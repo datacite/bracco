@@ -11,6 +11,12 @@ cache:
     - $HOME/.cache # includes bowers cache
 
 before_install:
+  - set -e
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then
+      AWS_BUCKET="eventdata.datacite.org";
+    else
+      AWS_BUCKET="eventdata.test.datacite.org";
+    fi
   - npm config set spin false
   - npm install -g bower phantomjs-prebuilt
   - bower --version
@@ -22,3 +28,19 @@ install:
 
 script:
   - npm test
+
+deploy:
+  provider: s3
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
+  bucket: $AWS_BUCKET
+  region: eu-west-1
+  skip_cleanup: true
+  local_dir: build
+  acl: public_read
+  cache_control: "max-age=31536000"
+  on:
+    all_branches: true
+notifications:
+  slack: datacite:Wt8En0ALoTA6Kjc5EOKNDWxN
+  email: false
