@@ -27,7 +27,7 @@ install:
   - bower install
 
 script:
-  - npm test
+  # - npm test
 
 deploy:
   provider: s3
