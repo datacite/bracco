@@ -26,15 +26,21 @@ module.exports = function(environment) {
   if (environment === 'production') {
     ENV.SITE_TITLE = 'DataCite Event Data';
     ENV.NAVMENU_TITLE = null;
+    ENV.JWT_HOST = "https://profiles.datacite.org";
+    ENV.ORCID_URL = "https://orcid.org";
   } else if (environment === 'stage') {
     ENV.SITE_TITLE = 'DataCite Event Data Test';
     ENV.NAVMENU_TITLE = 'Test Services';
+    ENV.JWT_HOST = "https://profiles.test.datacite.org";
+    ENV.ORCID_URL = "https://sandbox.orcid.org";
   } else if (environment === 'test') {
     // Testem prefers this...
     ENV.locationType = 'none';
 
     ENV.SITE_TITLE = 'DataCite Event Data';
     ENV.NAVMENU_TITLE = 'Development';
+    ENV.JWT_HOST = "http://localhost:8080";
+    ENV.ORCID_URL = "https://sandbox.orcid.org";
 
     // keep test console output quieter
     ENV.APP.LOG_ACTIVE_GENERATION = false;
