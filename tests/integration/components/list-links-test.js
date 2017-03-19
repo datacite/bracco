@@ -1,13 +1,13 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('nav-links', 'Integration | Component | nav-links', {
+moduleForComponent('list-links', 'Integration | Component | list-links', {
   integration: true
 });
 
 test('it renders', function(assert) {
-  this.set('navLinks', [{ url: "http://example.com", name: "Example" }]);
+  this.set('listLinks', [{ url: "http://example.com", name: "Example" }]);
 
-  this.render(hbs`{{nav-links links=navLinks}}`);
+  this.render(hbs`{{list-links links=listLinks}}`);
   assert.equal(this.$().text().trim(), 'Example');
 });
