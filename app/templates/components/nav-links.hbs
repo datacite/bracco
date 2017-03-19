@@ -1,0 +1,14 @@
+<ul class="{{class}}" role="{{role}}">
+{{#each links as |link| }}
+  {{#if (eq link.name "divider")}}
+    <li class="divider"></li>
+  {{else}}
+    <li><a href="{{link.url}}">
+      {{#if link.icon}}
+        <i class='fa fa-{{link.icon}} fa-fw'></i>
+      {{/if}}
+      {{link.name}}</a>
+    </li>
+  {{/if}}
+{{/each}}
+</ul>

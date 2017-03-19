@@ -25,7 +25,7 @@ before_install:
       NPM_ENV="production";
     else
       AWS_BUCKET="eventdata.test.datacite.org";
-      NPM_ENV="production";
+      NPM_ENV="stage";
     fi
   - npm config set spin false
   - npm install -g bower phantomjs-prebuilt

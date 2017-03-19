@@ -2,18 +2,17 @@
   <div class="container-fluid">
     <div class='col-md-3 col-sm-4'>
       <h4>About DataCite</h4>
-      <ul>
-        {{#each links as |link| }}
-          <li><a href="{{link.url}}">{{link.name}}</a></li>
-        {{/each}}
-      </ul>
+      {{nav-links links=model.about_links}}
     </div>
     <div class='col-md-3 col-sm-4'>
       <h4>Services</h4>
+      {{nav-links links=model.services_links}}
     </div>
     <div class='col-md-3 col-sm-4'>
       <h4>Resources</h4>
+      {{nav-links links=model.resources_links}}
       <h4>Community</h4>
+      {{nav-links links=model.community_links}}
     </div>
     <div class='col-md-3'>
       <h4 class="share">Contact us</h4>
@@ -29,6 +28,7 @@
       <a href='https://www.linkedin.com/company/datacite' class="share">
         <i class='fa fa-linkedin'></i>
       </a>
+      {{nav-links links=model.contact_links class="share"}}
     </div>
   </div>
 </footer>
