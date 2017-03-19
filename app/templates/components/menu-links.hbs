@@ -8,7 +8,7 @@
   {{else}}
     <li><a href="{{link.url}}">
       {{#if link.icon}}
-        <i class='fa fa-{{link.icon}} fa-fw'></i>
+        {{fa-icon link.icon fixedWidth=true}}
       {{/if}}
       {{link.name}}</a>
     </li>
