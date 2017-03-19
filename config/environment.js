@@ -25,6 +25,7 @@ module.exports = function(environment) {
 
   if (environment === 'production') {
     ENV.SITE_TITLE = 'DataCite Event Data';
+    ENV.NAVMENU_TITLE = null;
   } else if (environment === 'stage') {
     ENV.SITE_TITLE = 'DataCite Event Data Test';
     ENV.NAVMENU_TITLE = 'Test Services';
