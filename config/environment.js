@@ -43,10 +43,14 @@ module.exports = function(environment) {
     ENV.APP.rootElement = '#ember-testing';
   }
 
-  if (environment === 'stage') {
-    ENV.SITE_TITLE = 'DataCite Event Data Test';
-  } else if (environment === 'production') {
+  if (environment === 'production') {
     ENV.SITE_TITLE = 'DataCite Event Data';
+  } else if (environment === 'stage') {
+    ENV.SITE_TITLE = 'DataCite Event Data Test';
+    ENV.NAVMENU_TITLE = 'Test Services';
+  } else {
+    ENV.SITE_TITLE = 'DataCite Event Data';
+    ENV.NAVMENU_TITLE = 'Development';
   }
 
   return ENV;
