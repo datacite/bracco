@@ -36,7 +36,7 @@ deploy:
   bucket: $AWS_BUCKET
   region: eu-west-1
   skip_cleanup: true
-  local_dir: build
+  local_dir: dist
   acl: public_read
   cache_control: "max-age=31536000"
   on:
