@@ -1,0 +1,44 @@
+<div class="header" id="navtop">
+  <div class="{{navbar-class currentRouteName}}" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">{{site-title currentRouteName}}</a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="support">Support <span class="caret" /></a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="mailto:support@datacite.org">Email</a></li>
+              <li><a href="https://github.com/datacite/lagotto-admin">Source Code</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="sites"><i class='fa fa-th'></i> <span class="caret"></span></a>
+            {{menu-links links=model.header_links class="dropdown-menu" role="menu"}}
+          </li>
+          {{#if session.isAuthenticated}}
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="account_menu_link"><i class='fa fa-th'></i> <span class="caret"></span></a>
+              User
+              <span class="caret"/>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="{{jwt-host}}/users/me">{fa-icon "user"}} Settings</a></li>
+                <li><a href="/people">{fa-icon "files-o"}} Works</a></li>
+                <li class="divider"/>
+                <li><a href="/people">{fa-icon "external-link"}} ORCID Record</a></li>
+                <li><a href="{{jwt-host}}/sign_out">{fa-icon "sign-out"}} Sign out</a></li>
+              </ul>
+            </li>
+          {{/if}}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

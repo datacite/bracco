@@ -2,6 +2,14 @@
 language: node_js
 node_js:
   - "6"
+env:
+  - CXX=g++-4.8
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-4.8
 
 sudo: false
 
@@ -14,8 +22,10 @@ before_install:
   - set -e
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
       AWS_BUCKET="eventdata.datacite.org";
+      NPM_ENV="production";
     else
       AWS_BUCKET="eventdata.test.datacite.org";
+      NPM_ENV="stage";
     fi
   - npm config set spin false
   - npm install -g bower phantomjs-prebuilt
@@ -27,7 +37,8 @@ install:
   - bower install
 
 script:
-  # - npm test
+  - npm test
+  - ember build --environment=${NPM_ENV}
 
 deploy:
   provider: s3
@@ -36,7 +47,7 @@ deploy:
   bucket: $AWS_BUCKET
   region: eu-west-1
   skip_cleanup: true
-  local_dir: build
+  local_dir: dist
   acl: public_read
   cache_control: "max-age=31536000"
   on:

@@ -1,0 +1,17 @@
+<ul class="{{class}}" role="{{role}}">
+{{#if navmenuTitle}}
+  <li class='dropdown-header'>{{navmenuTitle}}</li>
+{{/if}}
+{{#each links as |link| }}
+  {{#if (eq link.name "divider")}}
+    <li class="divider"></li>
+  {{else}}
+    <li><a href="{{link.url}}">
+      {{#if link.icon}}
+        {{fa-icon link.icon fixedWidth=true}}
+      {{/if}}
+      {{link.name}}</a>
+    </li>
+  {{/if}}
+{{/each}}
+</ul>
