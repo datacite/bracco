@@ -38,6 +38,7 @@
     "ember-source": "~2.12.0",
     "ember-truth-helpers": "^1.3.0",
     "ember-font-awesome": "^3.0.4",
+    "ember-cookies": "^0.0.13",
     "ember-lodash": "^4.17.1",
     "ember-moment": "^7.3.0",
     "loader.js": "^4.2.3"
