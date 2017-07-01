@@ -21,7 +21,7 @@ export default Ember.Service.extend({
       if (Ember.isNone(jwt)) resolve(null);
 
       // verify asymmetric token, using RSA with SHA-256 hash algorithm
-      let cert = (ENV.JWT_PUBLIC_KEY) ? ENV.JWT_PUBLIC_KEY.replace(/\\n/g, '\n') : null;
+      let cert = ENV.JWT_PUBLIC_KEY ? ENV.JWT_PUBLIC_KEY.replace(/\\n/g, '\n') : null;
       JsonWebToken.verify(jwt, cert, { algorithms: ['RS256'] }, function (err, payload) {
         resolve(payload);
       });

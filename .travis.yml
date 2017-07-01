@@ -33,7 +33,7 @@ before_install:
   - phantomjs --version
 
 install:
-  - yarn install
+  - npm install
 
 script:
   - ember build --environment=${NPM_ENV}
