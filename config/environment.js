@@ -23,12 +23,12 @@ module.exports = function(environment) {
     }
   };
 
-  ENV.SITE_TITLE = process.env.SITE_TITLE;
+  ENV.SITE_TITLE = process.env.SITE_TITLE || "DataCite Event Data";
   ENV.NAVMENU_TITLE = process.env.NAVMENU_TITLE;
-  ENV.SEARCH_URL = process.env.SEARCH_URL;
-  ENV.ORCID_URL = process.env.ORCID_URL;
-  ENV.CDN_HOST = process.env.CDN_HOST;
-  ENV.JWT_HOST = process.env.JWT_HOST;
+  ENV.SEARCH_URL = process.env.SEARCH_URL || "https://search.datacite.org";
+  ENV.ORCID_URL = process.env.ORCID_URL || "https://orcid.org";
+  ENV.CDN_HOST = process.env.CDN_HOST || "assets.datacite.org";
+  ENV.JWT_HOST = process.env.JWT_HOST || "https://profiles.datacite.org";
   ENV.JWT_PUBLIC_KEY = process.env.JWT_PUBLIC_KEY;
 
   if (environment === 'test') {
