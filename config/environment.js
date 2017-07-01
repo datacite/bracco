@@ -23,39 +23,21 @@ module.exports = function(environment) {
     }
   };
 
-  if (environment === 'production') {
-    ENV.SITE_TITLE = 'DataCite Event Data';
-    ENV.NAVMENU_TITLE = null;
-    ENV.JWT_HOST = "https://profiles.datacite.org";
-    ENV.ORCID_URL = "https://orcid.org";
-  } else if (environment === 'stage') {
-    ENV.SITE_TITLE = 'DataCite Event Data Test';
-    ENV.NAVMENU_TITLE = 'Test Services';
-    ENV.JWT_HOST = "https://profiles.test.datacite.org";
-    ENV.ORCID_URL = "https://sandbox.orcid.org";
-  } else if (environment === 'test') {
+  ENV.SITE_TITLE = process.env.SITE_TITLE;
+  ENV.NAVMENU_TITLE = process.env.NAVMENU_TITLE;
+  ENV.CDN_HOST = process.env.CDN_HOST;
+  ENV.JWT_HOST = process.env.JWT_HOST;
+  ENV.JWT_PUBLIC_KEY = process.env.JWT_PUBLIC_KEY;
+
+  if (environment === 'test') {
     // Testem prefers this...
     ENV.locationType = 'none';
-
-    ENV.SITE_TITLE = 'DataCite Event Data';
-    ENV.NAVMENU_TITLE = 'Development';
-    ENV.JWT_HOST = "http://localhost:8080";
-    ENV.ORCID_URL = "https://sandbox.orcid.org";
 
     // keep test console output quieter
     ENV.APP.LOG_ACTIVE_GENERATION = false;
     ENV.APP.LOG_VIEW_LOOKUPS = false;
 
     ENV.APP.rootElement = '#ember-testing';
-  } else {
-    ENV.SITE_TITLE = 'DataCite Event Data';
-    ENV.NAVMENU_TITLE = 'Development';
-
-    // ENV.APP.LOG_RESOLVER = true;
-    // ENV.APP.LOG_ACTIVE_GENERATION = true;
-    // ENV.APP.LOG_TRANSITIONS = true;
-    // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
-    // ENV.APP.LOG_VIEW_LOOKUPS = true;
   }
 
   return ENV;

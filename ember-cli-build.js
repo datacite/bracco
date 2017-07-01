@@ -3,7 +3,21 @@ const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
-    // Add options here
+    'ember-cli-babel': {
+      includePolyfill: true
+    },
+    dotEnv: {
+      clientAllowedKeys: ['SITE_TITLE',
+                          'NAVMENU_TITLE',
+                          'CDN_HOST',
+                          'JWT_HOST',
+                          'JWT_PUBLIC_KEY']
+    },
+    inlineContent: {
+      'cdn-host' : {
+        content: process.env.CDN_HOST
+      }
+    }
   });
 
   // Use `app.import` to add additional libraries to the generated

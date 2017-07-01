@@ -23,20 +23,7 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="sites"><i class='fa fa-th'></i> <span class="caret"></span></a>
             {{menu-links links=model.header_links class="dropdown-menu" role="menu"}}
           </li>
-          {{#if session.isAuthenticated}}
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="account_menu_link"><i class='fa fa-th'></i> <span class="caret"></span></a>
-              User
-              <span class="caret"/>
-              <ul class="dropdown-menu" role="menu">
-                <li><a href="{{jwt-host}}/users/me">{fa-icon "user"}} Settings</a></li>
-                <li><a href="/people">{fa-icon "files-o"}} Works</a></li>
-                <li class="divider"/>
-                <li><a href="/people">{fa-icon "external-link"}} ORCID Record</a></li>
-                <li><a href="{{jwt-host}}/sign_out">{fa-icon "sign-out"}} Sign out</a></li>
-              </ul>
-            </li>
-          {{/if}}
+          {{user-menu}}
         </ul>
       </div>
     </div>
