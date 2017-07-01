@@ -22,12 +22,14 @@ export default Ember.Service.extend({
 
       // verify asymmetric token, using RSA with SHA-256 hash algorithm
       let cert = ENV.JWT_PUBLIC_KEY;
+      console.log(cert);
       JsonWebToken.verify(jwt, cert, { algorithms: ['RS256'] }, function (err, payload) {
         resolve(payload);
       });
     });
 
     decoded.then(function(result) {
+      console.log(result)
       self.set('isAuthenticated', Ember.isPresent(result));
 
       if (Ember.isPresent(result)) {
