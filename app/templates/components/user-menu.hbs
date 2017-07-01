@@ -1,15 +1,16 @@
-{{#if isAuthenticated}}
-  <li class="dropdown">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="account_menu_link"><i class='fa fa-th'></i> <span class="caret"></span></a>
+{{#if currentUser.isAuthenticated}}
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="account_menu_link">
+    {{log currentUser}}
     <span class="caret"/>
-    <ul class="dropdown-menu" role="menu">
-      <li><a href="{{jwt-host}}/users/me">{fa-icon "user"}} Settings</a></li>
-      <li><a href="/people">{fa-icon "files-o"}} Works</a></li>
-      <li class="divider"/>
-      <li><a href="/people">{fa-icon "external-link"}} ORCID Record</a></li>
-      <li><a href="{{jwt-host}}/sign_out">{fa-icon "sign-out"}} Sign out</a></li>
-    </ul>
-  </li>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li><a href="{{jwt-host}}/users/me">{{fa-icon "user"}} Settings</a></li>
+    <li><a href="{{search-url}}/people/{{currentUser.uid}}">{{fa-icon "files-o"}} Works</a></li>
+    <li class="divider"/>
+    <li><a href="https://orcid.org/{{currentUser.uid}}">{{fa-icon "external-link"}} ORCID Record</a></li>
+    <li class="divider"/>
+    <li><a href="{{jwt-host}}/sign_out">{{fa-icon "sign-out"}} Sign out</a></li>
+  </ul>
 {{else}}
   <a href="{{jwt-host}}/sign_in" class="btn btn-sm btn-neutral" id="sign-in">
     {{fa-icon "sign-in"}}

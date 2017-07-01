@@ -4,34 +4,37 @@ import JsonWebToken from 'npm:jsonwebtoken';
 import ENV from 'lagotto-admin/config/environment';
 
 export default Ember.Service.extend({
-  currentUser: null,
+  isAuthenticated: false,
+  uid: null,
+  name: null,
+  email: null,
+  role: null,
 
   init() {
     this._super(...arguments);
-    return Ember.RSVP.Promise(function(resolve) {
-      // verify asymmetric token, RSA with SHA-256 hash algorithm
+
+    let self = this;
+    let decoded = new Ember.RSVP.Promise(function(resolve) {
+      // check for cookie containing jwt
       let jwt = Cookie.get('_datacite_jwt');
-      var cert = ENV.JWT_PUBLIC_KEY;
-      JsonWebToken.verify(jwt, cert, { algorithms: ['RS256'] }, function (err, payload) {
-        if (err) {
-          // console.log(err)
-        } else {
-          this.set('currentUser', payload);
-          resolve(payload);
-        }
+      if (Ember.isNone(jwt)) resolve(null);
+
+      // verify asymmetric token, using RSA with SHA-256 hash algorithm
+      let cert = ENV.JWT_PUBLIC_KEY;
+      JsonWebToken.verify(jwt, cert, { algorithms: ['RS256'] }, function (payload) {
+        resolve(payload);
       });
     });
-  },
 
-  get() {
-    return this.get('currentUser');
-  },
+    decoded.then(function(result) {
+      self.set('isAuthenticated', Ember.isPresent(result));
 
-  isAuthenticated() {
-    if (this.get('currentUser')) {
-      return true;
-    } else {
-      return false;
-    }
+      if (Ember.isPresent(result)) {
+        self.set('uid', result.uid);
+        self.set('name', result.name);
+        self.set('email', result.email);
+        self.set('role', result.role);
+      }
+    });
   }
 });

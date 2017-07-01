@@ -25,6 +25,7 @@ module.exports = function(environment) {
 
   ENV.SITE_TITLE = process.env.SITE_TITLE;
   ENV.NAVMENU_TITLE = process.env.NAVMENU_TITLE;
+  ENV.SEARCH_URL = process.env.SEARCH_URL;
   ENV.CDN_HOST = process.env.CDN_HOST;
   ENV.JWT_HOST = process.env.JWT_HOST;
   ENV.JWT_PUBLIC_KEY = process.env.JWT_PUBLIC_KEY;

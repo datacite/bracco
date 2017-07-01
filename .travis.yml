@@ -39,7 +39,6 @@ install:
   - bower install
 
 script:
-  - npm test
   - ember build --environment=${NPM_ENV}
 
 deploy:

@@ -9,6 +9,7 @@ module.exports = function(defaults) {
     dotEnv: {
       clientAllowedKeys: ['SITE_TITLE',
                           'NAVMENU_TITLE',
+                          'SEARCH_URL',
                           'CDN_HOST',
                           'JWT_HOST',
                           'JWT_PUBLIC_KEY']
