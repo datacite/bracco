@@ -23,11 +23,18 @@ before_install:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
       AWS_BUCKET="eventdata.datacite.org";
       NPM_ENV="production";
-      cp .env.production .env;
+      SITE_TITLE=DataCite Event Data
+      SEARCH_URL=https://search.datacite.org
+      CDN_HOST=assets.datacite.org
+      JWT_HOST=https://profiles.datacite.org
     else
       AWS_BUCKET="eventdata.test.datacite.org";
       NPM_ENV="stage";
-      cp .env.stage .env;
+      SITE_TITLE="DataCite Event Data Test"
+      NAVMENU_TITLE="Test Services"
+      SEARCH_URL="https://search.test.datacite.org"
+      CDN_HOST="assets.test.datacite.org"
+      JWT_HOST="https://profiles.test.datacite.org"
     fi
   - npm config set spin false
   - npm install -g bower phantomjs-prebuilt
