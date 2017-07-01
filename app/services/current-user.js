@@ -18,19 +18,16 @@ export default Ember.Service.extend({
     let decoded = new Ember.RSVP.Promise(function(resolve) {
       // check for cookie containing jwt
       let jwt = Cookie.get('_datacite_jwt');
-      console.log("jwt: " + jwt)
       if (Ember.isNone(jwt)) resolve(null);
 
       // verify asymmetric token, using RSA with SHA-256 hash algorithm
-      let cert = ENV.JWT_PUBLIC_KEY;
-      console.log(cert);
+      let cert = (ENV.JWT_PUBLIC_KEY).replace(/\\n/g, '\n');
       JsonWebToken.verify(jwt, cert, { algorithms: ['RS256'] }, function (err, payload) {
         resolve(payload);
       });
     });
 
     decoded.then(function(result) {
-      console.log(result)
       self.set('isAuthenticated', Ember.isPresent(result));
 
       if (Ember.isPresent(result)) {
