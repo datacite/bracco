@@ -5,7 +5,7 @@ export default Ember.Component.extend({
   tagName: 'li',
   classNameBindings: ['dropdownMenu'],
   dropdownMenu: Ember.computed(function() {
-    this.get('currentUser').isAuthenticated;
+    this.get('currentUser').get('isAuthenticated');
   }),
 
   didInsertElement: function() {

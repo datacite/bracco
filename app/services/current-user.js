@@ -5,6 +5,7 @@ import ENV from 'lagotto-admin/config/environment';
 
 export default Ember.Service.extend({
   isAuthenticated: false,
+  isAdmin: false,
   uid: null,
   name: null,
   email: null,
@@ -21,7 +22,7 @@ export default Ember.Service.extend({
 
       // verify asymmetric token, using RSA with SHA-256 hash algorithm
       let cert = ENV.JWT_PUBLIC_KEY;
-      JsonWebToken.verify(jwt, cert, { algorithms: ['RS256'] }, function (payload) {
+      JsonWebToken.verify(jwt, cert, { algorithms: ['RS256'] }, function (err, payload) {
         resolve(payload);
       });
     });
@@ -34,6 +35,7 @@ export default Ember.Service.extend({
         self.set('name', result.name);
         self.set('email', result.email);
         self.set('role', result.role);
+        self.set('isAdmin', result.role === "admin");
       }
     });
   }

@@ -1,0 +1,9 @@
+<div class="container-fluid">
+  <div class="content">
+    {{#if (can "write status")}}
+      Admin.
+    {{else}}
+      No admin.
+    {{/if}}
+  </div>
+</div>

@@ -10,6 +10,7 @@ module.exports = function(defaults) {
       clientAllowedKeys: ['SITE_TITLE',
                           'NAVMENU_TITLE',
                           'SEARCH_URL',
+                          'ORCID_URL',
                           'CDN_HOST',
                           'JWT_HOST',
                           'JWT_PUBLIC_KEY']

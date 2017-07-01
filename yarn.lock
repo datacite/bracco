@@ -2375,6 +2375,12 @@ ember-browserify@^1.1.13:
     through2 "^2.0.0"
     walk-sync "^0.2.7"
 
+ember-can@^0.8.4:
+  version "0.8.4"
+  resolved "https://registry.yarnpkg.com/ember-can/-/ember-can-0.8.4.tgz#196f2492b47b4cf65e9842aafe4b5a9fb9092011"
+  dependencies:
+    ember-cli-babel "^5.1.5"
+
 ember-cli-app-version@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/ember-cli-app-version/-/ember-cli-app-version-3.0.0.tgz#d67a33aeec7bd03187fbe72c5663dadec4c3368a"
@@ -2383,7 +2389,7 @@ ember-cli-app-version@^3.0.0:
     ember-cli-htmlbars "^1.0.0"
     git-repo-version "0.4.1"
 
-ember-cli-babel@^5.1.6, ember-cli-babel@^5.1.7:
+ember-cli-babel@^5.1.5, ember-cli-babel@^5.1.6, ember-cli-babel@^5.1.7:
   version "5.2.4"
   resolved "https://registry.yarnpkg.com/ember-cli-babel/-/ember-cli-babel-5.2.4.tgz#5ce4f46b08ed6f6d21e878619fb689719d6e8e13"
   dependencies:
@@ -2596,7 +2602,7 @@ ember-cli-test-info@^1.0.0:
   dependencies:
     ember-cli-string-utils "^1.0.0"
 
-ember-cli-test-loader@^2.0.0:
+ember-cli-test-loader@^2.0.0, ember-cli-test-loader@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/ember-cli-test-loader/-/ember-cli-test-loader-2.1.0.tgz#16163bae0ac32cad1af13c4ed94c6c698b54d431"
   dependencies:
