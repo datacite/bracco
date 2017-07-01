@@ -18,6 +18,7 @@ export default Ember.Service.extend({
     let decoded = new Ember.RSVP.Promise(function(resolve) {
       // check for cookie containing jwt
       let jwt = Cookie.get('_datacite_jwt');
+      console.log("jwt: " + jwt)
       if (Ember.isNone(jwt)) resolve(null);
 
       // verify asymmetric token, using RSA with SHA-256 hash algorithm
