@@ -1,9 +1,11 @@
 <div class="container-fluid">
   <div class="content">
     {{#if (can "write status")}}
-      Admin.
+      <div class="centered">
+        <img src="http://i.imgur.com/oMxwObX.gif">
+      </div>
     {{else}}
-      No admin.
+      You have no permission to access this page.
     {{/if}}
   </div>
 </div>
