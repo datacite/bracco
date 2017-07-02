@@ -5,6 +5,7 @@ import ENV from 'lagotto-admin/config/environment';
 
 export default Ember.Service.extend({
   isAuthenticated: false,
+  isAdmin: false,
   uid: null,
   name: null,
   email: null,
@@ -34,6 +35,7 @@ export default Ember.Service.extend({
         self.set('name', result.name);
         self.set('email', result.email);
         self.set('role', result.role);
+        self.set('isAdmin', Ember.isEqual(result.role, "staff_admin"));
       }
     });
   }
