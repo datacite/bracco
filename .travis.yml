@@ -49,7 +49,7 @@ deploy:
   acl: public_read
   cache_control: "max-age=31536000"
   on:
-    all_branches: true
+    branch: test
 notifications:
   slack: datacite:Wt8En0ALoTA6Kjc5EOKNDWxN
   email: false
