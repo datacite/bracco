@@ -18,6 +18,8 @@ You will need the following things properly installed on your computer.
 
 * `git clone <repository-url>` this repository
 * `cd bracco`
+* `cp .env.example .env`
+* `npm install`
 * `yarn`
 
 ## Running / Development
