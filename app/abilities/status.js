@@ -5,7 +5,6 @@ export default Ability.extend({
   currentUser: Ember.inject.service(),
   canWrite: Ember.computed('currentUser.isAdmin', function() {
     var role = this.get('currentUser').get('role');
-    console.log(role)
     return (role === 'staff_admin');
   })
 });
