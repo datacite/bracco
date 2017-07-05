@@ -15,8 +15,8 @@ You will need the following things properly installed on your computer.
 ## Installation
 
 * `git clone <repository-url>` this repository
-* `cd lagotto-admin`
-* `npm install`
+* `cd mastino`
+* `yarn`
 
 ## Running / Development
 
