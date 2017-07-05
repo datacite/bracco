@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import Cookie from 'ember-cli-js-cookie';
 import JsonWebToken from 'npm:jsonwebtoken';
-import ENV from 'lagotto-admin/config/environment';
+import ENV from 'bracco/config/environment';
 
 export default Ember.Service.extend({
   isAuthenticated: false,

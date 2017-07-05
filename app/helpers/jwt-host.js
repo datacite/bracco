@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import ENV from 'lagotto-admin/config/environment';
+import ENV from 'bracco/config/environment';
 
 export function jwtHost() {
   return ENV.JWT_HOST;

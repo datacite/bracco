@@ -2,7 +2,7 @@
 
 module.exports = function(environment) {
   var ENV = {
-    modulePrefix: 'lagotto-admin',
+    modulePrefix: 'bracco',
     environment: environment,
     rootURL: '/',
     locationType: 'auto',
