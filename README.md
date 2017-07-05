@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/datacite/bracco.svg?branch=master)](https://travis-ci.org/datacite/bracco)
+[![Build Status](https://travis-ci.org/datacite/bracco.svg?branch=test)](https://travis-ci.org/datacite/bracco)
 
 # Bracco
 
