@@ -1,5 +1,10 @@
 <div class="row">
   <div class="col-md-9" id="show">
+    <ol class="breadcrumb">
+      <li><a href="/">Home</a></li>
+      <li>{{#link-to "members"}}Members{{/link-to}}</li>
+      <li class="active">{{model.title}}</li>
+    </ol>
     <div class="panel panel-default" id="content-member">
       {{#if (can "write member")}}
         <div class="panel-body">
