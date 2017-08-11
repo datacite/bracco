@@ -4,6 +4,7 @@
     <span class="caret"/>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li class='dropdown-header'>{{currentUser.role_human}}</li>
     <li><a href="{{jwt-host}}/users/me">{{fa-icon "user"}} Settings</a></li>
     <li><a href="{{search-url}}/people/{{currentUser.uid}}">{{fa-icon "files-o"}} Works</a></li>
     <li class="divider"/>
@@ -14,6 +15,6 @@
 {{else}}
   <a href="{{jwt-host}}/sign_in" class="btn btn-sm btn-neutral" id="sign-in">
     {{fa-icon "sign-in"}}
-    Sign in
+    {{t "user.signin"}}
   </a>
 {{/if}}

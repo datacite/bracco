@@ -16,8 +16,11 @@ module.exports = function(defaults) {
                           'JWT_PUBLIC_KEY']
     },
     inlineContent: {
-      'cdn-host' : {
-        content: process.env.CDN_HOST
+      'site-title' : {
+        content: (process.env.SITE_TITLE || "DataCite DOI Registration")
+      },
+      'cdn-url' : {
+        content: (process.env.CDN_URL || "https://assets.datacite.org")
       }
     }
   });

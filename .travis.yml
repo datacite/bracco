@@ -24,11 +24,11 @@ cache:
 before_install:
   - set -e
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
-      AWS_BUCKET="schnitzel.datacite.org";
+      AWS_BUCKET="bracco.datacite.org";
       NPM_ENV="production";
       cp .env.production .env;
     else
-      AWS_BUCKET="schnitzel.test.datacite.org";
+      AWS_BUCKET="bracco.test.datacite.org";
       NPM_ENV="stage";
       cp .env.stage .env;
     fi

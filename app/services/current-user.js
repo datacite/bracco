@@ -10,6 +10,7 @@ export default Ember.Service.extend({
   name: null,
   email: null,
   role: null,
+  role_human: null,
   member_id: null,
   datacenter_id: null,
 
@@ -37,6 +38,7 @@ export default Ember.Service.extend({
         self.set('name', result.name);
         self.set('email', result.email);
         self.set('role', result.role);
+        self.set('role_human', result.role.capitalize());
         self.set('member_id', result.member_id);
         self.set('datacenter_id', result.datacenter_id);
         self.set('isAdmin', Ember.isEqual(result.role, "staff_admin"));

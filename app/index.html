@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Schnitzel</title>
+    <title>{{content-for 'site-title'}}</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -12,7 +12,7 @@
     <link href="//fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700" rel="stylesheet">
     <link href='//fonts.googleapis.com/css?family=Raleway:400,600,400italic,600italic' rel='stylesheet' type='text/css'>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet" type='text/css'>
-    <link href="//{{content-for 'cdn-host'}}/stylesheets/datacite.css" rel='stylesheet' type='text/css'>
+    <link href="{{content-for 'cdn-url'}}/stylesheets/datacite.css" rel='stylesheet' type='text/css'>
 
     {{content-for "head-footer"}}
   </head>
