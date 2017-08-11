@@ -4,7 +4,7 @@
     <span class="caret"/>
   </a>
   <ul class="dropdown-menu" role="menu">
-    <li class='dropdown-header'>{{currentUser.role_human}}</li>
+    <li class='dropdown-header'>{{humanize currentUser.role}}</li>
     <li><a href="{{jwt-host}}/users/me">{{fa-icon "user"}} Settings</a></li>
     <li><a href="{{search-url}}/people/{{currentUser.uid}}">{{fa-icon "files-o"}} Works</a></li>
     <li class="divider"/>
