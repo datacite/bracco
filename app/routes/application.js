@@ -3,7 +3,7 @@ import ENV from 'bracco/config/environment';
 
 export default Ember.Route.extend({
   model() {
-    var url = "https://" + ENV.CDN_HOST + "/data/links.json"
+    var url = ENV.CDN_URL + "/data/links.json"
 
     return Ember.$.getJSON(url).then(function(data) {
       if (ENV.environment === 'development') {

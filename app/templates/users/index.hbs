@@ -1,0 +1,112 @@
+<div class="row">
+  <div class='col-md-9'>
+    <div class="search-wide">
+      <form action="/users" method="get" class="form form-horizontal">
+        <div class="input-group">
+          {{input type="hidden" valueBinding="organization"}}
+          {{input type="hidden" valueBinding="role"}}
+          {{input name="query" valueBinding="query" class="form-control" placeholder="Search user"}}
+
+          <div class="input-group-btn">
+            <button type="submit" class="btn btn-primary hidden-xs">Search</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class='col-md-9 panel-list' id="content">
+    {{#if model}}
+      {{#each model as |user|}}
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <a class="accordion-toggle" id="link_{{user.orcid}}" data-toggle="collapse" data-parent="#user" href="#user_{{user.orcid}}">
+              {{user.creditName}}<span class='small pull-right'>{{format-date user.created}}</span>
+            </a>
+          </div>
+          <div id="user_{{user.orcid}}" class="panel-collapse collapse">
+            <div class="panel-body user-list">
+              {{#if user.email}}
+                <h5>Email</h5>
+                <a href="mailto:{{user.email}}">{{user.email}}</a>
+              {{/if}}
+
+              <h5>ORCID</h5>
+              <a href="{{user.id}}">{{user.orcid}}</a>
+
+              {{#if user.memberId}}
+                <h5>Member</h5>
+                {{#link-to "member" user.memberId}}{{user.memberId}}{{/link-to}}
+              {{/if}}
+
+              <h5>Role</h5>
+              {{user.role}}
+
+              {{#if user.isPublic}}
+                <h5>Record public</h5>
+                {{user.isPublic}}
+              {{/if}}
+
+              <h5>Account created</h5>
+              {{format-date user.created}}
+            </div>
+          </div>
+        </div>
+      {{/each}}
+      <div class="text-center">
+        {{page-numbers content=content  showFL=true}}
+      </div>
+    {{else}}
+      <div class="alert alert-simple-info">
+        <h5>There are currently no users
+        </h5>
+      </div>
+    {{/if}}
+  </div>
+  <div class='col-md-3'>
+    {{#if model.meta.organizations}}
+      <div class="panel facets">
+        <div class="panel-body">
+          <h4>Organizations</h4>
+          <ul>
+            {{#each model.meta.organizations as |organization|}}
+              <li>
+                {{#if model.query.organization}}
+                  {{#link-to "users" (query-params organization='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+                {{else}}
+                  {{#link-to "users" (query-params organization=organization.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                {{/if}}
+                <div class="facet-title">{{organization.title}}</div>
+                <span class="number pull-right">{{organization.count}}</span>
+                <div class="clearfix"/>
+              </li>
+            {{/each}}
+          </ul>
+        </div>
+      </div>
+    {{/if}}
+    {{#if model.meta.roles}}
+      <div class="panel facets">
+        <div class="panel-body">
+          <h4>Roles</h4>
+          <ul>
+            {{#each model.meta.roles as |role|}}
+              <li>
+                {{#if model.query.role}}
+                  {{#link-to "users" (query-params role='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+                {{else}}
+                  {{#link-to "users" (query-params role=role.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                {{/if}}
+                <div class="facet-title">{{role.title}}</div>
+                <span class="number pull-right">{{role.count}}</span>
+                <div class="clearfix"/>
+              </li>
+            {{/each}}
+          </ul>
+        </div>
+      </div>
+    {{/if}}
+  </div>
+</div>
