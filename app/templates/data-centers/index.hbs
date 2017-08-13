@@ -1,4 +1,4 @@
-{{#if (can "read data-center")}}
+{{#if (can "list data-center")}}
   <div class="row">
     <div class='col-md-9'>
       <div class="search-wide">
@@ -17,37 +17,34 @@
     </div>
   </div>
 
+  <h3 class="results">{{#if (gt model.meta.total 1)}}{{model.meta.total}}{{/if}} Data Centers</h3>
+
   <div class="row">
     <div class='col-md-9 panel-list' id="content">
-      {{#unless (can "write data-center")}}
-      <div class="panel panel-default">
+      {{#if model}}
+        {{#each model as |data-center|}}
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <h3>
+                {{#link-to "data-centers.show" data-center.id}}{{data-center.title}}{{/link-to}}
+              </h3>
+            </div>
+            <div class="panel-footer">
+              {{data-center.name}}
+            </div>
+          </div>
+        {{/each}}
+        <div class="text-center">
+          {{#if (gt model.meta.total_pages 1)}}
+            {{page-numbers content=content}}
+          {{/if}}
         </div>
       {{else}}
-        {{#if model}}
-          {{#each model as |data-center|}}
-            <div class="panel panel-default">
-              <div class="panel-body">
-                <h3>
-                  {{#link-to "data-centers.show" data-center.id}}{{data-center.title}}{{/link-to}}
-                </h3>
-              </div>
-              <div class="panel-footer">
-                {{data-center.name}}
-              </div>
-            </div>
-          {{/each}}
-          <div class="text-center">
-            {{#if (gt model.meta.total_pages 1)}}
-              {{page-numbers content=content}}
-            {{/if}}
-          </div>
-        {{else}}
-          <div class="alert alert-simple-info">
-            <h5>There are currently no data centers
-            </h5>
-          </div>
-        {{/if}}
-      {{/unless}}
+        <div class="alert alert-simple-info">
+          <h5>There are currently no data centers
+          </h5>
+        </div>
+      {{/if}}
     </div>
     <div class='col-md-3'>
       {{#if model.meta.years}}
@@ -71,7 +68,7 @@
           </div>
         </div>
       {{/if}}
-      {{#if model.meta.members}}
+      {{#if (and model.meta.members (can "read data-center"))}}
         <div class="panel facets">
           <div class="panel-body">
             <h4>Members</h4>

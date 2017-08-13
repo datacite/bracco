@@ -1,0 +1,56 @@
+<div class="container-fluid">
+  <div class="content">
+    {{#if (and model can "read settings")}}
+    <h3 class="results">Settings</h3>
+    <div class="row">
+      <div class="col-md-9" id="show">
+        <div class="panel panel-default" id="content-member">
+          <div class="panel-body">
+            <h3>
+              <span class="label label-default label-{{model.memberType}} pull-right">{{model.memberType}}</span>
+              {{model.title}}
+            </h3>
+            {{#if model.description}}
+              <div class="description">{{{model.description}}}</div>
+            {{/if}}
+            <div class="logo text-center">
+              <img src="{{model.logoUrl}}">
+            </div>
+          </div>
+          <div class="panel-body">
+            <dl class="dl-horizontal">
+              <dt>Country</dt>
+              <dd>{{model.country}}</dd>
+              <dt>Year joined</dt>
+              <dd>{{model.year}}</dd>
+              {{#if model.website}}
+                <dt>Website</dt>
+                <dd><a href="{{model.website}}">{{model.website}}</a></dd>
+              {{/if}}
+              {{#if member.email}}
+                <dt>Email</dt>
+                <dd><a href="mailto:{{model.email}}">{{model.email}}</a></dd>
+              {{/if}}
+              {{#if model.phone}}
+                <dt>Phone</dt>
+                <dd>{{model.phone}}</dd>
+              {{/if}}
+            </dl>
+          </div>
+          <div class="panel-footer">
+            {{model.name}}
+          </div>
+        </div>
+      </div>
+    </div>
+    {{else}}
+      <div class="row">
+        <div class="col-md-9" id="show">
+          <div class="alert alert-warning">
+            Settings for DataCite have not yet been implemented.
+          </div>
+        </div>
+      </div>
+    {{/if}}
+  </div>
+</div>

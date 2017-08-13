@@ -13,6 +13,7 @@ Router.map(function() {
   this.route('data-centers', function() {
     this.route('show', { path: '/:data_center_id' });
   });
+  this.route('settings');
   this.route('status');
 });
 

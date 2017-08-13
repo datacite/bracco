@@ -5,7 +5,10 @@ import ENV from 'bracco/config/environment';
 
 export default Ember.Service.extend({
   isAuthenticated: false,
+  isPermitted: false,
   isAdmin: false,
+  isMember: false,
+  isDataCenter: false,
   uid: null,
   name: null,
   email: null,
@@ -40,6 +43,8 @@ export default Ember.Service.extend({
         self.set('member_id', result.member_id);
         self.set('datacenter_id', result.datacenter_id);
         self.set('isAdmin', Ember.isEqual(result.role, "staff_admin"));
+        self.set('isMember', Ember.isEqual(result.role, "member_admin"));
+        self.set('isDataCenter', Ember.isEqual(result.role, "datacenter_admin"));
       }
     });
   }

@@ -4,10 +4,7 @@ import { Ability } from 'ember-can';
 export default Ability.extend({
   currentUser: Ember.inject.service(),
 
-  canWrite: function() {
-    return (this.get('currentUser.role') === 'staff_admin');
-  }.property('currentUser.isAdmin'),
   canRead: function() {
-    return (this.get('currentUser.role') === 'staff_admin');
+    return (['staff_admin', 'member_admin'].includes(this.get('currentUser.role')));
   }.property('currentUser.isAdmin')
 });

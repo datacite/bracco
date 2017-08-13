@@ -17,39 +17,36 @@
     </div>
   </div>
 
+  <h3 class="results">{{#if (gt model.meta.total 1)}}{{model.meta.total}}{{/if}} Members</h3>
+
   <div class="row">
     <div class='col-md-9 panel-list' id="content">
-      {{#unless (can "write member")}}
-      <div class="panel panel-default">
+      {{#if model}}
+        {{#each model as |member|}}
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <h3>
+                {{#link-to "members.show" member.id}}{{member.title}}{{/link-to}}
+              </h3>
+              <div class="country">{{member.country}}</div>
+            </div>
+            <div class="panel-footer">
+              {{member.name}}
+              <span class="pull-right">{{member.memberType}} member</span>
+            </div>
+          </div>
+        {{/each}}
+        <div class="text-center">
+          {{#if (gt model.meta.total_pages 1)}}
+            {{page-numbers content=content}}
+          {{/if}}
         </div>
       {{else}}
-        {{#if model}}
-          {{#each model as |member|}}
-            <div class="panel panel-default">
-              <div class="panel-body">
-                <h3>
-                  {{#link-to "members.show" member.id}}{{member.title}}{{/link-to}}
-                </h3>
-                <div class="country">{{member.country}}</div>
-              </div>
-              <div class="panel-footer">
-                {{member.name}}
-                <span class="pull-right">{{member.memberType}} member</span>
-              </div>
-            </div>
-          {{/each}}
-          <div class="text-center">
-            {{#if (gt model.meta.total_pages 1)}}
-              {{page-numbers content=content}}
-            {{/if}}
-          </div>
-        {{else}}
-          <div class="alert alert-simple-info">
-            <h5>There are currently no members
-            </h5>
-          </div>
-        {{/if}}
-      {{/unless}}
+        <div class="alert alert-simple-info">
+          <h5>There are currently no members
+          </h5>
+        </div>
+      {{/if}}
     </div>
     <div class='col-md-3'>
       {{#if model.meta.member-types}}

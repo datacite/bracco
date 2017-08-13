@@ -3,12 +3,14 @@ import { Ability } from 'ember-can';
 
 export default Ability.extend({
   currentUser: Ember.inject.service(),
-  canWrite: Ember.computed('currentUser.isAdmin', function() {
-    var role = this.get('currentUser').get('role');
-    return (role === 'staff_admin');
-  }),
-  canRead: Ember.computed('currentUser.isAdmin', function() {
-    var role = this.get('currentUser').get('role');
-    return (role === 'staff_admin');
-  })
+
+  canWrite: function() {
+    return (this.get('currentUser.role') === 'staff_admin');
+  }.property('currentUser.isAdmin'),
+  canRead: function() {
+    return (this.get('currentUser.role') === 'staff_admin');
+  }.property('currentUser.isAdmin'),
+  canList: function() {
+    return (this.get('currentUser.role') === 'staff_admin');
+  }.property('currentUser.isAdmin')
 });
