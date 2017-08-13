@@ -2,6 +2,8 @@ import Ember from 'ember';
 import DS from 'ember-data';
 
 export default DS.Model.extend({
+  "data-centers": DS.hasMany('data-center'),
+
   title: DS.attr('string'),
   description: DS.attr('string'),
   memberType: DS.attr('string'),
@@ -12,6 +14,7 @@ export default DS.Model.extend({
   email: DS.attr('string'),
   website: DS.attr('string'),
   phone: DS.attr('string'),
+  created: DS.attr('date'),
   updated: DS.attr('date'),
 
   name: Ember.computed('id', function() {

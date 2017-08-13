@@ -1,0 +1,97 @@
+{{#if (can "read data-center")}}
+  <div class="row">
+    <div class='col-md-9'>
+      <div class="search-wide">
+        <form {{action "doSearch" query on="submit"}} class="form-horizontal">
+          <div class="input-group">
+            {{input name="query" value=query class="form-control" placeholder="Search for data center"}}
+
+            <div class="input-group-btn">
+              <button type="submit" class="btn btn-primary hidden-xs">Search</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class='col-md-3'>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class='col-md-9 panel-list' id="content">
+      {{#unless (can "write data-center")}}
+      <div class="panel panel-default">
+        </div>
+      {{else}}
+        {{#if model}}
+          {{#each model as |data-center|}}
+            <div class="panel panel-default">
+              <div class="panel-body">
+                <h3>
+                  {{#link-to "data-centers.show" data-center.id}}{{data-center.title}}{{/link-to}}
+                </h3>
+              </div>
+              <div class="panel-footer">
+                {{data-center.name}}
+              </div>
+            </div>
+          {{/each}}
+          <div class="text-center">
+            {{#if (gt model.meta.total_pages 1)}}
+              {{page-numbers content=content}}
+            {{/if}}
+          </div>
+        {{else}}
+          <div class="alert alert-simple-info">
+            <h5>There are currently no data centers
+            </h5>
+          </div>
+        {{/if}}
+      {{/unless}}
+    </div>
+    <div class='col-md-3'>
+      {{#if model.meta.years}}
+        <div class="panel facets">
+          <div class="panel-body">
+            <h4>Year Joined</h4>
+            <ul>
+              {{#each model.meta.years as |year|}}
+                <li>
+                  {{#if model.otherParams.year}}
+                    {{#link-to "data-centers" (query-params year='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+                  {{else}}
+                    {{#link-to "data-centers" (query-params year=year.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                  {{/if}}
+                  <div class="facet-title">{{year.title}}</div>
+                  <span class="number pull-right">{{year.count}}</span>
+                  <div class="clearfix"/>
+                </li>
+              {{/each}}
+            </ul>
+          </div>
+        </div>
+      {{/if}}
+      {{#if model.meta.members}}
+        <div class="panel facets">
+          <div class="panel-body">
+            <h4>Members</h4>
+            <ul>
+              {{#each model.meta.members as |member|}}
+                <li>
+                  {{#if model.otherParams.member-id}}
+                    {{#link-to "data-centers" (query-params member-id='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+                  {{else}}
+                    {{#link-to "data-centers" (query-params member-id=member.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                  {{/if}}
+                  <div class="facet-title">{{member.title}}</div>
+                  <span class="number pull-right">{{member.count}}</span>
+                  <div class="clearfix"/>
+                </li>
+              {{/each}}
+            </ul>
+          </div>
+        </div>
+      {{/if}}
+    </div>
+  </div>
+{{/if}}

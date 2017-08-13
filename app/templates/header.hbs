@@ -12,12 +12,15 @@
       </div>
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
+          {{#if (can "read data-center")}}
+            <li>{{#link-to "data-centers"}}Data Centers{{/link-to}}</li>
+          {{/if}}
           {{#if (can "read member")}}
             <li>{{#link-to "members"}}Members{{/link-to}}</li>
           {{/if}}
           <li><a href="https://support.datacite.org">{{t "general.support"}}</a></li>
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="services">Services <span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="services">{{fa-icon "th"}} <span class="caret"></span></a>
             {{menu-links links=model.header_links class="dropdown-menu" role="menu"}}
           </li>
           {{user-menu}}

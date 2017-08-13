@@ -1,0 +1,30 @@
+<ol class="breadcrumb">
+  <li>{{#link-to "data-centers"}}Data Centers{{/link-to}}</li>
+  <li class="active">{{model.title}}</li>
+</ol>
+<div class="row">
+  <div class="col-md-9" id="show">
+    <div class="panel panel-default" id="content-member">
+      {{#if (can "write data-center")}}
+        <div class="panel-body">
+          <h3>
+            {{model.title}}
+          </h3>
+        </div>
+        <div class="panel-footer">
+          {{model.name}}
+        </div>
+      {{/if}}
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="panel facets">
+      <div class="panel-body metadata">
+        <h5>Member</h5>
+          <div class="registration_agency">
+            {{#link-to "members.show" model.member.id}}{{model.member.title}}{{/link-to}}
+          </div>
+       </div>
+     </div>
+   </div>
+</div>

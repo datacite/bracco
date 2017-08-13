@@ -28,13 +28,13 @@
             <div class="panel panel-default">
               <div class="panel-body">
                 <h3>
-                  <span class="label label-default label-{{member.memberType}} pull-right">{{member.memberType}}</span>
                   {{#link-to "members.show" member.id}}{{member.title}}{{/link-to}}
                 </h3>
                 <div class="country">{{member.country}}</div>
               </div>
               <div class="panel-footer">
                 {{member.name}}
+                <span class="pull-right">{{member.memberType}} member</span>
               </div>
             </div>
           {{/each}}

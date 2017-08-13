@@ -15,6 +15,7 @@ export default Ember.Route.extend(RouteMixin, {
     params.paramMapping = { page: "page[number]",
                             perPage: "page[size]",
                             total_pages: "total-pages" };
+    // params = Ember.merge(params, { adapterOptions: { include: ['member'] }});
     return this.findPaged('data-center', params);
   },
   actions: {
