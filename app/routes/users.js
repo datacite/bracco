@@ -3,6 +3,11 @@ import RouteMixin from 'ember-cli-pagination/remote/route-mixin';
 import { CanMixin } from 'ember-can';
 
 export default Ember.Route.extend(RouteMixin, CanMixin, {
+  beforeModel: function() {
+    if (!this.can('list user')) {
+      this.transitionTo('index');
+    }
+  },
   perPage: 25,
 
   model(params) {
@@ -14,6 +19,14 @@ export default Ember.Route.extend(RouteMixin, CanMixin, {
   actions: {
     queryParamsDidChange: function() {
       this.refresh();
+    },
+    doSearch(query) {
+      let params = Object.assign(this.context.otherParams, { query: query });
+
+      params.paramMapping = { page: "page[number]",
+                              perPage: "page[size]",
+                              total_pages: "total-pages" };
+      this.transitionTo({ queryParams: params });
     }
   }
 });
