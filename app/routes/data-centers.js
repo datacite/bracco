@@ -29,6 +29,14 @@ export default Ember.Route.extend(RouteMixin, CanMixin, {
   actions: {
     queryParamsDidChange: function() {
       this.refresh();
+    },
+    doSearch(query) {
+      let params = Object.assign(this.context.otherParams, { query: query });
+
+      params.paramMapping = { page: "page[number]",
+                              perPage: "page[size]",
+                              total_pages: "total-pages" };
+      this.transitionTo({ queryParams: params });
     }
   }
 });

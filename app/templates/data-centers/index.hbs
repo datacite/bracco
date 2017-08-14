@@ -17,11 +17,10 @@
     </div>
   </div>
 
-  <h3 class="results">{{#if (gt model.meta.total 1)}}{{model.meta.total}}{{/if}} Data Centers</h3>
-
   <div class="row">
     <div class='col-md-9 panel-list' id="content">
       {{#if model}}
+        <h3 class="results">{{#if (gt model.meta.total 1)}}{{model.meta.total}}{{/if}} Data Centers</h3>
         {{#each model as |data-center|}}
           <div class="panel panel-default">
             <div class="panel-body">

@@ -22,14 +22,12 @@ export default Ember.Route.extend(RouteMixin, CanMixin, {
       this.refresh();
     },
     doSearch(query) {
-      this.refresh();
       let params = Object.assign(this.context.otherParams, { query: query });
 
       params.paramMapping = { page: "page[number]",
                               perPage: "page[size]",
                               total_pages: "total-pages" };
-      console.log(params)
-      return this.findPaged('member', params);
+      this.transitionTo({ queryParams: params });
     }
   }
 });
