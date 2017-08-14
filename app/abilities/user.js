@@ -6,8 +6,8 @@ export default Ability.extend({
 
   canWrite: function() {
     return (this.get('currentUser.role') === 'staff_admin');
-  }.property('currentUser.isAdmin'),
+  }.property('currentUser.uid', 'user', 'canWrite'),
   canRead: function() {
     return (this.get('currentUser.role') === 'staff_admin');
-  }.property('currentUser.isAdmin')
+  }.property('currentUser.uid', 'user', 'canRead')
 });

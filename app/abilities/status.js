@@ -6,5 +6,5 @@ export default Ability.extend({
 
   canWrite: function() {
     return (this.get('currentUser.role') === 'staff_admin');
-  }.property('currentUser.isAdmin')
+  }.property('currentUser.uid', 'status', 'canWrite')
 });

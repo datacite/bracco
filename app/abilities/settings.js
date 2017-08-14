@@ -6,5 +6,5 @@ export default Ability.extend({
 
   canRead: function() {
     return (['staff_admin', 'member_admin'].includes(this.get('currentUser.role')));
-  }.property('currentUser.isAdmin')
+  }.property('currentUser.uid', 'settings', 'canRead')
 });
