@@ -15,6 +15,7 @@ Router.map(function() {
   });
   this.route('settings');
   this.route('status');
+  this.route('users');
 });
 
 export default Router;

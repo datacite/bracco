@@ -15,8 +15,6 @@ export default Ember.Route.extend(CanMixin, {
 
     if (currentUser.member_id) {
       return this.store.findRecord('member', currentUser.member_id);
-    } else if (currentUser.isAdmin) {
-
     }
   }
 });

@@ -11,7 +11,9 @@ module.exports = function(defaults) {
                           'NAVMENU_TITLE',
                           'SEARCH_URL',
                           'ORCID_URL',
-                          'CDN_HOST',
+                          'CDN_URL',
+                          'USER_API_URL',
+                          'API_URL',
                           'JWT_HOST',
                           'JWT_PUBLIC_KEY']
     },

@@ -12,11 +12,14 @@
       </div>
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
+          {{#if (can "read member")}}
+            <li>{{#link-to "members" activeClass="active"}}Members{{/link-to}}</li>
+          {{/if}}
           {{#if (can "list data-center")}}
             <li>{{#link-to "data-centers" activeClass="active"}}Data Centers{{/link-to}}</li>
           {{/if}}
-          {{#if (can "read member")}}
-            <li>{{#link-to "members" activeClass="active"}}Members{{/link-to}}</li>
+          {{#if (can "list user")}}
+            <li>{{#link-to "users" activeClass="active"}}Users{{/link-to}}</li>
           {{/if}}
           {{#if (can "read settings")}}
             <li>{{#link-to "settings" activeClass="active"}}Settings{{/link-to}}</li>
