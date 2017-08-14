@@ -19,6 +19,10 @@ module.exports = function(environment) {
     'ember-cli-string-helpers': {
       only: ['humanize', 'html-safe', 'truncate', 'titleize']
     },
+    bugsnag: {
+      apiKey: process.env.BUGSNAG_API_KEY,
+      notifyReleaseStages: ['development', 'stage', 'production']
+    },
 
     APP: {
       // Here you can pass flags/options to your application instance
@@ -39,11 +43,6 @@ module.exports = function(environment) {
   ENV.i18n = {
     defaultLocale: 'en'
   };
-
-  bugsnag: {
-    apiKey: process.env.BUGSNAG_API_KEY,
-    notifyReleaseStages: ['development', 'stage', 'production']
-  }
 
   if (environment === 'test') {
     // Testem prefers this...
