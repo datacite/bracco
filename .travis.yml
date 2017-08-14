@@ -29,7 +29,7 @@ before_install:
       cp .env.production .env;
     else
       AWS_BUCKET="bracco.test.datacite.org";
-      NPM_ENV="development";
+      NPM_ENV="stage";
       cp .env.stage .env;
     fi
   - npm config set spin false
@@ -40,7 +40,7 @@ install:
   - npm install
 
 script:
-  - ember build --environment=$NPM_ENV
+  - ember build --environment=${NPM_ENV}
 
 deploy:
   provider: s3
