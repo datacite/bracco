@@ -10,6 +10,7 @@ export default Ember.Service.extend({
   isMember: false,
   isDataCenter: false,
   uid: null,
+  jwt: null,
   name: null,
   email: null,
   role: null,
@@ -28,6 +29,7 @@ export default Ember.Service.extend({
       // verify asymmetric token, using RSA with SHA-256 hash algorithm
       let cert = ENV.JWT_PUBLIC_KEY ? ENV.JWT_PUBLIC_KEY.replace(/\\n/g, '\n') : null;
       JsonWebToken.verify(jwt, cert, { algorithms: ['RS256'] }, function (err, payload) {
+        payload.jwt = jwt;
         resolve(payload);
       });
     });
@@ -36,6 +38,7 @@ export default Ember.Service.extend({
       self.set('isAuthenticated', Ember.isPresent(result));
 
       if (Ember.isPresent(result)) {
+        self.set('jwt', result.jwt);
         self.set('uid', result.uid);
         self.set('name', result.name);
         self.set('email', result.email);
