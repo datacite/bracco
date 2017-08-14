@@ -3,9 +3,7 @@
     <div class="search-wide">
       <form action="/users" method="get" class="form form-horizontal">
         <div class="input-group">
-          {{input type="hidden" valueBinding="organization"}}
-          {{input type="hidden" valueBinding="role"}}
-          {{input name="query" valueBinding="query" class="form-control" placeholder="Search user"}}
+          {{input name="query" value="query" class="form-control" placeholder="Search user"}}
 
           <div class="input-group-btn">
             <button type="submit" class="btn btn-primary hidden-xs">Search</button>
