@@ -40,6 +40,11 @@ module.exports = function(environment) {
     defaultLocale: 'en'
   };
 
+  bugsnag: {
+    apiKey: process.env.BUGSNAG_API_KEY,
+    notifyReleaseStages: ['development', 'stage', 'production']
+  }
+
   if (environment === 'test') {
     // Testem prefers this...
     ENV.locationType = 'none';
