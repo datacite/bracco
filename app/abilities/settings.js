@@ -5,6 +5,6 @@ export default Ability.extend({
   currentUser: Ember.inject.service(),
 
   canRead: function() {
-    return (['staff_admin', 'member_admin'].includes(this.get('currentUser.role')));
+    return (this.get('currentUser.role') === 'member_admin');
   }.property('currentUser.uid', 'settings', 'canRead')
 });

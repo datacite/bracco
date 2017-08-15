@@ -22,7 +22,7 @@
           {{#if model}}
             {{#bs-accordion as |acc|}}
               {{#each model as |user|}}
-                {{#acc.item value="{{user.orcid}}" as |aitem|}}
+                {{#acc.item value=user.orcid as |aitem|}}
                   {{#aitem.title}}
                     {{user.creditName}} {{#if user.role}}<span class='small pull-right'>{{user.role}}</span>{{/if}}
                   {{/aitem.title}}
