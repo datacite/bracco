@@ -6,6 +6,10 @@ module.exports = function(defaults) {
     'ember-cli-babel': {
       includePolyfill: true
     },
+    'ember-bootstrap': {
+      importBootstrapCSS: false,
+      whitelist: ['bs-popover', 'bs-accordion', 'bs-button', 'bs-alert']
+    },
     dotEnv: {
       clientAllowedKeys: ['SITE_TITLE',
                           'NAVMENU_TITLE',
@@ -17,13 +21,20 @@ module.exports = function(defaults) {
                           'JWT_HOST',
                           'JWT_PUBLIC_KEY']
     },
+
     inlineContent: {
       'site-title' : {
-        content: (process.env.SITE_TITLE || "DataCite DOI Registration")
+        content: (process.env.SITE_TITLE || "DataCite DOI Service")
       },
       'cdn-url' : {
         content: (process.env.CDN_URL || "https://assets.datacite.org")
       }
+    },
+
+    'ember-bootstrap': {
+      'bootstrapVersion': 3,
+      'importBootstrapFont': true,
+      'importBootstrapCSS': true
     }
   });
 

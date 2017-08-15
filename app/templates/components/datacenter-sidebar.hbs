@@ -1,7 +1,9 @@
 {{#if (not-eq currentUser.member_id model.member.id)}}
   <div class="panel facets">
     <div class="panel-body metadata">
-      <h5>Member</h5>
+      <h5>Member {{fa-icon "question-circle"}}
+        {{#bs-tooltip placement="top"}}Member the data center works with.{{/bs-tooltip}}
+      </h5>
         <div class="registration_agency">
           {{#link-to "members.show" model.member.id}}{{model.member.title}}{{/link-to}}
         </div>

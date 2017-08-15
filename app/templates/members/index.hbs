@@ -31,6 +31,9 @@
             <div class="panel-footer">
               {{member.name}}
               <span class="pull-right">{{member.memberType}} member</span>
+              <span>{{fa-icon "question-circle"}}
+                {{#bs-tooltip placement="top" viewportPadding=10}}Each member has a unique ID.{{/bs-tooltip}}
+              </span>
             </div>
           </div>
         {{/each}}
@@ -40,17 +43,16 @@
           {{/if}}
         </div>
       {{else}}
-        <div class="alert alert-simple-info">
-          <h5>There are currently no members
-          </h5>
-        </div>
+        {{#bs-alert dismissible=false type="warning"}}
+          There are currently no members.
+        {{/bs-alert}}
       {{/if}}
     </div>
     <div class='col-md-3'>
       {{#if model.meta.member-types}}
         <div class="panel facets">
           <div class="panel-body">
-            <h4>Member types</h4>
+            <h4>Member types <span class="small">{{fa-icon "question-circle"}}{{#bs-tooltip placement="top"}}Allocating members can register DOIs.{{/bs-tooltip}}</span></h4>
             <ul>
               {{#each model.meta.member-types as |memberType|}}
                 <li>
@@ -92,7 +94,7 @@
       {{#if model.meta.years}}
         <div class="panel facets">
           <div class="panel-body">
-            <h4>Years</h4>
+            <h4>Year joined</h4>
             <ul>
               {{#each model.meta.years as |year|}}
                 <li>

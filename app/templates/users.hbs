@@ -20,15 +20,13 @@
       <div class="row">
         <div class='col-md-9 panel-list' id="content">
           {{#if model}}
-            {{#each model as |user|}}
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <a class="accordion-toggle" id="link_{{user.orcid}}" data-toggle="collapse" data-parent="#user" href="#user_{{user.orcid}}">
-                    {{user.creditName}}{{#if user.role}}<span class='small pull-right'>{{user.role}}</span>{{/if}}
-                  </a>
-                </div>
-                <div id="user_{{user.orcid}}" class="panel-collapse collapse">
-                  <div class="panel-body user-list">
+            {{#bs-accordion as |acc|}}
+              {{#each model as |user|}}
+                {{#acc.item value="{{user.orcid}}" as |aitem|}}
+                  {{#aitem.title}}
+                    {{user.creditName}} {{#if user.role}}<span class='small pull-right'>{{user.role}}</span>{{/if}}
+                  {{/aitem.title}}
+                  {{#aitem.body}}
                     {{#if user.email}}
                       <h5>Email</h5>
                       <a href="mailto:{{user.email}}">{{user.email}}</a>
@@ -49,20 +47,19 @@
 
                     <h5>Account created</h5>
                     {{format-date user.created}}
-                  </div>
-                </div>
-              </div>
-            {{/each}}
+                  {{/aitem.body}}
+                {{/acc.item}}
+              {{/each}}
+            {{/bs-accordion}}
             <div class="text-center">
               {{#if (gt model.meta.total_pages 1)}}
                 {{page-numbers content=content}}
               {{/if}}
             </div>
           {{else}}
-            <div class="alert alert-simple-info">
-              <h5>There are currently no users
-              </h5>
-            </div>
+            {{#bs-alert dismissible=false type="warning"}}
+              There are currently no users.
+            {{/bs-alert}}
           {{/if}}
         </div>
         <div class='col-md-3'>

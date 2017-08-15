@@ -30,6 +30,9 @@
             </div>
             <div class="panel-footer">
               {{data-center.name}}
+              <span>{{fa-icon "question-circle"}}
+                {{#bs-tooltip placement="top" viewportPadding=10}}Each data center has a unique ID that starts with the member ID.{{/bs-tooltip}}
+              </span>
             </div>
           </div>
         {{/each}}
@@ -49,7 +52,7 @@
       {{#if model.meta.years}}
         <div class="panel facets">
           <div class="panel-body">
-            <h4>Year Joined</h4>
+            <h4>Year joined</h4>
             <ul>
               {{#each model.meta.years as |year|}}
                 <li>
@@ -70,7 +73,7 @@
       {{#if (and model.meta.members (can "read data-center"))}}
         <div class="panel facets">
           <div class="panel-body">
-            <h4>Members</h4>
+            <h4>Members <span class="small">{{fa-icon "question-circle"}}{{#bs-tooltip placement="top"}}Filter data centers by member they work with.{{/bs-tooltip}}</span></h4>
             <ul>
               {{#each model.meta.members as |member|}}
                 <li>

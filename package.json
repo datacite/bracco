@@ -17,9 +17,11 @@
   "devDependencies": {
     "async-promise-queue": "^1.0.2",
     "babylon": "^6.17.4",
+    "bootstrap": "^3.3.7",
     "broccoli-asset-rev": "^2.4.5",
     "broccoli-merge-trees": "^2.0.0",
     "ember-ajax": "^3.0.0",
+    "ember-bootstrap": "^1.0.0-rc.1",
     "ember-browserify": "^1.1.13",
     "ember-can": "^0.8.4",
     "ember-cli": "^2.13.3",

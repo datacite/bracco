@@ -37,6 +37,9 @@
         </div>
         <div class="panel-footer">
           {{model.name}}
+          <span>{{fa-icon "question-circle"}}
+            {{#bs-tooltip placement="top" viewportPadding=10}}Each member has a unique ID.{{/bs-tooltip}}
+          </span>
         </div>
       {{/if}}
     </div>
