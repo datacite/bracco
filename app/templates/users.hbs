@@ -24,7 +24,7 @@
               {{#each model as |user|}}
                 {{#acc.item value=user.orcid as |aitem|}}
                   {{#aitem.title}}
-                    {{user.creditName}} {{#if user.role}}<span class='small pull-right'>{{user.role}}</span>{{/if}}
+                    {{user.creditName}} {{#if user.role}}<span class='small pull-right'>{{humanize user.role}}</span>{{/if}}
                   {{/aitem.title}}
                   {{#aitem.body}}
                     {{#if user.email}}
@@ -33,7 +33,7 @@
                     {{/if}}
 
                     <h5>ORCID</h5>
-                    <a href="{{user.id}}">{{user.orcid}}</a>
+                    <a href="{{user.id}}">{{user.id}}</a>
 
                     {{#if user.member}}
                       <h5>Member</h5>
@@ -42,7 +42,7 @@
 
                     {{#if user.role}}
                       <h5>Role</h5>
-                      {{user.role}}
+                      {{humanize user.role}}
                     {{/if}}
 
                     <h5>Account created</h5>
@@ -53,12 +53,12 @@
             {{/bs-accordion}}
             <div class="text-center">
               {{#if (gt model.meta.total_pages 1)}}
-                {{page-numbers content=content}}
+                {{page-numbers content=content showFL=true}}
               {{/if}}
             </div>
           {{else}}
             {{#bs-alert dismissible=false type="warning"}}
-              There are currently no users.
+              No users found.
             {{/bs-alert}}
           {{/if}}
         </div>
@@ -75,7 +75,7 @@
                       {{else}}
                         {{#link-to "users" (query-params role=role.id)}}{{fa-icon "square-o"}}{{/link-to}}
                       {{/if}}
-                      <div class="facet-title">{{role.title}}</div>
+                      <div class="facet-title">{{humanize role.title}}</div>
                       <span class="number pull-right">{{role.count}}</span>
                       <div class="clearfix"/>
                     </li>

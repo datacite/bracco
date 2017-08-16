@@ -23,7 +23,7 @@
         {{#each model as |member|}}
           <div class="panel panel-default">
             <div class="panel-body">
-              <h3>
+              <h3 class="work">
                 {{#link-to "members.show" member.id}}{{member.title}}{{/link-to}}
               </h3>
               <div class="country">{{member.country}}</div>
@@ -44,7 +44,7 @@
         </div>
       {{else}}
         {{#bs-alert dismissible=false type="warning"}}
-          There are currently no members.
+          No members found.
         {{/bs-alert}}
       {{/if}}
     </div>

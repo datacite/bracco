@@ -20,7 +20,7 @@
   <div class="row">
     <div class='col-md-9 panel-list' id="content">
       {{#if model}}
-        <h3 class="results">{{#if (gt model.meta.total 1)}}{{model.meta.total}}{{/if}} Data Centers</h3>
+        <h3 class="results">{{#if (gt model.meta.total 1)}}{{model.meta.total}}{{/if}} Accounts</h3>
         {{#each model as |data-center|}}
           <div class="panel panel-default">
             <div class="panel-body">
@@ -43,7 +43,7 @@
         </div>
       {{else}}
         <div class="alert alert-simple-info">
-          <h5>There are currently no data centers
+          <h5>No clients found.
           </h5>
         </div>
       {{/if}}
