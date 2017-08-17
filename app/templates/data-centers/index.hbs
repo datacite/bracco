@@ -1,34 +1,40 @@
 {{#if (can "list data-center")}}
   <div class="row">
     <div class='col-md-9'>
-      <div class="search-wide">
+      <div class="search-input">
         <form {{action "doSearch" query on="submit"}} class="form-horizontal">
           <div class="input-group">
-            {{input name="query" value=query class="form-control" placeholder="Search for data center"}}
+            {{input name="query" value=query class="form-control" placeholder="Search for client"}}
 
             <div class="input-group-btn">
-              <button type="submit" class="btn btn-primary hidden-xs">Search</button>
+              <button type="submit" class="btn hidden-xs">Search</button>
             </div>
           </div>
         </form>
       </div>
     </div>
     <div class='col-md-3'>
+      <div class="panel facets">
+        <div class="panel-body">
+          <div class="pull-right">
+            {{#link-to "data-centers.new" data-center.id class="btn btn-warning"}}{{fa-icon "plus"}}Add Client{{/link-to}}
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
   <div class="row">
     <div class='col-md-9 panel-list' id="content">
       {{#if model}}
-        <h3 class="results">{{#if (gt model.meta.total 1)}}{{model.meta.total}}{{/if}} Accounts</h3>
+        <h3 class="member-results">{{#if (gt model.meta.total 1)}}{{format-number model.meta.total}}{{/if}} Clients</h3>
         {{#each model as |data-center|}}
           <div class="panel panel-default">
             <div class="panel-body">
-              <h3>
+              <h3 class="work">
                 {{#link-to "data-centers.show" data-center.id}}{{data-center.title}}{{/link-to}}
               </h3>
-            </div>
-            <div class="panel-footer">
+
               {{data-center.name}}
               <span>{{fa-icon "question-circle"}}
                 {{#bs-tooltip placement="top" viewportPadding=10}}Each data center has a unique ID that starts with the member ID.{{/bs-tooltip}}
@@ -38,7 +44,7 @@
         {{/each}}
         <div class="text-center">
           {{#if (gt model.meta.total_pages 1)}}
-            {{page-numbers content=content}}
+            {{page-numbers content=content showFL=true}}
           {{/if}}
         </div>
       {{else}}

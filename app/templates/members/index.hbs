@@ -1,45 +1,58 @@
 {{#if (can "read member")}}
   <div class="row">
     <div class='col-md-9'>
-      <div class="search-wide">
+      <div class="search-input">
         <form {{action "doSearch" query on="submit"}} class="form-horizontal">
           <div class="input-group">
             {{input name="query" value=query class="form-control" escape-press='resetSearch' placeholder="Search for member"}}
             <div class="input-group-btn">
-              <button type="submit" class="btn btn-primary hidden-xs">Search</button>
+              <button type="submit" class="btn hidden-xs">Search</button>
             </div>
           </div>
         </form>
       </div>
     </div>
     <div class='col-md-3'>
+      <div class="panel facets">
+        <div class="panel-body">
+          <div class="pull-right">
+            {{#link-to "members.new" member.id class="btn btn-warning"}}{{fa-icon "plus"}}Add Member{{/link-to}}
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
   <div class="row">
     <div class='col-md-9 panel-list' id="content">
       {{#if model}}
-        <h3 class="results">{{#if (gt model.meta.total 1)}}{{model.meta.total}}{{/if}} Members</h3>
+        <h3 class="member-results">{{#if (gt model.meta.total 1)}}{{format-number model.meta.total}}{{/if}} Members</h3>
         {{#each model as |member|}}
           <div class="panel panel-default">
             <div class="panel-body">
               <h3 class="work">
                 {{#link-to "members.show" member.id}}{{member.title}}{{/link-to}}
               </h3>
+
+              <div class="description">
+                <img class="pull-right img-responsive" src="{{member.logoUrl}}">
+                {{truncate-text member.description limit=300}}
+              </div>
               <div class="country">{{member.country}}</div>
-            </div>
-            <div class="panel-footer">
-              {{member.name}}
-              <span class="pull-right">{{member.memberType}} member</span>
-              <span>{{fa-icon "question-circle"}}
-                {{#bs-tooltip placement="top" viewportPadding=10}}Each member has a unique ID.{{/bs-tooltip}}
-              </span>
+
+              <div class="pseudo-footer">
+                <span class="pull-right">{{member.memberType}}</span>
+                {{member.name}}
+                <span>{{fa-icon "question-circle"}}
+                  {{#bs-tooltip placement="top" viewportPadding=10}}Each member has a unique ID.{{/bs-tooltip}}
+                </span>
+              </div>
             </div>
           </div>
         {{/each}}
         <div class="text-center">
           {{#if (gt model.meta.total_pages 1)}}
-            {{page-numbers content=content}}
+            {{page-numbers content=content showFL=true}}
           {{/if}}
         </div>
       {{else}}

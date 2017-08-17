@@ -3,13 +3,13 @@
     {{#if (can "list user")}}
       <div class="row">
         <div class='col-md-9'>
-          <div class="search-wide">
+          <div class="search-input">
             <form {{action "doSearch" query on="submit"}} class="form-horizontal">
               <div class="input-group">
                 {{input name="query" value=query class="form-control" placeholder="Search for user"}}
 
                 <div class="input-group-btn">
-                  <button type="submit" class="btn btn-primary hidden-xs">Search</button>
+                  <button type="submit" class="btn hidden-xs">Search</button>
                 </div>
               </div>
             </form>
@@ -20,6 +20,7 @@
       <div class="row">
         <div class='col-md-9 panel-list' id="content">
           {{#if model}}
+            <h3 class="member-results">{{#if (gt model.meta.total 1)}}{{format-number model.meta.total}}{{/if}} Users</h3>
             {{#bs-accordion as |acc|}}
               {{#each model as |user|}}
                 {{#acc.item value=user.orcid as |aitem|}}
@@ -31,10 +32,6 @@
                       <h5>Email</h5>
                       <a href="mailto:{{user.email}}">{{user.email}}</a>
                     {{/if}}
-
-                    <h5>ORCID</h5>
-                    <a href="{{user.id}}">{{user.id}}</a>
-
                     {{#if user.member}}
                       <h5>Member</h5>
                       {{#link-to "members.show" user.member.id}}{{user.member.title}}{{/link-to}}
@@ -47,6 +44,16 @@
 
                     <h5>Account created</h5>
                     {{format-date user.created}}
+
+                    <div class="pseudo-footer">
+                      <a href="{{user.id}}">{{fa-icon "external-link"}} {{user.id}}</a>
+                      <div class="btn-toolbar pull-right">
+                        <div class="btn-group btn-group-sm">
+                          {{#link-to "users.edit" user.id}}{{fa-icon "pencil"}}{{/link-to}}
+                        </div>
+                      </div>
+                      <div class="clearfix"/>
+                    </div>
                   {{/aitem.body}}
                 {{/acc.item}}
               {{/each}}
@@ -76,7 +83,7 @@
                         {{#link-to "users" (query-params role=role.id)}}{{fa-icon "square-o"}}{{/link-to}}
                       {{/if}}
                       <div class="facet-title">{{humanize role.title}}</div>
-                      <span class="number pull-right">{{role.count}}</span>
+                      <span class="number pull-right">{{format-number role.count}}</span>
                       <div class="clearfix"/>
                     </li>
                   {{/each}}

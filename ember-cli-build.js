@@ -15,16 +15,16 @@ module.exports = function(defaults) {
                           'NAVMENU_TITLE',
                           'SEARCH_URL',
                           'ORCID_URL',
-                          'CDN_URL',
-                          'USER_API_URL',
                           'API_URL',
+                          'USER_API_URL',
+                          'CDN_URL',
                           'JWT_HOST',
                           'JWT_PUBLIC_KEY']
     },
 
     inlineContent: {
       'site-title' : {
-        content: (process.env.SITE_TITLE || "DataCite DOI Service")
+        content: (process.env.SITE_TITLE || "DataCite DOI Registration Service")
       },
       'cdn-url' : {
         content: (process.env.CDN_URL || "https://assets.datacite.org")

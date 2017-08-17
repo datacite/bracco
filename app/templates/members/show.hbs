@@ -3,8 +3,8 @@
     <div class="panel panel-default" id="content-member">
       {{#if (can "write member")}}
         <div class="panel-body">
-          <h3>
-            <span class="label label-default label-{{model.memberType}} pull-right">{{model.memberType}}</span>
+          <h3 class="member">
+            <span class="small pull-right">{{model.memberType}}</span>
             {{model.title}}
           </h3>
           {{#if model.description}}
@@ -33,12 +33,24 @@
               <dd>{{model.phone}}</dd>
             {{/if}}
           </dl>
-        </div>
-        <div class="panel-footer">
+
           {{model.name}}
           <span>{{fa-icon "question-circle"}}
             {{#bs-tooltip placement="top" viewportPadding=10}}Each member has a unique ID.{{/bs-tooltip}}
           </span>
+          {{#if (can "write member")}}
+            <div class="btn-toolbar pull-right">
+              <div class="btn-group btn-group-sm">
+                {{#link-to "members.edit" member.id}}{{fa-icon "pencil"}}{{/link-to}}
+              </div>
+              {{#if (can "delete member")}}
+                <div class="btn-group btn-group-sm">
+                  {{#link-to "members.edit" member.id}}{{fa-icon "trash"}}{{/link-to}}
+                </div>
+              {{/if}}
+            </div>
+          {{/if}}
+          <div class="clearfix"/>
         </div>
       {{/if}}
     </div>

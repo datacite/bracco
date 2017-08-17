@@ -30,18 +30,18 @@ module.exports = function(environment) {
     }
   };
 
-  ENV.SITE_TITLE = process.env.SITE_TITLE || "DataCite Event Data";
-  ENV.NAVMENU_TITLE = process.env.NAVMENU_TITLE;
+  ENV.SITE_TITLE = process.env.SITE_TITLE || "DataCite DOI Registration Service";
+  ENV.NAVMENU_TITLE = process.env.NAVMENU_TITLE || '';
   ENV.SEARCH_URL = process.env.SEARCH_URL || "https://search.datacite.org";
   ENV.ORCID_URL = process.env.ORCID_URL || "https://orcid.org";
   ENV.API_URL = process.env.API_URL || "https://api.datacite.org";
   ENV.USER_API_URL = process.env.USER_API_URL || "https://profiles.datacite.org/api";
   ENV.CDN_URL = process.env.CDN_URL || "https://assets.datacite.org";
   ENV.JWT_HOST = process.env.JWT_HOST || "https://profiles.datacite.org";
-  ENV.JWT_PUBLIC_KEY = process.env.JWT_PUBLIC_KEY;
+  ENV.JWT_PUBLIC_KEY = process.env.JWT_PUBLIC_KEY || 'key';
 
   ENV.i18n = {
-    defaultLocale: 'en'
+    defaultLocale: 'en-US'
   };
 
   if (environment === 'test') {
