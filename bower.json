@@ -1,6 +1,0 @@
-{
-  "name": "bracco",
-  "dependencies": {
-    "sanitize.js": "^1.0.0"
-  }
-}
