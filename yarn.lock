@@ -3145,13 +3145,6 @@ ember-runtime-enumerable-includes-polyfill@^2.0.0:
     ember-cli-babel "^6.0.0"
     ember-cli-version-checker "^1.1.6"
 
-ember-sanitize@^2.0.2:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/ember-sanitize/-/ember-sanitize-2.0.2.tgz#23ab899b137e0f7023c2ac362bc659f0103b7cf5"
-  dependencies:
-    ember-cli-babel "^5.1.6"
-    ember-getowner-polyfill "^1.1.0"
-
 ember-singularity-mixins@^1.3.1:
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/ember-singularity-mixins/-/ember-singularity-mixins-1.3.1.tgz#d9ca55687ea3b3dd0b384f61e54f512b07f62fa5"
