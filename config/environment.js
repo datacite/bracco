@@ -37,6 +37,7 @@ module.exports = function(environment) {
   ENV.API_URL = process.env.API_URL || "https://api.datacite.org";
   ENV.USER_API_URL = process.env.USER_API_URL || "https://profiles.datacite.org/api";
   ENV.CDN_URL = process.env.CDN_URL || "https://assets.datacite.org";
+  ENV.DATA_URL = process.env.DATA_URL || "https://data.datacite.org";
   ENV.JWT_HOST = process.env.JWT_HOST || "https://profiles.datacite.org";
   ENV.JWT_PUBLIC_KEY = process.env.JWT_PUBLIC_KEY || 'key';
 

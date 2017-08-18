@@ -17,6 +17,7 @@ module.exports = function(defaults) {
                           'ORCID_URL',
                           'API_URL',
                           'USER_API_URL',
+                          'DATA_URL',
                           'CDN_URL',
                           'JWT_HOST',
                           'JWT_PUBLIC_KEY']
