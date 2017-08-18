@@ -26,7 +26,9 @@
   <div class="row">
     <div class='col-md-9 panel-list' id="content">
       {{#if model}}
-        <h3 class="member-results">{{#if (gt model.meta.total 1)}}{{format-number model.meta.total}}{{/if}} Members</h3>
+        {{#if (gt model.meta.total_pages 1)}}
+          <h3 class="member-results">{{#if (gt model.meta.total 1)}}{{format-number model.meta.total}}{{/if}} Members</h3>
+        {{/if}}
         {{#each model as |member|}}
           <div class="panel panel-default">
             <div class="panel-body">
@@ -36,7 +38,7 @@
 
               <div class="description">
                 <img class="pull-right img-responsive" src="{{member.logoUrl}}">
-                {{truncate-text member.description limit=300}}
+                {{format-text member.description limit=60}}
               </div>
               <div class="country">{{member.country}}</div>
 

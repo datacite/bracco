@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="col-md-9" id="show">
+    <div class="panel panel-default" id="content-work">
+      <div class="panel-body">
+        <h3 class="work">
+          <a href="{{model.identifier}}">{{model.title}}</a>
+        </h3>
+        {{{format-author model.author}}}
+        <div class="metadata">
+          {{format-metadata model.published resourceTypeId=model.resourceTypeId resourceTypeSubtype=model.resourceTypeSubtype containerTitle=model.containerTitle}}
+        </div>
+        {{#if model.description}}
+          <div class="description">
+            {{format-text model.description limit=75}}
+          </div>
+        {{/if}}
+        {{#if model.license}}
+          <div class="license">
+            {{model.license}}
+          </div>
+        {{/if}}
+        <div class="pseudo-footer">
+          <span class="pull-right">{{titleize work.resourceTypeId}}</span>
+          <a href="{{model.identifier}}">{{fa-icon "external-link"}} {{model.identifier}}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

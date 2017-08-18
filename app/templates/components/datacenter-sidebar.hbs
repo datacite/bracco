@@ -4,9 +4,18 @@
       <h5>Member {{fa-icon "question-circle"}}
         {{#bs-tooltip placement="top"}}Member the data center works with.{{/bs-tooltip}}
       </h5>
+
+      {{#if model.data-center}}
+        <div class="data-center">
+          {{#link-to "members.show" model.data-center.id}}{{model.data-center.title}}{{/link-to}}
+        </div>
+      {{/if}}
+
+      {{#if model.member}}
         <div class="registration_agency">
           {{#link-to "members.show" model.member.id}}{{model.member.title}}{{/link-to}}
         </div>
+      {{/if}}
      </div>
    </div>
 {{/if}}

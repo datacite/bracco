@@ -8,7 +8,7 @@
             {{model.title}}
           </h3>
           {{#if model.description}}
-            <div class="description">{{{model.description}}}</div>
+            <div class="description">{{{format-text model.description}}}</div>
           {{/if}}
           <div class="logo text-center">
             <img src="{{model.logoUrl}}">
