@@ -21,7 +21,7 @@ module.exports = function(environment) {
     },
     bugsnag: {
       apiKey: process.env.BUGSNAG_API_KEY,
-      notifyReleaseStages: ['development', 'stage', 'production']
+      notifyReleaseStages: ['stage', 'production']
     },
 
     APP: {
