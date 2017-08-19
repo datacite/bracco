@@ -1,17 +1,5 @@
 <div class="row">
-  <div class='col-md-9'>
-    <div class="search-input">
-      <form {{action "doSearch" query on="submit"}} class="form-horizontal">
-        <div class="input-group">
-          {{input name="query" value=query class="form-control" placeholder="Search for DOI"}}
-
-          <div class="input-group-btn">
-            <button type="submit" class="btn hidden-xs">Search</button>
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
+  {{model-search model=model}}
 </div>
 
 <div class="row">
@@ -53,10 +41,9 @@
         {{/if}}
       </div>
     {{else}}
-      <div class="alert alert-simple-info">
-        <h5>No DOIs found.
-        </h5>
-      </div>
+      {{#bs-alert dismissible=false type="warning"}}
+        No DOIs found.
+      {{/bs-alert}}
     {{/if}}
   </div>
   <div class='col-md-3'>

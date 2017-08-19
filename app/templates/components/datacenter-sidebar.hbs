@@ -1,19 +1,18 @@
 {{#if (not-eq currentUser.member_id model.member.id)}}
   <div class="panel facets">
     <div class="panel-body metadata">
-      <h5>Member {{fa-icon "question-circle"}}
-        {{#bs-tooltip placement="top"}}Member the data center works with.{{/bs-tooltip}}
-      </h5>
-
-      {{#if model.data-center}}
-        <div class="data-center">
-          {{#link-to "members.show" model.data-center.id}}{{model.data-center.title}}{{/link-to}}
-        </div>
-      {{/if}}
-
       {{#if model.member}}
+        <h5>Member {{fa-icon "question-circle"}}
+          {{#bs-tooltip placement="top"}}Member the data center works with.{{/bs-tooltip}}
+        </h5>
         <div class="registration_agency">
           {{#link-to "members.show" model.member.id}}{{model.member.title}}{{/link-to}}
+        </div>
+      {{/if}}
+      {{#if model.data-center}}
+        <h5>Client</h5>
+        <div class="data-center">
+          {{#link-to "data-centers.show" model.data-center.id}}{{model.data-center.title}}{{/link-to}}
         </div>
       {{/if}}
      </div>

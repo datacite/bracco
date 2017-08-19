@@ -2,25 +2,15 @@
   <div class="content">
     {{#if (can "list user")}}
       <div class="row">
-        <div class='col-md-9'>
-          <div class="search-input">
-            <form {{action "doSearch" query on="submit"}} class="form-horizontal">
-              <div class="input-group">
-                {{input name="query" value=query class="form-control" placeholder="Search for user"}}
-
-                <div class="input-group-btn">
-                  <button type="submit" class="btn hidden-xs">Search</button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
+        {{model-search model=model}}
       </div>
 
       <div class="row">
         <div class='col-md-9 panel-list' id="content">
           {{#if model}}
-            <h3 class="member-results">{{#if (gt model.meta.total 1)}}{{format-number model.meta.total}}{{/if}} Users</h3>
+            {{#if (gt model.meta.total 1)}}
+              <h3 class="member-results">{{#if (gt model.meta.total 1)}}{{format-number model.meta.total}}{{/if}} Users</h3>
+            {{/if}}
             {{#bs-accordion as |acc|}}
               {{#each model as |user|}}
                 {{#acc.item value=user.orcid as |aitem|}}

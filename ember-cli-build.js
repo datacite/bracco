@@ -10,6 +10,9 @@ module.exports = function(defaults) {
       importBootstrapCSS: false,
       whitelist: ['bs-popover', 'bs-accordion', 'bs-button', 'bs-alert']
     },
+    'ember-prism': {
+      'theme': 'default'
+    },
     dotEnv: {
       clientAllowedKeys: ['SITE_TITLE',
                           'NAVMENU_TITLE',

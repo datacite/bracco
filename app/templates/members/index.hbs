@@ -1,17 +1,6 @@
-{{#if (can "read member")}}
+{{#if (can "list member")}}
   <div class="row">
-    <div class='col-md-9'>
-      <div class="search-input">
-        <form {{action "doSearch" query on="submit"}} class="form-horizontal">
-          <div class="input-group">
-            {{input name="query" value=query class="form-control" escape-press='resetSearch' placeholder="Search for member"}}
-            <div class="input-group-btn">
-              <button type="submit" class="btn hidden-xs">Search</button>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
+    {{model-search model=model}}
     <div class='col-md-3'>
       <div class="panel facets">
         <div class="panel-body">
@@ -26,7 +15,7 @@
   <div class="row">
     <div class='col-md-9 panel-list' id="content">
       {{#if model}}
-        {{#if (gt model.meta.total_pages 1)}}
+        {{#if (gt model.meta.total 1)}}
           <h3 class="member-results">{{#if (gt model.meta.total 1)}}{{format-number model.meta.total}}{{/if}} Members</h3>
         {{/if}}
         {{#each model as |member|}}

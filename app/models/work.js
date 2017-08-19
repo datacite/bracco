@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import DS from 'ember-data';
 
 export default DS.Model.extend({
@@ -10,6 +11,7 @@ export default DS.Model.extend({
   title: DS.attr('string'),
   containerTitle: DS.attr('string'),
   description: DS.attr('string'),
+  xml: DS.attr('string'),
   resourceTypeId: DS.attr('string'),
   resourceTypeSubtype: DS.attr('string'),
   version: DS.attr('string'),
@@ -17,4 +19,8 @@ export default DS.Model.extend({
   published: DS.attr('string'),
   registered: DS.attr('date'),
   updated: DS.attr('date'),
+
+  datacite: Ember.computed('xml', function() {
+    return atob(this.get('xml'));
+  })
 });
