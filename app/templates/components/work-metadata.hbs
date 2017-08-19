@@ -7,6 +7,8 @@
         {{/each-in}}
       </select>
     </div>
+
+    <h3 class="metadata">Metadata</h3>
     <div class="clearfix"/>
   </div>
 </div>
@@ -16,7 +18,7 @@
       {{#if output}}
         <div class="panel-body">
           {{#code-block language='markup' class="metadata"}}
-            {{output}}
+            {{content-editable value=output type="html"}}
           {{/code-block}}
         </div>
       {{else}}

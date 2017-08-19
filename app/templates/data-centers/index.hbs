@@ -26,7 +26,7 @@
               </h3>
 
               {{data-center.name}}
-              <span>{{fa-icon "question-circle"}}
+              <span>{{fa-icon "question-circle-o"}}
                 {{#bs-tooltip placement="top" viewportPadding=10}}Each data center has a unique ID that starts with the member ID.{{/bs-tooltip}}
               </span>
             </div>
@@ -69,7 +69,7 @@
       {{#if (and model.meta.members (can "read data-center"))}}
         <div class="panel facets">
           <div class="panel-body">
-            <h4>Members <span class="small">{{fa-icon "question-circle"}}{{#bs-tooltip placement="top"}}Filter data centers by member they work with.{{/bs-tooltip}}</span></h4>
+            <h4>Members <span class="small">{{fa-icon "question-circle-o"}}{{#bs-tooltip placement="top"}}Filter data centers by member they work with.{{/bs-tooltip}}</span></h4>
             <ul>
               {{#each model.meta.members as |member|}}
                 <li>

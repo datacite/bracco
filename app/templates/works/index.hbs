@@ -5,7 +5,7 @@
 <div class="row">
   <div class='col-md-9 panel-list' id="content">
     {{#if model}}
-      {{#if (gt model.meta.total_pages 1)}}
+      {{#if (gt model.meta.total 1)}}
         <h3 class="member-results">{{#if (gt model.meta.total 1)}}{{format-number model.meta.total}}{{/if}} DOIs</h3>
       {{/if}}
       {{#each model as |work|}}
