@@ -17,9 +17,6 @@
   <div class="row">
     <div class='col-md-9 panel-list' id="content">
       {{#if model}}
-        {{#if (gt model.meta.total 1)}}
-          <h3 class="member-results">{{#if (gt model.meta.total 1)}}{{format-number model.meta.total}}{{/if}} Members</h3>
-        {{/if}}
         {{#each model as |member|}}
           <div class="panel panel-transparent">
             <div class="panel-body">
