@@ -11,10 +11,6 @@ addons:
     packages:
       - g++-4.8
 
-branches:
-  only:
-  - test
-
 sudo: false
 
 cache:
@@ -53,7 +49,7 @@ deploy:
   acl: public_read
   cache_control: "no-cache"
   on:
-    branch: test
+    branch: $TRAVIS_BRANCH
 notifications:
   slack: datacite:Wt8En0ALoTA6Kjc5EOKNDWxN
   email: false

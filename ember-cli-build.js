@@ -23,7 +23,8 @@ module.exports = function(defaults) {
                           'DATA_URL',
                           'CDN_URL',
                           'JWT_HOST',
-                          'JWT_PUBLIC_KEY']
+                          'JWT_PUBLIC_KEY',
+                          'BUGSNAG_API_KEY']
     },
 
     inlineContent: {
