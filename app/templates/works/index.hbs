@@ -21,10 +21,11 @@
           <h3 class="member-results">{{#if (gt model.meta.total 1)}}{{format-number model.meta.total}}{{/if}} DOIs</h3>
         {{/if}}
         {{#each model as |work|}}
-          <div class="panel panel-default">
+          <div class="panel panel-transparent">
             <div class="panel-body">
               <h3 class="work">
                 {{#link-to "works.show" work.id}}{{work.title}}{{/link-to}}
+                <span class="small">{{work.resourceTypeId}}</span>
               </h3>
               {{{format-author work.author}}}
               <div class="metadata">
@@ -41,7 +42,6 @@
                 </div>
               {{/if}}
               <div class="pseudo-footer">
-                <span class="pull-right">{{titleize work.resourceTypeId}}</span>
                 <a href="{{work.identifier}}">{{fa-icon "external-link"}} {{work.identifier}}</a>
               </div>
             </div>

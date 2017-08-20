@@ -1,16 +1,8 @@
 {{#if (can "read data-center" model)}}
   <div class="row">
     <div class="col-md-9" id="show">
-      <div class="panel panel-default" id="content-member">
-        <div class="panel-body">
-          <h3 class="member">
-            {{model.title}}
-          </h3>
-
-          {{model.name}}
-          <span>{{fa-icon "question-circle-o"}}
-            {{#bs-tooltip placement="top" viewportPadding=10}}Each data center has a unique ID that starts with the member ID.{{/bs-tooltip}}
-          </span>
+      <div class="panel panel-transparent" id="content-member">
+        <div class="panel-title">
           {{#if (can "write data-center")}}
             <div class="btn-toolbar pull-right">
               <div class="btn-group btn-group-sm">
@@ -26,6 +18,13 @@
             </div>
             <div class="clearfix"/>
           {{/if}}
+          {{model.title}}
+        </div>
+        <div class="panel-body">
+          {{model.name}}
+          <span>{{fa-icon "question-circle-o"}}
+            {{#bs-tooltip placement="top" viewportPadding=10}}Each data center has a unique ID that starts with the member ID.{{/bs-tooltip}}
+          </span>
         </div>
       </div>
     </div>

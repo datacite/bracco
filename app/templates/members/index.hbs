@@ -21,22 +21,21 @@
           <h3 class="member-results">{{#if (gt model.meta.total 1)}}{{format-number model.meta.total}}{{/if}} Members</h3>
         {{/if}}
         {{#each model as |member|}}
-          <div class="panel panel-default">
+          <div class="panel panel-transparent">
             <div class="panel-body">
               <h3 class="work">
                 {{#link-to "members.show" member.id}}{{member.title}}{{/link-to}}
+                <span class="small">{{member.memberType}} member</span>
               </h3>
 
               <div class="description">
                 <img class="pull-right img-responsive" src="{{member.logoUrl}}">
                 {{format-text member.description limit=60}}
               </div>
-              <div class="country">{{member.country}}</div>
 
               <div class="pseudo-footer">
-                <span class="pull-right">{{member.memberType}}</span>
                 {{member.name}}
-                <span>{{fa-icon "question-circle"}}
+                <span>{{fa-icon "question-circle-o"}}
                   {{#bs-tooltip placement="top" viewportPadding=10}}Each member has a unique ID.{{/bs-tooltip}}
                 </span>
               </div>

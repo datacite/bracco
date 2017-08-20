@@ -21,16 +21,18 @@
           <h3 class="member-results">{{#if (gt model.meta.total 1)}}{{format-number model.meta.total}}{{/if}} Clients</h3>
         {{/if}}
         {{#each model as |data-center|}}
-          <div class="panel panel-default">
+          <div class="panel panel-transparent">
             <div class="panel-body">
               <h3 class="work">
                 {{#link-to "data-centers.show" data-center.id}}{{data-center.title}}{{/link-to}}
               </h3>
 
-              {{data-center.name}}
-              <span>{{fa-icon "question-circle-o"}}
-                {{#bs-tooltip placement="top" viewportPadding=10}}Each data center has a unique ID that starts with the member ID.{{/bs-tooltip}}
-              </span>
+              <div class="pseudo-footer">
+                {{data-center.name}}
+                <span>{{fa-icon "question-circle-o"}}
+                  {{#bs-tooltip placement="top" viewportPadding=10}}Each data center has a unique ID that starts with the member ID.{{/bs-tooltip}}
+                </span>
+              </div>
             </div>
           </div>
         {{/each}}
