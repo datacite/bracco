@@ -9,7 +9,7 @@
         <div class='col-md-9 panel-list' id="content">
           {{#if model}}
             {{#if (gt model.meta.total 1)}}
-              <h3 class="member-results">{{#if (gt model.meta.total 1)}}{{format-number model.meta.total}}{{/if}} Users</h3>
+              <h3 class="user-results">{{#if (gt model.meta.total 1)}}{{format-number model.meta.total}}{{/if}} Users</h3>
             {{/if}}
             {{#bs-accordion as |acc|}}
               {{#each model as |user|}}

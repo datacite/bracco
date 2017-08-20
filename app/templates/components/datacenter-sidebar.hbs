@@ -15,6 +15,30 @@
           {{#link-to "data-centers.show" model.data-center.id}}{{model.data-center.title}}{{/link-to}}
         </div>
       {{/if}}
+      {{#if model.created}}
+        <h5>Record Creation</h5>
+        <div class="created">
+          {{format-date model.created}}
+        </div>
+      {{/if}}
+      {{#if (gt model.updated model.created)}}
+        <h5>Record Modification</h5>
+        <div class="updated">
+          {{format-date model.updated}}
+        </div>
+      {{/if}}
+      {{#if model.registered}}
+        <h5>DOI Registration</h5>
+        <div class="registered">
+          {{format-date model.registered}}
+        </div>
+      {{/if}}
+      {{#if (gt model.updated model.registered)}}
+        <h5>DOI Modification</h5>
+        <div class="updated">
+          {{format-date model.updated}}
+        </div>
+      {{/if}}
      </div>
    </div>
 {{/if}}
