@@ -8,7 +8,14 @@ module.exports = function(defaults) {
     },
     'ember-bootstrap': {
       importBootstrapCSS: false,
-      whitelist: ['bs-popover', 'bs-accordion', 'bs-button', 'bs-alert']
+      whitelist: ['bs-popover',
+                  'bs-accordion',
+                  'bs-button',
+                  'bs-button-group',
+                  'bs-alert',
+                  'bs-dropdown',
+                  'bs-modal',
+                  'bs-nav']
     },
     'ember-prism': {
       'theme': 'default'
