@@ -16,25 +16,25 @@
         </div>
       {{/if}}
       {{#if model.created}}
-        <h5>Record Creation</h5>
+        <h5>Record created</h5>
         <div class="created">
           {{format-date model.created}}
         </div>
       {{/if}}
       {{#if (gt model.updated model.created)}}
-        <h5>Record Modification</h5>
+        <h5>Record modified</h5>
         <div class="updated">
           {{format-date model.updated}}
         </div>
       {{/if}}
       {{#if model.registered}}
-        <h5>DOI Registration</h5>
+        <h5>DOI registered</h5>
         <div class="registered">
           {{format-date model.registered}}
         </div>
       {{/if}}
       {{#if (gt model.updated model.registered)}}
-        <h5>DOI Modification</h5>
+        <h5>DOI modified</h5>
         <div class="updated">
           {{format-date model.updated}}
         </div>
