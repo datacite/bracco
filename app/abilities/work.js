@@ -9,5 +9,8 @@ export default Ability.extend({
   }.property('currentUser.uid', 'work', 'canWrite'),
   canRead: function() {
     return (this.get('currentUser.role') === 'staff_admin');
-  }.property('currentUser.uid', 'work', 'canRead')
+  }.property('currentUser.uid', 'work', 'canRead'),
+  canList: function() {
+    return (this.get('currentUser.role') === 'staff_admin');
+  }.property('currentUser.uid', 'work', 'canList')
 });

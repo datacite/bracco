@@ -1,15 +1,8 @@
 import Ember from 'ember';
 import RouteMixin from 'ember-cli-pagination/remote/route-mixin';
-import { CanMixin } from 'ember-can';
 
-export default Ember.Route.extend(RouteMixin, CanMixin, {
+export default Ember.Route.extend(RouteMixin, {
   currentUser: Ember.inject.service(),
-
-  beforeModel: function() {
-    if (!this.can('list data-center')) {
-      this.transitionTo('index');
-    }
-  },
 
   perPage: 25,
 

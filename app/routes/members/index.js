@@ -1,14 +1,7 @@
 import Ember from 'ember';
 import RouteMixin from 'ember-cli-pagination/remote/route-mixin';
-import { CanMixin } from 'ember-can';
 
-export default Ember.Route.extend(RouteMixin, CanMixin, {
-  beforeModel: function() {
-    if (!this.can('list member')) {
-      this.transitionTo('index');
-    }
-  },
-
+export default Ember.Route.extend(RouteMixin, {
   perPage: 25,
 
   model(params) {
