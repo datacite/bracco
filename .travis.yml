@@ -51,7 +51,7 @@ deploy:
   skip_cleanup: true
   local_dir: dist
   acl: public_read
-  cache_control: "max-age=31536000"
+  cache_control: "no-cache"
   on:
     branch: test
 notifications:
