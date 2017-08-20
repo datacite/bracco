@@ -39,6 +39,7 @@ install:
   - npm install
 
 script:
+  - ember test
   - ember build --environment=${NPM_ENV}
 
 deploy:
