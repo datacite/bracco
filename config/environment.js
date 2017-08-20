@@ -20,7 +20,7 @@ module.exports = function(environment) {
       only: ['humanize', 'html-safe', 'truncate', 'titleize']
     },
     bugsnag: {
-      apiKey: process.env.BUGSNAG_API_KEY,
+      apiKey: process.env.BUGSNAG_API_KEY || 'key',
       notifyReleaseStages: ['stage', 'production']
     },
 
@@ -40,6 +40,7 @@ module.exports = function(environment) {
   ENV.DATA_URL = process.env.DATA_URL || "https://data.datacite.org";
   ENV.JWT_HOST = process.env.JWT_HOST || "https://profiles.datacite.org";
   ENV.JWT_PUBLIC_KEY = process.env.JWT_PUBLIC_KEY || 'key';
+  ENV.BUGSNAG_API_KEY = process.env.BUGSNAG_API_KEY || 'key';
 
   ENV.i18n = {
     defaultLocale: 'en-US'
