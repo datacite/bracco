@@ -1,15 +1,17 @@
 {{#if (can "list member")}}
   <div class="row">
     {{model-search model=model}}
-    <div class='col-md-3'>
-      <div class="panel facets">
-        <div class="panel-body">
-          <div class="pull-right">
-            {{#link-to "members.new" member.id class="btn btn-warning"}}{{fa-icon "plus"}}Add Member{{/link-to}}
+    {{#if (can "write member")}}
+      <div class='col-md-3'>
+        <div class="panel facets">
+          <div class="panel-body">
+            <div class="pull-right">
+              {{#link-to "members.new" class="btn btn-warning"}}{{fa-icon "plus"}}Add Member{{/link-to}}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    {{/if}}
   </div>
 
   <div class="row">

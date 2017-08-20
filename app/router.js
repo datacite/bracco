@@ -18,7 +18,9 @@ Router.map(function() {
     this.route('edit', { path: '/:data_center_id/edit' });
   });
   this.route('works', function() {
+    this.route('new');
     this.route('show', { path: '/:work_id' });
+    this.route('edit', { path: '/:work_id/edit' });
   });
   this.route('settings');
   this.route('status');

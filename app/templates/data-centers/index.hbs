@@ -1,15 +1,17 @@
 {{#if (can "list data-center")}}
   <div class="row">
     {{model-search model=model}}
-    <div class='col-md-3'>
-      <div class="panel facets">
-        <div class="panel-body">
-          <div class="pull-right">
-            {{#link-to "data-centers.new" data-center.id class="btn btn-warning"}}{{fa-icon "plus"}}Add Client{{/link-to}}
+    {{#if (can "write data-center")}}
+      <div class='col-md-3'>
+        <div class="panel facets">
+          <div class="panel-body">
+            <div class="pull-right">
+              {{#link-to "data-centers.new" class="btn btn-warning"}}{{fa-icon "plus"}}Add Client{{/link-to}}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    {{/if}}
   </div>
 
   <div class="row">

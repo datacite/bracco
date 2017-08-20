@@ -1,6 +1,17 @@
 {{#if (can "list work")}}
   <div class="row">
     {{model-search model=model}}
+    {{#if (can "write work")}}
+      <div class='col-md-3'>
+        <div class="panel facets">
+          <div class="panel-body">
+            <div class="pull-right">
+              {{#link-to "works.new" class="btn btn-warning"}}{{fa-icon "plus"}}Add Work{{/link-to}}
+            </div>
+          </div>
+        </div>
+      </div>
+    {{/if}}
   </div>
 
   <div class="row">
