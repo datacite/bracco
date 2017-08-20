@@ -20,7 +20,7 @@ module.exports = function(environment) {
       only: ['humanize', 'html-safe', 'truncate', 'titleize']
     },
     bugsnag: {
-      apiKey: '14785b5705d3c7b23fd73abacd122d95',
+      apiKey: process.env.BUGSNAG_API_KEY || 'key',
       notifyReleaseStages: ['stage', 'production']
     },
 
