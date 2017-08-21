@@ -7,7 +7,7 @@ export default Ember.Component.extend(RouteMixin, {
   hasInput: Ember.computed.notEmpty('query'),
 
   search(query) {
-    let params = Object.assign(this.get('model').get("otherParams"), { query: query, metadata: null });
+    let params = Object.assign(this.get('model').get("otherParams"), { query: query });
 
     params.paramMapping = { page: "page[number]",
                             perPage: "page[size]",

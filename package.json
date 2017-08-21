@@ -38,6 +38,7 @@
     "ember-cli-inline-content": "^0.4.1",
     "ember-cli-js-cookie": "^0.1.1",
     "ember-cli-moment-shim": "^3.3.1",
+    "ember-cli-notifications": "^4.2.1",
     "ember-cli-pagination": "^3.0.2",
     "ember-cli-qunit": "^4.0.0",
     "ember-cli-shims": "^1.1.0",

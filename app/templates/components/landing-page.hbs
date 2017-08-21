@@ -1,0 +1,219 @@
+{{#if (eq currentUser.role "staff_admin")}}
+  <div class="section section-white">
+    <div class="row row-section">
+      <div class="container-fluid">
+        <div class="col-md-8 col-sm-offset-2">
+          <p class="landing-page">
+            {{currentUser.name}}, your are logged in as staff admin.
+            Please choose one of the following options to proceed:
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="row row-section">
+      <div class="container-fluid">
+        <div class="col-sm-2 col-sm-offset-2 info">
+          <div class="icon icon-landing">
+            {{fa-icon "file-text"}}
+          </div>
+          <div class="description">
+            <h3>{{#link-to "works"}}DOIs{{/link-to}}</h3>
+            <p>Register and manage DOIs and their metadata.</p>
+          </div>
+        </div>
+        <div class="col-sm-2 info">
+          <div class="icon icon-landing">
+            {{fa-icon "cog"}}
+          </div>
+          <div class="description">
+            <h3>{{#link-to "members"}}Members{{/link-to}}</h3>
+            <p>Manage all members who use the DOI Registration Service.</p>
+          </div>
+        </div>
+        <div class="col-sm-2 info">
+          <div class="icon icon-landing">
+            {{fa-icon "sitemap"}}
+          </div>
+          <div class="description">
+            <h3>{{#link-to "data-centers"}}Clients{{/link-to}}</h3>
+            <p>Manage all clients who use the DOI Registration Service.</p>
+          </div>
+        </div>
+        <div class="col-sm-2 info">
+          <div class="icon icon-landing">
+            {{fa-icon "users"}}
+          </div>
+          <div class="description">
+            <h3>{{#link-to "users"}}Users{{/link-to}}</h3>
+            <p>Manage all users who use the DOI Registration Service</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{{else if (eq currentUser.role "member_admin")}}
+  <div class="section section-white">
+    <div class="row row-section">
+      <div class="container-fluid">
+        <div class="col-md-8 col-sm-offset-2">
+          <p class="landing-page">
+            {{currentUser.name}}, your are logged in as member admin.
+            Please choose one of the following options to proceed:
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="row row-section">
+      <div class="container-fluid">
+        <div class="col-sm-2 col-sm-offset-2 info">
+          <div class="icon icon-landing">
+            {{fa-icon "file-text"}}
+          </div>
+          <div class="description">
+            <h3>{{#link-to "works"}}DOIs{{/link-to}}</h3>
+            <p>Register and manage DOIs and their metadata.</p>
+          </div>
+        </div>
+        <div class="col-sm-2 info">
+          <div class="icon icon-landing">
+            {{fa-icon "sitemap"}}
+          </div>
+          <div class="description">
+            <h3>{{#link-to "data-centers"}}Clients{{/link-to}}</h3>
+            <p>Manage your clients.</p>
+          </div>
+        </div>
+        <div class="col-sm-2 info">
+          <div class="icon icon-landing">
+            {{fa-icon "users"}}
+          </div>
+          <div class="description">
+            <h3>{{#link-to "users"}}Users{{/link-to}}</h3>
+            <p>Users who can access your DOI registration service.</p>
+          </div>
+        </div>
+        <div class="col-sm-2 info">
+          <div class="icon icon-landing">
+            {{fa-icon "cog"}}
+          </div>
+          <div class="description">
+            <h3>{{#link-to "settings"}}Settings{{/link-to}}</h3>
+            <p>Information shown about your organization.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{{else if (eq currentUser.role "data_center_admin")}}
+  <div class="section section-white">
+    <div class="row row-section">
+      <div class="container-fluid">
+        <div class="col-md-8 col-sm-offset-2">
+          <p class="landing-page">
+            {{currentUser.name}}, your are logged in as client admin.
+            Please choose one of the following options to proceed:
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="row row-section">
+      <div class="container-fluid">
+        <div class="col-sm-2 col-sm-offset-2 info">
+          <div class="icon icon-landing">
+            {{fa-icon "file-text"}}
+          </div>
+          <div class="description">
+            <h3>{{#link-to "works"}}DOIs{{/link-to}}</h3>
+            <p>Register and manage DOIs and their metadata.</p>
+          </div>
+        </div>
+        <div class="col-sm-2 info">
+          <div class="icon icon-landing">
+            {{fa-icon "users"}}
+          </div>
+          <div class="description">
+            <h3>{{#link-to "users"}}Users{{/link-to}}</h3>
+            <p>Users who can access your DOI registration service.</p>
+          </div>
+        </div>
+        <div class="col-sm-2 info">
+          <div class="icon icon-landing">
+            {{fa-icon "cog"}}
+          </div>
+          <div class="description">
+            <h3>{{#link-to "settings"}}Settings{{/link-to}}</h3>
+            <p>Information shown about your organization.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{{else}}
+  <div class="wrapper">
+    <!-- https://www.pexels.com/photo/blue-and-white-wooden-modes-store-157563/ -->
+    <div class="landing-header" style="background-image: url('{{cdn-url}}/images/bracco.jpg');">
+      <div class="container-fluid">
+        <div class="motto">
+          <h1>{{site-title}}</h1>
+          <p>Register and manage DOIs and metadata.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section section-white">
+      <div class="row row-section">
+        <div class="container-fluid">
+          <div class="col-md-8 col-sm-offset-2">
+            <p>The current DataCite Metadata Store (<a href="https://mds.datacite.org">MDS</a>) will be renovated to become a new
+              DOI Registration Service, including all the functionalities needed to manage
+              DOI registration, members, clients, and prefixes. The service will provide stats, checks and reports.</p>
+            <p>This project is work in progress, check the status <a href="https://github.com/datacite/datacite/milestone/10">here</a>.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section section-white">
+      <div class="row row-section">
+        <div class="container-fluid">
+          <div class="col-sm-2 col-sm-offset-2 info">
+            <div class="icon icon-landing">
+              {{fa-icon "file-text"}}
+            </div>
+            <div class="description">
+              <h3>DOIs</h3>
+              <p>Register and manage DOIs and their metadata.</p>
+            </div>
+          </div>
+          <div class="col-sm-2 info">
+            <div class="icon icon-landing">
+              {{fa-icon "sitemap"}}
+            </div>
+            <div class="description">
+              <h3>Clients</h3>
+              <p>If you are a member, manage your clients.</p>
+            </div>
+          </div>
+          <div class="col-sm-2 info">
+            <div class="icon icon-landing">
+              {{fa-icon "users"}}
+            </div>
+            <div class="description">
+              <h3>Users</h3>
+              <p>Users who can access your DOI registration service.</p>
+            </div>
+          </div>
+          <div class="col-sm-2 info">
+            <div class="icon icon-landing">
+              {{fa-icon "cog"}}
+            </div>
+            <div class="description">
+              <h3>Settings</h3>
+              <p>Information shown about your organization.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{{/if}}

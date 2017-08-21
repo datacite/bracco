@@ -1,6 +1,7 @@
 {{#if (can "list member")}}
   <div class="row">
     {{model-search model=model}}
+
     {{#if (can "write member")}}
       <div class='col-md-3'>
         <div class="panel facets">
@@ -25,9 +26,8 @@
                 <span class="small">{{member.memberType}} member</span>
               </h3>
 
-              <div class="description">
-                <img class="pull-right img-responsive img-small" src="{{member.logoUrl}}">
-                {{format-text member.description limit=60}}
+              <div class="country">
+                {{member.country}}
               </div>
             </div>
             <div class="panel-footer">

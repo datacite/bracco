@@ -1,8 +1,15 @@
 import Ember from 'ember';
 import ENV from 'bracco/config/environment';
 
-export function siteTitle(params) {
-  return (params[0] === "index") ? null : ENV.SITE_TITLE;
-}
+export default Ember.Helper.extend({
+  currentUser: Ember.inject.service(),
 
-export default Ember.Helper.helper(siteTitle);
+  compute(params) {
+    let notAuthenticated = !this.get('currentUser').get('isAuthenticated');
+    if (notAuthenticated && params[0] === "index") {
+      return null;
+    } else {
+      return ENV.SITE_TITLE;
+    }
+  }
+});

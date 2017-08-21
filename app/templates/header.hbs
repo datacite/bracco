@@ -1,38 +1,30 @@
-<div class="header" id="navtop">
-  <div class="{{navbar-class currentRouteName}}" role="navigation">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="/">{{site-title currentRouteName}}</a>
-      </div>
-      <div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav navbar-right">
-          {{#if (can "list work")}}
-            <li>{{#link-to "works" activeClass="active"}}DOIs{{/link-to}}</li>
-          {{/if}}
-          {{#if (can "list member")}}
-            <li>{{#link-to "members" activeClass="active"}}Members{{/link-to}}</li>
-          {{/if}}
-          {{#if (can "list data-center")}}
-            <li>{{#link-to "data-centers" activeClass="active"}}Clients{{/link-to}}</li>
-          {{/if}}
-          {{#if (can "list user")}}
-            <li>{{#link-to "users" activeClass="active"}}Users{{/link-to}}</li>
-          {{/if}}
-          {{#if (can "read settings")}}
-            <li>{{#link-to "settings" activeClass="active"}}Settings{{/link-to}}</li>
-          {{/if}}
-          <li><a href="https://support.datacite.org">{{t "general.support"}}</a></li>
-
-          {{menu-links links=model.header_links class="dropdown"}}
-          {{menu-user class="dropdown"}}
-        </ul>
-      </div>
-    </div>
+{{#bs-navbar class=(navbar-class currentRouteName) fluid=true collapsed=collapsed onCollapse=(action (mut collapsed) true) onExpand=(action (mut collapsed) false) as |navbar|}}
+  <div class="navbar-header">
+    {{navbar.toggle}}
+    {{#link-to "index" class="navbar-brand"}}{{site-title currentRouteName}}{{/link-to}}
   </div>
-</div>
+  {{#navbar.content}}
+    {{#navbar.nav class="navbar-right" as |nav|}}
+      {{#if (can "list work")}}
+        {{#nav.item}}{{#nav.link-to "works" activeClass="active"}}DOIs{{/nav.link-to}}{{/nav.item}}
+      {{/if}}
+      {{#if (can "list member")}}
+        {{#nav.item}}{{#nav.link-to "members" activeClass="active"}}Members{{/nav.link-to}}{{/nav.item}}
+      {{/if}}
+      {{#if (can "list data-center")}}
+        {{#nav.item}}{{#nav.link-to "data-centers" activeClass="active"}}Clients{{/nav.link-to}}{{/nav.item}}
+      {{/if}}
+      {{#if (can "list user")}}
+        {{#nav.item}}{{#nav.link-to "users" activeClass="active"}}Users{{/nav.link-to}}{{/nav.item}}
+      {{/if}}
+      {{#if (can "read settings")}}
+        {{#nav.item}}{{#nav.link-to "settings" activeClass="active"}}Settings{{/nav.link-to}}{{/nav.item}}
+      {{/if}}
+      {{#nav.item}}
+        <a href="https://support.datacite.org">{{t "general.support"}}</a>
+      {{/nav.item}}
+      {{menu-links links=model.header_links class="dropdown"}}
+      {{menu-user class="dropdown"}}
+    {{/navbar.nav}}
+  {{/navbar.content}}
+{{/bs-navbar}}

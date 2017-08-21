@@ -1,8 +1,15 @@
 import Ember from 'ember';
+import ENV from 'bracco/config/environment';
 
-export function navbarClass(params) {
-  var navbarClassName = (params[0] === "index") ? "navbar-transparent" : "navbar-default"
-  return "navbar " + navbarClassName + " " + " navbar-static-top";
-}
+export default Ember.Helper.extend({
+  currentUser: Ember.inject.service(),
 
-export default Ember.Helper.helper(navbarClass);
+  compute(params) {
+    let notAuthenticated = !this.get('currentUser').get('isAuthenticated');
+    if (notAuthenticated && params[0] === "index") {
+      return "navbar-transparent";
+    } else {
+      return "navbar-default";
+    }
+  }
+});

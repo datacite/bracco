@@ -28,11 +28,6 @@
               <div class="metadata">
                 {{format-metadata work.published resourceType=work.resourceTypeSubtype containerTitle=work.containerTitle}}
               </div>
-              {{#if work.description}}
-                <div class="description">
-                  {{format-text work.description limit=75}}
-                </div>
-              {{/if}}
               {{#if work.license}}
                 <div class="license">
                   {{work.license}}

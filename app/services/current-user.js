@@ -4,6 +4,8 @@ import JsonWebToken from 'npm:jsonwebtoken';
 import ENV from 'bracco/config/environment';
 
 export default Ember.Service.extend({
+  notifications: Ember.inject.service('notification-messages'),
+
   isAuthenticated: false,
   isPermitted: false,
   isAdmin: false,
