@@ -21,16 +21,22 @@ export default Ember.Service.extend({
     this._super(...arguments);
 
     let self = this;
-    let decoded = new Ember.RSVP.Promise(function(resolve) {
+    let decoded = new Promise(function(resolve, reject) {
       // check for cookie containing jwt
       let jwt = Cookie.get('_datacite_jwt');
-      if (Ember.isNone(jwt)) resolve(null);
+
+      // check for RSA public key
+      let cert = ENV.JWT_PUBLIC_KEY ? ENV.JWT_PUBLIC_KEY.replace(/\\n/g, '\n') : null;
 
       // verify asymmetric token, using RSA with SHA-256 hash algorithm
-      let cert = ENV.JWT_PUBLIC_KEY ? ENV.JWT_PUBLIC_KEY.replace(/\\n/g, '\n') : null;
-      JsonWebToken.verify(jwt, cert, { algorithms: ['RS256'] }, function (err, payload) {
-        payload.jwt = jwt;
-        resolve(payload);
+      JsonWebToken.verify(jwt, cert, { algorithms: ['RS256'] }, function (error, payload) {
+        if (payload) {
+          // add JWT to returned payload
+          payload.jwt = jwt;
+          resolve(payload);
+        } else {
+          reject(error);
+        }
       });
     });
 
@@ -49,6 +55,8 @@ export default Ember.Service.extend({
         self.set('isMember', Ember.isEqual(result.role, "member_admin"));
         self.set('isDataCenter', Ember.isEqual(result.role, "datacenter_admin"));
       }
+    }, function(reason) {
+      Ember.Logger.assert(false, reason)
     });
   }
 });
