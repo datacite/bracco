@@ -1,7 +1,7 @@
 {{#bs-navbar class=(navbar-class currentRouteName) fluid=true collapsed=collapsed onCollapse=(action (mut collapsed) true) onExpand=(action (mut collapsed) false) as |navbar|}}
   <div class="navbar-header">
     {{navbar.toggle}}
-    {{#link-to "index" class="navbar-brand"}}{{site-title currentRouteName}}{{/link-to}}
+    {{#link-to "index" class="navbar-brand"}}{{#if (can "read index")}}{{site-title}}{{/if}}{{/link-to}}
   </div>
   {{#navbar.content}}
     {{#navbar.nav class="navbar-right" as |nav|}}
