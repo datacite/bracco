@@ -21,7 +21,7 @@ export default Ember.Service.extend({
     this._super(...arguments);
 
     let self = this;
-    let decoded = new Promise(function(resolve, reject) {
+    let decoded = new Ember.RSVP.Promise(function(resolve, reject) {
       // check for cookie containing jwt
       let jwt = Cookie.get('_datacite_jwt');
 
@@ -34,7 +34,7 @@ export default Ember.Service.extend({
           // add JWT to returned payload
           payload.jwt = jwt;
           resolve(payload);
-        } else {
+        } else {
           reject(error);
         }
       });
