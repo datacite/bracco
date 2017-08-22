@@ -1,0 +1,10 @@
+<div class="panel-body">
+  {{#if model.url}}
+     <a href="{{url}}">{{url}}</a>
+     {{#bs-button type=buttonType size="xs" onClick=(action "checkLink") class="btn btn-link"}}
+       {{status}}
+     {{/bs-button}}
+  {{else}}
+    The URL is currently not available.
+  {{/if}}
+</div>

@@ -7,6 +7,7 @@ export default DS.Model.extend({
 
   identifier: DS.attr('string'),
   doi: DS.attr('string'),
+  url: DS.attr('string'),
   author: DS.attr(),
   title: DS.attr('string'),
   containerTitle: DS.attr('string'),
