@@ -1,44 +1,42 @@
-{{#if (not-eq currentUser.member_id model.member.id)}}
-  <div class="panel facets">
-    <div class="panel-body metadata">
-      {{#if model.member}}
-        <h5>Member {{fa-icon "question-circle-o"}}
-          {{#bs-tooltip placement="top"}}Member the data center works with.{{/bs-tooltip}}
-        </h5>
-        <div class="registration_agency">
-          {{#link-to "members.show" model.member.id}}{{model.member.title}}{{/link-to}}
-        </div>
-      {{/if}}
-      {{#if model.data-center}}
-        <h5>Client</h5>
-        <div class="data-center">
-          {{#link-to "data-centers.show" model.data-center.id}}{{model.data-center.title}}{{/link-to}}
-        </div>
-      {{/if}}
-      {{#if model.created}}
-        <h5>Record created</h5>
-        <div class="created">
-          {{format-date model.created}}
-        </div>
-      {{/if}}
-      {{#if (gt model.updated model.created)}}
-        <h5>Record modified</h5>
-        <div class="updated">
-          {{format-date model.updated}}
-        </div>
-      {{/if}}
-      {{#if model.registered}}
-        <h5>DOI registered</h5>
-        <div class="registered">
-          {{format-date model.registered}}
-        </div>
-      {{/if}}
-      {{#if (gt model.updated model.registered)}}
-        <h5>DOI modified</h5>
-        <div class="updated">
-          {{format-date model.updated}}
-        </div>
-      {{/if}}
-     </div>
+<div class="panel facets">
+  <div class="panel-body metadata">
+    {{#if (current-user role="member_admin" inverse=true)}}
+      <h5>Member {{fa-icon "question-circle-o"}}
+        {{#bs-tooltip placement="top"}}Member the data center works with.{{/bs-tooltip}}
+      </h5>
+      <div class="registration_agency">
+        {{#link-to "members.show" model.member.id}}{{model.member.title}}{{/link-to}}
+      </div>
+    {{/if}}
+    {{#if (and model.data-center (current-user role="data_center_admin" inverse=true))}}
+      <h5>Client</h5>
+      <div class="data-center">
+        {{#link-to "data-centers.show" model.data-center.id}}{{model.data-center.title}}{{/link-to}}
+      </div>
+    {{/if}}
+    {{#if model.created}}
+      <h5>Record created</h5>
+      <div class="created">
+        {{format-date model.created}}
+      </div>
+    {{/if}}
+    {{#if (gt model.updated model.created)}}
+      <h5>Record modified</h5>
+      <div class="updated">
+        {{format-date model.updated}}
+      </div>
+    {{/if}}
+    {{#if model.registered}}
+      <h5>DOI registered</h5>
+      <div class="registered">
+        {{format-date model.registered}}
+      </div>
+    {{/if}}
+    {{#if (gt model.updated model.registered)}}
+      <h5>DOI modified</h5>
+      <div class="updated">
+        {{format-date model.updated}}
+      </div>
+    {{/if}}
    </div>
-{{/if}}
+ </div>

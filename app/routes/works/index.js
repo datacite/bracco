@@ -11,10 +11,11 @@ export default Ember.Route.extend(RouteMixin, {
                             perPage: "page[size]",
                             total_pages: "total-pages" };
 
-    // only show member works if member
-    if (this.get('currentUser').get('role') === "member_admin") {
+    // filter users by member or data center
+    let role = this.get('currentUser').get('role');
+    if (role === "member_admin") {
       params = Ember.merge(params, { 'member-id': this.get('currentUser').get('member_id') });
-    } else if (this.get('currentUser').get('role') === "data_center_admin") {
+    } else if (role === "data_center_admin") {
       params = Ember.merge(params, { 'data-center-id': this.get('currentUser').get('data_center_id') });
     }
 

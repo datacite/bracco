@@ -4,8 +4,6 @@ import JsonWebToken from 'npm:jsonwebtoken';
 import ENV from 'bracco/config/environment';
 
 export default Ember.Service.extend({
-  notifications: Ember.inject.service('notification-messages'),
-
   isAuthenticated: false,
   isPermitted: false,
   isAdmin: false,
@@ -17,7 +15,7 @@ export default Ember.Service.extend({
   email: null,
   role: null,
   member_id: null,
-  datacenter_id: null,
+  data_center_id: null,
 
   init() {
     this._super(...arguments);
@@ -52,10 +50,10 @@ export default Ember.Service.extend({
         self.set('email', result.email);
         self.set('role', result.role);
         self.set('member_id', result.member_id);
-        self.set('datacenter_id', result.datacenter_id);
+        self.set('data_center_id', result.datacenter_id);
         self.set('isAdmin', Ember.isEqual(result.role, "staff_admin"));
         self.set('isMember', Ember.isEqual(result.role, "member_admin"));
-        self.set('isDataCenter', Ember.isEqual(result.role, "datacenter_admin"));
+        self.set('isDataCenter', Ember.isEqual(result.role, "data_center_admin"));
       }
     }, function(reason) {
       Ember.Logger.assert(false, reason)

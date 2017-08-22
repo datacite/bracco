@@ -5,12 +5,23 @@ export default Ability.extend({
   currentUser: Ember.inject.service(),
 
   canWrite: function() {
-    return (['staff_admin', 'member_admin'].includes(this.get('currentUser.role')));
+    switch(this.get('currentUser.role')) {
+      case 'staff_admin':
+      case 'member_admin':
+      case 'data_center_admin':
+        return true;
+      default:
+        return false;
+    }
   }.property('currentUser.uid', 'user', 'canWrite'),
   canRead: function() {
-    return (['staff_admin', 'member_admin'].includes(this.get('currentUser.role')));
-  }.property('currentUser.uid', 'user', 'canRead'),
-  canList: function() {
-    return (['staff_admin', 'member_admin'].includes(this.get('currentUser.role')));
-  }.property('currentUser.uid', 'user', 'canList')
+    switch(this.get('currentUser.role')) {
+      case 'staff_admin':
+      case 'member_admin':
+      case 'data_center_admin':
+        return true;
+      default:
+        return false;
+    }
+  }.property('currentUser.uid', 'user', 'canRead')
 });

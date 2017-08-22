@@ -8,13 +8,13 @@
       {{#if (can "list work")}}
         {{#nav.item}}{{#nav.link-to "works" activeClass="active"}}DOIs{{/nav.link-to}}{{/nav.item}}
       {{/if}}
-      {{#if (can "list member")}}
+      {{#if (can "list member" model)}}
         {{#nav.item}}{{#nav.link-to "members" activeClass="active"}}Members{{/nav.link-to}}{{/nav.item}}
       {{/if}}
-      {{#if (can "list data-center")}}
+      {{#if (can "list data-center" model)}}
         {{#nav.item}}{{#nav.link-to "data-centers" activeClass="active"}}Clients{{/nav.link-to}}{{/nav.item}}
       {{/if}}
-      {{#if (can "list user")}}
+      {{#if (can "read user")}}
         {{#nav.item}}{{#nav.link-to "users" activeClass="active"}}Users{{/nav.link-to}}{{/nav.item}}
       {{/if}}
       {{#if (can "read settings")}}

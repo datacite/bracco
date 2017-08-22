@@ -39,10 +39,9 @@
           {{/if}}
         </div>
       {{else}}
-        <div class="alert alert-simple-info">
-          <h5>No clients found.
-          </h5>
-        </div>
+        {{#bs-alert dismissible=false type="warning"}}
+          No clients found.
+        {{/bs-alert}}
       {{/if}}
     </div>
     <div class='col-md-3'>
@@ -67,7 +66,7 @@
           </div>
         </div>
       {{/if}}
-      {{#if (and model.meta.members (can "read data-center"))}}
+      {{#if (and model.meta.members (current-user role="staff_admin"))}}
         <div class="panel facets">
           <div class="panel-body">
             <h4>Members <span class="small">{{fa-icon "question-circle-o"}}{{#bs-tooltip placement="top"}}Filter data centers by member they work with.{{/bs-tooltip}}</span></h4>

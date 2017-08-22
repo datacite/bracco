@@ -4,17 +4,15 @@ import { CanMixin } from 'ember-can';
 export default Ember.Route.extend(CanMixin, {
   currentUser: Ember.inject.service(),
 
-  beforeModel: function() {
-    if (!this.can('read settings')) {
-      this.transitionTo('index');
-    }
-  },
-
   model() {
     let currentUser = this.get('currentUser');
 
-    if (currentUser.member_id) {
-      return this.store.findRecord('member', currentUser.member_id);
+    if (currentUser.get('role') === "member_admin") {
+      return this.store.findRecord('member', currentUser.get('member_id'));
+    } else if (currentUser.get('role') === "data_center_admin") {
+      return this.store.findRecord('data-center', currentUser.get('data_center_id'), { include: 'member' });
+    } else {
+      return null;
     }
   }
 });
