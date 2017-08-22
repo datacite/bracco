@@ -18,7 +18,7 @@ export default Ember.Component.extend({
   actions: {
     checkLink() {
       let self = this;
-      let url = this.get('model').get("url");
+      let url = this.get('model').get("identifier");
       let result = fetch(url, {
       	method: 'head',
         timeout: 5000
@@ -27,6 +27,7 @@ export default Ember.Component.extend({
           self.set('status', 'ok');
           self.set('buttonType', 'success');
         } else {
+          console.log(response)
           self.set('status', 'failed');
           self.set('buttonType', 'warning');
         }
