@@ -5,9 +5,6 @@
   </div>
   {{#navbar.content}}
     {{#navbar.nav class="navbar-right" as |nav|}}
-      {{#if (can "list work")}}
-        {{#nav.item}}{{#nav.link-to "works" activeClass="active"}}DOIs{{/nav.link-to}}{{/nav.item}}
-      {{/if}}
       {{#if (can "list member" model)}}
         {{#nav.item}}{{#nav.link-to "members" activeClass="active"}}Members{{/nav.link-to}}{{/nav.item}}
       {{/if}}
@@ -16,6 +13,9 @@
       {{/if}}
       {{#if (can "read user")}}
         {{#nav.item}}{{#nav.link-to "users" activeClass="active"}}Users{{/nav.link-to}}{{/nav.item}}
+      {{/if}}
+      {{#if (can "list work")}}
+        {{#nav.item}}{{#nav.link-to "works" activeClass="active"}}DOIs{{/nav.link-to}}{{/nav.item}}
       {{/if}}
       {{#if (can "read settings")}}
         {{#nav.item}}{{#nav.link-to "settings" activeClass="active"}}Settings{{/nav.link-to}}{{/nav.item}}

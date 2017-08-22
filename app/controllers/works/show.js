@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  queryParams: ['metadata'],
-  metadata: null
+  queryParams: ['metadata', 'citation'],
+  metadata: null,
+  citation: null
 });

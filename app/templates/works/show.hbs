@@ -1,1 +1,18 @@
-{{work-metadata model=model}}
+<div class="row">
+  <div class="col-md-9">
+    <h3 class="member-results">URL</h3>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-9">
+    <div class="panel panel-transparent">
+      <div class="panel-body">
+         {{model.identifier}}
+      </div>
+    </div>
+
+    {{work-metadata model=model}}
+  </div>
+
+  {{datacenter-sidebar model=model}}
+</div>
