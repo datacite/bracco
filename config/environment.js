@@ -19,6 +19,11 @@ module.exports = function(environment) {
     'ember-cli-string-helpers': {
       only: ['humanize', 'html-safe', 'truncate', 'titleize']
     },
+    emberTracker: {
+			analyticsSettings: {
+				trackingId: process.env.TRACKING_ID || null,
+			},
+		},
 
     APP: {
       // Here you can pass flags/options to your application instance
@@ -37,7 +42,7 @@ module.exports = function(environment) {
   ENV.JWT_HOST = process.env.JWT_HOST || "https://profiles.test.datacite.org";
   ENV.JWT_PUBLIC_KEY = process.env.JWT_PUBLIC_KEY || null;
   ENV.BUGSNAG_API_KEY = process.env.BUGSNAG_API_KEY || null;
-  ENV.BUGSNAG_NOTIFY_RELEASE = "production";
+  ENV.BUGSNAG_NOTIFY_RELEASE = process.env.BUGSNAG_NOTIFY_RELEASE || "production";
 
   ENV.i18n = {
     defaultLocale: 'en-US'

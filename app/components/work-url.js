@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import fetch from 'fetch';
+import ENV from 'bracco/config/environment';
 
 export default Ember.Component.extend({
   tagName: 'div',
@@ -19,6 +20,7 @@ export default Ember.Component.extend({
     checkLink() {
       let self = this;
       let url = this.get('model').get("identifier");
+      // let url = ENV.DATA_URL + '/' + this.get('model').get("doi");
       fetch(url, {
         method: 'head',
         timeout: 5000
