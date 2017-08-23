@@ -4,7 +4,7 @@
       <div class="container-fluid">
         <div class="col-md-8 col-sm-offset-2">
           <p class="landing-page">
-            {{currentUser.name}}, your are logged in as staff admin.
+            Welcome {{currentUser.name}} to the staff administration area.
             Please choose one of the following options to proceed:
           </p>
         </div>
@@ -65,7 +65,7 @@
       <div class="container-fluid">
         <div class="col-md-8 col-sm-offset-2">
           <p class="landing-page">
-            {{currentUser.name}}, your are logged in as member admin.
+            Welcome {{currentUser.name}} to the member administration area.
             Please choose one of the following options to proceed:
           </p>
         </div>
@@ -73,9 +73,9 @@
     </div>
     <div class="row row-section">
       <div class="container-fluid">
-        <div class="col-sm-2 info">
+        <div class="col-sm-2 info col-sm-offset-2">
           {{#link-to "data-centers"}}
-            <div class="icon icon-landing col-sm-offset-2">
+            <div class="icon icon-landing">
               {{fa-icon "sitemap"}}
             </div>
             <h3>Clients</h3>
@@ -126,7 +126,7 @@
       <div class="container-fluid">
         <div class="col-md-8 col-sm-offset-2">
           <p class="landing-page">
-            {{currentUser.name}}, your are logged in as client admin.
+            Welcome {{currentUser.name}} to the client administration area.
             Please choose one of the following options to proceed:
           </p>
         </div>
