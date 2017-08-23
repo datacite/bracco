@@ -5,6 +5,7 @@ import ENV from 'bracco/config/environment';
 export default Ember.Component.extend({
   tagName: 'div',
   metadata: null,
+  output: null,
 
   showMetadata(metadata) {
     if (!metadata || metadata === "html") {
@@ -17,8 +18,6 @@ export default Ember.Component.extend({
       let acceptHeaders = { 'datacite': 'application/vnd.datacite.datacite+xml',
                             'schema_org': 'application/vnd.schemaorg.ld+json',
                             'citeproc': 'application/vnd.citationstyles.csl+json',
-                            'rdf_xml': 'application/rdf+xml',
-                            'turtle': 'text/turtle',
                             'codemeta': 'application/vnd.codemeta.ld+json',
                             'bibtex': 'application/x-bibtex',
                             'ris': 'application/x-research-info-systems' };
@@ -35,19 +34,19 @@ export default Ember.Component.extend({
         }
       });
 
-      result.then(function(result) {
-        if (typeof result === 'string') {
-          self.set('output', result);
+      result.then(function(response) {
+        if (typeof response === 'string') {
+          self.set('output', response);
         } else {
           let reader = new FileReader();
           reader.onloadend = function() {
             self.set('output', reader.result);
           }
-          reader.readAsText(result);
+          reader.readAsText(response);
         }
       });
     }
-    this.get('router').transitionTo({ queryParams: { metadata: metadata } });
+    //this.get('router').transitionTo({ queryParams: { metadata: metadata } });
   },
 
   actions: {
@@ -61,8 +60,6 @@ export default Ember.Component.extend({
                     'datacite': 'DataCite XML' };
                     // 'schema_org': 'Schema.org JSON-LD',
                     // 'citeproc': 'Citeproc JSON',
-                    // 'rdf_xml': 'RDF-XML',
-                    // 'turtle': 'Turtle',
                     // 'codemeta': 'Codemeta',
                     // 'bibtex': 'BibTeX',
                     // 'ris': 'RIS' };

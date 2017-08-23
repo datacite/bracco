@@ -4,6 +4,9 @@
      {{#bs-button type=buttonType size="xs" onClick=(action "checkLink") class="btn btn-link"}}
        {{status}}
      {{/bs-button}}
+     {{#if reason}}
+       <div class="icon-warning">{{reason}}</div>
+     {{/if}}
   {{else}}
     The URL is currently not available.
   {{/if}}
