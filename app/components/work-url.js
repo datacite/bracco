@@ -50,18 +50,17 @@ export default Ember.Component.extend({
             self.set('buttonType', 'warning');
             self.set('reason', "DOI landing page is not a web page (content type " + result["content-type"] + ").");
           }
-        } else if (parseInt(result.status) === 403) {
-          self.set('status', 'failed');
-          self.set('buttonType', 'warning');
-          self.set('reason', "Access to DOI landing page is forbidden (status code " + result.status + ").");
-        } else if (result.status === 404) {
-          self.set('status', 'failed');
-          self.set('buttonType', 'warning');
-          self.set('reason', "DOI landing page was not found (status code " + result.status + ").");
         } else {
           self.set('status', 'failed');
           self.set('buttonType', 'warning');
-          self.set('reason', "An error has occured (status code " + result.status + ").");
+
+          if (parseInt(result.status) === 403) {
+            self.set('reason', "Access to DOI landing page forbidden (status code " + result.status + ").");
+          } else if (result.status === 404) {
+            self.set('reason', "DOI landing page was not found (status code " + result.status + ").");
+          } else {
+            self.set('reason', "An error has occured (status code " + result.status + ").");
+          }
         }
       });
     }

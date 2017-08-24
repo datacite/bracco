@@ -13,9 +13,7 @@ export default Ember.Route.extend(RouteMixin, {
 
     // filter users by member or data center
     let role = this.get('currentUser').get('role');
-    if (role === "member_admin") {
-      params = Ember.merge(params, { 'member-id': this.get('currentUser').get('member_id') });
-    } else if (role === "data_center_admin") {
+    if (role === "data_center_admin") {
       params = Ember.merge(params, { 'data-center-id': this.get('currentUser').get('data_center_id') });
     }
 
