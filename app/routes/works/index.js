@@ -2,8 +2,6 @@ import Ember from 'ember';
 import RouteMixin from 'ember-cli-pagination/remote/route-mixin';
 
 export default Ember.Route.extend(RouteMixin, {
-  currentUser: Ember.inject.service(),
-
   perPage: 25,
 
   model(params) {

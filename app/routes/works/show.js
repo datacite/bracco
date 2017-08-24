@@ -1,8 +1,6 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-  currentUser: Ember.inject.service(),
-
   model(params) {
     // filter users by member or data center
     let include = { include: 'member,data-center' };
