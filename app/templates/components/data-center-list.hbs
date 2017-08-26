@@ -49,9 +49,9 @@
           {{#each model.meta.years as |year|}}
             <li>
               {{#if model.otherParams.year}}
-                {{#link-to "data-centers" (query-params year=null)}}{{fa-icon "check-square-o"}}{{/link-to}}
+                {{#link-to link (query-params year=null)}}{{fa-icon "check-square-o"}}{{/link-to}}
               {{else}}
-                {{#link-to "data-centers" (query-params year=year.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                {{#link-to link (query-params year=year.id)}}{{fa-icon "square-o"}}{{/link-to}}
               {{/if}}
               <div class="facet-title">{{year.title}}</div>
               <span class="number pull-right">{{year.count}}</span>
@@ -62,7 +62,7 @@
       </div>
     </div>
   {{/if}}
-  {{#if (and model.meta.members (current-user role="staff_admin"))}}
+  {{#if (eq link "data-centers")}}
     <div class="panel facets">
       <div class="panel-body">
         <h4>Members <span class="small">{{fa-icon "question-circle-o"}}{{#bs-tooltip placement="top"}}Filter data centers by member they work with.{{/bs-tooltip}}</span></h4>
@@ -70,9 +70,9 @@
           {{#each model.meta.members as |member|}}
             <li>
               {{#if model.otherParams.member-id}}
-                {{#link-to "data-centers" (query-params member-id=null)}}{{fa-icon "check-square-o"}}{{/link-to}}
+                {{#link-to link (query-params member-id=null)}}{{fa-icon "check-square-o"}}{{/link-to}}
               {{else}}
-                {{#link-to "data-centers" (query-params member-id=member.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                {{#link-to link (query-params member-id=member.id)}}{{fa-icon "square-o"}}{{/link-to}}
               {{/if}}
               <div class="facet-title">{{member.title}}</div>
               <span class="number pull-right">{{member.count}}</span>
