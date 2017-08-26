@@ -12,10 +12,11 @@
   <div class='col-md-9'>
     <div class="tab-content nav-tabs-member">
       {{#bs-nav type="tabs" as |nav|}}
-        {{#nav.item}}{{#nav.link-to "members.index" class="nav-link"}}Providers{{/nav.link-to}}{{/nav.item}}
-        {{#nav.item}}{{#nav.link-to "data-centers.index" class="nav-link"}}Clients{{/nav.link-to}}{{/nav.item}}
-        {{#nav.item}}{{#nav.link-to "users.index" class="nav-link"}}Users{{/nav.link-to}}{{/nav.item}}
-        {{#nav.item}}{{#nav.link-to "works.index" class="nav-link"}}DOIs{{/nav.link-to}}{{/nav.item}}
+        {{#nav.item}}{{#nav.link-to "index" class="nav-link"}}Info{{/nav.link-to}}{{/nav.item}}
+        {{#nav.item}}{{#nav.link-to "members" class="nav-link"}}Providers{{/nav.link-to}}{{/nav.item}}
+        {{#nav.item}}{{#nav.link-to "data-centers" class="nav-link"}}Clients{{/nav.link-to}}{{/nav.item}}
+        {{#nav.item}}{{#nav.link-to "users" class="nav-link"}}Users{{/nav.link-to}}{{/nav.item}}
+        {{#nav.item}}{{#nav.link-to "works" class="nav-link"}}DOIs{{/nav.link-to}}{{/nav.item}}
       {{/bs-nav}}
     </div>
   </div>

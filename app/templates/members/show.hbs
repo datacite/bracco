@@ -9,46 +9,6 @@
         <div class="panel-title work">
           <h2>{{model.title}}</h2>
         </div>
-        <div class="panel-body">
-          <div class="country">
-            {{model.country}}
-          </div>
-        </div>
-        <div class="panel-footer">
-          {{model.name}}
-          <span>{{fa-icon "question-circle-o"}}
-            {{#bs-tooltip placement="top" viewportPadding=10}}Each DOI service provider has a unique ID.{{/bs-tooltip}}
-          </span>
-          {{#if (can "write member")}}
-            <div class="btn-toolbar pull-right">
-              <div class="btn-group btn-group-sm">
-                {{fa-icon "pencil"}}
-              </div>
-              {{#if (can "delete member")}}
-                <div class="btn-group btn-group-sm">
-                  {{fa-icon "trash"}}
-                </div>
-              {{/if}}
-            </div>
-          {{/if}}
-          <div class="clearfix"/>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-3">
-      <div class="panel-facets">
-        <div class="panel-body metadata">
-          <h5>Record created</h5>
-          <div class="created">
-            {{format-date model.created}}
-          </div>
-          {{#if (gt model.updated model.created)}}
-            <h5>Record modified</h5>
-            <div class="updated">
-              {{format-date model.updated}}
-            </div>
-          {{/if}}
-        </div>
       </div>
     </div>
   </div>
@@ -57,6 +17,7 @@
     <div class='col-md-9'>
       <div class="tab-content nav-tabs-member">
         {{#bs-nav type="tabs" as |nav|}}
+          {{#nav.item}}{{#nav.link-to "members.show.index" model.id class="nav-link"}}Info{{/nav.link-to}}{{/nav.item}}
           {{#nav.item}}{{#nav.link-to "members.show.data-centers" model.id class="nav-link"}}Clients{{/nav.link-to}}{{/nav.item}}
           {{#nav.item}}{{#nav.link-to "members.show.users" model.id class="nav-link"}}Users{{/nav.link-to}}{{/nav.item}}
           {{#nav.item}}{{#nav.link-to "members.show.works" model.id class="nav-link"}}DOIs{{/nav.link-to}}{{/nav.item}}

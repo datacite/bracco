@@ -20,7 +20,7 @@
     {{/each}}
     <div class="text-center">
       {{#if (gt model.meta.total_pages 1)}}
-        {{page-numbers content=data-centers showFL=true}}
+        {{page-numbers content=model showFL=true}}
       {{/if}}
     </div>
   {{else}}

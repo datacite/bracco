@@ -1,12 +1,8 @@
 <div class="col-md-9" id="content-user">
-  {{#if title}}
-    <h3 class="user-results">
-      {{format-number model.meta.total}} Users
-      <span class="small">{{fa-icon "question-circle-o"}}
-        {{#bs-tooltip placement="top" viewportPadding=10}}Manage all users who use the DOI Registration Service.{{/bs-tooltip}}
-      </span>
-    </h3>
+  {{#if searchable}}
+    {{model-search model=model}}
   {{/if}}
+
   {{#if model}}
     {{#bs-accordion as |acc|}}
       {{#each model as |user|}}
@@ -47,7 +43,7 @@
     {{/bs-accordion}}
     <div class="text-center">
       {{#if (gt model.meta.total_pages 1)}}
-        {{page-numbers content=content showFL=true}}
+        {{page-numbers content=model showFL=true}}
       {{/if}}
     </div>
   {{else}}
