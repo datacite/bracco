@@ -9,3 +9,6 @@
     </div>
   </div>
 </form>
+{{#if (gt model.meta.total 1)}}
+  <h3 class="{{model.modelName}}-results">{{format-number model.meta.total}} {{modelName}}s</h3>
+{{/if}}

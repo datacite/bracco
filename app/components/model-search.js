@@ -37,10 +37,10 @@ export default Ember.Component.extend(RouteMixin, {
 
   didInsertElement: function() {
     let placeholders = { 'work': 'DOI',
-                         'member': 'DOI Service Provider',
+                         'member': 'Provider',
                          'data-center': 'Client',
                          'user': 'User' }
-    this.set('placeholder', 'Search');
+    this.set('placeholder', 'Search for ' + placeholders[this.get('model').get("modelName")]);
     this.set('modelName', placeholders[this.get('model').get("modelName")]);
   }
 });
