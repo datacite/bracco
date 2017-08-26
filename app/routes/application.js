@@ -1,7 +1,8 @@
 import Ember from 'ember';
 import ENV from 'bracco/config/environment';
+import { CanMixin } from 'ember-can';
 
-export default Ember.Route.extend({
+export default Ember.Route.extend(CanMixin, {
   model() {
     var url = ENV.CDN_URL + "/data/links.json"
 

@@ -1,2 +1,12 @@
-{{index-header}}
-{{work-list model=model searchable=true}}
+{{#if (can "read index")}}
+  {{index-header}}
+  {{work-list model=model searchable=true}}
+{{else}}
+  <div class="row">
+    <div class='col-md-9'>
+      {{#bs-alert dismissible=false type="warning"}}
+        You have no permissions to access this page.
+      {{/bs-alert}}
+    </div>
+  </div>
+{{/if}}

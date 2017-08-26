@@ -2,7 +2,6 @@
   <div class="col-md-9">
     <h3 class="member-results">
       {{model.title}}
-      <span class="small">{{model.memberType}} member</span>
     </h3>
   </div>
 </div>
@@ -10,12 +9,7 @@
   <div class="col-md-9">
     <div class="panel panel-transparent" id="content-member">
       <div class="panel-body">
-        {{#if model.description}}
-          <div class="description">
-            <img class="pull-right img-responsive" src="{{model.logoUrl}}">
-            {{{format-text model.description}}}
-          </div>
-        {{/if}}
+        The password reset functionality goes here.
       </div>
       <div class="panel-footer">
         {{model.name}}
@@ -35,40 +29,6 @@
           </div>
         {{/if}}
         <div class="clearfix"/>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-3">
-    <div class="panel-facets">
-      <div class="panel-body metadata">
-        <h5>Country</h5>
-        <div>{{model.country}}</div>
-
-        <h5>Year joined</h5>
-        <div>{{model.year}}</div>
-
-        {{#if model.website}}
-          <h5>Website</h5>
-          <div><a href="{{model.website}}">{{model.website}}</a></div>
-        {{/if}}
-        {{#if member.email}}
-          <h5>Email</h5>
-          <div><a href="mailto:{{model.email}}">{{model.email}}</a></div>
-        {{/if}}
-        {{#if model.phone}}
-          <h5>Phone</h5>
-          <div>{{model.phone}}</div>
-        {{/if}}
-        <h5>Record created</h5>
-        <div class="created">
-          {{format-date model.created}}
-        </div>
-        {{#if (gt model.updated model.created)}}
-          <h5>Record modified</h5>
-          <div class="updated">
-            {{format-date model.updated}}
-          </div>
-        {{/if}}
       </div>
     </div>
   </div>

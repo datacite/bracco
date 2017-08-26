@@ -1,8 +1,9 @@
-{{#if (can "read member" model)}}
+{{#if (can "read index")}}
   <ol class="breadcrumb">
     <li class="breadcrumb-item">{{#link-to "index"}}DataCite{{/link-to}}</li>
   </ol>
-
+{{/if}}
+{{#if (can "read member" model)}}
   <div class="row">
     <div class="col-md-9">
       <div class="panel panel-transparent" id="content-member">

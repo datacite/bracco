@@ -1,6 +1,8 @@
 {{#if (can "read data-center" model)}}
   <ol class="breadcrumb">
-    <li class="breadcrumb-item">{{#link-to "index"}}DataCite{{/link-to}}</li>
+    {{#if (can "read index")}}
+      <li class="breadcrumb-item">{{#link-to "index"}}DataCite{{/link-to}}</li>
+    {{/if}}
     <li class="breadcrumb-item">{{#link-to "members.show" model.member.id}}{{model.member.title}}{{/link-to}}</li>
   </ol>
 
@@ -26,4 +28,12 @@
     </div>
   </div>
   {{outlet}}
-{{/if}}
+  {{else}}
+    <div class="row">
+      <div class='col-md-9'>
+        {{#bs-alert dismissible=false type="warning"}}
+          You have no permissions to access this page.
+        {{/bs-alert}}
+      </div>
+    </div>
+  {{/if}}

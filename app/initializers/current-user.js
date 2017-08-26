@@ -1,5 +1,6 @@
 export function initialize(application) {
   application.inject('adapter', 'currentUser', 'service:current-user');
+  application.inject('ability', 'currentUser', 'service:current-user');
   application.inject('route', 'currentUser', 'service:current-user');
 }
 

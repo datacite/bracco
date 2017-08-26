@@ -1,7 +1,9 @@
 {{#if (can "read index")}}
   <div class="container-fluid">
     <div class="content">
-      {{index-header}}
+      {{#if (can "read index")}}
+        {{index-header}}
+      {{/if}}
 
       <div class="row">
         <div class='col-sm-8 col-sm-offset-2'>
@@ -15,7 +17,7 @@
       <div class="row row-section">
         <div class="col-sm-2 col-sm-offset-2 info">
           <div class="icon icon-landing">
-            {{fa-icon "cog"}}
+            {{fa-icon "university"}}
           </div>
           <h3>Providers</h3>
           <div class="description-centered">
@@ -84,7 +86,7 @@
               {{fa-icon "sitemap"}}
             </div>
             <h3>Clients</h3>
-            <div class="description">
+            <div class="description-centered">
               <p>If you are a member, manage your clients.</p>
             </div>
           </div>
@@ -93,7 +95,7 @@
               {{fa-icon "users"}}
             </div>
             <h3>Users</h3>
-            <div class="description">
+            <div class="description-centered">
               <p>Users who can access your DOI registration service.</p>
             </div>
           </div>
@@ -102,7 +104,7 @@
               {{fa-icon "file-text"}}
             </div>
             <h3>DOIs</h3>
-            <div class="description">
+            <div class="description-centered">
               <p>Register and manage DOIs and their metadata.</p>
             </div>
           </div>
@@ -111,7 +113,7 @@
               {{fa-icon "cog"}}
             </div>
             <h3>Settings</h3>
-            <div class="description">
+            <div class="description-centered">
               <p>Information shown about your organization.</p>
             </div>
           </div>
