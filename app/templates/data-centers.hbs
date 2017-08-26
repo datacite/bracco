@@ -1,5 +1,15 @@
 <div class="container-fluid">
   <div class="content">
-    {{outlet}}
+    {{#if (can "list data-center")}}
+      {{outlet}}
+    {{else}}
+      <div class="row">
+        <div class='col-md-9'>
+          {{#bs-alert dismissible=false type="warning"}}
+            You have no permissions to access this page.
+          {{/bs-alert}}
+        </div>
+      </div>
+    {{/if}}
   </div>
 </div>

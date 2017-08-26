@@ -3,6 +3,7 @@ import DS from 'ember-data';
 
 export default DS.Model.extend({
   member: DS.belongsTo('member'),
+  users: DS.hasMany('user'),
   
   title: DS.attr('string'),
   year: DS.attr('number'),

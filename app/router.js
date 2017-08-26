@@ -10,13 +10,19 @@ const Router = Ember.Router.extend(GoogleAnalyticsRoute, {
 Router.map(function() {
   this.route('members', function() {
     this.route('new');
-    this.route('show', { path: '/:member_id' });
-    this.route('edit', { path: '/:member_id/edit' });
+    this.route('show', { path: '/:member_id' }, function() {
+      this.route('works', { path: '/works' });
+      this.route('users', { path: '/users' });
+      this.route('data-centers', { path: '/data-centers' });
+    });
   });
   this.route('data-centers', function() {
     this.route('new');
-    this.route('show', { path: '/:data_center_id' });
     this.route('edit', { path: '/:data_center_id/edit' });
+    this.route('show', { path: '/:data_center_id' }, function() {
+      this.route('works', { path: '/works' });
+      this.route('users', { path: '/users' });
+    });
   });
   this.route('works', function() {
     this.route('new');
@@ -27,6 +33,12 @@ Router.map(function() {
   this.route('status');
   this.route('users', function() {
     this.route('edit', { path: '/:user_id/edit' });
+  });
+
+  this.route('member', function() {
+    this.route('data-centers');
+    this.route('users');
+    this.route('works');
   });
 });
 

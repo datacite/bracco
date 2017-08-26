@@ -1,0 +1,86 @@
+<div class='col-md-9 panel-list' id="content">
+  {{#if searchable}}
+    {{model-search model=model}}
+  {{/if}}
+  {{#if model}}
+    {{#each model as |data-center|}}
+      <div class="panel panel-transparent">
+        <div class="panel-body">
+          <h3 class="work">
+            {{#link-to "data-centers.show" data-center.id}}{{data-center.title}}{{/link-to}}
+          </h3>
+        </div>
+        <div class="panel-footer">
+          {{data-center.name}}
+          <span>{{fa-icon "question-circle-o"}}
+            {{#bs-tooltip placement="top" viewportPadding=10}}Each client has a unique ID that starts with the DOI service provider ID.{{/bs-tooltip}}
+          </span>
+        </div>
+      </div>
+    {{/each}}
+    <div class="text-center">
+      {{#if (gt model.meta.total_pages 1)}}
+        {{page-numbers content=data-centers showFL=true}}
+      {{/if}}
+    </div>
+  {{else}}
+    {{#bs-alert dismissible=false type="warning"}}
+      No clients found.
+    {{/bs-alert}}
+  {{/if}}
+</div>
+
+<div class='col-md-3'>
+  {{#if (can "write data-center")}}
+    <div class="panel facets">
+      <div class="panel-body">
+        <div class="pull-right">
+          <button class="btn btn-warning">{{fa-icon "plus"}}Add Client</button>
+        </div>
+      </div>
+    </div>
+  {{/if}}
+
+  {{#if model.meta.years}}
+    <div class="panel facets">
+      <div class="panel-body">
+        <h4>Year joined</h4>
+        <ul>
+          {{#each model.meta.years as |year|}}
+            <li>
+              {{#if model.otherParams.year}}
+                {{#link-to "data-centers" (query-params year=null)}}{{fa-icon "check-square-o"}}{{/link-to}}
+              {{else}}
+                {{#link-to "data-centers" (query-params year=year.id)}}{{fa-icon "square-o"}}{{/link-to}}
+              {{/if}}
+              <div class="facet-title">{{year.title}}</div>
+              <span class="number pull-right">{{year.count}}</span>
+              <div class="clearfix"/>
+            </li>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+  {{/if}}
+  {{#if (and model.meta.members (current-user role="staff_admin"))}}
+    <div class="panel facets">
+      <div class="panel-body">
+        <h4>Members <span class="small">{{fa-icon "question-circle-o"}}{{#bs-tooltip placement="top"}}Filter data centers by member they work with.{{/bs-tooltip}}</span></h4>
+        <ul>
+          {{#each model.meta.members as |member|}}
+            <li>
+              {{#if model.otherParams.member-id}}
+                {{#link-to "data-centers" (query-params member-id=null)}}{{fa-icon "check-square-o"}}{{/link-to}}
+              {{else}}
+                {{#link-to "data-centers" (query-params member-id=member.id)}}{{fa-icon "square-o"}}{{/link-to}}
+              {{/if}}
+              <div class="facet-title">{{member.title}}</div>
+              <span class="number pull-right">{{member.count}}</span>
+              <div class="clearfix"/>
+            </li>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+  {{/if}}
+</div>

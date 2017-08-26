@@ -9,12 +9,6 @@ export default Ember.Route.extend(RouteMixin, {
                             perPage: "page[size]",
                             total_pages: "total-pages" };
 
-    // filter users by member or data center
-    let role = this.get('currentUser').get('role');
-    if (role === "data_center_admin") {
-      params = Ember.merge(params, { 'data-center-id': this.get('currentUser').get('data_center_id') });
-    }
-
     return this.findPaged('user', params);
   },
   actions: {

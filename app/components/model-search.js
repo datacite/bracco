@@ -2,7 +2,7 @@ import Ember from 'ember';
 import RouteMixin from 'ember-cli-pagination/remote/route-mixin';
 
 export default Ember.Component.extend(RouteMixin, {
-  classNames: ['col-md-9'],
+  classNames: ['div'],
 
   hasInput: Ember.computed.notEmpty('query'),
 
@@ -37,10 +37,10 @@ export default Ember.Component.extend(RouteMixin, {
 
   didInsertElement: function() {
     let placeholders = { 'work': 'DOI',
-                         'member': 'Member',
+                         'member': 'DOI Service Provider',
                          'data-center': 'Client',
                          'user': 'User' }
-    this.set('placeholder', 'Search for ' + placeholders[this.get('model').get("modelName")]);
+    this.set('placeholder', 'Search');
     this.set('modelName', placeholders[this.get('model').get("modelName")]);
   }
 });

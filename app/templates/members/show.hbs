@@ -1,36 +1,32 @@
 {{#if (can "read member" model)}}
-  <div class="row">
-    <div class="col-md-9">
-      <h3 class="member-results">
-        {{model.title}}
-        <span class="small">{{model.memberType}} member</span>
-      </h3>
-    </div>
-  </div>
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">{{#link-to "index"}}DataCite{{/link-to}}</li>
+  </ol>
+
   <div class="row">
     <div class="col-md-9">
       <div class="panel panel-transparent" id="content-member">
+        <div class="panel-title work">
+          <h2>{{model.title}}</h2>
+        </div>
         <div class="panel-body">
-          {{#if model.description}}
-            <div class="description">
-              <img class="pull-right img-responsive" src="{{model.logoUrl}}">
-              {{{format-text model.description}}}
-            </div>
-          {{/if}}
+          <div class="country">
+            {{model.country}}
+          </div>
         </div>
         <div class="panel-footer">
           {{model.name}}
           <span>{{fa-icon "question-circle-o"}}
-            {{#bs-tooltip placement="top" viewportPadding=10}}Each member has a unique ID.{{/bs-tooltip}}
+            {{#bs-tooltip placement="top" viewportPadding=10}}Each DOI service provider has a unique ID.{{/bs-tooltip}}
           </span>
           {{#if (can "write member")}}
             <div class="btn-toolbar pull-right">
               <div class="btn-group btn-group-sm">
-                {{#link-to "members.edit" member.id}}{{fa-icon "pencil"}}{{/link-to}}
+                {{fa-icon "pencil"}}
               </div>
               {{#if (can "delete member")}}
                 <div class="btn-group btn-group-sm">
-                  {{#link-to "members.edit" member.id}}{{fa-icon "trash"}}{{/link-to}}
+                  {{fa-icon "trash"}}
                 </div>
               {{/if}}
             </div>
@@ -42,24 +38,6 @@
     <div class="col-md-3">
       <div class="panel-facets">
         <div class="panel-body metadata">
-          <h5>Country</h5>
-          <div>{{model.country}}</div>
-
-          <h5>Year joined</h5>
-          <div>{{model.year}}</div>
-
-          {{#if model.website}}
-            <h5>Website</h5>
-            <div><a href="{{model.website}}">{{model.website}}</a></div>
-          {{/if}}
-          {{#if member.email}}
-            <h5>Email</h5>
-            <div><a href="mailto:{{model.email}}">{{model.email}}</a></div>
-          {{/if}}
-          {{#if model.phone}}
-            <h5>Phone</h5>
-            <div>{{model.phone}}</div>
-          {{/if}}
           <h5>Record created</h5>
           <div class="created">
             {{format-date model.created}}
@@ -74,6 +52,19 @@
       </div>
     </div>
   </div>
+
+  <div class="row">
+    <div class='col-md-9'>
+      <div class="tab-content nav-tabs-member">
+        {{#bs-nav type="tabs" as |nav|}}
+          {{#nav.item}}{{#nav.link-to "members.show.data-centers" model.id class="nav-link"}}Clients{{/nav.link-to}}{{/nav.item}}
+          {{#nav.item}}{{#nav.link-to "members.show.users" model.id class="nav-link"}}Users{{/nav.link-to}}{{/nav.item}}
+          {{#nav.item}}{{#nav.link-to "members.show.works" model.id class="nav-link"}}DOIs{{/nav.link-to}}{{/nav.item}}
+        {{/bs-nav}}
+      </div>
+    </div>
+  </div>
+  {{outlet}}
 {{else}}
   <div class="row">
     <div class='col-md-9'>

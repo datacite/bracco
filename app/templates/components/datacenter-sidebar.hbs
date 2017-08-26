@@ -1,19 +1,5 @@
-<div class="panel facets">
+<div class="panel facets add">
   <div class="panel-body metadata">
-    {{#if (current-user role="member_admin" inverse=true)}}
-      <h5>Member {{fa-icon "question-circle-o"}}
-        {{#bs-tooltip placement="top"}}Member the data center works with.{{/bs-tooltip}}
-      </h5>
-      <div class="registration_agency">
-        {{#link-to "members.show" model.member.id}}{{model.member.title}}{{/link-to}}
-      </div>
-    {{/if}}
-    {{#if (and model.data-center (current-user role="data_center_admin" inverse=true))}}
-      <h5>Client</h5>
-      <div class="data-center">
-        {{#link-to "data-centers.show" model.data-center.id}}{{model.data-center.title}}{{/link-to}}
-      </div>
-    {{/if}}
     {{#if model.created}}
       <h5>Record created</h5>
       <div class="created">

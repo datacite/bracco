@@ -1,14 +1,15 @@
 {{#if (can "read data-center" model)}}
-  <div class="row">
-    <div class="col-md-9">
-      <h3 class="member-results">
-        {{model.title}}
-      </h3>
-    </div>
-  </div>
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">{{#link-to "index"}}DataCite{{/link-to}}</li>
+    <li class="breadcrumb-item">{{#link-to "members.show" model.member.id}}{{model.member.title}}{{/link-to}}</li>
+  </ol>
+
   <div class="row">
     <div class="col-md-9" id="show">
       <div class="panel panel-transparent" id="content-member">
+        <div class="panel-title work">
+          <h2>{{model.title}}</h2>
+        </div>
         <div class="panel-footer">
           {{model.name}}
           <span>{{fa-icon "question-circle-o"}}
@@ -17,12 +18,12 @@
           {{#if (can "write data-center")}}
             <div class="btn-toolbar pull-right">
               <div class="btn-group btn-group-sm pull-right">
-                {{#link-to "data-centers.edit" data-center.id}}{{fa-icon "pencil"}}{{/link-to}}
+                {{#link-to "data-centers.edit" model.id}}{{fa-icon "pencil"}}{{/link-to}}
               </div>
               {{#if (can "delete data-center")}}
                 <div class="btn-toolbar pull-right">
                   <div class="btn-group btn-group-sm pull-right">
-                    {{#link-to "data-centers.edit" data-center.id}}{{fa-icon "tra"}}{{/link-to}}
+                    {{#link-to "data-centers.edit" model.id}}{{fa-icon "tra"}}{{/link-to}}
                   </div>
                 </div>
               {{/if}}
@@ -33,4 +34,16 @@
     </div>
     {{datacenter-sidebar model=model}}
   </div>
+
+  <div class="row">
+    <div class='col-md-9'>
+      <div class="tab-content nav-tabs-member">
+        {{#bs-nav type="tabs" as |nav|}}
+          {{#nav.item}}{{#nav.link-to "data-centers.show.users" model.id class="nav-link"}}Users{{/nav.link-to}}{{/nav.item}}
+          {{#nav.item}}{{#nav.link-to "data-centers.show.works" model.id class="nav-link"}}DOIs{{/nav.link-to}}{{/nav.item}}
+        {{/bs-nav}}
+      </div>
+    </div>
+  </div>
+  {{outlet}}
 {{/if}}

@@ -8,6 +8,8 @@ export default Ember.Route.extend(RouteMixin, {
     params.paramMapping = { page: "page[number]",
                             perPage: "page[size]",
                             total_pages: "total-pages" };
+
+    params = Ember.merge(params, { 'member-type': 'allocating' });
     return this.findPaged('member', params);
   },
   actions: {

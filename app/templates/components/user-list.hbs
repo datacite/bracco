@@ -1,0 +1,58 @@
+<div class="col-md-9" id="content-user">
+  {{#if title}}
+    <h3 class="user-results">
+      {{format-number model.meta.total}} Users
+      <span class="small">{{fa-icon "question-circle-o"}}
+        {{#bs-tooltip placement="top" viewportPadding=10}}Manage all users who use the DOI Registration Service.{{/bs-tooltip}}
+      </span>
+    </h3>
+  {{/if}}
+  {{#if model}}
+    {{#bs-accordion as |acc|}}
+      {{#each model as |user|}}
+        {{#acc.item value=user.orcid as |aitem|}}
+          {{#aitem.title}}
+            {{user.creditName}} {{#if user.role}}<span class='small pull-right'>{{humanize user.role}}</span>{{/if}}
+          {{/aitem.title}}
+          {{#aitem.body}}
+            {{#if user.email}}
+              <h5>Email</h5>
+              <a href="mailto:{{user.email}}">{{user.email}}</a>
+            {{/if}}
+            {{#if user.member}}
+              <h5>Member</h5>
+              {{#link-to "members.show" user.member.id}}{{user.member.title}}{{/link-to}}
+            {{/if}}
+
+            {{#if user.role}}
+              <h5>Role</h5>
+              {{humanize user.role}}
+            {{/if}}
+
+            <h5>Account created</h5>
+            {{format-date user.created}}
+
+            <div class="pseudo-footer">
+              <a href="{{user.id}}">{{fa-icon "external-link"}} {{user.id}}</a>
+              <div class="btn-toolbar pull-right">
+                <div class="btn-group btn-group-sm">
+                  {{#link-to "users.edit" user.id}}{{fa-icon "pencil"}}{{/link-to}}
+                </div>
+              </div>
+              <div class="clearfix"/>
+            </div>
+          {{/aitem.body}}
+        {{/acc.item}}
+      {{/each}}
+    {{/bs-accordion}}
+    <div class="text-center">
+      {{#if (gt model.meta.total_pages 1)}}
+        {{page-numbers content=content showFL=true}}
+      {{/if}}
+    </div>
+  {{else}}
+    {{#bs-alert dismissible=false type="warning"}}
+      No users found.
+    {{/bs-alert}}
+  {{/if}}
+</div>

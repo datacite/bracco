@@ -9,6 +9,7 @@ module.exports = function(defaults) {
     'ember-bootstrap': {
       importBootstrapCSS: false,
       whitelist: ['bs-popover',
+                  'bs-collapse',
                   'bs-accordion',
                   'bs-button',
                   'bs-button-group',

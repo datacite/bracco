@@ -22,7 +22,6 @@ export default Ember.Component.extend({
       }
     }).then(function(response) {
       if (response.ok) {
-        console.log(response)
         return response.blob();
       } else {
         return response.statusText;

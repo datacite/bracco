@@ -1,0 +1,22 @@
+<div class="row">
+  <div class="col-md-9">
+    <div class="panel panel-transparent" id="content-member">
+      <div class="panel-title work">
+        <h2>DataCite</h2>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class='col-md-9'>
+    <div class="tab-content nav-tabs-member">
+      {{#bs-nav type="tabs" as |nav|}}
+        {{#nav.item}}{{#nav.link-to "members.index" class="nav-link"}}Providers{{/nav.link-to}}{{/nav.item}}
+        {{#nav.item}}{{#nav.link-to "data-centers.index" class="nav-link"}}Clients{{/nav.link-to}}{{/nav.item}}
+        {{#nav.item}}{{#nav.link-to "users.index" class="nav-link"}}Users{{/nav.link-to}}{{/nav.item}}
+        {{#nav.item}}{{#nav.link-to "works.index" class="nav-link"}}DOIs{{/nav.link-to}}{{/nav.item}}
+      {{/bs-nav}}
+    </div>
+  </div>
+</div>

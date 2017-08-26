@@ -2,7 +2,8 @@ import DS from 'ember-data';
 
 export default DS.Model.extend({
   member: DS.belongsTo('member'),
-  
+  'data-center': DS.belongsTo('data-center'),
+
   givenNames: DS.attr('string'),
   familyName: DS.attr('string'),
   creditName: DS.attr('string'),
