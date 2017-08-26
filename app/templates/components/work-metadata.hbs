@@ -1,42 +1,47 @@
-<div id="metadata" class="input-group pull-right">
-  <select onchange={{action 'selectMetadata' value="target.value"}}>
-    {{#each-in formats as |key value|}}
-      <option name="metadata" value={{key}} selected={{eq metadata key}}>{{value}}</option>
-    {{/each-in}}
-  </select>
-</div>
-<h3 class="member-results">Metadata</h3>
-<div class="clearfix"/>
-<div class="panel panel-transparent">
-  {{#if output}}
-    <div class="panel-body">
-      {{#code-block language='markup' class="metadata"}}
-        {{output}}
-      {{/code-block}}
+<div class="row">
+  <div class="col-md-9">
+    <div id="metadata" class="input-group pull-right">
+      <select onchange={{action 'selectMetadata' value="target.value"}}>
+        {{#each-in formats as |key value|}}
+          <option name="metadata" value={{key}} selected={{eq metadata key}}>{{value}}</option>
+        {{/each-in}}
+      </select>
     </div>
-  {{else}}
-    <div class="panel-body">
-      <h3 class="work">
-        <a href="{{model.identifier}}">{{model.title}}</a>
-      </h3>
-      {{{format-author model.author}}}
-      <div class="metadata">
-        {{format-metadata model.published resourceTypeId=model.resourceTypeId resourceTypeSubtype=model.resourceTypeSubtype containerTitle=model.containerTitle}}
-      </div>
-      {{#if model.description}}
-        <div class="description">
-          {{format-text model.description limit=75}}
+    <h3 class="member-results">Metadata</h3>
+    <div class="clearfix"/>
+    <div class="panel panel-transparent">
+      {{#if output}}
+        <div class="panel-body">
+          {{#code-block language='markup' class="metadata"}}
+            {{output}}
+          {{/code-block}}
+        </div>
+      {{else}}
+        <div class="panel-body">
+          <h3 class="work">
+            <a href="{{model.identifier}}">{{model.title}}</a>
+          </h3>
+          {{{format-author model.author}}}
+          <div class="metadata">
+            {{format-metadata model.published resourceTypeId=model.resourceTypeId resourceTypeSubtype=model.resourceTypeSubtype containerTitle=model.containerTitle}}
+          </div>
+          {{#if model.description}}
+            <div class="description">
+              {{format-text model.description limit=75}}
+            </div>
+          {{/if}}
+          {{#if model.license}}
+            <div class="license">
+              {{model.license}}
+            </div>
+          {{/if}}
+        </div>
+        <div class="panel-footer">
+          <span class="pull-right">{{titleize work.resourceTypeId}}</span>
+          <a href="{{model.identifier}}">{{fa-icon "external-link"}} {{model.identifier}}</a>
         </div>
       {{/if}}
-      {{#if model.license}}
-        <div class="license">
-          {{model.license}}
-        </div>
-      {{/if}}
     </div>
-    <div class="panel-footer">
-      <span class="pull-right">{{titleize work.resourceTypeId}}</span>
-      <a href="{{model.identifier}}">{{fa-icon "external-link"}} {{model.identifier}}</a>
-    </div>
-  {{/if}}
+  </div>
+  {{datacenter-sidebar model=model}}
 </div>

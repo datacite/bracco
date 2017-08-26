@@ -24,5 +24,11 @@
         {{format-date model.updated}}
       </div>
     {{/if}}
+    {{#if model.schema}}
+      <h5>Schema</h5>
+      <div class="schema-version">
+        <a href="http://schema.datacite.org/meta/kernel-{{model.schema}}">DataCite Metadata Schema {{model.schema}}</a>
+      </div>
+    {{/if}}
    </div>
  </div>

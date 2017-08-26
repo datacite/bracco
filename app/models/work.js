@@ -23,5 +23,9 @@ export default DS.Model.extend({
 
   datacite: Ember.computed('xml', function() {
     return atob(this.get('xml'));
+  }),
+  schema: Ember.computed('schemaVersion', function() {
+    console.log(parseInt(this.get('schemaVersion')))
+    return parseInt(this.get('schemaVersion')).toFixed(1);
   })
 });
