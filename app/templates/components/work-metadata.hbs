@@ -9,19 +9,26 @@
     </div>
     <h3 class="member-results">Metadata</h3>
     <div class="clearfix"/>
-    <div class="panel panel-transparent">
-      {{#if output}}
-        <div class="panel-body">
-          {{#code-block language='markup' class="metadata"}}
-            {{output}}
-          {{/code-block}}
-        </div>
-      {{else}}
+  </div>
+</div>
+{{#if output}}
+  <div class="panel panel-transparent">
+    <div class="panel-body">
+      {{#code-block class="metadata"}}
+{{output}}
+      {{/code-block}}
+    </div>
+  </div>
+{{else}}
+  <div class="row">
+    <div class="col-md-9">
+      <div class="panel panel-transparent">
         <div class="panel-body">
           <h3 class="work">
             <a href="{{model.identifier}}">{{model.title}}</a>
+            <span class="small">{{model.resourceTypeId}}</span>
           </h3>
-          {{{format-author model.author}}}
+          {{{format-author authors=model.author}}}
           <div class="metadata">
             {{format-metadata model.published resourceTypeId=model.resourceTypeId resourceTypeSubtype=model.resourceTypeSubtype containerTitle=model.containerTitle}}
           </div>
@@ -31,17 +38,15 @@
             </div>
           {{/if}}
           {{#if model.license}}
-            <div class="license">
-              {{model.license}}
-            </div>
+            {{cc-license licenseURL=model.license}}
           {{/if}}
         </div>
         <div class="panel-footer">
           <span class="pull-right">{{titleize work.resourceTypeId}}</span>
           <a href="{{model.identifier}}">{{fa-icon "external-link"}} {{model.identifier}}</a>
         </div>
-      {{/if}}
+      </div>
     </div>
+    {{datacenter-sidebar model=model}}
   </div>
-  {{datacenter-sidebar model=model}}
-</div>
+{{/if}}

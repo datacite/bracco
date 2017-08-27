@@ -19,7 +19,7 @@ export function formatMetadata([published], hash) {
       pubDate = moment(timestamp).utc().format('D MMM Y H:MM UTC');
   }
 
-  let resourceType = (hash.resourceType || hash.resourceTypeId || 'Work').capitalize();
+  let resourceType = (hash.resourceTypeSubtype || hash.resourceTypeId || 'Work').capitalize();
   let containerTitle = hash.containerTitle ? " via " + hash.containerTitle : '';
   return [resourceType, "published", pubDate, containerTitle].join(" ")
 }

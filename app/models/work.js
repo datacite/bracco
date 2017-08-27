@@ -12,6 +12,7 @@ export default DS.Model.extend({
   title: DS.attr('string'),
   containerTitle: DS.attr('string'),
   description: DS.attr('string'),
+  license: DS.attr('string'),
   xml: DS.attr('string'),
   resourceTypeId: DS.attr('string'),
   resourceTypeSubtype: DS.attr('string'),

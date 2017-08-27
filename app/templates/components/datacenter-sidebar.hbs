@@ -24,8 +24,13 @@
         {{format-date model.updated}}
       </div>
     {{/if}}
-    {{#if model.schema}}
-      <h5>Schema</h5>
+    {{#if model.schemaVersion}}
+      <h5>
+        Schema
+        <span>{{fa-icon "question-circle-o"}}
+          {{#bs-tooltip placement="top" viewportPadding=10}}Metadata schema version used.{{/bs-tooltip}}
+        </span>
+      </h5>
       <div class="schema-version">
         <a href="http://schema.datacite.org/meta/kernel-{{model.schemaVersion}}">DataCite Metadata Schema {{model.schemaVersion}}</a>
       </div>

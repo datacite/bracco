@@ -11,14 +11,12 @@
             {{#link-to "works.show" work.id}}{{work.title}}{{/link-to}}
             <span class="small">{{work.resourceTypeId}}</span>
           </h3>
-          {{{format-author work.author}}}
+          {{{format-author authors=work.author}}}
           <div class="metadata">
-            {{format-metadata work.published resourceType=work.resourceTypeSubtype containerTitle=work.containerTitle}}
+            {{format-metadata work.published resourceTypeId=work.resourceTypeId resourceTypeSubtype=work.resourceTypeSubtype containerTitle=work.containerTitle}}
           </div>
           {{#if work.license}}
-            <div class="license">
-              {{work.license}}
-            </div>
+            {{cc-license licenseURL=work.license}}
           {{/if}}
         </div>
         <div class="panel-footer">

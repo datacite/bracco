@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import fetch from 'fetch';
+import vkbeautify from 'npm:vkbeautify';
 import ENV from 'bracco/config/environment';
 
 export default Ember.Component.extend({
@@ -11,7 +12,9 @@ export default Ember.Component.extend({
     if (!metadata || metadata === "html") {
       this.set('output', null);
     } else if (metadata === "datacite") {
-      this.set('output', this.get('model').get("datacite"));
+      let output = vkbeautify.xml(this.get('model').get("datacite"));
+      console.log(output)
+      this.set('output', output);
     } else {
       let self = this;
       let url = ENV.DATA_URL + '/' + this.get('model').get("doi");
