@@ -13,7 +13,6 @@ export default Ember.Component.extend({
       this.set('output', null);
     } else if (metadata === "datacite") {
       let output = vkbeautify.xml(this.get('model').get("datacite"));
-      console.log(output)
       this.set('output', output);
     } else {
       let self = this;

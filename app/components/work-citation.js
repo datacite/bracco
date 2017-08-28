@@ -16,29 +16,32 @@ export default Ember.Component.extend({
                           'chicago-fullnote-bibliography': 'text/x-bibliography; style=chicago-fullnote-bibliography',
                           'ieee': 'text/x-bibliography; style=ieee' };
 
-    let result = fetch(url, {
+    let response = fetch(url, {
       headers: {
         'Accept': acceptHeaders[citation]
       }
     }).then(function(response) {
       if (response.ok) {
-        return response.blob();
+       //console.log(response.text())
+        return response
       } else {
-        return response.statusText;
+        var error = new Error(response.statusText)
+        error.response = response
+        throw error
       }
+    }, function(error) {
+      console.log(error.message);
+    }).then(function(result) {
+        // if (typeof result === 'string') {
+        //   self.set('citation-output', result);
+        // } else {
+      let reader = new FileReader();
+      reader.onloadend = function() {
+        self.set('citation-output', reader.result);
+      }
+      reader.readAsText(result);
     });
-
-    result.then(function(result) {
-        if (typeof result === 'string') {
-          self.set('citation-output', result);
-        } else {
-          let reader = new FileReader();
-          reader.onloadend = function() {
-            self.set('citation-output', reader.result);
-          }
-          reader.readAsText(result);
-        }
-      });
+    console.log(self.get('citation-output'))
     this.get('router').transitionTo({ queryParams: { citation: citation } });
   },
 

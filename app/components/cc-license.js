@@ -6,6 +6,12 @@ export default Ember.Component.extend({
   classNames: ['license'],
 
   didInsertElement: function() {
+    let tooltips = {
+      'by': '<b>Attribution (BY)</b>: Licensees may copy, distribute, display and perform the work and make derivative works and remixes based on it only if they give the author or licensor the credits (attribution) in the manner specified by these.',
+      'sa': '<b>Share-alike (SA)</b>: Licensees may distribute derivative works only under a license identical ("not more restrictive") to the license that governs the original work. (See also copyleft.) Without share-alike, derivative works might be sublicensed with compatible but more restrictive license clauses, e.g. CC BY to CC BY-NC.),',
+      'nc': '<b>Non-commercial (NC)</b>: Licensees may copy, distribute, display, and perform the work and make derivative works and remixes based on it only for non-commercial purposes.',
+      'nd': '<b>No Derivative Works (ND)</b>: Licensees may copy, distribute, display and perform only verbatim copies of the work, not derivative works and remixes based on it.'
+    }
     let licenseURL = this.get('licenseURL');
     let licenseLogo = licenseURL;
     this.set('licenseURL', licenseURL);

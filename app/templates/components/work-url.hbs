@@ -1,17 +1,14 @@
 <div class="row">
   <div class="col-md-9">
-    <div class="panel-body">
-      {{#if model.url}}
-         <a href="{{url}}">{{url}}</a>
-         {{#bs-button type=buttonType size="xs" onClick=(action "checkLink") class="btn btn-link"}}
-           {{status}}
-         {{/bs-button}}
-         {{#if reason}}
-           <div class="icon-warning">{{reason}}</div>
-         {{/if}}
-      {{else}}
-        The URL is currently not available.
-      {{/if}}
+    <h3 class="member-results">URL</h3>
+    <div class="panel panel-transparent">
+      <div class="panel-body">
+        {{#if model.url}}
+          {{url-check url=model.url urlToCheck=(url-transform model.doi)}}
+        {{else}}
+          The URL is currently not available.
+        {{/if}}
+      </div>
     </div>
   </div>
 </div>

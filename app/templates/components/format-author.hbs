@@ -2,12 +2,12 @@
   {{#each authors as |author index|}}
     {{#if (eq author authors.firstObject)}}{{else if (eq author authors.lastObject)}}&amp;{{else}},{{/if}}
     {{#if author.orcid}}
-      <span class="orcid">
+      <a href="{{author.orcid}}">
         {{author.name}}
-        {{#bs-popover placement="top" class="author-popover" title=author.name viewportPadding=10 delayShow=100 delayHide=1500 triggerEvents="hover"}}
+        {{#bs-popover placement="top" class="author-popover" title=author.name viewportPadding=10 triggerEvents="hover"}}
           <a href="{{author.orcid}}">{{author.orcid}}</a>
         {{/bs-popover}}
-      </span>
+      </a>
     {{else}}
       {{author.name}}
     {{/if}}
