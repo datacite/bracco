@@ -88,6 +88,27 @@
       </div>
     </div>
   {{/if}}
+  {{#if model.meta.registered}}
+    <div class="panel facets">
+      <div class="panel-body">
+        <h4>DOI Registration Year</h4>
+        <ul>
+          {{#each model.meta.registered as |year|}}
+            <li>
+              {{#if model.otherParams.registered}}
+                {{#link-to link (query-params registered='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+              {{else}}
+                {{#link-to link (query-params registered=year.id)}}{{fa-icon "square-o"}}{{/link-to}}
+              {{/if}}
+              <div class="facet-title">{{year.title}}</div>
+              <span class="number pull-right">{{format-number year.count}}</span>
+              <div class="clearfix"/>
+            </li>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+  {{/if}}
   {{#if model.meta.schema-versions}}
     <div class="panel facets">
       <div class="panel-body">
