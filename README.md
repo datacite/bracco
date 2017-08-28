@@ -2,8 +2,7 @@
 
 # Bracco
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+A web frontend to the DataCite DOI Registration Service.
 
 ## Prerequisites
 
@@ -43,12 +42,35 @@ Make use of the many generators for code, try `ember help generate` for more det
 
 ### Deploying
 
-Specify what it takes to deploy your app.
+The application is deployed to Amazon S3 via Travis CI. See `.travis.yml` for the configuration.
+Assets are served from S3, everything else is redirected to `index.html` so that the Ember router
+can handle all requests.
 
-## Further Reading / Useful Links
+```
+server {
+    server_name example.org;
+    listen 8080;
+    set $frontend http://example.org.s3.amazonaws.com;
+    index index.html;
 
-* [ember.js](http://emberjs.com/)
-* [ember-cli](https://ember-cli.com/)
-* Development Browser Extensions
-  * [ember inspector for chrome](https://chrome.google.com/webstore/detail/ember-inspector/bmdblncegkenkacieihfhpjfppoconhi)
-  * [ember inspector for firefox](https://addons.mozilla.org/en-US/firefox/addon/ember-inspector/)
+    location / {
+        try_files $uri $uri/ /index.html;
+
+        proxy_pass $frontend;
+    }
+
+    location /assets {
+        proxy_pass $frontend;
+    }
+```
+
+### Note on Patches/Pull Requests
+
+* Fork the project
+* Write tests for your new feature or a test that reproduces a bug
+* Implement your feature or make a bug fix
+* Do not mess with Rakefile, version or history
+* Commit, push and make a pull request. Bonus points for topical branches.
+
+## License
+**bracco** is released under the [MIT License](https://github.com/datacite/bracco/blob/master/LICENSE).
