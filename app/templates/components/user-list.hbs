@@ -52,3 +52,27 @@
     {{/bs-alert}}
   {{/if}}
 </div>
+
+<div class='col-md-3'>
+  {{#if model.meta.roles}}
+    <div class="panel facets">
+      <div class="panel-body">
+        <h4>Roles</h4>
+        <ul>
+          {{#each model.meta.roles as |role|}}
+            <li>
+              {{#if model.otherParams.role}}
+                {{#link-to link (query-params role='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+              {{else}}
+                {{#link-to link (query-params role=role.id)}}{{fa-icon "square-o"}}{{/link-to}}
+              {{/if}}
+              <div class="facet-title">{{role.title}}</div>
+              <span class="number pull-right">{{role.count}}</span>
+              <div class="clearfix"/>
+            </li>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+  {{/if}}
+</div>

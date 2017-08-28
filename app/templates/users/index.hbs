@@ -1,6 +1,6 @@
-{{#if (can "read index")}}
+{{#if (can "list user" model)}}
   {{index-header}}
-  {{user-list model=model searchable=true}}
+  {{user-list model=model searchable=true link="users"}}
 {{else}}
   <div class="row">
     <div class='col-md-9'>
