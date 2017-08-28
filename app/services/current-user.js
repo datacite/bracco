@@ -4,6 +4,8 @@ import JsonWebToken from 'npm:jsonwebtoken';
 import ENV from 'bracco/config/environment';
 
 export default Ember.Service.extend({
+  flashMessages: Ember.inject.service(),
+
   isAuthenticated: false,
   isPermitted: false,
   isAdmin: false,
@@ -68,6 +70,14 @@ export default Ember.Service.extend({
         self.set('isAdmin', Ember.isEqual(result.role, "staff_admin"));
         self.set('isMember', Ember.isEqual(result.role, "member_admin"));
         self.set('isDataCenter', Ember.isEqual(result.role, "data_center_admin"));
+
+        if (result.role === "data_center_admin") {
+          self.get('flashMessages').info('Welcome ' + result.name + ' to the Client Administration area.');
+        } else if (result.role === "member_admin") {
+          self.get('flashMessages').info('Welcome ' + result.name + ' to the DOI Registration Provider Administration area.');
+        } else if (result.role === "staff_admin") {
+          self.get('flashMessages').info('Welcome ' + result.name + ' to the DataCite Administration area.');
+        }
       }
     }, function(reason) {
       Ember.Logger.assert(false, reason)
