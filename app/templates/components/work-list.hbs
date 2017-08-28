@@ -11,7 +11,7 @@
             {{#link-to "works.show" work.id}}{{work.title}}{{/link-to}}
             <span class="small">{{work.resourceTypeId}}</span>
           </h3>
-          {{{format-author authors=work.author}}}
+          {{{format-author work.author}}}
           <div class="metadata">
             {{format-metadata work.published resourceTypeId=work.resourceTypeId resourceTypeSubtype=work.resourceTypeSubtype containerTitle=work.containerTitle}}
           </div>

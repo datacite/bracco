@@ -28,7 +28,7 @@
             <a href="{{model.identifier}}">{{model.title}}</a>
             <span class="small">{{model.resourceTypeId}}</span>
           </h3>
-          {{{format-author authors=model.author}}}
+          {{{format-author model.author}}}
           <div class="metadata">
             {{format-metadata model.published resourceTypeId=model.resourceTypeId resourceTypeSubtype=model.resourceTypeSubtype containerTitle=model.containerTitle}}
           </div>
