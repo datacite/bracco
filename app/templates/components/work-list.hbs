@@ -13,7 +13,7 @@
           </h3>
           {{{format-author work.author}}}
           <div class="metadata">
-            {{format-metadata work.published resourceTypeId=work.resourceTypeId resourceTypeSubtype=work.resourceTypeSubtype containerTitle=work.containerTitle}}
+            {{format-metadata work.published resourceTypeId=work.resourceTypeId resourceTypeSubtype=work.resourceTypeSubtype containerTitle=work.containerTitle version=work.version}}
           </div>
           {{#if work.license}}
             {{cc-license licenseURL=work.license}}
