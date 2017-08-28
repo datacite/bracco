@@ -9,7 +9,7 @@ export default Ember.Component.extend({
   output: null,
 
   showMetadata(metadata) {
-    if (!metadata || metadata === "html") {
+    if (!metadata || metadata === "summary") {
       this.set('output', null);
     } else if (metadata === "datacite") {
       let output = vkbeautify.xml(this.get('model').get("datacite"));
@@ -58,7 +58,7 @@ export default Ember.Component.extend({
   },
 
   didInsertElement: function() {
-    let formats = { 'html': 'HTML',
+    let formats = { 'summary': 'Summary',
                     'datacite': 'DataCite XML' };
                     // 'schema_org': 'Schema.org JSON-LD',
                     // 'citeproc': 'Citeproc JSON',
