@@ -1,12 +1,13 @@
 {{#if (can "read index")}}
-  {{index-header}}
-  {{member-list model=model searchable=true}}
-{{else}}
-  <div class="row">
-    <div class='col-md-9'>
-      {{#bs-alert dismissible=false type="warning"}}
-        You have no permissions to access this page.
-      {{/bs-alert}}
+  {{application-header default=true}}
+  
+  <div class="container-fluid">
+    <div class="content">
+      {{index-header}}
+      {{member-list model=model searchable=true}}
     </div>
   </div>
+{{else}}
+  {{application-header}}
+  {{landing-page}}
 {{/if}}
