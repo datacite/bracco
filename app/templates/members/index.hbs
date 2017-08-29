@@ -1,13 +1,10 @@
 {{#if (can "read index")}}
   {{application-header default=true}}
-  
+
   <div class="container-fluid">
     <div class="content">
       {{index-header}}
       {{member-list model=model searchable=true}}
     </div>
   </div>
-{{else}}
-  {{application-header}}
-  {{landing-page}}
 {{/if}}
