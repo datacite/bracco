@@ -2,7 +2,7 @@ import Ember from 'ember';
 import { Ability } from 'ember-can';
 
 export default Ability.extend({
-  canDelete: Ember.computed(function() {
+  canDelete: Ember.computed('currentUser', function() {
     switch(this.get('currentUser.role')) {
       case 'staff_admin':
         return true;
@@ -10,7 +10,7 @@ export default Ability.extend({
         return false;
     }
   }),
-  canWrite: Ember.computed('model', function() {
+  canWrite: Ember.computed('currentUser', 'model', function() {
     switch(this.get('currentUser.role')) {
       case 'staff_admin':
         return this.get('currentUser').get('member_id') === this.get('model.member_id');
@@ -22,7 +22,7 @@ export default Ability.extend({
         return false;
     }
   }),
-  canRead: Ember.computed('model', function() {
+  canRead: Ember.computed('currentUser', 'model', function() {
     switch(this.get('currentUser.role')) {
       case 'staff_admin':
         return true;

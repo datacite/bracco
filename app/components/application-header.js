@@ -7,16 +7,15 @@ export default Ember.Component.extend({
   title: null,
   home: '/',
 
-
-  init: function () {
-    this._super();
-
-    if (!this.get('default')) {
-      Ember.run.schedule("afterRender",this,function() {
-        this.send("transitionNoAccess");
-      });
-    }
-  },
+  // init: function () {
+  //   this._super();
+  //
+  //   if (!this.get('default')) {
+  //     Ember.run.schedule("afterRender",this,function() {
+  //       this.send("transitionNoAccess");
+  //     });
+  //   }
+  // },
 
   actions: {
     transitionNoAccess() {
