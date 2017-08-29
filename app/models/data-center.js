@@ -5,7 +5,7 @@ export default DS.Model.extend({
   member: DS.belongsTo('member'),
   users: DS.hasMany('user'),
 
-  title: DS.attr('string'),
+  name: DS.attr('string'),
   year: DS.attr('number'),
   created: DS.attr('date'),
   updated: DS.attr('date'),

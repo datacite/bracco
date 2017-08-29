@@ -1,12 +1,10 @@
-{{#if (can "list user" model)}}
-  {{index-header}}
-  {{user-list model=model searchable=true link="users"}}
-{{else}}
-  <div class="row">
-    <div class='col-md-9'>
-      {{#bs-alert dismissible=false type="warning"}}
-        You have no permissions to access this page.
-      {{/bs-alert}}
+{{#if (can "read index")}}
+  {{application-header default=true}}
+
+  <div class="container-fluid">
+    <div class="content">
+      {{index-header}}
+      {{user-list model=model searchable=true link="users"}}
     </div>
   </div>
 {{/if}}
