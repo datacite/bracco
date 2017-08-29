@@ -1,39 +1,40 @@
 {{#if (can "read data-center" model)}}
-  <ol class="breadcrumb">
-    {{#if (can "read index")}}
-      <li class="breadcrumb-item">{{#link-to "index"}}DataCite{{/link-to}}</li>
-    {{/if}}
-    <li class="breadcrumb-item">{{#link-to "members.show" model.member.id}}{{model.member.title}}{{/link-to}}</li>
-  </ol>
+  {{application-header default=true}}
 
-  <div class="row">
-    <div class="col-md-9" id="show">
-      <div class="panel panel-transparent" id="content-member">
-        <div class="panel-title work">
-          <h2>{{model.title}}</h2>
+  <div class="container-fluid">
+    <div class="content">
+      <ol class="breadcrumb">
+        {{#if (can "read index")}}
+          <li class="breadcrumb-item">{{#link-to "index"}}DataCite{{/link-to}}</li>
+        {{/if}}
+        <li class="breadcrumb-item">{{#link-to "members.show" model.member.id}}{{model.member.title}}{{/link-to}}</li>
+      </ol>
+
+      <div class="row">
+        <div class="col-md-9" id="show">
+          <div class="panel panel-transparent" id="content-member">
+            <div class="panel-title work">
+              <h2>{{model.title}}</h2>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
 
-  <div class="row">
-    <div class='col-md-9'>
-      <div class="tab-content nav-tabs-member">
-        {{#bs-nav type="tabs" as |nav|}}
-          {{#nav.item}}{{#nav.link-to "data-centers.show.index" model.id class="nav-link"}}Info{{/nav.link-to}}{{/nav.item}}
-          {{#nav.item}}{{#nav.link-to "data-centers.show.users" model.id class="nav-link"}}Users{{/nav.link-to}}{{/nav.item}}
-          {{#nav.item}}{{#nav.link-to "data-centers.show.works" model.id class="nav-link"}}DOIs{{/nav.link-to}}{{/nav.item}}
-        {{/bs-nav}}
+      <div class="row">
+        <div class='col-md-9'>
+          <div class="tab-content nav-tabs-member">
+            {{#bs-nav type="tabs" as |nav|}}
+              {{#nav.item}}{{#nav.link-to "data-centers.show.index" model.id class="nav-link"}}Info{{/nav.link-to}}{{/nav.item}}
+              {{#nav.item}}{{#nav.link-to "data-centers.show.users" model.id class="nav-link"}}Users{{/nav.link-to}}{{/nav.item}}
+              {{#nav.item}}{{#nav.link-to "data-centers.show.works" model.id class="nav-link"}}DOIs{{/nav.link-to}}{{/nav.item}}
+            {{/bs-nav}}
+          </div>
+        </div>
       </div>
+      {{outlet}}
     </div>
   </div>
-  {{outlet}}
-  {{else}}
-    <div class="row">
-      <div class='col-md-9'>
-        {{#bs-alert dismissible=false type="warning"}}
-          You have no permissions to access this page.
-        {{/bs-alert}}
-      </div>
-    </div>
-  {{/if}}
+{{else}}
+  {{application-header}}
+  {{landing-page}}
+{{/if}}

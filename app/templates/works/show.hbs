@@ -1,23 +1,24 @@
 {{#if (can "read work" model)}}
-  <ol class="breadcrumb">
-    {{#if (can "read index")}}
-      <li class="breadcrumb-item">{{#link-to "works"}}DataCite{{/link-to}}</li>
-    {{/if}}
-    <li class="breadcrumb-item">{{#link-to "members.show.works" model.member.id}}{{model.member.title}}{{/link-to}}</li>
-    <li class="breadcrumb-item">{{#link-to "data-centers.show.works" model.data-center.id}}{{model.data-center.title}}{{/link-to}}</li>
-  </ol>
+  {{application-header default=true}}
 
-  <h2 class="work">{{model.doi}}</h2>
+  <div class="container-fluid">
+    <div class="content">
+      <ol class="breadcrumb">
+        {{#if (can "read index")}}
+          <li class="breadcrumb-item">{{#link-to "works"}}DataCite{{/link-to}}</li>
+        {{/if}}
+        <li class="breadcrumb-item">{{#link-to "members.show.works" model.member.id}}{{model.member.title}}{{/link-to}}</li>
+        <li class="breadcrumb-item">{{#link-to "data-centers.show.works" model.data-center.id}}{{model.data-center.title}}{{/link-to}}</li>
+      </ol>
 
-  {{work-url model=model}}
-  {{work-metadata model=model}}
-  {{work-media model=model}}
-{{else}}
-  <div class="row">
-    <div class='col-md-9'>
-      {{#bs-alert dismissible=false type="warning"}}
-        You have no permissions to access this page.
-      {{/bs-alert}}
+      <h2 class="work">{{model.doi}}</h2>
+
+      {{work-url model=model}}
+      {{work-metadata model=model}}
+      {{work-media model=model}}
     </div>
   </div>
+{{else}}
+  {{application-header}}
+  {{landing-page}}
 {{/if}}

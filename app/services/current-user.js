@@ -18,8 +18,7 @@ export default Ember.Service.extend({
   role: null,
   member_id: null,
   data_center_id: null,
-  landing_page_route: null,
-  landing_page_id: null,
+  home: null,
 
   init() {
     this._super(...arguments);
@@ -55,18 +54,15 @@ export default Ember.Service.extend({
         self.set('role', result.role);
         self.set('member_id', result.member_id);
         self.set('data_center_id', result.datacenter_id);
-        self.set('landing_page_route', Ember.computed(function() {
-          if (result.member_id) {
-            return 'members.show';
-          } else if (result.data_center_id) {
-            return 'data-centers.show';
-          } else {
-            return 'index';
-          }
-        }));
-        self.set('landing_page_id', Ember.computed(function() {
-          return result.member_id || result.datacenter_id || null;
-        }));
+
+        if (result.member_id) {
+          self.set('home', '/members/' + result.member_id);
+        } else if (result.data_center_id) {
+          self.set('home', '/data-centers/' + result.data_center_id);
+        } else {
+          self.set('home', '/');
+        }
+
         self.set('isAdmin', Ember.isEqual(result.role, "staff_admin"));
         self.set('isMember', Ember.isEqual(result.role, "member_admin"));
         self.set('isDataCenter', Ember.isEqual(result.role, "data_center_admin"));

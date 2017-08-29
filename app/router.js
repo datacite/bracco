@@ -30,7 +30,6 @@ Router.map(function() {
     this.route('edit', { path: '/:work_id/edit' });
   });
   this.route('settings');
-  this.route('status');
   this.route('users', function() {
     this.route('edit', { path: '/:user_id/edit' });
   });
