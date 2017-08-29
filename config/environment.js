@@ -36,6 +36,7 @@ module.exports = function(environment) {
   ENV.SEARCH_URL = process.env.SEARCH_URL || "https://search.test.datacite.org";
   ENV.ORCID_URL = process.env.ORCID_URL || "https://sandbox.orcid.org";
   ENV.API_URL = process.env.API_URL || "https://api.test.datacite.org";
+  ENV.DOI_API_URL = process.env.DOI_API_URL || "https://api.test.datacite.org";
   ENV.USER_API_URL = process.env.USER_API_URL || "https://api.test.datacite.org";
   ENV.CDN_URL = process.env.CDN_URL || "https://assets.test.datacite.org";
   ENV.DATA_URL = process.env.DATA_URL || "https://data.test.datacite.org";
