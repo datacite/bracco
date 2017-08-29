@@ -7,6 +7,23 @@ export default Ember.Component.extend({
   title: null,
   home: '/',
 
+
+  init: function () {
+    this._super();
+
+    if (!this.get('default')) {
+      Ember.run.schedule("afterRender",this,function() {
+        this.send("transitionNoAccess");
+      });
+    }
+  },
+
+  actions: {
+    transitionNoAccess() {
+      this.get('router').transitionTo(this.get('home'));
+    }
+  },
+
   didInsertElement: function() {
     if (this.get('default')) {
       this.set('type', null);
