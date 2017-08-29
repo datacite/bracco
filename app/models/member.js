@@ -5,7 +5,7 @@ export default DS.Model.extend({
   "data-centers": DS.hasMany('data-center'),
   users: DS.hasMany('user'),
 
-  title: DS.attr('string'),
+  name: DS.attr('string'),
   description: DS.attr('string'),
   memberType: DS.attr('string'),
   region: DS.attr('string'),
