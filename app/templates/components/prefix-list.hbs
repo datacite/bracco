@@ -1,0 +1,93 @@
+<div class='col-md-9 panel-list' id="content">
+  {{#if searchable}}
+    {{model-search model=model}}
+  {{/if}}
+  {{#if model}}
+    {{#each model as |prefix|}}
+      <div class="panel panel-transparent">
+        <div class="panel-body">
+          <h3 class="work">
+            {{#link-to "prefixes.show" prefix.id}}{{prefix.id}}{{/link-to}}
+          </h3>
+          {{#if prefix.members}}
+            <h5>Members</h5>
+            {{#each prefix.members as |member|}}
+              {{#link-to "members.show.prefixes" member.id}}{{member.name}}{{/link-to}}
+            {{/each}}
+          {{/if}}
+
+          {{#if prefix.data-centers}}
+            <h5>Clients</h5>
+            {{#each prefix.data-centers as |data-center|}}
+              {{#link-to "data-centers.show.prefixes" data-center.id}}{{data-center.name}}{{/link-to}}
+            {{/each}}
+          {{/if}}
+        </div>
+      </div>
+    {{/each}}
+    <div class="text-center">
+      {{#if (gt model.meta.total_pages 1)}}
+        {{page-numbers content=model showFL=true}}
+      {{/if}}
+    </div>
+  {{else}}
+    {{#bs-alert dismissible=false type="warning"}}
+      No prefixes found.
+    {{/bs-alert}}
+  {{/if}}
+</div>
+
+<div class='col-md-3'>
+  {{#if (can "write prefix")}}
+    <div class="panel facets">
+      <div class="panel-body">
+        <div class="pull-right">
+          <button class="btn btn-warning">{{fa-icon "plus"}}Add Prefix</button>
+        </div>
+      </div>
+    </div>
+  {{/if}}
+
+  {{#if model.meta.years}}
+    <div class="panel facets">
+      <div class="panel-body">
+        <h4>Year created</h4>
+        <ul>
+          {{#each model.meta.years as |year|}}
+            <li>
+              {{#if model.otherParams.year}}
+                {{#link-to link (query-params year=null)}}{{fa-icon "check-square-o"}}{{/link-to}}
+              {{else}}
+                {{#link-to link (query-params year=year.id)}}{{fa-icon "square-o"}}{{/link-to}}
+              {{/if}}
+              <div class="facet-title">{{year.title}}</div>
+              <span class="number pull-right">{{year.count}}</span>
+              <div class="clearfix"/>
+            </li>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+  {{/if}}
+  {{#if (eq link "prefixes")}}
+    <div class="panel facets">
+      <div class="panel-body">
+        <h4>Members <span class="small">{{fa-icon "question-circle-o"}}{{#bs-tooltip placement="top"}}Filter data centers by member they work with.{{/bs-tooltip}}</span></h4>
+        <ul>
+          {{#each model.meta.members as |member|}}
+            <li>
+              {{#if model.otherParams.member-id}}
+                {{#link-to link (query-params member-id=null)}}{{fa-icon "check-square-o"}}{{/link-to}}
+              {{else}}
+                {{#link-to link (query-params member-id=member.id)}}{{fa-icon "square-o"}}{{/link-to}}
+              {{/if}}
+              <div class="facet-title">{{member.title}}</div>
+              <span class="number pull-right">{{member.count}}</span>
+              <div class="clearfix"/>
+            </li>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+  {{/if}}
+</div>

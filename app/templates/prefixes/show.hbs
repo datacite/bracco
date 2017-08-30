@@ -1,0 +1,36 @@
+{{#if (can "read prefix" model)}}
+  {{application-header default=true}}
+
+  <div class="container-fluid">
+    <div class="content">
+      {{#if (can "read index" )}}
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">{{#link-to "index"}}DataCite{{/link-to}}</li>
+        </ol>
+      {{/if}}
+
+      <h2 class="work">{{model.id}}</h2>
+
+      <div class="panel panel-transparent">
+        <div class="panel-body">
+          {{#if model.members}}
+            <h5>Members</h5>
+            {{#each model.members as |member|}}
+              {{#link-to "members.show.prefixes" member.id}}{{member.name}}{{/link-to}}
+            {{/each}}
+          {{/if}}
+
+          {{#if model.data-centers}}
+            <h5>Clients</h5>
+            {{#each model.data-centers as |data-center|}}
+              {{#link-to "data-centers.show.prefixes" data-center.id}}{{data-center.name}}{{/link-to}}
+            {{/each}}
+          {{/if}}
+        </div>
+      </div>
+    </div>
+  </div>
+{{else}}
+  {{application-header}}
+  {{landing-page}}
+{{/if}}

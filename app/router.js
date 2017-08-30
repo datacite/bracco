@@ -12,6 +12,7 @@ Router.map(function() {
     this.route('new');
     this.route('show', { path: '/:member_id' }, function() {
       this.route('works', { path: '/works' });
+      this.route('prefixes', { path: '/prefixes' });
       this.route('users', { path: '/users' });
       this.route('data-centers', { path: '/data-centers' });
     });
@@ -21,6 +22,7 @@ Router.map(function() {
     this.route('edit', { path: '/:data_center_id/edit' });
     this.route('show', { path: '/:data_center_id' }, function() {
       this.route('works', { path: '/works' });
+      this.route('prefixes', { path: '/prefixes' });
       this.route('users', { path: '/users' });
     });
   });
@@ -33,11 +35,8 @@ Router.map(function() {
   this.route('users', function() {
     this.route('edit', { path: '/:user_id/edit' });
   });
-
-  this.route('member', function() {
-    this.route('data-centers');
-    this.route('users');
-    this.route('works');
+  this.route('prefixes', function() {
+    this.route('show', { path: '/:prefix_id' });
   });
 });
 
