@@ -13,18 +13,22 @@
 
       <div class="panel panel-transparent">
         <div class="panel-body">
+          <h5>Providers</h5>
           {{#if model.members}}
-            <h5>Members</h5>
             {{#each model.members as |member|}}
               {{#link-to "members.show.prefixes" member.id}}{{member.name}}{{/link-to}}
             {{/each}}
+          {{else}}
+            <span class="icon-warning">No providers found.</span>
           {{/if}}
 
+          <h5>Clients</h5>
           {{#if model.data-centers}}
-            <h5>Clients</h5>
             {{#each model.data-centers as |data-center|}}
               {{#link-to "data-centers.show.prefixes" data-center.id}}{{data-center.name}}{{/link-to}}
             {{/each}}
+          {{else}}
+            <span class="icon-warning">No clients found.</span>
           {{/if}}
         </div>
       </div>
