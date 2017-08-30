@@ -13,7 +13,7 @@
           <h5>Providers</h5>
           {{#if prefix.members}}
             {{#each prefix.members as |member|}}
-              {{#link-to "members.show.prefixes" member.id}}{{member.name}}{{/link-to}}
+              {{#link-to "members.show.prefixes" member.id}}{{member.name}}{{/link-to}}<br/>
             {{/each}}
           {{else}}
             <span class="icon-warning">No providers found.</span>
@@ -22,7 +22,7 @@
           <h5>Clients</h5>
           {{#if prefix.data-centers}}
             {{#each prefix.data-centers as |data-center|}}
-              {{#link-to "data-centers.show.prefixes" data-center.id}}{{data-center.name}}{{/link-to}}
+              {{#link-to "data-centers.show.prefixes" data-center.id}}{{data-center.name}}{{/link-to}}<br/>
             {{/each}}
           {{else}}
             <span class="icon-warning">No clients found.</span>
