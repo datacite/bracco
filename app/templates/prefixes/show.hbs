@@ -13,22 +13,26 @@
 
       <div class="panel panel-transparent">
         <div class="panel-body">
-          <h5>Providers</h5>
-          {{#if model.members}}
-            {{#each model.members as |member|}}
-              {{#link-to "members.show.prefixes" member.id}}{{member.name}}{{/link-to}}<br/>
-            {{/each}}
+          {{#if (eq model.id "10.5072")}}
+            <span class="icon-info">Test prefix</span>
           {{else}}
-            <span class="icon-warning">No providers found.</span>
-          {{/if}}
+            <h5>Providers</h5>
+            {{#if model.members}}
+              {{#each model.members as |member|}}
+                {{#link-to "members.show.prefixes" member.id}}{{member.name}}{{/link-to}}<br/>
+              {{/each}}
+            {{else}}
+              <span class="icon-warning">No providers found.</span>
+            {{/if}}
 
-          <h5>Clients</h5>
-          {{#if model.data-centers}}
-            {{#each model.data-centers as |data-center|}}
-              {{#link-to "data-centers.show.prefixes" data-center.id}}{{data-center.name}}{{/link-to}}<br/>
-            {{/each}}
-          {{else}}
-            <span class="icon-warning">No clients found.</span>
+            <h5>Clients</h5>
+            {{#if model.data-centers}}
+              {{#each model.data-centers as |data-center|}}
+                {{#link-to "data-centers.show.prefixes" data-center.id}}{{data-center.name}}{{/link-to}}<br/>
+              {{/each}}
+            {{else}}
+              <span class="icon-warning">No clients found.</span>
+            {{/if}}
           {{/if}}
         </div>
       </div>
