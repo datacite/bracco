@@ -18,7 +18,7 @@ export default DS.Model.extend({
   created: DS.attr('date'),
   updated: DS.attr('date'),
 
-  name: Ember.computed('id', function() {
+  uid: Ember.computed('id', function() {
     return `${this.get('id').toUpperCase()}`;
   })
 });
