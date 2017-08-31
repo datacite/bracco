@@ -6,6 +6,7 @@ module.exports = function(defaults) {
     'ember-cli-babel': {
       includePolyfill: true
     },
+
     'ember-bootstrap': {
       importBootstrapCSS: false,
       whitelist: ['bs-popover',
@@ -18,9 +19,11 @@ module.exports = function(defaults) {
                   'bs-modal',
                   'bs-nav']
     },
+
     'ember-prism': {
       'theme': 'default'
     },
+
     dotEnv: {
       clientAllowedKeys: ['SITE_TITLE',
                           'NAVMENU_TITLE',
@@ -48,6 +51,10 @@ module.exports = function(defaults) {
       'bootstrapVersion': 3,
       'importBootstrapFont': true,
       'importBootstrapCSS': true
+    },
+
+    'ember-power-select': {
+      'theme': 'bootstrap'
     }
   });
 
