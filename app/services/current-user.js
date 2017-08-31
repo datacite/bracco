@@ -53,12 +53,12 @@ export default Ember.Service.extend({
         self.set('email', result.email);
         self.set('role', result.role);
         self.set('member_id', result.member_id);
-        self.set('data_center_id', result.datacenter_id);
+        self.set('datacenter_id', result.datacenter_id);
 
-        if (result.member_id) {
-          self.set('home', '/members/' + result.member_id);
-        } else if (result.data_center_id) {
-          self.set('home', '/data-centers/' + result.data_center_id);
+        if (result.role == "member_admin") {
+          self.set('home', '/members/' + result.member_id + "/data-centers");
+        } else if (result.role == "data_center_admin") {
+          self.set('home', '/data-centers/' + result.datacenter_id + "/works");
         } else {
           self.set('home', '/');
         }
