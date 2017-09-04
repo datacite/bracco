@@ -56,9 +56,9 @@ export default Ember.Service.extend({
         self.set('client_id', result.client_id);
 
         if (result.provider_id) {
-          self.set('home', '/providers/' + result.provider_id);
+          self.set('home', '/providers/' + result.provider_id + '/clients');
         } else if (result.client_id) {
-          self.set('home', '/clients/' + result.client_id);
+          self.set('home', '/clients/' + result.client_id + '/dois');
         } else {
           self.set('home', '/');
         }
