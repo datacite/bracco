@@ -1,8 +1,8 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  queryParams: ['query', 'data-center-id', 'year', 'page', 'perPage'],
+  queryParams: ['query', 'client-id', 'year', 'page', 'perPage'],
   query: null,
-  'data-center-id': null,
+  'client-id': null,
   'year': null
 });
