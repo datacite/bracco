@@ -25,7 +25,7 @@ export default Ember.Component.extend({
     this.set('role', roles.findBy('id', roleId));
     this.set('showProviders', Ember.String.w("provider_admin client_admin").includes(roleId));
   },
-  selectMember(providerId) {
+  selecProvider(providerId) {
     this.set('showClients', Ember.isPresent(providerId));
   },
 
@@ -41,12 +41,10 @@ export default Ember.Component.extend({
       }
     },
     searchProvider: function(query) {
-      let params = { 'query': query, 'page[size]': 10 };
-      this.set('providers', this.get('store').query('provider', params));
+      this.set('providers', this.get('store').query('provider', { 'query': query, 'page[size]': 10 }));
     },
     searchClient: function(query) {
-      let params = { 'query': query, 'page[size]': 10 };
-      this.set('data-centers', this.get('store').query('data-center', params));
+      this.set('data-centers', this.get('store').query('data-center', { 'query': query, 'page[size]': 10 }));
     },
     submit: function() {
       this.set('edit', false);

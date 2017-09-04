@@ -11,17 +11,17 @@
         {{/el.control}}
       {{/form.element}}
 
-      {{#if showMembers}}
+      {{#if showProviders}}
         {{#form.element controlType="power-select" property="member" label="Provider" optionLabelPath="name" options=members destination=member as |el|}}
-          {{#el.control onChange=(action "selectMember") search=(action "searchMember") searchField="name" as |item|}}
+          {{#el.control onChange=(action "selectProvider") search=(action "searchProvider") searchField="name" as |item|}}
             {{item.name}}
           {{/el.control}}
         {{/form.element}}
       {{/if}}
 
-      {{#if showDataCenters}}
+      {{#if showClients}}
         {{#form.element controlType="power-select" property="data-center" label="Client" options=data-centers destination=data-center as |el|}}
-          {{#el.control search=(action "searchDataCenter") searchField="name" as |item|}}
+          {{#el.control search=(action "searcClient") searchField="name" as |item|}}
             {{item.name}}
           {{/el.control}}
         {{/form.element}}
