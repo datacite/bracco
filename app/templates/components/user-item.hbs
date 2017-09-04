@@ -40,14 +40,15 @@
       <h5>Email</h5>
       <a href="mailto:{{user.email}}">{{user.email}}</a>
     {{/if}}
-    {{#if user.member}}
-      <h5>Member</h5>
-      {{#link-to "members.show" user.member.id}}{{user.member.title}}{{/link-to}}
-    {{/if}}
 
     {{#if user.role}}
       <h5>Role</h5>
       {{humanize user.role}}
+    {{/if}}
+
+    {{#if user.provider}}
+      <h5>Provider</h5>
+      {{#link-to "providers.show" user.provider.id}}{{user.provider.name}}{{/link-to}}
     {{/if}}
 
     <h5>Account created</h5>

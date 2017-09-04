@@ -1,7 +1,7 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('data-center-show', 'Integration | Component | data center show', {
+moduleForComponent('client-show', 'Integration | Component | data center show', {
   integration: true
 });
 
@@ -16,9 +16,9 @@ test('it renders', function(assert) {
 
   // Template block usage:
   this.render(hbs`
-    {{#data-center-show}}
+    {{#client-show}}
       template block text
-    {{/data-center-show}}
+    {{/client-show}}
   `);
 
   assert.equal(this.$().text().trim(), 'template block text');

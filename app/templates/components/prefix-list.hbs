@@ -83,15 +83,15 @@
       <div class="panel-body">
         <h4>Providers <span class="small">{{fa-icon "question-circle-o"}}{{#bs-tooltip placement="top"}}Filter prefixes by DOI Registration Provider they work with.{{/bs-tooltip}}</span></h4>
         <ul>
-          {{#each model.meta.providers as |member|}}
+          {{#each model.meta.providers as |provider|}}
             <li>
               {{#if model.otherParams.provider-id}}
-                {{#link-to link (query-params member-id=null)}}{{fa-icon "check-square-o"}}{{/link-to}}
+                {{#link-to link (query-params provider-id=null)}}{{fa-icon "check-square-o"}}{{/link-to}}
               {{else}}
-                {{#link-to link (query-params member-id=member.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                {{#link-to link (query-params provider-id=provider.id)}}{{fa-icon "square-o"}}{{/link-to}}
               {{/if}}
-              <div class="facet-title">{{member.title}}</div>
-              <span class="number pull-right">{{member.count}}</span>
+              <div class="facet-title">{{provider.title}}</div>
+              <span class="number pull-right">{{provider.count}}</span>
               <div class="clearfix"/>
             </li>
           {{/each}}

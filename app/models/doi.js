@@ -4,6 +4,7 @@ import DS from 'ember-data';
 export default DS.Model.extend({
   provider: DS.belongsTo('provider'),
   client: DS.belongsTo('client'),
+  'resource-type': DS.belongsTo('resource-type'),
 
   identifier: DS.attr('string'),
   doi: DS.attr('string'),
