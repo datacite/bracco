@@ -7,7 +7,7 @@ export default Ember.Route.extend(CanMixin, RouteMixin, {
   home: '/',
 
   model(params) {
-    return this.store.findRecord('doi', params.work_id, { include: 'provider,client' });
+    return this.store.findRecord('doi', params.doi_id, { include: 'provider,client' });
   },
 
   // afterModel(model, transition) {

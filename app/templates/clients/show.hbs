@@ -1,4 +1,4 @@
-{{#if (can "read data-center" model)}}
+{{#if (can "read client" model)}}
   {{application-header default=true}}
 
   <div class="container-fluid">
@@ -7,7 +7,7 @@
         {{#if (can "read index")}}
           <li class="breadcrumb-item">{{#link-to "index"}}DataCite{{/link-to}}</li>
         {{/if}}
-        <li class="breadcrumb-item">{{#link-to "members.show" model.member.id}}{{model.member.title}}{{/link-to}}</li>
+        <li class="breadcrumb-item">{{#link-to "providers.show" model.provider.id}}{{model.provider.name}}{{/link-to}}</li>
       </ol>
 
       <div class="row">
@@ -24,10 +24,10 @@
         <div class='col-md-9'>
           <div class="tab-content nav-tabs-member">
             {{#bs-nav type="tabs" as |nav|}}
-              {{#nav.item}}{{#nav.link-to "data-centers.show.index" model.id class="nav-link"}}Info{{/nav.link-to}}{{/nav.item}}
-              {{#nav.item}}{{#nav.link-to "data-centers.show.users" model.id class="nav-link"}}Users{{/nav.link-to}}{{/nav.item}}
-              {{#nav.item}}{{#nav.link-to "data-centers.show.prefixes" model.id class="nav-link"}}Prefixes{{/nav.link-to}}{{/nav.item}}
-            {{#nav.item}}{{#nav.link-to "data-centers.show.works" model.id class="nav-link"}}DOIs{{/nav.link-to}}{{/nav.item}}
+              {{#nav.item}}{{#nav.link-to "clients.show.index" model.id class="nav-link"}}Info{{/nav.link-to}}{{/nav.item}}
+              {{#nav.item}}{{#nav.link-to "clients.show.users" model.id class="nav-link"}}Users{{/nav.link-to}}{{/nav.item}}
+              {{#nav.item}}{{#nav.link-to "clients.show.prefixes" model.id class="nav-link"}}Prefixes{{/nav.link-to}}{{/nav.item}}
+            {{#nav.item}}{{#nav.link-to "clients.show.dois" model.id class="nav-link"}}DOIs{{/nav.link-to}}{{/nav.item}}
             {{/bs-nav}}
           </div>
         </div>

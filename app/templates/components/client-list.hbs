@@ -3,15 +3,15 @@
     {{model-search model=model}}
   {{/if}}
   {{#if model}}
-    {{#each model as |data-center|}}
+    {{#each model as |client|}}
       <div class="panel panel-transparent">
         <div class="panel-body">
           <h3 class="work">
-            {{#link-to "data-centers.show" data-center.id}}{{data-center.name}}{{/link-to}}
+            {{#link-to "clients.show" client.id}}{{client.name}}{{/link-to}}
           </h3>
         </div>
         <div class="panel-footer">
-          {{data-center.uid}}
+          {{client.uid}}
           <span>{{fa-icon "question-circle-o"}}
             {{#bs-tooltip placement="top" viewportPadding=10}}Each client has a unique ID that starts with the DOI service provider ID.{{/bs-tooltip}}
           </span>
@@ -31,7 +31,7 @@
 </div>
 
 <div class='col-md-3'>
-  {{#if (can "write data-center")}}
+  {{#if (can "write client")}}
     <div class="panel facets">
       <div class="panel-body">
         <div class="pull-right">
@@ -55,27 +55,6 @@
               {{/if}}
               <div class="facet-title">{{year.title}}</div>
               <span class="number pull-right">{{year.count}}</span>
-              <div class="clearfix"/>
-            </li>
-          {{/each}}
-        </ul>
-      </div>
-    </div>
-  {{/if}}
-  {{#if (eq link "data-centers")}}
-    <div class="panel facets">
-      <div class="panel-body">
-        <h4>Members <span class="small">{{fa-icon "question-circle-o"}}{{#bs-tooltip placement="top"}}Filter data centers by member they work with.{{/bs-tooltip}}</span></h4>
-        <ul>
-          {{#each model.meta.members as |member|}}
-            <li>
-              {{#if model.otherParams.member-id}}
-                {{#link-to link (query-params member-id=null)}}{{fa-icon "check-square-o"}}{{/link-to}}
-              {{else}}
-                {{#link-to link (query-params member-id=member.id)}}{{fa-icon "square-o"}}{{/link-to}}
-              {{/if}}
-              <div class="facet-title">{{member.title}}</div>
-              <span class="number pull-right">{{member.count}}</span>
               <div class="clearfix"/>
             </li>
           {{/each}}

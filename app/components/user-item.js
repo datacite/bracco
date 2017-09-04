@@ -13,38 +13,38 @@ export default Ember.Component.extend({
   edit: false,
   role: { 'id': 'user', 'name': 'User' },
   roles: roles,
-  member: null,
-  members: [],
-  'data-center': null,
-  'data-centers': [],
+  provider: null,
+  providers: [],
+  client: null,
+  clients: [],
 
-  showMembers: false,
-  showDataCenters: false,
+  showProviders: false,
+  showClients: false,
 
   selectRole(roleId) {
     this.set('role', roles.findBy('id', roleId));
-    this.set('showMembers', Ember.String.w("provider_admin client_admin").includes(roleId));
+    this.set('showProviders', Ember.String.w("provider_admin client_admin").includes(roleId));
   },
-  selectMember(memberId) {
-    this.set('showDataCenters', Ember.isPresent(memberId));
+  selectMember(providerId) {
+    this.set('showClients', Ember.isPresent(providerId));
   },
 
   actions: {
     edit: function(user) {
       this.set('edit', true);
       this.selectRole(user.get('role'));
-      if (this.get('showMembers')) {
-        this.set('members', this.get('store').query('member', { 'member-type': 'allocating', 'page[size]': 10 }));
+      if (this.get('showProviders')) {
+        this.set('providers', this.get('store').query('provider', { 'page[size]': 10 }));
       }
-      if (this.get('showDataCenters')) {
-        this.set('data-centers', this.get('store').query('data-center', { 'page[size]': 10 }));
+      if (this.get('showClients')) {
+        this.set('clients', this.get('store').query('client', { 'page[size]': 10 }));
       }
     },
-    searchMember: function(query) {
-      let params = { 'query': query, 'member-type': 'allocating', 'page[size]': 10 };
-      this.set('members', this.get('store').query('member', params));
+    searchProvider: function(query) {
+      let params = { 'query': query, 'page[size]': 10 };
+      this.set('providers', this.get('store').query('provider', params));
     },
-    searchDataCenter: function(query) {
+    searchClient: function(query) {
       let params = { 'query': query, 'page[size]': 10 };
       this.set('data-centers', this.get('store').query('data-center', params));
     },
@@ -57,8 +57,8 @@ export default Ember.Component.extend({
     selectRole(role) {
       this.selectRole(role.id);
     },
-    selectMember(member) {
-      this.selectMember(member.id);
+    selectProvider(provider) {
+      this.selectProvider(provider.id);
     }
   }
 });

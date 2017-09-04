@@ -17,18 +17,18 @@
             <span class="icon-info">Test prefix</span>
           {{else}}
             <h5>Providers</h5>
-            {{#if model.members}}
-              {{#each model.members as |member|}}
-                {{#link-to "members.show.prefixes" member.id}}{{member.name}}{{/link-to}}<br/>
+            {{#if model.providers}}
+              {{#each model.providers as |provider|}}
+                {{#link-to "providers.show.prefixes" provider.id}}{{provider.name}}{{/link-to}}<br/>
               {{/each}}
             {{else}}
               <span class="icon-warning">No providers found.</span>
             {{/if}}
 
             <h5>Clients</h5>
-            {{#if model.data-centers}}
-              {{#each model.data-centers as |data-center|}}
-                {{#link-to "data-centers.show.prefixes" data-center.id}}{{data-center.name}}{{/link-to}}<br/>
+            {{#if model.clients}}
+              {{#each model.clients as |client|}}
+                {{#link-to "clients.show.prefixes" client.id}}{{client.name}}{{/link-to}}<br/>
               {{/each}}
             {{else}}
               <span class="icon-warning">No clients found.</span>

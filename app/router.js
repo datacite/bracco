@@ -8,28 +8,28 @@ const Router = Ember.Router.extend(GoogleAnalyticsRoute, {
 });
 
 Router.map(function() {
-  this.route('members', function() {
+  this.route('providers', function() {
     this.route('new');
-    this.route('show', { path: '/:member_id' }, function() {
-      this.route('works', { path: '/works' });
+    this.route('show', { path: '/:provider_id' }, function() {
+      this.route('dois', { path: '/dois' });
       this.route('prefixes', { path: '/prefixes' });
       this.route('users', { path: '/users' });
-      this.route('data-centers', { path: '/data-centers' });
+      this.route('clients', { path: '/clients' });
     });
   });
-  this.route('data-centers', function() {
+  this.route('clients', function() {
     this.route('new');
-    this.route('edit', { path: '/:data_center_id/edit' });
-    this.route('show', { path: '/:data_center_id' }, function() {
-      this.route('works', { path: '/works' });
+    this.route('edit', { path: '/:client_id/edit' });
+    this.route('show', { path: '/:client_id' }, function() {
+      this.route('dois', { path: '/dois' });
       this.route('prefixes', { path: '/prefixes' });
       this.route('users', { path: '/users' });
     });
   });
-  this.route('works', function() {
+  this.route('dois', function() {
     this.route('new');
-    this.route('show', { path: '/:work_id' });
-    this.route('edit', { path: '/:work_id/edit' });
+    this.route('show', { path: '/:doi_id' });
+    this.route('edit', { path: '/:doi_id/edit' });
   });
   this.route('settings');
   this.route('users', function() {

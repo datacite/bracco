@@ -5,7 +5,7 @@ import { CanMixin } from 'ember-can';
 export default Ember.Route.extend(CanMixin, RouteMixin, {
 
   model(params) {
-    return this.store.findRecord('provider', params.member_id);
+    return this.store.findRecord('provider', params.provider_id);
   },
   actions: {
     queryParamsDidChange: function() {

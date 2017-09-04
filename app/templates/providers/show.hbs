@@ -1,0 +1,43 @@
+{{#if (can "read provider" model)}}
+  {{application-header default=true}}
+
+  <div class="container-fluid">
+    <div class="content">
+      {{#if (can "read index" )}}
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">{{#link-to "index"}}DataCite{{/link-to}}</li>
+        </ol>
+      {{/if}}
+
+      <div class="row">
+        <div class="col-md-9">
+          <div class="panel panel-transparent" id="content-member">
+            <div class="panel-title work">
+              <h2>{{model.name}}</h2>
+            </div>
+          </div>
+
+          <div class="tab-content nav-tabs-member">
+            {{#bs-nav type="tabs" as |nav|}}
+              {{#nav.item}}{{#nav.link-to "providers.show.index" model.id class="nav-link"}}Info{{/nav.link-to}}{{/nav.item}}
+              {{#nav.item}}{{#nav.link-to "providers.show.clients" model.id class="nav-link"}}Clients{{/nav.link-to}}{{/nav.item}}
+              {{#nav.item}}{{#nav.link-to "providers.show.users" model.id class="nav-link"}}Users{{/nav.link-to}}{{/nav.item}}
+              {{#nav.item}}{{#nav.link-to "providers.show.prefixes" model.id class="nav-link"}}Prefixes{{/nav.link-to}}{{/nav.item}}
+              {{#nav.item}}{{#nav.link-to "providers.show.dois" model.id class="nav-link"}}DOIs{{/nav.link-to}}{{/nav.item}}
+            {{/bs-nav}}
+          </div>
+        </div>
+        {{#if model.logoUrl}}
+          <div class="col-md-3">
+            <img class="img-responsive" src="{{model.logoUrl}}">
+          </div>
+        {{/if}}
+      </div>
+
+      {{outlet}}
+    </div>
+  </div>
+{{else}}
+  {{application-header}}
+  {{landing-page}}
+{{/if}}
