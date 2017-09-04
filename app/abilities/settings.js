@@ -4,8 +4,8 @@ import { Ability } from 'ember-can';
 export default Ability.extend({
   canWrite: function() {
     switch(this.get('currentUser.role')) {
-      case 'member_admin':
-      case 'data_center_admin':
+      case 'provider_admin':
+      case 'client_admin':
         return true;
       default:
         return false;
@@ -13,8 +13,8 @@ export default Ability.extend({
   }.property('currentUser.uid', 'settings', 'canWrite'),
   canRead: function() {
     switch(this.get('currentUser.role')) {
-      case 'member_admin':
-      case 'data_center_admin':
+      case 'provider_admin':
+      case 'client_admin':
         return true;
       default:
         return false;

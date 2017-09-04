@@ -9,15 +9,15 @@ export default Ember.Service.extend({
   isAuthenticated: false,
   isPermitted: false,
   isAdmin: false,
-  isMember: false,
-  isDataCenter: false,
+  isProvider: false,
+  isClient: false,
   uid: null,
   jwt: null,
   name: null,
   email: null,
   role: null,
-  member_id: null,
-  data_center_id: null,
+  provider_id: null,
+  client_id: null,
   home: null,
 
   init() {
@@ -52,24 +52,24 @@ export default Ember.Service.extend({
         self.set('name', result.name);
         self.set('email', result.email);
         self.set('role', result.role);
-        self.set('member_id', result.member_id);
-        self.set('data_center_id', result.datacenter_id);
+        self.set('provider_id', result.provider_id);
+        self.set('client_id', result.client_id);
 
-        if (result.member_id) {
-          self.set('home', '/members/' + result.member_id);
-        } else if (result.data_center_id) {
-          self.set('home', '/data-centers/' + result.data_center_id);
+        if (result.provider_id) {
+          self.set('home', '/members/' + result.provider_id);
+        } else if (result.client_id) {
+          self.set('home', '/data-centers/' + result.client_id);
         } else {
           self.set('home', '/');
         }
 
         self.set('isAdmin', Ember.isEqual(result.role, "staff_admin"));
-        self.set('isMember', Ember.isEqual(result.role, "member_admin"));
-        self.set('isDataCenter', Ember.isEqual(result.role, "data_center_admin"));
+        self.set('isProvider', Ember.isEqual(result.role, "provider_admin"));
+        self.set('isClient', Ember.isEqual(result.role, "client_admin"));
 
-        if (result.role === "data_center_admin") {
+        if (result.role === "client_admin") {
           self.get('flashMessages').info('Welcome ' + result.name + ' to the Client Administration area.');
-        } else if (result.role === "member_admin") {
+        } else if (result.role === "provider_admin") {
           self.get('flashMessages').info('Welcome ' + result.name + ' to the DOI Registration Provider Administration area.');
         } else if (result.role === "staff_admin") {
           self.get('flashMessages').info('Welcome ' + result.name + ' to the DataCite Administration area.');

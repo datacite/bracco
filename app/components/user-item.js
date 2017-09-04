@@ -1,8 +1,8 @@
 import Ember from 'ember';
 
 const roles = [{ 'id': 'staff_admin', 'name': "Staff admin" },
-               { 'id': 'member_admin', 'name': "Member admin" },
-               { 'id': 'data_center_admin', 'name': "Data center admin" },
+               { 'id': 'provider_admin', 'name': "Provider admin" },
+               { 'id': 'client_admin', 'name': "Client admin" },
                { 'id': 'user', 'name': 'User' }];
 
 export default Ember.Component.extend({
@@ -23,7 +23,7 @@ export default Ember.Component.extend({
 
   selectRole(roleId) {
     this.set('role', roles.findBy('id', roleId));
-    this.set('showMembers', Ember.String.w("member_admin data_center_admin").includes(roleId));
+    this.set('showMembers', Ember.String.w("provider_admin client_admin").includes(roleId));
   },
   selectMember(memberId) {
     this.set('showDataCenters', Ember.isPresent(memberId));

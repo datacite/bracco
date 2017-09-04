@@ -3,9 +3,9 @@
 
   <div class="container-fluid">
     <div class="content">
-      {{#if (current-user role="member_admin")}}
+      {{#if (current-user role="provider_admin")}}
         {{member-settings model=model}}
-      {{else if (current-user role="data_center_admin")}}
+      {{else if (current-user role="client_admin")}}
         {{data-center-settings model=model}}
       {{/if}}
     </div>

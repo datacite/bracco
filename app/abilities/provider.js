@@ -18,12 +18,12 @@ export default Ability.extend({
         return false;
     }
   }),
-  canRead: Ember.computed('currentUser.role', 'currentUser.member_id', 'model.id', function() {
+  canRead: Ember.computed('currentUser.role', 'currentUser.provider_id', 'model.id', function() {
     switch(this.get('currentUser.role')) {
       case 'staff_admin':
         return true;
-      case 'member_admin':
-        return this.get('currentUser.member_id') === this.get('model.id');
+      case 'provider_admin':
+        return this.get('currentUser.provider_id') === this.get('model.id');
       default:
         return false;
     }
