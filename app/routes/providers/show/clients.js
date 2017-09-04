@@ -1,28 +1,17 @@
 import Ember from 'ember';
 import RouteMixin from 'ember-cli-pagination/remote/route-mixin';
-import { CanMixin } from 'ember-can';
 
-export default Ember.Route.extend(CanMixin, RouteMixin, {
+export default Ember.Route.extend(RouteMixin, {
   perPage: 25,
-  home: '/',
-
-  beforeModel() {
-    let result = this._super(...arguments);
-
-    if (!this.can('read index')) {
-      let home = this.get('currentUser').get('home');
-      return this.transitionTo(home);
-    }
-
-    return result;
-  },
 
   model(params) {
     params.paramMapping = { page: "page[number]",
                             perPage: "page[size]",
                             total_pages: "total-pages" };
 
-    return this.findPaged('work', params);
+    // params = Ember.merge(params, { adapterOptions: { include: ['member'] }});
+    params = Ember.merge(params, { 'provider-id': this.modelFor('providers/show').get('id') });
+    return this.findPaged('client', params);
   },
   actions: {
     queryParamsDidChange: function() {

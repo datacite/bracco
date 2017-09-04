@@ -3,15 +3,12 @@ import RouteMixin from 'ember-cli-pagination/remote/route-mixin';
 import { CanMixin } from 'ember-can';
 
 export default Ember.Route.extend(CanMixin, RouteMixin, {
-  perPage: 25,
-  home: '/',
-
   model(params) {
-    return this.store.findRecord('work', params.work_id, { include: 'member,data-center' });
+    return this.store.findRecord('client', params.data_center_id, { include: 'provider' });
   },
 
   // afterModel(model, transition) {
-  //   if (!this.can('read work', model)) {
+  //   if (!this.can('read data-center', model)) {
   //     let home = this.get('currentUser').get('home');
   //     this.transitionTo(home);
   //   }

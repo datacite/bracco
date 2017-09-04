@@ -1,8 +1,8 @@
 import DS from 'ember-data';
 
 export default DS.Model.extend({
-  member: DS.belongsTo('member'),
-  'data-center': DS.belongsTo('data-center'),
+  provider: DS.belongsTo('provider'),
+  client: DS.belongsTo('client'),
 
   givenNames: DS.attr('string'),
   familyName: DS.attr('string'),

@@ -23,7 +23,7 @@ export default Ember.Route.extend(CanMixin, RouteMixin, {
                             total_pages: "total-pages" };
 
     // params = Ember.merge(params, { adapterOptions: { include: ['member'] }});
-    return this.findPaged('data-center', params);
+    return this.findPaged('client', params);
   },
   actions: {
     queryParamsDidChange: function() {
