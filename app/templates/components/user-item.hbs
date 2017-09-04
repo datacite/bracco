@@ -12,7 +12,7 @@
       {{/form.element}}
 
       {{#if showProviders}}
-        {{#form.element controlType="power-select" property="member" label="Provider" optionLabelPath="name" options=members destination=member as |el|}}
+        {{#form.element controlType="power-select" property="provider" label="Provider" optionLabelPath="name" options=providers destination=provider as |el|}}
           {{#el.control onChange=(action "selectProvider") search=(action "searchProvider") searchField="name" as |item|}}
             {{item.name}}
           {{/el.control}}
@@ -20,8 +20,8 @@
       {{/if}}
 
       {{#if showClients}}
-        {{#form.element controlType="power-select" property="data-center" label="Client" options=data-centers destination=data-center as |el|}}
-          {{#el.control search=(action "searcClient") searchField="name" as |item|}}
+        {{#form.element controlType="power-select" property="data-center" label="Client" options=clients destination=client as |el|}}
+          {{#el.control search=(action "searchClient") searchField="name" as |item|}}
             {{item.name}}
           {{/el.control}}
         {{/form.element}}
