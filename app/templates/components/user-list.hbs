@@ -7,37 +7,7 @@
     {{#bs-accordion as |acc|}}
       {{#each model as |user|}}
         {{#acc.item value=user.orcid as |aitem|}}
-          {{#aitem.title}}
-            {{user.creditName}} {{#if user.role}}<span class='small pull-right'>{{humanize user.role}}</span>{{/if}}
-          {{/aitem.title}}
-          {{#aitem.body}}
-            {{#if user.email}}
-              <h5>Email</h5>
-              <a href="mailto:{{user.email}}">{{user.email}}</a>
-            {{/if}}
-            {{#if user.member}}
-              <h5>Member</h5>
-              {{#link-to "members.show" user.member.id}}{{user.member.title}}{{/link-to}}
-            {{/if}}
-
-            {{#if user.role}}
-              <h5>Role</h5>
-              {{humanize user.role}}
-            {{/if}}
-
-            <h5>Account created</h5>
-            {{format-date user.created}}
-
-            <div class="pseudo-footer">
-              <a href="{{user.id}}">{{fa-icon "external-link"}} {{user.id}}</a>
-              <div class="btn-toolbar pull-right">
-                <div class="btn-group btn-group-sm">
-                  {{#link-to "users.edit" user.id}}{{fa-icon "pencil"}}{{/link-to}}
-                </div>
-              </div>
-              <div class="clearfix"/>
-            </div>
-          {{/aitem.body}}
+          {{user-item user=user aitem=aitem}}
         {{/acc.item}}
       {{/each}}
     {{/bs-accordion}}

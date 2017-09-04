@@ -1,0 +1,66 @@
+{{#aitem.title}}
+  {{user.creditName}} {{#if user.role}}<span class='small pull-right'>{{humanize user.role}}</span>{{/if}}
+{{/aitem.title}}
+
+{{#aitem.body}}
+  {{#if edit}}
+    {{#bs-form formLayout=formLayout model=this onSubmit=(action "submit") as |form|}}
+      {{#form.element controlType="power-select" property="role" label="Role" options=roles optionLabelPath="name" destination=role as |el|}}
+        {{#el.control onChange=(action "selectRole") searchEnabled=false allowClear=false as |item|}}
+          {{item.name}}
+        {{/el.control}}
+      {{/form.element}}
+
+      {{#if showMembers}}
+        {{#form.element controlType="power-select" property="member" label="Provider" optionLabelPath="name" options=members destination=member as |el|}}
+          {{#el.control onChange=(action "selectMember") search=(action "searchMember") searchField="name" as |item|}}
+            {{item.name}}
+          {{/el.control}}
+        {{/form.element}}
+      {{/if}}
+
+      {{#if showDataCenters}}
+        {{#form.element controlType="power-select" property="data-center" label="Client" options=data-centers destination=data-center as |el|}}
+          {{#el.control search=(action "searchDataCenter") searchField="name" as |item|}}
+            {{item.name}}
+          {{/el.control}}
+        {{/form.element}}
+      {{/if}}
+
+      <div class="pseudo-footer">
+        <div class="btn-toolbar pull-right">
+          <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
+          <button type="submit" class="btn btn-sm btn-fill">Save</button>
+        </div>
+        <div class="clearfix"/>
+      </div>
+    {{/bs-form}}
+  {{else}}
+    {{#if user.email}}
+      <h5>Email</h5>
+      <a href="mailto:{{user.email}}">{{user.email}}</a>
+    {{/if}}
+    {{#if user.member}}
+      <h5>Member</h5>
+      {{#link-to "members.show" user.member.id}}{{user.member.title}}{{/link-to}}
+    {{/if}}
+
+    {{#if user.role}}
+      <h5>Role</h5>
+      {{humanize user.role}}
+    {{/if}}
+
+    <h5>Account created</h5>
+    {{format-date user.created}}
+
+    <div class="pseudo-footer">
+      <a href="{{user.id}}">{{fa-icon "external-link"}} {{user.id}}</a>
+      <div class="btn-toolbar pull-right">
+        <div class="btn-group btn-group-sm">
+          <button {{action "edit" user}} class="btn-link">{{fa-icon "pencil"}}</button>
+        </div>
+      </div>
+      <div class="clearfix"/>
+    </div>
+  {{/if}}
+{{/aitem.body}}
