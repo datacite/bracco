@@ -1,7 +1,7 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('work-url', 'Integration | Component | work url', {
+moduleForComponent('provider-show', 'Integration | Component | provider show', {
   integration: true
 });
 
@@ -10,15 +10,15 @@ test('it renders', function(assert) {
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });
 
-  this.render(hbs`{{work-url}}`);
+  this.render(hbs`{{provider-show}}`);
 
   assert.equal(this.$().text().trim(), '');
 
   // Template block usage:
   this.render(hbs`
-    {{#work-url}}
+    {{#provider-show}}
       template block text
-    {{/work-url}}
+    {{/provider-show}}
   `);
 
   assert.equal(this.$().text().trim(), 'template block text');

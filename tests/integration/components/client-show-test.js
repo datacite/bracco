@@ -1,7 +1,7 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('data-center-settings', 'Integration | Component | data center settings', {
+moduleForComponent('client-show', 'Integration | Component | client show', {
   integration: true
 });
 
@@ -10,15 +10,15 @@ test('it renders', function(assert) {
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });
 
-  this.render(hbs`{{data-center-settings}}`);
+  this.render(hbs`{{client-show}}`);
 
   assert.equal(this.$().text().trim(), '');
 
   // Template block usage:
   this.render(hbs`
-    {{#data-center-settings}}
+    {{#client-show}}
       template block text
-    {{/data-center-settings}}
+    {{/client-show}}
   `);
 
   assert.equal(this.$().text().trim(), 'template block text');
