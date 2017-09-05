@@ -16,7 +16,7 @@ export default Ember.Component.extend({
                           'chicago-fullnote-bibliography': 'text/x-bibliography; style=chicago-fullnote-bibliography',
                           'ieee': 'text/x-bibliography; style=ieee' };
 
-    let response = fetch(url, {
+    fetch(url, {
       headers: {
         'Accept': acceptHeaders[citation]
       }
@@ -30,7 +30,7 @@ export default Ember.Component.extend({
         throw error
       }
     }, function(error) {
-      console.log(error.message);
+      Ember.Logger.assert(false, error);
     }).then(function(result) {
         // if (typeof result === 'string') {
         //   self.set('citation-output', result);
@@ -41,7 +41,7 @@ export default Ember.Component.extend({
       }
       reader.readAsText(result);
     });
-    console.log(self.get('citation-output'))
+    //console.log(self.get('citation-output'))
     this.get('router').transitionTo({ queryParams: { citation: citation } });
   },
 

@@ -10,7 +10,9 @@ export default Ember.Component.extend({
 
   tagName: 'div',
   classNames: ['panel', 'panel-default'],
+
   edit: false,
+  user: null,
   role: { 'id': 'user', 'name': 'User' },
   roles: roles,
   provider: null,
@@ -21,24 +23,40 @@ export default Ember.Component.extend({
   showProviders: false,
   showClients: false,
 
-  selectRole(roleId) {
-    this.set('role', roles.findBy('id', roleId));
-    if (this.get('showProviders')) {
-      this.set('showClients', Ember.String.w("client_admin").includes(roleId));
-    } else {
-      this.set('showProviders', Ember.String.w("provider_admin client_admin").includes(roleId));
+  selectRole(role) {
+    this.get('user').set('role', role.id);
+    //this.set('role', role);
+    this.set('showProviders', Ember.String.w("provider_admin client_admin").includes(role.id));
+    this.set('showClients', Ember.String.w("client_admin").includes(role.id));
+
+    if (!this.get('showProviders')) {
+      this.get('user').set('provider', null);
+    }
+    if (!this.get('showClients')) {
+      this.get('user').set('client', null);
     }
   },
-  selectProvider(providerId) {
-    this.set('provider', this.get('store').findRecord('provider', providerId));
+  selectProvider(provider) {
+//     let post = this.store.peekRecord('post', 1);
+// let comment = this.store.peekRecord('comment', 1);
+// comment.set('post', post);
+    //this.set('provider', this.get('store').peekRecord('provider', provider.id));
+    this.get('user').set('provider', provider);
+    console.log(this.get('user').get('provider'))
     this.set('showClients', Ember.String.w("client_admin").includes(this.get('role.id')));
+  },
+  selectClient(client) {
+    //this.set('client', this.get('store').peekRecord('client', client.id));
+    this.get('user').set('client', client);
   },
 
   actions: {
     edit: function(user) {
       this.set('edit', true);
-      this.selectRole(user.get('role'));
+      this.set('user', user);
+      //this.selectRole(user.get('role'));
       if (this.get('showProviders')) {
+        //this.selectProvider(user.get('provider').get('id'));
         this.set('providers', this.get('store').query('provider', { 'page[size]': 10 }));
       }
       if (this.get('showClients')) {
@@ -52,16 +70,20 @@ export default Ember.Component.extend({
       this.set('clients', this.get('store').query('client', { 'query': query, 'provider-id': this.get('provider').get('id'), 'page[size]': 10 }));
     },
     submit: function() {
+      this.get('user').save();
       this.set('edit', false);
     },
     cancel: function() {
       this.set('edit', false);
     },
     selectRole(role) {
-      this.selectRole(role.id);
+      this.selectRole(role);
     },
     selectProvider(provider) {
-      this.selectProvider(provider.id);
+      this.selectProvider(provider);
+    },
+    selectClient(client) {
+      this.selectClient(client);
     }
   }
 });
