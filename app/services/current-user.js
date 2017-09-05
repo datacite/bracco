@@ -15,7 +15,7 @@ export default Ember.Service.extend({
   jwt: null,
   name: null,
   email: null,
-  role: null,
+  role_id: null,
   provider_id: null,
   client_id: null,
   home: null,
@@ -51,7 +51,7 @@ export default Ember.Service.extend({
         self.set('uid', result.uid);
         self.set('name', result.name);
         self.set('email', result.email);
-        self.set('role', result.role);
+        self.set('role_id', result.role_id);
         self.set('provider_id', result.provider_id);
         self.set('client_id', result.client_id);
 
@@ -63,15 +63,15 @@ export default Ember.Service.extend({
           self.set('home', '/');
         }
 
-        self.set('isAdmin', Ember.isEqual(result.role, "staff_admin"));
-        self.set('isProvider', Ember.isEqual(result.role, "provider_admin"));
-        self.set('isClient', Ember.isEqual(result.role, "client_admin"));
+        self.set('isAdmin', Ember.isEqual(result.role_id, "staff_admin"));
+        self.set('isProvider', Ember.isEqual(result.role_id, "provider_admin"));
+        self.set('isClient', Ember.isEqual(result.role_id, "client_admin"));
 
-        if (result.role === "client_admin") {
+        if (result.role_id === "client_admin") {
           self.get('flashMessages').info('Welcome ' + result.name + ' to the Client Administration area.');
-        } else if (result.role === "provider_admin") {
+        } else if (result.role_id === "provider_admin") {
           self.get('flashMessages').info('Welcome ' + result.name + ' to the DOI Registration Provider Administration area.');
-        } else if (result.role === "staff_admin") {
+        } else if (result.role_id === "staff_admin") {
           self.get('flashMessages').info('Welcome ' + result.name + ' to the DataCite Administration area.');
         }
       }

@@ -1,10 +1,5 @@
 import Ember from 'ember';
 
-const roles = [{ 'id': 'staff_admin', 'name': "Staff admin" },
-               { 'id': 'provider_admin', 'name': "Provider admin" },
-               { 'id': 'client_admin', 'name': "Client admin" },
-               { 'id': 'user', 'name': 'User' }];
-
 export default Ember.Component.extend({
   store: Ember.inject.service(),
 
@@ -13,19 +8,22 @@ export default Ember.Component.extend({
 
   edit: false,
   user: null,
-  role: { 'id': 'user', 'name': 'User' },
-  roles: roles,
+  role: null,
   provider: null,
-  providers: [],
   client: null,
+  roles: [],
+  providers: [],
   clients: [],
 
   showProviders: false,
   showClients: false,
 
+  searchRole: function() {
+    this.set('roles', this.get('store').findAll('role'));
+  },
   selectRole(role) {
-    this.get('user').set('role', role.id);
-    //this.set('role', role);
+    this.set('role', role);
+    this.get('user').set('role', role);
     this.set('showProviders', Ember.String.w("provider_admin client_admin").includes(role.id));
     this.set('showClients', Ember.String.w("client_admin").includes(role.id));
 
@@ -41,12 +39,13 @@ export default Ember.Component.extend({
 // let comment = this.store.peekRecord('comment', 1);
 // comment.set('post', post);
     //this.set('provider', this.get('store').peekRecord('provider', provider.id));
+    this.set('provider', provider)
     this.get('user').set('provider', provider);
-    console.log(this.get('user').get('provider'))
     this.set('showClients', Ember.String.w("client_admin").includes(this.get('role.id')));
   },
   selectClient(client) {
     //this.set('client', this.get('store').peekRecord('client', client.id));
+    this.set('client', client)
     this.get('user').set('client', client);
   },
 
@@ -54,7 +53,10 @@ export default Ember.Component.extend({
     edit: function(user) {
       this.set('edit', true);
       this.set('user', user);
-      //this.selectRole(user.get('role'));
+      this.searchRole();
+      this.selectRole(user.get('role'));
+      this.selectProvider(user.get('provider'));
+
       if (this.get('showProviders')) {
         //this.selectProvider(user.get('provider').get('id'));
         this.set('providers', this.get('store').query('provider', { 'page[size]': 10 }));
@@ -62,6 +64,9 @@ export default Ember.Component.extend({
       if (this.get('showClients')) {
         this.set('clients', this.get('store').query('client', { 'page[size]': 10 }));
       }
+    },
+    searchRole: function() {
+      this.searchRole();
     },
     searchProvider: function(query) {
       this.set('providers', this.get('store').query('provider', { 'query': query, 'page[size]': 10 }));

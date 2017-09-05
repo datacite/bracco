@@ -1,18 +1,18 @@
 {{#aitem.title}}
-  {{user.creditName}} {{#if user.role}}<span class='small pull-right'>{{humanize user.role}}</span>{{/if}}
+  {{user.creditName}} {{#if user.role}}<span class='small pull-right'>{{user.role.name}}</span>{{/if}}
 {{/aitem.title}}
 
 {{#aitem.body}}
   {{#if edit}}
     {{#bs-form formLayout="vertical" model=this onSubmit=(action "submit") as |form|}}
-      {{#form.element controlType="power-select" property="role" label="Role" options=roles optionLabelPath="name" destination=user.role as |el|}}
+      {{#form.element controlType="power-select" property="role" label="Role" options=roles optionLabelPath="name" destination=role as |el|}}
         {{#el.control onChange=(action "selectRole") searchEnabled=false allowClear=false as |item|}}
           {{item.name}}
         {{/el.control}}
       {{/form.element}}
 
       {{#if showProviders}}
-        {{#form.element controlType="power-select" property="provider" label="Provider" optionLabelPath="name" options=providers destination=user.provider as |el|}}
+        {{#form.element controlType="power-select" property="provider" label="Provider" optionLabelPath="name" options=providers destination=provider as |el|}}
           {{#el.control onChange=(action "selectProvider") search=(action "searchProvider") searchField="name" as |item|}}
             {{item.name}}
           {{/el.control}}
@@ -20,7 +20,7 @@
       {{/if}}
 
       {{#if showClients}}
-        {{#form.element controlType="power-select" property="data-center" label="Client" options=clients destination=user.client as |el|}}
+        {{#form.element controlType="power-select" property="data-center" label="Client" options=clients destination=client as |el|}}
           {{#el.control search=(action "searchClient") searchField="name" as |item|}}
             {{item.name}}
           {{/el.control}}
@@ -43,7 +43,7 @@
 
     {{#if user.role}}
       <h5>Role</h5>
-      {{humanize user.role}}
+      {{user.role.name}}
     {{/if}}
 
     {{#if (and user.provider (eq link "users"))}}

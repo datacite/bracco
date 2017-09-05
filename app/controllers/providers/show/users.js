@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  queryParams: ['query', 'role', 'page', 'perPage'],
+  queryParams: ['query', 'role-id', 'page', 'perPage'],
   query: null,
-  role: null
+  'role-id': null
 });
