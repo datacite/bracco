@@ -37,7 +37,7 @@ install:
 
 script:
   # - ember test
-  - ember build --environment=${NPM_ENV}
+  - ember build --environment=production
 
 deploy:
   provider: s3
