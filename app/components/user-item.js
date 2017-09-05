@@ -18,14 +18,17 @@ export default Ember.Component.extend({
   showProviders: false,
   showClients: false,
 
-  searchRole: function() {
+  searchRole: function(link) {
     this.set('roles', this.get('store').findAll('role'));
+    // console.log(link)
+    // this.set('roles', this.get('store').query('role', { filter: { link: link } }));
   },
   selectRole(role) {
     this.set('role', role);
     this.get('user').set('role', role);
-    this.set('showProviders', Ember.String.w("provider_admin client_admin").includes(role.id));
-    this.set('showClients', Ember.String.w("client_admin").includes(role.id));
+
+    this.set('showProviders', Ember.String.w("provider_admin client_admin user").includes(role.get('id')));
+    this.set('showClients', Ember.String.w("client_admin").includes(role.get('id')));
 
     if (!this.get('showProviders')) {
       this.get('user').set('provider', null);
@@ -35,44 +38,44 @@ export default Ember.Component.extend({
     }
   },
   selectProvider(provider) {
-//     let post = this.store.peekRecord('post', 1);
-// let comment = this.store.peekRecord('comment', 1);
-// comment.set('post', post);
-    //this.set('provider', this.get('store').peekRecord('provider', provider.id));
     this.set('provider', provider)
     this.get('user').set('provider', provider);
-    this.set('showClients', Ember.String.w("client_admin").includes(this.get('role.id')));
+    this.set('showClients', Ember.String.w("client_admin").includes(this.get('user').get('id')));
+
+    this.searchClient('');
+    this.selectClient(this.get('user').get('client'));
   },
   selectClient(client) {
-    //this.set('client', this.get('store').peekRecord('client', client.id));
     this.set('client', client)
     this.get('user').set('client', client);
   },
+  searchClient(query) {
+    this.set('clients', this.get('store').query('client', { 'query': query, 'provider-id': this.get('provider').get('id'), 'page[size]': 10 }));
+  },
 
   actions: {
-    edit: function(user) {
+    edit: function(user, link) {
       this.set('edit', true);
       this.set('user', user);
-      this.searchRole();
+      this.searchRole(link);
       this.selectRole(user.get('role'));
       this.selectProvider(user.get('provider'));
 
       if (this.get('showProviders')) {
-        //this.selectProvider(user.get('provider').get('id'));
         this.set('providers', this.get('store').query('provider', { 'page[size]': 10 }));
       }
       if (this.get('showClients')) {
         this.set('clients', this.get('store').query('client', { 'page[size]': 10 }));
       }
     },
-    searchRole: function() {
-      this.searchRole();
+    searchRole: function(link) {
+      this.searchRole(link);
     },
     searchProvider: function(query) {
       this.set('providers', this.get('store').query('provider', { 'query': query, 'page[size]': 10 }));
     },
     searchClient: function(query) {
-      this.set('clients', this.get('store').query('client', { 'query': query, 'provider-id': this.get('provider').get('id'), 'page[size]': 10 }));
+      this.searchClient(query);
     },
     submit: function() {
       this.get('user').save();
@@ -88,6 +91,7 @@ export default Ember.Component.extend({
       this.selectProvider(provider);
     },
     selectClient(client) {
+      console.log(client)
       this.selectClient(client);
     }
   }

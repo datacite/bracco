@@ -4,14 +4,14 @@
 
 {{#aitem.body}}
   {{#if edit}}
-    {{#bs-form formLayout="vertical" model=this onSubmit=(action "submit") as |form|}}
+    {{#bs-form formLayout="vertical" model=this as |form|}}
       {{#form.element controlType="power-select" property="role" label="Role" options=roles optionLabelPath="name" destination=role as |el|}}
         {{#el.control onChange=(action "selectRole") searchEnabled=false allowClear=false as |item|}}
           {{item.name}}
         {{/el.control}}
       {{/form.element}}
 
-      {{#if showProviders}}
+      {{#if (and showProviders (eq link "users"))}}
         {{#form.element controlType="power-select" property="provider" label="Provider" optionLabelPath="name" options=providers destination=provider as |el|}}
           {{#el.control onChange=(action "selectProvider") search=(action "searchProvider") searchField="name" as |item|}}
             {{item.name}}
@@ -19,9 +19,9 @@
         {{/form.element}}
       {{/if}}
 
-      {{#if showClients}}
+      {{#if (and showClients (not-eq link "clients.show.users"))}}
         {{#form.element controlType="power-select" property="data-center" label="Client" options=clients destination=client as |el|}}
-          {{#el.control search=(action "searchClient") searchField="name" as |item|}}
+          {{#el.control onChange=(action "selectClient") search=(action "searchClient") searchField="name" as |item|}}
             {{item.name}}
           {{/el.control}}
         {{/form.element}}
@@ -30,7 +30,7 @@
       <div class="pseudo-footer">
         <div class="btn-toolbar pull-right">
           <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
-          <button type="submit" class="btn btn-sm btn-fill">Save</button>
+          <button {{action "submit"}} type="submit" class="btn btn-sm btn-fill">Save</button>
         </div>
         <div class="clearfix"/>
       </div>
@@ -63,7 +63,7 @@
       <a href="{{user.id}}">{{fa-icon "external-link"}} {{user.id}}</a>
       <div class="btn-toolbar pull-right">
         <div class="btn-group btn-group-sm">
-          <button {{action "edit" user}} class="btn-link">{{fa-icon "pencil"}}</button>
+          <button {{action "edit" user link}} class="btn-link">{{fa-icon "pencil"}}</button>
         </div>
       </div>
       <div class="clearfix"/>
