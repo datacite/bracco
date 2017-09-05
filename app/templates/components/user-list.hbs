@@ -7,7 +7,7 @@
     {{#bs-accordion as |acc|}}
       {{#each model as |user|}}
         {{#acc.item value=user.orcid as |aitem|}}
-          {{user-item user=user aitem=aitem}}
+          {{user-item user=user link=link aitem=aitem}}
         {{/acc.item}}
       {{/each}}
     {{/bs-accordion}}
@@ -37,7 +37,7 @@
                 {{#link-to link (query-params role=role.id)}}{{fa-icon "square-o"}}{{/link-to}}
               {{/if}}
               <div class="facet-title">{{role.title}}</div>
-              <span class="number pull-right">{{role.count}}</span>
+              <span class="number pull-right">{{format-number role.count}}</span>
               <div class="clearfix"/>
             </li>
           {{/each}}

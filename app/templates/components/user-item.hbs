@@ -46,9 +46,14 @@
       {{humanize user.role}}
     {{/if}}
 
-    {{#if user.provider}}
+    {{#if (and user.provider (eq link "users"))}}
       <h5>Provider</h5>
-      {{#link-to "providers.show" user.provider.id}}{{user.provider.name}}{{/link-to}}
+      {{#link-to "providers.show.users" user.provider.id}}{{user.provider.name}}{{/link-to}}
+    {{/if}}
+
+    {{#if (and user.client (not-eq link "clients.show.users"))}}
+      <h5>Client</h5>
+      {{#link-to "clients.show.users" user.client.id}}{{user.client.name}}{{/link-to}}
     {{/if}}
 
     <h5>Account created</h5>
