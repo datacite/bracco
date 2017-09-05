@@ -37,7 +37,7 @@ install:
 
 script:
   # - ember test
-  - ember build --environment=production
+  - travis_wait ember build --environment=production
 
 deploy:
   provider: s3
