@@ -1,8 +1,8 @@
 import { moduleFor, test } from 'ember-qunit';
 
-moduleFor('ability:data-center', 'Unit | Ability | data-center', {
+moduleFor('ability:doi', 'Unit | Ability | doi', {
   // Specify the other units that are required for this test.
-  // needs: ['service:foo']
+  needs: ['service:currentUser']
 });
 
 // Replace this with your real tests.
