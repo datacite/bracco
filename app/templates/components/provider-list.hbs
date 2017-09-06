@@ -11,9 +11,15 @@
             {{#link-to "providers.show" provider.id}}{{provider.name}}{{/link-to}}
           </h3>
 
-          <div class="country">
-            {{provider.country}}
-          </div>
+          {{#if provider.contact}}
+            <h5>Contact</h5>
+            {{provider.contact}}
+          {{/if}}
+
+          {{#if provider.email}}
+            <h5>Email</h5>
+            <a href="{{provider.email}}">{{provider.email}}</a>
+          {{/if}}
         </div>
         <div class="panel-footer">
           {{provider.uid}}

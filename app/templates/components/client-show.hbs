@@ -1,0 +1,46 @@
+{{#if edit}}
+  {{#bs-form formLayout="vertical" model=model onSubmit=(action "submit" model) as |form|}}
+    {{form.element controlType="text" label="Name" placeholder="Name" property="name" required=true}}
+    {{form.element controlType="text" label="Contact" placeholder="Contact" property="contact"}}
+    {{form.element controlType="email" label="Email" placeholder="Email" property="email"}}
+    {{form.element controlType="textarea" label="Domains" placeholder="Domains" property="domains"}}
+
+    <div class="pseudo-footer">
+      <div class="btn-toolbar pull-right">
+        <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
+        <button type="submit" class="btn btn-sm btn-fill">Save</button>
+      </div>
+      <div class="clearfix"/>
+    </div>
+  {{/bs-form}}
+{{else}}
+  {{#if model.contact}}
+    <h5>Contact</h5>
+    {{model.contact}}
+  {{/if}}
+
+  {{#if model.email}}
+    <h5>Email</h5>
+    <a href="{{model.email}}">{{model.email}}</a>
+  {{/if}}
+
+  {{#if model.domainList}}
+    <h5>
+      Domains
+      <span>{{fa-icon "question-circle-o"}}
+        {{#bs-tooltip placement="top" viewportPadding=10}}URLs for DOIs must point to one of these domains.{{/bs-tooltip}}
+      </span>
+    </h5>
+    {{#each model.domainList as |domain|}}
+      {{domain}}<br/>
+    {{/each}}
+  {{/if}}
+
+  <div class="pseudo-footer">
+    {{model.uid}}
+    <span>{{fa-icon "question-circle-o"}}
+      {{#bs-tooltip placement="top" viewportPadding=10}}Each client has a unique ID that starts with the DOI service provider ID.{{/bs-tooltip}}
+    </span>
+    <button {{action "edit" model}} class="btn-link">{{fa-icon "pencil"}}</button>
+  </div>
+{{/if}}

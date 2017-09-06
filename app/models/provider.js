@@ -11,6 +11,7 @@ export default DS.Model.extend({
   country: DS.attr('string'),
   year: DS.attr('number'),
   logoUrl: DS.attr('string'),
+  contact: DS.attr('string'),
   email: DS.attr('string'),
   website: DS.attr('string'),
   phone: DS.attr('string'),

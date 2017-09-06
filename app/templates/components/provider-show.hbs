@@ -1,0 +1,33 @@
+{{#if edit}}
+  {{#bs-form formLayout="vertical" model=model onSubmit=(action "submit" model) as |form|}}
+    {{form.element controlType="text" label="Name" placeholder="Name" property="name" required=true}}
+    {{form.element controlType="text" label="Contact" placeholder="Contact" property="contact"}}
+    {{form.element controlType="email" label="Email" placeholder="Email" property="email"}}
+
+    <div class="pseudo-footer">
+      <div class="btn-toolbar pull-right">
+        <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
+        <button type="submit" class="btn btn-sm btn-fill">Save</button>
+      </div>
+      <div class="clearfix"/>
+    </div>
+  {{/bs-form}}
+{{else}}
+  {{#if model.contact}}
+    <h5>Contact</h5>
+    {{model.contact}}
+  {{/if}}
+
+  {{#if model.email}}
+    <h5>Email</h5>
+    <a href="{{model.email}}">{{model.email}}</a>
+  {{/if}}
+
+  <div class="pseudo-footer">
+    {{model.uid}}
+    <span>{{fa-icon "question-circle-o"}}
+      {{#bs-tooltip placement="top" viewportPadding=10}}Each provider has a unique ID.{{/bs-tooltip}}
+    </span>
+    <button {{action "edit" model}} class="btn-link">{{fa-icon "pencil"}}</button>
+  </div>
+{{/if}}

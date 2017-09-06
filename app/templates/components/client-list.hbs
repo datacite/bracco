@@ -9,6 +9,28 @@
           <h3 class="work">
             {{#link-to "clients.show" client.id}}{{client.name}}{{/link-to}}
           </h3>
+
+          {{#if client.contact}}
+            <h5>Contact</h5>
+            {{client.contact}}
+          {{/if}}
+
+          {{#if client.email}}
+            <h5>Email</h5>
+            <a href="{{client.email}}">{{client.email}}</a>
+          {{/if}}
+
+          {{#if client.domainList}}
+            <h5>
+              Domains
+              <span>{{fa-icon "question-circle-o"}}
+                {{#bs-tooltip placement="top" viewportPadding=10}}URLs for DOIs must point to one of these domains.{{/bs-tooltip}}
+              </span>
+            </h5>
+            {{#each client.domainList as |domain|}}
+              {{domain}}<br/>
+            {{/each}}
+          {{/if}}
         </div>
         <div class="panel-footer">
           {{client.uid}}
