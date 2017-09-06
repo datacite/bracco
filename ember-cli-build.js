@@ -51,13 +51,13 @@ module.exports = function(defaults) {
 
     'ember-bootstrap': {
       'bootstrapVersion': 3,
-      'importBootstrapFont': true,
-      'importBootstrapCSS': true
-    },
-
-    'ember-power-select': {
-      'theme': 'bootstrap'
+      'importBootstrapFont': false,
+      'importBootstrapCSS': false
     }
+
+    // 'ember-power-select': {
+    //   'theme': 'bootstrap'
+    // }
   });
 
   // Use `app.import` to add additional libraries to the generated
