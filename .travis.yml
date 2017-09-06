@@ -37,7 +37,7 @@ install:
 
 script:
   # - ember test
-  - travis_wait ember build --environment=production
+  - DEBUG=broccoli* ember build --environment=production
 
 deploy:
   provider: s3
