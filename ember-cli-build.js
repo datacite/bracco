@@ -9,6 +9,10 @@ module.exports = function(defaults) {
       includePolyfill: true
     },
 
+    babel: {
+      sourceMaps: 'inline'
+    },
+
     'ember-bootstrap': {
       importBootstrapCSS: false,
       whitelist: ['bs-popover',
