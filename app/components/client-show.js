@@ -16,8 +16,8 @@ export default Ember.Component.extend({
       this.set('client', client);
       this.set('delete', true);
     },
-    submit: function() {
-      this.get('client').save();
+    submit: function(client) {
+      client.save();
       this.set('edit', false);
     },
     destroy: function(link) {
