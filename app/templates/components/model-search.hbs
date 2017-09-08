@@ -1,16 +1,14 @@
-{{#if (gt model.meta.total 0)}}
-  <form {{action "doSearch" query on="submit"}} class="form-horizontal">
-    <div id="search" class="input-group">
-      {{input name="query" value=query class="form-control" placeholder=placeholder key-up=(action 'doSearch')}}
-      {{#if hasInput}}
-        <span id="search-clear" title="Clear" aria-label="Clear" {{action 'clear'}}>{{fa-icon "times-circle"}}</span>
-      {{/if}}
-      <div class="input-group-btn">
-        <button type="submit" class="btn btn-primary hidden-xs">Search</button>
-      </div>
+<form {{action "doSearch" query on="submit"}} class="form-horizontal">
+  <div id="search" class="input-group">
+    {{input name="query" value=query class="form-control" placeholder=placeholder key-up=(action 'doSearch')}}
+    {{#if hasInput}}
+      <span id="search-clear" title="Clear" aria-label="Clear" {{action 'clear'}}>{{fa-icon "times-circle"}}</span>
+    {{/if}}
+    <div class="input-group-btn">
+      <button type="submit" class="btn btn-primary hidden-xs">Search</button>
     </div>
-  </form>
-{{/if}}
+  </div>
+</form>
 {{#if (gt model.meta.total 1)}}
   <h3 class="{{model.modelName}}-results">{{pluralize (format-number model.meta.total) modelName}}</h3>
 {{/if}}
