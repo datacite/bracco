@@ -1,12 +1,13 @@
 {{#if new}}
   <div class='col-md-9'>
-    {{#bs-form formLayout="vertical" model=model onSubmit=(action "submit" model) as |form|}}
+    {{#bs-form formLayout="vertical" model=client onSubmit=(action "submit" client model) as |form|}}
       {{form.element controlType="text" label="ID" placeholder="ID" property="id"}}
       {{form.element controlType="text" label="Name" placeholder="Name" property="name"}}
       {{form.element controlType="text" label="Contact" placeholder="Contact" property="contact"}}
       {{form.element controlType="email" label="Email" placeholder="Email" property="email"}}
       {{form.element controlType="textarea" label="Domains" placeholder="Domains" property="domains"}}
-
+      {{form.element controlType="checkbox" label="Account is active" property="isActive"}}
+      
       <div class="pseudo-footer">
         <div class="btn-toolbar pull-right">
           <button {{action "cancel"}} class="btn btn-sm">Cancel</button>

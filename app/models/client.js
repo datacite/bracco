@@ -22,11 +22,12 @@ export default DS.Model.extend(Validations, {
   contact: DS.attr('string'),
   email: DS.attr('string'),
   year: DS.attr('number'),
+  isActive: DS.attr('boolean'),
   created: DS.attr('date'),
   updated: DS.attr('date'),
 
   uid: Ember.computed('id', function() {
-    return `${this.get('id').toUpperCase()}`;
+    return this.get('id').toUpperCase();
   }),
   domainList: Ember.computed('domains', function() {
     return this.get('domains').split(",").map(function(item) {

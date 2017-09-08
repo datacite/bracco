@@ -1,7 +1,17 @@
 import Ember from 'ember';
 import DS from 'ember-data';
+import { validator, buildValidations } from 'ember-cp-validations';
 
-export default DS.Model.extend({
+const Validations = buildValidations({
+  name: validator('presence', true),
+  contact: validator('presence', true),
+  email: [
+    validator('presence', true),
+    validator('format', { type: 'email' })
+  ]
+});
+
+export default DS.Model.extend(Validations, {
   clients: DS.hasMany('client'),
   users: DS.hasMany('user'),
 
@@ -15,10 +25,11 @@ export default DS.Model.extend({
   email: DS.attr('string'),
   website: DS.attr('string'),
   phone: DS.attr('string'),
+  isActive: DS.attr('boolean'),
   created: DS.attr('date'),
   updated: DS.attr('date'),
 
   uid: Ember.computed('id', function() {
-    return `${this.get('id').toUpperCase()}`;
+    return this.get('id').toUpperCase();
   })
 });

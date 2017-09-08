@@ -4,6 +4,7 @@
     {{form.element controlType="text" label="Contact" placeholder="Contact" property="contact"}}
     {{form.element controlType="email" label="Email" placeholder="Email" property="email"}}
     {{form.element controlType="textarea" label="Domains" placeholder="Domains" property="domains"}}
+    {{form.element controlType="checkbox" label="Account is active" property="isActive"}}
 
     <div class="pseudo-footer">
       <div class="btn-toolbar pull-right">
@@ -54,7 +55,7 @@
       {{#bs-tooltip placement="top" viewportPadding=10}}Each client has a unique ID that starts with the DOI service provider ID.{{/bs-tooltip}}
     </span>
     <button {{action "edit" model}} class="btn-link btn-icon">{{fa-icon "pencil"}}</button>
-    {{#if (not model.prefixes)}}
+    {{#if isDeletable}}
       <button {{action "delete" model}} class="btn-link btn-icon">{{fa-icon "trash"}}</button>
     {{/if}}
   </div>

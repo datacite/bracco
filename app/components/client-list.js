@@ -9,12 +9,13 @@ export default Ember.Component.extend({
   new: false,
 
   actions: {
-    new: function(client) {
-      this.set('client', client);
+    new: function(client, provider) {
+      console.log(provider)
+      this.set('client', this.get('store').createRecord('client'));
       this.set('new', true);
     },
     submit: function(client) {
-      //client.createRecord('post',
+      client.save();
       this.set('new', false);
     },
     cancel: function() {

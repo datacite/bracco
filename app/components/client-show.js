@@ -6,10 +6,17 @@ export default Ember.Component.extend({
   edit: false,
   delete: false,
   client: null,
+  isDeletable: false,
+
+  setIsDeletable() {
+    console.log(this.get('client').get('prefixes'))
+    this.set('isDeletable', Ember.isBlank(this.get('client').get('prefixes')));
+  },
 
   actions: {
     edit: function(client) {
       this.set('client', client);
+      this.setIsDeletable();
       this.set('edit', true);
     },
     delete: function(client) {

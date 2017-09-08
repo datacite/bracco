@@ -1,97 +1,120 @@
-<div class='col-md-9 panel-list' id="content">
-  {{#if searchable}}
-    {{model-search model=model}}
-  {{/if}}
+{{#if new}}
+  <div class='col-md-9'>
+    {{#bs-form formLayout="vertical" model=provider onSubmit=(action "submit" provider model) as |form|}}
+      {{form.element controlType="text" label="ID" placeholder="ID" property="id"}}
+      {{form.element controlType="text" label="Name" placeholder="Name" property="name"}}
+      {{form.element controlType="text" label="Contact" placeholder="Contact" property="contact"}}
+      {{form.element controlType="email" label="Email" placeholder="Email" property="email"}}
+      {{form.element controlType="checkbox" label="Account is active" property="isActive"}}
 
-  {{#if model}}
-    {{#each model as |provider|}}
-      <div class="panel panel-transparent">
+      <div class="pseudo-footer">
+        <div class="btn-toolbar pull-right">
+          <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
+          <button type="submit" class="btn btn-sm btn-fill">Save</button>
+        </div>
+        <div class="clearfix"/>
+      </div>
+    {{/bs-form}}
+  </div>
+{{else}}
+  <div class='col-md-9 panel-list' id="content">
+    {{#if searchable}}
+      {{model-search model=model}}
+    {{/if}}
+
+    {{#if model}}
+      {{#each model as |provider|}}
+        <div class="panel panel-transparent">
+          <div class="panel-body">
+            <h3 class="work">
+              {{#link-to "providers.show" provider.id}}{{provider.name}}{{/link-to}}
+              {{#if (not provider.isActive)}}
+                <span class="small icon-warning">account not active</span>
+              {{/if}}
+            </h3>
+
+            {{#if provider.contact}}
+              <h5>Contact</h5>
+              {{provider.contact}}
+            {{/if}}
+
+            {{#if provider.email}}
+              <h5>Email</h5>
+              <a href="{{provider.email}}">{{provider.email}}</a>
+            {{/if}}
+          </div>
+          <div class="panel-footer">
+            {{provider.uid}}
+            <span>{{fa-icon "question-circle-o"}}
+              {{#bs-tooltip placement="top" viewportPadding=10}}Each provider has a unique ID.{{/bs-tooltip}}
+            </span>
+          </div>
+        </div>
+      {{/each}}
+      <div class="text-center">
+        {{#if (gt model.meta.total_pages 1)}}
+          {{page-numbers content=model showFL=true}}
+        {{/if}}
+      </div>
+    {{else}}
+      {{#bs-alert dismissible=false type="warning"}}
+        No providers found.
+      {{/bs-alert}}
+    {{/if}}
+  </div>
+
+  <div class='col-md-3'>
+    {{#if (can "create provider")}}
+      <div class="panel facets">
         <div class="panel-body">
-          <h3 class="work">
-            {{#link-to "providers.show" provider.id}}{{provider.name}}{{/link-to}}
-          </h3>
-
-          {{#if provider.contact}}
-            <h5>Contact</h5>
-            {{provider.contact}}
-          {{/if}}
-
-          {{#if provider.email}}
-            <h5>Email</h5>
-            <a href="{{provider.email}}">{{provider.email}}</a>
-          {{/if}}
-        </div>
-        <div class="panel-footer">
-          {{provider.uid}}
-          <span>{{fa-icon "question-circle-o"}}
-            {{#bs-tooltip placement="top" viewportPadding=10}}Each provider has a unique ID.{{/bs-tooltip}}
-          </span>
+          <div class="pull-right">
+            <button {{action "new"}} class="btn btn-warning">{{fa-icon "plus"}}Add Provider</button>
+          </div>
         </div>
       </div>
-    {{/each}}
-    <div class="text-center">
-      {{#if (gt model.meta.total_pages 1)}}
-        {{page-numbers content=model showFL=true}}
-      {{/if}}
-    </div>
-  {{else}}
-    {{#bs-alert dismissible=false type="warning"}}
-      No providers found.
-    {{/bs-alert}}
-  {{/if}}
-</div>
+    {{/if}}
 
-<div class='col-md-3'>
-  {{#if (can "write provider")}}
-    <div class="panel facets">
-      <div class="panel-body">
-        <div class="pull-right">
-          {{#link-to "providers.new" class="btn btn-warning"}}{{fa-icon "plus"}}Add Provider{{/link-to}}
+    {{#if model.meta.regions}}
+      <div class="panel facets">
+        <div class="panel-body">
+          <h4>Regions</h4>
+          <ul>
+            {{#each model.meta.regions as |region|}}
+              <li>
+                {{#if model.otherParams.region}}
+                  {{#link-to "providers" (query-params region='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+                {{else}}
+                  {{#link-to "providers" (query-params region=region.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                {{/if}}
+                <div class="facet-title">{{region.title}}</div>
+                <span class="number pull-right">{{region.count}}</span>
+                <div class="clearfix"/>
+              </li>
+            {{/each}}
+          </ul>
         </div>
       </div>
-    </div>
-  {{/if}}
-
-  {{#if model.meta.regions}}
-    <div class="panel facets">
-      <div class="panel-body">
-        <h4>Regions</h4>
-        <ul>
-          {{#each model.meta.regions as |region|}}
-            <li>
-              {{#if model.otherParams.region}}
-                {{#link-to "providers" (query-params region='')}}{{fa-icon "check-square-o"}}{{/link-to}}
-              {{else}}
-                {{#link-to "providers" (query-params region=region.id)}}{{fa-icon "square-o"}}{{/link-to}}
-              {{/if}}
-              <div class="facet-title">{{region.title}}</div>
-              <span class="number pull-right">{{region.count}}</span>
-              <div class="clearfix"/>
-            </li>
-          {{/each}}
-        </ul>
+    {{/if}}
+    {{#if model.meta.years}}
+      <div class="panel facets">
+        <div class="panel-body">
+          <h4>Year joined</h4>
+          <ul>
+            {{#each model.meta.years as |year|}}
+              <li>
+                {{#if model.otherParams.year}}
+                  {{#link-to "providers" (query-params year='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+                {{else}}
+                  {{#link-to "providers" (query-params year=year.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                {{/if}}
+                <div class="facet-title">{{year.title}}</div>
+                <span class="number pull-right">{{year.count}}</span>
+                <div class="clearfix"/>
+              </li>
+            {{/each}}
+          </ul>
+        </div>
       </div>
-    </div>
-  {{/if}}
-  {{#if model.meta.years}}
-    <div class="panel facets">
-      <div class="panel-body">
-        <h4>Year joined</h4>
-        <ul>
-          {{#each model.meta.years as |year|}}
-            <li>
-              {{#if model.otherParams.year}}
-                {{#link-to "providers" (query-params year='')}}{{fa-icon "check-square-o"}}{{/link-to}}
-              {{else}}
-                {{#link-to "providers" (query-params year=year.id)}}{{fa-icon "square-o"}}{{/link-to}}
-              {{/if}}
-              <div class="facet-title">{{year.title}}</div>
-              <span class="number pull-right">{{year.count}}</span>
-              <div class="clearfix"/>
-            </li>
-          {{/each}}
-        </ul>
-      </div>
-    </div>
-  {{/if}}
-</div>
+    {{/if}}
+  </div>
+{{/if}}
