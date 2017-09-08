@@ -2460,14 +2460,6 @@ crypto@0.0.3:
   version "0.0.3"
   resolved "https://registry.yarnpkg.com/crypto/-/crypto-0.0.3.tgz#470a81b86be4c5ee17acc8207a1f5315ae20dbb0"
 
-d3-plugins-dist@^3.0.0:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/d3-plugins-dist/-/d3-plugins-dist-3.2.0.tgz#61ae7e531258ceb76fca4216055e1d7e59c4e59b"
-
-d3@^3.0.0:
-  version "3.5.17"
-  resolved "https://registry.yarnpkg.com/d3/-/d3-3.5.17.tgz#bc46748004378b21a360c9fc7cf5231790762fb8"
-
 d@1:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/d/-/d-1.0.0.tgz#754bb5bfe55451da69a58b94d45f4c5b0462d58f"
@@ -2769,13 +2761,6 @@ ember-assign-polyfill@^2.0.1:
     ember-cli-babel "^6.6.0"
     ember-cli-version-checker "^1.2.0"
 
-ember-async-button@1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/ember-async-button/-/ember-async-button-1.0.2.tgz#c2d3575f9f464d710adc97152536449058040b96"
-  dependencies:
-    ember-cli-babel "^5.1.6"
-    ember-cli-htmlbars "^1.0.3"
-
 ember-basic-dropdown@^0.33.1:
   version "0.33.5"
   resolved "https://registry.yarnpkg.com/ember-basic-dropdown/-/ember-basic-dropdown-0.33.5.tgz#39986d4cc6732edf43fb51eabb70790e99e8ae2c"
@@ -2784,6 +2769,12 @@ ember-basic-dropdown@^0.33.1:
     ember-cli-htmlbars "^2.0.3"
     ember-native-dom-helpers "^0.5.3"
     ember-wormhole "^0.5.2"
+
+ember-bootstrap-cp-validations@1.0.0-alpha.0:
+  version "1.0.0-alpha.0"
+  resolved "https://registry.yarnpkg.com/ember-bootstrap-cp-validations/-/ember-bootstrap-cp-validations-1.0.0-alpha.0.tgz#5934d5abf8704ea126165f6d56ee7b907b562d26"
+  dependencies:
+    ember-cli-babel "^5.1.5"
 
 ember-bootstrap-power-select@^1.0.0-alpha.1:
   version "1.0.0-alpha.1"
@@ -2858,7 +2849,7 @@ ember-cli-app-version@^3.0.0:
     ember-cli-htmlbars "^1.0.0"
     git-repo-version "0.4.1"
 
-ember-cli-babel@^5.0.0, ember-cli-babel@^5.1.5, ember-cli-babel@^5.1.6, ember-cli-babel@^5.1.7:
+ember-cli-babel@^5.1.5, ember-cli-babel@^5.1.6, ember-cli-babel@^5.1.7:
   version "5.2.4"
   resolved "https://registry.yarnpkg.com/ember-cli-babel/-/ember-cli-babel-5.2.4.tgz#5ce4f46b08ed6f6d21e878619fb689719d6e8e13"
   dependencies:
@@ -2969,18 +2960,6 @@ ember-cli-clipboard@^0.8.0:
     ember-cli-htmlbars "^2.0.2"
     fastboot-transform "0.1.1"
 
-ember-cli-d3@^1.1.7:
-  version "1.1.7"
-  resolved "https://registry.yarnpkg.com/ember-cli-d3/-/ember-cli-d3-1.1.7.tgz#1b79179e64c7021e08b897c38d6a36609b57091c"
-  dependencies:
-    broccoli-funnel "^1.0.0"
-    broccoli-merge-trees "^1.0.0"
-    d3 "^3.0.0"
-    d3-plugins-dist "^3.0.0"
-    ember-cli-babel "^5.0.0"
-    ember-cli-htmlbars "^1.0.0"
-    ember-getowner-polyfill "1.0.0"
-
 ember-cli-dependency-checker@^1.3.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/ember-cli-dependency-checker/-/ember-cli-dependency-checker-1.4.0.tgz#2b13f977e1eea843fc1a21a001be6ca5d4ef1942"
@@ -3040,7 +3019,7 @@ ember-cli-htmlbars@^1.0.0, ember-cli-htmlbars@^1.0.3:
     json-stable-stringify "^1.0.0"
     strip-bom "^2.0.0"
 
-ember-cli-htmlbars@^1.0.10, ember-cli-htmlbars@^1.1.1:
+ember-cli-htmlbars@^1.1.1:
   version "1.3.4"
   resolved "https://registry.yarnpkg.com/ember-cli-htmlbars/-/ember-cli-htmlbars-1.3.4.tgz#461289724b34af372a6a0c4b6635819156963353"
   dependencies:
@@ -3244,7 +3223,7 @@ ember-cli-valid-component-name@^1.0.0:
   dependencies:
     silent-error "^1.0.0"
 
-ember-cli-version-checker@^1.0.2, ember-cli-version-checker@^1.1.3, ember-cli-version-checker@^1.1.4, ember-cli-version-checker@^1.1.5, ember-cli-version-checker@^1.1.6, ember-cli-version-checker@^1.1.7, ember-cli-version-checker@^1.2.0, ember-cli-version-checker@^1.3.1:
+ember-cli-version-checker@^1.0.2, ember-cli-version-checker@^1.1.4, ember-cli-version-checker@^1.1.5, ember-cli-version-checker@^1.1.6, ember-cli-version-checker@^1.1.7, ember-cli-version-checker@^1.2.0, ember-cli-version-checker@^1.3.1:
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/ember-cli-version-checker/-/ember-cli-version-checker-1.3.1.tgz#0bc2d134c830142da64bf9627a0eded10b61ae72"
   dependencies:
@@ -3361,15 +3340,15 @@ ember-content-editable@^0.10.0:
   dependencies:
     ember-cli-babel "^5.1.6"
 
-ember-cp-validations@^3.4.0:
-  version "3.4.0"
-  resolved "https://registry.yarnpkg.com/ember-cp-validations/-/ember-cp-validations-3.4.0.tgz#941a302b8396eb7a8d86e0fc283402a74c0dac6e"
+ember-cp-validations@^3.4.1:
+  version "3.4.1"
+  resolved "https://registry.yarnpkg.com/ember-cp-validations/-/ember-cp-validations-3.4.1.tgz#8f70ba5f728527f54c3f5e0a24cf0c5a55ac295f"
   dependencies:
     ember-cli-babel "^6.6.0"
     ember-cli-version-checker "^2.0.0"
     ember-getowner-polyfill "^2.0.1"
     ember-require-module "^0.1.2"
-    ember-string-ishtmlsafe-polyfill "^1.1.0"
+    ember-string-ishtmlsafe-polyfill "^2.0.0"
     ember-validators "1.0.3"
     exists-sync "0.0.4"
     walk-sync "^0.3.1"
@@ -3446,30 +3425,6 @@ ember-font-awesome@^3.0.5:
     ember-cli-htmlbars "^1.1.1"
     font-awesome "^4.7.0"
 
-ember-form-for@^2.0.0-alpha.15:
-  version "2.0.0-alpha.17"
-  resolved "https://registry.yarnpkg.com/ember-form-for/-/ember-form-for-2.0.0-alpha.17.tgz#40de7bf82fc234423a2f44055e75b1043f71c26c"
-  dependencies:
-    ember-async-button "1.0.2"
-    ember-cli-babel "^5.1.7"
-    ember-cli-htmlbars "^1.0.10"
-    ember-invoke-action "1.4.0"
-    ember-one-way-controls "^2.0.0"
-    ember-runtime-enumerable-includes-polyfill "^2.0.0"
-
-ember-get-helper@~1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/ember-get-helper/-/ember-get-helper-1.1.0.tgz#ef970b199bc1b6a52e986cb744ddf05eb3793051"
-  dependencies:
-    ember-cli-babel "^5.1.6"
-    ember-cli-version-checker "^1.1.3"
-
-ember-getowner-polyfill@1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/ember-getowner-polyfill/-/ember-getowner-polyfill-1.0.0.tgz#f847ceabd97ab97e9e9d279c382400a4d407a9d6"
-  dependencies:
-    ember-cli-babel "^5.1.5"
-
 ember-getowner-polyfill@^1.2.2:
   version "1.2.5"
   resolved "https://registry.yarnpkg.com/ember-getowner-polyfill/-/ember-getowner-polyfill-1.2.5.tgz#ceff8a09897d0d7e05c821bb71666a95eb26dc92"
@@ -3499,12 +3454,6 @@ ember-inflector@^2.0.0:
   resolved "https://registry.yarnpkg.com/ember-inflector/-/ember-inflector-2.0.1.tgz#e9ac469ffa17992a43276bb1c9b8d87992b10d37"
   dependencies:
     ember-cli-babel "^6.0.0"
-
-ember-invoke-action@1.4.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/ember-invoke-action/-/ember-invoke-action-1.4.0.tgz#2899854bd755f9331ca86c902bf6d4dbf8bdfcb3"
-  dependencies:
-    ember-cli-babel "^5.1.6"
 
 ember-load-initializers@^1.0.0:
   version "1.0.0"
@@ -3555,16 +3504,6 @@ ember-native-dom-helpers@^0.5.3:
   dependencies:
     broccoli-funnel "^1.1.0"
     ember-cli-babel "^6.6.0"
-
-ember-one-way-controls@^2.0.0:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/ember-one-way-controls/-/ember-one-way-controls-2.0.1.tgz#45bd9367554f69e10fa37dfac8f1a6c72360a7f1"
-  dependencies:
-    ember-cli-babel "^6.0.0"
-    ember-cli-htmlbars "^2.0.1"
-    ember-get-helper "~1.1.0"
-    ember-invoke-action "1.4.0"
-    ember-runtime-enumerable-includes-polyfill "^2.0.0"
 
 ember-power-select-blockless@^0.3.1:
   version "0.3.1"
@@ -3682,11 +3621,10 @@ ember-source@~2.15.0:
     simple-dom "^0.3.0"
     simple-html-tokenizer "^0.4.1"
 
-ember-string-ishtmlsafe-polyfill@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/ember-string-ishtmlsafe-polyfill/-/ember-string-ishtmlsafe-polyfill-1.1.0.tgz#ecde33419ff912b91dd8acf0640eb74b9758408e"
+ember-string-ishtmlsafe-polyfill@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/ember-string-ishtmlsafe-polyfill/-/ember-string-ishtmlsafe-polyfill-2.0.0.tgz#38f17038c3451999e9f1db748e424d8831e85863"
   dependencies:
-    ember-cli-babel "^5.1.7"
     ember-cli-version-checker "^1.2.0"
 
 ember-test-helpers@^0.6.3:

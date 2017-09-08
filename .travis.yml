@@ -35,7 +35,7 @@ install:
 
 script:
   # - ember test
-  - ember build
+  - ember build --environment=production
 
 deploy:
   provider: s3

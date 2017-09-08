@@ -1,6 +1,6 @@
 {{#if edit}}
   {{#bs-form formLayout="vertical" model=model onSubmit=(action "submit" model) as |form|}}
-    {{form.element controlType="text" label="Name" placeholder="Name" property="name" required=true}}
+    {{form.element controlType="text" label="Name" placeholder="Name" property="name"}}
     {{form.element controlType="text" label="Contact" placeholder="Contact" property="contact"}}
     {{form.element controlType="email" label="Email" placeholder="Email" property="email"}}
     {{form.element controlType="textarea" label="Domains" placeholder="Domains" property="domains"}}
@@ -13,6 +13,18 @@
       <div class="clearfix"/>
     </div>
   {{/bs-form}}
+{{else if delete}}
+  <div class="alert alert-danger" role="alert">
+    Are you sure you want to delete this client? This action cannot be undone.
+  </div>
+
+  <div class="pseudo-footer">
+    <div class="btn-toolbar pull-right">
+      <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
+      <button {{action "destroy" link}} class="btn btn-sm btn-fill">Delete</button>
+    </div>
+    <div class="clearfix"/>
+  </div>
 {{else}}
   {{#if model.contact}}
     <h5>Contact</h5>
@@ -41,6 +53,9 @@
     <span>{{fa-icon "question-circle-o"}}
       {{#bs-tooltip placement="top" viewportPadding=10}}Each client has a unique ID that starts with the DOI service provider ID.{{/bs-tooltip}}
     </span>
-    <button {{action "edit" model}} class="btn-link">{{fa-icon "pencil"}}</button>
+    <button {{action "edit" model}} class="btn-link btn-icon">{{fa-icon "pencil"}}</button>
+    {{#if (not model.prefixes)}}
+      <button {{action "delete" model}} class="btn-link btn-icon">{{fa-icon "trash"}}</button>
+    {{/if}}
   </div>
 {{/if}}

@@ -1,7 +1,18 @@
 import Ember from 'ember';
 import DS from 'ember-data';
+import { validator, buildValidations } from 'ember-cp-validations';
 
-export default DS.Model.extend({
+const Validations = buildValidations({
+  name: validator('presence', true),
+  domains: validator('presence', true),
+  contact: validator('presence', true),
+  email: [
+    validator('presence', true),
+    validator('format', { type: 'email' })
+  ]
+});
+
+export default DS.Model.extend(Validations, {
   provider: DS.belongsTo('provider'),
   prefixes: DS.hasMany('prefix'),
   users: DS.hasMany('user'),
