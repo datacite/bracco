@@ -3,6 +3,17 @@ import DS from 'ember-data';
 import { validator, buildValidations } from 'ember-cp-validations';
 
 const Validations = buildValidations({
+  id: [
+    validator('presence', true),
+    validator('format', {
+      regex: /^[a-z]+$/,
+      message: 'The Provider ID can contain only upper case letters'
+    }),
+    validator('length', {
+      min: 2,
+      max: 8
+    })
+  ],
   name: validator('presence', true),
   contact: validator('presence', true),
   email: [

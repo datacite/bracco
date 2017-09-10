@@ -62,9 +62,7 @@
     <div class="pseudo-footer">
       <a href="{{user.id}}">{{fa-icon "external-link"}} {{user.id}}</a>
       <div class="btn-toolbar pull-right">
-        <div class="btn-group btn-group-sm">
-          <button {{action "edit" user link}} class="btn-link">{{fa-icon "pencil"}}</button>
-        </div>
+        <button {{action "edit" user link}} class="btn btn-sm btn-warning">{{fa-icon "pencil"}} Edit User</button>
       </div>
       <div class="clearfix"/>
     </div>

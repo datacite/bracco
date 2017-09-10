@@ -6,53 +6,15 @@
       {{index-header}}
 
       <div class="row">
-        <div class='col-sm-8 col-sm-offset-2'>
-          {{#each flashMessages.queue as |flash|}}
-            {{flash-message flash=flash}}
-          {{/each}}
+        <div class="col-md-9">
+          <div class="panel panel-transparent" id="content-member">
+            <div class="panel-body">
+              {{#each flashMessages.queue as |flash|}}
+                {{flash-message flash=flash}}
+              {{/each}}
 
-          <p>The current DataCite Metadata Store (<a href="https://mds.datacite.org">MDS</a>) will be renovated to become a new
-            DOI Registration Service, including all the functionalities needed to manage
-            DOI registration, members, clients, and prefixes. The service will provide stats, checks and reports.</p>
-          <p>This project is work in progress, check the status <a href="https://github.com/datacite/datacite/milestone/10">here</a>.</p>
-        </div>
-      </div>
-
-      <div class="row row-section">
-        <div class="col-sm-2 col-sm-offset-2 info">
-          <div class="icon icon-landing">
-            {{fa-icon "university"}}
-          </div>
-          <h3>Providers</h3>
-          <div class="description-centered">
-            <p>Information shown about your organization.</p>
-          </div>
-        </div>
-        <div class="col-sm-2 info">
-          <div class="icon icon-landing">
-            {{fa-icon "sitemap"}}
-          </div>
-          <h3>Clients</h3>
-          <div class="description-centered">
-            <p>If you are a member, manage your clients.</p>
-          </div>
-        </div>
-        <div class="col-sm-2 info">
-          <div class="icon icon-landing">
-            {{fa-icon "users"}}
-          </div>
-          <h3>Users</h3>
-          <div class="description-centered">
-            <p>Users who can access your DOI registration service.</p>
-          </div>
-        </div>
-        <div class="col-sm-2 info">
-          <div class="icon icon-landing">
-            {{fa-icon "file-text"}}
-          </div>
-          <h3>DOIs</h3>
-          <div class="description-centered">
-            <p>Register and manage DOIs and their metadata.</p>
+              {{index-show}}
+            </div>
           </div>
         </div>
       </div>

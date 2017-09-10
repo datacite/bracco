@@ -3,6 +3,17 @@ import DS from 'ember-data';
 import { validator, buildValidations } from 'ember-cp-validations';
 
 const Validations = buildValidations({
+  id: [
+    validator('presence', true),
+    validator('format', {
+      regex: /^[a-z0-9\.]+$/,
+      message: 'The Client ID can contain only upper case letters and numbers, and must start with the Provider ID'
+    }),
+    validator('length', {
+      min: 5,
+      max: 17
+    })
+  ],
   name: validator('presence', true),
   domains: validator('presence', true),
   contact: validator('presence', true),
@@ -26,12 +37,12 @@ export default DS.Model.extend(Validations, {
   created: DS.attr('date'),
   updated: DS.attr('date'),
 
-  uid: Ember.computed('id', function() {
-    return this.get('id').toUpperCase();
-  }),
   domainList: Ember.computed('domains', function() {
     return this.get('domains').split(",").map(function(item) {
       return item.trim();
     });
+  }),
+  uid: Ember.computed('id', function() {
+    return this.get('id').toUpperCase();
   })
 });

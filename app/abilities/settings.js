@@ -4,6 +4,7 @@ import { Ability } from 'ember-can';
 export default Ability.extend({
   canWrite: Ember.computed('currentUser.role_id', function() {
     switch(this.get('currentUser.role_id')) {
+      case 'staff_admin':
       case 'provider_admin':
       case 'client_admin':
         return true;
@@ -13,6 +14,7 @@ export default Ability.extend({
   }),
   canRead: Ember.computed('currentUser.role_id', function() {
     switch(this.get('currentUser.role_id')) {
+      case 'staff_admin':
       case 'provider_admin':
       case 'client_admin':
         return true;

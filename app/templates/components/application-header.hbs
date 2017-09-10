@@ -5,10 +5,8 @@
   </div>
   {{#navbar.content}}
     {{#navbar.nav class="navbar-right" as |nav|}}
-      {{#nav.item}}
-        <a href="{{home}}">Home</a>
-      {{/nav.item}}
       {{#if (can "read settings")}}
+        {{#nav.item}}<a href="{{home}}">Home</a>{{/nav.item}}
         {{#nav.item}}{{#nav.link-to "settings"}}Settings{{/nav.link-to}}{{/nav.item}}
       {{/if}}
       {{#nav.item}}

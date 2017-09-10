@@ -4,6 +4,7 @@ import JsonWebToken from 'npm:jsonwebtoken';
 import ENV from 'bracco/config/environment';
 
 export default Ember.Service.extend({
+  store: Ember.inject.service(),
   flashMessages: Ember.inject.service(),
 
   isAuthenticated: false,
@@ -15,6 +16,7 @@ export default Ember.Service.extend({
   jwt: null,
   name: null,
   email: null,
+  role: null,
   role_id: null,
   provider_id: null,
   client_id: null,
@@ -47,25 +49,29 @@ export default Ember.Service.extend({
       self.set('isAuthenticated', Ember.isPresent(result));
 
       if (Ember.isPresent(result)) {
+        self.set('role_id', result.role_id);
+        self.set('role', self.get('store').findRecord('role', result.role_id));
+
         self.set('jwt', result.jwt);
         self.set('uid', result.uid);
+
         self.set('name', result.name);
         self.set('email', result.email);
-        self.set('role_id', result.role_id);
+
         self.set('provider_id', result.provider_id);
         self.set('client_id', result.client_id);
-
-        if (result.provider_id) {
-          self.set('home', '/providers/' + result.provider_id + '/clients');
-        } else if (result.client_id) {
-          self.set('home', '/clients/' + result.client_id + '/dois');
-        } else {
-          self.set('home', '/');
-        }
 
         self.set('isAdmin', Ember.isEqual(result.role_id, "staff_admin"));
         self.set('isProvider', Ember.isEqual(result.role_id, "provider_admin"));
         self.set('isClient', Ember.isEqual(result.role_id, "client_admin"));
+
+        if (self.get('isProvider')) {
+          self.set('home', '/providers/' + result.provider_id + '/clients');
+        } else if (self.get('isClient')) {
+          self.set('home', '/clients/' + result.client_id + '/dois');
+        } else {
+          self.set('home', '/');
+        }
 
         if (result.role_id === "client_admin") {
           self.get('flashMessages').info('Welcome ' + result.name + ' to the Client Administration area.');

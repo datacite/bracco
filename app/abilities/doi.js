@@ -2,7 +2,15 @@ import Ember from 'ember';
 import { Ability } from 'ember-can';
 
 export default Ability.extend({
-  canWrite: Ember.computed('currentUser.role_id', function() {
+  canCreate: Ember.computed('currentUser.role_id', function() {
+    switch(this.get('currentUser.role_id')) {
+      case 'staff_admin':
+        return true;
+      default:
+        return false;
+    }
+  }),
+  canUpdate: Ember.computed('currentUser.role_id', function() {
     switch(this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;

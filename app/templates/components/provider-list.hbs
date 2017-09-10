@@ -1,20 +1,26 @@
 {{#if new}}
   <div class='col-md-9'>
-    {{#bs-form formLayout="vertical" model=provider onSubmit=(action "submit" provider model) as |form|}}
-      {{form.element controlType="text" label="ID" placeholder="ID" property="id"}}
-      {{form.element controlType="text" label="Name" placeholder="Name" property="name"}}
-      {{form.element controlType="text" label="Contact" placeholder="Contact" property="contact"}}
-      {{form.element controlType="email" label="Email" placeholder="Email" property="email"}}
-      {{form.element controlType="checkbox" label="Account is active" property="isActive"}}
+    <div class="panel panel-transparent">
+      <div class="panel-body">
+        <h3 class="edit">New Provider</h3>
 
-      <div class="pseudo-footer">
-        <div class="btn-toolbar pull-right">
-          <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
-          <button type="submit" class="btn btn-sm btn-fill">Save</button>
-        </div>
-        <div class="clearfix"/>
+        {{#bs-form formLayout="vertical" model=provider onSubmit=(action "submit" provider model) submitOnEnter=true as |form|}}
+          {{form.element controlType="text" label="Provider ID" placeholder="Provider ID" property="id" required=false}}
+          {{form.element controlType="text" label="Name" placeholder="Name" property="name" required=false}}
+          {{form.element controlType="text" label="Contact" placeholder="Contact" property="contact" required=false}}
+          {{form.element controlType="email" label="Email" placeholder="Email" property="email" required=false}}
+          {{form.element controlType="checkbox" label="Account is active" property="isActive"}}
+
+          <div class="pseudo-footer">
+            <div class="btn-toolbar pull-right">
+              <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
+              <button type="submit" class="btn btn-sm btn-fill">Save</button>
+            </div>
+            <div class="clearfix"/>
+          </div>
+        {{/bs-form}}
       </div>
-    {{/bs-form}}
+    </div>
   </div>
 {{else}}
   <div class='col-md-9 panel-list' id="content">
@@ -33,6 +39,9 @@
               {{/if}}
             </h3>
 
+            <h5>Provider ID</h5>
+            {{provider.id}}
+
             {{#if provider.contact}}
               <h5>Contact</h5>
               {{provider.contact}}
@@ -42,12 +51,6 @@
               <h5>Email</h5>
               <a href="{{provider.email}}">{{provider.email}}</a>
             {{/if}}
-          </div>
-          <div class="panel-footer">
-            {{provider.uid}}
-            <span>{{fa-icon "question-circle-o"}}
-              {{#bs-tooltip placement="top" viewportPadding=10}}Each provider has a unique ID.{{/bs-tooltip}}
-            </span>
           </div>
         </div>
       {{/each}}
@@ -68,33 +71,12 @@
       <div class="panel facets">
         <div class="panel-body">
           <div class="pull-right">
-            <button {{action "new"}} class="btn btn-warning">{{fa-icon "plus"}}Add Provider</button>
+            <button {{action "new"}} class="btn btn-warning">{{fa-icon "plus"}} Add Provider</button>
           </div>
         </div>
       </div>
     {{/if}}
 
-    {{#if model.meta.regions}}
-      <div class="panel facets">
-        <div class="panel-body">
-          <h4>Regions</h4>
-          <ul>
-            {{#each model.meta.regions as |region|}}
-              <li>
-                {{#if model.otherParams.region}}
-                  {{#link-to "providers" (query-params region='')}}{{fa-icon "check-square-o"}}{{/link-to}}
-                {{else}}
-                  {{#link-to "providers" (query-params region=region.id)}}{{fa-icon "square-o"}}{{/link-to}}
-                {{/if}}
-                <div class="facet-title">{{region.title}}</div>
-                <span class="number pull-right">{{region.count}}</span>
-                <div class="clearfix"/>
-              </li>
-            {{/each}}
-          </ul>
-        </div>
-      </div>
-    {{/if}}
     {{#if model.meta.years}}
       <div class="panel facets">
         <div class="panel-body">
