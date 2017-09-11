@@ -11,7 +11,12 @@ module.exports = function(defaults) {
     minifyJS:  {
       enabled: false
     },
-
+    // fingerprint: {
+    //   enabled: false
+    // },
+    babel: {
+      sourceMaps: 'inline'
+    },
     'ember-bootstrap': {
       importBootstrapCSS: false,
       whitelist: ['bs-popover',
@@ -24,7 +29,6 @@ module.exports = function(defaults) {
                   'bs-modal',
                   'bs-nav']
     },
-
     'ember-prism': {
       'theme': 'default'
     },
