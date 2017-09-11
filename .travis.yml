@@ -34,7 +34,7 @@ install:
   - npm install
 
 script:
-  - ember test
+  - DEBUG=\* ember test
   - DEBUG=\* ember build --environment=production
 
 deploy:
