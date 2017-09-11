@@ -45,10 +45,6 @@ module.exports = function(environment) {
   ENV.BUGSNAG_API_KEY = process.env.BUGSNAG_API_KEY || null;
   ENV.BUGSNAG_NOTIFY_RELEASE = process.env.BUGSNAG_NOTIFY_RELEASE || "production";
 
-  ENV.i18n = {
-    defaultLocale: 'en-US'
-  };
-  
   if (environment === 'development') {
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
