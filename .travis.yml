@@ -28,8 +28,8 @@ install:
   - npm install
 
 script:
-  - DEBUG=\* ember test
-  - DEBUG=\* ember build --environment=production
+  - ember test
+  - ember build --environment=production
 
 deploy:
   provider: s3
