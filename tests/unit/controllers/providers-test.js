@@ -2,7 +2,7 @@ import { moduleFor, test } from 'ember-qunit';
 
 moduleFor('controller:providers', 'Unit | Controller | providers', {
   // Specify the other units that are required for this test.
-  // needs: ['controller:foo']
+  needs: ['service:google-analytics']
 });
 
 // Replace this with your real tests.

@@ -1,8 +1,7 @@
 import { moduleForModel, test } from 'ember-qunit';
 
 moduleForModel('client', 'Unit | Model | client', {
-  // Specify the other units that are required for this test.
-  needs: []
+  needs: ['validator:presence', 'validator:format', 'validator:length']
 });
 
 test('it exists', function(assert) {

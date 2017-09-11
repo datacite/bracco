@@ -1,8 +1,8 @@
 import { moduleFor, test } from 'ember-qunit';
 
-moduleFor('route:data-centers', 'Unit | Route | data centers', {
+moduleFor('route:clients', 'Unit | Route | clients', {
   // Specify the other units that are required for this test.
-  // needs: ['controller:foo']
+  needs: ['service:google-analytics']
 });
 
 test('it exists', function(assert) {

@@ -1,7 +1,7 @@
 import { moduleForModel, test } from 'ember-qunit';
 
-moduleForModel('doi', 'Unit | Model | doi', {
-  needs: []
+moduleForModel('role', 'Unit | Model | role', {
+  needs: ['validator:presence']
 });
 
 test('it exists', function(assert) {
