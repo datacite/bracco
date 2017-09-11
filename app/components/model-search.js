@@ -5,9 +5,12 @@ export default Ember.Component.extend(RouteMixin, {
   classNames: ['div'],
 
   hasInput: Ember.computed.notEmpty('query'),
+  formats: { '-created': 'Sort by Date', 'name': 'Sort by Name' },
+  query: null,
+  sort: '-created',
 
-  search(query) {
-    let params = Object.assign(this.get('model').get("otherParams"), { query: query });
+  search() {
+    let params = Object.assign(this.get('model').get("otherParams"), { query: this.get('query'), sort: this.get('sort') });
 
     params.paramMapping = { page: "page[number]",
                             perPage: "page[size]",
@@ -24,14 +27,19 @@ export default Ember.Component.extend(RouteMixin, {
 
   actions: {
     doSearch(query) {
-      this.search(query);
+      this.set('query', query);
+      this.search();
     },
     clear() {
-      this.set('query', '');
-      this.search('');
+      this.set('query', null);
+      this.search();
     },
     selectMetadata(metadata) {
       this.showMetadata(metadata);
+    },
+    sort(sort) {
+      this.set('sort', sort);
+      this.search();
     }
   },
 
