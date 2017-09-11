@@ -23,34 +23,24 @@ export default Ember.Component.extend({
     this.set('parent', this.get('client'));
   },
   addClient(client, prefix) {
-    console.log(prefix.get('clients'))
     prefix.get('clients').pushObject(client);
-    prefix.save().catch(function() {
-      let errors = prefix.get('errors');
-      console.log(errors);
-    });
+    prefix.save();
   },
   addProvider(provider, prefix) {
-    console.log(prefix.get('providers'))
     prefix.get('providers').pushObject(provider);
-    prefix.save().catch(function() {
-      let errors = prefix.get('errors');
-      console.log(errors);
-    });
+    prefix.save();
   },
   removeClient(client, prefix) {
     prefix.get('clients').removeObject(client);
-    prefix.save().catch(function() {
-      let errors = prefix.get('errors');
-      console.log(errors);
-    });
+    prefix.save();
+    // prefix.save().catch(function() {
+    //   let errors = prefix.get('errors');
+    //   //console.log(errors);
+    // });
   },
   removeProvider(provider, prefix) {
     prefix.get('providers').removeObject(provider);
-    prefix.save().catch(function() {
-      let errors = prefix.get('errors');
-      console.log(errors);
-    });
+    prefix.save();
   },
 
   actions: {

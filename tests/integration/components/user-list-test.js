@@ -12,14 +12,14 @@ test('it renders', function(assert) {
 
   this.render(hbs`{{user-list}}`);
 
-  assert.equal(this.$().text().trim(), '');
+  assert.equal(this.$().text().trim(), 'No users found.');
 
   // Template block usage:
   this.render(hbs`
     {{#user-list}}
-      template block text
+      No users found.
     {{/user-list}}
   `);
 
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.equal(this.$().text().trim(), 'No users found.');
 });

@@ -12,14 +12,14 @@ test('it renders', function(assert) {
 
   this.render(hbs`{{doi-list}}`);
 
-  assert.equal(this.$().text().trim(), '');
+  assert.equal(this.$().text().trim(), 'No DOIs found.');
 
   // Template block usage:
   this.render(hbs`
     {{#doi-list}}
-      template block text
+      
     {{/doi-list}}
   `);
 
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.equal(this.$().text().trim(), 'No DOIs found.');
 });

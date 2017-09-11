@@ -11,7 +11,7 @@ export default Ember.Component.extend({
       this.set('doi', doi);
       this.set('edit', true);
     },
-    submit: function(doi) {
+    submit: function() {
       //doi.save();
       this.set('edit', false);
     },

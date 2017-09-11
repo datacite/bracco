@@ -4,7 +4,7 @@ import { CanMixin } from 'ember-can';
 
 export default Ember.Route.extend(CanMixin, RouteMixin, {
 
-  model(params) {
+  model() {
     return this.store.findRecord('provider', 'admin');
   },
   actions: {

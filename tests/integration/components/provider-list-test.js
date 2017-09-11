@@ -12,14 +12,14 @@ test('it renders', function(assert) {
 
   this.render(hbs`{{provider-list}}`);
 
-  assert.equal(this.$().text().trim(), '');
+  assert.equal(this.$().text().trim(), 'No providers found.');
 
   // Template block usage:
   this.render(hbs`
     {{#provider-list}}
-      template block text
+      No providers found.
     {{/provider-list}}
   `);
 
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.equal(this.$().text().trim(), 'No providers found.');
 });

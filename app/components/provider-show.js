@@ -9,7 +9,6 @@ export default Ember.Component.extend({
   isDeletable: false,
 
   setIsDeletable() {
-    console.log(this.get('provider').get('prefixes'))
     this.set('isDeletable', Ember.isBlank(this.get('provider').get('prefixes')));
   },
 

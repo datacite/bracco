@@ -9,7 +9,6 @@ export default Ember.Component.extend({
   isDeletable: false,
 
   setIsDeletable() {
-    console.log(this.get('client').get('prefixes'))
     this.set('isDeletable', Ember.isBlank(this.get('client').get('prefixes')));
   },
 
@@ -28,7 +27,6 @@ export default Ember.Component.extend({
       this.set('edit', false);
     },
     destroy: function(link) {
-      console.log(link)
       this.get('client').destroyRecord();
       this.set('edit', false);
       this.get('router').transitionTo(link);
