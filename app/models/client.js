@@ -24,8 +24,12 @@ const Validations = buildValidations({
 });
 
 export default DS.Model.extend(Validations, {
-  provider: DS.belongsTo('provider'),
-  prefixes: DS.hasMany('prefix'),
+  provider: DS.belongsTo('provider', {
+    async: false
+  }),
+  prefixes: DS.hasMany('prefix', {
+    async: false
+  }),
   users: DS.hasMany('user', { async: true }),
 
   name: DS.attr('string'),
