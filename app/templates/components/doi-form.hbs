@@ -1,0 +1,10 @@
+<div class='col-md-9 panel-list' id="content">
+  {{#if searchable}}
+    {{model-search model=model}}
+  {{/if}}
+
+<form {{action 'create' on="submit"}}>
+  {{input type="url" value=url placeholder="Add url"}}<br>
+  {{input type="text" value=doi placeholder="Add DOI name"}}<br>
+</form>
+</div>
