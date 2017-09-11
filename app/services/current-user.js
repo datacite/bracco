@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import Cookie from 'ember-cli-js-cookie';
-import JsonWebToken from 'npm:jsonwebtoken';
+import NodeJsonWebToken from 'npm:jsonwebtoken';
 import ENV from 'bracco/config/environment';
 
 export default Ember.Service.extend({
@@ -34,7 +34,7 @@ export default Ember.Service.extend({
       let cert = ENV.JWT_PUBLIC_KEY ? ENV.JWT_PUBLIC_KEY.replace(/\\n/g, '\n') : null;
 
       // verify asymmetric token, using RSA with SHA-256 hash algorithm
-      JsonWebToken.verify(jwt, cert, { algorithms: ['RS256'] }, function (error, payload) {
+      NodeJsonWebToken.verify(jwt, cert, { algorithms: ['RS256'] }, function (error, payload) {
         if (payload) {
           // add JWT to returned payload
           payload.jwt = jwt;
