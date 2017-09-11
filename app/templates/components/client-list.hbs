@@ -82,6 +82,12 @@
           <button {{action "new"}} class="btn btn-warning">{{fa-icon "plus"}} Add Client</button>
         </div>
       </div>
+    {{else}}
+      <div class="panel panel-transparent">
+        <div class="panel-body">
+          <div class="edit"></div>
+        </div>
+      </div>
     {{/if}}
 
     {{#if model.meta.years}}

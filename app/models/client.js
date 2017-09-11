@@ -26,7 +26,7 @@ const Validations = buildValidations({
 export default DS.Model.extend(Validations, {
   provider: DS.belongsTo('provider'),
   prefixes: DS.hasMany('prefix'),
-  users: DS.hasMany('user'),
+  users: DS.hasMany('user', { async: true }),
 
   name: DS.attr('string'),
   domains: DS.attr('string'),

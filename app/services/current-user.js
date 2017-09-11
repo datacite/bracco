@@ -69,8 +69,8 @@ export default Ember.Service.extend({
           self.set('home', '/providers/' + result.provider_id + '/clients');
         } else if (self.get('isClient')) {
           self.set('home', '/clients/' + result.client_id + '/dois');
-        } else {
-          self.set('home', '/');
+        } else if (self.get('isAdmin')) {
+          self.set('home', '/providers');
         }
 
         if (result.role_id === "client_admin") {

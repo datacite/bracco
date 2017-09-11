@@ -3,7 +3,7 @@
     <div class="col-md-9">
       <div class="panel panel-transparent" id="content-member">
         <div class="panel-body">
-          <h3 class="edit">Edit Provider</h3>
+          <h3 class="edit">Edit {{#if (not admin)}}Provider{{else}}Admin{{/if}}</h3>
 
           {{#bs-form formLayout="vertical" model=model onSubmit=(action "submit" model) submitOnEnter=true as |form|}}
             {{form.element controlType="text" label="Provider ID" placeholder="ID" property="id" disabled=true}}
@@ -29,7 +29,7 @@
           <div class="edit"></div>
         </div>
       </div>
-      
+
       {{client-sidebar model=model}}
     </div>
   </div>
@@ -67,8 +67,10 @@
     <div class="col-md-9">
       <div class="panel panel-transparent">
         <div class="panel-body">
-          <h5>Provider ID</h5>
-          {{model.uid}}
+          {{#if (not admin)}}
+            <h5>Provider ID</h5>
+            {{model.uid}}
+          {{/if}}
 
           {{#if model.contact}}
             <h5>Contact</h5>
@@ -86,7 +88,7 @@
       {{#if (can "update provider")}}
         <div class="panel facets">
           <div class="panel-body">
-            <button {{action "edit" model}} class="btn btn-warning">{{fa-icon "pencil"}} Edit Provider</button>
+            <button {{action "edit" model}} class="btn btn-warning">{{fa-icon "pencil"}} Edit {{#if (not admin)}}Provider{{else}}Admin{{/if}}</button>
           </div>
         </div>
       {{/if}}

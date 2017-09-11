@@ -4,10 +4,10 @@
       <div class="panel-body">
         <h3 class="edit">New Prefix</h3>
 
-        {{#bs-form formLayout="vertical" model=this onSubmit=(action "submit") as |form|}}
-          {{#form.element controlType="power-select" property="prefixes" label="Prefix" optionLabelPath="id" options=prefixes destination=selectedPrefix allowClear=true as |el|}}
+        {{#bs-form formLayout="vertical" model=prefix onSubmit=(action "submit") as |form|}}
+          {{#form.element controlType="power-select" property="prefixes" label="Prefix" optionLabelPath="id" options=prefixes destination=prefix allowClear=true as |el|}}
             {{#el.control onChange=(action "selectPrefix") search=(action "searchPrefix") searchField="id" as |item|}}
-              {{selectedPrefix.id}}
+              {{item.id}}
             {{/el.control}}
           {{/form.element}}
 
@@ -46,12 +46,12 @@
       </div>
     </div>
   </div>
-{{else if delete}}
+{{else if detach}}
   <div class='col-md-9'>
     <div class="panel panel-transparent">
       <div class="panel-body">
         <div class="alert alert-danger" role="alert">
-          Are you sure you want to delete prefix {{prefix.id}} for this provider?
+          Are you sure you want to delete the prefix {{prefix.id}} for this {{#if client}}client{{else}}provider{{/if}}?
         </div>
 
         <div class="pseudo-footer">
@@ -101,7 +101,7 @@
           </div>
           <div class="panel-footer">
             {{prefix.id}}
-            <button {{action "delete" prefix}} class="btn-link btn-icon">{{fa-icon "trash"}}</button>
+            <button {{action "detach" prefix model}} class="btn-link btn-icon">{{fa-icon "trash"}}</button>
           </div>
         </div>
       {{/each}}
@@ -126,6 +126,12 @@
           {{else}}
             <button {{action "attach" model}} class="btn btn-warning">{{fa-icon "plus"}}Add Prefix</button>
           {{/if}}
+        </div>
+      </div>
+    {{else}}
+      <div class="panel panel-transparent">
+        <div class="panel-body">
+          <div class="edit"></div>
         </div>
       </div>
     {{/if}}

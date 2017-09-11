@@ -24,7 +24,7 @@ const Validations = buildValidations({
 
 export default DS.Model.extend(Validations, {
   clients: DS.hasMany('client'),
-  users: DS.hasMany('user'),
+  users: DS.hasMany('user', { async: true }),
 
   name: DS.attr('string'),
   description: DS.attr('string'),

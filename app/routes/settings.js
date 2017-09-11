@@ -7,7 +7,7 @@ export default Ember.Route.extend(CanMixin, {
     let currentUser = this.get('currentUser');
 
     if (currentUser.get('role') === "staff_admin") {
-      return this.store.findRecord('provider', "ADMIN");
+      return this.store.findRecord('provider', "admin");
     } else if (currentUser.get('role') === "provider_admin") {
       return this.store.findRecord('provider', currentUser.get('provider_id'));
     } else if (currentUser.get('role') === "client_admin") {
