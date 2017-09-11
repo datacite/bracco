@@ -26,10 +26,9 @@ export default Ember.Component.extend({
           key = "zero";
         }
         if (Ember.String.w("cc by nd nc sa zero").includes(key)) {
-          return sum + ' <i class="cc cc-' + key + '"></i>';
-        } else {
-          return sum;
-        }
+          sum += ' <i class="cc cc-' + key + '"></i>';
+        } 
+        return sum;
       });
     } else if (uri.hostname() === "opensource.org") {
       switch(uri.segment(1)) {
