@@ -12,14 +12,14 @@ test('it renders', function(assert) {
 
   this.render(hbs`{{landing-page}}`);
 
-  assert.equal(this.$().text().trim(), '');
+  assert.ok(/^DataCite DOI Registration Service+/.test(this.$().text().trim()), 'begins with "DataCite DOI Registration Service"');
 
   // Template block usage:
   this.render(hbs`
     {{#landing-page}}
-      template block text
+
     {{/landing-page}}
   `);
 
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.ok(/^DataCite DOI Registration Service+/.test(this.$().text().trim()), 'begins with "DataCite DOI Registration Service"');
 });

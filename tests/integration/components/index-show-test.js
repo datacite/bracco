@@ -6,7 +6,6 @@ moduleForComponent('index-show', 'Integration | Component | index show', {
 });
 
 test('it renders', function(assert) {
-
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });
 
@@ -17,9 +16,9 @@ test('it renders', function(assert) {
   // Template block usage:
   this.render(hbs`
     {{#index-show}}
-      template block text
+      
     {{/index-show}}
   `);
 
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.equal(this.$().text().trim(), '');
 });

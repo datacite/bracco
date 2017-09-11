@@ -1,87 +1,115 @@
-<div class='col-md-9 panel-list' id="content">
-  {{#if searchable}}
-    {{model-search model=model}}
-  {{/if}}
-  {{#if model}}
-    {{#each model as |client|}}
+{{#if new}}
+  <div class='col-md-9'>
+    <div class="panel panel-transparent">
+      <div class="panel-body">
+        <h3 class="edit">New Client</h3>
+
+        {{#bs-form formLayout="vertical" model=client onSubmit=(action "submit" client model) submitOnEnter=true as |form|}}
+          {{form.element controlType="text" label="Client ID" placeholder="Client ID" property="id" required=false}}
+          {{form.element controlType="text" label="Name" placeholder="Name" property="name" required=false}}
+          {{form.element controlType="text" label="Contact" placeholder="Contact" property="contact" required=false}}
+          {{form.element controlType="email" label="Email" placeholder="Email" property="email" required=false}}
+          {{form.element controlType="textarea" label="Domains" placeholder="Domains" property="domains" required=false}}
+          {{form.element controlType="checkbox" label="Account is active" property="isActive"}}
+
+          <div class="pseudo-footer">
+            <div class="btn-toolbar pull-right">
+              <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
+              <button type="submit" class="btn btn-sm btn-fill">Save</button>
+            </div>
+            <div class="clearfix"/>
+          </div>
+        {{/bs-form}}
+      </div>
+    </div>
+  </div>
+{{else}}
+  <div class='col-md-9 panel-list' id="content">
+    {{#if searchable}}
+      {{model-search model=model}}
+    {{/if}}
+    {{#if model}}
+      {{#each model as |client|}}
+        <div class="panel panel-transparent">
+          <div class="panel-body">
+            <h3 class="work">
+              {{#link-to "clients.show" client.id}}{{client.name}}{{/link-to}}
+            </h3>
+
+            <h5>Client ID</h5>
+            {{client.uid}}
+
+            {{#if client.contact}}
+              <h5>Contact</h5>
+              {{client.contact}}
+            {{/if}}
+
+            {{#if client.email}}
+              <h5>Email</h5>
+              <a href="{{client.email}}">{{client.email}}</a>
+            {{/if}}
+
+            {{#if client.domainList}}
+              <h5>
+                Domains
+                <span>{{fa-icon "question-circle-o"}}
+                  {{#bs-tooltip placement="top" viewportPadding=10}}URLs for DOIs must use one of these (sub-)domains.{{/bs-tooltip}}
+                </span>
+              </h5>
+              {{#each client.domainList as |domain|}}
+                {{domain}}<br/>
+              {{/each}}
+            {{/if}}
+          </div>
+        </div>
+      {{/each}}
+      <div class="text-center">
+        {{#if (gt model.meta.total_pages 1)}}
+          {{page-numbers content=model showFL=true}}
+        {{/if}}
+      </div>
+    {{else}}
+      {{#bs-alert dismissible=false type="warning"}}
+        No clients found.
+      {{/bs-alert}}
+    {{/if}}
+  </div>
+
+  <div class='col-md-3'>
+    {{#if (and (can "create client" model) (eq link "providers.show.clients"))}}
+      <div class="panel facets">
+        <div class="panel-body">
+          <button {{action "new"}} class="btn btn-warning">{{fa-icon "plus"}} Add Client</button>
+        </div>
+      </div>
+    {{else}}
       <div class="panel panel-transparent">
         <div class="panel-body">
-          <h3 class="work">
-            {{#link-to "clients.show" client.id}}{{client.name}}{{/link-to}}
-          </h3>
+          <div class="edit"></div>
+        </div>
+      </div>
+    {{/if}}
 
-          {{#if client.contact}}
-            <h5>Contact</h5>
-            {{client.contact}}
-          {{/if}}
-
-          {{#if client.email}}
-            <h5>Email</h5>
-            <a href="{{client.email}}">{{client.email}}</a>
-          {{/if}}
-
-          {{#if client.domainList}}
-            <h5>
-              Domains
-              <span>{{fa-icon "question-circle-o"}}
-                {{#bs-tooltip placement="top" viewportPadding=10}}URLs for DOIs must point to one of these domains.{{/bs-tooltip}}
-              </span>
-            </h5>
-            {{#each client.domainList as |domain|}}
-              {{domain}}<br/>
+    {{#if model.meta.years}}
+      <div class="panel facets add">
+        <div class="panel-body">
+          <h4>Year joined</h4>
+          <ul>
+            {{#each model.meta.years as |year|}}
+              <li>
+                {{#if model.otherParams.year}}
+                  {{#link-to link (query-params year=null)}}{{fa-icon "check-square-o"}}{{/link-to}}
+                {{else}}
+                  {{#link-to link (query-params year=year.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                {{/if}}
+                <div class="facet-title">{{year.title}}</div>
+                <span class="number pull-right">{{year.count}}</span>
+                <div class="clearfix"/>
+              </li>
             {{/each}}
-          {{/if}}
-        </div>
-        <div class="panel-footer">
-          {{client.uid}}
-          <span>{{fa-icon "question-circle-o"}}
-            {{#bs-tooltip placement="top" viewportPadding=10}}Each client has a unique ID that starts with the DOI service provider ID.{{/bs-tooltip}}
-          </span>
+          </ul>
         </div>
       </div>
-    {{/each}}
-    <div class="text-center">
-      {{#if (gt model.meta.total_pages 1)}}
-        {{page-numbers content=model showFL=true}}
-      {{/if}}
-    </div>
-  {{else}}
-    {{#bs-alert dismissible=false type="warning"}}
-      No clients found.
-    {{/bs-alert}}
-  {{/if}}
-</div>
-
-<div class='col-md-3'>
-  {{#if (can "write client")}}
-    <div class="panel facets">
-      <div class="panel-body">
-        <div class="pull-right">
-          <button class="btn btn-warning">{{fa-icon "plus"}}Add Client</button>
-        </div>
-      </div>
-    </div>
-  {{/if}}
-
-  {{#if model.meta.years}}
-    <div class="panel facets">
-      <div class="panel-body">
-        <h4>Year joined</h4>
-        <ul>
-          {{#each model.meta.years as |year|}}
-            <li>
-              {{#if model.otherParams.year}}
-                {{#link-to link (query-params year=null)}}{{fa-icon "check-square-o"}}{{/link-to}}
-              {{else}}
-                {{#link-to link (query-params year=year.id)}}{{fa-icon "square-o"}}{{/link-to}}
-              {{/if}}
-              <div class="facet-title">{{year.title}}</div>
-              <span class="number pull-right">{{year.count}}</span>
-              <div class="clearfix"/>
-            </li>
-          {{/each}}
-        </ul>
-      </div>
-    </div>
-  {{/if}}
-</div>
+    {{/if}}
+  </div>
+{{/if}}

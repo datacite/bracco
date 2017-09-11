@@ -1,0 +1,9 @@
+general:
+  support: "Support"
+
+user:
+  signin: "Sign in"
+
+footer:
+  about: "About DataCite"
+  staff: "Staff"

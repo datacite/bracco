@@ -12,14 +12,14 @@ test('it renders', function(assert) {
 
   this.render(hbs`{{doi-media}}`);
 
-  assert.equal(this.$().text().trim(), '');
+  assert.ok(/There are no media+/.test(this.$().text().trim()), 'begins with "There are no media"');
 
   // Template block usage:
   this.render(hbs`
     {{#doi-media}}
-      template block text
+
     {{/doi-media}}
   `);
 
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.ok(/There are no media+/.test(this.$().text().trim()), 'begins with "There are no media"');
 });

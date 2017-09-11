@@ -7,5 +7,5 @@ moduleForComponent('menu-links', 'Integration | Component | menu-links', {
 
 test('it renders', function(assert) {
   this.render(hbs`{{menu-links}}`);
-  assert.equal(this.$().text().trim(), 'Development');
+  assert.ok(/^Services+/.test(this.$().text().trim()), 'begins with Services');
 });

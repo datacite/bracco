@@ -1,15 +1,9 @@
 ---
 language: node_js
 node_js:
-  - "6"
-env:
-  - CXX=g++-4.8
-addons:
-  apt:
-    sources:
-      - ubuntu-toolchain-r-test
-    packages:
-      - g++-4.8
+  - "8"
+
+dist: trusty
 
 sudo: false
 
@@ -34,8 +28,8 @@ install:
   - npm install
 
 script:
-  # - ember test
-  - DEBUG=broccoli*,ember-cli* ember build --environment=production
+  - ember test
+  - ember build --environment=production
 
 deploy:
   provider: s3

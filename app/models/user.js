@@ -1,9 +1,15 @@
 import DS from 'ember-data';
 
 export default DS.Model.extend({
-  provider: DS.belongsTo('provider'),
-  client: DS.belongsTo('client'),
-  role: DS.belongsTo('role'),
+  provider: DS.belongsTo('provider', {
+    async: true
+  }),
+  client: DS.belongsTo('client', {
+    async: true
+  }),
+  role: DS.belongsTo('role', {
+    async: true
+  }),
 
   givenNames: DS.attr('string'),
   familyName: DS.attr('string'),

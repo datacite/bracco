@@ -18,7 +18,7 @@ export default Ember.Component.extend({
   showProviders: false,
   showClients: false,
 
-  searchRole: function(link) {
+  searchRole: function() {
     this.set('roles', this.get('store').findAll('role'));
     // console.log(link)
     // this.set('roles', this.get('store').query('role', { filter: { link: link } }));
@@ -91,7 +91,6 @@ export default Ember.Component.extend({
       this.selectProvider(provider);
     },
     selectClient(client) {
-      console.log(client)
       this.selectClient(client);
     }
   }

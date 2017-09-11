@@ -9,5 +9,5 @@ test('it renders', function(assert) {
   this.set('listLinks', [{ url: "http://example.com", name: "Example" }]);
 
   this.render(hbs`{{list-links links=listLinks}}`);
-  assert.equal(this.$().text().trim(), 'Example');
+  assert.ok(/^Example+/.test(this.$().text().trim()), 'begins with "Example"');
 });

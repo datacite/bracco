@@ -1,9 +1,32 @@
 import Ember from 'ember';
 import DS from 'ember-data';
+import { validator, buildValidations } from 'ember-cp-validations';
 
-export default DS.Model.extend({
-  clients: DS.hasMany('client'),
-  users: DS.hasMany('user'),
+const Validations = buildValidations({
+  id: [
+    validator('presence', true),
+    validator('format', {
+      regex: /^[a-z]+$/,
+      message: 'The Provider ID can contain only upper case letters'
+    }),
+    validator('length', {
+      min: 2,
+      max: 8
+    })
+  ],
+  name: validator('presence', true),
+  contact: validator('presence', true),
+  email: [
+    validator('presence', true),
+    validator('format', { type: 'email' })
+  ]
+});
+
+export default DS.Model.extend(Validations, {
+  clients: DS.hasMany('client', {
+    async: false
+  }),
+  users: DS.hasMany('user', { async: true }),
 
   name: DS.attr('string'),
   description: DS.attr('string'),
@@ -15,10 +38,11 @@ export default DS.Model.extend({
   email: DS.attr('string'),
   website: DS.attr('string'),
   phone: DS.attr('string'),
+  isActive: DS.attr('boolean'),
   created: DS.attr('date'),
   updated: DS.attr('date'),
 
   uid: Ember.computed('id', function() {
-    return `${this.get('id').toUpperCase()}`;
+    return this.get('id').toUpperCase();
   })
 });

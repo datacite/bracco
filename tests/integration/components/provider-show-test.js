@@ -11,14 +11,14 @@ test('it renders', function(assert) {
 
   this.render(hbs`{{provider-show}}`);
 
-  assert.equal(this.$().text().trim(), '');
+  assert.equal(this.$().text().trim(), 'Provider ID');
 
   // Template block usage:
   this.render(hbs`
     {{#provider-show}}
-      template block text
+      Provider ID
     {{/provider-show}}
   `);
 
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.equal(this.$().text().trim(), 'Provider ID');
 });

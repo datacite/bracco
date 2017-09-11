@@ -8,7 +8,15 @@ module.exports = function(defaults) {
     'ember-cli-babel': {
       includePolyfill: true
     },
-
+    minifyJS:  {
+      enabled: false
+    },
+    // fingerprint: {
+    //   enabled: false
+    // },
+    babel: {
+      sourceMaps: 'inline'
+    },
     'ember-bootstrap': {
       importBootstrapCSS: false,
       whitelist: ['bs-popover',
@@ -21,7 +29,6 @@ module.exports = function(defaults) {
                   'bs-modal',
                   'bs-nav']
     },
-
     'ember-prism': {
       'theme': 'default'
     },
@@ -54,10 +61,6 @@ module.exports = function(defaults) {
       'importBootstrapFont': false,
       'importBootstrapCSS': false
     }
-
-    // 'ember-power-select': {
-    //   'theme': 'bootstrap'
-    // }
   });
 
   // Use `app.import` to add additional libraries to the generated

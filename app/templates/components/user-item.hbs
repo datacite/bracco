@@ -57,14 +57,12 @@
     {{/if}}
 
     <h5>Account created</h5>
-    {{format-date user.created}}
+    {{format-date user.created year='numeric' month='long' day='numeric'}}
 
     <div class="pseudo-footer">
       <a href="{{user.id}}">{{fa-icon "external-link"}} {{user.id}}</a>
       <div class="btn-toolbar pull-right">
-        <div class="btn-group btn-group-sm">
-          <button {{action "edit" user link}} class="btn-link">{{fa-icon "pencil"}}</button>
-        </div>
+        <button {{action "edit" user link}} class="btn btn-sm btn-warning">{{fa-icon "pencil"}} Edit User</button>
       </div>
       <div class="clearfix"/>
     </div>

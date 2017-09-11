@@ -12,14 +12,14 @@ test('it renders', function(assert) {
 
   this.render(hbs`{{provider-settings}}`);
 
-  assert.equal(this.$().text().trim(), '');
+  assert.equal(this.$().text().trim(), 'The password reset functionality goes here.');
 
   // Template block usage:
   this.render(hbs`
     {{#provider-settings}}
-      template block text
+      
     {{/provider-settings}}
   `);
 
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.equal(this.$().text().trim(), 'The password reset functionality goes here.');
 });

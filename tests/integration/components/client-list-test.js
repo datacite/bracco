@@ -1,7 +1,7 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('client-list', 'Integration | Component | data center list', {
+moduleForComponent('client-list', 'Integration | Component | client list', {
   integration: true
 });
 
@@ -12,14 +12,14 @@ test('it renders', function(assert) {
 
   this.render(hbs`{{client-list}}`);
 
-  assert.equal(this.$().text().trim(), '');
+  assert.equal(this.$().text().trim(), 'No clients found.');
 
   // Template block usage:
   this.render(hbs`
     {{#client-list}}
-      template block text
+      
     {{/client-list}}
   `);
 
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.equal(this.$().text().trim(), 'No clients found.');
 });

@@ -11,11 +11,7 @@
         <li class="breadcrumb-item">{{#link-to "clients.show.dois" model.client.id}}{{model.client.name}}{{/link-to}}</li>
       </ol>
 
-      <h2 class="work">{{model.doi}}</h2>
-
-      {{doi-url model=model}}
-      {{doi-metadata model=model}}
-      {{doi-media model=model}}
+      {{doi-show model=model}}
     </div>
   </div>
 {{else}}
