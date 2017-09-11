@@ -8,6 +8,9 @@ module.exports = function(defaults) {
     'ember-cli-babel': {
       includePolyfill: true
     },
+    minifyJS:  {
+      enabled: false
+    },
 
     babel: {
       sourceMaps: 'inline'
@@ -58,10 +61,6 @@ module.exports = function(defaults) {
       'importBootstrapFont': false,
       'importBootstrapCSS': false
     }
-
-    // 'ember-power-select': {
-    //   'theme': 'bootstrap'
-    // }
   });
 
   // Use `app.import` to add additional libraries to the generated
