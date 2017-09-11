@@ -17,7 +17,7 @@ test('it renders', function(assert) {
   // Template block usage:
   this.render(hbs`
     {{#prefix-list}}
-      No prefixes found.
+      
     {{/prefix-list}}
   `);
 

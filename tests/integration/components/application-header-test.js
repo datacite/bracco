@@ -12,7 +12,7 @@
 //
 //   this.render(hbs`{{application-header}}`);
 //
-//   assert.equal(this.$().text().trim(), '');
+//   assert.ok(/^Toggle navigation+/.test(this.$().text().trim()), 'begins with Toggle navigation');
 //
 //   // Template block usage:
 //   this.render(hbs`
@@ -21,5 +21,5 @@
 //     {{/application-header}}
 //   `);
 //
-//   assert.equal(this.$().text().trim(), 'template block text');
+//   assert.ok(/^Toggle navigation+/.test(this.$().text().trim()), 'begins with Toggle navigation');
 // });

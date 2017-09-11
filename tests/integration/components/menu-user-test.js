@@ -4,7 +4,7 @@
 // moduleForComponent('menu-user', 'Integration | Component | menu user', {
 //   integration: true
 // });
-
+//
 // test('it renders', function(assert) {
 //
 //   // Set any properties with this.set('myProperty', 'value');
