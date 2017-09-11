@@ -12,10 +12,6 @@ module.exports = function(defaults) {
       enabled: false
     },
 
-    babel: {
-      sourceMaps: 'inline'
-    },
-
     'ember-bootstrap': {
       importBootstrapCSS: false,
       whitelist: ['bs-popover',
