@@ -3311,7 +3311,17 @@ ember-cli-deploy-gzip@^1.0.0:
     minimatch "^3.0.3"
     rsvp "^3.5.0"
 
-ember-cli-deploy-plugin@^0.2.1, ember-cli-deploy-plugin@^0.2.2, ember-cli-deploy-plugin@^0.2.6:
+ember-cli-deploy-manifest@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/ember-cli-deploy-manifest/-/ember-cli-deploy-manifest-1.1.0.tgz#096c4d1502c00935cabdbb9a38619ee3195ef927"
+  dependencies:
+    chalk "^1.0.0"
+    core-object "^2.0.0"
+    ember-cli-deploy-plugin "^0.2.3"
+    minimatch "^3.0.3"
+    rsvp "^3.5.0"
+
+ember-cli-deploy-plugin@^0.2.1, ember-cli-deploy-plugin@^0.2.2, ember-cli-deploy-plugin@^0.2.3, ember-cli-deploy-plugin@^0.2.6:
   version "0.2.9"
   resolved "https://registry.yarnpkg.com/ember-cli-deploy-plugin/-/ember-cli-deploy-plugin-0.2.9.tgz#a3d395b8adad7ef68d8bacdd0b0f4a61bcf9e651"
   dependencies:
