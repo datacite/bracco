@@ -1,3 +1,9 @@
-<a href="{{licenseURL}}">{{licenseLogo}}
-  {{#bs-tooltip placement="top" viewportPadding=10}}License. Click to go to a page with more information.{{/bs-tooltip}}
+<a href="{{licenseURL}}">
+  {{#each licenseLogo as |license|}}
+    {{#if license.class}}
+      <i class="{{license.class}}">{{#bs-popover placement="top" viewportPadding=10 triggerEvents='hover' title=license.tooltip.title}}{{license.tooltip.text}}{{/bs-popover}}</i>
+    {{else}}
+      {{license.logo}}
+    {{/if}}
+  {{/each}}
 </a>
