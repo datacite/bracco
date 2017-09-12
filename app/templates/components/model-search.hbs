@@ -10,5 +10,15 @@
   </div>
 </form>
 {{#if (gt model.meta.total 1)}}
+  {{#if sortable}}
+    <div id="sort" class="input-group pull-right">
+      <select onchange={{action 'sort' value="target.value"}}>
+        {{#each-in formats as |key value|}}
+          <option name="sort" value={{key}} selected={{eq sort key}}>{{value}}</option>
+        {{/each-in}}
+      </select>
+    </div>
+  {{/if}}
+
   <h3 class="{{model.modelName}}-results">{{pluralize (format-number model.meta.total) modelName}}</h3>
 {{/if}}

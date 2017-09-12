@@ -1,6 +1,6 @@
 <div class="col-md-9" id="content-user">
   {{#if searchable}}
-    {{model-search model=model}}
+    {{model-search model=model sortable=true}}
   {{/if}}
 
   {{#if model}}
@@ -37,7 +37,7 @@
         <ul>
           {{#each model.meta.roles as |role|}}
             <li>
-              {{#if model.otherParams.role}}
+              {{#if model.otherParams.role-id}}
                 {{#link-to link (query-params role-id=null)}}{{fa-icon "check-square-o"}}{{/link-to}}
               {{else}}
                 {{#link-to link (query-params role-id=role.id)}}{{fa-icon "square-o"}}{{/link-to}}

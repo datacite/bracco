@@ -17,6 +17,7 @@ npm-debug.log*
 yarn-error.log
 testem.log
 .env
+.env.deploy.*
 
 # ember-try
 .node_modules.ember-try/

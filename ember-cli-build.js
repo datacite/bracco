@@ -44,7 +44,11 @@ module.exports = function(defaults) {
                           'CDN_URL',
                           'JWT_HOST',
                           'JWT_PUBLIC_KEY',
-                          'BUGSNAG_API_KEY']
+                          'BUGSNAG_API_KEY',
+                          'AWS_ACCESS_KEY',
+                          'AWS_SECRET_KEY',
+                          'AWS_BUCKET',
+                          'AWS_REGION']
     },
 
     inlineContent: {

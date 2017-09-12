@@ -6,7 +6,7 @@
     </div>
   {{/if}}
   {{#if (gt model.updated model.created)}}
-    <h5>Record modified</h5>
+    <h5>Record last modified</h5>
     <div class="updated">
       {{format-time model.updated year='numeric' month='long' day='numeric'}}
     </div>
@@ -18,7 +18,7 @@
     </div>
   {{/if}}
   {{#if (gt model.updated model.registered)}}
-    <h5>DOI modified</h5>
+    <h5>DOI last updated</h5>
     <div class="updated">
       {{format-time model.updated year='numeric' month='long' day='numeric'}}
     </div>
