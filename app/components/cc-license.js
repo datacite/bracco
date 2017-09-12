@@ -12,7 +12,7 @@ export default Ember.Component.extend({
       { key: 'sa', title: 'Share-alike (SA)', text: 'Licensees may distribute derivative works only under a license identical ("not more restrictive") to the license that governs the original work.'},
       { key: 'nc', title: 'Non-commercial (NC)', text: 'Licensees may copy, distribute, display, and perform the work and make derivative works and remixes based on it only for non-commercial purposes.' },
       { key: 'nd', title: 'No Derivative Works (ND)', text: 'Licensees may copy, distribute, display and perform only verbatim copies of the work, not derivative works and remixes based on it.' },
-      { key: 'zero', title: 'Public Domain (Zero)', text: 'Copyright holder has waived the copyright interest and dedicated the work to the world-wide public domain.' }
+      { key: 'zero', title: 'Public Domain (Zero)', text: 'Copyright holder has waived the copyright interest and has dedicated the work to the world-wide public domain.' }
     ];
 
     let licenseURL = this.get('licenseURL');
