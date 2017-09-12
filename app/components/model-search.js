@@ -5,9 +5,8 @@ export default Ember.Component.extend(RouteMixin, {
   classNames: ['div'],
 
   hasInput: Ember.computed.notEmpty('query'),
-  formats: { '-created': 'Sort by Date', 'name': 'Sort by Name' },
   query: null,
-  sort: '-created',
+  sort: null,
 
   didReceiveAttrs() {
     this._super(...arguments);
@@ -57,5 +56,10 @@ export default Ember.Component.extend(RouteMixin, {
                          'user': 'User' }
     this.set('placeholder', 'Search for ' + placeholders[this.get('model').get("modelName")]);
     this.set('modelName', placeholders[this.get('model').get("modelName")]);
+    if (this.get('model').get("modelName") === "doi") {
+      this.set('formats', { '-created': 'Sort by Date', 'score': 'Sort by Relevance' });
+    } else {
+      this.set('formats', { '-created': 'Sort by Date', 'name': 'Sort by Name' });
+    }
   }
 });
