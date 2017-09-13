@@ -63,7 +63,7 @@
 
     <div class="pseudo-footer">
       <a href="{{user.identifier}}">{{fa-icon "external-link"}} {{user.identifier}}</a>
-      {{#if (and (can "modify user" user) (not-eq link "clients.show.users"))}}
+      {{#if (can "modify user" user)}}
         <div class="btn-toolbar pull-right">
           <button {{action "edit" user link}} class="btn btn-sm btn-warning">{{fa-icon "pencil"}} Edit User</button>
         </div>
