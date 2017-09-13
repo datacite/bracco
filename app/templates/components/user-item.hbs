@@ -5,11 +5,13 @@
 {{#aitem.body}}
   {{#if edit}}
     {{#bs-form formLayout="vertical" model=this as |form|}}
-      {{#form.element controlType="power-select" property="role" label="Role" options=roles optionLabelPath="name" destination=role as |el|}}
-        {{#el.control onChange=(action "selectRole") searchEnabled=false allowClear=false as |item|}}
-          {{item.name}}
-        {{/el.control}}
-      {{/form.element}}
+      {{#if (can "create user" user)}}
+        {{#form.element controlType="power-select" property="role" label="Role" options=roles optionLabelPath="name" destination=role as |el|}}
+          {{#el.control onChange=(action "selectRole") searchEnabled=false allowClear=false as |item|}}
+            {{item.name}}
+          {{/el.control}}
+        {{/form.element}}
+      {{/if}}
 
       {{#if (eq link "users")}}
         {{#form.element controlType="power-select" property="provider" label="Provider" optionLabelPath="name" options=providers destination=provider as |el|}}
@@ -61,10 +63,12 @@
 
     <div class="pseudo-footer">
       <a href="{{user.identifier}}">{{fa-icon "external-link"}} {{user.identifier}}</a>
-      <div class="btn-toolbar pull-right">
-        <button {{action "edit" user link}} class="btn btn-sm btn-warning">{{fa-icon "pencil"}} Edit User</button>
-      </div>
-      <div class="clearfix"/>
+      {{#if (and (can "modify user" user) (not-eq link "clients.show.users"))}}
+        <div class="btn-toolbar pull-right">
+          <button {{action "edit" user link}} class="btn btn-sm btn-warning">{{fa-icon "pencil"}} Edit User</button>
+        </div>
+        <div class="clearfix"/>
+      {{/if}}
     </div>
   {{/if}}
 {{/aitem.body}}

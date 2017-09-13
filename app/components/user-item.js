@@ -15,8 +15,14 @@ export default Ember.Component.extend({
   providers: [],
   clients: [],
 
-  searchRole: function() {
-    this.set('roles', this.get('store').findAll('role'));
+  searchRole: function(link) {
+    if (link === 'users') {
+      this.set('roles', this.get('store').findAll('role'));
+    } else if (link === 'providers.show.users') {
+      this.set('roles', this.get('store').query('role', { scope: 'provider' }));
+    } else if (link === 'clients.show.users') {
+      this.set('roles', this.get('store').query('role', { scope: 'client' }));
+    }
   },
   selectRole(role) {
     this.set('role', role);
@@ -42,6 +48,7 @@ export default Ember.Component.extend({
       this.set('providers', this.get('store').query('provider', { 'page[size]': 10 }));
       if (this.get('provider').get('id')) {
         this.set('clients', this.get('store').query('client', { sort: 'name', 'provider-id': this.get('provider').get('id'), 'page[size]': 10 }));
+        this.selectClient(user.get('client'));
       }
     },
     searchRole: function(link) {
