@@ -5,9 +5,10 @@ import { validator, buildValidations } from 'ember-cp-validations';
 const Validations = buildValidations({
   id: [
     validator('presence', true),
+    validator('unique-provider-id', true),
     validator('format', {
       regex: /^[a-z]+$/,
-      message: 'The Provider ID can contain only upper case letters'
+      message: 'The Provider ID can contain only lower case letters'
     }),
     validator('length', {
       min: 2,

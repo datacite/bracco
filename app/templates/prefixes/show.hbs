@@ -3,38 +3,49 @@
 
   <div class="container-fluid">
     <div class="content">
-      {{#if (can "read index" )}}
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item">{{#link-to "index"}}DataCite{{/link-to}}</li>
-        </ol>
-      {{/if}}
+      <div class='col-md-9'>
+        {{#if (can "read index" )}}
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">{{#link-to "index"}}DataCite{{/link-to}}</li>
+          </ol>
+        {{/if}}
 
-      <h2 class="work">{{model.id}}</h2>
+        <h2 class="work">{{model.id}}</h2>
 
-      <div class="panel panel-transparent">
-        <div class="panel-body">
-          {{#if (eq model.id "10.5072")}}
-            <span class="icon-default">Test prefix</span>
-          {{else}}
-            <h5>Providers</h5>
-            {{#if model.providers}}
-              {{#each model.providers as |provider|}}
-                {{#link-to "providers.show.prefixes" provider.id}}{{provider.name}}{{/link-to}}<br/>
-              {{/each}}
+        <div class="panel panel-transparent">
+          <div class="panel-body">
+            {{#if (eq model.id "10.5072")}}
+              <span class="icon-default">Test prefix</span>
             {{else}}
-              <span class="icon-warning">No providers found.</span>
-            {{/if}}
+              <h5>{{pluralize-word model.providers.length "Provider" omitCount=true}}</h5>
+              {{#if model.providers}}
+                {{#each model.providers as |provider|}}
+                  {{#link-to "providers.show.prefixes" provider.id}}{{provider.name}}{{/link-to}}<br/>
+                {{/each}}
+              {{else}}
+                <span class="icon-warning">No providers found.</span>
+              {{/if}}
 
-            <h5>Clients</h5>
-            {{#if model.clients}}
-              {{#each model.clients as |client|}}
-                {{#link-to "clients.show.prefixes" client.id}}{{client.name}}{{/link-to}}<br/>
-              {{/each}}
-            {{else}}
-              <span class="icon-warning">No clients found.</span>
+              <h5>{{pluralize-word model.clients.length "Client" omitCount=true}}</h5>
+              {{#if model.clients}}
+                {{#each model.clients as |client|}}
+                  {{#link-to "clients.show.prefixes" client.id}}{{client.name}}{{/link-to}}<br/>
+                {{/each}}
+              {{else}}
+                <span class="icon-warning">No clients found.</span>
+              {{/if}}
             {{/if}}
-          {{/if}}
+          </div>
         </div>
+      </div>
+      <div class='col-md-3'>
+        <div class="panel panel-transparent">
+          <div class="panel-body">
+            <div class="edit"></div>
+          </div>
+        </div>
+
+        {{client-sidebar model=model}}
       </div>
     </div>
   </div>
