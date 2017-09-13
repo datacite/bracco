@@ -49,21 +49,32 @@ export default Ember.Service.extend({
       self.set('isAuthenticated', Ember.isPresent(result));
 
       if (Ember.isPresent(result)) {
-        self.set('role_id', result.role_id);
-        self.set('role', self.get('store').findRecord('role', result.role_id));
-
         self.set('jwt', result.jwt);
         self.set('uid', result.uid);
 
         self.set('name', result.name);
         self.set('email', result.email);
 
-        self.set('provider_id', result.provider_id);
-        self.set('client_id', result.client_id);
+        // check that provider or client exist and are active
 
-        self.set('isAdmin', Ember.isEqual(result.role_id, "staff_admin"));
-        self.set('isProvider', Ember.isEqual(result.role_id, "provider_admin"));
-        self.set('isClient', Ember.isEqual(result.role_id, "client_admin"));
+        if (['staff_admin', 'staff_user'].includes(result.role_id)) {
+          self.set('role_id', result.role_id);
+          self.set('isAdmin', true);
+        } else if (['provider_admin', 'provider_user'].includes(result.role_id) && result.provider_id) {
+          self.set('provider_id', result.provider_id);
+          //let provider = self.get('store').findRecord('provider', result.provider_id);
+          //self.set('role_id', (isProvider) ? result.role_id : 'user');
+          self.set('isProvider', true);
+          self.set('role_id', result.role_id)
+        } else if (['client_admin', 'client_user'].includes(result.role_id) && result.client_id) {
+          self.set('client_id', result.client_id);
+          self.set('isClient', true);
+          self.set('role_id', result.role_id);
+        } else {
+          self.set('role_id', 'user');
+        }
+
+        self.set('role', self.get('store').findRecord('role', self.get('role_id')));
 
         if (self.get('isProvider')) {
           self.set('home', '/providers/' + result.provider_id + '/clients');
