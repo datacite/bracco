@@ -75,9 +75,9 @@
 
           {{#if model.domainList}}
             <h5>
-              Domains
+              {{pluralize-word model.domainList.length "Domain" omitCount=true}}
               <span>{{fa-icon "question-circle-o"}}
-                {{#bs-tooltip placement="top" viewportPadding=10}}URLs for DOIs must point to one of these domains.{{/bs-tooltip}}
+                {{#bs-tooltip placement="top" viewportPadding=10}}URLs for DOIs must use {{#if (gt model.domainList.length 1)}}one of these (sub-)domains{{else}}this (sub-)domain{{/if}}.{{/bs-tooltip}}
               </span>
             </h5>
             {{#each model.domainList as |domain|}}
