@@ -101,7 +101,9 @@
           </div>
           <div class="panel-footer">
             {{prefix.id}}
-            <button {{action "detach" prefix model}} class="btn-link btn-icon">{{fa-icon "trash"}}</button>
+            {{#if (can "write prefix" prefix)}}
+              <button {{action "detach" prefix model}} class="btn-link btn-icon">{{fa-icon "trash"}}</button>
+            {{/if}}
           </div>
         </div>
       {{/each}}
