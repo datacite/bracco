@@ -5,11 +5,11 @@
         <h3 class="edit">New Provider</h3>
 
         {{#bs-form formLayout="vertical" model=provider onSubmit=(action "submit" provider model) submitOnEnter=true as |form|}}
-          {{form.element controlType="text" label="Provider ID" placeholder="Provider ID" property="id" required=false}}
+          {{form.element controlType="text" label="Provider ID" placeholder="Provider ID" property="id" helpText='The Provider ID can contain only lower case letters, and must not be longer than 8 characters' useIcons=false required=false}}
           {{form.element controlType="text" label="Name" placeholder="Name" property="name" required=false}}
           {{form.element controlType="text" label="Contact" placeholder="Contact" property="contact" required=false}}
           {{form.element controlType="email" label="Email" placeholder="Email" property="email" required=false}}
-          {{form.element controlType="checkbox" label="Account is active" property="isActive"}}
+          {{form.element controlType="checkbox" label="Account is active" property="isActive" helpText='This account can manage clients, prefixes and users'}}
 
           <div class="pseudo-footer">
             <div class="btn-toolbar pull-right">

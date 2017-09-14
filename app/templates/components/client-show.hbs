@@ -10,8 +10,8 @@
             {{form.element controlType="text" label="Name" placeholder="Name" property="name" required=false}}
             {{form.element controlType="text" label="Contact" placeholder="Contact" property="contact" required=false}}
             {{form.element controlType="email" label="Email" placeholder="Email" property="email" required=false}}
-            {{form.element controlType="textarea" label="Domains" placeholder="Domains" property="domains" required=false}}
-            {{form.element controlType="checkbox" label="Account is active" property="isActive"}}
+            {{form.element controlType="textarea" label="Domains" placeholder="Domains" property="domains" required=false helpText='List of (sub-)domains used for DOI registration, or use * to allow all domains'}}
+            {{form.element controlType="checkbox" label="Account is active" property="isActive" helpText='This account can manage clients, prefixes and users'}}
 
             <div class="pseudo-footer">
               <div class="btn-toolbar pull-right">
@@ -75,9 +75,9 @@
 
           {{#if model.domainList}}
             <h5>
-              Domains
+              {{pluralize-word model.domainList.length "Domain" omitCount=true}}
               <span>{{fa-icon "question-circle-o"}}
-                {{#bs-tooltip placement="top" viewportPadding=10}}URLs for DOIs must point to one of these domains.{{/bs-tooltip}}
+                {{#bs-tooltip placement="top" viewportPadding=10}}URLs for DOIs must use {{#if (gt model.domainList.length 1)}}one of these (sub-)domains{{else}}this (sub-)domain{{/if}}.{{/bs-tooltip}}
               </span>
             </h5>
             {{#each model.domainList as |domain|}}
@@ -88,7 +88,7 @@
       </div>
     </div>
     <div class='col-md-3'>
-      {{#if (can "update client")}}
+      {{#if (can "update client" client)}}
         <div class="panel facets">
           <div class="panel-body">
             <button {{action "edit" model}} class="btn btn-warning">{{fa-icon "pencil"}}Edit Client</button>

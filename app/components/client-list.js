@@ -9,8 +9,9 @@ export default Ember.Component.extend({
   new: false,
 
   actions: {
-    new: function() {
-      this.set('client', this.get('store').createRecord('client'));
+    new: function(model) {
+      let provider = this.get('store').peekRecord('provider', model.get('otherParams.provider-id'));
+      this.set('client', this.get('store').createRecord('client', { provider: provider, id: provider.id + '.', domains: '*', isActive: true }));
       this.set('new', true);
     },
     submit: function(client) {
@@ -18,6 +19,8 @@ export default Ember.Component.extend({
       this.set('new', false);
     },
     cancel: function() {
+      this.get('client').deleteRecord();
+      this.set('client', null);
       this.set('new', false);
     }
   }

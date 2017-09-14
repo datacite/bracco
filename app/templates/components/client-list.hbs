@@ -5,12 +5,12 @@
         <h3 class="edit">New Client</h3>
 
         {{#bs-form formLayout="vertical" model=client onSubmit=(action "submit" client model) submitOnEnter=true as |form|}}
-          {{form.element controlType="text" label="Client ID" placeholder="Client ID" property="id" required=false}}
-          {{form.element controlType="text" label="Name" placeholder="Name" property="name" required=false}}
-          {{form.element controlType="text" label="Contact" placeholder="Contact" property="contact" required=false}}
-          {{form.element controlType="email" label="Email" placeholder="Email" property="email" required=false}}
-          {{form.element controlType="textarea" label="Domains" placeholder="Domains" property="domains" required=false}}
-          {{form.element controlType="checkbox" label="Account is active" property="isActive"}}
+          {{form.element controlType="text" label="Client ID" placeholder="Client ID" property="id" helpText='The Client ID can contain only lower case letters and numbers, and must start with the Provider ID' useIcons=false required=false}}
+          {{form.element controlType="text" label="Name" placeholder="Name" property="name" useIcons=false required=false}}
+          {{form.element controlType="text" label="Contact" placeholder="Contact" property="contact" useIcons=false required=false}}
+          {{form.element controlType="email" label="Email" placeholder="Email" property="email" useIcons=false required=false}}
+          {{form.element controlType="textarea" label="Domains" placeholder="Domains" property="domains" helpText='List of (sub-)domains used for DOI registration, or use * to allow all domains' useIcons=false required=false}}
+          {{form.element controlType="checkbox" label="Account is active" property="isActive" helpText='This account can manage users, prefixes and DOIs'}}
 
           <div class="pseudo-footer">
             <div class="btn-toolbar pull-right">
@@ -51,9 +51,9 @@
 
             {{#if client.domainList}}
               <h5>
-                Domains
+                {{pluralize-word client.domainList.length "Domain" omitCount=true}}
                 <span>{{fa-icon "question-circle-o"}}
-                  {{#bs-tooltip placement="top" viewportPadding=10}}URLs for DOIs must use one of these (sub-)domains.{{/bs-tooltip}}
+                  {{#bs-tooltip placement="top" viewportPadding=10}}URLs for DOIs must use {{#if (gt client.domainList.length 1)}}one of these (sub-)domains{{else}}this (sub-)domain{{/if}}.{{/bs-tooltip}}
                 </span>
               </h5>
               {{#each client.domainList as |domain|}}
@@ -79,7 +79,7 @@
     {{#if (and (can "create client" model) (eq link "providers.show.clients"))}}
       <div class="panel facets">
         <div class="panel-body">
-          <button {{action "new"}} class="btn btn-warning">{{fa-icon "plus"}} Add Client</button>
+          <button {{action "new" model}} class="btn btn-warning">{{fa-icon "plus"}} Add Client</button>
         </div>
       </div>
     {{else}}

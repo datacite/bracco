@@ -80,7 +80,7 @@
             {{#if (eq prefix.id "10.5072")}}
               <span class="icon-default">Test prefix</span>
             {{else}}
-              <h5>Providers</h5>
+              <h5>{{pluralize-word prefix.providers.length "Provider" omitCount=true}}</h5>
               {{#if prefix.providers}}
                 {{#each prefix.providers as |provider|}}
                   {{#link-to "providers.show.prefixes" provider.id}}{{provider.name}}{{/link-to}}<br/>
@@ -89,7 +89,7 @@
                 <span class="icon-warning">No providers found.</span>
               {{/if}}
 
-              <h5>Clients</h5>
+              <h5>{{pluralize-word prefix.clients.length "Client" omitCount=true}}</h5>
               {{#if prefix.clients}}
                 {{#each prefix.clients as |client|}}
                   {{#link-to "clients.show.prefixes" client.id}}{{client.name}}{{/link-to}}<br/>
@@ -101,7 +101,9 @@
           </div>
           <div class="panel-footer">
             {{prefix.id}}
-            <button {{action "detach" prefix model}} class="btn-link btn-icon">{{fa-icon "trash"}}</button>
+            {{#if (can "write prefix" prefix)}}
+              <button {{action "detach" prefix model}} class="btn-link btn-icon">{{fa-icon "trash"}}</button>
+            {{/if}}
           </div>
         </div>
       {{/each}}

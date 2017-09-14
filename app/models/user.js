@@ -1,4 +1,5 @@
 import DS from 'ember-data';
+import ENV from 'bracco/config/environment';
 
 export default DS.Model.extend({
   provider: DS.belongsTo('provider', {
@@ -18,5 +19,9 @@ export default DS.Model.extend({
   github: DS.attr('string'),
   email: DS.attr('string'),
   created: DS.attr('date'),
-  updated: DS.attr('date')
+  updated: DS.attr('date'),
+
+  identifier: Ember.computed('id', function() {
+    return ENV.ORCID_URL + '/' + this.get('id');
+  })
 });
