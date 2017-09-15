@@ -8,14 +8,14 @@ export default Ember.Component.extend({
   provider: null,
   isDeletable: false,
 
-  setIsDeletable() {
-    this.set('isDeletable', Ember.isBlank(this.get('provider').get('prefixes')));
+  didReceiveAttrs() {
+    this._super(...arguments);
+    this.set('isDeletable', Ember.isBlank(this.get('model').get('dois')));
   },
 
   actions: {
     edit: function(provider) {
       this.set('provider', provider);
-      this.setIsDeletable();
       this.set('edit', true);
     },
     delete: function(client) {

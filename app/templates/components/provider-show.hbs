@@ -88,7 +88,9 @@
       {{#if (can "update provider" model)}}
         <div class="panel facets">
           <div class="panel-body">
-            <button {{action "edit" model}} class="btn btn-warning">{{fa-icon "pencil"}} Edit {{#if (not admin)}}Provider{{else}}Admin{{/if}}</button>
+            <div class="btn-toolbar">
+              <button {{action "edit" model}} class="btn btn-warning">{{fa-icon "pencil"}} Edit {{#if (not admin)}}Provider{{else}}Admin{{/if}}</button>
+            </div>
           </div>
         </div>
       {{/if}}

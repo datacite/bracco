@@ -17,7 +17,6 @@ export default Ember.Component.extend({
     destroy: function() {
       this.get('clientPrefix').destroyRecord();
       this.get('clientPrefix').save();
-      this.sendAction('refreshCurrentRoute');
       this.set('delete', false);
     },
   }
