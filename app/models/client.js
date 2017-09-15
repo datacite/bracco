@@ -32,6 +32,9 @@ export default DS.Model.extend(Validations, {
   prefixes: DS.hasMany('prefix', {
     async: false
   }),
+  'client-prefixes': DS.hasMany('client-prefix', {
+    async: false
+  }),
   users: DS.hasMany('user', { async: true }),
 
   name: DS.attr('string'),

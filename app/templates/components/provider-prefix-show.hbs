@@ -1,0 +1,31 @@
+{{#if delete}}
+  <div class="panel-body">
+    <div class="alert alert-danger" role="alert">
+      Are you sure you want to delete prefix {{model.prefix.id}} for this provider?
+    </div>
+  </div>
+  <div class="panel-footer">
+    <div class="btn-toolbar pull-right">
+      <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
+      <button {{action "destroy"}} class="btn btn-sm btn-fill">Delete</button>
+    </div>
+    <div class="clearfix"/>
+  </div>
+{{else}}
+  <div class="panel-body">
+    <h3 class="member">{{model.prefix.id}}</h3>
+
+    {{#if (eq model.prefix.id "10.5072")}}
+      <span class="icon-default">Test prefix</span>
+    {{/if}}
+
+    <h5>Added</h5>
+    {{format-time model.created year='numeric' month='long' day='numeric'}}
+  </div>
+  <div class="panel-footer">
+    {{model.prefix.id}}
+    {{#if (can "write prefix" model)}}
+      <button {{action "delete" model}} class="btn-link btn-icon">{{fa-icon "trash"}}</button>
+    {{/if}}
+  </div>
+{{/if}}

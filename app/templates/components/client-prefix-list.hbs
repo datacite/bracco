@@ -1,0 +1,43 @@
+<div class='col-md-9 panel-list' id="content">
+  {{#if searchable}}
+    {{model-search model=model}}
+  {{/if}}
+  {{#if model}}
+    {{#each model as |client-prefix|}}
+      {{client-prefix-show model=client-prefix refreshCurrentRoute=refreshCurrentRoute}}
+    {{/each}}
+    <div class="text-center">
+      {{#if (gt model.meta.total_pages 1)}}
+        {{page-numbers content=model showFL=true}}
+      {{/if}}
+    </div>
+  {{else}}
+    {{#bs-alert dismissible=false type="warning"}}
+      No prefixes found.
+    {{/bs-alert}}
+  {{/if}}
+</div>
+
+<div class='col-md-3'>
+  {{#if model.meta.years}}
+    <div class="panel facets add">
+      <div class="panel-body">
+        <h4>Year created</h4>
+        <ul>
+          {{#each model.meta.years as |year|}}
+            <li>
+              {{#if model.otherParams.year}}
+                {{#link-to link (query-params year=null)}}{{fa-icon "check-square-o"}}{{/link-to}}
+              {{else}}
+                {{#link-to link (query-params year=year.id)}}{{fa-icon "square-o"}}{{/link-to}}
+              {{/if}}
+              <div class="facet-title">{{year.title}}</div>
+              <span class="number pull-right">{{year.count}}</span>
+              <div class="clearfix"/>
+            </li>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+  {{/if}}
+</div>

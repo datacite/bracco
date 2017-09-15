@@ -9,8 +9,8 @@ export default Ember.Route.extend(RouteMixin, {
                             perPage: "page[size]",
                             total_pages: "total-pages" };
 
-    params = Ember.merge(params, { 'client-id': this.modelFor('clients/show').get('id') });
-    return this.findPaged('prefix', params);
+    params = Ember.merge(params, { 'client-id': this.modelFor('clients/show').get('id'), reload: true });
+    return this.findPaged('client-prefix', params);
   },
   actions: {
     queryParamsDidChange: function() {
