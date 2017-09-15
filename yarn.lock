@@ -3186,6 +3186,12 @@ ember-can@^0.8.4:
   dependencies:
     ember-cli-babel "^5.1.5"
 
+ember-clean-tmp@^0.1.4:
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/ember-clean-tmp/-/ember-clean-tmp-0.1.4.tgz#e49a1530b7d2988603688c7a3bcdb8c4cd6c0710"
+  dependencies:
+    ember-cli-babel "^5.1.5"
+
 ember-cli-app-version@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/ember-cli-app-version/-/ember-cli-app-version-3.0.0.tgz#d67a33aeec7bd03187fbe72c5663dadec4c3368a"
