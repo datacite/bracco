@@ -8,6 +8,11 @@ export default Ember.Component.extend({
   client: null,
   new: false,
 
+  reset() {
+    this.set('client', null);
+    this.set('new', false);
+  },
+
   actions: {
     new: function(model) {
       let provider = this.get('store').peekRecord('provider', model.get('otherParams.provider-id'));
@@ -15,13 +20,15 @@ export default Ember.Component.extend({
       this.set('new', true);
     },
     submit: function(client) {
-      client.save();
-      this.set('new', false);
+      let self = this;
+      client.save().then(function(client) {
+        self.get('router').transitionTo('clients.show.prefixes', client.id);
+        self.set('new', false);
+      });
     },
     cancel: function() {
       this.get('client').deleteRecord();
-      this.set('client', null);
-      this.set('new', false);
+      this.reset();
     }
   }
 });

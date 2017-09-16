@@ -13,6 +13,11 @@ export default Ember.Component.extend({
     this.set('isDeletable', Ember.isBlank(this.get('model').get('dois')));
   },
 
+  reset() {
+    this.set('provider', null);
+    this.set('false', false);
+  },
+
   actions: {
     edit: function(provider) {
       this.set('provider', provider);
@@ -24,7 +29,7 @@ export default Ember.Component.extend({
     },
     submit: function() {
       this.get('provider').save();
-      this.set('edit', false);
+      this.reset();
     },
     destroy: function() {
       this.get('provider').destroyRecord();
@@ -32,7 +37,7 @@ export default Ember.Component.extend({
       this.get('router').transitionTo('providers');
     },
     cancel: function() {
-      this.set('edit', false);
+      this.reset();
     }
   }
 });

@@ -4,17 +4,14 @@
       <div class="panel-body">
         <h3 class="edit">Add Prefixes</h3>
 
-        {{#bs-form formLayout="vertical" model=prefix onSubmit=(action "submit") as |form|}}
-          {{form.element controlType="text" label="From" placeholder="First Prefix" property="firstPrefix" disabled=true}}
-          {{form.element controlType="text" label="To" placeholder="Last Prefix" property="lastPrefix" disabled=true}}
-
-          <div class="alert alert-warning" role="alert">
-            This functionality has not been implemented yet.
-          </div>
+        {{#bs-form formLayout="vertical" as |form|}}
+          {{form.element controlType="text" label="From" helpText='First prefix in range of new prefixes provided by CNRI' onChange=(action "submitFirstPrefix") placeholder="First Prefix" property="firstPrefix"}}
+          {{form.element controlType="text" label="To" helpText='Last prefix in range of new prefixes provided by CNRI' onChange=(action "submitLastPrefix") placeholder="Last Prefix" property="lastPrefix"}}
 
           <div class="pseudo-footer">
             <div class="btn-toolbar pull-right">
               <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
+              <button {{action "submit"}} type="submit" class="btn btn-sm btn-fill">Add</button>
             </div>
             <div class="clearfix"/>
           </div>

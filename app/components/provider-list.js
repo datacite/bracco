@@ -8,19 +8,26 @@ export default Ember.Component.extend({
   provider: null,
   new: false,
 
+  reset() {
+    this.set('provider', null);
+    this.set('new', false);
+  },
+
   actions: {
     new: function() {
       this.set('provider', this.get('store').createRecord('provider', { isActive: true }));
       this.set('new', true);
     },
     submit: function(provider) {
-      provider.save();
-      this.set('new', false);
+      let self = this;
+      provider.save().then(function(provider) {
+        self.get('router').transitionTo('providers.show.prefixes', provider.id);
+        self.set('new', false);
+      });
     },
     cancel: function() {
       this.get('provider').deleteRecord();
-      this.set('provider', null);
-      this.set('new', false);
+      this.reset();
     }
   }
 });

@@ -12,6 +12,11 @@ export default Ember.Component.extend({
     this.set('isDeletable', Ember.isBlank(this.get('client').get('prefixes')));
   },
 
+  reset() {
+    this.set('client', null);
+    this.set('edit', false);
+  },
+
   actions: {
     edit: function(client) {
       this.set('client', client);
@@ -24,7 +29,7 @@ export default Ember.Component.extend({
     },
     submit: function(client) {
       client.save();
-      this.set('edit', false);
+      this.reset();
     },
     destroy: function(link) {
       this.get('client').destroyRecord();
@@ -32,7 +37,7 @@ export default Ember.Component.extend({
       this.get('router').transitionTo(link);
     },
     cancel: function() {
-      this.set('edit', false);
+      this.reset();
       this.set('delete', false);
     }
   }
