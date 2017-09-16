@@ -25,7 +25,7 @@
 {{else}}
   <div class='col-md-9 panel-list' id="content">
     {{#if searchable}}
-      {{model-search model=model}}
+      {{model-search model=model sortable=true}}
     {{/if}}
     {{#if model}}
       {{#each model as |prefix|}}

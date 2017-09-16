@@ -5,9 +5,9 @@
         <h3 class="edit">Add Prefix</h3>
 
         {{#bs-form formLayout="vertical" model=prefix onSubmit=(action "submit") as |form|}}
-          {{#form.element controlType="power-select" property="prefix" options=prefixes optionLabelPath="name" destination=prefix as |el|}}
-            {{#el.control onChange=(action "selectPrefix") searchField="id" searchEnabled=true placeholder="Select Prefix" allowClear=true as |item|}}
-              {{item.id}}
+          {{#form.element controlType="power-select" property="id" options=prefixes as |el|}}
+            {{#el.control onChange=(action "selectPrefix") selected=prefix search=(action "searchPrefix") optionLabelPath="id" searchField="id" searchEnabled=true placeholder="Select Prefix" allowClear=true as |item|}}
+              {{if item.id item.id item}}
             {{/el.control}}
           {{/form.element}}
 

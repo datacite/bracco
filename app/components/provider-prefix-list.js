@@ -6,28 +6,39 @@ export default Ember.Component.extend({
   tagName: 'div',
   classNames: ['row'],
   new: false,
-  providerPrefix: null,
   provider: null,
   prefix: null,
   prefixes: [],
 
+  searchPrefix(query) {
+    this.set('prefixes', this.get('store').query('prefix', { query: query, state: 'unassigned', sort: 'name', 'page[size]': 10 }));
+  },
+  reset() {
+    this.set('provider', null);
+    this.set('prefix', null);
+    this.set('prefixes', []);
+    this.set('new', false);
+  },
+
   actions: {
-    new: function(model) {
+    new(model) {
       this.set('provider', this.get('store').findRecord('provider', model.content.query['provider-id']));
-      this.set('prefixes', this.get('store').query('prefix', { state: 'unassigned', 'page[size]': 10 }));
-      //this.set('prefix', this.get('prefixes').get('firstObject'));
+      this.searchPrefix(null);
       this.set('new', true);
     },
-    submit: function() {
-      this.set('providerPrefix', this.get('store').createRecord('providerPrefix', { provider: this.get('provider'), prefix: this.get('prefix') }));
-      this.get('providerPrefix').save();
-      this.set('new', false);
+    submit() {
+      var providerPrefix = this.get('store').createRecord('providerPrefix', { provider: this.get('provider'), prefix: this.get('prefix') });
+      providerPrefix.save();
+      this.reset();
     },
-    selectPrefix: function(prefix) {
+    searchPrefix(query) {
+      this.searchPrefix(query);
+    },
+    selectPrefix(prefix) {
       this.set('prefix', prefix);
     },
-    cancel: function() {
-      this.set('new', false);
+    cancel() {
+      this.reset();
     }
   }
 });
