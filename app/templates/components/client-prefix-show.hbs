@@ -24,7 +24,7 @@
   </div>
   <div class="panel-footer">
     {{model.prefix.id}}
-    {{#if (can "write prefix" model)}}
+    {{#if (and (can "write prefix" model) (not-eq model.prefix.id "10.5072"))}}
       <button {{action "delete" model}} class="btn-link btn-icon">{{fa-icon "trash"}}</button>
     {{/if}}
   </div>

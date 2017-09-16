@@ -17,6 +17,15 @@
 
     {{#if (eq model.prefix.id "10.5072")}}
       <span class="icon-default">Test prefix</span>
+    {{else}}
+      <h5>{{pluralize-word model.clients.length "Client" omitCount=true}}</h5>
+      {{#if model.clients}}
+        {{#each model.clients as |client|}}
+          {{#link-to "clients.show.prefixes" client.id}}{{client.name}}{{/link-to}}<br/>
+        {{/each}}
+      {{else}}
+        <span class="icon-warning">No clients found.</span>
+      {{/if}}
     {{/if}}
 
     <h5>Added</h5>
@@ -24,7 +33,7 @@
   </div>
   <div class="panel-footer">
     {{model.prefix.id}}
-    {{#if (can "write prefix" model)}}
+    {{#if (and (can "write prefix" model) (not-eq model.prefix.id "10.5072"))}}
       <button {{action "delete" model}} class="btn-link btn-icon">{{fa-icon "trash"}}</button>
     {{/if}}
   </div>
