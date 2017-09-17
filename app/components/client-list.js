@@ -22,7 +22,7 @@ export default Ember.Component.extend({
     submit: function(client) {
       let self = this;
       client.save().then(function(client) {
-        self.get('router').transitionTo('clients.show.prefixes', client.id);
+        self.get('router').transitionTo('clients.show.settings', client.id);
         self.set('new', false);
       });
     },

@@ -21,7 +21,7 @@ export default Ember.Component.extend({
     submit: function(provider) {
       let self = this;
       provider.save().then(function(provider) {
-        self.get('router').transitionTo('providers.show.prefixes', provider.id);
+        self.get('router').transitionTo('providers.show.settings', provider.id);
         self.set('new', false);
       });
     },
