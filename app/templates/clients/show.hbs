@@ -6,9 +6,10 @@
       {{#if (can "read provider" model.provider)}}
         <ol class="breadcrumb">
           {{#if (can "read index")}}
-            <li class="breadcrumb-item">{{#link-to "index"}}DataCite{{/link-to}}</li>
+            <li class="breadcrumb-item">{{#link-to "index"}}Providers{{/link-to}}</li>
           {{/if}}
-          <li class="breadcrumb-item">{{#link-to "providers.show.clients" model.provider.id}}{{model.provider.name}}{{/link-to}}</li>
+          <li class="breadcrumb-item">{{#link-to "providers.show" model.provider.id}}{{model.provider.name}}{{/link-to}}</li>
+          <li class="breadcrumb-item">{{#link-to "providers.show.clients" model.provider.id}}Clients{{/link-to}}</li>
         </ol>
       {{/if}}
 
@@ -27,6 +28,7 @@
           <div class="tab-content nav-tabs-member">
             {{#bs-nav type="tabs" as |nav|}}
               {{#nav.item}}{{#nav.link-to "clients.show.index" model.id class="nav-link"}}Info{{/nav.link-to}}{{/nav.item}}
+              {{#nav.item}}{{#nav.link-to "clients.show.settings" model.id class="nav-link"}}Settings{{/nav.link-to}}{{/nav.item}}
               {{#nav.item}}{{#nav.link-to "clients.show.users" model.id class="nav-link"}}Users{{/nav.link-to}}{{/nav.item}}
               {{#nav.item}}{{#nav.link-to "clients.show.prefixes" model.id class="nav-link"}}Prefixes{{/nav.link-to}}{{/nav.item}}
             {{#nav.item}}{{#nav.link-to "clients.show.dois" model.id class="nav-link"}}DOIs{{/nav.link-to}}{{/nav.item}}

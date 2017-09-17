@@ -5,7 +5,7 @@
     <div class="content">
       {{#if (can "read index" )}}
         <ol class="breadcrumb">
-          <li class="breadcrumb-item">{{#link-to "index"}}DataCite{{/link-to}}</li>
+          <li class="breadcrumb-item">{{#link-to "index"}}Providers{{/link-to}}</li>
         </ol>
       {{/if}}
 
@@ -25,7 +25,7 @@
           <div class="tab-content nav-tabs-member">
             {{#bs-nav type="tabs" as |nav|}}
               {{#nav.item}}{{#nav.link-to "providers.show.index" model.id class="nav-link"}}Info{{/nav.link-to}}{{/nav.item}}
-              {{#nav.item}}{{#nav.link-to "providers.show.clients" model.id class="nav-link"}}Clients{{/nav.link-to}}{{/nav.item}}
+              {{#nav.item}}{{#nav.link-to "providers.show.settings" model.id class="nav-link"}}Settings{{/nav.link-to}}{{/nav.item}}{{#nav.item}}{{#nav.link-to "providers.show.clients" model.id class="nav-link"}}Clients{{/nav.link-to}}{{/nav.item}}
               {{#nav.item}}{{#nav.link-to "providers.show.users" model.id class="nav-link"}}Users{{/nav.link-to}}{{/nav.item}}
               {{#nav.item}}{{#nav.link-to "providers.show.prefixes" model.id class="nav-link"}}Prefixes{{/nav.link-to}}{{/nav.item}}
               {{#nav.item}}{{#nav.link-to "providers.show.dois" model.id class="nav-link"}}DOIs{{/nav.link-to}}{{/nav.item}}

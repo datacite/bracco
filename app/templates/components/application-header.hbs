@@ -8,9 +8,6 @@
       {{#if (can "read settings")}}
         {{#nav.item}}<a href="{{home}}">Home</a>{{/nav.item}}
       {{/if}}
-      {{#if (can "write settings")}}
-        {{#nav.item}}{{#nav.link-to "settings"}}Settings{{/nav.link-to}}{{/nav.item}}
-      {{/if}}
       {{#nav.item}}
         <a href="https://support.datacite.org">{{t "general.support"}}</a>
       {{/nav.item}}

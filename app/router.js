@@ -10,6 +10,7 @@ const Router = Ember.Router.extend(GoogleAnalyticsRoute, {
 Router.map(function() {
   this.route('providers', function() {
     this.route('show', { path: '/:provider_id' }, function() {
+      this.route('settings', { path: '/settings' });
       this.route('dois', { path: '/dois' });
       this.route('prefixes', { path: '/prefixes' });
       this.route('users', { path: '/users' });
@@ -18,6 +19,7 @@ Router.map(function() {
   });
   this.route('clients', function() {
     this.route('show', { path: '/:client_id' }, function() {
+      this.route('settings', { path: '/settings' });
       this.route('dois', { path: '/dois' });
       this.route('prefixes', { path: '/prefixes' });
       this.route('users', { path: '/users' });

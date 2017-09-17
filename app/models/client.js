@@ -36,6 +36,7 @@ export default DS.Model.extend(Validations, {
     async: false
   }),
   users: DS.hasMany('user', { async: true }),
+  meta: DS.attr(),
 
   name: DS.attr('string'),
   domains: DS.attr('string'),
