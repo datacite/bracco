@@ -4,14 +4,16 @@
       <div class="panel-body">
         <h3 class="edit">Add Prefixes</h3>
 
-        {{#bs-form formLayout="vertical" as |form|}}
-          {{form.element controlType="text" label="From" helpText='First prefix in range of new prefixes provided by CNRI' onChange=(action "submitFirstPrefix") placeholder="First Prefix" property="firstPrefix"}}
-          {{form.element controlType="text" label="To" helpText='Last prefix in range of new prefixes provided by CNRI' onChange=(action "submitLastPrefix") placeholder="Last Prefix" property="lastPrefix"}}
+        {{#bs-form formLayout="vertical" model=this onSubmit=(action "submit") as |form|}}
+          <p class="help-block">Please add the first and last DOI prefix from the new prefix range registered by CNRI.</p>
+
+          {{form.element controlType="text" label="From" onChange=(action "submitFirstPrefix") placeholder="First Prefix" property="firstPrefix" required=false}}
+          {{form.element controlType="text" label="To" onChange=(action "submitLastPrefix") placeholder="Last Prefix" property="lastPrefix" required=false}}
 
           <div class="pseudo-footer">
             <div class="btn-toolbar pull-right">
               <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
-              <button {{action "submit"}} type="submit" class="btn btn-sm btn-fill">Add</button>
+              <button type="submit" class="btn btn-sm btn-fill">Add</button>
             </div>
             <div class="clearfix"/>
           </div>
