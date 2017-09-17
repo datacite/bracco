@@ -53,7 +53,7 @@ module.exports = function(defaults) {
 
     inlineContent: {
       'site-title' : {
-        content: (process.env.SITE_TITLE || "DataCite DOI Registration Service")
+        content: (process.env.SITE_TITLE || "DataCite DOI Fabrica")
       },
       'cdn-url' : {
         content: (process.env.CDN_URL || "https://assets.datacite.org")

@@ -32,7 +32,7 @@ module.exports = function(environment) {
     }
   };
 
-  ENV.SITE_TITLE = process.env.SITE_TITLE || "DataCite DOI Registration Service";
+  ENV.SITE_TITLE = process.env.SITE_TITLE || "DataCite DOI Fabrica";
   ENV.NAVMENU_TITLE = process.env.NAVMENU_TITLE || 'Test Services';
   ENV.SEARCH_URL = process.env.SEARCH_URL || "https://search.test.datacite.org";
   ENV.ORCID_URL = process.env.ORCID_URL || "https://sandbox.orcid.org";
