@@ -28,7 +28,9 @@ Router.map(function() {
   this.route('dois', function() {
     this.route('show', { path: '/:doi_id' });
   });
-  this.route('settings');
+  this.route('settings', function() {
+    this.route('show', { path: '/:provider_id' });
+  });
   this.route('users', function() {
     this.route('edit', { path: '/:user_id/edit' });
   });
