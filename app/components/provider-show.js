@@ -15,7 +15,7 @@ export default Ember.Component.extend({
 
   reset() {
     this.set('provider', null);
-    this.set('false', false);
+    this.set('edit', false);
   },
 
   actions: {
