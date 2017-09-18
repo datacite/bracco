@@ -1,54 +1,79 @@
-<div class="col-md-9" id="content-user">
-  {{#if searchable}}
-    {{model-search model=model sortable=true}}
-  {{/if}}
+{{#if new}}
+  <div class='col-md-9'>
+    {{#bs-form formLayout="vertical" model=this as |form|}}
+      <div class="panel-body">
+        <h3 class="member">Add User</h3>
 
-  {{#if model}}
-    {{#bs-accordion as |acc|}}
+        {{#form.element controlType="power-select" property="creditName" options=users optionLabelPath="creditName" destination=user as |el|}}
+          {{#el.control onChange=(action "selectUser") search=(action "searchUser") searchField="creditName" searchEnabled=true allowClear=true as |item|}}
+            {{if item.creditName item.creditName item}}
+          {{/el.control}}
+        {{/form.element}}
+      </div>
+      <div class="panel-footer">
+        <div class="btn-toolbar">
+          <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
+          <button {{action "submit"}} type="submit" class="btn btn-sm btn-fill">Save</button>
+        </div>
+      </div>
+    {{/bs-form}}
+  </div>
+{{else}}
+  <div class='col-md-9 panel-list' id="content">
+    {{#if searchable}}
+      {{model-search model=model sortable=true}}
+    {{/if}}
+    {{#if model}}
       {{#each model as |user|}}
-        {{#acc.item value=user.orcid as |aitem|}}
-          {{user-item user=user link=link aitem=aitem}}
-        {{/acc.item}}
+        {{user-item user=user link=link}}
       {{/each}}
-    {{/bs-accordion}}
-    <div class="text-center">
-      {{#if (gt model.meta.total_pages 1)}}
-        {{page-numbers content=model showFL=true}}
-      {{/if}}
-    </div>
-  {{else}}
-    {{#bs-alert dismissible=false type="warning"}}
-      No users found.
-    {{/bs-alert}}
-  {{/if}}
-</div>
-
-<div class='col-md-3'>
-  <div class="panel panel-transparent">
-    <div class="panel-body">
-      <div class="edit"></div>
-    </div>
+      <div class="text-center">
+        {{#if (gt model.meta.total_pages 1)}}
+          {{page-numbers content=model showFL=true}}
+        {{/if}}
+      </div>
+    {{else}}
+      {{#bs-alert dismissible=false type="warning"}}
+        No Users found.
+      {{/bs-alert}}
+    {{/if}}
   </div>
 
-  {{#if model.meta.roles}}
-    <div class="panel facets">
-      <div class="panel-body">
-        <h4>Roles</h4>
-        <ul>
-          {{#each model.meta.roles as |role|}}
-            <li>
-              {{#if model.otherParams.role-id}}
-                {{#link-to link (query-params role-id=null)}}{{fa-icon "check-square-o"}}{{/link-to}}
-              {{else}}
-                {{#link-to link (query-params role-id=role.id)}}{{fa-icon "square-o"}}{{/link-to}}
-              {{/if}}
-              <div class="facet-title">{{role.title}}</div>
-              <span class="number pull-right">{{format-number role.count}}</span>
-              <div class="clearfix"/>
-            </li>
-          {{/each}}
-        </ul>
+  <div class='col-md-3'>
+    {{#if (and (can "create user") (eq link "providers.show.users"))}}
+      <div class="panel facets">
+        <div class="panel-body">
+          <button {{action "new" model}} class="btn btn-warning">{{fa-icon "plus"}}Add User</button>
+        </div>
       </div>
-    </div>
-  {{/if}}
-</div>
+    {{else}}
+      <div class="panel panel-transparent">
+        <div class="panel-body">
+          <div class="edit"></div>
+        </div>
+      </div>
+    {{/if}}
+
+    {{#if model.meta.roles}}
+      <div class="panel facets">
+        <div class="panel-body">
+          <h4>Roles</h4>
+          <ul>
+            {{#each model.meta.roles as |role|}}
+              <li>
+                {{#if model.otherParams.role-id}}
+                  {{#link-to link (query-params role-id=null)}}{{fa-icon "check-square-o"}}{{/link-to}}
+                {{else}}
+                  {{#link-to link (query-params role-id=role.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                {{/if}}
+                <div class="facet-title">{{role.title}}</div>
+                <span class="number pull-right">{{format-number role.count}}</span>
+                <div class="clearfix"/>
+              </li>
+            {{/each}}
+          </ul>
+        </div>
+      </div>
+    {{/if}}
+  </div>
+{{/if}}

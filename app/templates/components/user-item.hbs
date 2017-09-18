@@ -1,10 +1,7 @@
-{{#aitem.title}}
-  {{user.creditName}} {{#if user.role}}<span class='small pull-right'>{{user.role.name}}</span>{{/if}}
-{{/aitem.title}}
-
-{{#aitem.body}}
-  {{#if edit}}
-    {{#bs-form formLayout="vertical" model=this as |form|}}
+{{#if edit}}
+  {{#bs-form formLayout="vertical" model=this as |form|}}
+    <div class="panel-body">
+      <h3 class="member">{{user.creditName}}</h3>
       {{#if (can "create user" user)}}
         {{#form.element controlType="power-select" property="role" label="Role" options=roles optionLabelPath="name" destination=role as |el|}}
           {{#el.control onChange=(action "selectRole") searchEnabled=false allowClear=false as |item|}}
@@ -28,16 +25,18 @@
           {{/el.control}}
         {{/form.element}}
       {{/if}}
-
-      <div class="pseudo-footer">
-        <div class="btn-toolbar pull-right">
-          <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
-          <button {{action "submit"}} type="submit" class="btn btn-sm btn-fill">Save</button>
-        </div>
-        <div class="clearfix"/>
+    </div>
+    <div class="panel-footer">
+      <div class="btn-toolbar">
+        <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
+        <button {{action "submit"}} type="submit" class="btn btn-sm btn-fill">Save</button>
       </div>
-    {{/bs-form}}
-  {{else}}
+    </div>
+  {{/bs-form}}
+{{else}}
+  <div class="panel-body">
+    <h3 class="member">{{user.creditName}}</h3>
+
     {{#if user.email}}
       <h5>Email</h5>
       <a href="mailto:{{user.email}}">{{user.email}}</a>
@@ -60,15 +59,11 @@
 
     <h5>Account created</h5>
     {{format-date user.created year='numeric' month='long' day='numeric'}}
-
-    <div class="pseudo-footer">
-      <a href="{{user.identifier}}">{{fa-icon "external-link"}} {{user.identifier}}</a>
-      {{#if (can "modify user" user)}}
-        <div class="btn-toolbar pull-right">
-          <button {{action "edit" user link}} class="btn btn-sm btn-warning">{{fa-icon "pencil"}} Edit User</button>
-        </div>
-        <div class="clearfix"/>
-      {{/if}}
-    </div>
-  {{/if}}
-{{/aitem.body}}
+  </div>
+  <div class="panel-footer">
+    <a href="{{user.identifier}}">{{fa-icon "external-link"}} {{user.identifier}}</a>
+    {{#if (can "modify user" user)}}
+      <button {{action "edit" user link}} class="btn-link btn-icon">{{fa-icon "pencil"}}</button>
+    {{/if}}
+  </div>
+{{/if}}

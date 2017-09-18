@@ -4,7 +4,7 @@ export default Ember.Component.extend({
   store: Ember.inject.service(),
 
   tagName: 'div',
-  classNames: ['panel', 'panel-default'],
+  classNames: ['panel', 'panel-transparent'],
 
   edit: false,
   user: null,
