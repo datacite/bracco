@@ -7,7 +7,7 @@
         {{else}}
           <div>{{model.name}} has <span class="icon-warning">no clients</span>. Add a client {{#link-to "providers.show.clients" model.id}}here{{/link-to}}.</div>
         {{/if}}
-
+        
         {{#if (gt model.meta.prefixes 1)}}
           <div>{{model.name}} uses <span class="icon-info">{{pluralize-word model.meta.prefixes "prefix"}}</span>.</div>
         {{else}}

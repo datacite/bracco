@@ -5,6 +5,7 @@ export default Ability.extend({
   canWrite: Ember.computed('currentUser.role_id', function() {
     switch(this.get('currentUser.role_id')) {
       case 'staff_admin':
+      case 'provider_admin':
         return true;
       default:
         return false;
@@ -18,9 +19,10 @@ export default Ability.extend({
         return true;
       case 'provider_admin':
       case 'provider_user':
-        return this.get('model.providers').any(function(provider, index, providers) {
-          return provider.get('id') === self.get('currentUser.provider_id');
-        });
+        return true;
+        // return this.get('model.providers').any(function(provider, index, providers) {
+        //   return provider.get('id') === self.get('currentUser.provider_id');
+        // });
       case 'client_admin':
       case 'client_user':
         return this.get('model.clients').any(function(client, index, clients) {
