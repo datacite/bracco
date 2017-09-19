@@ -15,6 +15,9 @@ export default Ember.Route.extend(RouteMixin, {
   actions: {
     queryParamsDidChange: function() {
       this.refresh();
+    },
+    refreshCurrentRoute(){
+      this.refresh();
     }
   }
 });

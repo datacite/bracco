@@ -7,6 +7,7 @@ export default Ember.Component.extend({
   classNames: ['panel', 'panel-transparent'],
 
   edit: false,
+  delete: false,
   user: null,
   role: null,
   provider: null,
@@ -15,7 +16,7 @@ export default Ember.Component.extend({
   providers: [],
   clients: [],
 
-  searchRole: function(link) {
+  searchRole(link) {
     if (link === 'users') {
       this.set('roles', this.get('store').findAll('role'));
     } else if (link === 'providers.show.users') {
@@ -36,9 +37,13 @@ export default Ember.Component.extend({
     this.set('client', client)
     this.get('user').set('client', client);
   },
+  reset() {
+    this.set('edit', false);
+    this.set('delete', false);
+  },
 
   actions: {
-    edit: function(user, link) {
+    edit(user, link) {
       this.set('edit', true);
       this.set('user', user);
       this.searchRole(link);
@@ -51,21 +56,33 @@ export default Ember.Component.extend({
         this.selectClient(user.get('client'));
       }
     },
-    searchRole: function(link) {
+    delete(user, link) {
+      if (link === 'providers.show.users') {
+        user.set('provider', null);
+      } else if (link === 'clients.show.users') {
+        user.set('client', null);
+      }
+      this.set('delete', true);
+    },
+    searchRole(link) {
       this.searchRole(link);
     },
-    searchProvider: function(query) {
+    searchProvider(query) {
       this.set('providers', this.get('store').query('provider', { 'query': query, sort: 'name', 'page[size]': 10 }));
     },
-    searchClient: function(query) {
+    searchClient(query) {
       this.set('clients', this.get('store').query('client', { 'query': query, sort: 'name', 'provider-id': this.get('provider').get('id'), 'page[size]': 10 }));
     },
-    submit: function() {
+    submit() {
       this.get('user').save();
-      this.set('edit', false);
+      this.reset();
     },
-    cancel: function() {
-      this.set('edit', false);
+    destroy() {
+      this.get('user').save();
+      this.reset();
+    },
+    cancel() {
+      this.reset();
     },
     selectRole(role) {
       this.selectRole(role);
