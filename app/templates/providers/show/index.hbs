@@ -1,10 +1,4 @@
 <div class="row">
-  <div class="col-md-9">
-    <div class="panel panel-transparent" id="content-member">
-      <div class="panel-body">
-        <div>{{model.name}} has {{#link-to "providers.show.clients" model.id }}{{format-number model.currentClientCount}} {{pluralize-word model.currentClientCount "Client" omitCount=true}}{{/link-to}}.</div>
-        <div>{{model.name}} has registered {{#link-to "providers.show.dois" model.id }}{{format-number model.currentDoiCount}} {{pluralize-word model.currentDoiCount "DOI" omitCount=true}}{{/link-to}} in 2017.</div>
-      </div>
-    </div>
-  </div>
+  {{chart-client model=model}}
+  {{chart-doi model=model}}
 </div>

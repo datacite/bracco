@@ -1,0 +1,6 @@
+<div class="panel panel-transparent">
+  <div class="panel-body panel-chart">
+    <h3 class="member graphs">{{#link-to "providers.show.clients" model.id}}{{format-number model.currentClientCount}} {{pluralize-word model.currentClientCount "Client" omitCount=true}} in 2017{{/link-to}}</h3>
+    <div class="graphs" id="chart-client"></div>
+  </div>
+</div>

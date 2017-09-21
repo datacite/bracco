@@ -1,0 +1,6 @@
+<div class="panel panel-transparent">
+  <div class="panel-body panel-chart">
+    <h3 class="member graphs">{{#link-to "providers.show.dois" model.id (query-params registered='2017')}}{{format-number model.currentDoiCount}} {{pluralize-word model.currentDoiCount "DOI" omitCount=true}} in 2017{{/link-to}}</h3>
+    <div class="graphs" id="chart-doi"></div>
+  </div>
+</div>
