@@ -63,7 +63,7 @@ export default DS.Model.extend(Validations, {
     }
   }),
   currentClientCount: Ember.computed('clientCount', function() {
-    let currentYear = this.get('clientCount').findBy('id', 2017);
+    let currentYear = this.get('clientCount').get('lastObject');
     if (currentYear) {
       return currentYear.count;
     } else {
