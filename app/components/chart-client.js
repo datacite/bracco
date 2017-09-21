@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import D3 from "npm:d3";
+import D3Tip from "npm:d3-tip";
 
 export default Ember.Component.extend({
   tagName: 'div',
@@ -14,6 +15,8 @@ export default Ember.Component.extend({
   },
 
   barChart() {
+    //let tip = D3Tip.tip().attr('class', 'd3-tip').html(function(d) { return d; });
+
     let formatYear = D3.time.format.utc("%Y");
     let formatMonthYear = D3.time.format.utc("%B %Y");
     let formatFixed = D3.format(",.0f");
@@ -39,8 +42,6 @@ export default Ember.Component.extend({
     var x = D3.time.scale.utc()
       .domain(domain)
       .rangeRound([0, width]);
-
-    console.log(data)
 
     var y = D3.scale.linear()
       .domain([0, D3.max(data, function(d) { return d.count; })])
@@ -88,20 +89,6 @@ export default Ember.Component.extend({
       .attr("class", "x axis")
       .attr("transform", "translate(0," + height + ")")
       .call(xAxis);
-
-    chart.selectAll("rect").each(
-      function(d) {
-        var title = null,
-            dateStamp = null,
-            dateString = null;
-
-        title = formatFixed(d.count);
-        dateStamp = Date.parse(d.id + '-01T12:00:00Z');
-        dateString = " in " + formatMonthYear(new Date(dateStamp));
-
-        Ember.$(this).tooltip({ title: title + dateString, container: "body"});
-      }
-    );
 
     // return chart object
     return chart;
