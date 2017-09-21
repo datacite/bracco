@@ -2,17 +2,8 @@
   <div class="col-md-9">
     <div class="panel panel-transparent" id="content-member">
       <div class="panel-body">
-        {{#if (gt model.meta.clients 0)}}
-          <div>{{model.name}} has <span class="icon-info">{{pluralize-word model.meta.clients "client"}}</span>.</div>
-        {{else}}
-          <div>{{model.name}} has <span class="icon-warning">no clients</span>. Add a client {{#link-to "providers.show.clients" model.id}}here{{/link-to}}.</div>
-        {{/if}}
-        
-        {{#if (gt model.meta.prefixes 1)}}
-          <div>{{model.name}} uses <span class="icon-info">{{pluralize-word model.meta.prefixes "prefix"}}</span>.</div>
-        {{else}}
-          <div>{{model.name}} uses <span class="icon-warning">only the test prefix 10.5072</span>. Ask DataCite staff to add prefixes.</div>
-        {{/if}}
+        <div>{{model.name}} has <span class="icon-info">{{pluralize-word model.currentClientCount "Client"}}</span>.</div>
+        <div>{{model.name}} has registered <span class="icon-info">{{pluralize-word model.currentDoiCount "DOI"}}</span> in 2017.</div>
       </div>
     </div>
   </div>
