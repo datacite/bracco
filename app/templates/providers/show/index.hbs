@@ -2,8 +2,8 @@
   <div class="col-md-9">
     <div class="panel panel-transparent" id="content-member">
       <div class="panel-body">
-        <div>{{model.name}} has <span class="icon-info">{{pluralize-word model.currentClientCount "Client"}}</span>.</div>
-        <div>{{model.name}} has registered <span class="icon-info">{{pluralize-word model.currentDoiCount "DOI"}}</span> in 2017.</div>
+        <div>{{model.name}} has <span class="icon-info">{{pluralize-word (format-number model.currentClientCount) "Client"}}</span>.</div>
+        <div>{{model.name}} has registered <span class="icon-info">{{pluralize-word (format-number model.currentDoiCount) "DOI"}}</span> in 2017.</div>
       </div>
     </div>
   </div>
