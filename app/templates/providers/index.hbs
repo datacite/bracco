@@ -1,0 +1,10 @@
+{{#if (can "read index")}}
+  {{application-header default=true}}
+
+  <div class="container-fluid">
+    <div class="content">
+      {{index-header}}
+      {{provider-list model=model searchable=true}}
+    </div>
+  </div>
+{{/if}}

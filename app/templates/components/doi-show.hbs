@@ -1,0 +1,53 @@
+{{#if edit}}
+  <h2 class="work">{{model.doi}}</h2>
+
+  <h3 class="edit">Edit DOI</h3>
+
+  <div class="row">
+    <div class='col-md-9'>
+      <div class="panel panel-transparent">
+        <div class="panel-body">
+          {{#bs-form formLayout="vertical" model=model onSubmit=(action "submit" model) submitOnEnter=true as |form|}}
+            {{form.element controlType="text" label="DOI" placeholder="DOI" property="id" disabled=true}}
+            {{form.element controlType="text" label="URL" placeholder="URL" property="url" disabled=true}}
+            {{form.element controlType="textarea" label="Metadata" placeholder="Metadata" property="datacite" rows=15 disabled=true}}
+
+            <div class="alert alert-warning" role="alert">
+              This functionality has not been implemented yet.
+            </div>
+
+            <div class="pseudo-footer">
+              <div class="btn-toolbar pull-right">
+                <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
+              </div>
+              <div class="clearfix"/>
+            </div>
+          {{/bs-form}}
+        </div>
+      </div>
+    </div>
+    <div class='col-md-3'>
+      {{client-sidebar model=model}}
+    </div>
+  </div>
+{{else}}
+  <div class="row">
+    <div class='col-md-9'>
+      <h2 class="work">{{model.doi}}</h2>
+    </div>
+
+    {{#if (can "create doi")}}
+      <div class='col-md-3'>
+        <div class="panel facets add">
+          <div class="panel-body">
+            <button {{action "edit"}} class="btn btn-warning">{{fa-icon "pencil"}} Edit DOI</button>
+          </div>
+        </div>
+      </div>
+    {{/if}}
+  </div>
+
+  {{doi-url model=model}}
+  {{doi-metadata model=model}}
+  {{doi-media model=model}}
+{{/if}}

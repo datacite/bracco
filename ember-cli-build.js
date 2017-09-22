@@ -1,10 +1,21 @@
 /* eslint-env node */
+'use strict';
+
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 module.exports = function(defaults) {
-  var app = new EmberApp(defaults, {
+  let app = new EmberApp(defaults, {
     'ember-cli-babel': {
       includePolyfill: true
+    },
+    minifyJS:  {
+      enabled: false
+    },
+    // fingerprint: {
+    //   enabled: false
+    // },
+    babel: {
+      sourceMaps: 'inline'
     },
     'ember-bootstrap': {
       importBootstrapCSS: false,
@@ -21,6 +32,7 @@ module.exports = function(defaults) {
     'ember-prism': {
       'theme': 'default'
     },
+
     dotEnv: {
       clientAllowedKeys: ['SITE_TITLE',
                           'NAVMENU_TITLE',
@@ -32,12 +44,16 @@ module.exports = function(defaults) {
                           'CDN_URL',
                           'JWT_HOST',
                           'JWT_PUBLIC_KEY',
-                          'BUGSNAG_API_KEY']
+                          'BUGSNAG_API_KEY',
+                          'AWS_ACCESS_KEY',
+                          'AWS_SECRET_KEY',
+                          'AWS_BUCKET',
+                          'AWS_REGION']
     },
 
     inlineContent: {
       'site-title' : {
-        content: (process.env.SITE_TITLE || "DataCite DOI Registration Service")
+        content: (process.env.SITE_TITLE || "DataCite DOI Fabrica")
       },
       'cdn-url' : {
         content: (process.env.CDN_URL || "https://assets.datacite.org")
@@ -46,8 +62,8 @@ module.exports = function(defaults) {
 
     'ember-bootstrap': {
       'bootstrapVersion': 3,
-      'importBootstrapFont': true,
-      'importBootstrapCSS': true
+      'importBootstrapFont': false,
+      'importBootstrapCSS': false
     }
   });
 

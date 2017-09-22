@@ -8,6 +8,6 @@ resolver.namespace = {
   podModulePrefix: config.podModulePrefix
 };
 
-// resolver.pluralizedTypes.ability = 'abilities';
+resolver.pluralizedTypes.ability = 'abilities';
 
 export default resolver;

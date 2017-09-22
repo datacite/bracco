@@ -1,0 +1,165 @@
+{{#if new}}
+  <div class='col-md-9'>
+    <div class="panel panel-transparent">
+      <div class="panel-body">
+        <h3 class="edit">New DOI</h3>
+
+        {{#bs-form formLayout="vertical" model=model onSubmit=(action "submit" model) submitOnEnter=true as |form|}}
+          {{form.element controlType="text" label="DOI" placeholder="DOI" property="id" disabled=true}}
+          {{form.element controlType="text" label="URL" placeholder="URL" property="url" disabled=true}}
+          {{form.element controlType="textarea" label="Metadata" placeholder="Metadata" property="datacite" rows=15 disabled=true}}
+
+          <div class="alert alert-warning" role="alert">
+            This functionality has not been implemented yet.
+          </div>
+
+          <div class="pseudo-footer">
+            <div class="btn-toolbar pull-right">
+              <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
+            </div>
+            <div class="clearfix"/>
+          </div>
+        {{/bs-form}}
+      </div>
+    </div>
+  </div>
+{{else}}
+  <div class='col-md-9 panel-list' id="content">
+    {{#if searchable}}
+      {{model-search model=model sortable=true}}
+    {{/if}}
+
+    {{#if model}}
+      {{#each model as |doi|}}
+        <div class="panel panel-transparent">
+          <div class="panel-body">
+            <h3 class="work">
+              {{#link-to "dois.show" doi.id}}{{doi.title}}{{/link-to}}
+              <span class="small">{{doi.resourceTypeId}}</span>
+            </h3>
+            {{{format-author doi.author}}}
+            <div class="metadata">
+              {{format-metadata doi.published resourceTypeId=doi.resourceTypeId resourceTypeSubtype=doi.resourceTypeSubtype containerTitle=doi.containerTitle version=doi.version}}
+            </div>
+            {{#if doi.license}}
+              {{cc-license licenseURL=doi.license}}
+            {{/if}}
+          </div>
+          <div class="panel-footer">
+            <a href="{{doi.identifier}}">{{fa-icon "external-link"}} {{doi.identifier}}</a>
+          </div>
+        </div>
+      {{/each}}
+      <div class="text-center">
+        {{#if (gt model.meta.total_pages 1)}}
+          {{page-numbers content=model showFL=true}}
+        {{/if}}
+      </div>
+    {{else}}
+      {{#bs-alert dismissible=false type="warning"}}
+        No DOIs found.
+      {{/bs-alert}}
+    {{/if}}
+  </div>
+
+  <div class='col-md-3'>
+    {{#if (and (can "create doi") (eq link "clients.show.dois"))}}
+      <div class="panel facets">
+        <div class="panel-body">
+          <button {{action "new"}} class="btn btn-warning">{{fa-icon "plus"}}Add DOI</button>
+        </div>
+      </div>
+    {{else}}
+      <div class="panel panel-transparent">
+        <div class="panel-body">
+          <div class="edit"></div>
+        </div>
+      </div>
+    {{/if}}
+
+    {{#if model.meta.resource-types}}
+      <div class="panel facets">
+        <div class="panel-body">
+          <h4>Resource Types</h4>
+          <ul>
+            {{#each model.meta.resource-types as |resource-type|}}
+              <li>
+                {{#if model.otherParams.resource-type-id}}
+                  {{#link-to link (query-params resource-type-id='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+                {{else}}
+                  {{#link-to link (query-params resource-type-id=resource-type.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                {{/if}}
+                <div class="facet-title">{{resource-type.title}}</div>
+                <span class="number pull-right">{{format-number resource-type.count}}</span>
+                <div class="clearfix"/>
+              </li>
+            {{/each}}
+          </ul>
+        </div>
+      </div>
+    {{/if}}
+    {{#if model.meta.years}}
+      <div class="panel facets">
+        <div class="panel-body">
+          <h4>Publication Year</h4>
+          <ul>
+            {{#each model.meta.years as |year|}}
+              <li>
+                {{#if model.otherParams.year}}
+                  {{#link-to link (query-params year='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+                {{else}}
+                  {{#link-to link (query-params year=year.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                {{/if}}
+                <div class="facet-title">{{year.title}}</div>
+                <span class="number pull-right">{{format-number year.count}}</span>
+                <div class="clearfix"/>
+              </li>
+            {{/each}}
+          </ul>
+        </div>
+      </div>
+    {{/if}}
+    {{#if model.meta.registered}}
+      <div class="panel facets">
+        <div class="panel-body">
+          <h4>DOI Registration Year</h4>
+          <ul>
+            {{#each model.meta.registered as |year|}}
+              <li>
+                {{#if model.otherParams.registered}}
+                  {{#link-to link (query-params registered='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+                {{else}}
+                  {{#link-to link (query-params registered=year.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                {{/if}}
+                <div class="facet-title">{{year.title}}</div>
+                <span class="number pull-right">{{format-number year.count}}</span>
+                <div class="clearfix"/>
+              </li>
+            {{/each}}
+          </ul>
+        </div>
+      </div>
+    {{/if}}
+    {{#if model.meta.schema-versions}}
+      <div class="panel facets">
+        <div class="panel-body">
+          <h4>Schema Versions</h4>
+          <ul>
+            {{#each model.meta.schema-versions as |schema-version|}}
+              <li>
+                {{#if model.otherParams.schema-version}}
+                  {{#link-to link (query-params schema-version='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+                {{else}}
+                  {{#link-to link (query-params schema-version=schema-version.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                {{/if}}
+                <div class="facet-title">{{schema-version.title}}</div>
+                <span class="number pull-right">{{format-number schema-version.count}}</span>
+                <div class="clearfix"/>
+              </li>
+            {{/each}}
+          </ul>
+        </div>
+      </div>
+    {{/if}}
+  </div>
+{{/if}}

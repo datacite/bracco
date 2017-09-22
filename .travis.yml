@@ -1,15 +1,9 @@
 ---
 language: node_js
 node_js:
-  - "6"
-env:
-  - CXX=g++-4.8
-addons:
-  apt:
-    sources:
-      - ubuntu-toolchain-r-test
-    packages:
-      - g++-4.8
+  - "8"
+
+dist: trusty
 
 sudo: false
 
@@ -21,11 +15,9 @@ before_install:
   - set -e
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
       AWS_BUCKET="doi.datacite.org";
-      NPM_ENV="production";
       cp .env.production .env;
     else
       AWS_BUCKET="doi.test.datacite.org";
-      NPM_ENV="stage";
       cp .env.stage .env;
     fi
   - npm config set spin false
@@ -36,8 +28,8 @@ install:
   - npm install
 
 script:
-  # - ember test
-  - ember build --environment=${NPM_ENV}
+  - ember test
+  - ember build --environment=production
 
 deploy:
   provider: s3

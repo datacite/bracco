@@ -20,7 +20,7 @@ export default Ember.Component.extend({
   actions: {
     checkLink() {
       let self = this;
-      if (!this.get('urlToCheck')) { this.set('urlToCheck', this.get('url')); }
+      if (!this.get('urlToCheck')) { this.set('urlToCheck', this.get('url')); }
       let result = fetch(this.get('urlToCheck'), {
         timeout: 5000
       }).then(function(response) {

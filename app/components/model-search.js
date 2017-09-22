@@ -5,9 +5,17 @@ export default Ember.Component.extend(RouteMixin, {
   classNames: ['div'],
 
   hasInput: Ember.computed.notEmpty('query'),
+  query: null,
+  sort: null,
 
-  search(query) {
-    let params = Object.assign(this.get('model').get("otherParams"), { query: query });
+  didReceiveAttrs() {
+    this._super(...arguments);
+    this.set('query', this.get('model').get('otherParams.query'));
+    this.set('sort', this.get('model').get('otherParams.sort'));
+  },
+
+  search() {
+    let params = Object.assign(this.get('model').get('otherParams'), { query: this.get('query'), sort: this.get('sort') });
 
     params.paramMapping = { page: "page[number]",
                             perPage: "page[size]",
@@ -24,23 +32,36 @@ export default Ember.Component.extend(RouteMixin, {
 
   actions: {
     doSearch(query) {
-      this.search(query);
+      this.set('query', query);
+      this.search();
     },
     clear() {
-      this.set('query', '');
-      this.search('');
+      this.set('query', null);
+      this.search();
     },
     selectMetadata(metadata) {
       this.showMetadata(metadata);
+    },
+    sort(sort) {
+      this.set('sort', sort);
+      this.search();
     }
   },
 
   didInsertElement: function() {
-    let placeholders = { 'work': 'DOI',
-                         'member': 'Provider',
-                         'data-center': 'Client',
+    let placeholders = { 'doi': 'DOI',
+                         'provider': 'Provider',
+                         'client': 'Client',
+                         'prefix': 'Prefix',
+                         'client-prefix': 'Prefix',
+                         'provider-prefix': 'Prefix',
                          'user': 'User' }
     this.set('placeholder', 'Search for ' + placeholders[this.get('model').get("modelName")]);
     this.set('modelName', placeholders[this.get('model').get("modelName")]);
+    if (this.get('model').get("modelName") === "doi") {
+      this.set('formats', { '-created': 'Sort by Date', 'score': 'Sort by Relevance' });
+    } else {
+      this.set('formats', { '-created': 'Sort by Date', 'name': 'Sort by Name' });
+    }
   }
 });

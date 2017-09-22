@@ -5,10 +5,20 @@
       <span id="search-clear" title="Clear" aria-label="Clear" {{action 'clear'}}>{{fa-icon "times-circle"}}</span>
     {{/if}}
     <div class="input-group-btn">
-      <button type="submit" class="btn hidden-xs">Search</button>
+      <button type="submit" class="btn btn-primary hidden-xs">Search</button>
     </div>
   </div>
 </form>
 {{#if (gt model.meta.total 1)}}
-  <h3 class="{{model.modelName}}-results">{{format-number model.meta.total}} {{modelName}}s</h3>
+  {{#if sortable}}
+    <div id="sort" class="input-group pull-right">
+      <select onchange={{action 'sort' value="target.value"}}>
+        {{#each-in formats as |key value|}}
+          <option name="sort" value={{key}} selected={{eq sort key}}>{{value}}</option>
+        {{/each-in}}
+      </select>
+    </div>
+  {{/if}}
+
+  <h3 class="member-results">{{pluralize-word (format-number model.meta.total) modelName}}</h3>
 {{/if}}

@@ -1,54 +1,80 @@
-<div class="col-md-9" id="content-user">
-  {{#if searchable}}
-    {{model-search model=model}}
-  {{/if}}
+{{#if new}}
+  <div class='col-md-9'>
+    {{#bs-form formLayout="vertical" model=this as |form|}}
+      <div class="panel-body">
+        <h3 class="member">Add User</h3>
 
-  {{#if model}}
-    {{#bs-accordion as |acc|}}
+        {{#form.element controlType="power-select" property="creditName" options=users optionLabelPath="creditName" destination=user as |el|}}
+          {{#el.control onChange=(action "selectUser") search=(action "searchUser" link) searchField="creditName" searchEnabled=true allowClear=true as |item|}}
+            {{if item.creditName item.creditName item}}
+          {{/el.control}}
+        {{/form.element}}
+      </div>
+      <div class="panel-footer">
+        <div class="btn-toolbar pull-right">
+          <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
+          <button {{action "submit"}} type="submit" class="btn btn-sm btn-fill">Save</button>
+        </div>
+        <div class="clearfix"/>
+      </div>
+    {{/bs-form}}
+  </div>
+{{else}}
+  <div class='col-md-9 panel-list' id="content">
+    {{#if searchable}}
+      {{model-search model=model sortable=true}}
+    {{/if}}
+    {{#if model}}
       {{#each model as |user|}}
-        {{#acc.item value=user.orcid as |aitem|}}
-          {{#aitem.title}}
-            {{user.creditName}} {{#if user.role}}<span class='small pull-right'>{{humanize user.role}}</span>{{/if}}
-          {{/aitem.title}}
-          {{#aitem.body}}
-            {{#if user.email}}
-              <h5>Email</h5>
-              <a href="mailto:{{user.email}}">{{user.email}}</a>
-            {{/if}}
-            {{#if user.member}}
-              <h5>Member</h5>
-              {{#link-to "members.show" user.member.id}}{{user.member.title}}{{/link-to}}
-            {{/if}}
-
-            {{#if user.role}}
-              <h5>Role</h5>
-              {{humanize user.role}}
-            {{/if}}
-
-            <h5>Account created</h5>
-            {{format-date user.created}}
-
-            <div class="pseudo-footer">
-              <a href="{{user.id}}">{{fa-icon "external-link"}} {{user.id}}</a>
-              <div class="btn-toolbar pull-right">
-                <div class="btn-group btn-group-sm">
-                  {{#link-to "users.edit" user.id}}{{fa-icon "pencil"}}{{/link-to}}
-                </div>
-              </div>
-              <div class="clearfix"/>
-            </div>
-          {{/aitem.body}}
-        {{/acc.item}}
+        {{user-item user=user link=link destroy=(route-action "refreshCurrentRoute")}}
       {{/each}}
-    {{/bs-accordion}}
-    <div class="text-center">
-      {{#if (gt model.meta.total_pages 1)}}
-        {{page-numbers content=model showFL=true}}
-      {{/if}}
-    </div>
-  {{else}}
-    {{#bs-alert dismissible=false type="warning"}}
-      No users found.
-    {{/bs-alert}}
-  {{/if}}
-</div>
+      <div class="text-center">
+        {{#if (gt model.meta.total_pages 1)}}
+          {{page-numbers content=model showFL=true}}
+        {{/if}}
+      </div>
+    {{else}}
+      {{#bs-alert dismissible=false type="warning"}}
+        No Users found.
+      {{/bs-alert}}
+    {{/if}}
+  </div>
+
+  <div class='col-md-3'>
+    {{#if (and (can "create user") (not-eq link "users"))}}
+      <div class="panel facets">
+        <div class="panel-body">
+          <button {{action "new" model link}} class="btn btn-warning">{{fa-icon "plus"}}Add User</button>
+        </div>
+      </div>
+    {{else}}
+      <div class="panel panel-transparent">
+        <div class="panel-body">
+          <div class="edit"></div>
+        </div>
+      </div>
+    {{/if}}
+
+    {{#if model.meta.roles}}
+      <div class="panel facets">
+        <div class="panel-body">
+          <h4>Roles</h4>
+          <ul>
+            {{#each model.meta.roles as |role|}}
+              <li>
+                {{#if model.otherParams.role-id}}
+                  {{#link-to link (query-params role-id=null)}}{{fa-icon "check-square-o"}}{{/link-to}}
+                {{else}}
+                  {{#link-to link (query-params role-id=role.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                {{/if}}
+                <div class="facet-title">{{role.title}}</div>
+                <span class="number pull-right">{{format-number role.count}}</span>
+                <div class="clearfix"/>
+              </li>
+            {{/each}}
+          </ul>
+        </div>
+      </div>
+    {{/if}}
+  </div>
+{{/if}}

@@ -1,0 +1,101 @@
+{{#if edit}}
+  <div class="row">
+    <div class="col-md-9">
+      <div class="panel panel-transparent" id="content-member">
+        <div class="panel-body">
+          <h3 class="edit">Edit {{#if (not admin)}}Provider{{else}}Admin{{/if}}</h3>
+
+          {{#bs-form formLayout="vertical" model=model onSubmit=(action "submit" model) submitOnEnter=true as |form|}}
+            {{form.element controlType="text" label="Provider ID" placeholder="ID" property="id" disabled=true}}
+            {{form.element controlType="text" label="Name" placeholder="Name" property="name" required=false}}
+            {{form.element controlType="text" label="Contact" placeholder="Contact" property="contact" required=false}}
+            {{form.element controlType="email" label="Email" placeholder="Email" property="email" required=false}}
+            {{form.element controlType="checkbox" label="Account is active" property="isActive" required=false helpText='This account can manage clients, prefixes and users'}}
+
+            <div class="pseudo-footer">
+              <div class="btn-toolbar pull-right">
+                <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
+                <button type="submit" class="btn btn-sm btn-fill">Save</button>
+              </div>
+              <div class="clearfix"/>
+            </div>
+          {{/bs-form}}
+        </div>
+      </div>
+    </div>
+    <div class='col-md-3'>
+      <div class="panel panel-transparent">
+        <div class="panel-body">
+          <div class="edit"></div>
+        </div>
+      </div>
+
+      {{client-sidebar model=model}}
+    </div>
+  </div>
+{{else if delete}}
+  <div class="row">
+    <div class="col-md-9">
+      <div class="panel panel-transparent" id="content-member">
+        <div class="panel-body">
+          <div class="alert alert-danger" role="alert">
+            Are you sure you want to delete this provider? This action cannot be undone.
+          </div>
+
+          <div class="pseudo-footer">
+            <div class="btn-toolbar pull-right">
+              <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
+              <button {{action "destroy"}} class="btn btn-sm btn-fill">Delete</button>
+            </div>
+            <div class="clearfix"/>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class='col-md-3'>
+      <div class="panel panel-transparent">
+        <div class="panel-body">
+          <div class="edit"></div>
+        </div>
+      </div>
+
+      {{client-sidebar model=model}}
+    </div>
+  </div>
+{{else}}
+  <div class="row">
+    <div class="col-md-9">
+      <div class="panel panel-transparent">
+        <div class="panel-body">
+          {{#if (not admin)}}
+            <h5>Provider ID</h5>
+            {{model.uid}}
+          {{/if}}
+
+          {{#if model.contact}}
+            <h5>Contact</h5>
+            {{model.contact}}
+          {{/if}}
+
+          {{#if model.email}}
+            <h5>Email</h5>
+            <a href="mailto:{{model.email}}">{{model.email}}</a>
+          {{/if}}
+        </div>
+      </div>
+    </div>
+    <div class='col-md-3'>
+      {{#if (can "update provider" model)}}
+        <div class="panel facets">
+          <div class="panel-body">
+            <div class="btn-toolbar">
+              <button {{action "edit" model}} class="btn btn-warning">{{fa-icon "pencil"}} Edit {{#if (not admin)}}Provider{{else}}Admin{{/if}}</button>
+            </div>
+          </div>
+        </div>
+      {{/if}}
+
+      {{client-sidebar model=model}}
+    </div>
+  </div>
+{{/if}}

@@ -4,9 +4,9 @@
     <span class="caret"/>
   </a>
   <ul class="dropdown-menu" role="menu">
-    <li class='dropdown-header'>Role: {{humanize currentUser.role}}</li>
+    <li class='dropdown-header'>Role: {{currentUser.role.name}}</li>
     <li><a href="{{jwt-host}}/users/me">{{fa-icon "user"}} Personal Settings</a></li>
-    <li><a href="{{search-url}}/people/{{currentUser.uid}}">{{fa-icon "files-o"}} Works</a></li>
+    <li><a href="{{search-url}}/people/{{currentUser.uid}}">{{fa-icon "files-o"}} DOIs</a></li>
     <li class="divider"/>
     <li><a href="{{orcid-url}}/{{currentUser.uid}}">{{fa-icon "external-link"}} ORCID Record</a></li>
     <li class="divider"/>

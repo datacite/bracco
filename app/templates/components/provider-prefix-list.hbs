@@ -1,0 +1,126 @@
+{{#if new}}
+  <div class='col-md-9'>
+    <div class="panel panel-transparent">
+      <div class="panel-body">
+        <h3 class="edit">Add Prefix</h3>
+
+        {{#bs-form formLayout="vertical" model=prefix onSubmit=(action "submit") as |form|}}
+          {{#form.element controlType="power-select" property="id" options=prefixes as |el|}}
+            {{#el.control onChange=(action "selectPrefix") selected=prefix search=(action "searchPrefix") optionLabelPath="id" searchField="id" searchEnabled=true placeholder="Select Prefix" allowClear=true as |item|}}
+              {{if item.id item.id item}}
+            {{/el.control}}
+          {{/form.element}}
+
+          <div class="pseudo-footer">
+            <div class="btn-toolbar pull-right">
+              <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
+              <button type="submit" class="btn btn-sm btn-fill">Add</button>
+            </div>
+            <div class="clearfix"/>
+          </div>
+        {{/bs-form}}
+      </div>
+    </div>
+  </div>
+{{else}}
+  <div class='col-md-9 panel-list' id="content">
+    {{#if searchable}}
+      {{model-search model=model sortable=true}}
+    {{/if}}
+    {{#if model}}
+      {{#each model as |provider-prefix|}}
+        {{provider-prefix-show model=provider-prefix destroy=(route-action "refreshCurrentRoute")}}
+      {{/each}}
+      <div class="text-center">
+        {{#if (gt model.meta.total_pages 1)}}
+          {{page-numbers content=model showFL=true}}
+        {{/if}}
+      </div>
+    {{else}}
+      {{#bs-alert dismissible=false type="warning"}}
+        No prefixes found.
+      {{/bs-alert}}
+    {{/if}}
+  </div>
+
+  <div class='col-md-3'>
+    {{#if (can "write prefix")}}
+      <div class="panel facets">
+        <div class="panel-body">
+          <button {{action "new" model}} class="btn btn-warning">{{fa-icon "plus"}}Add Prefix</button>
+        </div>
+      </div>
+    {{else}}
+      <div class="panel panel-transparent">
+        <div class="panel-body">
+          <div class="edit"></div>
+        </div>
+      </div>
+    {{/if}}
+
+    {{#if model.meta.states}}
+      <div class="panel facets add">
+        <div class="panel-body">
+          <h4>State <span class="small">{{fa-icon "question-circle-o"}}{{#bs-tooltip placement="top"}}Filter prefixes by whether they have been assigned to a provider and/or client.{{/bs-tooltip}}</span></h4>
+          <ul>
+            {{#each model.meta.states as |state|}}
+              <li>
+                {{#if model.otherParams.state}}
+                  {{#link-to link (query-params state=null)}}{{fa-icon "check-square-o"}}{{/link-to}}
+                {{else}}
+                  {{#link-to link (query-params state=state.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                {{/if}}
+                <div class="facet-title">{{state.title}}</div>
+                <span class="number pull-right">{{state.count}}</span>
+                <div class="clearfix"/>
+              </li>
+            {{/each}}
+          </ul>
+        </div>
+      </div>
+    {{/if}}
+
+    {{#if model.meta.years}}
+      <div class="panel facets add">
+        <div class="panel-body">
+          <h4>Year created</h4>
+          <ul>
+            {{#each model.meta.years as |year|}}
+              <li>
+                {{#if model.otherParams.year}}
+                  {{#link-to link (query-params year=null)}}{{fa-icon "check-square-o"}}{{/link-to}}
+                {{else}}
+                  {{#link-to link (query-params year=year.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                {{/if}}
+                <div class="facet-title">{{year.title}}</div>
+                <span class="number pull-right">{{year.count}}</span>
+                <div class="clearfix"/>
+              </li>
+            {{/each}}
+          </ul>
+        </div>
+      </div>
+    {{/if}}
+    {{#if (eq link "prefixes")}}
+      <div class="panel facets">
+        <div class="panel-body">
+          <h4>Providers <span class="small">{{fa-icon "question-circle-o"}}{{#bs-tooltip placement="top"}}Filter prefixes by DOI Registration Provider they work with.{{/bs-tooltip}}</span></h4>
+          <ul>
+            {{#each model.meta.providers as |provider|}}
+              <li>
+                {{#if model.otherParams.provider-id}}
+                  {{#link-to link (query-params provider-id=null)}}{{fa-icon "check-square-o"}}{{/link-to}}
+                {{else}}
+                  {{#link-to link (query-params provider-id=provider.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                {{/if}}
+                <div class="facet-title">{{provider.title}}</div>
+                <span class="number pull-right">{{provider.count}}</span>
+                <div class="clearfix"/>
+              </li>
+            {{/each}}
+          </ul>
+        </div>
+      </div>
+    {{/if}}
+  </div>
+{{/if}}

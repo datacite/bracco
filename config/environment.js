@@ -1,9 +1,10 @@
 /* eslint-env node */
+'use strict';
 
 module.exports = function(environment) {
-  var ENV = {
+  let ENV = {
     modulePrefix: 'bracco',
-    environment: environment,
+    environment,
     rootURL: '/',
     locationType: 'auto',
     EmberENV: {
@@ -31,7 +32,7 @@ module.exports = function(environment) {
     }
   };
 
-  ENV.SITE_TITLE = process.env.SITE_TITLE || "DataCite DOI Registration Service";
+  ENV.SITE_TITLE = process.env.SITE_TITLE || "DataCite DOI Fabrica";
   ENV.NAVMENU_TITLE = process.env.NAVMENU_TITLE || 'Test Services';
   ENV.SEARCH_URL = process.env.SEARCH_URL || "https://search.test.datacite.org";
   ENV.ORCID_URL = process.env.ORCID_URL || "https://sandbox.orcid.org";
@@ -44,9 +45,13 @@ module.exports = function(environment) {
   ENV.BUGSNAG_API_KEY = process.env.BUGSNAG_API_KEY || null;
   ENV.BUGSNAG_NOTIFY_RELEASE = process.env.BUGSNAG_NOTIFY_RELEASE || "production";
 
-  ENV.i18n = {
-    defaultLocale: 'en-US'
-  };
+  if (environment === 'development') {
+    // ENV.APP.LOG_RESOLVER = true;
+    // ENV.APP.LOG_ACTIVE_GENERATION = true;
+    // ENV.APP.LOG_TRANSITIONS = true;
+    // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
+    // ENV.APP.LOG_VIEW_LOOKUPS = true;
+  }
 
   if (environment === 'test') {
     // Testem prefers this...
@@ -57,6 +62,10 @@ module.exports = function(environment) {
     ENV.APP.LOG_VIEW_LOOKUPS = false;
 
     ENV.APP.rootElement = '#ember-testing';
+  }
+
+  if (environment === 'production') {
+
   }
 
   return ENV;

@@ -8,38 +8,38 @@ const Router = Ember.Router.extend(GoogleAnalyticsRoute, {
 });
 
 Router.map(function() {
-  this.route('members', function() {
-    this.route('new');
-    this.route('show', { path: '/:member_id' }, function() {
-      this.route('works', { path: '/works' });
+  this.route('providers', function() {
+    this.route('show', { path: '/:provider_id' }, function() {
+      this.route('settings', { path: '/settings' });
+      this.route('dois', { path: '/dois' });
+      this.route('prefixes', { path: '/prefixes' });
       this.route('users', { path: '/users' });
-      this.route('data-centers', { path: '/data-centers' });
+      this.route('clients', { path: '/clients' });
     });
   });
-  this.route('data-centers', function() {
-    this.route('new');
-    this.route('edit', { path: '/:data_center_id/edit' });
-    this.route('show', { path: '/:data_center_id' }, function() {
-      this.route('works', { path: '/works' });
+  this.route('clients', function() {
+    this.route('show', { path: '/:client_id' }, function() {
+      this.route('settings', { path: '/settings' });
+      this.route('dois', { path: '/dois' });
+      this.route('prefixes', { path: '/prefixes' });
       this.route('users', { path: '/users' });
     });
   });
-  this.route('works', function() {
-    this.route('new');
-    this.route('show', { path: '/:work_id' });
-    this.route('edit', { path: '/:work_id/edit' });
+  this.route('dois', function() {
+    this.route('show', { path: '/:doi_id' });
   });
-  this.route('settings');
-  this.route('status');
+  this.route('settings', function() {
+    this.route('show', { path: '/:provider_id' });
+  });
   this.route('users', function() {
     this.route('edit', { path: '/:user_id/edit' });
   });
-
-  this.route('member', function() {
-    this.route('data-centers');
-    this.route('users');
-    this.route('works');
+  this.route('prefixes', function() {
+    this.route('show', { path: '/:prefix_id' });
   });
+
+  //set up all of your known routes, and then...
+  this.route("404", { path: "*path"});
 });
 
 export default Router;

@@ -1,0 +1,10 @@
+{{#if (can "read index")}}
+  {{application-header default=true}}
+
+  <div class="container-fluid">
+    <div class="content">
+      {{index-header}}
+      {{prefix-list model=model link="prefixes" submit=(route-action "refreshCurrentRoute") searchable=true}}
+    </div>
+  </div>
+{{/if}}

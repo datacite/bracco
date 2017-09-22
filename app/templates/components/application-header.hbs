@@ -1,0 +1,18 @@
+{{#bs-navbar type=type fluid=true collapsed=collapsed onCollapse=(action (mut collapsed) true) onExpand=(action (mut collapsed) false) as |navbar|}}
+  <div class="navbar-header">
+    {{navbar.toggle}}
+    <a href="{{home}}" class="navbar-brand">{{title}}</a>
+  </div>
+  {{#navbar.content}}
+    {{#navbar.nav class="navbar-right" as |nav|}}
+      {{#if (can "read settings")}}
+        {{#nav.item}}<a href="{{home}}">Home</a>{{/nav.item}}
+      {{/if}}
+      {{#nav.item}}
+        <a href="https://support.datacite.org">{{t "general.support"}}</a>
+      {{/nav.item}}
+      {{menu-links links=header_links class="dropdown"}}
+      {{menu-user class="dropdown"}}
+    {{/navbar.nav}}
+  {{/navbar.content}}
+{{/bs-navbar}}

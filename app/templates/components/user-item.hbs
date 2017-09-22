@@ -1,0 +1,86 @@
+{{#if edit}}
+  {{#bs-form formLayout="vertical" model=this as |form|}}
+    <div class="panel-body">
+      <h3 class="member">{{user.creditName}}</h3>
+      {{#if (can "create user" user)}}
+        {{#form.element controlType="power-select" property="role" label="Role" options=roles optionLabelPath="name" destination=role as |el|}}
+          {{#el.control onChange=(action "selectRole") searchEnabled=false allowClear=false as |item|}}
+            {{item.name}}
+          {{/el.control}}
+        {{/form.element}}
+      {{/if}}
+
+      {{#if (eq link "users")}}
+        {{#form.element controlType="power-select" property="provider" label="Provider" optionLabelPath="name" options=providers destination=provider as |el|}}
+          {{#el.control onChange=(action "selectProvider") search=(action "searchProvider") searchField="name" allowClear=true as |item|}}
+            {{item.name}}
+          {{/el.control}}
+        {{/form.element}}
+      {{/if}}
+
+      {{#if (not-eq link "clients.show.users")}}
+        {{#form.element controlType="power-select" property="client" label="Client" optionLabelPath="name" options=clients destination=client as |el|}}
+          {{#el.control onChange=(action "selectClient") search=(action "searchClient") searchField="name" allowClear=true as |item|}}
+            {{item.name}}
+          {{/el.control}}
+        {{/form.element}}
+      {{/if}}
+    </div>
+    <div class="panel-footer">
+      <div class="btn-toolbar pull-right">
+        <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
+        <button {{action "submit"}} type="submit" class="btn btn-sm btn-fill">Save</button>
+      </div>
+      <div class="clearfix"/>
+    </div>
+  {{/bs-form}}
+{{else if delete}}
+  <div class="panel-body">
+    <div class="alert alert-danger" role="alert">
+      Are you sure you want to remove user {{user.creditName}} from this provider?
+    </div>
+  </div>
+  <div class="panel-footer">
+    <div class="btn-toolbar pull-right">
+      <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
+      <button {{action "destroy"}} class="btn btn-sm btn-fill">Delete</button>
+    </div>
+    <div class="clearfix"/>
+  </div>
+{{else}}
+  <div class="panel-body">
+    <h3 class="member">{{user.creditName}}</h3>
+
+    {{#if user.email}}
+      <h5>Email</h5>
+      <a href="mailto:{{user.email}}">{{user.email}}</a>
+    {{/if}}
+
+    {{#if user.role}}
+      <h5>Role</h5>
+      {{user.role.name}}
+    {{/if}}
+
+    {{#if (and user.provider (eq link "users"))}}
+      <h5>Provider</h5>
+      {{#link-to "providers.show.users" user.provider.id}}{{user.provider.name}}{{/link-to}}
+    {{/if}}
+
+    {{#if (and user.client (not-eq link "clients.show.users"))}}
+      <h5>Client</h5>
+      {{#link-to "clients.show.users" user.client.id}}{{user.client.name}}{{/link-to}}
+    {{/if}}
+
+    <h5>Account created</h5>
+    {{format-date user.created year='numeric' month='long' day='numeric'}}
+  </div>
+  <div class="panel-footer">
+    <a href="{{user.identifier}}">{{fa-icon "external-link"}} {{user.identifier}}</a>
+    {{#if (can "modify user" user)}}
+      <button {{action "edit" user link}} class="btn-link btn-icon">{{fa-icon "pencil"}}</button>
+    {{/if}}
+    {{#if (and (can "delete user" user) (not-eq link "users"))}}
+      <button {{action "delete" user link}} class="btn-link btn-icon">{{fa-icon "trash"}}</button>
+    {{/if}}
+  </div>
+{{/if}}
