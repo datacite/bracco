@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import D3 from "npm:d3";
-import D3Tip from "npm:d3-tip";
 
 export default Ember.Component.extend({
   tagName: 'div',
@@ -15,14 +14,11 @@ export default Ember.Component.extend({
   },
 
   barChart() {
-    //let tip = D3Tip.tip().attr('class', 'd3-tip').html(function(d) { return d; });
-
     let formatYear = D3.time.format.utc("%Y");
-    let formatMonthYear = D3.time.format.utc("%B %Y");
     let formatFixed = D3.format(",.0f");
 
     let data = this.get('model').get('clientCount');
-    let width = 240;
+
     let height = 100;
     let margin = { top: 10, right: 10, bottom: 5, left: 5 };
     let colors = ["#1abc9c","#2ecc71","#3498db","#9b59b6","#34495e","#95a6a6"];
@@ -37,7 +33,7 @@ export default Ember.Component.extend({
     let endDate = new Date("2018-01-01");
     let domain = [startDate, endDate];
     let length = D3.time.years(startDate, endDate).length;
-    width = length * 22;
+    let width = length * 22;
 
     var x = D3.time.scale.utc()
       .domain(domain)
@@ -66,15 +62,23 @@ export default Ember.Component.extend({
       .data(data)
       .enter().append("rect")
       .attr("class", function(d) {
-        timeStamp = Date.parse(d.id + '-01T12:00:00Z');
-        var year = formatYear(new Date(timeStamp));
-        return (year % 2 === 0) ? "bar relations" : "bar relations";
+        if (d.count >= 50) {
+          return "bar extra-large";
+        } else if (d.count > 10) {
+          return "bar large";
+        } else if (d.count > 5) {
+          return "bar medium";
+        } else if (d.count > 1) {
+          return "bar small";
+        } else {
+          return "bar tiny";
+        }
        })
       .attr("data-toggle", "tooltip")
       .attr("title", function(d) {
         var title = formatFixed(d.count);
         var dateStamp = Date.parse(d.id + '-01T12:00:00Z');
-        var dateString = " in " + formatMonthYear(new Date(dateStamp));
+        var dateString = " in " + formatYear(new Date(dateStamp));
 
         return title + dateString;
        })
@@ -89,6 +93,9 @@ export default Ember.Component.extend({
       .attr("class", "x axis")
       .attr("transform", "translate(0," + height + ")")
       .call(xAxis);
+
+    // activate bootstrap tooltips
+    //this.$('[data-toggle="tooltip"]').tooltip();
 
     // return chart object
     return chart;
