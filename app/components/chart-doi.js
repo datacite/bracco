@@ -4,7 +4,7 @@ import D3Tip from "npm:d3-tip";
 
 export default Ember.Component.extend({
   tagName: 'div',
-  classNames: ['col-md-4'],
+  classNames: ['col-md-3'],
   model: null,
 
   init: function () {
@@ -24,7 +24,7 @@ export default Ember.Component.extend({
     let data = this.get('model').get('doiCount');
     let width = 240;
     let height = 100;
-    let margin = { top: 24, right: 5, bottom: 5, left: 5 };
+    let margin = { top: 10, right: 5, bottom: 5, left: 5 };
     let colors = ["#1abc9c","#2ecc71","#3498db","#9b59b6","#34495e","#95a6a6"];
     let l = 200; // left margin
     let r = 150; // right margin
@@ -37,7 +37,7 @@ export default Ember.Component.extend({
     let endDate = new Date("2018-01-01");
     let domain = [startDate, endDate];
     let length = D3.time.years(startDate, endDate).length;
-    width = length * 18;
+    width = length * 22;
 
     var x = D3.time.scale.utc()
       .domain(domain)

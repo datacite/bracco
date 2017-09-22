@@ -1,6 +1,12 @@
-<div class="panel panel-transparent">
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">
+      {{pluralize-word model.currentClientCount "Client" omitCount=true}}
+      <span class="small pull-right">in 2017</span>
+    </h3>
+  </div>
   <div class="panel-body panel-chart">
-    <h3 class="member graphs">{{#link-to "providers.show.clients" model.id}}{{format-number model.currentClientCount}} {{pluralize-word model.currentClientCount "Client" omitCount=true}} in 2017{{/link-to}}</h3>
+    <h2 class="member graphs">{{#link-to "providers.show.clients" model.id}}{{format-number model.currentClientCount}}{{/link-to}}</h2>
     <div class="graphs" id="chart-client"></div>
   </div>
 </div>
