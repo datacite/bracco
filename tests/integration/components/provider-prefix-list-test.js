@@ -11,14 +11,14 @@ test('it renders', function(assert) {
 
   this.render(hbs`{{provider-prefix-list}}`);
 
-  assert.equal(this.$().text().trim(), '');
+  assert.equal(this.$().text().trim(), 'No prefixes found.');
 
   // Template block usage:
   this.render(hbs`
     {{#provider-prefix-list}}
-      template block text
+
     {{/provider-prefix-list}}
   `);
 
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.equal(this.$().text().trim(), 'No prefixes found.');
 });

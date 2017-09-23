@@ -27,7 +27,7 @@ export default Ember.Component.extend({
       this.set('new', true);
     },
     submit() {
-      var providerPrefix = this.get('store').createRecord('providerPrefix', { provider: this.get('provider'), prefix: this.get('prefix') });
+      var providerPrefix = this.get('store').createRecord('providerPrefix', { provider: this.get('provider'), prefix: this.get('prefix') });
       providerPrefix.save();
       this.reset();
     },

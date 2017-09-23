@@ -6,7 +6,7 @@ const UniqueClientId = BaseValidator.extend({
 
   validate(value, options, model, attribute) {
     let providerId = model.get('provider').get('id') + '.';
-    if (value === providerId || Ember.computed.not('model.meta.id.isEnabled')) {
+    if (value === providerId || Ember.computed.not('model.meta.id.isEnabled')) {
       return true;
     } else {
       return this.get('store').query('client', { id: value }).then((result) => {

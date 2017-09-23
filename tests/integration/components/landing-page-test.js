@@ -12,7 +12,7 @@ test('it renders', function(assert) {
 
   this.render(hbs`{{landing-page}}`);
 
-  assert.ok(/^DataCite DOI Registration Service+/.test(this.$().text().trim()), 'begins with "DataCite DOI Registration Service"');
+  assert.ok(/^DataCite DOI Fabrica+/.test(this.$().text().trim()), 'begins with "DataCite DOI Fabrica"');
 
   // Template block usage:
   this.render(hbs`
@@ -21,5 +21,5 @@ test('it renders', function(assert) {
     {{/landing-page}}
   `);
 
-  assert.ok(/^DataCite DOI Registration Service+/.test(this.$().text().trim()), 'begins with "DataCite DOI Registration Service"');
+  assert.ok(/^DataCite DOI Fabrica+/.test(this.$().text().trim()), 'begins with "DataCite DOI Fabrica"');
 });

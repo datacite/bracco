@@ -16,7 +16,7 @@ test('it renders', function(assert) {
   // Template block usage:
   this.render(hbs`
     {{#chart-client}}
-      template block text
+      
     {{/chart-client}}
   `);
 

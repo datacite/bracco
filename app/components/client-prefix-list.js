@@ -30,7 +30,7 @@ export default Ember.Component.extend({
       });
     },
     submit() {
-      var clientPrefix = this.get('store').createRecord('clientPrefix', { client: this.get('client'), prefix: this.get('prefix') });
+      var clientPrefix = this.get('store').createRecord('clientPrefix', { client: this.get('client'), prefix: this.get('prefix') });
       clientPrefix.save();
       this.reset();
     },

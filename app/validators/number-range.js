@@ -14,7 +14,6 @@ const NumberRange = BaseValidator.extend({
     } else {
       return true;
     }
-    return;
   }
 });
 

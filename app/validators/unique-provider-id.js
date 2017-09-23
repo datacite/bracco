@@ -5,7 +5,7 @@ const UniqueProviderId = BaseValidator.extend({
   store: Ember.inject.service(),
 
   validate(value, options, model, attribute) {
-    if (value.length < 2 || Ember.computed.not('model.meta.id.isEnabled')) {
+    if (value.length < 2 || Ember.computed.not('model.meta.id.isEnabled')) {
       return true;
     } else {
       return this.get('store').query('provider', { id: value }).then((result) => {

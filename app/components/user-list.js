@@ -46,8 +46,6 @@ export default Ember.Component.extend({
     selectUser(user) {
       this.set('user', user);
       this.get('user').set('provider', this.get('provider'));
-
-      console.log(this.get('user').get('provider'))
     },
     searchUser(query) {
       this.searchUser(query);

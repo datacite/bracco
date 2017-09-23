@@ -25,7 +25,7 @@ export default Ability.extend({
         // });
       case 'client_admin':
       case 'client_user':
-        return this.get('model.clients').any(function(client, index, clients) {
+        return this.get('model.clients').any(function(client) {
           return client.get('id') === self.get('currentUser.client_id');
         });
       default:

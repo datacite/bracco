@@ -21,12 +21,6 @@ export default Ember.Component.extend({
 
     let height = 100;
     let margin = { top: 10, right: 10, bottom: 5, left: 5 };
-    let colors = ["#1abc9c","#2ecc71","#3498db","#9b59b6","#34495e","#95a6a6"];
-    let l = 250; // left margin
-    let r = 150; // right margin
-    let w = 400; // width of drawing area
-    let h = 24;  // bar height
-    let s = 3;   // spacing between bars
     let div = '#chart-client';
 
     let startDate = new Date("2011-01-01");
@@ -56,9 +50,7 @@ export default Ember.Component.extend({
       .append("svg:g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    var timeStamp = null;
-
-    var bar = chart.selectAll(".bar")
+    chart.selectAll(".bar")
       .data(data)
       .enter().append("rect")
       .attr("class", function(d) {
