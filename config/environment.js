@@ -20,6 +20,10 @@ module.exports = function(environment) {
     'ember-cli-string-helpers': {
       only: ['humanize', 'html-safe', 'truncate', 'titleize']
     },
+    bugsnag: {
+      apiKey: process.env.BUGSNAG_API_KEY,
+      notifyReleaseStages: ['production']
+    },
     emberTracker: {
 			analyticsSettings: {
 				trackingId: process.env.TRACKING_ID || null,
@@ -42,8 +46,6 @@ module.exports = function(environment) {
   ENV.DATA_URL = process.env.DATA_URL || "https://data.test.datacite.org";
   ENV.JWT_HOST = process.env.JWT_HOST || "https://profiles.test.datacite.org";
   ENV.JWT_PUBLIC_KEY = process.env.JWT_PUBLIC_KEY || null;
-  ENV.BUGSNAG_API_KEY = process.env.BUGSNAG_API_KEY || null;
-  ENV.BUGSNAG_NOTIFY_RELEASE = process.env.BUGSNAG_NOTIFY_RELEASE || "production";
 
   if (environment === 'development') {
     // ENV.APP.LOG_RESOLVER = true;

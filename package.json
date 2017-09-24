@@ -58,6 +58,7 @@
     "ember-cli-uglify": "^1.2.0",
     "ember-cp-validations": "^3.4.1",
     "ember-data": "^2.14.3",
+    "ember-data-factory-guy": "^2.13.7",
     "ember-export-application-global": "^2.0.0",
     "ember-fetch": "^3.3.0",
     "ember-font-awesome": "^3.0.5",

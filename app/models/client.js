@@ -38,11 +38,11 @@ export default DS.Model.extend(Validations, {
   users: DS.hasMany('user', { async: true }),
 
   name: DS.attr('string'),
-  domains: DS.attr('string'),
+  domains: DS.attr('string', { defaultValue: '*' }),
   contact: DS.attr('string'),
   email: DS.attr('string'),
   year: DS.attr('number'),
-  isActive: DS.attr('boolean'),
+  isActive: DS.attr('boolean', { defaultValue: true }),
   doiCount: DS.attr(),
   created: DS.attr('date'),
   updated: DS.attr('date'),

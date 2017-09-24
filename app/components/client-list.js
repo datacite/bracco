@@ -16,7 +16,7 @@ export default Ember.Component.extend({
   actions: {
     new: function(model) {
       let provider = this.get('store').peekRecord('provider', model.get('otherParams.provider-id'));
-      this.set('client', this.get('store').createRecord('client', { provider: provider, id: provider.id + '.', domains: '*', isActive: true }));
+      this.set('client', this.get('store').createRecord('client', { provider: provider, id: provider.id + '.' }));
       this.set('new', true);
     },
     submit: function(client) {
