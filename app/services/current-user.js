@@ -83,13 +83,13 @@ export default Ember.Service.extend({
           self.set('role_id', 'user');
         }
 
-        // if (result.role_id === "client_admin") {
-        //   self.get('flashMessages').info('Welcome ' + result.name + ' to the Client Administration area.');
-        // } else if (result.role_id === "provider_admin") {
-        //   self.get('flashMessages').info('Welcome ' + result.name + ' to the DOI Registration Provider Administration area.');
-        // } else if (result.role_id === "staff_admin") {
-        //   self.get('flashMessages').info('Welcome ' + result.name + ' to the DataCite Administration area.');
-        // }
+        if (['client_admin', 'client_user'].includes(result.role_id)) {
+          self.get('flashMessages').info('Welcome ' + result.name + ' to the Client Administration area.');
+        } else if (['provider_admin', 'provider_user'].includes(result.role_id)) {
+          self.get('flashMessages').info('Welcome ' + result.name + ' to the DOI Registration Provider Administration area.');
+        } else if (['staff_admin', 'staff_user'].includes(result.role_id)) {
+          self.get('flashMessages').info('Welcome ' + result.name + ' to the DataCite Administration area.');
+        }
       }
     }, function(reason) {
       Ember.Logger.assert(false, reason)
