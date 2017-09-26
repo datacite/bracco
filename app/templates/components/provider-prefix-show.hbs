@@ -1,7 +1,7 @@
 {{#if delete}}
   <div class="panel-body">
     <div class="alert alert-danger" role="alert">
-      Are you sure you want to delete prefix {{model.prefix.id}} for this provider?
+      Are you sure you want to remove prefix {{model.prefix.id}} from this provider?
     </div>
   </div>
   <div class="panel-footer">
@@ -34,7 +34,7 @@
   <div class="panel-footer">
     {{model.prefix.id}}
     {{#if (and (can "write prefix" model) (not-eq model.prefix.id "10.5072"))}}
-      <button {{action "delete" model}} class="btn-link btn-icon">{{fa-icon "trash"}}</button>
+      <button {{action "delete" model}} class="btn-link btn-icon">{{fa-icon "chain-broken"}}</button>
     {{/if}}
   </div>
 {{/if}}

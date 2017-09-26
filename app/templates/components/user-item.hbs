@@ -43,7 +43,7 @@
   <div class="panel-footer">
     <div class="btn-toolbar pull-right">
       <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
-      <button {{action "destroy"}} class="btn btn-sm btn-fill">Delete</button>
+      <button {{action "destroy"}} class="btn btn-sm btn-fill">Remove</button>
     </div>
     <div class="clearfix"/>
   </div>
@@ -80,7 +80,7 @@
       <button {{action "edit" user link}} class="btn-link btn-icon">{{fa-icon "pencil"}}</button>
     {{/if}}
     {{#if (and (can "delete user" user) (not-eq link "users"))}}
-      <button {{action "delete" user link}} class="btn-link btn-icon">{{fa-icon "trash"}}</button>
+      <button {{action "delete" user link}} class="btn-link btn-icon">{{fa-icon "chain-broken"}}</button>
     {{/if}}
   </div>
 {{/if}}
