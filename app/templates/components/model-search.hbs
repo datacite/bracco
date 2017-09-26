@@ -7,6 +7,9 @@
     <div class="input-group-btn">
       <button type="submit" class="btn btn-primary hidden-xs">Search</button>
     </div>
+    {{#if helpText}}
+      <div class="helpBlock">{{helpText}}</div>
+    {{/if}}
   </div>
 </form>
 {{#if (gt model.meta.total 1)}}
