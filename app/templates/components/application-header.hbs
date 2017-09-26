@@ -8,9 +8,13 @@
       {{#if (can "read settings")}}
         {{#nav.item}}<a href="{{home}}">Home</a>{{/nav.item}}
       {{/if}}
-      {{#nav.item}}
-        <a href="https://support.datacite.org">{{t "general.support"}}</a>
-      {{/nav.item}}
+      <li>
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Support <span class="caret"></span></a>
+        <ul class="dropdown-menu" role="menu">
+          <li><a href="https://support.datacite.org">Support Website</a></li>
+          <li><a href="mailto:support@datacite.org">Email Support</a></li>
+        </ul>
+      </li>
       {{menu-links links=header_links class="dropdown"}}
       {{menu-user class="dropdown"}}
     {{/navbar.nav}}
