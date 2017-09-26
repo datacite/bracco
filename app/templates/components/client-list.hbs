@@ -36,7 +36,12 @@
               {{#link-to "clients.show" client.id}}{{client.name}}{{/link-to}}
             </h3>
 
-            <h5>Client ID</h5>
+            <h5>
+              Client ID
+              <span>{{fa-icon "question-circle-o"}}
+                {{#bs-tooltip placement="top" viewportPadding=10}}The Client ID is a unique identifier for each client. It must contain only lower case letters and numbers, and must start with the Provider ID.{{/bs-tooltip}}
+              </span>
+            </h5>
             {{client.uid}}
 
             {{#if client.contact}}

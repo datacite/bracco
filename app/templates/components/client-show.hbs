@@ -60,7 +60,12 @@
     <div class="col-md-9">
       <div class="panel panel-transparent">
         <div class="panel-body">
-          <h5>Client ID</h5>
+          <h5>
+            Client ID
+            <span>{{fa-icon "question-circle-o"}}
+              {{#bs-tooltip placement="top" viewportPadding=10}}The Client ID is a unique identifier for each client. It must contain only lower case letters and numbers, and must start with the Provider ID.{{/bs-tooltip}}
+            </span>
+          </h5>
           {{model.uid}}
 
           {{#if model.contact}}
@@ -69,7 +74,7 @@
           {{/if}}
 
           {{#if model.email}}
-            <h5>Email Name</h5>
+            <h5>Contact Email</h5>
             <a href="mailto:{{model.email}}">{{model.email}}</a>
           {{/if}}
 
