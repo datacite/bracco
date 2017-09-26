@@ -1,9 +1,12 @@
 import Ember from 'ember';
 
 export function formatAuthor([authors]) {
+  // turn single author object into an array
+  if (!Array.isArray(authors)) { authors = [authors]; }
+
   let authorList = authors.map(function(a) {
-    let name = a.literal || [a.given, a.family].join(" ");
-    return a.orcid ? '<a href="' + a.orcid + '">' + name + '</a>' : name
+    let name = (a.familyName) ? [a.givenName, a.familyName].join(" ") : a.name;
+    return a.id ? '<a href="' + a.id + '">' + name + '</a>' : name
   });
 
   switch(true) {

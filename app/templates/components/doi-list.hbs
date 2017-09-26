@@ -77,6 +77,27 @@
       </div>
     {{/if}}
 
+    {{#if model.meta.states}}
+      <div class="panel facets add">
+        <div class="panel-body">
+          <h4>State <span class="small">{{fa-icon "question-circle-o"}}{{#bs-tooltip placement="top"}}Filter dois by whether they have been indexed.{{/bs-tooltip}}</span></h4>
+          <ul>
+            {{#each model.meta.states as |state|}}
+              <li>
+                {{#if model.otherParams.state}}
+                  {{#link-to link (query-params state=null)}}{{fa-icon "check-square-o"}}{{/link-to}}
+                {{else}}
+                  {{#link-to link (query-params state=state.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                {{/if}}
+                <div class="facet-title">{{state.title}}</div>
+                <span class="number pull-right">{{state.count}}</span>
+                <div class="clearfix"/>
+              </li>
+            {{/each}}
+          </ul>
+        </div>
+      </div>
+    {{/if}}
     {{#if model.meta.resource-types}}
       <div class="panel facets">
         <div class="panel-body">

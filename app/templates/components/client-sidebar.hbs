@@ -23,7 +23,7 @@
       {{format-time model.updated year='numeric' month='long' day='numeric'}}
     </div>
   {{/if}}
-  {{#if model.schemaVersion}}
+  {{#if model.schemaVersionString}}
     <h5>
       Schema
       <span>{{fa-icon "question-circle-o"}}
@@ -31,7 +31,7 @@
       </span>
     </h5>
     <div class="schema-version">
-      <a href="http://schema.datacite.org/meta/kernel-{{model.schemaVersion}}">DataCite Metadata Schema {{model.schemaVersion}}</a>
+      <a href="http://schema.datacite.org/meta/kernel-{{model.schemaVersionString}}">DataCite Metadata Schema {{model.schemaVersionString}}</a>
     </div>
   {{/if}}
  </div>

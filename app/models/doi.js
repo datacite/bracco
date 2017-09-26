@@ -16,16 +16,22 @@ export default DS.Model.extend({
   author: DS.attr(),
   title: DS.attr('string'),
   containerTitle: DS.attr('string'),
-  description: DS.attr('string'),
+  description: DS.attr(),
   license: DS.attr('string'),
   xml: DS.attr('string'),
-  resourceTypeId: DS.attr('string'),
-  resourceTypeSubtype: DS.attr('string'),
+  resourceTypeGeneral: DS.attr('string'),
+  resourceType: DS.attr('string'),
   version: DS.attr('string'),
   schemaVersion: DS.attr('string'),
+  relatedIdentifier: DS.attr(),
+  state: DS.attr('boolean'),
   published: DS.attr('string'),
   registered: DS.attr('date'),
   updated: DS.attr('date'),
+
+  schemaVersionString: Ember.computed('schemaVersion', function() {
+    return this.get('schemaVersion').split("-").get("lastObject");
+  }),
 
   datacite: Ember.computed('xml', function() {
     return atob(this.get('xml'));
