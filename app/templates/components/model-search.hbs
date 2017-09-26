@@ -1,6 +1,6 @@
 <form {{action "doSearch" query on="submit"}} class="form-horizontal">
   <div id="search" class="input-group">
-    {{input name="query" value=query class="form-control" placeholder=placeholder key-up=(action 'doSearch')}}
+    {{input name="query" value=query class="form-control" placeholder='Search' key-up=(action 'doSearch')}}
     {{#if hasInput}}
       <span id="search-clear" title="Clear" aria-label="Clear" {{action 'clear'}}>{{fa-icon "times-circle"}}</span>
     {{/if}}
