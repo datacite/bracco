@@ -48,6 +48,8 @@
   </div>
 
   {{doi-url model=model}}
-  {{doi-metadata model=model}}
+  {{#if (not-eq model.xml "PGhzaD48L2hzaD4=\n")}}
+    {{doi-metadata model=model}}
+  {{/if}}
   {{doi-media model=model}}
 {{/if}}
