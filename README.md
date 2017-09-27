@@ -1,4 +1,6 @@
 [![Build Status](https://travis-ci.org/datacite/bracco.svg?branch=test)](https://travis-ci.org/datacite/bracco)
+[![Code Climate](https://codeclimate.com/github/datacite/bracco/badges/gpa.svg)](https://codeclimate.com/github/datacite/bracco)
+[![Test Coverage](https://codeclimate.com/github/datacite/bracco/badges/coverage.svg)](https://codeclimate.com/github/datacite/bracco/coverage)
 
 # Bracco
 
