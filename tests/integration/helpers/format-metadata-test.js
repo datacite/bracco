@@ -12,6 +12,5 @@ test('it renders', function(assert) {
 
   this.render(hbs`{{format-metadata inputValue}}`);
 
-  assert.equal(this.$().text().trim(), '1234');
+  assert.equal(this.$().text().trim(), 'Work published 1234');
 });
-

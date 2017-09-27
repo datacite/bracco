@@ -4,8 +4,8 @@ import BaseValidator from 'ember-cp-validations/validators/base';
 const UniqueProviderId = BaseValidator.extend({
   store: Ember.inject.service(),
 
-  validate(value, options, model, attribute) {
-    if (value.length < 2 || Ember.computed.not('model.meta.id.isEnabled')) {
+  validate(value, _options, model) {
+    if (value.length < 2 || !model.meta.id.isEnabled) {
       return true;
     } else {
       return this.get('store').query('provider', { id: value }).then((result) => {
@@ -20,7 +20,7 @@ const UniqueProviderId = BaseValidator.extend({
 });
 
 UniqueProviderId.reopenClass({
-  getDependentsFor(attribute, options) {
+  getDependentsFor() {
     return ['id'];
   }
 });

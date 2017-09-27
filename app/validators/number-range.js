@@ -1,7 +1,7 @@
 import BaseValidator from 'ember-cp-validations/validators/base';
 
 const NumberRange = BaseValidator.extend({
-  validate(value, options, model, attribute) {
+  validate(value, options, model) {
     let first = model.firstPrefix.split('.').get('lastObject');
     let last = value.split('.').get('lastObject');
 
@@ -18,7 +18,7 @@ const NumberRange = BaseValidator.extend({
 });
 
 NumberRange.reopenClass({
-  getDependentsFor(attribute, options) {
+  getDependentsFor() {
     return ['firstPrefix', 'lastPrefix'];
   }
 });

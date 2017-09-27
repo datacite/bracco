@@ -4,7 +4,7 @@ import BaseValidator from 'ember-cp-validations/validators/base';
 const UniqueClientId = BaseValidator.extend({
   store: Ember.inject.service(),
 
-  validate(value, options, model, attribute) {
+  validate(value, options, model) {
     let providerId = model.get('provider').get('id') + '.';
     if (value === providerId || Ember.computed.not('model.meta.id.isEnabled')) {
       return true;
@@ -15,15 +15,13 @@ const UniqueClientId = BaseValidator.extend({
         } else {
           return true;
         }
-      }, (error) => {
-        return true;
       });
     }
   }
 });
 
 UniqueClientId.reopenClass({
-  getDependentsFor(attribute, options) {
+  getDependentsFor() {
     return ['id'];
   }
 });
