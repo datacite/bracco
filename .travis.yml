@@ -21,8 +21,6 @@ before_install:
       cp .env.stage .env;
     fi
   - npm config set spin false
-  - npm install -g phantomjs-prebuilt
-  - phantomjs --version
 
 install:
   - npm install
