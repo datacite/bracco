@@ -36,14 +36,14 @@ export default DS.Model.extend(Validations, {
     async: false
   }),
   users: DS.hasMany('user', { async: true }),
+  meta: DS.attr(),
 
   name: DS.attr('string'),
   domains: DS.attr('string', { defaultValue: '*' }),
-  contact: DS.attr('string'),
-  email: DS.attr('string'),
+  contactName: DS.attr('string'),
+  contactEmail: DS.attr('string'),
   year: DS.attr('number'),
   isActive: DS.attr('boolean', { defaultValue: true }),
-  doiCount: DS.attr(),
   created: DS.attr('date'),
   updated: DS.attr('date'),
 
@@ -57,6 +57,9 @@ export default DS.Model.extend(Validations, {
   }),
   'provider-id': Ember.computed('id', function() {
     return this.get('id').split('.').get('firstObject');
+  }),
+  doiCount: Ember.computed('meta', function() {
+    return this.get('meta.dois');
   }),
   currentDoiCount: Ember.computed('doiCount', function() {
     let currentYear = this.get('doiCount').findBy('id', 2017);

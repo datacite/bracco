@@ -8,8 +8,8 @@
           {{#bs-form formLayout="vertical" model=model onSubmit=(action "submit" model) submitOnEnter=true as |form|}}
             {{form.element controlType="text" label="Client ID" placeholder="Client ID" property="id" helpText='The Client ID is a unique identifier for each client. It must contain only lower case letters and numbers, and must start with the Provider ID.' disabled=true}}
             {{form.element controlType="text" label="Client Name" placeholder="Client Name" property="name" required=false}}
-            {{form.element controlType="text" label="Contact Name" placeholder="Contact Name" property="contact" required=false}}
-            {{form.element controlType="email" label="Contact Email" placeholder="Contact Email" property="email" required=false}}
+            {{form.element controlType="text" label="Contact Name" placeholder="Contact Name" property="contactName" required=false}}
+            {{form.element controlType="email" label="Contact Email" placeholder="Contact Email" property="contactEmail" required=false}}
             {{form.element controlType="textarea" label="Domains" placeholder="Domains" property="domains" required=false helpText='List of (sub-)domains used for DOI registration, or use * to allow all domains'}}
             {{form.element controlType="checkbox" label="Account is active" property="isActive" helpText='This account can manage clients, prefixes and users'}}
 
@@ -68,14 +68,14 @@
           </h5>
           {{model.uid}}
 
-          {{#if model.contact}}
+          {{#if model.contactName}}
             <h5>Contact Name</h5>
-            {{model.contact}}
+            {{model.contactName}}
           {{/if}}
 
-          {{#if model.email}}
+          {{#if model.contactEmail}}
             <h5>Contact Email</h5>
-            <a href="mailto:{{model.email}}">{{model.email}}</a>
+            <a href="mailto:{{model.contactEmail}}">{{model.contactEmail}}</a>
           {{/if}}
 
           {{#if model.domainList}}

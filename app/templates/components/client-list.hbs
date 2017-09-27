@@ -7,8 +7,8 @@
         {{#bs-form formLayout="vertical" model=client onSubmit=(action "submit" client model) submitOnEnter=true as |form|}}
           {{form.element controlType="text" label="Client ID" placeholder="Client ID" property="id" helpText='The Client ID is a unique identifier for each client. It must contain only lower case letters and numbers, and must start with the Provider ID.' useIcons=false required=false}}
           {{form.element controlType="text" label="Client Name" placeholder="Client Name" property="name" useIcons=false required=false}}
-          {{form.element controlType="text" label="Contact Name" placeholder="Contact Name" property="contact" useIcons=false required=false}}
-          {{form.element controlType="email" label="Contact Email" placeholder="Contact Email" property="email" useIcons=false required=false}}
+          {{form.element controlType="text" label="Contact Name" placeholder="Contact Name" property="contactName" useIcons=false required=false}}
+          {{form.element controlType="email" label="Contact Email" placeholder="Contact Email" property="contactEmail" useIcons=false required=false}}
           {{form.element controlType="textarea" label="Domains" placeholder="Domains" property="domains" helpText='List of (sub-)domains used for DOI registration, or use * to allow all domains' useIcons=false required=false}}
           {{form.element controlType="checkbox" label="Account is active" property="isActive" helpText='This account can manage users, prefixes and DOIs'}}
 
@@ -44,14 +44,14 @@
             </h5>
             {{client.uid}}
 
-            {{#if client.contact}}
+            {{#if client.contactName}}
               <h5>Contact Name</h5>
-              {{client.contact}}
+              {{client.contactName}}
             {{/if}}
 
-            {{#if client.email}}
+            {{#if client.contactEmail}}
               <h5>Contact Email</h5>
-              <a href="mailto:{{client.email}}">{{client.email}}</a>
+              <a href="mailto:{{client.contactEmail}}">{{client.contactEmail}}</a>
             {{/if}}
 
             {{#if client.domainList}}

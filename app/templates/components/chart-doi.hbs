@@ -2,11 +2,13 @@
   <div class="panel-heading">
     <h3 class="panel-title">
       {{pluralize-word model.currentDoiCount "DOI" omitCount=true}}
-      <span class="small pull-right">in 2017</span>
     </h3>
   </div>
   <div class="panel-body panel-chart">
-    <h2 class="member graphs">{{#link-to "providers.show.dois" model.id (query-params registered='2017')}}{{format-number model.currentDoiCount}}{{/link-to}}</h2>
+    <h2 class="member graphs">
+      {{#link-to "providers.show.dois" model.id (query-params registered='2017')}}{{format-number model.currentDoiCount}}{{/link-to}}
+      <span class="small">in 2017</span>
+    </h2>
     <div class="graphs" id="chart-doi"></div>
   </div>
 </div>

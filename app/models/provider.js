@@ -34,6 +34,7 @@ export default DS.Model.extend(Validations, {
     async: false
   }),
   users: DS.hasMany('user', { async: false }),
+  meta: DS.attr(),
 
   name: DS.attr('string'),
   description: DS.attr('string'),
@@ -41,18 +42,19 @@ export default DS.Model.extend(Validations, {
   country: DS.attr('string'),
   year: DS.attr('number'),
   logoUrl: DS.attr('string'),
-  contact: DS.attr('string'),
-  email: DS.attr('string'),
+  contactName: DS.attr('string'),
+  contactEmail: DS.attr('string'),
   website: DS.attr('string'),
   phone: DS.attr('string'),
   isActive: DS.attr('boolean'),
-  doiCount: DS.attr(),
-  clientCount: DS.attr(),
   created: DS.attr('date'),
   updated: DS.attr('date'),
 
   uid: Ember.computed('id', function() {
     return this.get('id').toUpperCase();
+  }),
+  doiCount: Ember.computed('meta', function() {
+    return this.get('meta.dois');
   }),
   currentDoiCount: Ember.computed('doiCount', function() {
     let currentYear = this.get('doiCount').findBy('id', 2017);
@@ -62,8 +64,22 @@ export default DS.Model.extend(Validations, {
       return 0;
     }
   }),
+  clientCount: Ember.computed('meta', function() {
+    return this.get('meta.clients');
+  }),
   currentClientCount: Ember.computed('clientCount', function() {
     let currentYear = this.get('clientCount').get('lastObject');
+    if (currentYear) {
+      return currentYear.count;
+    } else {
+      return 0;
+    }
+  }),
+  providerCount: Ember.computed('meta', function() {
+    return this.get('meta.providers');
+  }),
+  currentProviderCount: Ember.computed('providerCount', function() {
+    let currentYear = this.get('providerCount').get('lastObject');
     if (currentYear) {
       return currentYear.count;
     } else {

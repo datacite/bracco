@@ -6,9 +6,9 @@
 
         {{#bs-form formLayout="vertical" model=provider onSubmit=(action "submit" provider model) submitOnEnter=true as |form|}}
           {{form.element controlType="text" label="Provider ID" placeholder="Provider ID" property="id" helpText='The Provider ID can contain only lower case letters, and must not be longer than 8 characters' useIcons=false required=false}}
-          {{form.element controlType="text" label="Name" placeholder="Name" property="name" required=false}}
-          {{form.element controlType="text" label="Contact" placeholder="Contact" property="contact" required=false}}
-          {{form.element controlType="email" label="Email" placeholder="Email" property="email" required=false}}
+          {{form.element controlType="text" label="Provider Name" placeholder="Provider Name" property="name" required=false}}
+          {{form.element controlType="text" label="Contact Name" placeholder="Contact Email" property="contactName" required=false}}
+          {{form.element controlType="email" label="Contact Email" placeholder="Contact Email" property="contactEmail" required=false}}
           {{form.element controlType="checkbox" label="Account is active" property="isActive" helpText='This account can manage clients, prefixes and users'}}
 
           <div class="pseudo-footer">
@@ -42,14 +42,14 @@
             <h5>Provider ID</h5>
             {{provider.uid}}
 
-            {{#if provider.contact}}
-              <h5>Contact</h5>
-              {{provider.contact}}
+            {{#if provider.contactName}}
+              <h5>Contact Name</h5>
+              {{provider.contactName}}
             {{/if}}
 
-            {{#if provider.email}}
-              <h5>Email</h5>
-              <a href="mailto:{{provider.email}}">{{provider.email}}</a>
+            {{#if provider.contactEmail}}
+              <h5>Contact Email</h5>
+              <a href="mailto:{{provider.contactEmail}}">{{provider.contactEmail}}</a>
             {{/if}}
           </div>
         </div>

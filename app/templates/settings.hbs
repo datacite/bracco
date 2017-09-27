@@ -1,16 +1,1 @@
-{{#if (can "read settings")}}
-  {{application-header default=true}}
-
-  <div class="container-fluid">
-    <div class="content">
-      {{#if (current-user role="provider_admin")}}
-        {{member-settings model=model}}
-      {{else if (current-user role="client_admin")}}
-        {{data-center-settings model=model}}
-      {{/if}}
-    </div>
-  </div>
-{{else}}
-  {{application-header}}
-  {{landing-page}}
-{{/if}}
+{{outlet}}

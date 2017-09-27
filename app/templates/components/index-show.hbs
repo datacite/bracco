@@ -13,14 +13,14 @@
     </div>
   {{/bs-form}}
 {{else}}
-  {{#if model.contact}}
-    <h5>Contact</h5>
-    {{model.contact}}
+  {{#if model.contactName}}
+    <h5>Contact Name</h5>
+    {{model.contactName}}
   {{/if}}
 
-  {{#if model.email}}
-    <h5>Email</h5>
-    <a href="{{model.email}}">{{model.email}}</a>
+  {{#if model.contactEmail}}
+    <h5>Contact Email</h5>
+    <a href="{{model.contactEmail}}">{{model.email}}</a>
   {{/if}}
 
   <div class="pseudo-footer">

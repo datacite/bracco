@@ -5,6 +5,12 @@
     <div class="content">
       {{index-header}}
 
+      <div class="row">
+        {{chart-provider model=model}}
+        {{chart-client model=model}}
+        {{chart-doi model=model}}
+      </div>
+
       {{#if (can "read messages" model)}}
         <div class="row">
           <div class="col-md-9">
@@ -14,8 +20,6 @@
           </div>
         </div>
       {{/if}}
-
-      {{provider-show model=model admin=true}}
     </div>
   </div>
 {{else}}
