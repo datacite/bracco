@@ -61,6 +61,7 @@ export default Ember.Service.extend({
           self.set('role_id', result.role_id);
           self.set('role', self.get('store').findRecord('role', result.role_id));
           self.set('home', '/');
+          self.get('flashMessages').info('Welcome ' + result.name + ' to the DataCite Administration area.');
         } else if (['provider_admin', 'provider_user'].includes(result.role_id) && result.provider_id) {
           self.set('provider_id', result.provider_id);
           self.get('store').findRecord('provider', result.provider_id).then(function(provider) {
@@ -69,6 +70,7 @@ export default Ember.Service.extend({
             self.set('role_id', (isProvider) ? result.role_id : 'user');
             self.set('role', self.get('store').findRecord('role', self.get('role_id')));
             self.set('home', '/providers/' + result.provider_id);
+            self.get('flashMessages').info('Welcome ' + result.name + ' to the DOI Registration Provider Administration area.');
           });
         } else if (['client_admin', 'client_user'].includes(result.role_id) && result.client_id) {
           self.set('client_id', result.client_id);
@@ -78,17 +80,10 @@ export default Ember.Service.extend({
             self.set('role_id', (isClient) ? result.role_id : 'user');
             self.set('role', self.get('store').findRecord('role', self.get('role_id')));
             self.set('home', '/clients/' + result.client_id);
+            self.get('flashMessages').info('Welcome ' + result.name + ' to the Client Administration area.');
           });
         } else {
           self.set('role_id', 'user');
-        }
-
-        if (['client_admin', 'client_user'].includes(result.role_id)) {
-          self.get('flashMessages').info('Welcome ' + result.name + ' to the Client Administration area.');
-        } else if (['provider_admin', 'provider_user'].includes(result.role_id)) {
-          self.get('flashMessages').info('Welcome ' + result.name + ' to the DOI Registration Provider Administration area.');
-        } else if (['staff_admin', 'staff_user'].includes(result.role_id)) {
-          self.get('flashMessages').info('Welcome ' + result.name + ' to the DataCite Administration area.');
         }
       }
     }, function(reason) {

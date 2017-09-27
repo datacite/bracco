@@ -70,15 +70,19 @@
     {{#if (can "create provider")}}
       <div class="panel facets">
         <div class="panel-body">
-          <div class="pull-right">
-            <button {{action "new"}} class="btn btn-warning">{{fa-icon "plus"}} Add Provider</button>
-          </div>
+          <button {{action "new"}} class="btn btn-warning">{{fa-icon "plus"}}Add Provider</button>
+        </div>
+      </div>
+    {{else}}
+      <div class="panel panel-transparent">
+        <div class="panel-body">
+          <div class="edit"></div>
         </div>
       </div>
     {{/if}}
 
     {{#if model.meta.years}}
-      <div class="panel facets">
+      <div class="panel facets add">
         <div class="panel-body">
           <h4>Year joined</h4>
           <ul>
