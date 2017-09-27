@@ -23,7 +23,7 @@ export default Ember.Component.extend({
     let margin = { top: 10, right: 10, bottom: 5, left: 5 };
     let div = '#chart-provider';
 
-    let startDate = new Date("2011-01-01");
+    let startDate = new Date("2009-01-01");
     let endDate = new Date("2018-01-01");
     let domain = [startDate, endDate];
     let length = D3.time.years(startDate, endDate).length;
@@ -53,26 +53,21 @@ export default Ember.Component.extend({
     chart.selectAll(".bar")
       .data(data)
       .enter().append("rect")
+      .attr("id", function(d) {
+        return "provider-" + d.id;
+       })
       .attr("class", function(d) {
-        if (d.count >= 50) {
+        if (d.count >= 100) {
           return "bar extra-large";
-        } else if (d.count > 10) {
+        } else if (d.count >= 75) {
           return "bar large";
-        } else if (d.count > 5) {
+        } else if (d.count >= 50) {
           return "bar medium";
-        } else if (d.count > 1) {
+        } else if (d.count >= 25) {
           return "bar small";
         } else {
           return "bar tiny";
         }
-       })
-      .attr("data-toggle", "tooltip")
-      .attr("title", function(d) {
-        var title = formatFixed(d.count);
-        var dateStamp = Date.parse(d.id + '-01T12:00:00Z');
-        var dateString = " in " + formatYear(new Date(dateStamp));
-
-        return title + dateString;
        })
       .attr("x", function(d) {
         return x(new Date(Date.parse(d.id + '-01T12:00:00Z')));
@@ -86,8 +81,17 @@ export default Ember.Component.extend({
       .attr("transform", "translate(0," + height + ")")
       .call(xAxis);
 
-    // activate bootstrap tooltips
-    //this.$('[data-toggle="tooltip"]').tooltip();
+    let self = this;
+    chart.selectAll("rect").each(
+      function(d) {
+        var id = "#provider-" + d.id;
+        var title = formatFixed(d.count);
+        var dateStamp = Date.parse(d.id + '-01T12:00:00Z');
+        var dateString = " in " + formatYear(new Date(dateStamp));
+
+        self.$(id).tooltip({ title: title + dateString, container: "body"});
+      }
+    );
 
     // return chart object
     return chart;

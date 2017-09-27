@@ -20,6 +20,7 @@ module.exports = function(defaults) {
     'ember-bootstrap': {
       importBootstrapCSS: false,
       whitelist: ['bs-popover',
+                  'bs-tooltip',
                   'bs-collapse',
                   'bs-accordion',
                   'bs-button',
@@ -67,9 +68,9 @@ module.exports = function(defaults) {
     }
   });
 
-  // Use `app.import` to add additional libraries to the generated
-  // output files.
-  //
+  app.import('vendor/bootstrap/js/dropdown.js');
+  app.import('vendor/bootstrap/js/tooltip.js');
+
   // If you need to use different assets in different
   // environments, specify an object as the first parameter. That
   // object's keys should be the environment name and the values

@@ -23,7 +23,7 @@ export default Ember.Component.extend({
     let margin = { top: 10, right: 5, bottom: 5, left: 5 };
     let div = '#chart-doi';
 
-    let startDate = new Date("2011-01-01");
+    let startDate = new Date("2009-01-01");
     let endDate = new Date("2018-01-01");
     let domain = [startDate, endDate];
     let length = d3.time.years(startDate, endDate).length;
@@ -53,6 +53,9 @@ export default Ember.Component.extend({
     chart.selectAll(".bar")
       .data(data)
       .enter().append("rect")
+      .attr("id", function(d) {
+        return "doi-" + d.id;
+       })
       .attr("class", function(d) {
         if (d.count >= 100000) {
           return "bar medium";
@@ -61,14 +64,6 @@ export default Ember.Component.extend({
         } else {
           return "bar tiny";
         }
-       })
-      .attr("data-toggle", "tooltip")
-      .attr("title", function(d) {
-        var title = formatFixed(d.count);
-        var dateStamp = Date.parse(d.id + '-01T12:00:00Z');
-        var dateString = " in " + formatYear(new Date(dateStamp));
-
-        return title + dateString;
        })
       .attr("x", function(d) {
         return x(new Date(Date.parse(d.id + '-01T12:00:00Z')));
@@ -82,8 +77,17 @@ export default Ember.Component.extend({
       .attr("transform", "translate(0," + height + ")")
       .call(xAxis);
 
-    // activate bootstrap tooltips
-    //this.$('[data-toggle="tooltip"]').tooltip();
+    let self = this;
+    chart.selectAll("rect").each(
+      function(d) {
+        var id = "#doi-" + d.id;
+        var title = formatFixed(d.count);
+        var dateStamp = Date.parse(d.id + '-01T12:00:00Z');
+        var dateString = " in " + formatYear(new Date(dateStamp));
+
+        self.$(id).tooltip({ title: title + dateString, container: "body"});
+      }
+    );
 
     // return chart object
     return chart;
