@@ -20,17 +20,7 @@ module.exports = function(defaults) {
     'ember-bootstrap': {
       importBootstrapCSS: false,
       importBootstrapFont: false,
-      bootstrapVersion: 3,
-      whitelist: ['bs-popover',
-                  'bs-tooltip',
-                  'bs-collapse',
-                  'bs-accordion',
-                  'bs-button',
-                  'bs-button-group',
-                  'bs-alert',
-                  'bs-dropdown',
-                  'bs-modal',
-                  'bs-nav']
+      bootstrapVersion: 3
     },
     'ember-prism': {
       'theme': 'default'
