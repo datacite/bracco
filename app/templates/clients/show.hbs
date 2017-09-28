@@ -35,13 +35,14 @@
               {{#nav.item}}{{#nav.link-to "clients.show.dois" model.id class="nav-link"}}DOIs{{/nav.link-to}}{{/nav.item}}
             {{/bs-nav}}
           </div>
-          {{#if model.badgeUrl}}
-            <div class="col-md-3">
-              <img class="img-responsive" src="{{model.badgeUrl}}">
-            </div>
-          {{/if}}
         </div>
+        {{#if model.badgeUrl}}
+          <div class="col-md-3">
+            <img class="img-responsive" src="{{model.badgeUrl}}">
+          </div>
+        {{/if}}
       </div>
+      
       {{outlet}}
     </div>
   </div>
