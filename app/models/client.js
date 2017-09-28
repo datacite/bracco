@@ -60,13 +60,5 @@ export default DS.Model.extend(Validations, {
   }),
   doiCount: Ember.computed('meta', function() {
     return this.get('meta.dois');
-  }),
-  currentDoiCount: Ember.computed('doiCount', function() {
-    let currentYear = this.get('doiCount').findBy('id', 2017);
-    if (currentYear) {
-      return currentYear.count;
-    } else {
-      return 0;
-    }
   })
 });

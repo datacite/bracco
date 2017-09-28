@@ -1,6 +1,6 @@
 <div class="row">
-  {{chart-client model=model}}
-  {{chart-doi model=model}}
+  {{bar-chart data=model.clientCount label='Client'}}
+  {{bar-chart data=model.doiCount label='DOI' cumulative=false}}
 </div>
 
 {{#if (can "read messages" model)}}

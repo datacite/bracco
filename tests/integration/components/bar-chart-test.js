@@ -1,7 +1,7 @@
 // import { moduleForComponent, test } from 'ember-qunit';
 // import hbs from 'htmlbars-inline-precompile';
 //
-// moduleForComponent('chart-provider', 'Integration | Component | chart provider', {
+// moduleForComponent('bar-chart', 'Integration | Component | bar chart', {
 //   integration: true
 // });
 //
@@ -9,15 +9,15 @@
 //   // Set any properties with this.set('myProperty', 'value');
 //   // Handle any actions with this.on('myAction', function(val) { ... });
 //
-//   this.render(hbs`{{chart-provider}}`);
+//   this.render(hbs`{{bar-chart}}`);
 //
 //   assert.equal(this.$().text().trim(), '');
-// 
+//
 //   // Template block usage:
 //   this.render(hbs`
-//     {{#chart-provider}}
+//     {{#bar-chart}}
 //       template block text
-//     {{/chart-provider}}
+//     {{/bar-chart}}
 //   `);
 //
 //   assert.equal(this.$().text().trim(), 'template block text');

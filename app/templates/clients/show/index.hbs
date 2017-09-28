@@ -1,5 +1,5 @@
-<div class="row">  
-  {{chart-doi model=model}}
+<div class="row">
+  {{bar-chart data=model.doiCount label='DOI' cumulative=false}}
 </div>
 
 {{#if (can "read messages" model)}}

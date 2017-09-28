@@ -1,0 +1,15 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">
+      {{pluralize-word count label omitCount=true}}
+      <span class="small pull-right">by year</span>
+    </h3>
+  </div>
+  <div class="panel-body panel-chart">
+    <h2 class="member graphs">
+      {{#link-to "providers.show.dois" model.id (query-params registered='2017')}}{{format-number count}}{{/link-to}}
+      {{#if (not cumulative)}}<span class="small">in 2017</span>{{/if}}
+    </h2>
+    <div class="graphs" id="{{chartId}}"></div>
+  </div>
+</div>
