@@ -19,6 +19,8 @@ module.exports = function(defaults) {
     },
     'ember-bootstrap': {
       importBootstrapCSS: false,
+      importBootstrapFont: false,
+      bootstrapVersion: 3,
       whitelist: ['bs-popover',
                   'bs-tooltip',
                   'bs-collapse',
@@ -59,12 +61,6 @@ module.exports = function(defaults) {
       'cdn-url' : {
         content: (process.env.CDN_URL || "https://assets.datacite.org")
       }
-    },
-
-    'ember-bootstrap': {
-      'bootstrapVersion': 3,
-      'importBootstrapFont': false,
-      'importBootstrapCSS': false
     }
   });
 
