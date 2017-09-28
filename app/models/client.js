@@ -61,5 +61,12 @@ export default DS.Model.extend(Validations, {
   }),
   doiCount: Ember.computed('meta', function() {
     return this.get('meta.dois');
+  }),
+  badgeUrl: Ember.computed('re3data', function() {
+    if (this.get('re3data')) {
+      return 'http://www.re3data.org/public/badges/s/light/' + this.get('re3data') + '.svg';
+    } else {
+      return null;
+    }
   })
 });
