@@ -42,6 +42,7 @@ export default DS.Model.extend(Validations, {
   domains: DS.attr('string', { defaultValue: '*' }),
   contactName: DS.attr('string'),
   contactEmail: DS.attr('string'),
+  re3data: DS.attr('string'),
   year: DS.attr('number'),
   isActive: DS.attr('boolean', { defaultValue: true }),
   created: DS.attr('date'),
