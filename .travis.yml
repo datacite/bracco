@@ -28,7 +28,7 @@ install:
 
 script:
   - COVERAGE=true ember test
-  - CODECLIMATE_REPO_TOKEN=$CODECLIMATE_REPO_TOKEN codeclimate-test-reporter < lcov.info
+  - codeclimate-test-reporter < lcov.info
   - ember build --environment=production
 
 deploy:
