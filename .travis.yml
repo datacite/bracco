@@ -21,12 +21,14 @@ before_install:
       cp .env.stage .env;
     fi
   - npm config set spin false
+  - npm install -g codeclimate-test-reporter
 
 install:
   - npm install
 
 script:
-  - ember test
+  - COVERAGE=true ember test
+  - $CODECLIMATE_REPO_TOKEN codeclimate-test-reporter < lcov.info
   - ember build --environment=production
 
 deploy:
