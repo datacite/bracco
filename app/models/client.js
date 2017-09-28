@@ -18,10 +18,20 @@ const Validations = buildValidations({
   ],
   name: validator('presence', true),
   domains: validator('presence', true),
-  contact: validator('presence', true),
-  email: [
+  contactName: validator('presence', true),
+  contactEmail: [
     validator('presence', true),
     validator('format', { type: 'email' })
+  ],
+  re3data: [
+    validator('format', {
+      regex: /^[0-9]+$/,
+      message: 'The re3data ID can contain only numbers'
+    }),
+    validator('length', {
+      min: 9,
+      max: 9
+    })
   ]
 });
 

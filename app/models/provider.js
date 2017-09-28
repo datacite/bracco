@@ -16,8 +16,8 @@ const Validations = buildValidations({
     })
   ],
   name: validator('presence', true),
-  contact: validator('presence', true),
-  email: [
+  contactName: validator('presence', true),
+  contactEmail: [
     validator('presence', true),
     validator('format', { type: 'email' })
   ]
@@ -56,10 +56,34 @@ export default DS.Model.extend(Validations, {
   doiCount: Ember.computed('meta', function() {
     return this.get('meta.dois');
   }),
+  currentDoiCount: Ember.computed('doiCount', function() {
+    let currentYear = this.get('doiCount').findBy('id', 2017);
+    if (currentYear) {
+      return currentYear.count;
+    } else {
+      return 0;
+    }
+  }),
   clientCount: Ember.computed('meta', function() {
     return this.get('meta.clients');
+  }),
+  currentClientCount: Ember.computed('clientCount', function() {
+    let currentYear = this.get('clientCount').get('lastObject');
+    if (currentYear) {
+      return currentYear.count;
+    } else {
+      return 0;
+    }
   }),
   providerCount: Ember.computed('meta', function() {
     return this.get('meta.providers');
   }),
+  currentProviderCount: Ember.computed('providerCount', function() {
+    let currentYear = this.get('providerCount').get('lastObject');
+    if (currentYear) {
+      return currentYear.count;
+    } else {
+      return 0;
+    }
+  })
 });
