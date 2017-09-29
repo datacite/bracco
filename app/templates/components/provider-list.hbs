@@ -5,7 +5,7 @@
         <h3 class="edit">New Provider</h3>
 
         {{#bs-form formLayout="vertical" model=provider onSubmit=(action "submit" provider model) submitOnEnter=true as |form|}}
-          {{form.element controlType="text" label="Provider ID" placeholder="Provider ID" property="id" helpText='The Provider ID can contain only lower case letters, and must not be longer than 8 characters' useIcons=false required=false}}
+          {{form.element controlType="text" label="Provider ID" placeholder="Provider ID" property="symbol" helpText='The Provider ID can contain only upper case letters, and must not be longer than 8 characters' useIcons=false required=false}}
           {{form.element controlType="text" label="Provider Name" placeholder="Provider Name" property="name" required=false}}
           {{form.element controlType="text" label="Contact Name" placeholder="Contact Email" property="contactName" required=false}}
           {{form.element controlType="email" label="Contact Email" placeholder="Contact Email" property="contactEmail" required=false}}
@@ -40,7 +40,7 @@
             </h3>
 
             <h5>Provider ID</h5>
-            {{provider.uid}}
+            {{provider.symbol}}
 
             {{#if provider.contactName}}
               <h5>Contact Name</h5>

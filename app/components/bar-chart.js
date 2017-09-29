@@ -6,9 +6,13 @@ export default Ember.Component.extend({
   classNames: ['col-md-3'],
   data: null,
   count: Ember.computed('data', function() {
-    let currentYear = this.get('data').findBy('id', 2017);
-    if (currentYear) {
-      return currentYear.count;
+    if (this.get('data')) {
+      let currentYear = this.get('data').findBy('id', 2017);
+      if (currentYear) {
+        return currentYear.count;
+      } else {
+        return 0;
+      }
     } else {
       return 0;
     }

@@ -5,7 +5,7 @@ const UniqueClientId = BaseValidator.extend({
   store: Ember.inject.service(),
 
   validate(value, options, model) {
-    let providerId = model.get('provider').get('id') + '.';
+    let providerId = model.get('provider').get('symbol') + '.';
     if (value === providerId || Ember.computed.not('model.meta.id.isEnabled')) {
       return true;
     } else {

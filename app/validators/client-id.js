@@ -2,7 +2,7 @@ import BaseValidator from 'ember-cp-validations/validators/base';
 
 const ClientId = BaseValidator.extend({
   validate(value, options, model) {
-    let providerId = model.get('provider').get('id') + '.';
+    let providerId = model.get('provider').get('symbol') + '.';
     if (value.startsWith(providerId)) {
       return true;
     } else {

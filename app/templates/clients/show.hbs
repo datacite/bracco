@@ -21,11 +21,7 @@
               <h2>{{model.name}}</h2>
             </div>
           </div>
-        </div>
-      </div>
 
-      <div class="row">
-        <div class='col-md-9'>
           <div class="tab-content nav-tabs-member">
             {{#bs-nav type="tabs" as |nav|}}
               {{#nav.item}}{{#nav.link-to "clients.show.index" model.id class="nav-link"}}Info{{/nav.link-to}}{{/nav.item}}
@@ -38,11 +34,11 @@
         </div>
         {{#if model.badgeUrl}}
           <div class="col-md-3">
-            <img class="img-responsive" src="{{model.badgeUrl}}">
+            <a href="http://www.re3data.org/repository/r3d{{model.re3data}}"><img class="img-responsive" src="{{model.badgeUrl}}"></a>
           </div>
         {{/if}}
       </div>
-      
+
       {{outlet}}
     </div>
   </div>

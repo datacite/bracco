@@ -6,7 +6,7 @@
           <h3 class="edit">Edit Client</h3>
 
           {{#bs-form formLayout="vertical" model=model onSubmit=(action "submit" model) submitOnEnter=true as |form|}}
-            {{form.element controlType="text" label="Client ID" placeholder="Client ID" property="id" helpText='The Client ID is a unique identifier for each client. It must contain only lower case letters and numbers, and must start with the Provider ID.' disabled=true}}
+            {{form.element controlType="text" label="Client ID" placeholder="Client ID" property="symbol" helpText='The Client ID is a unique identifier for each client. It must contain only upper case letters and numbers, and must start with the Provider ID.' disabled=true}}
             {{form.element controlType="text" label="re3data" placeholder="re3data" property="re3data" helpText='re3data is a registry of research data repositories.' useIcons=false required=false}}
             {{form.element controlType="text" label="Client Name" placeholder="Client Name" property="name" required=false}}
             {{form.element controlType="text" label="Contact Name" placeholder="Contact Name" property="contactName" required=false}}
@@ -64,10 +64,10 @@
           <h5>
             Client ID
             <span>{{fa-icon "question-circle-o"}}
-              {{#bs-tooltip placement="top" viewportPadding=10}}The Client ID is a unique identifier for each client. It must contain only lower case letters and numbers, and must start with the Provider ID.{{/bs-tooltip}}
+              {{#bs-tooltip placement="top" viewportPadding=10}}The Client ID is a unique identifier for each client. It must contain only upper case letters and numbers, and must start with the Provider ID.{{/bs-tooltip}}
             </span>
           </h5>
-          {{model.uid}}
+          {{model.symbol}}
 
           {{#if model.re3data}}
             <h5>

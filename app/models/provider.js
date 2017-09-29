@@ -3,12 +3,12 @@ import DS from 'ember-data';
 import { validator, buildValidations } from 'ember-cp-validations';
 
 const Validations = buildValidations({
-  id: [
+  symbol: [
     validator('presence', true),
     validator('unique-provider-id', true),
     validator('format', {
-      regex: /^[a-z]+$/,
-      message: 'The Provider ID can contain only lower case letters'
+      regex: /^[A-Z]+$/,
+      message: 'The Provider ID can contain only upper case letters'
     }),
     validator('length', {
       min: 2,
@@ -37,6 +37,7 @@ export default DS.Model.extend(Validations, {
   meta: DS.attr(),
 
   name: DS.attr('string'),
+  symbol: DS.attr('string'),
   description: DS.attr('string'),
   region: DS.attr('string'),
   country: DS.attr('string'),

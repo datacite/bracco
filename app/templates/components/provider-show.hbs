@@ -6,7 +6,7 @@
           <h3 class="edit">Edit {{#if (not admin)}}Provider{{else}}Admin{{/if}}</h3>
 
           {{#bs-form formLayout="vertical" model=model onSubmit=(action "submit" model) submitOnEnter=true as |form|}}
-            {{form.element controlType="text" label="Provider ID" placeholder="ID" property="id" disabled=true}}
+            {{form.element controlType="text" label="Provider ID" placeholder="ID" property="symbol" disabled=true}}
             {{form.element controlType="text" label="Provider Name" placeholder="Provider Name" property="name" required=false}}
             {{form.element controlType="text" label="Contact Name" placeholder="Contact Name" property="contactName" required=false}}
             {{form.element controlType="email" label="Contact Email" placeholder="Contact Email" property="contactEmail" required=false}}
@@ -69,7 +69,7 @@
         <div class="panel-body">
           {{#if (not admin)}}
             <h5>Provider ID</h5>
-            {{model.uid}}
+            {{model.symbol}}
           {{/if}}
 
           {{#if model.contactName}}
