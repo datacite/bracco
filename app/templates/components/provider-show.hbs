@@ -8,7 +8,7 @@
           {{#bs-form formLayout="vertical" model=model onSubmit=(action "submit" model) submitOnEnter=true as |form|}}
             {{form.element controlType="text" label="Provider ID" placeholder="ID" property="symbol" disabled=true}}
             {{form.element controlType="text" label="Provider Name" placeholder="Provider Name" property="name" required=false}}
-            {{form.element controlType="text" label="Contact Name" placeholder="Contact Name" property="contactName" required=false}}
+            {{form.element controlType="text" label="Contact Name" placeholder="Contact Name" property="contactName" helpText='Please enter the name of a person that can be contacted for technical or administrative issues.' required=false}}
             {{form.element controlType="email" label="Contact Email" placeholder="Contact Email" property="contactEmail" required=false}}
             {{form.element controlType="checkbox" label="Account is active" property="isActive" required=false helpText='This account can manage clients, prefixes and users'}}
 
