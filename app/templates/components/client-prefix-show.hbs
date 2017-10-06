@@ -13,7 +13,14 @@
   </div>
 {{else}}
   <div class="panel-body">
-    <h3 class="member">{{model.prefix.id}}</h3>
+    <h3 class="member">
+      {{model.prefix.id}}
+      {{#if (and (can "write prefix" model) (not-eq model.prefix.id "10.5072"))}}
+        <span class="small">
+          <button {{action "delete" model}} class="btn-link btn-icon">{{fa-icon "chain-broken"}}</button>
+        </span>
+      {{/if}}
+    </h3>
 
     {{#if (eq model.prefix.id "10.5072")}}
       <span class="icon-default">Test prefix</span>
@@ -21,11 +28,5 @@
 
     <h5>Added</h5>
     {{format-time model.created year='numeric' month='long' day='numeric'}}
-  </div>
-  <div class="panel-footer">
-    {{model.prefix.id}}
-    {{#if (and (can "write prefix" model) (not-eq model.prefix.id "10.5072"))}}
-      <button {{action "delete" model}} class="btn-link btn-icon">{{fa-icon "chain-broken"}}</button>
-    {{/if}}
   </div>
 {{/if}}
