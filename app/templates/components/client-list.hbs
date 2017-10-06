@@ -6,12 +6,12 @@
 
         {{#bs-form formLayout="vertical" model=client onSubmit=(action "submit" client model) submitOnEnter=true as |form|}}
           {{form.element controlType="text" label="Client ID" placeholder="Client ID" property="symbol" helpText='The Client ID is a unique identifier for each client. It must contain only upper case letters and numbers, and must start with the Provider ID.' useIcons=false required=false}}
-          {{form.element controlType="text" label="re3data" placeholder="re3data" property="re3data" helpText='re3data is a registry of research data repositories.' useIcons=false required=false}}
+          {{form.element controlType="text" label="re3data ID" placeholder="re3data ID" property="re3data" helpText='re3data is a registry of research data repositories. The re3data ID is a number starting with 10.' useIcons=false required=false}}
           {{form.element controlType="text" label="Client Name" placeholder="Client Name" property="name" useIcons=false required=false}}
           {{form.element controlType="text" label="Contact Name" placeholder="Contact Name" property="contactName" useIcons=false required=false}}
           {{form.element controlType="email" label="Contact Email" placeholder="Contact Email" property="contactEmail" useIcons=false required=false}}
           {{form.element controlType="textarea" label="Domains" placeholder="Domains" property="domains" helpText='List of (sub-)domains used for DOI registration, or use * to allow all domains' useIcons=false required=false}}
-          {{form.element controlType="checkbox" label="Account is active" property="isActive" helpText='This account can manage users, prefixes and DOIs'}}
+          {{form.element controlType="checkbox" label="Account is active" property="isActive" helpText=''This account can register and update DOIs'}}
 
           <div class="pseudo-footer">
             <div class="btn-toolbar pull-right">
