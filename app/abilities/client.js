@@ -10,7 +10,7 @@ export default Ability.extend({
         return false;
     }
   }),
-  canCreate: Ember.computed('currentUser.role_id', 'currentUser.provider_id', 'currentUser.data_center_id', 'model.id', 'model.provider.id', function() {
+  canCreate: Ember.computed('currentUser.role_id', 'currentUser.provider_id', 'currentUser.client_id', 'model.id', 'model.provider.id', function() {
     switch(this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true
@@ -20,7 +20,7 @@ export default Ability.extend({
         return false;
     }
   }),
-  canUpdate: Ember.computed('currentUser.role_id', 'currentUser.provider_id', 'currentUser.data_center_id', 'model.id', 'model.provider.id', function() {
+  canUpdate: Ember.computed('currentUser.role_id', 'currentUser.provider_id', 'currentUser.client_id', 'model.id', 'model.provider.id', function() {
     switch(this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
@@ -32,7 +32,7 @@ export default Ability.extend({
         return false;
     }
   }),
-  canRead: Ember.computed('currentUser.role_id', 'currentUser.provider_id', 'currentUser.data_center_id', 'model.id', 'model.provider.id', function() {
+  canRead: Ember.computed('currentUser.role_id', 'currentUser.provider_id', 'currentUser.client_id', 'model.id', 'model.provider.id', function() {
     switch(this.get('currentUser.role_id')) {
       case 'staff_admin':
       case 'staff_user':
