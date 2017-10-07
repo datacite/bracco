@@ -4,7 +4,7 @@ import { CanMixin } from 'ember-can';
 
 export default Ember.Route.extend(CanMixin, RouteMixin, {
   model(params) {
-    return this.store.findRecord('client', params.client_id, { include: 'provider' });
+    return this.store.findRecord('client', params.client_id, { include: 'provider,repository' });
   },
 
   // afterModel(model, transition) {
