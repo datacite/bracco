@@ -20,7 +20,6 @@ export default Ember.Component.extend({
         self.set('repository', repo)
         self.get('client').set('repository', repo);
         self.get('client').set('name', repo.get('name'));
-        self.get('client').set('contactEmail', repo.get('repositoryContact'));
       });
     }
   },

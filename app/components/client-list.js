@@ -17,7 +17,6 @@ export default Ember.Component.extend({
         self.set('repository', repo)
         self.get('client').set('repository', repo);
         self.get('client').set('name', repo.get('name'));
-        self.get('client').set('contactEmail', repo.get('repositoryContact'));
       });
     }
   },
@@ -29,7 +28,7 @@ export default Ember.Component.extend({
   actions: {
     new: function(model) {
       let provider = this.get('store').peekRecord('provider', model.get('otherParams.provider-id'));
-      this.set('client', this.get('store').createRecord('client', { provider: provider, id: provider.id.toUpperCase() + '.' }));
+      this.set('client', this.get('store').createRecord('client', { provider: provider, symbol: provider.id.toUpperCase() + '.' }));
       this.set('new', true);
     },
     searchRepository(query) {
