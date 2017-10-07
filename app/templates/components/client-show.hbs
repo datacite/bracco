@@ -13,7 +13,6 @@
               {{/el.control}}
             {{/form.element}}
             {{form.element controlType="text" label="Client Name" placeholder="Client Name" property="name" required=false}}
-            {{form.element controlType="text" label="Contact Name" placeholder="Contact Name" property="contactName" helpText='Please enter the name of a person that can be contacted for technical or administrative issues.' required=false}}
             {{form.element controlType="email" label="Contact Email" placeholder="Contact Email" property="contactEmail" required=false}}
             {{form.element controlType="textarea" label="Domains" placeholder="Domains" property="domains" required=false helpText='List of (sub-)domains used for DOI registration, or use * to allow all domains'}}
             {{form.element controlType="checkbox" label="Account is active" property="isActive" helpText='This account can register and update DOIs'}}
@@ -73,24 +72,58 @@
           </h5>
           {{model.symbol}}
 
-          {{#if model.repository}}
+          {{#if model.repository.id}}
             <h5>
               re3data Record
               <span>{{fa-icon "question-circle-o"}}
                 {{#bs-tooltip placement="top" viewportPadding=10}}re3data is a registry of research data repositories.{{/bs-tooltip}}
               </span>
             </h5>
-            <a href="http://www.re3data.org/repository/{{model.repository.id}}">{{model.repository.name}}</a>
+            <a href="http://www.re3data.org/repository/{{model.repository.id}}">{{model.repository.id}}</a>
           {{/if}}
 
-          {{#if model.contactName}}
-            <h5>Contact Name</h5>
-            {{model.contactName}}
+          {{#if model.repository.additionalName}}
+            <h5>Additional Name</h5>
+            {{model.repository.additionalName}}
+          {{/if}}
+
+          {{#if model.repository.subject}}
+            <h5>
+              {{pluralize-word model.subject.length "Subject" omitCount=true}}
+              <span>{{fa-icon "question-circle-o"}}
+                {{#bs-tooltip placement="top" viewportPadding=10}}German Research Foundation (DFG) classification of subject areas covered by this client.{{/bs-tooltip}}
+              </span>
+            </h5>
+            <div class="subject">
+              {{#each model.repository.subject as |sub|}}
+                <span class="label label-primary">{{sub.name}}</span>
+              {{/each}}
+            </div>
+          {{/if}}
+
+          {{#if model.repository.description}}
+            <h5>Description</h5>
+            {{model.repository.description}}
           {{/if}}
 
           {{#if model.contactEmail}}
             <h5>Contact Email</h5>
             <a href="mailto:{{model.contactEmail}}">{{model.contactEmail}}</a>
+          {{/if}}
+
+          {{#if model.repository.repositoryContact}}
+            <h5>Repository Contact</h5>
+            {{model.repository.repositoryContact}}
+          {{/if}}
+
+          {{#if model.repository.repositorySoftware}}
+            <h5>Repository Software</h5>
+            {{model.repository.repositorySoftware}}
+          {{/if}}
+
+          {{#if model.repository.repositoryUrl}}
+            <h5>Repository URL</h5>
+            <a href="{{model.repository.repositoryUrl}}">{{model.repository.repositoryUrl}}</a>
           {{/if}}
 
           {{#if model.domainList}}

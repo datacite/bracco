@@ -12,7 +12,6 @@
             {{/el.control}}
           {{/form.element}}
           {{form.element controlType="text" label="Client Name" placeholder="Client Name" property="name" useIcons=false required=false}}
-          {{form.element controlType="text" label="Contact Name" placeholder="Contact Name" property="contactName" useIcons=false helpText='Please enter the name of a person that can be contacted for technical or administrative issues.' required=false}}
           {{form.element controlType="email" label="Contact Email" placeholder="Contact Email" property="contactEmail" useIcons=false required=false}}
           {{form.element controlType="textarea" label="Domains" placeholder="Domains" property="domains" helpText='List of (sub-)domains used for DOI registration, or use * to allow all domains' useIcons=false required=false}}
           {{form.element controlType="checkbox" label="Account is active" property="isActive" helpText='This account can register and update DOIs'}}
@@ -56,12 +55,7 @@
                   {{#bs-tooltip placement="top" viewportPadding=10}}re3data is a registry of research data repositories.{{/bs-tooltip}}
                 </span>
               </h5>
-              <a href="http://www.re3data.org/repository/{{client.repository.id}}">{{client.repository.name}}</a>
-            {{/if}}
-
-            {{#if client.contactName}}
-              <h5>Contact Name</h5>
-              {{client.contactName}}
+              <a href="http://www.re3data.org/repository/{{client.repository.id}}">{{client.repository.id}}</a>
             {{/if}}
 
             {{#if client.contactEmail}}

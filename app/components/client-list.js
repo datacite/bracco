@@ -11,9 +11,15 @@ export default Ember.Component.extend({
   repositories: [],
 
   selectRepository(repository) {
-    this.set('repository', repository)
-    this.get('client').set('repository', repository);
-    this.get('client').set('name', this.get('repository').get('name'));
+    if (repository) {
+      let self = this;
+      this.get('store').findRecord('repository', repository.id).then(function(repo) {
+        self.set('repository', repo)
+        self.get('client').set('repository', repo);
+        self.get('client').set('name', repo.get('name'));
+        self.get('client').set('contactEmail', repo.get('repositoryContact'));
+      });
+    }
   },
   reset() {
     this.set('client', null);
@@ -23,7 +29,7 @@ export default Ember.Component.extend({
   actions: {
     new: function(model) {
       let provider = this.get('store').peekRecord('provider', model.get('otherParams.provider-id'));
-      this.set('client', this.get('store').createRecord('client', { provider: provider, id: provider.id + '.' }));
+      this.set('client', this.get('store').createRecord('client', { provider: provider, id: provider.id.toUpperCase() + '.' }));
       this.set('new', true);
     },
     searchRepository(query) {

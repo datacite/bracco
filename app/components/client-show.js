@@ -14,10 +14,14 @@ export default Ember.Component.extend({
     this.set('edit', false);
   },
   selectRepository(repository) {
-    this.set('repository', repository)
-    this.get('client').set('repository', repository);
     if (repository) {
-      this.get('client').set('name', this.get('repository').get('name'));
+      let self = this;
+      this.get('store').findRecord('repository', repository.id).then(function(repo) {
+        self.set('repository', repo)
+        self.get('client').set('repository', repo);
+        self.get('client').set('name', repo.get('name'));
+        self.get('client').set('contactEmail', repo.get('repositoryContact'));
+      });
     }
   },
 
