@@ -7,7 +7,14 @@ export default Ember.Component.extend({
   classNames: ['row'],
   client: null,
   new: false,
+  repository: null,
+  repositories: [],
 
+  selectRepository(repository) {
+    this.set('repository', repository)
+    this.get('client').set('repository', repository);
+    this.get('client').set('name', this.get('repository').get('name'));
+  },
   reset() {
     this.set('client', null);
     this.set('new', false);
@@ -18,6 +25,12 @@ export default Ember.Component.extend({
       let provider = this.get('store').peekRecord('provider', model.get('otherParams.provider-id'));
       this.set('client', this.get('store').createRecord('client', { provider: provider, id: provider.id + '.' }));
       this.set('new', true);
+    },
+    searchRepository(query) {
+      this.set('repositories', this.get('store').query('repository', { 'query': query, 'page[size]': 10 }));
+    },
+    selectRepository(repository) {
+      this.selectRepository(repository);
     },
     submit: function(client) {
       let self = this;

@@ -32,9 +32,9 @@
             {{/bs-nav}}
           </div>
         </div>
-        {{#if model.badgeUrl}}
+        {{#if model.repository}}
           <div class="col-md-3">
-            <a href="http://www.re3data.org/repository/r3d{{model.re3data}}"><img class="img-responsive" src="{{model.badgeUrl}}"></a>
+            <a href="http://www.re3data.org/repository/{{model.repository.id}}"><img class="img-responsive" src="{{model.badgeUrl}}"></a>
           </div>
         {{/if}}
       </div>

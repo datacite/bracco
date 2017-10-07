@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import DS from 'ember-data';
+import ENV from 'bracco/config/environment';
 import { validator, buildValidations } from 'ember-cp-validations';
 
 const Validations = buildValidations({
@@ -29,6 +30,9 @@ export default DS.Model.extend(Validations, {
   provider: DS.belongsTo('provider', {
     async: false
   }),
+  repository: DS.belongsTo('repository', {
+    async: false
+  }),
   prefixes: DS.hasMany('prefix', {
     async: false
   }),
@@ -43,7 +47,6 @@ export default DS.Model.extend(Validations, {
   domains: DS.attr('string', { defaultValue: '*' }),
   contactName: DS.attr('string'),
   contactEmail: DS.attr('string'),
-  re3data: DS.attr('string'),
   year: DS.attr('number'),
   isActive: DS.attr('boolean', { defaultValue: true }),
   created: DS.attr('date'),
@@ -60,9 +63,9 @@ export default DS.Model.extend(Validations, {
   doiCount: Ember.computed('meta', function() {
     return this.get('meta.dois');
   }),
-  badgeUrl: Ember.computed('re3data', function() {
-    if (this.get('re3data')) {
-      return 'http://www.re3data.org/public/badges/s/light/' + this.get('re3data') + '.svg';
+  badgeUrl: Ember.computed('repository', function() {
+    if (this.get('repository')) {
+      return ENV.API_URL + '/repositories/' + this.get('repository.id') + '/badge';
     } else {
       return null;
     }

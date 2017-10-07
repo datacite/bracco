@@ -7,7 +7,11 @@
 
           {{#bs-form formLayout="vertical" model=model onSubmit=(action "submit" model) submitOnEnter=true as |form|}}
             {{form.element controlType="text" label="Client ID" placeholder="Client ID" property="symbol" helpText='The Client ID is a unique identifier for each client. It must contain only upper case letters and numbers, and must start with the Provider ID.' disabled=true}}
-            {{form.element controlType="text" label="re3data ID" placeholder="re3data ID" property="re3data" helpText='re3data is a registry of research data repositories. The re3data ID is a number starting with 10.' useIcons=false required=false}}
+            {{#form.element controlType="power-select" property="repository" label="re3data Record" optionLabelPath="name" options=repositories destination=repository helpText='re3data is a registry of research data repositories.' as |el|}}
+              {{#el.control onChange=(action "selectRepository") search=(action "searchRepository") searchField="name" allowClear=true as |item|}}
+                {{item.name}}
+              {{/el.control}}
+            {{/form.element}}
             {{form.element controlType="text" label="Client Name" placeholder="Client Name" property="name" required=false}}
             {{form.element controlType="text" label="Contact Name" placeholder="Contact Name" property="contactName" helpText='Please enter the name of a person that can be contacted for technical or administrative issues.' required=false}}
             {{form.element controlType="email" label="Contact Email" placeholder="Contact Email" property="contactEmail" required=false}}
@@ -69,14 +73,14 @@
           </h5>
           {{model.symbol}}
 
-          {{#if model.re3data}}
+          {{#if model.repository}}
             <h5>
-              re3data ID
+              re3data Record
               <span>{{fa-icon "question-circle-o"}}
                 {{#bs-tooltip placement="top" viewportPadding=10}}re3data is a registry of research data repositories.{{/bs-tooltip}}
               </span>
             </h5>
-            <a href="http://www.re3data.org/repository/r3d{{model.re3data}}">{{model.re3data}}</a>
+            <a href="http://www.re3data.org/repository/{{model.repository.id}}">{{model.repository.name}}</a>
           {{/if}}
 
           {{#if model.contactName}}

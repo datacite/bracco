@@ -6,26 +6,36 @@ export default Ember.Component.extend({
   edit: false,
   delete: false,
   client: null,
-  isDeletable: false,
-
-  setIsDeletable() {
-    this.set('isDeletable', Ember.isBlank(this.get('client').get('prefixes')));
-  },
+  repository: null,
+  repositories: [],
 
   reset() {
     this.set('client', null);
     this.set('edit', false);
   },
+  selectRepository(repository) {
+    this.set('repository', repository)
+    this.get('client').set('repository', repository);
+    if (repository) {
+      this.get('client').set('name', this.get('repository').get('name'));
+    }
+  },
 
   actions: {
     edit: function(client) {
       this.set('client', client);
-      this.setIsDeletable();
+      this.set('repository', client.get('repository'));
       this.set('edit', true);
     },
     delete: function(client) {
       this.set('client', client);
       this.set('delete', true);
+    },
+    searchRepository(query) {
+      this.set('repositories', this.get('store').query('repository', { 'query': query, 'page[size]': 10 }));
+    },
+    selectRepository(repository) {
+      this.selectRepository(repository);
     },
     submit: function(client) {
       client.save();
