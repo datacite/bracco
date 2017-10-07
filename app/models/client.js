@@ -9,7 +9,7 @@ const Validations = buildValidations({
     validator('client-id', true),
     validator('unique-client-id', true),
     validator('format', {
-      regex: /^[A-Z0-9.]+$/,
+      regex: /^[A-Z0-9.-]+$/,
       message: 'The Client ID can contain only upper case letters and numbers, and must start with the Provider ID'
     }),
     validator('length', {
