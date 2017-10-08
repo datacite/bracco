@@ -1,6 +1,4 @@
 import Ember from 'ember';
-import ENV from 'bracco/config/environment';
-import fetch from 'fetch';
 
 export default Ember.Route.extend({
   intl: Ember.inject.service(),
