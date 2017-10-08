@@ -58,11 +58,12 @@ export default Ember.Component.extend(RouteMixin, {
                          'provider-prefix': 'Prefix',
                          'user': 'User' }
     this.set('modelName', placeholders[this.get('model').get("modelName")]);
+
     if (this.get('model').get("modelName") === "doi") {
       this.set('formats', { '-created': 'Sort by Date Registered', 'score': 'Sort by Relevance' });
       this.set('helpText', 'Search all (indexed) DOI metadata, including author, title, publisher, and description.');
-    } else if (this.get('model').get("modelName") === "prefix") {
-      this.set('formats', { '-created': 'Sort by Date Created', 'score': 'Sort by Relevance' });
+    } else if (['prefix', 'provider-prefix', 'client-prefix'].includes(this.get('model').get("modelName"))) {
+      this.set('formats', { '-created': 'Sort by Date Created', 'name': 'Sort by Name' });
     } else {
       this.set('formats', { '-created': 'Sort by Date Joined', 'name': 'Sort by Name' });
     }
