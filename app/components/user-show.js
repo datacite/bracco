@@ -3,9 +3,6 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   store: Ember.inject.service(),
 
-  tagName: 'div',
-  classNames: ['panel', 'panel-transparent'],
-
   edit: false,
   delete: false,
   user: null,
@@ -15,14 +12,13 @@ export default Ember.Component.extend({
   roles: [],
   providers: [],
   clients: [],
-  link: null,
 
   searchRole() {
-    if (this.get('link') === 'users') {
+    if (this.get('currentUser').get('isAdmin')) {
       this.set('roles', this.get('store').findAll('role'));
-    } else if (this.get('link') === 'providers.show.users') {
+    } else if (this.get('currentUser').get('isProvider')) {
       this.set('roles', this.get('store').query('role', { scope: 'provider' }));
-    } else if (this.get('link') === 'clients.show.users') {
+    } else if (this.get('currentUser').get('isClient')) {
       this.set('roles', this.get('store').query('role', { scope: 'client' }));
     }
   },
@@ -33,6 +29,14 @@ export default Ember.Component.extend({
   selectProvider(provider) {
     this.set('provider', provider)
     this.get('user').set('provider', provider);
+
+    if (provider) {
+      this.set('clients', this.get('store').query('client', { sort: 'name', 'provider-id': this.get('provider').get('id'), 'page[size]': 10 }));
+      this.selectClient(this.get('user').get('client'));
+    } else {
+      this.set('clients', []);
+      this.selectClient(null);
+    }
   },
   selectClient(client) {
     this.set('client', client)
@@ -44,8 +48,7 @@ export default Ember.Component.extend({
   },
 
   actions: {
-    edit(user, link) {
-      this.set('link', link);
+    edit(user) {
       this.set('edit', true);
       this.set('user', user);
       this.searchRole();
@@ -53,6 +56,7 @@ export default Ember.Component.extend({
       this.selectProvider(user.get('provider'));
 
       this.set('providers', this.get('store').query('provider', { 'page[size]': 10 }));
+
       if (this.get('provider').get('id')) {
         this.set('clients', this.get('store').query('client', { sort: 'name', 'provider-id': this.get('provider').get('id'), 'page[size]': 10 }));
         this.selectClient(user.get('client'));

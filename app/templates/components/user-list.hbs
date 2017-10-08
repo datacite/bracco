@@ -1,95 +1,87 @@
-{{#if new}}
-  <div class='col-md-9'>
-    {{#bs-form formLayout="vertical" model=this as |form|}}
-      <div class="panel-body">
-        <h3 class="member">Add User</h3>
-        {{#form.element controlType="power-select" property="user" label="User" optionLabelPath="name" options=users destination=user as |el|}}
-          {{#el.control onChange=(action "selectUser") search=(action "searchUser") searchField="name" allowClear=true as |item|}}
-            {{item.name}}
-          {{/el.control}}
-        {{/form.element}}
-
-        {{#if (and user (can "create user" user))}}
-          {{#form.element controlType="power-select" property="role" label="Role" optionLabelPath="name" options=roles destination=role as |el|}}
-            {{#el.control onChange=(action "selectRole") searchEnabled=false allowClear=false as |item|}}
-              {{item.name}}
-            {{/el.control}}
-          {{/form.element}}
-        {{/if}}
-
-        {{#if (and user (not-eq link "clients.show.users"))}}
-          {{#form.element controlType="power-select" property="client" label="Client" optionLabelPath="name" options=clients destination=client as |el|}}
-            {{#el.control onChange=(action "selectClient") search=(action "searchClient") searchField="name" allowClear=true as |item|}}
-              {{item.name}}
-            {{/el.control}}
-          {{/form.element}}
-        {{/if}}
-      </div>
-      <div class="panel-footer">
-        <div class="btn-toolbar pull-right">
-          <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
-          <button {{action "submit"}} type="submit" class="btn btn-sm btn-fill">Save</button>
-        </div>
-        <div class="clearfix"/>
-      </div>
-    {{/bs-form}}
-  </div>
-{{else}}
-  <div class='col-md-9 panel-list' id="content">
-    {{#if searchable}}
-      {{model-search model=model sortable=true}}
-    {{/if}}
-    {{#if model}}
-      {{#each model as |user|}}
-        {{user-item user=user link=link destroy=(route-action "refreshCurrentRoute")}}
-      {{/each}}
-      <div class="text-center">
-        {{#if (gt model.meta.total_pages 1)}}
-          {{page-numbers content=model showFL=true}}
-        {{/if}}
-      </div>
-    {{else}}
-      {{#bs-alert dismissible=false type="warning"}}
-        No Users found.
-      {{/bs-alert}}
-    {{/if}}
-  </div>
-
-  <div class='col-md-3'>
-    {{#if (and (can "create user") (not-eq link "users"))}}
-      <div class="panel facets">
-        <div class="panel-body">
-          <button {{action "new" model link}} class="btn btn-warning">{{fa-icon "link"}}Add User</button>
-        </div>
-      </div>
-    {{else}}
+<div class='col-md-9 panel-list' id="content">
+  {{#if searchable}}
+    {{model-search model=model sortable=true}}
+  {{/if}}
+  {{#if model}}
+    {{#each model as |user|}}
       <div class="panel panel-transparent">
         <div class="panel-body">
-          <div class="edit"></div>
-        </div>
-      </div>
-    {{/if}}
+          <h3 class="work">{{#link-to "users.show" user.id}}{{user.name}}{{/link-to}}</h3>
 
-    {{#if model.meta.roles}}
-      <div class="panel facets">
-        <div class="panel-body">
-          <h4>Roles</h4>
-          <ul>
-            {{#each model.meta.roles as |role|}}
-              <li>
-                {{#if model.otherParams.role-id}}
-                  {{#link-to link (query-params role-id=null)}}{{fa-icon "check-square-o"}}{{/link-to}}
-                {{else}}
-                  {{#link-to link (query-params role-id=role.id)}}{{fa-icon "square-o"}}{{/link-to}}
-                {{/if}}
-                <div class="facet-title">{{role.title}}</div>
-                <span class="number pull-right">{{format-number role.count}}</span>
-                <div class="clearfix"/>
-              </li>
-            {{/each}}
-          </ul>
+          {{#if user.email}}
+            <h5>Email</h5>
+            <a href="mailto:{{user.email}}">{{user.email}}</a>
+          {{/if}}
+
+          {{#if user.role}}
+            <h5>Role</h5>
+            {{user.role.name}}
+          {{/if}}
+
+          {{#if (and user.provider (eq link "users"))}}
+            <h5>Provider</h5>
+            {{#link-to "providers.show.users" user.provider.id}}{{user.provider.name}}{{/link-to}}
+          {{/if}}
+
+          {{#if (and user.client (not-eq link "clients.show.users"))}}
+            <h5>Client</h5>
+            {{#link-to "clients.show.users" user.client.id}}{{user.client.name}}{{/link-to}}
+          {{/if}}
         </div>
       </div>
-    {{/if}}
-  </div>
-{{/if}}
+    {{/each}}
+    <div class="text-center">
+      {{#if (gt model.meta.total_pages 1)}}
+        {{page-numbers content=model showFL=true}}
+      {{/if}}
+    </div>
+  {{else}}
+    {{#bs-alert dismissible=false type="warning"}}
+      No Users found.
+    {{/bs-alert}}
+  {{/if}}
+</div>
+
+<div class='col-md-3'>
+  {{#if (can "create user" model)}}
+    <div class="panel facets">
+      <div class="panel-body">
+        {{#if (and (not-eq link "users") (gt availableUsers.length 0))}}
+          {{#if model.otherParams.provider-id}}
+            {{#link-to "users.new" (query-params provider-id=model.otherParams.provider-id) class="btn btn-warning"}}{{fa-icon "link"}}Add User{{/link-to}}
+          {{else if model.otherParams.client-id}}
+            {{#link-to "users.new" (query-params client-id=model.otherParams.client-id) class="btn btn-warning"}}{{fa-icon "link"}}Add User{{/link-to}}
+          {{/if}}
+        {{/if}}
+      </div>
+    </div>
+  {{else}}
+    <div class="panel panel-transparent">
+      <div class="panel-body">
+        <div class="edit"></div>
+      </div>
+    </div>
+  {{/if}}
+
+  {{#if model.meta.roles}}
+    <div class="panel facets add">
+      <div class="panel-body">
+        <h4>Roles</h4>
+        <ul>
+          {{#each model.meta.roles as |role|}}
+            <li>
+              {{#if model.otherParams.role-id}}
+                {{#link-to link (query-params role-id=null)}}{{fa-icon "check-square-o"}}{{/link-to}}
+              {{else}}
+                {{#link-to link (query-params role-id=role.id)}}{{fa-icon "square-o"}}{{/link-to}}
+              {{/if}}
+              <div class="facet-title">{{role.title}}</div>
+              <span class="number pull-right">{{format-number role.count}}</span>
+              <div class="clearfix"/>
+            </li>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+  {{/if}}
+</div>

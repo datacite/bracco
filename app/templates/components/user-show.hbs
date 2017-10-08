@@ -1,0 +1,125 @@
+{{#if edit}}
+  <div class="row">
+    <div class='col-md-9'>
+      <h2 class="work">{{model.name}}</h2>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-9">
+      <div class="panel panel-transparent">
+        <div class="panel-body">
+
+          <h3 class="edit">Edit User</h3>
+
+          {{#bs-form formLayout="vertical" model=this as |form|}}
+            {{#if (can "create user" model)}}
+              {{#form.element controlType="power-select" property="role" label="Role" options=roles optionLabelPath="name" destination=role as |el|}}
+                {{#el.control onChange=(action "selectRole") searchEnabled=false allowClear=false as |item|}}
+                  {{item.name}}
+                {{/el.control}}
+              {{/form.element}}
+            {{/if}}
+
+            {{#if (can "update user" model)}}
+              {{#form.element controlType="power-select" property="provider" label="Provider" optionLabelPath="name" options=providers destination=provider as |el|}}
+                {{#el.control onChange=(action "selectProvider") search=(action "searchProvider") searchField="name" allowClear=true as |item|}}
+                  {{item.name}}
+                {{/el.control}}
+              {{/form.element}}
+
+              {{#form.element controlType="power-select" property="client" label="Client" optionLabelPath="name" options=clients destination=client as |el|}}
+                {{#el.control onChange=(action "selectClient") search=(action "searchClient") searchField="name" allowClear=true as |item|}}
+                  {{item.name}}
+                {{/el.control}}
+              {{/form.element}}
+            {{/if}}
+
+            <div class="pseudo-footer">
+              <div class="btn-toolbar pull-right">
+                <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
+                <button {{action "submit"}} type="submit" class="btn btn-sm btn-fill">Save</button>
+              </div>
+              <div class="clearfix"/>
+            </div>
+          {{/bs-form}}
+        </div>
+      </div>
+    </div>
+    <div class='col-md-3'>
+      <div class="panel panel-transparent">
+        <div class="panel-body">
+          <div class="edit"></div>
+        </div>
+      </div>
+
+      {{client-sidebar model=model}}
+    </div>
+  </div>
+{{else if delete}}
+  <div class="row">
+    <div class="col-md-9">
+      <div class="panel panel-transparent">
+        <div class="panel-body">
+          <div class="alert alert-danger" role="alert">
+            Are you sure you want to remove user {{model.name}} from this provider?
+          </div>
+        </div>
+        <div class="panel-footer">
+          <div class="btn-toolbar pull-right">
+            <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
+            <button {{action "destroy"}} class="btn btn-sm btn-fill">Remove</button>
+          </div>
+          <div class="clearfix"/>
+        </div>
+      </div>
+    </div>
+  </div>
+{{else}}
+  <div class="row">
+    <div class='col-md-9'>
+      <h2 class="work">{{model.name}}</h2>
+    </div>
+
+    {{#if (can "update user" model)}}
+      <div class='col-md-3'>
+        <div class="panel facets add">
+          <div class="panel-body">
+            <button {{action "edit" model}} class="btn btn-warning">{{fa-icon "pencil"}} Edit User</button>
+          </div>
+        </div>
+      </div>
+    {{/if}}
+  </div>
+
+  <div class="row">
+    <div class="col-md-9">
+      <div class="panel panel-transparent">
+        <div class="panel-body">
+          {{#if model.email}}
+            <h5>Email</h5>
+            <a href="mailto:{{model.email}}">{{model.email}}</a>
+          {{/if}}
+
+          {{#if model.role}}
+            <h5>Role</h5>
+            {{model.role.name}}
+          {{/if}}
+
+          {{#if model.provider}}
+            <h5>Provider</h5>
+            {{#link-to "providers.show.users" model.provider.id}}{{model.provider.name}}{{/link-to}}
+          {{/if}}
+
+          {{#if model.client}}
+            <h5>Client</h5>
+            {{#link-to "clients.show.users" model.client.id}}{{model.client.name}}{{/link-to}}
+          {{/if}}
+        </div>
+      </div>
+    </div>
+    <div class='col-md-3'>
+      {{client-sidebar model=model}}
+    </div>
+  </div>
+{{/if}}

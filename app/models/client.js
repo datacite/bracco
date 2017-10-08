@@ -19,6 +19,7 @@ const Validations = buildValidations({
   ],
   name: validator('presence', true),
   domains: validator('presence', true),
+  contactName: validator('presence', true),
   contactEmail: [
     validator('presence', true),
     validator('format', { type: 'email' })
@@ -44,6 +45,7 @@ export default DS.Model.extend(Validations, {
   name: DS.attr('string'),
   symbol: DS.attr('string'),
   domains: DS.attr('string', { defaultValue: '*' }),
+  contactName: DS.attr('string'),
   contactEmail: DS.attr('string'),
   year: DS.attr('number'),
   isActive: DS.attr('boolean', { defaultValue: true }),

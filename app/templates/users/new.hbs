@@ -1,0 +1,39 @@
+{{#if (can "read user" model)}}
+  {{application-header default=true}}
+
+  <div class="container-fluid">
+    <div class="content">
+      <ol class="breadcrumb">
+        {{#if (can "read index")}}
+          <li class="breadcrumb-item">{{#link-to "index"}}DataCite{{/link-to}}</li>
+
+          {{#if model.provider.id}}
+            <li class="breadcrumb-item">{{#link-to "providers"}}Providers{{/link-to}}</li>
+          {{else}}
+            <li class="breadcrumb-item">{{#link-to "users"}}Users{{/link-to}}</li>
+          {{/if}}
+        {{/if}}
+
+        {{#if (and model.provider (can "read provider" model.provider))}}
+          <li class="breadcrumb-item">{{#link-to "providers.show" model.provider.id}}{{model.provider.name}}{{/link-to}}</li>
+
+          {{#if model.client.id}}
+            <li class="breadcrumb-item">{{#link-to "providers.show.clients" model.provider.id}}Clients{{/link-to}}</li>
+          {{else}}
+            <li class="breadcrumb-item">{{#link-to "providers.show.users" model.provider.id}}Users{{/link-to}}</li>
+          {{/if}}
+        {{/if}}
+
+        {{#if (and model.client (can "read client" model.client))}}
+          <li class="breadcrumb-item">{{#link-to "clients.show" model.client.id}}{{model.client.name}}{{/link-to}}</li>
+          <li class="breadcrumb-item">{{#link-to "clients.show.users" model.client.id}}Users{{/link-to}}</li>
+        {{/if}}
+      </ol>
+
+      {{user-new model=model}}
+    </div>
+  </div>
+{{else}}
+  {{application-header}}
+  {{landing-page}}
+{{/if}}

@@ -32,10 +32,12 @@ Router.map(function() {
     this.route('show', { path: '/:provider_id' });
   });
   this.route('users', function() {
-    this.route('edit', { path: '/:user_id/edit' });
+    this.route('show', { path: '/:user_id' });
+    this.route('new', { path: '/new' });
   });
   this.route('prefixes', function() {
     this.route('show', { path: '/:prefix_id' });
+    this.route('new', { path: '/new' });
   });
 
   //set up all of your known routes, and then...

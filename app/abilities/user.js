@@ -22,7 +22,7 @@ export default Ability.extend({
         return false;
     }
   }),
-  canModify: Ember.computed('currentUser.role_id', 'currentUser.id', 'model.id', 'link', function() {
+  canUpdate: Ember.computed('currentUser.role_id', 'currentUser.id', 'model.id', 'link', function() {
     switch(this.get('currentUser.role_id')) {
       case 'staff_admin':
         return this.get('link') !== 'clients.show.users' || this.get('currentUser.uid') !== this.get('model.id');
