@@ -52,7 +52,7 @@
     <h3 class="member">
       {{user.creditName}}
       <span class="small">
-        {{#if (can "modify user" user)}}
+        {{#if (can "modify user" user link=link)}}
           <button {{action "edit" user link}} class="btn-link btn-icon">{{fa-icon "pencil"}}</button>
         {{/if}}
         {{#if (and (can "delete user" user) (not-eq link "users"))}}
