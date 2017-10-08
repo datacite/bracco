@@ -6,6 +6,7 @@ export default Ember.Component.extend({
   type: 'transparent',
   title: null,
   home: '/',
+  data: {},
 
   // init: function () {
   //   this._super();
@@ -29,5 +30,14 @@ export default Ember.Component.extend({
       this.set('title', Ember.String.htmlSafe(ENV.SITE_TITLE));
     }
     this.set('home', this.get('currentUser').get('home'));
+
+    let url = ENV.CDN_URL + "/data/links.json";
+    let self = this;
+    fetch(url).then(function(response) {
+      return response.json();
+    }).then(function(data) {
+      data.header_links = data[ENV.environment + '_links'];
+      self.set('data', data);
+    });
   }
 });
