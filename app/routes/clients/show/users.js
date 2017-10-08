@@ -13,10 +13,10 @@ export default Ember.Route.extend(RouteMixin, {
     return this.findPaged('user', params);
   },
   actions: {
-    queryParamsDidChange: function() {
+    queryParamsDidChange() {
       this.refresh();
     },
-    refreshCurrentRoute(){
+    refreshCurrentRoute() {
       this.refresh();
     }
   }

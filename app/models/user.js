@@ -15,7 +15,7 @@ export default DS.Model.extend({
 
   givenNames: DS.attr('string'),
   familyName: DS.attr('string'),
-  creditName: DS.attr('string'),
+  name: DS.attr('string'),
   orcid: DS.attr('string'),
   github: DS.attr('string'),
   email: DS.attr('string'),

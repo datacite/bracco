@@ -1,7 +1,7 @@
 {{#if delete}}
   <div class="panel-body">
     <div class="alert alert-danger" role="alert">
-      Are you sure you want to remove user {{model.user.creditName}} from this provider?
+      Are you sure you want to remove user {{model.user.name}} from this provider?
     </div>
   </div>
   <div class="panel-footer">
@@ -14,7 +14,7 @@
 {{else}}
   <div class="panel-body">
     {{log model}}
-    <h3 class="member">{{model.user.creditName}}</h3>
+    <h3 class="member">{{model.user.name}}</h3>
 
     {{#if model.user.email}}
       <h5>Email</h5>

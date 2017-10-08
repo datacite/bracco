@@ -1,7 +1,7 @@
 {{#if edit}}
   {{#bs-form formLayout="vertical" model=this as |form|}}
     <div class="panel-body">
-      <h3 class="member">{{user.creditName}}</h3>
+      <h3 class="member">{{user.name}}</h3>
       {{#if (can "create user" user)}}
         {{#form.element controlType="power-select" property="role" label="Role" options=roles optionLabelPath="name" destination=role as |el|}}
           {{#el.control onChange=(action "selectRole") searchEnabled=false allowClear=false as |item|}}
@@ -37,7 +37,7 @@
 {{else if delete}}
   <div class="panel-body">
     <div class="alert alert-danger" role="alert">
-      Are you sure you want to remove user {{user.creditName}} from this provider?
+      Are you sure you want to remove user {{user.name}} from this provider?
     </div>
   </div>
   <div class="panel-footer">
@@ -50,7 +50,7 @@
 {{else}}
   <div class="panel-body">
     <h3 class="member">
-      {{user.creditName}}
+      {{user.name}}
       <span class="small">
         {{#if (can "modify user" user link=link)}}
           <button {{action "edit" user link}} class="btn-link btn-icon">{{fa-icon "pencil"}}</button>

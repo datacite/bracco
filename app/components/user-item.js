@@ -15,13 +15,14 @@ export default Ember.Component.extend({
   roles: [],
   providers: [],
   clients: [],
+  link: null,
 
-  searchRole(link) {
-    if (link === 'users') {
+  searchRole() {
+    if (this.get('link') === 'users') {
       this.set('roles', this.get('store').findAll('role'));
-    } else if (link === 'providers.show.users') {
+    } else if (this.get('link') === 'providers.show.users') {
       this.set('roles', this.get('store').query('role', { scope: 'provider' }));
-    } else if (link === 'clients.show.users') {
+    } else if (this.get('link') === 'clients.show.users') {
       this.set('roles', this.get('store').query('role', { scope: 'client' }));
     }
   },
@@ -44,9 +45,10 @@ export default Ember.Component.extend({
 
   actions: {
     edit(user, link) {
+      this.set('link', link);
       this.set('edit', true);
       this.set('user', user);
-      this.searchRole(link);
+      this.searchRole();
       this.selectRole(user.get('role'));
       this.selectProvider(user.get('provider'));
 
@@ -57,6 +59,7 @@ export default Ember.Component.extend({
       }
     },
     delete(user, link) {
+      this.set('link', link);
       if (link === 'providers.show.users') {
         user.set('provider', null);
       } else if (link === 'clients.show.users') {
@@ -64,8 +67,8 @@ export default Ember.Component.extend({
       }
       this.set('delete', true);
     },
-    searchRole(link) {
-      this.searchRole(link);
+    searchRole() {
+      this.searchRole();
     },
     searchProvider(query) {
       this.set('providers', this.get('store').query('provider', { 'query': query, sort: 'name', 'page[size]': 10 }));
