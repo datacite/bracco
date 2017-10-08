@@ -35,7 +35,7 @@ export default Ember.Component.extend({
     let formatFixed = d3.format(",.0f");
 
     let chartId = this.get('chartId');
-    let data = this.get('data');
+    let data = (this.get('data')) ? this.get('data') : [];
 
     let height = 100;
     let margin = { top: 10, right: 5, bottom: 5, left: 5 };
