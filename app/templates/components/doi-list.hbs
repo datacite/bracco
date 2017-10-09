@@ -34,13 +34,17 @@
         <div class="panel panel-transparent">
           <div class="panel-body">
             <h3 class="work">
-              {{#link-to "dois.show" doi.id}}{{doi.title}}{{/link-to}}
+              {{#link-to "dois.show" doi.id}}{{if doi.resourceTypeId doi.title doi.doi}}{{/link-to}}
               <span class="small">{{doi.resourceTypeId}}</span>
             </h3>
-            {{{format-author doi.author}}}
-            <div class="metadata">
-              {{format-metadata doi.published resourceTypeId=doi.resourceTypeId resourceTypeSubtype=doi.resourceTypeSubtype containerTitle=doi.containerTitle version=doi.version}}
-            </div>
+            {{#if doi.author}}
+              {{{format-author doi.author}}}
+            {{/if}}
+            {{#if doi.resourceTypeId}}
+              <div class="metadata">
+                {{format-metadata doi.published resourceTypeId=doi.resourceTypeId resourceTypeSubtype=doi.resourceTypeSubtype containerTitle=doi.containerTitle version=doi.version}}
+              </div>
+            {{/if}}
             {{#if doi.license}}
               {{cc-license licenseURL=doi.license}}
             {{/if}}
