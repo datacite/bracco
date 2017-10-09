@@ -48,7 +48,7 @@
   </div>
 
   {{doi-url model=model}}
-  {{#if (not-eq model.xml "PGhzaD48L2hzaD4=\n")}}
+  {{#if doi.published}}
     {{doi-metadata model=model}}
   {{/if}}
   {{doi-media model=model}}
