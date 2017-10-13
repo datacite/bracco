@@ -3,7 +3,6 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   store: Ember.inject.service(),
 
-  new: false,
   user: null,
   users: [],
   provider: null,
@@ -67,11 +66,6 @@ export default Ember.Component.extend({
     this.set('client', client)
     this.get('user').set('client', client);
   },
-  reset() {
-    this.set('user', null);
-    this.set('users', []);
-    this.set('new', false);
-  },
 
   actions: {
     selectUser(user) {
@@ -104,23 +98,19 @@ export default Ember.Component.extend({
         this.get('user').set('client', this.get('client'));
         this.get('user').save().then(function(user) {
           self.get('router').transitionTo('clients.show.users', user.get('client'));
-          self.set('new', false);
         });
       } else if (this.get('provider')) {
         this.get('user').set('provider', this.get('provider'));
         this.get('user').save().then(function(user) {
           self.get('router').transitionTo('providers.show.users', user.get('provider'));
-          self.set('new', false);
         });
       }
     },
     cancel() {
       if (this.get('client')) {
         this.get('router').transitionTo('clients.show.users', this.get('client'));
-        this.set('new', false);
       } else if (this.get('provider')) {
         this.get('router').transitionTo('providers.show.users', this.get('provider'));
-        this.set('new', false);
       }
     }
   }
