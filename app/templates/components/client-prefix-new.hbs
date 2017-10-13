@@ -1,23 +1,25 @@
-<div class='col-md-9'>
-  <div class="panel panel-transparent">
-    <div class="panel-body">
-      <h3 class="edit">Add Prefix</h3>
+<div class="row">
+  <div class='col-md-9'>
+    <div class="panel panel-transparent">
+      <div class="panel-body">
+        <h3 class="edit">Add Prefix</h3>
 
-      {{#bs-form formLayout="vertical" model=prefix onSubmit=(action "submit") as |form|}}
-        {{#form.element controlType="power-select" property="id" options=prefixes as |el|}}
-          {{#el.control onChange=(action "selectPrefix") selected=prefix search=(action "searchPrefix") optionLabelPath="id" searchField="id" searchEnabled=true placeholder="Select Prefix" allowClear=true as |item|}}
-            {{if item.id item.id item}}
-          {{/el.control}}
-        {{/form.element}}
+        {{#bs-form formLayout="vertical" model=prefix onSubmit=(action "submit") as |form|}}
+          {{#form.element controlType="power-select" property="id" options=prefixes as |el|}}
+            {{#el.control onChange=(action "selectPrefix") selected=prefix search=(action "searchPrefix") optionLabelPath="id" searchField="id" searchEnabled=true placeholder="Select Prefix" allowClear=true as |item|}}
+              {{if item.id item.id item}}
+            {{/el.control}}
+          {{/form.element}}
 
-        <div class="pseudo-footer">
-          <div class="btn-toolbar pull-right">
-            <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
-            <button type="submit" class="btn btn-sm btn-fill">Add</button>
+          <div class="pseudo-footer">
+            <div class="btn-toolbar pull-right">
+              <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
+              <button type="submit" class="btn btn-sm btn-fill">Add</button>
+            </div>
+            <div class="clearfix"/>
           </div>
-          <div class="clearfix"/>
-        </div>
-      {{/bs-form}}
+        {{/bs-form}}
+      </div>
     </div>
   </div>
 </div>

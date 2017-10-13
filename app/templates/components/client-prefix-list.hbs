@@ -4,15 +4,17 @@
   {{/if}}
   {{#if model}}
     {{#each model as |client-prefix|}}
-      <div class="panel-body">
-        <h3 class="work">{{#link-to "clients.show.prefixes.show" client-prefix.id}}{{client-prefix.prefix.id}}{{/link-to}}</h3>
+      <div class="panel panel-transparent">
+        <div class="panel-body">
+          <h3 class="work">{{#link-to "client-prefixes.show" client-prefix.id}}{{client-prefix.prefix.id}}{{/link-to}}</h3>
 
-        {{#if (eq client-prefix.prefix.id "10.5072")}}
-          <span class="icon-default">Test prefix</span>
-        {{/if}}
+          {{#if (eq client-prefix.prefix.id "10.5072")}}
+            <span class="icon-default">Test prefix</span>
+          {{/if}}
 
-        <h5>Added</h5>
-        {{format-time client-prefix.created year='numeric' month='long' day='numeric'}}
+          <h5>Added</h5>
+          {{format-time client-prefix.created year='numeric' month='long' day='numeric'}}
+        </div>
       </div>
     {{/each}}
     <div class="text-center">
@@ -28,12 +30,18 @@
 </div>
 
 <div class='col-md-3'>
-  {{#if (can "write prefix")}}
-    <div class="panel facets">
-      <div class="panel-body">
-        {{#link-to "clients.show.prefixes.new" model.id class="btn btn-warning"}}{{fa-icon "link"}}Add Prefix{{/link-to}}
+  {{#if (can "write prefix" model)}}
+    {{#if (gt availablePrefixes.length 0)}}
+      <div class="panel facets">
+        <div class="panel-body">
+          {{#link-to "client-prefixes.new" (query-params client-id=model.otherParams.client-id) class="btn btn-warning"}}{{fa-icon "link"}}Assign Prefix{{/link-to}}
+        </div>
       </div>
-    </div>
+    {{else}}
+      {{#bs-alert dismissible=false type="warning"}}
+        All provider prefixes are assigned.
+      {{/bs-alert}}
+    {{/if}}
   {{else}}
     <div class="panel panel-transparent">
       <div class="panel-body">

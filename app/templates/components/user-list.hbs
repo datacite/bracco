@@ -44,17 +44,21 @@
 
 <div class='col-md-3'>
   {{#if (can "create user" model)}}
-    <div class="panel facets">
-      <div class="panel-body">
-        {{#if (and (not-eq link "users") (gt availableUsers.length 0))}}
+    {{#if (and (not-eq link "users") (gt availableUsers.length 0))}}
+      <div class="panel facets">
+        <div class="panel-body">
           {{#if model.otherParams.provider-id}}
             {{#link-to "users.new" (query-params provider-id=model.otherParams.provider-id) class="btn btn-warning"}}{{fa-icon "link"}}Add User{{/link-to}}
           {{else if model.otherParams.client-id}}
             {{#link-to "users.new" (query-params client-id=model.otherParams.client-id) class="btn btn-warning"}}{{fa-icon "link"}}Add User{{/link-to}}
           {{/if}}
-        {{/if}}
+        </div>
       </div>
-    </div>
+    {{else}}
+      {{#bs-alert dismissible=false type="warning"}}
+        All provider users are assigned.
+      {{/bs-alert}}
+    {{/if}}
   {{else}}
     <div class="panel panel-transparent">
       <div class="panel-body">
