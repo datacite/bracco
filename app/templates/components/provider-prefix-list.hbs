@@ -42,7 +42,7 @@
   {{#if (can "write prefix" model)}}
     <div class="panel facets">
       <div class="panel-body">
-        {{#link-to "provider-prefixes.new" (query-params provider-id=model.otherParams.provider-id) class="btn btn-warning"}}{{fa-icon "link"}}Add Prefix{{/link-to}}
+        {{#link-to "provider-prefixes.new" (query-params provider-id=model.otherParams.provider-id) class="btn btn-warning"}}{{fa-icon "link"}}Assign Prefix{{/link-to}}
       </div>
     </div>
   {{else}}
