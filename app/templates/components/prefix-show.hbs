@@ -1,17 +1,10 @@
 {{#if delete}}
   <div class="row">
-    <div class='col-md-9'>
-      <h2 class="work">{{model.prefix.id}}</h2>
-    </div>
-  </div>
-
-  <div class="row">
     <div class="col-md-9">
       <div class="panel panel-transparent">
         <div class="panel-body">
-
           <div class="alert alert-danger" role="alert">
-            Are you sure you want to remove prefix {{model.prefix.id}} from this provider?
+            Are you sure you want to remove prefix {{model.id}} from this provider?
           </div>
         </div>
         <div class="panel-footer">
@@ -27,14 +20,14 @@
 {{else}}
   <div class="row">
     <div class='col-md-9'>
-      <h2 class="work">{{model.prefix.id}}</h2>
+      <h2 class="work">{{model.id}}</h2>
     </div>
 
     {{#if (can "update prefix" model)}}
       <div class='col-md-3'>
         <div class="panel facets add">
           <div class="panel-body">
-            <button {{action "delete" model}} class="btn btn-warning">{{fa-icon "pencil"}} Remove Prefix</button>
+            <button {{action "edit" model}} class="btn btn-warning">{{fa-icon "pencil"}} Remove Prefix</button>
           </div>
         </div>
       </div>
@@ -45,10 +38,19 @@
     <div class="col-md-9">
       <div class="panel panel-transparent">
         <div class="panel-body">
-          {{#if (eq model.prefix.id "10.5072")}}
+          {{#if (eq prefix.id "10.5072")}}
             <span class="icon-default">Test prefix</span>
           {{else}}
-            <h5>{{pluralize-word model.clients.length "Client" omitCount=true}}</h5>
+            <h5>{{pluralize-word model.providers.length "Provider" omitCount=true}}</h5>
+            {{#if model.providers}}
+              {{#each model.providers as |provider|}}
+                {{#link-to "providers.show.prefixes" provider.id}}{{provider.name}}{{/link-to}}<br/>
+              {{/each}}
+            {{else}}
+              <span class="icon-warning">No providers found.</span>
+            {{/if}}
+
+            <h5>{{pluralize-word prefix.clients.length "Client" omitCount=true}}</h5>
             {{#if model.clients}}
               {{#each model.clients as |client|}}
                 {{#link-to "clients.show.prefixes" client.id}}{{client.name}}{{/link-to}}<br/>

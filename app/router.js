@@ -10,19 +10,19 @@ const Router = Ember.Router.extend(GoogleAnalyticsRoute, {
 Router.map(function() {
   this.route('providers', function() {
     this.route('show', { path: '/:provider_id' }, function() {
-      this.route('settings', { path: '/settings' });
-      this.route('dois', { path: '/dois' });
-      this.route('prefixes', { path: '/prefixes' });
-      this.route('users', { path: '/users' });
-      this.route('clients', { path: '/clients' });
+      this.route('settings');
+      this.route('dois');
+      this.route('prefixes');
+      this.route('users');
+      this.route('clients');
     });
   });
   this.route('clients', function() {
     this.route('show', { path: '/:client_id' }, function() {
-      this.route('settings', { path: '/settings' });
-      this.route('dois', { path: '/dois' });
-      this.route('prefixes', { path: '/prefixes' });
-      this.route('users', { path: '/users' });
+      this.route('settings');
+      this.route('dois');
+      this.route('prefixes');
+      this.route('users');
     });
   });
   this.route('dois', function() {
@@ -33,11 +33,19 @@ Router.map(function() {
   });
   this.route('users', function() {
     this.route('show', { path: '/:user_id' });
-    this.route('new', { path: '/new' });
+    this.route('new');
   });
   this.route('prefixes', function() {
     this.route('show', { path: '/:prefix_id' });
-    this.route('new', { path: '/new' });
+    this.route('new');
+  });
+  this.route('provider-prefixes', function() {
+    this.route('show', { path: '/:provider-prefix_id' });
+    this.route('new');
+  });
+  this.route('client-prefixes', function() {
+    this.route('show', { path: '/:client-prefix_id' });
+    this.route('new');
   });
 
   //set up all of your known routes, and then...

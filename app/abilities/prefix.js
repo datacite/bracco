@@ -11,6 +11,24 @@ export default Ability.extend({
         return false;
     }
   }),
+  canUpdate: Ember.computed('currentUser.role_id', 'currentUser.provider_id', 'currentUser.client_id', 'model.clients', 'model.providers', function() {
+    let self = this;
+    switch(this.get('currentUser.role_id')) {
+      case 'staff_admin':
+        return true;
+      case 'provider_admin':
+        return true;
+        // return this.get('model.providers').any(function(provider, index, providers) {
+        //   return provider.get('id') === self.get('currentUser.provider_id');
+        // });
+      case 'client_admin':
+        return this.get('model.clients').any(function(client) {
+          return client.get('id') === self.get('currentUser.client_id');
+        });
+      default:
+        return false;
+    }
+  }),
   canRead: Ember.computed('currentUser.role_id', 'currentUser.provider_id', 'currentUser.client_id', 'model.clients', 'model.providers', function() {
     let self = this;
     switch(this.get('currentUser.role_id')) {

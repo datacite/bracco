@@ -1,8 +1,6 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  tagName: 'div',
-  classNames: ['panel', 'panel-transparent'],
   delete: null,
   providerPrefix: null,
 
@@ -17,7 +15,7 @@ export default Ember.Component.extend({
     destroy: function() {
       this.get('providerPrefix').destroyRecord();
       this.get('providerPrefix').save();
-      this.set('delete', false);
+      this.get('router').transitionTo('providers.show.prefixes', this.get('providerPrefix').get('provider'));
     },
   }
 });

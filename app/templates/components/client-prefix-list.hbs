@@ -1,83 +1,66 @@
-{{#if new}}
-  <div class='col-md-9'>
-    <div class="panel panel-transparent">
+<div class='col-md-9 panel-list' id="content">
+  {{#if searchable}}
+    {{model-search model=model}}
+  {{/if}}
+  {{#if model}}
+    {{#each model as |client-prefix|}}
       <div class="panel-body">
-        <h3 class="edit">Add Prefix</h3>
+        <h3 class="work">{{#link-to "clients.show.prefixes.show" client-prefix.id}}{{client-prefix.prefix.id}}{{/link-to}}</h3>
 
-        {{#bs-form formLayout="vertical" model=prefix onSubmit=(action "submit") as |form|}}
-          {{#form.element controlType="power-select" property="id" options=prefixes as |el|}}
-            {{#el.control onChange=(action "selectPrefix") selected=prefix search=(action "searchPrefix") optionLabelPath="id" searchField="id" searchEnabled=true placeholder="Select Prefix" allowClear=true as |item|}}
-              {{if item.id item.id item}}
-            {{/el.control}}
-          {{/form.element}}
+        {{#if (eq client-prefix.prefix.id "10.5072")}}
+          <span class="icon-default">Test prefix</span>
+        {{/if}}
 
-          <div class="pseudo-footer">
-            <div class="btn-toolbar pull-right">
-              <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
-              <button type="submit" class="btn btn-sm btn-fill">Add</button>
-            </div>
-            <div class="clearfix"/>
-          </div>
-        {{/bs-form}}
+        <h5>Added</h5>
+        {{format-time client-prefix.created year='numeric' month='long' day='numeric'}}
+      </div>
+    {{/each}}
+    <div class="text-center">
+      {{#if (gt model.meta.total_pages 1)}}
+        {{page-numbers content=model showFL=true}}
+      {{/if}}
+    </div>
+  {{else}}
+    {{#bs-alert dismissible=false type="warning"}}
+      No prefixes found.
+    {{/bs-alert}}
+  {{/if}}
+</div>
+
+<div class='col-md-3'>
+  {{#if (can "write prefix")}}
+    <div class="panel facets">
+      <div class="panel-body">
+        {{#link-to "clients.show.prefixes.new" model.id class="btn btn-warning"}}{{fa-icon "link"}}Add Prefix{{/link-to}}
       </div>
     </div>
-  </div>
-{{else}}
-  <div class='col-md-9 panel-list' id="content">
-    {{#if searchable}}
-      {{model-search model=model}}
-    {{/if}}
-    {{#if model}}
-      {{#each model as |client-prefix|}}
-        {{client-prefix-show model=client-prefix destroy=(route-action "refreshCurrentRoute")}}
-      {{/each}}
-      <div class="text-center">
-        {{#if (gt model.meta.total_pages 1)}}
-          {{page-numbers content=model showFL=true}}
-        {{/if}}
+  {{else}}
+    <div class="panel panel-transparent">
+      <div class="panel-body">
+        <div class="edit"></div>
       </div>
-    {{else}}
-      {{#bs-alert dismissible=false type="warning"}}
-        No prefixes found.
-      {{/bs-alert}}
-    {{/if}}
-  </div>
+    </div>
+  {{/if}}
 
-  <div class='col-md-3'>
-    {{#if (can "write prefix")}}
-      <div class="panel facets">
-        <div class="panel-body">
-          <button {{action "new" model}} class="btn btn-warning">{{fa-icon "link"}}Add Prefix</button>
-        </div>
+  {{#if model.meta.years}}
+    <div class="panel facets add">
+      <div class="panel-body">
+        <h4>Year created</h4>
+        <ul>
+          {{#each model.meta.years as |year|}}
+            <li>
+              {{#if model.otherParams.year}}
+                {{#link-to link (query-params year=null)}}{{fa-icon "check-square-o"}}{{/link-to}}
+              {{else}}
+                {{#link-to link (query-params year=year.id)}}{{fa-icon "square-o"}}{{/link-to}}
+              {{/if}}
+              <div class="facet-title">{{year.title}}</div>
+              <span class="number pull-right">{{year.count}}</span>
+              <div class="clearfix"/>
+            </li>
+          {{/each}}
+        </ul>
       </div>
-    {{else}}
-      <div class="panel panel-transparent">
-        <div class="panel-body">
-          <div class="edit"></div>
-        </div>
-      </div>
-    {{/if}}
-
-    {{#if model.meta.years}}
-      <div class="panel facets add">
-        <div class="panel-body">
-          <h4>Year created</h4>
-          <ul>
-            {{#each model.meta.years as |year|}}
-              <li>
-                {{#if model.otherParams.year}}
-                  {{#link-to link (query-params year=null)}}{{fa-icon "check-square-o"}}{{/link-to}}
-                {{else}}
-                  {{#link-to link (query-params year=year.id)}}{{fa-icon "square-o"}}{{/link-to}}
-                {{/if}}
-                <div class="facet-title">{{year.title}}</div>
-                <span class="number pull-right">{{year.count}}</span>
-                <div class="clearfix"/>
-              </li>
-            {{/each}}
-          </ul>
-        </div>
-      </div>
-    {{/if}}
-  </div>
-{{/if}}
+    </div>
+  {{/if}}
+</div>
