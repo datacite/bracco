@@ -29,20 +29,20 @@ install:
 script:
   - COVERAGE=true ember test
   - codeclimate-test-reporter < coverage/lcov.info
-  - ember build --environment=production
+  # - ember build --environment=production
 
-deploy:
-  provider: s3
-  access_key_id: $AWS_ACCESS_KEY
-  secret_access_key: $AWS_SECRET_KEY
-  bucket: $AWS_BUCKET
-  region: eu-west-1
-  skip_cleanup: true
-  local_dir: dist
-  acl: public_read
-  cache_control: "no-cache"
-  on:
-    branch: $TRAVIS_BRANCH
-notifications:
-  slack: datacite:Wt8En0ALoTA6Kjc5EOKNDWxN
-  email: false
+# deploy:
+#   provider: s3
+#   access_key_id: $AWS_ACCESS_KEY
+#   secret_access_key: $AWS_SECRET_KEY
+#   bucket: $AWS_BUCKET
+#   region: eu-west-1
+#   skip_cleanup: true
+#   local_dir: dist
+#   acl: public_read
+#   cache_control: "no-cache"
+#   on:
+#     branch: $TRAVIS_BRANCH
+# notifications:
+#   slack: datacite:Wt8En0ALoTA6Kjc5EOKNDWxN
+#   email: false
