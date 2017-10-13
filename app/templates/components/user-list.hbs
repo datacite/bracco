@@ -48,9 +48,9 @@
       <div class="panel facets">
         <div class="panel-body">
           {{#if model.otherParams.provider-id}}
-            {{#link-to "users.new" (query-params provider-id=model.otherParams.provider-id) class="btn btn-warning"}}{{fa-icon "link"}}Add User{{/link-to}}
+            {{#link-to "users.new" (query-params provider-id=model.otherParams.provider-id) class="btn btn-warning"}}{{fa-icon "link"}}Assign User{{/link-to}}
           {{else if model.otherParams.client-id}}
-            {{#link-to "users.new" (query-params client-id=model.otherParams.client-id) class="btn btn-warning"}}{{fa-icon "link"}}Add User{{/link-to}}
+            {{#link-to "users.new" (query-params client-id=model.otherParams.client-id) class="btn btn-warning"}}{{fa-icon "link"}}Assign User{{/link-to}}
           {{/if}}
         </div>
       </div>
