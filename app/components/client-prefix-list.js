@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import ENV from 'bracco/config/environment';
 
 export default Ember.Component.extend({
   store: Ember.inject.service(),
@@ -10,6 +11,8 @@ export default Ember.Component.extend({
   didInsertElement() {
     this._super(...arguments);
 
-    this.set('availablePrefixes', this.get('store').query('prefix', { 'provider-id': this.get('model.otherParams.client-id').split('.').get('firstObject'), state: 'without-client', sort: 'name', 'page[size]': 10 }));
+    if (!ENV.IS_SANDBOX) {
+      this.set('availablePrefixes', this.get('store').query('prefix', { 'provider-id': this.get('model.otherParams.client-id').split('.').get('firstObject'), state: 'without-client', sort: 'name', 'page[size]': 10 }));
+    }
   },
 });

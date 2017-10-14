@@ -6,7 +6,11 @@
     {{#each model as |provider-prefix|}}
       <div class="panel panel-transparent">
         <div class="panel-body">
-          <h3 class="work">{{#link-to "provider-prefixes.show" provider-prefix.id}}{{provider-prefix.prefix.id}}{{/link-to}}</h3>
+          {{#if (eq provider-prefix.prefix.id "10.5072")}}
+            <h3 class="member">{{provider-prefix.prefix.id}}</h3>
+          {{else}}
+            <h3 class="work">{{#link-to "provider-prefixes.show" provider-prefix.id}}{{provider-prefix.prefix.id}}{{/link-to}}</h3>
+          {{/if}}
 
           {{#if (eq provider-prefix.prefix.id "10.5072")}}
             <span class="icon-default">Test prefix</span>
@@ -39,7 +43,7 @@
 </div>
 
 <div class='col-md-3'>
-  {{#if (can "write prefix" model)}}
+  {{#if (and (can "write prefix" model) (not (is-sandbox)))}}
     <div class="panel facets">
       <div class="panel-body">
         {{#link-to "provider-prefixes.new" (query-params provider-id=model.otherParams.provider-id) class="btn btn-warning"}}{{fa-icon "link"}}Assign Prefix{{/link-to}}

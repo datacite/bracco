@@ -6,7 +6,11 @@
     {{#each model as |client-prefix|}}
       <div class="panel panel-transparent">
         <div class="panel-body">
-          <h3 class="work">{{#link-to "client-prefixes.show" client-prefix.id}}{{client-prefix.prefix.id}}{{/link-to}}</h3>
+          {{#if (eq client-prefix.prefix.id "10.5072")}}
+            <h3 class="member">{{client-prefix.prefix.id}}</h3>
+          {{else}}
+            <h3 class="work">{{#link-to "client-prefixes.show" client-prefix.id}}{{client-prefix.prefix.id}}{{/link-to}}</h3>
+          {{/if}}
 
           {{#if (eq client-prefix.prefix.id "10.5072")}}
             <span class="icon-default">Test prefix</span>
@@ -30,18 +34,12 @@
 </div>
 
 <div class='col-md-3'>
-  {{#if (can "write prefix" model)}}
-    {{#if (gt availablePrefixes.length 0)}}
-      <div class="panel facets">
-        <div class="panel-body">
-          {{#link-to "client-prefixes.new" (query-params client-id=model.otherParams.client-id) class="btn btn-warning"}}{{fa-icon "link"}}Assign Prefix{{/link-to}}
-        </div>
+  {{#if (and (can "write prefix" model) (gt availablePrefixes.length 0))}}
+    <div class="panel facets">
+      <div class="panel-body">
+        {{#link-to "client-prefixes.new" (query-params client-id=model.otherParams.client-id) class="btn btn-warning"}}{{fa-icon "link"}}Assign Prefix{{/link-to}}
       </div>
-    {{else}}
-      {{#bs-alert dismissible=false type="warning"}}
-        All provider prefixes are assigned.
-      {{/bs-alert}}
-    {{/if}}
+    </div>
   {{else}}
     <div class="panel panel-transparent">
       <div class="panel-body">

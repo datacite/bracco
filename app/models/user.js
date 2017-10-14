@@ -19,6 +19,7 @@ export default DS.Model.extend({
   orcid: DS.attr('string'),
   github: DS.attr('string'),
   email: DS.attr('string'),
+  'sandbox-id': DS.attr('string'),
   created: DS.attr('date'),
   updated: DS.attr('date'),
 

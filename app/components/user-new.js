@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import ENV from 'bracco/config/environment';
 
 export default Ember.Component.extend({
   store: Ember.inject.service(),
@@ -64,7 +65,12 @@ export default Ember.Component.extend({
   },
   selectClient(client) {
     this.set('client', client)
-    this.get('user').set('client', client);
+
+    if (ENV.IS_SANDBOX) {
+      this.get('user').set('sandbox-id', client.id);
+    } else {
+      this.get('user').set('client', client);
+    }
   },
 
   actions: {
