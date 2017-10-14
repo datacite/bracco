@@ -46,7 +46,7 @@ module.exports = function(environment) {
   ENV.DATA_URL = process.env.DATA_URL || "https://data.test.datacite.org";
   ENV.JWT_HOST = process.env.JWT_HOST || "https://profiles.test.datacite.org";
   ENV.JWT_PUBLIC_KEY = process.env.JWT_PUBLIC_KEY || null;
-  ENV.IS_SANDBOX = process.env.IS_SANDBOX || false;
+  ENV.IS_SANDBOX = process.env.IS_SANDBOX || null;
 
   if (environment === 'development') {
     // ENV.APP.LOG_RESOLVER = true;
