@@ -12,9 +12,9 @@
     <div class="row row-section">
       <div class="container-fluid">
         <div class="col-md-8 col-sm-offset-2">
-          {{#if isSandbox}}
+          {{#if (is-sandbox)}}
             <p>The DataCite Sandbox allows you to test the registration and management of DOIs. This is a closed system,
-              so registered DOIs don't show up outside the DataCite Sandbox. The Sandbox is open to everyone, and is
+              so registered DOIs don't show up outside the Sandbox. The Sandbox is open to everyone, and is
               particularly useful for organizations new to DataCite, and for testing new integrations with the DataCite API.</p>
           {{else}}
             <p>DataCite DOI Fabrica is the one place for you to create and find, connect and track every single DOI from your organisation.
@@ -30,7 +30,7 @@
   <div class="section section-white">
     <div class="row row-section">
       <div class="container-fluid">
-        {{#if isSandbox}}
+        {{#if (is-sandbox)}}
           <div class="col-sm-2 col-sm-offset-4 info">
             <div class="icon icon-landing">
               {{fa-icon "user"}}
