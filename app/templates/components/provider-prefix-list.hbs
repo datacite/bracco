@@ -13,7 +13,7 @@
           {{/if}}
 
           {{#if (eq provider-prefix.prefix.id "10.5072")}}
-            <span class="icon-default">Test prefix</span>
+            <span class="icon-default">Sandbox prefix</span>
           {{else}}
             <h5>{{pluralize-word provider-prefix.clients.length "Client" omitCount=true}}</h5>
             {{#if provider-prefix.clients}}
@@ -43,7 +43,7 @@
 </div>
 
 <div class='col-md-3'>
-  {{#if (and (can "write prefix" model) (not (is-sandbox)))}}
+  {{#if (and (can "write prefix" model) (not isSandbox))}}
     <div class="panel facets">
       <div class="panel-body">
         {{#link-to "provider-prefixes.new" (query-params provider-id=model.otherParams.provider-id) class="btn btn-warning"}}{{fa-icon "link"}}Assign Prefix{{/link-to}}

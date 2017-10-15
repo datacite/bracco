@@ -60,9 +60,6 @@ export default DS.Model.extend(Validations, {
   'provider-id': Ember.computed('id', function() {
     return this.get('id').split('.').get('firstObject');
   }),
-  isSandbox: Ember.computed('id', function() {
-    return this.get('id').split('.').get('firstObject') === "sandbox";
-  }),
   doiCount: Ember.computed('meta', function() {
     return this.get('meta.dois');
   }),

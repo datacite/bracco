@@ -12,6 +12,9 @@ export default DS.Model.extend({
   role: DS.belongsTo('role', {
     async: true
   }),
+  sandbox: DS.belongsTo('sandbox', {
+    async: true
+  }),
 
   givenNames: DS.attr('string'),
   familyName: DS.attr('string'),
@@ -19,7 +22,6 @@ export default DS.Model.extend({
   orcid: DS.attr('string'),
   github: DS.attr('string'),
   email: DS.attr('string'),
-  'sandbox-id': DS.attr('string'),
   created: DS.attr('date'),
   updated: DS.attr('date'),
 

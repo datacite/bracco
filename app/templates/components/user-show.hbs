@@ -33,6 +33,12 @@
                   {{item.name}}
                 {{/el.control}}
               {{/form.element}}
+
+              {{#form.element controlType="power-select" property="sandbox" label="Sandbox" optionLabelPath="name" options=sandboxes destination=sandbox as |el|}}
+                {{#el.control onChange=(action "selectSandbox") search=(action "searchSandbox") searchField="name" allowClear=true as |item|}}
+                  {{item.name}}
+                {{/el.control}}
+              {{/form.element}}
             {{/if}}
 
             <div class="pseudo-footer">

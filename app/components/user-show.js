@@ -9,9 +9,11 @@ export default Ember.Component.extend({
   role: null,
   provider: null,
   client: null,
+  sandbox: null,
   roles: [],
   providers: [],
   clients: [],
+  sandboxes: [],
 
   searchRole() {
     if (this.get('currentUser').get('isAdmin')) {
@@ -42,6 +44,10 @@ export default Ember.Component.extend({
     this.set('client', client)
     this.get('user').set('client', client);
   },
+  selectSandbox(sandbox) {
+    this.set('sandbox', sandbox)
+    this.get('user').set('sandbox', sandbox);
+  },
   reset() {
     this.set('edit', false);
     this.set('delete', false);
@@ -57,8 +63,11 @@ export default Ember.Component.extend({
 
       this.set('providers', this.get('store').query('provider', { 'page[size]': 10 }));
 
-      if (this.get('provider').get('id')) {
-        this.set('clients', this.get('store').query('client', { sort: 'name', 'provider-id': this.get('provider').get('id'), 'page[size]': 10 }));
+      if (this.get('provider').get('id') === 'sandbox') {
+        this.set('sandboxes', this.get('store').query('client', { sort: 'name', 'provider-id': 'sandbox', 'page[size]': 25 }));
+        this.selectSandbox(user.get('sandbox'));
+      } else if (this.get('provider').get('id')) {
+        this.set('clients', this.get('store').query('client', { sort: 'name', 'provider-id': this.get('provider').get('id'), 'page[size]': 25 }));
         this.selectClient(user.get('client'));
       }
     },
@@ -78,7 +87,10 @@ export default Ember.Component.extend({
       this.set('providers', this.get('store').query('provider', { 'query': query, sort: 'name', 'page[size]': 10 }));
     },
     searchClient(query) {
-      this.set('clients', this.get('store').query('client', { 'query': query, sort: 'name', 'provider-id': this.get('provider').get('id'), 'page[size]': 10 }));
+      this.set('clients', this.get('store').query('client', { 'query': query, sort: 'name', 'provider-id': this.get('provider').get('id'), 'page[size]': 25 }));
+    },
+    searchSandbox(query) {
+      this.set('sandboxes', this.get('store').query('client', { 'query': query, sort: 'name', 'provider-id': 'sandbox', 'page[size]': 25 }));
     },
     submit() {
       this.get('user').save();
