@@ -52,6 +52,8 @@ export default DS.Model.extend(Validations, {
   created: DS.attr('date'),
   updated: DS.attr('date'),
 
+  confirmName: DS.attr('string'),
+
   domainList: Ember.computed('domains', function() {
     return this.get('domains').split(",").map(function(item) {
       return item.trim();

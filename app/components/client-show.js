@@ -1,17 +1,27 @@
 import Ember from 'ember';
+import { validator, buildValidations } from 'ember-cp-validations';
 
-export default Ember.Component.extend({
+const Validations = buildValidations({
+  confirmId: validator('confirmation', {
+    on: 'symbol',
+    message: 'Client ID does not match'
+  })
+});
+
+export default Ember.Component.extend(Validations, {
   store: Ember.inject.service(),
 
   edit: false,
   delete: false,
   client: null,
+  confirmName: null,
   repository: null,
   repositories: [],
 
   reset() {
     this.set('client', null);
     this.set('edit', false);
+    this.set('delete', false);
   },
   selectRepository(repository) {
     if (repository) {
@@ -44,14 +54,14 @@ export default Ember.Component.extend({
       client.save();
       this.reset();
     },
-    destroy: function(link) {
-      this.get('client').destroyRecord();
-      this.set('edit', false);
-      this.get('router').transitionTo(link);
+    destroy: function(client) {
+      if (this.get('confirmId') === client.get('symbol')) {
+        client.destroyRecord();
+        this.get('router').transitionTo('/clients');
+      }
     },
     cancel: function() {
       this.reset();
-      this.set('delete', false);
     }
   }
 });

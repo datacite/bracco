@@ -85,10 +85,9 @@ export default Ember.Service.extend({
             self.get('flashMessages').info('Welcome ' + result.name + ' to the Client Administration area.');
           });
         } else if (result.sandbox_id) {
-          self.set('role_id', 'client_admin');
-          self.get('flashMessages').info('Welcome ' + result.name + ' to your DataCite Sandbox Administration area.');
-        } else {
           self.set('role_id', 'user');
+          self.set('role', self.get('store').findRecord('role', self.get('role_id')));
+          self.get('flashMessages').info('Welcome ' + result.name + ' to your DataCite Sandbox Administration area.');
         }
         if (result.sandbox_id) {
           self.set('sandbox_id', result.sandbox_id);

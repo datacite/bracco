@@ -1,21 +1,25 @@
 import Ember from 'ember';
+import { validator, buildValidations } from 'ember-cp-validations';
 
-export default Ember.Component.extend({
+const Validations = buildValidations({
+  confirmId: validator('confirmation', {
+    on: 'symbol',
+    message: 'Provider ID does not match'
+  })
+});
+
+export default Ember.Component.extend(Validations, {
   store: Ember.inject.service(),
 
   edit: false,
   delete: false,
   provider: null,
-  isDeletable: false,
-
-  didReceiveAttrs() {
-    this._super(...arguments);
-    this.set('isDeletable', Ember.isBlank(this.get('model').get('dois')));
-  },
+  confirmId: null,
 
   reset() {
     this.set('provider', null);
     this.set('edit', false);
+    this.set('delete', false);
   },
 
   actions: {
@@ -23,18 +27,19 @@ export default Ember.Component.extend({
       this.set('provider', provider);
       this.set('edit', true);
     },
-    delete: function(client) {
-      this.set('provider', client);
+    delete: function(provider) {
+      this.set('provider', provider);
       this.set('delete', true);
     },
     submit: function() {
       this.get('provider').save();
       this.reset();
     },
-    destroy: function() {
-      this.get('provider').destroyRecord();
-      this.set('edit', false);
-      this.get('router').transitionTo('providers');
+    destroy: function(provider) {
+      if (this.get('confirmId') === provider.get('symbol')) {
+        provider.destroyRecord();
+        this.get('router').transitionTo('/providers');
+      }
     },
     cancel: function() {
       this.reset();

@@ -1,11 +1,11 @@
 {{#bs-navbar type=type fluid=true collapsed=collapsed onCollapse=(action (mut collapsed) true) onExpand=(action (mut collapsed) false) as |navbar|}}
   <div class="navbar-header">
     {{navbar.toggle}}
-    <a href="{{home}}" class="navbar-brand">{{title}}</a>
+    <a href="{{if home home sandbox}}" class="navbar-brand">{{title}}</a>
   </div>
   {{#navbar.content}}
     {{#navbar.nav class="navbar-right" as |nav|}}
-      {{#if (can "read settings")}}
+      {{#if home}}
         {{#nav.item}}<a href="{{home}}">Home</a>{{/nav.item}}
       {{/if}}
       {{#if sandbox}}
