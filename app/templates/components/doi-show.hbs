@@ -9,16 +9,22 @@
         <div class="panel-body">
           {{#bs-form formLayout="vertical" model=model onSubmit=(action "submit" model) submitOnEnter=true as |form|}}
             {{form.element controlType="text" label="DOI" placeholder="DOI" property="id" disabled=true}}
+            {{#form.element controlType="power-select" property="client" label="Client" helpText='Change client for this DOI.' optionLabelPath="name" options=clients destination=client as |el|}}
+              {{#el.control onChange=(action "selectClient") search=(action "searchClient") searchField="name" allowClear=true as |item|}}
+                {{item.name}}
+              {{/el.control}}
+            {{/form.element}}
             {{form.element controlType="text" label="URL" placeholder="URL" property="url" disabled=true}}
             {{form.element controlType="textarea" label="Metadata" placeholder="Metadata" property="datacite" rows=15 disabled=true}}
 
             <div class="alert alert-warning" role="alert">
-              This functionality has not been implemented yet.
+              The functionality for changing URL or metadata has not been implemented yet.
             </div>
 
             <div class="pseudo-footer">
               <div class="btn-toolbar pull-right">
                 <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
+                <button type="submit" class="btn btn-sm btn-fill">Save</button>
               </div>
               <div class="clearfix"/>
             </div>
@@ -40,7 +46,7 @@
       <div class='col-md-3'>
         <div class="panel facets add">
           <div class="panel-body">
-            <button {{action "edit"}} class="btn btn-warning">{{fa-icon "pencil"}} Edit DOI</button>
+            <button {{action "edit" model}} class="btn btn-warning">{{fa-icon "pencil"}} Edit DOI</button>
           </div>
         </div>
       </div>
