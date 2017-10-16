@@ -11,7 +11,8 @@ export default Ember.Component.extend({
   didInsertElement() {
     this._super(...arguments);
 
-    if (!ENV.IS_SANDBOX) {
+    let providerId = this.get('model.otherParams.client-id').split('.').get('firstObject');
+    if (providerId !== 'sandbox') {
       this.set('availablePrefixes', this.get('store').query('prefix', { 'provider-id': this.get('model.otherParams.client-id').split('.').get('firstObject'), state: 'without-client', sort: 'name', 'page[size]': 10 }));
     }
   },

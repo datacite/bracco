@@ -66,7 +66,7 @@ export default Ember.Component.extend({
   selectClient(client) {
     this.set('client', client)
 
-    if (ENV.IS_SANDBOX) {
+    if (client.get('isSandbox')) {
       this.get('user').set('sandbox-id', client.id);
     } else {
       this.get('user').set('client', client);

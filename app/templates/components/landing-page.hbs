@@ -12,16 +12,10 @@
     <div class="row row-section">
       <div class="container-fluid">
         <div class="col-md-8 col-sm-offset-2">
-          {{#if (is-sandbox)}}
-            <p>The DataCite Sandbox allows you to test the registration and management of DOIs. This is a closed system,
-              and registered DOIs don't show up outside the Sandbox. The Sandbox is open to everyone, and is
-              particularly useful for organizations new to DataCite, and for testing new integrations with the DataCite API.</p>
-          {{else}}
-            <p>DataCite DOI Fabrica is the one place for you to create and find, connect and track every single DOI from your organisation.
-              The DataCite Metadata Store (<a href="https://mds.datacite.org">MDS</a>) has been renovated and renamed to
-              DataCite DOI Fabrica. DOI Fabrica includes all the functionalities needed to manage DOI registration,
-              clients, prefixes, and users. Going forward, the service will provide stats, checks and reports.</p>
-          {{/if}}
+          <p>DataCite DOI Fabrica is the one place for you to create and find, connect and track every single DOI from your organisation.
+            The DataCite Metadata Store (<a href="https://mds.datacite.org">MDS</a>) has been renovated and renamed to
+            DataCite DOI Fabrica. DOI Fabrica includes all the functionalities needed to manage DOI registration,
+            clients, prefixes, and users. Going forward, the service will provide stats, checks and reports.</p>
         </div>
       </div>
     </div>
@@ -30,63 +24,42 @@
   <div class="section section-white">
     <div class="row row-section">
       <div class="container-fluid">
-        {{#if (is-sandbox)}}
-          <div class="col-sm-2 col-sm-offset-4 info">
-            <div class="icon icon-landing">
-              {{fa-icon "user"}}
-            </div>
-            <h3>Users</h3>
-            <div class="description-centered">
-              <p>Access your DOI registration service through the DataCite Sandbox.</p>
-            </div>
+        <div class="col-sm-2 col-sm-offset-2 info">
+          <div class="icon icon-landing">
+            {{fa-icon "sitemap"}}
           </div>
-          <div class="col-sm-2 info">
-            <div class="icon icon-landing">
-              {{fa-icon "file-text"}}
-            </div>
-            <h3>DOIs</h3>
-            <div class="description-centered">
-              <p>Register and manage DOIs and their metadata through the DataCite Sandbox.</p>
-            </div>
+          <h3>Clients</h3>
+          <div class="description-centered">
+            <p>DOI registration providers, use DOI Fabrica to manage your clients.</p>
           </div>
-        {{else}}
-          <div class="col-sm-2 col-sm-offset-2 info">
-            <div class="icon icon-landing">
-              {{fa-icon "sitemap"}}
-            </div>
-            <h3>Clients</h3>
-            <div class="description-centered">
-              <p>DOI registration providers, use DOI Fabrica to manage your clients.</p>
-            </div>
+        </div>
+        <div class="col-sm-2 info">
+          <div class="icon icon-landing">
+            {{fa-icon "user"}}
           </div>
-          <div class="col-sm-2 info">
-            <div class="icon icon-landing">
-              {{fa-icon "user"}}
-            </div>
-            <h3>Users</h3>
-            <div class="description-centered">
-              <p>Access your DOI registration service through DOI Fabrica.</p>
-            </div>
+          <h3>Users</h3>
+          <div class="description-centered">
+            <p>Access your DOI registration service through DOI Fabrica.</p>
           </div>
-          <div class="col-sm-2 info">
-            <div class="icon icon-landing">
-              {{fa-icon "tags"}}
-            </div>
-            <h3>Prefixes</h3>
-            <div class="description-centered">
-              <p>Use DOI Fabrica to manage your prefixes.</p>
-            </div>
+        </div>
+        <div class="col-sm-2 info">
+          <div class="icon icon-landing">
+            {{fa-icon "tags"}}
           </div>
-          <div class="col-sm-2 info">
-            <div class="icon icon-landing">
-              {{fa-icon "file-text"}}
-            </div>
-            <h3>DOIs</h3>
-            <div class="description-centered">
-              <p>Register and manage DOIs and their metadata through DOI Fabrica.</p>
-            </div>
+          <h3>Prefixes</h3>
+          <div class="description-centered">
+            <p>Use DOI Fabrica to manage your prefixes.</p>
           </div>
-        {{/if}}
+        </div>
+        <div class="col-sm-2 info">
+          <div class="icon icon-landing">
+            {{fa-icon "file-text"}}
+          </div>
+          <h3>DOIs</h3>
+          <div class="description-centered">
+            <p>Register and manage DOIs and their metadata through DOI Fabrica.</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
