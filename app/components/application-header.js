@@ -6,6 +6,7 @@ export default Ember.Component.extend({
   type: 'transparent',
   title: null,
   home: '/',
+  sandbox: null,
   data: {},
 
   // init: function () {
@@ -30,6 +31,7 @@ export default Ember.Component.extend({
       this.set('title', Ember.String.htmlSafe(ENV.SITE_TITLE));
     }
     this.set('home', this.get('currentUser').get('home'));
+    this.set('sandbox', this.get('currentUser').get('sandbox'));
 
     let url = ENV.CDN_URL + "/data/links.json";
     let self = this;

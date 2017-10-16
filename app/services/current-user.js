@@ -20,7 +20,9 @@ export default Ember.Service.extend({
   role_id: null,
   provider_id: null,
   client_id: null,
+  sandbox_id: null,
   home: null,
+  sandbox: null,
 
   init() {
     this._super(...arguments);
@@ -56,52 +58,41 @@ export default Ember.Service.extend({
         self.set('email', result.email);
 
         // check that provider or client exist and are active
-        if (ENV.IS_SANDBOX) {
-          if (['staff_admin', 'staff_user'].includes(result.role_id)) {
-            self.set('isProvider', true);
-            self.set('provider_id', 'sandbox');
-            self.set('role_id', 'provider_admin');
+        if (['staff_admin', 'staff_user'].includes(result.role_id)) {
+          self.set('isAdmin', true);
+          self.set('role_id', result.role_id);
+          self.set('role', self.get('store').findRecord('role', result.role_id));
+          self.set('home', '/');
+          self.get('flashMessages').info('Welcome ' + result.name + ' to the DataCite Administration area.');
+        } else if (['provider_admin', 'provider_user'].includes(result.role_id) && result.provider_id) {
+          self.set('provider_id', result.provider_id);
+          self.get('store').findRecord('provider', result.provider_id).then(function(provider) {
+            let isProvider = provider.get('isActive');
+            self.set('isProvider', isProvider);
+            self.set('role_id', (isProvider) ? result.role_id : 'user');
             self.set('role', self.get('store').findRecord('role', self.get('role_id')));
-            self.set('home', '/providers/sandbox');
-            self.get('flashMessages').info('Welcome ' + result.name + ' to the DataCite Sandbox Administration area.');
-          } else {
-            self.set('isClient', true);
-            self.set('client_id', result.sandbox_id);
-            self.set('role_id', 'client_admin');
+            self.set('home', '/providers/' + result.provider_id);
+            self.get('flashMessages').info('Welcome ' + result.name + ' to the DOI Registration Provider Administration area.');
+          });
+        } else if (['client_admin', 'client_user'].includes(result.role_id) && result.client_id) {
+          self.set('client_id', result.client_id);
+          self.get('store').findRecord('client', result.client_id).then(function(client) {
+            let isClient = client.get('isActive');
+            self.set('isClient', isClient);
+            self.set('role_id', (isClient) ? result.role_id : 'user');
             self.set('role', self.get('store').findRecord('role', self.get('role_id')));
-            self.set('home', '/clients/' + result.sandbox_id);
-            self.get('flashMessages').info('Welcome ' + result.name + ' to the DataCite Sandbox Client Administration area.');
-          }
+            self.set('home', '/clients/' + result.client_id);
+            self.get('flashMessages').info('Welcome ' + result.name + ' to the Client Administration area.');
+          });
+        } else if (result.sandbox_id) {
+          self.set('role_id', 'client_admin');
+          self.get('flashMessages').info('Welcome ' + result.name + ' to your DataCite Sandbox Administration area.');
         } else {
-          if (['staff_admin', 'staff_user'].includes(result.role_id)) {
-            self.set('isAdmin', true);
-            self.set('role_id', result.role_id);
-            self.set('role', self.get('store').findRecord('role', result.role_id));
-            self.set('home', '/');
-            self.get('flashMessages').info('Welcome ' + result.name + ' to the DataCite Administration area.');
-          } else if (['provider_admin', 'provider_user'].includes(result.role_id) && result.provider_id) {
-            self.set('provider_id', result.provider_id);
-            self.get('store').findRecord('provider', result.provider_id).then(function(provider) {
-              let isProvider = provider.get('isActive');
-              self.set('isProvider', isProvider);
-              self.set('role_id', (isProvider) ? result.role_id : 'user');
-              self.set('role', self.get('store').findRecord('role', self.get('role_id')));
-              self.set('home', '/providers/' + result.provider_id);
-              self.get('flashMessages').info('Welcome ' + result.name + ' to the DOI Registration Provider Administration area.');
-            });
-          } else if (['client_admin', 'client_user'].includes(result.role_id) && result.client_id) {
-            self.set('client_id', result.client_id);
-            self.get('store').findRecord('client', result.client_id).then(function(client) {
-              let isClient = client.get('isActive');
-              self.set('isClient', isClient);
-              self.set('role_id', (isClient) ? result.role_id : 'user');
-              self.set('role', self.get('store').findRecord('role', self.get('role_id')));
-              self.set('home', '/clients/' + result.client_id);
-              self.get('flashMessages').info('Welcome ' + result.name + ' to the Client Administration area.');
-            });
-          } else {
-            self.set('role_id', 'user');
-          }
+          self.set('role_id', 'user');
+        }
+        if (result.sandbox_id) {
+          self.set('sandbox_id', result.sandbox_id);
+          self.set('sandbox', '/clients/' + result.sandbox_id);
         }
       }
     }, function(reason) {

@@ -8,6 +8,9 @@
       {{#if (can "read settings")}}
         {{#nav.item}}<a href="{{home}}">Home</a>{{/nav.item}}
       {{/if}}
+      {{#if sandbox}}
+        {{#nav.item}}<a href="{{sandbox}}">Sandbox</a>{{/nav.item}}
+      {{/if}}
       <li>
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Support <span class="caret"></span></a>
         <ul class="dropdown-menu" role="menu">

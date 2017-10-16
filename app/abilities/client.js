@@ -27,9 +27,9 @@ export default Ability.extend({
       case 'provider_admin':
         return true;
       case 'client_admin':
-        return this.get('currentUser.client_id') === this.get('model.id');
+        return this.get('currentUser.client_id') === this.get('model.id') || this.get('currentUser.sandbox_id') === this.get('model.id');
       default:
-        return false;
+        return this.get('currentUser.sandbox_id') === this.get('model.id');;
     }
   }),
   canRead: Ember.computed('currentUser.role_id', 'currentUser.provider_id', 'currentUser.client_id', 'model.id', 'model.provider.id', function() {
@@ -39,12 +39,12 @@ export default Ability.extend({
         return true;
       case 'provider_admin':
       case 'provider_user':
-        return this.get('currentUser.provider_id') === this.get('model.provider.id');
+        return this.get('currentUser.provider_id') === this.get('model.provider.id') || this.get('currentUser.sandbox_id') === this.get('model.id');
       case 'client_admin':
       case 'client_user':
-        return this.get('currentUser.client_id') === this.get('model.id');
+        return this.get('currentUser.client_id') === this.get('model.id') || this.get('currentUser.sandbox_id') === this.get('model.id');
       default:
-        return false;
+        return this.get('currentUser.sandbox_id') === this.get('model.id');
     }
   })
 });
