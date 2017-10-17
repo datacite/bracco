@@ -58,7 +58,7 @@
           {{else}}
             {{#bs-form formLayout="vertical" model=model onSubmit=(action "destroy" model) submitOnEnter=true as |form|}}
               {{#form.group validation=(if (v-get model 'isInvalid') "error" "success")}}
-                {{form.element controlType="text" label='Are you sure you want to delete this client? This action cannot be undone.' property='confirmSymbol' showValidationOn="input" autofocus=true helpText='Please type in the Client ID to confirm.'}}
+                {{form.element controlType="text" label='Are you sure you want to delete this client? This action cannot be undone.' property='confirmSymbol' showValidationOn="input" autofocus=true helpText='Please add the Client ID to delete.'}}
               {{/form.group}}
 
               <div class="pseudo-footer">
