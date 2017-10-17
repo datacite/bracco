@@ -11,15 +11,7 @@
     <div class="clearfix"/>
   </div>
 </div>
-{{#if output}}
-  <div class="panel panel-transparent">
-    <div class="panel-body">
-      {{#code-block class="metadata"}}
-{{output}}
-      {{/code-block}}
-    </div>
-  </div>
-{{else}}
+{{#if summary}}
   <div class="row">
     <div class="col-md-9">
       <div class="panel panel-transparent">
@@ -49,6 +41,14 @@
     </div>
     <div class="col-md-3">
       {{client-sidebar model=model}}
+    </div>
+  </div>
+{{else if output}}
+  <div class="panel panel-transparent">
+    <div class="panel-body">
+      {{#code-block class="metadata"}}
+{{output}}
+      {{/code-block}}
     </div>
   </div>
 {{/if}}

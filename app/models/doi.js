@@ -30,7 +30,11 @@ export default DS.Model.extend({
   updated: DS.attr('date'),
 
   schemaVersionString: Ember.computed('schemaVersion', function() {
-    return this.get('schemaVersion').split("-").get("lastObject");
+    if (this.get('schemaVersion')) {
+      return this.get('schemaVersion').split("-").get("lastObject");
+    } else {
+      return null;
+    }
   }),
 
   datacite: Ember.computed('xml', function() {

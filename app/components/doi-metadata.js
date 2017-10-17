@@ -7,14 +7,16 @@ export default Ember.Component.extend({
   tagName: 'div',
   metadata: null,
   output: null,
+  summary: true,
 
   showMetadata(metadata) {
-    if (!metadata || metadata === "summary") {
-      this.set('output', null);
+    if (metadata === "summary") {
+      this.set('summary', true);
     } else if (metadata === "datacite") {
-      let output = vkbeautify.xml(this.get('model').get("datacite"));
-      this.set('output', output);
+      this.set('output', vkbeautify.xml(this.get('model').get("datacite")));
+      this.set('summary', false);
     } else {
+      this.set('output', null);
       let self = this;
       let url = ENV.DATA_URL + '/' + this.get('model').get("doi");
       let acceptHeaders = { 'datacite': 'application/vnd.datacite.datacite+xml',
@@ -38,17 +40,19 @@ export default Ember.Component.extend({
 
       result.then(function(response) {
         if (typeof response === 'string') {
-          self.set('output', response);
+          self.set('output', vkbeautify.json(response));
+          self.set('summary', false);
         } else {
           let reader = new FileReader();
           reader.onloadend = function() {
             self.set('output', reader.result);
+            self.set('summary', false);
           }
           reader.readAsText(response);
         }
       });
     }
-    //this.get('router').transitionTo({ queryParams: { metadata: metadata } });
+    // this.get('router').transitionTo({ queryParams: { metadata: metadata } });
   },
 
   actions: {
