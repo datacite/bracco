@@ -18,10 +18,17 @@ const Validations = buildValidations({
     })
   ],
   confirmSymbol: [
-    validator('presence', true),
+    validator('presence', {
+      disabled: Ember.computed('model', function() {
+        return this.get('model').get('isNew');
+      })
+    }),
     validator('confirmation', {
       on: 'symbol',
-      message: 'Client ID does not match'
+      message: 'Client ID does not match',
+      disabled: Ember.computed('model', function() {
+        return this.get('model').get('isNew');
+      })
     })
   ],
   name: validator('presence', true),

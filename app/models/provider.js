@@ -15,6 +15,20 @@ const Validations = buildValidations({
       max: 8
     })
   ],
+  confirmSymbol: [
+    validator('presence', {
+      disabled: Ember.computed('model', function() {
+        return this.get('model').get('isNew');
+      })
+    }),
+    validator('confirmation', {
+      on: 'symbol',
+      message: 'Provider ID does not match',
+      disabled: Ember.computed('model', function() {
+        return this.get('model').get('isNew');
+      })
+    })
+  ],
   name: validator('presence', true),
   contactName: validator('presence', true),
   contactEmail: [
