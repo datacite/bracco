@@ -92,6 +92,9 @@ export default Ember.Component.extend({
     searchSandbox(query) {
       this.set('sandboxes', this.get('store').query('client', { 'query': query, sort: 'name', 'provider-id': 'sandbox', 'page[size]': 25 }));
     },
+    selectSandbox(sandbox) {
+      this.selectSandbox(sandbox);
+    },
     submit() {
       this.get('user').save();
       this.reset();

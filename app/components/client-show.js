@@ -1,20 +1,12 @@
 import Ember from 'ember';
-import { validator, buildValidations } from 'ember-cp-validations';
 
-const Validations = buildValidations({
-  confirmId: validator('confirmation', {
-    on: 'symbol',
-    message: 'Client ID does not match'
-  })
-});
-
-export default Ember.Component.extend(Validations, {
+export default Ember.Component.extend({
   store: Ember.inject.service(),
 
   edit: false,
   delete: false,
   client: null,
-  confirmName: null,
+  provider: null,
   repository: null,
   repositories: [],
 
@@ -37,15 +29,19 @@ export default Ember.Component.extend(Validations, {
   actions: {
     edit: function(client) {
       this.set('client', client);
+      this.get('client').set('confirmSymbol', client.get('symbol'));
       this.set('repository', client.get('repository'));
       this.set('edit', true);
     },
     delete: function(client) {
       this.set('client', client);
+      this.get('client').set('confirmSymbol', null);
+      this.get('client').validateSync();
+      this.set('provider', client.get('provider'));
       this.set('delete', true);
     },
     searchRepository(query) {
-      this.set('repositories', this.get('store').query('repository', { 'query': query, 'page[size]': 10 }));
+      this.set('repositories', this.get('store').query('repository', { 'query': query, 'page[size]': 25 }));
     },
     selectRepository(repository) {
       this.selectRepository(repository);
@@ -55,10 +51,11 @@ export default Ember.Component.extend(Validations, {
       this.reset();
     },
     destroy: function(client) {
-      if (this.get('confirmId') === client.get('symbol')) {
+      let self = this;
+      this.get('store').findRecord("client", client.id, { backgroundReload: false }).then(function(client) {
         client.destroyRecord();
-        this.get('router').transitionTo('/clients');
-      }
+        self.get('router').transitionTo('providers.show', self.get('provider'));
+      });
     },
     cancel: function() {
       this.reset();

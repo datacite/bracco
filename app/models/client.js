@@ -17,6 +17,13 @@ const Validations = buildValidations({
       max: 17
     })
   ],
+  confirmSymbol: [
+    validator('presence', true),
+    validator('confirmation', {
+      on: 'symbol',
+      message: 'Client ID does not match'
+    })
+  ],
   name: validator('presence', true),
   domains: validator('presence', true),
   contactName: validator('presence', true),
