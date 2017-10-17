@@ -42,7 +42,7 @@
             {{/if}}
             {{#if doi.published}}
               <div class="metadata">
-                {{format-metadata doi.published resourceTypeId=doi.resourceTypeId resourceTypeSubtype=doi.resourceTypeSubtype containerTitle=doi.containerTitle version=doi.version}}
+                {{format-metadata doi.published resourceTypeGeneral=doi.resourceTypeGeneral resourceType=doi.resourceType containerTitle=doi.containerTitle version=doi.version}}
               </div>
             {{/if}}
             {{#if doi.license}}

@@ -34,6 +34,7 @@ export default DS.Model.extend({
   }),
 
   datacite: Ember.computed('xml', function() {
-    return atob(this.get('xml'));
+    let xml = atob(this.get('xml'));
+    return (xml === '<hsh></hsh>') ? '' : xml;
   })
 });

@@ -3,6 +3,9 @@ import SanitizeHtml from 'npm:sanitize-html';
 
 // sanitize and truncate text
 export function formatText([text], hash) {
+  if (Ember.typeOf(text) === 'object') {
+    text = text.text;
+  }
   let allowedTags = ['strong', 'em', 'b', 'i', 'code', 'pre', 'sub', 'sup', 'br']
   let sanitizedText = SanitizeHtml(text, { allowedTags: allowedTags });
   let words = sanitizedText.split(" ");

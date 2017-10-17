@@ -59,12 +59,12 @@ export default Ember.Component.extend({
 
   didInsertElement: function() {
     let formats = { 'summary': 'Summary',
-                    'datacite': 'DataCite XML' };
-                    // 'schema_org': 'Schema.org JSON-LD',
-                    // 'citeproc': 'Citeproc JSON',
-                    // 'codemeta': 'Codemeta',
-                    // 'bibtex': 'BibTeX',
-                    // 'ris': 'RIS' };
+                    'datacite': 'DataCite XML',
+                    'schema_org': 'Schema.org JSON-LD',
+                    'citeproc': 'Citeproc JSON',
+                    'codemeta': 'Codemeta',
+                    'bibtex': 'BibTeX',
+                    'ris': 'RIS' };
     this.set('formats', formats);
   }
 });
