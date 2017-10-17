@@ -101,7 +101,7 @@
                   {{#link-to link (query-params state=state.id)}}{{fa-icon "square-o"}}{{/link-to}}
                 {{/if}}
                 <div class="facet-title">{{state.title}}</div>
-                <span class="number pull-right">{{state.count}}</span>
+                <span class="number pull-right">{{format-number state.count}}</span>
                 <div class="clearfix"/>
               </li>
             {{/each}}
