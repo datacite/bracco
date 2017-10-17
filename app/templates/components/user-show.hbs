@@ -121,6 +121,11 @@
             <h5>Client</h5>
             {{#link-to "clients.show.users" model.client.id}}{{model.client.name}}{{/link-to}}
           {{/if}}
+
+          {{#if model.sandbox}}
+            <h5>Sandbox</h5>
+            {{#link-to "clients.show.users" model.sandbox.id}}{{model.sandbox.name}}{{/link-to}}
+          {{/if}}
         </div>
       </div>
     </div>
