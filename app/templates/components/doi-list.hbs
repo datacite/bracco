@@ -73,7 +73,7 @@
           <div class="btn-toolbar">
             <div class="btn-group btn-group-sm">
               <button {{action "new"}} class="btn btn-warning">{{fa-icon "plus"}}Add DOI</button>
-              {{#if (gt model.length 0)}}
+              {{#if (and (can "delete doi") (gt model.length 0))}}
                 {{#link-to "clients.show.transfer" model.otherParams.client-id class="btn btn-warning"}}{{fa-icon "arrow-circle-o-right"}}Transfer DOIs{{/link-to}}
               {{/if}}
             </div>

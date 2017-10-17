@@ -98,7 +98,7 @@
             <div class="btn-toolbar">
               <div class="btn-group btn-group-sm">
                 <button {{action "edit" model}} class="btn btn-warning">{{fa-icon "pencil"}}Edit {{#if (not admin)}}Provider{{else}}Admin{{/if}}</button>
-                {{#if (can "delete client" model)}}
+                {{#if (can "delete provider" model)}}
                   <button {{action "delete" model}} class="btn btn-warning">{{fa-icon "trash"}}Delete {{#if (not admin)}}Provider{{else}}Admin{{/if}}</button>
                 {{/if}}
               </div>
