@@ -54,7 +54,7 @@ export default Ember.Component.extend({
       let self = this;
       this.get('store').findRecord("client", client.id, { backgroundReload: false }).then(function(client) {
         client.destroyRecord();
-        self.get('router').transitionTo('providers.show', self.get('provider'));
+        self.get('router').transitionTo('providers.show.settings', self.get('provider'));
       });
     },
     cancel: function() {
