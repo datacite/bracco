@@ -47,7 +47,7 @@ export default Ember.Component.extend({
       this.selectTarget(target);
     },
     update() {
-      //this.get('client').save();
+      this.get('client').save();
       this.set('edit', false);
       this.get('router').transitionTo('clients.show.dois', this.get('target'));
     },

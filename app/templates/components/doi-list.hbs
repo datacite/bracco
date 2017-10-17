@@ -23,29 +23,6 @@
       </div>
     </div>
   </div>
-{{else if edit}}
-  <div class='col-md-9'>
-    <div class="panel panel-transparent">
-      <div class="panel-body">
-        <h3 class="edit">Transfer DOIs</h3>
-        {{#bs-form formLayout="vertical" model=this onSubmit=(action "submit" model) submitOnEnter=true as |form|}}
-          {{#form.element controlType="power-select" property="target" label="Client" helpText='Transfer all DOIs to this client.' optionLabelPath="name" options=clients destination=target as |el|}}
-            {{#el.control onChange=(action "selectTarget") search=(action "searchClient") searchField="name" allowClear=true as |item|}}
-              {{item.name}}
-            {{/el.control}}
-          {{/form.element}}
-
-          <div class="pseudo-footer">
-            <div class="btn-toolbar pull-right">
-              <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
-              <button {{action "update"}} class="btn btn-sm btn-fill">Transfer</button>
-            </div>
-            <div class="clearfix"/>
-          </div>
-        {{/bs-form}}
-      </div>
-    </div>
-  </div>
 {{else}}
   <div class='col-md-9 panel-list' id="content">
     {{#if searchable}}
@@ -97,7 +74,7 @@
             <div class="btn-group btn-group-sm">
               <button {{action "new"}} class="btn btn-warning">{{fa-icon "plus"}}Add DOI</button>
               {{#if (gt model.length 0)}}
-                <button {{action "edit"}} class="btn btn-warning">{{fa-icon "arrow-circle-o-right"}}Transfer DOIs</button>
+                {{#link-to "clients.show.transfer" model.otherParams.client-id class="btn btn-warning"}}{{fa-icon "arrow-circle-o-right"}}Transfer DOIs{{/link-to}}
               {{/if}}
             </div>
           </div>

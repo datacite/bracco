@@ -21,6 +21,7 @@ Router.map(function() {
     this.route('show', { path: '/:client_id' }, function() {
       this.route('settings');
       this.route('dois');
+      this.route('transfer');
       this.route('prefixes');
       this.route('users');
     });

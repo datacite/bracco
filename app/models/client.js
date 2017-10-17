@@ -52,7 +52,7 @@ export default DS.Model.extend(Validations, {
   created: DS.attr('date'),
   updated: DS.attr('date'),
 
-  target: DS.attr(),
+  targetId: DS.attr(),
 
   domainList: Ember.computed('domains', function() {
     return this.get('domains').split(",").map(function(item) {
@@ -67,6 +67,11 @@ export default DS.Model.extend(Validations, {
   }),
   doiCount: Ember.computed('meta', function() {
     return this.get('meta.dois');
+  }),
+  totalDoiCount: Ember.computed('meta', function() {
+    return this.get('meta.dois').reduce(function (a, b) {
+      return a + b.count;
+    }, 0);
   }),
   badgeUrl: Ember.computed('repository', function() {
     if (this.get('repository')) {
