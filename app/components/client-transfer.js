@@ -42,7 +42,7 @@ export default Ember.Component.extend({
         timeout: 5000,
         sticky: true
       });
-      this.get('router').transitionTo('clients.show.settings', this.get('client'));
+      this.get('router').transitionTo('clients.show.settings', this.get('model'));
     },
     cancel() {
       this.get('router').transitionTo('clients.show.dois', this.get('model'));
