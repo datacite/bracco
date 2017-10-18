@@ -32,7 +32,7 @@ export default DS.Model.extend({
   schemaVersionString: Ember.computed('schemaVersion', function() {
     if (this.get('schemaVersion')) {
       return this.get('schemaVersion').split("-").get("lastObject");
-    } else {
+    } else {
       return null;
     }
   }),

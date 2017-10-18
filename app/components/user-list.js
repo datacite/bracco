@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import ENV from 'bracco/config/environment';
 
 export default Ember.Component.extend({
   store: Ember.inject.service(),

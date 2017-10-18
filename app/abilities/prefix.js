@@ -12,7 +12,7 @@ export default Ability.extend({
     }
   }),
   canUpdate: Ember.computed('currentUser.role_id', 'currentUser.provider_id', 'currentUser.client_id', 'model.clients', 'model.providers', function() {
-    let self = this;
+    //let self = this;
     switch(this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;

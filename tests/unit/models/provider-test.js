@@ -1,7 +1,7 @@
 import { moduleForModel, test } from 'ember-qunit';
 
 moduleForModel('provider', 'Unit | Model | provider', {
-  needs: ['validator:presence', 'validator:format', 'validator:length', 'validator:unique-provider-id']
+  needs: ['validator:presence', 'validator:confirmation', 'validator:format', 'validator:length', 'validator:unique-provider-id']
 });
 
 test('it exists', function(assert) {

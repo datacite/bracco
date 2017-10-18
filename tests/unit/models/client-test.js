@@ -1,7 +1,7 @@
 import { moduleForModel, test } from 'ember-qunit';
 
 moduleForModel('client', 'Unit | Model | client', {
-  needs: ['validator:presence', 'validator:format', 'validator:length', 'validator:client-id', 'validator:unique-client-id']
+  needs: ['validator:presence', 'validator:confirmation', 'validator:format', 'validator:length', 'validator:client-id', 'validator:unique-client-id']
 });
 
 test('it exists', function(assert) {

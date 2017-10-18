@@ -29,7 +29,7 @@ export default Ability.extend({
       case 'client_admin':
         return this.get('currentUser.client_id') === this.get('model.id') || this.get('currentUser.sandbox_id') === this.get('model.id');
       default:
-        return this.get('currentUser.sandbox_id') === this.get('model.id');;
+        return false
     }
   }),
   canRead: Ember.computed('currentUser.role_id', 'currentUser.provider_id', 'currentUser.client_id', 'model.id', 'model.provider.id', function() {

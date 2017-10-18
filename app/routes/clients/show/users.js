@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import RouteMixin from 'ember-cli-pagination/remote/route-mixin';
-import ENV from 'bracco/config/environment';
 
 export default Ember.Route.extend(RouteMixin, {
   perPage: 25,
