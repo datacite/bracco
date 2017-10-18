@@ -14,14 +14,20 @@ export default Ember.Component.extend({
   providers: [],
   clients: [],
   sandboxes: [],
+  isAdmin: false,
+  isProvider: false,
+  isClient: false,
 
   searchRole() {
     if (this.get('currentUser').get('isAdmin')) {
       this.set('roles', this.get('store').findAll('role'));
+      this.set('isAdmin', true);
     } else if (this.get('currentUser').get('isProvider')) {
       this.set('roles', this.get('store').query('role', { scope: 'provider' }));
+      this.set('isProvider', true);
     } else if (this.get('currentUser').get('isClient')) {
       this.set('roles', this.get('store').query('role', { scope: 'client' }));
+      this.set('isClient', true);
     }
   },
   selectRole(role) {
