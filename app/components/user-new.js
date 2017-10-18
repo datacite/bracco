@@ -9,12 +9,23 @@ export default Ember.Component.extend({
   provider: null,
   client: null,
   link: null,
-
+  isAdmin: false,
+  isProvider: false,
+  isClient: false,
+  
   didReceiveAttrs() {
     this._super(...arguments);
 
     this.set('provider', this.get('model.provider'));
     this.set('client', this.get('model.client'));
+
+    if (this.get('currentUser').get('isAdmin')) {
+      this.set('isAdmin', true);
+    } else if (this.get('currentUser').get('isProvider')) {
+      this.set('isProvider', true);
+    } else if (this.get('currentUser').get('isClient')) {
+      this.set('isClient', true);
+    }
 
     this.searchUser(null);
     this.searchRole();
