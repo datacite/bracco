@@ -19,7 +19,7 @@
               {{/el.control}}
             {{/form.element}}
 
-            {{#if (isAdmin)}}
+            {{#if isAdmin}}
               {{#form.element controlType="power-select" property="provider" label="Provider" optionLabelPath="name" options=providers destination=provider as |el|}}
                 {{#el.control onChange=(action "selectProvider") search=(action "searchProvider") searchField="name" allowClear=true as |item|}}
                   {{item.name}}
