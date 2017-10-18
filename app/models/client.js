@@ -19,6 +19,7 @@ const Validations = buildValidations({
   ],
   confirmSymbol: [
     validator('presence', {
+      presence: true,
       disabled: Ember.computed('model', function() {
         return this.get('model').get('isNew');
       })
@@ -79,10 +80,10 @@ export default DS.Model.extend(Validations, {
   isSandbox: Ember.computed('id', function() {
     return this.get('id').split('.').get('firstObject') === "sandbox";
   }),
-  doiCount: Ember.computed('meta', function() {
+  doiCount: Ember.computed('meta.dois', function() {
     return this.get('meta.dois');
   }),
-  totalDoiCount: Ember.computed('meta', function() {
+  totalDoiCount: Ember.computed('meta.dois', function() {
     return this.get('meta.dois').reduce(function (a, b) {
       return a + b.count;
     }, 0);

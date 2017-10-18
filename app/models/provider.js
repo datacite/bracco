@@ -17,6 +17,7 @@ const Validations = buildValidations({
   ],
   confirmSymbol: [
     validator('presence', {
+      presence: true,
       disabled: Ember.computed('model', function() {
         return this.get('model').get('isNew');
       })
@@ -68,7 +69,7 @@ export default DS.Model.extend(Validations, {
   uid: Ember.computed('id', function() {
     return this.get('id').toUpperCase();
   }),
-  doiCount: Ember.computed('meta', function() {
+  doiCount: Ember.computed('meta.dois', function() {
     return this.get('meta.dois');
   }),
   currentDoiCount: Ember.computed('doiCount', function() {
@@ -79,7 +80,7 @@ export default DS.Model.extend(Validations, {
       return 0;
     }
   }),
-  clientCount: Ember.computed('meta', function() {
+  clientCount: Ember.computed('meta.clients', function() {
     return this.get('meta.clients');
   }),
   currentClientCount: Ember.computed('clientCount', function() {

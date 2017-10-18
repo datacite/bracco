@@ -7,6 +7,7 @@
 
           {{#bs-form formLayout="vertical" model=model onSubmit=(action "submit" model) submitOnEnter=true as |form|}}
             {{form.element controlType="text" label="Client ID" placeholder="Client ID" property="symbol" helpText='The Client ID is a unique identifier for each client. It must contain only upper case letters, numbers or a hypen, must not be longer than 17 characters, and must start with the Provider ID.' disabled=true}}
+            {{form.element controlType="hidden" property="confirmSymbol" required=false}}
             {{#form.element controlType="power-select" property="repository" label="re3data Record" optionLabelPath="name" options=repositories destination=repository helpText='re3data is a registry of research data repositories.' as |el|}}
               {{#el.control onChange=(action "selectRepository") search=(action "searchRepository") searchField="name" allowClear=true as |item|}}
                 {{item.name}}
@@ -44,7 +45,7 @@
     <div class="col-md-9">
       <div class="panel panel-transparent">
         <div class="panel-body">
-          {{#if (gt model.doiCount.length 0)}}
+          {{#if (gt model.meta.dois.length 0)}}
             <div class="alert alert-danger" role="alert">
               You need to transfer all DOIs to another client before you can delete this client.
             </div>
