@@ -25,7 +25,7 @@ export default Ember.Component.extend({
 
   init: function () {
     this._super();
-    Ember.run.schedule("afterRender",this,function() {
+    Ember.run.schedule("afterRender", this, function() {
       this.send("barChart");
     });
   },

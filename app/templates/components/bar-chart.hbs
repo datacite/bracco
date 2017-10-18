@@ -7,7 +7,11 @@
   </div>
   <div class="panel-body panel-chart">
     <h2 class="member graphs">
-      {{#link-to "providers.show.dois" model.id (query-params registered='2017')}}{{format-number count}}{{/link-to}}
+      {{#if model}}
+        {{#link-to link model.id}}{{format-number count}}{{/link-to}}
+      {{else}}
+        {{#link-to link}}{{format-number count}}{{/link-to}}
+      {{/if}}
       {{#if (not cumulative)}}<span class="small">in 2017</span>{{/if}}
     </h2>
     <div class="graphs" id="{{chartId}}"></div>

@@ -5,8 +5,16 @@ import ENV from 'bracco/config/environment';
 export default Ember.Component.extend({
   tagName: 'div',
   citation: null,
+  output: null,
+
+  didReceiveAttrs() {
+    this._super(...arguments);
+
+    this.showCitation('apa');
+  },
 
   showCitation(citation) {
+    this.set('output', null);
     let self = this;
     let url = ENV.DATA_URL + '/' + this.get('model').get("doi");
     let acceptHeaders = { 'apa': 'text/x-bibliography; style=apa',
@@ -16,33 +24,31 @@ export default Ember.Component.extend({
                           'chicago-fullnote-bibliography': 'text/x-bibliography; style=chicago-fullnote-bibliography',
                           'ieee': 'text/x-bibliography; style=ieee' };
 
-    fetch(url, {
+    let result = fetch(url, {
       headers: {
         'Accept': acceptHeaders[citation]
       }
     }).then(function(response) {
       if (response.ok) {
-       //console.log(response.text())
-        return response
+        return response.blob();
       } else {
-        var error = new Error(response.statusText)
-        error.response = response
-        throw error
+        return response.statusText;
       }
-    }, function(error) {
-      Ember.Logger.assert(false, error);
-    }).then(function(result) {
-        // if (typeof result === 'string') {
-        //   self.set('citation-output', result);
-        // } else {
-      let reader = new FileReader();
-      reader.onloadend = function() {
-        self.set('citation-output', reader.result);
-      }
-      reader.readAsText(result);
     });
-    //console.log(self.get('citation-output'))
-    this.get('router').transitionTo({ queryParams: { citation: citation } });
+
+    result.then(function(response) {
+      if (typeof response === 'string') {
+        self.set('output', response);
+      } else {
+        let reader = new FileReader();
+        reader.onloadend = function() {
+          //console.log(reader.result)
+          self.set('output', reader.result);
+        }
+        reader.readAsText(response);
+      }
+    });
+    //this.get('router').transitionTo({ queryParams: { citation: citation } });
   },
 
   actions: {
