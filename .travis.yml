@@ -1,15 +1,21 @@
 ---
 language: node_js
 node_js:
-  - "8"
-
-dist: trusty
+  - "6"
 
 sudo: false
+dist: trusty
+
+addons:
+  chrome: stable
 
 cache:
-  directories:
-    - $HOME/.npm
+  yarn: true
+
+env:
+  global:
+    # See https://git.io/vdao3 for details.
+    - JOBS=1
 
 before_install:
   - set -e
@@ -22,12 +28,14 @@ before_install:
     fi
   - npm config set spin false
   - npm install -g codeclimate-test-reporter
+  - curl -o- -L https://yarnpkg.com/install.sh | bash
+  - export PATH=$HOME/.yarn/bin:$PATH
 
 install:
-  - npm install
+  - yarn install --non-interactive
 
 script:
-  - COVERAGE=true ember test
+  - COVERAGE=true yarn test
   - codeclimate-test-reporter < coverage/lcov.info
   # - ember build --environment=production
 
