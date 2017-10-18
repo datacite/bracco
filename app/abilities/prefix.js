@@ -21,10 +21,6 @@ export default Ability.extend({
         // return this.get('model.providers').any(function(provider, index, providers) {
         //   return provider.get('id') === self.get('currentUser.provider_id');
         // });
-      case 'client_admin':
-        return this.get('model.clients').any(function(client) {
-          return client.get('id') === self.get('currentUser.client_id');
-        });
       default:
         return false;
     }

@@ -6,10 +6,10 @@
     {{#each model as |client-prefix|}}
       <div class="panel panel-transparent">
         <div class="panel-body">
-          {{#if (eq client-prefix.prefix.id "10.5072")}}
-            <h3 class="member">{{client-prefix.prefix.id}}</h3>
-          {{else}}
+          {{#if (and (can "update prefix" model) (not-eq client-prefix.prefix.id "10.5072"))}}
             <h3 class="work">{{#link-to "client-prefixes.show" client-prefix.id}}{{client-prefix.prefix.id}}{{/link-to}}</h3>
+          {{else}}
+            <h3 class="member">{{client-prefix.prefix.id}}</h3>
           {{/if}}
 
           {{#if (eq client-prefix.prefix.id "10.5072")}}
