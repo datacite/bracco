@@ -1,8 +1,7 @@
 import { moduleFor, test } from 'ember-qunit';
 
 moduleFor('route:providers/show/users', 'Unit | Route | providers/show/users', {
-  // Specify the other units that are required for this test.
-  needs: ['service:google-analytics']
+  needs: ['service:google-analytics', 'service:can']
 });
 
 test('it exists', function(assert) {
