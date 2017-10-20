@@ -37,7 +37,7 @@ install:
 script:
   - COVERAGE=true yarn test
   - codeclimate-test-reporter < coverage/lcov.info
-  # - ember build --environment=production
+  - ember build --environment=production
 
 # deploy:
 #   provider: s3
