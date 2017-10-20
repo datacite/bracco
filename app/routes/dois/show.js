@@ -3,8 +3,6 @@ import RouteMixin from 'ember-cli-pagination/remote/route-mixin';
 import { CanMixin } from 'ember-can';
 
 export default Ember.Route.extend(CanMixin, RouteMixin, {
-  home: '/',
-
   model(params) {
     return this.store.findRecord('doi', params.doi_id, { include: 'provider,client' });
   },

@@ -4,7 +4,6 @@ import { CanMixin } from 'ember-can';
 
 export default Ember.Route.extend(CanMixin, RouteMixin, {
   perPage: 25,
-  home: '/',
 
   model(params) {
     params.paramMapping = { page: "page[number]",
