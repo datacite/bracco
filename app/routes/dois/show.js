@@ -9,7 +9,7 @@ export default Ember.Route.extend(CanMixin, RouteMixin, {
     return this.store.findRecord('doi', params.doi_id, { include: 'provider,client' });
   },
 
-  afterModel(model, transition) {
+  afterModel(model) {
     if (!this.can('read doi', model)) {
       let home = (this.get('currentUser.id')) ? this.get('currentUser').get('home') : '/';
       return this.transitionTo(home);

@@ -8,7 +8,7 @@ export default Ember.Route.extend(CanMixin, RouteMixin, {
     return this.store.findRecord('user', params.user_id);
   },
 
-  afterModel(model, transition) {
+  afterModel(model) {
     if (!this.can('read user', model)) {
       let home = (this.get('currentUser.id')) ? this.get('currentUser').get('home') : '/';
       return this.transitionTo(home);

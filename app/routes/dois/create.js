@@ -8,7 +8,7 @@ export default Ember.Route.extend(CanMixin, RouteMixin, {
     return this.store.findRecord('doi', params.doi_id);
   },
 
-  afterModel(model, transition) {
+  afterModel(model) {
     if (!this.can('write doi', model)) {
       let home = (this.get('currentUser.id')) ? this.get('currentUser').get('home') : '/';
       return this.transitionTo(home);

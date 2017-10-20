@@ -6,7 +6,7 @@ export default Ember.Route.extend({
     return this.store.findRecord('user', this.modelFor('users/show').get('id'));
   },
 
-  afterModel(model, transition) {
+  afterModel(model) {
     if (!this.can('read user', model)) {
       let home = (this.get('currentUser.id')) ? this.get('currentUser').get('home') : '/';
       return this.transitionTo(home);

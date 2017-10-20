@@ -18,7 +18,7 @@ export default Ember.Route.extend(RouteMixin, {
     return this.findPaged('user', params);
   },
 
-  afterModel(model, transition) {
+  afterModel() {
     if (!this.can('read provider', this.modelFor('providers/show'))) {
       let home = (this.get('currentUser.id')) ? this.get('currentUser').get('home') : '/';
       return this.transitionTo(home);
