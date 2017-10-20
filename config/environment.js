@@ -30,22 +30,33 @@ module.exports = function(environment) {
 			},
 		},
 
-    SITE_TITLE: process.env.SITE_TITLE || "DataCite DOI Fabrica",
-    NAVMENU_TITLE: process.env.NAVMENU_TITLE || 'Test Services',
-    SEARCH_URL: process.env.SEARCH_URL || "https://search.test.datacite.org",
-    ORCID_URL: process.env.ORCID_URL || "https://sandbox.orcid.org",
-    API_URL: process.env.API_URL || "https://api.test.datacite.org",
-    USER_API_URL: process.env.USER_API_URL || "https://profiles.test.datacite.org/api",
-    CDN_URL: process.env.CDN_URL || "https://assets.test.datacite.org",
-    DATA_URL: process.env.DATA_URL || "https://data.test.datacite.org",
-    JWT_HOST: process.env.JWT_HOST || "https://profiles.test.datacite.org",
-    JWT_PUBLIC_KEY: process.env.JWT_PUBLIC_KEY || null,
+    // SITE_TITLE: process.env.SITE_TITLE || "DataCite DOI Fabrica",
+    // NAVMENU_TITLE: process.env.NAVMENU_TITLE || 'Test Services',
+    // SEARCH_URL: process.env.SEARCH_URL || "https://search.test.datacite.org",
+    // ORCID_URL: process.env.ORCID_URL || "https://sandbox.orcid.org",
+    // API_URL: process.env.API_URL || "https://api.test.datacite.org",
+    // USER_API_URL: process.env.USER_API_URL || "https://profiles.test.datacite.org/api",
+    // CDN_URL: process.env.CDN_URL || "https://assets.test.datacite.org",
+    // DATA_URL: process.env.DATA_URL || "https://data.test.datacite.org",
+    // JWT_HOST: process.env.JWT_HOST || "https://profiles.test.datacite.org",
+    // JWT_PUBLIC_KEY: process.env.JWT_PUBLIC_KEY || null,
 
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
     }
   };
+
+  ENV.SITE_TITLE = process.env.SITE_TITLE || "DataCite DOI Fabrica";
+  ENV.NAVMENU_TITLE = process.env.NAVMENU_TITLE || 'Test Services';
+  ENV.SEARCH_URL = process.env.SEARCH_URL || "https://search.test.datacite.org";
+  ENV.ORCID_URL = process.env.ORCID_URL || "https://sandbox.orcid.org";
+  ENV.API_URL = process.env.API_URL || "https://api.test.datacite.org";
+  ENV.USER_API_URL = process.env.USER_API_URL || "https://profiles.test.datacite.org/api";
+  ENV.CDN_URL = process.env.CDN_URL || "https://assets.test.datacite.org";
+  ENV.DATA_URL = process.env.DATA_URL || "https://data.test.datacite.org";
+  ENV.JWT_HOST = process.env.JWT_HOST || "https://profiles.test.datacite.org";
+  ENV.JWT_PUBLIC_KEY = process.env.JWT_PUBLIC_KEY || null;
 
   if (environment === 'development') {
     // ENV.APP.LOG_RESOLVER = true;
