@@ -5,7 +5,9 @@
         <div class="panel-body">
           <h3 class="edit">Edit {{if (eq currentUser.uid model.id) "Account" "User"}}</h3>
 
-          {{#bs-form formLayout="vertical" model=this as |form|}}
+          {{#bs-form formLayout="vertical" model=model as |form|}}
+            {{form.element controlType="text" label="ORCID ID" property="id" helpText='The ORCID ID is a unique identifier for each user.' disabled=true}}
+
             {{#form.element controlType="power-select" property="role" label="Role" options=roles optionLabelPath="name" destination=role disabled=(eq currentUser.uid model.id) as |el|}}
               {{#el.control onChange=(action "selectRole") searchEnabled=false allowClear=false as |item|}}
                 {{item.name}}
@@ -77,6 +79,9 @@
     <div class="col-md-9">
       <div class="panel panel-transparent">
         <div class="panel-body">
+          <h5>ORCID ID</h5>
+          <a href="{{model.orcid}}">{{model.id}}</a>
+
           {{#if model.email}}
             <h5>Email</h5>
             <a href="mailto:{{model.email}}">{{model.email}}</a>
