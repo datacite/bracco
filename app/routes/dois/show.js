@@ -9,12 +9,12 @@ export default Ember.Route.extend(CanMixin, RouteMixin, {
     return this.store.findRecord('doi', params.doi_id, { include: 'provider,client' });
   },
 
-  // afterModel(model, transition) {
-  //   if (!this.can('read work', model)) {
-  //     let home = this.get('currentUser').get('home');
-  //     this.transitionTo(home);
-  //   }
-  // },
+  afterModel(model, transition) {
+    if (!this.can('read doi', model)) {
+      let home = (this.get('currentUser')) ? this.get('currentUser').get('home') : '/';
+      return this.transitionTo(home);
+    }
+  },
 
   actions: {
     queryParamsDidChange: function() {

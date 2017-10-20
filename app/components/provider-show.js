@@ -10,6 +10,7 @@ const Validations = buildValidations({
 
 export default Ember.Component.extend(Validations, {
   store: Ember.inject.service(),
+  flashMessages: Ember.inject.service(),
 
   edit: false,
   delete: false,

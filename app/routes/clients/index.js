@@ -6,17 +6,6 @@ export default Ember.Route.extend(CanMixin, RouteMixin, {
   perPage: 25,
   home: '/',
 
-  beforeModel() {
-    let result = this._super(...arguments);
-
-    if (!this.can('read index')) {
-      let home = this.get('currentUser').get('home');
-      return this.transitionTo(home);
-    }
-
-    return result;
-  },
-
   model(params) {
     params.paramMapping = { page: "page[number]",
                             perPage: "page[size]",
@@ -25,6 +14,14 @@ export default Ember.Route.extend(CanMixin, RouteMixin, {
     // params = Ember.merge(params, { adapterOptions: { include: ['member'] }});
     return this.findPaged('client', params);
   },
+
+  afterModel(model, transition) {
+    if (!this.can('read index')) {
+      let home = (this.get('currentUser')) ? this.get('currentUser').get('home') : '/';
+      return this.transitionTo(home);
+    }
+  },
+
   actions: {
     queryParamsDidChange: function() {
       this.refresh();

@@ -7,12 +7,12 @@ export default Ember.Route.extend(CanMixin, RouteMixin, {
     return this.store.findRecord('client', params.client_id, { include: 'provider,repository' });
   },
 
-  // afterModel(model, transition) {
-  //   if (!this.can('read data-center', model)) {
-  //     let home = this.get('currentUser').get('home');
-  //     this.transitionTo(home);
-  //   }
-  // },
+  afterModel(model, transition) {
+    if (!this.can('read client', model)) {
+      let home = (this.get('currentUser')) ? this.get('currentUser').get('home') : '/';
+      return this.transitionTo(home);
+    }
+  },
 
   actions: {
     queryParamsDidChange: function() {
