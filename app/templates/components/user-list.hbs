@@ -6,7 +6,7 @@
     {{#each model as |user|}}
       <div class="panel panel-transparent">
         <div class="panel-body">
-          <h3 class="work">{{#link-to "users.show.settings" user.id}}{{user.name}}{{/link-to}}</h3>
+          <h3 class="work">{{#link-to "users.show" user.id}}{{user.name}}{{/link-to}}</h3>
 
           {{#if user.email}}
             <h5>Email</h5>
