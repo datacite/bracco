@@ -3,33 +3,26 @@
     <div class="col-md-9">
       <div class="panel panel-transparent">
         <div class="panel-body">
-
-          <h3 class="edit">Edit User</h3>
+          <h3 class="edit">Edit {{if (eq currentUser.uid model.id) "Account" "User"}}</h3>
 
           {{#bs-form formLayout="vertical" model=this as |form|}}
-            {{#if (can "create user" model)}}
-              {{#form.element controlType="power-select" property="role" label="Role" options=roles optionLabelPath="name" destination=role as |el|}}
-                {{#el.control onChange=(action "selectRole") searchEnabled=false allowClear=false as |item|}}
-                  {{item.name}}
-                {{/el.control}}
-              {{/form.element}}
-            {{/if}}
+            {{#form.element controlType="power-select" property="role" label="Role" options=roles optionLabelPath="name" destination=role disabled=(eq currentUser.uid model.id) as |el|}}
+              {{#el.control onChange=(action "selectRole") searchEnabled=false allowClear=false as |item|}}
+                {{item.name}}
+              {{/el.control}}
+            {{/form.element}}
 
-            {{#if isAdmin}}
-              {{#form.element controlType="power-select" property="provider" label="Provider" optionLabelPath="name" options=providers destination=provider as |el|}}
-                {{#el.control onChange=(action "selectProvider") search=(action "searchProvider") searchField="name" allowClear=true as |item|}}
-                  {{item.name}}
-                {{/el.control}}
-              {{/form.element}}
-            {{/if}}
+            {{#form.element controlType="power-select" property="provider" label="Provider" optionLabelPath="name" options=providers destination=provider disabled=(xor isProvider isClient) as |el|}}
+              {{#el.control onChange=(action "selectProvider") search=(action "searchProvider") searchField="name" allowClear=true as |item|}}
+                {{item.name}}
+              {{/el.control}}
+            {{/form.element}}
 
-            {{#if (not isClient)}}
-              {{#form.element controlType="power-select" property="client" label="Client" optionLabelPath="name" options=clients destination=client as |el|}}
-                {{#el.control onChange=(action "selectClient") search=(action "searchClient") searchField="name" allowClear=true as |item|}}
-                  {{item.name}}
-                {{/el.control}}
-              {{/form.element}}
-            {{/if}}
+            {{#form.element controlType="power-select" property="client" label="Client" optionLabelPath="name" options=clients destination=client disabled=isClient as |el|}}
+              {{#el.control onChange=(action "selectClient") search=(action "searchClient") searchField="name" allowClear=true as |item|}}
+                {{item.name}}
+              {{/el.control}}
+            {{/form.element}}
 
             {{#if isAdmin}}
               {{#form.element controlType="power-select" property="sandbox" label="Sandbox" optionLabelPath="name" options=sandboxes destination=sandbox as |el|}}
@@ -115,7 +108,7 @@
       {{#if (can "update user" model)}}
         <div class="panel facets add">
           <div class="panel-body">
-            <button {{action "edit" model}} class="btn btn-warning">{{fa-icon "pencil"}} Edit User</button>
+            <button {{action "edit" model}} class="btn btn-warning">{{fa-icon "pencil"}} Edit {{if (eq currentUser.uid model.id) "Account" "User"}}</button>
           </div>
         </div>
       {{/if}}

@@ -17,6 +17,14 @@ export default Ember.Component.extend({
   isAdmin: false,
   isProvider: false,
   isClient: false,
+  isUser: false,
+  currentUser: null,
+
+  didReceiveAttrs() {
+    this._super(...arguments);
+
+    this.set('currentUser', this.get('currentUser'));
+  },
 
   searchRole() {
     if (this.get('currentUser').get('isAdmin')) {
@@ -28,6 +36,9 @@ export default Ember.Component.extend({
     } else if (this.get('currentUser').get('isClient')) {
       this.set('roles', this.get('store').query('role', { scope: 'client' }));
       this.set('isClient', true);
+    } else {
+      this.set('roles', []);
+      this.set('isUser', true);
     }
   },
   selectRole(role) {
