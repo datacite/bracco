@@ -13,6 +13,13 @@ export default Ember.Route.extend(CanMixin, {
   //   }
   // },
 
+  afterModel(model, transition) {
+    if (!this.can('read client', this.modelFor('clients/show'))) {
+      let home = (this.get('currentUser.id')) ? this.get('currentUser').get('home') : '/';
+      return this.transitionTo(home);
+    }
+  },
+
   actions: {
     queryParamsDidChange: function() {
       this.refresh();

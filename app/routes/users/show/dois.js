@@ -12,6 +12,14 @@ export default Ember.Route.extend(RouteMixin, {
     params = Ember.merge(params, { 'person-id': this.modelFor('users/show').get('id') });
     return this.findPaged('doi', params);
   },
+
+  afterModel(model, transition) {
+    if (!this.can('read user', this.modelFor('users/show'))) {
+      let home = (this.get('currentUser.id')) ? this.get('currentUser').get('home') : '/';
+      return this.transitionTo(home);
+    }
+  },
+
   actions: {
     queryParamsDidChange: function() {
       this.refresh();
