@@ -46,7 +46,7 @@
     "ember-cli-deploy-gzip": "^1.0.0",
     "ember-cli-deploy-manifest": "^1.1.0",
     "ember-cli-deploy-s3": "^1.1.0",
-    "ember-cli-dotenv": "^1.2.0",
+    "ember-cli-dotenv": "jasonmit/ember-cli-dotenv#v2.0.1",
     "ember-cli-eslint": "^4.0.0",
     "ember-cli-flash": "^1.4.3",
     "ember-cli-htmlbars": "^2.0.1",

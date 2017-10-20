@@ -5,10 +5,9 @@ import ENV from 'bracco/config/environment';
 export default DS.JSONAPIAdapter.extend({
   host: ENV.USER_API_URL,
 
-  headers: Ember.computed('currentUser.jwt', function() {
-    let jwt = this.get('currentUser').get('jwt');
+  headers: Ember.computed('currentUser', function() {
     return {
-      "Authorization": "Bearer " + jwt
+      "Authorization": "Bearer " + this.get('currentUser').get('jwt')
     };
   })
 });

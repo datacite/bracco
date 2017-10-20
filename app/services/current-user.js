@@ -31,6 +31,7 @@ export default Ember.Service.extend({
     let decoded = new Ember.RSVP.Promise(function(resolve, reject) {
       // check for cookie containing jwt
       let jwt = Cookie.get('_datacite_jwt');
+      self.set('jwt', jwt);
 
       // check for RSA public key
       let cert = ENV.JWT_PUBLIC_KEY ? ENV.JWT_PUBLIC_KEY.replace(/\\n/g, '\n') : null;
@@ -38,8 +39,6 @@ export default Ember.Service.extend({
       // verify asymmetric token, using RSA with SHA-256 hash algorithm
       NodeJsonWebToken.verify(jwt, cert, { algorithms: ['RS256'] }, function (error, payload) {
         if (payload) {
-          // add JWT to returned payload
-          payload.jwt = jwt;
           resolve(payload);
         } else {
           reject(error);
@@ -51,13 +50,12 @@ export default Ember.Service.extend({
       self.set('isAuthenticated', Ember.isPresent(result));
 
       if (Ember.isPresent(result)) {
-        self.set('jwt', result.jwt);
         self.set('uid', result.uid);
 
         self.set('name', result.name);
         self.set('email', result.email);
 
-        // check that provider or client exist and are active
+        // check role
         if (['staff_admin', 'staff_user'].includes(result.role_id)) {
           self.set('isAdmin', true);
           self.set('role_id', result.role_id);
@@ -84,10 +82,11 @@ export default Ember.Service.extend({
             self.set('home', '/clients/' + result.client_id);
             self.get('flashMessages').info('Welcome ' + result.name + ' to the Client Administration area.');
           });
-        } else if (result.sandbox_id) {
+        } else {
           self.set('role_id', 'user');
           self.set('role', self.get('store').findRecord('role', self.get('role_id')));
-          self.get('flashMessages').info('Welcome ' + result.name + ' to your DataCite Sandbox Administration area.');
+          self.set('home', '/users/' + result.uid);
+          self.get('flashMessages').info('Welcome ' + result.name + ' to your DOI Fabrica Personal area.');
         }
         if (result.sandbox_id) {
           self.set('sandbox_id', result.sandbox_id);
@@ -95,7 +94,10 @@ export default Ember.Service.extend({
         }
       }
     }, function(reason) {
-      Ember.Logger.assert(false, reason)
+      if (reason.message !== 'jwt must be provided') {
+        self.set('isAuthenticated', false);
+        Ember.Logger.assert(false, reason);
+      }
     });
   }
 });

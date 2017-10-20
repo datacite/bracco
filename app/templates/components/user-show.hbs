@@ -1,11 +1,5 @@
 {{#if edit}}
   <div class="row">
-    <div class='col-md-9'>
-      <h2 class="work">{{model.name}}</h2>
-    </div>
-  </div>
-
-  <div class="row">
     <div class="col-md-9">
       <div class="panel panel-transparent">
         <div class="panel-body">
@@ -87,22 +81,6 @@
   </div>
 {{else}}
   <div class="row">
-    <div class='col-md-9'>
-      <h2 class="work">{{model.name}}</h2>
-    </div>
-
-    {{#if (can "update user" model)}}
-      <div class='col-md-3'>
-        <div class="panel facets add">
-          <div class="panel-body">
-            <button {{action "edit" model}} class="btn btn-warning">{{fa-icon "pencil"}} Edit User</button>
-          </div>
-        </div>
-      </div>
-    {{/if}}
-  </div>
-
-  <div class="row">
     <div class="col-md-9">
       <div class="panel panel-transparent">
         <div class="panel-body">
@@ -134,6 +112,13 @@
       </div>
     </div>
     <div class='col-md-3'>
+      {{#if (can "update user" model)}}
+        <div class="panel facets add">
+          <div class="panel-body">
+            <button {{action "edit" model}} class="btn btn-warning">{{fa-icon "pencil"}} Edit User</button>
+          </div>
+        </div>
+      {{/if}}
       {{client-sidebar model=model}}
     </div>
   </div>

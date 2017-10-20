@@ -33,7 +33,10 @@ Router.map(function() {
     this.route('show', { path: '/:provider_id' });
   });
   this.route('users', function() {
-    this.route('show', { path: '/:user_id' });
+    this.route('show', { path: '/:user_id' }, function() {
+      this.route('settings');
+      this.route('dois');
+    });
     this.route('new');
   });
   this.route('prefixes', function() {

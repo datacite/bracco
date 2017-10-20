@@ -36,7 +36,7 @@ export default Ability.extend({
         return false;
     }
   }),
-  canRead: Ember.computed('currentUser.role_id', 'currentUser.provider_id', 'currentUser.client_id', 'model.provider.id', 'model.client.id', function() {
+  canRead: Ember.computed('currentUser.role_id', 'currentUser.provider_id', 'currentUser.client_id', 'currentUser.uid', 'model.provider.id', 'model.client.id', function() {
     switch(this.get('currentUser.role_id')) {
       case 'staff_admin':
       case 'staff_user':
@@ -48,7 +48,7 @@ export default Ability.extend({
       case 'client_user':
         return this.get('currentUser.client_id') === this.get('model.client.id');
       default:
-        return false;
+        return this.get('currentUser.uid') === this.get('model.id');
     }
   })
 });
