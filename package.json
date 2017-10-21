@@ -95,9 +95,10 @@
   },
   "dependencies": {
     "ember-electron": "^2.7.0",
-    "node-gyp": "3.6.2",
+    "ember-responsive": "^2.0.5",
+    "fs-extra": "^4.0.2",
     "junk": "^2.1.0",
-    "fs-extra": "^4.0.2"
+    "node-gyp": "3.6.2"
   },
   "config": {
     "forge": {

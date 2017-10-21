@@ -3,7 +3,7 @@ import d3 from "npm:d3";
 
 export default Ember.Component.extend({
   tagName: 'div',
-  classNames: ['col-md-3'],
+  classNames: ['col-lg-3', 'col-md-4'],
   data: null,
   count: Ember.computed('data', function() {
     if (this.get('data')) {

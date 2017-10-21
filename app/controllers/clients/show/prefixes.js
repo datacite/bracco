@@ -5,5 +5,5 @@ export default Ember.Controller.extend({
   query: null,
   'provider-id': null,
   'client-id': null,
-  'year': null
+  year: null
 });
