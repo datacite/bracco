@@ -11,7 +11,6 @@ export default Ember.Route.extend(CanMixin, RouteMixin, {
       return admin;
     }).catch(function(reason){
       let error = reason.errors[0];
-      console.assert(false, error);
 
       if (error.title === "Adapter Error") {
         self.get('flashMessages').warning('There is a problem with the DataCite API. Please try again later or contact DataCite Support.', {
