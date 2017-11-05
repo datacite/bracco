@@ -123,7 +123,7 @@ export default Ember.Component.extend({
           self.get('router').transitionTo('providers.show.users', user.get('provider'));
         });
       } else {
-        this.get('user').save().then(function(user) {
+        this.get('user').save().then(function() {
           self.get('router').transitionTo('users');
         });
       }
