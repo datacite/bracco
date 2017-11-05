@@ -13,13 +13,17 @@ export default Ember.Route.extend(CanMixin, RouteMixin, {
                             total_pages: "total-pages" };
 
     let self = this;
-    return this.findPaged('provider', params).then(function(providers) {
-      return providers;
-    }).catch(function(reason){
-      Ember.Logger.assert(false, reason);
-      self.get('flashMessages').warning('DOI Fabrica is currently unavailable due to a DataCite API problem. We apologize for the inconvenience and are working hard to restore the service. Please check back later or contact DataCite Support if you have a question.');
-      return self.transitionTo('/');
-    });
+
+    let providers = this.findPaged('provider', params);
+    return providers;
+    // let providers = this.findPaged('provider', params).then(function(providers) {
+    //   console.log(providers)
+    //   return providers;
+    // }).catch(function(reason){
+    //   Ember.Logger.assert(false, reason);
+    //   self.get('flashMessages').warning('DOI Fabrica is currently unavailable due to a DataCite API problem. We apologize for the inconvenience and are working hard to restore the service. Please check back later or contact DataCite Support if you have a question.');
+    //   return self.transitionTo('/');
+    // });
   },
 
   afterModel() {

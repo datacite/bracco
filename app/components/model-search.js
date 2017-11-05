@@ -11,7 +11,7 @@ export default Ember.Component.extend(RouteMixin, {
 
   didReceiveAttrs() {
     this._super(...arguments);
-    
+
     this.set('query', this.get('model').get('otherParams.query'));
     this.set('sort', this.get('model').get('otherParams.sort'));
   },
