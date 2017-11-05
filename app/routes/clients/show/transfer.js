@@ -5,7 +5,7 @@ import { CanMixin } from 'ember-can';
 export default Ember.Route.extend(CanMixin, RouteMixin, {
   model() {
     let self = this;
-    this.store.findRecord('client', this.modelFor('clients/show').get('id'), { include: 'provider,repository' }).then(function(client) {
+    return this.store.findRecord('client', this.modelFor('clients/show').get('id'), { include: 'provider,repository' }).then(function(client) {
       return client;
     }).catch(function(reason){
       Ember.Logger.assert(false, reason);

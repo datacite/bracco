@@ -7,7 +7,7 @@ export default Ember.Route.extend(CanMixin, RouteMixin, {
 
   model() {
     let self = this;
-    this.store.findRecord('provider', 'admin').then(function(admin) {
+    return this.store.findRecord('provider', 'admin').then(function(admin) {
       return admin;
     }).catch(function(reason){
       Ember.Logger.assert(false, reason);

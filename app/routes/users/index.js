@@ -11,7 +11,7 @@ export default Ember.Route.extend(CanMixin, RouteMixin, {
                             total_pages: "total-pages" };
 
     let self = this;
-    this.findPaged('users', params).then(function(users) {
+    return this.findPaged('users', params).then(function(users) {
       return users;
     }).catch(function(reason){
       Ember.Logger.assert(false, reason);

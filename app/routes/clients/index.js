@@ -12,7 +12,7 @@ export default Ember.Route.extend(CanMixin, RouteMixin, {
 
     params = Ember.merge(params, { sort: 'name' });
     let self = this;
-    this.findPaged('client', params).then(function(clients) {
+    return this.findPaged('client', params).then(function(clients) {
       return clients;
     }).catch(function(reason){
       Ember.Logger.assert(false, reason);
