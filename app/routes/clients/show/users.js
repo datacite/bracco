@@ -10,12 +10,13 @@ export default Ember.Route.extend(CanMixin, RouteMixin, {
                             perPage: "page[size]",
                             total_pages: "total-pages" };
 
-    let client = this.modelFor('clients/show');
-    if (client.get('isSandbox')) {
-      params = Ember.merge(params, { 'sandbox-id': client.id });
-    } else {
-      params = Ember.merge(params, { 'client-id': client.id });
-    }
+    params = Ember.merge(params, { 'client-id': this.modelFor('clients/show') });
+    // let client = this.modelFor('clients/show');
+    // if (client.get('isSandbox')) {
+    //   params = Ember.merge(params, { 'sandbox-id': client.id });
+    // } else {
+    //   params = Ember.merge(params, { 'client-id': client.id });
+    // }
     return this.findPaged('user', params);
   },
 
