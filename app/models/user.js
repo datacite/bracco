@@ -23,6 +23,7 @@ export default DS.Model.extend({
   orcid: DS.attr('string'),
   github: DS.attr('string'),
   email: DS.attr('string'),
+  isActive: DS.attr('boolean'),
   created: DS.attr('date'),
   updated: DS.attr('date'),
 

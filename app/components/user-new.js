@@ -115,16 +115,16 @@ export default Ember.Component.extend({
       if (this.get('client')) {
         this.get('user').set('client', this.get('client'));
         this.get('user').save().then(function(user) {
-          self.get('router').transitionTo('clients.show.users', user.get('client'));
+          self.get('router').transitionTo('users.show', user.id);
         });
       } else if (this.get('provider')) {
         this.get('user').set('provider', this.get('provider'));
         this.get('user').save().then(function(user) {
-          self.get('router').transitionTo('providers.show.users', user.get('provider'));
+          self.get('router').transitionTo('users.show', user.id);
         });
       } else {
         this.get('user').save().then(function() {
-          self.get('router').transitionTo('users');
+          self.get('router').transitionTo('users.show', user.id);
         });
       }
     },

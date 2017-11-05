@@ -32,6 +32,11 @@
             <h5>Sandbox</h5>
             {{#link-to "clients.show.users" user.sandbox.id}}{{user.sandbox.name}}{{/link-to}}
           {{/if}}
+
+          {{#if (not user.isActive)}}
+            <h5>State</h5>
+            <span class="icon-warning">Not active</span>
+          {{/if}}
         </div>
       </div>
     {{/each}}
