@@ -7,6 +7,7 @@ export default Ember.Service.extend({
   store: Ember.inject.service(),
   flashMessages: Ember.inject.service(),
 
+  apiIsAvailable: false,
   isAuthenticated: false,
   isPermitted: false,
   isAdmin: false,
@@ -55,38 +56,58 @@ export default Ember.Service.extend({
         self.set('name', result.name);
         self.set('email', result.email);
 
+        // check that general API is available
+        self.get('store').findRecord('provider', 'admin').then(function() {
+          self.set('apiIsAvailable', true);
+        }).catch(function(reason){
+          Ember.Logger.assert(false, reason);
+          self.set('apiIsAvailable', false);
+        });
+
+        self.get('store').findRecord('role', result.role_id).then(function(role) {
+          self.set('role', role);
+        }).catch(function(reason) {
+          Ember.Logger.assert(false, reason);
+          self.get('flashMessages').warning('DOI Fabrica is currently unavailable due to a DataCite API problem. We apologize for the inconvenience and are working hard to restore the service. Please check back later or contact DataCite Support if you have a question.');
+          return self.transitionTo('/');
+        });
+
         // check role
         if (['staff_admin', 'staff_user'].includes(result.role_id)) {
           self.set('isAdmin', true);
           self.set('role_id', result.role_id);
-          self.set('role', self.get('store').findRecord('role', result.role_id));
           self.set('home', '/');
-          self.get('flashMessages').info('Welcome ' + result.name + ' to the DataCite Administration area.');
+          if (self.get('apiIsAvailable')) {
+            self.get('flashMessages').info('Welcome ' + result.name + ' to the DataCite Administration area.');
+          }
         } else if (['provider_admin', 'provider_user'].includes(result.role_id) && result.provider_id) {
           self.set('provider_id', result.provider_id);
           self.get('store').findRecord('provider', result.provider_id).then(function(provider) {
             let isProvider = provider.get('isActive');
             self.set('isProvider', isProvider);
-            self.set('role_id', (isProvider) ? result.role_id : 'user');
-            self.set('role', self.get('store').findRecord('role', self.get('role_id')));
+            self.set('role_id', result.role_id);
             self.set('home', '/providers/' + result.provider_id);
-            self.get('flashMessages').info('Welcome ' + result.name + ' to the DOI Registration Provider Administration area.');
+            if (self.get('apiIsAvailable')) {
+              self.get('flashMessages').info('Welcome ' + result.name + ' to the DOI Registration Provider Administration area.');
+            }
           });
         } else if (['client_admin', 'client_user'].includes(result.role_id) && result.client_id) {
           self.set('client_id', result.client_id);
           self.get('store').findRecord('client', result.client_id).then(function(client) {
             let isClient = client.get('isActive');
             self.set('isClient', isClient);
-            self.set('role_id', (isClient) ? result.role_id : 'user');
-            self.set('role', self.get('store').findRecord('role', self.get('role_id')));
+            self.set('role_id', result.role_id);
             self.set('home', '/clients/' + result.client_id);
-            self.get('flashMessages').info('Welcome ' + result.name + ' to the Client Administration area.');
+            if (self.get('apiIsAvailable')) {
+              self.get('flashMessages').info('Welcome ' + result.name + ' to the Client Administration area.');
+            }
           });
         } else {
           self.set('role_id', 'user');
-          self.set('role', self.get('store').findRecord('role', self.get('role_id')));
           self.set('home', '/users/' + result.uid);
-          self.get('flashMessages').info('Welcome ' + result.name + ' to your DOI Fabrica Personal area.');
+          if (self.get('apiIsAvailable')) {
+            self.get('flashMessages').info('Welcome ' + result.name + ' to your DOI Fabrica Personal area.');
+          }
         }
         if (result.sandbox_id) {
           self.set('sandbox_id', result.sandbox_id);

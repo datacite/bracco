@@ -10,7 +10,14 @@ export default Ember.Route.extend(CanMixin, RouteMixin, {
                             perPage: "page[size]",
                             total_pages: "total-pages" };
 
-    return this.findPaged('prefix', params);
+    let self = this;
+    this.findPaged('prefix', params).then(function(prefixes) {
+      return prefixes;
+    }).catch(function(reason){
+      Ember.Logger.assert(false, reason);
+      self.get('flashMessages').warning('DOI Fabrica is currently unavailable due to a DataCite API problem. We apologize for the inconvenience and are working hard to restore the service. Please check back later or contact DataCite Support if you have a question.');
+      return self.transitionTo('/');
+    });
   },
 
   afterModel() {

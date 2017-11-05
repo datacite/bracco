@@ -10,14 +10,8 @@ export default Ember.Route.extend(CanMixin, RouteMixin, {
     this.store.findRecord('provider', 'admin').then(function(admin) {
       return admin;
     }).catch(function(reason){
-      let error = reason.errors[0];
-
-      if (error.title === "Adapter Error") {
-        self.get('flashMessages').warning('There is a problem with the DataCite API. Please try again later or contact DataCite Support.', {
-          timeout: 5000,
-          sticky: true
-        });
-      }
+      Ember.Logger.assert(false, reason);
+      self.get('flashMessages').warning('DOI Fabrica is currently unavailable due to a DataCite API problem. We apologize for the inconvenience and are working hard to restore the service. Please check back later or contact DataCite Support if you have a question.');
     });
   },
 
