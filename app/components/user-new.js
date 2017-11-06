@@ -1,8 +1,26 @@
 import Ember from 'ember';
+import { validator, buildValidations } from 'ember-cp-validations';
 
-export default Ember.Component.extend({
+const Validations = buildValidations({
+  uid: [
+    validator('presence', true),
+    validator('format', {
+      regex: /^\d{4}-\d{4}-\d{4}-\d{3}[0-9X]+$/,
+      message: 'The ORCID ID must consist of 16 digits, or X as last digit.'
+    }),
+    validator('length', {
+      min: 19,
+      max: 19
+    })
+  ],
+  name: validator('presence', true)
+});
+
+export default Ember.Component.extend(Validations, {
   store: Ember.inject.service(),
 
+  uid: null,
+  name: null,
   user: null,
   users: [],
   model: null,
@@ -14,44 +32,46 @@ export default Ember.Component.extend({
   didReceiveAttrs() {
     this._super(...arguments);
 
-    this.set('currentUser', this.get('currentUser'));
+    this.searchRole();
   },
 
-  searchUser(query) {
-    this.set('users', this.get('store').query('user', { query: query, registry: true, 'page[size]': 25 }));
-  },
-  selectUser(user) {
-    let self = this;
-    this.get('store').findRecord('user', user.id, { reload: true, registry: true, include: 'role,client,provider,sandbox' }).then(function(user) {
-      self.set('user', user);
-      self.searchRole();
+  findUser(uid) {
+    this.set('uid', uid);
 
-      // if (!user.get('isActive') || this.get('currentUser').get('isAdmin')) {
-      //   self.set('disabled', false);
-      // }
-      self.set('disabled', false);
+    if (this.get('validations.attrs.uid.isValid')) {
+      let self = this;
+      this.get('store').findRecord('user', uid, { include: 'provider,client,role,sandbox' }).then(function(user) {
+        self.set('user', user);
+        self.set('disabled', false);
+        self.set('name', user.get('name'));
 
-      if (self.get('model.client')) {
-        self.get('store').findRecord('role', 'client_user').then(function(role) {
-          self.selectRole(role);
-          self.get('user').set('role', role);
-          self.get('user').set('client', self.get('model.client'));
-          self.get('user').set('provider', self.get('model.provider'));
-        });
-      } else if (self.get('model.provider')) {
-        self.get('store').findRecord('role', 'provider_user').then(function(role) {
-          self.selectRole(role);
-          self.get('user').set('role', role);
-          self.get('user').set('provider', self.get('model.provider'));
-        });
-      } else {
-        self.selectRole(user.get('role'));
-        self.selectClient(user.get('client'));
+        if (self.get('model.client')) {
+          self.get('store').findRecord('role', 'client_user').then(function(role) {
+            self.selectRole(role);
+            self.get('user').set('role', role);
+            self.get('user').set('client', self.get('model.client'));
+            self.get('user').set('provider', self.get('model.provider'));
+          });
+        } else if (self.get('model.provider')) {
+          self.get('store').findRecord('role', 'provider_user').then(function(role) {
+            self.selectRole(role);
+            self.get('user').set('role', role);
+            self.get('user').set('provider', self.get('model.provider'));
+          });
+        } else {
+          self.selectRole(user.get('role'));
+          self.selectClient(user.get('client'));
 
-        this.searchProvider(null);
-        self.selectProvider(user.get('provider'));
-      }
-    });
+          self.searchProvider(null);
+          self.selectProvider(user.get('provider'));
+        }
+      }).catch(function(reason){
+        Ember.Logger.assert(false, reason);
+        self.set('name', null);
+      });
+    } else {
+      this.set('name', null);
+    }
   },
   searchRole() {
     if (this.get('model.client')) {
@@ -74,7 +94,7 @@ export default Ember.Component.extend({
     this.get('user').set('provider', provider);
 
     if (provider) {
-      this.set('clients', this.get('store').query('client', { sort: 'name', 'provider-id': this.get('provider').get('id'), 'page[size]': 10 }));
+      this.set('clients', this.get('store').query('client', { sort: 'name', 'provider-id': provider.id, 'page[size]': 25 }));
       this.selectClient(this.get('user').get('client'));
     } else {
       this.set('clients', []);
@@ -82,7 +102,7 @@ export default Ember.Component.extend({
     }
   },
   searchClient(query) {
-    this.set('clients', this.get('store').query('client', { 'query': query, sort: 'name', 'provider-id': this.get('provider').get('id'), 'page[size]': 10 }));
+    this.set('clients', this.get('store').query('client', { 'query': query, sort: 'name', 'provider-id': this.get('model.provider').get('id'), 'page[size]': 25 }));
   },
   selectClient(client) {
     this.set('client', client);
@@ -96,12 +116,6 @@ export default Ember.Component.extend({
   },
 
   actions: {
-    selectUser(user) {
-      this.selectUser(user);
-    },
-    searchUser(query) {
-      this.searchUser(query);
-    },
     searchRole() {
       this.searchRole();
     },
@@ -119,6 +133,9 @@ export default Ember.Component.extend({
     },
     selectClient(client) {
       this.selectClient(client);
+    },
+    findUser(uid) {
+      this.findUser(uid);
     },
     submit() {
       let self = this;

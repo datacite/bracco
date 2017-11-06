@@ -23,6 +23,7 @@
     "babylon": "^6.17.4",
     "bootstrap": "^3.3.7",
     "broccoli-asset-rev": "^2.4.5",
+    "checkdigit": "^1.1.1",
     "d3": "^3.5.5",
     "d3-tip": "^0.7.1",
     "electron-compile": "^6.4.2",

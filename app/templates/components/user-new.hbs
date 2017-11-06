@@ -5,12 +5,9 @@
 
         <h3 class="edit">{{if user.created "Edit User" "Add User"}}</h3>
 
-        {{#bs-form formLayout="vertical" model=this as |form|}}
-          {{#form.element controlType="power-select" property="user" label="User" optionLabelPath="name" options=users destination=user as |el|}}
-            {{#el.control onChange=(action "selectUser") search=(action "searchUser") searchField="name" allowClear=true as |item|}}
-              {{item.name}}
-            {{/el.control}}
-          {{/form.element}}
+        {{#bs-form formLayout="vertical" model=this onSubmit=(action "submit") as |form|}}
+          {{form.element controlType="text" onChange=(action "findUser") label="ORCID ID" placeholder="ORCID ID" property="uid" destination=uid helpText='The ORCID ID is a 16 digit nonproprietary alphanumeric code to uniquely identify scientific and other academic authors and contributors.' useIcons=false required=false}}
+          {{form.element controlType="text" label="Name" placeholder="Name" property="name" helpText='Read-only, the name associated with the ORCID ID above.' required=false readonly=true}}
 
           {{#if (and user (can "create user" user))}}
             {{#form.element controlType="power-select" property="role" label="Role" optionLabelPath="name" options=roles destination=role as |el|}}
