@@ -9,6 +9,13 @@ export default Ember.Component.extend({
   role: null,
   provider: null,
   client: null,
+  disabled: true,
+
+  didReceiveAttrs() {
+    this._super(...arguments);
+
+    this.set('currentUser', this.get('currentUser'));
+  },
 
   searchUser(query) {
     this.set('users', this.get('store').query('user', { query: query, registry: true, 'page[size]': 25 }));
@@ -18,6 +25,10 @@ export default Ember.Component.extend({
     this.get('store').findRecord('user', user.id, { reload: true, registry: true, include: 'role,client,provider,sandbox' }).then(function(user) {
       self.set('user', user);
       self.searchRole();
+
+      if (!user.get('isActive') || this.get('currentUser').get('isAdmin')) {
+        self.set('disabled', false);
+      }
 
       if (self.get('model.client')) {
         self.get('store').findRecord('role', 'client_user').then(function(role) {

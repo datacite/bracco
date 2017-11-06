@@ -8,6 +8,9 @@
         <div class="panel-body">
           <h3 class="work">{{#link-to "users.show" user.id}}{{user.name}}{{/link-to}}</h3>
 
+          <h5>ORCID ID</h5>
+          <a href="{{user.identifier}}">{{user.identifier}}</a>
+
           {{#if user.email}}
             <h5>Email</h5>
             <a href="mailto:{{user.email}}">{{user.email}}</a>
