@@ -26,9 +26,10 @@ export default Ember.Component.extend({
       self.set('user', user);
       self.searchRole();
 
-      if (!user.get('isActive') || this.get('currentUser').get('isAdmin')) {
-        self.set('disabled', false);
-      }
+      // if (!user.get('isActive') || this.get('currentUser').get('isAdmin')) {
+      //   self.set('disabled', false);
+      // }
+      self.set('disabled', false);
 
       if (self.get('model.client')) {
         self.get('store').findRecord('role', 'client_user').then(function(role) {
