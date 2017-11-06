@@ -164,7 +164,6 @@
           <div class="panel-body">
             <div class="btn-toolbar">
               <div class="btn-group btn-group-sm">
-                {{log media}}
                 <button {{action "edit" model}} class="btn btn-warning">{{fa-icon "pencil"}}Edit{{if media.isXl ' Client'}}</button>
                 {{#if (can "delete client" model)}}
                   <button {{action "delete" model}} class="btn btn-warning">{{fa-icon "trash"}}Delete{{if media.isXl ' Client'}}</button>
