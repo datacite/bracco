@@ -12,6 +12,7 @@ export default Ember.Route.extend(CanMixin, RouteMixin, {
     } else if (params['provider-id']) {
       return Ember.RSVP.hash({
         provider: this.store.findRecord('provider', params['provider-id']),
+        client: null
       });
     }
   }
