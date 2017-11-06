@@ -8,23 +8,12 @@ export default Ember.Component.extend({
   provider: null,
   client: null,
   link: null,
-  isAdmin: false,
-  isProvider: false,
-  isClient: false,
 
   didReceiveAttrs() {
     this._super(...arguments);
 
     this.set('provider', this.get('model.provider'));
     this.set('client', this.get('model.client'));
-
-    if (this.get('currentUser').get('isAdmin')) {
-      this.set('isAdmin', true);
-    } else if (this.get('currentUser').get('isProvider')) {
-      this.set('isProvider', true);
-    } else if (this.get('currentUser').get('isClient')) {
-      this.set('isClient', true);
-    }
 
     this.searchUser(null);
     this.searchRole();
@@ -114,19 +103,13 @@ export default Ember.Component.extend({
       let self = this;
       if (this.get('client')) {
         this.get('user').set('client', this.get('client'));
-        this.get('user').save().then(function(user) {
-          self.get('router').transitionTo('users.show', user.id);
-        });
-      } else if (this.get('provider')) {
-        this.get('user').set('provider', this.get('provider'));
-        this.get('user').save().then(function(user) {
-          self.get('router').transitionTo('users.show', user.id);
-        });
-      } else {
-        this.get('user').save().then(function(user) {
-          self.get('router').transitionTo('users.show', user.id);
-        });
       }
+      if (this.get('provider')) {
+        this.get('user').set('provider', this.get('provider'));
+      }
+      this.get('user').save().then(function(user) {
+        self.get('router').transitionTo('users.show', user.id);
+      });
     },
     cancel() {
       if (this.get('client')) {
