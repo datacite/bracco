@@ -50,12 +50,11 @@ export default Ember.Component.extend({
     this.get('user').set('provider', provider);
 
     if (provider) {
-      this.set('clients', this.get('store').query('client', { sort: 'name', 'provider-id': this.get('provider').get('id'), 'page[size]': 10 }));
-      this.selectClient(this.get('user').get('client'));
+      this.set('clients', this.get('store').query('client', { sort: 'name', 'provider-id': this.get('provider').get('id'), 'page[size]': 25 }));
     } else {
       this.set('clients', []);
-      this.selectClient(null);
     }
+    this.selectClient(null);
   },
   selectClient(client) {
     this.set('client', client)

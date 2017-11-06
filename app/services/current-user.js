@@ -52,7 +52,6 @@ export default Ember.Service.extend({
 
       if (Ember.isPresent(result)) {
         self.set('uid', result.uid);
-
         self.set('name', result.name);
         self.set('email', result.email);
 
@@ -76,12 +75,15 @@ export default Ember.Service.extend({
         if (['staff_admin', 'staff_user'].includes(result.role_id)) {
           self.set('isAdmin', true);
           self.set('role_id', result.role_id);
+          self.set('provider_id', result.provider_id);
+          self.set('client_id', result.client_id);
           self.set('home', '/');
           if (self.get('apiIsAvailable')) {
             self.get('flashMessages').info('Welcome ' + result.name + ' to the DataCite Administration area.');
           }
         } else if (['provider_admin', 'provider_user'].includes(result.role_id) && result.provider_id) {
           self.set('provider_id', result.provider_id);
+          self.set('client_id', result.client_id);
           self.get('store').findRecord('provider', result.provider_id).then(function(provider) {
             let isProvider = provider.get('isActive');
             self.set('isProvider', isProvider);

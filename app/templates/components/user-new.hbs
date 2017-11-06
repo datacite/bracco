@@ -19,7 +19,7 @@
               {{/el.control}}
             {{/form.element}}
 
-            {{#if isAdmin}}
+            {{#if (not model.provider)}}
               {{#form.element controlType="power-select" property="provider" label="Provider" optionLabelPath="name" options=providers destination=provider as |el|}}
                 {{#el.control onChange=(action "selectProvider") search=(action "searchProvider") searchField="name" allowClear=true as |item|}}
                   {{item.name}}
@@ -27,7 +27,7 @@
               {{/form.element}}
             {{/if}}
 
-            {{#if (not isClient)}}
+            {{#if (not model.client)}}
               {{#form.element controlType="power-select" property="client" label="Client" optionLabelPath="name" options=clients destination=client as |el|}}
                 {{#el.control onChange=(action "selectClient") search=(action "searchClient") searchField="name" allowClear=true as |item|}}
                   {{item.name}}
