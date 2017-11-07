@@ -17,7 +17,7 @@ test('it renders one author', function(assert) {
 
   this.render(hbs`{{format-author authors}}`);
 
-  assert.equal(this.$().text().trim(), '<a href="https://orcid.org/0000-0002-2822-4968">Mitesh Patel</a>');
+  assert.equal(this.$().text().trim(), '<a href="/users/0000-0002-2822-4968">Mitesh Patel</a>');
 });
 
 test('it renders three authors', function(assert) {
