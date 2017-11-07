@@ -99,7 +99,7 @@
               <div class="btn-group btn-group-sm">
                 <button {{action "edit" model}} class="btn btn-warning">{{fa-icon "pencil"}}Edit{{#if (and admin media.isXl)}} Admin{{else if media.isXl}} Provider{{/if}}</button>
                 {{#if (and (not admin) (can "delete provider" model))}}
-                  <button {{action "delete" model}} class="btn btn-warning">{{fa-icon "trash"}}Delete{{#if media.isXl}} Provider{{/if}}</button>
+                  <button {{action "delete" model}} class="btn btn-warning">{{fa-icon "trash"}}Delete{{if media.isXl ' Provider'}}</button>
                 {{/if}}
               </div>
             </div>
