@@ -12,7 +12,7 @@ export default Ember.Component.extend({
     if (this.get('currentUser').get('isAdmin')) {
       this.set('clients', this.get('store').query('client', { 'query': query, sort: 'name', 'page[size]': 25 }));
     } else if (this.get('currentUser').get('isProvider')) {
-      this.set('clients', this.get('store').query('client', { 'query': query, 'provider-id': this.get('currentUser').get('providerId'), sort: 'name', 'page[size]': 25 }));
+      this.set('clients', this.get('store').query('client', { 'query': query, 'provider-id': this.get('currentUser').get('provider_id'), sort: 'name', 'page[size]': 25 }));
     }
   },
   selectClient(client) {
@@ -24,6 +24,7 @@ export default Ember.Component.extend({
   actions: {
     edit: function(doi) {
       this.set('doi', doi);
+      this.searchClient(null);
       this.set('edit', true);
     },
     searchClient(query) {
