@@ -40,7 +40,6 @@ Router.map(function() {
     this.route('new');
   });
   this.route('prefixes', function() {
-    this.route('show', { path: '/:prefix_id' });
     this.route('new');
   });
   this.route('provider-prefixes', function() {
