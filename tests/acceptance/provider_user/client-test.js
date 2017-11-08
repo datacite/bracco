@@ -3,14 +3,13 @@ import { test } from 'qunit';
 import moduleForAcceptance from 'bracco/tests/helpers/module-for-acceptance';
 import ENV from 'bracco/config/environment';
 
-moduleForAcceptance('Acceptance | client_admin | client', {
+moduleForAcceptance('Acceptance | provider_admin | client', {
   beforeEach: function () {
     this.application.register('service:mock-user', Ember.Service.extend({
       uid: (ENV.USER_API_URL === "https://profiles.datacite.org/api") ? '0000-0002-1825-0097' : '0000-0001-5489-3594',
       name: 'Josiah Carberry',
-      role_id: 'client_admin',
-      provider_id: 'tib',
-      client_id: 'tib.awi'
+      role_id: 'provider_user',
+      provider_id: 'tib'
     }));
     this.application.inject('adapter', 'currentUser', 'service:mock-user');
     this.application.inject('ability', 'currentUser', 'service:mock-user');

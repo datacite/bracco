@@ -1,11 +1,12 @@
 import Ember from 'ember';
 import { test } from 'qunit';
 import moduleForAcceptance from 'bracco/tests/helpers/module-for-acceptance';
+import ENV from 'bracco/config/environment';
 
 moduleForAcceptance('Acceptance | user | admin', {
   beforeEach: function () {
     this.application.register('service:mock-user', Ember.Service.extend({
-      uid: '0000-0001-5489-3594',
+      uid: (ENV.USER_API_URL === "https://profiles.datacite.org/api") ? '0000-0002-1825-0097' : '0000-0001-5489-3594',
       name: 'Josiah Carberry',
       role_id: 'user'
     }));
@@ -108,8 +109,8 @@ test('visiting dois', function(assert) {
   });
 });
 
-test('visiting doi 10.5438/53nz-n4g7', function(assert) {
-  visit('/dois/10.5438%2F53nz-n4g7');
+test('visiting specific doi', function(assert) {
+  visit('/dois/10.5520%2Fsagecite-1');
 
   andThen(function() {
     assert.equal(currentURL(), '/');

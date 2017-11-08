@@ -3,12 +3,14 @@ import { test } from 'qunit';
 import moduleForAcceptance from 'bracco/tests/helpers/module-for-acceptance';
 import ENV from 'bracco/config/environment';
 
-moduleForAcceptance('Acceptance | staff_admin | admin', {
+moduleForAcceptance('Acceptance | client_admin | admin', {
   beforeEach: function () {
     this.application.register('service:mock-user', Ember.Service.extend({
       uid: (ENV.USER_API_URL === "https://profiles.datacite.org/api") ? '0000-0002-1825-0097' : '0000-0001-5489-3594',
       name: 'Josiah Carberry',
-      role_id: 'staff_admin'
+      role_id: 'client_user',
+      provider_id: 'tib',
+      client_id: 'tib.awi'
     }));
     this.application.inject('adapter', 'currentUser', 'service:mock-user');
     this.application.inject('ability', 'currentUser', 'service:mock-user');
@@ -23,7 +25,7 @@ test('visiting homepage', function(assert) {
 
   andThen(function() {
     assert.equal(currentURL(), '/');
-    assert.equal(find('div.panel-title h2').text(), 'DataCite');
+    assert.equal(find('div.motto h1').text(), 'DataCite DOI Fabrica');
   });
 });
 
@@ -32,8 +34,8 @@ test('visiting settings', function(assert) {
   visit('/settings');
 
   andThen(function() {
-    assert.equal(currentURL(), '/settings');
-    assert.equal(find('div.panel-title h2').text(), 'DataCite');
+    assert.equal(currentURL(), '/');
+    assert.equal(find('div.motto h1').text(), 'DataCite DOI Fabrica');
   });
 });
 
@@ -41,8 +43,8 @@ test('visiting providers', function(assert) {
   visit('/providers');
 
   andThen(function() {
-    assert.equal(currentURL(), '/providers');
-    assert.equal(find('div.panel-title h2').text(), 'DataCite');
+    assert.equal(currentURL(), '/');
+    assert.equal(find('div.motto h1').text(), 'DataCite DOI Fabrica');
   });
 });
 
@@ -50,8 +52,8 @@ test('visiting clients', function(assert) {
   visit('/clients');
 
   andThen(function() {
-    assert.equal(currentURL(), '/clients');
-    assert.equal(find('div.panel-title h2').text(), 'DataCite');
+    assert.equal(currentURL(), '/');
+    assert.equal(find('div.motto h1').text(), 'DataCite DOI Fabrica');
   });
 });
 
@@ -59,8 +61,8 @@ test('visiting users', function(assert) {
   visit('/users');
 
   andThen(function() {
-    assert.equal(currentURL(), '/users');
-    assert.equal(find('div.panel-title h2').text(), 'DataCite');
+    assert.equal(currentURL(), '/');
+    assert.equal(find('div.motto h1').text(), 'DataCite DOI Fabrica');
   });
 });
 
@@ -77,8 +79,8 @@ test('visiting user 0000-0001-6528-2027', function(assert) {
   visit('/users/0000-0001-6528-2027');
 
   andThen(function() {
-    assert.equal(currentURL(), '/users/0000-0001-6528-2027');
-    assert.equal(find('div.panel-title h2').text(), 'Martin Fenner');
+    assert.equal(currentURL(), '/');
+    assert.equal(find('div.motto h1').text(), 'DataCite DOI Fabrica');
   });
 });
 
@@ -86,8 +88,8 @@ test('visiting prefixes', function(assert) {
   visit('/prefixes');
 
   andThen(function() {
-    assert.equal(currentURL(), '/prefixes');
-    assert.equal(find('div.panel-title h2').text(), 'DataCite');
+    assert.equal(currentURL(), '/');
+    assert.equal(find('div.motto h1').text(), 'DataCite DOI Fabrica');
   });
 });
 
@@ -104,16 +106,36 @@ test('visiting dois', function(assert) {
   visit('/dois');
 
   andThen(function() {
-    assert.equal(currentURL(), '/dois');
-    assert.equal(find('div.panel-title h2').text(), 'DataCite');
+    assert.equal(currentURL(), '/');
+    assert.equal(find('div.motto h1').text(), 'DataCite DOI Fabrica');
   });
 });
 
 test('visiting specific doi', function(assert) {
-  visit('/dois/10.1594%2Fwdcc%2Fclm_c20_3_d3');
+  let doi = (ENV.USER_API_URL === "https://profiles.datacite.org/api") ? '10.5517/ccdc.csd.cc1pl0dp' : '10.5438%2F53nz-n4g7';
+
+  visit('/dois/' + doi);
 
   andThen(function() {
-    assert.equal(currentURL(), '/dois/10.1594%2Fwdcc%2Fclm_c20_3_d3');
-    assert.equal(find('h2.work').text(), '10.1594/wdcc/clm_c20_3_d3');
+    assert.equal(currentURL(), '/');
+    assert.equal(find('div.motto h1').text(), 'DataCite DOI Fabrica');
+  });
+});
+
+test('visiting specific doi not managed by client', function(assert) {
+  visit('/dois/10.5520%2Fsagecite-1');
+
+  andThen(function() {
+    assert.equal(currentURL(), '/');
+    assert.equal(find('div.motto h1').text(), 'DataCite DOI Fabrica');
+  });
+});
+
+test('visiting specific doi managed by client', function(assert) {
+  visit('/dois/10.2312/cr_m84_4');
+
+  andThen(function() {
+    assert.equal(currentURL(), '/dois/10.2312%2Fcr_m84_4');
+    assert.equal(find('h2.work').text(), '10.2312/cr_m84_4');
   });
 });

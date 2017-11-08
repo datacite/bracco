@@ -8,7 +8,7 @@ moduleForAcceptance('Acceptance | client_admin | client', {
     this.application.register('service:mock-user', Ember.Service.extend({
       uid: (ENV.USER_API_URL === "https://profiles.datacite.org/api") ? '0000-0002-1825-0097' : '0000-0001-5489-3594',
       name: 'Josiah Carberry',
-      role_id: 'client_admin',
+      role_id: 'client_user',
       provider_id: 'tib',
       client_id: 'tib.awi'
     }));

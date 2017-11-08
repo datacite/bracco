@@ -85,8 +85,8 @@ test('visiting dois', function(assert) {
   });
 });
 
-test('visiting doi 10.5438/53nz-n4g7', function(assert) {
-  visit('/dois/10.5438%2F53nz-n4g7');
+test('visiting specific doi', function(assert) {
+  visit('/dois/10.5520%2Fsagecite-1');
 
   andThen(function() {
     assert.equal(currentURL(), '/');

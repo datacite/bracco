@@ -3,12 +3,14 @@ import { test } from 'qunit';
 import moduleForAcceptance from 'bracco/tests/helpers/module-for-acceptance';
 import ENV from 'bracco/config/environment';
 
-moduleForAcceptance('Acceptance | user | client', {
+moduleForAcceptance('Acceptance | client_admin | provider', {
   beforeEach: function () {
     this.application.register('service:mock-user', Ember.Service.extend({
       uid: (ENV.USER_API_URL === "https://profiles.datacite.org/api") ? '0000-0002-1825-0097' : '0000-0001-5489-3594',
       name: 'Josiah Carberry',
-      role_id: 'user'
+      role_id: 'client_user',
+      provider_id: 'tib',
+      client_id: 'tib.awi'
     }));
     this.application.inject('adapter', 'currentUser', 'service:mock-user');
     this.application.inject('ability', 'currentUser', 'service:mock-user');
@@ -18,8 +20,8 @@ moduleForAcceptance('Acceptance | user | client', {
   }
 });
 
-test('visiting client AWI', function(assert) {
-  visit('/clients/tib.awi');
+test('visiting provider TIB settings', function(assert) {
+  visit('/providers/tib/settings');
 
   andThen(function() {
     assert.equal(currentURL(), '/');
@@ -27,8 +29,8 @@ test('visiting client AWI', function(assert) {
   });
 });
 
-test('visiting client AWI settings', function(assert) {
-  visit('/clients/tib.awi/settings');
+test('visiting provider TIB users', function(assert) {
+  visit('/providers/tib/users');
 
   andThen(function() {
     assert.equal(currentURL(), '/');
@@ -36,8 +38,8 @@ test('visiting client AWI settings', function(assert) {
   });
 });
 
-test('visiting client AWI users', function(assert) {
-  visit('/clients/tib.awi/users');
+test('visiting provider TIB clients', function(assert) {
+  visit('/providers/tib/clients');
 
   andThen(function() {
     assert.equal(currentURL(), '/');
@@ -45,8 +47,8 @@ test('visiting client AWI users', function(assert) {
   });
 });
 
-test('visiting client AWI prefixes', function(assert) {
-  visit('/clients/tib.awi/prefixes');
+test('visiting provider TIB prefixes', function(assert) {
+  visit('/providers/tib/prefixes');
 
   andThen(function() {
     assert.equal(currentURL(), '/');
@@ -54,8 +56,8 @@ test('visiting client AWI prefixes', function(assert) {
   });
 });
 
-test('visiting client AWI dois', function(assert) {
-  visit('/clients/tib.awi/dois');
+test('visiting provider TIB dois', function(assert) {
+  visit('/providers/tib/dois');
 
   andThen(function() {
     assert.equal(currentURL(), '/');

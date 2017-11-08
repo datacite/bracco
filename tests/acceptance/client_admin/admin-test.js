@@ -1,11 +1,12 @@
 import Ember from 'ember';
 import { test } from 'qunit';
 import moduleForAcceptance from 'bracco/tests/helpers/module-for-acceptance';
+import ENV from 'bracco/config/environment';
 
 moduleForAcceptance('Acceptance | client_admin | admin', {
   beforeEach: function () {
     this.application.register('service:mock-user', Ember.Service.extend({
-      uid: '0000-0001-5489-3594',
+      uid: (ENV.USER_API_URL === "https://profiles.datacite.org/api") ? '0000-0002-1825-0097' : '0000-0001-5489-3594',
       name: 'Josiah Carberry',
       role_id: 'client_admin',
       provider_id: 'tib',
@@ -110,11 +111,31 @@ test('visiting dois', function(assert) {
   });
 });
 
-test('visiting doi 10.5438/53nz-n4g7', function(assert) {
-  visit('/dois/10.5438%2F53nz-n4g7');
+test('visiting specific doi', function(assert) {
+  let doi = (ENV.USER_API_URL === "https://profiles.datacite.org/api") ? '10.5517/ccdc.csd.cc1pl0dp' : '10.5438%2F53nz-n4g7';
+
+  visit('/dois/' + doi);
 
   andThen(function() {
     assert.equal(currentURL(), '/');
     assert.equal(find('div.motto h1').text(), 'DataCite DOI Fabrica');
+  });
+});
+
+test('visiting specific doi not managed by client', function(assert) {
+  visit('/dois/10.5520%2Fsagecite-1');
+
+  andThen(function() {
+    assert.equal(currentURL(), '/');
+    assert.equal(find('div.motto h1').text(), 'DataCite DOI Fabrica');
+  });
+});
+
+test('visiting specific doi managed by client', function(assert) {
+  visit('/dois/10.2312/cr_m84_4');
+
+  andThen(function() {
+    assert.equal(currentURL(), '/dois/10.2312%2Fcr_m84_4');
+    assert.equal(find('h2.work').text(), '10.2312/cr_m84_4');
   });
 });
