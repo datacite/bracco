@@ -10,7 +10,6 @@ const Validations = buildValidations({
 
 export default Ember.Component.extend(Validations, {
   store: Ember.inject.service(),
-  flashMessages: Ember.inject.service(),
 
   edit: false,
   delete: false,
@@ -26,15 +25,19 @@ export default Ember.Component.extend(Validations, {
   actions: {
     edit: function(provider) {
       this.set('provider', provider);
+      this.get('provider').set('confirmSymbol', provider.get('symbol'));
       this.set('edit', true);
     },
     delete: function(provider) {
       this.set('provider', provider);
+      this.get('provider').set('confirmSymbol', null);
       this.set('delete', true);
     },
     submit: function() {
-      this.get('provider').save();
-      this.reset();
+      let self = this;
+      this.get('provider').save().then(function () {
+        self.reset();
+      });
     },
     destroy: function(provider) {
       if (this.get('confirmId') === provider.get('symbol')) {

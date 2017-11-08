@@ -18,7 +18,7 @@
             {{form.element controlType="email" label="Contact Email" placeholder="Contact Email" property="contactEmail" required=false}}
             {{form.element controlType="textarea" label="Domains" placeholder="Domains" property="domains" required=false helpText='List of (sub-)domains used for DOI registration, or use * to allow all domains'}}
             {{form.element controlType="checkbox" label="Account is active" property="isActive" helpText='This account can register and update DOIs'}}
-
+            
             <div class="pseudo-footer">
               <div class="btn-toolbar pull-right">
                 <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
@@ -127,6 +127,11 @@
           {{#if model.repository.description}}
             <h5>Description</h5>
             {{model.repository.description}}
+          {{/if}}
+
+          {{#if model.contactName}}
+            <h5>Contact Name</h5>
+            {{model.contactName}}
           {{/if}}
 
           {{#if model.contactEmail}}

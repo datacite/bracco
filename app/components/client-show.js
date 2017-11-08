@@ -47,8 +47,10 @@ export default Ember.Component.extend({
       this.selectRepository(repository);
     },
     submit: function(client) {
-      client.save();
-      this.reset();
+      let self = this;
+      client.save().then(function () {
+        self.reset();
+      });
     },
     destroy: function(client) {
       let self = this;
