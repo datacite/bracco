@@ -2,12 +2,13 @@ import Ember from 'ember';
 import { test } from 'qunit';
 import moduleForAcceptance from 'bracco/tests/helpers/module-for-acceptance';
 
-moduleForAcceptance('Acceptance | staff_admin | admin', {
+moduleForAcceptance('Acceptance | provider_admin | admin', {
   beforeEach: function () {
     this.application.register('service:mock-user', Ember.Service.extend({
       uid: '0000-0001-5489-3594',
       name: 'Josiah Carberry',
-      role_id: 'staff_admin'
+      role_id: 'provider_admin',
+      provider_id: 'tib'
     }));
     this.application.inject('adapter', 'currentUser', 'service:mock-user');
     this.application.inject('ability', 'currentUser', 'service:mock-user');
@@ -22,7 +23,7 @@ test('visiting homepage', function(assert) {
 
   andThen(function() {
     assert.equal(currentURL(), '/');
-    assert.equal(find('div.panel-title h2').text(), 'DataCite');
+    assert.equal(find('div.motto h1').text(), 'DataCite DOI Fabrica');
   });
 });
 
@@ -31,8 +32,8 @@ test('visiting settings', function(assert) {
   visit('/settings');
 
   andThen(function() {
-    assert.equal(currentURL(), '/settings');
-    assert.equal(find('div.panel-title h2').text(), 'DataCite');
+    assert.equal(currentURL(), '/');
+    assert.equal(find('div.motto h1').text(), 'DataCite DOI Fabrica');
   });
 });
 
@@ -40,8 +41,8 @@ test('visiting providers', function(assert) {
   visit('/providers');
 
   andThen(function() {
-    assert.equal(currentURL(), '/providers');
-    assert.equal(find('div.panel-title h2').text(), 'DataCite');
+    assert.equal(currentURL(), '/');
+    assert.equal(find('div.motto h1').text(), 'DataCite DOI Fabrica');
   });
 });
 
@@ -49,8 +50,8 @@ test('visiting clients', function(assert) {
   visit('/clients');
 
   andThen(function() {
-    assert.equal(currentURL(), '/clients');
-    assert.equal(find('div.panel-title h2').text(), 'DataCite');
+    assert.equal(currentURL(), '/');
+    assert.equal(find('div.motto h1').text(), 'DataCite DOI Fabrica');
   });
 });
 
@@ -58,8 +59,8 @@ test('visiting users', function(assert) {
   visit('/users');
 
   andThen(function() {
-    assert.equal(currentURL(), '/users');
-    assert.equal(find('div.panel-title h2').text(), 'DataCite');
+    assert.equal(currentURL(), '/');
+    assert.equal(find('div.motto h1').text(), 'DataCite DOI Fabrica');
   });
 });
 
@@ -76,8 +77,8 @@ test('visiting user 0000-0001-6528-2027', function(assert) {
   visit('/users/0000-0001-6528-2027');
 
   andThen(function() {
-    assert.equal(currentURL(), '/users/0000-0001-6528-2027');
-    assert.equal(find('div.panel-title h2').text(), 'Martin Fenner');
+    assert.equal(currentURL(), '/');
+    assert.equal(find('div.motto h1').text(), 'DataCite DOI Fabrica');
   });
 });
 
@@ -85,8 +86,8 @@ test('visiting prefixes', function(assert) {
   visit('/prefixes');
 
   andThen(function() {
-    assert.equal(currentURL(), '/prefixes');
-    assert.equal(find('div.panel-title h2').text(), 'DataCite');
+    assert.equal(currentURL(), '/');
+    assert.equal(find('div.motto h1').text(), 'DataCite DOI Fabrica');
   });
 });
 
@@ -103,16 +104,16 @@ test('visiting dois', function(assert) {
   visit('/dois');
 
   andThen(function() {
-    assert.equal(currentURL(), '/dois');
-    assert.equal(find('div.panel-title h2').text(), 'DataCite');
+    assert.equal(currentURL(), '/');
+    assert.equal(find('div.motto h1').text(), 'DataCite DOI Fabrica');
   });
 });
 
-test('visiting doi 10.4124/ccdc.csd.cc1jhxvs', function(assert) {
-  visit('/dois/10.4124%2Fccdc.csd.cc1jhxvs');
+test('visiting doi 10.5438/53nz-n4g7', function(assert) {
+  visit('/dois/10.5438%2F53nz-n4g7');
 
   andThen(function() {
-    assert.equal(currentURL(), '/dois/10.4124%2Fccdc.csd.cc1jhxvs');
-    assert.equal(find('h2.work').text(), '10.4124/ccdc.csd.cc1jhxvs');
+    assert.equal(currentURL(), '/');
+    assert.equal(find('div.motto h1').text(), 'DataCite DOI Fabrica');
   });
 });
