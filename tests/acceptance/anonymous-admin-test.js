@@ -9,7 +9,6 @@ test('visiting homepage', function(assert) {
   andThen(function() {
     assert.equal(currentURL(), '/');
     assert.equal(find('div.motto h1').text(), 'DataCite DOI Fabrica');
-    // assert.equal(find('ul.share li:first').text(), 'Terms and conditions');
   });
 });
 
