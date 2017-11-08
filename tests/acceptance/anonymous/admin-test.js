@@ -49,8 +49,10 @@ test('visiting users', function(assert) {
   });
 });
 
-test('visiting user 0000-0001-6528-2027', function(assert) {
-  visit('/users/0000-0001-6528-2027');
+test('visiting specific user', function(assert) {
+  let uid = (ENV.USER_API_URL === "https://profiles.datacite.org/api") ? '0000-0003-1419-2405' : '0000-0001-6528-2027';
+
+  visit('/users/' + uid);
 
   andThen(function() {
     assert.equal(currentURL(), '/');

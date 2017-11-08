@@ -67,16 +67,20 @@ test('visiting users', function(assert) {
 });
 
 test('visiting personal settings', function(assert) {
-  visit('/users/0000-0001-5489-3594');
+  let uid = (ENV.USER_API_URL === "https://profiles.datacite.org/api") ? '0000-0002-1825-0097' : '0000-0001-5489-3594';
+
+  visit('/users/' + uid);
 
   andThen(function() {
-    assert.equal(currentURL(), '/users/0000-0001-5489-3594');
+    assert.equal(currentURL(), '/users/' + uid);
     assert.equal(find('div.panel-title h2').text(), 'Josiah Carberry');
   });
 });
 
-test('visiting user 0000-0001-6528-2027', function(assert) {
-  visit('/users/0000-0001-6528-2027');
+test('visiting specific user', function(assert) {
+  let uid = (ENV.USER_API_URL === "https://profiles.datacite.org/api") ? '0000-0003-1419-2405' : '0000-0001-6528-2027';
+
+  visit('/users/' + uid);
 
   andThen(function() {
     assert.equal(currentURL(), '/');
