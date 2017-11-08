@@ -17,8 +17,8 @@ export default Ember.Service.extend({
   jwt: null,
   name: null,
   email: null,
-  role: null,
   role_id: null,
+  roleName: null,
   provider_id: null,
   client_id: null,
   sandbox_id: null,
@@ -49,61 +49,41 @@ export default Ember.Service.extend({
 
     decoded.then(function(result) {
       if (Ember.isPresent(result)) {
-        self.get('store').findRecord('role', result.role_id).then(function(role) {
-          self.set('uid', result.uid);
-          self.set('name', result.name);
-          self.set('email', result.email);
-          self.set('role_id', result.role_id);
-          self.set('role', role);
-          self.set('isAuthenticated', true);
+        self.set('isAuthenticated', true);
+        self.set('uid', result.uid);
+        self.set('name', result.name);
+        self.set('email', result.email);
+        self.set('role_id', result.role_id);
+        self.set('roleName', result.role_id.split('_').map(item => item.capitalize()).join(' '));
+        self.set('provider_id', result.provider_id);
+        self.set('client_id', result.client_id);
 
-          // check role
-          if (['staff_admin', 'staff_user'].includes(result.role_id)) {
-            self.set('isAdmin', true);
-            self.set('provider_id', result.provider_id);
-            self.set('client_id', result.client_id);
-            self.set('home', '/');
-            self.get('flashMessages').info('Welcome ' + result.name + ' to the DataCite Administration area.');
-          } else if (['provider_admin', 'provider_user'].includes(result.role_id) && result.provider_id) {
-            self.set('provider_id', result.provider_id);
-            self.set('client_id', result.client_id);
-            self.get('store').findRecord('provider', result.provider_id).then(function(provider) {
-              self.set('isProvider', provider.get('isActive'));
-              self.set('home', '/providers/' + result.provider_id);
-              self.get('flashMessages').info('Welcome ' + result.name + ' to the ' + provider.get('name') + ' Administration area.');
-            }).catch(function(reason){
-              Ember.Logger.assert(false, reason);
-              self.get('flashMessages').warning('DOI Fabrica is currently unavailable due to a DataCite API problem. We apologize for the inconvenience and are working hard to restore the service. Please check back later or contact DataCite Support if you have a question.');
-              self.set('isAuthenticated', false);
-            });
-          } else if (['client_admin', 'client_user'].includes(result.role_id) && result.client_id) {
-            self.set('client_id', result.client_id);
-            self.get('store').findRecord('client', result.client_id).then(function(client) {
-              self.set('isClient', client.get('isActive'));
-              self.set('home', '/clients/' + result.client_id);
-              self.get('flashMessages').info('Welcome ' + result.name + ' to the ' + client.get('name') + ' Administration area.');
-            }).catch(function(reason){
-              Ember.Logger.assert(false, reason);
-              self.get('flashMessages').warning('DOI Fabrica is currently unavailable due to a DataCite API problem. We apologize for the inconvenience and are working hard to restore the service. Please check back later or contact DataCite Support if you have a question.');
-              self.set('isAuthenticated', false);
-            });
-          } else {
-            self.set('role_id', 'user');
-            self.set('home', '/users/' + result.uid);
-            self.get('flashMessages').info('Welcome ' + result.name + ' to your DOI Fabrica Personal area.');
-          }
-          if (result.sandbox_id) {
-            self.set('sandbox_id', result.sandbox_id);
-            self.set('sandbox', '/clients/' + result.sandbox_id);
-          }
-        }).catch(function(reason){
-          Ember.Logger.assert(false, reason);
-          self.get('flashMessages').warning('DOI Fabrica is currently unavailable due to a DataCite API problem. We apologize for the inconvenience and are working hard to restore the service. Please check back later or contact DataCite Support if you have a question.');
-        });
+        if (['staff_admin', 'staff_user'].includes(result.role_id)) {
+          self.set('isAdmin', true);
+          self.set('home', '/');
+          self.get('flashMessages').info('Welcome ' + result.name + ' to the DataCite Administration area.');
+        } else if (['provider_admin', 'provider_user'].includes(result.role_id) && result.provider_id) {
+          self.set('isProvider', true);
+          self.set('home', '/providers/' + result.provider_id);
+          self.get('flashMessages').info('Welcome ' + result.name + ' to the Provider Administration area.');
+        } else if (['client_admin', 'client_user'].includes(result.role_id) && result.client_id) {
+          self.set('isClient', true);
+          self.set('home', '/clients/' + result.client_id);
+          self.get('flashMessages').info('Welcome ' + result.name + ' to the Client Administration area.');
+        } else {
+          self.set('role_id', 'user');
+          self.set('role_name', 'User');
+          self.set('home', '/users/' + result.uid);
+          self.get('flashMessages').info('Welcome ' + result.name + ' to your DOI Fabrica Personal area.');
+        }
+
+        if (result.sandbox_id) {
+          self.set('sandbox_id', result.sandbox_id);
+          self.set('sandbox', '/clients/' + result.sandbox_id);
+        }
       }
     }, function(reason) {
       if (reason.message !== 'jwt must be provided') {
-        self.set('isAuthenticated', false);
         Ember.Logger.assert(false, reason);
       }
     });
