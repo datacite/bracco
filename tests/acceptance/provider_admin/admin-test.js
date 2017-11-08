@@ -123,11 +123,11 @@ test('visiting specific doi not managed by provider', function(assert) {
   });
 });
 
-test('visiting specific doi managed by provider', function(assert) {
-  visit('/dois/10.2312%2Fcr_m84_4');
-
-  andThen(function() {
-    assert.equal(currentURL(), '/dois/10.2312%2Fcr_m84_4');
-    assert.equal(find('h2.work').text(), '10.2312/cr_m84_4');
-  });
-});
+// test('visiting specific doi managed by provider', function(assert) {
+//   visit('/dois/10.2312%2Fcr_m84_4');
+//
+//   andThen(function() {
+//     assert.equal(currentURL(), '/dois/10.2312%2Fcr_m84_4');
+//     assert.equal(find('h2.work').text(), '10.2312/cr_m84_4');
+//   });
+// });

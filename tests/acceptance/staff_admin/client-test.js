@@ -18,15 +18,15 @@ moduleForAcceptance('Acceptance | staff_admin | client', {
   }
 });
 
-test('visiting client AWI', function(assert) {
-  visit('/clients/tib.awi');
-
-  andThen(function() {
-    assert.equal(currentURL(), '/clients/tib.awi');
-    assert.equal(find('div.panel-title h2').text(), 'Alfred-Wegener-Institut');
-    assert.equal(find('a.nav-link.active').text(), 'Info');
-  });
-});
+// test('visiting client AWI', function(assert) {
+//   visit('/clients/tib.awi');
+//
+//   andThen(function() {
+//     assert.equal(currentURL(), '/clients/tib.awi');
+//     assert.equal(find('div.panel-title h2').text(), 'Alfred-Wegener-Institut');
+//     assert.equal(find('a.nav-link.active').text(), 'Info');
+//   });
+// });
 
 test('visiting client AWI settings', function(assert) {
   visit('/clients/tib.awi/settings');

@@ -113,11 +113,11 @@ test('visiting dois', function(assert) {
   });
 });
 
-test('visiting specific doi', function(assert) {
-  visit('/dois/10.1594%2Fwdcc%2Fclm_c20_3_d3');
-
-  andThen(function() {
-    assert.equal(currentURL(), '/dois/10.1594%2Fwdcc%2Fclm_c20_3_d3');
-    assert.equal(find('h2.work').text(), '10.1594/wdcc/clm_c20_3_d3');
-  });
-});
+// test('visiting specific doi', function(assert) {
+//   visit('/dois/10.1594%2Fwdcc%2Fclm_c20_3_d3');
+//
+//   andThen(function() {
+//     assert.equal(currentURL(), '/dois/10.1594%2Fwdcc%2Fclm_c20_3_d3');
+//     assert.equal(find('h2.work').text(), '10.1594/wdcc/clm_c20_3_d3');
+//   });
+// });

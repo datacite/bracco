@@ -3,7 +3,7 @@ import { test } from 'qunit';
 import moduleForAcceptance from 'bracco/tests/helpers/module-for-acceptance';
 import ENV from 'bracco/config/environment';
 
-moduleForAcceptance('Acceptance | client_admin | client', {
+moduleForAcceptance('Acceptance | client_user | client', {
   beforeEach: function () {
     this.application.register('service:mock-user', Ember.Service.extend({
       uid: (ENV.USER_API_URL === "https://profiles.datacite.org/api") ? '0000-0002-1825-0097' : '0000-0001-5489-3594',
