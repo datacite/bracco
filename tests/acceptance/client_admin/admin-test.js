@@ -115,17 +115,6 @@ test('visiting dois', function(assert) {
   });
 });
 
-test('visiting specific doi', function(assert) {
-  let doi = (ENV.USER_API_URL === "https://profiles.datacite.org/api") ? '10.5517/ccdc.csd.cc1pl0dp' : '10.5438%2F53nz-n4g7';
-
-  visit('/dois/' + doi);
-
-  andThen(function() {
-    assert.equal(currentURL(), '/');
-    assert.equal(find('div.motto h1').text(), 'DataCite DOI Fabrica');
-  });
-});
-
 test('visiting specific doi not managed by client', function(assert) {
   visit('/dois/10.5520%2Fsagecite-1');
 
@@ -135,11 +124,11 @@ test('visiting specific doi not managed by client', function(assert) {
   });
 });
 
-test('visiting specific doi managed by client', function(assert) {
-  visit('/dois/10.2312%2Fcr_m84_4');
-
-  andThen(function() {
-    assert.equal(currentURL(), '/dois/10.2312%2Fcr_m84_4');
-    assert.equal(find('h2.work').text(), '10.2312/cr_m84_4');
-  });
-});
+// test('visiting specific doi managed by client', function(assert) {
+//   visit('/dois/10.2312%2Fcr_m84_4');
+//
+//   andThen(function() {
+//     assert.equal(currentURL(), '/dois/10.2312%2Fcr_m84_4');
+//     assert.equal(find('h2.work').text(), '10.2312/cr_m84_4');
+//   });
+// });
