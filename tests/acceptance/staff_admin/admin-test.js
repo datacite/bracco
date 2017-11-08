@@ -2,7 +2,7 @@ import Ember from 'ember';
 import { test } from 'qunit';
 import moduleForAcceptance from 'bracco/tests/helpers/module-for-acceptance';
 
-moduleForAcceptance('Acceptance | admin | admin', {
+moduleForAcceptance('Acceptance | staff_admin | admin', {
   beforeEach: function () {
     this.application.register('service:mock-user', Ember.Service.extend({
       uid: '0000-0001-5489-3594',

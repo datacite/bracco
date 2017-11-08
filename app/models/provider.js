@@ -40,15 +40,17 @@ const Validations = buildValidations({
 
 export default DS.Model.extend(Validations, {
   clients: DS.hasMany('client', {
-    async: false
+    async: true
   }),
   prefixes: DS.hasMany('prefix', {
-    async: false
+    async: true
   }),
   'provider-prefixes': DS.hasMany('provider-prefix', {
-    async: false
+    async: true
   }),
-  users: DS.hasMany('user', { async: false }),
+  users: DS.hasMany('user', {
+    async: true
+  }),
   meta: DS.attr(),
 
   name: DS.attr('string'),
