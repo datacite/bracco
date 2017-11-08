@@ -136,7 +136,7 @@ test('visiting specific doi not managed by client', function(assert) {
 });
 
 test('visiting specific doi managed by client', function(assert) {
-  visit('/dois/10.2312/cr_m84_4');
+  visit('/dois/10.2312%2Fcr_m84_4');
 
   andThen(function() {
     assert.equal(currentURL(), '/dois/10.2312%2Fcr_m84_4');

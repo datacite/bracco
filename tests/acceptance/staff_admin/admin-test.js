@@ -81,7 +81,7 @@ test('visiting specific user', function(assert) {
   visit('/users/' + uid);
 
   andThen(function() {
-    assert.equal(currentURL(), '/' + uid);
+    assert.equal(currentURL(), '/users/' + uid);
     assert.equal(find('div.panel-title h2').text(), 'Martin Fenner');
   });
 });

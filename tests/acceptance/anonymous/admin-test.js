@@ -1,5 +1,6 @@
 import { test } from 'qunit';
 import moduleForAcceptance from 'bracco/tests/helpers/module-for-acceptance';
+import ENV from 'bracco/config/environment';
 
 moduleForAcceptance('Acceptance | anonymous | admin');
 
