@@ -82,8 +82,8 @@ test('visiting specific user', function(assert) {
   visit('/users/' + uid);
 
   andThen(function() {
-    assert.equal(currentURL(), '/');
-    assert.equal(find('div.motto h1').text(), 'DataCite DOI Fabrica');
+    assert.equal(currentURL(), '/users/' + uid);
+    assert.equal(find('div.panel-title h2').text(), 'Martin Fenner');
   });
 });
 
