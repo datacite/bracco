@@ -87,14 +87,14 @@ export default Ember.Component.extend(Validations, {
     this.get('user').set('role', role);
   },
   searchProvider(query) {
-    this.set('providers', this.get('store').query('provider', { 'query': query, sort: 'name', 'page[size]': 25 }));
+    this.set('providers', this.get('store').query('provider', { 'query': query, sort: 'name', 'page[size]': 1000 }));
   },
   selectProvider(provider) {
     this.set('provider', provider)
     this.get('user').set('provider', provider);
 
     if (provider) {
-      this.set('clients', this.get('store').query('client', { sort: 'name', 'provider-id': provider.id, 'page[size]': 25 }));
+      this.set('clients', this.get('store').query('client', { sort: 'name', 'provider-id': provider.id, 'page[size]': 1000 }));
       this.selectClient(this.get('user').get('client'));
     } else {
       this.set('clients', []);
@@ -102,7 +102,7 @@ export default Ember.Component.extend(Validations, {
     }
   },
   searchClient(query) {
-    this.set('clients', this.get('store').query('client', { 'query': query, sort: 'name', 'provider-id': this.get('model.provider').get('id'), 'page[size]': 25 }));
+    this.set('clients', this.get('store').query('client', { 'query': query, sort: 'name', 'provider-id': this.get('model.provider').get('id'), 'page[size]': 1000 }));
   },
   selectClient(client) {
     this.set('client', client);

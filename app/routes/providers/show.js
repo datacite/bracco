@@ -17,7 +17,7 @@ export default Ember.Route.extend(CanMixin, RouteMixin, {
   },
 
   // afterModel(model, transition) {
-  //   let unassignedUserCount = this.get('store').query('user', { 'provider-id': model.id, 'role-id': 'user', sort: 'name', 'page[size]': 25 }).then(function(users) {
+  //   let unassignedUserCount = this.get('store').query('user', { 'provider-id': model.id, 'role-id': 'user', sort: 'name', 'page[size]': 1000 }).then(function(users) {
   //     console.log(users)
   //   });
   //
