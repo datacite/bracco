@@ -16,13 +16,13 @@
             {{/form.element}}
 
             {{#form.element controlType="power-select" property="provider" label="Provider" optionLabelPath="name" options=providers destination=provider disabled=(xor isProvider isClient) as |el|}}
-              {{#el.control onChange=(action "selectProvider") search=(action "searchProvider") searchField="name" allowClear=true as |item|}}
+              {{#el.control onChange=(action "selectProvider") search=(action "searchProvider") searchField="name" searchPlaceholder="Type to search..." allowClear=true as |item|}}
                 {{item.name}}
               {{/el.control}}
             {{/form.element}}
 
             {{#form.element controlType="power-select" property="client" label="Client" optionLabelPath="name" options=clients destination=client disabled=isClient as |el|}}
-              {{#el.control onChange=(action "selectClient") search=(action "searchClient") searchField="name" allowClear=true as |item|}}
+              {{#el.control onChange=(action "selectClient") search=(action "searchClient") searchField="name" searchPlaceholder="Type to search..." allowClear=true as |item|}}
                 {{item.name}}
               {{/el.control}}
             {{/form.element}}

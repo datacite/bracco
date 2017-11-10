@@ -9,7 +9,7 @@ export default Ember.Component.extend({
   prefixes: [],
 
   searchPrefix(query) {
-    this.set('prefixes', this.get('store').query('prefix', { query: query, state: 'unassigned', sort: 'name', 'page[size]': 10 }));
+    this.set('prefixes', this.get('store').query('prefix', { query: query, state: 'unassigned', sort: 'name', 'page[size]': 25 }));
   },
 
   didReceiveAttrs() {

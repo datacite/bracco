@@ -32,7 +32,7 @@ export default Ember.Component.extend({
       this.set('new', true);
     },
     searchRepository(query) {
-      this.set('repositories', this.get('store').query('repository', { 'query': query, 'page[size]': 10 }));
+      this.set('repositories', this.get('store').query('repository', { 'query': query, 'page[size]': 25 }));
     },
     selectRepository(repository) {
       this.selectRepository(repository);

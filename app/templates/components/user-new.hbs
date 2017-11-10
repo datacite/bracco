@@ -18,7 +18,7 @@
 
             {{#if (not model.provider)}}
               {{#form.element controlType="power-select" property="provider" label="Provider" optionLabelPath="name" options=providers destination=provider as |el|}}
-                {{#el.control onChange=(action "selectProvider") search=(action "searchProvider") searchField="name" allowClear=true as |item|}}
+                {{#el.control onChange=(action "selectProvider") search=(action "searchProvider") searchField="name" searchPlaceholder="Type to search..." allowClear=true as |item|}}
                   {{item.name}}
                 {{/el.control}}
               {{/form.element}}
@@ -26,7 +26,7 @@
 
             {{#if (not model.client)}}
               {{#form.element controlType="power-select" property="client" label="Client" optionLabelPath="name" options=clients destination=client as |el|}}
-                {{#el.control onChange=(action "selectClient") search=(action "searchClient") searchField="name" allowClear=true as |item|}}
+                {{#el.control onChange=(action "selectClient") search=(action "searchClient") searchField="name" searchPlaceholder="Type to search..." allowClear=true as |item|}}
                   {{item.name}}
                 {{/el.control}}
               {{/form.element}}

@@ -7,7 +7,7 @@
         {{#bs-form formLayout="vertical" model=client onSubmit=(action "submit" client model) submitOnEnter=true as |form|}}
           {{form.element controlType="text" label="Client ID" placeholder="Client ID" property="symbol" helpText='The Client ID is a unique identifier for each client. It must contain only upper case letters, numbers or a hypen, must not be longer than 17 characters, and must start with the Provider ID.' useIcons=false required=false}}
           {{#form.element controlType="power-select" property="repository" label="re3data Record" optionLabelPath="name" options=repositories destination=repository helpText='re3data is a registry of research data repositories.' as |el|}}
-            {{#el.control onChange=(action "selectRepository") search=(action "searchRepository") searchField="name" allowClear=true as |item|}}
+            {{#el.control onChange=(action "selectRepository") search=(action "searchRepository") searchField="name" searchPlaceholder="Type to search..." allowClear=true as |item|}}
               {{item.name}}
             {{/el.control}}
           {{/form.element}}
