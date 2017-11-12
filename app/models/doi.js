@@ -24,7 +24,7 @@ export default DS.Model.extend({
   version: DS.attr('string'),
   schemaVersion: DS.attr('string'),
   relatedIdentifier: DS.attr(),
-  state: DS.attr('boolean'),
+  state: DS.attr('string'),
   published: DS.attr('string'),
   registered: DS.attr('date'),
   updated: DS.attr('date'),

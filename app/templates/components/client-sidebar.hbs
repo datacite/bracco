@@ -11,6 +11,11 @@
       {{format-time model.updated year='numeric' month='long' day='numeric'}}
     </div>
   {{/if}}
+  {{#if model.state}}
+    <div class="state">
+      {{state-label state=model.state}}
+    </div>
+  {{/if}}
   {{#if model.registered}}
     <h5>DOI registered</h5>
     <div class="registered">
