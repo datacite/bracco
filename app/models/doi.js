@@ -1,7 +1,33 @@
 import Ember from 'ember';
 import DS from 'ember-data';
+import { validator, buildValidations } from 'ember-cp-validations';
 
-export default DS.Model.extend({
+const Validations = buildValidations({
+  doi: [
+    validator('presence', true),
+    // validator('format', {
+    //   regex: /^[A-Z0-9.-]+$/,
+    //   message: 'The DOI can contain only upper case letters and numbers'
+    // })
+  ],
+  confirmDoi: [
+    validator('presence', {
+      presence: true,
+      disabled: Ember.computed('model', function() {
+        return this.get('model').get('isNew');
+      })
+    }),
+    validator('confirmation', {
+      on: 'doi',
+      message: 'DOI does not match',
+      disabled: Ember.computed('model', function() {
+        return this.get('model').get('isNew');
+      })
+    })
+  ]
+});
+
+export default DS.Model.extend(Validations, {
   provider: DS.belongsTo('provider', {
     async: true
   }),

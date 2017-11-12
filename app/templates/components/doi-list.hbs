@@ -72,9 +72,9 @@
         <div class="panel-body">
           <div class="btn-toolbar">
             <div class="btn-group btn-group-sm">
-              <button {{action "new"}} class="btn btn-warning">{{fa-icon "plus"}}Add DOI</button>
+              <button {{action "new"}} class="btn btn-warning">{{fa-icon "plus"}}Add{{if media.isXl ' DOI'}}</button>
               {{#if (and (can "delete doi" model) (gt model.length 0))}}
-                {{#link-to "clients.show.transfer" model.otherParams.client-id class="btn btn-warning"}}{{fa-icon "arrow-circle-o-right"}}Transfer DOIs{{/link-to}}
+                {{#link-to "clients.show.transfer" model.otherParams.client-id class="btn btn-warning"}}{{fa-icon "arrow-circle-o-right"}}Transfer{{if media.isXl ' DOIs'}}{{/link-to}}
               {{/if}}
             </div>
           </div>

@@ -6,8 +6,6 @@ export default Ability.extend({
     switch(this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
-      case 'provider_admin':
-        return true;
       default:
         return false;
     }
