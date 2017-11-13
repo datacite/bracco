@@ -12,11 +12,7 @@
 
       <div class="row">
         <div class="col-md-9">
-          <div class="panel panel-transparent" id="content-member">
-            <div class="panel-title work">
-              <h2>{{model.name}}{{#if (not model.isActive)}}<span class="small icon-warning">account not active</span>{{/if}}</h2>
-            </div>
-          </div>
+          <h2 class="work">{{model.name}}{{#if (not model.isActive)}}<span class="small icon-warning">account not active</span>{{/if}}</h2>
 
           <div class="tab-content nav-tabs-member">
             {{#bs-nav type="tabs" as |nav|}}
