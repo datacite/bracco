@@ -37,7 +37,11 @@
   {{#if (and (can "write prefix" model) (gt availablePrefixes.length 0))}}
     <div class="panel facets">
       <div class="panel-body">
-        {{#link-to "client-prefixes.new" (query-params client-id=model.otherParams.client-id) class="btn btn-warning"}}{{fa-icon "link"}}Assign Prefix{{/link-to}}
+        <div class="btn-toolbar">
+          <div class="btn-group btn-group-sm">
+            {{#link-to "client-prefixes.new" (query-params client-id=model.otherParams.client-id) class="btn btn-warning"}}{{fa-icon "link"}}Assign Prefix{{/link-to}}
+          </div>
+        </div>
       </div>
     </div>
   {{else}}

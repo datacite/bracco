@@ -10,9 +10,9 @@ export default Ember.Component.extend({
 
   searchPrefix(query) {
     this.set('prefixes', this.get('store').query('prefix', { query: query, 'provider-id': this.get('client').get('provider-id'), state: 'without-client', sort: 'name', 'page[size]': 25 }));
-  },
+    },
 
-  didInsertElement() {
+  didReceiveAttrs() {
     this._super(...arguments);
 
     this.set('client', this.get('model.client'));
@@ -21,12 +21,12 @@ export default Ember.Component.extend({
   },
 
   actions: {
-    new() {
-    },
     submit() {
+      let self = this;
       var clientPrefix = this.get('store').createRecord('clientPrefix', { client: this.get('client'), prefix: this.get('prefix') });
-      clientPrefix.save();
-      this.get('router').transitionTo('clients.show.prefixes', this.get('client'));
+      clientPrefix.save().then(function(clientPrefix) {
+        self.get('router').transitionTo('clients.show.prefixes', self.get('client'));
+      });
     },
     searchPrefix(query) {
       this.searchPrefix(query);
@@ -35,7 +35,7 @@ export default Ember.Component.extend({
       this.set('prefix', prefix);
     },
     cancel() {
-      this.get('router').transitionTo('clients.show.prefixes', this.get('client'));
+      this.get('router').transitionTo('clients.show.prefixes', this.get('model.client'));
     }
   }
 });
