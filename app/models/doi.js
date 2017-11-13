@@ -34,6 +34,9 @@ export default DS.Model.extend(Validations, {
   client: DS.belongsTo('client', {
     async: true
   }),
+  'resource-type': DS.belongsTo('resource-type', {
+    async: true
+  }),
 
   identifier: DS.attr('string'),
   doi: DS.attr('string'),
@@ -45,8 +48,7 @@ export default DS.Model.extend(Validations, {
   description: DS.attr(),
   license: DS.attr('string'),
   xml: DS.attr('string'),
-  resourceTypeGeneral: DS.attr('string'),
-  resourceType: DS.attr('string'),
+  resourceTypeSubtype: DS.attr('string'),
   version: DS.attr('string'),
   schemaVersion: DS.attr('string'),
   relatedIdentifier: DS.attr(),

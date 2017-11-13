@@ -20,7 +20,7 @@ export function formatMetadata([published], hash) {
   }
 
   let version = hash.version ? 'Version ' + hash.version + ' of ' : '';
-  let resourceType = (hash.resourceTypeGeneral || hash.resourceType || 'Work').capitalize();
+  let resourceType = (hash.resourceTypeSubtype || (hash.resourceType && hash.resourceType.name) || 'Work').capitalize();
   let containerTitle = hash.containerTitle ? " via " + hash.containerTitle : '';
   return [version, resourceType, "published", pubDate, containerTitle].join(" ")
 }
