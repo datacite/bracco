@@ -4,7 +4,6 @@ export default Ember.Component.extend({
   store: Ember.inject.service(),
 
   new: false,
-  provider: null,
   prefix: null,
   prefixes: [],
 
@@ -15,18 +14,16 @@ export default Ember.Component.extend({
   didReceiveAttrs() {
     this._super(...arguments);
 
-    this.set('provider', this.get('model.provider'));
-
     this.searchPrefix(null);
   },
 
   actions: {
-    new() {
-    },
     submit() {
-      var providerPrefix = this.get('store').createRecord('providerPrefix', { provider: this.get('provider'), prefix: this.get('prefix') });
-      providerPrefix.save();
-      this.get('router').transitionTo('providers.show.prefixes', this.get('provider'));
+      let self = this;
+      var providerPrefix = this.get('store').createRecord('providerPrefix', { provider: this.get('model.provider'), prefix: this.get('prefix') });
+      providerPrefix.save().then(function(providerPrefix) {
+        self.get('router').transitionTo('providers.show.prefixes', providerPrefix.get('provider'));
+      });
     },
     searchPrefix(query) {
       this.searchPrefix(query);
@@ -35,7 +32,7 @@ export default Ember.Component.extend({
       this.set('prefix', prefix);
     },
     cancel() {
-      this.get('router').transitionTo('providers.show.prefixes', this.get('provider'));
+      this.get('router').transitionTo('providers.show.prefixes', this.get('model.provider'));
     }
   }
 });
