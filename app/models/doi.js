@@ -55,6 +55,10 @@ export default DS.Model.extend(Validations, {
   registered: DS.attr('date'),
   updated: DS.attr('date'),
 
+  isDraft: Ember.computed('state', function() {
+    return this.get('state') === 'draft';
+  }),
+
   schemaVersionString: Ember.computed('schemaVersion', function() {
     if (this.get('schemaVersion')) {
       return this.get('schemaVersion').split("-").get("lastObject");

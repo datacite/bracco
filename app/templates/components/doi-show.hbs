@@ -76,7 +76,7 @@
             <div class="btn-toolbar">
               <div class="btn-group btn-group-sm">
                 <button {{action "edit" model}} class="btn btn-warning">{{fa-icon "pencil"}} Edit {{if media.isXl ' DOI'}}</button>
-                {{#if (eq 1 1)}}
+                {{#if (and (can "delete doi") model.isDraft)}}
                   <button {{action "delete" model}} class="btn btn-warning">{{fa-icon "trash"}} Delete {{if media.isXl ' DOI'}}</button>
                 {{/if}}
               </div>
