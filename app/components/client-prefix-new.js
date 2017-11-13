@@ -24,7 +24,7 @@ export default Ember.Component.extend({
     submit() {
       let self = this;
       var clientPrefix = this.get('store').createRecord('clientPrefix', { client: this.get('client'), prefix: this.get('prefix') });
-      clientPrefix.save().then(function(clientPrefix) {
+      clientPrefix.save().then(function() {
         self.get('router').transitionTo('clients.show.prefixes', self.get('client'));
       });
     },
