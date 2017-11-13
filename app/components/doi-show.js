@@ -8,6 +8,11 @@ export default Ember.Component.extend({
   client: null,
   clients: [],
 
+  reset() {
+    this.set('doi', null);
+    this.set('edit', false);
+    this.set('delete', false);
+  },
   searchClient(query) {
     if (this.get('currentUser').get('isAdmin')) {
       this.set('clients', this.get('store').query('client', { 'query': query, sort: 'name', 'page[size]': 1000 }));
@@ -24,6 +29,7 @@ export default Ember.Component.extend({
   actions: {
     edit: function(doi) {
       this.set('doi', doi);
+      this.get('doi').set('confirmDoi', doi.get('doi'));
       this.searchClient(null);
       this.set('edit', true);
     },
@@ -51,8 +57,7 @@ export default Ember.Component.extend({
       });
     },
     cancel: function() {
-      this.set('edit', false);
-      this.set('delete', false);
+      this.reset();
     }
   }
 });
