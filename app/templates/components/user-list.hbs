@@ -59,13 +59,17 @@
   {{#if (can "create user" model)}}
     <div class="panel facets">
       <div class="panel-body">
-        {{#if model.otherParams.client-id}}
-          {{#link-to "users.new" (query-params client-id=model.otherParams.client-id) class="btn btn-warning"}}{{fa-icon "link"}}Add User{{/link-to}}
-        {{else if model.otherParams.provider-id}}
-          {{#link-to "users.new" (query-params provider-id=model.otherParams.provider-id) class="btn btn-warning"}}{{fa-icon "link"}}Add User{{/link-to}}
-        {{else}}
-          {{#link-to "users.new" class="btn btn-warning"}}{{fa-icon "link"}}Add User{{/link-to}}
-        {{/if}}
+        <div class="btn-toolbar">
+          <div class="btn-group btn-group-sm">
+            {{#if model.otherParams.client-id}}
+              {{#link-to "users.new" (query-params client-id=model.otherParams.client-id) class="btn btn-warning"}}{{fa-icon "link"}}Add User{{/link-to}}
+            {{else if model.otherParams.provider-id}}
+              {{#link-to "users.new" (query-params provider-id=model.otherParams.provider-id) class="btn btn-warning"}}{{fa-icon "link"}}Add User{{/link-to}}
+            {{else}}
+              {{#link-to "users.new" class="btn btn-warning"}}{{fa-icon "plus"}}Add User{{/link-to}}
+            {{/if}}
+          </div>
+        </div>
       </div>
     </div>
   {{else}}

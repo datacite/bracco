@@ -94,7 +94,11 @@
     {{#if (and (can "create client" model) (eq link "providers.show.clients"))}}
       <div class="panel facets">
         <div class="panel-body">
-          <button {{action "new" model}} class="btn btn-warning">{{fa-icon "plus"}} Add Client</button>
+          <div class="btn-toolbar">
+            <div class="btn-group btn-group-sm">
+              <button {{action "new" model}} class="btn btn-warning">{{fa-icon "plus"}} Add Client</button>
+            </div>
+          </div>
         </div>
       </div>
     {{else}}
