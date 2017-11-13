@@ -23,7 +23,7 @@ test('visiting homepage', function(assert) {
 
   andThen(function() {
     assert.equal(currentURL(), '/');
-    assert.equal(find('div.panel-title h2').text(), 'DataCite');
+    assert.equal(find('h2.work').text(), 'DataCite');
   });
 });
 
@@ -33,7 +33,7 @@ test('visiting settings', function(assert) {
 
   andThen(function() {
     assert.equal(currentURL(), '/settings');
-    assert.equal(find('div.panel-title h2').text(), 'DataCite');
+    assert.equal(find('h2.work').text(), 'DataCite');
   });
 });
 
@@ -42,7 +42,7 @@ test('visiting providers', function(assert) {
 
   andThen(function() {
     assert.equal(currentURL(), '/providers');
-    assert.equal(find('div.panel-title h2').text(), 'DataCite');
+    assert.equal(find('h2.work').text(), 'DataCite');
   });
 });
 
@@ -51,7 +51,7 @@ test('visiting clients', function(assert) {
 
   andThen(function() {
     assert.equal(currentURL(), '/clients');
-    assert.equal(find('div.panel-title h2').text(), 'DataCite');
+    assert.equal(find('h2.work').text(), 'DataCite');
   });
 });
 
@@ -60,7 +60,7 @@ test('visiting users', function(assert) {
 
   andThen(function() {
     assert.equal(currentURL(), '/users');
-    assert.equal(find('div.panel-title h2').text(), 'DataCite');
+    assert.equal(find('h2.work').text(), 'DataCite');
   });
 });
 
@@ -71,7 +71,7 @@ test('visiting personal settings', function(assert) {
 
   andThen(function() {
     assert.equal(currentURL(), '/users/' + uid);
-    assert.equal(find('div.panel-title h2').text(), 'Josiah Carberry');
+    assert.equal(find('h2.work').text(), 'Josiah Carberry');
   });
 });
 
@@ -82,7 +82,7 @@ test('visiting specific user', function(assert) {
 
   andThen(function() {
     assert.equal(currentURL(), '/users/' + uid);
-    assert.equal(find('div.panel-title h2').text(), 'Martin Fenner');
+    assert.equal(find('h2.work').text(), 'Martin Fenner');
   });
 });
 
@@ -91,7 +91,7 @@ test('visiting prefixes', function(assert) {
 
   andThen(function() {
     assert.equal(currentURL(), '/prefixes');
-    assert.equal(find('div.panel-title h2').text(), 'DataCite');
+    assert.equal(find('h2.work').text(), 'DataCite');
   });
 });
 
@@ -109,7 +109,7 @@ test('visiting dois', function(assert) {
 
   andThen(function() {
     assert.equal(currentURL(), '/dois');
-    assert.equal(find('div.panel-title h2').text(), 'DataCite');
+    assert.equal(find('h2.work').text(), 'DataCite');
   });
 });
 

@@ -71,7 +71,7 @@ test('visiting personal settings', function(assert) {
 
   andThen(function() {
     assert.equal(currentURL(), '/users/' + uid);
-    assert.equal(find('div.panel-title h2').text(), 'Josiah Carberry');
+    assert.equal(find('h2.work').text(), 'Josiah Carberry');
   });
 });
 
@@ -82,7 +82,7 @@ test('visiting specific user', function(assert) {
 
   andThen(function() {
     assert.equal(currentURL(), '/users/' + uid);
-    assert.equal(find('div.panel-title h2').text(), 'Martin Fenner');
+    assert.equal(find('h2.work').text(), 'Martin Fenner');
   });
 });
 

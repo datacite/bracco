@@ -24,7 +24,7 @@ moduleForAcceptance('Acceptance | provider_user | client', {
 //
 //   andThen(function() {
 //     assert.equal(currentURL(), '/clients/tib.awi');
-//     assert.equal(find('div.panel-title h2').text(), 'Alfred-Wegener-Institut');
+//     assert.equal(find('h2.work').text(), 'Alfred-Wegener-Institut');
 //     assert.equal(find('a.nav-link.active').text(), 'Info');
 //   });
 // });
@@ -34,7 +34,7 @@ test('visiting client AWI settings', function(assert) {
 
   andThen(function() {
     assert.equal(currentURL(), '/clients/tib.awi/settings');
-    assert.equal(find('div.panel-title h2').text(), 'Alfred-Wegener-Institut');
+    assert.equal(find('h2.work').text(), 'Alfred-Wegener-Institut');
     assert.equal(find('a.nav-link.active').text(), 'Settings');
   });
 });
@@ -44,7 +44,7 @@ test('visiting client AWI settings', function(assert) {
 //
 //   andThen(function() {
 //     assert.equal(currentURL(), '/clients/tib.awi/users');
-//     assert.equal(find('div.panel-title h2').text(), 'Alfred-Wegener-Institut');
+//     assert.equal(find('h2.work').text(), 'Alfred-Wegener-Institut');
 //     assert.equal(find('a.nav-link.active').text(), 'Users');
 //   });
 // });
@@ -54,7 +54,7 @@ test('visiting client AWI prefixes', function(assert) {
 
   andThen(function() {
     assert.equal(currentURL(), '/clients/tib.awi/prefixes');
-    assert.equal(find('div.panel-title h2').text(), 'Alfred-Wegener-Institut');
+    assert.equal(find('h2.work').text(), 'Alfred-Wegener-Institut');
     assert.equal(find('a.nav-link.active').text(), 'Prefixes');
   });
 });
@@ -64,7 +64,7 @@ test('visiting client AWI dois', function(assert) {
 
   andThen(function() {
     assert.equal(currentURL(), '/clients/tib.awi/dois');
-    assert.equal(find('div.panel-title h2').text(), 'Alfred-Wegener-Institut');
+    assert.equal(find('h2.work').text(), 'Alfred-Wegener-Institut');
     assert.equal(find('a.nav-link.active').text(), 'DOIs');
   });
 });

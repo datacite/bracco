@@ -24,7 +24,7 @@ test('visiting provider TIB', function(assert) {
 
   andThen(function() {
     assert.equal(currentURL(), '/providers/tib');
-    assert.equal(find('div.panel-title h2').text(), 'German National Library of Science and Technology');
+    assert.equal(find('h2.work').text(), 'German National Library of Science and Technology');
     assert.equal(find('a.nav-link.active').text(), 'Info');
   });
 });
@@ -34,7 +34,7 @@ test('visiting provider TIB settings', function(assert) {
 
   andThen(function() {
     assert.equal(currentURL(), '/providers/tib/settings');
-    assert.equal(find('div.panel-title h2').text(), 'German National Library of Science and Technology');
+    assert.equal(find('h2.work').text(), 'German National Library of Science and Technology');
     assert.equal(find('a.nav-link.active').text(), 'Settings');
   });
 });
@@ -44,7 +44,7 @@ test('visiting provider TIB users', function(assert) {
 
   andThen(function() {
     assert.equal(currentURL(), '/providers/tib/users');
-    assert.equal(find('div.panel-title h2').text(), 'German National Library of Science and Technology');
+    assert.equal(find('h2.work').text(), 'German National Library of Science and Technology');
     assert.equal(find('a.nav-link.active').text(), 'Users');
   });
 });
@@ -54,7 +54,7 @@ test('visiting provider TIB clients', function(assert) {
 
   andThen(function() {
     assert.equal(currentURL(), '/providers/tib/clients');
-    assert.equal(find('div.panel-title h2').text(), 'German National Library of Science and Technology');
+    assert.equal(find('h2.work').text(), 'German National Library of Science and Technology');
     assert.equal(find('a.nav-link.active').text(), 'Clients');
   });
 });
@@ -64,7 +64,7 @@ test('visiting provider TIB dois', function(assert) {
 
   andThen(function() {
     assert.equal(currentURL(), '/providers/tib/dois');
-    assert.equal(find('div.panel-title h2').text(), 'German National Library of Science and Technology');
+    assert.equal(find('h2.work').text(), 'German National Library of Science and Technology');
     assert.equal(find('a.nav-link.active').text(), 'DOIs');
   });
 });
@@ -74,7 +74,7 @@ test('visiting provider TIB dois', function(assert) {
 //
 //   andThen(function() {
 //     assert.equal(currentURL(), '/providers/tib/prefixes');
-//     assert.equal(find('div.panel-title h2').text(), 'German National Library of Science and Technology');
+//     assert.equal(find('h2.work').text(), 'German National Library of Science and Technology');
 //     assert.equal(find('a.nav-link.active').text(), 'Prefixes');
 //   });
 // });
