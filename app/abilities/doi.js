@@ -10,6 +10,16 @@ export default Ability.extend({
         return false;
     }
   }),
+  canTransfer: Ember.computed('currentUser.role_id', 'currentUser.client_id', 'model.otherParams.client-id', function() {
+    switch(this.get('currentUser.role_id')) {
+      case 'staff_admin':
+        return true;
+      case 'provider_admin':
+        return true;
+      default:
+        return false;
+    }
+  }),
   canCreate: Ember.computed('currentUser.role_id', 'currentUser.client_id', 'model.otherParams.client-id', function() {
     switch(this.get('currentUser.role_id')) {
       case 'staff_admin':

@@ -37,12 +37,18 @@ export default Ember.Component.extend(Validations, {
       let self = this;
       this.get('provider').save().then(function () {
         self.reset();
+      }).catch(function(reason){
+        Ember.Logger.assert(false, reason);
       });
     },
     destroy: function(provider) {
+      let self = this;
       if (this.get('confirmId') === provider.get('symbol')) {
-        provider.destroyRecord();
-        this.get('router').transitionTo('/providers');
+        provider.destroyRecord().then(function () {
+          self.get('router').transitionTo('/providers');
+        }).catch(function(reason){
+          Ember.Logger.assert(false, reason);
+        });
       }
     },
     cancel: function() {

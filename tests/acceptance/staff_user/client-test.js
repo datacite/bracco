@@ -35,6 +35,8 @@ test('visiting client AWI settings', function(assert) {
     assert.equal(currentURL(), '/clients/tib.awi/settings');
     assert.equal(find('h2.work').text(), 'Alfred-Wegener-Institut');
     assert.equal(find('a.nav-link.active').text(), 'Settings');
+    assert.equal(find('button#edit-client').length, 0);
+    assert.equal(find('button#delete-client').length, 0);
   });
 });
 
@@ -45,6 +47,7 @@ test('visiting client AWI users', function(assert) {
     assert.equal(currentURL(), '/clients/tib.awi/users');
     assert.equal(find('h2.work').text(), 'Alfred-Wegener-Institut');
     assert.equal(find('a.nav-link.active').text(), 'Users');
+    assert.equal(find('a#add-user').length, 0);
   });
 });
 
@@ -65,5 +68,7 @@ test('visiting client AWI dois', function(assert) {
     assert.equal(currentURL(), '/clients/tib.awi/dois');
     assert.equal(find('h2.work').text(), 'Alfred-Wegener-Institut');
     assert.equal(find('a.nav-link.active').text(), 'DOIs');
+    assert.equal(find('button#add-doi').length, 0);
+    assert.equal(find('a#transfer-dois').length, 0);
   });
 });

@@ -16,17 +16,6 @@ export default Ember.Route.extend(CanMixin, RouteMixin, {
     });
   },
 
-  // afterModel(model, transition) {
-  //   let unassignedUserCount = this.get('store').query('user', { 'provider-id': model.id, 'role-id': 'user', sort: 'name', 'page[size]': 1000 }).then(function(users) {
-  //     console.log(users)
-  //   });
-  //
-  //   this.get('flashMessages').success('There are unassigned users.', {
-  //     timeout: 5000,
-  //     sticky: true
-  //   });
-  // },
-
   afterModel(model) {
     if (!this.can('read provider', model)) {
       let home = (this.get('currentUser.id')) ? this.get('currentUser').get('home') : '/';

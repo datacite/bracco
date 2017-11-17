@@ -7,13 +7,13 @@
 
           {{#bs-form formLayout="vertical" model=model onSubmit=(action "submit" model) submitOnEnter=true as |form|}}
             {{form.element controlType="text" label="Provider ID" placeholder="ID" property="symbol" disabled=true}}
-            {{form.element controlType="text" label="Provider Name" placeholder="Provider Name" property="name" required=false}}
+            {{form.element controlType="text" label="Provider Name" placeholder="Provider Name" property="input-name" required=false}}
             {{form.element controlType="text" label="Contact Name" placeholder="Contact Name" property="contactName" helpText='Please enter the name of a person that can be contacted for technical or administrative issues.' required=false}}
             {{form.element controlType="email" label="Contact Email" placeholder="Contact Email" property="contactEmail" required=false}}
             {{form.element controlType="checkbox" label="Account is active" property="isActive" required=false helpText='This account can manage clients, prefixes and users'}}
             <div class="pseudo-footer">
               <div class="btn-toolbar pull-right">
-                <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
+                <button {{action "cancel"}} class="btn btn-sm" id="cancel">Cancel</button>
                 <button type="submit" class="btn btn-sm btn-fill">Save</button>
               </div>
               <div class="clearfix"/>
@@ -96,9 +96,9 @@
           <div class="panel-body">
             <div class="btn-toolbar">
               <div class="btn-group btn-group-sm">
-                <button {{action "edit" model}} class="btn btn-warning">{{fa-icon "pencil"}}Edit{{#if (and admin media.isXl)}} Admin{{else if media.isXl}} Provider{{/if}}</button>
+                <button {{action "edit" model}} class="btn btn-warning" id="edit-provider">{{fa-icon "pencil"}}Edit{{#if (and admin media.isXl)}} Admin{{else if media.isXl}} Provider{{/if}}</button>
                 {{#if (and (not admin) (can "delete provider" model))}}
-                  <button {{action "delete" model}} class="btn btn-warning">{{fa-icon "trash"}}Delete{{if media.isXl ' Provider'}}</button>
+                  <button {{action "delete" model}} class="btn btn-warning" id="delete-provider">{{fa-icon "trash"}}Delete{{if media.isXl ' Provider'}}</button>
                 {{/if}}
               </div>
             </div>
