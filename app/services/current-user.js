@@ -29,7 +29,7 @@ export default Ember.Service.extend({
   init() {
     this._super(...arguments);
 
-    if (ENV.JWT_PRIVATE_KEY) {
+    if (ENV.JWT_PRIVATE_KEY && ENV.environment === 'test') {
       this.initUser({ uid: ENV.USER_UID, name: ENV.USER_NAME, role_id: ENV.USER_ROLE_ID });
       this.setJwt();
     } else {
