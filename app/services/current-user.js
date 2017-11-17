@@ -29,7 +29,7 @@ export default Ember.Service.extend({
   init() {
     this._super(...arguments);
 
-    if (1 === 2) {
+    if (ENV.JWT_PRIVATE_KEY === 1) {
       let payload = {
         uid: (ENV.USER_API_URL === "https://profiles.datacite.org/api") ? '0000-0002-1825-0097' : '0000-0001-5489-3594',
         name: 'Josiah Carberry',
