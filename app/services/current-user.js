@@ -7,12 +7,12 @@ export default Ember.Service.extend({
   store: Ember.inject.service(),
   flashMessages: Ember.inject.service(),
 
-  apiIsAvailable: false,
   isAuthenticated: false,
   isPermitted: false,
   isAdmin: false,
   isProvider: false,
   isClient: false,
+  fromCookie: false,
   uid: null,
   jwt: null,
   name: null,
@@ -23,68 +23,102 @@ export default Ember.Service.extend({
   client_id: null,
   sandbox_id: null,
   home: null,
+  area: 'DOI Fabrica Personal area',
   sandbox: null,
 
   init() {
     this._super(...arguments);
 
-    let self = this;
-    let decoded = new Ember.RSVP.Promise(function(resolve, reject) {
+    if (ENV.JWT_PRIVATE_KEY) {
+      let payload = {
+        uid: (ENV.USER_API_URL === "https://profiles.datacite.org/api") ? '0000-0002-1825-0097' : '0000-0001-5489-3594',
+        name: 'Josiah Carberry',
+        role_id: ENV.ROLE_ID
+      }
+      this.initUser(payload);
+      this.setJwt();
+    } else {
       // check for cookie containing jwt
       let jwt = Cookie.get('_datacite_jwt');
-      self.set('jwt', jwt);
+      this.set('jwt', jwt);
 
-      // check for RSA public key
+      // RSA public key
       let cert = ENV.JWT_PUBLIC_KEY ? ENV.JWT_PUBLIC_KEY.replace(/\\n/g, '\n') : null;
 
       // verify asymmetric token, using RSA with SHA-256 hash algorithm
+      let self = this;
       NodeJsonWebToken.verify(jwt, cert, { algorithms: ['RS256'] }, function (error, payload) {
         if (payload) {
-          resolve(payload);
+          this.set('fromCookie', true);
+          self.initUser(payload);
         } else {
-          reject(error);
+          Ember.Logger.assert(false, error);
         }
       });
-    });
+    }
+  },
 
-    decoded.then(function(result) {
-      if (Ember.isPresent(result)) {
-        self.set('isAuthenticated', true);
-        self.set('uid', result.uid);
-        self.set('name', result.name);
-        self.set('email', result.email);
-        self.set('role_id', result.role_id);
-        self.set('roleName', result.role_id.split('_').map(item => item.capitalize()).join(' '));
-        self.set('provider_id', result.provider_id);
-        self.set('client_id', result.client_id);
+  initUser(payload) {
+    if (Ember.isPresent(payload)) {
+      this.set('isAuthenticated', true);
+      this.set('uid', payload.uid);
+      this.set('name', payload.name);
+      this.set('email', payload.email);
+      this.set('provider_id', payload.provider_id);
+      this.set('client_id', payload.client_id);
 
-        if (['staff_admin', 'staff_user'].includes(result.role_id)) {
-          self.set('isAdmin', true);
-          self.set('home', '/');
-          self.get('flashMessages').info('Welcome ' + result.name + ' to the DataCite Administration area.');
-        } else if (['provider_admin', 'provider_user'].includes(result.role_id) && result.provider_id) {
-          self.set('isProvider', true);
-          self.set('home', '/providers/' + result.provider_id);
-          self.get('flashMessages').info('Welcome ' + result.name + ' to the Provider Administration area.');
-        } else if (['client_admin', 'client_user'].includes(result.role_id) && result.client_id) {
-          self.set('isClient', true);
-          self.set('home', '/clients/' + result.client_id);
-          self.get('flashMessages').info('Welcome ' + result.name + ' to the Client Administration area.');
-        } else {
-          self.set('role_id', 'user');
-          self.set('role_name', 'User');
-          self.set('home', '/users/' + result.uid);
-          self.get('flashMessages').info('Welcome ' + result.name + ' to your DOI Fabrica Personal area.');
-        }
+      this.setRole(payload.role_id);
 
-        if (result.sandbox_id) {
-          self.set('sandbox_id', result.sandbox_id);
-          self.set('sandbox', '/clients/' + result.sandbox_id);
-        }
+      if (payload.sandbox_id) {
+        this.set('sandbox_id', payload.sandbox_id);
+        this.set('sandbox', '/clients/' + payload.sandbox_id);
       }
-    }, function(reason) {
-      if (reason.message !== 'jwt must be provided') {
-        Ember.Logger.assert(false, reason);
+    }
+  },
+
+  setRole(role_id) {
+    this.set('role_id', role_id);
+    this.set('roleName', role_id.split('_').map(item => item.capitalize()).join(' '));
+
+    if (['staff_admin', 'staff_user'].includes(role_id)) {
+      this.set('isAdmin', true);
+      this.set('home', '/');
+      this.set('area', 'DataCite Administration area')
+    } else if (['provider_admin', 'provider_user'].includes(role_id) && this.get('provider_id')) {
+      this.set('isProvider', true);
+      this.set('home', '/providers/' + this.get('provider_id'));
+      this.set('area', 'Provider Administration area')
+    } else if (['client_admin', 'client_user'].includes(role_id) && this.get('client_id')) {
+      this.set('isClient', true);
+      this.set('home', '/clients/' + this.get('client_id'));
+      this.set('area', 'Client Administration area')
+    } else {
+      this.set('role_id', 'user');
+      this.set('role_name', 'User');
+      this.set('home', '/users/' + this.get('uid'));
+    }
+
+    this.get('flashMessages').info('Welcome ' + this.get('name') + ' to the ' + this.get('area') + '.');
+  },
+
+  setJwt() {
+    let duration = (ENV.environment === 'test') ? 60 : (30 * 24 * 3600)
+    let payload = {
+      uid: this.get('uid'),
+      name: this.get('name'),
+      role_id: this.get('role_id'),
+      exp: Math.floor(Date.now() / 1000) + duration
+    };
+
+    // RSA private key
+    let cert = ENV.JWT_PRIVATE_KEY ? ENV.JWT_PRIVATE_KEY.replace(/\\n/g, '\n') : null;
+
+    // sign asymmetric token, using RSA with SHA-256 hash algorithm
+    NodeJsonWebToken.sign(payload, cert, { algorithm: 'RS256' }, function (error, jwt) {
+      if (jwt) {
+        self.set('jwt', jwt);
+      } else {
+        Ember.Logger.assert(false, error);
       }
     });
   }

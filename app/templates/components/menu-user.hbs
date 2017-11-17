@@ -8,8 +8,10 @@
     <li><a href="/users/{{currentUser.uid}}">{{fa-icon "cog"}} Personal Settings</a></li>
     <li class="divider"/>
     <li><a href="{{orcid-url}}/{{currentUser.uid}}">{{fa-icon "external-link"}} ORCID Record</a></li>
-    <li class="divider"/>
-    <li><a href="{{jwt-host}}/sign_out">{{fa-icon "sign-out"}} Sign out</a></li>
+    {{#if currentUser.fromCookie}}
+      <li class="divider"/>
+      <li><a href="{{jwt-host}}/sign_out">{{fa-icon "sign-out"}} Sign out</a></li>
+    {{/if}}
   </ul>
 {{else}}
   <a href="{{jwt-host}}/sign_in" class="btn btn-sm btn-neutral" id="sign-in">

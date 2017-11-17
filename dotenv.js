@@ -10,6 +10,8 @@ module.exports = function(env) {
                         'CDN_URL',
                         'JWT_HOST',
                         'JWT_PUBLIC_KEY',
+                        'JWT_PRIVATE_KEY',
+                        'ROLE_ID',
                         'BUGSNAG_API_KEY',
                         'AWS_ACCESS_KEY',
                         'AWS_SECRET_KEY',

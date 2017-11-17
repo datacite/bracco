@@ -48,6 +48,8 @@ module.exports = function(environment) {
     DATA_URL: process.env.DATA_URL || "https://data.test.datacite.org",
     JWT_HOST: process.env.JWT_HOST || "https://profiles.test.datacite.org",
     JWT_PUBLIC_KEY: process.env.JWT_PUBLIC_KEY || null,
+    JWT_PRIVATE_KEY: process.env.JWT_PRIVATE_KEY || null,
+    ROLE_ID: process.env.ROLE_ID || "staff_admin",
 
     APP: {
       // Here you can pass flags/options to your application instance
