@@ -1,20 +1,20 @@
 <footer class='row footer'>
   <div class="container-fluid">
-    <div class='col-md-3 col-sm-4'>
+    <div class='col-md-3 col-sm-4 footer-column'>
       <h4>{{t "footer.about"}}</h4>
       {{list-links links=data.about_links}}
     </div>
-    <div class='col-md-3 col-sm-4'>
+    <div class='col-md-3 col-sm-4 footer-column'>
       <h4>Services</h4>
       {{list-links links=data.services_links}}
     </div>
-    <div class='col-md-3 col-sm-4'>
+    <div class='col-md-3 col-sm-4 footer-column'>
       <h4>Resources</h4>
       {{list-links links=data.resources_links}}
       <h4>Community</h4>
       {{list-links links=data.community_links}}
     </div>
-    <div class='col-md-3'>
+    <div class='col-md-3 footer-column'>
       <h4 class="share">Contact us</h4>
       <a href='mailto:support@datacite.org' class="share">
         {{fa-icon "at"}}
