@@ -51,7 +51,11 @@
   {{#if (can "write prefix")}}
     <div class="panel facets">
       <div class="panel-body">
-        {{#link-to "prefixes.new" class="btn btn-warning"}}{{fa-icon "link"}}Add Prefixes{{/link-to}}
+        <div class="btn-toolbar">
+          <div class="btn-group btn-group-sm">
+            {{#link-to "prefixes.new" class="btn btn-warning" id="add-prefixes"}}{{fa-icon "link"}}Add Prefixes{{/link-to}}
+          </div>
+        </div>
       </div>
     </div>
   {{else}}

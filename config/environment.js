@@ -39,7 +39,7 @@ module.exports = function(environment) {
     },
 
     SITE_TITLE: process.env.SITE_TITLE || "DataCite DOI Fabrica",
-    NAVMENU_TITLE: process.env.NAVMENU_TITLE || 'Test Services',
+    NAVMENU_TITLE: process.env.NAVMENU_TITLE,
     SEARCH_URL: process.env.SEARCH_URL || "https://search.test.datacite.org",
     ORCID_URL: process.env.ORCID_URL || "https://sandbox.orcid.org",
     API_URL: process.env.API_URL || "https://api.test.datacite.org",
@@ -49,7 +49,9 @@ module.exports = function(environment) {
     JWT_HOST: process.env.JWT_HOST || "https://profiles.test.datacite.org",
     JWT_PUBLIC_KEY: process.env.JWT_PUBLIC_KEY || null,
     JWT_PRIVATE_KEY: process.env.JWT_PRIVATE_KEY || null,
-    ROLE_ID: process.env.ROLE_ID || "staff_admin",
+    USER_UID: process.env.USER_UID || '0000-0001-5489-3594',
+    USER_ROLE_ID: process.env.USER_ROLE_ID || "user",
+    USER_NAME: process.env.USER_NAME || 'Josiah Carberry',
 
     APP: {
       // Here you can pass flags/options to your application instance
