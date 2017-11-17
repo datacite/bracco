@@ -49,7 +49,7 @@ export default Ember.Service.extend({
       let self = this;
       NodeJsonWebToken.verify(jwt, cert, { algorithms: ['RS256'] }, function (error, payload) {
         if (payload) {
-          this.set('fromCookie', true);
+          self.set('fromCookie', true);
           self.initUser(payload);
         } else {
           Ember.Logger.assert(false, error);
