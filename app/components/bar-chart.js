@@ -46,7 +46,7 @@ export default Ember.Component.extend({
     let chartId = this.get('chartId');
     let data = (this.get('data')) ? this.get('data') : [];
 
-    let height = 75;
+    let height = 100;
     let margin = { top: 10, right: 5, bottom: 20, left: 5 };
 
     let startDate = new Date("2009-01-01");
