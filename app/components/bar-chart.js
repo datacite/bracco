@@ -25,7 +25,16 @@ export default Ember.Component.extend({
 
   init: function () {
     this._super();
+
     Ember.run.schedule("afterRender", this, function() {
+      this.send("barChart");
+    });
+  },
+
+  didReceiveAttrs() {
+    this._super(...arguments);
+
+    Ember.run(() => {
       this.send("barChart");
     });
   },
@@ -37,8 +46,8 @@ export default Ember.Component.extend({
     let chartId = this.get('chartId');
     let data = (this.get('data')) ? this.get('data') : [];
 
-    let height = 100;
-    let margin = { top: 10, right: 5, bottom: 5, left: 5 };
+    let height = 75;
+    let margin = { top: 10, right: 5, bottom: 20, left: 5 };
 
     let startDate = new Date("2009-01-01");
     let endDate = new Date("2018-01-01");
@@ -57,7 +66,10 @@ export default Ember.Component.extend({
     var xAxis = d3.svg.axis()
       .scale(x)
       .tickSize(0)
-      .ticks(0);
+      .ticks(0)
+
+    // remove chart before building new one
+    d3.select('#' + chartId).selectAll("*").remove();
 
     var chart = d3.select('#' + chartId).append("svg")
       .data([data])
@@ -85,6 +97,18 @@ export default Ember.Component.extend({
       .attr("class", "x axis")
       .attr("transform", "translate(0," + height + ")")
       .call(xAxis);
+
+    chart.append("text")
+      .attr("class", "label")
+      .attr("text-anchor", "middle")
+      .attr("transform", "translate(11," + (height + 18) + ")")
+      .text(formatYear(startDate));
+
+    chart.append("text")
+      .attr("class", "label")
+      .attr("text-anchor", "middle")
+      .attr("transform", "translate(" + (width - 11) + "," + (height + 18) + ")")
+      .text(formatYear(endDate) - 1);
 
     let self = this;
     chart.selectAll("rect").each(
