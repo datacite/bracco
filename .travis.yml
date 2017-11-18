@@ -22,7 +22,7 @@ before_install:
   - if [ "${TRAVIS_TAG?}" ]; then
       AWS_BUCKET="doi.datacite.org";
       cp .env.production .env;
-    else
+    elif [ "$TRAVIS_BRANCH" == "master" ]; then
       AWS_BUCKET="doi.test.datacite.org";
       cp .env.stage .env;
     fi
@@ -37,6 +37,10 @@ install:
 script:
   - COVERAGE=true yarn test
   - codeclimate-test-reporter < coverage/lcov.info
+  
+  - if [ "$TRAVIS_BRANCH" != "master" ]; then
+      exit 1;
+    fi
   - ember build --environment=production
 
 deploy:
