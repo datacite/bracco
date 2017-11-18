@@ -19,7 +19,7 @@ env:
 
 before_install:
   - set -e
-  - if [ "$TRAVIS_BRANCH" == "master" ]; then
+  - if [ "${TRAVIS_TAG?}" ]; then
       AWS_BUCKET="doi.datacite.org";
       cp .env.production .env;
     else
