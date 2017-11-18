@@ -37,7 +37,7 @@
     <div class="col-md-9">
       <div class="panel panel-transparent">
         <div class="panel-body">
-          {{#if (gt model.meta.clients.length 0)}}
+          {{#if (gt model.currentClientCount 0)}}
             <div class="alert alert-danger" role="alert">
               You need to delete all clients before you can delete this provider.
             </div>

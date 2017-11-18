@@ -45,7 +45,7 @@
     <div class="col-md-9">
       <div class="panel panel-transparent">
         <div class="panel-body">
-          {{#if (gt model.meta.dois.length 0)}}
+          {{#if (gt model.totalDoiCount 0)}}
             <div class="alert alert-danger" role="alert">
               You need to transfer all DOIs to another client before you can delete this client.
             </div>
