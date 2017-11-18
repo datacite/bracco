@@ -30,14 +30,14 @@ app.on('window-all-closed', () => {
 
 app.on('ready', () => {
   mainWindow = new BrowserWindow({
-    width: 1600,
-    height: 900,
+    width: 800,
+    height: 600,
   });
 
   // If you want to open up dev tools programmatically, call
   // mainWindow.openDevTools();
 
-  const emberAppLocation = 'https://doi.datacite.org';
+  const emberAppLocation = 'serve://dist';
 
   // Load the ember application using our custom protocol/scheme
   mainWindow.loadURL(emberAppLocation);
