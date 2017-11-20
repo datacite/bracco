@@ -4,7 +4,10 @@ export default DS.Model.extend({
   client: DS.belongsTo('client', {
     async: false
   }),
-  provider: DS.belongsTo('provider', {
+  // provider: DS.belongsTo('provider', {
+  //   async: false
+  // }),
+  'provider-prefix': DS.belongsTo('provider-prefix', {
     async: false
   }),
   prefix: DS.belongsTo('prefix', {
