@@ -57,7 +57,6 @@ export default Ember.Component.extend({
     } else {
       this.set('clients', []);
     }
-    this.selectClient(null);
   },
   selectClient(client) {
     this.set('client', client)
