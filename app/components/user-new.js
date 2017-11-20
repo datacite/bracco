@@ -28,9 +28,12 @@ export default Ember.Component.extend(Validations, {
   provider: null,
   client: null,
   disabled: true,
+  currentUser: null,
 
   didReceiveAttrs() {
     this._super(...arguments);
+
+    this.set('currentUser', this.get('currentUser'));
 
     this.searchRole();
   },
@@ -141,6 +144,8 @@ export default Ember.Component.extend(Validations, {
       let self = this;
       this.get('user').save().then(function(user) {
         self.get('router').transitionTo('users.show', user.id);
+      }).catch(function(reason){
+        Ember.Logger.assert(false, reason);
       });
     },
     cancel() {

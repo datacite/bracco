@@ -18,6 +18,8 @@ export default Ember.Component.extend({
         self.get('client').set('repository', repo);
         self.get('client').set('name', repo.get('name'));
       });
+    } else {
+      this.get('client').set('repository', null);
     }
   },
   reset() {
@@ -42,6 +44,8 @@ export default Ember.Component.extend({
       client.save().then(function(client) {
         self.get('router').transitionTo('clients.show.settings', client.id);
         self.set('new', false);
+      }).catch(function(reason){
+        Ember.Logger.assert(false, reason);
       });
     },
     cancel: function() {

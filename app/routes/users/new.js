@@ -1,8 +1,7 @@
 import Ember from 'ember';
-import RouteMixin from 'ember-cli-pagination/remote/route-mixin';
 import { CanMixin } from 'ember-can';
 
-export default Ember.Route.extend(CanMixin, RouteMixin, {
+export default Ember.Route.extend(CanMixin, {
   model(params) {
     if (params['client-id']) {
       return Ember.RSVP.hash({
@@ -12,6 +11,11 @@ export default Ember.Route.extend(CanMixin, RouteMixin, {
     } else if (params['provider-id']) {
       return Ember.RSVP.hash({
         provider: this.store.findRecord('provider', params['provider-id']),
+        client: null
+      });
+    } else {
+      return Ember.RSVP.hash({
+        provider: null,
         client: null
       });
     }

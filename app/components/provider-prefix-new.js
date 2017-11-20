@@ -23,6 +23,8 @@ export default Ember.Component.extend({
       var providerPrefix = this.get('store').createRecord('providerPrefix', { provider: this.get('model.provider'), prefix: this.get('prefix') });
       providerPrefix.save().then(function(providerPrefix) {
         self.get('router').transitionTo('providers.show.prefixes', providerPrefix.get('provider'));
+      }).catch(function(reason){
+        Ember.Logger.assert(false, reason);
       });
     },
     searchPrefix(query) {

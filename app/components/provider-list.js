@@ -23,6 +23,8 @@ export default Ember.Component.extend({
       provider.save().then(function(provider) {
         self.get('router').transitionTo('providers.show.settings', provider.id);
         self.set('new', false);
+      }).catch(function(reason){
+        Ember.Logger.assert(false, reason);
       });
     },
     cancel: function() {

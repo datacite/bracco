@@ -82,7 +82,7 @@ export default Ember.Component.extend({
     edit(user) {
       this.set('edit', true);
       this.set('user', user);
-      
+
       this.searchRole();
       this.selectRole(user.get('role'));
 
@@ -93,7 +93,6 @@ export default Ember.Component.extend({
         this.searchSandbox(null);
         this.selectSandbox(user.get('sandbox'));
       } else if (this.get('provider').get('id')) {
-        this.searchClient(null);
         this.selectClient(user.get('client'));
       }
     },

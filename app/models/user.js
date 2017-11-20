@@ -4,13 +4,13 @@ import ENV from 'bracco/config/environment';
 
 export default DS.Model.extend({
   provider: DS.belongsTo('provider', {
-    async: true
+    async: false
   }),
   client: DS.belongsTo('client', {
-    async: true
+    async: false
   }),
   role: DS.belongsTo('role', {
-    async: true
+    async: false
   }),
   sandbox: DS.belongsTo('sandbox', {
     async: true

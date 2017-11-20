@@ -6,6 +6,7 @@
       <ol class="breadcrumb">
         {{#if (can "read index")}}
           <li class="breadcrumb-item">{{#link-to "index"}}DataCite{{/link-to}}</li>
+
           {{#if model.provider}}
             <li class="breadcrumb-item">{{#link-to "providers"}}Providers{{/link-to}}</li>
           {{else}}

@@ -1,8 +1,7 @@
 import Ember from 'ember';
-import RouteMixin from 'ember-cli-pagination/remote/route-mixin';
 import { CanMixin } from 'ember-can';
 
-export default Ember.Route.extend(CanMixin, RouteMixin, {
+export default Ember.Route.extend(CanMixin, {
   model(params) {
     let self = this;
     return this.store.findRecord('user', params.user_id, { include: 'provider,client,role,sandbox' }).then(function(user) {
