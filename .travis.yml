@@ -25,6 +25,8 @@ before_install:
     elif [ "$TRAVIS_BRANCH" == "master" ]; then
       AWS_BUCKET="doi.test.datacite.org";
       cp .env.stage .env;
+    else
+      exit 1;
     fi
   - npm config set spin false
   - npm install -g codeclimate-test-reporter
@@ -38,9 +40,6 @@ script:
   # - COVERAGE=true yarn test
   # - codeclimate-test-reporter < coverage/lcov.info
 
-  - if [ "$TRAVIS_BRANCH" != "master" ]; then
-      exit 1;
-    fi
   - ember build --environment=production
 
 deploy:
