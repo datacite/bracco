@@ -64,6 +64,8 @@ export default Ember.Component.extend({
     } else if (this.get('currentUser').get('provider_id')) {
       let provider = this.get('store').findRecord('provider', this.get('currentUser').get('provider_id'));
       this.set('providers', [provider]);
+    } else {
+      this.set('providers', []);
     }
   },
   selectProvider(provider) {

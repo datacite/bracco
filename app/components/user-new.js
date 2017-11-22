@@ -88,9 +88,29 @@ export default Ember.Component.extend(Validations, {
   selectRole(role) {
     this.set('role', role);
     this.get('user').set('role', role);
+
+    if (role.id === 'user') {
+      this.set('providers', []);
+      this.set('provider', null);
+      this.get('user').set('provider', null);
+
+      this.set('client', null);
+      this.get('user').set('client', null);
+
+      this.set('isUser', true);
+    } else {
+      this.set('isUser', false);
+    }
   },
   searchProvider(query) {
-    this.set('providers', this.get('store').query('provider', { 'query': query, sort: 'name', 'page[size]': 1000 }));
+    if (this.get('currentUser').get('isAdmin')) {
+      this.set('providers', this.get('store').query('provider', { 'query': query, sort: 'name', 'page[size]': 25 }));
+    } else if (this.get('currentUser').get('provider_id')) {
+      let provider = this.get('store').findRecord('provider', this.get('currentUser').get('provider_id'));
+      this.set('providers', [provider]);
+    } else {
+      this.set('providers', []);
+    }
   },
   selectProvider(provider) {
     this.set('provider', provider)
