@@ -21,7 +21,7 @@
               {{/el.control}}
             {{/form.element}}
 
-            {{#form.element controlType="power-select" property="provider" label="Provider" optionLabelPath="name" options=providers destination=provider as |el|}}
+            {{#form.element controlType="power-select" property="provider" label="Provider" optionLabelPath="name" options=providers destination=provider disabled=isUser as |el|}}
               {{#el.control onChange=(action "selectProvider") search=(action "searchProvider") searchField="name" searchPlaceholder="Type to search..." allowClear=true as |item|}}
                 {{item.name}}
               {{/el.control}}
@@ -36,7 +36,7 @@
             <div class="pseudo-footer">
               <div class="btn-toolbar pull-right">
                 <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
-                <button {{action "submit"}} type="submit" class="btn btn-sm btn-fill">Save</button>
+                <button {{action "submit"}} disabled={{v-get model 'isInvalid'}} type="submit" class="btn btn-sm btn-fill">Save</button>
               </div>
               <div class="clearfix"/>
             </div>

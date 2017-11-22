@@ -44,9 +44,27 @@ export default Ember.Component.extend({
   selectRole(role) {
     this.set('role', role);
     this.get('user').set('role', role);
+
+    if (role.id === 'user') {
+      this.set('providers', []);
+      this.set('provider', null);
+      this.get('user').set('provider', null);
+
+      this.set('client', null);
+      this.get('user').set('client', null);
+
+      this.set('isUser', true);
+    } else {
+      this.set('isUser', false);
+    }
   },
   searchProvider(query) {
-    this.set('providers', this.get('store').query('provider', { 'query': query, sort: 'name', 'page[size]': 25 }));
+    if (this.get('currentUser').get('isAdmin')) {
+      this.set('providers', this.get('store').query('provider', { 'query': query, sort: 'name', 'page[size]': 25 }));
+    } else if (this.get('currentUser').get('provider_id')) {
+      let provider = this.get('store').findRecord('provider', this.get('currentUser').get('provider_id'));
+      this.set('providers', [provider]);
+    }
   },
   selectProvider(provider) {
     this.set('provider', provider)
@@ -86,8 +104,8 @@ export default Ember.Component.extend({
       this.searchRole();
       this.selectRole(user.get('role'));
 
-      this.selectProvider(user.get('provider'));
       this.searchProvider(null);
+      this.selectProvider(user.get('provider'));
 
       if (this.get('provider') && this.get('provider').get('id') === 'sandbox') {
         this.searchSandbox(null);
@@ -121,12 +139,20 @@ export default Ember.Component.extend({
       this.selectSandbox(sandbox);
     },
     submit() {
-      this.get('user').save();
-      this.reset();
+      let self = this;
+      this.get('user').save().then(function () {
+        self.reset();
+      }).catch(function(reason){
+        Ember.Logger.assert(false, reason);
+      });
     },
     destroy() {
-      this.get('user').save();
-      this.reset();
+      let self = this;
+      this.get('user').save().then(function () {
+        self.reset();
+      }).catch(function(reason){
+        Ember.Logger.assert(false, reason);
+      });
     },
     cancel() {
       this.reset();
