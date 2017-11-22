@@ -38,7 +38,7 @@ export default Ember.Component.extend({
     },
     submit() {
       this.get('model').save();
-      this.get('flashMessages').success('Transfer of ' + this.get('intl').formatNumber(this.get('model').get('totalDoiCount')) + ' DOIs initiated. It can take up to 8 hours until these changes are indexed and show up in DOI Fabrica.', {
+      this.get('flashMessages').success(this.get('intl').formatNumber(this.get('model').get('totalDoiCount')) + ' DOIs transferred. It can take up to 8 hours until these changes are indexed and show up outside of DOI Fabrica.', {
         timeout: 5000,
         sticky: true
       });
