@@ -46,7 +46,7 @@ export default Ember.Service.extend({
         if (payload) {
           self.set('fromCookie', true);
           self.initUser(payload);
-        } else {
+        } else if (error.message !== "jwt must be provided") {
           Ember.Logger.assert(false, error);
         }
       });
