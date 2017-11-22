@@ -56,6 +56,7 @@ export default Ember.Component.extend({
       this.searchClient(null);
     } else {
       this.set('clients', []);
+      this.selectClient(null);
     }
   },
   selectClient(client) {
@@ -88,10 +89,10 @@ export default Ember.Component.extend({
       this.selectProvider(user.get('provider'));
       this.searchProvider(null);
 
-      if (this.get('provider').get('id') === 'sandbox') {
+      if (this.get('provider') && this.get('provider').get('id') === 'sandbox') {
         this.searchSandbox(null);
         this.selectSandbox(user.get('sandbox'));
-      } else if (this.get('provider').get('id')) {
+      } else if (this.get('provider') && this.get('provider').get('id')) {
         this.selectClient(user.get('client'));
       }
     },

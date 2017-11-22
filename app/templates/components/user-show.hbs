@@ -27,7 +27,7 @@
               {{/el.control}}
             {{/form.element}}
 
-            {{#form.element controlType="power-select" property="client" label="Client" optionLabelPath="name" options=clients destination=client disabled=isClient as |el|}}
+            {{#form.element controlType="power-select" property="client" label="Client" optionLabelPath="name" options=clients destination=client disabled=(or isClient (not provider)) as |el|}}
               {{#el.control onChange=(action "selectClient") search=(action "searchClient") searchField="name" searchPlaceholder="Type to search..." allowClear=true as |item|}}
                 {{item.name}}
               {{/el.control}}
