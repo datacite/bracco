@@ -11,7 +11,7 @@ export default Ember.Route.extend(CanMixin, RouteMixin, {
                             total_pages: "total-pages" };
 
     // params = Ember.merge(params, { adapterOptions: { include: ['member'] }});
-    params = Ember.merge(params, { 'provider-id': this.modelFor('providers/show').get('id'), sort: 'name' });
+    params = Ember.merge(params, { 'provider-id': this.modelFor('providers/show').get('id') });
     return this.findPaged('client', params);
   },
 

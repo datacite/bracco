@@ -66,7 +66,7 @@ export default Ember.Component.extend(RouteMixin, {
     } else if (['prefix', 'provider-prefix', 'client-prefix'].includes(this.get('model').get("modelName"))) {
       this.set('formats', { '-created': 'Sort by Date Created', 'name': 'Sort by Name' });
     } else {
-      this.set('formats', { '-created': 'Sort by Date Joined', 'name': 'Sort by Name' });
+      this.set('formats', { 'name': 'Sort by Name', '-created': 'Sort by Date Joined' });
     }
   }
 });
