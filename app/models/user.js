@@ -4,25 +4,26 @@ import ENV from 'bracco/config/environment';
 import { validator, buildValidations } from 'ember-cp-validations';
 
 const Validations = buildValidations({
-  // provider: [
-  //   validator('presence', {
-  //     presence: true,
-  //     ignoreBlank: true,
-  //     disabled: Ember.computed('model', function() {
-  //       console.log(['staff_admin', 'staff_user', 'user'].includes(this.get('model').get('role_id')))
-  //       return ['staff_admin', 'staff_user', 'user'].includes(this.get('model').get('role_id'));
-  //     })
-  //   })
-  // ],
-  // client: [
-  //   validator('presence', {
-  //     presence: true,
-  //     ignoreBlank: true,
-  //     disabled: Ember.computed('model', function() {
-  //       return ['client_admin', 'client_user'].includes(this.get('model').get('role_id'));
-  //     })
-  //   })
-  // ]
+  provider: [
+    validator('presence', {
+      presence: true,
+      ignoreBlank: true,
+      disabled: Ember.computed('model', function() {
+        return true;
+        // return ['staff_admin', 'staff_user', 'user'].includes(this.get('model').get('role_id'));
+      })
+    })
+  ],
+  client: [
+    validator('presence', {
+      presence: true,
+      ignoreBlank: true,
+      disabled: Ember.computed('model', function() {
+        return true;
+        // return ['client_admin', 'client_user'].includes(this.get('model').get('role_id'));
+      })
+    })
+  ]
 });
 
 export default DS.Model.extend(Validations, {
