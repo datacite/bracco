@@ -1,5 +1,7 @@
 import Ember from 'ember';
 import { validator, buildValidations } from 'ember-cp-validations';
+import fetch from 'fetch';
+import ENV from 'bracco/config/environment';
 
 const Validations = buildValidations({
   confirmId: validator('confirmation', {
@@ -12,6 +14,7 @@ export default Ember.Component.extend(Validations, {
   store: Ember.inject.service(),
 
   edit: false,
+  change: false,
   delete: false,
   provider: null,
   setPassword: false,
@@ -20,7 +23,27 @@ export default Ember.Component.extend(Validations, {
   reset() {
     this.set('provider', null);
     this.set('edit', false);
+    this.set('change', false);
     this.set('delete', false);
+  },
+  generate() {
+    let self = this;
+    let url = ENV.USER_API_URL + '/random';
+    fetch(url, {
+      headers: {
+        'Authorization': 'Bearer ' + this.get('currentUser').get('jwt')
+      }
+    }).then(function(response) {
+      if (response.ok) {
+        response.json().then(function(data) {
+          self.get('model').set('password', data.phrase);
+        });
+      } else {
+        Ember.Logger.assert(false, response)
+      }
+    }).catch(function(error) {
+      Ember.Logger.assert(false, error)
+    });
   },
 
   actions: {
@@ -30,13 +53,28 @@ export default Ember.Component.extend(Validations, {
       this.get('provider').set('setPassword', false);
       this.set('edit', true);
     },
+    change: function(provider) {
+      this.set('provider', provider);
+      this.get('provider').set('confirmSymbol', provider.get('symbol'));
+      this.get('provider').set('password', null);
+      this.get('provider').set('setPassword', true);
+      this.set('change', true);
+    },
+    generate() {
+      this.generate();
+    },
     delete: function(provider) {
       this.set('provider', provider);
       this.get('provider').set('confirmSymbol', null);
       this.set('delete', true);
     },
-    setPassword: function(value) {
-      this.get('provider').set('setPassword', value);
+    setPassword: function() {
+      let self = this;
+      this.get('provider').save().then(function () {
+        self.reset();
+      }).catch(function(reason){
+        Ember.Logger.assert(false, reason);
+      });
     },
     submit: function() {
       let self = this;
@@ -58,6 +96,11 @@ export default Ember.Component.extend(Validations, {
     },
     cancel: function() {
       this.reset();
+    },
+    onSuccess() {
+    },
+    onError(error) {
+      Ember.Logger.assert(false, error)
     }
   }
 });

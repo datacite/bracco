@@ -48,7 +48,7 @@ test('editing provider TIB settings', function(assert) {
   andThen(function() {
     assert.equal(currentURL(), '/providers/tib/settings');
     assert.equal(find('h2.work').text(), 'German National Library of Science and Technology');
-    assert.equal(find('button#provider-edit').length, 0);
+    assert.equal(find('button#edit-provider').length, 0);
   });
 
   // fillIn('input[placeholder="Provider Name"]', 'German National Library of Science and Technology');

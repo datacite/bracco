@@ -15,12 +15,6 @@
               {{form.element controlType="checkbox" label="Account is active" property="isActive" required=false helpText='This account can manage clients, prefixes and users'}}
             {{/if}}
 
-            {{form.element controlType="checkbox" onChange=(action "setPassword") label="Set Password" property="setPassword"}}
-
-            {{#if model.setPassword}}
-              {{password-generate model=model}}
-            {{/if}}
-
             <div class="pseudo-footer">
               <div class="btn-toolbar pull-right">
                 <button {{action "cancel"}} class="btn btn-sm" id="cancel">Cancel</button>
@@ -40,6 +34,47 @@
       </div>
 
       {{client-sidebar model=model}}
+    </div>
+  </div>
+{{else if change}}
+  <div class="row">
+    <div class="col-md-9">
+      <div class="panel panel-transparent">
+        <div class="panel-body">
+          <h3 class="edit">Set API Password</h3>
+
+          {{#bs-form formLayout="vertical" model=model onSubmit=(action "setPassword" model) submitOnEnter=true as |form|}}
+            <div id="password" class="input-group">
+              {{input name="password" id="password" value=model.password class="form-control" placeholder='New API Password' readonly=true}}
+              <div class="input-group-btn">
+                <button {{action "generate"}} class="btn btn-xs btn-fill" id="generate">Generate</button>
+              </div>
+            </div>
+            <span class="help-block">Please click Generate for a new password.</span>
+            {{#if model.password}}
+              {{#bs-alert dismissible=false type="info"}}
+                Make sure to copy your new password now. You won’t be able to see it again!
+                {{#copy-button
+                  clipboardTarget="input#password"
+                  class="btn-link"
+                  success=(action "onSuccess")
+                  error=(action "onError")
+                }}
+                  <i class="fa fa-clipboard" />
+                {{/copy-button}}
+              {{/bs-alert}}
+            {{/if}}
+
+            <div class="pseudo-footer">
+              <div class="btn-toolbar pull-right">
+                <button {{action "cancel"}} class="btn btn-sm" id="cancel">Cancel</button>
+                <button type="submit" class="btn btn-sm btn-fill">Save</button>
+              </div>
+              <div class="clearfix"/>
+            </div>
+          {{/bs-form}}
+        </div>
+      </div>
     </div>
   </div>
 {{else if delete}}
@@ -110,10 +145,11 @@
         <div class="panel facets">
           <div class="panel-body">
             <div class="btn-toolbar">
-              <div class="btn-group btn-group-sm">
-                <button {{action "edit" model}} class="btn btn-warning" id="edit-provider">{{fa-icon "pencil"}}Edit{{#if (and admin media.isXl)}} Admin{{else if media.isXl}} Provider{{/if}}</button>
+              <div class="btn-group-vertical btn-group-sm">
+                <button {{action "change" model}} class="btn btn-warning" id="set-password-provider">{{fa-icon "key"}}Set API Password</button>
+                <button {{action "edit" model}} class="btn btn-warning" id="edit-provider">{{fa-icon "pencil"}}Edit{{if admin ' Admin' ' Provider'}}</button>
                 {{#if (and (not admin) (can "delete provider" model))}}
-                  <button {{action "delete" model}} class="btn btn-warning" id="delete-provider">{{fa-icon "trash"}}Delete{{if media.isXl ' Provider'}}</button>
+                  <button {{action "delete" model}} class="btn btn-warning" id="delete-provider">{{fa-icon "trash"}}Delete Provider</button>
                 {{/if}}
               </div>
             </div>

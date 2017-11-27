@@ -1,9 +1,12 @@
 import Ember from 'ember';
+import fetch from 'fetch';
+import ENV from 'bracco/config/environment';
 
 export default Ember.Component.extend({
   store: Ember.inject.service(),
 
   edit: false,
+  change: false,
   delete: false,
   client: null,
   provider: null,
@@ -13,7 +16,27 @@ export default Ember.Component.extend({
 
   reset() {
     this.set('edit', false);
+    this.set('change', false);
     this.set('delete', false);
+  },
+  generate() {
+    let self = this;
+    let url = ENV.USER_API_URL + '/random';
+    fetch(url, {
+      headers: {
+        'Authorization': 'Bearer ' + this.get('currentUser').get('jwt')
+      }
+    }).then(function(response) {
+      if (response.ok) {
+        response.json().then(function(data) {
+          self.get('model').set('password', data.phrase);
+        });
+      } else {
+        Ember.Logger.assert(false, response)
+      }
+    }).catch(function(error) {
+      Ember.Logger.assert(false, error)
+    });
   },
   selectRepository(repository) {
     if (repository) {
@@ -36,12 +59,30 @@ export default Ember.Component.extend({
       this.set('repository', client.get('repository'));
       this.set('edit', true);
     },
+    change: function(client) {
+      this.set('client', client);
+      this.get('client').set('confirmSymbol', client.get('symbol'));
+      this.get('client').set('password', null);
+      this.get('client').set('setPassword', true);
+      this.set('change', true);
+    },
+    generate() {
+      this.generate();
+    },
     delete: function(client) {
       this.set('client', client);
       this.get('client').set('confirmSymbol', null);
       this.get('client').validateSync();
       this.set('provider', client.get('provider'));
       this.set('delete', true);
+    },
+    setPassword: function() {
+      let self = this;
+      this.get('client').save().then(function () {
+        self.reset();
+      }).catch(function(reason){
+        Ember.Logger.assert(false, reason);
+      });
     },
     searchRepository(query) {
       this.set('repositories', this.get('store').query('repository', { 'query': query, 'page[size]': 25 }));
@@ -70,6 +111,11 @@ export default Ember.Component.extend({
         self.get('model').set('client', client);
         self.reset();
       });
+    },
+    onSuccess() {
+    },
+    onError(error) {
+      Ember.Logger.assert(false, error)
     }
   }
 });
