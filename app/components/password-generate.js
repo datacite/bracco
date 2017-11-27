@@ -34,9 +34,9 @@ export default Component.extend({
     generate() {
       this.generate();
     },
-    onSuccess(clipboard) {
+    onSuccess() {
     },
-    onError(message) {
+    onError(error) {
       Ember.Logger.assert(false, error)
     }
   }
