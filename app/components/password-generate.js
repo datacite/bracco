@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import Component from '@ember/component';
 import fetch from 'fetch';
 import ENV from 'bracco/config/environment';
@@ -12,7 +13,7 @@ export default Component.extend({
   generate() {
     let self = this;
     let url = ENV.USER_API_URL + '/random';
-    let result = fetch(url, {
+    fetch(url, {
       headers: {
         'Authorization': 'Bearer ' + this.get('currentUser').get('jwt')
       }
@@ -32,6 +33,11 @@ export default Component.extend({
   actions: {
     generate() {
       this.generate();
+    },
+    onSuccess(clipboard) {
+    },
+    onError(message) {
+      Ember.Logger.assert(false, error)
     }
   }
 });
