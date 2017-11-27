@@ -10,7 +10,17 @@
             {{form.element controlType="text" label="Provider Name" placeholder="Provider Name" property="name" required=false}}
             {{form.element controlType="text" label="Contact Name" placeholder="Contact Name" property="contactName" helpText='Please enter the name of a person that can be contacted for technical or administrative issues.' required=false}}
             {{form.element controlType="email" label="Contact Email" placeholder="Contact Email" property="contactEmail" required=false}}
-            {{form.element controlType="checkbox" label="Account is active" property="isActive" required=false helpText='This account can manage clients, prefixes and users'}}
+
+            {{#if (can "create provider")}}
+              {{form.element controlType="checkbox" label="Account is active" property="isActive" required=false helpText='This account can manage clients, prefixes and users'}}
+            {{/if}}
+
+            {{form.element controlType="checkbox" onChange=(action "setPassword") label="Set Password" property="setPassword"}}
+
+            {{#if model.setPassword}}
+              {{password-generate model=model}}
+            {{/if}}
+
             <div class="pseudo-footer">
               <div class="btn-toolbar pull-right">
                 <button {{action "cancel"}} class="btn btn-sm" id="cancel">Cancel</button>
@@ -86,6 +96,11 @@
           {{#if model.contactEmail}}
             <h5>Contact Email</h5>
             <a href="mailto:{{model.contactEmail}}">{{model.contactEmail}}</a>
+          {{/if}}
+
+          {{#if (not model.password)}}
+            <h5>Password</h5>
+            <span class="small icon-warning">has not been set</span>
           {{/if}}
         </div>
       </div>

@@ -2,7 +2,6 @@ import Ember from 'ember';
 import fetch from 'fetch';
 
 export default Ember.Component.extend({
-  tagName: 'div',
   url: null,
   urlToCheck: null,
   contentType: "text/html",

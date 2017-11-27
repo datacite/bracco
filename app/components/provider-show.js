@@ -14,6 +14,7 @@ export default Ember.Component.extend(Validations, {
   edit: false,
   delete: false,
   provider: null,
+  setPassword: false,
   confirmId: null,
 
   reset() {
@@ -26,12 +27,16 @@ export default Ember.Component.extend(Validations, {
     edit: function(provider) {
       this.set('provider', provider);
       this.get('provider').set('confirmSymbol', provider.get('symbol'));
+      this.get('provider').set('setPassword', false);
       this.set('edit', true);
     },
     delete: function(provider) {
       this.set('provider', provider);
       this.get('provider').set('confirmSymbol', null);
       this.set('delete', true);
+    },
+    setPassword: function(value) {
+      this.get('provider').set('setPassword', value);
     },
     submit: function() {
       let self = this;

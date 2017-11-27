@@ -7,11 +7,11 @@ export default Ember.Component.extend({
   delete: false,
   client: null,
   provider: null,
+  setPassword: false,
   repository: null,
   repositories: [],
 
   reset() {
-    this.set('client', null);
     this.set('edit', false);
     this.set('delete', false);
   },
@@ -32,6 +32,7 @@ export default Ember.Component.extend({
     edit: function(client) {
       this.set('client', client);
       this.get('client').set('confirmSymbol', client.get('symbol'));
+      this.get('client').set('setPassword', false);
       this.set('repository', client.get('repository'));
       this.set('edit', true);
     },
@@ -63,8 +64,12 @@ export default Ember.Component.extend({
         self.get('router').transitionTo('providers.show.settings', self.get('provider'));
       });
     },
-    cancel: function() {
-      this.reset();
+    cancel: function(client) {
+      let self = this;
+      this.get('store').findRecord("client", client.id).then(function(client) {
+        self.get('model').set('client', client);
+        self.reset();
+      });
     }
   }
 });

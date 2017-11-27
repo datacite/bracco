@@ -17,11 +17,20 @@
             {{form.element controlType="text" label="Contact Name" placeholder="Contact Name" property="contactName" helpText='Please enter the name of a person that can be contacted for technical or administrative issues.' required=false}}
             {{form.element controlType="email" label="Contact Email" placeholder="Contact Email" property="contactEmail" required=false}}
             {{form.element controlType="textarea" label="Domains" placeholder="Domains" property="domains" required=false helpText='List of (sub-)domains used for DOI registration, or use * to allow all domains'}}
-            {{form.element controlType="checkbox" label="Account is active" property="isActive" helpText='This account can register and update DOIs'}}
+
+            {{#if (can "create client" model.provider)}}
+              {{form.element controlType="checkbox" label="Account is active" property="isActive" helpText='This account can register and update DOIs'}}
+            {{/if}}
+
+            {{form.element controlType="checkbox" label="Set Password" property="setPassword"}}
+
+            {{#if model.setPassword}}
+              {{password-generate model=model}}
+            {{/if}}
 
             <div class="pseudo-footer">
               <div class="btn-toolbar pull-right">
-                <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
+                <button {{action "cancel" model}} class="btn btn-sm">Cancel</button>
                 <button type="submit" class="btn btn-sm btn-fill">Save</button>
               </div>
               <div class="clearfix"/>
@@ -159,6 +168,11 @@
             {{#each model.domainList as |domain|}}
               {{domain}}<br/>
             {{/each}}
+          {{/if}}
+
+          {{#if (not model.password)}}
+            <h5>Password</h5>
+            <span class="small icon-warning">has not been set</span>
           {{/if}}
         </div>
       </div>
