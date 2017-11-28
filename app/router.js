@@ -30,7 +30,7 @@ Router.map(function() {
     this.route('show', { path: '/:doi_id' });
   });
   this.route('settings', function() {
-    this.route('show', { path: '/:provider_id' });
+    this.route('index', { path: '/' });
   });
   this.route('users', function() {
     this.route('show', { path: '/:user_id' }, function() {
