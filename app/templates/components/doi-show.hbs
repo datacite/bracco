@@ -69,7 +69,7 @@
       <h2 class="work">{{model.doi}}</h2>
     </div>
 
-    {{#if (can "create doi")}}
+    {{#if (can "edit doi" model)}}
       <div class='col-md-3'>
         <div class="panel facets add">
           <div class="panel-body">
