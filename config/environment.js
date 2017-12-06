@@ -22,7 +22,8 @@ module.exports = function(environment) {
     },
     bugsnag: {
       apiKey: process.env.BUGSNAG_API_KEY,
-      notifyReleaseStages: ['production']
+      notifyReleaseStages: ['development', 'production', 'staging'],
+      releaseStage: process.env.BUGSNAG_RELEASE_STAGE
     },
     emberTracker: {
 			analyticsSettings: {
