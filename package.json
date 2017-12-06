@@ -27,6 +27,7 @@
     "checkdigit": "^1.1.1",
     "d3": "^3.5.5",
     "d3-tip": "^0.7.1",
+    "electron-prebuilt-compile": "^1.7.9",
     "ember-ajax": "^3.0.0",
     "ember-bootstrap": "^1.0.0-rc.3",
     "ember-bootstrap-cp-validations": "1.0.0-alpha.0",
