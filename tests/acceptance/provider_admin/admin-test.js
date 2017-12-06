@@ -114,7 +114,7 @@ test('visiting dois', function(assert) {
   });
 });
 
-test('visiting specific doi not managed by provider', function(assert) {
+test('visiting specific doi', function(assert) {
   visit('/dois/10.5520%2Fsagecite-1');
 
   andThen(function() {

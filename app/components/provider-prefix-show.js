@@ -22,6 +22,6 @@ export default Ember.Component.extend({
         providerPrefix.destroyRecord();
         self.get('router').transitionTo('providers.show.prefixes', self.get('provider'));
       });
-    },
+    }
   }
 });
