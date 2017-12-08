@@ -6,6 +6,7 @@ import ENV from 'bracco/config/environment';
 export default Ember.Service.extend({
   store: Ember.inject.service(),
   flashMessages: Ember.inject.service(),
+  features: Ember.inject.service(),
 
   isAuthenticated: false,
   isPermitted: false,
@@ -31,7 +32,7 @@ export default Ember.Service.extend({
 
     if (ENV.JWT_PRIVATE_KEY && ENV.environment === 'test') {
       this.initUser({ uid: ENV.USER_UID, name: ENV.USER_NAME, role_id: ENV.USER_ROLE_ID });
-      this.setJwt();
+      this.setJwt(ENV.USER_ROLE_ID);
     } else {
       // check for cookie containing jwt
       let jwt = Cookie.get('_datacite_jwt');
@@ -63,6 +64,9 @@ export default Ember.Service.extend({
       this.set('client_id', payload.client_id);
 
       this.setRole(payload.role_id);
+
+      // setup features for ember-feature-flags
+      this.get('features').setup(payload.features);
 
       if (payload.sandbox_id) {
         this.set('sandbox_id', payload.sandbox_id);
@@ -96,12 +100,12 @@ export default Ember.Service.extend({
     this.get('flashMessages').info('Welcome ' + this.get('name') + ' to the ' + this.get('area') + '.');
   },
 
-  setJwt() {
+  setJwt(role_id) {
     let duration = (ENV.environment === 'test') ? 60 : (30 * 24 * 3600)
     let payload = {
       uid: this.get('uid'),
       name: this.get('name'),
-      role_id: this.get('role_id'),
+      role_id: role_id,
       exp: Math.floor(Date.now() / 1000) + duration
     };
 
