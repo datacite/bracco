@@ -97,7 +97,7 @@
     "node": "^4.5 || 6.* || >= 7.*"
   },
   "dependencies": {
-    "ember-electron": "2.7.1",
+    "ember-electron": "2.7.2",
     "ember-responsive": "^2.0.5",
     "fs-extra": "4.0.2",
     "junk": "^2.1.0",
