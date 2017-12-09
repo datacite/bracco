@@ -53,7 +53,7 @@ app.on('window-all-closed', function onWindowAllClosed() {
 app.on('ready', function onReady() {
   mainWindow = new BrowserWindow({
     width: 1200,
-    height: 900,
+    height: 800,
     webPreferences: {
       backgroundThrottling: false,
     },
