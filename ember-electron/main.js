@@ -1,7 +1,8 @@
 /* eslint-env node */
-const { app, BrowserWindow, protocol } = require('electron');
+const { app, BrowserWindow, protocol, Menu, shell  } = require('electron');
 const { dirname, join, resolve } = require('path');
 const protocolServe = require('electron-protocol-serve');
+const defaultMenu = require('electron-default-menu');
 
 let mainWindow = null;
 
@@ -29,6 +30,20 @@ app.on('window-all-closed', () => {
 });
 
 app.on('ready', () => {
+  // Get template for default menu
+  const menu = defaultMenu(app, shell);
+
+  // Add custom menu
+  menu[4].submenu.splice(0, 1, {
+    label: 'Support Website',
+    click: (item, focusedWindow) => {
+      shell.openExternal('https://support.datacite.org')
+    }
+  })
+
+  // Set top-level application menu, using modified template
+  Menu.setApplicationMenu(Menu.buildFromTemplate(menu));
+
   mainWindow = new BrowserWindow({
     width: 1200,
     height: 800,

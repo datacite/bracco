@@ -149,14 +149,6 @@
   dependencies:
     "@glimmer/util" "^0.25.3"
 
-"@jasonmit/ember-cli-dotenv@github:jasonmit/ember-cli-dotenv#v2.0.1", ember-cli-dotenv@jasonmit/ember-cli-dotenv#v2.0.1:
-  version "2.0.1"
-  resolved "https://codeload.github.com/jasonmit/ember-cli-dotenv/tar.gz/79d820e6e8bab83206a0eeb8db58aeb81128c825"
-  dependencies:
-    dotenv "^1.0.0"
-    exists-sync "0.0.3"
-    minimist "^1.2.0"
-
 "@paulcbetts/mime-db@~1.22.0":
   version "1.22.4"
   resolved "https://registry.yarnpkg.com/@paulcbetts/mime-db/-/mime-db-1.22.4.tgz#b8ff8e78087a40992990f702f8d9c65499be2ef1"
@@ -4123,7 +4115,7 @@ dot-prop@^4.1.0:
   dependencies:
     is-obj "^1.0.0"
 
-dotenv@^1.0.0, dotenv@^1.2.0:
+dotenv@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-1.2.0.tgz#7cd73e16e07f057c8072147a5bc3a8677f0ab5c6"
 
@@ -4223,6 +4215,10 @@ electron-compilers@*:
     stylus-lookup "^1.0.1"
     toutsuite "^0.6.0"
     typescript ">=1.6"
+
+electron-default-menu@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/electron-default-menu/-/electron-default-menu-1.0.1.tgz#3173c5018eb507404fec63bdf3b78c38eedba808"
 
 electron-download@^3.0.1:
   version "3.3.0"
@@ -4819,6 +4815,14 @@ ember-cli-deploy@^1.0.2:
     lodash "^4.0.0"
     rsvp "^3.3.3"
     silent-error "^1.0.0"
+
+ember-cli-dotenv@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/ember-cli-dotenv/-/ember-cli-dotenv-2.0.0.tgz#2c09fc5f8b60f690c9e02428b4f4e3f0b8c64421"
+  dependencies:
+    dotenv "^4.0.0"
+    ember-cli-babel "^6.6.0"
+    minimist "^1.2.0"
 
 ember-cli-eslint@^4.0.0:
   version "4.0.0"

@@ -9,3 +9,10 @@ test('it exists', function(assert) {
   // let store = this.store();
   assert.ok(!!model);
 });
+
+// test('should correctly compute domainList', function(assert) {
+//   let model = this.subject();
+//   model.set('domains', 'datacite.org, datacite.de, datacite.fr');
+//
+//   assert.equal(model.get('domainList'), 'computed baz');
+// });
