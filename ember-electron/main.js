@@ -30,20 +30,6 @@ app.on('window-all-closed', () => {
 });
 
 app.on('ready', () => {
-  // Get template for default menu
-  const menu = defaultMenu(app, shell);
-
-  // Add custom menu
-  menu[4].submenu.splice(0, 1, {
-    label: 'Support Website',
-    click: (item, focusedWindow) => {
-      shell.openExternal('https://support.datacite.org')
-    }
-  })
-
-  // Set top-level application menu, using modified template
-  Menu.setApplicationMenu(Menu.buildFromTemplate(menu));
-
   mainWindow = new BrowserWindow({
     width: 1200,
     height: 800,
@@ -79,6 +65,31 @@ app.on('ready', () => {
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
+
+  // Get template for default menu
+  const menu = defaultMenu(app, shell);
+
+  // Add link to home
+  menu[2].submenu.splice(0, 0, {
+    label: 'Home',
+    click: (item, browserWindow) => {
+      browserWindow.loadURL(emberAppLocation)
+    }
+  })
+  menu[2].submenu.splice(1, 0, {
+    type: 'separator'
+  })
+
+  // Add support link
+  menu[4].submenu.splice(0, 1, {
+    label: 'Support Website',
+    click: (item, browserWindow) => {
+      shell.openExternal('https://support.datacite.org')
+    }
+  })
+
+  // Set top-level application menu, using modified template
+  Menu.setApplicationMenu(Menu.buildFromTemplate(menu));
 
   // open external links in browser for target="_blank", modified from https://github.com/electron/electron/issues/1344
   var handleRedirect = (e, url) => {

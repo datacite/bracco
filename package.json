@@ -1,6 +1,6 @@
 {
   "name": "bracco",
-  "version": "0.9.23",
+  "version": "0.9.24",
   "private": true,
   "description": "DOI Fabrica",
   "repository": {
@@ -110,6 +110,7 @@
     "ember-electron": "2.7.2",
     "ember-responsive": "^2.0.5",
     "fs-extra": "4.0.2",
+    "is-electron": "^2.1.0",
     "junk": "^2.1.0",
     "node-gyp": "3.6.2"
   },
