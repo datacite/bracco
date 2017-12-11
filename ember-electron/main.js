@@ -79,6 +79,16 @@ app.on('ready', () => {
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
+
+  // open external links in browser for target="_blank", modified from https://github.com/electron/electron/issues/1344
+  var handleRedirect = (e, url) => {
+    if(url != mainWindow.webContents.getURL()) {
+      e.preventDefault()
+      shell.openExternal(url)
+    }
+  }
+
+  mainWindow.webContents.on('new-window', handleRedirect)
 });
 
 // Handle an unhandled error in the main thread

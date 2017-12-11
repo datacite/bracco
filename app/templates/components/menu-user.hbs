@@ -5,17 +5,14 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li class='dropdown-header'>Role: {{currentUser.roleName}}</li>
-    <li><a href="/users/{{currentUser.uid}}">{{fa-icon "cog"}} Personal Settings</a></li>
+    <li>{{#link-to "users.show" currentUser.uid target="_self"}}{{fa-icon "cog"}} Personal Settings{{/link-to}}</li>
     <li class="divider"/>
-    <li><a href="{{orcid-url}}/{{currentUser.uid}}">{{fa-icon "external-link"}} ORCID Record</a></li>
+    <li><a target="_blank" href="{{orcid-url}}/{{currentUser.uid}}">{{fa-icon "external-link"}} ORCID Record</a></li>
     {{#if currentUser.fromCookie}}
       <li class="divider"/>
-      <li><a href="{{jwt-host}}/sign_out">{{fa-icon "sign-out"}} Sign out</a></li>
+      <li>{{#dynamic-link params=signout}}{{fa-icon "sign-out"}} Sign out{{/dynamic-link}}</li>
     {{/if}}
   </ul>
 {{else}}
-  <a href="{{jwt-host}}/sign_in" class="btn btn-sm btn-neutral" id="sign-in">
-    {{fa-icon "sign-in"}}
-    {{t "user.signin"}}
-  </a>
+  <li>{{#dynamic-link params=signin}}{{fa-icon "sign-in"}} {{t "user.signin"}}{{/dynamic-link}}</li>
 {{/if}}

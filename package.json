@@ -1,6 +1,6 @@
 {
   "name": "bracco",
-  "version": "0.9.21",
+  "version": "0.9.23",
   "private": true,
   "description": "DOI Fabrica",
   "repository": {
@@ -8,7 +8,7 @@
     "url": "https://github.com/datacite/bracco.git"
   },
   "license": "MIT",
-  "author": "",
+  "author": "Martin Fenner",
   "directories": {
     "doc": "doc",
     "test": "tests"
@@ -30,6 +30,7 @@
     "d3": "^3.5.5",
     "d3-tip": "^0.7.1",
     "devtron": "^1.4.0",
+    "dynamic-link": "^0.2.3",
     "electron-forge": "^4.1.6",
     "electron-prebuilt-compile": "1.8.2-beta.3",
     "ember-ajax": "^3.0.0",
@@ -116,7 +117,6 @@
     "forge": {
       "make_targets": {
         "darwin": [
-          "zip",
           "dmg"
         ]
       },
