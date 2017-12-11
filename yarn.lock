@@ -4137,6 +4137,13 @@ duplexer2@^0.1.2, duplexer2@~0.1.0, duplexer2@~0.1.2:
   dependencies:
     readable-stream "^2.0.2"
 
+dynamic-link@^0.2.3:
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/dynamic-link/-/dynamic-link-0.2.3.tgz#e5e8099a64c9f2f74396e0da4c53a13f3c815ef0"
+  dependencies:
+    ember-cli-babel "^6.0.0"
+    ember-getowner-polyfill "^1.2.3"
+
 eachr@^3.2.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/eachr/-/eachr-3.2.0.tgz#2c35e43ea086516f7997cf80b7aa64d55a4a4484"
@@ -5346,7 +5353,7 @@ ember-get-config@^0.2.3:
     broccoli-file-creator "^1.1.1"
     ember-cli-babel "^6.3.0"
 
-ember-getowner-polyfill@^1.1.1:
+ember-getowner-polyfill@^1.1.1, ember-getowner-polyfill@^1.2.3:
   version "1.2.5"
   resolved "https://registry.yarnpkg.com/ember-getowner-polyfill/-/ember-getowner-polyfill-1.2.5.tgz#ceff8a09897d0d7e05c821bb71666a95eb26dc92"
   dependencies:

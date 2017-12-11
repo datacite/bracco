@@ -70,7 +70,7 @@ export default Ember.Service.extend({
 
       if (payload.sandbox_id) {
         this.set('sandbox_id', payload.sandbox_id);
-        this.set('sandbox', '/clients/' + payload.sandbox_id);
+        this.set('sandbox', { route: 'clients.show', id: payload.sandbox_id });
       }
     }
   },
@@ -81,20 +81,20 @@ export default Ember.Service.extend({
 
     if (['staff_admin', 'staff_user'].includes(role_id)) {
       this.set('isAdmin', true);
-      this.set('home', '/');
+      this.set('home', { route: 'index' });
       this.set('area', 'DataCite Administration area')
     } else if (['provider_admin', 'provider_user'].includes(role_id) && this.get('provider_id')) {
       this.set('isProvider', true);
-      this.set('home', '/providers/' + this.get('provider_id'));
+      this.set('home', { route: 'providers.show', id: this.get('provider_id') });
       this.set('area', 'Provider Administration area')
     } else if (['client_admin', 'client_user'].includes(role_id) && this.get('client_id')) {
       this.set('isClient', true);
-      this.set('home', '/clients/' + this.get('client_id'));
+      this.set('home', { route: 'clients.show', id: this.get('client_id') });
       this.set('area', 'Client Administration area')
     } else {
       this.set('role_id', 'user');
       this.set('role_name', 'User');
-      this.set('home', '/users/' + this.get('uid'));
+      this.set('home', { route: 'users.show', id: this.get('uid') });
     }
 
     this.get('flashMessages').info('Welcome ' + this.get('name') + ' to the ' + this.get('area') + '.');
