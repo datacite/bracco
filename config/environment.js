@@ -20,6 +20,12 @@ module.exports = function(environment) {
     'ember-cli-string-helpers': {
       only: ['humanize', 'html-safe', 'truncate', 'titleize']
     },
+    'polyfill-io': {
+      features: [
+        'default-3.6',
+        'Intl.~locale.en-US'
+      ]
+    },
     bugsnag: {
       apiKey: process.env.BUGSNAG_API_KEY,
       notifyReleaseStages: ['production', 'staging'],
