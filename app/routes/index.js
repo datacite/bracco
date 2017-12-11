@@ -19,7 +19,13 @@ export default Ember.Route.extend(CanMixin, RouteMixin, {
   afterModel() {
     if (!this.can('read index') && this.get('currentUser')) {
       let home = this.get('currentUser').get('home');
-      return this.transitionTo(home);
+      if (Ember.typeOf(home) == 'object') {
+        return this.transitionTo(home.route, home.id);
+      } else if (home) {
+        return this.transitionTo(home);
+      } else {
+        return this.transitionTo('index');
+      }
     }
   },
 
