@@ -17,7 +17,7 @@
       <div class="panel panel-transparent">
         <div class="panel-body">
           <h3 class="work">
-            <a href="{{model.identifier}}">{{model.title}}</a>
+            <a target="_blank" href="{{model.identifier}}">{{model.title}}</a>
             <span class="small">{{model.resourceTypeId}}</span>
           </h3>
           {{{format-author model.author}}}
@@ -34,7 +34,7 @@
           {{/if}}
         </div>
         <div class="panel-footer">
-          <a href="{{model.identifier}}">{{fa-icon "external-link"}} {{model.identifier}}</a>
+          <a target="_blank" href="{{model.identifier}}">{{fa-icon "external-link"}} {{model.identifier}}</a>
         </div>
       </div>
     </div>
