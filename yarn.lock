@@ -4993,6 +4993,12 @@ ember-cli-path-utils@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/ember-cli-path-utils/-/ember-cli-path-utils-1.0.0.tgz#4e39af8b55301cddc5017739b77a804fba2071ed"
 
+ember-cli-polyfill-io@^1.2.3:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/ember-cli-polyfill-io/-/ember-cli-polyfill-io-1.2.3.tgz#a7ce367aedfc5e3fef00d802abd778eddcbe72ea"
+  dependencies:
+    debug "^2.6.8"
+
 ember-cli-preprocess-registry@^3.1.0:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/ember-cli-preprocess-registry/-/ember-cli-preprocess-registry-3.1.1.tgz#38456c21c4d2b64945850cf9ec68db6ba769288a"
@@ -10074,10 +10080,6 @@ promise-map-series@^0.2.0, promise-map-series@^0.2.1:
   resolved "https://registry.yarnpkg.com/promise-map-series/-/promise-map-series-0.2.3.tgz#c2d377afc93253f6bd03dbb77755eb88ab20a847"
   dependencies:
     rsvp "^3.0.14"
-
-promise-polyfill@6.0.2:
-  version "6.0.2"
-  resolved "https://registry.yarnpkg.com/promise-polyfill/-/promise-polyfill-6.0.2.tgz#d9c86d3dc4dc2df9016e88946defd69b49b41162"
 
 promise@^6.0.1:
   version "6.1.0"
