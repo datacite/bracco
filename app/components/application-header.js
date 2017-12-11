@@ -34,8 +34,10 @@ export default Ember.Component.extend({
     let home = this.get('currentUser').get('home');
     if (Ember.typeOf(home) == 'object') {
       this.set('home', { route: home.route, model: home.id });
-    } else {
+    } else if (home) {
       this.set('home', { href: home });
+    } else {
+      this.set('home', null);
     }
 
     let sandbox = this.get('currentUser').get('sandbox');
