@@ -8,15 +8,17 @@ const { getProperties } = Ember;
 
 export function getUser(owner) {
   const currentUser = owner.lookup('service:current-user').get('user');
-  const {
-    email,
-    uid,
-    fullName: name
-  } = getProperties(currentUser, 'email', 'uid', 'fullName');
+  if (currentUser) {
+    const {
+      email,
+      uid,
+      fullName: name
+    } = getProperties(currentUser, 'email', 'uid', 'fullName');
 
-  return {
-    email,
-    uid,
-    name
-  };
+    return {
+      email,
+      uid,
+      name
+    };
+  }
 }
