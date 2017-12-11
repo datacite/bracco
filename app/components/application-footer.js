@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import ENV from 'bracco/config/environment';
 import fetch from 'fetch';
-import isElectron from 'is-electron';
+import isElectron from 'npm:is-electron';
 
 export default Ember.Component.extend({
   didInsertElement: function() {
