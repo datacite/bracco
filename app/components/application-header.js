@@ -53,7 +53,13 @@ export default Ember.Component.extend({
     fetch(url).then(function(response) {
       return response.json();
     }).then(function(data) {
-      data.header_links = data[ENV.environment + '_links'];
+      if (ENV.BUGSNAG_RELEASE_STAGE === "production") {
+        data.header_links = data.production_links;
+      } else if (ENV.BUGSNAG_RELEASE_STAGE === "staging") {
+        data.header_links = data.stage_links;
+      } else {
+        data.header_links = data.development_links;
+      }
       self.set('data', data);
     });
   }
