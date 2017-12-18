@@ -46,7 +46,9 @@ Make use of the many generators for code, try `ember help generate` for more det
 
 The application is deployed to Amazon S3 via Travis CI. See `.travis.yml` for the configuration.
 Assets are served from S3, everything else is redirected to `index.html` so that the Ember router
-can handle all requests.
+can handle all requests:
+
+#### Nginx
 
 ```
 server {
@@ -64,6 +66,17 @@ server {
     location /assets {
         proxy_pass $frontend;
     }
+```
+
+#### Cloudfront (using [terraform](https://www.terraform.io/))
+
+```
+custom_error_response {
+  error_code            = "404"
+  error_caching_min_ttl = "5"
+  response_code         = "200"
+  response_page_path    = "/index.html"
+}
 ```
 
 ### Note on Patches/Pull Requests
