@@ -53,12 +53,10 @@ export default Ember.Component.extend({
     fetch(url).then(function(response) {
       return response.json();
     }).then(function(data) {
-      if (ENV.BUGSNAG_RELEASE_STAGE === "production") {
+      if (ENV.API_URL === "https://api.datacite.org") {
         data.header_links = data.production_links;
-      } else if (ENV.BUGSNAG_RELEASE_STAGE === "staging") {
-        data.header_links = data.stage_links;
       } else {
-        data.header_links = data.development_links;
+        data.header_links = data.stage_links;
       }
       self.set('data', data);
     });
