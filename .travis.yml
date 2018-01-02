@@ -3,30 +3,24 @@ language: node_js
 node_js:
   - "6"
 
-sudo: false
-dist: trusty
-
-addons:
-  chrome: stable
+sudo: required
 
 cache:
   yarn: true
-
-env:
-  global:
-    # See https://git.io/vdao3 for details.
-    - JOBS=1
 
 before_install:
   - set -e
   - if [ "${TRAVIS_TAG?}" ]; then
       AWS_BUCKET="doi.datacite.org";
       cp .env.production .env;
+      AUTO_DEPLOY=true;
     elif [ "$TRAVIS_BRANCH" == "master" ]; then
-      AWS_BUCKET="doi.test.datacite.org";
+      AWS_BUCKET="doi.stage.datacite.org";
+      CLOUDFRONT_DISTRIBUTION_ID=$CLOUDFRONT_DISTRIBUTION_ID_STAGE;
       cp .env.stage .env;
+      AUTO_DEPLOY=true;
     else
-      exit 1;
+      AUTO_DEPLOY=false;
     fi
   - npm config set spin false
   - npm install -g codeclimate-test-reporter
@@ -35,6 +29,7 @@ before_install:
 
 install:
   - yarn install --non-interactive
+  - sudo pip install awscli
 
 script:
   # - COVERAGE=true yarn test
@@ -53,7 +48,16 @@ deploy:
   acl: public_read
   cache_control: "no-cache"
   on:
-    branch: $TRAVIS_BRANCH
+    condition: $AUTO_DEPLOY = true
+
+after_deploy:
+  - export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY
+  - export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_KEY
+  # Allow `awscli` to make requests to CloudFront.
+  - aws configure set preview.cloudfront true
+  # Invalidate every object in the targeted distribution.
+  - aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
+
 notifications:
   slack: datacite:Wt8En0ALoTA6Kjc5EOKNDWxN
   email: false
