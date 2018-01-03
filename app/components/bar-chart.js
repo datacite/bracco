@@ -7,7 +7,7 @@ export default Ember.Component.extend({
   data: null,
   count: Ember.computed('data', function() {
     if (this.get('data')) {
-      let currentYear = this.get('data').findBy('id', 2017);
+      let currentYear = this.get('data').findBy('id', 2018);
       if (currentYear) {
         return currentYear.count;
       } else {
@@ -49,8 +49,8 @@ export default Ember.Component.extend({
     let height = 100;
     let margin = { top: 10, right: 5, bottom: 20, left: 5 };
 
-    let startDate = new Date("2009-01-01");
-    let endDate = new Date("2018-01-01");
+    let startDate = new Date("2010-01-01");
+    let endDate = new Date("2019-01-01");
     let domain = [startDate, endDate];
     let length = d3.time.years(startDate, endDate).length;
     let width = length * 22;
