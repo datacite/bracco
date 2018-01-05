@@ -10,6 +10,7 @@ export default Ember.Component.extend({
   provider: null,
   client: null,
   clients: [],
+  isShowingButton: false,
 
   didReceiveAttrs() {
     this._super(...arguments);
@@ -26,12 +27,7 @@ export default Ember.Component.extend({
   },
   selectClient(client) {
     this.set('client', client)
-    if (client){
-      this.$('#strans').prop('disabled', false);
-    }
-    else{
-      this.$('#strans').prop('disabled', true);
-    }
+    this.toggleProperty('isShowingButton');
     this.get('model').set('targetId', client.id);
 
   },
