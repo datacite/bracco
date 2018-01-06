@@ -12,7 +12,11 @@
         <div class="pseudo-footer">
           <div class="btn-toolbar pull-right">
             <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
-            <button {{action "submit"}} class="btn btn-sm btn-fill">Transfer</button>
+            {{#if isShowingButton}}
+              <button {{action "submit"}} class="btn btn-sm btn-fill">Transfer</button>
+            {{else}}
+              <button {{action "submit"}} class="btn btn-sm btn-fill" disabled>Transfer</button>
+            {{/if}}
           </div>
           <div class="clearfix"/>
         </div>
@@ -20,3 +24,4 @@
     </div>
   </div>
 </div>
+
