@@ -15,6 +15,7 @@ export default Ember.Component.extend({
   repositories: [],
 
   reset() {
+    this.get('client').set('passwordInput', null);
     this.set('edit', false);
     this.set('change', false);
     this.set('delete', false);

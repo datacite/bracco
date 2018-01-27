@@ -52,7 +52,7 @@
 
           {{#bs-form formLayout="vertical" model=model onSubmit=(action "setPassword" model) submitOnEnter=true as |form|}}
             <div id="password" class="input-group">
-              {{input name="passwordInput" id="passwordInput" value=model.passwordInput class="form-control" placeholder='New Password' readonly=true}}
+              {{input name="passwordInput" id="passwordInput" class="form-control" placeholder='New Password' readonly=true}}
               <div class="input-group-btn">
                 <button {{action "generate"}} class="btn btn-xs btn-fill" id="generate">Generate</button>
               </div>
@@ -205,7 +205,7 @@
             {{/each}}
           {{/if}}
 
-          {{#if (not model.password)}}
+          {{#if (not model.hasPassword)}}
             <h5>Password</h5>
             <span class="small icon-warning">has not been set</span>
           {{/if}}

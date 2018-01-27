@@ -20,7 +20,7 @@ export default Ember.Component.extend(Validations, {
   confirmId: null,
 
   reset() {
-    this.set('provider', null);
+    this.get('provider').set('passwordInput', null);
     this.set('edit', false);
     this.set('change', false);
     this.set('delete', false);
@@ -54,7 +54,7 @@ export default Ember.Component.extend(Validations, {
     change: function(provider) {
       this.set('provider', provider);
       this.get('provider').set('confirmSymbol', provider.get('symbol'));
-      this.get('provider').set('password', null);
+      this.get('provider').set('passwordInput', null);
       this.set('change', true);
     },
     generate() {

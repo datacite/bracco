@@ -66,6 +66,7 @@ export default DS.Model.extend(Validations, {
   phone: DS.attr('string'),
   isActive: DS.attr('boolean'),
   passwordInput: DS.attr('string'),
+  hasPassword: DS.attr('boolean'),
   created: DS.attr('date'),
   updated: DS.attr('date'),
 
