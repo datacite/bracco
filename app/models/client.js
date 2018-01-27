@@ -64,8 +64,8 @@ export default DS.Model.extend(Validations, {
   contactEmail: DS.attr('string'),
   year: DS.attr('number'),
   isActive: DS.attr('boolean', { defaultValue: true }),
-  setPassword: DS.attr('boolean', { defaultValue: false }),
-  password: DS.attr('string'),
+  passwordInput: DS.attr('string'),
+  hasPassword: DS.attr('boolean'),
   created: DS.attr('date'),
   updated: DS.attr('date'),
 
