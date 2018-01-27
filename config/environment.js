@@ -45,7 +45,7 @@ module.exports = function(environment) {
       preventDuplicates: true
     },
 
-    SITE_TITLE: process.env.SITE_TITLE || "DataCite DOI Fabrica",
+    SITE_TITLE: process.env.SITE_TITLE || "DataCite DOI Fabrica Stage",
     NAVMENU_TITLE: process.env.NAVMENU_TITLE,
     SEARCH_URL: process.env.SEARCH_URL || "https://search.test.datacite.org",
     ORCID_URL: process.env.ORCID_URL || "https://sandbox.orcid.org",
