@@ -29,7 +29,7 @@ export default Ember.Component.extend({
     }).then(function(response) {
       if (response.ok) {
         response.json().then(function(data) {
-          self.get('model').set('password', data.phrase);
+          self.get('model').set('passwordInput', data.phrase);
         });
       } else {
         Ember.Logger.assert(false, response)
@@ -55,15 +55,12 @@ export default Ember.Component.extend({
     edit: function(client) {
       this.set('client', client);
       this.get('client').set('confirmSymbol', client.get('symbol'));
-      this.get('client').set('setPassword', false);
       this.set('repository', client.get('repository'));
       this.set('edit', true);
     },
     change: function(client) {
       this.set('client', client);
       this.get('client').set('confirmSymbol', client.get('symbol'));
-      this.get('client').set('password', null);
-      this.get('client').set('setPassword', true);
       this.set('change', true);
     },
     generate() {

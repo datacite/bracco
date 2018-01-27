@@ -48,11 +48,11 @@
     <div class="col-md-9">
       <div class="panel panel-transparent">
         <div class="panel-body">
-          <h3 class="edit">Set API Password</h3>
+          <h3 class="edit">Set Password</h3>
 
           {{#bs-form formLayout="vertical" model=model onSubmit=(action "setPassword" model) submitOnEnter=true as |form|}}
             <div id="password" class="input-group">
-              {{input name="password" id="password" value=model.password class="form-control" placeholder='New API Password' readonly=true}}
+              {{input name="passwordInput" id="passwordInput" value=model.passwordInput class="form-control" placeholder='New Password' readonly=true}}
               <div class="input-group-btn">
                 <button {{action "generate"}} class="btn btn-xs btn-fill" id="generate">Generate</button>
               </div>
@@ -218,7 +218,7 @@
           <div class="panel-body">
             <div class="btn-toolbar">
               <div class="btn-group-vertical btn-group-sm">
-                <button {{action "change" model}} class="btn btn-warning" id="set-password-provider">{{fa-icon "key"}}Set API Password</button>
+                <button {{action "change" model}} class="btn btn-warning" id="set-password-provider">{{fa-icon "key"}}Set Password</button>
                 <button {{action "edit" model}} class="btn btn-warning" id="edit-client">{{fa-icon "pencil"}}Edit{{if media.isXl ' Client'}}</button>
                 {{#if (can "delete client" model)}}
                   <button {{action "delete" model}} class="btn btn-warning" id="delete-client">{{fa-icon "trash"}}Delete{{if media.isXl ' Client'}}</button>

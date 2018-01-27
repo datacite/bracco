@@ -17,7 +17,6 @@ export default Ember.Component.extend(Validations, {
   change: false,
   delete: false,
   provider: null,
-  setPassword: false,
   confirmId: null,
 
   reset() {
@@ -36,7 +35,7 @@ export default Ember.Component.extend(Validations, {
     }).then(function(response) {
       if (response.ok) {
         response.json().then(function(data) {
-          self.get('model').set('password', data.phrase);
+          self.get('model').set('passwordInput', data.phrase);
         });
       } else {
         Ember.Logger.assert(false, response)
@@ -50,14 +49,12 @@ export default Ember.Component.extend(Validations, {
     edit: function(provider) {
       this.set('provider', provider);
       this.get('provider').set('confirmSymbol', provider.get('symbol'));
-      this.get('provider').set('setPassword', false);
       this.set('edit', true);
     },
     change: function(provider) {
       this.set('provider', provider);
       this.get('provider').set('confirmSymbol', provider.get('symbol'));
       this.get('provider').set('password', null);
-      this.get('provider').set('setPassword', true);
       this.set('change', true);
     },
     generate() {
