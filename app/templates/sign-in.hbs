@@ -9,16 +9,16 @@
             <h3 class="title">Sign In</h3>
 
             {{#bs-form formLayout="vertical" model=this onSubmit=(action "authenticate") submitOnEnter=true as |form|}}
-              {{form.element controlType="text" property="identification" label="Account" placeholder="Account" required=false}}
-              {{form.element controlType="password" property="password" label="Password" placeholder="Password" required=false}}
+              {{form.element controlType="text" property="identification" label="Account ID" placeholder="Enter Account ID" required=false}}
+              {{form.element controlType="password" property="password" label="Password" placeholder="Enter Password" required=false}}
 
               {{#if errorMessage}}
                 <div class="alert alert-danger">{{errorMessage}}</div>
               {{/if}}
 
               <div>
-                <a target="_blank" href="https://support.datacite.org/">Forgot password?</a> •
-                <a target="_blank" href="https://support.datacite.org/docs/datacite-doi-fabrica#section-how-to-register-as-doi-fabrica-user">Need an account?</a>
+                <a target="_blank" href="https://support.datacite.org/docs/datacite-doi-fabrica#section-how-to-reset-the-doi-fabrica-password">Forgot password?</a> •
+                <a target="_blank" href="https://support.datacite.org/docs/datacite-doi-fabrica#section-how-to-sign-in-into-doi-fabrica">Need an account?</a>
               </div>
 
               <div class="pseudo-footer">
