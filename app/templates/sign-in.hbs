@@ -9,7 +9,7 @@
             <h3 class="title">Sign In</h3>
 
             {{#bs-form formLayout="vertical" model=this onSubmit=(action "authenticate") submitOnEnter=true as |form|}}
-              {{form.element controlType="text" property="identification" label="Account ID" placeholder="Enter Account ID" required=false}}
+              {{form.element controlType="text" property="identification" label="Account ID" placeholder="Enter Account ID (Symbol)" required=false}}
               {{form.element controlType="password" property="password" label="Password" placeholder="Enter Password" required=false}}
 
               {{#if errorMessage}}
