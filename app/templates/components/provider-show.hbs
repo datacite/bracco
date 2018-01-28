@@ -45,7 +45,8 @@
 
           {{#bs-form formLayout="vertical" model=model onSubmit=(action "setPassword" model) submitOnEnter=true as |form|}}
             <div id="password" class="input-group">
-              {{input name="passwordInput" id="passwordInput" class="form-control" placeholder='New Password' readonly=true}}
+              {{form.element controlType="text" property="passwordInput" placeholder='New Password' readonly=true required=false}}
+
               <div class="input-group-btn">
                 <button {{action "generate"}} class="btn btn-xs btn-fill" id="generate">Generate</button>
               </div>
