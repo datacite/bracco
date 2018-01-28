@@ -1,7 +1,6 @@
 import Ember from 'ember';
 import { test } from 'qunit';
 import moduleForAcceptance from 'bracco/tests/helpers/module-for-acceptance';
-import ENV from 'bracco/config/environment';
 
 moduleForAcceptance('Acceptance | anonymous | admin', {
   beforeEach: function () {
@@ -44,26 +43,6 @@ test('visiting providers', function(assert) {
 
 test('visiting clients', function(assert) {
   visit('/clients');
-
-  andThen(function() {
-    assert.equal(currentURL(), '/');
-    assert.equal(find('div.motto h1').text(), 'DataCite DOI Fabrica');
-  });
-});
-
-test('visiting users', function(assert) {
-  visit('/users');
-
-  andThen(function() {
-    assert.equal(currentURL(), '/');
-    assert.equal(find('div.motto h1').text(), 'DataCite DOI Fabrica');
-  });
-});
-
-test('visiting specific user', function(assert) {
-  let uid = (ENV.USER_API_URL === "https://profiles.datacite.org/api") ? '0000-0003-1419-2405' : '0000-0001-6528-2027';
-
-  visit('/users/' + uid);
 
   andThen(function() {
     assert.equal(currentURL(), '/');

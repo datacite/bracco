@@ -17,6 +17,9 @@ export default Ember.Service.extend({
   roleName: null,
   provider_id: null,
   client_id: null,
+  home: null,
+  settings: null,
+  sandbox: null,
 
   load() {
     let jwt = this.get('session.data.authenticated.access_token');
@@ -68,22 +71,21 @@ export default Ember.Service.extend({
     this.set('role_id', role_id);
     this.set('roleName', role_id.split('_')[0].capitalize());
 
-    if (['staff_admin', 'staff_user'].includes(role_id)) {
+    if (['staff_admin'].includes(role_id)) {
       this.set('isAdmin', true);
       this.set('home', { route: 'index' });
+      this.set('settings', { route: 'providers.show.settings', id: "admin" });
       this.set('area', 'DataCite Administration area')
-    } else if (['provider_admin', 'provider_user'].includes(role_id) && this.get('provider_id')) {
+    } else if (['provider_admin'].includes(role_id) && this.get('provider_id')) {
       this.set('isProvider', true);
       this.set('home', { route: 'providers.show', id: this.get('provider_id') });
+      this.set('settings', { route: 'providers.show.settings', id: this.get('provider_id') });
       this.set('area', 'Provider Administration area')
-    } else if (['client_admin', 'client_user'].includes(role_id) && this.get('client_id')) {
+    } else if (['client_admin'].includes(role_id) && this.get('client_id')) {
       this.set('isClient', true);
       this.set('home', { route: 'clients.show', id: this.get('client_id') });
+      this.set('settings', { route: 'clients.show.settings', id: this.get('client_id') });
       this.set('area', 'Client Administration area')
-    } else {
-      this.set('role_id', 'user');
-      this.set('role_name', 'User');
-      this.set('home', { route: 'users.show', id: this.get('uid') });
     }
 
     this.get('flashMessages').info('Welcome ' + this.get('name') + ' to the ' + this.get('area') + '.');

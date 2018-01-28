@@ -27,7 +27,7 @@ export default Ember.Component.extend(Validations, {
   },
   generate() {
     let self = this;
-    let url = ENV.USER_API_URL + '/random';
+    let url = ENV.API_URL + '/random';
     fetch(url, {
       headers: {
         'Authorization': 'Bearer ' + this.get('currentUser').get('jwt')

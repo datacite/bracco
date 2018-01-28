@@ -5,7 +5,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li class='dropdown-header'>Role: {{currentUser.roleName}}</li>
-    <li>{{#link-to "users.show" currentUser.uid target="_self"}}{{fa-icon "cog"}} Settings{{/link-to}}</li>
+    <li>{{#link-to currentUser.settings.route currentUser.settings.id target="_self"}}{{fa-icon "cog"}} Settings{{/link-to}}</li>
     <li class="divider"/>
     <li><a {{action 'invalidateSession'}}>{{fa-icon "sign-out"}} Sign out</a></li>
   </ul>

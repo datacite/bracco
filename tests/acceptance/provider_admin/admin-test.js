@@ -1,13 +1,12 @@
 import Ember from 'ember';
 import { test } from 'qunit';
 import moduleForAcceptance from 'bracco/tests/helpers/module-for-acceptance';
-import ENV from 'bracco/config/environment';
 
 moduleForAcceptance('Acceptance | provider_admin | admin', {
   beforeEach: function () {
     this.application.register('service:mock-user', Ember.Service.extend({
-      uid: (ENV.USER_API_URL === "https://profiles.datacite.org/api") ? '0000-0002-1825-0097' : '0000-0001-5489-3594',
-      name: 'Josiah Carberry',
+      uid: 'tib',
+      name: 'Technische Informationsbibliothek',
       role_id: 'provider_admin',
       provider_id: 'tib'
     }));
@@ -62,28 +61,6 @@ test('visiting users', function(assert) {
   andThen(function() {
     assert.equal(currentURL(), '/');
     assert.equal(find('div.motto h1').text(), 'DataCite DOI Fabrica');
-  });
-});
-
-test('visiting personal settings', function(assert) {
-  let uid = (ENV.USER_API_URL === "https://profiles.datacite.org/api") ? '0000-0002-1825-0097' : '0000-0001-5489-3594';
-
-  visit('/users/' + uid);
-
-  andThen(function() {
-    assert.equal(currentURL(), '/users/' + uid);
-    assert.equal(find('h2.work').text(), 'Josiah Carberry');
-  });
-});
-
-test('visiting specific user', function(assert) {
-  let uid = (ENV.USER_API_URL === "https://profiles.datacite.org/api") ? '0000-0003-1419-2405' : '0000-0001-6528-2027';
-
-  visit('/users/' + uid);
-
-  andThen(function() {
-    assert.equal(currentURL(), '/users/' + uid);
-    assert.equal(find('h2.work').text(), 'Martin Fenner');
   });
 });
 
