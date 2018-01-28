@@ -4,10 +4,12 @@ import ENV from 'bracco/config/environment';
 //import Cookie from 'ember-cli-js-cookie';
 
 export default Ember.Component.extend({
+  session: Ember.inject.service('session'),
+
   tagName: 'li',
   classNameBindings: ['dropdownMenu'],
   dropdownMenu: Ember.computed(function() {
-    this.get('currentUser').get('isAuthenticated');
+    this.get('session').get('isAuthenticated');
   }),
 
   // actions: {
@@ -23,6 +25,12 @@ export default Ember.Component.extend({
   //     });
   //   }
   // },
+
+  actions: {
+    invalidateSession() {
+      this.get('session').invalidate();
+    }
+  },
 
   didInsertElement: function() {
     this.set('currentUser', this.get('currentUser'));

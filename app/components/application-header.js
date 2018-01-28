@@ -8,6 +8,7 @@ export default Ember.Component.extend({
   title: null,
   home: '/',
   sandbox: null,
+  user: true,
   data: {},
 
   // init: function () {
@@ -30,6 +31,10 @@ export default Ember.Component.extend({
     if (this.get('default')) {
       this.set('type', null);
       this.set('title', Ember.String.htmlSafe(ENV.SITE_TITLE));
+    } else if (this.get('sign-in')) {
+      this.set('title', Ember.String.htmlSafe(ENV.SITE_TITLE));
+      this.set('user', false);
+      this.set('brand', '/');
     }
 
     let home = this.get('currentUser').get('home');
@@ -40,6 +45,8 @@ export default Ember.Component.extend({
     } else {
       this.set('home', null);
     }
+
+    //this.set('brand', this.get('home'));
 
     let sandbox = this.get('currentUser').get('sandbox');
     if (Ember.typeOf(sandbox) == 'object') {

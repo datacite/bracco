@@ -29,16 +29,13 @@ export default Ability.extend({
     let self = this;
     switch(this.get('currentUser.role_id')) {
       case 'staff_admin':
-      case 'staff_user':
         return true;
       case 'provider_admin':
-      case 'provider_user':
         return true;
         // return this.get('model.providers').any(function(provider, index, providers) {
         //   return provider.get('id') === self.get('currentUser.provider_id');
         // });
       case 'client_admin':
-      case 'client_user':
         return this.get('model.clients').any(function(client) {
           return client.get('id') === self.get('currentUser.client_id');
         });

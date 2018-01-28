@@ -1,6 +1,5 @@
 import { test } from 'qunit';
 import moduleForAcceptance from 'bracco/tests/helpers/module-for-acceptance';
-import ENV from 'bracco/config/environment';
 
 moduleForAcceptance('Acceptance | staff_admin | admin');
 //   beforeEach: function () {
@@ -60,28 +59,6 @@ test('visiting users', function(assert) {
   andThen(function() {
     assert.equal(currentURL(), '/users');
     assert.equal(find('h2.work').text(), 'DataCite');
-  });
-});
-
-test('visiting personal settings', function(assert) {
-  let uid = (ENV.USER_API_URL === "https://profiles.datacite.org/api") ? '0000-0002-1825-0097' : '0000-0001-5489-3594';
-
-  visit('/users/' + uid);
-
-  andThen(function() {
-    assert.equal(currentURL(), '/users/' + uid);
-    assert.equal(find('h2.work').text(), 'Josiah Carberry');
-  });
-});
-
-test('visiting specific user', function(assert) {
-  let uid = (ENV.USER_API_URL === "https://profiles.datacite.org/api") ? '0000-0003-1419-2405' : '0000-0001-6528-2027';
-
-  visit('/users/' + uid);
-
-  andThen(function() {
-    assert.equal(currentURL(), '/users/' + uid);
-    assert.equal(find('h2.work').text(), 'Martin Fenner');
   });
 });
 

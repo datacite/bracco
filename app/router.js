@@ -32,13 +32,6 @@ Router.map(function() {
   this.route('settings', function() {
     this.route('index', { path: '/' });
   });
-  this.route('users', function() {
-    this.route('show', { path: '/:user_id' }, function() {
-      this.route('settings');
-      this.route('dois');
-    });
-    this.route('new');
-  });
   this.route('prefixes', function() {
     this.route('new');
   });
@@ -50,6 +43,8 @@ Router.map(function() {
     this.route('show', { path: '/:client-prefix_id' });
     this.route('new');
   });
+
+  this.route("sign-in");
 
   //set up all of your known routes, and then...
   this.route("404", { path: "*path"});

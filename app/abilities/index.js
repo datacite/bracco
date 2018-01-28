@@ -13,7 +13,6 @@ export default Ability.extend({
   canRead: Ember.computed(function() {
     switch(this.get('currentUser.role_id')) {
       case 'staff_admin':
-      case 'staff_user':
         return true;
       default:
         return false;

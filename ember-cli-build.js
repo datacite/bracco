@@ -8,27 +8,33 @@ module.exports = function(defaults) {
     'ember-cli-babel': {
       includePolyfill: true
     },
+
     sourcemaps: {
       enabled: true,
       extensions: ['js']
     },
+
     minifyJS:  {
       enabled: false
     },
+
     // fingerprint: {
     //   enabled: false
     // },
     babel: {
       sourceMaps: 'inline'
     },
+
     'ember-bootstrap': {
       importBootstrapCSS: false,
       importBootstrapFont: false,
       bootstrapVersion: 3
     },
+
     'ember-prism': {
       'theme': 'default'
     },
+
     inlineContent: {
       'site-title' : {
         content: (process.env.SITE_TITLE || "DataCite DOI Fabrica")
@@ -36,6 +42,10 @@ module.exports = function(defaults) {
       'cdn-url' : {
         content: (process.env.CDN_URL || "https://assets.datacite.org")
       }
+    },
+
+    'ember-power-select': {
+      theme: 'bootstrap'
     }
   });
 
