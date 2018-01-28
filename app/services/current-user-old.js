@@ -1,14 +1,19 @@
 import Ember from 'ember';
-const { inject: { service }, isEmpty } = Ember;
+import Cookie from 'ember-cli-js-cookie';
 import NodeJsonWebToken from 'npm:jsonwebtoken';
 import ENV from 'bracco/config/environment';
 
 export default Ember.Service.extend({
-  session: service('session'),
-  store: service(),
-  flashMessages: service(),
-  features: service(),
+  store: Ember.inject.service(),
+  flashMessages: Ember.inject.service(),
+  features: Ember.inject.service(),
 
+  isAuthenticated: false,
+  isPermitted: false,
+  isAdmin: false,
+  isProvider: false,
+  isClient: false,
+  fromCookie: false,
   uid: null,
   jwt: null,
   name: null,
@@ -17,10 +22,22 @@ export default Ember.Service.extend({
   roleName: null,
   provider_id: null,
   client_id: null,
+  sandbox_id: null,
+  home: null,
+  area: 'DOI Fabrica Personal area',
+  sandbox: null,
 
-  load() {
-    let jwt = this.get('session.data.authenticated.access_token');
-    if (!isEmpty(jwt)) {
+  init() {
+    this._super(...arguments);
+
+    if (ENV.JWT_PRIVATE_KEY && ENV.environment === 'test') {
+      this.initUser({ uid: ENV.USER_UID, name: ENV.USER_NAME, role_id: ENV.USER_ROLE_ID });
+      this.setJwt(ENV.USER_ROLE_ID);
+    } else {
+      // check for cookie containing jwt
+      let jwt = Cookie.get('_datacite_jwt');
+      this.set('jwt', jwt);
+
       // RSA public key
       let cert = ENV.JWT_PUBLIC_KEY ? ENV.JWT_PUBLIC_KEY.replace(/\\n/g, '\n') : null;
 
@@ -28,18 +45,12 @@ export default Ember.Service.extend({
       let self = this;
       NodeJsonWebToken.verify(jwt, cert, { algorithms: ['RS256'] }, function (error, payload) {
         if (payload) {
-          self.set('jwt', jwt);
+          self.set('fromCookie', true);
           self.initUser(payload);
         } else if (error.message !== "jwt must be provided") {
           Ember.Logger.assert(false, error);
         }
       });
-      return Ember.RSVP.resolve();
-      // return this.get('store').findRecord('user', 1).then((user) => {
-      //   this.set('user', user);
-      // });
-    } else {
-      return Ember.RSVP.resolve();
     }
   },
 
@@ -66,7 +77,7 @@ export default Ember.Service.extend({
 
   setRole(role_id) {
     this.set('role_id', role_id);
-    this.set('roleName', role_id.split('_')[0].capitalize());
+    this.set('roleName', role_id.split('_').map(item => item.capitalize()).join(' '));
 
     if (['staff_admin', 'staff_user'].includes(role_id)) {
       this.set('isAdmin', true);
@@ -87,5 +98,27 @@ export default Ember.Service.extend({
     }
 
     this.get('flashMessages').info('Welcome ' + this.get('name') + ' to the ' + this.get('area') + '.');
+  },
+
+  setJwt(role_id) {
+    let duration = (ENV.environment === 'test') ? 60 : (30 * 24 * 3600)
+    let payload = {
+      uid: this.get('uid'),
+      name: this.get('name'),
+      role_id: role_id,
+      exp: Math.floor(Date.now() / 1000) + duration
+    };
+
+    // RSA private key
+    let cert = ENV.JWT_PRIVATE_KEY ? ENV.JWT_PRIVATE_KEY.replace(/\\n/g, '\n') : null;
+
+    // sign asymmetric token, using RSA with SHA-256 hash algorithm
+    NodeJsonWebToken.sign(payload, cert, { algorithm: 'RS256' }, function (error, jwt) {
+      if (jwt) {
+        self.set('jwt', jwt);
+      } else {
+        Ember.Logger.assert(false, error);
+      }
+    });
   }
 });

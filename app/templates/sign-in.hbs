@@ -1,0 +1,36 @@
+{{application-header sign-in=true}}
+
+<div class="wrapper">
+  <div class="register-background" style="background-image: url('https://assets.datacite.org/images/fabrica/header.png');">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1 ">
+          <div class="register-card">
+            <h3 class="title">Sign In</h3>
+
+            {{#bs-form formLayout="vertical" model=this onSubmit=(action "authenticate") submitOnEnter=true as |form|}}
+              {{form.element controlType="text" property="identification" label="Account" placeholder="Account" required=false}}
+              {{form.element controlType="password" property="password" label="Password" placeholder="Password" required=false}}
+
+              {{#if errorMessage}}
+                <div class="alert alert-danger">{{errorMessage}}</div>
+              {{/if}}
+
+              <div>
+                <a target="_blank" href="https://support.datacite.org/">Forgot password?</a> •
+                <a target="_blank" href="https://support.datacite.org/docs/datacite-doi-fabrica#section-how-to-register-as-doi-fabrica-user">Need an account?</a>
+              </div>
+
+              <div class="pseudo-footer">
+                <div class="btn-toolbar pull-right">
+                  <button type="submit" class="btn btn-sm btn-fill">Sign In</button>
+                </div>
+                <div class="clearfix"/>
+              </div>
+            {{/bs-form}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
