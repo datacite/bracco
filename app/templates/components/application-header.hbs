@@ -1,7 +1,7 @@
 {{#bs-navbar type=type fluid=true collapsed=collapsed onCollapse=(action (mut collapsed) true) onExpand=(action (mut collapsed) false) as |navbar|}}
   <div class="navbar-header">
     {{navbar.toggle}}
-    {{#dynamic-link params=brand class="navbar-brand"}}{{title}}{{/dynamic-link}}
+    <a href="/" class="navbar-brand">{{title}}</a>
   </div>
   {{#navbar.content}}
     {{#navbar.nav class="navbar-right" as |nav|}}

@@ -34,7 +34,6 @@ export default Ember.Component.extend({
     } else if (this.get('sign-in')) {
       this.set('title', Ember.String.htmlSafe(ENV.SITE_TITLE));
       this.set('user', false);
-      this.set('brand', '/');
     }
 
     let home = this.get('currentUser').get('home');
@@ -45,8 +44,6 @@ export default Ember.Component.extend({
     } else {
       this.set('home', null);
     }
-
-    //this.set('brand', this.get('home'));
 
     let sandbox = this.get('currentUser').get('sandbox');
     if (Ember.typeOf(sandbox) == 'object') {
