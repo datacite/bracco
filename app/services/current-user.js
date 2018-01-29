@@ -4,7 +4,7 @@ import NodeJsonWebToken from 'npm:jsonwebtoken';
 import ENV from 'bracco/config/environment';
 
 export default Ember.Service.extend({
-  session: service('session'),
+  session: service(),
   store: service(),
   flashMessages: service(),
   features: service(),

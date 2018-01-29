@@ -1,6 +1,6 @@
 {
   "name": "bracco",
-  "version": "0.9.24",
+  "version": "0.9.25",
   "private": true,
   "description": "DOI Fabrica",
   "repository": {
@@ -19,6 +19,7 @@
     "test": "ember test"
   },
   "devDependencies": {
+    "@ember-decorators/babel-transforms": "^0.1.1",
     "async-promise-queue": "^1.0.2",
     "babel-plugin-transform-async-to-generator": "^6.24.1",
     "babel-preset-env": "^1.6.1",
