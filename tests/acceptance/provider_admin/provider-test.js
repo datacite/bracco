@@ -60,17 +60,6 @@ test('editing provider TIB settings', function(assert) {
   // });
 });
 
-test('visiting provider TIB users', function(assert) {
-  visit('/providers/tib/users');
-
-  andThen(function() {
-    assert.equal(currentURL(), '/providers/tib/users');
-    assert.equal(find('h2.work').text(), 'German National Library of Science and Technology');
-    assert.equal(find('a.nav-link.active').text(), 'Users');
-    assert.equal(find('a#add-user').text(), 'Add User');
-  });
-});
-
 test('visiting provider TIB clients', function(assert) {
   visit('/providers/tib/clients');
 

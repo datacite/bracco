@@ -1,8 +1,7 @@
-import Ember from 'ember';
 import { moduleFor, test } from 'ember-qunit';
 
 moduleFor('ability:provider', 'Unit | Ability | provider', {
-  currentUser: Ember.inject.service()
+  needs: ['service:currentUser']
 });
 
 // Replace this with your real tests.

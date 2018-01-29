@@ -40,17 +40,6 @@ test('visiting client AWI settings', function(assert) {
   });
 });
 
-test('visiting client AWI users', function(assert) {
-  visit('/clients/tib.awi/users');
-
-  andThen(function() {
-    assert.equal(currentURL(), '/clients/tib.awi/users');
-    assert.equal(find('h2.work').text(), 'Alfred-Wegener-Institut');
-    assert.equal(find('a.nav-link.active').text(), 'Users');
-    assert.equal(find('a#add-user').text().trim(), 'Add User');
-  });
-});
-
 test('visiting client AWI prefixes', function(assert) {
   visit('/clients/tib.awi/prefixes');
 

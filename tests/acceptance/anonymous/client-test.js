@@ -31,15 +31,6 @@ test('visiting client AWI settings', function(assert) {
   });
 });
 
-test('visiting client AWI users', function(assert) {
-  visit('/clients/tib.awi/users');
-
-  andThen(function() {
-    assert.equal(currentURL(), '/');
-    assert.equal(find('div.motto h1').text(), 'DataCite DOI Fabrica');
-  });
-});
-
 test('visiting client AWI prefixes', function(assert) {
   visit('/clients/tib.awi/prefixes');
 

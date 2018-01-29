@@ -1,7 +1,21 @@
+import Ember from 'ember';
 import { test } from 'qunit';
 import moduleForAcceptance from 'bracco/tests/helpers/module-for-acceptance';
 
-moduleForAcceptance('Acceptance | staff_admin | client');
+moduleForAcceptance('Acceptance | staff_admin | client', {
+  beforeEach: function () {
+    this.application.register('service:mock-user', Ember.Service.extend({
+      uid: 'admin',
+      name: 'Admin',
+      role_id: 'staff_admin'
+    }));
+    this.application.inject('adapter', 'currentUser', 'service:mock-user');
+    this.application.inject('ability', 'currentUser', 'service:mock-user');
+    this.application.inject('route', 'currentUser', 'service:mock-user');
+    this.application.inject('component', 'currentUser', 'service:mock-user');
+    this.application.inject('helper', 'currentUser', 'service:mock-user');
+  }
+});
 
 // test('visiting client AWI', function(assert) {
 //   visit('/clients/tib.awi');
@@ -22,17 +36,6 @@ test('visiting client AWI settings', function(assert) {
     assert.equal(find('a.nav-link.active').text(), 'Settings');
     assert.equal(find('button#edit-client').text().trim(), 'Edit Client');
     assert.equal(find('button#delete-client').text().trim(), 'Delete Client');
-  });
-});
-
-test('visiting client AWI users', function(assert) {
-  visit('/clients/tib.awi/users');
-
-  andThen(function() {
-    assert.equal(currentURL(), '/clients/tib.awi/users');
-    assert.equal(find('h2.work').text(), 'Alfred-Wegener-Institut');
-    assert.equal(find('a.nav-link.active').text(), 'Users');
-    assert.equal(find('a#add-user').text().trim(), 'Add User');
   });
 });
 

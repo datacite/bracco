@@ -6,7 +6,7 @@ export function formatAuthor([authors]) {
 
   let authorList = authors.map(function(a) {
     let name = (a.familyName) ? [a.givenName, a.familyName].join(" ") : a.name;
-    return a.id ? '<a href="/users/' + a.id.split('/').pop() + '">' + name + '</a>' : name
+    return a.id ? '<a href="https://orcid.org/' + a.id.split('/').pop() + '">' + name + '</a>' : name
   });
 
   switch(true) {

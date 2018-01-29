@@ -1,20 +1,21 @@
+import Ember from 'ember';
 import { test } from 'qunit';
 import moduleForAcceptance from 'bracco/tests/helpers/module-for-acceptance';
 
-moduleForAcceptance('Acceptance | staff_admin | admin');
-//   beforeEach: function () {
-//     this.application.register('service:mock-user', Ember.Service.extend({
-//       uid: (ENV.USER_API_URL === "https://profiles.datacite.org/api") ? '0000-0002-1825-0097' : '0000-0001-5489-3594',
-//       name: 'Josiah Carberry',
-//       role_id: 'staff_admin'
-//     }));
-//     this.application.inject('adapter', 'currentUser', 'service:mock-user');
-//     this.application.inject('ability', 'currentUser', 'service:mock-user');
-//     this.application.inject('route', 'currentUser', 'service:mock-user');
-//     this.application.inject('component', 'currentUser', 'service:mock-user');
-//     this.application.inject('helper', 'currentUser', 'service:mock-user');
-//   }
-// });
+moduleForAcceptance('Acceptance | staff_admin | admin', {
+  beforeEach: function () {
+    this.application.register('service:mock-user', Ember.Service.extend({
+      uid: 'admin',
+      name: 'Admin',
+      role_id: 'staff_admin'
+    }));
+    this.application.inject('adapter', 'currentUser', 'service:mock-user');
+    this.application.inject('ability', 'currentUser', 'service:mock-user');
+    this.application.inject('route', 'currentUser', 'service:mock-user');
+    this.application.inject('component', 'currentUser', 'service:mock-user');
+    this.application.inject('helper', 'currentUser', 'service:mock-user');
+  }
+});
 
 test('visiting homepage', function(assert) {
   visit('/');
@@ -49,15 +50,6 @@ test('visiting clients', function(assert) {
 
   andThen(function() {
     assert.equal(currentURL(), '/clients');
-    assert.equal(find('h2.work').text(), 'DataCite');
-  });
-});
-
-test('visiting users', function(assert) {
-  visit('/users');
-
-  andThen(function() {
-    assert.equal(currentURL(), '/users');
     assert.equal(find('h2.work').text(), 'DataCite');
   });
 });

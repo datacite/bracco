@@ -1,7 +1,21 @@
+import Ember from 'ember';
 import { test } from 'qunit';
 import moduleForAcceptance from 'bracco/tests/helpers/module-for-acceptance';
 
-moduleForAcceptance('Acceptance | staff_admin | provider');
+moduleForAcceptance('Acceptance | staff_admin | provider', {
+  beforeEach: function () {
+    this.application.register('service:mock-user', Ember.Service.extend({
+      uid: 'admin',
+      name: 'Admin',
+      role_id: 'staff_admin'
+    }));
+    this.application.inject('adapter', 'currentUser', 'service:mock-user');
+    this.application.inject('ability', 'currentUser', 'service:mock-user');
+    this.application.inject('route', 'currentUser', 'service:mock-user');
+    this.application.inject('component', 'currentUser', 'service:mock-user');
+    this.application.inject('helper', 'currentUser', 'service:mock-user');
+  }
+});
 
 test('visiting provider TIB', function(assert) {
   visit('/providers/tib');
@@ -43,17 +57,6 @@ test('editing provider TIB settings', function(assert) {
   //   assert.equal(find('h2.work').text(), 'German National Library of Science and Technology');
   //   assert.equal(find('div.alert').text(), 'Settings');
   // });
-});
-
-test('visiting provider TIB users', function(assert) {
-  visit('/providers/tib/users');
-
-  andThen(function() {
-    assert.equal(currentURL(), '/providers/tib/users');
-    assert.equal(find('h2.work').text(), 'German National Library of Science and Technology');
-    assert.equal(find('a.nav-link.active').text(), 'Users');
-    assert.equal(find('a#add-user').text(), 'Add User');
-  });
 });
 
 test('visiting provider TIB clients', function(assert) {

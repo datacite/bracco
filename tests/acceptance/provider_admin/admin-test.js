@@ -55,15 +55,6 @@ test('visiting clients', function(assert) {
   });
 });
 
-test('visiting users', function(assert) {
-  visit('/users');
-
-  andThen(function() {
-    assert.equal(currentURL(), '/');
-    assert.equal(find('div.motto h1').text(), 'DataCite DOI Fabrica');
-  });
-});
-
 test('visiting prefixes', function(assert) {
   visit('/prefixes');
 

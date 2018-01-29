@@ -31,15 +31,6 @@ test('visiting provider TIB settings', function(assert) {
   });
 });
 
-test('visiting provider TIB users', function(assert) {
-  visit('/providers/tib/users');
-
-  andThen(function() {
-    assert.equal(currentURL(), '/');
-    assert.equal(find('div.motto h1').text(), 'DataCite DOI Fabrica');
-  });
-});
-
 test('visiting provider TIB clients', function(assert) {
   visit('/providers/tib/clients');
 

@@ -74,7 +74,7 @@ export default Ember.Service.extend({
     if (['staff_admin'].includes(role_id)) {
       this.set('isAdmin', true);
       this.set('home', { route: 'index' });
-      this.set('settings', { route: 'providers.show.settings', id: "admin" });
+      this.set('settings', { route: 'settings' });
       this.set('area', 'DataCite Administration area')
     } else if (['provider_admin'].includes(role_id) && this.get('provider_id')) {
       this.set('isProvider', true);
