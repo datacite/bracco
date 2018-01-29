@@ -53,7 +53,7 @@
           {{#bs-form formLayout="vertical" model=model onSubmit=(action "setPassword" model) submitOnEnter=true as |form|}}
             <div id="password" class="input-group">
               {{form.element controlType="text" property="passwordInput" placeholder='New Password' readonly=true required=false}}
-              
+
               <div class="input-group-btn">
                 <button {{action "generate"}} class="btn btn-xs btn-fill" id="generate">Generate</button>
               </div>
@@ -63,7 +63,7 @@
               {{#bs-alert dismissible=false type="info"}}
                 Make sure to copy your new password now. You won’t be able to see it again!
                 {{#copy-button
-                  clipboardTarget="input#password"
+                  clipboardTarget="input#passwordInput"
                   class="btn-link"
                   success=(action "onSuccess")
                   error=(action "onError")
