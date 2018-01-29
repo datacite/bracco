@@ -50,8 +50,7 @@ export default Ember.Component.extend(RouteMixin, {
                          'client': 'Client',
                          'prefix': 'Prefix',
                          'client-prefix': 'Prefix',
-                         'provider-prefix': 'Prefix',
-                         'user': 'User' }
+                         'provider-prefix': 'Prefix' }
     this.set('modelName', placeholders[this.get('model').get("modelName")]);
 
     if (this.get('model').get("modelName") === "doi") {

@@ -13,7 +13,6 @@ Router.map(function() {
       this.route('settings');
       this.route('dois');
       this.route('prefixes');
-      this.route('users');
       this.route('clients');
     });
   });
@@ -23,7 +22,6 @@ Router.map(function() {
       this.route('dois');
       this.route('transfer');
       this.route('prefixes');
-      this.route('users');
     });
   });
   this.route('dois', function() {
