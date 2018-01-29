@@ -19,7 +19,10 @@ export default Ember.Service.extend({
   client_id: null,
   home: null,
   settings: null,
-  sandbox: null,
+  area: null,
+  isAdmin: false,
+  isProvider: false,
+  isClient: false,
 
   load() {
     let jwt = this.get('session.data.authenticated.access_token');
@@ -48,7 +51,6 @@ export default Ember.Service.extend({
 
   initUser(payload) {
     if (Ember.isPresent(payload)) {
-      this.set('isAuthenticated', true);
       this.set('uid', payload.uid);
       this.set('name', payload.name);
       this.set('email', payload.email);
@@ -59,11 +61,6 @@ export default Ember.Service.extend({
 
       // setup features for ember-feature-flags
       this.get('features').setup(payload.features);
-
-      if (payload.sandbox_id) {
-        this.set('sandbox_id', payload.sandbox_id);
-        this.set('sandbox', { route: 'clients.show', id: payload.sandbox_id });
-      }
     }
   },
 
