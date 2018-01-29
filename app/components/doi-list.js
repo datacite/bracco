@@ -1,7 +1,9 @@
 import Ember from 'ember';
+const { service } = Ember.inject;
 
 export default Ember.Component.extend({
-  store: Ember.inject.service(),
+  currentUser: service(),
+  store: service(),
 
   tagName: 'div',
   classNames: ['row'],

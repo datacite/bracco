@@ -15,7 +15,6 @@ export default Ember.Route.extend(CanMixin, {
 
   afterModel() {
     if (!this.can('read client', this.modelFor('clients/show'))) {
-      //let home = (this.get('currentUser.id')) ? this.get('currentUser').get('home') : '/';
       return this.transitionTo('index');
     }
   },

@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import { validator, buildValidations } from 'ember-cp-validations';
 import fetch from 'fetch';
+const { service } = Ember.inject;
 import ENV from 'bracco/config/environment';
 
 const Validations = buildValidations({
@@ -11,7 +12,8 @@ const Validations = buildValidations({
 });
 
 export default Ember.Component.extend(Validations, {
-  store: Ember.inject.service(),
+  currentUser: service(),
+  store: service(),
 
   edit: false,
   change: false,

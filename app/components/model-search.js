@@ -23,12 +23,6 @@ export default Ember.Component.extend(RouteMixin, {
                             perPage: "page[size]",
                             total_pages: "total-pages" };
 
-    // filter by member or data center if currentUser has that role
-    // if (this.get('currentUser').get('role') === "member_admin") {
-    //   params = Ember.merge(params, { 'member-id': this.get('currentUser').get('member_id') });
-    // } else if (this.get('currentUser').get('role') === "data_center_admin") {
-    //   params = Ember.merge(params, { 'data-center-id': this.get('currentUser').get('data_center_id') });
-    // }
     this.get('router').transitionTo({ queryParams: params });
   },
 

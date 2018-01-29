@@ -1,9 +1,11 @@
 import Ember from 'ember';
 import RouteMixin from 'ember-cli-pagination/remote/route-mixin';
 import { CanMixin } from 'ember-can';
+const { service } = Ember.inject;
 
 export default Ember.Route.extend(CanMixin, RouteMixin, {
-  flashMessages: Ember.inject.service(),
+  currentUser: service(),
+  flashMessages: service(),
 
   model() {
     let self = this;

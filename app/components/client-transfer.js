@@ -1,9 +1,11 @@
 import Ember from 'ember';
+const { service } = Ember.inject;
 
 export default Ember.Component.extend({
-  store: Ember.inject.service(),
-  flashMessages: Ember.inject.service(),
-  intl: Ember.inject.service(),
+  currentUser: service(),
+  store: service(),
+  flashMessages: service(),
+  intl: service(),
 
   tagName: 'div',
   classNames: ['row'],
