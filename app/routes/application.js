@@ -7,7 +7,7 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
   intl: service(),
 
   beforeModel() {
-    /* NOTE: if you lazily load translations, here is also where you would load them via `intl.addTranslations` */
+    // if you lazily load translations, here is also where you would load them via `intl.addTranslations`
     this.get('intl').setLocale(['en-us']);
 
     return this._loadCurrentUser();
