@@ -18,8 +18,6 @@ export default Ember.Service.extend({
   provider_id: null,
   client_id: null,
   home: null,
-  settings: null,
-  area: null,
   isAdmin: false,
   isProvider: false,
   isClient: false,
@@ -40,51 +38,35 @@ export default Ember.Service.extend({
           Ember.Logger.assert(false, error);
         }
       });
-      return Ember.RSVP.resolve();
-      // return this.get('store').findRecord('user', 1).then((user) => {
-      //   this.set('user', user);
-      // });
-    } else {
-      return Ember.RSVP.resolve();
     }
+    return Ember.RSVP.resolve();
   },
 
   initUser(payload) {
-    if (Ember.isPresent(payload)) {
+    if (!isEmpty(payload) && !isEmpty(payload.uid)) {
       this.set('uid', payload.uid);
       this.set('name', payload.name);
       this.set('email', payload.email);
       this.set('provider_id', payload.provider_id);
       this.set('client_id', payload.client_id);
+      this.set('role_id', payload.role_id);
+      this.set('roleName', payload.role_id.split('_')[0].capitalize());
 
-      this.setRole(payload.role_id);
+      if (payload.role_id === 'staff_admin') {
+        this.set('isAdmin', true);
+        this.set('home', { route: 'index' });
+      } else if (payload.role_id === 'provider_admin') {
+        this.set('isProvider', true);
+        this.set('home', { route: 'providers.show', id: this.get('uid') });
+      } else if (payload.role_id === 'client_admin') {
+        this.set('isClient', true);
+        this.set('home', { route: 'clients.show', id: this.get('uid') });
+      }
+
+      this.get('flashMessages').info('Welcome ' + this.get('name') + ' to the DOI Fabrica administration area.');
 
       // setup features for ember-feature-flags
-      this.get('features').setup(payload.features);
+      // this.get('features').setup(payload.features);
     }
-  },
-
-  setRole(role_id) {
-    this.set('role_id', role_id);
-    this.set('roleName', role_id.split('_')[0].capitalize());
-
-    if (['staff_admin'].includes(role_id)) {
-      this.set('isAdmin', true);
-      this.set('home', { route: 'index' });
-      this.set('settings', { route: 'settings' });
-      this.set('area', 'DataCite Administration area')
-    } else if (['provider_admin'].includes(role_id) && this.get('provider_id')) {
-      this.set('isProvider', true);
-      this.set('home', { route: 'providers.show', id: this.get('provider_id') });
-      this.set('settings', { route: 'providers.show.settings', id: this.get('provider_id') });
-      this.set('area', 'Provider Administration area')
-    } else if (['client_admin'].includes(role_id) && this.get('client_id')) {
-      this.set('isClient', true);
-      this.set('home', { route: 'clients.show', id: this.get('client_id') });
-      this.set('settings', { route: 'clients.show.settings', id: this.get('client_id') });
-      this.set('area', 'Client Administration area')
-    }
-
-    this.get('flashMessages').info('Welcome ' + this.get('name') + ' to the ' + this.get('area') + '.');
   }
 });
