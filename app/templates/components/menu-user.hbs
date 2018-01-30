@@ -5,6 +5,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li class='dropdown-header'>Role: {{currentUser.roleName}}</li>
+    <li>{{#dynamic-link params=currentUser.settings}}{{fa-icon "cog"}} Settings{{/dynamic-link}}</li>
     <li class="divider"/>
     <li><a {{action 'invalidateSession'}}>{{fa-icon "sign-out"}} Sign out</a></li>
   </ul>
