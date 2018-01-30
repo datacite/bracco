@@ -3,7 +3,7 @@
     <div class="col-md-9">
       <div class="panel panel-transparent" id="content-member">
         <div class="panel-body">
-          <h3 class="edit">Edit Client</h3>
+          <h3 class="edit">Edit {{if (eq currentUser.uid model.id) 'Account' 'Client'}}</h3>
 
           {{#bs-form formLayout="vertical" model=model onSubmit=(action "submit" model) submitOnEnter=true as |form|}}
             {{form.element controlType="text" label="Client ID" placeholder="Client ID" property="symbol" helpText='The Client ID is a unique identifier for each client. It must contain only upper case letters, numbers or a hypen, must not be longer than 17 characters, and must start with the Provider ID.' disabled=true}}
@@ -220,7 +220,7 @@
             <div class="btn-toolbar">
               <div class="btn-group-vertical btn-group-sm">
                 <button {{action "change" model}} class="btn btn-warning" id="set-password-provider">{{fa-icon "key"}}Set Password</button>
-                <button {{action "edit" model}} class="btn btn-warning" id="edit-client">{{fa-icon "pencil"}}Edit{{if media.isXl ' Client'}}</button>
+                <button {{action "edit" model}} class="btn btn-warning" id="edit-client">{{fa-icon "pencil"}}Edit{{if (eq currentUser.uid model.id) ' Account' ' Client'}}</button>
                 {{#if (can "delete client" model)}}
                   <button {{action "delete" model}} class="btn btn-warning" id="delete-client">{{fa-icon "trash"}}Delete{{if media.isXl ' Client'}}</button>
                 {{/if}}
