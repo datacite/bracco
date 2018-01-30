@@ -1,0 +1,35 @@
+{{application-header sign-in=true}}
+
+<div class="wrapper">
+  <div class="register-background" style="background-image: url('https://assets.datacite.org/images/fabrica/header.png');">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1 ">
+          <div class="register-card">
+            <h3 class="title">Send Link</h3>
+
+            {{#bs-form formLayout="vertical" model=this onSubmit=(action "sendLink") submitOnEnter=true as |form|}}
+              {{form.element controlType="text" property="identification" label="Account ID" placeholder="Enter Account ID (Symbol)" helpText="Send a login link to the email address registered for this account." required=false}}
+
+              {{#if errorMessage}}
+                <div class="alert alert-danger">{{errorMessage}}</div>
+              {{/if}}
+
+              <div>
+                <a target="_blank" href="https://support.datacite.org/docs/datacite-doi-fabrica#section-how-to-reset-the-doi-fabrica-password">Forgot password?</a> •
+                <a target="_blank" href="https://support.datacite.org/docs/datacite-doi-fabrica#section-how-to-create-a-doi-fabrica-account">Need an account?</a>
+              </div>
+
+              <div class="pseudo-footer">
+                <div class="btn-toolbar pull-right">
+                  <button type="submit" class="btn btn-sm btn-fill">Send Link</button>
+                </div>
+                <div class="clearfix"/>
+              </div>
+            {{/bs-form}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
