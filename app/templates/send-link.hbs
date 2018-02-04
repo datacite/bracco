@@ -8,25 +8,39 @@
           <div class="register-card">
             <h3 class="title">Send Link</h3>
 
-            {{#bs-form formLayout="vertical" model=this onSubmit=(action "sendLink") submitOnEnter=true as |form|}}
-              {{form.element controlType="text" property="identification" label="Account ID" placeholder="Enter Account ID (Symbol)" helpText="Send a login link to the email address registered for this account." required=false}}
-
-              {{#if errorMessage}}
-                <div class="alert alert-danger">{{errorMessage}}</div>
-              {{/if}}
+            {{#if requestSent}}
+              <br/>
+              <div>
+                {{#bs-alert type="success"}}
+                  Login link to the email address registered for this account has been sent.
+                {{/bs-alert}}
+              </div>
 
               <div>
-                <a target="_blank" href="https://support.datacite.org/docs/datacite-doi-fabrica#section-how-to-reset-the-doi-fabrica-password">Forgot password?</a> •
+                {{#link-to "sign-in"}}Use password{{/link-to}} •
                 <a target="_blank" href="https://support.datacite.org/docs/datacite-doi-fabrica#section-how-to-create-a-doi-fabrica-account">Need an account?</a>
               </div>
+            {{else}}
+              {{#bs-form formLayout="vertical" model=this onSubmit=(action "sendLink") submitOnEnter=true as |form|}}
+                {{form.element controlType="text" property="identification" label="Account ID" placeholder="Enter Account ID (Symbol)" helpText="Send a login link to the email address registered for this account." required=false}}
 
-              <div class="pseudo-footer">
-                <div class="btn-toolbar pull-right">
-                  <button type="submit" class="btn btn-sm btn-fill">Send Link</button>
+                {{#if errorMessage}}
+                  <div class="alert alert-danger">{{errorMessage}}</div>
+                {{/if}}
+
+                <div>
+                  {{#link-to "sign-in"}}Use password{{/link-to}} •
+                  <a target="_blank" href="https://support.datacite.org/docs/datacite-doi-fabrica#section-how-to-create-a-doi-fabrica-account">Need an account?</a>
                 </div>
-                <div class="clearfix"/>
-              </div>
-            {{/bs-form}}
+
+                <div class="pseudo-footer">
+                  <div class="btn-toolbar pull-right">
+                    <button type="submit" class="btn btn-sm btn-fill">Send Link</button>
+                  </div>
+                  <div class="clearfix"/>
+                </div>
+              {{/bs-form}}
+            {{/if}}
           </div>
         </div>
       </div>
