@@ -18,6 +18,7 @@ export default Ember.Service.extend({
   provider_id: null,
   client_id: null,
   home: null,
+  settings: null,
   isAdmin: false,
   isProvider: false,
   isClient: false,
@@ -55,12 +56,15 @@ export default Ember.Service.extend({
       if (payload.role_id === 'staff_admin') {
         this.set('isAdmin', true);
         this.set('home', { route: 'index' });
+        this.set('settings', { route: 'settings' });
       } else if (payload.role_id === 'provider_admin') {
         this.set('isProvider', true);
         this.set('home', { route: 'providers.show', id: this.get('uid') });
+        this.set('settings', { route: 'providers.show.settings', id: this.get('uid') });
       } else if (payload.role_id === 'client_admin') {
         this.set('isClient', true);
         this.set('home', { route: 'clients.show', id: this.get('uid') });
+        this.set('settings', { route: 'clients.show.settings', id: this.get('uid') });
       }
 
       this.get('flashMessages').info('Welcome ' + this.get('name') + ' to the DOI Fabrica administration area.');

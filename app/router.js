@@ -43,6 +43,7 @@ Router.map(function() {
   });
 
   this.route("sign-in");
+  this.route("send-link");
 
   //set up all of your known routes, and then...
   this.route("404", { path: "*path"});

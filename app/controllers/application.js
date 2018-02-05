@@ -1,7 +1,11 @@
 import Ember from 'ember';
+const { service } = Ember.inject;
 
 export default Ember.Controller.extend({
-  session: Ember.inject.service('session'),
+  session: service(),
+
+  queryParams: ['jwt'],
+  jwt: null,
 
   // binding the property on the paged array
   // to the query params on the controller
@@ -14,4 +18,16 @@ export default Ember.Controller.extend({
       this.get('session').invalidate();
     }
   }
+});
+
+import ApplicationController from './application';
+
+ApplicationController.reopen({
+  unsetToken: Ember.observer('jwt', function() {
+    if (this.get('jwt')) {
+      Ember.run.next(this, function() {
+        this.set('jwt', null);
+      });
+    }
+  })
 });
