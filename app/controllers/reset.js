@@ -29,6 +29,6 @@ export default Ember.Controller.extend({
       }).catch(function(reason) {
         self.set('errorMessage', reason.errors && reason.errors[0].title || reason);
       });
-    },
+    }
   }
 });

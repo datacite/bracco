@@ -20,6 +20,13 @@
                 {{#link-to "sign-in"}}Use password{{/link-to}} •
                 <a target="_blank" href="https://support.datacite.org/docs/datacite-doi-fabrica#section-how-to-create-a-doi-fabrica-account">Need an account?</a>
               </div>
+
+              <div class="pseudo-footer">
+                <div class="btn-toolbar pull-right">
+                  <button {{action "close"}} type="submit" class="btn btn-sm btn-fill">Close</button>
+                </div>
+                <div class="clearfix"/>
+              </div>
             {{else}}
               {{#bs-form formLayout="vertical" model=this onSubmit=(action "sendLink") submitOnEnter=true as |form|}}
                 {{form.element controlType="text" property="identification" label="Account ID" placeholder="Enter Account ID (Symbol)" helpText="Send a reset password link to the email address registered for this account." required=false}}
