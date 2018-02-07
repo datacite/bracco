@@ -6,13 +6,13 @@
       <div class="row">
         <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1 ">
           <div class="register-card">
-            <h3 class="title">Send Link</h3>
+            <h3 class="title">Reset Password</h3>
 
             {{#if requestSent}}
               <br/>
               <div>
                 {{#bs-alert type="success"}}
-                  Login link has been sent to the email address registered for this account.
+                  A reset password link has been sent to the email address registered for this account.
                 {{/bs-alert}}
               </div>
 
@@ -22,7 +22,7 @@
               </div>
             {{else}}
               {{#bs-form formLayout="vertical" model=this onSubmit=(action "sendLink") submitOnEnter=true as |form|}}
-                {{form.element controlType="text" property="identification" label="Account ID" placeholder="Enter Account ID (Symbol)" helpText="Send a login link to the email address registered for this account." required=false}}
+                {{form.element controlType="text" property="identification" label="Account ID" placeholder="Enter Account ID (Symbol)" helpText="Send a reset password link to the email address registered for this account." required=false}}
 
                 {{#if errorMessage}}
                   <div class="alert alert-danger">{{errorMessage}}</div>
