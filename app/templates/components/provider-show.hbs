@@ -53,7 +53,7 @@
             </div>
             <span class="help-block">Please click Generate for a new password.</span>
             {{#if model.passwordInput}}
-              {{#bs-alert dismissible=false type="info"}}
+              {{#bs-alert dismissible=false type="warning"}}
                 Make sure to copy your new password now. You won’t be able to see it again!
                 {{#copy-button
                   clipboardTarget="input#passwordInput-field"
