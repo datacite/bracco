@@ -50,7 +50,7 @@
         <div class="panel-body">
           <h3 class="edit">Set Password</h3>
 
-          <span class="help-block">Click <a class="action-link" {{action "generate"}}>here</a> to have us suggest a new password.</span>
+          <span class="help-block">Click <a class="action-link" {{action "generate"}}>here</a> for a password suggestion.</span>
 
           {{#bs-form formLayout="vertical" model=model onSubmit=(action "setPassword" model) submitOnEnter=true as |form|}}
             {{form.element controlType="text" id="passwordInput" property="passwordInput" label="New Password" placeholder='New Password' required=false}}
