@@ -6,26 +6,12 @@ import ENV from 'bracco/config/environment';
 export default Ember.Controller.extend({
   session: service(),
   currentUser: service(),
-  identification: null,
-  password: null,
-
-  authenticate() {
-    if (this.get('session.isAuthenticated')) {
-      this.get('session').invalidate();
-    }
-    this.get('session').authenticate('authenticator:oauth2', this.get("identification"), this.get("password")).catch((reason) => {
-      this.set('errorMessage', reason.errors && reason.errors[0].title || reason);
-    });
-  },
 
   actions: {
     submit(user) {
-      this.set("identification", user.id);
-      this.set("password", user.get("passwordInput"));
-
       let self = this;
       user.save().then(function() {
-        self.authenticate();
+        self.get('session').invalidate();
       }).catch(function(reason){
         Ember.Logger.assert(false, reason);
       });
