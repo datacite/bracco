@@ -24,7 +24,7 @@ export default Ember.Controller.extend({
     },
     generate() {
       let self = this;
-      let url = ENV.API_URL + '/random';
+      let url = ENV.APP_URL + '/random';
       fetch(url, {
         headers: {
           'Authorization': 'Bearer ' + this.get('currentUser').get('jwt')
