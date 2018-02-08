@@ -44,6 +44,7 @@ Router.map(function() {
 
   this.route("sign-in");
   this.route("reset");
+  this.route("password");
 
   //set up all of your known routes, and then...
   this.route("404", { path: "*path"});
