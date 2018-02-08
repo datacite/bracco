@@ -50,28 +50,11 @@
         <div class="panel-body">
           <h3 class="edit">Set Password</h3>
 
-          {{#bs-form formLayout="vertical" model=model onSubmit=(action "setPassword" model) submitOnEnter=true as |form|}}
-            <div id="password" class="input-group">
-              {{form.element controlType="text" id="passwordInput" property="passwordInput" placeholder='New Password' readonly=true required=false}}
+          <span class="help-block">Click <a class="action-link" {{action "generate"}}>here</a> to have us suggest a new password.</span>
 
-              <div class="input-group-btn">
-                <button {{action "generate"}} class="btn btn-xs btn-fill" id="generate">Generate</button>
-              </div>
-            </div>
-            <span class="help-block">Please click Generate for a new password.</span>
-            {{#if model.passwordInput}}
-              {{#bs-alert dismissible=false type="warning"}}
-                Make sure to copy your new password now. You won’t be able to see it again!
-                {{#copy-button
-                  clipboardTarget="input#passwordInput-field"
-                  class="btn-link"
-                  success=(action "onSuccess")
-                  error=(action "onError")
-                }}
-                  <i class="fa fa-clipboard" />
-                {{/copy-button}}
-              {{/bs-alert}}
-            {{/if}}
+          {{#bs-form formLayout="vertical" model=model onSubmit=(action "setPassword" model) submitOnEnter=true as |form|}}
+            {{form.element controlType="text" id="passwordInput" property="passwordInput" label="New Password" placeholder='New Password' required=false}}
+            {{form.element controlType="text" property="confirmPasswordInput" label="Confirm Password" placeholder="Confirm Password" required=false}}
 
             <div class="pseudo-footer">
               <div class="btn-toolbar pull-right">
