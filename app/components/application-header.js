@@ -42,18 +42,20 @@ export default Ember.Component.extend({
     let home = this.get('currentUser').get('home');
     if (Ember.typeOf(home) == 'object') {
       this.set('home', { route: home.route, model: home.id });
+    } else if (home === "password") {
+      this.set('home', null);
     } else if (home) {
       this.set('home', { href: home });
     } else {
       this.set('home', null);
     }
 
-    let sandbox = this.get('currentUser').get('sandbox');
-    if (Ember.typeOf(sandbox) == 'object') {
-      this.set('sandbox', { route: sandbox.route, model: sandbox.id });
-    } else if (sandbox) {
-      this.set('sandbox', { href: sandbox });
-    }
+    // let sandbox = this.get('currentUser').get('sandbox');
+    // if (Ember.typeOf(sandbox) == 'object') {
+    //   this.set('sandbox', { route: sandbox.route, model: sandbox.id });
+    // } else if (sandbox) {
+    //   this.set('sandbox', { href: sandbox });
+    // }
 
     let url = ENV.CDN_URL + "/data/links.json";
     let self = this;
