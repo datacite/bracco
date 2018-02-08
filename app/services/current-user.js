@@ -65,9 +65,13 @@ export default Ember.Service.extend({
         this.set('isClient', true);
         this.set('home', { route: 'clients.show', id: this.get('uid') });
         this.set('settings', { route: 'clients.show.settings', id: this.get('uid') });
+      } else if (payload.role_id === 'user') {
+        this.set('home', 'password');
       }
 
-      this.get('flashMessages').info('Welcome ' + this.get('name') + ' to the DOI Fabrica administration area.');
+      if (payload.role_id !== 'user') {
+        this.get('flashMessages').info('Welcome ' + this.get('name') + ' to the DOI Fabrica administration area.');
+      }
 
       // setup features for ember-feature-flags
       // this.get('features').setup(payload.features);
