@@ -69,6 +69,7 @@ export default Ember.Component.extend(Validations, {
     },
     setPassword: function() {
       let self = this;
+      this.get('provider').set('keepPassword', false);
       this.get('provider').save().then(function () {
         self.reset();
       }).catch(function(reason){

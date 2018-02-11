@@ -33,18 +33,32 @@ const Validations = buildValidations({
     })
   ],
   passwordInput: [
-    validator('presence', true),
+    validator('presence', {
+      presence: true,
+      disabled: Ember.computed('model', function() {
+        return this.get('model').get('keepPassword');
+      })
+    }),
     validator('length', {
-      min: 8
+      min: 8,
+      disabled: Ember.computed('model', function() {
+        return this.get('model').get('keepPassword');
+      })
     })
   ],
   confirmPasswordInput: [
     validator('presence', {
-      presence: true
+      presence: true,
+      disabled: Ember.computed('model', function() {
+        return this.get('model').get('keepPassword');
+      })
     }),
     validator('confirmation', {
       on: 'passwordInput',
-      message: 'Password does not match'
+      message: 'Password does not match',
+      disabled: Ember.computed('model', function() {
+        return this.get('model').get('keepPassword');
+      })
     })
   ],
   name: validator('presence', true),
@@ -80,6 +94,7 @@ export default DS.Model.extend(Validations, {
   isActive: DS.attr('boolean', { defaultValue: true }),
   passwordInput: DS.attr('string'),
   hasPassword: DS.attr('boolean'),
+  keepPassword: DS.attr('boolean', { defaultValue: true }),
   created: DS.attr('date'),
   updated: DS.attr('date'),
 

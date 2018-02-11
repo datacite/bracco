@@ -78,6 +78,7 @@ export default Ember.Component.extend({
     },
     setPassword: function() {
       let self = this;
+      this.get('client').set('keepPassword', false);
       this.get('client').save().then(function () {
         self.reset();
       }).catch(function(reason){
