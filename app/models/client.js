@@ -66,7 +66,10 @@ const Validations = buildValidations({
   contactName: validator('presence', true),
   contactEmail: [
     validator('presence', true),
-    validator('format', { type: 'email' })
+    validator('format', {
+      type: 'email',
+      allowNonTld: true
+    })
   ]
 });
 
