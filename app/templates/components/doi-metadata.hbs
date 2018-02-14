@@ -1,53 +1,61 @@
-<div class="row">
-  <div class="col-md-9">
-    <div id="metadata" class="input-group pull-right">
-      <select onchange={{action 'selectMetadata' value="target.value"}}>
-        {{#each-in formats as |key value|}}
-          <option name="metadata" value={{key}} selected={{eq metadata key}}>{{value}}</option>
-        {{/each-in}}
-      </select>
-    </div>
-    <h3 class="member-results">Metadata</h3>
-    <div class="clearfix"/>
-  </div>
-</div>
-{{#if summary}}
+{{#if model.published}}
   <div class="row">
     <div class="col-md-9">
-      <div class="panel panel-transparent">
-        <div class="panel-body">
-          <h3 class="work">
-            <a target="_blank" href="{{model.identifier}}">{{model.title}}</a>
-            <span class="small">{{model.resourceTypeId}}</span>
-          </h3>
-          {{{format-author model.author}}}
-          <div class="metadata">
-            {{format-metadata model.published resourceType=model.resource-type resourceTypeSubtype=model.resourceTypeSubtype containerTitle=model.containerTitle version=model.version}}
-          </div>
-          {{#if model.description}}
-            <div class="description">
-              {{format-text model.description limit=75}}
-            </div>
-          {{/if}}
-          {{#if model.license}}
-            {{cc-license licenseURL=model.license}}
-          {{/if}}
-        </div>
-        <div class="panel-footer">
-          <a target="_blank" href="{{model.identifier}}">{{fa-icon "external-link"}} {{model.identifier}}</a>
-        </div>
+      <div id="metadata" class="input-group pull-right">
+        <select onchange={{action 'selectMetadata' value="target.value"}}>
+          {{#each-in formats as |key value|}}
+            <option name="metadata" value={{key}} selected={{eq metadata key}}>{{value}}</option>
+          {{/each-in}}
+        </select>
       </div>
-    </div>
-    <div class="col-md-3">
-      {{client-sidebar model=model}}
+      <h3 class="member-results">Metadata</h3>
+      <div class="clearfix"/>
     </div>
   </div>
-{{else if output}}
-  <div class="panel panel-transparent">
-    <div class="panel-body">
-      {{#code-block class="metadata"}}
-{{output}}
-      {{/code-block}}
+  {{#if summary}}
+    <div class="row">
+      <div class="col-md-9">
+        <div class="panel panel-transparent">
+          <div class="panel-body">
+            <h3 class="work">
+              <a target="_blank" href="{{model.identifier}}">{{model.title}}</a>
+              <span class="small">{{model.resourceTypeId}}</span>
+            </h3>
+            {{{format-author model.author}}}
+            <div class="metadata">
+              {{format-metadata model.published resourceType=model.resource-type resourceTypeSubtype=model.resourceTypeSubtype containerTitle=model.containerTitle version=model.version}}
+            </div>
+            {{#if model.description}}
+              <div class="description">
+                {{format-text model.description limit=75}}
+              </div>
+            {{/if}}
+            {{#if model.license}}
+              {{cc-license licenseURL=model.license}}
+            {{/if}}
+          </div>
+          <div class="panel-footer">
+            <a target="_blank" href="{{model.identifier}}">{{fa-icon "external-link"}} {{model.identifier}}</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        {{client-sidebar model=model}}
+      </div>
+    </div>
+  {{else if output}}
+    <div class="panel panel-transparent">
+      <div class="panel-body">
+        {{#code-block class="metadata"}}
+  {{output}}
+        {{/code-block}}
+      </div>
+    </div>
+  {{/if}}
+{{else}}
+  <div class="row">
+    <div class="col-md-offset-9 col-md-3">
+      {{client-sidebar model=model}}
     </div>
   </div>
 {{/if}}

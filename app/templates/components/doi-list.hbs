@@ -35,7 +35,7 @@
           <div class="panel-body">
             <h3 class="work">
               {{#link-to "dois.show" doi.id}}{{if doi.title doi.title doi.doi}}{{/link-to}}
-              <span class="small">{{doi.resourceTypeId}}</span>
+              <span class="small">{{doi.resource-type.title}}</span>
             </h3>
             {{#if doi.author}}
               {{{format-author doi.author}}}
@@ -45,6 +45,10 @@
                 {{format-metadata doi.published resourceType=doi.resource-type resourceTypeSubtype=doi.resourceTypeSubtype containerTitle=doi.containerTitle version=doi.version}}
               </div>
             {{/if}}
+            <div class="updated">
+              Last updated {{format-time doi.updated year='numeric' month='long' day='numeric'}}
+              <span class="text-{{doi.state}}">{{doi.state}}</span>
+            </div>
             {{#if doi.license}}
               {{cc-license licenseURL=doi.license}}
             {{/if}}
