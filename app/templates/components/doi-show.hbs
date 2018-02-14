@@ -74,18 +74,12 @@
         <div class="panel facets add">
           <div class="panel-body">
             <div class="btn-toolbar">
-              {{#if features.deleteDoi}}
-                <div class="btn-group-vertical btn-group-sm">
-                  <button {{action "edit" model}} class="btn btn-warning">{{fa-icon "pencil"}} Edit DOI</button>
-                  {{#if (and (can "delete doi") model.isDraft)}}
-                    <button {{action "delete" model}} class="btn btn-warning">{{fa-icon "trash"}} Delete DOI</button>
-                  {{/if}}
-                </div>
-              {{else}}
-                <div class="btn-group btn-group-sm">
-                  <button {{action "edit" model}} class="btn btn-warning">{{fa-icon "pencil"}} Edit {{if media.isXl ' DOI'}}</button>
-                </div>
-              {{/if}}
+              <div class="btn-group-vertical btn-group-sm">
+                <button {{action "edit" model}} class="btn btn-warning">{{fa-icon "pencil"}} Edit DOI</button>
+                {{#if (and (can "delete doi") model.isDraft)}}
+                  <button {{action "delete" model}} class="btn btn-warning">{{fa-icon "trash"}} Delete DOI</button>
+                {{/if}}
+              </div>
             </div>
           </div>
         </div>
