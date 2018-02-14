@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import vkbeautify from 'npm:vkbeautify';
 import DS from 'ember-data';
 import { validator, buildValidations } from 'ember-cp-validations';
 
@@ -71,6 +72,6 @@ export default DS.Model.extend(Validations, {
 
   datacite: Ember.computed('xml', function() {
     let xml = atob(this.get('xml'));
-    return (xml === '<hsh></hsh>') ? '' : xml;
+    return (xml === '<hsh></hsh>') ? '' : vkbeautify.xml(xml);
   })
 });
