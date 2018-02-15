@@ -46,8 +46,8 @@
               </div>
             {{/if}}
             <div class="updated">
-              Last updated {{format-time doi.updated year='numeric' month='long' day='numeric'}}
-              <span class="text-{{doi.state}}">{{doi.state}}</span>
+              Last updated {{format-time doi.updated year='numeric' month='long' day='numeric'}}.
+              <span class="text-{{doi.state}}">{{titleize doi.state}}</span>
             </div>
             {{#if doi.license}}
               {{cc-license licenseURL=doi.license}}
