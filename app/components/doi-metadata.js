@@ -40,7 +40,7 @@ export default Ember.Component.extend({
 
       result.then(function(response) {
         if (typeof response === 'string') {
-          self.set('output', vkbeautify.json(response));
+          self.set('output', vkbeautify.json(JSON.stringify(response)));
           self.set('summary', false);
         } else {
           let reader = new FileReader();
