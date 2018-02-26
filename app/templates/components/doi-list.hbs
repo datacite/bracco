@@ -2,20 +2,31 @@
   <div class='col-md-9'>
     <div class="panel panel-transparent">
       <div class="panel-body">
-        <h3 class="edit">New DOI</h3>
+        <h3 class="edit">New Draft DOI</h3>
 
-        {{#bs-form formLayout="vertical" model=model onSubmit=(action "submit" model) submitOnEnter=true as |form|}}
-          {{form.element controlType="text" label="DOI" placeholder="DOI" property="id" disabled=true}}
-          {{form.element controlType="text" label="URL" placeholder="URL" property="url" disabled=true}}
-          {{form.element controlType="textarea" label="Metadata" placeholder="Metadata" property="datacite" rows=15 disabled=true}}
+        <span class="help-block">Click <a class="action-link" {{action "generate"}}>here</a> for a DOI name suggestion.</span>
 
-          <div class="alert alert-warning" role="alert">
-            This functionality has not been implemented yet.
-          </div>
+        {{#bs-form formLayout="vertical" model=doi onSubmit=(action "submit" doi model) submitOnEnter=true as |form|}}
+        {{#form.group validation=doiValidation}}
+            <div class="compound-form input-group">
+              <div class="input-group-btn">
+                {{#bs-dropdown as |dd|}}
+                {{#dd.button class="btn btn-primary btn-fill"}}DOI Prefix <span class="caret"></span>{{/dd.button}}
+                  {{#dd.menu as |ddm|}}
+                    {{#each prefixes as |prefix|}}
+                      {{#ddm.item}}<a {{action "setPrefix" prefix.id}}>{{prefix.id}}</a>{{/ddm.item}}
+                    {{/each}}
+                  {{/dd.menu}}
+                {{/bs-dropdown}}
+              </div>
+              {{form.element controlType="text" placeholder="DOI" property="doi" required=false}}
+            </div>
+          {{/form.group}}
 
           <div class="pseudo-footer">
             <div class="btn-toolbar pull-right">
               <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
+              <button type="submit" class="btn btn-sm btn-fill">Save</button>
             </div>
             <div class="clearfix"/>
           </div>
@@ -71,12 +82,12 @@
   </div>
 
   <div class='col-md-3'>
-    {{#if (and (can "create doi" model) (eq link "clients.show.dois"))}}
+    {{#if (and (can "create doi") (eq link "clients.show.dois"))}}
       <div class="panel facets">
         <div class="panel-body">
           <div class="btn-toolbar">
             <div class="btn-group btn-group-sm">
-              <button {{action "new"}} class="btn btn-warning" id="add-doi">{{fa-icon "plus"}}Add{{if media.isXl ' DOI'}}</button>
+              <button {{action "new" model}} class="btn btn-warning" id="add-doi">{{fa-icon "plus"}}Add{{if media.isXl ' DOI'}}</button>
               {{#if (and (can "transfer doi" model) (gt model.length 0))}}
                 {{#link-to "clients.show.transfer" model.otherParams.client-id class="btn btn-warning" id="transfer-dois"}}{{fa-icon "arrow-circle-o-right"}}Transfer{{if media.isXl ' DOIs'}}{{/link-to}}
               {{/if}}
