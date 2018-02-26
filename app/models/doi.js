@@ -6,10 +6,10 @@ import { validator, buildValidations } from 'ember-cp-validations';
 const Validations = buildValidations({
   doi: [
     validator('presence', true),
-    // validator('format', {
-    //   regex: /^[A-Z0-9.-]+$/,
-    //   message: 'The DOI can contain only upper case letters and numbers'
-    // })
+    validator('format', {
+      regex: /^10\.\d{4,5}\/[-._;()/:A-Za-z0-9]+$/,
+      message: 'The DOI doesn\'t start with 10.xxxx and/or contains invalid characters.'
+    })
   ],
   confirmDoi: [
     validator('presence', {
@@ -54,6 +54,7 @@ export default DS.Model.extend(Validations, {
   schemaVersion: DS.attr('string'),
   relatedIdentifier: DS.attr(),
   state: DS.attr('string'),
+  event: DS.attr('string'),
   published: DS.attr('string'),
   registered: DS.attr('date'),
   updated: DS.attr('date'),
