@@ -9,6 +9,7 @@
 
         {{#bs-form formLayout="vertical" model=doi onSubmit=(action "submit" doi model) as |form|}}
           {{#form.group validation=doiValidation}}
+            <div class="compound-label">1. DOI</div>
             <div class="compound-form input-group">
               <div class="input-group-btn">
                 {{#bs-dropdown as |dd|}}
@@ -20,12 +21,12 @@
                   {{/dd.menu}}
                 {{/bs-dropdown}}
               </div>
-              {{form.element controlType="text" placeholder="DOI" property="doi" required=false}}
+              {{form.element controlType="text" placeholder="Please add a DOI with one of your prefixes" property="doi" required=false}}
             </div>
           {{/form.group}}
 
-          {{form.element controlType="text" label="URL" placeholder="URL" property="url" required=false}}
-          {{form.element controlType="textarea" label="Metadata" placeholder="Metadata" property="xml" rows=15 required=false}}
+          {{form.element controlType="text" label="2. URL" placeholder="Please add a URL in http/https format" property="url" required=false}}
+          {{form.element controlType="textarea" label="3. Metadata" placeholder="Please add metadata in DataCite XML format" property="xml" rows=15 required=false}}
 
           <div class="pseudo-footer">
             <div class="btn-toolbar pull-right">
