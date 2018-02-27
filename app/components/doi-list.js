@@ -1,6 +1,7 @@
 import Ember from 'ember';
 const { service } = Ember.inject;
 import ENV from 'bracco/config/environment';
+import fetch from 'fetch';
 
 export default Ember.Component.extend({
   currentUser: service(),

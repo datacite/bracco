@@ -1,4 +1,3 @@
-import Ember from 'ember';
 import BaseValidator from 'ember-cp-validations/validators/base';
 
 const validXml = BaseValidator.extend({
@@ -8,7 +7,6 @@ const validXml = BaseValidator.extend({
         return true;
     } catch (err) {
         // was not well-formed
-        Ember.Logger.assert(false, err);
         let message = "The XML is not valid."
         return message;
     }

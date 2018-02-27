@@ -50,7 +50,10 @@ const Validations = buildValidations({
         return this.get('model').get('state') === 'draft';
       })
     }),
-    validator('valid-xml', true)
+    validator('valid-xml', true),
+    validator('metadata', {
+      metadata: true
+    })
   ]
 });
 
