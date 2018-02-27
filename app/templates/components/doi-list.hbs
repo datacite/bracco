@@ -2,12 +2,13 @@
   <div class='col-md-9'>
     <div class="panel panel-transparent">
       <div class="panel-body">
-        <h3 class="edit">New Draft DOI</h3>
+        <h3 class="edit">New DOI</h3>
 
-        <span class="help-block">Click <a class="action-link" {{action "generate"}}>here</a> for a DOI name suggestion.</span>
+        <span class="help-block">DOIs with test prefix 10.5072 are only visible within DOI Fabrica.
+          Click <a class="action-link" {{action "generate"}}>here</a> for a DOI name suggestion.</span>
 
         {{#bs-form formLayout="vertical" model=doi onSubmit=(action "submit" doi model) submitOnEnter=true as |form|}}
-        {{#form.group validation=doiValidation}}
+          {{#form.group validation=doiValidation}}
             <div class="compound-form input-group">
               <div class="input-group-btn">
                 {{#bs-dropdown as |dd|}}
@@ -22,6 +23,9 @@
               {{form.element controlType="text" placeholder="DOI" property="doi" required=false}}
             </div>
           {{/form.group}}
+
+          {{form.element controlType="text" label="URL" placeholder="URL" property="url" required=false}}
+          {{form.element controlType="textarea" label="Metadata" placeholder="Metadata" property="xml" rows=15 required=false}}
 
           <div class="pseudo-footer">
             <div class="btn-toolbar pull-right">
