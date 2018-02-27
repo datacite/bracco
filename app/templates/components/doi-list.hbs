@@ -7,7 +7,7 @@
         <span class="help-block">DOIs with test prefix 10.5072 are only visible within DOI Fabrica.
           Click <a class="action-link" {{action "generate"}}>here</a> for a DOI name suggestion.</span>
 
-        {{#bs-form formLayout="vertical" model=doi onSubmit=(action "submit" doi model) submitOnEnter=true as |form|}}
+        {{#bs-form formLayout="vertical" model=doi onSubmit=(action "submit" doi model) as |form|}}
           {{#form.group validation=doiValidation}}
             <div class="compound-form input-group">
               <div class="input-group-btn">

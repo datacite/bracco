@@ -7,7 +7,7 @@
     <div class='col-md-9'>
       <div class="panel panel-transparent">
         <div class="panel-body">
-          {{#bs-form formLayout="vertical" model=model onSubmit=(action "submit" model) submitOnEnter=true as |form|}}
+          {{#bs-form formLayout="vertical" model=model onSubmit=(action "submit" model) as |form|}}
             {{#form.element controlType="power-select" property="client" label="Client" helpText='Change client for this DOI.' optionLabelPath="name" options=clients destination=client as |el|}}
               {{#el.control onChange=(action "selectClient") search=(action "searchClient") searchField="name" searchPlaceholder="Type to search..." as |item|}}
                 {{item.name}}
