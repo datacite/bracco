@@ -9,6 +9,7 @@ export default Ember.Component.extend({
   doi: null,
   client: null,
   clients: [],
+  lines: 18,
 
   reset() {
     this.set('doi', null);
@@ -27,12 +28,16 @@ export default Ember.Component.extend({
     this.get('doi').set('client', client);
     this.get('doi').set('provider', client.get('provider'));
   },
+  countLines(xml) {
+    this.set('lines', xml.split(/\r\n|\r|\n/).length + 1);
+  },
 
   actions: {
     edit: function(doi) {
       this.set('doi', doi);
       this.get('doi').set('confirmDoi', doi.get('doi'));
       this.searchClient(null);
+      this.countLines(doi.get('xml'));
       this.set('edit', true);
     },
     delete: function(doi) {

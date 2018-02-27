@@ -13,12 +13,8 @@
                 {{item.name}}
               {{/el.control}}
             {{/form.element}}
-            {{form.element controlType="text" label="URL" placeholder="URL" property="url" disabled=true}}
-            {{form.element controlType="textarea" label="Metadata" placeholder="Metadata" property="datacite" rows=15 disabled=true}}
-
-            <div class="alert alert-warning" role="alert">
-              The functionality for changing URL or metadata has not been implemented yet.
-            </div>
+            {{form.element controlType="text" label="URL" placeholder="URL" property="url" required=false}}
+            {{form.element controlType="textarea" label="Metadata" placeholder="Metadata" property="xml" rows=lines required=false}}
 
             <div class="pseudo-footer">
               <div class="btn-toolbar pull-right">
@@ -68,7 +64,7 @@
       <h2 class="work">{{model.doi}}</h2>
     </div>
 
-    {{#if (can "edit doi" model)}}
+    {{#if (can "edit doi")}}
       <div class='col-md-3'>
         <div class="panel facets add">
           <div class="panel-body">
