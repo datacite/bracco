@@ -1,11 +1,13 @@
 import Ember from 'ember';
-import vkbeautify from 'npm:vkbeautify';
 import DS from 'ember-data';
 import { validator, buildValidations } from 'ember-cp-validations';
 
 const Validations = buildValidations({
   doi: [
-    validator('presence', true),
+    validator('presence', {
+      presence: true,
+      message: 'Please enter a valid DOI.'
+    }),
     validator('format', {
       regex: /^10\.\d{4,5}\/[-._;()/:A-Za-z0-9]+$/,
       message: 'The DOI doesn\'t start with 10.xxxx and/or contains invalid characters.'
@@ -25,7 +27,21 @@ const Validations = buildValidations({
         return this.get('model').get('isNew');
       })
     })
-  ]
+  ],
+  url: [
+    validator('presence', {
+      presence: true,
+      message: 'Please enter a valid URL that the DOI should resolve to.',
+      disabled: Ember.computed('model', function() {
+        return this.get('model').get('state') === 'draft';
+      })
+    }),
+    validator('format', {
+      regex: /[-a-zA-Z0-9@:%_+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_+.~#?&//=]*)?/gi,
+      message: 'Please enter a valid URL that the DOI should resolve to.',
+      allowBlank: true
+    })
+  ],
 });
 
 export default DS.Model.extend(Validations, {
@@ -48,7 +64,7 @@ export default DS.Model.extend(Validations, {
   containerTitle: DS.attr('string'),
   description: DS.attr(),
   license: DS.attr('string'),
-  xml: DS.attr('string'),
+  xml: DS.attr('xml'),
   resourceTypeSubtype: DS.attr('string'),
   version: DS.attr('string'),
   schemaVersion: DS.attr('string'),
@@ -69,10 +85,5 @@ export default DS.Model.extend(Validations, {
     } else {
       return null;
     }
-  }),
-
-  datacite: Ember.computed('xml', function() {
-    let xml = atob(this.get('xml'));
-    return (xml === '<hsh></hsh>') ? '' : vkbeautify.xml(xml);
   })
 });
