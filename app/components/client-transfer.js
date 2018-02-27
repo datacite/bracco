@@ -22,9 +22,9 @@ export default Ember.Component.extend({
 
   searchClient(query) {
     if (this.get('currentUser').get('isAdmin')) {
-      this.set('clients', this.get('store').query('client', { 'query': query, sort: 'name', 'page[size]': 1000 }));
+      this.set('clients', this.get('store').query('client', { 'query': query, sort: 'name', 'page[size]': 100 }));
     } else if (this.get('currentUser').get('isProvider')) {
-      this.set('clients', this.get('store').query('client', { 'query': query, 'provider-id': this.get('currentUser').get('provider_id'), sort: 'name', 'page[size]': 1000 }));
+      this.set('clients', this.get('store').query('client', { 'query': query, 'provider-id': this.get('currentUser').get('provider_id'), sort: 'name', 'page[size]': 100 }));
     }
   },
   selectClient(client) {
