@@ -7,7 +7,7 @@ import ENV from 'bracco/config/environment';
 const Metadata = BaseValidator.extend({
   currentUser: service(),
 
-  validate(value, options, model) {
+  validate(value) {
     let url = ENV.APP_URL + '/metadata/validate';
     return fetch(url, {
       method: 'post',
@@ -18,29 +18,21 @@ const Metadata = BaseValidator.extend({
       body: JSON.stringify({
         data: {
           type: 'metadata',
-          attributes: { xml: btoa(value) },
-          relationships: {
-            doi: {
-              data: {
-                type: 'dois',
-                id: model.get('doi')
-              }
-            }
-          }
+          attributes: { xml: btoa(value) }
         }
       })
     }).then(function(response) {
       if (response.ok) {
         return true;
       } else {
-        Ember.Logger.assert(false, response);
-        let message = response
-        return message;
+        return response.json().then(function(data) {
+          let message = data.errors.map(e => e.source.capitalize() + ': ' + e.title).join('\n');
+          console.log(message)
+          return message;
+        });
       }
     }).catch(function(error) {
       Ember.Logger.assert(false, error)
-      let message = error
-      return message;
     });
   }
 });

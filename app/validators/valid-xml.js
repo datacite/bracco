@@ -7,7 +7,7 @@ const validXml = BaseValidator.extend({
         return true;
     } catch (err) {
         // was not well-formed
-        let message = "The XML is not valid."
+        let message = "The XML formatting is not valid."
         return message;
     }
   }

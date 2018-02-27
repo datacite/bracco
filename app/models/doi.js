@@ -52,7 +52,10 @@ const Validations = buildValidations({
     }),
     validator('valid-xml', true),
     validator('metadata', {
-      metadata: true
+      metadata: true,
+      disabled: Ember.computed('model', function() {
+        return this.get('model').get('state') === 'draft';
+      })
     })
   ]
 });
