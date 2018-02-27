@@ -42,6 +42,16 @@ const Validations = buildValidations({
       allowBlank: true
     })
   ],
+  xml: [
+    validator('presence', {
+      presence: true,
+      message: 'Please include valid metadata.',
+      disabled: Ember.computed('model', function() {
+        return this.get('model').get('state') === 'draft';
+      })
+    }),
+    validator('valid-xml', true)
+  ]
 });
 
 export default DS.Model.extend(Validations, {
