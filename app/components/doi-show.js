@@ -1,6 +1,17 @@
 import Ember from 'ember';
 const { service } = Ember.inject;
 
+const stateList = {
+  inactive: ['inactive'],
+  draft: ['draft', 'registered', 'findable'],
+  registered: ['registered', 'findable'],
+  findable: ['registered', 'findable']
+}
+const events = {
+  "registered": "register",
+  "findable": "publish"
+};
+
 export default Ember.Component.extend({
   currentUser: service(),
   store: service(),
@@ -10,6 +21,10 @@ export default Ember.Component.extend({
   client: null,
   clients: [],
   lines: 18,
+  stateList,
+  states: [],
+  state: null,
+  events,
 
   reset() {
     this.set('doi', null);
@@ -31,6 +46,14 @@ export default Ember.Component.extend({
   countLines(xml) {
     this.set('lines', xml.split(/\r\n|\r|\n/).length + 1);
   },
+  getStates(state) {
+    // test prefix uses only draft state
+    if (this.get('doi').get('doi').startsWith('10.5072')) {
+      return ['draft'];
+    } else {
+      return stateList[state];
+    }
+  },
 
   actions: {
     edit: function(doi) {
@@ -38,6 +61,8 @@ export default Ember.Component.extend({
       this.get('doi').set('confirmDoi', doi.get('doi'));
       this.searchClient(null);
       this.countLines(doi.get('xml'));
+      this.set('states', this.getStates(doi.get('state')));
+      this.set('state', this.get('states')[0]);
       this.set('edit', true);
     },
     delete: function(doi) {
@@ -52,8 +77,16 @@ export default Ember.Component.extend({
       this.selectClient(client);
     },
     submit: function(doi) {
-      doi.save();
-      this.set('edit', false);
+      // change state via event if there is a change
+      let stateChange = doi.changedAttributes().state;
+      if (typeof stateChange !== 'undefined') {
+        doi.set('event', events[stateChange[1]]);
+      }
+
+      let self = this;
+      doi.save().then(function() {
+        self.set('edit', false);
+      });
     },
     destroy: function(doi) {
       let self = this;

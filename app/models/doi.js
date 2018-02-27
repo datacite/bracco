@@ -29,17 +29,17 @@ const Validations = buildValidations({
     })
   ],
   url: [
+    validator('format', {
+      type: 'url',
+      allowBlank: true,
+      message: 'Please enter a valid URL that the DOI should resolve to.'
+    }),
     validator('presence', {
       presence: true,
       message: 'Please enter a valid URL that the DOI should resolve to.',
       disabled: Ember.computed('model', function() {
         return this.get('model').get('state') === 'draft';
       })
-    }),
-    validator('format', {
-      regex: /[-a-zA-Z0-9@:%_+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_+.~#?&//=]*)?/gi,
-      message: 'Please enter a valid URL that the DOI should resolve to.',
-      allowBlank: true
     })
   ],
   xml: [

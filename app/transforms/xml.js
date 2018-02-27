@@ -4,11 +4,11 @@ import vkbeautify from 'npm:vkbeautify';
 export default DS.Transform.extend({
   deserialize(serialized) {
     let xml = atob(serialized);
-    return (xml === '<hsh></hsh>') ? '' : vkbeautify.xml(xml);
+    return ["<hsh></hsh>", "ée"].includes(xml) ? '' : vkbeautify.xml(xml);
   },
 
   serialize(deserialized) {
-    let xml = vkbeautify.xml(deserialized);
+    let xml = (deserialized) ? vkbeautify.xml(deserialized) : vkbeautify.xml('<hsh></hsh>');
     return btoa(xml);
   }
 });

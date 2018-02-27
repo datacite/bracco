@@ -4,7 +4,7 @@
       <div class="panel-body">
         <h3 class="edit">New DOI</h3>
 
-        <span class="help-block">DOIs with test prefix 10.5072 are only visible within DOI Fabrica.
+        <span class="help-block">Use the prefix 10.5072 for testing.
           Click <a class="action-link" {{action "generate"}}>here</a> for a DOI name suggestion.</span>
 
         {{#bs-form formLayout="vertical" model=doi onSubmit=(action "submit" doi model) as |form|}}
@@ -27,6 +27,11 @@
 
           {{form.element controlType="text" label="2. URL" placeholder="Please add a URL in http/https format" property="url" required=false}}
           {{form.element controlType="textarea" label="3. Metadata" placeholder="Please add metadata in DataCite XML format" property="xml" rows=15 required=false}}
+          {{#form.element controlType="power-select" label="4. State" property="state" options=events destination=state helpText='Draft DOIs are only visible from within the account, and can be deleted. Findable DOIs are registered with the Global Handle System and included in DataCite Search.' as |el|}}
+            {{#el.control onchange=(action (mut state)) optionLabelPath="name" placeholder="Select State" as |item|}}
+              {{titleize item}}
+            {{/el.control}}
+          {{/form.element}}
 
           <div class="pseudo-footer">
             <div class="btn-toolbar pull-right">

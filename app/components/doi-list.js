@@ -3,6 +3,17 @@ const { service } = Ember.inject;
 import ENV from 'bracco/config/environment';
 import fetch from 'fetch';
 
+const stateList = {
+  inactive: ['inactive'],
+  draft: ['draft', 'registered', 'findable'],
+  registered: ['registered', 'findable'],
+  findable: ['registered', 'findable']
+}
+const events = {
+  "registered": "register",
+  "findable": "publish"
+};
+
 export default Ember.Component.extend({
   currentUser: service(),
   store: service(),
@@ -19,6 +30,7 @@ export default Ember.Component.extend({
   prefix: '10.5072',
   suffix: '',
   prefixes: [],
+  events,
 
   searchClient(query) {
     if (this.get('currentUser').get('isAdmin')) {
@@ -28,7 +40,7 @@ export default Ember.Component.extend({
     }
   },
   selectTarget(target) {
-    this.set('target', target)
+    this.set('target', target);
     this.get('client').set('target', target);
   },
   reset() {
@@ -36,13 +48,23 @@ export default Ember.Component.extend({
     this.set('edit', false);
     this.set('new', false);
   },
+  getStates(state) {
+    // test prefix uses only draft state
+    if (this.get('prefix') === '10.5072') {
+      return ['draft'];
+    } else {
+      return stateList[state];
+    }
+  },
 
   actions: {
     new: function(model) {
       this.set('client', this.get('store').peekRecord('client', model.get('otherParams.client-id')));
-      this.set('doi', this.get('store').createRecord('doi', { client: this.get('client') }));
+      this.set('doi', this.get('store').createRecord('doi', { client: this.get('client'), state: 'draft' }));
       this.set('new', true);
       this.set('prefixes', this.get('store').query('prefix', { 'client-id': this.get('client.id'), sort: 'name', 'page[size]': 25 }));
+      this.set('states', this.getStates('draft'));
+      this.set('state', this.get('states')[0]);
     },
     edit: function() {
       this.set('client', this.get('store').findRecord('client', this.get('model.otherParams.client-id')));
@@ -87,8 +109,13 @@ export default Ember.Component.extend({
       this.get('router').transitionTo('clients.show.dois', this.get('target'));
     },
     submit: function(doi) {
+      // change state via event if there is a change
+      let stateChange = doi.changedAttributes().state;
+      if (typeof stateChange !== 'undefined') {
+        doi.set('event', events[stateChange[1]]);
+      }
+
       doi.set('confirmDoi', doi.get('doi'));
-      doi.set('event', 'start');
       let self = this;
       doi.save().then(function(doi) {
         self.get('router').transitionTo('dois.show', doi.id);
