@@ -38,7 +38,7 @@ const Validations = buildValidations({
       presence: true,
       message: 'Please enter a valid URL that the DOI should resolve to.',
       disabled: Ember.computed('model', function() {
-        return this.get('model').get('state') === 'draft';
+        return this.get('model').get('state') === 'draft' || this.get('model').get('doi').startsWith('10.5072');
       })
     })
   ],
@@ -47,14 +47,14 @@ const Validations = buildValidations({
       presence: true,
       message: 'Please include valid metadata.',
       disabled: Ember.computed('model', function() {
-        return this.get('model').get('state') === 'draft';
+        return this.get('model').get('state') === 'draft' || this.get('model').get('doi').startsWith('10.5072');
       })
     }),
     validator('valid-xml', true),
     validator('metadata', {
       metadata: true,
       disabled: Ember.computed('model', function() {
-        return this.get('model').get('state') === 'draft';
+        return this.get('model').get('state') === 'draft' || this.get('model').get('doi').startsWith('10.5072');
       })
     })
   ]
@@ -85,6 +85,7 @@ export default DS.Model.extend(Validations, {
   version: DS.attr('string'),
   schemaVersion: DS.attr('string'),
   relatedIdentifier: DS.attr(),
+  isActive: DS.attr('boolean', { defaultValue: true }),
   state: DS.attr('string'),
   event: DS.attr('string'),
   published: DS.attr('string'),

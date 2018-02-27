@@ -112,7 +112,7 @@ export default Ember.Component.extend({
       // change state via event if there is a change
       let stateChange = doi.changedAttributes().state;
       if (typeof stateChange !== 'undefined') {
-        doi.set('event', events[stateChange[1]]);
+        doi.set('event', this.get('events')[stateChange[1]]);
       }
 
       doi.set('confirmDoi', doi.get('doi'));

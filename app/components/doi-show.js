@@ -2,12 +2,13 @@ import Ember from 'ember';
 const { service } = Ember.inject;
 
 const stateList = {
-  inactive: ['inactive'],
+  inactive: ['inactive', 'registered', 'findable'],
   draft: ['draft', 'registered', 'findable'],
   registered: ['registered', 'findable'],
   findable: ['registered', 'findable']
 }
 const events = {
+  "draft": "start",
   "registered": "register",
   "findable": "publish"
 };
@@ -50,6 +51,8 @@ export default Ember.Component.extend({
     // test prefix uses only draft state
     if (this.get('doi').get('doi').startsWith('10.5072')) {
       return ['draft'];
+    } else if (state === 'inactive' && Ember.isEmpty(this.get('doi').get('registered'))) {
+      return ['inactive', 'draft', 'registered', 'public'];
     } else {
       return stateList[state];
     }
@@ -80,7 +83,7 @@ export default Ember.Component.extend({
       // change state via event if there is a change
       let stateChange = doi.changedAttributes().state;
       if (typeof stateChange !== 'undefined') {
-        doi.set('event', events[stateChange[1]]);
+        doi.set('event', this.get('events')[stateChange[1]]);
       }
 
       let self = this;
