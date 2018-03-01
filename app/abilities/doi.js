@@ -15,17 +15,6 @@ export default Ability.extend({
         return false;
     }
   }),
-  canCreate: Ember.computed('currentUser.role_id', 'currentUser.client_id', 'model.otherParams.client-id', function() {
-    switch(this.get('currentUser.role_id')) {
-      case 'staff_admin':
-      case 'provider_admin':
-        return true;
-      case 'client_admin':
-        return this.get('currentUser.client_id') === this.get('model.otherParams.client-id');
-      default:
-        return false;
-    }
-  }),
   canUpdate: Ember.computed('currentUser.role_id', 'model.id', function() {
     switch(this.get('currentUser.role_id')) {
       case 'staff_admin':
@@ -33,6 +22,14 @@ export default Ability.extend({
         return true;
       case 'client_admin':
         return this.get('currentUser.client_id') === this.get('model.id');
+      default:
+        return false;
+    }
+  }),
+  canCreate: Ember.computed('currentUser.role_id', 'model.otherParams.client-id', function() {
+    switch(this.get('currentUser.role_id')) {
+      case 'client_admin':
+        return this.get('currentUser.client_id') === this.get('model.otherParams.client-id');
       default:
         return false;
     }
