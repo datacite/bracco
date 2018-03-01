@@ -72,7 +72,7 @@
             </div>
             <div class="pseudo-footer">
               <div class="btn-toolbar btn-sm pull-right">
-                <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
+                <button {{action "cancel" model}} class="btn btn-sm">Cancel</button>
                 {{#link-to "providers.show.clients" model.id class="btn btn-sm"}}All Clients{{/link-to}}
               </div>
               <div class="clearfix"/>
@@ -83,7 +83,7 @@
 
               <div class="pseudo-footer">
                 <div class="btn-toolbar pull-right">
-                  <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
+                  <button {{action "cancel" model}} class="btn btn-sm">Cancel</button>
                   <button {{action "destroy" model}} class="btn btn-sm btn-fill">Delete</button>
                 </div>
                 <div class="clearfix"/>

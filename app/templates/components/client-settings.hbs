@@ -18,7 +18,7 @@
             <div class="btn-group btn-group-sm pull-right">
               {{#link-to "clients.edit" client.id}}{{fa-icon "pencil"}}{{/link-to}}
             </div>
-            {{#if (can "delete client")}}
+            {{#if (can "delete client" model)}}
               <div class="btn-toolbar pull-right">
                 <div class="btn-group btn-group-sm pull-right">
                   {{#link-to "clients.edit" client.id}}{{fa-icon "tra"}}{{/link-to}}

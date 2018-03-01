@@ -79,7 +79,7 @@
             </div>
             <div class="pseudo-footer">
               <div class="btn-toolbar btn-sm pull-right">
-                <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
+                <button {{action "cancel" model}} class="btn btn-sm">Cancel</button>
                 {{#link-to "clients.show.transfer" model.id class="btn btn-sm"}}{{fa-icon "arrow-circle-o-right"}}Transfer DOIs{{/link-to}}
               </div>
               <div class="clearfix"/>
@@ -92,7 +92,7 @@
 
               <div class="pseudo-footer">
                 <div class="btn-toolbar pull-right">
-                  <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
+                  <button {{action "cancel" model}} class="btn btn-sm">Cancel</button>
                   <button {{action "destroy" model}} disabled={{v-get model 'isInvalid'}} class="btn btn-sm btn-fill">Delete</button>
                 </div>
                 <div class="clearfix"/>
