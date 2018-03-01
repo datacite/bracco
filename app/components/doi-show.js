@@ -18,6 +18,7 @@ export default Ember.Component.extend({
   store: service(),
 
   edit: false,
+  transfer: false,
   doi: null,
   client: null,
   clients: [],
@@ -68,6 +69,13 @@ export default Ember.Component.extend({
       this.set('state', this.get('states')[0]);
       this.set('edit', true);
     },
+    transfer: function(doi) {
+      this.set('doi', doi);
+      this.get('doi').set('confirmDoi', doi.get('doi'));
+      this.searchClient(null);
+      this.set('state', this.get('states')[0]);
+      this.set('transfer', true);
+    },
     delete: function(doi) {
       this.set('doi', doi);
       this.get('doi').set('confirmDoi', null);
@@ -89,6 +97,7 @@ export default Ember.Component.extend({
       let self = this;
       doi.save().then(function() {
         self.set('edit', false);
+        self.set('transfer', false);
       });
     },
     destroy: function(doi) {

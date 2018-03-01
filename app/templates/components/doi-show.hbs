@@ -17,7 +17,35 @@
                 {{titleize item}}
               {{/el.control}}
             {{/form.element}}
-            {{#form.element controlType="power-select" property="client" label="5. Client" helpText='The client that is managing this DOI.' optionLabelPath="name" options=clients destination=client.id as |el|}}
+
+            <div class="pseudo-footer">
+              <div class="btn-toolbar pull-right">
+                <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
+                <button type="submit" disabled={{v-get model 'isInvalid'}} class="btn btn-sm btn-fill">Save</button>
+              </div>
+              <div class="clearfix"/>
+            </div>
+          {{/bs-form}}
+        </div>
+      </div>
+    </div>
+    <div class='col-md-3'>
+      {{client-sidebar model=model}}
+    </div>
+  </div>
+{{else if transfer}}
+  <h2 class="work">{{model.doi}}</h2>
+
+  <h3 class="edit">Transfer DOI</h3>
+
+  <div class="row">
+    <div class='col-md-9'>
+      <div class="panel panel-transparent">
+        <div class="panel-body">
+          {{#bs-form formLayout="vertical" model=model onSubmit=(action "submit" model) as |form|}}
+            {{form.element controlType="hidden" property="doi" required=false}}
+            {{form.element controlType="hidden" property="confirmDOI" required=false}}
+            {{#form.element controlType="power-select" property="client" label="Client" helpText='Transfer all DOIs to this client. It can take up to 8 hours until these changes are indexed and show up outside of DOI Fabrica.' optionLabelPath="name" options=clients destination=client.id as |el|}}
               {{#el.control onChange=(action "selectClient") search=(action "searchClient") searchField="name" searchPlaceholder="Type to search..." as |item|}}
                 {{item.name}}
               {{/el.control}}
@@ -26,7 +54,7 @@
             <div class="pseudo-footer">
               <div class="btn-toolbar pull-right">
                 <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
-                <button type="submit" disabled={{v-get model 'isInvalid'}} class="btn btn-sm btn-fill">Save</button>
+                <button type="submit" disabled={{v-get model 'isInvalid'}} class="btn btn-sm btn-fill">Transfer</button>
               </div>
               <div class="clearfix"/>
             </div>
@@ -81,6 +109,18 @@
                 {{#if (and (can "delete doi" model) model.isDraft)}}
                   <button {{action "delete" model}} class="btn btn-warning">{{fa-icon "trash"}} Delete DOI</button>
                 {{/if}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {{else if (can "transfer doi" model)}}
+      <div class='col-md-3'>
+        <div class="panel facets add">
+          <div class="panel-body">
+            <div class="btn-toolbar">
+              <div class="btn-group-vertical btn-group-sm">
+                <button {{action "transfer" model}} class="btn btn-warning">{{fa-icon "arrow-circle-o-right"}} Transfer DOI</button>
               </div>
             </div>
           </div>
