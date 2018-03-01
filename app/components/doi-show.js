@@ -32,6 +32,7 @@ export default Ember.Component.extend({
     this.set('doi', null);
     this.set('edit', false);
     this.set('delete', false);
+    this.set('transfer', false);
   },
   searchClient(query) {
     if (this.get('currentUser').get('isAdmin')) {
