@@ -95,8 +95,9 @@ export default Ember.Component.extend({
       let self = this;
       this.set('client', this.get('doi').get('client'));
       this.get('store').findRecord("doi", doi.id, { backgroundReload: false }).then(function(doi) {
-        doi.destroyRecord();
-        self.get('router').transitionTo('clients.show.dois', self.get('client'));
+        doi.destroyRecord().then(function () {
+          self.get('router').transitionTo('clients.show.dois', self.get('client'));
+        });
       });
     },
     cancel: function() {

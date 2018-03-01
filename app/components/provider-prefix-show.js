@@ -19,8 +19,9 @@ export default Ember.Component.extend({
     destroy: function() {
       let self = this;
       this.get('store').findRecord("providerPrefix", this.get('providerPrefix').get('id'), { backgroundReload: false }).then(function(providerPrefix) {
-        providerPrefix.destroyRecord();
-        self.get('router').transitionTo('providers.show.prefixes', self.get('provider'));
+        providerPrefix.destroyRecord().then(function () {
+          self.get('router').transitionTo('providers.show.prefixes', self.get('provider'));
+        });
       });
     }
   }
