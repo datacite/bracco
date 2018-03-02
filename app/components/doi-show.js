@@ -1,5 +1,7 @@
 import Ember from 'ember';
 const { service } = Ember.inject;
+import fetch from 'fetch';
+import ENV from 'bracco/config/environment';
 
 const stateList = {
   inactive: ['inactive', 'registered', 'findable'],
@@ -59,6 +61,32 @@ export default Ember.Component.extend({
       return stateList[state];
     }
   },
+  convertContent(input) {
+    let url = ENV.APP_URL + '/metadata/convert';
+    return fetch(url, {
+      method: 'post',
+      headers: {
+        'authorization': 'Bearer ' + this.get('currentUser').get('jwt'),
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify({
+        data: {
+          type: 'metadata',
+          attributes: { xml: input }
+        }
+      })
+    }).then(function(response) {
+      if (response.ok) {
+        return response.json().then(function(res) {
+          return atob(res.data.attributes.xml);
+        });
+      } else {
+        Ember.Logger.assert(false, response);
+      }
+    }).catch(function(error) {
+      Ember.Logger.assert(false, error);
+    });
+  },
 
   actions: {
     edit: function(doi) {
@@ -87,6 +115,21 @@ export default Ember.Component.extend({
     },
     selectClient(client) {
       this.selectClient(client);
+    },
+    didSelectFiles(files, resetInput) {
+      var reader = new FileReader();
+      let self = this;
+      reader.onload = function(e) {
+        var data = e.target.result;
+        var input = data.split(",")[1];
+        self.convertContent(input).then(function(xml) {
+          self.countLines(xml);
+          self.get('doi').set('xml', xml);
+        });
+      }
+      reader.readAsDataURL(files[0]);
+
+      resetInput();
     },
     submit: function(doi) {
       // change state via event if there is a change

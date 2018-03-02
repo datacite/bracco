@@ -56,6 +56,35 @@ export default Ember.Component.extend({
       return stateList[state];
     }
   },
+  countLines(xml) {
+    this.set('lines', xml.split(/\r\n|\r|\n/).length + 1);
+  },
+  convertContent(input) {
+    let url = ENV.APP_URL + '/metadata/convert';
+    return fetch(url, {
+      method: 'post',
+      headers: {
+        'authorization': 'Bearer ' + this.get('currentUser').get('jwt'),
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify({
+        data: {
+          type: 'metadata',
+          attributes: { xml: input }
+        }
+      })
+    }).then(function(response) {
+      if (response.ok) {
+        return response.json().then(function(res) {
+          return atob(res.data.attributes.xml);
+        });
+      } else {
+        Ember.Logger.assert(false, response);
+      }
+    }).catch(function(error) {
+      Ember.Logger.assert(false, error);
+    });
+  },
 
   actions: {
     new: function(model) {
@@ -102,6 +131,21 @@ export default Ember.Component.extend({
     },
     selectTarget(target) {
       this.selectTarget(target);
+    },
+    didSelectFiles(files, resetInput) {
+      var reader = new FileReader();
+      let self = this;
+      reader.onload = function(e) {
+        var data = e.target.result;
+        var input = data.split(",")[1];
+        self.convertContent(input).then(function(xml) {
+          self.countLines(xml);
+          self.get('doi').set('xml', xml);
+        });
+      }
+      reader.readAsDataURL(files[0]);
+
+      resetInput();
     },
     update() {
       this.get('client').save();

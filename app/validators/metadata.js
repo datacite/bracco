@@ -8,7 +8,7 @@ const Metadata = BaseValidator.extend({
   currentUser: service(),
 
   validate(value) {
-    let url = ENV.APP_URL + '/metadata/validate';
+    let url = ENV.APP_URL + '/metadata/convert';
     return fetch(url, {
       method: 'post',
       headers: {
@@ -27,7 +27,6 @@ const Metadata = BaseValidator.extend({
       } else {
         return response.json().then(function(data) {
           let message = data.errors.map(e => e.source.capitalize() + ': ' + e.title).join('\n');
-          console.log(message)
           return message;
         });
       }

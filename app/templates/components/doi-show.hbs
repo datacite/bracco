@@ -12,6 +12,13 @@
             {{form.element controlType="hidden" property="confirmDOI" required=false}}
             {{form.element controlType="text" label="2. URL" placeholder="Please add a URL in http/https format" property="url" required=false}}
             {{form.element controlType="textarea" label="3. Metadata" placeholder="Please add metadata in DataCite XML format" property="xml" rows=lines required=false}}
+
+            <div class="btn-toolbar btn-file">
+              {{#x-file-input name="files" multiple=false action=(action "didSelectFiles") accept="application/xml,application/json,text/plain"}}
+                <span class="btn btn-sm">{{fa-icon "upload"}} Upload File</span>
+              {{/x-file-input}}
+            </div>
+
             {{#form.element controlType="power-select" label="4. State" property="state" options=states destination=state helpText='Draft DOIs are only visible from within the account, and can be deleted. Findable DOIs are registered with the Global Handle System and included in DataCite Search.' as |el|}}
               {{#el.control onchange=(action (mut state)) placeholder="Select State" as |item|}}
                 {{titleize item}}
