@@ -1,7 +1,4 @@
-<a href="{{url}}">{{url}}</a>
-{{#bs-button type=buttonType size="xs" onClick=(action "checkLink")}}
-  {{status}}
-{{/bs-button}}
-{{#if reason}}
-  <span class="icon-warning">{{reason}}</span>
+<a href="{{model.url}}">{{model.url}}</a>
+{{#if message}}
+  <div class="help-block has-error">{{message}}</div>
 {{/if}}

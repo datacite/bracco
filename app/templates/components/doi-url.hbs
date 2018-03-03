@@ -4,7 +4,7 @@
     <div class="panel panel-transparent url">
       <div class="panel-body">
         {{#if model.url}}
-          {{url-check url=model.url urlToCheck=(url-transform model.doi)}}
+          {{url-check model=model}}
         {{else}}
           The URL is currently not available.
         {{/if}}

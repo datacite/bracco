@@ -40,6 +40,12 @@ const Validations = buildValidations({
       disabled: Ember.computed('model', function() {
         return this.get('model').get('state') === 'draft' || this.get('model').get('doi').startsWith('10.5072');
       })
+    }),
+    validator('valid-url', {
+      allowBlank: true,
+      disabled: Ember.computed('model', function() {
+        return this.get('model').get('state') === 'draft' || this.get('model').get('doi').startsWith('10.5072');
+      })
     })
   ],
   xml: [

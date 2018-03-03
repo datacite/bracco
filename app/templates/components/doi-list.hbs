@@ -9,7 +9,7 @@
 
         {{#bs-form formLayout="vertical" model=doi onSubmit=(action "submit" doi model) as |form|}}
           {{#form.group validation=doiValidation}}
-            <div class="compound-label">1. DOI</div>
+            <div class="compound-label">DOI</div>
             <div class="compound-form input-group">
               <div class="input-group-btn">
                 {{#bs-dropdown as |dd|}}
@@ -25,16 +25,16 @@
             </div>
           {{/form.group}}
 
-          {{form.element controlType="text" label="2. URL" placeholder="Please add a URL in http/https format" property="url" required=false}}
-          {{form.element controlType="textarea" label="3. Metadata" placeholder="Please add metadata in DataCite XML format" property="xml" rows=15 required=false}}
+          {{form.element controlType="text" label="URL" placeholder="Please add a URL in http/https format" property="url" required=false}}
+          {{form.element controlType="textarea" label="Metadata" placeholder="Please add metadata in DataCite XML format" property="xml" rows=15 required=false}}
 
           <div class="btn-toolbar btn-file">
             {{#x-file-input name="files" multiple=false action=(action "didSelectFiles") accept="application/xml,application/json,text/plain"}}
               <span class="btn btn-sm">{{fa-icon "upload"}} Upload File</span>
             {{/x-file-input}}
           </div>
-          
-          {{#form.element controlType="power-select" label="4. State" property="state" options=events destination=state helpText='Draft DOIs are only visible from within the account, and can be deleted. Findable DOIs are registered with the Global Handle System and included in DataCite Search.' as |el|}}
+
+          {{#form.element controlType="power-select" label="State" property="state" options=events destination=state helpText='Draft DOIs are only visible from within the account, and can be deleted. Findable DOIs are registered with the Global Handle System and included in DataCite Search.' as |el|}}
             {{#el.control onchange=(action (mut state)) optionLabelPath="name" placeholder="Select State" as |item|}}
               {{titleize item}}
             {{/el.control}}

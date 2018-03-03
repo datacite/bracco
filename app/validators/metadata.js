@@ -4,7 +4,7 @@ import BaseValidator from 'ember-cp-validations/validators/base';
 import fetch from 'fetch';
 import ENV from 'bracco/config/environment';
 
-const Metadata = BaseValidator.extend({
+const metadata = BaseValidator.extend({
   currentUser: service(),
 
   validate(value) {
@@ -36,10 +36,10 @@ const Metadata = BaseValidator.extend({
   }
 });
 
-Metadata.reopenClass({
+metadata.reopenClass({
   getDependentsFor() {
     return ['xml'];
   }
 });
 
-export default Metadata;
+export default metadata;
