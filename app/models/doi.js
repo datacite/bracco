@@ -89,6 +89,7 @@ export default DS.Model.extend(Validations, {
   xml: DS.attr('xml'),
   resourceTypeSubtype: DS.attr('string'),
   version: DS.attr('string'),
+  metadataVersion: DS.attr('string'),
   schemaVersion: DS.attr('string'),
   relatedIdentifier: DS.attr(),
   isActive: DS.attr('boolean', { defaultValue: true }),

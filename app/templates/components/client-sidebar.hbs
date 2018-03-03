@@ -28,6 +28,17 @@
       {{format-time model.updated year='numeric' month='long' day='numeric'}}
     </div>
   {{/if}}
+  {{#if (gt model.metadataVersion 0)}}
+    <h5>
+      Metadata version
+      <span>{{fa-icon "question-circle-o"}}
+        {{#bs-tooltip placement="top" viewportPadding=10}}Most recent metadata. Previous versions are kept.{{/bs-tooltip}}
+      </span>
+    </h5>
+    <div class="metadata-version">
+      {{model.metadataVersion}}
+    </div>
+  {{/if}}
   {{#if model.schemaVersionString}}
     <h5>
       Schema
@@ -39,4 +50,4 @@
       <a href="http://schema.datacite.org/meta/kernel-{{model.schemaVersionString}}">DataCite Metadata Schema {{model.schemaVersionString}}</a>
     </div>
   {{/if}}
- </div>
+</div>
