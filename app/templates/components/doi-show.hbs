@@ -8,27 +8,40 @@
       <div class="panel panel-transparent">
         <div class="panel-body">
           {{#bs-form formLayout="vertical" model=model onSubmit=(action "submit" model) as |form|}}
-            {{form.element controlType="text" label="DOI" placeholder="Please add a DOI with one of your prefixes" property="doi" disabled=true}}
+            {{form.element controlType="text" label="DOI" placeholder="DOI (required)" property="doi" helpText="The unique string that identifies the resource." disabled=true}}
             {{form.element controlType="hidden" property="confirmDOI" required=false}}
-            {{form.element controlType="text" label="URL" placeholder="Please add a URL in http/https format" property="url" required=false}}
-            {{form.element controlType="textarea" label="Metadata" placeholder="Please add metadata in DataCite XML format" property="xml" rows=lines required=false}}
-
-            <div class="btn-toolbar btn-file">
-              {{#x-file-input name="files" multiple=false action=(action "didSelectFiles") accept="application/xml,application/json,text/plain"}}
-                <span class="btn btn-sm">{{fa-icon "upload"}} Upload File</span>
-              {{/x-file-input}}
-            </div>
-
-            {{#form.element controlType="power-select" label="State" property="state" options=states destination=state helpText='Draft DOIs are only visible from within the account, and can be deleted. Findable DOIs are registered with the Global Handle System and included in DataCite Search.' as |el|}}
+            {{form.element controlType="text" label="URL" placeholder="URL (required)" property="url" helpText="The location of the landing page with more information about the resource." required=false}}
+            {{multi-input-form model=model}}
+            {{form.element controlType="textarea" label="Title" placeholder="Title (required)" property="title" rows=2 helpText="A name or title by which a resource is known." required=false}}
+            {{form.element controlType="text" label="Publisher" placeholder="Publisher (required)" property="publisher" helpText="The name of the entity that holds, archives, publishes prints, distributes, releases, issues, or produces the resource." required=false}}
+            {{#form.element controlType="power-select" label="Publication Year" property="publicationYear" options=years destination=publicationYear helpText="The year when the resource was or will be made publicly available." as |el|}}
+              {{#el.control onchange=(action (mut publicationYear)) placeholder="Select Publication Year" as |item|}}
+                {{item}}
+              {{/el.control}}
+            {{/form.element}}
+            {{form.element controlType="text" label="Resource Type" placeholder="Resource Type" property="resourceTypeSubtype" helpText="A description of the resource, the preferred format is a single term of some detail." required=false}}
+            {{#form.element controlType="power-select" property="resource-type" helpText='The general type of the resource.' optionLabelPath="title" options=resourceTypes destination=resourceType as |el|}}
+              {{#el.control onChange=(action "selectResourceType") search=(action "searchResourceType") searchField="title" searchPlaceholder="Type to search..." as |item|}}
+                {{item.title}}
+              {{/el.control}}
+            {{/form.element}}
+            {{form.element controlType="textarea" label="Description" placeholder="Description" property="description" rows=8 helpText="All additional information that does not fit in any of the other categories." required=false}}
+            {{#form.element controlType="power-select" label="State" property="state" options=states destination=state helpText='The state determines whether the above information is only visible from within the account (draft), the DOI has been made public via the Handle System (registered), or in addition this information is also included in DataCite Search (findable).' as |el|}}
               {{#el.control onchange=(action (mut state)) placeholder="Select State" as |item|}}
                 {{titleize item}}
               {{/el.control}}
             {{/form.element}}
 
             <div class="pseudo-footer">
-              <div class="btn-toolbar pull-right">
-                <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
-                <button type="submit" class="btn btn-sm btn-fill">Save</button>
+              <div class="btn-toolbar">
+                {{#x-file-input name="files" multiple=false action=(action "didSelectFiles") accept="application/xml,application/json,text/plain"}}
+                  <span class="btn btn-sm">{{fa-icon "upload"}} Upload File</span>
+                {{/x-file-input}}
+
+                <div class="btn-toolbar pull-right">
+                  <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
+                  <button type="submit" class="btn btn-sm btn-fill">Save</button>
+                </div>
               </div>
               <div class="clearfix"/>
             </div>

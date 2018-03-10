@@ -85,15 +85,42 @@ export default Ember.Component.extend({
       Ember.Logger.assert(false, error);
     });
   },
+  generate() {
+    let self = this;
+    let url = ENV.APP_URL + '/dois/random?prefix=' + this.get('prefix');
+    return fetch(url, {
+      headers: {
+        'Authorization': 'Bearer ' + this.get('currentUser').get('jwt')
+      }
+    }).then(function(response) {
+      if (response.ok) {
+        return response.json().then(function(data) {
+          let suffix = 
+          self.get('doi').set('suffix', data.doi);
+          return data.doi;
+        });
+      } else {
+        Ember.Logger.assert(false, response)
+        return null;
+      }
+    }).catch(function(error) {
+      Ember.Logger.assert(false, error)
+    });
+  },
 
   actions: {
     new: function(model) {
+      let self = this;
       this.set('client', this.get('store').peekRecord('client', model.get('otherParams.client-id')));
       this.set('doi', this.get('store').createRecord('doi', { client: this.get('client'), state: 'draft' }));
-      this.set('new', true);
       this.set('prefixes', this.get('store').query('prefix', { 'client-id': this.get('client.id'), sort: 'name', 'page[size]': 25 }));
       this.set('states', this.getStates('draft'));
       this.set('state', this.get('states')[0]);
+      self.get('doi').set('prefix', '10.5072');
+      this.set('prefix', '10.5072');
+      this.generate().then(function() {
+        self.set('new', true);
+      });
     },
     edit: function() {
       this.set('client', this.get('store').findRecord('client', this.get('model.otherParams.client-id')));
@@ -101,30 +128,10 @@ export default Ember.Component.extend({
       this.set('edit', true);
     },
     setPrefix(prefix) {
-      this.set('prefix', prefix);
-      if (this.get('doi').get('doi')) {
-        this.set('suffix', this.get('doi').get('doi').split('/', 2).pop());
-      }
-      this.get('doi').set('doi', prefix + '/' + this.get('suffix'));
+      this.setPrefix(prefix);
     },
     generate() {
-      let self = this;
-      let url = ENV.APP_URL + '/dois/random?prefix=' + this.get('prefix');
-      fetch(url, {
-        headers: {
-          'Authorization': 'Bearer ' + this.get('currentUser').get('jwt')
-        }
-      }).then(function(response) {
-        if (response.ok) {
-          response.json().then(function(data) {
-            self.get('doi').set('doi', data.doi);
-          });
-        } else {
-          Ember.Logger.assert(false, response)
-        }
-      }).catch(function(error) {
-        Ember.Logger.assert(false, error)
-      });
+      this.generate();
     },
     searchClient(query) {
       this.searchClient(query);

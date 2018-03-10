@@ -1,4 +1,4 @@
-{{#if model.published}}
+{{#if model.publicationYear}}
   <div class="row">
     <div class="col-md-9">
       <div id="metadata" class="input-group pull-right">
@@ -19,11 +19,11 @@
           <div class="panel-body">
             <h3 class="work">
               <a target="_blank" href="{{model.identifier}}">{{model.title}}</a>
-              <span class="small">{{model.resourceTypeId}}</span>
+              <span class="small">{{model.resource-type.title}}</span>
             </h3>
-            {{{format-author model.author}}}
+            {{{format-author model.creator}}}
             <div class="metadata">
-              {{format-metadata model.published resourceType=model.resource-type resourceTypeSubtype=model.resourceTypeSubtype containerTitle=model.containerTitle version=model.version}}
+              {{format-metadata model.publicationYear resourceType=model.resource-type resourceTypeSubtype=model.resourceTypeSubtype publisher=model.publisher version=model.version}}
             </div>
             {{#if model.description}}
               <div class="description">

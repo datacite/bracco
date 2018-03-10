@@ -4,16 +4,13 @@
       <div class="panel-body">
         <h3 class="edit">New DOI</h3>
 
-        <span class="help-block">Use the prefix 10.5072 for testing.
-          Click <a class="action-link" {{action "generate"}}>here</a> for a DOI name suggestion.</span>
-
         {{#bs-form formLayout="vertical" model=doi onSubmit=(action "submit" doi model) as |form|}}
           {{#form.group validation=doiValidation}}
             <div class="compound-label">DOI</div>
             <div class="compound-form input-group">
               <div class="input-group-btn">
                 {{#bs-dropdown as |dd|}}
-                {{#dd.button class="btn btn-primary btn-fill"}}DOI Prefix <span class="caret"></span>{{/dd.button}}
+                {{#dd.button class="btn btn-default"}}DOI Prefix <span class="caret"></span>{{/dd.button}}
                   {{#dd.menu as |ddm|}}
                     {{#each prefixes as |prefix|}}
                       {{#ddm.item}}<a {{action "setPrefix" prefix.id}}>{{prefix.id}}</a>{{/ddm.item}}
@@ -21,7 +18,7 @@
                   {{/dd.menu}}
                 {{/bs-dropdown}}
               </div>
-              {{form.element controlType="text" placeholder="Please add a DOI with one of your prefixes" property="doi" required=false}}
+              {{form.element controlType="text" placeholder="Please add a DOI with one of your prefixes" property="suffix" required=false}}
             </div>
           {{/form.group}}
 
@@ -65,12 +62,17 @@
               {{#link-to "dois.show" doi.id}}{{if doi.title doi.title doi.doi}}{{/link-to}}
               <span class="small">{{doi.resource-type.title}}</span>
             </h3>
-            {{#if doi.author}}
-              {{{format-author doi.author}}}
+            {{#if doi.creator}}
+              {{{format-author doi.creator}}}
             {{/if}}
-            {{#if doi.published}}
+            {{#if doi.publicationYear}}
               <div class="metadata">
-                {{format-metadata doi.published resourceType=doi.resource-type resourceTypeSubtype=doi.resourceTypeSubtype containerTitle=doi.containerTitle version=doi.version}}
+                {{format-metadata doi.publicationYear resourceType=doi.resource-type resourceTypeSubtype=doi.resourceTypeSubtype publisher=doi.publisher version=doi.version}}
+              </div>
+            {{/if}}
+            {{#if doi.description}}
+              <div class="description">
+                {{format-text doi.description limit=75}}
               </div>
             {{/if}}
             <div class="updated">

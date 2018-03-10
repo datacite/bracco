@@ -1,0 +1,13 @@
+<label class="control-label">Creator</label>
+<span class="help-block">The main researchers involved in producing the data, or the authors of the publication, in priority order.</span>
+{{#each model.creator as |item|}}
+  <div class="compound-form input-group">
+    {{input type="text" class="form-control" name="creator" placeholder="Creator" value=item}}
+    <span class="input-group-btn">
+      <button {{action "delete" item}} class="btn btn-warning btn-fill">{{fa-icon "trash"}}</button>
+    </span>
+  </div>
+{{/each}}
+<div class="input-group">
+  <button {{action "add"}} disabled={{isDisabled}} class="btn btn-sm btn-file">{{fa-icon "plus"}} Add Creator</button>
+</div>
