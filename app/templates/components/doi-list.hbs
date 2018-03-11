@@ -10,7 +10,7 @@
             <div class="compound-form input-group">
               <div class="input-group-btn">
                 {{#bs-dropdown as |dd|}}
-                {{#dd.button class="btn btn-default"}}DOI Prefix <span class="caret"></span>{{/dd.button}}
+                {{#dd.button class="btn"}}DOI Prefix <span class="caret"></span>{{/dd.button}}
                   {{#dd.menu as |ddm|}}
                     {{#each prefixes as |prefix|}}
                       {{#ddm.item}}<a {{action "setPrefix" prefix.id}}>{{prefix.id}}</a>{{/ddm.item}}
@@ -18,18 +18,39 @@
                   {{/dd.menu}}
                 {{/bs-dropdown}}
               </div>
-              {{form.element controlType="text" placeholder="Please add a DOI with one of your prefixes" property="suffix" required=false}}
+              {{form.element controlType="text" placeholder="DOI (required)" property="suffix" helpText="The unique string that identifies the resource." required=false}}
             </div>
           {{/form.group}}
 
-          {{form.element controlType="text" label="URL" placeholder="Please add a URL in http/https format" property="url" required=false}}
-          {{form.element controlType="textarea" label="Metadata" placeholder="Please add metadata in DataCite XML format" property="xml" rows=15 required=false}}
+          {{form.element controlType="text" label="URL" placeholder="URL (required)" property="url" helpText="The location of the landing page with more information about the resource." required=false}}
 
-          <div class="btn-toolbar btn-file">
-            {{#x-file-input name="files" multiple=false action=(action "didSelectFiles") accept="application/xml,application/json,text/plain"}}
-              <span class="btn btn-sm">{{fa-icon "upload"}} Upload File</span>
-            {{/x-file-input}}
-          </div>
+          {{#if useForm}}
+            {{multi-input-form model=model}}
+            {{form.element controlType="textarea" label="Title" placeholder="Title (required)" property="title" rows=2 helpText="A name or title by which a resource is known." required=false}}
+            {{form.element controlType="text" label="Publisher" placeholder="Publisher (required)" property="publisher" helpText="The name of the entity that holds, archives, publishes prints, distributes, releases, issues, or produces the resource." required=false}}
+            {{#form.element controlType="power-select" label="Publication Year" property="publicationYear" options=years destination=publicationYear helpText="The year when the resource was or will be made publicly available." as |el|}}
+              {{#el.control onchange=(action (mut publicationYear)) placeholder="Select Publication Year" as |item|}}
+                {{item}}
+              {{/el.control}}
+            {{/form.element}}
+            {{form.element controlType="text" label="Resource Type" placeholder="Resource Type" property="resourceTypeSubtype" helpText="A description of the resource, the preferred format is a single term of some detail." required=false}}
+            {{#form.element controlType="power-select" property="resource-type" helpText='The general type of the resource.' optionLabelPath="title" options=resourceTypes destination=resourceType as |el|}}
+              {{#el.control onChange=(action "selectResourceType") search=(action "searchResourceType") searchField="title" searchPlaceholder="Type to search..." as |item|}}
+                {{item.title}}
+              {{/el.control}}
+            {{/form.element}}
+            {{form.element controlType="textarea" label="Description" placeholder="Description" property="description" rows=8 helpText="All additional information that does not fit in any of the other categories." required=false}}
+          {{else}}
+            {{#form.element controlType="textarea" label="Metadata" placeholder="Metadata (required)" property="xml" rows=15 helpText="Metadata that describe the resource. You can also upload a file with metadata in DataCite XML format, or one of the other supported formats." required=false as |el|}}
+              {{el.control class="form-control metadata"}}
+            {{/form.element}}
+
+            <div class="btn-toolbar btn-file">
+              {{#x-file-input name="files" multiple=false action=(action "didSelectFiles") accept="application/xml,application/json,text/plain"}}
+                <span class="btn btn-sm">{{fa-icon "upload"}} Upload File</span>
+              {{/x-file-input}}
+            </div>
+          {{/if}}
 
           {{#form.element controlType="power-select" label="State" property="state" options=events destination=state helpText='Draft DOIs are only visible from within the account, and can be deleted. Findable DOIs are registered with the Global Handle System and included in DataCite Search.' as |el|}}
             {{#el.control onchange=(action (mut state)) optionLabelPath="name" placeholder="Select State" as |item|}}

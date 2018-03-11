@@ -114,7 +114,7 @@ export default DS.Model.extend(Validations, {
   publicationYear: DS.attr('string'),
   description: DS.attr('string'),
   license: DS.attr('string'),
-  //xml: DS.attr('xml'),
+  xml: DS.attr('xml'),
   resourceTypeSubtype: DS.attr('string'),
   version: DS.attr('string'),
   metadataVersion: DS.attr('string'),

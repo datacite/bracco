@@ -49,7 +49,6 @@ export default Ember.Component.extend({
   clients: [],
   resourceType: null,
   resourceTypes: [],
-  lines: 18,
   stateList,
   states: [],
   state: null,
@@ -80,9 +79,6 @@ export default Ember.Component.extend({
   selectResourceType(resourceType) {
     this.set('resourceType', resourceType)
     this.get('doi').set('resource-type', resourceType);
-  },
-  countLines(xml) {
-    this.set('lines', 10);
   },
   getStates(state) {
     // test prefix uses only draft state
@@ -132,7 +128,6 @@ export default Ember.Component.extend({
       this.get('doi').set('confirmDoi', doi.get('doi'));
       this.searchClient(null);
       this.searchResourceType(null);
-      //this.countLines(doi.get('xml'));
       this.set('states', this.getStates(doi.get('state')));
       this.set('state', this.get('states')[0]);
       this.set('edit', true);
@@ -171,8 +166,6 @@ export default Ember.Component.extend({
         var data = e.target.result;
         var input = data.split(",")[1];
         self.new(input).then(function(xml) {
-          console.log(xml)
-          self.countLines(xml);
           self.get('doi').set('xml', xml);
         });
       }

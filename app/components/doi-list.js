@@ -85,6 +85,13 @@ export default Ember.Component.extend({
       Ember.Logger.assert(false, error);
     });
   },
+  setPrefix(prefix) {
+    this.set('prefix', prefix);
+    if (this.get('doi').get('doi')) {
+      this.set('suffix', this.get('doi').get('doi').split('/', 2).pop());
+    }
+    this.get('doi').set('doi', prefix + '/' + this.get('suffix'));
+  },
   generate() {
     let self = this;
     let url = ENV.APP_URL + '/dois/random?prefix=' + this.get('prefix');
@@ -95,7 +102,6 @@ export default Ember.Component.extend({
     }).then(function(response) {
       if (response.ok) {
         return response.json().then(function(data) {
-          let suffix = 
           self.get('doi').set('suffix', data.doi);
           return data.doi;
         });
