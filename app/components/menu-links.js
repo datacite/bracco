@@ -4,7 +4,7 @@ import ENV from 'bracco/config/environment';
 export default Ember.Component.extend({
   tagName: 'li',
 
-  didInsertElement: function() {
+  didInsertElement() {
     this.set('navmenuTitle', ENV.NAVMENU_TITLE);
   }
 });

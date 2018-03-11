@@ -115,7 +115,7 @@ export default Ember.Component.extend({
   },
 
   actions: {
-    new: function(model) {
+    new(model) {
       let self = this;
       this.set('client', this.get('store').peekRecord('client', model.get('otherParams.client-id')));
       this.set('doi', this.get('store').createRecord('doi', { client: this.get('client'), state: 'draft' }));
@@ -128,7 +128,7 @@ export default Ember.Component.extend({
         self.set('new', true);
       });
     },
-    edit: function() {
+    edit() {
       this.set('client', this.get('store').findRecord('client', this.get('model.otherParams.client-id')));
       this.searchClient(null);
       this.set('edit', true);
@@ -165,7 +165,7 @@ export default Ember.Component.extend({
       this.set('edit', false);
       this.get('router').transitionTo('clients.show.dois', this.get('target'));
     },
-    submit: function(doi) {
+    submit(doi) {
       // change state via event if there is a change
       let stateChange = doi.changedAttributes().state;
       if (typeof stateChange !== 'undefined') {
@@ -181,7 +181,7 @@ export default Ember.Component.extend({
         Ember.Logger.assert(false, reason);
       });
     },
-    cancel: function() {
+    cancel() {
       this.reset();
     }
   }

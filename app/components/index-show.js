@@ -7,15 +7,15 @@ export default Ember.Component.extend({
   provider: null,
 
   actions: {
-    edit: function(provider) {
+    edit(provider) {
       this.set('provider', provider);
       this.set('edit', true);
     },
-    submit: function() {
+    submit() {
       this.get('provider').save();
       this.set('edit', false);
     },
-    cancel: function() {
+    cancel() {
       this.set('edit', false);
     }
   }

@@ -44,7 +44,7 @@ export default Ember.Component.extend(RouteMixin, {
     }
   },
 
-  didInsertElement: function() {
+  didInsertElement() {
     let placeholders = { 'doi': 'DOI',
                          'provider': 'Provider',
                          'client': 'Client',

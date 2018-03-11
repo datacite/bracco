@@ -55,13 +55,13 @@ export default Ember.Component.extend({
   },
 
   actions: {
-    edit: function(client) {
+    edit(client) {
       this.set('client', client);
       this.get('client').set('confirmSymbol', client.get('symbol'));
       this.set('repository', client.get('repository'));
       this.set('edit', true);
     },
-    change: function(client) {
+    change(client) {
       this.set('client', client);
       this.get('client').set('confirmSymbol', client.get('symbol'));
       this.set('change', true);
@@ -69,14 +69,14 @@ export default Ember.Component.extend({
     generate() {
       this.generate();
     },
-    delete: function(client) {
+    delete(client) {
       this.set('client', client);
       this.get('client').set('confirmSymbol', null);
       this.get('client').validateSync();
       this.set('provider', client.get('provider'));
       this.set('delete', true);
     },
-    setPassword: function() {
+    setPassword() {
       let self = this;
       this.get('client').set('keepPassword', false);
       this.get('client').save().then(function () {
@@ -91,7 +91,7 @@ export default Ember.Component.extend({
     selectRepository(repository) {
       this.selectRepository(repository);
     },
-    submit: function(client) {
+    submit(client) {
       let self = this;
       client.save().then(function () {
         self.reset();
@@ -99,7 +99,7 @@ export default Ember.Component.extend({
         Ember.Logger.assert(false, reason);
       });
     },
-    destroy: function(client) {
+    destroy(client) {
       let self = this;
       this.get('store').findRecord("client", client.id, { backgroundReload: false }).then(function(client) {
         client.destroyRecord().then(function () {
@@ -107,7 +107,7 @@ export default Ember.Component.extend({
         });
       });
     },
-    cancel: function(client) {
+    cancel(client) {
       let self = this;
       this.get('store').findRecord("client", client.id).then(function(client) {
         self.get('model').set('client', client);

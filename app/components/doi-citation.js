@@ -59,7 +59,7 @@ export default Ember.Component.extend({
     }
   },
 
-  didInsertElement: function() {
+  didInsertElement() {
     let citationFormats = { 'apa': 'APA',
                             'harvard-cite-them-right': 'Harvard',
                             'modern-language-association': 'MLA',

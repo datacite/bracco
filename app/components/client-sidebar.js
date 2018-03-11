@@ -6,7 +6,7 @@ export default Ember.Component.extend({
 
   classNames: ['panel', 'facets', 'add'],
 
-  didInsertElement: function() {
+  didInsertElement() {
     this.set('currentUser', this.get('currentUser'));
   }
 });

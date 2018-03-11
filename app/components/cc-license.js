@@ -5,7 +5,7 @@ export default Ember.Component.extend({
   tagName: 'div',
   classNames: ['license'],
 
-  didInsertElement: function() {
+  didInsertElement() {
     const Tooltips = [
       { key: 'cc', title: 'Creative Commons (CC)', text: 'A Creative Commons license enables the free distribution of an otherwise copyrighted work.' },
       { key: 'by', title: 'Attribution (BY)', text: 'Licensees may copy, distribute, display and perform the work and make derivative works and remixes based on it only if they give the author or licensor the credits (attribution) in the manner specified by these.' },

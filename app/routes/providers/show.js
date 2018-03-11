@@ -23,7 +23,7 @@ export default Ember.Route.extend(CanMixin, RouteMixin, {
   },
 
   actions: {
-    queryParamsDidChange: function() {
+    queryParamsDidChange() {
       this.refresh();
     }
   }

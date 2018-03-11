@@ -111,7 +111,6 @@ export default Ember.Component.extend({
     }).then(function(response) {
       if (response.ok) {
         return response.json().then(function(res) {
-          console.log(res.data)
           return res.data;
         });
       } else {
@@ -123,7 +122,7 @@ export default Ember.Component.extend({
   },
 
   actions: {
-    edit: function(doi) {
+    edit(doi) {
       this.set('doi', doi);
       this.get('doi').set('confirmDoi', doi.get('doi'));
       this.searchClient(null);
@@ -132,14 +131,14 @@ export default Ember.Component.extend({
       this.set('state', this.get('states')[0]);
       this.set('edit', true);
     },
-    transfer: function(doi) {
+    transfer(doi) {
       this.set('doi', doi);
       this.get('doi').set('confirmDoi', doi.get('doi'));
       this.searchClient(null);
       this.set('state', this.get('states')[0]);
       this.set('transfer', true);
     },
-    delete: function(doi) {
+    delete(doi) {
       this.set('doi', doi);
       this.get('doi').set('confirmDoi', null);
       this.set('delete', true);
@@ -156,9 +155,9 @@ export default Ember.Component.extend({
     searchResourceType(query) {
       this.searchResourceType(query);
     },
-    selectPublished(date) {
-      console.log(date)
-    },
+    // selectPublished(date) {
+    //   this.selectPublished(date);
+    // },
     didSelectFiles(files, resetInput) {
       var reader = new FileReader();
       let self = this;
@@ -173,7 +172,7 @@ export default Ember.Component.extend({
 
       resetInput();
     },
-    submit: function(doi) {
+    submit(doi) {
       // change state via event if there is a change
       let stateChange = doi.changedAttributes().state;
       if (typeof stateChange !== 'undefined') {
@@ -186,7 +185,7 @@ export default Ember.Component.extend({
         self.set('transfer', false);
       });
     },
-    destroy: function(doi) {
+    destroy(doi) {
       let self = this;
       this.set('client', this.get('doi').get('client'));
       this.get('store').findRecord("doi", doi.id, { backgroundReload: false }).then(function(doi) {
@@ -195,7 +194,7 @@ export default Ember.Component.extend({
         });
       });
     },
-    cancel: function() {
+    cancel() {
       this.reset();
     }
   }

@@ -9,10 +9,10 @@ export default Component.extend({
   // }),
 
   actions: {
-    add: function() {
+    add() {
       this.get('model').get('creator').addObject('');
     },
-    delete: function(item) {
+    delete(item) {
       this.get('model').get('creator').removeObject(item);
     }
   }

@@ -5,7 +5,7 @@ export default Ember.Component.extend({
   classNames: ['row'],
   isSandbox: false,
 
-  didInsertElement: function() {
+  didInsertElement() {
     if (this.get('model.otherParams.provider-id') === 'sandbox') {
       this.set('isSandbox', true);
     }
