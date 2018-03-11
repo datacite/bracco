@@ -14,11 +14,11 @@ export default Ember.Component.extend({
   },
 
   actions: {
-    new: function() {
+    new() {
       this.set('provider', this.get('store').createRecord('provider', { isActive: true }));
       this.set('new', true);
     },
-    submit: function(provider) {
+    submit(provider) {
       let self = this;
       provider.save().then(function(provider) {
         self.get('router').transitionTo('providers.show.settings', provider.id);
@@ -27,7 +27,7 @@ export default Ember.Component.extend({
         Ember.Logger.assert(false, reason);
       });
     },
-    cancel: function() {
+    cancel() {
       this.get('provider').deleteRecord();
       this.reset();
     }

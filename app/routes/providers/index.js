@@ -16,7 +16,6 @@ export default Ember.Route.extend(CanMixin, RouteMixin, {
     return providers;
     // let self = this;
     // let providers = this.findPaged('provider', params).then(function(providers) {
-    //   console.log(providers)
     //   return providers;
     // }).catch(function(reason){
     //   Ember.Logger.assert(false, reason);
@@ -32,7 +31,7 @@ export default Ember.Route.extend(CanMixin, RouteMixin, {
   },
 
   actions: {
-    queryParamsDidChange: function() {
+    queryParamsDidChange() {
       this.refresh();
     }
   }

@@ -18,7 +18,7 @@ export default Ember.Component.extend({
       this.get('session').invalidate();
     }
   },
-  didInsertElement: function() {
+  didInsertElement() {
     let settings = this.get('currentUser').get('settings');
     if (Ember.typeOf(settings) == 'object') {
       this.set('settings', { route: settings.route, model: settings.id });

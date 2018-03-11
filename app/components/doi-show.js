@@ -15,6 +15,29 @@ const events = {
   "findable": "publish"
 };
 
+const years = [
+  1999,
+  2000,
+  2001,
+  2002,
+  2003,
+  2004,
+  2005,
+  2006,
+  2007,
+  2008,
+  2009,
+  2010,
+  2011,
+  2012,
+  2013,
+  2014,
+  2015,
+  2016,
+  2017,
+  2018
+];
+
 export default Ember.Component.extend({
   currentUser: service(),
   store: service(),
@@ -24,11 +47,13 @@ export default Ember.Component.extend({
   doi: null,
   client: null,
   clients: [],
-  lines: 18,
+  resourceType: null,
+  resourceTypes: [],
   stateList,
   states: [],
   state: null,
   events,
+  years,
 
   reset() {
     this.set('doi', null);
@@ -48,8 +73,12 @@ export default Ember.Component.extend({
     this.get('doi').set('client', client);
     this.get('doi').set('provider', client.get('provider'));
   },
-  countLines(xml) {
-    this.set('lines', xml.split(/\r\n|\r|\n/).length + 1);
+  searchResourceType(query) {
+    this.set('resourceTypes', this.get('store').query('resource-type', { 'query': query, sort: 'name', 'page[size]': 100 }));
+  },
+  selectResourceType(resourceType) {
+    this.set('resourceType', resourceType)
+    this.get('doi').set('resource-type', resourceType);
   },
   getStates(state) {
     // test prefix uses only draft state
@@ -61,24 +90,28 @@ export default Ember.Component.extend({
       return stateList[state];
     }
   },
-  convertContent(input) {
-    let url = ENV.APP_URL + '/metadata/convert';
+  new(input) {
+    let doi = this.get('doi').get('doi');
+    let url = ENV.APP_URL + '/dois/' + doi;
     return fetch(url, {
-      method: 'post',
+      method: 'put',
       headers: {
         'authorization': 'Bearer ' + this.get('currentUser').get('jwt'),
         'content-type': 'application/json'
       },
       body: JSON.stringify({
         data: {
-          type: 'metadata',
-          attributes: { xml: input }
+          type: 'dois',
+          attributes: {
+            doi: doi,
+            xml: input
+          }
         }
       })
     }).then(function(response) {
       if (response.ok) {
         return response.json().then(function(res) {
-          return atob(res.data.attributes.xml);
+          return res.data;
         });
       } else {
         Ember.Logger.assert(false, response);
@@ -89,23 +122,23 @@ export default Ember.Component.extend({
   },
 
   actions: {
-    edit: function(doi) {
+    edit(doi) {
       this.set('doi', doi);
       this.get('doi').set('confirmDoi', doi.get('doi'));
       this.searchClient(null);
-      this.countLines(doi.get('xml'));
+      this.searchResourceType(null);
       this.set('states', this.getStates(doi.get('state')));
       this.set('state', this.get('states')[0]);
       this.set('edit', true);
     },
-    transfer: function(doi) {
+    transfer(doi) {
       this.set('doi', doi);
       this.get('doi').set('confirmDoi', doi.get('doi'));
       this.searchClient(null);
       this.set('state', this.get('states')[0]);
       this.set('transfer', true);
     },
-    delete: function(doi) {
+    delete(doi) {
       this.set('doi', doi);
       this.get('doi').set('confirmDoi', null);
       this.set('delete', true);
@@ -116,14 +149,22 @@ export default Ember.Component.extend({
     selectClient(client) {
       this.selectClient(client);
     },
+    selectResourceType(resourceType) {
+      this.selectResourceType(resourceType);
+    },
+    searchResourceType(query) {
+      this.searchResourceType(query);
+    },
+    // selectPublished(date) {
+    //   this.selectPublished(date);
+    // },
     didSelectFiles(files, resetInput) {
       var reader = new FileReader();
       let self = this;
       reader.onload = function(e) {
         var data = e.target.result;
         var input = data.split(",")[1];
-        self.convertContent(input).then(function(xml) {
-          self.countLines(xml);
+        self.new(input).then(function(xml) {
           self.get('doi').set('xml', xml);
         });
       }
@@ -131,7 +172,7 @@ export default Ember.Component.extend({
 
       resetInput();
     },
-    submit: function(doi) {
+    submit(doi) {
       // change state via event if there is a change
       let stateChange = doi.changedAttributes().state;
       if (typeof stateChange !== 'undefined') {
@@ -144,7 +185,7 @@ export default Ember.Component.extend({
         self.set('transfer', false);
       });
     },
-    destroy: function(doi) {
+    destroy(doi) {
       let self = this;
       this.set('client', this.get('doi').get('client'));
       this.get('store').findRecord("doi", doi.id, { backgroundReload: false }).then(function(doi) {
@@ -153,7 +194,7 @@ export default Ember.Component.extend({
         });
       });
     },
-    cancel: function() {
+    cancel() {
       this.reset();
     }
   }

@@ -8,15 +8,15 @@ export default Ember.Component.extend({
   providerPrefix: null,
 
   actions: {
-    delete: function(providerPrefix) {
+    delete(providerPrefix) {
       this.set('providerPrefix', providerPrefix);
       this.set('provider', providerPrefix.get('provider'));
       this.set('delete', true);
     },
-    cancel: function() {
+    cancel() {
       this.set('delete', false);
     },
-    destroy: function() {
+    destroy() {
       let self = this;
       this.get('store').findRecord("providerPrefix", this.get('providerPrefix').get('id'), { backgroundReload: false }).then(function(providerPrefix) {
         providerPrefix.destroyRecord().then(function () {

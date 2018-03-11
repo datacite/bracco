@@ -23,7 +23,7 @@ export default Ember.Component.extend({
   }),
   cumulative: true,
 
-  init: function () {
+  init() {
     this._super();
 
     Ember.run.schedule("afterRender", this, function() {

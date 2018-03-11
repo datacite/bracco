@@ -61,8 +61,8 @@ export default Ember.Component.extend({
     }
   },
 
-  didInsertElement: function() {
-    let formats = { 'summary': 'Summary',
+  didInsertElement() {
+    let formats = { 'summary': 'Summary View',
                     'datacite': 'DataCite XML',
                     'schema_org': 'Schema.org JSON-LD',
                     'citeproc': 'Citeproc JSON',

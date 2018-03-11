@@ -48,22 +48,47 @@ const Validations = buildValidations({
       })
     })
   ],
-  xml: [
+  title: [
     validator('presence', {
       presence: true,
-      message: 'Please include valid metadata.',
-      disabled: Ember.computed('model', function() {
-        return this.get('model').get('state') === 'draft' || this.get('model').get('doi').startsWith('10.5072');
-      })
-    }),
-    validator('valid-xml', true),
-    validator('metadata', {
-      metadata: true,
       disabled: Ember.computed('model', function() {
         return this.get('model').get('state') === 'draft' || this.get('model').get('doi').startsWith('10.5072');
       })
     })
-  ]
+  ],
+  publisher: [
+    validator('presence', {
+      presence: true,
+      disabled: Ember.computed('model', function() {
+        return this.get('model').get('state') === 'draft' || this.get('model').get('doi').startsWith('10.5072');
+      })
+    })
+  ],
+  publicationYear: [
+    validator('presence', {
+      presence: true,
+      disabled: Ember.computed('model', function() {
+        return this.get('model').get('state') === 'draft' || this.get('model').get('doi').startsWith('10.5072');
+      })
+    })
+  ],
+
+  // xml: [
+  //   validator('presence', {
+  //     presence: true,
+  //     message: 'Please include valid metadata.',
+  //     disabled: Ember.computed('model', function() {
+  //       return this.get('model').get('state') === 'draft' || this.get('model').get('doi').startsWith('10.5072');
+  //     })
+  //   }),
+  //   validator('valid-xml', true),
+  //   validator('metadata', {
+  //     metadata: true,
+  //     disabled: Ember.computed('model', function() {
+  //       return this.get('model').get('state') === 'draft' || this.get('model').get('doi').startsWith('10.5072');
+  //     })
+  //   })
+  // ]
 });
 
 export default DS.Model.extend(Validations, {
@@ -79,23 +104,24 @@ export default DS.Model.extend(Validations, {
 
   identifier: DS.attr('string'),
   doi: DS.attr('string'),
+  prefix: DS.attr('string'),
+  suffix: DS.attr('string'),
   url: DS.attr('string'),
   media: DS.attr(),
-  author: DS.attr(),
+  creator: DS.attr(),
   title: DS.attr('string'),
-  containerTitle: DS.attr('string'),
-  description: DS.attr(),
+  publisher: DS.attr('string'),
+  publicationYear: DS.attr('string'),
+  description: DS.attr('string'),
   license: DS.attr('string'),
   xml: DS.attr('xml'),
   resourceTypeSubtype: DS.attr('string'),
   version: DS.attr('string'),
   metadataVersion: DS.attr('string'),
   schemaVersion: DS.attr('string'),
-  relatedIdentifier: DS.attr(),
   isActive: DS.attr('boolean', { defaultValue: true }),
   state: DS.attr('string'),
   event: DS.attr('string'),
-  published: DS.attr('string'),
   registered: DS.attr('date'),
   updated: DS.attr('date'),
 

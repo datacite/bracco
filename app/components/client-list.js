@@ -28,7 +28,7 @@ export default Ember.Component.extend({
   },
 
   actions: {
-    new: function(model) {
+    new(model) {
       let provider = this.get('store').peekRecord('provider', model.get('otherParams.provider-id'));
       this.set('client', this.get('store').createRecord('client', { provider: provider, symbol: provider.id.toUpperCase() + '.' }));
       this.set('new', true);
@@ -39,7 +39,7 @@ export default Ember.Component.extend({
     selectRepository(repository) {
       this.selectRepository(repository);
     },
-    submit: function(client) {
+    submit(client) {
       let self = this;
       client.save().then(function(client) {
         self.get('router').transitionTo('clients.show.settings', client.id);
@@ -48,7 +48,7 @@ export default Ember.Component.extend({
         Ember.Logger.assert(false, reason);
       });
     },
-    cancel: function() {
+    cancel() {
       this.get('client').deleteRecord();
       this.reset();
     }

@@ -6,7 +6,7 @@ import ENV from 'bracco/config/environment';
 export default Ember.Component.extend({
   currentUser: service(),
 
-  init: function () {
+  init() {
     this._super();
     Ember.run.schedule("afterRender",this,function() {
       this.send("checkLink");
@@ -47,7 +47,7 @@ export default Ember.Component.extend({
     }
   },
 
-  didInsertElement: function() {
+  didInsertElement() {
     this.set('url', this.get('url'));
   }
 });

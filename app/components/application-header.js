@@ -30,7 +30,7 @@ export default Ember.Component.extend({
     }
   },
 
-  didInsertElement: function() {
+  didInsertElement() {
     if (this.get('default')) {
       this.set('type', null);
       this.set('title', Ember.String.htmlSafe(ENV.SITE_TITLE));

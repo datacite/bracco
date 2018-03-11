@@ -48,12 +48,12 @@ export default Ember.Component.extend(Validations, {
   },
 
   actions: {
-    edit: function(provider) {
+    edit(provider) {
       this.set('provider', provider);
       this.get('provider').set('confirmSymbol', provider.get('symbol'));
       this.set('edit', true);
     },
-    change: function(provider) {
+    change(provider) {
       this.set('provider', provider);
       this.get('provider').set('confirmSymbol', provider.get('symbol'));
       this.get('provider').set('passwordInput', null);
@@ -62,12 +62,12 @@ export default Ember.Component.extend(Validations, {
     generate() {
       this.generate();
     },
-    delete: function(provider) {
+    delete(provider) {
       this.set('provider', provider);
       this.get('provider').set('confirmSymbol', null);
       this.set('delete', true);
     },
-    setPassword: function() {
+    setPassword() {
       let self = this;
       this.get('provider').set('keepPassword', false);
       this.get('provider').save().then(function () {
@@ -76,7 +76,7 @@ export default Ember.Component.extend(Validations, {
         Ember.Logger.assert(false, reason);
       });
     },
-    submit: function() {
+    submit() {
       let self = this;
       this.get('provider').save().then(function () {
         self.reset();
@@ -84,7 +84,7 @@ export default Ember.Component.extend(Validations, {
         Ember.Logger.assert(false, reason);
       });
     },
-    destroy: function(provider) {
+    destroy(provider) {
       let self = this;
       if (this.get('confirmId') === provider.get('symbol')) {
         provider.destroyRecord().then(function () {
@@ -94,7 +94,7 @@ export default Ember.Component.extend(Validations, {
         });
       }
     },
-    cancel: function(provider) {
+    cancel(provider) {
       let self = this;
       this.get('store').findRecord("provider", provider.id).then(function(provider) {
         self.get('model').set('provider', provider);
