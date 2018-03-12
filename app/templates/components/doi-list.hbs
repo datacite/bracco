@@ -49,8 +49,8 @@
             </div>
           {{/if}}
 
-          {{#form.element controlType="power-select" label="State" property="state" options=events destination=state helpText='Draft DOIs are only visible from within the account, and can be deleted. Findable DOIs are registered with the Global Handle System and included in DataCite Search.' as |el|}}
-            {{#el.control onchange=(action (mut state)) optionLabelPath="name" placeholder="Select State" as |item|}}
+          {{#form.element controlType="power-select" label="State" property="state" options=states destination=state helpText='Draft DOIs are only visible from within the account, and can be deleted. Findable DOIs are registered with the Global Handle System and included in DataCite Search.' as |el|}}
+            {{#el.control onChange=(action "selectState") optionLabelPath="name" placeholder="Select State" as |item|}}
               {{titleize item}}
             {{/el.control}}
           {{/form.element}}

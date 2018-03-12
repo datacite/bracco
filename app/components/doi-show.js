@@ -4,8 +4,8 @@ import fetch from 'fetch';
 import ENV from 'bracco/config/environment';
 
 const stateList = {
-  inactive: ['inactive', 'registered', 'findable'],
-  draft: ['draft', 'registered', 'findable'],
+  undetermined: ['undetermined', 'registered', 'findable'],
+  draft: ['draft', 'findable'],
   registered: ['registered', 'findable'],
   findable: ['registered', 'findable']
 }
@@ -80,14 +80,13 @@ export default Ember.Component.extend({
     this.set('resourceType', resourceType)
     this.get('doi').set('resource-type', resourceType);
   },
-  getStates(state) {
+  setStates(state) {
     // test prefix uses only draft state
-    if (this.get('doi').get('doi').startsWith('10.5072')) {
-      return ['draft'];
-    } else if (state === 'inactive' && Ember.isEmpty(this.get('doi').get('registered'))) {
-      return ['inactive', 'draft', 'registered', 'public'];
+    if (this.get('doi').get('prefix') === '10.5072') {
+      this.set('states', ['draft']);
+      this.get('doi').set('state', 'draft');
     } else {
-      return stateList[state] || ['draft'];
+      this.set('states', stateList[state]);
     }
   },
   new(input) {
@@ -127,15 +126,13 @@ export default Ember.Component.extend({
       this.get('doi').set('confirmDoi', doi.get('doi'));
       this.searchClient(null);
       this.searchResourceType(null);
-      this.set('states', this.getStates(doi.get('state')));
-      this.set('state', this.get('states')[0]);
+      this.set('states', this.setStates(doi.get('state')));
       this.set('edit', true);
     },
     transfer(doi) {
       this.set('doi', doi);
       this.get('doi').set('confirmDoi', doi.get('doi'));
       this.searchClient(null);
-      this.set('state', this.get('states')[0]);
       this.set('transfer', true);
     },
     delete(doi) {

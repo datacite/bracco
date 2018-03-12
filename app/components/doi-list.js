@@ -4,12 +4,13 @@ import ENV from 'bracco/config/environment';
 import fetch from 'fetch';
 
 const stateList = {
-  inactive: ['inactive'],
-  draft: ['draft', 'registered', 'findable'],
+  undetermined: ['undetermined', 'registered', 'findable'],
+  draft: ['draft', 'findable'],
   registered: ['registered', 'findable'],
   findable: ['registered', 'findable']
 }
 const events = {
+  "draft": "start",
   "registered": "register",
   "findable": "publish"
 };
@@ -27,8 +28,6 @@ export default Ember.Component.extend({
   target: null,
   client: null,
   clients: [],
-  prefix: '10.5072',
-  suffix: '',
   prefixes: [],
   events,
   hasInput: Ember.computed('doi', function() {
@@ -51,50 +50,41 @@ export default Ember.Component.extend({
     this.set('edit', false);
     this.set('new', false);
   },
-  getStates(state) {
+  setStates(state) {
     // test prefix uses only draft state
-    if (this.get('prefix') === '10.5072') {
-      return ['draft'];
+    if (this.get('doi').get('prefix') === '10.5072') {
+      this.set('states', ['draft']);
+      this.get('doi').set('state', 'draft');
     } else {
-      return stateList[state];
+      this.set('states', stateList[state]);
     }
   },
-  countLines(xml) {
-    this.set('lines', xml.split(/\r\n|\r|\n/).length + 1);
-  },
-  convertContent(input) {
-    let url = ENV.APP_URL + '/metadata/convert';
-    return fetch(url, {
-      method: 'post',
-      headers: {
-        'authorization': 'Bearer ' + this.get('currentUser').get('jwt'),
-        'content-type': 'application/json'
-      },
-      body: JSON.stringify({
-        data: {
-          type: 'metadata',
-          attributes: { xml: input }
-        }
-      })
-    }).then(function(response) {
-      if (response.ok) {
-        return response.json().then(function(res) {
-          return atob(res.data.attributes.xml);
-        });
-      } else {
-        Ember.Logger.assert(false, response);
-      }
-    }).catch(function(error) {
-      Ember.Logger.assert(false, error);
-    });
-  },
-  setPrefix(prefix) {
-    this.set('prefix', prefix);
-    if (this.get('doi').get('doi')) {
-      this.set('suffix', this.get('doi').get('doi').split('/', 2).pop());
-    }
-    this.get('doi').set('doi', prefix + '/' + this.get('suffix'));
-  },
+  // convertContent(input) {
+  //   let url = ENV.APP_URL + '/metadata/convert';
+  //   return fetch(url, {
+  //     method: 'post',
+  //     headers: {
+  //       'authorization': 'Bearer ' + this.get('currentUser').get('jwt'),
+  //       'content-type': 'application/json'
+  //     },
+  //     body: JSON.stringify({
+  //       data: {
+  //         type: 'metadata',
+  //         attributes: { xml: input }
+  //       }
+  //     })
+  //   }).then(function(response) {
+  //     if (response.ok) {
+  //       return response.json().then(function(res) {
+  //         return atob(res.data.attributes.xml);
+  //       });
+  //     } else {
+  //       Ember.Logger.assert(false, response);
+  //     }
+  //   }).catch(function(error) {
+  //     Ember.Logger.assert(false, error);
+  //   });
+  // },
   generate() {
     let self = this;
     let url = ENV.APP_URL + '/dois/random?prefix=' + this.get('doi').get('prefix');
@@ -122,11 +112,9 @@ export default Ember.Component.extend({
     new(model) {
       let self = this;
       this.set('client', this.get('store').peekRecord('client', model.get('otherParams.client-id')));
-      this.set('doi', this.get('store').createRecord('doi', { client: this.get('client'), state: 'draft' }));
+      this.set('doi', this.get('store').createRecord('doi', { client: this.get('client'), prefix: '10.5072', state: 'draft' }));
       this.set('prefixes', this.get('store').query('prefix', { 'client-id': this.get('client.id'), sort: 'name', 'page[size]': 25 }));
-      this.set('states', this.getStates('draft'));
-      this.set('state', this.get('states')[0]);
-      self.get('doi').set('prefix', '10.5072');
+      this.setStates('draft');
 
       this.generate().then(function() {
         self.set('new', true);
@@ -139,6 +127,7 @@ export default Ember.Component.extend({
     },
     selectPrefix(prefix) {
       this.get('doi').set('prefix', prefix.id);
+      this.setStates(this.get('doi').get('state'));
     },
     generate() {
       this.generate();
@@ -148,6 +137,9 @@ export default Ember.Component.extend({
     },
     selectTarget(target) {
       this.selectTarget(target);
+    },
+    selectState(state) {
+      this.get('doi').set('state', state);
     },
     didSelectFiles(files, resetInput) {
       var reader = new FileReader();
