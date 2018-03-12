@@ -27,7 +27,7 @@ const validUrl = BaseValidator.extend({
           if (parseInt(result.status) === 403) {
             return "Access to landing page was forbidden (status code " + result.status + ").";
           } else if (result.status === 404) {
-            return "landing page was not found (status code " + result.status + ").";
+            return "Landing page was not found (status code " + result.status + ").";
           } else if (result.status === 408) {
             return "Request timed out reaching the landing page (status code " + result.status + ").";
           } else if (result.status !== 200) {

@@ -11,6 +11,9 @@ const Validations = buildValidations({
     validator('format', {
       regex: /^[-._;()/:A-Za-z0-9]+$/,
       message: 'The DOI suffix contains invalid characters.'
+    }),
+    validator('unique-doi', {
+      dependentKeys: ['model.prefix']
     })
   ],
   url: [
