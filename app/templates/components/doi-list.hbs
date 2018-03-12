@@ -5,22 +5,18 @@
         <h3 class="edit">New DOI</h3>
 
         {{#bs-form formLayout="vertical" model=doi onSubmit=(action "submit" doi model) as |form|}}
-          {{#form.group validation=doiValidation}}
-            <div class="compound-label">DOI</div>
-            <div class="compound-form input-group">
-              <div class="input-group-btn">
-                {{#bs-dropdown as |dd|}}
-                {{#dd.button class="btn"}}DOI Prefix <span class="caret"></span>{{/dd.button}}
-                  {{#dd.menu as |ddm|}}
-                    {{#each prefixes as |prefix|}}
-                      {{#ddm.item}}<a {{action "setPrefix" prefix.id}}>{{prefix.id}}</a>{{/ddm.item}}
-                    {{/each}}
-                  {{/dd.menu}}
-                {{/bs-dropdown}}
-              </div>
-              {{form.element controlType="text" placeholder="DOI (required)" property="suffix" helpText="The unique string that identifies the resource." required=false}}
-            </div>
-          {{/form.group}}
+          <div class="compound-form input-group">
+            <span class="input-group-addon">
+              {{#form.element controlType="power-select" property="prefix" options=prefixes destination=prefix searchEnabled=false as |el|}}
+                {{#el.control onchange=(action (mut prefix)) optionLabelPath="id" as |item|}}
+                  {{item.id}}
+                {{/el.control}}
+              {{/form.element}}
+            </span>
+            {{form.element controlType="text" label="DOI" placeholder="DOI Suffix (required)" property="doi" helpText="A unique string that identifies a resource." required=false}}
+            <span class="input-group-addon refresh" title="Refresh" aria-label="Refresh" {{action 'refresh'}}>{{fa-icon "refresh"}}</span>
+            <span class="input-group-addon clear" title="Clear" aria-label="Clear" {{action 'clear'}}>{{fa-icon "times-circle"}}</span>
+          </div>
 
           {{form.element controlType="text" label="URL" placeholder="URL (required)" property="url" helpText="The location of the landing page with more information about the resource." required=false}}
 
@@ -28,8 +24,8 @@
             {{multi-input-form model=model}}
             {{form.element controlType="textarea" label="Title" placeholder="Title (required)" property="title" rows=2 helpText="A name or title by which a resource is known." required=false}}
             {{form.element controlType="text" label="Publisher" placeholder="Publisher (required)" property="publisher" helpText="The name of the entity that holds, archives, publishes prints, distributes, releases, issues, or produces the resource." required=false}}
-            {{#form.element controlType="power-select" label="Publication Year" property="publicationYear" options=years destination=publicationYear helpText="The year when the resource was or will be made publicly available." as |el|}}
-              {{#el.control onchange=(action (mut publicationYear)) placeholder="Select Publication Year" as |item|}}
+            {{#form.element controlType="power-select" label="Publication Year" property="published" options=years destination=published helpText="The year when the resource was or will be made publicly available." as |el|}}
+              {{#el.control onchange=(action (mut published)) placeholder="Select Publication Year" as |item|}}
                 {{item}}
               {{/el.control}}
             {{/form.element}}
@@ -57,6 +53,8 @@
               {{titleize item}}
             {{/el.control}}
           {{/form.element}}
+
+          {{v-get doi 'xml' 'message'}}
 
           <div class="pseudo-footer">
             <div class="btn-toolbar pull-right">
@@ -86,9 +84,9 @@
             {{#if doi.creator}}
               {{{format-author doi.creator}}}
             {{/if}}
-            {{#if doi.publicationYear}}
+            {{#if doi.published}}
               <div class="metadata">
-                {{format-metadata doi.publicationYear resourceType=doi.resource-type resourceTypeSubtype=doi.resourceTypeSubtype publisher=doi.publisher version=doi.version}}
+                {{format-metadata doi.published resourceType=doi.resource-type resourceTypeSubtype=doi.resourceTypeSubtype publisher=doi.publisher version=doi.version}}
               </div>
             {{/if}}
             {{#if doi.description}}

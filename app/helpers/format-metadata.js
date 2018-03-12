@@ -1,8 +1,8 @@
 import Ember from 'ember';
 import moment from 'moment';
 
-export function formatMetadata([publicationYear], hash) {
-  var timestamp = new Date(Date.parse(publicationYear));
+export function formatMetadata([published], hash) {
+  var timestamp = new Date(Date.parse(published));
   let pubDate = moment(timestamp).utc().format('Y');
   let version = hash.version ? 'Version ' + hash.version + ' of ' : '';
   let resourceType = (hash.resourceTypeSubtype || (hash.resourceType && hash.resourceType.name) || 'Work').capitalize();

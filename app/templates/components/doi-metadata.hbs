@@ -1,4 +1,4 @@
-{{#if model.publicationYear}}
+{{#if model.published}}
   <div class="row">
     <div class="col-md-9">
       <div id="metadata" class="input-group pull-right">
@@ -23,11 +23,11 @@
             </h3>
             {{{format-author model.creator}}}
             <div class="metadata">
-              {{format-metadata model.publicationYear resourceType=model.resource-type resourceTypeSubtype=model.resourceTypeSubtype publisher=model.publisher version=model.version}}
+              {{format-metadata model.published resourceType=model.resource-type resourceTypeSubtype=model.resourceTypeSubtype publisher=model.publisher version=model.version}}
             </div>
             {{#if model.description}}
               <div class="description">
-                {{format-text model.description limit=75}}
+                {{format-text model.description limit=150}}
               </div>
             {{/if}}
             {{#if model.license}}

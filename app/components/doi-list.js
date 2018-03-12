@@ -31,6 +31,9 @@ export default Ember.Component.extend({
   suffix: '',
   prefixes: [],
   events,
+  hasInput: Ember.computed('doi', function() {
+    return !Ember.isEmpty(this.get('doi.doi'));
+  }),
 
   searchClient(query) {
     if (this.get('currentUser').get('isAdmin')) {
@@ -102,7 +105,7 @@ export default Ember.Component.extend({
     }).then(function(response) {
       if (response.ok) {
         return response.json().then(function(data) {
-          self.get('doi').set('suffix', data.doi);
+          self.get('doi').set('doi', data.doi);
           return data.doi;
         });
       } else {
@@ -150,11 +153,8 @@ export default Ember.Component.extend({
       let self = this;
       reader.onload = function(e) {
         var data = e.target.result;
-        var input = data.split(",")[1];
-        self.convertContent(input).then(function(xml) {
-          self.countLines(xml);
-          self.get('doi').set('xml', xml);
-        });
+        var xml = atob(data.split(",")[1]);
+        self.get('doi').set('xml', xml);
       }
       reader.readAsDataURL(files[0]);
 
@@ -180,6 +180,13 @@ export default Ember.Component.extend({
       }).catch(function(reason){
         Ember.Logger.assert(false, reason);
       });
+    },
+    refresh() {
+      this.generate();
+    },
+    clear() {
+      this.get('doi').set('doi', null)
+      this.$('input[type=text]:first').focus();
     },
     cancel() {
       this.reset();

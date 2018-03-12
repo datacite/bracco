@@ -87,7 +87,7 @@ export default Ember.Component.extend({
     } else if (state === 'inactive' && Ember.isEmpty(this.get('doi').get('registered'))) {
       return ['inactive', 'draft', 'registered', 'public'];
     } else {
-      return stateList[state];
+      return stateList[state] || ['draft'];
     }
   },
   new(input) {
@@ -163,10 +163,17 @@ export default Ember.Component.extend({
       let self = this;
       reader.onload = function(e) {
         var data = e.target.result;
-        var input = data.split(",")[1];
-        self.new(input).then(function(xml) {
-          self.get('doi').set('xml', xml);
-        });
+        var xml = atob(data.split(",")[1]);
+        self.get('doi').set('xml', xml);
+
+        self.get('doi').set('creator', null);
+        self.get('doi').set('title', null);
+        self.get('doi').set('publisher', null);
+        self.get('doi').set('datePublished', null);
+        self.get('doi').set('resourceType', null);
+        self.get('doi').set('resourceTypeSubtype', null);
+        self.get('doi').set('description', null);
+        self.get('doi').set('license', null);
       }
       reader.readAsDataURL(files[0]);
 

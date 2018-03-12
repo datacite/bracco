@@ -6,11 +6,11 @@ const Validations = buildValidations({
   doi: [
     validator('presence', {
       presence: true,
-      message: 'Please enter a valid DOI.'
+      message: 'The DOI suffix can\'t be blank.'
     }),
     validator('format', {
-      regex: /^10\.\d{4,5}\/[-._;()/:A-Za-z0-9]+$/,
-      message: 'The DOI doesn\'t start with 10.xxxx and/or contains invalid characters.'
+      regex: /^[-._;()/:A-Za-z0-9]+$/,
+      message: 'The DOI suffix contains invalid characters.'
     })
   ],
   confirmDoi: [
@@ -52,7 +52,7 @@ const Validations = buildValidations({
     validator('presence', {
       presence: true,
       disabled: Ember.computed('model', function() {
-        return this.get('model').get('state') === 'draft' || this.get('model').get('doi').startsWith('10.5072');
+        return this.get('model').get('xml') || this.get('model').get('state') === 'draft' || this.get('model').get('doi').startsWith('10.5072');
       })
     })
   ],
@@ -60,35 +60,27 @@ const Validations = buildValidations({
     validator('presence', {
       presence: true,
       disabled: Ember.computed('model', function() {
-        return this.get('model').get('state') === 'draft' || this.get('model').get('doi').startsWith('10.5072');
+        return this.get('model').get('xml') || this.get('model').get('state') === 'draft' || this.get('model').get('doi').startsWith('10.5072');
       })
     })
   ],
-  publicationYear: [
+  published: [
     validator('presence', {
       presence: true,
+      disabled: Ember.computed('model', function() {
+        return this.get('model').get('xml') || this.get('model').get('state') === 'draft' || this.get('model').get('doi').startsWith('10.5072');
+      })
+    })
+  ],
+  xml: [
+    validator('presence', {
+      presence: true,
+      message: 'Please include valid metadata.',
       disabled: Ember.computed('model', function() {
         return this.get('model').get('state') === 'draft' || this.get('model').get('doi').startsWith('10.5072');
       })
     })
-  ],
-
-  // xml: [
-  //   validator('presence', {
-  //     presence: true,
-  //     message: 'Please include valid metadata.',
-  //     disabled: Ember.computed('model', function() {
-  //       return this.get('model').get('state') === 'draft' || this.get('model').get('doi').startsWith('10.5072');
-  //     })
-  //   }),
-  //   validator('valid-xml', true),
-  //   validator('metadata', {
-  //     metadata: true,
-  //     disabled: Ember.computed('model', function() {
-  //       return this.get('model').get('state') === 'draft' || this.get('model').get('doi').startsWith('10.5072');
-  //     })
-  //   })
-  // ]
+  ]
 });
 
 export default DS.Model.extend(Validations, {
@@ -111,7 +103,7 @@ export default DS.Model.extend(Validations, {
   creator: DS.attr(),
   title: DS.attr('string'),
   publisher: DS.attr('string'),
-  publicationYear: DS.attr('string'),
+  published: DS.attr('string'),
   description: DS.attr('string'),
   license: DS.attr('string'),
   xml: DS.attr('xml'),
