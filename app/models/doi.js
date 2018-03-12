@@ -28,7 +28,10 @@ const Validations = buildValidations({
       message: 'The DOI suffix contains invalid characters.'
     }),
     validator('unique-doi', {
-      dependentKeys: ['model.prefix']
+      dependentKeys: ['model.prefix'],
+      disabled: Ember.computed('model', function() {
+        return !this.get('model').get('isNew');
+      })
     })
   ],
   url: [
