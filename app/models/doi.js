@@ -31,7 +31,7 @@ const Validations = buildValidations({
     }),
     validator('valid-url', {
       allowBlank: true,
-      disabled: Ember.computed('model', function() {
+      isWarning: Ember.computed('model', function() {
         return this.get('model').get('state') === 'draft' || this.get('model').get('doi').startsWith('10.5072');
       })
     })
