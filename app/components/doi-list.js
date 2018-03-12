@@ -5,15 +5,10 @@ import fetch from 'fetch';
 
 const stateList = {
   undetermined: ['undetermined', 'registered', 'findable'],
-  draft: ['draft', 'findable'],
+  draft: ['draft', 'registered', 'findable'],
   registered: ['registered', 'findable'],
   findable: ['registered', 'findable']
 }
-const events = {
-  "draft": "start",
-  "registered": "register",
-  "findable": "publish"
-};
 
 export default Ember.Component.extend({
   currentUser: service(),
@@ -29,7 +24,6 @@ export default Ember.Component.extend({
   client: null,
   clients: [],
   prefixes: [],
-  events,
   hasInput: Ember.computed('doi', function() {
     return !Ember.isEmpty(this.get('doi.doi'));
   }),
@@ -57,6 +51,15 @@ export default Ember.Component.extend({
       this.get('doi').set('state', 'draft');
     } else {
       this.set('states', stateList[state]);
+    }
+  },
+  setEvent(state) {
+    if (state === 'draft') {
+      return 'start';
+    } else if (state === 'registered') {
+      return 'register';
+    } else if (state === 'findable') {
+      return 'publish';
     }
   },
   // convertContent(input) {
@@ -159,11 +162,7 @@ export default Ember.Component.extend({
       this.get('router').transitionTo('clients.show.dois', this.get('target'));
     },
     submit(doi) {
-      // change state via event if there is a change
-      let stateChange = doi.changedAttributes().state;
-      if (typeof stateChange !== 'undefined') {
-        doi.set('event', this.get('events')[stateChange[1]]);
-      }
+      doi.set('event', this.setEvent(doi.get('state')));
       doi.set('doi', doi.get('prefix') + '/' + doi.get('suffix'));
       doi.set('confirmDoi', doi.get('doi'));
       let self = this;

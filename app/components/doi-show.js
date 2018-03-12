@@ -5,15 +5,10 @@ import ENV from 'bracco/config/environment';
 
 const stateList = {
   undetermined: ['undetermined', 'registered', 'findable'],
-  draft: ['draft', 'findable'],
+  draft: ['draft', 'registered', 'findable'],
   registered: ['registered', 'findable'],
   findable: ['registered', 'findable']
 }
-const events = {
-  "draft": "start",
-  "registered": "register",
-  "findable": "publish"
-};
 
 const years = [
   1999,
@@ -50,9 +45,7 @@ export default Ember.Component.extend({
   resourceType: null,
   resourceTypes: [],
   stateList,
-  states: [],
   state: null,
-  events,
   years,
 
   reset() {
@@ -87,6 +80,19 @@ export default Ember.Component.extend({
       this.get('doi').set('state', 'draft');
     } else {
       this.set('states', stateList[state]);
+    }
+  },
+  setEvent(stateChange) {
+    if (stateChange[1] === 'draft') {
+      return 'start';
+    } else if (stateChange[0] === 'draft' && stateChange[1] === 'registered') {
+      return 'register';
+    } else if (stateChange[0] === 'draft' && stateChange[1] === 'findable') {
+      return 'publish';
+    } else if (stateChange[0] === 'registered' && stateChange[1] === 'findable') {
+      return 'publish';
+    } else if (stateChange[0] === 'findable' && stateChange[1] === 'registered') {
+      return 'hide';
     }
   },
   new(input) {
@@ -124,9 +130,9 @@ export default Ember.Component.extend({
     edit(doi) {
       this.set('doi', doi);
       this.get('doi').set('confirmDoi', doi.get('doi'));
+      this.setStates(doi.get('state'));
       this.searchClient(null);
       this.searchResourceType(null);
-      this.set('states', this.setStates(doi.get('state')));
       this.set('edit', true);
     },
     transfer(doi) {
@@ -155,6 +161,9 @@ export default Ember.Component.extend({
     // selectPublished(date) {
     //   this.selectPublished(date);
     // },
+    selectState(state) {
+      this.get('doi').set('state', state);
+    },
     didSelectFiles(files, resetInput) {
       var reader = new FileReader();
       let self = this;
@@ -180,7 +189,7 @@ export default Ember.Component.extend({
       // change state via event if there is a change
       let stateChange = doi.changedAttributes().state;
       if (typeof stateChange !== 'undefined') {
-        doi.set('event', this.get('events')[stateChange[1]]);
+        doi.set('event', this.setEvent(stateChange));
       }
 
       let self = this;

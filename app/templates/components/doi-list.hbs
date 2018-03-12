@@ -48,13 +48,11 @@
             </div>
           {{/if}}
 
-          {{#form.element controlType="power-select" label="State" property="state" options=states destination=state helpText='Draft DOIs are only visible from within the account, and can be deleted. Findable DOIs are registered with the Global Handle System and included in DataCite Search.' as |el|}}
+          {{#form.element controlType="power-select" label="State" property="state" options=states destination=state helpText='The state determines whether the above information is only visible from within the account (draft), the DOI has been made public via the Handle System (registered), or in addition this information is also included in DataCite Search (findable).' as |el|}}
             {{#el.control onChange=(action "selectState") optionLabelPath="name" placeholder="Select State" as |item|}}
               {{titleize item}}
             {{/el.control}}
           {{/form.element}}
-
-          {{v-get doi 'xml' 'message'}}
 
           <div class="pseudo-footer">
             <div class="btn-toolbar pull-right">
