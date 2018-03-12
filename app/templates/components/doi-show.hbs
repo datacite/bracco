@@ -8,9 +8,15 @@
       <div class="panel panel-transparent">
         <div class="panel-body">
           {{#bs-form formLayout="vertical" model=model onSubmit=(action "submit" model) as |form|}}
-            {{form.element controlType="text" label="DOI" placeholder="DOI (required)" property="doi" helpText="The unique string that identifies the resource." disabled=true}}
+            {{#form.element controlType="text" label="DOI" placeholder="DOI (required)" property="doi" disabled=true as |el|}}
+              {{el.control}}
+              <div class="help-block">The <a target="_blank" href="https://support.datacite.org">globally unique string</a> that identifies the resource.</div>
+            {{/form.element}}
             {{form.element controlType="hidden" property="confirmDOI" required=false}}
-            {{form.element controlType="text" label="URL" placeholder="URL (required)" property="url" helpText="The location of the landing page with more information about the resource." required=false}}
+            {{#form.element controlType="text" label="URL" placeholder="URL (required)" property="url" required=false as |el|}}
+              {{el.control}}
+              <div class="help-block">The location of the <a target="_blank" href="https://support.datacite.org">landing page</a> with more information about the resource.</div>
+            {{/form.element}}
 
             {{#if useForm}}
               {{multi-input-form model=model}}
@@ -31,7 +37,7 @@
             {{else}}
               {{#form.element controlType="textarea" label="Metadata" placeholder="Metadata (required)" property="xml" rows=15 required=false as |el|}}
                 {{el.control class="form-control metadata"}}
-                <div class="help-block">Metadata that describe the resource. You can also upload a file with metadata in DataCite XML format, or one of the <a target="_blank" href="https://github.com/datacite/bolognese">other supported formats.</a></div>
+                <div class="help-block">Metadata that describe the resource. You can also upload a file with metadata in DataCite XML format, or one of the other <a target="_blank" href="https://github.com/datacite/bolognese">supported formats.</a></div>
               {{/form.element}}
 
               <div class="btn-toolbar btn-file">
@@ -41,10 +47,11 @@
               </div>
             {{/if}}
 
-            {{#form.element controlType="power-select" label="State" property="state" options=states destination=state helpText='The state determines whether the above information is only visible from within the account (draft), the DOI has been made public via the Handle System (registered), or in addition this information is also included in DataCite Search (findable).' as |el|}}
+            {{#form.element controlType="power-select" label="State" property="state" options=states destination=state as |el|}}
               {{#el.control onchange=(action (mut state)) placeholder="Select State" as |item|}}
                 {{titleize item}}
               {{/el.control}}
+              <div class="help-block">The state determines whether the above information is only visible from within the account (<a target="_blank" href="https://support.datacite.org">draft</a>), the DOI has been made public via the Handle System (<a target="_blank" href="https://support.datacite.org">registered</a>), or in addition this information is also included in DataCite Search (<a target="_blank" href="https://support.datacite.org">findable</a>).</div>
             {{/form.element}}
 
             <div class="pseudo-footer">
