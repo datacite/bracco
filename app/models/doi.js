@@ -3,6 +3,21 @@ import DS from 'ember-data';
 import { validator, buildValidations } from 'ember-cp-validations';
 
 const Validations = buildValidations({
+  confirmDoi: [
+    validator('presence', {
+      presence: true,
+      disabled: Ember.computed('model', function() {
+        return this.get('model').get('isNew');
+      })
+    }),
+    validator('confirmation', {
+      on: 'doi',
+      message: 'DOI does not match',
+      disabled: Ember.computed('model', function() {
+        return this.get('model').get('isNew');
+      })
+    })
+  ],
   suffix: [
     validator('presence', {
       presence: true,
