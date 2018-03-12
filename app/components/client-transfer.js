@@ -31,7 +31,6 @@ export default Ember.Component.extend({
     this.set('client', client)
     this.toggleProperty('isShowingButton');
     this.get('model').set('targetId', client.id);
-
   },
 
   actions: {

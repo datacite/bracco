@@ -2,18 +2,18 @@
   <div class='col-md-9'>
     <div class="panel panel-transparent">
       <div class="panel-body">
-        <h3 class="edit">New DOI</h3>
+        <h3 class="edit">Create New DOI</h3>
 
         {{#bs-form formLayout="vertical" model=doi onSubmit=(action "submit" doi model) as |form|}}
           <div class="compound-form input-group">
             <span class="input-group-addon">
               {{#form.element controlType="power-select" property="prefix" options=prefixes destination=prefix searchEnabled=false as |el|}}
-                {{#el.control onchange=(action (mut prefix)) optionLabelPath="id" as |item|}}
-                  {{item.id}}
+                {{#el.control onChange=(action "selectPrefix") searchPlaceholder="Select Prefix" optionLabelPath="id" as |item|}}
+                  {{if item.id item.id item}}
                 {{/el.control}}
               {{/form.element}}
             </span>
-            {{form.element controlType="text" label="DOI" placeholder="DOI Suffix (required)" property="doi" helpText="A unique string that identifies a resource." required=false}}
+            {{form.element controlType="text" label="DOI" placeholder="DOI Suffix (required)" property="suffix" helpText="A unique string that identifies a resource." required=false}}
             <span class="input-group-addon refresh" title="Refresh" aria-label="Refresh" {{action 'refresh'}}>{{fa-icon "refresh"}}</span>
             <span class="input-group-addon clear" title="Clear" aria-label="Clear" {{action 'clear'}}>{{fa-icon "times-circle"}}</span>
           </div>

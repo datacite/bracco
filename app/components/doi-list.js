@@ -97,7 +97,7 @@ export default Ember.Component.extend({
   },
   generate() {
     let self = this;
-    let url = ENV.APP_URL + '/dois/random?prefix=' + this.get('prefix');
+    let url = ENV.APP_URL + '/dois/random?prefix=' + this.get('doi').get('prefix');
     return fetch(url, {
       headers: {
         'Authorization': 'Bearer ' + this.get('currentUser').get('jwt')
@@ -105,8 +105,9 @@ export default Ember.Component.extend({
     }).then(function(response) {
       if (response.ok) {
         return response.json().then(function(data) {
-          self.get('doi').set('doi', data.doi);
-          return data.doi;
+          var suffix = data.doi.split('/', 2)[1]
+          self.get('doi').set('suffix', suffix);
+          return suffix;
         });
       } else {
         Ember.Logger.assert(false, response)
@@ -126,7 +127,7 @@ export default Ember.Component.extend({
       this.set('states', this.getStates('draft'));
       this.set('state', this.get('states')[0]);
       self.get('doi').set('prefix', '10.5072');
-      this.set('prefix', '10.5072');
+
       this.generate().then(function() {
         self.set('new', true);
       });
@@ -136,8 +137,8 @@ export default Ember.Component.extend({
       this.searchClient(null);
       this.set('edit', true);
     },
-    setPrefix(prefix) {
-      this.setPrefix(prefix);
+    selectPrefix(prefix) {
+      this.get('doi').set('prefix', prefix.id);
     },
     generate() {
       this.generate();
@@ -171,7 +172,7 @@ export default Ember.Component.extend({
       if (typeof stateChange !== 'undefined') {
         doi.set('event', this.get('events')[stateChange[1]]);
       }
-
+      doi.set('doi', doi.get('prefix') + '/' + doi.get('suffix'));
       doi.set('confirmDoi', doi.get('doi'));
       let self = this;
       doi.save().then(function(doi) {
@@ -185,7 +186,7 @@ export default Ember.Component.extend({
       this.generate();
     },
     clear() {
-      this.get('doi').set('doi', null)
+      this.get('doi').set('suffix', null)
       this.$('input[type=text]:first').focus();
     },
     cancel() {

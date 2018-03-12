@@ -3,7 +3,7 @@ import DS from 'ember-data';
 import { validator, buildValidations } from 'ember-cp-validations';
 
 const Validations = buildValidations({
-  doi: [
+  suffix: [
     validator('presence', {
       presence: true,
       message: 'The DOI suffix can\'t be blank.'
@@ -11,21 +11,6 @@ const Validations = buildValidations({
     validator('format', {
       regex: /^[-._;()/:A-Za-z0-9]+$/,
       message: 'The DOI suffix contains invalid characters.'
-    })
-  ],
-  confirmDoi: [
-    validator('presence', {
-      presence: true,
-      disabled: Ember.computed('model', function() {
-        return this.get('model').get('isNew');
-      })
-    }),
-    validator('confirmation', {
-      on: 'doi',
-      message: 'DOI does not match',
-      disabled: Ember.computed('model', function() {
-        return this.get('model').get('isNew');
-      })
     })
   ],
   url: [
