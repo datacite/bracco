@@ -85,6 +85,13 @@ const Validations = buildValidations({
       disabled: Ember.computed('model', function() {
         return this.get('model').get('state') === 'draft' || this.get('model').get('doi').startsWith('10.5072');
       })
+    }),
+    validator('metadata', {
+      allowBlank: true,
+      dependentKeys: ['model.doi'],
+      isWarning: Ember.computed('model', function() {
+        return this.get('model').get('state') === 'draft' || this.get('model').get('doi').startsWith('10.5072');
+      })
     })
   ]
 });

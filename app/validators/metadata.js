@@ -7,32 +7,51 @@ import ENV from 'bracco/config/environment';
 const metadata = BaseValidator.extend({
   currentUser: service(),
 
-  validate(value) {
-    let url = ENV.APP_URL + '/metadata/convert';
-    return fetch(url, {
-      method: 'post',
-      headers: {
-        'authorization': 'Bearer ' + this.get('currentUser').get('jwt'),
-        'content-type': 'application/json'
-      },
-      body: JSON.stringify({
-        data: {
-          type: 'metadata',
-          attributes: { xml: btoa(value) }
+  validate(value, options) {
+    if (!value && options.allowBlank) {
+      return true;
+    } else {
+      let url = ENV.APP_URL + '/dois/validate';
+      return fetch(url, {
+        method: 'post',
+        headers: {
+          'authorization': 'Bearer ' + this.get('currentUser').get('jwt'),
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify({
+          data: {
+            type: 'dois',
+            attributes: {
+              doi: this.get(options.dependentKeys[0]),
+              xml: btoa(value)
+            },
+            relationships: {
+              client: {
+                data: {
+                  type: "clients",
+                  id: this.get('currentUser').get('client_id')
+                }
+              }
+            }
+          }
+        })
+      }).then(function(response) {
+        if (response.ok) {
+          return response.json().then(function(data) {
+            if (data.errors) {
+              let message = data.errors.map(e => e.source.capitalize() + ': ' + e.title).join('\n');
+              return message;
+            } else {
+              return true;
+            }
+          });
+        } else {
+          Ember.Logger.assert(false, response);
         }
-      })
-    }).then(function(response) {
-      if (response.ok) {
-        return true;
-      } else {
-        return response.json().then(function(data) {
-          let message = data.errors.map(e => e.source.capitalize() + ': ' + e.title).join('\n');
-          return message;
-        });
-      }
-    }).catch(function(error) {
-      Ember.Logger.assert(false, error)
-    });
+      }).catch(function(error) {
+        Ember.Logger.assert(false, error);
+      });
+    }
   }
 });
 
