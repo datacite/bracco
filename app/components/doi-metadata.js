@@ -12,19 +12,18 @@ export default Ember.Component.extend({
   showMetadata(metadata) {
     if (metadata === "summary") {
       this.set('summary', true);
-    } else if (metadata === "datacite") {
-      this.set('output', this.get('model').get("xml"));
-      this.set('summary', false);
     } else {
       this.set('output', null);
       let self = this;
-      let url = ENV.DATA_URL + '/' + this.get('model').get("doi");
-      let acceptHeaders = { 'datacite': 'application/vnd.datacite.datacite+xml',
-                            'schema_org': 'application/vnd.schemaorg.ld+json',
-                            'citeproc': 'application/vnd.citationstyles.csl+json',
-                            'codemeta': 'application/vnd.codemeta.ld+json',
-                            'bibtex': 'application/x-bibtex',
-                            'ris': 'application/x-research-info-systems' };
+      let url = ENV.APP_URL + '/dois/' + this.get('model').get("doi");
+      let acceptHeaders = {
+        'datacite': 'application/vnd.datacite.datacite+xml',
+        'schema_org': 'application/vnd.schemaorg.ld+json',
+        'citeproc': 'application/vnd.citationstyles.csl+json',
+        'codemeta': 'application/vnd.codemeta.ld+json',
+        'bibtex': 'application/x-bibtex',
+        'ris': 'application/x-research-info-systems',
+        'jats': 'application/vnd.jats+xml' };
 
       let result = fetch(url, {
         headers: {
@@ -68,7 +67,8 @@ export default Ember.Component.extend({
                     'citeproc': 'Citeproc JSON',
                     'codemeta': 'Codemeta',
                     'bibtex': 'BibTeX',
-                    'ris': 'RIS' };
+                    'ris': 'RIS',
+                    'jats': 'JATS' };
     this.set('formats', formats);
   }
 });
