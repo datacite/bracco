@@ -31,7 +31,7 @@ const validUrl = BaseValidator.extend({
           } else if (result.status === 408) {
             return "Request timed out reaching the landing page (status code " + result.status + ").";
           } else if (result.status !== 200) {
-            return "An error has occured (status code " + result.status + ").";
+            return "An unknown error has occured (status code " + result.status + ") and will be investigated.";
           } else if (result['content-type'] !== "text/html") {
             return "Landing page should be a web page, but was content type " + result['content-type'] + ".";
           } else {
