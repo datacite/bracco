@@ -62,32 +62,6 @@ export default Ember.Component.extend({
       return 'publish';
     }
   },
-  // convertContent(input) {
-  //   let url = ENV.APP_URL + '/metadata/convert';
-  //   return fetch(url, {
-  //     method: 'post',
-  //     headers: {
-  //       'authorization': 'Bearer ' + this.get('currentUser').get('jwt'),
-  //       'content-type': 'application/json'
-  //     },
-  //     body: JSON.stringify({
-  //       data: {
-  //         type: 'metadata',
-  //         attributes: { xml: input }
-  //       }
-  //     })
-  //   }).then(function(response) {
-  //     if (response.ok) {
-  //       return response.json().then(function(res) {
-  //         return atob(res.data.attributes.xml);
-  //       });
-  //     } else {
-  //       Ember.Logger.assert(false, response);
-  //     }
-  //   }).catch(function(error) {
-  //     Ember.Logger.assert(false, error);
-  //   });
-  // },
   generate() {
     let self = this;
     let url = ENV.APP_URL + '/dois/random?prefix=' + this.get('doi').get('prefix');
@@ -100,6 +74,7 @@ export default Ember.Component.extend({
         return response.json().then(function(data) {
           var suffix = data.doi.split('/', 2)[1]
           self.get('doi').set('suffix', suffix);
+          self.get('doi').set('doi', self.get('doi').get('prefix') + '/' + suffix);
           return suffix;
         });
       } else {
@@ -132,6 +107,10 @@ export default Ember.Component.extend({
       this.get('doi').set('prefix', prefix.id);
       this.setStates(this.get('doi').get('state'));
     },
+    selectSuffix(suffix) {
+      this.get('doi').set('suffix', suffix);
+      this.get('doi').set('doi', this.get('doi').get('prefix') + '/' + suffix);
+    },
     generate() {
       this.generate();
     },
@@ -163,7 +142,6 @@ export default Ember.Component.extend({
     },
     submit(doi) {
       doi.set('event', this.setEvent(doi.get('state')));
-      doi.set('doi', doi.get('prefix') + '/' + doi.get('suffix'));
       doi.set('confirmDoi', doi.get('doi'));
       let self = this;
       doi.save().then(function(doi) {

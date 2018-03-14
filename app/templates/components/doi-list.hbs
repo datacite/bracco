@@ -13,12 +13,12 @@
                 {{/el.control}}
               {{/form.element}}
             </span>
-            {{form.element controlType="text" label="DOI" placeholder="DOI Suffix (required)" property="suffix" helpText="A globally unique string that identifies a resource." required=false}}
+            {{form.element controlType="text" label="DOI" placeholder="DOI Suffix (required)" property="suffix" onChange=(action "selectSuffix") helpText="A globally unique string that identifies a resource." required=false}}
             <span class="input-group-addon refresh" title="Refresh" aria-label="Refresh" {{action 'refresh'}}>{{fa-icon "refresh"}}</span>
             <span class="input-group-addon clear" title="Clear" aria-label="Clear" {{action 'clear'}}>{{fa-icon "times-circle"}}</span>
           </div>
 
-          {{form.element controlType="text" label="URL" placeholder="URL (required)" property="url" helpText="The location of the landing page with more information about the resource." required=false}}
+          {{form.element controlType="text" label="URL" placeholder="URL" property="url" helpText="The location of the landing page with more information about the resource." required=false}}
 
           {{#if useForm}}
             {{form.element controlType="hidden" property="xml" value=null}}
@@ -48,7 +48,7 @@
             {{form.element controlType="hidden" property="description" value=null}}
             {{form.element controlType="hidden" property="license" value=null}}
 
-            {{#form.element controlType="textarea" label="Metadata" placeholder="Metadata (required)" property="xml" rows=15 helpText='Metadata that describe the resource. You can also upload a file with metadata in DataCite XML format, or one of the other supported formats.' required=false as |el|}}
+            {{#form.element controlType="textarea" label="Metadata" placeholder="Metadata" property="xml" rows=15 helpText='Metadata that describe the resource. You can also upload a file with metadata in DataCite XML format, or one of the other supported formats.' required=false as |el|}}
               {{el.control class="form-control metadata"}}
             {{/form.element}}
 
