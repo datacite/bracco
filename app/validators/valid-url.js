@@ -25,15 +25,15 @@ const validUrl = BaseValidator.extend({
       if (response.ok) {
         return response.json().then(function(result) {
           if (parseInt(result.status) === 403) {
-            return "Access to landing page was forbidden (status code " + result.status + ").";
+            return "Access to page was forbidden (status code " + result.status + ").";
           } else if (result.status === 404) {
-            return "Landing page was not found (status code " + result.status + ").";
+            return "Page was not found (status code " + result.status + ").";
           } else if (result.status === 408) {
-            return "Request timed out reaching the landing page (status code " + result.status + ").";
+            return "Request timed out reaching the page (status code " + result.status + ").";
           } else if (result.status !== 200) {
-            return "An unknown error has occured (status code " + result.status + ") and will be investigated.";
+            return true; //"An unknown error has occured (status code " + result.status + ") and will be investigated.";
           } else if (result['content-type'] !== "text/html") {
-            return "Landing page should be a web page, but was content type " + result['content-type'] + ".";
+            return "Page should be a web page, but was content type " + result['content-type'] + ".";
           } else {
             return true;
           }

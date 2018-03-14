@@ -52,7 +52,6 @@ const Validations = buildValidations({
       isWarning: Ember.computed('model', function() {
         return this.get('model').get('state') === 'draft' || this.get('model').get('doi').startsWith('10.5072');
       }),
-      disabled: true
     })
   ],
   title: [
