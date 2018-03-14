@@ -5,28 +5,20 @@ import ENV from 'bracco/config/environment';
 export default Ember.Component.extend({
   tagName: 'div',
   citation: null,
-  output: null,
+  citationOutput: null,
 
   didReceiveAttrs() {
     this._super(...arguments);
 
-    this.showCitation('apa');
+    this.selectStyle('apa');
   },
 
-  showCitation(citation) {
-    this.set('output', null);
+  selectStyle(style) {
     let self = this;
-    let url = ENV.DATA_URL + '/' + this.get('model').get("doi");
-    let acceptHeaders = { 'apa': 'text/x-bibliography; style=apa',
-                          'harvard-cite-them-right': 'text/x-bibliography; style=harvard-cite-them-right',
-                          'modern-language-association': 'text/x-bibliography; style=modern-language-association',
-                          'vancouver': 'text/x-bibliography; style=vancouver',
-                          'chicago-fullnote-bibliography': 'text/x-bibliography; style=chicago-fullnote-bibliography',
-                          'ieee': 'text/x-bibliography; style=ieee' };
-
+    let url = ENV.APP_URL + '/dois/' + this.get('model').get("doi") + '?style=' + style;
     let result = fetch(url, {
       headers: {
-        'Accept': acceptHeaders[citation]
+        'Accept': 'text/x-bibliography'
       }
     }).then(function(response) {
       if (response.ok) {
@@ -38,12 +30,11 @@ export default Ember.Component.extend({
 
     result.then(function(response) {
       if (typeof response === 'string') {
-        self.set('output', response);
+        self.set('citationOutput', response);
       } else {
         let reader = new FileReader();
         reader.onloadend = function() {
-          //console.log(reader.result)
-          self.set('output', reader.result);
+          self.set('citationOutput', reader.result);
         }
         reader.readAsText(response);
       }
@@ -52,10 +43,10 @@ export default Ember.Component.extend({
   },
 
   actions: {
-    selectCitation(citation) {
+    selectStyle(style) {
       // APA is default citation style
-      citation = (citation === undefined) ? 'apa' : citation;
-      this.showCitation(citation);
+      style = (style === undefined) ? 'apa' : style;
+      this.selectStyle(style);
     }
   },
 
