@@ -39,7 +39,7 @@ const metadata = BaseValidator.extend({
         if (response.ok) {
           return response.json().then(function(data) {
             if (data.errors) {
-              let message = data.errors.map(e => e.source.capitalize() + ': ' + e.title).join('\n');
+              let message = data.errors[0].source.capitalize() + ': ' + data.errors[0].title;
               return message;
             } else {
               return true;

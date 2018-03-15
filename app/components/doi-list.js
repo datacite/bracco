@@ -173,16 +173,26 @@ export default Ember.Component.extend({
       this.set('useForm', form === 'form');
     },
     didSelectFiles(files, resetInput) {
-      var reader = new FileReader();
       let self = this;
-      reader.onload = function(e) {
-        var data = e.target.result;
-        var xml = atob(data.split(",")[1]);
-        self.get('doi').set('xml', xml);
-      }
-      reader.readAsDataURL(files[0]);
+      return new Ember.RSVP.Promise(function (resolve, reject) {
+        var reader = new FileReader();
 
-      resetInput();
+        reader.onload = function(e) {
+          var data = e.target.result;
+          var xml = atob(data.split(",")[1]);
+          self.get('doi').set('xml', xml);
+        };
+
+        reader.onerror = function() {
+          reject(this);
+        }
+
+        reader.readAsDataURL(files[0]);
+
+        resetInput();
+      }).catch(function(reason){
+        Ember.Logger.assert(false, reason);
+      });
     },
     update() {
       this.get('client').save();
