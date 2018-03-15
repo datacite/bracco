@@ -12,10 +12,16 @@
       <div class="clearfix"/>
     </div>
   </div>
-  {{#if summary}}
-    <div class="row">
-      <div class="col-md-9">
-        <div class="panel panel-transparent">
+  <div class="row">
+    <div class="col-md-9">
+      <div class="panel panel-transparent">
+        {{#if output}}
+          <div class="panel-body">
+            {{#code-block class="metadata"}}
+{{output}}
+            {{/code-block}}
+          </div>
+        {{else}}
           <div class="panel-body">
             <h3 class="work">
               <a target="_blank" href="{{model.identifier}}">{{model.title}}</a>
@@ -37,24 +43,16 @@
           <div class="panel-footer">
             <a target="_blank" href="{{model.identifier}}">{{fa-icon "external-link"}} {{model.identifier}}</a>
           </div>
-        </div>
-      </div>
-      <div class="col-md-3">
-        {{client-sidebar model=model}}
+        {{/if}}
       </div>
     </div>
-  {{else if output}}
-    <div class="panel panel-transparent">
-      <div class="panel-body">
-        {{#code-block class="metadata"}}
-{{output}}
-        {{/code-block}}
-      </div>
+    <div class="col-md-3">
+      {{client-sidebar model=model}}
     </div>
-  {{/if}}
+  </div>
 {{else}}
   <div class="row">
-    <div class="col-md-offset-9 col-md-3">
+    <div class="col-md-3 col-md-offset-9">
       {{client-sidebar model=model}}
     </div>
   </div>

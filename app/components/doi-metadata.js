@@ -11,7 +11,7 @@ export default Ember.Component.extend({
 
   showMetadata(metadata) {
     if (metadata === "summary") {
-      this.set('summary', true);
+      this.set('output', false);
     } else {
       this.set('output', null);
       let self = this;
@@ -40,12 +40,10 @@ export default Ember.Component.extend({
       result.then(function(response) {
         if (typeof response === 'string') {
           self.set('output', vkbeautify.json(JSON.stringify(response)));
-          self.set('summary', false);
         } else {
           let reader = new FileReader();
           reader.onloadend = function() {
             self.set('output', reader.result);
-            self.set('summary', false);
           }
           reader.readAsText(response);
         }
