@@ -1,6 +1,7 @@
 import Ember from 'ember';
 const { service } = Ember.inject;
 import fetch from 'fetch';
+import moment from 'moment';
 import ENV from 'bracco/config/environment';
 
 const stateList = {
@@ -47,9 +48,11 @@ export default Ember.Component.extend({
   stateList,
   state: null,
   years,
+  useForm: false,
 
   reset() {
     this.set('doi', null);
+    this.set('useForm', false);
     this.set('edit', false);
     this.set('delete', false);
     this.set('transfer', false);
@@ -130,6 +133,11 @@ export default Ember.Component.extend({
     edit(doi) {
       this.set('doi', doi);
       this.get('doi').set('confirmDoi', doi.get('doi'));
+
+      var timestamp = new Date(Date.parse(doi.get('published')));
+      let published = moment(timestamp).utc().format('Y');
+      this.get('doi').set('published', published);
+
       this.setStates(doi.get('state'));
       this.searchClient(null);
       this.searchResourceType(null);
@@ -164,6 +172,9 @@ export default Ember.Component.extend({
     selectState(state) {
       this.get('doi').set('state', state);
     },
+    selectForm(form) {
+      this.set('useForm', form === 'form');
+    },
     didSelectFiles(files, resetInput) {
       var reader = new FileReader();
       let self = this;
@@ -195,6 +206,7 @@ export default Ember.Component.extend({
       let self = this;
       doi.save().then(function() {
         self.set('edit', false);
+        self.set('useForm', false);
         self.set('transfer', false);
       });
     },
@@ -210,5 +222,11 @@ export default Ember.Component.extend({
     cancel() {
       this.reset();
     }
+  },
+
+  didInsertElement() {
+    let forms = { 'xml': 'Upload File',
+                  'form': 'Use Form' };
+    this.set('forms', forms);
   }
 });
