@@ -15,7 +15,7 @@ export default Ember.Component.extend({
     } else {
       this.set('output', null);
       let self = this;
-      let url = ENV.APP_URL + '/dois/' + this.get('model').get("doi");
+      let url = ENV.APP_URL + '/' + this.get('model').get("doi");
       let acceptHeaders = {
         'datacite': 'application/vnd.datacite.datacite+xml',
         'schema_org': 'application/vnd.schemaorg.ld+json',
@@ -43,7 +43,7 @@ export default Ember.Component.extend({
         } else {
           let reader = new FileReader();
           reader.onloadend = function() {
-            self.set('output', reader.result);
+            self.set('output', vkbeautify.xml(reader.result));
           }
           reader.readAsText(response);
         }

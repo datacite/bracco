@@ -15,7 +15,7 @@ export default Ember.Component.extend({
 
   selectStyle(style) {
     let self = this;
-    let url = ENV.APP_URL + '/dois/' + this.get('model').get("doi") + '?style=' + style;
+    let url = ENV.APP_URL + '/' + this.get('model').get("doi") + '?style=' + style;
     let result = fetch(url, {
       headers: {
         'Accept': 'text/x-bibliography'
