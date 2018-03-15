@@ -24,9 +24,16 @@ export default Ember.Component.extend({
   client: null,
   clients: [],
   prefixes: [],
+  useForm: false,
   hasInput: Ember.computed('doi', function() {
     return !Ember.isEmpty(this.get('doi.doi'));
   }),
+
+  didReceiveAttrs() {
+    this._super(...arguments);
+
+    this.searchResourceType(null);
+  },
 
   searchClient(query) {
     if (this.get('currentUser').get('isAdmin')) {
@@ -61,6 +68,13 @@ export default Ember.Component.extend({
     } else if (state === 'findable') {
       return 'publish';
     }
+  },
+  searchResourceType(query) {
+    this.set('resourceTypes', this.get('store').query('resource-type', { 'query': query, sort: 'name', 'page[size]': 100 }));
+  },
+  selectResourceType(resourceType) {
+    this.set('resourceType', resourceType)
+    this.get('doi').set('resource-type', resourceType);
   },
   generate() {
     let self = this;
@@ -112,6 +126,12 @@ export default Ember.Component.extend({
       this.get('doi').set('suffix', suffix);
       this.get('doi').set('doi', this.get('doi').get('prefix') + '/' + suffix);
     },
+    selectResourceType(resourceType) {
+      this.selectResourceType(resourceType);
+    },
+    searchResourceType(query) {
+      this.searchResourceType(query);
+    },
     generate() {
       this.generate();
     },
@@ -123,6 +143,9 @@ export default Ember.Component.extend({
     },
     selectState(state) {
       this.get('doi').set('state', state);
+    },
+    selectForm(form) {
+      this.set('useForm', form === 'form');
     },
     didSelectFiles(files, resetInput) {
       var reader = new FileReader();
@@ -162,5 +185,11 @@ export default Ember.Component.extend({
     cancel() {
       this.reset();
     }
+  },
+
+  didInsertElement() {
+    let forms = { 'xml': 'Upload File',
+                  'form': 'Use Form' };
+    this.set('forms', forms);
   }
 });

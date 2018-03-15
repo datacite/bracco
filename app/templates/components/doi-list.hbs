@@ -20,11 +20,21 @@
 
           {{form.element controlType="text" label="URL" placeholder="URL" property="url" helpText="The location of the landing page with more information about the resource." required=false}}
 
+          <div id="citation" class="input-group pull-right">
+            <select onchange={{action 'selectForm' value="target.value"}}>
+              {{#each-in forms as |key value|}}
+                <option name="form" value={{key}} selected={{eq form key}}>{{value}}</option>
+              {{/each-in}}
+            </select>
+          </div>
+          <h3 class="metadata-form">Metadata</h3>
+          <div class="clearfix"/>
+
           {{#if useForm}}
             {{form.element controlType="hidden" property="xml" value=null}}
 
             {{multi-input-form model=model}}
-            {{form.element controlType="textarea" label="Title" placeholder="Title (required)" property="title" rows=2 helpText="A name or title by which a resource is known." required=false}}
+            {{form.element controlType="textarea" label="Title" placeholder="Title (required)" property="title" rows=2 helpText="A name or title by which the resource is known." required=false}}
             {{form.element controlType="text" label="Publisher" placeholder="Publisher (required)" property="publisher" helpText="The name of the entity that holds, archives, publishes prints, distributes, releases, issues, or produces the resource." required=false}}
             {{#form.element controlType="power-select" label="Publication Year" property="published" options=years destination=published helpText="The year when the resource was or will be made publicly available." as |el|}}
               {{#el.control onchange=(action (mut published)) placeholder="Select Publication Year" as |item|}}
