@@ -105,6 +105,7 @@ export default Ember.Component.extend({
     },
     selectPrefix(prefix) {
       this.get('doi').set('prefix', prefix.id);
+      this.get('doi').set('doi', prefix.id + '/' + this.get('doi').get('suffix'));
       this.setStates(this.get('doi').get('state'));
     },
     selectSuffix(suffix) {
