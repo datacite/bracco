@@ -32,8 +32,6 @@ export default Ember.Component.extend({
               self.set('message', "Page was not found (status code " + result.status + ").");
             } else if (result.status === 408) {
               self.set('message', "Request timed out reaching the page (status code " + result.status + ").");
-            } else if (result.status !== 200) {
-              self.set('message', "An error has occured (status code " + result.status + ").");
             } else if (result['content-type'] !== "text/html") {
               self.set('message', "Page should be a web page, but was content type " + result['content-type'] + ".");
             }
