@@ -186,7 +186,7 @@ export default Ember.Component.extend({
         self.get('doi').set('creator', null);
         self.get('doi').set('title', null);
         self.get('doi').set('publisher', null);
-        self.get('doi').set('datePublished', null);
+        self.get('doi').set('published', null);
         self.get('doi').set('resourceType', null);
         self.get('doi').set('resourceTypeSubtype', null);
         self.get('doi').set('description', null);

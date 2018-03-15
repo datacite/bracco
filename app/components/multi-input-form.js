@@ -8,12 +8,22 @@ export default Component.extend({
   //   return Ember.isEmpty(this.get('model').get('creator').get('lastObject'));
   // }),
 
+  add() {
+    if (typeof this.get('model').get('creator') === 'undefined') {
+      this.get('model').set('creator', [])
+    }
+    this.get('model').get('creator').addObject('');
+  },
+  delete(item) {
+    this.get('model').get('creator').removeObject(item);
+  },
+
   actions: {
     add() {
-      this.get('model').get('creator').addObject('');
+      this.add();
     },
     delete(item) {
-      this.get('model').get('creator').removeObject(item);
+      this.delete(item);
     }
   }
 });

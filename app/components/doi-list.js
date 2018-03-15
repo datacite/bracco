@@ -2,6 +2,7 @@ import Ember from 'ember';
 const { service } = Ember.inject;
 import ENV from 'bracco/config/environment';
 import fetch from 'fetch';
+import moment from 'moment';
 
 const stateList = {
   undetermined: ['undetermined', 'registered', 'findable'],
@@ -9,6 +10,29 @@ const stateList = {
   registered: ['registered', 'findable'],
   findable: ['registered', 'findable']
 }
+
+const years = [
+  1999,
+  2000,
+  2001,
+  2002,
+  2003,
+  2004,
+  2005,
+  2006,
+  2007,
+  2008,
+  2009,
+  2010,
+  2011,
+  2012,
+  2013,
+  2014,
+  2015,
+  2016,
+  2017,
+  2018
+];
 
 export default Ember.Component.extend({
   currentUser: service(),
@@ -24,6 +48,7 @@ export default Ember.Component.extend({
   client: null,
   clients: [],
   prefixes: [],
+  years,
   useForm: false,
   hasInput: Ember.computed('doi', function() {
     return !Ember.isEmpty(this.get('doi.doi'));
