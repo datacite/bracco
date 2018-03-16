@@ -11,19 +11,20 @@ const metadata = BaseValidator.extend({
     if (!value && options.allowBlank) {
       return true;
     } else {
+      let xml = this.b64EncodeUnicode(value);
       let url = ENV.APP_URL + '/dois/validate';
       return fetch(url, {
         method: 'post',
         headers: {
           'authorization': 'Bearer ' + this.get('currentUser').get('jwt'),
-          'content-type': 'application/json'
+          'content-type': 'application/json; charset=utf-8'
         },
         body: JSON.stringify({
           data: {
             type: 'dois',
             attributes: {
               doi: this.get(options.dependentKeys[0]),
-              xml: btoa(value)
+              xml: xml
             },
             relationships: {
               client: {
@@ -52,6 +53,15 @@ const metadata = BaseValidator.extend({
         Ember.Logger.assert(false, error);
       });
     }
+  },
+  b64EncodeUnicode(str) {
+      // first we use encodeURIComponent to get percent-encoded UTF-8,
+      // then we convert the percent encodings into raw bytes which
+      // can be fed into btoa.
+      return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g,
+          function toSolidBytes(match, p1) {
+              return String.fromCharCode('0x' + p1);
+      }));
   }
 });
 

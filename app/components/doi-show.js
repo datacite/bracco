@@ -128,6 +128,12 @@ export default Ember.Component.extend({
       Ember.Logger.assert(false, error);
     });
   },
+  b64DecodeUnicode(str) {
+    // Going backwards: from bytestream, to percent-encoding, to original string.
+    return decodeURIComponent(atob(str).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+  },
 
   actions: {
     edit(doi) {
@@ -180,7 +186,7 @@ export default Ember.Component.extend({
       let self = this;
       reader.onload = function(e) {
         var data = e.target.result;
-        var xml = atob(data.split(",")[1]);
+        var xml = self.b64DecodeUnicode(data.split(",")[1]);
         self.get('doi').set('xml', xml);
 
         self.get('doi').set('creator', null);
