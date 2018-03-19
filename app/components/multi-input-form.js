@@ -14,6 +14,9 @@ export default Component.extend({
     }
     this.get('model').get('creator').addObject('');
   },
+  update(item) {
+    console.log(item)
+  },
   delete(item) {
     this.get('model').get('creator').removeObject(item);
   },
@@ -21,6 +24,9 @@ export default Component.extend({
   actions: {
     add() {
       this.add();
+    },
+    update(item) {
+      this.update(item);
     },
     delete(item) {
       this.delete(item);
