@@ -56,7 +56,8 @@ export default Ember.Component.extend({
                             'modern-language-association': 'MLA',
                             'vancouver': 'Vancouver',
                             'chicago-fullnote-bibliography': 'Chicago',
-                            'ieee': 'IEEE' };
+                            'ieee': 'IEEE',
+                            'gost-r-7-0-5-2008': 'GOST R 7.0.5-2008' };
     this.set('citationFormats', citationFormats);
   }
 });
