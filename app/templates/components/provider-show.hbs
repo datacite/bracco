@@ -23,7 +23,6 @@
             {{form.element controlType="textarea" label="Description" placeholder="Description" property="description" rows=10 helpText='Description of the provider. Please use markdown for formatting.' required=false}}
 
             {{#if (can "create provider")}}
-              {{form.element controlType="text" label="Date joined" property="joined" required=false}}
               {{form.element controlType="checkbox" label="Account is active" property="isActive" required=false helpText='This account can manage clients and prefixes'}}
             {{/if}}
 
