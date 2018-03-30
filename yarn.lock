@@ -2463,7 +2463,7 @@ broccoli-stew@^1.2.0, broccoli-stew@^1.3.3, broccoli-stew@^1.4.0, broccoli-stew@
     symlink-or-copy "^1.1.8"
     walk-sync "^0.3.0"
 
-broccoli-string-replace@^0.1.1:
+broccoli-string-replace@^0.1.1, broccoli-string-replace@^0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/broccoli-string-replace/-/broccoli-string-replace-0.1.2.tgz#1ed92f85680af8d503023925e754e4e33676b91f"
   dependencies:
@@ -5122,6 +5122,20 @@ ember-cli-shims@^1.1.0:
     ember-cli-babel "^6.0.0-beta.7"
     ember-cli-version-checker "^1.2.0"
     silent-error "^1.0.1"
+
+ember-cli-showdown@^4.2.1:
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/ember-cli-showdown/-/ember-cli-showdown-4.2.1.tgz#41a841544f9bbdbeea577c416f6a8b194657ca08"
+  dependencies:
+    broccoli-funnel "^2.0.0"
+    broccoli-source "^1.1.0"
+    broccoli-string-replace "^0.1.2"
+    ember-cli-babel "^6.8.1"
+    ember-cli-htmlbars "^2.0.3"
+    ember-cli-import-polyfill "^0.2.0"
+    ember-getowner-polyfill "^2.0.1"
+    semver "^5.5.0"
+    showdown "^1.7.4"
 
 ember-cli-sri@^2.1.0:
   version "2.1.1"
@@ -8085,6 +8099,10 @@ isbinaryfile@^3.0.0, isbinaryfile@^3.0.2:
 isexe@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/isexe/-/isexe-2.0.0.tgz#e8fbf374dc556ff8947a10dcb0572d633f2cfa10"
+
+iso-3166-country-list@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/iso-3166-country-list/-/iso-3166-country-list-0.1.2.tgz#16523b8984547af65f2ff42a628ebdbd127abd1f"
 
 isobject@^2.0.0:
   version "2.1.0"
@@ -11066,6 +11084,10 @@ semver@^5.1.0, semver@^5.1.1, semver@^5.3.0, semver@~5.3.0:
   version "5.3.0"
   resolved "https://registry.yarnpkg.com/semver/-/semver-5.3.0.tgz#9b2ce5d3de02d17c6012ad326aa6b4d0cf54f94f"
 
+semver@^5.5.0:
+  version "5.5.0"
+  resolved "https://registry.yarnpkg.com/semver/-/semver-5.5.0.tgz#dc4bbc7a6ca9d916dee5d43516f0092b58f7b8ab"
+
 semver@~2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/semver/-/semver-2.2.1.tgz#7941182b3ffcc580bff1c17942acdf7951c0d213"
@@ -11153,6 +11175,12 @@ shell-quote@^1.6.1:
 shellwords@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/shellwords/-/shellwords-0.1.0.tgz#66afd47b6a12932d9071cbfd98a52e785cd0ba14"
+
+showdown@^1.7.4:
+  version "1.8.6"
+  resolved "https://registry.yarnpkg.com/showdown/-/showdown-1.8.6.tgz#91ea4ee3b7a5448aaca6820a4e27e690c6ad771c"
+  dependencies:
+    yargs "^10.0.3"
 
 sigmund@~1.0.0:
   version "1.0.1"

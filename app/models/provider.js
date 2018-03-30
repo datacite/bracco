@@ -36,7 +36,8 @@ const Validations = buildValidations({
     validator('presence', true),
     validator('format', {
       type: 'email',
-      allowNonTld: true
+      allowNonTld: true,
+      message: 'Please enter a valid email address.'
     })
   ],
   passwordInput: [
@@ -67,6 +68,13 @@ const Validations = buildValidations({
         return this.get('model').get('keepPassword');
       })
     })
+  ],
+  website: [
+    validator('format', {
+      type: 'url',
+      allowBlank: true,
+      message: 'Please enter a valid website URL.'
+    })
   ]
 });
 
@@ -86,17 +94,18 @@ export default DS.Model.extend(Validations, {
   symbol: DS.attr('string'),
   description: DS.attr('string'),
   region: DS.attr('string'),
-  country: DS.attr('string'),
-  year: DS.attr('number'),
+  country: DS.attr('country'),
+  institutionType: DS.attr('string'),
   logoUrl: DS.attr('string'),
   contactName: DS.attr('string'),
   contactEmail: DS.attr('string'),
+  contactPhone: DS.attr('string'),
   website: DS.attr('string'),
-  phone: DS.attr('string'),
   isActive: DS.attr('boolean'),
   passwordInput: DS.attr('string'),
   hasPassword: DS.attr('boolean'),
   keepPassword: DS.attr('boolean', { defaultValue: true }),
+  joined: DS.attr('date'),
   created: DS.attr('date'),
   updated: DS.attr('date'),
 

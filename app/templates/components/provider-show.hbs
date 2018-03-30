@@ -5,14 +5,26 @@
         <div class="panel-body">
           <h3 class="edit">Edit {{if (eq currentUser.uid model.id) 'Account' 'Provider'}}</h3>
 
-          {{#bs-form formLayout="vertical" model=model onSubmit=(action "submit" model) submitOnEnter=true as |form|}}
+          {{#bs-form formLayout="vertical" model=model onSubmit=(action "submit" model) as |form|}}
             {{form.element controlType="text" label="Provider ID" placeholder="ID" property="symbol" disabled=true}}
             {{form.element controlType="text" label="Provider Name" placeholder="Provider Name" property="name" required=false}}
+
+            {{form.element controlType="text" label="Website" placeholder="Website" property="website" helpText='Website of the provider.' required=false}}
             {{form.element controlType="text" label="Contact Name" placeholder="Contact Name" property="contactName" helpText='Please enter the name of a person that can be contacted for technical or administrative issues.' required=false}}
-            {{form.element controlType="email" label="Contact Email" placeholder="Contact Email" property="contactEmail" required=false}}
+            {{form.element controlType="email" label="Contact Email" placeholder="Contact Email" property="contactEmail" helpText='Please enter an email address that can be contacted for technical or administrative issues.' required=false}}
+            {{form.element controlType="text" label="Contact Phone" placeholder="Contact Phone" property="contactPhone" helpText='Please enter a phone number that can be contacted for technical or administrative issues.' required=false}}
+
+            {{#form.element controlType="power-select" property="country" optionLabelPath="name" options=countries destination=country helpText='Country where the provider is located.' as |el|}}
+              {{#el.control onChange=(action "selectCountry") search=(action "searchCountry") searchField="name" placeholder="Select Country" searchPlaceholder="Type to search..." allowClear=true as |item|}}
+                {{item.name}}
+              {{/el.control}}
+            {{/form.element}}
+
+            {{form.element controlType="textarea" label="Description" placeholder="Description" property="description" rows=10 helpText='Description of the provider. Please use markdown for formatting.' required=false}}
 
             {{#if (can "create provider")}}
-              {{form.element controlType="checkbox" label="Account is active" property="isActive" required=false helpText='This account can manage clients, prefixes and users'}}
+              {{form.element controlType="text" label="Date joined" property="joined" required=false}}
+              {{form.element controlType="checkbox" label="Account is active" property="isActive" required=false helpText='This account can manage clients and prefixes'}}
             {{/if}}
 
             <div class="pseudo-footer">
@@ -107,6 +119,11 @@
             {{model.symbol}}
           {{/if}}
 
+          {{#if model.website}}
+            <h5>Website</h5>
+            {{model.website}}
+          {{/if}}
+
           {{#if model.contactName}}
             <h5>Contact Name</h5>
             {{model.contactName}}
@@ -115,6 +132,21 @@
           {{#if model.contactEmail}}
             <h5>Contact Email</h5>
             <a href="mailto:{{model.contactEmail}}">{{model.contactEmail}}</a>
+          {{/if}}
+
+          {{#if model.contactPhone}}
+            <h5>Contact Phone</h5>
+            {{model.contactPhone}}
+          {{/if}}
+
+          {{#if model.country}}
+            <h5>Country</h5>
+            {{model.country.name}}
+          {{/if}}
+
+          {{#if model.description}}
+            <h5>Description</h5>
+            {{markdown-to-html model.description}}
           {{/if}}
 
           {{#if (not model.hasPassword)}}

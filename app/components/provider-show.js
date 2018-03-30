@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import { validator, buildValidations } from 'ember-cp-validations';
 import fetch from 'fetch';
+import countryList from 'npm:iso-3166-country-list';
 const { service } = Ember.inject;
 import ENV from 'bracco/config/environment';
 
@@ -20,6 +21,8 @@ export default Ember.Component.extend(Validations, {
   delete: false,
   provider: null,
   confirmId: null,
+  countryList,
+  countries: null,
 
   reset() {
     this.get('provider').set('passwordInput', null);
@@ -46,11 +49,22 @@ export default Ember.Component.extend(Validations, {
       Ember.Logger.assert(false, error)
     });
   },
+  searchCountry(query) {
+    var countries = countryList.filter(function(country) {
+      return country.name.toLowerCase().startsWith(query.toLowerCase());
+    })
+    this.set('countries', countries);
+  },
+  selectCountry(country) {
+    this.get('provider').set('country', country);
+    this.set('countries', countryList);
+  },
 
   actions: {
     edit(provider) {
       this.set('provider', provider);
       this.get('provider').set('confirmSymbol', provider.get('symbol'));
+      this.set('countries', countryList);
       this.set('edit', true);
     },
     change(provider) {
@@ -76,9 +90,9 @@ export default Ember.Component.extend(Validations, {
         Ember.Logger.assert(false, reason);
       });
     },
-    submit() {
+    submit(provider) {
       let self = this;
-      this.get('provider').save().then(function () {
+      provider.save().then(function () {
         self.reset();
       }).catch(function(reason){
         Ember.Logger.assert(false, reason);
@@ -105,6 +119,12 @@ export default Ember.Component.extend(Validations, {
     },
     onError(error) {
       Ember.Logger.assert(false, error)
+    },
+    searchCountry(query) {
+      this.searchCountry(query);
+    },
+    selectCountry(country) {
+      this.selectCountry(country);
     }
   }
 });
