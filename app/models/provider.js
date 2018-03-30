@@ -99,7 +99,7 @@ export default DS.Model.extend(Validations, {
   logoUrl: DS.attr('string'),
   contactName: DS.attr('string'),
   contactEmail: DS.attr('string'),
-  contactPhone: DS.attr('string'),
+  phone: DS.attr('string'),
   website: DS.attr('string'),
   isActive: DS.attr('boolean'),
   passwordInput: DS.attr('string'),
