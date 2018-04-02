@@ -6,7 +6,7 @@ export default DS.Transform.extend({
     if (serialized) {
       return { code: serialized, name: countryList.name(serialized) };
     } else {
-      return {};
+      return null;
     }
   },
 
