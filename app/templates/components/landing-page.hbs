@@ -11,15 +11,16 @@
   <div class="section section-white">
     <div class="row row-section">
       <div class="container-fluid">
-        <div class="col-md-8 col-sm-offset-2">
+        <div class="col-sm-8 col-sm-offset-2">
           {{#each flashMessages.queue as |flash|}}
             {{flash-message flash=flash}}
           {{/each}}
 
           <p>DataCite DOI Fabrica is the one place for you to create and find, connect and track every single DOI from your organisation.
-            The DataCite Metadata Store (<a href="https://mds.datacite.org">MDS</a>) has been renovated and renamed to
-            DataCite DOI Fabrica. DOI Fabrica includes all the functionalities needed to manage clients, prefixes,
-            users, and soon DOI registration. Going forward, the service will provide stats, checks and reports. Please sign in to use the service.</p>
+            DOI Fabrica replaces the DataCite Metadata Store (MDS) web frontend and complements the <a href="https://mds.datacite.org">MDS</a> 
+            and <a href="https://ez.datacite.org">EZ</a> API. DOI Fabrica includes all the functionalities needed to manage 
+            clients, prefixes, DOIs and their metadata. Going forward, the service will provide stats, checks and reports. 
+            Please sign in to use the service.</p>
         </div>
       </div>
     </div>
@@ -37,16 +38,7 @@
             <p>DOI registration providers, use DOI Fabrica to manage your clients.</p>
           </div>
         </div>
-        <div class="col-sm-2 info">
-          <div class="icon icon-landing">
-            {{fa-icon "user"}}
-          </div>
-          <h3>Users</h3>
-          <div class="description-centered">
-            <p>Access your DOI registration service through DOI Fabrica.</p>
-          </div>
-        </div>
-        <div class="col-sm-2 info">
+        <div class="col-sm-2 col-sm-offset-1 info">
           <div class="icon icon-landing">
             {{fa-icon "tags"}}
           </div>
@@ -55,13 +47,13 @@
             <p>Use DOI Fabrica to manage your prefixes.</p>
           </div>
         </div>
-        <div class="col-sm-2 info">
+        <div class="col-sm-2 col-sm-offset-1 info">
           <div class="icon icon-landing">
             {{fa-icon "file-text"}}
           </div>
           <h3>DOIs</h3>
           <div class="description-centered">
-            <p>(Soon) Register and manage DOIs and their metadata through DOI Fabrica.</p>
+            <p>Register and manage DOIs and their metadata through DOI Fabrica.</p>
           </div>
         </div>
       </div>
