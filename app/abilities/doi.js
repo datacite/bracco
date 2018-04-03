@@ -6,10 +6,9 @@ import ENV from 'bracco/config/environment';
 export default Ability.extend({
   currentUser: service(),
 
-  canTransfer: Ember.computed('currentUser.role_id', 'currentUser.client_id', 'model.otherParams.client-id', function() {
+  canTransfer: Ember.computed('currentUser.role_id', function() {
     switch(this.get('currentUser.role_id')) {
       case 'staff_admin':
-        return true;
       case 'provider_admin':
         return true;
       default:
