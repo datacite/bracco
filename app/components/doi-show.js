@@ -40,7 +40,9 @@ export default Ember.Component.extend({
 
   edit: false,
   transfer: false,
+  isDisabled: true,
   doi: null,
+  oldClient: null,
   client: null,
   clients: [],
   resourceType: null,
@@ -65,6 +67,7 @@ export default Ember.Component.extend({
     }
   },
   selectClient(client) {
+    this.set('isDisabled', client.id === this.get('oldClient.id'));
     this.set('client', client)
     this.get('doi').set('client', client);
     this.get('doi').set('provider', client.get('provider'));
@@ -152,6 +155,8 @@ export default Ember.Component.extend({
     transfer(doi) {
       this.set('doi', doi);
       this.get('doi').set('confirmDoi', doi.get('doi'));
+      this.get('doi').set('xml', null);
+      this.set('oldClient', this.get('doi').get('client'));
       this.searchClient(null);
       this.set('transfer', true);
     },
@@ -208,6 +213,9 @@ export default Ember.Component.extend({
       if (typeof stateChange !== 'undefined') {
         doi.set('event', this.setEvent(stateChange));
       }
+
+      doi.set('client', this.get('client'));
+      doi.set('provider', this.get('client').get('provider'));
 
       let self = this;
       doi.save().then(function() {
