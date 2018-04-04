@@ -122,7 +122,7 @@ export default Ember.Component.extend({
     new(model) {
       let self = this;
       this.set('client', this.get('store').peekRecord('client', model.get('otherParams.client-id')));
-      this.set('doi', this.get('store').createRecord('doi', { client: this.get('client'), prefix: '10.5072', state: 'draft', published: '2018' }));
+      this.set('doi', this.get('store').createRecord('doi', { client: this.get('client'), prefix: '10.5072', state: 'draft' }));
       this.set('prefixes', this.get('store').query('prefix', { 'client-id': this.get('client.id'), sort: 'name', 'page[size]': 25 }));
       this.setStates('draft');
       this.searchPublished(null);

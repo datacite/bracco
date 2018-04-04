@@ -122,7 +122,11 @@
             {{/if}}
           </div>
           <div class="panel-footer">
-            <a href="{{doi.identifier}}">{{fa-icon "external-link"}} {{doi.identifier}}</a>
+            {{#if doi.isDraft}}
+              {{fa-icon "info-circle"}} {{doi.doi}}
+            {{else}}
+              <a href="{{doi.identifier}}">{{fa-icon "external-link"}} {{doi.identifier}}</a>
+            {{/if}}
           </div>
         </div>
       {{/each}}

@@ -183,5 +183,8 @@
 
   {{doi-url model=model}}
   {{doi-metadata model=model}}
-  {{doi-citation model=model}}
+
+  {{#if (not model.isDraft)}}
+    {{doi-citation model=model}}
+  {{/if}}
 {{/if}}
