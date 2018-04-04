@@ -12,15 +12,18 @@
             {{form.element controlType="hidden" property="confirmDOI" required=false}}
             {{form.element controlType="text" label="URL" placeholder="URL" property="url" helpText="The location of the landing page with more information about the resource." required=false}}
 
-            <div id="citation" class="input-group pull-right">
-              <select onchange={{action 'selectForm' value="target.value"}}>
-                {{#each-in forms as |key value|}}
-                  <option name="form" value={{key}} selected={{eq form key}}>{{value}}</option>
-                {{/each-in}}
-              </select>
-            </div>
-            <h3 class="metadata-form">Metadata</h3>
-            <div class="clearfix"/>
+
+            {{#if (can "form doi" model)}}
+              <div id="citation" class="input-group pull-right">
+                <select onchange={{action 'selectForm' value="target.value"}}>
+                  {{#each-in forms as |key value|}}
+                    <option name="form" value={{key}} selected={{eq form key}}>{{value}}</option>
+                  {{/each-in}}
+                </select>
+              </div>
+              <h3 class="metadata-form">Metadata</h3>
+              <div class="clearfix"/>
+            {{/if}}
 
             {{#if model.useForm}}
               {{log model.useForm}}
