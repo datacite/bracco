@@ -37,13 +37,13 @@
             {{form.element controlType="textarea" label="Title" placeholder="Title" property="title" rows=2 helpText="A name or title by which the resource is known." required=false}}
             {{form.element controlType="text" label="Publisher" placeholder="Publisher" property="publisher" helpText="The name of the entity that holds, archives, publishes prints, distributes, releases, issues, or produces the resource." required=false}}
             {{#form.element controlType="power-select" label="Publication Year" property="published" options=years destination=published helpText="The year when the resource was or will be made publicly available." as |el|}}
-              {{#el.control onchange=(action (mut published)) placeholder="Select Publication Year" allowClear=true as |item|}}
+              {{#el.control onChange=(action "selectPublished") search=(action "searchPublished") placeholder="Select Publication Year" searchPlaceholder="Type to search..." as |item|}}
                 {{item}}
               {{/el.control}}
             {{/form.element}}
             {{form.element controlType="text" label="Resource Type" placeholder="Resource Type" property="resourceTypeSubtype" helpText="A description of the resource, the preferred format is a single term of some detail." required=false}}
             {{#form.element controlType="power-select" property="resource-type" helpText='The general type of the resource.' optionLabelPath="title" options=resourceTypes destination=resourceType as |el|}}
-              {{#el.control onChange=(action "selectResourceType") search=(action "searchResourceType") searchField="title" placeholder="Select Resource Type General" searchPlaceholder="Type to search..." allowClear=true as |item|}}
+              {{#el.control onChange=(action "selectResourceType") search=(action "searchResourceType") searchField="title" placeholder="Select Resource Type General" searchPlaceholder="Type to search..." as |item|}}
                 {{item.title}}
               {{/el.control}}
             {{/form.element}}

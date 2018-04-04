@@ -11,28 +11,7 @@ const stateList = {
   findable: ['registered', 'findable']
 }
 
-const years = [
-  1999,
-  2000,
-  2001,
-  2002,
-  2003,
-  2004,
-  2005,
-  2006,
-  2007,
-  2008,
-  2009,
-  2010,
-  2011,
-  2012,
-  2013,
-  2014,
-  2015,
-  2016,
-  2017,
-  2018
-];
+const yearList = Array.from(new Array(50), (x,i) => i + 1970);
 
 export default Ember.Component.extend({
   currentUser: service(),
@@ -49,7 +28,8 @@ export default Ember.Component.extend({
   resourceTypes: [],
   stateList,
   state: null,
-  years,
+  yearList,
+  years: null,
   useForm: false,
 
   reset() {
@@ -71,6 +51,15 @@ export default Ember.Component.extend({
     this.set('client', client)
     this.get('doi').set('client', client);
     this.get('doi').set('provider', client.get('provider'));
+  },
+  searchPublished(query) {
+    var years = yearList.filter(function(year) {
+      return year.toString().startsWith(query);
+    })
+    this.set('years', years);
+  },
+  selectPublished(published) {
+    this.get('doi').set('published', published);
   },
   searchResourceType(query) {
     this.set('resourceTypes', this.get('store').query('resource-type', { 'query': query, sort: 'name', 'page[size]': 100 }));
@@ -150,6 +139,8 @@ export default Ember.Component.extend({
       this.setStates(doi.get('state'));
       this.searchClient(null);
       this.searchResourceType(null);
+      this.searchPublished(null);
+      this.set('years', yearList);
       this.set('edit', true);
     },
     transfer(doi) {
@@ -170,6 +161,12 @@ export default Ember.Component.extend({
     },
     selectClient(client) {
       this.selectClient(client);
+    },
+    searchPublished(query) {
+      this.searchPublished(query);
+    },
+    selectPublished(published) {
+      this.selectPublished(published);
     },
     selectResourceType(resourceType) {
       this.selectResourceType(resourceType);

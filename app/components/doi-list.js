@@ -11,28 +11,7 @@ const stateList = {
   findable: ['registered', 'findable']
 }
 
-const years = [
-  1999,
-  2000,
-  2001,
-  2002,
-  2003,
-  2004,
-  2005,
-  2006,
-  2007,
-  2008,
-  2009,
-  2010,
-  2011,
-  2012,
-  2013,
-  2014,
-  2015,
-  2016,
-  2017,
-  2018
-];
+const yearList = Array.from(new Array(50), (x,i) => i + 1970);
 
 export default Ember.Component.extend({
   currentUser: service(),
@@ -48,7 +27,8 @@ export default Ember.Component.extend({
   client: null,
   clients: [],
   prefixes: [],
-  years,
+  yearList,
+  years: null,
   useForm: false,
   hasInput: Ember.computed('doi', function() {
     return !Ember.isEmpty(this.get('doi.doi'));
@@ -70,6 +50,15 @@ export default Ember.Component.extend({
   selectTarget(target) {
     this.set('target', target);
     this.get('client').set('target', target);
+  },
+  searchPublished(query) {
+    var years = yearList.filter(function(year) {
+      return year.toString().startsWith(query);
+    })
+    this.set('years', years);
+  },
+  selectPublished(published) {
+    this.get('doi').set('published', published);
   },
   reset() {
     this.set('client', null);
@@ -138,6 +127,8 @@ export default Ember.Component.extend({
       this.set('doi', this.get('store').createRecord('doi', { client: this.get('client'), prefix: '10.5072', state: 'draft' }));
       this.set('prefixes', this.get('store').query('prefix', { 'client-id': this.get('client.id'), sort: 'name', 'page[size]': 25 }));
       this.setStates('draft');
+      this.searchPublished(null);
+      this.set('years', yearList);
 
       this.generate().then(function() {
         self.set('new', true);
@@ -177,6 +168,12 @@ export default Ember.Component.extend({
     },
     selectForm(form) {
       this.set('useForm', form === 'form');
+    },
+    searchPublished(query) {
+      this.searchPublished(query);
+    },
+    selectPublished(published) {
+      this.selectPublished(published);
     },
     didSelectFiles(files, resetInput) {
       let self = this;
