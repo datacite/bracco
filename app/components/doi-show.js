@@ -140,9 +140,6 @@ export default Ember.Component.extend({
     searchResourceType(query) {
       this.searchResourceType(query);
     },
-    // selectPublished(date) {
-    //   this.selectPublished(date);
-    // },
     selectState(state) {
       this.get('doi').set('state', state);
     },
@@ -176,9 +173,6 @@ export default Ember.Component.extend({
       if (typeof stateChange !== 'undefined') {
         doi.set('event', this.setEvent(stateChange));
       }
-
-      doi.set('client', this.get('client'));
-      doi.set('provider', this.get('client').get('provider'));
 
       let self = this;
       doi.save().then(function() {
