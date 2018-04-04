@@ -58,7 +58,7 @@ const Validations = buildValidations({
     validator('presence', {
       presence: true,
       disabled: Ember.computed('model', function() {
-        return this.get('model').get('xml') || this.get('model').get('state') === 'draft' || this.get('model').get('doi').startsWith('10.5072');
+        return !this.get('model').get('useForm') || this.get('model').get('state') === 'draft' || this.get('model').get('doi').startsWith('10.5072');
       })
     })
   ],
@@ -66,7 +66,7 @@ const Validations = buildValidations({
     validator('presence', {
       presence: true,
       disabled: Ember.computed('model', function() {
-        return this.get('model').get('xml') || this.get('model').get('state') === 'draft' || this.get('model').get('doi').startsWith('10.5072');
+        return !this.get('model').get('useForm') || this.get('model').get('state') === 'draft' || this.get('model').get('doi').startsWith('10.5072');
       })
     })
   ],
@@ -74,7 +74,7 @@ const Validations = buildValidations({
     validator('presence', {
       presence: true,
       disabled: Ember.computed('model', function() {
-        return this.get('model').get('xml') || this.get('model').get('state') === 'draft' || this.get('model').get('doi').startsWith('10.5072');
+        return !this.get('model').get('useForm') || this.get('model').get('state') === 'draft' || this.get('model').get('doi').startsWith('10.5072');
       })
     })
   ],
@@ -91,6 +91,9 @@ const Validations = buildValidations({
       dependentKeys: ['model.doi'],
       isWarning: Ember.computed('model', function() {
         return this.get('model').get('state') === 'draft' || this.get('model').get('doi').startsWith('10.5072');
+      }),
+      disabled: Ember.computed('model', function() {
+        return this.get('model').get('useForm');
       })
     })
   ]
@@ -129,6 +132,8 @@ export default DS.Model.extend(Validations, {
   event: DS.attr('string'),
   registered: DS.attr('date'),
   updated: DS.attr('date'),
+
+  useForm: DS.attr('boolean', { defaultValue: false }),
 
   isDraft: Ember.computed('state', function() {
     return this.get('state') === 'draft';

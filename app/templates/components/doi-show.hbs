@@ -22,7 +22,8 @@
             <h3 class="metadata-form">Metadata</h3>
             <div class="clearfix"/>
 
-            {{#if useForm}}
+            {{#if model.useForm}}
+              {{log model.useForm}}
               {{form.element controlType="hidden" property="xml" value=null}}
 
               {{multi-input-form model=model}}
@@ -70,7 +71,7 @@
             <div class="pseudo-footer">
               <div class="btn-toolbar pull-right">
                 <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
-                <button type="submit" class="btn btn-sm btn-fill">Save</button>
+                <button type="submit" disabled={{v-get model 'isInvalid'}} class="btn btn-sm btn-fill">Save</button>
               </div>
               <div class="clearfix"/>
             </div>

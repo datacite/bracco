@@ -1,8 +1,6 @@
 import Ember from 'ember';
 const { service } = Ember.inject;
-import fetch from 'fetch';
 import moment from 'moment';
-import ENV from 'bracco/config/environment';
 
 const stateList = {
   undetermined: ['undetermined', 'registered', 'findable'],
@@ -30,11 +28,9 @@ export default Ember.Component.extend({
   state: null,
   yearList,
   years: null,
-  useForm: false,
 
   reset() {
     this.set('doi', null);
-    this.set('useForm', false);
     this.set('edit', false);
     this.set('delete', false);
     this.set('transfer', false);
@@ -89,36 +85,6 @@ export default Ember.Component.extend({
     } else if (stateChange[0] === 'findable' && stateChange[1] === 'registered') {
       return 'hide';
     }
-  },
-  new(input) {
-    let doi = this.get('doi').get('doi');
-    let url = ENV.APP_URL + '/dois/' + doi;
-    return fetch(url, {
-      method: 'put',
-      headers: {
-        'authorization': 'Bearer ' + this.get('currentUser').get('jwt'),
-        'content-type': 'application/json'
-      },
-      body: JSON.stringify({
-        data: {
-          type: 'dois',
-          attributes: {
-            doi: doi,
-            xml: input
-          }
-        }
-      })
-    }).then(function(response) {
-      if (response.ok) {
-        return response.json().then(function(res) {
-          return res.data;
-        });
-      } else {
-        Ember.Logger.assert(false, response);
-      }
-    }).catch(function(error) {
-      Ember.Logger.assert(false, error);
-    });
   },
   b64DecodeUnicode(str) {
     // Going backwards: from bytestream, to percent-encoding, to original string.
@@ -181,7 +147,7 @@ export default Ember.Component.extend({
       this.get('doi').set('state', state);
     },
     selectForm(form) {
-      this.set('useForm', form === 'form');
+      this.get('doi').set('useForm', form === 'form');
     },
     didSelectFiles(files, resetInput) {
       var reader = new FileReader();
@@ -217,7 +183,6 @@ export default Ember.Component.extend({
       let self = this;
       doi.save().then(function() {
         self.set('edit', false);
-        self.set('useForm', false);
         self.set('transfer', false);
       });
     },

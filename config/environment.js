@@ -51,7 +51,6 @@ module.exports = function(environment) {
     ORCID_URL: process.env.ORCID_URL || "https://sandbox.orcid.org",
     APP_URL: process.env.APP_URL || "https://app.test.datacite.org",
     CDN_URL: process.env.CDN_URL || "https://assets.test.datacite.org",
-    DATA_URL: process.env.DATA_URL || "https://data.test.datacite.org",
     JWT_PUBLIC_KEY: process.env.JWT_PUBLIC_KEY || null,
     JWT_PRIVATE_KEY: process.env.JWT_PRIVATE_KEY || null,
     USER_UID: process.env.USER_UID || '0000-0001-5489-3594',

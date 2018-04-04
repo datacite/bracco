@@ -2,7 +2,6 @@ import Ember from 'ember';
 const { service } = Ember.inject;
 import ENV from 'bracco/config/environment';
 import fetch from 'fetch';
-import moment from 'moment';
 
 const stateList = {
   undetermined: ['undetermined', 'registered', 'findable'],
@@ -29,7 +28,6 @@ export default Ember.Component.extend({
   prefixes: [],
   yearList,
   years: null,
-  useForm: false,
   hasInput: Ember.computed('doi', function() {
     return !Ember.isEmpty(this.get('doi.doi'));
   }),
@@ -124,7 +122,7 @@ export default Ember.Component.extend({
     new(model) {
       let self = this;
       this.set('client', this.get('store').peekRecord('client', model.get('otherParams.client-id')));
-      this.set('doi', this.get('store').createRecord('doi', { client: this.get('client'), prefix: '10.5072', state: 'draft' }));
+      this.set('doi', this.get('store').createRecord('doi', { client: this.get('client'), prefix: '10.5072', state: 'draft', published: '2018' }));
       this.set('prefixes', this.get('store').query('prefix', { 'client-id': this.get('client.id'), sort: 'name', 'page[size]': 25 }));
       this.setStates('draft');
       this.searchPublished(null);
@@ -167,7 +165,7 @@ export default Ember.Component.extend({
       this.get('doi').set('state', state);
     },
     selectForm(form) {
-      this.set('useForm', form === 'form');
+      this.get('doi').set('useForm', form === 'form');
     },
     searchPublished(query) {
       this.searchPublished(query);
@@ -205,6 +203,7 @@ export default Ember.Component.extend({
     submit(doi) {
       doi.set('event', this.setEvent(doi.get('state')));
       doi.set('confirmDoi', doi.get('doi'));
+
       let self = this;
       doi.save().then(function(doi) {
         self.get('router').transitionTo('dois.show', doi.id);

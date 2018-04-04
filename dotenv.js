@@ -5,7 +5,6 @@ module.exports = function(env) {
                         'SEARCH_URL',
                         'ORCID_URL',
                         'APP_URL',
-                        'DATA_URL',
                         'CDN_URL',
                         'JWT_PUBLIC_KEY',
                         'JWT_PRIVATE_KEY',
