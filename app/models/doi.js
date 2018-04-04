@@ -43,38 +43,38 @@ const Validations = buildValidations({
     validator('presence', {
       presence: true,
       message: 'Please enter a valid URL that the DOI should resolve to.',
-      disabled: Ember.computed('model', function() {
-        return this.get('model').get('state') === 'draft' || this.get('model').get('doi').startsWith('10.5072');
+      disabled: Ember.computed('model.state', 'model.prefix', function() {
+        return (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
       })
     }),
     validator('valid-url', {
       allowBlank: true,
-      isWarning: Ember.computed('model', function() {
-        return this.get('model').get('state') === 'draft' || this.get('model').get('doi').startsWith('10.5072');
-      }),
+      isWarning: Ember.computed('model.state', 'model.prefix', function() {
+        return (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
+      })
     })
   ],
   title: [
     validator('presence', {
       presence: true,
-      disabled: Ember.computed('model', function() {
-        return !this.get('model').get('useForm') || this.get('model').get('state') === 'draft' || this.get('model').get('doi').startsWith('10.5072');
+      disabled: Ember.computed('model.useForm', 'model.state', 'model.prefix', function() {
+        return !this.get('model.useForm') || (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
       })
     })
   ],
   publisher: [
     validator('presence', {
       presence: true,
-      disabled: Ember.computed('model', function() {
-        return !this.get('model').get('useForm') || this.get('model').get('state') === 'draft' || this.get('model').get('doi').startsWith('10.5072');
+      disabled: Ember.computed('model.useForm', 'model.state', 'model.prefix', function() {
+        return !this.get('model.useForm') || (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
       })
     })
   ],
   published: [
     validator('presence', {
       presence: true,
-      disabled: Ember.computed('model', function() {
-        return !this.get('model').get('useForm') || this.get('model').get('state') === 'draft' || this.get('model').get('doi').startsWith('10.5072');
+      disabled: Ember.computed('model.useForm', 'model.state', 'model.prefix', function() {
+        return !this.get('model.useForm') || (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
       })
     })
   ],
@@ -82,18 +82,18 @@ const Validations = buildValidations({
     validator('presence', {
       presence: true,
       message: 'Please include valid metadata.',
-      disabled: Ember.computed('model', function() {
-        return this.get('model').get('state') === 'draft' || this.get('model').get('doi').startsWith('10.5072');
-      })
+      disabled: Ember.computed('model.state', 'model.prefix', function() {
+        return (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
+      }),
     }),
     validator('metadata', {
       allowBlank: true,
       dependentKeys: ['model.doi'],
-      isWarning: Ember.computed('model', function() {
-        return this.get('model').get('state') === 'draft' || this.get('model').get('doi').startsWith('10.5072');
+      isWarning: Ember.computed('model.state', 'model.prefix', function() {
+        return (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
       }),
-      disabled: Ember.computed('model', function() {
-        return this.get('model').get('useForm');
+      disabled: Ember.computed('model.useForm', function() {
+        return this.get('model.useForm');
       })
     })
   ]

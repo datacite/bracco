@@ -7,8 +7,8 @@ import ENV from 'bracco/config/environment';
 const metadata = BaseValidator.extend({
   currentUser: service(),
 
-  validate(value, options) {
-    if (!value && options.allowBlank) {
+  validate(value, options, model) {
+    if (!value && options.allowBlank && (model.state === 'draft' || model.prefix === '10.5072')) {
       return true;
     } else {
       let xml = this.b64EncodeUnicode(value);
