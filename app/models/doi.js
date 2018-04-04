@@ -3,6 +3,13 @@ import DS from 'ember-data';
 import { validator, buildValidations } from 'ember-cp-validations';
 
 const Validations = buildValidations({
+  details: [
+    validator('belongs-to', {
+      disabled: Ember.computed('model.useForm', 'model.state', 'model.prefix', function() {
+        return !this.get('model.useForm') || (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
+      })
+    })
+  ],
   confirmDoi: [
     validator('presence', {
       presence: true,
@@ -54,6 +61,14 @@ const Validations = buildValidations({
       })
     })
   ],
+  creator: [
+    validator('presence', {
+      presence: true,
+      disabled: Ember.computed('model.useForm', 'model.state', 'model.prefix', function() {
+        return !this.get('model.useForm') || (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
+      })
+    })
+  ],
   title: [
     validator('presence', {
       presence: true,
@@ -83,7 +98,7 @@ const Validations = buildValidations({
       presence: true,
       message: 'Please include valid metadata.',
       disabled: Ember.computed('model.state', 'model.prefix', function() {
-        return (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
+        return this.get('model.useForm') || (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
       }),
     }),
     validator('metadata', {
