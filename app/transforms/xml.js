@@ -2,8 +2,12 @@ import DS from 'ember-data';
 
 export default DS.Transform.extend({
   deserialize(serialized) {
-    let xml = this.b64DecodeUnicode(serialized);
-    return ["<hsh></hsh>", "ée"].includes(xml) ? '' : xml;
+    if (serialized === 'xmlversiog==') {
+      return null;
+    } else {
+      let xml = this.b64DecodeUnicode(serialized);
+      return ["<hsh></hsh>", "ée"].includes(xml) ? '' : xml;
+    }
   },
 
   serialize(deserialized) {

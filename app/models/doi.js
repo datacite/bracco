@@ -116,13 +116,13 @@ const Validations = buildValidations({
 
 export default DS.Model.extend(Validations, {
   provider: DS.belongsTo('provider', {
-    async: true
+    async: false
   }),
   client: DS.belongsTo('client', {
-    async: true
+    async: false
   }),
   'resource-type': DS.belongsTo('resource-type', {
-    async: true
+    async: false
   }),
 
   identifier: DS.attr('string'),
