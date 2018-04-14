@@ -17,11 +17,5 @@ export default Ember.Route.extend(CanMixin, {
     if (!this.can('edit doi', this.modelFor('dois/show'))) {
       return this.transitionTo('index');
     }
-  },
-
-  actions: {
-    queryParamsDidChange() {
-      this.refresh();
-    }
   }
 });

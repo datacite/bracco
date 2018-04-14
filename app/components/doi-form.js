@@ -1,12 +1,4 @@
-import Ember from 'ember';
+import Component from '@ember/component';
 
-export default Ember.Route.extend({
-  model() {
-
-  },
-
-  actions: {
-    create() {
-    }
-  }
+export default Component.extend({
 });

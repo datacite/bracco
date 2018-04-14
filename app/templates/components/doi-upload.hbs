@@ -1,0 +1,38 @@
+{{#bs-form formLayout="vertical" model=model onSubmit=(action "submit" model) as |form|}}
+  {{form.element controlType="text" label="DOI" placeholder="DOI" property="doi" helpText="The globally unique string that identifies the resource. Can't be modified." disabled=true}}
+  {{form.element controlType="hidden" property="confirmDOI" required=false}}
+  {{form.element controlType="text" label="URL" placeholder="URL" property="url" helpText="The location of the landing page with more information about the resource." required=false}}
+
+  {{form.element controlType="hidden" property="creator" value=null}}
+  {{form.element controlType="hidden" property="title" value=null}}
+  {{form.element controlType="hidden" property="publisher" value=null}}
+  {{form.element controlType="hidden" property="published" value=null}}
+  {{form.element controlType="hidden" property="resourceTypeId" value=null}}
+  {{form.element controlType="hidden" property="resourceTypeSubtype" value=null}}
+  {{form.element controlType="hidden" property="description" value=null}}
+  {{form.element controlType="hidden" property="license" value=null}}
+
+  {{#form.element controlType="textarea" placeholder="Metadata" property="xml" rows=15 showValidationOn="focusOut" helpText='Metadata that describe the resource. You can also upload a file with metadata in DataCite XML format, or one of the other supported formats.' required=false as |el|}}
+    {{el.control class="form-control metadata"}}
+  {{/form.element}}
+
+  <div class="btn-toolbar btn-file">
+    {{#x-file-input name="files" multiple=false action=(action "didSelectFiles") accept="application/xml,application/json,text/plain"}}
+      <span class="btn btn-sm">{{fa-icon "upload"}} Upload File</span>
+    {{/x-file-input}}
+  </div>
+
+  {{#form.element controlType="power-select" label="State" property="state" options=states destination=state helpText='The state determines whether the above information is only visible from within the account (draft), the DOI has been made public via the Handle System (registered), or in addition this information is also included in DataCite Search (findable).' as |el|}}
+    {{#el.control onChange=(action "selectState") optionLabelPath="name" placeholder="Select State" as |item|}}
+      {{titleize item}}
+    {{/el.control}}
+  {{/form.element}}  
+
+  <div class="pseudo-footer">
+    <div class="btn-toolbar pull-right">
+      <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
+      <button type="submit" disabled={{v-get model 'isInvalid'}} class="btn btn-sm btn-fill">Save</button>
+    </div>
+    <div class="clearfix"/>
+  </div>
+{{/bs-form}}
