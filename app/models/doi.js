@@ -104,9 +104,6 @@ const Validations = buildValidations({
     validator('metadata', {
       allowBlank: true,
       dependentKeys: ['model.doi'],
-      isWarning: Ember.computed('model.state', 'model.prefix', function() {
-        return (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
-      }),
       disabled: Ember.computed('model.useForm', function() {
         return this.get('model.useForm');
       })

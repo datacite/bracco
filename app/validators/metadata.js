@@ -8,7 +8,8 @@ const metadata = BaseValidator.extend({
   currentUser: service(),
 
   validate(value, options, model) {
-    if (!value && options.allowBlank && (model.state === 'draft' || model.prefix === '10.5072')) {
+    console.log(value)
+    if (!value && options.allowBlank) {
       return true;
     } else {
       let xml = this.b64EncodeUnicode(value);
@@ -40,7 +41,8 @@ const metadata = BaseValidator.extend({
         if (response.ok) {
           return response.json().then(function(data) {
             if (data.errors) {
-              let message = data.errors[0].source.capitalize() + ': ' + data.errors[0].title;
+              let title = data.errors[0].title;
+              let message = title.slice(title.indexOf(' '), title.length);
               return message;
             } else {
               return true;
