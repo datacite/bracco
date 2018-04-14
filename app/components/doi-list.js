@@ -202,7 +202,6 @@ export default Ember.Component.extend({
     },
     submit(doi) {
       doi.set('event', this.setEvent(doi.get('state')));
-      doi.set('confirmDoi', doi.get('doi'));
 
       let self = this;
       doi.save().then(function(doi) {

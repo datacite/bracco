@@ -14,14 +14,14 @@ const Validations = buildValidations({
     validator('presence', {
       presence: true,
       disabled: Ember.computed('model', function() {
-        return this.get('model').get('isNew');
+        return this.get('model').get('dirtyType') === 'created';
       })
     }),
     validator('confirmation', {
       on: 'doi',
       message: 'DOI does not match',
       disabled: Ember.computed('model', function() {
-        return this.get('model').get('isNew');
+        return this.get('model').get('dirtyType') === 'created';
       })
     })
   ],
@@ -127,6 +127,7 @@ export default DS.Model.extend(Validations, {
 
   identifier: DS.attr('string'),
   doi: DS.attr('string'),
+  confirmDoi: DS.attr('string', { defaultValue: null }),
   prefix: DS.attr('string'),
   suffix: DS.attr('string'),
   url: DS.attr('string'),

@@ -17,7 +17,7 @@
         <li class="breadcrumb-item">{{#link-to "clients.show.dois" model.client.id}}{{model.client.name}}{{/link-to}}</li>
       </ol>
 
-      {{doi-show model=model}}
+      {{outlet}}
     </div>
   </div>
 {{else}}

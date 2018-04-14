@@ -117,11 +117,6 @@ export default Ember.Component.extend({
       this.searchClient(null);
       this.set('transfer', true);
     },
-    delete(doi) {
-      this.set('doi', doi);
-      this.get('doi').set('confirmDoi', null);
-      this.set('delete', true);
-    },
     searchClient(query) {
       this.searchClient(query);
     },
@@ -178,15 +173,6 @@ export default Ember.Component.extend({
       doi.save().then(function() {
         self.set('edit', false);
         self.set('transfer', false);
-      });
-    },
-    destroy(doi) {
-      let self = this;
-      this.set('client', this.get('doi').get('client'));
-      this.get('store').findRecord("doi", doi.id, { backgroundReload: false }).then(function(doi) {
-        doi.destroyRecord().then(function () {
-          self.get('router').transitionTo('clients.show.dois', self.get('client'));
-        });
       });
     },
     cancel() {
