@@ -10,8 +10,12 @@ export default Ember.Route.extend(CanMixin, RouteMixin, {
                             perPage: "page[size]",
                             total_pages: "total-pages" };
 
-    params = Ember.merge(params, { 'client-id': this.modelFor('clients/show').get('id') });
-    return this.findPaged('doi', params);
+    params = Ember.merge(params, { 'client-id': this.modelFor('clients/show').get('id'), reload: true });
+
+    return Ember.RSVP.hash({
+      client: this.modelFor('clients/show'),
+      prefixes: this.findPaged('client-prefix', params)
+    });
   },
 
   afterModel() {

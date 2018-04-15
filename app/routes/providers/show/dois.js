@@ -11,7 +11,11 @@ export default Ember.Route.extend(CanMixin, RouteMixin, {
                             total_pages: "total-pages" };
 
     params = Ember.merge(params, { 'provider-id': this.modelFor('providers/show').get('id') });
-    return this.findPaged('doi', params);
+    
+    return Ember.RSVP.hash({
+      provider: this.modelFor('providers/show'),
+      dois: this.findPaged('doi', params)
+    });
   },
 
   afterModel() {

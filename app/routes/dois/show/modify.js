@@ -14,7 +14,7 @@ export default Ember.Route.extend(CanMixin, {
   },
 
   afterModel() {
-    if (!this.can('transfer doi', this.modelFor('dois/show'))) {
+    if (!this.can('edit doi', this.modelFor('dois/show'))) {
       return this.transitionTo('index');
     }
   }

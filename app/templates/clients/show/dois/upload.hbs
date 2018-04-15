@@ -1,0 +1,26 @@
+<div class='row'>
+  <div class='col-md-9'>
+    <div class="panel panel-transparent">
+      <div class="panel-body">
+        <h3 class="edit">Add DOI (File Upload)</h3>
+
+        {{#bs-form formLayout="vertical" model=model onSubmit=(action "submit" model) as |form|}}
+          {{doi-doi model=model form=form}}
+
+          {{form.element controlType="text" label="URL" placeholder="URL" property="url" helpText="The location of the landing page with more information about the resource." required=false}}
+
+          {{doi-upload model=model form=form}}
+          {{doi-state model=model form=form}}
+
+          <div class="pseudo-footer">
+            <div class="btn-toolbar pull-right">
+              <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
+              <button type="submit" disabled={{v-get doi 'isInvalid'}} class="btn btn-sm btn-fill">Save</button>
+            </div>
+            <div class="clearfix"/>
+          </div>
+        {{/bs-form}}
+      </div>
+    </div>
+  </div>
+</div>

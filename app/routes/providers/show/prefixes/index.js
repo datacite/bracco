@@ -14,7 +14,7 @@ export default Ember.Route.extend(CanMixin, RouteMixin, {
 
     return Ember.RSVP.hash({
       provider: this.modelFor('providers/show'),
-      clients: this.findPaged('client', params)
+      prefixes: this.findPaged('provider-prefix', params)
     });
   },
 
