@@ -1,0 +1,5 @@
+{{#form.element controlType="power-select" label="Publication Year" property="published" options=years destination=published helpText="The year when the resource was or will be made publicly available." as |el|}}
+  {{#el.control onChange=(action "selectPublished") search=(action "searchPublished") placeholder="Select Publication Year" searchPlaceholder="Select from list or type to search..." as |item|}}
+    {{item}}
+  {{/el.control}}
+{{/form.element}}

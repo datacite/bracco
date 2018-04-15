@@ -1,0 +1,5 @@
+{{#form.element controlType="power-select" label="State" property="state" options=states destination=state helpText='The state determines whether the above information is only visible from within the account (draft), the DOI has been made public via the Handle System (registered), or in addition this information is also included in DataCite Search (findable).' as |el|}}
+  {{#el.control onChange=(action "selectState") optionLabelPath="name" placeholder="Select State" as |item|}}
+    {{titleize item}}
+  {{/el.control}}
+{{/form.element}}

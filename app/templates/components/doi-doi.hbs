@@ -1,0 +1,12 @@
+<div class="compound-form input-group">
+  <span class="input-group-addon">
+    {{#form.element controlType="power-select" property="prefix" options=prefixes destination=prefix searchEnabled=false as |el|}}
+      {{#el.control onChange=(action "selectPrefix") searchPlaceholder="Select Prefix" optionLabelPath="id" as |item|}}
+        {{if item.id item.id item}}
+      {{/el.control}}
+    {{/form.element}}
+  </span>
+  {{form.element controlType="text" label="DOI" placeholder="DOI Suffix" property="suffix" onChange=(action "selectSuffix") helpText="A globally unique string that identifies a resource." required=false}}
+  <span class="input-group-addon refresh" title="Refresh" aria-label="Refresh" {{action 'refresh'}}>{{fa-icon "refresh"}}</span>
+  <span class="input-group-addon clear" title="Clear" aria-label="Clear" {{action 'clear'}}>{{fa-icon "times-circle"}}</span>
+</div>
