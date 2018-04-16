@@ -205,7 +205,7 @@ export default Ember.Component.extend({
 
       let self = this;
       doi.save().then(function(doi) {
-        self.get('router').transitionTo('dois.show', doi.id);
+        self.get('router').transitionTo('clients.show.dois.show', doi.client.id, doi.id);
         self.set('new', false);
       }).catch(function(reason){
         Ember.Logger.assert(false, reason);

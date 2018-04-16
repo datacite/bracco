@@ -7,7 +7,7 @@ export default Ember.Route.extend(CanMixin, RouteMixin, {
   store: service(),
 
   model(params) {
-    let doi = this.get('store').createRecord('doi', { client: params['client-id'], prefix: '10.5072', state: 'draft' });
+    let doi = this.get('store').createRecord('doi', { client: params.client_id, prefix: '10.5072', state: 'draft' });
     return doi;
   },
 

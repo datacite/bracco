@@ -47,12 +47,12 @@ export default Ember.Controller.extend({
     },
     submit(doi) {    
       let self = this;
-      doi.save().then(function() {
-        self.transitionToRoute('dois.show.index', self.get('model'));
+      doi.save().then(function(doi) {
+        self.transitionToRoute('clients.show.dois.show', doi.client.id, doi);
       });
     },
     cancel() {
-      this.transitionToRoute('dois.show.index', this.get('model'));
+      this.transitionToRoute('clients.show.dois.show', this.get('model').get('client').get('id'), this.get('model'));
     }
   }
 });

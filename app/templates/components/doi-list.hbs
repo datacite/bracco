@@ -97,7 +97,7 @@
         <div class="panel panel-transparent">
           <div class="panel-body">
             <h3 class="work">
-              {{#link-to "dois.show" doi.id}}{{if doi.title doi.title doi.doi}}{{/link-to}}
+              {{#link-to "clients.show.dois.show" doi.client.id doi.id}}{{if doi.title doi.title doi.doi}}{{/link-to}}
               <span class="small">{{doi.resource-type.title}}</span>
             </h3>
             {{#if doi.creator}}
@@ -147,8 +147,9 @@
       <div class="panel facets">
         <div class="panel-body">
           <div class="btn-toolbar">
-            <div class="btn-group btn-group-sm">
-              <button {{action "new" model}} class="btn btn-warning" id="add-doi">{{fa-icon "plus"}}Add{{if media.isXl ' DOI'}}</button>
+            <div class="btn-group-vertical btn-group-sm">
+              {{#link-to "clients.show.dois.new" client.id class="btn btn-warning"}}{{fa-icon "wpforms"}} Add{{if media.isXl ' DOI'}} (Form){{/link-to}}
+              {{#link-to "clients.show.dois.upload" client.id class="btn btn-warning"}}{{fa-icon "upload"}} Add{{if media.isXl ' DOI'}} (File Upload){{/link-to}}
             </div>
           </div>
         </div>

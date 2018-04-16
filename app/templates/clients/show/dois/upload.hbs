@@ -14,7 +14,7 @@
 
           <div class="pseudo-footer">
             <div class="btn-toolbar pull-right">
-              <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
+              <button {{action "cancel" model}} class="btn btn-sm">Cancel</button>
               <button type="submit" disabled={{v-get doi 'isInvalid'}} class="btn btn-sm btn-fill">Save</button>
             </div>
             <div class="clearfix"/>
