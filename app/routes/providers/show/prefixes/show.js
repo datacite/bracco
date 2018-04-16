@@ -6,7 +6,7 @@ export default Ember.Route.extend(CanMixin, RouteMixin, {
 
   model(params) {
     let self = this;
-    return this.store.query('provider-prefix', { 'provider-id': params['provider-id'], 'prefix-id': params['prefix-id'] }).then(function(providerPrefixes) {
+    return this.store.query('provider-prefix', { 'provider-id': params.provider_id, 'prefix-id': params.prefix_id }).then(function(providerPrefixes) {
       return providerPrefixes.get("firstObject");
     }).catch(function(reason){
       Ember.Logger.assert(false, reason);

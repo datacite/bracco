@@ -18,7 +18,7 @@
               <h5>{{pluralize-word provider-prefix.clients.length "Client" omitCount=true}}</h5>
               {{#if provider-prefix.clients}}
                 {{#each provider-prefix.clients as |client|}}
-                  {{#link-to "clients.show.prefixes" client.id}}{{client.name}}{{/link-to}}<br/>
+                  {{#link-to "clients.show.prefixes.show" client.id provider-prefix.prefix.id}}{{client.name}}{{/link-to}}<br/>
                 {{/each}}
               {{else}}
                 <span class="icon-warning">No clients found.</span>

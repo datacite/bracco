@@ -8,5 +8,7 @@ export default DS.Model.extend({
     async: false
   }),
 
+  meta: DS.attr(),
+
   created: DS.attr('date')
 });

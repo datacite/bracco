@@ -28,7 +28,7 @@
           <h5>{{pluralize-word model.clients.length "Client" omitCount=true}}</h5>
           {{#if model.clients}}
             {{#each model.clients as |client|}}
-              {{#link-to "clients.show.prefixes" client.id}}{{client.name}}{{/link-to}}<br/>
+              {{#link-to "clients.show.prefixes.show" client.id model.prefix.id}}{{client.name}}{{/link-to}}<br/>
             {{/each}}
           {{else}}
             <span class="icon-warning">No clients found.</span>
