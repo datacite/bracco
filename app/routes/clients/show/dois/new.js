@@ -6,9 +6,13 @@ import { CanMixin } from 'ember-can';
 export default Ember.Route.extend(CanMixin, RouteMixin, {
   store: service(),
 
-  model(params) {
-    let doi = this.get('store').createRecord('doi', { client: params.client_id, prefix: '10.5072', state: 'draft' });
-    return doi;
+  model() {
+    let doi = this.get('store').createRecord('doi', { client: this.modelFor('clients/show').get('id'), prefix: '10.5072', state: 'draft' });
+
+    return Ember.RSVP.hash({
+      client: this.modelFor('clients/show'),
+      doi: doi
+    });
   },
 
   // afterModel(model) {

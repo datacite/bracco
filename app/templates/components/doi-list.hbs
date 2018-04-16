@@ -1,281 +1,189 @@
-{{#if new}}
-  <div class='col-md-9'>
-    <div class="panel panel-transparent">
-      <div class="panel-body">
-        <h3 class="edit">Create New DOI</h3>
+<div class='col-md-9 panel-list' id="content">
+  {{model-search model=model sortable=true}}
 
-        {{#bs-form formLayout="vertical" model=doi onSubmit=(action "submit" doi model) as |form|}}
-          <div class="compound-form input-group">
-            <span class="input-group-addon">
-              {{#form.element controlType="power-select" property="prefix" options=prefixes destination=prefix searchEnabled=false as |el|}}
-                {{#el.control onChange=(action "selectPrefix") searchPlaceholder="Select Prefix" optionLabelPath="id" as |item|}}
-                  {{if item.id item.id item}}
-                {{/el.control}}
-              {{/form.element}}
-            </span>
-            {{form.element controlType="text" label="DOI" placeholder="DOI Suffix" property="suffix" onChange=(action "selectSuffix") helpText="A globally unique string that identifies a resource." required=false}}
-            <span class="input-group-addon refresh" title="Refresh" aria-label="Refresh" {{action 'refresh'}}>{{fa-icon "refresh"}}</span>
-            <span class="input-group-addon clear" title="Clear" aria-label="Clear" {{action 'clear'}}>{{fa-icon "times-circle"}}</span>
-          </div>
-
-          {{form.element controlType="text" label="URL" placeholder="URL" property="url" helpText="The location of the landing page with more information about the resource." required=false}}
-
-          <div id="citation" class="input-group pull-right">
-            <select onchange={{action 'selectForm' value="target.value"}}>
-              {{#each-in forms as |key value|}}
-                <option name="form" value={{key}} selected={{and doi.useForm (eq "form" key)}}>{{value}}</option>
-              {{/each-in}}
-            </select>
-          </div>
-          <h3 class="metadata-form">Metadata</h3>
-          <div class="clearfix"/>
-
-          {{#if doi.useForm}}
-            {{form.element controlType="hidden" property="xml" value=null}}
-
-            {{multi-input-form model=model}}
-            {{form.element controlType="textarea" label="Title" placeholder="Title" property="title" rows=2 helpText="A name or title by which the resource is known." required=false}}
-            {{form.element controlType="text" label="Publisher" placeholder="Publisher" property="publisher" helpText="The name of the entity that holds, archives, publishes prints, distributes, releases, issues, or produces the resource." required=false}}
-            {{#form.element controlType="power-select" label="Publication Year" property="published" options=years destination=published helpText="The year when the resource was or will be made publicly available." as |el|}}
-              {{#el.control onChange=(action "selectPublished") search=(action "searchPublished") placeholder="Select Publication Year" searchPlaceholder="Type to search..." as |item|}}
-                {{item}}
-              {{/el.control}}
-            {{/form.element}}
-            {{form.element controlType="text" label="Resource Type" placeholder="Resource Type" property="resourceTypeSubtype" helpText="A description of the resource, the preferred format is a single term of some detail." required=false}}
-            {{#form.element controlType="power-select" property="resource-type" helpText='The general type of the resource.' optionLabelPath="title" options=resourceTypes destination=resourceType as |el|}}
-              {{#el.control onChange=(action "selectResourceType") search=(action "searchResourceType") searchField="title" placeholder="Select Resource Type General" searchPlaceholder="Type to search..." as |item|}}
-                {{item.title}}
-              {{/el.control}}
-            {{/form.element}}
-            {{form.element controlType="textarea" label="Description" placeholder="Description" property="description" rows=8 helpText="All additional information that does not fit in any of the other categories." required=false}}
-          {{else}}
-            {{form.element controlType="hidden" property="creator" value=null}}
-            {{form.element controlType="hidden" property="title" value=null}}
-            {{form.element controlType="hidden" property="publisher" value=null}}
-            {{form.element controlType="hidden" property="published" value=null}}
-            {{form.element controlType="hidden" property="resourceTypeId" value=null}}
-            {{form.element controlType="hidden" property="resourceTypeSubtype" value=null}}
-            {{form.element controlType="hidden" property="description" value=null}}
-            {{form.element controlType="hidden" property="license" value=null}}
-
-            {{#form.element controlType="textarea" label="Metadata" placeholder="Metadata" property="xml" rows=15 helpText='Metadata that describe the resource. You can also upload a file with metadata in DataCite XML format, or one of the other supported formats.' required=false as |el|}}
-              {{el.control class="form-control metadata"}}
-            {{/form.element}}
-
-            <div class="btn-toolbar btn-file">
-              {{#x-file-input name="files" multiple=false action=(action "didSelectFiles") accept="application/xml,application/json,text/plain"}}
-                <span class="btn btn-sm">{{fa-icon "upload"}} Upload File</span>
-              {{/x-file-input}}
-            </div>
-          {{/if}}
-
-          {{#form.element controlType="power-select" label="State" property="state" options=states destination=state helpText='The state determines whether the above information is only visible from within the account (draft), the DOI has been made public via the Handle System (registered), or in addition this information is also included in DataCite Search (findable).' as |el|}}
-            {{#el.control onChange=(action "selectState") optionLabelPath="name" placeholder="Select State" as |item|}}
-              {{titleize item}}
-            {{/el.control}}
-          {{/form.element}}
-
-          <div class="pseudo-footer">
-            <div class="btn-toolbar pull-right">
-              <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
-              <button type="submit" disabled={{v-get doi 'isInvalid'}} class="btn btn-sm btn-fill">Save</button>
-            </div>
-            <div class="clearfix"/>
-          </div>
-        {{/bs-form}}
-      </div>
-    </div>
-  </div>
-{{else}}
-  <div class='col-md-9 panel-list' id="content">
-    {{#if searchable}}
-      {{model-search model=model sortable=true}}
-    {{/if}}
-
-    {{#if model}}
-      {{#each model as |doi|}}
-        <div class="panel panel-transparent">
-          <div class="panel-body">
-            <h3 class="work">
-              {{#link-to "clients.show.dois.show" doi.client.id doi.id}}{{if doi.title doi.title doi.doi}}{{/link-to}}
-              <span class="small">{{doi.resource-type.title}}</span>
-            </h3>
-            {{#if doi.creator}}
-              {{{format-author doi.creator}}}
-            {{/if}}
-            {{#if doi.published}}
-              <div class="metadata">
-                {{format-metadata doi.published resourceType=doi.resource-type resourceTypeSubtype=doi.resourceTypeSubtype publisher=doi.publisher version=doi.version}}
-              </div>
-            {{/if}}
-            {{#if doi.description}}
-              <div class="description">
-                {{format-text doi.description limit=75}}
-              </div>
-            {{/if}}
-            <div class="updated">
-              Last updated {{format-time doi.updated year='numeric' month='long' day='numeric'}}.
-              <span class="text-{{doi.state}}">{{titleize doi.state}}</span>
-            </div>
-            {{#if doi.license}}
-              {{cc-license licenseURL=doi.license}}
-            {{/if}}
-          </div>
-          <div class="panel-footer">
-            {{#if doi.isDraft}}
-              {{fa-icon "info-circle"}} {{doi.doi}}
-            {{else}}
-              <a href="{{doi.identifier}}">{{fa-icon "external-link"}} {{doi.identifier}}</a>
-            {{/if}}
-          </div>
-        </div>
-      {{/each}}
-      <div class="text-center">
-        {{#if (gt model.meta.total_pages 1)}}
-          {{page-numbers content=model numPagesToShow=5 showFL=true}}
-        {{/if}}
-      </div>
-    {{else}}
-      {{#bs-alert dismissible=false type="warning"}}
-        No DOIs found.
-      {{/bs-alert}}
-    {{/if}}
-  </div>
-
-  <div class='col-md-3'>
-    {{#if (and (can "create doi" model) (eq link "clients.show.dois"))}}
-      <div class="panel facets">
-        <div class="panel-body">
-          <div class="btn-toolbar">
-            <div class="btn-group-vertical btn-group-sm">
-              {{#link-to "clients.show.dois.new" client.id class="btn btn-warning"}}{{fa-icon "wpforms"}} Add{{if media.isXl ' DOI'}} (Form){{/link-to}}
-              {{#link-to "clients.show.dois.upload" client.id class="btn btn-warning"}}{{fa-icon "upload"}} Add{{if media.isXl ' DOI'}} (File Upload){{/link-to}}
-            </div>
-          </div>
-        </div>
-      </div>
-    {{else if (and (can "transfer doi" model) (gt model.length 0))}}
-      <div class="panel facets">
-        <div class="panel-body">
-          <div class="btn-toolbar">
-            <div class="btn-group btn-group-sm">
-              {{#link-to "clients.show.transfer" model.otherParams.client-id class="btn btn-warning" id="transfer-dois"}}{{fa-icon "arrow-circle-o-right"}}Transfer{{if media.isXl ' DOIs'}}{{/link-to}}
-            </div>
-          </div>
-        </div>
-      </div>
-    {{else}}
+  {{#if model}}
+    {{#each model as |doi|}}
       <div class="panel panel-transparent">
         <div class="panel-body">
-          <div class="edit"></div>
+          <h3 class="work">
+            {{#link-to "clients.show.dois.show" doi.client.id doi.id}}{{if doi.title doi.title doi.doi}}{{/link-to}}
+            <span class="small">{{doi.resource-type.title}}</span>
+          </h3>
+          {{#if doi.creator}}
+            {{{format-author doi.creator}}}
+          {{/if}}
+          {{#if doi.published}}
+            <div class="metadata">
+              {{format-metadata doi.published resourceType=doi.resource-type resourceTypeSubtype=doi.resourceTypeSubtype publisher=doi.publisher version=doi.version}}
+            </div>
+          {{/if}}
+          {{#if doi.description}}
+            <div class="description">
+              {{format-text doi.description limit=75}}
+            </div>
+          {{/if}}
+          <div class="updated">
+            Last updated {{format-time doi.updated year='numeric' month='long' day='numeric'}}.
+            <span class="text-{{doi.state}}">{{titleize doi.state}}</span>
+          </div>
+          {{#if doi.license}}
+            {{cc-license licenseURL=doi.license}}
+          {{/if}}
+        </div>
+        <div class="panel-footer">
+          {{#if doi.isDraft}}
+            {{fa-icon "info-circle"}} {{doi.doi}}
+          {{else}}
+            <a href="{{doi.identifier}}">{{fa-icon "external-link"}} {{doi.identifier}}</a>
+          {{/if}}
         </div>
       </div>
-    {{/if}}
+    {{/each}}
+    <div class="text-center">
+      {{#if (gt model.meta.total_pages 1)}}
+        {{page-numbers content=model numPagesToShow=5 showFL=true}}
+      {{/if}}
+    </div>
+  {{else}}
+    {{#bs-alert dismissible=false type="warning"}}
+      No DOIs found.
+    {{/bs-alert}}
+  {{/if}}
+</div>
 
-    {{#if model.meta.states}}
-      <div class="panel facets add">
-        <div class="panel-body">
-          <h4>State</h4>
-          <ul>
-            {{#each model.meta.states as |state|}}
-              <li>
-                {{#if model.otherParams.state}}
-                  {{#link-to link (query-params state=null)}}{{fa-icon "check-square-o"}}{{/link-to}}
-                {{else}}
-                  {{#link-to link (query-params state=state.id)}}{{fa-icon "square-o"}}{{/link-to}}
-                {{/if}}
-                <div class="facet-title">{{state.title}}</div>
-                <span class="number pull-right">{{format-number state.count}}</span>
-                <div class="clearfix"/>
-              </li>
-            {{/each}}
-          </ul>
+<div class='col-md-3'>
+  {{#if (and (can "create doi" model) (eq link "clients.show.dois"))}}
+    <div class="panel facets">
+      <div class="panel-body">
+        <div class="btn-toolbar">
+          <div class="btn-group-vertical btn-group-sm">
+            {{#link-to "clients.show.dois.new" client.id class="btn btn-warning"}}{{fa-icon "wpforms"}} Add{{if media.isXl ' DOI'}} (Form){{/link-to}}
+            {{#link-to "clients.show.dois.upload" client.id class="btn btn-warning"}}{{fa-icon "upload"}} Add{{if media.isXl ' DOI'}} (File Upload){{/link-to}}
+          </div>
         </div>
       </div>
-    {{/if}}
-    {{#if model.meta.resource-types}}
-      <div class="panel facets">
-        <div class="panel-body">
-          <h4>Resource Types</h4>
-          <ul>
-            {{#each model.meta.resource-types as |resource-type|}}
-              <li>
-                {{#if model.otherParams.resource-type-id}}
-                  {{#link-to link (query-params resource-type-id='')}}{{fa-icon "check-square-o"}}{{/link-to}}
-                {{else}}
-                  {{#link-to link (query-params resource-type-id=resource-type.id)}}{{fa-icon "square-o"}}{{/link-to}}
-                {{/if}}
-                <div class="facet-title">{{resource-type.title}}</div>
-                <span class="number pull-right">{{format-number resource-type.count}}</span>
-                <div class="clearfix"/>
-              </li>
-            {{/each}}
-          </ul>
+    </div>
+  {{else if (and (can "transfer doi" model) (gt model.length 0))}}
+    <div class="panel facets">
+      <div class="panel-body">
+        <div class="btn-toolbar">
+          <div class="btn-group btn-group-sm">
+            {{#link-to "clients.show.transfer" model.otherParams.client-id class="btn btn-warning" id="transfer-dois"}}{{fa-icon "arrow-circle-o-right"}}Transfer{{if media.isXl ' DOIs'}}{{/link-to}}
+          </div>
         </div>
       </div>
-    {{/if}}
-    {{#if model.meta.years}}
-      <div class="panel facets">
-        <div class="panel-body">
-          <h4>Publication Year</h4>
-          <ul>
-            {{#each model.meta.years as |year|}}
-              <li>
-                {{#if model.otherParams.year}}
-                  {{#link-to link (query-params year='')}}{{fa-icon "check-square-o"}}{{/link-to}}
-                {{else}}
-                  {{#link-to link (query-params year=year.id)}}{{fa-icon "square-o"}}{{/link-to}}
-                {{/if}}
-                <div class="facet-title">{{year.title}}</div>
-                <span class="number pull-right">{{format-number year.count}}</span>
-                <div class="clearfix"/>
-              </li>
-            {{/each}}
-          </ul>
-        </div>
+    </div>
+  {{else}}
+    <div class="panel panel-transparent">
+      <div class="panel-body">
+        <div class="edit"></div>
       </div>
-    {{/if}}
-    {{#if model.meta.registered}}
-      <div class="panel facets">
-        <div class="panel-body">
-          <h4>DOI Registration Year</h4>
-          <ul>
-            {{#each model.meta.registered as |year|}}
-              <li>
-                {{#if model.otherParams.registered}}
-                  {{#link-to link (query-params registered='')}}{{fa-icon "check-square-o"}}{{/link-to}}
-                {{else}}
-                  {{#link-to link (query-params registered=year.id)}}{{fa-icon "square-o"}}{{/link-to}}
-                {{/if}}
-                <div class="facet-title">{{year.title}}</div>
-                <span class="number pull-right">{{format-number year.count}}</span>
-                <div class="clearfix"/>
-              </li>
-            {{/each}}
-          </ul>
-        </div>
+    </div>
+  {{/if}}
+
+  {{#if model.meta.states}}
+    <div class="panel facets add">
+      <div class="panel-body">
+        <h4>State</h4>
+        <ul>
+          {{#each model.meta.states as |state|}}
+            <li>
+              {{#if model.otherParams.state}}
+                {{#link-to link (query-params state=null)}}{{fa-icon "check-square-o"}}{{/link-to}}
+              {{else}}
+                {{#link-to link (query-params state=state.id)}}{{fa-icon "square-o"}}{{/link-to}}
+              {{/if}}
+              <div class="facet-title">{{state.title}}</div>
+              <span class="number pull-right">{{format-number state.count}}</span>
+              <div class="clearfix"/>
+            </li>
+          {{/each}}
+        </ul>
       </div>
-    {{/if}}
-    {{#if model.meta.schema-versions}}
-      <div class="panel facets">
-        <div class="panel-body">
-          <h4>Schema Versions</h4>
-          <ul>
-            {{#each model.meta.schema-versions as |schema-version|}}
-              <li>
-                {{#if model.otherParams.schema-version}}
-                  {{#link-to link (query-params schema-version='')}}{{fa-icon "check-square-o"}}{{/link-to}}
-                {{else}}
-                  {{#link-to link (query-params schema-version=schema-version.id)}}{{fa-icon "square-o"}}{{/link-to}}
-                {{/if}}
-                <div class="facet-title">{{schema-version.title}}</div>
-                <span class="number pull-right">{{format-number schema-version.count}}</span>
-                <div class="clearfix"/>
-              </li>
-            {{/each}}
-          </ul>
-        </div>
+    </div>
+  {{/if}}
+  {{#if model.meta.resource-types}}
+    <div class="panel facets">
+      <div class="panel-body">
+        <h4>Resource Types</h4>
+        <ul>
+          {{#each model.meta.resource-types as |resource-type|}}
+            <li>
+              {{#if model.otherParams.resource-type-id}}
+                {{#link-to link (query-params resource-type-id='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+              {{else}}
+                {{#link-to link (query-params resource-type-id=resource-type.id)}}{{fa-icon "square-o"}}{{/link-to}}
+              {{/if}}
+              <div class="facet-title">{{resource-type.title}}</div>
+              <span class="number pull-right">{{format-number resource-type.count}}</span>
+              <div class="clearfix"/>
+            </li>
+          {{/each}}
+        </ul>
       </div>
-    {{/if}}
-  </div>
-{{/if}}
+    </div>
+  {{/if}}
+  {{#if model.meta.years}}
+    <div class="panel facets">
+      <div class="panel-body">
+        <h4>Publication Year</h4>
+        <ul>
+          {{#each model.meta.years as |year|}}
+            <li>
+              {{#if model.otherParams.year}}
+                {{#link-to link (query-params year='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+              {{else}}
+                {{#link-to link (query-params year=year.id)}}{{fa-icon "square-o"}}{{/link-to}}
+              {{/if}}
+              <div class="facet-title">{{year.title}}</div>
+              <span class="number pull-right">{{format-number year.count}}</span>
+              <div class="clearfix"/>
+            </li>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+  {{/if}}
+  {{#if model.meta.registered}}
+    <div class="panel facets">
+      <div class="panel-body">
+        <h4>DOI Registration Year</h4>
+        <ul>
+          {{#each model.meta.registered as |year|}}
+            <li>
+              {{#if model.otherParams.registered}}
+                {{#link-to link (query-params registered='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+              {{else}}
+                {{#link-to link (query-params registered=year.id)}}{{fa-icon "square-o"}}{{/link-to}}
+              {{/if}}
+              <div class="facet-title">{{year.title}}</div>
+              <span class="number pull-right">{{format-number year.count}}</span>
+              <div class="clearfix"/>
+            </li>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+  {{/if}}
+  {{#if model.meta.schema-versions}}
+    <div class="panel facets">
+      <div class="panel-body">
+        <h4>Schema Versions</h4>
+        <ul>
+          {{#each model.meta.schema-versions as |schema-version|}}
+            <li>
+              {{#if model.otherParams.schema-version}}
+                {{#link-to link (query-params schema-version='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+              {{else}}
+                {{#link-to link (query-params schema-version=schema-version.id)}}{{fa-icon "square-o"}}{{/link-to}}
+              {{/if}}
+              <div class="facet-title">{{schema-version.title}}</div>
+              <span class="number pull-right">{{format-number schema-version.count}}</span>
+              <div class="clearfix"/>
+            </li>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+  {{/if}}
+</div>

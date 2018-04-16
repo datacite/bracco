@@ -3,7 +3,7 @@ import Component from '@ember/component';
 const { service } = Ember.inject;
 
 export default Component.extend({
-  store: Ember.inject.service(),
+  store: service(),
 
   prefixesAvailable: false,
 

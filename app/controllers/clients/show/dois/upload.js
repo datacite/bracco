@@ -13,7 +13,7 @@ export default Ember.Controller.extend({
       });
     },
     cancel() {
-      this.transitionToRoute('clients.show.dois', this.get('model'));
+      this.transitionToRoute('clients.show.dois', this.get('model.client.id'));
     }
   }
 });
