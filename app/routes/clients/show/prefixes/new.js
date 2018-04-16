@@ -5,11 +5,11 @@ import { CanMixin } from 'ember-can';
 export default Ember.Route.extend(CanMixin, RouteMixin, {
 
   model(params) {
-    if (params['client-id']) {
-      return Ember.RSVP.hash({
-        provider: this.store.findRecord('provider', params['client-id'].split('.').get('firstObject')),
-        client: this.store.findRecord('client', params['client-id'])
-      });
-    }
+    let client = this.modelFor('clients/show');
+
+    return Ember.RSVP.hash({
+      client: this.store.findRecord('client', client.id),
+      prefix: this.store.createRecord('client-prefix', { client: client })
+    });
   }
 });

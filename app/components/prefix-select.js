@@ -8,7 +8,13 @@ export default Component.extend({
   prefixes: [],
 
   searchPrefix(query) {
-    this.set('prefixes', this.get('store').query('prefix', { query: query, state: 'unassigned', sort: 'name', 'page[size]': 25 }));
+    if (this.get('client')) {
+      let providerId = this.get('client').get('id').split('.').get('firstObject');
+      console.log(providerId)
+      this.set('prefixes', this.get('store').query('prefix', { query: query, 'provider-id': providerId, state: 'without-client', sort: 'name', 'page[size]': 25 }));
+    } else {
+      this.set('prefixes', this.get('store').query('prefix', { query: query, state: 'unassigned', sort: 'name', 'page[size]': 25 }));
+    }
   },
 
   didReceiveAttrs() {

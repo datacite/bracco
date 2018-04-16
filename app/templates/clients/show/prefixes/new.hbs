@@ -6,7 +6,7 @@
 
         {{#bs-form formLayout="vertical" model=model.prefix onSubmit=(action "submit") as |form|}}
 
-          {{prefix-select model=model.prefix form=form}}
+          {{prefix-select model=model.prefix client=model.client form=form}}
 
           <div class="pseudo-footer">
             <div class="btn-toolbar pull-right">

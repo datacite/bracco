@@ -5,9 +5,11 @@ import { CanMixin } from 'ember-can';
 export default Ember.Route.extend(CanMixin, RouteMixin, {
 
   model() {
+    let provider = this.modelFor('providers/show');
+
     return Ember.RSVP.hash({
-      provider: this.store.findRecord('provider', this.modelFor('providers/show').get('id')),
-      prefix: this.store.createRecord('provider-prefix', { provider: this.modelFor('providers/show').get('id') })
+      provider: this.store.findRecord('provider', provider.get('id')),
+      prefix: this.store.createRecord('provider-prefix', { provider: provider })
     });
   }
 });
