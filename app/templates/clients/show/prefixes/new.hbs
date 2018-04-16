@@ -1,1 +1,23 @@
-{{client-prefix-new model=model}}
+<div class="row">
+  <div class='col-md-9'>
+    <div class="panel panel-transparent">
+      <div class="panel-body">
+        <h3 class="edit">Assign Prefix</h3>
+
+        {{#bs-form formLayout="vertical" model=model.prefix onSubmit=(action "submit") as |form|}}
+
+          {{prefix-select model=model.prefix form=form}}
+
+          <div class="pseudo-footer">
+            <div class="btn-toolbar pull-right">
+              <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
+              <button type="submit" disabled={{v-get model 'isInvalid'}} class="btn btn-sm btn-fill">Assign</button>
+            </div>
+            <div class="clearfix"/>
+          </div>
+        {{/bs-form}}
+      </div>
+    </div>
+  </div>
+</div>
+

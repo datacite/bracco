@@ -36,7 +36,9 @@ Router.map(function() {
       });
       this.route('transfer');
       this.route('prefixes', function() {
-        this.route('show', { path: '/:prefix_id' });
+        this.route('show', { path: '/:prefix_id' }, function() {
+          this.route('delete');
+        });
         this.route('new');
       });
     });

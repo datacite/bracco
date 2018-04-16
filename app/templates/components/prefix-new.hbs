@@ -1,25 +1,14 @@
-<div class="row">
-  <div class="col-md-9">
-    <div class="panel panel-transparent">
-      <div class="panel-body">
+  {{#bs-form formLayout="vertical" model=this onSubmit=(action "submit") as |form|}}
+    <p class="help-block">Please add the first and last DOI prefix from the new prefix range registered by CNRI.</p>
 
-        <h3 class="edit">Add Prefixes</h3>
+    {{form.element controlType="text" label="From" onChange=(action "submitFirstPrefix") placeholder="First Prefix" property="firstPrefix" required=false}}
+    {{form.element controlType="text" label="To" onChange=(action "submitLastPrefix") placeholder="Last Prefix" property="lastPrefix" required=false}}
 
-        {{#bs-form formLayout="vertical" model=this onSubmit=(action "submit") as |form|}}
-          <p class="help-block">Please add the first and last DOI prefix from the new prefix range registered by CNRI.</p>
-
-          {{form.element controlType="text" label="From" onChange=(action "submitFirstPrefix") placeholder="First Prefix" property="firstPrefix" required=false}}
-          {{form.element controlType="text" label="To" onChange=(action "submitLastPrefix") placeholder="Last Prefix" property="lastPrefix" required=false}}
-
-          <div class="pseudo-footer">
-            <div class="btn-toolbar pull-right">
-              <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
-              <button type="submit" class="btn btn-sm btn-fill">Save</button>
-            </div>
-            <div class="clearfix"/>
-          </div>
-        {{/bs-form}}
+    <div class="pseudo-footer">
+      <div class="btn-toolbar pull-right">
+        <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
+        <button type="submit" class="btn btn-sm btn-fill">Save</button>
       </div>
+      <div class="clearfix"/>
     </div>
-  </div>
-</div>
+  {{/bs-form}}

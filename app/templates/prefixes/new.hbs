@@ -4,10 +4,25 @@
   <div class="container-fluid">
     <div class="content">
       {{index-header}}
-      {{prefix-new model=model}}
+      
+      <div class="row">
+        <div class="col-md-9">
+          <div class="panel panel-transparent">
+            <div class="panel-body">
+
+              <h3 class="edit">Add Prefixes</h3>
+
+              {{prefix-new model=model}}
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 {{else}}
   {{application-header}}
   {{landing-page}}
 {{/if}}
+
+
+

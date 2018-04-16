@@ -31,8 +31,8 @@
         </div>
       {{/each}}
       <div class="text-center">
-        {{#if (gt model.meta.total_pages 1)}}
-          {{page-numbers content=model numPagesToShow=5 showFL=true}}
+        {{#if (gt model.prefixes.meta.total_pages 1)}}
+          {{page-numbers content=model.prefixes numPagesToShow=5 showFL=true}}
         {{/if}}
       </div>
     {{else}}
@@ -48,7 +48,7 @@
         <div class="panel-body">
           <div class="btn-toolbar">
             <div class="btn-group btn-group-sm">
-              {{#link-to "providers.show.prefixes.new" provider-id=model.provider.id class="btn btn-warning"}}{{fa-icon "link"}}Assign Prefix{{/link-to}}
+              {{#link-to "providers.show.prefixes.new" model.provider.id class="btn btn-warning"}}{{fa-icon "link"}}Assign Prefix{{/link-to}}
             </div>
           </div>
         </div>

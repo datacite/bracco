@@ -7,7 +7,7 @@ export default Ember.Route.extend(CanMixin, RouteMixin, {
   flashMessages: service(),
   store: service(),
 
-  model() {
+  model(params) {
     let self = this;
     return this.store.createRecord('doi', { client: params['client-id'], prefix: '10.5072', state: 'draft' }).then(function(doi) {
       return doi;

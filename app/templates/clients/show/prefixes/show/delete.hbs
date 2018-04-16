@@ -1,0 +1,25 @@
+<div class="row">
+  <div class='col-md-9'>
+    <h2 class="work">{{model.prefix.id}}</h2>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-9">
+    <div class="panel panel-transparent">
+      <div class="panel-body">
+
+        <div class="alert alert-danger" role="alert">
+          Are you sure you want to remove prefix {{model.prefix.id}} from this client?
+        </div>
+      </div>
+      <div class="panel-footer">
+        <div class="btn-toolbar pull-right">
+          <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
+          <button {{action "submit"}} class="btn btn-sm btn-fill">Remove</button>
+        </div>
+        <div class="clearfix"/>
+      </div>
+    </div>
+  </div>
+</div>
