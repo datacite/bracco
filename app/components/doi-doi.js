@@ -11,7 +11,7 @@ export default Component.extend({
   didReceiveAttrs() {
     this._super(...arguments);
 
-    this.set('prefixes', this.get('store').query('prefix', { 'client-id': this.get('model').get('client-id'), sort: 'name', 'page[size]': 25 }));
+    this.set('prefixes', this.get('store').query('prefix', { 'client-id': this.get('client').get('id'), sort: 'name', 'page[size]': 25 }));
     this.generate();
   },
 
@@ -25,9 +25,11 @@ export default Component.extend({
     }).then(function(response) {
       if (response.ok) {
         return response.json().then(function(data) {
-          var suffix = data.doi.split('/', 2)[1]
+          let suffix = data.doi.split('/', 2)[1]
           self.get('model').set('suffix', suffix);
-          self.get('model').set('doi', self.get('model').get('prefix') + '/' + suffix);
+          let doi = self.get('model').get('prefix') + '/' + suffix;
+          self.get('model').set('doi', doi);
+          self.get('model').set('confirmDoi', doi);
           return suffix;
         });
       } else {

@@ -5,7 +5,7 @@
         <h3 class="edit">Add DOI (Form)</h3>
 
         {{#bs-form formLayout="vertical" model=model.doi onSubmit=(action "submit" model.doi) as |form|}}
-          {{doi-doi model=model.doi form=form}}
+          {{doi-doi model=model.doi client=model.client form=form}}
 
           {{form.element controlType="text" label="URL" placeholder="URL" property="url" helpText="The location of the landing page with more information about the resource." required=false}}
 
@@ -25,7 +25,7 @@
           <div class="pseudo-footer">
             <div class="btn-toolbar pull-right">
               <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
-              <button type="submit" disabled={{v-get doi 'isInvalid'}} class="btn btn-sm btn-fill">Save</button>
+              <button type="submit" disabled={{v-get model.doi 'isInvalid'}} class="btn btn-sm btn-fill">Save</button>
             </div>
             <div class="clearfix"/>
           </div>
