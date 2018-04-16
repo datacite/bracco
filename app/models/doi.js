@@ -98,7 +98,7 @@ const Validations = buildValidations({
       presence: true,
       message: 'Please include valid metadata.',
       disabled: Ember.computed('model.state', 'model.prefix', function() {
-        return this.get('model.useForm') || (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
+        return this.get('model.useForm');
       }),
     }),
     validator('metadata', {
