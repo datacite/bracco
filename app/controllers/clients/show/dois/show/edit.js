@@ -121,11 +121,11 @@ export default Ember.Controller.extend({
     
       let self = this;
       doi.save().then(function(doi) {
-        self.transitionToRoute('dois.show.index', doi);
+        self.transitionToRoute('clients.show.dois.show', doi.client.id, doi);
       });
     },
     cancel() {
-      this.transitionToRoute('dois.show.index', this.get('model'));
+      this.transitionToRoute('clients.show.dois.show', this.get('model').get('client.id'), this.get('model'));
     }
   }
 });

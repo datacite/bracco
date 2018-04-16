@@ -17,7 +17,7 @@ export default Ember.Controller.extend({
       });
     },
     cancel() {
-      this.transitionToRoute('dois.show.index', this.get('model'));
+      this.transitionToRoute('clients.show.dois.show', this.get('model').get('client.id'), this.get('model'));
     }
   }
 });

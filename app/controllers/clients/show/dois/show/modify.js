@@ -28,13 +28,11 @@ export default Ember.Controller.extend({
     
       let self = this;
       doi.save().then(function() {
-        self.set('fileUpload', null);
-        self.transitionToRoute('dois.show.index', self.get('model'));
+        self.transitionToRoute('clients.show.dois.show', this.get('model').get('client.id'), this.get('model'));
       });
     },
     cancel() {
-      this.set('fileUpload', null);
-      this.transitionToRoute('dois.show.index', this.get('model'));
+      this.transitionToRoute('clients.show.dois.show', this.get('model').get('client.id'), this.get('model'));
     }
   }
 });

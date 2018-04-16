@@ -10,11 +10,11 @@
             <div class="btn-group-vertical btn-group-sm">
               {{#if (or (can "edit doi" model) (and (can "delete doi" model) model.isDraft))}}
                 {{#if (can "edit doi" model)}}
-                  {{#link-to "dois.show.edit" model.id class="btn btn-warning"}}{{fa-icon "wpforms"}} Edit DOI (Form){{/link-to}}
-                  {{#link-to "dois.show.modify" model.id class="btn btn-warning"}}{{fa-icon "upload"}} Edit DOI (File Upload){{/link-to}}
+                  {{#link-to "clients.show.dois.show.edit" model.client.id model.id class="btn btn-warning"}}{{fa-icon "wpforms"}} Edit DOI (Form){{/link-to}}
+                  {{#link-to "clients.show.dois.show.modify" model.client.id model.id class="btn btn-warning"}}{{fa-icon "upload"}} Edit DOI (File Upload){{/link-to}}
                 {{/if}}
                 {{#if (and (can "delete doi" model) model.isDraft)}}
-                  {{#link-to "dois.show.delete" model.id class="btn btn-warning"}}{{fa-icon "trash"}} Delete DOI{{/link-to}}
+                  {{#link-to "clients.show.dois.show.delete" model.client.id model.id class="btn btn-warning"}}{{fa-icon "trash"}} Delete DOI{{/link-to}}
                 {{/if}}
               {{else if (can "transfer doi" model)}}
                 {{#link-to "clients.show.dois.show.transfer" model.client.id model.id class="btn btn-warning"}}{{fa-icon "arrow-circle-o-right"}} Transfer DOI{{/link-to}}
