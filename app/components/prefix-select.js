@@ -10,7 +10,6 @@ export default Component.extend({
   searchPrefix(query) {
     if (this.get('client')) {
       let providerId = this.get('client').get('id').split('.').get('firstObject');
-      console.log(providerId)
       this.set('prefixes', this.get('store').query('prefix', { query: query, 'provider-id': providerId, state: 'without-client', sort: 'name', 'page[size]': 25 }));
     } else {
       this.set('prefixes', this.get('store').query('prefix', { query: query, state: 'unassigned', sort: 'name', 'page[size]': 25 }));
