@@ -1,0 +1,5 @@
+{{#form.element controlType="power-select" property="prefix" options=prefixes as |el|}}
+  {{#el.control onChange=(action "selectPrefix") selected=prefix search=(action "searchPrefix") optionLabelPath="id" searchField="id" searchPlaceholder="Select from list or type to search..." searchEnabled=true placeholder="Select Prefix" as |item|}}
+    {{if item.id item.id item}}
+  {{/el.control}}
+{{/form.element}}

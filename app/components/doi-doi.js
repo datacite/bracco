@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import Component from '@ember/component';
 const { service } = Ember.inject;
 import ENV from 'bracco/config/environment';
@@ -9,8 +10,6 @@ export default Component.extend({
 
   didReceiveAttrs() {
     this._super(...arguments);
-
-    console.log(this.get('model').get('client'))
 
     this.set('prefixes', this.get('store').query('prefix', { 'client-id': this.get('model').get('client-id'), sort: 'name', 'page[size]': 25 }));
     this.generate();

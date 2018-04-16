@@ -1,6 +1,13 @@
 import DS from 'ember-data';
+import { validator, buildValidations } from 'ember-cp-validations';
 
-export default DS.Model.extend({
+const Validations = buildValidations({
+  prefix: [
+    validator('presence', true)
+  ]
+});
+
+export default DS.Model.extend(Validations, {
   provider: DS.belongsTo('provider', {
     async: false
   }),

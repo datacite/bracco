@@ -9,7 +9,7 @@
           {{#if (eq provider-prefix.prefix.id "10.5072")}}
             <h3 class="member">{{provider-prefix.prefix.id}}</h3>
           {{else}}
-            <h3 class="work">{{#link-to "provider-prefixes.show" provider-prefix.id}}{{provider-prefix.prefix.id}}{{/link-to}}</h3>
+            <h3 class="work">{{#link-to "providers.show.prefixes.show" model.otherParams.provider-id provider-prefix.prefix.id}}{{provider-prefix.prefix.id}}{{/link-to}}</h3>
           {{/if}}
 
           {{#if (eq provider-prefix.prefix.id "10.5072")}}
@@ -48,7 +48,7 @@
       <div class="panel-body">
         <div class="btn-toolbar">
           <div class="btn-group btn-group-sm">
-            {{#link-to "provider-prefixes.new" (query-params provider-id=model.otherParams.provider-id) class="btn btn-warning"}}{{fa-icon "link"}}Assign Prefix{{/link-to}}
+            {{#link-to "providers.show.prefixes.new" provider-id=model.otherParams.provider-id class="btn btn-warning"}}{{fa-icon "link"}}Assign Prefix{{/link-to}}
           </div>
         </div>
       </div>

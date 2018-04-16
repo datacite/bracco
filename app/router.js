@@ -13,7 +13,9 @@ Router.map(function() {
       this.route('settings');
       this.route('dois');
       this.route('prefixes', function() {
-        this.route('show', { path: '/:provider-prefix_id' });
+        this.route('show', { path: '/:prefix_id' }, function() {
+          this.route('delete');
+        });
         this.route('new');
       });
       this.route('clients');
@@ -34,7 +36,7 @@ Router.map(function() {
       });
       this.route('transfer');
       this.route('prefixes', function() {
-        this.route('show', { path: '/:client-prefix_id' });
+        this.route('show', { path: '/:prefix_id' });
         this.route('new');
       });
     });

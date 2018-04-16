@@ -7,8 +7,7 @@ import ENV from 'bracco/config/environment';
 const metadata = BaseValidator.extend({
   currentUser: service(),
 
-  validate(value, options, model) {
-    console.log(value)
+  validate(value, options) {
     if (!value && options.allowBlank) {
       return true;
     } else {

@@ -7,7 +7,7 @@
       <div class="panel panel-transparent">
         <div class="panel-body">
           {{#if (and (can "update prefix" model) (not-eq client-prefix.prefix.id "10.5072"))}}
-            <h3 class="work">{{#link-to "client-prefixes.show" client-prefix.id}}{{client-prefix.prefix.id}}{{/link-to}}</h3>
+            <h3 class="work">{{#link-to "clients.show.prefixes.show" model.otherParams.client-id client-prefix.prefix.id}}{{client-prefix.prefix.id}}{{/link-to}}</h3>
           {{else}}
             <h3 class="member">{{client-prefix.prefix.id}}</h3>
           {{/if}}
@@ -39,7 +39,7 @@
       <div class="panel-body">
         <div class="btn-toolbar">
           <div class="btn-group btn-group-sm">
-            {{#link-to "client-prefixes.new" (query-params client-id=model.otherParams.client-id) class="btn btn-warning" id="assign-prefix"}}{{fa-icon "link"}}Assign Prefix{{/link-to}}
+            {{#link-to "clients.show.prefixes.new" client-id=model.otherParams.client-id class="btn btn-warning" id="assign-prefix"}}{{fa-icon "link"}}Assign Prefix{{/link-to}}
           </div>
         </div>
       </div>
