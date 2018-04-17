@@ -4,7 +4,7 @@ import { CanMixin } from 'ember-can';
 
 export default Ember.Route.extend(CanMixin, RouteMixin, {
 
-  model(params) {
+  model() {
     return Ember.RSVP.hash({
       client: this.store.findRecord('client', this.modelFor('clients/show').get('id')),
       prefix: this.store.createRecord('client-prefix', { client: this.modelFor('clients/show').get('id') })
