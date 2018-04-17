@@ -24,6 +24,8 @@
 
           {{doi-state model=model form=form}} 
 
+          {{model-validation-errors model=model form=form}}
+
           <div class="pseudo-footer">
             <div class="btn-toolbar pull-right">
               <button {{action "cancel"}} class="btn btn-sm">Cancel</button>

@@ -20,7 +20,9 @@
           
           {{form.element controlType="textarea" label="Description" placeholder="Description" property="description" rows=8 helpText="All additional information that does not fit in any of the other categories." required=false}}            
 
-          {{doi-state model=model.doi form=form}} 
+          {{doi-state model=model.doi form=form}}
+
+          {{model-validation-errors model=model.doi form=form}}
 
           <div class="pseudo-footer">
             <div class="btn-toolbar pull-right">

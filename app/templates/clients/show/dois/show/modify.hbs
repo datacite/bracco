@@ -8,7 +8,6 @@
       <div class="panel-body">
         {{#bs-form formLayout="vertical" model=model onSubmit=(action "submit" model) as |form|}}
           {{form.element controlType="text" label="DOI" placeholder="DOI" property="doi" helpText="The globally unique string that identifies the resource. Can't be modified." disabled=true}}
-          {{form.element controlType="hidden" property="confirmDOI" value=model.doi required=false}}
           {{form.element controlType="text" label="URL" placeholder="URL" property="url" helpText="The location of the landing page with more information about the resource." required=false}}
 
           {{form.element controlType="hidden" property="creator" value=null}}
@@ -22,6 +21,8 @@
 
           {{doi-upload model=model form=form}}
           {{doi-state model=model form=form}}
+
+          {{model-validation-errors model=model form=form}}
 
           <div class="pseudo-footer">
             <div class="btn-toolbar pull-right">
