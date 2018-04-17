@@ -6,8 +6,8 @@ export default Ember.Route.extend(CanMixin, RouteMixin, {
 
   model(params) {
     return Ember.RSVP.hash({
-      client: this.store.findRecord('client', params.client_id),
-      prefix: this.store.createRecord('client-prefix', { client: params.client_id })
+      client: this.store.findRecord('client', this.modelFor('clients/show').get('id')),
+      prefix: this.store.createRecord('client-prefix', { client: this.modelFor('clients/show').get('id') })
     });
   }
 });
