@@ -7,7 +7,7 @@ export default Ember.Route.extend(CanMixin, RouteMixin, {
   store: service(),
 
   model() {
-    let doi = this.get('store').createRecord('doi', { client: this.modelFor('clients/show').get('id'), prefix: '10.5072', state: 'draft' });
+    let doi = this.get('store').createRecord('doi', { client: this.modelFor('clients/show').get('id'), mode: 'upload', state: 'draft' });
 
     return Ember.RSVP.hash({
       client: this.modelFor('clients/show'),

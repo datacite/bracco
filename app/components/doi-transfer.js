@@ -13,8 +13,7 @@ export default Component.extend({
   didReceiveAttrs() {
     this._super(...arguments);
 
-    this.get('model').set('confirmDoi', this.get('model').get('doi'));
-    this.get('model').set('isTransfer', true);
+    this.get('model').set('mode', 'transfer');
 
     this.searchClient(null);
   },

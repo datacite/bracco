@@ -5,39 +5,45 @@ import { validator, buildValidations } from 'ember-cp-validations';
 const Validations = buildValidations({
   details: [
     validator('belongs-to', {
-      disabled: Ember.computed('model.useForm', 'model.state', 'model.prefix', function() {
-        return !this.get('model.useForm') || (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
+      disabled: Ember.computed('model.mode', 'model.state', 'model.prefix', function() {
+        return !["new", "edit"].includes(this.get('model').get('mode')) || (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
       })
     })
   ],
   confirmDoi: [
     validator('presence', {
       presence: true,
-      disabled: Ember.computed('model', function() {
-        return this.get('model').get('dirtyType') === 'created';
+      disabled: Ember.computed('model.mode', function() {
+        return this.get('model').get('mode') !== 'delete';
       })
     }),
     validator('confirmation', {
       on: 'doi',
       message: 'DOI does not match',
-      disabled: Ember.computed('model', function() {
-        return this.get('model').get('dirtyType') === 'created';
+      disabled: Ember.computed('model.mode', function() {
+        return this.get('model').get('mode') !== 'delete';
       })
     })
   ],
   suffix: [
     validator('presence', {
       presence: true,
-      message: 'The DOI suffix can\'t be blank.'
+      message: 'The DOI suffix can\'t be blank.',
+      disabled: Ember.computed('model.mode', function() {
+        return !["new", "upload"].includes(this.get('model').get('mode'));
+      })
     }),
     validator('format', {
       regex: /^[-._;()/:A-Za-z0-9]+$/,
-      message: 'The DOI suffix contains invalid characters.'
+      message: 'The DOI suffix contains invalid characters.',
+      disabled: Ember.computed('model.mode', function() {
+        return !["new", "upload"].includes(this.get('model').get('mode'));
+      })
     }),
     validator('unique-doi', {
       dependentKeys: ['model.prefix'],
-      disabled: Ember.computed('model', function() {
-        return !this.get('model').get('isNew');
+      disabled: Ember.computed('model.mode', function() {
+        return !["new", "upload"].includes(this.get('model').get('mode'));
       })
     })
   ],
@@ -64,32 +70,32 @@ const Validations = buildValidations({
   creator: [
     validator('presence', {
       presence: true,
-      disabled: Ember.computed('model.useForm', 'model.state', 'model.prefix', function() {
-        return !this.get('model.useForm') || this.get('model.isTransfer') || (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
+      disabled: Ember.computed('model.mode', 'model.state', 'model.prefix', function() {
+        return !["new", "edit"].includes(this.get('model').get('mode')) || (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
       })
     })
   ],
   title: [
     validator('presence', {
       presence: true,
-      disabled: Ember.computed('model.useForm', 'model.state', 'model.prefix', function() {
-        return !this.get('model.useForm') || this.get('model.isTransfer') || (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
+      disabled: Ember.computed('model.mode', 'model.state', 'model.prefix', function() {
+        return !["new", "edit"].includes(this.get('model').get('mode')) || (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
       })
     })
   ],
   publisher: [
     validator('presence', {
       presence: true,
-      disabled: Ember.computed('model.useForm', 'model.state', 'model.prefix', function() {
-        return !this.get('model.useForm') || this.get('model.isTransfer') || (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
+      disabled: Ember.computed('model.mode', 'model.state', 'model.prefix', function() {
+        return !["new", "edit"].includes(this.get('model').get('mode')) || (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
       })
     })
   ],
   published: [
     validator('presence', {
       presence: true,
-      disabled: Ember.computed('model.useForm', 'model.state', 'model.prefix', function() {
-        return !this.get('model.useForm') || this.get('model.isTransfer') || (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
+      disabled: Ember.computed('model.mode', 'model.state', 'model.prefix', function() {
+        return !["new", "edit"].includes(this.get('model').get('mode')) || (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
       })
     })
   ],
@@ -97,15 +103,15 @@ const Validations = buildValidations({
     validator('presence', {
       presence: true,
       message: 'Please include valid metadata.',
-      disabled: Ember.computed('model.useForm', 'model.isTransfer', 'model.state', 'model.prefix', function() {
-        return this.get('model.useForm') || this.get('model.isTransfer') || (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
+      disabled: Ember.computed('model.mode', 'model.state', 'model.prefix', function() {
+        return !["upload", "modify"].includes(this.get('model').get('mode')) || (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
       }),
     }),
     validator('metadata', {
       allowBlank: true,
       dependentKeys: ['model.doi'],
-      disabled: Ember.computed('model.useForm', 'model.isTransfer', function() {
-        return this.get('model.useForm') || this.get('model.isTransfer');
+      disabled: Ember.computed('model.mode', function() {
+        return !["upload", "modify"].includes(this.get('model').get('mode'))
       })
     })
   ]
@@ -146,8 +152,7 @@ export default DS.Model.extend(Validations, {
   registered: DS.attr('date'),
   updated: DS.attr('date'),
 
-  useForm: DS.attr('boolean', { defaultValue: false }),
-  isTransfer: DS.attr('boolean', { defaultValue: false }),
+  mode: DS.attr('string'),
 
   isDraft: Ember.computed('state', function() {
     return this.get('state') === 'draft';
