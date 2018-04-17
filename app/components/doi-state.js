@@ -33,6 +33,8 @@ export default Component.extend({
     // test prefix uses only draft state
     if (this.get('model').get('prefix') === '10.5072') {
       states = ['draft'];
+      this.set('registered', true);
+      this.set('findable', true);
     } else {
       states = stateList[state];
     }

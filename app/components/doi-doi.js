@@ -22,6 +22,8 @@ export default Component.extend({
   stateList,
   state: null,
 
+  prefixes: null,
+
   didReceiveAttrs() {
     this._super(...arguments);
 
@@ -76,6 +78,8 @@ export default Component.extend({
     // test prefix uses only draft state
     if (this.get('model').get('prefix') === '10.5072') {
       states = ['draft'];
+      this.set('registered', true);
+      this.set('findable', true);
     } else {
       states = stateList[state];
     }
@@ -88,7 +92,7 @@ export default Component.extend({
     selectPrefix(prefix) {
       this.get('model').set('prefix', prefix.id);
       this.get('model').set('doi', prefix.id + '/' + this.get('model').get('suffix'));
-      
+
       this.selectState(this.get('model').get('state'));
     },
     selectSuffix(suffix) {
