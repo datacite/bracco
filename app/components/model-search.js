@@ -54,7 +54,7 @@ export default Ember.Component.extend(RouteMixin, {
     this.set('modelName', placeholders[this.get('model').get("modelName")]);
 
     if (this.get('model').get("modelName") === "doi") {
-      this.set('formats', { '-created': 'Sort by Date Registered', 'name': 'Sort by Name' });
+      this.set('formats', { '-created': 'Sort by Date Registered', 'name': 'Sort by DOI Name' });
       this.set('helpText', 'Search for (exact) DOI.');
     } else if (['prefix', 'provider-prefix', 'client-prefix'].includes(this.get('model').get("modelName"))) {
       this.set('formats', { '-created': 'Sort by Date Created', 'name': 'Sort by Name' });
