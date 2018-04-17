@@ -40,8 +40,7 @@ const metadata = BaseValidator.extend({
         if (response.ok) {
           return response.json().then(function(data) {
             if (data.errors) {
-              let title = data.errors[0].title;
-              let message = title.slice(title.indexOf(' '), title.length);
+              let message = data.errors[0].title;
               return message;
             } else {
               return true;
