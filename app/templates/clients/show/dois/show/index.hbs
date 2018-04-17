@@ -29,6 +29,6 @@
   {{doi-url model=model}}
   {{doi-metadata model=model}}
 
-  {{#if (not model.isDraft)}}
+  {{#if model.xml}}
     {{doi-citation model=model}}
   {{/if}}
