@@ -4,9 +4,23 @@ const { service } = Ember.inject;
 import ENV from 'bracco/config/environment';
 import fetch from 'fetch';
 
+const stateList = {
+  undetermined: ['undetermined', 'registered', 'findable'],
+  draft: ['draft', 'registered', 'findable'],
+  registered: ['registered', 'findable'],
+  findable: ['registered', 'findable']
+}
+
 export default Component.extend({
   currentUser: service(),
   store: service(),
+
+  draft: true,
+  registered: true,
+  findable: true,
+
+  stateList,
+  state: null,
 
   didReceiveAttrs() {
     this._super(...arguments);
@@ -25,6 +39,7 @@ export default Component.extend({
 
       self.get('model').set('prefix', prefix);
       self.generate();
+      self.selectState(self.get('model').get('state'));
     });
   },
   generate() {
@@ -51,11 +66,30 @@ export default Component.extend({
       Ember.Logger.assert(false, error)
     });
   },
+  selectState(state) {
+    this.set('state', state);
+    this.get('model').set('state', state);
+    this.setStates(state)
+  },
+  setStates(state) {
+    let states = [];
+    // test prefix uses only draft state
+    if (this.get('model').get('prefix') === '10.5072') {
+      states = ['draft'];
+    } else {
+      states = stateList[state];
+    }
+    states.forEach((item) => {
+      this.set(item, false);
+    });
+  },
 
   actions: {
     selectPrefix(prefix) {
       this.get('model').set('prefix', prefix.id);
       this.get('model').set('doi', prefix.id + '/' + this.get('model').get('suffix'));
+      
+      this.selectState(this.get('model').get('state'));
     },
     selectSuffix(suffix) {
       this.get('model').set('suffix', suffix);
@@ -70,6 +104,9 @@ export default Component.extend({
     clear() {
       this.get('model').set('suffix', null)
       this.$('input[type=text]:first').focus();
+    },
+    selectState(state) {
+      this.selectState(state);
     }
   }
 });

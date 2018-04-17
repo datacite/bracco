@@ -10,3 +10,24 @@
   <span class="input-group-addon refresh" title="Refresh" aria-label="Refresh" {{action 'refresh'}}>{{fa-icon "refresh"}}</span>
   <span class="input-group-addon clear" title="Clear" aria-label="Clear" {{action 'clear'}}>{{fa-icon "times-circle"}}</span>
 </div>
+
+<div class="form-group">
+  <label class="control-label">State</label>
+  <div class="help-block">
+    The state determines whether a DOI is registered with the DOI Resolver and indexed in DataCite Search.
+    The default state after completing DOI&nbsp;registration should be Findable. Once in Registered or Findable state,
+    a DOI can no longer be set to Draft state. 
+  </div>
+  <div>{{radio-button value="draft" groupValue=state changed="selectState" disabled=draft}}Draft</div>
+  <div class="help-block">
+    The DOI is only visible in DOI Fabrica, and can be deleted.
+  </div>
+  <div>{{radio-button value="registered" groupValue=state changed="selectState" disabled=registered}}Registered</div>
+  <div class="help-block">
+    The DOI is registered with the DOI Resolver.
+  </div>
+  <div>{{radio-button value="findable" groupValue=state changed="selectState" disabled=findable}}Findable</div>
+  <div class="help-block">
+    The DOI is registered with the DOI Resolver and indexed in DataCite Search.
+  </div>
+</div>
