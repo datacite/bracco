@@ -4,7 +4,7 @@ import { CanMixin } from 'ember-can';
 
 export default Ember.Route.extend(CanMixin, RouteMixin, {
 
-  model(params) {
+  model() {
     let client = this.modelFor('clients/show');
     let doi = this.store.createRecord('doi', { client: client, mode: 'upload', state: 'draft' });
 
