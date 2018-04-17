@@ -92,7 +92,10 @@ export default Component.extend({
     selectPrefix(prefix) {
       this.get('model').set('prefix', prefix.id);
       this.get('model').set('doi', prefix.id + '/' + this.get('model').get('suffix'));
-
+      
+      if (prefix.id === '10.5072') {
+        this.get('model').set('state', 'draft');
+      }
       this.selectState(this.get('model').get('state'));
     },
     selectSuffix(suffix) {
