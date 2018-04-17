@@ -1,16 +1,15 @@
 import Ember from 'ember';
-const { service } = Ember.inject;
 import RouteMixin from 'ember-cli-pagination/remote/route-mixin';
 import { CanMixin } from 'ember-can';
 
 export default Ember.Route.extend(CanMixin, RouteMixin, {
-  store: service(),
 
-  model() {
-    let doi = this.get('store').createRecord('doi', { client: this.modelFor('clients/show').get('id'), mode: 'upload', state: 'draft' });
+  model(params) {
+    let client = this.modelFor('clients/show');
+    let doi = this.store.createRecord('doi', { client: client, mode: 'upload', state: 'draft' });
 
     return Ember.RSVP.hash({
-      client: this.modelFor('clients/show'),
+      client: client,
       doi: doi
     });
   },
