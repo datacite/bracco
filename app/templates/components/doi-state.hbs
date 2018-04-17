@@ -1,5 +1,22 @@
-{{#form.element controlType="power-select" label="State" property="state" options=states destination=state helpText='The state determines whether the above information is only visible from within the account (draft), the DOI has been made public via the Handle System (registered), or in addition this information is also included in DataCite Search (findable).' as |el|}}
-  {{#el.control onChange=(action "selectState") optionLabelPath="name" placeholder="Select State" as |item|}}
-    {{titleize item}}
-  {{/el.control}}
-{{/form.element}}
+<div class="form-group">
+  <label class="control-label">State</label>
+  <div class="help-block">
+    The state determines whether a DOI is registered with the DOI Resolver and indexed in DataCite Search.
+    The default state after completing DOI&nbsp;registration should be Findable. Once in Registered or Findable state,
+    a DOI can no longer be set to Draft state. DOIs with test prefix 10.5072 will always be in Draft state. 
+  </div>
+  <div>{{radio-button value="draft" groupValue=state changed="selectState" disabled=draft}}Draft</div>
+  <div class="help-block">
+    The DOI is only visible in DOI Fabrica, and can be deleted.
+  </div>
+  <div>{{radio-button value="registered" groupValue=state changed="selectState" disabled=registered}}Registered</div>
+  <div class="help-block">
+    The DOI is registered with the DOI Resolver.
+  </div>
+  <div>{{radio-button value="findable" groupValue=state changed="selectState" disabled=findable}}Findable</div>
+  <div class="help-block">
+    The DOI is registered with the DOI Resolver and indexed in DataCite Search.
+  </div>
+</div>
+
+

@@ -7,10 +7,11 @@
         {{#bs-form formLayout="vertical" model=model.doi onSubmit=(action "submit" model.doi) as |form|}}
           {{doi-doi model=model.doi client=model.client form=form}}
 
+          {{doi-state model=model.doi form=form}}
+
           {{form.element controlType="text" label="URL" placeholder="URL" property="url" helpText="The location of the landing page with more information about the resource." required=false}}
 
           {{doi-upload model=model.doi form=form}}
-          {{doi-state model=model.doi form=form}}
 
           {{model-validation-errors model=model.doi form=form}}
 

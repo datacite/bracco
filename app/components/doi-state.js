@@ -10,29 +10,40 @@ const stateList = {
 export default Component.extend({
   classNames: ['form-group'],
 
+  draft: true,
+  registered: true,
+  findable: true,
+
   stateList,
-  states: [],
   state: null,
 
   didReceiveAttrs() {
     this._super(...arguments);
 
-    this.setStates(this.get('model').get('state'));
+    this.selectState(this.get('model').get('state'));
   },
 
+  selectState(state) {
+    this.set('state', state);
+    this.get('model').set('state', state);
+    this.setStates(state)
+  },
   setStates(state) {
+    let states = [];
     // test prefix uses only draft state
     if (this.get('model').get('prefix') === '10.5072') {
-      this.set('states', ['draft']);
-      this.get('model').set('state', 'draft');
+      states = ['draft'];
     } else {
-      this.set('states', stateList[state]);
+      states = stateList[state];
     }
+    states.forEach((item) => {
+      this.set(item, false);
+    });
   },
 
   actions: {
     selectState(state) {
-      this.get('model').set('state', state);
+      this.selectState(state);
     }
   }
 });
