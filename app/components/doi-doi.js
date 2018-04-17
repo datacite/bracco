@@ -12,6 +12,7 @@ export default Component.extend({
     this._super(...arguments);
 
     this.set('prefixes', this.get('store').query('prefix', { 'client-id': this.get('client').get('id'), sort: 'name', 'page[size]': 25 }));
+    this.get('model').set('prefix', '10.5072');
     this.generate();
   },
 
@@ -29,7 +30,6 @@ export default Component.extend({
           self.get('model').set('suffix', suffix);
           let doi = self.get('model').get('prefix') + '/' + suffix;
           self.get('model').set('doi', doi);
-          self.get('model').set('confirmDoi', doi);
           return suffix;
         });
       } else {

@@ -138,9 +138,6 @@ export default Ember.Component.extend({
     selectState(state) {
       this.get('doi').set('state', state);
     },
-    selectForm(form) {
-      this.get('doi').set('useForm', form === 'form');
-    },
     didSelectFiles(files, resetInput) {
       var reader = new FileReader();
       let self = this;

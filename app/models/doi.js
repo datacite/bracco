@@ -30,14 +30,16 @@ const Validations = buildValidations({
       presence: true,
       message: 'The DOI suffix can\'t be blank.',
       disabled: Ember.computed('model.mode', function() {
-        return !["new", "upload"].includes(this.get('model').get('mode'));
+        return true;
+        // return !["new", "upload"].includes(this.get('model').get('mode'));
       })
     }),
     validator('format', {
       regex: /^[-._;()/:A-Za-z0-9]+$/,
       message: 'The DOI suffix contains invalid characters.',
       disabled: Ember.computed('model.mode', function() {
-        return !["new", "upload"].includes(this.get('model').get('mode'));
+        return true;
+        //return !["new", "upload"].includes(this.get('model').get('mode'));
       })
     }),
     validator('unique-doi', {
