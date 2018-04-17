@@ -44,6 +44,9 @@ export default Component.extend({
   actions: {
     selectState(state) {
       this.selectState(state);
+    },
+    setStates(state) {
+      this.setStates(state);
     }
   }
 });

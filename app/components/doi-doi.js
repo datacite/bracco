@@ -11,11 +11,22 @@ export default Component.extend({
   didReceiveAttrs() {
     this._super(...arguments);
 
-    this.set('prefixes', this.get('store').query('prefix', { 'client-id': this.get('client').get('id'), sort: 'name', 'page[size]': 25 }));
-    this.get('model').set('prefix', '10.5072');
-    this.generate();
+    this.setDefaultPrefix();
   },
 
+  setDefaultPrefix() {
+    let self = this;
+    let prefixes = this.get('store').query('prefix', { 'client-id': this.get('client').get('id'), sort: 'name', 'page[size]': 25 }).then(function(prefixes) {
+      self.set('prefixes', prefixes);
+
+      // use first prefix that is not 10.5072 if it exists
+      prefixes = prefixes.mapBy('id').removeObject('10.5072')
+      let prefix = prefixes.length > 0 ? prefixes.get('firstObject') : '10.5072';
+
+      self.get('model').set('prefix', prefix);
+      self.generate();
+    });
+  },
   generate() {
     let self = this;
     let url = ENV.APP_URL + '/dois/random?prefix=' + this.get('model').get('prefix');
