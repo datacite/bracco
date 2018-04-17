@@ -65,7 +65,7 @@ const Validations = buildValidations({
     validator('presence', {
       presence: true,
       disabled: Ember.computed('model.useForm', 'model.state', 'model.prefix', function() {
-        return !this.get('model.useForm') || (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
+        return !this.get('model.useForm') || this.get('model.isTransfer') || (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
       })
     })
   ],
@@ -73,7 +73,7 @@ const Validations = buildValidations({
     validator('presence', {
       presence: true,
       disabled: Ember.computed('model.useForm', 'model.state', 'model.prefix', function() {
-        return !this.get('model.useForm') || (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
+        return !this.get('model.useForm') || this.get('model.isTransfer') || (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
       })
     })
   ],
@@ -81,7 +81,7 @@ const Validations = buildValidations({
     validator('presence', {
       presence: true,
       disabled: Ember.computed('model.useForm', 'model.state', 'model.prefix', function() {
-        return !this.get('model.useForm') || (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
+        return !this.get('model.useForm') || this.get('model.isTransfer') || (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
       })
     })
   ],
@@ -89,7 +89,7 @@ const Validations = buildValidations({
     validator('presence', {
       presence: true,
       disabled: Ember.computed('model.useForm', 'model.state', 'model.prefix', function() {
-        return !this.get('model.useForm') || (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
+        return !this.get('model.useForm') || this.get('model.isTransfer') || (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
       })
     })
   ],
@@ -97,15 +97,15 @@ const Validations = buildValidations({
     validator('presence', {
       presence: true,
       message: 'Please include valid metadata.',
-      disabled: Ember.computed('model.useForm', 'model.state', 'model.prefix', function() {
-        return this.get('model.useForm') || (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
+      disabled: Ember.computed('model.useForm', 'model.isTransfer', 'model.state', 'model.prefix', function() {
+        return this.get('model.useForm') || this.get('model.isTransfer') || (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
       }),
     }),
     validator('metadata', {
       allowBlank: true,
       dependentKeys: ['model.doi'],
-      disabled: Ember.computed('model.useForm', function() {
-        return this.get('model.useForm');
+      disabled: Ember.computed('model.useForm', 'model.isTransfer', function() {
+        return this.get('model.useForm') || this.get('model.isTransfer');
       })
     })
   ]
@@ -147,6 +147,7 @@ export default DS.Model.extend(Validations, {
   updated: DS.attr('date'),
 
   useForm: DS.attr('boolean', { defaultValue: false }),
+  isTransfer: DS.attr('boolean', { defaultValue: false }),
 
   isDraft: Ember.computed('state', function() {
     return this.get('state') === 'draft';
