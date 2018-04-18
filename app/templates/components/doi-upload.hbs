@@ -1,4 +1,4 @@
-{{#form.element label="Metadata" controlType="textarea" placeholder="Metadata" property="xml" rows=15 showValidationOn="focusOut" helpText='Metadata that describe the resource. You can also upload a file with metadata in DataCite XML format, or one of the other supported formats. DOI in metadata will be replaced with DOI in DOI field if different.' required=false as |el|}}
+{{#form.element label="Metadata" controlType="textarea" placeholder="Metadata" property="xml" rows=15 showValidationOn="focusOut" helpText='Metadata that describe the resource. You can also upload a file with metadata in DataCite XML format, or one of the other supported formats. The DOI in the metadata will be replaced with the DOI in the DOI field if different.' required=false as |el|}}
   {{el.control class="form-control metadata"}}
 {{/form.element}}
 
