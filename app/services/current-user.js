@@ -36,9 +36,9 @@ export default Ember.Service.extend({
           self.set('jwt', jwt);
           self.initUser(payload);
         } else if (error.message !== "jwt must be provided") {
-          self.get('flashMessages').danger('Unable to authenticate because the token was wrong or has expired.');
-          self.set('router', Ember.getOwner(self).lookup('router:main'));
-          self.get('router').transitionTo('/');
+          self.get('session').invalidate().then(function () {
+            self.get('flashMessages').danger('Unable to authenticate because the token was wrong or has expired.');
+          });
         }
       });
     }
