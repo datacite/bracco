@@ -2,7 +2,10 @@
   <div class='col-md-9'>
     <div class="panel panel-transparent">
       <div class="panel-body">
-        <h3 class="edit">Add DOI (File Upload)</h3>
+        <h3 class="help-header">Add DOI (File Upload)</h3>
+        <div class="help-block">
+          More information about DOI registration via file upload can be found on our <a target="_blank" href="https://support.datacite.org/docs/datacite-doi-fabrica-for-clients#section-registering-dois">Support Website</a>.
+        </div>
 
         {{#bs-form formLayout="vertical" model=model.doi onSubmit=(action "submit" model.doi) as |form|}}
           {{doi-doi model=model.doi client=model.client form=form}}
