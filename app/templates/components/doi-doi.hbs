@@ -6,7 +6,7 @@
       {{/el.control}}
     {{/form.element}}
   </span>
-  {{form.element controlType="text" label="DOI" placeholder="DOI Suffix" property="suffix" onChange=(action "selectSuffix") helpText="A globally unique string that identifies a resource. DOIs with test prefix 10.5072 will always remain in Draft state." required=false}}
+  {{form.element controlType="text" label="DOI" placeholder="DOI Suffix" property="suffix" onChange=(action "selectSuffix") helpText="A globally unique string that identifies a resource. DOIs with demo prefix 10.5072 will always remain in Draft state." required=false}}
   <span class="input-group-addon refresh" title="Refresh" aria-label="Refresh" {{action 'refresh'}}>{{fa-icon "refresh"}}</span>
   <span class="input-group-addon clear" title="Clear" aria-label="Clear" {{action 'clear'}}>{{fa-icon "times-circle"}}</span>
 </div>

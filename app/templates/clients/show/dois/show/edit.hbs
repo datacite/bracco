@@ -10,7 +10,7 @@
     <div class="panel panel-transparent">
       <div class="panel-body">
         {{#bs-form formLayout="vertical" model=model onSubmit=(action "submit" model) as |form|}}
-          {{form.element controlType="text" label="DOI" placeholder="DOI" property="doi" helpText="The globally unique string that identifies the resource. DOIs with test prefix 10.5072 will always remain in Draft state. Can't be modified." disabled=true}}
+          {{form.element controlType="text" label="DOI" placeholder="DOI" property="doi" helpText="The globally unique string that identifies the resource. DOIs with demo prefix 10.5072 will always remain in Draft state. Can't be modified." disabled=true}}
 
           {{doi-state model=model form=form}} 
 
