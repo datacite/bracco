@@ -10,7 +10,6 @@ export default Ember.Component.extend({
   type: 'transparent',
   title: null,
   home: '/',
-  sandbox: null,
   user: true,
   data: {},
 
@@ -49,13 +48,6 @@ export default Ember.Component.extend({
     } else {
       this.set('home', null);
     }
-
-    // let sandbox = this.get('currentUser').get('sandbox');
-    // if (Ember.typeOf(sandbox) == 'object') {
-    //   this.set('sandbox', { route: sandbox.route, model: sandbox.id });
-    // } else if (sandbox) {
-    //   this.set('sandbox', { href: sandbox });
-    // }
 
     let url = ENV.CDN_URL + "/data/links.json";
     let self = this;
