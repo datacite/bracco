@@ -1,7 +1,7 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('multi-input-form', 'Integration | Component | multi input form', {
+moduleForComponent('doi-author', 'Integration | Component | doi author', {
   integration: true
 });
 
@@ -9,15 +9,15 @@ test('it renders', function(assert) {
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });
 
-  this.render(hbs`{{multi-input-form}}`);
+  this.render(hbs`{{doi-author}}`);
 
   assert.equal(this.$().text().trim(), '');
 
   // Template block usage:
   this.render(hbs`
-    {{#multi-input-form}}
+    {{#doi-author}}
       template block text
-    {{/multi-input-form}}
+    {{/doi-author}}
   `);
 
   assert.equal(this.$().text().trim(), 'template block text');

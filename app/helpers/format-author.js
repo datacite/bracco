@@ -1,8 +1,7 @@
 import Ember from 'ember';
 
 export function formatAuthor([authors]) {
-  // turn single author object into an array
-  if (!Array.isArray(authors)) { authors = [authors]; }
+  authors = JSON.parse(authors);
 
   let authorList = authors.map(function(a) {
     let name = (a['family-name']) ? [a['given-name'], a['family-name']].join(" ") : a.name;

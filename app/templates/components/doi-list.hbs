@@ -9,8 +9,8 @@
             {{#link-to "clients.show.dois.show" doi.client.id doi.id}}{{if doi.title doi.title doi.doi}}{{/link-to}}
             <span class="small">{{doi.resource-type.title}}</span>
           </h3>
-          {{#if doi.creator}}
-            {{{format-author doi.creator}}}
+          {{#if doi.author}}
+            {{{format-author doi.author}}}
           {{/if}}
           {{#if doi.published}}
             <div class="metadata">

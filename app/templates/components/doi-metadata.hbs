@@ -1,4 +1,4 @@
-{{#if model.published}}
+{{#if model.xml}}
   <div class="row">
     <div class="col-md-9">
       <div id="metadata" class="input-group pull-right">
@@ -31,7 +31,7 @@
               {{/if}}
               <span class="small">{{model.resource-type.title}}</span>
             </h3>
-            {{{format-author model.creator}}}
+            {{{format-author model.author}}}
             <div class="metadata">
               {{format-metadata model.published resourceType=model.resource-type resourceTypeSubtype=model.resourceTypeSubtype publisher=model.publisher version=model.version}}
             </div>

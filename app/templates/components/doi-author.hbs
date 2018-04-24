@@ -1,8 +1,13 @@
 <label class="control-label">Creator</label>
-<span class="help-block">The main researchers involved in producing the data, or the authors of the publication, in priority order.</span>
-{{#each model.creator as |item index|}}
+<div class="help-block">
+  The main researchers involved in producing the data, or the authors of the publication, in priority order.<br/>
+  The personal name format should be: "family, given", e.g. "Smith, John".
+</div>
+
+{{#each authors as |item index|}}
   <div class="compound-form input-group">
-    {{input type="text" keyPress="update" class="form-control" name="item" placeholder="Creator" value=(if item item.name)}}
+    {{input type="text" focus-out=(action "update") class="form-control" placeholder="Creator" value=item.name}}
+
     <span class="input-group-btn">
       <button {{action "delete" item}} class="btn btn-warning btn-fill">{{fa-icon "trash"}}</button>
     </span>

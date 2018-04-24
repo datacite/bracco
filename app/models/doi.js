@@ -69,14 +69,6 @@ const Validations = buildValidations({
       })
     })
   ],
-  creator: [
-    validator('presence', {
-      presence: true,
-      disabled: Ember.computed('model.mode', 'model.state', 'model.prefix', function() {
-        return !["new", "edit"].includes(this.get('model').get('mode')) || (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
-      })
-    })
-  ],
   title: [
     validator('presence', {
       presence: true,
@@ -137,7 +129,7 @@ export default DS.Model.extend(Validations, {
   suffix: DS.attr('string'),
   url: DS.attr('string'),
   media: DS.attr(),
-  creator: DS.attr(),
+  author: DS.attr('author', { defaultValue: null }),
   title: DS.attr('wrapped'),
   publisher: DS.attr('string'),
   published: DS.attr('string'),

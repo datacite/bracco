@@ -10,9 +10,11 @@ export default Component.extend({
   didReceiveAttrs() {
     this._super(...arguments);
 
-    var timestamp = new Date(Date.parse(this.get('model').get('published')));
-    let published = moment(timestamp).utc().format('Y');
-    this.get('model').set('published', published);
+    if (this.get('model').get('published')) {
+      var timestamp = new Date(Date.parse(this.get('model').get('published')));
+      let published = moment(timestamp).utc().format('Y');
+      this.get('model').set('published', published);
+    }
     this.set('years', yearList);
   },
 
