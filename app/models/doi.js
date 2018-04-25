@@ -58,7 +58,7 @@ const Validations = buildValidations({
     validator('presence', {
       presence: true,
       message: 'Please enter a valid URL that the DOI should resolve to.',
-      disabled: Ember.computed('model.state', 'model.prefix', function() {
+      isWarning: Ember.computed('model.state', 'model.prefix', function() {
         return (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
       })
     }),
@@ -72,24 +72,33 @@ const Validations = buildValidations({
   title: [
     validator('presence', {
       presence: true,
-      disabled: Ember.computed('model.mode', 'model.state', 'model.prefix', function() {
-        return !["new", "edit"].includes(this.get('model').get('mode')) || (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
+      isWarning: Ember.computed('model.state', 'model.prefix', function() {
+        return (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
+      }),
+      disabled: Ember.computed('model.mode', function() {
+        return !["new", "edit"].includes(this.get('model').get('mode'));
       })
     })
   ],
   publisher: [
     validator('presence', {
       presence: true,
-      disabled: Ember.computed('model.mode', 'model.state', 'model.prefix', function() {
-        return !["new", "edit"].includes(this.get('model').get('mode')) || (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
+      isWarning: Ember.computed('model.state', 'model.prefix', function() {
+        return (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
+      }),
+      disabled: Ember.computed('model.mode', function() {
+        return !["new", "edit"].includes(this.get('model').get('mode'));
       })
     })
   ],
   published: [
     validator('presence', {
       presence: true,
-      disabled: Ember.computed('model.mode', 'model.state', 'model.prefix', function() {
-        return !["new", "edit"].includes(this.get('model').get('mode')) || (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
+      isWarning: Ember.computed('model.state', 'model.prefix', function() {
+        return (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
+      }),
+      disabled: Ember.computed('model.mode', function() {
+        return !["new", "edit"].includes(this.get('model').get('mode'));
       })
     })
   ],
