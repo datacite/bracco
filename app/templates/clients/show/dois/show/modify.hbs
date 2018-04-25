@@ -16,15 +16,6 @@
 
           {{form.element controlType="text" label="URL" placeholder="URL" property="url" helpText="The location of the landing page with more information about the resource." required=false}}
 
-          {{form.element controlType="hidden" property="author" value=null}}
-          {{form.element controlType="hidden" property="title" value=null}}
-          {{form.element controlType="hidden" property="publisher" value=null}}
-          {{form.element controlType="hidden" property="published" value=null}}
-          {{form.element controlType="hidden" property="resourceTypeId" value=null}}
-          {{form.element controlType="hidden" property="resourceTypeSubtype" value=null}}
-          {{form.element controlType="hidden" property="description" value=null}}
-          {{form.element controlType="hidden" property="license" value=null}}
-
           {{doi-upload model=model form=form}}
 
           {{model-validation-errors model=model form=form}}

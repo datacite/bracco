@@ -1,4 +1,4 @@
-{{#if model.xml}}
+{{#if (or model.published model.resource-type model.title model.publisher model.description)}}
   <div class="row">
     <div class="col-md-9">
       <div id="metadata" class="input-group pull-right">

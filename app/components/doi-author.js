@@ -28,10 +28,9 @@ export default Component.extend(Validations, {
   },
 
   createAuthors() {
-    let authors = []
-    if (this.get('model').get('author')) {
-      authors = JSON.parse(this.get('model').get('author'));
-    } else {
+    let authors = JSON.parse(this.get('model').get('author'));
+
+    if (!authors.length > 0) {
       authors = authors.pushObject([{ name: '' }]);
     }
 
