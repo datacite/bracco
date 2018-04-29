@@ -1,8 +1,8 @@
   {{#bs-form formLayout="vertical" model=this onSubmit=(action "submit") as |form|}}
     <p class="help-block">Please add the first and last DOI prefix from the new prefix range registered by CNRI.</p>
 
-    {{form.element controlType="text" label="From" onChange=(action "submitFirstPrefix") placeholder="First Prefix" property="firstPrefix" required=false}}
-    {{form.element controlType="text" label="To" onChange=(action "submitLastPrefix") placeholder="Last Prefix" property="lastPrefix" required=false}}
+    {{form.element controlType="text" label="From" onChange=(action "submitFirstPrefix") property="firstPrefix" required=false}}
+    {{form.element controlType="text" label="To" onChange=(action "submitLastPrefix") property="lastPrefix" required=false}}
 
     <div class="pseudo-footer">
       <div class="btn-toolbar pull-right">

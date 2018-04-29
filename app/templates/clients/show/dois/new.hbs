@@ -10,17 +10,17 @@
         {{#bs-form formLayout="vertical" model=model.doi onSubmit=(action "submit" model.doi) as |form|}}
           {{doi-doi model=model.doi client=model.client form=form}}
 
-          {{form.element controlType="text" label="URL" placeholder="URL" property="url" helpText="The location of the landing page with more information about the resource." required=false}}
+          {{form.element controlType="text" label="URL" property="url" helpText="The location of the landing page with more information about the resource." required=false}}
 
           {{doi-author model=model.doi form=form}}
           
-          {{form.element controlType="textarea" label="Title" placeholder="Title" property="title" rows=2 helpText="A name or title by which the resource is known." required=false}}
-          {{form.element controlType="text" label="Publisher" placeholder="Publisher" property="publisher" helpText="The name of the entity that holds, archives, publishes prints, distributes, releases, issues, or produces the resource." required=false}}
+          {{form.element controlType="textarea" label="Title" property="title" rows=2 helpText="A name or title by which the resource is known." required=false}}
+          {{form.element controlType="text" label="Publisher" property="publisher" helpText="The name of the entity that holds, archives, publishes prints, distributes, releases, issues, or produces the resource." required=false}}
 
           {{doi-published model=model.doi form=form}}
           {{doi-resource-type model=model.doi form=form}}
           
-          {{form.element controlType="textarea" label="Description" placeholder="Description" property="description" rows=8 helpText="All additional information that does not fit in any of the other categories." required=false}}            
+          {{form.element controlType="textarea" label="Description" property="description" rows=8 helpText="All additional information that does not fit in any of the other categories." required=false}}            
 
           {{model-validation-errors model=model.doi form=form}}
 

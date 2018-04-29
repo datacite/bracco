@@ -5,16 +5,16 @@
         <h3 class="edit">New Client</h3>
 
         {{#bs-form formLayout="vertical" model=client onSubmit=(action "submit" client model) submitOnEnter=true as |form|}}
-          {{form.element controlType="text" label="Client ID" placeholder="Client ID" property="symbol" helpText='The Client ID is a unique identifier for each client. The Client ID must start with the Provider ID, followed by a dot. It can then contain only upper case letters, numbers, and at most one hyphen.' useIcons=false required=false}}
+          {{form.element controlType="text" label="Client ID" property="symbol" helpText='The Client ID is a unique identifier for each client. The Client ID must start with the Provider ID, followed by a dot. It can then contain only upper case letters, numbers, and at most one hyphen.' useIcons=false required=false}}
           {{#form.element controlType="power-select" property="repository" label="re3data Record" optionLabelPath="name" options=repositories destination=repository helpText='re3data is a registry of research data repositories.' as |el|}}
             {{#el.control onChange=(action "selectRepository") search=(action "searchRepository") searchField="name" searchPlaceholder="Type to search..." allowClear=true as |item|}}
               {{item.name}}
             {{/el.control}}
           {{/form.element}}
-          {{form.element controlType="text" label="Client Name" placeholder="Client Name" property="name" useIcons=false required=false}}
-          {{form.element controlType="text" label="Contact Name" placeholder="Contact Name" property="contactName" helpText='Please enter the name of a person that can be contacted for technical or administrative issues.' required=false}}
-          {{form.element controlType="email" label="Contact Email" placeholder="Contact Email" property="contactEmail" useIcons=false required=false}}
-          {{form.element controlType="textarea" label="Domains" placeholder="Domains" property="domains" helpText='List of (sub-)domains used for DOI registration, or use * to allow all domains' useIcons=false required=false}}
+          {{form.element controlType="text" label="Client Name" property="name" useIcons=false required=false}}
+          {{form.element controlType="text" label="Contact Name" property="contactName" helpText='Please enter the name of a person that can be contacted for technical or administrative issues.' required=false}}
+          {{form.element controlType="email" label="Contact Email" property="contactEmail" useIcons=false required=false}}
+          {{form.element controlType="textarea" label="Domains" property="domains" helpText='List of (sub-)domains used for DOI registration, or use * to allow all domains' useIcons=false required=false}}
           {{form.element controlType="checkbox" label="Account is active" property="isActive" helpText='This account can register and update DOIs'}}
 
           <div class="pseudo-footer">

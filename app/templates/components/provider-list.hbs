@@ -5,13 +5,13 @@
         <h3 class="edit">New Provider</h3>
 
         {{#bs-form formLayout="vertical" model=provider onSubmit=(action "submit" provider model) submitOnEnter=true as |form|}}
-          {{form.element controlType="text" label="Provider ID" placeholder="Provider ID" property="symbol" helpText='The Provider ID can contain only upper case letters, and must not be longer than 8 characters' useIcons=false required=false}}
-          {{form.element controlType="text" label="Provider Name" placeholder="Provider Name" property="name" required=false}}
+          {{form.element controlType="text" label="Provider ID" property="symbol" helpText='The Provider ID can contain only upper case letters, and must not be longer than 8 characters' useIcons=false required=false}}
+          {{form.element controlType="text" label="Provider Name" property="name" required=false}}
 
-          {{form.element controlType="text" label="Website" placeholder="Website" property="website" helpText='Website of the provider.' required=false}}
-          {{form.element controlType="text" label="Contact Name" placeholder="Contact Name" property="contactName" helpText='Please enter the name of a person that can be contacted for technical or administrative issues.' required=false}}
-          {{form.element controlType="email" label="Contact Email" placeholder="Contact Email" property="contactEmail" helpText='Please enter an email address that can be contacted for technical or administrative issues.' required=false}}
-          {{form.element controlType="text" label="Contact Phone" placeholder="Contact Phone" property="phone" helpText='Please enter a phone number that can be contacted for technical or administrative issues.' required=false}}
+          {{form.element controlType="text" label="Website" property="website" helpText='Website of the provider.' required=false}}
+          {{form.element controlType="text" label="Contact Name" property="contactName" helpText='Please enter the name of a person that can be contacted for technical or administrative issues.' required=false}}
+          {{form.element controlType="email" label="Contact Email" property="contactEmail" helpText='Please enter an email address that can be contacted for technical or administrative issues.' required=false}}
+          {{form.element controlType="text" label="Contact Phone" property="phone" helpText='Please enter a phone number that can be contacted for technical or administrative issues.' required=false}}
 
           {{#form.element controlType="power-select" property="country" optionLabelPath="name" options=countries destination=country helpText='Country where the provider is located.' as |el|}}
             {{#el.control onChange=(action "selectCountry") search=(action "searchCountry") searchField="name" placeholder="Select Country" searchPlaceholder="Type to search..." allowClear=true as |item|}}
@@ -19,7 +19,7 @@
             {{/el.control}}
           {{/form.element}}
 
-          {{form.element controlType="textarea" label="Description" placeholder="Description" property="description" rows=10 helpText='Description of the provider. Please use markdown for formatting.' required=false}}
+          {{form.element controlType="textarea" label="Description" property="description" rows=10 helpText='Description of the provider. Please use markdown for formatting.' required=false}}
 
           {{form.element controlType="checkbox" label="Account is active" property="isActive" helpText='This account can manage clients and prefixes'}}
 

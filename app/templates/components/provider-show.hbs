@@ -6,13 +6,13 @@
           <h3 class="edit">Edit {{if (eq currentUser.uid model.id) 'Account' 'Provider'}}</h3>
 
           {{#bs-form formLayout="vertical" model=model onSubmit=(action "submit" model) as |form|}}
-            {{form.element controlType="text" label="Provider ID" placeholder="ID" property="symbol" disabled=true}}
-            {{form.element controlType="text" label="Provider Name" placeholder="Provider Name" property="name" required=false}}
+            {{form.element controlType="text" label="Provider ID" property="symbol" disabled=true}}
+            {{form.element controlType="text" label="Provider Name" property="name" required=false}}
 
-            {{form.element controlType="text" label="Website" placeholder="Website" property="website" helpText='Website of the provider.' required=false}}
-            {{form.element controlType="text" label="Contact Name" placeholder="Contact Name" property="contactName" helpText='Please enter the name of a person that can be contacted for technical or administrative issues.' required=false}}
-            {{form.element controlType="email" label="Contact Email" placeholder="Contact Email" property="contactEmail" helpText='Please enter an email address that can be contacted for technical or administrative issues.' required=false}}
-            {{form.element controlType="text" label="Contact Phone" placeholder="Contact Phone" property="phone" helpText='Please enter a phone number that can be contacted for technical or administrative issues.' required=false}}
+            {{form.element controlType="text" label="Website" property="website" helpText='Website of the provider.' required=false}}
+            {{form.element controlType="text" label="Contact Name" property="contactName" helpText='Please enter the name of a person that can be contacted for technical or administrative issues.' required=false}}
+            {{form.element controlType="email" label="Contact Email" property="contactEmail" helpText='Please enter an email address that can be contacted for technical or administrative issues.' required=false}}
+            {{form.element controlType="text" label="Contact Phone" property="phone" helpText='Please enter a phone number that can be contacted for technical or administrative issues.' required=false}}
 
             {{#form.element controlType="power-select" property="country" optionLabelPath="name" options=countries destination=country helpText='Country where the provider is located.' as |el|}}
               {{#el.control onChange=(action "selectCountry") search=(action "searchCountry") searchField="name" placeholder="Select Country" searchPlaceholder="Type to search..." allowClear=true as |item|}}
@@ -20,7 +20,7 @@
               {{/el.control}}
             {{/form.element}}
 
-            {{form.element controlType="textarea" label="Description" placeholder="Description" property="description" rows=10 helpText='Description of the provider. Please use markdown for formatting.' required=false}}
+            {{form.element controlType="textarea" label="Description" property="description" rows=10 helpText='Description of the provider. Please use markdown for formatting.' required=false}}
 
             {{#if (can "create provider")}}
               {{form.element controlType="checkbox" label="Account is active" property="isActive" required=false helpText='This account can manage clients and prefixes'}}
