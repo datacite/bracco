@@ -100,6 +100,17 @@ const Validations = buildValidations({
       disabled: Ember.computed('model.mode', function() {
         return !["new", "edit"].includes(this.get('model').get('mode'));
       })
+    }),
+    validator('date', {
+      allowBlank: true,
+      after: '1000',
+      before: '2020',
+      precision: 'year',
+      format: 'YYYY',
+      errorFormat: 'YYYY',
+      disabled: Ember.computed('model.mode', function() {
+        return !["new", "edit"].includes(this.get('model').get('mode'));
+      })
     })
   ],
   xml: [
