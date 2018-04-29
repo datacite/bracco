@@ -32,7 +32,7 @@ export default Component.extend({
 
   setDefaultPrefix() {
     let self = this;
-    let prefixes = this.get('store').query('prefix', { 'client-id': this.get('client').get('id'), sort: 'name', 'page[size]': 25 }).then(function(prefixes) {
+    this.get('store').query('prefix', { 'client-id': this.get('client').get('id'), sort: 'name', 'page[size]': 25 }).then(function(prefixes) {
       self.set('prefixes', prefixes);
 
       // use first prefix that is not 10.5072 if it exists

@@ -28,7 +28,7 @@ export default Ember.Controller.extend({
     
       let self = this;
       doi.save().then(function(doi) {
-        self.transitionToRoute('clients.show.dois.show', self.get('model').get('client.id'), self.get('model'));
+        self.transitionToRoute('clients.show.dois.show', doi.get('client.id'), doi);
       });
     },
     cancel() {
