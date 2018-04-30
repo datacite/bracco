@@ -1,12 +1,12 @@
 <h2 class="work">{{model.doi}}</h2>
 
-<h3 class="edit">Transfer DOI</h3>
-
 <div class="row">
   <div class='col-md-9'>
     <div class="panel panel-transparent">
       <div class="panel-body">
-        {{#bs-form formLayout="vertical" model=model onSubmit=(action "submit" model) as |form|}}
+        <div class="col-md-9 col-md-offset-3"><h3 class="edit">Transfer DOI</h3></div>
+        
+        {{#bs-form formLayout="horizontal" horizontalLabelGridClass="col-md-3" model=model onSubmit=(action "submit" model) as |form|}}
           {{form.element controlType="hidden" property="doi" required=false}}
 
           {{#form.element controlType="power-select" property="client" label="Client" helpText='Transfer the DOI to this client. It can take up to 8 hours until these changes are indexed and show up outside of DOI Fabrica.' optionLabelPath="name" options=clients destination=client.id as |el|}}
@@ -15,12 +15,11 @@
             {{/el.control}}
           {{/form.element}}
 
-          <div class="pseudo-footer">
-            <div class="btn-toolbar pull-right">
+          <div class="col-md-9 col-md-offset-3">
+            <div class="btn-toolbar">
+              <button type="submit" disabled={{isDisabled}} class="btn btn-sm btn-fill">Transfer DOI</button>
               <button {{action "cancel" model}} class="btn btn-sm">Cancel</button>
-              <button type="submit" disabled={{isDisabled}} class="btn btn-sm btn-fill">Transfer</button>
             </div>
-            <div class="clearfix"/>
           </div>
         {{/bs-form}}
       </div>
