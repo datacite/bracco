@@ -15,7 +15,7 @@ const Validations = buildValidations({
 
 export default Component.extend(Validations, {
   tagName: 'div',
-  classNames: ['multi-part-form'],
+  classNames: ['form-group'],
   // isDisabled: Ember.computed('model', function() {
   //   return Ember.isEmpty(this.get('model').get('author').get('lastObject'));
   // }),

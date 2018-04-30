@@ -1,14 +1,11 @@
-  {{#bs-form formLayout="vertical" model=this onSubmit=(action "submit") as |form|}}
-    <p class="help-block">Please add the first and last DOI prefix from the new prefix range registered by CNRI.</p>
+  {{#bs-form formLayout="horizontal" horizontalLabelGridClass="col-md-3" model=this onSubmit=(action "submit") as |form|}}
+    {{form.element controlType="text" label="From" onChange=(action "submitFirstPrefix") property="firstPrefix" helpText='First prefix in range of new prefixes provided by CNRI.' required=false}}
+    {{form.element controlType="text" label="To" onChange=(action "submitLastPrefix") property="lastPrefix" helpText='Last prefix in range of new prefixes provided by CNRI.' required=false}}
 
-    {{form.element controlType="text" label="From" onChange=(action "submitFirstPrefix") property="firstPrefix" required=false}}
-    {{form.element controlType="text" label="To" onChange=(action "submitLastPrefix") property="lastPrefix" required=false}}
-
-    <div class="pseudo-footer">
-      <div class="btn-toolbar pull-right">
+    <div class="col-md-9 col-md-offset-3">
+      <div class="btn-toolbar">
+        <button type="submit" class="btn btn-sm btn-fill">Add Prefixes</button>
         <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
-        <button type="submit" class="btn btn-sm btn-fill">Save</button>
       </div>
-      <div class="clearfix"/>
     </div>
   {{/bs-form}}

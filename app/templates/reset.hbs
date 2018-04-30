@@ -29,7 +29,7 @@
               </div>
             {{else}}
               {{#bs-form formLayout="vertical" model=this onSubmit=(action "sendLink") submitOnEnter=true as |form|}}
-                {{form.element controlType="text" property="identification" label="Account ID" placeholder="Enter Account ID (Symbol)" helpText="Send a reset password link to the email address registered for this account." required=false}}
+                {{form.element controlType="text" property="identification" label="Account ID" helpText="Send a reset password link to the email address registered for this account." required=false}}
 
                 {{#if errorMessage}}
                   <div class="alert alert-danger">{{errorMessage}}</div>

@@ -1,17 +1,19 @@
-<label class="control-label">Creator</label>
-<div class="help-block">
-  The main researchers involved in producing the data, or the authors of the publication, in priority order.<br/>
-  The format for personal names should be "Smith, John" (family name separated from given names by a comma).
-</div>
+<label class="control-label col-md-3">Creator</label>
+<div class="col-md-9">
+  {{#each authors as |item index|}}
+    <div class="compound-form input-group">
+      {{input type="text" focus-out=(action "update") class="form-control" value=item.name}}
 
-{{#each authors as |item index|}}
-  <div class="compound-form input-group">
-    {{input type="text" focus-out=(action "update") class="form-control" value=item.name}}
+      <span class="input-group-btn">
+        <button {{action "delete" item}} class="btn btn-warning btn-fill">{{fa-icon "trash"}}</button>
+      </span>
+    </div>
+  {{/each}}
 
-    <span class="input-group-btn">
-      <button {{action "delete" item}} class="btn btn-warning btn-fill">{{fa-icon "trash"}}</button>
-    </span>
+  <div class="help-block">
+    The main researchers involved in producing the data, or the authors of the publication, in priority order.
+    The format for personal names should be "Smith, John".
   </div>
-{{/each}}
 
-<button {{action "add"}} disabled={{isDisabled}} class="btn btn-sm btn-file btn-add">{{fa-icon "plus"}} Add Creator</button>
+  <button {{action "add"}} disabled={{isDisabled}} class="btn btn-sm btn-file btn-add">{{fa-icon "plus"}} Add Creator</button>
+</div>

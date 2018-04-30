@@ -4,12 +4,14 @@
   <div class='col-md-9'>
     <div class="panel panel-transparent">
       <div class="panel-body">
-        <h3 class="help-header">Edit DOI</h3>
-        <div class="help-block">
-          More information about DOI registration via form can be found on our <a target="_blank" href="https://support.datacite.org/docs/datacite-doi-fabrica-for-clients#section-registering-dois">Support Website</a>.
+        <div class="col-md-9 col-md-offset-3">
+          <h3 class="help-header">Update DOI (Form)</h3>
+          <div class="help-block">
+            More information about DOI registration via form can be found on our <a target="_blank" href="https://support.datacite.org/docs/datacite-doi-fabrica-for-clients#section-registering-dois">Support Website</a>.
+          </div>
         </div>
 
-        {{#bs-form formLayout="vertical" model=model onSubmit=(action "submit" model) as |form|}}
+        {{#bs-form formLayout="horizontal" horizontalLabelGridClass="col-md-3" model=model onSubmit=(action "submit" model) as |form|}}
           {{form.element controlType="text" label="DOI" property="doi" helpText="The globally unique string that identifies the resource. DOIs with demo prefix 10.5072 will always remain in Draft state. Can't be modified." disabled=true}}
 
           {{doi-state model=model form=form}} 
@@ -24,16 +26,15 @@
 
           {{doi-resource-type model=model form=form}}
           
-          {{form.element controlType="textarea" label="Description" property="description" rows=8 helpText="All additional information that does not fit in any of the other categories." required=false}}            
+          {{form.element controlType="textarea" label="Description (optional)" property="description" rows=8 helpText="All additional information that does not fit in any of the other categories." required=false}}            
 
           {{model-validation-errors model=model form=form}}
 
-          <div class="pseudo-footer">
-            <div class="btn-toolbar pull-right">
+          <div class="col-md-9 col-md-offset-3">
+            <div class="btn-toolbar">
+              <button type="submit" class="btn btn-sm btn-fill">Update DOI</button>
               <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
-              <button type="submit" class="btn btn-sm btn-fill">Save</button>
             </div>
-            <div class="clearfix"/>
           </div>
         {{/bs-form}}
       </div>

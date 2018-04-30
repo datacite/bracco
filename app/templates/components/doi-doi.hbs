@@ -1,33 +1,37 @@
-<div class="compound-form input-group">
-  <span class="input-group-addon">
-    {{#form.element controlType="power-select" property="prefix" options=prefixes destination=prefix searchEnabled=false as |el|}}
-      {{#el.control onChange=(action "selectPrefix") searchPlaceholder="Select Prefix" optionLabelPath="id" as |item|}}
-        {{if item.id item.id item}}
-      {{/el.control}}
-    {{/form.element}}
-  </span>
-  {{form.element controlType="text" label="DOI" property="suffix" onChange=(action "selectSuffix") helpText="A globally unique string that identifies a resource. DOIs with demo prefix 10.5072 will always remain in Draft state." required=false}}
-  <span class="input-group-addon refresh" title="Refresh" aria-label="Refresh" {{action 'refresh'}}>{{fa-icon "refresh"}}</span>
-  <span class="input-group-addon clear" title="Clear" aria-label="Clear" {{action 'clear'}}>{{fa-icon "times-circle"}}</span>
+<div class="form-group">
+  <label class="control-label col-md-3">DOI</label>
+  <div class="input-group col-md-9">
+    <span class="input-group-addon">
+      {{#form.element controlType="power-select" property="prefix" options=prefixes destination=prefix searchEnabled=false as |el|}}
+        {{#el.control onChange=(action "selectPrefix") searchPlaceholder="Select Prefix" optionLabelPath="id" as |item|}}
+          {{if item.id item.id item}}
+        {{/el.control}}
+      {{/form.element}}
+    </span>
+    {{form.element controlType="text" property="suffix" onChange=(action "selectSuffix") helpText="A globally unique string that identifies a resource. DOIs with demo prefix 10.5072 will always remain in Draft state." required=false}}
+    <span class="input-group-addon refresh" title="Refresh" aria-label="Refresh" {{action 'refresh'}}>{{fa-icon "refresh"}}</span>
+    <span class="input-group-addon clear" title="Clear" aria-label="Clear" {{action 'clear'}}>{{fa-icon "times-circle"}}</span>
+  </div>
 </div>
 
 <div class="form-group">
-  <label class="control-label">State</label> 
-  <div class="help-block">
-    The state determines whether a DOI is registered with the DOI Resolver and indexed in DataCite Search.
-    The default state after completing DOI&nbsp;registration should be Findable. Once in Registered or Findable state,
-    a DOI can no longer be set to Draft state. <a target="_blank" href="https://support.datacite.org/docs/about-states-in-datacite-doi-fabrica">More&nbsp;…</a>
-  </div>
-  <div>{{radio-button value="draft" groupValue=state changed="selectState" disabled=draft}}Draft</div>
-  <div class="help-block">
-    The DOI is only visible in DOI Fabrica, and can be deleted.
-  </div>
-  <div>{{radio-button value="registered" groupValue=state changed="selectState" disabled=registered}}Registered</div>
-  <div class="help-block">
-    The DOI is registered with the DOI Resolver.
-  </div>
-  <div>{{radio-button value="findable" groupValue=state changed="selectState" disabled=findable}}Findable</div>
-  <div class="help-block">
-    The DOI is registered with the DOI Resolver and indexed in DataCite Search.
+  <label class="control-label col-md-3">State</label>
+  <div class="col-md-9">
+    <div class="help-block">
+      The state determines whether a DOI is registered with the DOI Resolver and indexed in DataCite Search.
+      Once in Registered or Findable state, a DOI can no longer be set to Draft state. <a target="_blank" href="https://support.datacite.org/docs/about-states-in-datacite-doi-fabrica">More&nbsp;…</a>
+    </div>
+    <div>{{radio-button value="draft" groupValue=state changed="selectState" disabled=draft}}Draft</div>
+    <div class="help-block">
+      The DOI is only visible in DOI Fabrica, and can be deleted.
+    </div>
+    <div>{{radio-button value="registered" groupValue=state changed="selectState" disabled=registered}}Registered</div>
+    <div class="help-block">
+      The DOI is registered with the DOI Resolver.
+    </div>
+    <div>{{radio-button value="findable" groupValue=state changed="selectState" disabled=findable}}Findable</div>
+    <div class="help-block">
+      The DOI is registered with the DOI Resolver and indexed in DataCite Search.
+    </div>
   </div>
 </div>

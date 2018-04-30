@@ -2,9 +2,9 @@
   <div class='col-md-9'>
     <div class="panel panel-transparent">
       <div class="panel-body">
-        <h3 class="edit">New Provider</h3>
-
-        {{#bs-form formLayout="vertical" model=provider onSubmit=(action "submit" provider model) submitOnEnter=true as |form|}}
+        <div class="col-md-9 col-md-offset-3"><h3 class="edit">Create Provider</h3></div>
+        
+        {{#bs-form formLayout="horizontal" horizontalLabelGridClass="col-md-3" model=provider onSubmit=(action "submit" provider model) submitOnEnter=true as |form|}}
           {{form.element controlType="text" label="Provider ID" property="symbol" helpText='The Provider ID can contain only upper case letters, and must not be longer than 8 characters' useIcons=false required=false}}
           {{form.element controlType="text" label="Provider Name" property="name" required=false}}
 
@@ -13,7 +13,7 @@
           {{form.element controlType="email" label="Contact Email" property="contactEmail" helpText='Please enter an email address that can be contacted for technical or administrative issues.' required=false}}
           {{form.element controlType="text" label="Contact Phone" property="phone" helpText='Please enter a phone number that can be contacted for technical or administrative issues.' required=false}}
 
-          {{#form.element controlType="power-select" property="country" optionLabelPath="name" options=countries destination=country helpText='Country where the provider is located.' as |el|}}
+          {{#form.element controlType="power-select" label="Country" property="country" optionLabelPath="name" options=countries destination=country helpText='Country where the provider is located.' as |el|}}
             {{#el.control onChange=(action "selectCountry") search=(action "searchCountry") searchField="name" placeholder="Select Country" searchPlaceholder="Type to search..." allowClear=true as |item|}}
               {{item.name}}
             {{/el.control}}
@@ -23,12 +23,11 @@
 
           {{form.element controlType="checkbox" label="Account is active" property="isActive" helpText='This account can manage clients and prefixes'}}
 
-          <div class="pseudo-footer">
-            <div class="btn-toolbar pull-right">
+          <div class="col-md-9 col-md-offset-3">
+            <div class="btn-toolbar">
+              <button type="submit" class="btn btn-sm btn-fill">Create Provider</button>
               <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
-              <button type="submit" class="btn btn-sm btn-fill">Save</button>
             </div>
-            <div class="clearfix"/>
           </div>
         {{/bs-form}}
       </div>
@@ -84,7 +83,7 @@
         <div class="panel-body">
           <div class="btn-toolbar">
             <div class="btn-group btn-group-sm">
-              <button {{action "new"}} class="btn btn-warning">{{fa-icon "plus"}}Add Provider</button>
+              <button {{action "new"}} class="btn btn-warning">{{fa-icon "plus"}}Create Provider</button>
             </div>
           </div>
         </div>
