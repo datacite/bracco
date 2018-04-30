@@ -5,8 +5,6 @@ const { service } = Ember.inject;
 export default Component.extend({
   store: service(),
 
-  classNames: ['form-group'],
-
   resourceType: null,
   resourceTypes: [],
 

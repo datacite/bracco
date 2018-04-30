@@ -2,10 +2,10 @@
   <div class='col-md-9'>
     <div class="panel panel-transparent">
       <div class="panel-body">
-        <div class="col-md-9 col-md-offset-3"><h3 class="edit">Create Client</h3></div>
+        <div class="col-md-10 col-md-offset-2"><h3 class="edit">Create Client</h3></div>
 
-        {{#bs-form formLayout="horizontal" horizontalLabelGridClass="col-md-3" model=client onSubmit=(action "submit" client model) submitOnEnter=true as |form|}}
-          {{form.element controlType="text" label="Client ID" property="symbol" helpText='The Client ID is a unique identifier for each client. The Client ID must start with the Provider ID, followed by a dot. It can then contain only upper case letters, numbers, and at most one hyphen.' useIcons=false required=false}}
+        {{#bs-form formLayout="horizontal" horizontalLabelGridClass="col-md-2" model=client onSubmit=(action "submit" client model) submitOnEnter=true as |form|}}
+          {{form.element controlType="text" label="Client ID" property="symbol" helpText='The Client ID is the unique identifier for each client and can\'t be changed. The Client ID must start with the Provider ID, followed by a dot. It can then contain only upper case letters, numbers, and at most one hyphen.' useIcons=false required=false}}
           {{#form.element controlType="power-select" property="repository" label="re3data Record (optional)" optionLabelPath="name" options=repositories destination=repository helpText='re3data is a registry of research data repositories.' as |el|}}
             {{#el.control onChange=(action "selectRepository") search=(action "searchRepository") searchField="name" searchPlaceholder="Type to search..." allowClear=true as |item|}}
               {{item.name}}
@@ -17,11 +17,9 @@
           {{form.element controlType="textarea" label="Domains" property="domains" helpText='List of (sub-)domains used for DOI registration, or use * to allow all domains' useIcons=false required=false}}
           {{form.element controlType="checkbox" label="Account is active" property="isActive" helpText='This account can register and update DOIs'}}
 
-          <div class="col-md-9 col-md-offset-3">
-            <div class="btn-toolbar">
-              <button type="submit" class="btn btn-sm btn-fill">Create Client</button>
-              <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
-            </div>
+          <div class="col-md-10 col-md-offset-2">
+            <button type="submit" class="btn btn-sm btn-fill">Create Client</button>
+            <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
           </div>
         {{/bs-form}}
       </div>

@@ -8,8 +8,6 @@ const stateList = {
 }
 
 export default Component.extend({
-  classNames: ['form-group'],
-
   draft: true,
   registered: true,
   findable: true,

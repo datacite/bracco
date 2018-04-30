@@ -1,22 +1,22 @@
-<div class="form-group">
-  <label class="control-label col-md-3">DOI</label>
-  <div class="input-group col-md-9">
+<div class="form-group compound-form">
+  <label class="control-label col-md-2">DOI</label>
+  <div class="input-group col-md-10">
     <span class="input-group-addon">
-      {{#form.element controlType="power-select" property="prefix" options=prefixes destination=prefix searchEnabled=false as |el|}}
+      {{#form.element controlType="power-select" formLayout="vertical" property="prefix" options=prefixes destination=prefix searchEnabled=false as |el|}}
         {{#el.control onChange=(action "selectPrefix") searchPlaceholder="Select Prefix" optionLabelPath="id" as |item|}}
           {{if item.id item.id item}}
         {{/el.control}}
       {{/form.element}}
     </span>
-    {{form.element controlType="text" property="suffix" onChange=(action "selectSuffix") helpText="A globally unique string that identifies a resource. DOIs with demo prefix 10.5072 will always remain in Draft state." required=false}}
+    {{form.element controlType="text" formLayout="vertical" property="suffix" onChange=(action "selectSuffix") helpText="A globally unique string that identifies the resource and can't be changed. DOIs with demo prefix 10.5072 will always remain in Draft state." required=false}}
     <span class="input-group-addon refresh" title="Refresh" aria-label="Refresh" {{action 'refresh'}}>{{fa-icon "refresh"}}</span>
     <span class="input-group-addon clear" title="Clear" aria-label="Clear" {{action 'clear'}}>{{fa-icon "times-circle"}}</span>
   </div>
 </div>
 
 <div class="form-group">
-  <label class="control-label col-md-3">State</label>
-  <div class="col-md-9">
+  <label class="control-label col-md-2">State</label>
+  <div class="col-md-10">
     <div class="help-block">
       The state determines whether a DOI is registered with the DOI Resolver and indexed in DataCite Search.
       Once in Registered or Findable state, a DOI can no longer be set to Draft state. <a target="_blank" href="https://support.datacite.org/docs/about-states-in-datacite-doi-fabrica">More&nbsp;…</a>

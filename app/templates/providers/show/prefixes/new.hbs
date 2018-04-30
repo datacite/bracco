@@ -2,17 +2,15 @@
   <div class='col-md-9'>
     <div class="panel panel-transparent">
       <div class="panel-body">
-        <div class="col-md-9 col-md-offset-3"><h3 class="edit">Assign Prefix</h3></div>
+        <div class="col-md-10 col-md-offset-2"><h3 class="edit">Assign Prefix</h3></div>
 
-        {{#bs-form formLayout="horizontal" horizontalLabelGridClass="col-md-3" model=model.prefix onSubmit=(action "submit") as |form|}}
+        {{#bs-form formLayout="horizontal" horizontalLabelGridClass="col-md-2" model=model.prefix onSubmit=(action "submit") as |form|}}
 
           {{prefix-select model=model.prefix form=form}}
 
-          <div class="col-md-9 col-md-offset-3">
-            <div class="btn-toolbar">
-              <button type="submit" class="btn btn-sm btn-fill">Assign</button>
-              <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
-            </div>
+          <div class="col-md-10 col-md-offset-2">
+            <button type="submit" class="btn btn-sm btn-fill">Assign Prefix</button>
+            <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
           </div>
         {{/bs-form}}
       </div>

@@ -2,14 +2,14 @@
   <div class='col-md-9'>
     <div class="panel panel-transparent">
       <div class="panel-body">
-        <div class="col-md-9 col-md-offset-3">
+        <div class="col-md-10 col-md-offset-2">
           <h3 class="help-header">Create DOI (File Upload)</h3>
           <div class="help-block">
             More information about DOI registration via file upload can be found on our <a target="_blank" href="https://support.datacite.org/docs/datacite-doi-fabrica-for-clients#section-registering-dois">Support Website</a>.
           </div>
         </div>
 
-        {{#bs-form formLayout="horizontal" horizontalLabelGridClass="col-md-3" model=model.doi onSubmit=(action "submit" model.doi) as |form|}}
+        {{#bs-form formLayout="horizontal" horizontalLabelGridClass="col-md-2" model=model.doi onSubmit=(action "submit" model.doi) as |form|}}
           {{doi-doi model=model.doi client=model.client form=form}}
 
           {{form.element controlType="text" label="URL" property="url" helpText="The location of the landing page with more information about the resource." required=false}}
@@ -18,11 +18,9 @@
 
           {{model-validation-errors model=model.doi form=form}}
 
-          <div class="col-md-9 col-md-offset-3">
-            <div class="btn-toolbar">
-              <button type="submit" class="btn btn-sm btn-fill">Create DOI</button>
-              <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
-            </div>
+          <div class="col-md-10 col-md-offset-2">
+            <button type="submit" class="btn btn-sm btn-fill">Create DOI</button>
+            <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
           </div>
         {{/bs-form}}
       </div>

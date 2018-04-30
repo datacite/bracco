@@ -1,8 +1,6 @@
 import Component from '@ember/component';
 
 export default Component.extend({
-  classNames: ['form-group'],
-
   b64DecodeUnicode(str) {
     // Going backwards: from bytestream, to percent-encoding, to original string.
     return decodeURIComponent(atob(str).split('').map(function(c) {

@@ -3,10 +3,10 @@
     <div class="col-md-9">
       <div class="panel panel-transparent">
         <div class="panel-body">
-          <div class="col-md-9 col-md-offset-3"><h3 class="edit">Update {{if (eq currentUser.uid model.id) 'Account' 'Provider'}}</h3></div>
+          <div class="col-md-10 col-md-offset-2"><h3 class="edit">Update {{if (eq currentUser.uid model.id) 'Account' 'Provider'}}</h3></div>
 
-          {{#bs-form formLayout="horizontal" horizontalLabelGridClass="col-md-3" model=model onSubmit=(action "submit" model) as |form|}}
-            {{form.element controlType="text" label="Provider ID" property="symbol" disabled=true}}
+          {{#bs-form formLayout="horizontal" horizontalLabelGridClass="col-md-2" model=model onSubmit=(action "submit" model) as |form|}}
+            {{form.element controlType="text" label="Provider ID" property="symbol" helpText='The Provider ID is the unique identifier for each provider and can\'t be changed.' disabled=true}}
             {{form.element controlType="text" label="Provider Name" property="name" required=false}}
 
             {{form.element controlType="text" label="Website (optional)" property="website" helpText='Website of the provider.' required=false}}
@@ -26,11 +26,9 @@
               {{form.element controlType="checkbox" label="Account is active" property="isActive" required=false helpText='This account can manage clients and prefixes'}}
             {{/if}}
 
-            <div class="col-md-9 col-md-offset-3">
-              <div class="btn-toolbar">
-                <button type="submit" class="btn btn-sm btn-fill">Update Provider</button>
-                <button {{action "cancel" model}} class="btn btn-sm" id="cancel">Cancel</button>
-              </div>
+            <div class="col-md-10 col-md-offset-2">
+              <button type="submit" class="btn btn-sm btn-fill">Update {{if (eq currentUser.uid model.id) 'Account' 'Provider'}}</button>
+              <button {{action "cancel" model}} class="btn btn-sm" id="cancel">Cancel</button>
             </div>
           {{/bs-form}}
         </div>
@@ -51,15 +49,15 @@
     <div class="col-md-9">
       <div class="panel panel-transparent">
         <div class="panel-body">
-          <div class="col-md-9 col-md-offset-3"><h3 class="edit">Set Password</h3></div>
+          <div class="col-md-10 col-md-offset-2"><h3 class="edit">Set Password</h3></div>
 
-          <div class="col-md-9 col-md-offset-3"><span class="help-block">Click <a class="action-link" {{action "generate"}}>here</a> for a password suggestion.</span></div>
+          <div class="col-md-10 col-md-offset-2"><span class="help-block">Click <a class="action-link" {{action "generate"}}>here</a> for a password suggestion.</span></div>
 
-          {{#bs-form formLayout="horizontal" horizontalLabelGridClass="col-md-3" model=model onSubmit=(action "setPassword" model) submitOnEnter=true as |form|}}
+          {{#bs-form formLayout="horizontal" horizontalLabelGridClass="col-md-2" model=model onSubmit=(action "setPassword" model) submitOnEnter=true as |form|}}
             {{form.element controlType="text" id="passwordInput" property="passwordInput" label="New Password" required=false}}
             {{form.element controlType="text" property="confirmPasswordInput" label="Confirm Password" required=false}}
 
-            <div class="col-md-9 col-md-offset-3">
+            <div class="col-md-10 col-md-offset-2">
               <div class="btn-toolbar">
                 <button type="submit" class="btn btn-sm btn-fill">Set Password</button>
                 <button {{action "cancel" model}} class="btn btn-sm" id="cancel">Cancel</button>

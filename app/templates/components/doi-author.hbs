@@ -1,5 +1,5 @@
-<label class="control-label col-md-3">Creator</label>
-<div class="col-md-9">
+<label class="control-label col-md-2">Creator</label>
+<div class="col-md-10">
   {{#each authors as |item index|}}
     <div class="compound-form input-group">
       {{input type="text" focus-out=(action "update") class="form-control" value=item.name}}

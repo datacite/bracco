@@ -4,15 +4,15 @@
   <div class='col-md-9'>
     <div class="panel panel-transparent">
       <div class="panel-body">
-        <div class="col-md-9 col-md-offset-3">
+        <div class="col-md-10 col-md-offset-2">
           <h3 class="help-header">Update DOI (Form)</h3>
           <div class="help-block">
             More information about DOI registration via form can be found on our <a target="_blank" href="https://support.datacite.org/docs/datacite-doi-fabrica-for-clients#section-registering-dois">Support Website</a>.
           </div>
         </div>
 
-        {{#bs-form formLayout="horizontal" horizontalLabelGridClass="col-md-3" model=model onSubmit=(action "submit" model) as |form|}}
-          {{form.element controlType="text" label="DOI" property="doi" helpText="The globally unique string that identifies the resource. DOIs with demo prefix 10.5072 will always remain in Draft state. Can't be modified." disabled=true}}
+        {{#bs-form formLayout="horizontal" horizontalLabelGridClass="col-md-2" model=model onSubmit=(action "submit" model) as |form|}}
+          {{form.element controlType="text" label="DOI" property="doi" helpText="The globally unique string that identifies the resource and can't be changed. DOIs with demo prefix 10.5072 will always remain in Draft state." disabled=true}}
 
           {{doi-state model=model form=form}} 
 
@@ -30,11 +30,9 @@
 
           {{model-validation-errors model=model form=form}}
 
-          <div class="col-md-9 col-md-offset-3">
-            <div class="btn-toolbar">
-              <button type="submit" class="btn btn-sm btn-fill">Update DOI</button>
-              <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
-            </div>
+          <div class="col-md-10 col-md-offset-2">
+            <button type="submit" class="btn btn-sm btn-fill">Update DOI</button>
+            <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
           </div>
         {{/bs-form}}
       </div>
