@@ -8,7 +8,7 @@
         <div class="panel-body">
           <div class="btn-toolbar">
             <div class="btn-group-vertical btn-group-sm">
-              {{#if (or (can "edit doi" model) (and (can "delete doi" model) model.isDraft))}}
+              {{#if (or (can "edit doi" model) (can "modify doi" model) (and (can "delete doi" model) model.isDraft))}}
                 {{#if (can "edit doi" model)}}
                   {{#link-to "clients.show.dois.show.edit" model.client.id model.id class="btn btn-warning"}}{{fa-icon "wpforms"}} Update DOI (Form){{/link-to}}
                 {{/if}}
