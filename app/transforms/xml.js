@@ -2,7 +2,7 @@ import DS from 'ember-data';
 
 export default DS.Transform.extend({
   deserialize(serialized) {
-    if (serialized === 'xmlversiog==') {
+    if (!serialized || serialized === 'xmlversiog==') {
       return null;
     } else {
       let xml = this.b64DecodeUnicode(serialized);
