@@ -32,6 +32,7 @@ export default Ember.Controller.extend({
       });
     },
     cancel() {
+      this.get('model').rollbackAttributes();
       this.transitionToRoute('clients.show.dois.show', this.get('model').get('client.id'), this.get('model'));
     }
   }

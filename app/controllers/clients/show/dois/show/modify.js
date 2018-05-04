@@ -27,11 +27,12 @@ export default Ember.Controller.extend({
       }
     
       let self = this;
-      doi.save().then(function() {
-        self.transitionToRoute('clients.show.dois.show', self.get('model').get('client.id'), self.get('model'));
+      doi.save().then(function(doi) {
+        self.transitionToRoute('clients.show.dois.show', doi.get('client.id'), doi);
       });
     },
     cancel() {
+      this.get('model').rollbackAttributes();
       this.transitionToRoute('clients.show.dois.show', this.get('model').get('client.id'), this.get('model'));
     }
   }
