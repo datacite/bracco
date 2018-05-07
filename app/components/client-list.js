@@ -49,7 +49,7 @@ export default Ember.Component.extend({
       });
     },
     cancel() {
-      this.get('client').deleteRecord();
+      this.get('client').rollbackAttributes();
       this.reset();
     }
   }

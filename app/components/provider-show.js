@@ -108,12 +108,9 @@ export default Ember.Component.extend(Validations, {
         });
       }
     },
-    cancel(provider) {
-      let self = this;
-      this.get('store').findRecord("provider", provider.id).then(function(provider) {
-        self.get('model').set('provider', provider);
-        self.reset();
-      });
+    cancel() {
+      this.get('provider').rollbackAttributes();
+      this.reset();
     },
     onSuccess() {
     },

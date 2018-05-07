@@ -42,7 +42,7 @@ export default Ember.Component.extend({
       });
     },
     cancel() {
-      this.get('provider').deleteRecord();
+      this.get('provider').rollbackAttributes();
       this.reset();
     },
     searchCountry(query) {

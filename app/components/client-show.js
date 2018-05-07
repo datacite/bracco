@@ -108,11 +108,8 @@ export default Ember.Component.extend({
       });
     },
     cancel(client) {
-      let self = this;
-      this.get('store').findRecord("client", client.id).then(function(client) {
-        self.get('model').set('client', client);
-        self.reset();
-      });
+      this.get('model').rollbackAttributes();
+      this.reset();
     },
     onSuccess() {
     },
