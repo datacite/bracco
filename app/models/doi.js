@@ -113,6 +113,17 @@ const Validations = buildValidations({
       })
     })
   ],
+  "resource-type": [
+    validator('presence', {
+      presence: true,
+      isWarning: Ember.computed('model.state', 'model.prefix', function() {
+        return (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
+      }),
+      disabled: Ember.computed('model.mode', function() {
+        return !["new", "edit"].includes(this.get('model').get('mode'));
+      })
+    })
+  ],
   xml: [
     validator('presence', {
       presence: true,
