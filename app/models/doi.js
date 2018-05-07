@@ -155,7 +155,7 @@ export default DS.Model.extend(Validations, {
   author: DS.attr('author', { defaultValue: null }),
   title: DS.attr('wrapped'),
   publisher: DS.attr('string'),
-  published: DS.attr('string'),
+  published: DS.attr('year'),
   description: DS.attr('wrapped'),
   license: DS.attr('string'),
   xml: DS.attr('xml'),
