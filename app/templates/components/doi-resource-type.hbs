@@ -1,6 +1,7 @@
-{{form.element controlType="text" label="Resource Type (optional)" property="resourceTypeSubtype" helpText="A description of the resource, the preferred format is a single term of some detail." required=false}}
 {{#form.element controlType="power-select" label="Resource Type General" property="resource-type" helpText='The general type of the resource.' optionLabelPath="title" options=resourceTypes destination=resource-type as |el|}}
   {{#el.control onChange=(action "selectResourceType") search=(action "searchResourceType") searchField="title" searchPlaceholder="Select from list or type to search..." allowClear=true as |item|}}
     {{item.title}}
   {{/el.control}}
 {{/form.element}}
+
+{{form.element controlType="text" label="Resource Type (optional)" property="resourceTypeSubtype" helpText="A description of the resource, the preferred format is a single term of some detail." required=false}}

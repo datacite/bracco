@@ -11,8 +11,11 @@ export default DS.Transform.extend({
   },
 
   serialize(deserialized) {
-    let xml = (deserialized) ? deserialized : '<hsh></hsh>';
-    return this.b64EncodeUnicode(xml);
+    if (!deserialized) {
+      return null;
+    } else {
+      return this.b64EncodeUnicode(deserialized);
+    }
   },
   b64EncodeUnicode(str) {
       // first we use encodeURIComponent to get percent-encoded UTF-8,
