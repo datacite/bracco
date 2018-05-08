@@ -25,6 +25,15 @@ export default Ember.Controller.extend({
       if (typeof stateChange !== 'undefined') {
         doi.set('event', this.setEvent(stateChange));
       }
+
+      // set individual attributes to null so that they don't overwrite what is in the xml attribute
+      doi.set('author', null);
+      doi.set('title', null);
+      doi.set('publisher', null);
+      doi.set('published', null);
+      doi.set('resourceTypeSubtype', null);
+      doi.set('resource-type', null);
+      doi.set('description', null);
     
       let self = this;
       doi.save().then(function(doi) {

@@ -24,7 +24,6 @@ export default Component.extend(Validations, {
     this._super(...arguments);
 
     this.createAuthors();
-    //this.createNewAuthor();
   },
 
   createAuthors() {
@@ -49,13 +48,6 @@ export default Component.extend(Validations, {
     });
     return JSON.stringify(authors);
   },
-
-  // createNewAuthor() {
-  //   const owner = Ember.getOwner(this);
-  //   let author = Author.create(owner.ownerInjection());
-  //   this.set('author', author);
-  // },
-
   add() {
     this.get('authors').pushObject({ name: '' });
     this.get('model').set('author', this.authorList(this.get('authors')));

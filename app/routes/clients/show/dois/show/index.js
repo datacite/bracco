@@ -4,7 +4,7 @@ import { CanMixin } from 'ember-can';
 export default Ember.Route.extend(CanMixin, {
   model() {
     let self = this;
-    return this.store.findRecord('doi', this.modelFor('clients/show/dois/show').get('id'), { reload: true, include: 'provider,client,resource-type' }).then(function(doi) {
+    return this.store.findRecord('doi', this.modelFor('clients/show/dois/show').get('id'), { include: 'provider,client,resource-type' }).then(function(doi) {
       return doi;
     }).catch(function(reason){
       Ember.Logger.assert(false, reason);
