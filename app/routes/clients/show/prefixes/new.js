@@ -11,9 +11,9 @@ export default Ember.Route.extend(CanMixin, RouteMixin, {
     });
   },
 
-  afterModel() {
-    if (!this.can('create prefix', this.modelFor('clients/show'))) {
-      return this.transitionTo('index');
-    }
-  }
+  // afterModel() {
+  //   if (!this.can('create prefix')) {
+  //     return this.transitionTo('index');
+  //   }
+  // }
 });
