@@ -34,6 +34,7 @@ export default Ember.Controller.extend({
       doi.set('resourceTypeSubtype', null);
       doi.set('resource-type', null);
       doi.set('description', null);
+      doi.set('schemaVersion', null);
     
       let self = this;
       doi.save().then(function(doi) {

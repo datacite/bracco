@@ -25,7 +25,10 @@ export default Ember.Controller.extend({
       if (typeof stateChange !== 'undefined') {
         doi.set('event', this.setEvent(stateChange));
       }
-    
+      
+      // schema-version will be determined by API
+      doi.set('schemaVersion', null);
+
       let self = this;
       doi.save().then(function(doi) {
         self.transitionToRoute('clients.show.dois.show', doi.get('client.id'), doi);
