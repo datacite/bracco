@@ -107,7 +107,7 @@ export default Ember.Component.extend({
         });
       });
     },
-    cancel(client) {
+    cancel() {
       this.get('model').rollbackAttributes();
       this.reset();
     },
