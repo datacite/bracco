@@ -51,7 +51,7 @@ const Validations = buildValidations({
   ],
   url: [
     validator('format', {
-      type: 'url',
+      regex: /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/,
       allowBlank: true,
       message: 'Please enter a valid URL that the DOI should resolve to.'
     }),
