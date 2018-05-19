@@ -51,7 +51,6 @@ module.exports = function(environment) {
     ORCID_URL: process.env.ORCID_URL || "https://sandbox.orcid.org",
     APP_URL: process.env.APP_URL || "https://app.test.datacite.org",
     CDN_URL: process.env.CDN_URL || "https://assets.test.datacite.org",
-    MATHJAX_URL: process.env.MATHJAX_URL || "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML",
     JWT_PUBLIC_KEY: process.env.JWT_PUBLIC_KEY || null,
     JWT_PRIVATE_KEY: process.env.JWT_PRIVATE_KEY || null,
     USER_UID: process.env.USER_UID || '0000-0001-5489-3594',

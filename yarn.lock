@@ -9774,6 +9774,10 @@ math-sign-x@^3.0.0:
     is-nan-x "^1.0.1"
     to-number-x "^2.0.0"
 
+mathjax-electron@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/mathjax-electron/-/mathjax-electron-2.0.1.tgz#da044a0bf9fff470e01c0fb31974bc7986e7323d"
+
 max-safe-integer@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/max-safe-integer/-/max-safe-integer-1.0.1.tgz#f38060be2c563d8c02e6d48af39122fd83b6f410"
