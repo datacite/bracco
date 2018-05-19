@@ -18,8 +18,42 @@
     "start": "ember server",
     "test": "ember test"
   },
+  "config": {
+    "forge": {
+      "make_targets": {
+        "darwin": [
+          "dmg"
+        ]
+      },
+      "electronPackagerConfig": {
+        "packageManager": "yarn",
+        "icon": "ember-electron/bracco.icns",
+        "name": "DOI Fabrica",
+        "platform": "darwin"
+      },
+      "electronInstallerDebian": {},
+      "electronInstallerRedhat": {},
+      "github_repository": {
+        "owner": "datacite",
+        "name": "bracco"
+      }
+    }
+  },
+  "dependencies": {
+    "electron-compile": "^6.4.2",
+    "electron-default-menu": "^1.0.1",
+    "electron-protocol-serve": "^1.3.0",
+    "electron-squirrel-startup": "^1.0.0",
+    "ember-decorators": "^1.3.4",
+    "ember-electron": "2.7.2",
+    "ember-responsive": "^2.0.5",
+    "fs-extra": "4.0.2",
+    "is-electron": "^2.1.0",
+    "junk": "^2.1.0",
+    "node-gyp": "3.6.2"
+  },
   "devDependencies": {
-    "@ember-decorators/babel-transforms": "^0.1.1",
+    "@ember-decorators/babel-transforms": "^2.0.1",
     "async-promise-queue": "^1.0.2",
     "babel-plugin-transform-async-to-generator": "^6.24.1",
     "babel-preset-env": "^1.6.1",
@@ -28,6 +62,7 @@
     "bootstrap": "^3.3.7",
     "broccoli-asset-rev": "^2.4.5",
     "checkdigit": "^1.1.1",
+    "corber": "1.2.7",
     "d3": "^3.5.5",
     "d3-tip": "^0.7.1",
     "devtron": "^1.4.0",
@@ -40,7 +75,7 @@
     "ember-bootstrap-power-select": "^1.0.0-rc.1",
     "ember-browserify": "^1.1.13",
     "ember-can": "^0.8.5",
-    "ember-cli": "~2.16.2",
+    "ember-cli": "~2.18.0",
     "ember-cli-app-version": "^3.0.0",
     "ember-cli-babel": "^6.10.0",
     "ember-cli-bugsnag": "^1.3.0",
@@ -72,6 +107,7 @@
     "ember-cli-sri": "^2.1.0",
     "ember-cli-string-helpers": "^1.4.0",
     "ember-cli-uglify": "^2.0.0",
+    "ember-cli-version-checker": "^2.1.2",
     "ember-cp-validations": "^3.4.1",
     "ember-data": "~2.16.2",
     "ember-data-factory-guy": "^2.13.13",
@@ -109,39 +145,5 @@
   },
   "engines": {
     "node": "^4.5 || 6.* || >= 7.*"
-  },
-  "dependencies": {
-    "electron-compile": "^6.4.2",
-    "electron-default-menu": "^1.0.1",
-    "electron-protocol-serve": "^1.3.0",
-    "electron-squirrel-startup": "^1.0.0",
-    "ember-decorators": "^1.3.4",
-    "ember-electron": "2.7.2",
-    "ember-responsive": "^2.0.5",
-    "fs-extra": "4.0.2",
-    "is-electron": "^2.1.0",
-    "junk": "^2.1.0",
-    "node-gyp": "3.6.2"
-  },
-  "config": {
-    "forge": {
-      "make_targets": {
-        "darwin": [
-          "dmg"
-        ]
-      },
-      "electronPackagerConfig": {
-        "packageManager": "yarn",
-        "icon": "ember-electron/bracco.icns",
-        "name": "DOI Fabrica",
-        "platform": "darwin"
-      },
-      "electronInstallerDebian": {},
-      "electronInstallerRedhat": {},
-      "github_repository": {
-        "owner": "datacite",
-        "name": "bracco"
-      }
-    }
   }
 }
