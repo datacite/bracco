@@ -9,13 +9,6 @@ export default Ember.Component.extend({
   output: null,
   summary: true,
 
-  loadPlugin: function() {
-    // Use run loop if you need to setup the DOM first
-    Ember.run.scheduleOnce('afterRender', this, function() {
-      Ember.$.getScript('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML');
-    });
-  }.on('init'),
-
   showMetadata(metadata) {
     if (metadata === "summary") {
       this.set('output', false);

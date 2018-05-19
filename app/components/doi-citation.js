@@ -13,13 +13,6 @@ export default Ember.Component.extend({
     this.selectStyle('apa');
   },
 
-  loadPlugin: function() {
-    // Use run loop if you need to setup the DOM first
-    Ember.run.scheduleOnce('afterRender', this, function() {
-      Ember.$.getScript('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML');
-    });
-  }.on('init'),
-
   selectStyle(style) {
     let self = this;
     let url = ENV.APP_URL + '/' + this.get('model').get("doi") + '?style=' + style;

@@ -22,28 +22,8 @@
             {{/code-block}}
           </div>
         {{else}}
-          <div class="panel-body">
-            <h3 class="work">
-              {{#if model.isDraft}}
-                {{model.title}}
-              {{else}}
-                <a target="_blank" href="{{model.identifier}}">{{model.title}}</a>
-              {{/if}}
-              <span class="small">{{model.resource-type.title}}</span>
-            </h3>
-            {{{format-author model.author}}}
-            <div class="metadata">
-              {{format-metadata model.published resourceType=model.resource-type resourceTypeSubtype=model.resourceTypeSubtype publisher=model.publisher version=model.version}}
-            </div>
-            {{#if model.description}}
-              <div class="description">
-                {{format-text model.description limit=150}}
-              </div>
-            {{/if}}
-            {{#if model.license}}
-              {{cc-license licenseURL=model.license}}
-            {{/if}}
-          </div>
+          {{doi-summary model=model}}
+          
           {{#if (not model.isDraft)}}
             <div class="panel-footer">
               <a target="_blank" href="{{model.identifier}}">{{fa-icon "external-link"}} {{model.identifier}}</a>

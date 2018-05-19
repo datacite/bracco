@@ -4,32 +4,8 @@
   {{#if model}}
     {{#each model as |doi|}}
       <div class="panel panel-transparent">
-        <div class="panel-body">
-          <h3 class="work">
-            {{#link-to "clients.show.dois.show" doi.client.id doi.id}}{{if doi.title doi.title doi.doi}}{{/link-to}}
-            <span class="small">{{doi.resource-type.title}}</span>
-          </h3>
-          {{#if doi.author}}
-            {{{format-author doi.author}}}
-          {{/if}}
-          {{#if doi.published}}
-            <div class="metadata">
-              {{format-metadata doi.published resourceType=doi.resource-type resourceTypeSubtype=doi.resourceTypeSubtype publisher=doi.publisher version=doi.version}}
-            </div>
-          {{/if}}
-          {{#if doi.description}}
-            <div class="description">
-              {{format-text doi.description limit=75}}
-            </div>
-          {{/if}}
-          <div class="updated">
-            Last updated {{format-time doi.updated year='numeric' month='long' day='numeric'}}.
-            <span class="text-{{doi.state}}">{{titleize doi.state}}</span>
-          </div>
-          {{#if doi.license}}
-            {{cc-license licenseURL=doi.license}}
-          {{/if}}
-        </div>
+        {{doi-summary model=doi isList=true}}
+
         <div class="panel-footer">
           {{#if doi.isDraft}}
             {{fa-icon "info-circle"}} {{doi.doi}}

@@ -1,0 +1,33 @@
+<h3 class="work">
+  {{#if isList}}
+    {{#link-to "clients.show.dois.show" model.client.id model.id}}{{if model.title model.title model.doi}}{{/link-to}}
+    <span class="small">{{model.resource-type.title}}</span>
+  {{else}}
+    {{#if model.isDraft}}
+      {{model.title}}
+    {{else}}
+      <a target="_blank" href="{{model.identifier}}">{{model.title}}</a>
+    {{/if}}
+    <span class="small">{{model.resource-type.title}}</span>
+  {{/if}}
+</h3>
+{{#if model.author}}
+  {{{format-author model.author}}}
+{{/if}}
+<div class="metadata">
+  {{format-metadata model.published resourceType=model.resource-type resourceTypeSubtype=model.resourceTypeSubtype publisher=model.publisher version=model.version}}
+</div>
+{{#if model.description}}
+  <div class="description">
+    {{format-text model.description limit=150}}
+  </div>
+{{/if}}
+{{#if isList}}
+  <div class="updated">
+    Last updated {{format-time model.updated year='numeric' month='long' day='numeric'}}.
+    <span class="text-{{model.state}}">{{titleize model.state}}</span>
+  </div>
+{{/if}}
+{{#if model.license}}
+  {{cc-license licenseURL=model.license}}
+{{/if}}
