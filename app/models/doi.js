@@ -100,11 +100,12 @@ const Validations = buildValidations({
     }),
     validator('date', {
       allowBlank: true,
-      after: '1000',
+      after: '1449',
       before: '2020',
       precision: 'year',
       format: 'YYYY',
       errorFormat: 'YYYY',
+      message: "Must be between 1450 and 2019.",
       disabled: Ember.computed('model.mode', function() {
         return !["new", "edit"].includes(this.get('model').get('mode'));
       })

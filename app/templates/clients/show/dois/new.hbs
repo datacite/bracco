@@ -18,7 +18,7 @@
           
           {{form.element controlType="textarea" label="Title" property="title" rows=2 helpText="A name or title by which the resource is known." required=false}}
           {{form.element controlType="text" label="Publisher" property="publisher" helpText="The name of the entity that holds, archives, publishes prints, distributes, releases, issues, or produces the resource." required=false}}
-          {{form.element controlType="text" label="Publication Year" property="published" helpText="The year when the resource was or will be made publicly available." required=false}}
+          {{form.element controlType="text" label="Publication Year" property="published" helpText="The year when the resource was or will be made publicly available. Must be between 1450 and 2019." required=false}}
 
           {{doi-resource-type model=model.doi form=form}}
           
