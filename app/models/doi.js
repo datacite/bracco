@@ -30,16 +30,14 @@ const Validations = buildValidations({
       presence: true,
       message: 'The DOI suffix can\'t be blank.',
       disabled: Ember.computed('model.mode', function() {
-        return true;
-        // return !["new", "upload"].includes(this.get('model').get('mode'));
+        return !["new", "upload"].includes(this.get('model').get('mode'));
       })
     }),
     validator('format', {
       regex: /^[-._;()/:A-Za-z0-9]+$/,
       message: 'The DOI suffix contains invalid characters.',
       disabled: Ember.computed('model.mode', function() {
-        return true;
-        //return !["new", "upload"].includes(this.get('model').get('mode'));
+        return !["new", "upload"].includes(this.get('model').get('mode'));
       })
     }),
     validator('unique-doi', {
@@ -57,7 +55,6 @@ const Validations = buildValidations({
     }),
     validator('presence', {
       presence: true,
-      message: 'Please enter a valid URL that the DOI should resolve to.',
       isWarning: Ember.computed('model.state', 'model.prefix', function() {
         return (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
       })
