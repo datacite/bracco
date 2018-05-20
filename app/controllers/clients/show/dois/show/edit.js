@@ -29,6 +29,10 @@ export default Ember.Controller.extend({
       // schema-version will be determined by API
       doi.set('schemaVersion', null);
 
+      //convert authors back into array, and then to JSON
+      let authorList = doi.get('author').split("\n").map(function(a) { return { name: a } });
+      doi.set('author', JSON.stringify(authorList));
+
       let self = this;
       doi.save().then(function(doi) {
         self.transitionToRoute('clients.show.dois.show', doi.get('client.id'), doi);
