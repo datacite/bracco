@@ -41,7 +41,6 @@ export default Component.extend({
 
       self.get('model').set('prefix', prefix);
       self.generate();
-      self.selectState(self.get('model').get('state'));
     });
   },
   generate() {
@@ -58,6 +57,7 @@ export default Component.extend({
           self.get('model').set('suffix', suffix);
           let doi = self.get('model').get('prefix') + '/' + suffix;
           self.get('model').set('doi', doi);
+          self.selectState(self.get('model').get('state'));
           return suffix;
         });
       } else {

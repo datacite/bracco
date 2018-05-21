@@ -34,7 +34,7 @@ const Validations = buildValidations({
       })
     }),
     validator('format', {
-      regex: /^[-._;()/:A-Za-z0-9]+$/,
+      regex: /^[A-Za-z0-9][-._;()/:A-Za-z0-9]+$/,
       message: 'The DOI suffix contains invalid characters.',
       disabled: Ember.computed('model.mode', function() {
         return !["new", "upload"].includes(this.get('model').get('mode'));
