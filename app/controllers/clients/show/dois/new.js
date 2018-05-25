@@ -16,7 +16,12 @@ export default Ember.Controller.extend({
       doi.set('event', this.setEvent(doi.get('state')));
 
       //convert authors back into array, and then to JSON
-      let authorList = doi.get('author').split("\n").map(function(a) { return { name: a } });
+      let authorList = doi.get('author').split("\n").reduce(function (sum, a) {
+        if (a.length > 0) {
+          sum.pushObject({ name: a });
+        }
+        return sum;
+      }, []);
       doi.set('author', JSON.stringify(authorList));
 
       let self = this;
