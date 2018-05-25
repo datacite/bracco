@@ -1,7 +1,6 @@
 import Ember from 'ember';
 const { service } = Ember.inject;
 import { Ability } from 'ember-can';
-import ENV from 'bracco/config/environment';
 
 export default Ability.extend({
   currentUser: service(),
@@ -37,7 +36,7 @@ export default Ability.extend({
   canCreate: Ember.computed('currentUser.role_id', 'currentUser.client_id', 'model.otherParams.client-id', function() {
     switch(this.get('currentUser.role_id')) {
       case 'client_admin':
-        return (ENV.APP_URL !== "https://app.datacite.org" || this.get('currentUser.client_id') === 'demo.datacite') && this.get('currentUser.client_id') === this.get('model.otherParams.client-id');
+        return this.get('currentUser.client_id') === this.get('model.otherParams.client-id');
       default:
         return false;
     }
@@ -61,7 +60,7 @@ export default Ability.extend({
   canEdit: Ember.computed('currentUser.role_id', 'currentUser.client_id', 'model.client.id', function() {
     switch(this.get('currentUser.role_id')) {
       case 'client_admin':
-        return (ENV.APP_URL !== "https://app.datacite.org" || this.get('currentUser.client_id') === 'demo.datacite') && this.get('currentUser.client_id') === this.get('model.client.id');
+        return this.get('currentUser.client_id') === this.get('model.client.id');
       default:
         return false;
     }
