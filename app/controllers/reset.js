@@ -7,12 +7,15 @@ export default Ember.Controller.extend({
   session: service(),
 
   requestSent: false,
+  errorMessage: null,
 
   actions: {
     sendLink() {
+      this.set('requestSent', false);
       let { identification } = this.getProperties('identification');
       let self = this;
       let url = ENV.APP_URL + '/reset';
+      
       fetch(url, {
         method: 'POST',
         headers: {
@@ -23,11 +26,10 @@ export default Ember.Controller.extend({
         if (response.ok) {
           self.set('requestSent', true);
         } else {
-          self.set('errorMessage', response.statusText || response);
-          Ember.Logger.assert(false, response)
+          self.set('errorMessage', response.statusText);
         }
       }).catch(function(reason) {
-        self.set('errorMessage', reason.errors && reason.errors[0].title || reason);
+        self.set('errorMessage', reason.errors && reason.errors[0].title || JSON.stringify(reason));
       });
     }
   }
