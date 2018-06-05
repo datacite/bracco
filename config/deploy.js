@@ -17,10 +17,6 @@ module.exports = function(deployTarget) {
     cloudfront: {
       accessKeyId: process.env.AWS_ACCESS_KEY,
       secretAccessKey: process.env.AWS_SECRET_KEY
-    },
-    bugsnag: {
-      apiKey: process.env.BUGSNAG_API_KEY,
-      publicUrl: process.env.BUGSNAG_PUBLIC_URL,
     }
   };
 
