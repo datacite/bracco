@@ -24,9 +24,15 @@ export default Ember.Controller.extend({
         body: 'username=' + identification
       }).then(function(response) {
         if (response.ok) {
-          self.set('requestSent', true);
+          response.json().then(function(data) {
+            if (data.message === 'Queued. Thank you.') {
+              self.set('requestSent', true);
+            } else {
+              self.set('errorMessage', data.message);
+            }
+          });
         } else {
-          self.set('errorMessage', response.statusText);
+          Ember.Logger.assert(false, response)
         }
       }).catch(function(reason) {
         self.set('errorMessage', reason.errors && reason.errors[0].title || JSON.stringify(reason));
