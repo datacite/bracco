@@ -33,6 +33,7 @@ export default Ember.Component.extend({
         if (response.ok) {
           return response.blob();
         } else {
+          console.log(response.statusText);
           return response.statusText;
         }
       });
@@ -43,6 +44,7 @@ export default Ember.Component.extend({
         } else {
           let reader = new FileReader();
           reader.onloadend = function() {
+            console.log(reader.result);
             self.set('output', vkbeautify.xml(reader.result));
           }
           reader.readAsText(response);
