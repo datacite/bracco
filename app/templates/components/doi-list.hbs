@@ -103,27 +103,6 @@
       </div>
     </div>
   {{/if}}
-  {{#if model.meta.years}}
-    <div class="panel facets">
-      <div class="panel-body">
-        <h4>Publication Year</h4>
-        <ul>
-          {{#each model.meta.years as |year|}}
-            <li>
-              {{#if model.otherParams.year}}
-                {{#link-to link (query-params year='')}}{{fa-icon "check-square-o"}}{{/link-to}}
-              {{else}}
-                {{#link-to link (query-params year=year.id)}}{{fa-icon "square-o"}}{{/link-to}}
-              {{/if}}
-              <div class="facet-title">{{year.title}}</div>
-              <span class="number pull-right">{{format-number year.count}}</span>
-              <div class="clearfix"/>
-            </li>
-          {{/each}}
-        </ul>
-      </div>
-    </div>
-  {{/if}}
   {{#if model.meta.registered}}
     <div class="panel facets">
       <div class="panel-body">
