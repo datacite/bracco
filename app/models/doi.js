@@ -186,6 +186,7 @@ export default DS.Model.extend(Validations, {
   isActive: DS.attr('boolean', { defaultValue: true }),
   state: DS.attr('string'),
   event: DS.attr('string'),
+  created: DS.attr('date'),
   registered: DS.attr('date'),
   updated: DS.attr('date'),
 

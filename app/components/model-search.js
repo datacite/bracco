@@ -61,7 +61,7 @@ export default Ember.Component.extend(RouteMixin, {
     this.set('modelName', placeholders[this.get('model').get("modelName")]);
 
     if (this.get('model').get("modelName") === "doi") {
-      this.set('formats', { '-created': 'Sort by Date Registered', 'name': 'Sort by DOI Name', 'relevance': 'Sort by Relevance' });
+      this.set('formats', { '-created': 'Sort by Date Created', 'name': 'Sort by DOI Name', 'relevance': 'Sort by Relevance' });
     } else if (['prefix', 'provider-prefix', 'client-prefix'].includes(this.get('model').get("modelName"))) {
       this.set('formats', { 'name': 'Sort by Prefix', '-created': 'Sort by Date Created' });
     } else {
