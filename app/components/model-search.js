@@ -28,11 +28,18 @@ export default Ember.Component.extend(RouteMixin, {
 
   actions: {
     doSearch(query) {
+      if (query) {
+        this.set('sort', 'relevance');
+      } else if (this.get('sort') === 'relevance') {
+        this.set('sort', null);
+      }
+
       this.set('query', query);
       this.search();
     },
     clear() {
       this.set('query', null);
+      this.set('sort', null);
       this.search();
     },
     selectMetadata(metadata) {
@@ -54,11 +61,11 @@ export default Ember.Component.extend(RouteMixin, {
     this.set('modelName', placeholders[this.get('model').get("modelName")]);
 
     if (this.get('model').get("modelName") === "doi") {
-      this.set('formats', { 'relevance': 'Sort by Relevance', 'name': 'Sort by DOI Name', '-created': 'Sort by Date Registered' });
+      this.set('formats', { '-created': 'Sort by Date Registered', 'name': 'Sort by DOI Name', 'relevance': 'Sort by Relevance' });
     } else if (['prefix', 'provider-prefix', 'client-prefix'].includes(this.get('model').get("modelName"))) {
       this.set('formats', { 'name': 'Sort by Prefix', '-created': 'Sort by Date Created' });
     } else {
-      this.set('formats', { 'relevance': 'Sort by Relevance', 'name': 'Sort by Name', '-created': 'Sort by Date Joined' });
+      this.set('formats', { 'name': 'Sort by Name', '-created': 'Sort by Date Joined', 'relevance': 'Sort by Relevance' });
     }
   }
 });
