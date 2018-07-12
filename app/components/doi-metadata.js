@@ -1,9 +1,13 @@
 import Ember from 'ember';
 import fetch from 'fetch';
+import Component from '@ember/component';
+const { service } = Ember.inject;
 import vkbeautify from 'npm:vkbeautify';
 import ENV from 'bracco/config/environment';
 
-export default Ember.Component.extend({
+export default Component.extend({
+  currentUser: service(),
+
   tagName: 'div',
   metadata: null,
   output: null,
@@ -27,6 +31,7 @@ export default Ember.Component.extend({
 
       let result = fetch(url, {
         headers: {
+          'Authorization': 'Bearer ' + this.get('currentUser').get('jwt'),
           'Accept': acceptHeaders[metadata]
         }
       }).then(function(response) {
