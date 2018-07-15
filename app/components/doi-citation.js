@@ -1,8 +1,11 @@
 import Ember from 'ember';
 import fetch from 'fetch';
+const { service } = Ember.inject;
 import ENV from 'bracco/config/environment';
 
 export default Ember.Component.extend({
+  currentUser: service(),
+
   tagName: 'div',
   citation: null,
   citationOutput: null,
@@ -18,6 +21,7 @@ export default Ember.Component.extend({
     let url = ENV.APP_URL + '/' + this.get('model').get("doi") + '?style=' + style;
     let result = fetch(url, {
       headers: {
+        'Authorization': 'Bearer ' + this.get('currentUser').get('jwt'),
         'Accept': 'text/x-bibliography'
       }
     }).then(function(response) {
