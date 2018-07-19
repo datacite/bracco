@@ -14,7 +14,7 @@ const validUrl = BaseValidator.extend({
       return true;
     }
 
-    let url = ENV.APP_URL + '/dois/status?url=' + value;
+    let url = ENV.API_URL + '/dois/status?url=' + value;
     return fetch(url, {
       method: 'post',
       timeout: 5000,

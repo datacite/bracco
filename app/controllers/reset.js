@@ -14,7 +14,7 @@ export default Ember.Controller.extend({
       this.set('requestSent', false);
       let { identification } = this.getProperties('identification');
       let self = this;
-      let url = ENV.APP_URL + '/reset';
+      let url = ENV.API_URL + '/reset';
       
       fetch(url, {
         method: 'POST',

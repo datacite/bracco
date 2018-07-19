@@ -2,5 +2,5 @@ import OAuth2PasswordGrantAuthenticator from 'ember-simple-auth/authenticators/o
 import ENV from 'bracco/config/environment';
 
 export default OAuth2PasswordGrantAuthenticator.extend({
-  serverTokenEndpoint: ENV.APP_URL + '/token'
+  serverTokenEndpoint: ENV.API_URL + '/token'
 });

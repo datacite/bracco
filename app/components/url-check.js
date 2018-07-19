@@ -16,7 +16,7 @@ export default Ember.Component.extend({
   actions: {
     checkLink() {
       let self = this;
-      let url = ENV.APP_URL + '/dois/status?id=' + this.get('model').get('doi');
+      let url = ENV.API_URL + '/dois/status?id=' + this.get('model').get('doi');
       fetch(url, {
         method: 'post',
         timeout: 5000,

@@ -45,7 +45,7 @@ export default Component.extend({
   },
   generate() {
     let self = this;
-    let url = ENV.APP_URL + '/dois/random?prefix=' + this.get('model').get('prefix');
+    let url = ENV.API_URL + '/dois/random?prefix=' + this.get('model').get('prefix');
     return fetch(url, {
       headers: {
         'Authorization': 'Bearer ' + this.get('currentUser').get('jwt')

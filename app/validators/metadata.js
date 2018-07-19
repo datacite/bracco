@@ -12,7 +12,7 @@ const metadata = BaseValidator.extend({
       return true;
     } else {
       let xml = this.b64EncodeUnicode(value);
-      let url = ENV.APP_URL + '/dois/validate';
+      let url = ENV.API_URL + '/dois/validate';
       return fetch(url, {
         method: 'post',
         headers: {

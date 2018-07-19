@@ -4,7 +4,7 @@ module.exports = function(env) {
                         'NAVMENU_TITLE',
                         'SEARCH_URL',
                         'ORCID_URL',
-                        'APP_URL',
+                        'API_URL',
                         'CDN_URL',
                         'JWT_PUBLIC_KEY',
                         'JWT_PRIVATE_KEY',

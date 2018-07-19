@@ -19,7 +19,7 @@ export default Component.extend({
     } else {
       this.set('output', null);
       let self = this;
-      let url = ENV.APP_URL + '/' + this.get('model').get("doi");
+      let url = ENV.API_URL + '/' + this.get('model').get("doi");
       let acceptHeaders = {
         'datacite': 'application/vnd.datacite.datacite+xml',
         'schema_org': 'application/vnd.schemaorg.ld+json',

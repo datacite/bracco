@@ -54,7 +54,7 @@ export default Ember.Component.extend({
     fetch(url).then(function(response) {
       return response.json();
     }).then(function(data) {
-      if (ENV.APP_URL === "https://app.datacite.org") {
+      if (ENV.API_URL === "https://api.datacite.org") {
         data.header_links = data.production_links;
       } else {
         data.header_links = data.stage_links;
