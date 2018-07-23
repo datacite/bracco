@@ -61,9 +61,7 @@ const Validations = buildValidations({
     }),
     validator('valid-url', {
       allowBlank: true,
-      isWarning: Ember.computed('model.state', 'model.prefix', function() {
-        return (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
-      })
+      isWarning: true
     })
   ],
   author: [
