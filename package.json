@@ -139,6 +139,7 @@
     "loader.js": "^4.2.3",
     "mathjax-electron": "^2.0.1",
     "minimatch": "^3.0.4",
+    "html-entities": "^1.2.1",
     "sanitize-html": "^1.14.1",
     "urijs": "^1.18.12",
     "vkbeautify": "^0.99.3"

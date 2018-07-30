@@ -1,11 +1,17 @@
 import Ember from 'ember';
+import HtmlEntities from 'npm:html-entities';
 import SanitizeHtml from 'npm:sanitize-html';
+
+const Entities = HtmlEntities.AllHtmlEntities;
+const entities = new Entities();
 
 // sanitize and truncate text
 export function formatText([text], hash) {
   if (Ember.typeOf(text) === 'object') {
     text = text.text;
   }
+  text = entities.decode(text);
+  
   let allowedTags = ['strong', 'em', 'b', 'i', 'code', 'pre', 'sub', 'sup', 'br']
   let sanitizedText = SanitizeHtml(text, { allowedTags: allowedTags });
   let words = sanitizedText.split(" ");

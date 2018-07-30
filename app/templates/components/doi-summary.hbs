@@ -4,9 +4,9 @@
     <span class="small">{{model.resource-type.title}}</span>
   {{else}}
     {{#if model.isDraft}}
-      {{model.title}}
+      {{format-text model.title}}
     {{else}}
-      <a target="_blank" href="{{model.identifier}}">{{model.title}}</a>
+      <a target="_blank" href="{{model.identifier}}">{{format-text model.title}}</a>
     {{/if}}
     <span class="small">{{model.resource-type.title}}</span>
   {{/if}}
