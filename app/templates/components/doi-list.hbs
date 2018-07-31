@@ -145,4 +145,25 @@
       </div>
     </div>
   {{/if}}
+  {{#if model.meta.sources}}
+    <div class="panel facets add">
+      <div class="panel-body">
+        <h4>State</h4>
+        <ul>
+          {{#each model.meta.sources as |source|}}
+            <li>
+              {{#if model.otherParams.source}}
+                {{#link-to link (query-params source=null)}}{{fa-icon "check-square-o"}}{{/link-to}}
+              {{else}}
+                {{#link-to link (query-params source=source.id)}}{{fa-icon "square-o"}}{{/link-to}}
+              {{/if}}
+              <div class="facet-title">{{source.title}}</div>
+              <span class="number pull-right">{{format-number source.count}}</span>
+              <div class="clearfix"/>
+            </li>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+  {{/if}}
 </div>
