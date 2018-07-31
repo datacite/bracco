@@ -182,6 +182,7 @@ export default DS.Model.extend(Validations, {
   metadataVersion: DS.attr('string'),
   schemaVersion: DS.attr('string'),
   isActive: DS.attr('boolean', { defaultValue: true }),
+  source: DS.attr('string', { defaultValue: "fabrica" }),
   state: DS.attr('string'),
   event: DS.attr('string'),
   created: DS.attr('date'),
