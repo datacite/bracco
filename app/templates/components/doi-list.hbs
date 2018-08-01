@@ -28,7 +28,7 @@
 </div>
 
 <div class='col-md-3'>
-  {{#if (and (or (can "create doi" model) (can "upload doi" model)) (eq link "clients.show.dois"))}}
+  {{#if (or (and (or (can "create doi" model) (can "upload doi" model)) (eq link "clients.show.dois")) (and (can "transfer doi" model) (gt model.length 0)))}}
     <div class="panel facets">
       <div class="panel-body">
         <div class="btn-toolbar">
@@ -39,16 +39,9 @@
             {{#if (can "upload doi" model)}}
               {{#link-to "clients.show.dois.upload" client.id class="btn btn-warning"}}{{fa-icon "upload"}} Create{{if media.isXl ' DOI'}} (File Upload){{/link-to}}
             {{/if}}
-          </div>
-        </div>
-      </div>
-    </div>
-  {{else if (and (can "transfer doi" model) (gt model.length 0))}}
-    <div class="panel facets">
-      <div class="panel-body">
-        <div class="btn-toolbar">
-          <div class="btn-group-vertical btn-group-sm">
-            {{#link-to "clients.show.transfer" model.otherParams.client-id class="btn btn-warning" id="transfer-dois"}}{{fa-icon "arrow-circle-o-right"}}Transfer{{if media.isXl ' DOIs'}}{{/link-to}}
+            {{#if (and (can "transfer doi" model) (gt model.length 0))}}
+              {{#link-to "clients.show.transfer" model.otherParams.client-id class="btn btn-warning" id="transfer-dois"}}{{fa-icon "arrow-circle-o-right"}}Transfer{{if media.isXl ' DOIs'}}{{/link-to}}
+            {{/if}}
           </div>
         </div>
       </div>
