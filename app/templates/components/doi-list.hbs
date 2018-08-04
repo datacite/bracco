@@ -96,17 +96,17 @@
       </div>
     </div>
   {{/if}}
-  {{#if model.meta.registered}}
+  {{#if model.meta.created}}
     <div class="panel facets">
       <div class="panel-body">
-        <h4>Registration Year</h4>
+        <h4>Year created</h4>
         <ul>
-          {{#each model.meta.registered as |year|}}
+          {{#each model.meta.created as |year|}}
             <li>
-              {{#if model.otherParams.registered}}
-                {{#link-to link (query-params registered='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+              {{#if model.otherParams.created}}
+                {{#link-to link (query-params created='')}}{{fa-icon "check-square-o"}}{{/link-to}}
               {{else}}
-                {{#link-to link (query-params registered=year.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                {{#link-to link (query-params created=year.id)}}{{fa-icon "square-o"}}{{/link-to}}
               {{/if}}
               <div class="facet-title">{{year.title}}</div>
               <span class="number pull-right">{{format-number year.count}}</span>
