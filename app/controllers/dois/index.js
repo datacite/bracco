@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  queryParams: ['query', 'resource-type-id', 'provider-id', 'client-id', 'person-id', 'prefix', 'year', 'registered', 'state', 'source', 'sort', 'schema-version', 'page', 'perPage'],
+  queryParams: ['query', 'resource-type-id', 'provider-id', 'client-id', 'person-id', 'prefix', 'year', 'created', 'state', 'source', 'sort', 'schema-version', 'page', 'perPage'],
   query: null,
   'resource-type-id': null,
   'provider-id': null,
@@ -9,7 +9,7 @@ export default Ember.Controller.extend({
   'person-id': null,
   prefix: null,
   year: null,
-  registered: null,
+  created: null,
   state: null,
   source: null,
   sort: null,
