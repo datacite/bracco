@@ -39,7 +39,7 @@
             {{#if (can "upload doi" model)}}
               {{#link-to "clients.show.dois.upload" client.id class="btn btn-warning"}}{{fa-icon "upload"}} Create{{if media.isXl ' DOI'}} (File Upload){{/link-to}}
             {{/if}}
-            {{#if (and (can "transfer doi" model) (gt model.length 0))}}
+            {{#if (and (can "transfer doi" model) model.otherParams.client-id (gt model.length 0))}}
               {{#link-to "clients.show.transfer" model.otherParams.client-id class="btn btn-warning" id="transfer-dois"}}{{fa-icon "arrow-circle-o-right"}}Transfer{{if media.isXl ' DOIs'}}{{/link-to}}
             {{/if}}
           </div>
@@ -110,6 +110,27 @@
               {{/if}}
               <div class="facet-title">{{year.title}}</div>
               <span class="number pull-right">{{format-number year.count}}</span>
+              <div class="clearfix"/>
+            </li>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+  {{/if}}
+  {{#if model.meta.clients}}
+    <div class="panel facets">
+      <div class="panel-body">
+        <h4>Clients</h4>
+        <ul>
+          {{#each model.meta.clients as |client|}}
+            <li>
+              {{#if model.otherParams.client-id}}
+                {{#link-to link (query-params client-id='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+              {{else}}
+                {{#link-to link (query-params client-id=client.id)}}{{fa-icon "square-o"}}{{/link-to}}
+              {{/if}}
+              <div class="facet-title">{{client.title}}</div>
+              <span class="number pull-right">{{format-number client.count}}</span>
               <div class="clearfix"/>
             </li>
           {{/each}}
