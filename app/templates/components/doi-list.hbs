@@ -78,7 +78,7 @@
   {{#if model.meta.resource-types}}
     <div class="panel facets">
       <div class="panel-body">
-        <h4>Resource Types</h4>
+        <h4>Resource Type</h4>
         <ul>
           {{#each model.meta.resource-types as |resource-type|}}
             <li>
@@ -141,7 +141,7 @@
   {{#if model.meta.prefixes}}
     <div class="panel facets">
       <div class="panel-body">
-        <h4>Prefixes</h4>
+        <h4>Prefix</h4>
         <ul>
           {{#each model.meta.prefixes as |prefix|}}
             <li>
@@ -162,7 +162,7 @@
   {{#if model.meta.schema-versions}}
     <div class="panel facets">
       <div class="panel-body">
-        <h4>Schema Versions</h4>
+        <h4>Schema Version</h4>
         <ul>
           {{#each model.meta.schema-versions as |schema-version|}}
             <li>
@@ -183,7 +183,7 @@
   {{#if (and (can "source doi" model) model.meta.sources)}}
     <div class="panel facets add">
       <div class="panel-body">
-        <h4>State</h4>
+        <h4>Source</h4>
         <ul>
           {{#each model.meta.sources as |source|}}
             <li>
@@ -192,7 +192,7 @@
               {{else}}
                 {{#link-to link (query-params source=source.id)}}{{fa-icon "square-o"}}{{/link-to}}
               {{/if}}
-              <div class="facet-title">{{source.title}}</div>
+              <div class="facet-title">{{lowercase source.title}}</div>
               <span class="number pull-right">{{format-number source.count}}</span>
               <div class="clearfix"/>
             </li>
