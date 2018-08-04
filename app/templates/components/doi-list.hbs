@@ -138,6 +138,27 @@
       </div>
     </div>
   {{/if}}
+  {{#if model.meta.prefixes}}
+    <div class="panel facets">
+      <div class="panel-body">
+        <h4>Prefixes</h4>
+        <ul>
+          {{#each model.meta.prefixes as |prefix|}}
+            <li>
+              {{#if model.otherParams.prefix}}
+                {{#link-to link (query-params prefix='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+              {{else}}
+                {{#link-to link (query-params prefix=prefix.id)}}{{fa-icon "square-o"}}{{/link-to}}
+              {{/if}}
+              <div class="facet-title">{{prefix.title}}</div>
+              <span class="number pull-right">{{format-number prefix.count}}</span>
+              <div class="clearfix"/>
+            </li>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+  {{/if}}
   {{#if model.meta.schema-versions}}
     <div class="panel facets">
       <div class="panel-body">
@@ -159,7 +180,7 @@
       </div>
     </div>
   {{/if}}
-  {{#if model.meta.sources}}
+  {{#if (and (can "source doi" model) model.meta.sources)}}
     <div class="panel facets add">
       <div class="panel-body">
         <h4>State</h4>
