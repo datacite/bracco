@@ -87,12 +87,12 @@ module.exports = function(environment) {
     ENV.featureFlags['use-elasticsearch'] = true;
   }
 
-  if (environment === 'stage') {
-    ENV.featureFlags['use-elasticsearch'] = true;
-  }
-
   if (environment === 'production') {
     // here you can enable a production-specific feature
+  }
+
+  if (process.env.DEPLOY_TARGET === 'stage') {
+    ENV.featureFlags['use-elasticsearch'] = true;
   }
 
   return ENV;
