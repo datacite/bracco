@@ -45,6 +45,12 @@
         <a href="http://schema.datacite.org/meta/kernel-{{model.schemaVersionString}}">DataCite Metadata Schema {{model.schemaVersionString}}</a>
       </div>
     {{/if}}
+    {{#if (and (can "source doi" model) model.source)}}
+      <h5>Source</h5>
+      <div class="source">
+        {{model.source}}
+      </div>
+    {{/if}}
   {{else}}
     {{#if model.created}}
       <h5>Record created</h5>
