@@ -43,6 +43,9 @@ module.exports = function(environment) {
       showProgress: true,
       preventDuplicates: true
     },
+    featureFlags: {
+      'use-elasticsearch': false
+    },
 
     SITE_TITLE: process.env.SITE_TITLE || "DataCite DOI Fabrica Test",
     NAVMENU_TITLE: process.env.NAVMENU_TITLE,
@@ -68,6 +71,7 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
+    ENV.featureFlags['use-elasticsearch'] = true;
   }
 
   if (environment === 'test') {
@@ -79,6 +83,12 @@ module.exports = function(environment) {
     ENV.APP.LOG_VIEW_LOOKUPS = false;
 
     ENV.APP.rootElement = '#ember-testing';
+
+    ENV.featureFlags['use-elasticsearch'] = true;
+  }
+
+  if (environment === 'stage') {
+    ENV.featureFlags['use-elasticsearch'] = true;
   }
 
   if (environment === 'production') {

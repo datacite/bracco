@@ -20,8 +20,10 @@
                 {{#each provider-prefix.clients as |client|}}
                   {{#link-to "clients.show.prefixes.show" client.id provider-prefix.prefix.id}}{{client.name}}{{/link-to}}<br/>
                 {{/each}}
-                <h5>DOIs</h5>
-                {{#link-to "providers.show.dois" provider-prefix.provider.id (query-params prefix=provider-prefix.prefix.id)}}DOIs for prefix {{provider-prefix.prefix.id}}{{/link-to}}
+                {{#if (feature-flag 'useElasticsearch')}}
+                  <h5>DOIs</h5>
+                  {{#link-to "providers.show.dois" provider-prefix.provider.id (query-params prefix=provider-prefix.prefix.id)}}DOIs for prefix {{provider-prefix.prefix.id}}{{/link-to}}
+                {{/if}}
               {{else}}
                 <span class="icon-warning">No clients found.</span>
               {{/if}}
