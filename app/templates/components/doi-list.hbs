@@ -117,10 +117,10 @@
       </div>
     </div>
   {{/if}}
-  {{#if (and (gt model.meta.clients 0) (not-eq link "clients.show.dois"))}}
+  {{#if (and (not-eq link "clients.show.dois") model.meta.clients)}}
     <div class="panel facets">
       <div class="panel-body">
-        <h4>Clients</h4>
+        <h4>Client</h4>
         <ul>
           {{#each model.meta.clients as |client|}}
             <li>
