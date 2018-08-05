@@ -31,6 +31,8 @@
                     {{#each prefix.clients as |client|}}
                       {{#link-to "clients.show.prefixes.show" client.id prefix.id}}{{client.name}}{{/link-to}}<br/>
                     {{/each}}
+                    <h5>DOIs</h5>
+                    {{#link-to "dois" (query-params prefix=prefix.id)}}DOIs for prefix {{prefix.id}}{{/link-to}}
                   {{else}}
                     <span class="icon-warning">No clients found.</span>
                   {{/if}}
