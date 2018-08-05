@@ -106,23 +106,32 @@
       </div>
     {{/if}}
 
-    {{#if model.meta.years}}
+    {{#if (or model.meta.years model.otherParams.year)}}
       <div class="panel facets add">
         <div class="panel-body">
           <h4>Year joined</h4>
           <ul>
-            {{#each model.meta.years as |year|}}
+            {{#if model.meta.years}}
+              {{#each model.meta.years as |year|}}
+                <li>
+                  {{#if model.otherParams.year}}
+                    {{#link-to "clients" (query-params year='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+                  {{else}}
+                    {{#link-to "clients" (query-params year=year.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                  {{/if}}
+                  <div class="facet-title">{{year.title}}</div>
+                  <span class="number pull-right">{{year.count}}</span>
+                  <div class="clearfix"/>
+                </li>
+              {{/each}}
+            {{else}}
               <li>
-                {{#if model.otherParams.year}}
-                  {{#link-to link (query-params year=null)}}{{fa-icon "check-square-o"}}{{/link-to}}
-                {{else}}
-                  {{#link-to link (query-params year=year.id)}}{{fa-icon "square-o"}}{{/link-to}}
-                {{/if}}
-                <div class="facet-title">{{year.title}}</div>
-                <span class="number pull-right">{{year.count}}</span>
+                {{#link-to "clients" (query-params year='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+                <div class="facet-title">{{model.otherParams.year}}</div>
+                <span class="number pull-right">0</span>
                 <div class="clearfix"/>
               </li>
-            {{/each}}
+            {{/if}}
           </ul>
         </div>
       </div>
