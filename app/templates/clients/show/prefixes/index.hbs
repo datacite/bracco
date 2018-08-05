@@ -15,7 +15,7 @@
             <span class="icon-default">Demo prefix</span>
           {{/if}}
 
-          {{#if (feature-flag 'useElasticsearch')}}
+          {{#if features.useElasticsearch}}
             <h5>DOIs</h5>
             {{#link-to "clients.show.dois" client-prefix.client.id (query-params prefix=client-prefix.prefix.id)}}DOIs for prefix {{client-prefix.prefix.id}}{{/link-to}}
           {{/if}}
