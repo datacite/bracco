@@ -7,12 +7,13 @@ import ENV from 'bracco/config/environment';
 const metadata = BaseValidator.extend({
   currentUser: service(),
 
-  validate(value, options) {
+  validate(value, options, model) {
     if (!value && options.allowBlank) {
       return true;
     } else {
       let xml = this.b64EncodeUnicode(value);
       let url = ENV.API_URL + '/dois/validate';
+      let clientId = model.get('client').get('id');
       return fetch(url, {
         method: 'post',
         headers: {
@@ -30,7 +31,7 @@ const metadata = BaseValidator.extend({
               client: {
                 data: {
                   type: "clients",
-                  id: this.get('currentUser').get('client_id')
+                  id: clientId
                 }
               }
             }
