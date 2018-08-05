@@ -46,7 +46,12 @@
       </div>
     {{/if}}
     {{#if (and (can "source doi" model) model.source)}}
-      <h5>Source</h5>
+      <h5>
+        Source
+        <span>{{fa-icon "question-circle-o"}}
+          {{#bs-tooltip placement="top" viewportPadding=10}}Service used for DOI registration.{{/bs-tooltip}}
+        </span>
+      </h5>
       <div class="source">
         {{model.source}}
       </div>
