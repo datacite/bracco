@@ -4,7 +4,7 @@
       <div class="col-md-10 col-md-offset-2"><h3 class="edit">Transfer DOIs</h3></div>
 
       {{#bs-form formLayout="horizontal" horizontalLabelGridClass="col-md-2" model=this onSubmit=(action "submit") submitOnEnter=true as |form|}}
-        {{#form.element controlType="power-select" property="client" label="Client" helpText='Transfer all DOIs to this client. It can take up to 8 hours until these changes are indexed and show up outside of DOI Fabrica.' optionLabelPath="name" options=clients destination=client as |el|}}
+        {{#form.element controlType="power-select" property="client" label="Client" helpText='Transfer all DOIs to this client. It can take up to one hour for the transfer to complete.' optionLabelPath="name" options=clients destination=client as |el|}}
           {{#el.control onChange=(action "selectClient") search=(action "searchClient") searchField="name" searchPlaceholder="Type to search..." allowClear=true as |item|}}
             {{item.name}}
           {{/el.control}}

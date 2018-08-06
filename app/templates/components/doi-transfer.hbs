@@ -9,7 +9,7 @@
         {{#bs-form formLayout="horizontal" horizontalLabelGridClass="col-md-2" model=model onSubmit=(action "submit" model) as |form|}}
           {{form.element controlType="hidden" property="doi" required=false}}
 
-          {{#form.element controlType="power-select" property="client" label="Client" helpText='Transfer the DOI to this client. It can take up to 8 hours until these changes are indexed and show up outside of DOI Fabrica.' optionLabelPath="name" options=clients destination=client.id as |el|}}
+          {{#form.element controlType="power-select" property="client" label="Client" helpText='Transfer the DOI to this client. It can take up one hour for the transfer to complete.' optionLabelPath="name" options=clients destination=client.id as |el|}}
             {{#el.control onChange=(action "selectClient") search=(action "searchClient") searchField="name" searchPlaceholder="Type to search..." as |item|}}
               {{item.name}}
             {{/el.control}}
