@@ -1,6 +1,6 @@
 <h3 class="work">
   {{#if isList}}
-    {{#link-to "clients.show.dois.show" model.client.id model.id}}{{#if model.title}}{{format-text model.title}}{{else}}model.doi{{/if}}{{/link-to}}
+    {{#link-to "clients.show.dois.show" model.client.id model.id}}{{#if model.title}}{{format-text model.title}}{{else}}{{model.doi}}{{/if}}{{/link-to}}
     <span class="small">{{model.resource-type.title}}</span>
   {{else}}
     {{#if model.isDraft}}
