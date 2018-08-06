@@ -42,7 +42,8 @@ export default Ember.Component.extend({
     },
     submit() {
       this.get('model').save();
-      this.get('flashMessages').success('DOI transfer for ' + this.get('intl').formatNumber(this.get('model').get('totalDoiCount')) + ' DOIs started, the transfer can take up to one hour to complete.', {
+      let count = this.get('model').get('totalDoiCount');
+      this.get('flashMessages').success('DOI transfer for ' + this.get('intl').formatNumber(count) + ' DOIs started, the transfer should take about ' + this.get('intl').formatNumber(Math.ceil(count/600)) + ' minutes to complete.', {
         timeout: 5000,
         sticky: true
       });
