@@ -28,7 +28,7 @@
 </div>
 
 <div class='col-md-3'>
-  {{#if (or (and (or (can "create doi" model) (can "upload doi" model)) (eq link "clients.show.dois")) (and (can "transfer doi" model)))}}
+  {{#if (and (eq link "clients.show.dois") (or (can "create doi" model) (can "upload doi" model) (can "transfer doi" model)))}}
     <div class="panel facets">
       <div class="panel-body">
         <div class="btn-toolbar">
