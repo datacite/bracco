@@ -5,6 +5,15 @@ import { Ability } from 'ember-can';
 export default Ability.extend({
   currentUser: service(),
 
+  canSource: Ember.computed('currentUser.role_id', function() {
+    switch(this.get('currentUser.role_id')) {
+      case 'staff_admin':
+        return true;
+      default:
+        return false;
+    }
+  }),
+
   canDelete: Ember.computed('currentUser.role_id', function() {
     switch(this.get('currentUser.role_id')) {
       case 'staff_admin':

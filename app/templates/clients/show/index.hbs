@@ -1,5 +1,9 @@
-<div class="row">
+<div class="row row-chart">
   {{bar-chart data=model.doiCount label='DOI' model=model link='clients.show.dois' cumulative=false}}
+  
+  {{#if (can "source client" model)}}
+    {{client-usage-stats model=model}}
+  {{/if}}
 </div>
 
 {{#if (can "read messages" model)}}
