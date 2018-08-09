@@ -33,3 +33,7 @@
   {{#if model.xml}}
     {{doi-citation model=model}}
   {{/if}}
+
+  {{#if (can "source doi" model)}}
+    {{doi-usage-stats model=model}}
+  {{/if}}

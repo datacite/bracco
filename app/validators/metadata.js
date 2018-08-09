@@ -18,7 +18,7 @@ const metadata = BaseValidator.extend({
         method: 'post',
         headers: {
           'authorization': 'Bearer ' + this.get('currentUser').get('jwt'),
-          'content-type': 'application/json; charset=utf-8'
+          'content-type': 'application/vnd.api+json; charset=utf-8'
         },
         body: JSON.stringify({
           data: {
