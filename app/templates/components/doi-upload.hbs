@@ -1,7 +1,7 @@
 <label class="control-label col-md-2">Metadata</label>
 <div class="col-md-10">
   <div class="btn-toolbar btn-sm btn-file">
-    {{#x-file-input name="files" multiple=false action=(action "didSelectFiles") accept="application/xml,application/json,text/plain"}}
+    {{#x-file-input name="files" multiple=false action=(action "didSelectFiles") accept="application/xml,application/json,application/x-bibtex,application/x-research-info-systems,text/plain"}}
       <span class="btn btn-sm">{{fa-icon "upload"}} Upload File</span>
     {{/x-file-input}}
   </div>
