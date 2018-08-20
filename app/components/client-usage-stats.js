@@ -23,7 +23,7 @@ export default Ember.Component.extend({
     let self = this;
     this.get('store').query('prefix', { 'client-id': this.get('model.id'), sort: 'name', 'page[size]': 25 }).then(function(prefixes) {
       prefixes = prefixes.mapBy('id').removeObject('10.5072').join(',')
-      let url = ENV.API_URL + '/events?prefix=' + prefixes;
+      let url = ENV.EVENTDATA_URL + '/events?prefix=' + prefixes;
 
       fetch(url, {
         headers: {

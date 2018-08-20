@@ -20,7 +20,7 @@ export default Ember.Component.extend({
 
   fetchUsage() {
     let self = this;
-    let url = ENV.API_URL + '/events?doi=' + this.get('model').get("doi");
+    let url = ENV.EVENTDATA_URL + '/events?doi=' + this.get('model').get("doi");
     fetch(url, {
       headers: {
         'Authorization': 'Bearer ' + this.get('currentUser').get('jwt'),
