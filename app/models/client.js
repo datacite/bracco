@@ -80,12 +80,6 @@ export default DS.Model.extend(Validations, {
   repository: DS.belongsTo('repository', {
     async: false
   }),
-  prefixes: DS.hasMany('prefix', {
-    async: false
-  }),
-  'client-prefixes': DS.hasMany('client-prefix', {
-    async: false
-  }),
   meta: DS.attr(),
 
   name: DS.attr('string'),

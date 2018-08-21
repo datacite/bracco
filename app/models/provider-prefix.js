@@ -14,9 +14,6 @@ export default DS.Model.extend(Validations, {
   prefix: DS.belongsTo('prefix', {
     async: false
   }),
-  clients: DS.hasMany('client', {
-    async: false
-  }),
 
   created: DS.attr('date')
 });
