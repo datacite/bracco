@@ -54,7 +54,7 @@
     </div>
   {{/if}}
 
-  {{#if features.useElasticsearch}}
+  {{#if (or features.useElasticsearch (eq link "dois"))}}
     {{#if (or model.meta.states model.otherParams.state)}}
       <div class="panel facets add">
         <div class="panel-body">
