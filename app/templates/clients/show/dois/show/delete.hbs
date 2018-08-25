@@ -1,26 +1,21 @@
-<h2 class="work">{{model.doi}}</h2>
+<div class="col-md-9 col-md-offset-3"><h2 class="doi">{{model.doi}}</h2></div>
 
-<div class="row">
-  <div class='col-md-3'>
-    {{client-sidebar model=model}}
-  </div>
-  <div class="col-md-9">
-    <div class="panel panel-transparent">
-      <div class="panel-body">
-        {{#bs-form formLayout="vertical" model=model onSubmit=(action "destroy") submitOnEnter=true as |form|}}
-          {{#form.group }}
-            {{form.element controlType="text" label='Are you sure you want to delete this DOI? This action cannot be undone.' property='confirmDoi' helpText='Please add the DOI to confirm.' showValidationOn="input" autofocus=true}}
-          {{/form.group}}
+<div class="panel panel-transparent">
+  <div class="panel-body">
+    <div class="col-md-9 col-md-offset-3">
+      {{#bs-form formLayout="vertical" model=model onSubmit=(action "destroy") submitOnEnter=true as |form|}}
+        {{#form.group }}
+          {{form.element controlType="text" label='Are you sure you want to delete this DOI? This action cannot be undone.' property='confirmDoi' helpText='Please add the DOI to confirm.' showValidationOn="input" autofocus=true}}
+        {{/form.group}}
 
-          <div class="pseudo-footer">
-            <div class="btn-toolbar pull-right">
-              <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
-              <button {{action "destroy"}} disabled={{v-get model 'confirmDoi' 'isInvalid'}} class="btn btn-sm btn-fill">Delete</button>
-            </div>
-            <div class="clearfix"/>
+        <div class="pseudo-footer">
+          <div class="btn-toolbar pull-right">
+            <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
+            <button {{action "destroy"}} disabled={{v-get model 'confirmDoi' 'isInvalid'}} class="btn btn-sm btn-fill">Delete</button>
           </div>
-        {{/bs-form}}
-      </div>
+          <div class="clearfix"/>
+        </div>
+      {{/bs-form}}
     </div>
   </div>
 </div>
