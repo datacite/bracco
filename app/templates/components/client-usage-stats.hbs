@@ -1,2 +1,6 @@
-{{month-chart data=(readonly usageViews) label='Views'}}
-{{month-chart data=(readonly usageDownloads) label='Downloads'}}
+{{#if usageViews}}
+  {{month-chart data=usageViews label='Views'}}
+{{/if}}
+{{#if usageDownloads}}
+  {{month-chart data=usageDownloads label='Downloads'}}
+{{/if}}
