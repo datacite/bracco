@@ -23,8 +23,8 @@
   </div>
 {{/if}}
 {{#if isList}}
-  <div class="updated">
-    Last updated {{format-time model.updated year='numeric' month='long' day='numeric'}}.
+  <div class="created">
+    Created {{format-time model.created year='numeric' month='long' day='numeric'}}.
     <span class="text-{{model.state}}">{{titleize model.state}}</span>
   </div>
 {{/if}}
