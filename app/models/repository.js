@@ -7,7 +7,7 @@ const Validations = buildValidations({
 
 export default DS.Model.extend(Validations, {
   client: DS.belongsTo('client', {
-    async: false
+    async: true
   }),
 
   name: DS.attr('string'),

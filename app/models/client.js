@@ -75,10 +75,10 @@ const Validations = buildValidations({
 
 export default DS.Model.extend(Validations, {
   provider: DS.belongsTo('provider', {
-    async: false
+    async: true
   }),
   repository: DS.belongsTo('repository', {
-    async: false
+    async: true
   }),
   meta: DS.attr(),
 

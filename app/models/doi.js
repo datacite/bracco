@@ -154,10 +154,10 @@ const Validations = buildValidations({
 
 export default DS.Model.extend(Validations, {
   client: DS.belongsTo('client', {
-    async: false
+    async: true
   }),
   'resource-type': DS.belongsTo('resource-type', {
-    async: false
+    async: true
   }),
 
   identifier: DS.attr('string'),
