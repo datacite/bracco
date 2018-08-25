@@ -10,25 +10,21 @@
         </ol>
       {{/if}}
 
-      <div class="row">
-        <div class="col-md-9">
-          <h2 class="work">{{model.name}}{{#if (not model.isActive)}}<span class="small icon-warning">account not active</span>{{/if}}</h2>
-
-          <div class="tab-content nav-tabs-member">
-            {{#bs-nav type="tabs" as |nav|}}
-              {{#nav.item}}{{#nav.link-to "providers.show.index" model.id class="nav-link"}}Info{{/nav.link-to}}{{/nav.item}}
-              {{#nav.item}}{{#nav.link-to "providers.show.settings" model.id class="nav-link"}}Settings{{/nav.link-to}}{{/nav.item}}
-              {{#nav.item}}{{#nav.link-to "providers.show.clients" model.id class="nav-link"}}Clients{{/nav.link-to}}{{/nav.item}}
-              {{#nav.item}}{{#nav.link-to "providers.show.prefixes" model.id class="nav-link"}}Prefixes{{/nav.link-to}}{{/nav.item}}
-              {{#nav.item}}{{#nav.link-to "providers.show.dois" model.id class="nav-link"}}DOIs{{/nav.link-to}}{{/nav.item}}
-            {{/bs-nav}}
-          </div>
+      {{#if model.logoUrl}}
+        <div class="pull-right">
+          <img class="img-responsive" src="{{model.logoUrl}}">
         </div>
-        {{#if model.logoUrl}}
-          <div class="col-md-3">
-            <img class="img-responsive" src="{{model.logoUrl}}">
-          </div>
-        {{/if}}
+      {{/if}}
+      <h2 class="work">{{model.name}}{{#if (not model.isActive)}}<span class="small icon-warning">account not active</span>{{/if}}</h2>
+
+      <div class="tab-content nav-tabs-member">
+        {{#bs-nav type="tabs" as |nav|}}
+          {{#nav.item}}{{#nav.link-to "providers.show.index" model.id class="nav-link"}}Info{{/nav.link-to}}{{/nav.item}}
+          {{#nav.item}}{{#nav.link-to "providers.show.settings" model.id class="nav-link"}}Settings{{/nav.link-to}}{{/nav.item}}
+          {{#nav.item}}{{#nav.link-to "providers.show.clients" model.id class="nav-link"}}Clients{{/nav.link-to}}{{/nav.item}}
+          {{#nav.item}}{{#nav.link-to "providers.show.prefixes" model.id class="nav-link"}}Prefixes{{/nav.link-to}}{{/nav.item}}
+          {{#nav.item}}{{#nav.link-to "providers.show.dois" model.id class="nav-link"}}DOIs{{/nav.link-to}}{{/nav.item}}
+        {{/bs-nav}}
       </div>
 
       {{outlet}}

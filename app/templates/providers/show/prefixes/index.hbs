@@ -1,52 +1,5 @@
 <div class="row">
-  <div class='col-md-9 panel-list' id="content">
-    {{model-search model=model.prefixes sortable=true}}
-    
-    {{#if model.prefixes}}
-      {{#each model.prefixes as |provider-prefix|}}
-        <div class="panel panel-transparent">
-          <div class="panel-body">
-            {{#if (eq provider-prefix.prefix.id "10.5072")}}
-              <h3 class="member">{{provider-prefix.prefix.id}}</h3>
-            {{else}}
-              <h3 class="work">{{#link-to "providers.show.prefixes.show" model.provider.id provider-prefix.prefix.id}}{{provider-prefix.prefix.id}}{{/link-to}}</h3>
-            {{/if}}
-
-            {{#if (eq provider-prefix.prefix.id "10.5072")}}
-              <span class="icon-default">Demo prefix</span>
-            {{else}}
-              <h5>{{pluralize-word provider-prefix.clients.length "Client" omitCount=true}}</h5>
-              {{#if provider-prefix.clients}}
-                {{#each provider-prefix.clients as |client|}}
-                  {{#link-to "clients.show.prefixes.show" client.id provider-prefix.prefix.id}}{{client.name}}{{/link-to}}<br/>
-                {{/each}}
-                {{#if features.useElasticsearch}}
-                  <h5>DOIs</h5>
-                  {{#link-to "providers.show.dois" provider-prefix.provider.id (query-params prefix=provider-prefix.prefix.id)}}DOIs for prefix {{provider-prefix.prefix.id}}{{/link-to}}
-                {{/if}}
-              {{else}}
-                <span class="icon-warning">No clients found.</span>
-              {{/if}}
-            {{/if}}
-
-            <h5>Added</h5>
-            {{format-time provider-prefix.created year='numeric' month='long' day='numeric'}}
-          </div>
-        </div>
-      {{/each}}
-      <div class="text-center">
-        {{#if (gt model.prefixes.meta.total_pages 1)}}
-          {{page-numbers content=model.prefixes numPagesToShow=5 showFL=true}}
-        {{/if}}
-      </div>
-    {{else}}
-      {{#bs-alert dismissible=false type="warning"}}
-        No prefixes found.
-      {{/bs-alert}}
-    {{/if}}
-  </div>
-
-  <div class='col-md-3'>
+    <div class='col-md-3'>
     {{#if (can "write prefix" model.prefixes)}}
       <div class="panel facets">
         <div class="panel-body">
@@ -128,6 +81,52 @@
           </ul>
         </div>
       </div>
+    {{/if}}
+  </div>
+  <div class='col-md-9 panel-list' id="content">
+    {{model-search model=model.prefixes sortable=true}}
+    
+    {{#if model.prefixes}}
+      {{#each model.prefixes as |provider-prefix|}}
+        <div class="panel panel-transparent">
+          <div class="panel-body">
+            {{#if (eq provider-prefix.prefix.id "10.5072")}}
+              <h3 class="member">{{provider-prefix.prefix.id}}</h3>
+            {{else}}
+              <h3 class="work">{{#link-to "providers.show.prefixes.show" model.provider.id provider-prefix.prefix.id}}{{provider-prefix.prefix.id}}{{/link-to}}</h3>
+            {{/if}}
+
+            {{#if (eq provider-prefix.prefix.id "10.5072")}}
+              <span class="icon-default">Demo prefix</span>
+            {{else}}
+              <h5>{{pluralize-word provider-prefix.clients.length "Client" omitCount=true}}</h5>
+              {{#if provider-prefix.clients}}
+                {{#each provider-prefix.clients as |client|}}
+                  {{#link-to "clients.show.prefixes.show" client.id provider-prefix.prefix.id}}{{client.name}}{{/link-to}}<br/>
+                {{/each}}
+                {{#if features.useElasticsearch}}
+                  <h5>DOIs</h5>
+                  {{#link-to "providers.show.dois" provider-prefix.provider.id (query-params prefix=provider-prefix.prefix.id)}}DOIs for prefix {{provider-prefix.prefix.id}}{{/link-to}}
+                {{/if}}
+              {{else}}
+                <span class="icon-warning">No clients found.</span>
+              {{/if}}
+            {{/if}}
+
+            <h5>Added</h5>
+            {{format-time provider-prefix.created year='numeric' month='long' day='numeric'}}
+          </div>
+        </div>
+      {{/each}}
+      <div class="text-center">
+        {{#if (gt model.prefixes.meta.total_pages 1)}}
+          {{page-numbers content=model.prefixes numPagesToShow=5 showFL=true}}
+        {{/if}}
+      </div>
+    {{else}}
+      {{#bs-alert dismissible=false type="warning"}}
+        No prefixes found.
+      {{/bs-alert}}
     {{/if}}
   </div>
 </div>

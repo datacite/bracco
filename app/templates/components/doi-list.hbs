@@ -1,32 +1,3 @@
-<div class='col-md-9 panel-list' id="content">
-  {{model-search model=model sortable=true}}
-
-  {{#if model}}
-    {{#each model as |doi|}}
-      <div class="panel panel-transparent">
-        {{doi-summary model=doi isList=true}}
-
-        <div class="panel-footer">
-          {{#if doi.isDraft}}
-            {{fa-icon "info-circle"}} {{doi.doi}}
-          {{else}}
-            <a href="{{doi.identifier}}">{{fa-icon "external-link"}} {{doi.identifier}}</a>
-          {{/if}}
-        </div>
-      </div>
-    {{/each}}
-    <div class="text-center">
-      {{#if (gt model.meta.total_pages 1)}}
-        {{page-numbers content=model numPagesToShow=5 showFL=true}}
-      {{/if}}
-    </div>
-  {{else}}
-    {{#bs-alert dismissible=false type="warning"}}
-      No DOIs found.
-    {{/bs-alert}}
-  {{/if}}
-</div>
-
 <div class='col-md-3'>
   {{#if (and (eq link "clients.show.dois") (or (can "create doi" model) (can "upload doi" model) (can "transfer doi" model)))}}
     <div class="panel facets">
@@ -265,5 +236,34 @@
         </div>
       </div>
     {{/if}}
+  {{/if}}
+</div>
+
+<div class='col-md-9 panel-list' id="content">
+  {{model-search model=model sortable=true}}
+
+  {{#if model}}
+    {{#each model as |doi|}}
+      <div class="panel panel-transparent">
+        {{doi-summary model=doi isList=true}}
+
+        <div class="panel-footer">
+          {{#if doi.isDraft}}
+            {{fa-icon "info-circle"}} {{doi.doi}}
+          {{else}}
+            <a href="{{doi.identifier}}">{{fa-icon "external-link"}} {{doi.identifier}}</a>
+          {{/if}}
+        </div>
+      </div>
+    {{/each}}
+    <div class="text-center">
+      {{#if (gt model.meta.total_pages 1)}}
+        {{page-numbers content=model numPagesToShow=5 showFL=true}}
+      {{/if}}
+    </div>
+  {{else}}
+    {{#bs-alert dismissible=false type="warning"}}
+      No DOIs found.
+    {{/bs-alert}}
   {{/if}}
 </div>

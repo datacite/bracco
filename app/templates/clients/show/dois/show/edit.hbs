@@ -1,44 +1,37 @@
-<h2 class="work">{{model.doi}}</h2>
+<div class="col-md-9 col-md-offset-3"><h2 class="work">{{model.doi}}</h2></div>
 
-<div class="row">
-  <div class='col-md-9'>
-    <div class="panel panel-transparent">
-      <div class="panel-body">
-        <div class="col-md-10 col-md-offset-2">
-          <h3 class="help-header">Update DOI (Form)</h3>
-          <div class="help-block">
-            More information about DOI registration via form can be found on our <a target="_blank" href="https://support.datacite.org/docs/datacite-doi-fabrica-for-clients#section-registering-dois">Support Website</a>.
-          </div>
-        </div>
-
-        {{#bs-form formLayout="horizontal" horizontalLabelGridClass="col-md-2" model=model onSubmit=(action "submit" model) as |form|}}
-          {{form.element controlType="text" label="DOI" property="doi" helpText="The globally unique string that identifies the resource and can't be changed. DOIs with demo prefix 10.5072 will always remain in Draft state." disabled=true}}
-
-          {{doi-state model=model form=form}} 
-
-          {{form.element controlType="text" label="URL" property="url" helpText="The location of the landing page with more information about the resource." required=false}}
-
-          {{doi-author model=model form=form}}
-
-          {{form.element controlType="textarea" label="Title" property="title" rows=2 helpText="A name or title by which the resource is known." required=false}}
-          {{form.element controlType="text" label="Publisher" property="publisher" helpText="The name of the entity that holds, archives, publishes prints, distributes, releases, issues, or produces the resource." required=false}}
-          {{form.element controlType="text" label="Publication Year" property="published" helpText="The year when the resource was or will be made publicly available. Must be between 1450 and 2019." required=false}}
-
-          {{doi-resource-type model=model form=form}}
-          
-          {{form.element controlType="textarea" label="Description (optional)" property="description" rows=8 helpText="All additional information that does not fit in any of the other categories." required=false}}            
-
-          {{model-validation-errors model=model form=form}}
-
-          <div class="col-md-10 col-md-offset-2">
-            <button type="submit" class="btn btn-sm btn-fill">Update DOI</button>
-            <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
-          </div>
-        {{/bs-form}}
+<div class="panel panel-transparent">
+  <div class="panel-body">
+    <div class="col-md-9 col-md-offset-3">
+      <h3 class="help-header">Update DOI (Form)</h3>
+      <div class="help-block">
+        More information about DOI registration via form can be found on our <a target="_blank" href="https://support.datacite.org/docs/datacite-doi-fabrica-for-clients#section-registering-dois">Support Website</a>.
       </div>
     </div>
-  </div>
-  <div class='col-md-3'>
-    {{client-sidebar model=model}}
+
+    {{#bs-form formLayout="horizontal" horizontalLabelGridClass="col-md-3" model=model onSubmit=(action "submit" model) as |form|}}
+      {{form.element controlType="text" label="DOI" property="doi" helpText="The globally unique string that identifies the resource and can't be changed. DOIs with demo prefix 10.5072 will always remain in Draft state." disabled=true}}
+
+      {{doi-state model=model form=form}} 
+
+      {{form.element controlType="text" label="URL" property="url" helpText="The location of the landing page with more information about the resource." required=false}}
+
+      {{doi-author model=model form=form}}
+
+      {{form.element controlType="textarea" label="Title" property="title" rows=2 helpText="A name or title by which the resource is known." required=false}}
+      {{form.element controlType="text" label="Publisher" property="publisher" helpText="The name of the entity that holds, archives, publishes prints, distributes, releases, issues, or produces the resource." required=false}}
+      {{form.element controlType="text" label="Publication Year" property="published" helpText="The year when the resource was or will be made publicly available. Must be between 1450 and 2019." required=false}}
+
+      {{doi-resource-type model=model form=form}}
+      
+      {{form.element controlType="textarea" label="Description (optional)" property="description" rows=8 helpText="All additional information that does not fit in any of the other categories." required=false}}            
+
+      {{model-validation-errors model=model form=form}}
+
+      <div class="col-md-9 col-md-offset-3">
+        <button type="submit" class="btn btn-sm btn-fill">Update DOI</button>
+        <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
+      </div>
+    {{/bs-form}}
   </div>
 </div>

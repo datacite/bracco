@@ -32,49 +32,6 @@
     </div>
   </div>
 {{else}}
-  <div class='col-md-9 panel-list' id="content">
-    {{#if searchable}}
-      {{model-search model=model sortable=true}}
-    {{/if}}
-
-    {{#if model}}
-      {{#each model as |provider|}}
-        <div class="panel panel-transparent">
-          <div class="panel-body">
-            <h3 class="work">
-              {{#link-to "providers.show" provider.id}}{{provider.name}}{{/link-to}}
-              {{#if (not provider.isActive)}}
-                <span class="small icon-warning">account not active</span>
-              {{/if}}
-            </h3>
-
-            <h5>Provider ID</h5>
-            {{provider.symbol}}
-
-            {{#if provider.contactName}}
-              <h5>Contact Name</h5>
-              {{provider.contactName}}
-            {{/if}}
-
-            {{#if provider.contactEmail}}
-              <h5>Contact Email</h5>
-              <a href="mailto:{{provider.contactEmail}}">{{provider.contactEmail}}</a>
-            {{/if}}
-          </div>
-        </div>
-      {{/each}}
-      <div class="text-center">
-        {{#if (gt model.meta.total_pages 1)}}
-          {{page-numbers content=model showFL=true}}
-        {{/if}}
-      </div>
-    {{else}}
-      {{#bs-alert dismissible=false type="warning"}}
-        No providers found.
-      {{/bs-alert}}
-    {{/if}}
-  </div>
-
   <div class='col-md-3'>
     {{#if (can "create provider")}}
       <div class="panel facets">
@@ -123,6 +80,48 @@
           </ul>
         </div>
       </div>
+    {{/if}}
+  </div>
+  <div class='col-md-9 panel-list' id="content">
+    {{#if searchable}}
+      {{model-search model=model sortable=true}}
+    {{/if}}
+
+    {{#if model}}
+      {{#each model as |provider|}}
+        <div class="panel panel-transparent">
+          <div class="panel-body">
+            <h3 class="work">
+              {{#link-to "providers.show" provider.id}}{{provider.name}}{{/link-to}}
+              {{#if (not provider.isActive)}}
+                <span class="small icon-warning">account not active</span>
+              {{/if}}
+            </h3>
+
+            <h5>Provider ID</h5>
+            {{provider.symbol}}
+
+            {{#if provider.contactName}}
+              <h5>Contact Name</h5>
+              {{provider.contactName}}
+            {{/if}}
+
+            {{#if provider.contactEmail}}
+              <h5>Contact Email</h5>
+              <a href="mailto:{{provider.contactEmail}}">{{provider.contactEmail}}</a>
+            {{/if}}
+          </div>
+        </div>
+      {{/each}}
+      <div class="text-center">
+        {{#if (gt model.meta.total_pages 1)}}
+          {{page-numbers content=model showFL=true}}
+        {{/if}}
+      </div>
+    {{else}}
+      {{#bs-alert dismissible=false type="warning"}}
+        No providers found.
+      {{/bs-alert}}
     {{/if}}
   </div>
 {{/if}}

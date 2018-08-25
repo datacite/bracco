@@ -1,40 +1,39 @@
 {{#if delete}}
-  <div class="row">
-    <div class="col-md-9">
-      <div class="panel panel-transparent">
-        <div class="panel-body">
-          <div class="alert alert-danger" role="alert">
-            Are you sure you want to remove prefix {{model.id}} from this provider?
-          </div>
-        </div>
-        <div class="panel-footer">
-          <div class="btn-toolbar pull-right">
-            <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
-            <button {{action "destroy"}} class="btn btn-sm btn-fill">Remove</button>
-          </div>
-          <div class="clearfix"/>
-        </div>
+  <div class="panel panel-transparent">
+    <div class="panel-body">
+      <div class="col-md-9 col-md-offset-3"></div>
+      <div class="alert alert-danger" role="alert">
+        Are you sure you want to remove prefix {{model.id}} from this provider?
       </div>
+    </div>
+    <div class="panel-footer">
+      <div class="btn-toolbar pull-right">
+        <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
+        <button {{action "destroy"}} class="btn btn-sm btn-fill">Remove</button>
+      </div>
+      <div class="clearfix"/>
     </div>
   </div>
 {{else}}
   <div class="row">
-    <div class='col-md-9'>
-      <h2 class="work">{{model.id}}</h2>
-    </div>
-
-    {{#if (can "update prefix" model)}}
-      <div class='col-md-3'>
+    <div class='col-md-3'>
+      {{#if (can "update prefix" model)}}
         <div class="panel facets add">
           <div class="panel-body">
             <button {{action "edit" model}} class="btn btn-warning">{{fa-icon "pencil"}} Remove Prefix</button>
           </div>
         </div>
-      </div>
-    {{/if}}
+      {{/if}}
+    </div>
+    <div class='col-md-9'>
+      <h2 class="work">{{model.id}}</h2>
+    </div>
   </div>
 
   <div class="row">
+    <div class='col-md-3'>
+      {{client-sidebar model=model}}
+    </div>
     <div class="col-md-9">
       <div class="panel panel-transparent">
         <div class="panel-body">
@@ -61,9 +60,6 @@
           {{/if}}
         </div>
       </div>
-    </div>
-    <div class='col-md-3'>
-      {{client-sidebar model=model}}
     </div>
   </div>
 {{/if}}

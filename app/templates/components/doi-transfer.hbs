@@ -1,29 +1,24 @@
-<h2 class="work">{{model.doi}}</h2>
+<div class="col-md-9 col-md-offset-3"><h2 class="work">{{model.doi}}</h2></div>
 
-<div class="row">
-  <div class='col-md-9'>
-    <div class="panel panel-transparent">
-      <div class="panel-body">
-        <div class="col-md-10 col-md-offset-2"><h3 class="edit">Transfer DOI</h3></div>
-
-        {{#bs-form formLayout="horizontal" horizontalLabelGridClass="col-md-2" model=model onSubmit=(action "submit" model) as |form|}}
-          {{form.element controlType="hidden" property="doi" required=false}}
-
-          {{#form.element controlType="power-select" property="client" label="Client" helpText='Transfer the DOI to this client. It can take up one hour for the transfer to complete.' optionLabelPath="name" options=clients destination=client.id as |el|}}
-            {{#el.control onChange=(action "selectClient") search=(action "searchClient") searchField="name" searchPlaceholder="Type to search..." as |item|}}
-              {{item.name}}
-            {{/el.control}}
-          {{/form.element}}
-
-          <div class="col-md-10 col-md-offset-2">
-            <button type="submit" disabled={{isDisabled}} class="btn btn-sm btn-fill">Transfer DOI</button>
-            <button {{action "cancel" model}} class="btn btn-sm">Cancel</button>
-          </div>
-        {{/bs-form}}
-      </div>
+<div class="panel panel-transparent">
+  <div class="panel-body">
+    <div class="col-md-9 col-md-offset-3">
+      <h3 class="help-header">Transfer DOI</h3>
     </div>
-  </div>
-  <div class='col-md-3'>
-    {{client-sidebar model=model}}
+
+    {{#bs-form formLayout="horizontal" horizontalLabelGridClass="col-md-3" model=model onSubmit=(action "submit" model) as |form|}}
+      {{form.element controlType="hidden" property="doi" required=false}}
+
+      {{#form.element controlType="power-select" property="client" label="Client" helpText='Transfer the DOI to this client. It can take up one hour for the transfer to complete.' optionLabelPath="name" options=clients destination=client.id as |el|}}
+        {{#el.control onChange=(action "selectClient") search=(action "searchClient") searchField="name" searchPlaceholder="Type to search..." as |item|}}
+          {{item.name}}
+        {{/el.control}}
+      {{/form.element}}
+
+      <div class="col-md-9 col-md-offset-3">
+        <button type="submit" disabled={{isDisabled}} class="btn btn-sm btn-fill">Transfer DOI</button>
+        <button {{action "cancel" model}} class="btn btn-sm">Cancel</button>
+      </div>
+    {{/bs-form}}
   </div>
 </div>

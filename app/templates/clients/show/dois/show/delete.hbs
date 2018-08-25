@@ -1,6 +1,9 @@
 <h2 class="work">{{model.doi}}</h2>
 
 <div class="row">
+  <div class='col-md-3'>
+    {{client-sidebar model=model}}
+  </div>
   <div class="col-md-9">
     <div class="panel panel-transparent">
       <div class="panel-body">
@@ -19,8 +22,5 @@
         {{/bs-form}}
       </div>
     </div>
-  </div>
-  <div class='col-md-3'>
-    {{client-sidebar model=model}}
   </div>
 </div>

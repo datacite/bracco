@@ -1,45 +1,29 @@
 {{#if (or model.published model.resource-type model.title model.publisher model.description)}}
-  <div class="row">
-    <div class="col-md-9">
-      <div id="metadata" class="input-group pull-right">
-        <select onchange={{action 'selectMetadata' value="target.value"}}>
-          {{#each-in formats as |key value|}}
-            <option name="metadata" value={{key}} selected={{eq metadata key}}>{{value}}</option>
-          {{/each-in}}
-        </select>
-      </div>
-      <h3 class="member-results">Metadata</h3>
-      <div class="clearfix"/>
-    </div>
+  <div id="metadata" class="input-group pull-right">
+    <select onchange={{action 'selectMetadata' value="target.value"}}>
+      {{#each-in formats as |key value|}}
+        <option name="metadata" value={{key}} selected={{eq metadata key}}>{{value}}</option>
+      {{/each-in}}
+    </select>
   </div>
-  <div class="row">
-    <div class="col-md-9">
-      <div class="panel panel-transparent">
-        {{#if output}}
-          <div class="panel-body">
-            {{#code-block class="metadata"}}
-{{output}}
-            {{/code-block}}
-          </div>
-        {{else}}
-          {{doi-summary model=model}}
-          
-          {{#if (not model.isDraft)}}
-            <div class="panel-footer">
-              <a target="_blank" href="{{model.identifier}}">{{fa-icon "external-link"}} {{model.identifier}}</a>
-            </div>
-          {{/if}}
-        {{/if}}
+  <h3 class="member-results">Metadata</h3>
+  <div class="clearfix"/>
+
+  <div class="panel panel-transparent">
+    {{#if output}}
+      <div class="panel-body">
+        {{#code-block class="metadata"}}
+  {{output}}
+        {{/code-block}}
       </div>
-    </div>
-    <div class="col-md-3">
-      {{client-sidebar model=model}}
-    </div>
-  </div>
-{{else}}
-  <div class="row">
-    <div class="col-md-3 col-md-offset-9">
-      {{client-sidebar model=model}}
-    </div>
+    {{else}}
+      {{doi-summary model=model}}
+      
+      {{#if (not model.isDraft)}}
+        <div class="panel-footer">
+          <a target="_blank" href="{{model.identifier}}">{{fa-icon "external-link"}} {{model.identifier}}</a>
+        </div>
+      {{/if}}
+    {{/if}}
   </div>
 {{/if}}

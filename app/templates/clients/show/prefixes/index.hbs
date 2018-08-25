@@ -1,3 +1,29 @@
+<div class='col-md-3'>
+  {{prefix-available model=model}}
+
+  {{#if model.prefixes.meta.years}}
+    <div class="panel facets add">
+      <div class="panel-body">
+        <h4>Year created</h4>
+        <ul>
+          {{#each model.prefixes.meta.years as |year|}}
+            <li>
+              {{#if model.prefixes.otherParams.year}}
+                {{#link-to 'clients.show.prefixes' (query-params year=null)}}{{fa-icon "check-square-o"}}{{/link-to}}
+              {{else}}
+                {{#link-to 'clients.show.prefixes' (query-params year=year.id)}}{{fa-icon "square-o"}}{{/link-to}}
+              {{/if}}
+              <div class="facet-title">{{year.title}}</div>
+              <span class="number pull-right">{{year.count}}</span>
+              <div class="clearfix"/>
+            </li>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+  {{/if}}
+</div>
+
 <div class='col-md-9 panel-list' id="content">
   {{model-search model=model.prefixes}}
 
@@ -36,30 +62,3 @@
     {{/bs-alert}}
   {{/if}}
 </div>
-
-<div class='col-md-3'>
-  {{prefix-available model=model}}
-
-  {{#if model.prefixes.meta.years}}
-    <div class="panel facets add">
-      <div class="panel-body">
-        <h4>Year created</h4>
-        <ul>
-          {{#each model.prefixes.meta.years as |year|}}
-            <li>
-              {{#if model.prefixes.otherParams.year}}
-                {{#link-to 'clients.show.prefixes' (query-params year=null)}}{{fa-icon "check-square-o"}}{{/link-to}}
-              {{else}}
-                {{#link-to 'clients.show.prefixes' (query-params year=year.id)}}{{fa-icon "square-o"}}{{/link-to}}
-              {{/if}}
-              <div class="facet-title">{{year.title}}</div>
-              <span class="number pull-right">{{year.count}}</span>
-              <div class="clearfix"/>
-            </li>
-          {{/each}}
-        </ul>
-      </div>
-    </div>
-  {{/if}}
-</div>
-

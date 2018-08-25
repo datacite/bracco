@@ -1,31 +1,79 @@
 {{#if new}}
-  <div class='col-md-9'>
-    <div class="panel panel-transparent">
-      <div class="panel-body">
-        <div class="col-md-10 col-md-offset-2"><h3 class="edit">Create Client</h3></div>
+  <div class="panel panel-transparent">
+    <div class="panel-body">
+      <div class="col-md-9 col-md-offset-3"><h3 class="edit">Create Client</h3></div>
 
-        {{#bs-form formLayout="horizontal" horizontalLabelGridClass="col-md-2" model=client onSubmit=(action "submit" client model) submitOnEnter=true as |form|}}
-          {{form.element controlType="text" label="Client ID" property="symbol" helpText='The Client ID is the unique identifier for each client and can\'t be changed. The Client ID must start with the Provider ID, followed by a dot. It can then contain only upper case letters, numbers, and at most one hyphen.' useIcons=false required=false}}
-          {{#form.element controlType="power-select" property="repository" label="re3data Record (optional)" optionLabelPath="name" options=repositories destination=repository helpText='re3data is a registry of research data repositories.' as |el|}}
-            {{#el.control onChange=(action "selectRepository") search=(action "searchRepository") searchField="name" searchPlaceholder="Type to search..." allowClear=true as |item|}}
-              {{item.name}}
-            {{/el.control}}
-          {{/form.element}}
-          {{form.element controlType="text" label="Client Name" property="name" useIcons=false required=false}}
-          {{form.element controlType="text" label="Contact Name" property="contactName" helpText='Please enter the name of a person that can be contacted for technical or administrative issues.' required=false}}
-          {{form.element controlType="email" label="Contact Email" property="contactEmail" helpText='Please enter an email address that can be contacted for technical or administrative issues.' useIcons=false required=false}}
-          {{form.element controlType="textarea" label="Domains" property="domains" helpText='List of (sub-)domains used for DOI registration, or use * to allow all domains' useIcons=false required=false}}
-          {{form.element controlType="checkbox" label="Account is active" property="isActive" helpText='This account can register and update DOIs'}}
+      {{#bs-form formLayout="horizontal" horizontalLabelGridClass="col-md-3" model=client onSubmit=(action "submit" client model) submitOnEnter=true as |form|}}
+        {{form.element controlType="text" label="Client ID" property="symbol" helpText='The Client ID is the unique identifier for each client and can\'t be changed. The Client ID must start with the Provider ID, followed by a dot. It can then contain only upper case letters, numbers, and at most one hyphen.' useIcons=false required=false}}
+        {{#form.element controlType="power-select" property="repository" label="re3data Record (optional)" optionLabelPath="name" options=repositories destination=repository helpText='re3data is a registry of research data repositories.' as |el|}}
+          {{#el.control onChange=(action "selectRepository") search=(action "searchRepository") searchField="name" searchPlaceholder="Type to search..." allowClear=true as |item|}}
+            {{item.name}}
+          {{/el.control}}
+        {{/form.element}}
+        {{form.element controlType="text" label="Client Name" property="name" useIcons=false required=false}}
+        {{form.element controlType="text" label="Contact Name" property="contactName" helpText='Please enter the name of a person that can be contacted for technical or administrative issues.' required=false}}
+        {{form.element controlType="email" label="Contact Email" property="contactEmail" helpText='Please enter an email address that can be contacted for technical or administrative issues.' useIcons=false required=false}}
+        {{form.element controlType="textarea" label="Domains" property="domains" helpText='List of (sub-)domains used for DOI registration, or use * to allow all domains' useIcons=false required=false}}
+        {{form.element controlType="checkbox" label="Account is active" property="isActive" helpText='This account can register and update DOIs'}}
 
-          <div class="col-md-10 col-md-offset-2">
-            <button type="submit" class="btn btn-sm btn-fill">Create Client</button>
-            <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
-          </div>
-        {{/bs-form}}
-      </div>
+        <div class="col-md-9 col-md-offset-3">
+          <button type="submit" class="btn btn-sm btn-fill">Create Client</button>
+          <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
+        </div>
+      {{/bs-form}}
     </div>
   </div>
 {{else}}
+  <div class='col-md-3'>
+    {{#if (and (can "create client" model) (eq link "providers.show.clients"))}}
+      <div class="panel facets">
+        <div class="panel-body">
+          <div class="btn-toolbar">
+            <div class="btn-group btn-group-sm">
+              <button {{action "new" model}} class="btn btn-warning" id="add-client">{{fa-icon "plus"}} Create Client</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    {{else}}
+      <div class="panel panel-transparent">
+        <div class="panel-body">
+          <div class="edit"></div>
+        </div>
+      </div>
+    {{/if}}
+
+    {{#if (or model.meta.years model.otherParams.year)}}
+      <div class="panel facets add">
+        <div class="panel-body">
+          <h4>Year joined</h4>
+          <ul>
+            {{#if model.meta.years}}
+              {{#each model.meta.years as |year|}}
+                <li>
+                  {{#if model.otherParams.year}}
+                    {{#link-to "clients" (query-params year='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+                  {{else}}
+                    {{#link-to "clients" (query-params year=year.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                  {{/if}}
+                  <div class="facet-title">{{year.title}}</div>
+                  <span class="number pull-right">{{year.count}}</span>
+                  <div class="clearfix"/>
+                </li>
+              {{/each}}
+            {{else}}
+              <li>
+                {{#link-to "clients" (query-params year='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+                <div class="facet-title">{{model.otherParams.year}}</div>
+                <span class="number pull-right">0</span>
+                <div class="clearfix"/>
+              </li>
+            {{/if}}
+          </ul>
+        </div>
+      </div>
+    {{/if}}
+  </div>
   <div class='col-md-9 panel-list' id="content">
     {{#if searchable}}
       {{model-search model=model sortable=true}}
@@ -84,57 +132,6 @@
       {{#bs-alert dismissible=false type="warning"}}
         No clients found.
       {{/bs-alert}}
-    {{/if}}
-  </div>
-
-  <div class='col-md-3'>
-    {{#if (and (can "create client" model) (eq link "providers.show.clients"))}}
-      <div class="panel facets">
-        <div class="panel-body">
-          <div class="btn-toolbar">
-            <div class="btn-group btn-group-sm">
-              <button {{action "new" model}} class="btn btn-warning" id="add-client">{{fa-icon "plus"}} Create Client</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    {{else}}
-      <div class="panel panel-transparent">
-        <div class="panel-body">
-          <div class="edit"></div>
-        </div>
-      </div>
-    {{/if}}
-
-    {{#if (or model.meta.years model.otherParams.year)}}
-      <div class="panel facets add">
-        <div class="panel-body">
-          <h4>Year joined</h4>
-          <ul>
-            {{#if model.meta.years}}
-              {{#each model.meta.years as |year|}}
-                <li>
-                  {{#if model.otherParams.year}}
-                    {{#link-to "clients" (query-params year='')}}{{fa-icon "check-square-o"}}{{/link-to}}
-                  {{else}}
-                    {{#link-to "clients" (query-params year=year.id)}}{{fa-icon "square-o"}}{{/link-to}}
-                  {{/if}}
-                  <div class="facet-title">{{year.title}}</div>
-                  <span class="number pull-right">{{year.count}}</span>
-                  <div class="clearfix"/>
-                </li>
-              {{/each}}
-            {{else}}
-              <li>
-                {{#link-to "clients" (query-params year='')}}{{fa-icon "check-square-o"}}{{/link-to}}
-                <div class="facet-title">{{model.otherParams.year}}</div>
-                <span class="number pull-right">0</span>
-                <div class="clearfix"/>
-              </li>
-            {{/if}}
-          </ul>
-        </div>
-      </div>
     {{/if}}
   </div>
 {{/if}}

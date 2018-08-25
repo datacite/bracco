@@ -1,24 +1,17 @@
 {{#if model.published}}
-  <div class="row">
-    <div class="col-md-9">
-      <div id="citation" class="input-group pull-right">
-        <select onchange={{action 'selectStyle' value="target.value"}}>
-          {{#each-in citationFormats as |key value|}}
-            <option name="citation" value={{key}} selected={{eq citation key}}>{{value}}</option>
-          {{/each-in}}
-        </select>
-      </div>
-      <h3 class="member-results">Citation</h3>
-      <div class="clearfix"/>
-    </div>
+  <div id="citation" class="input-group pull-right">
+    <select onchange={{action 'selectStyle' value="target.value"}}>
+      {{#each-in citationFormats as |key value|}}
+        <option name="citation" value={{key}} selected={{eq citation key}}>{{value}}</option>
+      {{/each-in}}
+    </select>
   </div>
-  <div class="row">
-    <div class="col-md-9">
-      <div class="panel panel-transparent">
-        <div class="panel-body">
-          {{citationOutput}}
-        </div>
-      </div>
+  <h3 class="member-results">Citation</h3>
+  <div class="clearfix"/>
+
+  <div class="panel panel-transparent">
+    <div class="panel-body">
+      {{citationOutput}}
     </div>
   </div>
 {{/if}}

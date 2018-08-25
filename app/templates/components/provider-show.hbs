@@ -1,111 +1,108 @@
 {{#if edit}}
-  <div class="row">
-    <div class="col-md-9">
-      <div class="panel panel-transparent">
-        <div class="panel-body">
-          <div class="col-md-10 col-md-offset-2"><h3 class="edit">Update {{if (eq currentUser.uid model.id) 'Account' 'Provider'}}</h3></div>
+  <div class="panel panel-transparent">
+    <div class="panel-body">
+      <div class="col-md-9 col-md-offset-3"><h3 class="edit">Update {{if (eq currentUser.uid model.id) 'Account' 'Provider'}}</h3></div>
+      
+      {{#bs-form formLayout="horizontal" horizontalLabelGridClass="col-md-3" model=model onSubmit=(action "submit" model) as |form|}}
+        {{form.element controlType="text" label="Provider ID" property="symbol" helpText='The Provider ID is the unique identifier for each provider and can\'t be changed.' disabled=true}}
+        {{form.element controlType="text" label="Provider Name" property="name" required=false}}
 
-          {{#bs-form formLayout="horizontal" horizontalLabelGridClass="col-md-2" model=model onSubmit=(action "submit" model) as |form|}}
-            {{form.element controlType="text" label="Provider ID" property="symbol" helpText='The Provider ID is the unique identifier for each provider and can\'t be changed.' disabled=true}}
-            {{form.element controlType="text" label="Provider Name" property="name" required=false}}
+        {{form.element controlType="text" label="Website (optional)" property="website" helpText='Website of the provider.' required=false}}
+        {{form.element controlType="text" label="Contact Name" property="contactName" helpText='Please enter the name of a person that can be contacted for technical or administrative issues.' required=false}}
+        {{form.element controlType="email" label="Contact Email" property="contactEmail" helpText='Please enter an email address that can be contacted for technical or administrative issues.' required=false}}
+        {{form.element controlType="text" label="Contact Phone (optional)" property="phone" helpText='Please enter a phone number that can be contacted for technical or administrative issues.' required=false}}
 
-            {{form.element controlType="text" label="Website (optional)" property="website" helpText='Website of the provider.' required=false}}
-            {{form.element controlType="text" label="Contact Name" property="contactName" helpText='Please enter the name of a person that can be contacted for technical or administrative issues.' required=false}}
-            {{form.element controlType="email" label="Contact Email" property="contactEmail" helpText='Please enter an email address that can be contacted for technical or administrative issues.' required=false}}
-            {{form.element controlType="text" label="Contact Phone (optional)" property="phone" helpText='Please enter a phone number that can be contacted for technical or administrative issues.' required=false}}
+        {{#form.element controlType="power-select" label="Country (optional)" property="country" optionLabelPath="name" options=countries destination=country helpText='Country where the provider is located.' as |el|}}
+          {{#el.control onChange=(action "selectCountry") search=(action "searchCountry") searchField="name" placeholder="Select Country" searchPlaceholder="Type to search..." allowClear=true as |item|}}
+            {{item.name}}
+          {{/el.control}}
+        {{/form.element}}
 
-            {{#form.element controlType="power-select" label="Country (optional)" property="country" optionLabelPath="name" options=countries destination=country helpText='Country where the provider is located.' as |el|}}
-              {{#el.control onChange=(action "selectCountry") search=(action "searchCountry") searchField="name" placeholder="Select Country" searchPlaceholder="Type to search..." allowClear=true as |item|}}
-                {{item.name}}
-              {{/el.control}}
-            {{/form.element}}
+        {{form.element controlType="textarea" label="Description (optional)" property="description" rows=10 helpText='Description of the provider. Please use markdown for formatting.' required=false}}
 
-            {{form.element controlType="textarea" label="Description (optional)" property="description" rows=10 helpText='Description of the provider. Please use markdown for formatting.' required=false}}
+        {{#if (can "create provider")}}
+          {{form.element controlType="checkbox" label="Account is active" property="isActive" required=false helpText='This account can manage clients and prefixes'}}
+        {{/if}}
 
-            {{#if (can "create provider")}}
-              {{form.element controlType="checkbox" label="Account is active" property="isActive" required=false helpText='This account can manage clients and prefixes'}}
-            {{/if}}
-
-            <div class="col-md-10 col-md-offset-2">
-              <button type="submit" class="btn btn-sm btn-fill">Update {{if (eq currentUser.uid model.id) 'Account' 'Provider'}}</button>
-              <button {{action "cancel" model}} class="btn btn-sm" id="cancel">Cancel</button>
-            </div>
-          {{/bs-form}}
+        <div class="col-md-9 col-md-offset-3">
+          <button type="submit" class="btn btn-sm btn-fill">Update {{if (eq currentUser.uid model.id) 'Account' 'Provider'}}</button>
+          <button {{action "cancel" model}} class="btn btn-sm" id="cancel">Cancel</button>
         </div>
-      </div>
-    </div>
-    <div class='col-md-3'>
-      <div class="panel panel-transparent">
-        <div class="panel-body">
-          <div class="edit"></div>
-        </div>
-      </div>
-
-      {{client-sidebar model=model}}
+      {{/bs-form}}
     </div>
   </div>
 {{else if change}}
-  <div class="row">
-    <div class="col-md-9">
-      <div class="panel panel-transparent">
-        <div class="panel-body">
-          <div class="col-md-10 col-md-offset-2"><h3 class="edit">Set Password</h3></div>
+  <div class="panel panel-transparent">
+    <div class="panel-body">
+      <div class="col-md-9 col-md-offset-3"><h3 class="edit">Set Password</h3></div>
 
-          <div class="col-md-10 col-md-offset-2"><span class="help-block">Click <a class="action-link" {{action "generate"}}>here</a> for a password suggestion.</span></div>
+      <div class="col-md-9 col-md-offset-3"><span class="help-block">Click <a class="action-link" {{action "generate"}}>here</a> for a password suggestion.</span></div>
 
-          {{#bs-form formLayout="horizontal" horizontalLabelGridClass="col-md-2" model=model onSubmit=(action "setPassword" model) submitOnEnter=true as |form|}}
-            {{form.element controlType="text" id="passwordInput" property="passwordInput" label="New Password" required=false}}
-            {{form.element controlType="text" property="confirmPasswordInput" label="Confirm Password" required=false}}
+      {{#bs-form formLayout="horizontal" horizontalLabelGridClass="col-md-3" model=model onSubmit=(action "setPassword" model) submitOnEnter=true as |form|}}
+        {{form.element controlType="text" id="passwordInput" property="passwordInput" label="New Password" required=false}}
+        {{form.element controlType="text" property="confirmPasswordInput" label="Confirm Password" required=false}}
 
-            <div class="col-md-10 col-md-offset-2">
-              <div class="btn-toolbar">
-                <button type="submit" class="btn btn-sm btn-fill">Set Password</button>
-                <button {{action "cancel" model}} class="btn btn-sm" id="cancel">Cancel</button>
-              </div>
-            </div>
-          {{/bs-form}}
+        <div class="col-md-9 col-md-offset-3">
+          <div class="btn-toolbar">
+            <button type="submit" class="btn btn-sm btn-fill">Set Password</button>
+            <button {{action "cancel" model}} class="btn btn-sm" id="cancel">Cancel</button>
+          </div>
         </div>
-      </div>
+      {{/bs-form}}
     </div>
   </div>
 {{else if delete}}
-  <div class="row">
-    <div class="col-md-9">
-      <div class="panel panel-transparent">
-        <div class="panel-body">
-          {{#if (gt model.currentClientCount 0)}}
-            <div class="alert alert-danger" role="alert">
-              You need to delete all clients before you can delete this provider.
+  <div class="panel panel-transparent">
+    <div class="panel-body">
+      <div class="col-md-9 col-md-offset-3">
+        {{#if (gt model.currentClientCount 0)}}
+          <div class="alert alert-danger" role="alert">
+            You need to delete all clients before you can delete this provider.
+          </div>
+          <div class="pseudo-footer">
+            <div class="btn-toolbar btn-sm pull-right">
+              <button {{action "cancel" model}} class="btn btn-sm">Cancel</button>
+              {{#link-to "providers.show.clients" model.id class="btn btn-sm"}}All Clients{{/link-to}}
             </div>
+            <div class="clearfix"/>
+          </div>
+        {{else}}
+          {{#bs-form formLayout="vertical" model=this onSubmit=(action "destroy" model) submitOnEnter=true as |form|}}
+            {{form.element controlType="text" label='Are you sure you want to delete this provider? This action cannot be undone.' property='confirmId' helpText='Please add the Provider ID to delete.' class='has-error'}}
+
             <div class="pseudo-footer">
-              <div class="btn-toolbar btn-sm pull-right">
+              <div class="btn-toolbar pull-right">
                 <button {{action "cancel" model}} class="btn btn-sm">Cancel</button>
-                {{#link-to "providers.show.clients" model.id class="btn btn-sm"}}All Clients{{/link-to}}
+                <button {{action "destroy" model}} class="btn btn-sm btn-fill">Delete</button>
               </div>
               <div class="clearfix"/>
             </div>
-          {{else}}
-            {{#bs-form formLayout="vertical" model=this onSubmit=(action "destroy" model) submitOnEnter=true as |form|}}
-              {{form.element controlType="text" label='Are you sure you want to delete this provider? This action cannot be undone.' property='confirmId' helpText='Please add the Provider ID to delete.' class='has-error'}}
-
-              <div class="pseudo-footer">
-                <div class="btn-toolbar pull-right">
-                  <button {{action "cancel" model}} class="btn btn-sm">Cancel</button>
-                  <button {{action "destroy" model}} class="btn btn-sm btn-fill">Delete</button>
-                </div>
-                <div class="clearfix"/>
-              </div>
-            {{/bs-form}}
-          {{/if}}
-        </div>
+          {{/bs-form}}
+        {{/if}}
       </div>
-    </div>
-    <div class='col-md-3'>
-      {{client-sidebar model=model}}
     </div>
   </div>
 {{else}}
   <div class="row">
+    <div class='col-md-3'>
+      {{#if (can "update provider" model)}}
+        <div class="panel facets">
+          <div class="panel-body">
+            <div class="btn-toolbar">
+              <div class="btn-group-vertical btn-group-sm">
+                <button {{action "change" model}} class="btn btn-warning" id="set-password-provider">{{fa-icon "key"}} Set Password</button>
+                <button {{action "edit" model}} class="btn btn-warning" id="edit-provider">{{fa-icon "pencil"}} Update {{if (eq currentUser.uid model.id) 'Account' 'Provider'}}</button>
+                {{#if (and (not admin) (can "delete provider" model))}}
+                  <button {{action "delete" model}} class="btn btn-warning" id="delete-provider">{{fa-icon "trash"}} Delete Provider</button>
+                {{/if}}
+              </div>
+            </div>
+          </div>
+        </div>
+      {{/if}}
+
+      {{client-sidebar model=model}}
+    </div>
     <div class="col-md-9">
       <div class="panel panel-transparent">
         <div class="panel-body">
@@ -155,25 +152,6 @@
           {{/if}}
         </div>
       </div>
-    </div>
-    <div class='col-md-3'>
-      {{#if (can "update provider" model)}}
-        <div class="panel facets">
-          <div class="panel-body">
-            <div class="btn-toolbar">
-              <div class="btn-group-vertical btn-group-sm">
-                <button {{action "change" model}} class="btn btn-warning" id="set-password-provider">{{fa-icon "key"}} Set Password</button>
-                <button {{action "edit" model}} class="btn btn-warning" id="edit-provider">{{fa-icon "pencil"}} Update {{if (eq currentUser.uid model.id) 'Account' 'Provider'}}</button>
-                {{#if (and (not admin) (can "delete provider" model))}}
-                  <button {{action "delete" model}} class="btn btn-warning" id="delete-provider">{{fa-icon "trash"}} Delete Provider</button>
-                {{/if}}
-              </div>
-            </div>
-          </div>
-        </div>
-      {{/if}}
-
-      {{client-sidebar model=model}}
     </div>
   </div>
 {{/if}}

@@ -1,8 +1,4 @@
   <div class="row">
-    <div class='col-md-9'>
-      <h2 class="work">{{model.doi}}</h2>
-    </div>
-
     <div class='col-md-3'>
       <div class="panel facets add">
         <div class="panel-body">
@@ -24,16 +20,20 @@
           </div>
         </div>
       </div>
+      {{client-sidebar model=model}}
+    </div>
+    <div class='col-md-9'>
+      <h2 class="work">{{model.doi}}</h2>
+
+      {{doi-url model=model}}
+      {{doi-metadata model=model}}
+
+      {{#if model.xml}}
+        {{doi-citation model=model}}
+      {{/if}}
+
+      {{#if (can "source doi" model)}}
+        {{doi-usage-stats model=model}}
+      {{/if}}
     </div>
   </div>
-
-  {{doi-url model=model}}
-  {{doi-metadata model=model}}
-
-  {{#if model.xml}}
-    {{doi-citation model=model}}
-  {{/if}}
-
-  {{#if (can "source doi" model)}}
-    {{doi-usage-stats model=model}}
-  {{/if}}
