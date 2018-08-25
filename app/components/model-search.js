@@ -71,9 +71,5 @@ export default Ember.Component.extend(RouteMixin, {
     } else {
       this.set('formats', { 'name': 'Sort by Name', '-created': 'Sort by Date Joined', 'relevance': 'Sort by Relevance' });
     }
-
-    if (this.get('link') === 'dois') {
-      this.set('queryParams', { });
-    }
   }
 });
