@@ -84,7 +84,7 @@
     {{/if}}
   </div>
   <div class='col-md-9 panel-list' id="content">
-    {{model-search model=model.prefixes sortable=true}}
+    {{model-search model=model.prefixes sortable=true link='providers.show.prefixes'}}
     
     {{#if model.prefixes}}
       {{#each model.prefixes as |provider-prefix|}}

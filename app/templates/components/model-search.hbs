@@ -8,8 +8,9 @@
       <button type="submit" class="btn btn-primary hidden-xs">Search</button>
     </div>
   </div>
-  {{#if helpText}}
-    <span class="help-block">{{helpText}}</span>
+
+  {{#if hasFilters}}  
+    <span class="help-block">{{#link-to link (query-params created=null state=null prefix=null client-id=null source=null year=null provider-id=null)}}Reset all filters{{/link-to}}</span>
   {{/if}}
 </form>
 {{#if (gt model.meta.total 1)}}

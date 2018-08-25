@@ -25,7 +25,7 @@
 </div>
 
 <div class='col-md-9 panel-list' id="content">
-  {{model-search model=model.prefixes}}
+  {{model-search model=model.prefixes link='clients.show.prefixes'}}
 
   {{#if model.prefixes}}
     {{#each model.prefixes as |client-prefix|}}

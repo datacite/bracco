@@ -5,15 +5,19 @@ export default Ember.Component.extend(RouteMixin, {
   classNames: ['div'],
 
   hasInput: Ember.computed.notEmpty('query'),
+  hasFilters: true,
   helpText: null,
+  filters: null,
   query: null,
   sort: null,
+  queryParams: {},
 
   didReceiveAttrs() {
     this._super(...arguments);
 
     this.set('query', this.get('model').get('otherParams.query'));
     this.set('sort', this.get('model').get('otherParams.sort'));
+    this.set('filters', this.get('model').get('otherParams'));
   },
 
   search() {
@@ -66,6 +70,10 @@ export default Ember.Component.extend(RouteMixin, {
       this.set('formats', { 'name': 'Sort by Prefix', '-created': 'Sort by Date Created' });
     } else {
       this.set('formats', { 'name': 'Sort by Name', '-created': 'Sort by Date Joined', 'relevance': 'Sort by Relevance' });
+    }
+
+    if (this.get('link') === 'dois') {
+      this.set('queryParams', { });
     }
   }
 });
