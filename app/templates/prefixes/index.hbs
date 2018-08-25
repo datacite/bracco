@@ -2,10 +2,9 @@
   {{application-header default=true}}
 
   <div class="container-fluid">
-    <div class="content">
       {{index-header}}
 
-            <div class='col-md-3'>
+      <div class='col-md-3'>
         {{#if (can "write prefix")}}
           <div class="panel facets">
             <div class="panel-body">
@@ -141,7 +140,6 @@
           {{/bs-alert}}
         {{/if}}
       </div>
-    </div>
   </div>
 {{else}}
   {{application-header}}

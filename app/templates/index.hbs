@@ -2,9 +2,9 @@
   {{application-header default=true}}
 
   <div class="container-fluid">
-    <div class="content">
-      {{index-header}}
+    {{index-header}}
 
+    <div class="content">
       <div class="row">
         {{bar-chart data=model.providerCount label='Provider' link='providers'}}
         {{bar-chart data=model.clientCount label='Client' link='clients'}}
