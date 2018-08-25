@@ -1,34 +1,32 @@
 {{#if new}}
-  <div class='col-md-9'>
-    <div class="panel panel-transparent">
-      <div class="panel-body">
-        <div class="col-md-10 col-md-offset-2"><h3 class="edit">Create Provider</h3></div>
-        
-        {{#bs-form formLayout="horizontal" horizontalLabelGridClass="col-md-2" model=provider onSubmit=(action "submit" provider model) submitOnEnter=true as |form|}}
-          {{form.element controlType="text" label="Provider ID" property="symbol" helpText='The Provider ID is the unique identifier for each provider and can\'t be changed. The Provider ID can contain only upper case letters, and must not be longer than 8 characters.' useIcons=false required=false}}
-          {{form.element controlType="text" label="Provider Name" property="name" required=false}}
+  <div class="panel panel-transparent">
+    <div class="panel-body">
+      <div class="col-md-9 col-md-offset-3"><h3 class="edit">Create Provider</h3></div>
+      
+      {{#bs-form formLayout="horizontal" horizontalLabelGridClass="col-md-3" model=provider onSubmit=(action "submit" provider model) submitOnEnter=true as |form|}}
+        {{form.element controlType="text" label="Provider ID" property="symbol" helpText='The Provider ID is the unique identifier for each provider and can\'t be changed. The Provider ID can contain only upper case letters, and must not be longer than 8 characters.' useIcons=false required=false}}
+        {{form.element controlType="text" label="Provider Name" property="name" required=false}}
 
-          {{form.element controlType="text" label="Website (optional)" property="website" helpText='Website of the provider.' required=false}}
-          {{form.element controlType="text" label="Contact Name" property="contactName" helpText='Please enter the name of a person that can be contacted for technical or administrative issues.' required=false}}
-          {{form.element controlType="email" label="Contact Email" property="contactEmail" helpText='Please enter an email address that can be contacted for technical or administrative issues.' required=false}}
-          {{form.element controlType="text" label="Contact Phone (optional)" property="phone" helpText='Please enter a phone number that can be contacted for technical or administrative issues.' required=false}}
+        {{form.element controlType="text" label="Website (optional)" property="website" helpText='Website of the provider.' required=false}}
+        {{form.element controlType="text" label="Contact Name" property="contactName" helpText='Please enter the name of a person that can be contacted for technical or administrative issues.' required=false}}
+        {{form.element controlType="email" label="Contact Email" property="contactEmail" helpText='Please enter an email address that can be contacted for technical or administrative issues.' required=false}}
+        {{form.element controlType="text" label="Contact Phone (optional)" property="phone" helpText='Please enter a phone number that can be contacted for technical or administrative issues.' required=false}}
 
-          {{#form.element controlType="power-select" label="Country (optional)" property="country" optionLabelPath="name" options=countries destination=country helpText='Country where the provider is located.' as |el|}}
-            {{#el.control onChange=(action "selectCountry") search=(action "searchCountry") searchField="name" placeholder="Select Country" searchPlaceholder="Type to search..." allowClear=true as |item|}}
-              {{item.name}}
-            {{/el.control}}
-          {{/form.element}}
+        {{#form.element controlType="power-select" label="Country (optional)" property="country" optionLabelPath="name" options=countries destination=country helpText='Country where the provider is located.' as |el|}}
+          {{#el.control onChange=(action "selectCountry") search=(action "searchCountry") searchField="name" placeholder="Select Country" searchPlaceholder="Type to search..." allowClear=true as |item|}}
+            {{item.name}}
+          {{/el.control}}
+        {{/form.element}}
 
-          {{form.element controlType="textarea" label="Description (optional)" property="description" rows=10 helpText='Description of the provider. Please use markdown for formatting.' required=false}}
+        {{form.element controlType="textarea" label="Description (optional)" property="description" rows=10 helpText='Description of the provider. Please use markdown for formatting.' required=false}}
 
-          {{form.element controlType="checkbox" label="Account is active" property="isActive" helpText='This account can manage clients and prefixes'}}
+        {{form.element controlType="checkbox" label="Account is active" property="isActive" helpText='This account can manage clients and prefixes'}}
 
-          <div class="col-md-10 col-md-offset-2">
-            <button type="submit" class="btn btn-sm btn-fill">Create Provider</button>
-            <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
-          </div>
-        {{/bs-form}}
-      </div>
+        <div class="col-md-9 col-md-offset-3">
+          <button type="submit" class="btn btn-sm btn-fill">Create Provider</button>
+          <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
+        </div>
+      {{/bs-form}}
     </div>
   </div>
 {{else}}

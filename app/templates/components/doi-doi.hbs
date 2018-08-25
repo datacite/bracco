@@ -1,6 +1,6 @@
 <div class="form-group compound-form">
-  <label class="control-label col-md-2">DOI</label>
-  <div class="col-md-10">
+  <label class="control-label col-md-3">DOI</label>
+  <div class="col-md-9">
     <div class="input-group">
       <span class="input-group-addon">
         {{#form.element controlType="power-select" formLayout="vertical" property="prefix" options=prefixes destination=prefix searchEnabled=false as |el|}}
@@ -17,8 +17,8 @@
 </div>
 
 <div class="form-group">
-  <label class="control-label col-md-2">State</label>
-  <div class="col-md-10">
+  <label class="control-label col-md-3">State</label>
+  <div class="col-md-9">
     <div>{{radio-button value="draft" groupValue=state radioClass="radio" changed="selectState" disabled=draft}}Draft <span class="help-block">only visible in DOI Fabrica, DOI can be deleted</span></div>
     <div>{{radio-button value="registered" groupValue=state radioClass="radio" changed="selectState" disabled=registered}}Registered <span class="help-block">registered with the DOI Resolver</span></div>
     <div>{{radio-button value="findable" groupValue=state radioClass="radio" changed="selectState" disabled=findable}}Findable <span class="help-block">registered with the DOI Resolver and indexed in DataCite Search</span></div>
