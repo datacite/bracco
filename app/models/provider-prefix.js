@@ -9,10 +9,13 @@ const Validations = buildValidations({
 
 export default DS.Model.extend(Validations, {
   provider: DS.belongsTo('provider', {
-    async: true
+    async: false
   }),
   prefix: DS.belongsTo('prefix', {
-    async: true
+    async: false
+  }),
+  clients: DS.hasMany('client', {
+    async: false
   }),
 
   created: DS.attr('date')
