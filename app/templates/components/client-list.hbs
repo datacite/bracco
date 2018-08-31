@@ -104,6 +104,11 @@
               <a href="http://www.re3data.org/repository/{{client.repository.id}}">{{client.repository.id}}</a>
             {{/if}}
 
+            {{#if client.contactName}}
+              <h5>Contact Name</h5>
+              {{client.contactName}}
+            {{/if}}
+
             {{#if client.contactEmail}}
               <h5>Contact Email</h5>
               <a href="mailto:{{client.contactEmail}}">{{client.contactEmail}}</a>
