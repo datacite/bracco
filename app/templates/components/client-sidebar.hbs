@@ -5,6 +5,18 @@
         {{state-label state=model.state}}
       </div>
     {{/if}}
+    {{#if (eq model.state 'findable')}}
+      <h5>Metadata Download</h5>
+      <div class="download">
+        <a href="{{{content-negotiation-url model.doi format='datacite'}}}">DataCite XML</a>
+      </div>
+      <div class="download">
+        <a href="{{{content-negotiation-url model.doi format='schema_org'}}}">Schema.org JSON-LD</a>
+      </div>
+      <div class="download">
+        <a href="{{{content-negotiation-url model.doi format='bibtex'}}}">BibTex</a>
+      </div>
+    {{/if}}
     {{#if model.created}}
       <h5>DOI created</h5>
       <div class="created">
