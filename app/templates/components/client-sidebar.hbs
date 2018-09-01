@@ -5,7 +5,7 @@
         {{state-label state=model.state}}
       </div>
     {{/if}}
-    {{#if (eq model.state 'findable')}}
+    {{#if (and (eq model.state 'findable') model.xml)}}
       <h5>Metadata Export</h5>
       <div class="download">
         <a href="{{{content-negotiation-url model.doi format='datacite'}}}">DataCite XML</a>
