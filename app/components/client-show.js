@@ -47,7 +47,7 @@ export default Ember.Component.extend({
       this.get('store').findRecord('repository', repository.id).then(function(repo) {
         self.set('repository', repo)
         self.get('client').set('repository', repo);
-        self.get('client').set('name', repo.get('name'));
+        self.get('client').set('name', repo.get('repositoryName'));
       });
     } else {
       this.get('client').set('repository', null);
