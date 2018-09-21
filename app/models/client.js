@@ -115,8 +115,7 @@ export default DS.Model.extend(Validations, {
   }),
   badgeUrl: Ember.computed('repository', function() {
     if (this.get('repository')) {
-      let id = this.get('repository').get('id').substring(3);
-      return ENV.API_URL + '/repositories/' + id + '/badge';
+      return ENV.API_URL + '/repositories/' + this.get('repository').get('id') + '/badge';
     } else {
       return null;
     }
