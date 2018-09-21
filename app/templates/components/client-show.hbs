@@ -7,8 +7,8 @@
         {{form.element controlType="text" label="Client ID" property="symbol" helpText='The Client ID is the unique identifier for each client and can\'t be changed.' disabled=true}}
         {{form.element controlType="hidden" property="confirmSymbol" required=false}}
         {{#form.element controlType="power-select" property="repository" label="re3data Record (optional)" optionLabelPath="name" options=repositories destination=repository helpText='re3data is a registry of research data repositories.' as |el|}}
-          {{#el.control onChange=(action "selectRepository") search=(action "searchRepository") searchField="name" searchPlaceholder="Type to search..." allowClear=true as |item|}}
-            {{item.name}}
+          {{#el.control onChange=(action "selectRepository") search=(action "searchRepository") searchField="repositoryName" searchPlaceholder="Type to search..." allowClear=true as |item|}}
+            {{item.repositoryName}}
           {{/el.control}}
         {{/form.element}}
         {{form.element controlType="text" label="Client Name" property="name" required=false}}

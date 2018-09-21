@@ -11,10 +11,10 @@ export default DS.Model.extend(Validations, {
   }),
 
   repositoryName: DS.attr('string'),
-  additionalNames: DS.attr('string'),
+  additionalNames: DS.attr(),
   description: DS.attr('string'),
   repositoryUrl: DS.attr('string'),
-  repositoryContacts: DS.attr('string'),
+  repositoryContacts: DS.attr(),
   repositorySoftware: DS.attr('string'),
   subjects: DS.attr(),
   created: DS.attr('date'),
