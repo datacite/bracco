@@ -1,4 +1,6 @@
-{{#if url}}
+{{#if form}}
+  {{form.element controlType="text" label="URL" property="url" helpText="The location of the landing page with more information about the resource." required=false}}
+{{else if url}}
   <h3 class="member-results">URL</h3>
   <div class="panel panel-transparent url">
     <div class="panel-body">

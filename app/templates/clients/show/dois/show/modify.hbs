@@ -13,9 +13,7 @@
       {{form.element controlType="text" label="DOI" property="doi" helpText="The globally unique string that identifies the resource and can't be changed. DOIs with demo prefix 10.5072 will always remain in Draft state." disabled=true}}
 
       {{doi-state model=model form=form}}
-
-      {{form.element controlType="text" label="URL" property="url" helpText="The location of the landing page with more information about the resource." required=false}}
-
+      {{doi-url model=model form=form}}
       {{doi-upload model=model form=form}}
 
       {{model-validation-errors model=model form=form}}
