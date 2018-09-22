@@ -160,9 +160,32 @@
             <a href="mailto:{{model.contactEmail}}">{{model.contactEmail}}</a>
           {{/if}}
 
-          {{#if model.repository.repositorySoftware}}
+          {{#if model.repository.certificates}}
+            <h5>Certificates <div class="info-icon icons-certificate_active"/></h5>
+            {{#each model.repository.certificates as |cert|}}
+              {{cert.text}}<br/>
+            {{/each}}
+          {{/if}}
+
+          {{#if model.repository.dataUploads}}
+            <h5>Data Upload</h5>
+            {{#each model.repository.dataUploads as |data|}}
+              {{data.type}}<br/>
+            {{/each}}
+          {{/if}}
+
+          {{#if model.repository.software}}
             <h5>Repository Software</h5>
-            {{model.repository.repositorySoftware}}
+            {{#each model.repository.software as |software|}}
+              <span class="label label-primary">{{software.name}}</span>
+            {{/each}}
+          {{/if}}
+
+          {{#if model.types}}
+            <h5>Repository Type</h5>
+            {{#each model.types as |type|}}
+              {{type.text}}<br/>
+            {{/each}}
           {{/if}}
 
           {{#if model.repository.repositoryUrl}}

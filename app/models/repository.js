@@ -15,8 +15,11 @@ export default DS.Model.extend(Validations, {
   description: DS.attr('string'),
   repositoryUrl: DS.attr('string'),
   repositoryContacts: DS.attr(),
-  repositorySoftware: DS.attr('string'),
+  software: DS.attr(),
   subjects: DS.attr(),
+  certificates: DS.attr(),
+  dataUploads: DS.attr(),
+  types: DS.attr(),
   created: DS.attr('date'),
   updated: DS.attr('date')
 });
