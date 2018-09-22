@@ -174,10 +174,17 @@
             {{/each}}
           {{/if}}
 
+          {{#if model.repository.dataAccesses}}
+            <h5>Data Access <div class="info-icon icons-open_access_active"/></h5>
+            {{#each model.repository.dataAccesses as |data|}}
+              {{data.type}}<br/>
+            {{/each}}
+          {{/if}}
+
           {{#if model.repository.software}}
             <h5>Repository Software</h5>
             {{#each model.repository.software as |software|}}
-              <span class="label label-primary">{{software.name}}</span>
+              {{software.name}}<br/>
             {{/each}}
           {{/if}}
 

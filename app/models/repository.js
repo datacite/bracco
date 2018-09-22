@@ -19,6 +19,7 @@ export default DS.Model.extend(Validations, {
   subjects: DS.attr(),
   certificates: DS.attr(),
   dataUploads: DS.attr(),
+  dataAccesses: DS.attr(),
   types: DS.attr(),
   created: DS.attr('date'),
   updated: DS.attr('date')
