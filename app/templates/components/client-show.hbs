@@ -131,23 +131,17 @@
             {{model.repository.additionalName}}
           {{/if}}
 
-          {{#if model.repository.subject}}
-            <h5>
-              {{pluralize-word model.subject.length "Subject" omitCount=true}}
-              <span>{{fa-icon "question-circle-o"}}
-                {{#bs-tooltip placement="top" viewportPadding=10}}German Research Foundation (DFG) classification of subject areas covered by this client.{{/bs-tooltip}}
-              </span>
-            </h5>
-            <div class="subject">
-              {{#each model.repository.subject as |sub|}}
-                <span class="label label-primary">{{sub.name}}</span>
-              {{/each}}
-            </div>
-          {{/if}}
-
           {{#if model.repository.description}}
             <h5>Description</h5>
             {{model.repository.description}}
+          {{/if}}
+
+          {{#if model.repository.tags}}
+            <div class="subject">
+              {{#each model.repository.tags as |tag|}}
+                {{subject-label tag=tag}}
+              {{/each}}
+            </div>
           {{/if}}
 
           {{#if model.contactName}}
@@ -163,21 +157,28 @@
           {{#if model.repository.certificates}}
             <h5>Certificates <div class="info-icon icons-certificate_active"/></h5>
             {{#each model.repository.certificates as |cert|}}
-              {{cert.text}}<br/>
+              {{cert.text}}{{#unless (eq cert model.repository.certificates.lastObject)}}, {{/unless}}
             {{/each}}
           {{/if}}
 
           {{#if model.repository.dataUploads}}
             <h5>Data Upload</h5>
             {{#each model.repository.dataUploads as |data|}}
-              {{data.type}}<br/>
+              {{#if (eq data.type "restricted")}}
+                {{data.type}}:
+                {{#each data.restrictions as |restriction index|}}
+                  {{restriction.text}}{{#unless (eq restriction data.restrictions.lastObject)}}, {{/unless}}
+                {{/each}}
+              {{else}}
+                {{data.type}}
+              {{/if}}
             {{/each}}
           {{/if}}
 
           {{#if model.repository.dataAccesses}}
             <h5>Data Access <div class="info-icon icons-open_access_active"/></h5>
             {{#each model.repository.dataAccesses as |data|}}
-              {{data.type}}<br/>
+              {{data.type}}{{#unless (eq data model.repository.dataAccesses.lastObject)}} or {{/unless}}
             {{/each}}
           {{/if}}
 

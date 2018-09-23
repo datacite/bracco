@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import DS from 'ember-data';
 import { validator, buildValidations } from 'ember-cp-validations';
 
@@ -22,5 +23,8 @@ export default DS.Model.extend(Validations, {
   dataAccesses: DS.attr(),
   types: DS.attr(),
   created: DS.attr('date'),
-  updated: DS.attr('date')
+  updated: DS.attr('date'),
+
+  // combine subject areas and keywords
+  tags: Ember.computed.union('subjects', 'keywords'),
 });
