@@ -31,6 +31,7 @@ export default Ember.Component.extend({
             return message;
           } else {
             self.set('url', data.url);
+            self.get('model').set('url', data.url);
           }
         });
       } else {
