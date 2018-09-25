@@ -73,7 +73,7 @@ export default Component.extend({
     this.setStates(state)
   },
   setStates(state) {
-    if (state == '') {
+    if (state == '' || state == 'undetermined') {
       state = 'draft';
     }
     let states = [];
