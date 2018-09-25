@@ -5,9 +5,7 @@ export default Ember.Controller.extend({
   store: service(),
 
   setEvent(stateChange) {
-    if (stateChange[1] === 'draft') {
-      return 'start';
-    } else if (stateChange[0] === 'draft' && stateChange[1] === 'registered') {
+    if (stateChange[0] === 'draft' && stateChange[1] === 'registered') {
       return 'register';
     } else if (stateChange[0] === 'draft' && stateChange[1] === 'findable') {
       return 'publish';

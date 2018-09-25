@@ -2,12 +2,12 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
   setEvent(state) {
-    if (state === 'draft') {
-      return 'start';
-    } else if (state === 'registered') {
+    if (state === 'registered') {
       return 'register';
     } else if (state === 'findable') {
       return 'publish';
+    } else {
+      return null;
     }
   },
 
