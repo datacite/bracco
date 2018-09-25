@@ -154,13 +154,11 @@
             <a href="mailto:{{model.contactEmail}}">{{model.contactEmail}}</a>
           {{/if}}
 
-          <h5>Certificates <div class="info-icon icons-certificate_active"/></h5>
           {{#if model.repository.certificates}}
+            <h5>Certificates <div class="info-icon icons-certificate_active"/></h5>
             {{#each model.repository.certificates as |cert|}}
               {{cert.text}}{{#unless (eq cert model.repository.certificates.lastObject)}}, {{/unless}}
             {{/each}}
-          {{else}}
-            none
           {{/if}}
 
           {{#if model.repository.dataUploads}}
