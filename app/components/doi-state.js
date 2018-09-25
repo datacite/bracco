@@ -26,6 +26,9 @@ export default Component.extend({
     this.setStates(state)
   },
   setStates(state) {
+    if (state == '') {
+      state = 'draft';
+    }
     let states = [];
     // demo prefix uses only draft state
     if (this.get('model').get('prefix') === '10.5072') {
