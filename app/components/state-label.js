@@ -5,9 +5,8 @@ export default Component.extend({
   classNameBindings: ['label'],
 
   didInsertElement() {
-    let state = this.get('state') || 'undetermined';
-    let stateLabels = { 'undetermined': 'label-default',
-                        'draft': 'label-warning',
+    let state = this.get('state') || 'draft';
+    let stateLabels = { 'draft': 'label-warning',
                         'registered': 'label-info',
                         'findable': 'label-primary' }
 

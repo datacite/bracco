@@ -5,7 +5,6 @@ import ENV from 'bracco/config/environment';
 import fetch from 'fetch';
 
 const stateList = {
-  undetermined: ['undetermined', 'registered', 'findable'],
   draft: ['draft', 'registered', 'findable'],
   registered: ['registered', 'findable'],
   findable: ['registered', 'findable']

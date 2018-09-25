@@ -1,7 +1,6 @@
 import Component from '@ember/component';
 
 const stateList = {
-  undetermined: ['undetermined', 'registered', 'findable'],
   draft: ['draft', 'registered', 'findable'],
   registered: ['registered', 'findable'],
   findable: ['registered', 'findable']
