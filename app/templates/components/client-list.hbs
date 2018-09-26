@@ -52,9 +52,9 @@
               {{#each model.meta.years as |year|}}
                 <li>
                   {{#if model.otherParams.year}}
-                    {{#link-to "clients" (query-params year='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+                    {{#link-to link (query-params year='')}}{{fa-icon "check-square-o"}}{{/link-to}}
                   {{else}}
-                    {{#link-to "clients" (query-params year=year.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                    {{#link-to link (query-params year=year.id)}}{{fa-icon "square-o"}}{{/link-to}}
                   {{/if}}
                   <div class="facet-title">{{year.title}}</div>
                   <span class="number pull-right">{{year.count}}</span>
