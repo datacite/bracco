@@ -1,8 +1,6 @@
 import Ember from 'ember';
 
 export function formatAuthor([authors]) {
-  authors = JSON.parse(authors);
-
   let authorList = authors.map(function(a) {
     let name = (a['family-name']) ? [a['given-name'], a['family-name']].join(" ") : a.name;
     return a.id ? '<a href="' + a.id + '">' + name + '</a>' : name

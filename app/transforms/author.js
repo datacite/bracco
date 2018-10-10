@@ -3,19 +3,19 @@ import Ember from 'ember';
 
 export default DS.Transform.extend({
   deserialize(serialized) {
-    
+
     if (Ember.typeOf(serialized) === 'array') {
-      return JSON.stringify(serialized); 
+      return serialized;
     } else if (Ember.typeOf(serialized) === 'object') {
-      return JSON.stringify([serialized]); 
+      return [serialized];
     } else {
-      return JSON.stringify([]);
+      return [];
     }
   },
 
   serialize(deserialized) {
-    if (deserialized) {
-      return JSON.parse(deserialized);
+    if (Ember.typeOf(deserialized) === 'array') {
+      return deserialized;
     } else {
       return [];
     }
