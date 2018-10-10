@@ -25,6 +25,10 @@ export default Ember.Component.extend({
       }
     }).then(function(response) {
       if (response.ok) {
+        if (response.status == 204 ) {
+          return "No URL found";
+        }
+
         return response.json().then(function(data) {
           if (data.errors) {
             let message = data.errors[0].title;
