@@ -116,6 +116,36 @@
         </div>
       </div>
     {{/if}}
+    {{#if (and (can "source doi" model) (or model.meta.registered model.otherParams.registered))}}
+      <div class="panel facets">
+        <div class="panel-body">
+          <h4>Year registered</h4>
+          <ul>
+            {{#if model.meta.registered}}
+              {{#each model.meta.registered as |year|}}
+                <li>
+                  {{#if model.otherParams.registered}}
+                    {{#link-to link (query-params registered='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+                  {{else}}
+                    {{#link-to link (query-params registered=year.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                  {{/if}}
+                  <div class="facet-title">{{year.title}}</div>
+                  <span class="number pull-right">{{format-number year.count}}</span>
+                  <div class="clearfix"/>
+                </li>
+              {{/each}}
+            {{else}}
+              <li>
+                {{#link-to link (query-params registered='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+                <div class="facet-title">{{model.otherParams.registered}}</div>
+                <span class="number pull-right">0</span>
+                <div class="clearfix"/>
+              </li>
+            {{/if}}
+          </ul>
+        </div>
+      </div>
+    {{/if}}
     {{#if (and (not-eq link "clients.show.dois") (or model.meta.clients model.otherParams.client-id))}}
       <div class="panel facets">
         <div class="panel-body">
