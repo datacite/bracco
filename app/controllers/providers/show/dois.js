@@ -10,7 +10,7 @@ export default Ember.Controller.extend({
   prefix: null,
   year: null,
   created: null,
-  registered; null,
+  registered: null,
   state: null,
   source: null,
   sort: null,
