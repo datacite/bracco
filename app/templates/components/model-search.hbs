@@ -10,7 +10,7 @@
   </div>
 
   {{#if hasFilters}}  
-    <span class="help-block">{{#link-to link (query-params query=null created=null state=null prefix=null client-id=null source=null year=null provider-id=null)}}Reset All{{/link-to}}</span>
+    <span class="help-block">{{#link-to link (query-params query=null created=null state=null resource-type-id=null schema-version=null prefix=null client-id=null source=null year=null provider-id=null)}}Reset All{{/link-to}}</span>
   {{/if}}
 </form>
 {{#if (gt model.meta.total 1)}}
