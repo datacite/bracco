@@ -7,7 +7,7 @@ export default Ember.Component.extend({
   data: null,
   count: Ember.computed('data', function() {
     if (this.get('data')) {
-      let currentYear = this.get('data').findBy('id', 2018);
+      let currentYear = this.get('data').findBy('id', '2018');
       if (currentYear) {
         return currentYear.count;
       } else {
