@@ -265,6 +265,36 @@
       </div>
     </div>
   {{/if}}
+   {{#if (and (can "source doi" model) (or model.meta.link-checks model.otherParams.link-checks))}}
+    <div class="panel facets add">
+      <div class="panel-body">
+        <h4>Link Check Status</h4>
+        <ul>
+          {{#if model.meta.link-checks}}
+            {{#each model.meta.link-checks as |link-check|}}
+              <li>
+                {{#if model.otherParams.link-check-status}}
+                  {{#link-to link (query-params link-check-status=null)}}{{fa-icon "check-square-o"}}{{/link-to}}
+                {{else}}
+                  {{#link-to link (query-params link-check-status=link-check.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                {{/if}}
+                <div class="facet-title">{{link-check.id}}</div>
+                <span class="number pull-right">{{format-number link-check.count}}</span>
+                <div class="clearfix"/>
+              </li>
+            {{/each}}
+          {{else}}
+            <li>
+              {{#link-to link (query-params link-check-status='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+              <div class="facet-title">{{model.otherParams.link-check-status}}</div>
+              <span class="number pull-right">0</span>
+              <div class="clearfix"/>
+            </li>
+          {{/if}}
+        </ul>
+      </div>
+    </div>
+  {{/if}}
 </div>
 
 <div class='col-md-9 panel-list' id="content">
