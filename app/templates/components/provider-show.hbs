@@ -18,6 +18,18 @@
           {{/el.control}}
         {{/form.element}}
 
+        {{#form.element controlType="power-select" label="Organization Type (optional)" property="organizationType" options=organizationTypes destination=organizationType as |el|}}
+          {{#el.control onChange=(action "selectOrganizationType") search=(action "searchOrganizationType") placeholder="Select Organization Type" searchPlaceholder="Type to search..." allowClear=true as |item|}}
+            {{humanize item}}
+          {{/el.control}}
+        {{/form.element}}
+
+        {{#form.element controlType="power-select" label="Focus Area (optional)" property="focusArea" options=focusAreas destination=focusArea helpText='Field of science covered by provider.' as |el|}}
+          {{#el.control onChange=(action "selectFocusArea") search=(action "searchFocusArea") placeholder="Select Focus Area" searchPlaceholder="Type to search..." allowClear=true as |item|}}
+            {{humanize item}}
+          {{/el.control}}
+        {{/form.element}}
+
         {{form.element controlType="textarea" label="Description (optional)" property="description" rows=10 helpText='Description of the provider. Please use markdown for formatting.' required=false}}
 
         {{#if (can "create provider")}}
@@ -139,6 +151,16 @@
           {{#if model.description}}
             <h5>Description</h5>
             {{markdown-to-html model.description}}
+          {{/if}}
+
+          {{#if model.organizationType}}
+            <h5>Organization Type</h5>
+            {{humanize model.organizationType}}
+          {{/if}}
+
+          {{#if model.focusArea}}
+            <h5>Focus Area</h5>
+            {{humanize model.focusArea}}
           {{/if}}
 
           {{#if model.joined}}

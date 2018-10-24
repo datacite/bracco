@@ -1,5 +1,26 @@
 import Ember from 'ember';
 import countryList from 'npm:iso-3166-country-list';
+const organizationTypeList = [
+  'academic_institution',
+  'academic_library',
+  'government_agency',
+  'national_institution',
+  'national_library',
+  'research_institution',
+  'professional_society',
+  'publisher',
+  'service_provider',
+  'vendor'
+]
+const focusAreaList = [
+  'biomedical_and_health_sciences',
+  'earth_sciences',
+  'humanities',
+  'mathematics_and_computer_science',
+  'physical_sciences_and_engineering',
+  'social_sciences',
+  'general'
+]
 
 export default Ember.Component.extend({
   store: Ember.inject.service(),
@@ -10,6 +31,10 @@ export default Ember.Component.extend({
   new: false,
   countryList,
   countries: null,
+  organizationTypeList,
+  organizationTypes: organizationTypeList,
+  focusAreaList,
+  focusAreas: focusAreaList,
 
   reset() {
     this.set('provider', null);
@@ -24,6 +49,26 @@ export default Ember.Component.extend({
   selectCountry(country) {
     this.get('provider').set('country', country);
     this.set('countries', countryList);
+  },
+  searchOrganizationType(query) {
+    var organizationTypes = organizationTypeList.filter(function(organizationType) {
+      return organizationType.startsWith(query.toLowerCase());
+    })
+    this.set('organizationTypes', organizationTypes);
+  },
+  selectOrganizationType(organizationType) {
+    this.get('provider').set('organizationType', organizationType);
+    this.set('organizationTypes', organizationTypeList);
+  },
+  searchFocusArea(query) {
+    var focusAreas = focusAreaList.filter(function(focusArea) {
+      return focusArea.startsWith(query.toLowerCase());
+    })
+    this.set('focusAreas', focusAreas);
+  },
+  selectFocusArea(focusArea) {
+    this.get('provider').set('focusArea', focusArea);
+    this.set('focusAreas', focusAreaList);
   },
 
   actions: {
@@ -50,6 +95,18 @@ export default Ember.Component.extend({
     },
     selectCountry(country) {
       this.selectCountry(country);
+    },
+    searchOrganizationType(query) {
+      this.searchOrganizationType(query);
+    },
+    selectOrganizationType(organizationType) {
+      this.selectOrganizationType(organizationType);
+    },
+    searchFocusArea(query) {
+      this.searchFocusArea(query);
+    },
+    selectFocusArea(focusArea) {
+      this.selectFocusArea(focusArea);
     }
   }
 });
