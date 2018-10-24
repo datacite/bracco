@@ -20,13 +20,13 @@
 
         {{#form.element controlType="power-select" label="Organization Type (optional)" property="organizationType" options=organizationTypes destination=organizationType as |el|}}
           {{#el.control onChange=(action "selectOrganizationType") search=(action "searchOrganizationType") placeholder="Select Organization Type" searchPlaceholder="Type to search..." allowClear=true as |item|}}
-            {{humanize item}}
+            {{titleize (humanize item)}}
           {{/el.control}}
         {{/form.element}}
 
         {{#form.element controlType="power-select" label="Focus Area (optional)" property="focusArea" options=focusAreas destination=focusArea helpText='Field of science covered by provider.' as |el|}}
           {{#el.control onChange=(action "selectFocusArea") search=(action "searchFocusArea") placeholder="Select Focus Area" searchPlaceholder="Type to search..." allowClear=true as |item|}}
-            {{humanize item}}
+            {{titleize (humanize item)}}
           {{/el.control}}
         {{/form.element}}
 
@@ -155,12 +155,12 @@
 
           {{#if model.organizationType}}
             <h5>Organization Type</h5>
-            {{humanize model.organizationType}}
+            {{titleize (humanize model.organizationType)}}
           {{/if}}
 
           {{#if model.focusArea}}
             <h5>Focus Area</h5>
-            {{humanize model.focusArea}}
+            {titleize ({humanize model.focusArea)}}
           {{/if}}
 
           {{#if model.joined}}
