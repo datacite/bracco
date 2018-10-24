@@ -18,17 +18,19 @@
           {{/el.control}}
         {{/form.element}}
 
-        {{#form.element controlType="power-select" label="Organization Type (optional)" property="organizationType" options=organizationTypes destination=organizationType as |el|}}
-          {{#el.control onChange=(action "selectOrganizationType") search=(action "searchOrganizationType") placeholder="Select Organization Type" searchPlaceholder="Type to search..." allowClear=true as |item|}}
-            {{titleize (humanize item)}}
-          {{/el.control}}
-        {{/form.element}}
+        {{#if (can "create provider")}}
+          {{#form.element controlType="power-select" label="Organization Type (optional)" property="organizationType" options=organizationTypes destination=organizationType as |el|}}
+            {{#el.control onChange=(action "selectOrganizationType") search=(action "searchOrganizationType") placeholder="Select Organization Type" searchPlaceholder="Type to search..." allowClear=true as |item|}}
+              {{titleize (humanize item)}}
+            {{/el.control}}
+          {{/form.element}}
 
-        {{#form.element controlType="power-select" label="Focus Area (optional)" property="focusArea" options=focusAreas destination=focusArea helpText='Field of science covered by provider.' as |el|}}
-          {{#el.control onChange=(action "selectFocusArea") search=(action "searchFocusArea") placeholder="Select Focus Area" searchPlaceholder="Type to search..." allowClear=true as |item|}}
-            {{titleize (humanize item)}}
-          {{/el.control}}
-        {{/form.element}}
+          {{#form.element controlType="power-select" label="Focus Area (optional)" property="focusArea" options=focusAreas destination=focusArea helpText='Field of science covered by provider.' as |el|}}
+            {{#el.control onChange=(action "selectFocusArea") search=(action "searchFocusArea") placeholder="Select Focus Area" searchPlaceholder="Type to search..." allowClear=true as |item|}}
+              {{titleize (humanize item)}}
+            {{/el.control}}
+          {{/form.element}}
+        {{/if}}
 
         {{form.element controlType="textarea" label="Description (optional)" property="description" rows=10 helpText='Description of the provider. Please use markdown for formatting.' required=false}}
 
@@ -121,65 +123,67 @@
         </div>
       </div>
     {{/if}}
-    {{#if (or model.meta.organization-types model.otherParams.organization-type)}}
-      <div class="panel facets">
-        <div class="panel-body">
-          <h4>Organization Type</h4>
-          <ul>
-            {{#if model.meta.organization-types}}
-              {{#each model.meta.organization-types as |organization-type|}}
+    {{#if (can "create provider")}}
+      {{#if (or model.meta.organization-types model.otherParams.organization-type)}}
+        <div class="panel facets">
+          <div class="panel-body">
+            <h4>Organization Type</h4>
+            <ul>
+              {{#if model.meta.organization-types}}
+                {{#each model.meta.organization-types as |organization-type|}}
+                  <li>
+                    {{#if model.otherParams.organization-type}}
+                      {{#link-to "providers" (query-params organization-type='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+                    {{else}}
+                      {{#link-to "providers" (query-params organization-type=organization-type.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                    {{/if}}
+                    <div class="facet-title">{{organization-type.title}}</div>
+                    <span class="number pull-right">{{organization-type.count}}</span>
+                    <div class="clearfix"/>
+                  </li>
+                {{/each}}
+              {{else}}
                 <li>
-                  {{#if model.otherParams.organization-type}}
-                    {{#link-to "providers" (query-params organization-type='')}}{{fa-icon "check-square-o"}}{{/link-to}}
-                  {{else}}
-                    {{#link-to "providers" (query-params organization-type=organization-type.id)}}{{fa-icon "square-o"}}{{/link-to}}
-                  {{/if}}
-                  <div class="facet-title">{{organization-type.title}}</div>
-                  <span class="number pull-right">{{organization-type.count}}</span>
+                  {{#link-to "providers" (query-params organization-type='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+                  <div class="facet-title">{{model.otherParams.organization-type}}</div>
+                  <span class="number pull-right">0</span>
                   <div class="clearfix"/>
                 </li>
-              {{/each}}
-            {{else}}
-              <li>
-                {{#link-to "providers" (query-params organization-type='')}}{{fa-icon "check-square-o"}}{{/link-to}}
-                <div class="facet-title">{{model.otherParams.organization-type}}</div>
-                <span class="number pull-right">0</span>
-                <div class="clearfix"/>
-              </li>
-            {{/if}}
-          </ul>
+              {{/if}}
+            </ul>
+          </div>
         </div>
-      </div>
-    {{/if}}
-    {{#if (or model.meta.focus-areas model.otherParams.focus-area)}}
-      <div class="panel facets">
-        <div class="panel-body">
-          <h4>Focus Area</h4>
-          <ul>
-            {{#if model.meta.focus-areas}}
-              {{#each model.meta.focus-areas as |focus-area|}}
+      {{/if}}
+      {{#if (or model.meta.focus-areas model.otherParams.focus-area)}}
+        <div class="panel facets">
+          <div class="panel-body">
+            <h4>Focus Area</h4>
+            <ul>
+              {{#if model.meta.focus-areas}}
+                {{#each model.meta.focus-areas as |focus-area|}}
+                  <li>
+                    {{#if model.otherParams.focus-area}}
+                      {{#link-to "providers" (query-params focus-area='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+                    {{else}}
+                      {{#link-to "providers" (query-params focus-area=focus-area.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                    {{/if}}
+                    <div class="facet-title">{{focus-area.title}}</div>
+                    <span class="number pull-right">{{focus-area.count}}</span>
+                    <div class="clearfix"/>
+                  </li>
+                {{/each}}
+              {{else}}
                 <li>
-                  {{#if model.otherParams.focus-area}}
-                    {{#link-to "providers" (query-params focus-area='')}}{{fa-icon "check-square-o"}}{{/link-to}}
-                  {{else}}
-                    {{#link-to "providers" (query-params focus-area=focus-area.id)}}{{fa-icon "square-o"}}{{/link-to}}
-                  {{/if}}
-                  <div class="facet-title">{{focus-area.title}}</div>
-                  <span class="number pull-right">{{focus-area.count}}</span>
+                  {{#link-to "providers" (query-params focus-area='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+                  <div class="facet-title">{{model.otherParams.focus-area}}</div>
+                  <span class="number pull-right">0</span>
                   <div class="clearfix"/>
                 </li>
-              {{/each}}
-            {{else}}
-              <li>
-                {{#link-to "providers" (query-params focus-area='')}}{{fa-icon "check-square-o"}}{{/link-to}}
-                <div class="facet-title">{{model.otherParams.focus-area}}</div>
-                <span class="number pull-right">0</span>
-                <div class="clearfix"/>
-              </li>
-            {{/if}}
-          </ul>
+              {{/if}}
+            </ul>
+          </div>
         </div>
-      </div>
+      {{/if}}
     {{/if}}
   </div>
   <div class='col-md-9 panel-list' id="content">
@@ -211,14 +215,16 @@
               <a href="mailto:{{provider.contactEmail}}">{{provider.contactEmail}}</a>
             {{/if}}
 
-            {{#if provider.organizationType}}
-              <h5>Organization Type</h5>
-              {{titleize (humanize provider.organizationType)}}
-            {{/if}}
+            {{#if (can "create provider")}}
+              {{#if provider.organizationType}}
+                <h5>Organization Type</h5>
+                {{titleize (humanize provider.organizationType)}}
+              {{/if}}
 
-            {{#if provider.focusArea}}
-              <h5>Focus Area</h5>
-              {{titleize (humanize provider.focusArea)}}
+              {{#if provider.focusArea}}
+                <h5>Focus Area</h5>
+                {{titleize (humanize provider.focusArea)}}
+              {{/if}}
             {{/if}}
           </div>
         </div>
