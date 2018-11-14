@@ -12,6 +12,22 @@ export default Ember.Component.extend({
     return Math.round(rawLatency)
   }),
 
+  bodyHasDoi: Ember.computed(function() {
+    if (this.get('model').get("landingPage").result['body-has-pid']) {
+      return "Yes";
+    } else {
+      return "No";
+    }
+  }),
+
+  hasSchemaOrg: Ember.computed(function() {
+    if (this.get('model').get("landingPage").result['has-schema-org']) {
+      return "Yes";
+    } else {
+      return "No";
+    }
+  }),
+
   isStatusError: Ember.computed(function() {
     return this.get('model').get("landingPage").status != 200;
   }),
