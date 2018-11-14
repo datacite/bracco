@@ -1,0 +1,111 @@
+  <h3 class="member-results">Health</h3>
+  <div class="clearfix"/>
+
+  <div class="panel panel-transparent">
+    <div class="panel-body">
+      {{#if model.landingPage.checked }}
+
+      <p>Summary of information found by the automated link checking.</p>
+      <p>
+        Landing page was last checked <strong>{{moment-from model.landingPage.checked }} on {{format-time model.landingPage.checked year='numeric' month='long' day='numeric'}}</strong>
+      </p>
+
+      {{#if hasError}}
+      <p class="bg-danger" style="padding: 15px" data-toggle="tooltip" title="A raw potential error message, these can vary but are provided as a hint.">
+        <strong>Error message:</strong> {{model.landingPage.result.error}}
+      </p>
+      {{/if}}
+
+      {{#if hasHttpInfo }}
+      <table class="table table-striped table-condensed">
+        <caption>HTTP Info</caption>
+        <thead>
+          <tr><th>Information</th><th>Found</th></tr>
+        </thead>
+        <tbody>
+          <tr class="{{if isStatusError 'danger'}}">
+            <td data-toggle="tooltip" title="A status code as returned by the checked web server at time of check.">HTTP Status Code</td>
+            {{#if isStatusError}}
+            <td data-toggle="tooltip" title="Status codes reflect potential errors, however they can change, e.g. was 404 but manual check reveals 200.">
+              {{model.landingPage.status}}
+            </td>
+            {{else}}
+            <td>
+              {{model.landingPage.status}}
+            </td>
+            {{/if}}
+          </tr>
+
+          <tr>
+            <td data-toggle="tooltip" title="Content-type as returned by the checked web server at time of check.">HTTP Content Type</td>
+            <td>{{model.landingPage.content-type}}</td>
+          </tr>
+
+          <tr>
+            <td data-toggle="tooltip" title="The latency to receive a full response from the checked web server. Note this can be affected by geo-location of servers.">Download Latency</td>
+            <td>{{model.landingPage.result.download-latency}}</td>
+          </tr>
+
+          <tr>
+            <td data-toggle="tooltip" title="Number of redirects triggered by the checked web server.">Times redirected</td>
+            <td>{{model.landingPage.result.redirect-count}}</td>
+          </tr>
+
+          <tr>
+            <td data-toggle="tooltip" title="The redirect urls followed by the check.">Redirects</td>
+            <td>
+              {{#if model.landingPage.result.redirect-urls}}
+                {{#each model.landingPage.result.redirect-urls as |redirect_url|}}
+                {{redirect_url}}<br>
+                {{/each}}
+              {{else}}
+                No redirects
+              {{/if}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      {{/if}}
+
+      {{#unless hasError}}
+      <table class="table table-striped table-condensed">
+        <caption>Metadata Info</caption>
+        <thead>
+          <tr><th>Information</th><th>Found</th></tr>
+        </thead>
+        <tbody>
+
+          <tr>
+            <td data-toggle="tooltip" title="In any of the returned response content was the DOI found.">DOI Found in body</td>
+            <td>{{model.landingPage.result.body-has-pid}}</td>
+          </tr>
+
+          <tr>
+            <td data-toggle="tooltip" title="Was any metadata in the format of schema.org JSON+LD found">Schema.org found</td>
+            <td>{{model.landingPage.result.has-schema-org}}</td>
+          </tr>
+
+          <tr>
+            <td data-toggle="tooltip" title="The schema.org identifier in the metadata if found">Schema.org Id</td>
+            <td>{{format-text model.landingPage.result.schema-org-id}}</td>
+          </tr>
+
+          <tr>
+            <td data-toggle="tooltip" title="The DC identifier if found in a meta tag">Dublin Core ID</td>
+            <td>{{model.landingPage.result.dc-identifier}}</td>
+          </tr>
+
+          <tr>
+            <td data-toggle="tooltip" title="The ID found in citation meta tag">Citation DOI</td>
+            <td>{{model.landingPage.result.citation-doi}}</td>
+          </tr>
+
+        </tbody>
+      </table>
+      {{/unless}}
+
+    {{else}}
+      No information to display, the automated link checker has not checked this DOI.
+    {{/if}}
+    </div>
+  </div>
