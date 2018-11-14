@@ -9,9 +9,9 @@ const UniqueClientId = BaseValidator.extend({
     if (value === providerId || Ember.computed.not('model.meta.id.isEnabled')) {
       return true;
     } else {
-      return this.get('store').query('client', { id: value }).then((result) => {
+      return this.get('store').query('client', { query: value, 'include-deleted': true }).then((result) => {
         if(result.content.length > 0) {
-          return "The Client ID " + value + " already exists.";
+          return "The Client ID " + value + " already exists, or existed before and has been deleted. Please contact DataCite staff if you want to create an account with this Client ID.";
         } else {
           return true;
         }
