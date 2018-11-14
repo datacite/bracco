@@ -7,7 +7,7 @@
 
       <p>Summary of information found by the automated link checking.</p>
       <p>
-        Landing page was last checked <strong>{{moment-from model.landingPage.checked }} on {{format-time model.landingPage.checked year='numeric' month='long' day='numeric'}}</strong>
+        Landing page was last checked <strong>{{moment-from model.landingPage.checked }}</strong> on <strong>{{format-time model.landingPage.checked year='numeric' month='long' day='numeric'}}</strong>
       </p>
 
       {{#if hasError}}
@@ -86,7 +86,7 @@
           </tr>
 
           <tr>
-            <td data-toggle="tooltip" title="The schema.org identifier in the metadata if found">Schema.org Id</td>
+            <td data-toggle="tooltip" title="The schema.org identifier in the metadata if found">Schema.org ID</td>
             <td>{{format-text model.landingPage.result.schema-org-id}}</td>
           </tr>
 
