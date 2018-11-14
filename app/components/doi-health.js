@@ -1,8 +1,4 @@
 import Ember from 'ember';
-import fetch from 'fetch';
-const { service } = Ember.inject;
-import ENV from 'bracco/config/environment';
-import provider from '../models/provider';
 
 export default Ember.Component.extend({
 
