@@ -7,6 +7,11 @@ export default Ember.Component.extend({
     this.$('[data-toggle="tooltip"]').tooltip({ placement: 'top', container: "body"});
   },
 
+  downloadLatency: Ember.computed(function() {
+    var rawLatency = this.get('model').get("landingPage").result['download-latency'];
+    return Math.round(rawLatency)
+  }),
+
   isStatusError: Ember.computed(function() {
     return this.get('model').get("landingPage").status != 200;
   }),
