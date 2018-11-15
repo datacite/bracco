@@ -5,7 +5,12 @@ import { validator, buildValidations } from 'ember-cp-validations';
 const Validations = buildValidations({
   symbol: [
     validator('presence', true),
-    validator('unique-provider-id', true),
+    validator('unique-provider-id', {
+      presence: true,
+      disabled: Ember.computed('model', function() {
+        return !this.get('model').get('isNew');
+      })
+    }),
     validator('format', {
       regex: /^[A-Z]+$/,
       message: 'The Provider ID can contain only upper case letters'
