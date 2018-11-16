@@ -36,6 +36,8 @@
         {{doi-usage-stats model=model}}
       {{/if}}
 
-      {{doi-health model=model}}
+      {{#if (can "viewHealth doi" model)}}
+        {{doi-health model=model}}
+      {{/if}}
     </div>
   </div>
