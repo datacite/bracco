@@ -98,7 +98,7 @@ export default DS.Model.extend(Validations, {
   contactEmail: DS.attr('string'),
   phone: DS.attr('string'),
   website: DS.attr('string'),
-  isActive: DS.attr('boolean'),
+  isActive: DS.attr('boolean', { defaultValue: true }),
   passwordInput: DS.attr('string'),
   hasPassword: DS.attr('boolean'),
   keepPassword: DS.attr('boolean', { defaultValue: true }),
