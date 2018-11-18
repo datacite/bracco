@@ -16,7 +16,7 @@ export default Ember.Component.extend({
     ];
 
     let licenseURL = this.get('licenseURL');
-    if (typeof licenseURL !== 'undefined') {
+    if (licenseURL != null) {
       let licenseLogo = licenseURL;
       this.set('licenseURL', licenseURL);
       let uri = new URI(licenseURL);
