@@ -25,13 +25,12 @@ export default Ember.Controller.extend({
       }
 
       // set individual attributes to null so that they don't overwrite what is in the xml attribute
-      doi.set('author', null);
-      doi.set('title', null);
+      doi.set('creator', null);
+      doi.set('titles', []);
       doi.set('publisher', null);
-      doi.set('published', null);
-      doi.set('resourceTypeSubtype', null);
-      doi.set('resource-type', null);
-      doi.set('description', null);
+      doi.set('publicationYear', null);
+      doi.set('types', {});
+      doi.set('descriptions', []);
       doi.set('schemaVersion', null);
     
       let self = this;

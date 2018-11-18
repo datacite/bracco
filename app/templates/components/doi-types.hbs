@@ -1,0 +1,5 @@
+{{#form.element controlType="power-select" label="Resource Type General" property="resourceTypeGeneral" helpText='The general type of the resource.' options=resourceTypesGeneral destination=resourceTypeGeneral as |el|}}
+  {{el.control onChange=(action "selectResourceTypeGeneral") search=(action "searchResourceTypeGeneral") searchPlaceholder="Select from list or type to search..." allowClear=true}}
+{{/form.element}}
+
+{{form.element controlType="text" label="Resource Type (optional)" property="resourceType" helpText="A description of the resource, the preferred format is a single term of some detail." required=false}}

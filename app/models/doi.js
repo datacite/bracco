@@ -64,7 +64,7 @@ const Validations = buildValidations({
     //   isWarning: true
     // })
   ],
-  author: [
+  creator: [
     validator('presence', {
       presence: true,
       isWarning: Ember.computed('model.state', 'model.prefix', function() {
@@ -75,7 +75,7 @@ const Validations = buildValidations({
       })
     })
   ],
-  title: [
+  titles: [
     validator('presence', {
       presence: true,
       isWarning: Ember.computed('model.state', 'model.prefix', function() {
@@ -97,7 +97,7 @@ const Validations = buildValidations({
       })
     })
   ],
-  published: [
+  publicationYear: [
     validator('presence', {
       presence: true,
       isWarning: Ember.computed('model.state', 'model.prefix', function() {
@@ -120,7 +120,7 @@ const Validations = buildValidations({
       })
     })
   ],
-  "resource-type": [
+  types: [
     validator('presence', {
       presence: true,
       isWarning: Ember.computed('model.state', 'model.prefix', function() {
@@ -156,9 +156,6 @@ export default DS.Model.extend(Validations, {
   client: DS.belongsTo('client', {
     async: true
   }),
-  'resource-type': DS.belongsTo('resource-type', {
-    async: true
-  }),
 
   identifier: DS.attr('string'),
   doi: DS.attr('string'),
@@ -167,25 +164,23 @@ export default DS.Model.extend(Validations, {
   suffix: DS.attr('string'),
   url: DS.attr('string'),
   media: DS.attr(),
-  author: DS.attr('author', { defaultValue: null }),
-  title: DS.attr('wrapped'),
+  creator: DS.attr('creator', { defaultValue: null }),
+  titles: DS.attr(),
   publisher: DS.attr('string'),
-  published: DS.attr('year'),
-  description: DS.attr('wrapped'),
-  license: DS.attr('string'),
+  publicationYear: DS.attr('number'),
+  descriptions: DS.attr(),
+  rightsList: DS.attr(),
+  types: DS.attr(),
   xml: DS.attr('xml'),
-  resourceTypeSubtype: DS.attr('string'),
   version: DS.attr('string'),
   metadataVersion: DS.attr('string'),
   schemaVersion: DS.attr('string'),
-  isActive: DS.attr('boolean', { defaultValue: true }),
   source: DS.attr('string', { defaultValue: "fabrica" }),
   state: DS.attr('string'),
   event: DS.attr('string'),
   created: DS.attr('date'),
   registered: DS.attr('date'),
   updated: DS.attr('date'),
-
   mode: DS.attr('string'),
 
   isDraft: Ember.computed('state', function() {
