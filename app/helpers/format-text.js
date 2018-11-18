@@ -8,9 +8,9 @@ const entities = new Entities();
 // sanitize and truncate text
 export function formatText([text], hash) {
   if (Ember.typeOf(text) === 'array') {
-    if (text[0].descriptionType) {
+    if (text[0] && text[0].descriptionType) {
       text = text[0].description;
-    } else {
+    } else if (text[0]) {
       text = text[0].title;
     }
   }
