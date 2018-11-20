@@ -70,7 +70,9 @@ export default Component.extend({
     if (isPresent(this.get('model.publicationYear')) || 
         isPresent(this.get('model.titles')) ||
         isPresent(this.get('model.publisher')) ||
-        isPresent(this.get('model.creator'))) {
+        isPresent(this.get('model.creator')) ||
+        this.get('model.types') instanceof Object && !!this.get('model.types.resourceTypeGeneral') ||
+        this.get('model.types') instanceof Object && !!this.get('model.types.resourceType')) {
       this.set('hasMetadata', true);
     }
 
