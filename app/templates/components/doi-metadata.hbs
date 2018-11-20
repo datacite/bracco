@@ -1,4 +1,4 @@
-{{#if (or model.publicationYear model.types model.titles model.publisher model.descriptions)}}
+{{#if hasMetadata}}
   <div id="metadata" class="input-group pull-right">
     <select onchange={{action 'selectMetadata' value="target.value"}}>
       {{#each-in formats as |key value|}}

@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import fetch from 'fetch';
 import Component from '@ember/component';
+import { isPresent } from '@ember/utils';
 const { service } = Ember.inject;
 import vkbeautify from 'npm:vkbeautify';
 import ENV from 'bracco/config/environment';
@@ -9,6 +10,7 @@ export default Component.extend({
   currentUser: service(),
 
   tagName: 'div',
+  hasMetadata: false,
   metadata: null,
   output: null,
   summary: true,
@@ -64,6 +66,16 @@ export default Component.extend({
   },
 
   didInsertElement() {
+    // show metadata if at least one of these attributes is set
+    if (isPresent(this.get('model.publicationYear')) || 
+        this.get('model.types').hasOwnProperty('resourceTypeGeneral') ||
+        this.get('model.types').hasOwnProperty('resourceType') ||
+        isPresent(this.get('model.titles')) ||
+        isPresent(this.get('model.publisher')) ||
+        isPresent(this.get('model.creator'))) {
+      this.set('hasMetadata', true);
+    }
+
     let formats = { 'summary': 'Summary View',
                     'datacite': 'DataCite XML',
                     'schema_org': 'Schema.org JSON-LD',

@@ -44,11 +44,19 @@ export default Ember.Controller.extend({
       doi.set('creator', creatorList);
 
       // convert title and description back into array
-      doi.set('titles', [{ title: doi.get('title') }]);
-      doi.set('descriptions', [{ description: doi.get('description'), descriptionType: 'Abstract' }]);
+      if (doi.get('title')) {
+        doi.set('titles', [{ title: doi.get('title') }]);
+      }
+      if (doi.get('description')) {
+        doi.set('descriptions', [{ description: doi.get('description'), descriptionType: 'Abstract' }]);
+      }
 
       // generate types object
-      doi.set('types'), { resourceTypeGeneral: doi.get('resourceTypeGeneral'), resourceType: doi.get('resourceType') }
+      if (doi.get('resourceTypeGeneral')) {
+        doi.set('types', { resourceTypeGeneral: doi.get('resourceTypeGeneral'), resourceType: doi.get('resourceType') });
+      } else {
+        doi.set('types', {});
+      }
 
       let self = this;
       doi.save().then(function(doi) {
