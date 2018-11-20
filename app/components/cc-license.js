@@ -39,7 +39,7 @@ export default Ember.Component.extend({
       } else if (uri.hostname() === "opensource.org") {
         switch(uri.segment(1)) {
           case 'MIT':
-            licenseLogo = [{ logo: '<img src="https://img.shields.io/:license-MIT-blue.svg" />' }];
+            licenseLogo = [{ logo: Ember.String.htmlSafe('<img src="https://img.shields.io/:license-MIT-blue.svg" />') }];
         }
       }
       this.set('licenseLogo', licenseLogo);
