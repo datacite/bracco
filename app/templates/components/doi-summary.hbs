@@ -4,9 +4,9 @@
     <span class="small">{{model.types.resourceTypeGeneral}}</span>
   {{else}}
     {{#if model.isDraft}}
-      {{#if (gt model.titles 0)}}{{format-text model.titles}}{{else}}{{model.doi}}{{/if}}
+      {{format-text model.titles}}
     {{else}}
-      <a target="_blank" href="{{model.identifier}}">{{#if (gt model.titles 0)}}{{format-text model.titles}}{{else}}{{model.doi}}{{/if}}</a>
+      {{#if (gt model.titles 0)}}<a target="_blank" href="{{model.identifier}}">{{format-text model.titles}}</a>{{/if}}
     {{/if}}
     <span class="small">{{model.types.resourceTypeGeneral}}</span>
   {{/if}}

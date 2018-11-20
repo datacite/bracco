@@ -68,8 +68,6 @@ export default Component.extend({
   didInsertElement() {
     // show metadata if at least one of these attributes is set
     if (isPresent(this.get('model.publicationYear')) || 
-        this.get('model.types').hasOwnProperty('resourceTypeGeneral') ||
-        this.get('model.types').hasOwnProperty('resourceType') ||
         isPresent(this.get('model.titles')) ||
         isPresent(this.get('model.publisher')) ||
         isPresent(this.get('model.creator'))) {
