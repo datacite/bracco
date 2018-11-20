@@ -1,12 +1,12 @@
 <h3 class="work">
   {{#if isList}}
-    {{#link-to "clients.show.dois.show" model.client.id model.id}}{{#if model.titles}}{{format-text model.titles}}{{else}}{{model.doi}}{{/if}}{{/link-to}}
+    {{#link-to "clients.show.dois.show" model.client.id model.id}}{{#if (gt model.titles 0)}}{{format-text model.titles}}{{else}}{{model.doi}}{{/if}}{{/link-to}}
     <span class="small">{{model.types.resourceTypeGeneral}}</span>
   {{else}}
     {{#if model.isDraft}}
-      {{format-text model.titles}}
+      {{#if (gt model.titles 0)}}{{format-text model.titles}}{{else}}{{model.doi}}{{/if}}
     {{else}}
-      <a target="_blank" href="{{model.identifier}}">{{format-text model.titles}}</a>
+      <a target="_blank" href="{{model.identifier}}">{{#if (gt model.titles 0)}}{{format-text model.titles}}{{else}}{{model.doi}}{{/if}}</a>
     {{/if}}
     <span class="small">{{model.types.resourceTypeGeneral}}</span>
   {{/if}}
