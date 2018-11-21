@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export function formatCreator([creators]) {
   let creatorList = creators.map(function(a) {
-    let name = (a['family-name']) ? [a['given-name'], a['family-name']].join(" ") : a.name;
+    let name = (a.familyName) ? [a.givenName, a.familyName]].join(" ") : a.name;
     return a.id ? '<a href="' + a.id + '">' + name + '</a>' : name
   });
 

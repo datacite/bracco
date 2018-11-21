@@ -23,8 +23,8 @@ export default Ember.Route.extend(CanMixin, {
   },
   creatorsToSeperated(creators) {
     return creators.map(function(a) {
-      if (a['family-name']) {
-        return [a['family-name'], a['given-name']].join(", ");
+      if (a.familyName) {
+        return [a.familyName, a.givenName].join(", ");
       } else {
         return a.name;
       }
