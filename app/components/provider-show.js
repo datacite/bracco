@@ -5,24 +5,24 @@ import countryList from 'npm:iso-3166-country-list';
 const { service } = Ember.inject;
 import ENV from 'bracco/config/environment';
 const organizationTypeList = [
-  'academic_institution',
-  'academic_library',
-  'government_agency',
-  'national_institution',
-  'national_library',
-  'research_institution',
-  'professional_society',
+  'academicInstitution',
+  'academicLibrary',
+  'governmentAgency',
+  'nationalInstitution',
+  'nationalLibrary',
+  'researchInstitution',
+  'professionalSociety',
   'publisher',
-  'service_provider',
+  'serviceProvider',
   'vendor'
 ]
 const focusAreaList = [
-  'biomedical_and_health_sciences',
-  'earth_sciences',
+  'biomedicalAndHealthSciences',
+  'earthSciences',
   'humanities',
-  'mathematics_and_computer_science',
-  'physical_sciences_and_engineering',
-  'social_sciences',
+  'mathematicsAndComputerScience',
+  'physicalSciencesAndEngineering',
+  'socialSciences',
   'general'
 ]
 
