@@ -16,31 +16,36 @@ export default Ember.Component.extend({
     ];
 
     let licenseURL = this.get('licenseURL');
-    let licenseLogo = licenseURL;
-    this.set('licenseURL', licenseURL);
-    let uri = new URI(licenseURL);
+    if (licenseURL != null) {
+      let licenseLogo = licenseURL;
+      this.set('licenseURL', licenseURL);
+      let uri = new URI(licenseURL);
 
-    if (uri.hostname() === "creativecommons.org") {
-      let labels = Ember.A(uri.segment(1).split("-"));
-      labels.unshift("cc");
-      let val = null;
+      if (uri.hostname() === "creativecommons.org") {
+        let labels = Ember.A(uri.segment(1).split("-"));
+        labels.unshift("cc");
+        let val = null;
 
-      licenseLogo = labels.reduce(function (sum, key) {
-        if (Ember.String.w("public publicdomain").includes(key)) {
-          key = "zero";
+        licenseLogo = labels.reduce(function (sum, key) {
+          if (Ember.String.w("public publicdomain").includes(key)) {
+            key = "zero";
+          }
+          if (Ember.String.w("cc by nd nc sa zero").includes(key)) {
+            val = { class: 'cc cc-' + key, tooltip: Tooltips.findBy("key", key) };
+            sum.pushObject(val);
+          }
+          return sum;
+        }, []);
+      } else if (uri.hostname() === "opensource.org") {
+        switch(uri.segment(1)) {
+          case 'MIT':
+            licenseLogo = [{ logo: Ember.String.htmlSafe('<img src="https://img.shields.io/:license-MIT-blue.svg" />') }];
         }
-        if (Ember.String.w("cc by nd nc sa zero").includes(key)) {
-          val = { class: 'cc cc-' + key, tooltip: Tooltips.findBy("key", key) };
-          sum.pushObject(val);
-        }
-        return sum;
-      }, []);
-    } else if (uri.hostname() === "opensource.org") {
-      switch(uri.segment(1)) {
-        case 'MIT':
-          licenseLogo = [{ logo: '<img src="https://img.shields.io/:license-MIT-blue.svg" />' }];
       }
+      this.set('licenseLogo', licenseLogo);
+    } else {
+      this.set('licenseURL', null);
+      this.set('licenseLogo', null);
     }
-    this.set('licenseLogo', licenseLogo);
   }
 });

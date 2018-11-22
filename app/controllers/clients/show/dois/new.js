@@ -15,22 +15,37 @@ export default Ember.Controller.extend({
     submit(doi) {
       doi.set('event', this.setEvent(doi.get('state')));
 
-      //convert authors back into array, and then to JSON
-      let authorList = doi.get('author').split("\n").reduce(function (sum, a) {
+      // convert creators back into array, and then to JSON
+      let creatorList = doi.get('creator').split("\n").reduce(function (sum, a) {
         if (a.length > 0) {
           let names = a.split(",")
-          let author = {}
+          let creator = {}
           if (names.length > 1) {
-            author = {familyName: names[0].trim(), givenName: names[1].trim()};
+            creator = {familyName: names[0].trim(), givenName: names[1].trim()};
           } else {
-            author = { name: a };
+            creator = { name: a };
           }
-          sum.pushObject(author);
+          sum.pushObject(creator);
         }
         return sum;
       }, []);
-      doi.set('author', authorList);
+      doi.set('creator', creatorList);
 
+      // convert title and description back into array
+      if (doi.get('title')) {
+        doi.set('titles', [{ title: doi.get('title') }]);
+      }
+      if (doi.get('description')) {
+        doi.set('descriptions', [{ description: doi.get('description'), descriptionType: 'Abstract' }]);
+      }
+
+      // generate types object
+      if (doi.get('resourceTypeGeneral')) {
+        doi.set('types', { resourceTypeGeneral: doi.get('resourceTypeGeneral'), resourceType: doi.get('resourceType') });
+      } else {
+        doi.set('types', {});
+      }
+      
       let self = this;
       doi.save().then(function(doi) {
         self.transitionToRoute('clients.show.dois.show', doi.get('client').get('id'), doi);

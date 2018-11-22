@@ -1,25 +1,25 @@
 <h3 class="work">
   {{#if isList}}
-    {{#link-to "clients.show.dois.show" model.client.id model.id}}{{#if model.title}}{{format-text model.title}}{{else}}{{model.doi}}{{/if}}{{/link-to}}
-    <span class="small">{{model.resource-type.title}}</span>
+    {{#link-to "clients.show.dois.show" model.client.id model.id}}{{#if (gt model.titles.length 0)}}{{format-text model.titles}}{{else}}{{model.doi}}{{/if}}{{/link-to}}
+    <span class="small">{{model.types.resourceTypeGeneral}}</span>
   {{else}}
     {{#if model.isDraft}}
-      {{format-text model.title}}
+      {{#if (gt model.titles.length 0)}}{{format-text model.titles}}{{else}}{{model.doi}}{{/if}}
     {{else}}
-      <a target="_blank" href="{{model.identifier}}">{{format-text model.title}}</a>
+      <a target="_blank" href="{{model.identifier}}">{{#if (gt model.titles.length 0)}}{{format-text model.titles}}{{else}}{{model.doi}}{{/if}}</a>
     {{/if}}
-    <span class="small">{{model.resource-type.title}}</span>
+    <span class="small">{{model.types.resourceTypeGeneral}}</span>
   {{/if}}
 </h3>
-{{#if model.author}}
-  {{{format-author model.author}}}
+{{#if model.creator}}
+  {{{format-creator model.creator}}}
 {{/if}}
 <div class="metadata">
-  {{format-metadata model.published resourceType=model.resource-type resourceTypeSubtype=model.resourceTypeSubtype publisher=model.publisher version=model.version}}
+  {{format-metadata model.publicationYear resourceTypeGeneral=model.types.resourceTypeGeneral resourceType=model.types.resourceType publisher=model.publisher version=model.version}}
 </div>
-{{#if model.description}}
+{{#if model.descriptions}}
   <div class="description">
-    {{format-text model.description limit=150}}
+    {{format-text model.descriptions limit=150}}
   </div>
 {{/if}}
 {{#if isList}}
@@ -28,6 +28,8 @@
     <span class="text-{{model.state}}">{{titleize model.state}}</span>
   </div>
 {{/if}}
-{{#if model.license}}
-  {{cc-license licenseURL=model.license}}
+{{#if model.rightsList}}
+  {{#each model.rightsList as |rights|}}
+    {{cc-license licenseURL=rights.rightsUri}}
+  {{/each}}
 {{/if}}

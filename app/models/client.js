@@ -7,7 +7,12 @@ const Validations = buildValidations({
   symbol: [
     validator('presence', true),
     validator('client-id', true),
-    validator('unique-client-id', true),
+    validator('unique-client-id', {
+      presence: true,
+      disabled: Ember.computed('model', function() {
+        return !this.get('model').get('isNew');
+      })
+    }),
     validator('format', {
       regex: /^[A-Z]+\.[A-Z0-9]+(-[A-Z0-9]+)?$/,
       message: 'The Client ID must start with the Provider ID, followed by a dot. It can then contain only upper case letters, numbers, and at most one hyphen.'

@@ -20,7 +20,10 @@ before_install:
       cp .env.stage .env;
       AUTO_DEPLOY=true;
     else
-      AUTO_DEPLOY=false;
+      AWS_BUCKET="doi.stage.datacite.org";
+      CLOUDFRONT_DISTRIBUTION_ID=$CLOUDFRONT_DISTRIBUTION_ID_STAGE;
+      cp .env.stage .env;
+      AUTO_DEPLOY=true;
     fi
   - npm config set spin false
   - npm install -g codeclimate-test-reporter

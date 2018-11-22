@@ -1,4 +1,4 @@
-{{#if model.published}}
+{{#if model.publicationYear}}
   <div id="citation" class="input-group pull-right">
     <select onchange={{action 'selectStyle' value="target.value"}}>
       {{#each-in citationFormats as |key value|}}

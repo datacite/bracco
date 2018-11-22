@@ -6,12 +6,12 @@ const UniqueClientId = BaseValidator.extend({
 
   validate(value, options, model) {
     let providerId = model.get('provider').get('symbol') + '.';
-    if (value === providerId || Ember.computed.not('model.meta.id.isEnabled')) {
+    if (value === providerId) {
       return true;
     } else {
       return this.get('store').query('client', { id: value }).then((result) => {
         if(result.content.length > 0) {
-          return "The Client ID " + value + " already exists.";
+          return "The Client ID " + value + " already exists, or existed before and has been deleted. Contact DataCite staff if you want to create an account with this Client ID.";
         } else {
           return true;
         }

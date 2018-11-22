@@ -7,15 +7,19 @@ const entities = new Entities();
 
 // sanitize and truncate text
 export function formatText([text], hash) {
-  if (Ember.typeOf(text) === 'object') {
-    text = text.text;
+  if (Ember.typeOf(text) === 'array') {
+    if (text[0] && text[0].descriptionType) {
+      text = text[0].description;
+    } else if (text[0]) {
+      text = text[0].title;
+    }
   }
   text = entities.decode(text);
   
   let allowedTags = ['strong', 'em', 'b', 'i', 'code', 'pre', 'sub', 'sup', 'br']
   let sanitizedText = SanitizeHtml(text, { allowedTags: allowedTags });
   let words = sanitizedText.split(" ");
-  let len = hash.limit || 300;
+  let len = hash.limit || 500;
   let out = '';
 
   if (words) {
@@ -24,9 +28,6 @@ export function formatText([text], hash) {
     if (words.length > len) {
       out += ' …';
     }
-
-  } else {
-    out = '';
   }
 
   return Ember.String.htmlSafe(out);

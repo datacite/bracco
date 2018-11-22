@@ -5,7 +5,12 @@ import { validator, buildValidations } from 'ember-cp-validations';
 const Validations = buildValidations({
   symbol: [
     validator('presence', true),
-    validator('unique-provider-id', true),
+    validator('unique-provider-id', {
+      presence: true,
+      disabled: Ember.computed('model', function() {
+        return !this.get('model').get('isNew');
+      })
+    }),
     validator('format', {
       regex: /^[A-Z]+$/,
       message: 'The Provider ID can contain only upper case letters'
@@ -93,7 +98,7 @@ export default DS.Model.extend(Validations, {
   contactEmail: DS.attr('string'),
   phone: DS.attr('string'),
   website: DS.attr('string'),
-  isActive: DS.attr('boolean'),
+  isActive: DS.attr('boolean', { defaultValue: true }),
   passwordInput: DS.attr('string'),
   hasPassword: DS.attr('boolean'),
   keepPassword: DS.attr('boolean', { defaultValue: true }),
@@ -108,7 +113,7 @@ export default DS.Model.extend(Validations, {
     return this.get('meta.dois');
   }),
   currentDoiCount: Ember.computed('doiCount', function() {
-    let currentYear = this.get('doiCount').findBy('id', 2017);
+    let currentYear = this.get('doiCount').findBy('id', 2018);
     if (currentYear) {
       return currentYear.count;
     } else {

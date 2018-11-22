@@ -72,7 +72,6 @@ export default Ember.Component.extend({
     delete(client) {
       this.set('client', client);
       this.get('client').set('confirmSymbol', null);
-      this.get('client').validateSync();
       this.set('provider', client.get('provider'));
       this.set('delete', true);
     },

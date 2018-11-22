@@ -18,13 +18,13 @@ export default Ember.Route.extend(CanMixin, {
       return this.transitionTo('index');
     } else {
       this.modelFor('clients/show/dois/show').set('mode', 'edit');
-      this.modelFor('clients/show/dois/show').set('author', this.authorsToSeperated(this.modelFor('clients/show/dois/show').get('author')));
+      this.modelFor('clients/show/dois/show').set('creator', this.creatorsToSeperated(this.modelFor('clients/show/dois/show').get('creator')));
     }
   },
-  authorsToSeperated(authors) {
-    return authors.map(function(a) {
-      if (a['family-name']) {
-        return [a['family-name'], a['given-name']].join(", ");
+  creatorsToSeperated(creators) {
+    return creators.map(function(a) {
+      if (a.familyName) {
+        return [a.familyName, a.givenName].join(", ");
       } else {
         return a.name;
       }
