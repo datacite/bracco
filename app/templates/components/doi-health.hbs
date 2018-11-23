@@ -38,7 +38,7 @@
 
           <tr>
             <td data-toggle="tooltip" title="Content-type as returned by the checked web server at time of check.">HTTP Content Type</td>
-            <td>{{model.landingPage.content-type}}</td>
+            <td>{{model.landingPage.contentType}}</td>
           </tr>
 
           <tr>
@@ -48,14 +48,14 @@
 
           <tr>
             <td data-toggle="tooltip" title="Number of redirects triggered by the checked web server.">Times redirected</td>
-            <td>{{model.landingPage.result.redirect-count}}</td>
+            <td>{{model.landingPage.result.redirectCount}}</td>
           </tr>
 
           <tr>
             <td data-toggle="tooltip" title="The redirect urls followed by the check.">Redirects</td>
             <td>
-              {{#if model.landingPage.result.redirect-urls}}
-                {{#each model.landingPage.result.redirect-urls as |redirect_url|}}
+              {{#if model.landingPage.result.redirectUrls}}
+                {{#each model.landingPage.result.redirectUrls as |redirect_url|}}
                 {{redirect_url}}<br>
                 {{/each}}
               {{else}}
@@ -87,17 +87,17 @@
 
           <tr>
             <td data-toggle="tooltip" title="The schema.org identifier in the metadata if found">Schema.org ID</td>
-            <td>{{format-text model.landingPage.result.schema-org-id}}</td>
+            <td>{{format-text model.landingPage.result.schemaOrgId}}</td>
           </tr>
 
           <tr>
             <td data-toggle="tooltip" title="The DC identifier if found in a meta tag">Dublin Core ID</td>
-            <td>{{model.landingPage.result.dc-identifier}}</td>
+            <td>{{model.landingPage.result.dcIdentifier}}</td>
           </tr>
 
           <tr>
             <td data-toggle="tooltip" title="The ID found in citation meta tag">Citation DOI</td>
-            <td>{{model.landingPage.result.citation-doi}}</td>
+            <td>{{model.landingPage.result.citationDoi}}</td>
           </tr>
 
         </tbody>
