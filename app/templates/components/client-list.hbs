@@ -80,6 +80,36 @@
         </div>
       </div>
     {{/if}}
+    {{#if (or model.meta.software model.otherParams.software)}}
+      <div class="panel facets">
+        <div class="panel-body">
+          <h4>Software</h4>
+          <ul>
+            {{#if model.meta.software}}
+              {{#each model.meta.software as |software|}}
+                <li>
+                  {{#if model.otherParams.software}}
+                    {{#link-to link (query-params software='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+                  {{else}}
+                    {{#link-to link (query-params software=software.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                  {{/if}}
+                  <div class="facet-title">{{software.title}}</div>
+                  <span class="number pull-right">{{software.count}}</span>
+                  <div class="clearfix"/>
+                </li>
+              {{/each}}
+            {{else}}
+              <li>
+                {{#link-to "clients" (query-params software='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+                <div class="facet-title">{{model.otherParams.software}}</div>
+                <span class="number pull-right">0</span>
+                <div class="clearfix"/>
+              </li>
+            {{/if}}
+          </ul>
+        </div>
+      </div>
+    {{/if}}
   </div>
   <div class='col-md-9 panel-list' id="content">
     {{#if searchable}}
