@@ -6,13 +6,20 @@
       {{#bs-form formLayout="horizontal" horizontalLabelGridClass="col-md-3" model=client onSubmit=(action "submit" client model) submitOnEnter=true as |form|}}
         {{form.element controlType="text" label="Client ID" property="symbol" helpText='The Client ID is the unique identifier for each client and can\'t be changed. The Client ID must start with the Provider ID, followed by a dot. It can then contain only upper case letters, numbers, and at most one hyphen.' useIcons=false required=false}}
         {{#form.element controlType="power-select" property="repository" label="re3data Record (optional)" optionLabelPath="name" options=repositories destination=repository helpText='re3data is a registry of research data repositories.' as |el|}}
-          {{#el.control onChange=(action "selectRepository") search=(action "searchRepository") searchField="name" searchPlaceholder="Type to search..." allowClear=true as |item|}}
-            {{item.name}}
+          {{#el.control onChange=(action "selectRepository") search=(action "searchRepository") searchField="repositoryName" searchPlaceholder="Type to search..." allowClear=true as |item|}}
+            {{item.repositoryName}}
           {{/el.control}}
         {{/form.element}}
         {{form.element controlType="text" label="Client Name" property="name" useIcons=false required=false}}
         {{form.element controlType="text" label="Contact Name" property="contactName" helpText='Please enter the name of a person that can be contacted for technical or administrative issues.' required=false}}
         {{form.element controlType="email" label="Contact Email" property="contactEmail" helpText='Please enter an email address that can be contacted for technical or administrative issues.' useIcons=false required=false}}
+        {{form.element controlType="textarea" label="Description (optional)" property="description" rows=10 helpText='Description of the client. Please use markdown for formatting.' required=false}}
+        {{form.element controlType="text" label="URL (optional)" property="url" helpText='The homepage of the client.' required=false}}
+        {{#form.element controlType="power-select" label="Software (optional)" property="software" options=softwares destination=software helpText='The name of the software that is used to run the repository.' as |el|}}
+          {{#el.control onChange=(action "selectSoftware") search=(action "searchSoftware") placeholder="Select Software" searchPlaceholder="Type to search..." allowClear=true as |item|}}
+            {{item}}
+          {{/el.control}}
+        {{/form.element}}
         {{form.element controlType="textarea" label="Domains" property="domains" helpText='List of (sub-)domains used for DOI registration, or use * to allow all domains' useIcons=false required=false}}
         {{form.element controlType="checkbox" label="Account is active" property="isActive" helpText='This account can register and update DOIs'}}
 
@@ -101,7 +108,7 @@
                   {{#bs-tooltip placement="top" viewportPadding=10}}re3data is a registry of research data repositories.{{/bs-tooltip}}
                 </span>
               </h5>
-              <a href="http://www.re3data.org/repository/{{client.repository.id}}">{{client.repository.id}}</a>
+              <a href="https://doi.org/{{client.repository.id}}">https://doi.org/{{client.repository.id}}</a>
             {{/if}}
 
             {{#if client.contactName}}

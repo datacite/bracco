@@ -11,6 +11,7 @@ export default DS.Model.extend(Validations, {
     async: true
   }),
 
+  re3dataId: DS.attr('string'),
   repositoryName: DS.attr('string'),
   additionalNames: DS.attr(),
   description: DS.attr('string'),

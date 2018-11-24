@@ -52,6 +52,7 @@ module.exports = function(environment) {
     SEARCH_URL: process.env.SEARCH_URL || "https://search.test.datacite.org",
     ORCID_URL: process.env.ORCID_URL || "https://sandbox.orcid.org",
     API_URL: process.env.API_URL || "https://api.test.datacite.org",
+    RE3DATA_API_URL: process.env.RE3DATA_API_URL || "https://api.test.datacite.org",
     EVENTDATA_URL: process.env.EVENTDATA_URL || "https://api.test.datacite.org",
     CDN_URL: process.env.CDN_URL || "https://assets.test.datacite.org",
     JWT_PUBLIC_KEY: process.env.JWT_PUBLIC_KEY || null,

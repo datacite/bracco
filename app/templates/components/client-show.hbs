@@ -14,6 +14,13 @@
         {{form.element controlType="text" label="Client Name" property="name" required=false}}
         {{form.element controlType="text" label="Contact Name" property="contactName" helpText='Please enter the name of a person that can be contacted for technical or administrative issues.' required=false}}
         {{form.element controlType="email" label="Contact Email" property="contactEmail" helpText='Please enter an email address that can be contacted for technical or administrative issues.' required=false}}
+        {{form.element controlType="textarea" label="Description (optional)" property="description" rows=10 helpText='Description of the client. Please use markdown for formatting.' required=false}}
+        {{form.element controlType="text" label="URL (optional)" property="url" helpText='The homepage of the client.' required=false}}
+        {{#form.element controlType="power-select" label="Software (optional)" property="software" options=softwares destination=software helpText='The name of the software that is used to run the repository.' as |el|}}
+          {{#el.control onChange=(action "selectSoftware") search=(action "searchSoftware") placeholder="Select Software" searchPlaceholder="Type to search..." allowClear=true as |item|}}
+            {{item}}
+          {{/el.control}}
+        {{/form.element}}
         {{form.element controlType="textarea" label="Domains" property="domains" required=false helpText='List of (sub-)domains used for DOI registration, or use * to allow all domains'}}
 
         {{#if (can "create client" model.provider)}}
@@ -123,7 +130,7 @@
                 {{#bs-tooltip placement="top" viewportPadding=10}}re3data is a registry of research data repositories.{{/bs-tooltip}}
               </span>
             </h5>
-            <a href="http://www.re3data.org/repository/{{model.repository.id}}">{{model.repository.id}}</a>
+            <a href="https://doi.org/{{model.repository.id}}">https://doi.org/{{model.repository.id}}</a>
           {{/if}}
 
           {{#if model.repository.additionalName}}
@@ -131,9 +138,9 @@
             {{model.repository.additionalName}}
           {{/if}}
 
-          {{#if model.repository.description}}
+          {{#if model.description}}
             <h5>Description</h5>
-            {{model.repository.description}}
+            {{model.description}}
           {{/if}}
 
           {{#if model.repository.tags}}
@@ -182,11 +189,9 @@
             {{/each}}
           {{/if}}
 
-          {{#if model.repository.software}}
-            <h5>Repository Software</h5>
-            {{#each model.repository.software as |software|}}
-              {{software.name}}<br/>
-            {{/each}}
+          {{#if model.software}}
+            <h5>Software</h5>
+            {{model.software}}
           {{/if}}
 
           {{#if model.types}}
@@ -196,9 +201,9 @@
             {{/each}}
           {{/if}}
 
-          {{#if model.repository.repositoryUrl}}
-            <h5>Repository URL</h5>
-            <a href="{{model.repository.repositoryUrl}}">{{model.repository.repositoryUrl}}</a>
+          {{#if model.url}}
+            <h5>URL</h5>
+            <a href="{{model.url}}">{{model.url}}</a>
           {{/if}}
 
           {{#if model.domainList}}

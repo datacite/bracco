@@ -2,6 +2,18 @@ import Ember from 'ember';
 import fetch from 'fetch';
 const { service } = Ember.inject;
 import ENV from 'bracco/config/environment';
+const softwareList = [
+  'CKAN',
+  'Dataverse',
+  'DSpace',
+  'EPrints',
+  'Fedora',
+  'Nesstar',
+  'Open Journal Systems (OJS)',
+  'Opus',
+  'Samvera',
+  'Other'
+]
 
 export default Ember.Component.extend({
   currentUser: service(),
@@ -15,6 +27,8 @@ export default Ember.Component.extend({
   setPassword: false,
   repository: null,
   repositories: [],
+  softwareList,
+  softwares: softwareList,
 
   reset() {
     this.get('client').set('passwordInput', null);
@@ -48,10 +62,29 @@ export default Ember.Component.extend({
         self.set('repository', repo)
         self.get('client').set('repository', repo);
         self.get('client').set('name', repo.get('repositoryName'));
+        self.get('client').set('description', repo.get('description'));
+        self.get('client').set('url', repo.get('repositoryUrl'));
+        if (repo.get('software').length > 0) {
+          let software = repo.get('software')[0].name;
+          if (software === "DataVerse") {
+            software = "Dataverse";
+          }
+          self.get('client').set('software', software);
+        }
       });
     } else {
       this.get('client').set('repository', null);
     }
+  },
+  searchSoftware(query) {
+    var softwares = softwareList.filter(function(software) {
+      return software.toLowerCase().startsWith(query.toLowerCase());
+    })
+    this.set('softwares', softwares);
+  },
+  selectSoftware(software) {
+    this.get('client').set('software', software);
+    this.set('softwares', softwareList);
   },
 
   actions: {
@@ -114,6 +147,12 @@ export default Ember.Component.extend({
     },
     onError(error) {
       Ember.Logger.assert(false, error)
+    },
+    searchSoftware(query) {
+      this.searchSoftware(query);
+    },
+    selectSoftware(software) {
+      this.selectSoftware(software);
     }
   }
 });

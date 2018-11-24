@@ -5,6 +5,7 @@ module.exports = function(env) {
                         'SEARCH_URL',
                         'ORCID_URL',
                         'API_URL',
+                        'RE3DATA_API_URL',
                         'EVENTDATA_URL',
                         'CDN_URL',
                         'JWT_PUBLIC_KEY',

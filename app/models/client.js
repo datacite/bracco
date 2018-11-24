@@ -93,6 +93,9 @@ export default DS.Model.extend(Validations, {
   contactName: DS.attr('string'),
   contactEmail: DS.attr('string'),
   year: DS.attr('number'),
+  description: DS.attr('string'),
+  url: DS.attr('string'),
+  software: DS.attr('string'),
   isActive: DS.attr('boolean', { defaultValue: true }),
   passwordInput: DS.attr('string'),
   hasPassword: DS.attr('boolean'),
@@ -120,7 +123,7 @@ export default DS.Model.extend(Validations, {
   }),
   badgeUrl: Ember.computed('repository', function() {
     if (this.get('repository')) {
-      return ENV.API_URL + '/repositories/' + this.get('repository').get('id') + '/badge';
+      return ENV.RE3DATA_API_URL + '/repositories/' + this.get('repository').get('re3dataId') + '/badge';
     } else {
       return null;
     }
