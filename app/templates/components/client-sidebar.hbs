@@ -20,19 +20,19 @@
     {{#if model.created}}
       <h5>DOI created</h5>
       <div class="created">
-        {{format-time model.created year='numeric' month='long' day='numeric'}}
+        {{format-time model.created year='numeric' month='long' day='numeric' hour='numeric' minute='numeric' second='numeric' timeZone='UTC' timeZoneName='short' hour12=false}}
       </div>
     {{/if}}
     {{#if model.registered}}
       <h5>DOI registered</h5>
       <div class="registered">
-        {{format-time model.registered year='numeric' month='long' day='numeric'}}
+        {{format-time model.registered year='numeric' month='long' day='numeric' hour='numeric' minute='numeric' second='numeric' timeZone='UTC' timeZoneName='short' hour12=false}}
       </div>
     {{/if}}
     {{#if (gt model.updated model.created)}}
       <h5>DOI last updated</h5>
       <div class="updated">
-        {{format-time model.updated year='numeric' month='long' day='numeric'}}
+        {{format-time model.updated year='numeric' month='long' day='numeric' hour='numeric' minute='numeric' second='numeric' timeZone='UTC' timeZoneName='short' hour12=false}}
       </div>
     {{/if}}
     {{#if (gt model.metadataVersion 0)}}
@@ -72,13 +72,13 @@
     {{#if model.created}}
       <h5>Record created</h5>
       <div class="created">
-        {{format-time model.created year='numeric' month='long' day='numeric'}}
+        {{format-time model.created year='numeric' month='long' day='numeric' hour='numeric' minute='numeric' second='numeric' timeZone='UTC' timeZoneName='short' hour12=false}}
       </div>
     {{/if}}
     {{#if (gt model.updated model.created)}}
       <h5>Record last modified</h5>
       <div class="updated">
-        {{format-time model.updated year='numeric' month='long' day='numeric'}}
+        {{format-time model.updated year='numeric' month='long' day='numeric' hour='numeric' minute='numeric' second='numeric' timeZone='UTC' timeZoneName='short' hour12=false}}
       </div>
     {{/if}}
   {{/if}}

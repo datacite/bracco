@@ -24,7 +24,7 @@
 {{/if}}
 {{#if isList}}
   <div class="created">
-    Created {{format-time model.created year='numeric' month='long' day='numeric'}}.
+    Created {{format-time model.created year='numeric' month='long' day='numeric' hour='numeric' minute='numeric' second='numeric' timeZone='UTC' timeZoneName='short' hour12=false}}.
     <span class="text-{{model.state}}">{{titleize model.state}}</span>
   </div>
 {{/if}}

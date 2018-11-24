@@ -114,7 +114,7 @@
             {{/if}}
 
             <h5>Added</h5>
-            {{format-time provider-prefix.created year='numeric' month='long' day='numeric'}}
+            {{format-time provider-prefix.created year='numeric' month='long' day='numeric' hour='numeric' minute='numeric' second='numeric' timeZone='UTC' timeZoneName='short' hour12=false}}
           </div>
         </div>
       {{/each}}

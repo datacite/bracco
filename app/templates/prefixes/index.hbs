@@ -125,7 +125,7 @@
                 {{/if}}
 
                 <h5>Created</h5>
-                {{format-time prefix.created year='numeric' month='long' day='numeric'}}
+                {{format-time prefix.created year='numeric' month='long' day='numeric' hour='numeric' minute='numeric' second='numeric' timeZone='UTC' timeZoneName='short' hour12=false}}
               </div>
             </div>
           {{/each}}
