@@ -69,7 +69,7 @@ export default Ember.Component.extend({
           if (software === "DataVerse") {
             software = "Dataverse";
           }
-          self.get('client').set('software', software);
+          self.get('client').set('software', software.capitalize());
         }
       });
     } else {

@@ -23,7 +23,7 @@ export default Ember.Component.extend({
   repositories: [],
   softwareList,
   softwares: softwareList,
-  
+
   selectRepository(repository) {
     if (repository) {
       let self = this;
@@ -37,8 +37,8 @@ export default Ember.Component.extend({
           let software = repo.get('software')[0].name;
           if (software === "DataVerse") {
             software = "Dataverse";
-          }
-          self.get('client').set('software', software);
+          } 
+          self.get('client').set('software', software.capitalize());
         }
       });
     } else {
