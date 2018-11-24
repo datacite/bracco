@@ -5,6 +5,7 @@ const softwareList = [
   'DSpace',
   'EPrints',
   'Fedora',
+  'Invenio',
   'Nesstar',
   'Open Journal Systems (OJS)',
   'Opus',
