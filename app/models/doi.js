@@ -181,6 +181,8 @@ export default DS.Model.extend(Validations, {
   created: DS.attr('date'),
   registered: DS.attr('date'),
   updated: DS.attr('date'),
+  landingPage: DS.attr(),
+
   mode: DS.attr('string'),
 
   isDraft: Ember.computed('state', function() {
