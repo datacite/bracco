@@ -2,11 +2,6 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
 
-  didInsertElement() {
-    this._super(...arguments);
-    this.$('[data-toggle="tooltip"]').tooltip({ placement: 'top', container: "body"});
-  },
-
   downloadLatency: Ember.computed(function() {
     var rawLatency = this.get('model').get("landingPage").result['downloadLatency'];
     return Math.round(rawLatency)
