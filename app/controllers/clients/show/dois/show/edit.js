@@ -58,6 +58,13 @@ export default Ember.Controller.extend({
         doi.set('types', {});
       }
 
+      // set landingPage
+      if (doi.get('landingPage')) {
+        doi.set('landingPage', { status: doi.get('landingPage.status'), contentType: doi.get('landingPage.contentType'), checked: doi.get('landingPage.checked'), result: doi.get('landingPage.result') || {} }); 
+      } else {
+        doi.set('landingPage', { status: null, contentType: null, checked: null, result: {} });
+      }
+
       let self = this;
       doi.save().then(function(doi) {
         self.transitionToRoute('clients.show.dois.show', doi.get('client.id'), doi);
