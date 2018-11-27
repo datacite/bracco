@@ -11,8 +11,9 @@
       </p>
 
       {{#if hasError}}
-      <p class="bg-danger" style="padding: 15px" data-toggle="tooltip" title="A raw potential error message, these can vary but are provided as a hint.">
+      <p class="alert alert-danger">
         <strong>Error message:</strong> {{model.landingPage.result.error}}
+        {{#bs-tooltip placement="top"}}A raw potential error message, these can vary but are provided as a hint.{{/bs-tooltip}}
       </p>
       {{/if}}
 
@@ -24,10 +25,13 @@
         </thead>
         <tbody>
           <tr class="{{if isStatusError 'danger'}}">
-            <td data-toggle="tooltip" title="A status code as returned by the checked web server at time of check.">HTTP Status Code</td>
+            <td>HTTP Status Code
+              {{#bs-tooltip placement="top"}}A status code as returned by the checked web server at time of check.{{/bs-tooltip}}
+            </td>
             {{#if isStatusError}}
-            <td data-toggle="tooltip" title="Status codes reflect potential errors, however they can change, e.g. was 404 but manual check reveals 200.">
+            <td>
               {{model.landingPage.status}}
+              {{#bs-tooltip placement="top"}}Status codes reflect potential errors, however they can change e.g. was 404 but manual check reveals 200.{{/bs-tooltip}}
             </td>
             {{else}}
             <td>
@@ -37,22 +41,30 @@
           </tr>
 
           <tr>
-            <td data-toggle="tooltip" title="Content-type as returned by the checked web server at time of check.">HTTP Content Type</td>
+            <td>HTTP Content Type
+              {{#bs-tooltip placement="top"}}Content-type as returned by the checked web server at time of check.{{/bs-tooltip}}
+            </td>
             <td>{{model.landingPage.contentType}}</td>
           </tr>
 
           <tr>
-            <td data-toggle="tooltip" title="The latency to receive a full response from the checked web server. Note this can be affected by geo-location of servers.">Download Latency</td>
+            <td>Download Latency
+              {{#bs-tooltip placement="top"}}The latency to receive a full response from the checked web server. Note this can be affected by geo-location of servers.{{/bs-tooltip}}
+            </td>
             <td>{{downloadLatency}}ms</td>
           </tr>
 
           <tr>
-            <td data-toggle="tooltip" title="Number of redirects triggered by the checked web server.">Times redirected</td>
+            <td>Times redirected
+              {{#bs-tooltip placement="top"}}Number of redirects triggered by the checked web server.{{/bs-tooltip}}
+            </td>
             <td>{{model.landingPage.result.redirectCount}}</td>
           </tr>
 
           <tr>
-            <td data-toggle="tooltip" title="The redirect urls followed by the check.">Redirects</td>
+            <td>Redirects
+              {{#bs-tooltip placement="top"}}The redirect urls followed by the check.{{/bs-tooltip}}
+            </td>
             <td>
               {{#if model.landingPage.result.redirectUrls}}
                 {{#each model.landingPage.result.redirectUrls as |redirect_url|}}
@@ -76,27 +88,37 @@
         <tbody>
 
           <tr>
-            <td data-toggle="tooltip" title="In any of the returned response content was the DOI found.">DOI Found in body</td>
+            <td>DOI Found in body
+              {{#bs-tooltip placement="top"}}In any of the returned response content was the DOI found.{{/bs-tooltip}}
+            </td>
             <td>{{bodyHasDoi}}</td>
           </tr>
 
           <tr>
-            <td data-toggle="tooltip" title="Was any metadata in the format of schema.org JSON+LD found">Schema.org found</td>
+            <td>Schema.org found
+              {{#bs-tooltip placement="top"}}Was any metadata in the format of schema.org JSON+LD found{{/bs-tooltip}}
+            </td>
             <td>{{hasSchemaOrg}}</td>
           </tr>
 
           <tr>
-            <td data-toggle="tooltip" title="The schema.org identifier in the metadata if found">Schema.org ID</td>
+            <td>Schema.org ID
+              {{#bs-tooltip placement="top"}}The schema.org identifier in the metadata if found.{{/bs-tooltip}}
+            </td>
             <td>{{format-text model.landingPage.result.schemaOrgId}}</td>
           </tr>
 
           <tr>
-            <td data-toggle="tooltip" title="The DC identifier if found in a meta tag">Dublin Core ID</td>
+            <td>Dublin Core ID
+              {{#bs-tooltip placement="top"}}The DC identifier if found in a meta tag{{/bs-tooltip}}
+            </td>
             <td>{{model.landingPage.result.dcIdentifier}}</td>
           </tr>
 
           <tr>
-            <td data-toggle="tooltip" title="The ID found in citation meta tag">Citation DOI</td>
+            <td>Citation DOI
+              {{#bs-tooltip placement="top"}}The ID found in citation meta tag{{/bs-tooltip}}
+            </td>
             <td>{{model.landingPage.result.citationDoi}}</td>
           </tr>
 
