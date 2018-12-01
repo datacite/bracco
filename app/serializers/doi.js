@@ -2,8 +2,12 @@ import DS from "ember-data";
 
 export default DS.JSONAPISerializer.extend({
   attrs: {
-    // don't send back this attribute
-    landingPage: { serialize: false }
+    // don't send back these attributes, as they are managed by the API
+    landingPage: { serialize: false },
+    metadataVersion: { serialize: false },
+    created: { serialize: false },
+    registered: { serialize: false },
+    updated: { serialize: false }
   },
   keyForAttribute(key) {
     return key;
