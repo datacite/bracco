@@ -18,7 +18,7 @@ export default Ember.Route.extend(CanMixin, {
       return this.transitionTo('index');
     } else {
       this.modelFor('clients/show/dois/show').set('mode', 'edit');
-      this.modelFor('clients/show/dois/show').set('creators', this.creatorsToSeperated(this.modelFor('clients/show/dois/show').get('creator')));
+      this.modelFor('clients/show/dois/show').set('creators', this.creatorsToSeperated(this.modelFor('clients/show/dois/show').get('creators')));
     }
   },
   creatorsToSeperated(creators) {
