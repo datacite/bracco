@@ -6,7 +6,7 @@ FactoryGuy.define('doi', {
     doi: '10.25499/jjva5eho424vep7dz2pson7qz',
     identifier: 'https://handle.test.datacite.org/10.25499/jjva5eho424vep7dz2pson7qz',
     url: null,
-    creator: [{
+    creators: [{
       "type": "Person",
       "id": "https://orcid.org/0000-0002-2822-4968",
       "name": "Mitesh Patel",

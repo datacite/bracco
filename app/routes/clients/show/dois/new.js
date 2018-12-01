@@ -6,7 +6,7 @@ export default Ember.Route.extend(CanMixin, RouteMixin, {
 
   model() {
     let client = this.modelFor('clients/show');
-    let doi = this.store.createRecord('doi', { client: client, mode: 'new', state: 'draft', creator: '' });
+    let doi = this.store.createRecord('doi', { client: client, mode: 'new', state: 'draft', creators: '' });
 
     return Ember.RSVP.hash({
       client: client,

@@ -64,7 +64,7 @@ const Validations = buildValidations({
     //   isWarning: true
     // })
   ],
-  creator: [
+  creators: [
     validator('presence', {
       presence: true,
       isWarning: Ember.computed('model.state', 'model.prefix', function() {
@@ -164,7 +164,7 @@ export default DS.Model.extend(Validations, {
   suffix: DS.attr('string'),
   url: DS.attr('string'),
   media: DS.attr(),
-  creator: DS.attr('creator', { defaultValue: null }),
+  creators: DS.attr('creators', { defaultValue: null }),
   titles: DS.attr(),
   publisher: DS.attr('string'),
   publicationYear: DS.attr('number'),

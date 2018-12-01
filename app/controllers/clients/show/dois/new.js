@@ -16,7 +16,7 @@ export default Ember.Controller.extend({
       doi.set('event', this.setEvent(doi.get('state')));
 
       // convert creators back into array, and then to JSON
-      let creatorList = doi.get('creator').split("\n").reduce(function (sum, a) {
+      let creatorList = doi.get('creators').split("\n").reduce(function (sum, a) {
         if (a.length > 0) {
           let names = a.split(",")
           let creator = {}
@@ -29,7 +29,7 @@ export default Ember.Controller.extend({
         }
         return sum;
       }, []);
-      doi.set('creator', creatorList);
+      doi.set('creators', creatorList);
 
       // convert title and description back into array
       if (doi.get('title')) {

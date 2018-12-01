@@ -11,8 +11,8 @@
     <span class="small">{{model.types.resourceTypeGeneral}}</span>
   {{/if}}
 </h3>
-{{#if model.creator}}
-  {{{format-creator model.creator}}}
+{{#if model.creators}}
+  {{{format-creator model.creators}}}
 {{/if}}
 <div class="metadata">
   {{format-metadata model.publicationYear resourceTypeGeneral=model.types.resourceTypeGeneral resourceType=model.types.resourceType publisher=model.publisher version=model.version}}
