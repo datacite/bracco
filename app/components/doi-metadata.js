@@ -24,6 +24,7 @@ export default Component.extend({
       let url = ENV.API_URL + '/' + this.get('model').get("doi");
       let acceptHeaders = {
         'datacite': 'application/vnd.datacite.datacite+xml',
+        'crosscite': 'application/vnd.crosscite.crosscite+json',
         'schema_org': 'application/vnd.schemaorg.ld+json',
         'citeproc': 'application/vnd.citationstyles.csl+json',
         'codemeta': 'application/vnd.codemeta.ld+json',
@@ -78,6 +79,7 @@ export default Component.extend({
 
     let formats = { 'summary': 'Summary View',
                     'datacite': 'DataCite XML',
+                    'crosscite': 'Crosscite JSON',
                     'schema_org': 'Schema.org JSON-LD',
                     'citeproc': 'Citeproc JSON',
                     'codemeta': 'Codemeta',

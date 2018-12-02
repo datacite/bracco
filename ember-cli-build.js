@@ -32,7 +32,8 @@ module.exports = function(defaults) {
     },
 
     'ember-prism': {
-      'theme': 'default'
+      'theme': 'default',
+      'plugins': ['line-highlight']
     },
 
     inlineContent: {
