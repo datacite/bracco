@@ -3,12 +3,12 @@ import Ember from 'ember';
 export default Ember.Component.extend({
 
   downloadLatency: Ember.computed(function() {
-    var rawLatency = this.get('model').get("landingPage").result['downloadLatency'];
+    var rawLatency = this.get('model').get("landingPage").downloadLatency;
     return Math.round(rawLatency)
   }),
 
   bodyHasDoi: Ember.computed(function() {
-    if (this.get('model').get("landingPage").result['bodyHasPid']) {
+    if (this.get('model').get("landingPage").bodyHasPid) {
       return "Yes";
     } else {
       return "No";
@@ -16,7 +16,7 @@ export default Ember.Component.extend({
   }),
 
   hasSchemaOrg: Ember.computed(function() {
-    if (this.get('model').get("landingPage").result['hasSchemaOrg']) {
+    if (this.get('model').get("landingPage").hasSchemaOrg) {
       return "Yes";
     } else {
       return "No";
@@ -36,7 +36,7 @@ export default Ember.Component.extend({
   }),
 
   hasError: Ember.computed(function() {
-    if (this.get('model').get("landingPage").result.error) {
+    if (this.get('model').get("landingPage").error) {
       return true;
     } else {
       return false;
