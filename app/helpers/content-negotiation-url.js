@@ -35,7 +35,7 @@ export function contentNegotiationUrl([doi], hash) {
       mimeType = "application/vnd.schemaorg.ld+json";
   }
 
-  return ENV.API_URL + '/' + mimeType + '/' + doi;
+  return ENV.API_URL + '/dois/' + mimeType + '/' + doi;
 }
 
 export default helper(contentNegotiationUrl);

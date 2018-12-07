@@ -21,7 +21,7 @@ export default Component.extend({
     } else {
       this.set('output', null);
       let self = this;
-      let url = ENV.API_URL + '/' + this.get('model').get("doi");
+      let url = ENV.API_URL + '/dois/' + this.get('model').get("doi");
       let acceptHeaders = {
         'datacite': 'application/vnd.datacite.datacite+xml',
         'crosscite': 'application/vnd.crosscite.crosscite+json',

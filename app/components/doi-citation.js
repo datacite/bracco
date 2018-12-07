@@ -18,7 +18,7 @@ export default Ember.Component.extend({
 
   selectStyle(style) {
     let self = this;
-    let url = ENV.API_URL + '/' + this.get('model').get("doi") + '?style=' + style;
+    let url = ENV.API_URL + '/dois/' + this.get('model').get("doi") + '?style=' + style;
     let result = fetch(url, {
       headers: {
         'Authorization': 'Bearer ' + this.get('currentUser').get('jwt'),
