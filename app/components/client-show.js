@@ -106,6 +106,7 @@ export default Ember.Component.extend({
     delete(client) {
       this.set('client', client);
       this.get('client').set('confirmSymbol', null);
+      this.get('client').validateSync();
       this.set('provider', client.get('provider'));
       this.set('delete', true);
     },
@@ -126,7 +127,8 @@ export default Ember.Component.extend({
     },
     submit(client) {
       let self = this;
-      client.save().then(function () {
+      client.save().then(function (client) {
+        console.log(client);
         self.reset();
       }).catch(function(reason){
         Ember.Logger.assert(false, reason);
@@ -140,6 +142,16 @@ export default Ember.Component.extend({
         });
       });
     },
+    // destroy(client) {
+    //   let self = this;
+    //   if (this.get('confirmId') === client.get('symbol')) {
+    //     client.destroyRecord().then(function () {
+    //       self.get('router').transitionTo('providers.show.settings', self.get('provider'));
+    //     }).catch(function(reason){
+    //       Ember.Logger.assert(false, reason);
+    //     });
+    //   }
+    // },
     cancel() {
       this.get('model').rollbackAttributes();
       this.reset();
