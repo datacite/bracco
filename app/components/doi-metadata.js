@@ -24,7 +24,7 @@ export default Component.extend({
       let url = ENV.API_URL + '/dois/' + this.get('model').get("doi");
       let acceptHeaders = {
         'datacite': 'application/vnd.datacite.datacite+xml',
-        'crosscite': 'application/vnd.crosscite.crosscite+json',
+        'datacite_json': 'application/vnd.datacite.datacite+json',
         'schema_org': 'application/vnd.schemaorg.ld+json',
         'citeproc': 'application/vnd.citationstyles.csl+json',
         'codemeta': 'application/vnd.codemeta.ld+json',
@@ -79,13 +79,13 @@ export default Component.extend({
 
     let formats = { 'summary': 'Summary View',
                     'datacite': 'DataCite XML',
-                    'crosscite': 'Crosscite JSON',
+                    'datacite_json': 'DataCite JSON',
                     'schema_org': 'Schema.org JSON-LD',
                     'citeproc': 'Citeproc JSON',
-                    'codemeta': 'Codemeta',
+                    'codemeta': 'Codemeta JSON',
                     'bibtex': 'BibTeX',
                     'ris': 'RIS',
-                    'jats': 'JATS' };
+                    'jats': 'JATS XML' };
     this.set('formats', formats);
   }
 });
