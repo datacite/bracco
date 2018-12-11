@@ -43,6 +43,13 @@
           </tr>
 
           <tr>
+            <td>URL checked
+              {{#bs-tooltip placement="top"}}The URL that was checked.{{/bs-tooltip}}
+            </td>
+            <td>{{model.landingPage.url}}</td>
+          </tr>
+
+          <tr>
             <td>HTTP Content Type
               {{#bs-tooltip placement="top"}}Content-type as returned by the checked web server at time of check.{{/bs-tooltip}}
             </td>
