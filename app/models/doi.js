@@ -197,8 +197,12 @@ export default DS.Model.extend(Validations, {
   mode: DS.attr('string'),
 
   identifier: Ember.computed('identifiers', function() {
-    let id = this.get('identifiers').findBy('identifierType', 'DOI');
-    return id.identifier;
+    if (this.get('identifiers')) {
+      let id =  this.get('identifiers').findBy('identifierType', 'DOI');
+      return id.identifier;
+    } else {
+      return null;
+    }
   }),
   isDraft: Ember.computed('state', function() {
     return this.get('state') === 'draft';
