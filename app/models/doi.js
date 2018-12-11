@@ -199,7 +199,11 @@ export default DS.Model.extend(Validations, {
   identifier: Ember.computed('identifiers', function() {
     if (this.get('identifiers')) {
       let id =  this.get('identifiers').findBy('identifierType', 'DOI');
-      return id.identifier;
+      if (id) {
+        return id.identifier;
+      } else {
+        return null;
+      }
     } else {
       return null;
     }
