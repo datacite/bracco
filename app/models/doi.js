@@ -157,38 +157,52 @@ export default DS.Model.extend(Validations, {
     async: true
   }),
 
-  identifier: DS.attr('string'),
   doi: DS.attr('string'),
+  identifiers: DS.attr(),
   confirmDoi: DS.attr('string', { defaultValue: null }),
   prefix: DS.attr('string'),
   suffix: DS.attr('string'),
   url: DS.attr('string'),
-  media: DS.attr(),
+  contentUrl: DS.attr('string'),
   creators: DS.attr('creators', { defaultValue: null }),
   titles: DS.attr(),
   publisher: DS.attr('string'),
+  bcontainer: DS.attr(),
   publicationYear: DS.attr('number'),
-  descriptions: DS.attr(),
-  rightsList: DS.attr(),
+  subjects: DS.attr(),
+  contributors: DS.attr(),
+  dates: DS.attr(),
+  language: DS.attr(),
   types: DS.attr(),
-  xml: DS.attr('xml'),
+  relatedIdentifiers: DS.attr(),
+  sizes: DS.attr(),
+  formats: DS.attr(),
   version: DS.attr('string'),
+  rightsList: DS.attr(),
+  descriptions: DS.attr(),
+  geoLocations: DS.attr(),
+  fundingReferences: DS.attr(),
+  landingPage: DS.attr(),
+  xml: DS.attr('xml'),
   metadataVersion: DS.attr('string'),
   schemaVersion: DS.attr('string'),
   source: DS.attr('string', { defaultValue: "fabrica" }),
   state: DS.attr('string'),
+  breason: DS.attr('string', { defaultValue: null }),
+  isActive: DS.attr('boolean', { defaultValue: true }),
   event: DS.attr('string'),
   created: DS.attr('date'),
   registered: DS.attr('date'),
   updated: DS.attr('date'),
-  landingPage: DS.attr(),
-
   mode: DS.attr('string'),
 
+  identifier: Ember.computed('identifiers', function() {
+    let id = this.get('identifiers').findBy('identifierType', 'DOI');
+    return id.identifier;
+  }),
   isDraft: Ember.computed('state', function() {
     return this.get('state') === 'draft';
   }),
-
   schemaVersionString: Ember.computed('schemaVersion', function() {
     if (this.get('schemaVersion')) {
       return this.get('schemaVersion').split("-").get("lastObject");

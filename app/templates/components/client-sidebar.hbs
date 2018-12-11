@@ -8,13 +8,16 @@
     {{#if (and (eq model.state 'findable') model.xml)}}
       <h5>Metadata Export</h5>
       <div class="download">
-        <a href="{{{content-negotiation-url model.doi format='datacite'}}}">DataCite XML</a>
+        <a target="_blank" href="{{{content-negotiation-url model.doi format='datacite'}}}">DataCite XML</a>
       </div>
       <div class="download">
-        <a href="{{{content-negotiation-url model.doi format='schema_org'}}}">Schema.org JSON-LD</a>
+        <a target="_blank" href="{{{content-negotiation-url model.doi format='datacite_json'}}}">DataCite JSON</a>
       </div>
       <div class="download">
-        <a href="{{{content-negotiation-url model.doi format='bibtex'}}}">BibTeX</a>
+        <a target="_blank" href="{{{content-negotiation-url model.doi format='schema_org'}}}">Schema.org JSON-LD</a>
+      </div>
+      <div class="download">
+        <a target="_blank" href="{{{content-negotiation-url model.doi format='bibtex'}}}">BibTeX</a>
       </div>
     {{/if}}
     {{#if model.created}}

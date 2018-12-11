@@ -31,7 +31,7 @@ export default Component.extend({
   },
 
   searchResourceTypeGeneral(query) {
-    var resourceTypesGeneral = resourceTypeGeneralList.filter(function(resourceTypeGeneral) {
+    resourceTypesGeneral = resourceTypeGeneralList.filter(function(resourceTypeGeneral) {
       return resourceTypeGeneral.startsWith(query.toLowerCase());
     })
   },
