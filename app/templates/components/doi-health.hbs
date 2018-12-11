@@ -5,9 +5,13 @@
     <div class="panel-body">
       {{#if model.landingPage.checked }}
 
-      <p>Summary of information found by the automated link checking.</p>
+      <p>Summary of information.</p>
       <p>
-        Landing page was last checked <strong>{{moment-from model.landingPage.checked }}</strong> on <strong>{{format-time model.landingPage.checked year='numeric' month='long' day='numeric'}}</strong>
+        <span>
+          Landing page URL
+          {{#bs-tooltip placement="left"}}The landing page URL is the registered URL stored against a DOI. We encourage the usage of landing pages but this may be a direct link to the content.{{/bs-tooltip}}
+        </span>
+        was last checked <strong>{{moment-from model.landingPage.checked }}</strong> on <strong>{{format-time model.landingPage.checked year='numeric' month='long' day='numeric'}}</strong>
       </p>
 
       {{#if hasError}}
@@ -19,7 +23,7 @@
 
       <table class="table table-striped table-condensed" style="table-layout:fixed;">
         <thead>
-          <tr><th>Information</th><th>Found</th></tr>
+          <tr><th>Information</th><th></th></tr>
         </thead>
         <tbody>
           <tr class="{{if isStatusError 'danger'}}">
