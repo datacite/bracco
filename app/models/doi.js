@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import DS from 'ember-data';
 import { validator, buildValidations } from 'ember-cp-validations';
+import ENV from 'bracco/config/environment';
 
 const Validations = buildValidations({
   details: [
@@ -196,16 +197,11 @@ export default DS.Model.extend(Validations, {
   updated: DS.attr('date'),
   mode: DS.attr('string'),
 
-  identifier: Ember.computed('identifiers', function() {
-    if (this.get('identifiers')) {
-      let id =  this.get('identifiers').findBy('identifierType', 'DOI');
-      if (id) {
-        return id.identifier;
-      } else {
-        return null;
-      }
+  identifier: Ember.computed('doi', function() {
+    if (ENV.API_URL == "https://api.datacite.org") {
+      return "https://doi.org/" + this.get('doi');
     } else {
-      return null;
+      return "https://handle.test.datacite.org/" + this.get('doi');
     }
   }),
   isDraft: Ember.computed('state', function() {
