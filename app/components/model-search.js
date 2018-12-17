@@ -25,7 +25,7 @@ export default Ember.Component.extend(RouteMixin, {
 
     params.paramMapping = { page: "page[number]",
                             perPage: "page[size]",
-                            total_pages: "total-pages" };
+                            total_pages: "totalPages" };
 
     this.get('router').transitionTo({ queryParams: params });
   },

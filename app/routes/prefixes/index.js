@@ -8,7 +8,7 @@ export default Ember.Route.extend(CanMixin, RouteMixin, {
   model(params) {
     params.paramMapping = { page: "page[number]",
                             perPage: "page[size]",
-                            total_pages: "total-pages" };
+                            total_pages: "totalPages" };
 
     let prefixes = this.findPaged('prefix', params);
     return prefixes;

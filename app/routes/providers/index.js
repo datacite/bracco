@@ -10,7 +10,7 @@ export default Ember.Route.extend(CanMixin, RouteMixin, {
   model(params) {
     params.paramMapping = { page: "page[number]",
                             perPage: "page[size]",
-                            total_pages: "total-pages" };
+                            total_pages: "totalPages" };
 
     let providers = this.findPaged('provider', params);
     return providers;

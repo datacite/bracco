@@ -8,7 +8,7 @@ export default Ember.Route.extend(CanMixin, RouteMixin, {
   model(params) {
     params.paramMapping = { page: "page[number]",
                             perPage: "page[size]",
-                            total_pages: "total-pages" };
+                            total_pages: "totalPages" };
 
     params = Ember.merge(params, { 'provider-id': this.modelFor('providers/show').get('id') });
     
