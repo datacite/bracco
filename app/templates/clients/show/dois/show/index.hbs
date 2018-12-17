@@ -36,7 +36,7 @@
         {{doi-usage-stats model=model}}
       {{/if}}
 
-      {{#if (can "viewHealth doi" model)}}
+      {{#if (and model.landingPage.checked (can "viewHealth doi" model))}}
         {{doi-health model=model}}
       {{/if}}
     </div>
