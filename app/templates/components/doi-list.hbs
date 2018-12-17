@@ -265,21 +265,21 @@
       </div>
     </div>
   {{/if}}
-   {{#if (and (can "source doi" model) (or model.meta.link-checks-status model.otherParams.link-checks-status))}}
+   {{#if (and (can "source doi" model) (or model.meta.linkChecksStatus model.otherParams.link-checks-status))}}
     <div class="panel facets add">
       <div class="panel-body">
         <h4>Link Check Status</h4>
         <ul>
-          {{#if model.meta.link-checks-status}}
-            {{#each model.meta.link-checks-status as |link-check-status|}}
+          {{#if model.meta.linkChecksStatus}}
+            {{#each model.meta.linkChecksStatus as |linkCheckStatus|}}
               <li>
                 {{#if model.otherParams.link-check-status}}
                   {{#link-to link (query-params link-check-status=null)}}{{fa-icon "check-square-o"}}{{/link-to}}
                 {{else}}
-                  {{#link-to link (query-params link-check-status=link-check-status.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                  {{#link-to link (query-params link-check-status=linkCheckStatus.id)}}{{fa-icon "square-o"}}{{/link-to}}
                 {{/if}}
-                <div class="facet-title">{{link-check-status.id}}</div>
-                <span class="number pull-right">{{format-number link-check-status.count}}</span>
+                <div class="facet-title">{{linkCheckStatus.id}}</div>
+                <span class="number pull-right">{{format-number linkCheckStatus.count}}</span>
                 <div class="clearfix"/>
               </li>
             {{/each}}

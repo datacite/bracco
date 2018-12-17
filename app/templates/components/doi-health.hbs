@@ -7,10 +7,6 @@
       this DOI was last checked <strong>{{moment-from model.landingPage.checked }}</strong> on 
       {{format-time model.landingPage.checked year='numeric' month='long' day='numeric'}}.
 
-      {{#if hasError}}
-        <div class="alert alert-danger">{{model.landingPage.error}}</div>
-      {{/if}}
-
       <ul class="checkbox">
         <li>
           {{#if isFound.isChecked}}
@@ -23,40 +19,42 @@
             <div class="help-block checkbox-list text-warning">{{{isFound.helpText}}}</div>
           {{/if}}
         </li>
-        <li>
-          {{#if hasLandingPage.isChecked}}
-            {{fa-icon "check-circle-o"}}
-            {{hasLandingPage.text}}
-            <div class="help-block checkbox-list">{{{hasLandingPage.helpText}}}</div>
-          {{else}}
-            {{fa-icon "circle-o"}}
-            {{hasLandingPage.text}}
-            <div class="help-block checkbox-list text-warning">{{{hasLandingPage.helpText}}}</div>
-          {{/if}}
-        </li>
-        <li>
-          {{#if hasDoi.isChecked}}
-            {{fa-icon "check-circle-o"}}
-            {{hasDoi.text}}
-            <div class="help-block checkbox-list">{{{hasDoi.helpText}}}</div>
-          {{else}}
-            {{fa-icon "circle-o"}}
-            {{hasDoi.text}}
-            <div class="help-block checkbox-list text-warning">{{{hasDoi.helpText}}}</div>
-          {{/if}}
-        </li>
-        {{#if (eq model.types.resourceTypeGeneral 'Dataset')}}
+        {{#if isFound.isChecked}}
           <li>
-            {{#if hasSchemaOrg.isChecked}}
+            {{#if hasLandingPage.isChecked}}
               {{fa-icon "check-circle-o"}}
-              {{hasSchemaOrg.text}}
-              <div class="help-block checkbox-list">{{{hasSchemaOrg.helpText}}}</div>
+              {{hasLandingPage.text}}
+              <div class="help-block checkbox-list">{{{hasLandingPage.helpText}}}</div>
             {{else}}
               {{fa-icon "circle-o"}}
-              {{hasSchemaOrg.text}}
-              <div class="help-block checkbox-list text-warning">{{{hasSchemaOrg.helpText}}}</div>
+              {{hasLandingPage.text}}
+              <div class="help-block checkbox-list text-warning">{{{hasLandingPage.helpText}}}</div>
             {{/if}}
           </li>
+          <li>
+            {{#if hasDoi.isChecked}}
+              {{fa-icon "check-circle-o"}}
+              {{hasDoi.text}}
+              <div class="help-block checkbox-list">{{{hasDoi.helpText}}}</div>
+            {{else}}
+              {{fa-icon "circle-o"}}
+              {{hasDoi.text}}
+              <div class="help-block checkbox-list text-warning">{{{hasDoi.helpText}}}</div>
+            {{/if}}
+          </li>
+          {{#if (eq model.types.resourceTypeGeneral 'Dataset')}}
+            <li>
+              {{#if hasSchemaOrg.isChecked}}
+                {{fa-icon "check-circle-o"}}
+                {{hasSchemaOrg.text}}
+                <div class="help-block checkbox-list">{{{hasSchemaOrg.helpText}}}</div>
+              {{else}}
+                {{fa-icon "circle-o"}}
+                {{hasSchemaOrg.text}}
+                <div class="help-block checkbox-list text-warning">{{{hasSchemaOrg.helpText}}}</div>
+              {{/if}}
+            </li>
+          {{/if}}
         {{/if}}
       </ul>
     </div>
