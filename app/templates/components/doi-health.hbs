@@ -45,17 +45,19 @@
             <div class="help-block checkbox-list text-warning">{{{hasDoi.helpText}}}</div>
           {{/if}}
         </li>
-        <li>
-          {{#if hasSchemaOrg.isChecked}}
-            {{fa-icon "check-circle-o"}}
-            {{hasSchemaOrg.text}}
-            <div class="help-block checkbox-list">{{{hasSchemaOrg.helpText}}}</div>
-          {{else}}
-            {{fa-icon "circle-o"}}
-            {{hasSchemaOrg.text}}
-            <div class="help-block checkbox-list text-warning">{{{hasSchemaOrg.helpText}}}</div>
-          {{/if}}
-        </li>
+        {{#if (eq model.types.resourceTypeGeneral 'Dataset')}}
+          <li>
+            {{#if hasSchemaOrg.isChecked}}
+              {{fa-icon "check-circle-o"}}
+              {{hasSchemaOrg.text}}
+              <div class="help-block checkbox-list">{{{hasSchemaOrg.helpText}}}</div>
+            {{else}}
+              {{fa-icon "circle-o"}}
+              {{hasSchemaOrg.text}}
+              <div class="help-block checkbox-list text-warning">{{{hasSchemaOrg.helpText}}}</div>
+            {{/if}}
+          </li>
+        {{/if}}
       </ul>
     </div>
   </div>
