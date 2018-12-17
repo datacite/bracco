@@ -9,14 +9,14 @@ export default Component.extend({
 
   didInsertElement() {
     if (this.get('model').get("landingPage").status == 200) {
-      let redirectText = "";
+      let redirectText = "resolved ";
       if (this.get('model').get("landingPage").redirectCount > 0) {
         let redirectUrls = this.get('model').get("landingPage").redirectUrls.join(', ')
-        redirectText = "redirected <strong>" + this.get('model').get("landingPage").redirectCount + "x</strong> (" + redirectUrls + "), and ";
+        redirectText = "redirected <strong>" + this.get('model').get("landingPage").redirectCount + "x</strong> (" + redirectUrls + "), and resolved to <a href=\"" + this.get('model').get("landingPage").url + "\">" + this.get('model').get("landingPage").url + "</a> ";
       }
       this.set('isFound', {
         text: "The URL resolves properly.",
-        helpText: "The link check " + redirectText + "resolved to <a href=\"" + this.get('model').get("landingPage").url + "\">" + this.get('model').get("landingPage").url + "</a> with HTTP status code <strong>" + this.get('model').get("landingPage").status + "</strong>.",
+        helpText: "The link check " + redirectText + "with HTTP status code <strong>" + this.get('model').get("landingPage").status + "</strong>.",
         isChecked: true
       })
     } else {
