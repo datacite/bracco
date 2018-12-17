@@ -39,7 +39,7 @@ export default Component.extend({
     } else {
       this.set('hasLandingPage', {
         text: "The URL does not resolve to a landing page.",
-        helpText: "The link check returned the HTTP content type <strong>" + contentType + "</strong>.",
+        helpText: "The link check returned the HTTP content type <strong>" + contentType + "</strong>. We recommend to have the URL resolve to a page of content type <strong>text/html</strong>.",
         isChecked: false
       })
     }
@@ -52,7 +52,7 @@ export default Component.extend({
     } else {
       this.set('hasDoi', {
         text: "No machine-readable DOI was found on the landing page.",
-        helpText: "The link check did not find the DOI in a <strong>DC.identifier</strong> or <strong>citation_doi</strong> meta tag, or in <strong>schema.org</strong> metadata.",
+        helpText: "The link check did not find the DOI in a <strong>DC.identifier</strong> or <strong>citation_doi</strong> meta tag, or in <strong>schema.org</strong> metadata. Please reach out to DataCite Support if we missed an embedded machine-readable DOI.",
         isChecked: false
       })
     }
@@ -65,7 +65,7 @@ export default Component.extend({
     } else {
       this.set('hasSchemaOrg', {
         text: "No metadata in schema.org format was found on the landing page.",
-        helpText: "The link check found no embedded JSON-LD with @context <strong>\"http://schema.org\"<strong>.",
+        helpText: "The link check found no embedded JSON-LD with @context <strong>\"http://schema.org\"<strong>. Please reach out to DataCite Support if we missed embedded schema.org metadata.",
         isChecked: false
       })
     }
