@@ -2,19 +2,21 @@ import Component from '@ember/component';
 import { isPresent } from '@ember/utils';
 
 export default Component.extend({
-  hasError: null,
   isFound: null,
   hasLandingPage: null,
   hasDoi: null,
   hasSchemaOrg: null,
 
   didInsertElement() {
-    this.set('hasError', isPresent(this.get('model').get("landingPage").error));
-    
     if (this.get('model').get("landingPage").status == 200) {
+      let redirectText = "not redirected,";
+      if (this.get('model').get("landingPage").redirectCount > 0) {
+        let redirectUrls = this.get('model').get("landingPage").redirectUrls.join(', ')
+        redirectText = "redirected <strong>" + this.get('model').get("landingPage").redirectCount + "x</strong> (" + redirectUrls + "),";
+      }
       this.set('isFound', {
         text: "The URL resolves properly.",
-        helpText: "The link check returned the HTTP status code <strong>" + this.get('model').get("landingPage").status + "</strong>.",
+        helpText: "The link check was " + redirectText + " and returned the HTTP status code <strong>" + this.get('model').get("landingPage").status + "</strong>.",
         isChecked: true
       })
     } else {
