@@ -59,13 +59,13 @@ export default Component.extend({
     if (this.get('model').get("landingPage").hasSchemaOrg) {
       this.set('hasSchemaOrg', {
         text: "The landing page includes metadata in schema.org format.",
-        helpText: "The link check found embedded JSON-LD with @context <strong>\"http://schema.org\"<strong>.",
+        helpText: "The link check found embedded JSON-LD with @context <strong>\"http://schema.org\"</strong>.",
         isChecked: true
       })
     } else {
       this.set('hasSchemaOrg', {
         text: "No metadata in schema.org format was found on the landing page.",
-        helpText: "The link check found no embedded JSON-LD with @context <strong>\"http://schema.org\"<strong>. Please reach out to DataCite Support if we missed embedded schema.org metadata.",
+        helpText: "The link check found no embedded JSON-LD with @context <strong>\"http://schema.org\"</strong>. Please reach out to DataCite Support if we missed embedded schema.org metadata.",
         isChecked: false
       })
     }
