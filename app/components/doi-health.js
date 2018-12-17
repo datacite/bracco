@@ -1,5 +1,5 @@
+import Ember from 'ember';
 import Component from '@ember/component';
-import { isPresent } from '@ember/utils';
 
 export default Component.extend({
   isFound: null,
