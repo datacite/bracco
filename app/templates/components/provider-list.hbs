@@ -124,21 +124,21 @@
       </div>
     {{/if}}
     {{#if (can "create provider")}}
-      {{#if (or model.meta.organization-types model.otherParams.organization-type)}}
+      {{#if (or model.meta.organizationTypes model.otherParams.organization-type)}}
         <div class="panel facets">
           <div class="panel-body">
             <h4>Organization Type</h4>
             <ul>
-              {{#if model.meta.organization-types}}
-                {{#each model.meta.organization-types as |organization-type|}}
+              {{#if model.meta.organizationTypes}}
+                {{#each model.meta.organizationTypes as |organizationType|}}
                   <li>
                     {{#if model.otherParams.organization-type}}
                       {{#link-to "providers" (query-params organization-type='')}}{{fa-icon "check-square-o"}}{{/link-to}}
                     {{else}}
-                      {{#link-to "providers" (query-params organization-type=organization-type.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                      {{#link-to "providers" (query-params organization-type=organizationType.id)}}{{fa-icon "square-o"}}{{/link-to}}
                     {{/if}}
-                    <div class="facet-title">{{organization-type.title}}</div>
-                    <span class="number pull-right">{{organization-type.count}}</span>
+                    <div class="facet-title">{{organizationType.title}}</div>
+                    <span class="number pull-right">{{organizationType.count}}</span>
                     <div class="clearfix"/>
                   </li>
                 {{/each}}
@@ -154,21 +154,21 @@
           </div>
         </div>
       {{/if}}
-      {{#if (or model.meta.focus-areas model.otherParams.focus-area)}}
+      {{#if (or model.meta.focusAreas model.otherParams.focus-area)}}
         <div class="panel facets">
           <div class="panel-body">
             <h4>Focus Area</h4>
             <ul>
-              {{#if model.meta.focus-areas}}
-                {{#each model.meta.focus-areas as |focus-area|}}
+              {{#if model.meta.focusAreas}}
+                {{#each model.meta.focusAreas as |focusArea|}}
                   <li>
                     {{#if model.otherParams.focus-area}}
                       {{#link-to "providers" (query-params focus-area='')}}{{fa-icon "check-square-o"}}{{/link-to}}
                     {{else}}
-                      {{#link-to "providers" (query-params focus-area=focus-area.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                      {{#link-to "providers" (query-params focus-area=focusArea.id)}}{{fa-icon "square-o"}}{{/link-to}}
                     {{/if}}
-                    <div class="facet-title">{{focus-area.title}}</div>
-                    <span class="number pull-right">{{focus-area.count}}</span>
+                    <div class="facet-title">{{focusArea.title}}</div>
+                    <span class="number pull-right">{{focusArea.count}}</span>
                     <div class="clearfix"/>
                   </li>
                 {{/each}}
