@@ -3,7 +3,7 @@ import DS from "ember-data";
 export default DS.JSONAPISerializer.extend({
   attrs: {
     // reserved attribute names
-    breason: { key: 'reason' },
+    breason: { key: 'reason' },
     bcontainer: { key: 'container', serialize: false },
 
     // don't send back these attributes, as updates are not implemented yet

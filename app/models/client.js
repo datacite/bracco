@@ -123,7 +123,7 @@ export default DS.Model.extend(Validations, {
   }),
   badgeUrl: Ember.computed('repository', function() {
     if (this.get('repository')) {
-      return ENV.RE3DATA_API_URL + '/repositories/' + this.get('repository').get('re3dataId') + '/badge';
+      return ENV.RE3DATA_API_URL + '/repositories/' + this.get('repository').get('id') + '/badge';
     } else {
       return null;
     }
