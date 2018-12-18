@@ -8,6 +8,7 @@ export default Ability.extend({
   canViewHealth: Ember.computed('currentUser.role_id', function() {
     switch(this.get('currentUser.role_id')) {
       case 'staff_admin':
+      case 'provider_admin':
         return true;
       default:
         return false;
