@@ -131,14 +131,14 @@
             </h5>
             {{client.symbol}}
 
-            {{#if client.re3data}}
+            {{#if client.repository.id}}
               <h5>
                 re3data Record
                 <span>{{fa-icon "question-circle-o"}}
                   {{#bs-tooltip placement="top" viewportPadding=10}}re3data is a registry of research data repositories.{{/bs-tooltip}}
                 </span>
               </h5>
-              <a href="https://doi.org/{{client.re3data}}">https://doi.org/{{client.re3data}}</a>
+              <a href="https://doi.org/{{client.repository.id}}">https://doi.org/{{client.repository.id}}</a>
             {{/if}}
 
             {{#if client.contactName}}

@@ -11,7 +11,6 @@ const softwareList = [
   'Invenio',
   'Nesstar',
   'Open Journal Systems (OJS)',
-  'Opus',
   'Samvera',
   'Other'
 ]
