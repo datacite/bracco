@@ -55,21 +55,21 @@
       </div>
     </div>
   {{/if}}
-  {{#if (or model.meta.resource-types model.otherParams.resource-type-id)}}
+  {{#if (or model.meta.resourceTypes model.otherParams.resource-type-id)}}
     <div class="panel facets">
       <div class="panel-body">
         <h4>Resource Type</h4>
         <ul>
-          {{#if model.meta.resource-types}}
-            {{#each model.meta.resource-types as |resource-type|}}
+          {{#if model.meta.resourceTypes}}
+            {{#each model.meta.resourceTypes as |resourceType|}}
               <li>
                 {{#if model.otherParams.resource-type-id}}
                   {{#link-to link (query-params resource-type-id='')}}{{fa-icon "check-square-o"}}{{/link-to}}
                 {{else}}
-                  {{#link-to link (query-params resource-type-id=resource-type.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                  {{#link-to link (query-params resource-type-id=resourceType.id)}}{{fa-icon "square-o"}}{{/link-to}}
                 {{/if}}
-                <div class="facet-title">{{resource-type.title}}</div>
-                <span class="number pull-right">{{format-number resource-type.count}}</span>
+                <div class="facet-title">{{resourceType.title}}</div>
+                <span class="number pull-right">{{format-number resourceType.count}}</span>
                 <div class="clearfix"/>
               </li>
             {{/each}}
