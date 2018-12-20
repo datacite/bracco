@@ -32,11 +32,11 @@ export default Ember.Controller.extend({
       doi.set('creators', creatorList);
 
       // convert title and description back into array
-      if (doi.get('title')) {
-        doi.set('titles', [{ title: doi.get('title') }]);
+      if (doi.get('titles')) {
+        doi.set('titles', [{ title: doi.get('titles') }]);
       }
-      if (doi.get('description')) {
-        doi.set('descriptions', [{ description: doi.get('description'), descriptionType: 'Abstract' }]);
+      if (doi.get('descriptions')) {
+        doi.set('descriptions', [{ description: doi.get('descriptions'), descriptionType: 'Abstract' }]);
       }
 
       // generate types object
