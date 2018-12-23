@@ -60,10 +60,6 @@ const Validations = buildValidations({
         return (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
       })
     })
-    // validator('valid-url', {
-    //   allowBlank: true,
-    //   isWarning: true
-    // })
   ],
   creators: [
     validator('presence', {
