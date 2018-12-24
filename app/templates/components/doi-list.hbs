@@ -205,21 +205,21 @@
       </div>
     </div>
   {{/if}}
-  {{#if (or model.meta.schema-versions model.otherParams.schema-version)}}
+  {{#if (or model.meta.schemaVersions model.otherParams.schema-version)}}
     <div class="panel facets">
       <div class="panel-body">
         <h4>Schema Version</h4>
         <ul>
-          {{#if model.meta.schema-versions}}
-            {{#each model.meta.schema-versions as |schema-version|}}
+          {{#if model.meta.schemaVersions}}
+            {{#each model.meta.schemaVersions as |schemaVersion|}}
               <li>
                 {{#if model.otherParams.schema-version}}
                   {{#link-to link (query-params schema-version='')}}{{fa-icon "check-square-o"}}{{/link-to}}
                 {{else}}
-                  {{#link-to link (query-params schema-version=schema-version.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                  {{#link-to link (query-params schema-version=schemaVersion.id)}}{{fa-icon "square-o"}}{{/link-to}}
                 {{/if}}
-                <div class="facet-title">{{schema-version.title}}</div>
-                <span class="number pull-right">{{format-number schema-version.count}}</span>
+                <div class="facet-title">{{schemaVersion.title}}</div>
+                <span class="number pull-right">{{format-number schemaVersion.count}}</span>
                 <div class="clearfix"/>
               </li>
             {{/each}}
