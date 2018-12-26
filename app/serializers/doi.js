@@ -20,7 +20,6 @@ export default DS.JSONAPISerializer.extend({
     rightsList: { serialize: false },
     geoLocations: { serialize: false },
     fundingReferences: { serialize: false },
-    landingPage: { serialize: false },
     schemaVersion: { serialize: false },
 
     // don't send back these attributes, as they are managed by the API
