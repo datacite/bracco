@@ -51,13 +51,6 @@ export default Ember.Controller.extend({
         doi.set('descriptions', [{ description: doi.get('descriptions'), descriptionType: 'Abstract' }]);
       }
 
-      // generate types object
-      if (doi.get('resourceTypeGeneral')) {
-        doi.set('types', { resourceTypeGeneral: doi.get('resourceTypeGeneral'), resourceType: doi.get('resourceType') });
-      } else {
-        doi.set('types', {});
-      }
-
       let self = this;
       doi.save().then(function(doi) {
         self.transitionToRoute('clients.show.dois.show', doi.get('client.id'), doi);

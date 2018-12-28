@@ -13,5 +13,5 @@ export default Component.extend({
         Ember.Logger.assert(false, item);
       });
     }
-  },
+  }
 });

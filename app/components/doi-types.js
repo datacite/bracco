@@ -21,22 +21,13 @@ export default Component.extend({
   resourceTypeGeneralList,
   resourceTypesGeneral: resourceTypeGeneralList,
 
-  didReceiveAttrs() {
-    this._super(...arguments);
-
-    if (this.get('model').get('types')) {
-      this.get('model').set('resourceType', this.get('model').get('types').resourceType);
-      this.get('model').set('resourceTypeGeneral', this.get('model').get('types').resourceTypeGeneral);
-    }
-  },
-
   searchResourceTypeGeneral(query) {
     resourceTypesGeneral = resourceTypeGeneralList.filter(function(resourceTypeGeneral) {
       return resourceTypeGeneral.startsWith(query.toLowerCase());
     })
   },
   selectResourceTypeGeneral(resourceTypeGeneral) {
-    this.get('model').set('resourceTypeGeneral', resourceTypeGeneral);
+    this.get('model').set('types', { 'resourceTypeGeneral': resourceTypeGeneral });
     this.set('resourceTypesGeneral', resourceTypeGeneralList);
   },
 

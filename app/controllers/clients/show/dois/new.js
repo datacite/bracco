@@ -38,13 +38,6 @@ export default Ember.Controller.extend({
       if (doi.get('descriptions')) {
         doi.set('descriptions', [{ description: doi.get('descriptions'), descriptionType: 'Abstract' }]);
       }
-
-      // generate types object
-      if (doi.get('resourceTypeGeneral')) {
-        doi.set('types', { resourceTypeGeneral: doi.get('resourceTypeGeneral'), resourceType: doi.get('resourceType') });
-      } else {
-        doi.set('types', {});
-      }
       
       let self = this;
       doi.save().then(function(doi) {
