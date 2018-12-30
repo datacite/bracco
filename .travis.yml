@@ -35,8 +35,8 @@ install:
   - sudo pip install awscli
 
 script:
-  # - COVERAGE=true yarn test
-  # - codeclimate-test-reporter < coverage/lcov.info
+  - COVERAGE=true yarn test
+  - codeclimate-test-reporter < coverage/lcov.info
 
   - ember build --environment=production
 
