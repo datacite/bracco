@@ -126,7 +126,7 @@ export default Ember.Component.extend({
     },
     submit(client) {
       let self = this;
-      client.save().then(function (client) {
+      client.save().then(function () {
         self.reset();
       }).catch(function(reason){
         Ember.Logger.assert(false, reason);

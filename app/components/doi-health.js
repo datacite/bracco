@@ -13,8 +13,7 @@ export default Component.extend({
       if (this.get('model').get("landingPage").redirectCount > 1) {
         let redirectUrls = this.get('model').get("landingPage").redirectUrls.join(', ')
         redirectText = "redirected <strong>" + this.get('model').get("landingPage").redirectCount + " </strong> times (" + redirectUrls + "), and resolved to <a href=\"" + this.get('model').get("landingPage").url + "\">" + this.get('model').get("landingPage").url + "</a> ";
-      } else if (this.get('model').get("landingPage").redirectCount > 0) {
-        let redirectUrls = this.get('model').get("landingPage").redirectUrls.join(', ')
+      } else if (this.get('model').get("landingPage").redirectCount > 0) {
         redirectText = "redirected <strong>once</strong>, and resolved to <a href=\"" + this.get('model').get("landingPage").url + "\">" + this.get('model').get("landingPage").url + "</a> ";
       }
       this.set('isFound', {

@@ -4,7 +4,7 @@ import BaseValidator from 'ember-cp-validations/validators/base';
 const UniqueProviderId = BaseValidator.extend({
   store: Ember.inject.service(),
 
-  validate(value, options, model) {
+  validate(value) {
     if (value.length < 2) {
       return true;
     } else {
