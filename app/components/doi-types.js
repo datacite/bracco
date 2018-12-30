@@ -22,7 +22,7 @@ export default Component.extend({
   resourceTypesGeneral: resourceTypeGeneralList,
 
   searchResourceTypeGeneral(query) {
-    resourceTypesGeneral = resourceTypeGeneralList.filter(function(resourceTypeGeneral) {
+    this.resourceTypesGeneral = resourceTypeGeneralList.filter(function(resourceTypeGeneral) {
       return resourceTypeGeneral.startsWith(query.toLowerCase());
     })
   },
