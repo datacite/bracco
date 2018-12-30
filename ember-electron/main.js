@@ -1,8 +1,7 @@
 /* eslint-env node */
-const { app, BrowserWindow, protocol, Menu, shell  } = require('electron');
+const { app, BrowserWindow, protocol } = require('electron');
 const { dirname, join, resolve } = require('path');
 const protocolServe = require('electron-protocol-serve');
-const defaultMenu = require('electron-default-menu');
 
 let mainWindow = null;
 
@@ -31,14 +30,14 @@ app.on('window-all-closed', () => {
 
 app.on('ready', () => {
   mainWindow = new BrowserWindow({
-    width: 1200,
-    height: 800,
+    width: 800,
+    height: 600,
   });
 
   // If you want to open up dev tools programmatically, call
   // mainWindow.openDevTools();
 
-  const emberAppLocation = 'https://doi.datacite.org';
+  const emberAppLocation = 'serve://dist';
 
   // Load the ember application using our custom protocol/scheme
   mainWindow.loadURL(emberAppLocation);
@@ -65,41 +64,6 @@ app.on('ready', () => {
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
-
-  // Get template for default menu
-  const menu = defaultMenu(app, shell);
-
-  // Add link to home
-  menu[2].submenu.splice(0, 0, {
-    label: 'Home',
-    click: (item, browserWindow) => {
-      browserWindow.loadURL(emberAppLocation)
-    }
-  })
-  menu[2].submenu.splice(1, 0, {
-    type: 'separator'
-  })
-
-  // Add support link
-  menu[4].submenu.splice(0, 1, {
-    label: 'Support Website',
-    click: (item, browserWindow) => {
-      shell.openExternal('https://support.datacite.org')
-    }
-  })
-
-  // Set top-level application menu, using modified template
-  Menu.setApplicationMenu(Menu.buildFromTemplate(menu));
-
-  // open external links in browser for target="_blank", modified from https://github.com/electron/electron/issues/1344
-  var handleRedirect = (e, url) => {
-    if(url != mainWindow.webContents.getURL()) {
-      e.preventDefault()
-      shell.openExternal(url)
-    }
-  }
-
-  mainWindow.webContents.on('new-window', handleRedirect)
 });
 
 // Handle an unhandled error in the main thread
