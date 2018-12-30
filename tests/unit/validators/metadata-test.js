@@ -1,7 +1,7 @@
 import { moduleFor, test } from 'ember-qunit';
 
 moduleFor('validator:metadata', 'Unit | Validator | metadata', {
-  needs: ['validator:messages']
+  needs: ['validator:messages', 'service:currentUser']
 });
 
 test('it works', function(assert) {

@@ -2,7 +2,7 @@ import { moduleFor, test } from 'ember-qunit';
 
 moduleFor('controller:prefixes', 'Unit | Controller | prefixes', {
   // Specify the other units that are required for this test.
-  needs: ['service:google-analytics']
+  needs: ['service:google-analytics', 'service:features']
 });
 
 // Replace this with your real tests.

@@ -1,8 +1,7 @@
 import { moduleForModel, test } from 'ember-qunit';
 
 moduleForModel('permission', 'Unit | Model | permission', {
-  // Specify the other units that are required for this test.
-  needs: []
+  needs: ['model:provider', 'model:client']
 });
 
 test('it exists', function(assert) {
