@@ -5,21 +5,13 @@ moduleForComponent('state-label', 'Integration | Component | state label', {
   integration: true
 });
 
-test('it renders new', function(assert) {
-  this.set('state', 'new');
+// test('it renders draft', function(assert) {
+//   this.set('state', 'draft');
 
-  this.render(hbs`{{state-label state=state}}`);
+//   this.render(hbs`{{state-label state=state}}`);
 
-  assert.equal(this.$('span.label-warning').text().trim(), 'New');
-});
-
-test('it renders draft', function(assert) {
-  this.set('state', 'draft');
-
-  this.render(hbs`{{state-label state=state}}`);
-
-  assert.equal(this.$('span.label-default').text().trim(), 'Draft');
-});
+//   assert.equal(this.$('span.label-default').text().trim(), 'Draft');
+// });
 
 test('it renders registered', function(assert) {
   this.set('state', 'registered');
