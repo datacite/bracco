@@ -1,13 +1,15 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render, find } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import ENV from 'bracco/config/environment';
 
-moduleForComponent('cdn-url', 'helper:cdn-url', {
-  integration: true
-});
+module('helper:cdn-url', function(hooks) {
+  setupRenderingTest(hooks);
 
-test('it renders', function(assert) {
-  this.render(hbs`{{cdn-url}}`);
+  test('it renders', async function(assert) {
+    await render(hbs`{{cdn-url}}`);
 
-  assert.equal(this.$().text(), ENV.CDN_URL);
+    assert.dom('*').hasText(ENV.CDN_URL);
+  });
 });

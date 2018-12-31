@@ -1,25 +1,27 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render, find } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('client-sidebar', 'Integration | Component | client sidebar', {
-  integration: true
-});
+module('Integration | Component | client sidebar', function(hooks) {
+  setupRenderingTest(hooks);
 
-test('it renders', function(assert) {
+  test('it renders', async function(assert) {
 
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
+    // Set any properties with this.set('myProperty', 'value');
+    // Handle any actions with this.on('myAction', function(val) { ... });
 
-  this.render(hbs`{{client-sidebar}}`);
+    await render(hbs`{{client-sidebar}}`);
 
-  assert.equal(this.$().text().trim(), '');
+    assert.dom('*').hasText('');
 
-  // Template block usage:
-  this.render(hbs`
-    {{#client-sidebar}}
-      
-    {{/client-sidebar}}
-  `);
+    // Template block usage:
+    await render(hbs`
+      {{#client-sidebar}}
+        
+      {{/client-sidebar}}
+    `);
 
-  assert.equal(this.$().text().trim(), '');
+    assert.dom('*').hasText('');
+  });
 });

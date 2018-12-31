@@ -1,10 +1,11 @@
-import { moduleFor, test } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupTest } from 'ember-qunit';
 
-moduleFor('route:providers/show/dois', 'Unit | Route | providers/show/dois', {
-  needs: ['service:google-analytics', 'service:can']
-});
+module('Unit | Route | providers/show/dois', function(hooks) {
+  setupTest(hooks);
 
-test('it exists', function(assert) {
-  let route = this.subject();
-  assert.ok(route);
+  test('it exists', function(assert) {
+    let route = this.owner.lookup('route:providers/show/dois');
+    assert.ok(route);
+  });
 });

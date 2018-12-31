@@ -1,10 +1,7 @@
+import { getProperties } from '@ember/object';
 export default function bugsnag() {
   return true;
 }
-
-import Ember from 'ember';
-
-const { getProperties } = Ember;
 
 export function getUser(owner) {
   const currentUser = owner.lookup('service:current-user').get('user');

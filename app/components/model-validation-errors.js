@@ -6,7 +6,7 @@ export default Component.extend({
   didReceiveAttrs() {
     this._super(...arguments);
 
-    let errors = this.get('model').get('validations.errors');
+    let errors = this.model.get('validations.errors');
 
     if (errors.length > 0) {
       errors.forEach((item) => {

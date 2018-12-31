@@ -1,5 +1,5 @@
+import { inject as service } from '@ember/service';
 import Ember from 'ember';
-const { service } = Ember.inject;
 import BaseValidator from 'ember-cp-validations/validators/base';
 import fetch from 'fetch';
 import ENV from 'bracco/config/environment';
@@ -17,7 +17,7 @@ const metadata = BaseValidator.extend({
       return fetch(url, {
         method: 'post',
         headers: {
-          'authorization': 'Bearer ' + this.get('currentUser').get('jwt'),
+          'authorization': 'Bearer ' + this.currentUser.get('jwt'),
           'content-type': 'application/vnd.api+json; charset=utf-8'
         },
         body: JSON.stringify({

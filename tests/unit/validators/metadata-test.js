@@ -1,10 +1,11 @@
-import { moduleFor, test } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupTest } from 'ember-qunit';
 
-moduleFor('validator:metadata', 'Unit | Validator | metadata', {
-  needs: ['validator:messages', 'service:currentUser']
-});
+module('Unit | Validator | metadata', function(hooks) {
+  setupTest(hooks);
 
-test('it works', function(assert) {
-  var validator = this.subject();
-  assert.ok(validator);
+  test('it works', function(assert) {
+    var validator = this.owner.lookup('validator:metadata');
+    assert.ok(validator);
+  });
 });

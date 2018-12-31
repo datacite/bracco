@@ -1,10 +1,10 @@
-import Ember from 'ember';
-const { service } = Ember.inject;
+import Component from '@ember/component';
+import { inject as service } from '@ember/service';
 
-export default Ember.Component.extend({
+export default Component.extend({
   currentUser: service(),
 
   didInsertElement() {
-    this.set('url', this.get('url'));
+    this.set('url', this.url);
   }
 });

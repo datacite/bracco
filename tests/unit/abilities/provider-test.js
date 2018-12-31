@@ -1,11 +1,12 @@
-import { moduleFor, test } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupTest } from 'ember-qunit';
 
-moduleFor('ability:provider', 'Unit | Ability | provider', {
-  needs: ['service:currentUser']
-});
+module('Unit | Ability | provider', function(hooks) {
+  setupTest(hooks);
 
-// Replace this with your real tests.
-test('it exists', function(assert) {
-  var ability = this.subject();
-  assert.ok(ability);
+  // Replace this with your real tests.
+  test('it exists', function(assert) {
+    var ability = this.owner.lookup('ability:provider');
+    assert.ok(ability);
+  });
 });

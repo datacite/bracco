@@ -17,12 +17,12 @@ export default Component.extend({
   didReceiveAttrs() {
     this._super(...arguments);
 
-    this.selectState(this.get('model').get('state'));
+    this.selectState(this.model.get('state'));
   },
 
   selectState(state) {
     this.set('state', state);
-    this.get('model').set('state', state);
+    this.model.set('state', state);
     this.setStates(state)
   },
   setStates(state) {
@@ -31,7 +31,7 @@ export default Component.extend({
     }
     let states = [];
     // demo prefix uses only draft state
-    if (this.get('model').get('prefix') === '10.5072') {
+    if (this.model.get('prefix') === '10.5072') {
       states = ['draft'];
       this.set('registered', true);
       this.set('findable', true);

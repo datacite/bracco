@@ -1,10 +1,11 @@
-import { moduleFor, test } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupTest } from 'ember-qunit';
 
-moduleFor('validator:unique-doi', 'Unit | Validator | unique-doi', {
-  needs: ['validator:messages']
-});
+module('Unit | Validator | unique-doi', function(hooks) {
+  setupTest(hooks);
 
-test('it works', function(assert) {
-  var validator = this.subject();
-  assert.ok(validator);
+  test('it works', function(assert) {
+    var validator = this.owner.lookup('validator:unique-doi');
+    assert.ok(validator);
+  });
 });

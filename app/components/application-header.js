@@ -1,9 +1,11 @@
-import Ember from 'ember';
+import { typeOf } from '@ember/utils';
+import { htmlSafe } from '@ember/template';
+import Component from '@ember/component';
+import { inject as service } from '@ember/service';
 import ENV from 'bracco/config/environment';
 import fetch from 'fetch';
-const { service } = Ember.inject;
 
-export default Ember.Component.extend({
+export default Component.extend({
   currentUser: service(),
 
   default: false,
@@ -25,21 +27,21 @@ export default Ember.Component.extend({
 
   actions: {
     transitionNoAccess() {
-      this.get('router').transitionTo(this.get('home'));
+      this.router.transitionTo(this.home);
     }
   },
 
   didInsertElement() {
-    if (this.get('default')) {
+    if (this['default']) {
       this.set('type', null);
-      this.set('title', Ember.String.htmlSafe(ENV.SITE_TITLE));
-    } else if (this.get('sign-in')) {
-      this.set('title', Ember.String.htmlSafe(ENV.SITE_TITLE));
+      this.set('title', htmlSafe(ENV.SITE_TITLE));
+    } else if (this['sign-in']) {
+      this.set('title', htmlSafe(ENV.SITE_TITLE));
       this.set('user', false);
     }
 
-    let home = this.get('currentUser').get('home');
-    if (Ember.typeOf(home) == 'object') {
+    let home = this.currentUser.get('home');
+    if (typeOf(home) == 'object') {
       this.set('home', { route: home.route, model: home.id });
     } else if (home === "password") {
       this.set('home', null);

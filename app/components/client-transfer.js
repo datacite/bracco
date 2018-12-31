@@ -1,7 +1,7 @@
-import Ember from 'ember';
-const { service } = Ember.inject;
+import Component from '@ember/component';
+import { inject as service } from '@ember/service';
 
-export default Ember.Component.extend({
+export default Component.extend({
   currentUser: service(),
   store: service(),
   flashMessages: service(),
@@ -21,16 +21,16 @@ export default Ember.Component.extend({
   },
 
   searchClient(query) {
-    if (this.get('currentUser').get('isAdmin')) {
-      this.set('clients', this.get('store').query('client', { 'query': query, sort: 'name', 'page[size]': 100 }));
-    } else if (this.get('currentUser').get('isProvider')) {
-      this.set('clients', this.get('store').query('client', { 'query': query, 'provider-id': this.get('currentUser').get('provider_id'), sort: 'name', 'page[size]': 100 }));
+    if (this.currentUser.get('isAdmin')) {
+      this.set('clients', this.store.query('client', { 'query': query, sort: 'name', 'page[size]': 100 }));
+    } else if (this.currentUser.get('isProvider')) {
+      this.set('clients', this.store.query('client', { 'query': query, 'provider-id': this.currentUser.get('provider_id'), sort: 'name', 'page[size]': 100 }));
     }
   },
   selectClient(client) {
     this.set('client', client)
     this.set('isDisabled', (client === null) || (client.id === this.get('model.id')));
-    this.get('model').set('targetId', client.id);
+    this.model.set('targetId', client.id);
   },
 
   actions: {
@@ -41,16 +41,16 @@ export default Ember.Component.extend({
       this.selectClient(client);
     },
     submit() {
-      this.get('model').save();
-      let count = this.get('model').get('totalDoiCount');
-      this.get('flashMessages').success('DOI transfer for ' + this.get('intl').formatNumber(count) + ' DOIs started, the transfer should take about ' + this.get('intl').formatNumber(Math.ceil(count/5000) + 1) + ' minutes to complete.', {
+      this.model.save();
+      let count = this.model.get('totalDoiCount');
+      this.flashMessages.success('DOI transfer for ' + this.intl.formatNumber(count) + ' DOIs started, the transfer should take about ' + this.intl.formatNumber(Math.ceil(count/5000) + 1) + ' minutes to complete.', {
         timeout: 5000,
         sticky: true
       });
-      this.get('router').transitionTo('clients.show.settings', this.get('model'));
+      this.router.transitionTo('clients.show.settings', this.model);
     },
     cancel() {
-      this.get('router').transitionTo('clients.show.dois', this.get('model'));
+      this.router.transitionTo('clients.show.dois', this.model);
     }
   }
 });

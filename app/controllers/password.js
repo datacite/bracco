@@ -1,9 +1,10 @@
+import Controller from '@ember/controller';
+import { inject as service } from '@ember/service';
 import Ember from 'ember';
-const { service } = Ember.inject;
 import fetch from 'fetch';
 import ENV from 'bracco/config/environment';
 
-export default Ember.Controller.extend({
+export default Controller.extend({
   session: service(),
   currentUser: service(),
 
@@ -18,7 +19,7 @@ export default Ember.Controller.extend({
     },
     cancel() {
       let self = this;
-      this.get('session').invalidate().then(function() {
+      this.session.invalidate().then(function() {
         self.transitionTo('index');
       });
     },
@@ -27,7 +28,7 @@ export default Ember.Controller.extend({
       let url = ENV.API_URL + '/random';
       fetch(url, {
         headers: {
-          'Authorization': 'Bearer ' + this.get('currentUser').get('jwt')
+          'Authorization': 'Bearer ' + this.currentUser.get('jwt')
         }
       }).then(function(response) {
         if (response.ok) {

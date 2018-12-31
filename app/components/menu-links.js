@@ -1,7 +1,7 @@
-import Ember from 'ember';
+import Component from '@ember/component';
 import ENV from 'bracco/config/environment';
 
-export default Ember.Component.extend({
+export default Component.extend({
   tagName: 'li',
 
   didInsertElement() {

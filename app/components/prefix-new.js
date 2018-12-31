@@ -1,4 +1,5 @@
-import Ember from 'ember';
+import { inject as service } from '@ember/service';
+import Component from '@ember/component';
 import { validator, buildValidations } from 'ember-cp-validations';
 
 const Validations = buildValidations({
@@ -19,18 +20,18 @@ const Validations = buildValidations({
   ]
 });
 
-export default Ember.Component.extend(Validations, {
-  store: Ember.inject.service(),
+export default Component.extend(Validations, {
+  store: service(),
 
   firstPrefix: '',
   lastPrefix: '',
 
   addPrefixes() {
-    let first = this.get('firstPrefix').split('.').get('lastObject');
-    let last = this.get('lastPrefix').split('.').get('lastObject')
+    let first = this.firstPrefix.split('.').get('lastObject');
+    let last = this.lastPrefix.split('.').get('lastObject')
 
     while(first <= last) {
-      var prefix = this.get('store').createRecord('prefix', { id: '10.' + first });
+      var prefix = this.store.createRecord('prefix', { id: '10.' + first });
       prefix.save();
 
       first++;
@@ -49,10 +50,10 @@ export default Ember.Component.extend(Validations, {
     },
     submit() {
       this.addPrefixes()
-      this.get('router').transitionTo('prefixes');
+      this.router.transitionTo('prefixes');
     },
     cancel() {
-      this.get('router').transitionTo('prefixes');
+      this.router.transitionTo('prefixes');
     }
   }
 });

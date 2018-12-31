@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
-import { currentURL, visit } from '@ember/test-helpers';
+import { currentURL, visit, find } from '@ember/test-helpers';
 import { authenticateSession } from 'ember-simple-auth/test-support';
 
 module('Acceptance | client_admin | admin', function(hooks) {
@@ -16,7 +16,7 @@ module('Acceptance | client_admin | admin', function(hooks) {
     });
     await visit('/');
     assert.equal(currentURL(), '/');
-    assert.equal(find('div.motto h1').text(), 'DataCite DOI Fabrica');
+    assert.dom('div.motto h1').hasText('DataCite DOI Fabrica');
   });
 
   // the following pages require authentication. Redirects to homepage otherwise
@@ -30,7 +30,7 @@ module('Acceptance | client_admin | admin', function(hooks) {
     });
     await visit('/settings');
     assert.equal(currentURL(), '/');
-    assert.equal(find('div.motto h1').text(), 'DataCite DOI Fabrica');
+    assert.dom('div.motto h1').hasText('DataCite DOI Fabrica');
   });
 
   test('visiting providers', async function(assert) {
@@ -43,7 +43,7 @@ module('Acceptance | client_admin | admin', function(hooks) {
     });
     await visit('/providers');
     assert.equal(currentURL(), '/');
-    assert.equal(find('div.motto h1').text(), 'DataCite DOI Fabrica');
+    assert.dom('div.motto h1').hasText('DataCite DOI Fabrica');
   });
 
   test('visiting clients', async function(assert) {
@@ -56,7 +56,7 @@ module('Acceptance | client_admin | admin', function(hooks) {
     });
     await visit('/clients');
     assert.equal(currentURL(), '/');
-    assert.equal(find('div.motto h1').text(), 'DataCite DOI Fabrica');
+    assert.dom('div.motto h1').hasText('DataCite DOI Fabrica');
   });
 
   test('visiting prefixes', async function(assert) {
@@ -69,7 +69,7 @@ module('Acceptance | client_admin | admin', function(hooks) {
     });
     await visit('/prefixes');
     assert.equal(currentURL(), '/');
-    assert.equal(find('div.motto h1').text(), 'DataCite DOI Fabrica');
+    assert.dom('div.motto h1').hasText('DataCite DOI Fabrica');
   });
 });
 

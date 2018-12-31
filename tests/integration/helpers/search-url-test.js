@@ -1,13 +1,15 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render, find } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import ENV from 'bracco/config/environment';
 
-moduleForComponent('search-url', 'helper:search-url', {
-  integration: true
-});
+module('helper:search-url', function(hooks) {
+  setupRenderingTest(hooks);
 
-test('it renders', function(assert) {
-  this.render(hbs`{{search-url}}`);
+  test('it renders', async function(assert) {
+    await render(hbs`{{search-url}}`);
 
-  assert.equal(this.$().text(), ENV.SEARCH_URL);
+    assert.dom('*').hasText(ENV.SEARCH_URL);
+  });
 });

@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import { computed } from '@ember/object';
 import DS from 'ember-data';
 import { validator, buildValidations } from 'ember-cp-validations';
 import ENV from 'bracco/config/environment';
@@ -6,23 +6,23 @@ import ENV from 'bracco/config/environment';
 const Validations = buildValidations({
   details: [
     validator('belongs-to', {
-      disabled: Ember.computed('model.mode', 'model.state', 'model.prefix', function() {
-        return !["new", "edit"].includes(this.get('model').get('mode')) || (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
+      disabled: computed('model.mode', 'model.state', 'model.prefix', function() {
+        return !["new", "edit"].includes(this.model.get('mode')) || (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
       })
     })
   ],
   confirmDoi: [
     validator('presence', {
       presence: true,
-      disabled: Ember.computed('model.mode', function() {
-        return this.get('model').get('mode') !== 'delete';
+      disabled: computed('model.mode', function() {
+        return this.model.get('mode') !== 'delete';
       })
     }),
     validator('confirmation', {
       on: 'doi',
       message: 'DOI does not match',
-      disabled: Ember.computed('model.mode', function() {
-        return this.get('model').get('mode') !== 'delete';
+      disabled: computed('model.mode', function() {
+        return this.model.get('mode') !== 'delete';
       })
     })
   ],
@@ -30,21 +30,21 @@ const Validations = buildValidations({
     validator('presence', {
       presence: true,
       message: 'The DOI suffix can\'t be blank.',
-      disabled: Ember.computed('model.mode', function() {
-        return !["new", "upload"].includes(this.get('model').get('mode'));
+      disabled: computed('model.mode', function() {
+        return !["new", "upload"].includes(this.model.get('mode'));
       })
     }),
     validator('format', {
       regex: /^[A-Za-z0-9][-._;()/:A-Za-z0-9]+$/,
       message: 'The DOI suffix contains invalid characters.',
-      disabled: Ember.computed('model.mode', function() {
-        return !["new", "upload"].includes(this.get('model').get('mode'));
+      disabled: computed('model.mode', function() {
+        return !["new", "upload"].includes(this.model.get('mode'));
       })
     }),
     validator('unique-doi', {
       dependentKeys: ['model.prefix'],
-      disabled: Ember.computed('model.mode', function() {
-        return !["new", "upload"].includes(this.get('model').get('mode'));
+      disabled: computed('model.mode', function() {
+        return !["new", "upload"].includes(this.model.get('mode'));
       })
     })
   ],
@@ -56,7 +56,7 @@ const Validations = buildValidations({
     }),
     validator('presence', {
       presence: true,
-      isWarning: Ember.computed('model.state', 'model.prefix', function() {
+      isWarning: computed('model.state', 'model.prefix', function() {
         return (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
       })
     })
@@ -64,44 +64,44 @@ const Validations = buildValidations({
   creators: [
     validator('presence', {
       presence: true,
-      isWarning: Ember.computed('model.state', 'model.prefix', function() {
+      isWarning: computed('model.state', 'model.prefix', function() {
         return (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
       }),
-      disabled: Ember.computed('model.mode', function() {
-        return !["new", "edit"].includes(this.get('model').get('mode'));
+      disabled: computed('model.mode', function() {
+        return !["new", "edit"].includes(this.model.get('mode'));
       })
     })
   ],
   titles: [
     validator('presence', {
       presence: true,
-      isWarning: Ember.computed('model.state', 'model.prefix', function() {
+      isWarning: computed('model.state', 'model.prefix', function() {
         return (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
       }),
-      disabled: Ember.computed('model.mode', function() {
-        return !["new", "edit"].includes(this.get('model').get('mode'));
+      disabled: computed('model.mode', function() {
+        return !["new", "edit"].includes(this.model.get('mode'));
       })
     })
   ],
   publisher: [
     validator('presence', {
       presence: true,
-      isWarning: Ember.computed('model.state', 'model.prefix', function() {
+      isWarning: computed('model.state', 'model.prefix', function() {
         return (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
       }),
-      disabled: Ember.computed('model.mode', function() {
-        return !["new", "edit"].includes(this.get('model').get('mode'));
+      disabled: computed('model.mode', function() {
+        return !["new", "edit"].includes(this.model.get('mode'));
       })
     })
   ],
   publicationYear: [
     validator('presence', {
       presence: true,
-      isWarning: Ember.computed('model.state', 'model.prefix', function() {
+      isWarning: computed('model.state', 'model.prefix', function() {
         return (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
       }),
-      disabled: Ember.computed('model.mode', function() {
-        return !["new", "edit"].includes(this.get('model').get('mode'));
+      disabled: computed('model.mode', function() {
+        return !["new", "edit"].includes(this.model.get('mode'));
       })
     }),
     validator('date', {
@@ -112,19 +112,19 @@ const Validations = buildValidations({
       format: 'YYYY',
       errorFormat: 'YYYY',
       message: "Must be between 1450 and 2020.",
-      disabled: Ember.computed('model.mode', function() {
-        return !["new", "edit"].includes(this.get('model').get('mode'));
+      disabled: computed('model.mode', function() {
+        return !["new", "edit"].includes(this.model.get('mode'));
       })
     })
   ],
   types: [
     validator('presence', {
       presence: true,
-      isWarning: Ember.computed('model.state', 'model.prefix', function() {
+      isWarning: computed('model.state', 'model.prefix', function() {
         return (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
       }),
-      disabled: Ember.computed('model.mode', function() {
-        return !["new", "edit"].includes(this.get('model').get('mode'));
+      disabled: computed('model.mode', function() {
+        return !["new", "edit"].includes(this.model.get('mode'));
       })
     })
   ],
@@ -132,18 +132,18 @@ const Validations = buildValidations({
     validator('presence', {
       presence: true,
       message: 'Please include valid metadata.',
-      disabled: Ember.computed('model.mode', 'model.state', 'model.prefix', function() {
-        return !["upload", "modify"].includes(this.get('model').get('mode')) || (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
+      disabled: computed('model.mode', 'model.state', 'model.prefix', function() {
+        return !["upload", "modify"].includes(this.model.get('mode')) || (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
       }),
     }),
     validator('metadata', {
       allowBlank: true,
       dependentKeys: ['model.doi'],
-      isWarning: Ember.computed('model.mode', 'model.state', 'model.prefix', function() {
+      isWarning: computed('model.mode', 'model.state', 'model.prefix', function() {
         return (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
       }),
-      disabled: Ember.computed('model.mode', function() {
-        return !["upload", "modify"].includes(this.get('model').get('mode'))
+      disabled: computed('model.mode', function() {
+        return !["upload", "modify"].includes(this.model.get('mode'));
       })
     })
   ]
@@ -193,19 +193,19 @@ export default DS.Model.extend(Validations, {
   updated: DS.attr('date'),
   mode: DS.attr('string'),
 
-  identifier: Ember.computed('doi', function() {
+  identifier: computed('doi', function() {
     if (ENV.API_URL == "https://api.datacite.org") {
-      return "https://doi.org/" + this.get('doi');
+      return "https://doi.org/" + this.doi;
     } else {
-      return "https://handle.test.datacite.org/" + this.get('doi');
+      return "https://handle.test.datacite.org/" + this.doi;
     }
   }),
-  isDraft: Ember.computed('state', function() {
-    return this.get('state') === 'draft';
+  isDraft: computed('state', function() {
+    return this.state === 'draft';
   }),
-  schemaVersionString: Ember.computed('schemaVersion', function() {
-    if (this.get('schemaVersion')) {
-      return this.get('schemaVersion').split("-").get("lastObject");
+  schemaVersionString: computed('schemaVersion', function() {
+    if (this.schemaVersion) {
+      return this.schemaVersion.split("-").get("lastObject");
     } else {
       return null;
     }

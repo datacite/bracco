@@ -1,9 +1,10 @@
+import Component from '@ember/component';
+import { inject as service } from '@ember/service';
 import Ember from 'ember';
 import fetch from 'fetch';
-const { service } = Ember.inject;
 import ENV from 'bracco/config/environment';
 
-export default Ember.Component.extend({
+export default Component.extend({
   currentUser: service(),
 
   url: null,
@@ -16,7 +17,7 @@ export default Ember.Component.extend({
 
   fetchURL() {
     let self = this;
-    let url = ENV.API_URL + '/dois/' + this.get('model').get('doi') + '/get-url';
+    let url = ENV.API_URL + '/dois/' + this.model.get('doi') + '/get-url';
 
     fetch(url, {
       headers: {

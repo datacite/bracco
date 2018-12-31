@@ -1,8 +1,9 @@
-import Ember from 'ember';
+import { helper as buildHelper } from '@ember/component/helper';
+import { htmlSafe } from '@ember/template';
 import ENV from 'bracco/config/environment';
 
 export function orcidURL() {
-  return Ember.String.htmlSafe(ENV.ORCID_URL);
+  return htmlSafe(ENV.ORCID_URL);
 }
 
-export default Ember.Helper.helper(orcidURL);
+export default buildHelper(orcidURL);

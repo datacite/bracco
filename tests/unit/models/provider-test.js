@@ -1,11 +1,14 @@
-import { moduleForModel, test } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupTest } from 'ember-qunit';
 
-moduleForModel('provider', 'Unit | Model | provider', {
-  needs: ['validator:presence', 'validator:confirmation', 'validator:format', 'validator:length', 'validator:unique-provider-id']
-});
+import { run } from '@ember/runloop';
 
-test('it exists', function(assert) {
-  let model = this.subject();
-  // let store = this.store();
-  assert.ok(!!model);
+module('Unit | Model | provider', function(hooks) {
+  setupTest(hooks);
+
+  test('it exists', function(assert) {
+    let model = run(() => this.owner.lookup('service:store').createRecord('provider'));
+    // let store = this.store();
+    assert.ok(!!model);
+  });
 });

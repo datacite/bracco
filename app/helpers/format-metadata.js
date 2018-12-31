@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import { helper as buildHelper } from '@ember/component/helper';
 import { isPresent } from '@ember/utils';
 
 export function formatMetadata([publicationYear], hash) {
@@ -15,4 +15,4 @@ export function formatMetadata([publicationYear], hash) {
   }
 }
 
-export default Ember.Helper.helper(formatMetadata);
+export default buildHelper(formatMetadata);

@@ -1,7 +1,8 @@
-import Ember from 'ember';
+import { inject as service } from '@ember/service';
+import Component from '@ember/component';
 
-export default Ember.Component.extend({
-  store: Ember.inject.service(),
+export default Component.extend({
+  store: service(),
 
   edit: false,
   provider: null,
@@ -12,7 +13,7 @@ export default Ember.Component.extend({
       this.set('edit', true);
     },
     submit() {
-      this.get('provider').save();
+      this.provider.save();
       this.set('edit', false);
     },
     cancel() {

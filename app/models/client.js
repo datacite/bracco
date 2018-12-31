@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import { computed } from '@ember/object';
 import DS from 'ember-data';
 import ENV from 'bracco/config/environment';
 import { validator, buildValidations } from 'ember-cp-validations';
@@ -9,8 +9,8 @@ const Validations = buildValidations({
     validator('client-id', true),
     validator('unique-client-id', {
       presence: true,
-      disabled: Ember.computed('model', function() {
-        return !this.get('model').get('isNew');
+      disabled: computed('model', function() {
+        return !this.model.get('isNew');
       })
     }),
     validator('format', {
@@ -25,44 +25,44 @@ const Validations = buildValidations({
   confirmSymbol: [
     validator('presence', {
       presence: true,
-      disabled: Ember.computed('model', function() {
-        return this.get('model').get('isNew');
+      disabled: computed('model', function() {
+        return this.model.get('isNew');
       })
     }),
     validator('confirmation', {
       on: 'symbol',
       message: 'Client ID does not match',
-      disabled: Ember.computed('model', function() {
-        return this.get('model').get('isNew');
+      disabled: computed('model', function() {
+        return this.model.get('isNew');
       })
     })
   ],
   passwordInput: [
     validator('presence', {
       presence: true,
-      disabled: Ember.computed('model', function() {
-        return this.get('model').get('keepPassword');
+      disabled: computed('model', function() {
+        return this.model.get('keepPassword');
       })
     }),
     validator('length', {
       min: 8,
-      disabled: Ember.computed('model', function() {
-        return this.get('model').get('keepPassword');
+      disabled: computed('model', function() {
+        return this.model.get('keepPassword');
       })
     })
   ],
   confirmPasswordInput: [
     validator('presence', {
       presence: true,
-      disabled: Ember.computed('model', function() {
-        return this.get('model').get('keepPassword');
+      disabled: computed('model', function() {
+        return this.model.get('keepPassword');
       })
     }),
     validator('confirmation', {
       on: 'passwordInput',
       message: 'Password does not match',
-      disabled: Ember.computed('model', function() {
-        return this.get('model').get('keepPassword');
+      disabled: computed('model', function() {
+        return this.model.get('keepPassword');
       })
     })
   ],
@@ -105,25 +105,25 @@ export default DS.Model.extend(Validations, {
 
   targetId: DS.attr(),
 
-  domainList: Ember.computed('domains', function() {
-    return this.get('domains').split(",").map(function(item) {
+  domainList: computed('domains', function() {
+    return this.domains.split(",").map(function(item) {
       return item.trim();
     });
   }),
   // 'provider-id': Ember.computed('id', function() {
   //   return this.get('id').split('.').get('firstObject');
   // }),
-  doiCount: Ember.computed('meta.dois', function() {
+  doiCount: computed('meta.dois', function() {
     return this.get('meta.dois');
   }),
-  totalDoiCount: Ember.computed('meta.dois', function() {
+  totalDoiCount: computed('meta.dois', function() {
     return this.get('meta.dois').reduce(function (a, b) {
       return a + b.count;
     }, 0);
   }),
-  badgeUrl: Ember.computed('repository', function() {
-    if (this.get('repository')) {
-      return ENV.RE3DATA_API_URL + '/repositories/' + this.get('repository').get('id') + '/badge';
+  badgeUrl: computed('repository', function() {
+    if (this.repository) {
+      return ENV.RE3DATA_API_URL + '/repositories/' + this.repository.get('id') + '/badge';
     } else {
       return null;
     }

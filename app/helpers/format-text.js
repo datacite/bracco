@@ -1,4 +1,6 @@
-import Ember from 'ember';
+import { helper as buildHelper } from '@ember/component/helper';
+import { htmlSafe } from '@ember/template';
+import { typeOf } from '@ember/utils';
 import HtmlEntities from 'npm:html-entities';
 import SanitizeHtml from 'npm:sanitize-html';
 
@@ -7,7 +9,7 @@ const entities = new Entities();
 
 // sanitize and truncate text
 export function formatText([text], hash) {
-  if (Ember.typeOf(text) === 'array') {
+  if (typeOf(text) === 'array') {
     if (text[0] && text[0].descriptionType) {
       text = text[0].description;
     } else if (text[0]) {
@@ -30,7 +32,7 @@ export function formatText([text], hash) {
     }
   }
 
-  return Ember.String.htmlSafe(out);
+  return htmlSafe(out);
 }
 
-export default Ember.Helper.helper(formatText);
+export default buildHelper(formatText);

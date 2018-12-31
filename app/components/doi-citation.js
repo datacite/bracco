@@ -1,9 +1,9 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { inject as service } from '@ember/service';
 import fetch from 'fetch';
-const { service } = Ember.inject;
 import ENV from 'bracco/config/environment';
 
-export default Ember.Component.extend({
+export default Component.extend({
   currentUser: service(),
 
   tagName: 'div',
@@ -18,10 +18,10 @@ export default Ember.Component.extend({
 
   selectStyle(style) {
     let self = this;
-    let url = ENV.API_URL + '/dois/' + this.get('model').get("doi") + '?style=' + style;
+    let url = ENV.API_URL + '/dois/' + this.model.get("doi") + '?style=' + style;
     let result = fetch(url, {
       headers: {
-        'Authorization': 'Bearer ' + this.get('currentUser').get('jwt'),
+        'Authorization': 'Bearer ' + this.currentUser.get('jwt'),
         'Accept': 'text/x-bibliography'
       }
     }).then(function(response) {

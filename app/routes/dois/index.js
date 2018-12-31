@@ -1,8 +1,8 @@
-import Ember from 'ember';
+import Route from '@ember/routing/route';
 import RouteMixin from 'ember-cli-pagination/remote/route-mixin';
 import { CanMixin } from 'ember-can';
 
-export default Ember.Route.extend(CanMixin, RouteMixin, {
+export default Route.extend(CanMixin, RouteMixin, {
   perPage: 25,
 
   model(params) {

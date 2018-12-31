@@ -1,11 +1,11 @@
-import Ember from 'ember';
-const { service } = Ember.inject;
+import { computed } from '@ember/object';
+import { inject as service } from '@ember/service';
 import { Ability } from 'ember-can';
 
 export default Ability.extend({
   currentUser: service(),
 
-  canWrite: Ember.computed(function() {
+  canWrite: computed(function() {
     switch(this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
@@ -13,7 +13,7 @@ export default Ability.extend({
         return false;
     }
   }),
-  canRead: Ember.computed(function() {
+  canRead: computed(function() {
     switch(this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;

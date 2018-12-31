@@ -1,25 +1,27 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render, find } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('doi-media', 'Integration | Component | doi media', {
-  integration: true
-});
+module('Integration | Component | doi media', function(hooks) {
+  setupRenderingTest(hooks);
 
-test('it renders', function(assert) {
+  test('it renders', async function(assert) {
 
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
+    // Set any properties with this.set('myProperty', 'value');
+    // Handle any actions with this.on('myAction', function(val) { ... });
 
-  this.render(hbs`{{doi-media}}`);
+    await render(hbs`{{doi-media}}`);
 
-  assert.ok(/There are no media+/.test(this.$().text().trim()), 'begins with "There are no media"');
+    assert.ok(/There are no media+/.test(find('*').textContent.trim()), 'begins with "There are no media"');
 
-  // Template block usage:
-  this.render(hbs`
-    {{#doi-media}}
+    // Template block usage:
+    await render(hbs`
+      {{#doi-media}}
 
-    {{/doi-media}}
-  `);
+      {{/doi-media}}
+    `);
 
-  assert.ok(/There are no media+/.test(this.$().text().trim()), 'begins with "There are no media"');
+    assert.ok(/There are no media+/.test(find('*').textContent.trim()), 'begins with "There are no media"');
+  });
 });

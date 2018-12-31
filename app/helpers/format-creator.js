@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import { helper as buildHelper } from '@ember/component/helper';
 
 export function formatCreator([creators]) {
   let creatorList = creators.map(function(a) {
@@ -16,4 +16,4 @@ export function formatCreator([creators]) {
   }
 }
 
-export default Ember.Helper.helper(formatCreator);
+export default buildHelper(formatCreator);

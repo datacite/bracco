@@ -1,10 +1,11 @@
+import Component from '@ember/component';
+import { inject as service } from '@ember/service';
 import Ember from 'ember';
 import fetch from 'fetch';
-const { service } = Ember.inject;
 import { oneWay } from '@ember/object/computed';
 import ENV from 'bracco/config/environment';
-  
-export default Ember.Component.extend({
+
+export default Component.extend({
   currentUser: service(),
   store: service(),
 
@@ -19,7 +20,7 @@ export default Ember.Component.extend({
 
   fetchUsage() {
     let self = this;
-    this.get('store').query('prefix', { 'client-id': this.get('model.id'), sort: 'name', 'page[size]': 25 }).then(function(prefixes) {
+    this.store.query('prefix', { 'client-id': this.get('model.id'), sort: 'name', 'page[size]': 25 }).then(function(prefixes) {
       prefixes = prefixes.mapBy('id').removeObject('10.5072').join(',')
       let url = ENV.EVENTDATA_URL + '/events?prefix=' + prefixes;
 

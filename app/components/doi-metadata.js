@@ -1,8 +1,7 @@
-import Ember from 'ember';
+import { inject as service } from '@ember/service';
 import fetch from 'fetch';
 import Component from '@ember/component';
 import { isPresent } from '@ember/utils';
-const { service } = Ember.inject;
 import vkbeautify from 'npm:vkbeautify';
 import ENV from 'bracco/config/environment';
 
@@ -21,7 +20,7 @@ export default Component.extend({
     } else {
       this.set('output', null);
       let self = this;
-      let url = ENV.API_URL + '/dois/' + this.get('model').get("doi");
+      let url = ENV.API_URL + '/dois/' + this.model.get("doi");
       let acceptHeaders = {
         'datacite': 'application/vnd.datacite.datacite+xml',
         'datacite_json': 'application/vnd.datacite.datacite+json',
@@ -34,7 +33,7 @@ export default Component.extend({
 
       let result = fetch(url, {
         headers: {
-          'Authorization': 'Bearer ' + this.get('currentUser').get('jwt'),
+          'Authorization': 'Bearer ' + this.currentUser.get('jwt'),
           'Accept': acceptHeaders[metadata]
         }
       }).then(function(response) {

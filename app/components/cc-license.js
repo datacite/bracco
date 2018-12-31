@@ -1,7 +1,10 @@
-import Ember from 'ember';
+import { htmlSafe } from '@ember/template';
+import { w } from '@ember/string';
+import { A } from '@ember/array';
+import Component from '@ember/component';
 import URI from 'npm:urijs';
 
-export default Ember.Component.extend({
+export default Component.extend({
   tagName: 'div',
   classNames: ['license'],
 
@@ -15,22 +18,22 @@ export default Ember.Component.extend({
       { key: 'zero', title: 'Public Domain (Zero)', text: 'Copyright holder has waived the copyright interest and has dedicated the work to the world-wide public domain.' }
     ];
 
-    let licenseURL = this.get('licenseURL');
+    let licenseURL = this.licenseURL;
     if (licenseURL != null) {
       let licenseLogo = licenseURL;
       this.set('licenseURL', licenseURL);
       let uri = new URI(licenseURL);
 
       if (uri.hostname() === "creativecommons.org") {
-        let labels = Ember.A(uri.segment(1).split("-"));
+        let labels = A(uri.segment(1).split("-"));
         labels.unshift("cc");
         let val = null;
 
         licenseLogo = labels.reduce(function (sum, key) {
-          if (Ember.String.w("public publicdomain").includes(key)) {
+          if (w("public publicdomain").includes(key)) {
             key = "zero";
           }
-          if (Ember.String.w("cc by nd nc sa zero").includes(key)) {
+          if (w("cc by nd nc sa zero").includes(key)) {
             val = { class: 'cc cc-' + key, tooltip: Tooltips.findBy("key", key) };
             sum.pushObject(val);
           }
@@ -39,7 +42,7 @@ export default Ember.Component.extend({
       } else if (uri.hostname() === "opensource.org") {
         switch(uri.segment(1)) {
           case 'MIT':
-            licenseLogo = [{ logo: Ember.String.htmlSafe('<img src="https://img.shields.io/:license-MIT-blue.svg" />') }];
+            licenseLogo = [{ logo: htmlSafe('<img src="https://img.shields.io/:license-MIT-blue.svg" />') }];
         }
       }
       this.set('licenseLogo', licenseLogo);

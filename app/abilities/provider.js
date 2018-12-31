@@ -1,11 +1,11 @@
-import Ember from 'ember';
-const { service } = Ember.inject;
+import { computed } from '@ember/object';
+import { inject as service } from '@ember/service';
 import { Ability } from 'ember-can';
 
 export default Ability.extend({
   currentUser: service(),
 
-  canCreate: Ember.computed('currentUser.role_id', function() {
+  canCreate: computed('currentUser.role_id', function() {
     switch(this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
@@ -13,7 +13,7 @@ export default Ability.extend({
         return false;
     }
   }),
-  canDelete: Ember.computed('currentUser.role_id', function() {
+  canDelete: computed('currentUser.role_id', function() {
     switch(this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
@@ -21,7 +21,7 @@ export default Ability.extend({
         return false;
     }
   }),
-  canUpdate: Ember.computed('currentUser.role_id', 'currentUser.provider_id', 'model.id', function() {
+  canUpdate: computed('currentUser.role_id', 'currentUser.provider_id', 'model.id', function() {
     switch(this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
@@ -31,7 +31,7 @@ export default Ability.extend({
         return false;
     }
   }),
-  canRead: Ember.computed('currentUser.role_id', 'currentUser.provider_id', 'model.id', function() {
+  canRead: computed('currentUser.role_id', 'currentUser.provider_id', 'model.id', function() {
     switch(this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;

@@ -1,3 +1,5 @@
+import { inject as service } from '@ember/service';
+import Component from '@ember/component';
 import Ember from 'ember';
 import countryList from 'npm:iso-3166-country-list';
 const organizationTypeList = [
@@ -22,8 +24,8 @@ const focusAreaList = [
   'general'
 ]
 
-export default Ember.Component.extend({
-  store: Ember.inject.service(),
+export default Component.extend({
+  store: service(),
 
   tagName: 'div',
   classNames: ['row'],
@@ -47,7 +49,7 @@ export default Ember.Component.extend({
     this.set('countries', countries);
   },
   selectCountry(country) {
-    this.get('provider').set('country', country);
+    this.provider.set('country', country);
     this.set('countries', countryList);
   },
   searchOrganizationType(query) {
@@ -57,7 +59,7 @@ export default Ember.Component.extend({
     this.set('organizationTypes', organizationTypes);
   },
   selectOrganizationType(organizationType) {
-    this.get('provider').set('organizationType', organizationType);
+    this.provider.set('organizationType', organizationType);
     this.set('organizationTypes', organizationTypeList);
   },
   searchFocusArea(query) {
@@ -67,13 +69,13 @@ export default Ember.Component.extend({
     this.set('focusAreas', focusAreas);
   },
   selectFocusArea(focusArea) {
-    this.get('provider').set('focusArea', focusArea);
+    this.provider.set('focusArea', focusArea);
     this.set('focusAreas', focusAreaList);
   },
 
   actions: {
     new() {
-      this.set('provider', this.get('store').createRecord('provider', { isActive: true }));
+      this.set('provider', this.store.createRecord('provider', { isActive: true }));
       this.set('countries', countryList);
       this.set('new', true);
     },
@@ -87,7 +89,7 @@ export default Ember.Component.extend({
       });
     },
     cancel() {
-      this.get('provider').rollbackAttributes();
+      this.provider.rollbackAttributes();
       this.reset();
     },
     searchCountry(query) {

@@ -1,6 +1,6 @@
-import Ember from 'ember';
+import Controller from '@ember/controller';
 
-export default Ember.Controller.extend({
+export default Controller.extend({
   queryParams: ['query', 'resource-type-id', 'provider-id', 'client-id', 'person-id', 'prefix', 'year', 'created', 'registered', 'state', 'source', 'link-check-status', 'sort', 'schema-version', 'page', 'perPage'],
   query: null,
   'resource-type-id': null,

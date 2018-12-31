@@ -1,7 +1,7 @@
-import Ember from 'ember';
+import Route from '@ember/routing/route';
 import { CanMixin } from 'ember-can';
 
-export default Ember.Route.extend(CanMixin, {
+export default Route.extend(CanMixin, {
 
   model() {
     return this.store.findRecord('provider', this.modelFor('providers/show').get('id'));

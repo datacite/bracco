@@ -1,8 +1,9 @@
-import Ember from 'ember';
+import { helper as buildHelper } from '@ember/component/helper';
+import { htmlSafe } from '@ember/template';
 import ENV from 'bracco/config/environment';
 
 export function siteTitle() {
-  return Ember.String.htmlSafe(ENV.SITE_TITLE);
+  return htmlSafe(ENV.SITE_TITLE);
 }
 
-export default Ember.Helper.helper(siteTitle);
+export default buildHelper(siteTitle);

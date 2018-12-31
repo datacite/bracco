@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import { w } from '@ember/string';
 import Component from '@ember/component';
 
 export default Component.extend({
@@ -8,33 +8,33 @@ export default Component.extend({
   hasSchemaOrg: null,
 
   didInsertElement() {
-    if (this.get('model').get("landingPage").status == 200) {
+    if (this.model.get("landingPage").status == 200) {
       let redirectText = "resolved ";
-      if (this.get('model').get("landingPage").redirectCount > 1) {
-        let redirectUrls = this.get('model').get("landingPage").redirectUrls.join(', ')
-        redirectText = "redirected <strong>" + this.get('model').get("landingPage").redirectCount + " </strong> times (" + redirectUrls + "), and resolved to <a href=\"" + this.get('model').get("landingPage").url + "\">" + this.get('model').get("landingPage").url + "</a> ";
-      } else if (this.get('model').get("landingPage").redirectCount > 0) {
-        redirectText = "redirected <strong>once</strong>, and resolved to <a href=\"" + this.get('model').get("landingPage").url + "\">" + this.get('model').get("landingPage").url + "</a> ";
+      if (this.model.get("landingPage").redirectCount > 1) {
+        let redirectUrls = this.model.get("landingPage").redirectUrls.join(', ')
+        redirectText = "redirected <strong>" + this.model.get("landingPage").redirectCount + " </strong> times (" + redirectUrls + "), and resolved to <a href=\"" + this.model.get("landingPage").url + "\">" + this.model.get("landingPage").url + "</a> ";
+      } else if (this.model.get("landingPage").redirectCount > 0) {
+        redirectText = "redirected <strong>once</strong>, and resolved to <a href=\"" + this.model.get("landingPage").url + "\">" + this.model.get("landingPage").url + "</a> ";
       }
       this.set('isFound', {
         text: "The URL resolves properly.",
-        helpText: "The link check " + redirectText + "with HTTP status code <strong>" + this.get('model').get("landingPage").status + "</strong>.",
+        helpText: "The link check " + redirectText + "with HTTP status code <strong>" + this.model.get("landingPage").status + "</strong>.",
         isChecked: true
       })
     } else {
       this.set('isFound', {
         text: "The URL does not resolve properly.",
-        helpText: "The link check returned the HTTP status code <strong>" + this.get('model').get("landingPage").status + "</strong>. This can be a temporal problem and we will repeat the link check.",
+        helpText: "The link check returned the HTTP status code <strong>" + this.model.get("landingPage").status + "</strong>. This can be a temporal problem and we will repeat the link check.",
         isChecked: false
       })
     }
-    let contentType = this.get('model').get("landingPage").contentType;
+    let contentType = this.model.get("landingPage").contentType;
     if (contentType) {
       contentType = contentType.split(';').get('firstObject').trim();
     } else {
       contentType = "unknown";
     }
-    if (Ember.String.w("text/html application/json").includes(contentType)) {     
+    if (w("text/html application/json").includes(contentType)) {     
       this.set('hasLandingPage', {
         text: "The URL resolves to a landing page.",
         helpText: "The link check returned the HTTP content type <strong>" + contentType + "</strong>.",
@@ -47,7 +47,7 @@ export default Component.extend({
         isChecked: false
       })
     }
-    if (this.get('model').get("landingPage").bodyHasPid) {
+    if (this.model.get("landingPage").bodyHasPid) {
       this.set('hasDoi', {
         text: "The landing page includes a machine-readable DOI.",
         helpText: "The link check found the DOI in a <strong>DC.identifier</strong> or <strong>citation_doi</strong> meta tag, or in <strong>schema.org</strong> metadata.",
@@ -60,7 +60,7 @@ export default Component.extend({
         isChecked: false
       })
     }
-    if (this.get('model').get("landingPage").hasSchemaOrg) {
+    if (this.model.get("landingPage").hasSchemaOrg) {
       this.set('hasSchemaOrg', {
         text: "The landing page includes metadata in schema.org format.",
         helpText: "The link check found embedded JSON-LD with @context <strong>\"http://schema.org\"</strong>.",

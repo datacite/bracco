@@ -1,11 +1,11 @@
-import Ember from 'ember';
+import Controller from '@ember/controller';
 
-export default Ember.Controller.extend({
+export default Controller.extend({
 
   actions: {
     submit() {
       let self = this;
-      this.get('store').findRecord("clientPrefix", this.get('model').get('id'), { backgroundReload: false }).then(function(clientPrefix) {
+      this.store.findRecord("clientPrefix", this.model.get('id'), { backgroundReload: false }).then(function(clientPrefix) {
         clientPrefix.destroyRecord().then(function () {
           self.transitionToRoute('clients.show.prefixes', self.get('model.client'));
         });

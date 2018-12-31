@@ -1,13 +1,14 @@
-import Ember from 'ember';
+import { htmlSafe } from '@ember/template';
+import Component from '@ember/component';
 import ENV from 'bracco/config/environment';
 import fetch from 'fetch';
 import isElectron from 'npm:is-electron';
 
-export default Ember.Component.extend({
+export default Component.extend({
   didInsertElement() {
-    if (this.get('default')) {
+    if (this['default']) {
       this.set('type', null);
-      this.set('title', Ember.String.htmlSafe(ENV.SITE_TITLE));
+      this.set('title', htmlSafe(ENV.SITE_TITLE));
     }
 
     this.set('isElectron', isElectron());

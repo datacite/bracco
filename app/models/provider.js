@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import { computed } from '@ember/object';
 import DS from 'ember-data';
 import { validator, buildValidations } from 'ember-cp-validations';
 
@@ -7,8 +7,8 @@ const Validations = buildValidations({
     validator('presence', true),
     validator('unique-provider-id', {
       presence: true,
-      disabled: Ember.computed('model', function() {
-        return !this.get('model').get('isNew');
+      disabled: computed('model', function() {
+        return !this.model.get('isNew');
       })
     }),
     validator('format', {
@@ -23,15 +23,15 @@ const Validations = buildValidations({
   confirmSymbol: [
     validator('presence', {
       presence: true,
-      disabled: Ember.computed('model', function() {
-        return this.get('model').get('isNew');
+      disabled: computed('model', function() {
+        return this.model.get('isNew');
       })
     }),
     validator('confirmation', {
       on: 'symbol',
       message: 'Provider ID does not match',
-      disabled: Ember.computed('model', function() {
-        return this.get('model').get('isNew');
+      disabled: computed('model', function() {
+        return this.model.get('isNew');
       })
     })
   ],
@@ -48,29 +48,29 @@ const Validations = buildValidations({
   passwordInput: [
     validator('presence', {
       presence: true,
-      disabled: Ember.computed('model', function() {
-        return this.get('model').get('keepPassword');
+      disabled: computed('model', function() {
+        return this.model.get('keepPassword');
       })
     }),
     validator('length', {
       min: 8,
-      disabled: Ember.computed('model', function() {
-        return this.get('model').get('keepPassword');
+      disabled: computed('model', function() {
+        return this.model.get('keepPassword');
       })
     })
   ],
   confirmPasswordInput: [
     validator('presence', {
       presence: true,
-      disabled: Ember.computed('model', function() {
-        return this.get('model').get('keepPassword');
+      disabled: computed('model', function() {
+        return this.model.get('keepPassword');
       })
     }),
     validator('confirmation', {
       on: 'passwordInput',
       message: 'Password does not match',
-      disabled: Ember.computed('model', function() {
-        return this.get('model').get('keepPassword');
+      disabled: computed('model', function() {
+        return this.model.get('keepPassword');
       })
     })
   ],
@@ -106,36 +106,36 @@ export default DS.Model.extend(Validations, {
   created: DS.attr('date'),
   updated: DS.attr('date'),
 
-  uid: Ember.computed('id', function() {
-    return this.get('id').toUpperCase();
+  uid: computed('id', function() {
+    return this.id.toUpperCase();
   }),
-  doiCount: Ember.computed('meta.dois', function() {
+  doiCount: computed('meta.dois', function() {
     return this.get('meta.dois');
   }),
-  currentDoiCount: Ember.computed('doiCount', function() {
-    let currentYear = this.get('doiCount').findBy('id', 2018);
+  currentDoiCount: computed('doiCount', function() {
+    let currentYear = this.doiCount.findBy('id', 2018);
     if (currentYear) {
       return currentYear.count;
     } else {
       return 0;
     }
   }),
-  clientCount: Ember.computed('meta.clients', function() {
+  clientCount: computed('meta.clients', function() {
     return this.get('meta.clients');
   }),
-  currentClientCount: Ember.computed('clientCount', function() {
-    let currentYear = this.get('clientCount').get('lastObject');
+  currentClientCount: computed('clientCount', function() {
+    let currentYear = this.clientCount.get('lastObject');
     if (currentYear) {
       return currentYear.count;
     } else {
       return 0;
     }
   }),
-  providerCount: Ember.computed('meta', function() {
+  providerCount: computed('meta', function() {
     return this.get('meta.providers');
   }),
-  currentProviderCount: Ember.computed('providerCount', function() {
-    let currentYear = this.get('providerCount').get('lastObject');
+  currentProviderCount: computed('providerCount', function() {
+    let currentYear = this.providerCount.get('lastObject');
     if (currentYear) {
       return currentYear.count;
     } else {

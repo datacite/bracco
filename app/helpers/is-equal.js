@@ -1,7 +1,7 @@
-import Ember from "ember";
+import { helper as buildHelper } from '@ember/component/helper';
 
 export function isEqual([leftSide, rightSide]) {
   return leftSide === rightSide;
 }
 
-export default Ember.Helper.helper(isEqual);
+export default buildHelper(isEqual);

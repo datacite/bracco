@@ -1,3 +1,5 @@
+import { inject as service } from '@ember/service';
+import Component from '@ember/component';
 import Ember from 'ember';
 const softwareList = [
   'CKAN',
@@ -13,8 +15,8 @@ const softwareList = [
   'Other'
 ]
 
-export default Ember.Component.extend({
-  store: Ember.inject.service(),
+export default Component.extend({
+  store: service(),
 
   tagName: 'div',
   classNames: ['row'],
@@ -28,7 +30,7 @@ export default Ember.Component.extend({
   selectRepository(repository) {
     if (repository) {
       let self = this;
-      this.get('store').findRecord('repository', repository.id).then(function(repo) {
+      this.store.findRecord('repository', repository.id).then(function(repo) {
         self.set('repository', repo)
         self.get('client').set('repository', repo);
         self.get('client').set('name', repo.get('repositoryName'));
@@ -43,7 +45,7 @@ export default Ember.Component.extend({
         }
       });
     } else {
-      this.get('client').set('repository', null);
+      this.client.set('repository', null);
     }
   },
   searchSoftware(query) {
@@ -53,7 +55,7 @@ export default Ember.Component.extend({
     this.set('softwares', softwares);
   },
   selectSoftware(software) {
-    this.get('client').set('software', software);
+    this.client.set('software', software);
     this.set('softwares', softwareList);
   },
   reset() {
@@ -63,12 +65,12 @@ export default Ember.Component.extend({
 
   actions: {
     new(model) {
-      let provider = this.get('store').peekRecord('provider', model.get('otherParams.provider-id'));
-      this.set('client', this.get('store').createRecord('client', { provider: provider, symbol: provider.id.toUpperCase() + '.' }));
+      let provider = this.store.peekRecord('provider', model.get('otherParams.provider-id'));
+      this.set('client', this.store.createRecord('client', { provider: provider, symbol: provider.id.toUpperCase() + '.' }));
       this.set('new', true);
     },
     searchRepository(query) {
-      this.set('repositories', this.get('store').query('repository', { 'query': query, 'page[size]': 25 }));
+      this.set('repositories', this.store.query('repository', { 'query': query, 'page[size]': 25 }));
     },
     selectRepository(repository) {
       this.selectRepository(repository);
@@ -83,7 +85,7 @@ export default Ember.Component.extend({
       });
     },
     cancel() {
-      this.get('client').rollbackAttributes();
+      this.client.rollbackAttributes();
       this.reset();
     },
     searchSoftware(query) {

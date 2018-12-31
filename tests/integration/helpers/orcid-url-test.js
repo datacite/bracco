@@ -1,13 +1,15 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render, find } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import ENV from 'bracco/config/environment';
 
-moduleForComponent('orcid-url', 'helper:orcid-url', {
-  integration: true
-});
+module('helper:orcid-url', function(hooks) {
+  setupRenderingTest(hooks);
 
-test('it renders', function(assert) {
-  this.render(hbs`{{orcid-url}}`);
+  test('it renders', async function(assert) {
+    await render(hbs`{{orcid-url}}`);
 
-  assert.equal(this.$().text(), ENV.ORCID_URL);
+    assert.dom('*').hasText(ENV.ORCID_URL);
+  });
 });

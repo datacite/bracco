@@ -1,7 +1,10 @@
-import Ember from 'ember';
-const { service } = Ember.inject;
+import { next } from '@ember/runloop';
+import { observer } from '@ember/object';
+import { alias } from '@ember/object/computed';
+import Controller from '@ember/controller';
+import { inject as service } from '@ember/service';
 
-export default Ember.Controller.extend({
+export default Controller.extend({
   session: service(),
 
   queryParams: ['jwt'],
@@ -9,13 +12,13 @@ export default Ember.Controller.extend({
 
   // binding the property on the paged array
   // to the query params on the controller
-  page: Ember.computed.alias("content.page[number]"),
-  perPage: Ember.computed.alias("content.page[size]"),
-  total_pages: Ember.computed.alias("content.total-pages"),
+  page: alias("content.page[number]"),
+  perPage: alias("content.page[size]"),
+  total_pages: alias("content.total-pages"),
 
   actions: {
     invalidateSession() {
-      this.get('session').invalidate();
+      this.session.invalidate();
     }
   }
 });
@@ -23,9 +26,9 @@ export default Ember.Controller.extend({
 import ApplicationController from './application';
 
 ApplicationController.reopen({
-  unsetToken: Ember.observer('jwt', function() {
-    if (this.get('jwt')) {
-      Ember.run.next(this, function() {
+  unsetToken: observer('jwt', function() {
+    if (this.jwt) {
+      next(this, function() {
         this.set('jwt', null);
       });
     }

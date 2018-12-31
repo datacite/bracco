@@ -1,9 +1,10 @@
-import Ember from 'ember';
-const { inject: { service }, isEmpty } = Ember;
+import { resolve } from 'rsvp';
+import Service, { inject as service } from '@ember/service';
+import { isEmpty } from '@ember/utils';
 import NodeJsonWebToken from 'npm:jsonwebtoken';
 import ENV from 'bracco/config/environment';
 
-export default Ember.Service.extend({
+export default Service.extend({
   session: service(),
   store: service(),
   flashMessages: service(),
@@ -42,7 +43,7 @@ export default Ember.Service.extend({
         }
       });
     }
-    return Ember.RSVP.resolve();
+    return resolve();
   },
 
   initUser(payload) {
@@ -61,18 +62,18 @@ export default Ember.Service.extend({
         this.set('settings', { route: 'settings' });
       } else if (payload.role_id === 'provider_admin') {
         this.set('isProvider', true);
-        this.set('home', { route: 'providers.show', id: this.get('uid') });
-        this.set('settings', { route: 'providers.show.settings', id: this.get('uid') });
+        this.set('home', { route: 'providers.show', id: this.uid });
+        this.set('settings', { route: 'providers.show.settings', id: this.uid });
       } else if (payload.role_id === 'client_admin') {
         this.set('isClient', true);
-        this.set('home', { route: 'clients.show', id: this.get('uid') });
-        this.set('settings', { route: 'clients.show.settings', id: this.get('uid') });
+        this.set('home', { route: 'clients.show', id: this.uid });
+        this.set('settings', { route: 'clients.show.settings', id: this.uid });
       } else if (payload.role_id === 'user') {
         this.set('home', 'password');
       }
 
       if (payload.role_id !== 'user') {
-        this.get('flashMessages').info('Welcome ' + this.get('name') + ' to the DOI Fabrica administration area.');
+        this.flashMessages.info('Welcome ' + this.name + ' to the DOI Fabrica administration area.');
       }
 
       // setup features for ember-feature-flags

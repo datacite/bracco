@@ -1,8 +1,10 @@
-import Ember from 'ember';
+import { hash } from 'rsvp';
+import { merge } from '@ember/polyfills';
+import Route from '@ember/routing/route';
 import RouteMixin from 'ember-cli-pagination/remote/route-mixin';
 import { CanMixin } from 'ember-can';
 
-export default Ember.Route.extend(CanMixin, RouteMixin, {
+export default Route.extend(CanMixin, RouteMixin, {
   perPage: 25,
 
   model(params) {
@@ -10,9 +12,9 @@ export default Ember.Route.extend(CanMixin, RouteMixin, {
                             perPage: "page[size]",
                             total_pages: "totalPages" };
 
-    params = Ember.merge(params, { 'provider-id': this.modelFor('providers/show').get('id') });
+    params = merge(params, { 'provider-id': this.modelFor('providers/show').get('id') });
 
-    return Ember.RSVP.hash({
+    return hash({
       provider: this.modelFor('providers/show'),
       prefixes: this.findPaged('provider-prefix', params)
     });

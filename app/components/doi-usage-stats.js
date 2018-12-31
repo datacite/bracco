@@ -1,10 +1,11 @@
+import Component from '@ember/component';
+import { inject as service } from '@ember/service';
 import Ember from 'ember';
 import fetch from 'fetch';
-const { service } = Ember.inject;
 import { oneWay } from '@ember/object/computed';
 import ENV from 'bracco/config/environment';
-  
-export default Ember.Component.extend({
+
+export default Component.extend({
   currentUser: service(),
 
   usageViews: null,
@@ -18,10 +19,10 @@ export default Ember.Component.extend({
 
   fetchUsage() {
     let self = this;
-    let url = ENV.EVENTDATA_URL + '/events?doi=' + this.get('model').get("doi");
+    let url = ENV.EVENTDATA_URL + '/events?doi=' + this.model.get("doi");
     fetch(url, {
       headers: {
-        'Authorization': 'Bearer ' + this.get('currentUser').get('jwt'),
+        'Authorization': 'Bearer ' + this.currentUser.get('jwt'),
         'Accept': 'application/vnd.api+json'
       }
     }).then(function(response) {

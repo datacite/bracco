@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import { union } from '@ember/object/computed';
 import DS from 'ember-data';
 import { validator, buildValidations } from 'ember-cp-validations';
 
@@ -27,5 +27,5 @@ export default DS.Model.extend(Validations, {
   updated: DS.attr('date'),
 
   // combine subject areas and keywords
-  tags: Ember.computed.union('subjects', 'keywords'),
+  tags: union('subjects', 'keywords'),
 });

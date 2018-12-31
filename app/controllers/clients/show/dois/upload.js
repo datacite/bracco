@@ -1,6 +1,7 @@
+import Controller from '@ember/controller';
 import Ember from 'ember';
 
-export default Ember.Controller.extend({
+export default Controller.extend({
   setEvent(state) {
     if (state === 'registered') {
       return 'register';

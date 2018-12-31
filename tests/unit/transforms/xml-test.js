@@ -1,12 +1,12 @@
-import { moduleFor, test } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupTest } from 'ember-qunit';
 
-moduleFor('transform:xml', 'Unit | Transform | xml', {
-  // Specify the other units that are required for this test.
-  // needs: ['serializer:foo']
-});
+module('Unit | Transform | xml', function(hooks) {
+  setupTest(hooks);
 
-// Replace this with your real tests.
-test('it exists', function(assert) {
-  let transform = this.subject();
-  assert.ok(transform);
+  // Replace this with your real tests.
+  test('it exists', function(assert) {
+    let transform = this.owner.lookup('transform:xml');
+    assert.ok(transform);
+  });
 });

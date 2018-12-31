@@ -1,15 +1,17 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render, find } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('format-metadata', 'helper:format-metadata', {
-  integration: true
-});
+module('helper:format-metadata', function(hooks) {
+  setupRenderingTest(hooks);
 
-// Replace this with your real tests.
-test('it renders', function(assert) {
-  this.set('inputValue', '1234');
+  // Replace this with your real tests.
+  test('it renders', async function(assert) {
+    this.set('inputValue', '1234');
 
-  this.render(hbs`{{format-metadata inputValue}}`);
+    await render(hbs`{{format-metadata inputValue}}`);
 
-  assert.equal(this.$().text().trim(), 'published 1234');
+    assert.dom('*').hasText('published 1234');
+  });
 });

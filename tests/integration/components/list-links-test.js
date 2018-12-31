@@ -1,13 +1,15 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render, find } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('list-links', 'Integration | Component | list-links', {
-  integration: true
-});
+module('Integration | Component | list-links', function(hooks) {
+  setupRenderingTest(hooks);
 
-test('it renders', function(assert) {
-  this.set('listLinks', [{ url: "http://example.com", name: "Example" }]);
+  test('it renders', async function(assert) {
+    this.set('listLinks', [{ url: "http://example.com", name: "Example" }]);
 
-  this.render(hbs`{{list-links links=listLinks}}`);
-  assert.ok(/^Example+/.test(this.$().text().trim()), 'begins with "Example"');
+    await render(hbs`{{list-links links=listLinks}}`);
+    assert.ok(/^Example+/.test(find('*').textContent.trim()), 'begins with "Example"');
+  });
 });

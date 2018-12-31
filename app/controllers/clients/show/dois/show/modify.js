@@ -1,7 +1,7 @@
-import Ember from 'ember';
-const { service } = Ember.inject;
+import Controller from '@ember/controller';
+import { inject as service } from '@ember/service';
 
-export default Ember.Controller.extend({
+export default Controller.extend({
   store: service(),
 
   setEvent(stateChange) {
@@ -40,8 +40,8 @@ export default Ember.Controller.extend({
       });
     },
     cancel() {
-      this.get('model').rollbackAttributes();
-      this.transitionToRoute('clients.show.dois.show', this.get('model').get('client.id'), this.get('model'));
+      this.model.rollbackAttributes();
+      this.transitionToRoute('clients.show.dois.show', this.model.get('client.id'), this.model);
     }
   }
 });

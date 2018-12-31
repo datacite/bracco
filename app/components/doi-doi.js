@@ -1,6 +1,6 @@
+import { inject as service } from '@ember/service';
 import Ember from 'ember';
 import Component from '@ember/component';
-const { service } = Ember.inject;
 import ENV from 'bracco/config/environment';
 import fetch from 'fetch';
 
@@ -31,7 +31,7 @@ export default Component.extend({
 
   setDefaultPrefix() {
     let self = this;
-    this.get('store').query('prefix', { 'client-id': this.get('client').get('id'), sort: 'name', 'page[size]': 25 }).then(function(prefixes) {
+    this.store.query('prefix', { 'client-id': this.client.get('id'), sort: 'name', 'page[size]': 25 }).then(function(prefixes) {
       self.set('prefixes', prefixes);
 
       // use first prefix that is not 10.5072 if it exists
@@ -44,10 +44,10 @@ export default Component.extend({
   },
   generate() {
     let self = this;
-    let url = ENV.API_URL + '/dois/random?prefix=' + this.get('model').get('prefix');
+    let url = ENV.API_URL + '/dois/random?prefix=' + this.model.get('prefix');
     return fetch(url, {
       headers: {
-        'Authorization': 'Bearer ' + this.get('currentUser').get('jwt')
+        'Authorization': 'Bearer ' + this.currentUser.get('jwt')
       }
     }).then(function(response) {
       if (response.ok) {
@@ -69,7 +69,7 @@ export default Component.extend({
   },
   selectState(state) {
     this.set('state', state);
-    this.get('model').set('state', state);
+    this.model.set('state', state);
     this.setStates(state)
   },
   setStates(state) {
@@ -78,7 +78,7 @@ export default Component.extend({
     }
     let states = [];
     // demo prefix uses only draft state
-    if (this.get('model').get('prefix') === '10.5072') {
+    if (this.model.get('prefix') === '10.5072') {
       states = ['draft'];
       this.set('registered', true);
       this.set('findable', true);
@@ -92,17 +92,17 @@ export default Component.extend({
 
   actions: {
     selectPrefix(prefix) {
-      this.get('model').set('prefix', prefix.id);
-      this.get('model').set('doi', prefix.id + '/' + this.get('model').get('suffix'));
+      this.model.set('prefix', prefix.id);
+      this.model.set('doi', prefix.id + '/' + this.model.get('suffix'));
       
       if (prefix.id === '10.5072') {
-        this.get('model').set('state', 'draft');
+        this.model.set('state', 'draft');
       }
-      this.selectState(this.get('model').get('state'));
+      this.selectState(this.model.get('state'));
     },
     selectSuffix(suffix) {
-      this.get('model').set('suffix', suffix);
-      this.get('model').set('doi', this.get('model').get('prefix') + '/' + suffix);
+      this.model.set('suffix', suffix);
+      this.model.set('doi', this.model.get('prefix') + '/' + suffix);
     },
     generate() {
       this.generate();
@@ -111,7 +111,7 @@ export default Component.extend({
       this.generate();
     },
     clear() {
-      this.get('model').set('suffix', null)
+      this.model.set('suffix', null)
       this.$('input[type=text]:first').focus();
     },
     selectState(state) {

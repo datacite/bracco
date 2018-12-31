@@ -1,6 +1,7 @@
+import Component from '@ember/component';
+import { inject as service } from '@ember/service';
 import Ember from 'ember';
 import fetch from 'fetch';
-const { service } = Ember.inject;
 import ENV from 'bracco/config/environment';
 const softwareList = [
   'CKAN',
@@ -15,7 +16,7 @@ const softwareList = [
   'Other'
 ]
 
-export default Ember.Component.extend({
+export default Component.extend({
   currentUser: service(),
   store: service(),
 
@@ -31,7 +32,7 @@ export default Ember.Component.extend({
   softwares: softwareList,
 
   reset() {
-    this.get('client').set('passwordInput', null);
+    this.client.set('passwordInput', null);
     this.set('edit', false);
     this.set('change', false);
     this.set('delete', false);
@@ -41,7 +42,7 @@ export default Ember.Component.extend({
     let url = ENV.API_URL + '/random';
     fetch(url, {
       headers: {
-        'Authorization': 'Bearer ' + this.get('currentUser').get('jwt')
+        'Authorization': 'Bearer ' + this.currentUser.get('jwt')
       }
     }).then(function(response) {
       if (response.ok) {
@@ -58,7 +59,7 @@ export default Ember.Component.extend({
   selectRepository(repository) {
     if (repository) {
       let self = this;
-      this.get('store').findRecord('repository', repository.id).then(function(repo) {
+      this.store.findRecord('repository', repository.id).then(function(repo) {
         self.set('repository', repo)
         self.get('client').set('repository', repo);
         self.get('client').set('name', repo.get('repositoryName'));
@@ -73,7 +74,7 @@ export default Ember.Component.extend({
         }
       });
     } else {
-      this.get('client').set('repository', null);
+      this.client.set('repository', null);
     }
   },
   searchSoftware(query) {
@@ -83,20 +84,20 @@ export default Ember.Component.extend({
     this.set('softwares', softwares);
   },
   selectSoftware(software) {
-    this.get('client').set('software', software);
+    this.client.set('software', software);
     this.set('softwares', softwareList);
   },
 
   actions: {
     edit(client) {
       this.set('client', client);
-      this.get('client').set('confirmSymbol', client.get('symbol'));
+      this.client.set('confirmSymbol', client.get('symbol'));
       this.set('repository', client.get('repository'));
       this.set('edit', true);
     },
     change(client) {
       this.set('client', client);
-      this.get('client').set('confirmSymbol', client.get('symbol'));
+      this.client.set('confirmSymbol', client.get('symbol'));
       this.set('change', true);
     },
     generate() {
@@ -104,22 +105,22 @@ export default Ember.Component.extend({
     },
     delete(client) {
       this.set('client', client);
-      this.get('client').set('confirmSymbol', null);
-      this.get('client').validateSync();
+      this.client.set('confirmSymbol', null);
+      this.client.validateSync();
       this.set('provider', client.get('provider'));
       this.set('delete', true);
     },
     setPassword() {
       let self = this;
-      this.get('client').set('keepPassword', false);
-      this.get('client').save().then(function () {
+      this.client.set('keepPassword', false);
+      this.client.save().then(function () {
         self.reset();
       }).catch(function(reason){
         Ember.Logger.assert(false, reason);
       });
     },
     searchRepository(query) {
-      this.set('repositories', this.get('store').query('repository', { 'query': query, 'page[size]': 25 }));
+      this.set('repositories', this.store.query('repository', { 'query': query, 'page[size]': 25 }));
     },
     selectRepository(repository) {
       this.selectRepository(repository);
@@ -134,7 +135,7 @@ export default Ember.Component.extend({
     },
     destroy(client) {
       let self = this;
-      this.get('store').findRecord("client", client.id, { backgroundReload: false }).then(function(client) {
+      this.store.findRecord("client", client.id, { backgroundReload: false }).then(function(client) {
         client.destroyRecord().then(function () {
           self.get('router').transitionTo('providers.show.settings', self.get('provider'));
         });
@@ -151,7 +152,7 @@ export default Ember.Component.extend({
     //   }
     // },
     cancel() {
-      this.get('model').rollbackAttributes();
+      this.model.rollbackAttributes();
       this.reset();
     },
     onSuccess() {

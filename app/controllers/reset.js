@@ -1,9 +1,10 @@
+import Controller from '@ember/controller';
+import { inject as service } from '@ember/service';
 import Ember from 'ember';
 import fetch from 'fetch';
-const { service } = Ember.inject;
 import ENV from 'bracco/config/environment';
 
-export default Ember.Controller.extend({
+export default Controller.extend({
   session: service(),
 
   requestSent: false,
@@ -12,7 +13,7 @@ export default Ember.Controller.extend({
   actions: {
     sendLink() {
       this.set('requestSent', false);
-      let { identification } = this.getProperties('identification');
+      let { identification } = this;
       let self = this;
       let url = ENV.API_URL + '/reset';
       

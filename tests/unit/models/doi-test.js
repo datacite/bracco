@@ -1,11 +1,14 @@
-import { moduleForModel, test } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupTest } from 'ember-qunit';
 
-moduleForModel('doi', 'Unit | Model | doi', {
-  needs: ['model:client', 'validator:presence', 'validator:confirmation', 'validator:belongs-to', 'validator:format', 'validator:unique-doi', 'validator:date', 'validator:metadata']
-});
+import { run } from '@ember/runloop';
 
-test('it exists', function(assert) {
-  let model = this.subject();
-  // let store = this.store();
-  assert.ok(!!model);
+module('Unit | Model | doi', function(hooks) {
+  setupTest(hooks);
+
+  test('it exists', function(assert) {
+    let model = run(() => this.owner.lookup('service:store').createRecord('doi'));
+    // let store = this.store();
+    assert.ok(!!model);
+  });
 });

@@ -1,9 +1,10 @@
-import Ember from 'ember';
+import { inject as service } from '@ember/service';
+import Route from '@ember/routing/route';
 import RouteMixin from 'ember-cli-pagination/remote/route-mixin';
 import { CanMixin } from 'ember-can';
 
-export default Ember.Route.extend(CanMixin, RouteMixin, {
-  flashMessages: Ember.inject.service(),
+export default Route.extend(CanMixin, RouteMixin, {
+  flashMessages: service(),
 
   perPage: 25,
 

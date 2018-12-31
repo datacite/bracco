@@ -1,8 +1,9 @@
-import Ember from 'ember';
+import { helper as buildHelper } from '@ember/component/helper';
+import { htmlSafe } from '@ember/template';
 import ENV from 'bracco/config/environment';
 
 export function searchURL() {
-  return Ember.String.htmlSafe(ENV.SEARCH_URL);
+  return htmlSafe(ENV.SEARCH_URL);
 }
 
-export default Ember.Helper.helper(searchURL);
+export default buildHelper(searchURL);

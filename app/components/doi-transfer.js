@@ -1,6 +1,5 @@
+import { inject as service } from '@ember/service';
 import Component from '@ember/component';
-import Ember from 'ember';
-const { service } = Ember.inject;
 
 export default Component.extend({
   currentUser: service(),
@@ -13,22 +12,22 @@ export default Component.extend({
   didReceiveAttrs() {
     this._super(...arguments);
 
-    this.get('model').set('mode', 'transfer');
+    this.model.set('mode', 'transfer');
 
     this.searchClient(null);
   },
 
   searchClient(query) {
-    if (this.get('currentUser').get('isAdmin')) {
-      this.set('clients', this.get('store').query('client', { 'query': query, sort: 'name', 'page[size]': 100 }));
-    } else if (this.get('currentUser').get('isProvider')) {
-      this.set('clients', this.get('store').query('client', { 'query': query, 'provider-id': this.get('currentUser').get('provider_id'), sort: 'name', 'page[size]': 100 }));
+    if (this.currentUser.get('isAdmin')) {
+      this.set('clients', this.store.query('client', { 'query': query, sort: 'name', 'page[size]': 100 }));
+    } else if (this.currentUser.get('isProvider')) {
+      this.set('clients', this.store.query('client', { 'query': query, 'provider-id': this.currentUser.get('provider_id'), sort: 'name', 'page[size]': 100 }));
     }
   },
   selectClient(client) {
-    this.set('oldClient', this.get('model').get('client'));
-    this.get('model').set('client', client);
-    this.get('model').set('provider', client.get('provider'));
+    this.set('oldClient', this.model.get('client'));
+    this.model.set('client', client);
+    this.model.set('provider', client.get('provider'));
 
     this.set('isDisabled', client.id === this.get('oldClient.id'));
   },
@@ -47,7 +46,7 @@ export default Component.extend({
       });
     },
     cancel() {
-      this.get('router').transitionTo('clients.show.dois.show', this.get('model').get('client').get('id'), this.get('model'));
+      this.router.transitionTo('clients.show.dois.show', this.model.get('client').get('id'), this.model);
     }
   }
 });

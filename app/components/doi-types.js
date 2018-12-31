@@ -27,7 +27,7 @@ export default Component.extend({
     })
   },
   selectResourceTypeGeneral(resourceTypeGeneral) {
-    this.get('model').set('types', { 'resourceTypeGeneral': resourceTypeGeneral });
+    this.model.set('types', { 'resourceTypeGeneral': resourceTypeGeneral });
     this.set('resourceTypesGeneral', resourceTypeGeneralList);
   },
 

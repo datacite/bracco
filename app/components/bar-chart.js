@@ -1,13 +1,15 @@
-import Ember from 'ember';
+import { schedule, run } from '@ember/runloop';
+import { computed } from '@ember/object';
+import Component from '@ember/component';
 import d3 from "npm:d3";
 
-export default Ember.Component.extend({
+export default Component.extend({
   tagName: 'div',
   classNames: ['col-lg-3', 'col-md-4'],
   data: null,
-  count: Ember.computed('data', function() {
-    if (this.get('data')) {
-      let currentYear = this.get('data').findBy('id', '2018');
+  count: computed('data', function() {
+    if (this.data) {
+      let currentYear = this.data.findBy('id', '2018');
       if (currentYear) {
         return currentYear.count;
       } else {
@@ -18,15 +20,15 @@ export default Ember.Component.extend({
     }
   }),
   label: 'Chart',
-  chartId: Ember.computed('label', function() {
-    return 'chart-' + this.get('label').toLowerCase();
+  chartId: computed('label', function() {
+    return 'chart-' + this.label.toLowerCase();
   }),
   cumulative: true,
 
   init() {
     this._super();
 
-    Ember.run.schedule("afterRender", this, function() {
+    schedule("afterRender", this, function() {
       this.send("barChart");
     });
   },
@@ -34,7 +36,7 @@ export default Ember.Component.extend({
   didReceiveAttrs() {
     this._super(...arguments);
 
-    Ember.run(() => {
+    run(() => {
       this.send("barChart");
     });
   },
@@ -43,8 +45,8 @@ export default Ember.Component.extend({
     let formatYear = d3.time.format.utc("%Y");
     let formatFixed = d3.format(",.0f");
 
-    let chartId = this.get('chartId');
-    let data = (this.get('data')) ? this.get('data') : [];
+    let chartId = this.chartId;
+    let data = (this.data) ? this.data : [];
 
     let height = 100;
     let margin = { top: 10, right: 5, bottom: 20, left: 5 };

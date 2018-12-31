@@ -1,7 +1,9 @@
-import Ember from 'ember';
-const { service } = Ember.inject;
+import { typeOf } from '@ember/utils';
+import { computed } from '@ember/object';
+import Component from '@ember/component';
+import { inject as service } from '@ember/service';
 
-export default Ember.Component.extend({
+export default Component.extend({
   session: service(),
   currentUser: service(),
 
@@ -9,18 +11,18 @@ export default Ember.Component.extend({
 
   tagName: 'li',
   classNameBindings: ['dropdownMenu'],
-  dropdownMenu: Ember.computed(function() {
-    this.get('session').get('isAuthenticated');
+  dropdownMenu: computed(function() {
+    this.session.get('isAuthenticated');
   }),
 
   actions: {
     invalidateSession() {
-      this.get('session').invalidate();
+      this.session.invalidate();
     }
   },
   didInsertElement() {
-    let settings = this.get('currentUser').get('settings');
-    if (Ember.typeOf(settings) == 'object') {
+    let settings = this.currentUser.get('settings');
+    if (typeOf(settings) == 'object') {
       this.set('settings', { route: settings.route, model: settings.id });
     } else if (settings) {
       this.set('settings', { href: settings });

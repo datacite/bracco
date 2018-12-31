@@ -1,6 +1,5 @@
-import Ember from 'ember';
+import { inject as service } from '@ember/service';
 import Component from '@ember/component';
-const { service } = Ember.inject;
 
 export default Component.extend({
   store: service(),
@@ -12,7 +11,7 @@ export default Component.extend({
 
     let providerId = this.get('model.client.id').split('.').get('firstObject');
     let self = this;
-    this.get('store').query('prefix', { 'provider-id': providerId, state: 'without-client' }).then(function(availablePrefixes) {
+    this.store.query('prefix', { 'provider-id': providerId, state: 'without-client' }).then(function(availablePrefixes) {
       self.set('prefixesAvailable', availablePrefixes.get('meta').total > 0);
     });
   },

@@ -1,11 +1,12 @@
-import Ember from 'ember';
+import { hash } from 'rsvp';
+import Route from '@ember/routing/route';
 import RouteMixin from 'ember-cli-pagination/remote/route-mixin';
 import { CanMixin } from 'ember-can';
 
-export default Ember.Route.extend(CanMixin, RouteMixin, {
+export default Route.extend(CanMixin, RouteMixin, {
 
   model() {
-    return Ember.RSVP.hash({
+    return hash({
       client: this.store.findRecord('client', this.modelFor('clients/show').get('id')),
       prefix: this.store.createRecord('client-prefix', { client: this.modelFor('clients/show').get('id') })
     });

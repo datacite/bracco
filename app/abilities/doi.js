@@ -1,11 +1,11 @@
-import Ember from 'ember';
-const { service } = Ember.inject;
+import { computed } from '@ember/object';
+import { inject as service } from '@ember/service';
 import { Ability } from 'ember-can';
 
 export default Ability.extend({
   currentUser: service(),
 
-  canViewHealth: Ember.computed('currentUser.role_id', function() {
+  canViewHealth: computed('currentUser.role_id', function() {
     switch(this.get('currentUser.role_id')) {
       case 'staff_admin':
       case 'provider_admin':
@@ -14,7 +14,7 @@ export default Ability.extend({
         return false;
     }
   }),
-  canSource: Ember.computed('currentUser.role_id', function() {
+  canSource: computed('currentUser.role_id', function() {
     switch(this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
@@ -22,7 +22,7 @@ export default Ability.extend({
         return false;
     }
   }),
-  canTransfer: Ember.computed('currentUser.role_id', function() {
+  canTransfer: computed('currentUser.role_id', function() {
     switch(this.get('currentUser.role_id')) {
       case 'staff_admin':
       case 'provider_admin':
@@ -31,7 +31,7 @@ export default Ability.extend({
         return false;
     }
   }),
-  canUpdate: Ember.computed('currentUser.role_id', 'model.id', function() {
+  canUpdate: computed('currentUser.role_id', 'model.id', function() {
     switch(this.get('currentUser.role_id')) {
       case 'staff_admin':
       case 'provider_admin':
@@ -42,7 +42,7 @@ export default Ability.extend({
         return false;
     }
   }),
-  canUpload: Ember.computed('currentUser.role_id', 'currentUser.client_id', 'model.otherParams.client-id', function() {
+  canUpload: computed('currentUser.role_id', 'currentUser.client_id', 'model.otherParams.client-id', function() {
     switch(this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
@@ -52,7 +52,7 @@ export default Ability.extend({
         return false;
     }
   }),
-  canCreate: Ember.computed('currentUser.role_id', 'currentUser.client_id', 'model.otherParams.client-id', function() {
+  canCreate: computed('currentUser.role_id', 'currentUser.client_id', 'model.otherParams.client-id', function() {
     switch(this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
@@ -62,7 +62,7 @@ export default Ability.extend({
         return false;
     }
   }),
-  canDelete: Ember.computed('currentUser.role_id', 'model.client.id', function() {
+  canDelete: computed('currentUser.role_id', 'model.client.id', function() {
     switch(this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
@@ -72,7 +72,7 @@ export default Ability.extend({
         return false;
     }
   }),
-  canModify: Ember.computed('currentUser.role_id', 'currentUser.client_id', 'model.client.id', function() {
+  canModify: computed('currentUser.role_id', 'currentUser.client_id', 'model.client.id', function() {
     switch(this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
@@ -82,7 +82,7 @@ export default Ability.extend({
         return false;
     }
   }),
-  canEdit: Ember.computed('currentUser.role_id', 'currentUser.client_id', 'model.client.id', function() {
+  canEdit: computed('currentUser.role_id', 'currentUser.client_id', 'model.client.id', function() {
     switch(this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
@@ -92,7 +92,7 @@ export default Ability.extend({
         return false;
     }
   }),
-  canForm: Ember.computed('currentUser.role_id', 'currentUser.client_id', 'model.client.id', function() {
+  canForm: computed('currentUser.role_id', 'currentUser.client_id', 'model.client.id', function() {
     switch(this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
@@ -102,7 +102,7 @@ export default Ability.extend({
         return false;
     }
   }),
-  canRead: Ember.computed('currentUser.role_id', 'currentUser.provider_id', 'currentUser.client_id', 'model.client.id', 'model.provider.id', function() {
+  canRead: computed('currentUser.role_id', 'currentUser.provider_id', 'currentUser.client_id', 'model.client.id', 'model.provider.id', function() {
     switch(this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;

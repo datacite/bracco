@@ -1,8 +1,9 @@
+import Component from '@ember/component';
+import { inject as service } from '@ember/service';
 import Ember from 'ember';
 import { validator, buildValidations } from 'ember-cp-validations';
 import fetch from 'fetch';
 import countryList from 'npm:iso-3166-country-list';
-const { service } = Ember.inject;
 import ENV from 'bracco/config/environment';
 const organizationTypeList = [
   'academicInstitution',
@@ -33,7 +34,7 @@ const Validations = buildValidations({
   })
 });
 
-export default Ember.Component.extend(Validations, {
+export default Component.extend(Validations, {
   currentUser: service(),
   store: service(),
 
@@ -50,7 +51,7 @@ export default Ember.Component.extend(Validations, {
   focusAreas: focusAreaList,
 
   reset() {
-    this.get('provider').set('passwordInput', null);
+    this.provider.set('passwordInput', null);
     this.set('edit', false);
     this.set('change', false);
     this.set('delete', false);
@@ -60,7 +61,7 @@ export default Ember.Component.extend(Validations, {
     let url = ENV.API_URL + '/random';
     fetch(url, {
       headers: {
-        'Authorization': 'Bearer ' + this.get('currentUser').get('jwt')
+        'Authorization': 'Bearer ' + this.currentUser.get('jwt')
       }
     }).then(function(response) {
       if (response.ok) {
@@ -81,7 +82,7 @@ export default Ember.Component.extend(Validations, {
     this.set('countries', countries);
   },
   selectCountry(country) {
-    this.get('provider').set('country', country);
+    this.provider.set('country', country);
     this.set('countries', countryList);
   },
   searchOrganizationType(query) {
@@ -91,7 +92,7 @@ export default Ember.Component.extend(Validations, {
     this.set('organizationTypes', organizationTypes);
   },
   selectOrganizationType(organizationType) {
-    this.get('provider').set('organizationType', organizationType);
+    this.provider.set('organizationType', organizationType);
     this.set('organizationTypes', organizationTypeList);
   },
   searchFocusArea(query) {
@@ -101,21 +102,21 @@ export default Ember.Component.extend(Validations, {
     this.set('focusAreas', focusAreas);
   },
   selectFocusArea(focusArea) {
-    this.get('provider').set('focusArea', focusArea);
+    this.provider.set('focusArea', focusArea);
     this.set('focusAreas', focusAreaList);
   },
 
   actions: {
     edit(provider) {
       this.set('provider', provider);
-      this.get('provider').set('confirmSymbol', provider.get('symbol'));
+      this.provider.set('confirmSymbol', provider.get('symbol'));
       this.set('countries', countryList);
       this.set('edit', true);
     },
     change(provider) {
       this.set('provider', provider);
-      this.get('provider').set('confirmSymbol', provider.get('symbol'));
-      this.get('provider').set('passwordInput', null);
+      this.provider.set('confirmSymbol', provider.get('symbol'));
+      this.provider.set('passwordInput', null);
       this.set('change', true);
     },
     generate() {
@@ -123,13 +124,13 @@ export default Ember.Component.extend(Validations, {
     },
     delete(provider) {
       this.set('provider', provider);
-      this.get('provider').set('confirmSymbol', null);
+      this.provider.set('confirmSymbol', null);
       this.set('delete', true);
     },
     setPassword() {
       let self = this;
-      this.get('provider').set('keepPassword', false);
-      this.get('provider').save().then(function () {
+      this.provider.set('keepPassword', false);
+      this.provider.save().then(function () {
         self.reset();
       }).catch(function(reason){
         Ember.Logger.assert(false, reason);
@@ -145,7 +146,7 @@ export default Ember.Component.extend(Validations, {
     },
     destroy(provider) {
       let self = this;
-      if (this.get('confirmId') === provider.get('symbol')) {
+      if (this.confirmId === provider.get('symbol')) {
         provider.destroyRecord().then(function () {
           self.get('router').transitionTo('/providers');
         }).catch(function(reason){
@@ -154,7 +155,7 @@ export default Ember.Component.extend(Validations, {
       }
     },
     cancel() {
-      this.get('provider').rollbackAttributes();
+      this.provider.rollbackAttributes();
       this.reset();
     },
     onSuccess() {

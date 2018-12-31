@@ -1,10 +1,11 @@
-import { moduleFor, test } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupTest } from 'ember-qunit';
 
-moduleFor('validator:number-range', 'Unit | Validator | number-range', {
-  needs: ['validator:messages']
-});
+module('Unit | Validator | number-range', function(hooks) {
+  setupTest(hooks);
 
-test('it works', function(assert) {
-  var validator = this.subject();
-  assert.ok(validator);
+  test('it works', function(assert) {
+    var validator = this.owner.lookup('validator:number-range');
+    assert.ok(validator);
+  });
 });

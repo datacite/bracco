@@ -1,30 +1,32 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render, find } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('state-label', 'Integration | Component | state label', {
-  integration: true
-});
+module('Integration | Component | state label', function(hooks) {
+  setupRenderingTest(hooks);
 
-// test('it renders draft', function(assert) {
-//   this.set('state', 'draft');
+  // test('it renders draft', function(assert) {
+  //   this.set('state', 'draft');
 
-//   this.render(hbs`{{state-label state=state}}`);
+  //   this.render(hbs`{{state-label state=state}}`);
 
-//   assert.equal(this.$('span.label-default').text().trim(), 'Draft');
-// });
+  //   assert.equal(this.$('span.label-default').text().trim(), 'Draft');
+  // });
 
-test('it renders registered', function(assert) {
-  this.set('state', 'registered');
+  test('it renders registered', async function(assert) {
+    this.set('state', 'registered');
 
-  this.render(hbs`{{state-label state=state}}`);
+    await render(hbs`{{state-label state=state}}`);
 
-  assert.equal(this.$('span.label-info').text().trim(), 'Registered');
-});
+    assert.dom('span.label-info').hasText('Registered');
+  });
 
-test('it renders findable', function(assert) {
-  this.set('state', 'findable');
+  test('it renders findable', async function(assert) {
+    this.set('state', 'findable');
 
-  this.render(hbs`{{state-label state=state}}`);
+    await render(hbs`{{state-label state=state}}`);
 
-  assert.equal(this.$('span.label-primary').text().trim(), 'Findable');
+    assert.dom('span.label-primary').hasText('Findable');
+  });
 });

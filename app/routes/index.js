@@ -1,9 +1,11 @@
+import { typeOf } from '@ember/utils';
+import Route from '@ember/routing/route';
+import { inject as service } from '@ember/service';
 import Ember from 'ember';
 import RouteMixin from 'ember-cli-pagination/remote/route-mixin';
 import { CanMixin } from 'ember-can';
-const { service } = Ember.inject;
 
-export default Ember.Route.extend(CanMixin, RouteMixin, {
+export default Route.extend(CanMixin, RouteMixin, {
   currentUser: service(),
   flashMessages: service(),
 
@@ -19,9 +21,9 @@ export default Ember.Route.extend(CanMixin, RouteMixin, {
   },
 
   afterModel() {
-    if (!this.can('read index') && this.get('currentUser')) {
-      let home = this.get('currentUser').get('home');
-      if (Ember.typeOf(home) == 'object') {
+    if (!this.can('read index') && this.currentUser) {
+      let home = this.currentUser.get('home');
+      if (typeOf(home) == 'object') {
         return this.transitionTo(home.route, home.id);
       } else if (home) {
         return this.transitionTo(home);
