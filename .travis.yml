@@ -35,7 +35,6 @@ install:
   - sudo pip install awscli
 
 script:
-<<<<<<< HEAD
   - COVERAGE=true yarn test
   - codeclimate-test-reporter < coverage/lcov.info
 
@@ -65,8 +64,3 @@ after_deploy:
 notifications:
   slack: datacite:Wt8En0ALoTA6Kjc5EOKNDWxN
   email: false
-=======
-  - npm run lint:hbs
-  - npm run lint:js
-  - npm test
->>>>>>> 6859ee0... message
