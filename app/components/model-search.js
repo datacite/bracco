@@ -63,9 +63,9 @@ export default Component.extend({
 
     this.set('modelName', placeholders[this.model.get("modelName")]);
     
-    if (this.model.get("modelName") === "doi") {
+    if (this.get("modelName") === "DOI") {
       this.set('formats', { '-created': 'Sort by Date Created', 'name': 'Sort by DOI', 'relevance': 'Sort by Relevance' });
-    } else if (['prefix', 'provider-prefix', 'client-prefix'].includes(this.model.get("modelName"))) {
+    } else if (this.get("modelName") === "Prefix") {
       this.set('formats', { 'name': 'Sort by Prefix', '-created': 'Sort by Date Created' });
     } else {
       this.set('formats', { 'name': 'Sort by Name', '-created': 'Sort by Date Joined', 'relevance': 'Sort by Relevance' });

@@ -155,7 +155,7 @@
 
             {{#if client.domainList}}
               <h5>
-                {{pluralize client.domainList.length "Domain" omitCount=true}}
+                {{pluralize client.domainList.length "Domain" without-count=true}}
                 <span>
                   {{fa-icon "question-circle-o"}}
                   {{#bs-tooltip placement="top" viewportPadding=10}}URLs for DOIs must use {{#if (gt client.domainList.length 1)}}one of these (sub-)domains{{else}}this (sub-)domain{{/if}}.{{/bs-tooltip}}

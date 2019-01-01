@@ -9,7 +9,7 @@ module.exports = {
     browser: true
   },
   rules: {
-    "no-console": [2, { "allow": ["warn", "error", "debug"] }]
+    "no-console": "off"
   },
   overrides: [
     // node files

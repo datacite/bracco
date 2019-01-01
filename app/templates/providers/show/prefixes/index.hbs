@@ -121,7 +121,7 @@
             {{#if (eq provider-prefix.prefix.id "10.5072")}}
               <span class="icon-default">Demo prefix</span>
             {{else}}
-              <h5>{{pluralize provider-prefix.clients.length "Client" omitCount=true}}</h5>
+              <h5>{{pluralize provider-prefix.clients.length "Client" without-count=true}}</h5>
               {{#if provider-prefix.clients}}
                 {{#each provider-prefix.clients as |client|}}
                   {{#link-to "clients.show.prefixes.show" client.id provider-prefix.prefix.id}}{{client.name}}{{/link-to}}<br/>
