@@ -10,12 +10,6 @@ export default Controller.extend({
   queryParams: ['jwt'],
   jwt: null,
 
-  // binding the property on the paged array
-  // to the query params on the controller
-  page: alias("content.page[number]"),
-  perPage: alias("content.page[size]"),
-  total_pages: alias("content.total-pages"),
-
   actions: {
     invalidateSession() {
       this.session.invalidate();

@@ -50,7 +50,7 @@
       </div>
     {{/if}}
 
-    {{#if (or model.meta.years model.otherParams.year)}}
+    {{#if (or model.meta.years model.query.year)}}
       <div class="panel facets add">
         <div class="panel-body">
           <h4>Year joined</h4>
@@ -58,7 +58,7 @@
             {{#if model.meta.years}}
               {{#each model.meta.years as |year|}}
                 <li>
-                  {{#if model.otherParams.year}}
+                  {{#if model.query.year}}
                     {{#link-to link (query-params year="")}}{{fa-icon "check-square-o"}}{{/link-to}}
                   {{else}}
                     {{#link-to link (query-params year=year.id)}}{{fa-icon "square-o"}}{{/link-to}}
@@ -71,7 +71,7 @@
             {{else}}
               <li>
                 {{#link-to "clients" (query-params year="")}}{{fa-icon "check-square-o"}}{{/link-to}}
-                <div class="facet-title">{{model.otherParams.year}}</div>
+                <div class="facet-title">{{model.query.year}}</div>
                 <span class="number pull-right">0</span>
                 <div class="clearfix"/>
               </li>
@@ -80,7 +80,7 @@
         </div>
       </div>
     {{/if}}
-    {{#if (or model.meta.software model.otherParams.software)}}
+    {{#if (or model.meta.software model.query.software)}}
       <div class="panel facets">
         <div class="panel-body">
           <h4>Software</h4>
@@ -88,7 +88,7 @@
             {{#if model.meta.software}}
               {{#each model.meta.software as |software|}}
                 <li>
-                  {{#if model.otherParams.software}}
+                  {{#if model.query.software}}
                     {{#link-to link (query-params software="")}}{{fa-icon "check-square-o"}}{{/link-to}}
                   {{else}}
                     {{#link-to link (query-params software=software.id)}}{{fa-icon "square-o"}}{{/link-to}}
@@ -101,7 +101,7 @@
             {{else}}
               <li>
                 {{#link-to "clients" (query-params software="")}}{{fa-icon "check-square-o"}}{{/link-to}}
-                <div class="facet-title">{{model.otherParams.software}}</div>
+                <div class="facet-title">{{model.query.software}}</div>
                 <span class="number pull-right">0</span>
                 <div class="clearfix"/>
               </li>
@@ -125,7 +125,8 @@
 
             <h5>
               Client ID
-              <span>{{fa-icon "question-circle-o"}}
+              <span>
+                {{fa-icon "question-circle-o"}}
                 {{#bs-tooltip placement="top" viewportPadding=10}}The Client ID is a unique identifier for each client. It must contain only upper case letters and numbers, and must start with the Provider ID.{{/bs-tooltip}}
               </span>
             </h5>
@@ -134,7 +135,8 @@
             {{#if client.repository.id}}
               <h5>
                 re3data Record
-                <span>{{fa-icon "question-circle-o"}}
+                <span>
+                  {{fa-icon "question-circle-o"}}
                   {{#bs-tooltip placement="top" viewportPadding=10}}re3data is a registry of research data repositories.{{/bs-tooltip}}
                 </span>
               </h5>
@@ -154,7 +156,8 @@
             {{#if client.domainList}}
               <h5>
                 {{pluralize client.domainList.length "Domain" omitCount=true}}
-                <span>{{fa-icon "question-circle-o"}}
+                <span>
+                  {{fa-icon "question-circle-o"}}
                   {{#bs-tooltip placement="top" viewportPadding=10}}URLs for DOIs must use {{#if (gt client.domainList.length 1)}}one of these (sub-)domains{{else}}this (sub-)domain{{/if}}.{{/bs-tooltip}}
                 </span>
               </h5>

@@ -1,8 +1,8 @@
 import { helper as buildHelper } from '@ember/component/helper';
 import { htmlSafe } from '@ember/template';
 import { typeOf } from '@ember/utils';
-import HtmlEntities from 'npm:html-entities';
-import SanitizeHtml from 'npm:sanitize-html';
+import HtmlEntities from 'html-entities';
+import SanitizeHtml from 'sanitize-html';
 
 const Entities = HtmlEntities.AllHtmlEntities;
 const entities = new Entities();

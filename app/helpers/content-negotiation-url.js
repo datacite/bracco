@@ -1,4 +1,4 @@
-import { helper } from '@ember/component/helper';
+import { helper as buildHelper } from '@ember/component/helper';
 import ENV from 'bracco/config/environment';
 
 export function contentNegotiationUrl([doi], hash) {
@@ -38,4 +38,4 @@ export function contentNegotiationUrl([doi], hash) {
   return ENV.API_URL + '/dois/' + mimeType + '/' + doi;
 }
 
-export default helper(contentNegotiationUrl);
+export default buildHelper(contentNegotiationUrl);

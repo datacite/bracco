@@ -1,7 +1,7 @@
 import Controller from '@ember/controller';
 
 export default Controller.extend({
-  queryParams: ['query', 'resource-type-id', 'provider-id', 'client-id', 'person-id', 'prefix', 'year', 'created', 'registered', 'state', 'source', 'link-check-status', 'sort', 'schema-version', 'page', 'perPage'],
+  queryParams: ['query', 'resource-type-id', 'provider-id', 'client-id', 'person-id', 'prefix', 'year', 'created', 'registered', 'state', 'source', 'link-check-status', 'sort', 'schema-version', 'page', 'size'],
   query: null,
   'resource-type-id': null,
   'provider-id': null,
@@ -15,5 +15,7 @@ export default Controller.extend({
   source: null,
   'link-check-status': null,
   sort: null,
-  'schema-version': null
+  'schema-version': null,
+  page: 1,
+  size: 25
 });

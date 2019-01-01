@@ -1,37 +1,36 @@
 import { hash } from 'rsvp';
 import { assign } from '@ember/polyfills';
 import Route from '@ember/routing/route';
-import RouteMixin from 'ember-cli-pagination/remote/route-mixin';
 import { CanMixin } from 'ember-can';
 
-export default Route.extend(CanMixin, RouteMixin, {
-  perPage: 25,
-
+export default Route.extend(CanMixin, {
   model(params) {
-    params.paramMapping = { page: "page[number]",
-                            perPage: "page[size]",
-                            total_pages: "totalPages" };
+    params = assign(params, { 
+      page: {
+        number: params.page,
+        size: params.size 
+      },
+      'provider-id': this.modelFor('providers/show').get('id')
+    });
 
-    params = assign(params, { 'provider-id': this.modelFor('providers/show').get('id') });
-    
     return hash({
       provider: this.modelFor('providers/show'),
-      dois: this.findPaged('doi', params)
+      dois: this.store.query('doi', params)
     });
+  },
+
+  queryParams: {
+    page: {
+      refreshModel: true
+    },
+    size: {
+      refreshModel: true
+    }
   },
 
   afterModel() {
     if (!this.can('read provider', this.modelFor('providers/show'))) {
       return this.transitionTo('index');
-    }
-  },
-
-  actions: {
-    queryParamsDidChange() {
-      this.refresh();
-    },
-    refreshCurrentRoute(){
-      this.refresh();
     }
   }
 });

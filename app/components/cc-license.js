@@ -2,7 +2,7 @@ import { htmlSafe } from '@ember/template';
 import { w } from '@ember/string';
 import { A } from '@ember/array';
 import Component from '@ember/component';
-import URI from 'npm:urijs';
+import URI from 'urijs';
 
 export default Component.extend({
   tagName: 'div',

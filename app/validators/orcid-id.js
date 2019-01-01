@@ -1,5 +1,5 @@
 import BaseValidator from 'ember-cp-validations/validators/base';
-import Checkdigit from 'npm:checkdigit';
+import Checkdigit from 'checkdigit';
 
 // validate ORCID ID checksum
 const OrcidId = BaseValidator.extend({

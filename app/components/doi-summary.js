@@ -1,5 +1,5 @@
 import Component from '@ember/component';
-//import Mathjax from 'npm:mathjax-electron';
+//import Mathjax from 'mathjax-electron';
 
 export default Component.extend({
   tagName: 'div',

@@ -1,39 +1,40 @@
 import Route from '@ember/routing/route';
-import RouteMixin from 'ember-cli-pagination/remote/route-mixin';
+import { assign } from '@ember/polyfills';
 import { CanMixin } from 'ember-can';
 
-export default Route.extend(CanMixin, RouteMixin, {
-  perPage: 25,
-
+export default Route.extend(CanMixin, {
   model(params) {
-    params.paramMapping = { page: "page[number]",
-                            perPage: "page[size]",
-                            total_pages: "totalPages" };
+    params = assign(params, { 
+      page: {
+        number: params.page,
+        size: params.size 
+      }
+    });
 
-    let prefixes = this.findPaged('prefix', params);
-    return prefixes;
-    // let self = this;
-    // return this.findPaged('prefix', params).then(function(prefixes) {
-    //   return prefixes;
-    // }).catch(function(reason){
-    //   Ember.Logger.assert(false, reason);
-    //   self.get('flashMessages').warning('DOI Fabrica is currently unavailable due to a DataCite API problem. We apologize for the inconvenience and are working hard to restore the service. Please check back later or contact DataCite Support if you have a question.');
-    //   return self.transitionTo('/');
-    // });
+    return this.store.query('prefix', params);
+  },
+
+  queryParams: {
+    page: {
+      refreshModel: true
+    },
+    size: {
+      refreshModel: true
+    },
+    state: {
+      refreshModel: true
+    },
+    year: {
+      refreshModel: true
+    },
+    'provider-id': {
+      refreshModel: true
+    }
   },
 
   afterModel() {
     if (!this.can('read index')) {
       return this.transitionTo('index');
-    }
-  },
-
-  actions: {
-    queryParamsDidChange() {
-      this.refresh();
-    },
-    refreshCurrentRoute(){
-      this.refresh();
     }
   }
 });

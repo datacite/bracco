@@ -1,8 +1,8 @@
 import { notEmpty } from '@ember/object/computed';
+import { assign } from '@ember/polyfills';
 import Component from '@ember/component';
-import RouteMixin from 'ember-cli-pagination/remote/route-mixin';
 
-export default Component.extend(RouteMixin, {
+export default Component.extend({
   classNames: ['div'],
 
   hasInput: notEmpty('query'),
@@ -17,17 +17,13 @@ export default Component.extend(RouteMixin, {
   didReceiveAttrs() {
     this._super(...arguments);
 
-    this.set('query', this.model.get('otherParams.query'));
-    this.set('sort', this.model.get('otherParams.sort'));
-    this.set('filters', this.model.get('otherParams'));
+    this.set('query', this.model.get('query.query'));
+    this.set('sort', this.model.get('query.sort'));
+    this.set('filters', this.model.get('query'));
   },
 
   search() {
-    let params = Object.assign(this.model.get('otherParams'), { query: this.query, sort: this.sort });
-
-    params.paramMapping = { page: "page[number]",
-                            perPage: "page[size]",
-                            total_pages: "totalPages" };
+    let params = assign(this.model.get('query'), { query: this.query, sort: this.sort });
 
     this.router.transitionTo({ queryParams: params });
   },

@@ -41,7 +41,8 @@
     {{#if (gt model.metadataVersion 0)}}
       <h5>
         Metadata version
-        <span>{{fa-icon "question-circle-o"}}
+        <span>
+          {{fa-icon "question-circle-o"}}
           {{#bs-tooltip placement="top" viewportPadding=10}}Most recent metadata. Previous versions are kept.{{/bs-tooltip}}
         </span>
       </h5>
@@ -52,7 +53,8 @@
     {{#if model.schemaVersionString}}
       <h5>
         Schema
-        <span>{{fa-icon "question-circle-o"}}
+        <span>
+          {{fa-icon "question-circle-o"}}
           {{#bs-tooltip placement="top" viewportPadding=10}}Metadata schema version used.{{/bs-tooltip}}
         </span>
       </h5>
@@ -63,7 +65,8 @@
     {{#if (and (can "source doi" model) model.source)}}
       <h5>
         Source
-        <span>{{fa-icon "question-circle-o"}}
+        <span>
+          {{fa-icon "question-circle-o"}}
           {{#bs-tooltip placement="top" viewportPadding=10}}Service used for DOI registration.{{/bs-tooltip}}
         </span>
       </h5>

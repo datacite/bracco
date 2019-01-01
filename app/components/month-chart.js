@@ -2,7 +2,7 @@ import { run } from '@ember/runloop';
 import { computed } from '@ember/object';
 import { mapBy, sum } from '@ember/object/computed';
 import Component from '@ember/component';
-import d3 from "npm:d3";
+import d3 from "d3";
 
 export default Component.extend({
   tagName: 'div',

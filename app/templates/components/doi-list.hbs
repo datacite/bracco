@@ -10,8 +10,8 @@
             {{#if (can "upload doi" model)}}
               {{#link-to "clients.show.dois.upload" client.id class="btn btn-warning"}}{{fa-icon "upload"}} Create{{if media.isXl ' DOI'}} (File Upload){{/link-to}}
             {{/if}}
-            {{#if (and (can "transfer doi" model) model.otherParams.client-id (gt model.length 0))}}
-              {{#link-to "clients.show.transfer" model.otherParams.client-id class="btn btn-warning" id="transfer-dois"}}{{fa-icon "arrow-circle-o-right"}}Transfer{{if media.isXl ' DOIs'}}{{/link-to}}
+            {{#if (and (can "transfer doi" model) model.query.client-id (gt model.length 0))}}
+              {{#link-to "clients.show.transfer" model.query.client-id class="btn btn-warning" id="transfer-dois"}}{{fa-icon "arrow-circle-o-right"}}Transfer{{if media.isXl ' DOIs'}}{{/link-to}}
             {{/if}}
           </div>
         </div>
@@ -25,7 +25,7 @@
     </div>
   {{/if}}
 
-  {{#if (or model.meta.states model.otherParams.state)}}
+  {{#if (or model.meta.states model.query.state)}}
     <div class="panel facets add">
       <div class="panel-body">
         <h4>State</h4>
@@ -33,7 +33,7 @@
           {{#if model.meta.states}}
             {{#each model.meta.states as |state|}}
               <li>
-                {{#if model.otherParams.state}}
+                {{#if model.query.state}}
                   {{#link-to link (query-params state=null)}}{{fa-icon "check-square-o"}}{{/link-to}}
                 {{else}}
                   {{#link-to link (query-params state=state.id)}}{{fa-icon "square-o"}}{{/link-to}}
@@ -46,7 +46,7 @@
           {{else}}
             <li>
               {{#link-to link (query-params state='')}}{{fa-icon "check-square-o"}}{{/link-to}}
-              <div class="facet-title">{{titleize model.otherParams.state}}</div>
+              <div class="facet-title">{{titleize model.query.state}}</div>
               <span class="number pull-right">0</span>
               <div class="clearfix"/>
             </li>
@@ -55,7 +55,7 @@
       </div>
     </div>
   {{/if}}
-  {{#if (or model.meta.resourceTypes model.otherParams.resource-type-id)}}
+  {{#if (or model.meta.resourceTypes model.query.resource-type-id)}}
     <div class="panel facets">
       <div class="panel-body">
         <h4>Resource Type</h4>
@@ -63,7 +63,7 @@
           {{#if model.meta.resourceTypes}}
             {{#each model.meta.resourceTypes as |resourceType|}}
               <li>
-                {{#if model.otherParams.resource-type-id}}
+                {{#if model.query.resource-type-id}}
                   {{#link-to link (query-params resource-type-id='')}}{{fa-icon "check-square-o"}}{{/link-to}}
                 {{else}}
                   {{#link-to link (query-params resource-type-id=resourceType.id)}}{{fa-icon "square-o"}}{{/link-to}}
@@ -76,7 +76,7 @@
           {{else}}
             <li>
               {{#link-to link (query-params resource-type-id='')}}{{fa-icon "check-square-o"}}{{/link-to}}
-              <div class="facet-title">{{humanize (underscore model.otherParams.resource-type-id)}}</div>
+              <div class="facet-title">{{humanize (underscore model.query.resource-type-id)}}</div>
               <span class="number pull-right">0</span>
               <div class="clearfix"/>
             </li>
@@ -85,7 +85,7 @@
       </div>
     </div>
   {{/if}}
-  {{#if (or model.meta.created model.otherParams.created)}}
+  {{#if (or model.meta.created model.query.created)}}
     <div class="panel facets">
       <div class="panel-body">
         <h4>Year created</h4>
@@ -93,7 +93,7 @@
           {{#if model.meta.created}}
             {{#each model.meta.created as |year|}}
               <li>
-                {{#if model.otherParams.created}}
+                {{#if model.query.created}}
                   {{#link-to link (query-params created='')}}{{fa-icon "check-square-o"}}{{/link-to}}
                 {{else}}
                   {{#link-to link (query-params created=year.id)}}{{fa-icon "square-o"}}{{/link-to}}
@@ -106,7 +106,7 @@
           {{else}}
             <li>
               {{#link-to link (query-params created='')}}{{fa-icon "check-square-o"}}{{/link-to}}
-              <div class="facet-title">{{model.otherParams.created}}</div>
+              <div class="facet-title">{{model.query.created}}</div>
               <span class="number pull-right">0</span>
               <div class="clearfix"/>
             </li>
@@ -115,7 +115,7 @@
       </div>
     </div>
   {{/if}}
-  {{#if (and (can "source doi" model) (or model.meta.registered model.otherParams.registered))}}
+  {{#if (and (can "source doi" model) (or model.meta.registered model.query.registered))}}
     <div class="panel facets">
       <div class="panel-body">
         <h4>Year registered</h4>
@@ -123,7 +123,7 @@
           {{#if model.meta.registered}}
             {{#each model.meta.registered as |year|}}
               <li>
-                {{#if model.otherParams.registered}}
+                {{#if model.query.registered}}
                   {{#link-to link (query-params registered='')}}{{fa-icon "check-square-o"}}{{/link-to}}
                 {{else}}
                   {{#link-to link (query-params registered=year.id)}}{{fa-icon "square-o"}}{{/link-to}}
@@ -136,7 +136,7 @@
           {{else}}
             <li>
               {{#link-to link (query-params registered='')}}{{fa-icon "check-square-o"}}{{/link-to}}
-              <div class="facet-title">{{model.otherParams.registered}}</div>
+              <div class="facet-title">{{model.query.registered}}</div>
               <span class="number pull-right">0</span>
               <div class="clearfix"/>
             </li>
@@ -145,7 +145,7 @@
       </div>
     </div>
   {{/if}}
-  {{#if (and (not-eq link "clients.show.dois") (or model.meta.clients model.otherParams.client-id))}}
+  {{#if (and (not-eq link "clients.show.dois") (or model.meta.clients model.query.client-id))}}
     <div class="panel facets">
       <div class="panel-body">
         <h4>Client</h4>
@@ -153,7 +153,7 @@
           {{#if model.meta.clients}}
             {{#each model.meta.clients as |client|}}
               <li>
-                {{#if model.otherParams.client-id}}
+                {{#if model.query.client-id}}
                   {{#link-to link (query-params client-id='')}}{{fa-icon "check-square-o"}}{{/link-to}}
                 {{else}}
                   {{#link-to link (query-params client-id=client.id)}}{{fa-icon "square-o"}}{{/link-to}}
@@ -166,7 +166,7 @@
           {{else}}
             <li>
               {{#link-to link (query-params client-id='')}}{{fa-icon "check-square-o"}}{{/link-to}}
-              <div class="facet-title">{{model.otherParams.client-id}}</div>
+              <div class="facet-title">{{model.query.client-id}}</div>
               <span class="number pull-right">0</span>
               <div class="clearfix"/>
             </li>
@@ -175,7 +175,7 @@
       </div>
     </div>
   {{/if}}
-  {{#if (or model.meta.prefixes model.otherParams.prefix)}}
+  {{#if (or model.meta.prefixes model.query.prefix)}}
     <div class="panel facets">
       <div class="panel-body">
         <h4>Prefix</h4>
@@ -183,7 +183,7 @@
           {{#if model.meta.prefixes}}
             {{#each model.meta.prefixes as |prefix|}}
               <li>
-                {{#if model.otherParams.prefix}}
+                {{#if model.query.prefix}}
                   {{#link-to link (query-params prefix='')}}{{fa-icon "check-square-o"}}{{/link-to}}
                 {{else}}
                   {{#link-to link (query-params prefix=prefix.id)}}{{fa-icon "square-o"}}{{/link-to}}
@@ -196,7 +196,7 @@
           {{else}}
             <li>
               {{#link-to link (query-params prefix='')}}{{fa-icon "check-square-o"}}{{/link-to}}
-              <div class="facet-title">{{model.otherParams.prefix}}</div>
+              <div class="facet-title">{{model.query.prefix}}</div>
               <span class="number pull-right">0</span>
               <div class="clearfix"/>
             </li>
@@ -205,7 +205,7 @@
       </div>
     </div>
   {{/if}}
-  {{#if (or model.meta.schemaVersions model.otherParams.schema-version)}}
+  {{#if (or model.meta.schemaVersions model.query.schema-version)}}
     <div class="panel facets">
       <div class="panel-body">
         <h4>Schema Version</h4>
@@ -213,7 +213,7 @@
           {{#if model.meta.schemaVersions}}
             {{#each model.meta.schemaVersions as |schemaVersion|}}
               <li>
-                {{#if model.otherParams.schema-version}}
+                {{#if model.query.schema-version}}
                   {{#link-to link (query-params schema-version='')}}{{fa-icon "check-square-o"}}{{/link-to}}
                 {{else}}
                   {{#link-to link (query-params schema-version=schemaVersion.id)}}{{fa-icon "square-o"}}{{/link-to}}
@@ -226,7 +226,7 @@
           {{else}}
             <li>
               {{#link-to link (query-params schema-version='')}}{{fa-icon "check-square-o"}}{{/link-to}}
-              <div class="facet-title">{{model.otherParams.schema-version}}</div>
+              <div class="facet-title">{{model.query.schema-version}}</div>
               <span class="number pull-right">0</span>
               <div class="clearfix"/>
             </li>
@@ -235,7 +235,7 @@
       </div>
     </div>
   {{/if}}
-  {{#if (and (can "source doi" model) (or model.meta.sources model.otherParams.source))}}
+  {{#if (and (can "source doi" model) (or model.meta.sources model.query.source))}}
     <div class="panel facets add">
       <div class="panel-body">
         <h4>Source</h4>
@@ -243,7 +243,7 @@
           {{#if model.meta.sources}}
             {{#each model.meta.sources as |source|}}
               <li>
-                {{#if model.otherParams.source}}
+                {{#if model.query.source}}
                   {{#link-to link (query-params source=null)}}{{fa-icon "check-square-o"}}{{/link-to}}
                 {{else}}
                   {{#link-to link (query-params source=source.id)}}{{fa-icon "square-o"}}{{/link-to}}
@@ -256,7 +256,7 @@
           {{else}}
             <li>
               {{#link-to link (query-params source='')}}{{fa-icon "check-square-o"}}{{/link-to}}
-              <div class="facet-title">{{model.otherParams.source}}</div>
+              <div class="facet-title">{{model.query.source}}</div>
               <span class="number pull-right">0</span>
               <div class="clearfix"/>
             </li>
@@ -265,7 +265,7 @@
       </div>
     </div>
   {{/if}}
-   {{#if (and (can "viewHealth doi" model) (or model.meta.linkChecksStatus model.otherParams.link-checks-status))}}
+   {{#if (and (can "viewHealth doi" model) (or model.meta.linkChecksStatus model.query.link-checks-status))}}
     <div class="panel facets add">
       <div class="panel-body">
         <h4>Link Check Status</h4>
@@ -273,7 +273,7 @@
           {{#if model.meta.linkChecksStatus}}
             {{#each model.meta.linkChecksStatus as |linkCheckStatus|}}
               <li>
-                {{#if model.otherParams.link-check-status}}
+                {{#if model.query.link-check-status}}
                   {{#link-to link (query-params link-check-status=null)}}{{fa-icon "check-square-o"}}{{/link-to}}
                 {{else}}
                   {{#link-to link (query-params link-check-status=linkCheckStatus.id)}}{{fa-icon "square-o"}}{{/link-to}}
@@ -286,7 +286,7 @@
           {{else}}
             <li>
               {{#link-to link (query-params link-check-status='')}}{{fa-icon "check-square-o"}}{{/link-to}}
-              <div class="facet-title">{{model.otherParams.link-check-status}}</div>
+              <div class="facet-title">{{model.query.link-check-status}}</div>
               <span class="number pull-right">0</span>
               <div class="clearfix"/>
             </li>

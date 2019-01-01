@@ -1,7 +1,7 @@
 import { resolve } from 'rsvp';
 import Service, { inject as service } from '@ember/service';
 import { isEmpty } from '@ember/utils';
-import NodeJsonWebToken from 'npm:jsonwebtoken';
+import nodeJsonWebToken from 'jsonwebtoken';
 import ENV from 'bracco/config/environment';
 
 export default Service.extend({
@@ -32,7 +32,7 @@ export default Service.extend({
 
       // verify asymmetric token, using RSA with SHA-256 hash algorithm
       let self = this;
-      NodeJsonWebToken.verify(jwt, cert, { algorithms: ['RS256'] }, function (error, payload) {
+      nodeJsonWebToken.verify(jwt, cert, { algorithms: ['RS256'] }, function (error, payload) {
         if (payload) {
           self.set('jwt', jwt);
           self.initUser(payload);

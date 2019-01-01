@@ -8,7 +8,7 @@
         <ul>
           {{#each model.prefixes.meta.years as |year|}}
             <li>
-              {{#if model.prefixes.otherParams.year}}
+              {{#if model.prefixes.query.year}}
                 {{#link-to 'clients.show.prefixes' (query-params year=null)}}{{fa-icon "check-square-o"}}{{/link-to}}
               {{else}}
                 {{#link-to 'clients.show.prefixes' (query-params year=year.id)}}{{fa-icon "square-o"}}{{/link-to}}

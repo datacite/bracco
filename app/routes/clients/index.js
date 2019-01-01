@@ -1,28 +1,37 @@
 import Route from '@ember/routing/route';
-import RouteMixin from 'ember-cli-pagination/remote/route-mixin';
+import { assign } from '@ember/polyfills';
 import { CanMixin } from 'ember-can';
 
-export default Route.extend(CanMixin, RouteMixin, {
-  perPage: 25,
-
+export default Route.extend(CanMixin, {
   model(params) {
-    params.paramMapping = { page: "page[number]",
-                            perPage: "page[size]",
-                            total_pages: "totalPages" };
+    params = assign(params, { 
+      page: {
+        number: params.page,
+        size: params.size 
+      }
+    });
 
-    let clients = this.findPaged('client', params);
-    return clients;
+    return this.store.query('client', params);
+  },
+
+  queryParams: {
+    page: {
+      refreshModel: true
+    },
+    size: {
+      refreshModel: true
+    },
+    year: {
+      refreshModel: true
+    },
+    software: {
+      refreshModel: true
+    }
   },
 
   afterModel() {
     if (!this.can('read index')) {
       return this.transitionTo('index');
-    }
-  },
-
-  actions: {
-    queryParamsDidChange() {
-      this.refresh();
     }
   }
 });

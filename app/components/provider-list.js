@@ -1,7 +1,6 @@
 import { inject as service } from '@ember/service';
 import Component from '@ember/component';
-import { computed } from '@ember/object';
-import countryList from 'npm:iso-3166-country-list';
+import countryList from 'iso-3166-country-list';
 
 const organizationTypeList = [
   'academicInstitution',
@@ -38,8 +37,6 @@ export default Component.extend({
   organizationTypes: organizationTypeList,
   focusAreaList,
   focusAreas: focusAreaList,
-  providersPaginator: computed.alias('model'),
-  providers: computed.alias('model.content'),
 
   reset() {
     this.set('provider', null);

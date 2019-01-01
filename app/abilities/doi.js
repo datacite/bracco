@@ -42,22 +42,22 @@ export default Ability.extend({
         return false;
     }
   }),
-  canUpload: computed('currentUser.role_id', 'currentUser.client_id', 'model.otherParams.client-id', function() {
+  canUpload: computed('currentUser.role_id', 'currentUser.client_id', 'model.query.client-id', function() {
     switch(this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
       case 'client_admin':
-        return this.get('currentUser.client_id') === this.get('model.otherParams.client-id');
+        return this.get('currentUser.client_id') === this.get('model.query.client-id');
       default:
         return false;
     }
   }),
-  canCreate: computed('currentUser.role_id', 'currentUser.client_id', 'model.otherParams.client-id', function() {
+  canCreate: computed('currentUser.role_id', 'currentUser.client_id', 'model.query.client-id', function() {
     switch(this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
       case 'client_admin':
-        return this.get('currentUser.client_id') === this.get('model.otherParams.client-id');
+        return this.get('currentUser.client_id') === this.get('model.query.client-id');
       default:
         return false;
     }

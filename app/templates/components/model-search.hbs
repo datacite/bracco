@@ -2,7 +2,9 @@
   <div id="search" class="input-group">
     {{input name="query" value=query class="form-control" placeholder='Type to search...' escape-press=(action 'clear') enter=(action 'doSearch')}}
     {{#if hasInput}}
-      <span id="search-clear" title="Clear" aria-label="Clear" {{action 'clear'}}>{{fa-icon "times-circle"}}</span>
+      <span id="search-clear" title="Clear" aria-label="Clear" {{action "clear"}}>
+        {{fa-icon "times-circle"}}
+      </span>
     {{/if}}
     <div class="input-group-btn">
       <button type="submit" class="btn btn-primary hidden-xs">Search</button>
@@ -10,7 +12,32 @@
   </div>
 
   {{#if hasFilters}}  
-    <span class="help-block">{{#link-to link (query-params query=null created=null registered=null state=null resource-type-id=null schema-version=null prefix=null client-id=null source=null year=null provider-id=null organization-type=null focus-area=null link-check-status=null software=null)}}Reset All{{/link-to}}</span>
+    <span class="help-block">
+      {{#link-to 
+        link 
+        (query-params
+        page=1
+        size=25
+        sort=null
+        query=null 
+        created=null 
+        registered=null 
+        state=null 
+        resource-type-id=null 
+        schema-version=null 
+        prefix=null 
+        client-id=null 
+        source=null 
+        year=null 
+        provider-id=null 
+        region=null 
+        organization-type=null 
+        focus-area=null 
+        link-check-status=null 
+        software=null)
+      }}Reset All
+      {{/link-to}}
+    </span>
   {{/if}}
 </form>
 {{#if (gt model.meta.total 1)}}

@@ -1,7 +1,7 @@
 import { schedule, run } from '@ember/runloop';
 import { computed } from '@ember/object';
 import Component from '@ember/component';
-import d3 from "npm:d3";
+import d3 from "d3";
 
 export default Component.extend({
   tagName: 'div',

@@ -30,10 +30,10 @@
               <ul>
                 {{#each model.meta.states as |state|}}
                   <li>
-                    {{#if model.otherParams.state}}
-                      {{#link-to 'prefixes' (query-params state=null)}}{{fa-icon "check-square-o"}}{{/link-to}}
+                    {{#if model.query.state}}
+                      {{#link-to "prefixes" (query-params state=null)}}{{fa-icon "check-square-o"}}{{/link-to}}
                     {{else}}
-                      {{#link-to 'prefixes' (query-params state=state.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                      {{#link-to "prefixes" (query-params state=state.id)}}{{fa-icon "square-o"}}{{/link-to}}
                     {{/if}}
                     <div class="facet-title">{{state.title}}</div>
                     <span class="number pull-right">{{state.count}}</span>
@@ -52,10 +52,10 @@
               <ul>
                 {{#each model.meta.years as |year|}}
                   <li>
-                    {{#if model.otherParams.year}}
-                      {{#link-to 'prefixes' (query-params year=null)}}{{fa-icon "check-square-o"}}{{/link-to}}
+                    {{#if model.query.year}}
+                      {{#link-to "prefixes" (query-params year=null)}}{{fa-icon "check-square-o"}}{{/link-to}}
                     {{else}}
-                      {{#link-to 'prefixes' (query-params year=year.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                      {{#link-to "prefixes" (query-params year=year.id)}}{{fa-icon "square-o"}}{{/link-to}}
                     {{/if}}
                     <div class="facet-title">{{year.title}}</div>
                     <span class="number pull-right">{{year.count}}</span>
@@ -73,10 +73,10 @@
               <ul>
                 {{#each model.meta.providers as |provider|}}
                   <li>
-                    {{#if model.otherParams.provider-id}}
-                      {{#link-to 'prefixes' (query-params provider-id=null)}}{{fa-icon "check-square-o"}}{{/link-to}}
+                    {{#if model.query.provider-id}}
+                      {{#link-to "prefixes" (query-params provider-id=null)}}{{fa-icon "check-square-o"}}{{/link-to}}
                     {{else}}
-                      {{#link-to 'prefixes' (query-params provider-id=provider.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                      {{#link-to "prefixes" (query-params provider-id=provider.id)}}{{fa-icon "square-o"}}{{/link-to}}
                     {{/if}}
                     <div class="facet-title">{{provider.title}}</div>
                     <span class="number pull-right">{{provider.count}}</span>

@@ -2,7 +2,7 @@ import { inject as service } from '@ember/service';
 import fetch from 'fetch';
 import Component from '@ember/component';
 import { isPresent } from '@ember/utils';
-import vkbeautify from 'npm:vkbeautify';
+import vkbeautify from 'vkbeautify';
 import ENV from 'bracco/config/environment';
 
 export default Component.extend({

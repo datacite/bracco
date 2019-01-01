@@ -1,6 +1,6 @@
 {{#if hasMetadata}}
   <div id="metadata" class="input-group pull-right">
-    <select onchange={{action 'selectMetadata' value="target.value"}}>
+    <select onchange={{action "selectMetadata" value="target.value"}}>
       {{#each-in formats as |key value|}}
         <option name="metadata" value={{key}} selected={{eq metadata key}}>{{value}}</option>
       {{/each-in}}
@@ -21,7 +21,7 @@
       
       {{#if (not model.isDraft)}}
         <div class="panel-footer">
-          <a target="_blank" rel="noopener" href="{{model.identifier}}">{{fa-icon "external-link"}} {{model.identifier}}</a>
+          <a target="_blank" rel="noopener" href={{model.identifier}}>{{fa-icon "external-link"}} {{model.identifier}}</a>
         </div>
       {{/if}}
     {{/if}}

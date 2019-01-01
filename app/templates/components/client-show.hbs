@@ -89,7 +89,7 @@
   </div>
 {{else}}
   <div class="row">
-    <div class='col-md-3'>
+    <div class="col-md-3">
       {{#if (can "update client" model)}}
         <div class="panel facets">
           <div class="panel-body">
@@ -117,7 +117,8 @@
 
           <h5>
             Client ID
-            <span>{{fa-icon "question-circle-o"}}
+            <span>
+              {{fa-icon "question-circle-o"}}
               {{#bs-tooltip placement="top" viewportPadding=10}}The Client ID is a unique identifier for each client. It must contain only upper case letters and numbers, and must start with the Provider ID.{{/bs-tooltip}}
             </span>
           </h5>
@@ -126,7 +127,8 @@
           {{#if model.repository.id}}
             <h5>
               re3data Record
-              <span>{{fa-icon "question-circle-o"}}
+              <span>
+                {{fa-icon "question-circle-o"}}
                 {{#bs-tooltip placement="top" viewportPadding=10}}re3data is a registry of research data repositories.{{/bs-tooltip}}
               </span>
             </h5>

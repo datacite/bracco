@@ -65,7 +65,7 @@ export default Component.extend({
 
   actions: {
     new(model) {
-      let provider = this.store.peekRecord('provider', model.get('otherParams.provider-id'));
+      let provider = this.store.peekRecord('provider', model.get('query.provider-id'));
       this.set('client', this.store.createRecord('client', { provider: provider, symbol: provider.id.toUpperCase() + '.' }));
       this.set('new', true);
     },

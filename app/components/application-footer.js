@@ -2,7 +2,7 @@ import { htmlSafe } from '@ember/template';
 import Component from '@ember/component';
 import ENV from 'bracco/config/environment';
 import fetch from 'fetch';
-import isElectron from 'npm:is-electron';
+import isElectron from 'is-electron';
 
 export default Component.extend({
   didInsertElement() {

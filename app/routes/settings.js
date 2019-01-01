@@ -1,8 +1,7 @@
 import Route from '@ember/routing/route';
-import RouteMixin from 'ember-cli-pagination/remote/route-mixin';
 import { CanMixin } from 'ember-can';
 
-export default Route.extend(CanMixin, RouteMixin, {
+export default Route.extend(CanMixin, {
 
   model() {
     let self = this;

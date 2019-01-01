@@ -1,10 +1,9 @@
 import { typeOf } from '@ember/utils';
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
-import RouteMixin from 'ember-cli-pagination/remote/route-mixin';
 import { CanMixin } from 'ember-can';
 
-export default Route.extend(CanMixin, RouteMixin, {
+export default Route.extend(CanMixin, {
   currentUser: service(),
   flashMessages: service(),
 

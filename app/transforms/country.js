@@ -1,5 +1,5 @@
 import DS from 'ember-data';
-import countryList from 'npm:iso-3166-country-list';
+import countryList from 'iso-3166-country-list';
 
 export default DS.Transform.extend({
   deserialize(serialized) {

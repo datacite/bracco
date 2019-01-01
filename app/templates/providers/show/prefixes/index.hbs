@@ -30,7 +30,7 @@
           <ul>
             {{#each model.prefixes.meta.states as |state|}}
               <li>
-                {{#if model.prefixes.otherParams.state}}
+                {{#if model.prefixes.query.state}}
                   {{#link-to 
                     "providers.show.prefixes" 
                     (query-params 
@@ -57,7 +57,7 @@
           <ul>
             {{#each model.prefixes.meta.years as |year|}}
               <li>
-                {{#if model.prefixes.otherParams.year}}
+                {{#if model.prefixes.query.year}}
                   {{#link-to 
                     "providers.show.prefixes" 
                     (query-params year=null)
@@ -86,7 +86,7 @@
           <ul>
             {{#each model.prefixes.meta.providers as |provider|}}
               <li>
-                {{#if model.prefixes.otherParams.provider-id}}
+                {{#if model.prefixes.query.provider-id}}
                   {{#link-to "providers.show.prefixes" (query-params provider-id=null)}}{{fa-icon "check-square-o"}}{{/link-to}}
                 {{else}}
                   {{#link-to "providers.show.prefixes" (query-params provider-id=provider.id)}}{{fa-icon "square-o"}}{{/link-to}}
@@ -142,7 +142,7 @@
       {{/each}}
       <div class="text-center">
         {{#if (gt model.prefixes.meta.total_pages 1)}}
-          {{page-numbers content=prefixesPaginator numPagesToShow=5 showFL=true}}
+          {{page-numbers content=model numPagesToShow=5 showFL=true}}
         {{/if}}
       </div>
     {{else}}

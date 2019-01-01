@@ -2,7 +2,7 @@ import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 import { validator, buildValidations } from 'ember-cp-validations';
 import fetch from 'fetch';
-import countryList from 'npm:iso-3166-country-list';
+import countryList from 'iso-3166-country-list';
 import ENV from 'bracco/config/environment';
 const organizationTypeList = [
   'academicInstitution',
