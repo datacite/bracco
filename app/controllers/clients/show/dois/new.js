@@ -1,5 +1,4 @@
 import Controller from '@ember/controller';
-import Ember from 'ember';
 
 export default Controller.extend({
   setEvent(state) {
@@ -44,7 +43,11 @@ export default Controller.extend({
       doi.save().then(function(doi) {
         self.transitionToRoute('clients.show.dois.show', doi.get('client').get('id'), doi);
       }).catch(function(reason){
-        Ember.Logger.assert(false, reason);
+        if (console.debug) {
+          console.debug(reason);
+        } else {
+          console.log(reason);
+        }
       });
     },
     cancel() {

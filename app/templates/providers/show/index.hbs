@@ -1,7 +1,18 @@
 <div class="content">
   <div class="row content">
-    {{bar-chart data=model.clientCount label='Client' model=model link='providers.show.clients'}}
-    {{bar-chart data=model.doiCount label='DOI' model=model link='providers.show.dois' cumulative=false}}
+    {{bar-chart 
+      data=model.clientCount 
+      label="Client" 
+      model=model 
+      link="providers.show.clients"
+    }}
+    {{bar-chart 
+      data=model.doiCount 
+      label="DOI" 
+      model=model 
+      link="providers.show.dois" 
+      cumulative=false
+    }}
   </div>
 
   {{#if (can "read messages" model)}}

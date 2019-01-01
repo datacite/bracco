@@ -1,4 +1,3 @@
-import Ember from 'ember';
 import Component from '@ember/component';
 
 export default Component.extend({
@@ -10,7 +9,11 @@ export default Component.extend({
 
     if (errors.length > 0) {
       errors.forEach((item) => {
-        Ember.Logger.assert(false, item);
+        if (console.debug) {
+          console.debug(item);
+        } else {
+          console.log(item);
+        }
       });
     }
   }

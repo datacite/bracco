@@ -1,10 +1,10 @@
-import { helper as buildHelper } from '@ember/component/helper';
+import { helper } from '@ember/component/helper';
 import { isPresent } from '@ember/utils';
 
 export function formatMetadata([publicationYear], hash) {
   let published = publicationYear ? " published " + publicationYear : '';
   let version = hash.version ? 'Version ' + hash.version + ' of ' : '';
-  let resourceType = hash.resourceType || hash.resourceTypeGeneral //|| isPresent(published) ? 'Work' : '';
+  let resourceType = hash.resourceType || hash.resourceTypeGeneral;
   let publisher = hash.publisher ? " via " + hash.publisher : '';
   let metadata = [version, resourceType, published, publisher].join(" ").trim();
   
@@ -15,4 +15,4 @@ export function formatMetadata([publicationYear], hash) {
   }
 }
 
-export default buildHelper(formatMetadata);
+export default helper(formatMetadata);

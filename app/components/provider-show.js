@@ -1,6 +1,5 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
-import Ember from 'ember';
 import { validator, buildValidations } from 'ember-cp-validations';
 import fetch from 'fetch';
 import countryList from 'npm:iso-3166-country-list';
@@ -69,10 +68,18 @@ export default Component.extend(Validations, {
           self.get('model').set('passwordInput', data.phrase);
         });
       } else {
-        Ember.Logger.assert(false, response)
+        if (console.debug) {
+          console.debug(response);
+        } else {
+          console.log(response);
+        }
       }
     }).catch(function(error) {
-      Ember.Logger.assert(false, error)
+      if (console.debug) {
+        console.debug(error);
+      } else {
+        console.log(error);
+      }
     });
   },
   searchCountry(query) {
@@ -133,7 +140,11 @@ export default Component.extend(Validations, {
       this.provider.save().then(function () {
         self.reset();
       }).catch(function(reason){
-        Ember.Logger.assert(false, reason);
+        if (console.debug) {
+          console.debug(reason);
+        } else {
+          console.log(reason);
+        }
       });
     },
     submit(provider) {
@@ -141,7 +152,11 @@ export default Component.extend(Validations, {
       provider.save().then(function () {
         self.reset();
       }).catch(function(reason){
-        Ember.Logger.assert(false, reason);
+        if (console.debug) {
+          console.debug(reason);
+        } else {
+          console.log(reason);
+        }
       });
     },
     destroy(provider) {
@@ -150,7 +165,11 @@ export default Component.extend(Validations, {
         provider.destroyRecord().then(function () {
           self.get('router').transitionTo('/providers');
         }).catch(function(reason){
-          Ember.Logger.assert(false, reason);
+          if (console.debug) {
+            console.debug(reason);
+          } else {
+            console.log(reason);
+          }
         });
       }
     },
@@ -161,7 +180,11 @@ export default Component.extend(Validations, {
     onSuccess() {
     },
     onError(error) {
-      Ember.Logger.assert(false, error)
+      if (console.debug) {
+        console.debug(error);
+      } else {
+        console.log(error);
+      }
     },
     searchCountry(query) {
       this.searchCountry(query);

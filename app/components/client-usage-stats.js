@@ -1,6 +1,5 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
-import Ember from 'ember';
 import fetch from 'fetch';
 import { oneWay } from '@ember/object/computed';
 import ENV from 'bracco/config/environment';
@@ -48,13 +47,25 @@ export default Component.extend({
             }
           });
         } else {
-          Ember.Logger.assert(false, response);
+          if (console.debug) {
+            console.debug(response);
+          } else {
+            console.log(response);
+          }
         }
       }).catch(function(error) {
-        Ember.Logger.assert(false, error);
+        if (console.debug) {
+          console.debug(error);
+        } else {
+          console.log(error);
+        }
       });
     }).catch(function(error){
-      Ember.Logger.assert(false, error);
+      if (console.debug) {
+        console.debug(error);
+      } else {
+        console.log(error);
+      }
     });
   }
 });

@@ -1,6 +1,5 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
-import Ember from 'ember';
 import fetch from 'fetch';
 import ENV from 'bracco/config/environment';
 const softwareList = [
@@ -50,10 +49,10 @@ export default Component.extend({
           self.get('model').set('passwordInput', data.phrase);
         });
       } else {
-        Ember.Logger.assert(false, response)
+        console.log(response);
       }
     }).catch(function(error) {
-      Ember.Logger.assert(false, error)
+      console.log(error);
     });
   },
   selectRepository(repository) {
@@ -116,7 +115,7 @@ export default Component.extend({
       this.client.save().then(function () {
         self.reset();
       }).catch(function(reason){
-        Ember.Logger.assert(false, reason);
+        console.log(reason);
       });
     },
     searchRepository(query) {
@@ -130,7 +129,7 @@ export default Component.extend({
       client.save().then(function () {
         self.reset();
       }).catch(function(reason){
-        Ember.Logger.assert(false, reason);
+        console.log(reason);
       });
     },
     destroy(client) {
@@ -158,7 +157,11 @@ export default Component.extend({
     onSuccess() {
     },
     onError(error) {
-      Ember.Logger.assert(false, error)
+      if (console.debug) {
+        console.debug(error);
+      } else {
+        console.log(error);
+      }
     },
     searchSoftware(query) {
       this.searchSoftware(query);

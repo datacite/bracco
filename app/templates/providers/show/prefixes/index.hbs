@@ -1,11 +1,16 @@
 <div class="row">
-    <div class='col-md-3'>
+  <div class="col-md-3">
     {{#if (can "write prefix" model.prefixes)}}
       <div class="panel facets">
         <div class="panel-body">
           <div class="btn-toolbar">
             <div class="btn-group btn-group-sm">
-              {{#link-to "providers.show.prefixes.new" model.provider.id class="btn btn-warning"}}{{fa-icon "link"}}Assign Prefix{{/link-to}}
+              {{#link-to 
+                "providers.show.prefixes.new" 
+                model.provider.id 
+                class="btn btn-warning"
+              }}{{fa-icon "link"}}Assign Prefix
+              {{/link-to}}
             </div>
           </div>
         </div>
@@ -26,9 +31,14 @@
             {{#each model.prefixes.meta.states as |state|}}
               <li>
                 {{#if model.prefixes.otherParams.state}}
-                  {{#link-to 'providers.show.prefixes' (query-params state=null)}}{{fa-icon "check-square-o"}}{{/link-to}}
+                  {{#link-to 
+                    "providers.show.prefixes" 
+                    (query-params 
+                    state=null)
+                  }}{{fa-icon "check-square-o"}}
+                  {{/link-to}}
                 {{else}}
-                  {{#link-to 'providers.show.prefixes' (query-params state=state.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                  {{#link-to "providers.show.prefixes" (query-params state=state.id)}}{{fa-icon "square-o"}}{{/link-to}}
                 {{/if}}
                 <div class="facet-title">{{state.title}}</div>
                 <span class="number pull-right">{{state.count}}</span>
@@ -48,9 +58,17 @@
             {{#each model.prefixes.meta.years as |year|}}
               <li>
                 {{#if model.prefixes.otherParams.year}}
-                  {{#link-to 'providers.show.prefixes' (query-params year=null)}}{{fa-icon "check-square-o"}}{{/link-to}}
+                  {{#link-to 
+                    "providers.show.prefixes" 
+                    (query-params year=null)
+                  }}{{fa-icon "check-square-o"}}
+                  {{/link-to}}
                 {{else}}
-                  {{#link-to 'providers.show.prefixes' (query-params year=year.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                  {{#link-to 
+                    "providers.show.prefixes" 
+                    (query-params year=year.id)
+                  }}{{fa-icon "square-o"}}
+                  {{/link-to}}
                 {{/if}}
                 <div class="facet-title">{{year.title}}</div>
                 <span class="number pull-right">{{year.count}}</span>
@@ -69,9 +87,9 @@
             {{#each model.prefixes.meta.providers as |provider|}}
               <li>
                 {{#if model.prefixes.otherParams.provider-id}}
-                  {{#link-to 'providers.show.prefixes' (query-params provider-id=null)}}{{fa-icon "check-square-o"}}{{/link-to}}
+                  {{#link-to "providers.show.prefixes" (query-params provider-id=null)}}{{fa-icon "check-square-o"}}{{/link-to}}
                 {{else}}
-                  {{#link-to 'providers.show.prefixes' (query-params provider-id=provider.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                  {{#link-to "providers.show.prefixes" (query-params provider-id=provider.id)}}{{fa-icon "square-o"}}{{/link-to}}
                 {{/if}}
                 <div class="facet-title">{{provider.title}}</div>
                 <span class="number pull-right">{{provider.count}}</span>
@@ -83,8 +101,12 @@
       </div>
     {{/if}}
   </div>
-  <div class='col-md-9 panel-list' id="content">
-    {{model-search model=model.prefixes sortable=true link='providers.show.prefixes'}}
+  <div class="col-md-9 panel-list" id="content">
+    {{model-search 
+      model=model.prefixes 
+      sortable=true 
+      link="providers.show.prefixes"
+    }}
     
     {{#if model.prefixes}}
       {{#each model.prefixes as |provider-prefix|}}
@@ -99,7 +121,7 @@
             {{#if (eq provider-prefix.prefix.id "10.5072")}}
               <span class="icon-default">Demo prefix</span>
             {{else}}
-              <h5>{{pluralize-word provider-prefix.clients.length "Client" omitCount=true}}</h5>
+              <h5>{{pluralize provider-prefix.clients.length "Client" omitCount=true}}</h5>
               {{#if provider-prefix.clients}}
                 {{#each provider-prefix.clients as |client|}}
                   {{#link-to "clients.show.prefixes.show" client.id provider-prefix.prefix.id}}{{client.name}}{{/link-to}}<br/>
@@ -120,7 +142,7 @@
       {{/each}}
       <div class="text-center">
         {{#if (gt model.prefixes.meta.total_pages 1)}}
-          {{page-numbers content=model.prefixes numPagesToShow=5 showFL=true}}
+          {{page-numbers content=prefixesPaginator numPagesToShow=5 showFL=true}}
         {{/if}}
       </div>
     {{else}}

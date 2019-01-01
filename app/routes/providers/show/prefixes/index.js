@@ -1,5 +1,5 @@
 import { hash } from 'rsvp';
-import { merge } from '@ember/polyfills';
+import { assign } from '@ember/polyfills';
 import Route from '@ember/routing/route';
 import RouteMixin from 'ember-cli-pagination/remote/route-mixin';
 import { CanMixin } from 'ember-can';
@@ -12,7 +12,7 @@ export default Route.extend(CanMixin, RouteMixin, {
                             perPage: "page[size]",
                             total_pages: "totalPages" };
 
-    params = merge(params, { 'provider-id': this.modelFor('providers/show').get('id') });
+    params = assign(params, { 'provider-id': this.modelFor('providers/show').get('id') });
 
     return hash({
       provider: this.modelFor('providers/show'),

@@ -3,20 +3,44 @@
     <div class="col-md-9 col-md-offset-3 form-help-header">
       <h3 class="help-header">Create DOI (Form)</h3>
       <div class="help-block">
-        More information about DOI registration via form can be found on our <a target="_blank" href="https://support.datacite.org/docs/fabrica-create-doi-form">Support Website</a>.
+        More information about DOI registration via form can be found on our <a target="_blank" rel="noopener" href="https://support.datacite.org/docs/fabrica-create-doi-form">Support Website</a>.
       </div>
     </div>
 
-    {{#bs-form formLayout="horizontal" horizontalLabelGridClass="col-md-3" model=model.doi onSubmit=(action "submit" model.doi) as |form|}}
+    {{#bs-form 
+      formLayout="horizontal" 
+      horizontalLabelGridClass="col-md-3" 
+      model=model.doi 
+      onSubmit=(action "submit" model.doi) 
+    as |form|
+    }}
       {{doi-doi model=model.doi client=model.client form=form}}
 
-      {{form.element controlType="text" label="URL" property="url" helpText="The location of the landing page with more information about the resource." required=false}}
+      {{form.element 
+        controlType="text" 
+        label="URL" 
+        property="url" 
+        helpText="The location of the landing page with more information about the resource." 
+        required=false
+      }}
 
       {{doi-creator model=model.doi form=form}}
       {{doi-titles model=model.doi form=form}}
       
-      {{form.element controlType="text" label="Publisher" property="publisher" helpText="The name of the entity that holds, archives, publishes prints, distributes, releases, issues, or produces the resource." required=false}}
-      {{form.element controlType="text" label="Publication Year" property="publicationYear" helpText="The year when the resource was or will be made publicly available. Must be between 1450 and 2019." required=false}}
+      {{form.element 
+        controlType="text" 
+        label="Publisher" 
+        property="publisher" 
+        helpText="The name of the entity that holds, archives, publishes prints, distributes, releases, issues, or produces the resource." 
+        required=false
+      }}
+      {{form.element 
+        controlType="text" 
+        label="Publication Year" 
+        property="publicationYear" 
+        helpText="The year when the resource was or will be made publicly available. Must be between 1450 and 2019." 
+        required=false
+      }}
 
       {{doi-types model=model.doi form=form}}
       {{doi-descriptions model=model.doi form=form}}

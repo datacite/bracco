@@ -1,5 +1,4 @@
 import { inject as service } from '@ember/service';
-import Ember from 'ember';
 import BaseValidator from 'ember-cp-validations/validators/base';
 import fetch from 'fetch';
 import ENV from 'bracco/config/environment';
@@ -48,10 +47,18 @@ const metadata = BaseValidator.extend({
             }
           });
         } else {
-          Ember.Logger.assert(false, response);
+          if (console.debug) {
+            console.debug(response);
+          } else {
+            console.log(response);
+          }
         }
       }).catch(function(error) {
-        Ember.Logger.assert(false, error);
+        if (console.debug) {
+          console.debug(error);
+        } else {
+          console.log(error);
+        }
       });
     }
   },

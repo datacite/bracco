@@ -1,6 +1,6 @@
 import { inject as service } from '@ember/service';
 import Component from '@ember/component';
-import Ember from 'ember';
+
 const softwareList = [
   'CKAN',
   'Dataverse',
@@ -81,7 +81,7 @@ export default Component.extend({
         self.get('router').transitionTo('clients.show.settings', client.id);
         self.set('new', false);
       }).catch(function(reason){
-        Ember.Logger.assert(false, reason);
+        console.log(reason);
       });
     },
     cancel() {

@@ -31,7 +31,7 @@
     </div>
   </div>
 {{else}}
-  <div class='col-md-3'>
+  <div class="col-md-3">
     {{#if (and (can "create client" model) (eq link "providers.show.clients"))}}
       <div class="panel facets">
         <div class="panel-body">
@@ -59,7 +59,7 @@
               {{#each model.meta.years as |year|}}
                 <li>
                   {{#if model.otherParams.year}}
-                    {{#link-to link (query-params year='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+                    {{#link-to link (query-params year="")}}{{fa-icon "check-square-o"}}{{/link-to}}
                   {{else}}
                     {{#link-to link (query-params year=year.id)}}{{fa-icon "square-o"}}{{/link-to}}
                   {{/if}}
@@ -70,7 +70,7 @@
               {{/each}}
             {{else}}
               <li>
-                {{#link-to "clients" (query-params year='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+                {{#link-to "clients" (query-params year="")}}{{fa-icon "check-square-o"}}{{/link-to}}
                 <div class="facet-title">{{model.otherParams.year}}</div>
                 <span class="number pull-right">0</span>
                 <div class="clearfix"/>
@@ -89,7 +89,7 @@
               {{#each model.meta.software as |software|}}
                 <li>
                   {{#if model.otherParams.software}}
-                    {{#link-to link (query-params software='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+                    {{#link-to link (query-params software="")}}{{fa-icon "check-square-o"}}{{/link-to}}
                   {{else}}
                     {{#link-to link (query-params software=software.id)}}{{fa-icon "square-o"}}{{/link-to}}
                   {{/if}}
@@ -100,7 +100,7 @@
               {{/each}}
             {{else}}
               <li>
-                {{#link-to "clients" (query-params software='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+                {{#link-to "clients" (query-params software="")}}{{fa-icon "check-square-o"}}{{/link-to}}
                 <div class="facet-title">{{model.otherParams.software}}</div>
                 <span class="number pull-right">0</span>
                 <div class="clearfix"/>
@@ -111,7 +111,7 @@
       </div>
     {{/if}}
   </div>
-  <div class='col-md-9 panel-list' id="content">
+  <div class="col-md-9 panel-list" id="content">
     {{#if searchable}}
       {{model-search model=model sortable=true link=link}}
     {{/if}}
@@ -153,13 +153,13 @@
 
             {{#if client.domainList}}
               <h5>
-                {{pluralize-word client.domainList.length "Domain" omitCount=true}}
+                {{pluralize client.domainList.length "Domain" omitCount=true}}
                 <span>{{fa-icon "question-circle-o"}}
                   {{#bs-tooltip placement="top" viewportPadding=10}}URLs for DOIs must use {{#if (gt client.domainList.length 1)}}one of these (sub-)domains{{else}}this (sub-)domain{{/if}}.{{/bs-tooltip}}
                 </span>
               </h5>
               {{#each client.domainList as |domain|}}
-                {{domain}}<br/>
+                {{domain}}<br>
               {{/each}}
             {{/if}}
           </div>

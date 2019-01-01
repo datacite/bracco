@@ -1,4 +1,11 @@
-{{#bs-navbar type=type fluid=true collapsed=collapsed onCollapse=(action (mut collapsed) true) onExpand=(action (mut collapsed) false) as |navbar|}}
+{{#bs-navbar 
+  type=type 
+  fluid=true 
+  collapsed=collapsed 
+  onCollapse=(action (mut collapsed) true) 
+  onExpand=(action (mut collapsed) false) 
+as |navbar|
+}}
   <div class="navbar-header">
     {{navbar.toggle}}
     <a href="/" class="navbar-brand">{{title}}</a>
@@ -8,7 +15,7 @@
       {{#if home}}
         {{#nav.item}}{{#dynamic-link params=home}}Home{{/dynamic-link}}{{/nav.item}}
       {{/if}}
-      {{#nav.item}}<a target="_blank" href="https://support.datacite.org">Support</a>{{/nav.item}}
+      {{#nav.item}}<a target="_blank" rel="noopener" href="https://support.datacite.org">Support</a>{{/nav.item}}
       {{#if user}}
         {{menu-user class="dropdown"}}
       {{/if}}

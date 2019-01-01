@@ -1,6 +1,5 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
-import Ember from 'ember';
 import fetch from 'fetch';
 import ENV from 'bracco/config/environment';
 
@@ -14,7 +13,11 @@ export default Controller.extend({
       user.save().then(function() {
         self.get('session').invalidate();
       }).catch(function(reason){
-        Ember.Logger.assert(false, reason);
+        if (console.debug) {
+          console.debug(reason);
+        } else {
+          console.log(reason);
+        }
       });
     },
     cancel() {
@@ -36,10 +39,18 @@ export default Controller.extend({
             self.get('model').set('passwordInput', data.phrase);
           });
         } else {
-          Ember.Logger.assert(false, response)
+          if (console.debug) {
+            console.debug(response);
+          } else {
+            console.log(response);
+          }
         }
       }).catch(function(error) {
-        Ember.Logger.assert(false, error)
+        if (console.debug) {
+          console.debug(error);
+        } else {
+          console.log(error);
+        }
       });
     },
   }

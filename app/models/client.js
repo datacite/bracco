@@ -110,7 +110,7 @@ export default DS.Model.extend(Validations, {
       return item.trim();
     });
   }),
-  // 'provider-id': Ember.computed('id', function() {
+  // 'provider-id': Ember.defineProperty('id', function() {
   //   return this.get('id').split('.').get('firstObject');
   // }),
   doiCount: computed('meta.dois', function() {

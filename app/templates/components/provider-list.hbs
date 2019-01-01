@@ -186,13 +186,13 @@
       {{/if}}
     {{/if}}
   </div>
-  <div class='col-md-9 panel-list' id="content">
+  <div class="col-md-9 panel-list" id="content">
     {{#if searchable}}
-      {{model-search model=model sortable=true link='providers'}}
+      {{model-search model=providersPaginator sortable=true link="providers"}}
     {{/if}}
 
-    {{#if model}}
-      {{#each model as |provider|}}
+    {{#if providersPaginator}}
+      {{#each providersPaginator as |provider|}}
         <div class="panel panel-transparent">
           <div class="panel-body">
             <h3 class="work">

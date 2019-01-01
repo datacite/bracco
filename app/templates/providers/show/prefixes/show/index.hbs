@@ -1,24 +1,30 @@
 <div class="row">
-  <div class='col-md-3'>
+  <div class="col-md-3">
     {{#if (and (can "update prefix" model) (not model.clients))}}
       <div class="panel facets add">
         <div class="panel-body">
           <div class="btn-toolbar">
             <div class="btn-group btn-group-sm">
-              {{#link-to "providers.show.prefixes.show.delete" model.provider.id model.prefix.id class="btn btn-warning"}}{{fa-icon "pencil"}} Remove Prefix{{/link-to}}
+              {{#link-to 
+                "providers.show.prefixes.show.delete" 
+                model.provider.id 
+                model.prefix.id 
+                class="btn btn-warning"
+              }}{{fa-icon "pencil"}} Remove Prefix
+              {{/link-to}}
             </div>
           </div>
         </div>
       </div>
     {{/if}}
   </div>
-  <div class='col-md-9'>
+  <div class="col-md-9">
     <h2 class="work">{{model.prefix.id}}</h2>
   </div>
 </div>
 
 <div class="row">
-  <div class='col-md-3'>
+  <div class="col-md-3">
     {{client-sidebar model=model}}
   </div>
   <div class="col-md-9">
@@ -27,10 +33,10 @@
         {{#if (eq model.prefix.id "10.5072")}}
           <span class="icon-default">Demo prefix</span>
         {{else}}
-          <h5>{{pluralize-word model.clients.length "Client" omitCount=true}}</h5>
+          <h5>{{pluralize model.clients.length "Client" omitCount=true}}</h5>
           {{#if model.clients}}
             {{#each model.clients as |client|}}
-              {{#link-to "clients.show.prefixes.show" client.id model.prefix.id}}{{client.name}}{{/link-to}}<br/>
+              {{#link-to "clients.show.prefixes.show" client.id model.prefix.id}}{{client.name}}{{/link-to}}<br>
             {{/each}}
           {{else}}
             <span class="icon-warning">No clients found.</span>

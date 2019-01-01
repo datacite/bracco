@@ -1,6 +1,5 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
-import Ember from 'ember';
 
 export default Controller.extend({
   store: service(),
@@ -12,7 +11,11 @@ export default Controller.extend({
       clientPrefix.save().then(function(clientPrefix) {
         self.transitionToRoute('clients.show.prefixes', clientPrefix.get('client'));
       }).catch(function(reason){
-        Ember.Logger.assert(false, reason);
+        if (console.debug) {
+          console.debug(reason);
+        } else {
+          console.log(reason);
+        }
       });
     },
     cancel() {

@@ -89,8 +89,8 @@
         {{/if}}
       </div>
       
-      <div class='col-md-9 panel-list' id="content">
-        {{model-search model=model sortable=true link='prefixes'}}
+      <div class="col-md-9 panel-list" id="content">
+        {{model-search model=model sortable=true link="prefixes"}}
 
         {{#if model}}
           {{#each model as |prefix|}}
@@ -101,7 +101,7 @@
                 {{#if (eq prefix.id "10.5072")}}
                   <span class="icon-default">Demo prefix</span>
                 {{else}}
-                  <h5>{{pluralize-word prefix.providers.length "Provider" omitCount=true}}</h5>
+                  <h5>{{pluralize prefix.providers.length "Provider" omitCount=true}}</h5>
                   {{#if prefix.providers}}
                     {{#each prefix.providers as |provider|}}
                       {{#link-to "providers.show.prefixes.show" provider.id prefix.id}}{{provider.name}}{{/link-to}}<br/>
@@ -110,7 +110,7 @@
                     <span class="icon-warning">No providers found.</span>
                   {{/if}}
 
-                  <h5>{{pluralize-word prefix.clients.length "Client" omitCount=true}}</h5>
+                  <h5>{{pluralize prefix.clients.length "Client" omitCount=true}}</h5>
                   {{#if prefix.clients}}
                     {{#each prefix.clients as |client|}}
                       {{#link-to "clients.show.prefixes.show" client.id prefix.id}}{{client.name}}{{/link-to}}<br/>

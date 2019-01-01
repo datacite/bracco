@@ -1,5 +1,4 @@
 import { inject as service } from '@ember/service';
-import Ember from 'ember';
 import Component from '@ember/component';
 import ENV from 'bracco/config/environment';
 import fetch from 'fetch';
@@ -60,11 +59,19 @@ export default Component.extend({
           return suffix;
         });
       } else {
-        Ember.Logger.assert(false, response)
+        if (console.debug) {
+          console.debug(response);
+        } else {
+          console.log(response);
+        }
         return null;
       }
     }).catch(function(error) {
-      Ember.Logger.assert(false, error)
+      if (console.debug) {
+        console.debug(error);
+      } else {
+        console.log(error);
+      }
     });
   },
   selectState(state) {

@@ -1,6 +1,5 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
-import Ember from 'ember';
 import fetch from 'fetch';
 import ENV from 'bracco/config/environment';
 
@@ -33,7 +32,11 @@ export default Controller.extend({
             }
           });
         } else {
-          Ember.Logger.assert(false, response)
+          if (console.debug) {
+            console.debug(response);
+          } else {
+            console.log(response);
+          }
         }
       }).catch(function(reason) {
         self.set('errorMessage', reason.errors && reason.errors[0].title || JSON.stringify(reason));

@@ -1,7 +1,8 @@
 import { inject as service } from '@ember/service';
 import Component from '@ember/component';
-import Ember from 'ember';
+import { computed } from '@ember/object';
 import countryList from 'npm:iso-3166-country-list';
+
 const organizationTypeList = [
   'academicInstitution',
   'academicLibrary',
@@ -37,6 +38,8 @@ export default Component.extend({
   organizationTypes: organizationTypeList,
   focusAreaList,
   focusAreas: focusAreaList,
+  providersPaginator: computed.alias('model'),
+  providers: computed.alias('model.content'),
 
   reset() {
     this.set('provider', null);
@@ -85,7 +88,11 @@ export default Component.extend({
         self.get('router').transitionTo('providers.show.settings', provider.id);
         self.set('new', false);
       }).catch(function(reason){
-        Ember.Logger.assert(false, reason);
+        if (console.debug) {
+          console.debug(reason);
+        } else {
+          console.log(reason);
+        }
       });
     },
     cancel() {

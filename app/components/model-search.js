@@ -12,6 +12,7 @@ export default Component.extend(RouteMixin, {
   query: null,
   sort: null,
   queryParams: {},
+  modelName: null,
 
   didReceiveAttrs() {
     this._super(...arguments);
@@ -63,8 +64,9 @@ export default Component.extend(RouteMixin, {
                          'prefix': 'Prefix',
                          'client-prefix': 'Prefix',
                          'provider-prefix': 'Prefix' }
-    this.set('modelName', placeholders[this.model.get("modelName")]);
 
+    this.set('modelName', placeholders[this.model.get("modelName")]);
+    
     if (this.model.get("modelName") === "doi") {
       this.set('formats', { '-created': 'Sort by Date Created', 'name': 'Sort by DOI', 'relevance': 'Sort by Relevance' });
     } else if (['prefix', 'provider-prefix', 'client-prefix'].includes(this.model.get("modelName"))) {
