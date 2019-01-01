@@ -52,8 +52,8 @@
       </div>
     {{/each}}
     <div class="text-center">
-      {{#if (gt model.prefixes.meta.total_pages 1)}}
-        {{page-numbers content=model.prefixes numPagesToShow=3 showFL=true}}
+      {{#if (gt model.prefixes.meta.totalPages 1)}}
+        {{page-numbers model=model.prefixes link="clients.show.prefixes"}}
       {{/if}}
     </div>
   {{else}}

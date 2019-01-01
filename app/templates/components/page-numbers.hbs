@@ -1,12 +1,35 @@
 <div class="pagination-centered">
   <ul class="pagination">
-    {{#if canStepBackward}}
+    {{#if previousPage}}
       <li class="arrow prev enabled-arrow">
-        <a href="#" {{action "incrementPage" -1}}>&laquo;</a>
+        {{#link-to 
+          link 
+          (query-params
+          page=previousPage
+          size=25
+          sort=null
+          query=null 
+          created=null 
+          registered=null 
+          state=null 
+          resource-type-id=null 
+          schema-version=null 
+          prefix=null 
+          client-id=null 
+          source=null 
+          year=null 
+          provider-id=null 
+          region=null 
+          organization-type=null 
+          focus-area=null 
+          link-check-status=null 
+          software=null)
+        }}&laquo;
+        {{/link-to}}
       </li>
     {{else}}
       <li class="arrow prev disabled">
-        <a href="#" {{action "incrementPage" -1}}>&laquo;</a>
+        <a>&laquo;</a>
       </li>
     {{/if}}
 
@@ -15,25 +38,70 @@
         <li class="dots disabled">
           <span>...</span>
         </li>
-      {{/if}}
-      {{#if item.current}}
+      {{else if item.current}}
         <li class="active page-number">
           <a>{{item.page}}</a>
         </li>
       {{else}}
         <li class="page-number">
-          <a href="#" {{action "pageClicked" item.page}}>{{item.page}}</a>
+          {{#link-to 
+            link 
+            (query-params
+            page=item.page
+            size=25
+            sort=null
+            query=null 
+            created=null 
+            registered=null 
+            state=null 
+            resource-type-id=null 
+            schema-version=null 
+            prefix=null 
+            client-id=null 
+            source=null 
+            year=null 
+            provider-id=null 
+            region=null 
+            organization-type=null 
+            focus-area=null 
+            link-check-status=null 
+            software=null)
+          }}{{item.page}}
+          {{/link-to}}
         </li>
       {{/if}}
     {{/each}}
 
-    {{#if canStepForward}}
+    {{#if nextPage}}
       <li class="arrow next enabled-arrow">
-        <a href="#" {{action "incrementPage" 1}}>&raquo;</a>
+        {{#link-to 
+          link 
+          (query-params
+          page=nextPage
+          size=25
+          sort=null
+          query=null 
+          created=null 
+          registered=null 
+          state=null 
+          resource-type-id=null 
+          schema-version=null 
+          prefix=null 
+          client-id=null 
+          source=null 
+          year=null 
+          provider-id=null 
+          region=null 
+          organization-type=null 
+          focus-area=null 
+          link-check-status=null 
+          software=null)
+        }}&raquo;
+        {{/link-to}}
       </li>
     {{else}}
       <li class="arrow next disabled">
-        <a href="#" {{action "incrementPage" 1}}>&raquo;</a>
+        <a>&raquo;</a>
       </li>
     {{/if}}
   </ul>

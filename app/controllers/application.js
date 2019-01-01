@@ -1,6 +1,5 @@
 import { next } from '@ember/runloop';
 import { observer } from '@ember/object';
-import { alias } from '@ember/object/computed';
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 

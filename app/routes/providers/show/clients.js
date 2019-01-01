@@ -25,6 +25,12 @@ export default Route.extend(CanMixin, {
     },
     size: {
       refreshModel: true
+    },
+    year: {
+      refreshModel: true
+    },
+    software: {
+      refreshModel: true
     }
   },
 

@@ -315,8 +315,8 @@
       </div>
     {{/each}}
     <div class="text-center">
-      {{#if (gt model.meta.total_pages 1)}}
-        {{page-numbers content=model numPagesToShow=5 showFL=true}}
+      {{#if (gt model.meta.totalPages 1)}}
+        {{page-numbers model=model link=link}}
       {{/if}}
     </div>
   {{else}}

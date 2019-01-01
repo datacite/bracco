@@ -81,7 +81,11 @@ export default Component.extend({
         self.get('router').transitionTo('clients.show.settings', client.id);
         self.set('new', false);
       }).catch(function(reason){
-        console.log(reason);
+        if (console.debug) {
+          console.debug(reason);
+        } else {
+          console.log(reason);
+        }
       });
     },
     cancel() {
