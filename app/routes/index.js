@@ -1,9 +1,9 @@
 import { typeOf } from '@ember/utils';
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
-import { CanMixin } from 'ember-can';
 
-export default Route.extend(CanMixin, {
+export default Route.extend({
+  can: service(),
   currentUser: service(),
   flashMessages: service(),
 
@@ -24,7 +24,7 @@ export default Route.extend(CanMixin, {
   },
 
   afterModel() {
-    if (!this.can('read index') && this.currentUser) {
+    if (this.get('can').cannot('read index') && this.currentUser) {
       let home = this.currentUser.get('home');
       if (typeOf(home) == 'object') {
         return this.transitionTo(home.route, home.id);

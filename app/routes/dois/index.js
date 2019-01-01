@@ -1,8 +1,20 @@
 import Route from '@ember/routing/route';
 import { assign } from '@ember/polyfills';
-import { CanMixin } from 'ember-can';
+import { inject as service } from '@ember/service';
 
-export default Route.extend(CanMixin, {
+export default Route.extend({
+  can: service(),
+
+  beforeModel() {
+    let result = this._super(...arguments);
+
+    if (this.get('can').cannot('read index')) {
+      return this.transitionTo('index');
+    }
+
+    return result;
+  },
+
   model(params) {
     params = assign(params, { 
       page: {
@@ -47,12 +59,6 @@ export default Route.extend(CanMixin, {
     },
     'link-check-status': {
       refreshModel: true
-    }
-  },
-
-  afterModel() {
-    if (!this.can('read index')) {
-      return this.transitionTo('index');
     }
   }
 });

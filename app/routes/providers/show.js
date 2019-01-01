@@ -1,9 +1,8 @@
 import { inject as service } from '@ember/service';
 import Route from '@ember/routing/route';
-import { CanMixin } from 'ember-can';
 
-export default Route.extend(CanMixin, {
-  flashMessages: service(),
+export default Route.extend({
+  can: service(),
 
   model(params) {
     let self = this;
@@ -22,7 +21,7 @@ export default Route.extend(CanMixin, {
   },
 
   afterModel(model) {
-    if (!this.can('read provider', model)) {
+    if (this.get('can').cannot('read provider', model)) {
       return this.transitionTo('index');
     }
   },

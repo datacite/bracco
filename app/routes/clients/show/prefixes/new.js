@@ -1,8 +1,9 @@
 import { hash } from 'rsvp';
 import Route from '@ember/routing/route';
-import { CanMixin } from 'ember-can';
+import { inject as service } from '@ember/service';
 
-export default Route.extend(CanMixin, {
+export default Route.extend({
+  can: service(),
 
   model() {
     return hash({
@@ -12,7 +13,7 @@ export default Route.extend(CanMixin, {
   },
 
   // afterModel() {
-  //   if (!this.can('create prefix')) {
+  //   if (this.get('can').cannot('create prefix')) {
   //     return this.transitionTo('index');
   //   }
   // }
