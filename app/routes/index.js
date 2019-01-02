@@ -1,4 +1,3 @@
-import { typeOf } from '@ember/utils';
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
 
@@ -26,10 +25,10 @@ export default Route.extend({
   afterModel() {
     if (this.get('can').cannot('read index') && this.currentUser) {
       let home = this.currentUser.get('home');
-      if (typeOf(home) == 'object') {
+      if (home && home.id) {
         return this.transitionTo(home.route, home.id);
       } else if (home) {
-        return this.transitionTo(home);
+        return this.transitionTo(home.route);
       } else {
         return this.transitionTo('index');
       }

@@ -69,7 +69,7 @@ export default Service.extend({
         this.set('home', { route: 'clients.show', id: this.uid });
         this.set('settings', { route: 'clients.show.settings', id: this.uid });
       } else if (payload.role_id === 'user') {
-        this.set('home', 'password');
+        this.set('home', { route: 'password' });
       }
 
       if (payload.role_id !== 'user') {
