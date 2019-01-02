@@ -6,9 +6,9 @@
 
     <div class="content">
       <div class="row">
-        {{bar-chart data=model.providerCount label='Provider' link='providers'}}
-        {{bar-chart data=model.clientCount label='Client' link='clients'}}
-        {{bar-chart data=model.doiCount label='DOI' link='dois' cumulative=false}}
+        {{bar-chart data=model.providerCount label="Provider" link="providers"}}
+        {{bar-chart data=model.clientCount label="Client" link="clients"}}
+        {{bar-chart data=model.doiCount label="DOI" link="dois" cumulative=false}}
       </div>
 
       {{#if (can "read messages" model)}}

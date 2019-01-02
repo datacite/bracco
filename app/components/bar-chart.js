@@ -9,7 +9,7 @@ export default Component.extend({
   data: null,
   count: computed('data', function() {
     if (this.data) {
-      let currentYear = this.data.findBy('id', '2018');
+      let currentYear = this.data.findBy('id', '2019');
       if (currentYear) {
         return currentYear.count;
       } else {
@@ -52,7 +52,7 @@ export default Component.extend({
     let margin = { top: 10, right: 5, bottom: 20, left: 5 };
 
     let startDate = new Date("2010-01-01");
-    let endDate = new Date("2019-01-01");
+    let endDate = new Date("2020-01-01");
     let domain = [startDate, endDate];
     let length = d3.time.years(startDate, endDate).length;
     let width = length * 22;

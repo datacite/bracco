@@ -113,7 +113,7 @@ export default DS.Model.extend(Validations, {
     return this.get('meta.dois');
   }),
   currentDoiCount: computed('doiCount', function() {
-    let currentYear = this.doiCount.findBy('id', 2018);
+    let currentYear = this.doiCount.findBy('id', 2019);
     if (currentYear) {
       return currentYear.count;
     } else {
