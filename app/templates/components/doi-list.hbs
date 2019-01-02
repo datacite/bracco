@@ -265,7 +265,7 @@
       </div>
     </div>
   {{/if}}
-   {{#if (and (can "viewHealth doi" model) (or model.meta.linkChecksStatus model.query.link-checks-status))}}
+  {{#if (and (can "viewHealth doi" model) (or model.meta.linkChecksStatus model.query.link-checks-status))}}
     <div class="panel facets add">
       <div class="panel-body">
         <h4>Link Check Status</h4>
@@ -297,7 +297,7 @@
   {{/if}}
 </div>
 
-<div class='col-md-9 panel-list' id="content">
+<div class="col-md-9 panel-list" id="content">
   {{model-search model=model link=link sortable=true}}
 
   {{#if model}}
@@ -309,7 +309,7 @@
           {{#if doi.isDraft}}
             {{fa-icon "info-circle"}} {{doi.doi}}
           {{else}}
-            <a href="{{doi.identifier}}">{{fa-icon "external-link"}} {{doi.identifier}}</a>
+            <a href={{doi.identifier}}>{{fa-icon "external-link"}} {{doi.identifier}}</a>
           {{/if}}
         </div>
       </div>
