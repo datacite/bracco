@@ -34,7 +34,7 @@ export default Component.extend({
     } else {
       contentType = "unknown";
     }
-    if (w("text/html application/json").includes(contentType)) {     
+    if (w("text/html application/json").includes(contentType)) {
       this.set('hasLandingPage', {
         text: "The URL resolves to a landing page.",
         helpText: "The link check returned the HTTP content type <strong>" + contentType + "</strong>.",
@@ -49,14 +49,14 @@ export default Component.extend({
     }
     if (this.model.get("landingPage").bodyHasPid) {
       this.set('hasDoi', {
-        text: "The landing page includes a machine-readable DOI.",
-        helpText: "The link check found the DOI in a <strong>DC.identifier</strong> or <strong>citation_doi</strong> meta tag, or in <strong>schema.org</strong> metadata.",
+        text: "The landing page includes the DOI.",
+        helpText: "The link check found the DOI in the landing page body.",
         isChecked: true
       })
     } else {
       this.set('hasDoi', {
-        text: "No machine-readable DOI was found on the landing page.",
-        helpText: "The link check did not find the DOI in a <strong>DC.identifier</strong> or <strong>citation_doi</strong> meta tag, or in <strong>schema.org</strong> metadata. Please reach out to DataCite Support if we missed an embedded machine-readable DOI.",
+        text: "No DOI was found on the landing page.",
+        helpText: "The link check did not find the DOI in the landing page body.",
         isChecked: false
       })
     }
