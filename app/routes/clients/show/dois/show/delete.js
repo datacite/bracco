@@ -1,9 +1,7 @@
 import Route from '@ember/routing/route';
-import { inject as service } from '@ember/service';
+import { CanMixin } from 'ember-can';
 
-export default Route.extend({
-  can: service(),
-
+export default Route.extend(CanMixin, {
   model() {
     let self = this;
     return this.store.findRecord('doi', this.modelFor('clients/show/dois/show').get('id'), { include: 'client' }).then(function(doi) {
@@ -21,7 +19,7 @@ export default Route.extend({
   },
 
   afterModel() {
-    if (this.get('can').cannot('delete doi', this.modelFor('clients/show/dois/show'))) {
+    if (!this.can('delete doi', this.modelFor('clients/show/dois/show'))) {
       return this.transitionTo('index');
     } else {
       this.modelFor('clients/show/dois/show').set('mode', 'delete');

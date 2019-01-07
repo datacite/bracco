@@ -1,9 +1,7 @@
 import Route from '@ember/routing/route';
-import { inject as service } from '@ember/service';
+import { CanMixin } from 'ember-can';
 
-export default Route.extend({
-  can: service(),
-
+export default Route.extend(CanMixin, {
   model() {
     let self = this;
     return this.store.findRecord('provider', 'admin').then(function(admin) {
@@ -20,7 +18,7 @@ export default Route.extend({
   },
 
   afterModel() {
-    if (this.get('can').cannot('read index')) {
+    if (!this.can('read index')) {
       return this.transitionTo('index');
     }
   },

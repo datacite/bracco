@@ -1,11 +1,9 @@
 import { hash } from 'rsvp';
 import { assign } from '@ember/polyfills';
 import Route from '@ember/routing/route';
-import { inject as service } from '@ember/service';
+import { CanMixin } from 'ember-can';
 
-export default Route.extend({
-  can: service(),
-  
+export default Route.extend(CanMixin, {
   model(params) {
     params = assign(params, { 
       page: {
@@ -31,7 +29,7 @@ export default Route.extend({
   },
 
   afterModel() {
-    if (this.get('can').cannot('read provider', this.modelFor('providers/show'))) {
+    if (!this.can('read provider', this.modelFor('providers/show'))) {
       return this.transitionTo('index');
     }
   }

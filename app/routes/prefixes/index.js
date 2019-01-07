@@ -1,20 +1,8 @@
 import Route from '@ember/routing/route';
 import { assign } from '@ember/polyfills';
-import { inject as service } from '@ember/service';
+import { CanMixin } from 'ember-can';
 
-export default Route.extend({
-  can: service(),
-
-  beforeModel() {
-    let result = this._super(...arguments);
-
-    if (this.get('can').cannot('read index')) {
-      return this.transitionTo('index');
-    }
-
-    return result;
-  },
-
+export default Route.extend(CanMixin, {
   model(params) {
     params = assign(params, { 
       page: {
@@ -24,6 +12,12 @@ export default Route.extend({
     });
 
     return this.store.query('prefix', params);
+  },
+
+  afterModel() {
+    if (!this.can('read index')) {
+      return this.transitionTo('index');
+    }
   },
 
   queryParams: {

@@ -1,10 +1,8 @@
 import { hash } from 'rsvp';
 import Route from '@ember/routing/route';
-import { inject as service } from '@ember/service';
+import { CanMixin } from 'ember-can';
 
-export default Route.extend({
-  can: service(),
-
+export default Route.extend(CanMixin, {
   model() {
     return hash({
       client: this.store.findRecord('client', this.modelFor('clients/show').get('id')),
