@@ -43,22 +43,22 @@ export default Component.extend({
       headers: {
         'Authorization': 'Bearer ' + this.currentUser.get('jwt')
       }
-    }).then(function(response) {
+    }).then(function (response) {
       if (response.ok) {
-        response.json().then(function(data) {
+        response.json().then(function (data) {
           self.get('model').set('passwordInput', data.phrase);
         });
       } else {
         console.log(response);
       }
-    }).catch(function(error) {
+    }).catch(function (error) {
       console.log(error);
     });
   },
   selectRepository(repository) {
     if (repository) {
       let self = this;
-      this.store.findRecord('repository', repository.id).then(function(repo) {
+      this.store.findRecord('repository', repository.id).then(function (repo) {
         self.set('repository', repo)
         self.get('client').set('repository', repo);
         self.get('client').set('name', repo.get('repositoryName'));
@@ -77,7 +77,7 @@ export default Component.extend({
     }
   },
   searchSoftware(query) {
-    var softwares = softwareList.filter(function(software) {
+    var softwares = softwareList.filter(function (software) {
       return software.toLowerCase().startsWith(query.toLowerCase());
     })
     this.set('softwares', softwares);
@@ -114,7 +114,7 @@ export default Component.extend({
       this.client.set('keepPassword', false);
       this.client.save().then(function () {
         self.reset();
-      }).catch(function(reason){
+      }).catch(function (reason) {
         console.log(reason);
       });
     },
@@ -126,15 +126,22 @@ export default Component.extend({
     },
     submit(client) {
       let self = this;
+
+      // Remove all whitespace on domains.
+      if (client.get('domains')) {
+        var domains = client.get('domains');
+        client.set('domains', domains.replace(/\s/g, ''));
+      }
+
       client.save().then(function () {
         self.reset();
-      }).catch(function(reason){
+      }).catch(function (reason) {
         console.log(reason);
       });
     },
     destroy(client) {
       let self = this;
-      this.store.findRecord("client", client.id, { backgroundReload: false }).then(function(client) {
+      this.store.findRecord("client", client.id, { backgroundReload: false }).then(function (client) {
         client.destroyRecord().then(function () {
           self.get('router').transitionTo('providers.show.settings', self.get('provider'));
         });
