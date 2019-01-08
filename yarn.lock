@@ -2051,7 +2051,7 @@ babel-plugin-ember-modules-api-polyfill@^2.3.0:
   dependencies:
     ember-rfc176-data "^0.3.0"
 
-babel-plugin-ember-modules-api-polyfill@^2.6.0:
+babel-plugin-ember-modules-api-polyfill@^2.3.2, babel-plugin-ember-modules-api-polyfill@^2.6.0:
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-ember-modules-api-polyfill/-/babel-plugin-ember-modules-api-polyfill-2.6.0.tgz#9524a65ef0c31ee82536a19c243fbaec1b977cbb"
   dependencies:
@@ -3214,7 +3214,7 @@ broccoli-babel-transpiler@^6.5.0:
     rsvp "^4.8.2"
     workerpool "^2.3.0"
 
-broccoli-babel-transpiler@^7.1.0:
+broccoli-babel-transpiler@^7.0.0, broccoli-babel-transpiler@^7.1.0:
   version "7.1.1"
   resolved "https://registry.yarnpkg.com/broccoli-babel-transpiler/-/broccoli-babel-transpiler-7.1.1.tgz#4202cd0653845083ee744fb4eaa4a2b50292f03f"
   dependencies:
@@ -6935,6 +6935,28 @@ ember-cli-babel@^7.1.0, ember-cli-babel@^7.1.2, ember-cli-babel@^7.1.3, ember-cl
     ensure-posix-path "^1.0.2"
     semver "^5.5.0"
 
+ember-cli-babel@~7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/ember-cli-babel/-/ember-cli-babel-7.0.0.tgz#92aeda2017127bfbf3fbc16a071ae824a1208099"
+  integrity sha512-77cE7l4MZt6E/ivN66B4y5BiBh/fHHNo3gI+ZuTQCCifG0QQNLpe+sZQIP+cKT3SnRPtGJrW+cX3ZCemDA7psg==
+  dependencies:
+    "@babel/core" "^7.0.0"
+    "@babel/plugin-transform-modules-amd" "^7.0.0"
+    "@babel/polyfill" "^7.0.0"
+    "@babel/preset-env" "^7.0.0"
+    amd-name-resolver "1.2.0"
+    babel-plugin-debug-macros "^0.2.0-beta.6"
+    babel-plugin-ember-modules-api-polyfill "^2.3.2"
+    babel-plugin-module-resolver "^3.1.1"
+    broccoli-babel-transpiler "^7.0.0"
+    broccoli-debug "^0.6.4"
+    broccoli-funnel "^2.0.1"
+    broccoli-source "^1.1.0"
+    clone "^2.1.2"
+    ember-cli-version-checker "^2.1.2"
+    ensure-posix-path "^1.0.2"
+    semver "^5.5.0"
+
 ember-cli-broccoli-sane-watcher@^2.0.4:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/ember-cli-broccoli-sane-watcher/-/ember-cli-broccoli-sane-watcher-2.0.4.tgz#f43f42f75b7509c212fb926cd9aea86ae19264c6"
@@ -7658,7 +7680,7 @@ ember-cookies@^0.3.0:
     ember-cli-babel "^6.8.2"
     ember-getowner-polyfill "^1.1.0 || ^2.0.0"
 
-ember-copy@^1.0.0:
+ember-copy@1.0.0, ember-copy@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/ember-copy/-/ember-copy-1.0.0.tgz#426554ba6cf65920f31d24d0a3ca2cb1be16e4aa"
   dependencies:
@@ -7677,14 +7699,28 @@ ember-cp-validations@^3.4.1:
     exists-sync "0.0.4"
     walk-sync "^0.3.1"
 
-ember-data-factory-guy@^2.18.0:
-  version "2.18.0"
-  resolved "https://registry.yarnpkg.com/ember-data-factory-guy/-/ember-data-factory-guy-2.18.0.tgz#2936b50e37e4831a11da721ff174d5a56c27cc7b"
+ember-data-factory-guy@^3.4.0:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/ember-data-factory-guy/-/ember-data-factory-guy-3.4.0.tgz#27d8a7f5ce3dff607f18cd6d3c82e567bc7f7ab9"
+  integrity sha512-rhUT+Zw8zSWs8JJ1IaObloXgL01B72q3XvAYY+Pa6Ru5IYa5b7Q7f42PmfXZxiLbaNf8uhXL4bbzzMLYsPliCA==
   dependencies:
     broccoli-funnel "^1.0.1"
     broccoli-merge-trees "^1.1.1"
-    ember-cli-babel "^6.7.1"
-    pretender "^1.6.0"
+    ember-cli-babel "~7.0.0"
+    pretender "~2.0.0"
+
+ember-data-model-fragments@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/ember-data-model-fragments/-/ember-data-model-fragments-3.3.0.tgz#93e3ddba6fab2150435f995e07d25a4d88694886"
+  integrity sha512-fzBGYCSooaF7sqhxrv08TqG7okye7btYjefGq0ATucaAqSVMkjDkmM9/304nQYHWbKpzWeAzX/qJKSMYaWpN6g==
+  dependencies:
+    broccoli-file-creator "^2.1.1"
+    broccoli-merge-trees "^3.0.0"
+    calculate-cache-key-for-tree "^1.1.0"
+    ember-cli-babel "^6.8.0"
+    ember-copy "1.0.0"
+    git-repo-info "^2.0.0"
+    npm-git-info "^1.0.3"
 
 ember-data@~3.6.0:
   version "3.6.0"
@@ -8116,6 +8152,7 @@ ember-runtime-enumerable-includes-polyfill@^2.0.0:
 ember-simple-auth@^1.8.0:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/ember-simple-auth/-/ember-simple-auth-1.8.0.tgz#e7b80ba0c35ae7e06adba4af365a9f1d3b9c9110"
+  integrity sha512-CN8NvjWK7cMiAofH7WPrEy/vFaIcEKEIG66vGSeD17Ssq5AXYbC0Ks6t0crSOaB3s7IoDrBHgM4NJScY6c/+MQ==
   dependencies:
     base-64 "^0.1.0"
     broccoli-file-creator "^2.0.0"
@@ -8957,9 +8994,10 @@ extsprintf@1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/extsprintf/-/extsprintf-1.0.2.tgz#e1080e0658e300b06294990cc70e1502235fd550"
 
-fake-xml-http-request@^1.6.0:
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/fake-xml-http-request/-/fake-xml-http-request-1.6.0.tgz#bd0ac79ae3e2660098282048a12c730a6f64d550"
+fake-xml-http-request@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/fake-xml-http-request/-/fake-xml-http-request-2.0.0.tgz#41a92f0ca539477700cb1dafd2df251d55dac8ff"
+  integrity sha512-UjNnynb6eLAB0lyh2PlTEkjRJORnNsVF1hbzU+PQv89/cyBV9GDRCy7JAcLQgeCLYT+3kaumWWZKEJvbaK74eQ==
 
 falafel@^2.0.0:
   version "2.1.0"
@@ -14452,11 +14490,12 @@ preserve@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/preserve/-/preserve-0.2.0.tgz#815ed1f6ebc65926f865b310c0713bcb3315ce4b"
 
-pretender@^1.6.0:
-  version "1.6.1"
-  resolved "https://registry.yarnpkg.com/pretender/-/pretender-1.6.1.tgz#77d1e42ac8c6b298f5cd43534a87645df035db8c"
+pretender@~2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/pretender/-/pretender-2.0.0.tgz#5adae189f1d5b25f86113f9225df25bed54f4072"
+  integrity sha512-2/0I/Y+R9odj/em56Iry4c7vjdKd5GWmm1lbDGkAZpSrHzSBliqtB5rkN5uTrJQFrjjKDsLIK/S7r8b/+oG6Vg==
   dependencies:
-    fake-xml-http-request "^1.6.0"
+    fake-xml-http-request "^2.0.0"
     route-recognizer "^0.3.3"
 
 pretty-bytes@^1.0.2:
