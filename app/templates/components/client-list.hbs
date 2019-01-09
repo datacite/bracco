@@ -100,7 +100,7 @@
               {{/each}}
             {{else}}
               <li>
-                {{#link-to "clients" (query-params software="")}}{{fa-icon "check-square-o"}}{{/link-to}}
+                {{#link-to link (query-params software="")}}{{fa-icon "check-square-o"}}{{/link-to}}
                 <div class="facet-title">{{model.query.software}}</div>
                 <span class="number pull-right">0</span>
                 <div class="clearfix"/>
@@ -170,7 +170,7 @@
       {{/each}}
       <div class="text-center">
         {{#if (gt model.meta.totalPages 1)}}
-          {{page-numbers model=model link="clients"}}
+          {{page-numbers model=model link=link}}
         {{/if}}
       </div>
     {{else}}
