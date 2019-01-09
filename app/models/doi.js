@@ -6,7 +6,7 @@ import ENV from 'bracco/config/environment';
 const Validations = buildValidations({
   details: [
     validator('belongs-to', {
-      disabled: computed('model.mode', 'model.state', 'model.prefix', function() {
+      disabled: computed('model.mode', 'model.state', 'model.prefix', function () {
         return !["new", "edit"].includes(this.model.get('mode')) || (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
       })
     })
@@ -14,14 +14,14 @@ const Validations = buildValidations({
   confirmDoi: [
     validator('presence', {
       presence: true,
-      disabled: computed('model.mode', function() {
+      disabled: computed('model.mode', function () {
         return this.model.get('mode') !== 'delete';
       })
     }),
     validator('confirmation', {
       on: 'doi',
       message: 'DOI does not match',
-      disabled: computed('model.mode', function() {
+      disabled: computed('model.mode', function () {
         return this.model.get('mode') !== 'delete';
       })
     })
@@ -30,20 +30,20 @@ const Validations = buildValidations({
     validator('presence', {
       presence: true,
       message: 'The DOI suffix can\'t be blank.',
-      disabled: computed('model.mode', function() {
+      disabled: computed('model.mode', function () {
         return !["new", "upload"].includes(this.model.get('mode'));
       })
     }),
     validator('format', {
       regex: /^[A-Za-z0-9][-._;()/:A-Za-z0-9]+$/,
       message: 'The DOI suffix contains invalid characters.',
-      disabled: computed('model.mode', function() {
+      disabled: computed('model.mode', function () {
         return !["new", "upload"].includes(this.model.get('mode'));
       })
     }),
     validator('unique-doi', {
       dependentKeys: ['model.prefix'],
-      disabled: computed('model.mode', function() {
+      disabled: computed('model.mode', function () {
         return !["new", "upload"].includes(this.model.get('mode'));
       })
     })
@@ -56,7 +56,7 @@ const Validations = buildValidations({
     }),
     validator('presence', {
       presence: true,
-      isWarning: computed('model.state', 'model.prefix', function() {
+      isWarning: computed('model.state', 'model.prefix', function () {
         return (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
       })
     })
@@ -64,10 +64,10 @@ const Validations = buildValidations({
   creators: [
     validator('presence', {
       presence: true,
-      isWarning: computed('model.state', 'model.prefix', function() {
+      isWarning: computed('model.state', 'model.prefix', function () {
         return (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
       }),
-      disabled: computed('model.mode', function() {
+      disabled: computed('model.mode', function () {
         return !["new", "edit"].includes(this.model.get('mode'));
       })
     })
@@ -75,10 +75,10 @@ const Validations = buildValidations({
   titles: [
     validator('presence', {
       presence: true,
-      isWarning: computed('model.state', 'model.prefix', function() {
+      isWarning: computed('model.state', 'model.prefix', function () {
         return (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
       }),
-      disabled: computed('model.mode', function() {
+      disabled: computed('model.mode', function () {
         return !["new", "edit"].includes(this.model.get('mode'));
       })
     })
@@ -86,10 +86,10 @@ const Validations = buildValidations({
   publisher: [
     validator('presence', {
       presence: true,
-      isWarning: computed('model.state', 'model.prefix', function() {
+      isWarning: computed('model.state', 'model.prefix', function () {
         return (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
       }),
-      disabled: computed('model.mode', function() {
+      disabled: computed('model.mode', function () {
         return !["new", "edit"].includes(this.model.get('mode'));
       })
     })
@@ -97,10 +97,10 @@ const Validations = buildValidations({
   publicationYear: [
     validator('presence', {
       presence: true,
-      isWarning: computed('model.state', 'model.prefix', function() {
+      isWarning: computed('model.state', 'model.prefix', function () {
         return (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
       }),
-      disabled: computed('model.mode', function() {
+      disabled: computed('model.mode', function () {
         return !["new", "edit"].includes(this.model.get('mode'));
       })
     }),
@@ -112,18 +112,18 @@ const Validations = buildValidations({
       format: 'YYYY',
       errorFormat: 'YYYY',
       message: "Must be between 1450 and 2020.",
-      disabled: computed('model.mode', function() {
+      disabled: computed('model.mode', function () {
         return !["new", "edit"].includes(this.model.get('mode'));
       })
     })
   ],
-  types: [
+  'types.resourceTypeGeneral': [
     validator('presence', {
       presence: true,
-      isWarning: computed('model.state', 'model.prefix', function() {
+      isWarning: computed('model.state', 'model.prefix', function () {
         return (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
       }),
-      disabled: computed('model.mode', function() {
+      disabled: computed('model.mode', function () {
         return !["new", "edit"].includes(this.model.get('mode'));
       })
     })
@@ -132,17 +132,17 @@ const Validations = buildValidations({
     validator('presence', {
       presence: true,
       message: 'Please include valid metadata.',
-      disabled: computed('model.mode', 'model.state', 'model.prefix', function() {
+      disabled: computed('model.mode', 'model.state', 'model.prefix', function () {
         return !["upload", "modify"].includes(this.model.get('mode')) || (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
       }),
     }),
     validator('metadata', {
       allowBlank: true,
       dependentKeys: ['model.doi'],
-      isWarning: computed('model.mode', 'model.state', 'model.prefix', function() {
+      isWarning: computed('model.mode', 'model.state', 'model.prefix', function () {
         return (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
       }),
-      disabled: computed('model.mode', function() {
+      disabled: computed('model.mode', function () {
         return !["upload", "modify"].includes(this.model.get('mode'));
       })
     })
@@ -193,17 +193,17 @@ export default DS.Model.extend(Validations, {
   updated: DS.attr('date'),
   mode: DS.attr('string'),
 
-  identifier: computed('doi', function() {
+  identifier: computed('doi', function () {
     if (ENV.API_URL == "https://api.datacite.org") {
       return "https://doi.org/" + this.doi;
     } else {
       return "https://handle.test.datacite.org/" + this.doi;
     }
   }),
-  isDraft: computed('state', function() {
+  isDraft: computed('state', function () {
     return this.state === 'draft';
   }),
-  schemaVersionString: computed('schemaVersion', function() {
+  schemaVersionString: computed('schemaVersion', function () {
     if (this.schemaVersion) {
       return this.schemaVersion.split("-").get("lastObject");
     } else {
