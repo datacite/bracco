@@ -1,21 +1,14 @@
 import FactoryGuy from 'ember-data-factory-guy';
 
 FactoryGuy.define('doi', {
-  dataset: {
-    id: '10.25499/jjva5eho424vep7dz2pson7qz',
+  default: {
     doi: '10.25499/jjva5eho424vep7dz2pson7qz',
-    identifier: 'https://handle.test.datacite.org/10.25499/jjva5eho424vep7dz2pson7qz',
-    url: null,
-    creators: [{
-      "type": "Person",
-      "id": "https://orcid.org/0000-0002-2822-4968",
-      "name": "Mitesh Patel",
-      "given-name": "Mitesh",
-      "family-name": "Patel"
+    identifiers: [{
+      'doi': 'https://handle.test.datacite.org/10.25499/jjva5eho424vep7dz2pson7qz'
     }],
-    titles: [{
-      'title': 'Submitted chemical data for InChIKey YAPQBXQYLJRXSA-UHFFFAOYSA-N'
-    }],
+    creators: FactoryGuy.hasMany('creator'),
+    titles: FactoryGuy.hasMany('title'),
+    descriptions: FactoryGuy.hasMany('description'),
     publisher: 'Royal Society of Chemistry',
     types: {
       resourceTypeGeneral: 'Dataset',
@@ -26,5 +19,26 @@ FactoryGuy.define('doi', {
     publicationYear: 2017,
     registered: "2017-09-27T14:08:02.000Z",
     updated: "2017-09-27T14:08:02.000Z"
+  }
+});
+
+FactoryGuy.define('creator', {
+  default: {
+    name: 'Patel, Mitesh',
+    givenName: 'Mitesh',
+    familyName: 'Patel',
+    nameType: 'Personal'
+  }
+});
+
+FactoryGuy.define('title', {
+  default: {
+    title: 'Submitted chemical data for InChIKey YAPQBXQYLJRXSA-UHFFFAOYSA-N'
+  }
+});
+
+FactoryGuy.define('description', {
+  default: {
+    description: 'Description of submitted chemical data for InChIKey YAPQBXQYLJRXSA-UHFFFAOYSA-N'
   }
 });

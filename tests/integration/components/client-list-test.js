@@ -1,25 +1,19 @@
-// import { moduleForComponent, test } from 'ember-qunit';
-// import hbs from 'htmlbars-inline-precompile';
-//
-// moduleForComponent('client-list', 'Integration | Component | client list', {
-//   integration: true
-// });
-//
-// test('it renders', function(assert) {
-//
-//   // Set any properties with this.set('myProperty', 'value');
-//   // Handle any actions with this.on('myAction', function(val) { ... });
-//
-//   this.render(hbs`{{client-list}}`);
-//
-//   assert.equal(this.$().text().trim(), 'No clients found.');
-//
-//   // Template block usage:
-//   this.render(hbs`
-//     {{#client-list}}
-//
-//     {{/client-list}}
-//   `);
-//
-//   assert.equal(this.$().text().trim(), 'No clients found.');
-// });
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { setupFactoryGuy, makeList } from 'ember-data-factory-guy';
+import { render } from '@ember/test-helpers';
+import hbs from 'htmlbars-inline-precompile';
+
+module('Integration | Component | client list', function(hooks) {
+  setupRenderingTest(hooks);
+  setupFactoryGuy(hooks);
+
+  test('it renders', async function(assert) {
+    this.set('model', makeList('client', 2));
+    await render(hbs`{{client-list model=model link="clients" searchable=true}}`);
+
+    assert.dom('span.help-block').hasText('Reset All');
+    assert.dom('div.panel-body > h3.work a').exists({ count: 2 });
+    assert.dom('div.panel-body:first-child a').hasText('Australian Data Archive');
+  });
+});

@@ -45,7 +45,7 @@ Router.map(function() {
   });
   
   this.route('dois', function() {
-    this.route('index', { path: '/dois' });
+    this.route('index', { path: '/' });
   });
   this.route('settings', function() {
     this.route('index', { path: '/' });

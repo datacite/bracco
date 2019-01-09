@@ -1,25 +1,17 @@
-// import { moduleForComponent, test } from 'ember-qunit';
-// import hbs from 'htmlbars-inline-precompile';
-//
-// moduleForComponent('cc-license', 'Integration | Component | cc license', {
-//   integration: true
-// });
-//
-// test('it renders', function(assert) {
-//
-//   // Set any properties with this.set('myProperty', 'value');
-//   // Handle any actions with this.on('myAction', function(val) { ... });
-//
-//   this.render(hbs`{{cc-license}}`);
-//
-//   assert.equal(this.$().text().trim(), '');
-//
-//   // Template block usage:
-//   this.render(hbs`
-//     {{#cc-license}}
-//       template block text
-//     {{/cc-license}}
-//   `);
-//
-//   assert.equal(this.$().text().trim(), 'template block text');
-// });
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render } from '@ember/test-helpers';
+import hbs from 'htmlbars-inline-precompile';
+
+module('Integration | Component | cc license', function(hooks) {
+  setupRenderingTest(hooks);
+
+  test('it renders', async function(assert) {
+    this.set('licenseURL', 'http://creativecommons.org/licenses/by-nc/4.0/legalcode');
+
+    await render(hbs`{{cc-license licenseURL=licenseURL}}`);
+
+    // logos for cc, by and nc
+    assert.dom('i').exists({ count: 3 });
+  });
+});

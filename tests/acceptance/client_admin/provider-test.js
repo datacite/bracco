@@ -1,56 +1,64 @@
-// import Ember from 'ember';
-// import { test } from 'qunit';
-// import moduleForAcceptance from 'bracco/tests/helpers/module-for-acceptance';
+import { module, test } from 'qunit';
+import { setupApplicationTest } from 'ember-qunit';
+import { currentURL, visit } from '@ember/test-helpers';
+import { authenticateSession } from 'ember-simple-auth/test-support';
 
-// moduleForAcceptance('Acceptance | client_admin | provider', {
-//   beforeEach: function () {
-//     this.application.register('service:mock-user', Ember.Service.extend({
-//       uid: 'tib.awi',
-//       name: 'Alfred Wegener Institute',
-//       role_id: 'client_admin',
-//       provider_id: 'tib',
-//       client_id: 'tib.awi'
-//     }));
-//     this.application.inject('adapter', 'currentUser', 'service:mock-user');
-//     this.application.inject('ability', 'currentUser', 'service:mock-user');
-//     this.application.inject('route', 'currentUser', 'service:mock-user');
-//     this.application.inject('component', 'currentUser', 'service:mock-user');
-//     this.application.inject('helper', 'currentUser', 'service:mock-user');
-//   }
-// });
+module('Acceptance | client_admin | provider', function(hooks) {
+  setupApplicationTest(hooks);
 
-// test('visiting provider TIB settings', function(assert) {
-//   visit('/providers/tib/settings');
+  test('visiting provider TIB settings', async function(assert) {
+    await authenticateSession({
+      uid: 'tib.awi',
+      name: 'Alfred Wegener Institute',
+      role_id: 'client_admin',
+      provider_id: 'tib',
+      client_id: 'tib.awi'
+    });
+    await visit('/providers/tib/settings');
 
-//   andThen(function() {
-//     assert.equal(currentURL(), '/');
-//     assert.equal(find('div.motto h1').text(), 'DataCite DOI Fabrica');
-//   });
-// });
+    assert.equal(currentURL(), '/clients/tib.awi');
+    assert.dom('h2.work').hasText('Alfred Wegener Institute');
+  });
 
-// test('visiting provider TIB clients', function(assert) {
-//   visit('/providers/tib/clients');
+  test('visiting provider TIB clients', async function(assert) {
+    await authenticateSession({
+      uid: 'tib.awi',
+      name: 'Alfred Wegener Institute',
+      role_id: 'client_admin',
+      provider_id: 'tib',
+      client_id: 'tib.awi'
+    });
+    await visit('/providers/tib/clients');
 
-//   andThen(function() {
-//     assert.equal(currentURL(), '/');
-//     assert.equal(find('div.motto h1').text(), 'DataCite DOI Fabrica');
-//   });
-// });
+    assert.equal(currentURL(), '/clients/tib.awi');
+    assert.dom('h2.work').hasText('Alfred Wegener Institute');
+  });
 
-// test('visiting provider TIB prefixes', function(assert) {
-//   visit('/providers/tib/prefixes');
+  test('visiting provider TIB prefixes', async function(assert) {
+    await authenticateSession({
+      uid: 'tib.awi',
+      name: 'Alfred Wegener Institute',
+      role_id: 'client_admin',
+      provider_id: 'tib',
+      client_id: 'tib.awi'
+    });
+    await visit('/providers/tib/prefixes');
 
-//   andThen(function() {
-//     assert.equal(currentURL(), '/');
-//     assert.equal(find('div.motto h1').text(), 'DataCite DOI Fabrica');
-//   });
-// });
+    assert.equal(currentURL(), '/clients/tib.awi');
+    assert.dom('h2.work').hasText('Alfred Wegener Institute');
+  });
 
-// test('visiting provider TIB dois', function(assert) {
-//   visit('/providers/tib/dois');
+  test('visiting provider TIB dois', async function(assert) {
+    await authenticateSession({
+      uid: 'tib.awi',
+      name: 'Alfred Wegener Institute',
+      role_id: 'client_admin',
+      provider_id: 'tib',
+      client_id: 'tib.awi'
+    });
+    await visit('/providers/tib/dois');
 
-//   andThen(function() {
-//     assert.equal(currentURL(), '/');
-//     assert.equal(find('div.motto h1').text(), 'DataCite DOI Fabrica');
-//   });
-// });
+    assert.equal(currentURL(), '/clients/tib.awi');
+    assert.dom('h2.work').hasText('Alfred Wegener Institute');
+  });
+});

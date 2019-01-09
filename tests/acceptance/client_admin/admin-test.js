@@ -1,178 +1,92 @@
-// import { module, test } from 'qunit';
-// import { setupApplicationTest } from 'ember-qunit';
-// import { currentURL, visit } from '@ember/test-helpers';
-// import { authenticateSession } from 'ember-simple-auth/test-support';
+import { module, test } from 'qunit';
+import { setupApplicationTest } from 'ember-qunit';
+import { currentURL, visit } from '@ember/test-helpers';
+import { authenticateSession } from 'ember-simple-auth/test-support';
 
-// module('Acceptance | client_admin | admin', function(hooks) {
-//   setupApplicationTest(hooks);
+module('Acceptance | client_admin | admin', function(hooks) {
+  setupApplicationTest(hooks);
 
-//   test('visiting homepage', async function(assert) {
-//     await authenticateSession({
-//       uid: 'tib.awi',
-//       name: 'Alfred Wegener Institute',
-//       role_id: 'client_admin',
-//       provider_id: 'tib',
-//       client_id: 'tib.awi'
-//     });
-//     await visit('/');
-//     assert.equal(currentURL(), '/');
-//     assert.dom('div.motto h1').hasText('DataCite DOI Fabrica');
-//   });
+  test('is logged in', async function(assert) {
+    await authenticateSession({
+      uid: 'tib.awi',
+      name: 'Alfred Wegener Institute',
+      role_id: 'client_admin',
+      provider_id: 'tib',
+      client_id: 'tib.awi'
+    });
+    await visit('/');
 
-//   // the following pages require authentication. Redirects to homepage otherwise
-//   test('visiting settings', async function(assert) {
-//     await authenticateSession({
-//       uid: 'tib.awi',
-//       name: 'Alfred Wegener Institute',
-//       role_id: 'client_admin',
-//       provider_id: 'tib',
-//       client_id: 'tib.awi'
-//     });
-//     await visit('/settings');
-//     assert.equal(currentURL(), '/');
-//     assert.dom('div.motto h1').hasText('DataCite DOI Fabrica');
-//   });
+    assert.dom('a#account_menu_link').hasText('TIB.AWI');
+  });
 
-//   test('visiting providers', async function(assert) {
-//     await authenticateSession({
-//       uid: 'tib.awi',
-//       name: 'Alfred Wegener Institute',
-//       role_id: 'client_admin',
-//       provider_id: 'tib',
-//       client_id: 'tib.awi'
-//     });
-//     await visit('/providers');
-//     assert.equal(currentURL(), '/');
-//     assert.dom('div.motto h1').hasText('DataCite DOI Fabrica');
-//   });
+  test('visiting homepage', async function(assert) {
+    await authenticateSession({
+      uid: 'tib.awi',
+      name: 'Alfred Wegener Institute',
+      role_id: 'client_admin',
+      provider_id: 'tib',
+      client_id: 'tib.awi'
+    });
+    await visit('/');
 
-//   test('visiting clients', async function(assert) {
-//     await authenticateSession({
-//       uid: 'tib.awi',
-//       name: 'Alfred Wegener Institute',
-//       role_id: 'client_admin',
-//       provider_id: 'tib',
-//       client_id: 'tib.awi'
-//     });
-//     await visit('/clients');
-//     assert.equal(currentURL(), '/');
-//     assert.dom('div.motto h1').hasText('DataCite DOI Fabrica');
-//   });
+    assert.equal(currentURL(), '/clients/tib.awi');
+    assert.dom('h2.work').hasText('Alfred Wegener Institute');
+  });
 
-//   test('visiting prefixes', async function(assert) {
-//     await authenticateSession({
-//       uid: 'tib.awi',
-//       name: 'Alfred Wegener Institute',
-//       role_id: 'client_admin',
-//       provider_id: 'tib',
-//       client_id: 'tib.awi'
-//     });
-//     await visit('/prefixes');
-//     assert.equal(currentURL(), '/');
-//     assert.dom('div.motto h1').hasText('DataCite DOI Fabrica');
-//   });
-// });
+  // the following pages require authentication. Redirects to homepage otherwise
+  test('visiting settings', async function(assert) {
+    await authenticateSession({
+      uid: 'tib.awi',
+      name: 'Alfred Wegener Institute',
+      role_id: 'client_admin',
+      provider_id: 'tib',
+      client_id: 'tib.awi'
+    });
+    await visit('/settings');
 
+    assert.equal(currentURL(), '/clients/tib.awi');
+    assert.dom('h2.work').hasText('Alfred Wegener Institute');
+  });
 
-// import Ember from 'ember';
-// import { test } from 'qunit';
-// import moduleForAcceptance from 'bracco/tests/helpers/module-for-acceptance';
+  test('visiting providers', async function(assert) {
+    await authenticateSession({
+      uid: 'tib.awi',
+      name: 'Alfred Wegener Institute',
+      role_id: 'client_admin',
+      provider_id: 'tib',
+      client_id: 'tib.awi'
+    });
+    await visit('/providers');
 
-// moduleForAcceptance('Acceptance | client_admin | admin', {
-//   beforeEach: function () {
-//     this.application.register('service:mock-user', Ember.Service.extend({
-//       uid: 'tib.awi',
-//       name: 'Alfred Wegener Institute',
-//       role_id: 'client_admin',
-//       provider_id: 'tib',
-//       client_id: 'tib.awi'
-//     }));
-//     this.application.inject('adapter', 'currentUser', 'service:mock-user');
-//     this.application.inject('ability', 'currentUser', 'service:mock-user');
-//     this.application.inject('route', 'currentUser', 'service:mock-user');
-//     this.application.inject('component', 'currentUser', 'service:mock-user');
-//     this.application.inject('helper', 'currentUser', 'service:mock-user');
-//   }
-// });
+    assert.equal(currentURL(), '/clients/tib.awi');
+    assert.dom('h2.work').hasText('Alfred Wegener Institute');
+  });
 
-// test('visiting homepage', function(assert) {
-//   visit('/');
+  test('visiting clients', async function(assert) {
+    await authenticateSession({
+      uid: 'tib.awi',
+      name: 'Alfred Wegener Institute',
+      role_id: 'client_admin',
+      provider_id: 'tib',
+      client_id: 'tib.awi'
+    });
+    await visit('/clients');
 
-//   andThen(function() {
-//     assert.equal(currentURL(), '/');
-//     assert.equal(find('div.motto h1').text(), 'DataCite DOI Fabrica');
-//   });
-// });
+    assert.equal(currentURL(), '/clients/tib.awi');
+    assert.dom('h2.work').hasText('Alfred Wegener Institute');
+  });
 
-// the following pages require authentication. Redirects to homepage otherwise
-// test('visiting settings', function(assert) {
-//   visit('/settings');
+  test('visiting prefixes', async function(assert) {
+    await authenticateSession({
+      uid: 'tib.awi',
+      name: 'Alfred Wegener Institute',
+      role_id: 'client_admin',
+      provider_id: 'tib',
+      client_id: 'tib.awi'
+    });
+    await visit('/prefixes');
 
-//   andThen(function() {
-//     assert.equal(currentURL(), '/');
-//     assert.equal(find('div.motto h1').text(), 'DataCite DOI Fabrica');
-//   });
-// });
-
-// test('visiting providers', function(assert) {
-//   visit('/providers');
-
-//   andThen(function() {
-//     assert.equal(currentURL(), '/');
-//     assert.equal(find('div.motto h1').text(), 'DataCite DOI Fabrica');
-//   });
-// });
-
-// test('visiting clients', function(assert) {
-//   visit('/clients');
-
-//   andThen(function() {
-//     assert.equal(currentURL(), '/');
-//     assert.equal(find('div.motto h1').text(), 'DataCite DOI Fabrica');
-//   });
-// });
-
-// test('visiting prefixes', function(assert) {
-//   visit('/prefixes');
-
-//   andThen(function() {
-//     assert.equal(currentURL(), '/');
-//     assert.equal(find('div.motto h1').text(), 'DataCite DOI Fabrica');
-//   });
-// });
-
-// test('visiting prefix 10.5072', function(assert) {
-//   visit('/prefixes/10.5072');
-
-//   andThen(function() {
-//     assert.equal(currentURL(), '/prefixes/10.5072');
-//     assert.equal(find('div.alert-warning').text().trim(), 'The page was not found.');
-//   });
-// });
-
-// test('visiting dois', function(assert) {
-//   visit('/dois');
-
-//   andThen(function() {
-//     assert.equal(currentURL(), '/');
-//     assert.equal(find('div.motto h1').text(), 'DataCite DOI Fabrica');
-//   });
-// });
-
-// test('visiting specific doi not managed by client', function(assert) {
-//   visit('/dois/10.5520%2Fsagecite-1');
-
-//   andThen(function() {
-//     assert.equal(currentURL(), '/');
-//     assert.equal(find('div.motto h1').text(), 'DataCite DOI Fabrica');
-//   });
-// });
-
-// test('visiting specific doi managed by client', function(assert) {
-//   visit('/dois/10.2312%2Fcr_m84_4');
-//
-//   andThen(function() {
-//     assert.equal(currentURL(), '/dois/10.2312%2Fcr_m84_4');
-//     assert.equal(find('h2.work').text(), '10.2312/cr_m84_4');
-//   });
-// });
+    assert.equal(currentURL(), '/clients/tib.awi');
+    assert.dom('h2.work').hasText('Alfred Wegener Institute');
+  });
+});

@@ -84,9 +84,19 @@ module.exports = function(environment) {
     ENV.APP.LOG_ACTIVE_GENERATION = false;
     ENV.APP.LOG_VIEW_LOOKUPS = false;
 
+    ENV['simple-auth'] = {
+      store: 'simple-auth-session-store:ephemeral'
+    }
+
     ENV.APP.rootElement = '#ember-testing';
 
     ENV.featureFlags['use-elasticsearch'] = true;
+
+    ENV.APP.autoboot = false;
+
+    // for consistency of acceptance tests
+    ENV.API_URL = "https://api.test.datacite.org"
+    ENV.SITE_TITLE = "DataCite DOI Fabrica Test"
   }
 
   if (environment === 'production') {

@@ -1,87 +1,70 @@
-// import Ember from 'ember';
-// import { test } from 'qunit';
-// import moduleForAcceptance from 'bracco/tests/helpers/module-for-acceptance';
+import { module, test } from 'qunit';
+import { setupApplicationTest } from 'ember-qunit';
+import { currentURL, visit } from '@ember/test-helpers';
 
-// moduleForAcceptance('Acceptance | anonymous | admin', {
-//   beforeEach: function () {
-//     this.application.register('service:mock-user', Ember.Service.extend({}));
-//     this.application.inject('adapter', 'currentUser', 'service:mock-user');
-//     this.application.inject('ability', 'currentUser', 'service:mock-user');
-//     this.application.inject('route', 'currentUser', 'service:mock-user');
-//     this.application.inject('component', 'currentUser', 'service:mock-user');
-//     this.application.inject('helper', 'currentUser', 'service:mock-user');
-//   }
-// });
+module('Acceptance | anonymous | admin', function(hooks) {
+  setupApplicationTest(hooks);
 
-// test('visiting homepage', function(assert) {
-//   visit('/');
+  test('is not logged in', async function(assert) {
+    await visit('/');
 
-//   andThen(function() {
-//     assert.equal(currentURL(), '/');
-//     assert.equal(find('div.motto h1').text(), 'DataCite DOI Fabrica');
-//   });
-// });
+    assert.dom('a#account_menu_link').doesNotExist();
+  });
 
-// the following pages require authentication. Redirects to homepage otherwise
-// test('visiting settings', function(assert) {
-//   visit('/settings');
+  test('visiting homepage', async function(assert) {
+    await visit('/');
 
-//   andThen(function() {
-//     assert.equal(currentURL(), '/');
-//     assert.equal(find('div.motto h1').text(), 'DataCite DOI Fabrica');
-//   });
-// });
+    assert.equal(currentURL(), '/');
+    assert.dom('div.motto h1').hasText('DataCite DOI Fabrica Test');
+  });
 
-// test('visiting providers', function(assert) {
-//   visit('/providers');
+  // the following pages require authentication. Redirects to homepage otherwise
+  test('visiting settings', async function(assert) {
+    await visit('/settings');
 
-//   andThen(function() {
-//     assert.equal(currentURL(), '/');
-//     assert.equal(find('div.motto h1').text(), 'DataCite DOI Fabrica');
-//   });
-// });
+    assert.equal(currentURL(), '/');
+    assert.dom('div.motto h1').hasText('DataCite DOI Fabrica Test');
+  });
 
-// test('visiting clients', function(assert) {
-//   visit('/clients');
+  test('visiting providers', async function(assert) {
+    await visit('/providers');
 
-//   andThen(function() {
-//     assert.equal(currentURL(), '/');
-//     assert.equal(find('div.motto h1').text(), 'DataCite DOI Fabrica');
-//   });
-// });
+    assert.equal(currentURL(), '/');
+    assert.dom('div.motto h1').hasText('DataCite DOI Fabrica Test');
+  });
 
-// test('visiting prefixes', function(assert) {
-//   visit('/prefixes');
+  test('visiting clients', async function(assert) {
+    await visit('/clients');
 
-//   andThen(function() {
-//     assert.equal(currentURL(), '/');
-//     assert.equal(find('div.motto h1').text(), 'DataCite DOI Fabrica');
-//   });
-// });
+    assert.equal(currentURL(), '/');
+    assert.dom('div.motto h1').hasText('DataCite DOI Fabrica Test');
+  });
 
-// test('visiting prefix 10.5072', function(assert) {
-//   visit('/prefixes/10.5072');
+  test('visiting prefixes', async function(assert) {
+    await visit('/prefixes');
 
-//   andThen(function() {
-//     assert.equal(currentURL(), '/prefixes/10.5072');
-//     assert.equal(find('div.alert-warning').text().trim(), 'The page was not found.');
-//   });
-// });
+    assert.equal(currentURL(), '/');
+    assert.dom('div.motto h1').hasText('DataCite DOI Fabrica Test');
+  });
 
-// test('visiting dois', function(assert) {
-//   visit('/dois');
+  test('visiting prefix 10.5072', async function(assert) {
+    await visit('/prefixes/10.5072');
 
-//   andThen(function() {
-//     assert.equal(currentURL(), '/');
-//     assert.equal(find('div.motto h1').text(), 'DataCite DOI Fabrica');
-//   });
-// });
+    assert.equal(currentURL(), '/prefixes/10.5072');
+    assert.dom('div.alert-warning').includesText('The page was not found.');
+  });
 
-// test('visiting specific doi', function(assert) {
-//   visit('/dois/10.5520%2Fsagecite-1');
+  test('visiting dois', async function(assert) {
+    await visit('/dois');
 
-//   andThen(function() {
-//     assert.equal(currentURL(), '/');
-//     assert.equal(find('div.motto h1').text(), 'DataCite DOI Fabrica');
-//   });
-// });
+    assert.equal(currentURL(), '/');
+    assert.dom('div.motto h1').hasText('DataCite DOI Fabrica Test');
+  });
+
+  test('visiting specific doi', async function(assert) {
+    await visit('clients/bl.sagecite/dois/10.5520%2Fsagecite-1');
+
+    assert.equal(currentURL(), '/');
+    assert.dom('div.motto h1').hasText('DataCite DOI Fabrica Test');
+  });
+});

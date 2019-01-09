@@ -2,6 +2,11 @@ import { computed } from '@ember/object';
 import DS from 'ember-data';
 import { validator, buildValidations } from 'ember-cp-validations';
 import ENV from 'bracco/config/environment';
+// import {
+//   fragment,
+//   fragmentArray,
+//   array
+// } from 'ember-data-model-fragments/attributes';
 
 const Validations = buildValidations({
   details: [
@@ -160,7 +165,7 @@ export default DS.Model.extend(Validations, {
   prefix: DS.attr('string'),
   suffix: DS.attr('string'),
   url: DS.attr('string'),
-  contentUrl: DS.attr('string'),
+  contentUrl: DS.attr(),
   creators: DS.attr('creators', { defaultValue: null }),
   titles: DS.attr(),
   publisher: DS.attr('string'),
