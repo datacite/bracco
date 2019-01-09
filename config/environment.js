@@ -93,6 +93,9 @@ module.exports = function(environment) {
     ENV.featureFlags['use-elasticsearch'] = true;
 
     ENV.APP.autoboot = false;
+
+    // for consistency of acceptance tests
+    ENV.API_URL = "https://api.test.datacite.org"
   }
 
   if (environment === 'production') {
