@@ -1,101 +1,112 @@
-// import Ember from 'ember';
-// import { test } from 'qunit';
-// import moduleForAcceptance from 'bracco/tests/helpers/module-for-acceptance';
+import { module, test } from 'qunit';
+import { setupApplicationTest } from 'ember-qunit';
+import { currentURL, visit } from '@ember/test-helpers';
+import { authenticateSession } from 'ember-simple-auth/test-support';
 
-// moduleForAcceptance('Acceptance | provider_admin | admin', {
-//   beforeEach: function () {
-//     this.application.register('service:mock-user', Ember.Service.extend({
-//       uid: 'tib',
-//       name: 'Technische Informationsbibliothek',
-//       role_id: 'provider_admin',
-//       provider_id: 'tib'
-//     }));
-//     this.application.inject('adapter', 'currentUser', 'service:mock-user');
-//     this.application.inject('ability', 'currentUser', 'service:mock-user');
-//     this.application.inject('route', 'currentUser', 'service:mock-user');
-//     this.application.inject('component', 'currentUser', 'service:mock-user');
-//     this.application.inject('helper', 'currentUser', 'service:mock-user');
-//   }
-// });
+module('Acceptance | provider_admin | admin', function(hooks) {
+  setupApplicationTest(hooks);
 
-// test('visiting homepage', function(assert) {
-//   visit('/');
+  test('is logged in', async function(assert) {
+    await authenticateSession({
+      uid: 'tib',
+      name: 'Technische Informationsbibliothek',
+      role_id: 'provider_admin',
+      provider_id: 'tib'
+    });
+    await visit('/');
 
-//   andThen(function() {
-//     assert.equal(currentURL(), '/');
-//     assert.equal(find('div.motto h1').text(), 'DataCite DOI Fabrica');
-//   });
-// });
+    assert.dom('a#account_menu_link').hasText('TIB');
+  });
 
-// the following pages require authentication. Redirects to homepage otherwise
-// test('visiting settings', function(assert) {
-//   visit('/settings');
+  test('visiting homepage', async function(assert) {
+    await authenticateSession({
+      uid: 'tib',
+      name: 'Technische Informationsbibliothek',
+      role_id: 'provider_admin',
+      provider_id: 'tib'
+    });
+    await visit('/');
 
-//   andThen(function() {
-//     assert.equal(currentURL(), '/');
-//     assert.equal(find('div.motto h1').text(), 'DataCite DOI Fabrica');
-//   });
-// });
+    assert.equal(currentURL(), '/providers/tib');
+    assert.dom('h2.work').hasText('German National Library of Science and Technology');
+  });
 
-// test('visiting providers', function(assert) {
-//   visit('/providers');
+  // the following pages require authentication. Redirects to provider homepage otherwise
+  test('visiting settings', async function(assert) {
+    await authenticateSession({
+      uid: 'tib',
+      name: 'Technische Informationsbibliothek',
+      role_id: 'provider_admin',
+      provider_id: 'tib'
+    });
+    await visit('/settings');
 
-//   andThen(function() {
-//     assert.equal(currentURL(), '/');
-//     assert.equal(find('div.motto h1').text(), 'DataCite DOI Fabrica');
-//   });
-// });
+    assert.equal(currentURL(), '/providers/tib');
+    assert.dom('h2.work').hasText('German National Library of Science and Technology');
+  });
 
-// test('visiting clients', function(assert) {
-//   visit('/clients');
+  test('visiting providers', async function(assert) {
+    await authenticateSession({
+      uid: 'tib',
+      name: 'Technische Informationsbibliothek',
+      role_id: 'provider_admin',
+      provider_id: 'tib'
+    });
+    await visit('/providers');
 
-//   andThen(function() {
-//     assert.equal(currentURL(), '/');
-//     assert.equal(find('div.motto h1').text(), 'DataCite DOI Fabrica');
-//   });
-// });
+    assert.equal(currentURL(), '/providers/tib');
+    assert.dom('h2.work').hasText('German National Library of Science and Technology');
+  });
 
-// test('visiting prefixes', function(assert) {
-//   visit('/prefixes');
+  test('visiting clients', async function(assert) {
+    await authenticateSession({
+      uid: 'tib',
+      name: 'Technische Informationsbibliothek',
+      role_id: 'provider_admin',
+      provider_id: 'tib'
+    });
+    await visit('/clients');
 
-//   andThen(function() {
-//     assert.equal(currentURL(), '/');
-//     assert.equal(find('div.motto h1').text(), 'DataCite DOI Fabrica');
-//   });
-// });
+    assert.equal(currentURL(), '/providers/tib');
+    assert.dom('h2.work').hasText('German National Library of Science and Technology');
+  });
 
-// test('visiting prefix 10.5072', function(assert) {
-//   visit('/prefixes/10.5072');
+  test('visiting prefixes', async function(assert) {
+    await authenticateSession({
+      uid: 'tib',
+      name: 'Technische Informationsbibliothek',
+      role_id: 'provider_admin',
+      provider_id: 'tib'
+    });
+    await visit('/prefixes');
 
-//   andThen(function() {
-//     assert.equal(currentURL(), '/prefixes/10.5072');
-//     assert.equal(find('div.alert-warning').text().trim(), 'The page was not found.');
-//   });
-// });
+    assert.equal(currentURL(), '/providers/tib');
+    assert.dom('h2.work').hasText('German National Library of Science and Technology');
+  });
 
-// test('visiting dois', function(assert) {
-//   visit('/dois');
+  test('visiting prefix 10.5072', async function(assert) {
+    await authenticateSession({
+      uid: 'tib',
+      name: 'Technische Informationsbibliothek',
+      role_id: 'provider_admin',
+      provider_id: 'tib'
+    });
+    await visit('/prefixes/10.5072');
 
-//   andThen(function() {
-//     assert.equal(currentURL(), '/');
-//     assert.equal(find('div.motto h1').text(), 'DataCite DOI Fabrica');
-//   });
-// });
+    assert.equal(currentURL(), '/prefixes/10.5072');
+    assert.dom('div.alert-warning').includesText('The page was not found.');
+  });
 
-// test('visiting specific doi', function(assert) {
-//   visit('/dois/10.5520%2Fsagecite-1');
+  test('visiting dois', async function(assert) {
+    await authenticateSession({
+      uid: 'tib',
+      name: 'Technische Informationsbibliothek',
+      role_id: 'provider_admin',
+      provider_id: 'tib'
+    });
+    await visit('/dois');
 
-//   andThen(function() {
-//     assert.equal(currentURL(), '/');
-//     assert.equal(find('div.motto h1').text(), 'DataCite DOI Fabrica');
-//   });
-// });
-
-// test('visiting specific doi managed by provider', function(assert) {
-//   visit('/dois/10.2312%2Fcr_m84_4');
-//
-//   andThen(function() {
-//     assert.equal(currentURL(), '/dois/10.2312%2Fcr_m84_4');
-//     assert.equal(find('h2.work').text(), '10.2312/cr_m84_4');
-//   });
-// });
+    assert.equal(currentURL(), '/providers/tib');
+    assert.dom('h2.work').hasText('German National Library of Science and Technology');
+  });
+});

@@ -9,6 +9,6 @@ module('Integration | Component | application header', function(hooks) {
   test('it renders', async function(assert) {
     await render(hbs`{{application-header}}`);
 
-    assert.dom('*').hasText('Toggle navigation Support No locale defined. Unable to resolve translation: "user.signin"');
+    assert.dom('*').hasText('Toggle navigation Support Sign in');
   });
 });

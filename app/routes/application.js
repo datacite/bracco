@@ -10,7 +10,6 @@ export default Route.extend(ApplicationRouteMixin, {
   isTokenAuthenticating: null,
 
   beforeModel() {
-    // if you lazily load translations, here is also where you would load them via `intl.addTranslations`
     this.intl.setLocale(['en-us']);
 
     return this._loadCurrentUser();

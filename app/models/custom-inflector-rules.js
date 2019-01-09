@@ -3,6 +3,7 @@ import Inflector from 'ember-inflector';
 const inflector = Inflector.inflector;
 
 inflector.uncountable('status');
+inflector.uncountable('media');
 inflector.uncountable('settings');
 inflector.irregular('prefix', 'prefixes');
 

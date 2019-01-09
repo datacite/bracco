@@ -1,91 +1,124 @@
-// import Ember from 'ember';
-// import { test } from 'qunit';
-// import moduleForAcceptance from 'bracco/tests/helpers/module-for-acceptance';
+import { module, test } from 'qunit';
+import { setupApplicationTest } from 'ember-qunit';
+import { currentURL, visit } from '@ember/test-helpers';
+import { authenticateSession } from 'ember-simple-auth/test-support';
 
-// moduleForAcceptance('Acceptance | staff_admin | admin', {
-//   beforeEach: function () {
-//     this.application.register('service:mock-user', Ember.Service.extend({
-//       uid: 'admin',
-//       name: 'Admin',
-//       role_id: 'staff_admin'
-//     }));
-//     this.application.inject('adapter', 'currentUser', 'service:mock-user');
-//     this.application.inject('ability', 'currentUser', 'service:mock-user');
-//     this.application.inject('route', 'currentUser', 'service:mock-user');
-//     this.application.inject('component', 'currentUser', 'service:mock-user');
-//     this.application.inject('helper', 'currentUser', 'service:mock-user');
-//   }
-// });
+module('Acceptance | staff_admin | admin', function(hooks) {
+  setupApplicationTest(hooks);
 
-// test('visiting homepage', function(assert) {
-//   visit('/');
+  test('is logged in', async function(assert) {
+    await authenticateSession({
+      uid: 'admin',
+      name: 'Admin',
+      role_id: 'staff_admin'
+    });
+    await visit('/');
 
-//   andThen(function() {
-//     assert.equal(currentURL(), '/');
-//     assert.equal(find('h2.work').text(), 'DataCite');
-//   });
-// });
+    assert.dom('a#account_menu_link').hasText('ADMIN');
+  });
 
-// the following pages require authentication. Redirects to homepage otherwise
-// test('visiting settings', function(assert) {
-//   visit('/settings');
+  test('visiting homepage', async function(assert) {
+    await authenticateSession({
+      uid: 'admin',
+      name: 'Admin',
+      role_id: 'staff_admin'
+    });
+    await visit('/');
+    
+    assert.equal(currentURL(), '/');
+    assert.dom('h2.work').hasText('DataCite');
+    assert.dom('a.nav-link.active').hasText('Info');
+  });
 
-//   andThen(function() {
-//     assert.equal(currentURL(), '/settings');
-//     assert.equal(find('h2.work').text(), 'DataCite');
-//   });
-// });
+  // the following pages require authentication. Redirects to homepage otherwise
+  test('visiting settings', async function(assert) {
+    await authenticateSession({
+      uid: 'admin',
+      name: 'Admin',
+      role_id: 'staff_admin'
+    });
+    await visit('/settings');
 
-// test('visiting providers', function(assert) {
-//   visit('/providers');
+    assert.equal(currentURL(), '/settings');
+    assert.dom('h2.work').hasText('DataCite');
+    assert.dom('a.nav-link.active').hasText('Settings');
+  });
 
-//   andThen(function() {
-//     assert.equal(currentURL(), '/providers');
-//     assert.equal(find('h2.work').text(), 'DataCite');
-//   });
-// });
+  test('visiting providers', async function(assert) {
+    await authenticateSession({
+      uid: 'admin',
+      name: 'Admin',
+      role_id: 'staff_admin'
+    });
+    await visit('/providers');
 
-// test('visiting clients', function(assert) {
-//   visit('/clients');
+    assert.equal(currentURL(), '/providers');
+    assert.dom('h2.work').hasText('DataCite');
+    assert.dom('a.nav-link.active').hasText('Providers');
+  });
 
-//   andThen(function() {
-//     assert.equal(currentURL(), '/clients');
-//     assert.equal(find('h2.work').text(), 'DataCite');
-//   });
-// });
+  test('visiting clients', async function(assert) {
+    await authenticateSession({
+      uid: 'admin',
+      name: 'Admin',
+      role_id: 'staff_admin'
+    });
+    await visit('/clients');
 
-// test('visiting prefixes', function(assert) {
-//   visit('/prefixes');
+    assert.equal(currentURL(), '/clients');
+    assert.dom('h2.work').hasText('DataCite');
+    assert.dom('a.nav-link.active').hasText('Clients');
+  });
 
-//   andThen(function() {
-//     assert.equal(currentURL(), '/prefixes');
-//     assert.equal(find('h2.work').text(), 'DataCite');
-//   });
-// });
+  test('visiting prefixes', async function(assert) {
+    await authenticateSession({
+      uid: 'admin',
+      name: 'Admin',
+      role_id: 'staff_admin'
+    });
+    await visit('/prefixes');
 
-// test('visiting prefix 10.5072', function(assert) {
-//   visit('/prefixes/10.5072');
+    assert.equal(currentURL(), '/prefixes');
+    assert.dom('h2.work').hasText('DataCite');
+  });
 
-//   andThen(function() {
-//     assert.equal(currentURL(), '/prefixes/10.5072');
-//     assert.equal(find('div.alert-warning').text().trim(), 'The page was not found.');
-//   });
-// });
+  test('visiting prefix 10.5072', async function(assert) {
+    await authenticateSession({
+      uid: 'admin',
+      name: 'Admin',
+      role_id: 'staff_admin'
+    });
+    await visit('/prefixes/10.5072');
 
-// test('visiting dois', function(assert) {
-//   visit('/dois');
+    assert.equal(currentURL(), '/prefixes/10.5072');
+    assert.dom('div.alert-warning').includesText('The page was not found.');
+  });
 
-//   andThen(function() {
-//     assert.equal(currentURL(), '/dois');
-//     assert.equal(find('h2.work').text(), 'DataCite');
-//   });
-// });
+  test('visiting dois', async function(assert) {
+    await authenticateSession({
+      uid: 'admin',
+      name: 'Admin',
+      role_id: 'staff_admin'
+    });
+    await visit('/dois');
 
-// test('visiting specific doi', function(assert) {
-//   visit('/dois/10.1594%2Fwdcc%2Fclm_c20_3_d3');
-//
-//   andThen(function() {
-//     assert.equal(currentURL(), '/dois/10.1594%2Fwdcc%2Fclm_c20_3_d3');
-//     assert.equal(find('h2.work').text(), '10.1594/wdcc/clm_c20_3_d3');
-//   });
-// });
+    assert.equal(currentURL(), '/dois');
+    assert.dom('h2.work').hasText('DataCite');
+    assert.dom('a.nav-link.active').hasText('DOIs');
+  });
+
+  // test('visiting specific doi', async function(assert) {
+  //   await authenticateSession({
+  //     uid: 'admin',
+  //     name: 'Admin',
+  //     role_id: 'staff_admin'
+  //   });
+  //   await visit('/dois');
+
+  //   // first DOI in list
+  //   await click('h3.work:first-child a');
+
+  //   assert.dom('button#edit-doi').includesText('Update DOI (Form)');
+  //   assert.dom('button#modify-doi').includesText('Update DOI (File Upload)');
+  // });
+});

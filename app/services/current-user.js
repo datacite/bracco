@@ -25,8 +25,10 @@ export default Service.extend({
   isClient: false,
 
   load() {
-    let jwt = this.get('session.data.authenticated.access_token');
-    if (!isEmpty(jwt)) {
+    if (this.get('session.data.authenticated.access_token')) {
+      // using authenticator:oauth2
+      let jwt = this.get('session.data.authenticated.access_token')
+
       // RSA public key
       let cert = ENV.JWT_PUBLIC_KEY ? ENV.JWT_PUBLIC_KEY.replace(/\\n/g, '\n') : null;
 
@@ -42,6 +44,9 @@ export default Service.extend({
           });
         }
       });
+    } else if (this.get('session.data.authenticated.role_id')) {
+      // using authenticator:test
+      this.initUser(this.get('session.data.authenticated'));
     }
     return resolve();
   },
