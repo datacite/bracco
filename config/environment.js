@@ -84,9 +84,15 @@ module.exports = function(environment) {
     ENV.APP.LOG_ACTIVE_GENERATION = false;
     ENV.APP.LOG_VIEW_LOOKUPS = false;
 
+    ENV['simple-auth'] = {
+      store: 'simple-auth-session-store:ephemeral'
+    }
+
     ENV.APP.rootElement = '#ember-testing';
 
     ENV.featureFlags['use-elasticsearch'] = true;
+
+    ENV.APP.autoboot = false;
   }
 
   if (environment === 'production') {

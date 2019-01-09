@@ -6,11 +6,31 @@ import { authenticateSession } from 'ember-simple-auth/test-support';
 module('Acceptance | client_admin | admin', function(hooks) {
   setupApplicationTest(hooks);
 
-  test('visiting homepage', async function(assert) {
-    // await authenticateSession();
+  test('is logged in', async function(assert) {
+    await authenticateSession({
+      uid: 'tib.awi',
+      name: 'Alfred Wegener Institute',
+      role_id: 'client_admin',
+      provider_id: 'tib',
+      client_id: 'tib.awi'
+    });
     await visit('/');
-    assert.equal(currentURL(), '/');
-    assert.dom('div.motto h1').hasText('DataCite DOI Fabrica');
+
+    assert.dom('a#account_menu_link').hasText('TIB.AWI');
+  });
+
+  test('visiting homepage', async function(assert) {
+    await authenticateSession({
+      uid: 'tib.awi',
+      name: 'Alfred Wegener Institute',
+      role_id: 'client_admin',
+      provider_id: 'tib',
+      client_id: 'tib.awi'
+    });
+    await visit('/');
+
+    assert.equal(currentURL(), '/clients/tib.awi');
+    assert.dom('h2.work').hasText('Alfred Wegener Institute');
   });
 
   // the following pages require authentication. Redirects to homepage otherwise
@@ -23,8 +43,9 @@ module('Acceptance | client_admin | admin', function(hooks) {
       client_id: 'tib.awi'
     });
     await visit('/settings');
-    assert.equal(currentURL(), '/');
-    assert.dom('div.motto h1').hasText('DataCite DOI Fabrica');
+
+    assert.equal(currentURL(), '/clients/tib.awi');
+    assert.dom('h2.work').hasText('Alfred Wegener Institute');
   });
 
   test('visiting providers', async function(assert) {
@@ -36,8 +57,9 @@ module('Acceptance | client_admin | admin', function(hooks) {
       client_id: 'tib.awi'
     });
     await visit('/providers');
-    assert.equal(currentURL(), '/');
-    assert.dom('div.motto h1').hasText('DataCite DOI Fabrica');
+
+    assert.equal(currentURL(), '/clients/tib.awi');
+    assert.dom('h2.work').hasText('Alfred Wegener Institute');
   });
 
   test('visiting clients', async function(assert) {
@@ -49,8 +71,9 @@ module('Acceptance | client_admin | admin', function(hooks) {
       client_id: 'tib.awi'
     });
     await visit('/clients');
-    assert.equal(currentURL(), '/');
-    assert.dom('div.motto h1').hasText('DataCite DOI Fabrica');
+
+    assert.equal(currentURL(), '/clients/tib.awi');
+    assert.dom('h2.work').hasText('Alfred Wegener Institute');
   });
 
   test('visiting prefixes', async function(assert) {
@@ -62,7 +85,8 @@ module('Acceptance | client_admin | admin', function(hooks) {
       client_id: 'tib.awi'
     });
     await visit('/prefixes');
-    assert.equal(currentURL(), '/');
-    assert.dom('div.motto h1').hasText('DataCite DOI Fabrica');
+
+    assert.equal(currentURL(), '/clients/tib.awi');
+    assert.dom('h2.work').hasText('Alfred Wegener Institute');
   });
 });
