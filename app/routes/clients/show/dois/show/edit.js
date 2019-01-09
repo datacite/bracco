@@ -4,9 +4,9 @@ import { CanMixin } from 'ember-can';
 export default Route.extend(CanMixin, {
   model() {
     let self = this;
-    return this.store.findRecord('doi', this.modelFor('clients/show/dois/show').get('id'), { include: 'provider,client,resource-type' }).then(function(doi) {
+    return this.store.findRecord('doi', this.modelFor('clients/show/dois/show').get('id'), { include: 'provider,client,resource-type' }).then(function (doi) {
       return doi;
-    }).catch(function(reason){
+    }).catch(function (reason) {
       if (console.debug) {
         console.debug(reason);
       } else {
@@ -23,16 +23,6 @@ export default Route.extend(CanMixin, {
       return this.transitionTo('index');
     } else {
       this.modelFor('clients/show/dois/show').set('mode', 'edit');
-      this.modelFor('clients/show/dois/show').set('creators', this.creatorsToSeperated(this.modelFor('clients/show/dois/show').get('creators')));
     }
-  },
-  creatorsToSeperated(creators) {
-    return creators.map(function(a) {
-      if (a.familyName) {
-        return [a.familyName, a.givenName].join(", ");
-      } else {
-        return a.name;
-      }
-    }).join("\n");
   }
 });
