@@ -96,6 +96,7 @@ module.exports = function(environment) {
 
     // for consistency of acceptance tests
     ENV.API_URL = "https://api.test.datacite.org"
+    ENV.SITE_TITLE = "DataCite DOI Fabrica Test"
   }
 
   if (environment === 'production') {
