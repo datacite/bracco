@@ -15,22 +15,6 @@ export default Controller.extend({
     submit(doi) {
       doi.set('event', this.setEvent(doi.get('state')));
 
-      // convert creators back into array, and then to JSON
-      let creatorList = doi.get('creators').split("\n").reduce(function (sum, a) {
-        if (a.length > 0) {
-          let names = a.split(",")
-          let creator = {}
-          if (names.length > 1) {
-            creator = {familyName: names[0].trim(), givenName: names[1].trim()};
-          } else {
-            creator = { name: a };
-          }
-          sum.pushObject(creator);
-        }
-        return sum;
-      }, []);
-      doi.set('creators', creatorList);
-
       // convert title and description back into array
       if (doi.get('titles')) {
         doi.set('titles', [{ title: doi.get('titles') }]);
@@ -38,11 +22,11 @@ export default Controller.extend({
       if (doi.get('descriptions')) {
         doi.set('descriptions', [{ description: doi.get('descriptions'), descriptionType: 'Abstract' }]);
       }
-      
+
       let self = this;
-      doi.save().then(function(doi) {
+      doi.save().then(function (doi) {
         self.transitionToRoute('clients.show.dois.show', doi.get('client').get('id'), doi);
-      }).catch(function(reason){
+      }).catch(function (reason) {
         if (console.debug) {
           console.debug(reason);
         } else {
