@@ -6,7 +6,12 @@ export default Component.extend({
     this._super(...arguments);
 
     if (isPresent(this.model.get('titles'))) {
-      this.model.set('titles', this.model.get('titles')[0].title);
+      var titles = this.model.get('titles');
+      if (typeof (titles) === 'string') {
+        this.model.set('titles', titles);
+      } else {
+        this.model.set('titles', titles[0].title);
+      }
     }
   }
 });
