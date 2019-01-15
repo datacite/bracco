@@ -5,7 +5,12 @@ disabled=true}}
 {{doi-state model=model form=form}}
 {{doi-url model=model form=form}}
 {{#if metadataFieldsDisabled}}
-Wee woo disabled
+<div class="col-md-9 col-md-offset-3">
+  <div class="help-block">
+    You cannot edit the metadata in the form, if the DOI was not created via the form. If you did create this doi via
+    the form you should contact <a target="_blank" rel="noopener" href="mailto:">support@datacite.org</a>.
+  </div>
+</div>
 {{/if}}
 {{doi-creator model=model form=form disabled=metadataFieldsDisabled}}
 {{doi-titles model=model form=form disabled=metadataFieldsDisabled}}
