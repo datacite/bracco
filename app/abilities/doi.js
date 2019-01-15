@@ -5,8 +5,8 @@ import { Ability } from 'ember-can';
 export default Ability.extend({
   currentUser: service(),
 
-  canViewHealth: computed('currentUser.role_id', function() {
-    switch(this.get('currentUser.role_id')) {
+  canViewHealth: computed('currentUser.role_id', function () {
+    switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
       case 'provider_admin':
         return true;
@@ -14,16 +14,16 @@ export default Ability.extend({
         return false;
     }
   }),
-  canSource: computed('currentUser.role_id', function() {
-    switch(this.get('currentUser.role_id')) {
+  canSource: computed('currentUser.role_id', function () {
+    switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
       default:
         return false;
     }
   }),
-  canTransfer: computed('currentUser.role_id', function() {
-    switch(this.get('currentUser.role_id')) {
+  canTransfer: computed('currentUser.role_id', function () {
+    switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
       case 'provider_admin':
         return true;
@@ -31,8 +31,16 @@ export default Ability.extend({
         return false;
     }
   }),
-  canUpdate: computed('currentUser.role_id', 'model.id', function() {
-    switch(this.get('currentUser.role_id')) {
+  canEnableForm: computed('currentUser.role_id', function () {
+    switch (this.get('currentUser.role_id')) {
+      case 'staff_admin':
+        return true;
+      default:
+        return false;
+    }
+  }),
+  canUpdate: computed('currentUser.role_id', 'model.id', function () {
+    switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
       case 'provider_admin':
         return true;
@@ -42,8 +50,8 @@ export default Ability.extend({
         return false;
     }
   }),
-  canUpload: computed('currentUser.role_id', 'currentUser.client_id', 'model.query.client-id', function() {
-    switch(this.get('currentUser.role_id')) {
+  canUpload: computed('currentUser.role_id', 'currentUser.client_id', 'model.query.client-id', function () {
+    switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
       case 'client_admin':
@@ -52,8 +60,8 @@ export default Ability.extend({
         return false;
     }
   }),
-  canCreate: computed('currentUser.role_id', 'currentUser.client_id', 'model.query.client-id', function() {
-    switch(this.get('currentUser.role_id')) {
+  canCreate: computed('currentUser.role_id', 'currentUser.client_id', 'model.query.client-id', function () {
+    switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
       case 'client_admin':
@@ -62,8 +70,8 @@ export default Ability.extend({
         return false;
     }
   }),
-  canDelete: computed('currentUser.role_id', 'model.client.id', function() {
-    switch(this.get('currentUser.role_id')) {
+  canDelete: computed('currentUser.role_id', 'model.client.id', function () {
+    switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
       case 'client_admin':
@@ -72,8 +80,8 @@ export default Ability.extend({
         return false;
     }
   }),
-  canModify: computed('currentUser.role_id', 'currentUser.client_id', 'model.client.id', function() {
-    switch(this.get('currentUser.role_id')) {
+  canModify: computed('currentUser.role_id', 'currentUser.client_id', 'model.client.id', function () {
+    switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
       case 'client_admin':
@@ -82,8 +90,8 @@ export default Ability.extend({
         return false;
     }
   }),
-  canEdit: computed('currentUser.role_id', 'currentUser.client_id', 'model.client.id', function() {
-    switch(this.get('currentUser.role_id')) {
+  canEdit: computed('currentUser.role_id', 'currentUser.client_id', 'model.client.id', function () {
+    switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
       case 'client_admin':
@@ -92,8 +100,8 @@ export default Ability.extend({
         return false;
     }
   }),
-  canForm: computed('currentUser.role_id', 'currentUser.client_id', 'model.client.id', function() {
-    switch(this.get('currentUser.role_id')) {
+  canForm: computed('currentUser.role_id', 'currentUser.client_id', 'model.client.id', function () {
+    switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
       case 'client_admin':
@@ -102,8 +110,8 @@ export default Ability.extend({
         return false;
     }
   }),
-  canRead: computed('currentUser.role_id', 'currentUser.provider_id', 'currentUser.client_id', 'model.client.id', 'model.provider.id', function() {
-    switch(this.get('currentUser.role_id')) {
+  canRead: computed('currentUser.role_id', 'currentUser.provider_id', 'currentUser.client_id', 'model.client.id', 'model.provider.id', function () {
+    switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
       case 'provider_admin':
