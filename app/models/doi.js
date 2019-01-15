@@ -249,5 +249,9 @@ export default DS.Model.extend(Validations, {
     } else {
       return null;
     }
-  })
+  }),
+  isSourceForm: computed('source', function () {
+    return this.get('source') == "fabricaForm";
+  }),
+
 });

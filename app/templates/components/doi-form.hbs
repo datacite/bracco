@@ -1,0 +1,28 @@
+{{form.element controlType="text" label="DOI" property="doi" helpText="The globally unique string that identifies
+the resource and can't be changed. DOIs with demo prefix 10.5072 will always remain in Draft state."
+disabled=true}}
+
+{{doi-state model=model form=form}}
+{{doi-url model=model form=form}}
+{{#if metadataFieldsDisabled}}
+<div class="col-md-9 col-md-offset-3">
+  <div class="help-block">
+    You cannot edit the metadata in the form, if the DOI was not created via the form. If you did create this doi via
+    the form you should contact <a target="_blank" rel="noopener" href="mailto:support@datacite.org">support@datacite.org</a>.
+  </div>
+</div>
+{{/if}}
+{{doi-creator model=model form=form disabled=metadataFieldsDisabled}}
+{{doi-titles model=model form=form disabled=metadataFieldsDisabled}}
+
+{{form.element controlType="text" label="Publisher" property="publisher" helpText="The name of the entity that
+holds, archives, publishes prints, distributes, releases, issues, or produces the resource." required=false
+disabled=metadataFieldsDisabled}}
+{{form.element controlType="text" label="Publication Year" property="publicationYear" helpText="The year when the
+resource was or will be made publicly available. Must be between 1450 and 2020." required=false
+disabled=metadataFieldsDisabled}}
+
+{{doi-types model=model form=form disabled=metadataFieldsDisabled}}
+{{doi-descriptions model=model form=form disabled=metadataFieldsDisabled}}
+
+{{model-validation-errors model=model form=form disabled=metadataFieldsDisabled}}

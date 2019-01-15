@@ -1,23 +1,25 @@
-{{#form.element 
-  controlType="power-select" 
-  label="Resource Type General" 
-  property="types.resourceTypeGeneral" 
-  helpText="The general type of the resource." 
-  options=resourceTypesGeneral 
-  destination=resourceTypeGeneral 
+{{#form.element
+controlType="power-select"
+label="Resource Type General"
+property="types.resourceTypeGeneral"
+helpText="The general type of the resource."
+options=resourceTypesGeneral
+disabled=disabled
+destination=resourceTypeGeneral
 as |el|
 }}
-  {{el.control 
-    onChange=(action "selectResourceTypeGeneral") 
-    search=(action "searchResourceTypeGeneral") 
-    searchPlaceholder="Select from list or type to search..."
-  }}
+{{el.control
+onChange=(action "selectResourceTypeGeneral")
+search=(action "searchResourceTypeGeneral")
+searchPlaceholder="Select from list or type to search..."
+}}
 {{/form.element}}
 
-{{form.element 
-  controlType="text" 
-  label="Resource Type (optional)" 
-  property="types.resourceType" 
-  helpText="A description of the resource, the preferred format is a single term of some detail." 
-  required=false
+{{form.element
+controlType="text"
+label="Resource Type (optional)"
+property="types.resourceType"
+helpText="A description of the resource, the preferred format is a single term of some detail."
+required=false
+disabled=disabled
 }}

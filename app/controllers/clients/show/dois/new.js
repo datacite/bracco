@@ -23,6 +23,8 @@ export default Controller.extend({
         doi.set('descriptions', [{ description: doi.get('descriptions'), descriptionType: 'Abstract' }]);
       }
 
+      doi.set("source", "fabricaForm");
+
       let self = this;
       doi.save().then(function (doi) {
         self.transitionToRoute('clients.show.dois.show', doi.get('client').get('id'), doi);

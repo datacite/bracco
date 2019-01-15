@@ -28,10 +28,10 @@ export default Controller.extend({
       doi.set('schemaVersion', null);
 
       // convert title and description back into array
-      if (doi.get('titles')) {
+      if (doi.get('titles') && doi.get('titles').constructor !== Array) {
         doi.set('titles', [{ title: doi.get('titles') }]);
       }
-      if (doi.get('descriptions')) {
+      if (doi.get('descriptions') && doi.get('descriptions').constructor !== Array) {
         doi.set('descriptions', [{ description: doi.get('descriptions'), descriptionType: 'Abstract' }]);
       }
 
