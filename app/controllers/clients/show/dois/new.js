@@ -34,6 +34,7 @@ export default Controller.extend({
         } else {
           console.log(reason);
         }
+        self.get('flashMessages').warning('This DOI name already exists. Please use a different DOI name.', {componentName: 'duplicated-doi'});
       });
     },
     cancel() {

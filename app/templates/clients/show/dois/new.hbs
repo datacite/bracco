@@ -52,5 +52,15 @@
         <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
       </div>
     {{/bs-form}}
+
+    <div class="row">
+      <div class="col-md-9 col-md-offset-3">
+        {{#each flashMessages.queue as |flash|}}
+          {{#if (eq flash.componentName "duplicated-doi") }}
+            {{flash-message flash=flash}}
+          {{/if}}
+        {{/each}}
+      </div>
+    </div>
   </div>
 </div>
