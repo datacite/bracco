@@ -2616,6 +2616,7 @@ babel-preset-env@^1.5.1:
 babel-preset-env@^1.7.0:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/babel-preset-env/-/babel-preset-env-1.7.0.tgz#dea79fa4ebeb883cd35dab07e260c1c9c04df77a"
+  integrity sha512-9OR2afuKDneX2/q2EurSftUYM0xGu4O2D9adAhVfADDhrYDaxXV0rBbevVYoY9n6nyX1PmQW/0jtpJvUNr9CHg==
   dependencies:
     babel-plugin-check-es2015-constants "^6.22.0"
     babel-plugin-syntax-trailing-function-commas "^6.22.0"
@@ -2700,6 +2701,7 @@ babel-preset-flow@^6.23.0:
 babel-preset-react@^6.24.1:
   version "6.24.1"
   resolved "https://registry.yarnpkg.com/babel-preset-react/-/babel-preset-react-6.24.1.tgz#ba69dfaea45fc3ec639b6a4ecea6e17702c91380"
+  integrity sha1-umnfrqRfw+xjm2pOzqbhdwLJE4A=
   dependencies:
     babel-plugin-syntax-jsx "^6.3.13"
     babel-plugin-transform-react-display-name "^6.23.0"
@@ -6249,9 +6251,10 @@ electron-compile@*:
     spawn-rx "^2.0.3"
     yargs "^4.8.1"
 
-electron-compile@^6.4.3:
-  version "6.4.3"
-  resolved "https://registry.yarnpkg.com/electron-compile/-/electron-compile-6.4.3.tgz#54a9ec4418ab5faf77ba48f75ab5eb80156a64d4"
+electron-compile@^6.4.4:
+  version "6.4.4"
+  resolved "https://registry.yarnpkg.com/electron-compile/-/electron-compile-6.4.4.tgz#24c5bc4c937856fcc9141cf3cc7251172e0205df"
+  integrity sha512-LEOq5Tt7fAfONEyYLR0Ue1kL6/H8NAX6s9ouw4g6Azhu6onWh166fnf2O7Y3f9qkQEqYzwZl49Rd/QWxLG2AYw==
   dependencies:
     "@paulcbetts/mime-types" "^2.1.10"
     "@types/node" "^7.0.12"
@@ -6351,6 +6354,7 @@ electron-forge-template-vue@^1.0.2:
 electron-forge@^5.2.3:
   version "5.2.3"
   resolved "https://registry.yarnpkg.com/electron-forge/-/electron-forge-5.2.3.tgz#edbdfe2ad23f9d4f93afc8bba0a746559b01fb6d"
+  integrity sha512-d85r9ElixixnO816fxUYtdTpyiwQhSSQ7nv0M+28q0qC1KHLJpBk71CM+WKlSVu99DCtKPJVMnB53NLJ0o7Njw==
   dependencies:
     "@octokit/rest" "^15.2.6"
     aws-sdk "^2.9.0"
@@ -6604,6 +6608,7 @@ electron-packager@^11.0.0:
 electron-prebuilt-compile@4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/electron-prebuilt-compile/-/electron-prebuilt-compile-4.0.0.tgz#3262fe69fa343022353e4c8bd16c60e8f181c47e"
+  integrity sha512-mIQSctVTH6zq0P5oBb5XI+aT6grCIXIF3ntIxx45HNoAQggMUmA9Gf1dUquila3gSHzMN6pcN7ClpEPXPvFm+w==
   dependencies:
     babel-plugin-array-includes "^2.0.3"
     babel-plugin-transform-async-to-generator "^6.24.1"
@@ -6636,7 +6641,8 @@ electron-rebuild@^1.6.0:
 
 electron-squirrel-startup@^1.0.0:
   version "1.0.0"
-  resolved "http://registry.npmjs.org/electron-squirrel-startup/-/electron-squirrel-startup-1.0.0.tgz#19b4e55933fa0ef8f556784b9c660f772546a0b8"
+  resolved "https://registry.yarnpkg.com/electron-squirrel-startup/-/electron-squirrel-startup-1.0.0.tgz#19b4e55933fa0ef8f556784b9c660f772546a0b8"
+  integrity sha1-GbTlWTP6Dvj1VnhLnGYPdyVGoLg=
   dependencies:
     debug "^2.2.0"
 
@@ -7813,6 +7819,7 @@ ember-diff-attrs@^0.2.1:
 ember-electron@^2.10.0:
   version "2.10.0"
   resolved "https://registry.yarnpkg.com/ember-electron/-/ember-electron-2.10.0.tgz#9aa9ebcc94fe8a95014defe6e933800a5db89094"
+  integrity sha512-Bmx5mI1YtyZr+WorOMisnzZcHmnDGcVf94NLx2qHFYfAQafNRWslkTzYrs8bhB8xbPTY/gsJM4ZetGuEUu5G9w==
   dependencies:
     broccoli-file-creator "^1.1.1"
     broccoli-funnel "^1.0.1"

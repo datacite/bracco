@@ -50,13 +50,13 @@ export default Component.extend({
     if (this.model.get("landingPage").bodyHasPid) {
       this.set('hasDoi', {
         text: "The landing page includes the DOI.",
-        helpText: "The link check found the DOI in the landing page body.",
+        helpText: "The link check found the DOI in the landing page HTML.",
         isChecked: true
       })
     } else {
       this.set('hasDoi', {
         text: "No DOI was found on the landing page.",
-        helpText: "The link check did not find the DOI in the landing page body.",
+        helpText: "The link check did not find the DOI in the landing page HTML.",
         isChecked: false
       })
     }
