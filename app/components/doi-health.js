@@ -23,7 +23,7 @@ export default Component.extend({
       })
     } else {
       this.set('isFound', {
-        text: "The URL does not resolve properly.",
+        text: "The URL resolves properly.",
         helpText: "The link check returned the HTTP status code <strong>" + this.model.get("landingPage").status + "</strong>. This can be a temporal problem and we will repeat the link check.",
         isChecked: false
       })
@@ -42,7 +42,7 @@ export default Component.extend({
       })
     } else {
       this.set('hasLandingPage', {
-        text: "The URL does not resolve to a landing page.",
+        text: "The URL resolves to a landing page.",
         helpText: "The link check returned the HTTP content type <strong>" + contentType + "</strong>. We recommend to have the URL resolve to a page of content type <strong>text/html</strong>.",
         isChecked: false
       })
@@ -55,7 +55,7 @@ export default Component.extend({
       })
     } else {
       this.set('hasDoi', {
-        text: "No DOI was found on the landing page.",
+        text: "The landing page includes the DOI.",
         helpText: "The link check did not find the DOI in the landing page HTML.",
         isChecked: false
       })
@@ -68,7 +68,7 @@ export default Component.extend({
       })
     } else {
       this.set('hasSchemaOrg', {
-        text: "No metadata in schema.org format was found on the landing page.",
+        text: "The landing page includes metadata in schema.org format.",
         helpText: "The link check found no embedded JSON-LD with @context <strong>\"http://schema.org\"</strong>. Please reach out to DataCite Support if we missed embedded schema.org metadata.",
         isChecked: false
       })
