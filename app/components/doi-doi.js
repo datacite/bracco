@@ -38,41 +38,49 @@ export default Component.extend({
       let prefix = prefixes.length > 0 ? prefixes.get('firstObject') : '10.5072';
 
       self.get('model').set('prefix', prefix);
-      self.generate();
+      
+      if(typeof self.get('model').get('doi') == 'undefined'){
+        self.generate();
+      }
     });
   },
-  generate() {
+  async generate() {
     let self = this;
     let url = ENV.API_URL + '/dois/random?prefix=' + this.model.get('prefix');
-    return fetch(url, {
-      headers: {
-        'Authorization': 'Bearer ' + this.currentUser.get('jwt')
-      }
-    }).then(function(response) {
+    try {
+      const response = await fetch(url, {
+        headers: {
+          'Authorization': 'Bearer ' + this.currentUser.get('jwt')
+        }
+      });
       if (response.ok) {
-        return response.json().then(function(data) {
-          let suffix = data.doi.split('/', 2)[1]
+        return response.json().then(function (data) {
+          let suffix = data.doi.split('/', 2)[1];
           self.get('model').set('suffix', suffix);
           let doi = self.get('model').get('prefix') + '/' + suffix;
           self.get('model').set('doi', doi);
           self.selectState(self.get('model').get('state'));
           return suffix;
         });
-      } else {
+      }
+      else {
         if (console.debug) {
           console.debug(response);
-        } else {
+        }
+        else {
           console.log(response);
         }
         return null;
       }
-    }).catch(function(error) {
+    }
+    catch (error) {
       if (console.debug) {
         console.debug(error);
-      } else {
+      }
+      else {
         console.log(error);
       }
-    });
+    }
   },
   selectState(state) {
     this.set('state', state);
