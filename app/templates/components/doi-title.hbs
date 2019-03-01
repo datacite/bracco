@@ -1,9 +1,9 @@
 {{#if (gt index 0)}}
   <div class="input-group">
-    <input type="text" class="form-control" value={{fragment.title}} onchange={{action "updateTitle" value="target.value"}} />
+    <input type="text" class="form-control" id="title" value={{fragment.title}} onchange={{action "updateTitle" value="target.value"}} />
 
     <span class="input-group-btn">
-      {{#bs-button outline=true id="title" onClick=(action "deleteTitle" index)}}{{fa-icon "trash"}}{{/bs-button}}
+      {{#bs-button outline=true onClick=(action "deleteTitle" index)}}{{fa-icon "trash"}}{{/bs-button}}
     </span>
   </div>
 {{else}}
