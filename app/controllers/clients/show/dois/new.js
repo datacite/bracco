@@ -15,10 +15,7 @@ export default Controller.extend({
     submit(doi) {
       doi.set('event', this.setEvent(doi.get('state')));
 
-      // convert title and description back into array
-      if (doi.get('titles')) {
-        doi.set('titles', [{ title: doi.get('titles') }]);
-      }
+      // convert description back into array
       if (doi.get('descriptions')) {
         doi.set('descriptions', [{ description: doi.get('descriptions'), descriptionType: 'Abstract' }]);
       }
