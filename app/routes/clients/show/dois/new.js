@@ -5,7 +5,7 @@ import { CanMixin } from 'ember-can';
 export default Route.extend(CanMixin, {
   model() {
     let client = this.modelFor('clients/show');
-    let doi = this.store.createRecord('doi', { client: client, mode: 'new', state: 'draft', creators: '' });
+    let doi = this.store.createRecord('doi', { client: client, mode: 'new', state: 'draft', creators: '', titles: [{}] });
 
     return hash({
       client: client,

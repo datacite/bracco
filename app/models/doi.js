@@ -2,11 +2,8 @@ import { computed } from '@ember/object';
 import DS from 'ember-data';
 import { validator, buildValidations } from 'ember-cp-validations';
 import ENV from 'bracco/config/environment';
-// import {
-//   fragment,
-//   fragmentArray,
-//   array
-// } from 'ember-data-model-fragments/attributes';
+import Model from 'ember-data/model';
+import { fragmentArray } from 'ember-data-model-fragments/attributes';
 
 const Validations = buildValidations({
   details: [
@@ -67,17 +64,6 @@ const Validations = buildValidations({
     })
   ],
   creators: [
-    validator('presence', {
-      presence: true,
-      isWarning: computed('model.state', 'model.prefix', function () {
-        return (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
-      }),
-      disabled: computed('model.mode', function () {
-        return !["new", "edit"].includes(this.model.get('mode'));
-      })
-    })
-  ],
-  titles: [
     validator('presence', {
       presence: true,
       isWarning: computed('model.state', 'model.prefix', function () {
@@ -154,7 +140,7 @@ const Validations = buildValidations({
   ]
 });
 
-export default DS.Model.extend(Validations, {
+export default Model.extend(Validations, {
   client: DS.belongsTo('client', {
     async: true
   }),
@@ -167,7 +153,7 @@ export default DS.Model.extend(Validations, {
   url: DS.attr('string'),
   contentUrl: DS.attr(),
   creators: DS.attr({ defaultValue: null }),
-  titles: DS.attr(),
+  titles: fragmentArray('title'),
   publisher: DS.attr('string'),
   bcontainer: DS.attr(),
   publicationYear: DS.attr('number'),
@@ -253,5 +239,4 @@ export default DS.Model.extend(Validations, {
   isSourceForm: computed('source', function () {
     return this.get('source') == "fabricaForm";
   }),
-
 });

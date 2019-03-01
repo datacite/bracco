@@ -6,5 +6,6 @@ export default Fragment.extend({
   givenName: attr('string'),
   familyName: attr('string'),
   nameType: attr('string'),
-  affiliation: attr('string')
+  affiliation: attr('string'),
+  nameIdentifiers: attr()
 });

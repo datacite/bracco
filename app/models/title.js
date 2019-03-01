@@ -3,6 +3,6 @@ import Fragment from 'ember-data-model-fragments/fragment';
 
 export default Fragment.extend({
   title: attr('string'),
-  titleType: attr('string'),
-  lang: attr('string')
+  titleType: attr('string', { defaultValue: null }),
+  lang: attr('string', { defaultValue: null })
 });

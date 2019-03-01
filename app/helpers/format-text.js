@@ -12,10 +12,9 @@ export function formatText([text], hash) {
   if (typeOf(text) === 'array') {
     if (text[0] && text[0].descriptionType) {
       text = text[0].description;
-    } else if (text[0]) {
-      text = text[0].title;
     }
   }
+
   text = entities.decode(text);
   
   let allowedTags = ['strong', 'em', 'b', 'i', 'code', 'pre', 'sub', 'sup', 'br']

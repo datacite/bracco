@@ -1,2 +1,15 @@
-{{form.element controlType="textarea" label="Title" property="titles" rows=2 helpText="A name or title by which the
-resource is known." required=false disabled=disabled}}
+<div class="form-group">
+  <label class="control-label col-md-3">Titles</label>
+  <div class="col-md-9">
+    {{#each model.titles as |title index|}}
+      {{doi-title model=model fragment=title form=form index=index}}
+    {{/each}}
+
+    <div class="help-block">
+      A name or title by which the resource is known.
+    </div>
+  </div>
+</div>
+
+
+
