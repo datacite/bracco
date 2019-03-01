@@ -4,11 +4,11 @@
   {{#if lastItem}}
     <span class="input-group-btn">
       {{#if lastItem}}
-        {{#bs-button type="primary" outline=true onClick=(action "addTitle")}}{{fa-icon "plus"}}{{/bs-button}}
+        {{#bs-button type="primary" id="title" outline=true onClick=(action "addTitle")}}{{fa-icon "plus"}}{{/bs-button}}
       {{/if}}
 
       {{#if (not firstItem)}}
-        {{#bs-button type="primary" outline=true onClick=(action "deleteTitle" index)}}{{fa-icon "trash"}}{{/bs-button}}
+        {{#bs-button type="primary" id="title" outline=true onClick=(action "deleteTitle" index)}}{{fa-icon "trash"}}{{/bs-button}}
       {{/if}}
     </span>
   {{/if}}
