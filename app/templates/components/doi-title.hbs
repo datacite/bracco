@@ -1,15 +1,11 @@
-<div class="input-group">
-  <input type="text" class="form-control" value={{fragment.title}} onchange={{action "updateTitle" value="target.value"}} />
+{{#if (gt index 0)}}
+  <div class="input-group">
+    <input type="text" class="form-control" value={{fragment.title}} onchange={{action "updateTitle" value="target.value"}} />
 
-  {{#if lastItem}}
     <span class="input-group-btn">
-      {{#if lastItem}}
-        {{#bs-button type="primary" id="title" outline=true onClick=(action "addTitle")}}{{fa-icon "plus"}}{{/bs-button}}
-      {{/if}}
-
-      {{#if (not firstItem)}}
-        {{#bs-button type="primary" id="title" outline=true onClick=(action "deleteTitle" index)}}{{fa-icon "trash"}}{{/bs-button}}
-      {{/if}}
+      {{#bs-button outline=true id="title" onClick=(action "deleteTitle" index)}}{{fa-icon "trash"}}{{/bs-button}}
     </span>
-  {{/if}}
-</div>
+  </div>
+{{else}}
+  <input type="text" class="form-control" value={{fragment.title}} onchange={{action "updateTitle" value="target.value"}} />
+{{/if}}
