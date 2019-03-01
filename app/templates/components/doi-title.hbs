@@ -3,9 +3,9 @@
     <input type="text" class="form-control" value={{fragment.title}} onchange={{action "updateTitle" value="target.value"}} />
 
     <span class="input-group-btn">
-      {{#bs-button outline=true onClick=(action "deleteTitle" index)}}{{fa-icon "trash"}}{{/bs-button}}
+      {{#bs-button outline=true id="title" onClick=(action "deleteTitle" index)}}{{fa-icon "trash"}}{{/bs-button}}
     </span>
-</div>
+  </div>
 {{else}}
   <input type="text" class="form-control" value={{fragment.title}} onchange={{action "updateTitle" value="target.value"}} />
 {{/if}}
