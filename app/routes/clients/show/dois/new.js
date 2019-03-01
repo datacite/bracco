@@ -5,8 +5,12 @@ import { CanMixin } from 'ember-can';
 export default Route.extend(CanMixin, {
   model() {
     let client = this.modelFor('clients/show');
-    let doi = this.store.createRecord('doi', { client: client, mode: 'new', state: 'draft', creators: '', titles: [] });
-    doi.get('titles').createFragment();
+    let doi = this.store.createRecord('doi', { client: client, mode: 'new', state: 'draft', creators: '' });
+    doi.get('titles').createFragment({
+      title: '',
+      titleType: null,
+      lang: null,
+    });
 
     return hash({
       client: client,
