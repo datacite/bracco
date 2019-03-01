@@ -1,10 +1,9 @@
 <div class="form-group">
-  <label class="control-label col-md-3">Titles</label>
-  <div class="col-md-9">
-    {{#each model.titles as |title index|}}
-      {{doi-title model=model fragment=title form=form index=index}}
-    {{/each}}
+  {{#each model.titles as |title index|}}
+    {{doi-title model=model fragment=title form=form index=index}}
+  {{/each}}
 
+  <div class="col-md-9 col-md-offset-3">
     <div class="help-block">
       A name or title by which the resource is known.
     </div>
@@ -12,6 +11,3 @@
     {{#bs-button class="btn-sm" outline=true onClick=(action "addTitle")}}{{fa-icon "plus"}} Add title{{/bs-button}}
   </div>
 </div>
-
-
-
