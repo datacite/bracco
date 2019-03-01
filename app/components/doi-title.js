@@ -16,7 +16,7 @@ export default Component.extend({
     addTitle() {
       this.model.get('titles').createFragment();
     },
-    deleteTitle(value) {
+    deleteTitle() {
       this.model.get('titles').removeObject(this.fragment);
     }
   }
