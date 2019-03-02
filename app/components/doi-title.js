@@ -39,9 +39,7 @@ export default Component.extend(Validations, {
       return null;
     }
   }),
-  isInvalid: computed('validations.isValid', function () {
-    return !this.get('validations.isValid');
-  }),
+  isValidating: false,
   showWarningMessage: computed('validations.warnings', function () {
     return this.get('validations.warnings').length > 0;
   }),
@@ -49,6 +47,9 @@ export default Component.extend(Validations, {
   actions: {
     updateTitle(value) {
       this.fragment.set('title', value);
+      if (value) {
+        this.set('isValidating', true);
+      }
     },
     deleteTitle() {
       this.model.get('titles').removeObject(this.fragment);
