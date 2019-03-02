@@ -6,17 +6,25 @@
         {{#bs-button outline=true onClick=(action "deleteTitle" index)}}{{fa-icon "trash"}}{{/bs-button}}
       </span>
     </div>
-    {{#if errorMessage}}
-      <div class='help-block'>{{errorMessage}}</div>
-    {{/if}}
+    <div class="help-block">
+      {{#if errorMessage}}
+        {{errorMessage}}
+      {{else}}
+        A name or title by which the resource is known.
+      {{/if}}
+    </div>
   </div>
 {{else}}
   <label class="control-label col-md-3">Titles</label>
   <div class="col-md-9">
     <input type="text" class="form-control" value={{fragment.title}} oninput={{action "updateTitle" value="target.value"}} onblur={{action "validateTitle"}} disabled={{metadataFieldsDisabled}}/>
-    {{#if errorMessage}}
-      <div class='help-block'>{{errorMessage}}</div>
-    {{/if}}
+    <div class="help-block">
+      {{#if errorMessage}}
+        {{errorMessage}}
+      {{else}}
+        A name or title by which the resource is known.
+      {{/if}}
+    </div>
   </div>
 {{/if}}
 

@@ -4,9 +4,6 @@
   {{/each}}
 
   <div class="col-md-9 col-md-offset-3">
-    <div class="help-block">
-      A name or title by which the resource is known.
-    </div>
     {{#if (lte model.titles.length 4)}}
       {{#bs-button class="btn-sm" outline=true onClick=(action "addTitle")}}{{fa-icon "plus"}} Add title{{/bs-button}}
     {{/if}}
