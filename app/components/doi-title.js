@@ -1,25 +1,22 @@
 import { computed } from '@ember/object';
 import Component from '@ember/component';
+import ISO6391 from 'iso-639-1';
+
 const titleTypeList = [
   'AlternativeTitle',
   'Subtitle',
   'TranslatedTitle',
   'Other'
 ];
-const languageList = [
-  { id: "de", title: "German" },
-  { id: "en", title: "English" },
-  { id: "fr", title: "French" },
-  { id: "es", title: "Spanish" }
-];
+const languageList = ISO6391.getAllNames();
 
 export default Component.extend({
   titleTypeList,
   titleTypes: titleTypeList,
   languageList,
   languages: languageList,
-  language: computed('fragment.lang', 'languageList', function () {
-    return languageList.findBy('id', this.get('fragment.lang'));
+  language: computed('fragment.lang', function () {
+    return ISO6391.getName(this.get('fragment.lang'));
   }),
 
   actions: {
@@ -47,7 +44,7 @@ export default Component.extend({
     },
     selectLanguage(language) {
       if (language) {
-        this.fragment.set('lang', language.id);
+        this.fragment.set('lang', ISO6391.getCode(language));
       } else {
         this.fragment.set('lang', null);
       }

@@ -1,7 +1,7 @@
 {{#if (gt index 0)}}
   <div class="col-md-9 col-md-offset-3">
     <div class="input-group">
-      <input type="text" class="form-control" value={{fragment.title}} onchange={{action "updateTitle" value="target.value"}} />
+      <input type="text" class="form-control" value={{fragment.title}} onchange={{action "updateTitle" value="target.value"}} disabled={{metadataFieldsDisabled}}/>
       <span class="input-group-btn">
         {{#bs-button outline=true onClick=(action "deleteTitle" index)}}{{fa-icon "trash"}}{{/bs-button}}
       </span>
@@ -19,7 +19,7 @@
 </div>
 
 <div class="power-select-fragment">
-  {{#form.element controlType="power-select" value=fragment.titleType options=titleTypes destination=fragment.titleType as |el|}}
+  {{#form.element controlType="power-select" value=fragment.titleType options=titleTypes destination=fragment.titleType disabled=metadataFieldsDisabled as |el|}}
     {{#el.control onChange=(action "selectTitleType") search=(action "searchTitleType") placeholder="Select Title Type" searchPlaceholder="Type to search..." allowClear=true as |item|}}
       {{item}}
     {{/el.control}}
@@ -32,7 +32,7 @@
 <div class="power-select-fragment">
   {{#form.element controlType="power-select" value=language options=languages as |el|}}
     {{#el.control onChange=(action "selectLanguage") search=(action "searchLanguage") placeholder="Select Language" searchPlaceholder="Type to search..." allowClear=true as |item|}}
-      {{item.title}}
+      {{item}}
     {{/el.control}}
   {{/form.element}}
 </div>

@@ -1,6 +1,6 @@
 <div class="form-group">
   {{#each model.titles as |title index|}}
-    {{doi-title model=model fragment=title form=form index=index}}
+    {{doi-title model=model fragment=title form=form index=index disabled=metadataFieldsDisabled}}
   {{/each}}
 
   <div class="col-md-9 col-md-offset-3">
