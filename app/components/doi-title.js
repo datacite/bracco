@@ -39,7 +39,6 @@ export default Component.extend(Validations, {
       return null;
     }
   }),
-  isValidating: false,
   showWarningMessage: computed('validations.warnings', function () {
     return this.get('validations.warnings').length > 0;
   }),
@@ -48,8 +47,20 @@ export default Component.extend(Validations, {
     updateTitle(value) {
       this.fragment.set('title', value);
       if (value) {
-        this.set('isValidating', true);
+        this.setIsValidating(true);
+      } else {
+        this.setIsValidating(false);
       }
+      this.setErrorMessage(this.get('errorMessage'));
+    },
+    validateTitle() {
+      if (this.get('fragment.title')) {
+        this.setIsValidating(true);
+      } else {
+        this.setIsValidating(false);
+      }
+      this.setErrorMessage(this.get('errorMessage'));
+      console.log("a")
     },
     deleteTitle() {
       this.model.get('titles').removeObject(this.fragment);
