@@ -14,8 +14,10 @@
   </div>
 {{/if}}
 
-<div class="col-md-9 col-md-offset-3">
-  <label for="titleType" class="subtitle">Title Type (optional)</label>
+<div class="power-select-label">
+  <div class="col-md-9 col-md-offset-3">
+    <label for="titleType" class="subtitle">Title Type (optional)</label>
+  </div>
 </div>
 
 <div class="power-select-fragment">
@@ -26,9 +28,12 @@
   {{/form.element}}
 </div>
 
-<div class="col-md-9 col-md-offset-3">
-  <label for="titleType"class="subtitle">Language (optional)</label>
+<div class="power-select-label">
+  <div class="col-md-9 col-md-offset-3">
+    <label for="titleType"class="subtitle">Language (optional)</label>
+  </div>
 </div>
+
 <div class="power-select-fragment">
   {{#form.element controlType="power-select" value=language options=languages as |el|}}
     {{#el.control onChange=(action "selectLanguage") search=(action "searchLanguage") placeholder="Select Language" searchPlaceholder="Type to search..." allowClear=true as |item|}}
