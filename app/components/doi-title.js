@@ -1,7 +1,21 @@
-import { computed } from '@ember/object';
 import Component from '@ember/component';
 import ISO6391 from 'iso-639-1';
+import { validator, buildValidations } from 'ember-cp-validations';
+import { computed } from '@ember/object';
 
+const Validations = buildValidations({
+  'fragment.title': [
+    validator('presence', {
+      presence: true,
+      isWarning: computed('model.model.state', 'model.model.prefix', function () {
+        return (this.get('model.model.state') === 'draft' || this.get('model.model.prefix') === '10.5072');
+      }),
+      disabled: computed('model.model.mode', function () {
+        return !["new", "edit"].includes(this.get('model.model.mode'));
+      })
+    })
+  ]
+});
 const titleTypeList = [
   'AlternativeTitle',
   'Subtitle',
@@ -10,7 +24,7 @@ const titleTypeList = [
 ];
 const languageList = ISO6391.getAllNames();
 
-export default Component.extend({
+export default Component.extend(Validations, {
   titleTypeList,
   titleTypes: titleTypeList,
   languageList,
@@ -18,7 +32,20 @@ export default Component.extend({
   language: computed('fragment.lang', function () {
     return ISO6391.getName(this.get('fragment.lang'));
   }),
-
+  errorMessage: computed('validations.messages', function () {
+    if (this.get('validations.messages').length > 0) {
+      return this.get('validations.messages').get('firstObject');
+    } else {
+      return null;
+    }
+  }),
+  isInvalid: computed('validations.isValid', function () {
+    return !this.get('validations.isValid');
+  }),
+  showWarningMessage: computed('validations.warnings', function () {
+    return this.get('validations.warnings').length > 0;
+  }),
+  
   actions: {
     updateTitle(value) {
       this.fragment.set('title', value);
