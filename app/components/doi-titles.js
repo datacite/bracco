@@ -2,7 +2,7 @@ import Component from '@ember/component';
 
 export default Component.extend({
   isValidating: false,
-  errorMessage: false,
+  hasErrors: false,
 
   actions: {
     addTitle() {
@@ -11,8 +11,8 @@ export default Component.extend({
     setIsValidating(value) {
       this.set('isValidating', value);
     },
-    setErrorMessage(value) {
-      this.set('errorMessage', value);
+    setHasErrors(value) {
+      this.set('hasErrors', value);
     }
   }
 });
