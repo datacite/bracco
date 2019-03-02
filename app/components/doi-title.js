@@ -39,14 +39,17 @@ export default Component.extend(Validations, {
       return null;
     }
   }),
+  isValidating: false,
   
   actions: {
     updateTitle(value) {
       this.fragment.set('title', value);
+      this.set('isValidating', !!value);
       this.setIsValidating(!!value);
       this.setHasErrors(!value);
     },
     validateTitle() {
+      this.set('isValidating', !!this.get('fragment.title'));
       this.setIsValidating(!!this.get('fragment.title'));
       this.setHasErrors(!this.get('fragment.title'));
     },
