@@ -1,2 +1,12 @@
-{{form.element controlType="textarea" label="Description (optional)" property="description" rows=8 helpText="All
-additional information that does not fit in any of the other categories." required=false disabled=disabled}}
+<div class="form-group">
+  {{#each model.descriptions as |description index|}}
+  {{doi-description model=model disabled=disabled fragment=description form=form index=index}}
+  {{/each}}
+
+  <div class="col-md-9 col-md-offset-3">
+    {{#if (lte model.descriptions.length 4)}}
+    {{#bs-button class="btn-sm" outline=true onClick=(action "addDescription")}}{{fa-icon "plus"}} Add
+    description{{/bs-button}}
+    {{/if}}
+  </div>
+</div>
