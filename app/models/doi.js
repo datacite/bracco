@@ -63,17 +63,17 @@ const Validations = buildValidations({
       })
     })
   ],
-  creators: [
-    validator('presence', {
-      presence: true,
-      isWarning: computed('model.state', 'model.prefix', function () {
-        return (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
-      }),
-      disabled: computed('model.mode', function () {
-        return !["new", "edit"].includes(this.model.get('mode'));
-      })
-    })
-  ],
+  // creators: [
+  //   validator('presence', {
+  //     presence: true,
+  //     isWarning: computed('model.state', 'model.prefix', function () {
+  //       return (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
+  //     }),
+  //     disabled: computed('model.mode', function () {
+  //       return !["new", "edit"].includes(this.model.get('mode'));
+  //     })
+  //   })
+  // ],
   publisher: [
     validator('presence', {
       presence: true,
@@ -152,7 +152,7 @@ export default Model.extend(Validations, {
   suffix: DS.attr('string'),
   url: DS.attr('string'),
   contentUrl: DS.attr(),
-  creators: DS.attr({ defaultValue: null }),
+  creators: fragmentArray('creator'),
   titles: fragmentArray('title'),
   publisher: DS.attr('string'),
   bcontainer: DS.attr(),
@@ -183,41 +183,6 @@ export default Model.extend(Validations, {
   registered: DS.attr('date'),
   updated: DS.attr('date'),
   mode: DS.attr('string'),
-
-  creatorsCsv: computed('creators', {
-    get() {
-      if (!this.creators) {
-        return ""
-      } else {
-        return this.creators.map(function (a) {
-          if (a.familyName) {
-            return [a.familyName, a.givenName].join(", ");
-          } else {
-            return a.name;
-          }
-        }).join("\n");
-      }
-    },
-    set(key, value) {
-      let creatorList = value.split("\n").reduce(function (sum, a) {
-        if (a.length > 0) {
-          let names = a.split(",")
-          let creator = {}
-          if (names.length > 1) {
-            creator = { familyName: names[0].trim(), givenName: names[1].trim() };
-          } else {
-            creator = { name: a };
-          }
-          sum.pushObject(creator);
-        }
-        return sum;
-      }, []);
-
-      this.set('creators', creatorList);
-
-      return value;
-    }
-  }),
 
   identifier: computed('doi', function () {
     if (ENV.API_URL == "https://api.datacite.org") {

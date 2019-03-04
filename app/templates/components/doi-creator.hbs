@@ -1,3 +1,44 @@
-{{form.element id="creator" controlType="textarea" label="Creators" property="creatorsCsv" rows=creatorNumber helpText=" The main
-researchers involved in producing the data, or the authors of the publication, in priority order. Please enter one
-creator per line, with a \"Smith, John\" format for personal names." required=false disabled=disabled}}
+{{#if (gt index 0)}}
+  <div class="col-md-9 col-md-offset-3">
+    <div class="input-group">
+      <input type="text" class="form-control {{if errorMessage 'has-error'}} {{if isValidating 'has-success'}}" value={{fragment.name}} oninput={{action "updateName" value="target.value"}} onblur={{action "validateName"}} disabled={{metadataFieldsDisabled}}/>
+      <span class="input-group-btn">
+        {{#bs-button outline=true onClick=(action "deleteCreator" index)}}{{fa-icon "trash"}}{{/bs-button}}
+      </span>
+    </div>
+    
+    {{#if errorMessage}}
+      <div class="help-block help-block-fragment has-error">{{errorMessage}}</div>
+    {{else}}
+      <div class="help-block help-block-fragment">The main researchers involved in producing the data, or the authors of the publication, in priority order.</div>
+    {{/if}}
+
+    <div class="power-select-label">
+      <label for="givenName" class="subtitle">Given Name (optional)</label>
+      <input type="text" class="form-control" value={{fragment.givenName}} oninput={{action "updateGivenName" value="target.value"}} onblur={{action "validateGivenName"}} disabled={{metadataFieldsDisabled}}/>
+    </div>
+
+    <div class="power-select-label">
+      <label for="familyName" class="subtitle">Family Name (optional)</label>
+      <input type="text" class="form-control" value={{fragment.familyName}} oninput={{action "updateFamilyName" value="target.value"}} onblur={{action "validateFamilyName"}} disabled={{metadataFieldsDisabled}}/>
+    </div>
+  </div>
+{{else}}
+  <label class="control-label col-md-3">Creators</label>
+  <div class="col-md-9">
+    <input type="text" class="form-control {{if errorMessage 'has-error'}} {{if isValidating 'has-success'}}" value={{fragment.name}} oninput={{action "updateName" value="target.value"}} onblur={{action "validateName"}} disabled={{metadataFieldsDisabled}}/>
+
+    {{#if errorMessage}}
+      <div class="help-block help-block-fragment has-error">{{errorMessage}}</div>
+    {{else}}
+      <div class="help-block help-block-fragment">The main researchers involved in producing the data, or the authors of the publication, in priority order.</div>
+    {{/if}}
+
+    <div class="power-select-label">
+      <label for="givenName" class="subtitle">Given Name (optional)</label>
+      <input type="text" class="form-control" value={{fragment.givenName}} oninput={{action "updateGivenName" value="target.value"}} onblur={{action "validateGivenName"}} disabled={{metadataFieldsDisabled}}/>
+    </div>
+
+
+  </div>
+{{/if}}
