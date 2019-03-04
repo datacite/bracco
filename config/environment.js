@@ -87,6 +87,8 @@ module.exports = function(environment) {
     ENV['simple-auth'] = {
       store: 'simple-auth-session-store:ephemeral'
     }
+    ENV.API_JWT= process.env.API_JWT || '',
+
 
     ENV.APP.rootElement = '#ember-testing';
 
