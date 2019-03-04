@@ -14,17 +14,10 @@
     {{/if}}
   </div>
 
-  {{#if errorMessage}}
-  <div class="help-block help-block-fragment has-error">{{errorMessage}}</div>
-  {{else}}
-  <div class="help-block help-block-fragment">One or more names or titles by which the resource is known.</div>
-  {{/if}}
 {{else}}
-<label class="control-label col-md-3">Titles</label>
-<div class="col-md-9">
-  <input type="text" class="form-control {{if errorMessage 'has-error'}} {{if isValidating 'has-success'}}"
-    value={{fragment.title}} oninput={{action "updateTitle" value="target.value"}} onblur={{action "validateTitle"}}
-    disabled={{disabled}} />
+  <label class="control-label col-md-3">Titles</label>
+  <div class="col-md-9">
+    <input type="text" class="form-control {{if errorMessage 'has-error'}} {{if isValidating 'has-success'}} title-field" value={{fragment.title}} oninput={{action "updateTitle" value="target.value"}} onblur={{action "validateTitle"}} disabled={{metadataFieldsDisabled}}/>
 
   {{#if errorMessage}}
   <div class="help-block help-block-fragment has-error">{{errorMessage}}</div>
