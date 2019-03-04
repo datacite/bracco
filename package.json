@@ -65,6 +65,7 @@
     "ember-responsive": "^2.0.5",
     "fs-extra": "4.0.2",
     "is-electron": "^2.1.0",
+    "iso-639-1": "^2.0.3",
     "junk": "^2.1.0",
     "mime": "^2.4.0",
     "node-gyp": "^3.6.2"

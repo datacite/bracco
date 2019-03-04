@@ -1,17 +1,11 @@
-<div class="form-group">
-  <label class="control-label col-md-3">Titles</label>
-  <div class="col-md-9">
-    {{#each model.titles as |title index|}}
-      {{doi-title model=model fragment=title form=form index=index}}
-    {{/each}}
+<div class="form-group {{if hasErrors 'has-error'}} {{if isValidating 'has-success'}}">
+  {{#each model.titles as |title index|}}
+    {{doi-title model=model fragment=title form=form index=index disabled=metadataFieldsDisabled setIsValidating=(action "setIsValidating") setHasErrors=(action "setHasErrors")}}
+  {{/each}}
 
-    <div class="help-block">
-      A name or title by which the resource is known.
-    </div>
-
-    {{#bs-button class="btn-sm" outline=true onClick=(action "addTitle")}}{{fa-icon "plus"}} Add title{{/bs-button}}
+  <div class="col-md-9 col-md-offset-3">
+    {{#if (lte model.titles.length 4)}}
+      {{#bs-button class="btn-sm" outline=true onClick=(action "addTitle")}}{{fa-icon "plus"}} Add title{{/bs-button}}
+    {{/if}}
   </div>
 </div>
-
-
-

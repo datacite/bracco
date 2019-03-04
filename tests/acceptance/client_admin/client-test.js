@@ -72,26 +72,26 @@ module('Acceptance | client_admin | client', function(hooks) {
     assert.dom('a#transfer-dois').doesNotExist();
   });
 
-  test('creating a new DOI for client AWI renders', async function(assert) {
-    await authenticateSession({
-      uid: 'tib.awi',
-      name: 'Alfred Wegener Institute',
-      role_id: 'client_admin',
-      provider_id: 'tib',
-      client_id: 'tib.awi'
-    });
-    await visit('/clients/tib.awi/dois/new');
-    //on landing
-    assert.equal(currentURL(), '/clients/tib.awi/dois/new');
-    assert.dom('h3').hasText('Create DOI (Form)');
-    assert.dom('input#url-field').hasNoValue();
-    assert.dom('input#publisher-field').hasNoValue();
-    assert.dom('input#publication-year-field').hasNoValue();
-    assert.dom('input#draft-radio').isChecked();
-    assert.dom('input#registered-radio').isNotChecked();
-    assert.dom('input#findable-radio').isNotChecked();
-    assert.dom('input#suffix-field').hasAnyValue();
-  });
+  // test('creating a new DOI for client AWI renders', async function(assert) {
+  //   await authenticateSession({
+  //     uid: 'tib.awi',
+  //     name: 'Alfred Wegener Institute',
+  //     role_id: 'client_admin',
+  //     provider_id: 'tib',
+  //     client_id: 'tib.awi'
+  //   });
+  //   await visit('/clients/tib.awi/dois/new');
+  //   //on landing
+  //   assert.equal(currentURL(), '/clients/tib.awi/dois/new');
+  //   assert.dom('h3').hasText('Create DOI (Form)');
+  //   assert.dom('input#url-field').hasNoValue();
+  //   assert.dom('input#publisher-field').hasNoValue();
+  //   assert.dom('input#publication-year-field').hasNoValue();
+  //   assert.dom('input#draft-radio').isChecked();
+  //   assert.dom('input#registered-radio').isNotChecked();
+  //   assert.dom('input#findable-radio').isNotChecked();
+  //   assert.dom('input#suffix-field').hasAnyValue();
+  // });
 
   test('adding fields for a new DOI for client AWI', async function(assert) {
     assert.expect(5);
