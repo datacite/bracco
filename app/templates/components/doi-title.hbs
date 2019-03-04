@@ -1,7 +1,7 @@
 {{#if (gt index 0)}}
   <div class="col-md-9 col-md-offset-3">
     <div class="input-group">
-      <input type="text" class="form-control {{if errorMessage 'has-error'}} {{if isValidating 'has-success'}}" value={{fragment.title}} oninput={{action "updateTitle" value="target.value"}} onblur={{action "validateTitle"}} disabled={{metadataFieldsDisabled}}/>
+      <input type="text"  class="form-control {{if errorMessage 'has-error'}} {{if isValidating 'has-success'}} title-field" value={{fragment.title}} oninput={{action "updateTitle" value="target.value"}} onblur={{action "validateTitle"}} disabled={{metadataFieldsDisabled}}/>
       <span class="input-group-btn">
         {{#bs-button outline=true onClick=(action "deleteTitle" index)}}{{fa-icon "trash"}}{{/bs-button}}
       </span>
@@ -10,7 +10,7 @@
     {{#if errorMessage}}
       <div class="help-block help-block-fragment has-error">{{errorMessage}}</div>
     {{else}}
-      <div class="help-block help-block-fragment">One or more names or titles by which the resource is known.</div>
+      <div class="help-block help-block-fragment title-field">One or more names or titles by which the resource is known.</div>
     {{/if}}
   </div>
 {{else}}
