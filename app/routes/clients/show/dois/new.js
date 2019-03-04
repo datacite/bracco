@@ -6,11 +6,8 @@ export default Route.extend(CanMixin, {
   model() {
     let client = this.modelFor('clients/show');
     let doi = this.store.createRecord('doi', { client: client, mode: 'new', state: 'draft', creators: '' });
-    doi.get('titles').createFragment({
-      title: '',
-      titleType: null,
-      lang: null,
-    });
+    doi.get('titles').createFragment();
+    doi.get('descriptions').createFragment();
 
     return hash({
       client: client,

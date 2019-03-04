@@ -15,11 +15,6 @@ export default Controller.extend({
     submit(doi) {
       doi.set('event', this.setEvent(doi.get('state')));
 
-      // convert description back into array
-      if (doi.get('descriptions')) {
-        doi.set('descriptions', [{ description: doi.get('descriptions'), descriptionType: 'Abstract' }]);
-      }
-
       doi.set("source", "fabricaForm");
 
       let self = this;
@@ -31,7 +26,7 @@ export default Controller.extend({
         } else {
           console.log(reason);
         }
-        self.get('flashMessages').warning('This DOI name already exists. Please use a different DOI name.', {componentName: 'duplicated-doi'});
+        self.get('flashMessages').warning('This DOI name already exists. Please use a different DOI name.', { componentName: 'duplicated-doi' });
       });
     },
     cancel() {

@@ -1,35 +1,37 @@
 <h3 class="work">
   {{#if isList}}
-    {{#link-to "clients.show.dois.show" model.client.id model.id}}{{#if (gt model.titles.length 0)}}{{format-text model.titles.firstObject.title}}{{else}}{{model.doi}}{{/if}}{{/link-to}}
-    <span class="small">{{model.types.resourceTypeGeneral}}</span>
+  {{#link-to "clients.show.dois.show" model.client.id model.id}}{{#if (gt model.titles.length 0)}}{{format-text model.titles.firstObject.title}}{{else}}{{model.doi}}{{/if}}{{/link-to}}
+  <span class="small">{{model.types.resourceTypeGeneral}}</span>
   {{else}}
-    {{#if model.isDraft}}
-      {{#if (gt model.titles.length 0)}}{{format-text model.titles.firstObject.title}}{{else}}{{model.doi}}{{/if}}
-    {{else}}
-      <a target="_blank" rel="noopener" href="{{model.identifier}}">{{#if (gt model.titles.length 0)}}{{format-text model.titles.firstObject.title}}{{else}}{{model.doi}}{{/if}}</a>
-    {{/if}}
-    <span class="small">{{model.types.resourceTypeGeneral}}</span>
+  {{#if model.isDraft}}
+  {{#if (gt model.titles.length 0)}}{{format-text model.titles.firstObject.title}}{{else}}{{model.doi}}{{/if}}
+  {{else}}
+  <a target="_blank" rel="noopener"
+    href="{{model.identifier}}">{{#if (gt model.titles.length 0)}}{{format-text model.titles.firstObject.title}}{{else}}{{model.doi}}{{/if}}</a>
+  {{/if}}
+  <span class="small">{{model.types.resourceTypeGeneral}}</span>
   {{/if}}
 </h3>
 {{#if model.creators}}
-  {{{format-creator model.creators}}}
+{{{format-creator model.creators}}}
 {{/if}}
 <div class="metadata">
   {{format-metadata model.publicationYear resourceTypeGeneral=model.types.resourceTypeGeneral resourceType=model.types.resourceType publisher=model.publisher version=model.version}}
 </div>
 {{#if model.descriptions}}
-  <div class="description">
-    {{format-text model.descriptions limit=150}}
-  </div>
+<div class="description">
+  {{#if (gt model.descriptions.length 0)}}{{format-text model.descriptions.firstObject.description limit=150}}{{/if}}
+</div>
 {{/if}}
 {{#if isList}}
-  <div class="created">
-    Created {{format-time model.created year='numeric' month='long' day='numeric' hour='numeric' minute='numeric' second='numeric' timeZone='UTC' timeZoneName='short' hour12=false}}.
-    <span class="text-{{model.state}}">{{titleize model.state}}</span>
-  </div>
+<div class="created">
+  Created
+  {{format-time model.created year='numeric' month='long' day='numeric' hour='numeric' minute='numeric' second='numeric' timeZone='UTC' timeZoneName='short' hour12=false}}.
+  <span class="text-{{model.state}}">{{titleize model.state}}</span>
+</div>
 {{/if}}
 {{#if model.rightsList}}
-  {{#each model.rightsList as |rights|}}
-    {{cc-license licenseURL=rights.rightsUri}}
-  {{/each}}
+{{#each model.rightsList as |rights|}}
+{{cc-license licenseURL=rights.rightsUri}}
+{{/each}}
 {{/if}}

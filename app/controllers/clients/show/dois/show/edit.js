@@ -27,11 +27,6 @@ export default Controller.extend({
       // schema-version will be determined by API
       doi.set('schemaVersion', null);
 
-      // convert description back into array
-      if (doi.get('descriptions') && doi.get('descriptions').constructor !== Array) {
-        doi.set('descriptions', [{ description: doi.get('descriptions'), descriptionType: 'Abstract' }]);
-      }
-
       let self = this;
       doi.save().then(function (doi) {
 
