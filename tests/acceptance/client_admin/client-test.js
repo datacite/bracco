@@ -132,16 +132,16 @@ module('Acceptance | client_admin | client', function(hooks) {
     // await fillIn(creators[0], "Teresa May")
     // await fillIn(creators[1], "Billy Corgan")
 
-    // await click('button#add-description')
-    // await click('button#add-description')
+    await click('button#add-description')
+    await click('button#add-description')
 
-    // var descriptions = this.element.querySelectorAll('textarea.description-field');
+    var descriptions = this.element.querySelectorAll('textarea.description-field');
  
-    // var desc1 = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis blandit odio. Donec justo ex, feugiat non imperdiet ut, ultrices a purus. Mauris molestie elementum finibus. Duis augue odio";
-    // var desc2 = 'Suspendisse tristique risus neque, non posuere lacus vestibulum et. Maecenas pellentesque mollis lectus, ac viverra nunc pellentesque sed. Sed nibh orci';
+    var desc1 = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis blandit odio. Donec justo ex, feugiat non imperdiet ut, ultrices a purus. Mauris molestie elementum finibus. Duis augue odio";
+    var desc2 = 'Suspendisse tristique risus neque, non posuere lacus vestibulum et. Maecenas pellentesque mollis lectus, ac viverra nunc pellentesque sed. Sed nibh orci';
 
-    // await fillIn(descriptions[0], desc1)
-    // await fillIn(descriptions[1], desc2)
+    await fillIn(descriptions[0], desc1)
+    await fillIn(descriptions[1], desc2)
 
     assert.equal(this.element.querySelectorAll('input.title-field')[0].value,'Abhinandan: Crowds gather for Indian pilots release');
     assert.equal(this.element.querySelectorAll('input.title-field')[1].value,'Tornadoes kill at least 23 in Lee County, Alabama');
@@ -149,8 +149,8 @@ module('Acceptance | client_admin | client', function(hooks) {
     // assert.equal(this.element.querySelectorAll('input.creator-field')[0].value,'Teresa May');
     // assert.equal(this.element.querySelectorAll('input.creator-field')[1].value,'Billy Corgan');
 
-    // assert.equal(this.element.querySelectorAll('textarea.description-field')[0].value,desc1);
-    // assert.equal(this.element.querySelectorAll('textarea.description-field')[1].value,desc2);
+    assert.equal(this.element.querySelectorAll('textarea.description-field')[0].value,desc1);
+    assert.equal(this.element.querySelectorAll('textarea.description-field')[1].value,desc2);
 
     assert.dom('input#url-field').hasValue('http://bbc.co.uk');
     assert.dom('input#publisher-field').hasValue('the BBC');
