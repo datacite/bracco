@@ -9,7 +9,7 @@
   </div>
 </div>
 {{else}}
-<label class="control-label col-md-3">Descriptions</label>
+<label class="control-label col-md-3">Descriptions (optional)</label>
 <div class="col-md-9">
   <textarea class="form-control description-field" value={{fragment.description}}
     oninput={{action "updateDescription" value="target.value"}} disabled={{disabled}} />
