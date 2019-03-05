@@ -1,7 +1,9 @@
 import Route from '@ember/routing/route';
-import { CanMixin } from 'ember-can';
+import { inject as service } from '@ember/service';
 
-export default Route.extend(CanMixin, {
+export default Route.extend({
+  can: service(),
+
   model(params) {
     let self = this;
     return this.store.query('client-prefix', { 'client-id': params.client_id, 'prefix-id': params.prefix_id }).then(function(clientPrefixes) {
@@ -19,7 +21,7 @@ export default Route.extend(CanMixin, {
   },
 
   afterModel(model) {
-    if (!this.can('read prefix', model)) {
+    if (this.get('can').cannot('read prefix', model)) {
       return this.transitionTo('index');
     }
   },

@@ -1,7 +1,9 @@
 import Route from '@ember/routing/route';
-import { CanMixin } from 'ember-can';
+import { inject as service } from '@ember/service';
 
-export default Route.extend(CanMixin, {
+export default Route.extend({
+  can: service(),
+  
   model(params) {
     let self = this;
     return this.store.query('provider-prefix', { 'provider-id': params.provider_id, 'prefix-id': params.prefix_id }).then(function(providerPrefixes) {

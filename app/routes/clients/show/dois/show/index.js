@@ -1,7 +1,9 @@
 import Route from '@ember/routing/route';
-import { CanMixin } from 'ember-can';
+import { inject as service } from '@ember/service';
 
-export default Route.extend(CanMixin, {
+export default Route.extend({
+  can: service(),
+
   model() {
     let self = this;
     return this.store.findRecord('doi', this.modelFor('clients/show/dois/show').get('id'), { include: 'client' }).then(function(doi) {
