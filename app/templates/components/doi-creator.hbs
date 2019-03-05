@@ -1,7 +1,7 @@
 {{#if (gt index 0)}}
   <div class="col-md-9 col-md-offset-3">
     <div class="input-group">
-      {{input type="text" class="form-control (if errorMessage 'has-error') (if isValidating 'has-success')" value=fragment.name oninput=(action "updateName") onblur=(action "validateName") disabled=metadataFieldsDisabled readonly=isReadonly}}
+      {{input type="text" class="form-control (if errorMessage 'has-error') (if isValidating 'has-success') creator-field" value=fragment.name oninput=(action "updateName") onblur=(action "validateName") disabled=metadataFieldsDisabled readonly=isReadonly}}
       <span class="input-group-btn">
         {{#bs-button outline=true onClick=(action "deleteCreator" index)}}{{fa-icon "trash"}}{{/bs-button}}
       </span>
@@ -37,7 +37,7 @@
 {{else}}
   <label class="control-label col-md-3">Creators</label>
   <div class="col-md-9">
-    {{input type="text" class="form-control (if errorMessage 'has-error') (if isValidating 'has-success')" value=fragment.name oninput=(action "updateName") onblur=(action "validateName") disabled=metadataFieldsDisabled readonly=isReadonly}}
+    {{input type="text" class="form-control (if errorMessage 'has-error') (if isValidating 'has-success') creator-field" value=fragment.name oninput=(action "updateName") onblur=(action "validateName") disabled=metadataFieldsDisabled readonly=isReadonly}}
       
     {{#if errorMessage}}
       <div class="help-block help-block-fragment has-error">{{errorMessage}}</div>
