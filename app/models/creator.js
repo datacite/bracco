@@ -5,7 +5,7 @@ export default Fragment.extend({
   name: attr('string'),
   givenName: attr('string', { defaultValue: null }),
   familyName: attr('string', { defaultValue: null }),
-  nameType: attr('string', { defaultValue: "Organizational" }),
+  nameType: attr('string', { defaultValue: "Personal" }),
   affiliation: attr('string', { defaultValue: null }),
   nameIdentifiers: attr()
 });

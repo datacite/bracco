@@ -25,6 +25,36 @@ export default Component.extend(Validations, {
     }
   }),
   isValidating: false,
+  isReadonly: false,
+
+  didReceiveAttrs() {
+    this._super(...arguments);
+
+    this.joinNameParts(null, null);
+  },
+
+  joinNameParts(givenName, familyName) {
+    givenName = givenName || this.fragment.get('givenName');
+    familyName = familyName || this.fragment.get('familyName');
+
+    if (givenName && familyName) {
+      this.fragment.set('name', familyName + ', ' + givenName);
+      this.fragment.set('nameType', 'Personal');
+      this.set('isReadonly', true);
+    } else if (givenName) {
+      this.fragment.set('name', givenName);
+      this.fragment.set('nameType', 'Personal');
+      this.set('isReadonly', true);
+    } else if (familyName) {
+      this.fragment.set('name', familyName);
+      this.fragment.set('nameType', 'Personal');
+      this.set('isReadonly', true);
+    } else {
+      this.fragment.set('name', '');
+      this.fragment.set('nameType', 'Organizational');
+      this.set('isReadonly', false);
+    }
+  },
   
   actions: {
     updateName(value) {
@@ -40,6 +70,7 @@ export default Component.extend(Validations, {
     },
     updateGivenName(value) {
       this.fragment.set('givenName', value);
+      this.joinNameParts(value, this.fragment.get('familyName'))
       this.set('isValidating', false);
       this.setIsValidating(false);
       this.setHasErrors(false);
@@ -50,11 +81,22 @@ export default Component.extend(Validations, {
     },
     updateFamilyName(value) {
       this.fragment.set('familyName', value);
+      this.joinNameParts(this.fragment.get('givenyName'), value)
       this.set('isValidating', false);
       this.setIsValidating(false);
       this.setHasErrors(false);
     },
-    validatefamilyName() {
+    validateFamilyName() {
+      this.setIsValidating(false);
+      this.setHasErrors(false);
+    },
+    updateAffiliation(value) {
+      this.fragment.set('affiliation', value);
+      this.set('isValidating', false);
+      this.setIsValidating(false);
+      this.setHasErrors(false);
+    },
+    validateAffiliation() {
       this.setIsValidating(false);
       this.setHasErrors(false);
     },
