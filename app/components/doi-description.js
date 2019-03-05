@@ -14,7 +14,7 @@ const languageList = ISO6391.getAllNames();
 
 export default Component.extend({
   descriptionTypeList,
-  titleTypes: descriptionTypeList,
+  descriptionTypes: descriptionTypeList,
   languageList,
   languages: languageList,
   language: computed('fragment.lang', function () {
