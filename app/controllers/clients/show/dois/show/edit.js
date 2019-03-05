@@ -27,6 +27,9 @@ export default Controller.extend({
       // schema-version will be determined by API
       doi.set('schemaVersion', null);
 
+      // track use of the form
+      doi.set("source", "fabricaForm");
+
       let self = this;
       doi.save().then(function (doi) {
 
