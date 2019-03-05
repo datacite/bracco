@@ -15,7 +15,7 @@ export default Controller.extend({
     submit(doi) {
       doi.set('event', this.setEvent(doi.get('state')));
 
-      doi.set("source", "fabricaForm");
+      doi.set("source", "fabrica");
 
       let self = this;
       doi.save().then(function (doi) {

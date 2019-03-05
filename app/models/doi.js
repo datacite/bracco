@@ -63,17 +63,6 @@ const Validations = buildValidations({
       })
     })
   ],
-  // creators: [
-  //   validator('presence', {
-  //     presence: true,
-  //     isWarning: computed('model.state', 'model.prefix', function () {
-  //       return (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
-  //     }),
-  //     disabled: computed('model.mode', function () {
-  //       return !["new", "edit"].includes(this.model.get('mode'));
-  //     })
-  //   })
-  // ],
   publisher: [
     validator('presence', {
       presence: true,
@@ -200,8 +189,5 @@ export default Model.extend(Validations, {
     } else {
       return null;
     }
-  }),
-  isSourceForm: computed('source', function () {
-    return this.get('source') == "fabricaForm";
-  }),
+  })
 });
