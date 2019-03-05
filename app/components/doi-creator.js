@@ -26,10 +26,12 @@ export default Component.extend(Validations, {
   }),
   isValidating: false,
   isReadonly: false,
+  showPersonal: true,
 
   didReceiveAttrs() {
     this._super(...arguments);
 
+    this.selectNameType(this.fragment.get('nameType'));
     this.joinNameParts(null, null);
   },
 
@@ -37,21 +39,33 @@ export default Component.extend(Validations, {
     givenName = givenName || this.fragment.get('givenName');
     familyName = familyName || this.fragment.get('familyName');
 
-    if (givenName && familyName) {
-      this.fragment.set('name', familyName + ', ' + givenName);
-      this.fragment.set('nameType', 'Personal');
+    if (this.fragment.get('nameType') === 'Personal') {
       this.set('isReadonly', true);
-    } else if (givenName) {
-      this.fragment.set('name', givenName);
-      this.fragment.set('nameType', 'Personal');
-      this.set('isReadonly', true);
-    } else if (familyName) {
-      this.fragment.set('name', familyName);
-      this.fragment.set('nameType', 'Personal');
+
+      if (givenName && familyName) {
+        this.fragment.set('name', familyName + ', ' + givenName);
+      } else if (givenName) {
+        this.fragment.set('name', givenName);
+      } else if (familyName) {
+        this.fragment.set('name', familyName);
+      } else {
+        this.fragment.set('name', '');
+      }
+    } else {
+      this.fragment.set('givenName', null);
+      this.fragment.set('familyName', null);
+      this.fragment.set('affiliation', null);
+      this.set('isReadonly', false);
+    }
+  },
+  selectNameType(value) {
+    this.fragment.set('nameType', value);
+    this.set('nameType', value);
+    if (value == "Personal") {
+      this.set('showPersonal', true);
       this.set('isReadonly', true);
     } else {
-      this.fragment.set('name', '');
-      this.fragment.set('nameType', 'Organizational');
+      this.set('showPersonal', false);
       this.set('isReadonly', false);
     }
   },
@@ -99,6 +113,9 @@ export default Component.extend(Validations, {
     validateAffiliation() {
       this.setIsValidating(false);
       this.setHasErrors(false);
+    },
+    selectNameType(value) {
+      this.selectNameType(value);
     },
     deleteCreator() {
       this.model.get('creators').removeObject(this.fragment);
