@@ -31,7 +31,7 @@ module('Acceptance | staff_admin | client', function(hooks) {
     assert.dom('h2.work').hasText('Alfred Wegener Institute');
     assert.dom('a.nav-link.active').hasText('Settings');
     assert.dom('button#edit-client').includesText('Update Client');
-    assert.dom('button#delete-client').includesText('Delete Client');
+    assert.dom('button#delete-client').includesText('Delete');
   });
 
   test('visiting client AWI prefixes', async function(assert) {
