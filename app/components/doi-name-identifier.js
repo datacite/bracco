@@ -31,6 +31,18 @@ export default Component.extend({
       this.fragment.set('nameIdentifierScheme', nameIdentifierScheme);
       this.fragment.set('schemeUri', schemeUriList[nameIdentifierScheme]);
       this.set('nameIdentifierSchemes', nameIdentifierSchemeList);
-    }
+    },
+    updateNameIdentifier(value) {
+      this.fragment.set('nameIdentifier', value);
+      this.setIsValidating(false);
+      this.setHasErrors(false);
+    },
+    validateNameIdentifier() {
+      this.setIsValidating(false);
+      this.setHasErrors(false);
+    },
+    deleteNameIdentifier() {
+      this.creator.get('nameIdentifiers').removeObject(this.fragment);
+    },
   }
 });

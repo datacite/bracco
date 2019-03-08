@@ -1,43 +1,14 @@
 {{#if (gt index 0)}}
-  <div class="col-md-9 col-md-offset-3">
-    <div class="input-group">
-      <input type="text"  class="form-control {{if errorMessage 'has-error'}} {{if isValidating 'has-success'}} title-field" value={{fragment.title}} oninput={{action "updateTitle" value="target.value"}} onblur={{action "validateTitle"}} disabled={{disabled}}/>
-      <span class="input-group-btn">
-        {{#bs-button outline=true onClick=(action "deleteNameIdentifier" index)}}{{fa-icon "trash"}}{{/bs-button}}
-      </span>
-    </div>
-
-    {{#if errorMessage}}
-      <div class="help-block help-block-fragment has-error">{{errorMessage}}</div>
-    {{else}}
-      <div class="help-block help-block-fragment name-identifier-field">Uniquely identifies an individual or legal entity, according to various schemas.</div>
-    {{/if}}
+  <div class="input-group">
+    <input type="text"  class="form-control {{if errorMessage 'has-error'}} {{if isValidating 'has-success'}} name-identifier-field" value={{fragment.nameIdentifier}} oninput={{action "updateNameIdentifier" value="target.value"}} onblur={{action "validateNameIdentifier"}}/>
+    <span class="input-group-btn">
+      {{#bs-button outline=true onClick=(action "deleteNameIdentifier" index)}}{{fa-icon "trash"}}{{/bs-button}}
+    </span>
   </div>
 {{else}}
-  <label class="control-label col-md-3">Name Identifiers</label>
-  <div class="col-md-9">
-    <input type="text" class="form-control {{if errorMessage 'has-error'}} {{if isValidating 'has-success'}} name-identifier-field" value={{fragment.nameIdentifier}} oninput={{action "updateNameIdentifier" value="target.value"}} onblur={{action "validateNameIdentifier"}}/>
-
-  {{#if errorMessage}}
-  <div class="help-block help-block-fragment has-error">{{errorMessage}}</div>
-  {{else}}
-  <div class="help-block help-block-fragment">Uniquely identifies an individual or legal entity, according to various schemas.</div>
-  {{/if}}
-</div>
+  <input type="text" class="form-control {{if errorMessage 'has-error'}} {{if isValidating 'has-success'}} name-identifier-field" value={{fragment.nameIdentifier}} oninput={{action "updateNameIdentifier" value="target.value"}} onblur={{action "validateNameIdentifier"}}/>
 {{/if}}
 
-<div class="power-select-label">
-  <div class="col-md-9 col-md-offset-3">
-    <label for="nameIdentifierScheme" class="subtitle">Name Identifier Scheme (optional)</label>
-  </div>
-</div>
-
-<div class="power-select-fragment">
-  {{#form.element controlType="power-select" value=fragment.nameIdentifierScheme options=nameIdentifierSchemes destination=fragment.nameIdentifierScheme disabled=disabled as |el|}}
-  {{#el.control onChange=(action "selectNameIdentifierScheme") search=(action "searchNameIdentifierScheme") placeholder="Select Name Identifier Scheme" searchPlaceholder="Type to search..." allowClear=true as |item|}}
-  {{item}}
-  {{/el.control}}
-  {{/form.element}}
-</div>
-
-<div class="col-md-9 col-md-offset-3"><hr /></div>
+{{#if errorMessage}}
+  <div class="help-block help-block-fragment has-error">{{errorMessage}}</div>
+{{/if}}

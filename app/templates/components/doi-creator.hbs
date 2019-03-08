@@ -19,6 +19,21 @@
   {{radio-button value="Personal" groupValue=nameType radioClass="radio" changed="selectNameType"}}<span class="subtitle">Person</span> {{radio-button value="Organizational" groupValue=nameType radioClass="radio" changed="selectNameType"}}<span class="subtitle">Organization</span>
 </div>
 
+<div class="power-select-label">
+  <label for="nameIdentifiers" class="subtitle">Name Identifier (optional)</label>
+
+  {{#each fragment.nameIdentifiers as |nameIdentifier index|}}
+    {{doi-name-identifier model=model creator=fragment fragment=nameIdentifier form=form index=index setIsValidating=(action "setIsValidating") setHasErrors=(action "setHasErrors")}}
+  {{/each}}
+
+  <div class="help-block help-block-fragment name-identifier-field">Uniquely identifies an individual or legal entity, according to various schemas.</div>
+
+  {{#if (lte fragment.nameIdentifiers.length 2)}}
+    {{#bs-button class="btn-sm add-name-identifier" outline=true onClick=(action "addNameIdentifier")}}{{fa-icon "plus"}} Add
+  Name Identifier{{/bs-button}}
+  {{/if}}
+</div>
+
 {{#if showPersonal}}
   <div class="power-select-label">
     <label for="givenName" class="subtitle">Given Name (optional)</label>
@@ -29,10 +44,6 @@
     <label for="familyName" class="subtitle">Family Name (optional)</label>
     <input type="text" class="form-control" value={{fragment.familyName}} oninput={{action "updateFamilyName" value="target.value"}} onblur={{action "validateFamilyName"}} disabled={{metadataFieldsDisabled}}/>
   </div>
-
-  {{#each model.nameIdentifiers as |nameIdentifier index|}}
-    {{doi-name-identifier model=model fragment=nameIdentifier form=form index=index setIsValidating=(action "setIsValidating") setHasErrors=(action "setHasErrors")}}
-  {{/each}}
 
   <div class="power-select-label">
     <label for="affiliation" class="subtitle">Affiliation (optional)</label>

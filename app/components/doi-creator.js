@@ -128,8 +128,17 @@ export default Component.extend(Validations, {
     selectNameType(value) {
       this.selectNameType(value);
     },
+    addNameIdentifier() {
+      this.fragment.get('nameIdentifiers').createFragment();
+    },
     deleteCreator() {
       this.model.get('creators').removeObject(this.fragment);
+    },
+    setIsValidating(value) {
+      this.set('isValidating', value);
+    },
+    setHasErrors(value) {
+      this.set('hasErrors', value);
     }
   }
 });
