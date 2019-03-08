@@ -71,8 +71,8 @@ module('Acceptance | client_admin | client', function(hooks) {
     assert.equal(currentURL(), '/clients/tib.awi/dois');
     assert.dom('h2.work').hasText('Alfred Wegener Institute');
     assert.dom('a.nav-link.active').hasText('DOIs');
-    assert.dom('a#new-doi').includesText('Create DOI (Form)');
-    assert.dom('a#upload-doi').includesText('Create DOI (File Upload)');
+    assert.dom('a#new-doi').includesText('Create (Form)');
+    assert.dom('a#upload-doi').includesText('Create (File Upload)');
     assert.dom('a#transfer-dois').doesNotExist();
   });
 
