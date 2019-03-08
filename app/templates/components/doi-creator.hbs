@@ -28,13 +28,10 @@
         <input type="text" class="form-control" value={{fragment.familyName}} oninput={{action "updateFamilyName" value="target.value"}} onblur={{action "validateFamilyName"}} disabled={{metadataFieldsDisabled}}/>
       </div>
 
-      <div class="power-select-label">
-        <label for="affiliation" class="subtitle">Affiliation (optional)</label>
-        <input type="text" class="form-control" value={{fragment.affiliation}} oninput={{action "updateAffiliation" value="target.value"}} onblur={{action "validateAffiliation"}} disabled={{metadataFieldsDisabled}}/>
-      </div>
+      {{#each model.nameIdentifiers as |nameIdentifier index|}}
+        {{doi-name-identifier model=model fragment=nameIdentifier form=form index=index setIsValidating=(action "setIsValidating") setHasErrors=(action "setHasErrors")}}
+      {{/each}}
     {{/if}}
-
-    <hr />
   </div>
 {{else}}
   <label class="control-label col-md-3">Creators</label>
@@ -62,12 +59,27 @@
         <input type="text" class="form-control" value={{fragment.familyName}} oninput={{action "updateFamilyName" value="target.value"}} onblur={{action "validateFamilyName"}} disabled={{metadataFieldsDisabled}}/>
       </div>
 
-      <div class="power-select-label">
-        <label for="affiliation" class="subtitle">Affiliation (optional)</label>
-        <input type="text" class="form-control" value={{fragment.affiliation}} oninput={{action "updateAffiliation" value="target.value"}} onblur={{action "validateAffiliation"}} disabled={{metadataFieldsDisabled}}/>
-      </div>
+      {{#each model.nameIdentifiers as |nameIdentifier index|}}
+        {{doi-name-identifier model=model fragment=nameIdentifier form=form index=index setIsValidating=(action "setIsValidating") setHasErrors=(action "setHasErrors")}}
+      {{/each}}      
     {{/if}}
-
-    <hr />
   </div>
 {{/if}}
+
+{{#if showPersonal}}
+  <div class="col-md-9 col-md-offset-3">
+    <div class="power-select-label">
+      <label for="affiliation" class="subtitle">Affiliation (optional)</label>
+    </div>
+  </div>
+
+  <div class="power-select-fragment">
+    {{#form.element controlType="power-select" disabled=disabled value=organization options=organizations as |el|}}
+      {{#el.control onChange=(action "selectOrganization") search=(action "searchOrganization") placeholder="Select Organization" searchPlaceholder="Type to search..." allowClear=true as |item|}}
+        {{item}}
+      {{/el.control}}
+    {{/form.element}}
+  </div>
+{{/if}}
+
+<div class="col-md-9 col-md-offset-3"><hr /></div>

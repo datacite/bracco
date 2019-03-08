@@ -1,4 +1,5 @@
 import Component from '@ember/component';
+import { inject as service } from '@ember/service';
 import { validator, buildValidations } from 'ember-cp-validations';
 import { computed } from '@ember/object';
 
@@ -17,6 +18,8 @@ const Validations = buildValidations({
 });
 
 export default Component.extend(Validations, {
+  store: service(),
+
   errorMessage: computed('validations.messages', function () {
     if (this.get('validations.messages').length > 0) {
       return this.get('validations.messages').get('firstObject');
@@ -27,10 +30,13 @@ export default Component.extend(Validations, {
   isValidating: false,
   isReadonly: false,
   showPersonal: true,
+  organizations: [],
+  organization: null,
 
   didReceiveAttrs() {
     this._super(...arguments);
 
+    this.set('organization', this.fragment.get('affiliation'));
     this.selectNameType(this.fragment.get('nameType'));
     this.joinNameParts(null, null);
   },
@@ -104,13 +110,18 @@ export default Component.extend(Validations, {
       this.setIsValidating(false);
       this.setHasErrors(false);
     },
-    updateAffiliation(value) {
-      this.fragment.set('affiliation', value);
-      this.set('isValidating', false);
-      this.setIsValidating(false);
-      this.setHasErrors(false);
+    searchOrganization(query) {
+      let self = this;
+      this.store.query('organization', { 'query': query, qp: 'multiMatch' }).then(function (orgs) {
+        let organizations = orgs.mapBy('name');
+        self.set('organizations', organizations);
+        return organizations;
+      });
     },
-    validateAffiliation() {
+    selectOrganization(organization) {
+      this.fragment.set('affiliation', organization);
+      this.set('organization', organization)
+      this.set('isValidating', false);
       this.setIsValidating(false);
       this.setHasErrors(false);
     },
