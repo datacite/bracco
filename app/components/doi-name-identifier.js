@@ -5,15 +5,15 @@ const nameIdentifierSchemeList = [
   'ORCID'
 ];
 
-const nameIdentifierSchemeOrganizationList = [
-  'ISNI',
-  'ROR'
-];
+// const nameIdentifierSchemeOrganizationList = [
+//   'ISNI',
+//   'ROR'
+// ];
 
 const schemeUriList = {
-  isni: 'ISNI',
-  orcid: 'ORCID',
-  ror: 'ROR'
+  isni: 'https://isni.org',
+  orcid: 'https://orcid.org',
+  ror: 'https://ror.org'
 };
 
 export default Component.extend({
