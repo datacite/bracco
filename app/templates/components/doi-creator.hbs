@@ -1,85 +1,48 @@
 {{#if (gt index 0)}}
-  <div class="col-md-9 col-md-offset-3">
-    <div class="input-group">
-      {{input type="text" class="form-control" value=fragment.name oninput=(action "updateName") onblur=(action "validateName") readonly=isReadonly}}
-      <span class="input-group-btn">
-        {{#bs-button outline=true onClick=(action "deleteCreator" index)}}{{fa-icon "trash"}}{{/bs-button}}
-      </span>
-    </div>
-    
-    {{#if errorMessage}}
-      <div class="help-block help-block-fragment has-error">{{errorMessage}}</div>
-    {{else}}
-      <div class="help-block help-block-fragment">The main researchers involved in producing the data, or the authors of the publication, in priority order.</div>
-    {{/if}}
-
-    <div class="radio-fragment">
-      {{radio-button value="Personal" groupValue=nameType radioClass="radio" changed="selectNameType"}}<span class="subtitle">Person</span> {{radio-button value="Organizational" groupValue=nameType radioClass="radio" changed="selectNameType"}}<span class="subtitle">Organization</span>
-    </div>
-
-    {{#if showPersonal}}
-      <div class="power-select-label">
-        <label for="givenName" class="subtitle">Given Name (optional)</label>
-        <input type="text" class="form-control" value={{fragment.givenName}} oninput={{action "updateGivenName" value="target.value"}} onblur={{action "validateGivenName"}} disabled={{metadataFieldsDisabled}}/>
-      </div>
-
-      <div class="power-select-label">
-        <label for="familyName" class="subtitle">Family Name (optional)</label>
-        <input type="text" class="form-control" value={{fragment.familyName}} oninput={{action "updateFamilyName" value="target.value"}} onblur={{action "validateFamilyName"}} disabled={{metadataFieldsDisabled}}/>
-      </div>
-
-      {{#each model.nameIdentifiers as |nameIdentifier index|}}
-        {{doi-name-identifier model=model fragment=nameIdentifier form=form index=index setIsValidating=(action "setIsValidating") setHasErrors=(action "setHasErrors")}}
-      {{/each}}
-    {{/if}}
+  <div class="input-group">
+    {{input type="text" class="form-control" value=fragment.name oninput=(action "updateName") onblur=(action "validateName") readonly=isReadonly}}
+    <span class="input-group-btn">
+      {{#bs-button outline=true onClick=(action "deleteCreator" index)}}{{fa-icon "trash"}}{{/bs-button}}
+    </span>
   </div>
 {{else}}
-  <label class="control-label col-md-3">Creators</label>
-  <div class="col-md-9">
-    {{input type="text" class="form-control creator-field" value=fragment.name oninput=(action "updateName") onblur=(action "validateName") readonly=isReadonly}}
-      
-    {{#if errorMessage}}
-      <div class="help-block help-block-fragment has-error">{{errorMessage}}</div>
-    {{else}}
-      <div class="help-block help-block-fragment">The main researchers involved in producing the data, or the authors of the publication, in priority order. For personal names use the given name and family name fields.</div>
-    {{/if}}
-
-    <div class="radio-fragment">
-      {{radio-button value="Personal" groupValue=fragment.nameType radioClass="radio" changed="selectNameType"}}<span class="subtitle">Person</span> {{radio-button value="Organizational" groupValue=fragment.nameType radioClass="radio" changed="selectNameType"}}<span class="subtitle">Organization</span>
-    </div>
-
-    {{#if showPersonal}}
-      <div class="power-select-label">
-        <label for="givenName" class="subtitle">Given Name (optional)</label>
-        <input type="text" class="form-control" value={{fragment.givenName}} oninput={{action "updateGivenName" value="target.value"}} onblur={{action "validateGivenName"}} disabled={{metadataFieldsDisabled}}/>
-      </div>
-
-      <div class="power-select-label">
-        <label for="familyName" class="subtitle">Family Name (optional)</label>
-        <input type="text" class="form-control" value={{fragment.familyName}} oninput={{action "updateFamilyName" value="target.value"}} onblur={{action "validateFamilyName"}} disabled={{metadataFieldsDisabled}}/>
-      </div>
-
-      {{#each model.nameIdentifiers as |nameIdentifier index|}}
-        {{doi-name-identifier model=model fragment=nameIdentifier form=form index=index setIsValidating=(action "setIsValidating") setHasErrors=(action "setHasErrors")}}
-      {{/each}}      
-    {{/if}}
-  </div>
+  {{input type="text" class="form-control creator-field" value=fragment.name oninput=(action "updateName") onblur=(action "validateName") readonly=isReadonly}}
 {{/if}}
 
+{{#if errorMessage}}
+  <div class="help-block help-block-fragment has-error">{{errorMessage}}</div>
+{{else}}
+  <div class="help-block help-block-fragment">The main researchers involved in producing the data, or the authors of the publication, in priority order.</div>
+{{/if}}
+
+<div class="radio-fragment">
+  {{radio-button value="Personal" groupValue=nameType radioClass="radio" changed="selectNameType"}}<span class="subtitle">Person</span> {{radio-button value="Organizational" groupValue=nameType radioClass="radio" changed="selectNameType"}}<span class="subtitle">Organization</span>
+</div>
+
 {{#if showPersonal}}
-  <div class="col-md-9 col-md-offset-3">
-    <div class="power-select-label">
-      <label for="affiliation" class="subtitle">Affiliation (optional)</label>
-    </div>
+  <div class="power-select-label">
+    <label for="givenName" class="subtitle">Given Name (optional)</label>
+    <input type="text" class="form-control" value={{fragment.givenName}} oninput={{action "updateGivenName" value="target.value"}} onblur={{action "validateGivenName"}} disabled={{metadataFieldsDisabled}}/>
+  </div>
+
+  <div class="power-select-label">
+    <label for="familyName" class="subtitle">Family Name (optional)</label>
+    <input type="text" class="form-control" value={{fragment.familyName}} oninput={{action "updateFamilyName" value="target.value"}} onblur={{action "validateFamilyName"}} disabled={{metadataFieldsDisabled}}/>
+  </div>
+
+  {{#each model.nameIdentifiers as |nameIdentifier index|}}
+    {{doi-name-identifier model=model fragment=nameIdentifier form=form index=index setIsValidating=(action "setIsValidating") setHasErrors=(action "setHasErrors")}}
+  {{/each}}
+
+  <div class="power-select-label">
+    <label for="affiliation" class="subtitle">Affiliation (optional)</label>
   </div>
 
   <div class="power-select-fragment">
     {{#form.element controlType="power-select" disabled=disabled value=organization options=organizations helpText='Affiliations are provided by the Research Organization Registry (ROR).' as |el|}}
-      {{#el.control onChange=(action "selectOrganization") search=(action "searchOrganization") placeholder="Select Organization" searchPlaceholder="Type to search..." allowClear=true as |item|}}
-        {{item}}
-      {{/el.control}}
+      {{el.control onChange=(action "selectOrganization") search=(action "searchOrganization") placeholder="Select Organization" searchPlaceholder="Type to search..." allowClear=true}}
     {{/form.element}}
   </div>
 {{/if}}
 
-<div class="col-md-9 col-md-offset-3"><hr /></div>
+<hr />
