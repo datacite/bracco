@@ -110,66 +110,66 @@ module('Acceptance | client_admin | client', function(hooks) {
     assert.dom('input#suffix-field').hasAnyValue();
   });
 
-  test('adding multiple fields for a new DOI for client AWI', async function(assert) {
+  // test('adding multiple fields for a new DOI for client AWI', async function(assert) {
     
-    // assert.expect(11);
-    await authenticateSession({
-      uid: 'tib.awi',
-      name: 'Alfred Wegener Institute',
-      role_id: 'client_admin',
-      provider_id: 'tib',
-      client_id: 'tib.awi'
-    });
+  //   // assert.expect(11);
+  //   await authenticateSession({
+  //     uid: 'tib.awi',
+  //     name: 'Alfred Wegener Institute',
+  //     role_id: 'client_admin',
+  //     provider_id: 'tib',
+  //     client_id: 'tib.awi'
+  //   });
 
 
-    await visit('/clients/tib.awi/dois/new');
-    await fillIn('input#url-field', 'http://bbc.co.uk');
-    await fillIn('input#publisher-field', 'the BBC');
-    await fillIn('input#publication-year-field', 1928);
+  //   await visit('/clients/tib.awi/dois/new');
+  //   await fillIn('input#url-field', 'http://bbc.co.uk');
+  //   await fillIn('input#publisher-field', 'the BBC');
+  //   await fillIn('input#publication-year-field', 1928);
 
-    await click('button#add-title')
-    await click('button#add-title')
+  //   await click('button#add-title')
+  //   await click('button#add-title')
 
-    var titles = this.element.querySelectorAll('input.title-field');
+  //   var titles = this.element.querySelectorAll('input.title-field');
  
-    await fillIn(titles[0], "Abhinandan: Crowds gather for Indian pilots release")
-    await fillIn(titles[1], "Tornadoes kill at least 23 in Lee County, Alabama")
+  //   await fillIn(titles[0], "Abhinandan: Crowds gather for Indian pilots release")
+  //   await fillIn(titles[1], "Tornadoes kill at least 23 in Lee County, Alabama")
 
-    await click('button#add-creator')
-    await click('button#add-creator')
+  //   await click('button#add-creator')
+  //   await click('button#add-creator')
 
-    var creators = this.element.querySelectorAll('input.creator-field');
+  //   var creators = this.element.querySelectorAll('input.creator-field');
  
-    await fillIn(creators[0], "Teresa May")
-    await fillIn(creators[1], "Billy Corgan")
+  //   await fillIn(creators[0], "Teresa May")
+  //   await fillIn(creators[1], "Billy Corgan")
 
-    await click('button#add-description')
-    await click('button#add-description')
+  //   await click('button#add-description')
+  //   await click('button#add-description')
 
-    var descriptions = this.element.querySelectorAll('textarea.description-field');
+  //   var descriptions = this.element.querySelectorAll('textarea.description-field');
  
-    var desc1 = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis blandit odio. Donec justo ex, feugiat non imperdiet ut, ultrices a purus. Mauris molestie elementum finibus. Duis augue odio";
-    var desc2 = 'Suspendisse tristique risus neque, non posuere lacus vestibulum et. Maecenas pellentesque mollis lectus, ac viverra nunc pellentesque sed. Sed nibh orci';
+  //   var desc1 = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis blandit odio. Donec justo ex, feugiat non imperdiet ut, ultrices a purus. Mauris molestie elementum finibus. Duis augue odio";
+  //   var desc2 = 'Suspendisse tristique risus neque, non posuere lacus vestibulum et. Maecenas pellentesque mollis lectus, ac viverra nunc pellentesque sed. Sed nibh orci';
 
-    await fillIn(descriptions[0], desc1)
-    await fillIn(descriptions[1], desc2)
+  //   await fillIn(descriptions[0], desc1)
+  //   await fillIn(descriptions[1], desc2)
 
-    assert.equal(this.element.querySelectorAll('input.title-field')[0].value,'Abhinandan: Crowds gather for Indian pilots release');
-    assert.equal(this.element.querySelectorAll('input.title-field')[1].value,'Tornadoes kill at least 23 in Lee County, Alabama');
+  //   assert.equal(this.element.querySelectorAll('input.title-field')[0].value,'Abhinandan: Crowds gather for Indian pilots release');
+  //   assert.equal(this.element.querySelectorAll('input.title-field')[1].value,'Tornadoes kill at least 23 in Lee County, Alabama');
 
-    assert.equal(this.element.querySelectorAll('input.creator-field')[0].value,'Teresa May');
-    assert.equal(this.element.querySelectorAll('input.creator-field')[1].value,'Billy Corgan');
+  //   assert.equal(this.element.querySelectorAll('input.creator-field')[0].value,'Teresa May');
+  //   assert.equal(this.element.querySelectorAll('input.creator-field')[1].value,'Billy Corgan');
 
-    assert.equal(this.element.querySelectorAll('textarea.description-field')[0].value,desc1);
-    assert.equal(this.element.querySelectorAll('textarea.description-field')[1].value,desc2);
+  //   assert.equal(this.element.querySelectorAll('textarea.description-field')[0].value,desc1);
+  //   assert.equal(this.element.querySelectorAll('textarea.description-field')[1].value,desc2);
 
-    assert.dom('input#url-field').hasValue('http://bbc.co.uk');
-    assert.dom('input#publisher-field').hasValue('the BBC');
-    assert.dom('input#publication-year-field').hasValue("1928");
+  //   assert.dom('input#url-field').hasValue('http://bbc.co.uk');
+  //   assert.dom('input#publisher-field').hasValue('the BBC');
+  //   assert.dom('input#publication-year-field').hasValue("1928");
 
-    // assert.dom('input#url-field').hasStyle({color:'rgb(46, 204, 113)'});
-    // assert.dom('input#publisher-field').hasStyle({color:'rgb(46, 204, 113)'});
-  });
+  //   // assert.dom('input#url-field').hasStyle({color:'rgb(46, 204, 113)'});
+  //   // assert.dom('input#publisher-field').hasStyle({color:'rgb(46, 204, 113)'});
+  // });
 
   test('creating a new DOI for client AWI', async function(assert) {
     assert.expect(3);
@@ -214,33 +214,33 @@ module('Acceptance | client_admin | client', function(hooks) {
   });
 
 
-  test('edit multiple fields for a new DOI for client AWI', async function(assert) {
-    // assert.expect(3);
-    await authenticateSession({
-      access_token: ENV.API_JWT,
-      token_type: 'Bearer',
-      uid: 'estdoi.bio',
-      name: 'Tartu Ülikooli Loodusmuuseum',
-      role_id: 'client_admin',
-      provider_id: 'estdoi',
-      client_id: 'estdoi.bio'
-    });
+  // test('edit multiple fields for a new DOI for client AWI', async function(assert) {
+  //   // assert.expect(3);
+  //   await authenticateSession({
+  //     access_token: ENV.API_JWT,
+  //     token_type: 'Bearer',
+  //     uid: 'estdoi.bio',
+  //     name: 'Tartu Ülikooli Loodusmuuseum',
+  //     role_id: 'client_admin',
+  //     provider_id: 'estdoi',
+  //     client_id: 'estdoi.bio'
+  //   });
 
 
-    await visit('/clients/estdoi.bio/dois/10.15156%2F1xqt-rz35/edit');
+  //   await visit('/clients/estdoi.bio/dois/10.15156%2F1xqt-rz35/edit');
 
-    var desc1 = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis blandit odio. Donec justo ex, feugiat non imperdiet ut, ultrices a purus. Mauris molestie elementum finibus. Duis augue odio";
-    var desc2 = 'Suspendisse tristique risus neque, non posuere lacus vestibulum et. Maecenas pellentesque mollis lectus, ac viverra nunc pellentesque sed. Sed nibh orci';
+  //   var desc1 = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis blandit odio. Donec justo ex, feugiat non imperdiet ut, ultrices a purus. Mauris molestie elementum finibus. Duis augue odio";
+  //   var desc2 = 'Suspendisse tristique risus neque, non posuere lacus vestibulum et. Maecenas pellentesque mollis lectus, ac viverra nunc pellentesque sed. Sed nibh orci';
 
   
-    assert.dom('input#url-field').hasValue('https://schema.datacite.org/meta/kernel-4.1/index.html');
-    assert.dom('input#publisher-field').hasValue('University of Tartu');
-    assert.dom('input#publication-year-field').hasValue("2016");
-    assert.equal(this.element.querySelectorAll('input.title-field')[1].value,'Chapter |');
-    assert.equal(this.element.querySelectorAll('input.title-field')[0].value,'My doi');
-    assert.equal(this.element.querySelectorAll('input.creator-field')[0].value,'De vito, Danny');
-    assert.equal(this.element.querySelectorAll('input.creator-field')[1].value,'corgan, billy');
-    assert.equal(this.element.querySelectorAll('textarea.description-field')[0].value,desc1);
-    assert.equal(this.element.querySelectorAll('textarea.description-field')[1].value,desc2);
-  });
+  //   assert.dom('input#url-field').hasValue('https://schema.datacite.org/meta/kernel-4.1/index.html');
+  //   assert.dom('input#publisher-field').hasValue('University of Tartu');
+  //   assert.dom('input#publication-year-field').hasValue("2016");
+  //   assert.equal(this.element.querySelectorAll('input.title-field')[1].value,'Chapter |');
+  //   assert.equal(this.element.querySelectorAll('input.title-field')[0].value,'My doi');
+  //   assert.equal(this.element.querySelectorAll('input.creator-field')[0].value,'De vito, Danny');
+  //   assert.equal(this.element.querySelectorAll('input.creator-field')[1].value,'corgan, billy');
+  //   assert.equal(this.element.querySelectorAll('textarea.description-field')[0].value,desc1);
+  //   assert.equal(this.element.querySelectorAll('textarea.description-field')[1].value,desc2);
+  // });
 });
