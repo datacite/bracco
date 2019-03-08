@@ -1,7 +1,7 @@
 {{#if (gt index 0)}}
   <div class="col-md-9 col-md-offset-3">
     <div class="input-group">
-      <input type="text"  class="form-control {{if errorMessage 'has-error'}} {{if isValidating 'has-success'}} title-field" value={{fragment.title}} oninput={{action "updateTitle" value="target.value"}} onblur={{action "validateTitle"}} disabled={{disabled}}/>
+      <input type="text" class="form-control {{if errorMessage 'has-error'}} {{if isValidating 'has-success'}} title-field" value={{fragment.title}} oninput={{action "updateTitle" value="target.value"}} onblur={{action "validateTitle"}} disabled={{disabled}}/>
       <span class="input-group-btn">
         {{#bs-button outline=true onClick=(action "deleteTitle" index)}}{{fa-icon "trash"}}{{/bs-button}}
       </span>
