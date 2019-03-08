@@ -1,14 +1,14 @@
 {{#if (gt index 0)}}
   <div class="input-group">
     <textarea class="form-control description-field" value={{fragment.description}}
-      oninput={{action "updateDescription" value="target.value"}} disabled={{metadataFieldsDisabled}} />
+      oninput={{action "updateDescription" value="target.value"}}/>
     <span class="input-group-btn">
     {{#bs-button outline=true onClick=(action "deleteDescription" index)}}{{fa-icon "trash"}}{{/bs-button}}
   </span>
   </div>
 {{else}}
   <textarea class="form-control description-field" value={{fragment.description}}
-    oninput={{action "updateDescription" value="target.value"}} disabled={{metadataFieldsDisabled}} />
+    oninput={{action "updateDescription" value="target.value"}}/>
 {{/if}}
 
 <div class="power-select-label">
