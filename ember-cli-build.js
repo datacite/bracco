@@ -4,6 +4,8 @@
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 module.exports = function(defaults) {
+  const pkg = require('./package.json');
+
   let app = new EmberApp(defaults, {
     'ember-cli-babel': {
       includePolyfill: true
@@ -41,7 +43,7 @@ module.exports = function(defaults) {
         content: (process.env.SITE_TITLE || "DataCite DOI Fabrica")
       },
       'cdn-url' : {
-        content: (process.env.CDN_URL || "https://assets.datacite.org")
+        content: (process.env.CDN_URL || "https://assets.datacite.org/") + "/stylesheets/doi.css?version=" + (pkg.version || "1.0")
       }
     },
 
