@@ -2,8 +2,8 @@
   <div class="input-group">
     <textarea class="form-control description-field" value={{fragment.description}}
       oninput={{action "updateDescription" value="target.value"}}/>
-    <span class="input-group-btn">
-    {{#bs-button outline=true onClick=(action "deleteDescription" index)}}{{fa-icon "trash"}}{{/bs-button}}
+    <span class="input-group-addon">
+    {{#bs-button outline=true onClick=(action "deleteDescription" index)}}{{fa-icon "trash" style="margin:0"}}{{/bs-button}}
   </span>
   </div>
 {{else}}
