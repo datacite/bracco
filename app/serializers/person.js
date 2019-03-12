@@ -1,12 +1,17 @@
-import { underscore } from '@ember/string';
 // import { assign } from '@ember/polyfills';
 import DS from 'ember-data';
 
 export default DS.JSONSerializer.extend({
   normalizeSingleResponse(store, primaryModelClass, payload, id, requestType) {
-    // strip "https://" from id
-    console.log(payload)
-    payload.id  = payload.id.substr(8);
+    let name = payload.person.name;
+
+    payload = {
+      id: payload['orcid-identifier'].path,
+      name: name['credit-name'] ? name['credit-name'].value : null,
+      givenName: name['given-names'] ? name['given-names'].value : null,
+      familyName: name['family-name'] ? name['family-name'].value : null
+    }
+
     return this._super(store, primaryModelClass, payload, id, requestType);
   },
   // normalizeFindRecordResponse(store, primaryModelClass, payload) {
@@ -14,7 +19,7 @@ export default DS.JSONSerializer.extend({
 
   //   return this._super(store, primaryModelClass, payload);
   // },
-  keyForAttribute(attr) {
-    return underscore(attr);
-  }
+  // keyForAttribute(attr) {
+  //   return underscore(attr);
+  // }
 });
