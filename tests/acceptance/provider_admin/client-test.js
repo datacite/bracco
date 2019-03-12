@@ -68,4 +68,18 @@ module('Acceptance | provider_admin | client', function(hooks) {
     // assert.dom('a#upload-doi').doesNotExist();
     // assert.dom('a#transfer-dois').includesText('Transfer DOIs');
   });
+
+  test('fail creating a new DOI for client', async function(assert) {
+    await authenticateSession({
+      token_type: 'Bearer',
+      uid: 'tib',
+      name: 'Technische Informationsbibliothek',
+      role_id: 'provider_admin',
+      provider_id: 'tib'
+    });
+    await visit('/clients/tib.awi/dois');
+
+    assert.dom('new-doi').doesNotExist();
+  });
+
 });
