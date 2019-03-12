@@ -29,7 +29,7 @@
   <div class="help-block help-block-fragment name-identifier-field">Uniquely identifies an individual or legal entity, according to various schemas.</div>
 
   {{#if (lte fragment.nameIdentifiers.length 2)}}
-    {{#bs-button id="add-name-identifier" class="btn-sm add-name-identifier" outline=true onClick=(action "addNameIdentifier")}}{{fa-icon "plus"}} Add
+    {{#bs-button  class="btn-sm add-name-identifier" outline=true onClick=(action "addNameIdentifier")}}{{fa-icon "plus"}} Add
   Name Identifier{{/bs-button}}
   {{/if}}
 </div>
