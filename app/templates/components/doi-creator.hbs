@@ -1,6 +1,6 @@
 {{#if (gt index 0)}}
   <div class="input-group">
-    {{input type="text" class="form-control" value=fragment.name oninput=(action "updateName") onblur=(action "validateName") readonly=isReadonly}}
+    {{input type="text" class="form-control creator-field" value=fragment.name oninput=(action "updateName") onblur=(action "validateName") readonly=isReadonly}}
     <span class="input-group-btn">
       {{#bs-button outline=true onClick=(action "deleteCreator" index)}}{{fa-icon "trash"}}{{/bs-button}}
     </span>
@@ -16,7 +16,7 @@
 {{/if}}
 
 <div class="radio-fragment">
-  {{radio-button value="Personal" groupValue=nameType radioClass="radio" changed="selectNameType"}}<span class="subtitle">Person</span> {{radio-button value="Organizational" groupValue=nameType radioClass="radio" changed="selectNameType"}}<span class="subtitle">Organization</span>
+  {{radio-button value="Personal" groupValue=nameType radioClass="radio select-person" changed="selectNameType"}}<span class="subtitle">Person</span> {{radio-button value="Organizational" groupValue=nameType radioClass="radio select-organisation" changed="selectNameType"}}<span class="subtitle">Organization</span>
 </div>
 
 <div class="power-select-label">
