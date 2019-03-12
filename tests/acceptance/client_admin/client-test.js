@@ -340,9 +340,9 @@ module('Acceptance | client_admin | client', function(hooks) {
     assert.equal(currentURL(), '/clients/tib.awi/dois/10.2312%2F'+suffix+"/edit");
     assert.dom('input#publisher-field').hasValue(goodDoi.publisher);
 
-    var titles = this.element.querySelectorAll('input.title-field');
+    var updatedTitles = this.element.querySelectorAll('input.title-field');
 
-    await fillIn(titles[0], goodDoi.titles[1])
+    await fillIn(updatedTitles[0], goodDoi.titles[1])
     await fillIn('input#publisher-field', "");
     await fillIn('input#publication-year-field', "");
     await fillIn('input.creator-field', '');
