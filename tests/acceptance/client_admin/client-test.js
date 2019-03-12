@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
-import { currentURL, visit, fillIn, click, waitUntil, pauseTest} from '@ember/test-helpers';
+import { currentURL, visit, fillIn, click, waitUntil} from '@ember/test-helpers';
 import { authenticateSession } from 'ember-simple-auth/test-support';
 import { setupFactoryGuy } from 'ember-data-factory-guy';
 
@@ -283,9 +283,9 @@ module('Acceptance | client_admin | client', function(hooks) {
     assert.equal(currentURL(), '/clients/tib.awi/dois/10.2312%2F'+suffix+"/edit");
     assert.dom('input#publisher-field').hasValue(goodDoi.publisher);
 
-    var titles = this.element.querySelectorAll('input.title-field');
+    var updatedTitles = this.element.querySelectorAll('input.title-field');
 
-    await fillIn(titles[0], goodDoi.titles[1])
+    await fillIn(updatedTitles[0], goodDoi.titles[1])
     await fillIn('input#publisher-field', "ITV4");
     await fillIn('input#publication-year-field', "2000");
     await fillIn('input.creator-field', 'Frank Ohara');
@@ -386,7 +386,7 @@ module('Acceptance | client_admin | client', function(hooks) {
   });
 
   test('fail creating a new DOI without yop and publisher ', async function(assert) {
-    assert.expect(3);
+    assert.expect(4);
     await authenticateSession({
       access_token: ENV.API_JWT,
       token_type: 'Bearer',
@@ -404,9 +404,9 @@ module('Acceptance | client_admin | client', function(hooks) {
     await fillIn('input#suffix-field', suffix);
     await click('input#findable-radio');
     await fillIn('input#url-field', 'http://bbc.co.uk');
-    await fillIn(titles[0], "Abhinandan: Crowds gather for Indian pilots release")
+    await fillIn(titles[0], "")
     await fillIn('input#publisher-field', '');
-    await fillIn('input#publication-year-field', 'aass');
+    await fillIn('input#publication-year-field', 'thisIs not a year');
     await fillIn('input.creator-field', 'Alexander Payne');
 
     // Maybe we do not need this one
@@ -423,6 +423,7 @@ module('Acceptance | client_admin | client', function(hooks) {
   
     assert.equal(currentURL(), '/clients/tib.awi/dois/new');
     assert.equal(this.element.querySelector("div#publisher").className, 'form-group has-error has-feedback ember-view');
+    assert.equal(this.element.querySelectorAll("input.title-field")[0].className, 'form-control has-error  title-field');
     assert.equal(this.element.querySelector("div#publication-year").className, 'form-group has-error has-feedback ember-view');
   });
 });
