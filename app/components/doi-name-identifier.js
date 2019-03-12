@@ -49,7 +49,7 @@ export default Component.extend(Validations, {
   }),
 
   validateOrcidIdentifier(id) {
-    let self = this;
+    // let self = this;
     this.store.findRecord('person', id).then(function(person) {
       console.log(person)
       return person;
