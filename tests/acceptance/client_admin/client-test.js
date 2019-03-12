@@ -243,6 +243,120 @@ module('Acceptance | client_admin | client', function(hooks) {
     assert.equal(this.element.querySelector('h3.work').innerText,goodDoi.titles[0]);
   });
 
+  test('modify values fo a DOI for client AWI', async function(assert) {
+    // assert.expect(3);
+    await authenticateSession({
+      access_token: ENV.API_JWT,
+      token_type: 'Bearer',
+      uid: 'tib.awi',
+      name: 'Alfred Wegener Institute',
+      role_id: 'client_admin',
+      provider_id: 'tib',
+      client_id: 'tib.awi'
+    });
+    await visit('/clients/tib.awi/dois/new');
+
+    var titles = this.element.querySelectorAll('input.title-field');
+    let suffix = Math.random().toString(36).substring(7);
+
+    await fillIn('input#suffix-field', suffix);
+    await click('input#draft-radio');
+    await fillIn('input#url-field', goodDoi.url);
+    await fillIn(titles[0], goodDoi.titles[0])
+    await fillIn('input#publisher-field', goodDoi.publisher);
+    await fillIn('input#publication-year-field', goodDoi.yop);
+    await fillIn('input.creator-field', 'Alexander Payne');
+
+    await click('button#create');
+
+    await waitUntil(() => {
+      let doiName = this.element.querySelectorAll('h2.work')[1].innerText;
+      console.log(doiName);
+      if (doiName == '10.2312/'+suffix ){
+        return true;
+      }
+      return false;
+    });
+    // await pauseTest()
+    await click('#edit-doi');
+
+    assert.equal(currentURL(), '/clients/tib.awi/dois/10.2312%2F'+suffix+"/edit");
+    assert.dom('input#publisher-field').hasValue(goodDoi.publisher);
+
+    var titles = this.element.querySelectorAll('input.title-field');
+
+    await fillIn(titles[0], goodDoi.titles[1])
+    await fillIn('input#publisher-field', "ITV4");
+    await fillIn('input#publication-year-field', "2000");
+    await fillIn('input.creator-field', 'Frank Ohara');
+
+ 
+    await click('#update-doi');
+  
+    assert.equal(currentURL(), '/clients/tib.awi/dois/10.2312%2F'+suffix);
+    assert.equal(this.element.querySelectorAll('h2.work')[1].innerText,'10.2312/'+suffix);
+    assert.equal(this.element.querySelector('h3.work').innerText,goodDoi.titles[1]);
+    assert.dom('h3.work ~ div.metadata').includesText("2000");
+    assert.dom('h3.work ~ div.metadata').includesText("ITV");
+  });
+
+  test('remove values values fo a DOI for client AWI', async function(assert) {
+    // assert.expect(3);
+    await authenticateSession({
+      access_token: ENV.API_JWT,
+      token_type: 'Bearer',
+      uid: 'tib.awi',
+      name: 'Alfred Wegener Institute',
+      role_id: 'client_admin',
+      provider_id: 'tib',
+      client_id: 'tib.awi'
+    });
+    await visit('/clients/tib.awi/dois/new');
+
+    var titles = this.element.querySelectorAll('input.title-field');
+    let suffix = Math.random().toString(36).substring(7);
+
+    await fillIn('input#suffix-field', suffix);
+    await click('input#draft-radio');
+    await fillIn('input#url-field', goodDoi.url);
+    await fillIn(titles[0], goodDoi.titles[0])
+    await fillIn('input#publisher-field', goodDoi.publisher);
+    await fillIn('input#publication-year-field', goodDoi.yop);
+    await fillIn('input.creator-field', 'Alexander Payne');
+
+    await click('button#create');
+
+    await waitUntil(() => {
+      let doiName = this.element.querySelectorAll('h2.work')[1].innerText;
+      console.log(doiName);
+      if (doiName == '10.2312/'+suffix ){
+        return true;
+      }
+      return false;
+    });
+    // await pauseTest()
+    await click('#edit-doi');
+
+    assert.equal(currentURL(), '/clients/tib.awi/dois/10.2312%2F'+suffix+"/edit");
+    assert.dom('input#publisher-field').hasValue(goodDoi.publisher);
+
+    var titles = this.element.querySelectorAll('input.title-field');
+
+    await fillIn(titles[0], goodDoi.titles[1])
+    await fillIn('input#publisher-field', "");
+    await fillIn('input#publication-year-field', "");
+    await fillIn('input.creator-field', '');
+
+ 
+    await click('#update-doi');
+  
+    assert.equal(currentURL(), '/clients/tib.awi/dois/10.2312%2F'+suffix);
+    assert.equal(this.element.querySelectorAll('h2.work')[1].innerText,'10.2312/'+suffix);
+    assert.equal(this.element.querySelector('h3.work').innerText,goodDoi.titles[1]);
+    assert.dom('h3.work ~ div.metadata').doesNotIncludeText("2000");
+    assert.dom('h3.work ~ div.metadata').doesNotIncludeText("ITV");
+  });
+
 
   test('edit multiple fields for a new DOI for client AWI', async function(assert) {
     // assert.expect(3);
