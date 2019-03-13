@@ -1,8 +1,9 @@
 import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
-import { currentURL, visit, fillIn, click, waitUntil} from '@ember/test-helpers';
+import { currentURL, visit, fillIn,triggerKeyEvent, typeIn, click, waitUntil, pauseTest} from '@ember/test-helpers';
 import { authenticateSession } from 'ember-simple-auth/test-support';
 import { setupFactoryGuy } from 'ember-data-factory-guy';
+// import { test, formFeedbackClass, formFeedbackElement, validationSuccessClass, validationErrorClass } from '@ember-bootstrap/bootstrap-test';
 
 // import { selectChoose, selectSearch, removeMultipleOption, clearSelected } from 'ember-power-select/test-support';
 import ENV from 'bracco/config/environment';
@@ -76,6 +77,40 @@ module('Acceptance | client_admin | client', function(hooks) {
     assert.dom('a#upload-doi').includesText('Create (File Upload)');
     assert.dom('a#transfer-dois').doesNotExist();
   });
+
+
+  test('unpermiited suffix', async function(assert) {
+
+    let suffix = Math.random().toString(36).substring(7);
+
+    await visit('/clients/tib.awi/dois/new');
+    await typeIn('input#suffix-field', suffix+"#:aswde3#"); //trigger validation
+    await click('#suffix.suffix.form-group'); //trigger validation
+    await click('input#draft-radio:checked'); //trigger validation
+    // await pauseTest();
+
+    var group = this.element.querySelectorAll('#suffix.suffix.form-group')[0].className;
+ 
+
+    assert.equal(group, "suffix form-group has-error has-feedback ember-view");
+  });
+
+  test('empty suffix', async function(assert) {
+
+    await visit('/clients/tib.awi/dois/new');
+    await fillIn('input#suffix-field', "");
+    await triggerKeyEvent('input#suffix-field', 'keyup', 'Tab'); //trigger validation
+
+    await click('#suffix.suffix.form-group'); //trigger validation
+    await click('input#draft-radio:checked'); // trigger validation
+    var group = this.element.querySelectorAll('#suffix.suffix.form-group')[0].className;
+
+
+    assert.equal(group, "suffix form-group has-error has-feedback ember-view");
+
+  });
+
+
 
   test('creating a new DOI for client AWI renders', async function(assert) {
     assert.expect(9);
