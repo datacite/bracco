@@ -1,11 +1,9 @@
 import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
-import { currentURL, visit, fillIn,triggerKeyEvent, typeIn, click, waitUntil, pauseTest} from '@ember/test-helpers';
+import { currentURL, visit, fillIn,triggerKeyEvent, typeIn, click, waitUntil} from '@ember/test-helpers';
 import { authenticateSession } from 'ember-simple-auth/test-support';
 import { setupFactoryGuy } from 'ember-data-factory-guy';
-// import { test, formFeedbackClass, formFeedbackElement, validationSuccessClass, validationErrorClass } from '@ember-bootstrap/bootstrap-test';
 
-// import { selectChoose, selectSearch, removeMultipleOption, clearSelected } from 'ember-power-select/test-support';
 import ENV from 'bracco/config/environment';
 
 module('Acceptance | client_admin | client', function(hooks) {
