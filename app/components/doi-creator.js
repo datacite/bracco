@@ -139,6 +139,9 @@ export default Component.extend(Validations, {
     },
     setHasErrors(value) {
       this.set('hasErrors', value);
+    },
+    joinNameParts(givenName, familyName) {
+      this.joinNameParts(givenName, familyName);
     }
   }
 });
