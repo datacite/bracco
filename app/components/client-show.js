@@ -118,7 +118,7 @@ export default Component.extend({
         console.log(reason);
       });
     },
-    searchRepository(query) {
+    searchy(query) {
       this.set('repositories', this.store.query('repository', { 'query': query, 'page[size]': 25 }));
     },
     selectRepository(repository) {

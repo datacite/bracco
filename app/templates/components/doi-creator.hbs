@@ -23,13 +23,13 @@
   <label for="nameIdentifiers" class="subtitle">Name Identifier (optional)</label>
 
   {{#each fragment.nameIdentifiers as |nameIdentifier index|}}
-    {{doi-name-identifier model=model creator=fragment fragment=nameIdentifier form=form index=index setIsValidating=(action "setIsValidating") setHasErrors=(action "setHasErrors")}}
+    {{doi-name-identifier model=model creator=fragment fragment=nameIdentifier form=form index=index setNameParts=(action "joinNameParts") setNameType=(action "selectNameType") setIsValidating=(action "setIsValidating") setHasErrors=(action "setHasErrors")}}
   {{/each}}
 
-  <div class="help-block help-block-fragment name-identifier-field">Uniquely identifies an individual or legal entity, according to various schemas.</div>
+  <div class="help-block help-block-fragment name-identifier-field">Uniquely identifies an individual or legal entity, according to various schemas, e.g. ORCID, ISNI or ROR. Use identifier expressed as URL.</div>
 
   {{#if (lte fragment.nameIdentifiers.length 2)}}
-    {{#bs-button class="btn-sm add-name-identifier" outline=true onClick=(action "addNameIdentifier")}}{{fa-icon "plus"}} Add
+    {{#bs-button  class="btn-sm add-name-identifier" outline=true onClick=(action "addNameIdentifier")}}{{fa-icon "plus"}} Add
   Name Identifier{{/bs-button}}
   {{/if}}
 </div>
@@ -37,12 +37,12 @@
 {{#if showPersonal}}
   <div class="power-select-label">
     <label for="givenName" class="subtitle">Given Name (optional)</label>
-    <input type="text" class="form-control" value={{fragment.givenName}} oninput={{action "updateGivenName" value="target.value"}} onblur={{action "validateGivenName"}} disabled={{metadataFieldsDisabled}}/>
+    <input type="text" class="form-control given-name-fields" value={{fragment.givenName}} oninput={{action "updateGivenName" value="target.value"}} onblur={{action "validateGivenName"}} disabled={{metadataFieldsDisabled}}/>
   </div>
 
   <div class="power-select-label">
     <label for="familyName" class="subtitle">Family Name (optional)</label>
-    <input type="text" class="form-control" value={{fragment.familyName}} oninput={{action "updateFamilyName" value="target.value"}} onblur={{action "validateFamilyName"}} disabled={{metadataFieldsDisabled}}/>
+    <input type="text" class="form-control family-name-fields" value={{fragment.familyName}} oninput={{action "updateFamilyName" value="target.value"}} onblur={{action "validateFamilyName"}} disabled={{metadataFieldsDisabled}}/>
   </div>
 
   <div class="power-select-label">
