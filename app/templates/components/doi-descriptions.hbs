@@ -1,5 +1,5 @@
 <div class="form-group">
-  <label class="control-label col-md-3">Descriptions (optional)</label>
+  <span class="{{if isValidating 'has-warning'}}"><label class="control-label col-md-3">Descriptions (optional)</label></span>
   <div class="col-md-9">
     {{#each model.descriptions as |description index|}}
       {{doi-description model=model fragment=description form=form index=index}}

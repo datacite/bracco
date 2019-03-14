@@ -20,6 +20,22 @@ export default Component.extend({
   language: computed('fragment.lang', function () {
     return ISO6391.getName(this.get('fragment.lang'));
   }),
+
+  seriesWarningMessage: computed('fragment.validations.attrs.description', function () {
+    var validation = this.get('fragment.validations.attrs.description');
+    if (validation.hasWarnings) {
+      return validation.warningMessage;
+    } else {
+      return null;
+    }
+  }),
+
+  isSeriesInformation: computed('fragment.descriptionType', function () {
+    return this.get('fragment.descriptionType') == 'SeriesInformation';
+  }),
+
+  isValidating: computed.and('isSeriesInformation', 'seriesWarningMessage').readOnly(),
+
   actions: {
     updateDescription(value) {
       this.fragment.set('description', value);
