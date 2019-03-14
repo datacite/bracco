@@ -1,9 +1,8 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { setupFactoryGuy, make } from 'ember-data-factory-guy';
-import { render, fillIn, click, pauseTest } from '@ember/test-helpers';
+import { render, fillIn, click } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
-import { selectChoose, selectSearch, removeMultipleOption, clearSelected } from 'ember-power-select/test-support';
 
 
 module('Integration | Component | doi descriptions', function(hooks) {
