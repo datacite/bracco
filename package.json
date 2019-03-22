@@ -52,6 +52,7 @@
     }
   },
   "dependencies": {
+    "@sentry/browser": "4.6.5",
     "acorn": "^6.0.5",
     "cldr-core": "^29.0.0",
     "electron-compile": "^6.4.4",
@@ -91,7 +92,7 @@
     "electron-forge": "^5.2.3",
     "electron-prebuilt-compile": "4.0.0",
     "ember-ajax": "^4.0.2",
-    "ember-auto-import": "^1.2.19",
+    "ember-auto-import": "^1.2.21",
     "ember-bootstrap": "^2.5.0",
     "ember-bootstrap-cp-validations": "^1.0.0",
     "ember-bootstrap-power-select": "^1.0.0",

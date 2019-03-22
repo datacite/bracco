@@ -38,12 +38,6 @@
     <script src="//cdn.statuspage.io/se-v2.js"></script>
 
     <script src="{{rootURL}}assets/vendor.js"></script>
-    <script>
-      Raven
-        .config('{{content-for 'sentry-dsn'}}')
-        .addPlugin(Raven.Plugins.Ember)
-        .install();
-    </script>
     <script src="{{rootURL}}assets/bracco.js"></script>
     <script type="text/javascript">
       (function() {

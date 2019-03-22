@@ -44,9 +44,6 @@ module.exports = function(defaults) {
       },
       'cdn-url': {
         content: (process.env.CDN_URL || "https://assets.datacite.org/") + "/stylesheets/doi.css?version=" + (pkg.version || "1.0")
-      },
-      'sentry-dsn': {
-        content:process.env.SENTRY_DSN
       }
     },
 
