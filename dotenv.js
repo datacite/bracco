@@ -12,7 +12,6 @@ module.exports = function() {
                         'JWT_PRIVATE_KEY',
                         'USER_NAME',
                         'USER_ROLE_ID',
-                        'BUGSNAG_API_KEY',
                         'AWS_ACCESS_KEY',
                         'AWS_SECRET_KEY',
                         'AWS_BUCKET',

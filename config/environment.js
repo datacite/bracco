@@ -26,10 +26,6 @@ module.exports = function(environment) {
         'Intl.~locale.en-US'
       ]
     },
-    bugsnag: {
-      apiKey: process.env.BUGSNAG_API_KEY,
-      notifyReleaseStages: ['production', 'staging']
-    },
     emberTracker: {
 			analyticsSettings: {
 				trackingId: process.env.TRACKING_ID || null,

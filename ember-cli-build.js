@@ -52,6 +52,9 @@ module.exports = function(defaults) {
     }
   });
 
+  app.import('node_modules/raven-js/dist/raven.js');
+  app.import('node_modules/raven-js/dist/plugins/ember.js');
+
   app.import('vendor/bootstrap/js/dropdown.js');
   app.import('vendor/bootstrap/js/tooltip.js');
 
