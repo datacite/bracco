@@ -126,7 +126,8 @@ const Validations = buildValidations({
         return !["upload", "modify"].includes(this.model.get('mode'));
       })
     })
-  ]
+  ],
+  'descriptions': validator('has-many')
 });
 
 export default Model.extend(Validations, {

@@ -1,15 +1,30 @@
+<div class="form-group" style="margin-bottom: 0">
 {{#if (gt index 0)}}
   <div class="input-group">
-    <textarea class="form-control description-field" value={{fragment.description}}
+    <div class="{{if isValidating 'has-warning'}}">
+    <textarea class="form-control description-field" rows="4" style="resize:none" value={{fragment.description}}
       oninput={{action "updateDescription" value="target.value"}}/>
-    <span class="input-group-addon">
+    </div>
+    <span class="input-group-addon" style="background-color: none;">
     {{#bs-button outline=true onClick=(action "deleteDescription" index)}}{{fa-icon "trash" style="margin:0"}}{{/bs-button}}
-  </span>
+    </span>
   </div>
 {{else}}
-  <textarea class="form-control description-field" value={{fragment.description}}
+  <div class="{{if isValidating 'has-warning'}}">
+  <textarea class="form-control description-field" rows="4" style="resize:none" value={{fragment.description}}
     oninput={{action "updateDescription" value="target.value"}}/>
+  </div>
 {{/if}}
+
+{{#if isValidating}}
+  <div class="help-block help-block-fragment has-warning">{{seriesWarningMessage}}</div>
+{{else}}
+  {{#if isSeriesInformation}}
+    <div class="help-block help-block-fragment title-field">Enter series information in the recommended format of: Title, volume(issue), firstpage-lastpage</div>
+  {{/if}}
+{{/if}}
+
+</div>
 
 <div class="power-select-label">
   <label for="descriptionType" class="subtitle">Description Type</label>
@@ -17,17 +32,18 @@
 
 <div class="power-select-fragment">
   {{#form.element controlType="power-select" value=fragment.descriptionType options=descriptionTypes destination=fragment.descriptionType disabled=disabled as |el|}}
-    {{el.control onChange=(action "selectDescriptionType") search=(action "searchDescriptionType") placeholder="Select Description Type" searchPlaceholder="Type to search..." allowClear=false}}
+    {{el.control class="description-types" onChange=(action "selectDescriptionType") search=(action "searchDescriptionType") placeholder="Select Description Type" searchPlaceholder="Type to search..." allowClear=false}}
   {{/form.element}}
 </div>
+
 
 <div class="power-select-label">
   <label for="descriptionLang" class="subtitle">Language (optional)</label>
 </div>
 
-<div class="power-select-fragment">
+<div class="power-select-fragment description-langs">
   {{#form.element controlType="power-select" disabled=disabled value=language options=languages as |el|}}
-    {{el.control onChange=(action "selectLanguage") search=(action "searchLanguage") placeholder="Select Language" searchPlaceholder="Type to search..." allowClear=true }}
+    {{el.control class="description-langs" onChange=(action "selectLanguage") search=(action "searchLanguage") placeholder="Select Language" searchPlaceholder="Type to search..." allowClear=true }}
   {{/form.element}}
 </div>
 
