@@ -40,7 +40,7 @@
     <script src="{{rootURL}}assets/vendor.js"></script>
     <script>
       Raven
-        .config('https://63201db022924202b697e03bc5e0d0ba@sentry.io/1420435')
+        .config('{{content-for 'sentry-dsn'}}')
         .addPlugin(Raven.Plugins.Ember)
         .install();
     </script>

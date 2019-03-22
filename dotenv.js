@@ -12,6 +12,7 @@ module.exports = function() {
                         'JWT_PRIVATE_KEY',
                         'USER_NAME',
                         'USER_ROLE_ID',
+                        'SENTRY_DSN',
                         'AWS_ACCESS_KEY',
                         'AWS_SECRET_KEY',
                         'AWS_BUCKET',
