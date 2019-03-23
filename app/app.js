@@ -7,7 +7,8 @@ import * as Sentry from '@sentry/browser';
 
 Sentry.init({ 
   dsn: config.SENTRY_DSN,
-  release: config.npm_package_name + ':' + config.npm_package_version
+  release: config.npm_package_name + ':' + config.npm_package_version,
+  integrations: [new Sentry.Integrations.Ember()]
 });
 
 const App = Application.extend({
