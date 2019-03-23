@@ -42,6 +42,22 @@ script:
   - yarn test
   - ember build --environment=production
 
+after_success:
+  # Send release information to Sentry
+  - if [ "$AUTO_DEPLOY" == "true" ]; then
+      GIT_TAG=$(git describe --tags $(git rev-list --tags --max-count=1));
+      printenv GIT_TAG;
+      sentry-cli releases new bracco:${GIT_TAG} --finalize --project bracco;
+
+      if [ "${TRAVIS_TAG?}" ]; then
+        sentry-cli releases deploys bracco:${GIT_TAG} new -e production;
+      else
+        sentry-cli releases deploys bracco:${GIT_TAG} new -e stage;
+      fi
+
+      sentry-cli releases set-commits --auto bracco:${GIT_TAG};
+    fi
+
 deploy:
   provider: s3
   access_key_id: $AWS_ACCESS_KEY
@@ -62,20 +78,6 @@ after_deploy:
   - aws configure set preview.cloudfront true
   # Invalidate every object in the targeted distribution.
   - aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
-  # Send release information to Sentry
-  - if [ "$AUTO_DEPLOY" == "true" ]; then
-      GIT_TAG=$(git describe --tags $(git rev-list --tags --max-count=1));
-      printenv GIT_TAG
-      sentry-cli releases new bracco:${GIT_TAG} --finalize --project bracco;
-
-      if [ "${TRAVIS_TAG?}" ]; then
-        sentry-cli releases deploys bracco:${GIT_TAG} new -e production;
-      else
-        sentry-cli releases deploys bracco:${GIT_TAG} new -e stage;
-      fi
-
-      sentry-cli releases set-commits --auto bracco:${GIT_TAG};
-    fi
 
 notifications:
   slack: datacite:Wt8En0ALoTA6Kjc5EOKNDWxN
