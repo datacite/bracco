@@ -45,8 +45,8 @@ script:
 after_success:
   # Send release information to Sentry
   - if [ "$AUTO_DEPLOY" == "true" ]; then
+      git fetch --depth=1000
       GIT_TAG=$(git describe --tags $(git rev-list --tags --max-count=1));
-      printenv GIT_TAG;
       sentry-cli releases new bracco:${GIT_TAG} --finalize --project bracco;
 
       if [ "${TRAVIS_TAG?}" ]; then
