@@ -5,11 +5,9 @@ import loadInitializers from 'ember-load-initializers';
 import config from './config/environment';
 import * as Sentry from '@sentry/browser';
 
-const pkg = require('./package.json');
-
 Sentry.init({ 
   dsn: config.SENTRY_DSN,
-  release: pkg.name + ':' + pkg.version
+  release: config.npm_package_name + ':' + config.npm_package_version
 });
 
 const App = Application.extend({
