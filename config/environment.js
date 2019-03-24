@@ -2,6 +2,8 @@
 'use strict';
 
 module.exports = function(environment) {
+  const pkg = require('../package.json');
+
   let ENV = {
     modulePrefix: 'bracco',
     environment,
@@ -25,10 +27,6 @@ module.exports = function(environment) {
         'default-3.6',
         'Intl.~locale.en-US'
       ]
-    },
-    bugsnag: {
-      apiKey: process.env.BUGSNAG_API_KEY,
-      notifyReleaseStages: ['production', 'staging']
     },
     emberTracker: {
 			analyticsSettings: {
@@ -60,6 +58,8 @@ module.exports = function(environment) {
     USER_UID: process.env.USER_UID || '0000-0001-5489-3594',
     USER_ROLE_ID: process.env.USER_ROLE_ID || "user",
     USER_NAME: process.env.USER_NAME || 'Josiah Carberry',
+    VERSION: pkg.version,
+    APP_NAME: pkg.name,
 
     APP: {
       // Here you can pass flags/options to your application instance
