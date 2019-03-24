@@ -7,7 +7,7 @@ import * as Sentry from '@sentry/browser';
 
 Sentry.init({ 
   dsn: config.SENTRY_DSN,
-  release: config.npm_package_name + ':' + config.npm_package_version,
+  release: config.APP_NAME + ':' + config.VERSION,
   integrations: [new Sentry.Integrations.Ember()]
 });
 

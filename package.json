@@ -69,8 +69,7 @@
     "iso-639-1": "^2.0.3",
     "junk": "^2.1.0",
     "mime": "^2.4.0",
-    "node-gyp": "^3.6.2",
-    "raven-js": "^3.27.0"
+    "node-gyp": "^3.6.2"
   },
   "devDependencies": {
     "@ember/jquery": "^0.5.2",
