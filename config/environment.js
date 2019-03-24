@@ -61,7 +61,6 @@ module.exports = function(environment) {
     USER_ROLE_ID: process.env.USER_ROLE_ID || "user",
     USER_NAME: process.env.USER_NAME || 'Josiah Carberry',
     SENTRY_DSN: process.env.SENTRY_DSN || null,
-
     VERSION: pkg.version,
     APP_NAME: pkg.name,
 
