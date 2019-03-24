@@ -1,6 +1,6 @@
 {
   "name": "bracco",
-  "version": "2.1.10",
+  "version": "2.1.11",
   "private": true,
   "description": "DOI Fabrica",
   "repository": {
@@ -52,7 +52,7 @@
     }
   },
   "dependencies": {
-    "@sentry/browser": "4.6.5",
+    "@sentry/browser": "^4.6.5",
     "acorn": "^6.0.5",
     "cldr-core": "^29.0.0",
     "electron-compile": "^6.4.4",
