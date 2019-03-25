@@ -42,7 +42,7 @@ export default Component.extend({
     submit(doi) {    
       let self = this;
       doi.save().then(function(doi) {
-        self.get('router').transitionTo('clients.show.dois.show', doi.get('client').get('id'), doi);
+        self.router.transitionTo('clients.show.dois.show', doi.get('client').get('id'), doi);
       });
     },
     cancel() {

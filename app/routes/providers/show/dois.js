@@ -32,7 +32,7 @@ export default Route.extend({
 
   afterModel() {
     if (this.get('can').cannot('read provider', this.modelFor('providers/show'))) {
-      return this.transitionTo('index');
+      this.transitionTo('index');
     }
   }
 });

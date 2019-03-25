@@ -32,7 +32,7 @@ export default Route.extend({
 
   afterModel() {
     if (this.get('can').cannot('read client', this.modelFor('clients/show'))) {
-      return this.transitionTo('index');
+      this.transitionTo('index');
     }
   }
 });

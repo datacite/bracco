@@ -5,7 +5,7 @@ export default Route.extend(UnauthenticatedRouteMixin, {
 
   actions: {
     close() {
-      return this.transitionTo('index');
+      this.transitionTo('index');
     }
   }
 });

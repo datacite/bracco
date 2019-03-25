@@ -78,7 +78,7 @@ export default Component.extend({
     submit(client) {
       let self = this;
       client.save().then(function(client) {
-        self.get('router').transitionTo('clients.show.settings', client.id);
+        self.router.transitionTo('clients.show.settings', client.id);
         self.set('new', false);
       }).catch(function(reason){
         if (console.debug) {
