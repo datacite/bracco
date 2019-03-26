@@ -1,3 +1,0 @@
-{
-  "useBabelInstrumenter": true
-}
