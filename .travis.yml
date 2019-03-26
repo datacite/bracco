@@ -43,7 +43,8 @@ before_script:
 
 script:
   - yarn test
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+  - ./cc-test-reporter -t lcov coverage/lcov.info
+  - ./cc-test-reporter upload-coverage
   - ember build --environment=production  
 
 after_success:
