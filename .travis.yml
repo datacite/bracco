@@ -43,10 +43,8 @@ before_script:
 
 script:
   - yarn test
-  - ember build --environment=production
-
-after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+  - ember build --environment=production  
 
 after_success:
   # Send release information to Sentry
