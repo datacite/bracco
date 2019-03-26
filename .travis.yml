@@ -42,9 +42,8 @@ before_script:
   - ./cc-test-reporter before-build
 
 script:
-  - yarn test
-  - ./cc-test-reporter -t lcov coverage/lcov.info
-  - ./cc-test-reporter upload-coverage
+  - COVERAGE=true ember test
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
   - ember build --environment=production  
 
 after_success:
