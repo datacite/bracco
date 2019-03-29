@@ -32,7 +32,7 @@
 
 <div class="power-select-fragment">
   {{#form.element controlType="power-select" value=fragment.descriptionType options=descriptionTypes destination=fragment.descriptionType disabled=disabled as |el|}}
-    {{el.control class="description-types" onChange=(action "selectDescriptionType") search=(action "searchDescriptionType") placeholder="Select Description Type" searchPlaceholder="Type to search..." allowClear=false}}
+    {{el.control class="description-types" onChange=(action "selectDescriptionType") placeholder="Select Description Type" allowClear=false}}
   {{/form.element}}
 </div>
 

@@ -21,7 +21,7 @@
 
 <div class="power-select-fragment title-type">
   {{#form.element controlType="power-select" value=fragment.titleType options=titleTypes destination=fragment.titleType disabled=disabled as |el|}}
-    {{el.control onChange=(action "selectTitleType") search=(action "searchTitleType") placeholder="Select Title Type" searchPlaceholder="Type to search..." allowClear=true}}
+    {{el.control onChange=(action "selectTitleType") placeholder="Select Title Type" allowClear=true}}
   {{/form.element}}
 </div>
 

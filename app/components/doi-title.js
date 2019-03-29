@@ -56,12 +56,6 @@ export default Component.extend(Validations, {
     deleteTitle() {
       this.model.get('titles').removeObject(this.fragment);
     },
-    searchTitleType(query) {
-      var titleTypes = titleTypeList.filter(function (titleType) {
-        return titleType.toLowerCase().startsWith(query.toLowerCase());
-      })
-      this.set('titleTypes', titleTypes);
-    },
     selectTitleType(titleType) {
       this.fragment.set('titleType', titleType);
       this.set('titleTypes', titleTypeList);
