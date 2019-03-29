@@ -1,5 +1,5 @@
 <div class="form-group {{if hasErrors 'has-error'}} {{if isValidating 'has-success'}}">
-  <label class="control-label col-md-3">Creators</label>
+  <label class="control-label col-md-3">Creator(s)</label>
   <div class="col-md-9">
     {{#each model.creators as |creator index|}}
       {{doi-creator model=model fragment=creator form=form index=index setIsValidating=(action "setIsValidating") setHasErrors=(action "setHasErrors")}}
