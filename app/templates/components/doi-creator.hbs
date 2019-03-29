@@ -29,8 +29,7 @@
   <div class="help-block help-block-fragment name-identifier-field">Uniquely identifies an individual or legal entity, according to various schemas, e.g. ORCID, ISNI or ROR. Use identifier expressed as URL.</div>
 
   {{#if (lte fragment.nameIdentifiers.length 2)}}
-    {{#bs-button  class="btn-sm add-name-identifier" outline=true onClick=(action "addNameIdentifier")}}{{fa-icon "plus"}} Add
-  Name Identifier{{/bs-button}}
+    {{#bs-button  class="btn-sm add-name-identifier" outline=true onClick=(action "addNameIdentifier")}}{{fa-icon "plus"}} Add another name identifier{{/bs-button}}
   {{/if}}
 </div>
 

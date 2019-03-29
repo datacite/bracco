@@ -6,8 +6,7 @@
     {{/each}}
 
     {{#if (lte model.titles.length 4)}}
-      {{#bs-button class="btn-sm" id="add-title" outline=true onClick=(action "addTitle")}}{{fa-icon "plus"}} Add
-    title{{/bs-button}}
+      {{#bs-button class="btn-sm" id="add-title" outline=true onClick=(action "addTitle")}}{{fa-icon "plus"}} Add another title{{/bs-button}}
     {{/if}}
   </div>
 </div>
