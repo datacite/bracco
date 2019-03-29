@@ -5,11 +5,7 @@ import { computed } from '@ember/object';
 
 const Validations = buildValidations({
   'fragment.nameIdentifier': [
-    validator('format', {
-      regex: /(http|https|ftp):\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/,
-      allowBlank: true,
-      message: 'Please enter a name identifier in URL format.'
-    })
+    validator('name-identifier', true)
   ],
 });
 
@@ -90,8 +86,10 @@ export default Component.extend(Validations, {
         this.fragment.set('nameIdentifierScheme', 'ORCID');
         this.fragment.set('nameIdentifier', 'https://orcid.org/' + id);
 
-        this.validateOrcidIdentifier(id);
-
+        const re = /^(http|https):\/\/orcid\.org\/\d{4}-\d{4}-\d{4}-\d{3}[0-9X]+$/;
+        if (re.test(value)) {
+          this.validateOrcidIdentifier(id);
+        }
       } else if (value.startsWith('http://isni.org')) {
         this.fragment.set('schemeUri', 'http://isni.org');
         this.fragment.set('nameIdentifierScheme', 'ISNI');
@@ -103,7 +101,10 @@ export default Component.extend(Validations, {
         this.fragment.set('nameIdentifierScheme', 'ROR');
         this.fragment.set('nameIdentifier', value);
 
-        this.validateRorIdentifier(id);
+        const re = /^https:\/\/ror\.org\/0\w{6}\d{2}$/;
+        if (re.test(value)) {
+          this.validateRorIdentifier(id);
+        }
       } else {
         this.fragment.set('nameIdentifierScheme', 'Other');
         this.fragment.set('nameIdentifier', value);
