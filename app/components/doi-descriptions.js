@@ -6,6 +6,9 @@ export default Component.extend({
 
   actions: {
     addDescription() {
+      if (!this.model.get('descriptions')) {
+        this.model.set('descriptions', []);
+      }
       this.model.get('descriptions').createFragment();
     }
   }

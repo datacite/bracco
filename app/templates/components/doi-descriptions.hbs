@@ -6,7 +6,7 @@
     {{/each}}
 
     {{#if (or (not model.descriptions) (lte model.descriptions.length 4))}}
-      {{#bs-button class="btn-sm" id="add-description" outline=true onClick=(action "addDescription")}}{{fa-icon "plus"}} Add another description{{/bs-button}}
+      {{#bs-button class="btn-sm" id="add-description" outline=true onClick=(action "addDescription")}}{{fa-icon "plus"}} Add {{if (gt model.descriptions.length 0) "another "}}description{{/bs-button}}
     {{/if}}
   </div>
 </div>
