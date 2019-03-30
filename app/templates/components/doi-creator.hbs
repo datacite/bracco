@@ -1,4 +1,40 @@
+<div class="radio-fragment">
+  {{radio-button value="Personal" groupValue=nameType radioClass="radio select-person" changed="selectNameType"}}<span class="subtitle">Person</span> {{radio-button value="Organizational" groupValue=nameType radioClass="radio select-organisation" changed="selectNameType"}}<span class="subtitle">Organization</span>
+</div>
+
+{{#if (gt fragment.nameIdentifiers.length 0)}}
+  <label for="nameIdentifiers" class="subtitle">Name Identifier (optional)</label>
+
+  {{#each fragment.nameIdentifiers as |nameIdentifier index|}}
+    {{doi-name-identifier model=model creator=fragment fragment=nameIdentifier form=form index=index joinNameParts=(action "joinNameParts") setNameType=(action "selectNameType") setReadOnly=(action "setReadOnly") setIsValidating=(action "setIsValidating") setHasErrors=(action "setHasErrors")}}
+  {{/each}}
+
+  <div class="help-block help-block-fragment name-identifier-field">
+    Uniquely identifies an individual or legal entity, according to various schemas, e.g. ORCID, ROR or ISNI. 
+    Use identifier expressed as URL. The Given Name, Family Name or Name will automatically be filled out for ORCID and ROR identifiers.
+  </div>
+{{/if}}
+
+{{#if (lte fragment.nameIdentifiers.length 2)}}
+  {{#bs-button  class="btn-sm add-name-identifier" outline=true onClick=(action "addNameIdentifier")}}{{fa-icon "plus"}} Add {{if (gt fragment.nameIdentifiers.length 0) "another "}}name identifier{{/bs-button}}
+{{/if}}
+
+{{#if showPersonal}}
+  <div>
+    <label for="givenName" class="subtitle">Given Name</label>
+    {{input type="text" class="form-control given-name-fields" value=fragment.givenName oninput=(action "updateGivenName") onblur=(action "validateGivenName") readonly=isReadonlyNameParts}}
+  </div>
+
+  <div>
+    <label for="familyName" class="subtitle">Family Name</label>
+    {{input type="text" class="form-control family-name-fields" value=fragment.familyName oninput=(action "updateFamilyName") onblur=(action "validateFamilyName") readonly=isReadonlyNameParts}}
+  </div>
+{{/if}}
+
 {{#if (gt index 0)}}
+  <div>
+    <label for="name" class="subtitle">Name{{if showPersonal ' (from Given Name and Family Name)'}}</label>
+  </div>
   <div class="input-group">
     {{input type="text" class="form-control creator-field" value=fragment.name oninput=(action "updateName") onblur=(action "validateName") readonly=isReadonly}}
     <span class="input-group-btn">
@@ -6,48 +42,20 @@
     </span>
   </div>
 {{else}}
+  <div>
+    <label for="name" class="subtitle">Name{{if showPersonal ' (from Given Name and Family Name)'}}</label>
+  </div>
   {{input type="text" class="form-control creator-field" value=fragment.name oninput=(action "updateName") onblur=(action "validateName") readonly=isReadonly}}
 {{/if}}
 
 {{#if errorMessage}}
   <div class="help-block help-block-fragment has-error">{{errorMessage}}</div>
 {{else}}
-  <div class="help-block help-block-fragment">The main researchers involved in producing the data, or the authors of the publication, in priority order.{{if showPersonal ' Personal names must be entered via the given name and family name fields below.'}}</div>
+  <div class="help-block help-block-fragment">The main {{if showPersonal 'researchers' 'organizations'}} involved in producing the data, or the authors of the publication, in priority order.</div>
 {{/if}}
 
-<div class="radio-fragment">
-  {{radio-button value="Personal" groupValue=nameType radioClass="radio select-person" changed="selectNameType"}}<span class="subtitle">Person</span> {{radio-button value="Organizational" groupValue=nameType radioClass="radio select-organisation" changed="selectNameType"}}<span class="subtitle">Organization</span>
-</div>
-
-<div class="power-select-label">
-  <label for="nameIdentifiers" class="subtitle">Name Identifier (optional)</label>
-
-  {{#each fragment.nameIdentifiers as |nameIdentifier index|}}
-    {{doi-name-identifier model=model creator=fragment fragment=nameIdentifier form=form index=index setNameParts=(action "joinNameParts") setNameType=(action "selectNameType") setIsValidating=(action "setIsValidating") setHasErrors=(action "setHasErrors")}}
-  {{/each}}
-
-  <div class="help-block help-block-fragment name-identifier-field">Uniquely identifies an individual or legal entity, according to various schemas, e.g. ORCID, ISNI or ROR. Use identifier expressed as URL.</div>
-
-  {{#if (lte fragment.nameIdentifiers.length 2)}}
-    {{#bs-button  class="btn-sm add-name-identifier" outline=true onClick=(action "addNameIdentifier")}}{{fa-icon "plus"}} Add another name identifier{{/bs-button}}
-  {{/if}}
-</div>
-
 {{#if showPersonal}}
-  <div class="power-select-label">
-    <label for="givenName" class="subtitle">Given Name (optional)</label>
-    <input type="text" class="form-control given-name-fields" value={{fragment.givenName}} oninput={{action "updateGivenName" value="target.value"}} onblur={{action "validateGivenName"}} disabled={{metadataFieldsDisabled}}/>
-  </div>
-
-  <div class="power-select-label">
-    <label for="familyName" class="subtitle">Family Name (optional)</label>
-    <input type="text" class="form-control family-name-fields" value={{fragment.familyName}} oninput={{action "updateFamilyName" value="target.value"}} onblur={{action "validateFamilyName"}} disabled={{metadataFieldsDisabled}}/>
-  </div>
-
-  <div class="power-select-label">
-    <label for="affiliation" class="subtitle">Affiliation (optional)</label>
-  </div>
-
+  <label for="affiliation" class="subtitle">Affiliation (optional)</label>
   <div class="power-select-fragment">
     {{#form.element controlType="power-select" disabled=disabled value=organization options=organizations helpText='Organization names are provided by the Research Organization Registry (ROR).' as |el|}}
       {{el.control onChange=(action "selectOrganization") search=(action "searchOrganization") placeholder="Select Organization" searchPlaceholder="Type to search..." allowClear=true}}

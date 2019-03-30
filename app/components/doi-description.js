@@ -2,7 +2,7 @@ import Component from '@ember/component';
 import { computed } from '@ember/object';
 import ISO6391 from 'iso-639-1';
 
-const descriptionTypeList = [
+const descriptionTypes = [
   'Abstract',
   'Methods',
   'SeriesInformation',
@@ -13,8 +13,7 @@ const descriptionTypeList = [
 const languageList = ISO6391.getAllNames();
 
 export default Component.extend({
-  descriptionTypeList,
-  descriptionTypes: descriptionTypeList,
+  descriptionTypes,
   languageList,
   languages: languageList,
   language: computed('fragment.lang', function () {
@@ -43,15 +42,8 @@ export default Component.extend({
     deleteDescription() {
       this.model.get('descriptions').removeObject(this.fragment);
     },
-    searchDescriptionType(query) {
-      var descriptionTypes = descriptionTypeList.filter(function (descriptionType) {
-        return descriptionType.toLowerCase().startsWith(query.toLowerCase());
-      })
-      this.set('descriptionTypes', descriptionTypes);
-    },
     selectDescriptionType(descriptionType) {
       this.fragment.set('descriptionType', descriptionType);
-      this.set('descriptionTypes', descriptionTypeList);
     },
     searchLanguage(query) {
       var languages = languageList.filter(function (language) {

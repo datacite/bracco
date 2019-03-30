@@ -16,7 +16,7 @@ const Validations = buildValidations({
     })
   ]
 });
-const titleTypeList = [
+const titleTypes = [
   'AlternativeTitle',
   'Subtitle',
   'TranslatedTitle',
@@ -25,8 +25,7 @@ const titleTypeList = [
 const languageList = ISO6391.getAllNames();
 
 export default Component.extend(Validations, {
-  titleTypeList,
-  titleTypes: titleTypeList,
+  titleTypes,
   languageList,
   languages: languageList,
   language: computed('fragment.lang', function () {
@@ -58,7 +57,6 @@ export default Component.extend(Validations, {
     },
     selectTitleType(titleType) {
       this.fragment.set('titleType', titleType);
-      this.set('titleTypes', titleTypeList);
     },
     searchLanguage(query) {
       var languages = languageList.filter(function (language) {

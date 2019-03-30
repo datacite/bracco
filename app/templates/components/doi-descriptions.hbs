@@ -5,7 +5,7 @@
       {{doi-description model=model fragment=description form=form index=index}}
     {{/each}}
 
-    {{#if (lte model.descriptions.length 4)}}
+    {{#if (or (not model.descriptions) (lte model.descriptions.length 4))}}
       {{#bs-button class="btn-sm" id="add-description" outline=true onClick=(action "addDescription")}}{{fa-icon "plus"}} Add another description{{/bs-button}}
     {{/if}}
   </div>

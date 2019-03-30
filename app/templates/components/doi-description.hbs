@@ -1,5 +1,4 @@
 <div class="form-group" style="margin-bottom: 0">
-{{#if (gt index 0)}}
   <div class="input-group">
     <div class="{{if isValidating 'has-warning'}}">
     <textarea class="form-control description-field" rows="4" style="resize:none" value={{fragment.description}}
@@ -9,21 +8,14 @@
     {{#bs-button outline=true onClick=(action "deleteDescription" index)}}{{fa-icon "trash" style="margin:0"}}{{/bs-button}}
     </span>
   </div>
-{{else}}
-  <div class="{{if isValidating 'has-warning'}}">
-  <textarea class="form-control description-field" rows="4" style="resize:none" value={{fragment.description}}
-    oninput={{action "updateDescription" value="target.value"}}/>
-  </div>
-{{/if}}
 
-{{#if isValidating}}
-  <div class="help-block help-block-fragment has-warning">{{seriesWarningMessage}}</div>
-{{else}}
-  {{#if isSeriesInformation}}
-    <div class="help-block help-block-fragment title-field">Enter series information in the recommended format of: Title, volume(issue), firstpage-lastpage</div>
+  {{#if isValidating}}
+    <div class="help-block help-block-fragment has-warning">{{seriesWarningMessage}}</div>
+  {{else}}
+    {{#if isSeriesInformation}}
+      <div class="help-block help-block-fragment title-field">Enter series information in the recommended format of: Title, volume(issue), firstpage-lastpage</div>
+    {{/if}}
   {{/if}}
-{{/if}}
-
 </div>
 
 <div class="power-select-label">

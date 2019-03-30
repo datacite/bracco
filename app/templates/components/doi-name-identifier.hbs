@@ -1,13 +1,9 @@
-{{#if (gt index 0)}}
-  <div class="input-group">
-    <input type="text"  class="form-control {{if errorMessage 'has-error'}} {{if isValidating 'has-success'}} name-identifier-field" value={{fragment.nameIdentifier}} oninput={{action "updateNameIdentifier" value="target.value"}} onblur={{action "validateNameIdentifier"}}/>
-    <span class="input-group-btn">
-      {{#bs-button outline=true onClick=(action "deleteNameIdentifier" index)}}{{fa-icon "trash"}}{{/bs-button}}
-    </span>
-  </div>
-{{else}}
-  <input type="text" class="form-control {{if errorMessage 'has-error'}} {{if isValidating 'has-success'}} name-identifier-field" value={{fragment.nameIdentifier}} oninput={{action "updateNameIdentifier" value="target.value"}} onblur={{action "validateNameIdentifier"}}/>
-{{/if}}
+<div class="input-group">
+  <input type="text"  class="form-control {{if errorMessage 'has-error'}} {{if isValidating 'has-success'}} name-identifier-field" value={{fragment.nameIdentifier}} oninput={{action "updateNameIdentifier" value="target.value"}} onblur={{action "validateNameIdentifier"}}/>
+  <span class="input-group-btn">
+    {{#bs-button outline=true onClick=(action "deleteNameIdentifier" index)}}{{fa-icon "trash"}}{{/bs-button}}
+  </span>
+</div>
 
 {{#if errorMessage}}
   <div class="help-block help-block-fragment has-error">{{errorMessage}}</div>

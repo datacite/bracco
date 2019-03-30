@@ -29,6 +29,7 @@ export default Component.extend(Validations, {
   }),
   isValidating: false,
   isReadonly: false,
+  isReadonlyNameParts: false,
   showPersonal: true,
   organizations: [],
   organization: null,
@@ -41,7 +42,7 @@ export default Component.extend(Validations, {
     this.joinNameParts(null, null);
   },
 
-  joinNameParts(givenName, familyName) {
+  joinNameParts(givenName, familyName, readOnly = false) {
     givenName = givenName || this.fragment.get('givenName');
     familyName = familyName || this.fragment.get('familyName');
 
@@ -62,6 +63,12 @@ export default Component.extend(Validations, {
       this.fragment.set('familyName', null);
       this.fragment.set('affiliation', null);
       this.set('isReadonly', false);
+    }
+
+    if (readOnly) {
+      this.set('isReadonlyNameParts', true);
+    } else {
+      this.set('isReadonlyNameParts', false);
     }
   },
   selectNameType(value) {
@@ -140,8 +147,11 @@ export default Component.extend(Validations, {
     setHasErrors(value) {
       this.set('hasErrors', value);
     },
-    joinNameParts(givenName, familyName) {
-      this.joinNameParts(givenName, familyName);
+    setReadOnly(value) {
+      this.set('isReadonly', value);
+    },
+    joinNameParts(givenName, familyName, readOnly = false) {
+      this.joinNameParts(givenName, familyName, readOnly);
     }
   }
 });

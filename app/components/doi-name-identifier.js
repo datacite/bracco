@@ -2,6 +2,7 @@ import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 import { validator, buildValidations } from 'ember-cp-validations';
 import { computed } from '@ember/object';
+import Checkdigit from 'checkdigit';
 
 const Validations = buildValidations({
   'fragment.nameIdentifier': [
@@ -9,27 +10,9 @@ const Validations = buildValidations({
   ],
 });
 
-const nameIdentifierSchemeList = [
-  'ISNI',
-  'ORCID'
-];
-
-// const nameIdentifierSchemeOrganizationList = [
-//   'ISNI',
-//   'ROR'
-// ];
-
-const schemeUriList = {
-  isni: 'https://isni.org',
-  orcid: 'https://orcid.org',
-  ror: 'https://ror.org'
-};
-
 export default Component.extend(Validations, {
   store: service(),
 
-  nameIdentifierSchemeList,
-  nameIdentifierSchemes: nameIdentifierSchemeList,
   errorMessage: computed('validations.messages', function () {
     if (this.get('validations.messages').length > 0) {
       return this.get('validations.messages').get('firstObject');
@@ -37,20 +20,19 @@ export default Component.extend(Validations, {
       return null;
     }
   }),
+  isValidating: false,
 
   validateOrcidIdentifier(id) {
     let self = this;
     this.store.findRecord('person', id).then(function(person) {
       self.creator.set('givenName', person.givenName);
       self.creator.set('familyName', person.familyName);
-      self.setNameParts(person.givenName, person.familyName);
+      self.joinNameParts(person.givenName, person.familyName, true);
       self.setNameType('Personal');
-    }).catch(function(reason){
-      if (console.debug) {
-        console.debug(reason);
-      } else {
-        console.log(reason);
-      }
+    }).catch(function() {
+      self.creator.set('givenName', null);
+      self.creator.set('familyName', null);
+      self.joinNameParts(null, null, false);
     });
   },
   validateRorIdentifier(id) {
@@ -58,27 +40,14 @@ export default Component.extend(Validations, {
     this.store.findRecord('organization', id).then(function(organization) {
       self.creator.set('name', organization.name);
       self.setNameType('Organizational');
-    }).catch(function(reason){
-      if (console.debug) {
-        console.debug(reason);
-      } else {
-        console.log(reason);
-      }
+      self.setReadOnly(true);
+    }).catch(function() {
+      self.creator.set('name', null);
+      self.setReadOnly(false);
     });
   },
 
   actions: {
-    searchNameIdentifierScheme(query) {
-      var nameIdentifierSchemes = nameIdentifierSchemeList.filter(function (nameIdentifierScheme) {
-        return nameIdentifierScheme.toLowerCase().startsWith(query.toLowerCase());
-      })
-      this.set('nameIdentifierSchemes', nameIdentifierSchemes);
-    },
-    selectNameIdentifierScheme(nameIdentifierScheme) {
-      this.fragment.set('nameIdentifierScheme', nameIdentifierScheme);
-      this.fragment.set('schemeUri', schemeUriList[nameIdentifierScheme]);
-      this.set('nameIdentifierSchemes', nameIdentifierSchemeList);
-    },
     updateNameIdentifier(value) {
       if (value.startsWith('https://orcid.org') || value.startsWith('http://orcid.org')) {
         let id = value.substr(value.indexOf('0'));
@@ -89,11 +58,11 @@ export default Component.extend(Validations, {
         const re = /^(http|https):\/\/orcid\.org\/\d{4}-\d{4}-\d{4}-\d{3}[0-9X]+$/;
         if (re.test(value)) {
           this.validateOrcidIdentifier(id);
+        } else {
+          this.creator.set('givenName', null);
+          this.creator.set('familyName', null);
+          this.joinNameParts(null, null, false);
         }
-      } else if (value.startsWith('http://isni.org')) {
-        this.fragment.set('schemeUri', 'http://isni.org');
-        this.fragment.set('nameIdentifierScheme', 'ISNI');
-        this.fragment.set('nameIdentifier', value);
       } else if (value.startsWith('https://ror.org')) {
         let id = value.substr(8);
 
@@ -104,7 +73,14 @@ export default Component.extend(Validations, {
         const re = /^https:\/\/ror\.org\/0\w{6}\d{2}$/;
         if (re.test(value)) {
           this.validateRorIdentifier(id);
+        } else {
+          this.creator.set('name', null);
+          this.setReadOnly(false);
         }
+      } else if (value.startsWith('http://isni.org')) {
+        this.fragment.set('schemeUri', 'http://isni.org');
+        this.fragment.set('nameIdentifierScheme', 'ISNI');
+        this.fragment.set('nameIdentifier', value);
       } else {
         this.fragment.set('nameIdentifierScheme', 'Other');
         this.fragment.set('nameIdentifier', value);

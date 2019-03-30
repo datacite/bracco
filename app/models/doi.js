@@ -157,7 +157,7 @@ export default Model.extend(Validations, {
   formats: DS.attr(),
   version: DS.attr('string'),
   rightsList: DS.attr(),
-  descriptions: fragmentArray('description'),
+  descriptions: fragmentArray('description', { defaultValue: [] }),
   geoLocations: DS.attr(),
   fundingReferences: DS.attr(),
   landingPage: DS.attr(),
