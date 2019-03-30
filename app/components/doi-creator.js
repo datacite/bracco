@@ -28,6 +28,7 @@ export default Component.extend(Validations, {
     }
   }),
   isValidating: false,
+  hasErrors: false,
   isReadonly: false,
   isReadonlyNameParts: false,
   showPersonal: true,

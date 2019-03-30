@@ -2,7 +2,7 @@ import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 import { validator, buildValidations } from 'ember-cp-validations';
 import { computed } from '@ember/object';
-import Checkdigit from 'checkdigit';
+import { isBlank } from '@ember/utils';
 
 const Validations = buildValidations({
   'fragment.nameIdentifier': [
