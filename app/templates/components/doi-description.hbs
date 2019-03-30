@@ -9,12 +9,14 @@
     </span>
   </div>
 
-  {{#if isValidating}}
+  {{#if errorMessage}}
+    <div class="help-block help-block-fragment has-error">{{errorMessage}}</div>
+  {{else if isValidating}}
     <div class="help-block help-block-fragment has-warning">{{seriesWarningMessage}}</div>
+  {{else if isSeriesInformation}}
+    <div class="help-block help-block-fragment title-field">Enter series information in the recommended format of: Title, volume(issue), firstpage-lastpage</div>
   {{else}}
-    {{#if isSeriesInformation}}
-      <div class="help-block help-block-fragment title-field">Enter series information in the recommended format of: Title, volume(issue), firstpage-lastpage</div>
-    {{/if}}
+    <div class="help-block help-block-fragment title-field">One or more names or titles by which the resource is known.</div>
   {{/if}}
 </div>
 

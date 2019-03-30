@@ -1,6 +1,21 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object';
 import ISO6391 from 'iso-639-1';
+import { validator, buildValidations } from 'ember-cp-validations';
+
+const Validations = buildValidations({
+  'fragment.description': [
+    validator('presence', {
+      presence: true,
+      isWarning: computed('model.model.state', 'model.model.prefix', function () {
+        return (this.get('model.model.state') === 'draft' || this.get('model.model.prefix') === '10.5072');
+      }),
+      disabled: computed('model.model.mode', function () {
+        return !["new", "edit"].includes(this.get('model.model.mode'));
+      })
+    })
+  ]
+});
 
 const descriptionTypes = [
   'Abstract',
@@ -12,12 +27,19 @@ const descriptionTypes = [
 ];
 const languageList = ISO6391.getAllNames();
 
-export default Component.extend({
+export default Component.extend(Validations, {
   descriptionTypes,
   languageList,
   languages: languageList,
   language: computed('fragment.lang', function () {
     return ISO6391.getName(this.get('fragment.lang'));
+  }),
+  errorMessage: computed('validations.messages', function () {
+    if (this.get('validations.messages').length > 0) {
+      return this.get('validations.messages').get('firstObject');
+    } else {
+      return null;
+    }
   }),
 
   seriesWarningMessage: computed('fragment.validations.attrs.description', function () {
