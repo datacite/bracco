@@ -1,5 +1,7 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
+// import { filter } from '@ember/object/computed';
+// import { isBlank } from '@ember/utils';
 
 export default Controller.extend({
   store: service(),
@@ -29,6 +31,11 @@ export default Controller.extend({
 
       // track use of the form
       doi.set("source", "fabricaForm");
+
+      // only store descriptions with a description text
+      // doi.set('descriptions', filter(doi.get('descriptions'), function(description) {
+      //   return !isBlank(description.description);
+      // }));
 
       let self = this;
       doi.save().then(function (doi) {
