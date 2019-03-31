@@ -1,7 +1,3 @@
-<div class="radio-fragment">
-  {{radio-button value="Personal" groupValue=nameType radioClass="radio select-person" changed="selectNameType"}}<span class="subtitle">Person</span> {{radio-button value="Organizational" groupValue=nameType radioClass="radio select-organisation" changed="selectNameType"}}<span class="subtitle">Organization</span>
-</div>
-
 {{#if (gt fragment.nameIdentifiers.length 0)}}
   <label for="nameIdentifiers" class="subtitle">Name Identifier (optional)</label>
 
@@ -12,14 +8,18 @@
   {{#if (not hasErrors)}}
     <div class="help-block help-block-fragment name-identifier-field">
       Uniquely identifies an individual or legal entity, according to various schemas, e.g. ORCID, ROR or ISNI. 
-      Use identifier expressed as URL. The Given Name, Family Name or Name will automatically be filled out for ORCID and ROR identifiers.
+      Use name identifier expressed as URL. The Given Name, Family Name and Name will automatically be filled out for ORCID and ROR identifiers.
     </div>
   {{/if}}
 {{/if}}
 
 {{#if (lte fragment.nameIdentifiers.length 2)}}
-  {{#bs-button  class="btn-sm add-name-identifier" outline=true onClick=(action "addNameIdentifier")}}{{fa-icon "plus"}} Add {{if (gt fragment.nameIdentifiers.length 0) "another "}}name identifier{{/bs-button}}
+  {{#bs-button  class="btn-sm add-name-identifier" outline=true onClick=(action "addNameIdentifier")}}{{fa-icon "plus-circle"}} Add another name identifier{{/bs-button}}
 {{/if}}
+
+<div class="radio-fragment">
+  {{radio-button value="Personal" groupValue=nameType radioClass="radio select-person" changed="selectNameType"}}<span class="subtitle">Person</span> {{radio-button value="Organizational" groupValue=nameType radioClass="radio select-organisation" changed="selectNameType"}}<span class="subtitle">Organization</span>
+</div>
 
 {{#if showPersonal}}
   <div>

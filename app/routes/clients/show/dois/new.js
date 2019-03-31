@@ -8,10 +8,6 @@ export default Route.extend({
   model() {
     let client = this.modelFor('clients/show');
     let doi = this.store.createRecord('doi', { client: client, mode: 'new', state: 'draft', titles: [], descriptions: [], creators: [] });
-    doi.get('titles').createFragment();
-    doi.get('descriptions').createFragment();
-    doi.get('creators').createFragment({ nameIdentifiers: [] });
-    doi.get('creators').get('lastObject').get('nameIdentifiers').createFragment();
 
     return hash({
       client: client,

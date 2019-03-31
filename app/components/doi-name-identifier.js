@@ -26,19 +26,18 @@ export default Component.extend(Validations, {
     this.store.findRecord('person', id).then(function(person) {
       self.creator.set('givenName', person.givenName);
       self.creator.set('familyName', person.familyName);
-      self.joinNameParts(person.givenName, person.familyName, true);
-      self.setNameType('Personal');
+      self.joinNameParts({ givenName: person.givenName, familyName: person.familyName, nameIdentifierScheme: 'ORCID' });
     }).catch(function() {
       self.creator.set('givenName', null);
       self.creator.set('familyName', null);
-      self.joinNameParts(null, null, false);
+      self.joinNameParts({});
     });
   },
   validateRorIdentifier(id) {
     let self = this;
     this.store.findRecord('organization', id).then(function(organization) {
       self.creator.set('name', organization.name);
-      self.setNameType('Organizational');
+      self.joinNameParts({ name: organization.name, nameIdentifierScheme: 'ROR' });
       self.setReadOnly(true);
     }).catch(function() {
       self.creator.set('name', null);
@@ -60,7 +59,7 @@ export default Component.extend(Validations, {
         } else {
           this.creator.set('givenName', null);
           this.creator.set('familyName', null);
-          this.joinNameParts(null, null, false);
+          this.joinNameParts({});
         }
       } else if (value.startsWith('https://ror.org')) {
         let id = value.substr(8);

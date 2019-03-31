@@ -4,6 +4,14 @@ export default Component.extend({
   isValidating: false,
   hasErrors: false,
 
+  didReceiveAttrs() {
+    this._super(...arguments);
+
+    if (this.model.get('creators').length == 0) {
+      this.model.get('creators').createFragment();
+    }
+  },
+
   actions: {
     addCreator() {
       this.model.get('creators').createFragment({ nameIdentifiers: [] });

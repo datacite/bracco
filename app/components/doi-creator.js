@@ -27,11 +27,14 @@ export default Component.extend(Validations, {
       return null;
     }
   }),
+  showPersonal: computed('fragment.nameType', function () {
+    return this.get('fragment.nameType') === 'Personal';
+  }),
   isValidating: false,
   hasErrors: false,
   isReadonly: false,
+  isReadonlyNameType: false,
   isReadonlyNameParts: false,
-  showPersonal: true,
   organizations: [],
   organization: null,
 
@@ -40,22 +43,42 @@ export default Component.extend(Validations, {
 
     this.set('organization', this.fragment.get('affiliation'));
     this.selectNameType(this.fragment.get('nameType'));
-    this.joinNameParts(null, null);
+    this.joinNameParts({});
+
+    if (!this.fragment.get('nameIdentifiers')) {
+      this.fragment.set('nameIdentifiers', []);
+    }
+    if (this.fragment.get('nameIdentifiers').length == 0) {
+      this.fragment.get('nameIdentifiers').createFragment();
+    }
   },
 
-  joinNameParts(givenName, familyName, readOnly = false) {
-    givenName = givenName || this.fragment.get('givenName');
-    familyName = familyName || this.fragment.get('familyName');
+  joinNameParts(options = {}) {
+    options.givenName = options.givenName || this.fragment.get('givenName');
+    options.familyName = options.familyName || this.fragment.get('familyName');
+
+    console.log(options.nameIdentifierScheme)
+
+    if (options.nameIdentifierScheme === 'ORCID') {
+      this.fragment.set('nameType', 'Personal')
+      this.set('nameType', 'Personal')
+      this.set('isReadonlyNameParts', true);
+    } else if (options.nameIdentifierScheme === 'ROR') {
+      this.fragment.set('nameType', 'Organizational')
+      this.set('nameType', 'Organizational')
+    } else {
+      this.set('isReadonlyNameParts', false);
+    }
 
     if (this.fragment.get('nameType') === 'Personal') {
       this.set('isReadonly', true);
 
-      if (givenName && familyName) {
-        this.fragment.set('name', familyName + ', ' + givenName);
-      } else if (givenName) {
-        this.fragment.set('name', givenName);
-      } else if (familyName) {
-        this.fragment.set('name', familyName);
+      if (options.givenName && options.familyName) {
+        this.fragment.set('name', options.familyName + ', ' + options.givenName);
+      } else if (options.givenName) {
+        this.fragment.set('name', options.givenName);
+      } else if (options.familyName) {
+        this.fragment.set('name', options.familyName);
       } else {
         this.fragment.set('name', '');
       }
@@ -65,21 +88,13 @@ export default Component.extend(Validations, {
       this.fragment.set('affiliation', null);
       this.set('isReadonly', false);
     }
-
-    if (readOnly) {
-      this.set('isReadonlyNameParts', true);
-    } else {
-      this.set('isReadonlyNameParts', false);
-    }
   },
   selectNameType(value) {
     this.fragment.set('nameType', value);
     this.set('nameType', value);
     if (value == "Personal") {
-      this.set('showPersonal', true);
       this.set('isReadonly', true);
     } else {
-      this.set('showPersonal', false);
       this.set('isReadonly', false);
     }
   },
@@ -98,7 +113,7 @@ export default Component.extend(Validations, {
     },
     updateGivenName(value) {
       this.fragment.set('givenName', value);
-      this.joinNameParts(value, this.fragment.get('familyName'))
+      this.joinNameParts({ givenName: value });
       this.set('isValidating', false);
       this.setIsValidating(false);
       this.setHasErrors(false);
@@ -109,7 +124,7 @@ export default Component.extend(Validations, {
     },
     updateFamilyName(value) {
       this.fragment.set('familyName', value);
-      this.joinNameParts(this.fragment.get('givenyName'), value)
+      this.joinNameParts({ familyName: value });
       this.set('isValidating', false);
       this.setIsValidating(false);
       this.setHasErrors(false);
@@ -151,8 +166,8 @@ export default Component.extend(Validations, {
     setReadOnly(value) {
       this.set('isReadonly', value);
     },
-    joinNameParts(givenName, familyName, readOnly = false) {
-      this.joinNameParts(givenName, familyName, readOnly);
+    joinNameParts(options) {
+      this.joinNameParts(options);
     }
   }
 });

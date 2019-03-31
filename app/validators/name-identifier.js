@@ -8,8 +8,7 @@ const NameIdentifier = BaseValidator.extend({
 
   validate(value) {
     if (!value) {
-      let message = 'This field can\'t be blank';
-      return message;
+      return true;
     } else if (value.startsWith('https://orcid.org') || value.startsWith('http://orcid.org')) {
       // check identifier format
       const re = /^(http|https):\/\/orcid\.org\/\d{4}-\d{4}-\d{4}-\d{3}[0-9X]+$/;
