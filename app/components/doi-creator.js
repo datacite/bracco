@@ -30,10 +30,12 @@ export default Component.extend(Validations, {
   showPersonal: computed('fragment.nameType', function () {
     return this.get('fragment.nameType') === 'Personal';
   }),
+  isReadonlyNameType: computed('fragment.nameIdentifiers', function () {
+    return this.fragment.get('nameIdentifiers').filter((nameIdentifier) => ["ORCID", "ROR"].includes(nameIdentifier.nameIdentifierScheme)).length > 0;
+  }),
   isValidating: false,
   hasErrors: false,
   isReadonly: false,
-  isReadonlyNameType: false,
   isReadonlyNameParts: false,
   organizations: [],
   organization: null,
@@ -56,8 +58,6 @@ export default Component.extend(Validations, {
   joinNameParts(options = {}) {
     options.givenName = options.givenName || this.fragment.get('givenName');
     options.familyName = options.familyName || this.fragment.get('familyName');
-
-    console.log(options.nameIdentifierScheme)
 
     if (options.nameIdentifierScheme === 'ORCID') {
       this.fragment.set('nameType', 'Personal')
