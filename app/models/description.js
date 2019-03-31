@@ -6,8 +6,8 @@ import { computed } from '@ember/object';
 const Validations = buildValidations({
   'description': [
     validator('format', {
-      regex: /(.+), (\d)\((\d)\), (\d)-(\d)$/,
-      message: 'Series information not in recommended format of: Title, volume(issue), firstpage-lastpage',
+      regex: /^([^,]+)(, \w+(\(\w+\))?, \w+(-\w+)?)?$/,
+      message: 'Series information not in recommended format of series title, followed by comma and optional volume(issue), firstpage-lastpage',
       disabled: computed('attribute', function () {
         return this.get('model.descriptionType') != 'SeriesInformation';
       }).volatile(),
@@ -17,7 +17,7 @@ const Validations = buildValidations({
 });
 
 export default Fragment.extend(Validations, {
-  description: attr('string'),
+  description: attr('string', { defaultValue: null }),
   descriptionType: attr('string', { defaultValue: "Abstract" }),
   lang: attr('string', { defaultValue: null })
 });
