@@ -30,9 +30,7 @@ export default Component.extend(Validations, {
   showPersonal: computed('fragment.nameType', function () {
     return this.get('fragment.nameType') === 'Personal';
   }),
-  isReadonlyNameType: computed('fragment.nameIdentifiers', function () {
-    return this.fragment.get('nameIdentifiers').filter((nameIdentifier) => ["ORCID", "ROR"].includes(nameIdentifier.nameIdentifierScheme)).length > 0;
-  }),
+  isReadonlyNameType: false,
   isValidating: false,
   hasErrors: false,
   isReadonly: false,
@@ -63,11 +61,14 @@ export default Component.extend(Validations, {
       this.fragment.set('nameType', 'Personal')
       this.set('nameType', 'Personal')
       this.set('isReadonlyNameParts', true);
+      this.set('isReadonlyNameType', true);
     } else if (options.nameIdentifierScheme === 'ROR') {
       this.fragment.set('nameType', 'Organizational')
       this.set('nameType', 'Organizational')
+      this.set('isReadonlyNameType', true);
     } else {
       this.set('isReadonlyNameParts', false);
+      this.set('isReadonlyNameType', false);
     }
 
     if (this.fragment.get('nameType') === 'Personal') {

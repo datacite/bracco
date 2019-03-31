@@ -38,10 +38,9 @@ export default Component.extend(Validations, {
     this.store.findRecord('organization', id).then(function(organization) {
       self.creator.set('name', organization.name);
       self.joinNameParts({ name: organization.name, nameIdentifierScheme: 'ROR' });
-      self.setReadOnly(true);
     }).catch(function() {
       self.creator.set('name', null);
-      self.setReadOnly(false);
+      self.joinNameParts({});
     });
   },
 
@@ -73,7 +72,7 @@ export default Component.extend(Validations, {
           this.validateRorIdentifier(id);
         } else {
           this.creator.set('name', null);
-          this.setReadOnly(false);
+          this.joinNameParts({});
         }
       } else if (value.startsWith('http://isni.org')) {
         this.fragment.set('schemeUri', 'http://isni.org');
