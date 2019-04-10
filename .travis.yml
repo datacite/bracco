@@ -33,12 +33,34 @@ before_install:
 install:
   - yarn install --non-interactive
   - sudo pip install awscli
+  - curl -sL https://sentry.io/get-cli/ | bash
+  - sentry-cli --version
+
+before_script:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
 
 script:
-  - COVERAGE=true yarn test
-  - codeclimate-test-reporter < coverage/lcov.info
+  - COVERAGE=true ember test
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+  - ember build --environment=production  
 
-  - ember build --environment=production
+after_success:
+  # Send release information to Sentry
+  - if [ "$AUTO_DEPLOY" == "true" ]; then
+      git fetch --depth=1000;
+      GIT_TAG=$(git describe --tags $(git rev-list --tags --max-count=1));
+      sentry-cli releases new bracco:${GIT_TAG} --finalize --project bracco;
+
+      if [ "${TRAVIS_TAG?}" ]; then
+        sentry-cli releases deploys bracco:${GIT_TAG} new -e production;
+      else
+        sentry-cli releases deploys bracco:${GIT_TAG} new -e stage;
+      fi
+
+      sentry-cli releases set-commits --auto bracco:${GIT_TAG};
+    fi
 
 deploy:
   provider: s3
