@@ -1,7 +1,7 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
-// import { filter } from '@ember/object/computed';
-// import { isBlank } from '@ember/utils';
+import { filter } from '@ember/object/computed';
+import { isBlank } from '@ember/utils';
 
 export default Controller.extend({
   store: service(),
@@ -32,10 +32,17 @@ export default Controller.extend({
       // track use of the form
       doi.set("source", "fabricaForm");
 
+      // only store name identifiers with a value
+      doi.get('creators').forEach((creator) => {
+        creator.set('nameIdentifiers', creator.get('nameIdentifiers').filter(function(nameIdentifier) {
+          return !isBlank(nameIdentifier.nameIdentifier);
+        }));
+      });
+
       // only store descriptions with a description text
-      // doi.set('descriptions', filter(doi.get('descriptions'), function(description) {
-      //   return !isBlank(description.description);
-      // }));
+      doi.set('descriptions', doi.get('descriptions').filter(function(description) {
+        return !isBlank(description.description);
+      }));
 
       let self = this;
       doi.save().then(function (doi) {

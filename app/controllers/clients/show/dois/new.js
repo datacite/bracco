@@ -1,6 +1,6 @@
 import Controller from '@ember/controller';
-// import { filter } from '@ember/object/computed';
-// import { isBlank } from '@ember/utils';
+import { filter } from '@ember/object/computed';
+import { isBlank } from '@ember/utils';
 
 export default Controller.extend({
   setEvent(state) {
