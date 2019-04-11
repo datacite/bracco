@@ -1,6 +1,5 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
-import { filter } from '@ember/object/computed';
 import { isBlank } from '@ember/utils';
 
 export default Controller.extend({
@@ -31,6 +30,9 @@ export default Controller.extend({
 
       // track use of the form
       doi.set("source", "fabricaForm");
+
+      // don't send xml
+      doi.set("xml", null);
 
       // only store name identifiers with a value
       doi.get('creators').forEach((creator) => {

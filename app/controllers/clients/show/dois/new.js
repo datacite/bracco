@@ -1,5 +1,4 @@
 import Controller from '@ember/controller';
-import { filter } from '@ember/object/computed';
 import { isBlank } from '@ember/utils';
 
 export default Controller.extend({
@@ -20,10 +19,13 @@ export default Controller.extend({
       // track use of the form
       doi.set("source", "fabricaForm");
 
+      // don't send xml
+      doi.set("xml", null);
+
       // only store descriptions with a description text
-      // doi.set('descriptions', filter(doi.get('descriptions'), function(description) {
-      //   return !isBlank(description.description);
-      // }));
+      doi.set('descriptions', doi.get('descriptions').filter(function(description) {
+        return !isBlank(description.description);
+      }));
 
       let self = this;
       doi.save().then(function (doi) {
