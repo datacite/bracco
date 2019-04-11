@@ -46,15 +46,14 @@ export default Component.extend(Validations, {
     if (this.fragment.get('nameIdentifiers').length == 0) {
       this.fragment.get('nameIdentifiers').createFragment();
     }
-    if (!this.fragment.get('affiliations')) {
-      this.fragment.set('affiliations', []);
+    if (!this.fragment.get('affiliation')) {
+      this.fragment.set('affiliation', []);
     }
     if (!isArray(this.fragment.get('affiliation'))) {
       this.fragment.set('affiliation', [this.fragment.get('affiliation')]);
     }
-    this.fragment.set('affiliations', this.fragment.get('affiliation'));
-    if (this.fragment.get('affiliations').length == 0) {
-      this.fragment.get('affiliations').createFragment();
+    if (this.fragment.get('affiliation').length == 0) {
+      this.fragment.get('affiliation').pushObject(null);
     }
   },
 
@@ -145,7 +144,7 @@ export default Component.extend(Validations, {
       this.fragment.get('nameIdentifiers').createFragment();
     },
     addAffiliation() {
-      this.fragment.get('affiliations').createFragment();
+      this.fragment.get('affiliation').pushObject(null);
     },
     deleteCreator() {
       this.model.get('creators').removeObject(this.fragment);

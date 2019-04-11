@@ -57,11 +57,11 @@
 {{/if}}
 
 {{#if showPersonal}}
-  {{#if (gt fragment.affiliations.length 0)}}
-    <label for="affiliations" class="subtitle">Affiliation (optional)</label>
+  {{#if (gt fragment.affiliation.length 0)}}
+    <label for="affiliation" class="subtitle">Affiliation (optional)</label>
 
-    {{#each fragment.affiliations as |affiliation index|}}
-      {{doi-affiliation model=model creator=fragment fragment=affiliation form=form index=index}}
+    {{#each fragment.affiliation as |aff index|}}
+      {{doi-affiliation model=model creator=fragment affiliation=aff form=form index=index}}
     {{/each}}
 
     {{#if (not hasErrors)}}
@@ -71,7 +71,7 @@
     {{/if}}
   {{/if}}
 
-  {{#if (lte fragment.affiliations.length 2)}}
+  {{#if (lte fragment.affiliation.length 2)}}
     {{#bs-button  class="btn-sm add-affiliation" outline=true onClick=(action "addAffiliation")}}{{fa-icon "plus-circle"}} Add another affiliation{{/bs-button}}
   {{/if}}
 {{/if}}

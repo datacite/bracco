@@ -17,11 +17,12 @@ export default Component.extend({
       });
     },
     selectOrganization(organization) {
-      this.fragment.set('name', organization);
+      //console.log(this.creator.get('affiliation').firstObject())
       this.set('organization', organization)
+      this.creator.set('affiliation', this.creator.get('affiliation').replace(this.index, 1, [organization]));
     },
     deleteAffiliation() {
-      this.creator.get('affiliations').removeObject(this.fragment);
+      this.creator.get('affiliation').removeAt(this.index);
     }
   }
 });

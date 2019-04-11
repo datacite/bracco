@@ -41,9 +41,8 @@ export default Controller.extend({
           return !isBlank(nameIdentifier.nameIdentifier);
         }));
         creator.set('affiliation', creator.get('affiliation').filter(function(affiliation) {
-          return !isBlank(affiliation.name);
+          return !isBlank(affiliation);
         }));
-        creator.set('affiliation', creator.get('affiliation').mapBy('name'));
       });
 
       // only store descriptions with a description text
