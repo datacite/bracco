@@ -22,7 +22,23 @@ export default Controller.extend({
       // don't send xml
       doi.set("xml", null);
 
-      // only store descriptions with a description text
+      // only store descriptions that have a description text
+      doi.set('descriptions', doi.get('descriptions').filter(function(description) {
+        return !isBlank(description.description);
+      }));
+
+      // only store name identifiers with a value
+      // store affiliations as an array of strings
+      doi.get('creators').forEach((creator) => {
+        creator.set('nameIdentifiers', creator.get('nameIdentifiers').filter(function(nameIdentifier) {
+          return !isBlank(nameIdentifier.nameIdentifier);
+        }));
+        creator.set('affiliation', creator.get('affiliation').filter(function(affiliation) {
+          return !isBlank(affiliation.name);
+        }));
+        creator.set('affiliation', creator.get('affiliation').mapBy('name'));
+      });
+      
       doi.set('descriptions', doi.get('descriptions').filter(function(description) {
         return !isBlank(description.description);
       }));

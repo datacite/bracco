@@ -35,10 +35,15 @@ export default Controller.extend({
       doi.set("xml", null);
 
       // only store name identifiers with a value
+      // store affiliations only with a value and as an array of strings
       doi.get('creators').forEach((creator) => {
         creator.set('nameIdentifiers', creator.get('nameIdentifiers').filter(function(nameIdentifier) {
           return !isBlank(nameIdentifier.nameIdentifier);
         }));
+        creator.set('affiliation', creator.get('affiliation').filter(function(affiliation) {
+          return !isBlank(affiliation.name);
+        }));
+        creator.set('affiliation', creator.get('affiliation').mapBy('name'));
       });
 
       // only store descriptions with a description text

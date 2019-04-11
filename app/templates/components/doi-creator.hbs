@@ -57,12 +57,23 @@
 {{/if}}
 
 {{#if showPersonal}}
-  <label for="affiliation" class="subtitle">Affiliation (optional)</label>
-  <div class="power-select-fragment">
-    {{#form.element controlType="power-select" disabled=disabled value=organization options=organizations helpText='Organization names are provided by the Research Organization Registry (ROR).' as |el|}}
-      {{el.control onChange=(action "selectOrganization") search=(action "searchOrganization") placeholder="Select Organization" searchPlaceholder="Type to search..." allowClear=true}}
-    {{/form.element}}
-  </div>
+  {{#if (gt fragment.affiliations.length 0)}}
+    <label for="affiliations" class="subtitle">Affiliation (optional)</label>
+
+    {{#each fragment.affiliations as |affiliation index|}}
+      {{doi-affiliation model=model creator=fragment fragment=affiliation form=form index=index}}
+    {{/each}}
+
+    {{#if (not hasErrors)}}
+      <div class="help-block help-block-fragment affiliation-field">
+         Organization names are provided by the Research Organization Registry (ROR).
+      </div>
+    {{/if}}
+  {{/if}}
+
+  {{#if (lte fragment.affiliations.length 2)}}
+    {{#bs-button  class="btn-sm add-affiliation" outline=true onClick=(action "addAffiliation")}}{{fa-icon "plus-circle"}} Add another affiliation{{/bs-button}}
+  {{/if}}
 {{/if}}
 
 <hr />

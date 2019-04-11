@@ -14,8 +14,9 @@ export default Component.extend({
 
   actions: {
     addCreator() {
-      this.model.get('creators').createFragment({ nameIdentifiers: [] });
+      this.model.get('creators').createFragment({ nameIdentifiers: [], affiliation: [] });
       this.model.get('creators').get('lastObject').get('nameIdentifiers').createFragment();
+      this.model.get('creators').get('lastObject').get('affiliation').createFragment();
     },
     setIsValidating(value) {
       this.set('isValidating', value);

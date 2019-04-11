@@ -1,7 +1,7 @@
 import Component from '@ember/component';
-import { inject as service } from '@ember/service';
 import { validator, buildValidations } from 'ember-cp-validations';
 import { computed } from '@ember/object';
+import { isArray } from '@ember/array';
 
 const Validations = buildValidations({
   'fragment.name': [
@@ -18,8 +18,6 @@ const Validations = buildValidations({
 });
 
 export default Component.extend(Validations, {
-  store: service(),
-
   errorMessage: computed('validations.messages', function () {
     if (this.get('validations.messages').length > 0) {
       return this.get('validations.messages').get('firstObject');
@@ -35,13 +33,10 @@ export default Component.extend(Validations, {
   hasErrors: false,
   isReadonly: false,
   isReadonlyNameParts: false,
-  organizations: [],
-  organization: null,
 
   didReceiveAttrs() {
     this._super(...arguments);
 
-    this.set('organization', this.fragment.get('affiliation'));
     this.selectNameType(this.fragment.get('nameType'));
     this.joinNameParts({});
 
@@ -50,6 +45,16 @@ export default Component.extend(Validations, {
     }
     if (this.fragment.get('nameIdentifiers').length == 0) {
       this.fragment.get('nameIdentifiers').createFragment();
+    }
+    if (!this.fragment.get('affiliations')) {
+      this.fragment.set('affiliations', []);
+    }
+    if (!isArray(this.fragment.get('affiliation'))) {
+      this.fragment.set('affiliation', [this.fragment.get('affiliation')]);
+    }
+    this.fragment.set('affiliations', this.fragment.get('affiliation'));
+    if (this.fragment.get('affiliations').length == 0) {
+      this.fragment.get('affiliations').createFragment();
     }
   },
 
@@ -86,7 +91,6 @@ export default Component.extend(Validations, {
     } else {
       this.fragment.set('givenName', null);
       this.fragment.set('familyName', null);
-      this.fragment.set('affiliation', null);
       this.set('isReadonly', false);
     }
   },
@@ -134,26 +138,14 @@ export default Component.extend(Validations, {
       this.setIsValidating(false);
       this.setHasErrors(false);
     },
-    searchOrganization(query) {
-      let self = this;
-      this.store.query('organization', { 'query': query, qp: 'multiMatch' }).then(function (orgs) {
-        let organizations = orgs.mapBy('name');
-        self.set('organizations', organizations);
-        return organizations;
-      });
-    },
-    selectOrganization(organization) {
-      this.fragment.set('affiliation', organization);
-      this.set('organization', organization)
-      this.set('isValidating', false);
-      this.setIsValidating(false);
-      this.setHasErrors(false);
-    },
     selectNameType(value) {
       this.selectNameType(value);
     },
     addNameIdentifier() {
       this.fragment.get('nameIdentifiers').createFragment();
+    },
+    addAffiliation() {
+      this.fragment.get('affiliations').createFragment();
     },
     deleteCreator() {
       this.model.get('creators').removeObject(this.fragment);
