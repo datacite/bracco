@@ -78,6 +78,10 @@ export default Component.extend(Validations, {
         this.fragment.set('schemeUri', 'http://isni.org');
         this.fragment.set('nameIdentifierScheme', 'ISNI');
         this.fragment.set('nameIdentifier', value);
+      } else if (value.length == 0) {
+        this.fragment.set('nameIdentifierScheme', null);
+        this.fragment.set('nameIdentifier', null);
+        this.joinNameParts({});
       } else {
         this.fragment.set('nameIdentifierScheme', 'Other');
         this.fragment.set('nameIdentifier', value);
