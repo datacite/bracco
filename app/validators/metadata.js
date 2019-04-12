@@ -23,7 +23,7 @@ const metadata = BaseValidator.extend({
           data: {
             type: 'dois',
             attributes: {
-              doi: this.get(options.dependentKeys[0]),
+              doi: this.get(options.dependentKeys[0]).replace(/\+/g,""),
               xml: xml
             },
             relationships: {
