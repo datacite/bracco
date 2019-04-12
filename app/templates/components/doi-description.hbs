@@ -4,8 +4,8 @@
       <textarea class="form-control description-field" rows="4" style="resize:none" value={{fragment.description}}
       oninput={{action "updateDescription" value="target.value"}}/>
     </div>
-    <span class="input-group-addon" style="background-color: none;">
-    {{#bs-button outline=true onClick=(action "deleteDescription" index)}}{{fa-icon "trash" style="margin:0"}}{{/bs-button}}
+    <span class="input-group-addon">
+    {{#bs-button outline=true onClick=(action "deleteDescription" index)}}{{fa-icon "trash" pull="left" style="margin:0;"}}{{/bs-button}}
     </span>
   </div>
 {{else}}

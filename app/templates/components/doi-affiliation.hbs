@@ -5,8 +5,8 @@
         {{el.control onChange=(action "selectOrganization") search=(action "searchOrganization") placeholder="Select Organization" searchPlaceholder="Type to search..." allowClear=true}}
       {{/form.element}}
     </div>
-    <span class="input-group-addon" style="background-color:none;">
-    {{#bs-button outline=true onClick=(action "deleteAffiliation" index)}}{{fa-icon "trash" style="margin:0;"}}{{/bs-button}}
+    <span class="input-group-addon">
+    {{#bs-button outline=true onClick=(action "deleteAffiliation" index)}}{{fa-icon "trash" pull="left" style="margin:0;"}}{{/bs-button}}
     </span>
   </div>
 {{else}}
