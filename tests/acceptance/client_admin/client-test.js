@@ -129,55 +129,55 @@ module('Acceptance | client_admin | client', function(hooks) {
     assert.dom('input#suffix-field').hasAnyValue();
   });
 
-  test('adding multiple fields for a new DOI for client AWI', async function(assert) {
+  // test('adding multiple fields for a new DOI for client AWI', async function(assert) {
     
-    // assert.expect(11);
+  //   // assert.expect(11);
 
-    await visit('/clients/tib.awi/dois/new');
-    await fillIn('input#url-field', goodDoi.url);
-    await fillIn('input#publisher-field', goodDoi.publisher);
-    await fillIn('input#publication-year-field', goodDoi.yop);
+  //   await visit('/clients/tib.awi/dois/new');
+  //   await fillIn('input#url-field', goodDoi.url);
+  //   await fillIn('input#publisher-field', goodDoi.publisher);
+  //   await fillIn('input#publication-year-field', goodDoi.yop);
 
-    await click('button#add-title')
-    await click('button#add-title')
+  //   await click('button#add-title')
+  //   await click('button#add-title')
 
-    var titles = findAll('input.title-field');
+  //   var titles = findAll('input.title-field');
  
-    await fillIn(titles[0], goodDoi.titles[0])
-    await fillIn(titles[1], goodDoi.titles[1])
+  //   await fillIn(titles[0], goodDoi.titles[0])
+  //   await fillIn(titles[1], goodDoi.titles[1])
 
-    await click('button#add-creator')
-    await click('button#add-creator')
+  //   await click('button#add-creator')
+  //   await click('button#add-creator')
 
-    var creators = findAll('input.creator-field');
+  //   var creators = findAll('input.creator-field');
  
-    await fillIn(creators[0], goodDoi.creators[0])
-    await fillIn(creators[1],  goodDoi.creators[1])
+  //   await fillIn(creators[0], goodDoi.creators[0])
+  //   await fillIn(creators[1],  goodDoi.creators[1])
 
-    await click('button#add-description')
-    await click('button#add-description')
+  //   await click('button#add-description')
+  //   await click('button#add-description')
 
-    var descriptions = findAll('textarea.description-field');
+  //   var descriptions = findAll('textarea.description-field');
  
-    await fillIn(descriptions[0], goodDoi.descriptions[0])
-    await fillIn(descriptions[1], goodDoi.descriptions[1])
+  //   await fillIn(descriptions[0], goodDoi.descriptions[0])
+  //   await fillIn(descriptions[1], goodDoi.descriptions[1])
 
-    assert.equal(findAll('input.title-field')[0].value,goodDoi.titles[0]);
-    assert.equal(findAll('input.title-field')[1].value,goodDoi.titles[1]);
+  //   assert.equal(findAll('input.title-field')[0].value,goodDoi.titles[0]);
+  //   assert.equal(findAll('input.title-field')[1].value,goodDoi.titles[1]);
 
-    assert.equal(findAll('input.creator-field')[0].value,goodDoi.creators[0]);
-    assert.equal(findAll('input.creator-field')[1].value, goodDoi.creators[1]);
+  //   assert.equal(findAll('input.creator-field')[0].value,goodDoi.creators[0]);
+  //   assert.equal(findAll('input.creator-field')[1].value, goodDoi.creators[1]);
 
-    assert.equal(findAll('textarea.description-field')[0].value,goodDoi.descriptions[0]);
-    assert.equal(findAll('textarea.description-field')[1].value,goodDoi.descriptions[1]);
+  //   assert.equal(findAll('textarea.description-field')[0].value,goodDoi.descriptions[0]);
+  //   assert.equal(findAll('textarea.description-field')[1].value,goodDoi.descriptions[1]);
 
-    assert.dom('input#url-field').hasValue('http://bbc.co.uk');
-    assert.dom('input#publisher-field').hasValue(goodDoi.publisher);
-    assert.dom('input#publication-year-field').hasValue(goodDoi.yop);
+  //   assert.dom('input#url-field').hasValue('http://bbc.co.uk');
+  //   assert.dom('input#publisher-field').hasValue(goodDoi.publisher);
+  //   assert.dom('input#publication-year-field').hasValue(goodDoi.yop);
 
-    // assert.dom('input#url-field').hasStyle({color:'rgb(46, 204, 113)'});
-    // assert.dom('input#publisher-field').hasStyle({color:'rgb(46, 204, 113)'});
-  });
+  //   // assert.dom('input#url-field').hasStyle({color:'rgb(46, 204, 113)'});
+  //   // assert.dom('input#publisher-field').hasStyle({color:'rgb(46, 204, 113)'});
+  // });
 
   // test('creating a draft new DOI for client AWI', async function(assert) {
   //   assert.expect(3);

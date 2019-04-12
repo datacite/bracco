@@ -16,10 +16,6 @@ module.exports = function(defaults) {
       extensions: ['js']
     },
 
-    minifyJS:  {
-      enabled: false
-    },
-
     // fingerprint: {
     //   enabled: false
     // },

@@ -9,8 +9,6 @@ module('Integration | Component | doi descriptions', function(hooks) {
   setupRenderingTest(hooks);
   setupFactoryGuy(hooks);
 
-
-
   test('it renders', async function(assert) {
     this.set('model', make('doi'));
     await render(hbs`{{doi-descriptions model=model}}`);
