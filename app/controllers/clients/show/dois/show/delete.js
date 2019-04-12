@@ -12,7 +12,7 @@ export default Controller.extend({
       let self = this;
       this.store.findRecord("doi", this.model.get('id'), { backgroundReload: false }).then(function(doi) {
         doi.destroyRecord().then(function () {
-          self.transitionToRoute('clients.show.dois', self.get('client'));
+          self.transitionToRoute('clients.show.dois', self.get('client.id'));
         });
       });
     },
