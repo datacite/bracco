@@ -15,7 +15,7 @@ FactoryGuy.define('doi', {
       resourceType: 'Substance'
     },
     schemaVersion: "http://datacite.org/schema/kernel-4",
-    state: "searchable",
+    state: "findable",
     publicationYear: 2017,
     created: "2017-09-27T14:08:02.000Z",
     registered: "2017-09-27T14:08:02.000Z",

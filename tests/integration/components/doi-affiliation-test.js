@@ -1,26 +1,20 @@
-// import { module, test } from 'qunit';
-// import { setupRenderingTest } from 'ember-qunit';
-// import { render } from '@ember/test-helpers';
-// import hbs from 'htmlbars-inline-precompile';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { setupFactoryGuy, make } from 'ember-data-factory-guy';
+import { render } from '@ember/test-helpers';
+import hbs from 'htmlbars-inline-precompile';
 
-// module('Integration | Component | doi-affiliation', function(hooks) {
-//   setupRenderingTest(hooks);
+module('Integration | Component | doi affiliation', function(hooks) {
+  setupRenderingTest(hooks);
+  setupFactoryGuy(hooks);
 
-//   test('it renders', async function(assert) {
-//     // Set any properties with this.set('myProperty', 'value');
-//     // Handle any actions with this.set('myAction', function(val) { ... });
+  test('it renders', async function(assert) {
+    this.set('model', make('doi'));
+    this.set('creator', make('creator'));
+    this.set('affiliation', 'Cambridge University');
 
-//     await render(hbs`{{doi-affiliation}}`);
+    await render(hbs`{{doi-affiliation model=model creator=creator affiliation=affiliation index=0}}`);
 
-//     assert.equal(this.element.textContent.trim(), '');
-
-//     // Template block usage:
-//     await render(hbs`
-//       {{#doi-affiliation}}
-//         template block text
-//       {{/doi-affiliation}}
-//     `);
-
-//     assert.equal(this.element.textContent.trim(), 'template block text');
-//   });
-// });
+    assert.dom('*').hasText('');
+  });
+});
