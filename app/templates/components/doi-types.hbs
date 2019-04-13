@@ -1,6 +1,7 @@
 {{#form.element
 controlType="power-select"
 label="Resource Type General"
+id="resource-type"
 property="types.resourceTypeGeneral"
 helpText="The general type of the resource."
 options=resourceTypesGeneral
@@ -10,8 +11,7 @@ as |el|
 }}
 {{el.control
 onChange=(action "selectResourceTypeGeneral")
-search=(action "searchResourceTypeGeneral")
-searchPlaceholder="Select from list or type to search..."
+placeholder="Select Resource Type General"
 }}
 {{/form.element}}
 

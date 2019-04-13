@@ -1,12 +1,26 @@
 import Component from '@ember/component';
-import { isPresent } from '@ember/utils';
 
 export default Component.extend({
+  isValidating: false,
+  hasErrors: false,
+
   didReceiveAttrs() {
     this._super(...arguments);
 
-    if (isPresent(this.model.get('titles')) && this.model.get('titles').constructor === Array) {
-      this.model.set('titles', this.model.get('titles')[0].title);
+    if (this.model.get('titles').length == 0) {
+      this.model.get('titles').createFragment();
+    }
+  },
+
+  actions: {
+    addTitle() {
+      this.model.get('titles').createFragment();
+    },
+    setIsValidating(value) {
+      this.set('isValidating', value);
+    },
+    setHasErrors(value) {
+      this.set('hasErrors', value);
     }
   }
 });

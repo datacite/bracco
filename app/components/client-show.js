@@ -118,7 +118,7 @@ export default Component.extend({
         console.log(reason);
       });
     },
-    searchRepository(query) {
+    searchy(query) {
       this.set('repositories', this.store.query('repository', { 'query': query, 'page[size]': 25 }));
     },
     selectRepository(repository) {
@@ -143,7 +143,7 @@ export default Component.extend({
       let self = this;
       this.store.findRecord("client", client.id, { backgroundReload: false }).then(function (client) {
         client.destroyRecord().then(function () {
-          self.get('router').transitionTo('providers.show.settings', self.get('provider'));
+          self.router.transitionTo('providers.show.settings', self.get('provider'));
         });
       });
     },

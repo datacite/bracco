@@ -1,3 +1,79 @@
-{{form.element controlType="textarea" label="Creators" property="creatorsCsv" rows=creatorNumber helpText=" The main
-researchers involved in producing the data, or the authors of the publication, in priority order. Please enter one
-creator per line, with a \"Smith, John\" format for personal names." required=false disabled=disabled}}
+{{#if (gt fragment.nameIdentifiers.length 0)}}
+  <label for="nameIdentifiers" class="subtitle">Name Identifier (optional)</label>
+
+  {{#each fragment.nameIdentifiers as |nameIdentifier index|}}
+    {{doi-name-identifier model=model creator=fragment fragment=nameIdentifier form=form index=index joinNameParts=(action "joinNameParts") setNameType=(action "selectNameType") setReadOnly=(action "setReadOnly") setIsValidating=(action "setIsValidating") setHasErrors=(action "setHasErrors")}}
+  {{/each}}
+
+  {{#if (not hasErrors)}}
+    <div class="help-block help-block-fragment name-identifier-field">
+      Uniquely identifies an individual or legal entity, according to various schemas, e.g. ORCID, ROR or ISNI. 
+      Use name identifier expressed as URL. The Given Name, Family Name and Name will automatically be filled out for ORCID and ROR identifiers.
+    </div>
+  {{/if}}
+{{/if}}
+
+{{#if (lte fragment.nameIdentifiers.length 2)}}
+  {{#bs-button  class="btn-sm add-name-identifier" outline=true onClick=(action "addNameIdentifier")}}{{fa-icon "plus-circle"}} Add another name identifier{{/bs-button}}
+{{/if}}
+
+<div class="radio-fragment">
+  {{radio-button value="Personal" groupValue=nameType radioClass="radio select-person" changed=(action "selectNameType") disabled=isReadonlyNameType}}<span class="subtitle">Person</span> {{radio-button value="Organizational" groupValue=nameType radioClass="radio select-organisation" changed=(action "selectNameType") disabled=isReadonlyNameType}}<span class="subtitle">Organization</span>
+</div>
+
+{{#if showPersonal}}
+  <div>
+    <label for="givenName" class="subtitle">Given Name</label>
+    {{input type="text" class="form-control given-name-field" value=fragment.givenName oninput=(action "updateGivenName") onblur=(action "validateGivenName") readonly=isReadonlyNameParts}}
+  </div>
+
+  <div>
+    <label for="familyName" class="subtitle">Family Name</label>
+    {{input type="text" class="form-control family-name-field" value=fragment.familyName oninput=(action "updateFamilyName") onblur=(action "validateFamilyName") readonly=isReadonlyNameParts}}
+  </div>
+{{/if}}
+
+{{#if (gt index 0)}}
+  <div>
+    <label for="name" class="subtitle">Name{{if showPersonal ' (from Given Name and Family Name)'}}</label>
+  </div>
+  <div class="input-group">
+    {{input type="text" class="form-control creator-field" value=fragment.name oninput=(action "updateName") onblur=(action "validateName") readonly=isReadonly}}
+    <span class="input-group-btn">
+      {{#bs-button outline=true onClick=(action "deleteCreator" index)}}{{fa-icon "trash"}}{{/bs-button}}
+    </span>
+  </div>
+{{else}}
+  <div>
+    <label for="name" class="subtitle">Name{{if showPersonal ' (from Given Name and Family Name)'}}</label>
+  </div>
+  {{input type="text" class="form-control creator-field" value=fragment.name oninput=(action "updateName") onblur=(action "validateName") readonly=isReadonly}}
+{{/if}}
+
+{{#if errorMessage}}
+  <div class="help-block help-block-fragment has-error">{{errorMessage}}</div>
+{{else}}
+  <div class="help-block help-block-fragment">The main {{if showPersonal 'researchers' 'organizations'}} involved in producing the data, or the authors of the publication, in priority order.</div>
+{{/if}}
+
+{{#if showPersonal}}
+  {{#if (gt fragment.affiliation.length 0)}}
+    <label for="affiliation" class="subtitle">Affiliation (optional)</label>
+
+    {{#each fragment.affiliation as |affiliation index|}}
+      {{doi-affiliation model=model creator=fragment affiliation=affiliation form=form index=index}}
+    {{/each}}
+
+    {{#if (not hasErrors)}}
+      <div class="help-block help-block-fragment affiliation-field">
+         Organization names are provided by the Research Organization Registry (ROR).
+      </div>
+    {{/if}}
+  {{/if}}
+
+  {{#if (lte fragment.affiliation.length 2)}}
+    {{#bs-button  class="btn-sm add-affiliation" outline=true onClick=(action "addAffiliation")}}{{fa-icon "plus-circle"}} Add another affiliation{{/bs-button}}
+  {{/if}}
+{{/if}}
+
+<hr />

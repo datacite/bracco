@@ -31,14 +31,6 @@ export default Ability.extend({
         return false;
     }
   }),
-  canEnableForm: computed('currentUser.role_id', function () {
-    switch (this.get('currentUser.role_id')) {
-      case 'staff_admin':
-        return true;
-      default:
-        return false;
-    }
-  }),
   canUpdate: computed('currentUser.role_id', 'model.id', function () {
     switch (this.get('currentUser.role_id')) {
       case 'staff_admin':

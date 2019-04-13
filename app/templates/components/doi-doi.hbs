@@ -9,7 +9,7 @@
           {{/el.control}}
         {{/form.element}}
       </span>
-      {{form.element controlType="text" formLayout="vertical" property="suffix" onChange=(action "selectSuffix") helpText="A globally unique string that identifies the resource and can't be changed. DOIs with demo prefix 10.5072 will always remain in Draft state." required=false}}
+      {{form.element controlType="text" class="suffix" id="suffix" formLayout="vertical" property="suffix" onChange=(action "selectSuffix") helpText="A globally unique string that identifies the resource and can't be changed. DOIs with demo prefix 10.5072 will always remain in Draft state." required=false}}
       <span class="input-group-addon refresh" title="Refresh" aria-label="Refresh" {{action 'refresh'}}>{{fa-icon "refresh"}}</span>
       <span class="input-group-addon clear" title="Clear" aria-label="Clear" {{action 'clear'}}>{{fa-icon "times-circle"}}</span>
     </div>
@@ -19,9 +19,9 @@
 <div class="form-group">
   <label class="control-label col-md-3">State</label>
   <div class="col-md-9">
-    <div>{{radio-button value="draft" groupValue=state radioClass="radio" changed="selectState" disabled=draft}}Draft <span class="help-block">only visible in DOI Fabrica, DOI can be deleted</span></div>
-    <div>{{radio-button value="registered" groupValue=state radioClass="radio" changed="selectState" disabled=registered}}Registered <span class="help-block">registered with the DOI Resolver</span></div>
-    <div>{{radio-button value="findable" groupValue=state radioClass="radio" changed="selectState" disabled=findable}}Findable <span class="help-block">registered with the DOI Resolver and indexed in DataCite Search</span></div>
+    <div>{{radio-button radioId="draft-radio" value="draft" groupValue=state radioClass="radio" changed=(action "selectState") disabled=draft}}Draft <span class="help-block">only visible in DOI Fabrica, DOI can be deleted</span></div>
+    <div>{{radio-button radioId="registered-radio" value="registered" groupValue=state radioClass="radio" changed=(action "selectState") disabled=registered}}Registered <span class="help-block">registered with the DOI Resolver</span></div>
+    <div>{{radio-button radioId="findable-radio" value="findable" groupValue=state radioClass="radio" changed=(action "selectState") disabled=findable}}Findable <span class="help-block">registered with the DOI Resolver and indexed in DataCite Search</span></div>
     <div class="help-block">
       The state determines whether a DOI is registered and findable. Once in Registered or Findable state, a DOI can't be set back to Draft state. <a target="_blank" rel="noopener" href="https://support.datacite.org/docs/doi-states">More&nbsp;…</a>
     </div>

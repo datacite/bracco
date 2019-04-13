@@ -30,12 +30,11 @@ export default Controller.extend({
       doi.set('publisher', null);
       doi.set('publicationYear', null);
       doi.set('types', {});
-      doi.set('descriptions', []);
       doi.set('rightsList', []);
       doi.set('schemaVersion', null);
-    
+
       let self = this;
-      doi.save().then(function(doi) {
+      doi.save().then(function (doi) {
         self.transitionToRoute('clients.show.dois.show', doi.get('client.id'), doi);
       });
     },

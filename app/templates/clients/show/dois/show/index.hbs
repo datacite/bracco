@@ -20,10 +20,6 @@
             {{#link-to "clients.show.dois.show.delete" model.client.id model.id class="btn btn-warning"
             id="delete-doi"}}{{fa-icon "trash"}} Delete DOI{{/link-to}}
             {{/if}}
-            {{#if (and (can "enableForm doi" model) (not model.isSourceForm))}}
-            {{#link-to "clients.show.dois.show.enableForm" model.client.id model.id class="btn btn-warning"
-            id="enable-form-doi"}}{{fa-icon "fa-unlock"}} Enable Form {{/link-to}}
-            {{/if}}
           </div>
         </div>
       </div>

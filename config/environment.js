@@ -51,6 +51,8 @@ module.exports = function(environment) {
     ORCID_URL: process.env.ORCID_URL || "https://sandbox.orcid.org",
     API_URL: process.env.API_URL || "https://api.test.datacite.org",
     RE3DATA_API_URL: process.env.RE3DATA_API_URL || "https://api.test.datacite.org",
+    ROR_API_URL: process.env.ROR_API_URL || "https://api.ror.org",
+    ORCID_API_URL: process.env.ORCID_API_URL || "https://pub.orcid.org",
     EVENTDATA_URL: process.env.EVENTDATA_URL || "https://api.test.datacite.org",
     CDN_URL: process.env.CDN_URL || "https://assets.test.datacite.org",
     JWT_PUBLIC_KEY: process.env.JWT_PUBLIC_KEY || null,
@@ -88,6 +90,8 @@ module.exports = function(environment) {
     ENV['simple-auth'] = {
       store: 'simple-auth-session-store:ephemeral'
     }
+    ENV.API_JWT= process.env.API_JWT || '',
+
 
     ENV.APP.rootElement = '#ember-testing';
 

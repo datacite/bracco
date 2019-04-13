@@ -15,10 +15,14 @@ FactoryGuy.define('doi', {
       resourceType: 'Substance'
     },
     schemaVersion: "http://datacite.org/schema/kernel-4",
-    state: "searchable",
+    state: "findable",
     publicationYear: 2017,
+    created: "2017-09-27T14:08:02.000Z",
     registered: "2017-09-27T14:08:02.000Z",
     updated: "2017-09-27T14:08:02.000Z"
+  },
+  empty: {
+    creators: []
   }
 });
 
@@ -27,7 +31,9 @@ FactoryGuy.define('creator', {
     name: 'Patel, Mitesh',
     givenName: 'Mitesh',
     familyName: 'Patel',
-    nameType: 'Personal'
+    nameType: 'Personal',
+    nameIdentifiers: FactoryGuy.hasMany('nameIdentifier'),
+    affiliation: ['Cambridge University']
   }
 });
 
@@ -40,5 +46,13 @@ FactoryGuy.define('title', {
 FactoryGuy.define('description', {
   default: {
     description: 'Description of submitted chemical data for InChIKey YAPQBXQYLJRXSA-UHFFFAOYSA-N'
+  }
+});
+
+FactoryGuy.define('nameIdentifier', {
+  default: {
+    nameIdentifier: 'https://orcid.org/0000-0003-1419-2405',
+    nameIdentifierScheme: 'ORCID',
+    schemeUri: 'https://orcid.org'
   }
 });

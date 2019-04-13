@@ -2,11 +2,8 @@ import { computed } from '@ember/object';
 import DS from 'ember-data';
 import { validator, buildValidations } from 'ember-cp-validations';
 import ENV from 'bracco/config/environment';
-// import {
-//   fragment,
-//   fragmentArray,
-//   array
-// } from 'ember-data-model-fragments/attributes';
+import Model from 'ember-data/model';
+import { fragmentArray } from 'ember-data-model-fragments/attributes';
 
 const Validations = buildValidations({
   details: [
@@ -63,28 +60,6 @@ const Validations = buildValidations({
       presence: true,
       isWarning: computed('model.state', 'model.prefix', function () {
         return (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
-      })
-    })
-  ],
-  creators: [
-    validator('presence', {
-      presence: true,
-      isWarning: computed('model.state', 'model.prefix', function () {
-        return (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
-      }),
-      disabled: computed('model.mode', function () {
-        return !["new", "edit"].includes(this.model.get('mode'));
-      })
-    })
-  ],
-  titles: [
-    validator('presence', {
-      presence: true,
-      isWarning: computed('model.state', 'model.prefix', function () {
-        return (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
-      }),
-      disabled: computed('model.mode', function () {
-        return !["new", "edit"].includes(this.model.get('mode'));
       })
     })
   ],
@@ -151,10 +126,11 @@ const Validations = buildValidations({
         return !["upload", "modify"].includes(this.model.get('mode'));
       })
     })
-  ]
+  ],
+  'descriptions': validator('has-many')
 });
 
-export default DS.Model.extend(Validations, {
+export default Model.extend(Validations, {
   client: DS.belongsTo('client', {
     async: true
   }),
@@ -166,8 +142,8 @@ export default DS.Model.extend(Validations, {
   suffix: DS.attr('string'),
   url: DS.attr('string'),
   contentUrl: DS.attr(),
-  creators: DS.attr({ defaultValue: null }),
-  titles: DS.attr(),
+  creators: fragmentArray('creator'),
+  titles: fragmentArray('title'),
   publisher: DS.attr('string'),
   bcontainer: DS.attr(),
   publicationYear: DS.attr('number'),
@@ -181,7 +157,7 @@ export default DS.Model.extend(Validations, {
   formats: DS.attr(),
   version: DS.attr('string'),
   rightsList: DS.attr(),
-  descriptions: DS.attr(),
+  descriptions: fragmentArray('description', { defaultValue: [] }),
   geoLocations: DS.attr(),
   fundingReferences: DS.attr(),
   landingPage: DS.attr(),
@@ -197,41 +173,6 @@ export default DS.Model.extend(Validations, {
   registered: DS.attr('date'),
   updated: DS.attr('date'),
   mode: DS.attr('string'),
-
-  creatorsCsv: computed('creators', {
-    get() {
-      if (!this.creators) {
-        return ""
-      } else {
-        return this.creators.map(function (a) {
-          if (a.familyName) {
-            return [a.familyName, a.givenName].join(", ");
-          } else {
-            return a.name;
-          }
-        }).join("\n");
-      }
-    },
-    set(key, value) {
-      let creatorList = value.split("\n").reduce(function (sum, a) {
-        if (a.length > 0) {
-          let names = a.split(",")
-          let creator = {}
-          if (names.length > 1) {
-            creator = { familyName: names[0].trim(), givenName: names[1].trim() };
-          } else {
-            creator = { name: a };
-          }
-          sum.pushObject(creator);
-        }
-        return sum;
-      }, []);
-
-      this.set('creators', creatorList);
-
-      return value;
-    }
-  }),
 
   identifier: computed('doi', function () {
     if (ENV.API_URL == "https://api.datacite.org") {
@@ -249,9 +190,5 @@ export default DS.Model.extend(Validations, {
     } else {
       return null;
     }
-  }),
-  isSourceForm: computed('source', function () {
-    return this.get('source') == "fabricaForm";
-  }),
-
+  })
 });

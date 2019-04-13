@@ -1,0 +1,12 @@
+<div class="form-group {{if hasErrors 'has-error'}} {{if isValidating 'has-success'}}">
+  <label class="control-label col-md-3">Creator(s)</label>
+  <div class="col-md-9">
+    {{#each model.creators as |creator index|}}
+      {{doi-creator model=model fragment=creator form=form index=index setIsValidating=(action "setIsValidating") setHasErrors=(action "setHasErrors")}}
+    {{/each}}
+
+    {{#if (lte model.creators.length 24)}}
+      {{#bs-button id="add-creator" class="btn-sm" outline=true onClick=(action "addCreator")}}{{fa-icon "plus"}} Add another creator{{/bs-button}}
+    {{/if}}
+  </div>
+</div>

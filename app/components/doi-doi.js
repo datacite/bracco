@@ -31,15 +31,20 @@ export default Component.extend({
   setDefaultPrefix() {
     let self = this;
     this.store.query('prefix', { 'client-id': this.client.get('id'), sort: 'name', 'page[size]': 25 }).then(function(prefixes) {
-      self.set('prefixes', prefixes);
+      
+      if ((typeof self.get('model').get('doi')) == 'undefined') {
+        self.set('prefixes', prefixes);
+      }
 
       // use first prefix that is not 10.5072 if it exists
       prefixes = prefixes.mapBy('id').removeObject('10.5072')
       let prefix = prefixes.length > 0 ? prefixes.get('firstObject') : '10.5072';
 
+
+
       self.get('model').set('prefix', prefix);
       
-      if(typeof self.get('model').get('doi') == 'undefined'){
+      if (typeof self.get('model').get('doi') == 'undefined') {
         self.generate();
       }
     });

@@ -33,7 +33,7 @@ module('Acceptance | provider_admin | client', function(hooks) {
     assert.dom('h2.work').hasText('Alfred Wegener Institute');
     assert.dom('a.nav-link.active').hasText('Settings');
     assert.dom('button#edit-client').includesText('Update Client');
-    assert.dom('button#delete-client').includesText('Delete Client');
+    assert.dom('button#delete-client').includesText('Delete');
   });
 
   test('visiting client AWI prefixes', async function(assert) {
@@ -68,4 +68,18 @@ module('Acceptance | provider_admin | client', function(hooks) {
     // assert.dom('a#upload-doi').doesNotExist();
     // assert.dom('a#transfer-dois').includesText('Transfer DOIs');
   });
+
+  test('fail creating a new DOI for client', async function(assert) {
+    await authenticateSession({
+      token_type: 'Bearer',
+      uid: 'tib',
+      name: 'Technische Informationsbibliothek',
+      role_id: 'provider_admin',
+      provider_id: 'tib'
+    });
+    await visit('/clients/tib.awi/dois');
+
+    assert.dom('new-doi').doesNotExist();
+  });
+
 });

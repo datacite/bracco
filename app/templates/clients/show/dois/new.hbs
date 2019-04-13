@@ -18,18 +18,20 @@
 
       {{form.element 
         controlType="text" 
-        label="URL" 
+        label="URL"
+        id="url"
         property="url" 
         helpText="The location of the landing page with more information about the resource." 
         required=false
       }}
 
-      {{doi-creator model=model.doi form=form}}
+      {{doi-creators model=model.doi form=form}}
       {{doi-titles model=model.doi form=form}}
       
       {{form.element 
         controlType="text" 
         label="Publisher" 
+        id="publisher"
         property="publisher" 
         helpText="The name of the entity that holds, archives, publishes prints, distributes, releases, issues, or produces the resource." 
         required=false
@@ -37,6 +39,7 @@
       {{form.element 
         controlType="text" 
         label="Publication Year" 
+        id="publication-year"
         property="publicationYear" 
         helpText="The year when the resource was or will be made publicly available. Must be between 1450 and 2020." 
         required=false
@@ -48,7 +51,7 @@
       {{model-validation-errors model=model.doi form=form}}
 
       <div class="col-md-9 col-md-offset-3">
-        <button type="submit" class="btn btn-sm btn-fill">Create DOI</button>
+        <button type="submit" id="create" class="btn btn-sm btn-fill">Create DOI</button>
         <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
       </div>
     {{/bs-form}}

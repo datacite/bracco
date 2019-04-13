@@ -163,7 +163,7 @@ export default Component.extend(Validations, {
       let self = this;
       if (this.confirmId === provider.get('symbol')) {
         provider.destroyRecord().then(function () {
-          self.get('router').transitionTo('/providers');
+          self.router.transitionTo('/providers');
         }).catch(function(reason){
           if (console.debug) {
             console.debug(reason);

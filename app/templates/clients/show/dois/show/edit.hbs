@@ -13,12 +13,29 @@
     </div>
     {{#bs-form formLayout="horizontal" horizontalLabelGridClass="col-md-3" model=model onSubmit=(action "submit" model)
     as |form|}}
-    {{doi-form model=model form=form}}
+      {{form.element controlType="text" label="DOI" property="doi" helpText="The globally unique string that identifies
+the resource and can't be changed. DOIs with demo prefix 10.5072 will always remain in Draft state."
+disabled=true}}
 
-    <div class="col-md-9 col-md-offset-3">
-      <button type="submit" class="btn btn-sm btn-fill">Update DOI</button>
-      <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
-    </div>
+      {{doi-state model=model form=form}}
+      {{doi-url model=model form=form}}
+      {{doi-creators model=model form=form}}
+      {{doi-titles model=model form=form}}
+
+      {{form.element id="publisher" controlType="text" label="Publisher" property="publisher" helpText="The name of the entity that
+      holds, archives, publishes prints, distributes, releases, issues, or produces the resource." required=false}}
+      {{form.element id="publication-year" controlType="text" label="Publication Year" property="publicationYear" helpText="The year when the
+      resource was or will be made publicly available. Must be between 1450 and 2020." required=false}}
+
+      {{doi-types model=model form=form}}
+      {{doi-descriptions model=model form=form}}
+
+      {{model-validation-errors model=model form=form}}
+
+      <div class="col-md-9 col-md-offset-3">
+        <button type="submit" id="update-doi" class="btn btn-sm btn-fill">Update DOI</button>
+        <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
+      </div>
     {{/bs-form}}
 
   </div>

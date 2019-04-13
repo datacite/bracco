@@ -1,5 +1,6 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
+import { isBlank } from '@ember/utils';
 
 export default Controller.extend({
   store: service(),
@@ -27,13 +28,27 @@ export default Controller.extend({
       // schema-version will be determined by API
       doi.set('schemaVersion', null);
 
-      // convert title and description back into array
-      if (doi.get('titles') && doi.get('titles').constructor !== Array) {
-        doi.set('titles', [{ title: doi.get('titles') }]);
-      }
-      if (doi.get('descriptions') && doi.get('descriptions').constructor !== Array) {
-        doi.set('descriptions', [{ description: doi.get('descriptions'), descriptionType: 'Abstract' }]);
-      }
+      // track use of the form
+      doi.set("source", "fabricaForm");
+
+      // don't send xml
+      doi.set("xml", null);
+
+      // only store name identifiers with a value
+      // store affiliations only with a value and as an array of strings
+      doi.get('creators').forEach((creator) => {
+        creator.set('nameIdentifiers', creator.get('nameIdentifiers').filter(function(nameIdentifier) {
+          return !isBlank(nameIdentifier.nameIdentifier);
+        }));
+        creator.set('affiliation', creator.get('affiliation').filter(function(affiliation) {
+          return !isBlank(affiliation);
+        }));
+      });
+
+      // only store descriptions with a description text
+      doi.set('descriptions', doi.get('descriptions').filter(function(description) {
+        return !isBlank(description.description);
+      }));
 
       let self = this;
       doi.save().then(function (doi) {

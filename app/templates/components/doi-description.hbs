@@ -1,0 +1,49 @@
+{{#if (gt index 0)}}
+  <div class="input-group">
+    <div class="{{if isValidating 'has-warning'}}">
+      <textarea class="form-control description-field" rows="4" style="resize:none" value={{fragment.description}}
+      oninput={{action "updateDescription" value="target.value"}}/>
+    </div>
+    <span class="input-group-addon">
+    {{#bs-button outline=true onClick=(action "deleteDescription" index)}}{{fa-icon "trash" pull="left" style="margin:0;"}}{{/bs-button}}
+    </span>
+  </div>
+{{else}}
+  <div class="{{if isValidating 'has-warning'}}">
+    <textarea class="form-control description-field" rows="4" style="resize:none" value={{fragment.description}}
+      oninput={{action "updateDescription" value="target.value"}}/>
+  </div>
+{{/if}}
+
+  {{#if errorMessage}}
+    <div class="help-block help-block-fragment has-error">{{errorMessage}}</div>
+  {{else if isValidating}}
+    <div class="help-block help-block-fragment has-warning">{{seriesWarningMessage}}</div>
+  {{else if isSeriesInformation}}
+    <div class="help-block help-block-fragment title-field">Enter series information in the recommended format of series title, followed by comma and optional volume(issue), firstpage-lastpage</div>
+  {{else}}
+    <div class="help-block help-block-fragment title-field">One or more names or titles by which the resource is known.</div>
+  {{/if}}
+
+<div class="power-select-label">
+  <label for="descriptionType" class="subtitle">Description Type</label>
+</div>
+
+<div class="power-select-fragment">
+  {{#form.element controlType="power-select" value=fragment.descriptionType options=descriptionTypes destination=fragment.descriptionType disabled=disabled as |el|}}
+    {{el.control class="description-types" onChange=(action "selectDescriptionType") placeholder="Select Description Type" allowClear=false}}
+  {{/form.element}}
+</div>
+
+
+<div class="power-select-label">
+  <label for="descriptionLang" class="subtitle">Language (optional)</label>
+</div>
+
+<div class="power-select-fragment description-langs">
+  {{#form.element controlType="power-select" disabled=disabled value=language options=languages as |el|}}
+    {{el.control class="description-langs" onChange=(action "selectLanguage") search=(action "searchLanguage") placeholder="Select Language" searchPlaceholder="Type to search..." allowClear=true }}
+  {{/form.element}}
+</div>
+
+<hr />

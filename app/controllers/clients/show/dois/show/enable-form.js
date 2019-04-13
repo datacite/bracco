@@ -7,7 +7,7 @@ export default Controller.extend({
   actions: {
     enable(doi) {
       let self = this;
-      doi.set("source", "fabricaForm")
+      doi.set("source", "fabrica")
       doi.save().then(function (doi) {
         self.transitionToRoute('clients.show.dois.show', doi.get('client').get('id'), doi);
       });

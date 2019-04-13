@@ -39,7 +39,7 @@ export default Service.extend({
           self.set('jwt', jwt);
           self.initUser(payload);
         } else if (error.message !== "jwt must be provided") {
-          self.get('session').invalidate().then(function () {
+          self.session.invalidate().then(function () {
             self.get('flashMessages').danger('Unable to authenticate because the token was wrong or has expired.');
           });
         }

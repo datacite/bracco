@@ -1,8 +1,8 @@
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
-import { CanMixin } from 'ember-can';
 
-export default Route.extend(CanMixin, {
+export default Route.extend({
+  can: service(),
   currentUser: service(),
   flashMessages: service(),
 
@@ -18,19 +18,19 @@ export default Route.extend(CanMixin, {
       }
 
       self.get('flashMessages').warning('DOI Fabrica is currently unavailable due to a DataCite API problem. We apologize for the inconvenience and are working hard to restore the service. Please check back later or contact DataCite Support if you have a question.');
-      return self.transitionTo('index');
+      self.transitionTo('index');
     });
   },
 
   afterModel() {
-    if (!this.can('read index') && this.currentUser) {
+    if (this.get('can').cannot('read index') && this.currentUser) {
       let home = this.currentUser.get('home');
       if (home && home.id) {
-        return this.transitionTo(home.route, home.id);
+        this.transitionTo(home.route, home.id);
       } else if (home) {
-        return this.transitionTo(home.route);
+        this.transitionTo(home.route);
       } else {
-        return this.transitionTo('index');
+        this.transitionTo('index');
       }
     }
   },
