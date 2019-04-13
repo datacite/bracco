@@ -24,12 +24,12 @@
 {{#if showPersonal}}
   <div>
     <label for="givenName" class="subtitle">Given Name</label>
-    {{input type="text" class="form-control given-name-fields" value=fragment.givenName oninput=(action "updateGivenName") onblur=(action "validateGivenName") readonly=isReadonlyNameParts}}
+    {{input type="text" class="form-control given-name-field" value=fragment.givenName oninput=(action "updateGivenName") onblur=(action "validateGivenName") readonly=isReadonlyNameParts}}
   </div>
 
   <div>
     <label for="familyName" class="subtitle">Family Name</label>
-    {{input type="text" class="form-control family-name-fields" value=fragment.familyName oninput=(action "updateFamilyName") onblur=(action "validateFamilyName") readonly=isReadonlyNameParts}}
+    {{input type="text" class="form-control family-name-field" value=fragment.familyName oninput=(action "updateFamilyName") onblur=(action "validateFamilyName") readonly=isReadonlyNameParts}}
   </div>
 {{/if}}
 
@@ -60,8 +60,8 @@
   {{#if (gt fragment.affiliation.length 0)}}
     <label for="affiliation" class="subtitle">Affiliation (optional)</label>
 
-    {{#each fragment.affiliation as |aff index|}}
-      {{doi-affiliation model=model creator=fragment affiliation=aff form=form index=index}}
+    {{#each fragment.affiliation as |affiliation index|}}
+      {{doi-affiliation model=model creator=fragment affiliation=affiliation form=form index=index}}
     {{/each}}
 
     {{#if (not hasErrors)}}

@@ -7,6 +7,9 @@ export default Component.extend({
   didReceiveAttrs() {
     this._super(...arguments);
 
+    if (!this.model.get('creators')) {
+      this.model.set('creators', []);
+    }
     if (this.model.get('creators').length == 0) {
       this.model.get('creators').createFragment();
     }

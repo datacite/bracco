@@ -5,7 +5,6 @@ export default Component.extend({
   store: service(),
 
   organizations: [],
-  organization: null,
 
   actions: {
     searchOrganization(query) {
@@ -17,9 +16,12 @@ export default Component.extend({
       });
     },
     selectOrganization(organization) {
-      //console.log(this.creator.get('affiliation').firstObject())
-      this.set('organization', organization)
-      this.creator.set('affiliation', this.creator.get('affiliation').replace(this.index, 1, [organization]));
+      this.set('affiliation', organization);
+      
+      //this.creator.get('affiliation')[this.index] = organization;
+      console.log(this.affiliation)
+      this.creator.get('affiliation').replace(this.index, 1, [organization]);
+      console.log(this.creator.get('affiliation').length)
     },
     deleteAffiliation() {
       this.creator.get('affiliation').removeAt(this.index);

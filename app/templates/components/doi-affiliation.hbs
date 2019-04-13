@@ -1,18 +1,18 @@
 {{#if (gt index 0)}}
   <div class="input-group">
     <div class="power-select-fragment">
-      {{#form.element controlType="power-select" disabled=disabled value=organization options=organizations as |el|}}
+      {{#form.element controlType="power-select" disabled=disabled value=affiliation options=organizations as |el|}}
         {{el.control onChange=(action "selectOrganization") search=(action "searchOrganization") placeholder="Select Organization" searchPlaceholder="Type to search..." allowClear=true}}
       {{/form.element}}
     </div>
-    <span class="input-group-addon">
+    <span class="input-group-addon" style="vertical-align:top;padding-top:3px;">
     {{#bs-button outline=true onClick=(action "deleteAffiliation" index)}}{{fa-icon "trash" pull="left" style="margin:0;"}}{{/bs-button}}
     </span>
   </div>
 {{else}}
   <div class="power-select-fragment">
-    {{#form.element controlType="power-select" disabled=disabled value=organization options=organizations as |el|}}
-      {{el.control onChange=(action "selectOrganization") search=(action "searchOrganization") placeholder="Select Organization" searchPlaceholder="Type to search..." allowClear=true}}
+    {{#form.element controlType="power-select" disabled=disabled value=affiliation options=organizations as |el|}}
+      {{el.control onChange=(action "selectOrganization") search=(action "searchOrganization") placeholder="Select Affiliation" searchPlaceholder="Type to search..." allowClear=true}}
     {{/form.element}}
   </div>
 {{/if}}
