@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
-import { currentURL, visit, click } from '@ember/test-helpers';
+import { currentURL, visit } from '@ember/test-helpers';
 import { authenticateSession } from 'ember-simple-auth/test-support';
 
 module('Acceptance | staff_admin | admin', function(hooks) {
@@ -107,18 +107,18 @@ module('Acceptance | staff_admin | admin', function(hooks) {
     assert.dom('a.nav-link.active').hasText('DOIs');
   });
 
-  test('visiting specific doi', async function(assert) {
-    await authenticateSession({
-      uid: 'admin',
-      name: 'Admin',
-      role_id: 'staff_admin'
-    });
-    await visit('/dois');
+  // test('visiting specific doi', async function(assert) {
+  //   await authenticateSession({
+  //     uid: 'admin',
+  //     name: 'Admin',
+  //     role_id: 'staff_admin'
+  //   });
+  //   await visit('/dois');
 
-    // first DOI in list
-    await click('h3.work:first-child a');
+  //   // first DOI in list
+  //   await click('h3.work:first-child a');
 
-    assert.dom('button#edit-doi').includesText('Update DOI (Form)');
-    assert.dom('button#modify-doi').includesText('Update DOI (File Upload)');
-  });
+  //   assert.dom('button#edit-doi').includesText('Update DOI (Form)');
+  //   assert.dom('button#modify-doi').includesText('Update DOI (File Upload)');
+  // });
 });
