@@ -1,16 +1,17 @@
-// import { module, test } from 'qunit';
-// import { setupRenderingTest } from 'ember-qunit';
-// import { render,  fillIn, pauseTest } from '@ember/test-helpers';
-// import hbs from 'htmlbars-inline-precompile';
-// import { setupFactoryGuy, make } from 'ember-data-factory-guy';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render } from '@ember/test-helpers';
+import hbs from 'htmlbars-inline-precompile';
+import { setupFactoryGuy, make } from 'ember-data-factory-guy';
 
-// module('Integration | Component | doi-title', function(hooks) {
-//   setupRenderingTest(hooks);
+module('Integration | Component | doi title', function(hooks) {
+  setupRenderingTest(hooks);
+  setupFactoryGuy(hooks);
 
-//   test('it renders', async function(assert) {
-//     await render(hbs`{{doi-title}}`);
-//     await fillIn('input.title-field', "Abhinandan: Crowds gather for Indian pilots release");
-//     await pauseTest();
-//     assert.dom('input.title-field').hasValue("Abhinandan: Crowds gather for Indian pilots release");
-//   });
-// });
+  test('it renders', async function(assert) {
+    this.set('model', make('doi'));
+    await render(hbs`{{doi-title model=model}}`);
+
+    assert.dom('*').hasText('One or more names or titles by which the resource is known. Title Type (optional) Language (optional)');
+  });
+});
