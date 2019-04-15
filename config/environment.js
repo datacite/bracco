@@ -24,8 +24,7 @@ module.exports = function(environment) {
     },
     'polyfill-io': {
       features: [
-        'default-3.6',
-        'Intl.~locale.en-US'
+        'default-3.6'
       ]
     },
     emberTracker: {
