@@ -1,26 +1,11 @@
 import Component from '@ember/component';
-import { validator, buildValidations } from 'ember-cp-validations';
 import { computed } from '@ember/object';
 import { isArray } from '@ember/array';
 
-const Validations = buildValidations({
-  'fragment.name': [
-    validator('presence', {
-      presence: true,
-      isWarning: computed('model.model.state', 'model.model.prefix', function () {
-        return (this.get('model.model.state') === 'draft' || this.get('model.model.prefix') === '10.5072');
-      }),
-      disabled: computed('model.model.mode', function () {
-        return !["new", "edit"].includes(this.get('model.model.mode'));
-      })
-    })
-  ]
-});
-
-export default Component.extend(Validations, {
-  errorMessage: computed('validations.messages', function () {
-    if (this.get('validations.messages').length > 0) {
-      return this.get('validations.messages').get('firstObject');
+export default Component.extend({
+  errorMessage: computed('fragment.validations.messages', function () {
+    if (this.get('fragment.validations.messages').length > 0) {
+      return this.get('fragment.validations.messages').get('firstObject');
     } else {
       return null;
     }

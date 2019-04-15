@@ -38,22 +38,24 @@
     <label for="name" class="subtitle">Name{{if showPersonal ' (from Given Name and Family Name)'}}</label>
   </div>
   <div class="input-group">
-    {{input type="text" class="form-control creator-field" value=fragment.name oninput=(action "updateName") onblur=(action "validateName") readonly=isReadonly}}
+    {{input type="text" class="form-control creator-field no-error" value=fragment.name oninput=(action "updateName") readonly=isReadonly}}
     <span class="input-group-btn">
       {{#bs-button outline=true onClick=(action "deleteCreator" index)}}{{fa-icon "trash"}}{{/bs-button}}
     </span>
   </div>
+
+  <div class="help-block help-block-fragment no-error">The main {{if showPersonal 'researchers' 'organizations'}} involved in producing the data, or the authors of the publication, in priority order.</div>
 {{else}}
   <div>
     <label for="name" class="subtitle">Name{{if showPersonal ' (from Given Name and Family Name)'}}</label>
   </div>
   {{input type="text" class="form-control creator-field" value=fragment.name oninput=(action "updateName") onblur=(action "validateName") readonly=isReadonly}}
-{{/if}}
-
-{{#if errorMessage}}
-  <div class="help-block help-block-fragment has-error">{{errorMessage}}</div>
-{{else}}
-  <div class="help-block help-block-fragment">The main {{if showPersonal 'researchers' 'organizations'}} involved in producing the data, or the authors of the publication, in priority order.</div>
+  
+  {{#if errorMessage}}
+    <div class="help-block help-block-fragment has-error">{{errorMessage}}</div>
+  {{else}}
+    <div class="help-block help-block-fragment">The main {{if showPersonal 'researchers' 'organizations'}} involved in producing the data, or the authors of the publication, in priority order.</div>
+  {{/if}}
 {{/if}}
 
 {{#if showPersonal}}

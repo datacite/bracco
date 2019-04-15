@@ -2,7 +2,11 @@
   <label class="control-label col-md-3">Creator(s)</label>
   <div class="col-md-9">
     {{#each model.creators as |creator index|}}
-      {{doi-creator model=model fragment=creator form=form index=index setIsValidating=(action "setIsValidating") setHasErrors=(action "setHasErrors")}}
+      {{#if (gt index 0)}}
+        {{doi-creator model=model fragment=creator form=form index=index}}
+      {{else}}
+        {{doi-creator model=model fragment=creator form=form index=index setIsValidating=(action "setIsValidating") setHasErrors=(action "setHasErrors")}}
+      {{/if}}
     {{/each}}
 
     {{#if (lte model.creators.length 24)}}
