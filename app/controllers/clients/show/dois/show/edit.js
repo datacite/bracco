@@ -50,6 +50,11 @@ export default Controller.extend({
         return !isBlank(description.description);
       }));
 
+      // only store titles with a title text
+      doi.set('titles', doi.get('titles').filter(function(title) {
+        return !isBlank(title.title);
+      }));
+
       let self = this;
       doi.save().then(function (doi) {
 
@@ -59,6 +64,12 @@ export default Controller.extend({
     cancel() {
       this.model.rollbackAttributes();
       this.transitionToRoute('clients.show.dois.show', this.model.get('client.id'), this.model);
+    },
+    setCreatorValidations(value) {
+      console.log(value)
+    },
+    setTitleValidations(value) {
+      console.log(value)
     }
   }
 });

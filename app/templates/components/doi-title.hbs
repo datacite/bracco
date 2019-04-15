@@ -1,18 +1,19 @@
 {{#if (gt index 0)}}
   <div class="input-group">
-    <input type="text" class="form-control {{if errorMessage 'has-error'}} {{if isValidating 'has-success'}} title-field" value={{fragment.title}} oninput={{action "updateTitle" value="target.value"}} onblur={{action "validateTitle"}} disabled={{disabled}}/>
+    {{input type="text" class="form-control title-field no-error" value=fragment.title onchange=(action "updateTitle")}}
     <span class="input-group-btn">
       {{#bs-button outline=true onClick=(action "deleteTitle" index)}}{{fa-icon "trash"}}{{/bs-button}}
     </span>
   </div>
+  <div class="help-block help-block-fragment title-field no-error">One or more names or titles by which the resource is known.</div>
 {{else}}
-  <input type="text" class="form-control {{if errorMessage 'has-error'}} {{if isValidating 'has-success'}} title-field" value={{fragment.title}} oninput={{action "updateTitle" value="target.value"}} onblur={{action "validateTitle"}}/>
-{{/if}}
+  {{input type="text" class="form-control title-field" value=fragment.title onchange=(action "updateTitle") focusOut=(action "validateTitle")}}
 
-{{#if errorMessage}}
-  <div class="help-block help-block-fragment has-error">{{errorMessage}}</div>
-{{else}}
-  <div class="help-block help-block-fragment title-field">One or more names or titles by which the resource is known.</div>
+  {{#if errorMessage}}
+    <div class="help-block help-block-fragment has-error">{{errorMessage}}</div>
+  {{else}}
+    <div class="help-block help-block-fragment title-field">One or more names or titles by which the resource is known.</div>
+  {{/if}}
 {{/if}}
 
 <div class="power-select-label">

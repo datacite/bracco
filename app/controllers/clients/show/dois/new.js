@@ -38,8 +38,14 @@ export default Controller.extend({
         }));
       });
       
+      // only store descriptions with a description text
       doi.set('descriptions', doi.get('descriptions').filter(function(description) {
         return !isBlank(description.description);
+      }));
+
+      // only store titles with a title text
+      doi.set('titles', doi.get('titles').filter(function(title) {
+        return !isBlank(title.title);
       }));
 
       let self = this;
@@ -56,6 +62,9 @@ export default Controller.extend({
     },
     cancel() {
       this.transitionToRoute('clients.show.dois', this.get('model.client.id'));
+    },
+    setTitleValidations(value) {
+      console.log(value)
     }
   }
 });

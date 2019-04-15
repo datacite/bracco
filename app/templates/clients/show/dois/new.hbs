@@ -25,8 +25,8 @@
         required=false
       }}
 
-      {{doi-creators model=model.doi form=form}}
-      {{doi-titles model=model.doi form=form}}
+      {{doi-creators model=model.doi form=form setCreatorValidations=(action "setCreatorValidations")}}
+      {{doi-titles model=model.doi form=form setTitleValidations=(action "setTitleValidations")}}
       
       {{form.element 
         controlType="text" 
@@ -51,7 +51,7 @@
       {{model-validation-errors model=model.doi form=form}}
 
       <div class="col-md-9 col-md-offset-3">
-        <button type="submit" id="create" class="btn btn-sm btn-fill">Create DOI</button>
+        <button type="submit" id="create" class="btn btn-sm btn-fill" disabled={{v-get model 'isInvalid'}}>Create DOI</button>
         <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
       </div>
     {{/bs-form}}
