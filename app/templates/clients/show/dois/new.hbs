@@ -25,8 +25,8 @@
         required=false
       }}
 
-      {{doi-creators model=model.doi form=form setCreatorValidations=(action "setCreatorValidations")}}
-      {{doi-titles model=model.doi form=form setTitleValidations=(action "setTitleValidations")}}
+      {{doi-creators model=model.doi form=form}}
+      {{doi-titles model=model.doi form=form}}
       
       {{form.element 
         controlType="text" 

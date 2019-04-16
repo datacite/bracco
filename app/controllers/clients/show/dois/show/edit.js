@@ -64,12 +64,6 @@ export default Controller.extend({
     cancel() {
       this.model.rollbackAttributes();
       this.transitionToRoute('clients.show.dois.show', this.model.get('client.id'), this.model);
-    },
-    setCreatorValidations(value) {
-      console.log(value)
-    },
-    setTitleValidations(value) {
-      console.log(value)
     }
   }
 });

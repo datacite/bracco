@@ -5,7 +5,7 @@
       {{#if (gt index 0)}}
         {{doi-title model=model fragment=title form=form index=index}}
       {{else}}
-        {{doi-title model=model fragment=title form=form index=index setIsValidating=(action "setIsValidating") setHasErrors=(action "setHasErrors") setValidations=(action "setValidations")}}
+        {{doi-title model=model fragment=title form=form index=index setIsValidating=(action "setIsValidating") setHasErrors=(action "setHasErrors")}}
       {{/if}}
     {{/each}}
 

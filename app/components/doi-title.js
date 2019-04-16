@@ -18,9 +18,8 @@ export default Component.extend({
   language: computed('fragment.lang', function () {
     return ISO6391.getName(this.get('fragment.lang'));
   }),
-  errorMessage: computed('fragment.validations.messages', 'index', function () {
-    if (this.get('fragment.validations.messages').length > 0 && this.get('index') == 0) {
-      console.log(this.get('fragment.validations.messages'))
+  errorMessage: computed('fragment.validations.messages', function () {
+    if (this.get('fragment.validations.messages').length > 0) {
       return this.get('fragment.validations.messages').get('firstObject');
     } else {
       return null;
@@ -33,6 +32,10 @@ export default Component.extend({
       this.set('isValidating', !!this.get('fragment.title'));
       this.setIsValidating(!!this.get('fragment.title'));
       this.setHasErrors(!this.get('fragment.title'));
+
+      // if (this.setHasErrors) {
+      //   this.model.validations.
+      // }
     }
   },
   

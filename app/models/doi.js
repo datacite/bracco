@@ -63,6 +63,9 @@ const Validations = buildValidations({
       })
     })
   ],
+  'creators': [
+    validator('has-many')
+  ],
   publisher: [
     validator('presence', {
       presence: true,
@@ -108,6 +111,9 @@ const Validations = buildValidations({
       })
     })
   ],
+  'titles': [
+    validator('has-many')
+  ],
   xml: [
     validator('presence', {
       presence: true,
@@ -127,7 +133,9 @@ const Validations = buildValidations({
       })
     })
   ],
-  'descriptions': validator('has-many')
+  'descriptions': [
+    validator('has-many')
+  ]
 });
 
 export default Model.extend(Validations, {
