@@ -505,7 +505,7 @@ module('Acceptance | client_admin | client', function(hooks) {
   
     assert.equal(currentURL(), '/clients/tib.awi/dois/new');
     assert.equal(this.element.querySelector("div#publisher").className, 'form-group has-error has-feedback ember-view');
-    assert.equal(findAll("input.title-field")[0].className, 'form-control has-error  title-field');
+    assert.equal(findAll("input.title-field")[0].className, 'form-control title-field ember-text-field ember-view');
     assert.equal(this.element.querySelector("div#publication-year").className, 'form-group has-error has-feedback ember-view');
   });
 });

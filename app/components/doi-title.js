@@ -19,7 +19,7 @@ export default Component.extend({
     return ISO6391.getName(this.get('fragment.lang'));
   }),
   errorMessage: computed('fragment.validations.messages', 'index', function () {
-    if (this.get('fragment.validations.messages').length > 0 && this.get('index') == 0) {
+    if (this.get('fragment.validations.messages') && this.get('fragment.validations.messages').length > 0 && this.get('index') == 0) {
       return this.get('fragment.validations.messages').get('firstObject');
     } else {
       return null;
