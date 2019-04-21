@@ -1,13 +1,13 @@
 {{#if (gt index 0)}}
   <div class="input-group">
-    {{input type="text" class="form-control title-field no-error" value=fragment.title onchange=(action "updateTitle")}}
+    <input type="text" class="form-control title-field no-error" value={{fragment.title}} oninput={{action "updateTitle" value="target.value"}}/>
     <span class="input-group-btn">
       {{#bs-button outline=true onClick=(action "deleteTitle" index)}}{{fa-icon "trash"}}{{/bs-button}}
     </span>
   </div>
   <div class="help-block help-block-fragment no-error">One or more names or titles by which the resource is known.</div>
 {{else}}
-  {{input type="text" class="form-control title-field" value=fragment.title onchange=(action "updateTitle")}}
+  <input type="text" class="form-control title-field" value={{fragment.title}} oninput={{action "updateTitle" value="target.value"}}/>
 
   {{#if (v-get fragment 'title' 'message')}}
     <div class="help-block help-block-fragment">{{v-get fragment 'title' 'message'}}</div>

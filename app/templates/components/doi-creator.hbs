@@ -49,7 +49,7 @@
   <div>
     <label for="name" class="subtitle">Name{{if showPersonal ' (from Given Name and Family Name)'}}</label>
   </div>
-  <input type="text" class="form-control creator-field no-error" value={{fragment.name}} oninput={{action "updateName" value="target.value"}} readonly={{isReadonly}}/>
+  <input type="text" class="form-control creator-field" value={{fragment.name}} oninput={{action "updateName" value="target.value"}} readonly={{isReadonly}}/>
   
   {{#if errorMessage}}
     <div class="help-block help-block-fragment has-error">{{errorMessage}}</div>
