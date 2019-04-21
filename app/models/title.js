@@ -5,13 +5,17 @@ import { computed } from '@ember/object';
 
 const Validations = buildValidations({
   'title': [
-    validator('presence', {
+    validator('presence', { 
       presence: true,
-      isWarning: computed('model.model.state', 'model.model.prefix', function () {
-        return (this.get('model.model.state') === 'draft' || this.get('model.model.prefix') === '10.5072');
+      isWarning: computed('model._internalModel._recordData.getOwner()', function () {
+        // workaround to look up owner
+        let owner = this.model._internalModel._recordData.getOwner();
+        return owner.state === 'draft' || owner.prefix === '10.5072';
       }),
-      disabled: computed('model.model.mode', function () {
-        return !["new", "edit"].includes(this.get('model.model.mode'));
+      disabled: computed('model._internalModel._recordData.getOwner()', function () {
+        // only validate first title
+        let owner = this.model._internalModel._recordData.getOwner();
+        return this.model !== owner.titles.content[0];
       })
     })
   ]

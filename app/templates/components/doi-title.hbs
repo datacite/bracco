@@ -7,10 +7,10 @@
   </div>
   <div class="help-block help-block-fragment no-error">One or more names or titles by which the resource is known.</div>
 {{else}}
-  {{input type="text" class="form-control title-field" value=fragment.title onchange=(action "updateTitle") focusOut=(action "validateTitle")}}
+  {{input type="text" class="form-control title-field" value=fragment.title onchange=(action "updateTitle")}}
 
-  {{#if errorMessage}}
-    <div class="help-block help-block-fragment">{{errorMessage}}</div>
+  {{#if (v-get fragment 'title' 'messages')}}
+    <div class="help-block help-block-fragment">{{v-get fragment 'title' 'message'}}</div>
   {{else}}
     <div class="help-block help-block-fragment">One or more names or titles by which the resource is known.</div>
   {{/if}}

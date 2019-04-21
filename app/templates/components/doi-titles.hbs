@@ -1,12 +1,8 @@
-<div class="form-group {{if hasErrors 'has-error'}} {{if isValidating 'has-success'}}">
+<div class="form-group {{if (v-get model 'titles' 'errors') 'has-error'}}">
   <label class="control-label col-md-3">Title(s)</label>
   <div class="col-md-9">
     {{#each model.titles as |title index|}}
-      {{#if (gt index 0)}}
-        {{doi-title model=model fragment=title form=form index=index}}
-      {{else}}
-        {{doi-title model=model fragment=title form=form index=index setIsValidating=(action "setIsValidating") setHasErrors=(action "setHasErrors")}}
-      {{/if}}
+      {{doi-title model=model fragment=title form=form index=index}}
     {{/each}}
 
     {{#if (lte model.titles.length 4)}}
