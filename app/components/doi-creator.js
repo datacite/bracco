@@ -91,36 +91,14 @@ export default Component.extend({
   actions: {
     updateName(value) {
       this.fragment.set('name', value);
-      this.set('isValidating', !!value);
-      this.setIsValidating(!!value);
-      this.setHasErrors(!value);
-    },
-    validateName() {
-      this.set('isValidating', !!this.get('fragment.name'));
-      this.setIsValidating(!!this.get('fragment.name'));
-      this.setHasErrors(!this.get('fragment.name'));
     },
     updateGivenName(value) {
       this.fragment.set('givenName', value);
       this.joinNameParts({ givenName: value });
-      this.set('isValidating', false);
-      this.setIsValidating(false);
-      this.setHasErrors(false);
-    },
-    validateGivenName() {
-      this.setIsValidating(false);
-      this.setHasErrors(false);
     },
     updateFamilyName(value) {
       this.fragment.set('familyName', value);
       this.joinNameParts({ familyName: value });
-      this.set('isValidating', false);
-      this.setIsValidating(false);
-      this.setHasErrors(false);
-    },
-    validateFamilyName() {
-      this.setIsValidating(false);
-      this.setHasErrors(false);
     },
     selectNameType(value) {
       this.selectNameType(value);

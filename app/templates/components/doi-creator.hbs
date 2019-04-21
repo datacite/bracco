@@ -24,12 +24,12 @@
 {{#if showPersonal}}
   <div>
     <label for="givenName" class="subtitle">Given Name</label>
-    {{input type="text" class="form-control given-name-field" value=fragment.givenName oninput=(action "updateGivenName") onblur=(action "validateGivenName") readonly=isReadonlyNameParts}}
+    <input type="text" class="form-control given-name-field" value={{fragment.givenName}} oninput={{action "updateGivenName" value="target.value"}} readonly={{isReadonlyNameParts}}/>
   </div>
 
   <div>
     <label for="familyName" class="subtitle">Family Name</label>
-    {{input type="text" class="form-control family-name-field" value=fragment.familyName oninput=(action "updateFamilyName") onblur=(action "validateFamilyName") readonly=isReadonlyNameParts}}
+    <input type="text" class="form-control family-name-field" value={{fragment.familyName}} oninput={{action "updateFamilyName" value="target.value"}} readonly={{isReadonlyNameParts}}/>
   </div>
 {{/if}}
 
@@ -38,7 +38,7 @@
     <label for="name" class="subtitle">Name{{if showPersonal ' (from Given Name and Family Name)'}}</label>
   </div>
   <div class="input-group">
-    {{input type="text" class="form-control creator-field no-error" value=fragment.name oninput=(action "updateName") readonly=isReadonly}}
+    <input type="text" class="form-control creator-field no-error" value={{fragment.name}} oninput={{action "updateName" value="target.value"}} readonly={{isReadonly}}/>
     <span class="input-group-btn">
       {{#bs-button outline=true onClick=(action "deleteCreator" index)}}{{fa-icon "trash"}}{{/bs-button}}
     </span>
@@ -49,7 +49,7 @@
   <div>
     <label for="name" class="subtitle">Name{{if showPersonal ' (from Given Name and Family Name)'}}</label>
   </div>
-  {{input type="text" class="form-control creator-field" value=fragment.name oninput=(action "updateName") onblur=(action "validateName") readonly=isReadonly}}
+  <input type="text" class="form-control creator-field no-error" value={{fragment.name}} oninput={{action "updateName" value="target.value"}} readonly={{isReadonly}}/>
   
   {{#if errorMessage}}
     <div class="help-block help-block-fragment has-error">{{errorMessage}}</div>
@@ -58,19 +58,17 @@
   {{/if}}
 {{/if}}
 
-{{#if showPersonal}}
-  {{#if (gt fragment.affiliation.length 0)}}
-    <label for="affiliation" class="subtitle">Affiliation (optional)</label>
+{{#if (gt fragment.affiliation.length 0)}}
+  <label for="affiliation" class="subtitle">Affiliation (optional)</label>
 
-    {{#each fragment.affiliation as |affiliation index|}}
-      {{doi-affiliation model=model creator=fragment affiliation=affiliation form=form index=index}}
-    {{/each}}
+  {{#each fragment.affiliation as |affiliation index|}}
+    {{doi-affiliation model=model creator=fragment affiliation=affiliation form=form index=index}}
+  {{/each}}
 
-    {{#if (not hasErrors)}}
-      <div class="help-block help-block-fragment affiliation-field">
-         Organization names are provided by the Research Organization Registry (ROR).
-      </div>
-    {{/if}}
+  {{#if (not hasErrors)}}
+    <div class="help-block help-block-fragment affiliation-field">
+        Affiliation names are provided by the Research Organization Registry (ROR).
+    </div>
   {{/if}}
 
   {{#if (lte fragment.affiliation.length 2)}}
