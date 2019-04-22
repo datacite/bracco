@@ -1,7 +1,7 @@
 import Component from '@ember/component';
 
 export default Component.extend({
-  validationsClass: null,
+  validationClass: null,
 
   didReceiveAttrs() {
     this._super(...arguments);
@@ -17,11 +17,11 @@ export default Component.extend({
     },
     setValidationClass() {
       if (this.model.get('validations.attrs.titles.errors').length > 0) {
-        this.set('validationsClass', 'has-error');
+        this.set('validationClass', 'has-error');
       } else if (this.model.get('validations.attrs.titles.warnings').length > 0) {
-        this.set('validationsClass', 'has-warning');
+        this.set('validationClass', 'has-warning');
       } else {
-        this.set('validationsClass', 'has-success');
+        this.set('validationClass', 'has-success');
       }
     }
   }
