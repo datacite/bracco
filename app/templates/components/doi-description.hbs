@@ -7,7 +7,7 @@
     </span>
   </div>
 {{else}}
-  <textarea class="form-control description-field" rows="8" style="resize:none" value={{fragment.description}} 
+  <textarea class="form-control description-field {{if (not isSeriesInformation) 'no-error'}}" rows="8" style="resize:none" value={{fragment.description}} 
     oninput={{action "updateDescription" value="target.value"}}/>
 {{/if}}
 
