@@ -43,6 +43,10 @@ export default Controller.extend({
         creator.set('affiliation', creator.get('affiliation').filter(function(affiliation) {
           return !isBlank(affiliation);
         }));
+        if (creator.nameType === 'Organizational') {
+          creator.set('givenName', null);
+          creator.set('familyName', null);
+        }
       });
 
       // only store descriptions with a description text

@@ -36,6 +36,10 @@ export default Controller.extend({
         creator.set('affiliation', creator.get('affiliation').filter(function(affiliation) {
           return !isBlank(affiliation);
         }));
+        if (creator.nameType === 'Organizational') {
+          creator.set('givenName', null);
+          creator.set('familyName', null);
+        }
       });
       
       // only store descriptions with a description text
@@ -62,6 +66,9 @@ export default Controller.extend({
     },
     cancel() {
       this.transitionToRoute('clients.show.dois', this.get('model.client.id'));
+    },
+    setCreatorValidations(value) {
+      console.log(value)
     },
     setTitleValidations(value) {
       console.log(value)

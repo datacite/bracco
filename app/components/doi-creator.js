@@ -74,10 +74,8 @@ export default Component.extend({
     this.set('nameType', value);
 
     if (this.fragment.get('nameType') === "Personal") {
-      //this.setValidationClass();
       this.set('isReadonly', true);
     } else {
-      this.setValidationClass();
       this.set('isReadonly', false);
     }
   },
