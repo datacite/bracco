@@ -26,50 +26,53 @@ export default Component.extend({
       self.joinNameParts({});
     });
   },
+  updateNameIdentifier(value) {
+    if (value.startsWith('https://orcid.org') || value.startsWith('http://orcid.org')) {
+      let id = value.substr(value.indexOf('0'));
+      this.fragment.set('schemeUri', 'https://orcid.org');
+      this.fragment.set('nameIdentifierScheme', 'ORCID');
+      this.fragment.set('nameIdentifier', 'https://orcid.org/' + id);
+
+      const re = /^(http|https):\/\/orcid\.org\/\d{4}-\d{4}-\d{4}-\d{3}[0-9X]+$/;
+      if (re.test(value)) {
+        this.validateOrcidIdentifier(id);
+      } else {
+        this.creator.set('givenName', null);
+        this.creator.set('familyName', null);
+        this.joinNameParts({});
+      }
+    } else if (value.startsWith('https://ror.org')) {
+      let id = value.substr(8);
+
+      this.fragment.set('schemeUri', 'https://ror.org');
+      this.fragment.set('nameIdentifierScheme', 'ROR');
+      this.fragment.set('nameIdentifier', value);
+
+      const re = /^https:\/\/ror\.org\/0\w{6}\d{2}$/;
+      if (re.test(value)) {
+        this.validateRorIdentifier(id);
+      } else {
+        this.creator.set('name', null);
+        this.joinNameParts({});
+      }
+    } else if (value.startsWith('http://isni.org')) {
+      this.fragment.set('schemeUri', 'http://isni.org');
+      this.fragment.set('nameIdentifierScheme', 'ISNI');
+      this.fragment.set('nameIdentifier', value);
+    } else if (value.length == 0) {
+      this.fragment.set('nameIdentifierScheme', null);
+      this.fragment.set('nameIdentifier', null);
+      this.joinNameParts({});
+    } else {
+      this.fragment.set('nameIdentifierScheme', 'Other');
+      this.fragment.set('nameIdentifier', value);
+    }
+    this.setCreatorValidationClass();
+  },
 
   actions: {
     updateNameIdentifier(value) {
-      if (value.startsWith('https://orcid.org') || value.startsWith('http://orcid.org')) {
-        let id = value.substr(value.indexOf('0'));
-        this.fragment.set('schemeUri', 'https://orcid.org');
-        this.fragment.set('nameIdentifierScheme', 'ORCID');
-        this.fragment.set('nameIdentifier', 'https://orcid.org/' + id);
-
-        const re = /^(http|https):\/\/orcid\.org\/\d{4}-\d{4}-\d{4}-\d{3}[0-9X]+$/;
-        if (re.test(value)) {
-          this.validateOrcidIdentifier(id);
-        } else {
-          this.creator.set('givenName', null);
-          this.creator.set('familyName', null);
-          this.joinNameParts({});
-        }
-      } else if (value.startsWith('https://ror.org')) {
-        let id = value.substr(8);
-
-        this.fragment.set('schemeUri', 'https://ror.org');
-        this.fragment.set('nameIdentifierScheme', 'ROR');
-        this.fragment.set('nameIdentifier', value);
-
-        const re = /^https:\/\/ror\.org\/0\w{6}\d{2}$/;
-        if (re.test(value)) {
-          this.validateRorIdentifier(id);
-        } else {
-          this.creator.set('name', null);
-          this.joinNameParts({});
-        }
-      } else if (value.startsWith('http://isni.org')) {
-        this.fragment.set('schemeUri', 'http://isni.org');
-        this.fragment.set('nameIdentifierScheme', 'ISNI');
-        this.fragment.set('nameIdentifier', value);
-      } else if (value.length == 0) {
-        this.fragment.set('nameIdentifierScheme', null);
-        this.fragment.set('nameIdentifier', null);
-        this.joinNameParts({});
-      } else {
-        this.fragment.set('nameIdentifierScheme', 'Other');
-        this.fragment.set('nameIdentifier', value);
-      }
-      this.setCreatorValidationClass();
+      this.updateNameIdentifier(value);
     },
     deleteNameIdentifier() {
       this.creator.get('nameIdentifiers').removeObject(this.fragment);
