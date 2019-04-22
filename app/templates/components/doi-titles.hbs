@@ -1,8 +1,8 @@
-<div class="form-group {{if (v-get model 'titles' 'errors') 'has-error'}}{{if (v-get model 'titles' 'warnings') 'has-warning'}}">
+<div class="form-group {{validationsClass}}">
   <label class="control-label col-md-3">Title(s)</label>
   <div class="col-md-9">
     {{#each model.titles as |title index|}}
-      {{doi-title model=model fragment=title form=form index=index}}
+      {{doi-title model=model fragment=title form=form index=index setValidationClass=(action "setValidationClass")}}
     {{/each}}
 
     {{#if (lte model.titles.length 4)}}
