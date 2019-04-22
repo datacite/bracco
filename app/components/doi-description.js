@@ -20,30 +20,21 @@ export default Component.extend({
     return ISO6391.getName(this.get('fragment.lang'));
   }),
 
-  seriesWarningMessage: computed('fragment.validations.attrs.description', function () {
-    var validation = this.get('fragment.validations.attrs.description');
-    if (validation.hasWarnings) {
-      return validation.warningMessage;
-    } else {
-      return null;
-    }
-  }),
-
   isSeriesInformation: computed('fragment.descriptionType', function () {
     return this.get('fragment.descriptionType') == 'SeriesInformation';
   }),
 
-  isValidating: computed.and('isSeriesInformation', 'seriesWarningMessage').readOnly(),
-
   actions: {
     updateDescription(value) {
       this.fragment.set('description', value);
+      this.setValidationClass();
     },
     deleteDescription() {
       this.model.get('descriptions').removeObject(this.fragment);
     },
     selectDescriptionType(descriptionType) {
       this.fragment.set('descriptionType', descriptionType);
+      this.setValidationClass();
     },
     searchLanguage(query) {
       var languages = languageList.filter(function (language) {
