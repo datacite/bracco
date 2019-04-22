@@ -2,7 +2,11 @@
   <label class="control-label col-md-3">Title(s)</label>
   <div class="col-md-9">
     {{#each model.titles as |title index|}}
-      {{doi-title model=model fragment=title form=form index=index setValidationClass=(action "setValidationClass")}}
+      {{#if (gt index 0)}}
+        {{doi-title model=model fragment=title form=form index=index}}
+      {{else}}
+        {{doi-title model=model fragment=title form=form index=index setValidationClass=(action "setValidationClass")}}
+      {{/if}}
     {{/each}}
 
     {{#if (lte model.titles.length 4)}}

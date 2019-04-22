@@ -32,7 +32,7 @@ module('Integration | Component | doi titles', function(hooks) {
     assert.dom(titles[0]).hasValue("Abhinandan: Crowds gather for Indian pilots release");
     assert.dom(titles[1]).hasValue("Praesent quis blandit odio. Donec justo ex, ");
     assert.equal(titles[0].className, 'form-control title-field');
-    assert.equal(titles[1].className, 'form-control title-field no-error');
+    assert.equal(titles[1].className, 'form-control title-field no-error no-success');
   });
 
   test('no titles', async function(assert) {
