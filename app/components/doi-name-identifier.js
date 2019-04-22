@@ -1,7 +1,6 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 import { validator, buildValidations } from 'ember-cp-validations';
-import { computed } from '@ember/object';
 
 const Validations = buildValidations({
   'fragment.nameIdentifier': [
@@ -11,15 +10,6 @@ const Validations = buildValidations({
 
 export default Component.extend(Validations, {
   store: service(),
-
-  errorMessage: computed('validations.messages', function () {
-    if (this.get('validations.messages').length > 0) {
-      return this.get('validations.messages').get('firstObject');
-    } else {
-      return null;
-    }
-  }),
-  isValidating: false,
 
   validateOrcidIdentifier(id) {
     let self = this;
@@ -86,12 +76,6 @@ export default Component.extend(Validations, {
         this.fragment.set('nameIdentifierScheme', 'Other');
         this.fragment.set('nameIdentifier', value);
       }
-      this.setIsValidating(false);
-      this.setHasErrors(false);
-    },
-    validateNameIdentifier() {
-      this.setIsValidating(false);
-      this.setHasErrors(false);
     },
     deleteNameIdentifier() {
       this.creator.get('nameIdentifiers').removeObject(this.fragment);

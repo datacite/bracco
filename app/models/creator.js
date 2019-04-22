@@ -13,12 +13,42 @@ const Validations = buildValidations({
         let owner = this.model._internalModel._recordData.getOwner();
         return owner.state === 'draft' || owner.prefix === '10.5072';
       }),
-      disabled: computed('model._internalModel._recordData.getOwner()', function () {
-        // only validate first creator
+      disabled: computed('model._internalModel._recordData.getOwner()', 'model.nameType', function () {
+        // only validate first creator and only if nameType is not "Personal"
         let owner = this.model._internalModel._recordData.getOwner();
-        return this.model !== owner.creators.content[0];
+        return this.model !== owner.creators.content[0] || this.model.get('nameType') === "Personal";
       })
     })
+  ],
+  'givenName': [
+    validator('presence', {
+      presence: true,
+      isWarning: computed('model._internalModel._recordData.getOwner()', function () {
+        // workaround to look up owner
+        let owner = this.model._internalModel._recordData.getOwner();
+        return owner.state === 'draft' || owner.prefix === '10.5072';
+      }),
+      disabled: computed('model._internalModel._recordData.getOwner()', 'model.nameType', function () {
+        // only validate first creator and only if nameType is "Personal"
+        let owner = this.model._internalModel._recordData.getOwner();
+        return this.model !== owner.creators.content[0] || this.model.get('nameType') !== "Personal";
+      })
+    })
+  ],
+  'familyName': [
+    validator('presence', {
+      presence: true,
+      isWarning: computed('model._internalModel._recordData.getOwner()', function () {
+        // workaround to look up owner
+        let owner = this.model._internalModel._recordData.getOwner();
+        return owner.state === 'draft' || owner.prefix === '10.5072';
+      }),
+      disabled: computed('model._internalModel._recordData.getOwner()', 'model.nameType', function () {
+        // only validate first creator and only if nameType is "Personal"
+        let owner = this.model._internalModel._recordData.getOwner();
+        return this.model !== owner.creators.content[0] || this.model.get('nameType') !== "Personal";
+      })
+    }),
   ]
 });
 

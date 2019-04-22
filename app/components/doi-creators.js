@@ -1,8 +1,7 @@
 import Component from '@ember/component';
 
 export default Component.extend({
-  isValidating: false,
-  hasErrors: false,
+  validationClass: null,
 
   didReceiveAttrs() {
     this._super(...arguments);
@@ -21,11 +20,14 @@ export default Component.extend({
       this.model.get('creators').get('lastObject').get('nameIdentifiers').createFragment();
       this.model.get('creators').get('lastObject').get('affiliation').createFragment();
     },
-    setIsValidating(value) {
-      this.set('isValidating', value);
-    },
-    setHasErrors(value) {
-      this.set('hasErrors', value);
+    setValidationClass() {
+      if (this.model.get('validations.attrs.creators.errors').length > 0) {
+        this.set('validationClass', 'has-error');
+      } else if (this.model.get('validations.attrs.creators.warnings').length > 0) {
+        this.set('validationClass', 'has-warning');
+      } else {
+        this.set('validationClass', 'has-success');
+      }
     }
   }
 });

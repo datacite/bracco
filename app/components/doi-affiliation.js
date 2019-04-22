@@ -17,11 +17,7 @@ export default Component.extend({
     },
     selectOrganization(organization) {
       this.set('affiliation', organization);
-      
-      //this.creator.get('affiliation')[this.index] = organization;
-      console.log(this.affiliation)
       this.creator.get('affiliation').replace(this.index, 1, [organization]);
-      console.log(this.creator.get('affiliation').length)
     },
     deleteAffiliation() {
       this.creator.get('affiliation').removeAt(this.index);

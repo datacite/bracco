@@ -3,19 +3,10 @@ import { computed } from '@ember/object';
 import { isArray } from '@ember/array';
 
 export default Component.extend({
-  errorMessage: computed('fragment.validations.messages', function () {
-    if (this.get('fragment.validations.messages').length > 0) {
-      return this.get('fragment.validations.messages').get('firstObject');
-    } else {
-      return null;
-    }
-  }),
   showPersonal: computed('fragment.nameType', function () {
     return this.get('fragment.nameType') === 'Personal';
   }),
   isReadonlyNameType: false,
-  isValidating: false,
-  hasErrors: false,
   isReadonly: false,
   isReadonlyNameParts: false,
 
@@ -81,9 +72,12 @@ export default Component.extend({
   selectNameType(value) {
     this.fragment.set('nameType', value);
     this.set('nameType', value);
-    if (value == "Personal") {
+
+    if (this.fragment.get('nameType') === "Personal") {
+      //this.setValidationClass();
       this.set('isReadonly', true);
     } else {
+      this.setValidationClass();
       this.set('isReadonly', false);
     }
   },
@@ -91,14 +85,17 @@ export default Component.extend({
   actions: {
     updateName(value) {
       this.fragment.set('name', value);
+      this.setValidationClass();
     },
     updateGivenName(value) {
       this.fragment.set('givenName', value);
       this.joinNameParts({ givenName: value });
+      this.setValidationClass();
     },
     updateFamilyName(value) {
       this.fragment.set('familyName', value);
       this.joinNameParts({ familyName: value });
+      this.setValidationClass();
     },
     selectNameType(value) {
       this.selectNameType(value);
@@ -111,12 +108,6 @@ export default Component.extend({
     },
     deleteCreator() {
       this.model.get('creators').removeObject(this.fragment);
-    },
-    setIsValidating(value) {
-      this.set('isValidating', value);
-    },
-    setHasErrors(value) {
-      this.set('hasErrors', value);
     },
     setReadOnly(value) {
       this.set('isReadonly', value);
