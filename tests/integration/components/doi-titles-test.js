@@ -31,8 +31,8 @@ module('Integration | Component | doi titles', function(hooks) {
 
     assert.dom(titles[0]).hasValue("Abhinandan: Crowds gather for Indian pilots release");
     assert.dom(titles[1]).hasValue("Praesent quis blandit odio. Donec justo ex, ");
-    assert.equal(titles[0].className, 'form-control title-field ember-text-field ember-view');
-    assert.equal(titles[1].className, 'form-control title-field no-error ember-text-field ember-view');
+    assert.equal(titles[0].className, 'form-control title-field');
+    assert.equal(titles[1].className, 'form-control title-field no-error');
   });
 
   test('no titles', async function(assert) {
@@ -42,6 +42,6 @@ module('Integration | Component | doi titles', function(hooks) {
     let titles = this.element.querySelector('input.title-field');
    
     assert.dom(titles).hasNoValue();
-    assert.equal(titles.className, 'form-control title-field ember-text-field ember-view');
+    assert.equal(titles.className, 'form-control title-field');
   });
 });
