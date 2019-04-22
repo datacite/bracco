@@ -14,7 +14,7 @@ module('Integration | Component | doi description', function(hooks) {
     this.set('fragment', make('description'));
     await render(hbs`{{doi-description model=model fragment=fragment index=0}}`);
 
-    assert.dom('*').hasText('One or more names or titles by which the resource is known. Description Type Language (optional)');
+    assert.dom('*').hasText('All additional information that does not fit in any of the other categories. Description Type Language (optional)');
   });
 
   // test('select type and language values', async function(assert) {
