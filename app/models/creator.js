@@ -49,6 +49,9 @@ const Validations = buildValidations({
         return this.model !== owner.creators.content[0] || this.model.get('nameType') !== "Personal";
       })
     }),
+  ],
+  'nameIdentifiers': [
+    validator('has-many')
   ]
 });
 

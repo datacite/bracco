@@ -1,10 +1,16 @@
 {{#if (gt index 0)}}
   <div class="input-group">
-    <input type="text" class="form-control name-identifier-field no-error no-success" value={{fragment.nameIdentifier}} oninput={{action "updateNameIdentifier" value="target.value"}}/>
+    <input type="text" class="form-control name-identifier-field no-error" value={{fragment.nameIdentifier}} oninput={{action "updateNameIdentifier" value="target.value"}}/>
     <span class="input-group-btn">
       {{#bs-button outline=true onClick=(action "deleteNameIdentifier" index)}}{{fa-icon "trash"}}{{/bs-button}}
     </span>
   </div>
 {{else}}
-  <input type="text" class="form-control name-identifier-field no-error no-success" value={{fragment.nameIdentifier}} oninput={{action "updateNameIdentifier" value="target.value"}}/>
+  <input type="text" class="form-control name-identifier-field {{if (not (v-get fragment 'nameIdentifier' 'messages')) 'no-error'}}" value={{fragment.nameIdentifier}} oninput={{action "updateNameIdentifier" value="target.value"}}/>
+  
+  {{#if (v-get fragment 'nameIdentifier' 'errors')}}
+    <div class="help-block help-block-fragment name-identifier-field ">{{v-get fragment 'nameIdentifier' 'message'}}</div>
+  {{else if (v-get fragment 'nameIdentifier' 'warnings')}}
+    <div class="help-block help-block-fragment name-identifier-field ">{{v-get fragment 'nameIdentifier' 'warningMessage'}}</div>
+  {{/if}}
 {{/if}}

@@ -2,11 +2,17 @@
   <label for="nameIdentifiers" class="subtitle">Name Identifier (optional)</label>
 
   {{#each fragment.nameIdentifiers as |nameIdentifier index|}}
-    {{doi-name-identifier model=model creator=fragment fragment=nameIdentifier form=form index=index joinNameParts=(action "joinNameParts") setNameType=(action "selectNameType") setReadOnly=(action "setReadOnly")}}
+    {{#if (gt index 0)}}
+      {{doi-name-identifier model=model creator=fragment fragment=nameIdentifier form=form index=index joinNameParts=(action "joinNameParts") setNameType=(action "selectNameType") setReadOnly=(action "setReadOnly")}}
+    {{else}}
+      {{doi-name-identifier model=model creator=fragment fragment=nameIdentifier form=form index=index joinNameParts=(action "joinNameParts") setNameType=(action "selectNameType") setCreatorValidationClass=(action "setCreatorValidationClass") setReadOnly=(action "setReadOnly")}}
+    {{/if}}
   {{/each}}
 
-  {{#if (not hasErrors)}}
-    <div class="help-block help-block-fragment name-identifier-field no-error no-success">
+  {{#if (v-get fragment 'nameIdentifiers' 'messages')}}  
+    <br/>
+  {{else}}
+    <div class="help-block help-block-fragment name-identifier-field no-error">
       Uniquely identifies an individual or legal entity, according to various schemas, e.g. ORCID, ROR or ISNI. 
       Use name identifier expressed as URL. The Given Name, Family Name and Name will automatically be filled out for ORCID and ROR identifiers.
     </div>
@@ -25,7 +31,7 @@
   {{#if showPersonal}}
     <div>
       <label for="givenName" class="subtitle">Given Name</label>
-      <input type="text" class="form-control given-name-field no error no-success" value={{fragment.givenName}} oninput={{action "updateGivenName" value="target.value"}} readonly={{isReadonlyNameParts}}/>
+      <input type="text" class="form-control given-name-field no-error no-success" value={{fragment.givenName}} oninput={{action "updateGivenName" value="target.value"}} readonly={{isReadonlyNameParts}}/>
     </div>
 
     <div>
@@ -83,7 +89,7 @@
     <div>
       <label for="name" class="subtitle">Name</label>
     </div>
-    <input type="text" class="form-control creator-field" value={{fragment.name}} oninput={{action "updateName" value="target.value"}} readonly={{isReadonly}}/>
+    <input type="text" class="form-control creator-field {{if (not (v-get fragment 'name' 'messages')) 'no-error'}}" value={{fragment.name}} oninput={{action "updateName" value="target.value"}} readonly={{isReadonly}}/>
 
     {{#if (v-get fragment 'name' 'errors')}}
       <div class="help-block help-block-fragment">{{v-get fragment 'name' 'message'}}</div>

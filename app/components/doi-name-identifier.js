@@ -1,14 +1,7 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
-import { validator, buildValidations } from 'ember-cp-validations';
 
-const Validations = buildValidations({
-  'fragment.nameIdentifier': [
-    validator('name-identifier', true)
-  ],
-});
-
-export default Component.extend(Validations, {
+export default Component.extend({
   store: service(),
 
   validateOrcidIdentifier(id) {
@@ -76,6 +69,7 @@ export default Component.extend(Validations, {
         this.fragment.set('nameIdentifierScheme', 'Other');
         this.fragment.set('nameIdentifier', value);
       }
+      this.setCreatorValidationClass();
     },
     deleteNameIdentifier() {
       this.creator.get('nameIdentifiers').removeObject(this.fragment);

@@ -112,6 +112,9 @@ export default Component.extend({
     },
     joinNameParts(options) {
       this.joinNameParts(options);
+    },
+    setCreatorValidationClass() {
+      this.setValidationClass();
     }
   }
 });
