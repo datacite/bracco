@@ -12,6 +12,18 @@ export default Component.extend({
     if (this.model.get('descriptions').length == 0) {
       this.model.get('descriptions').createFragment();
     }
+
+    this.setValidationClass();
+  },
+
+  setValidationClass() {
+    if (this.model.get('validations.attrs.descriptions.errors').length > 0) {
+      this.set('validationClass', 'has-error');
+    } else if (this.model.get('validations.attrs.descriptions.warnings').length > 0) {
+      this.set('validationClass', 'has-warning');
+    } else {
+      this.set('validationClass', null);
+    }
   },
 
   actions: {
@@ -19,13 +31,7 @@ export default Component.extend({
       this.model.get('descriptions').createFragment();
     },
     setValidationClass() {
-      if (this.model.get('validations.attrs.descriptions.errors').length > 0) {
-        this.set('validationClass', 'has-error');
-      } else if (this.model.get('validations.attrs.descriptions.warnings').length > 0) {
-        this.set('validationClass', 'has-warning');
-      } else {
-        this.set('validationClass', null);
-      }
+      this.setValidationClass();
     }
   }
 });

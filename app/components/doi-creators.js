@@ -12,6 +12,28 @@ export default Component.extend({
     if (this.model.get('creators').length == 0) {
       this.model.get('creators').createFragment();
     }
+
+    this.setValidationClass(false);
+  },
+
+  setValidationClass(success) {
+    // these errors and warnings are not included in global errors, as they are nested two levels
+    let nameIdentifiersErrors = this.model.get('creators').filter(function(creator) {
+      return creator.get('validations.attrs.nameIdentifiers.errors').length > 0;
+    });
+    let nameIdentifiersWarnings = this.model.get('creators').filter(function(creator) {
+      return creator.get('validations.attrs.nameIdentifiers.warnings').length > 0;
+    });
+
+    if (this.model.get('validations.attrs.creators.errors').length > 0 || nameIdentifiersErrors.length > 0) {
+      this.set('validationClass', 'has-error');
+    } else if (this.model.get('validations.attrs.creators.warnings').length > 0 || nameIdentifiersWarnings.length > 0) {
+      this.set('validationClass', 'has-warning');
+    } else if (success) {
+      this.set('validationClass', 'has-success');
+    } else {
+      this.set('validationClass', null);
+    }
   },
 
   actions: {
@@ -21,13 +43,7 @@ export default Component.extend({
       this.model.get('creators').get('lastObject').get('affiliation').createFragment();
     },
     setValidationClass() {
-      if (this.model.get('validations.attrs.creators.errors').length > 0) {
-        this.set('validationClass', 'has-error');
-      } else if (this.model.get('validations.attrs.creators.warnings').length > 0) {
-        this.set('validationClass', 'has-warning');
-      } else {
-        this.set('validationClass', 'has-success');
-      }
+      this.setValidationClass(true)
     }
   }
 });

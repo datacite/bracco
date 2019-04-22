@@ -42,6 +42,6 @@ export default Component.extend({
         this.fragment.set('lang', null);
       }
       this.set('languages', languageList);
-    },
+    }
   }
 });
