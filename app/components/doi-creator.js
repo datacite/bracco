@@ -14,6 +14,16 @@ export default Component.extend({
     this._super(...arguments);
 
     this.selectNameType(this.fragment.get('nameType'));
+
+    // if no givenName and familyName, and set for nameType "Personal"
+    if (this.fragment.get('name') && this.fragment.get('nameType') === 'Personal' && (!this.fragment.get('givenName') || this.fragment.get('familyName'))) {
+      let familyName = this.fragment.get('name').split(',', 2)[0]
+      let givenName = this.fragment.get('name').split(',', 2)[1]
+      familyName = (familyName) ? familyName.trim() : null;
+      givenName = (givenName) ? givenName.trim() : null;
+      this.fragment.set('givenName', givenName);
+      this.fragment.set('familyName', familyName);
+    }
     this.joinNameParts({});
 
     if (!this.fragment.get('nameIdentifiers')) {
@@ -70,6 +80,9 @@ export default Component.extend({
     }
   },
   selectNameType(value) {
+    if (!value) {
+      value = "Personal"
+    }
     this.fragment.set('nameType', value);
     this.set('nameType', value);
 
