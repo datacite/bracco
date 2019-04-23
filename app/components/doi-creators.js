@@ -32,7 +32,7 @@ export default Component.extend({
     } else if (success) {
       this.set('validationClass', 'has-success');
     } else {
-      this.set('validationClass', null);
+      this.set('validationClass', '');
     }
   },
 

@@ -44,10 +44,8 @@ export default Component.extend({
   },
 
   joinNameParts(options = {}) {
-    options.givenName = options.givenName || this.fragment.get('givenName');
-    options.familyName = options.familyName || this.fragment.get('familyName');
-
     if (options.nameIdentifierScheme === 'ORCID') {
+      console.log(options.familyName)
       this.fragment.set('nameType', 'Personal')
       this.set('nameType', 'Personal')
       this.set('isReadonlyNameParts', true);
@@ -57,12 +55,19 @@ export default Component.extend({
       this.set('nameType', 'Organizational')
       this.set('isReadonlyNameType', true);
     } else {
+      options.givenName = options.givenName || this.fragment.get('givenName');
+      options.familyName = options.familyName || this.fragment.get('familyName');
+      options.name = options.name || this.fragment.get('name');
+
       this.set('isReadonlyNameParts', false);
       this.set('isReadonlyNameType', false);
     }
 
     if (this.fragment.get('nameType') === 'Personal') {
       this.set('isReadonly', true);
+
+      this.fragment.set('givenName', options.givenName);
+      this.fragment.set('familyName', options.familyName);
 
       if (options.givenName && options.familyName) {
         this.fragment.set('name', options.familyName + ', ' + options.givenName);
@@ -76,6 +81,7 @@ export default Component.extend({
     } else {
       this.fragment.set('givenName', null);
       this.fragment.set('familyName', null);
+      this.fragment.set('name', options.name);
       this.set('isReadonly', false);
     }
   },
@@ -95,16 +101,14 @@ export default Component.extend({
   
   actions: {
     updateName(value) {
-      this.fragment.set('name', value);
+      this.joinNameParts({ name: value });
       this.setValidationClass();
     },
     updateGivenName(value) {
-      this.fragment.set('givenName', value);
       this.joinNameParts({ givenName: value });
       this.setValidationClass();
     },
     updateFamilyName(value) {
-      this.fragment.set('familyName', value);
       this.joinNameParts({ familyName: value });
       this.setValidationClass();
     },
