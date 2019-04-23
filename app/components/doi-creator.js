@@ -45,7 +45,6 @@ export default Component.extend({
 
   joinNameParts(options = {}) {
     if (options.nameIdentifierScheme === 'ORCID') {
-      console.log(options.familyName)
       this.fragment.set('nameType', 'Personal')
       this.set('nameType', 'Personal')
       this.set('isReadonlyNameParts', true);
