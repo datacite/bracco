@@ -5,12 +5,19 @@
       
       {{#bs-form formLayout="horizontal" horizontalLabelGridClass="col-md-3" model=model onSubmit=(action "submit" model) as |form|}}
         {{form.element controlType="text" id="provider-id" label="Provider ID" property="symbol" helpText='The Provider ID is the unique identifier for each provider and can\'t be changed.' disabled=true}}
+      
+        {{#form.element controlType="power-select" label="Affiliation via ROR ID (optional)" disabled=disabled value=rorId helpText='Affiliation names are provided by the Research Organization Registry (ROR).'  options=organizations as |el|}}
+          {{el.control onChange=(action "selectOrganization")   search=(action "searchOrganization") placeholder="Select Affiliation" searchPlaceholder="Type to search..." allowClear=true}}
+        {{/form.element}} 
+      
+      
         {{form.element controlType="text" id="provider-name" label="Provider Name" property="name" required=false}}
 
-        {{form.element controlType="text" id="website" label="Website (optional)" property="website" helpText='Website of the provider.' required=false}}
+        {{form.element controlType="text" id="website" label="Website" property="website" helpText='Website of the provider.' required=false}}
         {{form.element controlType="text" id="contact-name" label="Contact Name" property="contactName" helpText='Please enter the name of a person that can be contacted for technical or administrative issues.' required=false}}
         {{form.element controlType="email" id="contact-email" label="Contact Email" property="contactEmail" helpText='Please enter an email address that can be contacted for technical or administrative issues.' required=false}}
         {{form.element controlType="text" id="contact-phone" label="Contact Phone (optional)" property="phone" helpText='Please enter a phone number that can be contacted for technical or administrative issues.' required=false}}
+        {{form.element controlType="text" id="twitter-handle" label="Twitter (optional)" property="twitterHandle" helpText='Please enter a Twitter Handle for notifications.' required=false}}
 
         {{#form.element controlType="power-select" label="Country (optional)" property="country" optionLabelPath="name" options=countries destination=country helpText='Country where the provider is located.' as |el|}}
           {{#el.control onChange=(action "selectCountry") search=(action "searchCountry") searchField="name" placeholder="Select Country" searchPlaceholder="Type to search..." allowClear=true as |item|}}
@@ -125,6 +132,11 @@
             {{model.symbol}}
           {{/if}}
 
+          {{#if model.rorId}}
+            <h5>ROR ID</h5>
+            {{model.rorId}}
+          {{/if}}
+
           {{#if model.website}}
             <h5>Website</h5>
             <a href="{{model.website}}">{{model.website}}</a>
@@ -145,9 +157,10 @@
             {{model.phone}}
           {{/if}}
 
-          {{#if model.country}}
-            <h5>Country</h5>
-            {{model.country.name}}
+
+          {{#if model.twitterHandle}}
+            <h5>Twitter</h5>
+            {{model.twitterHandle}}
           {{/if}}
 
           {{#if model.description}}
@@ -166,6 +179,16 @@
               {{titleize (humanize (underscore model.focusArea))}}
             {{/if}}
           {{/if}}
+
+          {{#if model.country}}
+            <h5>Country</h5>
+            {{model.country.name}}
+          {{/if}}
+
+          {{!-- {{#if model.billingInformation}} --}}
+            <h5>Billing Information</h5>
+            {{provider-billing-information billingInformation=model.billingInformation}}
+          {{!-- {{/if}} --}}
 
           {{#if model.joined}}
             <h5>Date joined</h5>
