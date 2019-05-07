@@ -49,6 +49,9 @@ export default Component.extend(Validations, {
   focusAreaList,
   focusAreas: focusAreaList,
 
+  organizations: [],
+  organizationsNames: [],
+
   reset() {
     this.provider.set('passwordInput', null);
     this.set('edit', false);
@@ -149,6 +152,9 @@ export default Component.extend(Validations, {
     },
     submit(provider) {
       let self = this;
+      console.log(self)
+      console.log(provider)
+
       provider.save().then(function () {
         self.reset();
       }).catch(function(reason){
@@ -203,6 +209,26 @@ export default Component.extend(Validations, {
     },
     selectFocusArea(focusArea) {
       this.selectFocusArea(focusArea);
+    },
+    searchOrganization(query) {
+      let self = this;
+      this.store.query('organization', { 'query': query, qp: 'multiMatch' }).then(function (orgs) {
+        let organizations = orgs.toArray();
+        let organizationsNames = orgs.mapBy('name');
+        self.set('organizations', organizations);
+        self.set('organizationsNames', organizationsNames);
+        return organizationsNames;
+      });
+    },
+    selectOrganization(organization) {
+    
+      let organizationRecord = this.get('organizations').findBy('name', organization);
+     
+      this.set('rorId', organization);
+      this.provider.set('rorId',organizationRecord.id);
+    },
+    deleteRorId() {
+      this.provider.get('rorId').removeAt(this.index);
     }
   }
 });

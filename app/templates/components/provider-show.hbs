@@ -6,8 +6,8 @@
       {{#bs-form formLayout="horizontal" horizontalLabelGridClass="col-md-3" model=model onSubmit=(action "submit" model) as |form|}}
         {{form.element controlType="text" id="provider-id" label="Provider ID" property="symbol" helpText='The Provider ID is the unique identifier for each provider and can\'t be changed.' disabled=true}}
       
-        {{#form.element controlType="power-select" label="Affiliation via ROR ID (optional)" disabled=disabled value=rorId helpText='Affiliation names are provided by the Research Organization Registry (ROR).'  options=organizations as |el|}}
-          {{el.control onChange=(action "selectOrganization")   search=(action "searchOrganization") placeholder="Select Affiliation" searchPlaceholder="Type to search..." allowClear=true}}
+        {{#form.element controlType="power-select" label="Organisation lookup (optional)" disabled=disabled value=rorId helpText='Organisation names are provided by the Research Organization Registry (ROR).'  options=organizationsNames as |el|}}
+          {{el.control onChange=(action "selectOrganization")   search=(action "searchOrganization") placeholder="Select Organisation" searchPlaceholder="Type to search..." allowClear=true}}
         {{/form.element}} 
       
       
@@ -18,12 +18,6 @@
         {{form.element controlType="email" id="contact-email" label="Contact Email" property="contactEmail" helpText='Please enter an email address that can be contacted for technical or administrative issues.' required=false}}
         {{form.element controlType="text" id="contact-phone" label="Contact Phone (optional)" property="phone" helpText='Please enter a phone number that can be contacted for technical or administrative issues.' required=false}}
         {{form.element controlType="text" id="twitter-handle" label="Twitter (optional)" property="twitterHandle" helpText='Please enter a Twitter Handle for notifications.' required=false}}
-
-        {{#form.element controlType="power-select" label="Country (optional)" property="country" optionLabelPath="name" options=countries destination=country helpText='Country where the provider is located.' as |el|}}
-          {{#el.control onChange=(action "selectCountry") search=(action "searchCountry") searchField="name" placeholder="Select Country" searchPlaceholder="Type to search..." allowClear=true as |item|}}
-            {{item.name}}
-          {{/el.control}}
-        {{/form.element}}
 
         {{#if (can "create provider")}}
           {{#form.element controlType="power-select" label="Organization Type (optional)" property="organizationType" options=organizationTypes destination=organizationType as |el|}}
@@ -41,6 +35,22 @@
 
         {{form.element controlType="textarea" label="Description (optional)" property="description" rows=10 helpText='Description of the provider. Please use markdown for formatting.' required=false}}
 
+
+        <div class="col-md-9 col-md-offset-3">
+          <h4>Billing Information</h4>
+        </div>
+        {{form.element controlType="text" id="billing-information-address" label="Address" property="billingInformation.address"  required=false}}
+        
+        {{form.element controlType="text" id="billing-information-city" label="City" property="billingInformation.city"  required=false}}
+        {{form.element controlType="text" id="billing-information-state" label="State" property="billingInformation.state"  required=false}}
+        {{form.element controlType="text" id="billing-information-post-code" label="PostCode" property="billingInformation.postCode"  required=false}}
+
+        {{#form.element controlType="power-select" label="Country (optional)" property="country" optionLabelPath="name" options=countries destination=country helpText='Country where the provider is located.' as |el|}}
+          {{#el.control onChange=(action "selectCountry") search=(action "searchCountry") searchField="name" placeholder="Select Country" searchPlaceholder="Type to search..." allowClear=true as |item|}}
+            {{item.name}}
+          {{/el.control}}
+        {{/form.element}}
+        
         {{#if (can "create provider")}}
           {{form.element controlType="checkbox" label="Account is active" property="isActive" required=false helpText='This account can manage clients and prefixes'}}
         {{/if}}
@@ -180,15 +190,33 @@
             {{/if}}
           {{/if}}
 
+
+          {{#if model.billingInformation}} 
+            <h4>Billing Information</h4>
+            {{!-- {{provider-billing-information model.billingInformation address=model.billingInformation.address city=model.billingInformation.city state=model.billingInformation.state postCode=model.billingInformation.postCode}} --}}
+            {{#if model.billingInformation.address}}
+              <h5>Billing address</h5>
+              {{model.billingInformation.address}}
+            {{/if}}
+            {{#if model.billingInformation.city}}
+              <h5>City</h5>
+              {{model.billingInformation.city}}
+            {{/if}}
+            {{#if model.billingInformation.state}}
+              <h5>State</h5>
+              {{model.billingInformation.state}}
+            {{/if}}
+            {{#if model.billingInformation.postCode}}
+              <h5>PostCode</h5>
+              {{model.billingInformation.postCode}}
+            {{/if}}
+          {{/if}}
+
           {{#if model.country}}
             <h5>Country</h5>
             {{model.country.name}}
           {{/if}}
 
-          {{!-- {{#if model.billingInformation}} --}}
-            <h5>Billing Information</h5>
-            {{provider-billing-information billingInformation=model.billingInformation}}
-          {{!-- {{/if}} --}}
 
           {{#if model.joined}}
             <h5>Date joined</h5>
