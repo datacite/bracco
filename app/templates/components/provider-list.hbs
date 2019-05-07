@@ -7,16 +7,15 @@
         {{form.element controlType="text" label="Provider ID" property="symbol" helpText='The Provider ID is the unique identifier for each provider and can\'t be changed. The Provider ID can contain only upper case letters, and must not be longer than 8 characters.' useIcons=false required=false}}
         {{form.element controlType="text" label="Provider Name" property="name" required=false}}
 
-        {{form.element controlType="text" label="Website (optional)" property="website" helpText='Website of the provider.' required=false}}
+        {{#form.element controlType="power-select" label="Organisation lookup (optional)" disabled=disabled value=rorId helpText='Organisation names are provided by the Research Organization Registry (ROR).'  options=organizationsNames as |el|}}
+          {{el.control onChange=(action "selectOrganization")   search=(action "searchOrganization") placeholder="Select Organisation" searchPlaceholder="Type to search..." allowClear=true}}
+        {{/form.element}} 
+
+        {{form.element controlType="text" label="Website" property="website" helpText='Website of the provider.' required=true}}
         {{form.element controlType="text" label="Contact Name" property="contactName" helpText='Please enter the name of a person that can be contacted for technical or administrative issues.' required=false}}
         {{form.element controlType="email" label="Contact Email" property="contactEmail" helpText='Please enter an email address that can be contacted for technical or administrative issues.' required=false}}
         {{form.element controlType="text" label="Contact Phone (optional)" property="phone" helpText='Please enter a phone number that can be contacted for technical or administrative issues.' required=false}}
-
-        {{#form.element controlType="power-select" label="Country (optional)" property="country" optionLabelPath="name" options=countries destination=country helpText='Country where the provider is located.' as |el|}}
-          {{#el.control onChange=(action "selectCountry") search=(action "searchCountry") searchField="name" placeholder="Select Country" searchPlaceholder="Type to search..." allowClear=true as |item|}}
-            {{item.name}}
-          {{/el.control}}
-        {{/form.element}}
+        {{form.element controlType="text" id="twitter-handle" label="Twitter (optional)" property="twitterHandle" helpText='Please enter a Twitter Handle for notifications.' required=false}}
 
         {{#if (can "create provider")}}
           {{#form.element controlType="power-select" label="Organization Type (optional)" property="organizationType" options=organizationTypes destination=organizationType as |el|}}
@@ -33,6 +32,21 @@
         {{/if}}
 
         {{form.element controlType="textarea" label="Description (optional)" property="description" rows=10 helpText='Description of the provider. Please use markdown for formatting.' required=false}}
+
+        <div class="col-md-9 col-md-offset-3">
+          <h4>Billing Information</h4>
+        </div>
+        {{form.element controlType="text" id="billing-information-address" label="Address" property="billingInformationAddress"  required=true}}
+        
+        {{form.element controlType="text" id="billing-information-city" label="City" property="billingInformationCity"  required=true}}
+        {{form.element controlType="text" id="billing-information-state" label="State" property="billingInformationState"  required=true}}
+        {{form.element controlType="text" id="billing-information-post-code" label="PostCode" property="billingInformationPostCode"  required=true}}
+
+        {{#form.element controlType="power-select" label="Country (optional)" property="country" optionLabelPath="name" options=countries destination=country helpText='Country where the provider is located.' as |el|}}
+          {{#el.control onChange=(action "selectCountry") search=(action "searchCountry") searchField="name" placeholder="Select Country" searchPlaceholder="Type to search..." allowClear=true as |item|}}
+            {{item.name}}
+          {{/el.control}}
+        {{/form.element}}
 
         {{form.element controlType="checkbox" label="Account is active" property="isActive" helpText='This account can manage clients and prefixes'}}
 
