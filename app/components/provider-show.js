@@ -152,8 +152,7 @@ export default Component.extend(Validations, {
     },
     submit(provider) {
       let self = this;
-      console.log(self)
-      console.log(provider)
+
 
       provider.save().then(function () {
         self.reset();
