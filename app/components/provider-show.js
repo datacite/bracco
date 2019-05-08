@@ -115,6 +115,14 @@ export default Component.extend(Validations, {
     this.provider.set('focusArea', focusArea);
     this.set('focusAreas', focusAreaList);
   },
+  selectOrganization(rorId) {
+    let self = this;
+    this.store.findRecord('organization', rorId).then((result) => {
+      self.set('organization', result.name);
+      this.provider.set('rorId',rorId);
+      return result.name;
+    });
+  },
 
   actions: {
     edit(provider) {
@@ -122,6 +130,7 @@ export default Component.extend(Validations, {
       this.provider.set('confirmSymbol', provider.get('symbol'));
       this.set('countries', countryList);
       this.set('edit', true);
+      this.selectOrganization(provider.get('rorId'));
     },
     change(provider) {
       this.set('provider', provider);
@@ -222,12 +231,8 @@ export default Component.extend(Validations, {
     selectOrganization(organization) {
     
       let organizationRecord = this.get('organizations').findBy('name', organization);
-     
-      this.set('rorId', organization);
-      this.provider.set('rorId',organizationRecord.id);
-    },
-    deleteRorId() {
-      this.provider.get('rorId').removeAt(this.index);
+      this.set('organization', organization);
+      this.provider.set('rorId','https://'+organizationRecord.id);
     }
   }
 });

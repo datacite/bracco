@@ -140,11 +140,8 @@ export default Component.extend({
     
       let organizationRecord = this.get('organizations').findBy('name', organization);
      
-      this.set('rorId', organization);
-      this.provider.set('rorId',organizationRecord.id);
-    },
-    deleteRorId() {
-      this.provider.get('rorId').removeAt(this.index);
+      this.set('organization', organization);
+      this.provider.set('rorId','https://'+organizationRecord.id);
     }
   }
 });
