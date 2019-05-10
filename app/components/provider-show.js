@@ -49,6 +49,9 @@ export default Component.extend(Validations, {
   focusAreaList,
   focusAreas: focusAreaList,
 
+  organizations: [],
+  organizationsNames: [],
+
   reset() {
     this.provider.set('passwordInput', null);
     this.set('edit', false);
@@ -112,6 +115,24 @@ export default Component.extend(Validations, {
     this.provider.set('focusArea', focusArea);
     this.set('focusAreas', focusAreaList);
   },
+  selectOrganization(rorId) {
+    let self = this;
+    this.store.findRecord('organization', rorId).then((result) => {
+      self.set('organization', result.name);
+      this.provider.set('rorId',rorId);
+      return result.name;
+    });
+  },
+  selectBillingCountry(billingCountry) {
+    this.provider.set('billingInformation.country', billingCountry.code);
+    this.provider.set('billingInformationCountry', billingCountry);
+    this.set('countries', countryList);
+  },
+  setBillingCountry(billingCountryCode) {
+    let country = this.get('countries').findBy('code', billingCountryCode);
+    this.provider.set('billingInformationCountry', country);
+    this.set('countries', countryList);
+  },
 
   actions: {
     edit(provider) {
@@ -119,6 +140,8 @@ export default Component.extend(Validations, {
       this.provider.set('confirmSymbol', provider.get('symbol'));
       this.set('countries', countryList);
       this.set('edit', true);
+      this.selectOrganization(provider.get('rorId'));
+      this.setBillingCountry(provider.get('billingInformation.country'));
     },
     change(provider) {
       this.set('provider', provider);
@@ -149,6 +172,8 @@ export default Component.extend(Validations, {
     },
     submit(provider) {
       let self = this;
+
+
       provider.save().then(function () {
         self.reset();
       }).catch(function(reason){
@@ -203,6 +228,25 @@ export default Component.extend(Validations, {
     },
     selectFocusArea(focusArea) {
       this.selectFocusArea(focusArea);
+    },
+    selectBillingCountry(billingCountry) {
+      this.selectBillingCountry(billingCountry);
+    },
+    searchOrganization(query) {
+      let self = this;
+      this.store.query('organization', { 'query': query, qp: 'multiMatch' }).then(function (orgs) {
+        let organizations = orgs.toArray();
+        let organizationsNames = orgs.mapBy('name');
+        self.set('organizations', organizations);
+        self.set('organizationsNames', organizationsNames);
+        return organizationsNames;
+      });
+    },
+    selectOrganization(organization) {
+    
+      let organizationRecord = this.get('organizations').findBy('name', organization);
+      this.set('organization', organization);
+      this.provider.set('rorId','https://'+organizationRecord.id);
     }
   }
 });

@@ -35,6 +35,11 @@ const Validations = buildValidations({
       })
     })
   ],
+  twitterHandle: [ validator('format', {
+    regex: /^[a-zA-Z0-9_]{1,15}$/,
+    allowBlank: true,
+    message: 'The twitter handle is only 15 characters'
+  })],
   name: validator('presence', true),
   contactName: validator('presence', true),
   contactEmail: [
@@ -77,7 +82,6 @@ const Validations = buildValidations({
   website: [
     validator('format', {
       type: 'url',
-      allowBlank: true,
       message: 'Please enter a valid website URL.'
     })
   ]
@@ -102,6 +106,9 @@ export default DS.Model.extend(Validations, {
   passwordInput: DS.attr('string'),
   hasPassword: DS.attr('boolean'),
   keepPassword: DS.attr('boolean', { defaultValue: true }),
+  rorId: DS.attr('string'),
+  twitterHandle: DS.attr('string'),
+  billingInformation: DS.attr(),
   joined: DS.attr('date'),
   created: DS.attr('date'),
   updated: DS.attr('date'),

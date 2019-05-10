@@ -5,12 +5,18 @@
       
       {{#bs-form formLayout="horizontal" horizontalLabelGridClass="col-md-3" model=model onSubmit=(action "submit" model) as |form|}}
         {{form.element controlType="text" id="provider-id" label="Provider ID" property="symbol" helpText='The Provider ID is the unique identifier for each provider and can\'t be changed.' disabled=true}}
+      
+        {{#form.element controlType="power-select" label="Organisation lookup (optional)" disabled=disabled value=organization helpText='Organisation names are provided by the Research Organization Registry (ROR).'  options=organizationsNames as |el|}}
+          {{el.control onChange=(action "selectOrganization")   search=(action "searchOrganization") placeholder="Select Organisation" searchPlaceholder="Type to search..." allowClear=true}}
+        {{/form.element}}      
+      
         {{form.element controlType="text" id="provider-name" label="Provider Name" property="name" required=false}}
 
-        {{form.element controlType="text" id="website" label="Website (optional)" property="website" helpText='Website of the provider.' required=false}}
+        {{form.element controlType="text" id="website" label="Website" property="website" helpText='Website of the provider.' required=false}}
         {{form.element controlType="text" id="contact-name" label="Contact Name" property="contactName" helpText='Please enter the name of a person that can be contacted for technical or administrative issues.' required=false}}
         {{form.element controlType="email" id="contact-email" label="Contact Email" property="contactEmail" helpText='Please enter an email address that can be contacted for technical or administrative issues.' required=false}}
         {{form.element controlType="text" id="contact-phone" label="Contact Phone (optional)" property="phone" helpText='Please enter a phone number that can be contacted for technical or administrative issues.' required=false}}
+        {{form.element controlType="text" id="twitter-handle" label="Twitter (optional)" property="twitterHandle" helpText='DataCite will follow you on twitter.' required=false}}
 
         {{#form.element controlType="power-select" label="Country (optional)" property="country" optionLabelPath="name" options=countries destination=country helpText='Country where the provider is located.' as |el|}}
           {{#el.control onChange=(action "selectCountry") search=(action "searchCountry") searchField="name" placeholder="Select Country" searchPlaceholder="Type to search..." allowClear=true as |item|}}
@@ -34,6 +40,27 @@
 
         {{form.element controlType="textarea" label="Description (optional)" property="description" rows=10 helpText='Description of the provider. Please use markdown for formatting.' required=false}}
 
+
+        <div class="col-md-9 col-md-offset-3">
+          <br>
+          <h4>Billing Information</h4>
+          <div class="help-block ember-view">Your organization’s information for DataCite billing purposes</div>
+        </div>
+        {{form.element controlType="text" id="billing-information-organization" label="Billing Organization" property="billingInformation.organization"  required=false}}
+        {{form.element controlType="text" id="billing-information-department" label="Billing Department" property="billingInformation.department"  required=false}}
+        {{form.element controlType="text" id="billing-information-street" label="Billing Street" property="billingInformation.address"  required=false}}
+        
+        {{form.element controlType="text" id="billing-information-city" label="Billing City" property="billingInformation.city"  required=false}}
+        {{form.element controlType="text" id="billing-information-state" label="Billing State/Province" property="billingInformation.state"  required=false}}
+        {{form.element controlType="text" id="billing-information-post-code" label=" Billing Zip/PostCode" property="billingInformation.postCode"  required=false}}
+
+        {{#form.element controlType="power-select" label="Billing Country" property="billingInformationCountry" optionLabelPath="name" options=countries destination=billingInformationCountry as |el|}}
+          {{#el.control onChange=(action "selectBillingCountry") search=(action "searchCountry") searchField="name" placeholder="Select Country" searchPlaceholder="Type to search..." allowClear=true as |item|}}
+            {{item.name}}
+          {{/el.control}}
+        {{/form.element}}
+
+        
         {{#if (can "create provider")}}
           {{form.element controlType="checkbox" label="Account is active" property="isActive" required=false helpText='This account can manage clients and prefixes'}}
         {{/if}}
@@ -125,6 +152,11 @@
             {{model.symbol}}
           {{/if}}
 
+          {{#if model.rorId}}
+            <h5>ROR ID</h5>
+            {{model.rorId}}
+          {{/if}}
+
           {{#if model.website}}
             <h5>Website</h5>
             <a href="{{model.website}}">{{model.website}}</a>
@@ -139,16 +171,23 @@
             <h5>Contact Email</h5>
             <a href="mailto:{{model.contactEmail}}">{{model.contactEmail}}</a>
           {{/if}}
-
+          <calendar-lite></calendar-lite>
           {{#if model.phone}}
             <h5>Contact Phone</h5>
             {{model.phone}}
+          {{/if}}
+
+
+          {{#if model.twitterHandle}}
+            <h5>Twitter</h5>
+            {{model.twitterHandle}}
           {{/if}}
 
           {{#if model.country}}
             <h5>Country</h5>
             {{model.country.name}}
           {{/if}}
+
 
           {{#if model.description}}
             <h5>Description</h5>
@@ -166,6 +205,46 @@
               {{titleize (humanize (underscore model.focusArea))}}
             {{/if}}
           {{/if}}
+
+
+          {{#if model.billingInformation}} 
+            <br>
+            <h4>Billing Information</h4>
+            {{!-- {{provider-billing-information model.billingInformation address=model.billingInformation.address city=model.billingInformation.city state=model.billingInformation.state postCode=model.billingInformation.postCode}} --}}
+            {{#if model.billingInformation.organization}}
+              <h5>Billing Organization</h5>
+              {{model.billingInformation.organization}}
+            {{/if}}
+            {{#if model.billingInformation.department}}
+              <h5>Billing Department</h5>
+              {{model.billingInformation.department}}
+            {{/if}}
+
+
+            {{#if model.billingInformation.address}}
+              <h5>Billing Address</h5>
+              {{model.billingInformation.address}}
+            {{/if}}
+            {{#if model.billingInformation.city}}
+              <h5>Billing City</h5>
+              {{model.billingInformation.city}}
+            {{/if}}
+            {{#if model.billingInformation.state}}
+              <h5>Billing State/Province</h5>
+              {{model.billingInformation.state}}
+            {{/if}}
+            {{#if model.billingInformation.postCode}}
+              <h5>Billing Zip/PostCode</h5>
+              {{model.billingInformation.postCode}}
+            {{/if}}
+            {{#if model.billingInformation.country}}
+              <h5>Billing Country</h5>
+              {{model.billingInformation.country}}
+            {{/if}}
+
+          {{/if}}
+
+
 
           {{#if model.joined}}
             <h5>Date joined</h5>

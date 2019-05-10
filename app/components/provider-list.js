@@ -38,6 +38,9 @@ export default Component.extend({
   focusAreaList,
   focusAreas: focusAreaList,
 
+  organizations: [],
+  organizationsNames: [],
+
   reset() {
     this.set('provider', null);
     this.set('new', false);
@@ -72,6 +75,10 @@ export default Component.extend({
     this.provider.set('focusArea', focusArea);
     this.set('focusAreas', focusAreaList);
   },
+  selectBillingCountry(billingCountry) {
+    this.provider.set('billingInformationCountry', billingCountry);
+    this.set('countries', countryList);
+  },
 
   actions: {
     new() {
@@ -81,6 +88,18 @@ export default Component.extend({
     },
     submit(provider) {
       let self = this;
+
+      this.provider.set('billingInformation', {
+        address: this.provider.get('billingInformationAddress'),
+        organization: this.provider.get('billingInformationOrganization'),
+        department: this.provider.get('billingInformationDepartment'),
+        city: this.provider.get('billingInformationCity'),
+        state: this.provider.get('billingInformationState'),
+        postCode: this.provider.get('billingInformationPostCode'),
+        country: this.provider.get('billingInformationCountry.code')
+      });
+
+      console.log(provider)
       provider.save().then(function(provider) {
         self.router.transitionTo('providers.show.settings', provider.id);
         self.set('new', false);
@@ -113,6 +132,26 @@ export default Component.extend({
     },
     selectFocusArea(focusArea) {
       this.selectFocusArea(focusArea);
+    },
+    selectBillingCountry(billingCountry) {
+      this.selectBillingCountry(billingCountry);
+    },
+    searchOrganization(query) {
+      let self = this;
+      this.store.query('organization', { 'query': query, qp: 'multiMatch' }).then(function (orgs) {
+        let organizations = orgs.toArray();
+        let organizationsNames = orgs.mapBy('name');
+        self.set('organizations', organizations);
+        self.set('organizationsNames', organizationsNames);
+        return organizationsNames;
+      });
+    },
+    selectOrganization(organization) {
+    
+      let organizationRecord = this.get('organizations').findBy('name', organization);
+     
+      this.set('organization', organization);
+      this.provider.set('rorId','https://'+organizationRecord.id);
     }
   }
 });
