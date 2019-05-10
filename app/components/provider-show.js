@@ -123,6 +123,16 @@ export default Component.extend(Validations, {
       return result.name;
     });
   },
+  selectBillingCountry(billingCountry) {
+    this.provider.set('billingInformation.country', billingCountry.code);
+    this.provider.set('billingInformationCountry', billingCountry);
+    this.set('countries', countryList);
+  },
+  setBillingCountry(billingCountryCode) {
+    let country = this.get('countries').findBy('code', billingCountryCode);
+    this.provider.set('billingInformationCountry', country);
+    this.set('countries', countryList);
+  },
 
   actions: {
     edit(provider) {
@@ -131,6 +141,7 @@ export default Component.extend(Validations, {
       this.set('countries', countryList);
       this.set('edit', true);
       this.selectOrganization(provider.get('rorId'));
+      this.setBillingCountry(provider.get('billingInformation.country'));
     },
     change(provider) {
       this.set('provider', provider);
@@ -219,9 +230,7 @@ export default Component.extend(Validations, {
       this.selectFocusArea(focusArea);
     },
     selectBillingCountry(billingCountry) {
-      this.provider.set('billingInformation.country', billingCountry.code);
-      this.set('billingInformation.country', billingCountry);
-      this.set('countries', countryList);
+      this.selectBillingCountry(billingCountry);
     },
     searchOrganization(query) {
       let self = this;

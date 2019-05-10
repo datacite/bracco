@@ -75,6 +75,10 @@ export default Component.extend({
     this.provider.set('focusArea', focusArea);
     this.set('focusAreas', focusAreaList);
   },
+  selectBillingCountry(billingCountry) {
+    this.provider.set('billingInformationCountry', billingCountry);
+    this.set('countries', countryList);
+  },
 
   actions: {
     new() {
@@ -92,7 +96,7 @@ export default Component.extend({
         city: this.provider.get('billingInformationCity'),
         state: this.provider.get('billingInformationState'),
         postCode: this.provider.get('billingInformationPostCode'),
-        country: this.provider.get('billingInformationCountry')
+        country: this.provider.get('billingInformationCountry.code')
       });
 
       console.log(provider)
@@ -130,8 +134,7 @@ export default Component.extend({
       this.selectFocusArea(focusArea);
     },
     selectBillingCountry(billingCountry) {
-      this.provider.set('billingInformationCountry', billingCountry);
-      this.set('countries', countryList);
+      this.selectBillingCountry(billingCountry);
     },
     searchOrganization(query) {
       let self = this;
