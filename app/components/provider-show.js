@@ -218,6 +218,11 @@ export default Component.extend(Validations, {
     selectFocusArea(focusArea) {
       this.selectFocusArea(focusArea);
     },
+    selectBillingCountry(billingCountry) {
+      this.provider.set('billingInformation.country', billingCountry.code);
+      this.set('billingInformation.country', billingCountry);
+      this.set('countries', countryList);
+    },
     searchOrganization(query) {
       let self = this;
       this.store.query('organization', { 'query': query, qp: 'multiMatch' }).then(function (orgs) {
