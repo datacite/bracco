@@ -39,6 +39,7 @@ export default Component.extend(Validations, {
 
   edit: false,
   change: false,
+  isBillingEmpty: false,
   delete: false,
   provider: null,
   confirmId: null,
@@ -124,13 +125,12 @@ export default Component.extend(Validations, {
     });
   },
   selectBillingCountry(billingCountry) {
-    this.provider.set('billingInformation.country', billingCountry.code);
-    this.provider.set('billingInformationCountry', billingCountry);
+    this.provider.set('billingInformation.country', billingCountry);
     this.set('countries', countryList);
   },
-  setBillingCountry(billingCountryCode) {
-    let country = this.get('countries').findBy('code', billingCountryCode);
-    this.provider.set('billingInformationCountry', country);
+  setBillingCountry(billingCountry) {
+    this.set('billingInformationCountry', billingCountry);
+    this.provider.set('billingInformationCountry', billingCountry);
     this.set('countries', countryList);
   },
 
@@ -141,7 +141,6 @@ export default Component.extend(Validations, {
       this.set('countries', countryList);
       this.set('edit', true);
       this.selectOrganization(provider.get('rorId'));
-      this.setBillingCountry(provider.get('billingInformation.country'));
     },
     change(provider) {
       this.set('provider', provider);

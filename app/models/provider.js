@@ -108,7 +108,7 @@ export default DS.Model.extend(Validations, {
   keepPassword: DS.attr('boolean', { defaultValue: true }),
   rorId: DS.attr('string'),
   twitterHandle: DS.attr('string'),
-  billingInformation: DS.attr(),
+  billingInformation: DS.attr('billingInformation'),
   joined: DS.attr('date'),
   created: DS.attr('date'),
   updated: DS.attr('date'),

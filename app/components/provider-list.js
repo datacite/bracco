@@ -96,7 +96,7 @@ export default Component.extend({
         city: this.provider.get('billingInformationCity'),
         state: this.provider.get('billingInformationState'),
         postCode: this.provider.get('billingInformationPostCode'),
-        country: this.provider.get('billingInformationCountry.code')
+        country: this.provider.get('billingInformationCountry')
       });
 
       console.log(provider)

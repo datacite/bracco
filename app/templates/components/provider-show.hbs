@@ -54,7 +54,7 @@
         {{form.element controlType="text" id="billing-information-state" label="Billing State/Province" property="billingInformation.state"  required=false}}
         {{form.element controlType="text" id="billing-information-post-code" label=" Billing Zip/PostCode" property="billingInformation.postCode"  required=false}}
 
-        {{#form.element controlType="power-select" label="Billing Country" property="billingInformationCountry" optionLabelPath="name" options=countries destination=billingInformationCountry as |el|}}
+        {{#form.element controlType="power-select" label="Billing Country" property="billingInformation.country" optionLabelPath="name" options=countries destination=billingInformation.country as |el|}}
           {{#el.control onChange=(action "selectBillingCountry") search=(action "searchCountry") searchField="name" placeholder="Select Country" searchPlaceholder="Type to search..." allowClear=true as |item|}}
             {{item.name}}
           {{/el.control}}
@@ -206,10 +206,10 @@
             {{/if}}
           {{/if}}
 
+          <br>
+          <h4>Billing Information</h4>
 
-          {{#if model.billingInformation}} 
-            <br>
-            <h4>Billing Information</h4>
+          {{#if (not isBillingEmpty)}} 
             {{!-- {{provider-billing-information model.billingInformation address=model.billingInformation.address city=model.billingInformation.city state=model.billingInformation.state postCode=model.billingInformation.postCode}} --}}
             {{#if model.billingInformation.organization}}
               <h5>Billing Organization</h5>
@@ -239,9 +239,10 @@
             {{/if}}
             {{#if model.billingInformation.country}}
               <h5>Billing Country</h5>
-              {{model.billingInformation.country}}
+              {{model.billingInformation.country.name}}
             {{/if}}
-
+          {{else}}
+            <span class="small icon-warning">has not been provided</span>
           {{/if}}
 
 
