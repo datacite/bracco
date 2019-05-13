@@ -53,11 +53,11 @@ export default Component.extend(Validations, {
   organizations: [],
   organizationsNames: [],
 
-  didReceiveAttrs() {
-    this._super(...arguments);
-    let self = this;
-    this.set('isBillingEmpty', Object.values(self.get('model.billingInformation')).some(this.hasEmptyBilling));
-  },
+  // didReceiveAttrs() {
+  //   this._super(...arguments);
+  //   let self = this;
+  //   this.set('isBillingEmpty', Object.values(self.get('model.billingInformation')).some(this.hasEmptyBilling));
+  // },
   reset() {
     this.provider.set('passwordInput', null);
     this.set('edit', false);
