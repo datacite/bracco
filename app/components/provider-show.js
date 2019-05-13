@@ -53,6 +53,11 @@ export default Component.extend(Validations, {
   organizations: [],
   organizationsNames: [],
 
+  didReceiveAttrs() {
+    this._super(...arguments);
+    let self = this;
+    this.set('isBillingEmpty', Object.values(self.get('model.billingInformation')).some(this.hasEmptyBilling));
+  },
   reset() {
     this.provider.set('passwordInput', null);
     this.set('edit', false);
@@ -133,7 +138,9 @@ export default Component.extend(Validations, {
     this.provider.set('billingInformationCountry', billingCountry);
     this.set('countries', countryList);
   },
-
+  hasEmptyBilling(el){
+    return el === ""
+  },
   actions: {
     edit(provider) {
       this.set('provider', provider);
