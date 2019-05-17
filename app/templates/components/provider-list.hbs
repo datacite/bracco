@@ -44,13 +44,13 @@
           <h4>Billing Information</h4>
           <div class="help-block ember-view">Your organization’s information for DataCite billing purposes</div>
         </div>
-        {{form.element controlType="text" id="billing-information-organization" label="Billing Organization" property="billingInformationOrganization"  required=true}}
-        {{form.element controlType="text" id="billing-information-department" label="Billing Department" property="billingInformationDepartment"  required=true}}
-        {{form.element controlType="textarea" rows=3 id="billing-information-street" label="Billing Street" property="billingInformationAddress"  required=true}}
+        {{form.element controlType="text" id="billing-information-organization" label="Billing Organization" property="billingInformationOrganization"  helpText="Your organization's name for billing purposes" required=true}}
+        {{form.element controlType="text" id="billing-information-department" label="Billing Department" property="billingInformationDepartment"  helpText="Your organization's specific department that is responsible for payment" required=true}}
+        {{form.element controlType="textarea" rows=3 id="billing-information-street" label="Billing Street" property="billingInformationAddress"  helpText="Your organization's street and number for billing purposes" required=true}}
         
-        {{form.element controlType="text" id="billing-information-city" label="Billing City" property="billingInformationCity"  required=true}}
-        {{form.element controlType="text" id="billing-information-state" label="Billing State/Province" property="billingInformationState"  required=true}}
-        {{form.element controlType="text" id="billing-information-post-code" label=" Billing Zip/PostCode" property="billingInformationPostCode"  required=true}}
+        {{form.element controlType="text" id="billing-information-city" label="Billing City" property="billingInformationCity"  helpText="Your organization's city for billing purposes" required=true}}
+        {{form.element controlType="text" id="billing-information-state" label="Billing State/Province" property="billingInformationState"  helpText="Your organization's State/Province for billing purposes" required=true}}
+        {{form.element controlType="text" id="billing-information-post-code" label=" Billing Zip/PostCode" property="billingInformationPostCode" helpText="Your organization's Zip/PostCode for billing purposes"  required=true}}
 
         {{#form.element controlType="power-select" label="Billing Country" property="billingInformationCountry" optionLabelPath="name" options=countries destination=country helpText='Country where the provider is located.' as |el|}}
           {{#el.control onChange=(action "selectBillingCountry") search=(action "searchCountry") searchField="name" placeholder="Select Country" searchPlaceholder="Type to search..." allowClear=true as |item|}}
