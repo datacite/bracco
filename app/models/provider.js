@@ -35,11 +35,18 @@ const Validations = buildValidations({
       })
     })
   ],
-  twitterHandle: [ validator('format', {
-    regex: /^[a-zA-Z0-9_]{1,15}$/,
-    allowBlank: true,
-    message: 'The twitter handle is only 15 characters and you do not need to include @.'
-  })],
+  twitterHandle: [ 
+    validator('format', {
+      regex: /^[a-zA-Z0-9_@]{1,15}$/,
+      allowBlank: true,
+      message: 'The twitter handle is only 15 characters.'
+    }),
+    validator('format', {
+      regex: /^[a-zA-Z0-9_]+$/,
+      allowBlank: true,
+      message: 'You do not need to include @.'
+    }),
+  ],
   name: validator('presence', true),
   contactName: validator('presence', true),
   contactEmail: [
