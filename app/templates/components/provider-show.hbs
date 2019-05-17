@@ -6,8 +6,8 @@
       {{#bs-form formLayout="horizontal" horizontalLabelGridClass="col-md-3" model=model onSubmit=(action "submit" model) as |form|}}
         {{form.element controlType="text" id="provider-id" label="Provider ID" property="symbol" helpText='The Provider ID is the unique identifier for each provider and can\'t be changed.' disabled=true}}
       
-        {{#form.element controlType="power-select" label="Organisation lookup (optional)" disabled=disabled value=organization helpText='Organisation names are provided by the Research Organization Registry (ROR).'  options=organizationsNames as |el|}}
-          {{el.control onChange=(action "selectOrganization")   search=(action "searchOrganization") placeholder="Select Organisation" searchPlaceholder="Type to search..." allowClear=true}}
+        {{#form.element controlType="power-select" label="Organization lookup (optional)" disabled=disabled value=organization helpText='Organization names are provided by the Research Organization Registry (ROR).'  options=organizationsNames as |el|}}
+          {{el.control onChange=(action "selectOrganization")   search=(action "searchOrganization") placeholder="Select Organization" searchPlaceholder="Type to search..." allowClear=true}}
         {{/form.element}}      
       
         {{form.element controlType="text" id="provider-name" label="Provider Name" property="name" required=false}}

@@ -7,8 +7,8 @@
         {{form.element controlType="text" label="Provider ID" property="symbol" helpText='The Provider ID is the unique identifier for each provider and can\'t be changed. The Provider ID can contain only upper case letters, and must not be longer than 8 characters.' useIcons=false required=false}}
         {{form.element controlType="text" label="Provider Name" property="name" required=false helptext="this is the name that you are known by in the scholarly community -- this name will be used in our search index"}}
 
-        {{#form.element controlType="power-select" label="Organisation lookup (optional)" disabled=disabled value=organization helpText='Organisation names are provided by the Research Organization Registry (ROR).'  options=organizationsNames as |el|}}
-          {{el.control onChange=(action "selectOrganization")   search=(action "searchOrganization") placeholder="Select Organisation" searchPlaceholder="Type to search..." allowClear=true}}
+        {{#form.element controlType="power-select" label="Organization lookup (optional)" disabled=disabled value=organization helpText='Organization names are provided by the Research Organization Registry (ROR).'  options=organizationsNames as |el|}}
+          {{el.control onChange=(action "selectOrganization")   search=(action "searchOrganization") placeholder="Select Organization" searchPlaceholder="Type to search..." allowClear=true}}
         {{/form.element}} 
 
         {{form.element controlType="text" label="Website" property="website" helpText='Website of the provider.' required=true}}
