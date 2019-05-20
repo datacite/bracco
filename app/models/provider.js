@@ -37,14 +37,14 @@ const Validations = buildValidations({
   ],
   twitterHandle: [ 
     validator('format', {
-      regex: /^[a-zA-Z0-9_@]{1,15}$/,
+      regex: /^[a-zA-Z0-9_@]{1,16}$/,
       allowBlank: true,
       message: 'The twitter handle is only 15 characters.'
     }),
     validator('format', {
-      regex: /^[a-zA-Z0-9_]+$/,
+      regex: /^@[a-zA-Z0-9_]+$/,
       allowBlank: true,
-      message: 'You do not need to include @.'
+      message: 'Must start with @.'
     }),
   ],
   name: validator('presence', true),

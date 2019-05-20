@@ -16,7 +16,7 @@
         {{form.element controlType="text" id="contact-name" label="Contact Name" property="contactName" helpText='Please enter the name of a person that can be contacted for technical or administrative issues.' required=false}}
         {{form.element controlType="email" id="contact-email" label="Contact Email" property="contactEmail" helpText='Please enter an email address that can be contacted for technical or administrative issues.' required=false}}
         {{form.element controlType="text" id="contact-phone" label="Contact Phone (optional)" property="phone" helpText='Please enter a phone number that can be contacted for technical or administrative issues.' required=false}}
-        {{form.element controlType="text" id="twitter-handle"  label="Twitter (optional)"  property="twitterHandle"  placeholder="Add twitter account wihtout @" helpText='DataCite will follow you on twitter.' required=false}}
+        {{form.element controlType="text" id="twitter-handle"  label="Twitter (optional)"  property="twitterHandle"  placeholder="Add @twitter account" helpText='DataCite will follow you on twitter.' required=false}}
 
 
         {{#form.element controlType="power-select" label="Country (optional)" property="country" optionLabelPath="name" options=countries destination=country helpText='Country where the provider is located.' as |el|}}
@@ -47,7 +47,7 @@
           <h4>Billing Information</h4>
           <div class="help-block ember-view">Your organization’s information for DataCite billing purposes</div>
         </div>
-        {{form.element controlType="text" id="billing-information-organization" label="Billing Organization" property="billingInformation.organization"  helpText="Your organization's name billing purposes"  required=false}}
+        {{form.element controlType="text" id="billing-information-organization" label="Billing Organization" property="billingInformation.organization"  helpText="Your organization's name for billing purposes"  required=false}}
         {{form.element controlType="text" id="billing-information-department" label="Billing Department" property="billingInformation.department"  helpText="Your organization's specific department that is responsible for payment" required=false}}
         {{form.element controlType="textarea" rows=3 id="billing-information-street" label="Billing Street" property="billingInformation.address"  helpText="Your organization's street and number for billing purposes" required=false}}
         
@@ -55,7 +55,7 @@
         {{form.element controlType="text" id="billing-information-state" label="Billing State/Province" property="billingInformation.state"  helpText="Your organization's State/Province for billing purposes" required=false}}
         {{form.element controlType="text" id="billing-information-post-code" label=" Billing Zip/PostCode" property="billingInformation.postCode"  helpText="Your organization's Zip/PostCode for billing purposes"  required=false}}
 
-        {{#form.element controlType="power-select" label="Billing Country" property="billingInformation.country" optionLabelPath="name" options=countries helpText='Country where the provider is located.' destination=billingInformation.country as |el|}}
+        {{#form.element controlType="power-select" label="Billing Country" property="billingInformation.country" optionLabelPath="name" options=countries helpText='Country name for billing purposes.' destination=billingInformation.country as |el|}}
           {{#el.control onChange=(action "selectBillingCountry") search=(action "searchCountry") searchField="name" placeholder="Select Country" searchPlaceholder="Type to search..." allowClear=true as |item|}}
             {{item.name}}
           {{/el.control}}
