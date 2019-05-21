@@ -1,5 +1,6 @@
 import { computed } from '@ember/object';
 import DS from 'ember-data';
+import ENV from 'bracco/config/environment';
 import { validator, buildValidations } from 'ember-cp-validations';
 
 const Validations = buildValidations({
@@ -148,6 +149,12 @@ export default DS.Model.extend(Validations, {
   providerCount: computed('meta', function() {
     return this.get('meta.providers');
   }),
+  isEnvironmentProduction: computed('repository', function() {
+    if (ENV.environment === "production"){
+      return true;
+    }
+    return false;
+  }), 
   currentProviderCount: computed('providerCount', function() {
     let currentYear = this.providerCount.get('lastObject');
     if (currentYear) {
