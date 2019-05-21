@@ -61,6 +61,9 @@
           {{/el.control}}
         {{/form.element}}
 
+        {{form.element controlType="text" id="billing-contact-email" model=model.billingContact label="Billing Email" property="email" helpText="Billing contact email for your organisation." required=false}}
+        {{form.element controlType="text" id="billing-contact-givenName" model=model.billingContact label="Billing Given Name" property="givenName" helpText="Given name for this contact" required=false}}
+        {{form.element controlType="text" id="billing-contact-familyName" model=model.billingContact label="Billing Family Name" property="familyName" helpText="Family name for this contact" required=false}}
 
         <div class="col-md-9 col-md-offset-3">
           <br>
@@ -261,6 +264,14 @@
               <h5>Billing Country</h5>
               {{model.billingInformation.country.name}}
             {{/if}}
+
+            {{#if model.billingContact.email}}
+              <h5>Billing Contact</h5>
+              {{model.billingContact.givenName}} {{model.billingContact.familyName}}
+              <br>
+              <a href="mailto:{{model.billingContact.email}}">{{model.billingContact.email}}</a>
+            {{/if}}
+
           {{else}}
             <span class="small icon-warning">has not been provided</span>
           {{/if}}
