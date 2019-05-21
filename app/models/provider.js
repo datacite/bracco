@@ -1,6 +1,7 @@
 import { computed } from '@ember/object';
 import DS from 'ember-data';
 import { validator, buildValidations } from 'ember-cp-validations';
+import { fragment } from 'ember-data-model-fragments/attributes';
 
 const Validations = buildValidations({
   symbol: [
@@ -35,7 +36,7 @@ const Validations = buildValidations({
       })
     })
   ],
-  twitterHandle: [ 
+  twitterHandle: [
     validator('format', {
       regex: /^[a-zA-Z0-9_@]{1,16}$/,
       allowBlank: true,
@@ -91,7 +92,8 @@ const Validations = buildValidations({
       type: 'url',
       message: 'Please enter a valid website URL.'
     })
-  ]
+  ],
+  generalContact: validator('belongs-to')
 });
 
 export default DS.Model.extend(Validations, {
@@ -116,6 +118,9 @@ export default DS.Model.extend(Validations, {
   rorId: DS.attr('string'),
   twitterHandle: DS.attr('string'),
   billingInformation: DS.attr('billingInformation'),
+  technicalContact: fragment('contact'),
+  serviceContact: fragment('contact'),
+  votingContact: fragment('contact'),
   joined: DS.attr('date'),
   created: DS.attr('date'),
   updated: DS.attr('date'),
