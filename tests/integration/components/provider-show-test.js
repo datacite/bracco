@@ -14,10 +14,10 @@ module('Integration | Component | provider-show', function(hooks) {
     // Template block usage:
     await render(hbs`
       {{#provider-show model=model link="clients.index"}}
-        
+
       {{/provider-show}}
     `);
 
-    assert.dom('*').hasText('Provider ID Contact Name Dr. Steven McEachern Contact Email ada@anu.edu.au Billing Information Password has not been set');
+    assert.dom('*').hasText('Provider ID Contact Name Dr. Steven McEachern Contact Email ada@anu.edu.au Billing Information Additional Contacts Password has not been set');
   });
 });

@@ -2,14 +2,14 @@
   <div class="panel panel-transparent">
     <div class="panel-body">
       <div class="col-md-9 col-md-offset-3"><h3 class="edit">Update {{if (eq currentUser.uid model.id) 'Account' 'Provider'}}</h3></div>
-      
+
       {{#bs-form formLayout="horizontal" horizontalLabelGridClass="col-md-3" model=model onSubmit=(action "submit" model) as |form|}}
         {{form.element controlType="text" id="provider-id" label="Provider ID" property="symbol" helpText='The Provider ID is the unique identifier for each provider and can\'t be changed.' disabled=true}}
-      
+
         {{#form.element controlType="power-select" label="Organization lookup (optional)" disabled=disabled value=organization helpText='Organization names are provided by the Research Organization Registry (ROR).'  options=organizationsNames as |el|}}
           {{el.control onChange=(action "selectOrganization")   search=(action "searchOrganization") placeholder="Select Organization" searchPlaceholder="Type to search..." allowClear=true}}
-        {{/form.element}}      
-      
+        {{/form.element}}
+
         {{form.element controlType="text" id="provider-name" label="Provider Name" property="name" required=false}}
 
         {{form.element controlType="text" id="website" label="Website" property="website" helpText='Website of the provider.' required=false}}
@@ -50,7 +50,7 @@
         {{form.element controlType="text" id="billing-information-organization" label="Billing Organization" property="billingInformation.organization"  helpText="Your organization's name for billing purposes"  required=false}}
         {{form.element controlType="text" id="billing-information-department" label="Billing Department" property="billingInformation.department"  helpText="Your organization's specific department that is responsible for payment" required=false}}
         {{form.element controlType="textarea" rows=3 id="billing-information-street" label="Billing Street" property="billingInformation.address"  helpText="Your organization's street and number for billing purposes" required=false}}
-        
+
         {{form.element controlType="text" id="billing-information-city" label="Billing City" property="billingInformation.city" helpText="Your organization's city for billing purposes" required=false}}
         {{form.element controlType="text" id="billing-information-state" label="Billing State/Province" property="billingInformation.state"  helpText="Your organization's State/Province for billing purposes" required=false}}
         {{form.element controlType="text" id="billing-information-post-code" label=" Billing Zip/PostCode" property="billingInformation.postCode"  helpText="Your organization's Zip/PostCode for billing purposes"  required=false}}
@@ -61,7 +61,26 @@
           {{/el.control}}
         {{/form.element}}
 
-        
+
+        <div class="col-md-9 col-md-offset-3">
+          <br>
+          <h4>Additional Contacts</h4>
+          <div class="help-block ember-view">Additional contacts for your organization.</div>
+        </div>
+
+          {{form.element controlType="text" id="technical-contact-email" model=model.technicalContact label="Technical Email" property="email" helpText="Technical contact email for your organisation." required=false}}
+          {{form.element controlType="text" id="technical-contact-givenName" model=model.technicalContact label="Technical Given Name" property="givenName" helpText="Given name for this contact" required=false}}
+          {{form.element controlType="text" id="technical-contact-familyName" model=model.technicalContact label="Technical Family Name" property="familyName" helpText="Family name for this contact" required=false}}
+
+          {{form.element controlType="text" id="service-contact-email" model=model.serviceContact label="Service Email" property="email" helpText="Service contact email for your organisation." required=false}}
+          {{form.element controlType="text" id="service-contact-givenName" model=model.serviceContact label="Service Given Name" property="givenName" helpText="Given name for this contact" required=false}}
+          {{form.element controlType="text" id="service-contact-familyName" model=model.serviceContact label="Service Family Name" property="familyName" helpText="Family name for this contact" required=false}}
+
+          {{form.element controlType="text" id="voting-contact-email" model=model.votingContact label="Voting Email" property="email" helpText="Voting contact email for your organisation." required=false}}
+          {{form.element controlType="text" id="voting-contact-givenName" model=model.votingContact label="Voting Given Name" property="givenName" helpText="Given name for this contact" required=false}}
+          {{form.element controlType="text" id="voting-contact-familyName" model=model.votingContact label="Voting Family Name" property="familyName" helpText="Family name for this contact" required=false}}
+
+
         {{#if (can "create provider")}}
           {{form.element controlType="checkbox" label="Account is active" property="isActive" required=false helpText='This account can manage clients and prefixes'}}
         {{/if}}
@@ -210,7 +229,7 @@
           <br>
           <h4>Billing Information</h4>
 
-          {{#if (not isBillingEmpty)}} 
+          {{#if (not isBillingEmpty)}}
             {{!-- {{provider-billing-information model.billingInformation address=model.billingInformation.address city=model.billingInformation.city state=model.billingInformation.state postCode=model.billingInformation.postCode}} --}}
             {{#if model.billingInformation.organization}}
               <h5>Billing Organization</h5>
@@ -246,7 +265,36 @@
             <span class="small icon-warning">has not been provided</span>
           {{/if}}
 
+          <br>
+          <h4>Additional Contacts</h4>
 
+          {{#if model.generalContact}}
+            <h5>General</h5>
+            {{model.generalContact.givenName}} {{model.generalContact.familyName}}
+            <br>
+            <a href="mailto:{{model.generalContact.email}}">{{model.generalContact.email}}</a>
+          {{/if}}
+
+          {{#if model.technicalContact.email}}
+            <h5>Technical</h5>
+            {{model.technicalContact.givenName}} {{model.technicalContact.familyName}}
+            <br>
+            <a href="mailto:{{model.technicalContact.email}}">{{model.technicalContact.email}}</a>
+          {{/if}}
+
+          {{#if model.serviceContact.email}}
+            <h5>Service</h5>
+            {{model.serviceContact.givenName}} {{model.serviceContact.familyName}}
+            <br>
+            <a href="mailto:{{model.serviceContact.email}}">{{model.serviceContact.email}}</a>
+          {{/if}}
+
+          {{#if model.votingContact.email}}
+            <h5>Voting</h5>
+            {{model.votingContact.givenName}} {{model.votingContact.familyName}}
+            <br>
+            <a href="mailto:{{model.votingContact.email}}">{{model.votingContact.email}}</a>
+          {{/if}}
 
           {{#if model.joined}}
             <h5>Date joined</h5>
