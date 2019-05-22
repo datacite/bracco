@@ -61,6 +61,13 @@
           {{/el.control}}
         {{/form.element}}
 
+        {{form.element controlType="text" id="billing-contact-email" model=model.billingContact label="Billing Contact Email" property="email" helpText="Billing contact email for your organisation." required=false}}
+        {{form.element controlType="text" id="billing-contact-givenName" model=model.billingContact label="Billing Given Name" property="givenName" helpText="Given name for this billing contact" required=false}}
+        {{form.element controlType="text" id="billing-contact-familyName" model=model.billingContact label="Billing Family Name" property="familyName" helpText="Family name for this billing contact" required=false}}
+
+        {{form.element controlType="text" id="secondary-billing-contact-email" model=model.secondaryBillingContact label="Secondary Billing Email" property="email" helpText="Secondary Billing contact email for your organisation." required=false}}
+        {{form.element controlType="text" id="secondary-billing-contact-givenName" model=model.secondaryBillingContact label="Secondary Billing Given Name" property="givenName" helpText="Given name for this billing contact" required=false}}
+        {{form.element controlType="text" id="secondary-billing-contact-familyName" model=model.secondaryBillingContact label="Secondary Billing Family Name" property="familyName" helpText="Family name for this billing contact" required=false}}
 
         <div class="col-md-9 col-md-offset-3">
           <br>
@@ -230,7 +237,6 @@
           <h4>Billing Information</h4>
 
           {{#if (not isBillingEmpty)}}
-            {{!-- {{provider-billing-information model.billingInformation address=model.billingInformation.address city=model.billingInformation.city state=model.billingInformation.state postCode=model.billingInformation.postCode}} --}}
             {{#if model.billingInformation.organization}}
               <h5>Billing Organization</h5>
               {{model.billingInformation.organization}}
@@ -261,6 +267,21 @@
               <h5>Billing Country</h5>
               {{model.billingInformation.country.name}}
             {{/if}}
+
+            {{#if model.billingContact.email}}
+              <h5>Billing Contact</h5>
+              {{model.billingContact.givenName}} {{model.billingContact.familyName}}
+              <br>
+              <a href="mailto:{{model.billingContact.email}}">{{model.billingContact.email}}</a>
+            {{/if}}
+
+            {{#if model.secondaryBillingContact.email}}
+              <h5>Secondary Billing Contact</h5>
+              {{model.secondaryBillingContact.givenName}} {{model.secondaryBillingContact.familyName}}
+              <br>
+              <a href="mailto:{{model.secondaryBillingContact.email}}">{{model.secondaryBillingContact.email}}</a>
+            {{/if}}
+
           {{else}}
             <span class="small icon-warning">has not been provided</span>
           {{/if}}

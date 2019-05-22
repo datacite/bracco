@@ -120,6 +120,8 @@ export default DS.Model.extend(Validations, {
   twitterHandle: DS.attr('string'),
   billingInformation: DS.attr('billingInformation'),
   technicalContact: fragment('contact'),
+  billingContact: fragment('contact'),
+  secondaryBillingContact: fragment('contact'),
   serviceContact: fragment('contact'),
   votingContact: fragment('contact'),
   joined: DS.attr('date'),

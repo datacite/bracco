@@ -58,6 +58,14 @@
           {{/el.control}}
         {{/form.element}}
 
+        {{form.element controlType="text" id="billing-contact-email" model=model.billingContact label="Billing Email" property="email" helpText="Billing contact email for your organisation." required=isEnvironmentProduction}}
+        {{form.element controlType="text" id="billing-contact-givenName" model=model.billingContact label="Billing Given Name" property="givenName" helpText="Given name for this billing contact" required=isEnvironmentProduction}}
+        {{form.element controlType="text" id="billing-contact-familyName" model=model.billingContact label="Billing Family Name" property="familyName" helpText="Family name for this billing contact" required=isEnvironmentProduction}}
+
+        {{form.element controlType="text" id="secondary-billing-contact-email" model=model.secondaryBillingContact label="Secondary Billing Email" property="email" helpText="Secondary Billing contact email for your organisation." required=false}}
+        {{form.element controlType="text" id="secondary-billing-contact-givenName" model=model.secondaryBillingContact label="Secondary Billing Given Name" property="givenName" helpText="Given name for this billing contact" required=false}}
+        {{form.element controlType="text" id="secondary-billing-contact-familyName" model=model.secondaryBillingContact label="Secondary Billing Family Name" property="familyName" helpText="Family name for this billing contact" required=false}}
+
 
         {{form.element controlType="checkbox" label="Account is active" property="isActive" helpText='This account can manage clients and prefixes'}}
 
