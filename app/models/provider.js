@@ -121,6 +121,7 @@ export default DS.Model.extend(Validations, {
   billingInformation: DS.attr('billingInformation'),
   technicalContact: fragment('contact'),
   billingContact: fragment('contact'),
+  secondaryBillingContact: fragment('contact'),
   serviceContact: fragment('contact'),
   votingContact: fragment('contact'),
   joined: DS.attr('date'),
