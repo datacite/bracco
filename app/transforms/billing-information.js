@@ -3,7 +3,6 @@ import countryList from 'iso-3166-country-list';
 
 export default DS.Transform.extend({
   deserialize(serialized) {
-    console.log(serialized)
     if (serialized) {
 
       return {
@@ -22,8 +21,6 @@ export default DS.Transform.extend({
 
   serialize(deserialized) {
     if (deserialized) {
-      console.log("dhdhdhdhd")
-      console.log(deserialized)
       return  {
         city: deserialized.city,
         state: deserialized.state,
