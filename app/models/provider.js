@@ -94,7 +94,26 @@ const Validations = buildValidations({
       message: 'Please enter a valid website URL.'
     })
   ],
-  generalContact: validator('belongs-to')
+  technicalContact: [
+    validator('presence', true),
+    validator('belongs-to')
+  ],
+  serviceContact: [
+    validator('presence', true),
+    validator('belongs-to')
+  ],
+  votingContact: [
+    validator('presence', true),
+    validator('belongs-to')
+  ],
+  billingContact: [
+    validator('presence', true),
+    validator('belongs-to')
+  ],
+  secondaryBillingContact: [
+    validator('presence', false),
+    validator('belongs-to')
+  ],
 });
 
 export default DS.Model.extend(Validations, {
@@ -161,7 +180,7 @@ export default DS.Model.extend(Validations, {
       return true;
     }
     return false;
-  }), 
+  }),
   currentProviderCount: computed('providerCount', function() {
     let currentYear = this.providerCount.get('lastObject');
     if (currentYear) {

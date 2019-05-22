@@ -99,18 +99,6 @@ export default Component.extend({
         country: this.provider.get('billingInformationCountry')
       });
 
-      this.provider.set('billingContact', {
-        email: this.provider.get('billingContactEmail'),
-        givenName: this.provider.get('billingContactGivenName'),
-        familyName: this.provider.get('billingContactFamilyName')
-      });
-
-      this.provider.set('secondaryBillingContact', {
-        email: this.provider.get('secondaryBillingContactEmail'),
-        givenName: this.provider.get('secondaryBillingContactGivenName'),
-        familyName: this.provider.get('secondaryBillingContactFamilyName')
-      });
-
       console.log(provider)
       provider.save().then(function(provider) {
         self.router.transitionTo('providers.show.settings', provider.id);
@@ -159,9 +147,9 @@ export default Component.extend({
       });
     },
     selectOrganization(organization) {
-    
+
       let organizationRecord = this.get('organizations').findBy('name', organization);
-     
+
       this.set('organization', organization);
       this.provider.set('rorId','https://'+organizationRecord.id);
     }

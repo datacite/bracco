@@ -2,14 +2,14 @@
   <div class="panel panel-transparent">
     <div class="panel-body">
       <div class="col-md-9 col-md-offset-3"><h3 class="edit">Create Provider</h3></div>
-      
+
       {{#bs-form formLayout="horizontal" horizontalLabelGridClass="col-md-3" model=provider onSubmit=(action "submit" provider model) submitOnEnter=true as |form|}}
         {{form.element controlType="text" label="Provider ID" property="symbol" helpText='The Provider ID is the unique identifier for each provider and can\'t be changed. The Provider ID can contain only upper case letters, and must not be longer than 8 characters.' useIcons=false required=false}}
         {{form.element controlType="text" label="Provider Name" property="name" required=false helptext="this is the name that you are known by in the scholarly community -- this name will be used in our search index"}}
 
         {{#form.element controlType="power-select" label="Organization lookup (optional)" disabled=disabled value=organization helpText='Organization names are provided by the Research Organization Registry (ROR).'  options=organizationsNames as |el|}}
           {{el.control onChange=(action "selectOrganization")   search=(action "searchOrganization") placeholder="Select Organization" searchPlaceholder="Type to search..." allowClear=true}}
-        {{/form.element}} 
+        {{/form.element}}
 
         {{form.element controlType="text" label="Website" property="website" helpText='Website of the provider.' required=true}}
         {{form.element controlType="text" label="Contact Name" property="contactName" helpText='Please enter the name of a person that can be contacted for technical or administrative issues.' required=false}}
@@ -21,7 +21,7 @@
           {{#el.control onChange=(action "selectCountry") search=(action "searchCountry") searchField="name" placeholder="Select Country" searchPlaceholder="Type to search..." allowClear=true as |item|}}
             {{item.name}}
           {{/el.control}}
-        {{/form.element}} 
+        {{/form.element}}
 
         {{#if (can "create provider")}}
           {{#form.element controlType="power-select" label="Organization Type (optional)" property="organizationType" options=organizationTypes destination=organizationType as |el|}}
@@ -47,7 +47,7 @@
         {{form.element controlType="text" id="billing-information-organization" label="Billing Organization" property="billingInformationOrganization"  helpText="Your organization's name for billing purposes" required=isEnvironmentProduction}}
         {{form.element controlType="text" id="billing-information-department" label="Billing Department" property="billingInformationDepartment"  helpText="Your organization's specific department that is responsible for payment" required=isEnvironmentProduction}}
         {{form.element controlType="textarea" rows=3 id="billing-information-street" label="Billing Street" property="billingInformationAddress"  helpText="Your organization's street and number for billing purposes" required=isEnvironmentProduction}}
-        
+
         {{form.element controlType="text" id="billing-information-city" label="Billing City" property="billingInformationCity"  helpText="Your organization's city for billing purposes" required=isEnvironmentProduction}}
         {{form.element controlType="text" id="billing-information-state" label="Billing State/Province" property="billingInformationState"  helpText="Your organization's State/Province for billing purposes" required=isEnvironmentProduction}}
         {{form.element controlType="text" id="billing-information-post-code" label=" Billing Zip/PostCode" property="billingInformationPostCode" helpText="Your organization's Zip/PostCode for billing purposes"  required=isEnvironmentProduction}}
@@ -58,13 +58,13 @@
           {{/el.control}}
         {{/form.element}}
 
-        {{form.element controlType="text" id="billing-contact-email"  label="Billing Email" property="billingContactEmail" helpText="Billing contact email for your organisation." required=isEnvironmentProduction}}
-        {{form.element controlType="text" id="billing-contact-givenName"  label="Billing Given Name" property="billingContactGivenName" helpText="Given name for this billing contact" required=isEnvironmentProduction}}
-        {{form.element controlType="text" id="billing-contact-familyName"  label="Billing Family Name" property="billingContactFamilyName" helpText="Family name for this billing contact" required=isEnvironmentProduction}}
+        {{form.element controlType="text" id="billing-contact-email" label="Billing Email" model=model.billingContact property="email" helpText="Billing contact email for your organisation." required=isEnvironmentProduction}}
+        {{form.element controlType="text" id="billing-contact-givenName" label="Billing Given Name" model=model.billingContact property="givenName" helpText="Given name for this billing contact" required=isEnvironmentProduction}}
+        {{form.element controlType="text" id="billing-contact-familyName" label="Billing Family Name" model=model.billingContact property="familyName" helpText="Family name for this billing contact" required=isEnvironmentProduction}}
 
-        {{form.element controlType="text" id="secondary-billing-contact-email"  label="Secondary Billing Email" property="secondaryBillingContactEmail" helpText="Secondary Billing contact email for your organisation." required=false}}
-        {{form.element controlType="text" id="secondary-billing-contact-givenName"  label="Secondary Billing Given Name" property="secondaryBillingContactGivenName" helpText="Given name for this billing contact" required=false}}
-        {{form.element controlType="text" id="secondary-billing-contact-familyName"  label="Secondary Billing Family Name" property="secondaryBillingContactFamilyName" helpText="Family name for this billing contact" required=false}}
+        {{form.element controlType="text" id="secondary-billing-contact-email" label="Secondary Billing Email" model=model.billingContact property="email" helpText="Secondary Billing contact email for your organisation." required=false}}
+        {{form.element controlType="text" id="secondary-billing-contact-givenName" label="Secondary Billing Given Name" model=model.billingContact property="givenName" helpText="Given name for this billing contact" required=false}}
+        {{form.element controlType="text" id="secondary-billing-contact-familyName" label="Secondary Billing Family Name" model=model.billingContact property="familyName" helpText="Family name for this billing contact" required=false}}
 
 
         {{form.element controlType="checkbox" label="Account is active" property="isActive" helpText='This account can manage clients and prefixes'}}

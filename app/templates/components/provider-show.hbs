@@ -14,7 +14,6 @@
 
         {{form.element controlType="text" id="website" label="Website" property="website" helpText='Website of the provider.' required=false}}
         {{form.element controlType="text" id="contact-name" label="Contact Name" property="contactName" helpText='Please enter the name of a person that can be contacted for technical or administrative issues.' required=false}}
-        {{form.element controlType="email" id="contact-email" label="Contact Email" property="contactEmail" helpText='Please enter an email address that can be contacted for technical or administrative issues.' required=false}}
         {{form.element controlType="text" id="contact-phone" label="Contact Phone (optional)" property="phone" helpText='Please enter a phone number that can be contacted for technical or administrative issues.' required=false}}
         {{form.element controlType="text" id="twitter-handle"  label="Twitter (optional)"  property="twitterHandle"  placeholder="Add @twitter account" helpText='DataCite will follow you on twitter.' required=false}}
 
@@ -44,6 +43,28 @@
 
         <div class="col-md-9 col-md-offset-3">
           <br>
+          <h4>Service Contact Information</h4>
+          <div class="help-block ember-view">Additional contacts for your organization.</div>
+        </div>
+
+          {{form.element controlType="email" id="contact-email" label="General Contact - Email" property="contactEmail" helpText='Please enter an email for general communication with your organisation' required=false}}
+
+          {{form.element controlType="text" id="service-contact-email" model=model.serviceContact label="Service Contact - Email" property="email" helpText="Your organization's primary personal point of contact for DataCite services." required=false}}
+          {{form.element controlType="text" id="service-contact-givenName" model=model.serviceContact label="Service Contact - Given Name" property="givenName" helpText="Given name for this contact" required=false}}
+          {{form.element controlType="text" id="service-contact-familyName" model=model.serviceContact label="Service Contact - Family Name" property="familyName" helpText="Family name for this contact" required=false}}
+
+          {{form.element controlType="text" id="technical-contact-email" model=model.technicalContact label="Technical Contact - Email" property="email" helpText="Your organization's technical point of contact for DataCite services." required=false}}
+          {{form.element controlType="text" id="technical-contact-givenName" model=model.technicalContact label="Technical Contact - Given Name" property="givenName" helpText="Given name for this contact" required=false}}
+          {{form.element controlType="text" id="technical-contact-familyName" model=model.technicalContact label="Technical Contact - Family Name" property="familyName" helpText="Family name for this contact" required=false}}
+
+          {{form.element controlType="text" id="voting-contact-email" model=model.votingContact label="Voting Contact - Email" property="email" helpText="Contact email for the voting representative (per DataCite's statutes)" required=false}}
+          {{form.element controlType="text" id="voting-contact-givenName" model=model.votingContact label="Voting Contact - Given Name" property="givenName" helpText="Given name for this contact" required=false}}
+          {{form.element controlType="text" id="voting-contact-familyName" model=model.votingContact label="Voting Contact - Family Name" property="familyName" helpText="Family name for this contact" required=false}}
+
+
+
+        <div class="col-md-9 col-md-offset-3">
+          <br>
           <h4>Billing Information</h4>
           <div class="help-block ember-view">Your organization’s information for DataCite billing purposes</div>
         </div>
@@ -68,25 +89,6 @@
         {{form.element controlType="text" id="secondary-billing-contact-email" model=model.secondaryBillingContact label="Secondary Billing Email" property="email" helpText="Secondary Billing contact email for your organisation." required=false}}
         {{form.element controlType="text" id="secondary-billing-contact-givenName" model=model.secondaryBillingContact label="Secondary Billing Given Name" property="givenName" helpText="Given name for this billing contact" required=false}}
         {{form.element controlType="text" id="secondary-billing-contact-familyName" model=model.secondaryBillingContact label="Secondary Billing Family Name" property="familyName" helpText="Family name for this billing contact" required=false}}
-
-        <div class="col-md-9 col-md-offset-3">
-          <br>
-          <h4>Additional Contacts</h4>
-          <div class="help-block ember-view">Additional contacts for your organization.</div>
-        </div>
-
-          {{form.element controlType="text" id="technical-contact-email" model=model.technicalContact label="Technical Email" property="email" helpText="Technical contact email for your organisation." required=false}}
-          {{form.element controlType="text" id="technical-contact-givenName" model=model.technicalContact label="Technical Given Name" property="givenName" helpText="Given name for this contact" required=false}}
-          {{form.element controlType="text" id="technical-contact-familyName" model=model.technicalContact label="Technical Family Name" property="familyName" helpText="Family name for this contact" required=false}}
-
-          {{form.element controlType="text" id="service-contact-email" model=model.serviceContact label="Service Email" property="email" helpText="Service contact email for your organisation." required=false}}
-          {{form.element controlType="text" id="service-contact-givenName" model=model.serviceContact label="Service Given Name" property="givenName" helpText="Given name for this contact" required=false}}
-          {{form.element controlType="text" id="service-contact-familyName" model=model.serviceContact label="Service Family Name" property="familyName" helpText="Family name for this contact" required=false}}
-
-          {{form.element controlType="text" id="voting-contact-email" model=model.votingContact label="Voting Email" property="email" helpText="Voting contact email for your organisation." required=false}}
-          {{form.element controlType="text" id="voting-contact-givenName" model=model.votingContact label="Voting Given Name" property="givenName" helpText="Given name for this contact" required=false}}
-          {{form.element controlType="text" id="voting-contact-familyName" model=model.votingContact label="Voting Family Name" property="familyName" helpText="Family name for this contact" required=false}}
-
 
         {{#if (can "create provider")}}
           {{form.element controlType="checkbox" label="Account is active" property="isActive" required=false helpText='This account can manage clients and prefixes'}}
@@ -288,13 +290,6 @@
 
           <br>
           <h4>Additional Contacts</h4>
-
-          {{#if model.generalContact}}
-            <h5>General</h5>
-            {{model.generalContact.givenName}} {{model.generalContact.familyName}}
-            <br>
-            <a href="mailto:{{model.generalContact.email}}">{{model.generalContact.email}}</a>
-          {{/if}}
 
           {{#if model.technicalContact.email}}
             <h5>Technical</h5>
