@@ -4,6 +4,9 @@ import { validator, buildValidations } from 'ember-cp-validations';
 import fetch from 'fetch';
 import countryList from 'iso-3166-country-list';
 import ENV from 'bracco/config/environment';
+import { computed } from '@ember/object';
+import { isEmpty } from '@ember/utils';
+
 const organizationTypeList = [
   'academicInstitution',
   'academicLibrary',
@@ -39,7 +42,6 @@ export default Component.extend(Validations, {
 
   edit: false,
   change: false,
-  isBillingEmpty: false,
   delete: false,
   provider: null,
   confirmId: null,
@@ -91,6 +93,15 @@ export default Component.extend(Validations, {
       }
     });
   },
+  isBillingEmpty: computed('billingInformation', function() {
+    return isEmpty(this.model.get('billingInformation.city')) &&
+    isEmpty(this.model.get('billingInformation.postCode')) &&
+    isEmpty(this.model.get('billingInformation.state')) &&
+    isEmpty(this.model.get('billingInformation.department')) &&
+    isEmpty(this.model.get('billingInformation.organization')) &&
+    isEmpty(this.model.get('billingInformation.country')) &&
+    isEmpty(this.model.get('billingInformation.address'));
+  }),
   searchCountry(query) {
     var countries = countryList.filter(function(country) {
       return country.name.toLowerCase().startsWith(query.toLowerCase());
@@ -249,7 +260,7 @@ export default Component.extend(Validations, {
       });
     },
     selectOrganization(organization) {
-    
+
       let organizationRecord = this.get('organizations').findBy('name', organization);
       this.set('organization', organization);
       this.provider.set('rorId','https://'+organizationRecord.id);
