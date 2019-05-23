@@ -16,7 +16,7 @@
           {{el.control onChange=(action "selectOrganization")   search=(action "searchOrganization") placeholder="Select Organization" searchPlaceholder="Type to search..." allowClear=true}}
         {{/form.element}}
 
-        {{form.element controlType="text" label="Website" property="website" helpText='Website of the provider.' required=true}}
+        {{form.element controlType="text" label="Website" property="website" helpText='Website of the provider.' required=false}}
         {{form.element controlType="text" id="twitter-handle" label="Twitter (optional)"  property="twitterHandle"  placeholder="Add @twitter account" helpText='DataCite will follow you on twitter.' required=false}}
 
          {{#form.element controlType="power-select" label="Country (optional)" property="country" optionLabelPath="name" options=countries destination=country helpText='Country where the provider is located.' as |el|}}
