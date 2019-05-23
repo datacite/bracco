@@ -46,7 +46,7 @@ const Validations = buildValidations({
     validator('format', {
       regex: /^@[a-zA-Z0-9_]+$/,
       allowBlank: true,
-      message: 'Must start with @.'
+      message: 'Must start with @ followed by alphanumeric characters.'
     }),
   ],
   name: validator('presence', true),

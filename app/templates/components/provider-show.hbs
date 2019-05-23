@@ -4,6 +4,11 @@
       <div class="col-md-9 col-md-offset-3"><h3 class="edit">Update {{if (eq currentUser.uid model.id) 'Account' 'Provider'}}</h3></div>
 
       {{#bs-form formLayout="horizontal" horizontalLabelGridClass="col-md-3" model=model onSubmit=(action "submit" model) as |form|}}
+        <div class="col-md-12">
+          <h4>Organization Information</h4>
+          <br>
+        </div>
+
         {{form.element controlType="text" id="provider-id" label="Provider ID" property="symbol" helpText='The Provider ID is the unique identifier for each provider and can\'t be changed.' disabled=true}}
 
         {{#form.element controlType="power-select" label="Organization lookup (optional)" disabled=disabled value=organization helpText='Organization names are provided by the Research Organization Registry (ROR).'  options=organizationsNames as |el|}}
@@ -12,8 +17,8 @@
 
         {{form.element controlType="text" id="provider-name" label="Provider Name" property="name" required=false}}
 
-        {{form.element controlType="text" id="website" label="Website" property="website" helpText='Website of the provider.' required=false}}        }
-        {{form.element controlType="text" id="twitter-handle"  label="Twitter (optional)"  property="twitterHandle"  placeholder="Add @twitter account" helpText='DataCite will follow you on twitter.' required=false}}
+        {{form.element controlType="text" id="website" label="Website" property="website" helpText='Website of the provider.' required=false}}
+        {{form.element controlType="text" id="twitter-handle"  label="Twitter (optional)"  property="twitterHandle"  placeholder="Add @twitter account" helpText='DataCite will follow you on Twitter.' required=false}}
 
 
         {{#form.element controlType="power-select" label="Country (optional)" property="country" optionLabelPath="name" options=countries destination=country helpText='Country where the provider is located.' as |el|}}
@@ -39,9 +44,9 @@
         {{form.element controlType="textarea" label="Description (optional)" property="description" rows=10 helpText='Description of the provider. Please use markdown for formatting.' required=false}}
 
 
-        <div class="col-md-9 col-md-offset-3">
-          <br>
+        <div class="col-md-12">
           <h4>Service Contact Information</h4>
+          <br>
         </div>
 
           {{!-- {{form.element controlType="text" id="contact-name" label="Contact Name" property="contactName" helpText='Please enter the name of a person that can be contacted for technical or administrative issues.' required=false}} --}}
@@ -62,13 +67,22 @@
 
 
 
-        <div class="col-md-9 col-md-offset-3">
-          <br>
+        <div class="col-md-12">
           <h4>Billing Information</h4>
           <div class="help-block ember-view">Your organization’s information for DataCite billing purposes</div>
+          <br>
         </div>
         {{form.element controlType="text" id="billing-information-organization" label="Billing Organization" property="billingInformation.organization"  helpText="Your organization's name for billing purposes"  required=false}}
         {{form.element controlType="text" id="billing-information-department" label="Billing Department" property="billingInformation.department"  helpText="Your organization's specific department that is responsible for payment" required=false}}
+
+        {{form.element controlType="text" id="billing-contact-givenName" model=model.billingContact label="Billing Contact - Given Name" property="givenName" helpText="Given name for this billing contact" required=false}}
+        {{form.element controlType="text" id="billing-contact-familyName" model=model.billingContact label="Billing Contact - Family Name" property="familyName" helpText="Family name for this billing contact" required=false}}
+        {{form.element controlType="text" id="billing-contact-email" model=model.billingContact label="Billing Contact - Email" property="email" helpText="Billing contact email for your organisation." required=false}}
+
+        {{form.element controlType="text" id="secondary-billing-contact-givenName" model=model.secondaryBillingContact label="Secondary Billing Contact - Given Name (optional)" property="givenName" helpText="Given name for this billing contact" required=false}}
+        {{form.element controlType="text" id="secondary-billing-contact-familyName" model=model.secondaryBillingContact label="Secondary Billing Contact - Family Name (optional)" property="familyName" helpText="Family name for this billing contact" required=false}}
+        {{form.element controlType="text" id="secondary-billing-contact-email" model=model.secondaryBillingContact label="Secondary Billing Contact - Email (optional)" property="email" helpText="Secondary Billing contact email for your organisation." required=false}}
+
         {{form.element controlType="textarea" rows=3 id="billing-information-street" label="Billing Street" property="billingInformation.address"  helpText="Your organization's street and number for billing purposes" required=false}}
 
         {{form.element controlType="text" id="billing-information-city" label="Billing City" property="billingInformation.city" helpText="Your organization's city for billing purposes" required=false}}
@@ -80,14 +94,6 @@
             {{item.name}}
           {{/el.control}}
         {{/form.element}}
-
-        {{form.element controlType="text" id="billing-contact-email" model=model.billingContact label="Billing Contact Email" property="email" helpText="Billing contact email for your organisation." required=false}}
-        {{form.element controlType="text" id="billing-contact-givenName" model=model.billingContact label="Billing Given Name" property="givenName" helpText="Given name for this billing contact" required=false}}
-        {{form.element controlType="text" id="billing-contact-familyName" model=model.billingContact label="Billing Family Name" property="familyName" helpText="Family name for this billing contact" required=false}}
-
-        {{form.element controlType="text" id="secondary-billing-contact-email" model=model.secondaryBillingContact label="Secondary Billing Email" property="email" helpText="Secondary Billing contact email for your organisation." required=false}}
-        {{form.element controlType="text" id="secondary-billing-contact-givenName" model=model.secondaryBillingContact label="Secondary Billing Given Name" property="givenName" helpText="Given name for this billing contact" required=false}}
-        {{form.element controlType="text" id="secondary-billing-contact-familyName" model=model.secondaryBillingContact label="Secondary Billing Family Name" property="familyName" helpText="Family name for this billing contact" required=false}}
 
         {{#if (can "create provider")}}
           {{form.element controlType="checkbox" label="Account is active" property="isActive" required=false helpText='This account can manage clients and prefixes'}}
@@ -271,16 +277,16 @@
             <span class="small icon-warning">has not been set</span>
           {{/if}}
 
-                  <br>
-          <h4>Billing Information</h4>
-
           {{#if (not isBillingEmpty)}}
+            <br>
+            <h4>Billing Information</h4>
+
             {{#if model.billingInformation.organization}}
               <h5>Billing Organization</h5>
               {{model.billingInformation.organization}}
             {{/if}}
             {{#if model.billingInformation.department}}
-              <h5>Billing Department</h5>
+              <h5>Billing I caDepartment</h5>
               {{model.billingInformation.department}}
             {{/if}}
 
