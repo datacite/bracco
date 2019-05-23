@@ -53,17 +53,17 @@
           {{form.element controlType="text" id="contact-phone" label="Contact Phone (optional)" property="phone" helpText='Please enter a phone number that can be contacted for technical or administrative issues.' required=false}}
           {{form.element controlType="email" id="contact-email" label="General Contact - Email" property="contactEmail" helpText='A general (versus personal) contact e-mail for your service e.g. pids@example.org. This is used for account communication e.g. password resets.' required=false}}
 
-          {{form.element controlType="text" id="service-contact-email" model=model.serviceContact label="Service Contact - Email" property="email" helpText="Your organization's primary personal point of contact for DataCite services." required=false}}
-          {{form.element controlType="text" id="service-contact-givenName" model=model.serviceContact label="Service Contact - Given Name" property="givenName" helpText="Given name for this contact" required=false}}
-          {{form.element controlType="text" id="service-contact-familyName" model=model.serviceContact label="Service Contact - Family Name" property="familyName" helpText="Family name for this contact" required=false}}
+          {{form.element controlType="text" id="service-contact-email" model=model.serviceContact label="Service Contact - Email (optional)" property="email" helpText="Your organization's primary personal point of contact for DataCite services." required=false}}
+          {{form.element controlType="text" id="service-contact-givenName" model=model.serviceContact label="Service Contact - Given Name (optional)" property="givenName" helpText="Given name for this contact" required=false}}
+          {{form.element controlType="text" id="service-contact-familyName" model=model.serviceContact label="Service Contact - Family Name (optional)" property="familyName" helpText="Family name for this contact" required=false}}
 
-          {{form.element controlType="text" id="technical-contact-email" model=model.technicalContact label="Technical Contact - Email" property="email" helpText="Your organization's technical point of contact for DataCite services." required=false}}
-          {{form.element controlType="text" id="technical-contact-givenName" model=model.technicalContact label="Technical Contact - Given Name" property="givenName" helpText="Given name for this contact" required=false}}
-          {{form.element controlType="text" id="technical-contact-familyName" model=model.technicalContact label="Technical Contact - Family Name" property="familyName" helpText="Family name for this contact" required=false}}
+          {{form.element controlType="text" id="technical-contact-email" model=model.technicalContact label="Technical Contact - Email (optional)" property="email" helpText="Your organization's technical point of contact for DataCite services." required=false}}
+          {{form.element controlType="text" id="technical-contact-givenName" model=model.technicalContact label="Technical Contact - Given Name (optional)" property="givenName" helpText="Given name for this contact" required=false}}
+          {{form.element controlType="text" id="technical-contact-familyName" model=model.technicalContact label="Technical Contact - Family Name (optional)" property="familyName" helpText="Family name for this contact" required=false}}
 
-          {{form.element controlType="text" id="voting-contact-email" model=model.votingContact label="Voting Contact - Email" property="email" helpText="Contact email - Per DataCite's statutes, each member organization has one designated representative that annually approves our budget, fee structure, and votes for the Executive Board" required=false}}
-          {{form.element controlType="text" id="voting-contact-givenName" model=model.votingContact label="Voting Contact - Given Name" property="givenName" helpText="Given name for this contact" required=false}}
-          {{form.element controlType="text" id="voting-contact-familyName" model=model.votingContact label="Voting Contact - Family Name" property="familyName" helpText="Family name for this contact" required=false}}
+          {{form.element controlType="text" id="voting-contact-email" model=model.votingContact label="Voting Contact - Email (optional)" property="email" helpText="Contact email - Per DataCite's statutes, each member organization has one designated representative that annually approves our budget, fee structure, and votes for the Executive Board" required=false}}
+          {{form.element controlType="text" id="voting-contact-givenName" model=model.votingContact label="Voting Contact - Given Name (optional)" property="givenName" helpText="Given name for this contact" required=false}}
+          {{form.element controlType="text" id="voting-contact-familyName" model=model.votingContact label="Voting Contact - Family Name (optional)" property="familyName" helpText="Family name for this contact" required=false}}
 
 
 
@@ -75,9 +75,9 @@
         {{form.element controlType="text" id="billing-information-organization" label="Billing Organization" property="billingInformation.organization"  helpText="Your organization's name for billing purposes"  required=false}}
         {{form.element controlType="text" id="billing-information-department" label="Billing Department" property="billingInformation.department"  helpText="Your organization's specific department that is responsible for payment" required=false}}
 
-        {{form.element controlType="text" id="billing-contact-givenName" model=model.billingContact label="Billing Contact - Given Name" property="givenName" helpText="Given name for this billing contact" required=false}}
-        {{form.element controlType="text" id="billing-contact-familyName" model=model.billingContact label="Billing Contact - Family Name" property="familyName" helpText="Family name for this billing contact" required=false}}
-        {{form.element controlType="text" id="billing-contact-email" model=model.billingContact label="Billing Contact - Email" property="email" helpText="Billing contact email for your organisation." required=false}}
+        {{form.element controlType="text" id="billing-contact-givenName" model=model.billingContact label="Billing Contact - Given Name (optional)" property="givenName" helpText="Given name for this billing contact" required=false}}
+        {{form.element controlType="text" id="billing-contact-familyName" model=model.billingContact label="Billing Contact - Family Name (optional)" property="familyName" helpText="Family name for this billing contact" required=false}}
+        {{form.element controlType="text" id="billing-contact-email" model=model.billingContact label="Billing Contact - Email" property="email (optional)" helpText="Billing contact email for your organisation." required=false}}
 
         {{form.element controlType="text" id="secondary-billing-contact-givenName" model=model.secondaryBillingContact label="Secondary Billing Contact - Given Name (optional)" property="givenName" helpText="Given name for this billing contact" required=false}}
         {{form.element controlType="text" id="secondary-billing-contact-familyName" model=model.secondaryBillingContact label="Secondary Billing Contact - Family Name (optional)" property="familyName" helpText="Family name for this billing contact" required=false}}

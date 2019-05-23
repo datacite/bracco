@@ -94,22 +94,6 @@ const Validations = buildValidations({
       message: 'Please enter a valid website URL.'
     })
   ],
-  technicalContact: [
-    validator('presence', true),
-    validator('belongs-to')
-  ],
-  serviceContact: [
-    validator('presence', true),
-    validator('belongs-to')
-  ],
-  votingContact: [
-    validator('presence', true),
-    validator('belongs-to')
-  ],
-  billingContact: [
-    validator('presence', true),
-    validator('belongs-to')
-  ]
 });
 
 export default DS.Model.extend(Validations, {

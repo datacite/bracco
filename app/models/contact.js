@@ -4,15 +4,26 @@ import { validator, buildValidations } from 'ember-cp-validations';
 
 const Validations = buildValidations({
   'email': [
-    validator('presence', true),
+    validator('presence', {
+      presence: true,
+      allowBlank: true
+    }),
     validator('format', {
       type: 'email',
       allowNonTld: true,
       message: 'Please enter a valid email address.'
     })
   ],
-  'givenName': validator('presence', true),
-  'familyName': validator('presence', true)
+  'givenName': validator('presence', {
+    presence: true,
+    allowBlank: true
+  }),
+  'familyName': validator('presence', {
+    presence: true,
+    allowBlank: true
+  })
+}, {
+  isWarning: true
 });
 
 export default Fragment.extend(Validations, {
