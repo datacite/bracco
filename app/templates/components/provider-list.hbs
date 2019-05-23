@@ -4,6 +4,11 @@
       <div class="col-md-9 col-md-offset-3"><h3 class="edit">Create Provider</h3></div>
 
       {{#bs-form formLayout="horizontal" horizontalLabelGridClass="col-md-3" model=provider onSubmit=(action "submit" provider model) submitOnEnter=true as |form|}}
+        <div class="col-md-12">
+          <h4>Organization Information</h4>
+          <br>
+        </div>
+        
         {{form.element controlType="text" label="Provider ID" property="symbol" helpText='The Provider ID is the unique identifier for each provider and can\'t be changed. The Provider ID can contain only upper case letters, and must not be longer than 8 characters.' useIcons=false required=false}}
         {{form.element controlType="text" label="Provider Name" property="name" required=false helptext="this is the name that you are known by in the scholarly community -- this name will be used in our search index"}}
 
@@ -36,44 +41,143 @@
 
         {{form.element controlType="textarea" label="Description (optional)" property="description" rows=10 helpText='Description of the provider. Please use markdown for formatting.' required=false}}
 
-        <div class="col-md-9 col-md-offset-3">
+        <div class="col-md-12">
           <br>
           <h4>Service Contact Information</h4>
         </div>
 
-        {{form.element controlType="text" label="Contact Phone (optional)" property="phone" helpText='Please enter a phone number that can be contacted for technical or administrative issues.' required=false}}
-        {{form.element controlType="email" label="General Contact - Email" property="contactEmail" helpText='Please enter an email address that can be contacted for technical or administrative issues.' required=false}}
-
-        <div class="col-md-9 col-md-offset-3">
-          <br>
-          <h4>Billing Information</h4>
-          <div class="help-block ember-view">Your organization’s information for DataCite billing purposes</div>
+        <div class="form-group">
+          <label class="control-label col-md-3">General Contact</label>
+          <div class="col-md-9">
+            {{!-- <div>
+              <label for="givenName" class="subtitle">Name</label>
+              {{input type="text" class="form-control" id="contact-name" value=model.contactName required=false}}
+            </div> --}}
+            <div>
+              <label for="email" class="subtitle">Email</label>
+              {{input type="text" class="form-control" id="contact-email" value=model.contactEmail required=false}}
+            </div>
+            <div>
+              <label for="familyName" class="subtitle">Phone</label>
+              {{input type="text" class="form-control" id="contact-phone" value=model.phone required=false}}
+            </div>
+          </div>
         </div>
-        {{form.element controlType="text" id="billing-information-organization" label="Billing Organization" property="billingInformationOrganization"  helpText="Your organization's name for billing purposes" required=isEnvironmentProduction}}
-        {{form.element controlType="text" id="billing-information-department" label="Billing Department" property="billingInformationDepartment"  helpText="Your organization's specific department that is responsible for payment" required=isEnvironmentProduction}}
-        {{form.element controlType="textarea" rows=3 id="billing-information-street" label="Billing Street" property="billingInformationAddress"  helpText="Your organization's street and number for billing purposes" required=isEnvironmentProduction}}
 
-        {{form.element controlType="text" id="billing-information-city" label="Billing City" property="billingInformationCity"  helpText="Your organization's city for billing purposes" required=isEnvironmentProduction}}
-        {{form.element controlType="text" id="billing-information-state" label="Billing State/Province" property="billingInformationState"  helpText="Your organization's State/Province for billing purposes" required=isEnvironmentProduction}}
-        {{form.element controlType="text" id="billing-information-post-code" label=" Billing Zip/PostCode" property="billingInformationPostCode" helpText="Your organization's Zip/PostCode for billing purposes"  required=isEnvironmentProduction}}
+        <div class="form-group">
+          <label class="control-label col-md-3">Service Contact</label>
+          <div class="col-md-9">
+            <div>
+              <label for="givenName" class="subtitle">Given Name (optional)</label>
+              {{input type="text" class="form-control" id="service-contact-givenName" value=model.serviceContact.givenName required=false}}
+            </div>
+            <div>
+              <label for="familyName" class="subtitle">Family Name (optional)</label>
+              {{input type="text" class="form-control" id="service-contact-familyName" value=model.serviceContact.familyName required=false}}
+            </div>
+            <div>
+              <label for="email" class="subtitle">Email (optional)</label>
+              {{input type="text" class="form-control" id="service-contact-email" value=model.serviceContact.email required=false}}
+            </div>
+          </div>
+        </div>
 
-        {{#form.element controlType="power-select" label="Billing Country" property="billingInformationCountry" optionLabelPath="name" options=countries destination=country required=isEnvironmentProduction helpText='Country where the provider is located.' as |el|}}
-          {{#el.control onChange=(action "selectBillingCountry") search=(action "searchCountry") searchField="name" placeholder="Select Country" searchPlaceholder="Type to search..." allowClear=false as |item|}}
+        <div class="form-group">
+          <label class="control-label col-md-3">Technical Contact</label>
+          <div class="col-md-9">
+            <div>
+              <label for="givenName" class="subtitle">Given Name (optional)</label>
+              {{input type="text" class="form-control" id="technical-contact-givenName" value=model.technicalContact.givenName required=false}}
+            </div>
+            <div>
+              <label for="familyName" class="subtitle">Family Name (optional)</label>
+              {{input type="text" class="form-control" id="technical-contact-familyName" value=model.technicalContact.familyName required=false}}
+            </div>
+            <div>
+              <label for="email" class="subtitle">Email (optional)</label>
+              {{input type="text" class="form-control" id="technical-contact-email" value=model.technicalContact.email required=false}}
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-md-3">Voting Contact</label>
+          <div class="col-md-9">
+            <div>
+              <label for="givenName" class="subtitle">Given Name (optional)</label>
+              {{input type="text" class="form-control" id="voting-contact-givenName" value=model.votingContact.givenName required=false}}
+            </div>
+            <div>
+              <label for="familyName" class="subtitle">Family Name (optional)</label>
+              {{input type="text" class="form-control" id="voting-contact-familyName" value=model.votingContact.familyName required=false}}
+            </div>
+            <div>
+              <label for="email" class="subtitle">Email (optional)</label>
+              {{input type="text" class="form-control" id="voting-contact-email" value=model.votingContact.email required=false}}
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-12">
+          <h4>Billing Contact Information</h4>
+          <div class="help-block ember-view">Your organization’s information for DataCite billing purposes</div>
+          <br>
+        </div>
+        {{form.element controlType="text" id="billing-information-organization" label="Billing Organization" property="billingInformation.organization"  helpText="Your organization's name for billing purposes"  required=false}}
+        {{form.element controlType="text" id="billing-information-department" label="Billing Department" property="billingInformation.department"  helpText="Your organization's specific department that is responsible for payment" required=false}}
+
+        <div class="form-group">
+          <label class="control-label col-md-3">Billing Contact</label>
+          <div class="col-md-9">
+            <div>
+              <label for="givenName" class="subtitle">Given Name (optional)</label>
+              {{input type="text" class="form-control" id="billing-contact-givenName" value=model.billingContact.givenName required=false}}
+            </div>
+            <div>
+              <label for="familyName" class="subtitle">Family Name (optional)</label>
+              {{input type="text" class="form-control" id="billing-contact-familyName" value=model.billingContact.familyName required=false}}
+            </div>
+            <div>
+              <label for="email" class="subtitle">Email (optional)</label>
+              {{input type="text" class="form-control" id="billing-contact-email" value=model.billingContact.email required=false}}
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-md-3">Secondary Billing Contact</label>
+          <div class="col-md-9">
+            <div>
+              <label for="givenName" class="subtitle">Given Name (optional)</label>
+              {{input type="text" class="form-control" id="secondary-billing-contact-givenName" value=model.secondaryBillingContact.givenName required=false}}
+            </div>
+            <div>
+              <label for="familyName" class="subtitle">Family Name (optional)</label>
+              {{input type="text" class="form-control" id="secondary-billing-contact-familyName" value=model.secondaryBillingContact.familyName required=false}}
+            </div>
+            <div>
+              <label for="email" class="subtitle">Email (optional)</label>
+              {{input type="text" class="form-control" id="secondary-billing-contact-email" value=model.secondaryBillingContact.email required=false}}
+            </div>
+          </div>
+        </div>
+
+        {{form.element controlType="textarea" rows=3 id="billing-information-street" label="Billing Street" property="billingInformation.address"  helpText="Your organization's street and number for billing purposes" required=false}}
+
+        {{form.element controlType="text" id="billing-information-city" label="Billing City" property="billingInformation.city" helpText="Your organization's city for billing purposes" required=false}}
+        {{form.element controlType="text" id="billing-information-state" label="Billing State/Province" property="billingInformation.state"  helpText="Your organization's State/Province for billing purposes" required=false}}
+        {{form.element controlType="text" id="billing-information-post-code" label=" Billing Zip/PostCode" property="billingInformation.postCode"  helpText="Your organization's Zip/PostCode for billing purposes"  required=false}}
+
+        {{#form.element controlType="power-select" label="Billing Country" property="billingInformation.country" optionLabelPath="name" options=countries helpText='Country name for billing purposes.' destination=billingInformation.country as |el|}}
+          {{#el.control onChange=(action "selectBillingCountry") search=(action "searchCountry") searchField="name" placeholder="Select Country" searchPlaceholder="Type to search..." allowClear=true as |item|}}
             {{item.name}}
           {{/el.control}}
         {{/form.element}}
-
-        {{form.element controlType="text" id="billing-contact-email" label="Billing Email" model=model.billingContact property="email" helpText="Billing contact email for your organisation." required=isEnvironmentProduction}}
-        {{form.element controlType="text" id="billing-contact-givenName" label="Billing Given Name" model=model.billingContact property="givenName" helpText="Given name for this billing contact" required=isEnvironmentProduction}}
-        {{form.element controlType="text" id="billing-contact-familyName" label="Billing Family Name" model=model.billingContact property="familyName" helpText="Family name for this billing contact" required=isEnvironmentProduction}}
-
-        {{form.element controlType="text" id="secondary-billing-contact-email" label="Secondary Billing Email" model=model.billingContact property="email" helpText="Secondary Billing contact email for your organisation." required=false}}
-        {{form.element controlType="text" id="secondary-billing-contact-givenName" label="Secondary Billing Given Name" model=model.billingContact property="givenName" helpText="Given name for this billing contact" required=false}}
-        {{form.element controlType="text" id="secondary-billing-contact-familyName" label="Secondary Billing Family Name" model=model.billingContact property="familyName" helpText="Family name for this billing contact" required=false}}
-
-
-        {{form.element controlType="checkbox" label="Account is active" property="isActive" helpText='This account can manage clients and prefixes'}}
-
+        
+        {{#if (can "create provider")}}
+          {{form.element controlType="checkbox" label="Account is active" property="isActive" required=false helpText='This account can manage clients and prefixes'}}
+        {{/if}}
+        
         <div class="col-md-9 col-md-offset-3">
           <button type="submit" class="btn btn-sm btn-fill">Create Provider</button>
           <button {{action "cancel"}} class="btn btn-sm">Cancel</button>

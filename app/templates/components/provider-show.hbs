@@ -1,7 +1,7 @@
 {{#if edit}}
   <div class="panel panel-transparent">
     <div class="panel-body">
-      <div class="col-md-9 col-md-offset-3"><h3 class="edit">Update {{if (eq currentUser.uid model.id) 'Account' 'Provider'}}</h3></div>
+      <div class="col-md-offset-3 form-help-header"><h3 class="edit">Update {{if (eq currentUser.uid model.id) 'Account' 'Provider'}}</h3></div>
 
       {{#bs-form formLayout="horizontal" horizontalLabelGridClass="col-md-3" model=model onSubmit=(action "submit" model) as |form|}}
         <div class="col-md-12">
@@ -19,7 +19,6 @@
 
         {{form.element controlType="text" id="website" label="Website" property="website" helpText='Website of the provider.' required=false}}
         {{form.element controlType="text" id="twitter-handle"  label="Twitter (optional)"  property="twitterHandle"  placeholder="Add @twitter account" helpText='DataCite will follow you on Twitter.' required=false}}
-
 
         {{#form.element controlType="power-select" label="Country (optional)" property="country" optionLabelPath="name" options=countries destination=country helpText='Country where the provider is located.' as |el|}}
           {{#el.control onChange=(action "selectCountry") search=(action "searchCountry") searchField="name" placeholder="Select Country" searchPlaceholder="Type to search..." allowClear=true as |item|}}
@@ -43,30 +42,83 @@
 
         {{form.element controlType="textarea" label="Description (optional)" property="description" rows=10 helpText='Description of the provider. Please use markdown for formatting.' required=false}}
 
-
         <div class="col-md-12">
           <h4>Service Contact Information</h4>
           <br>
         </div>
 
-          {{!-- {{form.element controlType="text" id="contact-name" label="Contact Name" property="contactName" helpText='Please enter the name of a person that can be contacted for technical or administrative issues.' required=false}} --}}
-          {{form.element controlType="text" id="contact-phone" label="Contact Phone (optional)" property="phone" helpText='Please enter a phone number that can be contacted for technical or administrative issues.' required=false}}
-          {{form.element controlType="email" id="contact-email" label="General Contact - Email" property="contactEmail" helpText='A general (versus personal) contact e-mail for your service e.g. pids@example.org. This is used for account communication e.g. password resets.' required=false}}
+        <div class="form-group">
+          <label class="control-label col-md-3">General Contact</label>
+          <div class="col-md-9">
+            {{!-- <div>
+              <label for="givenName" class="subtitle">Name</label>
+              {{input type="text" class="form-control" id="contact-name" value=model.contactName required=false}}
+            </div> --}}
+            <div>
+              <label for="email" class="subtitle">Email</label>
+              {{input type="text" class="form-control" id="contact-email" value=model.contactEmail required=false}}
+            </div>
+            <div>
+              <label for="familyName" class="subtitle">Phone</label>
+              {{input type="text" class="form-control" id="contact-phone" value=model.phone required=false}}
+            </div>
+          </div>
+        </div>
 
-          {{form.element controlType="text" id="service-contact-email" model=model.serviceContact label="Service Contact - Email (optional)" property="email" helpText="Your organization's primary personal point of contact for DataCite services." required=false}}
-          {{form.element controlType="text" id="service-contact-givenName" model=model.serviceContact label="Service Contact - Given Name (optional)" property="givenName" helpText="Given name for this contact" required=false}}
-          {{form.element controlType="text" id="service-contact-familyName" model=model.serviceContact label="Service Contact - Family Name (optional)" property="familyName" helpText="Family name for this contact" required=false}}
+        <div class="form-group">
+          <label class="control-label col-md-3">Service Contact</label>
+          <div class="col-md-9">
+            <div>
+              <label for="givenName" class="subtitle">Given Name (optional)</label>
+              {{input type="text" class="form-control" id="service-contact-givenName" value=model.serviceContact.givenName required=false}}
+            </div>
+            <div>
+              <label for="familyName" class="subtitle">Family Name (optional)</label>
+              {{input type="text" class="form-control" id="service-contact-familyName" value=model.serviceContact.familyName required=false}}
+            </div>
+            <div>
+              <label for="email" class="subtitle">Email (optional)</label>
+              {{input type="text" class="form-control" id="service-contact-email" value=model.serviceContact.email required=false}}
+            </div>
+          </div>
+        </div>
 
-          {{form.element controlType="text" id="technical-contact-email" model=model.technicalContact label="Technical Contact - Email (optional)" property="email" helpText="Your organization's technical point of contact for DataCite services." required=false}}
-          {{form.element controlType="text" id="technical-contact-givenName" model=model.technicalContact label="Technical Contact - Given Name (optional)" property="givenName" helpText="Given name for this contact" required=false}}
-          {{form.element controlType="text" id="technical-contact-familyName" model=model.technicalContact label="Technical Contact - Family Name (optional)" property="familyName" helpText="Family name for this contact" required=false}}
+        <div class="form-group">
+          <label class="control-label col-md-3">Technical Contact</label>
+          <div class="col-md-9">
+            <div>
+              <label for="givenName" class="subtitle">Given Name (optional)</label>
+              {{input type="text" class="form-control" id="technical-contact-givenName" value=model.technicalContact.givenName required=false}}
+            </div>
+            <div>
+              <label for="familyName" class="subtitle">Family Name (optional)</label>
+              {{input type="text" class="form-control" id="technical-contact-familyName" value=model.technicalContact.familyName required=false}}
+            </div>
+            <div>
+              <label for="email" class="subtitle">Email (optional)</label>
+              {{input type="text" class="form-control" id="technical-contact-email" value=model.technicalContact.email required=false}}
+            </div>
+          </div>
+        </div>
 
-          {{form.element controlType="text" id="voting-contact-email" model=model.votingContact label="Voting Contact - Email (optional)" property="email" helpText="Contact email - Per DataCite's statutes, each member organization has one designated representative that annually approves our budget, fee structure, and votes for the Executive Board" required=false}}
-          {{form.element controlType="text" id="voting-contact-givenName" model=model.votingContact label="Voting Contact - Given Name (optional)" property="givenName" helpText="Given name for this contact" required=false}}
-          {{form.element controlType="text" id="voting-contact-familyName" model=model.votingContact label="Voting Contact - Family Name (optional)" property="familyName" helpText="Family name for this contact" required=false}}
-
-
-
+        <div class="form-group">
+          <label class="control-label col-md-3">Voting Contact</label>
+          <div class="col-md-9">
+            <div>
+              <label for="givenName" class="subtitle">Given Name (optional)</label>
+              {{input type="text" class="form-control" id="voting-contact-givenName" value=model.votingContact.givenName required=false}}
+            </div>
+            <div>
+              <label for="familyName" class="subtitle">Family Name (optional)</label>
+              {{input type="text" class="form-control" id="voting-contact-familyName" value=model.votingContact.familyName required=false}}
+            </div>
+            <div>
+              <label for="email" class="subtitle">Email (optional)</label>
+              {{input type="text" class="form-control" id="voting-contact-email" value=model.votingContact.email required=false}}
+            </div>
+          </div>
+        </div>
+        
         <div class="col-md-12">
           <h4>Billing Contact Information</h4>
           <div class="help-block ember-view">Your organization’s information for DataCite billing purposes</div>
@@ -75,14 +127,42 @@
         {{form.element controlType="text" id="billing-information-organization" label="Billing Organization" property="billingInformation.organization"  helpText="Your organization's name for billing purposes"  required=false}}
         {{form.element controlType="text" id="billing-information-department" label="Billing Department" property="billingInformation.department"  helpText="Your organization's specific department that is responsible for payment" required=false}}
 
-        {{form.element controlType="text" id="billing-contact-givenName" model=model.billingContact label="Billing Contact - Given Name (optional)" property="givenName" helpText="Given name for this billing contact" required=false}}
-        {{form.element controlType="text" id="billing-contact-familyName" model=model.billingContact label="Billing Contact - Family Name (optional)" property="familyName" helpText="Family name for this billing contact" required=false}}
-        {{form.element controlType="text" id="billing-contact-email" model=model.billingContact label="Billing Contact - Email (optional)" property="email" helpText="Billing contact email for your organisation." required=false}}
+        <div class="form-group">
+          <label class="control-label col-md-3">Billing Contact</label>
+          <div class="col-md-9">
+            <div>
+              <label for="givenName" class="subtitle">Given Name (optional)</label>
+              {{input type="text" class="form-control" id="billing-contact-givenName" value=model.billingContact.givenName required=false}}
+            </div>
+            <div>
+              <label for="familyName" class="subtitle">Family Name (optional)</label>
+              {{input type="text" class="form-control" id="billing-contact-familyName" value=model.billingContact.familyName required=false}}
+            </div>
+            <div>
+              <label for="email" class="subtitle">Email (optional)</label>
+              {{input type="text" class="form-control" id="billing-contact-email" value=model.billingContact.email required=false}}
+            </div>
+          </div>
+        </div>
 
-        {{form.element controlType="text" id="secondary-billing-contact-givenName" model=model.secondaryBillingContact label="Secondary Billing Contact - Given Name (optional)" property="givenName" helpText="Given name for this billing contact" required=false}}
-        {{form.element controlType="text" id="secondary-billing-contact-familyName" model=model.secondaryBillingContact label="Secondary Billing Contact - Family Name (optional)" property="familyName" helpText="Family name for this billing contact" required=false}}
-        {{form.element controlType="text" id="secondary-billing-contact-email" model=model.secondaryBillingContact label="Secondary Billing Contact - Email (optional)" property="email" helpText="Secondary Billing contact email for your organisation." required=false}}
-
+        <div class="form-group">
+          <label class="control-label col-md-3">Secondary Billing Contact</label>
+          <div class="col-md-9">
+            <div>
+              <label for="givenName" class="subtitle">Given Name (optional)</label>
+              {{input type="text" class="form-control" id="secondary-billing-contact-givenName" value=model.secondaryBillingContact.givenName required=false}}
+            </div>
+            <div>
+              <label for="familyName" class="subtitle">Family Name (optional)</label>
+              {{input type="text" class="form-control" id="secondary-billing-contact-familyName" value=model.secondaryBillingContact.familyName required=false}}
+            </div>
+            <div>
+              <label for="email" class="subtitle">Email (optional)</label>
+              {{input type="text" class="form-control" id="secondary-billing-contact-email" value=model.secondaryBillingContact.email required=false}}
+            </div>
+          </div>
+        </div>
+   
         {{form.element controlType="textarea" rows=3 id="billing-information-street" label="Billing Street" property="billingInformation.address"  helpText="Your organization's street and number for billing purposes" required=false}}
 
         {{form.element controlType="text" id="billing-information-city" label="Billing City" property="billingInformation.city" helpText="Your organization's city for billing purposes" required=false}}
@@ -203,7 +283,6 @@
             {{model.contactName}}
           {{/if}}
 
-          <calendar-lite></calendar-lite>
           {{#if model.phone}}
             <h5>Contact Phone</h5>
             {{model.phone}}
@@ -277,10 +356,8 @@
             <span class="small icon-warning">has not been set</span>
           {{/if}}
 
+          <h4>Billing Information</h4>
           {{#if (not isBillingEmpty)}}
-            <br>
-            <h4>Billing Information</h4>
-
             {{#if model.billingInformation.organization}}
               <h5>Billing Organization</h5>
               {{model.billingInformation.organization}}
