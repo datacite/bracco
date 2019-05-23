@@ -55,11 +55,20 @@ export default Component.extend(Validations, {
   organizations: [],
   organizationsNames: [],
 
+  twitterUrl: computed('model.twitterHandle', function() {
+    if (this.model.get('twitterHandle')) {
+      return 'https://twitter.com/' + this.model.get('twitterHandle').substr(1);
+    } else {
+      return null;
+    }
+  }),
+
   // didReceiveAttrs() {
   //   this._super(...arguments);
   //   let self = this;
   //   this.set('isBillingEmpty', Object.values(self.get('model.billingInformation')).some(this.hasEmptyBilling));
   // },
+
   reset() {
     this.provider.set('passwordInput', null);
     this.set('edit', false);
