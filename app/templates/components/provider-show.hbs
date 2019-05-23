@@ -44,10 +44,9 @@
         <div class="col-md-9 col-md-offset-3">
           <br>
           <h4>Service Contact Information</h4>
-          <div class="help-block ember-view">Additional contacts for your organization.</div>
         </div>
 
-          {{form.element controlType="email" id="contact-email" label="General Contact - Email" property="contactEmail" helpText='Please enter an email for general communication with your organisation' required=false}}
+          {{form.element controlType="email" id="contact-email" label="General Contact - Email" property="contactEmail" helpText='Please enter an email for general communication with your organisation. This is used for account communication e.g. password resets.' required=false}}
 
           {{form.element controlType="text" id="service-contact-email" model=model.serviceContact label="Service Contact - Email" property="email" helpText="Your organization's primary personal point of contact for DataCite services." required=false}}
           {{form.element controlType="text" id="service-contact-givenName" model=model.serviceContact label="Service Contact - Given Name" property="givenName" helpText="Given name for this contact" required=false}}
@@ -176,6 +175,8 @@
     <div class="col-md-9">
       <div class="panel panel-transparent">
         <div class="panel-body">
+
+          <h4>Organization Information</h4>
           {{#if (not admin)}}
             <h5>Provider ID</h5>
             {{model.symbol}}
@@ -196,10 +197,6 @@
             {{model.contactName}}
           {{/if}}
 
-          {{#if model.contactEmail}}
-            <h5>Contact Email</h5>
-            <a href="mailto:{{model.contactEmail}}">{{model.contactEmail}}</a>
-          {{/if}}
           <calendar-lite></calendar-lite>
           {{#if model.phone}}
             <h5>Contact Phone</h5>
@@ -236,6 +233,45 @@
           {{/if}}
 
           <br>
+          <h4>Service Contact Information</h4>
+
+          {{#if model.contactEmail}}
+            <h5>General Contact Email</h5>
+            <a href="mailto:{{model.contactEmail}}">{{model.contactEmail}}</a>
+          {{/if}}
+
+          {{#if model.technicalContact.email}}
+            <h5>Technical</h5>
+            {{model.technicalContact.givenName}} {{model.technicalContact.familyName}}
+            <br>
+            <a href="mailto:{{model.technicalContact.email}}">{{model.technicalContact.email}}</a>
+          {{/if}}
+
+          {{#if model.serviceContact.email}}
+            <h5>Service</h5>
+            {{model.serviceContact.givenName}} {{model.serviceContact.familyName}}
+            <br>
+            <a href="mailto:{{model.serviceContact.email}}">{{model.serviceContact.email}}</a>
+          {{/if}}
+
+          {{#if model.votingContact.email}}
+            <h5>Voting</h5>
+            {{model.votingContact.givenName}} {{model.votingContact.familyName}}
+            <br>
+            <a href="mailto:{{model.votingContact.email}}">{{model.votingContact.email}}</a>
+          {{/if}}
+
+          {{#if model.joined}}
+            <h5>Date joined</h5>
+            {{format-time model.joined year='numeric' month='long' day='numeric'}}
+          {{/if}}
+
+          {{#if (not model.hasPassword)}}
+            <h5>Password</h5>
+            <span class="small icon-warning">has not been set</span>
+          {{/if}}
+
+                  <br>
           <h4>Billing Information</h4>
 
           {{#if (not isBillingEmpty)}}
@@ -288,39 +324,6 @@
             <span class="small icon-warning">has not been provided</span>
           {{/if}}
 
-          <br>
-          <h4>Additional Contacts</h4>
-
-          {{#if model.technicalContact.email}}
-            <h5>Technical</h5>
-            {{model.technicalContact.givenName}} {{model.technicalContact.familyName}}
-            <br>
-            <a href="mailto:{{model.technicalContact.email}}">{{model.technicalContact.email}}</a>
-          {{/if}}
-
-          {{#if model.serviceContact.email}}
-            <h5>Service</h5>
-            {{model.serviceContact.givenName}} {{model.serviceContact.familyName}}
-            <br>
-            <a href="mailto:{{model.serviceContact.email}}">{{model.serviceContact.email}}</a>
-          {{/if}}
-
-          {{#if model.votingContact.email}}
-            <h5>Voting</h5>
-            {{model.votingContact.givenName}} {{model.votingContact.familyName}}
-            <br>
-            <a href="mailto:{{model.votingContact.email}}">{{model.votingContact.email}}</a>
-          {{/if}}
-
-          {{#if model.joined}}
-            <h5>Date joined</h5>
-            {{format-time model.joined year='numeric' month='long' day='numeric'}}
-          {{/if}}
-
-          {{#if (not model.hasPassword)}}
-            <h5>Password</h5>
-            <span class="small icon-warning">has not been set</span>
-          {{/if}}
         </div>
       </div>
     </div>
