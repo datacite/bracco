@@ -12,9 +12,7 @@
 
         {{form.element controlType="text" id="provider-name" label="Provider Name" property="name" required=false}}
 
-        {{form.element controlType="text" id="website" label="Website" property="website" helpText='Website of the provider.' required=false}}
-        {{form.element controlType="text" id="contact-name" label="Contact Name" property="contactName" helpText='Please enter the name of a person that can be contacted for technical or administrative issues.' required=false}}
-        {{form.element controlType="text" id="contact-phone" label="Contact Phone (optional)" property="phone" helpText='Please enter a phone number that can be contacted for technical or administrative issues.' required=false}}
+        {{form.element controlType="text" id="website" label="Website" property="website" helpText='Website of the provider.' required=false}}        }
         {{form.element controlType="text" id="twitter-handle"  label="Twitter (optional)"  property="twitterHandle"  placeholder="Add @twitter account" helpText='DataCite will follow you on twitter.' required=false}}
 
 
@@ -46,7 +44,9 @@
           <h4>Service Contact Information</h4>
         </div>
 
-          {{form.element controlType="email" id="contact-email" label="General Contact - Email" property="contactEmail" helpText='Please enter an email for general communication with your organisation. This is used for account communication e.g. password resets.' required=false}}
+          {{!-- {{form.element controlType="text" id="contact-name" label="Contact Name" property="contactName" helpText='Please enter the name of a person that can be contacted for technical or administrative issues.' required=false}} --}}
+          {{form.element controlType="text" id="contact-phone" label="Contact Phone (optional)" property="phone" helpText='Please enter a phone number that can be contacted for technical or administrative issues.' required=false}}
+          {{form.element controlType="email" id="contact-email" label="General Contact - Email" property="contactEmail" helpText='A general (versus personal) contact e-mail for your service e.g. pids@example.org. This is used for account communication e.g. password resets.' required=false}}
 
           {{form.element controlType="text" id="service-contact-email" model=model.serviceContact label="Service Contact - Email" property="email" helpText="Your organization's primary personal point of contact for DataCite services." required=false}}
           {{form.element controlType="text" id="service-contact-givenName" model=model.serviceContact label="Service Contact - Given Name" property="givenName" helpText="Given name for this contact" required=false}}
@@ -56,7 +56,7 @@
           {{form.element controlType="text" id="technical-contact-givenName" model=model.technicalContact label="Technical Contact - Given Name" property="givenName" helpText="Given name for this contact" required=false}}
           {{form.element controlType="text" id="technical-contact-familyName" model=model.technicalContact label="Technical Contact - Family Name" property="familyName" helpText="Family name for this contact" required=false}}
 
-          {{form.element controlType="text" id="voting-contact-email" model=model.votingContact label="Voting Contact - Email" property="email" helpText="Contact email for the voting representative (per DataCite's statutes)" required=false}}
+          {{form.element controlType="text" id="voting-contact-email" model=model.votingContact label="Voting Contact - Email" property="email" helpText="Contact email - Per DataCite's statutes, each member organization has one designated representative that annually approves our budget, fee structure, and votes for the Executive Board" required=false}}
           {{form.element controlType="text" id="voting-contact-givenName" model=model.votingContact label="Voting Contact - Given Name" property="givenName" helpText="Given name for this contact" required=false}}
           {{form.element controlType="text" id="voting-contact-familyName" model=model.votingContact label="Voting Contact - Family Name" property="familyName" helpText="Family name for this contact" required=false}}
 
