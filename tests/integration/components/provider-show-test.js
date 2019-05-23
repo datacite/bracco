@@ -18,6 +18,6 @@ module('Integration | Component | provider-show', function(hooks) {
       {{/provider-show}}
     `);
 
-    assert.dom('*').hasText('Organization Information Provider ID Contact Name Dr. Steven McEachern Service Contact Information General Contact Email ada@anu.edu.au Password has not been set Billing Information has not been provided');
+    assert.dom('*').hasText('Organization Information Provider ID Service Contact Information General Contact Name Dr. Steven McEachern General Contact Email ada@anu.edu.au Password has not been set Billing Information has not been provided');
   });
 });
