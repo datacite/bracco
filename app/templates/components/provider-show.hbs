@@ -50,10 +50,10 @@
         <div class="form-group">
           <label class="control-label col-md-3">General Contact</label>
           <div class="col-md-9">
-            {{!-- <div>
-              <label for="givenName" class="subtitle">Name</label>
+            <div>
+              <label for="name" class="subtitle">Name</label>
               {{input type="text" class="form-control" id="contact-name" value=model.contactName required=false}}
-            </div> --}}
+            </div>
             <div>
               <label for="email" class="subtitle">Email</label>
               {{input type="text" class="form-control" id="contact-email" value=model.contactEmail required=false}}
@@ -278,17 +278,6 @@
             <a href="{{model.website}}">{{model.website}}</a>
           {{/if}}
 
-          {{#if model.contactName}}
-            <h5>Contact Name</h5>
-            {{model.contactName}}
-          {{/if}}
-
-          {{#if model.phone}}
-            <h5>Contact Phone</h5>
-            {{model.phone}}
-          {{/if}}
-
-
           {{#if twitterUrl}}
             <h5>Twitter</h5>
             <a href="{{twitterUrl}}">{{twitterUrl}}</a>
@@ -305,24 +294,32 @@
             {{markdown-to-html model.description}}
           {{/if}}
 
-          {{#if (can "create provider")}}
-            {{#if model.organizationType}}
-              <h5>Organization Type</h5>
-              {{titleize (humanize (underscore model.organizationType))}}
-            {{/if}}
+          {{#if model.organizationType}}
+            <h5>Organization Type</h5>
+            {{titleize (humanize (underscore model.organizationType))}}
+          {{/if}}
 
-            {{#if model.focusArea}}
-              <h5>Focus Area</h5>
-              {{titleize (humanize (underscore model.focusArea))}}
-            {{/if}}
+          {{#if model.focusArea}}
+            <h5>Focus Area</h5>
+            {{titleize (humanize (underscore model.focusArea))}}
           {{/if}}
 
           <br>
           <h4>Service Contact Information</h4>
 
+          {{#if model.contactName}}
+            <h5>General Contact Name</h5>
+            {{model.contactName}}
+          {{/if}}
+
           {{#if model.contactEmail}}
             <h5>General Contact Email</h5>
             <a href="mailto:{{model.contactEmail}}">{{model.contactEmail}}</a>
+          {{/if}}
+
+          {{#if model.phone}}
+            <h5>General Contact Phone</h5>
+            {{model.phone}}
           {{/if}}
 
           {{#if model.technicalContact.email}}
