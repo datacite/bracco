@@ -109,11 +109,7 @@ const Validations = buildValidations({
   billingContact: [
     validator('presence', true),
     validator('belongs-to')
-  ],
-  secondaryBillingContact: [
-    validator('presence', false),
-    validator('belongs-to')
-  ],
+  ]
 });
 
 export default DS.Model.extend(Validations, {
