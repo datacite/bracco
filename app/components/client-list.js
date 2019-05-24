@@ -28,7 +28,7 @@ export default Component.extend({
   softwareList,
   softwares: softwareList,
   availableClientCount: computed('model.provider', 'model.clients', function() {
-    if (this.model.provider.memberType === 'contractual_provider') {
+    if (this.model.provider && this.model.provider.memberType === 'contractual_provider') {
       return 1 - this.model.clients.length;
     } else {
       return 500 - this.model.clients.length;

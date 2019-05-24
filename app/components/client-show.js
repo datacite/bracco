@@ -2,7 +2,6 @@ import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 import fetch from 'fetch';
 import ENV from 'bracco/config/environment';
-import { computed } from '@ember/object';
 
 const softwareList = [
   'CKAN',
