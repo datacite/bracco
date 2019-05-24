@@ -60,8 +60,9 @@ const NameIdentifier = BaseValidator.extend({
       return fetch(value).then(function() {
         return true;
       }).catch(function() {
-        let message = 'ISNI identifier does not exist. Please make sure you entered the correct identifier.'
-        return message;
+        // let message = 'ISNI identifier does not exist. Please make sure you entered the correct identifier.'
+        // return message;
+        return true;
       });
     } else {
       const re = /^(http|https):\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/;
