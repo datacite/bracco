@@ -30,6 +30,9 @@ export default Route.extend({
     year: {
       refreshModel: true
     },
+    'member-type': {
+      refreshModel: true
+    },
     'organization-type': {
       refreshModel: true
     },

@@ -272,6 +272,36 @@
       </div>
     {{/if}}
     {{#if (can "create provider")}}
+      {{#if (or model.meta.memberTypes model.query.member-type)}}
+        <div class="panel facets">
+          <div class="panel-body">
+            <h4>Member Type</h4>
+            <ul>
+              {{#if model.meta.memberTypes}}
+                {{#each model.meta.memberTypes as |memberType|}}
+                  <li>
+                    {{#if model.query.member-type}}
+                      {{#link-to "providers" (query-params member-type='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+                    {{else}}
+                      {{#link-to "providers" (query-params member-type=memberType.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                    {{/if}}
+                    <div class="facet-title">{{memberType.title}}</div>
+                    <span class="number pull-right">{{memberType.count}}</span>
+                    <div class="clearfix"/>
+                  </li>
+                {{/each}}
+              {{else}}
+                <li>
+                  {{#link-to "providers" (query-params omember-type='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+                  <div class="facet-title">{{model.query.member-type}}</div>
+                  <span class="number pull-right">0</span>
+                  <div class="clearfix"/>
+                </li>
+              {{/if}}
+            </ul>
+          </div>
+        </div>
+      {{/if}}
       {{#if (or model.meta.organizationTypes model.query.organization-type)}}
         <div class="panel facets">
           <div class="panel-body">
