@@ -28,7 +28,7 @@
         {{#if (can "create provider")}}
           {{#form.element controlType="power-select" label="Member Type" property="memberType" options=memberTypes destination=memberType as |el|}}
             {{#el.control onChange=(action "selectMemberType") search=(action "searchMemberType") placeholder="Select Member Type" searchPlaceholder="Type to search..." as |item|}}
-              {{titleize (humanize (item))}}
+              {{titleize (humanize item)}}
             {{/el.control}}
           {{/form.element}}
 
