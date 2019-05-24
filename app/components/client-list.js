@@ -28,11 +28,12 @@ export default Component.extend({
   softwareList,
   softwares: softwareList,
   availableClientCount: computed('model.provider', 'model.clients', function() {
-    if (this.model.provider && this.model.provider.memberType === 'contractual_provider') {
-      return 1 - this.model.clients.length;
-    } else {
-      return 500 - this.model.clients.length;
-    }
+    // if (this.model.provider && this.model.provider.memberType === 'contractual_provider') {
+    //   return 1 - this.model.clients.length;
+    // } else {
+    //   return 500 - this.model.clients.length;
+    // }
+    return 1;
   }),
 
   selectRepository(repository) {
