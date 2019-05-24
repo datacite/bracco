@@ -1,18 +1,26 @@
 <div class="content">
   <div class="row content">
-    {{bar-chart 
-      data=model.clientCount 
-      label="Client" 
-      model=model 
-      link="providers.show.clients"
-    }}
-    {{bar-chart 
-      data=model.doiCount 
-      label="DOI" 
-      model=model 
-      link="providers.show.dois" 
-      cumulative=false
-    }}
+    {{#if (not-eq model.memberType "member_only")}}
+      {{bar-chart 
+        data=model.clientCount 
+        label="Client" 
+        model=model 
+        link="providers.show.clients"
+      }}
+      {{bar-chart 
+        data=model.doiCount 
+        label="DOI" 
+        model=model 
+        link="providers.show.dois" 
+        cumulative=false
+      }}
+    {{else}}
+      <div class="panel panel-transparent">
+        <div class="panel-body">
+          {{model.name}} does not provide DOI registration services.
+        </div>
+      </div>
+    {{/if}}
   </div>
 
   {{#if (can "read messages" model)}}
