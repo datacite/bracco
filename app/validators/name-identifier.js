@@ -56,14 +56,15 @@ const NameIdentifier = BaseValidator.extend({
         return message;
       }
 
+      return true;
+
       // lookup identifier
-      return fetch(value).then(function() {
-        return true;
-      }).catch(function() {
-        // let message = 'ISNI identifier does not exist. Please make sure you entered the correct identifier.'
-        // return message;
-        return true;
-      });
+      // return fetch(value).then(function() {
+      //   return true;
+      // }).catch(function() {
+      //   let message = 'ISNI identifier does not exist. Please make sure you entered the correct identifier.'
+      //   return message;
+      // });
     } else {
       const re = /^(http|https):\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/;
       if (!re.test(value)) {

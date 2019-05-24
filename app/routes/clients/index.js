@@ -1,3 +1,4 @@
+import { hash } from 'rsvp';
 import Route from '@ember/routing/route';
 import { assign } from '@ember/polyfills';
 import { inject as service } from '@ember/service';
@@ -13,7 +14,10 @@ export default Route.extend({
       }
     });
 
-    return this.store.query('client', params);
+    return hash({
+      provider: null,
+      clients: this.store.query('client', params)
+    });
   },
 
   afterModel() {

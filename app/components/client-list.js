@@ -1,5 +1,6 @@
 import { inject as service } from '@ember/service';
 import Component from '@ember/component';
+import { computed } from '@ember/object';
 
 const softwareList = [
   'CKAN',
@@ -26,6 +27,13 @@ export default Component.extend({
   repositories: [],
   softwareList,
   softwares: softwareList,
+  availableClientCount: computed('model.provider', 'model.clients', function() {
+    if (this.model.provider.memberType === 'contractual_provider') {
+      return 1 - this.model.clients.length;
+    } else {
+      return 500 - this.model.clients.length;
+    }
+  }),
 
   selectRepository(repository) {
     if (repository) {
@@ -65,7 +73,7 @@ export default Component.extend({
 
   actions: {
     new(model) {
-      let provider = this.store.peekRecord('provider', model.get('query.provider-id'));
+      let provider = this.store.peekRecord('provider', model.clients.get('query.provider-id'));
       this.set('client', this.store.createRecord('client', { provider: provider, symbol: provider.id.toUpperCase() + '.' }));
       this.set('new', true);
     },

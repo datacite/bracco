@@ -32,7 +32,7 @@
   </div>
 {{else}}
   <div class="col-md-3">
-    {{#if (and (can "create client" model) (eq link "providers.show.clients"))}}
+    {{#if (and (can "create client" model) (eq link "providers.show.clients") (gt availableClientCount 0))}}
       <div class="panel facets">
         <div class="panel-body">
           <div class="btn-toolbar">
@@ -50,15 +50,15 @@
       </div>
     {{/if}}
 
-    {{#if (or model.meta.years model.query.year)}}
+    {{#if (or model.clients.meta.years model.clients.query.year)}}
       <div class="panel facets add">
         <div class="panel-body">
           <h4>Year joined</h4>
           <ul>
-            {{#if model.meta.years}}
-              {{#each model.meta.years as |year|}}
+            {{#if model.clients.meta.years}}
+              {{#each model.clients.meta.years as |year|}}
                 <li>
-                  {{#if model.query.year}}
+                  {{#if model.clients.query.year}}
                     {{#link-to link (query-params year="")}}{{fa-icon "check-square-o"}}{{/link-to}}
                   {{else}}
                     {{#link-to link (query-params year=year.id)}}{{fa-icon "square-o"}}{{/link-to}}
@@ -71,7 +71,7 @@
             {{else}}
               <li>
                 {{#link-to "clients" (query-params year="")}}{{fa-icon "check-square-o"}}{{/link-to}}
-                <div class="facet-title">{{model.query.year}}</div>
+                <div class="facet-title">{{model.clients.query.year}}</div>
                 <span class="number pull-right">0</span>
                 <div class="clearfix"/>
               </li>
@@ -80,15 +80,15 @@
         </div>
       </div>
     {{/if}}
-    {{#if (or model.meta.software model.query.software)}}
+    {{#if (or model.clients.meta.software model.clients.query.software)}}
       <div class="panel facets">
         <div class="panel-body">
           <h4>Software</h4>
           <ul>
-            {{#if model.meta.software}}
-              {{#each model.meta.software as |software|}}
+            {{#if model.clients.meta.software}}
+              {{#each model.clients.meta.software as |software|}}
                 <li>
-                  {{#if model.query.software}}
+                  {{#if model.clients.query.software}}
                     {{#link-to link (query-params software="")}}{{fa-icon "check-square-o"}}{{/link-to}}
                   {{else}}
                     {{#link-to link (query-params software=software.id)}}{{fa-icon "square-o"}}{{/link-to}}
@@ -101,7 +101,7 @@
             {{else}}
               <li>
                 {{#link-to link (query-params software="")}}{{fa-icon "check-square-o"}}{{/link-to}}
-                <div class="facet-title">{{model.query.software}}</div>
+                <div class="facet-title">{{model.clients.query.software}}</div>
                 <span class="number pull-right">0</span>
                 <div class="clearfix"/>
               </li>
@@ -113,10 +113,10 @@
   </div>
   <div class="col-md-9 panel-list" id="content">
     {{#if searchable}}
-      {{model-search model=model sortable=true link=link}}
+      {{model-search model=model.clients sortable=true link=link}}
     {{/if}}
-    {{#if model}}
-      {{#each model as |client|}}
+    {{#if model.clients}}
+      {{#each model.clients as |client|}}
         <div class="panel panel-transparent">
           <div class="panel-body">
             <h3 class="work">
@@ -169,8 +169,8 @@
         </div>
       {{/each}}
       <div class="text-center">
-        {{#if (gt model.meta.totalPages 1)}}
-          {{page-numbers model=model link=link}}
+        {{#if (gt model.clients.meta.totalPages 1)}}
+          {{page-numbers model=model.clients link=link}}
         {{/if}}
       </div>
     {{else}}
