@@ -347,6 +347,11 @@
             <h5>Provider ID</h5>
             {{provider.symbol}}
 
+            {{#if model.rorId}}
+              <h5>ROR ID</h5>
+              <a href="{{model.rorId}}">{{model.rorId}}</a>
+            {{/if}}
+
             {{#if provider.organizationType}}
               <h5>Organization Type</h5>
               {{titleize (humanize (underscore provider.organizationType))}}
