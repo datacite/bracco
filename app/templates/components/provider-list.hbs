@@ -26,15 +26,21 @@
         {{/form.element}}
 
         {{#if (can "create provider")}}
+          {{#form.element controlType="power-select" label="Member Type" property="memberType" options=memberTypes destination=memberType as |el|}}
+            {{#el.control onChange=(action "selectMemberType") search=(action "searchMemberType") placeholder="Select Member Type" searchPlaceholder="Type to search..." as |item|}}
+              {{titleize (humanize (item))}}
+            {{/el.control}}
+          {{/form.element}}
+
           {{#form.element controlType="power-select" label="Organization Type (optional)" property="organizationType" options=organizationTypes destination=organizationType as |el|}}
             {{#el.control onChange=(action "selectOrganizationType") search=(action "searchOrganizationType") placeholder="Select Organization Type" searchPlaceholder="Type to search..." allowClear=true as |item|}}
-              {{titleize (humanize item)}}
+              {{titleize (humanize (underscore item))}}
             {{/el.control}}
           {{/form.element}}
 
           {{#form.element controlType="power-select" label="Focus Area (optional)" property="focusArea" options=focusAreas destination=focusArea helpText='Field of science covered by provider.' as |el|}}
             {{#el.control onChange=(action "selectFocusArea") search=(action "searchFocusArea") placeholder="Select Focus Area" searchPlaceholder="Type to search..." allowClear=true as |item|}}
-              {{titleize (humanize item)}}
+              {{titleize (humanize (underscore item))}}
             {{/el.control}}
           {{/form.element}}
         {{/if}}
@@ -350,6 +356,11 @@
             {{#if provider.rorId}}
               <h5>ROR ID</h5>
               <a href="{{provider.rorId}}">{{provider.rorId}}</a>
+            {{/if}}
+
+            {{#if (can "create provider")}}
+              <h5>Member Type</h5>
+              {{titleize (humanize (underscore provider.memberType))}}
             {{/if}}
 
             {{#if provider.organizationType}}

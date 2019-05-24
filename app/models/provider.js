@@ -99,6 +99,7 @@ export default DS.Model.extend(Validations, {
   description: DS.attr('string'),
   region: DS.attr('string'),
   country: DS.attr('country'),
+  memberType: DS.attr('string'),
   organizationType: DS.attr('string'),
   focusArea: DS.attr('string'),
   logoUrl: DS.attr('string'),

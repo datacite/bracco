@@ -14,6 +14,13 @@ const organizationTypeList = [
   'serviceProvider',
   'vendor'
 ]
+const memberTypeList = [
+  'provider',
+  'consortium_lead',
+  'contractual_provider',
+  'for_profit_provider',
+  'member_only'
+]
 const focusAreaList = [
   'biomedicalAndHealthSciences',
   'earthSciences',
@@ -35,6 +42,8 @@ export default Component.extend({
   countries: null,
   organizationTypeList,
   organizationTypes: organizationTypeList,
+  memberTypeList,
+  memberTypes: memberTypeList,
   focusAreaList,
   focusAreas: focusAreaList,
 
@@ -64,6 +73,16 @@ export default Component.extend({
   selectOrganizationType(organizationType) {
     this.provider.set('organizationType', organizationType);
     this.set('organizationTypes', organizationTypeList);
+  },
+  searchMemberType(query) {
+    var memberTypes = memberTypeList.filter(function(memberType) {
+      return memberType.startsWith(query.toLowerCase());
+    })
+    this.set('memberTypes', memberTypes);
+  },
+  selectMemberType(memberType) {
+    this.provider.set('memberType', memberType);
+    this.set('memberTypes', memberTypeList);
   },
   searchFocusArea(query) {
     var focusAreas = focusAreaList.filter(function(focusArea) {
@@ -126,6 +145,12 @@ export default Component.extend({
     },
     selectOrganizationType(organizationType) {
       this.selectOrganizationType(organizationType);
+    },
+    searchMemberType(query) {
+      this.searchMemberType(query);
+    },
+    selectMemberType(memberType) {
+      this.selectMemberType(memberType);
     },
     searchFocusArea(query) {
       this.searchFocusArea(query);

@@ -27,6 +27,12 @@
         {{/form.element}}
 
         {{#if (can "create provider")}}
+          {{#form.element controlType="power-select" label="Member Type" property="memberType" options=memberTypes destination=memberType as |el|}}
+            {{#el.control onChange=(action "selectMemberType") search=(action "searchMemberType") placeholder="Select Member Type" searchPlaceholder="Type to search..." as |item|}}
+              {{titleize (humanize (item))}}
+            {{/el.control}}
+          {{/form.element}}
+
           {{#form.element controlType="power-select" label="Organization Type (optional)" property="organizationType" options=organizationTypes destination=organizationType as |el|}}
             {{#el.control onChange=(action "selectOrganizationType") search=(action "searchOrganizationType") placeholder="Select Organization Type" searchPlaceholder="Type to search..." allowClear=true as |item|}}
               {{titleize (humanize (underscore item))}}
@@ -292,6 +298,11 @@
           {{#if model.description}}
             <h5>Description</h5>
             {{markdown-to-html model.description}}
+          {{/if}}
+
+          {{#if (can "create provider")}}
+            <h5>Member Type</h5>
+            {{titleize (humanize (underscore model.memberType))}}
           {{/if}}
 
           {{#if model.organizationType}}
