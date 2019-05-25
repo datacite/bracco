@@ -32,7 +32,7 @@
   </div>
 {{else}}
   <div class="col-md-3">
-    {{#if (and (can "create client" model) (eq link "providers.show.clients") (gt availableClientCount 0))}}
+    {{#if (and (can "create client" model) (eq link "providers.show.clients"))}}
       <div class="panel facets">
         <div class="panel-body">
           <div class="btn-toolbar">
