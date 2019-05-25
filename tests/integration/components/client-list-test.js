@@ -9,7 +9,7 @@ module('Integration | Component | client list', function(hooks) {
   setupFactoryGuy(hooks);
 
   test('it renders', async function(assert) {
-    this.set('model', makeList('client', 2));
+    this.set('model', { clients: makeList('client', 2) });
     await render(hbs`{{client-list model=model link="clients" searchable=true}}`);
 
     assert.dom('span.help-block').hasText('Reset All');
