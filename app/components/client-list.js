@@ -1,6 +1,6 @@
 import { inject as service } from '@ember/service';
 import Component from '@ember/component';
-import { computed } from '@ember/object';
+// import { computed } from '@ember/object';
 
 const softwareList = [
   'CKAN',
