@@ -96,29 +96,29 @@ export default Component.extend({
   },
   selectBillingCountry(billingCountry) {
     this.provider.set('billingInformationCountry', billingCountry);
+    this.provider.set('billingInformation.country', billingCountry);
     this.set('countries', countryList);
   },
 
   actions: {
     new() {
-      this.set('provider', this.store.createRecord('provider', { isActive: true }));
+      this.set('provider', this.store.createRecord('provider', { billingInformation: {}, technicalContact: {}, isActive: true }));
       this.set('countries', countryList);
       this.set('new', true);
     },
     submit(provider) {
       let self = this;
 
-      this.provider.set('billingInformation', {
-        address: this.provider.get('billingInformationAddress'),
-        organization: this.provider.get('billingInformationOrganization'),
-        department: this.provider.get('billingInformationDepartment'),
-        city: this.provider.get('billingInformationCity'),
-        state: this.provider.get('billingInformationState'),
-        postCode: this.provider.get('billingInformationPostCode'),
-        country: this.provider.get('billingInformationCountry')
-      });
+      // this.provider.set('billingInformation', {
+      //   address: this.provider.get('billingInformationAddress'),
+      //   organization: this.provider.get('billingInformationOrganization'),
+      //   department: this.provider.get('billingInformationDepartment'),
+      //   city: this.provider.get('billingInformationCity'),
+      //   state: this.provider.get('billingInformationState'),
+      //   postCode: this.provider.get('billingInformationPostCode'),
+      //   country: this.provider.get('billingInformationCountry')
+      // });
 
-      console.log(provider)
       provider.save().then(function(provider) {
         self.router.transitionTo('providers.show.settings', provider.id);
         self.set('new', false);

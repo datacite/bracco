@@ -174,7 +174,7 @@
         {{form.element controlType="text" id="billing-information-state" label="Billing State/Province" property="billingInformation.state"  helpText="Your organization's State/Province for billing purposes" required=false}}
         {{form.element controlType="text" id="billing-information-post-code" label=" Billing Zip/PostCode" property="billingInformation.postCode"  helpText="Your organization's Zip/PostCode for billing purposes"  required=false}}
 
-        {{#form.element controlType="power-select" label="Billing Country" property="billingInformation.country" optionLabelPath="name" options=countries helpText='Country name for billing purposes.' destination=billingInformation.country as |el|}}
+        {{#form.element controlType="power-select" label="Billing Country" property="billingInformationCountry"  optionLabelPath="name" options=countries helpText='Country name for billing purposes.' destination=billingInformationCountry as |el|}}
           {{#el.control onChange=(action "selectBillingCountry") search=(action "searchCountry") searchField="name" placeholder="Select Country" searchPlaceholder="Type to search..." allowClear=true as |item|}}
             {{item.name}}
           {{/el.control}}
