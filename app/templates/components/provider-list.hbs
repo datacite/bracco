@@ -57,17 +57,25 @@
           <div class="col-md-9">
             <div>
               <label for="name" class="subtitle">Name</label>
-              {{input type="text" class="form-control" id="contact-name" value=model.contactName required=false}}
-            </div>
-            <div>
-              <label for="email" class="subtitle">Email</label>
-              {{input type="text" class="form-control" id="contact-email" value=model.contactEmail required=false}}
-            </div>
-            <div>
-              <label for="familyName" class="subtitle">Phone</label>
-              {{input type="text" class="form-control" id="contact-phone" value=model.phone required=false}}
             </div>
           </div>
+          {{form.element class="dshsd" controlType="text" property="contactName" helpText='Please enter the name of a person that can be contacted for technical or administrative issues.' required=false}}
+
+          <label class="control-label col-md-3"></label>
+          <div class="col-md-9">
+            <div>
+              <label for="email" class="subtitle">Email</label>
+            </div>
+          </div>
+          {{form.element controlType="email" class="" property="contactEmail" helpText='Please enter an email address that can be contacted for technical or administrative issues.' required=false}}
+    
+          <label class="control-label col-md-3"></label>
+          <div class="col-md-9">
+            <div>
+              <label for="familyName" class="subtitle">Phone</label>
+            </div>
+          </div>
+          {{form.element controlType="text" class="" property="phone" helpText='Please enter a phone number that can be contacted for technical or administrative issues.' required=false}}
         </div>
 
         <div class="form-group">
