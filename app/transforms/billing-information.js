@@ -28,7 +28,7 @@ export default DS.Transform.extend({
         postCode: deserialized.postCode,
         department: deserialized.department,
         organization: deserialized.organization,
-        country: deserialized.country.code
+        country: deserialized.country ? deserialized.country.code : ""
       };
     } else {
       return null;
