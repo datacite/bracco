@@ -182,7 +182,7 @@ export default Model.extend(Validations, {
   updated: DS.attr('date'),
   mode: DS.attr('string'),
 
-  identifier: computed('doi', function () {
+  identifier: computed('doi', 'client', function () {
     if (ENV.API_URL == "https://api.datacite.org" || this.client.get("id") === 'crossref.citations') {
       return "https://doi.org/" + this.doi;
     } else {
@@ -191,6 +191,9 @@ export default Model.extend(Validations, {
   }),
   isDraft: computed('state', function () {
     return this.state === 'draft';
+  }),
+  showCitation: computed('registered', 'client', function () {
+    return (this.registered || this.client.get("id") === 'crossref.citations');
   }),
   schemaVersionString: computed('schemaVersion', function () {
     if (this.schemaVersion) {
