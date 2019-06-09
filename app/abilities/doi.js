@@ -32,7 +32,10 @@ export default Ability.extend({
     }
   }),
   canUpdate: computed('currentUser.role_id', 'model.id', function () {
-    switch (this.get('currentUser.role_id')) {
+    if (this.get('model.client.id') === 'crossref.citations') {
+      return false;
+    } else {
+      switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
       case 'provider_admin':
         return true;
@@ -40,26 +43,35 @@ export default Ability.extend({
         return this.get('currentUser.client_id') === this.get('model.id');
       default:
         return false;
+      }
     }
   }),
   canUpload: computed('currentUser.role_id', 'currentUser.client_id', 'model.query.client-id', function () {
-    switch (this.get('currentUser.role_id')) {
+    if (this.get('model.client.id') === 'crossref.citations') {
+      return false;
+    } else {
+      switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
       case 'client_admin':
         return this.get('currentUser.client_id') === this.get('model.query.client-id');
       default:
         return false;
+      }
     }
   }),
   canCreate: computed('currentUser.role_id', 'currentUser.client_id', 'model.query.client-id', function () {
-    switch (this.get('currentUser.role_id')) {
+    if (this.get('model.client.id') === 'crossref.citations') {
+      return false;
+    } else {
+      switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
       case 'client_admin':
         return this.get('currentUser.client_id') === this.get('model.query.client-id');
       default:
         return false;
+      }
     }
   }),
   canDelete: computed('currentUser.role_id', 'model.client.id', function () {
@@ -73,24 +85,32 @@ export default Ability.extend({
     }
   }),
   canModify: computed('currentUser.role_id', 'currentUser.client_id', 'model.client.id', function () {
-    switch (this.get('currentUser.role_id')) {
-      case 'staff_admin':
-        return true;
-      case 'client_admin':
-        return this.get('currentUser.client_id') === this.get('model.client.id');
-      default:
-        return false;
+    if (this.get('model.client.id') === 'crossref.citations') {
+      return false;
+    } else {
+      switch (this.get('currentUser.role_id')) {
+        case 'staff_admin':
+          return true;
+        case 'client_admin':
+          return this.get('currentUser.client_id') === this.get('model.client.id');
+        default:
+          return false;
+      }
     }
   }),
   canEdit: computed('currentUser.role_id', 'currentUser.client_id', 'model.client.id', function () {
-    switch (this.get('currentUser.role_id')) {
-      case 'staff_admin':
-        return true;
-      case 'client_admin':
-        return this.get('currentUser.client_id') === this.get('model.client.id');
-      default:
-        return false;
-    }
+    if (this.get('model.client.id') === 'crossref.citations') {
+      return false;
+    } else {
+      switch (this.get('currentUser.role_id')) {
+        case 'staff_admin':
+          return true;
+        case 'client_admin':
+          return this.get('currentUser.client_id') === this.get('model.client.id');
+        default:
+          return false;
+      }
+  }
   }),
   canForm: computed('currentUser.role_id', 'currentUser.client_id', 'model.client.id', function () {
     switch (this.get('currentUser.role_id')) {
