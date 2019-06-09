@@ -15,42 +15,46 @@ export default Component.extend({
   },
 
   fetchURL() {
-    let self = this;
-    let url = ENV.API_URL + '/dois/' + this.model.get('doi') + '/get-url';
+    if (this.model.get('client.id') === 'crossref.citations') {
+      this.set('url', this.model.get('url'));
+    } else {
+      let self = this;
+      let url = ENV.API_URL + '/dois/' + this.model.get('doi') + '/get-url';
 
-    fetch(url, {
-      headers: {
-        'Authorization': 'Bearer ' + self.get('currentUser').get('jwt'),
-        'Accept': 'application/vnd.api+json'
-      }
-    }).then(function(response) {
-      if (response.ok) {
-        if (response.status == 204 ) {
-          return "No URL found";
+      fetch(url, {
+        headers: {
+          'Authorization': 'Bearer ' + self.get('currentUser').get('jwt'),
+          'Accept': 'application/vnd.api+json'
         }
-
-        return response.json().then(function(data) {
-          if (data.errors) {
-            let message = data.errors[0].title;
-            return message;
-          } else {
-            self.set('url', data.url);
-            self.get('model').set('url', data.url);
+      }).then(function(response) {
+        if (response.ok) {
+          if (response.status == 204 ) {
+            return "No URL found";
           }
-        });
-      } else {
-        if (console.debug) {
-          console.debug(response);
+
+          return response.json().then(function(data) {
+            if (data.errors) {
+              let message = data.errors[0].title;
+              return message;
+            } else {
+              self.set('url', data.url);
+              self.get('model').set('url', data.url);
+            }
+          });
         } else {
-          console.log(response);
+          if (console.debug) {
+            console.debug(response);
+          } else {
+            console.log(response);
+          }
         }
-      }
-    }).catch(function(error) {
-      if (console.debug) {
-        console.debug(error);
-      } else {
-        console.log(error);
-      }
-    });
+      }).catch(function(error) {
+        if (console.debug) {
+          console.debug(error);
+        } else {
+          console.log(error);
+        }
+      });
+    }
   }
 });
