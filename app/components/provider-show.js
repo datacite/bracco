@@ -24,7 +24,8 @@ const memberTypeList = [
   'consortium_lead',
   'contractual_provider',
   'for_profit_provider',
-  'member_only'
+  'member_only',
+  'registration_agency'
 ]
 const focusAreaList = [
   'biomedicalAndHealthSciences',
@@ -217,7 +218,6 @@ export default Component.extend(Validations, {
     },
     submit(provider) {
       let self = this;
-
 
       provider.save().then(function () {
         self.reset();
