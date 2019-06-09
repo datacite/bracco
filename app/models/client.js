@@ -19,7 +19,7 @@ const Validations = buildValidations({
     }),
     validator('length', {
       min: 5,
-      max: 17
+      max: 18
     })
   ],
   confirmSymbol: [
