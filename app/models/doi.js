@@ -183,7 +183,7 @@ export default Model.extend(Validations, {
   mode: DS.attr('string'),
 
   identifier: computed('doi', function () {
-    if (ENV.API_URL == "https://api.datacite.org") {
+    if (ENV.API_URL == "https://api.datacite.org" || this.client.get("id") === 'crossref.citations') {
       return "https://doi.org/" + this.doi;
     } else {
       return "https://handle.test.datacite.org/" + this.doi;
