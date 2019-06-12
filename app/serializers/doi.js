@@ -4,7 +4,7 @@ export default DS.JSONAPISerializer.extend({
   attrs: {
     // reserved attribute names
     breason: { key: 'reason' },
-    bcontainer: { key: 'container', serialize: false },
+    bcontainer: { key: 'container' },
 
     // don't send back these attributes, as updates are not implemented yet
     identifiers: { serialize: false },
