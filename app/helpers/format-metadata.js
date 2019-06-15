@@ -1,5 +1,6 @@
 import { helper as buildHelper } from '@ember/component/helper';
 import { isPresent } from '@ember/utils';
+import _string from 'lodash/string';
 
 export function formatMetadata([publicationYear], hash) {
   let container = '';
@@ -10,7 +11,7 @@ export function formatMetadata([publicationYear], hash) {
   }
   let published = publicationYear ? " published " + publicationYear : '';
   let version = hash.version ? 'Version ' + hash.version + ' of ' : '';
-  let resourceType = hash.resourceType || hash.resourceTypeGeneral;
+  let resourceType = _string.startCase(hash.resourceType || hash.resourceTypeGeneral || '');
   let metadata = [version, resourceType, published, container].join(" ").trim();
   
   if (isPresent(metadata)) {
