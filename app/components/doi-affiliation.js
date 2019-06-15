@@ -9,7 +9,7 @@ export default Component.extend({
   actions: {
     searchOrganization(query) {
       let self = this;
-      this.store.query('organization', { 'query': query, qp: 'multiMatch' }).then(function (orgs) {
+      this.store.query('organization', { 'query.ui': query }).then(function (orgs) {
         let organizations = orgs.mapBy('name');
         self.set('organizations', organizations);
         return organizations;

@@ -163,9 +163,10 @@ export default Component.extend(Validations, {
   },
   selectOrganization(rorId) {
     let self = this;
-    this.store.findRecord('organization', rorId).then((result) => {
+    let id = 'ror.org/' + rorId.substr(rorId.indexOf('0'));
+    this.store.findRecord('organization', id).then((result) => {
       self.set('organization', result.name);
-      this.provider.set('rorId',rorId);
+      self.provider.set('rorId',id);
       return result.name;
     });
   },
@@ -285,7 +286,7 @@ export default Component.extend(Validations, {
     },
     searchOrganization(query) {
       let self = this;
-      this.store.query('organization', { 'query': query, qp: 'multiMatch' }).then(function (orgs) {
+      this.store.query('organization', { 'query.ui': query }).then(function (orgs) {
         let organizations = orgs.toArray();
         let organizationsNames = orgs.mapBy('name');
         self.set('organizations', organizations);

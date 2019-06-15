@@ -19,7 +19,8 @@ const memberTypeList = [
   'consortium_lead',
   'contractual_provider',
   'for_profit_provider',
-  'member_only'
+  'member_only',
+  'registration_agency'
 ]
 const focusAreaList = [
   'biomedicalAndHealthSciences',
@@ -163,7 +164,7 @@ export default Component.extend({
     },
     searchOrganization(query) {
       let self = this;
-      this.store.query('organization', { 'query': query, qp: 'multiMatch' }).then(function (orgs) {
+      this.store.query('organization', { 'query.ui': query }).then(function (orgs) {
         let organizations = orgs.toArray();
         let organizationsNames = orgs.mapBy('name');
         self.set('organizations', organizations);
@@ -172,11 +173,10 @@ export default Component.extend({
       });
     },
     selectOrganization(organization) {
-
       let organizationRecord = this.get('organizations').findBy('name', organization);
 
       this.set('organization', organization);
-      this.provider.set('rorId','https://'+organizationRecord.id);
+      this.provider.set('rorId', organizationRecord.id);
     }
   }
 });

@@ -12,8 +12,9 @@ export default Component.extend({
       self.joinNameParts({ givenName: null, familyName: null, nameIdentifierScheme: 'ORCID' });
     });
   },
-  validateRorIdentifier(id) {
+  validateRorIdentifier(value) {
     let self = this;
+    let id = 'ror.org/' + value.substr(value.indexOf('0'));
     this.store.findRecord('organization', id).then(function(organization) {
       self.joinNameParts({ name: organization.name, nameIdentifierScheme: 'ROR' });
     }).catch(function() {
