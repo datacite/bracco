@@ -60,7 +60,7 @@ export default Component.extend({
       });
       if (response.ok) {
         return response.json().then(function (data) {
-          let suffix = data.doi.split('/', 2)[1];
+          let suffix = data.dois[0].split('/', 2)[1];
           self.get('model').set('suffix', suffix);
           let doi = self.get('model').get('prefix') + '/' + suffix;
           self.get('model').set('doi', doi);
