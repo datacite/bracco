@@ -37,10 +37,6 @@
             <h3 class="member">{{client-prefix.prefix.id}}</h3>
           {{/if}}
 
-          {{#if (eq client-prefix.prefix.id "10.5072")}}
-            <span class="icon-default">Demo prefix</span>
-          {{/if}}
-
           {{#if features.useElasticsearch}}
             <h5>DOIs</h5>
             {{#link-to "clients.show.dois" client-prefix.client.id (query-params prefix=client-prefix.prefix.id)}}DOIs for prefix {{client-prefix.prefix.id}}{{/link-to}}

@@ -14,7 +14,7 @@
     {{#bs-form formLayout="horizontal" horizontalLabelGridClass="col-md-3" model=model onSubmit=(action "submit" model)
     as |form|}}
       {{form.element controlType="text" label="DOI" property="doi" helpText="The globally unique string that identifies
-the resource and can't be changed. DOIs with demo prefix 10.5072 will always remain in Draft state."
+the resource and can't be changed."
 disabled=true}}
 
       {{doi-state model=model form=form}}

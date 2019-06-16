@@ -40,8 +40,6 @@ export default Component.extend({
       prefixes = prefixes.mapBy('id').removeObject('10.5072')
       let prefix = prefixes.length > 0 ? prefixes.get('firstObject') : '10.5072';
 
-
-
       self.get('model').set('prefix', prefix);
       
       if (typeof self.get('model').get('doi') == 'undefined') {
@@ -97,14 +95,7 @@ export default Component.extend({
       state = 'draft';
     }
     let states = [];
-    // demo prefix uses only draft state
-    if (this.model.get('prefix') === '10.5072') {
-      states = ['draft'];
-      this.set('registered', true);
-      this.set('findable', true);
-    } else {
-      states = stateList[state];
-    }
+    states = stateList[state];
     states.forEach((item) => {
       this.set(item, false);
     });

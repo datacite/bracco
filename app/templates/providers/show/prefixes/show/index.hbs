@@ -30,17 +30,13 @@
   <div class="col-md-9">
     <div class="panel panel-transparent">
       <div class="panel-body">
-        {{#if (eq model.prefix.id "10.5072")}}
-          <span class="icon-default">Demo prefix</span>
+        <h5>{{pluralize model.clients.length "Client" without-count=true}}</h5>
+        {{#if model.clients}}
+          {{#each model.clients as |client|}}
+            {{#link-to "clients.show.prefixes.show" client.id model.prefix.id}}{{client.name}}{{/link-to}}<br>
+          {{/each}}
         {{else}}
-          <h5>{{pluralize model.clients.length "Client" without-count=true}}</h5>
-          {{#if model.clients}}
-            {{#each model.clients as |client|}}
-              {{#link-to "clients.show.prefixes.show" client.id model.prefix.id}}{{client.name}}{{/link-to}}<br>
-            {{/each}}
-          {{else}}
-            <span class="icon-warning">No clients found.</span>
-          {{/if}}
+          <span class="icon-warning">No clients found.</span>
         {{/if}}
       </div>
     </div>

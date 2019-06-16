@@ -98,30 +98,26 @@
             <div class="panel-body">
               <h3 class="member">{{prefix.id}}</h3>
 
-              {{#if (eq prefix.id "10.5072")}}
-                <span class="icon-default">Demo prefix</span>
+              <h5>{{pluralize prefix.providers.length "Provider" without-count=true}}</h5>
+              {{#if prefix.providers}}
+                {{#each prefix.providers as |provider|}}
+                  {{#link-to "providers.show.prefixes.show" provider.id prefix.id}}{{provider.name}}{{/link-to}}<br/>
+                {{/each}}
               {{else}}
-                <h5>{{pluralize prefix.providers.length "Provider" without-count=true}}</h5>
-                {{#if prefix.providers}}
-                  {{#each prefix.providers as |provider|}}
-                    {{#link-to "providers.show.prefixes.show" provider.id prefix.id}}{{provider.name}}{{/link-to}}<br/>
-                  {{/each}}
-                {{else}}
-                  <span class="icon-warning">No providers found.</span>
-                {{/if}}
+                <span class="icon-warning">No providers found.</span>
+              {{/if}}
 
-                <h5>{{pluralize prefix.clients.length "Client" without-count=true}}</h5>
-                {{#if prefix.clients}}
-                  {{#each prefix.clients as |client|}}
-                    {{#link-to "clients.show.prefixes.show" client.id prefix.id}}{{client.name}}{{/link-to}}<br/>
-                  {{/each}}
-                  {{#if features.useElasticsearch}}
-                    <h5>DOIs</h5>
-                    {{#link-to "dois" (query-params prefix=prefix.id)}}DOIs for prefix {{prefix.id}}{{/link-to}}
-                  {{/if}}
-                {{else}}
-                  <span class="icon-warning">No clients found.</span>
+              <h5>{{pluralize prefix.clients.length "Client" without-count=true}}</h5>
+              {{#if prefix.clients}}
+                {{#each prefix.clients as |client|}}
+                  {{#link-to "clients.show.prefixes.show" client.id prefix.id}}{{client.name}}{{/link-to}}<br/>
+                {{/each}}
+                {{#if features.useElasticsearch}}
+                  <h5>DOIs</h5>
+                  {{#link-to "dois" (query-params prefix=prefix.id)}}DOIs for prefix {{prefix.id}}{{/link-to}}
                 {{/if}}
+              {{else}}
+                <span class="icon-warning">No clients found.</span>
               {{/if}}
 
               <h5>Created</h5>

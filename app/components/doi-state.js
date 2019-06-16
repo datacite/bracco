@@ -30,14 +30,7 @@ export default Component.extend({
       state = 'draft';
     }
     let states = [];
-    // demo prefix uses only draft state
-    if (this.model.get('prefix') === '10.5072') {
-      states = ['draft'];
-      this.set('registered', true);
-      this.set('findable', true);
-    } else {
-      states = stateList[state];
-    }
+    states = stateList[state];
     states.forEach((item) => {
       this.set(item, false);
     });
