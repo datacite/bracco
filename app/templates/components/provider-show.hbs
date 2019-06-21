@@ -305,6 +305,14 @@
             {{model.displayName}}
           {{/if}}
 
+          <h5>System Email</h5>
+          <a href="mailto:{{model.systemEmail}}">{{model.systemEmail}}</a>
+
+          {{#if model.groupEmail}}
+            <h5>Group Email</h5>
+            <a href="mailto:{{model.groupEmail}}">{{model.groupEmail}}</a>
+          {{/if}}
+
           {{#if model.website}}
             <h5>Website</h5>
             <a href="{{model.website}}">{{model.website}}</a>
@@ -343,21 +351,6 @@
 
           <br>
           <h4>Service Contact Information</h4>
-
-          {{#if model.contactName}}
-            <h5>General Contact Name</h5>
-            {{model.contactName}}
-          {{/if}}
-
-          {{#if model.contactEmail}}
-            <h5>General Contact Email</h5>
-            <a href="mailto:{{model.contactEmail}}">{{model.contactEmail}}</a>
-          {{/if}}
-
-          {{#if model.phone}}
-            <h5>General Contact Phone</h5>
-            {{model.phone}}
-          {{/if}}
 
           {{#if model.technicalContact.email}}
             <h5>Technical</h5>
