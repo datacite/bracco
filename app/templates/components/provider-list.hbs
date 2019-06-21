@@ -10,7 +10,8 @@
         </div>
         
         {{form.element controlType="text" label="Provider ID" property="symbol" helpText='The Provider ID is the unique identifier for each provider and can\'t be changed. The Provider ID can contain only upper case letters, and must not be longer than 8 characters.' useIcons=false required=false}}
-        {{form.element controlType="text" label="Provider Name" property="name" required=false helptext="this is the name that you are known by in the scholarly community -- this name will be used in our search index"}}
+        {{form.element controlType="text" label="Organization Name" property="name" required=false helptext="The official name of your organization."}}
+        {{form.element controlType="text" label="Organization Name to Display" property="displayName" required=false helptext="Name of your organization as you would like it to appear in Fabrica and on DataCite’s website."}}
 
         {{#form.element controlType="power-select" label="Organization identifier (optional)" disabled=disabled value=organization helpText='Organization identifiers are provided by the Research Organization Registry (ROR).'  options=organizationsNames as |el|}}
           {{el.control onChange=(action "selectOrganization")   search=(action "searchOrganization") placeholder="Select Organization" searchPlaceholder="Type to search..." allowClear=true}}
@@ -395,6 +396,9 @@
               <h5>ROR ID</h5>
               <a href="{{provider.rorId}}">{{provider.rorId}}</a>
             {{/if}}
+
+            <h5>Organization Name to Display</h5>
+            {{model.displayName}}
 
             {{#if (can "create provider")}}
               <h5>Member Type</h5>

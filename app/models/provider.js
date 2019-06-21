@@ -45,9 +45,16 @@ const Validations = buildValidations({
     }),
   ],
   name: validator('presence', true),
-  contactName: validator('presence', true),
-  contactEmail: [
+  displayName: validator('presence', true),
+  systemEmail: [
     validator('presence', true),
+    validator('format', {
+      type: 'email',
+      allowNonTld: true,
+      message: 'Please enter a valid email address.'
+    })
+  ],
+  groupEmail: [
     validator('format', {
       type: 'email',
       allowNonTld: true,
@@ -95,6 +102,7 @@ export default DS.Model.extend(Validations, {
   meta: DS.attr(),
 
   name: DS.attr('string'),
+  displayame: DS.attr('string'),
   symbol: DS.attr('string'),
   description: DS.attr('string'),
   region: DS.attr('string'),
