@@ -3,16 +3,14 @@ import Component from '@ember/component';
 import countryList from 'iso-3166-country-list';
 
 const organizationTypeList = [
+  'researchInstitution',
   'academicInstitution',
-  'academicLibrary',
   'governmentAgency',
   'nationalInstitution',
-  'nationalLibrary',
-  'researchInstitution',
   'professionalSociety',
   'publisher',
   'serviceProvider',
-  'vendor'
+  'other'
 ]
 const memberTypeList = [
   'provider',

@@ -8,17 +8,16 @@ import { computed } from '@ember/object';
 import { isEmpty } from '@ember/utils';
 
 const organizationTypeList = [
+  'researchInstitution',
   'academicInstitution',
-  'academicLibrary',
   'governmentAgency',
   'nationalInstitution',
-  'nationalLibrary',
-  'researchInstitution',
   'professionalSociety',
   'publisher',
   'serviceProvider',
-  'vendor'
+  'other'
 ]
+
 const memberTypeList = [
   'provider',
   'consortium_lead',
