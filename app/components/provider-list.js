@@ -23,12 +23,12 @@ const memberTypeList = [
   'registration_agency'
 ]
 const focusAreaList = [
-  'biomedicalAndHealthSciences',
-  'earthSciences',
-  'humanities',
-  'mathematicsAndComputerScience',
-  'physicalSciencesAndEngineering',
+  'naturalSciences',
+  'engineeringAndTechnology',
+  'medicalAndHealthSciences',
+  'agriculturalSciences',
   'socialSciences',
+  'humanities',
   'general'
 ]
 
