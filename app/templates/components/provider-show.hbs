@@ -15,9 +15,11 @@
           {{el.control onChange=(action "selectOrganization")   search=(action "searchOrganization") placeholder="Select Organization" searchPlaceholder="Type to search..." allowClear=true}}
         {{/form.element}}
 
-        {{form.element controlType="text" label="Organization Name" property="name" required=false helptext="The official name of your organization."}}
-        {{form.element controlType="text" label="Organization Name to Display" property="displayName" required=false helptext="Name of your organization as you would like it to appear in Fabrica and on DataCite’s website."}}
+        {{form.element controlType="text" label="Organization Name" property="name" required=false helpText="The official name of your organization."}}
+        {{form.element controlType="text" label="Organization Name to Display" property="displayName" required=false helpText="Name of your organization as you would like it to appear in Fabrica and on DataCite’s website."}}
 
+        {{form.element controlType="text" id="system-email" label="System Email" property="systemEmail" helpText='This is the email used for sending password reset requests and similar system notifications.' required=false}}
+        {{form.element controlType="text" id="group-email" label="Group Email" property="groupEmail" helpText='A generic shared email address (such as info@datacite.org or similar) where you would like to receive communications from DataCite.' required=false}}
         {{form.element controlType="text" id="website" label="Website" property="website" helpText='Website of the provider.' required=false}}
         {{form.element controlType="text" id="twitter-handle"  label="Twitter (optional)"  property="twitterHandle"  placeholder="Add @twitter account" helpText='DataCite will follow you on Twitter.' required=false}}
 
@@ -55,24 +57,6 @@
         </div>
 
         <div class="form-group">
-          <label class="control-label col-md-3">General Contact</label>
-          <div class="col-md-9">
-            <div>
-              <label for="name" class="subtitle">Name</label>
-              {{input type="text" class="form-control" id="contact-name" value=model.contactName required=false}}
-            </div>
-            <div>
-              <label for="email" class="subtitle">Email</label>
-              {{input type="text" class="form-control" id="contact-email" value=model.contactEmail required=false}}
-            </div>
-            <div>
-              <label for="familyName" class="subtitle">Phone</label>
-              {{input type="text" class="form-control" id="contact-phone" value=model.phone required=false}}
-            </div>
-          </div>
-        </div>
-
-        <div class="form-group">
           <label class="control-label col-md-3">Service Contact</label>
           <div class="col-md-9">
             <div>
@@ -91,6 +75,24 @@
         </div>
 
         <div class="form-group">
+          <label class="control-label col-md-3">Secondary Service Contact</label>
+          <div class="col-md-9">
+            <div>
+              <label for="givenName" class="subtitle">Given Name (optional)</label>
+              {{input type="text" class="form-control" id="secondary-service-contact-givenName" value=model.secondaryServiceContact.givenName required=false}}
+            </div>
+            <div>
+              <label for="familyName" class="subtitle">Family Name (optional)</label>
+              {{input type="text" class="form-control" id="secondary-service-contact-familyName" value=model.secondaryServiceContact.familyName required=false}}
+            </div>
+            <div>
+              <label for="email" class="subtitle">Email (optional)</label>
+              {{input type="text" class="form-control" id="secondary-service-contact-email" value=model.secondaryServiceContact.email required=false}}
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
           <label class="control-label col-md-3">Technical Contact</label>
           <div class="col-md-9">
             <div>
@@ -104,6 +106,24 @@
             <div>
               <label for="email" class="subtitle">Email (optional)</label>
               {{input type="text" class="form-control" id="technical-contact-email" value=model.technicalContact.email required=false}}
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-md-3">Secondary Technical Contact</label>
+          <div class="col-md-9">
+            <div>
+              <label for="givenName" class="subtitle">Given Name (optional)</label>
+              {{input type="text" class="form-control" id="secondary-technical-contact-givenName" value=model.secondaryTechnicalContact.givenName required=false}}
+            </div>
+            <div>
+              <label for="familyName" class="subtitle">Family Name (optional)</label>
+              {{input type="text" class="form-control" id="secondary-technical-contact-familyName" value=model.secondaryTechnicalContact.familyName required=false}}
+            </div>
+            <div>
+              <label for="email" class="subtitle">Email (optional)</label>
+              {{input type="text" class="form-control" id="secondary-technical-contact-email" value=model.secondaryTechnicalContact.email required=false}}
             </div>
           </div>
         </div>
