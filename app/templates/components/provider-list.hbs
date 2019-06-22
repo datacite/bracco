@@ -395,7 +395,7 @@
         <div class="panel panel-transparent">
           <div class="panel-body">
             <h3 class="work">
-              {{#link-to "providers.show" provider.id}}{{provider.name}}{{/link-to}}
+              {{#link-to "providers.show" provider.id}}{{provider.displayName}}{{/link-to}}
               {{#if (not provider.isActive)}}
                 <span class="small icon-warning">account not active</span>
               {{/if}}
@@ -409,8 +409,8 @@
               <a href="{{provider.rorId}}">{{provider.rorId}}</a>
             {{/if}}
 
-            <h5>Organization Name to Display</h5>
-            {{model.displayName}}
+            <h5>Organization Name</h5>
+            {{model.name}}
 
             {{#if (can "create provider")}}
               <h5>Member Type</h5>
