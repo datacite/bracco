@@ -58,6 +58,7 @@ const Validations = buildValidations({
     validator('format', {
       type: 'email',
       allowNonTld: true,
+      allowBlank: true,
       message: 'Please enter a valid email address.'
     })
   ],
