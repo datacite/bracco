@@ -103,7 +103,7 @@ export default DS.Model.extend(Validations, {
   meta: DS.attr(),
 
   name: DS.attr('string'),
-  displayame: DS.attr('string'),
+  displayName: DS.attr('string'),
   symbol: DS.attr('string'),
   description: DS.attr('string'),
   region: DS.attr('string'),
