@@ -301,8 +301,8 @@
           {{/if}}
 
           {{#if (not admin)}}
-            <h5>Organization Name to Display</h5>
-            {{model.displayName}}
+            <h5>Organization Name</h5>
+            {{model.name}}
           {{/if}}
 
           <h5>System Email</h5>
@@ -327,7 +327,6 @@
             <h5>Country</h5>
             {{model.country.name}}
           {{/if}}
-
 
           {{#if model.description}}
             <h5>Description</h5>
