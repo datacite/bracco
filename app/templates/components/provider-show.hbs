@@ -57,7 +57,7 @@
         </div>
 
         <div class="form-group">
-          <label class="control-label col-md-3">Service Contact</label>
+          <label class="control-label col-md-3">Primary Service Contact</label>
           <div class="col-md-9">
             <div>
               <label for="givenName" class="subtitle">Given Name (optional)</label>
@@ -93,7 +93,7 @@
         </div>
 
         <div class="form-group">
-          <label class="control-label col-md-3">Technical Contact</label>
+          <label class="control-label col-md-3">Primary Technical Contact</label>
           <div class="col-md-9">
             <div>
               <label for="givenName" class="subtitle">Given Name (optional)</label>
@@ -352,23 +352,34 @@
           <h4>Service Contact Information</h4>
 
           {{#if model.technicalContact.email}}
-            <h5>Technical</h5>
-            {{model.technicalContact.givenName}} {{model.technicalContact.familyName}}
-            <br>
+            <h5>Primary Technical Contact</h5>
+            {{model.technicalContact.givenName}} {{model.technicalContact.familyName}}<br>
             <a href="mailto:{{model.technicalContact.email}}">{{model.technicalContact.email}}</a>
           {{/if}}
 
+          {{#if model.secondaryTechnicalContact.email}}
+            <h5>Secondary Technical Contact</h5>
+            {{model.secondaryTechnicalContact.givenName}} {{model.secondaryTechnicalContact.familyName}}<br>
+            <a href="mailto:{{model.secondaryTechnicalContact.email}}">{{model.secondaryTechnicalContact.email}}</a>
+          {{/if}}
+
           {{#if model.serviceContact.email}}
-            <h5>Service</h5>
+            <h5>Primary Service Contact</h5>
             {{model.serviceContact.givenName}} {{model.serviceContact.familyName}}
             <br>
             <a href="mailto:{{model.serviceContact.email}}">{{model.serviceContact.email}}</a>
           {{/if}}
 
-          {{#if model.votingContact.email}}
-            <h5>Voting</h5>
-            {{model.votingContact.givenName}} {{model.votingContact.familyName}}
+          {{#if model.secondaryServiceContact.email}}
+            <h5>Secondary Service Contact</h5>
+            {{model.secondaryServiceContact.givenName}} {{model.secondaryServiceContact.familyName}}
             <br>
+            <a href="mailto:{{model.secondaryServiceContact.email}}">{{model.secondaryServiceContact.email}}</a>
+          {{/if}}
+
+          {{#if model.votingContact.email}}
+            <h5>Voting Representative</h5>
+            {{model.votingContact.givenName}} {{model.votingContact.familyName}}<br>
             <a href="mailto:{{model.votingContact.email}}">{{model.votingContact.email}}</a>
           {{/if}}
 
