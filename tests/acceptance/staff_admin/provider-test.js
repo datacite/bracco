@@ -6,18 +6,18 @@ import { authenticateSession } from 'ember-simple-auth/test-support';
 module('Acceptance | staff_admin | provider', function(hooks) {
   setupApplicationTest(hooks);
 
-  // test('visiting provider TIB', async function(assert) {
-  //   await authenticateSession({
-  //     uid: 'admin',
-  //     name: 'Admin',
-  //     role_id: 'staff_admin'
-  //   });
-  //   await visit('/providers/tib');
+  test('visiting provider TIB', async function(assert) {
+    await authenticateSession({
+      uid: 'admin',
+      name: 'Admin',
+      role_id: 'staff_admin'
+    });
+    await visit('/providers/tib');
 
-  //   assert.equal(currentURL(), '/providers/tib');
-  //   assert.dom('h2.work').hasText('German National Library of Science and Technology');
-  //   assert.dom('a.nav-link.active').hasText('Info');
-  // });
+    assert.equal(currentURL(), '/providers/tib');
+    assert.dom('h2.work').hasText('German National Library of Science and Technology');
+    assert.dom('a.nav-link.active').hasText('Info');
+  });
 
   // test('visiting provider TIB settings', async function(assert) {
   //   await authenticateSession({
@@ -55,19 +55,19 @@ module('Acceptance | staff_admin | provider', function(hooks) {
   //   assert.dom('a.nav-link.active').hasText('Settings');
   // });
 
-  test('visiting provider TIB clients', async function(assert) {
-    await authenticateSession({
-      uid: 'admin',
-      name: 'Admin',
-      role_id: 'staff_admin'
-    });
-    await visit('/providers/tib/clients');
+  // test('visiting provider TIB clients', async function(assert) {
+  //   await authenticateSession({
+  //     uid: 'admin',
+  //     name: 'Admin',
+  //     role_id: 'staff_admin'
+  //   });
+  //   await visit('/providers/tib/clients');
 
-    assert.equal(currentURL(), '/providers/tib/clients');
-    assert.dom('h2.work').hasText('German National Library of Science and Technology');
-    assert.dom('a.nav-link.active').hasText('Clients');
-    assert.dom('button#add-client').includesText('Create Client');
-  });
+  //   assert.equal(currentURL(), '/providers/tib/clients');
+  //   assert.dom('h2.work').hasText('German National Library of Science and Technology');
+  //   assert.dom('a.nav-link.active').hasText('Clients');
+  //   assert.dom('button#add-client').includesText('Create Client');
+  // });
 
   test('visiting provider TIB dois', async function(assert) {
     await authenticateSession({
