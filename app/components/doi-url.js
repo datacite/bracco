@@ -2,6 +2,7 @@ import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 import fetch from 'fetch';
 import ENV from 'bracco/config/environment';
+import { w } from '@ember/string';
 
 export default Component.extend({
   currentUser: service(),
@@ -15,7 +16,7 @@ export default Component.extend({
   },
 
   fetchURL() {
-    if (this.model.get('client.id') === 'crossref.citations') {
+    if (w("crossref.citations medra.citations kisti.citations jalc.citations op.citations").includes(this.model.get('client.id'))) {
       this.set('url', this.model.get('url'));
     } else {
       let self = this;

@@ -4,6 +4,7 @@ import { validator, buildValidations } from 'ember-cp-validations';
 import ENV from 'bracco/config/environment';
 import Model from 'ember-data/model';
 import { fragmentArray } from 'ember-data-model-fragments/attributes';
+import { w } from '@ember/string';
 
 const Validations = buildValidations({
   details: [
@@ -183,7 +184,7 @@ export default Model.extend(Validations, {
   mode: DS.attr('string'),
 
   identifier: computed('doi', 'client', function () {
-    if (ENV.API_URL == "https://api.datacite.org" || this.client.get("id") === 'crossref.citations') {
+    if (ENV.API_URL == "https://api.datacite.org" || (w("crossref.citations medra.citations kisti.citations jalc.citations op.citations").includes(this.client.get('id')))) {
       return "https://doi.org/" + this.doi;
     } else {
       return "https://handle.test.datacite.org/" + this.doi;
@@ -193,7 +194,7 @@ export default Model.extend(Validations, {
     return this.state === 'draft';
   }),
   showCitation: computed('registered', 'client', function () {
-    return (this.registered || this.client.get("id") === 'crossref.citations');
+    return (this.registered || (w("crossref.citations medra.citations kisti.citations jalc.citations op.citations").includes(this.client.get('id'))));
   }),
   schemaVersionString: computed('schemaVersion', function () {
     if (this.schemaVersion) {

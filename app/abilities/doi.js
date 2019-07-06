@@ -1,6 +1,7 @@
 import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { Ability } from 'ember-can';
+import { w } from '@ember/string';
 
 export default Ability.extend({
   currentUser: service(),
@@ -32,7 +33,7 @@ export default Ability.extend({
     }
   }),
   canUpdate: computed('currentUser.role_id', 'model.id', function () {
-    if (this.get('model.id') === 'crossref.citations') {
+    if (w("crossref.citations medra.citations kisti.citations jalc.citations op.citations").includes(this.get('model.id'))) {
       return false;
     } else {
       switch (this.get('currentUser.role_id')) {
@@ -47,7 +48,7 @@ export default Ability.extend({
     }
   }),
   canUpload: computed('currentUser.role_id', 'currentUser.client_id', 'model.query.client-id', function () {
-    if (this.get('model.query.client-id') === 'crossref.citations') {
+    if (w("crossref.citations medra.citations kisti.citations jalc.citations op.citations").includes(this.get('model.query.client-id'))) {
       return false;
     } else {
       switch (this.get('currentUser.role_id')) {
@@ -61,7 +62,7 @@ export default Ability.extend({
     }
   }),
   canCreate: computed('currentUser.role_id', 'currentUser.client_id', 'model.query.client-id', function () {
-    if (this.get('model.query.client-id') === 'crossref.citations') {
+    if (w("crossref.citations medra.citations kisti.citations jalc.citations op.citations").includes(this.get('model.query.client-id'))) {
       return false;
     } else {
       switch (this.get('currentUser.role_id')) {
@@ -85,7 +86,7 @@ export default Ability.extend({
     }
   }),
   canModify: computed('currentUser.role_id', 'currentUser.client_id', 'model.client.id', function () {
-    if (this.get('model.client.id') === 'crossref.citations') {
+    if (w("crossref.citations medra.citations kisti.citations jalc.citations op.citations").includes(this.get('model.client-id'))) {
       return false;
     } else {
       switch (this.get('currentUser.role_id')) {
@@ -99,7 +100,7 @@ export default Ability.extend({
     }
   }),
   canEdit: computed('currentUser.role_id', 'currentUser.client_id', 'model.client.id', function () {
-    if (this.get('model.client.id') === 'crossref.citations') {
+    if (w("crossref.citations medra.citations kisti.citations jalc.citations op.citations").includes(this.get('model.client-id'))) {
       return false;
     } else {
       switch (this.get('currentUser.role_id')) {
