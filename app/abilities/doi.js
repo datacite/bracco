@@ -86,7 +86,7 @@ export default Ability.extend({
     }
   }),
   canModify: computed('currentUser.role_id', 'currentUser.client_id', 'model.client.id', function () {
-    if (w("crossref.citations medra.citations kisti.citations jalc.citations op.citations").includes(this.get('model.client-id'))) {
+    if (w("crossref.citations medra.citations kisti.citations jalc.citations op.citations").includes(this.get('model.client.id'))) {
       return false;
     } else {
       switch (this.get('currentUser.role_id')) {
@@ -100,7 +100,7 @@ export default Ability.extend({
     }
   }),
   canEdit: computed('currentUser.role_id', 'currentUser.client_id', 'model.client.id', function () {
-    if (w("crossref.citations medra.citations kisti.citations jalc.citations op.citations").includes(this.get('model.client-id'))) {
+    if (w("crossref.citations medra.citations kisti.citations jalc.citations op.citations").includes(this.get('model.client.id'))) {
       return false;
     } else {
       switch (this.get('currentUser.role_id')) {
