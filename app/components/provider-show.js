@@ -165,7 +165,7 @@ export default Component.extend(Validations, {
     let id = 'ror.org/' + rorId.substr(rorId.indexOf('0'));
     this.store.findRecord('organization', id).then((result) => {
       self.set('organization', result.name);
-      self.provider.set('rorId',id);
+      self.provider.set('rorId','https://'+id);
       return result.name;
     });
   },
