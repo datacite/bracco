@@ -23,13 +23,17 @@ export default Ability.extend({
         return false;
     }
   }),
-  canTransfer: computed('currentUser.role_id', function () {
-    switch (this.get('currentUser.role_id')) {
-      case 'staff_admin':
-      case 'provider_admin':
-        return true;
-      default:
-        return false;
+  canTransfer: computed('currentUser.role_id', 'model.client.id', 'model.query.client-id', function () {
+    if (w("crossref.citations medra.citations kisti.citations jalc.citations op.citations").includes(this.get('model.client.id')) || w("crossref.citations medra.citations kisti.citations jalc.citations op.citations").includes(this.get('model.query.client-id'))) {
+      return false;
+    } else {
+      switch (this.get('currentUser.role_id')) {
+        case 'staff_admin':
+        case 'provider_admin':
+          return true;
+        default:
+          return false;
+      }
     }
   }),
   canUpdate: computed('currentUser.role_id', 'model.id', function () {
