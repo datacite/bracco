@@ -53,6 +53,9 @@ const Validations = buildValidations({
   'nameIdentifiers': [
     validator('has-many')
   ]
+  // 'affiliation': [
+  //   validator('has-many')
+  // ]
 });
 
 export default Fragment.extend(Validations, {
@@ -60,6 +63,6 @@ export default Fragment.extend(Validations, {
   givenName: attr('string', { defaultValue: null }),
   familyName: attr('string', { defaultValue: null }),
   nameType: attr('string', { defaultValue: "Personal" }),
-  affiliation: array(),
-  nameIdentifiers: fragmentArray('name-identifier')
+  nameIdentifiers: fragmentArray('name-identifier'),
+  affiliation: fragmentArray('affiliation')
 });

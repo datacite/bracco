@@ -5,22 +5,34 @@ export default Component.extend({
   store: service(),
 
   organizations: [],
+  organizationsNames: [],
+
+  updateAffiliation(organizationRecord) {
+    this.fragment.set('name', organizationRecord.name);
+    this.fragment.set('affiliationIdentifier', 'https://' + organizationRecord.id);
+    this.fragment.set('schemeUri', 'https://ror.org');
+    this.fragment.set('affiliationIdentifierScheme', 'ROR');
+
+    this.setCreatorValidationClass();
+  },
 
   actions: {
     searchOrganization(query) {
       let self = this;
       this.store.query('organization', { 'query.ui': query }).then(function (orgs) {
-        let organizations = orgs.mapBy('name');
+        let organizations = orgs.toArray();
+        let organizationsNames = orgs.mapBy('name');
         self.set('organizations', organizations);
-        return organizations;
+        self.set('organizationsNames', organizationsNames);
+        return organizationsNames;
       });
     },
     selectOrganization(organization) {
-      this.set('affiliation', organization);
-      this.creator.get('affiliation').replace(this.index, 1, [organization]);
+      let organizationRecord = this.get('organizations').findBy('name', organization);
+      this.updateAffiliation(organizationRecord);
     },
     deleteAffiliation() {
-      this.creator.get('affiliation').removeAt(this.index);
+      this.creator.get('affiliation').removeObject(this.fragment);
     }
   }
 });

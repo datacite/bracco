@@ -34,14 +34,13 @@ export default Controller.extend({
       // don't send xml
       doi.set("xml", null);
 
-      // only store name identifiers with a value
-      // store affiliations only with a value and as an array of strings
+      // only store name identifiers and affiliations with a value
       doi.get('creators').forEach((creator) => {
         creator.set('nameIdentifiers', creator.get('nameIdentifiers').filter(function(nameIdentifier) {
           return !isBlank(nameIdentifier.nameIdentifier);
         }));
         creator.set('affiliation', creator.get('affiliation').filter(function(affiliation) {
-          return !isBlank(affiliation);
+          return !isBlank(affiliation.name);
         }));
         if (creator.nameType === 'Organizational') {
           creator.set('givenName', null);

@@ -92,7 +92,7 @@
   <label for="affiliation" class="subtitle">Affiliation (optional)</label>
 
   {{#each fragment.affiliation as |affiliation index|}}
-    {{doi-affiliation model=model creator=fragment affiliation=affiliation form=form index=index}}
+    {{doi-affiliation model=model creator=fragment fragment=affiliation form=form index=index setCreatorValidationClass=(action "setCreatorValidationClass")}}
   {{/each}}
 
   {{#if (not hasErrors)}}

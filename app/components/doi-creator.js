@@ -32,15 +32,23 @@ export default Component.extend({
     if (this.fragment.get('nameIdentifiers').length == 0) {
       this.fragment.get('nameIdentifiers').createFragment();
     }
+
     if (!this.fragment.get('affiliation')) {
       this.fragment.set('affiliation', []);
     }
-    if (!isArray(this.fragment.get('affiliation'))) {
-      this.fragment.set('affiliation', [this.fragment.get('affiliation')]);
-    }
     if (this.fragment.get('affiliation').length == 0) {
-      this.fragment.get('affiliation').pushObject(null);
+      this.fragment.get('affiliation').createFragment();
     }
+
+    // if (!this.fragment.get('affiliation')) {
+    //   this.fragment.set('affiliation', []);
+    // }
+    // if (!isArray(this.fragment.get('affiliation'))) {
+    //   this.fragment.set('affiliation', [this.fragment.get('affiliation')]);
+    // }
+    // if (this.fragment.get('affiliation').length == 0) {
+    //   this.fragment.get('affiliation').pushObject(null);
+    // }
   },
 
   joinNameParts(options = {}) {
@@ -118,7 +126,7 @@ export default Component.extend({
       this.fragment.get('nameIdentifiers').createFragment();
     },
     addAffiliation() {
-      this.fragment.get('affiliation').pushObject(null);
+      this.fragment.get('affiliation').createFragment();
     },
     deleteCreator() {
       this.model.get('creators').removeObject(this.fragment);
