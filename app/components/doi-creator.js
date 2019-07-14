@@ -1,6 +1,5 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object';
-import { isArray } from '@ember/array';
 
 export default Component.extend({
   showPersonal: computed('fragment.nameType', function () {

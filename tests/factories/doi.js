@@ -33,7 +33,7 @@ FactoryGuy.define('creator', {
     familyName: 'Patel',
     nameType: 'Personal',
     nameIdentifiers: FactoryGuy.hasMany('nameIdentifier'),
-    affiliation: ['Cambridge University']
+    affiliation: FactoryGuy.hasMany('affiliation'),
   }
 });
 
@@ -54,5 +54,14 @@ FactoryGuy.define('nameIdentifier', {
     nameIdentifier: 'https://orcid.org/0000-0003-1419-2405',
     nameIdentifierScheme: 'ORCID',
     schemeUri: 'https://orcid.org'
+  }
+});
+
+FactoryGuy.define('affiliation', {
+  default: {
+    name: 'University of Cambridge',
+    affiliationIdentifier: 'https://ror.org/013meh722',
+    affiliationIdentifierScheme: 'ROR',
+    schemeUri: 'https://ror.org'
   }
 });

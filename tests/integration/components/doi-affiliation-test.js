@@ -11,9 +11,9 @@ module('Integration | Component | doi affiliation', function(hooks) {
   test('it renders', async function(assert) {
     this.set('model', make('doi'));
     this.set('creator', make('creator'));
-    this.set('affiliation', 'Cambridge University');
+    this.set('affiliation', make('affiliation'));
 
-    await render(hbs`{{doi-affiliation model=model creator=creator affiliation=affiliation index=0}}`);
+    await render(hbs`{{doi-affiliation model=model creator=creator fragment=affiliation index=0}}`);
 
     assert.dom('*').hasText('');
   });

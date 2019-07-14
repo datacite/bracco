@@ -1,6 +1,6 @@
 import attr from 'ember-data/attr';
 import Fragment from 'ember-data-model-fragments/fragment';
-import { fragmentArray, array } from 'ember-data-model-fragments/attributes';
+import { fragmentArray } from 'ember-data-model-fragments/attributes';
 import { validator, buildValidations } from 'ember-cp-validations';
 import { computed } from '@ember/object';
 
