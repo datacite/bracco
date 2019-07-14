@@ -259,32 +259,32 @@ module('Acceptance | client_admin | client', function(hooks) {
   //   assert.equal(this.element.querySelector('h3.work').innerText,goodDoi.titles[0]);
   // });
 
-  test('modify values for a DOI from client AWI', async function(assert) {
-    // assert.expect(3);
-    await authenticateSession({
-      access_token: ENV.API_JWT,
-      token_type: 'Bearer',
-      uid: 'tib.awi',
-      name: 'Alfred Wegener Institute',
-      role_id: 'client_admin',
-      provider_id: 'tib',
-      client_id: 'tib.awi'
-    });
-    await visit('/clients/tib.awi/dois/new');
-    assert.equal(currentURL(), '/clients/tib.awi/dois/new');
+  // test('modify values for a DOI from client AWI', async function(assert) {
+  //   // assert.expect(3);
+  //   await authenticateSession({
+  //     access_token: ENV.API_JWT,
+  //     token_type: 'Bearer',
+  //     uid: 'tib.awi',
+  //     name: 'Alfred Wegener Institute',
+  //     role_id: 'client_admin',
+  //     provider_id: 'tib',
+  //     client_id: 'tib.awi'
+  //   });
+  //   await visit('/clients/tib.awi/dois/new');
+  //   assert.equal(currentURL(), '/clients/tib.awi/dois/new');
 
-    var titles = findAll('input.title-field');
-    let suffix = Math.random().toString(36).substring(7);
+  //   var titles = findAll('input.title-field');
+  //   let suffix = Math.random().toString(36).substring(7);
 
-    await fillIn('input#suffix-field', suffix);
-    await click('input#draft-radio');
-    await fillIn('input#url-field', goodDoi.url);
-    await fillIn(titles[0], goodDoi.titles[0])
-    await fillIn('input#publisher-field', goodDoi.publisher);
-    await fillIn('input#publication-year-field', goodDoi.yop);
-    await fillIn('input.creator-field', 'Alexander Payne');
+  //   await fillIn('input#suffix-field', suffix);
+  //   await click('input#draft-radio');
+  //   await fillIn('input#url-field', goodDoi.url);
+  //   await fillIn(titles[0], goodDoi.titles[0])
+  //   await fillIn('input#publisher-field', goodDoi.publisher);
+  //   await fillIn('input#publication-year-field', goodDoi.yop);
+  //   await fillIn('input.creator-field', 'Alexander Payne');
 
-    await click('button#create');
+  //   await click('button#create');
 
     // await waitUntil(() => {
     //   let doiName = findAll('h2.work')[1].innerText;
@@ -315,7 +315,7 @@ module('Acceptance | client_admin | client', function(hooks) {
     // assert.equal(this.element.querySelector('h3.work').innerText,goodDoi.titles[1]);
     // assert.dom('h3.work ~ div.metadata').includesText("2000");
     // assert.dom('h3.work ~ div.metadata').includesText("ITV");
-  });
+  // });
 
   // test('remove values for a DOI from client AWI', async function(assert) {
   //   // assert.expect(3);
@@ -374,32 +374,32 @@ module('Acceptance | client_admin | client', function(hooks) {
   //   assert.dom('h3.work ~ div.metadata').doesNotIncludeText("ITV");
   // });
 
-  test('edit multiple fields for a new DOI for client AWI', async function(assert) {
-    // assert.expect(3);
-    await authenticateSession({
-      access_token: ENV.API_JWT,
-      token_type: 'Bearer',
-      uid: 'estdoi.bio',
-      name: 'Tartu Ülikooli Loodusmuuseum',
-      role_id: 'client_admin',
-      provider_id: 'estdoi',
-      client_id: 'estdoi.bio'
-    });
+  // test('edit multiple fields for a new DOI for client AWI', async function(assert) {
+  //   // assert.expect(3);
+  //   await authenticateSession({
+  //     access_token: ENV.API_JWT,
+  //     token_type: 'Bearer',
+  //     uid: 'estdoi.bio',
+  //     name: 'Tartu Ülikooli Loodusmuuseum',
+  //     role_id: 'client_admin',
+  //     provider_id: 'estdoi',
+  //     client_id: 'estdoi.bio'
+  //   });
 
 
-    await visit('/clients/estdoi.bio/dois/10.15156%2F1xqt-rz35/edit');
+  //   await visit('/clients/estdoi.bio/dois/10.15156%2F1xqt-rz35/edit');
 
   
-    assert.dom('input#url-field').hasValue('https://schema.datacite.org/meta/kernel-4.1/index.html');
-    assert.dom('input#publisher-field').hasValue('University of Tartu');
-    assert.dom('input#publication-year-field').hasValue("2016");
-    assert.equal(findAll('input.title-field')[1].value,'Chapter |');
-    assert.equal(findAll('input.title-field')[0].value,'My doi');
-    assert.equal(findAll('input.creator-field')[0].value,'De vito, Danny');
-    assert.equal(findAll('input.creator-field')[1].value,'corgan, billy');
-    assert.equal(findAll('textarea.description-field')[0].value,goodDoi.descriptions[0]);
-    assert.equal(findAll('textarea.description-field')[1].value,goodDoi.descriptions[1]);
-  });
+  //   assert.dom('input#url-field').hasValue('https://schema.datacite.org/meta/kernel-4.1/index.html');
+  //   assert.dom('input#publisher-field').hasValue('University of Tartu');
+  //   assert.dom('input#publication-year-field').hasValue("2016");
+  //   assert.equal(findAll('input.title-field')[1].value,'Chapter |');
+  //   assert.equal(findAll('input.title-field')[0].value,'My doi');
+  //   assert.equal(findAll('input.creator-field')[0].value,'De vito, Danny');
+  //   assert.equal(findAll('input.creator-field')[1].value,'corgan, billy');
+  //   assert.equal(findAll('textarea.description-field')[0].value,goodDoi.descriptions[0]);
+  //   assert.equal(findAll('textarea.description-field')[1].value,goodDoi.descriptions[1]);
+  // });
 
   // test('view full DOI in the form', async function(assert) {
   //   await authenticateSession({

@@ -294,7 +294,6 @@ export default Component.extend(Validations, {
       });
     },
     selectOrganization(organization) {
-
       let organizationRecord = this.get('organizations').findBy('name', organization);
       this.set('organization', organization);
       this.provider.set('rorId','https://'+organizationRecord.id);
