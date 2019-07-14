@@ -11,14 +11,14 @@ module('Acceptance | client_admin | client', function(hooks) {
   setupApplicationTest(hooks);
   setupFactoryGuy(hooks);
 
-  let goodDoi = {
-    titles: ["Abhinandan: Crowds gather for Indian pilots release", "Tornadoes kill at least 23 in Lee County, Alabama"],
-    creators: ["Teresa May", "Billy Corgan"],
-    descriptions: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis blandit odio. Donec justo ex, feugiat non imperdiet ut, ultrices a purus. Mauris molestie elementum finibus. Duis augue odio","Suspendisse tristique risus neque, non posuere lacus vestibulum et. Maecenas pellentesque mollis lectus, ac viverra nunc pellentesque sed. Sed nibh orci" ],
-    yop: "1990",
-    publisher: "the BBC",
-    url: 'http://bbc.co.uk'
-  }
+  // let goodDoi = {
+  //   titles: ["Abhinandan: Crowds gather for Indian pilots release", "Tornadoes kill at least 23 in Lee County, Alabama"],
+  //   creators: ["Teresa May", "Billy Corgan"],
+  //   descriptions: ["Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis blandit odio. Donec justo ex, feugiat non imperdiet ut, ultrices a purus. Mauris molestie elementum finibus. Duis augue odio","Suspendisse tristique risus neque, non posuere lacus vestibulum et. Maecenas pellentesque mollis lectus, ac viverra nunc pellentesque sed. Sed nibh orci" ],
+  //   yop: "1990",
+  //   publisher: "the BBC",
+  //   url: 'http://bbc.co.uk'
+  // }
 
   hooks.beforeEach(async function() {
     await authenticateSession({
