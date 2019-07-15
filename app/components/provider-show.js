@@ -285,7 +285,7 @@ export default Component.extend(Validations, {
     },
     searchOrganization(query) {
       let self = this;
-      this.store.query('organization', { 'query.ui': query }).then(function (orgs) {
+      this.store.query('organization', { 'query': query }).then(function (orgs) {
         let organizations = orgs.toArray();
         let organizationsNames = orgs.mapBy('name');
         self.set('organizations', organizations);
