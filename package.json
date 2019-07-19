@@ -1,6 +1,6 @@
 {
   "name": "bracco",
-  "version": "2.3.22",
+  "version": "2.3.23",
   "private": true,
   "description": "DOI Fabrica",
   "repository": {
@@ -140,7 +140,7 @@
     "ember-lodash": "^4.19.4",
     "ember-maybe-import-regenerator": "^0.1.6",
     "ember-moment": "^7.3.1",
-    "ember-power-select": "^2.2.1",
+    "ember-power-select": "^2.3.5",
     "ember-power-select-blockless": "^0.5.0",
     "ember-prism": "^0.3.0",
     "ember-qunit": "^4.4.1",
