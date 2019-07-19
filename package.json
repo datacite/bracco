@@ -143,7 +143,7 @@
     "ember-power-select": "^2.2.1",
     "ember-power-select-blockless": "^0.5.0",
     "ember-prism": "^0.3.0",
-    "ember-qunit": "^3.4.1",
+    "ember-qunit": "^4.4.1",
     "ember-radio-button": "^2.0.0",
     "ember-resolver": "^5.0.1",
     "ember-route-action-helper": "^2.0.6",

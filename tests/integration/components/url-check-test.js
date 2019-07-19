@@ -1,19 +1,21 @@
-import { find } from '@ember/test-helpers';
-import { moduleForComponent, test } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('url-check', 'Integration | Component | url check', {
-  integration: true
-});
+module('Integration | Component | url check', function(hooks) {
+  setupRenderingTest(hooks);
 
-test('it renders', function(assert) {
+  test('it renders', async function(assert) {
+    this.set('state', 'registered');
 
-  // Template block usage:
-  this.render(hbs`
-    {{#url-check}}
-      working …
-    {{/url-check}}
-  `);
+    // Template block usage:
+    await render(hbs`
+      {{#url-check}}
 
-  assert.equal(find('*').textContent.trim(), '');
+      {{/url-check}}
+  ` );
+
+    assert.dom('*').hasText('');
+  });
 });

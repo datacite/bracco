@@ -474,7 +474,7 @@ module('Acceptance | client_admin | client', function(hooks) {
   //   assert.equal(findAll('h2.work')[1].innerText,'10.2312/7qw1-th81');
   // });
 
-  test('fail creating a new DOI without yop and publisher ', async function(assert) {
+  test('fail creating a new DOI without publicationYear and publisher ', async function(assert) {
     assert.expect(4);
     await authenticateSession({
       access_token: ENV.API_JWT,

@@ -1,19 +1,19 @@
-import { find } from '@ember/test-helpers';
-import { moduleForComponent, test } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('menu-user', 'Integration | Component | menu user', {
-  integration: true
-});
+module('Integration | Component | menu user', function(hooks) {
+  setupRenderingTest(hooks);
 
-test('it renders', function(assert) {
+  test('it renders', async function(assert) {
+    // Template block usage:
+    await render(hbs`
+      {{#menu-user}}
 
-  // Template block usage:
-  this.render(hbs`
-    {{#menu-user}}
-      template block text
-    {{/menu-user}}
-  `);
+      {{/menu-user}}
+    `);
 
-  assert.equal(find('*').textContent.trim(), 'Sign in');
+    assert.dom('*').hasText('Sign in');
+  });
 });

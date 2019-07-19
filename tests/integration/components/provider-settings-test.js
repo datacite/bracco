@@ -1,26 +1,23 @@
-import { find } from '@ember/test-helpers';
-import { moduleForComponent, test } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { setupFactoryGuy, make } from 'ember-data-factory-guy';
+import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('provider-settings', 'Integration | Component | provider settings', {
-  integration: true
-});
+module('Integration | Component | provider settings', function(hooks) {
+  setupRenderingTest(hooks);
+  setupFactoryGuy(hooks);
 
-test('it renders', function(assert) {
+  test('it renders', async function(assert) {
+    this.set('model', make('client'));
 
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
+    // Template block usage:
+    await render(hbs`
+      {{#provider-settings}}
 
-  this.render(hbs`{{provider-settings}}`);
+      {{/provider-settings}}
+    `);
 
-  assert.equal(find('*').textContent.trim(), 'The password reset functionality goes here.');
-
-  // Template block usage:
-  this.render(hbs`
-    {{#provider-settings}}
-
-    {{/provider-settings}}
-  `);
-
-  assert.equal(find('*').textContent.trim(), 'The password reset functionality goes here.');
+    assert.dom('*').hasText('The password reset functionality goes here.');
+  });
 });

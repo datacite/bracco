@@ -12,7 +12,7 @@ module('helper:is-equal', function(hooks) {
 
     await render(hbs`{{is-equal inputValue}}`);
 
-    assert.ok(this.$(), 'is equal');
+    assert.dom('*').exists();
   });
 
   // test('it renders false', function(assert) {
