@@ -1,3 +1,4 @@
+import { find } from '@ember/test-helpers';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
@@ -12,7 +13,7 @@ test('it renders', function(assert) {
 
   this.render(hbs`{{provider-list}}`);
 
-  assert.equal(this.$().text().trim(), 'No providers found.');
+  assert.equal(find('*').textContent.trim(), 'No providers found.');
 
   // Template block usage:
   this.render(hbs`
@@ -21,5 +22,5 @@ test('it renders', function(assert) {
     {{/provider-list}}
   `);
 
-  assert.equal(this.$().text().trim(), 'No providers found.');
+  assert.equal(find('*').textContent.trim(), 'No providers found.');
 });

@@ -1,6 +1,13 @@
 import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
-import { currentURL, findAll, visit, fillIn, click, waitUntil } from '@ember/test-helpers';
+import {
+  currentURL,
+  findAll,
+  visit,
+  fillIn,
+  click,
+  waitUntil
+} from '@ember/test-helpers';
 import { authenticateSession } from 'ember-simple-auth/test-support';
 import { setupFactoryGuy } from 'ember-data-factory-guy';
 // import { build, make, mockFindRecord } from 'ember-data-factory-guy';

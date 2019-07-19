@@ -1,9 +1,10 @@
+import { alias } from '@ember/object/computed';
 import Component from '@ember/component';
 import { computed } from '@ember/object';
 
 export default Component.extend({
-  currentPage: computed.alias("model.meta.page"),
-  totalPages: computed.alias("model.meta.totalPages"),
+  currentPage: alias("model.meta.page"),
+  totalPages: alias("model.meta.totalPages"),
 
   pageItems: computed("currentPage","totalPages", function() {
     const page = Number(this.get("currentPage") || 1);

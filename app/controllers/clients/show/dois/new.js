@@ -28,7 +28,6 @@ export default Controller.extend({
       }));
 
       // only store name identifiers and affiliations with a value
-      // store affiliations as an array of strings
       doi.get('creators').forEach((creator) => {
         creator.set('nameIdentifiers', creator.get('nameIdentifiers').filter(function(nameIdentifier) {
           return !isBlank(nameIdentifier.nameIdentifier);

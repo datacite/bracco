@@ -1,3 +1,4 @@
+import { find } from '@ember/test-helpers';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
@@ -14,5 +15,5 @@ test('it renders', function(assert) {
     {{/menu-user}}
   `);
 
-  assert.equal(this.$().text().trim(), 'Sign in');
+  assert.equal(find('*').textContent.trim(), 'Sign in');
 });

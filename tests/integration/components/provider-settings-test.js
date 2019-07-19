@@ -1,3 +1,4 @@
+import { find } from '@ember/test-helpers';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
@@ -12,7 +13,7 @@ test('it renders', function(assert) {
 
   this.render(hbs`{{provider-settings}}`);
 
-  assert.equal(this.$().text().trim(), 'The password reset functionality goes here.');
+  assert.equal(find('*').textContent.trim(), 'The password reset functionality goes here.');
 
   // Template block usage:
   this.render(hbs`
@@ -21,5 +22,5 @@ test('it renders', function(assert) {
     {{/provider-settings}}
   `);
 
-  assert.equal(this.$().text().trim(), 'The password reset functionality goes here.');
+  assert.equal(find('*').textContent.trim(), 'The password reset functionality goes here.');
 });
