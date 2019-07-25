@@ -103,6 +103,9 @@ export default DS.Model.extend(Validations, {
   consortiumLead: DS.belongsTo('provider', {
     async: true
   }),
+  consortiumOrganizations: DS.hasMany('provider', {
+    async: true
+  }),
   meta: DS.attr(),
 
   name: DS.attr('string'),
