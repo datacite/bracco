@@ -34,6 +34,14 @@
               {{titleize (humanize item)}}
             {{/el.control}}
           {{/form.element}}
+
+          {{#if (eq model.provider.memberType "consortium_organization")}}
+            {{#form.element controlType="power-select" property="consortiumLead" label="Consortium Lead" helpText='Consortium lead for this organization.' optionLabelPath="name" options=consortiumLeads destination=consortiumLead.id as |el|}}
+              {{#el.control onChange=(action "selectConsortiumLead") search=(action "searchConsortiumLead") searchField="name" searchPlaceholder="Type to search..." allowClear=true as |item|}}
+                {{item.name}}
+              {{/el.control}}
+            {{/form.element}}
+          {{/if}}
         {{/if}}
 
         {{#form.element controlType="power-select" label="Organization Type (optional)" property="organizationType" options=organizationTypes destination=organizationType as |el|}}
@@ -127,80 +135,84 @@
           </div>
         </div>
 
-        <div class="form-group">
-          <label class="control-label col-md-3">Voting Representative</label>
-          <div class="col-md-9">
-            <div>
-              <label for="givenName" class="subtitle">Given Name (optional)</label>
-              {{input type="text" class="form-control" id="voting-contact-givenName" value=model.votingContact.givenName required=false}}
-            </div>
-            <div>
-              <label for="familyName" class="subtitle">Family Name (optional)</label>
-              {{input type="text" class="form-control" id="voting-contact-familyName" value=model.votingContact.familyName required=false}}
-            </div>
-            <div>
-              <label for="email" class="subtitle">Email (optional)</label>
-              {{input type="text" class="form-control" id="voting-contact-email" value=model.votingContact.email required=false}}
+        {{#if (not-eq model.memberType "consortium_organization")}}
+          <div class="form-group">
+            <label class="control-label col-md-3">Voting Representative</label>
+            <div class="col-md-9">
+              <div>
+                <label for="givenName" class="subtitle">Given Name (optional)</label>
+                {{input type="text" class="form-control" id="voting-contact-givenName" value=model.votingContact.givenName required=false}}
+              </div>
+              <div>
+                <label for="familyName" class="subtitle">Family Name (optional)</label>
+                {{input type="text" class="form-control" id="voting-contact-familyName" value=model.votingContact.familyName required=false}}
+              </div>
+              <div>
+                <label for="email" class="subtitle">Email (optional)</label>
+                {{input type="text" class="form-control" id="voting-contact-email" value=model.votingContact.email required=false}}
+              </div>
             </div>
           </div>
-        </div>
+        {{/if}}
         
-        <div class="col-md-12">
-          <h4>Billing Contact Information</h4>
-          <div class="help-block ember-view">Your organization’s information for DataCite billing purposes</div>
-          <br>
-        </div>
-        {{form.element controlType="text" id="billing-information-organization" label="Billing Organization" property="billingInformation.organization"  helpText="Your organization's name for billing purposes"  required=false}}
-        {{form.element controlType="text" id="billing-information-department" label="Billing Department" property="billingInformation.department"  helpText="Your organization's specific department that is responsible for payment" required=false}}
+        {{#if (not-eq model.memberType "consortium_organization")}}
+          <div class="col-md-12">
+            <h4>Billing Contact Information</h4>
+            <div class="help-block ember-view">Your organization’s information for DataCite billing purposes</div>
+            <br>
+          </div>
+          {{form.element controlType="text" id="billing-information-organization" label="Billing Organization" property="billingInformation.organization"  helpText="Your organization's name for billing purposes"  required=false}}
+          {{form.element controlType="text" id="billing-information-department" label="Billing Department" property="billingInformation.department"  helpText="Your organization's specific department that is responsible for payment" required=false}}
 
-        <div class="form-group">
-          <label class="control-label col-md-3">Billing Contact</label>
-          <div class="col-md-9">
-            <div>
-              <label for="givenName" class="subtitle">Given Name (optional)</label>
-              {{input type="text" class="form-control" id="billing-contact-givenName" value=model.billingContact.givenName required=false}}
-            </div>
-            <div>
-              <label for="familyName" class="subtitle">Family Name (optional)</label>
-              {{input type="text" class="form-control" id="billing-contact-familyName" value=model.billingContact.familyName required=false}}
-            </div>
-            <div>
-              <label for="email" class="subtitle">Email (optional)</label>
-              {{input type="text" class="form-control" id="billing-contact-email" value=model.billingContact.email required=false}}
+          <div class="form-group">
+            <label class="control-label col-md-3">Billing Contact</label>
+            <div class="col-md-9">
+              <div>
+                <label for="givenName" class="subtitle">Given Name (optional)</label>
+                {{input type="text" class="form-control" id="billing-contact-givenName" value=model.billingContact.givenName required=false}}
+              </div>
+              <div>
+                <label for="familyName" class="subtitle">Family Name (optional)</label>
+                {{input type="text" class="form-control" id="billing-contact-familyName" value=model.billingContact.familyName required=false}}
+              </div>
+              <div>
+                <label for="email" class="subtitle">Email (optional)</label>
+                {{input type="text" class="form-control" id="billing-contact-email" value=model.billingContact.email required=false}}
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="form-group">
-          <label class="control-label col-md-3">Secondary Billing Contact</label>
-          <div class="col-md-9">
-            <div>
-              <label for="givenName" class="subtitle">Given Name (optional)</label>
-              {{input type="text" class="form-control" id="secondary-billing-contact-givenName" value=model.secondaryBillingContact.givenName required=false}}
-            </div>
-            <div>
-              <label for="familyName" class="subtitle">Family Name (optional)</label>
-              {{input type="text" class="form-control" id="secondary-billing-contact-familyName" value=model.secondaryBillingContact.familyName required=false}}
-            </div>
-            <div>
-              <label for="email" class="subtitle">Email (optional)</label>
-              {{input type="text" class="form-control" id="secondary-billing-contact-email" value=model.secondaryBillingContact.email required=false}}
+          <div class="form-group">
+            <label class="control-label col-md-3">Secondary Billing Contact</label>
+            <div class="col-md-9">
+              <div>
+                <label for="givenName" class="subtitle">Given Name (optional)</label>
+                {{input type="text" class="form-control" id="secondary-billing-contact-givenName" value=model.secondaryBillingContact.givenName required=false}}
+              </div>
+              <div>
+                <label for="familyName" class="subtitle">Family Name (optional)</label>
+                {{input type="text" class="form-control" id="secondary-billing-contact-familyName" value=model.secondaryBillingContact.familyName required=false}}
+              </div>
+              <div>
+                <label for="email" class="subtitle">Email (optional)</label>
+                {{input type="text" class="form-control" id="secondary-billing-contact-email" value=model.secondaryBillingContact.email required=false}}
+              </div>
             </div>
           </div>
-        </div>
 
-        {{form.element controlType="textarea" rows=3 id="billing-information-street" label="Billing Street" property="billingInformation.address"  helpText="Your organization's street and number for billing purposes" required=false}}
+          {{form.element controlType="textarea" rows=3 id="billing-information-street" label="Billing Street" property="billingInformation.address"  helpText="Your organization's street and number for billing purposes" required=false}}
 
-        {{form.element controlType="text" id="billing-information-city" label="Billing City" property="billingInformation.city" helpText="Your organization's city for billing purposes" required=false}}
-        {{form.element controlType="text" id="billing-information-state" label="Billing State/Province" property="billingInformation.state"  helpText="Your organization's State/Province for billing purposes" required=false}}
-        {{form.element controlType="text" id="billing-information-post-code" label=" Billing Zip/PostCode" property="billingInformation.postCode"  helpText="Your organization's Zip/PostCode for billing purposes"  required=false}}
+          {{form.element controlType="text" id="billing-information-city" label="Billing City" property="billingInformation.city" helpText="Your organization's city for billing purposes" required=false}}
+          {{form.element controlType="text" id="billing-information-state" label="Billing State/Province" property="billingInformation.state"  helpText="Your organization's State/Province for billing purposes" required=false}}
+          {{form.element controlType="text" id="billing-information-post-code" label=" Billing Zip/PostCode" property="billingInformation.postCode"  helpText="Your organization's Zip/PostCode for billing purposes"  required=false}}
 
-        {{#form.element controlType="power-select" label="Billing Country" property="billingInformationCountry"  optionLabelPath="name" options=countries helpText='Country name for billing purposes.' destination=billingInformationCountry as |el|}}
-          {{#el.control onChange=(action "selectBillingCountry") search=(action "searchCountry") searchField="name" placeholder="Select Country" searchPlaceholder="Type to search..." allowClear=true as |item|}}
-            {{item.name}}
-          {{/el.control}}
-        {{/form.element}}
-        
+          {{#form.element controlType="power-select" label="Billing Country" property="billingInformationCountry"  optionLabelPath="name" options=countries helpText='Country name for billing purposes.' destination=billingInformationCountry as |el|}}
+            {{#el.control onChange=(action "selectBillingCountry") search=(action "searchCountry") searchField="name" placeholder="Select Country" searchPlaceholder="Type to search..." allowClear=true as |item|}}
+              {{item.name}}
+            {{/el.control}}
+          {{/form.element}}
+        {{/if}}
+
         {{#if (can "create provider")}}
           {{form.element controlType="checkbox" label="Account is active" property="isActive" required=false helpText='This account can manage clients and prefixes'}}
         {{/if}}

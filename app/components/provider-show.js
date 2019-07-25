@@ -21,6 +21,7 @@ const organizationTypeList = [
 const memberTypeList = [
   'provider',
   'consortium_lead',
+  'consortium_organization',
   'contractual_provider',
   'for_profit_provider',
   'member_only',
@@ -63,6 +64,7 @@ export default Component.extend(Validations, {
 
   organizations: [],
   organizationsNames: [],
+  consortiumLeads: [],
 
   twitterUrl: computed('model.twitterHandle', function() {
     if (this.model.get('twitterHandle')) {
@@ -169,6 +171,12 @@ export default Component.extend(Validations, {
       return result.name;
     });
   },
+  searchConsortiumLead(query) {
+    this.set('consortiumLeads', this.store.query('provider', { 'query': query, 'member-type': 'consortium_lead', sort: 'name', 'page[size]': 100 }));
+  },
+  selectConsortiumLead(consortiumLead) {
+    this.provider.set('consortiumLead', consortiumLead)
+  },
   selectBillingCountry(billingCountry) {
     this.provider.set('billingInformation.country', billingCountry);
     this.set('countries', countryList);
@@ -273,6 +281,12 @@ export default Component.extend(Validations, {
     },
     selectMemberType(memberType) {
       this.selectMemberType(memberType);
+    },
+    searchConsortiumLead(query) {
+      this.searchConsortiumLead(query);
+    },
+    selectConsortiumLead(provider) {
+      this.selectConsortiumLead(provider);
     },
     searchFocusArea(query) {
       this.searchFocusArea(query);

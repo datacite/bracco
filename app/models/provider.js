@@ -100,6 +100,9 @@ const Validations = buildValidations({
 });
 
 export default DS.Model.extend(Validations, {
+  consortiumLead: DS.belongsTo('provider', {
+    async: true
+  }),
   meta: DS.attr(),
 
   name: DS.attr('string'),
