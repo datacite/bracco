@@ -15,20 +15,6 @@
           {{el.control onChange=(action "selectOrganization") search=(action "searchOrganization") placeholder="Select Organization" searchPlaceholder="Type to search..." allowClear=true}}
         {{/form.element}}
 
-        {{form.element controlType="text" label="Organization Name" property="name" required=false helpText="The official name of your organization."}}
-        {{form.element controlType="text" label="Organization Name to Display" property="displayName" required=false helpText="Name of your organization as you would like it to appear in Fabrica and on DataCite’s website."}}
-
-        {{form.element controlType="text" id="system-email" label="System Email" property="systemEmail" helpText='This is the email used for sending password reset requests and similar system notifications.' required=false}}
-        {{form.element controlType="text" id="group-email" label="Group Email (optional)" property="groupEmail" helpText='A generic shared email address (such as info@datacite.org or similar) where you would like to receive communications from DataCite.' required=false}}
-        {{form.element controlType="text" id="website" label="Website" property="website" helpText='Website of the provider.' required=false}}
-        {{form.element controlType="text" id="twitter-handle"  label="Twitter (optional)"  property="twitterHandle"  placeholder="Add @twitter account" helpText='DataCite will follow you on Twitter.' required=false}}
-
-        {{#form.element controlType="power-select" label="Country (optional)" property="country" optionLabelPath="name" options=countries destination=country helpText='Country where the provider is located.' as |el|}}
-          {{#el.control onChange=(action "selectCountry") search=(action "searchCountry") searchField="name" placeholder="Select Country" searchPlaceholder="Type to search..." allowClear=true as |item|}}
-            {{item.name}}
-          {{/el.control}}
-        {{/form.element}}
-
         {{#if (can "create provider")}}
           {{#form.element controlType="power-select" label="Member Type" property="memberType" options=memberTypes destination=memberType as |el|}}
             {{#el.control onChange=(action "selectMemberType") search=(action "searchMemberType") placeholder="Select Member Type" searchPlaceholder="Type to search..." as |item|}}
@@ -44,6 +30,20 @@
             {{/form.element}}
           {{/if}}
         {{/if}}
+
+        {{form.element controlType="text" label="Organization Name" property="name" required=false helpText="The official name of your organization."}}
+        {{form.element controlType="text" label="Organization Name to Display" property="displayName" required=false helpText="Name of your organization as you would like it to appear in Fabrica and on DataCite’s website."}}
+
+        {{form.element controlType="text" id="system-email" label="System Email" property="systemEmail" helpText='This is the email used for sending password reset requests and similar system notifications.' required=false}}
+        {{form.element controlType="text" id="group-email" label="Group Email (optional)" property="groupEmail" helpText='A generic shared email address (such as info@datacite.org or similar) where you would like to receive communications from DataCite.' required=false}}
+        {{form.element controlType="text" id="website" label="Website" property="website" helpText='Website of the provider.' required=false}}
+        {{form.element controlType="text" id="twitter-handle"  label="Twitter (optional)"  property="twitterHandle"  placeholder="Add @twitter account" helpText='DataCite will follow you on Twitter.' required=false}}
+
+        {{#form.element controlType="power-select" label="Country (optional)" property="country" optionLabelPath="name" options=countries destination=country helpText='Country where the provider is located.' as |el|}}
+          {{#el.control onChange=(action "selectCountry") search=(action "searchCountry") searchField="name" placeholder="Select Country" searchPlaceholder="Type to search..." allowClear=true as |item|}}
+            {{item.name}}
+          {{/el.control}}
+        {{/form.element}}
 
         {{#form.element controlType="power-select" label="Organization Type (optional)" property="organizationType" options=organizationTypes destination=organizationType as |el|}}
           {{#el.control onChange=(action "selectOrganizationType") search=(action "searchOrganizationType") placeholder="Select Organization Type" searchPlaceholder="Type to search..." allowClear=true as |item|}}
@@ -312,6 +312,11 @@
             <a href="{{model.rorId}}">{{model.rorId}}</a>
           {{/if}}
 
+          {{#if (can "create provider")}}
+            <h5>Member Type</h5>
+            {{titleize (humanize model.memberType)}}
+          {{/if}}
+
           {{#if (not admin)}}
             <h5>Organization Name</h5>
             {{model.name}}
@@ -343,11 +348,6 @@
           {{#if model.description}}
             <h5>Description</h5>
             {{markdown-to-html model.description}}
-          {{/if}}
-
-          {{#if (can "create provider")}}
-            <h5>Member Type</h5>
-            {{titleize (humanize model.memberType)}}
           {{/if}}
 
           {{#if model.organizationType}}
@@ -389,10 +389,12 @@
             <a href="mailto:{{model.secondaryServiceContact.email}}">{{model.secondaryServiceContact.email}}</a>
           {{/if}}
 
-          {{#if model.votingContact.email}}
-            <h5>Voting Representative</h5>
-            {{model.votingContact.givenName}} {{model.votingContact.familyName}}<br>
-            <a href="mailto:{{model.votingContact.email}}">{{model.votingContact.email}}</a>
+          {{#if (not-eq model.memberType "consortium_organization")}}
+            {{#if model.votingContact.email}}
+              <h5>Voting Representative</h5>
+              {{model.votingContact.givenName}} {{model.votingContact.familyName}}<br>
+              <a href="mailto:{{model.votingContact.email}}">{{model.votingContact.email}}</a>
+            {{/if}}
           {{/if}}
 
           {{#if model.joined}}
@@ -405,57 +407,58 @@
             <span class="small icon-warning">has not been set</span>
           {{/if}}
 
-          <h4>Billing Information</h4>
-          {{#if (not isBillingEmpty)}}
-            {{#if model.billingInformation.organization}}
-              <h5>Billing Organization</h5>
-              {{model.billingInformation.organization}}
-            {{/if}}
-            {{#if model.billingInformation.department}}
-              <h5>Billing I caDepartment</h5>
-              {{model.billingInformation.department}}
-            {{/if}}
+          {{#if (not-eq model.memberType "consortium_organization")}}
+            <h4>Billing Information</h4>
+            {{#if (not isBillingEmpty)}}
+              {{#if model.billingInformation.organization}}
+                <h5>Billing Organization</h5>
+                {{model.billingInformation.organization}}
+              {{/if}}
+              {{#if model.billingInformation.department}}
+                <h5>Billing I caDepartment</h5>
+                {{model.billingInformation.department}}
+              {{/if}}
 
 
-            {{#if model.billingInformation.address}}
-              <h5>Billing Address</h5>
-              {{model.billingInformation.address}}
-            {{/if}}
-            {{#if model.billingInformation.city}}
-              <h5>Billing City</h5>
-              {{model.billingInformation.city}}
-            {{/if}}
-            {{#if model.billingInformation.state}}
-              <h5>Billing State/Province</h5>
-              {{model.billingInformation.state}}
-            {{/if}}
-            {{#if model.billingInformation.postCode}}
-              <h5>Billing Zip/PostCode</h5>
-              {{model.billingInformation.postCode}}
-            {{/if}}
-            {{#if model.billingInformation.country}}
-              <h5>Billing Country</h5>
-              {{model.billingInformation.country.name}}
-            {{/if}}
+              {{#if model.billingInformation.address}}
+                <h5>Billing Address</h5>
+                {{model.billingInformation.address}}
+              {{/if}}
+              {{#if model.billingInformation.city}}
+                <h5>Billing City</h5>
+                {{model.billingInformation.city}}
+              {{/if}}
+              {{#if model.billingInformation.state}}
+                <h5>Billing State/Province</h5>
+                {{model.billingInformation.state}}
+              {{/if}}
+              {{#if model.billingInformation.postCode}}
+                <h5>Billing Zip/PostCode</h5>
+                {{model.billingInformation.postCode}}
+              {{/if}}
+              {{#if model.billingInformation.country}}
+                <h5>Billing Country</h5>
+                {{model.billingInformation.country.name}}
+              {{/if}}
 
-            {{#if model.billingContact.email}}
-              <h5>Billing Contact</h5>
-              {{model.billingContact.givenName}} {{model.billingContact.familyName}}
-              <br>
-              <a href="mailto:{{model.billingContact.email}}">{{model.billingContact.email}}</a>
+              {{#if model.billingContact.email}}
+                <h5>Billing Contact</h5>
+                {{model.billingContact.givenName}} {{model.billingContact.familyName}}
+                <br>
+                <a href="mailto:{{model.billingContact.email}}">{{model.billingContact.email}}</a>
+              {{/if}}
+
+              {{#if model.secondaryBillingContact.email}}
+                <h5>Secondary Billing Contact</h5>
+                {{model.secondaryBillingContact.givenName}} {{model.secondaryBillingContact.familyName}}
+                <br>
+                <a href="mailto:{{model.secondaryBillingContact.email}}">{{model.secondaryBillingContact.email}}</a>
+              {{/if}}
+
+            {{else}}
+              <span class="small icon-warning">has not been provided</span>
             {{/if}}
-
-            {{#if model.secondaryBillingContact.email}}
-              <h5>Secondary Billing Contact</h5>
-              {{model.secondaryBillingContact.givenName}} {{model.secondaryBillingContact.familyName}}
-              <br>
-              <a href="mailto:{{model.secondaryBillingContact.email}}">{{model.secondaryBillingContact.email}}</a>
-            {{/if}}
-
-          {{else}}
-            <span class="small icon-warning">has not been provided</span>
-          {{/if}}
-
+           {{/if}}
         </div>
       </div>
     </div>

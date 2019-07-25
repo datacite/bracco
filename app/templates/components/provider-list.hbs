@@ -10,6 +10,23 @@
         </div>
         
         {{form.element controlType="text" label="Provider ID" property="symbol" helpText='The Provider ID is the unique identifier for each provider and can\'t be changed. The Provider ID can contain only upper case letters, and must not be longer than 8 characters.' useIcons=false required=false}}
+        
+        {{#if (can "create provider")}}
+          {{#form.element controlType="power-select" label="Member Type" property="memberType" options=memberTypes destination=memberType as |el|}}
+            {{#el.control onChange=(action "selectMemberType") search=(action "searchMemberType") placeholder="Select Member Type" searchPlaceholder="Type to search..." as |item|}}
+              {{titleize (humanize item)}}
+            {{/el.control}}
+          {{/form.element}}
+
+          {{#if (eq model.provider.memberType "consortium_organization")}}
+            {{#form.element controlType="power-select" property="consortiumLead" label="Consortium Lead" helpText='Consortium lead for this organization.' optionLabelPath="name" options=consortiumLeads destination=consortiumLead.id as |el|}}
+              {{#el.control onChange=(action "selectConsortiumLead") search=(action "searchConsortiumLead") searchField="name" searchPlaceholder="Type to search..." allowClear=true as |item|}}
+                {{item.name}}
+              {{/el.control}}
+            {{/form.element}}
+          {{/if}}
+        {{/if}}
+
         {{form.element controlType="text" label="Organization Name" property="name" required=false helpText="The official name of your organization."}}
         {{form.element controlType="text" label="Organization Name to Display" property="displayName" required=false helpText="Name of your organization as you would like it to appear in Fabrica and on DataCite’s website."}}
 
@@ -27,23 +44,7 @@
             {{item.name}}
           {{/el.control}}
         {{/form.element}}
-
-        {{#if (can "create provider")}}
-          {{#form.element controlType="power-select" label="Member Type" property="memberType" options=memberTypes destination=memberType as |el|}}
-            {{#el.control onChange=(action "selectMemberType") search=(action "searchMemberType") placeholder="Select Member Type" searchPlaceholder="Type to search..." as |item|}}
-              {{titleize (humanize item)}}
-            {{/el.control}}
-          {{/form.element}}
-
-          {{#if (eq model.provider.memberType "consortium_organization")}}
-            {{#form.element controlType="power-select" property="consortiumLead" label="Consortium Lead" helpText='Consortium lead for this organization.' optionLabelPath="name" options=consortiumLeads destination=consortiumLead.id as |el|}}
-              {{#el.control onChange=(action "selectConsortiumLead") search=(action "searchConsortiumLead") searchField="name" searchPlaceholder="Type to search..." allowClear=true as |item|}}
-                {{item.name}}
-              {{/el.control}}
-            {{/form.element}}
-          {{/if}}
-        {{/if}}
-
+        
         {{#form.element controlType="power-select" label="Organization Type (optional)" property="organizationType" options=organizationTypes destination=organizationType as |el|}}
           {{#el.control onChange=(action "selectOrganizationType") search=(action "searchOrganizationType") placeholder="Select Organization Type" searchPlaceholder="Type to search..." allowClear=true as |item|}}
             {{titleize (humanize (underscore item))}}
@@ -420,9 +421,6 @@
               <h5>ROR ID</h5>
               <a href="{{provider.rorId}}">{{provider.rorId}}</a>
             {{/if}}
-
-            <h5>Organization Name</h5>
-            {{provider.name}}
 
             {{#if (can "create provider")}}
               <h5>Member Type</h5>
