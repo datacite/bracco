@@ -56,12 +56,17 @@ export default Component.extend({
   didInsertElement() {
     let placeholders = { 'doi': 'DOI',
                          'provider': 'Provider',
+                         'organization': 'Organization',
                          'client': 'Client',
                          'prefix': 'Prefix',
                          'client-prefix': 'Prefix',
                          'provider-prefix': 'Prefix' }
 
-    this.set('modelName', placeholders[this.model.get("modelName")]);
+    if (this.get("name")) {
+      this.set('modelName', this.get("name"));
+    } else {
+      this.set('modelName', placeholders[this.model.get("modelName")]);
+    }
     
     if (this.get("modelName") === "DOI") {
       this.set('formats', { '-updated': 'Sort by Date Updated', '-created': 'Sort by Date Created', 'name': 'Sort by DOI', 'relevance': 'Sort by Relevance' });
