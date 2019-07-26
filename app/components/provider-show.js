@@ -80,6 +80,12 @@ export default Component.extend(Validations, {
   //   this.set('isBillingEmpty', Object.values(self.get('model.billingInformation')).some(this.hasEmptyBilling));
   // },
 
+  didReceiveAttrs() {
+    this._super(...arguments);
+
+    this.searchConsortiumLead(null);
+  },
+
   reset() {
     this.provider.set('passwordInput', null);
     this.set('edit', false);

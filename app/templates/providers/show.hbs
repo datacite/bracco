@@ -6,6 +6,9 @@
       <ol class="breadcrumb">
         <li class="breadcrumb-item">{{#link-to "index"}}DataCite{{/link-to}}</li>
         <li class="breadcrumb-item">{{#link-to "providers"}}Providers{{/link-to}}</li>
+        {{#if (eq model.memberType "consortium_organization")}}
+          <li class="breadcrumb-item">{{#link-to "providers.show.index" model.consortiumLead.id}}{{model.consortiumLead.name}}{{/link-to}}</li>
+        {{/if}}
       </ol>
     {{/if}}
 
@@ -21,6 +24,10 @@
         {{#nav.item}}{{#nav.link-to "providers.show.index" model.id class="nav-link"}}Info{{/nav.link-to}}{{/nav.item}}
         {{#nav.item}}{{#nav.link-to "providers.show.settings" model.id class="nav-link"}}Settings{{/nav.link-to}}{{/nav.item}}
         
+        {{#if (eq model.memberType "consortium_lead")}}
+          {{#nav.item}}{{#nav.link-to "providers.show.organizations" class="nav-link"}}Consortium Organizations{{/nav.link-to}}{{/nav.item}}
+        {{/if}}
+
         {{#if (not-eq model.memberType "member_only")}}
           {{#nav.item}}{{#nav.link-to "providers.show.clients" model.id class="nav-link"}}Clients{{/nav.link-to}}{{/nav.item}}
           {{#nav.item}}{{#nav.link-to "providers.show.prefixes" model.id class="nav-link"}}Prefixes{{/nav.link-to}}{{/nav.item}}

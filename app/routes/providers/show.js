@@ -6,7 +6,7 @@ export default Route.extend({
 
   model(params) {
     let self = this;
-    return this.store.findRecord('provider', params.provider_id).then(function(provider) {
+    return this.store.findRecord('provider', params.provider_id, { include: 'consortium-lead,consortium-organizations' }).then(function(provider) {
       return provider;
     }).catch(function(reason){
       if (console.debug) {

@@ -1,0 +1,329 @@
+{{#if new}}
+  <div class="panel panel-transparent">
+    <div class="panel-body">
+      <div class="col-md-9 col-md-offset-3"><h3 class="edit">Create Consortium Organization</h3></div>
+
+      {{#bs-form formLayout="horizontal" horizontalLabelGridClass="col-md-3" model=provider onSubmit=(action "submit" provider model) submitOnEnter=true as |form|}}
+        <div class="col-md-12">
+          <h4>Organization Information</h4>
+          <br>
+        </div>
+        
+        {{form.element controlType="text" label="Provider ID" property="symbol" helpText='The Provider ID is the unique identifier for each provider and can\'t be changed. The Provider ID can contain only upper case letters, and must not be longer than 8 characters.' useIcons=false required=false}}
+        {{form.element controlType="text" id="member-type" label="Member Type" value="Consortium Organization" readonly=true}}
+        {{form.element controlType="text" label="Organization Name" property="name" required=false helpText="The official name of your organization."}}
+        {{form.element controlType="text" label="Organization Name to Display" property="displayName" required=false helpText="Name of your organization as you would like it to appear in Fabrica and on DataCite’s website."}}
+
+        {{#form.element controlType="power-select" label="Organization identifier (optional)" disabled=disabled value=organization helpText='Organization identifiers are provided by the Research Organization Registry (ROR).'  options=organizationsNames as |el|}}
+          {{el.control onChange=(action "selectOrganization") search=(action "searchOrganization") placeholder="Select Organization" searchPlaceholder="Type to search..." allowClear=true}}
+        {{/form.element}}
+
+        {{form.element controlType="text" id="system-email" label="System Email" property="systemEmail" helpText='This is the email used for sending password reset requests and similar system notifications.' required=false}}
+        {{form.element controlType="text" id="group-email" label="Group Email (optional)" property="groupEmail" helpText='A generic shared email address (such as info@datacite.org or similar) where you would like to receive communications from DataCite.' required=false}}
+        {{form.element controlType="text" label="Website" property="website" helpText='Website of the provider.' required=false}}
+        {{form.element controlType="text" id="twitter-handle" label="Twitter (optional)"  property="twitterHandle"  placeholder="Add @twitter account" helpText='DataCite will follow you on twitter.' required=false}}
+
+         {{#form.element controlType="power-select" label="Country (optional)" property="country" optionLabelPath="name" options=countries destination=country helpText='Country where the provider is located.' as |el|}}
+          {{#el.control onChange=(action "selectCountry") search=(action "searchCountry") searchField="name" placeholder="Select Country" searchPlaceholder="Type to search..." allowClear=true as |item|}}
+            {{item.name}}
+          {{/el.control}}
+        {{/form.element}}
+        
+        {{#form.element controlType="power-select" label="Organization Type (optional)" property="organizationType" options=organizationTypes destination=organizationType as |el|}}
+          {{#el.control onChange=(action "selectOrganizationType") search=(action "searchOrganizationType") placeholder="Select Organization Type" searchPlaceholder="Type to search..." allowClear=true as |item|}}
+            {{titleize (humanize (underscore item))}}
+          {{/el.control}}
+        {{/form.element}}
+
+        {{#form.element controlType="power-select" label="Focus Area (optional)" property="focusArea" options=focusAreas destination=focusArea helpText='Field of research covered by provider.' as |el|}}
+          {{#el.control onChange=(action "selectFocusArea") search=(action "searchFocusArea") placeholder="Select Focus Area" searchPlaceholder="Type to search..." allowClear=true as |item|}}
+            {{titleize (humanize (underscore item))}}
+          {{/el.control}}
+        {{/form.element}}
+        
+        {{form.element controlType="textarea" label="Description (optional)" property="description" rows=10 helpText='Description of the provider. Please use markdown for formatting.' required=false}}
+
+        <div class="col-md-12">
+          <br>
+          <h4>Service Contact Information</h4>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-md-3">Primary Service Contact</label>
+          <div class="col-md-9">
+            <div>
+              <label for="givenName" class="subtitle">Given Name (optional)</label>
+              {{input type="text" class="form-control" id="service-contact-givenName" value=model.serviceContact.givenName required=false}}
+            </div>
+            <div>
+              <label for="familyName" class="subtitle">Family Name (optional)</label>
+              {{input type="text" class="form-control" id="service-contact-familyName" value=model.serviceContact.familyName required=false}}
+            </div>
+            <div>
+              <label for="email" class="subtitle">Email (optional)</label>
+              {{input type="text" class="form-control" id="service-contact-email" value=model.serviceContact.email required=false}}
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-md-3">Secondary Service Contact</label>
+          <div class="col-md-9">
+            <div>
+              <label for="givenName" class="subtitle">Given Name (optional)</label>
+              {{input type="text" class="form-control" id="secondary-service-contact-givenName" value=model.secondaryServiceContact.givenName required=false}}
+            </div>
+            <div>
+              <label for="familyName" class="subtitle">Family Name (optional)</label>
+              {{input type="text" class="form-control" id="secondary-service-contact-familyName" value=model.secondaryServiceContact.familyName required=false}}
+            </div>
+            <div>
+              <label for="email" class="subtitle">Email (optional)</label>
+              {{input type="text" class="form-control" id="secondary-service-contact-email" value=model.secondaryServiceContact.email required=false}}
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-md-3">Primary Technical Contact</label>
+          <div class="col-md-9">
+            <div>
+              <label for="givenName" class="subtitle">Given Name (optional)</label>
+              {{input type="text" class="form-control" id="technical-contact-givenName" value=model.technicalContact.givenName required=false}}
+            </div>
+            <div>
+              <label for="familyName" class="subtitle">Family Name (optional)</label>
+              {{input type="text" class="form-control" id="technical-contact-familyName" value=model.technicalContact.familyName required=false}}
+            </div>
+            <div>
+              <label for="email" class="subtitle">Email (optional)</label>
+              {{input type="text" class="form-control" id="technical-contact-email" value=model.technicalContact.email required=false}}
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-md-3">Secondary Technical Contact</label>
+          <div class="col-md-9">
+            <div>
+              <label for="givenName" class="subtitle">Given Name (optional)</label>
+              {{input type="text" class="form-control" id="secondary-technical-contact-givenName" value=model.secondaryTechnicalContact.givenName required=false}}
+            </div>
+            <div>
+              <label for="familyName" class="subtitle">Family Name (optional)</label>
+              {{input type="text" class="form-control" id="secondary-technical-contact-familyName" value=model.secondaryTechnicalContact.familyName required=false}}
+            </div>
+            <div>
+              <label for="email" class="subtitle">Email (optional)</label>
+              {{input type="text" class="form-control" id="secondary-technical-contact-email" value=model.secondaryTechnicalContact.email required=false}}
+            </div>
+          </div>
+        </div>
+
+        {{#if (can "create provider")}}
+          {{form.element controlType="checkbox" label="Account is active" property="isActive" required=false helpText='This account can manage clients and prefixes'}}
+        {{/if}}
+        
+        <div class="col-md-9 col-md-offset-3">
+          <button type="submit" class="btn btn-sm btn-fill">Create Consortium Organization</button>
+          <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
+        </div>
+      {{/bs-form}}
+    </div>
+  </div>
+{{else}}
+  <div class="col-md-3">
+    {{#if (can "create provider")}}
+      <div class="panel facets">
+        <div class="panel-body">
+          <div class="btn-toolbar">
+            <div class="btn-group btn-group-sm">
+              <button {{action "new"}} class="btn btn-warning">{{fa-icon "plus"}}Create Consortium Organization</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    {{else}}
+      <div class="panel panel-transparent">
+        <div class="panel-body">
+          <div class="edit"></div>
+        </div>
+      </div>
+    {{/if}}
+
+    {{#if (or model.organizations.meta.years model.organizations.query.year)}}
+      <div class="panel facets add">
+        <div class="panel-body">
+          <h4>Year joined</h4>
+          <ul>
+            {{#if model.organizations.meta.years}}
+              {{#each model.organizations.meta.years as |year|}}
+                <li>
+                  {{#if model.organizations.query.year}}
+                    {{#link-to "providers" (query-params year="")}}{{fa-icon "check-square-o"}}{{/link-to}}
+                  {{else}}
+                    {{#link-to "providers" (query-params year=year.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                  {{/if}}
+                  <div class="facet-title">{{year.title}}</div>
+                  <span class="number pull-right">{{year.count}}</span>
+                  <div class="clearfix"/>
+                </li>
+              {{/each}}
+            {{else}}
+              <li>
+                {{#link-to "providers" (query-params year="")}}{{fa-icon "check-square-o"}}{{/link-to}}
+                <div class="facet-title">{{model.query.year}}</div>
+                <span class="number pull-right">0</span>
+                <div class="clearfix"/>
+              </li>
+            {{/if}}
+          </ul>
+        </div>
+      </div>
+    {{/if}}
+    {{#if (or model.organizations.meta.regions model.organizations.query.region)}}
+      <div class="panel facets">
+        <div class="panel-body">
+          <h4>Region</h4>
+          <ul>
+            {{#if model.organizations.meta.regions}}
+              {{#each model.organizations.meta.regions as |region|}}
+                <li>
+                  {{#if model.organizations.query.region}}
+                    {{#link-to "providers" (query-params region='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+                  {{else}}
+                    {{#link-to "providers" (query-params region=region.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                  {{/if}}
+                  <div class="facet-title">{{region.title}}</div>
+                  <span class="number pull-right">{{region.count}}</span>
+                  <div class="clearfix"/>
+                </li>
+              {{/each}}
+            {{else}}
+              <li>
+                {{#link-to "providers" (query-params region='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+                <div class="facet-title">{{model.query.region}}</div>
+                <span class="number pull-right">0</span>
+                <div class="clearfix"/>
+              </li>
+            {{/if}}
+          </ul>
+        </div>
+      </div>
+    {{/if}}
+    {{#if (can "create provider")}}
+      {{#if (or model.organizations.meta.organizationTypes model.organizations.query.organization-type)}}
+        <div class="panel facets">
+          <div class="panel-body">
+            <h4>Organization Type</h4>
+            <ul>
+              {{#if model.organizations.meta.organizationTypes}}
+                {{#each model.organizations.meta.organizationTypes as |organizationType|}}
+                  <li>
+                    {{#if model.organizations.query.organization-type}}
+                      {{#link-to "providers" (query-params organization-type='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+                    {{else}}
+                      {{#link-to "providers" (query-params organization-type=organizationType.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                    {{/if}}
+                    <div class="facet-title">{{organizationType.title}}</div>
+                    <span class="number pull-right">{{organizationType.count}}</span>
+                    <div class="clearfix"/>
+                  </li>
+                {{/each}}
+              {{else}}
+                <li>
+                  {{#link-to "providers" (query-params organization-type='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+                  <div class="facet-title">{{model.query.organization-type}}</div>
+                  <span class="number pull-right">0</span>
+                  <div class="clearfix"/>
+                </li>
+              {{/if}}
+            </ul>
+          </div>
+        </div>
+      {{/if}}
+      {{#if (or model.organizations.meta.focusAreas model.organizations.query.focus-area)}}
+        <div class="panel facets">
+          <div class="panel-body">
+            <h4>Focus Area</h4>
+            <ul>
+              {{#if model.organizations.meta.focusAreas}}
+                {{#each model.organizations.meta.focusAreas as |focusArea|}}
+                  <li>
+                    {{#if model.organizations.query.focus-area}}
+                      {{#link-to "providers" (query-params focus-area='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+                    {{else}}
+                      {{#link-to "providers" (query-params focus-area=focusArea.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                    {{/if}}
+                    <div class="facet-title">{{focusArea.title}}</div>
+                    <span class="number pull-right">{{focusArea.count}}</span>
+                    <div class="clearfix"/>
+                  </li>
+                {{/each}}
+              {{else}}
+                <li>
+                  {{#link-to "providers" (query-params focus-area='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+                  <div class="facet-title">{{model.organizations.query.focus-area}}</div>
+                  <span class="number pull-right">0</span>
+                  <div class="clearfix"/>
+                </li>
+              {{/if}}
+            </ul>
+          </div>
+        </div>
+      {{/if}}
+    {{/if}}
+  </div>
+  <div class="col-md-9 panel-list" id="content">
+    {{#if searchable}}
+      {{model-search model=model.organizations sortable=true link="providers"}}
+    {{/if}}
+
+    {{#if model.organizations}}
+      {{#each model.organizations as |provider|}}
+        <div class="panel panel-transparent">
+          <div class="panel-body">
+            <h3 class="work">
+              {{#link-to "providers.show" provider.id}}{{provider.displayName}}{{/link-to}}
+              {{#if (not provider.isActive)}}
+                <span class="small icon-warning">account not active</span>
+              {{/if}}
+            </h3>
+
+            <h5>Provider ID</h5>
+            {{provider.symbol}}
+
+            {{#if provider.rorId}}
+              <h5>ROR ID</h5>
+              <a href="{{provider.rorId}}">{{provider.rorId}}</a>
+            {{/if}}
+
+            {{#if (can "create provider")}}
+              <h5>Member Type</h5>
+              {{titleize (humanize (underscore provider.memberType))}}
+            {{/if}}
+
+            {{#if provider.organizationType}}
+              <h5>Organization Type</h5>
+              {{titleize (humanize (underscore provider.organizationType))}}
+            {{/if}}
+
+            {{#if provider.focusArea}}
+              <h5>Focus Area</h5>
+              {{titleize (humanize (underscore provider.focusArea))}}
+            {{/if}}
+          </div>
+        </div>
+      {{/each}}
+      <div class="text-center">
+        {{#if (gt model.meta.totalPages 1)}}
+          {{page-numbers model=model link="providers"}}
+        {{/if}}
+      </div>
+    {{else}}
+      {{#bs-alert dismissible=false type="warning"}}
+        No providers found.
+      {{/bs-alert}}
+    {{/if}}
+  </div>
+{{/if}}
