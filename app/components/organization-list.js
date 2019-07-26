@@ -108,9 +108,9 @@ export default Component.extend({
   },
 
   actions: {
-    new() {
-      let consortiumLead = this.modelFor('providers/show');
-      this.set('provider', this.store.createRecord('provider', { memberType: "consortium_organization", consortiumLead: consortiumLead, billingContact: {}, technicalContact: {}, isActive: true }));
+    new(model) {
+      // let consortiumLead = this.store.peekRecord('provider', this.model.get("uid"));
+      this.set('provider', this.store.createRecord('provider', { memberType: "consortium_organization", billingContact: {}, technicalContact: {}, isActive: true }));
       this.set('countries', countryList);
       this.set('new', true);
     },

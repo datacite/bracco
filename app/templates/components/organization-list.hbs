@@ -138,7 +138,7 @@
         <div class="panel-body">
           <div class="btn-toolbar">
             <div class="btn-group btn-group-sm">
-              <button {{action "new"}} class="btn btn-warning">{{fa-icon "plus"}}Create Consortium Organization</button>
+              <button {{action "new" model}} class="btn btn-warning">{{fa-icon "plus"}}Create Consortium Organization</button>
             </div>
           </div>
         </div>
@@ -160,9 +160,9 @@
               {{#each model.organizations.meta.years as |year|}}
                 <li>
                   {{#if model.organizations.query.year}}
-                    {{#link-to "providers" (query-params year="")}}{{fa-icon "check-square-o"}}{{/link-to}}
+                    {{#link-to link (query-params year="")}}{{fa-icon "check-square-o"}}{{/link-to}}
                   {{else}}
-                    {{#link-to "providers" (query-params year=year.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                    {{#link-to link (query-params year=year.id)}}{{fa-icon "square-o"}}{{/link-to}}
                   {{/if}}
                   <div class="facet-title">{{year.title}}</div>
                   <span class="number pull-right">{{year.count}}</span>
@@ -171,7 +171,7 @@
               {{/each}}
             {{else}}
               <li>
-                {{#link-to "providers" (query-params year="")}}{{fa-icon "check-square-o"}}{{/link-to}}
+                {{#link-to link (query-params year="")}}{{fa-icon "check-square-o"}}{{/link-to}}
                 <div class="facet-title">{{model.query.year}}</div>
                 <span class="number pull-right">0</span>
                 <div class="clearfix"/>
@@ -190,9 +190,9 @@
               {{#each model.organizations.meta.regions as |region|}}
                 <li>
                   {{#if model.organizations.query.region}}
-                    {{#link-to "providers" (query-params region='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+                    {{#link-to link (query-params region='')}}{{fa-icon "check-square-o"}}{{/link-to}}
                   {{else}}
-                    {{#link-to "providers" (query-params region=region.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                    {{#link-to link (query-params region=region.id)}}{{fa-icon "square-o"}}{{/link-to}}
                   {{/if}}
                   <div class="facet-title">{{region.title}}</div>
                   <span class="number pull-right">{{region.count}}</span>
@@ -201,7 +201,7 @@
               {{/each}}
             {{else}}
               <li>
-                {{#link-to "providers" (query-params region='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+                {{#link-to link (query-params region='')}}{{fa-icon "check-square-o"}}{{/link-to}}
                 <div class="facet-title">{{model.query.region}}</div>
                 <span class="number pull-right">0</span>
                 <div class="clearfix"/>
@@ -221,9 +221,9 @@
                 {{#each model.organizations.meta.organizationTypes as |organizationType|}}
                   <li>
                     {{#if model.organizations.query.organization-type}}
-                      {{#link-to "providers" (query-params organization-type='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+                      {{#link-to link (query-params organization-type='')}}{{fa-icon "check-square-o"}}{{/link-to}}
                     {{else}}
-                      {{#link-to "providers" (query-params organization-type=organizationType.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                      {{#link-to link (query-params organization-type=organizationType.id)}}{{fa-icon "square-o"}}{{/link-to}}
                     {{/if}}
                     <div class="facet-title">{{organizationType.title}}</div>
                     <span class="number pull-right">{{organizationType.count}}</span>
@@ -232,7 +232,7 @@
                 {{/each}}
               {{else}}
                 <li>
-                  {{#link-to "providers" (query-params organization-type='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+                  {{#link-to link (query-params organization-type='')}}{{fa-icon "check-square-o"}}{{/link-to}}
                   <div class="facet-title">{{model.query.organization-type}}</div>
                   <span class="number pull-right">0</span>
                   <div class="clearfix"/>
@@ -251,9 +251,9 @@
                 {{#each model.organizations.meta.focusAreas as |focusArea|}}
                   <li>
                     {{#if model.organizations.query.focus-area}}
-                      {{#link-to "providers" (query-params focus-area='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+                      {{#link-to link (query-params focus-area='')}}{{fa-icon "check-square-o"}}{{/link-to}}
                     {{else}}
-                      {{#link-to "providers" (query-params focus-area=focusArea.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                      {{#link-to link (query-params focus-area=focusArea.id)}}{{fa-icon "square-o"}}{{/link-to}}
                     {{/if}}
                     <div class="facet-title">{{focusArea.title}}</div>
                     <span class="number pull-right">{{focusArea.count}}</span>
@@ -262,7 +262,7 @@
                 {{/each}}
               {{else}}
                 <li>
-                  {{#link-to "providers" (query-params focus-area='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+                  {{#link-to link (query-params focus-area='')}}{{fa-icon "check-square-o"}}{{/link-to}}
                   <div class="facet-title">{{model.organizations.query.focus-area}}</div>
                   <span class="number pull-right">0</span>
                   <div class="clearfix"/>
@@ -276,7 +276,7 @@
   </div>
   <div class="col-md-9 panel-list" id="content">
     {{#if searchable}}
-      {{model-search model=model.organizations name="Consortium Organization" sortable=true link="providers"}}
+      {{model-search model=model.organizations name="Consortium Organization" sortable=true link="providers.show.organizations"}}
     {{/if}}
 
     {{#if model.organizations}}
