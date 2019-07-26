@@ -120,7 +120,7 @@
           </div>
         </div>
 
-        {{#if (can "create provider")}}
+        {{#if (can "create organization")}}
           {{form.element controlType="checkbox" label="Account is active" property="isActive" required=false helpText='This account can manage clients and prefixes'}}
         {{/if}}
         
@@ -133,7 +133,7 @@
   </div>
 {{else}}
   <div class="col-md-3">
-    {{#if (can "create provider")}}
+    {{#if (can "create organization" model)}}
       <div class="panel facets">
         <div class="panel-body">
           <div class="btn-toolbar">
@@ -211,7 +211,7 @@
         </div>
       </div>
     {{/if}}
-    {{#if (can "create provider")}}
+    {{#if (can "create organization")}}
       {{#if (or model.organizations.meta.organizationTypes model.organizations.query.organization-type)}}
         <div class="panel facets">
           <div class="panel-body">
@@ -298,7 +298,7 @@
               <a href="{{provider.rorId}}">{{provider.rorId}}</a>
             {{/if}}
 
-            {{#if (can "create provider")}}
+            {{#if (can "create organization")}}
               <h5>Member Type</h5>
               {{titleize (humanize (underscore provider.memberType))}}
             {{/if}}

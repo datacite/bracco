@@ -2,11 +2,13 @@
   {{application-header default=true}}
 
   <div class="container-fluid">
-    {{#if (can "read index" )}}
+    {{#if (or (can "read index") (can "read provider" model))}}
       <ol class="breadcrumb">
-        <li class="breadcrumb-item">{{#link-to "index"}}DataCite{{/link-to}}</li>
-        <li class="breadcrumb-item">{{#link-to "providers"}}Providers{{/link-to}}</li>
-        {{#if (eq model.memberType "consortium_organization")}}
+        {{#if (can "read index")}}
+          <li class="breadcrumb-item">{{#link-to "index"}}DataCite{{/link-to}}</li>
+          <li class="breadcrumb-item">{{#link-to "providers"}}Providers{{/link-to}}</li>
+        {{/if}}
+        {{#if (and (eq model.memberType "consortium_organization") (can "read provider" model))}}
           <li class="breadcrumb-item">{{#link-to "providers.show.index" model.consortiumLead.id}}{{model.consortiumLead.name}}{{/link-to}}</li>
         {{/if}}
       </ol>
