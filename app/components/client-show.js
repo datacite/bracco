@@ -5,7 +5,7 @@ import ENV from 'bracco/config/environment';
 
 const clientTypeList = [
   'repository',
-  'serial',
+  'periodical',
   'other'
 ]
 const softwareList = [

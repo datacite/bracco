@@ -4,7 +4,7 @@ import Component from '@ember/component';
 
 const clientTypeList = [
   'repository',
-  'serial',
+  'periodical',
   'other'
 ]
 const softwareList = [
@@ -14,6 +14,7 @@ const softwareList = [
   'EPrints',
   'Fedora',
   'Invenio',
+  'Islandora',
   'Nesstar',
   'Open Journal Systems (OJS)',
   'Opus',

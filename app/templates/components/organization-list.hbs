@@ -317,12 +317,12 @@
       {{/each}}
       <div class="text-center">
         {{#if (gt model.meta.totalPages 1)}}
-          {{page-numbers model=model link="providers"}}
+          {{page-numbers model=model link=link}}
         {{/if}}
       </div>
     {{else}}
       {{#bs-alert dismissible=false type="warning"}}
-        No providers found.
+        No consortium organizations found.
       {{/bs-alert}}
     {{/if}}
   </div>
