@@ -26,7 +26,7 @@
         {{#nav.item}}{{#nav.link-to "providers.show.index" model.id class="nav-link"}}Info{{/nav.link-to}}{{/nav.item}}
         {{#nav.item}}{{#nav.link-to "providers.show.settings" model.id class="nav-link"}}Settings{{/nav.link-to}}{{/nav.item}}
         
-        {{#if (eq model.memberType "consortium_lead")}}
+        {{#if (and (can "read index") (eq model.memberType "consortium_lead"))}}
           {{#nav.item}}{{#nav.link-to "providers.show.organizations" class="nav-link"}}Consortium Organizations{{/nav.link-to}}{{/nav.item}}
         {{/if}}
 
