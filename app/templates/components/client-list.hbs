@@ -188,6 +188,11 @@
               <a href="mailto:{{client.contactEmail}}">{{client.contactEmail}}</a>
             {{/if}}
 
+            {{#if client.clientType}}
+              <h5>Client Type</h5>
+              {{titleize client.clientType}}
+            {{/if}}
+
             {{#if client.domainList}}
               <h5>
                 {{pluralize client.domainList.length "Domain" without-count=true}}
