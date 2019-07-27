@@ -3,6 +3,11 @@ import { inject as service } from '@ember/service';
 import fetch from 'fetch';
 import ENV from 'bracco/config/environment';
 
+const clientTypeList = [
+  'repository',
+  'serial',
+  'other'
+]
 const softwareList = [
   'CKAN',
   'Dataverse',
@@ -30,6 +35,8 @@ export default Component.extend({
   repositories: [],
   softwareList,
   softwares: softwareList,
+  clientTypeList,
+  clientTypes: clientTypeList,
 
   reset() {
     this.client.set('passwordInput', null);
@@ -76,6 +83,16 @@ export default Component.extend({
     } else {
       this.client.set('repository', null);
     }
+  },
+  searchClientType(query) {
+    var clientTypes = clientTypeList.filter(function(clientType) {
+      return clientType.startsWith(query.toLowerCase());
+    })
+    this.set('clientTypes', clientTypes);
+  },
+  selectClientType(clientType) {
+    this.provider.set('clientType', clientType);
+    this.set('clientTypes', clientTypeList);
   },
   searchSoftware(query) {
     var softwares = softwareList.filter(function (software) {
@@ -170,6 +187,12 @@ export default Component.extend({
       } else {
         console.log(error);
       }
+    },
+    searchClientType(query) {
+      this.searchClientType(query);
+    },
+    selectClientType(clientType) {
+      this.selectClientType(clientType);
     },
     searchSoftware(query) {
       this.searchSoftware(query);

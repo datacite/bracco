@@ -2,6 +2,11 @@ import { inject as service } from '@ember/service';
 import Component from '@ember/component';
 // import { computed } from '@ember/object';
 
+const clientTypeList = [
+  'repository',
+  'serial',
+  'other'
+]
 const softwareList = [
   'CKAN',
   'Dataverse',
@@ -27,6 +32,8 @@ export default Component.extend({
   repositories: [],
   softwareList,
   softwares: softwareList,
+  clientTypeList,
+  clientTypes: clientTypeList,
   // availableClientCount: computed('model.provider', 'model.clients', function() {
   //   if (this.model.provider && this.model.provider.memberType === 'contractual_provider') {
   //     return 1 - this.model.clients.length;
@@ -55,6 +62,16 @@ export default Component.extend({
     } else {
       this.client.set('repository', null);
     }
+  },
+  searchClientType(query) {
+    var clientTypes = clientTypeList.filter(function(clientType) {
+      return clientType.startsWith(query.toLowerCase());
+    })
+    this.set('clientTypes', clientTypes);
+  },
+  selectClientType(clientType) {
+    this.provider.set('clientType', clientType);
+    this.set('clientTypes', clientTypeList);
   },
   searchSoftware(query) {
     var softwares = softwareList.filter(function(software) {
@@ -99,6 +116,12 @@ export default Component.extend({
     cancel() {
       this.client.rollbackAttributes();
       this.reset();
+    },
+    searchClientType(query) {
+      this.searchClientType(query);
+    },
+    selectClientType(clientType) {
+      this.selectClientType(clientType);
     },
     searchSoftware(query) {
       this.searchSoftware(query);

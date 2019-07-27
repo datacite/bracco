@@ -95,6 +95,7 @@ export default DS.Model.extend(Validations, {
   year: DS.attr('number'),
   description: DS.attr('string'),
   url: DS.attr('string'),
+  clientType: DS.attr('string'),
   software: DS.attr('string'),
   isActive: DS.attr('boolean', { defaultValue: true }),
   passwordInput: DS.attr('string'),

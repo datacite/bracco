@@ -16,6 +16,11 @@
         {{form.element controlType="textarea" label="Description (optional)" property="description" rows=10 helpText='Description of the client. Please use markdown for formatting.' required=false}}
         {{form.element controlType="text" label="URL (optional)" property="url" helpText='The homepage of the client.' required=false}}
         {{#form.element controlType="power-select" label="Software (optional)" property="software" options=softwares destination=software helpText='The name of the software that is used to run the repository.' as |el|}}
+          {{#el.control onChange=(action "selectClientType") search=(action "searchSoftware") placeholder="Select Software" searchPlaceholder="Type to search..." allowClear=true as |item|}}
+            {{item}}
+          {{/el.control}}
+        {{/form.element}}
+        {{#form.element controlType="power-select" label="Software (optional)" property="software" options=softwares destination=software helpText='The name of the software that is used to run the repository.' as |el|}}
           {{#el.control onChange=(action "selectSoftware") search=(action "searchSoftware") placeholder="Select Software" searchPlaceholder="Type to search..." allowClear=true as |item|}}
             {{item}}
           {{/el.control}}
@@ -72,6 +77,36 @@
               <li>
                 {{#link-to "clients" (query-params year="")}}{{fa-icon "check-square-o"}}{{/link-to}}
                 <div class="facet-title">{{model.clients.query.year}}</div>
+                <span class="number pull-right">0</span>
+                <div class="clearfix"/>
+              </li>
+            {{/if}}
+          </ul>
+        </div>
+      </div>
+    {{/if}}
+    {{#if (or model.clients.meta.clientType model.clients.query.clientType)}}
+      <div class="panel facets">
+        <div class="panel-body">
+          <h4>Client Type</h4>
+          <ul>
+            {{#if model.clients.meta.clientType}}
+              {{#each model.clients.meta.clientType as |clientType|}}
+                <li>
+                  {{#if model.clients.query.clientType}}
+                    {{#link-to link (query-params clientType="")}}{{fa-icon "check-square-o"}}{{/link-to}}
+                  {{else}}
+                    {{#link-to link (query-params clientType=clientType.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                  {{/if}}
+                  <div class="facet-title">{{clientType.title}}</div>
+                  <span class="number pull-right">{{clientType.count}}</span>
+                  <div class="clearfix"/>
+                </li>
+              {{/each}}
+            {{else}}
+              <li>
+                {{#link-to link (query-params clientType="")}}{{fa-icon "check-square-o"}}{{/link-to}}
+                <div class="facet-title">{{model.clients.query.clientType}}</div>
                 <span class="number pull-right">0</span>
                 <div class="clearfix"/>
               </li>
