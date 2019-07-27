@@ -15,9 +15,9 @@
         {{form.element controlType="email" label="Contact Email" property="contactEmail" helpText='Please enter an email address that can be contacted for technical or administrative issues.' useIcons=false required=false}}
         {{form.element controlType="textarea" label="Description (optional)" property="description" rows=10 helpText='Description of the client. Please use markdown for formatting.' required=false}}
         {{form.element controlType="text" label="URL (optional)" property="url" helpText='The homepage of the client.' required=false}}
-        {{#form.element controlType="power-select" label="Software (optional)" property="software" options=softwares destination=software helpText='The name of the software that is used to run the repository.' as |el|}}
-          {{#el.control onChange=(action "selectClientType") search=(action "searchSoftware") placeholder="Select Software" searchPlaceholder="Type to search..." allowClear=true as |item|}}
-            {{item}}
+        {{#form.element controlType="power-select" label="Client Type" property="clientType" options=clientTypes destination=clientType as |el|}}
+          {{#el.control onChange=(action "selectMemberType") search=(action "searchClientType") placeholder="Select Client Type" searchPlaceholder="Type to search..." as |item|}}
+            {{titleize (humanize item)}}
           {{/el.control}}
         {{/form.element}}
         {{#form.element controlType="power-select" label="Software (optional)" property="software" options=softwares destination=software helpText='The name of the software that is used to run the repository.' as |el|}}
@@ -85,18 +85,18 @@
         </div>
       </div>
     {{/if}}
-    {{#if (or model.clients.meta.clientType model.clients.query.clientType)}}
+    {{#if (or model.clients.meta.clientTypes model.clients.query.client-type)}}
       <div class="panel facets">
         <div class="panel-body">
           <h4>Client Type</h4>
           <ul>
-            {{#if model.clients.meta.clientType}}
-              {{#each model.clients.meta.clientType as |clientType|}}
+            {{#if model.clients.meta.clientTypes}}
+              {{#each model.clients.meta.clientTypes as |clientType|}}
                 <li>
-                  {{#if model.clients.query.clientType}}
-                    {{#link-to link (query-params clientType="")}}{{fa-icon "check-square-o"}}{{/link-to}}
+                  {{#if model.clients.query.client-type}}
+                    {{#link-to link (query-params client-type="")}}{{fa-icon "check-square-o"}}{{/link-to}}
                   {{else}}
-                    {{#link-to link (query-params clientType=clientType.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                    {{#link-to link (query-params client-type=clientType.id)}}{{fa-icon "square-o"}}{{/link-to}}
                   {{/if}}
                   <div class="facet-title">{{clientType.title}}</div>
                   <span class="number pull-right">{{clientType.count}}</span>
@@ -105,8 +105,8 @@
               {{/each}}
             {{else}}
               <li>
-                {{#link-to link (query-params clientType="")}}{{fa-icon "check-square-o"}}{{/link-to}}
-                <div class="facet-title">{{model.clients.query.clientType}}</div>
+                {{#link-to link (query-params client-type="")}}{{fa-icon "check-square-o"}}{{/link-to}}
+                <div class="facet-title">{{model.clients.query.client-type}}</div>
                 <span class="number pull-right">0</span>
                 <div class="clearfix"/>
               </li>

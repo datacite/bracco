@@ -38,6 +38,9 @@ export default Route.extend({
     },
     software: {
       refreshModel: true
+    },
+    'client-type': {
+      refreshModel: true
     }
   }
 });

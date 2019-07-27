@@ -70,7 +70,7 @@ export default Component.extend({
     this.set('clientTypes', clientTypes);
   },
   selectClientType(clientType) {
-    this.provider.set('clientType', clientType);
+    this.client.set('clientType', clientType);
     this.set('clientTypes', clientTypeList);
   },
   searchSoftware(query) {
