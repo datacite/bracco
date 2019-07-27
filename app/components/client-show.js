@@ -15,6 +15,7 @@ const softwareList = [
   'EPrints',
   'Fedora',
   'Invenio',
+  'Islandora',
   'Nesstar',
   'Open Journal Systems (OJS)',
   'Samvera',
