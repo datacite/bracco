@@ -58,6 +58,8 @@ export default Component.extend({
                          'provider': 'Provider',
                          'organization': 'Organization',
                          'client': 'Client',
+                         'repository': 'Repository',
+                         'periodical': 'Periodical',
                          'prefix': 'Prefix',
                          'client-prefix': 'Prefix',
                          'provider-prefix': 'Prefix' }

@@ -1,0 +1,91 @@
+<div class="panel-body metadata">
+  {{#if model.doi}}
+    {{#if model.state}}
+      <div class="state">
+        {{state-label state=model.state}}
+      </div>
+    {{/if}}
+    {{#if (and (eq model.state 'findable') model.xml)}}
+      <h5>Metadata Export</h5>
+      <div class="download">
+        <a target="_blank" rel="noopener" href="{{{content-negotiation-url model.doi format='datacite'}}}">DataCite XML</a>
+      </div>
+      <div class="download">
+        <a target="_blank" rel="noopener" href="{{{content-negotiation-url model.doi format='datacite_json'}}}">DataCite JSON</a>
+      </div>
+      <div class="download">
+        <a target="_blank" rel="noopener" href="{{{content-negotiation-url model.doi format='schema_org'}}}">Schema.org JSON-LD</a>
+      </div>
+      <div class="download">
+        <a target="_blank" rel="noopener" href="{{{content-negotiation-url model.doi format='bibtex'}}}">BibTeX</a>
+      </div>
+    {{/if}}
+    {{#if model.created}}
+      <h5>DOI created</h5>
+      <div class="created">
+        {{format-time model.created year='numeric' month='long' day='numeric' hour='numeric' minute='numeric' second='numeric' timeZone='UTC' timeZoneName='short' hour12=false}}
+      </div>
+    {{/if}}
+    {{#if model.registered}}
+      <h5>DOI registered</h5>
+      <div class="registered">
+        {{format-time model.registered year='numeric' month='long' day='numeric' hour='numeric' minute='numeric' second='numeric' timeZone='UTC' timeZoneName='short' hour12=false}}
+      </div>
+    {{/if}}
+    {{#if (gt model.updated model.created)}}
+      <h5>DOI last updated</h5>
+      <div class="updated">
+        {{format-time model.updated year='numeric' month='long' day='numeric' hour='numeric' minute='numeric' second='numeric' timeZone='UTC' timeZoneName='short' hour12=false}}
+      </div>
+    {{/if}}
+    {{#if (gt model.metadataVersion 0)}}
+      <h5>
+        Metadata version
+        <span>
+          {{fa-icon "question-circle-o"}}
+          {{#bs-tooltip placement="top" viewportPadding=10}}Most recent metadata. Previous versions are kept.{{/bs-tooltip}}
+        </span>
+      </h5>
+      <div class="metadata-version">
+        {{model.metadataVersion}}
+      </div>
+    {{/if}}
+    {{#if model.schemaVersionString}}
+      <h5>
+        Schema
+        <span>
+          {{fa-icon "question-circle-o"}}
+          {{#bs-tooltip placement="top" viewportPadding=10}}Metadata schema version used.{{/bs-tooltip}}
+        </span>
+      </h5>
+      <div class="schema-version">
+        <a href="http://schema.datacite.org/meta/kernel-{{model.schemaVersionString}}">DataCite Metadata Schema {{model.schemaVersionString}}</a>
+      </div>
+    {{/if}}
+    {{#if (and (can "source doi" model) model.source)}}
+      <h5>
+        Source
+        <span>
+          {{fa-icon "question-circle-o"}}
+          {{#bs-tooltip placement="top" viewportPadding=10}}Service used for DOI registration.{{/bs-tooltip}}
+        </span>
+      </h5>
+      <div class="source">
+        {{model.source}}
+      </div>
+    {{/if}}
+  {{else}}
+    {{#if model.created}}
+      <h5>Record created</h5>
+      <div class="created">
+        {{format-time model.created year='numeric' month='long' day='numeric' hour='numeric' minute='numeric' second='numeric' timeZone='UTC' timeZoneName='short' hour12=false}}
+      </div>
+    {{/if}}
+    {{#if (gt model.updated model.created)}}
+      <h5>Record last modified</h5>
+      <div class="updated">
+        {{format-time model.updated year='numeric' month='long' day='numeric' hour='numeric' minute='numeric' second='numeric' timeZone='UTC' timeZoneName='short' hour12=false}}
+      </div>
+    {{/if}}
+  {{/if}}
+</div>

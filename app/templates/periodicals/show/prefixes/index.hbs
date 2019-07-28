@@ -1,0 +1,60 @@
+<div class='col-md-3'>
+  {{prefix-available model=model}}
+
+  {{#if model.prefixes.meta.years}}
+    <div class="panel facets add">
+      <div class="panel-body">
+        <h4>Year created</h4>
+        <ul>
+          {{#each model.prefixes.meta.years as |year|}}
+            <li>
+              {{#if model.prefixes.query.year}}
+                {{#link-to 'periodicals.show.prefixes' (query-params year=null)}}{{fa-icon "check-square-o"}}{{/link-to}}
+              {{else}}
+                {{#link-to 'periodicals.show.prefixes' (query-params year=year.id)}}{{fa-icon "square-o"}}{{/link-to}}
+              {{/if}}
+              <div class="facet-title">{{year.title}}</div>
+              <span class="number pull-right">{{year.count}}</span>
+              <div class="clearfix"/>
+            </li>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+  {{/if}}
+</div>
+
+<div class='col-md-9 panel-list' id="content">
+  {{model-search model=model.prefixes link='periodicals.show.prefixes'}}
+
+  {{#if model.prefixes}}
+    {{#each model.prefixes as |client-prefix|}}
+      <div class="panel panel-transparent">
+        <div class="panel-body">
+          {{#if (and (can "update prefix" model) (not-eq client-prefix.prefix.id "10.5072"))}}
+            <h3 class="work">{{#link-to "periodicals.show.prefixes.show" model.periodical.id client-prefix.prefix.id}}{{client-prefix.prefix.id}}{{/link-to}}</h3>
+          {{else}}
+            <h3 class="member">{{client-prefix.prefix.id}}</h3>
+          {{/if}}
+
+          {{#if features.useElasticsearch}}
+            <h5>DOIs</h5>
+            {{#link-to "periodicals.show.dois" client-prefix.client.id (query-params prefix=client-prefix.prefix.id)}}DOIs for prefix {{client-prefix.prefix.id}}{{/link-to}}
+          {{/if}}
+
+          <h5>Added</h5>
+          {{format-time client-prefix.created year='numeric' month='long' day='numeric' hour='numeric' minute='numeric' second='numeric' timeZone='UTC' timeZoneName='short' hour12=false}}
+        </div>
+      </div>
+    {{/each}}
+    <div class="text-center">
+      {{#if (gt model.prefixes.meta.totalPages 1)}}
+        {{page-numbers model=model.prefixes link="periodicals.show.prefixes"}}
+      {{/if}}
+    </div>
+  {{else}}
+    {{#bs-alert dismissible=false type="warning"}}
+      No prefixes found.
+    {{/bs-alert}}
+  {{/if}}
+</div>

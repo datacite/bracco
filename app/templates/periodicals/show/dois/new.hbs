@@ -1,0 +1,69 @@
+<div class="panel panel-transparent">
+  <div class="panel-body">
+    <div class="col-md-9 col-md-offset-3 form-help-header">
+      <h3 class="help-header">Create DOI (Form)</h3>
+      <div class="help-block">
+        More information about DOI registration via form can be found on our <a target="_blank" rel="noopener" href="https://support.datacite.org/docs/fabrica-create-doi-form">Support Website</a>.
+      </div>
+    </div>
+
+    {{#bs-form 
+      formLayout="horizontal" 
+      horizontalLabelGridClass="col-md-3" 
+      model=model.doi 
+      onSubmit=(action "submit" model.doi) 
+    as |form|
+    }}
+      {{doi-doi model=model.doi client=model.client form=form}}
+
+      {{form.element 
+        controlType="text" 
+        label="URL"
+        id="url"
+        property="url" 
+        helpText="The location of the landing page with more information about the resource." 
+        required=false
+      }}
+
+      {{doi-creators model=model.doi form=form}}
+      {{doi-titles model=model.doi form=form}}
+      
+      {{form.element 
+        controlType="text" 
+        label="Publisher" 
+        id="publisher"
+        property="publisher" 
+        helpText="The name of the entity that holds, archives, publishes prints, distributes, releases, issues, or produces the resource." 
+        required=false
+      }}
+      {{form.element 
+        controlType="text" 
+        label="Publication Year" 
+        id="publication-year"
+        property="publicationYear" 
+        helpText="The year when the resource was or will be made publicly available. Must be between 1450 and 2020." 
+        required=false
+      }}
+
+      {{doi-types model=model.doi form=form}}
+      {{doi-descriptions model=model.doi form=form}}
+
+      {{model-validation-errors model=model.doi form=form}}
+
+      <div class="col-md-9 col-md-offset-3">
+        <button type="submit" id="create" class="btn btn-sm btn-fill" disabled={{model-disabled (v-get model.doi 'isValid') model.doi.state model.doi.creators}}>Create DOI</button>
+        <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
+      </div>
+    {{/bs-form}}
+
+    <div class="row">
+      <div class="col-md-9 col-md-offset-3">
+        {{#each flashMessages.queue as |flash|}}
+          {{#if (eq flash.componentName "duplicated-doi") }}
+            {{flash-message flash=flash}}
+          {{/if}}
+        {{/each}}
+      </div>
+    </div>
+  </div>
+</div>

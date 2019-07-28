@@ -122,9 +122,9 @@ export default DS.Model.extend(Validations, {
       return a + b.count;
     }, 0);
   }),
-  badgeUrl: computed('repository', function() {
-    if (this.repository) {
-      return ENV.RE3DATA_API_URL + '/repositories/' + this.repository.get('id') + '/badge';
+  badgeUrl: computed('re3data', function() {
+    if (this.re3data) {
+      return ENV.RE3DATA_API_URL + '/re3data/' + this.re3data.substr(this.re3data.indexOf('1')) + '/badge';
     } else {
       return null;
     }

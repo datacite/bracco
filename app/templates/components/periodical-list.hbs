@@ -1,0 +1,164 @@
+{{#if new}}
+  <div class="panel panel-transparent">
+    <div class="panel-body">
+      <div class="col-md-9 col-md-offset-3"><h3 class="edit">Add Periodical</h3></div>
+
+      {{#bs-form formLayout="horizontal" horizontalLabelGridClass="col-md-3" model=periodical onSubmit=(action "submit" periodical model) submitOnEnter=true as |form|}}
+        {{form.element controlType="text" label="Periodical ID" property="symbol" helpText='The Periodical ID is the unique identifier for each periodical in DataCite and can\'t be changed. The Periodical ID must start with the Provider ID, followed by a dot. It can then contain only upper case letters, numbers, and at most one hyphen.' useIcons=false required=false}}
+        {{form.element controlType="text" label="Periodical Name" property="name" useIcons=false required=false}}
+        {{form.element controlType="text" label="Contact Name" property="contactName" helpText='Please enter the name of a person that can be contacted for technical or administrative issues.' required=false}}
+        {{form.element controlType="email" label="Contact Email" property="contactEmail" helpText='Please enter an email address that can be contacted for technical or administrative issues.' useIcons=false required=false}}
+        {{form.element controlType="text" label="Alternate Name (optional)" property="alternateName" required=false}}
+        {{form.element controlType="textarea" label="Description (optional)" property="description" rows=10 helpText='Description of the periodical. Please use markdown for formatting.' required=false}}
+        {{form.element controlType="text" label="URL (optional)" property="url" helpText='The homepage of the client.' required=false}}
+        {{#form.element controlType="power-select" label="Client Type" property="clientType" options=clientTypes destination=clientType as |el|}}
+          {{#el.control onChange=(action "selectClientType") search=(action "searchClientType") placeholder="Select Client Type" searchPlaceholder="Type to search..." as |item|}}
+            {{titleize (humanize item)}}
+          {{/el.control}}
+        {{/form.element}}
+        {{#form.element controlType="power-select" label="Software (optional)" property="software" options=softwares destination=software helpText='The name of the software that is used to run the repository.' as |el|}}
+          {{#el.control onChange=(action "selectSoftware") search=(action "searchSoftware") placeholder="Select Software" searchPlaceholder="Type to search..." allowClear=true as |item|}}
+            {{item}}
+          {{/el.control}}
+        {{/form.element}}
+        {{form.element controlType="textarea" label="Domains" property="domains" helpText='List of (sub-)domains used for DOI registration, or use * to allow all domains' useIcons=false required=false}}
+        {{form.element controlType="checkbox" label="Account is active" property="isActive" helpText='This account can register and update DOIs'}}
+
+        <div class="col-md-9 col-md-offset-3">
+          <button type="submit" class="btn btn-sm btn-fill">Add Repository</button>
+          <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
+        </div>
+      {{/bs-form}}
+    </div>
+  </div>
+{{else}}
+  <div class="col-md-3">
+    {{#if (and (can "create periodical" model) (eq link "providers.show.periodicals"))}}
+      <div class="panel facets">
+        <div class="panel-body">
+          <div class="btn-toolbar">
+            <div class="btn-group btn-group-sm">
+              <button {{action "new" model}} class="btn btn-warning" id="add-periodical">{{fa-icon "plus"}} Add Periodical</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    {{else}}
+      <div class="panel panel-transparent">
+        <div class="panel-body">
+          <div class="edit"></div>
+        </div>
+      </div>
+    {{/if}}
+
+    {{#if (or model.periodicals.meta.years model.periodicals.query.year)}}
+      <div class="panel facets add">
+        <div class="panel-body">
+          <h4>Year joined</h4>
+          <ul>
+            {{#if model.periodicals.meta.years}}
+              {{#each model.periodicals.meta.years as |year|}}
+                <li>
+                  {{#if model.periodicals.query.year}}
+                    {{#link-to link (query-params year="")}}{{fa-icon "check-square-o"}}{{/link-to}}
+                  {{else}}
+                    {{#link-to link (query-params year=year.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                  {{/if}}
+                  <div class="facet-title">{{year.title}}</div>
+                  <span class="number pull-right">{{year.count}}</span>
+                  <div class="clearfix"/>
+                </li>
+              {{/each}}
+            {{else}}
+              <li>
+                {{#link-to link (query-params year="")}}{{fa-icon "check-square-o"}}{{/link-to}}
+                <div class="facet-title">{{model.periodicals.query.year}}</div>
+                <span class="number pull-right">0</span>
+                <div class="clearfix"/>
+              </li>
+            {{/if}}
+          </ul>
+        </div>
+      </div>
+    {{/if}}
+    {{#if (or model.periodicals.meta.software model.periodicals.query.software)}}
+      <div class="panel facets">
+        <div class="panel-body">
+          <h4>Software</h4>
+          <ul>
+            {{#if model.periodicals.meta.software}}
+              {{#each model.periodicals.meta.software as |software|}}
+                <li>
+                  {{#if model.periodicals.query.software}}
+                    {{#link-to link (query-params software="")}}{{fa-icon "check-square-o"}}{{/link-to}}
+                  {{else}}
+                    {{#link-to link (query-params software=software.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                  {{/if}}
+                  <div class="facet-title">{{software.title}}</div>
+                  <span class="number pull-right">{{software.count}}</span>
+                  <div class="clearfix"/>
+                </li>
+              {{/each}}
+            {{else}}
+              <li>
+                {{#link-to link (query-params software="")}}{{fa-icon "check-square-o"}}{{/link-to}}
+                <div class="facet-title">{{model.periodicals.query.software}}</div>
+                <span class="number pull-right">0</span>
+                <div class="clearfix"/>
+              </li>
+            {{/if}}
+          </ul>
+        </div>
+      </div>
+    {{/if}}
+  </div>
+  <div class="col-md-9 panel-list" id="content">
+    {{#if searchable}}
+      {{model-search model=model.periodicals name="Periodical" sortable=true link=link}}
+    {{/if}}
+    {{#if model.periodicals}}
+      {{#each model.periodicals as |client|}}
+        <div class="panel panel-transparent">
+          <div class="panel-body">
+            <h3 class="work">
+              {{#link-to "periodicals.show" client.id}}{{client.name}}{{/link-to}}
+            </h3>
+
+            <h5 class="periodical-id">
+              Periodical ID
+              <span>
+                {{fa-icon "question-circle-o"}}
+                {{#bs-tooltip placement="top" viewportPadding=10}}The Periodical ID is a unique identifier for each periodical in DataCite. It must contain only upper case letters and numbers, and must start with the Provider ID.{{/bs-tooltip}}
+              </span>
+            </h5>
+            {{client.symbol}}
+
+            {{#if client.contactName}}
+              <h5>Contact Name</h5>
+              {{client.contactName}}
+            {{/if}}
+
+            {{#if client.contactEmail}}
+              <h5>Contact Email</h5>
+              <a href="mailto:{{client.contactEmail}}">{{client.contactEmail}}</a>
+            {{/if}}
+
+            {{#if client.url}}
+              <h5>URL</h5>
+              <a href="{{client.url}}">{{client.url}}</a>
+            {{/if}}
+          </div>
+        </div>
+      {{/each}}
+      <div class="text-center">
+        {{#if (gt model.periodicals.meta.totalPages 1)}}
+          {{page-numbers model=model.periodicals link=link}}
+        {{/if}}
+      </div>
+    {{else}}
+      {{#bs-alert dismissible=false type="warning"}}
+        No periodicals found.
+      {{/bs-alert}}
+    {{/if}}
+  </div>
+{{/if}}

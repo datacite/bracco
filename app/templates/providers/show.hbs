@@ -31,7 +31,12 @@
         {{/if}}
 
         {{#if (not-eq model.memberType "member_only")}}
-          {{#nav.item}}{{#nav.link-to "providers.show.clients" model.id class="nav-link"}}Clients{{/nav.link-to}}{{/nav.item}}
+          {{#if (can "read index")}}
+            {{#nav.item}}{{#nav.link-to "providers.show.repositories" model.id class="nav-link"}}Repositories{{/nav.link-to}}{{/nav.item}}
+            {{#nav.item}}{{#nav.link-to "providers.show.periodicals" model.id class="nav-link"}}Periodicals{{/nav.link-to}}{{/nav.item}}
+          {{else}}
+            {{#nav.item}}{{#nav.link-to "providers.show.clients" model.id class="nav-link"}}Clients{{/nav.link-to}}{{/nav.item}}
+          {{/if}}
           {{#nav.item}}{{#nav.link-to "providers.show.prefixes" model.id class="nav-link"}}Prefixes{{/nav.link-to}}{{/nav.item}}
           {{#nav.item}}{{#nav.link-to "providers.show.dois" model.id class="nav-link doi"}}DOIs{{/nav.link-to}}{{/nav.item}}
         {{/if}}

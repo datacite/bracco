@@ -1,0 +1,208 @@
+{{#if edit}}
+  <div class="panel panel-transparent" id="content-member">
+    <div class="panel-body">
+      <div class="col-md-9 col-md-offset-3"><h3 class="edit">Update {{if (eq currentUser.uid model.id) 'Account' 'Repository'}}</h3></div>
+
+      {{#bs-form formLayout="horizontal" horizontalLabelGridClass="col-md-3" model=model onSubmit=(action "submit" model) submitOnEnter=true as |form|}}
+        {{form.element controlType="text" label="Repository ID" property="symbol" helpText='The Repository ID is the unique identifier for each repository in DataCite and can\'t be changed.' disabled=true}}
+        {{form.element controlType="hidden" property="confirmSymbol" required=false}}
+        {{#form.element controlType="power-select" property="repository" label="re3data Record (optional)" optionLabelPath="name" options=repositories destination=repository helpText='re3data is a registry of research data repositories.' as |el|}}
+          {{#el.control onChange=(action "selectRepository") search=(action "searchRepository") searchField="repositoryName" searchPlaceholder="Type to search..." allowClear=true as |item|}}
+            {{item.repositoryName}}
+          {{/el.control}}
+        {{/form.element}}
+        {{form.element controlType="text" label="Repository Name" property="name" required=false}}
+        {{form.element controlType="text" label="Contact Name" property="contactName" helpText='Please enter the name of a person that can be contacted for technical or administrative issues.' required=false}}
+        {{form.element controlType="email" label="Contact Email" property="contactEmail" helpText='Please enter an email address that can be contacted for technical or administrative issues.' required=false}}
+        {{form.element controlType="text" label="Alternate Name (optional)" property="alternateName" required=false}}
+        {{form.element controlType="textarea" label="Description (optional)" property="description" rows=10 helpText='Description of the repository. Please use markdown for formatting.' required=false}}
+        {{form.element controlType="text" label="URL (optional)" property="url" helpText='The homepage of the client.' required=false}}
+        {{#form.element controlType="power-select" label="Client Type" property="clientType" options=clientTypes destination=clientType as |el|}}
+          {{#el.control onChange=(action "selectClientType") search=(action "searchClientType") placeholder="Select Client Type" searchPlaceholder="Type to search..." as |item|}}
+            {{titleize (humanize item)}}
+          {{/el.control}}
+        {{/form.element}}
+        {{#form.element controlType="power-select" label="Software (optional)" property="software" options=softwares destination=software helpText='The name of the software that is used to run the repository.' as |el|}}
+          {{#el.control onChange=(action "selectSoftware") search=(action "searchSoftware") placeholder="Select Software" searchPlaceholder="Type to search..." allowClear=true as |item|}}
+            {{item}}
+          {{/el.control}}
+        {{/form.element}}
+        {{form.element controlType="textarea" label="Domains" property="domains" required=false helpText='List of (sub-)domains used for DOI registration, or use * to allow all domains'}}
+
+        {{#if (can "create repository" model.provider)}}
+          {{form.element controlType="checkbox" label="Account is active" property="isActive" helpText='This account can register and update DOIs'}}
+        {{/if}}
+
+        <div class="col-md-9 col-md-offset-3">
+          <button type="submit" class="btn btn-sm btn-fill">Update Repository</button>
+          <button {{action "cancel" model}} class="btn btn-sm">Cancel</button>
+        </div>
+      {{/bs-form}}
+    </div>
+  </div>
+{{else if change}}
+  <div class="panel panel-transparent">
+    <div class="panel-body">
+      <div class="col-md-9 col-md-offset-3">
+        <h3 class="edit">Set Password</h3>
+
+        <span class="help-block">Click <a class="action-link" {{action "generate"}}>here</a> for a password suggestion.</span>
+      </div>
+
+      {{#bs-form formLayout="horizontal" horizontalLabelGridClass="col-md-3" model=model onSubmit=(action "setPassword" model) submitOnEnter=true as |form|}}
+        {{form.element controlType="text" id="passwordInput" property="passwordInput" label="New Password" required=false}}
+        {{form.element controlType="text" property="confirmPasswordInput" label="Confirm Password" required=false}}
+
+        <div class="col-md-9 col-md-offset-3">
+          <button type="submit" class="btn btn-sm btn-fill">Set Password</button>
+          <button {{action "cancel" model}} class="btn btn-sm" id="cancel">Cancel</button>
+        </div>
+      {{/bs-form}}
+    </div>
+  </div>
+{{else if delete}}
+  <div class="panel panel-transparent">
+    <div class="panel-body">
+      <div class="col-md-9 col-md-offset-3">
+        {{#if (gt model.totalDoiCount 0)}}
+          <div class="alert alert-danger" role="alert">
+            You need to transfer all DOIs to another repository before you can delete this repository.
+          </div>
+          <div class="pseudo-footer">
+            <div class="btn-toolbar btn-sm pull-right">
+              <button {{action "cancel" model}} class="btn btn-sm">Cancel</button>
+              {{#link-to "repositories.show.transfer" model.id class="btn btn-sm"}}{{fa-icon "arrow-circle-o-right"}}Transfer DOIs{{/link-to}}
+            </div>
+            <div class="clearfix"/>
+          </div>
+        {{else}}
+          {{#bs-form formLayout="vertical" model=model onSubmit=(action "destroy" model) submitOnEnter=true as |form|}}
+            {{#form.group validation=(if (v-get model 'isInvalid') "error" "success")}}
+              {{form.element controlType="text" label='Are you sure you want to delete this repository? This action cannot be undone.' property='confirmSymbol' showValidationOn="input" autofocus=true helpText='Please add the Repository ID to delete.'}}
+            {{/form.group}}
+
+            <div class="pseudo-footer">
+              <div class="btn-toolbar pull-right">
+                <button {{action "cancel" model}} class="btn btn-sm">Cancel</button>
+                <button {{action "destroy" model}} class="btn btn-sm btn-fill">Delete</button>
+              </div>
+              <div class="clearfix"/>
+            </div>
+          {{/bs-form}}
+        {{/if}}
+      </div>
+    </div>
+  </div>
+{{else}}
+  <div class="row">
+    <div class="col-md-3">
+      {{#if (can "update repository" model)}}
+        <div class="panel facets">
+          <div class="panel-body">
+            <div class="btn-toolbar">
+              <div class="btn-group-vertical btn-group-sm">
+                <button {{action "change" model}} class="btn btn-warning" id="set-password-provider">{{fa-icon "key"}}Set Password</button>
+                <button {{action "edit" model}} class="btn btn-warning" id="edit-client">{{fa-icon "pencil"}}Update{{if (eq currentUser.uid model.id) ' Account' ' Repository'}}</button>
+                {{#if (can "delete repository" model)}}
+                  <button {{action "delete" model}} class="btn btn-warning" id="delete-client">{{fa-icon "trash"}}Delete{{if media.isXl ' Repository'}}</button>
+                {{/if}}
+              </div>
+            </div>
+          </div>
+        </div>
+      {{/if}}
+
+      {{client-sidebar model=model}}
+    </div>
+    <div class="col-md-9">
+      <div class="panel panel-transparent">
+        <div class="panel-body">
+          {{#each flashMessages.queue as |flash|}}
+            {{flash-message flash=flash}}
+          {{/each}}
+
+          <h5>
+            Repository ID
+            <span>
+              {{fa-icon "question-circle-o"}}
+              {{#bs-tooltip placement="top" viewportPadding=10}}The Repository ID is a unique identifier for each repository in DataCite. It must contain only upper case letters and numbers, and must start with the Provider ID.{{/bs-tooltip}}
+            </span>
+          </h5>
+          {{model.symbol}}
+
+          {{#if model.re3data}}
+            <h5>
+              re3data Record
+              <span>
+                {{fa-icon "question-circle-o"}}
+                {{#bs-tooltip placement="top" viewportPadding=10}}re3data is a registry of research data repositories.{{/bs-tooltip}}
+              </span>
+            </h5>
+            <a href="{{model.re3data}}">{{model.re3data}}</a>
+          {{/if}}
+
+          {{#if model.alternateName}}
+            <h5>Alternate Name</h5>
+            {{model.alternateName}}
+          {{/if}}
+
+          {{#if model.description}}
+            <h5>Description</h5>
+            {{model.description}}
+          {{/if}}
+
+          {{#if model.contactName}}
+            <h5>Contact Name</h5>
+            {{model.contactName}}
+          {{/if}}
+
+          {{#if model.contactEmail}}
+            <h5>Contact Email</h5>
+            <a href="mailto:{{model.contactEmail}}">{{model.contactEmail}}</a>
+          {{/if}}
+
+          {{#if model.certificate}}
+            <h5>Certificates <div class="info-icon icons-certificate_active"/></h5>
+            {{#each model.certificate as |cert|}}
+              {{cert}}{{#unless (eq cert model.certificates.lastObject)}}, {{/unless}}
+            {{/each}}
+          {{/if}}
+
+          {{#if model.software}}
+            <h5>Software</h5>
+            {{model.software}}
+          {{/if}}
+
+          {{#if model.repositoryType}}
+            <h5>Repository Type</h5>
+            {{#each model.repositoryType as |type|}}
+              {{type}}<br/>
+            {{/each}}
+          {{/if}}
+
+          {{#if model.url}}
+            <h5>URL</h5>
+            <a href="{{model.url}}">{{model.url}}</a>
+          {{/if}}
+
+          {{#if model.domainList}}
+            <h5>
+              {{pluralize model.domainList.length "Domain" without-count=true}}
+              <span>{{fa-icon "question-circle-o"}}
+                {{#bs-tooltip placement="top" viewportPadding=10}}URLs for DOIs must use {{#if (gt model.domainList.length 1)}}one of these (sub-)domains{{else}}this (sub-)domain{{/if}}.{{/bs-tooltip}}
+              </span>
+            </h5>
+            {{#each model.domainList as |domain|}}
+              {{domain}}<br/>
+            {{/each}}
+          {{/if}}
+
+          {{#if (not model.hasPassword)}}
+            <h5>Password</h5>
+            <span class="small icon-warning">has not been set</span>
+          {{/if}}
+        </div>
+      </div>
+    </div>
+  </div>
+{{/if}}
