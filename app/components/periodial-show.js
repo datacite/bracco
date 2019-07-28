@@ -31,7 +31,7 @@ export default Component.extend({
   periodical: null,
   provider: null,
   setPassword: false,
-  repository: null,
+  re3data: null,
   repositories: [],
   softwareList,
   softwares: softwareList,

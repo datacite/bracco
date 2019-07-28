@@ -5,8 +5,7 @@ import ENV from 'bracco/config/environment';
 
 const clientTypeList = [
   'repository',
-  'periodical',
-  'other'
+  'periodical'
 ]
 const softwareList = [
   'CKAN',
@@ -29,7 +28,7 @@ export default Component.extend({
   edit: false,
   change: false,
   delete: false,
-  client: null,
+  repository: null,
   provider: null,
   setPassword: false,
   re3data: null,
@@ -40,7 +39,7 @@ export default Component.extend({
   clientTypes: clientTypeList,
 
   reset() {
-    this.client.set('passwordInput', null);
+    this.repository.set('passwordInput', null);
     this.set('edit', false);
     this.set('change', false);
     this.set('delete', false);
@@ -82,7 +81,7 @@ export default Component.extend({
         }
       });
     } else {
-      this.client.set('repository', null);
+      this.repository.set('re3data', null);
     }
   },
   searchClientType(query) {
@@ -92,7 +91,7 @@ export default Component.extend({
     this.set('clientTypes', clientTypes);
   },
   selectClientType(clientType) {
-    this.client.set('clientType', clientType);
+    this.repository.set('clientType', clientType);
     this.set('clientTypes', clientTypeList);
   },
   searchSoftware(query) {
@@ -102,36 +101,36 @@ export default Component.extend({
     this.set('softwares', softwares);
   },
   selectSoftware(software) {
-    this.client.set('software', software);
+    this.repository.set('software', software);
     this.set('softwares', softwareList);
   },
 
   actions: {
-    edit(client) {
-      this.set('client', client);
-      this.client.set('confirmSymbol', client.get('symbol'));
-      this.set('repository', client.get('repository'));
+    edit(repository) {
+      this.set('repository', repository);
+      this.repository.set('confirmSymbol', repository.get('symbol'));
+      this.set('re3data', repository.get('re3data'));
       this.set('edit', true);
     },
-    change(client) {
-      this.set('client', client);
-      this.client.set('confirmSymbol', client.get('symbol'));
+    change(repository) {
+      this.set('repository', repository);
+      this.repository.set('confirmSymbol', repository.get('symbol'));
       this.set('change', true);
     },
     generate() {
       this.generate();
     },
-    delete(client) {
-      this.set('client', client);
-      this.client.set('confirmSymbol', null);
-      this.client.validateSync();
-      this.set('provider', client.get('provider'));
+    delete(repository) {
+      this.set('repository', repository);
+      this.repository.set('confirmSymbol', null);
+      this.repository.validateSync();
+      this.set('provider', repository.get('provider'));
       this.set('delete', true);
     },
     setPassword() {
       let self = this;
-      this.client.set('keepPassword', false);
-      this.client.save().then(function () {
+      this.repository.set('keepPassword', false);
+      this.repository.save().then(function () {
         self.reset();
       }).catch(function (reason) {
         console.log(reason);
@@ -143,25 +142,25 @@ export default Component.extend({
     selectRepository(repository) {
       this.selectRepository(repository);
     },
-    submit(client) {
+    submit(repository) {
       let self = this;
 
       // Remove all whitespace on domains.
-      if (client.get('domains')) {
-        var domains = client.get('domains');
-        client.set('domains', domains.replace(/\s/g, ''));
+      if (repository.get('domains')) {
+        var domains = repository.get('domains');
+        repository.set('domains', domains.replace(/\s/g, ''));
       }
 
-      client.save().then(function () {
+      repository.save().then(function () {
         self.reset();
       }).catch(function (reason) {
         console.log(reason);
       });
     },
-    destroy(client) {
+    destroy(repository) {
       let self = this;
-      this.store.findRecord("client", client.id, { backgroundReload: false }).then(function (client) {
-        client.destroyRecord().then(function () {
+      this.store.findRecord("repository", repository.id, { backgroundReload: false }).then(function (repository) {
+        repository.destroyRecord().then(function () {
           self.router.transitionTo('providers.show.settings', self.get('provider'));
         });
       });

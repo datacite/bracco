@@ -5,8 +5,7 @@ import ENV from 'bracco/config/environment';
 
 const clientTypeList = [
   'repository',
-  'periodical',
-  'other'
+  'periodical'
 ]
 const softwareList = [
   'CKAN',
@@ -69,7 +68,7 @@ export default Component.extend({
       let self = this;
       this.store.findRecord('re3data', re3data.id).then(function (repo) {
         self.set('repository', repo)
-        self.get('client').set('re3data', repo.get('id'));
+        self.get('client').set('re3data', 'https://doi.org/' + repo.get('id'));
         self.get('client').set('name', repo.get('repositoryName'));
         self.get('client').set('description', repo.get('description'));
         self.get('client').set('url', repo.get('repositoryUrl'));
@@ -110,7 +109,7 @@ export default Component.extend({
     edit(client) {
       this.set('client', client);
       this.client.set('confirmSymbol', client.get('symbol'));
-      this.set('repository', client.get('repository'));
+      this.set('re3data', client.get('re3data'));
       this.set('edit', true);
     },
     change(client) {

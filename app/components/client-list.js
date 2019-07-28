@@ -4,8 +4,7 @@ import Component from '@ember/component';
 
 const clientTypeList = [
   'repository',
-  'periodical',
-  'other'
+  'periodical'
 ]
 const softwareList = [
   'CKAN',
@@ -48,7 +47,7 @@ export default Component.extend({
       let self = this;
       this.store.findRecord('re3data', re3data.id).then(function(repo) {
         self.set('repository', repo)
-        self.get('client').set('re3data', repo.get('id');
+        self.get('client').set('re3data', repo.get('id'));
         self.get('client').set('name', repo.get('repositoryName'));
         self.get('client').set('description', repo.get('description'));
         self.get('client').set('url', repo.get('repositoryUrl'));
