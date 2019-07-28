@@ -25,13 +25,13 @@
 </div>
 
 <div class='col-md-9 panel-list' id="content">
-  {{model-search model=model.prefixes link='periodicals.show.prefixes'}}
+  {{model-search model=model.prefixes name="Prefix" link='periodicals.show.prefixes'}}
 
   {{#if model.prefixes}}
     {{#each model.prefixes as |client-prefix|}}
       <div class="panel panel-transparent">
         <div class="panel-body">
-          {{#if (and (can "update prefix" model) (not-eq client-prefix.prefix.id "10.5072"))}}
+          {{#if (can "update prefix" model)}}
             <h3 class="work">{{#link-to "periodicals.show.prefixes.show" model.periodical.id client-prefix.prefix.id}}{{client-prefix.prefix.id}}{{/link-to}}</h3>
           {{else}}
             <h3 class="member">{{client-prefix.prefix.id}}</h3>

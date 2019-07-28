@@ -16,7 +16,7 @@ export default Route.extend({
 
     return hash({
       provider: null,
-      clients: this.store.query('periodical', params)
+      periodicals: this.store.query('periodical', params)
     });
   },
 
