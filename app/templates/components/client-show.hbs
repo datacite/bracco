@@ -129,7 +129,7 @@
           </h5>
           {{model.symbol}}
 
-          {{#if model.repository.id}}
+          {{#if model.re3data}}
             <h5>
               re3data Record
               <span>
@@ -137,7 +137,7 @@
                 {{#bs-tooltip placement="top" viewportPadding=10}}re3data is a registry of research data repositories.{{/bs-tooltip}}
               </span>
             </h5>
-            <a href="https://doi.org/{{model.repository.id}}">https://doi.org/{{model.repository.id}}</a>
+            <a href="{{model.re3data}}">{{model.re3data}}</a>
           {{/if}}
 
           {{#if model.repository.additionalName}}

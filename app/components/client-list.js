@@ -43,12 +43,12 @@ export default Component.extend({
   //   }
   // }),
 
-  selectRepository(repository) {
-    if (repository) {
+  selectRepository(re3data) {
+    if (re3data) {
       let self = this;
-      this.store.findRecord('repository', repository.id).then(function(repo) {
+      this.store.findRecord('re3data', re3data.id).then(function(repo) {
         self.set('repository', repo)
-        self.get('client').set('repository', repo);
+        self.get('client').set('re3data', repo.get('id');
         self.get('client').set('name', repo.get('repositoryName'));
         self.get('client').set('description', repo.get('description'));
         self.get('client').set('url', repo.get('repositoryUrl'));

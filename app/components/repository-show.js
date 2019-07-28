@@ -32,7 +32,7 @@ export default Component.extend({
   client: null,
   provider: null,
   setPassword: false,
-  repository: null,
+  re3data: null,
   repositories: [],
   softwareList,
   softwares: softwareList,
@@ -64,21 +64,21 @@ export default Component.extend({
       console.log(error);
     });
   },
-  selectRepository(repository) {
-    if (repository) {
+  selectRepository(re3data) {
+    if (re3data) {
       let self = this;
-      this.store.findRecord('repository', repository.id).then(function (repo) {
-        self.set('repository', repo)
-        self.get('client').set('repository', repo);
-        self.get('client').set('name', repo.get('repositoryName'));
-        self.get('client').set('description', repo.get('description'));
-        self.get('client').set('url', repo.get('repositoryUrl'));
+      this.store.findRecord('re3data', re3data.id).then(function (repo) {
+        self.set('re3data', repo)
+        self.get('repository').set('re3data', 'https://doi.org/' + repo.get('id'));
+        self.get('repository').set('name', repo.get('repositoryName'));
+        self.get('repository').set('description', repo.get('description'));
+        self.get('repository').set('url', repo.get('repositoryUrl'));
         if (repo.get('software').length > 0) {
           let software = repo.get('software')[0].name;
           if (software === "DataVerse") {
             software = "Dataverse";
           }
-          self.get('client').set('software', software.capitalize());
+          self.get('repository').set('software', software.capitalize());
         }
       });
     } else {

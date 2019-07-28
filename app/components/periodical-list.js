@@ -42,27 +42,6 @@ export default Component.extend({
   //   }
   // }),
 
-  selectRepository(repository) {
-    if (repository) {
-      let self = this;
-      this.store.findRecord('repository', repository.id).then(function(repo) {
-        self.set('repository', repo)
-        self.get('periodical').set('repository', repo);
-        self.get('periodical').set('name', repo.get('repositoryName'));
-        self.get('periodical').set('description', repo.get('description'));
-        self.get('periodical').set('url', repo.get('repositoryUrl'));
-        if (repo.get('software').length > 0) {
-          let software = repo.get('software')[0].name;
-          if (software === "DataVerse") {
-            software = "Dataverse";
-          } 
-          self.get('periodical').set('software', software.capitalize());
-        }
-      });
-    } else {
-      this.periodical.set('repository', null);
-    }
-  },
   searchClientType(query) {
     var clientTypes = clientTypeList.filter(function(clientType) {
       return clientType.startsWith(query.toLowerCase());

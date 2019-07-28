@@ -28,7 +28,7 @@ export default Component.extend({
   classNames: ['row'],
   client: null,
   new: false,
-  repository: null,
+  re3data: null,
   repositories: [],
   softwareList,
   softwares: softwareList,
@@ -42,12 +42,12 @@ export default Component.extend({
   //   }
   // }),
 
-  selectRepository(repository) {
-    if (repository) {
+  selectRepository(re3data) {
+    if (re3data) {
       let self = this;
-      this.store.findRecord('re3data', repository.id).then(function(repo) {
-        self.set('re3data_id', repo.id)
-        self.get('repository').set('re3data_id', repo.id);
+      this.store.findRecord('re3data', re3data.id).then(function(repo) {
+        self.set('re3data', repo.get('id'))
+        self.get('repository').set('re3data', 'https://doi.org/' + repo.get('id'));
         self.get('repository').set('name', repo.get('repositoryName'));
         self.get('repository').set('description', repo.get('description'));
         self.get('repository').set('url', repo.get('repositoryUrl'));
@@ -60,7 +60,7 @@ export default Component.extend({
         }
       });
     } else {
-      this.repository.set('repository', null);
+      this.repository.set('re3data', null);
     }
   },
   searchClientType(query) {

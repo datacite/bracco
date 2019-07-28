@@ -167,7 +167,7 @@
             </h5>
             {{client.symbol}}
 
-            {{#if client.repository.id}}
+            {{#if client.re3data}}
               <h5>
                 re3data Record
                 <span>
@@ -175,7 +175,7 @@
                   {{#bs-tooltip placement="top" viewportPadding=10}}re3data is a registry of research data repositories.{{/bs-tooltip}}
                 </span>
               </h5>
-              <a href="https://doi.org/{{client.repository.id}}">https://doi.org/{{client.repository.id}}</a>
+              <a href="{{client.re3data}}">{{client.re3data}}</a>
             {{/if}}
 
             {{#if client.contactName}}
