@@ -57,17 +57,17 @@ module('Acceptance | staff_admin | admin', function(hooks) {
     assert.dom('a.nav-link.active').hasText('Providers');
   });
 
-  test('visiting clients', async function(assert) {
+  test('visiting repositories', async function(assert) {
     await authenticateSession({
       uid: 'admin',
       name: 'Admin',
       role_id: 'staff_admin'
     });
-    await visit('/clients');
+    await visit('/repositories');
 
-    assert.equal(currentURL(), '/clients');
+    assert.equal(currentURL(), '/repositories');
     assert.dom('h2.work').hasText('DataCite');
-    assert.dom('a.nav-link.active').hasText('Clients');
+    assert.dom('a.nav-link.active').hasText('Repositories');
   });
 
   test('visiting prefixes', async function(assert) {
