@@ -151,8 +151,11 @@ export default Component.extend({
         repository.set('domains', domains.replace(/\s/g, ''));
       }
 
-      repository.save().then(function () {
+      repository.save().then(function (repository) {
         self.reset();
+        if (repository.clientType == "periodical") {
+          self.router.transitionTo('periodicals.show.settings', repository.id);
+        }  
       }).catch(function (reason) {
         console.log(reason);
       });

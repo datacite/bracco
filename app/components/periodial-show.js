@@ -123,8 +123,11 @@ export default Component.extend({
         periodical.set('domains', domains.replace(/\s/g, ''));
       }
 
-      periodical.save().then(function () {
+      periodical.save().then(function (periodical) {
         self.reset();
+        if (periodical.clientType == "repository") {
+          self.router.transitionTo('repositories.show.settings', periodical.id);
+        }  
       }).catch(function (reason) {
         console.log(reason);
       });

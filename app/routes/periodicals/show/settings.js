@@ -6,8 +6,8 @@ export default Route.extend({
   
   model() {
     let self = this;
-    return this.store.findRecord('periodical', this.modelFor('periodicals/show').get('id'), { include: 'provider,repository' }).then(function(client) {
-      return client;
+    return this.store.findRecord('periodical', this.modelFor('periodicals/show').get('id'), { include: 'provider' }).then(function(periodical) {
+      return periodical;
     }).catch(function(reason){
       if (console.debug) {
         console.debug(reason);

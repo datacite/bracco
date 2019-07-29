@@ -96,7 +96,7 @@
           <div class="panel-body">
             <div class="btn-toolbar">
               <div class="btn-group-vertical btn-group-sm">
-                <button {{action "change" model}} class="btn btn-warning" id="set-password-provider">{{fa-icon "key"}}Set Password</button>
+                <button {{action "change" model}} class="btn btn-warning" id="set-password-periodical">{{fa-icon "key"}}Set Password</button>
                 <button {{action "edit" model}} class="btn btn-warning" id="edit-periodical">{{fa-icon "pencil"}}Update{{if (eq currentUser.uid model.id) ' Account' ' Periodical'}}</button>
                 {{#if (can "delete periodical" model)}}
                   <button {{action "delete" model}} class="btn btn-warning" id="delete-periodical">{{fa-icon "trash"}}Delete{{if media.isXl ' Periodical'}}</button>
@@ -143,12 +143,6 @@
           {{#if model.contactEmail}}
             <h5>Contact Email</h5>
             <a href="mailto:{{model.contactEmail}}">{{model.contactEmail}}</a>
-          {{/if}}
-
-
-          {{#if model.clientType}}
-            <h5>Client Type</h5>
-            {{titleize model.clientType}}
           {{/if}}
 
           {{#if model.software}}

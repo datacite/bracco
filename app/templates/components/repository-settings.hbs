@@ -6,23 +6,23 @@
   </div>
 </div>
 <div class="row">
-  {{client-sidebar model=model}}
+  {{repository-sidebar model=model}}
   <div class="col-md-9" id="show">
     <div class="panel panel-transparent" id="content-member">
       <div class="panel-footer">
         {{model.name}}
         <span>{{fa-icon "question-circle-o"}}
-          {{#bs-tooltip placement="top" viewportPadding=10}}Each client has a unique ID that starts with the provider ID.{{/bs-tooltip}}
+          {{#bs-tooltip placement="top" viewportPadding=10}}Each repository has a unique ID that starts with the provider ID.{{/bs-tooltip}}
         </span>
-        {{#if (can "write client" model)}}
+        {{#if (can "write repository" model)}}
           <div class="btn-toolbar pull-right">
             <div class="btn-group btn-group-sm pull-right">
-              {{#link-to "clients.edit" client.id}}{{fa-icon "pencil"}}{{/link-to}}
+              {{#link-to "repositories.edit" model.id}}{{fa-icon "pencil"}}{{/link-to}}
             </div>
-            {{#if (can "delete client" model)}}
+            {{#if (can "repositories client" model)}}
               <div class="btn-toolbar pull-right">
                 <div class="btn-group btn-group-sm pull-right">
-                  {{#link-to "clients.edit" client.id}}{{fa-icon "tra"}}{{/link-to}}
+                  {{#link-to "repositories.edit" model.id}}{{fa-icon "tra"}}{{/link-to}}
                 </div>
               </div>
             {{/if}}
