@@ -1,6 +1,5 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
-import { validator, buildValidations } from 'ember-cp-validations';
 import fetch from 'fetch';
 import countryList from 'iso-3166-country-list';
 import ENV from 'bracco/config/environment';
@@ -37,14 +36,7 @@ const focusAreaList = [
   'general'
 ]
 
-const Validations = buildValidations({
-  confirmId: validator('confirmation', {
-    on: 'symbol',
-    message: 'Provider ID does not match'
-  })
-});
-
-export default Component.extend(Validations, {
+export default Component.extend({
   currentUser: service(),
   store: service(),
 
