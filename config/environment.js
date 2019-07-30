@@ -41,7 +41,7 @@ module.exports = function(environment) {
       preventDuplicates: true
     },
     featureFlags: {
-      'use-elasticsearch': false
+      'use-repositories': process.env.API_URL === "https://api.test.datacite.org"
     },
 
     SITE_TITLE: process.env.SITE_TITLE || "DataCite DOI Fabrica Test",
@@ -75,7 +75,7 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
-    ENV.featureFlags['use-elasticsearch'] = true;
+    ENV.featureFlags['use-repositories'] = true;
   }
 
   if (environment === 'test') {
@@ -94,7 +94,7 @@ module.exports = function(environment) {
 
     ENV.APP.rootElement = '#ember-testing';
 
-    ENV.featureFlags['use-elasticsearch'] = true;
+    ENV.featureFlags['use-repositories'] = true;
 
     ENV.APP.autoboot = false;
 

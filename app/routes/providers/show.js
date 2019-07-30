@@ -3,7 +3,8 @@ import { inject as service } from '@ember/service';
 
 export default Route.extend({
   can: service(),
-
+  features: service(),
+  
   model(params) {
     let self = this;
     return this.store.findRecord('provider', params.provider_id, { include: 'consortium-lead,consortium-organizations' }).then(function(provider) {

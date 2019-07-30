@@ -3,6 +3,7 @@ import Route from '@ember/routing/route';
 
 export default Route.extend({
   can: service(),
+  features: service(),
   flashMessages: service(),
 
   model(params) {
