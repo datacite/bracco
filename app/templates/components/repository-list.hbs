@@ -130,6 +130,66 @@
         </div>
       </div>
     {{/if}}
+    {{#if (or model.repositories.meta.repositoryTypes model.repositories.query.repository-type)}}
+      <div class="panel facets">
+        <div class="panel-body">
+          <h4>Repository Type</h4>
+          <ul>
+            {{#if model.repositories.meta.repositoryTypes}}
+              {{#each model.repositories.meta.repositoryTypes as |repositoryType|}}
+                <li>
+                  {{#if model.repositories.query.repository-type}}
+                    {{#link-to link (query-params repository-type="")}}{{fa-icon "check-square-o"}}{{/link-to}}
+                  {{else}}
+                    {{#link-to link (query-params repository-type=repositoryType.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                  {{/if}}
+                  <div class="facet-title">{{repositoryType.title}}</div>
+                  <span class="number pull-right">{{repositoryType.count}}</span>
+                  <div class="clearfix"/>
+                </li>
+              {{/each}}
+            {{else}}
+              <li>
+                {{#link-to link (query-params repository-type="")}}{{fa-icon "check-square-o"}}{{/link-to}}
+                <div class="facet-title">{{model.repositories.query.repository-type}}</div>
+                <span class="number pull-right">0</span>
+                <div class="clearfix"/>
+              </li>
+            {{/if}}
+          </ul>
+        </div>
+      </div>
+    {{/if}}
+    {{#if (or model.repositories.meta.certificates model.repositories.query.certificate)}}
+      <div class="panel facets">
+        <div class="panel-body">
+          <h4>Certificate</h4>
+          <ul>
+            {{#if model.repositories.meta.certificates}}
+              {{#each model.repositories.meta.certificates as |certificate|}}
+                <li>
+                  {{#if model.repositories.query.certificate}}
+                    {{#link-to link (query-params certificate="")}}{{fa-icon "check-square-o"}}{{/link-to}}
+                  {{else}}
+                    {{#link-to link (query-params certificate=certificate.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                  {{/if}}
+                  <div class="facet-title">{{certificate.title}}</div>
+                  <span class="number pull-right">{{certificate.count}}</span>
+                  <div class="clearfix"/>
+                </li>
+              {{/each}}
+            {{else}}
+              <li>
+                {{#link-to link (query-params certificate="")}}{{fa-icon "check-square-o"}}{{/link-to}}
+                <div class="facet-title">{{model.repositories.query.certificate}}</div>
+                <span class="number pull-right">0</span>
+                <div class="clearfix"/>
+              </li>
+            {{/if}}
+          </ul>
+        </div>
+      </div>
+    {{/if}}
     {{#if (or model.repositories.meta.software model.repositories.query.software)}}
       <div class="panel facets">
         <div class="panel-body">
