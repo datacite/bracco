@@ -209,15 +209,10 @@
           {{/if}}
 
           {{#if model.certificate}}
-            <h5>Certificates <div class="info-icon icons-certificate_active"/></h5>
+            <h5>Certificate<div class="info-icon icons-certificate_active"/></h5>
             {{#each model.certificate as |cert|}}
               {{cert}}{{#unless (eq cert model.certificate.lastObject)}}, {{/unless}}
             {{/each}}
-          {{/if}}
-
-          {{#if model.software}}
-            <h5>Software</h5>
-            {{model.software}}
           {{/if}}
 
           {{#if model.repositoryType}}
@@ -225,6 +220,11 @@
             {{#each model.repositoryType as |type|}}
               {{titleize type}}{{#unless (eq type model.repositoryType.lastObject)}}, {{/unless}}
             {{/each}}
+          {{/if}}
+
+          {{#if model.software}}
+            <h5>Software</h5>
+            {{model.software}}
           {{/if}}
 
           {{#if model.url}}
