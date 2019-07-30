@@ -3,6 +3,7 @@ import { inject as service } from '@ember/service';
 
 export default Route.extend({
   can: service(),
+  features: service(),
   
   model() {
     let self = this;

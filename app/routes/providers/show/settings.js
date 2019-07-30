@@ -3,7 +3,8 @@ import { inject as service } from '@ember/service';
 
 export default Route.extend({
   can: service(),
-
+  features: service(),
+  
   model() {
     return this.store.findRecord('provider', this.modelFor('providers/show').get('id'));
   },

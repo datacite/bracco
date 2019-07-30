@@ -41,7 +41,7 @@ module.exports = function(environment) {
       preventDuplicates: true
     },
     featureFlags: {
-      'use-repositories': process.env.API_URL === "https://api.test.datacite.org"
+      'use-repositories': false
     },
 
     SITE_TITLE: process.env.SITE_TITLE || "DataCite DOI Fabrica Test",
@@ -105,10 +105,11 @@ module.exports = function(environment) {
 
   if (environment === 'production') {
     // here you can enable a production-specific feature
+    ENV.featureFlags['use-repositories'] = process.env.API_URL === "https://api.test.datacite.org";
   }
 
   if (process.env.DEPLOY_TARGET === 'stage') {
-    ENV.featureFlags['use-elasticsearch'] = true;
+    ENV.featureFlags['use-repositories'] = true;
   }
 
   return ENV;

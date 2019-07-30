@@ -192,7 +192,7 @@ export default Component.extend({
         return !isBlank(certificate);
       }));
 
-      repository.save().then(function (repository) {
+      repository.save().then(function () {
         self.reset();
       }).catch(function (reason) {
         console.log(reason);

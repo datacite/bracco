@@ -31,7 +31,7 @@
         {{/if}}
 
         {{#if (not-eq model.memberType "member_only")}}
-          {{#if (and (can "read index") features.useRepositories)}}
+          {{#if (can "read index")}}
             {{#nav.item}}{{#nav.link-to "providers.show.repositories" model.id class="nav-link"}}Repositories{{/nav.link-to}}{{/nav.item}}
           {{else}}
             {{#nav.item}}{{#nav.link-to "providers.show.clients" model.id class="nav-link"}}Clients{{/nav.link-to}}{{/nav.item}}
