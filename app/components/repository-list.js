@@ -1,5 +1,6 @@
 import { inject as service } from '@ember/service';
 import Component from '@ember/component';
+import { isBlank } from '@ember/utils';
 // import { computed } from '@ember/object';
 
 const clientTypeList = [
@@ -91,7 +92,10 @@ export default Component.extend({
   actions: {
     new(model) {
       let provider = this.store.peekRecord('provider', model.repositories.get('query.provider-id'));
-      this.set('repository', this.store.createRecord('repository', { provider: provider, symbol: provider.id.toUpperCase() + '.' }));
+      this.set('repository', this.store.createRecord('repository', { provider: provider, symbol: provider.id.toUpperCase() + '.', language: [], repositoryType: [], certificate: [] }));
+      this.repository.get('language').pushObject('');
+      this.repository.get('repositoryType').pushObject('');
+      this.repository.get('certificate').pushObject('');
       this.set('new', true);
     },
     searchRepository(query) {
@@ -100,8 +104,36 @@ export default Component.extend({
     selectRepository(repository) {
       this.selectRepository(repository);
     },
+    addLanguage() {
+      this.repository.get('language').pushObject(null);
+    },
+    addCertificate() {
+      this.repository.get('certificate').pushObject(null);
+    },
+    addRepositoryType() {
+      this.repository.get('repositoryType').pushObject(null);
+    },
     submit(repository) {
       let self = this;
+
+      // Remove all whitespace on domains.
+      if (repository.get('domains')) {
+        var domains = repository.get('domains');
+        repository.set('domains', domains.replace(/\s/g, ''));
+      }
+
+      repository.set('language', repository.get('language').filter(function(language) {
+        return !isBlank(language);
+      }));
+
+      repository.set('repositoryType', repository.get('repositoryType').filter(function(repositoryType) {
+        return !isBlank(repositoryType);
+      }));
+
+      repository.set('certificate', repository.get('certificate').filter(function(certificate) {
+        return !isBlank(certificate);
+      }));
+
       repository.save().then(function(repository) {
         self.router.transitionTo('repositories.show.settings', repository.id);
         self.set('new', false);

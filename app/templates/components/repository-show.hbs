@@ -17,16 +17,63 @@
         {{form.element controlType="text" label="Alternate Name (optional)" property="alternateName" required=false}}
         {{form.element controlType="textarea" label="Description (optional)" property="description" rows=10 helpText='Description of the repository. Please use markdown for formatting.' required=false}}
         {{form.element controlType="text" label="URL (optional)" property="url" helpText='The homepage of the repository.' required=false}}
-        {{#form.element controlType="power-select" label="Client Type" property="clientType" options=clientTypes destination=clientType as |el|}}
-          {{#el.control onChange=(action "selectClientType") search=(action "searchClientType") placeholder="Select Client Type" searchPlaceholder="Type to search..." as |item|}}
-            {{titleize (humanize item)}}
-          {{/el.control}}
-        {{/form.element}}
+        
+        <div class="form-group">
+          <label class="control-label col-md-3">Language (optional)</label>
+          <div class="col-md-9">
+            {{#if (gt model.language.length 0)}}
+              {{#each model.language as |language index|}}
+                {{repository-language model=model language=language form=form index=index}}
+              {{/each}}
+
+              {{#if (lte model.language.length 2)}}
+                {{#bs-button  class="btn-sm add-language" outline=true onClick=(action "addLanguage")}}{{fa-icon "plus-circle"}} Add another Language{{/bs-button}}
+              {{/if}}
+            {{/if}}
+          </div>
+        </div>
+
         {{#form.element controlType="power-select" label="Software (optional)" property="software" options=softwares destination=software helpText='The name of the software that is used to run the repository.' as |el|}}
           {{#el.control onChange=(action "selectSoftware") search=(action "searchSoftware") placeholder="Select Software" searchPlaceholder="Type to search..." allowClear=true as |item|}}
             {{item}}
           {{/el.control}}
         {{/form.element}}
+        {{#form.element controlType="power-select" label="Client Type" property="clientType" options=clientTypes destination=clientType as |el|}}
+          {{#el.control onChange=(action "selectClientType") search=(action "searchClientType") placeholder="Select Client Type" searchPlaceholder="Type to search..." as |item|}}
+            {{titleize (humanize item)}}
+          {{/el.control}}
+        {{/form.element}}
+
+        <div class="form-group">
+          <label class="control-label col-md-3">Repository Type (optional)</label>
+          <div class="col-md-9">
+            {{#if (gt model.repositoryType.length 0)}}
+              {{#each model.repositoryType as |repositoryType index|}}
+                {{repository-repository-type model=model repositoryType=repositoryType form=form index=index}}
+              {{/each}}
+
+              {{#if (lte model.repositoryType.length 2)}}
+                {{#bs-button  class="btn-sm add-repositoryType" outline=true onClick=(action "addRepositoryType")}}{{fa-icon "plus-circle"}} Add another Repository Type{{/bs-button}}
+              {{/if}}
+            {{/if}}
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-md-3">Certificate (optional)</label>
+          <div class="col-md-9">
+            {{#if (gt model.certificate.length 0)}}
+              {{#each model.certificate as |certificate index|}}
+                {{repository-certificate model=model certificate=certificate form=form index=index}}
+              {{/each}}
+
+              {{#if (lte model.certificate.length 2)}}
+                {{#bs-button  class="btn-sm add-certificate" outline=true onClick=(action "addCertificate")}}{{fa-icon "plus-circle"}} Add another Certificate{{/bs-button}}
+              {{/if}}
+            {{/if}}
+          </div>
+        </div>
+
         {{form.element controlType="textarea" label="Domains" property="domains" required=false helpText='List of (sub-)domains used for DOI registration, or use * to allow all domains'}}
 
         {{#if (can "create repository" model.provider)}}
@@ -164,7 +211,7 @@
           {{#if model.certificate}}
             <h5>Certificates <div class="info-icon icons-certificate_active"/></h5>
             {{#each model.certificate as |cert|}}
-              {{cert}}{{#unless (eq cert model.certificates.lastObject)}}, {{/unless}}
+              {{cert}}{{#unless (eq cert model.certificate.lastObject)}}, {{/unless}}
             {{/each}}
           {{/if}}
 
@@ -176,13 +223,20 @@
           {{#if model.repositoryType}}
             <h5>Repository Type</h5>
             {{#each model.repositoryType as |type|}}
-              {{type}}<br/>
+              {{titleize type}}{{#unless (eq type model.repositoryType.lastObject)}}, {{/unless}}
             {{/each}}
           {{/if}}
 
           {{#if model.url}}
             <h5>URL</h5>
             <a href="{{model.url}}">{{model.url}}</a>
+          {{/if}}
+
+          {{#if model.language}}
+            <h5>Language</h5>
+            {{#each model.language as |lang|}}
+              {{format-language lang}}{{#unless (eq lang model.language.lastObject)}}, {{/unless}}
+            {{/each}}
           {{/if}}
 
           {{#if model.domainList}}

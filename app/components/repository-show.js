@@ -1,5 +1,7 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
+import { isArray } from '@ember/array';
+import { isBlank } from '@ember/utils';
 import fetch from 'fetch';
 import ENV from 'bracco/config/environment';
 
@@ -28,7 +30,6 @@ export default Component.extend({
   edit: false,
   change: false,
   delete: false,
-  repository: null,
   provider: null,
   setPassword: false,
   re3data: null,
@@ -110,6 +111,25 @@ export default Component.extend({
       this.set('repository', repository);
       this.repository.set('confirmSymbol', repository.get('symbol'));
       this.set('re3data', repository.get('re3data'));
+
+      if (!isArray(this.repository.get('language'))) {
+        this.repository.set('language', [this.repository.get('language')]);
+      }
+      if (this.repository.get('language').length == 0) {
+        this.repository.get('language').pushObject(null);
+      }
+      if (!isArray(this.repository.get('repositoryType'))) {
+        this.repository.set('repositoryType', [this.repository.get('repositoryType')]);
+      }
+      if (this.repository.get('repositoryType').length == 0) {
+        this.repository.get('repositoryType').pushObject('');
+      }
+      if (!isArray(this.repository.get('certificate'))) {
+        this.repository.set('certificate', [this.model.get('certificate')]);
+      }
+      if (this.repository.get('certificate').length == 0) {
+        this.repository.get('certificate').pushObject('');
+      }
       this.set('edit', true);
     },
     change(repository) {
@@ -142,6 +162,15 @@ export default Component.extend({
     selectRepository(repository) {
       this.selectRepository(repository);
     },
+    addLanguage() {
+      this.model.get('language').pushObject(null);
+    },
+    addCertificate() {
+      this.model.get('certificate').pushObject(null);
+    },
+    addRepositoryType() {
+      this.model.get('repositoryType').pushObject(null);
+    },
     submit(repository) {
       let self = this;
 
@@ -150,6 +179,18 @@ export default Component.extend({
         var domains = repository.get('domains');
         repository.set('domains', domains.replace(/\s/g, ''));
       }
+
+      repository.set('language', repository.get('language').filter(function(language) {
+        return !isBlank(language);
+      }));
+
+      repository.set('repositoryType', repository.get('repositoryType').filter(function(repositoryType) {
+        return !isBlank(repositoryType);
+      }));
+
+      repository.set('certificate', repository.get('certificate').filter(function(certificate) {
+        return !isBlank(certificate);
+      }));
 
       repository.save().then(function (repository) {
         self.reset();

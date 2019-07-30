@@ -16,12 +16,60 @@
         {{form.element controlType="text" label="Alternate Name (optional)" property="alternateName" required=false}}
         {{form.element controlType="textarea" label="Description (optional)" property="description" rows=10 helpText='Description of the repository. Please use markdown for formatting.' required=false}}
         {{form.element controlType="text" label="URL (optional)" property="url" helpText='The homepage of the client.' required=false}}
-        {{form.element controlType="hidden" property="clientType" required=false}}
+        
+        <div class="form-group">
+          <label class="control-label col-md-3">Language (optional)</label>
+          <div class="col-md-9">
+            {{#if (gt repository.language.length 0)}}
+              {{#each repository.language as |language index|}}
+                {{repository-language model=repository language=language form=form index=index}}
+              {{/each}}
+
+              {{#if (lte repository.language.length 2)}}
+                {{#bs-button  class="btn-sm add-language" outline=true onClick=(action "addLanguage")}}{{fa-icon "plus-circle"}} Add another Language{{/bs-button}}
+              {{/if}}
+            {{/if}}
+          </div>
+        </div>
+
         {{#form.element controlType="power-select" label="Software (optional)" property="software" options=softwares destination=software helpText='The name of the software that is used to run the repository.' as |el|}}
           {{#el.control onChange=(action "selectSoftware") search=(action "searchSoftware") placeholder="Select Software" searchPlaceholder="Type to search..." allowClear=true as |item|}}
             {{item}}
           {{/el.control}}
         {{/form.element}}
+        
+        {{form.element controlType="hidden" property="clientType" required=false}}
+
+        <div class="form-group">
+          <label class="control-label col-md-3">Repository Type (optional)</label>
+          <div class="col-md-9">
+            {{#if (gt repository.repositoryType.length 0)}}
+              {{#each repository.repositoryType as |repositoryType index|}}
+                {{repository-repository-type model=repository repositoryType=repositoryType form=form index=index}}
+              {{/each}}
+
+              {{#if (lte repository.repositoryType.length 2)}}
+                {{#bs-button  class="btn-sm add-repositoryType" outline=true onClick=(action "addRepositoryType")}}{{fa-icon "plus-circle"}} Add another Repository Type{{/bs-button}}
+              {{/if}}
+            {{/if}}
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-md-3">Certificate (optional)</label>
+          <div class="col-md-9">
+            {{#if (gt repository.certificate.length 0)}}
+              {{#each repository.certificate as |certificate index|}}
+                {{repository-certificate model=repository certificate=certificate form=form index=index}}
+              {{/each}}
+
+              {{#if (lte repository.certificate.length 2)}}
+                {{#bs-button  class="btn-sm add-certificate" outline=true onClick=(action "addCertificate")}}{{fa-icon "plus-circle"}} Add another Certificate{{/bs-button}}
+              {{/if}}
+            {{/if}}
+          </div>
+        </div>
+
         {{form.element controlType="textarea" label="Domains" property="domains" helpText='List of (sub-)domains used for DOI registration, or use * to allow all domains' useIcons=false required=false}}
         {{form.element controlType="checkbox" label="Account is active" property="isActive" helpText='This account can register and update DOIs'}}
 

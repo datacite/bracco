@@ -1,6 +1,7 @@
 import { computed } from '@ember/object';
 import DS from 'ember-data';
 import ENV from 'bracco/config/environment';
+import { array } from 'ember-data-model-fragments/attributes';
 import { validator, buildValidations } from 'ember-cp-validations';
 
 const Validations = buildValidations({
@@ -95,6 +96,7 @@ export default DS.Model.extend(Validations, {
   contactEmail: DS.attr('string'),
   year: DS.attr('number'),
   description: DS.attr('string'),
+  language: array(),
   url: DS.attr('string'),
   clientType: DS.attr('string'),
   software: DS.attr('string'),

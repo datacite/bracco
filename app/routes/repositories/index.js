@@ -38,6 +38,15 @@ export default Route.extend({
     },
     software: {
       refreshModel: true
+    },
+    language: {
+      refreshModel: true
+    },
+    certificate: {
+      refreshModel: true
+    },
+    'repository-type': {
+      refreshModel: true
     }
   }
 });

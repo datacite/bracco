@@ -1,0 +1,18 @@
+{{#if (gt index 0)}}
+  <div class="input-group">
+    <div class="power-select-fragment">
+      {{#form.element controlType="power-select" disabled=disabled value=languageName options=languages as |el|}}
+        {{el.control onChange=(action "selectLanguage") search=(action "searchLanguage") placeholder="Select Language" searchPlaceholder="Type to search..." allowClear=true}}
+      {{/form.element}}
+    </div>
+    <span class="input-group-addon" style="vertical-align:top;padding-top:3px;">
+    {{#bs-button outline=true onClick=(action "deleteLanguage" index)}}{{fa-icon "trash" pull="left" style="margin:0;"}}{{/bs-button}}
+    </span>
+  </div>
+{{else}}
+  <div class="power-select-fragment">
+    {{#form.element controlType="power-select" disabled=disabled value=languageName options=languages as |el|}}
+      {{el.control onChange=(action "selectLanguage") search=(action "searchLanguage") placeholder="Select Language" searchPlaceholder="Type to search..." allowClear=true}}
+    {{/form.element}}
+  </div>
+{{/if}}
