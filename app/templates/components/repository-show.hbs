@@ -80,8 +80,6 @@
           </div>
         {{/if}}
 
-        {{form.element controlType="textarea" label="Domains" property="domains" required=false helpText='List of (sub-)domains used for DOI registration, or use * to allow all domains'}}
-
         {{#if (can "create repository" model.provider)}}
           {{form.element controlType="checkbox" label="Account is active" property="isActive" helpText='This account can register and update DOIs'}}
         {{/if}}
@@ -248,18 +246,6 @@
           {{#if model.software}}
             <h5>Software</h5>
             {{model.software}}
-          {{/if}}
-
-          {{#if model.domainList}}
-            <h5>
-              {{pluralize model.domainList.length "Domain" without-count=true}}
-              <span>{{fa-icon "question-circle-o"}}
-                {{#bs-tooltip placement="top" viewportPadding=10}}URLs for DOIs must use {{#if (gt model.domainList.length 1)}}one of these (sub-)domains{{else}}this (sub-)domain{{/if}}.{{/bs-tooltip}}
-              </span>
-            </h5>
-            {{#each model.domainList as |domain|}}
-              {{domain}}<br/>
-            {{/each}}
           {{/if}}
 
           {{#if (not model.hasPassword)}}
