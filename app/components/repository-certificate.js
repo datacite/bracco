@@ -2,10 +2,12 @@ import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 
 const certificateList = [
+  'CLARIN',
   'CoreTrustSeal',
+  'DINI',
   'DSA',
-  'WDS',
-  'DINI'
+  'RatSWD',
+  'WDS'
 ]
 
 export default Component.extend({
