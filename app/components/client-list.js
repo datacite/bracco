@@ -95,10 +95,10 @@ export default Component.extend({
       this.set('new', true);
     },
     searchRepository(query) {
-      this.set('repositories', this.store.query('repository', { 'query': query, 'page[size]': 25 }));
+      this.set('re3data', this.store.query('re3data', { 'query': query, 'page[size]': 25 }));
     },
-    selectRepository(repository) {
-      this.selectRepository(repository);
+    selectRepository(re3data) {
+      this.selectRepository(re3data);
     },
     submit(client) {
       let self = this;

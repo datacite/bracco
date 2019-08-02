@@ -4,8 +4,8 @@
       <div class="col-md-9 col-md-offset-3"><h3 class="edit">Update {{if (eq currentUser.uid model.id) 'Account' 'Repository'}}</h3></div>
 
       {{#bs-form formLayout="horizontal" horizontalLabelGridClass="col-md-3" model=model onSubmit=(action "submit" model) submitOnEnter=true as |form|}}
-        {{form.element controlType="text" label="Repository ID" property="symbol" helpText='The Repository ID is the unique identifier for each repository in DataCite and can\'t be changed.' disabled=true}}
         {{form.element controlType="hidden" property="confirmSymbol" required=false}}
+        {{form.element controlType="text" label="Repository ID" property="symbol" helpText='The Repository ID is the unique identifier for each repository in DataCite and can\'t be changed.' disabled=true}}
         {{#form.element controlType="power-select" label="Type" property="clientType" options=clientTypes destination=clientType as |el|}}
           {{#el.control onChange=(action "selectClientType") search=(action "searchClientType") placeholder="Select Client Type" searchPlaceholder="Type to search..." as |item|}}
             {{titleize item}}
@@ -13,7 +13,7 @@
         {{/form.element}}
 
         {{#if (eq model.clientType "repository")}}
-          {{#form.element controlType="power-select" property="repository" label="re3data Record (optional)" optionLabelPath="name" options=repositories destination=repository helpText='re3data is a registry of research data repositories.' as |el|}}
+          {{#form.element controlType="power-select" property="repository" label="re3data Record (optional)" optionLabelPath="name" options=repositories destination=re3data helpText='re3data is a registry of research data repositories.' as |el|}}
             {{#el.control onChange=(action "selectRepository") search=(action "searchRepository") searchField="repositoryName" searchPlaceholder="Type to search..." allowClear=true as |item|}}
               {{item.repositoryName}}
             {{/el.control}}

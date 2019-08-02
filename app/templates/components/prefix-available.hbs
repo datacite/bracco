@@ -3,7 +3,11 @@
     <div class="panel-body">
       <div class="btn-toolbar">
         <div class="btn-group btn-group-sm">
-          {{#link-to "clients.show.prefixes.new" model.client.id class="btn btn-warning" id="assign-prefix"}}{{fa-icon "link"}}Assign Prefix{{/link-to}}
+          {{#if model.client}}
+            {{#link-to link model.client.id class="btn btn-warning" id="assign-prefix"}}{{fa-icon "link"}}Assign Prefix{{/link-to}}
+          {{else}}
+            {{#link-to link model.repository.id class="btn btn-warning" id="assign-prefix"}}{{fa-icon "link"}}Assign Prefix{{/link-to}}
+          {{/if}}
         </div>
       </div>
     </div>

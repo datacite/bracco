@@ -7,10 +7,6 @@ const Validations = buildValidations({
 });
 
 export default DS.Model.extend(Validations, {
-  client: DS.belongsTo('client', {
-    async: true
-  }),
-
   re3dataId: DS.attr('string'),
   repositoryName: DS.attr('string'),
   additionalNames: DS.attr(),

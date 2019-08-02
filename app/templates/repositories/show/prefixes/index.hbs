@@ -1,5 +1,5 @@
 <div class='col-md-3'>
-  {{prefix-available model=model}}
+  {{prefix-available model=model link="repositories.show.prefixes.new"}}
 
   {{#if model.prefixes.meta.years}}
     <div class="panel facets add">
@@ -39,7 +39,7 @@
 
           {{#if features.useElasticsearch}}
             <h5>DOIs</h5>
-            {{#link-to "repositories.show.dois" client-prefix.client.id (query-params prefix=client-prefix.prefix.id)}}DOIs for prefix {{client-prefix.prefix.id}}{{/link-to}}
+            {{#link-to "repositories.show.dois" client-prefix.repository.id (query-params prefix=client-prefix.prefix.id)}}DOIs for prefix {{client-prefix.prefix.id}}{{/link-to}}
           {{/if}}
 
           <h5>Added</h5>

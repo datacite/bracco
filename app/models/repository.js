@@ -127,7 +127,7 @@ export default DS.Model.extend(Validations, {
   }),
   badgeUrl: computed('re3data', function() {
     if (this.re3data) {
-      return ENV.RE3DATA_API_URL + '/re3data/' + this.re3data.substr(this.re3data.indexOf('1')) + '/badge';
+      return ENV.API_URL + '/re3data/' + this.re3data.substr(this.re3data.indexOf('1')) + '/badge';
     } else {
       return null;
     }

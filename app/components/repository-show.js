@@ -157,10 +157,10 @@ export default Component.extend({
       });
     },
     searchRepository(query) {
-      this.set('repositories', this.store.query('repository', { 'query': query, 'page[size]': 25 }));
+      this.set('repositories', this.store.query('re3data', { 'query': query, 'page[size]': 25 }));
     },
-    selectRepository(repository) {
-      this.selectRepository(repository);
+    selectRepository(re3data) {
+      this.selectRepository(re3data);
     },
     addLanguage() {
       this.model.get('language').pushObject(null);

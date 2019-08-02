@@ -7,9 +7,9 @@ export default Controller.extend({
   actions: {
     submit() {
       let self = this;
-      var clientPrefix = this.store.createRecord('clientPrefix', { client: this.get('model.client'), prefix: this.get('model.prefix.prefix') });
+      var clientPrefix = this.store.createRecord('clientPrefix', { client: this.get('model.repository'), prefix: this.get('model.prefix.prefix') });
       clientPrefix.save().then(function(clientPrefix) {
-        self.transitionToRoute('clients.show.prefixes', clientPrefix.get('client'));
+        self.transitionToRoute('repositories.show.prefixes', clientPrefix.get('client'));
       }).catch(function(reason){
         if (console.debug) {
           console.debug(reason);
@@ -19,7 +19,7 @@ export default Controller.extend({
       });
     },
     cancel() {
-      this.transitionToRoute('clients.show.prefixes', this.get('model.client'));
+      this.transitionToRoute('repositories.show.prefixes', this.get('model.repository'));
     }
   }
 });
