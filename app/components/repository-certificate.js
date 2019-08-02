@@ -4,6 +4,7 @@ import { inject as service } from '@ember/service';
 const certificateList = [
   'CLARIN',
   'CoreTrustSeal',
+  'DIN 31644',
   'DINI',
   'DSA',
   'RatSWD',
