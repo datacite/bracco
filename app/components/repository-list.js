@@ -2,6 +2,7 @@ import { inject as service } from '@ember/service';
 import Component from '@ember/component';
 import { isBlank } from '@ember/utils';
 // import { computed } from '@ember/object';
+import langs from 'langs';
 
 const clientTypeList = [
   'repository',
@@ -46,18 +47,31 @@ export default Component.extend({
   selectRepository(re3data) {
     if (re3data) {
       let self = this;
-      this.store.findRecord('re3data', re3data.id).then(function(repo) {
-        self.set('re3data', repo.get('id'))
+      this.store.findRecord('re3data', re3data.id).then(function (repo) {
+        self.set('re3data', repo)
+        self.get('repository').set('clientType', 'repository');
         self.get('repository').set('re3data', 'https://doi.org/' + repo.get('id'));
         self.get('repository').set('name', repo.get('repositoryName'));
         self.get('repository').set('description', repo.get('description'));
+        self.get('repository').set('alternateName', repo.get('additionalNames').get('firstObject').text);
         self.get('repository').set('url', repo.get('repositoryUrl'));
         if (repo.get('software').length > 0) {
           let software = repo.get('software')[0].name;
           if (software === "DataVerse") {
             software = "Dataverse";
-          } 
+          }
           self.get('repository').set('software', software.capitalize());
+        }
+        if (repo.get('repositoryLanguages').length > 0) {
+          self.get('repository').set('language', repo.get('repositoryLanguages').map(function(l) {
+            return langs.where("2", l.text)["1"];
+          }));
+        }
+        if (repo.get('types').length > 0) {
+          self.get('repository').set('repositoryType', repo.get('types').mapBy('text'));
+        }
+        if (repo.get('certificates').length > 0) {
+          self.get('repository').set('certificate', repo.get('certificates').mapBy('text'));
         }
       });
     } else {
@@ -92,7 +106,7 @@ export default Component.extend({
   actions: {
     new(model) {
       let provider = this.store.peekRecord('provider', model.repositories.get('query.provider-id'));
-      this.set('repository', this.store.createRecord('repository', { provider: provider, symbol: provider.id.toUpperCase() + '.', language: [], repositoryType: [], certificate: [] }));
+      this.set('repository', this.store.createRecord('repository', { provider: provider, symbol: provider.id.toUpperCase() + '.', clientType: 'repository', language: [], repositoryType: [], certificate: [] }));
       this.repository.get('language').pushObject('');
       this.repository.get('repositoryType').pushObject('');
       this.repository.get('certificate').pushObject('');

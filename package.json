@@ -1,6 +1,6 @@
 {
   "name": "bracco",
-  "version": "2.5.0",
+  "version": "2.5.1",
   "private": true,
   "description": "DOI Fabrica",
   "repository": {
@@ -67,6 +67,7 @@
     "fs-extra": "^4.0.2",
     "is-electron": "^2.1.0",
     "iso-639-1": "^2.0.3",
+    "langs": "^2.0.0",
     "junk": "^2.1.0",
     "mime": "^2.4.0",
     "node-gyp": "^3.6.2"

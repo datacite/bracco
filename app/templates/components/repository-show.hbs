@@ -13,9 +13,9 @@
         {{/form.element}}
 
         {{#if (eq model.clientType "repository")}}
-          {{#form.element controlType="power-select" property="repository" label="re3data Record (optional)" optionLabelPath="name" options=repositories destination=re3data helpText='re3data is a registry of research data repositories.' as |el|}}
+          {{#form.element controlType="power-select" property="re3data" label="re3data Record (optional)" optionLabelPath="re3data" options=repositories destination=re3data helpText='re3data is a registry of research data repositories.' as |el|}}
             {{#el.control onChange=(action "selectRepository") search=(action "searchRepository") searchField="repositoryName" searchPlaceholder="Type to search..." allowClear=true as |item|}}
-              {{item.repositoryName}}
+              {{if item.name item.name model.re3data}}
             {{/el.control}}
           {{/form.element}}
         {{/if}}
