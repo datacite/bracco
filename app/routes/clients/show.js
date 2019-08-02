@@ -8,7 +8,7 @@ export default Route.extend({
 
   model(params) {
     let self = this;
-    return this.store.findRecord('client', params.client_id, { include: 'provider,repository' }).then(function(client) {
+    return this.store.findRecord('client', params.client_id, { include: 'provider' }).then(function(client) {
       return client;
     }).catch(function(reason){
       if (console.debug) {
