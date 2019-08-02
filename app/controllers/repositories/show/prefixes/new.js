@@ -19,7 +19,7 @@ export default Controller.extend({
       });
     },
     cancel() {
-      this.transitionToRoute('repositorirs.show.prefixes', this.get('model.repository'));
+      this.transitionToRoute('repositories.show.prefixes', this.get('model.repository'));
     }
   }
 });
