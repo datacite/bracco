@@ -6,7 +6,7 @@ export default Route.extend({
 
   model(params) {
     let self = this;
-    return this.store.query('client-prefix', { 'client-id': params.client_id, 'prefix-id': params.prefix_id }).then(function(clientPrefixes) {
+    return this.store.query('client-prefix', { 'client-id': params.repository_id, 'prefix-id': params.prefix_id }).then(function(clientPrefixes) {
       return clientPrefixes.get("firstObject");
     }).catch(function(reason){
       if (console.debug) {
