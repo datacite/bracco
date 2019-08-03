@@ -80,6 +80,8 @@ export default Component.extend({
           let software = repo.get('software')[0].name;
           if (software === "DataVerse") {
             software = "Dataverse";
+          } else if (software === "unknown") {
+            software = "Other";
           }
           self.get('repository').set('software', software.capitalize());
         }

@@ -45,6 +45,12 @@ export default Route.extend({
     certificate: {
       refreshModel: true
     },
+    'provider-id': {
+      refreshModel: true
+    },
+    'client-type': {
+      refreshModel: true
+    },
     'repository-type': {
       refreshModel: true
     }

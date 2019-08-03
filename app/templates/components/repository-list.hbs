@@ -134,6 +134,66 @@
         </div>
       </div>
     {{/if}}
+    {{#if (and (eq link 'repositories') (or model.repositories.meta.providers model.repositories.query.provider-id))}}
+      <div class="panel facets">
+        <div class="panel-body">
+          <h4>Provider</h4>
+          <ul>
+            {{#if model.repositories.meta.providers}}
+              {{#each model.repositories.meta.providers as |provider|}}
+                <li>
+                  {{#if model.repositories.query.provider-id}}
+                    {{#link-to link (query-params provider-id="")}}{{fa-icon "check-square-o"}}{{/link-to}}
+                  {{else}}
+                    {{#link-to link (query-params provider-id=provider.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                  {{/if}}
+                  <div class="facet-title">{{provider.title}}</div>
+                  <span class="number pull-right">{{provider.count}}</span>
+                  <div class="clearfix"/>
+                </li>
+              {{/each}}
+            {{else}}
+              <li>
+                {{#link-to link (query-params provider="")}}{{fa-icon "check-square-o"}}{{/link-to}}
+                <div class="facet-title">{{titleize model.repositories.query.provider}}</div>
+                <span class="number pull-right">0</span>
+                <div class="clearfix"/>
+              </li>
+            {{/if}}
+          </ul>
+        </div>
+      </div>
+    {{/if}}
+    {{#if (or model.repositories.meta.clientTypes model.repositories.query.client-type)}}
+      <div class="panel facets">
+        <div class="panel-body">
+          <h4>Type</h4>
+          <ul>
+            {{#if model.repositories.meta.clientTypes}}
+              {{#each model.repositories.meta.clientTypes as |clientType|}}
+                <li>
+                  {{#if model.repositories.query.client-type}}
+                    {{#link-to link (query-params client-type="")}}{{fa-icon "check-square-o"}}{{/link-to}}
+                  {{else}}
+                    {{#link-to link (query-params client-type=clientType.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                  {{/if}}
+                  <div class="facet-title">{{clientType.title}}</div>
+                  <span class="number pull-right">{{clientType.count}}</span>
+                  <div class="clearfix"/>
+                </li>
+              {{/each}}
+            {{else}}
+              <li>
+                {{#link-to link (query-params client-type="")}}{{fa-icon "check-square-o"}}{{/link-to}}
+                <div class="facet-title">{{titleize model.repositories.query.client-type}}</div>
+                <span class="number pull-right">0</span>
+                <div class="clearfix"/>
+              </li>
+            {{/if}}
+          </ul>
+        </div>
+      </div>
+    {{/if}}
     {{#if (or model.repositories.meta.repositoryTypes model.repositories.query.repository-type)}}
       <div class="panel facets">
         <div class="panel-body">
@@ -234,8 +294,14 @@
         <div class="panel panel-transparent">
           <div class="panel-body">
             <h3 class="work">
-              {{#link-to "repositories.show" client.id}}{{client.name}}{{/link-to}}
-              {{#if client.alternateName}}<div class="subtitle">{{client.alternateName}}</div>{{/if}}
+              {{#link-to "repositories.show" client.id}}
+                {{client.name}}
+                {{#if client.alternateName}}<div class="subtitle">{{client.alternateName}}</div>{{/if}}
+              {{/link-to}}
+
+              {{#if (eq client.clientType 'periodical')}}
+                <span class="label label-primary-inv">Periodical</span>
+              {{/if}}
             </h3>
 
             <h5 class="repository-id">

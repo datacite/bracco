@@ -172,6 +172,10 @@
             {{flash-message flash=flash}}
           {{/each}}
 
+          {{#if (eq model.clientType 'periodical')}}
+            <span class="label label-primary-inv label-sm">Periodical</span>
+          {{/if}}
+
           <h5>
             Repository ID
             <span>
