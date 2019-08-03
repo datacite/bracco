@@ -235,6 +235,7 @@
           <div class="panel-body">
             <h3 class="work">
               {{#link-to "repositories.show" client.id}}{{client.name}}{{/link-to}}
+              {{#if client.alternateName}}<div class="subtitle">{{client.alternateName}}</div>{{/if}}
             </h3>
 
             <h5 class="repository-id">
@@ -272,17 +273,17 @@
               <a href="{{client.url}}">{{client.url}}</a>
             {{/if}}
 
-            {{#if client.certificate}}
-              <h5>Certificate<div class="info-icon icons-certificate_active"/></h5>
-              {{#each client.certificate as |cert|}}
-                {{cert}}{{#unless (eq cert client.certificate.lastObject)}}, {{/unless}}
-              {{/each}}
-            {{/if}}
-
             {{#if client.repositoryType}}
               <h5>Repository Type</h5>
               {{#each client.repositoryType as |type|}}
                 {{titleize type}}{{#unless (eq type client.repositoryType.lastObject)}}, {{/unless}}
+              {{/each}}
+            {{/if}}
+
+            {{#if client.certificate}}
+              <h5>Certificate <div class="info-icon icons-certificate_active"/></h5>
+              {{#each client.certificate as |cert|}}
+                {{cert}}{{#unless (eq cert client.certificate.lastObject)}}, {{/unless}}
               {{/each}}
             {{/if}}
           </div>

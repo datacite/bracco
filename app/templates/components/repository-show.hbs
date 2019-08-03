@@ -237,7 +237,7 @@
           {{/if}}
 
           {{#if model.certificate}}
-            <h5>Certificate<div class="info-icon icons-certificate_active"/></h5>
+            <h5>Certificate <div class="info-icon icons-certificate_active"/></h5>
             {{#each model.certificate as |cert|}}
               {{cert}}{{#unless (eq cert model.certificate.lastObject)}}, {{/unless}}
             {{/each}}

@@ -156,6 +156,7 @@
           <div class="panel-body">
             <h3 class="work">
               {{#link-to "clients.show" client.id}}{{client.name}}{{/link-to}}
+              {{#if repository.alternateName}}<div class="subtitle">{{repository.alternateName}}</div>{{/if}}
             </h3>
 
             <h5 class="client-id">
