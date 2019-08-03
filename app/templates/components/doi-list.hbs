@@ -205,6 +205,36 @@
       </div>
     </div>
   {{/if}}
+  {{#if (or model.meta.certificates model.query.certificate)}}
+    <div class="panel facets">
+      <div class="panel-body">
+        <h4>Repository Certificate</h4>
+        <ul>
+          {{#if model.meta.certificates}}
+            {{#each model.meta.certificates as |certificate|}}
+              <li>
+                {{#if model.query.certificate}}
+                  {{#link-to link (query-params certificate="")}}{{fa-icon "check-square-o"}}{{/link-to}}
+                {{else}}
+                  {{#link-to link (query-params certificate=certificate.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                {{/if}}
+                <div class="facet-title">{{certificate.title}}</div>
+                <span class="number pull-right">{{certificate.count}}</span>
+                <div class="clearfix"/>
+              </li>
+            {{/each}}
+          {{else}}
+            <li>
+              {{#link-to link (query-params certificate="")}}{{fa-icon "check-square-o"}}{{/link-to}}
+              <div class="facet-title">{{titleize model.query.certificate}}</div>
+              <span class="number pull-right">0</span>
+              <div class="clearfix"/>
+            </li>
+          {{/if}}
+        </ul>
+      </div>
+    </div>
+  {{/if}}
   {{#if (or model.meta.schemaVersions model.query.schema-version)}}
     <div class="panel facets">
       <div class="panel-body">
