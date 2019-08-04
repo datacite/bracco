@@ -228,11 +228,6 @@
             {{/each}}
           {{/if}}
 
-          {{#if model.clientType}}
-            <h5>Type</h5>
-            {{titleize model.clientType}}
-          {{/if}}
-
           {{#if model.repositoryType}}
             <h5>Repository Type</h5>
             {{#each model.repositoryType as |type|}}

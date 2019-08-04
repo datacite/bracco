@@ -96,6 +96,7 @@ export default DS.Model.extend(Validations, {
   description: DS.attr('string'),
   language: array(),
   certificate: array(),
+  issn: array(),
   url: DS.attr('string'),
   clientType: DS.attr('string'),
   repositoryType: array(),

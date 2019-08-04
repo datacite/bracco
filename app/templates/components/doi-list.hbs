@@ -1,5 +1,5 @@
 <div class='col-md-3'>
-  {{#if (and (eq link "clients.show.dois") (or (can "create doi" model) (can "upload doi" model) (can "transfer doi" model)))}}
+  {{#if (and (or (eq link "clients.show.dois") (eq link "repositories.show.dois")) (or (can "create doi" model) (can "upload doi" model) (can "transfer doi" model)))}}
     <div class="panel facets">
       <div class="panel-body">
         <div class="btn-toolbar">
