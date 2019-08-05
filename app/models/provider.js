@@ -100,11 +100,11 @@ const Validations = buildValidations({
 });
 
 export default DS.Model.extend(Validations, {
-  consortiumLead: DS.belongsTo('provider', {
+  consortium: DS.belongsTo('provider', {
     inverse: 'consortiumOrganizations', async: false
   }),
   consortiumOrganizations: DS.hasMany('provider', {
-    inverse: 'consortiumLead', async: false
+    inverse: 'consortium', async: false
   }),
   meta: DS.attr(),
 

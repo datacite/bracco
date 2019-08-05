@@ -14,7 +14,7 @@ const organizationTypeList = [
 ]
 const memberTypeList = [
   'provider',
-  'consortium_lead',
+  'consortium',
   'consortium_organization',
   'contractual_provider',
   'for_profit_provider',
@@ -49,7 +49,7 @@ export default Component.extend({
 
   organizations: [],
   organizationsNames: [],
-  consortiumLeads: [],
+  consortia: [],
 
   reset() {
     this.set('provider', null);
@@ -85,11 +85,11 @@ export default Component.extend({
     this.provider.set('memberType', memberType);
     this.set('memberTypes', memberTypeList);
   },
-  searchConsortiumLead(query) {
-    this.set('consortiumLeads', this.store.query('provider', { 'query': query, 'member-type': 'consortium_lead', sort: 'name', 'page[size]': 100 }));
+  searchConsortium(query) {
+    this.set('consortia', this.store.query('provider', { 'query': query, 'member-type': 'consortium', sort: 'name', 'page[size]': 100 }));
   },
-  selectConsortiumLead(consortiumLead) {
-    this.provider.set('consortiumLead', consortiumLead)
+  selectConsortium(consortium) {
+    this.provider.set('consortium', consortium)
   },
   searchFocusArea(query) {
     var focusAreas = focusAreaList.filter(function(focusArea) {
@@ -109,8 +109,8 @@ export default Component.extend({
 
   actions: {
     new(model) {
-      let consortiumLead = this.store.peekRecord('provider', model.organizations.get('query.consortium-lead-id'));
-      this.set('provider', this.store.createRecord('provider', { consortiumLead: consortiumLead, memberType: "consortium_organization", billingContact: {}, technicalContact: {}, isActive: true }));
+      let consortium = this.store.peekRecord('provider', model.organizations.get('query.consortium-id'));
+      this.set('provider', this.store.createRecord('provider', { consortium: consortium, memberType: "consortium_organization", billingContact: {}, technicalContact: {}, isActive: true }));
       this.set('countries', countryList);
       this.set('new', true);
     },
@@ -150,11 +150,11 @@ export default Component.extend({
     selectMemberType(memberType) {
       this.selectMemberType(memberType);
     },
-    searchConsortiumLead(query) {
-      this.searchConsortiumLead(query);
+    searchConsortium(query) {
+      this.searchConsortium(query);
     },
-    selectConsortiumLead(provider) {
-      this.selectConsortiumLead(provider);
+    selectConsortium(provider) {
+      this.selectConsortium(provider);
     },
     searchFocusArea(query) {
       this.searchFocusArea(query);

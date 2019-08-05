@@ -14,7 +14,7 @@ const organizationTypeList = [
 ]
 const memberTypeList = [
   'provider',
-  'consortium_lead',
+  'consortium',
   'consortium_organization',
   'contractual_provider',
   'for_profit_provider',
@@ -84,11 +84,11 @@ export default Component.extend({
     this.provider.set('memberType', memberType);
     this.set('memberTypes', memberTypeList);
   },
-  searchConsortiumLead(query) {
-    this.set('consortiumLeads', this.store.query('provider', { 'query': query, 'member-type': 'consortium_lead', sort: 'name', 'page[size]': 100 }));
+  searchConsortium(query) {
+    this.set('consortia', this.store.query('provider', { 'query': query, 'member-type': 'consortium', sort: 'name', 'page[size]': 100 }));
   },
-  selectConsortiumLead(consortiumLead) {
-    this.provider.set('consortiumLead', consortiumLead)
+  selectConsortium(consortium) {
+    this.provider.set('consortium', consortium)
   },
   searchFocusArea(query) {
     var focusAreas = focusAreaList.filter(function(focusArea) {
@@ -158,11 +158,11 @@ export default Component.extend({
     selectMemberType(memberType) {
       this.selectMemberType(memberType);
     },
-    searchConsortiumLead(query) {
-      this.searchConsortiumLead(query);
+    searchConsortium(query) {
+      this.searchConsortium(query);
     },
-    selectConsortiumLead(provider) {
-      this.selectConsortiumLead(provider);
+    selectConsortium(provider) {
+      this.selectConsortium(provider);
     },
     searchFocusArea(query) {
       this.searchFocusArea(query);
