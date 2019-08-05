@@ -1,0 +1,21 @@
+<div class="form-group">
+  <label class="control-label col-md-3">ISSN (optional)</label>
+  <div class="col-md-9">
+    <div>
+      <label for="issnl" class="subtitle">ISSN-L</label>
+      {{input type="text" class="form-control" id="repository-issn-issnl" value=fragment.issnl required=false}}
+
+      {{#if (v-get fragment 'issnl' 'errors')}}
+        <div class="help-block help-block-fragment issnl-field">{{v-get fragment 'issnl' 'errorMessage'}}</div>
+      {{/if}}
+    </div>
+    <div>
+      <label for="issnl" class="subtitle">ISSN (electronic)</label>
+      {{input type="text" class="form-control" id="repository-issn-electronic" value=fragment.electronic required=false}}
+    </div>
+    <div>
+      <label for="issnl" class="subtitle">ISSN (print)</label>
+      {{input type="text" class="form-control" id="repository-issn-print" value=fragment.print required=false}}
+    </div>
+  </div>
+</div>

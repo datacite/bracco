@@ -18,6 +18,8 @@
               {{if item.name item.name model.re3data}}
             {{/el.control}}
           {{/form.element}}
+        {{else}}
+          {{repository-issn model=model fragment=model.issn form=form}}
         {{/if}}
 
         {{form.element controlType="text" label="Repository Name" property="name" required=false}}
@@ -194,6 +196,19 @@
               </span>
             </h5>
             <a href="{{model.re3data}}">{{model.re3data}}</a>
+          {{/if}}
+
+          {{#if (or model.issn.issnl model.issn.electronic model.issn.print)}}
+            <h5>ISSN</h5>
+            {{#if model.issn.issnl}}
+              {{model.issn.issnl}}<br/>
+            {{/if}}
+            {{#if model.issn.electronic}}
+              {{model.issn.electronic}}<br/>
+            {{/if}}
+            {{#if model.issn.print}}
+              {{model.issn.print}}<br/>
+            {{/if}}
           {{/if}}
 
           {{#if model.alternateName}}

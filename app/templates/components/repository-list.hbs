@@ -16,7 +16,10 @@
               {{if item.name item.name repository.re3data}}
             {{/el.control}}
           {{/form.element}}
+        {{else}}
+          {{repository-issn model=model fragment=model.issn form=form}}
         {{/if}}
+
         {{form.element controlType="text" label="Repository Name" property="name" useIcons=false required=false}}
         {{form.element controlType="text" label="Contact Name" property="contactName" helpText='Please enter the name of a person that can be contacted for technical or administrative issues.' required=false}}
         {{form.element controlType="email" label="Contact Email" property="contactEmail" helpText='Please enter an email address that can be contacted for technical or administrative issues.' useIcons=false required=false}}

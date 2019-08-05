@@ -3,6 +3,7 @@ import DS from 'ember-data';
 import ENV from 'bracco/config/environment';
 import { array } from 'ember-data-model-fragments/attributes';
 import { validator, buildValidations } from 'ember-cp-validations';
+import { fragment } from 'ember-data-model-fragments/attributes';
 
 const Validations = buildValidations({
   symbol: [
@@ -96,7 +97,7 @@ export default DS.Model.extend(Validations, {
   description: DS.attr('string'),
   language: array(),
   certificate: array(),
-  issn: array(),
+  issn: fragment('issn'),
   url: DS.attr('string'),
   clientType: DS.attr('string'),
   repositoryType: array(),
