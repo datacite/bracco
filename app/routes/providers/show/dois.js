@@ -7,12 +7,21 @@ export default Route.extend({
   can: service(),
   
   model(params) {
+    let providerId = null;
+    let consortiumId = null;
+    let model = this.modelFor('providers/show');
+    if (model.memberType === "consortium") {
+      consortiumId = model.get('id');
+    } else {
+      providerId = model.get('id');
+    }
     params = assign(params, { 
       page: {
         number: params.page,
         size: params.size 
       },
-      'provider-id': this.modelFor('providers/show').get('id')
+      'provider-id': providerId,
+      'consortium-id': consortiumId 
     });
 
     return hash({

@@ -11,9 +11,9 @@
     {{#if (not-eq model.memberType "member_only")}}
       {{bar-chart 
         data=model.clientCount 
-        label="Client" 
+        label="Repository" 
         model=model 
-        link="providers.show.clients"
+        link="providers.show.repositories"
       }}
       {{bar-chart 
         data=model.doiCount 
