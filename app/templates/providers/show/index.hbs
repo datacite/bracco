@@ -1,5 +1,13 @@
 <div class="content">
   <div class="row content">
+    {{#if (eq model.memberType "consortium")}}
+      {{bar-chart 
+        data=model.providerCount 
+        label="Organization" 
+        model=model 
+        link="providers.show.organizations"
+      }}
+    {{/if}}
     {{#if (not-eq model.memberType "member_only")}}
       {{bar-chart 
         data=model.clientCount 
