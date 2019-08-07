@@ -342,6 +342,36 @@
           </div>
         </div>
       {{/if}}
+      {{#if (or model.meta.nonProfitStatuses model.query.non-profit-status)}}
+        <div class="panel facets">
+          <div class="panel-body">
+            <h4>Non-Profit Status</h4>
+            <ul>
+              {{#if model.meta.nonProfitStatuses}}
+                {{#each model.meta.nonProfitStatuses as |nonProfitStatus|}}
+                  <li>
+                    {{#if model.query.member-type}}
+                      {{#link-to "providers" (query-params non-profit-status='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+                    {{else}}
+                      {{#link-to "providers" (query-params non-profit-status=nonProfitStatus.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                    {{/if}}
+                    <div class="facet-title">{{nonProfitStatus.title}}</div>
+                    <span class="number pull-right">{{nonProfitStatus.count}}</span>
+                    <div class="clearfix"/>
+                  </li>
+                {{/each}}
+              {{else}}
+                <li>
+                  {{#link-to "providers" (query-params non-profit-status='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+                  <div class="facet-title">{{model.query.non-profit-status}}</div>
+                  <span class="number pull-right">0</span>
+                  <div class="clearfix"/>
+                </li>
+              {{/if}}
+            </ul>
+          </div>
+        </div>
+      {{/if}}
       {{#if (or model.meta.organizationTypes model.query.organization-type)}}
         <div class="panel facets">
           <div class="panel-body">
