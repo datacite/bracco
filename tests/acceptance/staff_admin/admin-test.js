@@ -54,7 +54,7 @@ module('Acceptance | staff_admin | admin', function(hooks) {
 
     assert.equal(currentURL(), '/providers');
     assert.dom('h2.work').hasText('DataCite');
-    assert.dom('a.nav-link.active').hasText('Providers');
+    assert.dom('a.nav-link.active').hasText('Members');
   });
 
   test('visiting repositories', async function(assert) {
