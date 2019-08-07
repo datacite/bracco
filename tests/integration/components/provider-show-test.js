@@ -18,6 +18,6 @@ module('Integration | Component | provider-show', function(hooks) {
       {{/provider-show}}
     `);
 
-    assert.dom('*').hasText('Organization Information Member ID Organization Name Australian Data Archive System Email Service Contact Information Password has not been set Billing Information has not been provided');
+    assert.dom('*').hasText('Organization Information Member ID Member Type Organization Name Australian Data Archive System Email Service Contact Information Password has not been set Billing Information has not been provided');
   });
 });
