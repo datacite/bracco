@@ -345,6 +345,9 @@
             <h5>Member Type</h5>
             {{titleize (humanize model.memberType)}}
 
+            <h5>Non-Profit Status</h5>
+            {{titleize model.nonProfitStatus}}
+
             <h5>Organization Name</h5>
             {{model.name}}
           {{/if}}
@@ -442,7 +445,7 @@
                 {{model.billingInformation.organization}}
               {{/if}}
               {{#if model.billingInformation.department}}
-                <h5>Billing I caDepartment</h5>
+                <h5>Billing Department</h5>
                 {{model.billingInformation.department}}
               {{/if}}
 

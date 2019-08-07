@@ -458,10 +458,11 @@
               <a href="{{provider.rorId}}">{{provider.rorId}}</a>
             {{/if}}
 
-            {{#if (can "create provider")}}
-              <h5>Member Type</h5>
-              {{titleize (humanize (underscore provider.memberType))}}
-            {{/if}}
+            <h5>Member Type</h5>
+            {{titleize (humanize (underscore provider.memberType))}}
+
+            <h5>Non-Profit Status</h5>
+            {{titleize provider.nonProfitStatus}}
 
             {{#if provider.organizationType}}
               <h5>Organization Type</h5>
