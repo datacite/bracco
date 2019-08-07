@@ -48,7 +48,6 @@ export default Component.extend({
   change: false,
   delete: false,
   provider: null,
-  confirmId: null,
   countryList,
   countries: null,
   organizationTypeList,
@@ -251,19 +250,13 @@ export default Component.extend({
         }
       });
     },
-    destroy(provider) {
+    destroy() {
       let self = this;
-      if (this.confirmId === provider.get('symbol')) {
+      this.store.findRecord("provider", this.provider.get('id'), { backgroundReload: false }).then(function (provider) {
         provider.destroyRecord().then(function () {
           self.router.transitionTo('/providers');
-        }).catch(function(reason){
-          if (console.debug) {
-            console.debug(reason);
-          } else {
-            console.log(reason);
-          }
         });
-      }
+      });
     },
     cancel() {
       this.provider.rollbackAttributes();

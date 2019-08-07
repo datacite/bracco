@@ -75,14 +75,15 @@
           </div>
         {{else}}
           {{#bs-form formLayout="vertical" model=model onSubmit=(action "destroy" model) submitOnEnter=true as |form|}}
-            {{#form.group validation=(if (v-get model 'isInvalid') "error" "success")}}
-              {{form.element controlType="text" label='Are you sure you want to delete this client? This action cannot be undone.' property='confirmSymbol' showValidationOn="input" autofocus=true helpText='Please add the Client ID to delete.'}}
+            {{#form.group}}
+              <label class="control-label">Are you sure you want to delete the {{uppercase model.id}} client? This action cannot be undone.</label>
+              {{form.element controlType="text" property='confirmSymbol' showValidationOn="input" autofocus=true helpText='Please add the Client ID to delete.'}}
             {{/form.group}}
 
             <div class="pseudo-footer">
               <div class="btn-toolbar pull-right">
                 <button {{action "cancel" model}} class="btn btn-sm">Cancel</button>
-                <button {{action "destroy" model}} class="btn btn-sm btn-fill">Delete</button>
+                <button {{action "destroy"}} disabled={{v-get model 'confirmSymbol' 'isInvalid'}} class="btn btn-sm btn-fill">Delete</button>
               </div>
               <div class="clearfix"/>
             </div>

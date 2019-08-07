@@ -214,24 +214,14 @@ export default Component.extend({
         console.log(reason);
       });
     },
-    destroy(repository) {
+    destroy() {
       let self = this;
-      this.store.findRecord("repository", repository.id, { backgroundReload: false }).then(function (repository) {
+      this.store.findRecord("repository", this.model.get('id'), { backgroundReload: false }).then(function (repository) {
         repository.destroyRecord().then(function () {
           self.router.transitionTo('providers.show.settings', self.get('provider'));
         });
       });
     },
-    // destroy(client) {
-    //   let self = this;
-    //   if (this.get('confirmId') === client.get('symbol')) {
-    //     client.destroyRecord().then(function () {
-    //       self.get('router').transitionTo('providers.show.settings', self.get('provider'));
-    //     }).catch(function(reason){
-    //       Ember.Logger.assert(false, reason);
-    //     });
-    //   }
-    // },
     cancel() {
       this.model.rollbackAttributes();
       this.reset();
