@@ -38,6 +38,9 @@ export default Route.extend({
     },
     'focus-area': {
       refreshModel: true
+    },
+    'non-profit-status': {
+      refreshModel: true
     }
   },
 

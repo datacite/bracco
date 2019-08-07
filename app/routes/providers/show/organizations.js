@@ -28,10 +28,22 @@ export default Route.extend({
     size: {
       refreshModel: true
     },
+    region: {
+      refreshModel: true
+    },
     year: {
       refreshModel: true
     },
-    software: {
+    'member-type': {
+      refreshModel: true
+    },
+    'organization-type': {
+      refreshModel: true
+    },
+    'focus-area': {
+      refreshModel: true
+    },
+    'non-profit-status': {
       refreshModel: true
     }
   },

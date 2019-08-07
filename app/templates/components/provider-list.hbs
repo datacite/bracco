@@ -350,7 +350,7 @@
               {{#if model.meta.nonProfitStatuses}}
                 {{#each model.meta.nonProfitStatuses as |nonProfitStatus|}}
                   <li>
-                    {{#if model.query.member-type}}
+                    {{#if model.query.non-profit-status}}
                       {{#link-to "providers" (query-params non-profit-status='')}}{{fa-icon "check-square-o"}}{{/link-to}}
                     {{else}}
                       {{#link-to "providers" (query-params non-profit-status=nonProfitStatus.id)}}{{fa-icon "square-o"}}{{/link-to}}
