@@ -69,8 +69,6 @@ const Validations = buildValidations({
     })
   ],
   name: validator('presence', true),
-  domains: validator('presence', true),
-  contactName: validator('presence', true),
   systemEmail: [
     validator('presence', true),
     validator('format', {

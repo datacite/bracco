@@ -12,7 +12,6 @@
           {{/el.control}}
         {{/form.element}}
         {{form.element controlType="text" label="Client Name" property="name" required=false}}
-        {{form.element controlType="text" label="Contact Name" property="contactName" helpText='Please enter the name of a person that can be contacted for technical or administrative issues.' required=false}}
         {{form.element controlType="email" label="Contact Email" property="contactEmail" helpText='Please enter an email address that can be contacted for technical or administrative issues.' required=false}}
         {{form.element controlType="textarea" label="Description (optional)" property="description" rows=10 helpText='Description of the client. Please use markdown for formatting.' required=false}}
         {{form.element controlType="text" label="URL (optional)" property="url" helpText='The homepage of the client.' required=false}}
@@ -156,11 +155,6 @@
                 {{subject-label tag=tag}}
               {{/each}}
             </div>
-          {{/if}}
-
-          {{#if model.contactName}}
-            <h5>Contact Name</h5>
-            {{model.contactName}}
           {{/if}}
 
           {{#if model.contactEmail}}

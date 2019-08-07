@@ -8,7 +8,6 @@ FactoryGuy.define('provider', {
   ands: {
     id: 'ands',
     name: 'Australian National Data Service',
-    contactName: 'Adrian Burton',
-    contactEmail: 'adrian.burton@ands.org.au'
+    systemEmail: 'adrian.burton@ands.org.au'
   }
 });
