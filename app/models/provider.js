@@ -15,7 +15,7 @@ const Validations = buildValidations({
     }),
     validator('format', {
       regex: /^[A-Z]+$/,
-      message: 'The Provider ID can contain only upper case letters'
+      message: 'The Member ID can contain only upper case letters'
     }),
     validator('length', {
       min: 2,
@@ -31,7 +31,7 @@ const Validations = buildValidations({
     }),
     validator('confirmation', {
       on: 'symbol',
-      message: 'Provider ID does not match',
+      message: 'Member ID does not match',
       disabled: computed('model', function() {
         return this.model.get('isNew');
       })

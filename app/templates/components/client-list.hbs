@@ -4,7 +4,7 @@
       <div class="col-md-9 col-md-offset-3"><h3 class="edit">Create Client</h3></div>
 
       {{#bs-form formLayout="horizontal" horizontalLabelGridClass="col-md-3" model=client onSubmit=(action "submit" client model) submitOnEnter=true as |form|}}
-        {{form.element controlType="text" label="Client ID" property="symbol" helpText='The Client ID is the unique identifier for each client and can\'t be changed. The Client ID must start with the Provider ID, followed by a dot. It can then contain only upper case letters, numbers, and at most one hyphen.' useIcons=false required=false}}
+        {{form.element controlType="text" label="Client ID" property="symbol" helpText='The Client ID is the unique identifier for each client and can\'t be changed. The Client ID must start with the Member ID, followed by a dot. It can then contain only upper case letters, numbers, and at most one hyphen.' useIcons=false required=false}}
         {{#form.element controlType="power-select" property="repository" label="re3data Record (optional)" optionLabelPath="name" options=repositories destination=repository helpText='re3data is a registry of research data repositories.' as |el|}}
           {{#el.control onChange=(action "selectRepository") search=(action "searchRepository") searchField="repositoryName" searchPlaceholder="Type to search..." allowClear=true as |item|}}
             {{item.repositoryName}}
@@ -163,7 +163,7 @@
               Client ID
               <span>
                 {{fa-icon "question-circle-o"}}
-                {{#bs-tooltip placement="top" viewportPadding=10}}The Client ID is a unique identifier for each client. It must contain only upper case letters and numbers, and must start with the Provider ID.{{/bs-tooltip}}
+                {{#bs-tooltip placement="top" viewportPadding=10}}The Client ID is a unique identifier for each client. It must contain only upper case letters and numbers, and must start with the Member ID.{{/bs-tooltip}}
               </span>
             </h5>
             {{client.symbol}}

@@ -16,7 +16,7 @@ const Validations = buildValidations({
     }),
     validator('format', {
       regex: /^[A-Z]+\.[A-Z0-9]+(-[A-Z0-9]+)?$/,
-      message: 'The Client ID must start with the Provider ID, followed by a dot. It can then contain only upper case letters, numbers, and at most one hyphen.'
+      message: 'The Client ID must start with the Member ID, followed by a dot. It can then contain only upper case letters, numbers, and at most one hyphen.'
     }),
     validator('length', {
       min: 5,

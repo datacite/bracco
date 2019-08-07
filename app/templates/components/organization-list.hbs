@@ -9,7 +9,7 @@
           <br>
         </div>
         
-        {{form.element controlType="text" label="Provider ID" property="symbol" helpText='The Provider ID is the unique identifier for each provider and can\'t be changed. The Provider ID can contain only upper case letters, and must not be longer than 8 characters.' useIcons=false required=false}}
+        {{form.element controlType="text" label="Member ID" property="symbol" helpText='The Member ID is the unique identifier for each member and can\'t be changed. The Member ID can contain only upper case letters, and must not be longer than 8 characters.' useIcons=false required=false}}
         {{form.element controlType="text" id="member-type" label="Member Type" value="Consortium Organization" readonly=true}}
         {{form.element controlType="text" label="Organization Name" property="name" required=false helpText="The official name of your organization."}}
         {{form.element controlType="text" label="Organization Name to Display" property="displayName" required=false helpText="Name of your organization as you would like it to appear in Fabrica and on DataCite’s website."}}
@@ -290,7 +290,7 @@
               {{/if}}
             </h3>
 
-            <h5>Provider ID</h5>
+            <h5>Member ID</h5>
             {{provider.symbol}}
 
             {{#if provider.rorId}}
