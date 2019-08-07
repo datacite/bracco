@@ -18,11 +18,10 @@ const organizationTypeList = [
 ]
 
 const memberTypeList = [
-  'provider',
-  'consortium',
+  'consortium_member',
   'consortium_organization',
-  'contractual_provider',
-  'for_profit_provider',
+  'contractual_member',
+  'direct_member',
   'member_only',
   'registration_agency'
 ]
