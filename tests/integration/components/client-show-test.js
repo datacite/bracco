@@ -18,6 +18,6 @@ module('Integration | Component | client-show', function(hooks) {
       {{/client-show}}
     `);
 
-    assert.dom('*').hasText('Client ID Contact Name Dr. Steven McEachern Contact Email ada@anu.edu.au Domains ada.edu.au nesstar.ada.edu.au Password has not been set');
+    assert.dom('*').hasText('Client ID Contact Email ada@anu.edu.au Domains ada.edu.au nesstar.ada.edu.au Password has not been set');
   });
 });
