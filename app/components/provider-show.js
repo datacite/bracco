@@ -239,6 +239,7 @@ export default Component.extend({
     },
     submit(provider) {
       let self = this;
+      console.log(provider)
 
       provider.save().then(function () {
         self.reset();
@@ -322,8 +323,13 @@ export default Component.extend({
     },
     selectOrganization(organization) {
       let organizationRecord = this.get('organizations').findBy('name', organization);
-      this.set('organization', organization);
-      this.provider.set('rorId','https://'+organizationRecord.id);
+      if (organizationRecord) {
+        this.set('organization', organization);
+        this.provider.set('rorId', 'https://' + organizationRecord.id);
+      } else {
+        this.set('organization', null);
+        this.provider.set('rorId', null);
+      }
     }
   }
 });

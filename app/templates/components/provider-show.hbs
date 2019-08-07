@@ -227,8 +227,8 @@
         {{/if}}
 
         <div class="col-md-9 col-md-offset-3">
-          <button type="submit" class="btn btn-sm btn-fill">Update {{if (eq currentUser.uid model.id) 'Account' 'Provider'}}</button>
-          <button {{action "cancel" model}} class="btn btn-sm" id="cancel">Cancel</button>
+          <button type="submit" disabled={{v-get model 'isInvalid'}} class="btn btn-sm btn-fill">Update {{if (eq currentUser.uid model.id) 'Account' 'Provider'}}</button>
+          <button {{action "cancel" model}} class="btn btn-sm" id="cancel">Cancel</button> 
         </div>
       {{/bs-form}}
     </div>

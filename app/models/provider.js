@@ -97,6 +97,13 @@ const Validations = buildValidations({
       message: 'Please enter a valid website URL.'
     })
   ],
+  rorId: [
+    validator('format', {
+      type: 'url',
+      allowBlank: true,
+      message: 'Please enter a valid ROR ID expressed as URL.'
+    })
+  ],
   salesforceId: [
     validator('format', {
       regex: /[a-zA-Z0-9]{18}/,
