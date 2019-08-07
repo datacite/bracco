@@ -336,12 +336,12 @@
               <h5>Salesforce ID</h5>
               {{model.salesforceId}}
             {{/if}}
-
-            <h5>Member Type</h5>
-            {{titleize (humanize model.memberType)}}
           {{/if}}
 
-          {{#if (not admin)}}
+           {{#if (not admin)}}
+            <h5>Member Type</h5>
+            {{titleize (humanize model.memberType)}}
+
             <h5>Organization Name</h5>
             {{model.name}}
           {{/if}}
