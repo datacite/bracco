@@ -31,6 +31,11 @@ const focusAreaList = [
   'general'
 ]
 
+const nonProfitStatusList = [
+  'non-profit',
+  'for-profit'
+]
+
 export default Component.extend({
   store: service(),
 
