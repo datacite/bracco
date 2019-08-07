@@ -123,6 +123,7 @@ export default DS.Model.extend(Validations, {
   website: DS.attr('string'),
   isActive: DS.attr('boolean', { defaultValue: true }),
   passwordInput: DS.attr('string'),
+  nonProfitStatus: DS.attr('string'),
   hasPassword: DS.attr('boolean'),
   keepPassword: DS.attr('boolean', { defaultValue: true }),
   rorId: DS.attr('string'),

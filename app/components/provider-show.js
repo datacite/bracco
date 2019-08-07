@@ -36,6 +36,11 @@ const focusAreaList = [
   'general'
 ]
 
+const nonProfitStatusList = [
+  'non-profit',
+  'for-profit'
+]
+
 export default Component.extend({
   currentUser: service(),
   store: service(),
@@ -53,6 +58,8 @@ export default Component.extend({
   memberTypes: memberTypeList,
   focusAreaList,
   focusAreas: focusAreaList,
+  nonProfitStatusList,
+  nonProfitStatuses: nonProfitStatusList,
 
   organizations: [],
   organizationsNames: [],
@@ -159,6 +166,16 @@ export default Component.extend({
   selectFocusArea(focusArea) {
     this.provider.set('focusArea', focusArea);
     this.set('focusAreas', focusAreaList);
+  },
+  searchNonProfitStatus(query) {
+    var nonProfitStatuses = nonProfitStatusList.filter(function(nonProfitStatus) {
+      return nonProfitStatus.startsWith(query.toLowerCase());
+    })
+    this.set('nonProfitStatuses', nonProfitStatuses);
+  },
+  selectNonProfitStatus(nonProfitStatus) {
+    this.provider.set('nonProfitStatus', nonProfitStatus);
+    this.set('nonProfitStatuses', nonProfitStatusList);
   },
   selectOrganization(rorId) {
     let self = this;
@@ -291,6 +308,12 @@ export default Component.extend({
     },
     selectFocusArea(focusArea) {
       this.selectFocusArea(focusArea);
+    },
+    searchNonProfitStatus(query) {
+      this.searchNonProfitStatus(query);
+    },
+    selectNonProfitStatus(nonProfitStatus) {
+      this.selectNonProfitStatus(nonProfitStatus);
     },
     selectBillingCountry(billingCountry) {
       this.selectBillingCountry(billingCountry);

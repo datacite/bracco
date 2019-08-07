@@ -100,6 +100,16 @@ export default Component.extend({
     this.provider.set('focusArea', focusArea);
     this.set('focusAreas', focusAreaList);
   },
+  searchNonProfitStatus(query) {
+    var nonProfitStatuses = nonProfitStatusList.filter(function(nonProfitStatus) {
+      return nonProfitStatus.startsWith(query.toLowerCase());
+    })
+    this.set('nonProfitStatuses', nonProfitStatuses);
+  },
+  selectNonProfitStatus(nonProfitStatus) {
+    this.provider.set('nonProfitStatus', nonProfitStatus);
+    this.set('nonProfitStatuses', nonProfitStatusList);
+  },
   selectBillingCountry(billingCountry) {
     this.provider.set('billingInformationCountry', billingCountry);
     this.provider.set('billingInformation.country', billingCountry);
@@ -169,6 +179,12 @@ export default Component.extend({
     },
     selectFocusArea(focusArea) {
       this.selectFocusArea(focusArea);
+    },
+    searchNonProfitStatus(query) {
+      this.searchNonProfitStatus(query);
+    },
+    selectNonProfitStatus(nonProfitStatus) {
+      this.selectNonProfitStatus(nonProfitStatus);
     },
     selectBillingCountry(billingCountry) {
       this.selectBillingCountry(billingCountry);

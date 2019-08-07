@@ -18,6 +18,12 @@
             {{/el.control}}
           {{/form.element}}
 
+          {{#form.element controlType="power-select" label="Non-Profit Status" property="nonProfitStatus" options=nonProfitStatuses destination=nonProfitStatus as |el|}}
+            {{#el.control onChange=(action "selectNonProfitStatus") search=(action "searchNonProfitStatus") placeholder="Non-Profit Status" searchPlaceholder="Type to search..." as |item|}}
+              {{titleize item}}
+            {{/el.control}}
+          {{/form.element}}
+
           {{#if (eq model.provider.memberType "consortium_organization")}}
             {{#form.element controlType="power-select" property="consortium" label="Consortium" helpText='Consortium for this organization.' optionLabelPath="name" options=consortia destination=consortium.id as |el|}}
               {{#el.control onChange=(action "selectConsortium") search=(action "searchConsortium") searchField="name" searchPlaceholder="Type to search..." allowClear=true as |item|}}

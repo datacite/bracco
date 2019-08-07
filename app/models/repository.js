@@ -71,7 +71,7 @@ const Validations = buildValidations({
   name: validator('presence', true),
   domains: validator('presence', true),
   contactName: validator('presence', true),
-  contactEmail: [
+  systemEmail: [
     validator('presence', true),
     validator('format', {
       type: 'email',
@@ -91,12 +91,13 @@ export default DS.Model.extend(Validations, {
   symbol: DS.attr('string'),
   re3data: DS.attr('string'),
   domains: DS.attr('string', { defaultValue: '*' }),
-  contactName: DS.attr('string'),
-  contactEmail: DS.attr('string'),
+  systemEmail: DS.attr('string'),
+  salesforceId: DS.attr('string'),
   year: DS.attr('number'),
   description: DS.attr('string'),
   language: array(),
   certificate: array(),
+  serviceContact: fragment('contact'),
   issn: fragment('issn'),
   url: DS.attr('string'),
   clientType: DS.attr('string'),

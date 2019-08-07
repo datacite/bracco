@@ -22,8 +22,26 @@
 
         {{form.element controlType="text" label="Repository Name" property="name" useIcons=false required=false}}
         {{form.element controlType="text" label="Alternate Repository Name (optional)" property="alternateName" required=false}}
-        {{form.element controlType="text" label="Contact Name" property="contactName" helpText='Please enter the name of a person that can be contacted for technical or administrative issues.' required=false}}
-        {{form.element controlType="email" label="Contact Email" property="contactEmail" helpText='Please enter an email address that can be contacted for technical or administrative issues.' useIcons=false required=false}}
+        {{form.element controlType="email" label="System Email" property="systemEmail" helpText='This is the email used for sending password reset requests and similar system notifications.' useIcons=false required=false}}
+        
+        <div class="form-group">
+          <label class="control-label col-md-3">Service Contact</label>
+          <div class="col-md-9">
+            <div>
+              <label for="givenName" class="subtitle">Given Name (optional)</label>
+              {{input type="text" class="form-control" id="service-contact-givenName" value=model.serviceContact.givenName required=false}}
+            </div>
+            <div>
+              <label for="familyName" class="subtitle">Family Name (optional)</label>
+              {{input type="text" class="form-control" id="service-contact-familyName" value=model.serviceContact.familyName required=false}}
+            </div>
+            <div>
+              <label for="email" class="subtitle">Email (optional)</label>
+              {{input type="text" class="form-control" id="service-contact-email" value=model.serviceContact.email required=false}}
+            </div>
+          </div>
+        </div>
+        
         {{form.element controlType="textarea" label="Description (optional)" property="description" rows=10 helpText='Description of the repository. Please use markdown for formatting.' required=false}}
         {{form.element controlType="text" label="URL (optional)" property="url" helpText='The homepage of the repository.' required=false}}
         
@@ -327,14 +345,9 @@
               <a href="{{client.re3data}}">{{client.re3data}}</a>
             {{/if}}
 
-            {{#if client.contactName}}
-              <h5>Contact Name</h5>
-              {{client.contactName}}
-            {{/if}}
-
-            {{#if client.contactEmail}}
-              <h5>Contact Email</h5>
-              <a href="mailto:{{client.contactEmail}}">{{client.contactEmail}}</a>
+            {{#if client.systemEmail}}
+              <h5>System Email</h5>
+              <a href="mailto:{{client.systemEmail}}">{{client.systemEmail}}</a>
             {{/if}}
 
             {{#if client.url}}
