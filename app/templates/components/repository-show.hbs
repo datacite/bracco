@@ -12,6 +12,10 @@
           {{/el.control}}
         {{/form.element}}
 
+        {{#if (can "create provider")}}
+          {{form.element controlType="text" label="Salesforce ID" property="salesforceId" required=false helpText="The 18 digit ID in Salesforce."}}
+        {{/if}}
+
         {{#if (eq model.clientType "repository")}}
           {{#form.element controlType="power-select" property="re3data" label="re3data Record (optional)" optionLabelPath="re3data" options=repositories destination=re3data helpText='re3data is a registry of research data repositories.' as |el|}}
             {{#el.control onChange=(action "selectRepository") search=(action "searchRepository") searchField="repositoryName" searchPlaceholder="Type to search..." allowClear=true as |item|}}
@@ -214,6 +218,11 @@
               </span>
             </h5>
             <a href="{{model.re3data}}">{{model.re3data}}</a>
+          {{/if}}
+
+          {{#if (and (can "create provider") model.salesforceId)}}
+            <h5>Salesforce ID</h5>
+            <a href="{{model.salesforceId}}">{{model.salesforceId}}</a>
           {{/if}}
 
           {{#if (or model.issn.issnl model.issn.electronic model.issn.print)}}

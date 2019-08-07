@@ -77,6 +77,13 @@ const Validations = buildValidations({
       type: 'email',
       allowNonTld: true
     })
+  ],
+  salesforceId: [
+    validator('format', {
+      regex: /[a-zA-Z0-9]{18}/,
+      allowBlank: true,
+      message: 'Please enter a valid 18 digit Salesforce ID.'
+    }),
   ]
 });
 

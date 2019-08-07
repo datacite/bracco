@@ -97,6 +97,13 @@ const Validations = buildValidations({
       message: 'Please enter a valid website URL.'
     })
   ],
+  salesforceId: [
+    validator('format', {
+      regex: /[a-zA-Z0-9]{18}/,
+      allowBlank: true,
+      message: 'Please enter a valid 18 digit Salesforce ID.'
+    }),
+  ]
 });
 
 export default DS.Model.extend(Validations, {
@@ -127,6 +134,7 @@ export default DS.Model.extend(Validations, {
   hasPassword: DS.attr('boolean'),
   keepPassword: DS.attr('boolean', { defaultValue: true }),
   rorId: DS.attr('string'),
+  salesforceId: DS.attr('string'),
   twitterHandle: DS.attr('string'),
   billingInformation: DS.attr('billingInformation'),
   technicalContact: fragment('contact'),

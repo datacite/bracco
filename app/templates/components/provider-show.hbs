@@ -16,6 +16,8 @@
         {{/form.element}}
 
         {{#if (can "create provider")}}
+          {{form.element controlType="text" label="Salesforce ID" property="salesforceId" required=false helpText="The 18 digit ID in Salesforce."}}
+        
           {{#form.element controlType="power-select" label="Member Type" property="memberType" options=memberTypes destination=memberType as |el|}}
             {{#el.control onChange=(action "selectMemberType") search=(action "searchMemberType") placeholder="Select Member Type" searchPlaceholder="Type to search..." as |item|}}
               {{titleize (humanize item)}}
@@ -330,6 +332,11 @@
           {{/if}}
 
           {{#if (can "create provider")}}
+            {{#if model.salesforceId}}
+              <h5>Salesforce ID</h5>
+              {{model.salesforceId}}
+            {{/if}}
+
             <h5>Member Type</h5>
             {{titleize (humanize model.memberType)}}
           {{/if}}
