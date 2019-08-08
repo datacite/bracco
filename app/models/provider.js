@@ -94,6 +94,7 @@ const Validations = buildValidations({
   website: [
     validator('format', {
       type: 'url',
+      allowBlank: true,
       message: 'Please enter a valid website URL.'
     })
   ],

@@ -229,13 +229,13 @@
           {{#if (or model.issn.issnl model.issn.electronic model.issn.print)}}
             <h5>ISSN</h5>
             {{#if model.issn.issnl}}
-              {{model.issn.issnl}}<br/>
+              {{model.issn.issnl}} (ISSN-L)<br/>
             {{/if}}
             {{#if model.issn.electronic}}
-              {{model.issn.electronic}}<br/>
+              {{model.issn.electronic}} (electronic)<br/>
             {{/if}}
             {{#if model.issn.print}}
-              {{model.issn.print}}<br/>
+              {{model.issn.print}} (print)<br/>
             {{/if}}
           {{/if}}
 

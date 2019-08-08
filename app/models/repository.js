@@ -82,6 +82,27 @@ const Validations = buildValidations({
       allowBlank: true,
       message: 'Please enter a valid 18 digit Salesforce ID.'
     }),
+  ],
+  'issn.issnl': [
+    validator('format', {
+      allowBlank: true,
+      regex: /^\d{4}(-)?\d{3}[0-9X]+\$/,
+      message: 'ISSN-L is in the wrong format.'
+    })
+  ],
+  'issn.electronic': [
+    validator('format', {
+      allowBlank: true,
+      regex: /^\d{4}(-)?\d{3}[0-9X]+\$/,
+      message: 'ISSN (electronic) is in the wrong format.'
+    })
+  ],
+  'issn.print': [
+    validator('format', {
+      allowBlank: true,
+      regex: /^\d{4}(-)?\d{3}[0-9X]+\$/,
+      message: 'ISSN (print) is in the wrong format.'
+    })
   ]
 });
 
