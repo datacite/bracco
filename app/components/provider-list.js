@@ -1,6 +1,7 @@
 import { inject as service } from '@ember/service';
 import Component from '@ember/component';
 import countryList from 'iso-3166-country-list';
+import ENV from 'bracco/config/environment';
 
 const organizationTypeList = [
   'researchInstitution',
@@ -124,6 +125,28 @@ export default Component.extend({
     new() {
       this.set('provider', this.store.createRecord('provider', { billingInformation: {}, technicalContact: {}, isActive: true }));
       this.set('countries', countryList);
+      let self = this;
+      let url = ENV.API_URL + '/providers/random';
+      fetch(url).then(function(response) {
+        if (response.ok) {
+          response.json().then(function(data) {
+            self.get('provider').set('symbol', data.symbol);
+          });
+        } else {
+          if (console.debug) {
+            console.debug(response);
+          } else {
+            console.log(response);
+          }
+        }
+      }).catch(function(error) {
+        if (console.debug) {
+          console.debug(error);
+        } else {
+          console.log(error);
+        }
+      });
+      
       this.set('new', true);
     },
     submit(provider) {
