@@ -1,5 +1,6 @@
 import attr from 'ember-data/attr';
 import Fragment from 'ember-data-model-fragments/fragment';
+import { computed } from '@ember/object';
 // import { validator, buildValidations } from 'ember-cp-validations';
 
 // const Validations = buildValidations({
@@ -29,5 +30,13 @@ import Fragment from 'ember-data-model-fragments/fragment';
 export default Fragment.extend({
   email : attr('string'),
   givenName : attr('string'),
-  familyName  : attr('string')
+  familyName  : attr('string'),
+
+  name: computed('givenName', 'familyName', function () {
+    let name = null;
+    if (this.givenName || this.familyName) {
+      name = [this.givenName, this.familyName].join(" ");
+    }
+    return name;
+  }),
 });

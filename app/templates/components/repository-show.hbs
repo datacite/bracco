@@ -249,6 +249,16 @@
             {{model.description}}
           {{/if}}
 
+          {{#if (or model.serviceContact.name model.serviceContact.email)}}
+            <h5>Service Contact</h5>
+            {{#if model.serviceContact.name}}
+              {{model.serviceContact.name}}<br>
+            {{/if}}
+            {{#if model.serviceContact.email}}
+              <a href="mailto:{{model.serviceContact.email}}">{{model.serviceContact.email}}</a>
+            {{/if}}
+          {{/if}}
+
           {{#if model.systemEmail}}
             <h5>System Email</h5>
             <a href="mailto:{{model.systemEmail}}">{{model.systemEmail}}</a>
