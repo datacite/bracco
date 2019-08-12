@@ -42,7 +42,7 @@ const NameIdentifier = BaseValidator.extend({
 
       // lookup identifier
       let id = 'ror.org/' + value.substr(value.indexOf('0'));
-      return this.store.findRecord('organization', id).then(function() {
+      return this.store.findRecord('ror', id).then(function() {
         return true;
       }).catch(function() {
         let message = 'ROR identifier does not exist. Please make sure you entered the correct identifier.'

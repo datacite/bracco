@@ -175,15 +175,6 @@ export default Component.extend({
     this.provider.set('nonProfitStatus', nonProfitStatus);
     this.set('nonProfitStatuses', nonProfitStatusList);
   },
-  selectOrganization(rorId) {
-    let self = this;
-    let id = 'ror.org/' + rorId.substr(rorId.indexOf('0'));
-    this.store.findRecord('organization', id).then((result) => {
-      self.set('organization', result.name);
-      self.provider.set('rorId','https://' + id);
-      return result.name;
-    });
-  },
   searchConsortium(query) {
     this.set('consortia', this.store.query('provider', { 'query': query, 'member-type': 'consortium_member', sort: 'name', 'page[size]': 100 }));
   },
@@ -311,23 +302,18 @@ export default Component.extend({
     selectBillingCountry(billingCountry) {
       this.selectBillingCountry(billingCountry);
     },
-    searchOrganization(query) {
+    searchRor(query) {
       let self = this;
-      this.store.query('organization', { 'query': query }).then(function (orgs) {
-        let organizations = orgs.toArray();
-        let organizationsNames = orgs.mapBy('name');
+      this.store.query('ror', { 'query': query }).then(function (organizations) {
         self.set('organizations', organizations);
-        self.set('organizationsNames', organizationsNames);
-        return organizationsNames;
       });
     },
-    selectOrganization(organization) {
-      let organizationRecord = this.get('organizations').findBy('name', organization);
-      if (organizationRecord) {
-        this.set('organization', organization);
-        this.provider.set('rorId', 'https://' + organizationRecord.id);
+    selectRor(ror) {
+      if (ror) {
+        this.provider.set('rorId', ror.id);
+        this.provider.set('name', ror.name);
+        this.provider.set('displayName', ror.name);
       } else {
-        this.set('organization', null);
         this.provider.set('rorId', null);
       }
     }

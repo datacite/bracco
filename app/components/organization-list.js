@@ -165,21 +165,18 @@ export default Component.extend({
     selectBillingCountry(billingCountry) {
       this.selectBillingCountry(billingCountry);
     },
-    searchOrganization(query) {
+    searchRor(query) {
       let self = this;
-      this.store.query('organization', { 'query': query }).then(function (orgs) {
-        let organizations = orgs.toArray();
-        let organizationsNames = orgs.mapBy('name');
+      this.store.query('ror', { 'query': query }).then(function (organizations) {
         self.set('organizations', organizations);
-        self.set('organizationsNames', organizationsNames);
-        return organizationsNames;
       });
     },
-    selectOrganization(organization) {
-      let organizationRecord = this.get('organizations').findBy('name', organization);
-
-      this.set('organization', organization);
-      this.provider.set('rorId', organizationRecord.id);
+    selectRor(ror) {
+      if (ror) {
+        this.provider.set('rorId', ror.id);
+      } else {
+        this.provider.set('rorId', null);
+      }
     }
   }
 });

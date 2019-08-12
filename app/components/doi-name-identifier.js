@@ -15,8 +15,8 @@ export default Component.extend({
   validateRorIdentifier(value) {
     let self = this;
     let id = 'ror.org/' + value.substr(value.indexOf('0'));
-    this.store.findRecord('organization', id).then(function(organization) {
-      self.joinNameParts({ name: organization.name, nameIdentifierScheme: 'ROR' });
+    this.store.findRecord('ror', id).then(function(ror) {
+      self.joinNameParts({ name: ror.name, nameIdentifierScheme: 'ROR' });
     }).catch(function() {
       self.joinNameParts({ name: null, nameIdentifierScheme: 'ROR' });
     });

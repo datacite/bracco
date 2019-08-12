@@ -8,8 +8,6 @@ export default DS.JSONSerializer.extend({
     let totalPages = Math.min(Math.ceil(total / 20), 500);
     let meta = { meta: { total: total, totalPages: totalPages } }
     payload = payload.items.map(item => { 
-      // strip "https://" from id
-      item.id = item.id.substr(8);
       return item;
     });
     let data = this._super(store, primaryModelClass, payload, id, requestType);

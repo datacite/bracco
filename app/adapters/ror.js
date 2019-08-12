@@ -8,6 +8,9 @@ export default JSONAPIAdapter.extend(DataAdapterMixin, {
   host: ENV.ROR_API_URL,
 
   authorize() {
+  },
 
+  pathForType() {
+    return 'organizations';
   }
 });

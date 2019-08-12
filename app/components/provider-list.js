@@ -51,10 +51,31 @@ export default Component.extend({
   memberTypes: memberTypeList,
   focusAreaList,
   focusAreas: focusAreaList,
-
   organizations: [],
-  organizationsNames: [],
 
+  generate() {
+    let self = this;
+    let url = ENV.API_URL + '/providers/random';
+    fetch(url).then(function(response) {
+      if (response.ok) {
+        response.json().then(function(data) {
+          self.get('provider').set('symbol', data.symbol);
+        });
+      } else {
+        if (console.debug) {
+          console.debug(response);
+        } else {
+          console.log(response);
+        }
+      }
+    }).catch(function(error) {
+      if (console.debug) {
+        console.debug(error);
+      } else {
+        console.log(error);
+      }
+    });
+  },
   reset() {
     this.set('provider', null);
     this.set('new', false);
@@ -125,28 +146,7 @@ export default Component.extend({
     new() {
       this.set('provider', this.store.createRecord('provider', { billingInformation: {}, technicalContact: {}, isActive: true }));
       this.set('countries', countryList);
-      let self = this;
-      let url = ENV.API_URL + '/providers/random';
-      fetch(url).then(function(response) {
-        if (response.ok) {
-          response.json().then(function(data) {
-            self.get('provider').set('symbol', data.symbol);
-          });
-        } else {
-          if (console.debug) {
-            console.debug(response);
-          } else {
-            console.log(response);
-          }
-        }
-      }).catch(function(error) {
-        if (console.debug) {
-          console.debug(error);
-        } else {
-          console.log(error);
-        }
-      });
-      
+      this.generate();
       this.set('new', true);
     },
     submit(provider) {
@@ -176,6 +176,13 @@ export default Component.extend({
     cancel() {
       this.provider.rollbackAttributes();
       this.reset();
+    },
+    refresh() {
+      this.generate();
+    },
+    clear() {
+      this.provider.set('symbol', null)
+      this.$('input[type=text]:first').focus();
     },
     searchCountry(query) {
       this.searchCountry(query);
@@ -216,23 +223,18 @@ export default Component.extend({
     selectBillingCountry(billingCountry) {
       this.selectBillingCountry(billingCountry);
     },
-    searchOrganization(query) {
+    searchRor(query) {
       let self = this;
-      this.store.query('organization', { 'query': query }).then(function (orgs) {
-        let organizations = orgs.toArray();
-        let organizationsNames = orgs.mapBy('name');
+      this.store.query('ror', { 'query': query }).then(function (organizations) {
         self.set('organizations', organizations);
-        self.set('organizationsNames', organizationsNames);
-        return organizationsNames;
       });
     },
-    selectOrganization(organization) {
-      let organizationRecord = this.get('organizations').findBy('name', organization);
-      if (organizationRecord) {
-        this.set('organization', organization);
-        this.provider.set('rorId', 'https://' + organizationRecord.id);
+    selectRor(ror) {
+      if (ror) {
+        this.provider.set('rorId', ror.id);
+        this.provider.set('name', ror.name);
+        this.provider.set('displayName', ror.name);
       } else {
-        this.set('organization', null);
         this.provider.set('rorId', null);
       }
     }
