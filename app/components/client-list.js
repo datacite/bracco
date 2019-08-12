@@ -28,6 +28,7 @@ export default Component.extend({
   classNames: ['row'],
   client: null,
   new: false,
+  re3data: null,
   repository: null,
   repositories: [],
   softwareList,
@@ -95,7 +96,7 @@ export default Component.extend({
       this.set('new', true);
     },
     searchRepository(query) {
-      this.set('re3data', this.store.query('re3data', { 'query': query, 'page[size]': 25 }));
+      this.set('repositories', this.store.query('re3data', { 'query': query, 'page[size]': 25 }));  
     },
     selectRepository(re3data) {
       this.selectRepository(re3data);

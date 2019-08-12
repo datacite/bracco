@@ -137,7 +137,7 @@ export default Component.extend({
       });
     },
     searchRepository(query) {
-      this.set('re3data', this.store.query('re3data', { 'query': query, 'page[size]': 25 }));
+      this.set('repositories', this.store.query('re3data', { 'query': query, 'page[size]': 25 }));
     },
     selectRepository(re3data) {
       this.selectRepository(re3data);
