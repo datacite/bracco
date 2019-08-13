@@ -2,7 +2,9 @@
   <div class="input-group" style="padding-top:30px;">
     <div class="power-select-fragment">
       {{#form.element controlType="power-select" disabled=disabled value=fragment.name options=organizationsNames as |el|}}
-        {{el.control onChange=(action "selectOrganization") search=(action "searchOrganization") placeholder="Select Organization" searchPlaceholder="Type to search..." allowClear=true}}
+        {{#el.control onChange=(action "selectRor") search=(action "searchRor") placeholder="Select Affiliation" searchPlaceholder="Type to search..." allowClear=true as |item|}}
+          {{if item.name item.name fragment.name}}
+        {{/el.control}}
       {{/form.element}}
     </div>
     <span class="input-group-addon" style="vertical-align:top;padding-top:3px;background-color:white;">
