@@ -145,6 +145,15 @@ export default Component.extend({
     this.provider.set('organizationType', organizationType);
     this.set('organizationTypes', organizationTypeList);
   },
+  selectRor(ror) {
+    if (ror) {
+      this.provider.set('rorId', ror.id);
+      this.provider.set('name', ror.name);
+      this.provider.set('displayName', ror.name);
+    } else {
+      this.provider.set('rorId', null);
+    }
+  },
   searchMemberType(query) {
     var memberTypes = memberTypeList.filter(function(memberType) {
       return memberType.startsWith(query.toLowerCase());
@@ -199,7 +208,7 @@ export default Component.extend({
       this.provider.set('confirmSymbol', provider.get('symbol'));
       this.set('countries', countryList);
       this.set('edit', true);
-      this.selectOrganization(provider.get('rorId'));
+      this.selectRor(provider.get('rorId'));
     },
     change(provider) {
       this.set('provider', provider);
@@ -309,13 +318,7 @@ export default Component.extend({
       });
     },
     selectRor(ror) {
-      if (ror) {
-        this.provider.set('rorId', ror.id);
-        this.provider.set('name', ror.name);
-        this.provider.set('displayName', ror.name);
-      } else {
-        this.provider.set('rorId', null);
-      }
+      this.selectRor(ror);
     }
   }
 });

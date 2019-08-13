@@ -17,8 +17,8 @@
           {{/el.control}}
         {{/form.element}}
 
-        {{form.element controlType="text" label="Organization Name" property="name" required=false helpText="The official name of your organization."}}
-        {{form.element controlType="text" label="Organization Name to Display" property="displayName" required=false helpText="Name of your organization as you would like it to appear in Fabrica and on DataCite’s website."}}
+        {{form.element controlType="text" id="name" label="Organization Name" property="name" required=false helpText="The official name of your organization."}}
+        {{form.element controlType="text" id="display-name" label="Organization Name to Display" property="displayName" required=false helpText="Name of your organization as you would like it to appear in Fabrica and on DataCite’s website."}}
 
         {{#if (can "create provider")}}
           {{#form.element controlType="power-select" label="Member Type" property="memberType" options=memberTypes destination=memberType as |el|}}

@@ -41,8 +41,8 @@
           {{/if}}
         {{/if}}
 
-        {{form.element controlType="text" label="Organization Name" property="name" required=false helpText="The official name of your organization."}}
-        {{form.element controlType="text" label="Organization Name to Display" property="displayName" required=false helpText="Name of your organization as you would like it to appear in Fabrica and on DataCite’s website."}}
+        {{form.element controlType="text" id="name" label="Organization Name" property="name" required=false helpText="The official name of your organization."}}
+        {{form.element controlType="text" id="display-name" label="Organization Name to Display" property="displayName" required=false helpText="Name of your organization as you would like it to appear in Fabrica and on DataCite’s website."}}
 
         {{form.element controlType="text" id="system-email" label="System Email" property="systemEmail" helpText='This is the email used for sending password reset requests and similar system notifications.' required=false}}
         {{form.element controlType="text" id="group-email" label="Group Email (optional)" property="groupEmail" helpText='A generic shared email address (such as info@datacite.org or similar) where you would like to receive communications from DataCite.' required=false}}
