@@ -52,7 +52,8 @@
     }
   },
   "dependencies": {
-    "@sentry/browser": "^4.6.5",
+    "@sentry/browser": "^5.6.1",
+    "@sentry/integrations": "^5.6.1",
     "acorn": "^6.0.5",
     "cldr-core": "^29.0.0",
     "electron-compile": "^6.4.4",
@@ -67,13 +68,12 @@
     "fs-extra": "^4.0.2",
     "is-electron": "^2.1.0",
     "iso-639-1": "^2.0.3",
-    "langs": "^2.0.0",
     "junk": "^2.1.0",
+    "langs": "^2.0.0",
     "mime": "^2.4.0",
     "node-gyp": "^3.6.2"
   },
   "devDependencies": {
-    "@ember/jquery": "^0.5.2",
     "@ember/optional-features": "^0.6.3",
     "async-promise-queue": "^1.0.2",
     "babel-eslint": "10",
@@ -90,9 +90,8 @@
     "dynamic-link": "^0.2.5",
     "electron-forge": "^5.2.3",
     "electron-prebuilt-compile": "4.0.0",
-    "ember-ajax": "^4.0.2",
     "ember-auto-import": "^1.2.21",
-    "ember-bootstrap": "^2.5.0",
+    "ember-bootstrap": "^2.8.0",
     "ember-bootstrap-cp-validations": "^1.0.0",
     "ember-bootstrap-power-select": "^1.0.0",
     "ember-can": "^1.1.1",
@@ -101,7 +100,6 @@
     "ember-cli-babel": "^7.7.3",
     "ember-cli-clipboard": "^0.8.0",
     "ember-cli-code-coverage": "github:kategengler/ember-cli-code-coverage",
-    "ember-cli-daterangepicker": "^0.9.0",
     "ember-cli-dependency-checker": "^3.0.0",
     "ember-cli-deploy": "^1.0.2",
     "ember-cli-deploy-aws-pack": "^1.0.2",

@@ -19,6 +19,9 @@ module.exports = function(environment) {
         Date: false
       }
     },
+    sentry: {
+      environment,
+    },
     'ember-cli-string-helpers': {
       only: ['humanize', 'html-safe', 'truncate', 'titleize']
     },
@@ -42,6 +45,9 @@ module.exports = function(environment) {
     },
     featureFlags: {
       'use-repositories': false
+    },
+    fastboot: {
+      hostWhitelist: ['doi.datacite.org', 'doi.test.datacite.org', /^localhost:\d+$/]
     },
 
     SITE_TITLE: process.env.SITE_TITLE || "DataCite DOI Fabrica Test",
