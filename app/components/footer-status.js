@@ -13,8 +13,8 @@ export default Component.extend({
 
       sp.summary({
         success(data) {
-          self.$('.color-description').text(data.status.description);
-          self.$('.color-dot').addClass(data.status.indicator);
+          self.element.querySelector('.color-description').textContent = data.status.description;
+          self.element.querySelector('.color-dot').classList.add(data.status.indicator);
         }
       });
     }
