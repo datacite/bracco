@@ -59,22 +59,25 @@ export default Service.extend({
       this.set('provider_id', payload.provider_id);
       this.set('client_id', payload.client_id);
       this.set('role_id', payload.role_id);
-      this.set('roleName', payload.role_id.split('_')[0].capitalize());
 
       if (payload.role_id === 'staff_admin') {
         this.set('isAdmin', true);
         this.set('home', { route: 'index' });
         this.set('settings', { route: 'settings' });
+        this.set('roleName', 'Staff');
       } else if (payload.role_id === 'provider_admin') {
         this.set('isProvider', true);
         this.set('home', { route: 'providers.show', id: this.uid });
         this.set('settings', { route: 'providers.show.settings', id: this.uid });
+        this.set('roleName', 'Member');
       } else if (payload.role_id === 'client_admin') {
         this.set('isClient', true);
         this.set('home', { route: 'clients.show', id: this.uid });
         this.set('settings', { route: 'clients.show.settings', id: this.uid });
+        this.set('roleName', 'Repository');
       } else if (payload.role_id === 'user') {
         this.set('home', { route: 'password' });
+        this.set('roleName', 'User');
       }
 
       if (payload.role_id !== 'user') {
