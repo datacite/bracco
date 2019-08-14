@@ -14,6 +14,31 @@ export default Component.extend({
   output: null,
   summary: true,
 
+  didReceiveAttrs() {
+    this._super(...arguments);
+    
+    // show metadata if at least one of these attributes is set
+    if (isPresent(this.get('model.publicationYear')) || 
+        isPresent(this.get('model.titles')) ||
+        isPresent(this.get('model.publisher')) ||
+        isPresent(this.get('model.creators')) ||
+        this.get('model.types') instanceof Object && !!this.get('model.types.resourceTypeGeneral') ||
+        this.get('model.types') instanceof Object && !!this.get('model.types.resourceType')) {
+      this.set('hasMetadata', true);
+    }
+
+    let formats = { 'summary': 'Summary View',
+                    'datacite': 'DataCite XML',
+                    'datacite_json': 'DataCite JSON',
+                    'schema_org': 'Schema.org JSON-LD',
+                    'citeproc': 'Citeproc JSON',
+                    'codemeta': 'Codemeta JSON',
+                    'bibtex': 'BibTeX',
+                    'ris': 'RIS',
+                    'jats': 'JATS XML' };
+    this.set('formats', formats);
+  },
+
   showMetadata(metadata) {
     if (metadata === "summary") {
       this.set('output', false);
@@ -63,28 +88,5 @@ export default Component.extend({
     selectMetadata(metadata) {
       this.showMetadata(metadata);
     }
-  },
-
-  didInsertElement() {
-    // show metadata if at least one of these attributes is set
-    if (isPresent(this.get('model.publicationYear')) || 
-        isPresent(this.get('model.titles')) ||
-        isPresent(this.get('model.publisher')) ||
-        isPresent(this.get('model.creators')) ||
-        this.get('model.types') instanceof Object && !!this.get('model.types.resourceTypeGeneral') ||
-        this.get('model.types') instanceof Object && !!this.get('model.types.resourceType')) {
-      this.set('hasMetadata', true);
-    }
-
-    let formats = { 'summary': 'Summary View',
-                    'datacite': 'DataCite XML',
-                    'datacite_json': 'DataCite JSON',
-                    'schema_org': 'Schema.org JSON-LD',
-                    'citeproc': 'Citeproc JSON',
-                    'codemeta': 'Codemeta JSON',
-                    'bibtex': 'BibTeX',
-                    'ris': 'RIS',
-                    'jats': 'JATS XML' };
-    this.set('formats', formats);
   }
 });

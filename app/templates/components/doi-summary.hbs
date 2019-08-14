@@ -19,19 +19,19 @@
   {{format-metadata model.publicationYear resourceTypeGeneral=model.types.resourceTypeGeneral resourceType=model.types.resourceType container=model.bcontainer publisher=model.publisher version=model.version}}
 </div>
 {{#if model.descriptions}}
-<div class="description">
-  {{#if (gt model.descriptions.length 0)}}{{format-text model.descriptions.firstObject.description limit=150}}{{/if}}
-</div>
+  <div class="description">
+    {{#if (gt model.descriptions.length 0)}}{{format-text model.descriptions.firstObject.description limit=150}}{{/if}}
+  </div>
 {{/if}}
 {{#if isList}}
-<div class="created">
-  Created
-  {{format-time model.created year='numeric' month='long' day='numeric' hour='numeric' minute='numeric' second='numeric' timeZone='UTC' timeZoneName='short' hour12=false}}.
-  <span class="text-{{model.state}}">{{titleize model.state}}</span>
-</div>
+  <div class="created">
+    Created
+    {{format-time model.created year='numeric' month='long' day='numeric' hour='numeric' minute='numeric' second='numeric' timeZone='UTC' timeZoneName='short' hour12=false}}.
+    <span class="text-{{model.state}}">{{titleize model.state}}</span>
+  </div>
 {{/if}}
 {{#if model.rightsList}}
-{{#each model.rightsList as |rights|}}
-{{cc-license licenseURL=rights.rightsUri}}
-{{/each}}
+  {{#each model.rightsList as |rights|}}
+    {{cc-license licenseURL=rights.rightsUri}}
+  {{/each}}
 {{/if}}

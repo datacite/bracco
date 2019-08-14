@@ -4,7 +4,9 @@ import Component from '@ember/component';
 
 export default Component.extend({
 
-  didInsertElement() {
+  didReceiveAttrs() {
+    this._super(...arguments);
+    
     if (typeof StatusPage !== 'undefined') {
       let sp = new StatusPage.page({ page: 'nmtzsv0smzk5'});
       let self = this;

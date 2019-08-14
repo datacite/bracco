@@ -5,7 +5,9 @@ import fetch from 'fetch';
 import isElectron from 'is-electron';
 
 export default Component.extend({
-  didInsertElement() {
+  didReceiveAttrs() {
+    this._super(...arguments);
+    
     if (this['default']) {
       this.set('type', null);
       this.set('title', htmlSafe(ENV.SITE_TITLE));

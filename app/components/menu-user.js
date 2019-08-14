@@ -15,12 +15,9 @@ export default Component.extend({
     this.session.get('isAuthenticated');
   }),
 
-  actions: {
-    invalidateSession() {
-      this.session.invalidate();
-    }
-  },
-  didInsertElement() {
+  didReceiveAttrs() {
+    this._super(...arguments);
+    
     let settings = this.currentUser.get('settings');
     if (typeOf(settings) == 'object') {
       this.set('settings', { route: settings.route, model: settings.id });
@@ -28,6 +25,12 @@ export default Component.extend({
       this.set('settings', { href: settings });
     } else {
       this.set('settings', null);
+    }
+  },
+
+  actions: {
+    invalidateSession() {
+      this.session.invalidate();
     }
   }
 });

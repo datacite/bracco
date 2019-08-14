@@ -3,6 +3,7 @@ import { inject as service } from '@ember/service';
 import fetch from 'fetch';
 import { oneWay } from '@ember/object/computed';
 import ENV from 'bracco/config/environment';
+import { A } from '@ember/array';
 
 export default Component.extend({
   currentUser: service(),
@@ -35,8 +36,8 @@ export default Component.extend({
               let message = data.errors[0].title;
               return message;
             } else {
-              let usageViews = oneWay(data.meta['relation-types'] && data.meta['relation-types'].findBy('id', 'total-dataset-investigations-regular'));
-              let usageDownloads = oneWay(data.meta['relation-types'] && data.meta['relation-types'].findBy('id', 'total-dataset-requests-regular'));
+              let usageViews = oneWay(data.meta['relation-types'] && A(data.meta['relation-types']).findBy('id', 'total-dataset-investigations-regular'));
+              let usageDownloads = oneWay(data.meta['relation-types'] && A(data.meta['relation-types']).findBy('id', 'total-dataset-requests-regular'));
   
               if (usageViews) {
                 self.set('usageViews', usageViews['year-months']);

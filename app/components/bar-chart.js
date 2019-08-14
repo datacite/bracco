@@ -2,6 +2,7 @@ import { schedule, run } from '@ember/runloop';
 import { computed } from '@ember/object';
 import Component from '@ember/component';
 import d3 from "d3";
+import { A } from '@ember/array';
 
 export default Component.extend({
   tagName: 'div',
@@ -9,7 +10,7 @@ export default Component.extend({
   data: null,
   count: computed('data', function() {
     if (this.data) {
-      let currentYear = this.data.findBy('id', '2019');
+      let currentYear = A(this.data).findBy('id', '2019');
       if (currentYear) {
         return currentYear.count;
       } else {

@@ -4,7 +4,9 @@ import { inject as service } from '@ember/service';
 export default Component.extend({
   currentUser: service(),
 
-  didInsertElement() {
+  didReceiveAttrs() {
+    this._super(...arguments);
+    
     this.set('url', this.url);
   }
 });

@@ -6,7 +6,9 @@ export default Component.extend({
 
   classNames: ['panel', 'facets', 'add'],
 
-  didInsertElement() {
+  didReceiveAttrs() {
+    this._super(...arguments);
+    
     this.set('currentUser', this.currentUser);
   }
 });

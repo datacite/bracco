@@ -14,6 +14,15 @@ export default Component.extend({
     this._super(...arguments);
 
     this.selectStyle('apa');
+
+    let citationFormats = { 
+      'apa': 'APA',
+      'harvard-cite-them-right': 'Harvard',
+      'modern-language-association': 'MLA',
+      'vancouver': 'Vancouver',
+      'chicago-fullnote-bibliography': 'Chicago',
+      'ieee': 'IEEE' };
+    this.set('citationFormats', citationFormats);
   },
 
   selectStyle(style) {
@@ -52,15 +61,5 @@ export default Component.extend({
       style = (style === undefined) ? 'apa' : style;
       this.selectStyle(style);
     }
-  },
-
-  didInsertElement() {
-    let citationFormats = { 'apa': 'APA',
-                            'harvard-cite-them-right': 'Harvard',
-                            'modern-language-association': 'MLA',
-                            'vancouver': 'Vancouver',
-                            'chicago-fullnote-bibliography': 'Chicago',
-                            'ieee': 'IEEE' };
-    this.set('citationFormats', citationFormats);
   }
 });

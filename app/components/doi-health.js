@@ -1,4 +1,5 @@
 import { w } from '@ember/string';
+import { A } from '@ember/array';
 import Component from '@ember/component';
 
 export default Component.extend({
@@ -7,7 +8,9 @@ export default Component.extend({
   hasDoi: null,
   hasSchemaOrg: null,
 
-  didInsertElement() {
+  didReceiveAttrs() {
+    this._super(...arguments);
+    
     if (this.model.get("landingPage").status == 200) {
       let redirectText = "resolved ";
       if (this.model.get("landingPage").redirectCount > 1) {
@@ -30,7 +33,7 @@ export default Component.extend({
     }
     let contentType = this.model.get("landingPage").contentType;
     if (contentType) {
-      contentType = contentType.split(';').get('firstObject').trim();
+      contentType = A(contentType.split(';')).get('firstObject').trim();
     } else {
       contentType = "unknown";
     }

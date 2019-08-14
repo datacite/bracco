@@ -2,6 +2,16 @@ import { notEmpty } from '@ember/object/computed';
 import { assign } from '@ember/polyfills';
 import Component from '@ember/component';
 
+const placeholders = { 
+  'doi': 'DOI',
+  'provider': 'Provider',
+  'organization': 'Organization',
+  'client': 'Client',
+  'repository': 'Repository',
+  'prefix': 'Prefix',
+  'client-prefix': 'Prefix',
+  'provider-prefix': 'Prefix' }
+
 export default Component.extend({
   classNames: ['div'],
 
@@ -20,6 +30,20 @@ export default Component.extend({
     this.set('query', this.model.get('query.query'));
     this.set('sort', this.model.get('query.sort'));
     this.set('filters', this.model.get('query'));
+
+    if (this.name) {
+      this.set('modelName', this.name);
+    } else {
+      this.set('modelName', placeholders[this.model.get("modelName")]);
+    }
+    
+    if (this.modelName === "DOI") {
+      this.set('formats', { '-updated': 'Sort by Date Updated', '-created': 'Sort by Date Created', 'name': 'Sort by DOI', 'relevance': 'Sort by Relevance' });
+    } else if (this.modelName === "Prefix") {
+      this.set('formats', { 'name': 'Sort by Prefix', '-created': 'Sort by Date Created' });
+    } else {
+      this.set('formats', { 'name': 'Sort by Name', '-created': 'Sort by Date Joined', 'relevance': 'Sort by Relevance' });
+    }
   },
 
   search() {
@@ -50,31 +74,6 @@ export default Component.extend({
     sort(sort) {
       this.set('sort', sort);
       this.search();
-    }
-  },
-
-  didInsertElement() {
-    let placeholders = { 'doi': 'DOI',
-                         'provider': 'Provider',
-                         'organization': 'Organization',
-                         'client': 'Client',
-                         'repository': 'Repository',
-                         'prefix': 'Prefix',
-                         'client-prefix': 'Prefix',
-                         'provider-prefix': 'Prefix' }
-
-    if (this.name) {
-      this.set('modelName', this.name);
-    } else {
-      this.set('modelName', placeholders[this.model.get("modelName")]);
-    }
-    
-    if (this.modelName === "DOI") {
-      this.set('formats', { '-updated': 'Sort by Date Updated', '-created': 'Sort by Date Created', 'name': 'Sort by DOI', 'relevance': 'Sort by Relevance' });
-    } else if (this.modelName === "Prefix") {
-      this.set('formats', { 'name': 'Sort by Prefix', '-created': 'Sort by Date Created' });
-    } else {
-      this.set('formats', { 'name': 'Sort by Name', '-created': 'Sort by Date Joined', 'relevance': 'Sort by Relevance' });
     }
   }
 });

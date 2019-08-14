@@ -3,7 +3,9 @@ import Component from '@ember/component';
 export default Component.extend({
   tagName: 'span',
 
-  didInsertElement() {
+  didReceiveAttrs() {
+    this._super(...arguments);
+    
     let text = this.get('tag.text');
 
     if (text.match(/^\d/)) {

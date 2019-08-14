@@ -15,23 +15,9 @@ export default Component.extend({
   user: true,
   data: {},
 
-  // init: function () {
-  //   this._super();
-  //
-  //   if (!this.get('default')) {
-  //     Ember.run.schedule("afterRender",this,function() {
-  //       this.send("transitionNoAccess");
-  //     });
-  //   }
-  // },
+  didReceiveAttrs() {
+    this._super(...arguments);
 
-  actions: {
-    transitionNoAccess() {
-      this.router.transitionTo(this.home);
-    }
-  },
-
-  didInsertElement() {
     if (this['default']) {
       this.set('type', null);
       this.set('title', htmlSafe(ENV.SITE_TITLE));
@@ -63,5 +49,11 @@ export default Component.extend({
       }
       self.set('data', data);
     });
+  },
+
+  actions: {
+    transitionNoAccess() {
+      this.router.transitionTo(this.home);
+    }
   }
 });

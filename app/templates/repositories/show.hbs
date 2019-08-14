@@ -1,4 +1,4 @@
-{{#if (can "read client" model)}}
+{{#if (can "read client" model provider=model.provider)}}
   {{application-header default=true}}
 
   <div class="container-fluid">
