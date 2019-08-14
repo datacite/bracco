@@ -131,7 +131,7 @@
     "ember-data-model-fragments": "^4.0.0",
     "ember-export-application-global": "^2.0.0",
     "ember-feature-flags": "^5.0.0",
-    "ember-fetch": "^6.4.0",
+    "ember-fetch": "^6.7.0",
     "ember-font-awesome": "^4.0.0-rc.3",
     "ember-inflector": "^3.0.0",
     "ember-intl": "^3.5.0",
