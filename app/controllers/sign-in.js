@@ -6,7 +6,7 @@ export default Controller.extend({
 
   actions: {
     authenticate() {
-      let { identification, password } = this.getProperties('identification', 'password');
+      let { identification, password } = this;
       this.session.authenticate('authenticator:oauth2', identification, password).catch((reason) => {
         this.set('errorMessage', reason.errors && reason.errors[0].title || reason);
       });

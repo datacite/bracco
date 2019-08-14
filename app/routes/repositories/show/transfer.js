@@ -21,7 +21,7 @@ export default Route.extend({
   },
 
   afterModel() {
-    if (this.get('can').cannot('read repository', this.modelFor('repositories/show'))) {
+    if (this.can.cannot('read repository', this.modelFor('repositories/show'))) {
       this.transitionTo('index');
     }
   }

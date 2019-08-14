@@ -11,6 +11,6 @@ module('Integration | Helper | format-language', function(hooks) {
 
     await render(hbs`{{format-language inputValue}}`);
 
-    assert.equal(this.element.textContent.trim(), 'English');
+    assert.dom(this.element).hasText('English');
   });
 });

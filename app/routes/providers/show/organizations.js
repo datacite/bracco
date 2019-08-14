@@ -49,7 +49,7 @@ export default Route.extend({
   },
 
   afterModel() {
-    if (this.get('can').cannot('read provider', this.modelFor('providers/show'))) {
+    if (this.can.cannot('read provider', this.modelFor('providers/show'))) {
       this.transitionTo('index');
     }
   }

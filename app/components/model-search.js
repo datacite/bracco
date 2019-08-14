@@ -63,15 +63,15 @@ export default Component.extend({
                          'client-prefix': 'Prefix',
                          'provider-prefix': 'Prefix' }
 
-    if (this.get("name")) {
-      this.set('modelName', this.get("name"));
+    if (this.name) {
+      this.set('modelName', this.name);
     } else {
       this.set('modelName', placeholders[this.model.get("modelName")]);
     }
     
-    if (this.get("modelName") === "DOI") {
+    if (this.modelName === "DOI") {
       this.set('formats', { '-updated': 'Sort by Date Updated', '-created': 'Sort by Date Created', 'name': 'Sort by DOI', 'relevance': 'Sort by Relevance' });
-    } else if (this.get("modelName") === "Prefix") {
+    } else if (this.modelName === "Prefix") {
       this.set('formats', { 'name': 'Sort by Prefix', '-created': 'Sort by Date Created' });
     } else {
       this.set('formats', { 'name': 'Sort by Name', '-created': 'Sort by Date Joined', 'relevance': 'Sort by Relevance' });

@@ -21,7 +21,7 @@ export default Route.extend({
   },
 
   afterModel() {
-    if (this.get('can').cannot('delete doi', this.modelFor('clients/show/dois/show'))) {
+    if (this.can.cannot('delete doi', this.modelFor('clients/show/dois/show'))) {
       this.transitionTo('index');
     } else {
       this.modelFor('clients/show/dois/show').set('mode', 'edit');

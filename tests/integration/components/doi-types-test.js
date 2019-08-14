@@ -1,18 +1,20 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('doi-types', 'Integration | Component | doi types', {
-  integration: true
-});
+module('Integration | Component | doi types', function(hooks) {
+  setupRenderingTest(hooks);
 
-test('it renders', function(assert) {
+  test('it renders', async function(assert) {
 
-  // Template block usage:
-  this.render(hbs`
-    {{#doi-types}}
-      template block text
-    {{/doi-types}}
-  `);
+    // Template block usage:
+    await render(hbs`
+      {{#doi-types}}
+        template block text
+      {{/doi-types}}
+    `);
 
-  assert.dom('*').hasText('');
+    assert.dom('*').hasText('');
+  });
 });

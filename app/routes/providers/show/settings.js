@@ -10,7 +10,7 @@ export default Route.extend({
   },
 
   afterModel(model) {
-    if (this.get('can').cannot('read provider', model)) {
+    if (this.can.cannot('read provider', model)) {
       this.transitionTo('index');
     }
   }

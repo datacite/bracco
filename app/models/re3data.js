@@ -25,7 +25,7 @@ export default DS.Model.extend(Validations, {
   updated: DS.attr('date'),
 
   name: computed('repositoryName', function () {
-    return this.get('repositoryName');
+    return this.repositoryName;
   }),
 
   // combine subject areas and keywords

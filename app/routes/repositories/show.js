@@ -23,7 +23,7 @@ export default Route.extend({
   },
 
   afterModel(model) {
-    if (this.get('can').cannot('read repository', model)) {
+    if (this.can.cannot('read repository', model)) {
       this.transitionTo('index');
     }
   },
