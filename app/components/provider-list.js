@@ -182,7 +182,7 @@ export default Component.extend({
     },
     clear() {
       this.provider.set('symbol', null)
-      this.$('input[type=text]:first').focus();
+      //this.$('input[type=text]:first').focus();
     },
     searchCountry(query) {
       this.searchCountry(query);

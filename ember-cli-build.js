@@ -48,8 +48,8 @@ module.exports = function(defaults) {
     }
   });
 
-  app.import('vendor/bootstrap/js/dropdown.js');
-  app.import('vendor/bootstrap/js/tooltip.js');
+  // app.import('vendor/bootstrap/js/dropdown.js');
+  // app.import('vendor/bootstrap/js/tooltip.js');
 
   // If you need to use different assets in different
   // environments, specify an object as the first parameter. That
