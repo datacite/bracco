@@ -19,11 +19,15 @@ before_install:
       CLOUDFRONT_DISTRIBUTION_ID=$CLOUDFRONT_DISTRIBUTION_ID_STAGE;
       cp .env.stage .env;
       AUTO_DEPLOY=true;
-    else
+    elif [ "$TRAVIS_BRANCH" == "fastboot" ]; then
       AWS_BUCKET="doi.stage.datacite.org";
       CLOUDFRONT_DISTRIBUTION_ID=$CLOUDFRONT_DISTRIBUTION_ID_STAGE;
       cp .env.stage .env;
       AUTO_DEPLOY=true;
+    else
+      AWS_BUCKET="doi.stage.datacite.org";
+      CLOUDFRONT_DISTRIBUTION_ID=$CLOUDFRONT_DISTRIBUTION_ID_STAGE;
+      cp .env.stage .env;
     fi
   - npm config set spin false
   - npm install -g codeclimate-test-reporter

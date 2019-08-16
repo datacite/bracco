@@ -1,0 +1,13 @@
+version: '2'
+
+services:
+  bracco:
+    env_file: .env
+    image: datacite/bracco
+    build: .
+    ports:
+      - "9030:80"
+    volumes:
+      - ./public:/home/app/webapp/public
+      - ./dist:/home/app/webapp/dist
+      - ./vendor:/home/app/webapp/vendor
