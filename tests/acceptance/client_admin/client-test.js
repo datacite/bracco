@@ -41,32 +41,29 @@ module('Acceptance | client_admin | client', function(hooks) {
   });
 
   test('visiting client AWI', async function(assert) {
-
     await visit('/clients/tib.awi');
 
     assert.equal(currentURL(), '/clients/tib.awi');
     assert.dom('h2.work').hasText('Alfred Wegener Institute');
-    assert.dom('a.nav-link.active').hasText('Info');
+    assert.dom('li.nav-link.active a').hasText('Info');
   });
 
   test('visiting client AWI settings', async function(assert) {
-
     await visit('/clients/tib.awi/settings');
 
     assert.equal(currentURL(), '/clients/tib.awi/settings');
     assert.dom('h2.work').hasText('Alfred Wegener Institute');
-    assert.dom('a.nav-link.active').hasText('Settings');
+    assert.dom('li.nav-link.active a').hasText('Settings');
     assert.dom('button#edit-client').includesText('Update Account');
     assert.dom('button#delete-client').doesNotExist();
   });
 
   test('visiting client AWI prefixes', async function(assert) {
-
     await visit('/clients/tib.awi/prefixes');
 
     assert.equal(currentURL(), '/clients/tib.awi/prefixes');
     assert.dom('h2.work').hasText('Alfred Wegener Institute');
-    assert.dom('a.nav-link.active').hasText('Prefixes');
+    assert.dom('li.nav-link.active a').hasText('Prefixes');
   });
 
   test('visiting client AWI dois', async function(assert) {
@@ -74,7 +71,7 @@ module('Acceptance | client_admin | client', function(hooks) {
 
     assert.equal(currentURL(), '/clients/tib.awi/dois');
     assert.dom('h2.work').hasText('Alfred Wegener Institute');
-    assert.dom('a.nav-link.active').hasText('DOIs');
+    assert.dom('li.nav-link.active a').hasText('DOIs');
     assert.dom('a#new-doi').includesText('Create (Form)');
     assert.dom('a#upload-doi').includesText('Create (File Upload)');
     assert.dom('a#transfer-dois').doesNotExist();

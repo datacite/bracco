@@ -17,7 +17,7 @@ module('Acceptance | organization_admin | provider', function(hooks) {
 
     assert.equal(currentURL(), '/providers/datacite');
     assert.dom('h2.work').hasText('DataCite');
-    assert.dom('a.nav-link.active').hasText('Info');
+    assert.dom('li.nav-link.active a').hasText('Info');
   });
 
   test('visiting provider DataCite settings', async function(assert) {
@@ -31,7 +31,7 @@ module('Acceptance | organization_admin | provider', function(hooks) {
 
     assert.equal(currentURL(), '/providers/datacite/settings');
     assert.dom('h2.work').hasText('DataCite');
-    assert.dom('a.nav-link.active').hasText('Settings');
+    assert.dom('li.nav-link.active a').hasText('Settings');
     assert.dom('button#edit-provider').includesText('Update Account');
     assert.dom('button#delete-provider').doesNotExist();
   });
@@ -47,7 +47,7 @@ module('Acceptance | organization_admin | provider', function(hooks) {
 
     assert.equal(currentURL(), '/providers/datacite/settings');
     assert.dom('h2.work').hasText('DataCite');
-    assert.dom('a.nav-link.active').hasText('Settings');
+    assert.dom('li.nav-link.active a').hasText('Settings');
     assert.dom('button#edit-provider').exists();
     assert.dom('button#delete-provider').doesNotExist();
 
@@ -58,7 +58,7 @@ module('Acceptance | organization_admin | provider', function(hooks) {
 
     assert.equal(currentURL(), '/providers/datacite/settings');
     assert.dom('h2.work').hasText('DataCite II');
-    assert.dom('a.nav-link.active').hasText('Settings');
+    assert.dom('li.nav-link.active a').hasText('Settings');
   });
 
   test('visiting provider DataCite repositories', async function(assert) {
@@ -72,7 +72,7 @@ module('Acceptance | organization_admin | provider', function(hooks) {
 
     assert.equal(currentURL(), '/providers/datacite/repositories');
     assert.dom('h2.work').hasText('DataCite');
-    assert.dom('a.nav-link.active').hasText('Repositories');
+    assert.dom('li.nav-link.active a').hasText('Repositories');
     assert.dom('button#add-repository').includesText('Add Repository');
   });
 
@@ -87,7 +87,7 @@ module('Acceptance | organization_admin | provider', function(hooks) {
 
     assert.equal(currentURL(), '/providers/datacite/dois');
     assert.dom('h2.work').hasText('DataCite');
-    assert.dom('a.nav-link.active').hasText('DOIs');
+    assert.dom('li.nav-link.active a').hasText('DOIs');
     assert.dom('a#create-doi').doesNotExist();
     assert.dom('a#upload-doi').doesNotExist();
   });
@@ -121,6 +121,6 @@ module('Acceptance | organization_admin | provider', function(hooks) {
 
     assert.equal(currentURL(), '/providers/datacite/prefixes');
     assert.dom('h2.work').hasText('DataCite');
-    assert.dom('a.nav-link.active').hasText('Prefixes');
+    assert.dom('li.nav-link.active a').hasText('Prefixes');
   });
 });
