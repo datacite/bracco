@@ -1,7 +1,7 @@
 version: '2'
 
 services:
-  bracco:
+  web:
     env_file: .env
     image: datacite/bracco
     build: .
