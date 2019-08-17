@@ -6,6 +6,7 @@ import ENV from 'bracco/config/environment';
 import fetch from 'fetch';
 
 export default Component.extend({
+  session: service(),
   currentUser: service(),
 
   default: false,
@@ -37,6 +38,15 @@ export default Component.extend({
       this.set('home', null);
     }
 
+    let settings = this.currentUser.get('settings');
+    if (typeOf(settings) == 'object') {
+      this.set('settings', { route: settings.route, model: settings.id });
+    } else if (settings) {
+      this.set('settings', { href: settings });
+    } else {
+      this.set('settings', null);
+    }
+
     let url = ENV.CDN_URL + "/data/links.json";
     let self = this;
     fetch(url).then(function(response) {
@@ -54,6 +64,9 @@ export default Component.extend({
   actions: {
     transitionNoAccess() {
       this.router.transitionTo(this.home);
+    },
+    invalidateSession() {
+      this.session.invalidate();
     }
   }
 });
