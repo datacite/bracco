@@ -1,20 +1,22 @@
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
 import ApplicationRouteMixin from 'ember-simple-auth/mixins/application-route-mixin';
+import ENV from 'bracco/config/environment';
+import { set } from '@ember/object';
 
 export default Route.extend(ApplicationRouteMixin, {
   session: service(),
   currentUser: service(),
+  headData: service(),
   intl: service(),
 
   isTokenAuthenticating: null,
 
   beforeModel() {
     this.intl.setLocale(['en-us']);
-
+    set(this, 'headData.siteName', ENV.SITE_TITLE);
     return this._loadCurrentUser();
   },
-
   model(params) {
     const { jwt } = params;
     if (jwt) {
@@ -28,7 +30,6 @@ export default Route.extend(ApplicationRouteMixin, {
       });
     }
   },
-
   sessionAuthenticated() {
     if (!this.isTokenAuthenticating) {
       this._super(...arguments);
@@ -37,13 +38,11 @@ export default Route.extend(ApplicationRouteMixin, {
       this.set('isTokenAuthenticating', false);
     }
   },
-
   sessionInvalidated() {
     if (!this.isTokenAuthenticating) {
       this._super();
     }
   },
-
   _loadCurrentUser() {
     return this.currentUser.load().catch(() => this.session.invalidate());
   }
