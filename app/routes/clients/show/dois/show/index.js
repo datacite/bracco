@@ -10,11 +10,10 @@ export default Route.extend({
     let self = this;
     return this.store.findRecord('doi', this.modelFor('clients/show/dois/show').get('id'), { include: 'client' }).then(function(doi) {
       if (doi.titles) {
-        console.log(doi.titles[0].title)
-        set(self, 'headData.title', doi.titles[0].title);
+        set(self, 'headData.title', null);
       }
       if (doi.descriptions) {
-        set(self, 'headData.description', doi.descriptions[0].description);
+        set(self, 'headData.description', null);
       }
       
       return doi;

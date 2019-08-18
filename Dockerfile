@@ -41,12 +41,9 @@ RUN chown -R app:app /home/app/webapp && \
 # Install npm packages and build dist
 WORKDIR /home/app/webapp
 RUN npm install -g ember-cli && \
-    yarn install && \
+    yarn install --frozen-lockfile && \
     ember build --environment=production && \
     exit 0
-
-# Run additional scripts during container startup (i.e. not at build time)
-RUN mkdir -p /etc/my_init.d
 
 # Expose web
 EXPOSE 80
