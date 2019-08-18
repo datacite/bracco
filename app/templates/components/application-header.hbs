@@ -15,27 +15,29 @@
         <nav.item>{{#dynamic-link params=home}}Home{{/dynamic-link}}</nav.item>
       {{/if}}
       <nav.item><a target="_blank" rel="noopener" href="https://support.datacite.org">Support</a></nav.item>
-      {{#if (and user session.isAuthenticated)}}
-        <nav.dropdown as |dd|>
-          <dd.toggle id="account_menu_link">
-            {{uppercase currentUser.uid}}
-            <span class="caret"></span>
-          </dd.toggle>
-          <dd.menu class="navbar-menu" as |menu|>
-            <menu.item class="dropdown-header">
-              Role: {{currentUser.roleName}}
-            </menu.item>
-            <menu.item>
-              {{#dynamic-link params=settings}}{{fa-icon "cog"}} Settings{{/dynamic-link}}
-            </menu.item>
-            <menu.divider/>
-            <menu.item>
-              <a {{action "invalidateSession"}}>{{fa-icon "sign-out"}} Sign out</a>
-            </menu.item>
-          </dd.menu>
-        </nav.dropdown>
-      {{else}}
-        <nav.item>{{#link-to "sign-in" class="btn btn-sm btn-neutral"}}{{fa-icon "sign-in"}} {{t "user.signin"}}{{/link-to}}</nav.item>
+      {{#if user}}
+        {{#if session.isAuthenticated}}
+          <nav.dropdown as |dd|>
+            <dd.toggle id="account_menu_link">
+              {{uppercase currentUser.uid}}
+              <span class="caret"></span>
+            </dd.toggle>
+            <dd.menu class="navbar-menu" as |menu|>
+              <menu.item class="dropdown-header">
+                Role: {{currentUser.roleName}}
+              </menu.item>
+              <menu.item>
+                {{#dynamic-link params=settings}}{{fa-icon "cog"}} Settings{{/dynamic-link}}
+              </menu.item>
+              <menu.divider/>
+              <menu.item>
+                <a {{action "invalidateSession"}}>{{fa-icon "sign-out"}} Sign out</a>
+              </menu.item>
+            </dd.menu>
+          </nav.dropdown>
+        {{else}}
+          <nav.item>{{#link-to "sign-in" id="sign-in" class="btn btn-sm btn-neutral"}}{{fa-icon "sign-in"}} {{t "user.signin"}}{{/link-to}}</nav.item>
+        {{/if}}
       {{/if}}
     </navbar.nav>
   </navbar.content>
