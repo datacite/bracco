@@ -44,7 +44,7 @@ module.exports = function(environment) {
       'use-repositories': false
     },
     fastboot: {
-      hostWhitelist: ['doi.datacite.org', 'doi.test.datacite.org', /^localhost:\d+$/]
+      hostWhitelist: ['doi.datacite.org', 'doi.test.datacite.org', /^10\.0\.(\d){1,3}\.(\d){1,3}$/, /^localhost:\d+$/]
     },
 
     SITE_TITLE: process.env.SITE_TITLE || "DataCite DOI Fabrica Test",

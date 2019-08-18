@@ -1,4 +1,5 @@
-FROM phusion/passenger-nodejs:0.9.30
+FROM phusion/passenger-full:0.9.30
+LABEL maintainer="mfenner@datacite.org"
 
 # Set correct environment variables
 ENV HOME /home/app
