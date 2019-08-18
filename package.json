@@ -73,6 +73,9 @@
     "langs": "^2.0.0",
     "mime": "^2.4.0"
   },
+  "fastbootDependencies": [
+    "node-fetch"
+  ],
   "devDependencies": {
     "@ember/optional-features": "^0.7.0",
     "async-promise-queue": "^1.0.2",
