@@ -19,11 +19,11 @@ export default Route.extend({
         });
       } else {
         console.log(response);
-        self.transitionTo('/');
+        self.transitionTo('/sign-in');
       }
     }).catch(function (error) {
       console.log(error);
-      this.transitionTo('/');
+      this.transitionTo('/sign-in');
     });
   }
 });
