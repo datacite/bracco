@@ -15,14 +15,14 @@ export default Route.extend({
         self.session.authenticate('authenticator:globus', jwt).catch((reason) => {
           this.set('errorMessage', reason.errors && reason.errors[0].title || reason);
         });
-        self.transitionToRoute('/');
+        self.transitionTo('/');
       } else {
         console.log(response);
-        self.transitionToRoute('/');
+        self.transitionTo('/');
       }
     }).catch(function (error) {
       console.log(error);
-      self.transitionToRoute('/');
+      self.transitionTo('/');
     });
   }
 });
