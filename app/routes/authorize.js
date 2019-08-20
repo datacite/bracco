@@ -13,16 +13,16 @@ export default Route.extend({
       if (response.ok) {
         let jwt = response.headers.get('x-amzn-oidc-data');
         self.session.authenticate('authenticator:globus', jwt).catch((reason) => {
-          this.set('errorMessage', reason.errors && reason.errors[0].title || reason);
+          self.set('errorMessage', reason.errors && reason.errors[0].title || reason);
+          self.transitionTo('/');
         });
-        self.transitionTo('/');
       } else {
         console.log(response);
         self.transitionTo('/');
       }
     }).catch(function (error) {
       console.log(error);
-      self.transitionTo('/');
+      this.transitionTo('/');
     });
   }
 });
