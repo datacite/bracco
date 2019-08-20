@@ -11,7 +11,7 @@ export default Controller.extend({
   session: service(),
   orcidLogoUrl: ENV.CDN_URL + '/images/orcid.png',
   globusLogoUrl: ENV.CDN_URL + '/images/globus.png',
-  oidcAuthUrl: ENV.FABRICA_URL + '/authorize',
+  oidcAuthUrl: ENV.API_URL + '/authorize',
 
   showGlobus: computed('globus', function() {
     return isPresent(this.globus);
