@@ -19,11 +19,11 @@ export default Route.extend({
         });
       } else {
         console.log(response);
-        self.transitionTo('/sign-in');
+        self.transitionTo('/sign-in?globus');
       }
     }).catch(function (error) {
       console.log(error);
-      this.transitionTo('/sign-in');
+      this.transitionTo('/sign-in?globus');
     });
   }
 });
