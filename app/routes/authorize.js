@@ -8,7 +8,7 @@ export default Route.extend({
 
   beforeModel() {
     let self = this;
-    let url = ENV.API_URL + '/oidc-token';
+    let url = ENV.FABRICA_URL + '/authorize';
     fetch(url).then(function (response) {
       let jwt = response.headers.get('x-amzn-oidc-data');
 
