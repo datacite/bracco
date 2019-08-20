@@ -80,7 +80,7 @@ Router.map(function () {
   });
 
   this.route("sign-in");
-  this.route('callback');
+  this.route('authorize');
   this.route("reset");
   this.route("password");
 
