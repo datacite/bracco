@@ -10,8 +10,9 @@ export default Route.extend({
     let self = this;
     let url = ENV.FABRICA_URL + '/authorize';
     fetch(url).then(function (response) {
-      if (response.ok) {
-        let jwt = response.headers.get('x-amzn-oidc-data');
+      let jwt = response.headers.get('x-amzn-oidc-data');
+        
+      if (jwt) {
         self.session.authenticate('authenticator:globus', jwt).catch((reason) => {
           self.set('errorMessage', reason.errors && reason.errors[0].title || reason);
           self.transitionTo('/');
