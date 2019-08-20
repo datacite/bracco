@@ -1,8 +1,10 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
+import ENV from 'bracco/config/environment';
 
 export default Controller.extend({
   session: service(),
+  orcidLogoUrl: ENV.CDN_URL + '/images/orcid.png',
 
   actions: {
     authenticate() {

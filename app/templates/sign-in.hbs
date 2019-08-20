@@ -7,6 +7,10 @@
         <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1 ">
           <div class="register-card">
             <h3 class="title">Sign In</h3>
+            
+            <a target="_blank" rel="noopener" class="btn btn-block btn-social btn-orcid" href="https://profiles.datacite.org/users/auth/orcid"><img id="orcid-id-logo" src="{{orcidLogoUrl}}" alt="ORCID iD icon"/> Sign In with ORCID</a>
+            
+            <div id="or">or</div>
 
             {{#bs-form formLayout="vertical" model=this onSubmit=(action "authenticate") submitOnEnter=true as |form|}}
               {{form.element controlType="text" property="identification" label="Account ID" required=false}}
