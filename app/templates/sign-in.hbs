@@ -8,9 +8,11 @@
           <div class="register-card">
             <h3 class="title">Sign In</h3>
             
-            <a target="_blank" rel="noopener" class="btn btn-block btn-social btn-orcid" href="https://profiles.datacite.org/users/auth/orcid"><img id="orcid-id-logo" src="{{orcidLogoUrl}}" alt="ORCID iD icon"/> Sign In with ORCID</a>
-            
-            <div id="or">or</div>
+            {{#if showGlobus}}
+              <a href="{{oidcAuthUrl}}" class="btn btn-block btn-social btn-globus btn-fill"><img id="globus-logo" src="{{globusLogoUrl}}" alt="Globus icon"/> Sign In with Globus Auth</a>
+              
+              <div id="or">or</div>
+            {{/if}}
 
             {{#bs-form formLayout="vertical" model=this onSubmit=(action "authenticate") submitOnEnter=true as |form|}}
               {{form.element controlType="text" property="identification" label="Account ID" required=false}}
