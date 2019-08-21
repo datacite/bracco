@@ -13,7 +13,7 @@
   {{/if}}
 </h3>
 {{#if model.creators}}
-  {{{format-creator model.creators}}}
+  {{creator-show creators=model.creators}}
 {{/if}}
 <div class="metadata">
   {{format-metadata model.publicationYear resourceTypeGeneral=model.types.resourceTypeGeneral resourceType=model.types.resourceType container=model.bcontainer publisher=model.publisher version=model.version}}

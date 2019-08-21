@@ -1,0 +1,9 @@
+{{#if creators}}
+  {{#each creators as |creator index|}}
+    {{#if (and creator.orcid (can "read index"))}}
+      {{#link-to "researchers.show" creator.orcid}}{{creator.displayName~}}{{/link-to}}{{format-creator creators index=index}}
+    {{else}}
+      {{creator.displayName~}}{{format-creator creators index=index}}
+    {{/if}}
+  {{/each}}
+{{/if}}
