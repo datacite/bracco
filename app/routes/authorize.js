@@ -19,6 +19,8 @@ export default Route.extend({
       } else {
         this.transitionTo('/sign-in?globus');
       }
+    } else {
+      this.transitionTo('/sign-in');
     }
   }
 });
