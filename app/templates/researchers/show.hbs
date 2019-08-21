@@ -1,0 +1,31 @@
+{{#if (can "read researcher" model)}}
+  {{application-header default=true}}
+
+  <div class="container-fluid">
+    {{#if (can "read researcher" model)}}
+      <ol class="breadcrumb">
+        {{#if (can "read index")}}
+          <li class="breadcrumb-item">{{#link-to "index"}}DataCite{{/link-to}}</li>
+          <li class="breadcrumb-item">{{#link-to "researchers"}}Researchers{{/link-to}}</li>
+        {{/if}}
+      </ol>
+    {{/if}}
+
+    <div id="show">
+      <h2 class="work">{{model.name}}</h2>
+
+      <div class="tab-content nav-tabs-member">
+        {{#bs-nav type="tabs" as |nav|}}
+          {{#nav.item route="researchers.show.index" model=model.id class="nav-link"}}Info{{/nav.item}}
+          {{#nav.item route="researchers.show.settings" model=model.id class="nav-link"}}Settings{{/nav.item}}
+          {{#nav.item route="researchers.show.dois" model=model.id class="nav-link doi"}}DOIs{{/nav.item}}
+        {{/bs-nav}}
+      </div>
+    </div>
+
+    {{outlet}}
+  </div>
+{{else}}
+  {{application-header}}
+  {{landing-page}}
+{{/if}}

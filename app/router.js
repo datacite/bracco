@@ -57,7 +57,6 @@ Router.map(function () {
           this.route('modify');
           this.route('delete');
           this.route('transfer');
-          this.route('enableForm');
         });
       });
       this.route('transfer');
@@ -77,6 +76,12 @@ Router.map(function () {
   });
   this.route('prefixes', function () {
     this.route('new');
+  });
+  this.route('researchers', function () {
+    this.route('show', { path: '/:researcher_id' }, function () {
+      this.route('settings');
+      this.route('dois');
+    });
   });
 
   this.route("sign-in");
