@@ -5,7 +5,7 @@ export default Route.extend({
   session: service(),
   fastboot: service(),
 
-  beforeModel() {
+  model() {
     let headers = this.get('fastboot.request.headers');
     let jwt = headers.get('x-amzn-oidc-data');
     if (jwt) {
