@@ -94,18 +94,18 @@ module('Acceptance | staff_admin | admin', function(hooks) {
     assert.dom('div.alert-warning').includesText('The page was not found.');
   });
 
-  test('visiting dois', async function(assert) {
-    await authenticateSession({
-      uid: 'admin',
-      name: 'Admin',
-      role_id: 'staff_admin'
-    });
-    await visit('/dois');
+  // test('visiting dois', async function(assert) {
+  //   await authenticateSession({
+  //     uid: 'admin',
+  //     name: 'Admin',
+  //     role_id: 'staff_admin'
+  //   });
+  //   await visit('/dois');
 
-    assert.equal(currentURL(), '/dois');
-    assert.dom('h2.work').hasText('DataCite');
-    assert.dom('li.nav-link.active a').hasText('DOIs');
-  });
+  //   assert.equal(currentURL(), '/dois');
+  //   assert.dom('h2.work').hasText('DataCite');
+  //   assert.dom('li.nav-link.active a').hasText('DOIs');
+  // });
 
   // test('visiting specific doi', async function(assert) {
   //   await authenticateSession({
