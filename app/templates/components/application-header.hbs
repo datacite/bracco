@@ -19,9 +19,13 @@
         {{#if session.isAuthenticated}}
           <nav.dropdown as |dd|>
             <dd.toggle id="account_menu_link">
-              {{uppercase currentUser.uid}}
+              {{#if currentUser.isResearcher}}
+                {{currentUser.name}}
+              {{else}}
+                {{uppercase currentUser.uid}}
+              {{/if}}
               <span class="caret"></span>
-            </dd.toggle>
+            </dd.toggle> 
             <dd.menu class="navbar-menu" as |menu|>
               <menu.item class="dropdown-header">
                 Role: {{currentUser.roleName}}
