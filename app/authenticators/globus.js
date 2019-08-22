@@ -15,12 +15,7 @@ export default Base.extend({
 
       fetch(serverTokenEndpoint, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          token: jwt
-        })
+        body: 'token=' + jwt
       }).then((response) => {
         response.text().then((text) => {
           try {
