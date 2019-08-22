@@ -2,6 +2,7 @@ import Base from 'ember-simple-auth/authenticators/base';
 import { Promise } from 'rsvp';
 import fetch from 'fetch';
 import ENV from 'bracco/config/environment';
+import { isEmpty } from '@ember/utils';
 
 export default Base.extend({
   serverTokenEndpoint: ENV.API_URL + '/oidc-token',
@@ -27,6 +28,7 @@ export default Base.extend({
               response.responseJSON = json;
               reject(response);
             } else {
+              console.log(json)
               resolve(json);
             }
           } catch (SyntaxError) {
@@ -39,5 +41,8 @@ export default Base.extend({
   },
   invalidate() {
     return Promise.resolve();
+  },
+  _validate(data) {
+    return !isEmpty(data['access_token']);
   }
 });
