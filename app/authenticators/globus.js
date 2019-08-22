@@ -15,6 +15,9 @@ export default Base.extend({
 
       fetch(serverTokenEndpoint, {
         method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
         body: 'token=' + jwt
       }).then((response) => {
         response.text().then((text) => {
@@ -31,9 +34,7 @@ export default Base.extend({
             reject(response);
           }
         });
-      }).catch(function (error) {
-        console.log(error);
-      });
+      }).catch(reject);
     });
   },
   invalidate() {
