@@ -20,7 +20,8 @@ export default Base.extend({
         },
         body: JSON.stringify({
           token: jwt
-        }).then((response) => {
+        })
+      }).then((response) => {
         response.text().then((text) => {
           try {
             let json = JSON.parse(text);
@@ -35,7 +36,9 @@ export default Base.extend({
             reject(response);
           }
         });
-      }).catch(reject);
+      }).catch(function (error) {
+        console.log(error);
+      });
     });
   },
   invalidate() {
