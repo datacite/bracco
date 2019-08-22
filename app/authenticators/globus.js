@@ -9,11 +9,14 @@ export default Base.extend({
   restore(data) {
     return this._validate(data) ? Promise.resolve(data) : Promise.reject();
   },
-  authenticate() {  
+  authenticate(jwt) {  
     return new Promise((resolve, reject) => {
       const serverTokenEndpoint = this.get('serverTokenEndpoint');
 
-      fetch(serverTokenEndpoint).then((response) => {
+      fetch(serverTokenEndpoint, {
+        method: 'POST',
+        token: jwt
+      }).then((response) => {
         response.text().then((text) => {
           try {
             let json = JSON.parse(text);
