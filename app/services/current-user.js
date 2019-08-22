@@ -77,12 +77,12 @@ export default Service.extend({
         this.set('settings', { route: 'clients.show.settings', id: this.uid });
         this.set('roleName', 'Repository');
       } else if (payload.role_id === 'user') {
+        this.set('home', { route: 'researchers.show', id: this.uid });
         this.set('roleName', 'User');
       }
 
       if (payload.uid.startsWith('0')) {
         this.set('isResearcher', true);
-        this.set('home', { route: 'researchers.show', id: this.uid });
         this.set('settings', { route: 'researchers.show.settings', id: this.uid });
       }
 

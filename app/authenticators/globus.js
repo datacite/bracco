@@ -28,7 +28,6 @@ export default Base.extend({
               response.responseJSON = json;
               reject(response);
             } else {
-              console.log(json)
               resolve(json);
             }
           } catch (SyntaxError) {
