@@ -15,8 +15,12 @@ export default Base.extend({
 
       fetch(serverTokenEndpoint, {
         method: 'POST',
-        body: { token: jwt }
-      }).then((response) => {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          token: jwt
+        }).then((response) => {
         response.text().then((text) => {
           try {
             let json = JSON.parse(text);
