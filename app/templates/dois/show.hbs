@@ -4,25 +4,22 @@
   <ol class="breadcrumb">
     {{#if (can "read index")}}
       <li class="breadcrumb-item">{{#link-to "index"}}DataCite{{/link-to}}</li>
-    {{/if}}
-    {{#if (can "read provider" model.client.provider)}}
+      <li class="breadcrumb-item">{{#link-to "providers"}}Providers{{/link-to}}</li>
       <li class="breadcrumb-item">{{#link-to "providers.show" model.client.provider.id}}{{model.client.provider.name}}{{/link-to}}</li>
-    {{/if}}
-    {{#if (can "read index")}}
       <li class="breadcrumb-item">{{#link-to "providers.show.repositories" model.client.provider.id}}Repositories{{/link-to}}</li>
-    {{else if (can "read provider" model.client.provider)}}
-      <li class="breadcrumb-item">{{#link-to "providers.show.clients" model.client.provider.id}}Clients{{/link-to}}</li>
-    {{/if}}
-    {{#if (can "read index")}}
       <li class="breadcrumb-item">{{#link-to "repositories.show" model.client.id}}{{model.client.name}}{{/link-to}}</li>
       <li class="breadcrumb-item">{{#link-to "repositories.show.dois" model.client.id}}DOIs{{/link-to}}</li>
+    {{else if (can "read provider" model.client.provider)}}
+      <li class="breadcrumb-item">{{#link-to "providers.show" model.client.provider.id}}{{model.client.provider.name}}{{/link-to}}</li>
+      <li class="breadcrumb-item">{{#link-to "providers.show.clients" model.client.provider.id}}Clients{{/link-to}}</li>
+      <li class="breadcrumb-item">{{#link-to "clients.show" model.client.id}}{{model.client.name}}{{/link-to}}</li>
+      <li class="breadcrumb-item">{{#link-to "clients.show.dois" model.client.id}}DOIs{{/link-to}}</li>      
     {{else if (can "read repository" model.repository)}}
       <li class="breadcrumb-item">{{#link-to "clients.show" model.client.id}}{{model.client.name}}{{/link-to}}</li>
       <li class="breadcrumb-item">{{#link-to "clients.show.dois" model.client.id}}DOIs{{/link-to}}</li>
-    {{else}}
-      {{#if (can "detail doi" model)}}
-        <li class="breadcrumb-item">{{#link-to "dois"}}DOIs{{/link-to}}</li>
-      {{/if}}
+    {{else if (can "detail researcher" model.researcher)}}
+      <li class="breadcrumb-item">{{#link-to "researchers.show" model.researcher.id}}{{model.researcher.name}}{{/link-to}}</li>
+      <li class="breadcrumb-item">{{#link-to "researchers.show.dois" model.researcher.id}}DOIs{{/link-to}}</li>
     {{/if}}
   </ol>
   
