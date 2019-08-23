@@ -203,5 +203,19 @@ export default Model.extend(Validations, {
     } else {
       return null;
     }
-  })
+  }),
+  title: computed('titles', function () {
+    if (this.titles.length > 0) {
+      return A(this.titles).get('firstObject').get('title');
+    } else {
+      return null;
+    }
+  }),
+  description: computed('descriptions', function () {
+    if (this.descriptions.length > 0) {
+      return A(this.descriptions).get('firstObject').get('description');
+    } else {
+      return null;
+    }
+  }),
 });

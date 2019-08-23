@@ -20,7 +20,9 @@
       <li class="breadcrumb-item">{{#link-to "clients.show" model.client.id}}{{model.client.name}}{{/link-to}}</li>
       <li class="breadcrumb-item">{{#link-to "clients.show.dois" model.client.id}}DOIs{{/link-to}}</li>
     {{else}}
-      <li class="breadcrumb-item">{{#link-to "dois"}}DOIs{{/link-to}}</li>
+      {{#if (can "detail doi" model)}}
+        <li class="breadcrumb-item">{{#link-to "dois"}}DOIs{{/link-to}}</li>
+      {{/if}}
     {{/if}}
   </ol>
   

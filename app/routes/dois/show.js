@@ -1,6 +1,7 @@
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
 import { set } from '@ember/object';
+import { A } from '@ember/array';
 
 export default Route.extend({
   can: service(),
@@ -9,12 +10,8 @@ export default Route.extend({
   model(params) {
     let self = this;
     return this.store.findRecord('doi', params.doi_id, { include: 'client' }).then(function(doi) {
-      if (doi.titles) {
-        set(self, 'headData.title', null);
-      }
-      if (doi.descriptions) {
-        set(self, 'headData.description', null);
-      }
+      set(self, 'headData.title', doi.title);
+      set(self, 'headData.description', doi.description);
 
       return doi;
     }).catch(function(reason){
