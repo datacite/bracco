@@ -7,7 +7,11 @@
     {{/if}}
     {{#if (can "read provider" model.client.provider)}}
       <li class="breadcrumb-item">{{#link-to "providers.show" model.client.provider.id}}{{model.client.provider.name}}{{/link-to}}</li>
+    {{/if}}
+    {{#if (can "read index")}}
       <li class="breadcrumb-item">{{#link-to "providers.show.repositories" model.client.provider.id}}Repositories{{/link-to}}</li>
+    {{else if (can "read provider" model.client.provider)}}
+      <li class="breadcrumb-item">{{#link-to "providers.show.clients" model.client.provider.id}}Clients{{/link-to}}</li>
     {{/if}}
     {{#if (can "read index")}}
       <li class="breadcrumb-item">{{#link-to "repositories.show" model.client.id}}{{model.client.name}}{{/link-to}}</li>
