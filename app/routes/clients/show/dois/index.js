@@ -30,9 +30,9 @@ export default Route.extend({
     }
   },
 
-  // afterModel() {
-  //   if (this.can.cannot('read client', this.modelFor('clients/show'))) {
-  //     this.transitionTo('index');
-  //   }
-  // }
+  afterModel() {
+    if (this.can.cannot('read client', this.modelFor('clients/show'))) {
+      this.transitionTo('index');
+    }
+  }
 });

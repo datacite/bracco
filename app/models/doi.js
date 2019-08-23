@@ -5,6 +5,7 @@ import ENV from 'bracco/config/environment';
 import Model from 'ember-data/model';
 import { fragmentArray } from 'ember-data-model-fragments/attributes';
 import { w } from '@ember/string';
+import { A } from '@ember/array';
 
 const Validations = buildValidations({
   details: [
@@ -198,7 +199,7 @@ export default Model.extend(Validations, {
   }),
   schemaVersionString: computed('schemaVersion', function () {
     if (this.schemaVersion) {
-      return this.schemaVersion.split("-").get("lastObject");
+      return A(this.schemaVersion.split("-")).get("lastObject");
     } else {
       return null;
     }

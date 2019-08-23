@@ -73,7 +73,7 @@ export default Fragment.extend(Validations, {
   orcid: computed('nameIdentifiers', function() {
     if (this.nameIdentifiers) {
       let id = A(this.nameIdentifiers).findBy('nameIdentifierScheme', 'ORCID');
-      if (id) {
+      if (typeof id !== 'undefined' && typeof id.nameIdentifier !== 'undefined') {
         return id.nameIdentifier.substr(id.nameIdentifier.indexOf('0'));
       } else {
         return null;
