@@ -7,17 +7,17 @@ export default Route.extend({
   can: service(),
   
   model(params) {
-    let model = this.modelFor('researchers/show');
+    let researcher = this.modelFor('researchers/show');
     params = assign(params, { 
       page: {
         number: params.page,
         size: params.size 
       },
-      'researcher-id': model.get('id')
+      'researcher-id': researcher.get('id')
     });
 
     return hash({
-      researcher: model,
+      researcher: researcher,
       dois: this.store.query('doi', params)
     });
   },
