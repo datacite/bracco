@@ -17,7 +17,7 @@ export default Route.extend({
     });
 
     return hash({
-      provider: model,
+      researcher: model,
       dois: this.store.query('doi', params)
     });
   },
