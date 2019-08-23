@@ -6,7 +6,7 @@ export default Route.extend({
 
   model() {
     let self = this;
-    return this.store.findRecord('doi', this.modelFor('clients/show/dois/show').get('id'), { include: 'provider,client,resource-type' }).then(function (doi) {
+    return this.store.findRecord('doi', this.modelFor('dois/show').get('id'), { include: 'provider,client,resource-type' }).then(function (doi) {
       return doi;
     }).catch(function (reason) {
       if (console.debug) {
@@ -21,10 +21,10 @@ export default Route.extend({
   },
 
   afterModel() {
-    if (this.can.cannot('delete doi', this.modelFor('clients/show/dois/show'))) {
+    if (this.can.cannot('delete doi', this.modelFor('dois/show'))) {
       this.transitionTo('index');
     } else {
-      this.modelFor('clients/show/dois/show').set('mode', 'edit');
+      this.modelFor('dois/show').set('mode', 'edit');
     }
   }
 });

@@ -69,7 +69,14 @@ Router.map(function () {
     });
   });
   this.route('dois', function () {
-    this.route('index', { path: '/' });
+    this.route('new');
+    this.route('upload');
+    this.route('show', { path: '/:doi_id' }, function () {
+      this.route('edit');
+      this.route('modify');
+      this.route('delete');
+      this.route('transfer');
+    });
   });
   this.route('settings', function () {
     this.route('index', { path: '/' });

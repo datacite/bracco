@@ -61,12 +61,12 @@ export default Controller.extend({
       let self = this;
       doi.save().then(function (doi) {
 
-        self.transitionToRoute('clients.show.dois.show', doi.get('client.id'), doi);
+        self.transitionToRoute('dois.show', doi);
       });
     },
     cancel() {
       this.model.rollbackAttributes();
-      this.transitionToRoute('clients.show.dois.show', this.model.get('client.id'), this.model);
+      this.transitionToRoute('dois.show', this.model);
     }
   }
 });

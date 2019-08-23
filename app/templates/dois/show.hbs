@@ -1,0 +1,28 @@
+{{application-header default=true}}
+
+<div class="container-fluid">
+  <ol class="breadcrumb">
+    {{#if (can "read index")}}
+      <li class="breadcrumb-item">{{#link-to "index"}}DataCite{{/link-to}}</li>
+    {{/if}}
+    {{#if (can "read provider" model.client.provider)}}
+      <li class="breadcrumb-item">{{#link-to "providers.show" model.client.provider.id}}{{model.client.provider.name}}{{/link-to}}</li>
+      <li class="breadcrumb-item">{{#link-to "providers.show.repositories" model.client.provider.id}}Repositories{{/link-to}}</li>
+    {{/if}}
+    {{#if (can "read index")}}
+      <li class="breadcrumb-item">{{#link-to "repositories.show" model.client.id}}{{model.client.name}}{{/link-to}}</li>
+      <li class="breadcrumb-item">{{#link-to "repositories.show.dois" model.client.id}}DOIs{{/link-to}}</li>
+    {{else if (can "read repository" model.repository)}}
+      <li class="breadcrumb-item">{{#link-to "clients.show" model.client.id}}{{model.client.name}}{{/link-to}}</li>
+      <li class="breadcrumb-item">{{#link-to "clients.show.dois" model.client.id}}DOIs{{/link-to}}</li>
+    {{else}}
+      <li class="breadcrumb-item">{{#link-to "dois"}}DOIs{{/link-to}}</li>
+    {{/if}}
+  </ol>
+  
+  <div id="show">
+    <h2 class="work">{{model.id}}</h2>
+  </div>
+
+  {{outlet}}
+</div>
