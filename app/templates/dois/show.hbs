@@ -17,7 +17,7 @@
     {{else if (can "read repository" model.repository)}}
       <li class="breadcrumb-item">{{#link-to "clients.show" model.client.id}}{{model.client.name}}{{/link-to}}</li>
       <li class="breadcrumb-item">{{#link-to "clients.show.dois" model.client.id}}DOIs{{/link-to}}</li>
-    {{else if (can "detail researcher" model.researcher)}}
+    {{else if (can "detail doi" model)}}
       <li class="breadcrumb-item">{{#link-to "researchers.show" model.researcher.id}}{{model.researcher.name}}{{/link-to}}</li>
       <li class="breadcrumb-item">{{#link-to "researchers.show.dois" model.researcher.id}}DOIs{{/link-to}}</li>
     {{/if}}
