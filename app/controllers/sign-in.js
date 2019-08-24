@@ -5,10 +5,10 @@ import { computed } from '@ember/object';
 import { isPresent } from '@ember/utils';
 
 export default Controller.extend({
+  session: service(),
+
   queryParams: ['globus'],
   globus: null,
-
-  session: service(),
   orcidLogoUrl: ENV.CDN_URL + '/images/orcid.png',
   globusLogoUrl: ENV.CDN_URL + '/images/globus.png',
   oidcAuthUrl: ENV.FABRICA_URL + '/authorize',
