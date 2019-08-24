@@ -14,12 +14,9 @@
       <li class="breadcrumb-item">{{#link-to "providers.show.clients" model.client.provider.id}}Clients{{/link-to}}</li>
       <li class="breadcrumb-item">{{#link-to "clients.show" model.client.id}}{{model.client.name}}{{/link-to}}</li>
       <li class="breadcrumb-item">{{#link-to "clients.show.dois" model.client.id}}DOIs{{/link-to}}</li>      
-    {{else if (can "read repository" model.repository)}}
+    {{else if (can "read repository" model.client)}}
       <li class="breadcrumb-item">{{#link-to "clients.show" model.client.id}}{{model.client.name}}{{/link-to}}</li>
       <li class="breadcrumb-item">{{#link-to "clients.show.dois" model.client.id}}DOIs{{/link-to}}</li>
-    {{else if (and currentUser.isResearcher (can "detail doi" model))}}
-      <li class="breadcrumb-item">{{#link-to "researchers.show" currentUser.uid}}{{model.researcher.name}}{{/link-to}}</li>
-      <li class="breadcrumb-item">{{#link-to "researchers.show.dois" currentUser.uid}}DOIs{{/link-to}}</li>
     {{/if}}
   </ol>
   
