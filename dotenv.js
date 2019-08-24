@@ -4,6 +4,7 @@ module.exports = function() {
                         'NAVMENU_TITLE',
                         'SEARCH_URL',
                         'ORCID_URL',
+                        'FABRICA_URL',
                         'API_URL',
                         'RE3DATA_API_URL',
                         'EVENTDATA_URL',
