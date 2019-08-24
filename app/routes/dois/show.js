@@ -5,6 +5,7 @@ import { set } from '@ember/object';
 export default Route.extend({
   can: service(),
   headData: service(),
+  currentUser: service(),
 
   model(params) {
     let self = this;
