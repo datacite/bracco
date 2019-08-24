@@ -79,6 +79,8 @@ export default Service.extend({
       } else if (payload.role_id === 'user') {
         this.set('home', { route: 'researchers.show', id: this.uid });
         this.set('roleName', 'User');
+      } else if (payload.role_id === 'temporary') {
+        this.set('home', { route: 'password' });
       }
 
       if (payload.uid.startsWith('0')) {
@@ -86,7 +88,7 @@ export default Service.extend({
         this.set('settings', { route: 'researchers.show.settings', id: this.uid });
       }
 
-      if (payload.role_id !== 'user') {
+      if (!['user', 'temporary'].includes(payload.role_id)) {
         this.flashMessages.info('Welcome ' + this.name + ' to the DOI Fabrica administration area.');
       }
 
