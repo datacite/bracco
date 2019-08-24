@@ -1,12 +1,21 @@
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
+import { set } from '@ember/object';
 
 export default Route.extend({
   can: service(),
+  headData: service(),
 
   model() {
     let self = this;
     return this.store.findRecord('doi', this.modelFor('clients/show/dois/show').get('id'), { include: 'client' }).then(function(doi) {
+      if (doi.titles) {
+        set(self, 'headData.title', null);
+      }
+      if (doi.descriptions) {
+        set(self, 'headData.description', null);
+      }
+      
       return doi;
     }).catch(function(reason){
       if (console.debug) {

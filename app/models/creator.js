@@ -3,6 +3,7 @@ import Fragment from 'ember-data-model-fragments/fragment';
 import { fragmentArray } from 'ember-data-model-fragments/attributes';
 import { validator, buildValidations } from 'ember-cp-validations';
 import { computed } from '@ember/object';
+import { A } from '@ember/array';
 
 const Validations = buildValidations({
   'name': [
@@ -64,5 +65,21 @@ export default Fragment.extend(Validations, {
   familyName: attr('string', { defaultValue: null }),
   nameType: attr('string', { defaultValue: "Personal" }),
   nameIdentifiers: fragmentArray('name-identifier'),
-  affiliation: fragmentArray('affiliation')
+  affiliation: fragmentArray('affiliation'),
+
+  displayName: computed('name', 'givenName', 'familyName', function() {
+    return (this.familyName) ? [this.givenName, this.familyName].join(" ") : this.name;
+  }),
+  orcid: computed('nameIdentifiers', function() {
+    if (this.nameIdentifiers) {
+      let id = A(this.nameIdentifiers).findBy('nameIdentifierScheme', 'ORCID');
+      if (typeof id !== 'undefined' && typeof id.nameIdentifier !== 'undefined') {
+        return id.nameIdentifier.substr(id.nameIdentifier.indexOf('0'));
+      } else {
+        return null;
+      }
+    } else {
+      return null;
+    }
+  }),
 });

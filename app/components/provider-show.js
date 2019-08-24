@@ -239,8 +239,6 @@ export default Component.extend({
     },
     submit(provider) {
       let self = this;
-      console.log(provider)
-
       provider.save().then(function () {
         self.reset();
       }).catch(function(reason){

@@ -18,23 +18,10 @@
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
 
     {{content-for "head-footer"}}
-
-    <script>
-      var _prum = [['id', '5a13e3df9c55538d208dda08'],
-                   ['mark', 'firstbyte', (new Date()).getTime()]];
-      (function() {
-          var s = document.getElementsByTagName('script')[0],
-              p = document.createElement('script');
-          p.async = 'async';
-          p.src = '//rum-static.pingdom.net/prum.min.js';
-          s.parentNode.insertBefore(p, s);
-      })();
-    </script>
   </head>
   <body>
     {{content-for "body"}}
 
-    <script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
     <script src="//cdn.statuspage.io/se-v2.js"></script>
 
     <script src="{{rootURL}}assets/vendor.js"></script>

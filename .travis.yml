@@ -19,11 +19,15 @@ before_install:
       CLOUDFRONT_DISTRIBUTION_ID=$CLOUDFRONT_DISTRIBUTION_ID_STAGE;
       cp .env.stage .env;
       AUTO_DEPLOY=true;
-    else
+    elif [ "$TRAVIS_BRANCH" == "fastboot" ]; then
       AWS_BUCKET="doi.stage.datacite.org";
       CLOUDFRONT_DISTRIBUTION_ID=$CLOUDFRONT_DISTRIBUTION_ID_STAGE;
       cp .env.stage .env;
       AUTO_DEPLOY=true;
+    else
+      AWS_BUCKET="doi.stage.datacite.org";
+      CLOUDFRONT_DISTRIBUTION_ID=$CLOUDFRONT_DISTRIBUTION_ID_STAGE;
+      cp .env.stage .env;
     fi
   - npm config set spin false
   - npm install -g codeclimate-test-reporter
@@ -44,44 +48,70 @@ before_script:
 script:
   - COVERAGE=true ember test
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
-  - ember build --environment=production  
+  - ember build --environment=production
 
 after_success:
-  # Send release information to Sentry
+  - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
+  - REPO=datacite/bracco;
+  - AUTO_DEPLOY=false;
+  - if [ "${TRAVIS_TAG?}" ]; then
+      docker build -f Dockerfile -t $REPO:$TRAVIS_TAG .;
+      docker push $REPO:$TRAVIS_TAG;
+      echo "Pushed to" $REPO:$TRAVIS_TAG;
+      AUTO_DEPLOY=true;
+    elif [[ "$TRAVIS_BRANCH" == "master" && "$TRAVIS_PULL_REQUEST" == "false" ]]; then
+      docker build -f Dockerfile -t $REPO .;
+      docker push $REPO;
+      echo "Pushed to" $REPO;
+      AUTO_DEPLOY=true;
+    elif [[ "$TRAVIS_BRANCH" == "fastboot" && "$TRAVIS_PULL_REQUEST" == "false" ]]; then
+      docker build -f Dockerfile -t $REPO .;
+      docker push $REPO;
+      echo "Pushed to" $REPO;
+      AUTO_DEPLOY=true;
+    else
+      docker build -f Dockerfile -t $REPO:$TRAVIS_BRANCH .;
+      docker push $REPO:$TRAVIS_BRANCH;
+      echo "Pushed to" $REPO:$TRAVIS_BRANCH;
+    fi
+
   - if [ "$AUTO_DEPLOY" == "true" ]; then
-      git fetch --depth=1000;
-      GIT_TAG=$(git describe --tags $(git rev-list --tags --max-count=1));
+      wget https://github.com/jwilder/dockerize/releases/download/v0.6.0/dockerize-linux-amd64-v0.6.0.tar.gz;
+      tar -xzvf dockerize-linux-amd64-v0.6.0.tar.gz;
+      rm dockerize-linux-amd64-v0.6.0.tar.gz;
+      export GIT_SHA=$(git rev-parse --short HEAD);
+      export GIT_REVISION=$(git rev-parse HEAD);
+      export GIT_TAG=$(git describe --tags $(git rev-list --tags --max-count=1));
+
+      git clone "https://${TRAVIS_SECURE_TOKEN}@github.com/datacite/mastino.git";
+      ./dockerize -template vendor/docker/_bracco.auto.tfvars.tmpl:mastino/stage/services/doi/_bracco.auto.tfvars;
+
       sentry-cli releases new bracco:${GIT_TAG} --finalize --project bracco;
 
       if [ "${TRAVIS_TAG?}" ]; then
+        ./dockerize -template vendor/docker/_bracco.auto.tfvars.tmpl:mastino/prod-eu-west/services/doi/_bracco.auto.tfvars;
         sentry-cli releases deploys bracco:${GIT_TAG} new -e production;
       else
         sentry-cli releases deploys bracco:${GIT_TAG} new -e stage;
       fi
 
       sentry-cli releases set-commits --auto bracco:${GIT_TAG};
+      
+      cd mastino;
+      git remote;
+      git config user.email ${DOCKER_EMAIL};
+      git config user.name ${DOCKER_USERNAME};
+      
+      if [ "${TRAVIS_TAG?}" ]; then
+        git add prod-eu-west/services/doi/_bracco.auto.tfvars;
+        git commit -m "Adding bracco git variables for commit tagged ${TRAVIS_TAG?}";
+        git push "https://${TRAVIS_SECURE_TOKEN}@github.com/datacite/mastino.git" master;
+      else
+        git add stage/services/doi/_bracco.auto.tfvars;
+        git commit -m "Adding bracco git variables for latest commit";
+        git push "https://${TRAVIS_SECURE_TOKEN}@github.com/datacite/mastino.git" master;
+      fi
     fi
-
-deploy:
-  provider: s3
-  access_key_id: $AWS_ACCESS_KEY
-  secret_access_key: $AWS_SECRET_KEY
-  bucket: $AWS_BUCKET
-  region: eu-west-1
-  skip_cleanup: true
-  local_dir: dist
-  acl: public_read
-  cache_control: "no-cache"
-  on:
-    all_branches: true
-
-after_deploy:
-  - export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY
-  - export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_KEY
-  # Allow `awscli` to make requests to CloudFront.
-  - aws configure set preview.cloudfront true
-  # Invalidate every object in the targeted distribution.
-  - aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
 
 notifications:
   slack: datacite:Wt8En0ALoTA6Kjc5EOKNDWxN

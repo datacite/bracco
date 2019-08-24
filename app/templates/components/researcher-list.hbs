@@ -1,0 +1,46 @@
+<div class="col-md-3">
+  <div class="panel panel-transparent">
+    <div class="panel-body">
+      <div class="edit"></div>
+    </div>
+  </div>
+</div>
+<div class="col-md-9 panel-list" id="content">
+  {{#if searchable}}
+    {{model-search model=model sortable=true name="Researcher" link="researchers"}}
+  {{/if}}
+
+  {{#if model}}
+    {{#each model as |researcher|}}
+      <div class="panel panel-transparent">
+        <div class="panel-body">
+          <h3 class="work">
+            {{#link-to "researchers.show" researcher.id}}{{researcher.name}}{{/link-to}}
+          </h3>
+
+          <h5>ORCID</h5>
+          <a href="{{researcher.orcid}}">{{researcher.orcid}}</a>
+
+          {{#if researcher.givenNames}}
+            <h5>Given Name</h5>
+            {{researcher.givenNames}}
+          {{/if}}
+
+          {{#if researcher.familyName}}
+            <h5>Family Name</h5>
+            {{researcher.familyName}}
+          {{/if}}
+        </div>
+      </div>
+    {{/each}}
+    <div class="text-center">
+      {{#if (gt model.meta.totalPages 1)}}
+        {{page-numbers model=model link="researchers"}}
+      {{/if}}
+    </div>
+  {{else}}
+    {{#bs-alert dismissible=false type="warning"}}
+      No researchers found.
+    {{/bs-alert}}
+  {{/if}}
+</div>

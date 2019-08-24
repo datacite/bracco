@@ -26,7 +26,7 @@ export default Component.extend({
 
   barChart() {
     let formatMonthYear = d3.time.format.utc("%B %Y");
-    let formatFixed = d3.format(",.0f");
+    //let formatFixed = d3.format(",.0f");
 
     let chartId = this.chartId;
     let data = (this.data) ? this.data : [];
@@ -108,17 +108,17 @@ export default Component.extend({
         .text(formatMonthYear(startDate));
     }
       
-    let self = this;
-    chart.selectAll("rect").each(
-      function(d) {
-        var id = '#' + chartId + '-' + d.id;
-        var title = formatFixed(d.sum);
-        var dateStamp = Date.parse(d.id + '-01T12:00:00Z');
-        var dateString = " in " + formatMonthYear(new Date(dateStamp));
+    // let self = this;
+    // chart.selectAll("rect").each(
+    //   function(d) {
+    //     var id = '#' + chartId + '-' + d.id;
+    //     var title = formatFixed(d.sum);
+    //     var dateStamp = Date.parse(d.id + '-01T12:00:00Z');
+    //     var dateString = " in " + formatMonthYear(new Date(dateStamp));
 
-        self.$(id).tooltip({ title: title + dateString, container: "body"});
-      }
-    );
+    //     self.$(id).tooltip({ title: title + dateString, container: "body"});
+    //   }
+    // );
 
     // return chart object
     return chart;

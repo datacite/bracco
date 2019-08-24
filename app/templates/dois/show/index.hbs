@@ -1,0 +1,45 @@
+<div class="row">
+  <div class='col-md-3'>
+    <div class="panel facets add">
+      <div class="panel-body">
+        <div class="btn-toolbar">
+          <div class="btn-group-vertical btn-group-sm">
+            {{#if (can "edit doi" model)}}
+            {{#link-to "dois.show.edit" model.id class="btn btn-warning"
+            id="edit-doi"}}{{fa-icon "wpforms"}} Update DOI (Form){{/link-to}}
+            {{/if}}
+            {{#if (can "modify doi" model)}}
+            {{#link-to "dois.show.modify" model.id class="btn btn-warning"
+            id="modify-doi"}}{{fa-icon "upload"}} Update DOI (File Upload){{/link-to}}
+            {{/if}}
+            {{#if (can "transfer doi" model)}}
+            {{#link-to "dois.show.transfer" model.id class="btn btn-warning"
+            id="transfer-doi"}}{{fa-icon "arrow-circle-o-right"}} Transfer DOI{{/link-to}}
+            {{/if}}
+            {{#if (and (can "delete doi" model) model.isDraft)}}
+            {{#link-to "dois.show.delete" model.id class="btn btn-warning"
+            id="delete-doi"}}{{fa-icon "trash"}} Delete DOI{{/link-to}}
+            {{/if}}
+          </div>
+        </div>
+      </div>
+    </div>
+    {{client-sidebar model=model}}
+  </div>
+  <div class='col-md-9'>
+    {{doi-url model=model}}
+    {{doi-metadata model=model}}
+
+    {{#if model.showCitation}}
+    {{doi-citation model=model}}
+    {{/if}}
+
+    {{#if (can "source doi" model)}}
+    {{doi-usage-stats model=model}}
+    {{/if}}
+
+    {{#if (and model.landingPage.checked (can "viewHealth doi" model))}}
+    {{doi-health model=model}}
+    {{/if}}
+  </div>
+</div>

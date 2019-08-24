@@ -11,7 +11,7 @@ export default Component.extend({
   languageList,
   languages: languageList,
   languageName: computed('language', function () {
-    return ISO6391.getName(this.get('language'));
+    return ISO6391.getName(this.language);
   }),
 
   actions: {

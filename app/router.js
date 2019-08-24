@@ -57,7 +57,6 @@ Router.map(function () {
           this.route('modify');
           this.route('delete');
           this.route('transfer');
-          this.route('enableForm');
         });
       });
       this.route('transfer');
@@ -70,7 +69,14 @@ Router.map(function () {
     });
   });
   this.route('dois', function () {
-    this.route('index', { path: '/' });
+    this.route('new');
+    this.route('upload');
+    this.route('show', { path: '/:doi_id' }, function () {
+      this.route('edit');
+      this.route('modify');
+      this.route('delete');
+      this.route('transfer');
+    });
   });
   this.route('settings', function () {
     this.route('index', { path: '/' });
@@ -78,8 +84,15 @@ Router.map(function () {
   this.route('prefixes', function () {
     this.route('new');
   });
+  this.route('researchers', function () {
+    this.route('show', { path: '/:researcher_id' }, function () {
+      this.route('settings');
+      this.route('dois');
+    });
+  });
 
   this.route("sign-in");
+  this.route('authorize');
   this.route("reset");
   this.route("password");
 

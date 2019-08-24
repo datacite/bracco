@@ -5,12 +5,13 @@ import ENV from 'bracco/config/environment';
 import Model from 'ember-data/model';
 import { fragmentArray } from 'ember-data-model-fragments/attributes';
 import { w } from '@ember/string';
+import { A } from '@ember/array';
 
 const Validations = buildValidations({
   details: [
     validator('belongs-to', {
       disabled: computed('model.mode', 'model.state', 'model.prefix', function () {
-        return !["new", "edit"].includes(this.model.get('mode')) || (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
+        return !["new", "edit"].includes(this.model.get('mode')) || this.get('model.state') === 'draft';
       })
     })
   ],
@@ -60,7 +61,7 @@ const Validations = buildValidations({
     validator('presence', {
       presence: true,
       isWarning: computed('model.state', 'model.prefix', function () {
-        return (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
+        return this.get('model.state') === 'draft';
       })
     })
   ],
@@ -71,7 +72,7 @@ const Validations = buildValidations({
     validator('presence', {
       presence: true,
       isWarning: computed('model.state', 'model.prefix', function () {
-        return (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
+        return this.get('model.state') === 'draft';
       }),
       disabled: computed('model.mode', function () {
         return !["new", "edit"].includes(this.model.get('mode'));
@@ -82,7 +83,7 @@ const Validations = buildValidations({
     validator('presence', {
       presence: true,
       isWarning: computed('model.state', 'model.prefix', function () {
-        return (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
+        return this.get('model.state') === 'draft';
       }),
       disabled: computed('model.mode', function () {
         return !["new", "edit"].includes(this.model.get('mode'));
@@ -105,7 +106,7 @@ const Validations = buildValidations({
     validator('presence', {
       presence: true,
       isWarning: computed('model.state', 'model.prefix', function () {
-        return (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
+        return this.get('model.state') === 'draft';
       }),
       disabled: computed('model.mode', function () {
         return !["new", "edit"].includes(this.model.get('mode'));
@@ -120,14 +121,14 @@ const Validations = buildValidations({
       presence: true,
       message: 'Please include valid metadata.',
       disabled: computed('model.mode', 'model.state', 'model.prefix', function () {
-        return !["upload", "modify"].includes(this.model.get('mode')) || (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
+        return !["upload", "modify"].includes(this.model.get('mode')) || this.get('model.state') === 'draft';
       }),
     }),
     validator('metadata', {
       allowBlank: true,
       dependentKeys: ['model.doi'],
       isWarning: computed('model.mode', 'model.state', 'model.prefix', function () {
-        return (this.get('model.state') === 'draft' || this.get('model.prefix') === '10.5072');
+        return this.get('model.state') === 'draft';
       }),
       disabled: computed('model.mode', function () {
         return !["upload", "modify"].includes(this.model.get('mode'));
@@ -198,9 +199,23 @@ export default Model.extend(Validations, {
   }),
   schemaVersionString: computed('schemaVersion', function () {
     if (this.schemaVersion) {
-      return this.schemaVersion.split("-").get("lastObject");
+      return A(this.schemaVersion.split("-")).get("lastObject");
     } else {
       return null;
     }
-  })
+  }),
+  title: computed('titles', function () {
+    if (this.titles.length > 0) {
+      return A(this.titles).get('firstObject').get('title');
+    } else {
+      return null;
+    }
+  }),
+  description: computed('descriptions', function () {
+    if (this.descriptions.length > 0) {
+      return A(this.descriptions).get('firstObject').get('description');
+    } else {
+      return null;
+    }
+  }),
 });

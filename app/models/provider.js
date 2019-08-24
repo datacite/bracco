@@ -3,6 +3,7 @@ import DS from 'ember-data';
 import ENV from 'bracco/config/environment';
 import { validator, buildValidations } from 'ember-cp-validations';
 import { fragment } from 'ember-data-model-fragments/attributes';
+import { A } from '@ember/array';
 
 const Validations = buildValidations({
   symbol: [
@@ -163,7 +164,7 @@ export default DS.Model.extend(Validations, {
     return this.get('meta.dois');
   }),
   currentDoiCount: computed('doiCount', function() {
-    let currentYear = this.doiCount.findBy('id', 2019);
+    let currentYear = A(this.doiCount).findBy('id', 2019);
     if (currentYear) {
       return currentYear.count;
     } else {

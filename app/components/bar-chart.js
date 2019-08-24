@@ -2,6 +2,7 @@ import { schedule, run } from '@ember/runloop';
 import { computed } from '@ember/object';
 import Component from '@ember/component';
 import d3 from "d3";
+import { A } from '@ember/array';
 
 export default Component.extend({
   tagName: 'div',
@@ -9,7 +10,7 @@ export default Component.extend({
   data: null,
   count: computed('data', function() {
     if (this.data) {
-      let currentYear = this.data.findBy('id', '2019');
+      let currentYear = A(this.data).findBy('id', '2019');
       if (currentYear) {
         return currentYear.count;
       } else {
@@ -43,7 +44,7 @@ export default Component.extend({
 
   barChart() {
     let formatYear = d3.time.format.utc("%Y");
-    let formatFixed = d3.format(",.0f");
+    //let formatFixed = d3.format(",.0f");
 
     let chartId = this.chartId;
     let data = (this.data) ? this.data : [];
@@ -112,17 +113,17 @@ export default Component.extend({
       .attr("transform", "translate(" + (width - 11) + "," + (height + 18) + ")")
       .text(formatYear(endDate) - 1);
 
-    let self = this;
-    chart.selectAll("rect").each(
-      function(d) {
-        var id = '#' + chartId + '-' + d.id;
-        var title = formatFixed(d.count);
-        var dateStamp = Date.parse(d.id + '-01T12:00:00Z');
-        var dateString = " in " + formatYear(new Date(dateStamp));
+    // let self = this;
+    // chart.selectAll("rect").each(
+    //   function(d) {
+    //     var id = '#' + chartId + '-' + d.id;
+    //     var title = formatFixed(d.count);
+    //     var dateStamp = Date.parse(d.id + '-01T12:00:00Z');
+    //     var dateString = " in " + formatYear(new Date(dateStamp));
 
-        self.$(id).tooltip({ title: title + dateString, container: "body"});
-      }
-    );
+    //     self.$(id).tooltip({ title: title + dateString, container: "body"});
+    //   }
+    // );
 
     // return chart object
     return chart;

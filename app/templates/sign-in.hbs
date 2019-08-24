@@ -7,6 +7,12 @@
         <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1 ">
           <div class="register-card">
             <h3 class="title">Sign In</h3>
+            
+            {{#if showGlobus}}
+              <a href="{{oidcAuthUrl}}" class="btn btn-block btn-social btn-globus btn-fill"><img id="globus-logo" src="{{globusLogoUrl}}" alt="Globus icon"/> Sign In with Globus Auth</a>
+              
+              <div id="or">or</div>
+            {{/if}}
 
             {{#bs-form formLayout="vertical" model=this onSubmit=(action "authenticate") submitOnEnter=true as |form|}}
               {{form.element controlType="text" property="identification" label="Account ID" required=false}}

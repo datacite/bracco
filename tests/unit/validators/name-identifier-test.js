@@ -1,10 +1,11 @@
-import { moduleFor, test } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupTest } from 'ember-qunit';
 
-moduleFor('validator:name-identifier', 'Unit | Validator | name-identifier', {
-  needs: ['validator:messages']
-});
+module('Unit | Validator | name-identifier', function(hooks) {
+  setupTest(hooks);
 
-test('it works', function(assert) {
-  var validator = this.subject();
-  assert.ok(validator);
+  test('it works', function(assert) {
+    var validator = this.owner.lookup('validator:name-identifier');
+    assert.ok(validator);
+  });
 });

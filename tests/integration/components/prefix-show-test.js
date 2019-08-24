@@ -1,17 +1,19 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('prefix-show', 'Integration | Component | prefix show', {
-  integration: true
-});
+module('Integration | Component | prefix show', function(hooks) {
+  setupRenderingTest(hooks);
 
-test('it renders', function(assert) {
-  // Template block usage:
-  this.render(hbs`
-    {{#prefix-show}}
-      template block text
-    {{/prefix-show}}
-  `);
+  test('it renders', async function(assert) {
+    // Template block usage:
+    await render(hbs`
+      {{#prefix-show}}
+        template block text
+      {{/prefix-show}}
+    `);
 
-  assert.dom('*').hasText('Providers No providers found. Clients No clients found.');
+    assert.dom('*').hasText('Providers No providers found. Clients No clients found.');
+  });
 });

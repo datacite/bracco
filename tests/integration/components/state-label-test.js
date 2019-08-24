@@ -6,14 +6,6 @@ import hbs from 'htmlbars-inline-precompile';
 module('Integration | Component | state label', function(hooks) {
   setupRenderingTest(hooks);
 
-  // test('it renders draft', function(assert) {
-  //   this.set('state', 'draft');
-
-  //   this.render(hbs`{{state-label state=state}}`);
-
-  //   assert.equal(this.$('span.label-default').text().trim(), 'Draft');
-  // });
-
   test('it renders registered', async function(assert) {
     this.set('state', 'registered');
 

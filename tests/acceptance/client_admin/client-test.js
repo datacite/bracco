@@ -4,15 +4,15 @@ import {
   currentURL,
   findAll,
   visit,
-  fillIn,
-  click,
+  // fillIn,
+  // click,
   waitUntil
 } from '@ember/test-helpers';
 import { authenticateSession } from 'ember-simple-auth/test-support';
 import { setupFactoryGuy } from 'ember-data-factory-guy';
 // import { build, make, mockFindRecord } from 'ember-data-factory-guy';
 
-import ENV from 'bracco/config/environment';
+// import ENV from 'bracco/config/environment';
 
 module('Acceptance | client_admin | client', function(hooks) {
   setupApplicationTest(hooks);
@@ -41,32 +41,29 @@ module('Acceptance | client_admin | client', function(hooks) {
   });
 
   test('visiting client AWI', async function(assert) {
-
     await visit('/clients/tib.awi');
 
     assert.equal(currentURL(), '/clients/tib.awi');
     assert.dom('h2.work').hasText('Alfred Wegener Institute');
-    assert.dom('a.nav-link.active').hasText('Info');
+    assert.dom('li.nav-link.active a').hasText('Info');
   });
 
   test('visiting client AWI settings', async function(assert) {
-
     await visit('/clients/tib.awi/settings');
 
     assert.equal(currentURL(), '/clients/tib.awi/settings');
     assert.dom('h2.work').hasText('Alfred Wegener Institute');
-    assert.dom('a.nav-link.active').hasText('Settings');
+    assert.dom('li.nav-link.active a').hasText('Settings');
     assert.dom('button#edit-client').includesText('Update Account');
     assert.dom('button#delete-client').doesNotExist();
   });
 
   test('visiting client AWI prefixes', async function(assert) {
-
     await visit('/clients/tib.awi/prefixes');
 
     assert.equal(currentURL(), '/clients/tib.awi/prefixes');
     assert.dom('h2.work').hasText('Alfred Wegener Institute');
-    assert.dom('a.nav-link.active').hasText('Prefixes');
+    assert.dom('li.nav-link.active a').hasText('Prefixes');
   });
 
   test('visiting client AWI dois', async function(assert) {
@@ -74,7 +71,7 @@ module('Acceptance | client_admin | client', function(hooks) {
 
     assert.equal(currentURL(), '/clients/tib.awi/dois');
     assert.dom('h2.work').hasText('Alfred Wegener Institute');
-    assert.dom('a.nav-link.active').hasText('DOIs');
+    assert.dom('li.nav-link.active a').hasText('DOIs');
     assert.dom('a#new-doi').includesText('Create (Form)');
     assert.dom('a#upload-doi').includesText('Create (File Upload)');
     assert.dom('a#transfer-dois').doesNotExist();
@@ -474,45 +471,45 @@ module('Acceptance | client_admin | client', function(hooks) {
   //   assert.equal(findAll('h2.work')[1].innerText,'10.2312/7qw1-th81');
   // });
 
-  test('fail creating a new DOI without publicationYear and publisher ', async function(assert) {
-    assert.expect(4);
-    await authenticateSession({
-      access_token: ENV.API_JWT,
-      token_type: 'Bearer',
-      uid: 'tib.awi',
-      name: 'Alfred Wegener Institute',
-      role_id: 'client_admin',
-      provider_id: 'tib',
-      client_id: 'tib.awi'
-    });
-    await visit('/clients/tib.awi/dois/new');
+  // test('fail creating a new DOI without publicationYear and publisher ', async function(assert) {
+  //   assert.expect(4);
+  //   await authenticateSession({
+  //     access_token: ENV.API_JWT,
+  //     token_type: 'Bearer',
+  //     uid: 'tib.awi',
+  //     name: 'Alfred Wegener Institute',
+  //     role_id: 'client_admin',
+  //     provider_id: 'tib',
+  //     client_id: 'tib.awi'
+  //   });
+  //   await visit('/clients/tib.awi/dois/new');
 
-    var titles = findAll('input.title-field');
-    let suffix = Math.random().toString(36).substring(7);
+  //   var titles = findAll('input.title-field');
+  //   let suffix = Math.random().toString(36).substring(7);
  
-    await fillIn('input#suffix-field', suffix);
-    await click('input#findable-radio');
-    await fillIn('input#url-field', 'http://bbc.co.uk');
-    await fillIn(titles[0], "")
-    await fillIn('input#publisher-field', '');
-    await fillIn('input#publication-year-field', 'thisIs not a year');
-    await fillIn('input.creator-field', 'Alexander Payne');
+  //   await fillIn('input#suffix-field', suffix);
+  //   await click('input#findable-radio');
+  //   await fillIn('input#url-field', 'http://bbc.co.uk');
+  //   await fillIn(titles[0], "")
+  //   await fillIn('input#publisher-field', '');
+  //   await fillIn('input#publication-year-field', 'thisIs not a year');
+  //   await fillIn('input.creator-field', 'Alexander Payne');
 
-    // Maybe we do not need this one
-    await waitUntil(() => {
-      let prefix = findAll('span.ember-power-select-selected-item');
-      let suffix = this.element.querySelector('input#suffix-field');
-      let status = this.element.querySelector('input#findable-radio:checked');
-      if (prefix[0].innerText && suffix.value && status.value ){
-        return true;
-      }
-      return false;
-    });
-    await click('button#create');
+  //   // Maybe we do not need this one
+  //   await waitUntil(() => {
+  //     let prefix = findAll('span.ember-power-select-selected-item');
+  //     let suffix = this.element.querySelector('input#suffix-field');
+  //     let status = this.element.querySelector('input#findable-radio:checked');
+  //     if (prefix[0].innerText && suffix.value && status.value ){
+  //       return true;
+  //     }
+  //     return false;
+  //   });
+  //   await click('button#create');
   
-    assert.equal(currentURL(), '/clients/tib.awi/dois/new');
-    assert.equal(this.element.querySelector("div#publisher").className, 'form-group has-error has-feedback ember-view');
-    assert.equal(findAll("input.title-field")[0].className, 'form-control title-field');
-    assert.equal(this.element.querySelector("div#publication-year").className, 'form-group has-error has-feedback ember-view');
-  });
+  //   assert.equal(currentURL(), '/clients/tib.awi/dois/new');
+  //   assert.equal(this.element.querySelector("div#publisher").className, 'form-group has-error has-feedback ember-view');
+  //   assert.equal(findAll("input.title-field")[0].className, 'form-control title-field');
+  //   assert.equal(this.element.querySelector("div#publication-year").className, 'form-group has-error has-feedback ember-view');
+  // });
 });

@@ -14,12 +14,4 @@ module('helper:is-equal', function(hooks) {
 
     assert.dom('*').exists();
   });
-
-  // test('it renders false', function(assert) {
-  //   this.set('inputValue', ['1234', '5678']);
-  //
-  //   this.render(hbs`{{is-equal inputValue}}`);
-  //
-  //   assert.notOk(this.$(), 'is not equal');
-  // });
 });

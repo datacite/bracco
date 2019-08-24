@@ -1,18 +1,20 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('doi-upload', 'Integration | Component | doi upload', {
-  integration: true
-});
+module('Integration | Component | doi upload', function(hooks) {
+  setupRenderingTest(hooks);
 
-test('it renders', function(assert) {
+  test('it renders', async function(assert) {
 
-  // Template block usage:
-  this.render(hbs`
-    {{#doi-upload}}
-      template block text
-    {{/doi-upload}}
-  `);
+    // Template block usage:
+    await render(hbs`
+      {{#doi-upload}}
+        template block text
+      {{/doi-upload}}
+    `);
 
-  assert.dom('*').hasText('Metadata Upload File');
+    assert.dom('*').hasText('Metadata Upload File');
+  });
 });

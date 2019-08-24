@@ -1,18 +1,20 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('prefix-list', 'Integration | Component | prefix list', {
-  integration: true
-});
+module('Integration | Component | prefix list', function(hooks) {
+  setupRenderingTest(hooks);
 
-test('it renders', function(assert) {
+  test('it renders', async function(assert) {
 
-  // Template block usage:
-  this.render(hbs`
-    {{#prefix-list}}
+    // Template block usage:
+    await render(hbs`
+      {{#prefix-list}}
 
-    {{/prefix-list}}
-  `);
+      {{/prefix-list}}
+    `);
 
-  assert.dom('*').hasText('');
+    assert.dom('*').hasText('');
+  });
 });

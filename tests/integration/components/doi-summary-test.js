@@ -10,15 +10,4 @@
 //   // Handle any actions with this.on('myAction', function(val) { ... });
 
 //   this.render(hbs`{{doi-summary}}`);
-
-//   assert.equal(this.$().text().trim(), '');
-
-//   // Template block usage:
-//   this.render(hbs`
-//     {{#doi-summary}}
-//       template block text
-//     {{/doi-summary}}
-//   `);
-
-//   assert.equal(this.$().text().trim(), 'template block text');
 // });

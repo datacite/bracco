@@ -6,10 +6,10 @@ export default Component.extend({
 
   prefixesAvailable: false,
 
-  didInsertElement() {
+  didReceiveAttrs() {
     this._super(...arguments);
 
-    let providerId = (this.get('model.client.id') || this.get('model.repository.id')).split('.').get('firstObject');
+    let providerId = this.get('model.client.provider.id') || this.get('model.repository.provider.id');
     let self = this;
     this.store.query('prefix', { 'provider-id': providerId, state: 'without-client' }).then(function(availablePrefixes) {
       self.set('prefixesAvailable', availablePrefixes.get('meta').total > 0);

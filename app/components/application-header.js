@@ -3,9 +3,9 @@ import { htmlSafe } from '@ember/template';
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 import ENV from 'bracco/config/environment';
-import fetch from 'fetch';
 
 export default Component.extend({
+  session: service(),
   currentUser: service(),
 
   default: false,
@@ -15,23 +15,9 @@ export default Component.extend({
   user: true,
   data: {},
 
-  // init: function () {
-  //   this._super();
-  //
-  //   if (!this.get('default')) {
-  //     Ember.run.schedule("afterRender",this,function() {
-  //       this.send("transitionNoAccess");
-  //     });
-  //   }
-  // },
+  didReceiveAttrs() {
+    this._super(...arguments);
 
-  actions: {
-    transitionNoAccess() {
-      this.router.transitionTo(this.home);
-    }
-  },
-
-  didInsertElement() {
     if (this['default']) {
       this.set('type', null);
       this.set('title', htmlSafe(ENV.SITE_TITLE));
@@ -51,17 +37,22 @@ export default Component.extend({
       this.set('home', null);
     }
 
-    let url = ENV.CDN_URL + "/data/links.json";
-    let self = this;
-    fetch(url).then(function(response) {
-      return response.json();
-    }).then(function(data) {
-      if (ENV.API_URL === "https://api.datacite.org") {
-        data.header_links = data.production_links;
-      } else {
-        data.header_links = data.stage_links;
-      }
-      self.set('data', data);
-    });
+    let settings = this.currentUser.get('settings');
+    if (typeOf(settings) == 'object') {
+      this.set('settings', { route: settings.route, model: settings.id });
+    } else if (settings) {
+      this.set('settings', { href: settings });
+    } else {
+      this.set('settings', null);
+    }
+  },
+
+  actions: {
+    transitionNoAccess() {
+      this.router.transitionTo(this.home);
+    },
+    invalidateSession() {
+      this.session.invalidate();
+    }
   }
 });

@@ -34,24 +34,24 @@ export default Ability.extend({
         return false;
     }
   }),
-  canUpdate: computed('currentUser.role_id', 'currentUser.provider_id', 'currentUser.client_id', 'model.id', function() {
+  canUpdate: computed('currentUser.role_id', 'currentUser.provider_id', 'currentUser.client_id', 'model.id', 'model.provider.id', function() {
     switch(this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
       case 'provider_admin':
-        return this.get('currentUser.provider_id') === (this.get('model.id') && this.get('model.id').split('.').get('firstObject'));
+        return this.get('currentUser.provider_id') === this.get('model.provider.id');
       case 'client_admin':
         return this.get('currentUser.client_id') === this.get('model.id');
       default:
         return false
     }
   }),
-  canRead: computed('currentUser.role_id', 'currentUser.provider_id', 'currentUser.client_id', 'model.id', function() {
+  canRead: computed('currentUser.role_id', 'currentUser.provider_id', 'currentUser.client_id', 'model.id', 'model.provider.id', function() {
     switch(this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
       case 'provider_admin':
-        return this.get('currentUser.provider_id') === (this.get('model.id') && this.get('model.id').split('.').get('firstObject'));
+        return this.get('currentUser.provider_id') === this.get('model.provider.id');
       case 'client_admin':
         return this.get('currentUser.client_id') === this.get('model.id');
       default:

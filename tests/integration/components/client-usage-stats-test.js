@@ -10,15 +10,4 @@
 //   // Handle any actions with this.on('myAction', function(val) { ... });
 
 //   this.render(hbs`{{client-usage-stats}}`);
-
-//   assert.equal(this.$().text().trim(), '');
-
-//   // Template block usage:
-//   this.render(hbs`
-//     {{#client-usage-stats}}
-//       template block text
-//     {{/client-usage-stats}}
-//   `);
-
-//   assert.equal(this.$().text().trim(), 'template block text');
 // });

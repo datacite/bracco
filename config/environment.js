@@ -12,12 +12,12 @@ module.exports = function(environment) {
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
-        // e.g. 'with-controller': true
+        // e.g. EMBER_NATIVE_DECORATOR_SUPPORT: true
       },
-      EXTEND_PROTOTYPES: {
-        // Prevent Ember Data from overriding Date.parse.
-        Date: false
-      }
+      EXTEND_PROTOTYPES: false
+    },
+    sentry: {
+      environment,
     },
     'ember-cli-string-helpers': {
       only: ['humanize', 'html-safe', 'truncate', 'titleize']
@@ -43,17 +43,22 @@ module.exports = function(environment) {
     featureFlags: {
       'use-repositories': false
     },
+    fastboot: {
+      hostWhitelist: ['doi.datacite.org', 'doi.test.datacite.org', /^10\.0\.\d{1,3}\.\d{1,3}$/, /^localhost:\d+$/]
+    },
 
     SITE_TITLE: process.env.SITE_TITLE || "DataCite DOI Fabrica Test",
     NAVMENU_TITLE: process.env.NAVMENU_TITLE,
     SEARCH_URL: process.env.SEARCH_URL || "https://search.test.datacite.org",
     ORCID_URL: process.env.ORCID_URL || "https://sandbox.orcid.org",
     API_URL: process.env.API_URL || "https://api.test.datacite.org",
+    FABRICA_URL: process.env.FABRICA_URL || "https://doi.test.datacite.org",
     // RE3DATA_API_URL: process.env.RE3DATA_API_URL || "https://api.test.datacite.org",
     ROR_API_URL: process.env.ROR_API_URL || "https://api.ror.org",
     ORCID_API_URL: process.env.ORCID_API_URL || "https://pub.orcid.org",
     EVENTDATA_URL: process.env.EVENTDATA_URL || "https://api.test.datacite.org",
     CDN_URL: process.env.CDN_URL || "https://assets.test.datacite.org",
+    ALB_PUBLIC_KEY: process.env.ALB_PUBLIC_KEY || null,
     JWT_PUBLIC_KEY: process.env.JWT_PUBLIC_KEY || null,
     JWT_PRIVATE_KEY: process.env.JWT_PRIVATE_KEY || null,
     USER_UID: process.env.USER_UID || '0000-0001-5489-3594',

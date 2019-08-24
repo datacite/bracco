@@ -21,7 +21,7 @@ export default Route.extend({
   },
 
   afterModel(model) {
-    if (this.get('can').cannot('read prefix', model)) {
+    if (this.can.cannot('read prefix', model)) {
       this.transitionTo('index');
     }
   },

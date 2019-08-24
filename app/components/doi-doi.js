@@ -123,7 +123,7 @@ export default Component.extend({
     },
     clear() {
       this.model.set('suffix', null)
-      this.$('input[type=text]:first').focus();
+      //this.$('input[type=text]:first').focus();
     },
     selectState(state) {
       this.selectState(state);
