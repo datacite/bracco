@@ -17,9 +17,18 @@ export default DS.Model.extend({
   doiCount: computed('meta.dois', function() {
     return this.get('meta.dois');
   }),
-  resourceTypeCount: computed('meta.dois', function() {
-    return [];
-    //return this.get('meta.dois');
+  totalDoiCount: computed('meta.dois', function() {
+    return this.get('meta.dois').reduce(function (a, b) {
+      return a + b.count;
+    }, 0);
+  }),
+  resourceTypeCount: computed('meta.resourceTypes', function() {
+    return this.get('meta.resourceTypes');
+  }),
+  totalresourceTypeCount: computed('meta.resourceTypes', function() {
+    return this.get('meta.resourceTypes').reduce(function (a, b) {
+      return a + b.count;
+    }, 0);
   }),
   currentDoiCount: computed('doiCount', function() {
     let currentYear = A(this.doiCount).findBy('id', 2019);

@@ -68,6 +68,16 @@ module.exports = function(environment) {
     }
   };
 
+  if (process.env.DEPLOY_TARGET === 'production') {
+    ENV.SITE_TITLE = "DataCite DOI Fabrica";
+    ENV.API_URL = "https://api.datacite.org";
+    ENV.ORCID_URL = "https://orcid.org";
+    ENV.FABRICA_URL = "https://doi.datacite.org";
+    ENV.EVENTDATA_URL = "https://api.datacite.org";
+    ENV.SEARCH_URL = "https://search.datacite.org";
+    ENV.CDN_URL = "https://assets.datacite.org";
+  }
+
   if (environment === 'development') {
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;

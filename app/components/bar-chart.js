@@ -10,11 +10,17 @@ export default Component.extend({
   data: null,
   count: computed('data', function() {
     if (this.data) {
-      let currentYear = A(this.data).findBy('id', '2019');
-      if (currentYear) {
-        return currentYear.count;
+      if (this.summarize) {
+        return A(this.data).reduce(function (a, b) {
+          return a + b.count;
+        }, 0);
       } else {
-        return 0;
+        let currentYear = A(this.data).findBy('id', '2019');
+        if (currentYear) {
+          return currentYear.count;
+        } else {
+          return 0;
+        }
       }
     } else {
       return 0;
@@ -25,6 +31,7 @@ export default Component.extend({
     return 'chart-' + this.label.toLowerCase();
   }),
   cumulative: true,
+  summarize: false,
 
   init() {
     this._super();

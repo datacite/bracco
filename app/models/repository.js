@@ -154,6 +154,11 @@ export default DS.Model.extend(Validations, {
       return a + b.count;
     }, 0);
   }),
+  resourceTypeCount: computed('meta.resourceTypes', function() {
+    return this.get('meta.resourceTypes').reduce(function (a, b) {
+      return a + b.count;
+    }, 0);
+  }),
   badgeUrl: computed('re3data', function() {
     if (this.re3data) {
       return ENV.API_URL + '/re3data/' + this.re3data.substr(this.re3data.indexOf('1')) + '/badge';

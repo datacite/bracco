@@ -171,6 +171,11 @@ export default DS.Model.extend(Validations, {
       return 0;
     }
   }),
+  resourceTypeCount: computed('meta.resourceTypes', function() {
+    return this.get('meta.resourceTypes').reduce(function (a, b) {
+      return a + b.count;
+    }, 0);
+  }),
   clientCount: computed('meta.clients', function() {
     return this.get('meta.clients');
   }),

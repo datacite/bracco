@@ -14,7 +14,8 @@ module.exports = function() {
                         'AWS_ACCESS_KEY',
                         'AWS_SECRET_KEY',
                         'AWS_BUCKET',
-                        'AWS_REGION'],
+                        'AWS_REGION',
+                        'DEPLOY_TARGET'],
     fastbootAllowedKeys: ['SITE_TITLE',
                         'NAVMENU_TITLE',
                         'SEARCH_URL',
@@ -29,7 +30,8 @@ module.exports = function() {
                         'AWS_ACCESS_KEY',
                         'AWS_SECRET_KEY',
                         'AWS_BUCKET',
-                        'AWS_REGION'],
+                        'AWS_REGION',
+                        'DEPLOY_TARGET'],
     failOnMissingKey: false, 
   };
 };
