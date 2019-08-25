@@ -11,17 +11,15 @@ cache:
 before_install:
   - set -e
   - if [ "${TRAVIS_TAG?}" ]; then
-      AWS_BUCKET="doi.datacite.org";
+      cp .env.production .env;
       AUTO_DEPLOY=true;
       DEPLOY_TARGET="production";
     elif [ "$TRAVIS_BRANCH" == "master" ]; then
-      AWS_BUCKET="doi.stage.datacite.org";
-      CLOUDFRONT_DISTRIBUTION_ID=$CLOUDFRONT_DISTRIBUTION_ID_STAGE;
+      cp .env.stage .env;
       AUTO_DEPLOY=true;
       DEPLOY_TARGET="stage";
     else
-      AWS_BUCKET="doi.stage.datacite.org";
-      CLOUDFRONT_DISTRIBUTION_ID=$CLOUDFRONT_DISTRIBUTION_ID_STAGE;
+      cp .env.stage .env;
       DEPLOY_TARGET="stage";
     fi
   - npm config set spin false
