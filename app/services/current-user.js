@@ -66,6 +66,10 @@ export default Service.extend({
         this.set('home', { route: 'index' });
         this.set('settings', { route: 'settings' });
         this.set('roleName', 'Staff');
+
+        this.get('features').setup({
+          "use-repositories": true
+        });
       } else if (payload.role_id === 'provider_admin') {
         this.set('isProvider', true);
         this.set('home', { route: 'providers.show', id: this.uid });
@@ -91,9 +95,6 @@ export default Service.extend({
       if (!['user', 'temporary'].includes(payload.role_id)) {
         this.flashMessages.info('Welcome ' + this.name + ' to the DOI Fabrica administration area.');
       }
-
-      // setup features for ember-feature-flags
-      // this.get('features').setup(payload.features);
     }
   }
 });

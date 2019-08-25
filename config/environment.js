@@ -90,7 +90,7 @@ module.exports = function(environment) {
     ENV.SITE_TITLE = "DataCite DOI Fabrica Test"
   }
 
-  if (process.env.DEPLOY_TARGET === 'production') {
+  if (process.env.DEPLOY_TARGET === 'production' || process.env.PASSENGER_APP_ENV === 'production') {
     ENV.SITE_TITLE = process.env.SITE_TITLE || "DataCite DOI Fabrica";
     ENV.NAVMENU_TITLE = process.env.NAVMENU_TITLE;
     ENV.SEARCH_URL = process.env.SEARCH_URL || "https://search.datacite.org";
