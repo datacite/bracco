@@ -59,7 +59,7 @@ module.exports = function(environment) {
     }
   };
 
-  if (environment === 'production' && process.env.PASSENGER_APP_ENV === 'production') {
+  if (environment === 'production') {
     ENV.SITE_TITLE = process.env.SITE_TITLE || "DataCite DOI Fabrica";
     ENV.NAVMENU_TITLE = process.env.NAVMENU_TITLE;
     ENV.SEARCH_URL = process.env.SEARCH_URL || "https://search.datacite.org";
