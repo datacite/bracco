@@ -9,12 +9,21 @@
       }}
     {{/if}}
     {{#if (not-eq model.memberType "member_only")}}
-      {{bar-chart 
-        data=model.clientCount 
-        label="Repository" 
-        model=model 
-        link="providers.show.repositories"
-      }}
+      {{#if (feature-flag 'useRepositories')}}
+        {{bar-chart 
+          data=model.clientCount 
+          label="Repository" 
+          model=model 
+          link="providers.show.repositories"
+        }}
+      {{else}}
+        {{bar-chart 
+          data=model.clientCount 
+          label="Client" 
+          model=model 
+          link="providers.show.clients"
+        }}
+      {{/if}}
       {{bar-chart 
         data=model.doiCount 
         label="DOI" 

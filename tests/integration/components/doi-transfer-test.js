@@ -12,6 +12,6 @@ module('Integration | Component | doi transfer', function(hooks) {
     this.set('model', make('doi'));
     await render(hbs`{{doi-transfer model=model}}`);
 
-    assert.dom('*').hasText(this.get('model.doi') + ' Transfer DOI Client Transfer the DOI to this client. It can take up one hour for the transfer to complete. Transfer DOI Cancel');
+    assert.dom('*').hasText('Transfer DOI Repository Transfer the DOI to this repository. Transfer DOI Cancel');
   });
 });
