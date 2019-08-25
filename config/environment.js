@@ -53,17 +53,11 @@ module.exports = function(environment) {
     ORCID_URL: process.env.ORCID_URL || "https://sandbox.orcid.org",
     API_URL: process.env.API_URL || "https://api.test.datacite.org",
     FABRICA_URL: process.env.FABRICA_URL || "https://doi.test.datacite.org",
-    // RE3DATA_API_URL: process.env.RE3DATA_API_URL || "https://api.test.datacite.org",
     ROR_API_URL: process.env.ROR_API_URL || "https://api.ror.org",
     ORCID_API_URL: process.env.ORCID_API_URL || "https://pub.orcid.org",
     EVENTDATA_URL: process.env.EVENTDATA_URL || "https://api.test.datacite.org",
     CDN_URL: process.env.CDN_URL || "https://assets.test.datacite.org",
-    ALB_PUBLIC_KEY: process.env.ALB_PUBLIC_KEY || null,
     JWT_PUBLIC_KEY: process.env.JWT_PUBLIC_KEY || null,
-    JWT_PRIVATE_KEY: process.env.JWT_PRIVATE_KEY || null,
-    USER_UID: process.env.USER_UID || '0000-0001-5489-3594',
-    USER_ROLE_ID: process.env.USER_ROLE_ID || "user",
-    USER_NAME: process.env.USER_NAME || 'Josiah Carberry',
     SENTRY_DSN: process.env.SENTRY_DSN || null,
     VERSION: pkg.version,
     APP_NAME: pkg.name,
@@ -109,6 +103,21 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
+    ENV.SITE_TITLE = process.env.SITE_TITLE || "DataCite DOI Fabrica";
+    ENV.NAVMENU_TITLE = process.env.NAVMENU_TITLE;
+    ENV.SEARCH_URL = process.env.SEARCH_URL || "https://search.datacite.org";
+    ENV.ORCID_URL = process.env.ORCID_URL || "https://orcid.org";
+    ENV.API_URL = process.env.API_URL || "https://api.datacite.org";
+    ENV.FABRICA_URL = process.env.FABRICA_URL || "https://doi.datacite.org";
+    ENV.ROR_API_URL = process.env.ROR_API_URL || "https://api.ror.org";
+    ENV.ORCID_API_URL = process.env.ORCID_API_URL || "https://pub.orcid.org";
+    ENV.EVENTDATA_URL = process.env.EVENTDATA_URL || "https://api.datacite.org";
+    ENV.CDN_URL = process.env.CDN_URL || "https://assets.datacite.org";
+    ENV.JWT_PUBLIC_KEY = process.env.JWT_PUBLIC_KEY || null;
+    ENV.SENTRY_DSN = process.env.SENTRY_DSN || null;
+    ENV.VERSION = pkg.version;
+    ENV.APP_NAME = pkg.name;
+
     // here you can enable a production-specific feature
     ENV.featureFlags['use-repositories'] = process.env.API_URL === "https://api.test.datacite.org";
   }
