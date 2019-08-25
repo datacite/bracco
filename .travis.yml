@@ -46,7 +46,7 @@ before_script:
 script:
   - COVERAGE=true ember test
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
-  - DEPLOY_TARGET=$DEPLOY_TARGET ember build --environment=production
+  - DEPLOY_TARGET=${DEPLOY_TARGET} ember build --environment=production
 
 after_success:
   - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
