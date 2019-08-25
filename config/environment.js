@@ -60,29 +60,31 @@ module.exports = function(environment) {
   };
 
   if (environment === 'production') {
-    ENV.SITE_TITLE = process.env.SITE_TITLE || "DataCite DOI Fabrica";
-    ENV.NAVMENU_TITLE = process.env.NAVMENU_TITLE;
-    ENV.SEARCH_URL = process.env.SEARCH_URL || "https://search.datacite.org";
-    ENV.ORCID_URL = process.env.ORCID_URL || "https://orcid.org";
-    ENV.API_URL = process.env.API_URL || "https://api.datacite.org";
-    ENV.FABRICA_URL = process.env.FABRICA_URL || "https://doi.datacite.org";
-    ENV.ROR_API_URL = process.env.ROR_API_URL || "https://api.ror.org";
-    ENV.ORCID_API_URL = process.env.ORCID_API_URL || "https://pub.orcid.org";
-    ENV.EVENTDATA_URL = process.env.EVENTDATA_URL || "https://api.datacite.org";
-    ENV.CDN_URL = process.env.CDN_URL || "https://assets.datacite.org";
-  } else {
-    ENV.SITE_TITLE = process.env.SITE_TITLE || "DataCite DOI Fabrica Test";
-    ENV.NAVMENU_TITLE = process.env.NAVMENU_TITLE;
-    ENV.SEARCH_URL = process.env.SEARCH_URL || "https://search.test.datacite.org";
-    ENV.ORCID_URL = process.env.ORCID_URL || "https://sandbox.orcid.org";
-    ENV.API_URL = process.env.API_URL || "https://api.test.datacite.org";
-    ENV.FABRICA_URL = process.env.FABRICA_URL || "https://doi.test.datacite.org";
-    ENV.ROR_API_URL = process.env.ROR_API_URL || "https://api.ror.org";
-    ENV.ORCID_API_URL = process.env.ORCID_API_URL || "https://pub.orcid.org";
-    ENV.EVENTDATA_URL = process.env.EVENTDATA_URL || "https://api.test.datacite.org";
-    ENV.CDN_URL = process.env.CDN_URL || "https://assets.test.datacite.org";
+    if (process.env.DEPLOY_TARGET === 'production')
+      ENV.SITE_TITLE = process.env.SITE_TITLE || "DataCite DOI Fabrica";
+      ENV.NAVMENU_TITLE = process.env.NAVMENU_TITLE;
+      ENV.SEARCH_URL = process.env.SEARCH_URL || "https://search.datacite.org";
+      ENV.ORCID_URL = process.env.ORCID_URL || "https://orcid.org";
+      ENV.API_URL = process.env.API_URL || "https://api.datacite.org";
+      ENV.FABRICA_URL = process.env.FABRICA_URL || "https://doi.datacite.org";
+      ENV.ROR_API_URL = process.env.ROR_API_URL || "https://api.ror.org";
+      ENV.ORCID_API_URL = process.env.ORCID_API_URL || "https://pub.orcid.org";
+      ENV.EVENTDATA_URL = process.env.EVENTDATA_URL || "https://api.datacite.org";
+      ENV.CDN_URL = process.env.CDN_URL || "https://assets.datacite.org";
+    } else {
+      ENV.SITE_TITLE = process.env.SITE_TITLE || "DataCite DOI Fabrica Test";
+      ENV.NAVMENU_TITLE = process.env.NAVMENU_TITLE;
+      ENV.SEARCH_URL = process.env.SEARCH_URL || "https://search.test.datacite.org";
+      ENV.ORCID_URL = process.env.ORCID_URL || "https://sandbox.orcid.org";
+      ENV.API_URL = process.env.API_URL || "https://api.test.datacite.org";
+      ENV.FABRICA_URL = process.env.FABRICA_URL || "https://doi.test.datacite.org";
+      ENV.ROR_API_URL = process.env.ROR_API_URL || "https://api.ror.org";
+      ENV.ORCID_API_URL = process.env.ORCID_API_URL || "https://pub.orcid.org";
+      ENV.EVENTDATA_URL = process.env.EVENTDATA_URL || "https://api.test.datacite.org";
+      ENV.CDN_URL = process.env.CDN_URL || "https://assets.test.datacite.org";
+    }
   }
-
+  
   if (environment === 'development') {
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
