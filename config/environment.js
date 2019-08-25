@@ -47,16 +47,6 @@ module.exports = function(environment) {
       hostWhitelist: ['doi.datacite.org', 'doi.test.datacite.org', /^10\.0\.\d{1,3}\.\d{1,3}$/, /^localhost:\d+$/]
     },
 
-    SITE_TITLE: process.env.SITE_TITLE || "DataCite DOI Fabrica Test",
-    NAVMENU_TITLE: process.env.NAVMENU_TITLE,
-    SEARCH_URL: process.env.SEARCH_URL || "https://search.test.datacite.org",
-    ORCID_URL: process.env.ORCID_URL || "https://sandbox.orcid.org",
-    API_URL: process.env.API_URL || "https://api.test.datacite.org",
-    FABRICA_URL: process.env.FABRICA_URL || "https://doi.test.datacite.org",
-    ROR_API_URL: process.env.ROR_API_URL || "https://api.ror.org",
-    ORCID_API_URL: process.env.ORCID_API_URL || "https://pub.orcid.org",
-    EVENTDATA_URL: process.env.EVENTDATA_URL || "https://api.test.datacite.org",
-    CDN_URL: process.env.CDN_URL || "https://assets.test.datacite.org",
     JWT_PUBLIC_KEY: process.env.JWT_PUBLIC_KEY || null,
     SENTRY_DSN: process.env.SENTRY_DSN || null,
     VERSION: pkg.version,
@@ -74,7 +64,6 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
-    ENV.featureFlags['use-repositories'] = true;
   }
 
   if (environment === 'test') {
@@ -90,7 +79,6 @@ module.exports = function(environment) {
     }
     ENV.API_JWT= process.env.API_JWT || '',
 
-
     ENV.APP.rootElement = '#ember-testing';
 
     ENV.featureFlags['use-repositories'] = true;
@@ -102,7 +90,7 @@ module.exports = function(environment) {
     ENV.SITE_TITLE = "DataCite DOI Fabrica Test"
   }
 
-  if (environment === 'production') {
+  if (process.env.DEPLOY_TARGET === 'production') {
     ENV.SITE_TITLE = process.env.SITE_TITLE || "DataCite DOI Fabrica";
     ENV.NAVMENU_TITLE = process.env.NAVMENU_TITLE;
     ENV.SEARCH_URL = process.env.SEARCH_URL || "https://search.datacite.org";
@@ -113,16 +101,22 @@ module.exports = function(environment) {
     ENV.ORCID_API_URL = process.env.ORCID_API_URL || "https://pub.orcid.org";
     ENV.EVENTDATA_URL = process.env.EVENTDATA_URL || "https://api.datacite.org";
     ENV.CDN_URL = process.env.CDN_URL || "https://assets.datacite.org";
-    ENV.JWT_PUBLIC_KEY = process.env.JWT_PUBLIC_KEY || null;
-    ENV.SENTRY_DSN = process.env.SENTRY_DSN || null;
-    ENV.VERSION = pkg.version;
-    ENV.APP_NAME = pkg.name;
 
     // here you can enable a production-specific feature
-    ENV.featureFlags['use-repositories'] = process.env.API_URL === "https://api.test.datacite.org";
-  }
+    ENV.featureFlags['use-repositories'] = false;
+  } else {
+    ENV.SITE_TITLE = process.env.SITE_TITLE || "DataCite DOI Fabrica Test";
+    ENV.NAVMENU_TITLE = process.env.NAVMENU_TITLE;
+    ENV.SEARCH_URL = process.env.SEARCH_URL || "https://search.test.datacite.org";
+    ENV.ORCID_URL = process.env.ORCID_URL || "https://sandbox.orcid.org";
+    ENV.API_URL = process.env.API_URL || "https://api.test.datacite.org";
+    ENV.FABRICA_URL = process.env.FABRICA_URL || "https://doi.test.datacite.org";
+    ENV.ROR_API_URL = process.env.ROR_API_URL || "https://api.ror.org";
+    ENV.ORCID_API_URL = process.env.ORCID_API_URL || "https://pub.orcid.org";
+    ENV.EVENTDATA_URL = process.env.EVENTDATA_URL || "https://api.test.datacite.org";
+    ENV.CDN_URL = process.env.CDN_URL || "https://assets.test.datacite.org";
 
-  if (process.env.DEPLOY_TARGET === 'stage') {
+    // here you can enable a stage-specific feature
     ENV.featureFlags['use-repositories'] = true;
   }
 
