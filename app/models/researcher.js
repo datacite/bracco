@@ -17,6 +17,10 @@ export default DS.Model.extend({
   doiCount: computed('meta.dois', function() {
     return this.get('meta.dois');
   }),
+  resourceTypeCount: computed('meta.dois', function() {
+    return [];
+    //return this.get('meta.dois');
+  }),
   currentDoiCount: computed('doiCount', function() {
     let currentYear = A(this.doiCount).findBy('id', 2019);
     if (currentYear) {
