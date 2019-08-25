@@ -84,6 +84,9 @@ module.exports = function(environment) {
     ENV.featureFlags['use-repositories'] = true;
 
     ENV.APP.autoboot = false;
+
+    ENV.API_URL = process.env.API_URL || "https://api.test.datacite.org";
+    ENV.SITE_TITLE = process.env.SITE_TITLE || "DataCite DOI Fabrica Test";
   }
 
   if (environment === 'production' && process.env.PASSENGER_APP_ENV === 'production') {
