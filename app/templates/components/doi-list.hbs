@@ -25,7 +25,7 @@
     </div>
   {{/if}}
 
-  {{#if (or model.meta.states model.query.state)}}
+  {{#if (and (can "viewState doi") (or model.meta.states model.query.state))}}
     <div class="panel facets add">
       <div class="panel-body">
         <h4>State</h4>
@@ -148,7 +148,7 @@
   {{#if (and (not-eq link "clients.show.dois") (not-eq link "repositories.show.dois") (or model.meta.clients model.query.client-id))}}
     <div class="panel facets">
       <div class="panel-body">
-        <h4>Client</h4>
+        <h4>{{if (feature-flag 'useRepositories') 'Repository' 'Client'}}</h4>
         <ul>
           {{#if model.meta.clients}}
             {{#each model.meta.clients as |client|}}

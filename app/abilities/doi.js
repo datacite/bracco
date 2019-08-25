@@ -15,6 +15,16 @@ export default Ability.extend({
         return false;
     }
   }),
+  canViewState: computed('currentUser.role_id', function () {
+    switch (this.get('currentUser.role_id')) {
+      case 'staff_admin':
+      case 'provider_admin':
+      case 'client_admin':
+        return true;
+      default:
+        return false;
+    }
+  }),
   canSource: computed('currentUser.role_id', function () {
     switch (this.get('currentUser.role_id')) {
       case 'staff_admin':

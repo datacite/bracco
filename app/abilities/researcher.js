@@ -5,7 +5,7 @@ import { Ability } from 'ember-can';
 export default Ability.extend({
   currentUser: service(),
 
-  canUpdate: computed('currentUser.role_id', function() {
+  canUpdate: computed('currentUser.role_id', 'model.id', function() {
     switch(this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
