@@ -17,6 +17,6 @@ module('Integration | Component | researcher-show', function(hooks) {
       </ResearcherShow>
     `);
 
-    assert.equal(this.element.textContent.trim(), 'ORCID');
+    assert.equal(this.element.textContent.trim(), 'ORCID ID');
   });
 });
