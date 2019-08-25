@@ -86,6 +86,17 @@ module.exports = function(environment) {
   }
 
   if (environment === 'development') {
+    ENV.SITE_TITLE = process.env.SITE_TITLE || "DataCite DOI Fabrica Test";
+    ENV.NAVMENU_TITLE = process.env.NAVMENU_TITLE;
+    ENV.SEARCH_URL = process.env.SEARCH_URL || "https://search.test.datacite.org";
+    ENV.ORCID_URL = process.env.ORCID_URL || "https://sandbox.orcid.org";
+    ENV.API_URL = process.env.API_URL || "https://api.test.datacite.org";
+    ENV.FABRICA_URL = process.env.FABRICA_URL || "https://doi.test.datacite.org";
+    ENV.ROR_API_URL = process.env.ROR_API_URL || "https://api.ror.org";
+    ENV.ORCID_API_URL = process.env.ORCID_API_URL || "https://pub.orcid.org";
+    ENV.EVENTDATA_URL = process.env.EVENTDATA_URL || "https://api.test.datacite.org";
+    ENV.CDN_URL = process.env.CDN_URL || "https://assets.test.datacite.org";
+
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
     // ENV.APP.LOG_TRANSITIONS = true;
@@ -113,8 +124,16 @@ module.exports = function(environment) {
 
     ENV.APP.autoboot = false;
 
-    ENV.API_URL = process.env.API_URL || "https://api.test.datacite.org";
     ENV.SITE_TITLE = process.env.SITE_TITLE || "DataCite DOI Fabrica Test";
+    ENV.NAVMENU_TITLE = process.env.NAVMENU_TITLE;
+    ENV.SEARCH_URL = process.env.SEARCH_URL || "https://search.test.datacite.org";
+    ENV.ORCID_URL = process.env.ORCID_URL || "https://sandbox.orcid.org";
+    ENV.API_URL = process.env.API_URL || "https://api.test.datacite.org";
+    ENV.FABRICA_URL = process.env.FABRICA_URL || "https://doi.test.datacite.org";
+    ENV.ROR_API_URL = process.env.ROR_API_URL || "https://api.ror.org";
+    ENV.ORCID_API_URL = process.env.ORCID_API_URL || "https://pub.orcid.org";
+    ENV.EVENTDATA_URL = process.env.EVENTDATA_URL || "https://api.test.datacite.org";
+    ENV.CDN_URL = process.env.CDN_URL || "https://assets.test.datacite.org";
   }
 
   return ENV;
