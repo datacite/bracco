@@ -29,7 +29,7 @@ module.exports = function(environment) {
     },
     emberTracker: {
 			analyticsSettings: {
-				trackingId: process.env.TRACKING_ID || null,
+				trackingId: process.env.TRACKING_ID || 'UA-22806196-13',
 			},
 		},
     flashMessageDefaults: {
@@ -41,14 +41,15 @@ module.exports = function(environment) {
       preventDuplicates: true
     },
     featureFlags: {
-      'use-repositories': false
+      'use-repositories': false,
+      'show-researchers': false
     },
     fastboot: {
       hostWhitelist: ['doi.datacite.org', 'doi.test.datacite.org', /^10\.0\.\d{1,3}\.\d{1,3}$/, /^localhost:\d+$/]
     },
 
-    JWT_PUBLIC_KEY: process.env.JWT_PUBLIC_KEY || null,
-    SENTRY_DSN: process.env.SENTRY_DSN || null,
+    JWT_PUBLIC_KEY: process.env.JWT_PUBLIC_KEY || '-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxWfFGoaO4d9s7OoW34UD\nbEbFdh1FrAXT5QmWVocZIP0Y+1KtNGNjpRpazlSWeSMFuswoDG/cKiJX3BQkP7fw\nbHCujQoNpQqznsI8rRJYZh/L+THxjY7OEoFg7QohqnEHRr9YW4wPzh+I0xj2puVr\ngyQzREYckeBUEJnS2uXdiZ32LzbiH4pE+wwZNVQv0BbadnTc2mJWMaEcUfuh0Qko\nxIVpPwTCzyD4kMriETe+/AOw/2DEwbNJakh8N2ySMhXbso/zHxStEw2YesJkNJWG\n+aG5ApSbwTba8DVHKvTgCsE1d+1tHFyeruTxPIfamwA/VkVBuUpYR7CmJaoNuk1e\nKwIDAQAB\n-----END PUBLIC KEY-----\n',
+    SENTRY_DSN: process.env.SENTRY_DSN || 'https://63201db022924202b697e03bc5e0d0ba@sentry.io/1420435',
     VERSION: pkg.version,
     APP_NAME: pkg.name,
 
@@ -69,10 +70,6 @@ module.exports = function(environment) {
     ENV.ORCID_API_URL = process.env.ORCID_API_URL || "https://pub.orcid.org";
     ENV.EVENTDATA_URL = process.env.EVENTDATA_URL || "https://api.datacite.org";
     ENV.CDN_URL = process.env.CDN_URL || "https://assets.datacite.org";
-
-    // here you can enable a production-specific feature
-    ENV.featureFlags['use-repositories'] = false;
-    ENV.featureFlags['show-researchers'] = false;
   } else {
     ENV.SITE_TITLE = process.env.SITE_TITLE || "DataCite DOI Fabrica Test";
     ENV.NAVMENU_TITLE = process.env.NAVMENU_TITLE;
@@ -84,10 +81,6 @@ module.exports = function(environment) {
     ENV.ORCID_API_URL = process.env.ORCID_API_URL || "https://pub.orcid.org";
     ENV.EVENTDATA_URL = process.env.EVENTDATA_URL || "https://api.test.datacite.org";
     ENV.CDN_URL = process.env.CDN_URL || "https://assets.test.datacite.org";
-
-    // here you can enable a development-specific feature
-    ENV.featureFlags['use-repositories'] = false;
-    ENV.featureFlags['show-researchers'] = false;
   }
 
   if (environment === 'development') {
