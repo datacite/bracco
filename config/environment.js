@@ -60,7 +60,7 @@ module.exports = function(environment) {
   };
 
   if (environment === 'production') {
-    if (process.env.DEPLOY_TARGET === 'production')
+    if (process.env.DEPLOY_TARGET === 'production') {
       ENV.SITE_TITLE = process.env.SITE_TITLE || "DataCite DOI Fabrica";
       ENV.NAVMENU_TITLE = process.env.NAVMENU_TITLE;
       ENV.SEARCH_URL = process.env.SEARCH_URL || "https://search.datacite.org";
@@ -84,7 +84,7 @@ module.exports = function(environment) {
       ENV.CDN_URL = process.env.CDN_URL || "https://assets.test.datacite.org";
     }
   }
-  
+
   if (environment === 'development') {
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;

@@ -14,18 +14,15 @@ before_install:
       AWS_BUCKET="doi.datacite.org";
       AUTO_DEPLOY=true;
       DEPLOY_TARGET="production";
-      cp .env.production .env;
     elif [ "$TRAVIS_BRANCH" == "master" ]; then
       AWS_BUCKET="doi.stage.datacite.org";
       CLOUDFRONT_DISTRIBUTION_ID=$CLOUDFRONT_DISTRIBUTION_ID_STAGE;
       AUTO_DEPLOY=true;
       DEPLOY_TARGET="stage";
-      cp .env.stage .env;
     else
       AWS_BUCKET="doi.stage.datacite.org";
       CLOUDFRONT_DISTRIBUTION_ID=$CLOUDFRONT_DISTRIBUTION_ID_STAGE;
       DEPLOY_TARGET="stage";
-      cp .env.stage .env;
     fi
   - npm config set spin false
   - npm install -g codeclimate-test-reporter
