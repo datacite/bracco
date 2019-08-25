@@ -12,17 +12,14 @@ before_install:
   - set -e
   - if [ "${TRAVIS_TAG?}" ]; then
       AWS_BUCKET="doi.datacite.org";
-      cp .env.production .env;
       AUTO_DEPLOY=true;
     elif [ "$TRAVIS_BRANCH" == "master" ]; then
       AWS_BUCKET="doi.stage.datacite.org";
       CLOUDFRONT_DISTRIBUTION_ID=$CLOUDFRONT_DISTRIBUTION_ID_STAGE;
-      cp .env.stage .env;
       AUTO_DEPLOY=true;
     else
       AWS_BUCKET="doi.stage.datacite.org";
       CLOUDFRONT_DISTRIBUTION_ID=$CLOUDFRONT_DISTRIBUTION_ID_STAGE;
-      cp .env.stage .env;
     fi
   - npm config set spin false
   - npm install -g codeclimate-test-reporter
