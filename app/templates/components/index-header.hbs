@@ -8,6 +8,8 @@
     {{#nav.item route="repositories" class="nav-link"}}Repositories{{/nav.item}}
     {{#nav.item route="prefixes" class="nav-link"}}Prefixes{{/nav.item}}
     {{#nav.item route="dois" class="nav-link doi"}}DOIs{{/nav.item}}
-    {{#nav.item route="researchers" class="nav-link"}}Researchers{{/nav.item}}
+    {{#if (feature-flag 'showResearchers')}}
+      {{#nav.item route="researchers" class="nav-link"}}Researchers{{/nav.item}}
+    {{/if}}
   {{/bs-nav}}
 </div>

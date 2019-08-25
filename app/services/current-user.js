@@ -24,6 +24,7 @@ export default Service.extend({
   isProvider: false,
   isClient: false,
   isResearcher: false,
+  isBetaTester: false,
 
   load() {
     if (this.get('session.data.authenticated.access_token')) {
@@ -60,6 +61,7 @@ export default Service.extend({
       this.set('provider_id', payload.provider_id);
       this.set('client_id', payload.client_id);
       this.set('role_id', payload.role_id);
+      this.set('isBetaTester', payload.beta_tester);
 
       if (payload.role_id === 'staff_admin') {
         this.set('isAdmin', true);
@@ -68,7 +70,8 @@ export default Service.extend({
         this.set('roleName', 'Staff');
 
         this.get('features').setup({
-          "use-repositories": true
+          "use-repositories": true,
+          "show-researchers": true
         });
       } else if (payload.role_id === 'provider_admin') {
         this.set('isProvider', true);
@@ -90,6 +93,13 @@ export default Service.extend({
       if (payload.uid.startsWith('0')) {
         this.set('isResearcher', true);
         this.set('settings', { route: 'researchers.show.settings', id: this.uid });
+      }
+
+      if (payload.beta_tester) {
+        this.get('features').setup({
+          "use-repositories": true,
+          "show-researchers": true
+        });
       }
 
       if (!['user', 'temporary'].includes(payload.role_id)) {

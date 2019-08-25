@@ -112,7 +112,7 @@ module.exports = function(environment) {
     ENV.EVENTDATA_URL = process.env.EVENTDATA_URL || "https://api.test.datacite.org";
     ENV.CDN_URL = process.env.CDN_URL || "https://assets.test.datacite.org";
 
-    // here you can enable a stage-specific feature
+    // here you can enable a development-specific feature
     ENV.featureFlags['use-repositories'] = true;
   }
 
