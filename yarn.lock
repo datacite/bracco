@@ -6974,7 +6974,7 @@ ember-auto-import@1.3.0:
     walk-sync "^0.3.3"
     webpack "~4.28"
 
-ember-auto-import@^1.2.21, ember-auto-import@^1.3.0:
+ember-auto-import@^1.2.15, ember-auto-import@^1.2.21, ember-auto-import@^1.3.0:
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/ember-auto-import/-/ember-auto-import-1.5.2.tgz#e97ed96b600caa6090ffed83e4611c3e7ec9bad7"
   integrity sha512-skVQpfdc6G5OVRsyemDn3vI1nj/iBBgnoqRLRka0ZbDT2GqelmyJ86bp+Bd/ztJe45Le3we+LXbR7T54RU5A9w==
@@ -7548,6 +7548,18 @@ ember-cli-showdown@^4.2.1:
     resolve "^1.8.1"
     semver "^5.5.0"
     showdown "^1.7.4"
+
+ember-cli-spinjs@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/ember-cli-spinjs/-/ember-cli-spinjs-2.1.1.tgz#96d7f34412f267aa5a1116c7979e4d9fb99602af"
+  integrity sha512-uiusC1HtCfuu1BdG7Wv3rtlXrb/7IB32RhaZPBbP5CRjgIVuHto4CDscPYBfF5QnfgVg6wu0sRsYOXuIgIE7gQ==
+  dependencies:
+    broccoli-funnel "^2.0.1"
+    broccoli-merge-trees "^3.0.1"
+    ember-auto-import "^1.2.15"
+    ember-cli-babel "^7.1.2"
+    resolve "^1.8.1"
+    spin.js "^4.0.0"
 
 ember-cli-sri@^2.1.1:
   version "2.1.1"
@@ -16512,6 +16524,11 @@ speedometer@~0.1.2:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/speedometer/-/speedometer-0.1.4.tgz#9876dbd2a169d3115402d48e6ea6329c8816a50d"
   integrity sha1-mHbb0qFp0xFUAtSObqYynIgWpQ0=
+
+spin.js@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/spin.js/-/spin.js-4.0.0.tgz#d6643232cc20b8d2c1b3ab6f0661178145b4dde8"
+  integrity sha512-uJN9Q4/I4I7PRZAp1c5reoY89thAfvFB5thbJncAwkPjPhqCfUrCooJc8GMN8q8WKFGIMy+JMf477RW7deCInA==
 
 split-string@^3.0.1, split-string@^3.0.2:
   version "3.1.0"
