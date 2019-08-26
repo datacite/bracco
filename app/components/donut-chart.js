@@ -2,7 +2,7 @@ import { schedule, run } from '@ember/runloop';
 import { computed } from '@ember/object';
 import Component from '@ember/component';
 import d3 from 'd3';
-// import colorbrewer from 'colorbrewer';
+import colorbrewer from 'colorbrewer';
 
 export default Component.extend({
   tagName: 'div',
@@ -51,8 +51,12 @@ export default Component.extend({
     let title = this.count;
     let subtitle = null;
 
-    // var colors = colorbrewer.Set2[8]
-    var color = d3.scale.category10();
+    // use PID Graph categories, use colors from colorbrewer
+    let categories = ["researcher", "other", "software", "dataset", "text", "collection", "funder", "institution"];
+    let colors = colorbrewer.Set3[8];
+    var color = d3.scale.ordinal()
+      .domain(categories)
+      .range(colors);
 
     // remove chart before building new one
     d3.select('#' + chartId).selectAll("*").remove();
@@ -80,7 +84,12 @@ export default Component.extend({
       .attr("class", "slice");
 
     arcs.append("svg:path")
-      .attr("fill", function(d) { return color(d.data.id); })
+      .attr("fill", function(d) {
+        if (!categories.includes(d.data.id)) {
+          d.data.id = "other";
+        }
+        return color(d.data.id); 
+      })
       .attr("d", arc);
 
     // arcs.each(
