@@ -85,6 +85,10 @@ module.exports = function(environment) {
     ENV.CDN_URL = "https://assets.test.datacite.org";
   }
 
+  if (environment === 'development') {
+    ENV.SENTRY_DSN = null;
+  }
+
   if (environment === 'test') {
     // Testem prefers this...
     ENV.locationType = 'none';
@@ -107,6 +111,7 @@ module.exports = function(environment) {
 
     ENV.SITE_TITLE = "DataCite DOI Fabrica Test";
     ENV.API_URL = "https://api.test.datacite.org";
+    ENV.SENTRY_DSN = null;
   }
 
   return ENV;

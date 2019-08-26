@@ -1,7 +1,12 @@
-import { schedule } from '@ember/runloop';
+import { schedule, run } from '@ember/runloop';
 import { computed } from '@ember/object';
 import Component from '@ember/component';
-import d3 from 'd3';
+import { select } from "d3-selection";
+import { axisBottom } from "d3-axis";
+import { max } from "d3-array";
+import { timeYears } from "d3-time";
+import { timeFormat } from "d3-time-format";
+import { scaleTime, scaleLinear } from "d3-scale";
 import { A } from '@ember/array';
 
 export default Component.extend({
@@ -44,12 +49,14 @@ export default Component.extend({
   didReceiveAttrs() {
     this._super(...arguments);
 
-    this.barChart();
+    run(() => {
+      this.send("barChart");
+    });
   },
 
   barChart() {
-    let formatYear = d3.timeFormat("%Y");
-    //let formatFixed = d3.format(",.0f");
+    let formatYear = timeFormat("%Y");
+    //let formatFixed = format(",.0f");
 
     let chartId = this.chartId;
     let data = (this.data) ? this.data : [];
@@ -60,26 +67,32 @@ export default Component.extend({
     let startDate = new Date("2010-01-01");
     let endDate = new Date("2020-01-01");
     let domain = [startDate, endDate];
-    let length = d3.timeYears(startDate, endDate).length;
+    let length = timeYears(startDate, endDate).length;
     let width = length * 22;
 
-    var x = d3.scaleTime()
+    var x = scaleTime()
       .domain(domain)
       .rangeRound([0, width]);
 
-    var y = d3.scaleLinear()
-      .domain([0, d3.max(data, function(d) { return d.count; })])
+    var y = scaleLinear()
+      .domain([0, max(data, function(d) { return d.count; })])
       .rangeRound([height, 0]);
 
-    var xAxis = d3.axisBottom()
+    var xAxis = axisBottom()
       .scale(x)
       .tickSize(0)
       .ticks(0)
+    
+    // var tip = d3Tip()
+    //   .attr('class', 'tooltip')
+    //   .html(function(d) { return d.id + ': ' + formatFixed(d.count); });
 
     // remove chart before building new one
-    d3.select('#' + chartId).selectAll("*").remove();
+    // wrap in try/catch block to handle fastboot
+    try {
+      select('#' + chartId).selectAll("*").remove();
 
-    var chart = d3.select('#' + chartId).append("svg")
+      var chart = select('#' + chartId).append("svg")
       .data([data])
       .attr("width", margin.left + width + margin.right)
       .attr("height", margin.top + height + margin.bottom)
@@ -87,51 +100,61 @@ export default Component.extend({
       .append("svg:g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    chart.selectAll(".bar")
-      .data(data)
-      .enter().append("rect")
-      .attr("id", function(d) {
-        return chartId + '-' + d.id;
-       })
-      .attr("class", "bar relations")
-      .attr("x", function(d) {
-        return x(new Date(Date.parse(d.id + '-01T12:00:00Z')));
-       })
-      .attr("width", width/length - 1)
-      .attr("y", function(d) { return y(d.count); })
-      .attr("height", function(d) { return height - y(d.count); });
+      chart.selectAll(".bar")
+        .data(data)
+        .enter().append("rect")
+        .attr("id", function(d) {
+          return chartId + '-' + d.id;
+        })
+        .attr("class", "bar relations")
+        .attr("x", function(d) {
+          return x(new Date(Date.parse(d.id + '-01T12:00:00Z')));
+        })
+        .attr("width", width/length - 1)
+        .attr("y", function(d) { return y(d.count); })
+        .attr("height", function(d) { return height - y(d.count); });
+        // .on('mouseover', function(d, i, nodes) {
+        //   console.log(d)
+        //  })
+        // .on('mouseout', function(d, i, nodes) {
+        //   console.log(d)
+        //  });
 
-    chart.append("g")
-      .attr("class", "x axis")
-      .attr("transform", "translate(0," + height + ")")
-      .call(xAxis);
+      chart.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis);
 
-    chart.append("text")
-      .attr("class", "label")
-      .attr("text-anchor", "middle")
-      .attr("transform", "translate(11," + (height + 18) + ")")
-      .text(formatYear(startDate));
+      chart.append("text")
+        .attr("class", "label")
+        .attr("text-anchor", "middle")
+        .attr("transform", "translate(11," + (height + 18) + ")")
+        .text(formatYear(startDate));
 
-    chart.append("text")
-      .attr("class", "label")
-      .attr("text-anchor", "middle")
-      .attr("transform", "translate(" + (width - 11) + "," + (height + 18) + ")")
-      .text(formatYear(endDate) - 1);
+      chart.append("text")
+        .attr("class", "label")
+        .attr("text-anchor", "middle")
+        .attr("transform", "translate(" + (width - 11) + "," + (height + 18) + ")")
+        .text(formatYear(endDate) - 1);
 
-    // let self = this;
-    // chart.selectAll("rect").each(
-    //   function(d) {
-    //     var id = '#' + chartId + '-' + d.id;
-    //     var title = formatFixed(d.count);
-    //     var dateStamp = Date.parse(d.id + '-01T12:00:00Z');
-    //     var dateString = " in " + formatYear(new Date(dateStamp));
+      // let self = this;
+      // chart.selectAll("rect").each(
+      //   function(d) {
+      //     var id = '#' + chartId + '-' + d.id;
+      //     var title = formatFixed(d.count);
+      //     var dateStamp = Date.parse(d.id + '-01T12:00:00Z');
+      //     var dateString = " in " + formatYear(new Date(dateStamp));
 
-    //     self.$(id).tooltip({ title: title + dateString, container: "body"});
-    //   }
-    // );
+      //     self.$(id).tooltip({ title: title + dateString, container: "body"});
+      //   }
+      // );
 
-    // return chart object
-    return chart;
+      // return chart object
+      return chart;
+    }
+    catch(error) {
+      //console.error(error);
+    }
   },
 
   actions: {

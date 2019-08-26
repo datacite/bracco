@@ -1,7 +1,11 @@
-import { schedule } from '@ember/runloop';
+import { schedule, run } from '@ember/runloop';
 import { computed } from '@ember/object';
 import Component from '@ember/component';
-import d3 from 'd3';
+import { select } from "d3-selection";
+import { format } from "d3-format";
+import { arc, pie } from "d3-shape";
+import { scaleOrdinal } from "d3-scale";
+import { schemeSet3 } from "d3-scale-chromatic";
 
 const categoryList = [
   "researcher", 
@@ -55,11 +59,13 @@ export default Component.extend({
   didReceiveAttrs() {
     this._super(...arguments);
 
-    this.donutChart();
+    run(() => {
+      this.send("donutChart");
+    });
   },
 
   donutChart() {
-    let formatFixed = d3.format(",.0f");
+    let formatFixed = format(",.0f");
 
     let chartId = this.chartId;
     let data = (this.data) ? this.data : [];
@@ -69,95 +75,85 @@ export default Component.extend({
     let subtitle = null;
     let categories = this.categories;
 
-    // use PID Graph categories, use colors from colorbrewer
-    var color = d3.scaleOrdinal()
+    // use colors from colorbrewer
+    var color = scaleOrdinal()
       .domain(categories)
-      .range(d3.schemeSet3);
+      .range(schemeSet3);
+
+    // var tip = d3Tip()
+    //   .attr('class', 'tooltip')
+    //   .html(function(d) { return d.data.title + ': ' + formatFixed(d.count); });
 
     // remove chart before building new one
-    d3.select('#' + chartId).selectAll("*").remove();
+    // wrap in try/catch block to handle fastboot
+    try {
+      select('#' + chartId).selectAll("*").remove();
 
-    var chart = d3.select('#' + chartId).append("svg")
-      .data([data])
-      .attr("width", radius * 2 + 50)
-      .attr("height", radius * 2 + 10)
-      .attr("class", "chart donut")
-      .append("svg:g")
-      .attr("transform", "translate(" + (radius + 20) + "," + (radius + 10) + ")");
+      var chart = select('#' + chartId).append("svg")
+        .data([data])
+        .attr("width", radius * 2 + 50)
+        .attr("height", radius * 2 + 10)
+        .attr("class", "chart donut")
+        .append("svg:g")
+        .attr("transform", "translate(" + (radius + 20) + "," + (radius + 10) + ")");
 
-    var arc = d3.arc()
-      .outerRadius(radius - 5)
-      .innerRadius(radius - 30);
+      var myArc = arc()
+        .outerRadius(radius - 5)
+        .innerRadius(radius - 30);
 
-    var pie = d3.pie()
-      .sort(null)
-      .value(function(d) { return d.count; });
+      var myPie = pie()
+        .sort(null)
+        .value(function(d) { return d.count; });
 
-    var arcs = chart.selectAll("g.slice")
-      .data(pie)
-      .enter()
-      .append("svg:g")
-      .attr("class", "slice");
+      var arcs = chart.selectAll("g.slice")
+        .data(myPie)
+        .enter()
+        .append("svg:g")
+        .attr("class", "slice");
 
-    arcs.append("svg:path")
-      .attr("fill", function(d) {
-        if (!(categories.includes(d.data.id))) {
-          d.data.id = "other";
-        }
-        return color(d.data.id); 
-      })
-      .attr("d", arc);
+      // arcs.call(tip)
 
-    // var tooltip = chart.append('div')
-    //   .attr('class', 'tooltip')
-    //   .style('opacity', 0);
-      
-    // arcs.on('mouseover', function(d) {
-    //   var posLeft = d3.event.pageX;
-    //   var posTop = d3.event.pageY;
+      arcs.append("svg:path")
+        .attr("fill", function(d) {
+          if (!(categories.includes(d.data.id))) {
+            d.data.id = "other";
+          }
+          return color(d.data.id); 
+        })
+        .attr("d", myArc);
+        // .on('mouseover', function(d, i, nodes) {
+        //   console.log(d)
+        //  })
+        // .on('mouseout', function(d, i, nodes) {
+        //   console.log(d)
+        //  })
 
-    //   tooltip
-    //     .style('left', posLeft + 'px')
-    //     .style('top', posTop + 'px')
-    //     .html(d.data.title + ': ' + d.data.count)
-    //     .transition()
-    //     .duration(200)
-    //     .style('opacity', 0.9);
-    // });
-      
-    // arcs.on('mouseout', function() {
-    //   tooltip
-    //     .transition()
-    //     .duration(500)
-    //     .style('opacity', 0);
-    // });
+      if (subtitle !== null) {
+        chart.append("text")
+          .attr("dy", 0)
+          .attr("text-anchor", "middle")
+          .attr("class", "title")
+          .text(formatFixed(title));
 
-    // arcs.each(
-    //   function(d){ $(this).tooltip({title: formatFixed(d.data.value) + " " + items + " " + d.data.key.replace("_", " "), container: "body"});
-    // });
+        chart.append("text")
+          .attr("dy", 21)
+          .attr("text-anchor", "middle")
+          .attr("class", "subtitle")
+          .text(subtitle);
+      } else {
+        chart.append("text")
+          .attr("dy", 8)
+          .attr("text-anchor", "middle")
+          .attr("class", "title-only")
+          .text(formatFixed(title));
+      }
 
-    if (subtitle !== null) {
-      chart.append("text")
-        .attr("dy", 0)
-        .attr("text-anchor", "middle")
-        .attr("class", "title")
-        .text(formatFixed(title));
-
-      chart.append("text")
-        .attr("dy", 21)
-        .attr("text-anchor", "middle")
-        .attr("class", "subtitle")
-        .text(subtitle);
-    } else {
-      chart.append("text")
-        .attr("dy", 8)
-        .attr("text-anchor", "middle")
-        .attr("class", "title-only")
-        .text(formatFixed(title));
+      // return chart object
+      return chart;
     }
-
-    // return chart object
-    return chart;
+    catch(error) {
+      //console.error(error);
+    }
   },
 
   actions: {
