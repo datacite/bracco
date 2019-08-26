@@ -1,17 +1,35 @@
-import { schedule, run } from '@ember/runloop';
+import { schedule } from '@ember/runloop';
 import { computed } from '@ember/object';
 import Component from '@ember/component';
 import d3 from 'd3';
-import colorbrewer from 'colorbrewer';
+
+const categoryList = [
+  "researcher", 
+  "other", 
+  "software", 
+  "dataset", 
+  "text", 
+  "collection", 
+  "institution", 
+  "audiovisual", 
+  "other1", 
+  "other2", 
+  "other3", 
+  "other4"
+]
 
 export default Component.extend({
   tagName: 'div',
   classNames: ['col-lg-3', 'col-md-4'],
-  data: null,
+  data: [],
   count: computed('data', function() {
-    return this.get('data').reduce(function (a, b) {
-      return a + b.count;
-    }, 0);
+    if (this.get('data')) {
+      return this.get('data').reduce(function (a, b) {
+        return a + b.count;
+      }, 0);
+    } else {
+      return 0
+    }
   }),
   label: 'Chart',
   chartId: computed('label', function() {
@@ -24,6 +42,7 @@ export default Component.extend({
       return null;
     }
   }),
+  categories: categoryList,
 
   init() {
     this._super();
@@ -36,9 +55,7 @@ export default Component.extend({
   didReceiveAttrs() {
     this._super(...arguments);
 
-    run(() => {
-      this.send("donutChart");
-    });
+    this.donutChart();
   },
 
   donutChart() {
@@ -50,13 +67,12 @@ export default Component.extend({
 
     let title = this.count;
     let subtitle = null;
+    let categories = this.categories;
 
     // use PID Graph categories, use colors from colorbrewer
-    let categories = ["researcher", "other", "software", "dataset", "text", "collection", "institution", "audiovisual"];
-    let colors = colorbrewer.Set3[8];
-    var color = d3.scale.ordinal()
+    var color = d3.scaleOrdinal()
       .domain(categories)
-      .range(colors);
+      .range(d3.schemeSet3);
 
     // remove chart before building new one
     d3.select('#' + chartId).selectAll("*").remove();
@@ -69,11 +85,11 @@ export default Component.extend({
       .append("svg:g")
       .attr("transform", "translate(" + (radius + 20) + "," + (radius + 10) + ")");
 
-    var arc = d3.svg.arc()
+    var arc = d3.arc()
       .outerRadius(radius - 5)
       .innerRadius(radius - 30);
 
-    var pie = d3.layout.pie()
+    var pie = d3.pie()
       .sort(null)
       .value(function(d) { return d.count; });
 
@@ -85,7 +101,7 @@ export default Component.extend({
 
     arcs.append("svg:path")
       .attr("fill", function(d) {
-        if (!categories.includes(d.data.id)) {
+        if (!(categories.includes(d.data.id))) {
           d.data.id = "other";
         }
         return color(d.data.id); 

@@ -1,7 +1,7 @@
-import { schedule, run } from '@ember/runloop';
+import { schedule } from '@ember/runloop';
 import { computed } from '@ember/object';
 import Component from '@ember/component';
-import d3 from "d3";
+import d3 from 'd3';
 import { A } from '@ember/array';
 
 export default Component.extend({
@@ -44,13 +44,11 @@ export default Component.extend({
   didReceiveAttrs() {
     this._super(...arguments);
 
-    run(() => {
-      this.send("barChart");
-    });
+    this.barChart();
   },
 
   barChart() {
-    let formatYear = d3.time.format.utc("%Y");
+    let formatYear = d3.timeFormat("%Y");
     //let formatFixed = d3.format(",.0f");
 
     let chartId = this.chartId;
@@ -62,18 +60,18 @@ export default Component.extend({
     let startDate = new Date("2010-01-01");
     let endDate = new Date("2020-01-01");
     let domain = [startDate, endDate];
-    let length = d3.time.years(startDate, endDate).length;
+    let length = d3.timeYears(startDate, endDate).length;
     let width = length * 22;
 
-    var x = d3.time.scale.utc()
+    var x = d3.scaleTime()
       .domain(domain)
       .rangeRound([0, width]);
 
-    var y = d3.scale.linear()
+    var y = d3.scaleLinear()
       .domain([0, d3.max(data, function(d) { return d.count; })])
       .rangeRound([height, 0]);
 
-    var xAxis = d3.svg.axis()
+    var xAxis = d3.axisBottom()
       .scale(x)
       .tickSize(0)
       .ticks(0)
