@@ -42,7 +42,7 @@ export default Component.extend({
   },
 
   donutChart() {
-    // let formatFixed = d3.format(",.0f");
+    let formatFixed = d3.format(",.0f");
 
     let chartId = this.chartId;
     let data = (this.data) ? this.data : [];
@@ -52,7 +52,7 @@ export default Component.extend({
     let subtitle = null;
 
     // use PID Graph categories, use colors from colorbrewer
-    let categories = ["researcher", "other", "software", "dataset", "text", "collection", "funder", "institution"];
+    let categories = ["researcher", "other", "software", "dataset", "text", "collection", "institution", "audiovisual"];
     let colors = colorbrewer.Set3[8];
     var color = d3.scale.ordinal()
       .domain(categories)
@@ -92,6 +92,30 @@ export default Component.extend({
       })
       .attr("d", arc);
 
+    // var tooltip = chart.append('div')
+    //   .attr('class', 'tooltip')
+    //   .style('opacity', 0);
+      
+    // arcs.on('mouseover', function(d) {
+    //   var posLeft = d3.event.pageX;
+    //   var posTop = d3.event.pageY;
+
+    //   tooltip
+    //     .style('left', posLeft + 'px')
+    //     .style('top', posTop + 'px')
+    //     .html(d.data.title + ': ' + d.data.count)
+    //     .transition()
+    //     .duration(200)
+    //     .style('opacity', 0.9);
+    // });
+      
+    // arcs.on('mouseout', function() {
+    //   tooltip
+    //     .transition()
+    //     .duration(500)
+    //     .style('opacity', 0);
+    // });
+
     // arcs.each(
     //   function(d){ $(this).tooltip({title: formatFixed(d.data.value) + " " + items + " " + d.data.key.replace("_", " "), container: "body"});
     // });
@@ -101,7 +125,7 @@ export default Component.extend({
         .attr("dy", 0)
         .attr("text-anchor", "middle")
         .attr("class", "title")
-        .text(title);
+        .text(formatFixed(title));
 
       chart.append("text")
         .attr("dy", 21)
@@ -113,7 +137,7 @@ export default Component.extend({
         .attr("dy", 8)
         .attr("text-anchor", "middle")
         .attr("class", "title-only")
-        .text(title);
+        .text(formatFixed(title));
     }
 
     // return chart object
