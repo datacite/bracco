@@ -53,6 +53,7 @@ module.exports = function(environment) {
     SEARCH_URL: process.env.SEARCH_URL || "https://search.datacite.org",
     ORCID_URL: process.env.ORCID_URL || "https://orcid.org",
     API_URL: process.env.API_URL || "https://api.datacite.org",
+    FABRICA_URL: process.env.FABRICA_URL || "https://doi.datacite.org",
     ROR_API_URL: process.env.ROR_API_URL || "https://api.ror.org",
     ORCID_API_URL: process.env.ORCID_API_URL || "https://pub.orcid.org",
     EVENTDATA_URL: process.env.EVENTDATA_URL || "https://api.datacite.org",
@@ -68,22 +69,20 @@ module.exports = function(environment) {
     }
   };
 
-  if (process.env.DEPLOY_TARGET === 'production') {
-    ENV.SITE_TITLE = "DataCite DOI Fabrica";
-    ENV.API_URL = "https://api.datacite.org";
-    ENV.ORCID_URL = "https://orcid.org";
-    ENV.FABRICA_URL = "https://doi.datacite.org";
-    ENV.EVENTDATA_URL = "https://api.datacite.org";
-    ENV.SEARCH_URL = "https://search.datacite.org";
-    ENV.CDN_URL = "https://assets.datacite.org";
-  }
-
-  if (environment === 'development') {
+  if (environment === 'development' || process.env.DEPLOY_TARGET === 'stage') {
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
+
+    ENV.SITE_TITLE = "DataCite DOI Fabrica Test";
+    ENV.API_URL = "https://api.test.datacite.org";
+    ENV.ORCID_URL = "https://orcid.org";
+    ENV.FABRICA_URL = "https://doi.test.datacite.org";
+    ENV.EVENTDATA_URL = "https://api.test.datacite.org";
+    ENV.SEARCH_URL = "https://search.test.datacite.org";
+    ENV.CDN_URL = "https://assets.test.datacite.org";
   }
 
   if (environment === 'test') {
