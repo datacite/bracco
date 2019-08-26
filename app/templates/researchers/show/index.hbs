@@ -1,6 +1,7 @@
 <div class="content">
   <div class="row row-chart">
     {{bar-chart data=model.doiCount label='DOI' model=model link='researchers.show.dois' summarize=true}}
+    {{donut-chart data=model.resourceTypeCount label='DOI' model=model link='researchers.show.dois'}}
   </div>
 
   {{#if (can "read messages" model)}}
