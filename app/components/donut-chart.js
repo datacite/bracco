@@ -1,4 +1,4 @@
-import { schedule, run } from '@ember/runloop';
+import { schedule } from '@ember/runloop';
 import { computed } from '@ember/object';
 import Component from '@ember/component';
 import { select } from "d3-selection";

@@ -1,8 +1,8 @@
-import { schedule, run } from '@ember/runloop';
+import { schedule } from '@ember/runloop';
 import { computed } from '@ember/object';
 import Component from '@ember/component';
 import { select } from "d3-selection";
-import { format } from "d3-format";
+// import { format } from "d3-format";
 import { axisBottom } from "d3-axis";
 import { max } from "d3-array";
 import { timeYears } from "d3-time";
@@ -55,7 +55,7 @@ export default Component.extend({
 
   barChart() {
     let formatYear = timeFormat("%Y");
-    let formatFixed = format(",.0f");
+    // let formatFixed = format(",.0f");
 
     let chartId = this.chartId;
     let data = (this.data) ? this.data : [];
@@ -111,17 +111,17 @@ export default Component.extend({
         })
         .attr("width", width/length - 1)
         .attr("y", function(d) { return y(d.count); })
-        .attr("height", function(d) { return height - y(d.count); })
-        .on('mouseover', function(d) {
-          // var id = '#' + chartId + '-' + d.id;
-          var title = formatFixed(d.count);
-          var dateStamp = Date.parse(d.id + '-01T12:00:00Z');
-          var dateString = " in " + formatYear(new Date(dateStamp));
-          console.log(title + dateString);
-         })
-        .on('mouseout', function(d, i, nodes) {
-          console.log(d)
-         });
+        .attr("height", function(d) { return height - y(d.count); });
+        // .on('mouseover', function(d) {
+        //   // var id = '#' + chartId + '-' + d.id;
+        //   var title = formatFixed(d.count);
+        //   var dateStamp = Date.parse(d.id + '-01T12:00:00Z');
+        //   var dateString = " in " + formatYear(new Date(dateStamp));
+        //   console.log(title + dateString);
+        //  })
+        // .on('mouseout', function(d, i, nodes) {
+        //   console.log(d)
+        //  });
 
       chart.append("g")
         .attr("class", "x axis")
