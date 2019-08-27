@@ -27,8 +27,8 @@
             {{/el.control}}
           {{/form.element}}
 
-          {{#form.element controlType="power-select" label="Non-Profit Status" property="nonProfitStatus" options=nonProfitStatuses destination=nonProfitStatus as |el|}}
-            {{#el.control onChange=(action "selectNonProfitStatus") search=(action "searchNonProfitStatus") placeholder="Non-Profit Status" searchPlaceholder="Type to search..." as |item|}}
+          {{#form.element controlType="power-select" label="Tax Status" property="nonProfitStatus" options=nonProfitStatuses destination=nonProfitStatus as |el|}}
+            {{#el.control onChange=(action "selectNonProfitStatus") search=(action "searchNonProfitStatus") placeholder="Tax Status" searchPlaceholder="Type to search..." as |item|}}
               {{titleize item}}
             {{/el.control}}
           {{/form.element}}
@@ -347,7 +347,7 @@
       {{#if (or model.meta.nonProfitStatuses model.query.non-profit-status)}}
         <div class="panel facets">
           <div class="panel-body">
-            <h4>Non-Profit Status</h4>
+            <h4>Tax Status</h4>
             <ul>
               {{#if model.meta.nonProfitStatuses}}
                 {{#each model.meta.nonProfitStatuses as |nonProfitStatus|}}
@@ -463,7 +463,7 @@
             <h5>Member Type</h5>
             {{titleize (humanize (underscore provider.memberType))}}
 
-            <h5>Non-Profit Status</h5>
+            <h5>Tax Status</h5>
             {{titleize provider.nonProfitStatus}}
 
             {{#if provider.organizationType}}
