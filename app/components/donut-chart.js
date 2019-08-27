@@ -59,9 +59,7 @@ export default Component.extend({
   didReceiveAttrs() {
     this._super(...arguments);
 
-    run(() => {
-      this.send("donutChart");
-    });
+    this.donutChart();
   },
 
   donutChart() {
