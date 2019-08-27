@@ -30,7 +30,8 @@ bower.json.ember-try
 package.json.ember-try
 
 .env
-.env.deploy.*
+.env.*
+!.env.deploy.*
 !.env.travis
 
 electron-out/
