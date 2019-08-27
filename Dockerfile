@@ -42,9 +42,16 @@ RUN chown -R app:app /home/app/webapp && \
 # Install npm packages and build dist
 WORKDIR /home/app/webapp
 RUN npm install -g ember-cli && \
-    yarn install --frozen-lockfile && \
-    ember build --environment=production && \
-    exit 0
+    yarn install --frozen-lockfile --silent
+
+# Run additional scripts during container startup (i.e. not at build time)
+RUN mkdir -p /etc/my_init.d
+
+# install custom ssh key during startup
+COPY vendor/docker/10_ssh.sh /etc/my_init.d/10_ssh.sh
+
+# run ember-cli deploy
+COPY vendor/docker/20_ember_deploy.sh /etc/my_init.d/20_ember_deploy.sh
 
 # Expose web
 EXPOSE 80

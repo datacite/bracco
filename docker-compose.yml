@@ -3,6 +3,8 @@ version: '2'
 services:
   web:
     env_file: .env
+    environment:
+      - DEPLOY_TARGET=staging
     image: datacite/bracco
     build: .
     ports:

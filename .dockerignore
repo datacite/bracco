@@ -1,6 +1,6 @@
 log/*
 tmp/*
-/dist/
+dist/*
 node_modules/*
 electron-out/*
 .env

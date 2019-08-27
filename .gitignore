@@ -30,6 +30,7 @@ package.json.ember-try
 
 .env
 .env.deploy.*
+!.env.travis
 
 electron-out/
 
