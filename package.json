@@ -74,7 +74,8 @@
     "mime": "^2.4.0"
   },
   "fastbootDependencies": [
-    "node-fetch"
+    "node-fetch",
+    "compression"
   ],
   "devDependencies": {
     "@ember/optional-features": "^0.7.0",
@@ -163,6 +164,8 @@
     "emberx-file-input": "^1.2.1",
     "eslint": "^6.1.0",
     "eslint-plugin-node": "^9.0.1",
+    "fastboot-express-middleware": "^2.0.0",
+    "compression": "^1.7.4",
     "fs-xattr": "^0.2.0",
     "html-entities": "^1.2.1",
     "iso-3166-country-list": "^0.1.2",

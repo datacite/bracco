@@ -1,18 +1,24 @@
-// from https://github.com/ember-fastboot/fastboot-app-server/issues/65
+if (typeof(PhusionPassenger) !== 'undefined') {
+  PhusionPassenger.configure({ autoInstall: false });
+}
 
-const FastBootAppServer = require("fastboot-app-server");
-const ExpressHTTPServer = require('fastboot-app-server/src/express-http-server');
+const express = require('express');
+const compression = require('compression')
+const fastbootMiddleware = require('fastboot-express-middleware');
 
-const httpServer = new ExpressHTTPServer({
-  gzip: true,
-  chunkedResponse: true
-});
-const app = httpServer.app;
-let server = new FastBootAppServer({
-  httpServer: httpServer,
+let app = express();
+
+// compress responses
+app.use(compression());
+
+app.get('/*', fastbootMiddleware({
   distPath: 'dist',
-  gzip: true,
+  resilient: true,
   chunkedResponse: true
-});
+}));
 
-server.start();
+if (typeof(PhusionPassenger) !== 'undefined') {
+  app.listen('passenger');
+} else {
+  app.listen(3000);
+}
