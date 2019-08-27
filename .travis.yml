@@ -42,6 +42,7 @@ script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 
 after_success:
+  - ember deploy $DEPLOY_TARGET
   - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
   - REPO=datacite/bracco;
   - if [ "${TRAVIS_TAG?}" ]; then
