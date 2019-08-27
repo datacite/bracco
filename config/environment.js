@@ -3,6 +3,7 @@
 
 module.exports = function(environment) {
   const pkg = require('../package.json');
+  var deployTarget = process.env.DEPLOY_TARGET;
 
   let ENV = {
     modulePrefix: 'bracco',
@@ -48,16 +49,17 @@ module.exports = function(environment) {
       hostWhitelist: ['doi.datacite.org', 'doi.test.datacite.org', /^10\.0\.\d{1,3}\.\d{1,3}$/, /^localhost:\d+$/]
     },
 
-    SITE_TITLE: process.env.SITE_TITLE || "DataCite DOI Fabrica",
+    SITE_TITLE: process.env.SITE_TITLE || "DataCite DOI Fabrica Test",
     NAVMENU_TITLE: process.env.NAVMENU_TITLE,
-    SEARCH_URL: process.env.SEARCH_URL || "https://search.datacite.org",
+    SEARCH_URL: process.env.SEARCH_URL || "https://search.test.datacite.org",
     ORCID_URL: process.env.ORCID_URL || "https://orcid.org",
-    API_URL: process.env.API_URL || "https://api.datacite.org",
-    FABRICA_URL: process.env.FABRICA_URL || "https://doi.datacite.org",
+    API_URL: process.env.API_URL || "https://api.test.datacite.org",
+    FABRICA_URL: process.env.FABRICA_URL || "https://doi.test.datacite.org",
     ROR_API_URL: process.env.ROR_API_URL || "https://api.ror.org",
     ORCID_API_URL: process.env.ORCID_API_URL || "https://pub.orcid.org",
-    EVENTDATA_URL: process.env.EVENTDATA_URL || "https://api.datacite.org",
-    CDN_URL: process.env.CDN_URL || "https://assets.datacite.org",
+    EVENTDATA_URL: process.env.EVENTDATA_URL || "https://api.test.datacite.org",
+    CDN_URL: process.env.CDN_URL || "https://assets.test.datacite.org",
+
     JWT_PUBLIC_KEY: process.env.JWT_PUBLIC_KEY || '-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxWfFGoaO4d9s7OoW34UD\nbEbFdh1FrAXT5QmWVocZIP0Y+1KtNGNjpRpazlSWeSMFuswoDG/cKiJX3BQkP7fw\nbHCujQoNpQqznsI8rRJYZh/L+THxjY7OEoFg7QohqnEHRr9YW4wPzh+I0xj2puVr\ngyQzREYckeBUEJnS2uXdiZ32LzbiH4pE+wwZNVQv0BbadnTc2mJWMaEcUfuh0Qko\nxIVpPwTCzyD4kMriETe+/AOw/2DEwbNJakh8N2ySMhXbso/zHxStEw2YesJkNJWG\n+aG5ApSbwTba8DVHKvTgCsE1d+1tHFyeruTxPIfamwA/VkVBuUpYR7CmJaoNuk1e\nKwIDAQAB\n-----END PUBLIC KEY-----\n',
     SENTRY_DSN: process.env.SENTRY_DSN || 'https://63201db022924202b697e03bc5e0d0ba@sentry.io/1420435',
     VERSION: pkg.version,
@@ -69,23 +71,27 @@ module.exports = function(environment) {
     }
   };
 
-  if (environment === 'development' || process.env.DEPLOY_TARGET === 'stage') {
+  if (deployTarget === 'staging') {
+    // add staging-specific settings here
+  }
+
+  if (deployTarget === 'production') {
+    ENV.SITE_TITLE = "DataCite DOI Fabrica";
+    ENV.API_URL = "https://api.datacite.org";
+    ENV.ORCID_URL = "https://orcid.org";
+    ENV.FABRICA_URL = "https://doi.datacite.org";
+    ENV.EVENTDATA_URL = "https://api.datacite.org";
+    ENV.SEARCH_URL = "https://search.datacite.org";
+    ENV.CDN_URL = "https://assets.datacite.org";
+  }
+
+  if (environment === 'development') {
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
 
-    ENV.SITE_TITLE = "DataCite DOI Fabrica Test";
-    ENV.API_URL = "https://api.test.datacite.org";
-    ENV.ORCID_URL = "https://orcid.org";
-    ENV.FABRICA_URL = "https://doi.test.datacite.org";
-    ENV.EVENTDATA_URL = "https://api.test.datacite.org";
-    ENV.SEARCH_URL = "https://search.test.datacite.org";
-    ENV.CDN_URL = "https://assets.test.datacite.org";
-  }
-
-  if (environment === 'development') {
     ENV.SENTRY_DSN = null;
   }
 
