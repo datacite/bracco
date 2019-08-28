@@ -15,7 +15,7 @@ module('Acceptance | anonymous | admin', function(hooks) {
     await visit('/');
 
     assert.equal(currentURL(), '/');
-    assert.dom('div.motto h1').hasText('DataCite DOI Fabrica Test');
+    assert.dom('div.motto h1').hasText('DataCite Fabrica Test');
   });
 
   // the following pages require authentication. Redirects to homepage otherwise
@@ -23,28 +23,28 @@ module('Acceptance | anonymous | admin', function(hooks) {
     await visit('/settings');
 
     assert.equal(currentURL(), '/');
-    assert.dom('div.motto h1').hasText('DataCite DOI Fabrica Test');
+    assert.dom('div.motto h1').hasText('DataCite Fabrica Test');
   });
 
   test('visiting providers', async function(assert) {
     await visit('/providers');
 
     assert.equal(currentURL(), '/');
-    assert.dom('div.motto h1').hasText('DataCite DOI Fabrica Test');
+    assert.dom('div.motto h1').hasText('DataCite Fabrica Test');
   });
 
   test('visiting clients', async function(assert) {
     await visit('/clients');
 
     assert.equal(currentURL(), '/');
-    assert.dom('div.motto h1').hasText('DataCite DOI Fabrica Test');
+    assert.dom('div.motto h1').hasText('DataCite Fabrica Test');
   });
 
   test('visiting prefixes', async function(assert) {
     await visit('/prefixes');
 
     assert.equal(currentURL(), '/');
-    assert.dom('div.motto h1').hasText('DataCite DOI Fabrica Test');
+    assert.dom('div.motto h1').hasText('DataCite Fabrica Test');
   });
 
   test('visiting prefix 10.5072', async function(assert) {
@@ -58,13 +58,13 @@ module('Acceptance | anonymous | admin', function(hooks) {
     await visit('/dois');
 
     assert.equal(currentURL(), '/');
-    assert.dom('div.motto h1').hasText('DataCite DOI Fabrica Test');
+    assert.dom('div.motto h1').hasText('DataCite Fabrica Test');
   });
 
   test('visiting specific doi', async function(assert) {
     await visit('clients/bl.sagecite/dois/10.5520%2Fsagecite-1');
 
     assert.equal(currentURL(), '/');
-    assert.dom('div.motto h1').hasText('DataCite DOI Fabrica Test');
+    assert.dom('div.motto h1').hasText('DataCite Fabrica Test');
   });
 });

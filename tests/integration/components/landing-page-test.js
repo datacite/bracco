@@ -13,7 +13,7 @@ module('Integration | Component | landing page', function(hooks) {
 
     await render(hbs`{{landing-page}}`);
 
-    assert.ok(/^DataCite DOI Fabrica+/.test(find('*').textContent.trim()), 'begins with "DataCite DOI Fabrica"');
+    assert.ok(/^DataCite Fabrica+/.test(find('*').textContent.trim()), 'begins with "DataCite Fabrica"');
 
     // Template block usage:
     await render(hbs`
@@ -22,6 +22,6 @@ module('Integration | Component | landing page', function(hooks) {
       {{/landing-page}}
     `);
 
-    assert.ok(/^DataCite DOI Fabrica+/.test(find('*').textContent.trim()), 'begins with "DataCite DOI Fabrica"');
+    assert.ok(/^DataCite Fabrica+/.test(find('*').textContent.trim()), 'begins with "DataCite Fabrica"');
   });
 });

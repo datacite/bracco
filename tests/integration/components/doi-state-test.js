@@ -12,6 +12,6 @@ module('Integration | Component | doi-state', function(hooks) {
     this.set('model', make('doi'));
     await render(hbs`{{doi-state model=model}}`);
 
-    assert.dom('*').hasText('State Draft only visible in DOI Fabrica, DOI can be deleted Registered registered with the DOI Resolver Findable registered with the DOI Resolver and indexed in DataCite Search The state determines whether a DOI is registered and findable. Once in Registered or Findable state, a DOI can\'t be set back to Draft state. More …');
+    assert.dom('*').hasText('State Draft only visible in Fabrica, DOI can be deleted Registered registered with the DOI Resolver Findable registered with the DOI Resolver and indexed in DataCite Search The state determines whether a DOI is registered and findable. Once in Registered or Findable state, a DOI can\'t be set back to Draft state. More …');
   });
 });

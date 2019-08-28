@@ -5,7 +5,7 @@
 
 # Bracco
 
-The web frontend for the DataCite DOI Fabrica service.
+The web frontend for the DataCite Fabrica service.
 
 ## Prerequisites
 

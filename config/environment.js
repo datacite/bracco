@@ -49,7 +49,7 @@ module.exports = function(environment) {
       hostWhitelist: ['doi.datacite.org', 'doi.test.datacite.org', /^10\.0\.\d{1,3}\.\d{1,3}$/, /^localhost:\d+$/]
     },
 
-    SITE_TITLE: process.env.SITE_TITLE || "DataCite DOI Fabrica Test",
+    SITE_TITLE: process.env.SITE_TITLE || "DataCite Fabrica Test",
     NAVMENU_TITLE: process.env.NAVMENU_TITLE,
     SEARCH_URL: process.env.SEARCH_URL || "https://search.test.datacite.org",
     ORCID_URL: process.env.ORCID_URL || "https://orcid.org",
@@ -76,7 +76,7 @@ module.exports = function(environment) {
   }
 
   if (deployTarget === 'production') {
-    ENV.SITE_TITLE = "DataCite DOI Fabrica";
+    ENV.SITE_TITLE = "DataCite Fabrica";
     ENV.API_URL = "https://api.datacite.org";
     ENV.ORCID_URL = "https://orcid.org";
     ENV.FABRICA_URL = "https://doi.datacite.org";
@@ -115,7 +115,7 @@ module.exports = function(environment) {
 
     ENV.APP.autoboot = false;
 
-    ENV.SITE_TITLE = "DataCite DOI Fabrica Test";
+    ENV.SITE_TITLE = "DataCite Fabrica Test";
     ENV.API_URL = "https://api.test.datacite.org";
     ENV.SENTRY_DSN = null;
   }

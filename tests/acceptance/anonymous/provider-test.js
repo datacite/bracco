@@ -9,34 +9,34 @@ module('Acceptance | anonymous | provider', function(hooks) {
     await visit('/providers/tib');
 
     assert.equal(currentURL(), '/');
-    assert.dom('div.motto h1').hasText('DataCite DOI Fabrica Test');
+    assert.dom('div.motto h1').hasText('DataCite Fabrica Test');
   });
 
   test('visiting provider TIB settings', async function(assert) {
     await visit('/providers/tib/settings');
 
     assert.equal(currentURL(), '/');
-    assert.dom('div.motto h1').hasText('DataCite DOI Fabrica Test');
+    assert.dom('div.motto h1').hasText('DataCite Fabrica Test');
   });
 
   test('visiting provider TIB clients', async function(assert) {
     await visit('/providers/tib/clients');
 
     assert.equal(currentURL(), '/');
-    assert.dom('div.motto h1').hasText('DataCite DOI Fabrica Test');
+    assert.dom('div.motto h1').hasText('DataCite Fabrica Test');
   });
 
   test('visiting provider TIB prefixes', async function(assert) {
     await visit('/providers/tib/prefixes');
 
     assert.equal(currentURL(), '/');
-    assert.dom('div.motto h1').hasText('DataCite DOI Fabrica Test');
+    assert.dom('div.motto h1').hasText('DataCite Fabrica Test');
   });
 
   test('visiting provider TIB dois', async function(assert) {
     await visit('/providers/tib/dois');
 
     assert.equal(currentURL(), '/');
-    assert.dom('div.motto h1').hasText('DataCite DOI Fabrica Test');
+    assert.dom('div.motto h1').hasText('DataCite Fabrica Test');
   });
 });

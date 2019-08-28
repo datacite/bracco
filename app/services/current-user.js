@@ -103,7 +103,7 @@ export default Service.extend({
       }
 
       if (!['user', 'temporary'].includes(payload.role_id)) {
-        this.flashMessages.info('Welcome ' + this.name + ' to the DOI Fabrica administration area.');
+        this.flashMessages.info('Welcome ' + this.name + ' to the Fabrica administration area.');
       }
     }
   }

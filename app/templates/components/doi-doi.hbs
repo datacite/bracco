@@ -19,7 +19,7 @@
 <div class="form-group">
   <label class="control-label col-md-3">State</label>
   <div class="col-md-9">
-    <div>{{radio-button radioId="draft-radio" value="draft" groupValue=state radioClass="radio" changed=(action "selectState") disabled=draft}}Draft <span class="help-block">only visible in DOI Fabrica, DOI can be deleted</span></div>
+    <div>{{radio-button radioId="draft-radio" value="draft" groupValue=state radioClass="radio" changed=(action "selectState") disabled=draft}}Draft <span class="help-block">only visible in Fabrica, DOI can be deleted</span></div>
     <div>{{radio-button radioId="registered-radio" value="registered" groupValue=state radioClass="radio" changed=(action "selectState") disabled=registered}}Registered <span class="help-block">registered with the DOI Resolver</span></div>
     <div>{{radio-button radioId="findable-radio" value="findable" groupValue=state radioClass="radio" changed=(action "selectState") disabled=findable}}Findable <span class="help-block">registered with the DOI Resolver and indexed in DataCite Search</span></div>
     <div class="help-block">

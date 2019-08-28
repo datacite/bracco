@@ -28,7 +28,7 @@ module.exports = function(defaults) {
     },
     inlineContent: {
       'site-title': {
-        content: (process.env.SITE_TITLE || "DataCite DOI Fabrica")
+        content: (process.env.SITE_TITLE || "DataCite Fabrica")
       },
       'cdn-url': {
         content: (process.env.CDN_URL || "https://assets.datacite.org") + "/stylesheets/doi.css?version=" + (pkg.version || "1.0")

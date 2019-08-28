@@ -17,16 +17,16 @@
 	"dateCreated": "2017-03-18",
 	"datePublished": "2018-05-09",
 	"dateModified": "2018-05-09",
-	"description": "The web frontend for the DataCite DOI Fabrica service for managing DataCite providers, clients, prefixes and DOIs.",
+	"description": "The web frontend for the DataCite Fabrica service for managing DataCite providers, clients, prefixes and DOIs.",
 	"isAutomatedBuild": true,
 	"licenseId": "MIT",
   "publisher": "DataCite",
   "version": "1.0.1",
 	"tags": [
 		"Doi Registration",
-		"DOI Fabrica"
+		"Fabrica"
 	],
-	"title": "Frontend for the DataCite DOI Fabrica service",
+	"title": "Frontend for the DataCite Fabrica service",
 	"programmingLanguage": {
 		"name": "Javascript",
 		"URL": "https://www.javascript.com/"
