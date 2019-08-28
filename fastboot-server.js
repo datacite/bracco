@@ -9,9 +9,6 @@ const fastbootMiddleware = require('fastboot-express-middleware');
 
 let app = express();
 
-// logging
-app.use(morgan('combined'));
-
 // compress responses
 app.use(compression());
 
@@ -20,6 +17,9 @@ app.use(express.static('dist'));
 app.get('/assets/*', function(req, res) {
   res.sendStatus(404);
 });
+
+// logging
+app.use(morgan('combined'));
 
 app.get('/*', fastbootMiddleware({
   distPath: 'dist',
