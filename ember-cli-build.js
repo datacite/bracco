@@ -10,30 +10,22 @@ module.exports = function(defaults) {
     'ember-cli-babel': {
       includePolyfill: true
     },
-
     sourcemaps: {
       enabled: true,
       extensions: ['js']
     },
-
-    // fingerprint: {
-    //   enabled: false
-    // },
     babel: {
       sourceMaps: 'inline'
     },
-
     'ember-bootstrap': {
       importBootstrapCSS: false,
       importBootstrapFont: false,
       bootstrapVersion: 3
     },
-
     'ember-prism': {
       'theme': 'default',
       'plugins': ['line-highlight']
     },
-
     inlineContent: {
       'site-title': {
         content: (process.env.SITE_TITLE || "DataCite DOI Fabrica")
