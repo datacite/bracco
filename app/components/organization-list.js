@@ -48,7 +48,6 @@ export default Component.extend({
   focusAreas: focusAreaList,
 
   organizations: [],
-  organizationsNames: [],
   consortia: [],
 
   reset() {

@@ -14,7 +14,7 @@
         {{form.element controlType="text" label="Organization Name" property="name" required=false helpText="The official name of your organization."}}
         {{form.element controlType="text" label="Organization Name to Display" property="displayName" required=false helpText="Name of your organization as you would like it to appear in Fabrica and on DataCite’s website."}}
 
-        {{#form.element controlType="power-select" label="Organization identifier (optional)" disabled=disabled value=organization helpText='Organization identifiers are provided by the Research Organization Registry (ROR).'  options=organizationsNames as |el|}}
+        {{#form.element controlType="power-select" label="Organization identifier (optional)" disabled=disabled value=organization helpText='Organization identifiers are provided by the Research Organization Registry (ROR).'  options=organizations as |el|}}
           {{el.control onChange=(action "selectRor") search=(action "searchRor") placeholder="Select Organization" searchPlaceholder="Type to search..." allowClear=true}}
         {{/form.element}}
 

@@ -5,11 +5,10 @@ export default Component.extend({
   store: service(),
 
   organizations: [],
-  organizationsNames: [],
 
   updateAffiliation(organizationRecord) {
     this.fragment.set('name', organizationRecord.name);
-    this.fragment.set('affiliationIdentifier', 'https://' + organizationRecord.id);
+    this.fragment.set('affiliationIdentifier', organizationRecord.id);
     this.fragment.set('schemeUri', 'https://ror.org');
     this.fragment.set('affiliationIdentifierScheme', 'ROR');
 

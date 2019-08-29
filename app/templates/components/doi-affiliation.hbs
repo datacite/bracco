@@ -1,7 +1,7 @@
 {{#if (gt index 0)}}
   <div class="input-group" style="padding-top:30px;">
     <div class="power-select-fragment">
-      {{#form.element controlType="power-select" disabled=disabled value=fragment.name options=organizationsNames as |el|}}
+      {{#form.element controlType="power-select" disabled=disabled value=fragment.name options=organizations as |el|}}
         {{#el.control onChange=(action "selectRor") search=(action "searchRor") placeholder="Select Affiliation" searchPlaceholder="Type to search..." allowClear=true as |item|}}
           {{if item.name item.name fragment.name}}
         {{/el.control}}
