@@ -73,6 +73,7 @@ module.exports = function(environment) {
 
   if (deployTarget === 'staging') {
     // add staging-specific settings here
+    ENV.COOKIE_DOMAIN = ".test.datacite.org";
     ENV.featureFlags['use-repositories'] = true;
   }
 
@@ -84,6 +85,7 @@ module.exports = function(environment) {
     ENV.EVENTDATA_URL = "https://api.datacite.org";
     ENV.SEARCH_URL = "https://search.datacite.org";
     ENV.CDN_URL = "https://assets.datacite.org";
+    ENV.COOKIE_DOMAIN = ".datacite.org";
   }
 
   if (environment === 'development') {
@@ -94,6 +96,7 @@ module.exports = function(environment) {
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
 
     ENV.featureFlags['use-repositories'] = true;
+    ENV.COOKIE_DOMAIN = "localhost";
     ENV.SENTRY_DSN = null;
   }
 
@@ -109,7 +112,6 @@ module.exports = function(environment) {
       store: 'simple-auth-session-store:ephemeral'
     }
     ENV.API_JWT= process.env.API_JWT || '',
-
     ENV.APP.rootElement = '#ember-testing';
 
     ENV.featureFlags['use-repositories'] = true;
@@ -118,6 +120,7 @@ module.exports = function(environment) {
     ENV.APP.autoboot = false;
 
     ENV.SITE_TITLE = "DataCite Fabrica Test";
+    ENV.COOKIE_DOMAIN = "localhost";
     ENV.API_URL = "https://api.test.datacite.org";
     ENV.SENTRY_DSN = null;
   }
