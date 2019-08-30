@@ -73,6 +73,7 @@ module.exports = function(environment) {
 
   if (deployTarget === 'staging') {
     // add staging-specific settings here
+    ENV.featureFlags['use-repositories'] = true;
   }
 
   if (deployTarget === 'production') {
@@ -92,6 +93,7 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
 
+    ENV.featureFlags['use-repositories'] = true;
     ENV.SENTRY_DSN = null;
   }
 
