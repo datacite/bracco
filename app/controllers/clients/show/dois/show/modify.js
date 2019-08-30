@@ -24,16 +24,6 @@ export default Controller.extend({
         doi.set('event', this.setEvent(stateChange));
       }
 
-      // set individual attributes to null so that they don't overwrite what is in the xml attribute
-      doi.set('creators', null);
-      doi.set('titles', null);
-      doi.set('descriptions', null);
-      doi.set('publisher', null);
-      doi.set('publicationYear', null);
-      doi.set('types', null);
-      doi.set('rightsList', null);
-      doi.set('schemaVersion', null);
-
       let self = this;
       doi.save().then(function (doi) {
         self.transitionToRoute('clients.show.dois.show', doi.get('client.id'), doi);

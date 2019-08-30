@@ -60,7 +60,6 @@ export default Controller.extend({
 
       let self = this;
       doi.save().then(function (doi) {
-
         self.transitionToRoute('clients.show.dois.show', doi.get('client.id'), doi);
       });
     },

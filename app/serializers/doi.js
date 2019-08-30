@@ -1,6 +1,21 @@
 import DS from "ember-data";
 
 export default DS.JSONAPISerializer.extend({
+  serialize(snapshot) {
+    let json = this._super(...arguments);
+
+    // don't send back these attributes if file upload form is used
+    if (snapshot.attr('mode') === 'modify') {
+      delete json.data.attributes.creators;
+      delete json.data.attributes.titles;
+      delete json.data.attributes.description;
+      delete json.data.attributes.publisher;
+      delete json.data.attributes.publicationYear;
+      delete json.data.attributes.types;
+    }
+
+    return json;
+  },
   attrs: {
     // reserved attribute names
     breason: { key: 'reason' },

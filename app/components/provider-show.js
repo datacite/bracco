@@ -60,7 +60,6 @@ export default Component.extend({
   nonProfitStatuses: nonProfitStatusList,
 
   organizations: [],
-  organizationsNames: [],
   consortia: [],
 
   twitterUrl: computed('model.twitterHandle', function() {
