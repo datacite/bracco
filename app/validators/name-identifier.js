@@ -1,6 +1,6 @@
 import { inject as service } from '@ember/service';
 import BaseValidator from 'ember-cp-validations/validators/base';
-import fetch from 'fetch';
+// import fetch from 'fetch';
 // import Checkdigit from 'checkdigit';
 
 const NameIdentifier = BaseValidator.extend({
