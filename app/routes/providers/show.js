@@ -27,7 +27,7 @@ export default Route.extend({
     });
   },
 
-  afterModel(model) {
+  redirect(model) {
     if (this.can.cannot('read provider', model)) {
       this.transitionTo('index');
     }
