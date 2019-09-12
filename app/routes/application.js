@@ -34,6 +34,7 @@ export default Route.extend(ApplicationRouteMixin, {
     if (!this.isTokenAuthenticating) {
       this._super(...arguments);
       this._loadCurrentUser();
+      this.transitionTo('settings')
     } else {
       this.set('isTokenAuthenticating', false);
     }

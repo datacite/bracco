@@ -1,6 +1,6 @@
 import { inject as service } from '@ember/service';
 import BaseValidator from 'ember-cp-validations/validators/base';
-import fetch from 'fetch';
+// import fetch from 'fetch';
 // import Checkdigit from 'checkdigit';
 
 const NameIdentifier = BaseValidator.extend({
@@ -72,13 +72,17 @@ const NameIdentifier = BaseValidator.extend({
         return message;
       }
 
-      // lookup identifier
-      return fetch(value).then(function() {
-        return true;
-      }).catch(function() {
-        let message = 'Name identifier does not exist. Please make sure you entered the correct identifier.'
-        return message;
-      });
+      return true;
+      //// lookup identifier
+      //// https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS/Errors/CORSExternalRedirectNotAllowed
+      // return fetch(value,{method: 'head', redirect: 'error'}
+      //   ).then(function() {
+      //   return true;
+      // }).catch(function() {
+      //   console.log()
+      //   let message = 'Name identifier does not exist. Please make sure you entered the correct identifier.'
+      //   return message;
+      // });
     }
   }
 });
