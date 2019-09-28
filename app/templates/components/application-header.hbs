@@ -19,7 +19,7 @@
         {{#if session.isAuthenticated}}
           <nav.dropdown as |dd|>
             <dd.toggle id="account_menu_link">
-              {{#if currentUser.isResearcher}}
+              {{#if currentUser.isUser}}
                 {{currentUser.name}}
               {{else}}
                 {{uppercase currentUser.uid}}

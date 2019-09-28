@@ -84,8 +84,8 @@ Router.map(function () {
   this.route('prefixes', function () {
     this.route('new');
   });
-  this.route('researchers', function () {
-    this.route('show', { path: '/:researcher_id' }, function () {
+  this.route('users', function () {
+    this.route('show', { path: '/:user_id' }, function () {
       this.route('settings');
       this.route('dois');
     });

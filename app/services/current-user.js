@@ -23,7 +23,7 @@ export default Service.extend({
   isAdmin: false,
   isProvider: false,
   isClient: false,
-  isResearcher: false,
+  isUser: false,
   isBetaTester: false,
 
   load() {
@@ -84,15 +84,15 @@ export default Service.extend({
         this.set('settings', { route: 'clients.show.settings', id: this.uid });
         this.set('roleName', 'Repository');
       } else if (payload.role_id === 'user') {
-        this.set('home', { route: 'researchers.show', id: this.uid });
+        this.set('home', { route: 'users.show', id: this.uid });
         this.set('roleName', 'User');
       } else if (payload.role_id === 'temporary') {
         this.set('home', { route: 'password' });
       }
 
       if (payload.uid.startsWith('0')) {
-        this.set('isResearcher', true);
-        this.set('settings', { route: 'researchers.show.settings', id: this.uid });
+        this.set('isUser', true);
+        this.set('settings', { route: 'users.show.settings', id: this.uid });
       }
 
       if (payload.beta_tester) {

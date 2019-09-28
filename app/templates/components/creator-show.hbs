@@ -1,7 +1,7 @@
 {{#if creators}}
   {{#each creators as |creator index|}}
     {{#if (and creator.orcid (feature-flag 'showResearchers'))}}
-      {{#link-to "researchers.show" creator.orcid}}{{creator.displayName~}}{{/link-to}}{{format-creator creators index=index}}
+      {{#link-to "users.show" creator.orcid}}{{creator.displayName~}}{{/link-to}}{{format-creator creators index=index}}
     {{else}}
       {{creator.displayName~}}{{format-creator creators index=index}}
     {{/if}}

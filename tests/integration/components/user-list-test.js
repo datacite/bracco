@@ -3,7 +3,7 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-module('Integration | Component | researcher-show', function(hooks) {
+module('Integration | Component | user-list', function(hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function(assert) {
@@ -12,11 +12,11 @@ module('Integration | Component | researcher-show', function(hooks) {
 
     // Template block usage:
     await render(hbs`
-      <ResearcherShow>
+      <UserList>
         template block text
-      </ResearcherShow>
+      </UserList>
     `);
 
-    assert.equal(this.element.textContent.trim(), 'ORCID ID');
+    assert.equal(this.element.textContent.trim(), 'No users found.');
   });
 });

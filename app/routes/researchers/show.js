@@ -9,10 +9,9 @@ export default Route.extend({
   
   model(params) {
     let self = this;
-    return this.store.findRecord('researcher', params.researcher_id).then(function(researcher) {
-      set(self, 'headData.title', researcher.name); 
-
-      return researcher;
+    return this.store.findRecord('user', params.user_id).then(function(user) {
+      set(self, 'headData.title', user.name); 
+      return user;
     }).catch(function(reason){
       if (console.debug) {
         console.debug(reason);
@@ -26,7 +25,7 @@ export default Route.extend({
   },
 
   afterModel(model) {
-    if (this.can.cannot('read researcher', model)) {
+    if (this.can.cannot('read user', model)) {
       this.transitionTo('index');
     }
   },

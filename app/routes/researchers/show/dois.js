@@ -7,17 +7,17 @@ export default Route.extend({
   can: service(),
   
   model(params) {
-    let researcher = this.modelFor('researchers/show');
+    let user = this.modelFor('users/show');
     params = assign(params, { 
       page: {
         number: params.page,
         size: params.size 
       },
-      'researcher-id': researcher.get('id')
+      'user-id': user.get('id')
     });
 
     return hash({
-      researcher: researcher,
+      user: user,
       dois: this.store.query('doi', params)
     });
   },
@@ -32,7 +32,7 @@ export default Route.extend({
   },
 
   afterModel() {
-    if (this.can.cannot('read researcher', this.modelFor('researchers/show'))) {
+    if (this.can.cannot('read user', this.modelFor('users/show'))) {
       this.transitionTo('index');
     }
   }

@@ -8,7 +8,7 @@ import { scaleOrdinal } from "d3-scale";
 import { schemeSet3 } from "d3-scale-chromatic";
 
 const categoryList = [
-  "researcher", 
+  "user", 
   "other", 
   "software", 
   "dataset", 
@@ -40,8 +40,8 @@ export default Component.extend({
     return 'chart-donut-' + this.label.toLowerCase();
   }),
   doiLink: computed('link','model.id', function() {
-    if (this.link === 'researchers.show.dois') {
-      return '/researchers/' + this.model.get('id') + '/dois';
+    if (this.link === 'users.show.dois') {
+      return '/users/' + this.model.get('id') + '/dois';
     } else {
       return null;
     }

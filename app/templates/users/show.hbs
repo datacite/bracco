@@ -1,12 +1,12 @@
-{{#if (can "read researcher" model)}}
+{{#if (can "read user" model)}}
   {{application-header default=true}}
 
   <div class="container-fluid">
-    {{#if (can "read researcher" model)}}
+    {{#if (can "read user" model)}}
       <ol class="breadcrumb">
         {{#if (can "read index")}}
           <li class="breadcrumb-item">{{#link-to "index"}}DataCite{{/link-to}}</li>
-          <li class="breadcrumb-item">{{#link-to "researchers"}}Researchers{{/link-to}}</li>
+          <li class="breadcrumb-item">{{#link-to "users"}}Users{{/link-to}}</li>
         {{/if}}
       </ol>
     {{/if}}
@@ -16,9 +16,9 @@
 
       <div class="tab-content nav-tabs-member">
         {{#bs-nav type="tabs" as |nav|}}
-          {{#nav.item route="researchers.show.index" model=model.id class="nav-link"}}Info{{/nav.item}}
-          {{#nav.item route="researchers.show.settings" model=model.id class="nav-link"}}Settings{{/nav.item}}
-          {{#nav.item route="researchers.show.dois" model=model.id class="nav-link doi"}}DOIs{{/nav.item}}
+          {{#nav.item route="users.show.index" model=model.id class="nav-link"}}Info{{/nav.item}}
+          {{#nav.item route="users.show.settings" model=model.id class="nav-link"}}Settings{{/nav.item}}
+          {{#nav.item route="users.show.dois" model=model.id class="nav-link doi"}}DOIs{{/nav.item}}
         {{/bs-nav}}
       </div>
     </div>

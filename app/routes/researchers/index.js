@@ -14,7 +14,7 @@ export default Route.extend({
       }
     });
 
-    return this.store.query('researcher', params);
+    return this.store.query('user', params);
   },
 
   queryParams: {
@@ -33,7 +33,7 @@ export default Route.extend({
   },
 
   afterModel() {
-    if (this.can.cannot('read researcher')) {
+    if (this.can.cannot('read user')) {
       this.transitionTo('index');
     }
   }

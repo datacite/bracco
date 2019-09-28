@@ -11,10 +11,10 @@
       {{#nav.item route="providers" class="nav-link"}}Providers{{/nav.item}}
       {{#nav.item route="clients" class="nav-link"}}Clients{{/nav.item}}
     {{/if}}
+    {{#if (feature-flag 'showResearchers')}}
+      {{#nav.item route="users" class="nav-link"}}Users{{/nav.item}}
+    {{/if}}
     {{#nav.item route="prefixes" class="nav-link"}}Prefixes{{/nav.item}}
     {{#nav.item route="dois" class="nav-link doi"}}DOIs{{/nav.item}}
-    {{#if (feature-flag 'showResearchers')}}
-      {{#nav.item route="researchers" class="nav-link"}}Researchers{{/nav.item}}
-    {{/if}}
   {{/bs-nav}}
 </div>

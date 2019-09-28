@@ -6,8 +6,8 @@ export default Route.extend({
 
   model() {
     let self = this;
-    return this.store.findRecord('researcher', this.modelFor('researchers/show').get('id')).then(function(researcher) {
-      return researcher;
+    return this.store.findRecord('user', this.modelFor('users/show').get('id')).then(function(user) {
+      return user;
     }).catch(function(reason){
       if (console.debug) {
         console.debug(reason);
@@ -21,7 +21,7 @@ export default Route.extend({
   },
 
   afterModel() {
-    if (this.can.cannot('read researcher', this.modelFor('researchers/show'))) {
+    if (this.can.cannot('read user', this.modelFor('users/show'))) {
       this.transitionTo('index');
     }
   },

@@ -96,7 +96,7 @@ module.exports = function(environment) {
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
 
     ENV.featureFlags['use-repositories'] = true;
-    ENV.COOKIE_DOMAIN = ".lvh.me";
+    ENV.COOKIE_DOMAIN = "localhost";
     ENV.SENTRY_DSN = null;
   }
 
@@ -120,7 +120,7 @@ module.exports = function(environment) {
     ENV.APP.autoboot = false;
 
     ENV.SITE_TITLE = "DataCite Fabrica Test";
-    ENV.COOKIE_DOMAIN = ".lvh.me";
+    ENV.COOKIE_DOMAIN = "localhost";
     ENV.API_URL = "https://api.test.datacite.org";
     ENV.SENTRY_DSN = null;
   }
