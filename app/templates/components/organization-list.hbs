@@ -20,7 +20,7 @@
 
         {{form.element controlType="text" id="system-email" label="System Email" property="systemEmail" helpText='This is the email used for sending password reset requests and similar system notifications.' required=false}}
         {{form.element controlType="text" id="group-email" label="Group Email (optional)" property="groupEmail" helpText='A generic shared email address (such as info@datacite.org or similar) where you would like to receive communications from DataCite.' required=false}}
-        {{form.element controlType="text" label="Website" property="website" helpText='Website of the provider.' required=false}}
+        {{form.element controlType="text" label="Website" property="website (optional)" helpText='Website of the provider.' required=false}}
         {{form.element controlType="text" id="twitter-handle" label="Twitter (optional)"  property="twitterHandle"  placeholder="Add @twitter account" helpText='DataCite will follow you on twitter.' required=false}}
 
          {{#form.element controlType="power-select" label="Country (optional)" property="country" optionLabelPath="name" options=countries destination=country helpText='Country where the provider is located.' as |el|}}

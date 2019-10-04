@@ -8,7 +8,7 @@
           <li class="breadcrumb-item">{{#link-to "index"}}DataCite{{/link-to}}</li>
           <li class="breadcrumb-item">{{#link-to "providers"}}{{if (feature-flag 'useRepositories') 'Members' 'Providers'}}{{/link-to}}</li>
         {{/if}}
-        {{#if (and (eq model.memberType "consortium_organization") (can "read index"))}}
+        {{#if (eq model.memberType "consortium_organization")}}
           <li class="breadcrumb-item">{{#link-to "providers.show.index" model.consortium.id}}{{model.consortium.name}}{{/link-to}}</li>
         {{/if}}
       </ol>
