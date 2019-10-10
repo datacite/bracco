@@ -175,6 +175,36 @@
       </div>
     </div>
   {{/if}}
+  {{#if (and (can "source doi" model) (or model.meta.affiliations model.query.affilitation-id))}}
+    <div class="panel facets add">
+      <div class="panel-body">
+        <h4>Affiliation</h4>
+        <ul>
+          {{#if model.meta.affilitations}}
+            {{#each model.meta.affilitations as |affilitation|}}
+              <li>
+                {{#if model.query.affilitation-id}}
+                  {{#link-to link (query-params affilitation-id=null)}}{{fa-icon "check-square-o"}}{{/link-to}}
+                {{else}}
+                  {{#link-to link (query-params affilitation=affilitation.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                {{/if}}
+                <div class="facet-title">{{affilitation.title}}</div>
+                <span class="number pull-right">{{format-number affilitation.count}}</span>
+                <div class="clearfix"/>
+              </li>
+            {{/each}}
+          {{else}}
+            <li>
+              {{#link-to link (query-params affilitation='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+              <div class="facet-title">{{model.query.affilitation-id}}</div>
+              <span class="number pull-right">0</span>
+              <div class="clearfix"/>
+            </li>
+          {{/if}}
+        </ul>
+      </div>
+    </div>
+  {{/if}}
   {{#if (or model.meta.prefixes model.query.prefix)}}
     <div class="panel facets">
       <div class="panel-body">
