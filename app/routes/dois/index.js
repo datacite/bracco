@@ -44,6 +44,9 @@ export default Route.extend({
     'client-id': {
       refreshModel: true
     },
+    'affiliation-id': {
+      refreshModel: true
+    },
     prefix: {
       refreshModel: true
     },
