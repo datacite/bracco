@@ -29,7 +29,9 @@ export default Ability.extend({
       case 'staff_admin':
         return true
       case 'provider_admin':
-        return true;
+        // direct_admins and consortium organizations should be able to create
+        // consortium members should not
+        return this.get('model.provider.memberType') == 'consortium_organization' || this.get('model.provider.memberType') == 'direct_member';
       default:
         return false;
     }
