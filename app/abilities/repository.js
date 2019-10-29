@@ -36,24 +36,29 @@ export default Ability.extend({
         return false;
     }
   }),
-  canUpdate: computed('currentUser.role_id', 'currentUser.provider_id', 'currentUser.client_id', 'model.id', 'model.provider.id', function() {
+  canUpdate: computed('currentUser.role_id', 'currentUser.provider_id', 'currentUser.client_id', 'model.id', 'model.provider.id', 'model.provider.consortium.id', function() {
     switch(this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
       case 'provider_admin':
-        return this.get('currentUser.provider_id') === this.get('model.provider.id');
+        return this.get('currentUser.provider_id') === this.get('model.provider.id') || (this.get('model.provider.memberType') === 'consortium_organization' && this.get('currentUser.provider_id') === this.get('model.provider.consortium.id'));
       case 'client_admin':
         return this.get('currentUser.client_id') === this.get('model.id');
       default:
         return false
     }
   }),
-  canRead: computed('currentUser.role_id', 'currentUser.provider_id', 'currentUser.client_id', 'model.id', 'model.provider.id', function() {
+  canRead: computed('currentUser.role_id', 'currentUser.provider_id', 'currentUser.client_id', 'model.id', 'model.provider.id', 'model.provider.consortium.id', function() {
+    this.get('currentUser.role_id');
     switch(this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
       case 'provider_admin':
-        return this.get('currentUser.provider_id') === this.get('model.provider.id');
+        console.debug(this.get('currentUser.provider_id'));
+        console.debug(this.get('model.provider.id'));
+        console.debug(this.get('model.provider.memberType'));
+        console.debug(this.get('model.provider.consortium.id'));
+        return this.get('currentUser.provider_id') === this.get('model.provider.id') || (this.get('model.provider.memberType') === 'consortium_organization' && this.get('currentUser.provider_id') === this.get('model.provider.consortium.id'));
       case 'client_admin':
         return this.get('currentUser.client_id') === this.get('model.id');
       default:
