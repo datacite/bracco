@@ -1,6 +1,6 @@
 import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
-import { Ability } from 'ember-can';
+import { Ability } from 'ember-can'
 
 export default Ability.extend({
   currentUser: service(),
