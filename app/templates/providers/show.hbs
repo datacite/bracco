@@ -9,7 +9,7 @@
           <li class="breadcrumb-item">{{#link-to "providers"}}{{if (feature-flag 'useRepositories') 'Members' 'Providers'}}{{/link-to}}</li>
         {{/if}}
         {{#if (eq model.memberType "consortium_organization")}}
-          <li class="breadcrumb-item">{{#link-to "providers.show.index" model.consortium.id}}{{model.consortium.name}}{{/link-to}}</li>
+          <li class="breadcrumb-item">{{#link-to "providers.show.index" model.consortium_id}}{{model.consortium_name}}{{/link-to}}</li>
         {{/if}}
       </ol>
     {{/if}}
@@ -25,7 +25,7 @@
       {{#bs-nav type="tabs" as |nav|}}
         {{#nav.item route="providers.show.index" model=model.id class="nav-link"}}Info{{/nav.item}}
         {{#nav.item route="providers.show.settings" model=model.id class="nav-link"}}Settings{{/nav.item}}
-        
+
         {{#if (eq model.memberType "consortium_member")}}
           {{#nav.item route="providers.show.organizations" class="nav-link"}}Consortium Organizations{{/nav.item}}
         {{/if}}
