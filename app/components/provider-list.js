@@ -14,7 +14,7 @@ const organizationTypeList = [
   'other'
 ]
 const memberTypeList = [
-  'consortium_member',
+  'consortium',
   'consortium_organization',
   'contractual_member',
   'direct_member',
@@ -111,7 +111,7 @@ export default Component.extend({
     this.set('memberTypes', memberTypeList);
   },
   searchConsortium(query) {
-    this.set('consortia', this.store.query('provider', { 'query': query, 'member-type': 'consortium_member', sort: 'name', 'page[size]': 100 }));
+    this.set('consortia', this.store.query('provider', { 'query': query, 'member-type': 'consortium', sort: 'name', 'page[size]': 100 }));
   },
   selectConsortium(consortium) {
     this.provider.set('consortium', consortium)

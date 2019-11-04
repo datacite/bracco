@@ -107,7 +107,7 @@
   </div>
 {{else}}
   <div class="col-md-3">
-    {{#if (and (can "create repository" model) (eq link "providers.show.repositories") (not-eq model.provider.memberType "consortium_member"))}}
+    {{#if (and (can "create repository" model) (eq link "providers.show.repositories") (not-eq model.provider.memberType "consortium"))}}
       <div class="panel facets">
         <div class="panel-body">
           <div class="btn-toolbar">

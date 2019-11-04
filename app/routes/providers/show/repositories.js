@@ -11,7 +11,7 @@ export default Route.extend({
     let providerId = null;
     let consortiumId = null;
     let model = this.modelFor('providers/show');
-    if (model.memberType === "consortium_member") {
+    if (model.memberType === "consortium") {
       consortiumId = model.get('id');
     } else {
       providerId = model.get('id');
