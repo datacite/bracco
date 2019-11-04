@@ -205,8 +205,8 @@ export default Component.extend({
     searchConsortium(query) {
       this.searchConsortium(query);
     },
-    selectConsortium(provider) {
-      this.selectConsortium(provider);
+    selectConsortium(consortium) {
+      this.selectConsortium(consortium);
     },
     searchFocusArea(query) {
       this.searchFocusArea(query);

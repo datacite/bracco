@@ -76,11 +76,11 @@ export default Component.extend({
   //   this.set('isBillingEmpty', Object.values(self.get('model.billingInformation')).some(this.hasEmptyBilling));
   // },
 
-  didReceiveAttrs() {
-    this._super(...arguments);
+  // didReceiveAttrs() {
+  //   this._super(...arguments);
 
-    this.searchConsortium(null);
-  },
+  //   this.searchConsortium(null);    
+  // },
 
   reset() {
     this.provider.set('passwordInput', null);
@@ -290,8 +290,8 @@ export default Component.extend({
     searchConsortium(query) {
       this.searchConsortium(query);
     },
-    selectConsortium(provider) {
-      this.selectConsortium(provider);
+    selectConsortium(consortium) {
+      this.selectConsortium(consortium);
     },
     searchFocusArea(query) {
       this.searchFocusArea(query);

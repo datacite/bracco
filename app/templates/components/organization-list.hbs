@@ -9,6 +9,7 @@
           <br>
         </div>
 
+        {{form.element controlType="hidden" property="consortium" required=false}}
         {{form.element controlType="text" label="Member ID" property="symbol" helpText='The Member ID is the unique identifier for each member and can\'t be changed. The Member ID can contain only upper case letters, and must not be longer than 8 characters.' useIcons=false required=false}}
         {{form.element controlType="text" id="member-type" label="Member Type" value="Consortium Organization" readonly=true}}
         {{form.element controlType="text" label="Organization Name" property="name" required=false helpText="The official name of your organization."}}
@@ -140,7 +141,7 @@
         <div class="panel-body">
           <div class="btn-toolbar">
             <div class="btn-group btn-group-sm">
-              <button {{action "new" model}} class="btn btn-warning">{{fa-icon "plus"}}Create Consortium Organization</button>
+              <button {{action "new"}} class="btn btn-warning">{{fa-icon "plus"}}Create Consortium Organization</button>
             </div>
           </div>
         </div>
