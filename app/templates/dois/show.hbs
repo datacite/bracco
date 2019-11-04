@@ -4,36 +4,19 @@
   <ol class="breadcrumb">
     {{#if (can "read index")}}
       <li class="breadcrumb-item">{{#link-to "index"}}DataCite{{/link-to}}</li>
-      <li class="breadcrumb-item">{{#link-to "providers"}}{{if (feature-flag 'useRepositories') 'Members' 'Providers'}}{{/link-to}}</li>
+      <li class="breadcrumb-item">{{#link-to "providers"}}Members{{/link-to}}</li>
       <li class="breadcrumb-item">{{#link-to "providers.show" model.client.provider.id}}{{model.client.provider.name}}{{/link-to}}</li>
-      {{#if (feature-flag 'useRepositories')}}
-        <li class="breadcrumb-item">{{#link-to "providers.show.repositories" model.client.provider.id}}Repositories{{/link-to}}</li>
-        <li class="breadcrumb-item">{{#link-to "repositories.show" model.client.id}}{{model.client.name}}{{/link-to}}</li>
-        <li class="breadcrumb-item">{{#link-to "repositories.show.dois" model.client.id}}DOIs{{/link-to}}</li>
-      {{else}}
-        <li class="breadcrumb-item">{{#link-to "providers.show.clients" model.client.provider.id}}Clients{{/link-to}}</li>
-        <li class="breadcrumb-item">{{#link-to "clients.show" model.client.id}}{{model.client.name}}{{/link-to}}</li>
-        <li class="breadcrumb-item">{{#link-to "clients.show.dois" model.client.id}}DOIs{{/link-to}}</li>
-      {{/if}}
+      <li class="breadcrumb-item">{{#link-to "providers.show.repositories" model.client.provider.id}}Repositories{{/link-to}}</li>
+      <li class="breadcrumb-item">{{#link-to "repositories.show" model.client.id}}{{model.client.name}}{{/link-to}}</li>
+      <li class="breadcrumb-item">{{#link-to "repositories.show.dois" model.client.id}}DOIs{{/link-to}}</li>
     {{else if (can "read provider" model.client.provider)}}
       <li class="breadcrumb-item">{{#link-to "providers.show" model.client.provider.id}}{{model.client.provider.name}}{{/link-to}}</li>
-      {{#if (feature-flag 'useRepositories')}}
-        <li class="breadcrumb-item">{{#link-to "providers.show.repositories" model.client.provider.id}}Repositories{{/link-to}}</li>
-        <li class="breadcrumb-item">{{#link-to "repositories.show" model.client.id}}{{model.client.name}}{{/link-to}}</li>
-        <li class="breadcrumb-item">{{#link-to "repositories.show.dois" model.client.id}}DOIs{{/link-to}}</li> 
-      {{else}}
-        <li class="breadcrumb-item">{{#link-to "providers.show.clients" model.client.provider.id}}Clients{{/link-to}}</li>
-        <li class="breadcrumb-item">{{#link-to "clients.show" model.client.id}}{{model.client.name}}{{/link-to}}</li>
-        <li class="breadcrumb-item">{{#link-to "clients.show.dois" model.client.id}}DOIs{{/link-to}}</li>
-      {{/if}}
+      <li class="breadcrumb-item">{{#link-to "providers.show.repositories" model.client.provider.id}}Repositories{{/link-to}}</li>
+      <li class="breadcrumb-item">{{#link-to "repositories.show" model.client.id}}{{model.client.name}}{{/link-to}}</li>
+      <li class="breadcrumb-item">{{#link-to "repositories.show.dois" model.client.id}}DOIs{{/link-to}}</li> 
     {{else if (can "read repository" model.client)}}
-      {{#if (feature-flag 'useRepositories')}}
-        <li class="breadcrumb-item">{{#link-to "repositories.show" model.client.id}}{{model.client.name}}{{/link-to}}</li>
-        <li class="breadcrumb-item">{{#link-to "repositories.show.dois" model.client.id}}DOIs{{/link-to}}</li>
-      {{else}}
-        <li class="breadcrumb-item">{{#link-to "clients.show" model.client.id}}{{model.client.name}}{{/link-to}}</li>
-        <li class="breadcrumb-item">{{#link-to "clients.show.dois" model.client.id}}DOIs{{/link-to}}</li>
-      {{/if}}
+      <li class="breadcrumb-item">{{#link-to "repositories.show" model.client.id}}{{model.client.name}}{{/link-to}}</li>
+      <li class="breadcrumb-item">{{#link-to "repositories.show.dois" model.client.id}}DOIs{{/link-to}}</li>
     {{/if}}
   </ol>
   

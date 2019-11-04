@@ -6,7 +6,7 @@
       <ol class="breadcrumb">
         {{#if (can "read index")}}
           <li class="breadcrumb-item">{{#link-to "index"}}DataCite{{/link-to}}</li>
-          <li class="breadcrumb-item">{{#link-to "providers"}}{{if (feature-flag 'useRepositories') 'Members' 'Providers'}}{{/link-to}}</li>
+          <li class="breadcrumb-item">{{#link-to "providers"}}Members{{/link-to}}</li>
         {{/if}}
         {{#if (eq model.memberType "consortium_organization")}}
           <li class="breadcrumb-item">{{#link-to "providers.show.index" model.consortium_id}}{{model.consortium_name}}{{/link-to}}</li>
@@ -31,11 +31,7 @@
         {{/if}}
 
         {{#if (not-eq model.memberType "member_only")}}
-          {{#if (feature-flag 'useRepositories')}}
-            {{#nav.item route="providers.show.repositories" model=model.id class="nav-link"}}Repositories{{/nav.item}}
-          {{else}}
-            {{#nav.item route="providers.show.clients" model=model.id class="nav-link"}}Clients{{/nav.item}}
-          {{/if}}
+          {{#nav.item route="providers.show.repositories" model=model.id class="nav-link"}}Repositories{{/nav.item}}
           {{#if (not-eq model.memberType "consortium")}}
             {{#nav.item route="providers.show.prefixes" model=model.id class="nav-link"}}Prefixes{{/nav.item}}
           {{/if}}

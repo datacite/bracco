@@ -1,7 +1,7 @@
 {{#if edit}}
   <div class="panel panel-transparent">
     <div class="panel-body">
-      <div class="col-md-offset-3 form-help-header"><h3 class="edit">Update {{if (eq currentUser.uid model.id) 'Account' (if (feature-flag 'useRepositories') 'Member' 'Provider')}}</h3></div>
+      <div class="col-md-offset-3 form-help-header"><h3 class="edit">Update {{if (eq currentUser.uid model.id) 'Account' 'Member'}}</h3></div>
 
       {{#bs-form formLayout="horizontal" horizontalLabelGridClass="col-md-3" model=model onSubmit=(action "submit" model) as |form|}}
         <div class="col-md-12">
@@ -229,7 +229,7 @@
         {{/if}}
 
         <div class="col-md-9 col-md-offset-3">
-          <button type="submit" disabled={{v-get model 'isInvalid'}} class="btn btn-sm btn-fill">Update {{if (eq currentUser.uid model.id) 'Account' (if (feature-flag 'useRepositories') 'Member' 'Provider')}}</button>
+          <button type="submit" disabled={{v-get model 'isInvalid'}} class="btn btn-sm btn-fill">Update {{if (eq currentUser.uid model.id) 'Account' 'Member'}}</button>
           <button {{action "cancel" model}} class="btn btn-sm" id="cancel">Cancel</button> 
         </div>
       {{/bs-form}}
@@ -309,9 +309,9 @@
             <div class="btn-toolbar">
               <div class="btn-group-vertical btn-group-sm">
                 <button {{action "change" model}} class="btn btn-warning" id="set-password-provider">{{fa-icon "key"}} Set Password</button>
-                <button {{action "edit" model}} class="btn btn-warning" id="edit-provider">{{fa-icon "pencil"}} Update {{if (eq currentUser.uid model.id) 'Account' (if (feature-flag 'useRepositories') 'Member' 'Provider')}}</button>
+                <button {{action "edit" model}} class="btn btn-warning" id="edit-provider">{{fa-icon "pencil"}} Update {{if (eq currentUser.uid model.id) 'Account' 'Member'}}</button>
                 {{#if (and (not admin) (can "delete provider" model))}}
-                  <button {{action "delete" model}} class="btn btn-warning" id="delete-provider">{{fa-icon "trash"}} Delete {{if (feature-flag 'useRepositories') 'Member' 'Provider'}}</button>
+                  <button {{action "delete" model}} class="btn btn-warning" id="delete-provider">{{fa-icon "trash"}} Delete Member</button>
                 {{/if}}
               </div>
             </div>
@@ -327,7 +327,7 @@
 
           <h4>Organization Information</h4>
           {{#if (not admin)}}
-            <h5>{{if (feature-flag 'useRepositories') 'Member' 'Provider'}} ID</h5>
+            <h5>Member ID</h5>
             {{model.symbol}}
           {{/if}}
 

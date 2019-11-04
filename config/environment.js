@@ -74,7 +74,6 @@ module.exports = function(environment) {
   if (deployTarget === 'staging') {
     // add staging-specific settings here
     ENV.COOKIE_DOMAIN = ".test.datacite.org";
-    ENV.featureFlags['use-repositories'] = true;
   }
 
   if (deployTarget === 'production') {
@@ -95,7 +94,6 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
 
-    ENV.featureFlags['use-repositories'] = true;
     ENV.COOKIE_DOMAIN = "localhost";
     ENV.SENTRY_DSN = null;
   }
@@ -114,7 +112,6 @@ module.exports = function(environment) {
     ENV.API_JWT= process.env.API_JWT || '',
     ENV.APP.rootElement = '#ember-testing';
 
-    ENV.featureFlags['use-repositories'] = true;
     ENV.featureFlags['show-researchers'] = true;
 
     ENV.APP.autoboot = false;

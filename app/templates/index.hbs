@@ -6,13 +6,8 @@
 
     <div class="content">
       <div class="row">
-        {{#if (feature-flag 'useRepositories')}}
-          {{bar-chart data=model.providerCount label="Member" link="providers"}}
-          {{bar-chart data=model.clientCount label="Repository" link="repositories"}}
-        {{else}}
-          {{bar-chart data=model.providerCount label="Provider" link="providers"}}
-          {{bar-chart data=model.clientCount label="Client" link="clients"}}
-        {{/if}}
+        {{bar-chart data=model.providerCount label="Member" link="providers"}}
+        {{bar-chart data=model.clientCount label="Repository" link="repositories"}}
         {{bar-chart data=model.doiCount label="DOI" link="dois" cumulative=false}}
       </div>
 
