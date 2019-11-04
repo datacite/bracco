@@ -120,7 +120,7 @@ export default DS.Model.extend(Validations, {
     inverse: 'consortiumOrganizations', async: true
   }),
   consortiumOrganizations: DS.hasMany('provider', {
-    inverse: 'consortium', async: false
+    inverse: 'consortium', async: true
   }),
   meta: DS.attr(),
 
@@ -180,7 +180,7 @@ export default DS.Model.extend(Validations, {
     return this.get('meta.clients');
   }),
   currentClientCount: computed('clientCount', function() {
-    let currentYear = this.clientCount.get('lastObject');
+    let currentYear = A(this.clientCount).findBy('id', 2019);
     if (currentYear) {
       return currentYear.count;
     } else {
