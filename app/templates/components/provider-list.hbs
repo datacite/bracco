@@ -34,7 +34,7 @@
           {{/form.element}}
 
           {{#if (eq model.provider.memberType "consortium_organization")}}
-            {{#form.element controlType="power-select" property="consortium" label="Consortium Member" helpText='Consortium member for this organization.' optionLabelPath="name" options=consortia destination=consortium.id as |el|}}
+            {{#form.element controlType="power-select" property="consortium" label="Consortium" helpText='Consortium for this organization.' optionLabelPath="name" options=consortia destination=consortium.id as |el|}}
               {{#el.control onChange=(action "selectConsortium") search=(action "searchConsortium") searchField="name" searchPlaceholder="Type to search..." allowClear=true as |item|}}
                 {{item.name}}
               {{/el.control}}

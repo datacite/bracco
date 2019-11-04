@@ -30,7 +30,7 @@ export default Ability.extend({
         return true
       case 'provider_admin':
         // direct_admins and consortium organizations should be able to create
-        // consortium members should not
+        // consortia should not
         return this.get('model.provider.memberType') == 'consortium_organization' || this.get('model.provider.memberType') == 'direct_member';
       default:
         return false;
