@@ -71,6 +71,7 @@
             {{item}}
           {{/el.control}}
         {{/form.element}}
+        {{form.element controlType="textarea" label="Domains" property="domains" required=false helpText='List of (sub-)domains used for DOI registration, or use * to allow all domains'}}
 
         {{#if (eq model.clientType "repository")}}
           <div class="form-group">
@@ -267,6 +268,18 @@
           {{#if model.url}}
             <h5>URL</h5>
             <a href="{{model.url}}">{{model.url}}</a>
+          {{/if}}
+
+          {{#if model.domainList}}
+            <h5>
+              {{pluralize model.domainList.length "Domain" without-count=true}}
+              <span>{{fa-icon "question-circle-o"}}
+                {{#bs-tooltip placement="top" viewportPadding=10}}URLs for DOIs must use {{#if (gt model.domainList.length 1)}}one of these (sub-)domains{{else}}this (sub-)domain{{/if}}.{{/bs-tooltip}}
+              </span>
+            </h5>
+            {{#each model.domainList as |domain|}}
+              {{domain}}<br/>
+            {{/each}}
           {{/if}}
 
           {{#if model.language}}
