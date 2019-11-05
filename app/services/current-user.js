@@ -80,8 +80,8 @@ export default Service.extend({
         this.set('roleName', 'Member');
       } else if (payload.role_id === 'client_admin') {
         this.set('isClient', true);
-        this.set('home', { route: 'clients.show', id: this.uid });
-        this.set('settings', { route: 'clients.show.settings', id: this.uid });
+        this.set('home', { route: 'repositories.show', id: this.uid });
+        this.set('settings', { route: 'repositories.show.settings', id: this.uid });
         this.set('roleName', 'Repository');
       } else if (payload.role_id === 'user') {
         this.set('home', { route: 'users.show', id: this.uid });
