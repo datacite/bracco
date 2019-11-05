@@ -1,6 +1,7 @@
 import { inject as service } from '@ember/service';
 import Component from '@ember/component';
 import { validator, buildValidations } from 'ember-cp-validations';
+import { A } from '@ember/array';
 
 const Validations = buildValidations({
   firstPrefix: [
@@ -27,8 +28,8 @@ export default Component.extend(Validations, {
   lastPrefix: '',
 
   addPrefixes() {
-    let first = this.firstPrefix.split('.').get('lastObject');
-    let last = this.lastPrefix.split('.').get('lastObject')
+    let first = A(this.firstPrefix.split('.')).get('lastObject');
+    let last = A(this.lastPrefix.split('.')).get('lastObject')
 
     while(first <= last) {
       var prefix = this.store.createRecord('prefix', { id: '10.' + first });

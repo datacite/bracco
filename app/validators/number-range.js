@@ -1,9 +1,10 @@
+import { A } from '@ember/array';
 import BaseValidator from 'ember-cp-validations/validators/base';
 
 const NumberRange = BaseValidator.extend({
   validate(value, options, model) {
-    let first = model.firstPrefix.split('.').get('lastObject');
-    let last = value.split('.').get('lastObject');
+    let first = A(model.firstPrefix.split('.')).get('lastObject');
+    let last = A(value.split('.')).get('lastObject');
 
     if ((last - first) < 0) {
       let message = "The last prefix must be or come after " + model.firstPrefix;
