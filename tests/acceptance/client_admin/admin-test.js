@@ -29,7 +29,7 @@ module('Acceptance | client_admin | admin', function(hooks) {
     });
     await visit('/');
 
-    assert.equal(currentURL(), '/clients/tib.awi');
+    assert.equal(currentURL(), '/repositories/tib.awi');
     assert.dom('h2.work').hasText('Alfred Wegener Institute');
   });
 
@@ -44,7 +44,7 @@ module('Acceptance | client_admin | admin', function(hooks) {
     });
     await visit('/settings');
 
-    assert.equal(currentURL(), '/clients/tib.awi');
+    assert.equal(currentURL(), '/repositories/tib.awi');
     assert.dom('h2.work').hasText('Alfred Wegener Institute');
   });
 
@@ -58,7 +58,7 @@ module('Acceptance | client_admin | admin', function(hooks) {
     });
     await visit('/providers');
 
-    assert.equal(currentURL(), '/clients/tib.awi');
+    assert.equal(currentURL(), '/repositories/tib.awi');
     assert.dom('h2.work').hasText('Alfred Wegener Institute');
   });
 
@@ -70,9 +70,9 @@ module('Acceptance | client_admin | admin', function(hooks) {
       provider_id: 'tib',
       client_id: 'tib.awi'
     });
-    await visit('/clients');
+    await visit('/repositories');
 
-    assert.equal(currentURL(), '/clients/tib.awi');
+    assert.equal(currentURL(), '/repositories/tib.awi');
     assert.dom('h2.work').hasText('Alfred Wegener Institute');
   });
 
@@ -86,7 +86,7 @@ module('Acceptance | client_admin | admin', function(hooks) {
     });
     await visit('/prefixes');
 
-    assert.equal(currentURL(), '/clients/tib.awi');
+    assert.equal(currentURL(), '/repositories/tib.awi');
     assert.dom('h2.work').hasText('Alfred Wegener Institute');
   });
 });

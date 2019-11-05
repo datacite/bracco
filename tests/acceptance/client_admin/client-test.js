@@ -41,35 +41,35 @@ module('Acceptance | client_admin | client', function(hooks) {
   });
 
   test('visiting client AWI', async function(assert) {
-    await visit('/clients/tib.awi');
+    await visit('/repositories/tib.awi');
 
-    assert.equal(currentURL(), '/clients/tib.awi');
+    assert.equal(currentURL(), '/repositories/tib.awi');
     assert.dom('h2.work').hasText('Alfred Wegener Institute');
     assert.dom('li.nav-link.active a').hasText('Info');
   });
 
   test('visiting client AWI settings', async function(assert) {
-    await visit('/clients/tib.awi/settings');
+    await visit('/repositories/tib.awi/settings');
 
-    assert.equal(currentURL(), '/clients/tib.awi/settings');
+    assert.equal(currentURL(), '/repositories/tib.awi/settings');
     assert.dom('h2.work').hasText('Alfred Wegener Institute');
     assert.dom('li.nav-link.active a').hasText('Settings');
-    assert.dom('button#edit-client').includesText('Update Account');
-    assert.dom('button#delete-client').doesNotExist();
+    assert.dom('button#edit-repository').includesText('Update Account');
+    assert.dom('button#delete-repository').doesNotExist();
   });
 
   test('visiting client AWI prefixes', async function(assert) {
-    await visit('/clients/tib.awi/prefixes');
+    await visit('/repositories/tib.awi/prefixes');
 
-    assert.equal(currentURL(), '/clients/tib.awi/prefixes');
+    assert.equal(currentURL(), '/repositories/tib.awi/prefixes');
     assert.dom('h2.work').hasText('Alfred Wegener Institute');
     assert.dom('li.nav-link.active a').hasText('Prefixes');
   });
 
   test('visiting client AWI dois', async function(assert) {
-    await visit('/clients/tib.awi/dois');
+    await visit('/repositories/tib.awi/dois');
 
-    assert.equal(currentURL(), '/clients/tib.awi/dois');
+    assert.equal(currentURL(), '/repositories/tib.awi/dois');
     assert.dom('h2.work').hasText('Alfred Wegener Institute');
     assert.dom('li.nav-link.active a').hasText('DOIs');
     assert.dom('a#new-doi').includesText('Create (Form)');
@@ -106,7 +106,7 @@ module('Acceptance | client_admin | client', function(hooks) {
   test('creating a new DOI for client AWI renders', async function(assert) {
     assert.expect(9);
 
-    await visit('/clients/tib.awi/dois/new');
+    await visit('/repositories/tib.awi/dois/new');
 
     // Maybe we do not need this one
     await waitUntil(() => {
@@ -120,7 +120,7 @@ module('Acceptance | client_admin | client', function(hooks) {
     });
     //on landing
 
-    assert.equal(currentURL(), '/clients/tib.awi/dois/new');
+    assert.equal(currentURL(), '/repositories/tib.awi/dois/new');
     assert.dom('h3').hasText('Create DOI (Form)');
     assert.dom('input#url-field').hasNoValue();
     assert.dom('input#publisher-field').hasNoValue();
