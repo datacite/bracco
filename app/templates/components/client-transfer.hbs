@@ -3,7 +3,7 @@
     <div class="col-md-9 col-md-offset-3"><h3 class="edit">Transfer DOIs</h3></div>
 
     {{#bs-form formLayout="horizontal" horizontalLabelGridClass="col-md-3" model=this onSubmit=(action "submit") submitOnEnter=true as |form|}}
-      {{#form.element controlType="power-select" property="client" label="Client" helpText='Transfer all DOIs to this client. It can take up to one hour for the transfer to complete.' optionLabelPath="name" options=clients destination=client as |el|}}
+      {{#form.element controlType="power-select" property="client" label="Repository" helpText='Transfer all DOIs to this repository. It can take up to one hour for the transfer to complete.' optionLabelPath="name" options=clients destination=client as |el|}}
         {{#el.control onChange=(action "selectClient") search=(action "searchClient") searchField="name" searchPlaceholder="Type to search..." allowClear=true as |item|}}
           {{item.name}}
         {{/el.control}}

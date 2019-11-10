@@ -14,12 +14,12 @@ export default Ability.extend({
     }
   }),
 
-  canDelete: computed('currentUser.role_id', function() {
+  canDelete: computed('currentUser.role_id', 'currentUser.provider_id', 'model.provider.id', function() {
     switch(this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
       case 'provider_admin':
-        return true;
+        return this.get('currentUser.provider_id') === this.get('model.provider.id');
       default:
         return false;
     }
@@ -27,11 +27,9 @@ export default Ability.extend({
   canCreate: computed('currentUser.role_id', 'currentUser.provider_id', 'currentUser.client_id', 'model.id', 'model.provider.id', function() {
     switch(this.get('currentUser.role_id')) {
       case 'staff_admin':
-        return true
+        return true;
       case 'provider_admin':
-        // direct_admins and consortium organizations should be able to create
-        // consortia should not
-        return this.get('model.provider.memberType') == 'consortium_organization' || this.get('model.provider.memberType') == 'direct_member';
+        return this.get('currentUser.provider_id') === this.get('model.provider.id');
       default:
         return false;
     }
@@ -41,7 +39,7 @@ export default Ability.extend({
       case 'staff_admin':
         return true;
       case 'provider_admin':
-        return this.get('currentUser.provider_id') === this.get('model.provider.id') || (this.get('model.provider.memberType') === 'consortium_organization' && this.get('currentUser.provider_id') === this.get('model.provider.consortium.id'));
+        return this.get('currentUser.provider_id') === this.get('model.provider.id');
       case 'client_admin':
         return this.get('currentUser.client_id') === this.get('model.id');
       default:

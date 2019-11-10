@@ -33,17 +33,32 @@ export default Ability.extend({
         return false;
     }
   }),
-  canTransfer: computed('currentUser.role_id', 'model.client.id', 'model.query.client-id', function () {
-    if (w("crossref.citations medra.citations kisti.citations jalc.citations op.citations").includes(this.get('model.client.id')) || w("crossref.citations medra.citations kisti.citations jalc.citations op.citations").includes(this.get('model.query.client-id'))) {
-      return false;
-    } else {
-      switch (this.get('currentUser.role_id')) {
-        case 'staff_admin':
-        case 'provider_admin':
-          return true;
-        default:
+  canTransfer: computed('currentUser.role_id', 'currentUser.provider_id', 'model.client.provider.id', 'client.provider.id', 'model.client.id', 'model.query.client-id', function () {
+    switch (this.get('currentUser.role_id')) {
+      case 'staff_admin':
+        if (w("crossref.citations medra.citations kisti.citations jalc.citations op.citations").includes(this.get('model.client.id')) || w("crossref.citations medra.citations kisti.citations jalc.citations op.citations").includes(this.get('model.query.client-id'))) {
           return false;
-      }
+        } else {
+          return true;
+        }
+      case 'provider_admin':
+        return this.get('currentUser.provider_id') === this.get('model.client.provider.id') || this.get('currentUser.provider_id') === this.get('client.provider.id');
+      default:
+        return false;
+    }
+  }),
+  canMove: computed('currentUser.role_id', 'currentUser.provider_id', 'client.id', 'client.provider.id', function () {
+    switch (this.get('currentUser.role_id')) {
+      case 'staff_admin':
+        if (w("crossref.citations medra.citations kisti.citations jalc.citations op.citations").includes(this.get('client.id'))) {
+          return false;
+        } else {
+          return true;
+        }
+      case 'provider_admin':
+        return true; //this.get('currentUser.provider_id') === this.get('client.provider.id');
+      default:
+        return false;
     }
   }),
   canUpdate: computed('currentUser.role_id', 'model.id', function () {
@@ -137,12 +152,12 @@ export default Ability.extend({
         return false;
     }
   }),
-  canDetail: computed('currentUser.role_id', 'currentUser.provider_id', 'currentUser.client_id', 'model.client.id', 'model.provider.id', 'model.state', function () {
+  canDetail: computed('currentUser.role_id', 'currentUser.provider_id', 'currentUser.client_id', 'model.client.id', 'model.client.provider.id', 'model.state', function () {
     switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
-      case 'provider_admin':
-        return this.get('currentUser.provider_id') === this.get('model.provider.id');
+      case 'provider_admin':  
+        return this.get('currentUser.provider_id') === this.get('model.client.provider.id');
       case 'client_admin':
         return this.get('currentUser.client_id') === this.get('model.client.id');
       case 'user':

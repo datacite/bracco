@@ -82,9 +82,6 @@ export default DS.Model.extend(Validations, {
   provider: DS.belongsTo('provider', {
     async: true
   }),
-  repository: DS.belongsTo('repository', {
-    async: true
-  }),
   meta: DS.attr(),
 
   name: DS.attr('string'),

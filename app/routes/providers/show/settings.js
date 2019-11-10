@@ -10,8 +10,9 @@ export default Route.extend({
      // Explicitly get the consortium here and set on the model
      // This ensures the promise is fulfilled before the template is run
      // so the data can be used in the template.
-     model.set('consortium_id', model.get('consortium.id'));
-     model.set('consortium_name', model.get('consortium.name'));
+     // this only works in the settings tab
+     //model.set('consortium_id', model.get('consortium.id'));
+     //model.set('consortium_name', model.get('consortium.name'));
      return model;
   },
 
