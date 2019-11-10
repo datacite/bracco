@@ -13,7 +13,7 @@ module('Integration | Component | client transfer', function(hooks) {
 
     await render(hbs`{{client-transfer model=model}}`);
 
-    assert.dom('*').hasText('Transfer DOIs Client Transfer all DOIs to this client. It can take up to one hour for the transfer to complete. Transfer DOIs Cancel');
+    assert.dom('*').hasText('Transfer DOIs Repository Transfer all DOIs to this repository. It can take up to one hour for the transfer to complete. Transfer DOIs Cancel');
 
     // Template block usage:
     await render(hbs`
@@ -22,6 +22,6 @@ module('Integration | Component | client transfer', function(hooks) {
       {{/client-transfer}}
     `);
 
-    assert.dom('*').hasText('Transfer DOIs Client Transfer all DOIs to this client. It can take up to one hour for the transfer to complete. Transfer DOIs Cancel');
+    assert.dom('*').hasText('Transfer DOIs Repository Transfer all DOIs to this repository. It can take up to one hour for the transfer to complete. Transfer DOIs Cancel');
   });
 });
