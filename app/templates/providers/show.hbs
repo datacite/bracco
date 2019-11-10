@@ -9,7 +9,7 @@
           <li class="breadcrumb-item">{{#link-to "providers"}}Members{{/link-to}}</li>
         {{/if}}
         {{#if (eq model.memberType "consortium_organization")}}
-          <li class="breadcrumb-item">{{#link-to "providers.show.index" model.consortium_id}}{{model.consortium_name}}{{/link-to}}</li>
+          <li class="breadcrumb-item">{{#link-to "providers.show.index" model.consortium.id}}{{model.consortium.name}}{{/link-to}}</li>
         {{/if}}
       </ol>
     {{/if}}

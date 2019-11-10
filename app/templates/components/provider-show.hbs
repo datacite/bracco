@@ -343,7 +343,7 @@
             {{/if}}
           {{/if}}
 
-           {{#if (not admin)}}
+          {{#if (not admin)}}
             <h5>Member Type</h5>
             {{titleize (humanize model.memberType)}}
 
@@ -352,6 +352,11 @@
 
             <h5>Organization Name</h5>
             {{model.name}}
+          {{/if}}
+
+          {{#if (eq model.memberType "consortium_organization")}}
+            <h5>Consortium</h5>
+            {{model.consortium.name}}
           {{/if}}
 
           <h5>System Email</h5>
