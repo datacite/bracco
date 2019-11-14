@@ -25,11 +25,10 @@ export default Component.extend({
     }
   },
   selectClient(client) {
-    this.set('oldClient', this.model.get('client'));
+    this.set('oldClient', this.model.get('client.id'));
     this.model.set('client', client);
     this.model.set('provider', client.get('provider'));
-
-    this.set('isDisabled', client.id === this.get('oldClient.id'));
+    this.set('isDisabled', client.id === this.get('oldClient'));
   },
 
   actions: {
@@ -39,7 +38,7 @@ export default Component.extend({
     selectClient(client) {
       this.selectClient(client);
     },
-    submit(doi) {    
+    submit(doi) {
       let self = this;
       doi.save().then(function(doi) {
         self.router.transitionTo('dois.show', doi);
