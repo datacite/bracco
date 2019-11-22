@@ -141,7 +141,7 @@ const Validations = buildValidations({
 });
 
 export default Model.extend(Validations, {
-  client: DS.belongsTo('client', {
+  client: DS.belongsTo('repository', {
     async: true
   }),
 

@@ -17,7 +17,7 @@ export default Controller.extend({
 
       let self = this;
       doi.save().then(function(doi) {
-        self.transitionToRoute('repositories.show.dois.show', doi.get('client').get('id'), doi);
+        self.transitionToRoute('dois.show', doi);
       }).catch(function(reason){
         if (console.debug) {
           console.debug(reason);

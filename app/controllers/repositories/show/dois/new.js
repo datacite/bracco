@@ -40,7 +40,7 @@ export default Controller.extend({
           creator.set('familyName', null);
         }
       });
-      
+
       // only store descriptions with a description text
       doi.set('descriptions', doi.get('descriptions').filter(function(description) {
         return !isBlank(description.description);
@@ -53,7 +53,7 @@ export default Controller.extend({
 
       let self = this;
       doi.save().then(function (doi) {
-        self.transitionToRoute('repositories.show.dois.show', doi.get('client').get('id'), doi);
+        self.transitionToRoute('dois.show', doi);
       }).catch(function (reason) {
         if (console.debug) {
           console.debug(reason);

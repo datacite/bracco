@@ -7,7 +7,7 @@ export default Route.extend({
 
   model() {
     let client = this.modelFor('repositories/show');
-    let doi = this.store.createRecord('doi', { client: client.get('id'), mode: 'upload', state: 'draft' });
+    let doi = this.store.createRecord('doi', { client: client, mode: 'upload', state: 'draft' });
 
     return hash({
       client: client,
