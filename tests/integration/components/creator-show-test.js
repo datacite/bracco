@@ -10,28 +10,24 @@
 //     this.set('creators', [
 //       {
 //         "nameType": "Person",
-//         "name": "Empbh R. Goh",
+//         "displayName": "Empbh R. Goh",
 //         "givenName": "Empbh R.",
 //         "familyName": "Goh"
 //       }, {
 //         "nameType": "Person",
-//         "name": "M. Barrgow",
+//         "displayName": "M. Barrgow",
 //         "givenName": "M.",
 //         "familyName": "Barrgow"
 //       }, {
 //         "nameType": "Person",
-//         "name": "M. Barrgoe",
+//         "displayName": "M. Barrgoe",
 //         "givenName": "M.",
 //         "familyName": "Barrgoe"
 //       }
 //     ]);
 
-//     await render(hbs`
-//       {{#creator-show creators=creators}}
-        
-//       {{/creator-show}}
-//     `);
+//     await render(hbs` {{creator-show creators=creators}}`);
 
-//     assert.equal(this.element.textContent.trim(), 'template block text');
+//     assert.equal(this.element.textContent.trim(), "Empbh R. Goh, \n      M. Barrgow & \n      M. Barrgoe");
 //   });
 // });

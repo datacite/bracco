@@ -1,19 +1,20 @@
-// import { module, test } from 'qunit';
-// import { setupRenderingTest } from 'ember-qunit';
-// import {
-//   render,
-//   click,
-//   typeIn,
-//   findAll,
-//   triggerKeyEvent
-// } from '@ember/test-helpers';
-// import hbs from 'htmlbars-inline-precompile';
-// import { setupFactoryGuy, make } from 'ember-data-factory-guy';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import {
+  render,
+  click,
+  typeIn,
+  findAll,
+  triggerKeyEvent,
+  // pauseTest
+} from '@ember/test-helpers';
+import hbs from 'htmlbars-inline-precompile';
+import { setupFactoryGuy, make } from 'ember-data-factory-guy';
 
 
-// module('Integration | Component | doi creators', function(hooks) {
-//   setupRenderingTest(hooks);
-//   setupFactoryGuy(hooks);
+module('Integration | Component | doi creators', function(hooks) {
+  setupRenderingTest(hooks);
+  setupFactoryGuy(hooks);
 
   // test('adding multiple persons', async function(assert) {
   //   this.set('model', make('doi'));
@@ -56,7 +57,7 @@
   //   await typeIn(nameIdentifiers[0], "Teresa May")
   //   await triggerKeyEvent(creators[0], 'keyup', 'Tab');
   
-  //   assert.equal(nameIdentifiers[0].className,'form-control has-error  name-identifier-field');
+  //   assert.equal(nameIdentifiers[0].className, 'form-control name-identifier-field  ');
   //   assert.dom(organisations[0]).isNotChecked();
   //   assert.dom(persons[0]).isChecked();
 
@@ -65,28 +66,26 @@
   //   await triggerKeyEvent(creators[0], 'keyup', 'Tab');
   //   // await pauseTest()
 
-  //   assert.equal(nameIdentifiers[0].className,'form-control has-error  name-identifier-field');
+  //   assert.equal(nameIdentifiers[0].className, 'form-control name-identifier-field  ');
   //   assert.dom(organisations[0]).isChecked();
   //   assert.dom(persons[0]).isNotChecked();
   // });
 
-  // test('no value(s)', async function(assert) {
-  //   this.set('model', make('doi'));
+  test('no value(s)', async function(assert) {
+    this.set('model', make('doi'));
 
-  //   await render(hbs`{{doi-creators model=model}}`);
-  //   await click('button#add-creator')
-  //   await click('button#add-creator')
-  //   var creators = findAll('input.creator-field'); 
-  //   await typeIn(creators[0], "")
-  //   await typeIn(creators[1], "")
-  //   await triggerKeyEvent(creators[0], 'keyup', 'Tab');
-  //   await triggerKeyEvent(creators[1], 'keyup', 'Tab');
-  //   await pauseTest()
-
+    await render(hbs`{{doi-creators model=model}}`);
+    await click('button#add-creator')
+    await click('button#add-creator')
+    var creators = findAll('input.creator-field'); 
+    await typeIn(creators[0], "")
+    await typeIn(creators[1], "")
+    await triggerKeyEvent(creators[0], 'keyup', 'Tab');
+    await triggerKeyEvent(creators[1], 'keyup', 'Tab');
  
-  //   assert.equal(findAll('input.creator-field')[0].value,"");
-  //   assert.equal(findAll('input.creator-field')[1].value,"");
-  //   assert.equal(creators[1].className, 'form-control creator-field has-error ember-text-field ember-view');
-  //   assert.equal(creators[1].className, 'form-control creator-field has-error ember-text-field ember-view');
-  // });
-// });
+    assert.equal(findAll('input.creator-field')[0].value,"");
+    assert.equal(findAll('input.creator-field')[1].value,"");
+    assert.equal(creators[1].className, 'form-control creator-field no-error no-success');
+    assert.equal(creators[1].className, 'form-control creator-field no-error no-success');
+  });
+});

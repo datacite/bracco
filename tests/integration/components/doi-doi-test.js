@@ -32,25 +32,25 @@
 //     assert.dom("#suffix-field").hasClass("has_error");
 //   });
 
-//   test('unpermitted doi', async function(assert) {
-//     this.set('doi', make('doi'));
-//     this.set('repository', make('repository'));
+  // test('unpermitted doi', async function(assert) {
+  //   this.set('doi', make('doi'));
+  //   this.set('repository', make('repository'));
 
-//     await render(hbs`{{doi-doi model=doi repository=repository}}`);
-//     await click('button#add-creator')
-//     await click('button#add-creator')
-//     await click('button#add-creator')
-//     var creators = this.element.querySelectorAll('input.creator-field'); 
-//     await fillIn(creators[0], "Teresa May")
-//     await fillIn(creators[1], "Billy Corgan")
-//     var persons = this.element.querySelectorAll(".select-person")
-//     var organisations = this.element.querySelectorAll(".select-organisation")
+  //   await render(hbs`{{doi-doi model=doi repository=repository}}`);
+  //   await click('button#add-creator')
+  //   await click('button#add-creator')
+  //   await click('button#add-creator')
+  //   var creators = this.element.querySelectorAll('input.creator-field'); 
+  //   await fillIn(creators[0], "Teresa May")
+  //   await fillIn(creators[1], "Billy Corgan")
+  //   var persons = this.element.querySelectorAll(".select-person")
+  //   var organisations = this.element.querySelectorAll(".select-organisation")
     
-//     assert.equal(persons[0].checked,true);
-//     assert.equal(organisations[0].checked,false);
-//     assert.equal(creators[0].value,'Teresa May');
-//     assert.equal(creators[1].value,'Billy Corgan');
-//     assert.equal(creators[0].className, 'form-control creator-field ember-text-field ember-view');  // there is no changes in format
-//     assert.equal(creators[1].className, 'form-control creator-field ember-text-field ember-view');
-//   });
+  //   assert.equal(persons[0].checked,true);
+  //   assert.equal(organisations[0].checked,false);
+  //   assert.equal(creators[0].value,'Teresa May');
+  //   assert.equal(creators[1].value,'Billy Corgan');
+  //   assert.equal(creators[0].className, 'form-control creator-field ember-text-field ember-view');  // there is no changes in format
+  //   assert.equal(creators[1].className, 'form-control creator-field ember-text-field ember-view');
+  // });
 // });

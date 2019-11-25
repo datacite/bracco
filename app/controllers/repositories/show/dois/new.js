@@ -60,7 +60,7 @@ export default Controller.extend({
         } else {
           console.log(reason);
         }
-        self.get('flashMessages').warning('This DOI name already exists. Please use a different DOI name.', { componentName: 'duplicated-doi' });
+        self.get('flashMessages').warning('An error occured and this DOI could not be saved.', { componentName: 'doi-error' });
       });
     },
     cancel() {

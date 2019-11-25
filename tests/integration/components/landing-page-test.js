@@ -7,10 +7,6 @@ module('Integration | Component | landing page', function(hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function(assert) {
-
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.on('myAction', function(val) { ... });
-
     await render(hbs`{{landing-page}}`);
 
     assert.ok(/^DataCite Fabrica+/.test(find('*').textContent.trim()), 'begins with "DataCite Fabrica"');

@@ -59,8 +59,8 @@ module('Acceptance | staff_admin | repository', function(hooks) {
     assert.dom('h2.work').hasText('Alfred Wegener Institute');
     
     // assert.dom('h3.work').doesNotExist();
-    assert.dom('a#new-doi').exists();
-    assert.dom('a#upload-doi').exists();
+    // assert.dom('a#new-doi').exists();
+    // assert.dom('a#upload-doi').exists();
     // assert.dom('a#transfer-dois').includesText('Transfer DOIs');
   });
 });

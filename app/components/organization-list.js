@@ -109,7 +109,6 @@ export default Component.extend({
   actions: {
     new() {
       this.set('provider', this.store.createRecord('provider', { consortium: this.get('model.provider'), memberType: "consortium_organization", billingContact: {}, technicalContact: {}, isActive: true }));
-      console.log(this.get('provider'));
       this.set('countries', countryList);
       this.set('new', true);
     },

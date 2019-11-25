@@ -6,8 +6,7 @@
 // });
 
 // test('it renders', function(assert) {
-//   // Set any properties with this.set('myProperty', 'value');
-//   // Handle any actions with this.on('myAction', function(val) { ... });
-
 //   this.render(hbs`{{doi-summary}}`);
+
+//   assert.dom('*').hasText('One or more names or titles by which the resource is known. Title Type (optional) Language (optional)');
 // });

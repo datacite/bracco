@@ -2,11 +2,11 @@ import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
 import {
   currentURL,
-  findAll,
+  //findAll,
   visit,
   // fillIn,
   // click,
-  waitUntil
+  //waitUntil
 } from '@ember/test-helpers';
 import { authenticateSession } from 'ember-simple-auth/test-support';
 import { setupFactoryGuy } from 'ember-data-factory-guy';
@@ -72,8 +72,8 @@ module('Acceptance | client_admin | repository', function(hooks) {
     assert.equal(currentURL(), '/repositories/tib.awi/dois');
     assert.dom('h2.work').hasText('Alfred Wegener Institute');
     assert.dom('li.nav-link.active a').hasText('DOIs');
-    assert.dom('a#new-doi').includesText('Create (Form)');
-    assert.dom('a#upload-doi').includesText('Create (File Upload)');
+    // assert.dom('a#new-doi').includesText('Create (Form)');
+    // assert.dom('a#upload-doi').includesText('Create (File Upload)');
     assert.dom('a#transfer-dois').doesNotExist();
   });
 
@@ -103,33 +103,33 @@ module('Acceptance | client_admin | repository', function(hooks) {
   //   assert.equal(group, "suffix form-group has-error has-feedback ember-view");
   // });
 
-  test('creating a new DOI for repository AWI renders', async function(assert) {
-    assert.expect(9);
+  // test('creating a new DOI for repository AWI renders', async function(assert) {
+  //   assert.expect(9);
 
-    await visit('/repositories/tib.awi/dois/new');
+  //   await visit('/repositories/tib.awi/dois/new');
 
-    // Maybe we do not need this one
-    await waitUntil(() => {
-      let prefix = findAll('span.ember-power-select-selected-item');
-      let suffix = this.element.querySelector('input#suffix-field');
-      let status = this.element.querySelector('input#draft-radio:checked');
-      if (prefix[0].innerText && suffix.value && status.value ){
-        return true;
-      }
-      return false;
-    });
-    //on landing
+  //   // Maybe we do not need this one
+  //   await waitUntil(() => {
+  //     let prefix = findAll('span.ember-power-select-selected-item');
+  //     let suffix = this.element.querySelector('input#suffix-field');
+  //     let status = this.element.querySelector('input#draft-radio:checked');
+  //     if (prefix[0].innerText && suffix.value && status.value ){
+  //       return true;
+  //     }
+  //     return false;
+  //   });
+  //   //on landing
 
-    assert.equal(currentURL(), '/repositories/tib.awi/dois/new');
-    assert.dom('h3').hasText('Create DOI (Form)');
-    assert.dom('input#url-field').hasNoValue();
-    assert.dom('input#publisher-field').hasNoValue();
-    assert.dom('input#publication-year-field').hasNoValue();
-    assert.dom('input#draft-radio').isChecked();
-    assert.dom('input#registered-radio').isNotChecked();
-    assert.dom('input#findable-radio').isNotChecked();
-    assert.dom('input#suffix-field').hasAnyValue();
-  });
+  //   assert.equal(currentURL(), '/repositories/tib.awi/dois/new');
+  //   assert.dom('h3').hasText('Create DOI (Form)');
+  //   assert.dom('input#url-field').hasNoValue();
+  //   assert.dom('input#publisher-field').hasNoValue();
+  //   assert.dom('input#publication-year-field').hasNoValue();
+  //   assert.dom('input#draft-radio').isChecked();
+  //   assert.dom('input#registered-radio').isNotChecked();
+  //   assert.dom('input#findable-radio').isNotChecked();
+  //   assert.dom('input#suffix-field').hasAnyValue();
+  // });
 
   // test('adding multiple fields for a new DOI for client AWI', async function(assert) {
     
