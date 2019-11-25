@@ -14,7 +14,7 @@ export default Ability.extend({
         return false;
     }
   }),
-  canUpdate: computed('currentUser.role_id', 'currentUser.provider_id', 'currentUser.client_id', 'model.clients', 'model.providers', function() {
+  canUpdate: computed('currentUser.role_id', 'currentUser.provider_id', 'currentUser.client_id', 'model.repositories', 'model.providers', function() {
     //let self = this;
     switch(this.get('currentUser.role_id')) {
       case 'staff_admin':
@@ -28,7 +28,7 @@ export default Ability.extend({
         return false;
     }
   }),
-  canRead: computed('currentUser.role_id', 'currentUser.provider_id', 'currentUser.client_id', 'model.clients', 'model.providers', function() {
+  canRead: computed('currentUser.role_id', 'currentUser.provider_id', 'currentUser.client_id', 'model.repositories', 'model.providers', function() {
     let self = this;
     switch(this.get('currentUser.role_id')) {
       case 'staff_admin':
@@ -39,8 +39,8 @@ export default Ability.extend({
         //   return provider.get('id') === self.get('currentUser.provider_id');
         // });
       case 'client_admin':
-        return this.get('model.clients').any(function(client) {
-          return client.get('id') === self.get('currentUser.client_id');
+        return this.get('model.repositories').any(function(repository) {
+          return repository.get('id') === self.get('currentUser.client_id');
         });
       default:
         return false;

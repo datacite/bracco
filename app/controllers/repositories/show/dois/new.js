@@ -64,7 +64,7 @@ export default Controller.extend({
       });
     },
     cancel() {
-      this.transitionToRoute('repositories.show.dois', this.get('model.client.id'));
+      this.transitionToRoute('repositories.show.dois', this.get('model.repository.id'));
     },
     setCreatorValidations(value) {
       console.log(value)

@@ -14,7 +14,7 @@ export default DS.Model.extend(Validations, {
   prefix: DS.belongsTo('prefix', {
     async: false
   }),
-  clients: DS.hasMany('client', {
+  repositories: DS.hasMany('repository', {
     async: false
   }),
 

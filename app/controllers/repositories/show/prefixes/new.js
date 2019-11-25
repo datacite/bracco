@@ -7,9 +7,9 @@ export default Controller.extend({
   actions: {
     submit() {
       let self = this;
-      var clientPrefix = this.store.createRecord('clientPrefix', { client: this.get('model.client'), prefix: this.get('model.prefix.prefix') });
-      clientPrefix.save().then(function(clientPrefix) {
-        self.transitionToRoute('repositories.show.prefixes', clientPrefix.get('client').get('id'));
+      var repositoryPrefix = this.store.createRecord('repositoryPrefix', { repository: this.get('model.repository'), prefix: this.get('model.prefix.prefix') });
+      repositoryPrefix.save().then(function(repositoryPrefix) {
+        self.transitionToRoute('repositories.show.prefixes', repositoryPrefix.get('repository').get('id'));
       }).catch(function(reason){
         if (console.debug) {
           console.debug(reason);

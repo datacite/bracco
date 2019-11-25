@@ -14,6 +14,6 @@ module('Integration | Component | prefix show', function(hooks) {
       {{/prefix-show}}
     `);
 
-    assert.dom('*').hasText('Providers No providers found. Clients No clients found.');
+    assert.dom('*').hasText('Providers No providers found. Repositories No repositories found.');
   });
 });

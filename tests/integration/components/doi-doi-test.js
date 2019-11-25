@@ -23,9 +23,9 @@
 
 //   test('no doi', async function(assert) {
 //     this.set('doi', make('doi'));
-//     this.set('client', make('client'));
+//     this.set('repository', make('repository'));
 
-//     await render(hbs`{{doi-doi model=doi client=client}}`);
+//     await render(hbs`{{doi-doi model=doi repository=repository}}`);
 //     await fillIn("#suffix-field","")
  
 //     assert.dom("#suffix-field").hasNoValue();
@@ -34,9 +34,9 @@
 
 //   test('unpermitted doi', async function(assert) {
 //     this.set('doi', make('doi'));
-//     this.set('client', make('client'));
+//     this.set('repository', make('repository'));
 
-//     await render(hbs`{{doi-doi model=doi client=client}}`);
+//     await render(hbs`{{doi-doi model=doi repository=repository}}`);
 //     await click('button#add-creator')
 //     await click('button#add-creator')
 //     await click('button#add-creator')

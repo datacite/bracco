@@ -141,7 +141,7 @@ const Validations = buildValidations({
 });
 
 export default Model.extend(Validations, {
-  client: DS.belongsTo('repository', {
+  repository: DS.belongsTo('repository', {
     async: true
   }),
 
@@ -184,8 +184,8 @@ export default Model.extend(Validations, {
   updated: DS.attr('date'),
   mode: DS.attr('string'),
 
-  identifier: computed('doi', 'client', function () {
-    if (ENV.API_URL == "https://api.datacite.org" || (w("crossref.citations medra.citations kisti.citations jalc.citations op.citations").includes(this.client.get('id')))) {
+  identifier: computed('doi', 'repository', function () {
+    if (ENV.API_URL == "https://api.datacite.org" || (w("crossref.citations medra.citations kisti.citations jalc.citations op.citations").includes(this.repository.get('id')))) {
       return "https://doi.org/" + this.doi;
     } else {
       return "https://handle.test.datacite.org/" + this.doi;
@@ -195,7 +195,7 @@ export default Model.extend(Validations, {
     return this.state === 'draft';
   }),
   showCitation: computed('registered', 'client', function () {
-    return (this.registered || (w("crossref.citations medra.citations kisti.citations jalc.citations op.citations").includes(this.client.get('id'))));
+    return (this.registered || (w("crossref.citations medra.citations kisti.citations jalc.citations op.citations").includes(this.repository.get('id'))));
   }),
   schemaVersionString: computed('schemaVersion', function () {
     if (this.schemaVersion) {

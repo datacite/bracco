@@ -10,35 +10,35 @@ export default Component.extend({
   tagName: 'div',
   classNames: ['row'],
   provider: null,
-  client: null,
-  clients: [],
+  repository: null,
+  repositories: [],
   isDisabled: true,
 
   didReceiveAttrs() {
     this._super(...arguments);
 
-    this.searchClient(null);
+    this.searchRepository(null);
   },
 
-  searchClient(query) {
+  searchRepository(query) {
     if (this.currentUser.get('isAdmin')) {
-      this.set('clients', this.store.query('client', { 'query': query, sort: 'name', 'page[size]': 100 }));
+      this.set('repositories', this.store.query('repository', { 'query': query, sort: 'name', 'page[size]': 100 }));
     } else if (this.currentUser.get('isProvider')) {
-      this.set('clients', this.store.query('client', { 'query': query, 'provider-id': this.currentUser.get('provider_id'), sort: 'name', 'page[size]': 100 }));
+      this.set('repositories', this.store.query('repository', { 'query': query, 'provider-id': this.currentUser.get('provider_id'), sort: 'name', 'page[size]': 100 }));
     }
   },
-  selectClient(client) {
-    this.set('client', client)
-    this.set('isDisabled', (client === null) || (client.id === this.get('model.id')));
-    this.model.set('targetId', client.id);
+  selectRepository(repository) {
+    this.set('repository', repository)
+    this.set('isDisabled', (repository === null) || (repository.id === this.get('model.id')));
+    this.model.set('targetId', repository.id);
   },
 
   actions: {
-    searchClient(query) {
-      this.searchClient(query);
+    searchRepository(query) {
+      this.searchRepository(query);
     },
-    selectClient(client) {
-      this.selectClient(client);
+    selectRepository(repository) {
+      this.selectRepository(repository);
     },
     submit() {
       this.model.save();
@@ -47,10 +47,10 @@ export default Component.extend({
         timeout: 5000,
         sticky: true
       });
-      this.router.transitionTo('clients.show.settings', this.model);
+      this.router.transitionTo('repositories.show.settings', this.model);
     },
     cancel() {
-      this.router.transitionTo('clients.show.dois', this.model);
+      this.router.transitionTo('repositories.show.dois', this.model);
     }
   }
 });

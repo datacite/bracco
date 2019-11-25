@@ -270,14 +270,14 @@
             </div>
             <div class="clearfix"/>
           </div>
-        {{else if (gt model.currentClientCount 0)}}
+        {{else if (gt model.currentRepositoryCount 0)}}
           <div class="alert alert-danger" role="alert">
-            You need to delete all clients before you can delete the {{uppercase model.id}} provider.
+            You need to delete all repositories before you can delete the {{uppercase model.id}} provider.
           </div>
           <div class="pseudo-footer">
             <div class="btn-toolbar btn-sm pull-right">
               <button {{action "cancel" model}} class="btn btn-sm">Cancel</button>
-              {{#link-to "providers.show.clients" model.id class="btn btn-sm"}}All Clients{{/link-to}}
+              {{#link-to "providers.show.repositories" model.id class="btn btn-sm"}}All Repositories{{/link-to}}
             </div>
             <div class="clearfix"/>
           </div>
@@ -319,7 +319,7 @@
         </div>
       {{/if}}
 
-      {{client-sidebar model=model}}
+      {{repository-sidebar model=model}}
     </div>
     <div class="col-md-9">
       <div class="panel panel-transparent">

@@ -9,9 +9,9 @@ export default Route.extend(AuthenticatedRouteMixin, {
 
   model() {
     if (this.currentUser.get("client_id")) {
-      return this.store.findRecord('client', this.currentUser.get("uid")).then(function(client) {
-        client.set('confirmSymbol', client.get('symbol'));
-        return client;
+      return this.store.findRecord('repository', this.currentUser.get("uid")).then(function(repository) {
+        repository.set('confirmSymbol', repository.get('symbol'));
+        return repository;
       });
     } else if (this.currentUser.get("provider_id")) {
       return this.store.findRecord('provider', this.currentUser.get("uid")).then(function(provider) {

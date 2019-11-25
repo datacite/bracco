@@ -6,11 +6,11 @@ export default Route.extend({
   can: service(),
 
   model() {
-    let client = this.modelFor('repositories/show');
-    let doi = this.store.createRecord('doi', { client: client, mode: 'new', state: 'draft', titles: [], descriptions: [], creators: [] });
+    let repository = this.modelFor('repositories/show');
+    let doi = this.store.createRecord('doi', { repository: repository, mode: 'new', state: 'draft', titles: [], descriptions: [], creators: [] });
 
     return hash({
-      client: client,
+      repository: repository,
       doi: doi
     });
   },

@@ -58,14 +58,14 @@ module('Acceptance | provider_admin | admin', function(hooks) {
     assert.dom('h2.work').hasText('German National Library of Science and Technology');
   });
 
-  test('visiting clients', async function(assert) {
+  test('visiting repositories', async function(assert) {
     await authenticateSession({
       uid: 'tib',
       name: 'Technische Informationsbibliothek',
       role_id: 'provider_admin',
       provider_id: 'tib'
     });
-    await visit('/clients');
+    await visit('/repositories');
 
     assert.equal(currentURL(), '/providers/tib');
     assert.dom('h2.work').hasText('German National Library of Science and Technology');

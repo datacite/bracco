@@ -12,7 +12,7 @@ const metadata = BaseValidator.extend({
     } else {
       let xml = this.b64EncodeUnicode(value);
       let url = ENV.API_URL + '/dois/validate';
-      let clientId = model.get('client').get('id');
+      let repositoryId = model.get('repository').get('id');
       return fetch(url, {
         method: 'post',
         headers: {
@@ -27,10 +27,10 @@ const metadata = BaseValidator.extend({
               xml: xml
             },
             relationships: {
-              client: {
+              repository: {
                 data: {
-                  type: "clients",
-                  id: clientId
+                  type: "repositories",
+                  id: repositoryId
                 }
               }
             }

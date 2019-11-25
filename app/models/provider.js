@@ -176,11 +176,11 @@ export default DS.Model.extend(Validations, {
       return a + b.count;
     }, 0);
   }),
-  clientCount: computed('meta.clients', function() {
+  repositoryCount: computed('meta.clients', function() {
     return this.get('meta.clients');
   }),
-  currentClientCount: computed('clientCount', function() {
-    let currentYear = A(this.clientCount).findBy('id', 2019);
+  currentRepositoryCount: computed('repositoryCount', function() {
+    let currentYear = A(this.repositoryCount).findBy('id', 2019);
     if (currentYear) {
       return currentYear.count;
     } else {

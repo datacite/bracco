@@ -62,7 +62,7 @@ module('Acceptance | client_admin | admin', function(hooks) {
     assert.dom('h2.work').hasText('Alfred Wegener Institute');
   });
 
-  test('visiting clients', async function(assert) {
+  test('visiting repositories', async function(assert) {
     await authenticateSession({
       uid: 'tib.awi',
       name: 'Alfred Wegener Institute',

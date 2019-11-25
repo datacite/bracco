@@ -16,7 +16,7 @@ export default Component.extend({
   },
 
   fetchURL() {
-    if (w("crossref.citations medra.citations kisti.citations jalc.citations op.citations").includes(this.model.get('client.id'))) {
+    if (w("crossref.citations medra.citations kisti.citations jalc.citations op.citations").includes(this.model.get('repository.id'))) {
       this.set('url', this.model.get('url'));
     } else {
       let self = this;

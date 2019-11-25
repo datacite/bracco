@@ -4,7 +4,7 @@ export default DS.Model.extend({
   provider: DS.belongsTo('provider', {
     async: false
   }),
-  prefix: DS.belongsTo('client', {
+  prefix: DS.belongsTo('repository', {
     async: false
   }),
 

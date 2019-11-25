@@ -8,8 +8,8 @@ import { fragment } from 'ember-data-model-fragments/attributes';
 const Validations = buildValidations({
   symbol: [
     validator('presence', true),
-    validator('client-id', true),
-    validator('unique-client-id', {
+    validator('repository-id', true),
+    validator('unique-repository-id', {
       presence: true,
       disabled: computed('model', function() {
         return !this.model.get('isNew');

@@ -32,7 +32,7 @@
 
   <div class="row">
     <div class="col-md-3">
-      {{client-sidebar model=model}}
+      {{repository-sidebar model=model}}
     </div>
     <div class="col-md-9">
       <div class="panel panel-transparent">
@@ -46,13 +46,13 @@
             <span class="icon-warning">No providers found.</span>
           {{/if}}
 
-          <h5>{{pluralize prefix.clients.length "Client" without-count=true}}</h5>
-          {{#if model.clients}}
-            {{#each model.clients as |client|}}
-              {{#link-to "clients.show.prefixes" client.id}}{{client.name}}{{/link-to}}<br>
+          <h5>{{pluralize prefix.repositories.length "Repository" without-count=true}}</h5>
+          {{#if model.repositories}}
+            {{#each model.repositories as |repository|}}
+              {{#link-to "repositories.show.prefixes" repository.id}}{{repository.name}}{{/link-to}}<br>
             {{/each}}
           {{else}}
-            <span class="icon-warning">No clients found.</span>
+            <span class="icon-warning">No repositories found.</span>
           {{/if}}
         </div>
       </div>

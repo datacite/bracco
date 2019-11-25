@@ -14,7 +14,7 @@
       onSubmit=(action "submit" model.doi) 
     as |form|
     }}
-      {{doi-doi model=model.doi client=model.client form=form}}
+      {{doi-doi model=model.doi repository=model.repository form=form}}
 
       {{form.element 
         controlType="text" 

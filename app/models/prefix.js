@@ -4,7 +4,7 @@ export default DS.Model.extend({
   providers: DS.hasMany('provider', {
     async: false
   }),
-  clients: DS.hasMany('client', {
+  repositories: DS.hasMany('repository', {
     async: false
   }),
 

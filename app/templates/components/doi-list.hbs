@@ -1,17 +1,17 @@
 <div class='col-md-3'>
-  {{#if (and (or (eq link "clients.show.dois") (eq link "repositories.show.dois")) (or (can "create doi" model) (can "upload doi" model) (can "move doi" client)))}}
+  {{#if (and (eq link "repositories.show.dois") (or (can "create doi" model) (can "upload doi" model) (can "move doi" repository)))}}
     <div class="panel facets">
       <div class="panel-body">
         <div class="btn-toolbar">
           <div class="btn-group-vertical btn-group-sm">
             {{#if (can "create doi" model)}}
-              {{#link-to "repositories.show.dois.new" client.id class="btn btn-warning" id="new-doi"}}{{fa-icon "wpforms"}} Create{{if media.isXl ' DOI'}} (Form){{/link-to}}
+              {{#link-to "repositories.show.dois.new" repository.id class="btn btn-warning" id="new-doi"}}{{fa-icon "wpforms"}} Create{{if media.isXl ' DOI'}} (Form){{/link-to}}
             {{/if}}
             {{#if (can "upload doi" model)}}
-              {{#link-to "repositories.show.dois.upload" client.id class="btn btn-warning" id="upload-doi"}}{{fa-icon "upload"}} Create{{if media.isXl ' DOI'}} (File Upload){{/link-to}}
+              {{#link-to "repositories.show.dois.upload" repository.id class="btn btn-warning" id="upload-doi"}}{{fa-icon "upload"}} Create{{if media.isXl ' DOI'}} (File Upload){{/link-to}}
             {{/if}}
-            {{#if (and (can "move doi" client) (gt model.length 0))}}
-              {{#link-to "repositories.show.transfer" client.id class="btn btn-warning" id="transfer-dois"}}{{fa-icon "arrow-circle-o-right"}}Transfer{{if media.isXl ' DOIs'}}{{/link-to}}
+            {{#if (and (can "move doi" repository) (gt model.length 0))}}
+              {{#link-to "repositories.show.transfer" repository.id class="btn btn-warning" id="transfer-dois"}}{{fa-icon "arrow-circle-o-right"}}Transfer{{if media.isXl ' DOIs'}}{{/link-to}}
             {{/if}}
           </div>
         </div>
@@ -145,7 +145,7 @@
       </div>
     </div>
   {{/if}}
-  {{#if (and (not-eq link "clients.show.dois") (not-eq link "repositories.show.dois") (or model.meta.clients model.query.client-id))}}
+  {{#if (not-eq link "repositories.show.dois" or model.meta.clients model.query.client-id)}}
     <div class="panel facets">
       <div class="panel-body">
         <h4>Repository</h4>

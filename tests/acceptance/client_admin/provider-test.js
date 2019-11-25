@@ -20,7 +20,7 @@ module('Acceptance | client_admin | provider', function(hooks) {
     assert.dom('h2.work').hasText('Alfred Wegener Institute');
   });
 
-  test('visiting provider TIB clients', async function(assert) {
+  test('visiting provider TIB repositories', async function(assert) {
     await authenticateSession({
       uid: 'tib.awi',
       name: 'Alfred Wegener Institute',

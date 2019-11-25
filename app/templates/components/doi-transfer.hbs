@@ -6,8 +6,8 @@
 
     {{#bs-form formLayout="horizontal" horizontalLabelGridClass="col-md-3" model=model onSubmit=(action "submit" model) as |form|}}
       {{form.element controlType="hidden" property="doi" required=false}}
-      {{#form.element controlType="power-select" property="client" label="Repository" helpText='Transfer the DOI to this repository.' optionLabelPath="name" options=clients destination=client.id as |el|}}
-        {{#el.control onChange=(action "selectClient") search=(action "searchClient") searchField="name" searchPlaceholder="Type to search..." as |item|}}
+      {{#form.element controlType="power-select" property="repository" label="Repository" helpText='Transfer the DOI to this repository.' optionLabelPath="name" options=repositories destination=repository.id as |el|}}
+        {{#el.control onChange=(action "selectRepository") search=(action "searchRepository") searchField="name" searchPlaceholder="Type to search..." as |item|}}
           {{item.name}}
         {{/el.control}}
       {{/form.element}}

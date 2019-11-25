@@ -33,8 +33,8 @@ module('Acceptance | anonymous | admin', function(hooks) {
     assert.dom('div.motto h1').hasText('DataCite Fabrica Test');
   });
 
-  test('visiting clients', async function(assert) {
-    await visit('/clients');
+  test('visiting repositories', async function(assert) {
+    await visit('/repositories');
 
     assert.equal(currentURL(), '/');
     assert.dom('div.motto h1').hasText('DataCite Fabrica Test');
@@ -62,7 +62,7 @@ module('Acceptance | anonymous | admin', function(hooks) {
   });
 
   test('visiting specific doi', async function(assert) {
-    await visit('clients/bl.sagecite/dois/10.5520%2Fsagecite-1');
+    await visit('repositories/bl.sagecite/dois/10.5520%2Fsagecite-1');
 
     assert.equal(currentURL(), '/');
     assert.dom('div.motto h1').hasText('DataCite Fabrica Test');

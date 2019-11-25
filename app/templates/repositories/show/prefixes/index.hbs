@@ -28,22 +28,22 @@
   {{model-search model=model.prefixes name="Prefix" link='repositories.show.prefixes'}}
 
   {{#if model.prefixes}}
-    {{#each model.prefixes as |client-prefix|}}
+    {{#each model.prefixes as |repository-prefix|}}
       <div class="panel panel-transparent">
         <div class="panel-body">
           {{#if (can "update prefix" model)}}
-            <h3 class="work">{{#link-to "repositories.show.prefixes.show" model.repository.id client-prefix.prefix.id}}{{client-prefix.prefix.id}}{{/link-to}}</h3>
+            <h3 class="work">{{#link-to "repositories.show.prefixes.show" model.repository.id repository-prefix.prefix.id}}{{repository-prefix.prefix.id}}{{/link-to}}</h3>
           {{else}}
-            <h3 class="member">{{client-prefix.prefix.id}}</h3>
+            <h3 class="member">{{repository-prefix.prefix.id}}</h3>
           {{/if}}
 
           {{#if features.useElasticsearch}}
             <h5>DOIs</h5>
-            {{#link-to "repositories.show.dois" client-prefix.repository.id (query-params prefix=client-prefix.prefix.id)}}DOIs for prefix {{client-prefix.prefix.id}}{{/link-to}}
+            {{#link-to "repositories.show.dois" repository-prefix.repository.id (query-params prefix=repository-prefix.prefix.id)}}DOIs for prefix {{repository-prefix.prefix.id}}{{/link-to}}
           {{/if}}
 
           <h5>Added</h5>
-          {{format-time client-prefix.created year='numeric' month='long' day='numeric' hour='numeric' minute='numeric' second='numeric' timeZone='UTC' timeZoneName='short' hour12=false}}
+          {{format-time repository-prefix.created year='numeric' month='long' day='numeric' hour='numeric' minute='numeric' second='numeric' timeZone='UTC' timeZoneName='short' hour12=false}}
         </div>
       </div>
     {{/each}}

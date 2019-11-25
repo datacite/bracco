@@ -5,8 +5,8 @@ export default Component.extend({
   currentUser: service(),
   store: service(),
 
-  oldClient: null,
-  clients: null,
+  oldRepository: null,
+  repositories: null,
   isDisabled: true,
 
   didReceiveAttrs() {
@@ -14,29 +14,29 @@ export default Component.extend({
 
     this.model.set('mode', 'transfer');
 
-    this.searchClient(null);
+    this.searchRepository(null);
   },
 
-  searchClient(query) {
+  searchRepository(query) {
     if (this.currentUser.get('isAdmin')) {
-      this.set('clients', this.store.query('client', { 'query': query, sort: 'name', 'page[size]': 100 }));
+      this.set('repositories', this.store.query('repository', { 'query': query, sort: 'name', 'page[size]': 100 }));
     } else if (this.currentUser.get('isProvider')) {
-      this.set('clients', this.store.query('client', { 'query': query, 'provider-id': this.currentUser.get('provider_id'), sort: 'name', 'page[size]': 100 }));
+      this.set('repositories', this.store.query('repository', { 'query': query, 'provider-id': this.currentUser.get('provider_id'), sort: 'name', 'page[size]': 100 }));
     }
   },
-  selectClient(client) {
-    this.set('oldClient', this.model.get('client.id'));
-    this.model.set('client', client);
-    this.model.set('provider', client.get('provider'));
-    this.set('isDisabled', client.id === this.get('oldClient'));
+  selectRepository(repository) {
+    this.set('oldRepository', this.model.get('repository.id'));
+    this.model.set('repository', repository);
+    this.model.set('provider', repository.get('provider'));
+    this.set('isDisabled', repository.id === this.get('oldRepository'));
   },
 
   actions: {
-    searchClient(query) {
-      this.searchClient(query);
+    searchRepository(query) {
+      this.searchRepository(query);
     },
-    selectClient(client) {
-      this.selectClient(client);
+    selectRepository(repository) {
+      this.selectRepository(repository);
     },
     submit(doi) {
       let self = this;

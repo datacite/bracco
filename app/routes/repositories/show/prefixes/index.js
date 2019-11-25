@@ -17,7 +17,7 @@ export default Route.extend({
 
     return hash({
       repository: this.modelFor('repositories/show'),
-      prefixes: this.store.query('client-prefix', params)
+      prefixes: this.store.query('repository-prefix', params)
     });
   },
 

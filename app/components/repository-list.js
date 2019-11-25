@@ -28,7 +28,7 @@ export default Component.extend({
 
   tagName: 'div',
   classNames: ['row'],
-  client: null,
+  repository: null,
   new: false,
   re3data: null,
   repositories: [],
@@ -36,11 +36,11 @@ export default Component.extend({
   softwares: softwareList,
   clientTypeList,
   clientTypes: clientTypeList,
-  // availableClientCount: computed('model.provider', 'model.clients', function() {
+  // availableClientCount: computed('model.provider', 'model.repositories', function() {
   //   if (this.model.provider && this.model.provider.memberType === 'contractual_provider') {
-  //     return 1 - this.model.clients.length;
+  //     return 1 - this.model.repositories.length;
   //   } else {
-  //     return 500 - this.model.clients.length;
+  //     return 500 - this.model.repositories.length;
   //   }
   // }),
 
@@ -101,7 +101,7 @@ export default Component.extend({
     this.set('softwares', softwareList);
   },
   reset() {
-    this.set('client', null);
+    this.set('repository', null);
     this.set('new', false);
   },
 

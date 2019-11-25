@@ -26,7 +26,7 @@
     {{#if model.prefixes.meta.states}}
       <div class="panel facets add">
         <div class="panel-body">
-          <h4>State <span class="small">{{fa-icon "question-circle-o"}}{{#bs-tooltip placement="top"}}Filter prefixes by whether they have been assigned to a client.{{/bs-tooltip}}</span></h4>
+          <h4>State <span class="small">{{fa-icon "question-circle-o"}}{{#bs-tooltip placement="top"}}Filter prefixes by whether they have been assigned to a repository.{{/bs-tooltip}}</span></h4>
           <ul>
             {{#each model.prefixes.meta.states as |state|}}
               <li>
@@ -118,17 +118,17 @@
               <h3 class="work">{{#link-to "providers.show.prefixes.show" model.provider.id provider-prefix.prefix.id}}{{provider-prefix.prefix.id}}{{/link-to}}</h3>
             {{/if}}
 
-            <h5>{{pluralize provider-prefix.clients.length "Client" without-count=true}}</h5>
-            {{#if provider-prefix.clients}}
-              {{#each provider-prefix.clients as |client|}}
-                {{#link-to "clients.show.prefixes.show" client.id provider-prefix.prefix.id}}{{client.name}}{{/link-to}}<br/>
+            <h5>{{pluralize provider-prefix.repositories.length "Repository" without-count=true}}</h5>
+            {{#if provider-prefix.repositories}}
+              {{#each provider-prefix.repositories as |repository|}}
+                {{#link-to "repositories.show.prefixes.show" repository.id provider-prefix.prefix.id}}{{repository.name}}{{/link-to}}<br/>
               {{/each}}
               {{#if features.useElasticsearch}}
                 <h5>DOIs</h5>
                 {{#link-to "providers.show.dois" provider-prefix.provider.id (query-params prefix=provider-prefix.prefix.id)}}DOIs for prefix {{provider-prefix.prefix.id}}{{/link-to}}
               {{/if}}
             {{else}}
-              <span class="icon-warning">No clients found.</span>
+              <span class="icon-warning">No repositories found.</span>
             {{/if}}
 
             <h5>Added</h5>

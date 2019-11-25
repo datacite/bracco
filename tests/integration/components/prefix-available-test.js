@@ -9,7 +9,7 @@ module('Integration | Component | prefix available', function(hooks) {
   setupFactoryGuy(hooks);
 
   test('it renders', async function(assert) {
-    this.set('model', { client: make('client') });
+    this.set('model', { repository: make('repository') });
 
     // Template block usage:
     await render(hbs`

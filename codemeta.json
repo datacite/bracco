@@ -17,7 +17,7 @@
 	"dateCreated": "2017-03-18",
 	"datePublished": "2018-05-09",
 	"dateModified": "2018-05-09",
-	"description": "The web frontend for the DataCite Fabrica service for managing DataCite providers, clients, prefixes and DOIs.",
+	"description": "The web frontend for the DataCite Fabrica service for managing DataCite providers, repositories, prefixes and DOIs.",
 	"isAutomatedBuild": true,
 	"licenseId": "MIT",
   "publisher": "DataCite",

@@ -24,7 +24,7 @@
         </div>
       </div>
     </div>
-    {{client-sidebar model=model}}
+    {{repository-sidebar model=model}}
   </div>
   <div class='col-md-9'>
     {{doi-url model=model}}
@@ -32,10 +32,6 @@
 
     {{#if model.showCitation}}
     {{doi-citation model=model}}
-    {{/if}}
-
-    {{#if (can "source doi" model)}}
-    {{doi-usage-stats model=model}}
     {{/if}}
 
     {{#if (and model.landingPage.checked (can "viewHealth doi" model))}}

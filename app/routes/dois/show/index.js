@@ -21,7 +21,7 @@ export default Route.extend({
   },
 
   // afterModel() {
-  //   if (this.get('can').cannot('view doi', this.modelFor('clients/show/dois/show'))) {
+  //   if (this.get('can').cannot('view doi', this.modelFor('repositories/show/dois/show'))) {
   //     return this.transitionTo('index');
   //   }
   // }

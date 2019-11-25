@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-3">
-    {{#if (and (can "update prefix" model) (not model.clients))}}
+    {{#if (and (can "update prefix" model) (not model.repositories))}}
       <div class="panel facets add">
         <div class="panel-body">
           <div class="btn-toolbar">
@@ -25,18 +25,18 @@
 
 <div class="row">
   <div class="col-md-3">
-    {{client-sidebar model=model}}
+    {{repository-sidebar model=model}}
   </div>
   <div class="col-md-9">
     <div class="panel panel-transparent">
       <div class="panel-body">
-        <h5>{{pluralize model.clients.length "Client" without-count=true}}</h5>
-        {{#if model.clients}}
-          {{#each model.clients as |client|}}
-            {{#link-to "clients.show.prefixes.show" client.id model.prefix.id}}{{client.name}}{{/link-to}}<br>
+        <h5>{{pluralize model.repositories.length "Repository" without-count=true}}</h5>
+        {{#if model.repositories}}
+          {{#each model.repositories as |repository|}}
+            {{#link-to "repositories.show.prefixes.show" repository.id model.prefix.id}}{{repository.name}}{{/link-to}}<br>
           {{/each}}
         {{else}}
-          <span class="icon-warning">No clients found.</span>
+          <span class="icon-warning">No repositories found.</span>
         {{/if}}
       </div>
     </div>

@@ -19,31 +19,7 @@ Router.map(function () {
         this.route('new');
       });
       this.route('organizations');
-      this.route('clients');
       this.route('repositories');
-    });
-  });
-  this.route('clients', function () {
-    this.route('show', { path: '/:client_id' }, function () {
-      this.route('settings');
-      this.route('dois', function () {
-        this.route('new');
-        this.route('upload');
-        this.route('show', { path: '/:doi_id' }, function () {
-          this.route('edit');
-          this.route('modify');
-          this.route('delete');
-          this.route('transfer');
-          this.route('enableForm');
-        });
-      });
-      this.route('transfer');
-      this.route('prefixes', function () {
-        this.route('show', { path: '/:prefix_id' }, function () {
-          this.route('delete');
-        });
-        this.route('new');
-      });
     });
   });
   this.route('repositories', function () {

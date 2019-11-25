@@ -26,7 +26,7 @@
         {{#if model.meta.states}}
           <div class="panel facets add">
             <div class="panel-body">
-              <h4>State <span class="small">{{fa-icon "question-circle-o"}}{{#bs-tooltip placement="top"}}Filter prefixes by whether they have been assigned to a provider and/or client.{{/bs-tooltip}}</span></h4>
+              <h4>State <span class="small">{{fa-icon "question-circle-o"}}{{#bs-tooltip placement="top"}}Filter prefixes by whether they have been assigned to a provider and/or repository.{{/bs-tooltip}}</span></h4>
               <ul>
                 {{#each model.meta.states as |state|}}
                   <li>
@@ -107,17 +107,17 @@
                 <span class="icon-warning">No providers found.</span>
               {{/if}}
 
-              <h5>{{pluralize prefix.clients.length "Client" without-count=true}}</h5>
-              {{#if prefix.clients}}
-                {{#each prefix.clients as |client|}}
-                  {{#link-to "clients.show.prefixes.show" client.id prefix.id}}{{client.name}}{{/link-to}}<br/>
+              <h5>{{pluralize prefix.repositories.length "Repository" without-count=true}}</h5>
+              {{#if prefix.repositories}}
+                {{#each prefix.repositories as |repository|}}
+                  {{#link-to "repositories.show.prefixes.show" repository.id prefix.id}}{{repository.name}}{{/link-to}}<br/>
                 {{/each}}
                 {{#if features.useElasticsearch}}
                   <h5>DOIs</h5>
                   {{#link-to "dois" (query-params prefix=prefix.id)}}DOIs for prefix {{prefix.id}}{{/link-to}}
                 {{/if}}
               {{else}}
-                <span class="icon-warning">No clients found.</span>
+                <span class="icon-warning">No repositories found.</span>
               {{/if}}
 
               <h5>Created</h5>

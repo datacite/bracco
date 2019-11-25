@@ -6,10 +6,9 @@ const placeholders = {
   'doi': 'DOI',
   'provider': 'Provider',
   'organization': 'Organization',
-  'client': 'Client',
   'repository': 'Repository',
   'prefix': 'Prefix',
-  'client-prefix': 'Prefix',
+  'repository-prefix': 'Prefix',
   'provider-prefix': 'Prefix' }
 
 export default Component.extend({

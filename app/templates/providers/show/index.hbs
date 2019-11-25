@@ -10,7 +10,7 @@
     {{/if}}
     {{#if (not-eq model.memberType "member_only")}}
       {{bar-chart 
-        data=model.clientCount 
+        data=model.repositoryCount 
         label="Repository" 
         model=model 
         link="providers.show.repositories"
