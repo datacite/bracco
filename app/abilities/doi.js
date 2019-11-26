@@ -33,10 +33,10 @@ export default Ability.extend({
         return false;
     }
   }),
-  canTransfer: computed('currentUser.role_id', 'currentUser.provider_id', 'model.repository.provider.id', 'repository.provider.id', 'model.repository.id', 'model.query.repository-id', function () {
+  canTransfer: computed('currentUser.role_id', 'currentUser.provider_id', 'model.repository.provider.id', 'repository.provider.id', 'model.repository.id', 'model.query.client-id', function () {
     switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
-        if (w("crossref.citations medra.citations kisti.citations jalc.citations op.citations").includes(this.get('model.repository.id')) || w("crossref.citations medra.citations kisti.citations jalc.citations op.citations").includes(this.get('model.query.repository-id'))) {
+        if (w("crossref.citations medra.citations kisti.citations jalc.citations op.citations").includes(this.get('model.repository.id')) || w("crossref.citations medra.citations kisti.citations jalc.citations op.citations").includes(this.get('model.query.client-id'))) {
           return false;
         } else {
           return true;
@@ -61,7 +61,7 @@ export default Ability.extend({
         return false;
     }
   }),
-  canUpdate: computed('currentUser.role_id', 'model.id', function () {
+  canUpdate: computed('currentUser.role_id', 'currentUser.client_id', 'model.id', function () {
     if (w("crossref.citations medra.citations kisti.citations jalc.citations op.citations").includes(this.get('model.id'))) {
       return false;
     } else {
@@ -70,51 +70,51 @@ export default Ability.extend({
       case 'provider_admin':
         return true;
       case 'client_admin':
-        return this.get('currentUser.repository_id') === this.get('model.id');
+        return this.get('currentUser.client_id') === this.get('model.repository.id');
       default:
         return false;
       }
     }
   }),
-  canUpload: computed('currentUser.role_id', 'currentUser.repository_id', 'model.query.repository-id', function () {
-    if (w("crossref.citations medra.citations kisti.citations jalc.citations op.citations").includes(this.get('model.query.repository-id'))) {
+  canUpload: computed('currentUser.role_id', 'currentUser.client_id', 'model.query.client-id', function () {
+    if (w("crossref.citations medra.citations kisti.citations jalc.citations op.citations").includes(this.get('model.query.client-id'))) {
       return false;
     } else {
       switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
       case 'client_admin':
-        return this.get('currentUser.repository_id') === this.get('model.query.repository-id');
+        return this.get('currentUser.client_id') === this.get('model.query.client-id');
       default:
         return false;
       }
     }
   }),
-  canCreate: computed('currentUser.role_id', 'currentUser.repository_id', 'model.query.repository-id', function () {
-    if (w("crossref.citations medra.citations kisti.citations jalc.citations op.citations").includes(this.get('model.query.repository-id'))) {
+  canCreate: computed('currentUser.role_id', 'currentUser.client_id', 'model.query.client-id', function () {
+    if (w("crossref.citations medra.citations kisti.citations jalc.citations op.citations").includes(this.get('model.query.client-id'))) {
       return false;
     } else {
       switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
       case 'client_admin':
-        return this.get('currentUser.repository_id') === this.get('model.query.repository-id');
+        return this.get('currentUser.client_id') === this.get('model.query.client-id');
       default:
         return false;
       }
     }
   }),
-  canDelete: computed('currentUser.role_id', 'model.repository.id', function () {
+  canDelete: computed('currentUser.role_id', 'currentUser.client_id', 'model.repository.id', function () {
     switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
       case 'client_admin':
-        return this.get('currentUser.repository_id') === this.get('model.repository.id');
+        return this.get('currentUser.client_id') === this.get('model.repository.id');
       default:
         return false;
     }
   }),
-  canModify: computed('currentUser.role_id', 'currentUser.repository_id', 'model.repository.id', function () {
+  canModify: computed('currentUser.role_id', 'currentUser.client_id', 'model.repository.id', function () {
     if (w("crossref.citations medra.citations kisti.citations jalc.citations op.citations").includes(this.get('model.repository.id'))) {
       return false;
     } else {
@@ -122,13 +122,13 @@ export default Ability.extend({
         case 'staff_admin':
           return true;
         case 'client_admin':
-          return this.get('currentUser.repository_id') === this.get('model.repository.id');
+          return this.get('currentUser.client_id') === this.get('model.repository.id');
         default:
           return false;
       }
     }
   }),
-  canEdit: computed('currentUser.role_id', 'currentUser.repository_id', 'model.repository.id', function () {
+  canEdit: computed('currentUser.role_id', 'currentUser.client_id', 'model.repository.id', function () {
     if (w("crossref.citations medra.citations kisti.citations jalc.citations op.citations").includes(this.get('model.repository.id'))) {
       return false;
     } else {
@@ -136,44 +136,44 @@ export default Ability.extend({
         case 'staff_admin':
           return true;
         case 'client_admin':
-          return this.get('currentUser.repository_id') === this.get('model.repository.id');
+          return this.get('currentUser.client_id') === this.get('model.repository.id');
         default:
           return false;
       }
   }
   }),
-  canForm: computed('currentUser.role_id', 'currentUser.repository_id', 'model.repository.id', function () {
+  canForm: computed('currentUser.role_id', 'currentUser.client_id', 'model.repository.id', function () {
     switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
       case 'client_admin':
-        return this.get('currentUser.repository_id') === 'demo.datacite' && this.get('currentUser.repository_id') === this.get('model.repository.id');
+        return this.get('currentUser.client_id') === 'demo.datacite' && this.get('currentUser.client_id') === this.get('model.repository.id');
       default:
         return false;
     }
   }),
-  canDetail: computed('currentUser.role_id', 'currentUser.provider_id', 'currentUser.repository_id', 'model.repository.id', 'model.repository.provider.id', 'model.state', function () {
+  canDetail: computed('currentUser.role_id', 'currentUser.provider_id', 'currentUser.client_id', 'model.repository.id', 'model.repository.provider.id', 'model.state', function () {
     switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
       case 'provider_admin':  
         return this.get('currentUser.provider_id') === this.get('model.repository.provider.id');
       case 'client_admin':
-        return this.get('currentUser.repository_id') === this.get('model.repository.id');
+        return this.get('currentUser.client_id') === this.get('model.repository.id');
       case 'user':
         return this.get('model.state') === 'findable';
       default:
         return false;
     }
   }),
-  canRead: computed('currentUser.role_id', 'currentUser.provider_id', 'currentUser.repository_id', 'model.repository.id', 'model.provider.id', 'model.state', function () {
+  canRead: computed('currentUser.role_id', 'currentUser.provider_id', 'currentUser.client_id', 'model.repository.id', 'model.provider.id', 'model.state', function () {
     switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
       case 'provider_admin':
         return this.get('currentUser.provider_id') === this.get('model.provider.id');
       case 'client_admin':
-        return this.get('currentUser.repository_id') === this.get('model.repository.id');
+        return this.get('currentUser.client_id') === this.get('model.repository.id');
       case 'user':
         return this.get('model.state') === 'findable';
       default:
