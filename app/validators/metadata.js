@@ -27,9 +27,9 @@ const metadata = BaseValidator.extend({
               xml: xml
             },
             relationships: {
-              repository: {
+              client: {
                 data: {
-                  type: "repositories",
+                  type: "clients",
                   id: repositoryId
                 }
               }
