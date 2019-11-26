@@ -2,6 +2,7 @@ import { inject as service } from '@ember/service';
 import Component from '@ember/component';
 import ENV from 'bracco/config/environment';
 import fetch from 'fetch';
+import { A } from '@ember/array';
 
 const stateList = {
   draft: ['draft', 'registered', 'findable'],
@@ -96,7 +97,7 @@ export default Component.extend({
     }
     let states = [];
     states = stateList[state];
-    states.forEach((item) => {
+    A(states).forEach((item) => {
       this.set(item, false);
     });
   },
@@ -105,10 +106,6 @@ export default Component.extend({
     selectPrefix(prefix) {
       this.model.set('prefix', prefix.id);
       this.model.set('doi', prefix.id + '/' + this.model.get('suffix'));
-      
-      if (prefix.id === '10.5072') {
-        this.model.set('state', 'draft');
-      }
       this.selectState(this.model.get('state'));
     },
     selectSuffix(suffix) {

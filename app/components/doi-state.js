@@ -1,4 +1,5 @@
 import Component from '@ember/component';
+import { A } from '@ember/array';
 
 const stateList = {
   draft: ['draft', 'registered', 'findable'],
@@ -31,7 +32,7 @@ export default Component.extend({
     }
     let states = [];
     states = stateList[state];
-    states.forEach((item) => {
+    A(states).forEach((item) => {
       this.set(item, false);
     });
   },

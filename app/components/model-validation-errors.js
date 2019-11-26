@@ -1,4 +1,5 @@
 import Component from '@ember/component';
+import { A } from '@ember/array';
 
 export default Component.extend({
 
@@ -8,7 +9,7 @@ export default Component.extend({
     let errors = this.model.get('validations.errors');
 
     if (errors.length > 0) {
-      errors.forEach((item) => {
+      A(errors).forEach((item) => {
         if (console.debug) {
           console.debug(item);
         } else {
