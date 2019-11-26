@@ -1,6 +1,6 @@
-import DS from "ember-data";
+import ApplicationSerializer from './application';
 
-export default DS.JSONAPISerializer.extend({
+export default ApplicationSerializer.extend({
   serialize(snapshot) {
     let json = this._super(...arguments);
 
@@ -48,6 +48,13 @@ export default DS.JSONAPISerializer.extend({
   },
   keyForAttribute(key) {
     return key;
+  },
+  keyForRelationship(key) {
+    if (key === 'repository') {
+      return 'client';
+    } else {
+      return this._super(...arguments);
+    }
   },
   normalizeFindRecordResponse(store, primaryModelClass, payload) {
     payload.data.attributes.meta = payload.meta || {};
