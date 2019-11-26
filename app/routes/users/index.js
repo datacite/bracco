@@ -33,8 +33,8 @@ export default Route.extend({
   },
 
   afterModel() {
-    if (this.can.cannot('read user')) {
+    if (this.can.cannot('read index')) {
       this.transitionTo('index');
     }
-  }
+  },
 });

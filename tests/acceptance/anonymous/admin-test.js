@@ -47,10 +47,10 @@ module('Acceptance | anonymous | admin', function(hooks) {
     assert.dom('div.motto h1').hasText('DataCite Fabrica Test');
   });
 
-  test('visiting prefix 10.5072', async function(assert) {
-    await visit('/prefixes/10.5072');
+  test('visiting prefix 10.5038', async function(assert) {
+    await visit('/prefixes/10.5038');
 
-    assert.equal(currentURL(), '/prefixes/10.5072');
+    assert.equal(currentURL(), '/prefixes/10.5038');
     assert.dom('div.alert-warning').includesText('The page was not found.');
   });
 
@@ -66,5 +66,19 @@ module('Acceptance | anonymous | admin', function(hooks) {
 
     assert.equal(currentURL(), '/');
     assert.dom('div.motto h1').hasText('DataCite Fabrica Test');
+  });
+
+  test('visiting users', async function(assert) {
+    await visit('/users');
+
+    assert.equal(currentURL(), '/');
+    assert.dom('div.motto h1').hasText('DataCite Fabrica Test');
+  });
+
+  test('visiting specific user', async function(assert) {
+    await visit('/users/0000-0003-1419-2405');
+
+    assert.equal(currentURL(), '/users/0000-0003-1419-2405');
+    assert.dom('h2.work').hasText('Martin Fenner');
   });
 });

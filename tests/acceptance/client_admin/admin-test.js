@@ -89,4 +89,34 @@ module('Acceptance | client_admin | admin', function(hooks) {
     assert.equal(currentURL(), '/repositories/tib.awi');
     assert.dom('h2.work').hasText('Alfred Wegener Institute');
   });
+
+  test('visiting users', async function(assert) {
+    await authenticateSession({
+      uid: 'tib.awi',
+      name: 'Alfred Wegener Institute',
+      role_id: 'client_admin',
+      provider_id: 'tib',
+      client_id: 'tib.awi'
+    });
+
+    await visit('/users');
+
+    assert.equal(currentURL(), '/repositories/tib.awi');
+    assert.dom('h2.work').hasText('Alfred Wegener Institute');
+  });
+
+  test('visiting specific user', async function(assert) {
+    await authenticateSession({
+      uid: 'tib.awi',
+      name: 'Alfred Wegener Institute',
+      role_id: 'client_admin',
+      provider_id: 'tib',
+      client_id: 'tib.awi'
+    });
+
+    await visit('/users/0000-0003-1419-2405');
+
+    assert.equal(currentURL(), '/users/0000-0003-1419-2405');
+    assert.dom('h2.work').hasText('Martin Fenner');
+  });
 });

@@ -112,11 +112,7 @@
       {{#each model.prefixes as |provider-prefix|}}
         <div class="panel panel-transparent">
           <div class="panel-body">
-            {{#if (eq provider-prefix.prefix.id "10.5072")}}
-              <h3 class="member">{{provider-prefix.prefix.id}}</h3>
-            {{else}}
-              <h3 class="work">{{#link-to "providers.show.prefixes.show" model.provider.id provider-prefix.prefix.id}}{{provider-prefix.prefix.id}}{{/link-to}}</h3>
-            {{/if}}
+            <h3 class="work">{{#link-to "providers.show.prefixes.show" model.provider.id provider-prefix.prefix.id}}{{provider-prefix.prefix.id}}{{/link-to}}</h3>
 
             <h5>{{pluralize provider-prefix.repositories.length "Repository" without-count=true}}</h5>
             {{#if provider-prefix.repositories}}

@@ -82,15 +82,15 @@ module('Acceptance | staff_admin | admin', function(hooks) {
     assert.dom('h2.work').hasText('DataCite');
   });
 
-  test('visiting prefix 10.5072', async function(assert) {
+  test('visiting prefix 10.5038', async function(assert) {
     await authenticateSession({
       uid: 'admin',
       name: 'Admin',
       role_id: 'staff_admin'
     });
-    await visit('/prefixes/10.5072');
+    await visit('/prefixes/10.5038');
 
-    assert.equal(currentURL(), '/prefixes/10.5072');
+    assert.equal(currentURL(), '/prefixes/10.5038');
     assert.dom('div.alert-warning').includesText('The page was not found.');
   });
 
@@ -121,4 +121,31 @@ module('Acceptance | staff_admin | admin', function(hooks) {
   //   assert.dom('button#edit-doi').includesText('Update DOI (Form)');
   //   assert.dom('button#modify-doi').includesText('Update DOI (File Upload)');
   // });
+
+  test('visiting users', async function(assert) {
+    await authenticateSession({
+      uid: 'admin',
+      name: 'Admin',
+      role_id: 'staff_admin'
+    });
+
+    await visit('/users');
+
+    assert.equal(currentURL(), '/users');
+    assert.dom('h2.work').hasText('DataCite');
+    assert.dom('h3.member-results').includesText('Users');
+  });
+
+  test('visiting specific user', async function(assert) {
+    await authenticateSession({
+      uid: 'admin',
+      name: 'Admin',
+      role_id: 'staff_admin'
+    });
+
+    await visit('/users/0000-0003-1419-2405');
+
+    assert.equal(currentURL(), '/users/0000-0003-1419-2405');
+    assert.dom('h2.work').hasText('Martin Fenner');
+  });
 });
