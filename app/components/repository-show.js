@@ -4,7 +4,9 @@ import { isArray } from '@ember/array';
 import { isBlank } from '@ember/utils';
 import fetch from 'fetch';
 import ENV from 'bracco/config/environment';
+import { capitalize } from '@ember/string';
 import langs from 'langs';
+import { A } from '@ember/array';
 
 const clientTypeList = [
   'repository',
@@ -65,7 +67,7 @@ export default Component.extend({
       console.log(error);
     });
   },
-  selectRepository(re3data) {
+  selectRe3Data(re3data) {
     if (re3data) {
       let self = this;
       this.store.findRecord('re3data', re3data.id).then(function (repo) {
@@ -74,7 +76,7 @@ export default Component.extend({
         self.get('repository').set('re3data', 'https://doi.org/' + repo.get('id'));
         self.get('repository').set('name', repo.get('repositoryName'));
         self.get('repository').set('description', repo.get('description'));
-        self.get('repository').set('alternateName', repo.get('additionalNames').get('firstObject').text);
+        self.get('repository').set('alternateName', A(repo.get('additionalNames')).get('firstObject').text);
         self.get('repository').set('url', repo.get('repositoryUrl'));
         if (repo.get('software').length > 0) {
           let software = repo.get('software')[0].name;
@@ -83,18 +85,18 @@ export default Component.extend({
           } else if (software === "unknown") {
             software = "Other";
           }
-          self.get('repository').set('software', software.capitalize());
+          self.get('repository').set('software', capitalize(software));
         }
         if (repo.get('repositoryLanguages').length > 0) {
-          self.get('repository').set('language', repo.get('repositoryLanguages').map(function(l) {
+          self.get('repository').set('language', A(repo.get('repositoryLanguages')).map(function(l) {
             return langs.where("2", l.text)["1"];
           }));
         }
         if (repo.get('types').length > 0) {
-          self.get('repository').set('repositoryType', repo.get('types').mapBy('text'));
+          self.get('repository').set('repositoryType', A(repo.get('types')).mapBy('text'));
         }
         if (repo.get('certificates').length > 0) {
-          self.get('repository').set('certificate', repo.get('certificates').mapBy('text'));
+          self.get('repository').set('certificate', A(repo.get('certificates')).mapBy('text'));
         }
       });
     } else {
@@ -172,11 +174,11 @@ export default Component.extend({
         console.log(reason);
       });
     },
-    searchRepository(query) {
+    searchRe3Data(query) {
       this.set('repositories', this.store.query('re3data', { 'query': query, 'page[size]': 25 }));
     },
-    selectRepository(re3data) {
-      this.selectRepository(re3data);
+    selectRe3Data(re3data) {
+      this.selectRe3Data(re3data);
     },
     addLanguage() {
       this.model.get('language').pushObject(null);
