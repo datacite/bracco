@@ -19,7 +19,7 @@ export default Ability.extend({
     switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
       case 'provider_admin':
-      case 'repository_admin':
+      case 'client_admin':
         return true;
       default:
         return false;
@@ -69,7 +69,7 @@ export default Ability.extend({
       case 'staff_admin':
       case 'provider_admin':
         return true;
-      case 'repository_admin':
+      case 'client_admin':
         return this.get('currentUser.repository_id') === this.get('model.id');
       default:
         return false;
@@ -83,7 +83,7 @@ export default Ability.extend({
       switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
-      case 'repository_admin':
+      case 'client_admin':
         return this.get('currentUser.repository_id') === this.get('model.query.repository-id');
       default:
         return false;
@@ -97,7 +97,7 @@ export default Ability.extend({
       switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
-      case 'repository_admin':
+      case 'client_admin':
         return this.get('currentUser.repository_id') === this.get('model.query.repository-id');
       default:
         return false;
@@ -108,7 +108,7 @@ export default Ability.extend({
     switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
-      case 'repository_admin':
+      case 'client_admin':
         return this.get('currentUser.repository_id') === this.get('model.repository.id');
       default:
         return false;
@@ -121,7 +121,7 @@ export default Ability.extend({
       switch (this.get('currentUser.role_id')) {
         case 'staff_admin':
           return true;
-        case 'repository_admin':
+        case 'client_admin':
           return this.get('currentUser.repository_id') === this.get('model.repository.id');
         default:
           return false;
@@ -135,7 +135,7 @@ export default Ability.extend({
       switch (this.get('currentUser.role_id')) {
         case 'staff_admin':
           return true;
-        case 'repository_admin':
+        case 'client_admin':
           return this.get('currentUser.repository_id') === this.get('model.repository.id');
         default:
           return false;
@@ -146,7 +146,7 @@ export default Ability.extend({
     switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
-      case 'repository_admin':
+      case 'client_admin':
         return this.get('currentUser.repository_id') === 'demo.datacite' && this.get('currentUser.repository_id') === this.get('model.repository.id');
       default:
         return false;
@@ -158,7 +158,7 @@ export default Ability.extend({
         return true;
       case 'provider_admin':  
         return this.get('currentUser.provider_id') === this.get('model.repository.provider.id');
-      case 'repository_admin':
+      case 'client_admin':
         return this.get('currentUser.repository_id') === this.get('model.repository.id');
       case 'user':
         return this.get('model.state') === 'findable';
@@ -172,7 +172,7 @@ export default Ability.extend({
         return true;
       case 'provider_admin':
         return this.get('currentUser.provider_id') === this.get('model.provider.id');
-      case 'repository_admin':
+      case 'client_admin':
         return this.get('currentUser.repository_id') === this.get('model.repository.id');
       case 'user':
         return this.get('model.state') === 'findable';
