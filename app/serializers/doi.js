@@ -49,6 +49,7 @@ export default ApplicationSerializer.extend({
   keyForAttribute(key) {
     return key;
   },
+  // don't return this._super('client')
   keyForRelationship(key) {
     if (key === 'repository') {
       return 'client';

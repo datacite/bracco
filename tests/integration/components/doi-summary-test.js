@@ -1,12 +1,17 @@
-// import { moduleForComponent, test } from 'ember-qunit';
-// import hbs from 'htmlbars-inline-precompile';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { setupFactoryGuy, make } from 'ember-data-factory-guy';
+import { render } from '@ember/test-helpers';
+import hbs from 'htmlbars-inline-precompile';
 
-// moduleForComponent('doi-summary', 'Integration | Component | doi summary', {
-//   integration: true
-// });
+module('Integration | Component | doi summary', function(hooks) {
+  setupRenderingTest(hooks);
+  setupFactoryGuy(hooks);
 
-// test('it renders', function(assert) {
-//   this.render(hbs`{{doi-summary}}`);
+  test('it renders', async function(assert) {
+    this.set('model', make('doi'));
+    await render(hbs`{{doi-summary model=model}}`);
 
-//   assert.dom('*').hasText('One or more names or titles by which the resource is known. Title Type (optional) Language (optional)');
-// });
+    assert.dom('*').hasText('10.25499/jjva5eho424vep7dz2pson7qz Dataset Substance published 2017 via Royal Society of Chemistry');
+  });
+});
