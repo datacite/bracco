@@ -1,9 +1,14 @@
 <label class="control-label col-md-3">Metadata</label>
 <div class="col-md-9">
   <div class="btn-toolbar btn-sm btn-file">
-    {{#x-file-input name="files" multiple=false action=(action "didSelectFiles") accept="application/xml,application/json,text/plain,.bib,.ris"}}
-      <span class="btn btn-sm">{{fa-icon "upload"}} Upload File</span>
-    {{/x-file-input}}
+    {{#file-upload name="files"
+                   multiple=false
+                   accept="application/xml,application/json,text/plain,.bib,.ris"
+                   onfileadd=(action "didSelectFiles")}}
+      <span class="btn btn-sm">
+        {{fa-icon "upload"}} Upload File
+      </span>
+    {{/file-upload}}
   </div>
 </div>
 

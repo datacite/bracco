@@ -1,4 +1,5 @@
 import Component from '@ember/component';
+import FileReader from 'ember-file-upload/system/file-reader';
 
 export default Component.extend({
   b64DecodeUnicode(str) {
@@ -9,17 +10,15 @@ export default Component.extend({
   },
 
   actions: {
-    didSelectFiles(files, resetInput) {
-      var reader = new FileReader();
+    didSelectFiles(file) {
+      let reader = new FileReader();
       let self = this;
-      reader.onload = function(e) {
-        var data = e.target.result;
-        var xml = self.b64DecodeUnicode(data.split(",")[1]);
+      
+      reader.readAsText(file.blob).then((xml) => {
         self.get('model').set('xml', xml);
-      }
-      reader.readAsDataURL(files[0]);
-
-      resetInput();
+      }, (err) => {
+        console.error(err);
+      });
     }
   }
 });
