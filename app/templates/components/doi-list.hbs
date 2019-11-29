@@ -145,7 +145,7 @@
       </div>
     </div>
   {{/if}}
-  {{#if (not-eq link "repositories.show.dois" or model.meta.clients model.query.client-id)}}
+  {{#if (and (not (is-empty model.content)) (not-eq link "repositories.show.dois" or model.meta.clients model.query.client-id))}}
     <div class="panel facets">
       <div class="panel-body">
         <h4>Repository</h4>
