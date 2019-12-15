@@ -8,6 +8,7 @@ export function startSentry() {
     dsn: config.SENTRY_DSN,
     release: config.APP_NAME + ':' + config.VERSION,
     integrations: [new Ember()],
+    ignoreErrors: ['TransitionAborted'],
 
     // beforeSend(event, hint) {
     //   let error = hint.originalException;
