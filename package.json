@@ -1,6 +1,6 @@
 {
   "name": "bracco",
-  "version": "3.1.11",
+  "version": "3.2.0",
   "private": true,
   "description": "Fabrica",
   "repository": {
@@ -42,8 +42,8 @@
       "electronInstallerDebian": {},
       "electronInstallerRedhat": {},
       "github_repository": {
-        "owner": "",
-        "name": ""
+        "owner": "datacite",
+        "name": "bracco"
       },
       "windowsStoreConfig": {
         "packageName": "",
@@ -52,8 +52,8 @@
     }
   },
   "dependencies": {
-    "@sentry/browser": "^5.9.1",
-    "@sentry/integrations": "^5.8.0",
+    "@sentry/browser": "^5.10.2",
+    "@sentry/integrations": "^5.10.2",
     "acorn": "^6.0.5",
     "cldr-core": "^29.0.0",
     "electron-compile": "^6.4.4",
@@ -82,6 +82,12 @@
   ],
   "devDependencies": {
     "@ember/optional-features": "^0.7.0",
+    "@types/ember": "^3.1.1",
+    "@types/ember-data": "^3.1.9",
+    "@types/ember-qunit": "^3.4.7",
+    "@types/ember__test-helpers": "^0.7.9",
+    "@types/qunit": "^2.9.0",
+    "@types/rsvp": "^4.0.3",
     "async-promise-queue": "^1.0.2",
     "babel-eslint": "10",
     "babel-plugin-transform-async-to-generator": "^6.24.1",
@@ -136,6 +142,8 @@
     "ember-cli-sri": "^2.1.1",
     "ember-cli-string-helpers": "^4.0.0",
     "ember-cli-template-lint": "^1.0.0-beta.1",
+    "ember-cli-typescript": "^3.1.2",
+    "ember-cli-typescript-blueprints": "^3.0.0",
     "ember-cli-uglify": "^2.1.0",
     "ember-composable-helpers": "^2.2.0",
     "ember-copy": "^1.0.0",
@@ -179,6 +187,7 @@
     "morgan": "^1.9.1",
     "qunit-dom": "^0.8.4",
     "sanitize-html": "^1.14.1",
+    "typescript": "^3.7.4",
     "urijs": "^1.18.12",
     "vkbeautify": "^0.99.3",
     "xml2js": "^0.4.19"
