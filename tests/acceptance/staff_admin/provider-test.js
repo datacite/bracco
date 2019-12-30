@@ -16,7 +16,7 @@ module('Acceptance | staff_admin | provider', function(hooks) {
 
     assert.equal(currentURL(), '/providers/tib');
     assert.dom('h2.work').hasText('German National Library of Science and Technology');
-    assert.dom('li.nav-link.active a').hasText('Info');
+    assert.dom('li a.nav-link.active').hasText('Info');
   });
 
   // test('visiting provider TIB settings', async function(assert) {
@@ -79,7 +79,7 @@ module('Acceptance | staff_admin | provider', function(hooks) {
 
     assert.equal(currentURL(), '/providers/tib/dois');
     assert.dom('h2.work').hasText('German National Library of Science and Technology');
-    assert.dom('li.nav-link.active a').hasText('DOIs');
+    assert.dom('li a.nav-link.active').hasText('DOIs');
     assert.dom('button#add-doi').doesNotExist();
   });
 
@@ -93,6 +93,6 @@ module('Acceptance | staff_admin | provider', function(hooks) {
 
     assert.equal(currentURL(), '/providers/tib/prefixes');
     assert.dom('h2.work').hasText('German National Library of Science and Technology');
-    assert.dom('li.nav-link.active a').hasText('Prefixes');
+    assert.dom('li a.nav-link.active').hasText('Prefixes');
   });
 });

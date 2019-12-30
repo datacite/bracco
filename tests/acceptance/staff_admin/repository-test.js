@@ -16,7 +16,7 @@ module('Acceptance | staff_admin | repository', function(hooks) {
 
     assert.equal(currentURL(), '/repositories/tib.awi');
     assert.dom('h2.work').hasText('Alfred Wegener Institute');
-    assert.dom('li.nav-link.active a').hasText('Info');
+    assert.dom('li a.nav-link.active').hasText('Info');
   });
 
   test('visiting repository AWI settings', async function(assert) {
@@ -29,7 +29,7 @@ module('Acceptance | staff_admin | repository', function(hooks) {
 
     assert.equal(currentURL(), '/repositories/tib.awi/settings');
     assert.dom('h2.work').hasText('Alfred Wegener Institute');
-    assert.dom('li.nav-link.active a').hasText('Settings');
+    assert.dom('li a.nav-link.active').hasText('Settings');
     assert.dom('button#edit-repository').includesText('Update Repository');
     assert.dom('button#delete-repository').includesText('Delete');
   });
@@ -44,7 +44,7 @@ module('Acceptance | staff_admin | repository', function(hooks) {
 
   //   assert.equal(currentURL(), '/repositories/tib.awi/prefixes');
   //   assert.dom('h2.work').hasText('Alfred Wegener Institute');
-  //   assert.dom('li.nav-link.active a').hasText('Prefixes');
+  //   assert.dom('li a.nav-link.active').hasText('Prefixes');
   // });
 
   test('visiting repository AWI dois', async function(assert) {

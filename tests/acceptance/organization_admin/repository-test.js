@@ -17,7 +17,7 @@ module('Acceptance | organization_admin | repository', function(hooks) {
 
     assert.equal(currentURL(), '/repositories/datacite.datacite');
     assert.dom('h2.work').hasText('DataCite Repository');
-    assert.dom('li.nav-link.active a').hasText('Info');
+    assert.dom('li a.nav-link.active').hasText('Info');
   });
 
   test('visiting repository DataCite Journal settings', async function(assert) {
@@ -31,7 +31,7 @@ module('Acceptance | organization_admin | repository', function(hooks) {
 
     assert.equal(currentURL(), '/repositories/datacite.datacite/settings');
     assert.dom('h2.work').hasText('DataCite Repository');
-    assert.dom('li.nav-link.active a').hasText('Settings');
+    assert.dom('li a.nav-link.active').hasText('Settings');
     assert.dom('button#edit-repository').includesText('Update Repository');
     assert.dom('button#delete-repository').includesText('Delete');
   });
@@ -47,7 +47,7 @@ module('Acceptance | organization_admin | repository', function(hooks) {
 
   //   assert.equal(currentURL(), '/repositories/datacite.datacite/prefixes');
   //   assert.dom('h2.work').hasText('DataCite Repository');
-  //   assert.dom('li.nav-link.active a').hasText('Prefixes');
+  //   assert.dom('li a.nav-link.active').hasText('Prefixes');
   // });
 
   test('visiting repository DataCite Journal dois', async function(assert) {
@@ -61,7 +61,7 @@ module('Acceptance | organization_admin | repository', function(hooks) {
 
     assert.equal(currentURL(), '/repositories/datacite.datacite/dois');
     assert.dom('h2.work').hasText('DataCite Repository');
-    assert.dom('li.nav-link.active a').hasText('DOIs');
+    assert.dom('li a.nav-link.active').hasText('DOIs');
     
     assert.dom('h3.work').exists();
     assert.dom('a#new-doi').doesNotExist();

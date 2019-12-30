@@ -26,12 +26,25 @@
       <h2 class="work">{{model.name}}{{#if (not model.isActive)}} <span class="small icon-warning">account not active</span>{{/if}}</h2>
 
       <div class="tab-content nav-tabs-member">
-        {{#bs-nav type="tabs" as |nav|}}
-          {{#nav.item route="repositories.show.index" model=model.id class="nav-link"}}Info{{/nav.item}}
-          {{#nav.item route="repositories.show.settings" model=model.id class="nav-link"}}Settings{{/nav.item}}
-          {{#nav.item route="repositories.show.prefixes" model=model.id class="nav-link"}}Prefixes{{/nav.item}}
-          {{#nav.item route="repositories.show.dois" model=model.id class="nav-link doi"}}DOIs{{/nav.item}}
-        {{/bs-nav}}
+        <BsNav
+          @type="tabs"
+          @justified={{false}}
+          @stacked={{false}}
+          @fill={{false}} as |nav|
+        >
+          <nav.item>
+            <nav.link-to @route="repositories.show.index" model="model.id" class="nav-link">Info</nav.link-to>
+          </nav.item>
+          <nav.item>
+            <nav.link-to @route="repositories.show.settings" model="model.id" class="nav-link">Settings</nav.link-to>
+          </nav.item>
+          <nav.item>
+            <nav.link-to @route="repositories.show.prefixes" model="model.id" class="nav-link">Prefixes</nav.link-to>
+          </nav.item>
+          <nav.item>
+            <nav.link-to @route="repositories.show.dois" model="model.id" class="nav-link">DOIs</nav.link-to>
+          </nav.item>
+        </BsNav>
       </div>
     </div>
 

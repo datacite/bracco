@@ -1,15 +1,34 @@
 <h2 class="work">DataCite</h2>
 
 <div class="tab-content nav-tabs-member">
-  {{#bs-nav type="tabs" as |nav|}}
-    {{#nav.item route="index" class="nav-link"}}Info{{/nav.item}}
-    {{#nav.item route="settings" class="nav-link"}}Settings{{/nav.item}}
-    {{#nav.item route="providers" class="nav-link"}}Members{{/nav.item}}
-    {{#nav.item route="repositories" class="nav-link"}}Repositories{{/nav.item}}
+  <BsNav
+    @type="tabs"
+    @justified={{false}}
+    @stacked={{false}}
+    @fill={{false}} as |nav|
+  >
+    <nav.item>
+      <nav.link-to @route="index" class="nav-link">Info</nav.link-to>
+    </nav.item>
+    <nav.item>
+      <nav.link-to @route="settings" class="nav-link">Settings</nav.link-to>
+    </nav.item>
+    <nav.item>
+      <nav.link-to @route="providers" class="nav-link">Members</nav.link-to>
+    </nav.item>
+    <nav.item>
+      <nav.link-to @route="repositories" class="nav-link">Repositories</nav.link-to>
+    </nav.item>
     {{#if (feature-flag 'showResearchers')}}
-      {{#nav.item route="users" class="nav-link"}}Users{{/nav.item}}
+      <nav.item>
+        <nav.link-to @route="users" class="nav-link">Users</nav.link-to>
+      </nav.item>
     {{/if}}
-    {{#nav.item route="prefixes" class="nav-link"}}Prefixes{{/nav.item}}
-    {{#nav.item route="dois" class="nav-link doi"}}DOIs{{/nav.item}}
-  {{/bs-nav}}
+    <nav.item>
+      <nav.link-to @route="prefixes" class="nav-link">Prefixes</nav.link-to>
+    </nav.item>
+    <nav.item>
+      <nav.link-to @route="dois" class="nav-link">DOIs</nav.link-to>
+    </nav.item>
+  </BsNav>
 </div>

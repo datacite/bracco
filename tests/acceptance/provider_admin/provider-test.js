@@ -17,7 +17,7 @@ module('Acceptance | provider_admin | provider', function(hooks) {
 
     assert.equal(currentURL(), '/providers/tib');
     assert.dom('h2.work').hasText('German National Library of Science and Technology');
-    assert.dom('li.nav-link.active a').hasText('Info');
+    assert.dom('li a.nav-link.active').hasText('Info');
   });
 
   test('visiting provider TIB settings', async function(assert) {
@@ -31,7 +31,7 @@ module('Acceptance | provider_admin | provider', function(hooks) {
 
     assert.equal(currentURL(), '/providers/tib/settings');
     assert.dom('h2.work').hasText('German National Library of Science and Technology');
-    assert.dom('li.nav-link.active a').hasText('Settings');
+    assert.dom('li a.nav-link.active').hasText('Settings');
     assert.dom('button#edit-provider').includesText('Update Account');
     assert.dom('button#delete-provider').doesNotExist();
   });
@@ -86,7 +86,7 @@ module('Acceptance | provider_admin | provider', function(hooks) {
 
     assert.equal(currentURL(), '/providers/tib/dois');
     assert.dom('h2.work').hasText('German National Library of Science and Technology');
-    assert.dom('li.nav-link.active a').hasText('DOIs');
+    assert.dom('li a.nav-link.active').hasText('DOIs');
     assert.dom('a#create-doi').doesNotExist();
     assert.dom('a#upload-doi').doesNotExist();
   });
@@ -120,6 +120,6 @@ module('Acceptance | provider_admin | provider', function(hooks) {
 
     assert.equal(currentURL(), '/providers/tib/prefixes');
     assert.dom('h2.work').hasText('German National Library of Science and Technology');
-    assert.dom('li.nav-link.active a').hasText('Prefixes');
+    assert.dom('li a.nav-link.active').hasText('Prefixes');
   });
 });

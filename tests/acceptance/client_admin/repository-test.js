@@ -45,7 +45,7 @@ module('Acceptance | client_admin | repository', function(hooks) {
 
     assert.equal(currentURL(), '/repositories/tib.awi');
     assert.dom('h2.work').hasText('Alfred Wegener Institute');
-    assert.dom('li.nav-link.active a').hasText('Info');
+    assert.dom('li a.nav-link.active').hasText('Info');
   });
 
   test('visiting repository AWI settings', async function(assert) {
@@ -53,7 +53,7 @@ module('Acceptance | client_admin | repository', function(hooks) {
 
     assert.equal(currentURL(), '/repositories/tib.awi/settings');
     assert.dom('h2.work').hasText('Alfred Wegener Institute');
-    assert.dom('li.nav-link.active a').hasText('Settings');
+    assert.dom('li a.nav-link.active').hasText('Settings');
     assert.dom('button#edit-repository').includesText('Update Account');
     assert.dom('button#delete-repository').doesNotExist();
   });
@@ -63,7 +63,7 @@ module('Acceptance | client_admin | repository', function(hooks) {
 
   //   assert.equal(currentURL(), '/repositories/tib.awi/prefixes');
   //   assert.dom('h2.work').hasText('Alfred Wegener Institute');
-  //   assert.dom('li.nav-link.active a').hasText('Prefixes');
+  //   assert.dom('li a.nav-link.active').hasText('Prefixes');
   // });
 
   test('visiting repository AWI dois', async function(assert) {
@@ -71,7 +71,7 @@ module('Acceptance | client_admin | repository', function(hooks) {
 
     assert.equal(currentURL(), '/repositories/tib.awi/dois');
     assert.dom('h2.work').hasText('Alfred Wegener Institute');
-    assert.dom('li.nav-link.active a').hasText('DOIs');
+    assert.dom('li a.nav-link.active').hasText('DOIs');
     // assert.dom('a#new-doi').includesText('Create (Form)');
     // assert.dom('a#upload-doi').includesText('Create (File Upload)');
     assert.dom('a#transfer-dois').doesNotExist();

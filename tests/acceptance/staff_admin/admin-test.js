@@ -27,7 +27,7 @@ module('Acceptance | staff_admin | admin', function(hooks) {
     
     assert.equal(currentURL(), '/');
     assert.dom('h2.work').hasText('DataCite');
-    assert.dom('li.nav-link.active a').hasText('Info');
+    assert.dom('li a.nav-link.active').hasText('Info');
   });
 
   // the following pages require authentication. Redirects to homepage otherwise
@@ -41,7 +41,7 @@ module('Acceptance | staff_admin | admin', function(hooks) {
 
     assert.equal(currentURL(), '/settings');
     assert.dom('h2.work').hasText('DataCite');
-    assert.dom('li.nav-link.active a').hasText('Settings');
+    assert.dom('li a.nav-link.active').hasText('Settings');
   });
 
   test('visiting providers', async function(assert) {
@@ -54,7 +54,7 @@ module('Acceptance | staff_admin | admin', function(hooks) {
 
     assert.equal(currentURL(), '/providers');
     assert.dom('h2.work').hasText('DataCite');
-    assert.dom('li.nav-link.active a').hasText('Members');
+    assert.dom('li a.nav-link.active').hasText('Members');
   });
 
   test('visiting repositories', async function(assert) {
@@ -67,7 +67,7 @@ module('Acceptance | staff_admin | admin', function(hooks) {
 
     assert.equal(currentURL(), '/repositories');
     assert.dom('h2.work').hasText('DataCite');
-    assert.dom('li.nav-link.active a').hasText('Repositories');
+    assert.dom('li a.nav-link.active').hasText('Repositories');
   });
 
   test('visiting prefixes', async function(assert) {
@@ -104,7 +104,7 @@ module('Acceptance | staff_admin | admin', function(hooks) {
 
   //   assert.equal(currentURL(), '/dois');
   //   assert.dom('h2.work').hasText('DataCite');
-  //   assert.dom('li.nav-link.active a').hasText('DOIs');
+  //   assert.dom('li a.nav-link.active').hasText('DOIs');
   // });
 
   // test('visiting specific doi', async function(assert) {
