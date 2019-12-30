@@ -83,7 +83,6 @@
   "devDependencies": {
     "@babel/core": "^7.7.7",
     "@ember/optional-features": "^1.1.0",
-    "@glimmer/component": "^1.0.0",
     "@types/ember": "^3.1.1",
     "@types/ember-data": "^3.1.9",
     "@types/ember-qunit": "^3.4.7",
@@ -150,7 +149,7 @@
     "ember-composable-helpers": "^3.0.2",
     "ember-copy": "^1.0.0",
     "ember-cp-validations": "^4.0.0-beta.6",
-    "ember-data": "~3.15.0",
+    "ember-data": "~3.11.4",
     "ember-data-factory-guy": "^3.9.5",
     "ember-data-model-fragments": "^4.0.0",
     "ember-export-application-global": "^2.0.1",
@@ -171,7 +170,7 @@
     "ember-resolver": "^7.0.0",
     "ember-route-action-helper": "^2.0.6",
     "ember-simple-auth": "^2.1.1",
-    "ember-source": "^3.15.0",
+    "ember-source": "^3.12.0",
     "ember-tracker": "^1.0.0",
     "ember-truncate": "^2.0.1",
     "ember-truth-helpers": "^2.1.0",
@@ -197,8 +196,5 @@
   },
   "engines": {
     "node": "8.* || >= 10.*"
-  },
-  "ember": {
-    "edition": "octane"
   }
 }
