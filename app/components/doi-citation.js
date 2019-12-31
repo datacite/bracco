@@ -2,6 +2,7 @@ import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 import fetch from 'fetch';
 import ENV from 'bracco/config/environment';
+import FileReader from 'ember-file-upload/system/file-reader';
 
 export default Component.extend({
   currentUser: service(),
@@ -46,10 +47,11 @@ export default Component.extend({
         self.set('citationOutput', response);
       } else {
         let reader = new FileReader();
-        reader.onloadend = function() {
-          self.set('citationOutput', reader.result);
-        }
-        reader.readAsText(response);
+        reader.readAsText(response).then((result) => {
+          self.set('citationOutput', result);
+        }, (err) => {
+          console.error(err);
+        });
       }
     });
     //this.get('router').transitionTo({ queryParams: { citation: citation } });

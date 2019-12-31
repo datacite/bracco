@@ -4,6 +4,7 @@ import Component from '@ember/component';
 import { isPresent } from '@ember/utils';
 import vkbeautify from 'vkbeautify';
 import ENV from 'bracco/config/environment';
+import FileReader from 'ember-file-upload/system/file-reader';
 
 export default Component.extend({
   currentUser: service(),
@@ -73,11 +74,12 @@ export default Component.extend({
         if (typeof response === 'string') {
           self.set('output', vkbeautify.json(JSON.stringify(response)));
         } else {
-          let reader = new FileReader();
-          reader.onloadend = function() {
-            self.set('output', vkbeautify.xml(reader.result));
-          }
-          reader.readAsText(response);
+          let reader = new FileReader();      
+          reader.readAsText(response).then((result) => {
+            self.set('output', vkbeautify.xml(result));
+          }, (err) => {
+            console.error(err);
+          });
         }
       });
     }
