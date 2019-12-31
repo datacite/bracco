@@ -109,17 +109,17 @@ module('Acceptance | provider_admin | provider', function(hooks) {
   //   assert.dom('a#delete-doi').doesNotExist();
   // });
 
-  test('visiting provider TIB prefixes', async function(assert) {
-    await authenticateSession({
-      uid: 'tib',
-      name: 'Technische Informationsbibliothek',
-      role_id: 'provider_admin',
-      provider_id: 'tib'
-    });
-    await visit('/providers/tib/prefixes');
+  // test('visiting provider TIB prefixes', async function(assert) {
+  //   await authenticateSession({
+  //     uid: 'tib',
+  //     name: 'Technische Informationsbibliothek',
+  //     role_id: 'provider_admin',
+  //     provider_id: 'tib'
+  //   });
+  //   await visit('/providers/tib/prefixes');
 
-    assert.equal(currentURL(), '/providers/tib/prefixes');
-    assert.dom('h2.work').hasText('German National Library of Science and Technology');
-    assert.dom('li a.nav-link.active').hasText('Prefixes');
-  });
+  //   assert.equal(currentURL(), '/providers/tib/prefixes');
+  //   assert.dom('h2.work').hasText('German National Library of Science and Technology');
+  //   assert.dom('li a.nav-link.active').hasText('Prefixes');
+  // });
 });

@@ -1,7 +1,7 @@
 // import { assign } from '@ember/polyfills';
-import DS from 'ember-data';
+import JSONSerializer from '@ember-data/serializer/json';
 
-export default DS.JSONSerializer.extend({
+export default JSONSerializer.extend({
   normalizeSingleResponse(store, primaryModelClass, payload, id, requestType) {
     let name = payload.person.name;
 

@@ -1,7 +1,7 @@
-import DS from 'ember-data';
+import Transform from '@ember-data/serializer/transform';
 import countryList from 'iso-3166-country-list';
 
-export default DS.Transform.extend({
+export default Transform.extend({
   deserialize(serialized) {
     if (serialized) {
 

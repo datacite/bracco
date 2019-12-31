@@ -3,14 +3,14 @@
   <div class="col-md-9">
     {{#each model.creators as |creator index|}}
       {{#if (gt index 0)}}
-        {{doi-creator model=model fragment=creator form=form index=index}}
+        <DoiCreator @model={{model}} @fragment={{creator}} @form={{form}} @index={{index}} />
       {{else}}
-        {{doi-creator model=model fragment=creator form=form index=index setValidationClass=(action "setValidationClass")}}
+        <DoiCreator @model={{model}} @fragment={{creator}} @form={{form}} @index={{index}} @setValidationClass={{action "setValidationClass"}} />
       {{/if}}
     {{/each}}
 
     {{#if (lte model.creators.length 24)}}
-      {{#bs-button id="add-creator" class="btn-sm" outline=true onClick=(action "addCreator")}}{{fa-icon "plus"}} Add another creator{{/bs-button}}
+      <BsButton @id="add-creator" @class="btn-sm" @outline={{true}} @onClick={{action "addCreator"}}>{{fa-icon "plus"}} Add another creator</BsButton>
     {{/if}}
   </div>
 </div>

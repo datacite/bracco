@@ -1,11 +1,11 @@
 <div class="panel panel-transparent">
   <div class="panel-body">
     <div class="col-md-9 col-md-offset-3">
-      {{#bs-form formLayout="vertical" model=model onSubmit=(action "destroy") submitOnEnter=true as |form|}}
-        {{#form.group }}
+      <BsForm @formLayout="vertical" @model={{model}} @onSubmit={{action "destroy"}} @submitOnEnter={{true}} as |form|>
+        <form.group>
           <label class="control-label">Are you sure you want to delete the DOI {{model.doi}}? This action cannot be undone.</label>
-          {{form.element controlType="text" property='confirmDoi' helpText='Please add the DOI to confirm.' showValidationOn="input" autofocus=true}}
-        {{/form.group}}
+          <form.element @controlType="text" @property="confirmDoi" @helpText="Please add the DOI to confirm." @showValidationOn="input" @autofocus={{true}} />
+        </form.group>
 
         <div class="pseudo-footer">
           <div class="btn-toolbar pull-right">
@@ -14,7 +14,7 @@
           </div>
           <div class="clearfix"/>
         </div>
-      {{/bs-form}}
+      </BsForm>
     </div>
   </div>
 </div>

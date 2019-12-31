@@ -27,8 +27,8 @@ export default Component.extend({
   classNames: ['col-lg-3', 'col-md-4'],
   data: [],
   count: computed('data', function() {
-    if (this.get('data')) {
-      return this.get('data').reduce(function (a, b) {
+    if (this.data) {
+      return this.data.reduce(function (a, b) {
         return a + b.count;
       }, 0);
     } else {

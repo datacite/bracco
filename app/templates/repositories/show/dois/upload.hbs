@@ -8,21 +8,20 @@
       </div>
     </div>
 
-    {{#bs-form formLayout="horizontal" horizontalLabelGridClass="col-md-3" model=model.doi onSubmit=(action "submit"
-    model.doi) as |form|}}
-    {{doi-doi model=model.doi repository=model.repository form=form}}
+    <BsForm @formLayout="horizontal" @horizontalLabelGridClass="col-md-3" @model={{model.doi}} @onSubmit={{action "submit" model.doi}} as |form|>
+    <DoiDoi @model={{model.doi}} @repository={{model.repository}} @form={{form}} />
 
-    {{form.element controlType="text" label="URL" property="url" helpText="The location of the landing page with more
-    information about the resource." required=false}}
+    <form.element @controlType="text" @label="URL" @property="url" @helpText="The location of the landing page with more
+    information about the resource." @required={{false}} />
 
-    {{doi-upload model=model.doi form=form}}
+    <DoiUpload @model={{model.doi}} @form={{form}} />
 
-    {{model-validation-errors model=model.doi form=form}}
+    <ModelValidationErrors @model={{model.doi}} @form={{form}} />
 
     <div class="col-md-9 col-md-offset-3">
       <button type="submit" class="btn btn-sm btn-fill">Create DOI</button>
       <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
     </div>
-    {{/bs-form}}
+    </BsForm>
   </div>
 </div>

@@ -5,12 +5,8 @@
         <div class="panel-body">
           <div class="btn-toolbar">
             <div class="btn-group btn-group-sm">
-              {{#link-to 
-                "providers.show.prefixes.new" 
-                model.provider.id 
-                class="btn btn-warning"
-              }}{{fa-icon "link"}}Assign Prefix
-              {{/link-to}}
+              <LinkTo @route="providers.show.prefixes.new" @model={{model.provider.id}} class="btn btn-warning">{{fa-icon "link"}}Assign Prefix
+              </LinkTo>
             </div>
           </div>
         </div>
@@ -26,19 +22,15 @@
     {{#if model.prefixes.meta.states}}
       <div class="panel facets add">
         <div class="panel-body">
-          <h4>State <span class="small">{{fa-icon "question-circle-o"}}{{#bs-tooltip placement="top"}}Filter prefixes by whether they have been assigned to a repository.{{/bs-tooltip}}</span></h4>
+          <h4>State <span class="small">{{fa-icon "question-circle-o"}}<BsTooltip @placement="top">Filter prefixes by whether they have been assigned to a repository.</BsTooltip></span></h4>
           <ul>
             {{#each model.prefixes.meta.states as |state|}}
               <li>
                 {{#if model.prefixes.query.state}}
-                  {{#link-to 
-                    "providers.show.prefixes" 
-                    (query-params 
-                    state=null)
-                  }}{{fa-icon "check-square-o"}}
-                  {{/link-to}}
+                  <LinkTo @route="providers.show.prefixes" @query={{hash state=null}}>{{fa-icon "check-square-o"}}
+                  </LinkTo>
                 {{else}}
-                  {{#link-to "providers.show.prefixes" (query-params state=state.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                  <LinkTo @route="providers.show.prefixes" @query={{hash state=state.id}}>{{fa-icon "square-o"}}</LinkTo>
                 {{/if}}
                 <div class="facet-title">{{state.title}}</div>
                 <span class="number pull-right">{{state.count}}</span>
@@ -58,17 +50,11 @@
             {{#each model.prefixes.meta.years as |year|}}
               <li>
                 {{#if model.prefixes.query.year}}
-                  {{#link-to 
-                    "providers.show.prefixes" 
-                    (query-params year=null)
-                  }}{{fa-icon "check-square-o"}}
-                  {{/link-to}}
+                  <LinkTo @route="providers.show.prefixes" @query={{hash year=null}}>{{fa-icon "check-square-o"}}
+                  </LinkTo>
                 {{else}}
-                  {{#link-to 
-                    "providers.show.prefixes" 
-                    (query-params year=year.id)
-                  }}{{fa-icon "square-o"}}
-                  {{/link-to}}
+                  <LinkTo @route="providers.show.prefixes" @query={{hash year=year.id}}>{{fa-icon "square-o"}}
+                  </LinkTo>
                 {{/if}}
                 <div class="facet-title">{{year.title}}</div>
                 <span class="number pull-right">{{year.count}}</span>
@@ -82,14 +68,14 @@
     {{#if (eq link "prefixes")}}
       <div class="panel facets">
         <div class="panel-body">
-          <h4>Providers <span class="small">{{fa-icon "question-circle-o"}}{{#bs-tooltip placement="top"}}Filter prefixes by DOI Registration Provider they work with.{{/bs-tooltip}}</span></h4>
+          <h4>Providers <span class="small">{{fa-icon "question-circle-o"}}<BsTooltip @placement="top">Filter prefixes by DOI Registration Provider they work with.</BsTooltip></span></h4>
           <ul>
             {{#each model.prefixes.meta.providers as |provider|}}
               <li>
                 {{#if model.prefixes.query.provider-id}}
-                  {{#link-to "providers.show.prefixes" (query-params provider-id=null)}}{{fa-icon "check-square-o"}}{{/link-to}}
+                  <LinkTo @route="providers.show.prefixes" @query={{hash provider-id=null}}>{{fa-icon "check-square-o"}}</LinkTo>
                 {{else}}
-                  {{#link-to "providers.show.prefixes" (query-params provider-id=provider.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                  <LinkTo @route="providers.show.prefixes" @query={{hash provider-id=provider.id}}>{{fa-icon "square-o"}}</LinkTo>
                 {{/if}}
                 <div class="facet-title">{{provider.title}}</div>
                 <span class="number pull-right">{{provider.count}}</span>
@@ -102,26 +88,22 @@
     {{/if}}
   </div>
   <div class="col-md-9 panel-list" id="content">
-    {{model-search 
-      model=model.prefixes 
-      sortable=true 
-      link="providers.show.prefixes"
-    }}
+    <ModelSearch @model={{model.prefixes}} @sortable={{true}} @link="providers.show.prefixes" />
     
     {{#if model.prefixes}}
       {{#each model.prefixes as |provider-prefix|}}
         <div class="panel panel-transparent">
           <div class="panel-body">
-            <h3 class="work">{{#link-to "providers.show.prefixes.show" model.provider.id provider-prefix.prefix.id}}{{provider-prefix.prefix.id}}{{/link-to}}</h3>
+            <h3 class="work"><LinkTo @route="providers.show.prefixes.show" @models={{array model.provider.id provider-prefix.prefix.id}}><provider-prefix.prefix.id /></LinkTo></h3>
 
             <h5>{{pluralize provider-prefix.repositories.length "Repository" without-count=true}}</h5>
             {{#if provider-prefix.repositories}}
               {{#each provider-prefix.repositories as |repository|}}
-                {{#link-to "repositories.show.prefixes.show" repository.id provider-prefix.prefix.id}}{{repository.name}}{{/link-to}}<br/>
+                <LinkTo @route="repositories.show.prefixes.show" @models={{array repository.id provider-prefix.prefix.id}}>{{repository.name}}</LinkTo><br/>
               {{/each}}
               {{#if features.useElasticsearch}}
                 <h5>DOIs</h5>
-                {{#link-to "providers.show.dois" provider-prefix.provider.id (query-params prefix=provider-prefix.prefix.id)}}DOIs for prefix {{provider-prefix.prefix.id}}{{/link-to}}
+                <LinkTo @route="providers.show.dois" @model={{provider-prefix.provider.id}} @query={{hash prefix=provider-prefix.prefix.id}}>DOIs for prefix <provider-prefix.prefix.id /></LinkTo>
               {{/if}}
             {{else}}
               <span class="icon-warning">No repositories found.</span>
@@ -134,13 +116,13 @@
       {{/each}}
       <div class="text-center">
         {{#if (gt model.prefixes.meta.totalPages 1)}}
-          {{page-numbers model=model.prefixes link="providers.show.prefixes"}}
+          <PageNumbers @model={{model.prefixes}} @link="providers.show.prefixes" />
         {{/if}}
       </div>
     {{else}}
-      {{#bs-alert dismissible=false type="warning"}}
+      <BsAlert @dismissible={{false}} @type="warning">
         No prefixes found.
-      {{/bs-alert}}
+      </BsAlert>
     {{/if}}
   </div>
 </div>

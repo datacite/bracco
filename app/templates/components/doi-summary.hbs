@@ -1,6 +1,6 @@
 <h3 class="work">
   {{#if isList}}
-    {{#link-to "dois.show" model.id}}{{#if (and (gt model.titles.length 0) (gt model.titles.firstObject.title.length 0))}}{{format-text model.titles.firstObject.title}}{{else}}{{model.doi}}{{/if}}{{/link-to}}
+    <LinkTo @route="dois.show" @model={{model.id}}>{{#if (and (gt model.titles.length 0) (gt model.titles.firstObject.title.length 0))}}{{format-text model.titles.firstObject.title}}{{else}}{{model.doi}}{{/if}}</LinkTo>
     <span class="small">{{model.types.resourceTypeGeneral}}</span>
   {{else}}
     {{#if model.isDraft}}
@@ -13,7 +13,7 @@
   {{/if}}
 </h3>
 {{#if model.creators}}
-  {{creator-show creators=model.creators}}
+  <CreatorShow @creators={{model.creators}} />
 {{/if}}
 <div class="metadata">
   {{format-metadata model.publicationYear resourceTypeGeneral=model.types.resourceTypeGeneral resourceType=model.types.resourceType container=model.bcontainer publisher=model.publisher version=model.version}}
@@ -32,6 +32,6 @@
 {{/if}}
 {{#if model.rightsList}}
   {{#each model.rightsList as |rights|}}
-    {{cc-license licenseURL=rights.rightsUri}}
+    <CcLicense @licenseURL={{rights.rightsUri}} />
   {{/each}}
 {{/if}}

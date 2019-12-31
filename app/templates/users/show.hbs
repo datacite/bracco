@@ -1,12 +1,12 @@
 {{#if (can "read user" model)}}
-  {{application-header default=true}}
+  <ApplicationHeader @default={{true}} />
 
   <div class="container-fluid">
     {{#if (can "read user" model)}}
       <ol class="breadcrumb">
         {{#if (can "read index")}}
-          <li class="breadcrumb-item">{{#link-to "index"}}DataCite{{/link-to}}</li>
-          <li class="breadcrumb-item">{{#link-to "users"}}Users{{/link-to}}</li>
+          <li class="breadcrumb-item"><LinkTo @route="index">DataCite</LinkTo></li>
+          <li class="breadcrumb-item"><LinkTo @route="users">Users</LinkTo></li>
         {{/if}}
       </ol>
     {{/if}}
@@ -37,6 +37,6 @@
     {{outlet}}
   </div>
 {{else}}
-  {{application-header}}
-  {{landing-page}}
+  <ApplicationHeader />
+  <LandingPage />
 {{/if}}

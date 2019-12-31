@@ -1,8 +1,6 @@
-import DS from 'ember-data';
+import JSONAPIAdapter from '@ember-data/adapter/json-api';
 import DataAdapterMixin from 'ember-simple-auth/mixins/data-adapter-mixin';
 import ENV from 'bracco/config/environment';
-
-const { JSONAPIAdapter } = DS;
 
 export default JSONAPIAdapter.extend(DataAdapterMixin, {
   host: ENV.ORCID_API_URL,

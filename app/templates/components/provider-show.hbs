@@ -3,71 +3,71 @@
     <div class="panel-body">
       <div class="col-md-offset-3 form-help-header"><h3 class="edit">Update {{if (eq currentUser.uid model.id) 'Account' 'Member'}}</h3></div>
 
-      {{#bs-form formLayout="horizontal" horizontalLabelGridClass="col-md-3" model=model onSubmit=(action "submit" model) as |form|}}
+      <BsForm @formLayout="horizontal" @horizontalLabelGridClass="col-md-3" @model={{model}} @onSubmit={{action "submit" model}} as |form|>
         <div class="col-md-12">
           <h4>Organization Information</h4>
           <br>
         </div>
 
-        {{form.element controlType="text" id="provider-id" label="Member ID" property="symbol" helpText='The Member ID is the unique identifier for each member and can\'t be changed.' disabled=true}}
+        <form.element @controlType="text" @id="provider-id" @label="Member ID" @property="symbol" @helpText="The Member ID is the unique identifier for each member and can't be changed." @disabled={{true}} />
         
-        {{#form.element controlType="power-select" label="Organization identifier (optional)" property="rorId" optionLabelPath="rorId" options=organizations destination=rorId helpText='Organization identifiers are provided by the Research Organization Registry (ROR).' as |el|}}
-          {{#el.control onChange=(action "selectRor") search=(action "searchRor") placeholder="Select Organization" searchPlaceholder="Type to search..." allowClear=true as |item|}}
+        <form.element @controlType="power-select" @label="Organization identifier (optional)" @property="rorId" @optionLabelPath="rorId" @options={{organizations}} @destination={{rorId}} @helpText="Organization identifiers are provided by the Research Organization Registry (ROR)." as |el|>
+          <el.control @onChange={{action "selectRor"}} @search={{action "searchRor"}} @placeholder="Select Organization" @searchPlaceholder="Type to search..." @allowClear={{true}} as |item|>
             {{if item.name item.name model.name}}
-          {{/el.control}}
-        {{/form.element}}
+          </el.control>
+        </form.element>
 
         {{#if (can "create provider")}}
-          {{form.element controlType="text" label="Salesforce ID" property="salesforceId" required=false helpText="The 18 digit ID in Salesforce."}}
+          <form.element @controlType="text" @label="Salesforce ID" @property="salesforceId" @required={{false}} @helpText="The 18 digit ID in Salesforce." />
         
-          {{#form.element controlType="power-select" label="Member Type" property="memberType" options=memberTypes destination=memberType as |el|}}
-            {{#el.control onChange=(action "selectMemberType") search=(action "searchMemberType") placeholder="Select Member Type" searchPlaceholder="Type to search..." as |item|}}
+          <form.element @controlType="power-select" @label="Member Type" @property="memberType" @options={{memberTypes}} @destination={{memberType}} as |el|>
+            <el.control @onChange={{action "selectMemberType"}} @search={{action "searchMemberType"}} @placeholder="Select Member Type" @searchPlaceholder="Type to search..." as |item|>
               {{titleize (humanize item)}}
-            {{/el.control}}
-          {{/form.element}}
+            </el.control>
+          </form.element>
 
-          {{#form.element controlType="power-select" label="Tax Status" property="nonProfitStatus" options=nonProfitStatuses destination=nonProfitStatus as |el|}}
-            {{#el.control onChange=(action "selectNonProfitStatus") search=(action "searchNonProfitStatus") placeholder="Tax Status" searchPlaceholder="Type to search..." as |item|}}
+          <form.element @controlType="power-select" @label="Tax Status" @property="nonProfitStatus" @options={{nonProfitStatuses}} @destination={{nonProfitStatus}} as |el|>
+            <el.control @onChange={{action "selectNonProfitStatus"}} @search={{action "searchNonProfitStatus"}} @placeholder="Tax Status" @searchPlaceholder="Type to search..." as |item|>
               {{titleize item}}
-            {{/el.control}}
-          {{/form.element}}
+            </el.control>
+          </form.element>
 
           {{#if (eq model.memberType "consortium_organization")}}
-            {{#form.element controlType="power-select" property="consortium" label="Consortium" helpText='Consortium for this organization.' optionLabelPath="name" options=consortia destination=consortium.id as |el|}}
-              {{#el.control onChange=(action "selectConsortium") search=(action "searchConsortium") searchField="name" searchPlaceholder="Type to search..." as |item|}}
+            <form.element @controlType="power-select" @property="consortium" @label="Consortium" @helpText="Consortium for this organization." @optionLabelPath="name" @options={{consortia}} @destination={{consortium.id}} as |el|>
+              <el.control @onChange={{action "selectConsortium"}} @search={{action "searchConsortium"}} @searchField="name" @searchPlaceholder="Type to search..." as |item|>
                 {{item.name}}
-              {{/el.control}}
-            {{/form.element}}
+              </el.control>
+            </form.element>
           {{/if}}
         {{/if}}
 
-        {{form.element controlType="text" id="name" label="Organization Name" property="name" required=false helpText="The official name of your organization."}}
-        {{form.element controlType="text" id="display-name" label="Organization Name to Display" property="displayName" required=false helpText="Name of your organization as you would like it to appear in Fabrica and on DataCite’s website."}}
+        <form.element @controlType="text" @id="name" @label="Organization Name" @property="name" @required={{false}} @helpText="The official name of your organization." />
+        <form.element @controlType="text" @id="display-name" @label="Organization Name to Display" @property="displayName" @required={{false}} @helpText="Name of your organization as you would like it to appear in Fabrica and on DataCite’s website." />
 
-        {{form.element controlType="text" id="system-email" label="System Email" property="systemEmail" helpText='This is the email used for sending password reset requests and similar system notifications.' required=false}}
-        {{form.element controlType="text" id="group-email" label="Group Email (optional)" property="groupEmail" helpText='A generic shared email address (such as info@datacite.org or similar) where you would like to receive communications from DataCite.' required=false}}
-        {{form.element controlType="text" id="website" label="Website" property="website" helpText='Website of the member.' required=false}}
-        {{form.element controlType="text" id="twitter-handle"  label="Twitter (optional)"  property="twitterHandle"  placeholder="Add @twitter account" helpText='DataCite will follow you on Twitter.' required=false}}
+        <form.element @controlType="text" @id="system-email" @label="System Email" @property="systemEmail" @helpText="This is the email used for sending password reset requests and similar system notifications." @required={{false}} />
+        <form.element @controlType="text" @id="group-email" @label="Group Email (optional)" @property="groupEmail" @helpText="A generic shared email address (such as info@datacite.org or similar) where you would like to receive communications from DataCite." @required={{false}} />
+        <form.element @controlType="text" @id="website" @label="Website" @property="website" @helpText="Website of the member." @required={{false}} />
+        <form.element @controlType="text" @id="twitter-handle" @label="Twitter (optional)" @property="twitterHandle" @placeholder="Add @twitter account" @helpText="DataCite will follow you on Twitter." @required={{false}} />
 
-        {{#form.element controlType="power-select" label="Country (optional)" property="country" optionLabelPath="name" options=countries destination=country helpText='Country where the member is located.' as |el|}}
-          {{#el.control onChange=(action "selectCountry") search=(action "searchCountry") searchField="name" placeholder="Select Country" searchPlaceholder="Type to search..." allowClear=true as |item|}}
+        <form.element @controlType="power-select" @label="Country (optional)" @property="country" @optionLabelPath="name" @options={{countries}} @destination={{country}} @helpText="Country where the member is located." as |el|>
+          <el.control @onChange={{action "selectCountry"}} @search={{action "searchCountry"}} @searchField="name" @placeholder="Select Country" @searchPlaceholder="Type to search..." @allowClear={{true}} as |item|>
             {{item.name}}
-          {{/el.control}}
-        {{/form.element}}
+          </el.control>
+        </form.element>
 
-        {{#form.element controlType="power-select" label="Organization Type (optional)" property="organizationType" options=organizationTypes destination=organizationType as |el|}}
-          {{#el.control onChange=(action "selectOrganizationType") search=(action "searchOrganizationType") placeholder="Select Organization Type" searchPlaceholder="Type to search..." allowClear=true as |item|}}
+        <form.element @controlType="power-select" @label="Organization Type (optional)" @property="organizationType" @options={{organizationTypes}} @destination={{organizationType}} as |el|>
+          <el.control @onChange={{action "selectOrganizationType"}} @search={{action "searchOrganizationType"}} @placeholder="Select Organization Type" @searchPlaceholder="Type to search..." @allowClear={{true}} as |item|>
             {{titleize (humanize (underscore item))}}
-          {{/el.control}}
-        {{/form.element}}
+          </el.control>
+        </form.element>
 
-        {{#form.element controlType="power-select" label="Focus Area (optional)" property="focusArea" options=focusAreas destination=focusArea helpText='Field of research covered by the member.' as |el|}}
-          {{#el.control onChange=(action "selectFocusArea") search=(action "searchFocusArea") placeholder="Select Focus Area" searchPlaceholder="Type to search..." allowClear=true as |item|}}
+        <form.element @controlType="power-select" @label="Focus Area (optional)" @property="focusArea" @options={{focusAreas}} @destination={{focusArea}} @helpText="Field of research covered by the member." as |el|>
+          <el.control @onChange={{action "selectFocusArea"}} @search={{action "searchFocusArea"}} @placeholder="Select Focus Area" @searchPlaceholder="Type to search..." @allowClear={{true}} as |item|>
             {{titleize (humanize (underscore item))}}
-          {{/el.control}}
-        {{/form.element}}
+          </el.control>
+        </form.element>
 
-        {{form.element controlType="textarea" label="Description (optional)" property="description" rows=10 helpText='Description of the provider. Please use markdown for formatting.' required=false}}
+        <form.element @controlType="textarea" @label="Description (optional)" @property="description" @rows={{10}} @helpText="Description of the provider. Please use markdown for formatting." @required={{false}} />
 
         <div class="col-md-12">
           <h4>Service Contact Information</h4>
@@ -79,15 +79,15 @@
           <div class="col-md-9">
             <div>
               <label for="givenName" class="subtitle">Given Name (optional)</label>
-              {{input type="text" class="form-control" id="service-contact-givenName" value=model.serviceContact.givenName required=false}}
+              <Input @type="text" class="form-control" @id="service-contact-givenName" @value={{model.serviceContact.givenName}} required={{false}} />
             </div>
             <div>
               <label for="familyName" class="subtitle">Family Name (optional)</label>
-              {{input type="text" class="form-control" id="service-contact-familyName" value=model.serviceContact.familyName required=false}}
+              <Input @type="text" class="form-control" @id="service-contact-familyName" @value={{model.serviceContact.familyName}} required={{false}} />
             </div>
             <div>
               <label for="email" class="subtitle">Email (optional)</label>
-              {{input type="text" class="form-control" id="service-contact-email" value=model.serviceContact.email required=false}}
+              <Input @type="text" class="form-control" @id="service-contact-email" @value={{model.serviceContact.email}} required={{false}} />
             </div>
           </div>
         </div>
@@ -97,15 +97,15 @@
           <div class="col-md-9">
             <div>
               <label for="givenName" class="subtitle">Given Name (optional)</label>
-              {{input type="text" class="form-control" id="secondary-service-contact-givenName" value=model.secondaryServiceContact.givenName required=false}}
+              <Input @type="text" class="form-control" @id="secondary-service-contact-givenName" @value={{model.secondaryServiceContact.givenName}} required={{false}} />
             </div>
             <div>
               <label for="familyName" class="subtitle">Family Name (optional)</label>
-              {{input type="text" class="form-control" id="secondary-service-contact-familyName" value=model.secondaryServiceContact.familyName required=false}}
+              <Input @type="text" class="form-control" @id="secondary-service-contact-familyName" @value={{model.secondaryServiceContact.familyName}} required={{false}} />
             </div>
             <div>
               <label for="email" class="subtitle">Email (optional)</label>
-              {{input type="text" class="form-control" id="secondary-service-contact-email" value=model.secondaryServiceContact.email required=false}}
+              <Input @type="text" class="form-control" @id="secondary-service-contact-email" @value={{model.secondaryServiceContact.email}} required={{false}} />
             </div>
           </div>
         </div>
@@ -115,15 +115,15 @@
           <div class="col-md-9">
             <div>
               <label for="givenName" class="subtitle">Given Name (optional)</label>
-              {{input type="text" class="form-control" id="technical-contact-givenName" value=model.technicalContact.givenName required=false}}
+              <Input @type="text" class="form-control" @id="technical-contact-givenName" @value={{model.technicalContact.givenName}} required={{false}} />
             </div>
             <div>
               <label for="familyName" class="subtitle">Family Name (optional)</label>
-              {{input type="text" class="form-control" id="technical-contact-familyName" value=model.technicalContact.familyName required=false}}
+              <Input @type="text" class="form-control" @id="technical-contact-familyName" @value={{model.technicalContact.familyName}} required={{false}} />
             </div>
             <div>
               <label for="email" class="subtitle">Email (optional)</label>
-              {{input type="text" class="form-control" id="technical-contact-email" value=model.technicalContact.email required=false}}
+              <Input @type="text" class="form-control" @id="technical-contact-email" @value={{model.technicalContact.email}} required={{false}} />
             </div>
           </div>
         </div>
@@ -133,15 +133,15 @@
           <div class="col-md-9">
             <div>
               <label for="givenName" class="subtitle">Given Name (optional)</label>
-              {{input type="text" class="form-control" id="secondary-technical-contact-givenName" value=model.secondaryTechnicalContact.givenName required=false}}
+              <Input @type="text" class="form-control" @id="secondary-technical-contact-givenName" @value={{model.secondaryTechnicalContact.givenName}} required={{false}} />
             </div>
             <div>
               <label for="familyName" class="subtitle">Family Name (optional)</label>
-              {{input type="text" class="form-control" id="secondary-technical-contact-familyName" value=model.secondaryTechnicalContact.familyName required=false}}
+              <Input @type="text" class="form-control" @id="secondary-technical-contact-familyName" @value={{model.secondaryTechnicalContact.familyName}} required={{false}} />
             </div>
             <div>
               <label for="email" class="subtitle">Email (optional)</label>
-              {{input type="text" class="form-control" id="secondary-technical-contact-email" value=model.secondaryTechnicalContact.email required=false}}
+              <Input @type="text" class="form-control" @id="secondary-technical-contact-email" @value={{model.secondaryTechnicalContact.email}} required={{false}} />
             </div>
           </div>
         </div>
@@ -152,15 +152,15 @@
             <div class="col-md-9">
               <div>
                 <label for="givenName" class="subtitle">Given Name (optional)</label>
-                {{input type="text" class="form-control" id="voting-contact-givenName" value=model.votingContact.givenName required=false}}
+                <Input @type="text" class="form-control" @id="voting-contact-givenName" @value={{model.votingContact.givenName}} required={{false}} />
               </div>
               <div>
                 <label for="familyName" class="subtitle">Family Name (optional)</label>
-                {{input type="text" class="form-control" id="voting-contact-familyName" value=model.votingContact.familyName required=false}}
+                <Input @type="text" class="form-control" @id="voting-contact-familyName" @value={{model.votingContact.familyName}} required={{false}} />
               </div>
               <div>
                 <label for="email" class="subtitle">Email (optional)</label>
-                {{input type="text" class="form-control" id="voting-contact-email" value=model.votingContact.email required=false}}
+                <Input @type="text" class="form-control" @id="voting-contact-email" @value={{model.votingContact.email}} required={{false}} />
               </div>
             </div>
           </div>
@@ -172,23 +172,23 @@
             <div class="help-block ember-view">Your organization’s information for DataCite billing purposes</div>
             <br>
           </div>
-          {{form.element controlType="text" id="billing-information-organization" label="Billing Organization" property="billingInformation.organization"  helpText="Your organization's name for billing purposes"  required=false}}
-          {{form.element controlType="text" id="billing-information-department" label="Billing Department" property="billingInformation.department"  helpText="Your organization's specific department that is responsible for payment" required=false}}
+          <form.element @controlType="text" @id="billing-information-organization" @label="Billing Organization" @property="billingInformation.organization" @helpText="Your organization's name for billing purposes" @required={{false}} />
+          <form.element @controlType="text" @id="billing-information-department" @label="Billing Department" @property="billingInformation.department" @helpText="Your organization's specific department that is responsible for payment" @required={{false}} />
 
           <div class="form-group">
             <label class="control-label col-md-3">Billing Contact</label>
             <div class="col-md-9">
               <div>
                 <label for="givenName" class="subtitle">Given Name (optional)</label>
-                {{input type="text" class="form-control" id="billing-contact-givenName" value=model.billingContact.givenName required=false}}
+                <Input @type="text" class="form-control" @id="billing-contact-givenName" @value={{model.billingContact.givenName}} required={{false}} />
               </div>
               <div>
                 <label for="familyName" class="subtitle">Family Name (optional)</label>
-                {{input type="text" class="form-control" id="billing-contact-familyName" value=model.billingContact.familyName required=false}}
+                <Input @type="text" class="form-control" @id="billing-contact-familyName" @value={{model.billingContact.familyName}} required={{false}} />
               </div>
               <div>
                 <label for="email" class="subtitle">Email (optional)</label>
-                {{input type="text" class="form-control" id="billing-contact-email" value=model.billingContact.email required=false}}
+                <Input @type="text" class="form-control" @id="billing-contact-email" @value={{model.billingContact.email}} required={{false}} />
               </div>
             </div>
           </div>
@@ -198,41 +198,41 @@
             <div class="col-md-9">
               <div>
                 <label for="givenName" class="subtitle">Given Name (optional)</label>
-                {{input type="text" class="form-control" id="secondary-billing-contact-givenName" value=model.secondaryBillingContact.givenName required=false}}
+                <Input @type="text" class="form-control" @id="secondary-billing-contact-givenName" @value={{model.secondaryBillingContact.givenName}} required={{false}} />
               </div>
               <div>
                 <label for="familyName" class="subtitle">Family Name (optional)</label>
-                {{input type="text" class="form-control" id="secondary-billing-contact-familyName" value=model.secondaryBillingContact.familyName required=false}}
+                <Input @type="text" class="form-control" @id="secondary-billing-contact-familyName" @value={{model.secondaryBillingContact.familyName}} required={{false}} />
               </div>
               <div>
                 <label for="email" class="subtitle">Email (optional)</label>
-                {{input type="text" class="form-control" id="secondary-billing-contact-email" value=model.secondaryBillingContact.email required=false}}
+                <Input @type="text" class="form-control" @id="secondary-billing-contact-email" @value={{model.secondaryBillingContact.email}} required={{false}} />
               </div>
             </div>
           </div>
     
-          {{form.element controlType="textarea" rows=3 id="billing-information-street" label="Billing Street" property="billingInformation.address"  helpText="Your organization's street and number for billing purposes" required=false}}
+          <form.element @controlType="textarea" @rows={{3}} @id="billing-information-street" @label="Billing Street" @property="billingInformation.address" @helpText="Your organization's street and number for billing purposes" @required={{false}} />
 
-          {{form.element controlType="text" id="billing-information-city" label="Billing City" property="billingInformation.city" helpText="Your organization's city for billing purposes" required=false}}
-          {{form.element controlType="text" id="billing-information-state" label="Billing State/Province" property="billingInformation.state"  helpText="Your organization's State/Province for billing purposes" required=false}}
-          {{form.element controlType="text" id="billing-information-post-code" label=" Billing Zip/PostCode" property="billingInformation.postCode"  helpText="Your organization's Zip/PostCode for billing purposes"  required=false}}
+          <form.element @controlType="text" @id="billing-information-city" @label="Billing City" @property="billingInformation.city" @helpText="Your organization's city for billing purposes" @required={{false}} />
+          <form.element @controlType="text" @id="billing-information-state" @label="Billing State/Province" @property="billingInformation.state" @helpText="Your organization's State/Province for billing purposes" @required={{false}} />
+          <form.element @controlType="text" @id="billing-information-post-code" @label=" Billing Zip/PostCode" @property="billingInformation.postCode" @helpText="Your organization's Zip/PostCode for billing purposes" @required={{false}} />
 
-          {{#form.element controlType="power-select" label="Billing Country" property="billingInformation.country" optionLabelPath="name" options=countries helpText='Country name for billing purposes.' destination=billingInformation.country as |el|}}
-            {{#el.control onChange=(action "selectBillingCountry") search=(action "searchCountry") searchField="name" placeholder="Select Country" searchPlaceholder="Type to search..." allowClear=true as |item|}}
+          <form.element @controlType="power-select" @label="Billing Country" @property="billingInformation.country" @optionLabelPath="name" @options={{countries}} @helpText="Country name for billing purposes." @destination={{billingInformation.country}} as |el|>
+            <el.control @onChange={{action "selectBillingCountry"}} @search={{action "searchCountry"}} @searchField="name" @placeholder="Select Country" @searchPlaceholder="Type to search..." @allowClear={{true}} as |item|>
               {{item.name}}
-            {{/el.control}}
-          {{/form.element}}
+            </el.control>
+          </form.element>
         {{/if}}
 
         {{#if (can "create provider")}}
-          {{form.element controlType="checkbox" label="Account is active" property="isActive" required=false helpText='This account can manage repositories and prefixes'}}
+          <form.element @controlType="checkbox" @label="Account is active" @property="isActive" @required={{false}} @helpText="This account can manage repositories and prefixes" />
         {{/if}}
 
         <div class="col-md-9 col-md-offset-3">
           <button type="submit" disabled={{v-get model 'isInvalid'}} class="btn btn-sm btn-fill">Update {{if (eq currentUser.uid model.id) 'Account' 'Member'}}</button>
           <button {{action "cancel" model}} class="btn btn-sm" id="cancel">Cancel</button> 
         </div>
-      {{/bs-form}}
+      </BsForm>
     </div>
   </div>
 {{else if change}}
@@ -242,9 +242,9 @@
 
       <div class="col-md-9 col-md-offset-3"><span class="help-block">Click <a class="action-link" {{action "generate"}}>here</a> for a password suggestion.</span></div>
 
-      {{#bs-form formLayout="horizontal" horizontalLabelGridClass="col-md-3" model=model onSubmit=(action "setPassword" model) submitOnEnter=true as |form|}}
-        {{form.element controlType="text" id="passwordInput" property="passwordInput" label="New Password" required=false}}
-        {{form.element controlType="text" property="confirmPasswordInput" label="Confirm Password" required=false}}
+      <BsForm @formLayout="horizontal" @horizontalLabelGridClass="col-md-3" @model={{model}} @onSubmit={{action "setPassword" model}} @submitOnEnter={{true}} as |form|>
+        <form.element @controlType="text" @id="passwordInput" @property="passwordInput" @label="New Password" @required={{false}} />
+        <form.element @controlType="text" @property="confirmPasswordInput" @label="Confirm Password" @required={{false}} />
 
         <div class="col-md-9 col-md-offset-3">
           <div class="btn-toolbar">
@@ -252,7 +252,7 @@
             <button {{action "cancel" model}} class="btn btn-sm" id="cancel">Cancel</button>
           </div>
         </div>
-      {{/bs-form}}
+      </BsForm>
     </div>
   </div>
 {{else if delete}}
@@ -266,7 +266,7 @@
           <div class="pseudo-footer">
             <div class="btn-toolbar btn-sm pull-right">
               <button {{action "cancel" model}} class="btn btn-sm">Cancel</button>
-              {{#link-to "providers.show.organizations" model.id class="btn btn-sm"}}All Consortium Organizations{{/link-to}}
+              <LinkTo @route="providers.show.organizations" @model={{model.id}} class="btn btn-sm">All Consortium Organizations</LinkTo>
             </div>
             <div class="clearfix"/>
           </div>
@@ -277,16 +277,16 @@
           <div class="pseudo-footer">
             <div class="btn-toolbar btn-sm pull-right">
               <button {{action "cancel" model}} class="btn btn-sm">Cancel</button>
-              {{#link-to "providers.show.repositories" model.id class="btn btn-sm"}}All Repositories{{/link-to}}
+              <LinkTo @route="providers.show.repositories" @model={{model.id}} class="btn btn-sm">All Repositories</LinkTo>
             </div>
             <div class="clearfix"/>
           </div>
         {{else}}
-          {{#bs-form formLayout="vertical" model=model onSubmit=(action "destroy" model) submitOnEnter=true as |form|}}
-            {{#form.group}}
+          <BsForm @formLayout="vertical" @model={{model}} @onSubmit={{action "destroy" model}} @submitOnEnter={{true}} as |form|>
+            <form.group>
               <label class="control-label">Are you sure you want to delete the {{uppercase model.id}} provider? This action cannot be undone.</label>
-              {{form.element controlType="text" property='confirmSymbol' showValidationOn="input" autofocus=true helpText='Please add the Member ID to delete.'}}
-            {{/form.group}}
+              <form.element @controlType="text" @property="confirmSymbol" @showValidationOn="input" @autofocus={{true}} @helpText="Please add the Member ID to delete." />
+            </form.group>
             
             <div class="pseudo-footer">
               <div class="btn-toolbar pull-right">
@@ -295,7 +295,7 @@
               </div>
               <div class="clearfix"/>
             </div>
-          {{/bs-form}}
+          </BsForm>
         {{/if}}
       </div>
     </div>
@@ -319,7 +319,7 @@
         </div>
       {{/if}}
 
-      {{repository-sidebar model=model}}
+      <RepositorySidebar @model={{model}} />
     </div>
     <div class="col-md-9">
       <div class="panel panel-transparent">

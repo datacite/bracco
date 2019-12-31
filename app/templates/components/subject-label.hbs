@@ -1,1 +1,1 @@
-{{#link-to "repositories" (query-params query=text)}}<span class="label label-info label-sm">{{text}}</span>{{/link-to}}
+<LinkTo @route="repositories" @query={{hash query=text}}><span class="label label-info label-sm">{{text}}</span></LinkTo>

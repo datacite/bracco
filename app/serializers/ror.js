@@ -1,8 +1,8 @@
+import JSONSerializer from '@ember-data/serializer/json';
 import { underscore } from '@ember/string';
 import { assign } from '@ember/polyfills';
-import DS from 'ember-data';
 
-export default DS.JSONSerializer.extend({
+export default JSONSerializer.extend({
   normalizeArrayResponse(store, primaryModelClass, payload, id, requestType) {
     let total = payload.number_of_results;
     let totalPages = Math.min(Math.ceil(total / 20), 500);

@@ -2,11 +2,11 @@
   <label class="control-label col-md-3">Description(s) (optional)</label>
   <div class="col-md-9">
     {{#each model.descriptions as |description index|}}
-      {{doi-description model=model fragment=description form=form index=index setValidationClass=(action "setValidationClass")}}
+      <DoiDescription @model={{model}} @fragment={{description}} @form={{form}} @index={{index}} @setValidationClass={{action "setValidationClass"}} />
     {{/each}}
 
     {{#if (or (not model.descriptions) (lte model.descriptions.length 4))}}
-      {{#bs-button class="btn-sm" id="add-description" outline=true onClick=(action "addDescription")}}{{fa-icon "plus"}} Add {{if (gt model.descriptions.length 0) "another "}}description{{/bs-button}}
+      <BsButton @class="btn-sm" @id="add-description" @outline={{true}} @onClick={{action "addDescription"}}>{{fa-icon "plus"}} Add {{if (gt model.descriptions.length 0) "another "}}description</BsButton>
     {{/if}}
   </div>
 </div>

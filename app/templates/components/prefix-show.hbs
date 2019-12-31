@@ -32,7 +32,7 @@
 
   <div class="row">
     <div class="col-md-3">
-      {{repository-sidebar model=model}}
+      <RepositorySidebar @model={{model}} />
     </div>
     <div class="col-md-9">
       <div class="panel panel-transparent">
@@ -40,7 +40,7 @@
           <h5>{{pluralize model.providers.length "Provider" without-count=true}}</h5>
           {{#if model.providers}}
             {{#each model.providers as |provider|}}
-              {{#link-to "providers.show.prefixes" provider.id}}{{provider.name}}{{/link-to}}<br>
+              <LinkTo @route="providers.show.prefixes" @model={{provider.id}}>{{provider.name}}</LinkTo><br>
             {{/each}}
           {{else}}
             <span class="icon-warning">No providers found.</span>
@@ -49,7 +49,7 @@
           <h5>{{pluralize prefix.repositories.length "Repository" without-count=true}}</h5>
           {{#if model.repositories}}
             {{#each model.repositories as |repository|}}
-              {{#link-to "repositories.show.prefixes" repository.id}}{{repository.name}}{{/link-to}}<br>
+              <LinkTo @route="repositories.show.prefixes" @model={{repository.id}}>{{repository.name}}</LinkTo><br>
             {{/each}}
           {{else}}
             <span class="icon-warning">No repositories found.</span>

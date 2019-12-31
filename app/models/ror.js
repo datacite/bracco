@@ -1,17 +1,17 @@
-import DS from 'ember-data';
+import Model, { attr } from '@ember-data/model';
 
-export default DS.Model.extend({
-  meta: DS.attr(),
+export default Model.extend({
+  meta: attr(),
   
-  rorId: DS.attr('string'),
-  name: DS.attr('string'),
-  local: DS.attr('string'),
-  types: DS.attr(),
-  links: DS.attr(),
-  aliases: DS.attr(),
-  acronyms: DS.attr(),
-  external_ids: DS.attr(),
-  wikipediaUrl: DS.attr('string'),
-  labels: DS.attr(),
-  country: DS.attr()
+  rorId: attr('string'),
+  name: attr('string'),
+  local: attr('string'),
+  types: attr(),
+  links: attr(),
+  aliases: attr(),
+  acronyms: attr(),
+  external_ids: attr(),
+  wikipediaUrl: attr('string'),
+  labels: attr(),
+  country: attr()
 });

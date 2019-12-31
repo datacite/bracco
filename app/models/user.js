@@ -1,18 +1,18 @@
-import DS from 'ember-data';
+import Model, { attr } from '@ember-data/model';
 import { computed } from '@ember/object';
 import { A } from '@ember/array';
 
-export default DS.Model.extend({
-  meta: DS.attr(),
+export default Model.extend({
+  meta: attr(),
 
-  name: DS.attr('string'),
-  givenNames: DS.attr('string'),
-  familyName: DS.attr('string'),
-  createdAt: DS.attr('date'),
-  updatedAt: DS.attr('date'),
+  name: attr('string'),
+  givenNames: attr('string'),
+  familyName: attr('string'),
+  createdAt: attr('date'),
+  updatedAt: attr('date'),
 
   orcid: computed('id', function() {
-    return 'https://orcid.org/' + this.get('id');
+    return 'https://orcid.org/' + this.id;
   }),
   doiCount: computed('meta.dois', function() {
     return this.get('meta.dois');

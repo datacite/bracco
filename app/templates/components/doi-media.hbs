@@ -9,10 +9,10 @@
       {{#each model.media as |media|}}
         <div class="row">
           <div class="col-md-2">
-            <strong>{{media.media-type}}</strong>
+            <strong><media.media-type /></strong>
           </div>
           <div class="col-md-7">
-            {{url-check url=media.url contentType=media.media-type urlToCheck=(url-transform model.doi contentType=media.media-type)}}
+            <UrlCheck @url={{media.url}} @contentType={{media.media-type}} @urlToCheck={{url-transform model.doi contentType=media.media-type}} />
           </div>
         </div>
       {{/each}}

@@ -14,16 +14,16 @@
       <div class="panel-footer">
         {{model.name}}
         <span>{{fa-icon "question-circle-o"}}
-          {{#bs-tooltip placement="top" viewportPadding=10}}Each provider has a unique ID.{{/bs-tooltip}}
+          <BsTooltip @placement="top" @viewportPadding={{10}}>Each provider has a unique ID.</BsTooltip>
         </span>
         {{#if (can "write provider")}}
           <div class="btn-toolbar pull-right">
             <div class="btn-group btn-group-sm">
-              {{#link-to "provider.edit" member.id}}{{fa-icon "pencil"}}{{/link-to}}
+              <LinkTo @route="provider.edit" @model={{member.id}}>{{fa-icon "pencil"}}</LinkTo>
             </div>
             {{#if (can "delete provider")}}
               <div class="btn-group btn-group-sm">
-                {{#link-to "provider.edit" member.id}}{{fa-icon "trash"}}{{/link-to}}
+                <LinkTo @route="provider.edit" @model={{member.id}}>{{fa-icon "trash"}}</LinkTo>
               </div>
             {{/if}}
           </div>

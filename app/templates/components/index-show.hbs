@@ -1,8 +1,8 @@
 {{#if edit}}
-  {{#bs-form formLayout="vertical" model=model onSubmit=(action "submit" model) as |form|}}
-    {{form.element controlType="text" label="Name" property="name" required=false}}
-    {{form.element controlType="text" label="Contact" property="contact" required=false}}
-    {{form.element controlType="email" label="Email" property="email" required=false}}
+  <BsForm @formLayout="vertical" @model={{model}} @onSubmit={{action "submit" model}} as |form|>
+    <form.element @controlType="text" @label="Name" @property="name" @required={{false}} />
+    <form.element @controlType="text" @label="Contact" @property="contact" @required={{false}} />
+    <form.element @controlType="email" @label="Email" @property="email" @required={{false}} />
 
     <div class="pseudo-footer">
       <div class="btn-toolbar pull-right">
@@ -11,7 +11,7 @@
       </div>
       <div class="clearfix"/>
     </div>
-  {{/bs-form}}
+  </BsForm>
 {{else}}
   {{#if model.contactEmail}}
     <h5>Contact Email</h5>
@@ -21,7 +21,7 @@
   <div class="pseudo-footer">
     {{model.uid}}
     <span>{{fa-icon "question-circle-o"}}
-      {{#bs-tooltip placement="top" viewportPadding=10}}Each provider has a unique ID.{{/bs-tooltip}}
+      <BsTooltip @placement="top" @viewportPadding={{10}}>Each provider has a unique ID.</BsTooltip>
     </span>
     <button {{action "edit" model}} class="btn-link">{{fa-icon "pencil"}}</button>
   </div>

@@ -1,4 +1,4 @@
-{{application-header sign-in=true}}
+<ApplicationHeader @sign-in={{true}} />
 
 <div class="wrapper">
   <div class="register-background" style="background-image: url('https://assets.datacite.org/images/fabrica/header.png');">
@@ -11,13 +11,13 @@
             {{#if requestSent}}
               <br>
               <div>
-                {{#bs-alert type="success"}}
+                <BsAlert @type="success">
                   A reset password link has been sent to the email address registered for this account.
-                {{/bs-alert}}
+                </BsAlert>
               </div>
 
               <div>
-                {{#link-to "sign-in"}}Use password{{/link-to}} •
+                <LinkTo @route="sign-in">Use password</LinkTo> •
                 <a target="_blank" rel="noopener" href="https://support.datacite.org/docs/create-a-fabrica-account">Need an account?</a>
               </div>
 
@@ -28,15 +28,15 @@
                 <div class="clearfix"/>
               </div>
             {{else}}
-              {{#bs-form formLayout="vertical" model=this onSubmit=(action "sendLink") submitOnEnter=true as |form|}}
-                {{form.element controlType="text" property="identification" label="Account ID" helpText="Send a reset password link to the email address registered for this account." required=false}}
+              <BsForm @formLayout="vertical" @model={{this}} @onSubmit={{action "sendLink"}} @submitOnEnter={{true}} as |form|>
+                <form.element @controlType="text" @property="identification" @label="Account ID" @helpText="Send a reset password link to the email address registered for this account." @required={{false}} />
 
                 {{#if errorMessage}}
                   <div class="alert alert-danger">{{errorMessage}}</div>
                 {{/if}}
 
                 <div>
-                  {{#link-to "sign-in"}}Use password{{/link-to}} •
+                  <LinkTo @route="sign-in">Use password</LinkTo> •
                   <a target="_blank" rel="noopener" href="https://support.datacite.org/docs/create-a-fabrica-account">Need an account?</a>
                 </div>
 
@@ -46,7 +46,7 @@
                   </div>
                   <div class="clearfix"/>
                 </div>
-              {{/bs-form}}
+              </BsForm>
             {{/if}}
           </div>
         </div>

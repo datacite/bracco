@@ -5,37 +5,33 @@
         <div class="btn-toolbar">
           <div class="btn-group-vertical btn-group-sm">
             {{#if (can "edit doi" model)}}
-            {{#link-to "dois.show.edit" model.id class="btn btn-warning"
-            id="edit-doi"}}{{fa-icon "wpforms"}} Update DOI (Form){{/link-to}}
+            <LinkTo @route="dois.show.edit" @model={{model.id}} class="btn btn-warning" @id="edit-doi">{{fa-icon "wpforms"}} Update DOI (Form)</LinkTo>
             {{/if}}
             {{#if (can "modify doi" model)}}
-            {{#link-to "dois.show.modify" model.id class="btn btn-warning"
-            id="modify-doi"}}{{fa-icon "upload"}} Update DOI (File Upload){{/link-to}}
+            <LinkTo @route="dois.show.modify" @model={{model.id}} class="btn btn-warning" @id="modify-doi">{{fa-icon "upload"}} Update DOI (File Upload)</LinkTo>
             {{/if}}
             {{#if (can "transfer doi" model)}}
-            {{#link-to "dois.show.transfer" model.id class="btn btn-warning"
-            id="transfer-doi"}}{{fa-icon "arrow-circle-o-right"}} Transfer DOI{{/link-to}}
+            <LinkTo @route="dois.show.transfer" @model={{model.id}} class="btn btn-warning" @id="transfer-doi">{{fa-icon "arrow-circle-o-right"}} Transfer DOI</LinkTo>
             {{/if}}
             {{#if (and (can "delete doi" model) model.isDraft)}}
-            {{#link-to "dois.show.delete" model.id class="btn btn-warning"
-            id="delete-doi"}}{{fa-icon "trash"}} Delete DOI{{/link-to}}
+            <LinkTo @route="dois.show.delete" @model={{model.id}} class="btn btn-warning" @id="delete-doi">{{fa-icon "trash"}} Delete DOI</LinkTo>
             {{/if}}
           </div>
         </div>
       </div>
     </div>
-    {{repository-sidebar model=model}}
+    <RepositorySidebar @model={{model}} />
   </div>
   <div class='col-md-9'>
-    {{doi-url model=model}}
-    {{doi-metadata model=model}}
+    <DoiUrl @model={{model}} />
+    <DoiMetadata @model={{model}} />
 
     {{#if model.showCitation}}
-    {{doi-citation model=model}}
+    <DoiCitation @model={{model}} />
     {{/if}}
 
     {{#if (and model.landingPage.checked (can "viewHealth doi" model))}}
-    {{doi-health model=model}}
+    <DoiHealth @model={{model}} />
     {{/if}}
   </div>
 </div>

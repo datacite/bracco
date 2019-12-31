@@ -1,4 +1,4 @@
-import DS from 'ember-data';
+import Model, { belongsTo, hasMany, attr } from '@ember-data/model';
 import { validator, buildValidations } from 'ember-cp-validations';
 
 const Validations = buildValidations({
@@ -7,16 +7,16 @@ const Validations = buildValidations({
   ]
 });
 
-export default DS.Model.extend(Validations, {
-  provider: DS.belongsTo('provider', {
+export default Model.extend(Validations, {
+  provider: belongsTo('provider', {
     async: false
   }),
-  prefix: DS.belongsTo('prefix', {
+  prefix: belongsTo('prefix', {
     async: false
   }),
-  repositories: DS.hasMany('repository', {
+  repositories: hasMany('repository', {
     async: false
   }),
 
-  created: DS.attr('date')
+  created: attr('date')
 });

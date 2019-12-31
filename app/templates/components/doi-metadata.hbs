@@ -12,12 +12,12 @@
   <div class="panel panel-transparent">
     {{#if output}}
       <div class="panel-body">
-        {{#code-block class="metadata"}}
+        <CodeBlock @class="metadata">
 {{output}}
-        {{/code-block}}
+        </CodeBlock>
       </div>
     {{else}}
-      {{doi-summary model=model}}
+      <DoiSummary @model={{model}} />
       
       {{#if (not model.isDraft)}}
         <div class="panel-footer">

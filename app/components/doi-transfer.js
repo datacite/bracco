@@ -28,7 +28,7 @@ export default Component.extend({
     this.set('oldRepository', this.model.get('repository.id'));
     this.model.set('repository', repository);
     this.model.set('provider', repository.get('provider'));
-    this.set('isDisabled', repository.id === this.get('oldRepository'));
+    this.set('isDisabled', repository.id === this.oldRepository);
   },
 
   actions: {

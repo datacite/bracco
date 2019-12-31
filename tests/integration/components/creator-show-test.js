@@ -28,6 +28,6 @@ module('Integration | Component | creator-show', function(hooks) {
 
     await render(hbs` {{creator-show creators=creators}}`);
 
-    assert.equal(this.element.textContent.trim(), "Empbh R. Goh, \n      M. Barrgow & \n      M. Barrgoe");
+    assert.dom(this.element).hasText('Empbh R. Goh, M. Barrgow & M. Barrgoe');
   });
 });

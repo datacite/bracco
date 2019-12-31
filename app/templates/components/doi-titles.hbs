@@ -3,14 +3,14 @@
   <div class="col-md-9">
     {{#each model.titles as |title index|}}
       {{#if (gt index 0)}}
-        {{doi-title model=model fragment=title form=form index=index}}
+        <DoiTitle @model={{model}} @fragment={{title}} @form={{form}} @index={{index}} />
       {{else}}
-        {{doi-title model=model fragment=title form=form index=index setValidationClass=(action "setValidationClass")}}
+        <DoiTitle @model={{model}} @fragment={{title}} @form={{form}} @index={{index}} @setValidationClass={{action "setValidationClass"}} />
       {{/if}}
     {{/each}}
 
     {{#if (lte model.titles.length 4)}}
-      {{#bs-button class="btn-sm" id="add-title" outline=true onClick=(action "addTitle")}}{{fa-icon "plus"}} Add another title{{/bs-button}}
+      <BsButton @class="btn-sm" @id="add-title" @outline={{true}} @onClick={{action "addTitle"}}>{{fa-icon "plus"}} Add another title</BsButton>
     {{/if}}
   </div>
 </div>

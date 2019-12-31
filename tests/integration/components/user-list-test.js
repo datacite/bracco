@@ -17,6 +17,6 @@ module('Integration | Component | user-list', function(hooks) {
       </UserList>
     `);
 
-    assert.equal(this.element.textContent.trim(), 'No users found.');
+    assert.dom(this.element).hasText('No users found.');
   });
 });

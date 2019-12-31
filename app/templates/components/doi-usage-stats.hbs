@@ -3,10 +3,10 @@
 
   <div class="row row-chart">
     {{#if usageViews}}
-      {{month-chart data=usageViews label='Views' class='col-lg-4 col-md-4'}}
+      <MonthChart @data={{usageViews}} @label="Views" @class="col-lg-4 col-md-4" />
     {{/if}}
     {{#if usageDownloads}}
-      {{month-chart data=usageDownloads label='Downloads' class='col-lg-4 col-md-4'}}
+      <MonthChart @data={{usageDownloads}} @label="Downloads" @class="col-lg-4 col-md-4" />
     {{/if}}
   </div>
 {{/if}}

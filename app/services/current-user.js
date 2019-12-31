@@ -69,7 +69,7 @@ export default Service.extend({
         this.set('settings', { route: 'settings' });
         this.set('roleName', 'Staff');
 
-        this.get('features').setup({
+        this.features.setup({
           "use-repositories": true,
           "show-researchers": true
         });
@@ -96,7 +96,7 @@ export default Service.extend({
       }
 
       if (payload.beta_tester) {
-        this.get('features').setup({
+        this.features.setup({
           "use-repositories": true,
           "show-researchers": true
         });

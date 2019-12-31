@@ -1,5 +1,5 @@
+import Model, { attr } from '@ember-data/model';
 import { union } from '@ember/object/computed';
-import DS from 'ember-data';
 import { computed } from '@ember/object';
 import { validator, buildValidations } from 'ember-cp-validations';
 
@@ -7,22 +7,22 @@ const Validations = buildValidations({
   name: validator('presence', true)
 });
 
-export default DS.Model.extend(Validations, {
-  re3dataId: DS.attr('string'),
-  repositoryName: DS.attr('string'),
-  additionalNames: DS.attr(),
-  description: DS.attr('string'),
-  repositoryUrl: DS.attr('string'),
-  repositoryContacts: DS.attr(),
-  repositoryLanguages: DS.attr(),
-  software: DS.attr(),
-  subjects: DS.attr(),
-  certificates: DS.attr(),
-  dataUploads: DS.attr(),
-  dataAccesses: DS.attr(),
-  types: DS.attr(),
-  created: DS.attr('date'),
-  updated: DS.attr('date'),
+export default Model.extend(Validations, {
+  re3dataId: attr('string'),
+  repositoryName: attr('string'),
+  additionalNames: attr(),
+  description: attr('string'),
+  repositoryUrl: attr('string'),
+  repositoryContacts: attr(),
+  repositoryLanguages: attr(),
+  software: attr(),
+  subjects: attr(),
+  certificates: attr(),
+  dataUploads: attr(),
+  dataAccesses: attr(),
+  types: attr(),
+  created: attr('date'),
+  updated: attr('date'),
 
   name: computed('repositoryName', function () {
     return this.repositoryName;

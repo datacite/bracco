@@ -1,12 +1,11 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
-import { isArray } from '@ember/array';
+import { isArray, A } from '@ember/array';
 import { isBlank } from '@ember/utils';
 import fetch from 'fetch';
 import ENV from 'bracco/config/environment';
 import { capitalize } from '@ember/string';
 import langs from 'langs';
-import { A } from '@ember/array';
 
 const clientTypeList = [
   'repository',

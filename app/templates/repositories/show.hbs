@@ -1,18 +1,18 @@
 {{#if (can "read repository" model provider=model.provider)}}
-  {{application-header default=true}}
+  <ApplicationHeader @default={{true}} />
 
   <div class="container-fluid">
     {{#if (can "read provider" model.provider)}}
       <ol class="breadcrumb">
         {{#if (can "read index")}}
-          <li class="breadcrumb-item">{{#link-to "index"}}DataCite{{/link-to}}</li>
-          <li class="breadcrumb-item">{{#link-to "providers"}}Members{{/link-to}}</li>
+          <li class="breadcrumb-item"><LinkTo @route="index">DataCite</LinkTo></li>
+          <li class="breadcrumb-item"><LinkTo @route="providers">Members</LinkTo></li>
         {{/if}}
         {{#if (and (can "read provider" model.provider.consortium) (eq model.provider.memberType "consortium_organization"))}}
-          <li class="breadcrumb-item">{{#link-to "providers.show.index" model.provider.consortium.id}}{{model.provider.consortium.name}}{{/link-to}}</li>
+          <li class="breadcrumb-item"><LinkTo @route="providers.show.index" @model={{model.provider.consortium.id}}>{{model.provider.consortium.name}}</LinkTo></li>
         {{/if}}
-        <li class="breadcrumb-item">{{#link-to "providers.show" model.provider.id}}{{model.provider.name}}{{/link-to}}</li>
-        <li class="breadcrumb-item">{{#link-to "providers.show.repositories" model.provider.id}}Repositories{{/link-to}}</li>
+        <li class="breadcrumb-item"><LinkTo @route="providers.show" @model={{model.provider.id}}>{{model.provider.name}}</LinkTo></li>
+        <li class="breadcrumb-item"><LinkTo @route="providers.show.repositories" @model={{model.provider.id}}>Repositories</LinkTo></li>
       </ol>
     {{/if}}
 
@@ -51,6 +51,6 @@
     {{outlet}}
   </div>
 {{else}}
-  {{application-header}}
-  {{landing-page}}
+  <ApplicationHeader />
+  <LandingPage />
 {{/if}}

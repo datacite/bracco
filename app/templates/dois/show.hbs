@@ -1,22 +1,22 @@
-{{application-header default=true}}
+<ApplicationHeader @default={{true}} />
 
 <div class="container-fluid">
   <ol class="breadcrumb">
     {{#if (can "read index")}}
-      <li class="breadcrumb-item">{{#link-to "index"}}DataCite{{/link-to}}</li>
-      <li class="breadcrumb-item">{{#link-to "providers"}}Members{{/link-to}}</li>
-      <li class="breadcrumb-item">{{#link-to "providers.show" model.repository.provider.id}}{{model.repository.provider.name}}{{/link-to}}</li>
-      <li class="breadcrumb-item">{{#link-to "providers.show.repositories" model.repository.provider.id}}Repositories{{/link-to}}</li>
-      <li class="breadcrumb-item">{{#link-to "repositories.show" model.repository.id}}{{model.repository.name}}{{/link-to}}</li>
-      <li class="breadcrumb-item">{{#link-to "repositories.show.dois" model.repository.id}}DOIs{{/link-to}}</li>
+      <li class="breadcrumb-item"><LinkTo @route="index">DataCite</LinkTo></li>
+      <li class="breadcrumb-item"><LinkTo @route="providers">Members</LinkTo></li>
+      <li class="breadcrumb-item"><LinkTo @route="providers.show" @model={{model.repository.provider.id}}>{{model.repository.provider.name}}</LinkTo></li>
+      <li class="breadcrumb-item"><LinkTo @route="providers.show.repositories" @model={{model.repository.provider.id}}>Repositories</LinkTo></li>
+      <li class="breadcrumb-item"><LinkTo @route="repositories.show" @model={{model.repository.id}}>{{model.repository.name}}</LinkTo></li>
+      <li class="breadcrumb-item"><LinkTo @route="repositories.show.dois" @model={{model.repository.id}}>DOIs</LinkTo></li>
     {{else if (can "read provider" model.repository.provider)}}
-      <li class="breadcrumb-item">{{#link-to "providers.show" model.repository.provider.id}}{{model.repository.provider.name}}{{/link-to}}</li>
-      <li class="breadcrumb-item">{{#link-to "providers.show.repositories" model.repository.provider.id}}Repositories{{/link-to}}</li>
-      <li class="breadcrumb-item">{{#link-to "repositories.show" model.repository.id}}{{model.repository.name}}{{/link-to}}</li>
-      <li class="breadcrumb-item">{{#link-to "repositories.show.dois" model.repository.id}}DOIs{{/link-to}}</li> 
+      <li class="breadcrumb-item"><LinkTo @route="providers.show" @model={{model.repository.provider.id}}>{{model.repository.provider.name}}</LinkTo></li>
+      <li class="breadcrumb-item"><LinkTo @route="providers.show.repositories" @model={{model.repository.provider.id}}>Repositories</LinkTo></li>
+      <li class="breadcrumb-item"><LinkTo @route="repositories.show" @model={{model.repository.id}}>{{model.repository.name}}</LinkTo></li>
+      <li class="breadcrumb-item"><LinkTo @route="repositories.show.dois" @model={{model.repository.id}}>DOIs</LinkTo></li> 
     {{else if (can "read repository" model.repository)}}
-      <li class="breadcrumb-item">{{#link-to "repositories.show" model.repository.id}}{{model.repository.name}}{{/link-to}}</li>
-      <li class="breadcrumb-item">{{#link-to "repositories.show.dois" model.repository.id}}DOIs{{/link-to}}</li>
+      <li class="breadcrumb-item"><LinkTo @route="repositories.show" @model={{model.repository.id}}>{{model.repository.name}}</LinkTo></li>
+      <li class="breadcrumb-item"><LinkTo @route="repositories.show.dois" @model={{model.repository.id}}>DOIs</LinkTo></li>
     {{/if}}
   </ol>
   

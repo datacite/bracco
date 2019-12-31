@@ -2,17 +2,17 @@
   <div class="panel-body">
     <div class="col-md-9 col-md-offset-3"><h3 class="edit">Transfer DOIs</h3></div>
 
-    {{#bs-form formLayout="horizontal" horizontalLabelGridClass="col-md-3" model=this onSubmit=(action "submit") submitOnEnter=true as |form|}}
-      {{#form.element controlType="power-select" property="repository" label="Repository" helpText='Transfer all DOIs to this repository. It can take up to one hour for the transfer to complete.' optionLabelPath="name" options=repositories destination=repository as |el|}}
-        {{#el.control onChange=(action "selectRepository") search=(action "searchRepository") searchField="name" searchPlaceholder="Type to search..." allowClear=true as |item|}}
+    <BsForm @formLayout="horizontal" @horizontalLabelGridClass="col-md-3" @model={{this}} @onSubmit={{action "submit"}} @submitOnEnter={{true}} as |form|>
+      <form.element @controlType="power-select" @property="repository" @label="Repository" @helpText="Transfer all DOIs to this repository. It can take up to one hour for the transfer to complete." @optionLabelPath="name" @options={{repositories}} @destination={{repository}} as |el|>
+        <el.control @onChange={{action "selectRepository"}} @search={{action "searchRepository"}} @searchField="name" @searchPlaceholder="Type to search..." @allowClear={{true}} as |item|>
           {{item.name}}
-        {{/el.control}}
-      {{/form.element}}
+        </el.control>
+      </form.element>
 
       <div class="col-md-9 col-md-offset-3">
         <button {{action "submit"}} class="btn btn-sm btn-fill" disabled={{isDisabled}}>Transfer DOIs</button>
         <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
       </div>
-    {{/bs-form}}
+    </BsForm>
   </div>
 </div>

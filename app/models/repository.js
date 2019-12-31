@@ -1,9 +1,8 @@
+import Model, { belongsTo, attr } from '@ember-data/model';
 import { computed } from '@ember/object';
-import DS from 'ember-data';
 import ENV from 'bracco/config/environment';
-import { array } from 'ember-data-model-fragments/attributes';
+import { array, fragment } from 'ember-data-model-fragments/attributes';
 import { validator, buildValidations } from 'ember-cp-validations';
-import { fragment } from 'ember-data-model-fragments/attributes';
 
 const Validations = buildValidations({
   symbol: [
@@ -106,37 +105,37 @@ const Validations = buildValidations({
   ]
 });
 
-export default DS.Model.extend(Validations, {
-  provider: DS.belongsTo('provider', {
+export default Model.extend(Validations, {
+  provider: belongsTo('provider', {
     async: true
   }),
-  meta: DS.attr(),
+  meta: attr(),
 
-  name: DS.attr('string'),
-  alternateName: DS.attr('string'),
-  symbol: DS.attr('string'),
-  re3data: DS.attr('string'),
-  domains: DS.attr('string', { defaultValue: '*' }),
-  systemEmail: DS.attr('string'),
-  salesforceId: DS.attr('string'),
-  year: DS.attr('number'),
-  description: DS.attr('string'),
+  name: attr('string'),
+  alternateName: attr('string'),
+  symbol: attr('string'),
+  re3data: attr('string'),
+  domains: attr('string', { defaultValue: '*' }),
+  systemEmail: attr('string'),
+  salesforceId: attr('string'),
+  year: attr('number'),
+  description: attr('string'),
   language: array(),
   certificate: array(),
   serviceContact: fragment('contact'),
   issn: fragment('issn'),
-  url: DS.attr('string'),
-  clientType: DS.attr('string'),
+  url: attr('string'),
+  clientType: attr('string'),
   repositoryType: array(),
-  software: DS.attr('string'),
-  isActive: DS.attr('boolean', { defaultValue: true }),
-  passwordInput: DS.attr('string'),
-  hasPassword: DS.attr('boolean'),
-  keepPassword: DS.attr('boolean', { defaultValue: true }),
-  created: DS.attr('date'),
-  updated: DS.attr('date'),
+  software: attr('string'),
+  isActive: attr('boolean', { defaultValue: true }),
+  passwordInput: attr('string'),
+  hasPassword: attr('boolean'),
+  keepPassword: attr('boolean', { defaultValue: true }),
+  created: attr('date'),
+  updated: attr('date'),
 
-  targetId: DS.attr(),
+  targetId: attr(),
 
   domainList: computed('domains', function() {
     return this.domains.split(",").map(function(item) {

@@ -1,11 +1,11 @@
 {{#if (can "read index")}}
-  {{application-header default=true}}
+  <ApplicationHeader @default={{true}} />
 
   <div class="container-fluid">
-    {{index-header}}
-    {{provider-list model=model searchable=true}}
+    <IndexHeader />
+    <ProviderList @model={{model}} @searchable={{true}} />
   </div>
 {{else}}
-  {{application-header}}
-  {{landing-page}}
+  <ApplicationHeader />
+  <LandingPage />
 {{/if}}

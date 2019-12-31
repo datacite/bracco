@@ -1,8 +1,7 @@
 import { computed } from '@ember/object';
-import DS from 'ember-data';
 import { validator, buildValidations } from 'ember-cp-validations';
 import ENV from 'bracco/config/environment';
-import Model from 'ember-data/model';
+import Model, { belongsTo, attr } from '@ember-data/model';
 import { fragmentArray } from 'ember-data-model-fragments/attributes';
 import { w } from '@ember/string';
 import { A } from '@ember/array';
@@ -141,48 +140,48 @@ const Validations = buildValidations({
 });
 
 export default Model.extend(Validations, {
-  repository: DS.belongsTo('repository', {
+  repository: belongsTo('repository', {
     async: true
   }),
 
-  doi: DS.attr('string'),
-  identifiers: DS.attr(),
-  confirmDoi: DS.attr('string', { defaultValue: null }),
-  prefix: DS.attr('string'),
-  suffix: DS.attr('string'),
-  url: DS.attr('string'),
-  contentUrl: DS.attr(),
+  doi: attr('string'),
+  identifiers: attr(),
+  confirmDoi: attr('string', { defaultValue: null }),
+  prefix: attr('string'),
+  suffix: attr('string'),
+  url: attr('string'),
+  contentUrl: attr(),
   creators: fragmentArray('creator'),
   titles: fragmentArray('title'),
-  publisher: DS.attr('string'),
-  bcontainer: DS.attr(),
-  publicationYear: DS.attr('number'),
-  subjects: DS.attr(),
-  contributors: DS.attr(),
-  dates: DS.attr(),
-  language: DS.attr(),
-  types: DS.attr(),
-  relatedIdentifiers: DS.attr(),
-  sizes: DS.attr(),
-  formats: DS.attr(),
-  version: DS.attr('string'),
-  rightsList: DS.attr(),
+  publisher: attr('string'),
+  bcontainer: attr(),
+  publicationYear: attr('number'),
+  subjects: attr(),
+  contributors: attr(),
+  dates: attr(),
+  language: attr(),
+  types: attr(),
+  relatedIdentifiers: attr(),
+  sizes: attr(),
+  formats: attr(),
+  version: attr('string'),
+  rightsList: attr(),
   descriptions: fragmentArray('description', { defaultValue: [] }),
-  geoLocations: DS.attr(),
-  fundingReferences: DS.attr(),
-  landingPage: DS.attr(),
-  xml: DS.attr('xml'),
-  metadataVersion: DS.attr('string'),
-  schemaVersion: DS.attr('string'),
-  source: DS.attr('string', { defaultValue: "fabrica" }),
-  state: DS.attr('string'),
-  breason: DS.attr('string', { defaultValue: null }),
-  isActive: DS.attr('boolean', { defaultValue: true }),
-  event: DS.attr('string'),
-  created: DS.attr('date'),
-  registered: DS.attr('date'),
-  updated: DS.attr('date'),
-  mode: DS.attr('string'),
+  geoLocations: attr(),
+  fundingReferences: attr(),
+  landingPage: attr(),
+  xml: attr('xml'),
+  metadataVersion: attr('string'),
+  schemaVersion: attr('string'),
+  source: attr('string', { defaultValue: "fabrica" }),
+  state: attr('string'),
+  breason: attr('string', { defaultValue: null }),
+  isActive: attr('boolean', { defaultValue: true }),
+  event: attr('string'),
+  created: attr('date'),
+  registered: attr('date'),
+  updated: attr('date'),
+  mode: attr('string'),
 
   identifier: computed('doi', 'repository', function () {
     if (ENV.API_URL == "https://api.datacite.org" || (w("crossref.citations medra.citations kisti.citations jalc.citations op.citations").includes(this.repository.get('id')))) {

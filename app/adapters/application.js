@@ -1,11 +1,9 @@
-import DS from 'ember-data';
+import JSONAPIAdapter from '@ember-data/adapter/json-api';
 import DataAdapterMixin from 'ember-simple-auth/mixins/data-adapter-mixin';
 import { inject as service } from '@ember/service';
 import ENV from 'bracco/config/environment';
 import { computed } from '@ember/object';
 import { isPresent } from '@ember/utils';
-
-const { JSONAPIAdapter } = DS;
 
 export default JSONAPIAdapter.extend(DataAdapterMixin, {
   session: service(), 

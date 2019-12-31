@@ -14,6 +14,6 @@ module('Integration | Component | user-show', function(hooks) {
       </UserShow>
     `);
 
-    assert.equal(this.element.textContent.trim(), 'ORCID ID');
+    assert.dom(this.element).hasText('ORCID ID');
   });
 });

@@ -3,7 +3,7 @@
   <div class="col-md-9">
     <div>
       <label for="issnl" class="subtitle">ISSN-L</label>
-      {{input type="text" class="form-control" id="repository-issn-issnl" value=model.issn.issnl required=false}}
+      <Input @type="text" class="form-control" @id="repository-issn-issnl" @value={{model.issn.issnl}} required={{false}} />
 
       {{#if (v-get fragment 'issnl' 'errors')}}
         <div class="help-block help-block-fragment issnl-field">{{v-get fragment 'issnl' 'errorMessage'}}</div>
@@ -11,11 +11,11 @@
     </div>
     <div>
       <label for="issnl" class="subtitle">ISSN (electronic)</label>
-      {{input type="text" class="form-control" id="repository-issn-electronic" value=model.issn.electronic required=false}}
+      <Input @type="text" class="form-control" @id="repository-issn-electronic" @value={{model.issn.electronic}} required={{false}} />
     </div>
     <div>
       <label for="issnl" class="subtitle">ISSN (print)</label>
-      {{input type="text" class="form-control" id="repository-issn-print" value=model.issn.print required=false}}
+      <Input @type="text" class="form-control" @id="repository-issn-print" @value={{model.issn.print}} required={{false}} />
     </div>
   </div>
 </div>

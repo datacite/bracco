@@ -3,17 +3,17 @@
     <div class="container-fluid">
       <div class='col-md-3 col-sm-4 footer-column'>
         <h4>{{t "footer.about"}}</h4>
-        {{list-links links=data.about_links}}
+        <ListLinks @links={{data.about_links}} />
       </div>
       <div class='col-md-3 col-sm-4 footer-column'>
         <h4>Services</h4>
-        {{list-links links=data.services_links}}
+        <ListLinks @links={{data.services_links}} />
       </div>
       <div class='col-md-3 col-sm-4 footer-column'>
         <h4>Resources</h4>
-        {{list-links links=data.resources_links}}
+        <ListLinks @links={{data.resources_links}} />
         <h4>Community</h4>
-        {{list-links links=data.community_links}}
+        <ListLinks @links={{data.community_links}} />
       </div>
       <div class='col-md-3 footer-column'>
         <h4 class="share">Contact us</h4>
@@ -32,8 +32,8 @@
         <a href='https://www.linkedin.com/company/datacite' class="share">
           {{fa-icon "linkedin"}}
         </a>
-        {{list-links links=data.contact_links class="share"}}
-        {{footer-status}}
+        <ListLinks @links={{data.contact_links}} @class="share" />
+        <FooterStatus />
       </div>
     </div>
   </footer>

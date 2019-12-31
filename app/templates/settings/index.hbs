@@ -1,11 +1,11 @@
 {{#if (can "read index")}}
-  {{application-header default=true}}
+  <ApplicationHeader @default={{true}} />
 
   <div class="container-fluid">
-    {{index-header}}
-    {{provider-show model=model admin=true}}
+    <IndexHeader />
+    <ProviderShow @model={{model}} @admin={{true}} />
   </div>
 {{else}}
-  {{application-header}}
-  {{landing-page}}
+  <ApplicationHeader />
+  <LandingPage />
 {{/if}}

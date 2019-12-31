@@ -4,18 +4,18 @@
       <h3 class="help-header">Transfer DOI</h3>
     </div>
 
-    {{#bs-form formLayout="horizontal" horizontalLabelGridClass="col-md-3" model=model onSubmit=(action "submit" model) as |form|}}
-      {{form.element controlType="hidden" property="doi" required=false}}
-      {{#form.element controlType="power-select" property="repository" label="Repository" helpText='Transfer the DOI to this repository.' optionLabelPath="name" options=repositories destination=repository.id as |el|}}
-        {{#el.control onChange=(action "selectRepository") search=(action "searchRepository") searchField="name" searchPlaceholder="Type to search..." as |item|}}
+    <BsForm @formLayout="horizontal" @horizontalLabelGridClass="col-md-3" @model={{model}} @onSubmit={{action "submit" model}} as |form|>
+      <form.element @controlType="hidden" @property="doi" @required={{false}} />
+      <form.element @controlType="power-select" @property="repository" @label="Repository" @helpText="Transfer the DOI to this repository." @optionLabelPath="name" @options={{repositories}} @destination={{repository.id}} as |el|>
+        <el.control @onChange={{action "selectRepository"}} @search={{action "searchRepository"}} @searchField="name" @searchPlaceholder="Type to search..." as |item|>
           {{item.name}}
-        {{/el.control}}
-      {{/form.element}}
+        </el.control>
+      </form.element>
 
       <div class="col-md-9 col-md-offset-3">
         <button type="submit" disabled={{isDisabled}} class="btn btn-sm btn-fill">Transfer DOI</button>
         <button {{action "cancel" model}} class="btn btn-sm">Cancel</button>
       </div>
-    {{/bs-form}}
+    </BsForm>
   </div>
 </div>

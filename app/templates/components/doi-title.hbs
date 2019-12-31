@@ -2,7 +2,7 @@
   <div class="input-group">
     <input type="text" class="form-control title-field no-error no-success" value={{fragment.title}} oninput={{action "updateTitle" value="target.value"}}/>
     <span class="input-group-btn">
-      {{#bs-button outline=true onClick=(action "deleteTitle" index)}}{{fa-icon "trash"}}{{/bs-button}}
+      <BsButton @outline={{true}} @onClick={{action "deleteTitle" index}}>{{fa-icon "trash"}}</BsButton>
     </span>
   </div>
   <div class="help-block help-block-fragment no-error no-success">One or more names or titles by which the resource is known.</div>

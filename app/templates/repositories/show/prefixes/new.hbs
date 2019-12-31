@@ -2,8 +2,8 @@
   <div class="panel-body">
     <div class="col-md-9 col-md-offset-3"><h3 class="edit">Assign Prefix</h3></div>
 
-    {{#bs-form formLayout="horizontal" horizontalLabelGridClass="col-md-3" model=model.prefix onSubmit=(action "submit") as |form|}}
-      {{prefix-select model=model.prefix repository=model.repository form=form}}
+    <BsForm @formLayout="horizontal" @horizontalLabelGridClass="col-md-3" @model={{model.prefix}} @onSubmit={{action "submit"}} as |form|>
+      <PrefixSelect @model={{model.prefix}} @repository={{model.repository}} @form={{form}} />
 
       <div class="col-md-9 col-md-offset-3">
         <div class="btn-toolbar">
@@ -11,6 +11,6 @@
           <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
         </div>
       </div>
-    {{/bs-form}}
+    </BsForm>
   </div>
 </div>

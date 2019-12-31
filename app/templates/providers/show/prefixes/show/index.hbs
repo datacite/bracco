@@ -5,13 +5,8 @@
         <div class="panel-body">
           <div class="btn-toolbar">
             <div class="btn-group btn-group-sm">
-              {{#link-to 
-                "providers.show.prefixes.show.delete" 
-                model.provider.id 
-                model.prefix.id 
-                class="btn btn-warning"
-              }}{{fa-icon "pencil"}} Remove Prefix
-              {{/link-to}}
+              <LinkTo @route="providers.show.prefixes.show.delete" @models={{array model.provider.id model.prefix.id}} class="btn btn-warning">{{fa-icon "pencil"}} Remove Prefix
+              </LinkTo>
             </div>
           </div>
         </div>
@@ -25,7 +20,7 @@
 
 <div class="row">
   <div class="col-md-3">
-    {{repository-sidebar model=model}}
+    <RepositorySidebar @model={{model}} />
   </div>
   <div class="col-md-9">
     <div class="panel panel-transparent">
@@ -33,7 +28,7 @@
         <h5>{{pluralize model.repositories.length "Repository" without-count=true}}</h5>
         {{#if model.repositories}}
           {{#each model.repositories as |repository|}}
-            {{#link-to "repositories.show.prefixes.show" repository.id model.prefix.id}}{{repository.name}}{{/link-to}}<br>
+            <LinkTo @route="repositories.show.prefixes.show" @models={{array repository.id model.prefix.id}}>{{repository.name}}</LinkTo><br>
           {{/each}}
         {{else}}
           <span class="icon-warning">No repositories found.</span>

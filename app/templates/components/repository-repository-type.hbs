@@ -1,22 +1,22 @@
 {{#if (gt index 0)}}
   <div class="input-group">
     <div class="power-select-fragment">
-      {{#form.element controlType="power-select" disabled=disabled value=repositoryType options=repositoryTypes as |el|}}
-        {{#el.control onChange=(action "selectRepositoryType") search=(action "searchRepositoryType") placeholder="Select RepositoryType" searchPlaceholder="Type to search..." allowClear=true as |item|}}
+      <PowerSelect @disabled={{disabled}} @value={{repositoryType}} @options={{repositoryTypes}} as |el|>
+        <el.control @onChange={{action "selectRepositoryType"}} @search={{action "searchRepositoryType"}} @placeholder="Select RepositoryType" @searchPlaceholder="Type to search..." @allowClear={{true}} as |item|>
           {{titleize item}}
-        {{/el.control}}
-      {{/form.element}}
+        </el.control>
+      </PowerSelect>
     </div>
     <span class="input-group-addon" style="vertical-align:top;padding-top:3px;">
-    {{#bs-button outline=true onClick=(action "deleteRepositoryType" index)}}{{fa-icon "trash" pull="left" style="margin:0;"}}{{/bs-button}}
+    <BsButton @outline={{true}} @onClick={{action "deleteRepositoryType" index}}>{{fa-icon "trash" pull="left" style="margin:0;"}}</BsButton>
     </span>
   </div>
 {{else}}
   <div class="power-select-fragment">
-    {{#form.element controlType="power-select" disabled=disabled value=repositoryType options=repositoryTypes as |el|}}
-      {{#el.control onChange=(action "selectRepositoryType") search=(action "searchRepositoryType") placeholder="Select RepositoryType" searchPlaceholder="Type to search..." allowClear=true as |item|}}
+    <PowerSelect @disabled={{disabled}} @value={{repositoryType}} @options={{repositoryTypes}} as |el|>
+      <el.control @onChange={{action "selectRepositoryType"}} @search={{action "searchRepositoryType"}} @placeholder="Select RepositoryType" @searchPlaceholder="Type to search..." @allowClear={{true}} as |item|>
         {{titleize item}}
-      {{/el.control}}
-    {{/form.element}}
+      </el.control>
+    </PowerSelect>
   </div>
 {{/if}}

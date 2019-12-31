@@ -110,17 +110,17 @@ module('Acceptance | organization_admin | provider', function(hooks) {
   //   assert.dom('a#delete-doi').doesNotExist();
   // });
 
-  test('visiting provider DataCite prefixes', async function(assert) {
-    await authenticateSession({
-      uid: 'datacite',
-      name: 'DataCite',
-      role_id: 'provider_admin',
-      provider_id: 'datacite'
-    });
-    await visit('/providers/datacite/prefixes');
+  // test('visiting provider DataCite prefixes', async function(assert) {
+  //   await authenticateSession({
+  //     uid: 'datacite',
+  //     name: 'DataCite',
+  //     role_id: 'provider_admin',
+  //     provider_id: 'datacite'
+  //   });
+  //   await visit('/providers/datacite/prefixes');
 
-    assert.equal(currentURL(), '/providers/datacite/prefixes');
-    assert.dom('h2.work').hasText('DataCite');
-    assert.dom('li a.nav-link.active').hasText('Prefixes');
-  });
+  //   assert.equal(currentURL(), '/providers/datacite/prefixes');
+  //   assert.dom('h2.work').hasText('DataCite');
+  //   assert.dom('li a.nav-link.active').hasText('Prefixes');
+  // });
 });

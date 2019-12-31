@@ -1,7 +1,7 @@
 <a href="{{licenseURL}}">
   {{#each licenseLogo as |license|}}
     {{#if license.class}}
-      <i class="{{license.class}}">{{#bs-popover placement="top" viewportPadding=10 triggerEvents='hover' title=license.tooltip.title}}{{license.tooltip.text}}{{/bs-popover}}</i>
+      <i class="{{license.class}}"><BsPopover @placement="top" @viewportPadding={{10}} @triggerEvents="hover" @title={{license.tooltip.title}}>{{license.tooltip.text}}</BsPopover></i>
     {{else}}
       {{license.logo}}
     {{/if}}

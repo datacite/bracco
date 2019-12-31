@@ -1,20 +1,20 @@
 {{#if (can "read index")}}
-  {{application-header default=true}}
+  <ApplicationHeader @default={{true}} />
 
   <div class="container-fluid">
-    {{index-header}}
+    <IndexHeader />
     
     <div class="panel panel-transparent">
       <div class="panel-body">
         <div class="col-md-9 col-md-offset-3"><h3 class="edit">Add Prefixes</h3></div>
 
-        {{prefix-new model=model}}
+        <PrefixNew @model={{model}} />
       </div>
     </div>
   </div>
 {{else}}
-  {{application-header}}
-  {{landing-page}}
+  <ApplicationHeader />
+  <LandingPage />
 {{/if}}
 
 

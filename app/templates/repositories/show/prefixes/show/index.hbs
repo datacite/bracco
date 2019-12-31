@@ -5,7 +5,7 @@
           <div class="panel-body">
             <div class="btn-toolbar">
               <div class="btn-group btn-group-sm">
-                 {{#link-to "repositories.show.prefixes.show.delete" model.repository.id model.prefix.id class="btn btn-warning"}}{{fa-icon "pencil"}} Remove Prefix{{/link-to}}
+                 <LinkTo @route="repositories.show.prefixes.show.delete" @models={{array model.repository.id model.prefix.id}} class="btn btn-warning">{{fa-icon "pencil"}} Remove Prefix</LinkTo>
               </div>
             </div>
           </div>
@@ -19,7 +19,7 @@
 
   <div class="row">
     <div class='col-md-3'>
-      {{repository-sidebar model=model}}
+      <RepositorySidebar @model={{model}} />
     </div>
     <div class="col-md-9">
       <div class="panel panel-transparent">

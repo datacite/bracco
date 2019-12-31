@@ -2,7 +2,7 @@
   {{#if model.doi}}
     {{#if model.state}}
       <div class="state">
-        {{state-label state=model.state}}
+        <StateLabel @state={{model.state}} />
       </div>
     {{/if}}
     {{#if (and (eq model.state 'findable') model.xml)}}
@@ -43,7 +43,7 @@
         Metadata version
         <span>
           {{fa-icon "question-circle-o"}}
-          {{#bs-tooltip placement="top" viewportPadding=10}}Most recent metadata. Previous versions are kept.{{/bs-tooltip}}
+          <BsTooltip @placement="top" @viewportPadding={{10}}>Most recent metadata. Previous versions are kept.</BsTooltip>
         </span>
       </h5>
       <div class="metadata-version">
@@ -55,7 +55,7 @@
         Schema
         <span>
           {{fa-icon "question-circle-o"}}
-          {{#bs-tooltip placement="top" viewportPadding=10}}Metadata schema version used.{{/bs-tooltip}}
+          <BsTooltip @placement="top" @viewportPadding={{10}}>Metadata schema version used.</BsTooltip>
         </span>
       </h5>
       <div class="schema-version">
@@ -67,7 +67,7 @@
         Source
         <span>
           {{fa-icon "question-circle-o"}}
-          {{#bs-tooltip placement="top" viewportPadding=10}}Service used for DOI registration.{{/bs-tooltip}}
+          <BsTooltip @placement="top" @viewportPadding={{10}}>Service used for DOI registration.</BsTooltip>
         </span>
       </h5>
       <div class="source">

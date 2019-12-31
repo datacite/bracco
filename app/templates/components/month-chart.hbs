@@ -8,9 +8,9 @@
   <div class="panel-body panel-chart">
     <h2 class="member graphs">
       {{#if model}}
-        {{#link-to link model.id}}{{format-number count}}{{/link-to}}
+        <LinkTo @route={{link}} @model={{model.id}}>{{format-number count}}</LinkTo>
       {{else if link}}
-        {{#link-to link}}{{format-number count}}{{/link-to}}
+        <LinkTo @route={{link}}>{{format-number count}}</LinkTo>
       {{else}}
         {{format-number count}}
       {{/if}}

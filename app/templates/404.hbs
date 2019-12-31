@@ -1,4 +1,4 @@
-{{application-header}}
+<ApplicationHeader />
 
 <div class="wrapper">
   <div class="landing-header" style="background-image: url('https://assets.datacite.org/images/404.png');"/>
@@ -7,9 +7,9 @@
     <div class="row row-section">
       <div class="container-fluid">
         <div class="col-md-8 col-sm-offset-2">
-          {{#bs-alert dismissible=false type="warning"}}
+          <BsAlert @dismissible={{false}} @type="warning">
             The page was not found.
-          {{/bs-alert}}
+          </BsAlert>
         </div>
       </div>
     </div>

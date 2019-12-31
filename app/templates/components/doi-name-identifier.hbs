@@ -2,7 +2,7 @@
   <div class="input-group">
     <input type="text" class="form-control name-identifier-field no-error {{if (not fragment.nameIdentifier) 'no-success'}}" value={{fragment.nameIdentifier}} oninput={{action "updateNameIdentifier" value="target.value"}}/>
     <span class="input-group-btn">
-      {{#bs-button outline=true onClick=(action "deleteNameIdentifier" index)}}{{fa-icon "trash"}}{{/bs-button}}
+      <BsButton @outline={{true}} @onClick={{action "deleteNameIdentifier" index}}>{{fa-icon "trash"}}</BsButton>
     </span>
   </div>
 {{else}}

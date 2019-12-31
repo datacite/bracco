@@ -2,10 +2,7 @@
   <ul class="pagination">
     {{#if previousPage}}
       <li class="arrow prev enabled-arrow">
-        {{#link-to 
-          link 
-          (query-params
-          page=previousPage
+        <LinkTo @route={{link}} @query={{hash page=previousPage
           size=25
           created=model.query.created
           registered=model.query.registered  
@@ -21,9 +18,8 @@
           organization-type=model.query.organization-type
           focus-area=model.query.focus-area
           link-check-status=model.query.link-check-status
-          software=model.query.software)
-        }}&laquo;
-        {{/link-to}}
+          software=model.query.software}}>&laquo;
+        </LinkTo>
       </li>
     {{else}}
       <li class="arrow prev disabled">
@@ -42,10 +38,7 @@
         </li>
       {{else}}
         <li class="page-number">
-          {{#link-to 
-            link 
-            (query-params
-            page=item.page
+          <LinkTo @route={{link}} @query={{hash page=item.page
             size=25
             created=model.query.created
             registered=model.query.registered  
@@ -61,19 +54,15 @@
             organization-type=model.query.organization-type
             focus-area=model.query.focus-area
             link-check-status=model.query.link-check-status
-            software=model.query.software)
-          }}{{item.page}}
-          {{/link-to}}
+            software=model.query.software}}>{{item.page}}
+          </LinkTo>
         </li>
       {{/if}}
     {{/each}}
 
     {{#if nextPage}}
       <li class="arrow next enabled-arrow">
-        {{#link-to 
-          link 
-          (query-params
-          page=nextPage
+        <LinkTo @route={{link}} @query={{hash page=nextPage
           size=25
           created=model.query.created
           registered=model.query.registered  
@@ -89,9 +78,8 @@
           organization-type=model.query.organization-type
           focus-area=model.query.focus-area
           link-check-status=model.query.link-check-status
-          software=model.query.software)
-        }}&raquo;
-        {{/link-to}}
+          software=model.query.software}}>&raquo;
+        </LinkTo>
       </li>
     {{else}}
       <li class="arrow next disabled">

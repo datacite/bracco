@@ -12,7 +12,7 @@ export default Base.extend({
   },
   authenticate(jwt) {  
     return new Promise((resolve, reject) => {
-      const serverTokenEndpoint = this.get('serverTokenEndpoint');
+      const serverTokenEndpoint = this.serverTokenEndpoint;
 
       fetch(serverTokenEndpoint, {
         method: 'POST',

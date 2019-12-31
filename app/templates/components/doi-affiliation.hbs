@@ -8,7 +8,7 @@
       {{/form.element}}
     </div>
     <span class="input-group-addon" style="vertical-align:top;padding-top:3px;background-color:white;">
-    {{#bs-button outline=true onClick=(action "deleteAffiliation" index)}}{{fa-icon "trash" pull="left" style="margin:0;"}}{{/bs-button}}
+    <BsButton @outline={{true}} @onClick={{action "deleteAffiliation" index}}>{{fa-icon "trash" pull="left" style="margin:0;"}}</BsButton>
     </span>
   </div>
 {{else}}

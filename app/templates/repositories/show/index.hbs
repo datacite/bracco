@@ -1,13 +1,13 @@
 <div class="content">
   <div class="row row-chart">
-    {{bar-chart data=model.doiCount label='DOI' model=model link='repositories.show.dois' cumulative=false}}
+    <BarChart @data={{model.doiCount}} @label="DOI" @model={{model}} @link="repositories.show.dois" @cumulative={{false}} />
   </div>
 
   {{#if (can "read messages" model)}}
     <div class="row">
       <div class="col-md-9">
         {{#each flashMessages.queue as |flash|}}
-          {{flash-message flash=flash}}
+          <FlashMessage @flash={{flash}} />
         {{/each}}
       </div>
     </div>
