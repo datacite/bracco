@@ -25,7 +25,10 @@ Router.map(function() {
   this.route('repositories', function() {
     this.route('show', { path: '/:repository_id' }, function() {
       this.route('settings');
-      this.route('dois');
+      this.route('dois', function() {
+        this.route('new');
+        this.route('upload');
+      });
       this.route('transfer');
       this.route('prefixes', function() {
         this.route('show', { path: '/:prefix_id' }, function() {
@@ -36,8 +39,6 @@ Router.map(function() {
     });
   });
   this.route('dois', function() {
-    this.route('new');
-    this.route('upload');
     this.route('show', { path: '/:doi_id' }, function() {
       this.route('edit');
       this.route('modify');

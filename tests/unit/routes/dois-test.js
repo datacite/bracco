@@ -14,16 +14,6 @@ module('Unit | Route | dois', function(hooks) {
     assert.ok(route);
   });
 
-  test('new exists', function(assert) {
-    let route = this.owner.lookup('route:dois/new');
-    assert.ok(route);
-  });
-
-  test('upload exists', function(assert) {
-    let route = this.owner.lookup('route:dois/upload');
-    assert.ok(route);
-  });
-
   test('edit exists', function(assert) {
     let route = this.owner.lookup('route:dois/show/edit');
     assert.ok(route);
@@ -40,7 +30,7 @@ module('Unit | Route | dois', function(hooks) {
   });
 
   test('transfer exists', function(assert) {
-    let route = this.owner.lookup('route:dois/show/transdfer');
+    let route = this.owner.lookup('route:dois/show/transfer');
     assert.ok(route);
   });
 });

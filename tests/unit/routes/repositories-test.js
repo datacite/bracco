@@ -15,37 +15,47 @@ module('Unit | Route | repositories', function(hooks) {
   });
 
   test('settings exists', function(assert) {
-    let route = this.owner.lookup('route: repositories/show/settings');
+    let route = this.owner.lookup('route:repositories/show/settings');
     assert.ok(route);
   });
 
-  test('dois exists', function(assert) {
-    let route = this.owner.lookup('route: repositories/show/dois');
+  test('dois/index exists', function(assert) {
+    let route = this.owner.lookup('route:repositories/show/dois');
+    assert.ok(route);
+  });
+
+  test('dois/new exists', function(assert) {
+    let route = this.owner.lookup('route:repositories/show/dois/new');
+    assert.ok(route);
+  });
+
+  test('dois/upload exists', function(assert) {
+    let route = this.owner.lookup('route:repositories/show/dois/upload');
     assert.ok(route);
   });
 
   test('transfer exists', function(assert) {
-    let route = this.owner.lookup('route: repositories/show/transfer');
+    let route = this.owner.lookup('route:repositories/show/transfer');
     assert.ok(route);
   });
 
   test('prefixes exists', function(assert) {
-    let route = this.owner.lookup('route: repositories/show/prefixes');
+    let route = this.owner.lookup('route:repositories/show/prefixes');
     assert.ok(route);
   });
 
   test('prefixes/new exists', function(assert) {
-    let route = this.owner.lookup('route: repositories/show/prefixes/new');
+    let route = this.owner.lookup('route:repositories/show/prefixes/new');
     assert.ok(route);
   });
 
   test('prefixes/show exists', function(assert) {
-    let route = this.owner.lookup('route: repositories/show/prefixes/show');
+    let route = this.owner.lookup('route:repositories/show/prefixes/show');
     assert.ok(route);
   });
 
   test('prefixes/delete exists', function(assert) {
-    let route = this.owner.lookup('route: repositories/show/prefixes/delete');
+    let route = this.owner.lookup('route:repositories/show/prefixes/delete');
     assert.ok(route);
   });
 });
