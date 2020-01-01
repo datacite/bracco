@@ -7,19 +7,15 @@ export default Controller.extend({
   actions: {
     submit() {
       let self = this;
-      var repositoryPrefix = this.store.createRecord('repositoryPrefix', { repository: this.get('model.repository'), prefix: this.get('model.prefix.prefix') });
+      let repositoryPrefix = this.store.createRecord('repositoryPrefix', { repository: this.get('model.repository'), prefix: this.get('model.prefix.prefix') });
       repositoryPrefix.save().then(function(repositoryPrefix) {
         self.transitionToRoute('repositories.show.prefixes', repositoryPrefix.get('repository').get('id'));
-      }).catch(function(reason){
-        if (console.debug) {
-          console.debug(reason);
-        } else {
-          console.log(reason);
-        }
+      }).catch(function(reason) {
+        console.debug(reason);
       });
     },
     cancel() {
       this.transitionToRoute('repositories.show.prefixes', this.get('model.repository'));
-    }
-  }
+    },
+  },
 });

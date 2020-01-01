@@ -17,9 +17,9 @@ export default Component.extend({
 
   didReceiveAttrs() {
     this._super(...arguments);
-    
+
     // show metadata if at least one of these attributes is set
-    if (isPresent(this.get('model.publicationYear')) || 
+    if (isPresent(this.get('model.publicationYear')) ||
         isPresent(this.get('model.titles')) ||
         isPresent(this.get('model.publisher')) ||
         isPresent(this.get('model.creators')) ||
@@ -29,24 +29,24 @@ export default Component.extend({
     }
 
     let formats = { 'summary': 'Summary View',
-                    'datacite': 'DataCite XML',
-                    'datacite_json': 'DataCite JSON',
-                    'schema_org': 'Schema.org JSON-LD',
-                    'citeproc': 'Citeproc JSON',
-                    'codemeta': 'Codemeta JSON',
-                    'bibtex': 'BibTeX',
-                    'ris': 'RIS',
-                    'jats': 'JATS XML' };
+      'datacite': 'DataCite XML',
+      'datacite_json': 'DataCite JSON',
+      'schema_org': 'Schema.org JSON-LD',
+      'citeproc': 'Citeproc JSON',
+      'codemeta': 'Codemeta JSON',
+      'bibtex': 'BibTeX',
+      'ris': 'RIS',
+      'jats': 'JATS XML' };
     this.set('formats', formats);
   },
 
   showMetadata(metadata) {
-    if (metadata === "summary") {
+    if (metadata === 'summary') {
       this.set('output', false);
     } else {
       this.set('output', null);
       let self = this;
-      let url = ENV.API_URL + '/dois/' + this.model.get("doi");
+      let url = ENV.API_URL + '/dois/' + this.model.get('doi');
       let acceptHeaders = {
         'datacite': 'application/vnd.datacite.datacite+xml',
         'datacite_json': 'application/vnd.datacite.datacite+json',
@@ -60,8 +60,8 @@ export default Component.extend({
       let result = fetch(url, {
         headers: {
           'Authorization': 'Bearer ' + this.currentUser.get('jwt'),
-          'Accept': acceptHeaders[metadata]
-        }
+          'Accept': acceptHeaders[metadata],
+        },
       }).then(function(response) {
         if (response.ok) {
           return response.blob();
@@ -74,7 +74,7 @@ export default Component.extend({
         if (typeof response === 'string') {
           self.set('output', vkbeautify.json(JSON.stringify(response)));
         } else {
-          let reader = new FileReader();      
+          let reader = new FileReader();
           reader.readAsText(response).then((result) => {
             self.set('output', vkbeautify.xml(result));
           }, (err) => {
@@ -89,6 +89,6 @@ export default Component.extend({
   actions: {
     selectMetadata(metadata) {
       this.showMetadata(metadata);
-    }
-  }
+    },
+  },
 });

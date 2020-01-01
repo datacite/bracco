@@ -1,7 +1,7 @@
 import Controller from '@ember/controller';
 
 export default Controller.extend({
-  queryParams: ['query', 'region', 'member-type', 'organization-type', 'focus-area', 'include-deleted', 'non-profit-status', 'year', 'sort', 'page', 'size'],
+  queryParams: [ 'query', 'region', 'member-type', 'organization-type', 'focus-area', 'include-deleted', 'non-profit-status', 'year', 'sort', 'page', 'size' ],
   query: null,
   region: null,
   'member-type': null,
@@ -12,5 +12,5 @@ export default Controller.extend({
   year: null,
   sort: null,
   page: 1,
-  size: 25
+  size: 25,
 });

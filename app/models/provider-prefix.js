@@ -3,20 +3,20 @@ import { validator, buildValidations } from 'ember-cp-validations';
 
 const Validations = buildValidations({
   prefix: [
-    validator('presence', true)
-  ]
+    validator('presence', true),
+  ],
 });
 
 export default DS.Model.extend(Validations, {
   provider: DS.belongsTo('provider', {
-    async: false
+    async: false,
   }),
   prefix: DS.belongsTo('prefix', {
-    async: false
+    async: false,
   }),
   repositories: DS.hasMany('repository', {
-    async: false
+    async: false,
   }),
 
-  created: DS.attr('date')
+  created: DS.attr('date'),
 });

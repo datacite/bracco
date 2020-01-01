@@ -5,7 +5,7 @@ module('Unit | Validator | name-identifier', function(hooks) {
   setupTest(hooks);
 
   test('it works', function(assert) {
-    var validator = this.owner.lookup('validator:name-identifier');
+    let validator = this.owner.lookup('validator:name-identifier');
     assert.ok(validator);
   });
 });

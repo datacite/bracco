@@ -1,12 +1,15 @@
-// import { moduleForComponent, test } from 'ember-qunit';
-// import hbs from 'htmlbars-inline-precompile';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render } from '@ember/test-helpers';
+import hbs from 'htmlbars-inline-precompile';
 
-// moduleForComponent('month-chart', 'Integration | Component | month chart', {
-//   integration: true
-// });
+module('Integration | Component | month-chart', function(hooks) {
+  setupRenderingTest(hooks);
 
-// test('it renders', function(assert) {
-//   this.render(hbs`{{month-chart}}`);
+  test('it renders', async function(assert) {
+    await render(hbs`{{month-chart}}`);
 
-//   assert.dom('*').hasText('Search Reset All');
-// });
+    assert.dom('h3.panel-title').hasText('Charts by month');
+    assert.dom('div.panel-body').hasText('0 January 2010NaN');
+  });
+});

@@ -6,7 +6,7 @@ export default Component.extend({
 
   didReceiveAttrs() {
     this._super(...arguments);
-    
+
     this.set('navmenuTitle', ENV.NAVMENU_TITLE);
-  }
+  },
 });

@@ -10,7 +10,7 @@ module('Acceptance | user | repository', function(hooks) {
     await authenticateSession({
       uid: '0000-0001-6528-2027',
       name: 'Martin Fenner',
-      role_id: 'user'
+      role_id: 'user',
     });
 
     await visit('/repositories/tib.awi');
@@ -23,7 +23,7 @@ module('Acceptance | user | repository', function(hooks) {
     await authenticateSession({
       uid: '0000-0001-6528-2027',
       name: 'Martin Fenner',
-      role_id: 'user'
+      role_id: 'user',
     });
 
     await visit('/repositories/tib.awi/settings');
@@ -36,7 +36,7 @@ module('Acceptance | user | repository', function(hooks) {
     await authenticateSession({
       uid: '0000-0001-6528-2027',
       name: 'Martin Fenner',
-      role_id: 'user'
+      role_id: 'user',
     });
 
     await visit('/repositories/tib.awi/prefixes');
@@ -49,7 +49,7 @@ module('Acceptance | user | repository', function(hooks) {
     await authenticateSession({
       uid: '0000-0001-6528-2027',
       name: 'Martin Fenner',
-      role_id: 'user'
+      role_id: 'user',
     });
 
     await visit('/repositories/tib.awi/dois');

@@ -16,7 +16,7 @@ const NameIdentifier = BaseValidator.extend({
         let message = 'Not a valid ORCID identifier. Must start with https://orcid.org/, followed by 16 digits in groups of four, separated by hyphen. Last character can also be X.';
         return message;
       }
-  
+
       // check checksum
       // let num = value.replace(/-/g, '');
       // if (!Checkdigit.mod11.isValid(num)) {
@@ -29,7 +29,7 @@ const NameIdentifier = BaseValidator.extend({
       return this.store.findRecord('person', id).then(function() {
         return true;
       }).catch(function() {
-        let message = 'ORCID identifier does not exist. Please make sure you entered the correct identifier.'
+        let message = 'ORCID identifier does not exist. Please make sure you entered the correct identifier.';
         return message;
       });
     } else if (value.startsWith('https://ror.org')) {
@@ -45,7 +45,7 @@ const NameIdentifier = BaseValidator.extend({
       return this.store.findRecord('ror', id).then(function() {
         return true;
       }).catch(function() {
-        let message = 'ROR identifier does not exist. Please make sure you entered the correct identifier.'
+        let message = 'ROR identifier does not exist. Please make sure you entered the correct identifier.';
         return message;
       });
     } else if (value.startsWith('http://isni.org')) {
@@ -73,8 +73,8 @@ const NameIdentifier = BaseValidator.extend({
       }
 
       return true;
-      //// lookup identifier
-      //// https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS/Errors/CORSExternalRedirectNotAllowed
+      // // lookup identifier
+      // // https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS/Errors/CORSExternalRedirectNotAllowed
       // return fetch(value,{method: 'head', redirect: 'error'}
       //   ).then(function() {
       //   return true;
@@ -84,13 +84,13 @@ const NameIdentifier = BaseValidator.extend({
       //   return message;
       // });
     }
-  }
+  },
 });
 
 NameIdentifier.reopenClass({
   getDependentsFor() {
-    return ['id'];
-  }
+    return [ 'id' ];
+  },
 });
 
 export default NameIdentifier;

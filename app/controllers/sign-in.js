@@ -7,7 +7,7 @@ import { isPresent } from '@ember/utils';
 export default Controller.extend({
   session: service(),
 
-  queryParams: ['globus'],
+  queryParams: [ 'globus' ],
   globus: null,
   orcidLogoUrl: ENV.CDN_URL + '/images/orcid.png',
   globusLogoUrl: ENV.CDN_URL + '/images/globus.png',
@@ -24,6 +24,6 @@ export default Controller.extend({
         this.set('errorMessage', reason.errors && reason.errors[0].title || reason);
       });
       this.transitionToRoute('/');
-    }
-  }
+    },
+  },
 });

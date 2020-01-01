@@ -11,7 +11,7 @@ module('Acceptance | organization_admin | provider', function(hooks) {
       uid: 'datacite',
       name: 'DataCite',
       role_id: 'provider_admin',
-      provider_id: 'datacite'
+      provider_id: 'datacite',
     });
     await visit('/providers/datacite');
 
@@ -25,7 +25,7 @@ module('Acceptance | organization_admin | provider', function(hooks) {
       uid: 'datacite',
       name: 'DataCite',
       role_id: 'provider_admin',
-      provider_id: 'datacite'
+      provider_id: 'datacite',
     });
     await visit('/providers/datacite/settings');
 
@@ -36,37 +36,37 @@ module('Acceptance | organization_admin | provider', function(hooks) {
     assert.dom('button#delete-provider').doesNotExist();
   });
 
-  // test('editing provider DataCite settings', async function(assert) {
-  //   await authenticateSession({
-  //     uid: 'datacite',
-  //     name: 'DataCite',
-  //     role_id: 'provider_admin',
-  //     provider_id: 'datacite'
-  //   });
-  //   await visit('/providers/datacite/settings');
+  test('editing provider DataCite settings', async function(assert) {
+    await authenticateSession({
+      uid: 'datacite',
+      name: 'DataCite',
+      role_id: 'provider_admin',
+      provider_id: 'datacite',
+    });
+    await visit('/providers/datacite/settings');
 
-  //   assert.equal(currentURL(), '/providers/datacite/settings');
-  //   assert.dom('h2.work').hasText('DataCite');
-  //   assert.dom('li a.nav-link.active').hasText('Settings');
-  //   assert.dom('button#edit-provider').exists();
-  //   assert.dom('button#delete-provider').doesNotExist();
+    assert.equal(currentURL(), '/providers/datacite/settings');
+    assert.dom('h2.work').hasText('DataCite');
+    assert.dom('li a.nav-link.active').hasText('Settings');
+    assert.dom('button#edit-provider').exists();
+    assert.dom('button#delete-provider').doesNotExist();
 
-  //   await click('button#edit-provider');
+    await click('button#edit-provider');
 
-  //   await fillIn('input#display-name-field', 'DataCite II');
-  //   await click('button[type=submit]');
+    await fillIn('input#display-name-field', 'DataCite II');
+    await click('button[type=submit]');
 
-  //   assert.equal(currentURL(), '/providers/datacite/settings');
-  //   assert.dom('h2.work').hasText('DataCite II');
-  //   assert.dom('li a.nav-link.active').hasText('Settings');
-  // });
+    assert.equal(currentURL(), '/providers/datacite/settings');
+    assert.dom('h2.work').hasText('DataCite II');
+    assert.dom('li a.nav-link.active').hasText('Settings');
+  });
 
   test('visiting provider DataCite repositories', async function(assert) {
     await authenticateSession({
       uid: 'datacite',
       name: 'DataCite',
       role_id: 'provider_admin',
-      provider_id: 'datacite'
+      provider_id: 'datacite',
     });
     await visit('/providers/datacite/repositories');
 
@@ -81,7 +81,7 @@ module('Acceptance | organization_admin | provider', function(hooks) {
       uid: 'datacite',
       name: 'DataCite',
       role_id: 'provider_admin',
-      provider_id: 'datacite'
+      provider_id: 'datacite',
     });
     await visit('/providers/datacite/dois');
 
@@ -92,35 +92,35 @@ module('Acceptance | organization_admin | provider', function(hooks) {
     assert.dom('a#upload-doi').doesNotExist();
   });
 
-  // test('visiting specific doi managed by provider', async function(assert) {
-  //   await authenticateSession({
-  //     uid: 'tib',
-  //     name: 'Technische Informationsbibliothek',
-  //     role_id: 'provider_admin',
-  //     provider_id: 'tib'
-  //   });
-  //   await visit('/providers/tib/dois');
+  test('visiting specific doi managed by provider', async function(assert) {
+    await authenticateSession({
+      uid: 'tib',
+      name: 'Technische Informationsbibliothek',
+      role_id: 'provider_admin',
+      provider_id: 'tib',
+    });
+    await visit('/providers/tib/dois');
 
-  //   // first DOI in list
-  //   await click('h3.work:first-child a');
+    // first DOI in list
+    await click('h3.work:first-child a');
 
-  //   assert.dom('a#transfer-doi').includesText('Transfer DOI');
-  //   assert.dom('a#edit-doi').doesNotExist();
-  //   assert.dom('a#modify-doi').doesNotExist();
-  //   assert.dom('a#delete-doi').doesNotExist();
-  // });
+    assert.dom('a#transfer-doi').includesText('Transfer DOI');
+    assert.dom('a#edit-doi').doesNotExist();
+    assert.dom('a#modify-doi').doesNotExist();
+    assert.dom('a#delete-doi').doesNotExist();
+  });
 
-  // test('visiting provider DataCite prefixes', async function(assert) {
-  //   await authenticateSession({
-  //     uid: 'datacite',
-  //     name: 'DataCite',
-  //     role_id: 'provider_admin',
-  //     provider_id: 'datacite'
-  //   });
-  //   await visit('/providers/datacite/prefixes');
+  test('visiting provider DataCite prefixes', async function(assert) {
+    await authenticateSession({
+      uid: 'datacite',
+      name: 'DataCite',
+      role_id: 'provider_admin',
+      provider_id: 'datacite',
+    });
+    await visit('/providers/datacite/prefixes');
 
-  //   assert.equal(currentURL(), '/providers/datacite/prefixes');
-  //   assert.dom('h2.work').hasText('DataCite');
-  //   assert.dom('li a.nav-link.active').hasText('Prefixes');
-  // });
+    assert.equal(currentURL(), '/providers/datacite/prefixes');
+    assert.dom('h2.work').hasText('DataCite');
+    assert.dom('li a.nav-link.active').hasText('Prefixes');
+  });
 });

@@ -10,7 +10,7 @@ export default JSONAPIAdapter.extend(DataAdapterMixin, {
 
     this.set('headers', {
       'Content-Type': 'application/json',
-      'Accept': 'application/json'
+      'Accept': 'application/json',
     });
   },
 
@@ -20,5 +20,5 @@ export default JSONAPIAdapter.extend(DataAdapterMixin, {
 
   authorize() {
 
-  }
+  },
 });

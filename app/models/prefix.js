@@ -2,13 +2,13 @@ import DS from 'ember-data';
 
 export default DS.Model.extend({
   providers: DS.hasMany('provider', {
-    async: false
+    async: false,
   }),
   repositories: DS.hasMany('repository', {
-    async: false
+    async: false,
   }),
 
   meta: DS.attr(),
 
-  created: DS.attr('date')
+  created: DS.attr('date'),
 });

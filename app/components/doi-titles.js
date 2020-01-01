@@ -30,7 +30,7 @@ export default Component.extend({
       this.model.get('titles').createFragment();
     },
     setValidationClass() {
-      this.setValidationClass(true)
-    }
-  }
+      this.setValidationClass(true);
+    },
+  },
 });

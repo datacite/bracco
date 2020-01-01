@@ -4,7 +4,7 @@ import { computed } from '@ember/object';
 import { validator, buildValidations } from 'ember-cp-validations';
 
 const Validations = buildValidations({
-  name: validator('presence', true)
+  name: validator('presence', true),
 });
 
 export default DS.Model.extend(Validations, {
@@ -24,7 +24,7 @@ export default DS.Model.extend(Validations, {
   created: DS.attr('date'),
   updated: DS.attr('date'),
 
-  name: computed('repositoryName', function () {
+  name: computed('repositoryName', function() {
     return this.repositoryName;
   }),
 

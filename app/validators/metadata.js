@@ -17,25 +17,25 @@ const metadata = BaseValidator.extend({
         method: 'post',
         headers: {
           'authorization': 'Bearer ' + this.currentUser.get('jwt'),
-          'content-type': 'application/vnd.api+json; charset=utf-8'
+          'content-type': 'application/vnd.api+json; charset=utf-8',
         },
         body: JSON.stringify({
           data: {
             type: 'dois',
             attributes: {
               doi: this.get(options.dependentKeys[0]),
-              xml: xml
+              xml,
             },
             relationships: {
               client: {
                 data: {
-                  type: "clients",
-                  id: repositoryId
-                }
-              }
-            }
-          }
-        })
+                  type: 'clients',
+                  id: repositoryId,
+                },
+              },
+            },
+          },
+        }),
       }).then(function(response) {
         if (response.ok) {
           return response.json().then(function(data) {
@@ -47,36 +47,28 @@ const metadata = BaseValidator.extend({
             }
           });
         } else {
-          if (console.debug) {
-            console.debug(response);
-          } else {
-            console.log(response);
-          }
+          console.debug(response);
         }
       }).catch(function(error) {
-        if (console.debug) {
-          console.debug(error);
-        } else {
-          console.log(error);
-        }
+        console.debug(error);
       });
     }
   },
   b64EncodeUnicode(str) {
-      // first we use encodeURIComponent to get percent-encoded UTF-8,
-      // then we convert the percent encodings into raw bytes which
-      // can be fed into btoa.
-      return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g,
-          function toSolidBytes(match, p1) {
-              return String.fromCharCode('0x' + p1);
+    // first we use encodeURIComponent to get percent-encoded UTF-8,
+    // then we convert the percent encodings into raw bytes which
+    // can be fed into btoa.
+    return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g,
+      function toSolidBytes(match, p1) {
+        return String.fromCharCode('0x' + p1);
       }));
-  }
+  },
 });
 
 metadata.reopenClass({
   getDependentsFor() {
-    return ['xml'];
-  }
+    return [ 'xml' ];
+  },
 });
 
 export default metadata;

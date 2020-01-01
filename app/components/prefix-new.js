@@ -8,17 +8,17 @@ const Validations = buildValidations({
     validator('presence', true),
     validator('format', {
       regex: /^10\.\d{4,5}$/,
-      message: 'Must be a valid DOI prefix'
-    })
+      message: 'Must be a valid DOI prefix',
+    }),
   ],
   lastPrefix: [
     validator('presence', true),
     validator('format', {
       regex: /^10\.\d{4,5}$/,
-      message: 'Must be a valid DOI prefix'
+      message: 'Must be a valid DOI prefix',
     }),
-    validator('number-range', true)
-  ]
+    validator('number-range', true),
+  ],
 });
 
 export default Component.extend(Validations, {
@@ -29,10 +29,10 @@ export default Component.extend(Validations, {
 
   addPrefixes() {
     let first = A(this.firstPrefix.split('.')).get('lastObject');
-    let last = A(this.lastPrefix.split('.')).get('lastObject')
+    let last = A(this.lastPrefix.split('.')).get('lastObject');
 
-    while(first <= last) {
-      var prefix = this.store.createRecord('prefix', { id: '10.' + first });
+    while (first <= last) {
+      let prefix = this.store.createRecord('prefix', { id: '10.' + first });
       prefix.save();
 
       first++;
@@ -41,7 +41,7 @@ export default Component.extend(Validations, {
 
   actions: {
     new() {
-      
+
     },
     submitFirstPrefix(firstPrefix) {
       this.set('firstPrefix', firstPrefix);
@@ -50,11 +50,11 @@ export default Component.extend(Validations, {
       this.set('lastPrefix', lastPrefix);
     },
     submit() {
-      this.addPrefixes()
+      this.addPrefixes();
       this.router.transitionTo('prefixes');
     },
     cancel() {
       this.router.transitionTo('prefixes');
-    }
-  }
+    },
+  },
 });

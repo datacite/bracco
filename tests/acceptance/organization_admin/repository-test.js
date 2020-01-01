@@ -11,7 +11,7 @@ module('Acceptance | organization_admin | repository', function(hooks) {
       uid: 'datacite',
       name: 'DataCite',
       role_id: 'provider_admin',
-      provider_id: 'datacite'
+      provider_id: 'datacite',
     });
     await visit('/repositories/datacite.datacite');
 
@@ -25,7 +25,7 @@ module('Acceptance | organization_admin | repository', function(hooks) {
       uid: 'datacite',
       name: 'DataCite',
       role_id: 'provider_admin',
-      provider_id: 'datacite'
+      provider_id: 'datacite',
     });
     await visit('/repositories/datacite.datacite/settings');
 
@@ -36,33 +36,33 @@ module('Acceptance | organization_admin | repository', function(hooks) {
     assert.dom('button#delete-repository').includesText('Delete');
   });
 
-  // test('visiting repository DataCite Journal prefixes', async function(assert) {
-  //   await authenticateSession({
-  //     uid: 'datacite',
-  //     name: 'DataCite',
-  //     role_id: 'provider_admin',
-  //     provider_id: 'datacite'
-  //   });
-  //   await visit('/repositories/datacite.datacite/prefixes');
+  test('visiting repository DataCite Journal prefixes', async function(assert) {
+    await authenticateSession({
+      uid: 'datacite',
+      name: 'DataCite',
+      role_id: 'provider_admin',
+      provider_id: 'datacite',
+    });
+    await visit('/repositories/datacite.datacite/prefixes');
 
-  //   assert.equal(currentURL(), '/repositories/datacite.datacite/prefixes');
-  //   assert.dom('h2.work').hasText('DataCite Repository');
-  //   assert.dom('li a.nav-link.active').hasText('Prefixes');
-  // });
+    assert.equal(currentURL(), '/repositories/datacite.datacite/prefixes');
+    assert.dom('h2.work').hasText('DataCite Repository');
+    assert.dom('li a.nav-link.active').hasText('Prefixes');
+  });
 
   test('visiting repository DataCite Journal dois', async function(assert) {
     await authenticateSession({
       uid: 'datacite',
       name: 'DataCite',
       role_id: 'provider_admin',
-      provider_id: 'datacite'
+      provider_id: 'datacite',
     });
     await visit('/repositories/datacite.datacite/dois');
 
     assert.equal(currentURL(), '/repositories/datacite.datacite/dois');
     assert.dom('h2.work').hasText('DataCite Repository');
     assert.dom('li a.nav-link.active').hasText('DOIs');
-    
+
     assert.dom('h3.work').exists();
     assert.dom('a#new-doi').doesNotExist();
     assert.dom('a#upload-doi').doesNotExist();
@@ -74,11 +74,10 @@ module('Acceptance | organization_admin | repository', function(hooks) {
       uid: 'datacite',
       name: 'DataCite',
       role_id: 'provider_admin',
-      provider_id: 'datacite'
+      provider_id: 'datacite',
     });
     await visit('/repositories/datacite.datacite/dois');
 
     assert.dom('new-doi').doesNotExist();
   });
-
 });

@@ -29,19 +29,19 @@ export default Service.extend({
   load() {
     if (this.get('session.data.authenticated.access_token')) {
       // using authenticator:oauth2
-      let jwt = this.get('session.data.authenticated.access_token')
+      let jwt = this.get('session.data.authenticated.access_token');
 
       // RSA public key
       let cert = ENV.JWT_PUBLIC_KEY ? ENV.JWT_PUBLIC_KEY.replace(/\\n/g, '\n') : null;
 
       // verify asymmetric token, using RSA with SHA-256 hash algorithm
       let self = this;
-      nodeJsonWebToken.verify(jwt, cert, { algorithms: ['RS256'] }, function (error, payload) {
+      nodeJsonWebToken.verify(jwt, cert, { algorithms: [ 'RS256' ] }, function(error, payload) {
         if (payload) {
           self.set('jwt', jwt);
           self.initUser(payload);
-        } else if (error.message !== "jwt must be provided") {
-          self.session.invalidate().then(function () {
+        } else if (error.message !== 'jwt must be provided') {
+          self.session.invalidate().then(function() {
             self.get('flashMessages').danger('Unable to authenticate because the token was wrong or has expired.');
           });
         }
@@ -70,8 +70,8 @@ export default Service.extend({
         this.set('roleName', 'Staff');
 
         this.features.setup({
-          "use-repositories": true,
-          "show-researchers": true
+          'use-repositories': true,
+          'show-researchers': true,
         });
       } else if (payload.role_id === 'provider_admin') {
         this.set('isProvider', true);
@@ -97,14 +97,14 @@ export default Service.extend({
 
       if (payload.beta_tester) {
         this.features.setup({
-          "use-repositories": true,
-          "show-researchers": true
+          'use-repositories': true,
+          'show-researchers': true,
         });
       }
 
-      if (!['user', 'temporary'].includes(payload.role_id)) {
+      if (![ 'user', 'temporary' ].includes(payload.role_id)) {
         this.flashMessages.info('Welcome ' + this.name + ' to the Fabrica administration area.');
       }
     }
-  }
+  },
 });

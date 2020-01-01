@@ -15,5 +15,5 @@ export default JSONAPISerializer.extend({
     } else {
       return this._super(...arguments);
     }
-  }
+  },
 });

@@ -14,8 +14,8 @@ module('Integration | Component | doi descriptions', function(hooks) {
     await click('#add-description');
     let descriptions = this.element.querySelectorAll('textarea.description-field');
 
-    await fillIn(descriptions[0], "Abhinandan: Crowds gather for Indian pilots release");
-    assert.dom(descriptions[0]).hasValue("Abhinandan: Crowds gather for Indian pilots release");
+    await fillIn(descriptions[0], 'Abhinandan: Crowds gather for Indian pilots release');
+    assert.dom(descriptions[0]).hasValue('Abhinandan: Crowds gather for Indian pilots release');
   });
 
   test('add multiple values', async function(assert) {
@@ -25,10 +25,10 @@ module('Integration | Component | doi descriptions', function(hooks) {
     await click('#add-description');
     let descriptions = this.element.querySelectorAll('textarea.description-field');
 
-    await fillIn(descriptions[0], "Abhinandan: Crowds gather for Indian pilots release");
-    await fillIn(descriptions[1], "Praesent quis blandit odio. Donec justo ex, ");
+    await fillIn(descriptions[0], 'Abhinandan: Crowds gather for Indian pilots release');
+    await fillIn(descriptions[1], 'Praesent quis blandit odio. Donec justo ex, ');
 
-    assert.dom(descriptions[0]).hasValue("Abhinandan: Crowds gather for Indian pilots release");
-    assert.dom(descriptions[1]).hasValue("Praesent quis blandit odio. Donec justo ex, ");
+    assert.dom(descriptions[0]).hasValue('Abhinandan: Crowds gather for Indian pilots release');
+    assert.dom(descriptions[1]).hasValue('Praesent quis blandit odio. Donec justo ex, ');
   });
 });

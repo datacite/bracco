@@ -10,5 +10,5 @@ export default JSONAPIAdapter.extend(DataAdapterMixin, {
 
   pathForType() {
     return 'organizations';
-  }
+  },
 });

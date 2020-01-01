@@ -12,12 +12,8 @@ export default Controller.extend({
       let self = this;
       user.save().then(function() {
         self.get('session').invalidate();
-      }).catch(function(reason){
-        if (console.debug) {
-          console.debug(reason);
-        } else {
-          console.log(reason);
-        }
+      }).catch(function(reason) {
+        console.debug(reason);
       });
     },
     cancel() {
@@ -31,27 +27,19 @@ export default Controller.extend({
       let url = ENV.API_URL + '/random';
       fetch(url, {
         headers: {
-          'Authorization': 'Bearer ' + this.currentUser.get('jwt')
-        }
+          'Authorization': 'Bearer ' + this.currentUser.get('jwt'),
+        },
       }).then(function(response) {
         if (response.ok) {
           response.json().then(function(data) {
             self.get('model').set('passwordInput', data.phrase);
           });
         } else {
-          if (console.debug) {
-            console.debug(response);
-          } else {
-            console.log(response);
-          }
+          console.debug(response);
         }
       }).catch(function(error) {
-        if (console.debug) {
-          console.debug(error);
-        } else {
-          console.log(error);
-        }
+        console.debug(error);
       });
     },
-  }
+  },
 });

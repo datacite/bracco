@@ -6,7 +6,7 @@ const protocolServe = require('electron-protocol-serve');
 let mainWindow = null;
 
 // Registering a protocol & schema to serve our Ember application
-protocol.registerStandardSchemes(['serve'], { secure: true });
+protocol.registerStandardSchemes([ 'serve' ], { secure: true });
 protocolServe({
   cwd: join(__dirname || resolve(dirname('')), '..', 'ember'),
   app,

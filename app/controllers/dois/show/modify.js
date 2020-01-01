@@ -35,13 +35,13 @@ export default Controller.extend({
       doi.set('schemaVersion', null);
 
       let self = this;
-      doi.save().then(function (doi) {
+      doi.save().then(function(doi) {
         self.transitionToRoute('dois.show', doi);
       });
     },
     cancel() {
       this.model.rollbackAttributes();
       this.transitionToRoute('dois.show', this.model);
-    }
-  }
+    },
+  },
 });

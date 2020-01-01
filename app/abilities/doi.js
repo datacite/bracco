@@ -6,7 +6,7 @@ import { w } from '@ember/string';
 export default Ability.extend({
   currentUser: service(),
 
-  canViewHealth: computed('currentUser.role_id', function () {
+  canViewHealth: computed('currentUser.role_id', function() {
     switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
       case 'provider_admin':
@@ -15,7 +15,7 @@ export default Ability.extend({
         return false;
     }
   }),
-  canViewState: computed('currentUser.role_id', function () {
+  canViewState: computed('currentUser.role_id', function() {
     switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
       case 'provider_admin':
@@ -25,7 +25,7 @@ export default Ability.extend({
         return false;
     }
   }),
-  canSource: computed('currentUser.role_id', function () {
+  canSource: computed('currentUser.role_id', function() {
     switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
@@ -33,10 +33,10 @@ export default Ability.extend({
         return false;
     }
   }),
-  canTransfer: computed('currentUser.role_id', 'currentUser.provider_id', 'model.repository.provider.id', 'repository.provider.id', 'model.repository.id', 'model.query.client-id', function () {
+  canTransfer: computed('currentUser.role_id', 'currentUser.provider_id', 'model.repository.provider.id', 'repository.provider.id', 'model.repository.id', 'model.query.client-id', function() {
     switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
-        if (w("crossref.citations medra.citations kisti.citations jalc.citations op.citations").includes(this.get('model.repository.id')) || w("crossref.citations medra.citations kisti.citations jalc.citations op.citations").includes(this.get('model.query.client-id'))) {
+        if (w('crossref.citations medra.citations kisti.citations jalc.citations op.citations').includes(this.get('model.repository.id')) || w('crossref.citations medra.citations kisti.citations jalc.citations op.citations').includes(this.get('model.query.client-id'))) {
           return false;
         } else {
           return true;
@@ -47,64 +47,64 @@ export default Ability.extend({
         return false;
     }
   }),
-  canMove: computed('currentUser.role_id', 'currentUser.provider_id', 'repository.id', 'repository.provider.id', function () {
+  canMove: computed('currentUser.role_id', 'currentUser.provider_id', 'repository.id', 'repository.provider.id', function() {
     switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
-        if (w("crossref.citations medra.citations kisti.citations jalc.citations op.citations").includes(this.get('repository.id'))) {
+        if (w('crossref.citations medra.citations kisti.citations jalc.citations op.citations').includes(this.get('repository.id'))) {
           return false;
         } else {
           return true;
         }
       case 'provider_admin':
-        return true; //this.get('currentUser.provider_id') === this.get('repository.provider.id');
+        return true; // this.get('currentUser.provider_id') === this.get('repository.provider.id');
       default:
         return false;
     }
   }),
-  canUpdate: computed('currentUser.role_id', 'currentUser.client_id', 'model.id', function () {
-    if (w("crossref.citations medra.citations kisti.citations jalc.citations op.citations").includes(this.get('model.id'))) {
+  canUpdate: computed('currentUser.role_id', 'currentUser.client_id', 'model.id', function() {
+    if (w('crossref.citations medra.citations kisti.citations jalc.citations op.citations').includes(this.get('model.id'))) {
       return false;
     } else {
       switch (this.get('currentUser.role_id')) {
-      case 'staff_admin':
-      case 'provider_admin':
-        return true;
-      case 'client_admin':
-        return this.get('currentUser.client_id') === this.get('model.repository.id');
-      default:
-        return false;
+        case 'staff_admin':
+        case 'provider_admin':
+          return true;
+        case 'client_admin':
+          return this.get('currentUser.client_id') === this.get('model.repository.id');
+        default:
+          return false;
       }
     }
   }),
-  canUpload: computed('currentUser.role_id', 'currentUser.client_id', 'model.query.client-id', function () {
-    if (w("crossref.citations medra.citations kisti.citations jalc.citations op.citations").includes(this.get('model.query.client-id'))) {
+  canUpload: computed('currentUser.role_id', 'currentUser.client_id', 'model.query.client-id', function() {
+    if (w('crossref.citations medra.citations kisti.citations jalc.citations op.citations').includes(this.get('model.query.client-id'))) {
       return false;
     } else {
       switch (this.get('currentUser.role_id')) {
-      case 'staff_admin':
-        return true;
-      case 'client_admin':
-        return this.get('currentUser.client_id') === this.get('model.query.client-id');
-      default:
-        return false;
+        case 'staff_admin':
+          return true;
+        case 'client_admin':
+          return this.get('currentUser.client_id') === this.get('model.query.client-id');
+        default:
+          return false;
       }
     }
   }),
-  canCreate: computed('currentUser.role_id', 'currentUser.client_id', 'model.query.client-id', function () {
-    if (w("crossref.citations medra.citations kisti.citations jalc.citations op.citations").includes(this.get('model.query.client-id'))) {
+  canCreate: computed('currentUser.role_id', 'currentUser.client_id', 'model.query.client-id', function() {
+    if (w('crossref.citations medra.citations kisti.citations jalc.citations op.citations').includes(this.get('model.query.client-id'))) {
       return false;
     } else {
       switch (this.get('currentUser.role_id')) {
-      case 'staff_admin':
-        return true;
-      case 'client_admin':
-        return this.get('currentUser.client_id') === this.get('model.query.client-id');
-      default:
-        return false;
+        case 'staff_admin':
+          return true;
+        case 'client_admin':
+          return this.get('currentUser.client_id') === this.get('model.query.client-id');
+        default:
+          return false;
       }
     }
   }),
-  canDelete: computed('currentUser.role_id', 'currentUser.client_id', 'model.repository.id', function () {
+  canDelete: computed('currentUser.role_id', 'currentUser.client_id', 'model.repository.id', function() {
     switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
@@ -114,8 +114,8 @@ export default Ability.extend({
         return false;
     }
   }),
-  canModify: computed('currentUser.role_id', 'currentUser.client_id', 'model.repository.id', function () {
-    if (w("crossref.citations medra.citations kisti.citations jalc.citations op.citations").includes(this.get('model.repository.id'))) {
+  canModify: computed('currentUser.role_id', 'currentUser.client_id', 'model.repository.id', function() {
+    if (w('crossref.citations medra.citations kisti.citations jalc.citations op.citations').includes(this.get('model.repository.id'))) {
       return false;
     } else {
       switch (this.get('currentUser.role_id')) {
@@ -128,8 +128,8 @@ export default Ability.extend({
       }
     }
   }),
-  canEdit: computed('currentUser.role_id', 'currentUser.client_id', 'model.repository.id', function () {
-    if (w("crossref.citations medra.citations kisti.citations jalc.citations op.citations").includes(this.get('model.repository.id'))) {
+  canEdit: computed('currentUser.role_id', 'currentUser.client_id', 'model.repository.id', function() {
+    if (w('crossref.citations medra.citations kisti.citations jalc.citations op.citations').includes(this.get('model.repository.id'))) {
       return false;
     } else {
       switch (this.get('currentUser.role_id')) {
@@ -140,9 +140,9 @@ export default Ability.extend({
         default:
           return false;
       }
-  }
+    }
   }),
-  canForm: computed('currentUser.role_id', 'currentUser.client_id', 'model.repository.id', function () {
+  canForm: computed('currentUser.role_id', 'currentUser.client_id', 'model.repository.id', function() {
     switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
@@ -152,11 +152,11 @@ export default Ability.extend({
         return false;
     }
   }),
-  canDetail: computed('currentUser.role_id', 'currentUser.provider_id', 'currentUser.client_id', 'model.repository.id', 'model.repository.provider.id', 'model.state', function () {
+  canDetail: computed('currentUser.role_id', 'currentUser.provider_id', 'currentUser.client_id', 'model.repository.id', 'model.repository.provider.id', 'model.state', function() {
     switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
-      case 'provider_admin':  
+      case 'provider_admin':
         return this.get('currentUser.provider_id') === this.get('model.repository.provider.id');
       case 'client_admin':
         return this.get('currentUser.client_id') === this.get('model.repository.id');
@@ -166,7 +166,7 @@ export default Ability.extend({
         return false;
     }
   }),
-  canRead: computed('currentUser.role_id', 'currentUser.provider_id', 'currentUser.client_id', 'model.repository.id', 'model.provider.id', 'model.state', function () {
+  canRead: computed('currentUser.role_id', 'currentUser.provider_id', 'currentUser.client_id', 'model.repository.id', 'model.provider.id', 'model.state', function() {
     switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
@@ -179,5 +179,5 @@ export default Ability.extend({
       default:
         return this.get('model.state') === 'findable';
     }
-  })
+  }),
 });

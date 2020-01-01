@@ -24,11 +24,11 @@ module('Unit | Serializer | application', function(hooks) {
                   'client': {
                     'links': {
                       'self': 'https://host.test/api/dois/1/relationships/clients',
-                      'related': 'https://host.test/api/dois/1/clients'
+                      'related': 'https://host.test/api/dois/1/clients',
                     },
-                    'data': [{ 'type': 'clients', 'id': '10' }]
-                  }
-                }
+                    'data': [ { 'type': 'clients', 'id': '10' } ],
+                  },
+                },
               },
               'included': [
                 {
@@ -36,10 +36,10 @@ module('Unit | Serializer | application', function(hooks) {
                   'id': '10',
                   'attributes': {},
                   'links': {
-                    'self': 'https://host.test/api/clients/10'
-                  }
-                }
-              ]
+                    'self': 'https://host.test/api/clients/10',
+                  },
+                },
+              ],
             };
 
             let normalizedPayload = serializer.normalizeResponse(store, store.modelFor('repository'),
@@ -51,24 +51,24 @@ module('Unit | Serializer | application', function(hooks) {
                 'relationships': {
                   'repository': {
                     'data': [
-                      { 'id': '10', 'type': 'repository' }
+                      { 'id': '10', 'type': 'repository' },
                     ],
                     'links': {
                       'self': 'https://host.test/api/dois/1/relationships/clients',
-                      'related': 'https://host.test/api/dois/1/clients'
-                    }
-                  }
+                      'related': 'https://host.test/api/dois/1/clients',
+                    },
+                  },
                 },
-                'type': 'doi'
+                'type': 'doi',
               },
               'included': [
                 {
                   'attributes': {},
                   'id': '10',
                   'relationships': {},
-                  'type': 'repository'
-                }
-              ]
+                  'type': 'repository',
+                },
+              ],
             };
 
             assert.deepEqual(normalizedPayload.data.relationships, expectedPayload.data.relationships);

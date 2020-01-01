@@ -12,7 +12,7 @@ module('Integration | Component | doi metadata', function(hooks) {
       {{#doi-metadata}}
 
       {{/doi-metadata}}
-  ` );
+  `);
 
     assert.dom('*').hasText('');
   });

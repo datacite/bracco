@@ -9,84 +9,84 @@ import { A } from '@ember/array';
 const Validations = buildValidations({
   details: [
     validator('belongs-to', {
-      disabled: computed('model.mode', 'model.state', 'model.prefix', function () {
-        return !["new", "edit"].includes(this.model.get('mode')) || this.get('model.state') === 'draft';
-      })
-    })
+      disabled: computed('model.mode', 'model.state', 'model.prefix', function() {
+        return ![ 'new', 'edit' ].includes(this.model.get('mode')) || this.get('model.state') === 'draft';
+      }),
+    }),
   ],
   confirmDoi: [
     validator('presence', {
       presence: true,
-      disabled: computed('model.mode', function () {
+      disabled: computed('model.mode', function() {
         return this.model.get('mode') !== 'delete';
-      })
+      }),
     }),
     validator('confirmation', {
       on: 'doi',
       message: 'DOI does not match',
-      disabled: computed('model.mode', function () {
+      disabled: computed('model.mode', function() {
         return this.model.get('mode') !== 'delete';
-      })
-    })
+      }),
+    }),
   ],
   suffix: [
     validator('presence', {
       presence: true,
       message: 'The DOI suffix can\'t be blank.',
-      disabled: computed('model.mode', function () {
-        return !["new", "upload"].includes(this.model.get('mode'));
-      })
+      disabled: computed('model.mode', function() {
+        return ![ 'new', 'upload' ].includes(this.model.get('mode'));
+      }),
     }),
     validator('format', {
       regex: /^[A-Za-z0-9][-._;()/:A-Za-z0-9]+$/,
       message: 'The DOI suffix contains invalid characters.',
-      disabled: computed('model.mode', function () {
-        return !["new", "upload"].includes(this.model.get('mode'));
-      })
+      disabled: computed('model.mode', function() {
+        return ![ 'new', 'upload' ].includes(this.model.get('mode'));
+      }),
     }),
     validator('unique-doi', {
-      dependentKeys: ['model.prefix'],
-      disabled: computed('model.mode', function () {
-        return !["new", "upload"].includes(this.model.get('mode'));
-      })
-    })
+      dependentKeys: [ 'model.prefix' ],
+      disabled: computed('model.mode', function() {
+        return ![ 'new', 'upload' ].includes(this.model.get('mode'));
+      }),
+    }),
   ],
   url: [
     validator('format', {
       regex: /(http|https|ftp):\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/,
       allowBlank: true,
-      message: 'Please enter a valid URL that the DOI should resolve to.'
+      message: 'Please enter a valid URL that the DOI should resolve to.',
     }),
     validator('presence', {
       presence: true,
-      isWarning: computed('model.state', 'model.prefix', function () {
+      isWarning: computed('model.state', 'model.prefix', function() {
         return this.get('model.state') === 'draft';
-      })
-    })
+      }),
+    }),
   ],
   'creators': [
-    validator('has-many')
+    validator('has-many'),
   ],
   publisher: [
     validator('presence', {
       presence: true,
-      isWarning: computed('model.state', 'model.prefix', function () {
+      isWarning: computed('model.state', 'model.prefix', function() {
         return this.get('model.state') === 'draft';
       }),
-      disabled: computed('model.mode', function () {
-        return !["new", "edit"].includes(this.model.get('mode'));
-      })
-    })
+      disabled: computed('model.mode', function() {
+        return ![ 'new', 'edit' ].includes(this.model.get('mode'));
+      }),
+    }),
   ],
   publicationYear: [
     validator('presence', {
       presence: true,
-      isWarning: computed('model.state', 'model.prefix', function () {
+      isWarning: computed('model.state', 'model.prefix', function() {
         return this.get('model.state') === 'draft';
       }),
-      disabled: computed('model.mode', function () {
-        return !["new", "edit"].includes(this.model.get('mode'));
-      })
+      disabled: computed('model.mode', function() {
+        return ![ 'new', 'edit' ].includes(this.model.get('mode'));
+      }),
     }),
     validator('date', {
       allowBlank: true,
@@ -95,53 +95,53 @@ const Validations = buildValidations({
       precision: 'year',
       format: 'YYYY',
       errorFormat: 'YYYY',
-      message: "Must be between 1450 and 2020.",
-      disabled: computed('model.mode', function () {
-        return !["new", "edit"].includes(this.model.get('mode'));
-      })
-    })
+      message: 'Must be between 1450 and 2020.',
+      disabled: computed('model.mode', function() {
+        return ![ 'new', 'edit' ].includes(this.model.get('mode'));
+      }),
+    }),
   ],
   'types.resourceTypeGeneral': [
     validator('presence', {
       presence: true,
-      isWarning: computed('model.state', 'model.prefix', function () {
+      isWarning: computed('model.state', 'model.prefix', function() {
         return this.get('model.state') === 'draft';
       }),
-      disabled: computed('model.mode', function () {
-        return !["new", "edit"].includes(this.model.get('mode'));
-      })
-    })
+      disabled: computed('model.mode', function() {
+        return ![ 'new', 'edit' ].includes(this.model.get('mode'));
+      }),
+    }),
   ],
   'titles': [
-    validator('has-many')
+    validator('has-many'),
   ],
   xml: [
     validator('presence', {
       presence: true,
       message: 'Please include valid metadata.',
-      disabled: computed('model.mode', 'model.state', 'model.prefix', function () {
-        return !["upload", "modify"].includes(this.model.get('mode')) || this.get('model.state') === 'draft';
+      disabled: computed('model.mode', 'model.state', 'model.prefix', function() {
+        return ![ 'upload', 'modify' ].includes(this.model.get('mode')) || this.get('model.state') === 'draft';
       }),
     }),
     validator('metadata', {
       allowBlank: true,
-      dependentKeys: ['model.doi'],
-      isWarning: computed('model.mode', 'model.state', 'model.prefix', function () {
+      dependentKeys: [ 'model.doi' ],
+      isWarning: computed('model.mode', 'model.state', 'model.prefix', function() {
         return this.get('model.state') === 'draft';
       }),
-      disabled: computed('model.mode', function () {
-        return !["upload", "modify"].includes(this.model.get('mode'));
-      })
-    })
+      disabled: computed('model.mode', function() {
+        return ![ 'upload', 'modify' ].includes(this.model.get('mode'));
+      }),
+    }),
   ],
   'descriptions': [
-    validator('has-many')
-  ]
+    validator('has-many'),
+  ],
 });
 
 export default DS.Model.extend(Validations, {
   repository: DS.belongsTo('repository', {
-    async: true
+    async: true,
   }),
 
   doi: DS.attr('string'),
@@ -173,7 +173,7 @@ export default DS.Model.extend(Validations, {
   xml: DS.attr('xml'),
   metadataVersion: DS.attr('string'),
   schemaVersion: DS.attr('string'),
-  source: DS.attr('string', { defaultValue: "fabrica" }),
+  source: DS.attr('string', { defaultValue: 'fabrica' }),
   state: DS.attr('string'),
   breason: DS.attr('string', { defaultValue: null }),
   isActive: DS.attr('boolean', { defaultValue: true }),
@@ -183,34 +183,34 @@ export default DS.Model.extend(Validations, {
   updated: DS.attr('date'),
   mode: DS.attr('string'),
 
-  identifier: computed('doi', 'repository', function () {
-    if (ENV.API_URL == "https://api.datacite.org" || (w("crossref.citations medra.citations kisti.citations jalc.citations op.citations").includes(this.repository.get('id')))) {
-      return "https://doi.org/" + this.doi;
+  identifier: computed('doi', 'repository', function() {
+    if (ENV.API_URL == 'https://api.datacite.org' || (w('crossref.citations medra.citations kisti.citations jalc.citations op.citations').includes(this.repository.get('id')))) {
+      return 'https://doi.org/' + this.doi;
     } else {
-      return "https://handle.test.datacite.org/" + this.doi;
+      return 'https://handle.test.datacite.org/' + this.doi;
     }
   }),
-  isDraft: computed('state', function () {
+  isDraft: computed('state', function() {
     return this.state === 'draft';
   }),
-  showCitation: computed('registered', 'client', function () {
-    return (this.registered || (w("crossref.citations medra.citations kisti.citations jalc.citations op.citations").includes(this.repository.get('id'))));
+  showCitation: computed('registered', 'client', function() {
+    return (this.registered || (w('crossref.citations medra.citations kisti.citations jalc.citations op.citations').includes(this.repository.get('id'))));
   }),
-  schemaVersionString: computed('schemaVersion', function () {
+  schemaVersionString: computed('schemaVersion', function() {
     if (this.schemaVersion) {
-      return A(this.schemaVersion.split("-")).get("lastObject");
+      return A(this.schemaVersion.split('-')).get('lastObject');
     } else {
       return null;
     }
   }),
-  title: computed('titles', function () {
+  title: computed('titles', function() {
     if (this.titles.length > 0) {
       return A(this.titles).get('firstObject').get('title');
     } else {
       return null;
     }
   }),
-  description: computed('descriptions', function () {
+  description: computed('descriptions', function() {
     if (this.descriptions.length > 0) {
       return A(this.descriptions).get('firstObject').get('description');
     } else {

@@ -5,10 +5,10 @@ import fetch from 'fetch';
 import { A } from '@ember/array';
 
 const stateList = {
-  draft: ['draft', 'registered', 'findable'],
-  registered: ['registered', 'findable'],
-  findable: ['registered', 'findable']
-}
+  draft: [ 'draft', 'registered', 'findable' ],
+  registered: [ 'registered', 'findable' ],
+  findable: [ 'registered', 'findable' ],
+};
 
 export default Component.extend({
   currentUser: service(),
@@ -32,17 +32,17 @@ export default Component.extend({
   setDefaultPrefix() {
     let self = this;
     this.store.query('prefix', { 'client-id': this.repository.get('id'), sort: 'name', 'page[size]': 25 }).then(function(prefixes) {
-      
+
       if ((typeof self.get('model').get('doi')) == 'undefined') {
         self.set('prefixes', prefixes);
       }
 
       // use first prefix that is not 10.5072 if it exists
-      prefixes = prefixes.mapBy('id').removeObject('10.5072')
+      prefixes = prefixes.mapBy('id').removeObject('10.5072');
       let prefix = prefixes.length > 0 ? prefixes.get('firstObject') : '10.5072';
 
       self.get('model').set('prefix', prefix);
-      
+
       if (typeof self.get('model').get('doi') == 'undefined') {
         self.generate();
       }
@@ -54,11 +54,11 @@ export default Component.extend({
     try {
       const response = await fetch(url, {
         headers: {
-          'Authorization': 'Bearer ' + this.currentUser.get('jwt')
-        }
+          'Authorization': 'Bearer ' + this.currentUser.get('jwt'),
+        },
       });
       if (response.ok) {
-        return response.json().then(function (data) {
+        return response.json().then(function(data) {
           let suffix = data.dois[0].split('/', 2)[1];
           self.get('model').set('suffix', suffix);
           let doi = self.get('model').get('prefix') + '/' + suffix;
@@ -66,30 +66,19 @@ export default Component.extend({
           self.selectState(self.get('model').get('state'));
           return suffix;
         });
-      }
-      else {
-        if (console.debug) {
-          console.debug(response);
-        }
-        else {
-          console.log(response);
-        }
+      } else {
+        console.debug(response);
+
         return null;
       }
-    }
-    catch (error) {
-      if (console.debug) {
-        console.debug(error);
-      }
-      else {
-        console.log(error);
-      }
+    } catch (error) {
+      console.debug(error);
     }
   },
   selectState(state) {
     this.set('state', state);
     this.model.set('state', state);
-    this.setStates(state)
+    this.setStates(state);
   },
   setStates(state) {
     if (state == '' || state == 'undetermined') {
@@ -119,11 +108,11 @@ export default Component.extend({
       this.generate();
     },
     clear() {
-      this.model.set('suffix', null)
-      //this.$('input[type=text]:first').focus();
+      this.model.set('suffix', null);
+      // this.$('input[type=text]:first').focus();
     },
     selectState(state) {
       this.selectState(state);
-    }
-  }
+    },
+  },
 });

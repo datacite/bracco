@@ -6,7 +6,7 @@ export default Ability.extend({
   currentUser: service(),
 
   canUpdate: computed('currentUser.role_id', 'model.id', function() {
-    switch(this.get('currentUser.role_id')) {
+    switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
       case 'provider_admin':
@@ -18,7 +18,7 @@ export default Ability.extend({
     }
   }),
   canRead: computed('currentUser.role_id', function() {
-    switch(this.get('currentUser.role_id')) {
+    switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
       case 'provider_admin':
       case 'client_admin':
@@ -27,5 +27,5 @@ export default Ability.extend({
       default:
         return true;
     }
-  })
+  }),
 });

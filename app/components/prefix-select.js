@@ -8,9 +8,9 @@ export default Component.extend({
 
   searchPrefix(query) {
     if (this.repository) {
-      this.set('prefixes', this.store.query('prefix', { query: query, 'provider-id': this.repository.get('provider').get('id'), state: 'without-client', sort: 'name', 'page[size]': 25 }));
+      this.set('prefixes', this.store.query('prefix', { query, 'provider-id': this.repository.get('provider').get('id'), state: 'without-client', sort: 'name', 'page[size]': 25 }));
     } else {
-      this.set('prefixes', this.store.query('prefix', { query: query, state: 'unassigned', sort: 'name', 'page[size]': 25 }));
+      this.set('prefixes', this.store.query('prefix', { query, state: 'unassigned', sort: 'name', 'page[size]': 25 }));
     }
   },
 
@@ -26,6 +26,6 @@ export default Component.extend({
     },
     selectPrefix(prefix) {
       this.model.set('prefix', prefix);
-    }
-  }
+    },
+  },
 });

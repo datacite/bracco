@@ -12,14 +12,14 @@ export default Component.extend({
       this.fragment.set('affiliationIdentifier', organizationRecord.id);
       this.fragment.set('schemeUri', 'https://ror.org');
       this.fragment.set('affiliationIdentifierScheme', 'ROR');
-  
+
       this.setCreatorValidationClass();
     } else {
       this.fragment.set('name', null);
       this.fragment.set('affiliationIdentifier', null);
       this.fragment.set('schemeUri', 'https://ror.org');
       this.fragment.set('affiliationIdentifierScheme', 'ROR');
-      
+
       // this.setCreatorValidationClass();
     }
   },
@@ -27,7 +27,7 @@ export default Component.extend({
   actions: {
     searchRor(query) {
       let self = this;
-      this.store.query('ror', { 'query': query }).then(function (organizations) {
+      this.store.query('ror', { query }).then(function(organizations) {
         self.set('organizations', organizations);
       });
     },
@@ -36,6 +36,6 @@ export default Component.extend({
     },
     deleteAffiliation() {
       this.creator.get('affiliation').removeObject(this.fragment);
-    }
-  }
+    },
+  },
 });

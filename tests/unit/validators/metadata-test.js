@@ -5,7 +5,7 @@ module('Unit | Validator | metadata', function(hooks) {
   setupTest(hooks);
 
   test('it works', function(assert) {
-    var validator = this.owner.lookup('validator:metadata');
+    let validator = this.owner.lookup('validator:metadata');
     assert.ok(validator);
   });
 });

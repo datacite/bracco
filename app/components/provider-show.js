@@ -14,8 +14,8 @@ const organizationTypeList = [
   'professionalSociety',
   'publisher',
   'serviceProvider',
-  'other'
-]
+  'other',
+];
 
 const memberTypeList = [
   'consortium',
@@ -23,8 +23,8 @@ const memberTypeList = [
   'contractual_member',
   'direct_member',
   'member_only',
-  'registration_agency'
-]
+  'registration_agency',
+];
 const focusAreaList = [
   'naturalSciences',
   'engineeringAndTechnology',
@@ -32,13 +32,13 @@ const focusAreaList = [
   'agriculturalSciences',
   'socialSciences',
   'humanities',
-  'general'
-]
+  'general',
+];
 
 const nonProfitStatusList = [
   'non-profit',
-  'for-profit'
-]
+  'for-profit',
+];
 
 export default Component.extend({
   currentUser: service(),
@@ -79,7 +79,7 @@ export default Component.extend({
   // didReceiveAttrs() {
   //   this._super(...arguments);
 
-  //   this.searchConsortium(null);    
+  //   this.searchConsortium(null);
   // },
 
   reset() {
@@ -93,26 +93,18 @@ export default Component.extend({
     let url = ENV.API_URL + '/random';
     fetch(url, {
       headers: {
-        'Authorization': 'Bearer ' + this.currentUser.get('jwt')
-      }
+        'Authorization': 'Bearer ' + this.currentUser.get('jwt'),
+      },
     }).then(function(response) {
       if (response.ok) {
         response.json().then(function(data) {
           self.get('model').set('passwordInput', data.phrase);
         });
       } else {
-        if (console.debug) {
-          console.debug(response);
-        } else {
-          console.log(response);
-        }
+        console.debug(response);
       }
     }).catch(function(error) {
-      if (console.debug) {
-        console.debug(error);
-      } else {
-        console.log(error);
-      }
+      console.debug(error);
     });
   },
   isBillingEmpty: computed('billingInformation', function() {
@@ -125,9 +117,9 @@ export default Component.extend({
     isEmpty(this.model.get('billingInformation.address'));
   }),
   searchCountry(query) {
-    var countries = countryList.filter(function(country) {
+    let countries = countryList.filter(function(country) {
       return country.name.toLowerCase().startsWith(query.toLowerCase());
-    })
+    });
     this.set('countries', countries);
   },
   selectCountry(country) {
@@ -135,9 +127,9 @@ export default Component.extend({
     this.set('countries', countryList);
   },
   searchOrganizationType(query) {
-    var organizationTypes = organizationTypeList.filter(function(organizationType) {
+    let organizationTypes = organizationTypeList.filter(function(organizationType) {
       return organizationType.startsWith(query.toLowerCase());
-    })
+    });
     this.set('organizationTypes', organizationTypes);
   },
   selectOrganizationType(organizationType) {
@@ -154,9 +146,9 @@ export default Component.extend({
     }
   },
   searchMemberType(query) {
-    var memberTypes = memberTypeList.filter(function(memberType) {
+    let memberTypes = memberTypeList.filter(function(memberType) {
       return memberType.startsWith(query.toLowerCase());
-    })
+    });
     this.set('memberTypes', memberTypes);
   },
   selectMemberType(memberType) {
@@ -164,9 +156,9 @@ export default Component.extend({
     this.set('memberTypes', memberTypeList);
   },
   searchFocusArea(query) {
-    var focusAreas = focusAreaList.filter(function(focusArea) {
+    let focusAreas = focusAreaList.filter(function(focusArea) {
       return focusArea.startsWith(query.toLowerCase());
-    })
+    });
     this.set('focusAreas', focusAreas);
   },
   selectFocusArea(focusArea) {
@@ -174,9 +166,9 @@ export default Component.extend({
     this.set('focusAreas', focusAreaList);
   },
   searchNonProfitStatus(query) {
-    var nonProfitStatuses = nonProfitStatusList.filter(function(nonProfitStatus) {
+    let nonProfitStatuses = nonProfitStatusList.filter(function(nonProfitStatus) {
       return nonProfitStatus.startsWith(query.toLowerCase());
-    })
+    });
     this.set('nonProfitStatuses', nonProfitStatuses);
   },
   selectNonProfitStatus(nonProfitStatus) {
@@ -184,10 +176,10 @@ export default Component.extend({
     this.set('nonProfitStatuses', nonProfitStatusList);
   },
   searchConsortium(query) {
-    this.set('consortia', this.store.query('provider', { 'query': query, 'member-type': 'consortium', sort: 'name', 'page[size]': 100 }));
+    this.set('consortia', this.store.query('provider', { query, 'member-type': 'consortium', sort: 'name', 'page[size]': 100 }));
   },
   selectConsortium(consortium) {
-    this.provider.set('consortium', consortium)
+    this.provider.set('consortium', consortium);
   },
   selectBillingCountry(billingCountry) {
     this.provider.set('billingInformation.country', billingCountry);
@@ -198,8 +190,8 @@ export default Component.extend({
     this.provider.set('billingInformationCountry', billingCountry);
     this.set('countries', countryList);
   },
-  hasEmptyBilling(el){
-    return el === ""
+  hasEmptyBilling(el) {
+    return el === '';
   },
   actions: {
     edit(provider) {
@@ -226,32 +218,24 @@ export default Component.extend({
     setPassword() {
       let self = this;
       this.provider.set('keepPassword', false);
-      this.provider.save().then(function () {
+      this.provider.save().then(function() {
         self.reset();
-      }).catch(function(reason){
-        if (console.debug) {
-          console.debug(reason);
-        } else {
-          console.log(reason);
-        }
+      }).catch(function(reason) {
+        console.debug(reason);
       });
     },
     submit(provider) {
       let self = this;
-      provider.save().then(function () {
+      provider.save().then(function() {
         self.reset();
-      }).catch(function(reason){
-        if (console.debug) {
-          console.debug(reason);
-        } else {
-          console.log(reason);
-        }
+      }).catch(function(reason) {
+        console.debug(reason);
       });
     },
     destroy() {
       let self = this;
-      this.store.findRecord("provider", this.provider.get('id'), { backgroundReload: false }).then(function (provider) {
-        provider.destroyRecord().then(function () {
+      this.store.findRecord('provider', this.provider.get('id'), { backgroundReload: false }).then(function(provider) {
+        provider.destroyRecord().then(function() {
           self.router.transitionTo('/providers');
         });
       });
@@ -263,11 +247,7 @@ export default Component.extend({
     onSuccess() {
     },
     onError(error) {
-      if (console.debug) {
-        console.debug(error);
-      } else {
-        console.log(error);
-      }
+      console.debug(error);
     },
     searchCountry(query) {
       this.searchCountry(query);
@@ -310,12 +290,12 @@ export default Component.extend({
     },
     searchRor(query) {
       let self = this;
-      this.store.query('ror', { 'query': query }).then(function (organizations) {
+      this.store.query('ror', { query }).then(function(organizations) {
         self.set('organizations', organizations);
       });
     },
     selectRor(ror) {
       this.selectRor(ror);
-    }
-  }
+    },
+  },
 });

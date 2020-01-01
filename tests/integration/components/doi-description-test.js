@@ -2,7 +2,7 @@ import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
-// import { selectChoose } from 'ember-power-select/test-support';
+import { selectChoose } from 'ember-power-select/test-support';
 import { setupFactoryGuy, make } from 'ember-data-factory-guy';
 
 module('Integration | Component | doi description', function(hooks) {
@@ -17,15 +17,15 @@ module('Integration | Component | doi description', function(hooks) {
     assert.dom('*').hasText('All additional information that does not fit in any of the other categories. Description Type Language (optional)');
   });
 
-  // test('select type and language values', async function(assert) {
-  //   this.set('model', make('doi'));
-  //   this.set('fragment', make('description'));
-  //   await render(hbs`{{doi-description model=model fragment=fragment index=0}}`);
+  test('select type and language values', async function(assert) {
+    this.set('model', make('doi'));
+    this.set('fragment', make('description'));
+    await render(hbs`{{doi-description model=model fragment=fragment index=0}}`);
 
-  //   await selectChoose(".description-langs", '.ember-power-select-option', "Akan");
-  //   await selectChoose(".description-types",'.ember-power-select-option', "Methods");
+    await selectChoose('.description-langs', '.ember-power-select-option', 'Akan');
+    await selectChoose('.description-types','.ember-power-select-option', 'Methods');
 
-  //   assert.dom(".description-types").hasText("Methods");
-  //   assert.dom(".description-langs").hasText("Akan");
-  // });
+    assert.dom('.description-types').hasText('Methods');
+    assert.dom('.description-langs').hasText('Akan');
+  });
 });

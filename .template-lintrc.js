@@ -15,7 +15,6 @@ module.exports = {
     'no-triple-curlies': false,
     'no-unused-block-params': false,
     'simple-unless': false,
-    'no-console': false,
-    'no-bare-strings': false
-  }
+    'no-bare-strings': false,
+  },
 };

@@ -10,16 +10,16 @@ export default Base.extend({
   restore(data) {
     return this._validate(data) ? Promise.resolve(data) : Promise.reject();
   },
-  authenticate(jwt) {  
+  authenticate(jwt) {
     return new Promise((resolve, reject) => {
       const serverTokenEndpoint = this.serverTokenEndpoint;
 
       fetch(serverTokenEndpoint, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
+          'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: 'token=' + jwt
+        body: 'token=' + jwt,
       }).then((response) => {
         response.text().then((text) => {
           try {
@@ -42,6 +42,6 @@ export default Base.extend({
     return Promise.resolve();
   },
   _validate(data) {
-    return !isEmpty(data['access_token']);
-  }
+    return !isEmpty(data.access_token);
+  },
 });

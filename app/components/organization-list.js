@@ -10,8 +10,8 @@ const organizationTypeList = [
   'professionalSociety',
   'publisher',
   'serviceProvider',
-  'other'
-]
+  'other',
+];
 const memberTypeList = [
   'provider',
   'consortium',
@@ -19,8 +19,8 @@ const memberTypeList = [
   'contractual_provider',
   'for_profit_provider',
   'member_only',
-  'registration_agency'
-]
+  'registration_agency',
+];
 const focusAreaList = [
   'naturalSciences',
   'engineeringAndTechnology',
@@ -28,14 +28,14 @@ const focusAreaList = [
   'agriculturalSciences',
   'socialSciences',
   'humanities',
-  'general'
-]
+  'general',
+];
 
 export default Component.extend({
   store: service(),
 
   tagName: 'div',
-  classNames: ['row'],
+  classNames: [ 'row' ],
   provider: null,
   new: false,
   countryList,
@@ -55,9 +55,9 @@ export default Component.extend({
     this.set('new', false);
   },
   searchCountry(query) {
-    var countries = countryList.filter(function(country) {
+    let countries = countryList.filter(function(country) {
       return country.name.toLowerCase().startsWith(query.toLowerCase());
-    })
+    });
     this.set('countries', countries);
   },
   selectCountry(country) {
@@ -65,9 +65,9 @@ export default Component.extend({
     this.set('countries', countryList);
   },
   searchOrganizationType(query) {
-    var organizationTypes = organizationTypeList.filter(function(organizationType) {
+    let organizationTypes = organizationTypeList.filter(function(organizationType) {
       return organizationType.startsWith(query.toLowerCase());
-    })
+    });
     this.set('organizationTypes', organizationTypes);
   },
   selectOrganizationType(organizationType) {
@@ -75,9 +75,9 @@ export default Component.extend({
     this.set('organizationTypes', organizationTypeList);
   },
   searchMemberType(query) {
-    var memberTypes = memberTypeList.filter(function(memberType) {
+    let memberTypes = memberTypeList.filter(function(memberType) {
       return memberType.startsWith(query.toLowerCase());
-    })
+    });
     this.set('memberTypes', memberTypes);
   },
   selectMemberType(memberType) {
@@ -85,15 +85,15 @@ export default Component.extend({
     this.set('memberTypes', memberTypeList);
   },
   searchConsortium(query) {
-    this.set('consortia', this.store.query('provider', { 'query': query, 'member-type': 'consortium', sort: 'name', 'page[size]': 100 }));
+    this.set('consortia', this.store.query('provider', { query, 'member-type': 'consortium', sort: 'name', 'page[size]': 100 }));
   },
   selectConsortium(consortium) {
-    this.provider.set('consortium', consortium)
+    this.provider.set('consortium', consortium);
   },
   searchFocusArea(query) {
-    var focusAreas = focusAreaList.filter(function(focusArea) {
+    let focusAreas = focusAreaList.filter(function(focusArea) {
       return focusArea.startsWith(query.toLowerCase());
-    })
+    });
     this.set('focusAreas', focusAreas);
   },
   selectFocusArea(focusArea) {
@@ -108,7 +108,7 @@ export default Component.extend({
 
   actions: {
     new() {
-      this.set('provider', this.store.createRecord('provider', { consortium: this.get('model.provider'), memberType: "consortium_organization", billingContact: {}, technicalContact: {}, isActive: true }));
+      this.set('provider', this.store.createRecord('provider', { consortium: this.get('model.provider'), memberType: 'consortium_organization', billingContact: {}, technicalContact: {}, isActive: true }));
       this.set('countries', countryList);
       this.set('new', true);
     },
@@ -118,12 +118,8 @@ export default Component.extend({
       provider.save().then(function(provider) {
         self.router.transitionTo('providers.show.settings', provider.id);
         self.set('new', false);
-      }).catch(function(reason){
-        if (console.debug) {
-          console.debug(reason);
-        } else {
-          console.log(reason);
-        }
+      }).catch(function(reason) {
+        console.debug(reason);
       });
     },
     cancel() {
@@ -165,7 +161,7 @@ export default Component.extend({
     },
     searchRor(query) {
       let self = this;
-      this.store.query('ror', { 'query': query }).then(function (organizations) {
+      this.store.query('ror', { query }).then(function(organizations) {
         self.set('organizations', organizations);
       });
     },
@@ -175,6 +171,6 @@ export default Component.extend({
       } else {
         this.provider.set('rorId', null);
       }
-    }
-  }
+    },
+  },
 });

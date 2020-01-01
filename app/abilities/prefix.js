@@ -6,7 +6,7 @@ export default Ability.extend({
   currentUser: service(),
 
   canWrite: computed('currentUser.role_id', function() {
-    switch(this.get('currentUser.role_id')) {
+    switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
       case 'provider_admin':
         return true;
@@ -15,8 +15,8 @@ export default Ability.extend({
     }
   }),
   canUpdate: computed('currentUser.role_id', 'currentUser.provider_id', 'currentUser.client_id', 'model.repositories', 'model.providers', function() {
-    //let self = this;
-    switch(this.get('currentUser.role_id')) {
+    // let self = this;
+    switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
       case 'provider_admin':
@@ -30,7 +30,7 @@ export default Ability.extend({
   }),
   canRead: computed('currentUser.role_id', 'currentUser.provider_id', 'currentUser.client_id', 'model.repositories', 'model.providers', function() {
     let self = this;
-    switch(this.get('currentUser.role_id')) {
+    switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
       case 'provider_admin':
@@ -45,5 +45,5 @@ export default Ability.extend({
       default:
         return false;
     }
-  })
+  }),
 });

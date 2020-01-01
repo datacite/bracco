@@ -16,7 +16,7 @@ export default Component.extend({
   },
 
   fetchURL() {
-    if (w("crossref.citations medra.citations kisti.citations jalc.citations op.citations").includes(this.model.get('repository.id'))) {
+    if (w('crossref.citations medra.citations kisti.citations jalc.citations op.citations').includes(this.model.get('repository.id'))) {
       this.set('url', this.model.get('url'));
     } else {
       let self = this;
@@ -25,12 +25,12 @@ export default Component.extend({
       fetch(url, {
         headers: {
           'Authorization': 'Bearer ' + self.get('currentUser').get('jwt'),
-          'Accept': 'application/vnd.api+json'
-        }
+          'Accept': 'application/vnd.api+json',
+        },
       }).then(function(response) {
         if (response.ok) {
-          if (response.status == 204 ) {
-            return "No URL found";
+          if (response.status == 204) {
+            return 'No URL found';
           }
 
           return response.json().then(function(data) {
@@ -43,19 +43,11 @@ export default Component.extend({
             }
           });
         } else {
-          if (console.debug) {
-            console.debug(response);
-          } else {
-            console.log(response);
-          }
+          console.debug(response);
         }
       }).catch(function(error) {
-        if (console.debug) {
-          console.debug(error);
-        } else {
-          console.log(error);
-        }
+        console.debug(error);
       });
     }
-  }
+  },
 });

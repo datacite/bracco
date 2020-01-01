@@ -11,7 +11,7 @@ module('Acceptance | organization_admin | admin', function(hooks) {
       uid: 'datacite',
       name: 'DataCite',
       role_id: 'provider_admin',
-      provider_id: 'datacite'
+      provider_id: 'datacite',
     });
     await visit('/');
 
@@ -23,7 +23,7 @@ module('Acceptance | organization_admin | admin', function(hooks) {
       uid: 'datacite',
       name: 'DataCite',
       role_id: 'provider_admin',
-      provider_id: 'datacite'
+      provider_id: 'datacite',
     });
     await visit('/');
 
@@ -37,7 +37,7 @@ module('Acceptance | organization_admin | admin', function(hooks) {
       uid: 'datacite',
       name: 'DataCite',
       role_id: 'provider_admin',
-      provider_id: 'datacite'
+      provider_id: 'datacite',
     });
     await visit('/settings');
 
@@ -50,7 +50,7 @@ module('Acceptance | organization_admin | admin', function(hooks) {
       uid: 'datacite',
       name: 'DataCite',
       role_id: 'provider_admin',
-      provider_id: 'datacite'
+      provider_id: 'datacite',
     });
     await visit('/providers');
 
@@ -63,7 +63,7 @@ module('Acceptance | organization_admin | admin', function(hooks) {
       uid: 'datacite',
       name: 'DataCite',
       role_id: 'provider_admin',
-      provider_id: 'datacite'
+      provider_id: 'datacite',
     });
     await visit('/repositories');
 
@@ -76,7 +76,7 @@ module('Acceptance | organization_admin | admin', function(hooks) {
       uid: 'datacite',
       name: 'DataCite',
       role_id: 'provider_admin',
-      provider_id: 'datacite'
+      provider_id: 'datacite',
     });
     await visit('/prefixes');
 
@@ -89,7 +89,7 @@ module('Acceptance | organization_admin | admin', function(hooks) {
       uid: 'datacite',
       name: 'DataCite',
       role_id: 'provider_admin',
-      provider_id: 'datacite'
+      provider_id: 'datacite',
     });
     await visit('/prefixes/10.5038');
 
@@ -102,7 +102,7 @@ module('Acceptance | organization_admin | admin', function(hooks) {
       uid: 'datacite',
       name: 'DataCite',
       role_id: 'provider_admin',
-      provider_id: 'datacite'
+      provider_id: 'datacite',
     });
     await visit('/dois');
 
@@ -115,7 +115,7 @@ module('Acceptance | organization_admin | admin', function(hooks) {
       uid: 'datacite',
       name: 'DataCite',
       role_id: 'provider_admin',
-      provider_id: 'datacite'
+      provider_id: 'datacite',
     });
 
     await visit('/users');
@@ -129,7 +129,7 @@ module('Acceptance | organization_admin | admin', function(hooks) {
       uid: 'tib',
       name: 'Technische Informationsbibliothek',
       role_id: 'provider_admin',
-      provider_id: 'tib'
+      provider_id: 'tib',
     });
 
     await visit('/users/0000-0003-1419-2405');

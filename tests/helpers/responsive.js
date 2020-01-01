@@ -30,7 +30,7 @@ MediaService.reopen({
       this.setProperties(props);
     } else {
       throw new Error(
-        `You tried to set the breakpoint to ${breakpoint}, which is not in your app/breakpoint.js file.`
+        `You tried to set the breakpoint to ${breakpoint}, which is not in your app/breakpoint.js file.`,
       );
     }
   },
@@ -41,7 +41,7 @@ MediaService.reopen({
     this._super(...arguments);
 
     this._forceSetBreakpoint(this.get('_defaultBreakpoint'));
-  }
+  },
 });
 
 export default registerAsyncHelper('setBreakpoint', function(app, breakpoint) {

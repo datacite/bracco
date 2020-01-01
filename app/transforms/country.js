@@ -16,5 +16,5 @@ export default Transform.extend({
     } else {
       return null;
     }
-  }
+  },
 });

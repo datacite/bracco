@@ -14,7 +14,7 @@ module('Integration | Component | url check', function(hooks) {
       {{#url-check}}
 
       {{/url-check}}
-  ` );
+    `);
 
     assert.dom('*').hasText('');
   });

@@ -12,7 +12,7 @@ module('Acceptance | client_admin | admin', function(hooks) {
       name: 'Alfred Wegener Institute',
       role_id: 'client_admin',
       provider_id: 'tib',
-      client_id: 'tib.awi'
+      client_id: 'tib.awi',
     });
     await visit('/');
 
@@ -25,7 +25,7 @@ module('Acceptance | client_admin | admin', function(hooks) {
       name: 'Alfred Wegener Institute',
       role_id: 'client_admin',
       provider_id: 'tib',
-      client_id: 'tib.awi'
+      client_id: 'tib.awi',
     });
     await visit('/');
 
@@ -40,7 +40,7 @@ module('Acceptance | client_admin | admin', function(hooks) {
       name: 'Alfred Wegener Institute',
       role_id: 'client_admin',
       provider_id: 'tib',
-      client_id: 'tib.awi'
+      client_id: 'tib.awi',
     });
     await visit('/settings');
 
@@ -54,7 +54,7 @@ module('Acceptance | client_admin | admin', function(hooks) {
       name: 'Alfred Wegener Institute',
       role_id: 'client_admin',
       provider_id: 'tib',
-      client_id: 'tib.awi'
+      client_id: 'tib.awi',
     });
     await visit('/providers');
 
@@ -68,7 +68,7 @@ module('Acceptance | client_admin | admin', function(hooks) {
       name: 'Alfred Wegener Institute',
       role_id: 'client_admin',
       provider_id: 'tib',
-      client_id: 'tib.awi'
+      client_id: 'tib.awi',
     });
     await visit('/repositories');
 
@@ -82,7 +82,7 @@ module('Acceptance | client_admin | admin', function(hooks) {
       name: 'Alfred Wegener Institute',
       role_id: 'client_admin',
       provider_id: 'tib',
-      client_id: 'tib.awi'
+      client_id: 'tib.awi',
     });
     await visit('/prefixes');
 
@@ -96,7 +96,7 @@ module('Acceptance | client_admin | admin', function(hooks) {
       name: 'Alfred Wegener Institute',
       role_id: 'client_admin',
       provider_id: 'tib',
-      client_id: 'tib.awi'
+      client_id: 'tib.awi',
     });
 
     await visit('/users');
@@ -111,7 +111,7 @@ module('Acceptance | client_admin | admin', function(hooks) {
       name: 'Alfred Wegener Institute',
       role_id: 'client_admin',
       provider_id: 'tib',
-      client_id: 'tib.awi'
+      client_id: 'tib.awi',
     });
 
     await visit('/users/0000-0003-1419-2405');

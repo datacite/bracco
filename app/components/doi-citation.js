@@ -16,7 +16,7 @@ export default Component.extend({
 
     this.selectStyle('apa');
 
-    let citationFormats = { 
+    let citationFormats = {
       'apa': 'APA',
       'harvard-cite-them-right': 'Harvard',
       'modern-language-association': 'MLA',
@@ -28,12 +28,12 @@ export default Component.extend({
 
   selectStyle(style) {
     let self = this;
-    let url = ENV.API_URL + '/dois/' + this.model.get("doi") + '?style=' + style;
+    let url = ENV.API_URL + '/dois/' + this.model.get('doi') + '?style=' + style;
     let result = fetch(url, {
       headers: {
         'Authorization': 'Bearer ' + this.currentUser.get('jwt'),
-        'Accept': 'text/x-bibliography'
-      }
+        'Accept': 'text/x-bibliography',
+      },
     }).then(function(response) {
       if (response.ok) {
         return response.blob();
@@ -54,7 +54,7 @@ export default Component.extend({
         });
       }
     });
-    //this.get('router').transitionTo({ queryParams: { citation: citation } });
+    // this.get('router').transitionTo({ queryParams: { citation: citation } });
   },
 
   actions: {
@@ -62,6 +62,6 @@ export default Component.extend({
       // APA is default citation style
       style = (style === undefined) ? 'apa' : style;
       this.selectStyle(style);
-    }
-  }
+    },
+  },
 });

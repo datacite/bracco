@@ -10,7 +10,7 @@ module('Acceptance | user | admin', function(hooks) {
     await authenticateSession({
       uid: '0000-0001-6528-2027',
       name: 'Martin Fenner',
-      role_id: 'user'
+      role_id: 'user',
     });
 
     await visit('/');
@@ -22,7 +22,7 @@ module('Acceptance | user | admin', function(hooks) {
     await authenticateSession({
       uid: '0000-0001-6528-2027',
       name: 'Martin Fenner',
-      role_id: 'user'
+      role_id: 'user',
     });
 
     await visit('/');
@@ -36,7 +36,7 @@ module('Acceptance | user | admin', function(hooks) {
     await authenticateSession({
       uid: '0000-0001-6528-2027',
       name: 'Martin Fenner',
-      role_id: 'user'
+      role_id: 'user',
     });
 
     await visit('/settings');
@@ -49,7 +49,7 @@ module('Acceptance | user | admin', function(hooks) {
     await authenticateSession({
       uid: '0000-0001-6528-2027',
       name: 'Martin Fenner',
-      role_id: 'user'
+      role_id: 'user',
     });
 
     await visit('/providers');
@@ -62,7 +62,7 @@ module('Acceptance | user | admin', function(hooks) {
     await authenticateSession({
       uid: '0000-0001-6528-2027',
       name: 'Martin Fenner',
-      role_id: 'user'
+      role_id: 'user',
     });
 
     await visit('/repositories');
@@ -75,7 +75,7 @@ module('Acceptance | user | admin', function(hooks) {
     await authenticateSession({
       uid: '0000-0001-6528-2027',
       name: 'Martin Fenner',
-      role_id: 'user'
+      role_id: 'user',
     });
 
     await visit('/prefixes');
@@ -88,7 +88,7 @@ module('Acceptance | user | admin', function(hooks) {
     await authenticateSession({
       uid: '0000-0001-6528-2027',
       name: 'Martin Fenner',
-      role_id: 'user'
+      role_id: 'user',
     });
 
     await visit('/prefixes/10.5038');
@@ -101,7 +101,7 @@ module('Acceptance | user | admin', function(hooks) {
     await authenticateSession({
       uid: '0000-0001-6528-2027',
       name: 'Martin Fenner',
-      role_id: 'user'
+      role_id: 'user',
     });
 
     await visit('/dois');
@@ -114,7 +114,7 @@ module('Acceptance | user | admin', function(hooks) {
     await authenticateSession({
       uid: '0000-0001-6528-2027',
       name: 'Martin Fenner',
-      role_id: 'user'
+      role_id: 'user',
     });
 
     await visit('repositories/bl.sagecite/dois/10.5520%2Fsagecite-1');
@@ -127,7 +127,7 @@ module('Acceptance | user | admin', function(hooks) {
     await authenticateSession({
       uid: '0000-0001-6528-2027',
       name: 'Martin Fenner',
-      role_id: 'user'
+      role_id: 'user',
     });
 
     await visit('/users');
@@ -140,7 +140,7 @@ module('Acceptance | user | admin', function(hooks) {
     await authenticateSession({
       uid: '0000-0001-6528-2027',
       name: 'Martin Fenner',
-      role_id: 'user'
+      role_id: 'user',
     });
 
     await visit('/users/0000-0003-1419-2405');

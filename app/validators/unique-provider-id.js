@@ -9,20 +9,20 @@ const UniqueProviderId = BaseValidator.extend({
       return true;
     } else {
       return this.store.query('provider', { id: value }).then((result) => {
-        if(result.content.length > 0) {
-          return "The Member ID " + value + " already exists, or existed before and has been deleted. Please contact DataCite staff if you want to create an account with this Member ID.";
+        if (result.content.length > 0) {
+          return 'The Member ID ' + value + ' already exists, or existed before and has been deleted. Please contact DataCite staff if you want to create an account with this Member ID.';
         } else {
           return true;
         }
       });
     }
-  }
+  },
 });
 
 UniqueProviderId.reopenClass({
   getDependentsFor() {
-    return ['id'];
-  }
+    return [ 'id' ];
+  },
 });
 
 export default UniqueProviderId;

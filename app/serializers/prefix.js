@@ -8,5 +8,5 @@ export default ApplicationSerializer.extend({
     } else {
       return this._super(...arguments);
     }
-  }
+  },
 });

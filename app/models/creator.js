@@ -9,51 +9,51 @@ const Validations = buildValidations({
   'name': [
     validator('presence', {
       presence: true,
-      isWarning: computed('model._internalModel._recordData.getOwner()', function () {
+      isWarning: computed('model._internalModel._recordData.getOwner()', function() {
         // workaround to look up owner
         let owner = this.model._internalModel._recordData.getOwner();
         return owner.state === 'draft' || owner.prefix === '10.5072';
       }),
-      disabled: computed('model._internalModel._recordData.getOwner()', 'model.nameType', function () {
+      disabled: computed('model._internalModel._recordData.getOwner()', 'model.nameType', function() {
         // only validate first creator and only if nameType is not "Personal"
         let owner = this.model._internalModel._recordData.getOwner();
-        return this.model !== owner.creators.content[0] || this.model.get('nameType') === "Personal";
-      })
-    })
+        return this.model !== owner.creators.content[0] || this.model.get('nameType') === 'Personal';
+      }),
+    }),
   ],
   'givenName': [
     validator('presence', {
       presence: true,
-      isWarning: computed('model._internalModel._recordData.getOwner()', function () {
+      isWarning: computed('model._internalModel._recordData.getOwner()', function() {
         // workaround to look up owner
         let owner = this.model._internalModel._recordData.getOwner();
         return owner.state === 'draft' || owner.prefix === '10.5072';
       }),
-      disabled: computed('model._internalModel._recordData.getOwner()', 'model.nameType', function () {
+      disabled: computed('model._internalModel._recordData.getOwner()', 'model.nameType', function() {
         // only validate first creator and only if nameType is "Personal"
         let owner = this.model._internalModel._recordData.getOwner();
-        return this.model !== owner.creators.content[0] || this.model.get('nameType') !== "Personal";
-      })
-    })
+        return this.model !== owner.creators.content[0] || this.model.get('nameType') !== 'Personal';
+      }),
+    }),
   ],
   'familyName': [
     validator('presence', {
       presence: true,
-      isWarning: computed('model._internalModel._recordData.getOwner()', function () {
+      isWarning: computed('model._internalModel._recordData.getOwner()', function() {
         // workaround to look up owner
         let owner = this.model._internalModel._recordData.getOwner();
         return owner.state === 'draft' || owner.prefix === '10.5072';
       }),
-      disabled: computed('model._internalModel._recordData.getOwner()', 'model.nameType', function () {
+      disabled: computed('model._internalModel._recordData.getOwner()', 'model.nameType', function() {
         // only validate first creator and only if nameType is "Personal"
         let owner = this.model._internalModel._recordData.getOwner();
-        return this.model !== owner.creators.content[0] || this.model.get('nameType') !== "Personal";
-      })
+        return this.model !== owner.creators.content[0] || this.model.get('nameType') !== 'Personal';
+      }),
     }),
   ],
   'nameIdentifiers': [
-    validator('has-many')
-  ]
+    validator('has-many'),
+  ],
   // 'affiliation': [
   //   validator('has-many')
   // ]
@@ -63,12 +63,12 @@ export default Fragment.extend(Validations, {
   name: DS.attr('string'),
   givenName: DS.attr('string', { defaultValue: null }),
   familyName: DS.attr('string', { defaultValue: null }),
-  nameType: DS.attr('string', { defaultValue: "Personal" }),
+  nameType: DS.attr('string', { defaultValue: 'Personal' }),
   nameIdentifiers: fragmentArray('name-identifier'),
   affiliation: fragmentArray('affiliation'),
 
   displayName: computed('name', 'givenName', 'familyName', function() {
-    return (this.familyName) ? [this.givenName, this.familyName].join(" ") : this.name;
+    return (this.familyName) ? [ this.givenName, this.familyName ].join(' ') : this.name;
   }),
   orcid: computed('nameIdentifiers', function() {
     if (this.nameIdentifiers) {

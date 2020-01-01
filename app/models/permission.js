@@ -2,11 +2,11 @@ import DS from 'ember-data';
 
 export default DS.Model.extend({
   provider: DS.belongsTo('provider', {
-    async: false
+    async: false,
   }),
   prefix: DS.belongsTo('repository', {
-    async: false
+    async: false,
   }),
 
-  created: DS.attr('date')
+  created: DS.attr('date'),
 });

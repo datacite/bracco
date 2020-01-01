@@ -6,7 +6,7 @@ module('Unit | Ability | repository', function(hooks) {
 
   // Replace this with your real tests.
   test('it exists', function(assert) {
-    var ability = this.owner.lookup('ability:repository');
+    let ability = this.owner.lookup('ability:repository');
     assert.ok(ability);
   });
 });

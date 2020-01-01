@@ -2,17 +2,17 @@ import { notEmpty } from '@ember/object/computed';
 import { assign } from '@ember/polyfills';
 import Component from '@ember/component';
 
-const placeholders = { 
+const placeholders = {
   'doi': 'DOI',
   'provider': 'Provider',
   'organization': 'Organization',
   'repository': 'Repository',
   'prefix': 'Prefix',
   'repository-prefix': 'Prefix',
-  'provider-prefix': 'Prefix' }
+  'provider-prefix': 'Prefix' };
 
 export default Component.extend({
-  classNames: ['div'],
+  classNames: [ 'div' ],
 
   hasInput: notEmpty('query'),
   hasFilters: true,
@@ -33,12 +33,12 @@ export default Component.extend({
     if (this.name) {
       this.set('modelName', this.name);
     } else {
-      this.set('modelName', placeholders[this.model.get("modelName")]);
+      this.set('modelName', placeholders[this.model.get('modelName')]);
     }
-    
-    if (this.modelName === "DOI") {
+
+    if (this.modelName === 'DOI') {
       this.set('formats', { '-updated': 'Sort by Date Updated', '-created': 'Sort by Date Created', 'name': 'Sort by DOI', 'relevance': 'Sort by Relevance' });
-    } else if (this.modelName === "Prefix") {
+    } else if (this.modelName === 'Prefix') {
       this.set('formats', { 'name': 'Sort by Prefix', '-created': 'Sort by Date Created' });
     } else {
       this.set('formats', { 'name': 'Sort by Name', '-created': 'Sort by Date Joined', 'relevance': 'Sort by Relevance' });
@@ -73,6 +73,6 @@ export default Component.extend({
     sort(sort) {
       this.set('sort', sort);
       this.search();
-    }
-  }
+    },
+  },
 });

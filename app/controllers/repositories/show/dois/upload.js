@@ -18,16 +18,12 @@ export default Controller.extend({
       let self = this;
       doi.save().then(function(doi) {
         self.transitionToRoute('dois.show', doi);
-      }).catch(function(reason){
-        if (console.debug) {
-          console.debug(reason);
-        } else {
-          console.log(reason);
-        }
+      }).catch(function(reason) {
+        console.debug(reason);
       });
     },
     cancel() {
       this.transitionToRoute('repositories.show.dois', this.get('model.repository.id'));
-    }
-  }
+    },
+  },
 });

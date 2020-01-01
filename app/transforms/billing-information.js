@@ -6,13 +6,13 @@ export default Transform.extend({
     if (serialized) {
 
       return {
-        city: serialized.city ? serialized.city : "",
+        city: serialized.city ? serialized.city : '',
         state: serialized.state,
         postCode: serialized.postCode,
         department: serialized.department,
         address: serialized.address,
         organization: serialized.organization,
-        country: serialized.country ? {code: serialized.country, name: countryList.name(serialized.country)} : ""
+        country: serialized.country ? {code: serialized.country, name: countryList.name(serialized.country)} : '',
       };
     } else {
       return null;
@@ -28,10 +28,10 @@ export default Transform.extend({
         postCode: deserialized.postCode,
         department: deserialized.department,
         organization: deserialized.organization,
-        country: deserialized.country ? deserialized.country.code : ""
+        country: deserialized.country ? deserialized.country.code : '',
       };
     } else {
       return null;
     }
-  }
+  },
 });

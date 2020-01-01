@@ -6,7 +6,7 @@ const titleTypes = [
   'AlternativeTitle',
   'Subtitle',
   'TranslatedTitle',
-  'Other'
+  'Other',
 ];
 const languageList = ISO6391.getAllNames();
 
@@ -14,10 +14,10 @@ export default Component.extend({
   titleTypes,
   languageList,
   languages: languageList,
-  language: computed('fragment.lang', function () {
+  language: computed('fragment.lang', function() {
     return ISO6391.getName(this.get('fragment.lang'));
   }),
-  
+
   actions: {
     updateTitle(value) {
       this.fragment.set('title', value);
@@ -30,9 +30,9 @@ export default Component.extend({
       this.fragment.set('titleType', titleType);
     },
     searchLanguage(query) {
-      var languages = languageList.filter(function (language) {
+      let languages = languageList.filter(function(language) {
         return language.toLowerCase().startsWith(query.toLowerCase());
-      })
+      });
       this.set('languages', languages);
     },
     selectLanguage(language) {
@@ -42,6 +42,6 @@ export default Component.extend({
         this.fragment.set('lang', null);
       }
       this.set('languages', languageList);
-    }
-  }
+    },
+  },
 });

@@ -25,7 +25,7 @@ module('Acceptance | provider_admin | provider', function(hooks) {
       uid: 'tib',
       name: 'Technische Informationsbibliothek',
       role_id: 'provider_admin',
-      provider_id: 'tib'
+      provider_id: 'tib',
     });
     await visit('/providers/tib/settings');
 
@@ -36,51 +36,51 @@ module('Acceptance | provider_admin | provider', function(hooks) {
     assert.dom('button#delete-provider').doesNotExist();
   });
 
-  // test('editing provider TIB settings', async function(assert) {
-  //   await authenticateSession({
-  //     uid: 'tib',
-  //     name: 'Technische Informationsbibliothek',
-  //     role_id: 'provider_admin',
-  //     provider_id: 'tib'
-  //   });
-  //   await visit('/providers/tib/settings');
-  //   await click('button#edit-provider');
+  test('editing provider TIB settings', async function(assert) {
+    await authenticateSession({
+      uid: 'tib',
+      name: 'Technische Informationsbibliothek',
+      role_id: 'provider_admin',
+      provider_id: 'tib',
+    });
+    await visit('/providers/tib/settings');
+    await click('button#edit-provider');
 
-  //   assert.equal(currentURL(), '/providers/tib/settings');
-  //   assert.dom('h2.work').hasText('German National Library of Science and Technology');
-  //   assert.dom('a.nav-link.active').hasText('Settings');
-  //   assert.dom('button#edit-provider').doesNotExist();
-  //   assert.dom('button#delete-provider').doesNotExist();
+    assert.equal(currentURL(), '/providers/tib/settings');
+    assert.dom('h2.work').hasText('German National Library of Science and Technology');
+    assert.dom('a.nav-link.active').hasText('Settings');
+    assert.dom('button#edit-provider').doesNotExist();
+    assert.dom('button#delete-provider').doesNotExist();
 
-  //   await fillIn('input#provider-name-field', 'German National Library of Science and Technology');
-  //   await click('button#cancel');
+    await fillIn('input#provider-name-field', 'German National Library of Science and Technology');
+    await click('button#cancel');
 
-  //   assert.equal(currentURL(), '/providers/tib/settings');
-  //   assert.dom('h2.work').hasText('German National Library of Science and Technology');
-  //   assert.dom('a.nav-link.active').hasText('Settings');
-  // });
+    assert.equal(currentURL(), '/providers/tib/settings');
+    assert.dom('h2.work').hasText('German National Library of Science and Technology');
+    assert.dom('a.nav-link.active').hasText('Settings');
+  });
 
-  // test('visiting provider TIB clients', async function(assert) {
-  //   await authenticateSession({
-  //     uid: 'tib',
-  //     name: 'Technische Informationsbibliothek',
-  //     role_id: 'provider_admin',
-  //     provider_id: 'tib'
-  //   });
-  //   await visit('/providers/tib/clients');
+  test('visiting provider TIB clients', async function(assert) {
+    await authenticateSession({
+      uid: 'tib',
+      name: 'Technische Informationsbibliothek',
+      role_id: 'provider_admin',
+      provider_id: 'tib',
+    });
+    await visit('/providers/tib/clients');
 
-  //   assert.equal(currentURL(), '/providers/tib/clients');
-  //   assert.dom('h2.work').hasText('German National Library of Science and Technology');
-  //   assert.dom('a.nav-link.active').hasText('Clients');
-  //   assert.dom('button#add-client').includesText('Create Client');
-  // });
+    assert.equal(currentURL(), '/providers/tib/clients');
+    assert.dom('h2.work').hasText('German National Library of Science and Technology');
+    assert.dom('a.nav-link.active').hasText('Clients');
+    assert.dom('button#add-client').includesText('Create Client');
+  });
 
   test('visiting provider TIB dois', async function(assert) {
     await authenticateSession({
       uid: 'tib',
       name: 'Technische Informationsbibliothek',
       role_id: 'provider_admin',
-      provider_id: 'tib'
+      provider_id: 'tib',
     });
     await visit('/providers/tib/dois');
 
@@ -91,35 +91,35 @@ module('Acceptance | provider_admin | provider', function(hooks) {
     assert.dom('a#upload-doi').doesNotExist();
   });
 
-  // test('visiting specific doi managed by provider', async function(assert) {
-  //   await authenticateSession({
-  //     uid: 'tib',
-  //     name: 'Technische Informationsbibliothek',
-  //     role_id: 'provider_admin',
-  //     provider_id: 'tib'
-  //   });
-  //   await visit('/providers/tib/dois');
+  test('visiting specific doi managed by provider', async function(assert) {
+    await authenticateSession({
+      uid: 'tib',
+      name: 'Technische Informationsbibliothek',
+      role_id: 'provider_admin',
+      provider_id: 'tib',
+    });
+    await visit('/providers/tib/dois');
 
-  //   // first DOI in list
-  //   await click('h3.work:first-child a');
+    // first DOI in list
+    await click('h3.work:first-child a');
 
-  //   assert.dom('a#transfer-doi').includesText('Transfer DOI');
-  //   assert.dom('a#edit-doi').doesNotExist();
-  //   assert.dom('a#modify-doi').doesNotExist();
-  //   assert.dom('a#delete-doi').doesNotExist();
-  // });
+    assert.dom('a#transfer-doi').includesText('Transfer DOI');
+    assert.dom('a#edit-doi').doesNotExist();
+    assert.dom('a#modify-doi').doesNotExist();
+    assert.dom('a#delete-doi').doesNotExist();
+  });
 
-  // test('visiting provider TIB prefixes', async function(assert) {
-  //   await authenticateSession({
-  //     uid: 'tib',
-  //     name: 'Technische Informationsbibliothek',
-  //     role_id: 'provider_admin',
-  //     provider_id: 'tib'
-  //   });
-  //   await visit('/providers/tib/prefixes');
+  test('visiting provider TIB prefixes', async function(assert) {
+    await authenticateSession({
+      uid: 'tib',
+      name: 'Technische Informationsbibliothek',
+      role_id: 'provider_admin',
+      provider_id: 'tib',
+    });
+    await visit('/providers/tib/prefixes');
 
-  //   assert.equal(currentURL(), '/providers/tib/prefixes');
-  //   assert.dom('h2.work').hasText('German National Library of Science and Technology');
-  //   assert.dom('li a.nav-link.active').hasText('Prefixes');
-  // });
+    assert.equal(currentURL(), '/providers/tib/prefixes');
+    assert.dom('h2.work').hasText('German National Library of Science and Technology');
+    assert.dom('li a.nav-link.active').hasText('Prefixes');
+  });
 });

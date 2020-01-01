@@ -8,7 +8,7 @@ export default Component.extend({
   intl: service(),
 
   tagName: 'div',
-  classNames: ['row'],
+  classNames: [ 'row' ],
   provider: null,
   repository: null,
   repositories: [],
@@ -22,13 +22,13 @@ export default Component.extend({
 
   searchRepository(query) {
     if (this.currentUser.get('isAdmin')) {
-      this.set('repositories', this.store.query('repository', { 'query': query, sort: 'name', 'page[size]': 100 }));
+      this.set('repositories', this.store.query('repository', { query, sort: 'name', 'page[size]': 100 }));
     } else if (this.currentUser.get('isProvider')) {
-      this.set('repositories', this.store.query('repository', { 'query': query, 'provider-id': this.currentUser.get('provider_id'), sort: 'name', 'page[size]': 100 }));
+      this.set('repositories', this.store.query('repository', { query, 'provider-id': this.currentUser.get('provider_id'), sort: 'name', 'page[size]': 100 }));
     }
   },
   selectRepository(repository) {
-    this.set('repository', repository)
+    this.set('repository', repository);
     this.set('isDisabled', (repository === null) || (repository.id === this.get('model.id')));
     this.model.set('targetId', repository.id);
   },
@@ -43,14 +43,14 @@ export default Component.extend({
     submit() {
       this.model.save();
       let count = this.model.get('totalDoiCount');
-      this.flashMessages.success('DOI transfer for ' + this.intl.formatNumber(count) + ' DOIs started, the transfer should take about ' + this.intl.formatNumber(Math.ceil(count/5000) + 1) + ' minutes to complete.', {
+      this.flashMessages.success('DOI transfer for ' + this.intl.formatNumber(count) + ' DOIs started, the transfer should take about ' + this.intl.formatNumber(Math.ceil(count / 5000) + 1) + ' minutes to complete.', {
         timeout: 5000,
-        sticky: true
+        sticky: true,
       });
       this.router.transitionTo('repositories.show.settings', this.model);
     },
     cancel() {
       this.router.transitionTo('repositories.show.dois', this.model);
-    }
-  }
+    },
+  },
 });

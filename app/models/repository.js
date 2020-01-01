@@ -12,102 +12,102 @@ const Validations = buildValidations({
       presence: true,
       disabled: computed('model', function() {
         return !this.model.get('isNew');
-      })
+      }),
     }),
     validator('format', {
       regex: /^[A-Z]+\.[A-Z0-9]+(-[A-Z0-9]+)?$/,
-      message: 'The Repository ID must start with the Member ID, followed by a dot. It can then contain only upper case letters, numbers, and at most one hyphen.'
+      message: 'The Repository ID must start with the Member ID, followed by a dot. It can then contain only upper case letters, numbers, and at most one hyphen.',
     }),
     validator('length', {
       min: 5,
-      max: 18
-    })
+      max: 18,
+    }),
   ],
   confirmSymbol: [
     validator('presence', {
       presence: true,
       disabled: computed('model', function() {
         return this.model.get('isNew');
-      })
+      }),
     }),
     validator('confirmation', {
       on: 'symbol',
       message: 'Repository ID does not match',
       disabled: computed('model', function() {
         return this.model.get('isNew');
-      })
-    })
+      }),
+    }),
   ],
   passwordInput: [
     validator('presence', {
       presence: true,
       disabled: computed('model', function() {
         return this.model.get('keepPassword');
-      })
+      }),
     }),
     validator('length', {
       min: 8,
       disabled: computed('model', function() {
         return this.model.get('keepPassword');
-      })
-    })
+      }),
+    }),
   ],
   confirmPasswordInput: [
     validator('presence', {
       presence: true,
       disabled: computed('model', function() {
         return this.model.get('keepPassword');
-      })
+      }),
     }),
     validator('confirmation', {
       on: 'passwordInput',
       message: 'Password does not match',
       disabled: computed('model', function() {
         return this.model.get('keepPassword');
-      })
-    })
+      }),
+    }),
   ],
   name: validator('presence', true),
   systemEmail: [
     validator('presence', true),
     validator('format', {
       type: 'email',
-      allowNonTld: true
-    })
+      allowNonTld: true,
+    }),
   ],
   salesforceId: [
     validator('format', {
       regex: /[a-zA-Z0-9]{18}/,
       allowBlank: true,
-      message: 'Please enter a valid 18 digit Salesforce ID.'
+      message: 'Please enter a valid 18 digit Salesforce ID.',
     }),
   ],
   'issn.issnl': [
     validator('format', {
       allowBlank: true,
       regex: /^\d{4}(-)?\d{3}[0-9X]+\$/,
-      message: 'ISSN-L is in the wrong format.'
-    })
+      message: 'ISSN-L is in the wrong format.',
+    }),
   ],
   'issn.electronic': [
     validator('format', {
       allowBlank: true,
       regex: /^\d{4}(-)?\d{3}[0-9X]+\$/,
-      message: 'ISSN (electronic) is in the wrong format.'
-    })
+      message: 'ISSN (electronic) is in the wrong format.',
+    }),
   ],
   'issn.print': [
     validator('format', {
       allowBlank: true,
       regex: /^\d{4}(-)?\d{3}[0-9X]+\$/,
-      message: 'ISSN (print) is in the wrong format.'
-    })
-  ]
+      message: 'ISSN (print) is in the wrong format.',
+    }),
+  ],
 });
 
 export default DS.Model.extend(Validations, {
   provider: DS.belongsTo('provider', {
-    async: true
+    async: true,
   }),
   meta: DS.attr(),
 
@@ -138,7 +138,7 @@ export default DS.Model.extend(Validations, {
   targetId: DS.attr(),
 
   domainList: computed('domains', function() {
-    return this.domains.split(",").map(function(item) {
+    return this.domains.split(',').map(function(item) {
       return item.trim();
     });
   }),
@@ -149,12 +149,12 @@ export default DS.Model.extend(Validations, {
     return this.get('meta.dois');
   }),
   totalDoiCount: computed('meta.dois', function() {
-    return this.get('meta.dois').reduce(function (a, b) {
+    return this.get('meta.dois').reduce(function(a, b) {
       return a + b.count;
     }, 0);
   }),
   resourceTypeCount: computed('meta.resourceTypes', function() {
-    return this.get('meta.resourceTypes').reduce(function (a, b) {
+    return this.get('meta.resourceTypes').reduce(function(a, b) {
       return a + b.count;
     }, 0);
   }),
@@ -164,5 +164,5 @@ export default DS.Model.extend(Validations, {
     } else {
       return null;
     }
-  })
+  }),
 });

@@ -18,7 +18,7 @@ export default Component.extend({
   didReceiveAttrs() {
     this._super(...arguments);
 
-    if (this['default']) {
+    if (this.default) {
       this.set('type', null);
       this.set('title', htmlSafe(ENV.SITE_TITLE));
     } else if (this['sign-in']) {
@@ -29,7 +29,7 @@ export default Component.extend({
     let home = this.currentUser.get('home');
     if (typeOf(home) == 'object') {
       this.set('home', { route: home.route, model: home.id });
-    } else if (home === "password") {
+    } else if (home === 'password') {
       this.set('home', null);
     } else if (home) {
       this.set('home', { href: home });
@@ -53,6 +53,6 @@ export default Component.extend({
     },
     invalidateSession() {
       this.session.invalidate();
-    }
-  }
+    },
+  },
 });

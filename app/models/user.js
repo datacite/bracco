@@ -18,7 +18,7 @@ export default Model.extend({
     return this.get('meta.dois');
   }),
   totalDoiCount: computed('meta.dois', function() {
-    return this.get('meta.dois').reduce(function (a, b) {
+    return this.get('meta.dois').reduce(function(a, b) {
       return a + b.count;
     }, 0);
   }),
@@ -26,7 +26,7 @@ export default Model.extend({
     return this.get('meta.resourceTypes');
   }),
   totalresourceTypeCount: computed('meta.resourceTypes', function() {
-    return this.get('meta.resourceTypes').reduce(function (a, b) {
+    return this.get('meta.resourceTypes').reduce(function(a, b) {
       return a + b.count;
     }, 0);
   }),
@@ -37,5 +37,5 @@ export default Model.extend({
     } else {
       return 0;
     }
-  })
+  }),
 });

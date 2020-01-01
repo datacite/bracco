@@ -6,7 +6,7 @@ export default Ability.extend({
   currentUser: service(),
 
   canWrite: computed(function() {
-    switch(this.get('currentUser.role_id')) {
+    switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
       default:
@@ -14,11 +14,11 @@ export default Ability.extend({
     }
   }),
   canRead: computed(function() {
-    switch(this.get('currentUser.role_id')) {
+    switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
       default:
         return false;
     }
-  })
+  }),
 });

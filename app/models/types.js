@@ -7,6 +7,6 @@ export default Fragment.extend({
   citeproc: attr('string'),
   resourceTypeGeneral: attr('string'),
   resourceType: attr('string'),
-  schemaOrg: attr('string')
+  schemaOrg: attr('string'),
 });
 

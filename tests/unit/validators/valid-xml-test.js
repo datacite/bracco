@@ -5,7 +5,7 @@ module('Unit | Validator | valid-xml', function(hooks) {
   setupTest(hooks);
 
   test('it works', function(assert) {
-    var validator = this.owner.lookup('validator:valid-xml');
+    let validator = this.owner.lookup('validator:valid-xml');
     assert.ok(validator);
   });
 });

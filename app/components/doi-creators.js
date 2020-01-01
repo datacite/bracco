@@ -43,7 +43,7 @@ export default Component.extend({
       this.model.get('creators').get('lastObject').get('affiliation').createFragment();
     },
     setValidationClass() {
-      this.setValidationClass(true)
-    }
-  }
+      this.setValidationClass(true);
+    },
+  },
 });

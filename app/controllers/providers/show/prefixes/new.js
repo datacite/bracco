@@ -7,19 +7,15 @@ export default Controller.extend({
   actions: {
     submit() {
       let self = this;
-      var providerPrefix = this.store.createRecord('providerPrefix', { provider: this.get('model.provider'), prefix: this.get('model.prefix.prefix') });
+      let providerPrefix = this.store.createRecord('providerPrefix', { provider: this.get('model.provider'), prefix: this.get('model.prefix.prefix') });
       providerPrefix.save().then(function(providerPrefix) {
         self.transitionToRoute('providers.show.prefixes', providerPrefix.get('provider'));
-      }).catch(function(reason){
-        if (console.debug) {
-          console.debug(reason);
-        } else {
-          console.log(reason);
-        }
+      }).catch(function(reason) {
+        console.debug(reason);
       });
     },
     cancel() {
       this.transitionToRoute('providers.show.prefixes', this.get('model.provider'));
-    }
-  }
+    },
+  },
 });

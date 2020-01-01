@@ -6,8 +6,8 @@ export default JSONSerializer.extend({
   normalizeArrayResponse(store, primaryModelClass, payload, id, requestType) {
     let total = payload.number_of_results;
     let totalPages = Math.min(Math.ceil(total / 20), 500);
-    let meta = { meta: { total: total, totalPages: totalPages } }
-    payload = payload.items.map(item => { 
+    let meta = { meta: { total, totalPages } };
+    payload = payload.items.map(item => {
       return item;
     });
     let data = this._super(store, primaryModelClass, payload, id, requestType);
@@ -25,5 +25,5 @@ export default JSONSerializer.extend({
   // },
   keyForAttribute(attr) {
     return underscore(attr);
-  }
+  },
 });

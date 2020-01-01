@@ -7,19 +7,19 @@ const validXml = BaseValidator.extend({
     parseString(value, function(err, result) {
       if (err) {
         // was not well-formed
-        let message = "The XML formatting is not valid."
+        let message = 'The XML formatting is not valid.';
         return message;
       } else {
         return isPresent(result);
       }
     });
-  }
+  },
 });
 
 validXml.reopenClass({
   getDependentsFor() {
-    return ['xml'];
-  }
+    return [ 'xml' ];
+  },
 });
 
 export default validXml;

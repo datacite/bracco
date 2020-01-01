@@ -1,4 +1,4 @@
-/*jshint node:true*/
+/* jshint node:true*/
 
 module.exports = function(/* env */) {
   return {
@@ -89,6 +89,6 @@ module.exports = function(/* env */) {
      * @type {Boolean}
      * @default false
      */
-    stripEmptyTranslations: false
+    stripEmptyTranslations: false,
   };
 };

@@ -19,9 +19,9 @@ export default Component.extend({
 
   searchRepository(query) {
     if (this.currentUser.get('isAdmin')) {
-      this.set('repositories', this.store.query('repository', { 'query': query, sort: 'name', 'page[size]': 100 }));
+      this.set('repositories', this.store.query('repository', { query, sort: 'name', 'page[size]': 100 }));
     } else if (this.currentUser.get('isProvider')) {
-      this.set('repositories', this.store.query('repository', { 'query': query, 'provider-id': this.currentUser.get('provider_id'), sort: 'name', 'page[size]': 100 }));
+      this.set('repositories', this.store.query('repository', { query, 'provider-id': this.currentUser.get('provider_id'), sort: 'name', 'page[size]': 100 }));
     }
   },
   selectRepository(repository) {
@@ -46,6 +46,6 @@ export default Component.extend({
     },
     cancel() {
       this.router.transitionTo('dois.show', this.model);
-    }
-  }
+    },
+  },
 });

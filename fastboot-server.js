@@ -24,7 +24,7 @@ app.use(morgan('combined'));
 app.get('/*', fastbootMiddleware({
   distPath: 'dist',
   resilient: true,
-  chunkedResponse: true
+  chunkedResponse: true,
 }));
 
 if (typeof(PhusionPassenger) !== 'undefined') {

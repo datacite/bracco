@@ -7,19 +7,19 @@ const UniqueDoi = BaseValidator.extend({
   validate(value, options) {
     let doi = options.dependentKeys[0] + '/' + value;
     return this.store.query('doi', { id: doi }).then((result) => {
-      if(result.content.length > 0) {
-        return "The DOI " + doi + " already exists.";
+      if (result.content.length > 0) {
+        return 'The DOI ' + doi + ' already exists.';
       } else {
         return true;
       }
     });
-  }
+  },
 });
 
 UniqueDoi.reopenClass({
   getDependentsFor() {
-    return ['doi'];
-  }
+    return [ 'doi' ];
+  },
 });
 
 export default UniqueDoi;

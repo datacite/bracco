@@ -3,7 +3,7 @@
 
 module.exports = function(environment) {
   const pkg = require('../package.json');
-  var deployTarget = process.env.DEPLOY_TARGET;
+  let deployTarget = process.env.DEPLOY_TARGET;
 
   let ENV = {
     modulePrefix: 'bracco',
@@ -15,50 +15,50 @@ module.exports = function(environment) {
         // Here you can enable experimental features on an ember canary build
         // e.g. EMBER_NATIVE_DECORATOR_SUPPORT: true
       },
-      EXTEND_PROTOTYPES: false
+      EXTEND_PROTOTYPES: false,
     },
     sentry: {
       environment,
     },
     'ember-cli-string-helpers': {
-      only: ['humanize', 'html-safe', 'truncate', 'titleize']
+      only: [ 'humanize', 'html-safe', 'truncate', 'titleize' ],
     },
     'polyfill-io': {
       features: [
-        'default-3.6'
-      ]
+        'default-3.6',
+      ],
     },
     emberTracker: {
-			analyticsSettings: {
-				trackingId: process.env.TRACKING_ID || 'UA-22806196-13',
-			},
-		},
+      analyticsSettings: {
+        trackingId: process.env.TRACKING_ID || 'UA-22806196-13',
+      },
+    },
     flashMessageDefaults: {
       timeout: 5000,
       extendedTimeout: 0,
       priority: 200,
       sticky: true,
       showProgress: true,
-      preventDuplicates: true
+      preventDuplicates: true,
     },
     featureFlags: {
       'use-repositories': false,
-      'show-researchers': false
+      'show-researchers': false,
     },
     fastboot: {
-      hostWhitelist: ['doi.datacite.org', 'doi.test.datacite.org', /^10\.0\.\d{1,3}\.\d{1,3}$/, /^localhost:\d+$/]
+      hostWhitelist: [ 'doi.datacite.org', 'doi.test.datacite.org', /^10\.0\.\d{1,3}\.\d{1,3}$/, /^localhost:\d+$/ ],
     },
 
-    SITE_TITLE: process.env.SITE_TITLE || "DataCite Fabrica Test",
+    SITE_TITLE: process.env.SITE_TITLE || 'DataCite Fabrica Test',
     NAVMENU_TITLE: process.env.NAVMENU_TITLE,
-    SEARCH_URL: process.env.SEARCH_URL || "https://search.test.datacite.org",
-    ORCID_URL: process.env.ORCID_URL || "https://orcid.org",
-    API_URL: process.env.API_URL || "https://api.test.datacite.org",
-    FABRICA_URL: process.env.FABRICA_URL || "https://doi.test.datacite.org",
-    ROR_API_URL: process.env.ROR_API_URL || "https://api.ror.org",
-    ORCID_API_URL: process.env.ORCID_API_URL || "https://pub.orcid.org",
-    EVENTDATA_URL: process.env.EVENTDATA_URL || "https://api.test.datacite.org",
-    CDN_URL: process.env.CDN_URL || "https://assets.test.datacite.org",
+    SEARCH_URL: process.env.SEARCH_URL || 'https://search.test.datacite.org',
+    ORCID_URL: process.env.ORCID_URL || 'https://orcid.org',
+    API_URL: process.env.API_URL || 'https://api.test.datacite.org',
+    FABRICA_URL: process.env.FABRICA_URL || 'https://doi.test.datacite.org',
+    ROR_API_URL: process.env.ROR_API_URL || 'https://api.ror.org',
+    ORCID_API_URL: process.env.ORCID_API_URL || 'https://pub.orcid.org',
+    EVENTDATA_URL: process.env.EVENTDATA_URL || 'https://api.test.datacite.org',
+    CDN_URL: process.env.CDN_URL || 'https://assets.test.datacite.org',
 
     JWT_PUBLIC_KEY: process.env.JWT_PUBLIC_KEY || '-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxWfFGoaO4d9s7OoW34UD\nbEbFdh1FrAXT5QmWVocZIP0Y+1KtNGNjpRpazlSWeSMFuswoDG/cKiJX3BQkP7fw\nbHCujQoNpQqznsI8rRJYZh/L+THxjY7OEoFg7QohqnEHRr9YW4wPzh+I0xj2puVr\ngyQzREYckeBUEJnS2uXdiZ32LzbiH4pE+wwZNVQv0BbadnTc2mJWMaEcUfuh0Qko\nxIVpPwTCzyD4kMriETe+/AOw/2DEwbNJakh8N2ySMhXbso/zHxStEw2YesJkNJWG\n+aG5ApSbwTba8DVHKvTgCsE1d+1tHFyeruTxPIfamwA/VkVBuUpYR7CmJaoNuk1e\nKwIDAQAB\n-----END PUBLIC KEY-----\n',
     SENTRY_DSN: process.env.SENTRY_DSN || 'https://63201db022924202b697e03bc5e0d0ba@sentry.io/1420435',
@@ -68,24 +68,24 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
-    }
+    },
   };
 
   if (deployTarget === 'staging') {
     // add staging-specific settings here
-    ENV.COOKIE_DOMAIN = ".test.datacite.org";
+    ENV.COOKIE_DOMAIN = '.test.datacite.org';
     ENV.featureFlags['use-repositories'] = true;
   }
 
   if (deployTarget === 'production') {
-    ENV.SITE_TITLE = "DataCite Fabrica";
-    ENV.API_URL = "https://api.datacite.org";
-    ENV.ORCID_URL = "https://orcid.org";
-    ENV.FABRICA_URL = "https://doi.datacite.org";
-    ENV.EVENTDATA_URL = "https://api.datacite.org";
-    ENV.SEARCH_URL = "https://search.datacite.org";
-    ENV.CDN_URL = "https://assets.datacite.org";
-    ENV.COOKIE_DOMAIN = ".datacite.org";
+    ENV.SITE_TITLE = 'DataCite Fabrica';
+    ENV.API_URL = 'https://api.datacite.org';
+    ENV.ORCID_URL = 'https://orcid.org';
+    ENV.FABRICA_URL = 'https://doi.datacite.org';
+    ENV.EVENTDATA_URL = 'https://api.datacite.org';
+    ENV.SEARCH_URL = 'https://search.datacite.org';
+    ENV.CDN_URL = 'https://assets.datacite.org';
+    ENV.COOKIE_DOMAIN = '.datacite.org';
   }
 
   if (environment === 'development') {
@@ -96,7 +96,7 @@ module.exports = function(environment) {
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
 
     ENV.featureFlags['use-repositories'] = true;
-    ENV.COOKIE_DOMAIN = "localhost";
+    ENV.COOKIE_DOMAIN = 'localhost';
     ENV.SENTRY_DSN = null;
   }
 
@@ -109,9 +109,9 @@ module.exports = function(environment) {
     ENV.APP.LOG_VIEW_LOOKUPS = false;
 
     ENV['simple-auth'] = {
-      store: 'simple-auth-session-store:ephemeral'
-    }
-    ENV.API_JWT= process.env.API_JWT || '',
+      store: 'simple-auth-session-store:ephemeral',
+    };
+    ENV.API_JWT = process.env.API_JWT || '',
     ENV.APP.rootElement = '#ember-testing';
 
     ENV.featureFlags['use-repositories'] = true;
@@ -119,9 +119,9 @@ module.exports = function(environment) {
 
     ENV.APP.autoboot = false;
 
-    ENV.SITE_TITLE = "DataCite Fabrica Test";
-    ENV.COOKIE_DOMAIN = "localhost";
-    ENV.API_URL = "https://api.test.datacite.org";
+    ENV.SITE_TITLE = 'DataCite Fabrica Test';
+    ENV.COOKIE_DOMAIN = 'localhost';
+    ENV.API_URL = 'https://api.test.datacite.org';
     ENV.SENTRY_DSN = null;
   }
 

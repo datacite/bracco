@@ -10,7 +10,7 @@ module('Acceptance | user | provider', function(hooks) {
     await authenticateSession({
       uid: '0000-0001-6528-2027',
       name: 'Martin Fenner',
-      role_id: 'user'
+      role_id: 'user',
     });
 
     await visit('/providers/tib');
@@ -23,7 +23,7 @@ module('Acceptance | user | provider', function(hooks) {
     await authenticateSession({
       uid: '0000-0001-6528-2027',
       name: 'Martin Fenner',
-      role_id: 'user'
+      role_id: 'user',
     });
 
     await visit('/providers/tib/settings');
@@ -36,7 +36,7 @@ module('Acceptance | user | provider', function(hooks) {
     await authenticateSession({
       uid: '0000-0001-6528-2027',
       name: 'Martin Fenner',
-      role_id: 'user'
+      role_id: 'user',
     });
 
     await visit('/providers/tib/repositories');
@@ -49,7 +49,7 @@ module('Acceptance | user | provider', function(hooks) {
     await authenticateSession({
       uid: '0000-0001-6528-2027',
       name: 'Martin Fenner',
-      role_id: 'user'
+      role_id: 'user',
     });
 
     await visit('/providers/tib/prefixes');
@@ -62,7 +62,7 @@ module('Acceptance | user | provider', function(hooks) {
     await authenticateSession({
       uid: '0000-0001-6528-2027',
       name: 'Martin Fenner',
-      role_id: 'user'
+      role_id: 'user',
     });
 
     await visit('/providers/tib/dois');

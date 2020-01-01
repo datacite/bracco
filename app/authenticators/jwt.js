@@ -6,8 +6,8 @@ export default OAuth2PasswordGrantAuthenticator.extend({
     return new Promise((resolve) => {
       resolve({
         access_token: jwt,
-        token_type: 'bearer'
+        token_type: 'bearer',
       });
     });
-  }
+  },
 });

@@ -15,13 +15,13 @@ export default Controller.extend({
       let { identification } = this;
       let self = this;
       let url = ENV.API_URL + '/reset';
-      
+
       fetch(url, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
+          'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: 'username=' + identification
+        body: 'username=' + identification,
       }).then(function(response) {
         if (response.ok) {
           response.json().then(function(data) {
@@ -32,15 +32,11 @@ export default Controller.extend({
             }
           });
         } else {
-          if (console.debug) {
-            console.debug(response);
-          } else {
-            console.log(response);
-          }
+          console.debug(response);
         }
       }).catch(function(reason) {
         self.set('errorMessage', reason.errors && reason.errors[0].title || JSON.stringify(reason));
       });
-    }
-  }
+    },
+  },
 });

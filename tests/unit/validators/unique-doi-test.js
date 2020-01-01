@@ -5,7 +5,7 @@ module('Unit | Validator | unique-doi', function(hooks) {
   setupTest(hooks);
 
   test('it works', function(assert) {
-    var validator = this.owner.lookup('validator:unique-doi');
+    let validator = this.owner.lookup('validator:unique-doi');
     assert.ok(validator);
   });
 });

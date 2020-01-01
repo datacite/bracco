@@ -12,37 +12,37 @@ const Validations = buildValidations({
       presence: true,
       disabled: computed('model', function() {
         return !this.model.get('isNew');
-      })
+      }),
     }),
     validator('format', {
       regex: /^[A-Z]+$/,
-      message: 'The Member ID can contain only upper case letters'
+      message: 'The Member ID can contain only upper case letters',
     }),
     validator('length', {
       min: 2,
-      max: 8
-    })
+      max: 8,
+    }),
   ],
   confirmSymbol: [
     validator('presence', {
       presence: true,
       disabled: computed('model', function() {
         return this.model.get('isNew');
-      })
+      }),
     }),
     validator('confirmation', {
       on: 'symbol',
       message: 'Member ID does not match',
       disabled: computed('model', function() {
         return this.model.get('isNew');
-      })
-    })
+      }),
+    }),
   ],
   twitterHandle: [
     validator('format', {
       regex: /^@[a-zA-Z0-9_]{0,15}$/,
       allowBlank: true,
-      message: 'Must start with @ followed by up to 15 alphanumeric characters.'
+      message: 'Must start with @ followed by up to 15 alphanumeric characters.',
     }),
   ],
   name: validator('presence', true),
@@ -52,75 +52,75 @@ const Validations = buildValidations({
     validator('format', {
       type: 'email',
       allowNonTld: true,
-      message: 'Please enter a valid email address.'
-    })
+      message: 'Please enter a valid email address.',
+    }),
   ],
   groupEmail: [
     validator('format', {
       type: 'email',
       allowNonTld: true,
       allowBlank: true,
-      message: 'Please enter a valid email address.'
-    })
+      message: 'Please enter a valid email address.',
+    }),
   ],
   passwordInput: [
     validator('presence', {
       presence: true,
       disabled: computed('model', function() {
         return this.model.get('keepPassword');
-      })
+      }),
     }),
     validator('length', {
       min: 8,
       disabled: computed('model', function() {
         return this.model.get('keepPassword');
-      })
-    })
+      }),
+    }),
   ],
   confirmPasswordInput: [
     validator('presence', {
       presence: true,
       disabled: computed('model', function() {
         return this.model.get('keepPassword');
-      })
+      }),
     }),
     validator('confirmation', {
       on: 'passwordInput',
       message: 'Password does not match',
       disabled: computed('model', function() {
         return this.model.get('keepPassword');
-      })
-    })
+      }),
+    }),
   ],
   website: [
     validator('format', {
       type: 'url',
       allowBlank: true,
-      message: 'Please enter a valid website URL.'
-    })
+      message: 'Please enter a valid website URL.',
+    }),
   ],
   rorId: [
     validator('format', {
       type: 'url',
       allowBlank: true,
-      message: 'Please enter a valid ROR ID expressed as URL.'
-    })
+      message: 'Please enter a valid ROR ID expressed as URL.',
+    }),
   ],
   salesforceId: [
     validator('format', {
       regex: /[a-zA-Z0-9]{18}/,
       allowBlank: true,
-      message: 'Please enter a valid 18 digit Salesforce ID.'
+      message: 'Please enter a valid 18 digit Salesforce ID.',
     }),
-  ]
+  ],
 });
 
 export default DS.Model.extend(Validations, {
   consortium: DS.belongsTo('provider', {
-    inverse: 'consortiumOrganizations', async: true
+    inverse: 'consortiumOrganizations', async: true,
   }),
   consortiumOrganizations: DS.hasMany('provider', {
-    inverse: 'consortium', async: true
+    inverse: 'consortium', async: true,
   }),
   meta: DS.attr(),
 
@@ -172,7 +172,7 @@ export default DS.Model.extend(Validations, {
     }
   }),
   resourceTypeCount: computed('meta.resourceTypes', function() {
-    return this.get('meta.resourceTypes').reduce(function (a, b) {
+    return this.get('meta.resourceTypes').reduce(function(a, b) {
       return a + b.count;
     }, 0);
   }),
@@ -191,7 +191,7 @@ export default DS.Model.extend(Validations, {
     return this.get('meta.providers');
   }),
   isEnvironmentProduction: computed('repository', function() {
-    if (ENV.environment === "production"){
+    if (ENV.environment === 'production') {
       return true;
     }
     return false;
@@ -203,5 +203,5 @@ export default DS.Model.extend(Validations, {
     } else {
       return 0;
     }
-  })
+  }),
 });

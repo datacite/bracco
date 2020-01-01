@@ -2,10 +2,10 @@ import Component from '@ember/component';
 import { A } from '@ember/array';
 
 const stateList = {
-  draft: ['draft', 'registered', 'findable'],
-  registered: ['registered', 'findable'],
-  findable: ['registered', 'findable']
-}
+  draft: [ 'draft', 'registered', 'findable' ],
+  registered: [ 'registered', 'findable' ],
+  findable: [ 'registered', 'findable' ],
+};
 
 export default Component.extend({
   draft: true,
@@ -24,7 +24,7 @@ export default Component.extend({
   selectState(state) {
     this.set('state', state);
     this.model.set('state', state);
-    this.setStates(state)
+    this.setStates(state);
   },
   setStates(state) {
     if (state == '' || state == 'undetermined') {
@@ -43,6 +43,6 @@ export default Component.extend({
     },
     setStates(state) {
       this.setStates(state);
-    }
-  }
+    },
+  },
 });

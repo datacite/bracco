@@ -12,7 +12,7 @@ module('Acceptance | client_admin | provider', function(hooks) {
       name: 'Alfred Wegener Institute',
       role_id: 'client_admin',
       provider_id: 'tib',
-      client_id: 'tib.awi'
+      client_id: 'tib.awi',
     });
     await visit('/providers/tib/settings');
 
@@ -26,7 +26,7 @@ module('Acceptance | client_admin | provider', function(hooks) {
       name: 'Alfred Wegener Institute',
       role_id: 'client_admin',
       provider_id: 'tib',
-      client_id: 'tib.awi'
+      client_id: 'tib.awi',
     });
     await visit('/providers/tib/repositories');
 
@@ -40,7 +40,7 @@ module('Acceptance | client_admin | provider', function(hooks) {
       name: 'Alfred Wegener Institute',
       role_id: 'client_admin',
       provider_id: 'tib',
-      client_id: 'tib.awi'
+      client_id: 'tib.awi',
     });
     await visit('/providers/tib/prefixes');
 
@@ -54,7 +54,7 @@ module('Acceptance | client_admin | provider', function(hooks) {
       name: 'Alfred Wegener Institute',
       role_id: 'client_admin',
       provider_id: 'tib',
-      client_id: 'tib.awi'
+      client_id: 'tib.awi',
     });
     await visit('/providers/tib/dois');
 

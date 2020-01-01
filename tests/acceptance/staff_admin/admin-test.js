@@ -10,7 +10,7 @@ module('Acceptance | staff_admin | admin', function(hooks) {
     await authenticateSession({
       uid: 'admin',
       name: 'Admin',
-      role_id: 'staff_admin'
+      role_id: 'staff_admin',
     });
     await visit('/');
 
@@ -21,10 +21,10 @@ module('Acceptance | staff_admin | admin', function(hooks) {
     await authenticateSession({
       uid: 'admin',
       name: 'Admin',
-      role_id: 'staff_admin'
+      role_id: 'staff_admin',
     });
     await visit('/');
-    
+
     assert.equal(currentURL(), '/');
     assert.dom('h2.work').hasText('DataCite');
     assert.dom('li a.nav-link.active').hasText('Info');
@@ -35,7 +35,7 @@ module('Acceptance | staff_admin | admin', function(hooks) {
     await authenticateSession({
       uid: 'admin',
       name: 'Admin',
-      role_id: 'staff_admin'
+      role_id: 'staff_admin',
     });
     await visit('/settings');
 
@@ -48,7 +48,7 @@ module('Acceptance | staff_admin | admin', function(hooks) {
     await authenticateSession({
       uid: 'admin',
       name: 'Admin',
-      role_id: 'staff_admin'
+      role_id: 'staff_admin',
     });
     await visit('/providers');
 
@@ -61,7 +61,7 @@ module('Acceptance | staff_admin | admin', function(hooks) {
     await authenticateSession({
       uid: 'admin',
       name: 'Admin',
-      role_id: 'staff_admin'
+      role_id: 'staff_admin',
     });
     await visit('/repositories');
 
@@ -74,7 +74,7 @@ module('Acceptance | staff_admin | admin', function(hooks) {
     await authenticateSession({
       uid: 'admin',
       name: 'Admin',
-      role_id: 'staff_admin'
+      role_id: 'staff_admin',
     });
     await visit('/prefixes');
 
@@ -86,7 +86,7 @@ module('Acceptance | staff_admin | admin', function(hooks) {
     await authenticateSession({
       uid: 'admin',
       name: 'Admin',
-      role_id: 'staff_admin'
+      role_id: 'staff_admin',
     });
     await visit('/prefixes/10.5038');
 
@@ -94,39 +94,39 @@ module('Acceptance | staff_admin | admin', function(hooks) {
     assert.dom('div.alert-warning').includesText('The page was not found.');
   });
 
-  // test('visiting dois', async function(assert) {
-  //   await authenticateSession({
-  //     uid: 'admin',
-  //     name: 'Admin',
-  //     role_id: 'staff_admin'
-  //   });
-  //   await visit('/dois');
+  test('visiting dois', async function(assert) {
+    await authenticateSession({
+      uid: 'admin',
+      name: 'Admin',
+      role_id: 'staff_admin',
+    });
+    await visit('/dois');
 
-  //   assert.equal(currentURL(), '/dois');
-  //   assert.dom('h2.work').hasText('DataCite');
-  //   assert.dom('li a.nav-link.active').hasText('DOIs');
-  // });
+    assert.equal(currentURL(), '/dois');
+    assert.dom('h2.work').hasText('DataCite');
+    assert.dom('li a.nav-link.active').hasText('DOIs');
+  });
 
-  // test('visiting specific doi', async function(assert) {
-  //   await authenticateSession({
-  //     uid: 'admin',
-  //     name: 'Admin',
-  //     role_id: 'staff_admin'
-  //   });
-  //   await visit('/dois');
+  test('visiting specific doi', async function(assert) {
+    await authenticateSession({
+      uid: 'admin',
+      name: 'Admin',
+      role_id: 'staff_admin',
+    });
+    await visit('/dois');
 
-  //   // first DOI in list
-  //   await click('h3.work:first-child a');
+    // first DOI in list
+    await click('h3.work:first-child a');
 
-  //   assert.dom('button#edit-doi').includesText('Update DOI (Form)');
-  //   assert.dom('button#modify-doi').includesText('Update DOI (File Upload)');
-  // });
+    assert.dom('button#edit-doi').includesText('Update DOI (Form)');
+    assert.dom('button#modify-doi').includesText('Update DOI (File Upload)');
+  });
 
   test('visiting users', async function(assert) {
     await authenticateSession({
       uid: 'admin',
       name: 'Admin',
-      role_id: 'staff_admin'
+      role_id: 'staff_admin',
     });
 
     await visit('/users');
@@ -140,7 +140,7 @@ module('Acceptance | staff_admin | admin', function(hooks) {
     await authenticateSession({
       uid: 'admin',
       name: 'Admin',
-      role_id: 'staff_admin'
+      role_id: 'staff_admin',
     });
 
     await visit('/users/0000-0003-1419-2405');

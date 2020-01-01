@@ -44,7 +44,7 @@ export default ApplicationSerializer.extend({
     created: { serialize: false },
     registered: { serialize: false },
     updated: { serialize: false },
-    isActive: { serialize: false }
+    isActive: { serialize: false },
   },
   keyForAttribute(key) {
     return key;
@@ -61,5 +61,5 @@ export default ApplicationSerializer.extend({
     payload.data.attributes.meta = payload.meta || {};
 
     return this._super.apply(this, arguments);
-  }
+  },
 });

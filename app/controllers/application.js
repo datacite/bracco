@@ -6,14 +6,14 @@ import { inject as service } from '@ember/service';
 export default Controller.extend({
   session: service(),
 
-  queryParams: ['jwt'],
+  queryParams: [ 'jwt' ],
   jwt: null,
 
   actions: {
     invalidateSession() {
       this.session.invalidate();
-    }
-  }
+    },
+  },
 });
 
 import ApplicationController from './application';
@@ -25,5 +25,5 @@ ApplicationController.reopen({
         this.set('jwt', null);
       });
     }
-  })
+  }),
 });

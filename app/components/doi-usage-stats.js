@@ -19,12 +19,12 @@ export default Component.extend({
 
   fetchUsage() {
     let self = this;
-    let url = ENV.EVENTDATA_URL + '/events?doi=' + this.model.get("doi");
+    let url = ENV.EVENTDATA_URL + '/events?doi=' + this.model.get('doi');
     fetch(url, {
       headers: {
         'Authorization': 'Bearer ' + this.currentUser.get('jwt'),
-        'Accept': 'application/vnd.api+json'
-      }
+        'Accept': 'application/vnd.api+json',
+      },
     }).then(function(response) {
       if (response.ok) {
         return response.json().then(function(data) {
@@ -44,18 +44,10 @@ export default Component.extend({
           }
         });
       } else {
-        if (console.debug) {
-          console.debug(response);
-        } else {
-          console.log(response);
-        }
+        console.debug(response);
       }
     }).catch(function(error) {
-      if (console.debug) {
-        console.debug(error);
-      } else {
-        console.log(error);
-      }
+      console.debug(error);
     });
-  }
+  },
 });

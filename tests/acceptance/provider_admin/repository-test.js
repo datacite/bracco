@@ -11,7 +11,7 @@ module('Acceptance | provider_admin | repository', function(hooks) {
       uid: 'tib',
       name: 'Technische Informationsbibliothek',
       role_id: 'provider_admin',
-      provider_id: 'tib'
+      provider_id: 'tib',
     });
     await visit('/repositories/tib.awi');
 
@@ -25,7 +25,7 @@ module('Acceptance | provider_admin | repository', function(hooks) {
       uid: 'tib',
       name: 'Technische Informationsbibliothek',
       role_id: 'provider_admin',
-      provider_id: 'tib'
+      provider_id: 'tib',
     });
     await visit('/repositories/tib.awi/settings');
 
@@ -36,37 +36,37 @@ module('Acceptance | provider_admin | repository', function(hooks) {
     assert.dom('button#delete-repository').includesText('Delete');
   });
 
-  // test('visiting repository AWI prefixes', async function(assert) {
-  //   await authenticateSession({
-  //     uid: 'tib',
-  //     name: 'Technische Informationsbibliothek',
-  //     role_id: 'provider_admin',
-  //     provider_id: 'tib'
-  //   });
-  //   await visit('/repositories/tib.awi/prefixes');
+  test('visiting repository AWI prefixes', async function(assert) {
+    await authenticateSession({
+      uid: 'tib',
+      name: 'Technische Informationsbibliothek',
+      role_id: 'provider_admin',
+      provider_id: 'tib',
+    });
+    await visit('/repositories/tib.awi/prefixes');
 
-  //   assert.equal(currentURL(), '/repositories/tib.awi/prefixes');
-  //   assert.dom('h2.work').hasText('Alfred Wegener Institute');
-  //   assert.dom('li a.nav-link.active').hasText('Prefixes');
-  // });
+    assert.equal(currentURL(), '/repositories/tib.awi/prefixes');
+    assert.dom('h2.work').hasText('Alfred Wegener Institute');
+    assert.dom('li a.nav-link.active').hasText('Prefixes');
+  });
 
   test('visiting repository AWI dois', async function(assert) {
     await authenticateSession({
       uid: 'tib',
       name: 'Technische Informationsbibliothek',
       role_id: 'provider_admin',
-      provider_id: 'tib'
+      provider_id: 'tib',
     });
     await visit('/repositories/tib.awi/dois');
 
     assert.equal(currentURL(), '/repositories/tib.awi/dois');
     assert.dom('h2.work').hasText('Alfred Wegener Institute');
     assert.dom('li a.nav-link.active').hasText('DOIs');
-    
-    // assert.dom('h3.work').doesNotExist();
-    // assert.dom('a#new-doi').doesNotExist();
-    // assert.dom('a#upload-doi').doesNotExist();
-    // assert.dom('a#transfer-dois').includesText('Transfer DOIs');
+
+    assert.dom('h3.work').doesNotExist();
+    assert.dom('a#new-doi').doesNotExist();
+    assert.dom('a#upload-doi').doesNotExist();
+    assert.dom('a#transfer-dois').includesText('Transfer DOIs');
   });
 
   test('fail creating a new DOI for repository', async function(assert) {
@@ -75,11 +75,10 @@ module('Acceptance | provider_admin | repository', function(hooks) {
       uid: 'tib',
       name: 'Technische Informationsbibliothek',
       role_id: 'provider_admin',
-      provider_id: 'tib'
+      provider_id: 'tib',
     });
     await visit('/repositories/tib.awi/dois');
 
     assert.dom('new-doi').doesNotExist();
   });
-
 });

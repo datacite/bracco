@@ -32,6 +32,6 @@ export default Component.extend({
     },
     setValidationClass() {
       this.setValidationClass();
-    }
-  }
+    },
+  },
 });

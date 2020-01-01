@@ -8,7 +8,7 @@ module('helper:is-equal', function(hooks) {
   setupRenderingTest(hooks);
 
   test('it renders true', async function(assert) {
-    this.set('inputValue', ['1234', '1234']);
+    this.set('inputValue', [ '1234', '1234' ]);
 
     await render(hbs`{{is-equal inputValue}}`);
 

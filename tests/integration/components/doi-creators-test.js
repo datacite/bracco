@@ -24,9 +24,9 @@
 //   //   await click('button#add-creator');
 
 //   //   var persons = findAll(".select-person");
-//   //   var givenNames = findAll('input.given-name-field'); 
-//   //   var FamilyNames = findAll('input.family-name-field'); 
-//   //   var creators = findAll('input.creator-field'); 
+//   //   var givenNames = findAll('input.given-name-field');
+//   //   var FamilyNames = findAll('input.family-name-field');
+//   //   var creators = findAll('input.creator-field');
 
 //   //   await click(persons[0]);
 //   //   await fillIn(givenNames[0], "Teresa")
@@ -35,7 +35,7 @@
 //   //   await click(persons[1]);
 //   //   await fillIn(givenNames[1], "Billy")
 //   //   await fillIn(FamilyNames[1], "Corgan")
-    
+
 //   //   assert.equal(persons[0].checked, true);
 //   //   assert.equal(creators[0].value,'May, Teresa');
 
@@ -52,11 +52,11 @@
 //   //   let nameIdentifiers = findAll('input.name-identifier-field')
 //   //   let organisations = findAll('input.select-organisation')
 //   //   let persons = findAll('input.select-person')
-//   //   var creators = findAll('input.creator-field'); 
+//   //   var creators = findAll('input.creator-field');
 
 //   //   await typeIn(nameIdentifiers[0], "Teresa May")
 //   //   await triggerKeyEvent(creators[0], 'keyup', 'Tab');
-  
+
 //   //   assert.equal(nameIdentifiers[0].className, 'form-control name-identifier-field  ');
 //   //   assert.dom(organisations[0]).isNotChecked();
 //   //   assert.dom(persons[0]).isChecked();
@@ -77,12 +77,12 @@
 //     await render(hbs`{{doi-creators model=model}}`);
 //     await click('button#add-creator')
 //     await click('button#add-creator')
-//     var creators = findAll('input.creator-field'); 
+//     var creators = findAll('input.creator-field');
 //     await typeIn(creators[0], "")
 //     await typeIn(creators[1], "")
 //     await triggerKeyEvent(creators[0], 'keyup', 'Tab');
 //     await triggerKeyEvent(creators[1], 'keyup', 'Tab');
- 
+
 //     assert.equal(findAll('input.creator-field')[0].value,"");
 //     assert.equal(findAll('input.creator-field')[1].value,"");
 //     assert.equal(creators[1].className, 'form-control creator-field no-error no-success');

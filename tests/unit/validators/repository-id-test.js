@@ -5,7 +5,7 @@ module('Unit | Validator | repository-id', function(hooks) {
   setupTest(hooks);
 
   test('it works', function(assert) {
-    var validator = this.owner.lookup('validator:repository-id');
+    let validator = this.owner.lookup('validator:repository-id');
     assert.ok(validator);
   });
 });

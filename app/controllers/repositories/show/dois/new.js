@@ -18,10 +18,10 @@ export default Controller.extend({
       doi.set('event', this.setEvent(doi.get('state')));
 
       // track use of the form
-      doi.set("source", "fabricaForm");
+      doi.set('source', 'fabricaForm');
 
       // don't send xml
-      doi.set("xml", null);
+      doi.set('xml', null);
 
       // only store descriptions that have a description text
       doi.set('descriptions', A(doi.get('descriptions')).filter(function(description) {
@@ -53,14 +53,11 @@ export default Controller.extend({
       }));
 
       let self = this;
-      doi.save().then(function (doi) {
+      doi.save().then(function(doi) {
         self.transitionToRoute('dois.show', doi);
-      }).catch(function (reason) {
-        if (console.debug) {
-          console.debug(reason);
-        } else {
-          console.log(reason);
-        }
+      }).catch(function(reason) {
+        console.debug(reason);
+
         self.get('flashMessages').warning('An error occured and this DOI could not be saved.', { componentName: 'doi-error' });
       });
     },
@@ -68,10 +65,10 @@ export default Controller.extend({
       this.transitionToRoute('repositories.show.dois', this.get('model.repository.id'));
     },
     setCreatorValidations(value) {
-      console.log(value)
+      console.log(value);
     },
     setTitleValidations(value) {
-      console.log(value)
-    }
-  }
+      console.log(value);
+    },
+  },
 });

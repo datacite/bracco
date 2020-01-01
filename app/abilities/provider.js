@@ -6,7 +6,7 @@ export default Ability.extend({
   currentUser: service(),
 
   canCreate: computed('currentUser.role_id', function() {
-    switch(this.get('currentUser.role_id')) {
+    switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
       default:
@@ -14,7 +14,7 @@ export default Ability.extend({
     }
   }),
   canDelete: computed('currentUser.role_id', function() {
-    switch(this.get('currentUser.role_id')) {
+    switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
       default:
@@ -22,7 +22,7 @@ export default Ability.extend({
     }
   }),
   canUpdate: computed('currentUser.role_id', 'currentUser.provider_id', 'model.id', 'model.memberType', 'member.consortium.id', function() {
-    switch(this.get('currentUser.role_id')) {
+    switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
       case 'provider_admin':
@@ -32,7 +32,7 @@ export default Ability.extend({
     }
   }),
   canRead: computed('currentUser.role_id', 'currentUser.provider_id', 'model.id', 'model.memberType', 'member.consortium.id', function() {
-    switch(this.get('currentUser.role_id')) {
+    switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
       case 'provider_admin':
@@ -40,5 +40,5 @@ export default Ability.extend({
       default:
         return false;
     }
-  })
+  }),
 });

@@ -6,16 +6,16 @@ const RepositoryId = BaseValidator.extend({
     if (value.startsWith(providerId)) {
       return true;
     } else {
-      let message = "The Repository ID must beginn with " + providerId;
+      let message = 'The Repository ID must beginn with ' + providerId;
       return message;
     }
-  }
+  },
 });
 
 RepositoryId.reopenClass({
   getDependentsFor() {
-    return ['id'];
-  }
+    return [ 'id' ];
+  },
 });
 
 export default RepositoryId;

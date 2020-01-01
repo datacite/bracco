@@ -8,5 +8,5 @@ export function initialize(/* application */) {
 
 export default {
   name: 'custom-inflector-rules',
-  initialize
+  initialize,
 };

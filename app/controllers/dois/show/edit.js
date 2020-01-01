@@ -30,10 +30,10 @@ export default Controller.extend({
       doi.set('schemaVersion', null);
 
       // track use of the form
-      doi.set("source", "fabricaForm");
+      doi.set('source', 'fabricaForm');
 
       // don't send xml
-      doi.set("xml", null);
+      doi.set('xml', null);
 
       // only store name identifiers and affiliations with a value
       A(doi.get('creators')).forEach((creator) => {
@@ -60,7 +60,7 @@ export default Controller.extend({
       }));
 
       let self = this;
-      doi.save().then(function (doi) {
+      doi.save().then(function(doi) {
 
         self.transitionToRoute('dois.show', doi);
       });
@@ -68,6 +68,6 @@ export default Controller.extend({
     cancel() {
       this.model.rollbackAttributes();
       this.transitionToRoute('dois.show', this.model);
-    }
-  }
+    },
+  },
 });

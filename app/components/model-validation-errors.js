@@ -10,12 +10,8 @@ export default Component.extend({
 
     if (errors.length > 0) {
       A(errors).forEach((item) => {
-        if (console.debug) {
-          console.debug(item);
-        } else {
-          console.log(item);
-        }
+        console.log(item);
       });
     }
-  }
+  },
 });

@@ -73,5 +73,5 @@ export default Component.extend({
     deleteNameIdentifier() {
       this.creator.get('nameIdentifiers').removeObject(this.fragment);
     },
-  }
+  },
 });

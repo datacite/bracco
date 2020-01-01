@@ -6,7 +6,7 @@ export default Ability.extend({
   currentUser: service(),
 
   canSource: computed('currentUser.role_id', function() {
-    switch(this.get('currentUser.role_id')) {
+    switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
       default:
@@ -15,7 +15,7 @@ export default Ability.extend({
   }),
 
   canDelete: computed('currentUser.role_id', 'currentUser.provider_id', 'model.provider.id', function() {
-    switch(this.get('currentUser.role_id')) {
+    switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
       case 'provider_admin':
@@ -25,7 +25,7 @@ export default Ability.extend({
     }
   }),
   canCreate: computed('currentUser.role_id', 'currentUser.provider_id', 'currentUser.client_id', 'model.id', 'model.provider.id', function() {
-    switch(this.get('currentUser.role_id')) {
+    switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
       case 'provider_admin':
@@ -35,7 +35,7 @@ export default Ability.extend({
     }
   }),
   canUpdate: computed('currentUser.role_id', 'currentUser.provider_id', 'currentUser.client_id', 'model.id', 'model.provider.id', 'model.provider.consortium.id', function() {
-    switch(this.get('currentUser.role_id')) {
+    switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
       case 'provider_admin':
@@ -43,12 +43,12 @@ export default Ability.extend({
       case 'client_admin':
         return this.get('currentUser.client_id') === this.get('model.id');
       default:
-        return false
+        return false;
     }
   }),
   canRead: computed('currentUser.role_id', 'currentUser.provider_id', 'currentUser.client_id', 'model.id', 'model.provider.id', 'model.provider.consortium.id', function() {
     this.get('currentUser.role_id');
-    switch(this.get('currentUser.role_id')) {
+    switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
       case 'provider_admin':
@@ -56,7 +56,7 @@ export default Ability.extend({
       case 'client_admin':
         return this.get('currentUser.client_id') === this.get('model.id');
       default:
-        return false
+        return false;
     }
-  })
+  }),
 });
