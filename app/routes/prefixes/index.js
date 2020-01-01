@@ -4,13 +4,13 @@ import { inject as service } from '@ember/service';
 
 export default Route.extend({
   can: service(),
-  
+
   model(params) {
-    params = assign(params, { 
+    params = assign(params, {
       page: {
         number: params.page,
-        size: params.size 
-      }
+        size: params.size,
+      },
     });
 
     return this.store.query('prefix', params);
@@ -24,19 +24,19 @@ export default Route.extend({
 
   queryParams: {
     page: {
-      refreshModel: true
+      refreshModel: true,
     },
     size: {
-      refreshModel: true
+      refreshModel: true,
     },
     state: {
-      refreshModel: true
+      refreshModel: true,
     },
     year: {
-      refreshModel: true
+      refreshModel: true,
     },
     'provider-id': {
-      refreshModel: true
-    }
-  }
+      refreshModel: true,
+    },
+  },
 });

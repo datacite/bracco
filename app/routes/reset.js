@@ -6,6 +6,6 @@ export default Route.extend(UnauthenticatedRouteMixin, {
   actions: {
     close() {
       this.transitionTo('index');
-    }
-  }
+    },
+  },
 });

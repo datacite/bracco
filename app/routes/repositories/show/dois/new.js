@@ -7,11 +7,11 @@ export default Route.extend({
 
   model() {
     let repository = this.modelFor('repositories/show');
-    let doi = this.store.createRecord('doi', { repository: repository, mode: 'new', state: 'draft', titles: [], descriptions: [], creators: [] });
+    let doi = this.store.createRecord('doi', { repository, mode: 'new', state: 'draft', titles: [], descriptions: [], creators: [] });
 
     return hash({
-      repository: repository,
-      doi: doi
+      repository,
+      doi,
     });
   },
 

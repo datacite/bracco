@@ -10,12 +10,8 @@ export default Route.extend({
     let self = this;
     return this.store.findRecord('provider', 'admin').then(function(admin) {
       return admin;
-    }).catch(function(reason){
-      if (console.debug) {
-        console.debug(reason);
-      } else {
-        console.log(reason);
-      }
+    }).catch(function(reason) {
+      console.debug(reason);
 
       self.get('flashMessages').warning('Fabrica is currently unavailable due to a DataCite API problem. We apologize for the inconvenience and are working hard to restore the service. Please check back later or contact DataCite Support if you have a question.');
       self.transitionTo('index');
@@ -38,6 +34,6 @@ export default Route.extend({
   actions: {
     queryParamsDidChange() {
       this.refresh();
-    }
-  }
+    },
+  },
 });

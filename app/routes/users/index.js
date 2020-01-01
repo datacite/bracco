@@ -7,11 +7,11 @@ export default Route.extend({
   flashMessages: service(),
 
   model(params) {
-    params = assign(params, { 
+    params = assign(params, {
       page: {
         number: params.page,
-        size: params.size 
-      }
+        size: params.size,
+      },
     });
 
     return this.store.query('user', params);
@@ -19,17 +19,17 @@ export default Route.extend({
 
   queryParams: {
     page: {
-      refreshModel: true
+      refreshModel: true,
     },
     size: {
-      refreshModel: true
+      refreshModel: true,
     },
     'provider-id': {
-      refreshModel: true
+      refreshModel: true,
     },
     'repository-id': {
-      refreshModel: true
-    }
+      refreshModel: true,
+    },
   },
 
   afterModel() {

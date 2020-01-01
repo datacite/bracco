@@ -13,7 +13,7 @@ export default Route.extend(ApplicationRouteMixin, {
   isTokenAuthenticating: null,
 
   beforeModel() {
-    this.intl.setLocale(['en-us']);
+    this.intl.setLocale([ 'en-us' ]);
     set(this, 'headData.siteName', ENV.SITE_TITLE);
     return this._loadCurrentUser();
   },
@@ -34,7 +34,7 @@ export default Route.extend(ApplicationRouteMixin, {
     if (!this.isTokenAuthenticating) {
       this._super(...arguments);
       this._loadCurrentUser();
-      this.transitionTo('settings')
+      this.transitionTo('settings');
     } else {
       this.set('isTokenAuthenticating', false);
     }
@@ -46,5 +46,5 @@ export default Route.extend(ApplicationRouteMixin, {
   },
   _loadCurrentUser() {
     return this.currentUser.load().catch(() => this.session.invalidate());
-  }
+  },
 });

@@ -4,14 +4,14 @@ import { inject as service } from '@ember/service';
 
 export default Route.extend({
   can: service(),
-  
+
   model() {
     let provider = this.modelFor('providers/show');
 
     return hash({
       provider: this.store.findRecord('provider', provider.get('id')),
-      prefix: this.store.createRecord('provider-prefix', { provider: provider })
+      prefix: this.store.createRecord('provider-prefix', { provider }),
     });
-  }
+  },
 });
 

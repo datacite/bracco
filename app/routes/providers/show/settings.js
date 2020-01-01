@@ -6,19 +6,19 @@ export default Route.extend({
   features: service(),
 
   model() {
-     var model = this.modelFor('providers/show');
-     // Explicitly get the consortium here and set on the model
-     // This ensures the promise is fulfilled before the template is run
-     // so the data can be used in the template.
-     // this only works in the settings tab
-     //model.set('consortium_id', model.get('consortium.id'));
-     //model.set('consortium_name', model.get('consortium.name'));
-     return model;
+    let model = this.modelFor('providers/show');
+    // Explicitly get the consortium here and set on the model
+    // This ensures the promise is fulfilled before the template is run
+    // so the data can be used in the template.
+    // this only works in the settings tab
+    // model.set('consortium_id', model.get('consortium.id'));
+    // model.set('consortium_name', model.get('consortium.name'));
+    return model;
   },
 
   afterModel(model) {
     if (this.can.cannot('read provider', model)) {
       this.transitionTo('index');
     }
-  }
+  },
 });

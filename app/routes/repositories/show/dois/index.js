@@ -7,32 +7,32 @@ export default Route.extend({
   can: service(),
 
   model(params) {
-    params = assign(params, { 
+    params = assign(params, {
       page: {
         number: params.page,
-        size: params.size 
+        size: params.size,
       },
-      'client-id': this.modelFor('repositories/show').get('id')
+      'client-id': this.modelFor('repositories/show').get('id'),
     });
 
     return hash({
       repository: this.modelFor('repositories/show'),
-      dois: this.store.query('doi', params)
+      dois: this.store.query('doi', params),
     });
   },
 
   queryParams: {
     page: {
-      refreshModel: true
+      refreshModel: true,
     },
     size: {
-      refreshModel: true
-    }
+      refreshModel: true,
+    },
   },
 
   afterModel() {
     if (this.can.cannot('read repository', this.modelFor('repositories/show'))) {
       this.transitionTo('index');
     }
-  }
+  },
 });

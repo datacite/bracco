@@ -7,11 +7,11 @@ export default Route.extend({
   flashMessages: service(),
 
   model(params) {
-    params = assign(params, { 
+    params = assign(params, {
       page: {
         number: params.page,
-        size: params.size 
-      }
+        size: params.size,
+      },
     });
 
     return this.store.query('provider', params);
@@ -19,34 +19,34 @@ export default Route.extend({
 
   queryParams: {
     page: {
-      refreshModel: true
+      refreshModel: true,
     },
     size: {
-      refreshModel: true
+      refreshModel: true,
     },
     region: {
-      refreshModel: true
+      refreshModel: true,
     },
     year: {
-      refreshModel: true
+      refreshModel: true,
     },
     'member-type': {
-      refreshModel: true
+      refreshModel: true,
     },
     'organization-type': {
-      refreshModel: true
+      refreshModel: true,
     },
     'focus-area': {
-      refreshModel: true
+      refreshModel: true,
     },
     'non-profit-status': {
-      refreshModel: true
-    }
+      refreshModel: true,
+    },
   },
 
   afterModel() {
     if (this.can.cannot('read index')) {
       this.transitionTo('index');
     }
-  }
+  },
 });
