@@ -1,3 +1,5 @@
+/* global module */
+
 module.exports = function() {
   return {
     clientAllowedKeys: [ 'SITE_TITLE',
