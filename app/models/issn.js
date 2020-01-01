@@ -1,8 +1,8 @@
-import { attr } from '@ember-data/model';
+import DS from 'ember-data';
 import Fragment from 'ember-data-model-fragments/fragment';
 
 export default Fragment.extend({
-  issnl: attr('string'),
-  electronic: attr('string'),
-  print: attr('string')
+  issnl: DS.attr('string'),
+  electronic: DS.attr('string'),
+  print: DS.attr('string')
 });

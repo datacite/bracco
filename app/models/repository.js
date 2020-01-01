@@ -1,4 +1,4 @@
-import Model, { belongsTo, attr } from '@ember-data/model';
+import DS from 'ember-data';
 import { computed } from '@ember/object';
 import ENV from 'bracco/config/environment';
 import { array, fragment } from 'ember-data-model-fragments/attributes';
@@ -105,37 +105,37 @@ const Validations = buildValidations({
   ]
 });
 
-export default Model.extend(Validations, {
-  provider: belongsTo('provider', {
+export default DS.Model.extend(Validations, {
+  provider: DS.belongsTo('provider', {
     async: true
   }),
-  meta: attr(),
+  meta: DS.attr(),
 
-  name: attr('string'),
-  alternateName: attr('string'),
-  symbol: attr('string'),
-  re3data: attr('string'),
-  domains: attr('string', { defaultValue: '*' }),
-  systemEmail: attr('string'),
-  salesforceId: attr('string'),
-  year: attr('number'),
-  description: attr('string'),
+  name: DS.attr('string'),
+  alternateName: DS.attr('string'),
+  symbol: DS.attr('string'),
+  re3data: DS.attr('string'),
+  domains: DS.attr('string', { defaultValue: '*' }),
+  systemEmail: DS.attr('string'),
+  salesforceId: DS.attr('string'),
+  year: DS.attr('number'),
+  description: DS.attr('string'),
   language: array(),
   certificate: array(),
   serviceContact: fragment('contact'),
   issn: fragment('issn'),
-  url: attr('string'),
-  clientType: attr('string'),
+  url: DS.attr('string'),
+  clientType: DS.attr('string'),
   repositoryType: array(),
-  software: attr('string'),
-  isActive: attr('boolean', { defaultValue: true }),
-  passwordInput: attr('string'),
-  hasPassword: attr('boolean'),
-  keepPassword: attr('boolean', { defaultValue: true }),
-  created: attr('date'),
-  updated: attr('date'),
+  software: DS.attr('string'),
+  isActive: DS.attr('boolean', { defaultValue: true }),
+  passwordInput: DS.attr('string'),
+  hasPassword: DS.attr('boolean'),
+  keepPassword: DS.attr('boolean', { defaultValue: true }),
+  created: DS.attr('date'),
+  updated: DS.attr('date'),
 
-  targetId: attr(),
+  targetId: DS.attr(),
 
   domainList: computed('domains', function() {
     return this.domains.split(",").map(function(item) {

@@ -1,15 +1,15 @@
-import Model, { belongsTo, attr } from '@ember-data/model';
+import DS from 'ember-data';
 
-export default Model.extend({
-  repository: belongsTo('repository', {
+export default DS.Model.extend({
+  repository: DS.belongsTo('repository', {
     async: true
   }),
-  'provider-prefix': belongsTo('provider-prefix', {
+  'provider-prefix': DS.belongsTo('provider-prefix', {
     async: true
   }),
-  prefix: belongsTo('prefix', {
+  prefix: DS.belongsTo('prefix', {
     async: true
   }),
 
-  created: attr('date')
+  created: DS.attr('date')
 });

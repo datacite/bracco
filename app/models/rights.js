@@ -1,7 +1,7 @@
-import { attr } from '@ember-data/model';
+import DS from 'ember-data';
 import Fragment from 'ember-data-model-fragments/fragment';
 
 export default Fragment.extend({
-  rights: attr('string'),
-  rightsUri: attr('string')
+  rights: DS.attr('string'),
+  rightsUri: DS.attr('string')
 });

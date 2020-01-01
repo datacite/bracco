@@ -1,4 +1,4 @@
-import { attr } from '@ember-data/model';
+import DS from 'ember-data';
 import Fragment from 'ember-data-model-fragments/fragment';
 import { validator, buildValidations } from 'ember-cp-validations';
 import { computed } from '@ember/object';
@@ -17,7 +17,7 @@ const Validations = buildValidations({
 });
 
 export default Fragment.extend(Validations, {
-  description: attr('string', { defaultValue: null }),
-  descriptionType: attr('string', { defaultValue: "Abstract" }),
-  lang: attr('string', { defaultValue: null })
+  description: DS.attr('string', { defaultValue: null }),
+  descriptionType: DS.attr('string', { defaultValue: "Abstract" }),
+  lang: DS.attr('string', { defaultValue: null })
 });

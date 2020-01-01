@@ -8096,7 +8096,7 @@ ember-data-model-fragments@^4.0.0:
     git-repo-info "^2.0.0"
     npm-git-info "^1.0.3"
 
-ember-data@~3.12.0:
+ember-data@~3.12.4:
   version "3.12.4"
   resolved "https://registry.yarnpkg.com/ember-data/-/ember-data-3.12.4.tgz#09433e9c270eb4aad023e1e0ed5a8db31b356fd1"
   integrity sha512-PWHCKYZKht2h6nqG4Vr6sjsQndRbx23eFS7VtzEfTD3qJf5Aa2fG5Ur9T8ZX9U75KxrDLoV/LfnUe1FU5fXI8w==
@@ -8654,7 +8654,7 @@ ember-source-channel-url@^2.0.1:
   dependencies:
     got "^8.0.1"
 
-ember-source@^3.12.0:
+ember-source@^3.12.1:
   version "3.15.0"
   resolved "https://registry.yarnpkg.com/ember-source/-/ember-source-3.15.0.tgz#f6500c6d289ce58231bf1e6695c4974df2be7390"
   integrity sha512-daTELJBDMGqAmQb/Puxdk1YR204/zs1DEiEMQWlqbtmhphAoDUbGi9ifJu20ajP/IcOCWw9Vp7aPzguTohWF7w==

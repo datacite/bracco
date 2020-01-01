@@ -1,4 +1,4 @@
-import { attr } from '@ember-data/model';
+import DS from 'ember-data';
 import Fragment from 'ember-data-model-fragments/fragment';
 import { fragmentArray } from 'ember-data-model-fragments/attributes';
 import { validator, buildValidations } from 'ember-cp-validations';
@@ -60,10 +60,10 @@ const Validations = buildValidations({
 });
 
 export default Fragment.extend(Validations, {
-  name: attr('string'),
-  givenName: attr('string', { defaultValue: null }),
-  familyName: attr('string', { defaultValue: null }),
-  nameType: attr('string', { defaultValue: "Personal" }),
+  name: DS.attr('string'),
+  givenName: DS.attr('string', { defaultValue: null }),
+  familyName: DS.attr('string', { defaultValue: null }),
+  nameType: DS.attr('string', { defaultValue: "Personal" }),
   nameIdentifiers: fragmentArray('name-identifier'),
   affiliation: fragmentArray('affiliation'),
 

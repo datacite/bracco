@@ -1,4 +1,4 @@
-import Model, { belongsTo, hasMany, attr } from '@ember-data/model';
+import DS from 'ember-data';
 import { computed } from '@ember/object';
 import ENV from 'bracco/config/environment';
 import { validator, buildValidations } from 'ember-cp-validations';
@@ -115,37 +115,37 @@ const Validations = buildValidations({
   ]
 });
 
-export default Model.extend(Validations, {
-  consortium: belongsTo('provider', {
+export default DS.Model.extend(Validations, {
+  consortium: DS.belongsTo('provider', {
     inverse: 'consortiumOrganizations', async: true
   }),
-  consortiumOrganizations: hasMany('provider', {
+  consortiumOrganizations: DS.hasMany('provider', {
     inverse: 'consortium', async: true
   }),
-  meta: attr(),
+  meta: DS.attr(),
 
-  name: attr('string'),
-  displayName: attr('string'),
-  symbol: attr('string'),
-  description: attr('string'),
-  region: attr('string'),
-  country: attr('country'),
-  memberType: attr('string'),
-  organizationType: attr('string'),
-  focusArea: attr('string'),
-  logoUrl: attr('string'),
-  systemEmail: attr('string'),
-  groupEmail: attr('string'),
-  website: attr('string'),
-  isActive: attr('boolean', { defaultValue: true }),
-  passwordInput: attr('string'),
-  nonProfitStatus: attr('string'),
-  hasPassword: attr('boolean'),
-  keepPassword: attr('boolean', { defaultValue: true }),
-  rorId: attr('string'),
-  salesforceId: attr('string'),
-  twitterHandle: attr('string'),
-  billingInformation: attr('billingInformation'),
+  name: DS.attr('string'),
+  displayName: DS.attr('string'),
+  symbol: DS.attr('string'),
+  description: DS.attr('string'),
+  region: DS.attr('string'),
+  country: DS.attr('country'),
+  memberType: DS.attr('string'),
+  organizationType: DS.attr('string'),
+  focusArea: DS.attr('string'),
+  logoUrl: DS.attr('string'),
+  systemEmail: DS.attr('string'),
+  groupEmail: DS.attr('string'),
+  website: DS.attr('string'),
+  isActive: DS.attr('boolean', { defaultValue: true }),
+  passwordInput: DS.attr('string'),
+  nonProfitStatus: DS.attr('string'),
+  hasPassword: DS.attr('boolean'),
+  keepPassword: DS.attr('boolean', { defaultValue: true }),
+  rorId: DS.attr('string'),
+  salesforceId: DS.attr('string'),
+  twitterHandle: DS.attr('string'),
+  billingInformation: DS.attr('billingInformation'),
   technicalContact: fragment('contact'),
   secondaryTechnicalContact: fragment('contact'),
   billingContact: fragment('contact'),
@@ -153,9 +153,9 @@ export default Model.extend(Validations, {
   secondaryServiceContact: fragment('contact'),
   serviceContact: fragment('contact'),
   votingContact: fragment('contact'),
-  joined: attr('date'),
-  created: attr('date'),
-  updated: attr('date'),
+  joined: DS.attr('date'),
+  created: DS.attr('date'),
+  updated: DS.attr('date'),
 
   uid: computed('id', function() {
     return this.id.toUpperCase();

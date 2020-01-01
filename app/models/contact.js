@@ -1,4 +1,4 @@
-import { attr } from '@ember-data/model';
+import DS from 'ember-data';
 import Fragment from 'ember-data-model-fragments/fragment';
 import { computed } from '@ember/object';
 // import { validator, buildValidations } from 'ember-cp-validations';
@@ -28,9 +28,9 @@ import { computed } from '@ember/object';
 // });
 
 export default Fragment.extend({
-  email : attr('string'),
-  givenName : attr('string'),
-  familyName  : attr('string'),
+  email : DS.attr('string'),
+  givenName : DS.attr('string'),
+  familyName  : DS.attr('string'),
 
   name: computed('givenName', 'familyName', function () {
     let name = null;
