@@ -2,92 +2,92 @@
   <ApplicationHeader @default={{true}} />
 
   <div class="container-fluid">
-      <IndexHeader />
+    <IndexHeader />
 
-      <div class='col-md-3'>
-        {{#if (can "write prefix")}}
-          <div class="panel facets">
-            <div class="panel-body">
-              <div class="btn-toolbar">
-                <div class="btn-group btn-group-sm">
-                  <LinkTo @route="prefixes.new" class="btn btn-warning" @id="add-prefixes">{{fa-icon "link"}}Add Prefixes</LinkTo>
-                </div>
+    <div class='col-md-3'>
+      {{#if (can "write prefix")}}
+        <div class="panel facets">
+          <div class="panel-body">
+            <div class="btn-toolbar">
+              <div class="btn-group btn-group-sm">
+                <LinkTo @route="prefixes.new" class="btn btn-warning" @id="add-prefixes">{{fa-icon "link"}}Add Prefixes</LinkTo>
               </div>
             </div>
           </div>
-        {{else}}
-          <div class="panel panel-transparent">
-            <div class="panel-body">
-              <div class="edit"></div>
-            </div>
+        </div>
+      {{else}}
+        <div class="panel panel-transparent">
+          <div class="panel-body">
+            <div class="edit"></div>
           </div>
-        {{/if}}
+        </div>
+      {{/if}}
 
-        {{#if model.meta.states}}
-          <div class="panel facets add">
-            <div class="panel-body">
-              <h4>State <span class="small">{{fa-icon "question-circle-o"}}<BsTooltip @placement="top">Filter prefixes by whether they have been assigned to a provider and/or repository.</BsTooltip></span></h4>
-              <ul>
-                {{#each model.meta.states as |state|}}
-                  <li>
-                    {{#if model.query.state}}
-                      <LinkTo @route="prefixes" @query={{hash state=null}}>{{fa-icon "check-square-o"}}</LinkTo>
-                    {{else}}
-                      <LinkTo @route="prefixes" @query={{hash state=state.id}}>{{fa-icon "square-o"}}</LinkTo>
-                    {{/if}}
-                    <div class="facet-title">{{state.title}}</div>
-                    <span class="number pull-right">{{state.count}}</span>
-                    <div class="clearfix"/>
-                  </li>
-                {{/each}}
-              </ul>
-            </div>
+      {{#if model.meta.states}}
+        <div class="panel facets add">
+          <div class="panel-body">
+            <h4>State <span class="small">{{fa-icon "question-circle-o"}}<BsTooltip @placement="top">Filter prefixes by whether they have been assigned to a provider and/or repository.</BsTooltip></span></h4>
+            <ul>
+              {{#each model.meta.states as |state|}}
+                <li>
+                  {{#if model.query.state}}
+                    <LinkTo @route="prefixes" @query={{hash state=null}}>{{fa-icon "check-square-o"}}</LinkTo>
+                  {{else}}
+                    <LinkTo @route="prefixes" @query={{hash state=state.id}}>{{fa-icon "square-o"}}</LinkTo>
+                  {{/if}}
+                  <div class="facet-title">{{state.title}}</div>
+                  <span class="number pull-right">{{state.count}}</span>
+                  <div class="clearfix"/>
+                </li>
+              {{/each}}
+            </ul>
           </div>
-        {{/if}}
+        </div>
+      {{/if}}
 
-        {{#if model.meta.years}}
-          <div class="panel facets add">
-            <div class="panel-body">
-              <h4>Year created</h4>
-              <ul>
-                {{#each model.meta.years as |year|}}
-                  <li>
-                    {{#if model.query.year}}
-                      <LinkTo @route="prefixes" @query={{hash year=null}}>{{fa-icon "check-square-o"}}</LinkTo>
-                    {{else}}
-                      <LinkTo @route="prefixes" @query={{hash year=year.id}}>{{fa-icon "square-o"}}</LinkTo>
-                    {{/if}}
-                    <div class="facet-title">{{year.title}}</div>
-                    <span class="number pull-right">{{year.count}}</span>
-                    <div class="clearfix"/>
-                  </li>
-                {{/each}}
-              </ul>
-            </div>
+      {{#if model.meta.years}}
+        <div class="panel facets add">
+          <div class="panel-body">
+            <h4>Year created</h4>
+            <ul>
+              {{#each model.meta.years as |year|}}
+                <li>
+                  {{#if model.query.year}}
+                    <LinkTo @route="prefixes" @query={{hash year=null}}>{{fa-icon "check-square-o"}}</LinkTo>
+                  {{else}}
+                    <LinkTo @route="prefixes" @query={{hash year=year.id}}>{{fa-icon "square-o"}}</LinkTo>
+                  {{/if}}
+                  <div class="facet-title">{{year.title}}</div>
+                  <span class="number pull-right">{{year.count}}</span>
+                  <div class="clearfix"/>
+                </li>
+              {{/each}}
+            </ul>
           </div>
-        {{/if}}
-        {{#if model.meta.providers}}
-          <div class="panel facets">
-            <div class="panel-body">
-              <h4>Providers <span class="small">{{fa-icon "question-circle-o"}}<BsTooltip @placement="top">Filter prefixes by DOI Registration Provider they work with.</BsTooltip></span></h4>
-              <ul>
-                {{#each model.meta.providers as |provider|}}
-                  <li>
-                    {{#if model.query.provider-id}}
-                      <LinkTo @route="prefixes" @query={{hash provider-id=null}}>{{fa-icon "check-square-o"}}</LinkTo>
-                    {{else}}
-                      <LinkTo @route="prefixes" @query={{hash provider-id=provider.id}}>{{fa-icon "square-o"}}</LinkTo>
-                    {{/if}}
-                    <div class="facet-title">{{provider.title}}</div>
-                    <span class="number pull-right">{{provider.count}}</span>
-                    <div class="clearfix"/>
-                  </li>
-                {{/each}}
-              </ul>
-            </div>
+        </div>
+      {{/if}}
+      {{#if model.meta.providers}}
+        <div class="panel facets">
+          <div class="panel-body">
+            <h4>Providers <span class="small">{{fa-icon "question-circle-o"}}<BsTooltip @placement="top">Filter prefixes by DOI Registration Provider they work with.</BsTooltip></span></h4>
+            <ul>
+              {{#each model.meta.providers as |provider|}}
+                <li>
+                  {{#if model.query.provider-id}}
+                    <LinkTo @route="prefixes" @query={{hash provider-id=null}}>{{fa-icon "check-square-o"}}</LinkTo>
+                  {{else}}
+                    <LinkTo @route="prefixes" @query={{hash provider-id=provider.id}}>{{fa-icon "square-o"}}</LinkTo>
+                  {{/if}}
+                  <div class="facet-title">{{provider.title}}</div>
+                  <span class="number pull-right">{{provider.count}}</span>
+                  <div class="clearfix"/>
+                </li>
+              {{/each}}
+            </ul>
           </div>
-        {{/if}}
-      </div>
+        </div>
+      {{/if}}
+    </div>
       
     <div class="col-md-9 panel-list" id="content">
       <ModelSearch @model={{model}} @sortable={{true}} @link="prefixes" />
