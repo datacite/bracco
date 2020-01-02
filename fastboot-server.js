@@ -6,7 +6,7 @@ if (typeof(PhusionPassenger) !== 'undefined') {
 
 const express = require('express');
 const compression = require('compression');
-const morgan  = require('morgan');
+const pino = require('express-pino-logger');
 const fastbootMiddleware = require('fastboot-express-middleware');
 
 let app = express();
@@ -21,7 +21,7 @@ app.get('/assets/*', function(req, res) {
 });
 
 // logging
-app.use(morgan('combined'));
+app.use(pino);
 
 app.get('/*', fastbootMiddleware({
   distPath: 'dist',
