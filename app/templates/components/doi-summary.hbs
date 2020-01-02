@@ -1,30 +1,30 @@
 <h3 class="work">
   {{#if isList}}
     <LinkTo @route="dois.show" @model={{model.id}}>{{#if (and (gt model.titles.length 0) (gt model.titles.firstObject.title.length 0))}}{{format-text model.titles.firstObject.title}}{{else}}{{model.doi}}{{/if}}</LinkTo>
-    <span class="small">{{model.types.resourceTypeGeneral}}</span>
+    <span class="small" data-test-resource-type-general>{{model.types.resourceTypeGeneral}}</span>
   {{else}}
     {{#if model.isDraft}}
       {{#if (and (gt model.titles.length 0) (gt model.titles.firstObject.title.length 0))}}{{format-text model.titles.firstObject.title}}{{else}}{{model.doi}}{{/if}}
     {{else}}
       <a target="_blank" rel="noopener"
-        href="{{model.identifier}}">{{#if (gt model.titles.length 0)}}{{format-text model.titles.firstObject.title}}{{else}}{{model.doi}}{{/if}}</a>
+        href="{{model.identifier}}" data-test-doi>{{#if (gt model.titles.length 0)}}{{format-text model.titles.firstObject.title}}{{else}}{{model.doi}}{{/if}}</a>
     {{/if}}
-    <span class="small">{{model.types.resourceTypeGeneral}}</span>
+    <span class="small" data-test-resource-type-general>{{model.types.resourceTypeGeneral}}</span>
   {{/if}}
 </h3>
 {{#if model.creators}}
   <CreatorShow @creators={{model.creators}} />
 {{/if}}
-<div class="metadata">
+<div class="metadata" data-test-metadata>
   {{format-metadata model.publicationYear resourceTypeGeneral=model.types.resourceTypeGeneral resourceType=model.types.resourceType container=model.bcontainer publisher=model.publisher version=model.version}}
 </div>
 {{#if model.descriptions}}
-  <div class="description">
+  <div class="description" data-test-description>
     {{#if (gt model.descriptions.length 0)}}{{format-text model.descriptions.firstObject.description limit=150}}{{/if}}
   </div>
 {{/if}}
 {{#if isList}}
-  <div class="created">
+  <div class="created" data-test-created>
     Created
     {{format-time model.created year='numeric' month='long' day='numeric' hour='numeric' minute='numeric' second='numeric' timeZone='UTC' timeZoneName='short' hour12=false}}.
     <span class="text-{{model.state}}">{{titleize model.state}}</span>

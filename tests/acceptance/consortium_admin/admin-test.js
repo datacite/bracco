@@ -3,57 +3,58 @@ import { setupApplicationTest } from 'ember-qunit';
 import { currentURL, visit } from '@ember/test-helpers';
 import { authenticateSession } from 'ember-simple-auth/test-support';
 
-module('Acceptance | user | admin', function(hooks) {
+module('Acceptance | consortium_admin | admin', function(hooks) {
   setupApplicationTest(hooks);
 
   hooks.beforeEach(async function() {
     await authenticateSession({
-      uid: '0000-0001-6528-2027',
-      name: 'Martin Fenner',
-      role_id: 'user',
+      uid: 'dc',
+      name: 'DataCite Consortium',
+      role_id: 'provider_admin',
+      provider_id: 'dc',
     });
   });
 
   test('is logged in', async function(assert) {
     await visit('/');
 
-    assert.dom('a#account_menu_link').hasText('Martin Fenner');
+    assert.dom('a#account_menu_link').hasText('DC');
   });
 
   test('visiting homepage', async function(assert) {
     await visit('/');
 
-    assert.equal(currentURL(), '/users/0000-0001-6528-2027');
-    assert.dom('h2.work').hasText('Martin Fenner');
+    assert.equal(currentURL(), '/providers/dc');
+    assert.dom('h2.work').hasText('DataCite Consortium');
   });
 
-  // the following pages require authentication. Redirects to homepage otherwise
+  // the following pages require authentication. Redirects to provider homepage otherwise
   test('visiting settings', async function(assert) {
     await visit('/settings');
 
-    assert.equal(currentURL(), '/users/0000-0001-6528-2027');
-    assert.dom('h2.work').hasText('Martin Fenner');
+    assert.equal(currentURL(), '/providers/dc');
+    assert.dom('h2.work').hasText('DataCite Consortium');
   });
 
   test('visiting providers', async function(assert) {
     await visit('/providers');
 
-    assert.equal(currentURL(), '/users/0000-0001-6528-2027');
-    assert.dom('h2.work').hasText('Martin Fenner');
+    assert.equal(currentURL(), '/providers/dc');
+    assert.dom('h2.work').hasText('DataCite Consortium');
   });
 
   test('visiting repositories', async function(assert) {
     await visit('/repositories');
 
-    assert.equal(currentURL(), '/users/0000-0001-6528-2027');
-    assert.dom('h2.work').hasText('Martin Fenner');
+    assert.equal(currentURL(), '/providers/dc');
+    assert.dom('h2.work').hasText('DataCite Consortium');
   });
 
   test('visiting prefixes', async function(assert) {
     await visit('/prefixes');
 
-    assert.equal(currentURL(), '/users/0000-0001-6528-2027');
-    assert.dom('h2.work').hasText('Martin Fenner');
+    assert.equal(currentURL(), '/providers/dc');
+    assert.dom('h2.work').hasText('DataCite Consortium');
   });
 
   test('visiting prefix 10.5038', async function(assert) {
@@ -66,16 +67,11 @@ module('Acceptance | user | admin', function(hooks) {
   test('visiting dois', async function(assert) {
     await visit('/dois');
 
-    assert.equal(currentURL(), '/users/0000-0001-6528-2027');
-    assert.dom('h2.work').hasText('Martin Fenner');
+    assert.equal(currentURL(), '/providers/dc');
+    assert.dom('h2.work').hasText('DataCite Consortium');
   });
 
   // test('visiting specific doi', async function(assert) {
-  //   await authenticateSession({
-  //     uid: '0000-0001-6528-2027',
-  //     name: 'Martin Fenner',
-  //     role_id: 'user',
-  //   });
   //   await visit('/dois/10.70048%2Fe605-dg05');
 
   //   assert.equal(currentURL(), '/dois/10.70048%2Fe605-dg05');
@@ -85,8 +81,8 @@ module('Acceptance | user | admin', function(hooks) {
   test('visiting users', async function(assert) {
     await visit('/users');
 
-    assert.equal(currentURL(), '/users/0000-0001-6528-2027');
-    assert.dom('h2.work').hasText('Martin Fenner');
+    assert.equal(currentURL(), '/providers/dc');
+    assert.dom('h2.work').hasText('DataCite Consortium');
   });
 
   test('visiting specific user', async function(assert) {

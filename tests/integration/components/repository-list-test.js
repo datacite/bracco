@@ -11,9 +11,8 @@ module('Integration | Component | repository-list', function(hooks) {
   test('it renders', async function(assert) {
     this.set('model', { provider: null, repositories: makeList('repository', 2) });
 
-    await render(hbs`{{repository-list model=model link="repositories" searchable=true}}`);
+    await render(hbs`{{repository-list model=model link="repositories" searchable=false}}`);
 
-    assert.dom('span.help-block').hasText('Reset All');
     assert.dom('div.panel-body > h3.work a').exists({ count: 2 });
     assert.dom('div.panel-body:first-child a').hasText('Australian Data Archive');
   });

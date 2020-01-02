@@ -360,7 +360,9 @@
 </div>
 
 <div class="col-md-9 panel-list" id="content">
-  <ModelSearch @model={{model}} @link={{link}} @sortable={{true}} />
+  {{#if searchable}}
+    <ModelSearch @model={{model}} @link={{link}} @sortable={{true}} />
+  {{/if}}
 
   {{#if model}}
     {{#each model as |doi|}}
@@ -371,7 +373,7 @@
           {{#if doi.isDraft}}
             {{fa-icon "info-circle"}} {{doi.doi}}
           {{else}}
-            <a href={{doi.identifier}}>{{fa-icon "external-link"}} {{doi.identifier}}</a>
+            <a href={{doi.identifier}} data-test-identifier>{{fa-icon "external-link"}} {{doi.identifier}}</a>
           {{/if}}
         </div>
       </div>

@@ -37,9 +37,7 @@ export default Component.extend({
         self.set('prefixes', prefixes);
       }
 
-      // use first prefix that is not 10.5072 if it exists
-      prefixes = prefixes.mapBy('id').removeObject('10.5072');
-      let prefix = prefixes.length > 0 ? prefixes.get('firstObject') : '10.5072';
+      let prefix = prefixes.length > 0 ? prefixes.get('firstObject') : null;
 
       self.get('model').set('prefix', prefix);
 

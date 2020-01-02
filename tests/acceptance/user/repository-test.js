@@ -6,13 +6,15 @@ import { authenticateSession } from 'ember-simple-auth/test-support';
 module('Acceptance | user | repository', function(hooks) {
   setupApplicationTest(hooks);
 
-  test('visiting repository AWI', async function(assert) {
+  hooks.beforeEach(async function() {
     await authenticateSession({
       uid: '0000-0001-6528-2027',
       name: 'Martin Fenner',
       role_id: 'user',
     });
+  });
 
+  test('visiting repository AWI', async function(assert) {
     await visit('/repositories/tib.awi');
 
     assert.equal(currentURL(), '/users/0000-0001-6528-2027');
@@ -20,12 +22,6 @@ module('Acceptance | user | repository', function(hooks) {
   });
 
   test('visiting repository AWI settings', async function(assert) {
-    await authenticateSession({
-      uid: '0000-0001-6528-2027',
-      name: 'Martin Fenner',
-      role_id: 'user',
-    });
-
     await visit('/repositories/tib.awi/settings');
 
     assert.equal(currentURL(), '/users/0000-0001-6528-2027');
@@ -33,12 +29,6 @@ module('Acceptance | user | repository', function(hooks) {
   });
 
   test('visiting repository AWI prefixes', async function(assert) {
-    await authenticateSession({
-      uid: '0000-0001-6528-2027',
-      name: 'Martin Fenner',
-      role_id: 'user',
-    });
-
     await visit('/repositories/tib.awi/prefixes');
 
     assert.equal(currentURL(), '/users/0000-0001-6528-2027');
@@ -46,12 +36,6 @@ module('Acceptance | user | repository', function(hooks) {
   });
 
   test('visiting repository AWI dois', async function(assert) {
-    await authenticateSession({
-      uid: '0000-0001-6528-2027',
-      name: 'Martin Fenner',
-      role_id: 'user',
-    });
-
     await visit('/repositories/tib.awi/dois');
 
     assert.equal(currentURL(), '/users/0000-0001-6528-2027');

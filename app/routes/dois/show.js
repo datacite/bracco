@@ -4,15 +4,12 @@ import { set } from '@ember/object';
 
 export default Route.extend({
   can: service(),
-  headData: service(),
-  currentUser: service(),
 
   model(params) {
     let self = this;
     return this.store.findRecord('doi', params.doi_id, { include: 'client' }).then(function(doi) {
       set(self, 'headData.title', doi.title);
       set(self, 'headData.description', doi.description);
-
       return doi;
     }).catch(function(reason) {
       console.debug(reason);
@@ -22,8 +19,8 @@ export default Route.extend({
     });
   },
 
-  // afterModel() {
-  //   if (this.get('can').cannot('view doi', this.modelFor('repositories/show/dois/show'))) {
+  // afterModel(model) {
+  //   if (this.get('can').cannot('view doi', model)) {
   //     return this.transitionTo('index');
   //   }
   // }

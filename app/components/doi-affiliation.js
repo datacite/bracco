@@ -13,7 +13,7 @@ export default Component.extend({
       this.fragment.set('schemeUri', 'https://ror.org');
       this.fragment.set('affiliationIdentifierScheme', 'ROR');
 
-      this.setCreatorValidationClass();
+      // this.setCreatorValidationClass();
     } else {
       this.fragment.set('name', null);
       this.fragment.set('affiliationIdentifier', null);

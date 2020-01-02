@@ -2,9 +2,9 @@ import FactoryGuy from 'ember-data-factory-guy';
 
 FactoryGuy.define('doi', {
   default: {
-    doi: '10.25499/jjva5eho424vep7dz2pson7qz',
+    doi: '10.70048/rph240519',
     identifiers: [ {
-      'doi': 'https://handle.test.datacite.org/10.25499/jjva5eho424vep7dz2pson7qz',
+      'doi': 'https://handle.test.datacite.org/10.70048/rph240519',
     } ],
     creators: FactoryGuy.hasMany('creator'),
     titles: FactoryGuy.hasMany('title'),

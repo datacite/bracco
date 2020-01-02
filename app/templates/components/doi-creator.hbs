@@ -2,7 +2,7 @@
   <label for="nameIdentifiers" class="subtitle">Name Identifier (optional)</label>
 
   {{#each fragment.nameIdentifiers as |nameIdentifier index|}}
-    <DoiNameIdentifier @model={{model}} @creator={{fragment}} @fragment={{nameIdentifier}} @form={{form}} @index={{index}} @joinNameParts={{action "joinNameParts"}} @setNameType={{action "selectNameType"}} @setCreatorValidationClass={{action "setCreatorValidationClass"}} @setReadOnly={{action "setReadOnly"}} />
+    <DoiNameIdentifier @model={{model}} @creator={{fragment}} @fragment={{nameIdentifier}} @form={{form}} @index={{index}} @joinNameParts={{action "joinNameParts"}} @setNameType={{action "selectNameType"}} @setReadOnly={{action "setReadOnly"}} />
   {{/each}}
 {{/if}}
 
@@ -92,7 +92,7 @@
   <label for="affiliation" class="subtitle">Affiliation (optional)</label>
 
   {{#each fragment.affiliation as |affiliation index|}}
-    <DoiAffiliation @model={{model}} @creator={{fragment}} @fragment={{affiliation}} @form={{form}} @index={{index}} @setCreatorValidationClass={{action "setCreatorValidationClass"}} />
+    <DoiAffiliation @model={{model}} @creator={{fragment}} @fragment={{affiliation}} @form={{form}} @index={{index}} />
   {{/each}}
 
   {{#if (not hasErrors)}}

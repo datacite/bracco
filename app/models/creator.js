@@ -1,6 +1,5 @@
 import DS from 'ember-data';
-import Fragment from 'ember-data-model-fragments/fragment';
-import { fragmentArray } from 'ember-data-model-fragments/attributes';
+import MF from 'ember-data-model-fragments';
 import { validator, buildValidations } from 'ember-cp-validations';
 import { computed } from '@ember/object';
 import { A } from '@ember/array';
@@ -9,45 +8,27 @@ const Validations = buildValidations({
   'name': [
     validator('presence', {
       presence: true,
-      isWarning: computed('model._internalModel._recordData.getOwner()', function() {
-        // workaround to look up owner
-        let owner = this.model._internalModel._recordData.getOwner();
-        return owner.state === 'draft' || owner.prefix === '10.5072';
-      }),
-      disabled: computed('model._internalModel._recordData.getOwner()', 'model.nameType', function() {
-        // only validate first creator and only if nameType is not "Personal"
-        let owner = this.model._internalModel._recordData.getOwner();
-        return this.model !== owner.creators.content[0] || this.model.get('nameType') === 'Personal';
+      disabled: computed('model.nameType', function() {
+        // only validate if nameType is not "Personal"
+        this.model.get('nameType') === 'Personal';
       }),
     }),
   ],
   'givenName': [
     validator('presence', {
       presence: true,
-      isWarning: computed('model._internalModel._recordData.getOwner()', function() {
-        // workaround to look up owner
-        let owner = this.model._internalModel._recordData.getOwner();
-        return owner.state === 'draft' || owner.prefix === '10.5072';
-      }),
-      disabled: computed('model._internalModel._recordData.getOwner()', 'model.nameType', function() {
-        // only validate first creator and only if nameType is "Personal"
-        let owner = this.model._internalModel._recordData.getOwner();
-        return this.model !== owner.creators.content[0] || this.model.get('nameType') !== 'Personal';
+      disabled: computed('model.nameType', function() {
+        // only validate if nameType is "Personal"
+        this.model.get('nameType') !== 'Personal';
       }),
     }),
   ],
   'familyName': [
     validator('presence', {
       presence: true,
-      isWarning: computed('model._internalModel._recordData.getOwner()', function() {
-        // workaround to look up owner
-        let owner = this.model._internalModel._recordData.getOwner();
-        return owner.state === 'draft' || owner.prefix === '10.5072';
-      }),
-      disabled: computed('model._internalModel._recordData.getOwner()', 'model.nameType', function() {
-        // only validate first creator and only if nameType is "Personal"
-        let owner = this.model._internalModel._recordData.getOwner();
-        return this.model !== owner.creators.content[0] || this.model.get('nameType') !== 'Personal';
+      disabled: computed('model.nameType', function() {
+        // only validate if nameType is "Personal"
+        this.model.get('nameType') !== 'Personal';
       }),
     }),
   ],
@@ -59,13 +40,13 @@ const Validations = buildValidations({
   // ]
 });
 
-export default Fragment.extend(Validations, {
+export default MF.Fragment.extend(Validations, {
   name: DS.attr('string'),
   givenName: DS.attr('string', { defaultValue: null }),
   familyName: DS.attr('string', { defaultValue: null }),
   nameType: DS.attr('string', { defaultValue: 'Personal' }),
-  nameIdentifiers: fragmentArray('name-identifier'),
-  affiliation: fragmentArray('affiliation'),
+  nameIdentifiers: MF.fragmentArray('name-identifier'),
+  affiliation: MF.fragmentArray('affiliation'),
 
   displayName: computed('name', 'givenName', 'familyName', function() {
     return (this.familyName) ? [ this.givenName, this.familyName ].join(' ') : this.name;

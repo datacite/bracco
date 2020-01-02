@@ -38,16 +38,6 @@ export default Component.extend({
     if (this.fragment.get('affiliation').length == 0) {
       this.fragment.get('affiliation').createFragment();
     }
-
-    // if (!this.fragment.get('affiliation')) {
-    //   this.fragment.set('affiliation', []);
-    // }
-    // if (!isArray(this.fragment.get('affiliation'))) {
-    //   this.fragment.set('affiliation', [this.fragment.get('affiliation')]);
-    // }
-    // if (this.fragment.get('affiliation').length == 0) {
-    //   this.fragment.get('affiliation').pushObject(null);
-    // }
   },
 
   joinNameParts(options = {}) {
@@ -108,15 +98,15 @@ export default Component.extend({
   actions: {
     updateName(value) {
       this.joinNameParts({ name: value });
-      this.setValidationClass();
+      // this.setValidationClass();
     },
     updateGivenName(value) {
       this.joinNameParts({ givenName: value });
-      this.setValidationClass();
+      // this.setValidationClass();
     },
     updateFamilyName(value) {
       this.joinNameParts({ familyName: value });
-      this.setValidationClass();
+      // this.setValidationClass();
     },
     selectNameType(value) {
       this.selectNameType(value);
@@ -136,8 +126,8 @@ export default Component.extend({
     joinNameParts(options) {
       this.joinNameParts(options);
     },
-    setCreatorValidationClass() {
-      this.setValidationClass();
-    },
+    // setCreatorValidationClass() {
+    //   this.setValidationClass();
+    // },
   },
 });

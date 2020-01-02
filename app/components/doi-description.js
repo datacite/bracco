@@ -26,14 +26,14 @@ export default Component.extend({
   actions: {
     updateDescription(value) {
       this.fragment.set('description', value);
-      this.setValidationClass();
+      // this.setValidationClass();
     },
     deleteDescription() {
       this.model.get('descriptions').removeObject(this.fragment);
     },
     selectDescriptionType(descriptionType) {
       this.fragment.set('descriptionType', descriptionType);
-      this.setValidationClass();
+      // this.setValidationClass();
     },
     searchLanguage(query) {
       let languages = languageList.filter(function(language) {

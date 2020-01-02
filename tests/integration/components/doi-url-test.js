@@ -12,6 +12,6 @@ module('Integration | Component | doi url', function(hooks) {
     this.set('model', make('doi'));
     await render(hbs`{{doi-url model=model}}`);
 
-    assert.dom('*').hasText('');
+    assert.dom('*').hasText('URL https://digitalscholarship.unlv.edu/rtds/1');
   });
 });

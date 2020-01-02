@@ -30,10 +30,10 @@ export default Component.extend({
 
       const re = /^(http|https):\/\/orcid\.org\/\d{4}-\d{4}-\d{4}-\d{3}[0-9X]+$/;
       if (re.test(value)) {
-        this.setCreatorValidationClass();
+        // this.setCreatorValidationClass();
         this.validateOrcidIdentifier(id);
       } else {
-        this.setCreatorValidationClass();
+        // this.setCreatorValidationClass();
       }
     } else if (value.startsWith('https://ror.org')) {
       let id = value.substr(8);
@@ -44,25 +44,25 @@ export default Component.extend({
 
       const re = /^https:\/\/ror\.org\/0\w{6}\d{2}$/;
       if (re.test(value)) {
-        this.setCreatorValidationClass();
+        // this.setCreatorValidationClass();
         this.validateRorIdentifier(id);
       } else {
-        this.setCreatorValidationClass();
+        // this.setCreatorValidationClass();
       }
     } else if (value.startsWith('http://isni.org')) {
       this.fragment.set('schemeUri', 'http://isni.org');
       this.fragment.set('nameIdentifierScheme', 'ISNI');
       this.fragment.set('nameIdentifier', value);
-      this.setCreatorValidationClass();
+      // this.setCreatorValidationClass();
     } else if (value.length == 0) {
       this.fragment.set('nameIdentifierScheme', null);
       this.fragment.set('nameIdentifier', null);
-      this.setCreatorValidationClass();
+      // this.setCreatorValidationClass();
       this.joinNameParts({});
     } else {
       this.fragment.set('nameIdentifierScheme', 'Other');
       this.fragment.set('nameIdentifier', value);
-      this.setCreatorValidationClass();
+      // this.setCreatorValidationClass();
     }
   },
 
