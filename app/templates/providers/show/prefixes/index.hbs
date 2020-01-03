@@ -91,26 +91,26 @@
     <ModelSearch @model={{model.prefixes}} @sortable={{true}} @link="providers.show.prefixes" />
     
     {{#if model.prefixes}}
-      {{#each model.prefixes as |provider-prefix|}}
+      {{#each model.prefixes as |providerPrefix|}}
         <div class="panel panel-transparent">
           <div class="panel-body">
-            <h3 class="work"><LinkTo @route="providers.show.prefixes.show" @models={{array model.provider.id provider-prefix.prefix.id}}>{{provider-prefix.prefix.id}}</LinkTo></h3>
+            <h3 class="work"><LinkTo @route="providers.show.prefixes.show" @models={{array model.provider.id providerPrefix.prefix.id}}>{{providerPrefix.prefix.id}}</LinkTo></h3>
 
-            <h5>{{pluralize provider-prefix.repositories.length "Repository" without-count=true}}</h5>
-            {{#if provider-prefix.repositories}}
-              {{#each provider-prefix.repositories as |repository|}}
-                <LinkTo @route="repositories.show.prefixes.show" @models={{array repository.id provider-prefix.prefix.id}}>{{repository.name}}</LinkTo><br/>
+            <h5>{{pluralize providerPrefix.repositories.length "Repository" without-count=true}}</h5>
+            {{#if providerPrefix.repositories}}
+              {{#each providerPrefix.repositories as |repository|}}
+                <LinkTo @route="repositories.show.prefixes.show" @models={{array repository.id providerPrefix.prefix.id}}>{{repository.name}}</LinkTo><br/>
               {{/each}}
               {{#if features.useElasticsearch}}
                 <h5>DOIs</h5>
-                <LinkTo @route="providers.show.dois" @model={{provider-prefix.provider.id}} @query={{hash prefix=provider-prefix.prefix.id}}>DOIs for prefix {{provider-prefix.prefix.id}}</LinkTo>
+                <LinkTo @route="providers.show.dois" @model={{providerPrefix.provider.id}} @query={{hash prefix=providerPrefix.prefix.id}}>DOIs for prefix {{providerPrefix.prefix.id}}</LinkTo>
               {{/if}}
             {{else}}
               <span class="icon-warning">No repositories found.</span>
             {{/if}}
 
             <h5>Added</h5>
-            {{format-time provider-prefix.created year='numeric' month='long' day='numeric' hour='numeric' minute='numeric' second='numeric' timeZone='UTC' timeZoneName='short' hour12=false}}
+            {{format-time providerPrefix.created year='numeric' month='long' day='numeric' hour='numeric' minute='numeric' second='numeric' timeZone='UTC' timeZoneName='short' hour12=false}}
           </div>
         </div>
       {{/each}}
