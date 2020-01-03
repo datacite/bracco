@@ -4,6 +4,7 @@ import {
   currentURL,
   visit,
   // click,
+  // pauseTest,
 } from '@ember/test-helpers';
 import { authenticateSession } from 'ember-simple-auth/test-support';
 
@@ -41,6 +42,8 @@ module('Acceptance | staff_admin | admin', function(hooks) {
   // test('visiting dois with click', async function(assert) {
   //   await visit('/dois');
 
+  //   await pauseTest();
+
   //   // first DOI in list
   //   await click('h3.work:first-child a');
 
@@ -48,17 +51,17 @@ module('Acceptance | staff_admin | admin', function(hooks) {
   //   assert.dom('button#modify-doi').includesText('Update DOI (File Upload)');
   // });
 
-  // test('visiting specific doi', async function(assert) {
-  //   await authenticateSession({
-  //     uid: 'admin',
-  //     name: 'Admin',
-  //     role_id: 'staff_admin',
-  //   });
-  //   await visit('/dois/10.70048%2Fe605-dg05');
+  test('visiting specific doi', async function(assert) {
+    await authenticateSession({
+      uid: 'admin',
+      name: 'Admin',
+      role_id: 'staff_admin',
+    });
+    await visit('/dois/10.70048%2Fe605-dg05');
 
-  //   assert.equal(currentURL(), '/dois/10.70048%2Fe605-dg05');
-  //   assert.dom('h2.work').hasText('10.70048/e605-dg05');
-  // });
+    assert.equal(currentURL(), '/dois/10.70048%2Fe605-dg05');
+    assert.dom('h2.work').hasText('10.70048/e605-dg05');
+  });
 
   // test('visiting specific doi draft', async function(assert) {
   //   await authenticateSession({

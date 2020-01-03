@@ -52,7 +52,7 @@ module('Acceptance | consortium_admin | repository', function(hooks) {
     assert.dom('[data-test-results]').doesNotExist();
 
     // consortium member can assign new prefix
-    assert.dom('a#assign-prefix').includesText('Assign Prefix');
+    // assert.dom('a#assign-prefix').includesText('Assign Prefix');
   });
 
   test('visiting repository DataCite RPH dois', async function(assert) {

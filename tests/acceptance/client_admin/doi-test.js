@@ -46,19 +46,19 @@ module('Acceptance | client_admin | repository', function(hooks) {
     assert.dom('h2.work').hasText('DataCite Test RPH');
   });
 
-  // test('visiting specific doi', async function(assert) {
-  //   await authenticateSession({
-  //     uid: 'tib.awi',
-  //     name: 'Alfred Wegener Institute',
-  //     role_id: 'client_admin',
-  //     provider_id: 'tib',
-  //     client_id: 'tib.awi',
-  //   });
-  //   await visit('/dois/10.70048%2Fe605-dg05');
+  test('visiting specific doi', async function(assert) {
+    await authenticateSession({
+      uid: 'tib.awi',
+      name: 'Alfred Wegener Institute',
+      role_id: 'client_admin',
+      provider_id: 'tib',
+      client_id: 'tib.awi',
+    });
+    await visit('/dois/10.70048%2Fe605-dg05');
 
-  //   assert.equal(currentURL(), '/dois/10.70048%2Fe605-dg05');
-  //   assert.dom('h2.work').hasText('10.70048/e605-dg05');
-  // });
+    assert.equal(currentURL(), '/dois/10.70048%2Fe605-dg05');
+    assert.dom('h2.work').hasText('10.70048/e605-dg05');
+  });
 
   // test('unpermitted suffix', async function(assert) {
   //   let suffix = Math.random().toString(36).substring(7);

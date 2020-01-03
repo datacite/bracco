@@ -22,10 +22,10 @@ module('Acceptance | consortium_admin | admin', function(hooks) {
     assert.dom('h2.work').hasText('DataCite Consortium');
   });
 
-  // test('visiting specific doi', async function(assert) {
-  //   await visit('/dois/10.70048%2Fe605-dg05');
+  test('visiting specific doi', async function(assert) {
+    await visit('/dois/10.70048%2Fe605-dg05');
 
-  //   assert.equal(currentURL(), '/dois/10.70048%2Fe605-dg05');
-  //   assert.dom('h2.work').hasText('10.70048/e605-dg05');
-  // });
+    assert.equal(currentURL(), '/dois/10.70048%2Fe605-dg05');
+    assert.dom('h2.work').hasText('10.70048/e605-dg05');
+  });
 });
