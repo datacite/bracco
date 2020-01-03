@@ -3,11 +3,11 @@
   <div class="col-md-9">
     <div class="input-group">
       <span class="input-group-addon">
-        <PowerSelect @formLayout="vertical" @property="prefix" @options={{prefixes}} @destination={{prefix}} @searchEnabled={{false}} as |el|>
-          <el.control @onChange={{action "selectPrefix"}} @searchPlaceholder="Select Prefix" @optionLabelPath="id" as |item|>
+        {{#form.element controlType="power-select" formLayout="vertical" property="prefix" options=prefixes destination=prefix searchEnabled=false as |el|}}
+          {{#el.control onChange=(action "selectPrefix") searchPlaceholder="Select Prefix" optionLabelPath=id as |item|}}
             {{if item.id item.id item}}
-          </el.control>
-        </PowerSelect>
+          {{/el.control}}
+        {{/form.element}}
       </span>
       <form.element @controlType="text" @class="suffix" @id="suffix-field" @formLayout="vertical" @property="suffix" @onChange={{action "selectSuffix"}} @helpText="A globally unique string that identifies the resource and can't be changed." @required={{false}} />
       <span class="input-group-addon refresh" title="Refresh" aria-label="Refresh" {{action 'refresh'}}>{{fa-icon "refresh"}}</span>
