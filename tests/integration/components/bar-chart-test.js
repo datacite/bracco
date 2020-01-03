@@ -10,7 +10,7 @@ module('Integration | Component | bar chart', function(hooks) {
     await render(hbs`{{bar-chart}}`);
 
     assert.dom('h3.panel-title').hasText('Charts by year');
-    assert.dom('div.panel-body').hasText('0 20102019');
+    assert.dom('div.panel-body').hasText('0 20102020');
   });
 });
 

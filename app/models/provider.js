@@ -164,7 +164,7 @@ export default DS.Model.extend(Validations, {
     return this.get('meta.dois');
   }),
   currentDoiCount: computed('doiCount', function() {
-    let currentYear = A(this.doiCount).findBy('id', 2019);
+    let currentYear = A(this.doiCount).findBy('id', new Date().getFullYear());
     if (currentYear) {
       return currentYear.count;
     } else {
@@ -180,21 +180,15 @@ export default DS.Model.extend(Validations, {
     return this.get('meta.clients');
   }),
   currentRepositoryCount: computed('repositoryCount', function() {
-    let currentYear = A(this.repositoryCount).findBy('id', 2019);
+    let currentYear = A(this.repositoryCount).findBy('id', new Date().getFullYear());
     if (currentYear) {
       return currentYear.count;
     } else {
       return 0;
     }
   }),
-  providerCount: computed('meta', function() {
+  providerCount: computed('meta.providers', function() {
     return this.get('meta.providers');
-  }),
-  isEnvironmentProduction: computed('repository', function() {
-    if (ENV.environment === 'production') {
-      return true;
-    }
-    return false;
   }),
   currentProviderCount: computed('providerCount', function() {
     let currentYear = this.providerCount.get('lastObject');
