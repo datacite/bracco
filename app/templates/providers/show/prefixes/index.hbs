@@ -94,7 +94,7 @@
       {{#each model.prefixes as |provider-prefix|}}
         <div class="panel panel-transparent">
           <div class="panel-body">
-            <h3 class="work"><LinkTo @route="providers.show.prefixes.show" @models={{array model.provider.id provider-prefix.prefix.id}}><provider-prefix.prefix.id /></LinkTo></h3>
+            <h3 class="work"><LinkTo @route="providers.show.prefixes.show" @models={{array model.provider.id provider-prefix.prefix.id}}>{{provider-prefix.prefix.id}}</LinkTo></h3>
 
             <h5>{{pluralize provider-prefix.repositories.length "Repository" without-count=true}}</h5>
             {{#if provider-prefix.repositories}}
@@ -103,7 +103,7 @@
               {{/each}}
               {{#if features.useElasticsearch}}
                 <h5>DOIs</h5>
-                <LinkTo @route="providers.show.dois" @model={{provider-prefix.provider.id}} @query={{hash prefix=provider-prefix.prefix.id}}>DOIs for prefix <provider-prefix.prefix.id /></LinkTo>
+                <LinkTo @route="providers.show.dois" @model={{provider-prefix.provider.id}} @query={{hash prefix=provider-prefix.prefix.id}}>DOIs for prefix {{provider-prefix.prefix.id}}</LinkTo>
               {{/if}}
             {{else}}
               <span class="icon-warning">No repositories found.</span>

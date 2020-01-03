@@ -32,14 +32,14 @@
       <div class="panel panel-transparent">
         <div class="panel-body">
           {{#if (can "update prefix" model)}}
-            <h3 class="work"><LinkTo @route="repositories.show.prefixes.show" @models={{array model.repository.id repository-prefix.prefix.id}}><repository-prefix.prefix.id /></LinkTo></h3>
+            <h3 class="work"><LinkTo @route="repositories.show.prefixes.show" @models={{array model.repository.id repository-prefix.prefix.id}}>{{repository-prefix.prefix.id}}</LinkTo></h3>
           {{else}}
-            <h3 class="member"><repository-prefix.prefix.id /></h3>
+            <h3 class="member">{{repository-prefix.prefix.id}}</h3>
           {{/if}}
 
           {{#if features.useElasticsearch}}
             <h5>DOIs</h5>
-            <LinkTo @route="repositories.show.dois" @model={{repository-prefix.repository.id}} @query={{hash prefix=repository-prefix.prefix.id}}>DOIs for prefix <repository-prefix.prefix.id /></LinkTo>
+            <LinkTo @route="repositories.show.dois" @model={{repository-prefix.repository.id}} @query={{hash prefix=repository-prefix.prefix.id}}>DOIs for prefix {{repository-prefix.prefix.id}}</LinkTo>
           {{/if}}
 
           <h5>Added</h5>
