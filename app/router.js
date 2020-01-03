@@ -55,8 +55,9 @@ Router.map(function() {
       this.route('dois');
     });
   });
-
-  this.route('settings');
+  this.route('settings', function() {
+    this.route('index', { path: '/' });
+  });
   this.route('sign-in');
   this.route('authorize');
   this.route('reset');

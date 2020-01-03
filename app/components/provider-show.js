@@ -16,7 +16,6 @@ const organizationTypeList = [
   'serviceProvider',
   'other',
 ];
-
 const memberTypeList = [
   'consortium',
   'consortium_organization',

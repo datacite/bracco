@@ -6,8 +6,8 @@ export default Route.extend({
 
   model() {
     let self = this;
-    return this.store.findRecord('provider', 'admin').then(function(admin) {
-      return admin;
+    return this.store.findRecord('provider', 'admin').then(function(model) {
+      return model;
     }).catch(function(reason) {
       console.debug(reason);
 
