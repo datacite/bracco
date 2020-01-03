@@ -1,18 +1,10 @@
 import Component from '@ember/component';
+import { computed } from '@ember/object';
 
 export default Component.extend({
   tagName: 'div',
   classNames: ['row'],
-
-  isPerson(){
-    this.get('model.name')
-    console.log(this.get('model.name'))
-    console.log(this.model.name)
-    return this.model.name == "user";
-  },
-  actions: {
-    isPerson() {
-      this.isPerson();
-    }
-  }
+  isPerson: computed(function() {
+    return this.attrs.link == "users.show.dois";
+  }),
 });
