@@ -68,6 +68,7 @@
     "ember-responsive": "^3.0.0",
     "fastboot-app-server": "^2.0.0",
     "fs-extra": "^8.1.0",
+    "graphql-request": "^1.8.2",
     "is-electron": "^2.1.0",
     "iso-639-1": "^2.0.3",
     "junk": "^3.1.0",

@@ -1,13 +1,13 @@
     <div class="container-fluid"     style="padding-left: 0px;">
       <div class="row" style="display:flex">
-            {{#if count}}
-            <p style="margin-right: 1.5em;">{{fa-icon "quote-right"}}  {{ pluralize count.citations 'Citation' }}</p>
+            {{#if citations}}
+            <p style="margin-right: 1.5em;">{{fa-icon "quote-right"}}  {{ pluralize citations 'Citation' }}</p>
             {{/if}}
-            {{#if count}}
-               <p style="margin-right: 1.5em;"> {{fa-icon "eye"}}  {{ pluralize count.views 'View' }} </p>
+            {{#if views}}
+               <p style="margin-right: 1.5em;"> {{fa-icon "eye"}}  {{ pluralize views 'View' }} </p>
             {{/if}}
-            {{#if count}}
-             <p style="margin-right: 1.5em;"> {{fa-icon "download"}}   {{ pluralize count.downloads 'Download' }} </p>
+            {{#if downloads}}
+             <p style="margin-right: 1.5em;"> {{fa-icon "download"}}   {{ pluralize downloads 'Download' }} </p>
             {{/if}}
       </div>
     </div>
