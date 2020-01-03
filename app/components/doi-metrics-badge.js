@@ -5,12 +5,16 @@ import { computed } from '@ember/object';
 
 export default Component.extend({
   tagName: "div",
-  classNames: ["col-lg-3", "col-md-4"],
+  classNames: ["container"],
   data: null,
   label: '',
   store: service(),
   count: computed('data', function() {
-    return this.formatNumbers(250000);
+    return {
+      citations: this.formatNumbers(47645376453),
+      views: this.formatNumbers(232),
+      downloads: this.formatNumbers(1),
+    };
   }),
 
   init() {
