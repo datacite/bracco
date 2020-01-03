@@ -141,7 +141,7 @@
         <div class="panel-body">
           <div class="btn-toolbar">
             <div class="btn-group btn-group-sm">
-              <button {{action "new"}} class="btn btn-warning">{{fa-icon "plus"}}Create Consortium Organization</button>
+              <button {{action "new"}} class="btn btn-warning" id="add-organization">{{fa-icon "plus"}}Add {{if media.isXl 'Consortium '}}Organization</button>
             </div>
           </div>
         </div>
@@ -284,7 +284,7 @@
 
     {{#if model.organizations}}
       {{#each model.organizations as |provider|}}
-        <div class="panel panel-transparent">
+        <div class="panel panel-transparent" data-test-organization>
           <div class="panel-body">
             <h3 class="work">
               <LinkTo @route="providers.show" @model={{provider.id}}>{{provider.displayName}}</LinkTo>

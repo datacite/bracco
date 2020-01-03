@@ -21,6 +21,9 @@ module('Acceptance | organization_admin | repository', function(hooks) {
     assert.equal(currentURL(), '/repositories/datacite.datacite');
     assert.dom('h2.work').hasText('DataCite Repository');
     assert.dom('li a.nav-link.active').hasText('Info');
+
+    // repository charts are displayed
+    assert.dom('#chart-doi-title').includesText('DOIs by year');
   });
 
   test('visiting repository DataCite Journal settings', async function(assert) {
@@ -33,13 +36,22 @@ module('Acceptance | organization_admin | repository', function(hooks) {
     assert.dom('button#delete-repository').includesText('Delete');
   });
 
-  // test('visiting repository DataCite Journal prefixes', async function(assert) {
-  //   await visit('/repositories/datacite.datacite/prefixes');
+  test('visiting repository DataCite Journal prefixes', async function(assert) {
+    await visit('/repositories/datacite.datacite/prefixes');
 
-  //   assert.equal(currentURL(), '/repositories/datacite.datacite/prefixes');
-  //   assert.dom('h2.work').hasText('DataCite Repository');
-  //   assert.dom('li a.nav-link.active').hasText('Prefixes');
-  // });
+    assert.equal(currentURL(), '/repositories/datacite.datacite/prefixes');
+    assert.dom('h2.work').hasText('DataCite Repository');
+    assert.dom('li a.nav-link.active').hasText('Prefixes');
+    assert.dom('div#search').exists();
+
+    // at least one prefix exists
+    assert.dom('[data-test-results]').includesText('Prefixes');
+    assert.dom('[data-test-prefix]').exists();
+    assert.dom('div.panel.facets').exists();
+
+    // provider can assign new prefix
+    assert.dom('a#assign-prefix').includesText('Assign Prefix');
+  });
 
   test('visiting repository DataCite Journal dois', async function(assert) {
     await visit('/repositories/datacite.datacite/dois');
@@ -47,16 +59,17 @@ module('Acceptance | organization_admin | repository', function(hooks) {
     assert.equal(currentURL(), '/repositories/datacite.datacite/dois');
     assert.dom('h2.work').hasText('DataCite Repository');
     assert.dom('li a.nav-link.active').hasText('DOIs');
+    assert.dom('div#search').exists();
 
-    assert.dom('h3.work').exists();
+    // at least one doi exists
+    // TODO Ember-Inflector pluralizes DOI to Dois
+    assert.dom('[data-test-results]').includesText('Dois');
+    assert.dom('[data-test-doi]').exists();
+    assert.dom('div.panel.facets').exists();
+
+    // provider can't add dois, but can transfer dois
     assert.dom('a#new-doi').doesNotExist();
     assert.dom('a#upload-doi').doesNotExist();
     assert.dom('a#transfer-dois').includesText('Transfer');
-  });
-
-  test('fail creating a new DOI for repository', async function(assert) {
-    await visit('/repositories/datacite.datacite/dois');
-
-    assert.dom('new-doi').doesNotExist();
   });
 });

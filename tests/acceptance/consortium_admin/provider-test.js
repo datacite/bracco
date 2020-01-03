@@ -5,6 +5,7 @@ import {
   visit,
   click,
   // fillIn,
+  // pauseTest,
 } from '@ember/test-helpers';
 import { authenticateSession } from 'ember-simple-auth/test-support';
 
@@ -26,6 +27,11 @@ module('Acceptance | consortium_admin | provider', function(hooks) {
     assert.equal(currentURL(), '/providers/dc');
     assert.dom('h2.work').hasText('DataCite Consortium');
     assert.dom('li a.nav-link.active').hasText('Info');
+
+    // consortium charts are displayed
+    assert.dom('#chart-organization-title').includesText('Organizations by year');
+    assert.dom('#chart-repository-title').includesText('Repositories by year');
+    assert.dom('#chart-doi-title').includesText('DOIs by year');
   });
 
   test('visiting provider DC settings', async function(assert) {
@@ -34,6 +40,7 @@ module('Acceptance | consortium_admin | provider', function(hooks) {
     assert.equal(currentURL(), '/providers/dc/settings');
     assert.dom('h2.work').hasText('DataCite Consortium');
     assert.dom('li a.nav-link.active').hasText('Settings');
+    assert.dom('button#set-password-provider').includesText('Set Password');
     assert.dom('button#edit-provider').includesText('Update Account');
     assert.dom('button#delete-provider').doesNotExist();
   });
@@ -43,10 +50,10 @@ module('Acceptance | consortium_admin | provider', function(hooks) {
     await click('button#edit-provider');
 
     assert.equal(currentURL(), '/providers/dc/settings');
-    // assert.dom('h2.work').hasText('DataCite Consortium');
-    // assert.dom('a.nav-link.active').hasText('Settings');
-    // assert.dom('button#edit-provider').doesNotExist();
-    // assert.dom('button#delete-provider').doesNotExist();
+    assert.dom('a.nav-link.active').hasText('Settings');
+    assert.dom('h3.edit').hasText('Update Account');
+    assert.dom('button#set-password-provider').doesNotExist();
+    assert.dom('button#edit-provider').doesNotExist();
 
     // await fillIn('input#provider-name-field', 'DataCite Consortium');
     // await click('button#cancel');
@@ -63,6 +70,10 @@ module('Acceptance | consortium_admin | provider', function(hooks) {
     assert.dom('h2.work').hasText('DataCite Consortium');
     assert.dom('a.nav-link.active').hasText('Repositories');
 
+    // TODO consortium member should see all repositories
+    assert.dom('.alert-warning').hasText('No repositories found.');
+    assert.dom('div.panel.facets').doesNotExist();
+
     // consortium members can't add repositories
     assert.dom('button#add-repository').doesNotExist();
   });
@@ -73,16 +84,20 @@ module('Acceptance | consortium_admin | provider', function(hooks) {
     assert.equal(currentURL(), '/providers/dc/dois');
     assert.dom('h2.work').hasText('DataCite Consortium');
     assert.dom('li a.nav-link.active').hasText('DOIs');
-    assert.dom('a#create-doi').doesNotExist();
-    assert.dom('a#upload-doi').doesNotExist();
+    assert.dom('div#search').exists();
 
-    // TODO should list DOIs
+    // TODO consortium member should see all dois
+    assert.dom('.alert-warning').hasText('No DOIs found.');
+    assert.dom('div.panel.facets').doesNotExist();
+
+    // consortium member can't add dois here (or via consortium organization or repository)
+    assert.dom('a#new-doi').doesNotExist();
+    assert.dom('a#upload-doi').doesNotExist();
+    assert.dom('a#transfer-dois').doesNotExist();
   });
 
   // test('visiting specific doi managed by provider', async function(assert) {
   //   await visit('/providers/dc/dois');
-
-  //   // TODO should list DOIs
 
   //   // first DOI in list
   //   await click('h3.work:first-child a');
@@ -98,6 +113,14 @@ module('Acceptance | consortium_admin | provider', function(hooks) {
 
     assert.equal(currentURL(), '/providers/dc/prefixes');
     assert.dom('h2.work').hasText('DataCite Consortium');
-    // assert.dom('li a.nav-link.active').hasText('Prefixes');
+    assert.dom('li a.nav-link.active').hasText('Prefixes');
+    assert.dom('div#search').exists();
+
+    // TODO consortium member should see all prefixes
+    assert.dom('.alert-warning').hasText('No prefixes found.');
+    assert.dom('div.panel.facets').exists();
+
+    // consortium member can assign new prefix
+    assert.dom('a#assign-prefix').includesText('Assign Prefix');
   });
 });

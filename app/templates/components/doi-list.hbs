@@ -366,7 +366,7 @@
 
   {{#if model}}
     {{#each model as |doi|}}
-      <div class="panel panel-transparent">
+      <div class="panel panel-transparent" data-test-doi>
         <DoiSummary @model={{doi}} @isList={{true}} />
 
         <div class="panel-footer">

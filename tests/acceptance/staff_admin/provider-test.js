@@ -25,6 +25,23 @@ module('Acceptance | staff_admin | provider', function(hooks) {
     assert.equal(currentURL(), '/providers/tib');
     assert.dom('h2.work').hasText('German National Library of Science and Technology');
     assert.dom('li a.nav-link.active').hasText('Info');
+
+    // provider charts are displayed
+    assert.dom('#chart-repository-title').includesText('Repositories by year');
+    assert.dom('#chart-doi-title').includesText('DOIs by year');
+  });
+
+  test('visiting consortium DC', async function(assert) {
+    await visit('/providers/dc');
+
+    assert.equal(currentURL(), '/providers/dc');
+    assert.dom('h2.work').hasText('DataCite Consortium');
+    assert.dom('li a.nav-link.active').hasText('Info');
+
+    // consortium charts are displayed
+    assert.dom('#chart-organization-title').includesText('Organizations by year');
+    assert.dom('#chart-repository-title').includesText('Repositories by year');
+    assert.dom('#chart-doi-title').includesText('DOIs by year');
   });
 
   test('visiting provider TIB settings', async function(assert) {
@@ -59,6 +76,14 @@ module('Acceptance | staff_admin | provider', function(hooks) {
     assert.equal(currentURL(), '/providers/tib/repositories');
     assert.dom('h2.work').hasText('German National Library of Science and Technology');
     assert.dom('a.nav-link.active').hasText('Repositories');
+    assert.dom('div#search').exists();
+
+    // at least one repository exists
+    assert.dom('[data-test-results]').includesText('Repositories');
+    assert.dom('[data-test-repository]').exists();
+    assert.dom('div.panel.facets').exists();
+
+    // admin can add repository
     assert.dom('button#add-repository').includesText('Add Repository');
   });
 
@@ -68,14 +93,34 @@ module('Acceptance | staff_admin | provider', function(hooks) {
     assert.equal(currentURL(), '/providers/tib/dois');
     assert.dom('h2.work').hasText('German National Library of Science and Technology');
     assert.dom('li a.nav-link.active').hasText('DOIs');
-    assert.dom('button#add-doi').doesNotExist();
+    assert.dom('div#search').exists();
+
+    // at least one doi exists
+    // TODO Ember-Inflector pluralizes DOI to Dois
+    assert.dom('[data-test-results]').includesText('Dois');
+    assert.dom('[data-test-doi]').exists();
+    assert.dom('div.panel.facets').exists();
+
+    // admin can't add dois here (needs to go to repository)
+    assert.dom('a#new-doi').doesNotExist();
+    assert.dom('a#upload-doi').doesNotExist();
+    assert.dom('a#transfer-dois').doesNotExist();
   });
 
-  // test('visiting provider TIB prefixes', async function(assert) {
-  //   await visit('/providers/tib/prefixes');
+  test('visiting provider TIB prefixes', async function(assert) {
+    await visit('/providers/tib/prefixes');
 
-  //   assert.equal(currentURL(), '/providers/tib/prefixes');
-  //   assert.dom('h2.work').hasText('German National Library of Science and Technology');
-  //   assert.dom('li a.nav-link.active').hasText('Prefixes');
-  // });
+    assert.equal(currentURL(), '/providers/tib/prefixes');
+    assert.dom('h2.work').hasText('German National Library of Science and Technology');
+    assert.dom('li a.nav-link.active').hasText('Prefixes');
+    assert.dom('div#search').exists();
+
+    // at least one prefix exists
+    assert.dom('[data-test-results]').includesText('Prefixes');
+    assert.dom('[data-test-prefix]').exists();
+    assert.dom('div.panel.facets').exists();
+
+    // admin can assign new prefix
+    assert.dom('a#assign-prefix').includesText('Assign Prefix');
+  });
 });

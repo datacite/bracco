@@ -63,32 +63,4 @@ module('Acceptance | consortium_admin | admin', function(hooks) {
     assert.equal(currentURL(), '/prefixes/10.5038');
     assert.dom('div.alert-warning').includesText('The page was not found.');
   });
-
-  test('visiting dois', async function(assert) {
-    await visit('/dois');
-
-    assert.equal(currentURL(), '/providers/dc');
-    assert.dom('h2.work').hasText('DataCite Consortium');
-  });
-
-  // test('visiting specific doi', async function(assert) {
-  //   await visit('/dois/10.70048%2Fe605-dg05');
-
-  //   assert.equal(currentURL(), '/dois/10.70048%2Fe605-dg05');
-  //   assert.dom('h2.work').hasText('10.70048/e605-dg05');
-  // });
-
-  test('visiting users', async function(assert) {
-    await visit('/users');
-
-    assert.equal(currentURL(), '/providers/dc');
-    assert.dom('h2.work').hasText('DataCite Consortium');
-  });
-
-  test('visiting specific user', async function(assert) {
-    await visit('/users/0000-0003-1419-2405');
-
-    assert.equal(currentURL(), '/users/0000-0003-1419-2405');
-    assert.dom('h2.work').hasText('Martin Fenner');
-  });
 });

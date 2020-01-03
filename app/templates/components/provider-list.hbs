@@ -1,7 +1,7 @@
 {{#if new}}
   <div class="panel panel-transparent">
     <div class="panel-body">
-      <div class="col-md-9 col-md-offset-3"><h3 class="edit">Create Member</h3></div>
+      <div class="col-md-9 col-md-offset-3"><h3 class="edit">Add Member</h3></div>
 
       <BsForm @formLayout="horizontal" @horizontalLabelGridClass="col-md-3" @model={{provider}} @onSubmit={{action "submit" provider model}} @submitOnEnter={{true}} as |form|>
         <div class="col-md-12">
@@ -227,7 +227,7 @@
         {{/if}}
         
         <div class="col-md-9 col-md-offset-3">
-          <button type="submit" class="btn btn-sm btn-fill">Create Member</button>
+          <button type="submit" class="btn btn-sm btn-fill">Add Member</button>
           <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
         </div>
       </BsForm>
@@ -240,7 +240,7 @@
         <div class="panel-body">
           <div class="btn-toolbar">
             <div class="btn-group btn-group-sm">
-              <button {{action "new"}} class="btn btn-warning">{{fa-icon "plus"}}Create Member</button>
+              <button {{action "new"}} class="btn btn-warning" id="add-provider">{{fa-icon "plus"}} Add Member</button>
             </div>
           </div>
         </div>
@@ -443,7 +443,7 @@
 
     {{#if model}}
       {{#each model as |provider|}}
-        <div class="panel panel-transparent">
+        <div class="panel panel-transparent" data-test-provider>
           <div class="panel-body">
             <h3 class="work">
               <LinkTo @route="providers.show" @model={{provider.id}}>{{provider.displayName}}</LinkTo>

@@ -21,6 +21,9 @@ module('Acceptance | consortium_admin | repository', function(hooks) {
     assert.equal(currentURL(), '/repositories/datacite.rph');
     assert.dom('h2.work').hasText('DataCite Test RPH');
     assert.dom('li a.nav-link.active').hasText('Info');
+
+    // repository charts are displayed
+    assert.dom('#chart-doi-title').includesText('DOIs by year');
   });
 
   test('visiting repository DataCite RPH settings', async function(assert) {
@@ -30,18 +33,27 @@ module('Acceptance | consortium_admin | repository', function(hooks) {
     assert.dom('h2.work').hasText('DataCite Test RPH');
     assert.dom('li a.nav-link.active').hasText('Settings');
 
-    // consortium members can't edit or delete repositories
+    // consortium member can't edit or delete repositories
     assert.dom('button#edit-repository').doesNotExist();
     assert.dom('button#delete-repository').doesNotExist();
   });
 
-  // test('visiting repository DataCite RPH prefixes', async function(assert) {
-  //   await visit('/repositories/datacite.rph/prefixes');
+  test('visiting repository DataCite RPH prefixes', async function(assert) {
+    await visit('/repositories/datacite.rph/prefixes');
 
-  //   assert.equal(currentURL(), '/repositories/datacite.rph/prefixes');
-  //   assert.dom('h2.work').hasText('DataCite Test RPH');
-  //   assert.dom('li a.nav-link.active').hasText('Prefixes');
-  // });
+    assert.equal(currentURL(), '/repositories/datacite.rph/prefixes');
+    assert.dom('h2.work').hasText('DataCite Test RPH');
+    assert.dom('li a.nav-link.active').hasText('Prefixes');
+    assert.dom('div#search').exists();
+
+    // one prefix exists
+    assert.dom('[data-test-prefix]').includesText('10.70048');
+    assert.dom('div.panel.facets').exists();
+    assert.dom('[data-test-results]').doesNotExist();
+
+    // consortium member can assign new prefix
+    assert.dom('a#assign-prefix').includesText('Assign Prefix');
+  });
 
   test('visiting repository DataCite RPH dois', async function(assert) {
     await visit('/repositories/datacite.rph/dois');
@@ -49,17 +61,17 @@ module('Acceptance | consortium_admin | repository', function(hooks) {
     assert.equal(currentURL(), '/repositories/datacite.rph/dois');
     assert.dom('h2.work').hasText('DataCite Test RPH');
     assert.dom('li a.nav-link.active').hasText('DOIs');
+    assert.dom('div#search').exists();
 
-    assert.dom('h3.work').exists();
+    // at least one doi exists
+    // TODO Ember-Inflector pluralizes DOI to Dois
+    assert.dom('[data-test-results]').includesText('Dois');
+    assert.dom('[data-test-doi]').exists();
+    assert.dom('div.panel.facets').exists();
+
+    // consortium member can't add dois, but can transfer them
     assert.dom('a#new-doi').doesNotExist();
     assert.dom('a#upload-doi').doesNotExist();
     assert.dom('a#transfer-dois').includesText('Transfer');
-  });
-
-  test('fail creating a new DOI for repository', async function(assert) {
-    await visit('/repositories/datacite.rph/dois');
-
-    assert.dom('new-doi').doesNotExist();
-    assert.dom('a#upload-doi').doesNotExist();
   });
 });

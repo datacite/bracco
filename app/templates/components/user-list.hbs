@@ -12,7 +12,7 @@
 
   {{#if model}}
     {{#each model as |user|}}
-      <div class="panel panel-transparent">
+      <div class="panel panel-transparent" data-test-user>
         <div class="panel-body">
           <h3 class="work">
             <LinkTo @route="users.show" @model={{user.id}}>{{user.name}}</LinkTo>

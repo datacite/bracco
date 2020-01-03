@@ -312,7 +312,7 @@
     {{/if}}
     {{#if model.repositories}}
       {{#each model.repositories as |repository|}}
-        <div class="panel panel-transparent">
+        <div class="panel panel-transparent" data-test-repository>
           <div class="panel-body">
             <h3 class="work">
               <LinkTo @route="repositories.show" @model={{repository.id}}>

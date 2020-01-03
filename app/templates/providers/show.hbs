@@ -45,11 +45,9 @@
           <nav.item>
             <nav.link-to @route="providers.show.repositories" model="model.id" class="nav-link">Repositories</nav.link-to>
           </nav.item>
-          {{#if (not-eq model.memberType "consortium")}}
-            <nav.item>
-              <nav.link-to @route="providers.show.prefixes" model="model.id" class="nav-link">Prefixes</nav.link-to>
-            </nav.item>
-          {{/if}}
+          <nav.item>
+            <nav.link-to @route="providers.show.prefixes" model="model.id" class="nav-link">Prefixes</nav.link-to>
+          </nav.item>
           <nav.item>
             <nav.link-to @route="providers.show.dois" model="model.id" class="nav-link">DOIs</nav.link-to>
           </nav.item>

@@ -20,6 +20,9 @@ module('Acceptance | staff_admin | repository', function(hooks) {
     assert.equal(currentURL(), '/repositories/tib.awi');
     assert.dom('h2.work').hasText('Alfred Wegener Institute');
     assert.dom('li a.nav-link.active').hasText('Info');
+
+    // repository charts are displayed
+    assert.dom('#chart-doi-title').includesText('DOIs by year');
   });
 
   test('visiting repository AWI settings', async function(assert) {
@@ -32,26 +35,45 @@ module('Acceptance | staff_admin | repository', function(hooks) {
     assert.dom('button#delete-repository').includesText('Delete');
   });
 
-  // test('visiting repository AWI prefixes', async function(assert) {
-  //   await authenticateSession({
-  //     uid: 'admin',
-  //     name: 'Admin',
-  //     role_id: 'staff_admin',
-  //   });
-  //   await visit('/repositories/tib.awi/prefixes');
+  test('visiting repository RPH prefixes', async function(assert) {
+    await authenticateSession({
+      uid: 'admin',
+      name: 'Admin',
+      role_id: 'staff_admin',
+    });
+    await visit('/repositories/datacite.rph/prefixes');
 
-  //   assert.equal(currentURL(), '/repositories/tib.awi/prefixes');
-  //   assert.dom('h2.work').hasText('Alfred Wegener Institute');
-  //   assert.dom('li a.nav-link.active').hasText('Prefixes');
-  // });
+    assert.equal(currentURL(), '/repositories/datacite.rph/prefixes');
+    assert.dom('h2.work').hasText('DataCite Test RPH');
+    assert.dom('li a.nav-link.active').hasText('Prefixes');
+    assert.dom('div#search').exists();
 
-  test('visiting repository AWI dois', async function(assert) {
-    await visit('/repositories/tib.awi/dois');
+    // search result title bar not shown when only one prefix
+    assert.dom('[data-test-results]').doesNotExist();
 
-    assert.equal(currentURL(), '/repositories/tib.awi/dois');
-    assert.dom('h2.work').hasText('Alfred Wegener Institute');
+    // at least one prefix exists
+    assert.dom('[data-test-prefix]').exists();
+    assert.dom('div.panel.facets').exists();
 
-    assert.dom('h3.work').exists();
+    // admin can assign new prefix
+    assert.dom('a#assign-prefix').includesText('Assign Prefix');
+  });
+
+  test('visiting repository RPH dois', async function(assert) {
+    await visit('/repositories/datacite.rph/dois');
+
+    assert.equal(currentURL(), '/repositories/datacite.rph/dois');
+    assert.dom('h2.work').hasText('DataCite Test RPH');
+    assert.dom('li a.nav-link.active').hasText('DOIs');
+    assert.dom('div#search').exists();
+
+    // at least one doi exists
+    // TODO Ember-Inflector pluralizes DOI to Dois
+    assert.dom('[data-test-results]').includesText('Dois');
+    assert.dom('[data-test-doi]').exists();
+    assert.dom('div.panel.facets').exists();
+
+    // admin can add dois
     assert.dom('a#new-doi').exists();
     assert.dom('a#upload-doi').exists();
     assert.dom('a#transfer-dois').includesText('Transfer');
