@@ -11,14 +11,14 @@
     <BsForm @formLayout="horizontal" @horizontalLabelGridClass="col-md-3" @model={{model.doi}} @onSubmit={{action "submit" model.doi}} as |form|>
       <DoiDoi @model={{model.doi}} @repository={{model.repository}} @form={{form}} />
 
-      <form.element @controlType="text" @label="URL" @property="url" @helpText="The location of the landing page with more information about the resource." @required={{false}} />
+      <form.element @controlType="text" @label="URL" @id="url" @property="url" @helpText="The location of the landing page with more information about the resource." @required={{false}} />
 
       <DoiUpload @model={{model.doi}} @form={{form}} />
 
       <ModelValidationErrors @model={{model.doi}} @form={{form}} />
 
       <div class="col-md-9 col-md-offset-3">
-        <button type="submit" class="btn btn-sm btn-fill" disabled={{v-get model 'isInvalid'}}>Create DOI</button>
+        <button type="submit" id="doi-create" class="btn btn-sm btn-fill" disabled={{and (v-get model 'isInvalid') (not-eq model.state 'draft')}}>Create DOI</button>
         <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
       </div>
     </BsForm>

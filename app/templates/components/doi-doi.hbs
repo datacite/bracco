@@ -3,7 +3,7 @@
   <div class="col-md-9">
     <div class="input-group">
       <span class="input-group-addon">
-        {{#form.element controlType="power-select" formLayout="vertical" property="prefix" options=prefixes destination=prefix searchEnabled=false as |el|}}
+        {{#form.element controlType="power-select" id="prefix-field" formLayout="vertical" property="prefix" options=prefixes destination=prefix searchEnabled=false as |el|}}
           {{#el.control onChange=(action "selectPrefix") searchPlaceholder="Select Prefix" optionLabelPath=id as |item|}}
             {{if item.id item.id item}}
           {{/el.control}}
@@ -12,7 +12,7 @@
       {{form.element 
         controlType="text"
         class="suffix"
-        id="suffix-field"
+        id="suffix"
         formLayout="vertical"
         property="suffix"
         onChange=(action "selectSuffix")

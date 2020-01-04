@@ -87,7 +87,7 @@
     {{/if}}
   </div>
   <div class="col-md-9 panel-list" id="content">
-    <ModelSearch @model={{model.prefixes}} @sortable={{true}} @link="providers.show.prefixes" />
+    <ModelSearch @model={{model.prefixes}} @name="Prefix" @sortable={{true}} @link="providers.show.prefixes" />
     
     {{#if model.prefixes}}
       {{#each model.prefixes as |providerPrefix|}}

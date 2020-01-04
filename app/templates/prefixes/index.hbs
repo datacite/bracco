@@ -90,7 +90,7 @@
     </div>
       
     <div class="col-md-9 panel-list" id="content">
-      <ModelSearch @model={{model}} @sortable={{true}} @link="prefixes" />
+      <ModelSearch @model={{model}} @name="Prefix" @sortable={{true}} @link="prefixes" />
 
       {{#if model}}
         {{#each model as |prefix|}}

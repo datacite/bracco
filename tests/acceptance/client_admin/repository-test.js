@@ -86,8 +86,7 @@ module('Acceptance | client_admin | repository', function(hooks) {
     assert.dom('div#search').exists();
 
     // at least one doi exists
-    // TODO Ember-Inflector pluralizes DOI to Dois
-    assert.dom('[data-test-results]').includesText('Dois');
+    assert.dom('[data-test-results]').includesText('DOIs');
     assert.dom('[data-test-doi]').exists();
     assert.dom('div.panel.facets').exists();
 

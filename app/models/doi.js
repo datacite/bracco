@@ -9,7 +9,7 @@ import { A } from '@ember/array';
 const Validations = buildValidations({
   details: [
     validator('belongs-to', {
-      disabled: computed('model.mode', 'model.state', 'model.prefix', function() {
+      disabled: computed('model.mode', 'model.state', function() {
         return ![ 'new', 'edit' ].includes(this.model.get('mode')) || this.get('model.state') === 'draft';
       }),
     }),
@@ -59,7 +59,7 @@ const Validations = buildValidations({
     }),
     validator('presence', {
       presence: true,
-      isWarning: computed('model.state', 'model.prefix', function() {
+      isWarning: computed('model.state', function() {
         return this.get('model.state') === 'draft';
       }),
     }),
@@ -70,7 +70,7 @@ const Validations = buildValidations({
   publisher: [
     validator('presence', {
       presence: true,
-      isWarning: computed('model.state', 'model.prefix', function() {
+      isWarning: computed('model.state', function() {
         return this.get('model.state') === 'draft';
       }),
       disabled: computed('model.mode', function() {

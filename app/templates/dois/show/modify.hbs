@@ -13,7 +13,7 @@
     </div>
 
     <BsForm @formLayout="horizontal" @horizontalLabelGridClass="col-md-3" @model={{model}} @onSubmit={{action "submit" model}} as |form|>
-      <form.element @controlType="text" @label="DOI" @property="doi" @helpText="The globally unique string that identifies the resource and can't be changed." @disabled={{true}} />
+      <form.element @controlType="text" @label="DOI" @id="doi" @property="doi" @helpText="The globally unique string that identifies the resource and can't be changed." @disabled={{true}} />
 
       <DoiState @model={{model}} @form={{form}} />
       <form.element @id="url" @controlType="text" @label="URL" @property="url" @helpText="The location of the landing page with more information about the resource."  @required={{false}} />
@@ -22,7 +22,7 @@
       <ModelValidationErrors @model={{model}} @form={{form}} />
 
       <div class="col-md-9 col-md-offset-3">
-        <button type="submit" class="btn btn-sm btn-fill" disabled={{v-get model 'isInvalid'}}>Update DOI</button>
+        <button type="submit" id="doi-modify" class="btn btn-sm btn-fill" disabled={{and (v-get model 'isInvalid') (not-eq model.state 'draft')}}>Update DOI</button>
         <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
       </div>
     </BsForm>

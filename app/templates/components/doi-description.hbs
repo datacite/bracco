@@ -1,14 +1,14 @@
 {{#if (gt index 0)}}
   <div class="input-group">
     <textarea class="form-control description-field {{if (not isSeriesInformation) 'no-error'}}" rows="8" style="resize:none" value={{fragment.description}}
-      oninput={{action "updateDescription" value="target.value"}}/>    
+      oninput={{action "updateDescription" value="target.value"}} data-test-description/>    
     <span class="input-group-addon">
       <BsButton @outline={{true}} @onClick={{action "deleteDescription" index}}>{{fa-icon "trash" pull="left" style="margin:0;"}}</BsButton>
     </span>
   </div>
 {{else}}
   <textarea class="form-control description-field {{if (not isSeriesInformation) 'no-error'}}" rows="8" style="resize:none" value={{fragment.description}} 
-    oninput={{action "updateDescription" value="target.value"}}/>
+    oninput={{action "updateDescription" value="target.value"}} data-test-description/>
 {{/if}}
 {{#if (v-get fragment 'description' 'warnings')}}
   <div class="help-block help-block-fragment description-field">{{v-get fragment 'description' 'warningMessage'}}</div>
