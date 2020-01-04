@@ -14,4 +14,11 @@
   }}
 {{/form.element}}
 
-<form.element @controlType="text" @label="Resource Type (optional)" @property="types.resourceType" @helpText="A description of the resource, the preferred format is a single term of some detail." @required={{false}} @disabled={{disabled}} />
+{{form.element
+  controlType="text"
+  label="Resource Type (optional)"
+  property="types.resourceType"
+  helpText="A description of the resource, the preferred format is a single term of some detail."
+  required=false
+  disabled=disabled
+}}

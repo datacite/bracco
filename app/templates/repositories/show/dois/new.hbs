@@ -24,7 +24,7 @@
       <ModelValidationErrors @model={{model.doi}} @form={{form}} />
 
       <div class="col-md-9 col-md-offset-3">
-        <button type="submit" id="create" class="btn btn-sm btn-fill" disabled={{model-disabled (v-get model.doi 'isValid') model.doi.state model.doi.creators}}>Create DOI</button>
+        <button type="submit" id="create" class="btn btn-sm btn-fill" disabled={{v-get model 'isInvalid'}}>Create DOI</button>
         <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
       </div>
     </BsForm>

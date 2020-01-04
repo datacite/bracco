@@ -23,15 +23,23 @@
     <RepositorySidebar @model={{model}} />
   </div>
   <div class='col-md-9'>
-    <DoiUrl @model={{model}} />
+    {{#if model.url}}
+      <h3 class="member-results">URL</h3>
+      <div class="panel panel-transparent url">
+        <div class="panel-body">
+          <a href="{{model.url}}">{{model.url}}</a>
+        </div>
+      </div>
+    {{/if}}
+
     <DoiMetadata @model={{model}} />
 
     {{#if model.showCitation}}
-    <DoiCitation @model={{model}} />
+      <DoiCitation @model={{model}} />
     {{/if}}
 
     {{#if (and model.landingPage.checked (can "viewHealth doi" model))}}
-    <DoiHealth @model={{model}} />
+      <DoiHealth @model={{model}} />
     {{/if}}
   </div>
 </div>

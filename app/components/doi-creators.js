@@ -13,7 +13,7 @@ export default Component.extend({
       this.model.get('creators').createFragment();
     }
 
-    this.setValidationClass(false);
+    // this.setValidationClass(false);
   },
 
   // setValidationClass(success) {

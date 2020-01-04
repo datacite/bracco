@@ -32,14 +32,13 @@ export default Component.extend({
   setDefaultPrefix() {
     let self = this;
     this.store.query('prefix', { 'client-id': this.repository.get('id'), sort: 'name', 'page[size]': 25 }).then(function(prefixes) {
-
       if ((typeof self.get('model').get('doi')) == 'undefined') {
         self.set('prefixes', prefixes);
       }
 
       let prefix = prefixes.length > 0 ? prefixes.get('firstObject') : null;
 
-      self.get('model').set('prefix', prefix);
+      self.get('model').set('prefix', prefix.id);
 
       if (typeof self.get('model').get('doi') == 'undefined') {
         self.generate();

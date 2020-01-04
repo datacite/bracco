@@ -16,7 +16,9 @@
 the resource and can't be changed." @disabled={{true}} />
 
       <DoiState @model={{model}} @form={{form}} />
-      <DoiUrl @model={{model}} @form={{form}} />
+      
+      <form.element @id="url" @controlType="text" @label="URL" @property="url" @helpText="The location of the landing page with more information about the resource."  @required={{false}} />
+
       <DoiCreators @model={{model}} @form={{form}} />
       <DoiTitles @model={{model}} @form={{form}} />
 
@@ -31,7 +33,7 @@ the resource and can't be changed." @disabled={{true}} />
       <ModelValidationErrors @model={{model}} @form={{form}} />
 
       <div class="col-md-9 col-md-offset-3">
-        <button type="submit" id="update-doi" class="btn btn-sm btn-fill" disabled={{model-disabled (v-get model 'isValid') model.state model.creators}}>Update DOI</button>
+        <button type="submit" id="update-doi" class="btn btn-sm btn-fill" disabled={{v-get model 'isInvalid'}}>Update DOI</button>
         <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
       </div>
     </BsForm>
