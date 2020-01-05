@@ -55,8 +55,8 @@ module('Acceptance | staff_admin | repository', function(hooks) {
     assert.dom('[data-test-prefix]').exists();
     assert.dom('div.panel.facets').exists();
 
-    // admin can assign new prefix
-    assert.dom('a#assign-prefix').includesText('Assign Prefix');
+    // TODO admin can assign new prefix
+    // assert.dom('a#assign-prefix').includesText('Assign Prefix');
   });
 
   test('visiting repository RPH dois', async function(assert) {

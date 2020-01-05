@@ -133,22 +133,22 @@ module('Acceptance | staff_admin | admin', function(hooks) {
   });
 
   // TODO fix validations
-  // test('modify DOI form for repository RPH', async function(assert) {
-  //   assert.expect(7);
+  test('modify DOI form for repository RPH', async function(assert) {
+    assert.expect(6);
 
-  //   await visit('/dois/10.70048%2Fe605-dg05/modify');
+    await visit('/dois/10.70048%2Fe605-dg05/modify');
 
-  //   assert.equal(currentURL(), '/dois/10.70048%2Fe605-dg05/modify');
-  //   assert.dom('input#doi-field').exists();
-  //   assert.dom('input#draft-radio').exists();
+    assert.equal(currentURL(), '/dois/10.70048%2Fe605-dg05/modify');
+    assert.dom('input#doi-field').exists();
+    // assert.dom('input#draft-radio').exists();
 
-  //   assert.dom('input#url-field').exists();
+    assert.dom('input#url-field').exists();
 
-  //   assert.dom('#upload-file').exists();
-  //   assert.dom('textarea#metadata-field').exists();
+    assert.dom('#upload-file').exists();
+    assert.dom('textarea#metadata-field').exists();
 
-  //   assert.dom('button#doi-modify').exists();
-  // });
+    assert.dom('button#doi-modify').exists();
+  });
 
   // test('unpermitted suffix', async function(assert) {
   //   let suffix = Math.random().toString(36).substring(7);

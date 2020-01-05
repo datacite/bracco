@@ -23,11 +23,6 @@ export default Controller.extend({
       // don't send xml
       doi.set('xml', null);
 
-      // only store descriptions that have a description text
-      doi.set('descriptions', A(doi.get('descriptions')).filter(function(description) {
-        return !isBlank(description.description);
-      }));
-
       // only store name identifiers and affiliations with a value
       A(doi.get('creators')).forEach((creator) => {
         creator.set('nameIdentifiers', A(creator.get('nameIdentifiers')).filter(function(nameIdentifier) {
@@ -64,11 +59,11 @@ export default Controller.extend({
     cancel() {
       this.transitionToRoute('repositories.show.dois', this.get('model.repository.id'));
     },
-    setCreatorValidations(value) {
-      console.log(value);
-    },
-    setTitleValidations(value) {
-      console.log(value);
-    },
+    // setCreatorValidations(value) {
+    //   console.log(value);
+    // },
+    // setTitleValidations(value) {
+    //   console.log(value);
+    // },
   },
 });

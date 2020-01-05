@@ -3,7 +3,7 @@ import Fragment from 'ember-data-model-fragments/fragment';
 import { validator, buildValidations } from 'ember-cp-validations';
 
 const Validations = buildValidations({
-  'title': [
+  title: [
     validator('presence', {
       presence: true,
     }),

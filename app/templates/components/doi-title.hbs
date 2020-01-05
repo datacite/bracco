@@ -1,21 +1,14 @@
 {{#if (gt index 0)}}
   <div class="input-group">
-    <input type="text" class="form-control title-field no-error no-success" value={{fragment.title}} oninput={{action "updateTitle" value="target.value"}} data-test-title/>
+    <input type="text" class="form-control title-field" value={{fragment.title}} oninput={{action "updateTitle" value="target.value"}} data-test-title/>
     <span class="input-group-btn">
       <BsButton @outline={{true}} @onClick={{action "deleteTitle" index}}>{{fa-icon "trash"}}</BsButton>
     </span>
   </div>
-  <div class="help-block help-block-fragment no-error no-success">One or more names or titles by which the resource is known.</div>
+  <div class="help-block help-block-fragment">One or more names or titles by which the resource is known.</div>
 {{else}}
   <input type="text" class="form-control title-field" value={{fragment.title}} oninput={{action "updateTitle" value="target.value"}} data-test-title/>
-
-  {{#if (v-get fragment 'title' 'errors')}}
-    <div class="help-block help-block-fragment">{{v-get fragment 'title' 'message'}}</div>
-  {{else if (v-get fragment 'title' 'warnings')}}
-    <div class="help-block help-block-fragment">{{v-get fragment 'title' 'warningMessage'}}</div>
-  {{else}}
-    <div class="help-block help-block-fragment">One or more names or titles by which the resource is known.</div>
-  {{/if}}
+  <div class="help-block help-block-fragment">One or more names or titles by which the resource is known.</div>
 {{/if}}
 
 <div class="power-select-label">

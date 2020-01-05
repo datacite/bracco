@@ -4,7 +4,7 @@ import { validator, buildValidations } from 'ember-cp-validations';
 import { computed } from '@ember/object';
 
 const Validations = buildValidations({
-  'description': [
+  description: [
     validator('format', {
       regex: /^([^,]+)(, \w+(\(\w+\))?, \w+(-\w+)?)?$/,
       message: 'Series information not in recommended format of series title, followed by comma and optional volume(issue), firstpage-lastpage',

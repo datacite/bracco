@@ -42,28 +42,14 @@
   {{#if showPersonal}}
     <div>
       <label for="givenName" class="subtitle">Given Name</label>
-      <input type="text" class="form-control given-name-field {{if (not (v-get fragment 'givenName' 'messages')) 'no-error'}}" value={{fragment.givenName}} oninput={{action "updateGivenName" value="target.value"}} readonly={{isReadonlyNameParts}} data-test-given-name/>
-      
-      {{#if (v-get fragment 'givenName' 'errors')}}
-        <div class="help-block help-block-fragment">{{v-get fragment 'givenName' 'message'}}</div>
-      {{else if (v-get fragment 'givenName' 'warnings')}}
-        <div class="help-block help-block-fragment">{{v-get fragment 'givenName' 'warningMessage'}}</div>
-      {{else}}
-        <div class="help-block help-block-fragment no-error">The personal or first name of the creator.</div>
-      {{/if}}
+      <input type="text" class="form-control given-name-field" value={{fragment.givenName}} oninput={{action "updateGivenName" value="target.value"}} readonly={{isReadonlyNameParts}} data-test-given-name/>
+      <div class="help-block help-block-fragment">The personal or first name of the creator.</div>
     </div>
 
     <div>
       <label for="familyName" class="subtitle">Family Name</label>
-      <input type="text" class="form-control family-name-field {{if (not (v-get fragment 'familyName' 'messages')) 'no-error'}}" value={{fragment.familyName}} oninput={{action "updateFamilyName" value="target.value"}} readonly={{isReadonlyNameParts}} data-test-family-name/>
-      
-      {{#if (v-get fragment 'familyName' 'errors')}}
-        <div class="help-block help-block-fragment">{{v-get fragment 'familyName' 'message'}}</div>
-      {{else if (v-get fragment 'familyName' 'warnings')}}
-        <div class="help-block help-block-fragment">{{v-get fragment 'familyName' 'warningMessage'}}</div>
-      {{else}}
-        <div class="help-block help-block-fragment no-error">The surname or last name of the creator.</div>
-      {{/if}}
+      <input type="text" class="form-control family-name-field" value={{fragment.familyName}} oninput={{action "updateFamilyName" value="target.value"}} readonly={{isReadonlyNameParts}} data-test-family-name/>
+      <div class="help-block help-block-fragment">The surname or last name of the creator.</div>
     </div>
 
     <div>
@@ -73,18 +59,9 @@
     
     <div class="help-block help-block-fragment no-error no-success">The main researchers involved in producing the data, or the authors of the publication, in priority order.</div>
   {{else}}
-    <div>
-      <label for="name" class="subtitle">Name</label>
-    </div>
-    <input type="text" class="form-control name-field {{if (not (v-get fragment 'name' 'messages')) 'no-error'}}" value={{fragment.name}} oninput={{action "updateName" value="target.value"}} readonly={{isReadonly}}/>
-
-    {{#if (v-get fragment 'name' 'errors')}}
-      <div class="help-block help-block-fragment">{{v-get fragment 'name' 'message'}}</div>
-    {{else if (v-get fragment 'name' 'warnings')}}
-      <div class="help-block help-block-fragment">{{v-get fragment 'name' 'warningMessage'}}</div>
-    {{else}}
-      <div class="help-block help-block-fragment no-error">The main organizations involved in producing the data, or the authors of the publication, in priority order.</div>
-    {{/if}}
+    <div><label for="name" class="subtitle">Name</label></div>
+    <input type="text" class="form-control name-field" value={{fragment.name}} oninput={{action "updateName" value="target.value"}} readonly={{isReadonly}} data-test-name/>
+    <div class="help-block help-block-fragment no-error">The main organizations involved in producing the data, or the authors of the publication, in priority order.</div>
   {{/if}}
 {{/if}}
 

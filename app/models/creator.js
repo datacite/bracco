@@ -5,16 +5,12 @@ import { computed } from '@ember/object';
 import { A } from '@ember/array';
 
 const Validations = buildValidations({
-  'name': [
+  name: [
     validator('presence', {
       presence: true,
-      disabled: computed('model.nameType', function() {
-        // only validate if nameType is not "Personal"
-        this.model.get('nameType') === 'Personal';
-      }),
     }),
   ],
-  'givenName': [
+  givenName: [
     validator('presence', {
       presence: true,
       disabled: computed('model.nameType', function() {
@@ -23,7 +19,7 @@ const Validations = buildValidations({
       }),
     }),
   ],
-  'familyName': [
+  familyName: [
     validator('presence', {
       presence: true,
       disabled: computed('model.nameType', function() {
@@ -32,12 +28,6 @@ const Validations = buildValidations({
       }),
     }),
   ],
-  'nameIdentifiers': [
-    validator('has-many'),
-  ],
-  // 'affiliation': [
-  //   validator('has-many')
-  // ]
 });
 
 export default MF.Fragment.extend(Validations, {

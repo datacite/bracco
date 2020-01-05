@@ -64,9 +64,6 @@ const Validations = buildValidations({
       }),
     }),
   ],
-  'creators': [
-    validator('has-many'),
-  ],
   publisher: [
     validator('presence', {
       presence: true,
@@ -104,7 +101,7 @@ const Validations = buildValidations({
   'types.resourceTypeGeneral': [
     validator('presence', {
       presence: true,
-      isWarning: computed('model.state', 'model.prefix', function() {
+      isWarning: computed('model.state', function() {
         return this.get('model.state') === 'draft';
       }),
       disabled: computed('model.mode', function() {
@@ -112,14 +109,11 @@ const Validations = buildValidations({
       }),
     }),
   ],
-  'titles': [
-    validator('has-many'),
-  ],
   xml: [
     validator('presence', {
       presence: true,
       message: 'Please include valid metadata.',
-      disabled: computed('model.mode', 'model.state', 'model.prefix', function() {
+      disabled: computed('model.mode', 'model.state', function() {
         return ![ 'upload', 'modify' ].includes(this.model.get('mode')) || this.get('model.state') === 'draft';
       }),
     }),
@@ -133,9 +127,6 @@ const Validations = buildValidations({
         return ![ 'upload', 'modify' ].includes(this.model.get('mode'));
       }),
     }),
-  ],
-  'descriptions': [
-    validator('has-many'),
   ],
 });
 
@@ -151,8 +142,8 @@ export default DS.Model.extend(Validations, {
   suffix: DS.attr('string'),
   url: DS.attr('string'),
   contentUrl: DS.attr(),
-  creators: fragmentArray('creator'),
-  titles: fragmentArray('title'),
+  creators: fragmentArray('creator', { defaultValue: [] }),
+  titles: fragmentArray('title', { defaultValue: [] }),
   publisher: DS.attr('string'),
   bcontainer: DS.attr(),
   publicationYear: DS.attr('number'),

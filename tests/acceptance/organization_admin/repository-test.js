@@ -49,8 +49,8 @@ module('Acceptance | organization_admin | repository', function(hooks) {
     assert.dom('[data-test-prefix]').exists();
     assert.dom('div.panel.facets').exists();
 
-    // provider can assign new prefix
-    assert.dom('a#assign-prefix').includesText('Assign Prefix');
+    // TODO provider can assign new prefix
+    // assert.dom('a#assign-prefix').includesText('Assign Prefix');
   });
 
   test('visiting repository DataCite Journal dois', async function(assert) {
