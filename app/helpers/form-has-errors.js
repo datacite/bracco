@@ -2,7 +2,7 @@ import { helper } from '@ember/component/helper';
 
 export function formHasErrors([ model ]) {
   if (model.state === 'draft') {
-    return true;
+    return false;
   }
 
   let invalidModel = model.validations.errors.length > 0;
