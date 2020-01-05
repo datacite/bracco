@@ -22,6 +22,18 @@ export function formHasErrors([ model ]) {
     });
   }
 
+  if (invalidModel) {
+    model.validations.errors.forEach((error) => {
+      console.log(`Invalid ${error.attribute}.`);
+    });
+  }
+  if (invalidTitle) {
+    console.log('Invalid title.');
+  }
+  if (invalidCreator) {
+    console.log('Invalid creator.');
+  }
+
   return invalidModel || invalidTitle || invalidCreator;
 }
 
