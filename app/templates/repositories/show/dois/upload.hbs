@@ -15,10 +15,17 @@
 
       <DoiUpload @model={{model.doi}} @form={{form}} />
 
-      <ModelValidationErrors @model={{model.doi}} @form={{form}} />
-
       <div class="col-md-9 col-md-offset-3">
-        <button type="submit" id="doi-create" class="btn btn-sm btn-fill" disabled={{form-has-errors model.doi}}>Create DOI</button>
+        {{#if (is-empty (doi-form-errors model.doi))}}
+          <button type="submit" id="doi-create" class="btn btn-sm btn-fill" disabled={{false}}>Create DOI</button>
+        {{else}}
+          <BsAlert @dismissible={{false}} @type="warning">
+            To save this DOI, first resolve the errors with these fields: {{doi-form-errors model.doi}}.
+          </BsAlert>
+
+          <button type="submit" id="doi-create" class="btn btn-sm btn-fill" disabled={{true}}>Create DOI</button>          
+        {{/if}}
+        
         <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
       </div>
     </BsForm>
