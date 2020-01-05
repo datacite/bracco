@@ -9,6 +9,8 @@ export default Controller.extend({
         providerPrefix.destroyRecord().then(function() {
           self.transitionToRoute('providers.show.prefixes', self.get('model.provider'));
         });
+      }).catch(function(reason) {
+        console.debug(reason);
       });
     },
     cancel() {

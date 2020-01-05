@@ -236,6 +236,8 @@ export default Component.extend({
       this.store.findRecord('provider', this.provider.get('id'), { backgroundReload: false }).then(function(provider) {
         provider.destroyRecord().then(function() {
           self.router.transitionTo('/providers');
+        }).catch(function(reason) {
+          console.debug(reason);
         });
       });
     },

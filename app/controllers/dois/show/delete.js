@@ -14,6 +14,8 @@ export default Controller.extend({
         doi.destroyRecord().then(function() {
           self.transitionToRoute('repositories.show.dois', self.get('repositoryId'));
         });
+      }).catch(function(reason) {
+        console.debug(reason);
       });
     },
     cancel() {

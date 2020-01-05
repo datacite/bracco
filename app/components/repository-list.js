@@ -77,6 +77,8 @@ export default Component.extend({
         if (repo.get('certificates').length > 0) {
           self.get('repository').set('certificate', A(repo.get('certificates')).mapBy('text'));
         }
+      }).catch(function(reason) {
+        console.debug(reason);
       });
     } else {
       this.repository.set('re3data', null);

@@ -7,7 +7,7 @@ export default Route.extend({
 
   model() {
     return hash({
-      repository: this.store.findRecord('repository', this.modelFor('repositories/show').get('id')),
+      repository: this.modelFor('repositories/show'),
       prefix: this.store.createRecord('repositoryPrefix'),
     });
   },

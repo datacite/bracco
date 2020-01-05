@@ -9,6 +9,8 @@ export default Controller.extend({
         repositoryPrefix.destroyRecord().then(function() {
           self.transitionToRoute('repositories.show.prefixes', self.model.get('repository.id'));
         });
+      }).catch(function(reason) {
+        console.debug(reason);
       });
     },
     cancel() {

@@ -97,6 +97,8 @@ export default Component.extend({
         if (repo.get('certificates').length > 0) {
           self.get('repository').set('certificate', A(repo.get('certificates')).mapBy('text'));
         }
+      }).catch(function(reason) {
+        console.debug(reason);
       });
     } else {
       this.repository.set('re3data', null);
@@ -221,6 +223,8 @@ export default Component.extend({
         repository.destroyRecord().then(function() {
           self.router.transitionTo('providers.show.settings', self.get('provider'));
         });
+      }).catch(function(reason) {
+        console.debug(reason);
       });
     },
     cancel() {
