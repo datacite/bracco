@@ -15,7 +15,7 @@ const Validations = buildValidations({
       presence: true,
       disabled: computed('model.nameType', function() {
         // only validate if nameType is "Personal"
-        this.model.get('nameType') !== 'Personal';
+        return this.model.get('nameType') !== 'Personal';
       }),
     }),
   ],
@@ -24,7 +24,7 @@ const Validations = buildValidations({
       presence: true,
       disabled: computed('model.nameType', function() {
         // only validate if nameType is "Personal"
-        this.model.get('nameType') !== 'Personal';
+        return this.model.get('nameType') !== 'Personal';
       }),
     }),
   ],
