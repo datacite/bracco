@@ -85,9 +85,12 @@
               <label for="familyName" class="subtitle">Family Name (optional)</label>
               <Input @type="text" class="form-control" @id="service-contact-familyName" @value={{model.serviceContact.familyName}} required={{false}} />
             </div>
-            <div>
-              <label for="email" class="subtitle">Email (optional)</label>
+            <div class="{{if (v-get model.serviceContact 'isInvalid') 'has-error has-feedback'}}">
+              <label for="email" class="subtitle control-label">Email (optional)</label>
               <Input @type="text" class="form-control" @id="service-contact-email" @value={{model.serviceContact.email}} required={{false}} />
+              {{#if (v-get model.serviceContact 'isInvalid')}}
+                <div class="help-block help-block-fragment" data-test-service-contact-email-help>{{v-get model.serviceContact 'message'}}</div>
+              {{/if}}
             </div>
           </div>
         </div>
@@ -103,9 +106,12 @@
               <label for="familyName" class="subtitle">Family Name (optional)</label>
               <Input @type="text" class="form-control" @id="secondary-service-contact-familyName" @value={{model.secondaryServiceContact.familyName}} required={{false}} />
             </div>
-            <div>
-              <label for="email" class="subtitle">Email (optional)</label>
+            <div class="{{if (v-get model.secondaryServiceContact 'isInvalid') 'has-error has-feedback'}}">
+              <label for="email" class="subtitle control-label">Email (optional)</label>
               <Input @type="text" class="form-control" @id="secondary-service-contact-email" @value={{model.secondaryServiceContact.email}} required={{false}} />
+              {{#if (v-get model.serviceContact 'isInvalid')}}
+                <div class="help-block help-block-fragment" data-test-secondary-service-contact-email-help>{{v-get model.secondaryServiceContact 'message'}}</div>
+              {{/if}}
             </div>
           </div>
         </div>
@@ -121,9 +127,12 @@
               <label for="familyName" class="subtitle">Family Name (optional)</label>
               <Input @type="text" class="form-control" @id="technical-contact-familyName" @value={{model.technicalContact.familyName}} required={{false}} />
             </div>
-            <div>
-              <label for="email" class="subtitle">Email (optional)</label>
+            <div class="{{if (v-get model.technicalContact 'isInvalid') 'has-error has-feedback'}}">
+              <label for="email" class="subtitle control-label">Email (optional)</label>
               <Input @type="text" class="form-control" @id="technical-contact-email" @value={{model.technicalContact.email}} required={{false}} />
+              {{#if (v-get model.technicalContact 'isInvalid')}}
+                <div class="help-block help-block-fragment" data-test-technical-contact-email-help>{{v-get model.technicalContact 'message'}}</div>
+              {{/if}}
             </div>
           </div>
         </div>
@@ -139,9 +148,12 @@
               <label for="familyName" class="subtitle">Family Name (optional)</label>
               <Input @type="text" class="form-control" @id="secondary-technical-contact-familyName" @value={{model.secondaryTechnicalContact.familyName}} required={{false}} />
             </div>
-            <div>
-              <label for="email" class="subtitle">Email (optional)</label>
+            <div class="{{if (v-get model.secondaryTechnicalContact 'isInvalid') 'has-error has-feedback'}}">
+              <label for="email" class="subtitle control-label">Email (optional)</label>
               <Input @type="text" class="form-control" @id="secondary-technical-contact-email" @value={{model.secondaryTechnicalContact.email}} required={{false}} />
+              {{#if (v-get model.secondaryTechnicalContact 'isInvalid')}}
+                <div class="help-block help-block-fragment" data-test-secondary-technical-contact-email-help>{{v-get model.secondaryTechnicalContact 'message'}}</div>
+              {{/if}}
             </div>
           </div>
         </div>
@@ -158,9 +170,12 @@
                 <label for="familyName" class="subtitle">Family Name (optional)</label>
                 <Input @type="text" class="form-control" @id="voting-contact-familyName" @value={{model.votingContact.familyName}} required={{false}} />
               </div>
-              <div>
-                <label for="email" class="subtitle">Email (optional)</label>
+              <div class="{{if (v-get model.votingContact 'isInvalid') 'has-error has-feedback'}}">
+                <label for="email" class="subtitle control-label">Email (optional)</label>
                 <Input @type="text" class="form-control" @id="voting-contact-email" @value={{model.votingContact.email}} required={{false}} />
+                {{#if (v-get model.votingContact 'isInvalid')}}
+                  <div class="help-block help-block-fragment" data-test-voting-contact-email-help>{{v-get model.votingContact 'message'}}</div>
+                {{/if}}
               </div>
             </div>
           </div>
@@ -186,9 +201,12 @@
                 <label for="familyName" class="subtitle">Family Name (optional)</label>
                 <Input @type="text" class="form-control" @id="billing-contact-familyName" @value={{model.billingContact.familyName}} required={{false}} />
               </div>
-              <div>
-                <label for="email" class="subtitle">Email (optional)</label>
+              <div class="{{if (v-get model.billingContact 'isInvalid') 'has-error has-feedback'}}">
+                <label for="email" class="subtitle control-label">Email (optional)</label>
                 <Input @type="text" class="form-control" @id="billing-contact-email" @value={{model.billingContact.email}} required={{false}} />
+                {{#if (v-get model.billingContact 'isInvalid')}}
+                  <div class="help-block help-block-fragment" data-test-billing-contact-email-help>{{v-get model.billingContact 'message'}}</div>
+                {{/if}}
               </div>
             </div>
           </div>
@@ -204,9 +222,12 @@
                 <label for="familyName" class="subtitle">Family Name (optional)</label>
                 <Input @type="text" class="form-control" @id="secondary-billing-contact-familyName" @value={{model.secondaryBillingContact.familyName}} required={{false}} />
               </div>
-              <div>
-                <label for="email" class="subtitle">Email (optional)</label>
+              <div class="{{if (v-get model.secondaryBillingContact 'isInvalid') 'has-error has-feedback'}}">
+                <label for="email" class="subtitle control-label">Email (optional)</label>
                 <Input @type="text" class="form-control" @id="secondary-billing-contact-email" @value={{model.secondaryBillingContact.email}} required={{false}} />
+                {{#if (v-get model.secondaryBillingContact 'isInvalid')}}
+                  <div class="help-block help-block-fragment" data-test-secondary-billing-contact-email-help>{{v-get model.secondaryBillingContact 'message'}}</div>
+                {{/if}}
               </div>
             </div>
           </div>
@@ -229,7 +250,16 @@
         {{/if}}
 
         <div class="col-md-9 col-md-offset-3">
-          <button type="submit" disabled={{v-get model 'isInvalid'}} class="btn btn-sm btn-fill">Update {{if (eq currentUser.uid model.id) 'Account' 'Member'}}</button>
+          {{#if (is-empty (provider-form-errors model))}}
+            <button type="submit" id="provider-update" class="btn btn-sm btn-fill" disabled={{false}}>Update {{if (eq currentUser.uid model.id) 'Account' 'Member'}}</button>
+          {{else}}
+            <BsAlert @dismissible={{false}} @type="warning">
+              To save this member, first resolve the errors with these fields: {{provider-form-errors model}}.
+            </BsAlert>
+
+              <button type="submit" id="provider-update" class="btn btn-sm btn-fill" disabled={{true}}>Update DOI</button>          
+          {{/if}}
+
           <button {{action "cancel" model}} class="btn btn-sm" id="cancel">Cancel</button> 
         </div>
       </BsForm>

@@ -1,33 +1,19 @@
 import DS from 'ember-data';
 import Fragment from 'ember-data-model-fragments/fragment';
 import { computed } from '@ember/object';
-// import { validator, buildValidations } from 'ember-cp-validations';
+import { validator, buildValidations } from 'ember-cp-validations';
 
-// const Validations = buildValidations({
-//   'email': [
-//     validator('presence', {
-//       presence: true,
-//       allowBlank: true
-//     }),
-//     validator('format', {
-//       type: 'email',
-//       allowNonTld: true,
-//       message: 'Please enter a valid email address.'
-//     })
-//   ],
-//   'givenName': validator('presence', {
-//     presence: true,
-//     allowBlank: true
-//   }),
-//   'familyName': validator('presence', {
-//     presence: true,
-//     allowBlank: true
-//   })
-// }, {
-//   isWarning: true
-// });
+const Validations = buildValidations({
+  email: [
+    validator('format', {
+      type: 'email',
+      allowBlank: true,
+      message: 'Please enter a valid email address.',
+    }),
+  ],
+});
 
-export default Fragment.extend({
+export default Fragment.extend(Validations, {
   email: DS.attr('string'),
   givenName: DS.attr('string'),
   familyName: DS.attr('string'),
