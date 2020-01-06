@@ -1,0 +1,44 @@
+<div class="panel panel-transparent">
+  <div class="panel-body">
+    <div class="col-md-9 col-md-offset-3">
+      {{#if (and (eq model.memberType "consortium") (gt model.providerCount 0))}}
+        <div class="alert alert-danger" role="alert">
+          You need to delete all consortium organizations before you can delete the {{uppercase model.id}} consortium.
+        </div>
+        <div class="pseudo-footer">
+          <div class="btn-toolbar btn-sm pull-right">
+            <button {{action "cancel" model}} class="btn btn-sm">Cancel</button>
+            <LinkTo @route="providers.show.organizations" @model={{model.id}} class="btn btn-sm">All Consortium Organizations</LinkTo>
+          </div>
+          <div class="clearfix"/>
+        </div>
+      {{else if (gt model.currentRepositoryCount 0)}}
+        <div class="alert alert-danger" role="alert">
+          You need to delete all repositories before you can delete the {{uppercase model.id}} provider.
+        </div>
+        <div class="pseudo-footer">
+          <div class="btn-toolbar btn-sm pull-right">
+            <button {{action "cancel" model}} class="btn btn-sm">Cancel</button>
+            <LinkTo @route="providers.show.repositories" @model={{model.id}} class="btn btn-sm">All Repositories</LinkTo>
+          </div>
+          <div class="clearfix"/>
+        </div>
+      {{else}}
+        <BsForm @formLayout="vertical" @model={{model}} @onSubmit={{action "submit" model}} @submitOnEnter={{true}} as |form|>
+          <form.group>
+            <label class="control-label">Are you sure you want to delete the {{uppercase model.id}} provider? This action cannot be undone.</label>
+            <form.element @controlType="text" @property="confirmSymbol" @showValidationOn="input" @autofocus={{true}} @helpText="Please add the Member ID to delete." />
+          </form.group>
+          
+          <div class="pseudo-footer">
+            <div class="btn-toolbar pull-right">
+              <button {{action "cancel" model}} class="btn btn-sm">Cancel</button>
+              <button {{action "submit"}} disabled={{v-get model 'confirmSymbol' 'isInvalid'}} class="btn btn-sm btn-fill">Delete</button>
+            </div>
+            <div class="clearfix"/>
+          </div>
+        </BsForm>
+      {{/if}}
+    </div>
+  </div>
+</div>

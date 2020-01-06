@@ -135,36 +135,6 @@ export default Component.extend({
   },
 
   actions: {
-    new() {
-      this.set('provider', this.store.createRecord('provider', { billingInformation: {}, technicalContact: {}, isActive: true }));
-      this.set('countries', countryList);
-      this.generate();
-      this.set('new', true);
-    },
-    submit(provider) {
-      let self = this;
-
-      // this.provider.set('billingInformation', {
-      //   address: this.provider.get('billingInformationAddress'),
-      //   organization: this.provider.get('billingInformationOrganization'),
-      //   department: this.provider.get('billingInformationDepartment'),
-      //   city: this.provider.get('billingInformationCity'),
-      //   state: this.provider.get('billingInformationState'),
-      //   postCode: this.provider.get('billingInformationPostCode'),
-      //   country: this.provider.get('billingInformationCountry')
-      // });
-
-      provider.save().then(function(provider) {
-        self.router.transitionTo('providers.show.settings', provider.id);
-        self.set('new', false);
-      }).catch(function(reason) {
-        console.debug(reason);
-      });
-    },
-    cancel() {
-      this.provider.rollbackAttributes();
-      this.reset();
-    },
     refresh() {
       this.generate();
     },

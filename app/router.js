@@ -10,6 +10,9 @@ const Router = EmberRouter.extend(GoogleAnalyticsRoute, {
 Router.map(function() {
   this.route('providers', function() {
     this.route('show', { path: '/:provider_id' }, function() {
+      this.route('edit');
+      this.route('change');
+      this.route('delete');
       this.route('settings');
       this.route('dois');
       this.route('prefixes', function() {
@@ -18,12 +21,20 @@ Router.map(function() {
         });
         this.route('new');
       });
-      this.route('organizations');
-      this.route('repositories');
+      this.route('organizations', function() {
+        this.route('new');
+      });
+      this.route('repositories', function() {
+        this.route('new');
+      });
     });
+    this.route('new');
   });
   this.route('repositories', function() {
     this.route('show', { path: '/:repository_id' }, function() {
+      this.route('edit');
+      this.route('change');
+      this.route('delete');
       this.route('settings');
       this.route('dois', function() {
         this.route('new');
@@ -37,6 +48,7 @@ Router.map(function() {
         this.route('new');
       });
     });
+    this.route('new');
   });
   this.route('dois', function() {
     this.route('show', { path: '/:doi_id' }, function() {

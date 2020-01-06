@@ -135,15 +135,6 @@ export default Component.extend({
     this.provider.set('organizationType', organizationType);
     this.set('organizationTypes', organizationTypeList);
   },
-  selectRor(ror) {
-    if (ror) {
-      this.provider.set('rorId', ror.id);
-      this.provider.set('name', ror.name);
-      this.provider.set('displayName', ror.name);
-    } else {
-      this.provider.set('rorId', null);
-    }
-  },
   searchMemberType(query) {
     let memberTypes = memberTypeList.filter(function(memberType) {
       return memberType.startsWith(query.toLowerCase());
@@ -213,23 +204,6 @@ export default Component.extend({
       this.set('provider', provider);
       this.provider.set('confirmSymbol', null);
       this.set('delete', true);
-    },
-    setPassword() {
-      let self = this;
-      this.provider.set('keepPassword', false);
-      this.provider.save().then(function() {
-        self.reset();
-      }).catch(function(reason) {
-        console.debug(reason);
-      });
-    },
-    submit(provider) {
-      let self = this;
-      provider.save().then(function() {
-        self.reset();
-      }).catch(function(reason) {
-        console.debug(reason);
-      });
     },
     destroy() {
       let self = this;

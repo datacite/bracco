@@ -35,9 +35,12 @@
               <label for="familyName" class="subtitle">Family Name (optional)</label>
               <Input @type="text" class="form-control" @id="service-contact-familyName" @value={{model.serviceContact.familyName}} required={{false}} />
             </div>
-            <div>
-              <label for="email" class="subtitle">Email (optional)</label>
+            <div class="{{if (v-get model.serviceContact 'isInvalid') 'has-error has-feedback'}}">
+              <label for="email" class="subtitle control-label">Email (optional)</label>
               <Input @type="text" class="form-control" @id="service-contact-email" @value={{model.serviceContact.email}} required={{false}} />
+              {{#if (v-get model.serviceContact 'isInvalid')}}
+                <div class="help-block help-block-fragment" data-test-service-contact-email-help>{{v-get model.serviceContact 'message'}}</div>
+              {{/if}}
             </div>
           </div>
         </div>
