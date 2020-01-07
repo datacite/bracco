@@ -50,25 +50,9 @@ module('Acceptance | staff_admin | provider', function(hooks) {
     assert.equal(currentURL(), '/providers/tib/settings');
     assert.dom('h2.work').hasText('German National Library of Science and Technology');
     assert.dom('a.nav-link.active').hasText('Settings');
-    assert.dom('button#edit-provider').includesText('Update Member');
-    assert.dom('button#delete-provider').includesText('Delete Member');
+    assert.dom('a#edit-provider').includesText('Update Member');
+    assert.dom('a#delete-provider').includesText('Delete Member');
   });
-
-  // test('editing provider TIB settings', async function(assert) {
-  //   await visit('/providers/tib/settings');
-  //   await click('button#edit-provider');
-
-  //   assert.equal(currentURL(), '/providers/tib/settings');
-  //   assert.dom('h2.work').hasText('German National Library of Science and Technology');
-  //   assert.dom('button#edit-provider').doesNotExist();
-
-  //   await fillIn('input#provider-name-field', 'German National Library of Science and Technology');
-  //   await click('button#cancel');
-
-  //   assert.equal(currentURL(), '/providers/tib/settings');
-  //   assert.dom('h2.work').hasText('German National Library of Science and Technology');
-  //   assert.dom('a.nav-link.active').hasText('Settings');
-  // });
 
   test('visiting provider TIB repositories', async function(assert) {
     await visit('/providers/tib/repositories');
@@ -121,5 +105,121 @@ module('Acceptance | staff_admin | provider', function(hooks) {
 
     // admin can assign new prefix
     assert.dom('a#assign-prefix').includesText('Assign Prefix');
+  });
+
+  test('new provider form', async function(assert) {
+    assert.expect(47);
+
+    await visit('/providers/new');
+
+    assert.equal(currentURL(), '/providers/new');
+    assert.dom('h2.work').hasText('DataCite');
+    assert.dom('div.tab-content').exists();
+
+    assert.dom('input#member-id-field').exists();
+    assert.dom('input#name-field').exists();
+    assert.dom('input#display-name-field').exists();
+    assert.dom('input#system-email-field').exists();
+    assert.dom('input#group-email-field').exists();
+    assert.dom('input#website-field').exists();
+    assert.dom('input#twitter-handle-field').exists();
+    assert.dom('div#ror-id').exists();
+    assert.dom('input#salesforce-id-field').exists();
+    assert.dom('div#member-type').exists();
+    assert.dom('div#tax-status').exists();
+    assert.dom('div#country').exists();
+    assert.dom('div#organization-type').exists();
+    assert.dom('div#focus-area').exists();
+    assert.dom('textarea#description-field').exists();
+
+    assert.dom('input#service-contact-given-name').exists();
+    assert.dom('input#service-contact-family-name').exists();
+    assert.dom('input#service-contact-email').exists();
+    assert.dom('input#secondary-service-contact-given-name').exists();
+    assert.dom('input#secondary-service-contact-family-name').exists();
+    assert.dom('input#secondary-service-contact-email').exists();
+    assert.dom('input#technical-contact-given-name').exists();
+    assert.dom('input#technical-contact-family-name').exists();
+    assert.dom('input#technical-contact-email').exists();
+    assert.dom('input#secondary-technical-contact-given-name').exists();
+    assert.dom('input#secondary-technical-contact-family-name').exists();
+    assert.dom('input#secondary-technical-contact-email').exists();
+    assert.dom('input#voting-contact-given-name').exists();
+    assert.dom('input#voting-contact-family-name').exists();
+    assert.dom('input#voting-contact-email').exists();
+    assert.dom('input#billing-contact-given-name').exists();
+    assert.dom('input#billing-contact-family-name').exists();
+    assert.dom('input#billing-contact-email').exists();
+    assert.dom('input#secondary-billing-contact-given-name').exists();
+    assert.dom('input#secondary-billing-contact-family-name').exists();
+    assert.dom('input#secondary-billing-contact-email').exists();
+
+    assert.dom('input#billing-information-organization-field').exists();
+    assert.dom('input#billing-information-department-field').exists();
+    assert.dom('textarea#billing-information-street-field').exists();
+    assert.dom('input#billing-information-city-field').exists();
+    assert.dom('input#billing-information-state-field').exists();
+    assert.dom('input#billing-information-postcode-field').exists();
+    assert.dom('div#billing-information-country').exists();
+
+    assert.dom('button#add-provider').includesText('Add Member');
+  });
+
+  test('editing provider TIB form', async function(assert) {
+    assert.expect(47);
+
+    await visit('/providers/tib/edit');
+
+    assert.equal(currentURL(), '/providers/tib/edit');
+    assert.dom('h2.work').hasText('German National Library of Science and Technology');
+    assert.dom('div.tab-content').exists();
+
+    assert.dom('input#member-id-field').exists();
+    assert.dom('input#name-field').exists();
+    assert.dom('input#display-name-field').exists();
+    assert.dom('input#system-email-field').exists();
+    assert.dom('input#group-email-field').exists();
+    assert.dom('input#website-field').exists();
+    assert.dom('input#twitter-handle-field').exists();
+    assert.dom('div#ror-id').exists();
+    assert.dom('input#salesforce-id-field').exists();
+    assert.dom('div#member-type').exists();
+    assert.dom('div#tax-status').exists();
+    assert.dom('div#country').exists();
+    assert.dom('div#organization-type').exists();
+    assert.dom('div#focus-area').exists();
+    assert.dom('textarea#description-field').exists();
+
+    assert.dom('input#service-contact-given-name').exists();
+    assert.dom('input#service-contact-family-name').exists();
+    assert.dom('input#service-contact-email').exists();
+    assert.dom('input#secondary-service-contact-given-name').exists();
+    assert.dom('input#secondary-service-contact-family-name').exists();
+    assert.dom('input#secondary-service-contact-email').exists();
+    assert.dom('input#technical-contact-given-name').exists();
+    assert.dom('input#technical-contact-family-name').exists();
+    assert.dom('input#technical-contact-email').exists();
+    assert.dom('input#secondary-technical-contact-given-name').exists();
+    assert.dom('input#secondary-technical-contact-family-name').exists();
+    assert.dom('input#secondary-technical-contact-email').exists();
+    assert.dom('input#voting-contact-given-name').exists();
+    assert.dom('input#voting-contact-family-name').exists();
+    assert.dom('input#voting-contact-email').exists();
+    assert.dom('input#billing-contact-given-name').exists();
+    assert.dom('input#billing-contact-family-name').exists();
+    assert.dom('input#billing-contact-email').exists();
+    assert.dom('input#secondary-billing-contact-given-name').exists();
+    assert.dom('input#secondary-billing-contact-family-name').exists();
+    assert.dom('input#secondary-billing-contact-email').exists();
+
+    assert.dom('input#billing-information-organization-field').exists();
+    assert.dom('input#billing-information-department-field').exists();
+    assert.dom('textarea#billing-information-street-field').exists();
+    assert.dom('input#billing-information-city-field').exists();
+    assert.dom('input#billing-information-state-field').exists();
+    assert.dom('input#billing-information-postcode-field').exists();
+    assert.dom('div#billing-information-country').exists();
+
+    assert.dom('button#update-provider').includesText('Update Member');
   });
 });

@@ -55,7 +55,7 @@ module('Acceptance | staff_admin | admin', function(hooks) {
     assert.dom('div.panel.facets').exists();
 
     // staff can add member
-    assert.dom('button#add-provider').exists();
+    assert.dom('a#new-provider').exists();
   });
 
   test('visiting repositories', async function(assert) {

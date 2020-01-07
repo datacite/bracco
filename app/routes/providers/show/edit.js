@@ -6,7 +6,9 @@ export default Route.extend({
   features: service(),
 
   model() {
-    return this.modelFor('providers/show');
+    let provider = this.modelFor('providers/show');
+    provider.set('confirmSymbol', provider.get('symbol'));
+    return provider;
   },
 
   afterModel(model) {
