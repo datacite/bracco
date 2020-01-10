@@ -25,14 +25,6 @@ export default Component.extend({
 
     this.metricsCounter();
   },
-  formatNumbers(counter) {
-    if (counter < 1e3) return counter;
-    if (counter >= 1e3 && counter < 1e6) return `${+(counter / 1e3).toFixed(1)}K`;
-    if (counter >= 1e6 && counter < 1e9) return `${+(counter / 1e6).toFixed(1)}M`;
-    if (counter >= 1e9 && counter < 1e12) return `${+(counter / 1e9).toFixed(1)}B`;
-    if (counter >= 1e12) return `${+(counter / 1e12).toFixed(1)}T`;
-    return counter;
-  },
   metricsCounter() {
     const query = `{
       person(id: "http://orcid.org/${this.orcid}") {
@@ -43,7 +35,7 @@ export default Component.extend({
       return request('https://api.datacite.org/client-api/graphql', query)
       .then(function(researcher) {
         console.log(researcher)
-        self.set('count', self.formatNumbers(Object.values(researcher.person)[0]))
+        self.set('count', (Object.values(researcher.person)[0]))
         return researcher;
       })
       .catch(function(reason) {
