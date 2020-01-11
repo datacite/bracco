@@ -18,7 +18,7 @@ export default Model.extend({
     return this.get('meta.published');
   }),
   totalDoiCount: computed('meta.published', function() {
-    return this.get('meta.published').reduce(function (a, b) {
+    return this.get('meta.published').reduce(function(a, b) {
       return a + b.count;
     }, 0);
   }),

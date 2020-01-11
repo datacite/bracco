@@ -3,8 +3,8 @@ import { computed } from '@ember/object';
 
 export default Component.extend({
   tagName: 'div',
-  classNames: ['row'],
+  classNames: [ 'row' ],
   isPerson: computed(function() {
-    return this.attrs.link == "users.show.dois";
+    return this.attrs.link == 'users.show.dois';
   }),
 });

@@ -1,22 +1,20 @@
-import Route from "@ember/routing/route";
-import { inject as service } from "@ember/service";
-import { set } from "@ember/object";
-import RSVP from 'rsvp';
+import Route from '@ember/routing/route';
+import { inject as service } from '@ember/service';
+import { set } from '@ember/object';
+// import RSVP from 'rsvp';
 // import fetch from 'fetch';
-import { request, GraphQLClient } from 'graphql-request'
+// import { request, GraphQLClient } from 'graphql-request';
 
-const query = `{
-  person(id: "https://orcid.org/0000-0002-8862-1404") {
-    givenName
-    familyName
-    orcid: id
-    citationCount
-    viewCount
-    downloadCount
-  }
-}`
-
-
+// const query = `{
+//   person(id: "https://orcid.org/0000-0002-8862-1404") {
+//     givenName
+//     familyName
+//     orcid: id
+//     citationCount
+//     viewCount
+//     downloadCount
+//   }
+// }`;
 
 
 export default Route.extend({
@@ -38,8 +36,8 @@ export default Route.extend({
   },
 
   afterModel(model) {
-    if (this.can.cannot("read user", model)) {
-      this.transitionTo("index");
+    if (this.can.cannot('read user', model)) {
+      this.transitionTo('index');
     }
   },
 
