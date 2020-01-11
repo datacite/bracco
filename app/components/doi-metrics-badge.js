@@ -12,15 +12,7 @@ export default Component.extend({
   views: 0,
   downloads: 0,
   label: '',
-  // doi: '',
   store: service(),
-  // count: computed('data', function() {
-  //   return {
-  //     citations: this.formatNumbers(this.citations),
-  //     views: this.formatNumbers(this.views),
-  //     downloads: this.formatNumbers(this.downloads),
-  //   };
-  // }),
   hasUsage: computed('views','downloads', function() {
     return ((this.views + this.downloads) > 0) ?  true  : false
   }),

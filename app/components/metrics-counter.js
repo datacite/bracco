@@ -1,6 +1,6 @@
 import Component from "@ember/component";
 import { inject as service } from '@ember/service';
-import { computed } from '@ember/object';
+// import { computed } from '@ember/object';
 import { request } from 'graphql-request'
 
 
@@ -11,11 +11,7 @@ export default Component.extend({
   data: null,
   label: '',
   store: service(),
-  // count: computed('data', function() {
-  //   return this.formatNumbers(250000);
-  // }),
   count: 0,
-
   init() {
     this._super();
   },
