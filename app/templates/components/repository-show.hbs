@@ -1,178 +1,9 @@
 {{#if edit}}
-  <div class="panel panel-transparent" id="content-member">
-    <div class="panel-body">
-      <div class="col-md-9 col-md-offset-3"><h3 class="edit">Update {{if (eq currentUser.uid model.id) 'Account' 'Repository'}}</h3></div>
 
-      <BsForm @formLayout="horizontal" @horizontalLabelGridClass="col-md-3" @model={{model}} @onSubmit={{action "submit" model}} @submitOnEnter={{true}} as |form|>
-        <form.element @controlType="hidden" @property="confirmSymbol" @required={{false}} />
-        <form.element @controlType="text" @label="Repository ID" @property="symbol" @helpText="The Repository ID is the unique identifier for each repository in DataCite and can't be changed." @disabled={{true}} />
-        <form.element @controlType="power-select" @label="Type" @property="clientType" @options={{clientTypes}} @destination={{clientType}} as |el|>
-          <el.control @onChange={{action "selectClientType"}} @search={{action "searchClientType"}} @placeholder="Select Client Type" @searchPlaceholder="Type to search..." as |item|>
-            {{titleize item}}
-          </el.control>
-        </form.element>
-
-        {{#if (can "create provider")}}
-          <form.element @controlType="text" @label="Salesforce ID" @property="salesforceId" @required={{false}} @helpText="The 18 digit ID in Salesforce." />
-        {{/if}}
-
-        {{#if (eq model.clientType "repository")}}
-          <form.element @controlType="power-select" @property="re3data" @label="re3data Record (optional)" @optionLabelPath="re3data" @options={{repositories}} @destination={{re3data}} @helpText="re3data is a registry of research data repositories." as |el|>
-            <el.control @onChange={{action "selectRe3Data"}} @search={{action "searchRe3Data"}} @searchField="repositoryName" @searchPlaceholder="Type to search..." @allowClear={{true}} as |item|>
-              {{if item.name item.name model.re3data}}
-            </el.control>
-          </form.element>
-        {{else}}
-          <RepositoryIssn @model={{model}} @fragment={{model.issn}} @form={{form}} />
-        {{/if}}
-
-        <form.element @controlType="text" @label="Repository Name" @property="name" @required={{false}} />
-        <form.element @controlType="text" @label="Alternate Repository Name (optional)" @property="alternateName" @required={{false}} />
-        <form.element @controlType="email" @label="System Email" @property="systemEmail" @helpText="This is the email used for sending password reset requests and similar system notifications." @required={{false}} />
-        
-        <div class="form-group">
-          <label class="control-label col-md-3">Service Contact</label>
-          <div class="col-md-9">
-            <div>
-              <label for="givenName" class="subtitle">Given Name (optional)</label>
-              <Input @type="text" class="form-control" @id="service-contact-givenName" @value={{model.serviceContact.givenName}} required={{false}} />
-            </div>
-            <div>
-              <label for="familyName" class="subtitle">Family Name (optional)</label>
-              <Input @type="text" class="form-control" @id="service-contact-familyName" @value={{model.serviceContact.familyName}} required={{false}} />
-            </div>
-            <div class="{{if (v-get model.serviceContact 'isInvalid') 'has-error has-feedback'}}">
-              <label for="email" class="subtitle control-label">Email (optional)</label>
-              <Input @type="text" class="form-control" @id="service-contact-email" @value={{model.serviceContact.email}} required={{false}} />
-              {{#if (v-get model.serviceContact 'isInvalid')}}
-                <div class="help-block help-block-fragment" data-test-service-contact-email-help>{{v-get model.serviceContact 'message'}}</div>
-              {{/if}}
-            </div>
-          </div>
-        </div>
-        
-        <form.element @controlType="textarea" @label="Description (optional)" @property="description" @rows={{10}} @helpText="Description of the repository. Please use markdown for formatting." @required={{false}} />
-        <form.element @controlType="text" @label="URL (optional)" @property="url" @helpText="The homepage of the repository." @required={{false}} />
-        
-        <div class="form-group">
-          <label class="control-label col-md-3">Language (optional)</label>
-          <div class="col-md-9">
-            {{#if (gt model.language.length 0)}}
-              {{#each model.language as |language index|}}
-                <RepositoryLanguage @model={{model}} @language={{language}} @form={{form}} @index={{index}} />
-              {{/each}}
-
-              {{#if (lte model.language.length 2)}}
-                <BsButton @class="btn-sm add-language" @outline={{true}} @onClick={{action "addLanguage"}}>{{fa-icon "plus-circle"}} Add another Language</BsButton>
-              {{/if}}
-            {{/if}}
-          </div>
-        </div>
-
-        <form.element @controlType="power-select" @label="Software (optional)" @property="software" @options={{softwares}} @destination={{software}} @helpText="The name of the software that is used to run the repository." as |el|>
-          <el.control @onChange={{action "selectSoftware"}} @search={{action "searchSoftware"}} @placeholder="Select Software" @searchPlaceholder="Type to search..." @allowClear={{true}} as |item|>
-            {{item}}
-          </el.control>
-        </form.element>
-        <form.element @controlType="textarea" @label="Domains" @property="domains" @required={{false}} @helpText="List of (sub-)domains used for DOI registration, or use * to allow all domains" />
-
-        {{#if (eq model.clientType "repository")}}
-          <div class="form-group">
-            <label class="control-label col-md-3">Repository Type (optional)</label>
-            <div class="col-md-9">
-              {{#if (gt model.repositoryType.length 0)}}
-                {{#each model.repositoryType as |repositoryType index|}}
-                  <RepositoryRepositoryType @model={{model}} @repositoryType={{repositoryType}} @form={{form}} @index={{index}} />
-                {{/each}}
-
-                {{#if (lte model.repositoryType.length 2)}}
-                  <BsButton @class="btn-sm add-repositoryType" @outline={{true}} @onClick={{action "addRepositoryType"}}>{{fa-icon "plus-circle"}} Add another Repository Type</BsButton>
-                {{/if}}
-              {{/if}}
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="control-label col-md-3">Certificate (optional)</label>
-            <div class="col-md-9">
-              {{#if (gt model.certificate.length 0)}}
-                {{#each model.certificate as |certificate index|}}
-                  <RepositoryCertificate @model={{model}} @certificate={{certificate}} @form={{form}} @index={{index}} />
-                {{/each}}
-
-                {{#if (lte model.certificate.length 2)}}
-                  <BsButton @class="btn-sm add-certificate" @outline={{true}} @onClick={{action "addCertificate"}}>{{fa-icon "plus-circle"}} Add another Certificate</BsButton>
-                {{/if}}
-              {{/if}}
-            </div>
-          </div>
-        {{/if}}
-
-        {{#if (can "create repository" model.provider)}}
-          <form.element @controlType="checkbox" @label="Account is active" @property="isActive" @helpText="This account can register and update DOIs" />
-        {{/if}}
-
-        <div class="col-md-9 col-md-offset-3">
-          <button type="submit" class="btn btn-sm btn-fill" disabled={{v-get model 'isInvalid'}}>Update Repository</button>
-          <button {{action "cancel" model}} class="btn btn-sm">Cancel</button>
-        </div>
-      </BsForm>
-    </div>
-  </div>
 {{else if change}}
-  <div class="panel panel-transparent">
-    <div class="panel-body">
-      <div class="col-md-9 col-md-offset-3">
-        <h3 class="edit">Set Password</h3>
 
-        <span class="help-block">Click <a class="action-link" {{action "generate"}}>here</a> for a password suggestion.</span>
-      </div>
-
-      <BsForm @formLayout="horizontal" @horizontalLabelGridClass="col-md-3" @model={{model}} @onSubmit={{action "setPassword" model}} @submitOnEnter={{true}} as |form|>
-        <form.element @controlType="text" @id="passwordInput" @property="passwordInput" @label="New Password" @required={{false}} />
-        <form.element @controlType="text" @property="confirmPasswordInput" @label="Confirm Password" @required={{false}} />
-
-        <div class="col-md-9 col-md-offset-3">
-          <button type="submit" class="btn btn-sm btn-fill">Set Password</button>
-          <button {{action "cancel" model}} class="btn btn-sm" id="cancel">Cancel</button>
-        </div>
-      </BsForm>
-    </div>
-  </div>
 {{else if delete}}
-  <div class="panel panel-transparent">
-    <div class="panel-body">
-      <div class="col-md-9 col-md-offset-3">
-        {{#if (gt model.totalDoiCount 0)}}
-          <div class="alert alert-danger" role="alert">
-            You need to transfer all DOIs to another repository before you can delete the {{uppercase model.id}} repository.
-          </div>
-          <div class="pseudo-footer">
-            <div class="btn-toolbar btn-sm pull-right">
-              <button {{action "cancel" model}} class="btn btn-sm">Cancel</button>
-              <LinkTo @route="repositories.show.transfer" @model={{model.id}} class="btn btn-sm">{{fa-icon "arrow-circle-o-right"}}Transfer DOIs</LinkTo>
-            </div>
-            <div class="clearfix"/>
-          </div>
-        {{else}}
-          <BsForm @formLayout="vertical" @model={{model}} @onSubmit={{action "destroy" model}} @submitOnEnter={{true}} as |form|>
-            <form.group>
-              <label class="control-label">Are you sure you want to delete the {{uppercase model.id}} repository? This action cannot be undone.</label>
-              <form.element @controlType="text" @property="confirmSymbol" @showValidationOn="input" @autofocus={{true}} @helpText="Please add the Repository ID to delete." />
-            </form.group>
 
-            <div class="pseudo-footer">
-              <div class="btn-toolbar pull-right">
-                <button {{action "cancel" model}} class="btn btn-sm">Cancel</button>
-                <button {{action "destroy"}} disabled={{v-get model 'confirmSymbol' 'isInvalid'}} class="btn btn-sm btn-fill">Delete</button>
-              </div>
-              <div class="clearfix"/>
-            </div>
-          </BsForm>
-        {{/if}}
-      </div>
-    </div>
-  </div>
 {{else}}
   <div class="row">
     <div class="col-md-3">
@@ -181,10 +12,11 @@
           <div class="panel-body">
             <div class="btn-toolbar">
               <div class="btn-group-vertical btn-group-sm">
-                <button {{action "change" model}} class="btn btn-warning" id="set-password-provider">{{fa-icon "key"}}Set Password</button>
-                <button {{action "edit" model}} class="btn btn-warning" id="edit-repository">{{fa-icon "pencil"}}Update{{if (eq currentUser.uid model.id) ' Account' ' Repository'}}</button>
+                <LinkTo @route="repositories.show.change" @model={{model.id}} class="btn btn-warning" @id="set-password-repository">{{fa-icon "key"}} Set Password</LinkTo>
+                <LinkTo @route="repositories.show.edit" @model={{model.id}} class="btn btn-warning" @id="edit-repository">{{fa-icon "pencil"}} Update {{if (eq currentUser.uid model.id) 'Account' 'Repository'}}</LinkTo>
+              
                 {{#if (can "delete repository" model)}}
-                  <button {{action "delete" model}} class="btn btn-warning" id="delete-repository">{{fa-icon "trash"}}Delete{{if media.isXl ' Repository'}}</button>
+                  <LinkTo @route="providers.show.delete" @model={{model.id}} class="btn btn-warning" @id="delete-repository">{{fa-icon "trash"}} Delete Repository</LinkTo>
                 {{/if}}
               </div>
             </div>

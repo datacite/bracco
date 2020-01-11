@@ -68,7 +68,7 @@ module('Acceptance | staff_admin | provider', function(hooks) {
     assert.dom('div.panel.facets').exists();
 
     // admin can add repository
-    assert.dom('button#add-repository').includesText('Add Repository');
+    assert.dom('a#new-repository').includesText('Add Repository');
   });
 
   test('visiting provider TIB dois', async function(assert) {
@@ -108,7 +108,7 @@ module('Acceptance | staff_admin | provider', function(hooks) {
   });
 
   test('new provider form', async function(assert) {
-    assert.expect(47);
+    assert.expect(48);
 
     await visit('/providers/new');
 
@@ -161,12 +161,13 @@ module('Acceptance | staff_admin | provider', function(hooks) {
     assert.dom('input#billing-information-state-field').exists();
     assert.dom('input#billing-information-postcode-field').exists();
     assert.dom('div#billing-information-country').exists();
+    assert.dom('input#is-active-field').exists();
 
     assert.dom('button#add-provider').includesText('Add Member');
   });
 
   test('editing provider TIB form', async function(assert) {
-    assert.expect(47);
+    assert.expect(48);
 
     await visit('/providers/tib/edit');
 
@@ -219,6 +220,7 @@ module('Acceptance | staff_admin | provider', function(hooks) {
     assert.dom('input#billing-information-state-field').exists();
     assert.dom('input#billing-information-postcode-field').exists();
     assert.dom('div#billing-information-country').exists();
+    assert.dom('input#is-active-field').exists();
 
     assert.dom('button#update-provider').includesText('Update Member');
   });

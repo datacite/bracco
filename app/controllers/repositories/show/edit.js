@@ -1,9 +1,8 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
-import { isBlank } from '@ember/utils';
+import { A } from '@ember/array';
 import { capitalize } from '@ember/string';
 import langs from 'langs';
-import { A } from '@ember/array';
 
 const clientTypeList = [
   'repository',
@@ -19,14 +18,19 @@ const softwareList = [
   'Islandora',
   'Nesstar',
   'Open Journal Systems (OJS)',
-  'Opus',
   'Samvera',
   'Other',
 ];
 
 export default Controller.extend({
+  currentUser: service(),
   store: service(),
 
+  edit: false,
+  change: false,
+  delete: false,
+  provider: null,
+  setPassword: false,
   re3data: null,
   repositories: [],
   softwareList,
@@ -43,12 +47,12 @@ export default Controller.extend({
         let self = this;
         this.store.findRecord('re3data', re3data.id).then(function(repo) {
           self.set('re3data', repo);
-          self.get('repository').set('clientType', 'repository');
-          self.get('repository').set('re3data', 'https://doi.org/' + repo.get('id'));
-          self.get('repository').set('name', repo.get('repositoryName'));
-          self.get('repository').set('description', repo.get('description'));
-          self.get('repository').set('alternateName', A(repo.get('additionalNames')).get('firstObject').text);
-          self.get('repository').set('url', repo.get('repositoryUrl'));
+          self.model.set('clientType', 'repository');
+          self.model.set('re3data', 'https://doi.org/' + repo.get('id'));
+          self.model.set('name', repo.get('repositoryName'));
+          self.model.set('description', repo.get('description'));
+          self.model.set('alternateName', A(repo.get('additionalNames')).get('firstObject').text);
+          self.model.set('url', repo.get('repositoryUrl'));
           if (repo.get('software').length > 0) {
             let software = repo.get('software')[0].name;
             if (software === 'DataVerse') {
@@ -56,7 +60,7 @@ export default Controller.extend({
             } else if (software === 'unknown') {
               software = 'Other';
             }
-            self.get('repository').set('software', capitalize(software));
+            self.model.set('software', capitalize(software));
           }
           if (repo.get('repositoryLanguages').length > 0) {
             self.get('repository').set('language', A(repo.get('repositoryLanguages')).map(function(l) {
@@ -64,16 +68,16 @@ export default Controller.extend({
             }));
           }
           if (repo.get('types').length > 0) {
-            self.get('repository').set('repositoryType', A(repo.get('types')).mapBy('text'));
+            self.model.set('repositoryType', A(repo.get('types')).mapBy('text'));
           }
           if (repo.get('certificates').length > 0) {
-            self.get('repository').set('certificate', A(repo.get('certificates')).mapBy('text'));
+            self.model.set('certificate', A(repo.get('certificates')).mapBy('text'));
           }
         }).catch(function(reason) {
           console.debug(reason);
         });
       } else {
-        this.repository.set('re3data', null);
+        this.model.set('re3data', null);
       }
     },
     searchClientType(query) {
@@ -83,7 +87,7 @@ export default Controller.extend({
       this.set('clientTypes', clientTypes);
     },
     selectClientType(clientType) {
-      this.model.repository.set('clientType', clientType);
+      this.model.set('clientType', clientType);
       this.set('clientTypes', clientTypeList);
     },
     searchSoftware(query) {
@@ -93,48 +97,29 @@ export default Controller.extend({
       this.set('softwares', softwares);
     },
     selectSoftware(software) {
-      this.model.repository.set('software', software);
+      this.model.set('software', software);
       this.set('softwares', softwareList);
     },
     addLanguage() {
-      this.model.repository.get('language').pushObject(null);
+      this.model.get('language').pushObject(null);
     },
     addCertificate() {
-      this.model.repository.get('certificate').pushObject(null);
+      this.model.get('certificate').pushObject(null);
     },
     addRepositoryType() {
-      this.model.repository.get('repositoryType').pushObject(null);
+      this.model.get('repositoryType').pushObject(null);
     },
     submit(repository) {
       let self = this;
-
-      // Remove all whitespace on domains.
-      if (repository.get('domains')) {
-        let domains = repository.get('domains');
-        repository.set('domains', domains.replace(/\s/g, ''));
-      }
-
-      repository.set('language', repository.get('language').filter(function(language) {
-        return !isBlank(language);
-      }));
-
-      repository.set('repositoryType', repository.get('repositoryType').filter(function(repositoryType) {
-        return !isBlank(repositoryType);
-      }));
-
-      repository.set('certificate', repository.get('certificate').filter(function(certificate) {
-        return !isBlank(certificate);
-      }));
-
       repository.save().then(function(repository) {
-        self.transitionToRoute('repositories.show.settings', repository.id);
+        self.transitionToRoute('repositories.show.settings', repository);
       }).catch(function(reason) {
         console.debug(reason);
       });
     },
     cancel() {
-      this.model.repository.rollbackAttributes();
-      this.transitionToRoute('providers.show.repositories', this.get('model.provider.id'));
+      this.model.rollbackAttributes();
+      this.transitionToRoute('repositories.show.settings', this.model);
     },
   },
 });

@@ -7,7 +7,11 @@ export default Route.extend({
 
   model() {
     let provider = this.modelFor('providers/show');
-    let repository = this.store.createRecord('repository', { provider: provider.get('id') });
+    let repository = this.store.createRecord('repository', { provider: provider.get('id'), clientType: 'repository', language: [], repositoryType: [], certificate: [] });
+
+    repository.get('language').pushObject('');
+    repository.get('repositoryType').pushObject('');
+    repository.get('certificate').pushObject('');
 
     return hash({
       provider,

@@ -136,7 +136,7 @@ export default Controller.extend({
     submit(provider) {
       let self = this;
       provider.save().then(function(provider) {
-        self.router.transitionTo('providers.show.settings', provider.id);
+        self.transitionToRoute('providers.show.settings', provider.id);
       }).catch(function(reason) {
         console.debug(reason);
       });
