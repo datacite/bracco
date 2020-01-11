@@ -1,13 +1,12 @@
-import Component from "@ember/component";
+import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 // import { computed } from '@ember/object';
-import { request } from 'graphql-request'
-
+import { request } from 'graphql-request';
 
 
 export default Component.extend({
-  tagName: "div",
-  classNames: ["col-lg-3", "col-md-4"],
+  tagName: 'div',
+  classNames: [ 'col-lg-3', 'col-md-4' ],
   data: null,
   label: '',
   store: service(),
@@ -26,12 +25,12 @@ export default Component.extend({
       person(id: "http://orcid.org/${this.orcid}") {
         ${this.label.toLowerCase()}Count
       }
-    }`
+    }`;
     let self = this;
-      return request('https://api.datacite.org/client-api/graphql', query)
+    return request('https://api.datacite.org/client-api/graphql', query)
       .then(function(researcher) {
-        console.log(researcher)
-        self.set('count', (Object.values(researcher.person)[0]))
+        console.log(researcher);
+        self.set('count', (Object.values(researcher.person)[0]));
         return researcher;
       })
       .catch(function(reason) {
@@ -42,16 +41,16 @@ export default Component.extend({
         }
 
         self
-          .get("flashMessages")
+          .get('flashMessages')
           .warning(
-            "Fabrica is currently unavailable due to a DataCite API problem. We apologize for the inconvenience and are working hard to restore the service. Please check back later or contact DataCite Support if you have a question."
+            'Fabrica is currently unavailable due to a DataCite API problem. We apologize for the inconvenience and are working hard to restore the service. Please check back later or contact DataCite Support if you have a question.'
           );
-        self.transitionTo("/");
-      })
+        self.transitionTo('/');
+      });
   },
   actions: {
     metricsCounter() {
       this.metricsCounter();
-    }
-  }
+    },
+  },
 });
