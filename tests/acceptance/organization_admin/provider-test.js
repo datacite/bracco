@@ -33,8 +33,8 @@ module('Acceptance | organization_admin | provider', function(hooks) {
     assert.equal(currentURL(), '/providers/datacite/settings');
     assert.dom('h2.work').hasText('DataCite');
     assert.dom('li a.nav-link.active').hasText('Settings');
-    assert.dom('button#edit-provider').includesText('Update Account');
-    assert.dom('button#delete-provider').doesNotExist();
+    assert.dom('a#edit-provider').includesText('Update Account');
+    assert.dom('a#delete-provider').doesNotExist();
   });
 
   test('editing provider DataCite settings', async function(assert) {
@@ -43,10 +43,10 @@ module('Acceptance | organization_admin | provider', function(hooks) {
     assert.equal(currentURL(), '/providers/datacite/settings');
     assert.dom('h2.work').hasText('DataCite');
     assert.dom('li a.nav-link.active').hasText('Settings');
-    assert.dom('button#edit-provider').exists();
-    assert.dom('button#delete-provider').doesNotExist();
+    assert.dom('a#edit-provider').exists();
+    assert.dom('a#delete-provider').doesNotExist();
 
-    await click('button#edit-provider');
+    await click('a#edit-provider');
     await fillIn('input#display-name-field', 'DataCite II');
     await click('button[type=submit]');
 
@@ -69,7 +69,7 @@ module('Acceptance | organization_admin | provider', function(hooks) {
     assert.dom('div.panel.facets').exists();
 
     // provider can add repository
-    assert.dom('button#add-repository').includesText('Add Repository');
+    assert.dom('a#add-repository').includesText('Add Repository');
   });
 
   test('visiting provider DataCite dois', async function(assert) {

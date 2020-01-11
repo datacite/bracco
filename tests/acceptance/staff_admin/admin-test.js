@@ -55,7 +55,7 @@ module('Acceptance | staff_admin | admin', function(hooks) {
     assert.dom('div.panel.facets').exists();
 
     // staff can add member
-    assert.dom('a#new-provider').exists();
+    assert.dom('a#add-provider').exists();
   });
 
   test('visiting repositories', async function(assert) {
@@ -72,7 +72,7 @@ module('Acceptance | staff_admin | admin', function(hooks) {
     assert.dom('div.panel.facets').exists();
 
     // staff can't add repositories here (needs to go to provider first)
-    assert.dom('button#add-repository').doesNotExist();
+    assert.dom('a#add-repository').doesNotExist();
   });
 
   test('visiting prefixes', async function(assert) {

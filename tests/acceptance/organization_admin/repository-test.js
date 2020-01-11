@@ -32,8 +32,8 @@ module('Acceptance | organization_admin | repository', function(hooks) {
     assert.equal(currentURL(), '/repositories/datacite.datacite/settings');
     assert.dom('h2.work').hasText('DataCite Repository');
     assert.dom('li a.nav-link.active').hasText('Settings');
-    assert.dom('button#edit-repository').includesText('Update Repository');
-    assert.dom('button#delete-repository').includesText('Delete');
+    assert.dom('a#edit-repository').includesText('Update Repository');
+    assert.dom('a#delete-repository').includesText('Delete');
   });
 
   test('visiting repository DataCite Journal prefixes', async function(assert) {

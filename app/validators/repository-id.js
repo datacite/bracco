@@ -6,7 +6,7 @@ const RepositoryId = BaseValidator.extend({
     if (value.startsWith(providerId)) {
       return true;
     } else {
-      let message = 'The Repository ID must beginn with ' + providerId;
+      let message = 'The Repository ID must begin with ' + providerId;
       return message;
     }
   },

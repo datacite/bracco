@@ -68,7 +68,7 @@ module('Acceptance | staff_admin | provider', function(hooks) {
     assert.dom('div.panel.facets').exists();
 
     // admin can add repository
-    assert.dom('a#new-repository').includesText('Add Repository');
+    assert.dom('a#add-repository').includesText('Add Repository');
   });
 
   test('visiting provider TIB dois', async function(assert) {

@@ -40,20 +40,20 @@ module('Acceptance | consortium_admin | provider', function(hooks) {
     assert.equal(currentURL(), '/providers/dc/settings');
     assert.dom('h2.work').hasText('DataCite Consortium');
     assert.dom('li a.nav-link.active').hasText('Settings');
-    assert.dom('button#set-password-provider').includesText('Set Password');
-    assert.dom('button#edit-provider').includesText('Update Account');
-    assert.dom('button#delete-provider').doesNotExist();
+    assert.dom('a#set-password-provider').includesText('Set Password');
+    assert.dom('a#edit-provider').includesText('Update Account');
+    assert.dom('a#delete-provider').doesNotExist();
   });
 
   test('editing provider DC settings', async function(assert) {
     await visit('/providers/dc/settings');
-    await click('button#edit-provider');
+    await click('a#edit-provider');
 
     assert.equal(currentURL(), '/providers/dc/settings');
     assert.dom('a.nav-link.active').hasText('Settings');
     assert.dom('h3.edit').hasText('Update Account');
-    assert.dom('button#set-password-provider').doesNotExist();
-    assert.dom('button#edit-provider').doesNotExist();
+    assert.dom('a#set-password-provider').doesNotExist();
+    assert.dom('a#edit-provider').doesNotExist();
 
     // await fillIn('input#provider-name-field', 'DataCite Consortium');
     // await click('button#cancel');
@@ -75,7 +75,7 @@ module('Acceptance | consortium_admin | provider', function(hooks) {
     assert.dom('div.panel.facets').doesNotExist();
 
     // consortium members can't add repositories
-    assert.dom('button#add-repository').doesNotExist();
+    assert.dom('a#add-repository').doesNotExist();
   });
 
   test('visiting provider DC dois', async function(assert) {
