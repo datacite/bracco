@@ -14,11 +14,11 @@ export default Model.extend({
   orcid: computed('id', function() {
     return 'https://orcid.org/' + this.id;
   }),
-  doiCount: computed('meta.dois', function() {
-    return this.get('meta.dois');
+  doiCount: computed('meta.published', function() {
+    return this.get('meta.published');
   }),
-  totalDoiCount: computed('meta.dois', function() {
-    return this.get('meta.dois').reduce(function(a, b) {
+  totalDoiCount: computed('meta.published', function() {
+    return this.get('meta.published').reduce(function (a, b) {
       return a + b.count;
     }, 0);
   }),

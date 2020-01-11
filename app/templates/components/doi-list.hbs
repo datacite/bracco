@@ -85,35 +85,68 @@
       </div>
     </div>
   {{/if}}
-  {{#if (or model.meta.created model.query.created)}}
-    <div class="panel facets">
-      <div class="panel-body">
-        <h4>Year created</h4>
-        <ul>
-          {{#if model.meta.created}}
-            {{#each model.meta.created as |year|}}
+  {{#if isPerson}}
+    {{#if (or model.meta.published model.query.published)}}
+      <div class="panel facets">
+        <div class="panel-body">
+          <h4>Year published</h4>
+          <ul>
+            {{#if model.meta.published}}
+              {{#each model.meta.published as |year|}}
+                <li>
+                  {{#if model.query.published}}
+                    {{#link-to link (query-params published='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+                  {{else}}
+                    {{#link-to link (query-params published=year.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                  {{/if}}
+                  <div class="facet-title">{{year.title}}</div>
+                  <span class="number pull-right">{{format-number year.count}}</span>
+                  <div class="clearfix"/>
+                </li>
+              {{/each}}
+            {{else}}
               <li>
-                {{#if model.query.created}}
-                  <LinkTo @route={{link}} @query={{hash created=''}}>{{fa-icon "check-square-o"}}</LinkTo>
-                {{else}}
-                  <LinkTo @route={{link}} @query={{hash created=year.id}}>{{fa-icon "square-o"}}</LinkTo>
-                {{/if}}
-                <div class="facet-title">{{year.title}}</div>
-                <span class="number pull-right">{{format-number year.count}}</span>
+                {{#link-to link (query-params published='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+                <div class="facet-title">{{model.query.published}}</div>
+                <span class="number pull-right">0</span>
                 <div class="clearfix"/>
               </li>
-            {{/each}}
-          {{else}}
-            <li>
-              <LinkTo @route={{link}} @query={{hash created=''}}>{{fa-icon "check-square-o"}}</LinkTo>
-              <div class="facet-title">{{model.query.created}}</div>
-              <span class="number pull-right">0</span>
-              <div class="clearfix"/>
-            </li>
-          {{/if}}
-        </ul>
+            {{/if}}
+          </ul>
+        </div>
       </div>
-    </div>
+    {{/if}}
+  {{else}}
+    {{#if (or model.meta.created model.query.created)}}
+      <div class="panel facets">
+        <div class="panel-body">
+          <h4>Year created</h4>
+          <ul>
+            {{#if model.meta.created}}
+              {{#each model.meta.created as |year|}}
+                <li>
+                  {{#if model.query.created}}
+                    {{#link-to link (query-params created='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+                  {{else}}
+                    {{#link-to link (query-params created=year.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                  {{/if}}
+                  <div class="facet-title">{{year.title}}</div>
+                  <span class="number pull-right">{{format-number year.count}}</span>
+                  <div class="clearfix"/>
+                </li>
+              {{/each}}
+            {{else}}
+              <li>
+                {{#link-to link (query-params created='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+                <div class="facet-title">{{model.query.created}}</div>
+                <span class="number pull-right">0</span>
+                <div class="clearfix"/>
+              </li>
+            {{/if}}
+          </ul>
+        </div>
+      </div>
+    {{/if}}
   {{/if}}
   {{#if (and (can "source doi" model) (or model.meta.registered model.query.registered))}}
     <div class="panel facets">
@@ -207,36 +240,38 @@
       </div>
     </div>
   {{/if}}
-  {{#if (or model.meta.prefixes model.query.prefix)}}
-    <div class="panel facets">
-      <div class="panel-body">
-        <h4>Prefix</h4>
-        <ul>
-          {{#if model.meta.prefixes}}
-            {{#each model.meta.prefixes as |prefix|}}
+  {{#unless isPerson}}
+    {{#if (or model.meta.prefixes model.query.prefix)}}
+      <div class="panel facets">
+        <div class="panel-body">
+          <h4>Prefix</h4>
+          <ul>
+            {{#if model.meta.prefixes}}
+              {{#each model.meta.prefixes as |prefix|}}
+                <li>
+                  {{#if model.query.prefix}}
+                    {{#link-to link (query-params prefix='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+                  {{else}}
+                    {{#link-to link (query-params prefix=prefix.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                  {{/if}}
+                  <div class="facet-title">{{prefix.title}}</div>
+                  <span class="number pull-right">{{format-number prefix.count}}</span>
+                  <div class="clearfix"/>
+                </li>
+              {{/each}}
+            {{else}}
               <li>
-                {{#if model.query.prefix}}
-                  <LinkTo @route={{link}} @query={{hash prefix=''}}>{{fa-icon "check-square-o"}}</LinkTo>
-                {{else}}
-                  <LinkTo @route={{link}} @query={{hash prefix=prefix.id}}>{{fa-icon "square-o"}}</LinkTo>
-                {{/if}}
-                <div class="facet-title">{{prefix.title}}</div>
-                <span class="number pull-right">{{format-number prefix.count}}</span>
+                {{#link-to link (query-params prefix='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+                <div class="facet-title">{{model.query.prefix}}</div>
+                <span class="number pull-right">0</span>
                 <div class="clearfix"/>
               </li>
-            {{/each}}
-          {{else}}
-            <li>
-              <LinkTo @route={{link}} @query={{hash prefix=''}}>{{fa-icon "check-square-o"}}</LinkTo>
-              <div class="facet-title">{{model.query.prefix}}</div>
-              <span class="number pull-right">0</span>
-              <div class="clearfix"/>
-            </li>
-          {{/if}}
-        </ul>
+            {{/if}}
+          </ul>
+        </div>
       </div>
-    </div>
-  {{/if}}
+    {{/if}}
+  {{/unless}}
   {{#if (or model.meta.certificates model.query.certificate)}}
     <div class="panel facets">
       <div class="panel-body">
@@ -376,6 +411,7 @@
             <a href={{doi.identifier}} data-test-identifier>{{fa-icon "external-link"}} {{doi.identifier}}</a>
           {{/if}}
         </div>
+        <br/>
       </div>
     {{/each}}
     <div class="text-center">
