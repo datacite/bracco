@@ -3,11 +3,11 @@ import fetch from 'fetch';
 import ENV from 'bracco/config/environment';
 
 export default Component.extend({
-  // didReceiveAttrs() {
-  //   this._super(...arguments);
+  didReceiveAttrs() {
+    this._super(...arguments);
 
-  //   this.generate();
-  // },
+    this.generate();
+  },
 
   generate() {
     let self = this;
@@ -23,5 +23,17 @@ export default Component.extend({
     }).catch(function(error) {
       console.debug(error);
     });
+  },
+
+  actions: {
+    generate() {
+      this.generate();
+    },
+    refresh() {
+      this.generate();
+    },
+    clear() {
+      this.model.set('symbol', null);
+    },
   },
 });

@@ -1,26 +1,18 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
+import { setupFactoryGuy, make } from 'ember-data-factory-guy';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
 module('Integration | Component | provider-id', function(hooks) {
   setupRenderingTest(hooks);
+  setupFactoryGuy(hooks);
 
   test('it renders', async function(assert) {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.set('myAction', function(val) { ... });
+    this.set('model', make('provider'));
 
-    await render(hbs`{{provider-id}}`);
+    await render(hbs`{{provider-id model=model}}`);
 
-    assert.equal(this.element.textContent.trim(), '');
-
-    // Template block usage:
-    await render(hbs`
-      {{#provider-id}}
-        template block text
-      {{/provider-id}}
-    `);
-
-    assert.equal(this.element.textContent.trim(), 'template block text');
+    assert.dom(this.element).hasText('');
   });
 });
