@@ -118,6 +118,6 @@ module('Acceptance | staff_admin | organization', function(hooks) {
     assert.dom('input#secondary-technical-contact-email').exists();
     assert.dom('input#is-active-field').exists();
 
-    assert.dom('button#update-provider').includesText('Update Member');
+    assert.dom('button#update-provider').includesText('Update Organization');
   });
 });

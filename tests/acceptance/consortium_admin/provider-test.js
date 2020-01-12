@@ -69,8 +69,8 @@ module('Acceptance | consortium_admin | provider', function(hooks) {
     assert.dom('.alert-warning').hasText('No repositories found.');
     assert.dom('div.panel.facets').doesNotExist();
 
-    // consortium members can't add repositories
-    assert.dom('a#add-repository').doesNotExist();
+    // consortium members can add repository
+    assert.dom('a#add-repository').includesText('Add Repository');
   });
 
   test('visiting provider DC dois', async function(assert) {
