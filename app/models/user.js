@@ -31,7 +31,7 @@ export default Model.extend({
     }, 0);
   }),
   currentDoiCount: computed('doiCount', function() {
-    let currentYear = A(this.doiCount).findBy('id', new Date().getFullYear());
+    let currentYear = A(this.doiCount).findBy('id', new Date().getFullYear().toString());
     if (currentYear) {
       return currentYear.count;
     } else {

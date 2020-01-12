@@ -224,4 +224,30 @@ module('Acceptance | staff_admin | provider', function(hooks) {
 
     assert.dom('button#update-provider').includesText('Update Member');
   });
+
+  test('editing provider TIB password form', async function(assert) {
+    await visit('/providers/tib/change');
+
+    assert.equal(currentURL(), '/providers/tib/change');
+    assert.dom('h2.work').hasText('German National Library of Science and Technology');
+    assert.dom('div.tab-content').exists();
+
+    assert.dom('input#password-input-field').exists();
+    assert.dom('input#confirm-password-input-field').exists();
+
+    assert.dom('button[type=submit]').includesText('Set Password');
+  });
+
+  test('editing provider TIB delete form', async function(assert) {
+    await visit('/providers/tib/delete');
+
+    assert.equal(currentURL(), '/providers/tib/delete');
+    assert.dom('h2.work').hasText('German National Library of Science and Technology');
+    assert.dom('div.tab-content').exists();
+
+    assert.dom('div.alert-danger').hasText('You need to delete all repositories before you can delete the TIB provider.');
+
+    assert.dom('input#confirm-symbol-field').doesNotExist();
+    assert.dom('button#delete').doesNotExist();
+  });
 });

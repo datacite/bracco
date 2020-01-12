@@ -141,4 +141,30 @@ module('Acceptance | staff_admin | repository', function(hooks) {
 
     assert.dom('button#update-repository').includesText('Update Repository');
   });
+
+  test('editing repository AWI password form', async function(assert) {
+    await visit('/repositories/tib.awi/change');
+
+    assert.equal(currentURL(), '/repositories/tib.awi/change');
+    assert.dom('h2.work').hasText('Alfred Wegener Institute');
+    assert.dom('div.tab-content').exists();
+
+    assert.dom('input#password-input-field').exists();
+    assert.dom('input#confirm-password-input-field').exists();
+
+    assert.dom('button[type=submit]').includesText('Set Password');
+  });
+
+  test('editing repository AWI delete form', async function(assert) {
+    await visit('/repositories/tib.awi/delete');
+
+    assert.equal(currentURL(), '/repositories/tib.awi/delete');
+    assert.dom('h2.work').hasText('Alfred Wegener Institute');
+    assert.dom('div.tab-content').exists();
+
+    assert.dom('div.alert-danger').hasText('You need to transfer all DOIs to another repository before you can delete the TIB.AWI repository.');
+
+    assert.dom('input#confirm-symbol-field').doesNotExist();
+    assert.dom('button#delete').doesNotExist();
+  });
 });

@@ -27,13 +27,13 @@
         <BsForm @formLayout="vertical" @model={{model}} @onSubmit={{action "submit" model}} @submitOnEnter={{true}} as |form|>
           <form.group>
             <label class="control-label">Are you sure you want to delete the {{uppercase model.id}} provider? This action cannot be undone.</label>
-            <form.element @controlType="text" @property="confirmSymbol" @showValidationOn="input" @autofocus={{true}} @helpText="Please add the Member ID to delete." />
+            <form.element @controlType="text" @id="confirm-symbol" @property="confirmSymbol" @showValidationOn="input" @autofocus={{true}} @helpText="Please add the Member ID to delete." />
           </form.group>
           
           <div class="pseudo-footer">
             <div class="btn-toolbar pull-right">
-              <button {{action "cancel" model}} class="btn btn-sm">Cancel</button>
-              <button {{action "submit"}} disabled={{v-get model 'confirmSymbol' 'isInvalid'}} class="btn btn-sm btn-fill">Delete</button>
+              <button {{action "cancel" model}} id="cancel" class="btn btn-sm">Cancel</button>
+              <button {{action "submit"}} id="delete" disabled={{v-get model 'confirmSymbol' 'isInvalid'}} class="btn btn-sm btn-fill">Delete</button>
             </div>
             <div class="clearfix"/>
           </div>

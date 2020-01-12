@@ -41,26 +41,21 @@ module('Acceptance | consortium_admin | provider', function(hooks) {
     assert.dom('h2.work').hasText('DataCite Consortium');
     assert.dom('li a.nav-link.active').hasText('Settings');
     assert.dom('a#set-password-provider').includesText('Set Password');
-    assert.dom('a#edit-provider').includesText('Update Account');
+    assert.dom('a#edit-provider').includesText('Update Member');
     assert.dom('a#delete-provider').doesNotExist();
   });
 
-  test('editing provider DC settings', async function(assert) {
+  test('going to provider DC edit form', async function(assert) {
     await visit('/providers/dc/settings');
-    await click('a#edit-provider');
 
     assert.equal(currentURL(), '/providers/dc/settings');
-    assert.dom('a.nav-link.active').hasText('Settings');
-    assert.dom('h3.edit').hasText('Update Account');
-    assert.dom('a#set-password-provider').doesNotExist();
-    assert.dom('a#edit-provider').doesNotExist();
+    assert.dom('a#edit-provider').includesText('Update Member');
 
-    // await fillIn('input#provider-name-field', 'DataCite Consortium');
-    // await click('button#cancel');
+    await click('a#edit-provider');
 
-    // assert.equal(currentURL(), '/providers/dc/settings');
-    // assert.dom('h2.work').hasText('DataCite Consortium');
-    // assert.dom('a.nav-link.active').hasText('Settings');
+    assert.equal(currentURL(), '/providers/dc/edit');
+    assert.dom('h2.work').hasText('DataCite Consortium');
+    assert.dom('input#member-id-field').exists();
   });
 
   test('visiting provider DC repositories', async function(assert) {

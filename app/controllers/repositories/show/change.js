@@ -7,15 +7,6 @@ export default Controller.extend({
   currentUser: service(),
 
   actions: {
-    setPassword(repository) {
-      let self = this;
-      repository.set('keepPassword', false);
-      repository.save().then(function(repository) {
-        self.transitionToRoute('repositories.show.settings', repository);
-      }).catch(function(reason) {
-        console.debug(reason);
-      });
-    },
     generate() {
       let self = this;
       let url = ENV.API_URL + '/random';
@@ -37,6 +28,7 @@ export default Controller.extend({
     },
     submit(repository) {
       let self = this;
+      repository.set('keepPassword', false);
       repository.save().then(function(repository) {
         self.transitionToRoute('repositories.show.settings', repository);
       }).catch(function(reason) {

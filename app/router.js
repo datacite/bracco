@@ -69,6 +69,8 @@ Router.map(function() {
   });
   this.route('settings', function() {
     this.route('index', { path: '/' });
+    this.route('edit');
+    this.route('change');
   });
   this.route('sign-in');
   this.route('authorize');

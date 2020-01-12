@@ -7,7 +7,7 @@ export default Route.extend({
 
   model() {
     let provider = this.modelFor('providers/show');
-    let repository = this.store.createRecord('repository', { provider: provider.get('id'), symbol: provider.get('id').toUpperCase() + '.', clientType: 'repository', language: [], repositoryType: [], certificate: [] });
+    let repository = this.store.createRecord('repository', { provider: provider.get('id'), clientType: 'repository', language: [], repositoryType: [], certificate: [] });
 
     repository.get('language').pushObject('');
     repository.get('repositoryType').pushObject('');
