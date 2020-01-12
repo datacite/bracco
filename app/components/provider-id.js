@@ -3,7 +3,7 @@ import fetch from 'fetch';
 import ENV from 'bracco/config/environment';
 
 export default Component.extend({
-  didReceiveAttrs() {
+  init() {
     this._super(...arguments);
 
     this.generate();

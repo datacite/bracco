@@ -133,10 +133,10 @@ export default Controller.extend({
         this.model.set('rorId', null);
       }
     },
-    submit(provider) {
+    submit() {
       let self = this;
-      provider.save().then(function(provider) {
-        self.transitionToRoute('providers.show.settings', provider.id);
+      this.model.save().then(function(provider) {
+        self.transitionToRoute('providers.show.settings', provider);
       }).catch(function(reason) {
         console.debug(reason);
       });

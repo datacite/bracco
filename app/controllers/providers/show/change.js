@@ -26,10 +26,10 @@ export default Controller.extend({
         console.debug(error);
       });
     },
-    submit(provider) {
+    submit() {
       let self = this;
-      provider.set('keepPassword', false);
-      provider.save().then(function(provider) {
+      this.model.set('keepPassword', false);
+      this.model.save().then(function(provider) {
         self.transitionToRoute('providers.show.settings', provider);
       }).catch(function(reason) {
         console.debug(reason);
