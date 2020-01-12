@@ -7,7 +7,19 @@ export default Route.extend({
 
   model() {
     let provider = this.modelFor('providers/show');
-    let organization = this.store.createRecord('provider', { consortium: provider, memberType: 'consortium_organization', isActive: true });
+    let organization = this.store.createRecord('provider', {
+      consortium: provider,
+      memberType: 'consortium_organization',
+      billingInformation: {},
+      technicalContact: this.store.createFragment('contact'),
+      secondaryTechnicalContact: this.store.createFragment('contact'),
+      billingContact: this.store.createFragment('contact'),
+      secondaryBillingContact: this.store.createFragment('contact'),
+      serviceContact: this.store.createFragment('contact'),
+      secondaryServiceContact: this.store.createFragment('contact'),
+      votingContact: this.store.createFragment('contact'),
+      isActive: true,
+    });
 
     return hash({
       provider,
