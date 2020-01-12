@@ -7,7 +7,7 @@ export default Route.extend({
 
   model() {
     let provider = this.modelFor('providers/show');
-    let organization = this.store.createRecord('provider', { consortium: provider.get('id') });
+    let organization = this.store.createRecord('provider', { consortium: provider, memberType: 'consortium_organization', isActive: true });
 
     return hash({
       provider,

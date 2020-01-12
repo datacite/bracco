@@ -22,7 +22,7 @@ export default Controller.extend({
     searchRor(query) {
       let self = this;
       this.store.query('ror', { query }).then(function(organizations) {
-        self.model.set('organizations', organizations);
+        self.set('organizations', organizations);
       });
     },
     selectRor(ror) {
@@ -33,6 +33,7 @@ export default Controller.extend({
       } else {
         this.model.set('rorId', null);
       }
+      this.set('organizations', []);
     },
     submit(provider) {
       let self = this;

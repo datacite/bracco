@@ -16,7 +16,7 @@
 
         <form.element @controlType="power-select" @id="ror-id" @label="Organization identifier (optional)" @property="rorId" @optionLabelPath="rorId" @options={{organizations}} @destination={{rorId}} @helpText="Organization identifiers are provided by the Research Organization Registry (ROR)." as |el|>
           <el.control @onChange={{action "selectRor"}} @search={{action "searchRor"}} @placeholder="Select Organization" @searchPlaceholder="Type to search..." @allowClear={{true}} as |item|>
-            {{if item.name item.name provider.rorId}}
+            {{if item.name item.name model.provider.rorId}}
           </el.control>
         </form.element>
 

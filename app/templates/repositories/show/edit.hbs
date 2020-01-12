@@ -24,8 +24,8 @@
         <RepositoryIssn @model={{model}} @fragment={{model.issn}} @form={{form}} />
       {{/if}}
 
-      <form.element @controlType="text" @id="name" @label="Repository Name" @property="name" @required={{false}} />
-      <form.element @controlType="text" @id="alternate-name" @label="Alternate Repository Name (optional)" @property="alternateName" @required={{false}} />
+      <form.element @controlType="text" @id="name" @label="Name" @property="name" @required={{false}} />
+      <form.element @controlType="text" @id="alternate-name" @label="Alternate Name (optional)" @property="alternateName" @required={{false}} />
       <form.element @controlType="email" @id="system-email" @label="System Email" @property="systemEmail" @helpText="This is the email used for sending password reset requests and similar system notifications." @required={{false}} />
       
       <div class="form-group">

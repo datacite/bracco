@@ -39,9 +39,9 @@
           <a href="{{model.website}}">{{model.website}}</a>
         {{/if}}
 
-        {{#if twitterUrl}}
+        {{#if model.twitterHandle}}
           <h5>Twitter</h5>
-          <a href="{{twitterUrl}}">{{twitterUrl}}</a>
+          <a href="{{twitter-url model.twitterHandle}}">{{twitter-url model.twitterHandle}}</a>
         {{/if}}
 
         {{#if model.country}}

@@ -6,7 +6,7 @@
         <span class="help-block">Click <a class="action-link" {{action "generate"}}>here</a> for a password suggestion.</span>
       </div>
 
-      <BsForm @formLayout="horizontal" @horizontalLabelGridClass="col-md-3" @model={{model}} @onSubmit={{action "submit" model}} @submitOnEnter={{true}} as |form|>
+      <BsForm @formLayout="horizontal" @horizontalLabelGridClass="col-md-3" @model={{model}} @onSubmit={{action "submit"}} @submitOnEnter={{true}} as |form|>
         <form.element @controlType="text" @id="password-input" @property="passwordInput" @label="New Password" @required={{false}} />
         <form.element @controlType="text" @id="confirm-password-input" @property="confirmPasswordInput" @label="Confirm Password" @required={{false}} />
 

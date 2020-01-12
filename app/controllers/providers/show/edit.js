@@ -48,9 +48,7 @@ export default Controller.extend({
   focusAreas: focusAreaList,
   nonProfitStatusList,
   nonProfitStatuses: nonProfitStatusList,
-
   organizations: [],
-  consortia: [],
 
   actions: {
     searchCountry(query) {
@@ -121,7 +119,7 @@ export default Controller.extend({
     searchRor(query) {
       let self = this;
       this.store.query('ror', { query }).then(function(organizations) {
-        self.model.set('organizations', organizations);
+        self.set('organizations', organizations);
       });
     },
     selectRor(ror) {
@@ -132,6 +130,7 @@ export default Controller.extend({
       } else {
         this.model.set('rorId', null);
       }
+      this.set('organizations', []);
     },
     submit() {
       let self = this;
