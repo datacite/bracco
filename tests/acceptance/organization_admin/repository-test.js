@@ -36,6 +36,17 @@ module('Acceptance | organization_admin | repository', function(hooks) {
     assert.dom('a#delete-repository').includesText('Delete');
   });
 
+  test('visiting repository DataCite RPH', async function(assert) {
+    await visit('/repositories/datacite.rph');
+
+    assert.equal(currentURL(), '/repositories/datacite.rph');
+    assert.dom('h2.work').hasText('DataCite Test RPH');
+    assert.dom('li a.nav-link.active').hasText('Info');
+
+    // repository charts are displayed
+    assert.dom('#chart-doi-title').includesText('DOIs by year');
+  });
+
   test('visiting repository DataCite Journal prefixes', async function(assert) {
     await visit('/repositories/datacite.datacite/prefixes');
 

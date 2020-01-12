@@ -69,7 +69,25 @@ module('Acceptance | consortium_admin | provider', function(hooks) {
     assert.dom('.alert-warning').hasText('No repositories found.');
     assert.dom('div.panel.facets').doesNotExist();
 
-    // consortium members can add repository
+    // consortium members can't add repositories here
+    // (need to go to consortium organization first)
+    assert.dom('a#add-repository').doesNotExist();
+  });
+
+  test('visiting provider DataCite repositories', async function(assert) {
+    await visit('/providers/datacite/repositories');
+
+    assert.equal(currentURL(), '/providers/datacite/repositories');
+    assert.dom('h2.work').hasText('DataCite');
+    assert.dom('a.nav-link.active').hasText('Repositories');
+    assert.dom('div#search').exists();
+
+    // at least one repository exists
+    assert.dom('[data-test-results]').includesText('Repositories');
+    assert.dom('[data-test-repository]').exists();
+    assert.dom('div.panel.facets').exists();
+
+    // provider can add repository
     assert.dom('a#add-repository').includesText('Add Repository');
   });
 
