@@ -6,7 +6,6 @@ export default Route.extend({
   can: service(),
   features: service(),
   headData: service(),
-  currentUser: service(),
 
   model(params) {
     let self = this;

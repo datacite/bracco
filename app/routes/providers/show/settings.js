@@ -4,7 +4,6 @@ import { inject as service } from '@ember/service';
 export default Route.extend({
   can: service(),
   features: service(),
-  currentUser: service(),
 
   model() {
     return this.modelFor('providers/show');
