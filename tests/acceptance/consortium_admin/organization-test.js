@@ -35,6 +35,6 @@ module('Acceptance | consortium_admin | organization', function(hooks) {
     assert.dom('div.panel.facets').exists();
 
     // consortium member can add consortium organizations
-    assert.dom('button#add-organization').includesText('Add Organization');
+    assert.dom('a#add-organization').includesText('Add Organization');
   });
 });

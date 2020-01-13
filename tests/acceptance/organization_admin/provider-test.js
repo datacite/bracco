@@ -1,6 +1,11 @@
 import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
-import { currentURL, visit, click, fillIn } from '@ember/test-helpers';
+import {
+  currentURL,
+  visit,
+  click,
+  // fillIn
+} from '@ember/test-helpers';
 import { authenticateSession } from 'ember-simple-auth/test-support';
 
 module('Acceptance | organization_admin | provider', function(hooks) {
@@ -33,26 +38,21 @@ module('Acceptance | organization_admin | provider', function(hooks) {
     assert.equal(currentURL(), '/providers/datacite/settings');
     assert.dom('h2.work').hasText('DataCite');
     assert.dom('li a.nav-link.active').hasText('Settings');
-    assert.dom('button#edit-provider').includesText('Update Account');
-    assert.dom('button#delete-provider').doesNotExist();
+    assert.dom('a#edit-provider').includesText('Update Organization');
+    assert.dom('a#delete-provider').doesNotExist();
   });
 
-  test('editing provider DataCite settings', async function(assert) {
+  test('going to provider DataCite edit form', async function(assert) {
     await visit('/providers/datacite/settings');
 
     assert.equal(currentURL(), '/providers/datacite/settings');
+    assert.dom('a#edit-provider').includesText('Update Organization');
+
+    await click('a#edit-provider');
+
+    assert.equal(currentURL(), '/providers/datacite/edit');
     assert.dom('h2.work').hasText('DataCite');
-    assert.dom('li a.nav-link.active').hasText('Settings');
-    assert.dom('button#edit-provider').exists();
-    assert.dom('button#delete-provider').doesNotExist();
-
-    await click('button#edit-provider');
-    await fillIn('input#display-name-field', 'DataCite II');
-    await click('button[type=submit]');
-
-    assert.equal(currentURL(), '/providers/datacite/settings');
-    assert.dom('h2.work').hasText('DataCite II');
-    assert.dom('li a.nav-link.active').hasText('Settings');
+    assert.dom('input#member-id-field').exists();
   });
 
   test('visiting provider DataCite repositories', async function(assert) {
@@ -69,7 +69,7 @@ module('Acceptance | organization_admin | provider', function(hooks) {
     assert.dom('div.panel.facets').exists();
 
     // provider can add repository
-    assert.dom('button#add-repository').includesText('Add Repository');
+    assert.dom('a#add-repository').includesText('Add Repository');
   });
 
   test('visiting provider DataCite dois', async function(assert) {
