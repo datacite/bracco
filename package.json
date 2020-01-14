@@ -1,6 +1,6 @@
 {
   "name": "bracco",
-  "version": "3.3.2",
+  "version": "3.3.4",
   "private": true,
   "description": "Fabrica",
   "repository": {
@@ -67,7 +67,6 @@
     "ember-responsive": "^3.0.5",
     "fastboot-app-server": "^2.0.0",
     "fs-extra": "^8.1.0",
-    "graphql-request": "^1.8.2",
     "is-electron": "^2.2.0",
     "iso-639-1": "^2.1.0",
     "junk": "^3.1.0",
@@ -171,7 +170,7 @@
     "ember-radio-button": "^2.0.1",
     "ember-resolver": "^7.0.0",
     "ember-route-action-helper": "^2.0.7",
-    "ember-simple-auth": "^2.1.1",
+    "ember-simple-auth": "^1.9.2",
     "ember-source": "^3.12.1",
     "ember-test-selectors": "^3.0.0",
     "ember-tracker": "^1.0.0",
