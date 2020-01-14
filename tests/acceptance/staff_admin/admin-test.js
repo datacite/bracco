@@ -38,7 +38,41 @@ module('Acceptance | staff_admin | admin', function(hooks) {
 
     assert.equal(currentURL(), '/settings');
     assert.dom('h2.work').hasText('DataCite');
+    assert.dom('div.tab-content').exists();
     assert.dom('li a.nav-link.active').hasText('Settings');
+  });
+
+  test('editing admin settings form', async function(assert) {
+    assert.expect(11);
+
+    await visit('/settings/edit');
+
+    assert.equal(currentURL(), '/settings/edit');
+    assert.dom('h2.work').hasText('DataCite');
+    assert.dom('div.tab-content').exists();
+
+    assert.dom('input#member-id-field').exists();
+    assert.dom('input#system-email-field').exists();
+    assert.dom('input#website-field').exists();
+    assert.dom('input#twitter-handle-field').exists();
+    assert.dom('div#ror-id').exists();
+    assert.dom('div#country').exists();
+    assert.dom('textarea#description-field').exists();
+
+    assert.dom('button#update-provider').includesText('Update Account');
+  });
+
+  test('editing admin password form', async function(assert) {
+    await visit('/settings/change');
+
+    assert.equal(currentURL(), '/settings/change');
+    assert.dom('h2.work').hasText('DataCite');
+    assert.dom('div.tab-content').exists();
+
+    assert.dom('input#password-input-field').exists();
+    assert.dom('input#confirm-password-input-field').exists();
+
+    assert.dom('button[type=submit]').includesText('Set Password');
   });
 
   test('visiting members', async function(assert) {
@@ -55,7 +89,7 @@ module('Acceptance | staff_admin | admin', function(hooks) {
     assert.dom('div.panel.facets').exists();
 
     // staff can add member
-    assert.dom('button#add-provider').exists();
+    assert.dom('a#add-provider').exists();
   });
 
   test('visiting repositories', async function(assert) {
@@ -72,7 +106,7 @@ module('Acceptance | staff_admin | admin', function(hooks) {
     assert.dom('div.panel.facets').exists();
 
     // staff can't add repositories here (needs to go to provider first)
-    assert.dom('button#add-repository').doesNotExist();
+    assert.dom('a#add-repository').doesNotExist();
   });
 
   test('visiting prefixes', async function(assert) {

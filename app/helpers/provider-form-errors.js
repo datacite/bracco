@@ -11,7 +11,7 @@ export function providerFormErrors([ model ]) {
   if (model.secondaryTechnicalContact && isPresent(model.secondaryTechnicalContact.validations.errors)) {
     errorAttributes = errorAttributes.concat('secondary technical contact ' + model.secondaryTechnicalContact.validations.errors.mapBy('attribute'));
   }
-  if (model.secondaryServiceContact && isPresent(model.secondaryServiceContact.validations.errors)) {
+  if (model.serviceContact && isPresent(model.serviceContact.validations.errors)) {
     errorAttributes = errorAttributes.concat('service contact ' + model.serviceContact.validations.errors.mapBy('attribute'));
   }
   if (model.secondaryServiceContact && isPresent(model.secondaryServiceContact.validations.errors)) {

@@ -19,7 +19,7 @@
         {{#if (is-empty (doi-form-errors model.doi))}}
           <button type="submit" id="doi-create" class="btn btn-sm btn-fill" disabled={{false}}>Create DOI</button>
         {{else}}
-          <BsAlert @dismissible={{false}} @type="warning">
+          <BsAlert @dismissible={{false}} @type="danger">
             To save this DOI, first resolve the errors with these fields: {{doi-form-errors model.doi}}.
           </BsAlert>
 
