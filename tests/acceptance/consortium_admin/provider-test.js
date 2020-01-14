@@ -40,22 +40,27 @@ module('Acceptance | consortium_admin | provider', function(hooks) {
     assert.equal(currentURL(), '/providers/dc/settings');
     assert.dom('h2.work').hasText('DataCite Consortium');
     assert.dom('li a.nav-link.active').hasText('Settings');
-    assert.dom('a#set-password-provider').includesText('Set Password');
-    assert.dom('a#edit-provider').includesText('Update Member');
-    assert.dom('a#delete-provider').doesNotExist();
+    assert.dom('button#set-password-provider').includesText('Set Password');
+    assert.dom('button#edit-provider').includesText('Update Account');
+    assert.dom('button#delete-provider').doesNotExist();
   });
 
-  test('going to provider DC edit form', async function(assert) {
+  test('editing provider DC settings', async function(assert) {
     await visit('/providers/dc/settings');
+    await click('button#edit-provider');
 
     assert.equal(currentURL(), '/providers/dc/settings');
-    assert.dom('a#edit-provider').includesText('Update Member');
+    assert.dom('a.nav-link.active').hasText('Settings');
+    assert.dom('h3.edit').hasText('Update Account');
+    assert.dom('button#set-password-provider').doesNotExist();
+    assert.dom('button#edit-provider').doesNotExist();
 
-    await click('a#edit-provider');
+    // await fillIn('input#provider-name-field', 'DataCite Consortium');
+    // await click('button#cancel');
 
-    assert.equal(currentURL(), '/providers/dc/edit');
-    assert.dom('h2.work').hasText('DataCite Consortium');
-    assert.dom('input#member-id-field').exists();
+    // assert.equal(currentURL(), '/providers/dc/settings');
+    // assert.dom('h2.work').hasText('DataCite Consortium');
+    // assert.dom('a.nav-link.active').hasText('Settings');
   });
 
   test('visiting provider DC repositories', async function(assert) {
@@ -69,26 +74,8 @@ module('Acceptance | consortium_admin | provider', function(hooks) {
     assert.dom('.alert-warning').hasText('No repositories found.');
     assert.dom('div.panel.facets').doesNotExist();
 
-    // consortium members can't add repositories here
-    // (need to go to consortium organization first)
-    assert.dom('a#add-repository').doesNotExist();
-  });
-
-  test('visiting provider DataCite repositories', async function(assert) {
-    await visit('/providers/datacite/repositories');
-
-    assert.equal(currentURL(), '/providers/datacite/repositories');
-    assert.dom('h2.work').hasText('DataCite');
-    assert.dom('a.nav-link.active').hasText('Repositories');
-    assert.dom('div#search').exists();
-
-    // at least one repository exists
-    assert.dom('[data-test-results]').includesText('Repositories');
-    assert.dom('[data-test-repository]').exists();
-    assert.dom('div.panel.facets').exists();
-
-    // provider can add repository
-    assert.dom('a#add-repository').includesText('Add Repository');
+    // consortium members can't add repositories
+    assert.dom('button#add-repository').doesNotExist();
   });
 
   test('visiting provider DC dois', async function(assert) {

@@ -164,7 +164,7 @@ export default DS.Model.extend(Validations, {
     return this.get('meta.dois');
   }),
   currentDoiCount: computed('doiCount', function() {
-    let currentYear = A(this.doiCount).findBy('id', new Date().getFullYear().toString());
+    let currentYear = A(this.doiCount).findBy('id', new Date().getFullYear());
     if (currentYear) {
       return currentYear.count;
     } else {
@@ -180,7 +180,7 @@ export default DS.Model.extend(Validations, {
     return this.get('meta.clients');
   }),
   currentRepositoryCount: computed('repositoryCount', function() {
-    let currentYear = A(this.repositoryCount).findBy('id', new Date().getFullYear().toString());
+    let currentYear = A(this.repositoryCount).findBy('id', new Date().getFullYear());
     if (currentYear) {
       return currentYear.count;
     } else {

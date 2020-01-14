@@ -1,7 +1,10 @@
-import { inject as service } from '@ember/service';
 import Component from '@ember/component';
+import { inject as service } from '@ember/service';
+import fetch from 'fetch';
 import countryList from 'iso-3166-country-list';
 import ENV from 'bracco/config/environment';
+import { computed } from '@ember/object';
+import { isEmpty } from '@ember/utils';
 
 const organizationTypeList = [
   'researchInstitution',
@@ -37,12 +40,13 @@ const nonProfitStatusList = [
 ];
 
 export default Component.extend({
+  currentUser: service(),
   store: service(),
 
-  tagName: 'div',
-  classNames: [ 'row' ],
+  edit: false,
+  change: false,
+  delete: false,
   provider: null,
-  new: false,
   countryList,
   countries: null,
   organizationTypeList,
@@ -51,15 +55,49 @@ export default Component.extend({
   memberTypes: memberTypeList,
   focusAreaList,
   focusAreas: focusAreaList,
-  organizations: [],
+  nonProfitStatusList,
+  nonProfitStatuses: nonProfitStatusList,
 
+  organizations: [],
+  consortia: [],
+
+  twitterUrl: computed('model.twitterHandle', function() {
+    if (this.model.get('twitterHandle')) {
+      return 'https://twitter.com/' + this.model.get('twitterHandle').substr(1);
+    } else {
+      return null;
+    }
+  }),
+
+  // didReceiveAttrs() {
+  //   this._super(...arguments);
+  //   let self = this;
+  //   this.set('isBillingEmpty', Object.values(self.get('model.billingInformation')).some(this.hasEmptyBilling));
+  // },
+
+  // didReceiveAttrs() {
+  //   this._super(...arguments);
+
+  //   this.searchConsortium(null);
+  // },
+
+  reset() {
+    this.provider.set('passwordInput', null);
+    this.set('edit', false);
+    this.set('change', false);
+    this.set('delete', false);
+  },
   generate() {
     let self = this;
-    let url = ENV.API_URL + '/providers/random';
-    fetch(url).then(function(response) {
+    let url = ENV.API_URL + '/random';
+    fetch(url, {
+      headers: {
+        'Authorization': 'Bearer ' + this.currentUser.get('jwt'),
+      },
+    }).then(function(response) {
       if (response.ok) {
         response.json().then(function(data) {
-          self.get('provider').set('symbol', data.symbol);
+          self.get('model').set('passwordInput', data.phrase);
         });
       } else {
         console.debug(response);
@@ -68,10 +106,15 @@ export default Component.extend({
       console.debug(error);
     });
   },
-  reset() {
-    this.set('provider', null);
-    this.set('new', false);
-  },
+  isBillingEmpty: computed('billingInformation', function() {
+    return isEmpty(this.model.get('billingInformation.city')) &&
+    isEmpty(this.model.get('billingInformation.postCode')) &&
+    isEmpty(this.model.get('billingInformation.state')) &&
+    isEmpty(this.model.get('billingInformation.department')) &&
+    isEmpty(this.model.get('billingInformation.organization')) &&
+    isEmpty(this.model.get('billingInformation.country')) &&
+    isEmpty(this.model.get('billingInformation.address'));
+  }),
   searchCountry(query) {
     let countries = countryList.filter(function(country) {
       return country.name.toLowerCase().startsWith(query.toLowerCase());
@@ -92,6 +135,15 @@ export default Component.extend({
     this.provider.set('organizationType', organizationType);
     this.set('organizationTypes', organizationTypeList);
   },
+  selectRor(ror) {
+    if (ror) {
+      this.provider.set('rorId', ror.id);
+      this.provider.set('name', ror.name);
+      this.provider.set('displayName', ror.name);
+    } else {
+      this.provider.set('rorId', null);
+    }
+  },
   searchMemberType(query) {
     let memberTypes = memberTypeList.filter(function(memberType) {
       return memberType.startsWith(query.toLowerCase());
@@ -101,12 +153,6 @@ export default Component.extend({
   selectMemberType(memberType) {
     this.provider.set('memberType', memberType);
     this.set('memberTypes', memberTypeList);
-  },
-  searchConsortium(query) {
-    this.set('consortia', this.store.query('provider', { query, 'member-type': 'consortium', sort: 'name', 'page[size]': 100 }));
-  },
-  selectConsortium(consortium) {
-    this.provider.set('consortium', consortium);
   },
   searchFocusArea(query) {
     let focusAreas = focusAreaList.filter(function(focusArea) {
@@ -128,49 +174,81 @@ export default Component.extend({
     this.provider.set('nonProfitStatus', nonProfitStatus);
     this.set('nonProfitStatuses', nonProfitStatusList);
   },
+  searchConsortium(query) {
+    this.set('consortia', this.store.query('provider', { query, 'member-type': 'consortium', sort: 'name', 'page[size]': 100 }));
+  },
+  selectConsortium(consortium) {
+    this.provider.set('consortium', consortium);
+  },
   selectBillingCountry(billingCountry) {
-    this.provider.set('billingInformationCountry', billingCountry);
     this.provider.set('billingInformation.country', billingCountry);
     this.set('countries', countryList);
   },
-
+  setBillingCountry(billingCountry) {
+    this.set('billingInformationCountry', billingCountry);
+    this.provider.set('billingInformationCountry', billingCountry);
+    this.set('countries', countryList);
+  },
+  hasEmptyBilling(el) {
+    return el === '';
+  },
   actions: {
-    new() {
-      this.set('provider', this.store.createRecord('provider', { billingInformation: {}, technicalContact: {}, isActive: true }));
+    edit(provider) {
+      this.set('provider', provider);
+      this.provider.set('confirmSymbol', provider.get('symbol'));
       this.set('countries', countryList);
+      this.set('edit', true);
+      this.selectRor(provider.get('rorId'));
+    },
+    change(provider) {
+      this.set('provider', provider);
+      this.provider.set('confirmSymbol', provider.get('symbol'));
+      this.provider.set('passwordInput', null);
+      this.set('change', true);
+    },
+    generate() {
       this.generate();
-      this.set('new', true);
+    },
+    delete(provider) {
+      this.set('provider', provider);
+      this.provider.set('confirmSymbol', null);
+      this.set('delete', true);
+    },
+    setPassword() {
+      let self = this;
+      this.provider.set('keepPassword', false);
+      this.provider.save().then(function() {
+        self.reset();
+      }).catch(function(reason) {
+        console.debug(reason);
+      });
     },
     submit(provider) {
       let self = this;
-
-      // this.provider.set('billingInformation', {
-      //   address: this.provider.get('billingInformationAddress'),
-      //   organization: this.provider.get('billingInformationOrganization'),
-      //   department: this.provider.get('billingInformationDepartment'),
-      //   city: this.provider.get('billingInformationCity'),
-      //   state: this.provider.get('billingInformationState'),
-      //   postCode: this.provider.get('billingInformationPostCode'),
-      //   country: this.provider.get('billingInformationCountry')
-      // });
-
-      provider.save().then(function(provider) {
-        self.router.transitionTo('providers.show.settings', provider.id);
-        self.set('new', false);
+      provider.save().then(function() {
+        self.reset();
       }).catch(function(reason) {
         console.debug(reason);
+      });
+    },
+    destroy() {
+      let self = this;
+      this.store.findRecord('provider', this.provider.get('id'), { backgroundReload: false }).then(function(provider) {
+        provider.destroyRecord().then(function() {
+          self.router.transitionTo('/providers');
+        }).catch(function(reason) {
+          console.debug(reason);
+        });
       });
     },
     cancel() {
       this.provider.rollbackAttributes();
       this.reset();
     },
-    refresh() {
-      this.generate();
+    onSuccess() {
     },
-    clear() {
-      this.provider.set('symbol', null);
-      // this.$('input[type=text]:first').focus();
+    onError(error) {
+      console.debug(error);
     },
     searchCountry(query) {
       this.searchCountry(query);
@@ -218,13 +296,7 @@ export default Component.extend({
       });
     },
     selectRor(ror) {
-      if (ror) {
-        this.provider.set('rorId', ror.id);
-        this.provider.set('name', ror.name);
-        this.provider.set('displayName', ror.name);
-      } else {
-        this.provider.set('rorId', null);
-      }
+      this.selectRor(ror);
     },
   },
 });

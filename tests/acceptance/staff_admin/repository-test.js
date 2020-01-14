@@ -31,8 +31,8 @@ module('Acceptance | staff_admin | repository', function(hooks) {
     assert.equal(currentURL(), '/repositories/tib.awi/settings');
     assert.dom('h2.work').hasText('Alfred Wegener Institute');
     assert.dom('li a.nav-link.active').hasText('Settings');
-    assert.dom('a#edit-repository').includesText('Update Repository');
-    assert.dom('a#delete-repository').includesText('Delete');
+    assert.dom('button#edit-repository').includesText('Update Repository');
+    assert.dom('button#delete-repository').includesText('Delete');
   });
 
   test('visiting repository RPH prefixes', async function(assert) {
@@ -76,95 +76,5 @@ module('Acceptance | staff_admin | repository', function(hooks) {
     assert.dom('a#new-doi').exists();
     assert.dom('a#upload-doi').exists();
     assert.dom('a#transfer-dois').includesText('Transfer');
-  });
-
-  test('new repository form', async function(assert) {
-    assert.expect(22);
-
-    await visit('/providers/tib/repositories/new');
-
-    assert.equal(currentURL(), '/providers/tib/repositories/new');
-    assert.dom('h2.work').hasText('German National Library of Science and Technology');
-    assert.dom('div.tab-content').exists();
-
-    assert.dom('input#repository-id-field').exists();
-    assert.dom('div#client-type').exists();
-    assert.dom('input#salesforce-id-field').exists();
-    assert.dom('div#re3data').exists();
-    assert.dom('input#name-field').exists();
-    assert.dom('input#alternate-name-field').exists();
-    assert.dom('input#system-email-field').exists();
-
-    assert.dom('input#service-contact-given-name').exists();
-    assert.dom('input#service-contact-family-name').exists();
-    assert.dom('input#service-contact-email').exists();
-
-    assert.dom('textarea#description-field').exists();
-    assert.dom('input#url-field').exists();
-    assert.dom('div#language').exists();
-    assert.dom('div#software').exists();
-    assert.dom('textarea#domains-field').exists();
-    assert.dom('div#repository-type').exists();
-    assert.dom('div#certificate').exists();
-    assert.dom('input#is-active-field').exists();
-
-    assert.dom('button#add-repository').includesText('Add Repository');
-  });
-
-  test('editing repository AWI form', async function(assert) {
-    assert.expect(20);
-
-    await visit('/repositories/tib.awi/edit');
-
-    assert.equal(currentURL(), '/repositories/tib.awi/edit');
-    assert.dom('h2.work').hasText('Alfred Wegener Institute');
-    assert.dom('div.tab-content').exists();
-
-    assert.dom('input#repository-id-field').exists();
-    assert.dom('div#client-type').exists();
-    assert.dom('input#salesforce-id-field').exists();
-    assert.dom('div#re3data').exists();
-    assert.dom('input#name-field').exists();
-    assert.dom('input#alternate-name-field').exists();
-    assert.dom('input#system-email-field').exists();
-
-    assert.dom('input#service-contact-given-name').exists();
-    assert.dom('input#service-contact-family-name').exists();
-    assert.dom('input#service-contact-email').exists();
-
-    assert.dom('textarea#description-field').exists();
-    assert.dom('input#url-field').exists();
-    assert.dom('div#language').exists();
-    assert.dom('div#software').exists();
-    assert.dom('textarea#domains-field').exists();
-    assert.dom('input#is-active-field').exists();
-
-    assert.dom('button#update-repository').includesText('Update Repository');
-  });
-
-  test('editing repository AWI password form', async function(assert) {
-    await visit('/repositories/tib.awi/change');
-
-    assert.equal(currentURL(), '/repositories/tib.awi/change');
-    assert.dom('h2.work').hasText('Alfred Wegener Institute');
-    assert.dom('div.tab-content').exists();
-
-    assert.dom('input#password-input-field').exists();
-    assert.dom('input#confirm-password-input-field').exists();
-
-    assert.dom('button[type=submit]').includesText('Set Password');
-  });
-
-  test('editing repository AWI delete form', async function(assert) {
-    await visit('/repositories/tib.awi/delete');
-
-    assert.equal(currentURL(), '/repositories/tib.awi/delete');
-    assert.dom('h2.work').hasText('Alfred Wegener Institute');
-    assert.dom('div.tab-content').exists();
-
-    assert.dom('div.alert-danger').hasText('You need to transfer all DOIs to another repository before you can delete the TIB.AWI repository.');
-
-    assert.dom('input#confirm-symbol-field').doesNotExist();
-    assert.dom('button#delete').doesNotExist();
   });
 });

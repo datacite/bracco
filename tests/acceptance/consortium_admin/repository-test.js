@@ -33,9 +33,9 @@ module('Acceptance | consortium_admin | repository', function(hooks) {
     assert.dom('h2.work').hasText('DataCite Test RPH');
     assert.dom('li a.nav-link.active').hasText('Settings');
 
-    // consortium member can edit and delete repositories
-    assert.dom('a#edit-repository').includesText('Update Repository');
-    assert.dom('a#delete-repository').includesText('Delete');
+    // consortium member can't edit or delete repositories
+    assert.dom('button#edit-repository').doesNotExist();
+    assert.dom('button#delete-repository').doesNotExist();
   });
 
   test('visiting repository DataCite RPH prefixes', async function(assert) {

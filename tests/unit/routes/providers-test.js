@@ -19,23 +19,13 @@ module('Unit | Route | providers', function(hooks) {
     assert.ok(route);
   });
 
-  test('organizations/index exists', function(assert) {
-    let route = this.owner.lookup('route:providers/show/organizations/index');
+  test('organizations exists', function(assert) {
+    let route = this.owner.lookup('route:providers/show/organizations');
     assert.ok(route);
   });
 
-  test('organizations/new exists', function(assert) {
-    let route = this.owner.lookup('route:providers/show/organizations/new');
-    assert.ok(route);
-  });
-
-  test('repositories/index exists', function(assert) {
-    let route = this.owner.lookup('route:providers/show/repositories/index');
-    assert.ok(route);
-  });
-
-  test('repositories/new exists', function(assert) {
-    let route = this.owner.lookup('route:providers/show/repositories/new');
+  test('repositories exists', function(assert) {
+    let route = this.owner.lookup('route:providers/show/repositories');
     assert.ok(route);
   });
 

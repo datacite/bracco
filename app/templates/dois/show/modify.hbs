@@ -23,7 +23,7 @@
         {{#if (is-empty (doi-form-errors model))}}
           <button type="submit" id="doi-modify" class="btn btn-sm btn-fill" disabled={{false}}>Update DOI</button>
         {{else}}
-          <BsAlert @dismissible={{false}} @type="danger">
+          <BsAlert @dismissible={{false}} @type="warning">
             To save this DOI, first resolve the errors with these fields: {{doi-form-errors model}}.
           </BsAlert>
 

@@ -7,7 +7,6 @@ export default Route.extend({
   model() {
     let self = this;
     return this.store.findRecord('provider', 'admin').then(function(model) {
-      model.set('confirmSymbol', model.get('symbol'));
       return model;
     }).catch(function(reason) {
       console.debug(reason);
@@ -20,5 +19,11 @@ export default Route.extend({
     if (this.can.cannot('read index')) {
       this.transitionTo('index');
     }
+  },
+
+  actions: {
+    queryParamsDidChange() {
+      this.refresh();
+    },
   },
 });

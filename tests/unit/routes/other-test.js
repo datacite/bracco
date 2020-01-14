@@ -4,18 +4,8 @@ import { setupTest } from 'ember-qunit';
 module('Unit | Route | other', function(hooks) {
   setupTest(hooks);
 
-  test('settings/index exists', function(assert) {
-    let route = this.owner.lookup('route:settings/index');
-    assert.ok(route);
-  });
-
-  test('settings/edit exists', function(assert) {
-    let route = this.owner.lookup('route:settings/edit');
-    assert.ok(route);
-  });
-
-  test('settings/change exists', function(assert) {
-    let route = this.owner.lookup('route:settings/change');
+  test('settings exists', function(assert) {
+    let route = this.owner.lookup('route:settings');
     assert.ok(route);
   });
 
