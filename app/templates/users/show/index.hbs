@@ -2,9 +2,9 @@
   <div class="row row-chart">
     <BarChart @data={{model.doiCount}} @label="DOI" @model={{model}} @link="users.show.dois" @summarize={{true}} />
     <DonutChart @data={{model.resourceTypeCount}} @label="DOI" @model={{model}} @link="users.show.dois" />
-    <MetricsCounter @orcid={{model.id}} @data={{model.citationCount}} @label='Citation' @model={{model}}  />
-    <MetricsCounter @orcid={{model.id}} @data={{model.viewCount}} @label='View' @model={{model}}  />
-    <MetricsCounter @orcid={{model.id}} @data={{model.downloadCount}} @label='Download' @model={{model}}  />
+    {{metrics-counter orcid=model.id data=model.citationCount label='Citation' model=model }}
+    {{metrics-counter orcid=model.id data=model.viewCount label='View' model=model }}
+    {{metrics-counter orcid=model.id data=model.downloadCount label='Download' model=model }}
   </div>
 
   {{#if (can "read messages" model)}}
