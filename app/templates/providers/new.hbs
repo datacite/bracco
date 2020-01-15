@@ -22,8 +22,8 @@
             </el.control>
           </form.element>
 
-          <form.element @controlType="text" @id="name" @label="Name" @property="name" @required={{false}} @helpText="The official name of your organization." />
-          <form.element @controlType="text" @id="display-name" @label="Display Name" @property="displayName" @required={{false}} @helpText="Name of your organization as you would like it to appear in Fabrica and on DataCite’s website." />
+          <form.element @controlType="text" @id="name" @label="Member Name" @property="name" @required={{false}} @helpText="The official name of your organization." />
+          <form.element @controlType="text" @id="display-name" @label="Member Display Name" @property="displayName" @required={{false}} @helpText="Name of your organization as you would like it to appear in Fabrica and on DataCite’s website." />
 
           {{#if (can "create provider")}}
             <form.element @controlType="text" @id="salesforce-id" @label="Salesforce ID" @property="salesforceId" @required={{false}} @helpText="The 18 digit ID in Salesforce." />
@@ -51,7 +51,7 @@
 
           <form.element @controlType="text" @id="system-email" @label="System Email" @property="systemEmail" @helpText="This is the email used for sending password reset requests and similar system notifications." @required={{false}} />
           <form.element @controlType="text" @id="group-email" @label="Group Email (optional)" @property="groupEmail" @helpText="A generic shared email address (such as info@datacite.org or similar) where you would like to receive communications from DataCite." @required={{false}} />
-          <form.element @controlType="text" @id="website" @label="Website" @property="website" @helpText="Website of the member." @required={{false}} />
+          <form.element @controlType="text" @id="website" @label="Website (optional)" @property="website" @helpText="Website of the member." @required={{false}} />
           <form.element @controlType="text" @id="twitter-handle" @label="Twitter (optional)" @property="twitterHandle" @placeholder="Add @twitter account" @helpText="DataCite will follow you on twitter." @required={{false}} />
 
             <form.element @controlType="power-select" @id="country" @label="Country (optional)" @property="country" @optionLabelPath="name" @options={{countries}} @destination={{country}} @helpText="Country where the member is located." as |el|>
