@@ -32,7 +32,9 @@ module('Acceptance | staff_admin | repository', function(hooks) {
     assert.dom('h2.work').hasText('Alfred Wegener Institute');
     assert.dom('li a.nav-link.active').hasText('Settings');
     assert.dom('a#edit-repository').includesText('Update Repository');
+    assert.dom('a#edit-repository').hasAttribute('href', '/repositories/tib.awi/edit');
     assert.dom('a#delete-repository').includesText('Delete');
+    assert.dom('a#delete-repository').hasAttribute('href', '/repositories/tib.awi/delete');
   });
 
   test('visiting repository RPH prefixes', async function(assert) {
@@ -73,9 +75,12 @@ module('Acceptance | staff_admin | repository', function(hooks) {
     assert.dom('div.panel.facets').exists();
 
     // admin can add dois
-    assert.dom('a#new-doi').exists();
-    assert.dom('a#upload-doi').exists();
+    assert.dom('a#new-doi').includesText('Create (Form)');
+    assert.dom('a#new-doi').hasAttribute('href', '/repositories/datacite.rph/dois/new');
+    assert.dom('a#upload-doi').includesText('Create (File Upload)');
+    assert.dom('a#upload-doi').hasAttribute('href', '/repositories/datacite.rph/dois/upload');
     assert.dom('a#transfer-dois').includesText('Transfer');
+    assert.dom('a#transfer-dois').hasAttribute('href', '/repositories/datacite.rph/transfer');
   });
 
   test('new repository form', async function(assert) {

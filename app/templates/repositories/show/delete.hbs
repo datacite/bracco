@@ -13,7 +13,7 @@
           <div class="clearfix"/>
         </div>
       {{else}}
-        <BsForm @formLayout="vertical" @model={{model}} @onSubmit={{action "destroy" model}} @submitOnEnter={{true}} as |form|>
+        <BsForm @formLayout="vertical" @model={{model}} @onSubmit={{action "submit"}} @submitOnEnter={{true}} as |form|>
           <form.group>
             <label class="control-label">Are you sure you want to delete the {{uppercase model.id}} repository? This action cannot be undone.</label>
             <form.element @controlType="text" @id="confirm-symbol" @property="confirmSymbol" @showValidationOn="input" @autofocus={{true}} @helpText="Please add the Repository ID to delete." />
@@ -21,8 +21,8 @@
 
           <div class="pseudo-footer">
             <div class="btn-toolbar pull-right">
-              <button {{action "cancel" model}} id="cancel" class="btn btn-sm">Cancel</button>
-              <button {{action "destroy"}} disabled={{v-get model 'confirmSymbol' 'isInvalid'}} id="delete" class="btn btn-sm btn-fill">Delete</button>
+              <button {{action "cancel"}} id="cancel" class="btn btn-sm">Cancel</button>
+              <button {{action "submit"}} disabled={{v-get model 'confirmSymbol' 'isInvalid'}} id="delete" class="btn btn-sm btn-fill">Delete</button>
             </div>
             <div class="clearfix"/>
           </div>

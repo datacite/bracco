@@ -51,7 +51,9 @@ module('Acceptance | staff_admin | provider', function(hooks) {
     assert.dom('h2.work').hasText('German National Library of Science and Technology');
     assert.dom('a.nav-link.active').hasText('Settings');
     assert.dom('a#edit-provider').includesText('Update Member');
+    assert.dom('a#edit-provider').hasAttribute('href', '/providers/tib/edit');
     assert.dom('a#delete-provider').includesText('Delete Member');
+    assert.dom('a#delete-provider').hasAttribute('href', '/providers/tib/delete');
   });
 
   test('visiting provider TIB repositories', async function(assert) {
@@ -69,6 +71,7 @@ module('Acceptance | staff_admin | provider', function(hooks) {
 
     // admin can add repository
     assert.dom('a#add-repository').includesText('Add Repository');
+    assert.dom('a#add-repository').hasAttribute('href', '/providers/tib/repositories/new');
   });
 
   test('visiting provider TIB dois', async function(assert) {
@@ -105,6 +108,7 @@ module('Acceptance | staff_admin | provider', function(hooks) {
 
     // admin can assign new prefix
     assert.dom('a#assign-prefix').includesText('Assign Prefix');
+    assert.dom('a#assign-prefix').hasAttribute('href', '/providers/tib/prefixes/new');
   });
 
   test('new provider form', async function(assert) {

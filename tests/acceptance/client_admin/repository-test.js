@@ -56,7 +56,7 @@ module('Acceptance | client_admin | repository', function(hooks) {
     assert.equal(currentURL(), '/repositories/datacite.rph/settings');
     assert.dom('h2.work').hasText('DataCite Test RPH');
     assert.dom('li a.nav-link.active').hasText('Settings');
-    assert.dom('a#edit-repository').includesText('Update Account');
+    assert.dom('a#edit-repository').includesText('Update Repository');
     assert.dom('a#delete-repository').doesNotExist();
   });
 

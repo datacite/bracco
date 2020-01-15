@@ -35,6 +35,7 @@ module('Acceptance | staff_admin | organization', function(hooks) {
 
     // consortium member can add consortium organizations
     assert.dom('a#add-organization').includesText('Add Organization');
+    assert.dom('a#add-organization').hasAttribute('href', '/providers/dc/organizations/new');
   });
 
   test('new organization form', async function(assert) {

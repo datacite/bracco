@@ -89,7 +89,8 @@ module('Acceptance | staff_admin | admin', function(hooks) {
     assert.dom('div.panel.facets').exists();
 
     // staff can add member
-    assert.dom('a#add-provider').exists();
+    assert.dom('a#add-provider').includesText('Add Member');
+    assert.dom('a#add-provider').hasAttribute('href', '/providers/new');
   });
 
   test('visiting repositories', async function(assert) {
@@ -124,6 +125,7 @@ module('Acceptance | staff_admin | admin', function(hooks) {
 
     // admin can add new prefixes
     assert.dom('a#add-prefixes').includesText('Add Prefixes');
+    assert.dom('a#add-prefixes').hasAttribute('href', '/prefixes/new');
   });
 
   test('visiting prefix 10.5038', async function(assert) {
