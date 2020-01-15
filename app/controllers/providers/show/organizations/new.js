@@ -60,7 +60,7 @@ export default Controller.extend({
       this.set('countries', countries);
     },
     selectCountry(country) {
-      this.model.set('country', country);
+      this.model.organization.set('country', country);
       this.set('countries', countryList);
     },
     searchOrganizationType(query) {
@@ -70,7 +70,7 @@ export default Controller.extend({
       this.set('organizationTypes', organizationTypes);
     },
     selectOrganizationType(organizationType) {
-      this.model.set('organizationType', organizationType);
+      this.model.organization.set('organizationType', organizationType);
       this.set('organizationTypes', organizationTypeList);
     },
     searchMemberType(query) {
@@ -80,7 +80,7 @@ export default Controller.extend({
       this.set('memberTypes', memberTypes);
     },
     selectMemberType(memberType) {
-      this.model.set('memberType', memberType);
+      this.model.organization.set('memberType', memberType);
       this.set('memberTypes', memberTypeList);
     },
     searchFocusArea(query) {
@@ -90,7 +90,7 @@ export default Controller.extend({
       this.set('focusAreas', focusAreas);
     },
     selectFocusArea(focusArea) {
-      this.model.set('focusArea', focusArea);
+      this.model.organization.set('focusArea', focusArea);
       this.set('focusAreas', focusAreaList);
     },
     searchNonProfitStatus(query) {
@@ -100,22 +100,22 @@ export default Controller.extend({
       this.set('nonProfitStatuses', nonProfitStatuses);
     },
     selectNonProfitStatus(nonProfitStatus) {
-      this.model.set('nonProfitStatus', nonProfitStatus);
+      this.model.organization.set('nonProfitStatus', nonProfitStatus);
       this.set('nonProfitStatuses', nonProfitStatusList);
     },
     searchConsortium(query) {
       this.set('consortia', this.store.query('provider', { query, 'member-type': 'consortium', sort: 'name', 'page[size]': 100 }));
     },
     selectConsortium(consortium) {
-      this.model.set('consortium', consortium);
+      this.model.organization.set('consortium', consortium);
     },
     selectBillingCountry(billingCountry) {
-      this.model.set('billingInformation.country', billingCountry);
+      this.model.organization.set('billingInformation.country', billingCountry);
       this.set('countries', countryList);
     },
     setBillingCountry(billingCountry) {
       this.set('billingInformationCountry', billingCountry);
-      this.model.set('billingInformationCountry', billingCountry);
+      this.model.organization.set('billingInformationCountry', billingCountry);
       this.set('countries', countryList);
     },
     searchRor(query) {
@@ -126,11 +126,11 @@ export default Controller.extend({
     },
     selectRor(ror) {
       if (ror) {
-        this.model.set('rorId', ror.id);
-        this.model.set('name', ror.name);
-        this.model.set('displayName', ror.name);
+        this.model.organization.set('rorId', ror.id);
+        this.model.organization.set('name', ror.name);
+        this.model.organization.set('displayName', ror.name);
       } else {
-        this.model.set('rorId', null);
+        this.model.organization.set('rorId', null);
       }
       this.set('organizations', []);
     },
