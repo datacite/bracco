@@ -1,6 +1,23 @@
 import { helper } from '@ember/component/helper';
 import { isPresent } from '@ember/utils';
 
+const providerLabelList = {
+  symbol: 'member ID',
+  confirmSymbol: 'confirm member ID',
+  rorId: 'ROR ID',
+  name: 'provider name',
+  displayName: 'provider display name',
+  systemEmail: 'system email',
+};
+const organizationLabelList = {
+  symbol: 'member ID',
+  confirmSymbol: 'confirm member ID',
+  rorId: 'ROR ID',
+  name: 'organization name',
+  displayName: 'organization display name',
+  systemEmail: 'system email',
+};
+
 export function providerFormErrors([ model ]) {
   let errorAttributes = model.validations.errors.mapBy('attribute');
 
@@ -31,7 +48,13 @@ export function providerFormErrors([ model ]) {
     }
   }
 
-  return errorAttributes.join(', ');
+  return errorAttributes.map(function(attribute) {
+    if (model.memberType === 'consortium_organization') {
+      return organizationLabelList[attribute] || attribute;
+    } else {
+      return providerLabelList[attribute] || attribute;
+    }
+  }).join(', ');
 }
 
 export default helper(providerFormErrors);
