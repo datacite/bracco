@@ -35,4 +35,7 @@
     <CcLicense @licenseURL={{rights.rightsUri}} />
   {{/each}}
 {{/if}}
-{{doi-metrics-badge doi=model.id model=model link=link}}
+{{#if (eq link "users.show.dois") }}
+  {{doi-metrics-badge doi=model.id metrics=metrics link=link}} 
+{{/if}}
+

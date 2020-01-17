@@ -13,11 +13,12 @@ export default Route.extend({
         number: params.page,
         size: params.size,
       },
-      'user-id': user.get('id'),
+      'user-id': user.user.get('id'),
+      'mix-in': 'metrics',
     });
 
     return hash({
-      user,
+      user: user.user,
       dois: this.store.query('doi', params),
     });
   },
