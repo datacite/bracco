@@ -28,7 +28,6 @@ RUN rm -f /etc/service/nginx/down && \
     rm /etc/nginx/sites-enabled/default
 COPY vendor/docker/webapp.conf /etc/nginx/sites-enabled/webapp.conf
 COPY vendor/docker/00_app_env.conf /etc/nginx/conf.d/00_app_env.conf
-COPY vendor/docker/cors.conf /etc/nginx/conf.d/cors.conf
 
 # Use Amazon NTP servers
 COPY vendor/docker/ntp.conf /etc/ntp.conf
@@ -42,7 +41,7 @@ RUN chown -R app:app /home/app/webapp && \
 # Install npm packages and build dist
 WORKDIR /home/app/webapp
 RUN npm install -g ember-cli && \
-    yarn install --frozen-lockfile --verbose
+    yarn install --frozen-lockfile
 
 # Run additional scripts during container startup (i.e. not at build time)
 RUN mkdir -p /etc/my_init.d
