@@ -31,7 +31,7 @@ export default Component.extend({
   passMetrics() {
     let self = this;
     self.set('citations' , this.model.citations);
-    self.set('views',(this.model.views));
-    self.set('downloads',(this.model.downloads));
+    self.set('views',this.model.views);
+    self.set('downloads',this.model.downloads);
   },
 });

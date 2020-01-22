@@ -20,6 +20,9 @@ FactoryGuy.define('doi', {
     created: '2017-09-27T14:08:02.000Z',
     registered: '2017-09-27T14:08:02.000Z',
     updated: '2017-09-27T14:08:02.000Z',
+    downloads: 4,
+    views: 111111,
+    citations: 123,
   },
   empty: {
     creators: [],
