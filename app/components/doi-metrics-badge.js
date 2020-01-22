@@ -5,8 +5,7 @@ import { computed } from '@ember/object';
 
 export default Component.extend({
   tagName: 'div',
-  classNames: [ 'panel-footer' ],
-  data: null,
+  classNames: [ 'license' ],
   citations: 0,
   views: 0,
   downloads: 0,
@@ -14,10 +13,10 @@ export default Component.extend({
   metrics: [],
   store: service(),
   hasUsage: computed('views','downloads', function() {
-    return ((this.model.views + this.model.downloads) > 0) ?  true  : false;
+    return ((this.views + this.downloads) > 0) ?  true  : false;
   }),
   hasMetrics: computed('citations','views','downloads', function() {
-    return ((this.model.views + this.model.downloads + this.model.citations) > 0) ?  true  : false;
+    return ((this.views + this.downloads + this.citations) > 0) ?  true  : false;
   }),
 
   init() {

@@ -21,7 +21,7 @@ module.exports = function(environment) {
       environment,
     },
     apollo: {
-      apiURL: process.env.API_URL + '/graphql' || 'https://api.test.datacite.org/client-api/graphql',
+      apiURL: 'https://api.test.datacite.org/client-api/graphql',
     },
     'ember-cli-string-helpers': {
       only: [ 'humanize', 'html-safe', 'truncate', 'titleize' ],

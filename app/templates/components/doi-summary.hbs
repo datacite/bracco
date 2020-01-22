@@ -31,7 +31,9 @@
   </div>
 {{/if}}
 {{#if (eq link "users.show.dois") }}
-  {{doi-metrics-badge doi=model.id model=model link=link}} 
+  <div class="metadata">
+    {{doi-metrics-badge doi=model.id model=model link=link}} 
+  </div>
 {{/if}}
 {{#if model.rightsList}}
   {{#each model.rightsList as |rights|}}

@@ -1,21 +1,21 @@
-      <div class="row" style="display:flex; padding-left: 7px">
-        {{#if hasMetrics}}
-            {{#if citations}}
-              <p style="margin-right: 1.5em;">{{fa-icon "quote-right"}} {{ format-numbers citations }} {{  pluralize citations 'Citation' without-count=true}}</p>
-            {{else}}
-              <p style="margin-right: 1.5em;">{{fa-icon "info-circle"}}  No citations were reported.</p>
-            {{/if}}
-            {{#if hasUsage }}
-              {{#if views}}
-                <p style="margin-right: 1.5em;"> {{fa-icon "eye"}}  {{ format-numbers views }}  {{ pluralize views 'View' without-count=true }} </p>
-              {{/if}}
-              {{#if downloads}}
-                <p style="margin-right: 1.5em;"> {{fa-icon "download"}}  {{ format-numbers downloads }}   {{ pluralize downloads 'Download' without-count=true }} </p>
-              {{/if}}
-            {{else}}
-              <p style="margin-right: 1.5em;">{{fa-icon "info-circle"}}  No usage information was reported.</p>
-            {{/if}}
-        {{else}}
-          <p style="margin-right: 1.5em;">{{fa-icon "info-circle"}}  No citations were reported. No usage information was reported.</p>
+<div style="display:flex;">
+  {{#if hasMetrics}}
+      {{#if citations}}
+        <i style="margin-right: 1.5em; margin-bottom: 4px; margin-top: 4px">{{fa-icon "quote-right"}} {{ format-numbers citations }} {{  pluralize citations 'Citation' without-count=true}}</i>
+      {{else}}
+        <i style="margin-right: 1.5em; margin-bottom: 4px; margin-top: 4px">{{fa-icon "info-circle"}}  No citations were reported.</i>
+      {{/if}}
+      {{#if hasUsage }}
+        {{#if views}}
+          <i style="margin-right: 1.5em; margin-bottom: 4px; margin-top: 4px"> {{fa-icon "eye"}}  {{ format-numbers views }}  {{ pluralize views 'View' without-count=true }} </i>
         {{/if}}
-      </div>
+        {{#if downloads}}
+          <i style="margin-right: 1.5em; margin-bottom: 4px; margin-top: 4px"> {{fa-icon "download"}}  {{ format-numbers downloads }}   {{ pluralize downloads 'Download' without-count=true }} </i>
+        {{/if}}
+      {{else}}
+        <i style="margin-right: 1.5em; margin-bottom: 4px; margin-top: 4px">{{fa-icon "info-circle"}}  No usage information was reported.</i>
+      {{/if}}
+  {{else}}
+    <i style="margin-right: 1.5em; margin-bottom: 4px; margin-top: 4px">{{fa-icon "info-circle"}}  No citations were reported. No usage information was reported.</i>
+  {{/if}}
+</div>
