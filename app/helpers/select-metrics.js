@@ -21,7 +21,7 @@ export function selectMetrics([ metrics, doi ]) {
       citations,
       views,
       downloads,
-    }
+    },
   );
 }
 
