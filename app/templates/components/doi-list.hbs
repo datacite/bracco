@@ -85,7 +85,7 @@
       </div>
     </div>
   {{/if}}
-  {{#if isPerson}}
+  {{#if (and isPerson (cannot "update user"))}}
     {{#if (or model.meta.published model.query.published)}}
       <div class="panel facets">
         <div class="panel-body">
@@ -240,7 +240,7 @@
       </div>
     </div>
   {{/if}}
-  {{#unless isPerson}}
+  {{#unless (and isPerson (cannot "update user"))}}
     {{#if (or model.meta.prefixes model.query.prefix)}}
       <div class="panel facets">
         <div class="panel-body">
@@ -302,7 +302,7 @@
       </div>
     </div>
   {{/if}}
-  {{#unless isPerson}}
+  {{#unless (and isPerson (cannot "update user"))}}
     {{#if (or model.meta.schemaVersions model.query.schema-version)}}
       <div class="panel facets">
         <div class="panel-body">

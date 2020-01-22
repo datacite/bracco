@@ -1,6 +1,10 @@
 <div class="content">
   <div class="row row-chart">
-    <BarChart @data={{model.user.doiCount}} @label="DOI" @model={{model.user}} @link="users.show.dois" @summarize={{true}} />
+    {{#if (can "update user")}}
+      <BarChart @data={{model.user.doiCount}} @label="DOI" @model={{model.user}} @link="users.show.dois" @summarize={{true}} />
+    {{else}}
+      <BarChart @data={{model.user.doiCountByPublicationYear}} @label="DOI" @model={{model.user}} @link="users.show.dois" @summarize={{true}} />
+    {{/if}}
     <DonutChart @data={{model.user.resourceTypeCount}} @label="DOI" @model={{model.user}} @link="users.show.dois" />
   </div>
   <div class="row row-chart">
