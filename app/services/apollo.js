@@ -5,6 +5,7 @@ export default ApolloService.extend({
   session: service(),
 });
 
+/* eslint-disable-next-line no-unused-vars */
 class OverriddenApolloService extends ApolloService {
   clientOptions() {
     const opts = super.clientOptions();

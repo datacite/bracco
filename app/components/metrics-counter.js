@@ -13,6 +13,8 @@ export default Component.extend({
 
   didReceiveAttrs() {
     this._super(...arguments);
-    this.set('count', this.data[`${this.label.toLowerCase()}Count`]);
+    if (this.data != null) {
+      this.set('count', this.data[`${this.label.toLowerCase()}Count`]);
+    }
   },
 });
