@@ -14,6 +14,13 @@ module('Integration | Component | doi metrics badge', function(hooks) {
 
     assert.dom('i').hasText('  123 Citations');
   });
+
+  test('it renders 0 citations', async function(assert) {
+    this.set('model', make('doi', {citations: 0}));
+    await render(hbs`{{doi-metrics-badge model=model}}`);
+
+    assert.dom('i').hasText('  No citations were reported.');
+  });
 });
 
 
