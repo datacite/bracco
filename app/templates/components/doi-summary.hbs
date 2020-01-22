@@ -30,12 +30,13 @@
     <span class="text-{{model.state}}">{{titleize model.state}}</span>
   </div>
 {{/if}}
+{{#if (eq link "users.show.dois") }}
+  {{doi-metrics-badge doi=model.id model=model link=link}} 
+{{/if}}
 {{#if model.rightsList}}
   {{#each model.rightsList as |rights|}}
     <CcLicense @licenseURL={{rights.rightsUri}} />
   {{/each}}
 {{/if}}
-{{#if (eq link "users.show.dois") }}
-  {{doi-metrics-badge doi=model.id model=model link=link}} 
-{{/if}}
+
 
