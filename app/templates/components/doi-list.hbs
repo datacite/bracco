@@ -402,7 +402,7 @@
   {{#if model}}
     {{#each model as |doi|}}
       <div class="panel panel-transparent" data-test-doi>
-        <DoiSummary @model={{doi}} @metrics={{ select-metrics model.meta doi.doi }} @isList={{true}}  @link={{link}} />
+        <DoiSummary @model={{doi}} @isList={{true}}  @link={{link}} />
         <div class="panel-footer">
           {{#if doi.isDraft}}
             {{fa-icon "info-circle"}} {{doi.doi}}

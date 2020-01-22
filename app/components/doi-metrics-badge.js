@@ -14,10 +14,10 @@ export default Component.extend({
   metrics: [],
   store: service(),
   hasUsage: computed('views','downloads', function() {
-    return ((this.views + this.downloads) > 0) ?  true  : false;
+    return ((this.model.views + this.model.downloads) > 0) ?  true  : false;
   }),
   hasMetrics: computed('citations','views','downloads', function() {
-    return ((this.views + this.downloads + this.citations) > 0) ?  true  : false;
+    return ((this.model.views + this.model.downloads + this.model.citations) > 0) ?  true  : false;
   }),
 
   init() {
@@ -31,8 +31,8 @@ export default Component.extend({
   },
   passMetrics() {
     let self = this;
-    self.set('citations' , this.metrics.citations);
-    self.set('views',(this.metrics.views));
-    self.set('downloads',(this.metrics.downloads));
+    self.set('citations' , this.model.citations);
+    self.set('views',(this.model.views));
+    self.set('downloads',(this.model.downloads));
   },
 });
