@@ -7,13 +7,13 @@ export default Route.extend({
   can: service(),
 
   model(params) {
-    let user = this.modelFor('users/show');
+    let user = this.modelFor('users/show').user;
     params = assign(params, {
       page: {
         number: params.page,
         size: params.size,
       },
-      'user-id': user.user.get('id'),
+      'user-id': user.get('id'),
       'mix-in': 'metrics',
     });
 
@@ -33,7 +33,7 @@ export default Route.extend({
   },
 
   afterModel() {
-    if (this.can.cannot('read user', this.modelFor('users/show'))) {
+    if (this.can.cannot('read user', this.modelFor('users/show').user)) {
       this.transitionTo('index');
     }
   },
