@@ -14,6 +14,6 @@ module('Integration | Component | repository-id', function(hooks) {
 
     await render(hbs`{{repository-id model=model provider=provider}}`);
 
-    assert.dom(this.element).hasText('');
+    assert.dom(this.element).hasText('Click the circle icon for a new random ID, or the cross icon to delete the random ID and enter a value manually.');
   });
 });

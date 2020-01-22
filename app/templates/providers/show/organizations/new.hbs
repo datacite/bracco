@@ -11,12 +11,12 @@
         <form.element @controlType="hidden" @property="consortium" @required={{false}} />
         <ProviderId @model={{model.organization}} @form={{form}} />
         <form.element @controlType="text" @id="member-type" @label="Member Type" @value="Consortium Organization" @readonly={{true}} />
-        <form.element @controlType="text" @id="name" @label="Name" @property="name" @required={{false}} @helpText="The official name of your organization." />
-        <form.element @controlType="text" @id="display-name" @label="Display Name" @property="displayName" @required={{false}} @helpText="Name of your organization as you would like it to appear in Fabrica and on DataCite’s website." />
+        <form.element @controlType="text" @id="name" @label="Organization Name" @property="name" @required={{false}} @helpText="The official name of your organization." />
+        <form.element @controlType="text" @id="display-name" @label="Organization Display Name" @property="displayName" @required={{false}} @helpText="Name of your organization as you would like it to appear in Fabrica and on DataCite’s website." />
 
         <form.element @controlType="power-select" @id="ror-id" @label="Organization identifier (optional)" @property="rorId" @optionLabelPath="rorId" @options={{organizations}} @destination={{rorId}} @helpText="Organization identifiers are provided by the Research Organization Registry (ROR)." as |el|>
           <el.control @onChange={{action "selectRor"}} @search={{action "searchRor"}} @placeholder="Select Organization" @searchPlaceholder="Type to search..." @allowClear={{true}} as |item|>
-            {{if item.name item.name model.provider.rorId}}
+            {{if item.name item.name model.organization.rorId}}
           </el.control>
         </form.element>
 

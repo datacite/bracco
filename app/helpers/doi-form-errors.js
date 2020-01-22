@@ -1,5 +1,8 @@
 import { helper } from '@ember/component/helper';
 
+const labelList = {
+};
+
 export function doiFormErrors([ model ]) {
   if (model.state === 'draft') {
     return [];
@@ -18,7 +21,9 @@ export function doiFormErrors([ model ]) {
       errorAttributes = errorAttributes.concat(creator.validations.errors.mapBy('attribute'));
     });
   }
-  return errorAttributes.join(', ');
+  return errorAttributes.map(function(attribute) {
+    return labelList[attribute] || attribute;
+  }).join(', ');
 }
 
 export default helper(doiFormErrors);

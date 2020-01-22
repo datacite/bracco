@@ -1,13 +1,19 @@
-<div class="input-group">
-  {{form.element 
-    controlType="text"
-    id="member-id"
-    label="Member ID"
-    property="symbol"
-    helpText="The Member ID is the unique identifier for each member and can't be changed. The Member ID can contain only upper case letters, and must not be longer than 8 characters."
-    required=false
-  }}
-
-  <span class="input-group-addon refresh-input" title="Refresh" aria-label="Refresh" {{action 'refresh'}}>{{fa-icon "refresh"}}</span>
-  <span class="input-group-addon clear-input" title="Clear" aria-label="Clear" {{action 'clear'}}>{{fa-icon "times-circle"}}</span>  
+<div class="col-md-9 col-md-offset-3 label-small">
+  Click the circle icon for a new random ID, or the cross icon to delete the random ID and enter a value manually.
 </div>
+
+{{#form.element 
+  controlType="text"
+  id="member-id"
+  label="Member ID"
+  property="symbol"
+  helpText="The Member ID is the unique identifier for each member and can't be changed. The Member ID can contain only upper case letters, and must not be longer than 8 characters."
+  required=false as |el|}}
+  
+  <div class="input-group-no-float">
+    {{el.control}}
+
+    <span class="input-group-addon refresh-input" title="Refresh" aria-label="Refresh" {{action 'refresh'}}>{{fa-icon "refresh"}}</span>
+    <span class="input-group-addon clear-input" title="Clear" aria-label="Clear" {{action 'clear'}}>{{fa-icon "times-circle"}}</span>  
+  </div>
+{{/form.element}}

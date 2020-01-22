@@ -7,9 +7,10 @@ export default Controller.extend({
   actions: {
     submit() {
       let self = this;
-      this.store.findRecord('repository', this.repository.get('id'), { backgroundReload: false }).then(function(repository) {
+      let providerId = this.model.get('provider.id');
+      this.store.findRecord('repository', this.model.get('id'), { backgroundReload: false }).then(function(repository) {
         repository.destroyRecord().then(function() {
-          self.transitionToRoute('repositories');
+          self.transitionToRoute('providers.show.repositories', providerId);
         }).catch(function(reason) {
           console.debug(reason);
         });
