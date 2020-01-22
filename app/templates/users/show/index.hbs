@@ -2,6 +2,8 @@
   <div class="row row-chart">
     <BarChart @data={{model.user.doiCount}} @label="DOI" @model={{model.user}} @link="users.show.dois" @summarize={{true}} />
     <DonutChart @data={{model.user.resourceTypeCount}} @label="DOI" @model={{model.user}} @link="users.show.dois" />
+  </div>
+  <div class="row row-chart">
     <MetricsCounter @orcid={{model.user.id}} @data={{model.researcher}} @label='Citation' @model={{model}}  />
     <MetricsCounter @orcid={{model.user.id}} @data={{model.researcher}} @label='View' @model={{model}}  />
     <MetricsCounter @orcid={{model.user.id}} @data={{model.researcher}} @label='Download' @model={{model}}  />
