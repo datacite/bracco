@@ -8,9 +8,9 @@
     <DonutChart @data={{model.user.resourceTypeCount}} @label="DOI" @model={{model.user}} @link="users.show.dois" />
   </div>
   <div class="row row-chart">
-    <MetricsCounter @orcid={{model.user.id}} @data={{model.researcher}} @label='Citation' @model={{model}}  />
-    <MetricsCounter @orcid={{model.user.id}} @data={{model.researcher}} @label='View' @model={{model}}  />
-    <MetricsCounter @orcid={{model.user.id}} @data={{model.researcher}} @label='Download' @model={{model}}  />
+    <MetricsCounter @orcid={{model.user.id}} @data={{model.metrics}} @label='Citation' @model={{model}}  />
+    <MetricsCounter @orcid={{model.user.id}} @data={{model.metrics}} @label='View' @model={{model}}  />
+    <MetricsCounter @orcid={{model.user.id}} @data={{model.metrics}} @label='Download' @model={{model}}  />
   </div>
 
   {{#if (can "read messages" model.user)}}
