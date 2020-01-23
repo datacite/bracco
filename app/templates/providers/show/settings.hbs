@@ -33,11 +33,14 @@
           <a href="{{model.rorId}}">{{model.rorId}}</a>
         {{/if}}
 
-        {{#if (can "create provider")}}
-          {{#if model.salesforceId}}
-            <h5>Salesforce ID</h5>
-            {{model.salesforceId}}
-          {{/if}}
+        {{#if (and (can "create provider") model.salesforceId)}}
+          <h5>Salesforce ID</h5>
+          {{model.salesforceId}}
+        {{/if}}
+
+        {{#if (and (can "token provider") model.globusUuid)}}
+          <h5>Globus UUID</h5>
+          {{model.globusUuid}}
         {{/if}}
 
         {{#if (not admin)}}

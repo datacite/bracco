@@ -38,6 +38,13 @@ const Validations = buildValidations({
       }),
     }),
   ],
+  globusUuid: [
+    validator('format', {
+      regex: /^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i,
+      allowBlank: true,
+      message: 'Must be a valid UUID (version 4).',
+    }),
+  ],
   twitterHandle: [
     validator('format', {
       regex: /^@[a-zA-Z0-9_]{0,15}$/,
@@ -127,6 +134,7 @@ export default DS.Model.extend(Validations, {
   name: DS.attr('string'),
   displayName: DS.attr('string'),
   symbol: DS.attr('string'),
+  globusUuid: DS.attr('string'),
   description: DS.attr('string'),
   region: DS.attr('string'),
   country: DS.attr('country'),
