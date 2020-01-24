@@ -70,10 +70,7 @@ const Validations = buildValidations({
   name: validator('presence', true),
   systemEmail: [
     validator('presence', true),
-    validator('format', {
-      type: 'email',
-      allowNonTld: true,
-    }),
+    validator('email-format', true),
   ],
   salesforceId: [
     validator('format', {
@@ -83,30 +80,27 @@ const Validations = buildValidations({
     }),
   ],
   globusUuid: [
-    validator('format', {
-      regex: /^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i,
+    validator('uuid-format', {
+      version: 4,
       allowBlank: true,
       message: 'Must be a valid UUID (version 4).',
     }),
   ],
   'issn.issnl': [
-    validator('format', {
+    validator('issn-format', {
       allowBlank: true,
-      regex: /^\d{4}(-)?\d{3}[0-9X]+\$/,
       message: 'ISSN-L is in the wrong format.',
     }),
   ],
   'issn.electronic': [
-    validator('format', {
+    validator('issn-format', {
       allowBlank: true,
-      regex: /^\d{4}(-)?\d{3}[0-9X]+\$/,
       message: 'ISSN (electronic) is in the wrong format.',
     }),
   ],
   'issn.print': [
-    validator('format', {
+    validator('issn-format', {
       allowBlank: true,
-      regex: /^\d{4}(-)?\d{3}[0-9X]+\$/,
       message: 'ISSN (print) is in the wrong format.',
     }),
   ],

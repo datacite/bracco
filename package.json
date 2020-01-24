@@ -67,7 +67,8 @@
     "iso-639-1": "^2.1.0",
     "junk": "^3.1.0",
     "langs": "^2.0.0",
-    "mime": "^2.4.4"
+    "mime": "^2.4.4",
+    "validator": "^12.1.0"
   },
   "fastbootDependencies": [
     "node-fetch",

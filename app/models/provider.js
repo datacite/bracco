@@ -39,8 +39,8 @@ const Validations = buildValidations({
     }),
   ],
   globusUuid: [
-    validator('format', {
-      regex: /^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i,
+    validator('uuid-format', {
+      version: 4,
       allowBlank: true,
       message: 'Must be a valid UUID (version 4).',
     }),
@@ -56,18 +56,11 @@ const Validations = buildValidations({
   displayName: validator('presence', true),
   systemEmail: [
     validator('presence', true),
-    validator('format', {
-      type: 'email',
-      allowNonTld: true,
-      message: 'Please enter a valid email address.',
-    }),
+    validator('email-format', true),
   ],
   groupEmail: [
-    validator('format', {
-      type: 'email',
-      allowNonTld: true,
+    validator('email-format', {
       allowBlank: true,
-      message: 'Please enter a valid email address.',
     }),
   ],
   passwordInput: [
@@ -100,15 +93,13 @@ const Validations = buildValidations({
     }),
   ],
   website: [
-    validator('format', {
-      type: 'url',
+    validator('url-format', {
       allowBlank: true,
       message: 'Please enter a valid website URL.',
     }),
   ],
   rorId: [
-    validator('format', {
-      type: 'url',
+    validator('url-format', {
       allowBlank: true,
       message: 'Please enter a valid ROR ID expressed as URL.',
     }),

@@ -5,10 +5,8 @@ import { validator, buildValidations } from 'ember-cp-validations';
 
 const Validations = buildValidations({
   email: [
-    validator('format', {
-      type: 'email',
+    validator('email-format', {
       allowBlank: true,
-      message: 'Please enter a valid email address.',
     }),
   ],
 });
