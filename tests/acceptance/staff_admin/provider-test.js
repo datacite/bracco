@@ -112,7 +112,7 @@ module('Acceptance | staff_admin | provider', function(hooks) {
   });
 
   test('new provider form', async function(assert) {
-    assert.expect(48);
+    assert.expect(49);
 
     await visit('/providers/new');
 
@@ -128,6 +128,7 @@ module('Acceptance | staff_admin | provider', function(hooks) {
     assert.dom('input#website-field').exists();
     assert.dom('input#twitter-handle-field').exists();
     assert.dom('div#ror-id').exists();
+    assert.dom('input#globus-uuid-field').exists();
     assert.dom('input#salesforce-id-field').exists();
     assert.dom('div#member-type').exists();
     assert.dom('div#tax-status').exists();
@@ -171,7 +172,7 @@ module('Acceptance | staff_admin | provider', function(hooks) {
   });
 
   test('editing provider TIB form', async function(assert) {
-    assert.expect(48);
+    assert.expect(49);
 
     await visit('/providers/tib/edit');
 
@@ -187,6 +188,7 @@ module('Acceptance | staff_admin | provider', function(hooks) {
     assert.dom('input#website-field').exists();
     assert.dom('input#twitter-handle-field').exists();
     assert.dom('div#ror-id').exists();
+    assert.dom('input#globus-uuid-field').exists();
     assert.dom('input#salesforce-id-field').exists();
     assert.dom('div#member-type').exists();
     assert.dom('div#tax-status').exists();

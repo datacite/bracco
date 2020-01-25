@@ -23,7 +23,7 @@ module('Acceptance | organization_admin | repository', function(hooks) {
     assert.dom('li a.nav-link.active').hasText('Info');
 
     // repository charts are displayed
-    assert.dom('#chart-doi-title').includesText('DOIs by year');
+    assert.dom('#chart-doi-title').includesText('DOI by year');
   });
 
   test('visiting repository DataCite Journal settings', async function(assert) {

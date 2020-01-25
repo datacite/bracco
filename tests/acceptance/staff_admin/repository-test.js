@@ -84,7 +84,7 @@ module('Acceptance | staff_admin | repository', function(hooks) {
   });
 
   test('new repository form', async function(assert) {
-    assert.expect(22);
+    assert.expect(23);
 
     await visit('/providers/tib/repositories/new');
 
@@ -94,6 +94,7 @@ module('Acceptance | staff_admin | repository', function(hooks) {
 
     assert.dom('input#repository-id-field').exists();
     assert.dom('div#client-type').exists();
+    assert.dom('input#globus-uuid-field').exists();
     assert.dom('input#salesforce-id-field').exists();
     assert.dom('div#re3data').exists();
     assert.dom('input#name-field').exists();
@@ -117,7 +118,7 @@ module('Acceptance | staff_admin | repository', function(hooks) {
   });
 
   test('editing repository AWI form', async function(assert) {
-    assert.expect(20);
+    assert.expect(21);
 
     await visit('/repositories/tib.awi/edit');
 
@@ -127,6 +128,7 @@ module('Acceptance | staff_admin | repository', function(hooks) {
 
     assert.dom('input#repository-id-field').exists();
     assert.dom('div#client-type').exists();
+    assert.dom('input#globus-uuid-field').exists();
     assert.dom('input#salesforce-id-field').exists();
     assert.dom('div#re3data').exists();
     assert.dom('input#name-field').exists();
