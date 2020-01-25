@@ -27,7 +27,7 @@
         {{#if (can "token provider")}}
           <form.element @controlType="text" @id="globus-uuid" @label="Globus UUID (optional)" @property="globusUuid" @required={{false}} @helpText="The Globus UUID used for token authentication." />
         {{/if}}
-        
+
         {{#if (can "create provider")}}
           <form.element @controlType="power-select" @id="tax-status" @label="Tax Status" @property="nonProfitStatus" @options={{nonProfitStatuses}} @destination={{nonProfitStatus}} as |el|>
             <el.control @onChange={{action "selectNonProfitStatus"}} @search={{action "searchNonProfitStatus"}} @placeholder="Tax Status" @searchPlaceholder="Type to search..." as |item|>
@@ -59,7 +59,7 @@
           </el.control>
         </form.element>
 
-        <form.element @controlType="textarea" @id="description" @label="Description (optional)" @property="description" rows="10" @helpText="Description of the organization. Please use markdown for formatting." @required={{false}} />
+        <form.element @controlType="textarea" @id="description" @label="Description (optional)" @property="description" @rows="10" @helpText="Description of the organization. Please use markdown for formatting." @required={{false}} />
 
         <div class="col-md-12">
           <br>

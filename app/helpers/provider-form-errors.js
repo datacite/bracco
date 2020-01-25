@@ -4,6 +4,7 @@ import { isPresent } from '@ember/utils';
 const providerLabelList = {
   symbol: 'member ID',
   confirmSymbol: 'confirm member ID',
+  globusUuid: 'globus UUID',
   rorId: 'ROR ID',
   name: 'provider name',
   displayName: 'provider display name',
@@ -12,6 +13,7 @@ const providerLabelList = {
 const organizationLabelList = {
   symbol: 'member ID',
   confirmSymbol: 'confirm member ID',
+  globusUuid: 'globus UUID',
   rorId: 'ROR ID',
   name: 'organization name',
   displayName: 'organization display name',
