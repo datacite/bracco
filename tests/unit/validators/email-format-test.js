@@ -29,7 +29,6 @@ module('Unit | Validator | email-format', function(hooks) {
 
     options = {
       allowBlank: true,
-      type: 'email',
     };
     options = validator.buildOptions(options, {}).toObject();
 
@@ -81,15 +80,11 @@ module('Unit | Validator | email-format', function(hooks) {
 
     assert.expect(validAddresses.length + invalidAddresses.length);
 
-    options = {
-      type: 'email',
-    };
-
-    options = validator.buildOptions(options, {}).toObject();
+    builtOptions = validator.buildOptions({}).toObject();
 
     validAddresses.forEach(email =>
       assert.equal(
-        validator.validate(email, options),
+        validator.validate(email, builtOptions),
         true,
         `validation of ${email} must succeed`,
       ),
@@ -145,7 +140,6 @@ module('Unit | Validator | email-format', function(hooks) {
     assert.expect(validAddresses.length + invalidAddresses.length);
 
     options = {
-      type: 'email',
       require_tld: false,
     };
 
@@ -155,8 +149,8 @@ module('Unit | Validator | email-format', function(hooks) {
       assert.equal(
         validator.validate(email, options),
         true,
-        `validation of ${email} must succeed`
-      )
+        `validation of ${email} must succeed`,
+      ),
     );
     invalidAddresses.forEach(email =>
       assert.equal(
