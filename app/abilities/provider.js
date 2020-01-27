@@ -31,16 +31,6 @@ export default Ability.extend({
         return false;
     }
   }),
-  canToken: computed('currentUser.role_id', 'model.provider_id', function() {
-    switch (this.get('currentUser.role_id')) {
-      case 'staff_admin':
-        return true;
-      case 'provider_admin':
-        return this.get('model.provider_id') === 'globus' || this.get('model.provider_id') === 'datacite';
-      default:
-        return false;
-    }
-  }),
   canRead: computed('currentUser.role_id', 'currentUser.provider_id', 'model.id', 'model.memberType', 'member.consortium.id', function() {
     switch (this.get('currentUser.role_id')) {
       case 'staff_admin':

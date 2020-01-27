@@ -52,12 +52,7 @@
 
         {{#if (and (can "create provider") model.salesforceId)}}
           <h5>Salesforce ID</h5>
-          {{model.salesforceId}}
-        {{/if}}
-
-        {{#if (and (can "token repository") model.globusUuid)}}
-          <h5>Globus UUID</h5>
-          {{model.globusUuid}}
+          <a href="{{model.salesforceId}}">{{model.salesforceId}}</a>
         {{/if}}
 
         {{#if (or model.issn.issnl model.issn.electronic model.issn.print)}}

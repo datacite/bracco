@@ -46,18 +46,6 @@ export default Ability.extend({
         return false;
     }
   }),
-  canToken: computed('currentUser.role_id', 'model.provider.id', function() {
-    switch (this.get('currentUser.role_id')) {
-      case 'staff_admin':
-        return true;
-      case 'provider_admin':
-        return this.get('model.provider.id') === 'globus' || this.get('model.provider.id') === 'datacite';
-      case 'client_admin':
-        return this.get('model.provider.id') === 'globus' || this.get('model.provider.id') === 'datacite';
-      default:
-        return false;
-    }
-  }),
   canRead: computed('currentUser.role_id', 'currentUser.provider_id', 'currentUser.client_id', 'model.id', 'model.provider.id', 'model.provider.consortium.id', function() {
     this.get('currentUser.role_id');
     switch (this.get('currentUser.role_id')) {

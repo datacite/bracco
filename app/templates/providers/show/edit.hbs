@@ -18,13 +18,7 @@
 
       {{#if (can "create provider")}}
         <form.element @controlType="text" @id="salesforce-id" @label="Salesforce ID" @property="salesforceId" @required={{false}} @helpText="The 18 digit ID in Salesforce." />
-      {{/if}}
-
-      {{#if (can "token provider")}}
-        <form.element @controlType="text" @id="globus-uuid" @label="Globus UUID (optional)" @property="globusUuid" @required={{false}} @helpText="The Globus UUID used for token authentication." />
-      {{/if}}
-
-      {{#if (can "create provider")}}
+      
         <form.element @controlType="power-select" @id="member-type" @label="Member Type" @property="memberType" @options={{memberTypes}} @destination={{memberType}} as |el|>
           <el.control @onChange={{action "selectMemberType"}} @search={{action "searchMemberType"}} @placeholder="Select Member Type" @searchPlaceholder="Type to search..." as |item|>
             {{titleize (humanize item)}}
