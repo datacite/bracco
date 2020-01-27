@@ -1,5 +1,5 @@
 import Component from '@ember/component';
-
+import { pluralize } from 'ember-inflector';
 
 export default Component.extend({
   tagName: 'div',
@@ -13,8 +13,8 @@ export default Component.extend({
 
   didReceiveAttrs() {
     this._super(...arguments);
-    if (this.model[`${this.label.toLowerCase()}s`] != null) {
-      this.set('count', this.model[`${this.label.toLowerCase()}s`]);
+    if (this.model[`${pluralize(this.label.toLowerCase())}`] != null) {
+      this.set('count', this.model[`${pluralize(this.label.toLowerCase())}`]);
     }
   },
 });
