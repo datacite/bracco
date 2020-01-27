@@ -30,14 +30,14 @@
     <span class="text-{{model.state}}">{{titleize model.state}}</span>
   </div>
 {{/if}}
-{{#if (eq link "users.show.dois") }}
+{{#if (and isPerson (cannot "update user")) }}
   <div class="metadata license">
     <div class="metrics-counter">
       {{#if hasMetrics}}
           {{#if citations}}
-            <i class="metrics-icons"> {{fa-icon "quote-right"}} {{ format-numbers citations }} {{  pluralize citations 'Citation' without-count=true}}</i>
+            <i class="metrics-icons" citations-test-badge> {{fa-icon "quote-right"}} {{ format-numbers citations }} {{  pluralize citations 'Citation' without-count=true}}</i>
           {{else}}
-            <i class="metrics-icons">{{fa-icon "info-circle"}}  No citations were reported.</i>
+            <i class="metrics-icons" citations-test-badge>{{fa-icon "info-circle"}}  No citations were reported.</i>
           {{/if}}
           {{#if hasUsage }}
             {{#if views}}

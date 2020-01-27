@@ -16,6 +16,9 @@ export default Component.extend({
   hasMetrics: computed('views','downloads','citations',function() {
     return ((this.views + this.downloads + this.citations) > 0) ?  true  : false;
   }),
+  isPerson: computed(function() {
+    return this.attrs.link == 'users.show.dois';
+  }),
   didReceiveAttrs() {
     this._super(...arguments);
 

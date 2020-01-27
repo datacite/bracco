@@ -85,7 +85,7 @@
       </div>
     </div>
   {{/if}}
-  {{#if (and isPerson (cannot "update user"))}}
+  {{#if isPerson}}
     {{#if (or model.meta.published model.query.published)}}
       <div class="panel facets">
         <div class="panel-body">
