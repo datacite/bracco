@@ -38,6 +38,13 @@ const Validations = buildValidations({
       }),
     }),
   ],
+  globusUuid: [
+    validator('uuid-format', {
+      version: 4,
+      allowBlank: true,
+      message: 'Must be a valid UUID (version 4).',
+    }),
+  ],
   twitterHandle: [
     validator('format', {
       regex: /^@[a-zA-Z0-9_]{0,15}$/,
@@ -49,18 +56,11 @@ const Validations = buildValidations({
   displayName: validator('presence', true),
   systemEmail: [
     validator('presence', true),
-    validator('format', {
-      type: 'email',
-      allowNonTld: true,
-      message: 'Please enter a valid email address.',
-    }),
+    validator('email-format', true),
   ],
   groupEmail: [
-    validator('format', {
-      type: 'email',
-      allowNonTld: true,
+    validator('email-format', {
       allowBlank: true,
-      message: 'Please enter a valid email address.',
     }),
   ],
   passwordInput: [
@@ -93,15 +93,14 @@ const Validations = buildValidations({
     }),
   ],
   website: [
-    validator('format', {
-      type: 'url',
+    validator('url-format', {
       allowBlank: true,
+      require_tld: false,
       message: 'Please enter a valid website URL.',
     }),
   ],
   rorId: [
-    validator('format', {
-      type: 'url',
+    validator('url-format', {
       allowBlank: true,
       message: 'Please enter a valid ROR ID expressed as URL.',
     }),

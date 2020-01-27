@@ -39,7 +39,7 @@ module('Acceptance | staff_admin | organization', function(hooks) {
   });
 
   test('new organization form', async function(assert) {
-    assert.expect(32);
+    assert.expect(33);
 
     await visit('/providers/dc/organizations/new');
 
@@ -55,6 +55,7 @@ module('Acceptance | staff_admin | organization', function(hooks) {
     assert.dom('input#website-field').exists();
     assert.dom('input#twitter-handle-field').exists();
     assert.dom('div#ror-id').exists();
+    assert.dom('input#globus-uuid-field').exists();
     assert.dom('input#salesforce-id-field').exists();
     assert.dom('div#member-type').exists();
     assert.dom('div#tax-status').exists();
@@ -81,7 +82,7 @@ module('Acceptance | staff_admin | organization', function(hooks) {
   });
 
   test('editing organization DataCite form', async function(assert) {
-    assert.expect(32);
+    assert.expect(33);
 
     await visit('/providers/datacite/edit');
 
@@ -97,6 +98,7 @@ module('Acceptance | staff_admin | organization', function(hooks) {
     assert.dom('input#website-field').exists();
     assert.dom('input#twitter-handle-field').exists();
     assert.dom('div#ror-id').exists();
+    assert.dom('input#globus-uuid-field').exists();
     assert.dom('input#salesforce-id-field').exists();
     assert.dom('div#member-type').exists();
     assert.dom('div#tax-status').exists();

@@ -52,9 +52,9 @@ const Validations = buildValidations({
     }),
   ],
   url: [
-    validator('format', {
-      regex: /(?:^|\s)((https?:\/\/)?(?:localhost|[\w-]+(?:\.[\w-]+)+)(:\d+)?(\/\S*)?)/,
+    validator('url-format', {
       allowBlank: true,
+      require_tld: false,
       message: 'Please enter a valid URL that the DOI should resolve to.',
     }),
     validator('presence', {
