@@ -14,27 +14,11 @@ export default Model.extend({
   orcid: computed('id', function() {
     return 'https://orcid.org/' + this.id;
   }),
-  doiCountByPublicationYear: computed('meta.published', function() {
+  doiCount: computed('meta.published', function() {
     return this.get('meta.published');
   }),
-  totalDoiCountByPublicationYear: computed('meta.published', function() {
+  totalDoiCount: computed('meta.published', function() {
     return this.get('meta.published').reduce(function(a, b) {
-      return a + b.count;
-    }, 0);
-  }),
-  currentDoiCountByPublicationYear: computed('doiCount', function() {
-    let currentYear = A(this.doiCount).findBy('id', new Date().getFullYear().toString());
-    if (currentYear) {
-      return currentYear.count;
-    } else {
-      return 0;
-    }
-  }),
-  doiCount: computed('meta.dois', function() {
-    return this.get('meta.dois');
-  }),
-  totalDoiCount: computed('meta.dois', function() {
-    return this.get('meta.dois').reduce(function(a, b) {
       return a + b.count;
     }, 0);
   }),
