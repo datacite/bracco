@@ -1,21 +1,21 @@
-<div style="display:flex;">
+<div class="metrics-counter">
   {{#if hasMetrics}}
       {{#if citations}}
-        <i style="margin-right: 1.5em; margin-bottom: 4px; margin-top: 4px">{{fa-icon "quote-right"}} {{ format-numbers citations }} {{  pluralize citations 'Citation' without-count=true}}</i>
+        <i class="metrics-icons"> {{fa-icon "quote-right"}} {{ format-numbers citations }} {{  pluralize citations 'Citation' without-count=true}}</i>
       {{else}}
-        <i style="margin-right: 1.5em; margin-bottom: 4px; margin-top: 4px">{{fa-icon "info-circle"}}  No citations were reported.</i>
+        <i class="metrics-icons">{{fa-icon "info-circle"}}  No citations were reported.</i>
       {{/if}}
       {{#if hasUsage }}
         {{#if views}}
-          <i style="margin-right: 1.5em; margin-bottom: 4px; margin-top: 4px"> {{fa-icon "eye"}}  {{ format-numbers views }}  {{ pluralize views 'View' without-count=true }} </i>
+          <i class="metrics-icons"> {{fa-icon "eye"}}  {{ format-numbers views }}  {{ pluralize views 'View' without-count=true }} </i>
         {{/if}}
         {{#if downloads}}
-          <i style="margin-right: 1.5em; margin-bottom: 4px; margin-top: 4px"> {{fa-icon "download"}}  {{ format-numbers downloads }}   {{ pluralize downloads 'Download' without-count=true }} </i>
+          <i class="metrics-icons"> {{fa-icon "download"}}  {{ format-numbers downloads }}   {{ pluralize downloads 'Download' without-count=true }} </i>
         {{/if}}
       {{else}}
-        <i style="margin-right: 1.5em; margin-bottom: 4px; margin-top: 4px">{{fa-icon "info-circle"}}  No usage information was reported.</i>
+        <i class="metrics-icons">{{fa-icon "info-circle"}}  No usage information was reported.</i>
       {{/if}}
   {{else}}
-    <i style="margin-right: 1.5em; margin-bottom: 4px; margin-top: 4px">{{fa-icon "info-circle"}}  No citations were reported. No usage information was reported.</i>
+    <i>{{fa-icon "info-circle"}}  No citations were reported. No usage information was reported.</i>
   {{/if}}
 </div>
