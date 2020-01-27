@@ -19,6 +19,7 @@ export default Route.extend({
       'mix-in': 'metrics',
     };
 
+    // eslint-disable-next-line no-undef
     return new Promise(function(resolve, reject) {
       all([
         self.store.findRecord('user', params.user_id).then(function(user) {
