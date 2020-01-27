@@ -31,12 +31,7 @@ export default Route.extend({
           self.transitionTo('/');
         }),
         self.store.query('doi', parameters).then(function(result) {
-          // return result.meta.citations;
-          return {
-            citations: 123,
-            downloads: 1,
-            views: 11,
-          };
+          return result.meta;
         }).catch(error => console.log(error)) ])
         .then(function([ hashA, hashB ]) {
           resolve(assign(hashA, hashB));
