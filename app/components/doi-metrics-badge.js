@@ -10,12 +10,11 @@ export default Component.extend({
   views: 0,
   downloads: 0,
   label: '',
-  metrics: [],
   store: service(),
   hasUsage: computed('views','downloads', function() {
     return ((this.views + this.downloads) > 0) ?  true  : false;
   }),
-  hasMetrics: computed('citations','views','downloads', function() {
+  hasMetrics: computed('views','downloads','citations',function() {
     return ((this.views + this.downloads + this.citations) > 0) ?  true  : false;
   }),
 
@@ -30,8 +29,8 @@ export default Component.extend({
   },
   passMetrics() {
     let self = this;
-    self.set('citations' , this.model.citations);
-    self.set('views',this.model.views);
-    self.set('downloads',this.model.downloads);
+    self.set('citations' , this.model.citations || 0);
+    self.set('views', this.model.views || 0);
+    self.set('downloads',this.model.downloads || 0);
   },
 });
