@@ -1,7 +1,0 @@
-query researcher($id: ID!) {
-  person(id: $id) {
-    citationCount
-    viewCount
-    downloadCount
-  }
-}
