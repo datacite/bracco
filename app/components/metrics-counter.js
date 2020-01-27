@@ -13,8 +13,8 @@ export default Component.extend({
 
   didReceiveAttrs() {
     this._super(...arguments);
-    if (this.data[`${this.label.toLowerCase()}s`] != null) {
-      this.set('count', this.data[`${this.label.toLowerCase()}s`]);
+    if (this.model[`${this.label.toLowerCase()}s`] != null) {
+      this.set('count', this.model[`${this.label.toLowerCase()}s`]);
     }
   },
 });

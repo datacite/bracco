@@ -1,19 +1,16 @@
 <div class="content">
   <div class="row row-chart">
-    {{#if (can "update user")}}
-      <BarChart @data={{model.user.doiCount}} @label="DOI" @model={{model.user}} @link="users.show.dois" @summarize={{true}} />
-    {{else}}
-      <BarChart @data={{model.user.doiCountByPublicationYear}} @label="DOI" @model={{model.user}} @link="users.show.dois" @summarize={{true}} />
-    {{/if}}
-    <DonutChart @data={{model.user.resourceTypeCount}} @label="DOI" @model={{model.user}} @link="users.show.dois" />
+    <BarChart @data={{model.doiCount}} @label="DOI" @model={{model}} @link="users.show.dois" @summarize={{true}} />
+    <DonutChart @data={{model.resourceTypeCount}} @label="DOI" @model={{model}} @link="users.show.dois" />
   </div>
   <div class="row row-chart">
-    <MetricsCounter @orcid={{model.user.id}} @data={{model.metrics}} @label='Citation' @model={{model}}  />
-    <MetricsCounter @orcid={{model.user.id}} @data={{model.metrics}} @label='View' @model={{model}}  />
-    <MetricsCounter @orcid={{model.user.id}} @data={{model.metrics}} @label='Download' @model={{model}}  />
+
+    <MetricsCounter @orcid={{model.id}}  @label='Citation' @model={{model}}  />
+    <MetricsCounter @orcid={{model.id}}  @label='View' @model={{model}}  />
+    <MetricsCounter @orcid={{model.id}}  @label='Download' @model={{model}}  />
   </div>
 
-  {{#if (can "read messages" model.user)}}
+  {{#if (can "read messages" model)}}
     <div class="row">
       <div class="col-md-9">
         {{#each flashMessages.queue as |flash|}}

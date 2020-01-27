@@ -1,8 +1,8 @@
-{{#if (can "read user" model.user)}}
+{{#if (can "read user" model)}}
   <ApplicationHeader @default={{true}} />
 
   <div class="container-fluid">
-    {{#if (can "read user" model.user)}}
+    {{#if (can "read user" model)}}
       <ol class="breadcrumb">
         {{#if (can "read index")}}
           <li class="breadcrumb-item"><LinkTo @route="index">DataCite</LinkTo></li>
@@ -12,7 +12,7 @@
     {{/if}}
 
     <div id="show">
-      <h2 class="work">{{model.user.name}}</h2>
+      <h2 class="work">{{model.name}}</h2>
 
       <div class="tab-content nav-tabs-member">
         <BsNav

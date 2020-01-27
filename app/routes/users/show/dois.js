@@ -7,7 +7,7 @@ export default Route.extend({
   can: service(),
 
   model(params) {
-    let user = this.modelFor('users/show').user;
+    let user = this.modelFor('users/show');
     params = assign(params, {
       page: {
         number: params.page,
@@ -18,7 +18,7 @@ export default Route.extend({
     });
 
     return hash({
-      user: user.user,
+      user,
       dois: this.store.query('doi', params),
     });
   },
