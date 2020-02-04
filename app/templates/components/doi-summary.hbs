@@ -30,21 +30,21 @@
     <span class="text-{{model.state}}">{{titleize model.state}}</span>
   </div>
 {{/if}}
-{{#if (and isPerson (cannot "update user")) }}
+{{#if isResearcherProfile}}
   <div class="metadata license">
     <div class="metrics-counter">
-      {{#if hasMetrics}}
-          {{#if citations}}
-            <i class="metrics-icons" citations-test-badge> {{fa-icon "quote-right"}} {{ format-numbers citations }} {{  pluralize citations 'Citation' without-count=true}}</i>
+      {{#if (add model.citations model.views model.downloads)}}
+          {{#if model.citations}}
+            <i class="metrics-icons" citations-test-badge> {{fa-icon "quote-right"}} {{ format-numbers model.citations }} {{  pluralize model.citations 'Citation' without-count=true}}</i>
           {{else}}
             <i class="metrics-icons" citations-test-badge>{{fa-icon "info-circle"}}  No citations were reported.</i>
           {{/if}}
-          {{#if hasUsage }}
-            {{#if views}}
-              <i class="metrics-icons"> {{fa-icon "eye"}}  {{ format-numbers views }}  {{ pluralize views 'View' without-count=true }} </i>
+          {{#if (add model.views model.downloads) }}
+            {{#if model.views}}
+              <i class="metrics-icons"> {{fa-icon "eye"}}  {{ format-numbers model.views }}  {{ pluralize model.views 'View' without-count=true }} </i>
             {{/if}}
-            {{#if downloads}}
-              <i class="metrics-icons"> {{fa-icon "download"}}  {{ format-numbers downloads }}   {{ pluralize downloads 'Download' without-count=true }} </i>
+            {{#if model.downloads}}
+              <i class="metrics-icons"> {{fa-icon "download"}}  {{ format-numbers model.downloads }}   {{ pluralize model.downloads 'Download' without-count=true }} </i>
             {{/if}}
           {{else}}
             <i class="metrics-icons">{{fa-icon "info-circle"}}  No usage information was reported.</i>

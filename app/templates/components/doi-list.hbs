@@ -85,7 +85,7 @@
       </div>
     </div>
   {{/if}}
-  {{#if isPerson}}
+  {{#if isResearcherProfile}}
     {{#if (or model.meta.published model.query.published)}}
       <div class="panel facets">
         <div class="panel-body">
@@ -240,7 +240,7 @@
       </div>
     </div>
   {{/if}}
-  {{#unless (and isPerson (cannot "update user"))}}
+  {{#unless isResearcherProfile}}
     {{#if (or model.meta.prefixes model.query.prefix)}}
       <div class="panel facets">
         <div class="panel-body">
@@ -302,7 +302,7 @@
       </div>
     </div>
   {{/if}}
-  {{#unless (and isPerson (cannot "update user"))}}
+  {{#unless isResearcherProfile}}
     {{#if (or model.meta.schemaVersions model.query.schema-version)}}
       <div class="panel facets">
         <div class="panel-body">
@@ -404,7 +404,7 @@
   {{#if model}}
     {{#each model as |doi|}}
       <div class="panel panel-transparent" data-test-doi>
-        <DoiSummary @model={{doi}} @isList={{true}}  @link={{link}} />
+        <DoiSummary @model={{doi}} @isList={{true}}  @isResearcherProfile={{isResearcherProfile}} />
         <div class="panel-footer">
           {{#if doi.isDraft}}
             {{fa-icon "info-circle"}} {{doi.doi}}
