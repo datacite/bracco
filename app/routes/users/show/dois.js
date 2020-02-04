@@ -17,9 +17,12 @@ export default Route.extend({
       'mix-in': 'metrics',
     });
 
+
     return hash({
       user,
-      dois: this.store.query('doi', params),
+      dois: this.store.query('doi', params).then(function(result) {
+        return result;
+      }).catch(error => console.log(error)),
     });
   },
 

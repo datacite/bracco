@@ -14,10 +14,14 @@ export default Route.extend({
 
     let self = this;
 
-    let parameters = {
+    let  parameters = assign(params, {
+      page: {
+        number: params.page,
+        size: params.size,
+      },
       'user-id': `${params.user_id}`,
       'mix-in': 'metrics',
-    };
+    });
 
     // eslint-disable-next-line no-undef
     return new Promise(function(resolve, reject) {
