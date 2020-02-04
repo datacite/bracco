@@ -34,9 +34,6 @@ module.exports = function(defaults) {
         content: (process.env.CDN_URL || 'https://assets.datacite.org') + '/stylesheets/doi.css?version=' + (pkg.version || '1.0'),
       },
     },
-    emberApolloClient: {
-      keepGraphqlFileExtension: true,
-    },
     'ember-power-select': {
       theme: 'bootstrap',
     },

@@ -20,9 +20,6 @@ module.exports = function(environment) {
     sentry: {
       environment,
     },
-    apollo: {
-      apiURL: 'https://api.test.datacite.org/client-api/graphql',
-    },
     'ember-cli-string-helpers': {
       only: [ 'humanize', 'html-safe', 'truncate', 'titleize' ],
     },
