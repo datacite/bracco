@@ -174,9 +174,9 @@ export default DS.Model.extend(Validations, {
   updated: DS.attr('date'),
   mode: DS.attr('string'),
   meta: DS.attr(),
-  citations: DS.attr(),
-  views: DS.attr(),
-  downloads: DS.attr(),
+  citations: DS.attr('number'),
+  views: DS.attr('number'),
+  downloads: DS.attr('number'),
 
 
   identifier: computed('doi', 'repository', function() {
