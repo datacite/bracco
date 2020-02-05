@@ -45,6 +45,11 @@ export default ApplicationSerializer.extend({
     registered: { serialize: false },
     updated: { serialize: false },
     isActive: { serialize: false },
+
+    citations: { serialize: false },
+    downloads: { serialize: false },
+    views: { serialize: false },
+    meta: { serialize: false },
   },
   keyForAttribute(key) {
     return key;
