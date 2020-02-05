@@ -39,8 +39,8 @@ const Validations = buildValidations({
     }),
   ],
   globusUuid: [
-    validator('format', {
-      regex: /^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i,
+    validator('uuid-format', {
+      version: 4,
       allowBlank: true,
       message: 'Must be a valid UUID (version 4).',
     }),
