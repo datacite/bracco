@@ -80,8 +80,8 @@ const Validations = buildValidations({
     }),
   ],
   globusUuid: [
-    validator('uuid-format', {
-      version: 4,
+    validator('format', {
+      regex: /^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i,
       allowBlank: true,
       message: 'Must be a valid UUID (version 4).',
     }),
@@ -115,6 +115,7 @@ export default DS.Model.extend(Validations, {
   name: DS.attr('string'),
   alternateName: DS.attr('string'),
   symbol: DS.attr('string'),
+  globusUuid: DS.attr('string'),
   re3data: DS.attr('string'),
   domains: DS.attr('string', { defaultValue: '*' }),
   systemEmail: DS.attr('string'),

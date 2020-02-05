@@ -14,6 +14,10 @@
         <form.element @controlType="text" @id="salesforce-id" @label="Salesforce ID" @property="salesforceId" @required={{false}} @helpText="The 18 digit ID in Salesforce." />
       {{/if}}
 
+      {{#if (can "token provider")}}
+        <form.element @controlType="text" @id="globus-uuid" @label="Globus UUID (optional)" @property="globusUuid" @required={{false}} @helpText="The Globus UUID used for token authentication." />
+      {{/if}}
+
       {{#if (eq model.repository.clientType "repository")}}
         <form.element @id="re3data" @controlType="power-select" @property="re3data" @label="re3data Record (optional)" @optionLabelPath="re3data" @options={{repositories}} @destination={{re3data}} @helpText="re3data is a registry of research data repositories." as |el|>
           <el.control @onChange={{action "selectRe3Data"}} @search={{action "searchRe3Data"}} @searchField="repositoryName" @searchPlaceholder="Type to search..." @allowClear={{true}} as |item|>
