@@ -14,11 +14,15 @@ export default Route.extend({
         size: params.size,
       },
       'user-id': user.get('id'),
+      'mix-in': 'metrics',
     });
+
 
     return hash({
       user,
-      dois: this.store.query('doi', params),
+      dois: this.store.query('doi', params).then(function(result) {
+        return result;
+      }).catch(error => console.log(error)),
     });
   },
 
@@ -32,7 +36,7 @@ export default Route.extend({
   },
 
   afterModel() {
-    if (this.can.cannot('read user', this.modelFor('users/show'))) {
+    if (this.can.cannot('read user', this.modelFor('users/show').user)) {
       this.transitionTo('index');
     }
   },

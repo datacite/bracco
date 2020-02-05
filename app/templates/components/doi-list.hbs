@@ -85,7 +85,7 @@
       </div>
     </div>
   {{/if}}
-  {{#if isPerson}}
+  {{#if isResearcherProfile}}
     {{#if (or model.meta.published model.query.published)}}
       <div class="panel facets">
         <div class="panel-body">
@@ -240,7 +240,7 @@
       </div>
     </div>
   {{/if}}
-  {{#unless isPerson}}
+  {{#unless isResearcherProfile}}
     {{#if (or model.meta.prefixes model.query.prefix)}}
       <div class="panel facets">
         <div class="panel-body">
@@ -302,36 +302,38 @@
       </div>
     </div>
   {{/if}}
-  {{#if (or model.meta.schemaVersions model.query.schema-version)}}
-    <div class="panel facets">
-      <div class="panel-body">
-        <h4>Schema Version</h4>
-        <ul>
-          {{#if model.meta.schemaVersions}}
-            {{#each model.meta.schemaVersions as |schemaVersion|}}
+  {{#unless isResearcherProfile}}
+    {{#if (or model.meta.schemaVersions model.query.schema-version)}}
+      <div class="panel facets">
+        <div class="panel-body">
+          <h4>Schema Version</h4>
+          <ul>
+            {{#if model.meta.schemaVersions}}
+              {{#each model.meta.schemaVersions as |schemaVersion|}}
+                <li>
+                  {{#if model.query.schema-version}}
+                    <LinkTo @route={{link}} @query={{hash schema-version=''}}>{{fa-icon "check-square-o"}}</LinkTo>
+                  {{else}}
+                    <LinkTo @route={{link}} @query={{hash schema-version=schemaVersion.id}}>{{fa-icon "square-o"}}</LinkTo>
+                  {{/if}}
+                  <div class="facet-title">{{schemaVersion.title}}</div>
+                  <span class="number pull-right">{{format-number schemaVersion.count}}</span>
+                  <div class="clearfix"/>
+                </li>
+              {{/each}}
+            {{else}}
               <li>
-                {{#if model.query.schema-version}}
-                  <LinkTo @route={{link}} @query={{hash schema-version=''}}>{{fa-icon "check-square-o"}}</LinkTo>
-                {{else}}
-                  <LinkTo @route={{link}} @query={{hash schema-version=schemaVersion.id}}>{{fa-icon "square-o"}}</LinkTo>
-                {{/if}}
-                <div class="facet-title">{{schemaVersion.title}}</div>
-                <span class="number pull-right">{{format-number schemaVersion.count}}</span>
+                <LinkTo @route={{link}} @query={{hash schema-version=''}}>{{fa-icon "check-square-o"}}</LinkTo>
+                <div class="facet-title"><model.query.schema-version /></div>
+                <span class="number pull-right">0</span>
                 <div class="clearfix"/>
               </li>
-            {{/each}}
-          {{else}}
-            <li>
-              <LinkTo @route={{link}} @query={{hash schema-version=''}}>{{fa-icon "check-square-o"}}</LinkTo>
-              <div class="facet-title"><model.query.schema-version /></div>
-              <span class="number pull-right">0</span>
-              <div class="clearfix"/>
-            </li>
-          {{/if}}
-        </ul>
+            {{/if}}
+          </ul>
+        </div>
       </div>
-    </div>
-  {{/if}}
+    {{/if}}
+  {{/unless}}
   {{#if (and (can "source doi" model) (or model.meta.sources model.query.source))}}
     <div class="panel facets add">
       <div class="panel-body">
@@ -402,8 +404,7 @@
   {{#if model}}
     {{#each model as |doi|}}
       <div class="panel panel-transparent" data-test-doi>
-        <DoiSummary @model={{doi}} @isList={{true}} />
-
+        <DoiSummary @model={{doi}} @isList={{true}}  @isResearcherProfile={{isResearcherProfile}} />
         <div class="panel-footer">
           {{#if doi.isDraft}}
             {{fa-icon "info-circle"}} {{doi.doi}}

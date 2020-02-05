@@ -1,8 +1,10 @@
 import Component from '@ember/component';
-// import Mathjax from 'mathjax-electron';
+import { inject as service } from '@ember/service';
 
 export default Component.extend({
   tagName: 'div',
   classNames: [ 'panel-body' ],
   isList: false,
+  store: service(),
+  isResearcherProfile: false,
 });
