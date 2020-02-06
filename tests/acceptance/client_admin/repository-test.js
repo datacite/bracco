@@ -95,4 +95,26 @@ module('Acceptance | client_admin | repository', function(hooks) {
     assert.dom('a#upload-doi').includesText('Create (File Upload)');
     assert.dom('a#transfer-dois').doesNotExist();
   });
+
+  test('editing repository RPH form', async function(assert) {
+    await visit('/repositories/datacite.rph/edit');
+
+    assert.equal(currentURL(), '/repositories/datacite.rph/edit');
+    assert.dom('h2.work').hasText('DataCite Test RPH');
+    assert.dom('div.tab-content').exists();
+    assert.dom('button#update-repository').includesText('Update Account');
+  });
+
+  test('editing repository RPH password form', async function(assert) {
+    await visit('/repositories/datacite.rph/change');
+
+    assert.equal(currentURL(), '/repositories/datacite.rph/change');
+    assert.dom('h2.work').hasText('DataCite Test RPH');
+    assert.dom('div.tab-content').exists();
+
+    assert.dom('input#password-input-field').exists();
+    assert.dom('input#confirm-password-input-field').exists();
+
+    assert.dom('button[type=submit]').includesText('Set Password');
+  });
 });
