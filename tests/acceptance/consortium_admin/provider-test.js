@@ -65,9 +65,10 @@ module('Acceptance | consortium_admin | provider', function(hooks) {
     assert.dom('h2.work').hasText('DataCite Consortium');
     assert.dom('a.nav-link.active').hasText('Repositories');
 
-    // TODO consortium member should see all repositories
-    assert.dom('.alert-warning').hasText('No repositories found.');
-    assert.dom('div.panel.facets').doesNotExist();
+    // at least one repository exists
+    assert.dom('[data-test-results]').includesText('Repositories');
+    assert.dom('[data-test-repository]').exists();
+    assert.dom('div.panel.facets').exists();
 
     // consortium members can't add repositories here
     // (need to go to consortium organization first)
@@ -99,9 +100,10 @@ module('Acceptance | consortium_admin | provider', function(hooks) {
     assert.dom('li a.nav-link.active').hasText('DOIs');
     assert.dom('div#search').exists();
 
-    // TODO consortium member should see all dois
-    assert.dom('.alert-warning').hasText('No DOIs found.');
-    assert.dom('div.panel.facets').doesNotExist();
+    // at least one doi exists
+    assert.dom('[data-test-results]').includesText('DOIs');
+    assert.dom('[data-test-doi]').exists();
+    assert.dom('div.panel.facets').exists();
 
     // consortium member can't add dois here (or via consortium organization or repository)
     assert.dom('a#new-doi').doesNotExist();
