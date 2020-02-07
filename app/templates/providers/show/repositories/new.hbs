@@ -63,10 +63,9 @@
             {{#each model.repository.language as |language index|}}
               <RepositoryLanguage @model={{model.repository}} @language={{language}} @form={{form}} @index={{index}} />
             {{/each}}
-
-            {{#if (lte model.repository.language.length 2)}}
-              <BsButton @class="btn-sm add-language" @outline={{true}} @onClick={{action "addLanguage"}}>{{fa-icon "plus-circle"}} Add another Language</BsButton>
-            {{/if}}
+          {{/if}}
+          {{#if (lte model.repository.language.length 2)}}
+            <BsButton @class="btn-sm add-language" @outline={{true}} @onClick={{action "addLanguage"}}>{{fa-icon "plus-circle"}} Add Language</BsButton>
           {{/if}}
         </div>
       </div>
@@ -86,10 +85,9 @@
               {{#each model.repository.repositoryType as |repositoryType index|}}
                 <RepositoryRepositoryType @model={{model.repository}} @repositoryType={{repositoryType}} @form={{form}} @index={{index}} />
               {{/each}}
-
-              {{#if (lte model.repository.repositoryType.length 2)}}
-                <BsButton @class="btn-sm add-repositoryType" @outline={{true}} @onClick={{action "addRepositoryType"}}>{{fa-icon "plus-circle"}} Add another Repository Type</BsButton>
-              {{/if}}
+            {{/if}}
+            {{#if (lte model.repository.repositoryType.length 2)}}
+              <BsButton @class="btn-sm add-repositoryType" @outline={{true}} @onClick={{action "addRepositoryType"}}>{{fa-icon "plus-circle"}} Add Repository Type</BsButton>
             {{/if}}
           </div>
         </div>
@@ -101,10 +99,9 @@
               {{#each model.repository.certificate as |certificate index|}}
                 <RepositoryCertificate @model={{model.repository}} @certificate={{certificate}} @form={{form}} @index={{index}} />
               {{/each}}
-
-              {{#if (lte model.repository.certificate.length 2)}}
-                <BsButton @class="btn-sm add-certificate" @outline={{true}} @onClick={{action "addCertificate"}}>{{fa-icon "plus-circle"}} Add another Certificate</BsButton>
-              {{/if}}
+            {{/if}}
+            {{#if (lte model.repository.certificate.length 2)}}
+              <BsButton @class="btn-sm add-certificate" @outline={{true}} @onClick={{action "addCertificate"}}>{{fa-icon "plus-circle"}} Add Certificate</BsButton>
             {{/if}}
           </div>
         </div>

@@ -63,10 +63,9 @@
             {{#each model.language as |language index|}}
               <RepositoryLanguage @model={{model}} @language={{language}} @form={{form}} @index={{index}} />
             {{/each}}
-
-            {{#if (lte model.language.length 2)}}
-              <BsButton @class="btn-sm add-language" @outline={{true}} @onClick={{action "addLanguage"}}>{{fa-icon "plus-circle"}} Add another Language</BsButton>
-            {{/if}}
+          {{/if}}
+          {{#if (lte model.language.length 2)}}
+            <BsButton @class="btn-sm add-language" @outline={{true}} @onClick={{action "addLanguage"}}>{{fa-icon "plus-circle"}} Add Language</BsButton>
           {{/if}}
         </div>
       </div>
@@ -79,17 +78,16 @@
       <form.element @controlType="textarea" @id="domains" @label="Domains" @property="domains" @required={{false}} @helpText="List of (sub-)domains used for DOI registration, or use * to allow all domains" />
 
       {{#if (eq model.clientType "repository")}}
-        <div class="form-group">
+        <div class="form-group" id="repository-type">
           <label class="control-label col-md-3">Repository Type (optional)</label>
           <div class="col-md-9">
             {{#if (gt model.repositoryType.length 0)}}
               {{#each model.repositoryType as |repositoryType index|}}
                 <RepositoryRepositoryType @model={{model}} @repositoryType={{repositoryType}} @form={{form}} @index={{index}} />
               {{/each}}
-
-              {{#if (lte model.repositoryType.length 2)}}
-                <BsButton @class="btn-sm add-repositoryType" @outline={{true}} @onClick={{action "addRepositoryType"}}>{{fa-icon "plus-circle"}} Add another Repository Type</BsButton>
-              {{/if}}
+            {{/if}}
+            {{#if (lte model.repositoryType.length 2)}}
+              <BsButton @class="btn-sm add-repositoryType" @outline={{true}} @onClick={{action "addRepositoryType"}}>{{fa-icon "plus-circle"}} Add Repository Type</BsButton>
             {{/if}}
           </div>
         </div>
@@ -101,10 +99,9 @@
               {{#each model.certificate as |certificate index|}}
                 <RepositoryCertificate @model={{model}} @certificate={{certificate}} @form={{form}} @index={{index}} />
               {{/each}}
-
-              {{#if (lte model.certificate.length 2)}}
-                <BsButton @class="btn-sm add-certificate" @outline={{true}} @onClick={{action "addCertificate"}}>{{fa-icon "plus-circle"}} Add another Certificate</BsButton>
-              {{/if}}
+            {{/if}}
+            {{#if (lte model.certificate.length 2)}}
+              <BsButton @class="btn-sm add-certificate" @outline={{true}} @onClick={{action "addCertificate"}}>{{fa-icon "plus-circle"}} Add Certificate</BsButton>
             {{/if}}
           </div>
         </div>

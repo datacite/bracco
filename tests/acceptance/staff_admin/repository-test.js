@@ -118,7 +118,7 @@ module('Acceptance | staff_admin | repository', function(hooks) {
   });
 
   test('editing repository AWI form', async function(assert) {
-    assert.expect(21);
+    assert.expect(23);
 
     await visit('/repositories/tib.awi/edit');
 
@@ -143,6 +143,8 @@ module('Acceptance | staff_admin | repository', function(hooks) {
     assert.dom('input#url-field').exists();
     assert.dom('div#language').exists();
     assert.dom('div#software').exists();
+    assert.dom('div#repository-type').exists();
+    assert.dom('div#certificate').exists();
     assert.dom('textarea#domains-field').exists();
     assert.dom('input#is-active-field').exists();
 
