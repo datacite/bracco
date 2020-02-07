@@ -15,6 +15,17 @@ export default Controller.extend({
     submit(doi) {
       doi.set('event', this.setEvent(doi.get('state')));
 
+      // Reset content to null rather than use default values
+      // We want the API to work out the values from the file XML
+      doi.set('creators', null);
+      doi.set('titles', null);
+      doi.set('descriptions', null);
+      doi.set('publisher', null);
+      doi.set('publicationYear', null);
+      doi.set('types', null);
+      doi.set('rightsList', null);
+      doi.set('schemaVersion', null);
+
       let self = this;
       doi.save().then(function(doi) {
         self.transitionToRoute('dois.show', doi);
