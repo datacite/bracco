@@ -21,6 +21,7 @@ export default Route.extend({
       },
       'user-id': `${params.user_id}`,
       'mix-in': 'metrics',
+      'user-stats': true,
     });
 
     // eslint-disable-next-line no-undef
