@@ -34,6 +34,9 @@ export default Controller.extend({
       doi.set('rightsList', null);
       doi.set('schemaVersion', null);
 
+      // Don't try and set the landingPage information for DOI Updates
+      doi.set('landingPage', null);
+
       let self = this;
       doi.save().then(function(doi) {
         self.transitionToRoute('dois.show', doi);

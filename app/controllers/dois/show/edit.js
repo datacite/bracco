@@ -35,6 +35,9 @@ export default Controller.extend({
       // don't send xml
       doi.set('xml', null);
 
+      // Don't try and set the landingPage information for DOI Updates
+      doi.set('landingPage', null);
+
       // only store name identifiers and affiliations with a value
       A(doi.get('creators')).forEach((creator) => {
         creator.set('nameIdentifiers', A(creator.get('nameIdentifiers')).filter(function(nameIdentifier) {
