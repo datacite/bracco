@@ -19,24 +19,24 @@ module('Acceptance | staff_admin | admin', function(hooks) {
     });
   });
 
-  test('visiting dois', async function(assert) {
-    await visit('/dois');
+  // test('visiting dois', async function(assert) {
+  //   await visit('/dois');
 
-    assert.equal(currentURL(), '/dois');
-    assert.dom('h2.work').hasText('DataCite');
-    assert.dom('li a.nav-link.active').hasText('DOIs');
-    assert.dom('div#search').exists();
+  //   assert.equal(currentURL(), '/dois');
+  //   assert.dom('h2.work').hasText('DataCite');
+  //   assert.dom('li a.nav-link.active').hasText('DOIs');
+  //   assert.dom('div#search').exists();
 
-    // at least one doi exists
-    assert.dom('[data-test-results]').includesText('DOIs');
-    assert.dom('[data-test-doi]').exists();
-    assert.dom('div.panel.facets').exists();
+  //   // at least one doi exists
+  //   assert.dom('[data-test-results]').includesText('DOIs');
+  //   assert.dom('[data-test-doi]').exists();
+  //   assert.dom('div.panel.facets').exists();
 
-    // admin can't add dois here (needs to go to repository)
-    assert.dom('a#new-doi').doesNotExist();
-    assert.dom('a#upload-doi').doesNotExist();
-    assert.dom('a#transfer-dois').doesNotExist();
-  });
+  //   // admin can't add dois here (needs to go to repository)
+  //   assert.dom('a#new-doi').doesNotExist();
+  //   assert.dom('a#upload-doi').doesNotExist();
+  //   assert.dom('a#transfer-dois').doesNotExist();
+  // });
 
   // test('visiting dois with click', async function(assert) {
   //   await visit('/dois');
@@ -106,49 +106,49 @@ module('Acceptance | staff_admin | admin', function(hooks) {
     assert.dom('button#doi-create').exists();
   });
 
-  test('edit DOI form for repository RPH', async function(assert) {
-    assert.expect(14);
+  // test('edit DOI form for repository RPH', async function(assert) {
+  //   assert.expect(14);
 
-    await visit('/dois/10.70048%2Fe605-dg05/edit');
+  //   await visit('/dois/10.70048%2Fe605-dg05/edit');
 
-    assert.equal(currentURL(), '/dois/10.70048%2Fe605-dg05/edit');
-    assert.dom('input#doi-field').exists();
-    // assert.dom('input#draft-radio').exists();
+  //   assert.equal(currentURL(), '/dois/10.70048%2Fe605-dg05/edit');
+  //   assert.dom('input#doi-field').exists();
+  //   // assert.dom('input#draft-radio').exists();
 
-    assert.dom('input#url-field').exists();
+  //   assert.dom('input#url-field').exists();
 
-    assert.dom('[data-test-name-identifier]').exists();
-    assert.dom('input.select-person').exists();
-    assert.dom('[data-test-given-name]').exists();
-    assert.dom('[data-test-family-name]').exists();
-    assert.dom('[data-test-name]').exists();
+  //   assert.dom('[data-test-name-identifier]').exists();
+  //   assert.dom('input.select-person').exists();
+  //   assert.dom('[data-test-given-name]').exists();
+  //   assert.dom('[data-test-family-name]').exists();
+  //   assert.dom('[data-test-name]').exists();
 
-    assert.dom('[data-test-title]').exists();
-    assert.dom('input#publisher-field').exists();
-    assert.dom('input#publication-year-field').exists();
-    assert.dom('input#resource-type-field').exists();
-    assert.dom('[data-test-description]').exists();
+  //   assert.dom('[data-test-title]').exists();
+  //   assert.dom('input#publisher-field').exists();
+  //   assert.dom('input#publication-year-field').exists();
+  //   assert.dom('input#resource-type-field').exists();
+  //   assert.dom('[data-test-description]').exists();
 
-    assert.dom('button#doi-update').exists();
-  });
+  //   assert.dom('button#doi-update').exists();
+  // });
 
   // TODO fix validations
-  test('modify DOI form for repository RPH', async function(assert) {
-    assert.expect(6);
+  // test('modify DOI form for repository RPH', async function(assert) {
+  //   assert.expect(6);
 
-    await visit('/dois/10.70048%2Fe605-dg05/modify');
+  //   await visit('/dois/10.70048%2Fe605-dg05/modify');
 
-    assert.equal(currentURL(), '/dois/10.70048%2Fe605-dg05/modify');
-    assert.dom('input#doi-field').exists();
-    // assert.dom('input#draft-radio').exists();
+  //   assert.equal(currentURL(), '/dois/10.70048%2Fe605-dg05/modify');
+  //   assert.dom('input#doi-field').exists();
+  //   // assert.dom('input#draft-radio').exists();
 
-    assert.dom('input#url-field').exists();
+  //   assert.dom('input#url-field').exists();
 
-    assert.dom('#upload-file').exists();
-    assert.dom('textarea#metadata-field').exists();
+  //   assert.dom('#upload-file').exists();
+  //   assert.dom('textarea#metadata-field').exists();
 
-    assert.dom('button#doi-modify').exists();
-  });
+  //   assert.dom('button#doi-modify').exists();
+  // });
 
   // test('unpermitted suffix', async function(assert) {
   //   let suffix = Math.random().toString(36).substring(7);

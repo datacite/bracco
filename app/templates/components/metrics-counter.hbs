@@ -7,7 +7,11 @@
   <div class="panel-body panel-chart">
     <div class="user-metrics-counter-box" id="metrics-counter-doi">
       <p class="user-metrics-counter">
-        {{format-numbers data}} 
+        {{#if (gt data 0)}}
+          <LinkTo @route={{link}} @query={{query}} @model={{model.id}}>{{format-numbers count}}</LinkTo>
+        {{else}}
+          {{format-numbers count}}
+        {{/if}}
       </p>
     </div>
   </div>
