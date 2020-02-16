@@ -26,13 +26,16 @@ export default Controller.extend({
 
       // set individual attributes to null so that they don't overwrite what is in the xml attribute
       doi.set('creators', null);
-      doi.set('titles', []);
-      doi.set('descriptions', []);
+      doi.set('titles', null);
+      doi.set('descriptions', null);
       doi.set('publisher', null);
       doi.set('publicationYear', null);
-      doi.set('types', {});
-      doi.set('rightsList', []);
+      doi.set('types', null);
+      doi.set('rightsList', null);
       doi.set('schemaVersion', null);
+
+      // Don't try and set the landingPage information for DOI Updates
+      doi.set('landingPage', null);
 
       let self = this;
       doi.save().then(function(doi) {
