@@ -4,9 +4,9 @@
     <DonutChart @data={{model.resourceTypeCount}} @label="DOI" @model={{model}} @link="users.show.dois" />
   </div>
   <div class="row row-chart">
-    <MetricsCounter @label='Citation' @model={{model}}  />
-    <MetricsCounter @label='View' @model={{model}}  />
-    <MetricsCounter @label='Download' @model={{model}}  />
+    <MetricsCounter @label='Citations' @data={{model.totalCitationCount}} />
+    <MetricsCounter @label='Views' @data={{model.totalViewCount}} />
+    <MetricsCounter @label='Downloads' @data={{model.totalDownloadCount}} />
   </div>
   {{#if (can "read messages" model)}}
     <div class="row">
