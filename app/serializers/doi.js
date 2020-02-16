@@ -46,9 +46,9 @@ export default ApplicationSerializer.extend({
     updated: { serialize: false },
     isActive: { serialize: false },
 
-    citations: { serialize: false },
-    downloads: { serialize: false },
-    views: { serialize: false },
+    citationCount: { serialize: false },
+    downloadCount: { serialize: false },
+    viewCount: { serialize: false },
     meta: { serialize: false },
   },
   keyForAttribute(key) {

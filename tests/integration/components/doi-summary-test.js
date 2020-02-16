@@ -25,7 +25,7 @@ module('Integration | Component | doi summary', function(hooks) {
   });
 
   test('it renders 0 citations', async function(assert) {
-    this.set('model', make('doi', {citations: 0}));
+    this.set('model', make('doi', { citationCount: 0 }));
     await render(hbs`{{doi-summary isResearcherProfile=true model=model}}`);
 
     assert.dom('[citations-test-badge]').hasText('  No citations were reported.');

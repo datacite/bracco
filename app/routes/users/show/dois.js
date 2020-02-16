@@ -14,9 +14,7 @@ export default Route.extend({
         size: params.size,
       },
       'user-id': user.get('id'),
-      'mix-in': 'metrics',
     });
-
 
     return hash({
       user,

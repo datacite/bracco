@@ -174,10 +174,9 @@ export default DS.Model.extend(Validations, {
   updated: DS.attr('date'),
   mode: DS.attr('string'),
   meta: DS.attr(),
-  citations: DS.attr('number'),
-  views: DS.attr('number'),
-  downloads: DS.attr('number'),
-
+  citationCount: DS.attr('number'),
+  viewCount: DS.attr('number'),
+  downloadCount: DS.attr('number'),
 
   identifier: computed('doi', 'repository', function() {
     if (ENV.API_URL == 'https://api.datacite.org' || (w('crossref.citations medra.citations kisti.citations jalc.citations op.citations').includes(this.repository.get('id')))) {
