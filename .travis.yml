@@ -22,7 +22,6 @@ before_install:
     fi
   - cp .env.travis .env
   - npm config set spin false
-  - npm install -g codeclimate-test-reporter
   - curl -o- -L https://yarnpkg.com/install.sh | bash
   - export PATH=$HOME/.yarn/bin:$PATH
 
