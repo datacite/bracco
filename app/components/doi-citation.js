@@ -29,11 +29,15 @@ export default Component.extend({
   selectStyle(style) {
     let self = this;
     let url = ENV.API_URL + '/dois/' + this.model.get('doi') + '?style=' + style;
-    let result = fetch(url, {
-      headers: {
+    let headers = { 'Accept': 'text/x-bibliography' };
+    if (this.currentUser.get('jwt')) {
+      headers = {
         'Authorization': 'Bearer ' + this.currentUser.get('jwt'),
         'Accept': 'text/x-bibliography',
-      },
+      };
+    }
+    let result = fetch(url, {
+      headers,
     }).then(function(response) {
       if (response.ok) {
         return response.blob();

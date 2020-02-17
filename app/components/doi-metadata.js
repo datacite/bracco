@@ -56,12 +56,15 @@ export default Component.extend({
         'bibtex': 'application/x-bibtex',
         'ris': 'application/x-research-info-systems',
         'jats': 'application/vnd.jats+xml' };
-
-      let result = fetch(url, {
-        headers: {
+      let headers = { 'Accept': acceptHeaders[metadata] };
+      if (this.currentUser.get('jwt')) {
+        headers = {
           'Authorization': 'Bearer ' + this.currentUser.get('jwt'),
           'Accept': acceptHeaders[metadata],
-        },
+        };
+      }
+      let result = fetch(url, {
+        headers,
       }).then(function(response) {
         if (response.ok) {
           return response.blob();
