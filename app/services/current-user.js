@@ -70,7 +70,6 @@ export default Service.extend({
         this.set('roleName', 'Staff');
 
         this.features.setup({
-          'use-repositories': true,
           'show-researchers': true,
         });
       } else if (payload.role_id === 'provider_admin') {
@@ -97,7 +96,6 @@ export default Service.extend({
 
       if (payload.beta_tester) {
         this.features.setup({
-          'use-repositories': true,
           'show-researchers': true,
         });
       }
