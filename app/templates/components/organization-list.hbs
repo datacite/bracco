@@ -182,8 +182,8 @@
       </div>
     {{/each}}
     <div class="text-center">
-      {{#if (gt model.meta.totalPages 1)}}
-        <PageNumbers @model={{model}} @link={{link}} />
+      {{#if (gt model.organizations.meta.totalPages 1)}}
+        <PageNumbers @model={{model.organizations}} @link={{link}} />
       {{/if}}
     </div>
   {{else}}
