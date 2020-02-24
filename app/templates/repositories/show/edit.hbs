@@ -107,7 +107,7 @@
         </div>
       {{/if}}
 
-      {{#if (can "create repository" model.provider)}}
+      {{#if (can "create repository" model)}}
         <form.element @controlType="checkbox" @id="is-active" @label="Account is active" @property="isActive" @helpText="This account can register and update DOIs" />
       {{/if}}
 
