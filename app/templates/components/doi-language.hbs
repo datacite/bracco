@@ -1,0 +1,12 @@
+<div class="form-group {{validationClass}}">
+  <label class="control-label col-md-3">Language (optional)</label>
+
+  <div class="col-md-9">
+    <div class="power-select doi-language">
+      {{#form.element controlType="power-select" disabled=disabled value=language options=languages as |el|}}
+      {{el.control class="doi-language" onChange=(action "selectLanguage") search=(action "searchLanguage") placeholder="Select Language" searchPlaceholder="Type to search..." allowClear=true }}
+      {{/form.element}}
+    </div>
+    <div class="help-block help-block doi-language">The primary language of the resource.</div>
+  </div>
+</div>
