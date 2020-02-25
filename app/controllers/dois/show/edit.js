@@ -52,6 +52,11 @@ export default Controller.extend({
         }
       });
 
+      // // only store descriptions with a description text
+      // doi.set('language', A(doi.get('language')).filter(function(language) {
+      //   return !isBlank(language);
+      // }));
+
       // only store descriptions with a description text
       doi.set('descriptions', A(doi.get('descriptions')).filter(function(description) {
         return !isBlank(description.description);

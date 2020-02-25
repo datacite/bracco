@@ -64,7 +64,7 @@ module('Acceptance | staff_admin | admin', function(hooks) {
   // });
 
   test('new DOI form for repository RPH', async function(assert) {
-    assert.expect(14);
+    assert.expect(15);
 
     await visit('/repositories/datacite.rph/dois/new');
 
@@ -85,6 +85,7 @@ module('Acceptance | staff_admin | admin', function(hooks) {
     assert.dom('input#publication-year-field').exists();
     assert.dom('input#resource-type-field').exists();
     assert.dom('[data-test-description]').exists();
+    assert.dom('#doi-language').exists();
 
     assert.dom('button#doi-create').exists();
   });
@@ -106,31 +107,32 @@ module('Acceptance | staff_admin | admin', function(hooks) {
     assert.dom('button#doi-create').exists();
   });
 
-  // test('edit DOI form for repository RPH', async function(assert) {
-  //   assert.expect(14);
+  test('edit DOI form for repository RPH', async function(assert) {
+    assert.expect(15);
 
-  //   await visit('/dois/10.70048%2Fe605-dg05/edit');
+    await visit('/dois/10.70048%2Fe605-dg05/edit');
 
-  //   assert.equal(currentURL(), '/dois/10.70048%2Fe605-dg05/edit');
-  //   assert.dom('input#doi-field').exists();
-  //   // assert.dom('input#draft-radio').exists();
+    assert.equal(currentURL(), '/dois/10.70048%2Fe605-dg05/edit');
+    assert.dom('input#doi-field').exists();
+    // assert.dom('input#draft-radio').exists();
 
-  //   assert.dom('input#url-field').exists();
+    assert.dom('input#url-field').exists();
 
-  //   assert.dom('[data-test-name-identifier]').exists();
-  //   assert.dom('input.select-person').exists();
-  //   assert.dom('[data-test-given-name]').exists();
-  //   assert.dom('[data-test-family-name]').exists();
-  //   assert.dom('[data-test-name]').exists();
+    assert.dom('[data-test-name-identifier]').exists();
+    assert.dom('input.select-person').exists();
+    assert.dom('[data-test-given-name]').exists();
+    assert.dom('[data-test-family-name]').exists();
+    assert.dom('[data-test-name]').exists();
 
-  //   assert.dom('[data-test-title]').exists();
-  //   assert.dom('input#publisher-field').exists();
-  //   assert.dom('input#publication-year-field').exists();
-  //   assert.dom('input#resource-type-field').exists();
-  //   assert.dom('[data-test-description]').exists();
+    assert.dom('[data-test-title]').exists();
+    assert.dom('input#publisher-field').exists();
+    assert.dom('input#publication-year-field').exists();
+    assert.dom('input#resource-type-field').exists();
+    assert.dom('[data-test-description]').exists();
+    assert.dom('#doi-language').exists();
 
-  //   assert.dom('button#doi-update').exists();
-  // });
+    assert.dom('button#doi-update').exists();
+  });
 
   // TODO fix validations
   // test('modify DOI form for repository RPH', async function(assert) {

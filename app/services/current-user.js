@@ -71,6 +71,7 @@ export default Service.extend({
 
         this.features.setup({
           'show-researchers': true,
+          'optional-fields': true,
         });
       } else if (payload.role_id === 'provider_admin') {
         this.set('isProvider', true);
@@ -97,6 +98,7 @@ export default Service.extend({
       if (payload.beta_tester) {
         this.features.setup({
           'show-researchers': true,
+          'optional-fields': true,
         });
       }
 
