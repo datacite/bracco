@@ -27,7 +27,7 @@ export default ApplicationSerializer.extend({
     subjects: { serialize: false },
     contributors: { serialize: false },
     dates: { serialize: false },
-    language: { serialize: false },
+    // language: { serialize: false },
     relatedIdentifiers: { serialize: false },
     sizes: { serialize: false },
     formats: { serialize: false },

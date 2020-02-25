@@ -150,7 +150,7 @@ export default DS.Model.extend(Validations, {
   subjects: DS.attr(),
   contributors: DS.attr(),
   dates: DS.attr(),
-  language: DS.attr(),
+  language: DS.attr('string'),
   types: DS.attr(),
   relatedIdentifiers: DS.attr(),
   sizes: DS.attr(),
