@@ -13,8 +13,10 @@ module('Unit | Model | contact', function(hooks) {
   });
 
   test('should correct contact name', function(assert) {
-    this.set('contact', make('contact'));
-    const contact = run(() => this.owner.lookup('service:store').first);
-    assert.equal(contact.name, 'John Smith', 'name is John Smith');
+    let model = run(() => this.owner.lookup('service:store').createRecord('contact'));
+    const contact = make('contact');
+    model.set('givenName', contact.givenName);
+    model.set('familyName', contact.familyName);
+    assert.equal(model.get('name'), 'John Smith');
   });
 });
