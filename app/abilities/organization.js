@@ -9,7 +9,7 @@ export default Ability.extend({
     switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
-      case 'provider_admin':
+      case 'consortium_admin':
         return this.get('currentUser.provider_id') === this.get('model.organizations.query.consortium-id');
       default:
         return false;
