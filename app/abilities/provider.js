@@ -17,16 +17,20 @@ export default Ability.extend({
     switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
+      case 'consortium_admin':
+        return this.get('currentUser.provider_id') === this.get('model.consortium.id');
       default:
         return false;
     }
   }),
-  canUpdate: computed('currentUser.role_id', 'currentUser.provider_id', 'model.id', 'model.memberType', 'member.consortium.id', function() {
+  canUpdate: computed('currentUser.role_id', 'currentUser.provider_id', 'model.id', 'model.memberType', 'model.consortium.id', function() {
     switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
+      case 'consortium_admin':
+        return this.get('currentUser.provider_id') === this.get('model.id') || this.get('currentUser.provider_id') === this.get('model.consortium.id');
       case 'provider_admin':
-        return this.get('currentUser.provider_id') === this.get('model.id') || (this.get('model.memberType') === 'consortium_organization' && this.get('currentUser.provider_id') === this.get('model.consortium.id'));
+        return this.get('currentUser.provider_id') === this.get('model.id');
       default:
         return false;
     }
@@ -41,12 +45,14 @@ export default Ability.extend({
         return false;
     }
   }),
-  canRead: computed('currentUser.role_id', 'currentUser.provider_id', 'model.id', 'model.memberType', 'member.consortium.id', function() {
+  canRead: computed('currentUser.role_id', 'currentUser.provider_id', 'model.id', 'model.memberType', 'model.consortium.id', function() {
     switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
+      case 'consortium_admin':
+        return this.get('currentUser.provider_id') === this.get('model.id') || this.get('currentUser.provider_id') === this.get('model.consortium.id');
       case 'provider_admin':
-        return this.get('currentUser.provider_id') === this.get('model.id') || (this.get('model.memberType') === 'consortium_organization' && this.get('currentUser.provider_id') === this.get('model.consortium.id'));
+        return this.get('currentUser.provider_id') === this.get('model.id');
       default:
         return false;
     }

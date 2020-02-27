@@ -15,6 +15,7 @@ import { authenticateSession } from 'ember-simple-auth/test-support';
 import { setupFactoryGuy } from 'ember-data-factory-guy';
 // import { build, make, mockFindRecord } from 'ember-data-factory-guy';
 // import ENV from 'bracco/config/environment';
+import { selectChoose } from 'ember-power-select/test-support/helpers';
 
 module('Acceptance | client_admin | repository', function(hooks) {
   setupApplicationTest(hooks);
@@ -58,5 +59,34 @@ module('Acceptance | client_admin | repository', function(hooks) {
 
     assert.equal(currentURL(), '/dois/10.70048%2Fe605-dg05');
     assert.dom('h2.work').hasText('10.70048/e605-dg05');
+  });
+
+  test('visiting specific doi in the Form', async function(assert) {
+    await authenticateSession({
+      uid: 'datacite.rph',
+      name: 'Alfred Wegener Institute',
+      role_id: 'client_admin',
+      provider_id: 'datacite',
+      client_id: 'datacite.rph',
+    });
+    await visit('/dois/10.70048%2Fe605-dg05/edit');
+
+    assert.equal(currentURL(), '/dois/10.70048%2Fe605-dg05/edit');
+    assert.dom('#doi-language').includesText('French');
+  });
+
+  test('visiting the Form and selecting language', async function(assert) {
+    await authenticateSession({
+      uid: 'datacite.rph',
+      name: 'Alfred Wegener Institute',
+      role_id: 'client_admin',
+      provider_id: 'datacite',
+      client_id: 'datacite.rph',
+    });
+    await visit('repositories/datacite.rph/dois/new');
+
+    await selectChoose('#doi-language', 'English');
+    assert.equal(currentURL(), 'repositories/datacite.rph/dois/new');
+    assert.dom('#doi-language').includesText('English');
   });
 });

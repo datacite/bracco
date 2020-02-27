@@ -9,6 +9,8 @@ export default Ability.extend({
     switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
         return 'admin' === this.get('model.id');
+      case 'consortium_admin':
+        return this.get('currentUser.provider_id') === this.get('model.id');
       case 'provider_admin':
         return this.get('currentUser.provider_id') === this.get('model.id');
       case 'client_admin':

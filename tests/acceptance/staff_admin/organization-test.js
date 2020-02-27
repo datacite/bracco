@@ -38,6 +38,22 @@ module('Acceptance | staff_admin | organization', function(hooks) {
     assert.dom('a#add-organization').hasAttribute('href', '/providers/dc/organizations/new');
   });
 
+  test('visiting provider DC consortium organization workshop', async function(assert) {
+    await visit('/providers/workshop/settings');
+
+    assert.equal(currentURL(), '/providers/workshop/settings');
+    assert.dom('h2.work').hasText('DataCite Training Workshop');
+    assert.dom('li a.nav-link.active').hasText('Settings');
+
+    // staff can edit or delete consortium organization
+    assert.dom('a#edit-provider').includesText('Update Organization');
+    assert.dom('a#edit-provider').hasAttribute('href', '/providers/workshop/edit');
+
+    // staff can edit or delete consortium organization
+    assert.dom('a#delete-provider').includesText('Delete Organization');
+    assert.dom('a#delete-provider').hasAttribute('href', '/providers/workshop/delete');
+  });
+
   test('new organization form', async function(assert) {
     assert.expect(33);
 

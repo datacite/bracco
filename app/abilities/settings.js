@@ -8,6 +8,7 @@ export default Ability.extend({
   canWrite: computed('currentUser.role_id', function() {
     switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
+      case 'consortium_admin':
       case 'provider_admin':
       case 'client_admin':
         return true;
@@ -18,6 +19,7 @@ export default Ability.extend({
   canRead: computed('currentUser.role_id', function() {
     switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
+      case 'consortium_admin':
       case 'provider_admin':
       case 'client_admin':
         return true;

@@ -21,6 +21,7 @@ export default Service.extend({
   home: null,
   settings: null,
   isAdmin: false,
+  isConsortium: false,
   isProvider: false,
   isClient: false,
   isUser: false,
@@ -71,7 +72,13 @@ export default Service.extend({
 
         this.features.setup({
           'show-researchers': true,
+          'optional-fields': true,
         });
+      } else if (payload.role_id === 'consortium_admin') {
+        this.set('isConsortium', true);
+        this.set('home', { route: 'providers.show', id: this.uid });
+        this.set('settings', { route: 'providers.show.settings', id: this.uid });
+        this.set('roleName', 'Consortium');
       } else if (payload.role_id === 'provider_admin') {
         this.set('isProvider', true);
         this.set('home', { route: 'providers.show', id: this.uid });
@@ -97,6 +104,7 @@ export default Service.extend({
       if (payload.beta_tester) {
         this.features.setup({
           'show-researchers': true,
+          'optional-fields': true,
         });
       }
 

@@ -10,7 +10,7 @@ module('Acceptance | consortium_admin | user', function(hooks) {
     await authenticateSession({
       uid: 'dc',
       name: 'DataCite Consortium',
-      role_id: 'provider_admin',
+      role_id: 'consortium_admin',
       provider_id: 'dc',
     });
   });
