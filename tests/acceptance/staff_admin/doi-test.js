@@ -64,7 +64,7 @@ module('Acceptance | staff_admin | admin', function(hooks) {
   // });
 
   test('new DOI form for repository RPH', async function(assert) {
-    assert.expect(15);
+    assert.expect(16);
 
     await visit('/repositories/datacite.rph/dois/new');
 
@@ -86,6 +86,7 @@ module('Acceptance | staff_admin | admin', function(hooks) {
     assert.dom('input#resource-type-field').exists();
     assert.dom('[data-test-description]').exists();
     assert.dom('#doi-language').exists();
+    assert.dom('#contributor-type').exists();
 
     assert.dom('button#doi-create').exists();
   });
@@ -108,7 +109,7 @@ module('Acceptance | staff_admin | admin', function(hooks) {
   });
 
   test('edit DOI form for repository RPH', async function(assert) {
-    assert.expect(15);
+    assert.expect(16);
 
     await visit('/dois/10.70048%2Fe605-dg05/edit');
 
@@ -130,6 +131,7 @@ module('Acceptance | staff_admin | admin', function(hooks) {
     assert.dom('input#resource-type-field').exists();
     assert.dom('[data-test-description]').exists();
     assert.dom('#doi-language').exists();
+    assert.dom('#contributor-type').exists();
 
     assert.dom('button#doi-update').exists();
   });

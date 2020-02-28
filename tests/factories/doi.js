@@ -7,6 +7,7 @@ FactoryGuy.define('doi', {
       'doi': 'https://handle.test.datacite.org/10.70048/rph240519',
     } ],
     creators: FactoryGuy.hasMany('creator'),
+    contributors: FactoryGuy.hasMany('contributor'),
     titles: FactoryGuy.hasMany('title'),
     descriptions: FactoryGuy.hasMany('description'),
     publisher: 'Royal Society of Chemistry',
@@ -32,6 +33,18 @@ FactoryGuy.define('doi', {
 
 FactoryGuy.define('creator', {
   default: {
+    name: 'Patel, Mitesh',
+    givenName: 'Mitesh',
+    familyName: 'Patel',
+    nameType: 'Personal',
+    nameIdentifiers: FactoryGuy.hasMany('nameIdentifier'),
+    affiliation: FactoryGuy.hasMany('affiliation'),
+  },
+});
+
+FactoryGuy.define('contributor', {
+  default: {
+    contributorType: 'Editor',
     name: 'Patel, Mitesh',
     givenName: 'Mitesh',
     familyName: 'Patel',
