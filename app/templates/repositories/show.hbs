@@ -10,6 +10,7 @@
         {{/if}}
         {{#if (and (can "read provider" model.provider.consortium) (eq model.provider.memberType "consortium_organization"))}}
           <li class="breadcrumb-item"><LinkTo @route="providers.show.index" @model={{model.provider.consortium.id}}>{{model.provider.consortium.name}}</LinkTo></li>
+          <li class="breadcrumb-item"><LinkTo @route="providers.show.organizations" @model={{model.provider.consortium.id}}>Consortium Organizations</LinkTo></li>
         {{/if}}
         <li class="breadcrumb-item"><LinkTo @route="providers.show" @model={{model.provider.id}}>{{model.provider.name}}</LinkTo></li>
         <li class="breadcrumb-item"><LinkTo @route="providers.show.repositories" @model={{model.provider.id}}>Repositories</LinkTo></li>

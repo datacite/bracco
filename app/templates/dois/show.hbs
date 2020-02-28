@@ -5,11 +5,19 @@
     {{#if (can "read index")}}
       <li class="breadcrumb-item"><LinkTo @route="index">DataCite</LinkTo></li>
       <li class="breadcrumb-item"><LinkTo @route="providers">Members</LinkTo></li>
+      {{#if (eq model.repository.provider.memberType "consortium_organization")}}
+        <li class="breadcrumb-item"><LinkTo @route="providers.show.index" @model={{model.repository.provider.consortium.id}}>{{model.repository.provider.consortium.name}}</LinkTo></li>
+        <li class="breadcrumb-item"><LinkTo @route="providers.show.organizations" @model={{model.repository.provider.consortium.id}}>Consortium Organizations</LinkTo></li>
+      {{/if}}
       <li class="breadcrumb-item"><LinkTo @route="providers.show" @model={{model.repository.provider.id}}>{{model.repository.provider.name}}</LinkTo></li>
       <li class="breadcrumb-item"><LinkTo @route="providers.show.repositories" @model={{model.repository.provider.id}}>Repositories</LinkTo></li>
       <li class="breadcrumb-item"><LinkTo @route="repositories.show" @model={{model.repository.id}}>{{model.repository.name}}</LinkTo></li>
       <li class="breadcrumb-item"><LinkTo @route="repositories.show.dois" @model={{model.repository.id}}>DOIs</LinkTo></li>
     {{else if (can "read provider" model.repository.provider)}}
+      {{#if (eq model.repository.provider.memberType "consortium_organization")}}
+        <li class="breadcrumb-item"><LinkTo @route="providers.show.index" @model={{model.repository.provider.consortium.id}}>{{model.repository.provider.consortium.name}}</LinkTo></li>
+        <li class="breadcrumb-item"><LinkTo @route="providers.show.organizations" @model={{model.repository.provider.consortium.id}}>Consortium Organizations</LinkTo></li>
+      {{/if}}
       <li class="breadcrumb-item"><LinkTo @route="providers.show" @model={{model.repository.provider.id}}>{{model.repository.provider.name}}</LinkTo></li>
       <li class="breadcrumb-item"><LinkTo @route="providers.show.repositories" @model={{model.repository.provider.id}}>Repositories</LinkTo></li>
       <li class="breadcrumb-item"><LinkTo @route="repositories.show" @model={{model.repository.id}}>{{model.repository.name}}</LinkTo></li>
