@@ -10,6 +10,7 @@
         {{/if}}
         {{#if (eq model.memberType "consortium_organization")}}
           <li class="breadcrumb-item"><LinkTo @route="providers.show.index" @model={{model.consortium.id}}>{{model.consortium.name}}</LinkTo></li>
+          <li class="breadcrumb-item"><LinkTo @route="providers.show.organizations" @model={{model.consortium.id}}>Consortium Organizations</LinkTo></li>
         {{/if}}
       </ol>
     {{/if}}
