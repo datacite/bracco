@@ -1,4 +1,4 @@
-import PersonBaseComponent from '../components/person';
+import PersonBaseComponent from './person-base-component';
 
 const contributorTypes = [
   'ContactPerson',
