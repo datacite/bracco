@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-3">
-    {{#if (can "write prefix" model.prefixes)}}
+    {{#if (and (can "write prefix" model.prefixes) (not-eq model.provider.memberType "consortium"))}}
       <div class="panel facets">
         <div class="panel-body">
           <div class="btn-toolbar">
