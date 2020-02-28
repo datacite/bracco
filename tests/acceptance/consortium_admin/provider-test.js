@@ -131,11 +131,9 @@ module('Acceptance | consortium_admin | provider', function(hooks) {
     assert.dom('li a.nav-link.active').hasText('Prefixes');
     assert.dom('div#search').exists();
 
-    // TODO consortium member should see all prefixes
-    assert.dom('.alert-warning').hasText('No prefixes found.');
+    // at least one prefix exists
+    assert.dom('[data-test-results]').includesText('Prefixes');
+    assert.dom('[data-test-prefix]').exists();
     assert.dom('div.panel.facets').exists();
-
-    // consortium member can assign new prefix
-    assert.dom('a#assign-prefix').includesText('Assign Prefix');
   });
 });
