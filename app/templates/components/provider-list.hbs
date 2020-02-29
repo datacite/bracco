@@ -239,6 +239,31 @@
             <h5>Focus Area</h5>
             {{titleize (humanize (underscore provider.focusArea))}}
           {{/if}}
+
+          {{#if (not-eq provider.memberType "consortium_organization")}}
+            <h5>Billing Information</h5>
+            {{#if provider.formattedBillingInformation}}
+              {{#if provider.billingContact.familyName}}
+                {{provider.billingContact.givenName}} {{provider.billingContact.familyName}}<br/>
+              {{/if}}
+              {{#if provider.billingInformation.department}}
+                {{provider.billingInformation.department}}<br/>
+              {{/if}}
+              {{#if provider.billingInformation.organization}}
+                {{provider.billingInformation.organization}}<br/>
+              {{else}}
+                {{provider.name}}<br/>
+              {{/if}}
+
+              {{#if provider.formattedBillingInformation}}
+                {{#each provider.formattedBillingInformation as |line|}}
+                  {{line}}<br/>
+                {{/each}}
+              {{/if}}
+            {{else}}
+              <span class="small icon-warning">Please provide this information.</span>
+            {{/if}}
+          {{/if}}
         </div>
       </div>
     {{/each}}

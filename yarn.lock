@@ -1767,6 +1767,13 @@
     resolve "^1.8.1"
     semver "^5.6.0"
 
+"@fragaria/address-formatter@^2.2.1":
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/@fragaria/address-formatter/-/address-formatter-2.2.1.tgz#e8374ad2c8ed4313a5b48196edaa92a9c5ab7133"
+  integrity sha512-PmnDHTUJwbkib8VUkQowrkbTQvhe8hPa+0nfEUiLxx53AM7TCSkfCwxb4zuaCOoAWb2jyXndiUhe7ChQrCL6WA==
+  dependencies:
+    mustache "^4.0.0"
+
 "@glimmer/compiler@^0.27.0":
   version "0.27.0"
   resolved "https://registry.yarnpkg.com/@glimmer/compiler/-/compiler-0.27.0.tgz#b24042752a53171d5cb3d9a95a29dfc0f314ed2c"
@@ -10876,6 +10883,11 @@ mustache@^3.0.0:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/mustache/-/mustache-3.0.1.tgz#873855f23aa8a95b150fb96d9836edbc5a1d248a"
   integrity sha512-jFI/4UVRsRYdUbuDTKT7KzfOp7FiD5WzYmmwNwXyUVypC0xjoTL78Fqc0jHUPIvvGD+6DQSPHIt1NE7D1ArsqA==
+
+mustache@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/mustache/-/mustache-4.0.0.tgz#7f02465dbb5b435859d154831c032acdfbbefb31"
+  integrity sha512-FJgjyX/IVkbXBXYUwH+OYwQKqWpFPLaLVESd70yHjSDunwzV2hZOoTBvPf4KLoxesUzzyfTH6F784Uqd7Wm5yA==
 
 mute-stream@0.0.8:
   version "0.0.8"

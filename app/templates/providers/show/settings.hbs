@@ -19,10 +19,9 @@
     <RepositorySidebar @model={{model}} />
   </div>
   <div class="col-md-9">
+    <h3 class="member-results">Organization Information</h3>
     <div class="panel panel-transparent">
       <div class="panel-body">
-
-        <h4>Organization Information</h4>
         {{#if (not admin)}}
           <h5>Member ID</h5>
           {{model.symbol}}
@@ -97,43 +96,6 @@
           {{titleize (humanize (underscore model.focusArea))}}
         {{/if}}
 
-        <br>
-        <h4>Service Contact Information</h4>
-
-        {{#if model.technicalContact.email}}
-          <h5>Primary Technical Contact</h5>
-          {{model.technicalContact.givenName}} {{model.technicalContact.familyName}}<br>
-          <a href="mailto:{{model.technicalContact.email}}">{{model.technicalContact.email}}</a>
-        {{/if}}
-
-        {{#if model.secondaryTechnicalContact.email}}
-          <h5>Secondary Technical Contact</h5>
-          {{model.secondaryTechnicalContact.givenName}} {{model.secondaryTechnicalContact.familyName}}<br>
-          <a href="mailto:{{model.secondaryTechnicalContact.email}}">{{model.secondaryTechnicalContact.email}}</a>
-        {{/if}}
-
-        {{#if model.serviceContact.email}}
-          <h5>Primary Service Contact</h5>
-          {{model.serviceContact.givenName}} {{model.serviceContact.familyName}}
-          <br>
-          <a href="mailto:{{model.serviceContact.email}}">{{model.serviceContact.email}}</a>
-        {{/if}}
-
-        {{#if model.secondaryServiceContact.email}}
-          <h5>Secondary Service Contact</h5>
-          {{model.secondaryServiceContact.givenName}} {{model.secondaryServiceContact.familyName}}
-          <br>
-          <a href="mailto:{{model.secondaryServiceContact.email}}">{{model.secondaryServiceContact.email}}</a>
-        {{/if}}
-
-        {{#if (not-eq model.memberType "consortium_organization")}}
-          {{#if model.votingContact.email}}
-            <h5>Voting Representative</h5>
-            {{model.votingContact.givenName}} {{model.votingContact.familyName}}<br>
-            <a href="mailto:{{model.votingContact.email}}">{{model.votingContact.email}}</a>
-          {{/if}}
-        {{/if}}
-
         {{#if model.joined}}
           <h5>Date joined</h5>
           {{format-time model.joined year='numeric' month='long' day='numeric'}}
@@ -143,40 +105,60 @@
           <h5>Password</h5>
           <span class="small icon-warning">has not been set</span>
         {{/if}}
+      </div>
+    </div>
+
+    <h3 class="member-results">Contact Information</h3>
+    <div class="panel panel-transparent">
+      <div class="panel-body">
+        {{#if (not-eq model.memberType "consortium_organization")}}
+          <h5>Voting Representative</h5>
+          {{#if model.votingContact.email}}
+            {{model.votingContact.givenName}} {{model.votingContact.familyName}}<br>
+            <a href="mailto:{{model.votingContact.email}}">{{model.votingContact.email}}</a>
+          {{else}}
+            <span class="small icon-warning">Please provide this information.</span>
+          {{/if}}
+        {{/if}}
+
+        {{#if (or model.serviceContact.email model.secondaryServiceContact.email)}}
+          {{#if model.serviceContact.email}}
+            <h5>Service Contact</h5>
+            {{model.serviceContact.givenName}} {{model.serviceContact.familyName}}
+            <br>
+            <a href="mailto:{{model.serviceContact.email}}">{{model.serviceContact.email}}</a>
+          {{/if}}
+
+          {{#if model.secondaryServiceContact.email}}
+            <h5>Secondary Service Contact</h5>
+            {{model.secondaryServiceContact.givenName}} {{model.secondaryServiceContact.familyName}}
+            <br>
+            <a href="mailto:{{model.secondaryServiceContact.email}}">{{model.secondaryServiceContact.email}}</a>
+          {{/if}}
+        {{else}}
+          <h5>Service Contact</h5>
+          <span class="small icon-warning">Please provide this information.</span>
+        {{/if}}
+
+        {{#if (or model.technicalContact.email model.secondaryTechnicalContact.email)}}
+          {{#if model.technicalContact.email}}
+            <h5>Technical Contact</h5>
+            {{model.technicalContact.givenName}} {{model.technicalContact.familyName}}<br>
+            <a href="mailto:{{model.technicalContact.email}}">{{model.technicalContact.email}}</a>
+          {{/if}}
+
+          {{#if model.secondaryTechnicalContact.email}}
+            <h5>Secondary Technical Contact</h5>
+            {{model.secondaryTechnicalContact.givenName}} {{model.secondaryTechnicalContact.familyName}}<br>
+            <a href="mailto:{{model.secondaryTechnicalContact.email}}">{{model.secondaryTechnicalContact.email}}</a>
+          {{/if}}
+        {{else}}
+          <h5>Technical Contact</h5>
+          <span class="small icon-warning">Please provide this information.</span>
+        {{/if}}
 
         {{#if (not-eq model.memberType "consortium_organization")}}
-          <h4>Billing Information</h4>
-          {{#if (not isBillingEmpty)}}
-            {{#if model.billingInformation.organization}}
-              <h5>Billing Organization</h5>
-              {{model.billingInformation.organization}}
-            {{/if}}
-            {{#if model.billingInformation.department}}
-              <h5>Billing Department</h5>
-              {{model.billingInformation.department}}
-            {{/if}}
-
-            {{#if model.billingInformation.address}}
-              <h5>Billing Address</h5>
-              {{model.billingInformation.address}}
-            {{/if}}
-            {{#if model.billingInformation.city}}
-              <h5>Billing City</h5>
-              {{model.billingInformation.city}}
-            {{/if}}
-            {{#if model.billingInformation.state}}
-              <h5>Billing State/Province</h5>
-              {{model.billingInformation.state}}
-            {{/if}}
-            {{#if model.billingInformation.postCode}}
-              <h5>Billing Zip/PostCode</h5>
-              {{model.billingInformation.postCode}}
-            {{/if}}
-            {{#if model.billingInformation.country}}
-              <h5>Billing Country</h5>
-              {{model.billingInformation.country.name}}
-            {{/if}}
-
+          {{#if (or model.billingContact.email model.secondaryBillingContact.email)}}
             {{#if model.billingContact.email}}
               <h5>Billing Contact</h5>
               {{model.billingContact.givenName}} {{model.billingContact.familyName}}
@@ -190,12 +172,41 @@
               <br>
               <a href="mailto:{{model.secondaryBillingContact.email}}">{{model.secondaryBillingContact.email}}</a>
             {{/if}}
-
           {{else}}
-            <span class="small icon-warning">has not been provided</span>
+            <h5>Billing Contact</h5>
+            <span class="small icon-warning">Please provide this information.</span>
           {{/if}}
         {{/if}}
       </div>
     </div>
+
+    {{#if (not-eq model.memberType "consortium_organization")}}
+      <h3 class="member-results">Billing Information</h3>
+      <div class="panel panel-transparent">
+        <div class="panel-body">
+          {{#if model.formattedBillingInformation}}
+            {{#if model.billingContact.familyName}}
+              {{model.billingContact.givenName}} {{model.billingContact.familyName}}<br/>
+            {{/if}}
+            {{#if model.billingInformation.department}}
+              {{model.billingInformation.department}}<br/>
+            {{/if}}
+            {{#if model.billingInformation.organization}}
+              {{model.billingInformation.organization}}<br/>
+            {{else}}
+              {{model.name}}<br/>
+            {{/if}}
+
+            {{#if model.formattedBillingInformation}}
+              {{#each model.formattedBillingInformation as |line|}}
+                {{line}}<br/>
+              {{/each}}
+            {{/if}}
+          {{else}}
+            <span class="small icon-warning">Please provide this information.</span>
+          {{/if}}
+        </div>
+      </div>
+    {{/if}}
   </div>
 </div>
