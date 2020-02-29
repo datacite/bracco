@@ -113,27 +113,22 @@
       <div class="panel-body">
         {{#if (not-eq model.memberType "consortium_organization")}}
           <h5>Voting Representative</h5>
-          {{#if model.votingContact.email}}
-            {{model.votingContact.givenName}} {{model.votingContact.familyName}}<br>
-            <a href="mailto:{{model.votingContact.email}}">{{model.votingContact.email}}</a>
+          {{#if model.votingContact}}
+            {{format-contact model.votingContact}}
           {{else}}
             <span class="small icon-warning">Please provide this information.</span>
           {{/if}}
         {{/if}}
 
         {{#if (or model.serviceContact.email model.secondaryServiceContact.email)}}
-          {{#if model.serviceContact.email}}
+          {{#if model.serviceContact}}
             <h5>Service Contact</h5>
-            {{model.serviceContact.givenName}} {{model.serviceContact.familyName}}
-            <br>
-            <a href="mailto:{{model.serviceContact.email}}">{{model.serviceContact.email}}</a>
+            {{format-contact model.serviceContact}}
           {{/if}}
 
-          {{#if model.secondaryServiceContact.email}}
+          {{#if model.secondaryServiceContact}}
             <h5>Secondary Service Contact</h5>
-            {{model.secondaryServiceContact.givenName}} {{model.secondaryServiceContact.familyName}}
-            <br>
-            <a href="mailto:{{model.secondaryServiceContact.email}}">{{model.secondaryServiceContact.email}}</a>
+            {{format-contact model.secondaryServiceContact}}
           {{/if}}
         {{else}}
           <h5>Service Contact</h5>
@@ -141,16 +136,14 @@
         {{/if}}
 
         {{#if (or model.technicalContact.email model.secondaryTechnicalContact.email)}}
-          {{#if model.technicalContact.email}}
+          {{#if model.technicalContact}}
             <h5>Technical Contact</h5>
-            {{model.technicalContact.givenName}} {{model.technicalContact.familyName}}<br>
-            <a href="mailto:{{model.technicalContact.email}}">{{model.technicalContact.email}}</a>
+            {{format-contact model.technicalContact}}
           {{/if}}
 
-          {{#if model.secondaryTechnicalContact.email}}
+          {{#if model.secondaryTechnicalContact}}
             <h5>Secondary Technical Contact</h5>
-            {{model.secondaryTechnicalContact.givenName}} {{model.secondaryTechnicalContact.familyName}}<br>
-            <a href="mailto:{{model.secondaryTechnicalContact.email}}">{{model.secondaryTechnicalContact.email}}</a>
+              {{format-contact model.secondaryTechnicalContact}}
           {{/if}}
         {{else}}
           <h5>Technical Contact</h5>
@@ -161,16 +154,12 @@
           {{#if (or model.billingContact.email model.secondaryBillingContact.email)}}
             {{#if model.billingContact.email}}
               <h5>Billing Contact</h5>
-              {{model.billingContact.givenName}} {{model.billingContact.familyName}}
-              <br>
-              <a href="mailto:{{model.billingContact.email}}">{{model.billingContact.email}}</a>
+              {{format-contact model.billingContact}}
             {{/if}}
 
             {{#if model.secondaryBillingContact.email}}
               <h5>Secondary Billing Contact</h5>
-              {{model.secondaryBillingContact.givenName}} {{model.secondaryBillingContact.familyName}}
-              <br>
-              <a href="mailto:{{model.secondaryBillingContact.email}}">{{model.secondaryBillingContact.email}}</a>
+              {{format-contact model.secondaryBillingContact}}
             {{/if}}
           {{else}}
             <h5>Billing Contact</h5>
