@@ -113,7 +113,7 @@
       <div class="panel-body">
         {{#if (not-eq model.memberType "consortium_organization")}}
           <h5>Voting Representative</h5>
-          {{#if model.votingContact}}
+          {{#if model.votingContact.email}}
             {{format-contact model.votingContact}}
           {{else}}
             <span class="small icon-warning">Please provide this information.</span>
@@ -121,12 +121,12 @@
         {{/if}}
 
         {{#if (or model.serviceContact.email model.secondaryServiceContact.email)}}
-          {{#if model.serviceContact}}
+          {{#if model.serviceContact.email}}
             <h5>Service Contact</h5>
             {{format-contact model.serviceContact}}
           {{/if}}
 
-          {{#if model.secondaryServiceContact}}
+          {{#if model.secondaryServiceContact.email}}
             <h5>Secondary Service Contact</h5>
             {{format-contact model.secondaryServiceContact}}
           {{/if}}
@@ -136,14 +136,14 @@
         {{/if}}
 
         {{#if (or model.technicalContact.email model.secondaryTechnicalContact.email)}}
-          {{#if model.technicalContact}}
+          {{#if model.technicalContact.email}}
             <h5>Technical Contact</h5>
             {{format-contact model.technicalContact}}
           {{/if}}
 
-          {{#if model.secondaryTechnicalContact}}
+          {{#if model.secondaryTechnicalContact.email}}
             <h5>Secondary Technical Contact</h5>
-              {{format-contact model.secondaryTechnicalContact}}
+            {{format-contact model.secondaryTechnicalContact}}
           {{/if}}
         {{else}}
           <h5>Technical Contact</h5>
