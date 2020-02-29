@@ -109,15 +109,6 @@ export default Controller.extend({
     selectConsortium(consortium) {
       this.model.organization.set('consortium', consortium);
     },
-    selectBillingCountry(billingCountry) {
-      this.model.organization.set('billingInformation.country', billingCountry);
-      this.set('countries', countryList);
-    },
-    setBillingCountry(billingCountry) {
-      this.set('billingInformationCountry', billingCountry);
-      this.model.organization.set('billingInformationCountry', billingCountry);
-      this.set('countries', countryList);
-    },
     searchRor(query) {
       let self = this;
       this.store.query('ror', { query }).then(function(organizations) {

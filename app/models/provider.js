@@ -4,6 +4,7 @@ import { computed } from '@ember/object';
 import { validator, buildValidations } from 'ember-cp-validations';
 import { fragment } from 'ember-data-model-fragments/attributes';
 import { A } from '@ember/array';
+import addressFormatter from '@fragaria/address-formatter';
 
 const Validations = buildValidations({
   symbol: [
@@ -197,5 +198,17 @@ export default DS.Model.extend(Validations, {
     } else {
       return 0;
     }
+  }),
+  formattedBillingInformation: computed('billingInformation.address', 'billingInformation.city', 'billingInformation.postCode', 'billingInformation.state', 'billingInformation.country', function() {
+    return addressFormatter.format({
+      'road': this.billingInformation.address,
+      'city': this.billingInformation.city,
+      'postcode': this.billingInformation.postCode ? this.billingInformation.postCode : null,
+      'state': this.billingInformation.state ? this.billingInformation.state.name : null,
+      'country': this.billingInformation.country ? this.billingInformation.country.name : null,
+      'countryCode': this.billingInformation.country ? this.billingInformation.country.code : null,
+    }, {
+      output: 'array',
+    });
   }),
 });

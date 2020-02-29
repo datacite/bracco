@@ -9,10 +9,7 @@
         <div class="col-md-9 col-md-offset-3"><h3 class="edit">Add Member</h3></div>
 
         <BsForm @formLayout="horizontal" @horizontalLabelGridClass="col-md-3" @model={{model}} @onSubmit={{action "submit" model}} @submitOnEnter={{true}} as |form|>
-          <div class="col-md-12">
-            <h4>Organization Information</h4>
-            <br>
-          </div>
+          <h3 class="member-results">Organization Information</h3>
 
           <ProviderId @model={{model}} @form={{form}} />
 
@@ -80,13 +77,33 @@
           
           <form.element @controlType="textarea" @id="description" @label="Description (optional)" @property="description" @rows="10" @helpText="Description of the member. Please use markdown for formatting." @required={{false}} />
 
-          <div class="col-md-12">
-            <br>
-            <h4>Service Contact Information</h4>
-          </div>
+          <h3 class="member-results">Contact Information</h3>
+
+          {{#if (not-eq model.memberType "consortium_organization")}}
+            <div class="form-group">
+              <label class="control-label col-md-3">Voting Representative</label>
+              <div class="col-md-9">
+                <div>
+                  <label for="givenName" class="subtitle">Given Name (optional)</label>
+                  <Input @type="text" class="form-control" @id="voting-contact-given-name" @value={{model.votingContact.givenName}} required={{false}} />
+                </div>
+                <div>
+                  <label for="familyName" class="subtitle">Family Name (optional)</label>
+                  <Input @type="text" class="form-control" @id="voting-contact-family-name" @value={{model.votingContact.familyName}} required={{false}} />
+                </div>
+                <div class="{{if (v-get model.votingContact 'isInvalid') 'has-error has-feedback'}}">
+                  <label for="email" class="subtitle control-label">Email (optional)</label>
+                  <Input @type="text" class="form-control" @id="voting-contact-email" @value={{model.votingContact.email}} required={{false}} />
+                  {{#if (v-get model.votingContact 'isInvalid')}}
+                    <div class="help-block help-block-fragment" data-test-voting-contact-email-help>{{v-get model.votingContact 'message'}}</div>
+                  {{/if}}
+                </div>
+              </div>
+            </div>
+          {{/if}}
 
           <div class="form-group">
-            <label class="control-label col-md-3">Primary Service Contact</label>
+            <label class="control-label col-md-3">Service Contact</label>
             <div class="col-md-9">
               <div>
                 <label for="givenName" class="subtitle">Given Name (optional)</label>
@@ -128,7 +145,7 @@
           </div>
 
           <div class="form-group">
-            <label class="control-label col-md-3">Primary Technical Contact</label>
+            <label class="control-label col-md-3">Technical Contact</label>
             <div class="col-md-9">
               <div>
                 <label for="givenName" class="subtitle">Given Name (optional)</label>
@@ -171,37 +188,6 @@
 
           {{#if (not-eq model.memberType "consortium_organization")}}
             <div class="form-group">
-              <label class="control-label col-md-3">Voting Representative</label>
-              <div class="col-md-9">
-                <div>
-                  <label for="givenName" class="subtitle">Given Name (optional)</label>
-                  <Input @type="text" class="form-control" @id="voting-contact-given-name" @value={{model.votingContact.givenName}} required={{false}} />
-                </div>
-                <div>
-                  <label for="familyName" class="subtitle">Family Name (optional)</label>
-                  <Input @type="text" class="form-control" @id="voting-contact-family-name" @value={{model.votingContact.familyName}} required={{false}} />
-                </div>
-                <div class="{{if (v-get model.votingContact 'isInvalid') 'has-error has-feedback'}}">
-                  <label for="email" class="subtitle control-label">Email (optional)</label>
-                  <Input @type="text" class="form-control" @id="voting-contact-email" @value={{model.votingContact.email}} required={{false}} />
-                  {{#if (v-get model.votingContact 'isInvalid')}}
-                    <div class="help-block help-block-fragment" data-test-voting-contact-email-help>{{v-get model.votingContact 'message'}}</div>
-                  {{/if}}
-                </div>
-              </div>
-            </div>
-          {{/if}}
-          
-          {{#if (not-eq model.memberType "consortium_organization")}}
-            <div class="col-md-12">
-              <h4>Billing Contact Information</h4>
-              <div class="help-block ember-view">Your organization’s information for DataCite billing purposes</div>
-              <br>
-            </div>
-            <form.element @controlType="text" @id="billing-information-organization" @label="Billing Organization" @property="billingInformation.organization" @helpText="Your organization's name for billing purposes" @required={{false}} />
-            <form.element @controlType="text" @id="billing-information-department" @label="Billing Department" @property="billingInformation.department" @helpText="Your organization's specific department that is responsible for payment" @required={{false}} />
-
-            <div class="form-group">
               <label class="control-label col-md-3">Billing Contact</label>
               <div class="col-md-9">
                 <div>
@@ -242,18 +228,29 @@
                 </div>
               </div>
             </div>
+          {{/if}}
+          
+          {{#if (not-eq model.memberType "consortium_organization")}}
+            <h3 class="member-results">Billing Information</h3>
 
-            <form.element @controlType="textarea" rows="3" @id="billing-information-street" @label="Billing Street" @property="billingInformation.address" @helpText="Your organization's street and number for billing purposes" @required={{false}} />
-
+            <form.element @controlType="text" @id="billing-information-department" @label="Billing Department" @property="billingInformation.department" @helpText="Your organization's specific department that is responsible for payment" @required={{false}} />
+            <form.element @controlType="text" @id="billing-information-organization" @label="Billing Organization" @property="billingInformation.organization" @helpText="Your organization's name for billing purposes if different from the official name" @required={{false}} />
+            
+            <form.element @controlType="text" @id="billing-information-street" @label="Billing Street" @property="billingInformation.address" @helpText="Your organization's street for billing purposes" @required={{false}} />
             <form.element @controlType="text" @id="billing-information-city" @label="Billing City" @property="billingInformation.city" @helpText="Your organization's city for billing purposes" @required={{false}} />
-            <form.element @controlType="text" @id="billing-information-state" @label="Billing State/Province" @property="billingInformation.state" @helpText="Your organization's State/Province for billing purposes" @required={{false}} />
-            <form.element @controlType="text" @id="billing-information-postcode" @label=" Billing Zip/PostCode" @property="billingInformation.postCode" @helpText="Your organization's Zip/PostCode for billing purposes" @required={{false}} />
-
-            <form.element @controlType="power-select" @id="billing-information-country" @label="Billing Country" @property="billingInformationCountry" @optionLabelPath="name" @options={{countries}} @helpText="Country name for billing purposes." @destination={{billingInformationCountry}} as |el|>
+            <form.element @controlType="text" @id="billing-information-postcode" @label=" Billing Zip/Post Code" @property="billingInformation.postCode" @helpText="Your organization's Zip/post code for billing purposes" @required={{false}} />
+            <form.element @controlType="power-select" @id="billing-information-country" @label="Billing Country" @property="billingInformationCountry" @optionLabelPath="name" @options={{countries}} @helpText="Your organization's country for billing purposes." @destination={{billingInformationCountry}} as |el|>
               <el.control @onChange={{action "selectBillingCountry"}} @search={{action "searchCountry"}} @searchField="name" @placeholder="Select Country" @searchPlaceholder="Type to search..." @allowClear={{true}} as |item|>
                 {{item.name}}
               </el.control>
             </form.element>
+            {{#if showStateSearch}}
+              <form.element @controlType="power-select" @id="billing-information-state" @label="Billing State/Province" @property="billingInformation.state" @optionLabelPath="name" @options={{states}} @helpText="Your organization's state/province for billing purposes." @destination={{billingInformation.country}} as |el|>
+                <el.control @onChange={{action "selectBillingState"}} @search={{action "searchState"}} @searchField="name" @placeholder="Select State/Province" @searchPlaceholder="Type to search..." @allowClear={{true}} as |item|>
+                  {{item.name}}
+                </el.control>
+              </form.element>
+            {{/if}}
           {{/if}}
 
           <form.element @controlType="checkbox" @id="is-active" @label="Account is active" @property="isActive" @required={{false}} @helpText="This account can manage repositories and prefixes" />
