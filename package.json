@@ -155,6 +155,7 @@
     "ember-inflector": "^3.0.1",
     "ember-intl": "^4.2.2",
     "ember-load-initializers": "^2.1.1",
+    "ember-loading": "^0.3.1",
     "ember-lodash": "^4.19.5",
     "ember-math-helpers": "^2.12.1",
     "ember-maybe-import-regenerator": "^0.1.6",

@@ -28,6 +28,9 @@ module.exports = function(environment) {
         'default-3.6',
       ],
     },
+    'ember-loading': {
+      preDelay: 500,
+    },
     emberTracker: {
       analyticsSettings: {
         trackingId: process.env.TRACKING_ID || 'UA-22806196-13',
