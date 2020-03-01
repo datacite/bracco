@@ -37,6 +37,7 @@ const nonProfitStatusList = [
 
 export default Controller.extend({
   store: service(),
+  features: service(),
 
   countryList,
   countries: null,
