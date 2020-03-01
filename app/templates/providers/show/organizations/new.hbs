@@ -64,7 +64,7 @@
             <div class="btn-toolbar btn-sm btn-file">
               <FileUpload @name="files" @id="upload-file" @multiple={{false}} @accept="image/png,image/jpeg" @onfileadd={{action "didSelectFiles"}}>
                 <span class="btn btn-sm">
-                  {{fa-icon "upload"}} Upload Logo
+                  {{fa-icon "upload"}} {{if model.organization.image 'Replace' 'Upload'}} Logo
                 </span>
               </FileUpload>
             </div>
