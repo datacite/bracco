@@ -86,7 +86,7 @@ module('Acceptance | staff_admin | admin', function(hooks) {
     assert.dom('input#resource-type-field').exists();
     assert.dom('[data-test-description]').exists();
     assert.dom('#doi-language').exists();
-    assert.dom('#contributor-type').exists();
+    assert.dom('[doi-contributor]').exists();
 
     assert.dom('button#doi-create').exists();
   });
@@ -131,7 +131,7 @@ module('Acceptance | staff_admin | admin', function(hooks) {
     assert.dom('input#resource-type-field').exists();
     assert.dom('[data-test-description]').exists();
     assert.dom('#doi-language').exists();
-    assert.dom('#contributor-type').exists();
+    assert.dom('[doi-contributor]').exists();
 
     assert.dom('button#doi-update').exists();
   });

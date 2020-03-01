@@ -100,8 +100,8 @@ module('Acceptance | client_admin | repository', function(hooks) {
     });
     await visit('repositories/datacite.rph/dois/new');
 
-    await selectChoose('#contributor-type', 'DataCollector');
+    await selectChoose('[doi-contributor]', 'DataCollector');
     assert.equal(currentURL(), 'repositories/datacite.rph/dois/new');
-    assert.dom('#contributor-type').includesText('DataCollector');
+    assert.dom('[doi-contributor]').includesText('DataCollector');
   });
 });
