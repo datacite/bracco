@@ -74,24 +74,24 @@ module('Acceptance | staff_admin | provider', function(hooks) {
     assert.dom('a#add-repository').hasAttribute('href', '/providers/tib/repositories/new');
   });
 
-  test('visiting provider TIB dois', async function(assert) {
-    await visit('/providers/tib/dois');
+  // test('visiting provider TIB dois', async function(assert) {
+  //   await visit('/providers/tib/dois');
 
-    assert.equal(currentURL(), '/providers/tib/dois');
-    assert.dom('h2.work').hasText('German National Library of Science and Technology');
-    assert.dom('li a.nav-link.active').hasText('DOIs');
-    assert.dom('div#search').exists();
+  //   assert.equal(currentURL(), '/providers/tib/dois');
+  //   assert.dom('h2.work').hasText('German National Library of Science and Technology');
+  //   assert.dom('li a.nav-link.active').hasText('DOIs');
+  //   assert.dom('div#search').exists();
 
-    // at least one doi exists
-    assert.dom('[data-test-results]').includesText('DOIs');
-    assert.dom('[data-test-doi]').exists();
-    assert.dom('div.panel.facets').exists();
+  //   // at least one doi exists
+  //   assert.dom('[data-test-results]').includesText('DOIs');
+  //   assert.dom('[data-test-doi]').exists();
+  //   assert.dom('div.panel.facets').exists();
 
-    // admin can't add dois here (needs to go to repository)
-    assert.dom('a#new-doi').doesNotExist();
-    assert.dom('a#upload-doi').doesNotExist();
-    assert.dom('a#transfer-dois').doesNotExist();
-  });
+  //   // admin can't add dois here (needs to go to repository)
+  //   assert.dom('a#new-doi').doesNotExist();
+  //   assert.dom('a#upload-doi').doesNotExist();
+  //   assert.dom('a#transfer-dois').doesNotExist();
+  // });
 
   test('visiting provider TIB prefixes', async function(assert) {
     await visit('/providers/tib/prefixes');
