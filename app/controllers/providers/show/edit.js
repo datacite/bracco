@@ -3,6 +3,7 @@ import { inject as service } from '@ember/service';
 import { computed } from '@ember/object';
 import { w } from '@ember/string';
 import countryList from 'iso-3166-country-list';
+import FileReader from 'ember-file-upload/system/file-reader';
 
 // states and provinces use iso-3166-2 codes
 const stateList = [
@@ -288,6 +289,16 @@ export default Controller.extend({
         this.model.set('rorId', null);
       }
       this.set('organizations', []);
+    },
+    didSelectFiles(file) {
+      let reader = new FileReader();
+      let self = this;
+
+      reader.readAsText(file.blob).then((image) => {
+        self.get('model').set('image', image);
+      }, (err) => {
+        console.error(err);
+      });
     },
     submit() {
       let self = this;

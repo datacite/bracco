@@ -290,6 +290,16 @@ export default Controller.extend({
       }
       this.set('organizations', []);
     },
+    didSelectFiles(file) {
+      let reader = new FileReader();
+      let self = this;
+
+      reader.readAsText(file.blob).then((image) => {
+        self.get('model').set('image', image);
+      }, (err) => {
+        console.error(err);
+      });
+    },
     submit() {
       let self = this;
       this.model.save().then(function(provider) {

@@ -73,6 +73,7 @@ export default Service.extend({
         this.features.setup({
           'show-researchers': true,
           'optional-fields': true,
+          'logo-upload': true,
         });
       } else if (payload.role_id === 'consortium_admin') {
         this.set('isConsortium', true);
@@ -105,6 +106,7 @@ export default Service.extend({
         this.features.setup({
           'show-researchers': true,
           'optional-fields': true,
+          'logo-upload': true,
         });
       }
 
