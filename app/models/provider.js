@@ -146,7 +146,7 @@ export default DS.Model.extend(Validations, {
   rorId: DS.attr('string'),
   salesforceId: DS.attr('string'),
   twitterHandle: DS.attr('string'),
-  image: DS.attr('image'),
+  logo: DS.attr('logo'),
   billingInformation: DS.attr('billingInformation'),
   technicalContact: fragment('contact'),
   secondaryTechnicalContact: fragment('contact'),

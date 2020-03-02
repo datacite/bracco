@@ -77,11 +77,11 @@
           <div class="btn-toolbar btn-sm btn-file">
             <FileUpload @name="files" @id="upload-file" @multiple={{false}} @accept="image/png,image/jpeg" @onfileadd={{action "didSelectFiles"}}>
               <span class="btn btn-sm">
-                {{fa-icon "upload"}} {{if model.image 'Replace' 'Upload'}} Logo
+                {{fa-icon "upload"}} {{if model.logo 'Replace' 'Upload'}} Logo
               </span>
             </FileUpload>
           </div>
-          <div class="help-block">Please upload your logo in either png or jpeg format, and a size of about 500 x 200 px.</div>
+          <div class="help-block">Please upload your horizontal logo in either png or jpeg format. It will be proportionally resized to be no larger than 500 x 200 px.</div>
         </div>
       {{/if}}
 

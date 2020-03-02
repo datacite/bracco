@@ -130,8 +130,8 @@ export default Controller.extend({
       let reader = new FileReader();
       let self = this;
 
-      reader.readAsText(file.blob).then((image) => {
-        self.model.organization.set('image', image);
+      reader.readAsText(file.blob).then((logo) => {
+        self.model.organization.set('logo', logo);
       }, (err) => {
         console.error(err);
       });
