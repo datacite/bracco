@@ -3,11 +3,8 @@
       <div class="col-md-9 col-md-offset-3"><h3 class="edit">Create Consortium Organization</h3></div>
 
       <BsForm @formLayout="horizontal" @horizontalLabelGridClass="col-md-3" @model={{model.organization}} @onSubmit={{action "submit"}} @submitOnEnter={{true}} as |form|>
-        <div class="col-md-12">
-          <h4>Organization Information</h4>
-          <br>
-        </div>
-
+        <h3 class="member-results">Organization Information</h3>
+        
         <form.element @controlType="hidden" @property="consortium" @required={{false}} />
         <ProviderId @model={{model.organization}} @form={{form}} />
         <form.element @controlType="text" @id="member-type" @label="Member Type" @value="Consortium Organization" @readonly={{true}} />
@@ -61,10 +58,21 @@
 
         <form.element @controlType="textarea" @id="description" @label="Description (optional)" @property="description" @rows="10" @helpText="Description of the organization. Please use markdown for formatting." @required={{false}} />
 
-        <div class="col-md-12">
-          <br>
-          <h4>Service Contact Information</h4>
-        </div>
+        {{#if features.logoUpload}}
+          <label class="control-label col-md-3">Logo</label>
+          <div class="col-md-9 form-help-header">
+            <div class="btn-toolbar btn-sm btn-file">
+              <FileUpload @name="files" @id="upload-file" @multiple={{false}} @accept="image/png,image/jpeg" @onfileadd={{action "didSelectFiles"}}>
+                <span class="btn btn-sm">
+                  {{fa-icon "upload"}} {{if model.organization.logo 'Replace' 'Upload'}} Logo
+                </span>
+              </FileUpload>
+            </div>
+            <div class="help-block">Please upload your horizontal logo in either png or jpeg format. It will be proportionally resized to be no larger than 500 x 200 px.</div>
+          </div>
+        {{/if}}
+
+        <h3 class="member-results">Contact Information</h3>
 
         <div class="form-group">
           <label class="control-label col-md-3">Primary Service Contact</label>

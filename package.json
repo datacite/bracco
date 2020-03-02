@@ -1,6 +1,6 @@
 {
   "name": "bracco",
-  "version": "3.5.3",
+  "version": "3.5.7",
   "private": true,
   "description": "Fabrica",
   "repository": {
@@ -52,6 +52,7 @@
     }
   },
   "dependencies": {
+    "@fragaria/address-formatter": "^2.2.1",
     "@sentry/browser": "^5.10.2",
     "@sentry/integrations": "^5.10.2",
     "@types/ember-feature-flags": "^4.0.6",
@@ -154,6 +155,7 @@
     "ember-inflector": "^3.0.1",
     "ember-intl": "^4.2.2",
     "ember-load-initializers": "^2.1.1",
+    "ember-loading": "^0.3.1",
     "ember-lodash": "^4.19.5",
     "ember-math-helpers": "^2.12.1",
     "ember-maybe-import-regenerator": "^0.1.6",

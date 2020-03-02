@@ -9,7 +9,7 @@ const Validations = buildValidations({
       regex: /^([^,]+)(, \w+(\(\w+\))?, \w+(-\w+)?)?$/,
       message: 'Series information not in recommended format of series title, followed by comma and optional volume(issue), firstpage-lastpage',
       disabled: computed('model.descriptionType', function() {
-        return this.get('model.descriptionType') !== 'SeriesInformation';
+        return this.model.get('descriptionType') !== 'SeriesInformation';
       }),
       isWarning: true,
     }),

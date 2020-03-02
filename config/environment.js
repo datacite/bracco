@@ -28,6 +28,9 @@ module.exports = function(environment) {
         'default-3.6',
       ],
     },
+    'ember-loading': {
+      preDelay: 500,
+    },
     emberTracker: {
       analyticsSettings: {
         trackingId: process.env.TRACKING_ID || 'UA-22806196-13',
@@ -44,6 +47,7 @@ module.exports = function(environment) {
     featureFlags: {
       'show-researchers': false,
       'optional-fields': false,
+      'logo-upload': false,
     },
     fastboot: {
       hostWhitelist: [ 'doi.datacite.org', 'doi.test.datacite.org', /^10\.0\.\d{1,3}\.\d{1,3}$/, /^localhost:\d+$/ ],
@@ -114,6 +118,7 @@ module.exports = function(environment) {
 
     ENV.featureFlags['show-researchers'] = true;
     ENV.featureFlags['optional-fields'] = true;
+    ENV.featureFlags['logo-upload'] = false;
 
     ENV.APP.autoboot = false;
 

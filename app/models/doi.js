@@ -10,7 +10,7 @@ const Validations = buildValidations({
   details: [
     validator('belongs-to', {
       disabled: computed('model.mode', 'model.state', function() {
-        return ![ 'new', 'edit' ].includes(this.model.get('mode')) || this.get('model.state') === 'draft';
+        return ![ 'new', 'edit' ].includes(this.model.get('mode')) || this.model.get('state') === 'draft';
       }),
     }),
   ],
@@ -60,7 +60,7 @@ const Validations = buildValidations({
     validator('presence', {
       presence: true,
       isWarning: computed('model.state', function() {
-        return this.get('model.state') === 'draft';
+        return this.model.get('state') === 'draft';
       }),
     }),
   ],
@@ -68,7 +68,7 @@ const Validations = buildValidations({
     validator('presence', {
       presence: true,
       isWarning: computed('model.state', function() {
-        return this.get('model.state') === 'draft';
+        return this.model.get('state') === 'draft';
       }),
       disabled: computed('model.mode', function() {
         return ![ 'new', 'edit' ].includes(this.model.get('mode'));
@@ -79,7 +79,7 @@ const Validations = buildValidations({
     validator('presence', {
       presence: true,
       isWarning: computed('model.state', 'model.prefix', function() {
-        return this.get('model.state') === 'draft';
+        return this.model.get('state') === 'draft';
       }),
       disabled: computed('model.mode', function() {
         return ![ 'new', 'edit' ].includes(this.model.get('mode'));
@@ -102,7 +102,7 @@ const Validations = buildValidations({
     validator('presence', {
       presence: true,
       isWarning: computed('model.state', function() {
-        return this.get('model.state') === 'draft';
+        return this.model.get('state') === 'draft';
       }),
       disabled: computed('model.mode', function() {
         return ![ 'new', 'edit' ].includes(this.model.get('mode'));
@@ -114,14 +114,14 @@ const Validations = buildValidations({
       presence: true,
       message: 'Please include valid metadata.',
       disabled: computed('model.mode', 'model.state', function() {
-        return ![ 'upload', 'modify' ].includes(this.model.get('mode')) || this.get('model.state') === 'draft';
+        return ![ 'upload', 'modify' ].includes(this.model.get('mode')) || this.model.get('state') === 'draft';
       }),
     }),
     validator('metadata', {
       allowBlank: true,
       dependentKeys: [ 'model.doi' ],
       isWarning: computed('model.mode', 'model.state', 'model.prefix', function() {
-        return this.get('model.state') === 'draft';
+        return this.model.get('state') === 'draft';
       }),
       disabled: computed('model.mode', function() {
         return ![ 'upload', 'modify' ].includes(this.model.get('mode'));

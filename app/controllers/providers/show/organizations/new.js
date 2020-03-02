@@ -37,6 +37,7 @@ const nonProfitStatusList = [
 
 export default Controller.extend({
   store: service(),
+  features: service(),
 
   countryList,
   countries: null,
@@ -109,15 +110,6 @@ export default Controller.extend({
     selectConsortium(consortium) {
       this.model.organization.set('consortium', consortium);
     },
-    selectBillingCountry(billingCountry) {
-      this.model.organization.set('billingInformation.country', billingCountry);
-      this.set('countries', countryList);
-    },
-    setBillingCountry(billingCountry) {
-      this.set('billingInformationCountry', billingCountry);
-      this.model.organization.set('billingInformationCountry', billingCountry);
-      this.set('countries', countryList);
-    },
     searchRor(query) {
       let self = this;
       this.store.query('ror', { query }).then(function(organizations) {
@@ -133,6 +125,16 @@ export default Controller.extend({
         this.model.organization.set('rorId', null);
       }
       this.set('organizations', []);
+    },
+    didSelectFiles(file) {
+      let reader = new FileReader();
+      let self = this;
+
+      reader.readAsText(file.blob).then((logo) => {
+        self.model.organization.set('logo', logo);
+      }, (err) => {
+        console.error(err);
+      });
     },
     submit() {
       let self = this;
