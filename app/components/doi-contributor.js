@@ -40,12 +40,6 @@ export default PersonBaseComponent.extend({
     deleteContributor() {
       this.model.get('contributors').removeObject(this.fragment);
     },
-    searchContributorType(query) {
-      let contributorTypes = contributorTypes.filter(function(contributorType) {
-        return contributorType.toLowerCase().startsWith(query.toLowerCase());
-      });
-      this.set('contributorTypes', contributorTypes);
-    },
     selectContributorType(contributorType) {
       this.selectContributorType(contributorType);
     },
