@@ -4,7 +4,7 @@
       <BarChart @data={{model.providerCount}} @label="Organization" @model={{model}} @link="providers.show.organizations" />
     {{/if}}
     {{#if (not-eq model.memberType "member_only")}}
-      <BarChart @data={{model.repositoryCount}} @label="Repository" @model={{model}} @link="providers.show.repositories" />
+      <BarChart @data={{model.repositoryList}} @label="Repository" @model={{model}} @link="providers.show.repositories" />
       <BarChart @data={{model.doiCount}} @label="DOI" @model={{model}} @link="providers.show.dois" @cumulative={{false}} />
     {{else}}
       <div class="panel panel-transparent">
