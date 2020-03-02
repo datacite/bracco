@@ -38,7 +38,7 @@ export default PersonBaseComponent.extend({
 
   actions: {
     deleteContributor() {
-      this.model.get('contributor').removeObject(this.fragment);
+      this.model.get('contributors').removeObject(this.fragment);
     },
     searchContributorType(query) {
       let contributorTypes = contributorTypes.filter(function(contributorType) {
