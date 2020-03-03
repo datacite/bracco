@@ -31,6 +31,7 @@
       
       {{#if (feature-flag 'optionalFields')}}
         <DoiLanguage @model={{model}} @form={{form}} />
+        <DoiContributors @model={{model}} @form={{form}} />
       {{/if}}
 
       <div class="col-md-9 col-md-offset-3">
