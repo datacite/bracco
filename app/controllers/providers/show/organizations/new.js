@@ -130,7 +130,7 @@ export default Controller.extend({
       let reader = new FileReader();
       let self = this;
 
-      reader.readAsText(file.blob).then((logo) => {
+      reader.readAsDataURL(file.blob).then((logo) => {
         self.model.organization.set('logo', logo);
       }, (err) => {
         console.error(err);
