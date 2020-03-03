@@ -37,6 +37,20 @@ export default Controller.extend({
         }
       });
 
+      // only store name identifiers and affiliations with a value
+      A(doi.get('contributors')).forEach((contributor) => {
+        contributor.set('nameIdentifiers', A(contributor.get('nameIdentifiers')).filter(function(nameIdentifier) {
+          return !isBlank(nameIdentifier.nameIdentifier);
+        }));
+        contributor.set('affiliation', A(contributor.get('affiliation')).filter(function(affiliation) {
+          return !isBlank(affiliation.name);
+        }));
+        if (contributor.nameType === 'Organizational') {
+          contributor.set('givenName', null);
+          contributor.set('familyName', null);
+        }
+      });
+
       // only store descriptions with a description text
       doi.set('descriptions', A(doi.get('descriptions')).filter(function(description) {
         return !isBlank(description.description);
