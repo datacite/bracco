@@ -7,7 +7,7 @@
     <div class="content">
       <div class="row">
         <BarChart @data={{model.providerCount}} @label="Member" @link="providers" />
-        <BarChart @data={{model.repositoryCount}} @label="Repository" @link="repositories" />
+        <BarChart @data={{model.repositoryList}} @label="Repository" @link="repositories" />
         <BarChart @data={{model.doiCount}} @label="DOI" @link="dois" @cumulative={{false}} />
       </div>
 
