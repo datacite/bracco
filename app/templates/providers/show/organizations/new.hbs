@@ -58,20 +58,6 @@
 
         <form.element @controlType="textarea" @id="description" @label="Description (optional)" @property="description" @rows="10" @helpText="Description of the organization. Please use markdown for formatting." @required={{false}} />
 
-        {{#if features.logoUpload}}
-          <label class="control-label col-md-3">Logo</label>
-          <div class="col-md-9 form-help-header">
-            <div class="btn-toolbar btn-sm btn-file">
-              <FileUpload @name="files" @id="upload-file" @multiple={{false}} @accept="image/png,image/jpeg" @onfileadd={{action "didSelectFiles"}}>
-                <span class="btn btn-sm">
-                  {{fa-icon "upload"}} {{if model.organization.logo 'Replace' 'Upload'}} Logo
-                </span>
-              </FileUpload>
-            </div>
-            <div class="help-block">Please upload your horizontal logo in either png or jpeg format. It will be proportionally resized to be no larger than 500 x 200 px.</div>
-          </div>
-        {{/if}}
-
         <h3 class="member-results">Contact Information</h3>
 
         <div class="form-group">
