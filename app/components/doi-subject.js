@@ -69,7 +69,7 @@ export default Component.extend({
   setSchemeUri(value) {
     let uri = URI(value);
     this.fragment.set('subjectSchemeUri', value);
-    this.fragment.set('valueUri', uri.segment()[uri.segment().length - 1]);
+    this.fragment.set('valueUri', value);
     this.fragment.set('schemeUri', uri.origin().concat(uri.directory()));
     this.set('schemeUri', value);
   },
