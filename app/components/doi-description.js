@@ -17,7 +17,7 @@ export default Component.extend({
   languageList,
   languages: languageList,
   language: computed('fragment.lang', function() {
-    return ISO6391.getName(this.get('fragment.lang'));
+    return ISO6391.getName(this.get('fragment.lang')) !== '' ? ISO6391.getName(this.get('fragment.lang')) : this.get('fragment.lang');
   }),
   isSeriesInformation: computed('fragment.descriptionType', function() {
     return this.get('fragment.descriptionType') == 'SeriesInformation';
