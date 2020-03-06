@@ -1,3 +1,6 @@
+  <div class="power-select-label">
+    <label for="subject" class="subtitle">Subject</label>
+  </div> 
 <div class="input-group">
   <div class="power-select-fragment" doi-subject>
     {{#form.element
@@ -19,11 +22,10 @@
     }}
     {{/form.element}}
   </div>
-
   <div class="power-select-label">
     <label for="subjectScheme" class="subtitle">Subject Scheme</label>
-  </div>
-  <input type="text" class="form-control subject-scheme-field" disabled={{this.oecdSelected}}
+  </div> 
+  <input type="text"  class="form-control subject-scheme-field" disabled={{this.oecdSelected}}
     value={{fragment.subjectScheme}} oninput={{action "updateSubjectScheme" value="target.value"}} data-test-subject-scheme/>
   <div class="help-block help-block-fragment">The name of the subject scheme or classification code or authority if one
     is used.</div>
@@ -38,3 +40,5 @@
   </span>
 </div>
 <div class="help-block help-block-fragment">The URI of the subject term.</div>
+
+<hr />
