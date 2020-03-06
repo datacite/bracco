@@ -118,8 +118,6 @@ module('Acceptance | client_admin | repository', function(hooks) {
     });
     await visit('repositories/datacite.rph/dois/new');
 
-    let subjects = this.element.querySelectorAll('[doi-subject]');
-    console.log(subjects);
 
     await selectSearch('[doi-subject]', 'Optics');
     assert.dom('[doi-subject]').includesText('Search Subject The general type of the resource.');
