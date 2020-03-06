@@ -1,0 +1,16 @@
+<div class="form-group {{validationClass}}">
+  <label class="control-label col-md-3">Subject(s)</label>
+  <div class="col-md-9">
+    {{#each model.subjects as |subject index|}}
+      {{#if (gt index 0)}}
+        <DoiSubject @model={{model}} @fragment={{subject}} @form={{form}} @index={{index}} />
+      {{else}}
+        <DoiSubject @model={{model}} @fragment={{subject}} @form={{form}} @index={{index}} />
+      {{/if}}
+    {{/each}}
+
+    {{#if (lte model.subjects.length 4)}}
+      <BsButton @class="btn-sm" @id="add-subject" @outline={{true}} @onClick={{action "addSubject"}}>{{fa-icon "plus"}} Add another subject</BsButton>
+    {{/if}}
+  </div>
+</div>

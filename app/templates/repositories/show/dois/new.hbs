@@ -22,6 +22,7 @@
       <DoiDescriptions @model={{model.doi}} @form={{form}} />
 
       {{#if (feature-flag 'optionalFields')}}
+        <DoiSubjects @model={{model.doi}} @form={{form}} />
         <DoiLanguage @model={{model.doi}} @form={{form}} />
       {{/if}}
 

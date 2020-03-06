@@ -1,0 +1,42 @@
+<div class="input-group">
+  <div class="power-select-fragment" doi-subject>
+    {{#form.element
+    controlType="power-select"
+    helpText="The general type of the resource."
+    options=subjects
+    value=fragment.subject
+    disabled=disabled
+    destination=fragment.subject as |el|
+  }}
+    {{el.control
+      searchEnabled=true
+      onChange=(action "updateSubject")
+      placeholder="Search Subject"
+      onkeydown=(action "createOnEnter")
+      search=(action "searchSubject")
+      searchPlaceholder="Type to search..."
+      noMatchesMessage="Press ENTER to add new subject."
+    }}
+    {{/form.element}}
+  </div>
+
+  <div class="power-select-label">
+    <label for="subjectScheme" class="subtitle">Subject Scheme</label>
+  </div>
+  <input type="text" class="form-control subject-scheme-field" disabled={{this.oecdSelected}}
+    value={{fragment.subjectScheme}} oninput={{action "updateSubjectScheme" value="target.value"}}
+    data-test-subject-scheme />
+  <div class="help-block help-block-fragment">The name of the subject scheme or classification code or authority if one
+    is used.</div>
+
+  <div class="power-select-label">
+    <label for="subjectSchemeUri" class="subtitle">Subject Scheme URI</label>
+  </div>
+  <input type="text" class="form-control subject-scheme-uri-field" disabled={{this.oecdSelected}}
+    value={{fragment.subjectSchemeUri}} oninput={{action "updateSubjectSchemeUri" value="target.value"}}
+    data-test-subject-uri />
+  <span class="input-group-btn">
+    <BsButton @outline={{true}} @onClick={{action "deleteSubject" index}}>{{fa-icon "trash"}}</BsButton>
+  </span>
+</div>
+<div class="help-block help-block-fragment">The URI of the subject term.</div>
