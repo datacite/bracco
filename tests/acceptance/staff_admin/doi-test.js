@@ -64,7 +64,7 @@ module('Acceptance | staff_admin | admin', function(hooks) {
   // });
 
   test('new DOI form for repository RPH', async function(assert) {
-    assert.expect(16);
+    assert.expect(17);
 
     await visit('/repositories/datacite.rph/dois/new');
 
@@ -110,7 +110,7 @@ module('Acceptance | staff_admin | admin', function(hooks) {
   });
 
   test('edit DOI form for repository RPH', async function(assert) {
-    assert.expect(16);
+    assert.expect(17);
 
     await visit('/dois/10.70048%2Fe605-dg05/edit');
 
