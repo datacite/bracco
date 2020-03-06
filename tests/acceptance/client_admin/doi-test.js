@@ -5,6 +5,7 @@ import {
   // findAll,
   visit,
   // fillIn,
+  // waitFor,
   // click,
   // typeIn,
   // waitUntil,
@@ -15,7 +16,7 @@ import { authenticateSession } from 'ember-simple-auth/test-support';
 import { setupFactoryGuy } from 'ember-data-factory-guy';
 // import { build, make, mockFindRecord } from 'ember-data-factory-guy';
 // import ENV from 'bracco/config/environment';
-import { selectChoose } from 'ember-power-select/test-support/helpers';
+import { selectChoose, selectSearch } from 'ember-power-select/test-support/helpers';
 
 module('Acceptance | client_admin | repository', function(hooks) {
   setupApplicationTest(hooks);
@@ -88,5 +89,39 @@ module('Acceptance | client_admin | repository', function(hooks) {
     await selectChoose('#doi-language', 'English');
     assert.equal(currentURL(), 'repositories/datacite.rph/dois/new');
     assert.dom('#doi-language').includesText('English');
+  });
+
+  test('visiting the Form and selecting subject', async function(assert) {
+    await authenticateSession({
+      uid: 'datacite.rph',
+      name: 'Alfred Wegener Institute',
+      role_id: 'client_admin',
+      provider_id: 'datacite',
+      client_id: 'datacite.rph',
+    });
+    await visit('repositories/datacite.rph/dois/new');
+
+    await selectSearch('[doi-subject]', 'Materials');
+    await selectChoose('[doi-subject]', 'Materials engineering');
+
+    assert.equal(currentURL(), 'repositories/datacite.rph/dois/new');
+    assert.dom('[doi-subject]').includesText('Materials engineering');
+  });
+
+  test('visiting the Form and entering new subject', async function(assert) {
+    await authenticateSession({
+      uid: 'datacite.rph',
+      name: 'Alfred Wegener Institute',
+      role_id: 'client_admin',
+      provider_id: 'datacite',
+      client_id: 'datacite.rph',
+    });
+    await visit('repositories/datacite.rph/dois/new');
+
+    let subjects = this.element.querySelectorAll('[doi-subject]');
+    console.log(subjects);
+
+    await selectSearch('[doi-subject]', 'Optics');
+    assert.dom('[doi-subject]').includesText('Search Subject The general type of the resource.');
   });
 });
