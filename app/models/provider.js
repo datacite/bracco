@@ -178,11 +178,11 @@ export default DS.Model.extend(Validations, {
       return a + b.count;
     }, 0);
   }),
-  repositoryCount: computed('meta.clients', function() {
+  repositoryList: computed('meta.clients', function() {
     return this.get('meta.clients');
   }),
-  currentRepositoryCount: computed('repositoryCount', function() {
-    let currentYear = A(this.repositoryCount).findBy('id', new Date().getFullYear().toString());
+  currentRepositoryCount: computed('repositoryList', function() {
+    let currentYear = A(this.repositoryList).findBy('id', new Date().getFullYear().toString());
     if (currentYear) {
       return currentYear.count;
     } else {

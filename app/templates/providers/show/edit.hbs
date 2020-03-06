@@ -71,7 +71,7 @@
 
       <form.element @controlType="textarea" @id="description" @label="Description (optional)" @property="description" @rows={{10}} @helpText="Description of the member. Please use markdown for formatting." @required={{false}} />
 
-      {{#if features.logoUpload}}
+      {{#if (not-eq model.memberType "consortium_organization")}}
         <label class="control-label col-md-3">Logo</label>
         <div class="col-md-9 form-help-header">
           <div class="btn-toolbar btn-sm btn-file">

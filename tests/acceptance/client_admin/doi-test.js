@@ -124,4 +124,19 @@ module('Acceptance | client_admin | repository', function(hooks) {
     await selectSearch('[doi-subject]', 'Optics');
     assert.dom('[doi-subject]').includesText('Search Subject The general type of the resource.');
   });
+
+  test('visiting the Form and adding Contributor', async function(assert) {
+    await authenticateSession({
+      uid: 'datacite.rph',
+      name: 'Alfred Wegener Institute',
+      role_id: 'client_admin',
+      provider_id: 'datacite',
+      client_id: 'datacite.rph',
+    });
+    await visit('repositories/datacite.rph/dois/new');
+
+    await selectChoose('[doi-contributor]', 'DataCollector');
+    assert.equal(currentURL(), 'repositories/datacite.rph/dois/new');
+    assert.dom('[doi-contributor]').includesText('DataCollector');
+  });
 });

@@ -1,0 +1,107 @@
+
+<label for="contributorType" class="subtitle">Contributor Type</label>
+  <div class="power-select-fragment" doi-contributor>
+    {{#form.element
+      controlType="power-select"
+      value=fragment.contributorType
+      helpText="The type of contributor of the resource."
+      options=contributorTypes
+      formLayout="vertical"
+      selected=contributorType
+      destination=fragment.contributorType
+      disabled=disabled as |el|
+    }}
+      {{el.control
+        onChange=(action "selectContributorType")
+        placeholder="Select Contributor Type"
+        allowClear=true
+      }}
+    {{/form.element}}
+</div>  
+{{#if (gt fragment.nameIdentifiers.length 0)}}
+  <label for="nameIdentifiers" class="subtitle">Name Identifier (optional)</label>
+
+  {{#each fragment.nameIdentifiers as |nameIdentifier index|}}
+    <DoiNameIdentifier @model={{model}} @creator={{fragment}} @fragment={{nameIdentifier}} @form={{form}} @index={{index}} @joinNameParts={{action "joinNameParts"}} @setNameType={{action "selectNameType"}} @setReadOnly={{action "setReadOnly"}} />
+  {{/each}}
+{{/if}}
+
+{{#if (lte fragment.nameIdentifiers.length 2)}}
+  <BsButton @class="btn-sm add-name-identifier" @outline={{true}} @onClick={{action "addNameIdentifier"}}>{{fa-icon "plus-circle"}} Add another name identifier</BsButton>
+{{/if}}
+
+<div class="radio-fragment">
+  <RadioButton @value="Personal" @groupValue={{nameType}} @radioClass="radio select-person" @changed={{action "selectNameType"}} @disabled={{isReadonlyNameType}}/><span class="subtitle">Person</span> <RadioButton @value="Organizational" @groupValue={{nameType}} @radioClass="radio select-organisation" @changed={{action "selectNameType"}} @disabled={{isReadonlyNameType}} /><span class="subtitle">Organization</span>
+</div>
+
+{{#if (gt index 0)}}
+  {{#if showPersonal}}
+    <div>
+      <label for="givenName" class="subtitle">Given Name</label>
+      <input type="text" class="form-control given-name-field no-error no-success" value={{fragment.givenName}} oninput={{action "updateGivenName" value="target.value"}} readonly={{isReadonlyNameParts}} data-test-given-name/>
+    </div>
+
+    <div>
+      <label for="familyName" class="subtitle">Family Name</label>
+      <input type="text" class="form-control family-name-field no-error no-success" value={{fragment.familyName}} oninput={{action "updateFamilyName" value="target.value"}} readonly={{isReadonlyNameParts}} data-test-family-name/>
+    </div>
+  {{/if}}
+
+  <div>
+    <label for="name" class="subtitle">Name{{if showPersonal ' (from Given Name and Family Name)'}}</label>
+  </div>
+  <div class="input-group">
+    <input type="text" class="form-control name-field no-error no-success" value={{fragment.name}} oninput={{action "updateName" value="target.value"}} readonly={{isReadonly}} data-test-name/>
+    <span class="input-group-btn">
+      <BsButton @outline={{true}} @onClick={{action "deleteContributor" index}}>{{fa-icon "trash"}}</BsButton>
+    </span>
+  </div>
+
+  <div class="help-block help-block-fragment no-error no-success">The main {{if showPersonal 'researchers' 'organizations'}} involved in producing the data, or the authors of the publication, in priority order.</div>
+{{else}}
+  {{#if showPersonal}}
+    <div>
+      <label for="givenName" class="subtitle">Given Name</label>
+      <input type="text" class="form-control given-name-field" value={{fragment.givenName}} oninput={{action "updateGivenName" value="target.value"}} readonly={{isReadonlyNameParts}} data-test-given-name/>
+      <div class="help-block help-block-fragment">The personal or first name of the contributor.</div>
+    </div>
+    
+
+    <div>
+      <label for="familyName" class="subtitle">Family Name</label>
+      <input type="text" class="form-control family-name-field" value={{fragment.familyName}} oninput={{action "updateFamilyName" value="target.value"}} readonly={{isReadonlyNameParts}} data-test-family-name/>
+      <div class="help-block help-block-fragment">The surname or last name of the contributor.</div>
+    </div>
+
+    <div>
+      <label for="name" class="subtitle">Name (from Given Name and Family Name)</label>
+    </div>
+    <input type="text" class="form-control name-field no-error no-success" value={{fragment.name}} oninput={{action "updateName" value="target.value"}} readonly={{isReadonly}} data-test-name/>
+    
+    <div class="help-block help-block-fragment no-error no-success">The main researchers involved in producing the data, or the authors of the publication, in priority order.</div>
+  {{else}}
+    <div><label for="name" class="subtitle">Name</label></div>
+    <input type="text" class="form-control name-field" value={{fragment.name}} oninput={{action "updateName" value="target.value"}} readonly={{isReadonly}} data-test-name/>
+    <div class="help-block help-block-fragment no-error">The main organizations involved in producing the data, or the authors of the publication, in priority order.</div>
+  {{/if}}
+{{/if}}
+
+{{#if (gt fragment.affiliation.length 0)}}
+  <label for="affiliation" class="subtitle">Affiliation (optional)</label>
+
+  {{#each fragment.affiliation as |affiliation index|}}
+    <DoiAffiliation @model={{model}} @creator={{fragment}} @fragment={{affiliation}} @form={{form}} @index={{index}} />
+  {{/each}}
+
+  {{#if (not hasErrors)}}
+    <div class="help-block help-block-fragment affiliation-field no-error no-success">
+      Affiliation names and identifiers are provided by the Research Organization Registry (ROR).
+    </div>
+  {{/if}}
+
+  {{#if (lte fragment.affiliation.length 2)}}
+    <BsButton @class="btn-sm add-affiliation" @outline={{true}} @onClick={{action "addAffiliation"}}>{{fa-icon "plus-circle"}} Add another affiliation</BsButton>
+  {{/if}}
+{{/if}}
+
+<hr />

@@ -30,4 +30,19 @@ module('Unit | Model | provider', function(hooks) {
     assert.equal(relationship.key, 'consortiumOrganizations', 'has relationship with consortiumOrganizations');
     assert.equal(relationship.kind, 'hasMany', 'kind of relationship is hasMany');
   });
+
+  test('should have meta data', function(assert) {
+    let model = run(() => this.owner.lookup('service:store').createRecord('provider'));
+
+    let meta = {clients: [ {id: '2011',title: '2011',count: 7}, {id: '2020',title: '2020',count: 11} ],
+      dois: [ {id: '2011',title: '2011',count: 13567}, {id: '2020',title: '2020',count: 2440} ]};
+
+    model.set('meta', meta);
+
+    assert.equal(model.get('currentRepositoryCount'),11);
+    assert.equal(model.get('repositoryList'),meta.clients);
+
+    assert.equal(model.get('currentDoiCount'),2440);
+    assert.equal(model.get('doiCount'),meta.dois);
+  });
 });
