@@ -5,6 +5,8 @@
       <DoiSubject @model={{model}} @fragment={{subject}} @form={{form}} @index={{index}} />
     {{/each}}
 
-    <BsButton @class="btn-sm" @id="add-subject" @outline={{true}} @onClick={{action "addSubject"}}>{{fa-icon "plus"}} Add another subject</BsButton>
+    {{#if (lte model.subjects.length 6)}}
+      <BsButton @class="btn-sm" @id="add-subject" @outline={{true}} @onClick={{action "addSubject"}}>{{fa-icon "plus"}} Add another subject</BsButton>
+    {{/if}}
   </div>
 </div>
