@@ -5,6 +5,7 @@ import { w } from '@ember/string';
 import countryList from 'iso-3166-country-list';
 
 // states and provinces use iso-3166-2 codes
+// TODO add Brazil, India, Ireland, Italy, Mexico, all supported in Salesforce
 const stateList = [
   { code: 'US-AL', name: 'Alabama' },
   { code: 'US-AK', name: 'Alaska' },
