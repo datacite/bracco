@@ -32,9 +32,6 @@
         <nav.item>
           <nav.link-to @route="providers.show.index" model="model.id" class="nav-link">Info</nav.link-to>
         </nav.item>
-        <nav.item>
-          <nav.link-to @route="providers.show.settings" model="model.id" class="nav-link">Settings</nav.link-to>
-        </nav.item>
 
         {{#if (eq model.memberType "consortium")}}
           <nav.item>
@@ -51,6 +48,9 @@
           </nav.item>
           <nav.item>
             <nav.link-to @route="providers.show.dois" model="model.id" class="nav-link">DOIs</nav.link-to>
+          </nav.item>
+          <nav.item>
+            <nav.link-to @route="providers.show.dashboard" model="model.id" class="nav-link">Dashboard</nav.link-to>
           </nav.item>
         {{/if}}
       </BsNav>

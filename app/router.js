@@ -13,7 +13,7 @@ Router.map(function() {
       this.route('edit');
       this.route('change');
       this.route('delete');
-      this.route('settings');
+      this.route('dashboard');
       this.route('dois');
       this.route('prefixes', function() {
         this.route('show', { path: '/:prefix_id' }, function() {
