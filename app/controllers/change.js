@@ -30,14 +30,14 @@ export default Controller.extend({
       let self = this;
       provider.set('keepPassword', false);
       provider.save().then(function() {
-        self.transitionToRoute('settings');
+        self.transitionToRoute('index');
       }).catch(function(reason) {
         console.debug(reason);
       });
     },
     cancel() {
       this.model.rollbackAttributes();
-      this.transitionToRoute('settings');
+      this.transitionToRoute('index');
     },
   },
 });

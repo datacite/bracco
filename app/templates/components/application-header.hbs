@@ -11,9 +11,6 @@
   </div>
   <navbar.content>
     <navbar.nav class="navbar-right" as |nav|>
-      {{#if home}}
-        <nav.item><DynamicLink @params={{home}}>Home</DynamicLink></nav.item>
-      {{/if}}
       <nav.item><a target="_blank" rel="noopener" href="https://support.datacite.org">Support</a></nav.item>
       {{#if user}}
         {{#if session.isAuthenticated}}
@@ -31,7 +28,7 @@
                 Role: {{currentUser.roleName}}
               </menu.item>
               <menu.item>
-                <DynamicLink @params={{settings}}>{{fa-icon "cog"}} Settings</DynamicLink>
+                <DynamicLink @params={{home}}>{{fa-icon "cog"}} Home</DynamicLink>
               </menu.item>
               <menu.divider/>
               <menu.item>

@@ -1,0 +1,32 @@
+{{#if (can "write settings")}}
+  <ApplicationHeader @default={{true}} />
+
+  <div class="container-fluid">
+    <IndexHeader />
+
+    <div class="content">
+      <div class="panel panel-transparent">
+        <div class="panel-body">
+          <div class="col-md-9 col-md-offset-3"><h3 class="edit">Set Password</h3></div>
+
+          <div class="col-md-9 col-md-offset-3"><span class="help-block">Click <a class="action-link" {{action "generate"}}>here</a> for a password suggestion.</span></div>
+
+          <BsForm @formLayout="horizontal" @horizontalLabelGridClass="col-md-3" @model={{model}} @onSubmit={{action "submit" model}} @submitOnEnter={{true}} as |form|>
+            <form.element @controlType="text" @id="password-input" @property="passwordInput" @label="New Password" @required={{false}} />
+            <form.element @controlType="text" @id="confirm-password-input" @property="confirmPasswordInput" @label="Confirm Password" @required={{false}} />
+
+            <div class="col-md-9 col-md-offset-3">
+              <div class="btn-toolbar">
+                <button type="submit" class="btn btn-sm btn-fill">Set Password</button>
+                <button {{action "cancel" model}} class="btn btn-sm" id="cancel">Cancel</button>
+              </div>
+            </div>
+          </BsForm>
+        </div>
+      </div>
+    </div>
+  </div>
+{{else}}
+  <ApplicationHeader />
+  <LandingPage />
+{{/if}}
