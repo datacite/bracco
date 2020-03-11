@@ -147,7 +147,7 @@ export default DS.Model.extend(Validations, {
   publisher: DS.attr('string'),
   bcontainer: DS.attr(),
   publicationYear: DS.attr('number'),
-  subjects: DS.attr(),
+  subjects: fragmentArray('subject', { defaultValue: [] }),
   contributors: fragmentArray('contributor', { defaultValue: [] }),
   dates: DS.attr(),
   language: DS.attr('string'),

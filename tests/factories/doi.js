@@ -10,6 +10,7 @@ FactoryGuy.define('doi', {
     contributors: FactoryGuy.hasMany('contributor'),
     titles: FactoryGuy.hasMany('title'),
     descriptions: FactoryGuy.hasMany('description'),
+    subjects: FactoryGuy.hasMany('subject'),
     publisher: 'Royal Society of Chemistry',
     types: {
       resourceTypeGeneral: 'Dataset',
@@ -63,6 +64,15 @@ FactoryGuy.define('title', {
 FactoryGuy.define('description', {
   default: {
     description: 'Description of submitted chemical data for InChIKey YAPQBXQYLJRXSA-UHFFFAOYSA-N',
+  },
+});
+
+FactoryGuy.define('subject', {
+  default: {
+    subject: 'Clinical medicine',
+    subjectScheme: 'OECD',
+    schemeURI: 'http://www.oecd.org/science/inno' ,
+    valueURI: '38235147.pdf',
   },
 });
 

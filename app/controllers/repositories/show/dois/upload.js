@@ -25,6 +25,9 @@ export default Controller.extend({
       doi.set('types', null);
       doi.set('rightsList', null);
       doi.set('schemaVersion', null);
+      doi.set('subjects', null);
+      doi.set('language', null);
+      doi.set('contributors', null);
 
       let self = this;
       doi.save().then(function(doi) {

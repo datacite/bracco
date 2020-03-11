@@ -38,6 +38,11 @@ export default Controller.extend({
       // Don't try and set the landingPage information for DOI Updates
       doi.set('landingPage', null);
 
+      // only store subject with a subject text
+      doi.set('subjects', A(doi.get('subjects')).filter(function(subject) {
+        return !isBlank(subject.subject);
+      }));
+
       // only store name identifiers and affiliations with a value
       A(doi.get('creators')).forEach((creator) => {
         creator.set('nameIdentifiers', A(creator.get('nameIdentifiers')).filter(function(nameIdentifier) {
