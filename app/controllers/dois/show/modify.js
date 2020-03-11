@@ -33,6 +33,9 @@ export default Controller.extend({
       doi.set('types', null);
       doi.set('rightsList', null);
       doi.set('schemaVersion', null);
+      doi.set('language', null);
+      doi.set('subjects', null);
+      doi.set('contributors', null);
 
       // Don't try and set the landingPage information for DOI Updates
       doi.set('landingPage', null);

@@ -1,12 +1,8 @@
 import Component from '@ember/component';
-import ISO6391 from 'iso-639-1';
 import URI from 'urijs';
 import { isBlank } from '@ember/utils';
-// import OECD from 'helpers/oecd-list';
-// import { subjectList as OECD } from 'bracco/helpers/oecd-list';
 
-// const subjectList = OECD.subjects;
-const subjectList = [
+const completeSubjectList = [
   'Natural sciences',
   'Mathematics',
   'Computer and information sciences',
@@ -61,8 +57,8 @@ const oecdScheme = 'OECD';
 const oecdSchemeUri = 'http://www.oecd.org/science/inno/38235147.pdf';
 
 export default Component.extend({
-  subjectList,
-  subjects: subjectList,
+  completeSubjectList,
+  subjects: completeSubjectList,
   oecdSelected: false,
   selected: [],
 
@@ -80,7 +76,7 @@ export default Component.extend({
   didReceiveAttrs() {
     this._super(...arguments);
 
-    if (subjectList.includes(this.fragment.get('subject'))) {
+    if (completeSubjectList.includes(this.fragment.get('subject'))) {
       this.set('oecdSelected', true);
     } else {
       this.set('oecdSelected', false);
@@ -94,13 +90,13 @@ export default Component.extend({
           this.subjects.push(select.searchText);
           select.actions.choose(select.searchText);
           this.fragment.set('subject', select.searchText);
-          this.set('subjects', subjectList);
+          this.set('subjects', completeSubjectList);
         }
       }
     },
     updateSubject(value) {
       this.fragment.set('subject', value);
-      if (subjectList.includes(value)) {
+      if (completeSubjectList.includes(value)) {
         this.setScheme(oecdScheme);
         this.setSchemeUri(oecdSchemeUri);
         this.set('oecdSelected', true);
@@ -121,19 +117,10 @@ export default Component.extend({
       this.model.get('subjects').removeObject(this.fragment);
     },
     searchSubject(query) {
-      let subjects = subjectList.filter(function(subject) {
+      let subjects = completeSubjectList.filter(function(subject) {
         return subject.toLowerCase().startsWith(query.toLowerCase());
       });
       this.set('subjects', subjects);
-    },
-    selectSubject(subject) {
-      if (subject) {
-        this.fragment.set('subject', ISO6391.getCode(subject));
-      } else {
-        this.fragment.set('subject', null);
-
-      }
-      this.set('subjects', subjectList);
     },
   },
 });
