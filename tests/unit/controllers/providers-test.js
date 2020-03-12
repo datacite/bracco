@@ -27,4 +27,20 @@ module('Unit | Controller | providers', function(hooks) {
     controller.send('searchCountry', 'Australia');
     assert.equal(controller.get('countries').length,1);
   });
+
+  test('should list organisation type list', function(assert) {
+    let controller = this.owner.lookup('controller:providers.show.organizations.new');
+    let providerModel = make('provider');
+    let orgModel = make('provider'); // make('organisation') does not work
+
+    let model = {
+      'provider': providerModel,
+      'organization': orgModel,
+    };
+    controller.set('model', model);
+    controller.send('selectOrganizationType', 'nationalInstitution');
+    assert.equal(controller.model.organization.get('organizationType'), 'nationalInstitution');
+    controller.send('searchOrganizationType', 'national'); // if I search for 'nationalInstitution' it doesn't work, result 0
+    assert.equal(controller.get('organizationTypes').length,1);
+  });
 });
