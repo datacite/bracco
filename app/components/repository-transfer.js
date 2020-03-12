@@ -47,7 +47,7 @@ export default Component.extend({
         timeout: 5000,
         sticky: true,
       });
-      this.router.transitionTo('repositories.show.settings', this.model);
+      this.router.transitionTo('repositories.show', this.model);
     },
     cancel() {
       this.router.transitionTo('repositories.show.dois', this.model);

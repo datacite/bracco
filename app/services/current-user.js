@@ -19,7 +19,6 @@ export default Service.extend({
   provider_id: null,
   client_id: null,
   home: null,
-  settings: null,
   isAdmin: false,
   isConsortium: false,
   isProvider: false,
@@ -67,7 +66,6 @@ export default Service.extend({
       if (payload.role_id === 'staff_admin') {
         this.set('isAdmin', true);
         this.set('home', { route: 'index' });
-        this.set('settings', { route: 'settings' });
         this.set('roleName', 'Staff');
 
         this.features.setup({
@@ -77,17 +75,14 @@ export default Service.extend({
       } else if (payload.role_id === 'consortium_admin') {
         this.set('isConsortium', true);
         this.set('home', { route: 'providers.show', id: this.uid });
-        this.set('settings', { route: 'providers.show.settings', id: this.uid });
         this.set('roleName', 'Consortium');
       } else if (payload.role_id === 'provider_admin') {
         this.set('isProvider', true);
         this.set('home', { route: 'providers.show', id: this.uid });
-        this.set('settings', { route: 'providers.show.settings', id: this.uid });
         this.set('roleName', 'Member');
       } else if (payload.role_id === 'client_admin') {
         this.set('isClient', true);
         this.set('home', { route: 'repositories.show', id: this.uid });
-        this.set('settings', { route: 'repositories.show.settings', id: this.uid });
         this.set('roleName', 'Repository');
       } else if (payload.role_id === 'user') {
         this.set('home', { route: 'users.show', id: this.uid });
@@ -98,7 +93,7 @@ export default Service.extend({
 
       if (payload.uid.startsWith('0')) {
         this.set('isUser', true);
-        this.set('settings', { route: 'users.show.settings', id: this.uid });
+        this.set('home', { route: 'users.show', id: this.uid });
       }
 
       if (payload.beta_tester) {

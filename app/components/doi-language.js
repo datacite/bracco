@@ -9,7 +9,7 @@ export default Component.extend({
   languageList,
   languages: languageList,
   language: computed('model.language', function() {
-    return ISO6391.getName(this.get('model.language'));
+    return ISO6391.getName(this.get('model.language')) !== '' ? ISO6391.getName(this.get('model.language')) : this.get('model.language');
   }),
 
 

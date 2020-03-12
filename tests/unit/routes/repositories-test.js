@@ -14,8 +14,8 @@ module('Unit | Route | repositories', function(hooks) {
     assert.ok(route);
   });
 
-  test('settings exists', function(assert) {
-    let route = this.owner.lookup('route:repositories/show/settings');
+  test('dashboard exists', function(assert) {
+    let route = this.owner.lookup('route:repositories/show/dashboard');
     assert.ok(route);
   });
 

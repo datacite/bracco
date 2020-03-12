@@ -29,8 +29,8 @@ module('Acceptance | organization_admin | admin', function(hooks) {
   });
 
   // the following pages require authentication. Redirects to provider homepage otherwise
-  test('visiting settings', async function(assert) {
-    await visit('/settings');
+  test('visiting dashboard', async function(assert) {
+    await visit('/dashboard');
 
     assert.equal(currentURL(), '/providers/datacite');
     assert.dom('h2.work').hasText('DataCite');

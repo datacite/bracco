@@ -1,0 +1,53 @@
+{{#if (can "write index")}}
+  <ApplicationHeader @default={{true}} />
+
+  <div class="container-fluid">
+    <IndexHeader />
+
+    <div class="content">
+      <div class="panel panel-transparent">
+        <div class="panel-body">
+          <div class="col-md-offset-3 form-help-header"><h3 class="edit">Update Account</h3></div>
+
+          <BsForm @formLayout="horizontal" @horizontalLabelGridClass="col-md-3" @model={{model}} @onSubmit={{action "submit" model}} as |form|>
+            <form.element @controlType="text" @id="member-id" @label="Member ID" @property="symbol" @helpText="The Member ID is the unique identifier for each member and can't be changed." @disabled={{true}} />
+            
+            <form.element @controlType="power-select" @id="ror-id" @label="Organization identifier (optional)" @property="rorId" @optionLabelPath="name" @options={{organizations}} @destination={{rorId}} @helpText="Organization identifiers are provided by the Research Organization Registry (ROR)." as |el|>
+              <el.control @onChange={{action "selectRor"}} @search={{action "searchRor"}} @placeholder="Select Organization" @searchPlaceholder="Type to search..." @allowClear={{true}} as |item|>
+                {{if item.name item.name model.rorId}}
+              </el.control>
+            </form.element>
+
+            <form.element @controlType="text" @id="system-email" @label="System Email" @property="systemEmail" @helpText="This is the email used for sending password reset requests and similar system notifications." @required={{false}} />
+            <form.element @controlType="text" @id="website" @label="Website" @property="website" @helpText="Website of the member." @required={{false}} />
+            <form.element @controlType="text" @id="twitter-handle" @label="Twitter (optional)" @property="twitterHandle" @placeholder="Add @twitter account" @helpText="DataCite will follow you on Twitter." @required={{false}} />
+            <form.element @controlType="textarea" @id="description" @label="Description (optional)" @property="description" rows="10" @helpText="Description of the provider. Please use markdown for formatting." @required={{false}} />
+
+            <form.element @controlType="power-select" @id="country" @label="Country (optional)" @property="country" @optionLabelPath="name" @options={{countries}} @destination={{country}} @helpText="Country where the member is located." as |el|>
+              <el.control @onChange={{action "selectCountry"}} @search={{action "searchCountry"}} @searchField="name" @placeholder="Select Country" @searchPlaceholder="Type to search..." @allowClear={{true}} as |item|>
+                {{item.name}}
+              </el.control>
+            </form.element>
+
+            <div class="col-md-9 col-md-offset-3">
+              {{#if (is-empty (provider-form-errors model))}}
+                <button type="submit" id="update-provider" class="btn btn-sm btn-fill" disabled={{false}}>Update Account</button>
+              {{else}}
+                <BsAlert @dismissible={{false}} @type="danger">
+                  To save this member, first resolve the errors with these fields: {{provider-form-errors model}}.
+                </BsAlert>
+
+                <button type="submit" id="update-provider" class="btn btn-sm btn-fill" disabled={{true}}>Update Account</button>          
+              {{/if}}
+
+              <button {{action "cancel" model}} class="btn btn-sm" id="cancel">Cancel</button> 
+            </div>
+          </BsForm>
+        </div>
+      </div>
+    </div>
+  </div>
+{{else}}
+  <ApplicationHeader />
+  <LandingPage />
+{{/if}}

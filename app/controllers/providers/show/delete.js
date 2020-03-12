@@ -17,7 +17,7 @@ export default Controller.extend({
     },
     cancel() {
       this.model.rollbackAttributes();
-      this.transitionToRoute('providers.show.settings', this.model);
+      this.transitionToRoute('providers.show', this.model);
     },
   },
 });

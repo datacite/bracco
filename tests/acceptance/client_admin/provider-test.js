@@ -16,8 +16,8 @@ module('Acceptance | client_admin | provider', function(hooks) {
     });
   });
 
-  test('visiting provider DataCite settings', async function(assert) {
-    await visit('/providers/tib/settings');
+  test('visiting provider TIB dashboard', async function(assert) {
+    await visit('/providers/tib/dashboard');
 
     assert.equal(currentURL(), '/repositories/tib.awi');
     assert.dom('h2.work').hasText('Alfred Wegener Institute');

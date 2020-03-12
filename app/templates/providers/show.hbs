@@ -2,13 +2,13 @@
   <ApplicationHeader @default={{true}} />
 
   <div class="container-fluid">
-    {{#if (or (can "read index") (can "read provider" model))}}
+    {{#if (or (can "read index") (can "read provider" model.consortium))}}
       <ol class="breadcrumb">
         {{#if (can "read index")}}
           <li class="breadcrumb-item"><LinkTo @route="index">DataCite</LinkTo></li>
           <li class="breadcrumb-item"><LinkTo @route="providers">Members</LinkTo></li>
         {{/if}}
-        {{#if (eq model.memberType "consortium_organization")}}
+        {{#if (and (can "read provider" model.consortium) (eq model.memberType "consortium_organization"))}}
           <li class="breadcrumb-item"><LinkTo @route="providers.show.index" @model={{model.consortium.id}}>{{model.consortium.name}}</LinkTo></li>
           <li class="breadcrumb-item"><LinkTo @route="providers.show.organizations" @model={{model.consortium.id}}>Consortium Organizations</LinkTo></li>
         {{/if}}
@@ -32,9 +32,6 @@
         <nav.item>
           <nav.link-to @route="providers.show.index" model="model.id" class="nav-link">Info</nav.link-to>
         </nav.item>
-        <nav.item>
-          <nav.link-to @route="providers.show.settings" model="model.id" class="nav-link">Settings</nav.link-to>
-        </nav.item>
 
         {{#if (eq model.memberType "consortium")}}
           <nav.item>
@@ -51,6 +48,9 @@
           </nav.item>
           <nav.item>
             <nav.link-to @route="providers.show.dois" model="model.id" class="nav-link">DOIs</nav.link-to>
+          </nav.item>
+          <nav.item>
+            <nav.link-to @route="providers.show.dashboard" model="model.id" class="nav-link">Dashboard</nav.link-to>
           </nav.item>
         {{/if}}
       </BsNav>

@@ -24,7 +24,7 @@ export default ApplicationSerializer.extend({
     // don't send back these attributes, as updates are not implemented yet
     identifiers: { serialize: false },
     contentUrl: { serialize: false },
-    subjects: { serialize: false },
+    // subjects: { serialize: false },
     // contributors: { serialize: false },
     dates: { serialize: false },
     // language: { serialize: false },

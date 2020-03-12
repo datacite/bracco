@@ -18,7 +18,7 @@ export default Controller.extend({
     },
     cancel() {
       this.model.rollbackAttributes();
-      this.transitionToRoute('repositories.show.settings', this.model);
+      this.transitionToRoute('repositories.show', this.model);
     },
   },
 });
