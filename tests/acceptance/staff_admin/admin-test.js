@@ -33,21 +33,21 @@ module('Acceptance | staff_admin | admin', function(hooks) {
   });
 
   // the following pages require authentication. Redirects to homepage otherwise
-  test('visiting settings', async function(assert) {
-    await visit('/settings');
+  test('visiting dashboard', async function(assert) {
+    await visit('/dashboard');
 
-    assert.equal(currentURL(), '/settings');
+    assert.equal(currentURL(), '/dashboard');
     assert.dom('h2.work').hasText('DataCite');
     assert.dom('div.tab-content').exists();
-    assert.dom('li a.nav-link.active').hasText('Settings');
+    assert.dom('li a.nav-link.active').hasText('Dashboard');
   });
 
-  test('editing admin settings form', async function(assert) {
+  test('editing admin form', async function(assert) {
     assert.expect(11);
 
-    await visit('/settings/edit');
+    await visit('/edit');
 
-    assert.equal(currentURL(), '/settings/edit');
+    assert.equal(currentURL(), '/edit');
     assert.dom('h2.work').hasText('DataCite');
     assert.dom('div.tab-content').exists();
 
@@ -63,9 +63,9 @@ module('Acceptance | staff_admin | admin', function(hooks) {
   });
 
   test('editing admin password form', async function(assert) {
-    await visit('/settings/change');
+    await visit('/change');
 
-    assert.equal(currentURL(), '/settings/change');
+    assert.equal(currentURL(), '/change');
     assert.dom('h2.work').hasText('DataCite');
     assert.dom('div.tab-content').exists();
 

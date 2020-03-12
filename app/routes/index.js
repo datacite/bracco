@@ -1,8 +1,10 @@
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
+import { w } from '@ember/string';
 
 export default Route.extend({
   can: service(),
+  currentUser: service(),
 
   model() {
     let self = this;
@@ -16,8 +18,13 @@ export default Route.extend({
   },
 
   afterModel() {
-    if (this.can.cannot('read index')) {
+    if (this.get('currentUser.role_id') === 'staff_admin') {
       this.transitionTo('index');
+    } else if (w('provider_admin consortium_admin client_admin user').includes(this.get('currentUser.role_id'))) {
+      let home = this.currentUser.get('home');
+      this.transitionTo(home.route, home.id);
+    } else if (this.get('currentUser.role_id') === 'temporary') {
+      this.transitionTo('password');
     }
   },
 });

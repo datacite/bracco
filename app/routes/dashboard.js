@@ -22,14 +22,7 @@ export default Route.extend({
 
   afterModel() {
     if (this.can.cannot('read index') && this.currentUser) {
-      let home = this.currentUser.get('home');
-      if (home && home.id) {
-        this.transitionTo(home.route, home.id);
-      } else if (home) {
-        this.transitionTo(home.route);
-      } else {
-        this.transitionTo('index');
-      }
+      this.transitionTo('index');
     }
   },
 

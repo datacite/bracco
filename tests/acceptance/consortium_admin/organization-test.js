@@ -40,11 +40,11 @@ module('Acceptance | consortium_admin | organization', function(hooks) {
   });
 
   test('visiting provider DC consortium organization workshop', async function(assert) {
-    await visit('/providers/workshop/settings');
+    await visit('/providers/workshop');
 
-    assert.equal(currentURL(), '/providers/workshop/settings');
+    assert.equal(currentURL(), '/providers/workshop');
     assert.dom('h2.work').hasText('DataCite Training Workshop');
-    assert.dom('li a.nav-link.active').hasText('Settings');
+    assert.dom('li a.nav-link.active').hasText('Info');
 
     // consortium member can edit or delete consortium organization
     assert.dom('a#edit-provider').includesText('Update Organization');

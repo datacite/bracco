@@ -221,7 +221,7 @@ export default Component.extend({
       let self = this;
       this.store.findRecord('repository', this.model.get('id'), { backgroundReload: false }).then(function(repository) {
         repository.destroyRecord().then(function() {
-          self.router.transitionTo('providers.show.settings', self.get('provider'));
+          self.router.transitionTo('providers.show', self.get('provider'));
         });
       }).catch(function(reason) {
         console.debug(reason);
