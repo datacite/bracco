@@ -19,7 +19,7 @@ module('Acceptance | staff_admin | repository', function(hooks) {
 
     assert.equal(currentURL(), '/repositories/tib.awi');
     assert.dom('h2.work').hasText('Alfred Wegener Institute');
-    assert.dom('li a.nav-link.active').hasText('Info');
+    assert.dom('li a.nav-link.active').hasText('Settings');
 
     assert.dom('a#edit-repository').includesText('Update Repository');
     assert.dom('a#edit-repository').hasAttribute('href', '/repositories/tib.awi/edit');
@@ -27,12 +27,12 @@ module('Acceptance | staff_admin | repository', function(hooks) {
     assert.dom('a#delete-repository').hasAttribute('href', '/repositories/tib.awi/delete');
   });
 
-  test('visiting repository AWI dashboard', async function(assert) {
-    await visit('/repositories/tib.awi/dashboard');
+  test('visiting repository AWI info', async function(assert) {
+    await visit('/repositories/tib.awi/info');
 
-    assert.equal(currentURL(), '/repositories/tib.awi/dashboard');
+    assert.equal(currentURL(), '/repositories/tib.awi/info');
     assert.dom('h2.work').hasText('Alfred Wegener Institute');
-    assert.dom('li a.nav-link.active').hasText('Dashboard');
+    assert.dom('li a.nav-link.active').hasText('Info');
 
     // repository charts are displayed
     assert.dom('#chart-doi-title').includesText('DOIs by year');

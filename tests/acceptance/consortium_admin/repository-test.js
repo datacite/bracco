@@ -20,19 +20,19 @@ module('Acceptance | consortium_admin | repository', function(hooks) {
 
     assert.equal(currentURL(), '/repositories/datacite.rph');
     assert.dom('h2.work').hasText('DataCite Test RPH');
-    assert.dom('li a.nav-link.active').hasText('Info');
+    assert.dom('li a.nav-link.active').hasText('Settings');
 
     // consortium member can edit and delete repositories
     assert.dom('a#edit-repository').includesText('Update Repository');
     assert.dom('a#delete-repository').includesText('Delete');
   });
 
-  test('visiting repository DataCite RPH dashboard', async function(assert) {
-    await visit('/repositories/datacite.rph/dashboard');
+  test('visiting repository DataCite RPH info', async function(assert) {
+    await visit('/repositories/datacite.rph/info');
 
-    assert.equal(currentURL(), '/repositories/datacite.rph/dashboard');
+    assert.equal(currentURL(), '/repositories/datacite.rph/info');
     assert.dom('h2.work').hasText('DataCite Test RPH');
-    assert.dom('li a.nav-link.active').hasText('Dashboard');
+    assert.dom('li a.nav-link.active').hasText('Info');
 
     // repository charts are displayed
     assert.dom('#chart-doi-title').includesText('DOIs by year');

@@ -16,11 +16,11 @@ module('Acceptance | organization_admin | repository', function(hooks) {
   });
 
   test('visiting repository DataCite Journal', async function(assert) {
-    await visit('/repositories/datacite.datacite/dashboard');
+    await visit('/repositories/datacite.datacite/info');
 
-    assert.equal(currentURL(), '/repositories/datacite.datacite/dashboard');
+    assert.equal(currentURL(), '/repositories/datacite.datacite/info');
     assert.dom('h2.work').hasText('DataCite Repository');
-    assert.dom('li a.nav-link.active').hasText('Dashboard');
+    assert.dom('li a.nav-link.active').hasText('Info');
 
     // repository charts are displayed
     assert.dom('#chart-doi-title').includesText('by year');
@@ -31,7 +31,7 @@ module('Acceptance | organization_admin | repository', function(hooks) {
 
     assert.equal(currentURL(), '/repositories/datacite.datacite');
     assert.dom('h2.work').hasText('DataCite Repository');
-    assert.dom('li a.nav-link.active').hasText('Info');
+    assert.dom('li a.nav-link.active').hasText('Settings');
     assert.dom('a#edit-repository').includesText('Update Repository');
     assert.dom('a#delete-repository').includesText('Delete');
   });
@@ -41,7 +41,7 @@ module('Acceptance | organization_admin | repository', function(hooks) {
 
     assert.equal(currentURL(), '/repositories/datacite.rph');
     assert.dom('h2.work').hasText('DataCite Test RPH');
-    assert.dom('li a.nav-link.active').hasText('Info');
+    assert.dom('li a.nav-link.active').hasText('Settings');
     assert.dom('a#edit-repository').includesText('Update Repository');
     assert.dom('a#delete-repository').includesText('Delete');
   });

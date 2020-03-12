@@ -21,8 +21,8 @@ module('Acceptance | user | repository', function(hooks) {
     assert.dom('h2.work').hasText('Martin Fenner');
   });
 
-  test('visiting repository AWI dashboard', async function(assert) {
-    await visit('/repositories/tib.awi/dashboard');
+  test('visiting repository AWI info', async function(assert) {
+    await visit('/repositories/tib.awi/info');
 
     assert.equal(currentURL(), '/users/0000-0001-6528-2027');
     assert.dom('h2.work').hasText('Martin Fenner');

@@ -29,8 +29,8 @@ module('Acceptance | consortium_admin | admin', function(hooks) {
   });
 
   // the following pages require authentication. Redirects to provider homepage otherwise
-  test('visiting dashboard', async function(assert) {
-    await visit('/dashboard');
+  test('visiting info', async function(assert) {
+    await visit('/info');
 
     assert.equal(currentURL(), '/providers/dc');
     assert.dom('h2.work').hasText('DataCite Consortium');
