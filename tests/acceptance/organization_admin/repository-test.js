@@ -16,22 +16,22 @@ module('Acceptance | organization_admin | repository', function(hooks) {
   });
 
   test('visiting repository DataCite Journal', async function(assert) {
-    await visit('/repositories/datacite.datacite');
+    await visit('/repositories/datacite.datacite/dashboard');
 
-    assert.equal(currentURL(), '/repositories/datacite.datacite');
+    assert.equal(currentURL(), '/repositories/datacite.datacite/dashboard');
     assert.dom('h2.work').hasText('DataCite Repository');
-    assert.dom('li a.nav-link.active').hasText('Info');
+    assert.dom('li a.nav-link.active').hasText('Dashboard');
 
     // repository charts are displayed
     assert.dom('#chart-doi-title').includesText('by year');
   });
 
-  test('visiting repository DataCite Journal settings', async function(assert) {
-    await visit('/repositories/datacite.datacite/settings');
+  test('visiting repository DataCite Journal', async function(assert) {
+    await visit('/repositories/datacite.datacite');
 
-    assert.equal(currentURL(), '/repositories/datacite.datacite/settings');
+    assert.equal(currentURL(), '/repositories/datacite.datacite');
     assert.dom('h2.work').hasText('DataCite Repository');
-    assert.dom('li a.nav-link.active').hasText('Settings');
+    assert.dom('li a.nav-link.active').hasText('Info');
     assert.dom('a#edit-repository').includesText('Update Repository');
     assert.dom('a#delete-repository').includesText('Delete');
   });
@@ -42,9 +42,8 @@ module('Acceptance | organization_admin | repository', function(hooks) {
     assert.equal(currentURL(), '/repositories/datacite.rph');
     assert.dom('h2.work').hasText('DataCite Test RPH');
     assert.dom('li a.nav-link.active').hasText('Info');
-
-    // repository charts are displayed
-    assert.dom('#chart-doi-title').includesText('DOIs by year');
+    assert.dom('a#edit-repository').includesText('Update Repository');
+    assert.dom('a#delete-repository').includesText('Delete');
   });
 
   test('visiting repository DataCite Journal prefixes', async function(assert) {

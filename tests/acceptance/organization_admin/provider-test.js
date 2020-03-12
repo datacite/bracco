@@ -27,25 +27,26 @@ module('Acceptance | organization_admin | provider', function(hooks) {
     assert.dom('h2.work').hasText('DataCite');
     assert.dom('li a.nav-link.active').hasText('Info');
 
+    assert.dom('a#edit-provider').includesText('Update Organization');
+    assert.dom('a#delete-provider').doesNotExist();
+  });
+
+  test('visiting provider DataCite dashboard', async function(assert) {
+    await visit('/providers/datacite/dashboard');
+
+    assert.equal(currentURL(), '/providers/datacite/dashboard');
+    assert.dom('h2.work').hasText('DataCite');
+    assert.dom('li a.nav-link.active').hasText('Dashboard');
+
     // provider charts are displayed
     assert.dom('#chart-repository-title').includesText('Repositories by year');
     assert.dom('#chart-doi-title').includesText('DOIs by year');
   });
 
-  test('visiting provider DataCite settings', async function(assert) {
-    await visit('/providers/datacite/settings');
-
-    assert.equal(currentURL(), '/providers/datacite/settings');
-    assert.dom('h2.work').hasText('DataCite');
-    assert.dom('li a.nav-link.active').hasText('Settings');
-    assert.dom('a#edit-provider').includesText('Update Organization');
-    assert.dom('a#delete-provider').doesNotExist();
-  });
-
   test('going to provider DataCite edit form', async function(assert) {
-    await visit('/providers/datacite/settings');
+    await visit('/providers/datacite');
 
-    assert.equal(currentURL(), '/providers/datacite/settings');
+    assert.equal(currentURL(), '/providers/datacite');
     assert.dom('a#edit-provider').includesText('Update Organization');
 
     await click('a#edit-provider');

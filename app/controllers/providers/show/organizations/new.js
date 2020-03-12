@@ -139,7 +139,7 @@ export default Controller.extend({
     submit() {
       let self = this;
       this.model.organization.save().then(function(provider) {
-        self.transitionToRoute('providers.show.settings', provider.id);
+        self.transitionToRoute('providers.show', provider.id);
       }).catch(function(reason) {
         console.debug(reason);
       });

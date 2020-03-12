@@ -127,7 +127,7 @@ export default Controller.extend({
       }));
 
       repository.save().then(function(repository) {
-        self.transitionToRoute('repositories.show.settings', repository.id);
+        self.transitionToRoute('repositories.show', repository.id);
       }).catch(function(reason) {
         console.debug(reason);
       });

@@ -26,9 +26,10 @@ module('Acceptance | staff_admin | provider', function(hooks) {
     assert.dom('h2.work').hasText('German National Library of Science and Technology');
     assert.dom('li a.nav-link.active').hasText('Info');
 
-    // provider charts are displayed
-    assert.dom('#chart-repository-title').includesText('Repositories by year');
-    assert.dom('#chart-doi-title').includesText('DOIs by year');
+    assert.dom('a#edit-provider').includesText('Update Member');
+    assert.dom('a#edit-provider').hasAttribute('href', '/providers/tib/edit');
+    assert.dom('a#delete-provider').includesText('Delete Member');
+    assert.dom('a#delete-provider').hasAttribute('href', '/providers/tib/delete');
   });
 
   test('visiting consortium DC', async function(assert) {
@@ -38,22 +39,35 @@ module('Acceptance | staff_admin | provider', function(hooks) {
     assert.dom('h2.work').hasText('DataCite Consortium');
     assert.dom('li a.nav-link.active').hasText('Info');
 
-    // consortium charts are displayed
-    assert.dom('#chart-organization-title').includesText('Organizations by year');
+    assert.dom('a#edit-provider').includesText('Update Member');
+    assert.dom('a#edit-provider').hasAttribute('href', '/providers/dc/edit');
+    assert.dom('a#delete-provider').includesText('Delete Member');
+    assert.dom('a#delete-provider').hasAttribute('href', '/providers/dc/delete');
+  });
+
+  test('visiting provider TIB dashboard', async function(assert) {
+    await visit('/providers/tib/dashboard');
+
+    assert.equal(currentURL(), '/providers/tib/dashboard');
+    assert.dom('h2.work').hasText('German National Library of Science and Technology');
+    assert.dom('a.nav-link.active').hasText('Dashboard');
+
+    // direct member charts are displayed
     assert.dom('#chart-repository-title').includesText('Repositories by year');
     assert.dom('#chart-doi-title').includesText('DOIs by year');
   });
 
-  test('visiting provider TIB settings', async function(assert) {
-    await visit('/providers/tib/settings');
+  test('visiting consortium DC dashboard', async function(assert) {
+    await visit('/providers/dc/dashboard');
 
-    assert.equal(currentURL(), '/providers/tib/settings');
-    assert.dom('h2.work').hasText('German National Library of Science and Technology');
-    assert.dom('a.nav-link.active').hasText('Settings');
-    assert.dom('a#edit-provider').includesText('Update Member');
-    assert.dom('a#edit-provider').hasAttribute('href', '/providers/tib/edit');
-    assert.dom('a#delete-provider').includesText('Delete Member');
-    assert.dom('a#delete-provider').hasAttribute('href', '/providers/tib/delete');
+    assert.equal(currentURL(), '/providers/dc/dashboard');
+    assert.dom('h2.work').hasText('DataCite Consortium');
+    assert.dom('a.nav-link.active').hasText('Dashboard');
+
+    // consortium charts are displayed
+    assert.dom('#chart-organization-title').includesText('Organizations by year');
+    assert.dom('#chart-repository-title').includesText('Repositories by year');
+    assert.dom('#chart-doi-title').includesText('DOIs by year');
   });
 
   test('visiting provider TIB repositories', async function(assert) {

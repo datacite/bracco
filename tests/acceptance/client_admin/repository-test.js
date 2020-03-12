@@ -45,19 +45,19 @@ module('Acceptance | client_admin | repository', function(hooks) {
     assert.equal(currentURL(), '/repositories/datacite.rph');
     assert.dom('h2.work').hasText('DataCite Test RPH');
     assert.dom('li a.nav-link.active').hasText('Info');
+    assert.dom('a#edit-repository').includesText('Update Repository');
+    assert.dom('a#delete-repository').doesNotExist();
+  });
+
+  test('visiting repository RPH dashboard', async function(assert) {
+    await visit('/repositories/datacite.rph/dashboard');
+
+    assert.equal(currentURL(), '/repositories/datacite.rph/dashboard');
+    assert.dom('h2.work').hasText('DataCite Test RPH');
+    assert.dom('li a.nav-link.active').hasText('Dashboard');
 
     // repository charts are displayed
     assert.dom('#chart-doi-title').includesText('DOIs by year');
-  });
-
-  test('visiting repository RPH settings', async function(assert) {
-    await visit('/repositories/datacite.rph/settings');
-
-    assert.equal(currentURL(), '/repositories/datacite.rph/settings');
-    assert.dom('h2.work').hasText('DataCite Test RPH');
-    assert.dom('li a.nav-link.active').hasText('Settings');
-    assert.dom('a#edit-repository').includesText('Update Repository');
-    assert.dom('a#delete-repository').doesNotExist();
   });
 
   test('visiting repository RPH prefixes', async function(assert) {

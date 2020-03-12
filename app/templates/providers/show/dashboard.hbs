@@ -1,0 +1,27 @@
+<div class="content">
+  <div class="row content">
+    {{#if (eq model.memberType "consortium")}}
+      <BarChart @data={{model.providerCount}} @label="Organization" @model={{model}} @link="providers.show.organizations" />
+    {{/if}}
+    {{#if (not-eq model.memberType "member_only")}}
+      <BarChart @data={{model.repositoryList}} @label="Repository" @model={{model}} @link="providers.show.repositories" />
+      <BarChart @data={{model.doiCount}} @label="DOI" @model={{model}} @link="providers.show.dois" @cumulative={{false}} />
+    {{else}}
+      <div class="panel panel-transparent">
+        <div class="panel-body">
+          {{model.displayName}} does not provide DOI registration services.
+        </div>
+      </div>
+    {{/if}}
+  </div>
+
+  {{#if (can "read messages" model)}}
+    <div class="row">
+      <div class="col-md-9">
+        {{#each flashMessages.queue as |flash|}}
+          <FlashMessage @flash={{flash}} />
+        {{/each}}
+      </div>
+    </div>
+  {{/if}}
+</div>

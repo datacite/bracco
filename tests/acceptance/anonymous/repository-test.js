@@ -12,8 +12,8 @@ module('Acceptance | anonymous | repository', function(hooks) {
     assert.dom('div.motto h1').hasText('DataCite Fabrica Test');
   });
 
-  test('visiting repository AWI settings', async function(assert) {
-    await visit('/repositories/tib.awi/settings');
+  test('visiting repository AWI dashboard', async function(assert) {
+    await visit('/repositories/tib.awi/dashboard');
 
     assert.equal(currentURL(), '/');
     assert.dom('div.motto h1').hasText('DataCite Fabrica Test');

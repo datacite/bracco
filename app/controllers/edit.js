@@ -38,14 +38,14 @@ export default Controller.extend({
     submit(provider) {
       let self = this;
       provider.save().then(function() {
-        self.transitionToRoute('settings');
+        self.transitionToRoute('index');
       }).catch(function(reason) {
         console.debug(reason);
       });
     },
     cancel() {
       this.model.rollbackAttributes();
-      this.transitionToRoute('settings');
+      this.transitionToRoute('index');
     },
   },
 });

@@ -21,20 +21,21 @@ module('Acceptance | staff_admin | repository', function(hooks) {
     assert.dom('h2.work').hasText('Alfred Wegener Institute');
     assert.dom('li a.nav-link.active').hasText('Info');
 
-    // repository charts are displayed
-    assert.dom('#chart-doi-title').includesText('DOIs by year');
-  });
-
-  test('visiting repository AWI settings', async function(assert) {
-    await visit('/repositories/tib.awi/settings');
-
-    assert.equal(currentURL(), '/repositories/tib.awi/settings');
-    assert.dom('h2.work').hasText('Alfred Wegener Institute');
-    assert.dom('li a.nav-link.active').hasText('Settings');
     assert.dom('a#edit-repository').includesText('Update Repository');
     assert.dom('a#edit-repository').hasAttribute('href', '/repositories/tib.awi/edit');
     assert.dom('a#delete-repository').includesText('Delete');
     assert.dom('a#delete-repository').hasAttribute('href', '/repositories/tib.awi/delete');
+  });
+
+  test('visiting repository AWI dashboard', async function(assert) {
+    await visit('/repositories/tib.awi/dashboard');
+
+    assert.equal(currentURL(), '/repositories/tib.awi/dashboard');
+    assert.dom('h2.work').hasText('Alfred Wegener Institute');
+    assert.dom('li a.nav-link.active').hasText('Dashboard');
+
+    // repository charts are displayed
+    assert.dom('#chart-doi-title').includesText('DOIs by year');
   });
 
   test('visiting repository RPH prefixes', async function(assert) {
