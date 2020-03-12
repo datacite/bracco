@@ -2,7 +2,6 @@ import DS from 'ember-data';
 import MF from 'ember-data-model-fragments';
 import { validator, buildValidations } from 'ember-cp-validations';
 import { computed } from '@ember/object';
-// import { A } from '@ember/array';
 
 const Validations = buildValidations({
   subject: validator('presence', true),
