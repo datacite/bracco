@@ -8,6 +8,9 @@
     @fill={{false}} as |nav|
   >
     <nav.item>
+      <nav.link-to @route="info" class="nav-link">Info</nav.link-to>
+    </nav.item>
+    <nav.item>
       <nav.link-to @route="index" class="nav-link">Settings</nav.link-to>
     </nav.item>
     <nav.item>
@@ -26,9 +29,6 @@
     </nav.item>
     <nav.item>
       <nav.link-to @route="dois" class="nav-link">DOIs</nav.link-to>
-    </nav.item>
-    <nav.item>
-      <nav.link-to @route="info" class="nav-link">Info</nav.link-to>
     </nav.item>
   </BsNav>
 </div>

@@ -65,7 +65,7 @@ export default Service.extend({
 
       if (payload.role_id === 'staff_admin') {
         this.set('isAdmin', true);
-        this.set('home', { route: 'index' });
+        this.set('home', { route: 'providers' });
         this.set('roleName', 'Staff');
 
         this.features.setup({
@@ -74,11 +74,11 @@ export default Service.extend({
         });
       } else if (payload.role_id === 'consortium_admin') {
         this.set('isConsortium', true);
-        this.set('home', { route: 'providers.show', id: this.uid });
+        this.set('home', { route: 'providers.show.organizations', id: this.uid });
         this.set('roleName', 'Consortium');
       } else if (payload.role_id === 'provider_admin') {
         this.set('isProvider', true);
-        this.set('home', { route: 'providers.show', id: this.uid });
+        this.set('home', { route: 'providers.show.repositories', id: this.uid });
         this.set('roleName', 'Member');
       } else if (payload.role_id === 'client_admin') {
         this.set('isClient', true);

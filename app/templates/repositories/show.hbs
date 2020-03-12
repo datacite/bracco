@@ -34,6 +34,9 @@
           @fill={{false}} as |nav|
         >
           <nav.item>
+            <nav.link-to @route="repositories.show.info" model="model.id" class="nav-link">Info</nav.link-to>
+          </nav.item>
+          <nav.item>
             <nav.link-to @route="repositories.show.index" model="model.id" class="nav-link">Settings</nav.link-to>
           </nav.item>
           <nav.item>
@@ -41,9 +44,6 @@
           </nav.item>
           <nav.item>
             <nav.link-to @route="repositories.show.dois" model="model.id" class="nav-link">DOIs</nav.link-to>
-          </nav.item>
-          <nav.item>
-            <nav.link-to @route="repositories.show.info" model="model.id" class="nav-link">Info</nav.link-to>
           </nav.item>
         </BsNav>
       </div>
