@@ -22,7 +22,7 @@ export default ApplicationSerializer.extend({
     bcontainer: { key: 'container', serialize: false },
 
     // don't send back these attributes, as updates are not implemented yet
-    identifiers: { serialize: false },
+    // identifiers: { serialize: false },
     contentUrl: { serialize: false },
     // subjects: { serialize: false },
     // contributors: { serialize: false },

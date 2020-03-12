@@ -36,6 +36,7 @@ export default Controller.extend({
       doi.set('language', null);
       doi.set('subjects', null);
       doi.set('contributors', null);
+      doi.set('identifiers', null);
 
       // Don't try and set the landingPage information for DOI Updates
       doi.set('landingPage', null);

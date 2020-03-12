@@ -28,6 +28,7 @@ export default Controller.extend({
       doi.set('subjects', null);
       doi.set('language', null);
       doi.set('contributors', null);
+      doi.set('identifiers', null);
 
       let self = this;
       doi.save().then(function(doi) {

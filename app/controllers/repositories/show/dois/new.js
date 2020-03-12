@@ -61,6 +61,13 @@ export default Controller.extend({
         return !isBlank(description.description);
       }));
 
+
+      // only store identifiers with a  text
+      doi.set('identifiers', A(doi.get('identifiers')).filter(function(identifier) {
+        return !isBlank(identifier.identifier);
+      }));
+
+
       // only store descriptions with a description text
       // doi.set('language', A(doi.get('language')).filter(function(language) {
       //   return !isBlank(language);
