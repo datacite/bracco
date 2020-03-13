@@ -24,7 +24,7 @@ module('Acceptance | staff_admin | provider', function(hooks) {
 
     assert.equal(currentURL(), '/providers/tib');
     assert.dom('h2.work').hasText('German National Library of Science and Technology');
-    assert.dom('li a.nav-link.active').hasText('Info');
+    assert.dom('li a.nav-link.active').hasText('Settings');
 
     assert.dom('a#edit-provider').includesText('Update Member');
     assert.dom('a#edit-provider').hasAttribute('href', '/providers/tib/edit');
@@ -37,7 +37,7 @@ module('Acceptance | staff_admin | provider', function(hooks) {
 
     assert.equal(currentURL(), '/providers/dc');
     assert.dom('h2.work').hasText('DataCite Consortium');
-    assert.dom('li a.nav-link.active').hasText('Info');
+    assert.dom('li a.nav-link.active').hasText('Settings');
 
     assert.dom('a#edit-provider').includesText('Update Member');
     assert.dom('a#edit-provider').hasAttribute('href', '/providers/dc/edit');
@@ -45,24 +45,24 @@ module('Acceptance | staff_admin | provider', function(hooks) {
     assert.dom('a#delete-provider').hasAttribute('href', '/providers/dc/delete');
   });
 
-  test('visiting provider TIB dashboard', async function(assert) {
-    await visit('/providers/tib/dashboard');
+  test('visiting provider TIB info', async function(assert) {
+    await visit('/providers/tib/info');
 
-    assert.equal(currentURL(), '/providers/tib/dashboard');
+    assert.equal(currentURL(), '/providers/tib/info');
     assert.dom('h2.work').hasText('German National Library of Science and Technology');
-    assert.dom('a.nav-link.active').hasText('Dashboard');
+    assert.dom('a.nav-link.active').hasText('Info');
 
     // direct member charts are displayed
     assert.dom('#chart-repository-title').includesText('Repositories by year');
     assert.dom('#chart-doi-title').includesText('DOIs by year');
   });
 
-  test('visiting consortium DC dashboard', async function(assert) {
-    await visit('/providers/dc/dashboard');
+  test('visiting consortium DC info', async function(assert) {
+    await visit('/providers/dc/info');
 
-    assert.equal(currentURL(), '/providers/dc/dashboard');
+    assert.equal(currentURL(), '/providers/dc/info');
     assert.dom('h2.work').hasText('DataCite Consortium');
-    assert.dom('a.nav-link.active').hasText('Dashboard');
+    assert.dom('a.nav-link.active').hasText('Info');
 
     // consortium charts are displayed
     assert.dom('#chart-organization-title').includesText('Organizations by year');

@@ -21,8 +21,8 @@ module('Acceptance | user | provider', function(hooks) {
     assert.dom('h2.work').hasText('Martin Fenner');
   });
 
-  test('visiting provider TIB dashboard', async function(assert) {
-    await visit('/providers/tib/dashboard');
+  test('visiting provider TIB info', async function(assert) {
+    await visit('/providers/tib/info');
 
     assert.equal(currentURL(), '/users/0000-0001-6528-2027');
     assert.dom('h2.work').hasText('Martin Fenner');

@@ -24,36 +24,36 @@ module('Acceptance | consortium_admin | admin', function(hooks) {
   test('visiting homepage', async function(assert) {
     await visit('/');
 
-    assert.equal(currentURL(), '/providers/dc');
+    assert.equal(currentURL(), '/providers/dc/organizations');
     assert.dom('h2.work').hasText('DataCite Consortium');
   });
 
   // the following pages require authentication. Redirects to provider homepage otherwise
-  test('visiting dashboard', async function(assert) {
-    await visit('/dashboard');
+  test('visiting info', async function(assert) {
+    await visit('/info');
 
-    assert.equal(currentURL(), '/providers/dc');
+    assert.equal(currentURL(), '/providers/dc/organizations');
     assert.dom('h2.work').hasText('DataCite Consortium');
   });
 
   test('visiting providers', async function(assert) {
     await visit('/providers');
 
-    assert.equal(currentURL(), '/providers/dc');
+    assert.equal(currentURL(), '/providers/dc/organizations');
     assert.dom('h2.work').hasText('DataCite Consortium');
   });
 
   test('visiting repositories', async function(assert) {
     await visit('/repositories');
 
-    assert.equal(currentURL(), '/providers/dc');
+    assert.equal(currentURL(), '/providers/dc/organizations');
     assert.dom('h2.work').hasText('DataCite Consortium');
   });
 
   test('visiting prefixes', async function(assert) {
     await visit('/prefixes');
 
-    assert.equal(currentURL(), '/providers/dc');
+    assert.equal(currentURL(), '/providers/dc/organizations');
     assert.dom('h2.work').hasText('DataCite Consortium');
   });
 

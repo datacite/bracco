@@ -14,8 +14,8 @@ module('Unit | Route | providers', function(hooks) {
     assert.ok(route);
   });
 
-  test('dashboard exists', function(assert) {
-    let route = this.owner.lookup('route:providers/show/dashboard');
+  test('info exists', function(assert) {
+    let route = this.owner.lookup('route:providers/show/info');
     assert.ok(route);
   });
 

@@ -18,7 +18,7 @@ module('Acceptance | organization_admin | user', function(hooks) {
   test('visiting users', async function(assert) {
     await visit('/users');
 
-    assert.equal(currentURL(), '/providers/datacite');
+    assert.equal(currentURL(), '/providers/datacite/repositories');
     assert.dom('h2.work').hasText('DataCite');
   });
 
