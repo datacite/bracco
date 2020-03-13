@@ -14,12 +14,9 @@ module('Unit | Controller | providers', function(hooks) {
 
   test('should list countries', function(assert) {
     let controller = this.owner.lookup('controller:providers.show.organizations.new');
-    let providerModel = make('provider');
-    let orgModel = make('provider', { memberType: 'consortium_organization' });
-
     let model = {
-      'provider': providerModel,
-      'organization': orgModel,
+      'provider': make('provider'),
+      'organization': make('provider', { memberType: 'consortium_organization' }),
     };
     controller.set('model', model);
     controller.send('selectCountry', 'Australia');
@@ -30,12 +27,10 @@ module('Unit | Controller | providers', function(hooks) {
 
   test('should list organisation type list', function(assert) {
     let controller = this.owner.lookup('controller:providers.show.organizations.new');
-    let providerModel = make('provider');
-    let orgModel = make('provider', { memberType: 'consortium_organization' });
 
     let model = {
-      'provider': providerModel,
-      'organization': orgModel,
+      'provider': make('provider'),
+      'organization': make('provider', { memberType: 'consortium_organization' }),
     };
     controller.set('model', model);
     controller.send('selectOrganizationType', 'nationalInstitution');
@@ -48,13 +43,12 @@ module('Unit | Controller | providers', function(hooks) {
     let controller = this.owner.lookup('controller:providers.show.organizations.new');
     let model = {
       'provider': make('provider'),
-      'organization': make('provider'),
+      'organization': make('provider', { memberType: 'consortium_organization' }),
     };
     controller.set('model', model);
     controller.send('selectMemberType', 'direct_member');
     assert.equal(controller.model.organization.get('memberType'), 'direct_member');
     controller.send('searchMemberType', 'direct_member');
-    console.log(controller.get('memberTypes'));
     assert.equal(controller.get('memberTypes').length,1);
   });
 });

@@ -27,4 +27,26 @@ FactoryGuy.define('provider', {
     name: 'Australian National Data Service',
     systemEmail: 'adrian.burton@ands.org.au',
   },
+
+  // organisation: {
+  //   memberType: 'direct_member',
+  //   technicalContact: { },
+  //   secondaryTechnicalContact: { },
+  //   billingContact: {
+  //     email: 'services@ardc.edu.au',
+  //     givenName: 'Adrian',
+  //     familyName: 'Burton',
+  //   },
+  //   secondaryBillingContact: {
+  //     email: 'finance@ardc.edu.au',
+  //     givenName: 'David',
+  //     familyName: 'Vitkin',
+  //   },
+  //   serviceContact: {
+  //     email: 'services@ardc.edu.au',
+  //     givenName: 'ARDC Services',
+  //   },
+  //   secondaryServiceContact: { },
+  //   votingContact: { },
+  // },
 });
