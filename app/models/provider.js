@@ -3,7 +3,6 @@ import { computed } from '@ember/object';
 // import ENV from 'bracco/config/environment';
 import { validator, buildValidations } from 'ember-cp-validations';
 import { fragment } from 'ember-data-model-fragments/attributes';
-import { A } from '@ember/array';
 import addressFormatter from '@fragaria/address-formatter';
 
 const Validations = buildValidations({
@@ -161,44 +160,6 @@ export default DS.Model.extend(Validations, {
 
   uid: computed('id', function() {
     return this.id.toUpperCase();
-  }),
-  doiCount: computed('meta.dois', function() {
-    return this.get('meta.dois');
-  }),
-  currentDoiCount: computed('doiCount', function() {
-    let currentYear = A(this.doiCount).findBy('id', new Date().getFullYear().toString());
-    if (currentYear) {
-      return currentYear.count;
-    } else {
-      return 0;
-    }
-  }),
-  resourceTypeCount: computed('meta.resourceTypes', function() {
-    return this.get('meta.resourceTypes').reduce(function(a, b) {
-      return a + b.count;
-    }, 0);
-  }),
-  repositoryList: computed('meta.clients', function() {
-    return this.get('meta.clients');
-  }),
-  currentRepositoryCount: computed('repositoryList', function() {
-    let currentYear = A(this.repositoryList).findBy('id', new Date().getFullYear().toString());
-    if (currentYear) {
-      return currentYear.count;
-    } else {
-      return 0;
-    }
-  }),
-  providerCount: computed('meta.providers', function() {
-    return this.get('meta.providers');
-  }),
-  currentProviderCount: computed('providerCount', function() {
-    let currentYear = this.providerCount.get('lastObject');
-    if (currentYear) {
-      return currentYear.count;
-    } else {
-      return 0;
-    }
   }),
   formattedBillingInformation: computed('billingInformation', 'billingInformation', 'billingInformation', 'billingInformation', 'billingInformation', function() {
     if (this.billingInformation) {
