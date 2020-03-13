@@ -15,7 +15,7 @@ module('Unit | Controller | providers', function(hooks) {
   test('should list countries', function(assert) {
     let controller = this.owner.lookup('controller:providers.show.organizations.new');
     let providerModel = make('provider');
-    let orgModel = make('provider'); // make('organisation') does not work
+    let orgModel = make('provider', { memberType: 'consortium_organization' });
 
     let model = {
       'provider': providerModel,
@@ -31,7 +31,7 @@ module('Unit | Controller | providers', function(hooks) {
   test('should list organisation type list', function(assert) {
     let controller = this.owner.lookup('controller:providers.show.organizations.new');
     let providerModel = make('provider');
-    let orgModel = make('provider'); // make('organisation') does not work
+    let orgModel = make('provider', { memberType: 'consortium_organization' });
 
     let model = {
       'provider': providerModel,
