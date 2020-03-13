@@ -40,7 +40,21 @@ module('Unit | Controller | providers', function(hooks) {
     controller.set('model', model);
     controller.send('selectOrganizationType', 'nationalInstitution');
     assert.equal(controller.model.organization.get('organizationType'), 'nationalInstitution');
-    controller.send('searchOrganizationType', 'national'); // if I search for 'nationalInstitution' it doesn't work, result 0
+    controller.send('searchOrganizationType', 'National Institution');
     assert.equal(controller.get('organizationTypes').length,1);
+  });
+
+  test('should list member type list', function(assert) {
+    let controller = this.owner.lookup('controller:providers.show.organizations.new');
+    let model = {
+      'provider': make('provider'),
+      'organization': make('provider'),
+    };
+    controller.set('model', model);
+    controller.send('selectMemberType', 'direct_member');
+    assert.equal(controller.model.organization.get('memberType'), 'direct_member');
+    controller.send('searchMemberType', 'direct_member');
+    console.log(controller.get('memberTypes'));
+    assert.equal(controller.get('memberTypes').length,1);
   });
 });
