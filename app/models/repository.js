@@ -144,22 +144,6 @@ export default DS.Model.extend(Validations, {
       return item.trim();
     });
   }),
-  // 'provider-id': Ember.defineProperty('id', function() {
-  //   return this.get('id').split('.').get('firstObject');
-  // }),
-  doiCount: computed('meta.dois', function() {
-    return this.get('meta.dois');
-  }),
-  totalDoiCount: computed('meta.dois', function() {
-    return this.get('meta.dois').reduce(function(a, b) {
-      return a + b.count;
-    }, 0);
-  }),
-  resourceTypeCount: computed('meta.resourceTypes', function() {
-    return this.get('meta.resourceTypes').reduce(function(a, b) {
-      return a + b.count;
-    }, 0);
-  }),
   badgeUrl: computed('re3data', function() {
     if (this.re3data) {
       return ENV.API_URL + '/re3data/' + this.re3data.substr(this.re3data.indexOf('1')) + '/badge';

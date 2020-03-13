@@ -4,24 +4,8 @@
   <div class="container-fluid">
     <IndexHeader />
 
-    <div class="content">
-      <div class="row">
-        <BarChart @data={{model.providerCount}} @label="Member" @link="providers" />
-        <BarChart @data={{model.repositoryList}} @label="Repository" @link="repositories" />
-        <BarChart @data={{model.doiCount}} @label="DOI" @link="dois" @cumulative={{false}} />
-      </div>
-
-      {{#if (can "read messages" model)}}
-        <div class="row">
-          <div class="col-md-9">
-            {{#each flashMessages.queue as |flash|}}
-              <FlashMessage @flash={{flash}} />
-            {{/each}}
-          </div>
-        </div>
-      {{/if}}
-    </div>
-  </div>
+    <IndexInfo @model={{model}} />
+  </div>  
 {{else}}
   <ApplicationHeader />
   <LandingPage />

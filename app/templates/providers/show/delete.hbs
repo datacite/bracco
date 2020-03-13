@@ -1,7 +1,7 @@
 <div class="panel panel-transparent">
   <div class="panel-body">
     <div class="col-md-9 col-md-offset-3">
-      {{#if (and (eq model.memberType "consortium") (gt model.providerCount 0))}}
+      {{#if (and (eq model.memberType "consortium") (gt model.meta.consortiumOrganizationCount 0))}}
         <div class="alert alert-danger" role="alert">
           You need to delete all consortium organizations before you can delete the {{uppercase model.id}} consortium.
         </div>
@@ -12,7 +12,7 @@
           </div>
           <div class="clearfix"/>
         </div>
-      {{else if (gt model.currentRepositoryCount 0)}}
+      {{else if (gt model.meta.repositoryCount 0)}}
         <div class="alert alert-danger" role="alert">
           You need to delete all repositories before you can delete the {{uppercase model.id}} provider.
         </div>
