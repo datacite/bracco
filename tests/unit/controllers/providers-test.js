@@ -35,7 +35,7 @@ module('Unit | Controller | providers', function(hooks) {
     controller.set('model', model);
     controller.send('selectOrganizationType', 'nationalInstitution');
     assert.equal(controller.model.organization.get('organizationType'), 'nationalInstitution');
-    controller.send('searchOrganizationType', 'National Institution');
+    controller.send('searchOrganizationType', 'National');
     assert.equal(controller.get('organizationTypes').length,1);
   });
 
@@ -50,5 +50,63 @@ module('Unit | Controller | providers', function(hooks) {
     assert.equal(controller.model.organization.get('memberType'), 'direct_member');
     controller.send('searchMemberType', 'direct_member');
     assert.equal(controller.get('memberTypes').length,1);
+  });
+
+  test('should list focus area list', function(assert) {
+    let controller = this.owner.lookup('controller:providers.show.organizations.new');
+    let model = {
+      'provider': make('provider'),
+      'organization': make('provider', { memberType: 'consortium_organization' }),
+    };
+    controller.set('model', model);
+    controller.send('selectFocusArea', 'general');
+    assert.equal(controller.model.organization.get('focusArea'), 'general');
+    controller.send('searchFocusArea', 'general');
+    assert.equal(controller.get('focusAreas').length,1);
+  });
+
+  test('should list non profit status list', function(assert) {
+    let controller = this.owner.lookup('controller:providers.show.organizations.new');
+    let model = {
+      'provider': make('provider'),
+      'organization': make('provider', { memberType: 'consortium_organization' }),
+    };
+    controller.set('model', model);
+    controller.send('selectFocusArea', 'general');
+    assert.equal(controller.model.organization.get('focusArea'), 'general');
+    controller.send('searchFocusArea', 'general');
+    assert.equal(controller.get('focusAreas').length,1);
+  });
+
+  // I don't know how to test for consortium either
+  // test('should list consortium', function(assert) {
+  //   let controller = this.owner.lookup('controller:providers.show.organizations.new');
+  //   let model = {
+  //     'provider': make('provider'),
+  //     'organization': make('provider', { memberType: 'consortium_organization' }),
+  //   };
+  //   controller.set('model', model);
+  //   controller.send('searchConsortium', '');
+  //   assert.equal(controller.model.organization.get('consortia'), '');
+  //   controller.send('selectConsortium', '');
+  //   assert.equal(controller.get('consortium').length,1);
+  // });
+
+  test('should list ror id', function(assert) {
+    let controller = this.owner.lookup('controller:providers.show.organizations.new');
+    let model = {
+      'provider': make('provider'),
+      'organization': make('provider', { memberType: 'consortium_organization' }),
+    };
+    let ror = {
+      'id': 'https://ror.org/038sjwq14',
+      'name': 'Australian Research Data Commons',
+      'displayName': 'Australian Research Data Commons',
+    };
+    controller.set('model', model);
+    controller.send('searchRor', ror.name); // what should be sent here
+    assert.equal(controller.model.organization.get('organizations'), '');
+    controller.send('selectRor', ror);
+    assert.equal(controller.get('organizations').length,0); // why is organisations set to 0
   });
 });
