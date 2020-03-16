@@ -61,6 +61,13 @@ FactoryGuy.define('title', {
   },
 });
 
+FactoryGuy.define('identifier', {
+  default: {
+    identifier: 'https://handle.test.datacite.org/10.70048/rph240519',
+    identifierType: 'DOI',
+  },
+});
+
 FactoryGuy.define('description', {
   default: {
     description: 'Description of submitted chemical data for InChIKey YAPQBXQYLJRXSA-UHFFFAOYSA-N',

@@ -4,7 +4,7 @@ import {
   currentURL,
   // findAll,
   visit,
-  // fillIn,
+  fillIn,
   // waitFor,
   // click,
   // typeIn,
@@ -136,5 +136,23 @@ module('Acceptance | client_admin | repository', function(hooks) {
     await selectChoose('[doi-contributor]', 'DataCollector');
     assert.equal(currentURL(), 'repositories/datacite.rph/dois/new');
     assert.dom('[doi-contributor]').includesText('DataCollector');
+  });
+
+  test('visiting the Form and adding Alternate Identfier', async function(assert) {
+    await authenticateSession({
+      uid: 'datacite.rph',
+      name: 'Alfred Wegener Institute',
+      role_id: 'client_admin',
+      provider_id: 'datacite',
+      client_id: 'datacite.rph',
+    });
+    await visit('repositories/datacite.rph/dois/new');
+    await fillIn('[data-test-alternate-identifier]','https://doi.org/10.70048/rph240519');
+    await fillIn('[data-test-alternate-identifier-type]','DOI');
+
+    // // NOTE: fillIn matches with hasValue but not with includesText
+    assert.equal(currentURL(), 'repositories/datacite.rph/dois/new');
+    assert.dom('[data-test-alternate-identifier]').hasValue('https://doi.org/10.70048/rph240519');
+    assert.dom('[data-test-alternate-identifier-type]').hasValue('DOI');
   });
 });
