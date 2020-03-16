@@ -12,7 +12,7 @@ export default Route.extend({
         number: params.page,
         size: params.size,
       },
-      'client-id': this.modelFor('repositories/show').get('id'),
+      'repository-id': this.modelFor('repositories/show').get('id'),
     });
 
     return hash({

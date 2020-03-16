@@ -11,5 +11,5 @@ export default DS.Model.extend({
     async: true,
   }),
 
-  created: DS.attr('date'),
+  createdAt: DS.attr('date'),
 });

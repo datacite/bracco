@@ -67,7 +67,7 @@
     {{#if (eq link "prefixes")}}
       <div class="panel facets">
         <div class="panel-body">
-          <h4>Providers <span class="small">{{fa-icon "question-circle-o"}}<BsTooltip @placement="top">Filter prefixes by DOI Registration Provider they work with.</BsTooltip></span></h4>
+          <h4>Members</h4>
           <ul>
             {{#each model.prefixes.meta.providers as |provider|}}
               <li>
@@ -109,7 +109,7 @@
             {{/if}}
 
             <h5>Added</h5>
-            {{format-time providerPrefix.created year='numeric' month='long' day='numeric' hour='numeric' minute='numeric' second='numeric' timeZone='UTC' timeZoneName='short' hour12=false}}
+            {{format-time providerPrefix.createdAt year='numeric' month='long' day='numeric' hour='numeric' minute='numeric' second='numeric' timeZone='UTC' timeZoneName='short' hour12=false}}
           </div>
         </div>
       {{/each}}
