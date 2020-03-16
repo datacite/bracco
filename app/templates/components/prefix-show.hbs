@@ -37,13 +37,13 @@
     <div class="col-md-9">
       <div class="panel panel-transparent">
         <div class="panel-body">
-          <h5>{{pluralize model.providers.length "Provider" without-count=true}}</h5>
+          <h5>{{pluralize model.providers.length "Member" without-count=true}}</h5>
           {{#if model.providers}}
             {{#each model.providers as |provider|}}
               <LinkTo @route="providers.show.prefixes" @model={{provider.id}}>{{provider.name}}</LinkTo><br>
             {{/each}}
           {{else}}
-            <span class="icon-warning">No providers found.</span>
+            <span class="icon-warning">No member found.</span>
           {{/if}}
 
           <h5>{{pluralize prefix.repositories.length "Repository" without-count=true}}</h5>
@@ -52,7 +52,7 @@
               <LinkTo @route="repositories.show.prefixes" @model={{repository.id}}>{{repository.name}}</LinkTo><br>
             {{/each}}
           {{else}}
-            <span class="icon-warning">No repositories found.</span>
+            <span class="icon-warning">No repository found.</span>
           {{/if}}
         </div>
       </div>

@@ -104,7 +104,7 @@
                   <LinkTo @route="providers.show.prefixes.show" @models={{array provider.id prefix.id}}>{{provider.name}}</LinkTo><br/>
                 {{/each}}
               {{else}}
-                <span class="icon-warning">No providers found.</span>
+                <span class="icon-warning">No member found.</span>
               {{/if}}
 
               <h5>{{pluralize prefix.repositories.length "Repository" without-count=true}}</h5>
@@ -117,7 +117,7 @@
                   <LinkTo @route="dois" @query={{hash prefix=prefix.id}}>DOIs for prefix {{prefix.id}}</LinkTo>
                 {{/if}}
               {{else}}
-                <span class="icon-warning">No repositories found.</span>
+                <span class="icon-warning">No repository found.</span>
               {{/if}}
 
               <h5>Created</h5>
