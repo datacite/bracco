@@ -12,6 +12,6 @@ module('Integration | Component | doi transfer', function(hooks) {
     this.set('model', make('doi'));
     await render(hbs`{{doi-transfer model=model}}`);
 
-    assert.dom('*').hasText('Transfer DOI Repository Transfer the DOI to this repository. Transfer DOI Cancel');
+    assert.dom('*').hasText('Transfer DOI Repository Australian Data Archive Transfer the DOI to this repository. Transfer DOI Cancel');
   });
 });

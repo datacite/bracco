@@ -7,6 +7,6 @@ FactoryGuy.define('repository', {
     systemEmail: 'ada@anu.edu.au',
     domains: 'ada.edu.au,nesstar.ada.edu.au',
     isActive: true,
-    provider: FactoryGuy.belongsTo('provider')
+    provider: FactoryGuy.belongsTo('provider'),
   },
 });
