@@ -20,5 +20,5 @@ const Validations = buildValidations({
 
 export default Fragment.extend(Validations, {
   identifier: DS.attr('string', { defaultValue: null }),
-  identifierType: DS.attr('string'),
+  identifierType: DS.attr('string', { defaultValue: null }),
 });
