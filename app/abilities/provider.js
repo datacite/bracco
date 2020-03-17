@@ -40,7 +40,7 @@ export default Ability.extend({
       case 'staff_admin':
         return true;
       case 'provider_admin':
-        return this.get('model.provider_id') === 'globus' || this.get('model.provider_id') === 'datacite';
+        return this.get('model.id') === 'globus' || this.get('model.id') === 'datacite';
       default:
         return false;
     }

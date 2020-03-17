@@ -2,6 +2,7 @@ import FactoryGuy from 'ember-data-factory-guy';
 
 FactoryGuy.define('provider', {
   default: {
+    id: 'ands',
     name: 'Australian Research Data Commons',
     displayName: 'Australian Research Data Commons',
     symbol: 'ANDS',
@@ -22,31 +23,33 @@ FactoryGuy.define('provider', {
     rorId: 'https://ror.org/038sjwq14',
   },
 
-  ands: {
-    id: 'ands',
-    name: 'Australian National Data Service',
-    systemEmail: 'adrian.burton@ands.org.au',
-  },
+  traits: {
+    ands: {
+      id: 'ands',
+      name: 'Australian National Data Service',
+      systemEmail: 'adrian.burton@ands.org.au',
+    },
 
-  // organisation: {
-  //   memberType: 'direct_member',
-  //   technicalContact: { },
-  //   secondaryTechnicalContact: { },
-  //   billingContact: {
-  //     email: 'services@ardc.edu.au',
-  //     givenName: 'Adrian',
-  //     familyName: 'Burton',
-  //   },
-  //   secondaryBillingContact: {
-  //     email: 'finance@ardc.edu.au',
-  //     givenName: 'David',
-  //     familyName: 'Vitkin',
-  //   },
-  //   serviceContact: {
-  //     email: 'services@ardc.edu.au',
-  //     givenName: 'ARDC Services',
-  //   },
-  //   secondaryServiceContact: { },
-  //   votingContact: { },
-  // },
+    organization: {
+      memberType: 'consortium_organization',
+      technicalContact: {},
+      secondaryTechnicalContact: {},
+      billingContact: {
+        email: 'services@ardc.edu.au',
+        givenName: 'Adrian',
+        familyName: 'Burton',
+      },
+      secondaryBillingContact: {
+        email: 'finance@ardc.edu.au',
+        givenName: 'David',
+        familyName: 'Vitkin',
+      },
+      serviceContact: {
+        email: 'services@ardc.edu.au',
+        givenName: 'ARDC Services',
+      },
+      secondaryServiceContact: {},
+      votingContact: {},
+    },
+  },
 });
