@@ -26,8 +26,8 @@ export default MF.Fragment.extend(Validations, {
   schemeUri: DS.attr('string', { defaultValue: null }),
   valueUri: DS.attr('string', { defaultValue: null }),
 
-  subjectSchemeUri: computed('schemeUri', 'valueUri', function() {
-    return (this.schemeUri || '').concat(this.schemeUri || '');
+  subjectSchemeUri: computed('valueUri', function() {
+    return (this.valueUri || '');
   }),
 });
 
