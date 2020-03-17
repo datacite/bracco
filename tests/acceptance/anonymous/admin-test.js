@@ -19,8 +19,8 @@ module('Acceptance | anonymous | admin', function(hooks) {
   });
 
   // the following pages require authentication. Redirects to homepage otherwise
-  test('visiting dashboard', async function(assert) {
-    await visit('/dashboard');
+  test('visiting info', async function(assert) {
+    await visit('/info');
 
     assert.equal(currentURL(), '/');
     assert.dom('div.motto h1').hasText('DataCite Fabrica Test');

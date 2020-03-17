@@ -1,13 +1,14 @@
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
+import { A } from '@ember/array';
 
 export default Route.extend({
   can: service(),
 
   model(params) {
     let self = this;
-    return this.store.query('provider-prefix', { 'provider-id': params['provider-id'], 'prefix-id': params['prefix-id'] }).then(function(providerPrefixes) {
-      return providerPrefixes.get('firstObject');
+    return this.store.query('provider-prefix', { 'provider-id': this.modelFor('providers/show').get('id'), 'prefix-id': params.prefix_id }).then(function(providerPrefixes) {
+      return A(providerPrefixes).get('firstObject');
     }).catch(function(reason) {
       console.debug(reason);
 

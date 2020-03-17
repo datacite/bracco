@@ -14,6 +14,6 @@ module('Integration | Helper | provider-form-errors', function(hooks) {
 
     await render(hbs`{{provider-form-errors model}}`);
 
-    assert.dom(this.element).hasText('member ID, confirm member ID, provider name, provider display name, system email');
+    assert.dom(this.element).hasText('confirm member ID');
   });
 });

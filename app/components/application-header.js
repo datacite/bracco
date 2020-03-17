@@ -36,6 +36,17 @@ export default Component.extend({
     } else {
       this.set('home', null);
     }
+
+    let settings = this.currentUser.get('settings');
+    if (typeOf(settings) == 'object') {
+      this.set('settings', { route: settings.route, model: settings.id });
+    } else if (home === 'password') {
+      this.set('settings', null);
+    } else if (home) {
+      this.set('settings', { href: settings });
+    } else {
+      this.set('settings', null);
+    }
   },
 
   actions: {

@@ -18,7 +18,7 @@ module('Acceptance | consortium_admin | user', function(hooks) {
   test('visiting users', async function(assert) {
     await visit('/users');
 
-    assert.equal(currentURL(), '/providers/dc');
+    assert.equal(currentURL(), '/providers/dc/organizations');
     assert.dom('h2.work').hasText('DataCite Consortium');
   });
 

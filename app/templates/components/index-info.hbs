@@ -1,6 +1,8 @@
 <div class="content">
-  <div class="row row-chart">
-    <BarChart @data={{model.doiCount}} @label="DOI" @model={{model}} @link="repositories.show.dois" @cumulative={{false}} />
+  <div class="row">
+    <BarChart @data={{json.providers}} @label="Member" @link="providers" />
+    <BarChart @data={{json.clients}} @label="Repository" @link="repositories" />
+    <BarChart @data={{json.dois}} @label="DOI" @link="dois" @cumulative={{false}} />
   </div>
 
   {{#if (can "read messages" model)}}

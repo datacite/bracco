@@ -25,18 +25,18 @@ module('Acceptance | organization_admin | provider', function(hooks) {
 
     assert.equal(currentURL(), '/providers/datacite');
     assert.dom('h2.work').hasText('DataCite');
-    assert.dom('li a.nav-link.active').hasText('Info');
+    assert.dom('li a.nav-link.active').hasText('Settings');
 
     assert.dom('a#edit-provider').includesText('Update Organization');
     assert.dom('a#delete-provider').doesNotExist();
   });
 
-  test('visiting provider DataCite dashboard', async function(assert) {
-    await visit('/providers/datacite/dashboard');
+  test('visiting provider DataCite info', async function(assert) {
+    await visit('/providers/datacite/info');
 
-    assert.equal(currentURL(), '/providers/datacite/dashboard');
+    assert.equal(currentURL(), '/providers/datacite/info');
     assert.dom('h2.work').hasText('DataCite');
-    assert.dom('li a.nav-link.active').hasText('Dashboard');
+    assert.dom('li a.nav-link.active').hasText('Info');
 
     // provider charts are displayed
     assert.dom('#chart-repository-title').includesText('Repositories by year');

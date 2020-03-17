@@ -28,8 +28,8 @@ module('Acceptance | user | admin', function(hooks) {
   });
 
   // the following pages require authentication. Redirects to homepage otherwise
-  test('visiting dashboard', async function(assert) {
-    await visit('/dashboard');
+  test('visiting info', async function(assert) {
+    await visit('/info');
 
     assert.equal(currentURL(), '/users/0000-0001-6528-2027');
     assert.dom('h2.work').hasText('Martin Fenner');

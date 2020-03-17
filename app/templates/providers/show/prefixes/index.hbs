@@ -64,20 +64,21 @@
         </div>
       </div>
     {{/if}}
-    {{#if (eq link "prefixes")}}
+
+    {{#if (eq model.provider.memberType "consortium")}}
       <div class="panel facets">
         <div class="panel-body">
-          <h4>Providers <span class="small">{{fa-icon "question-circle-o"}}<BsTooltip @placement="top">Filter prefixes by DOI Registration Provider they work with.</BsTooltip></span></h4>
+          <h4>Consortium Organizations</h4>
           <ul>
-            {{#each model.prefixes.meta.providers as |provider|}}
+            {{#each model.prefixes.meta.providers as |consortium-organization|}}
               <li>
-                {{#if model.prefixes.query.provider-id}}
-                  <LinkTo @route="providers.show.prefixes" @query={{hash provider-id=null}}>{{fa-icon "check-square-o"}}</LinkTo>
+                {{#if model.prefixes.query.consortium-organization-id}}
+                  <LinkTo @route="providers.show.prefixes" @query={{hash consortium-organization-id=null}}>{{fa-icon "check-square-o"}}</LinkTo>
                 {{else}}
-                  <LinkTo @route="providers.show.prefixes" @query={{hash provider-id=provider.id}}>{{fa-icon "square-o"}}</LinkTo>
+                  <LinkTo @route="providers.show.prefixes" @query={{hash consortium-organization-id=consortium-organization.id}}>{{fa-icon "square-o"}}</LinkTo>
                 {{/if}}
-                <div class="facet-title">{{provider.title}}</div>
-                <span class="number pull-right">{{provider.count}}</span>
+                <div class="facet-title">{{consortium-organization.title}}</div>
+                <span class="number pull-right">{{consortium-organization.count}}</span>
                 <div class="clearfix"/>
               </li>
             {{/each}}
@@ -93,7 +94,18 @@
       {{#each model.prefixes as |providerPrefix|}}
         <div class="panel panel-transparent" data-test-prefix>
           <div class="panel-body">
-            <h3 class="work"><LinkTo @route="providers.show.prefixes.show" @models={{array model.provider.id providerPrefix.prefix.id}}>{{providerPrefix.prefix.id}}</LinkTo></h3>
+            {{#if (not-eq model.provider.memberType "consortium")}}
+              <h3 class="work"><LinkTo @route="providers.show.prefixes.show" @models={{array providerPrefix.provider.id providerPrefix.prefix.id}}>{{providerPrefix.prefix.id}}</LinkTo></h3>
+            {{else}}
+              <h3 class="member">{{providerPrefix.prefix.id}}</h3>
+
+              <h5>Consortium Organization</h5>
+              {{#if providerPrefix.provider}}
+                <LinkTo @route="providers.show.prefixes.show" @models={{array providerPrefix.provider.id providerPrefix.prefix.id}}>{{providerPrefix.provider.name}}</LinkTo><br/>
+              {{else}}
+                <span class="icon-warning">No member found.</span>
+              {{/if}}
+            {{/if}}
 
             <h5>{{pluralize providerPrefix.repositories.length "Repository" without-count=true}}</h5>
             {{#if providerPrefix.repositories}}
@@ -105,11 +117,11 @@
                 <LinkTo @route="providers.show.dois" @model={{providerPrefix.provider.id}} @query={{hash prefix=providerPrefix.prefix.id}}>DOIs for prefix {{providerPrefix.prefix.id}}</LinkTo>
               {{/if}}
             {{else}}
-              <span class="icon-warning">No repositories found.</span>
+              <span class="icon-warning">No repository found.</span>
             {{/if}}
 
             <h5>Added</h5>
-            {{format-time providerPrefix.created year='numeric' month='long' day='numeric' hour='numeric' minute='numeric' second='numeric' timeZone='UTC' timeZoneName='short' hour12=false}}
+            {{format-time providerPrefix.createdAt year='numeric' month='long' day='numeric' hour='numeric' minute='numeric' second='numeric' timeZone='UTC' timeZoneName='short' hour12=false}}
           </div>
         </div>
       {{/each}}

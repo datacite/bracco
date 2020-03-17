@@ -18,5 +18,5 @@ export default DS.Model.extend(Validations, {
     async: false,
   }),
 
-  created: DS.attr('date'),
+  createdAt: DS.attr('date'),
 });

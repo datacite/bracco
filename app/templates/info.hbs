@@ -1,0 +1,12 @@
+{{#if (can "read index")}}
+  <ApplicationHeader @default={{true}} />
+
+  <div class="container-fluid">
+    <IndexHeader />
+
+    <IndexInfo @model={{model}} />
+  </div>  
+{{else}}
+  <ApplicationHeader />
+  <LandingPage />
+{{/if}}

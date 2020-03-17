@@ -12,8 +12,8 @@ module('Acceptance | anonymous | provider', function(hooks) {
     assert.dom('div.motto h1').hasText('DataCite Fabrica Test');
   });
 
-  test('visiting provider TIB dashboard', async function(assert) {
-    await visit('/providers/tib/dashboard');
+  test('visiting provider TIB info', async function(assert) {
+    await visit('/providers/tib/info');
 
     assert.equal(currentURL(), '/');
     assert.dom('div.motto h1').hasText('DataCite Fabrica Test');

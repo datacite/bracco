@@ -29,17 +29,17 @@ module('Acceptance | staff_admin | admin', function(hooks) {
 
     assert.equal(currentURL(), '/');
     assert.dom('h2.work').hasText('DataCite');
-    assert.dom('li a.nav-link.active').hasText('Info');
+    assert.dom('li a.nav-link.active').hasText('Settings');
   });
 
   // the following pages require authentication. Redirects to homepage otherwise
-  test('visiting dashboard', async function(assert) {
-    await visit('/dashboard');
+  test('visiting info', async function(assert) {
+    await visit('/info');
 
-    assert.equal(currentURL(), '/dashboard');
+    assert.equal(currentURL(), '/info');
     assert.dom('h2.work').hasText('DataCite');
     assert.dom('div.tab-content').exists();
-    assert.dom('li a.nav-link.active').hasText('Dashboard');
+    assert.dom('li a.nav-link.active').hasText('Info');
   });
 
   test('editing admin form', async function(assert) {

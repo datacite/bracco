@@ -42,7 +42,7 @@ export default Component.extend({
     },
     submit() {
       this.model.save();
-      let count = this.model.get('totalDoiCount');
+      let count = this.model.get('meta.doiCount');
       this.flashMessages.success('DOI transfer for ' + this.intl.formatNumber(count) + ' DOIs started, the transfer should take about ' + this.intl.formatNumber(Math.ceil(count / 5000) + 1) + ' minutes to complete.', {
         timeout: 5000,
         sticky: true,

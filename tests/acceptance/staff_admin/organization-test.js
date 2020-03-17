@@ -43,7 +43,7 @@ module('Acceptance | staff_admin | organization', function(hooks) {
 
     assert.equal(currentURL(), '/providers/workshop');
     assert.dom('h2.work').hasText('DataCite Training Workshop');
-    assert.dom('li a.nav-link.active').hasText('Info');
+    assert.dom('li a.nav-link.active').hasText('Settings');
 
     // staff can edit or delete consortium organization
     assert.dom('a#edit-provider').includesText('Update Organization');

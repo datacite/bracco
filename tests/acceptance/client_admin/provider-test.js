@@ -16,8 +16,8 @@ module('Acceptance | client_admin | provider', function(hooks) {
     });
   });
 
-  test('visiting provider TIB dashboard', async function(assert) {
-    await visit('/providers/tib/dashboard');
+  test('visiting provider TIB info', async function(assert) {
+    await visit('/providers/tib/info');
 
     assert.equal(currentURL(), '/repositories/tib.awi');
     assert.dom('h2.work').hasText('Alfred Wegener Institute');

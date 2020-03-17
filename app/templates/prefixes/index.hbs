@@ -69,7 +69,7 @@
       {{#if model.meta.providers}}
         <div class="panel facets">
           <div class="panel-body">
-            <h4>Providers <span class="small">{{fa-icon "question-circle-o"}}<BsTooltip @placement="top">Filter prefixes by DOI Registration Provider they work with.</BsTooltip></span></h4>
+            <h4>Member</h4>
             <ul>
               {{#each model.meta.providers as |provider|}}
                 <li>
@@ -98,13 +98,13 @@
             <div class="panel-body">
               <h3 class="member">{{prefix.id}}</h3>
 
-              <h5>{{pluralize prefix.providers.length "Provider" without-count=true}}</h5>
+              <h5>{{pluralize prefix.providers.length "Member" without-count=true}}</h5>
               {{#if prefix.providers}}
                 {{#each prefix.providers as |provider|}}
                   <LinkTo @route="providers.show.prefixes.show" @models={{array provider.id prefix.id}}>{{provider.name}}</LinkTo><br/>
                 {{/each}}
               {{else}}
-                <span class="icon-warning">No providers found.</span>
+                <span class="icon-warning">No member found.</span>
               {{/if}}
 
               <h5>{{pluralize prefix.repositories.length "Repository" without-count=true}}</h5>
@@ -117,11 +117,11 @@
                   <LinkTo @route="dois" @query={{hash prefix=prefix.id}}>DOIs for prefix {{prefix.id}}</LinkTo>
                 {{/if}}
               {{else}}
-                <span class="icon-warning">No repositories found.</span>
+                <span class="icon-warning">No repository found.</span>
               {{/if}}
 
               <h5>Created</h5>
-              {{format-time prefix.created year='numeric' month='long' day='numeric' hour='numeric' minute='numeric' second='numeric' timeZone='UTC' timeZoneName='short' hour12=false}}
+              {{format-time prefix.createdAt year='numeric' month='long' day='numeric' hour='numeric' minute='numeric' second='numeric' timeZone='UTC' timeZoneName='short' hour12=false}}
             </div>
           </div>
         {{/each}}

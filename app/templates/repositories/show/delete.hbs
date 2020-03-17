@@ -1,7 +1,7 @@
 <div class="panel panel-transparent">
   <div class="panel-body">
     <div class="col-md-9 col-md-offset-3">
-      {{#if (gt model.totalDoiCount 0)}}
+      {{#if (gt model.meta.doiCount 0)}}
         <div class="alert alert-danger" role="alert">
           You need to transfer all DOIs to another repository before you can delete the {{uppercase model.id}} repository.
         </div>
