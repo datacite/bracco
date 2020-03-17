@@ -1,6 +1,7 @@
 import DS from 'ember-data';
 import Fragment from 'ember-data-model-fragments/fragment';
-import { validator, buildValidations } from 'ember-cp-validations';
+import { buildValidations } from 'ember-cp-validations';
+// import { validator, buildValidations } from 'ember-cp-validations';
 // import { computed } from '@ember/object';
 
 const Validations = buildValidations({

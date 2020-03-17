@@ -8,7 +8,7 @@ export default Component.extend({
       this.fragment.set('geoLocationPlace', value);
     },
     deleteGeoLocation() {
-      this.model.get('geoLocationPlaces').removeObject(this.fragment);
+      this.model.get('geoLocations').removeObject(this.fragment);
     },
   },
 });
