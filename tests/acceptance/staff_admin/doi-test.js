@@ -69,7 +69,7 @@ module('Acceptance | staff_admin | doi', function(hooks) {
   // });
 
   test('new DOI form for repository Test', async function(assert) {
-    assert.expect(17);
+    assert.expect(18);
 
     await visit('/repositories/datacite.test/dois/new');
 
@@ -84,7 +84,7 @@ module('Acceptance | staff_admin | doi', function(hooks) {
     assert.dom('[data-test-given-name]').exists();
     assert.dom('[data-test-family-name]').exists();
     assert.dom('[data-test-name]').exists();
-    assert.dom('[data-test-geo-location-place]').exists();
+    assert.dom('[data-test-geo-location-place]').doesNotExist();
     assert.dom('[data-test-title]').exists();
     assert.dom('input#publisher-field').exists();
     assert.dom('input#publication-year-field').exists();
@@ -130,7 +130,7 @@ module('Acceptance | staff_admin | doi', function(hooks) {
     assert.dom('[data-test-given-name]').exists();
     assert.dom('[data-test-family-name]').exists();
     assert.dom('[data-test-name]').exists();
-    assert.dom('[data-test-geo-location-place]').exists();
+    assert.dom('[data-test-geo-location-place]').doesNotExist();
     assert.dom('[data-test-title]').exists();
     assert.dom('input#publisher-field').exists();
     assert.dom('input#publication-year-field').exists();
