@@ -94,13 +94,7 @@ module('Acceptance | client_admin | doi', function(hooks) {
   });
 
   test('visiting the Form and adding Alternate Identfier', async function(assert) {
-    await authenticateSession({
-      uid: 'datacite.rph',
-      name: 'Alfred Wegener Institute',
-      role_id: 'client_admin',
-      provider_id: 'datacite',
-      client_id: 'datacite.rph',
-    });
+
     await visit('repositories/datacite.rph/dois/new');
     await fillIn('[data-test-alternate-identifier]','https://doi.org/10.70048/rph240519');
     await fillIn('[data-test-alternate-identifier-type]','DOI');
