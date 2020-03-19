@@ -5,7 +5,6 @@ import {
   visit,
   click,
   fillIn,
-  fillIn,
 } from '@ember/test-helpers';
 import ENV from 'bracco/config/environment';
 import { setupFactoryGuy } from 'ember-data-factory-guy';
