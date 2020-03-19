@@ -4,7 +4,7 @@ import {
   currentURL,
   // findAll,
   visit,
-  // fillIn,
+  fillIn,
   // waitFor,
   // click,
   // typeIn,
@@ -106,6 +106,21 @@ module('Acceptance | client_admin | repository', function(hooks) {
 
     assert.equal(currentURL(), 'repositories/datacite.rph/dois/new');
     assert.dom('[doi-subject]').includesText('Materials engineering');
+  });
+
+  test('visiting the Form and adding geoLocationPlace', async function(assert) {
+    await authenticateSession({
+      uid: 'datacite.rph',
+      name: 'Alfred Wegener Institute',
+      role_id: 'client_admin',
+      provider_id: 'datacite',
+      client_id: 'datacite.rph',
+    });
+    await visit('repositories/datacite.rph/dois/new');
+
+    await fillIn('[data-test-geo-location-place]', 'Amsterdam, Novoravis hotel');
+
+    assert.dom('[data-test-geo-location-place]').hasValue('Amsterdam, Novoravis hotel');
   });
 
   test('visiting the Form and entering new subject', async function(assert) {

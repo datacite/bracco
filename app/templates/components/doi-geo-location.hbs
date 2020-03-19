@@ -1,0 +1,21 @@
+<label for="geoLocationPlace" class="subtitle">GeoLocation Place (optional)</label>
+{{#if (gt index 0)}}
+  <div class="input-group">
+    <input class="form-control geo-location-place-field" value={{fragment.geoLocationPlace}}
+      oninput={{action "updateGeoLocationPlace" value="target.value"}} data-test-geo-location-place/>    
+    <span class="input-group-addon">
+      <BsButton @outline={{true}} @onClick={{action "deleteGeoLocation" index}}>{{fa-icon "trash" pull="left" style="margin:0;"}}</BsButton>
+    </span>
+  </div>
+{{else}}
+  <input class="form-control geo-location-place-field" value={{fragment.geoLocationPlace}} 
+    oninput={{action "updateGeoLocationPlace" value="target.value"}} data-test-geo-location-place/>
+{{/if}}
+<div class="help-block help-block-fragment geo-location-place-field">Description of a geographic location. </div>
+
+{{!-- {{#if isSeriesInformation}}
+{{else}}
+  <div class="help-block help-block-fragment geo-location-place-field">All additional information that does not fit in any of the other categories.</div>
+{{/if}} --}}
+
+<hr />

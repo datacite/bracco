@@ -10,6 +10,7 @@ FactoryGuy.define('doi', {
     contributors: FactoryGuy.hasMany('contributor'),
     titles: FactoryGuy.hasMany('title'),
     descriptions: FactoryGuy.hasMany('description'),
+    geoLocations: FactoryGuy.hasMany('geoLocation'),
     subjects: FactoryGuy.hasMany('subject'),
     publisher: 'Royal Society of Chemistry',
     types: {
@@ -64,6 +65,12 @@ FactoryGuy.define('title', {
 FactoryGuy.define('description', {
   default: {
     description: 'Description of submitted chemical data for InChIKey YAPQBXQYLJRXSA-UHFFFAOYSA-N',
+  },
+});
+
+FactoryGuy.define('geoLocation', {
+  default: {
+    geoLocationPlace: 'Mexico',
   },
 });
 
