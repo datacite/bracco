@@ -30,6 +30,7 @@
       <DoiDescriptions @model={{model}} @form={{form}} />
       
       {{#if (feature-flag 'optionalFields')}}
+        <DoiGeoLocations @model={{model}} @form={{form}} />
         <DoiSubjects @model={{model}} @form={{form}} />
         <DoiLanguage @model={{model}} @form={{form}} />
         <DoiContributors @model={{model}} @form={{form}} />
