@@ -71,14 +71,7 @@ module('Acceptance | client_admin | doi', function(hooks) {
   });
 
   test('visiting the Form and adding geoLocationPlace', async function(assert) {
-    await authenticateSession({
-      uid: 'datacite.rph',
-      name: 'Alfred Wegener Institute',
-      role_id: 'client_admin',
-      provider_id: 'datacite',
-      client_id: 'datacite.rph',
-    });
-    await visit('repositories/datacite.rph/dois/new');
+    await visit('repositories/datacite.test/dois/new');
 
     await fillIn('[data-test-geo-location-place]', 'Amsterdam, Novoravis hotel');
 
