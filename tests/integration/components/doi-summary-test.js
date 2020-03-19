@@ -12,7 +12,7 @@ module('Integration | Component | doi summary', function(hooks) {
     this.set('model', make('doi'));
     await render(hbs`{{doi-summary model=model}}`);
 
-    assert.dom('[data-test-doi]').hasText('10.70048/rph240519');
+    assert.dom('[data-test-doi]').hasText('10.80225/rph240519');
     assert.dom('[data-test-resource-type-general]').hasText('Dataset');
     assert.dom('[data-test-metadata]').hasText('Substance published 2017 via Royal Society of Chemistry');
   });

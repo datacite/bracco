@@ -1,18 +1,21 @@
 import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
-import { currentURL, visit } from '@ember/test-helpers';
-import { authenticateSession } from 'ember-simple-auth/test-support';
+import {
+  currentURL,
+  visit,
+  click,
+  fillIn,
+} from '@ember/test-helpers';
+import ENV from 'bracco/config/environment';
 
 module('Acceptance | organization_admin | admin', function(hooks) {
   setupApplicationTest(hooks);
 
   hooks.beforeEach(async function() {
-    await authenticateSession({
-      uid: 'datacite',
-      name: 'DataCite',
-      role_id: 'provider_admin',
-      provider_id: 'datacite',
-    });
+    await visit('/sign-in');
+    await fillIn('input#account-field', 'DATACITE');
+    await fillIn('input#password-field', ENV.ORGANIZATION_ADMIN_PASSWORD);
+    await click('button[type=submit]');
   });
 
   test('is logged in', async function(assert) {
@@ -57,10 +60,10 @@ module('Acceptance | organization_admin | admin', function(hooks) {
     assert.dom('h2.work').hasText('DataCite');
   });
 
-  test('visiting prefix 10.5038', async function(assert) {
-    await visit('/prefixes/10.5038');
+  test('visiting prefix 10.80225', async function(assert) {
+    await visit('/prefixes/10.80225');
 
-    assert.equal(currentURL(), '/prefixes/10.5038');
+    assert.equal(currentURL(), '/prefixes/10.80225');
     assert.dom('div.alert-warning').includesText('The page was not found.');
   });
 });

@@ -2,19 +2,13 @@ import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
 import {
   currentURL,
-  // findAll,
   visit,
-  // fillIn,
-  // click,
-  // typeIn,
-  // waitUntil,
-  // triggerKeyEvent,
-  // pauseTest,
+  click,
+  fillIn,
 } from '@ember/test-helpers';
-import { authenticateSession } from 'ember-simple-auth/test-support';
+import ENV from 'bracco/config/environment';
 import { setupFactoryGuy } from 'ember-data-factory-guy';
 // import { build, make, mockFindRecord } from 'ember-data-factory-guy';
-// import ENV from 'bracco/config/environment';
 
 module('Acceptance | client_admin | repository', function(hooks) {
   setupApplicationTest(hooks);
@@ -30,46 +24,43 @@ module('Acceptance | client_admin | repository', function(hooks) {
   // };
 
   hooks.beforeEach(async function() {
-    await authenticateSession({
-      uid: 'datacite.rph',
-      name: 'DataCite Test RPH',
-      role_id: 'client_admin',
-      provider_id: 'datacite',
-      client_id: 'datacite.rph',
-    });
+    await visit('/sign-in');
+    await fillIn('input#account-field', 'DATACITE.TEST');
+    await fillIn('input#password-field', ENV.CLIENT_ADMIN_PASSWORD);
+    await click('button[type=submit]');
   });
 
-  test('visiting repository RPH', async function(assert) {
-    await visit('/repositories/datacite.rph');
+  test('visiting repository DataCite Test', async function(assert) {
+    await visit('/repositories/datacite.test');
 
-    assert.equal(currentURL(), '/repositories/datacite.rph');
-    assert.dom('h2.work').hasText('DataCite Test RPH');
+    assert.equal(currentURL(), '/repositories/datacite.test');
+    assert.dom('h2.work').hasText('DataCite Test Repository');
     assert.dom('li a.nav-link.active').hasText('Settings');
     assert.dom('a#edit-repository').includesText('Update Repository');
     assert.dom('a#delete-repository').doesNotExist();
   });
 
-  test('visiting repository RPH info', async function(assert) {
-    await visit('/repositories/datacite.rph/info');
+  test('visiting repository DataCite Test info', async function(assert) {
+    await visit('/repositories/datacite.test/info');
 
-    assert.equal(currentURL(), '/repositories/datacite.rph/info');
-    assert.dom('h2.work').hasText('DataCite Test RPH');
+    assert.equal(currentURL(), '/repositories/datacite.test/info');
+    assert.dom('h2.work').hasText('DataCite Test Repository');
     assert.dom('li a.nav-link.active').hasText('Info');
 
     // repository charts are displayed
     assert.dom('#chart-doi-title').includesText('DOIs by year');
   });
 
-  test('visiting repository RPH prefixes', async function(assert) {
-    await visit('/repositories/datacite.rph/prefixes');
+  test('visiting repository DataCite Test prefixes', async function(assert) {
+    await visit('/repositories/datacite.test/prefixes');
 
-    assert.equal(currentURL(), '/repositories/datacite.rph/prefixes');
-    assert.dom('h2.work').hasText('DataCite Test RPH');
+    assert.equal(currentURL(), '/repositories/datacite.test/prefixes');
+    assert.dom('h2.work').hasText('DataCite Test Repository');
     assert.dom('li a.nav-link.active').hasText('Prefixes');
     assert.dom('div#search').exists();
 
     // one prefix exists
-    assert.dom('[data-test-prefix]').includesText('10.70048');
+    assert.dom('[data-test-prefix]').includesText('10.80225');
     assert.dom('div.panel.facets').exists();
     assert.dom('[data-test-results]').doesNotExist();
 
@@ -77,11 +68,11 @@ module('Acceptance | client_admin | repository', function(hooks) {
     assert.dom('a#assign-prefix').doesNotExist();
   });
 
-  test('visiting repository RPH dois', async function(assert) {
-    await visit('/repositories/datacite.rph/dois');
+  test('visiting repository DataCite Test dois', async function(assert) {
+    await visit('/repositories/datacite.test/dois');
 
-    assert.equal(currentURL(), '/repositories/datacite.rph/dois');
-    assert.dom('h2.work').hasText('DataCite Test RPH');
+    assert.equal(currentURL(), '/repositories/datacite.test/dois');
+    assert.dom('h2.work').hasText('DataCite Test Repository');
     assert.dom('li a.nav-link.active').hasText('DOIs');
     assert.dom('div#search').exists();
 
@@ -96,20 +87,20 @@ module('Acceptance | client_admin | repository', function(hooks) {
     assert.dom('a#transfer-dois').doesNotExist();
   });
 
-  test('editing repository RPH form', async function(assert) {
-    await visit('/repositories/datacite.rph/edit');
+  test('editing repository DataCite Test form', async function(assert) {
+    await visit('/repositories/datacite.test/edit');
 
-    assert.equal(currentURL(), '/repositories/datacite.rph/edit');
-    assert.dom('h2.work').hasText('DataCite Test RPH');
+    assert.equal(currentURL(), '/repositories/datacite.test/edit');
+    assert.dom('h2.work').hasText('DataCite Test Repository');
     assert.dom('div.tab-content').exists();
     assert.dom('button#update-repository').includesText('Update Account');
   });
 
-  test('editing repository RPH password form', async function(assert) {
-    await visit('/repositories/datacite.rph/change');
+  test('editing repository DataCite Test password form', async function(assert) {
+    await visit('/repositories/datacite.test/change');
 
-    assert.equal(currentURL(), '/repositories/datacite.rph/change');
-    assert.dom('h2.work').hasText('DataCite Test RPH');
+    assert.equal(currentURL(), '/repositories/datacite.test/change');
+    assert.dom('h2.work').hasText('DataCite Test Repository');
     assert.dom('div.tab-content').exists();
 
     assert.dom('input#password-input-field').exists();

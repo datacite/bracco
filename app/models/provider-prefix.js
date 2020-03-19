@@ -17,6 +17,9 @@ export default DS.Model.extend(Validations, {
   repositories: DS.hasMany('repository', {
     async: false,
   }),
+  'repository-prefixes': DS.hasMany('repository-prefix', {
+    async: false,
+  }),
 
   createdAt: DS.attr('date'),
 });

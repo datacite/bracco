@@ -10,7 +10,7 @@ export default Route.extend({
 
     return hash({
       provider: this.store.findRecord('provider', provider.get('id')),
-      prefix: this.store.createRecord('provider-prefix', { provider }),
+      'provider-prefix': this.store.createRecord('provider-prefix', { provider }),
     });
   },
 });

@@ -3,9 +3,9 @@
   <div class="col-md-9">
     <div class="input-group">
       <span class="input-group-addon">
-        {{#form.element controlType="power-select" id="prefix-field" formLayout="vertical" property="prefix" options=prefixes destination=prefix searchEnabled=false as |el|}}
+        {{#form.element controlType="power-select" id="prefix-field" formLayout="vertical" property="prefix" options=repositoryPrefixes destination=prefix searchEnabled=false as |el|}}
           {{#el.control onChange=(action "selectPrefix") searchPlaceholder="Select Prefix" optionLabelPath=id as |item|}}
-            {{if item.id item.id item}}
+            {{if item.prefix.id item.prefix.id item}}
           {{/el.control}}
         {{/form.element}}
       </span>
