@@ -47,7 +47,7 @@ module('Unit | Ability | doi', function(hooks) {
     });
     this.owner.register('service:current-user', currentUser);
 
-    this.set('provider', make('provider', 'ands'));
+    this.set('provider', make('ands'));
     this.set('repository', make('repository', { id: 'ands.centre9', provider: this.provider }));
     this.set('model', make('doi', { repository: this.repository }));
     ability.model = this.model;
@@ -78,7 +78,7 @@ module('Unit | Ability | doi', function(hooks) {
     });
     this.owner.register('service:current-user', currentUser);
 
-    this.set('provider', make('provider', 'ands'));
+    this.set('provider', make('ands'));
     this.set('repository', make('repository', { id: 'ands.centre9', provider: this.provider }));
     this.set('model', make('doi', { repository: this.repository }));
     ability.model = this.model;
@@ -94,6 +94,37 @@ module('Unit | Ability | doi', function(hooks) {
     assert.equal(ability.canDelete, true);
     assert.equal(ability.canModify, true);
     assert.equal(ability.canEdit, true);
+    assert.equal(ability.canForm, false);
+    assert.equal(ability.canDetail, true);
+    assert.equal(ability.canRead, true);
+  });
+
+  test('role consortium_admin', function(assert) {
+    const ability = this.owner.lookup('ability:doi');
+    const currentUser = Service.extend({
+      uid: 'carl',
+      name: 'Admin',
+      role_id: 'consortium_admin',
+      consortium_id: 'carl.frdr',
+    });
+    this.owner.register('service:current-user', currentUser);
+
+    this.set('provider', make('carl'));
+    this.set('repository', make('repository', { id: 'carl.frdr', provider: this.provider }));
+    this.set('model', make('doi', { repository: this.repository }));
+    ability.model = this.model;
+
+    assert.equal(ability.canViewHealth, true);
+    assert.equal(ability.canViewState, true);
+    assert.equal(ability.canSource, false);
+    assert.equal(ability.canTransfer, true);
+    assert.equal(ability.canMove, true);
+    assert.equal(ability.canUpdate, true);
+    assert.equal(ability.canUpload, false);
+    assert.equal(ability.canCreate, false);
+    assert.equal(ability.canDelete, false);
+    assert.equal(ability.canModify, false);
+    assert.equal(ability.canEdit, false);
     assert.equal(ability.canForm, false);
     assert.equal(ability.canDetail, true);
     assert.equal(ability.canRead, true);

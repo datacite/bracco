@@ -1,7 +1,7 @@
 import FactoryGuy from 'ember-data-factory-guy';
 
 FactoryGuy.define('provider', {
-  default: {
+  ands: {
     id: 'ands',
     name: 'Australian Research Data Commons',
     displayName: 'Australian Research Data Commons',
@@ -23,33 +23,25 @@ FactoryGuy.define('provider', {
     rorId: 'https://ror.org/038sjwq14',
   },
 
-  traits: {
-    ands: {
-      id: 'ands',
-      name: 'Australian National Data Service',
-      systemEmail: 'adrian.burton@ands.org.au',
-    },
-
-    organization: {
-      memberType: 'consortium_organization',
-      technicalContact: {},
-      secondaryTechnicalContact: {},
-      billingContact: {
-        email: 'services@ardc.edu.au',
-        givenName: 'Adrian',
-        familyName: 'Burton',
-      },
-      secondaryBillingContact: {
-        email: 'finance@ardc.edu.au',
-        givenName: 'David',
-        familyName: 'Vitkin',
-      },
-      serviceContact: {
-        email: 'services@ardc.edu.au',
-        givenName: 'ARDC Services',
-      },
-      secondaryServiceContact: {},
-      votingContact: {},
-    },
+  carl: {
+    id: 'carl',
+    name: 'Canadian Association of Research Libraries',
+    displayName: 'Canadian Association of Research Libraries',
+    symbol: 'CARL',
+    website: '',
+    systemEmail: 'portageservices@carl-abrc.ca',
+    groupEmail: null,
+    description: '',
+    region: 'AMER',
+    country: 'CA',
+    logoUrl: null,
+    memberType: 'consortium_organization',
+    organizationType: null,
+    focusArea: null,
+    nonProfitStatus: 'non-profit',
+    isActive: true,
+    hasPassword: true,
+    joined: null,
+    rorId: 'https://ror.org/001tw8739',
   },
 });

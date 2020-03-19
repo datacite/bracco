@@ -16,7 +16,7 @@ module('Unit | Controller | providers', function(hooks) {
     let controller = this.owner.lookup('controller:providers.show.organizations.new');
     let model = {
       'provider': make('provider'),
-      'organization': make('provider', { memberType: 'consortium_organization' }),
+      'organization': make('provider', { memberType: 'direct_member' }),
     };
     controller.set('model', model);
     controller.send('selectCountry', 'Australia');
@@ -30,7 +30,7 @@ module('Unit | Controller | providers', function(hooks) {
 
     let model = {
       'provider': make('provider'),
-      'organization': make('provider', { memberType: 'consortium_organization' }),
+      'organization': make('provider', { memberType: 'direct_member' }),
     };
     controller.set('model', model);
     controller.send('selectOrganizationType', 'nationalInstitution');
@@ -43,7 +43,7 @@ module('Unit | Controller | providers', function(hooks) {
     let controller = this.owner.lookup('controller:providers.show.organizations.new');
     let model = {
       'provider': make('provider'),
-      'organization': make('provider', { memberType: 'consortium_organization' }),
+      'organization': make('provider', { memberType: 'direct_member' }),
     };
     controller.set('model', model);
     controller.send('selectMemberType', 'direct_member');
@@ -56,7 +56,7 @@ module('Unit | Controller | providers', function(hooks) {
     let controller = this.owner.lookup('controller:providers.show.organizations.new');
     let model = {
       'provider': make('provider'),
-      'organization': make('provider', { memberType: 'consortium_organization' }),
+      'organization': make('provider', { memberType: 'direct_member' }),
     };
     controller.set('model', model);
     controller.send('selectFocusArea', 'general');
@@ -69,7 +69,7 @@ module('Unit | Controller | providers', function(hooks) {
     let controller = this.owner.lookup('controller:providers.show.organizations.new');
     let model = {
       'provider': make('provider'),
-      'organization': make('provider', { memberType: 'consortium_organization' }),
+      'organization': make('provider', { memberType: 'direct_member' }),
     };
     controller.set('model', model);
     controller.send('selectFocusArea', 'general');

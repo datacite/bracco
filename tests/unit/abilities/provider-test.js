@@ -38,7 +38,7 @@ module('Unit | Ability | provider', function(hooks) {
     });
     this.owner.register('service:current-user', currentUser);
 
-    this.set('model', make('provider', 'ands'));
+    this.set('model', make('ands'));
     ability.model = this.model;
 
     assert.equal(ability.canCreate, false);
@@ -63,6 +63,26 @@ module('Unit | Ability | provider', function(hooks) {
 
     assert.equal(ability.canToken, true);
     assert.equal(ability.canRead, true);
+  });
+
+  test('role provider_admin should not acess other member accounts', function(assert) {
+    const ability = this.owner.lookup('ability:provider');
+    const currentUser = Service.extend({
+      uid: 'ands',
+      name: 'Australian National Data Service',
+      role_id: 'provider_admin',
+      provider_id: 'ands',
+    });
+    this.owner.register('service:current-user', currentUser);
+
+    this.set('model', make('carl'));
+    ability.model = this.model;
+
+    assert.equal(ability.canCreate, false);
+    assert.equal(ability.canDelete, false);
+    assert.equal(ability.canUpdate, false);
+    assert.equal(ability.canToken, false);
+    assert.equal(ability.canRead, false);
   });
 
   test('role client_admin', function(assert) {

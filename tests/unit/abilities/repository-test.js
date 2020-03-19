@@ -39,7 +39,7 @@ module('Unit | Ability | repository', function(hooks) {
     });
     this.owner.register('service:current-user', currentUser);
 
-    this.set('provider', make('provider', 'ands'));
+    this.set('provider', make('ands'));
     this.set('model', make('repository', { provider: this.provider }));
     ability.model = this.model;
 
@@ -79,7 +79,7 @@ module('Unit | Ability | repository', function(hooks) {
     });
     this.owner.register('service:current-user', currentUser);
 
-    this.set('provider', make('provider', 'ands'));
+    this.set('provider', make('ands'));
     this.set('model', make('repository', { id: 'ands.centre9', provider: this.provider }));
     ability.model = this.model;
 
