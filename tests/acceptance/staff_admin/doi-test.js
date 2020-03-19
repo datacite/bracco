@@ -84,7 +84,7 @@ module('Acceptance | staff_admin | doi', function(hooks) {
     assert.dom('[data-test-given-name]').exists();
     assert.dom('[data-test-family-name]').exists();
     assert.dom('[data-test-name]').exists();
-    assert.dom('[data-test-geo-location-place]').doesNotExist();
+    assert.dom('[data-test-geo-location-place]').exists();
     assert.dom('[data-test-title]').exists();
     assert.dom('input#publisher-field').exists();
     assert.dom('input#publication-year-field').exists();
@@ -115,7 +115,7 @@ module('Acceptance | staff_admin | doi', function(hooks) {
   });
 
   test('edit DOI form for repository DataCite Test', async function(assert) {
-    assert.expect(16);
+    assert.expect(17);
 
     await visit('/dois/10.80225%2Fda52-7919/edit');
 
