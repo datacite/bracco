@@ -2,7 +2,7 @@ import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
 import { currentURL, visit } from '@ember/test-helpers';
 
-module('Acceptance | anonymous | admin', function(hooks) {
+module('Acceptance | anonymous | doi', function(hooks) {
   setupApplicationTest(hooks);
 
   test('visiting dois', async function(assert) {
@@ -13,9 +13,9 @@ module('Acceptance | anonymous | admin', function(hooks) {
   });
 
   test('visiting specific doi', async function(assert) {
-    await visit('/dois/10.80225%2Fe605-dg05');
+    await visit('/dois/10.80225%2Fda52-7919');
 
-    assert.equal(currentURL(), '/dois/10.80225%2Fe605-dg05');
-    assert.dom('h2.work').hasText('10.80225/e605-dg05');
+    assert.equal(currentURL(), '/dois/10.80225%2Fda52-7919');
+    assert.dom('h2.work').hasText('10.80225/da52-7919');
   });
 });

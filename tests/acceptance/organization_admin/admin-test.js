@@ -60,10 +60,10 @@ module('Acceptance | organization_admin | admin', function(hooks) {
     assert.dom('h2.work').hasText('DataCite');
   });
 
-  test('visiting prefix 10.5038', async function(assert) {
-    await visit('/prefixes/10.5038');
+  test('visiting prefix 10.80225', async function(assert) {
+    await visit('/prefixes/10.80225');
 
-    assert.equal(currentURL(), '/prefixes/10.5038');
+    assert.equal(currentURL(), '/prefixes/10.80225');
     assert.dom('div.alert-warning').includesText('The page was not found.');
   });
 });

@@ -8,7 +8,7 @@ import {
 } from '@ember/test-helpers';
 import ENV from 'bracco/config/environment';
 
-module('Acceptance | consortium_admin | admin', function(hooks) {
+module('Acceptance | consortium_admin | doi', function(hooks) {
   setupApplicationTest(hooks);
 
   hooks.beforeEach(async function() {
@@ -26,9 +26,9 @@ module('Acceptance | consortium_admin | admin', function(hooks) {
   });
 
   test('visiting specific doi', async function(assert) {
-    await visit('/dois/10.80225%2Fe605-dg05');
+    await visit('/dois/10.80225%2Fda52-7919');
 
-    assert.equal(currentURL(), '/dois/10.80225%2Fe605-dg05');
-    assert.dom('h2.work').hasText('10.80225/e605-dg05');
+    assert.equal(currentURL(), '/dois/10.80225%2Fda52-7919');
+    assert.dom('h2.work').hasText('10.80225/da52-7919');
   });
 });
