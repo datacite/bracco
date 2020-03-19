@@ -27,9 +27,9 @@ module('Acceptance | user | admin', function(hooks) {
       name: 'Martin Fenner',
       role_id: 'user',
     });
-    await visit('/dois/10.70048%2Fe605-dg05');
+    await visit('/dois/10.80225%2Fe605-dg05');
 
-    assert.equal(currentURL(), '/dois/10.70048%2Fe605-dg05');
-    assert.dom('h2.work').hasText('10.70048/e605-dg05');
+    assert.equal(currentURL(), '/dois/10.80225%2Fe605-dg05');
+    assert.dom('h2.work').hasText('10.80225/e605-dg05');
   });
 });

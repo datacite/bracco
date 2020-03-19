@@ -11,7 +11,7 @@ export default Component.extend({
 
     let providerId = this.get('model.repository.provider.id');
     let self = this;
-    this.store.query('prefix', { 'provider-id': providerId, state: 'without-client' }).then(function(availablePrefixes) {
+    this.store.query('prefix', { 'provider-id': providerId, state: 'without-repository' }).then(function(availablePrefixes) {
       self.set('prefixesAvailable', availablePrefixes.get('meta').total > 0);
     });
   },

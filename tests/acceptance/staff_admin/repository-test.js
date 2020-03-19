@@ -1,17 +1,21 @@
 import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
-import { currentURL, visit } from '@ember/test-helpers';
-import { authenticateSession } from 'ember-simple-auth/test-support';
+import {
+  currentURL,
+  visit,
+  click,
+  fillIn,
+} from '@ember/test-helpers';
+import ENV from 'bracco/config/environment';
 
 module('Acceptance | staff_admin | repository', function(hooks) {
   setupApplicationTest(hooks);
 
   hooks.beforeEach(async function() {
-    await authenticateSession({
-      uid: 'admin',
-      name: 'Admin',
-      role_id: 'staff_admin',
-    });
+    await visit('/sign-in');
+    await fillIn('input#account-field', 'ADMIN');
+    await fillIn('input#password-field', ENV.STAFF_ADMIN_PASSWORD);
+    await click('button[type=submit]');
   });
 
   test('visiting repository AWI', async function(assert) {
@@ -38,16 +42,11 @@ module('Acceptance | staff_admin | repository', function(hooks) {
     assert.dom('#chart-doi-title').includesText('DOIs by year');
   });
 
-  test('visiting repository RPH prefixes', async function(assert) {
-    await authenticateSession({
-      uid: 'admin',
-      name: 'Admin',
-      role_id: 'staff_admin',
-    });
-    await visit('/repositories/datacite.rph/prefixes');
+  test('visiting repository DataCite Test prefixes', async function(assert) {
+    await visit('/repositories/datacite.test/prefixes');
 
-    assert.equal(currentURL(), '/repositories/datacite.rph/prefixes');
-    assert.dom('h2.work').hasText('DataCite Test RPH');
+    assert.equal(currentURL(), '/repositories/datacite.test/prefixes');
+    assert.dom('h2.work').hasText('DataCite Test Repository');
     assert.dom('li a.nav-link.active').hasText('Prefixes');
     assert.dom('div#search').exists();
 
@@ -62,11 +61,11 @@ module('Acceptance | staff_admin | repository', function(hooks) {
     // assert.dom('a#assign-prefix').includesText('Assign Prefix');
   });
 
-  test('visiting repository RPH dois', async function(assert) {
-    await visit('/repositories/datacite.rph/dois');
+  test('visiting repository DataCite Test dois', async function(assert) {
+    await visit('/repositories/datacite.test/dois');
 
-    assert.equal(currentURL(), '/repositories/datacite.rph/dois');
-    assert.dom('h2.work').hasText('DataCite Test RPH');
+    assert.equal(currentURL(), '/repositories/datacite.test/dois');
+    assert.dom('h2.work').hasText('DataCite Test Repository');
     assert.dom('li a.nav-link.active').hasText('DOIs');
     assert.dom('div#search').exists();
 
@@ -77,11 +76,11 @@ module('Acceptance | staff_admin | repository', function(hooks) {
 
     // admin can add dois
     assert.dom('a#new-doi').includesText('Create (Form)');
-    assert.dom('a#new-doi').hasAttribute('href', '/repositories/datacite.rph/dois/new');
+    assert.dom('a#new-doi').hasAttribute('href', '/repositories/datacite.test/dois/new');
     assert.dom('a#upload-doi').includesText('Create (File Upload)');
-    assert.dom('a#upload-doi').hasAttribute('href', '/repositories/datacite.rph/dois/upload');
+    assert.dom('a#upload-doi').hasAttribute('href', '/repositories/datacite.test/dois/upload');
     assert.dom('a#transfer-dois').includesText('Transfer');
-    assert.dom('a#transfer-dois').hasAttribute('href', '/repositories/datacite.rph/transfer');
+    assert.dom('a#transfer-dois').hasAttribute('href', '/repositories/datacite.test/transfer');
   });
 
   test('new repository form', async function(assert) {

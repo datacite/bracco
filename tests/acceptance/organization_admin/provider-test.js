@@ -4,20 +4,18 @@ import {
   currentURL,
   visit,
   click,
-  // fillIn
+  fillIn,
 } from '@ember/test-helpers';
-import { authenticateSession } from 'ember-simple-auth/test-support';
+import ENV from 'bracco/config/environment';
 
 module('Acceptance | organization_admin | provider', function(hooks) {
   setupApplicationTest(hooks);
 
   hooks.beforeEach(async function() {
-    await authenticateSession({
-      uid: 'datacite',
-      name: 'DataCite',
-      role_id: 'provider_admin',
-      provider_id: 'datacite',
-    });
+    await visit('/sign-in');
+    await fillIn('input#account-field', 'DATACITE');
+    await fillIn('input#password-field', ENV.ORGANIZATION_ADMIN_PASSWORD);
+    await click('button[type=submit]');
   });
 
   test('visiting provider DataCite', async function(assert) {

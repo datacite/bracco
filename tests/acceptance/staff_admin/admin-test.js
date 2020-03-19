@@ -3,19 +3,19 @@ import { setupApplicationTest } from 'ember-qunit';
 import {
   currentURL,
   visit,
-  // click,
+  click,
+  fillIn,
 } from '@ember/test-helpers';
-import { authenticateSession } from 'ember-simple-auth/test-support';
+import ENV from 'bracco/config/environment';
 
 module('Acceptance | staff_admin | admin', function(hooks) {
   setupApplicationTest(hooks);
 
   hooks.beforeEach(async function() {
-    await authenticateSession({
-      uid: 'admin',
-      name: 'Admin',
-      role_id: 'staff_admin',
-    });
+    await visit('/sign-in');
+    await fillIn('input#account-field', 'ADMIN');
+    await fillIn('input#password-field', ENV.STAFF_ADMIN_PASSWORD);
+    await click('button[type=submit]');
   });
 
   test('is logged in', async function(assert) {

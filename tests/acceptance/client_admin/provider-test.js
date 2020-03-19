@@ -1,46 +1,48 @@
 import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
-import { currentURL, visit } from '@ember/test-helpers';
-import { authenticateSession } from 'ember-simple-auth/test-support';
+import {
+  currentURL,
+  visit,
+  click,
+  fillIn,
+} from '@ember/test-helpers';
+import ENV from 'bracco/config/environment';
 
 module('Acceptance | client_admin | provider', function(hooks) {
   setupApplicationTest(hooks);
 
   hooks.beforeEach(async function() {
-    await authenticateSession({
-      uid: 'tib.awi',
-      name: 'Alfred Wegener Institute',
-      role_id: 'client_admin',
-      provider_id: 'tib',
-      client_id: 'tib.awi',
-    });
+    await visit('/sign-in');
+    await fillIn('input#account-field', 'DATACITE.TEST');
+    await fillIn('input#password-field', ENV.CLIENT_ADMIN_PASSWORD);
+    await click('button[type=submit]');
   });
 
-  test('visiting provider TIB info', async function(assert) {
-    await visit('/providers/tib/info');
+  test('visiting provider DataCite info', async function(assert) {
+    await visit('/providers/datacite/info');
 
-    assert.equal(currentURL(), '/repositories/tib.awi');
-    assert.dom('h2.work').hasText('Alfred Wegener Institute');
+    assert.equal(currentURL(), '/repositories/datacite.test');
+    assert.dom('h2.work').hasText('DataCite Test Repository');
   });
 
-  test('visiting provider TIB repositories', async function(assert) {
-    await visit('/providers/tib/repositories');
+  test('visiting provider DataCite repositories', async function(assert) {
+    await visit('/providers/datacite/repositories');
 
-    assert.equal(currentURL(), '/repositories/tib.awi');
-    assert.dom('h2.work').hasText('Alfred Wegener Institute');
+    assert.equal(currentURL(), '/repositories/datacite.test');
+    assert.dom('h2.work').hasText('DataCite Test Repository');
   });
 
-  test('visiting provider TIB prefixes', async function(assert) {
-    await visit('/providers/tib/prefixes');
+  test('visiting provider DataCite prefixes', async function(assert) {
+    await visit('/providers/datacite/prefixes');
 
-    assert.equal(currentURL(), '/repositories/tib.awi');
-    assert.dom('h2.work').hasText('Alfred Wegener Institute');
+    assert.equal(currentURL(), '/repositories/datacite.test');
+    assert.dom('h2.work').hasText('DataCite Test Repository');
   });
 
-  test('visiting provider TIB dois', async function(assert) {
-    await visit('/providers/tib/dois');
+  test('visiting provider DataCite dois', async function(assert) {
+    await visit('/providers/datacite/dois');
 
-    assert.equal(currentURL(), '/repositories/tib.awi');
-    assert.dom('h2.work').hasText('Alfred Wegener Institute');
+    assert.equal(currentURL(), '/repositories/datacite.test');
+    assert.dom('h2.work').hasText('DataCite Test Repository');
   });
 });
