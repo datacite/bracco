@@ -28,6 +28,7 @@ FactoryGuy.define('doi', {
     downloadCount: 4,
     viewCount: 111111,
     citationCount: 123,
+    repository: FactoryGuy.belongsTo('repository'),
   },
   empty: {
     creators: [],
