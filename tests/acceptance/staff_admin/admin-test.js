@@ -3,19 +3,19 @@ import { setupApplicationTest } from 'ember-qunit';
 import {
   currentURL,
   visit,
-  // click,
+  click,
+  fillIn,
 } from '@ember/test-helpers';
-import { authenticateSession } from 'ember-simple-auth/test-support';
+import ENV from 'bracco/config/environment';
 
 module('Acceptance | staff_admin | admin', function(hooks) {
   setupApplicationTest(hooks);
 
   hooks.beforeEach(async function() {
-    await authenticateSession({
-      uid: 'admin',
-      name: 'Admin',
-      role_id: 'staff_admin',
-    });
+    await visit('/sign-in');
+    await fillIn('input#account-field', 'ADMIN');
+    await fillIn('input#password-field', ENV.STAFF_ADMIN_PASSWORD);
+    await click('button[type=submit]');
   });
 
   test('is logged in', async function(assert) {
@@ -128,10 +128,10 @@ module('Acceptance | staff_admin | admin', function(hooks) {
     assert.dom('a#add-prefixes').hasAttribute('href', '/prefixes/new');
   });
 
-  test('visiting prefix 10.5038', async function(assert) {
-    await visit('/prefixes/10.5038');
+  test('visiting prefix 10.80225', async function(assert) {
+    await visit('/prefixes/10.80225');
 
-    assert.equal(currentURL(), '/prefixes/10.5038');
+    assert.equal(currentURL(), '/prefixes/10.80225');
     assert.dom('div.alert-warning').includesText('The page was not found.');
   });
 });

@@ -1,25 +1,28 @@
 import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
-import { currentURL, visit } from '@ember/test-helpers';
-import { authenticateSession } from 'ember-simple-auth/test-support';
+import {
+  currentURL,
+  visit,
+  click,
+  fillIn,
+} from '@ember/test-helpers';
+import ENV from 'bracco/config/environment';
 
 module('Acceptance | consortium_admin | repository', function(hooks) {
   setupApplicationTest(hooks);
 
   hooks.beforeEach(async function() {
-    await authenticateSession({
-      uid: 'dc',
-      name: 'DataCite Consortium',
-      role_id: 'consortium_admin',
-      provider_id: 'dc',
-    });
+    await visit('/sign-in');
+    await fillIn('input#account-field', 'DC');
+    await fillIn('input#password-field', ENV.CONSORTIUM_ADMIN_PASSWORD);
+    await click('button[type=submit]');
   });
 
-  test('visiting repository DataCite RPH', async function(assert) {
-    await visit('/repositories/datacite.rph');
+  test('visiting repository DataCite Test', async function(assert) {
+    await visit('/repositories/datacite.test');
 
-    assert.equal(currentURL(), '/repositories/datacite.rph');
-    assert.dom('h2.work').hasText('DataCite Test RPH');
+    assert.equal(currentURL(), '/repositories/datacite.test');
+    assert.dom('h2.work').hasText('DataCite Test Repository');
     assert.dom('li a.nav-link.active').hasText('Settings');
 
     // consortium member can edit and delete repositories
@@ -27,27 +30,27 @@ module('Acceptance | consortium_admin | repository', function(hooks) {
     assert.dom('a#delete-repository').includesText('Delete');
   });
 
-  test('visiting repository DataCite RPH info', async function(assert) {
-    await visit('/repositories/datacite.rph/info');
+  test('visiting repository DataCite Test info', async function(assert) {
+    await visit('/repositories/datacite.test/info');
 
-    assert.equal(currentURL(), '/repositories/datacite.rph/info');
-    assert.dom('h2.work').hasText('DataCite Test RPH');
+    assert.equal(currentURL(), '/repositories/datacite.test/info');
+    assert.dom('h2.work').hasText('DataCite Test Repository');
     assert.dom('li a.nav-link.active').hasText('Info');
 
     // repository charts are displayed
     assert.dom('#chart-doi-title').includesText('DOIs by year');
   });
 
-  test('visiting repository DataCite RPH prefixes', async function(assert) {
-    await visit('/repositories/datacite.rph/prefixes');
+  test('visiting repository DataCite Test prefixes', async function(assert) {
+    await visit('/repositories/datacite.test/prefixes');
 
-    assert.equal(currentURL(), '/repositories/datacite.rph/prefixes');
-    assert.dom('h2.work').hasText('DataCite Test RPH');
+    assert.equal(currentURL(), '/repositories/datacite.test/prefixes');
+    assert.dom('h2.work').hasText('DataCite Test Repository');
     assert.dom('li a.nav-link.active').hasText('Prefixes');
     assert.dom('div#search').exists();
 
     // one prefix exists
-    assert.dom('[data-test-prefix]').includesText('10.70048');
+    assert.dom('[data-test-prefix]').includesText('10.80225');
     assert.dom('div.panel.facets').exists();
     assert.dom('[data-test-results]').doesNotExist();
 
@@ -55,11 +58,11 @@ module('Acceptance | consortium_admin | repository', function(hooks) {
     // assert.dom('a#assign-prefix').includesText('Assign Prefix');
   });
 
-  test('visiting repository DataCite RPH dois', async function(assert) {
-    await visit('/repositories/datacite.rph/dois');
+  test('visiting repository DataCite Test dois', async function(assert) {
+    await visit('/repositories/datacite.test/dois');
 
-    assert.equal(currentURL(), '/repositories/datacite.rph/dois');
-    assert.dom('h2.work').hasText('DataCite Test RPH');
+    assert.equal(currentURL(), '/repositories/datacite.test/dois');
+    assert.dom('h2.work').hasText('DataCite Test Repository');
     assert.dom('li a.nav-link.active').hasText('DOIs');
     assert.dom('div#search').exists();
 

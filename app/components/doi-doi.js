@@ -21,7 +21,7 @@ export default Component.extend({
   stateList,
   state: null,
 
-  prefixes: null,
+  repositoryPrefixes: null,
 
   didReceiveAttrs() {
     this._super(...arguments);
@@ -31,14 +31,13 @@ export default Component.extend({
 
   setDefaultPrefix() {
     let self = this;
-    this.store.query('prefix', { 'client-id': this.repository.get('id'), sort: 'name', 'page[size]': 25 }).then(function(prefixes) {
+    this.store.query('repository-prefix', { 'repository-id': this.repository.get('id'), sort: 'name', 'page[size]': 25 }).then(function(repositoryPrefixes) {
       if ((typeof self.get('model').get('doi')) == 'undefined') {
-        self.set('prefixes', prefixes);
+        self.set('repositoryPrefixes', repositoryPrefixes);
       }
 
-      let prefix = prefixes.length > 0 ? prefixes.get('firstObject') : null;
-
-      self.get('model').set('prefix', prefix.id);
+      let repositoryPrefix = repositoryPrefixes.length > 0 ? repositoryPrefixes.get('firstObject') : null;
+      self.get('model').set('prefix', repositoryPrefix.get('prefix').get('id'));
 
       if (typeof self.get('model').get('doi') == 'undefined') {
         self.generate();
@@ -89,9 +88,9 @@ export default Component.extend({
   },
 
   actions: {
-    selectPrefix(prefix) {
-      this.model.set('prefix', prefix.id);
-      this.model.set('doi', prefix.id + '/' + this.model.get('suffix'));
+    selectPrefix(repositoryPrefix) {
+      this.model.set('prefix', repositoryPrefix.prefix.get('id'));
+      this.model.set('doi', repositoryPrefix.prefix.get('id') + '/' + this.model.get('suffix'));
       this.selectState(this.model.get('state'));
     },
     selectSuffix(suffix) {

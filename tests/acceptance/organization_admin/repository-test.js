@@ -1,18 +1,21 @@
 import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
-import { currentURL, visit } from '@ember/test-helpers';
-import { authenticateSession } from 'ember-simple-auth/test-support';
+import {
+  currentURL,
+  visit,
+  click,
+  fillIn,
+} from '@ember/test-helpers';
+import ENV from 'bracco/config/environment';
 
 module('Acceptance | organization_admin | repository', function(hooks) {
   setupApplicationTest(hooks);
 
   hooks.beforeEach(async function() {
-    await authenticateSession({
-      uid: 'datacite',
-      name: 'DataCite',
-      role_id: 'provider_admin',
-      provider_id: 'datacite',
-    });
+    await visit('/sign-in');
+    await fillIn('input#account-field', 'DATACITE');
+    await fillIn('input#password-field', ENV.ORGANIZATION_ADMIN_PASSWORD);
+    await click('button[type=submit]');
   });
 
   test('visiting repository DataCite Journal', async function(assert) {
@@ -36,11 +39,11 @@ module('Acceptance | organization_admin | repository', function(hooks) {
     assert.dom('a#delete-repository').includesText('Delete');
   });
 
-  test('visiting repository DataCite RPH', async function(assert) {
-    await visit('/repositories/datacite.rph');
+  test('visiting repository DataCite Test', async function(assert) {
+    await visit('/repositories/datacite.test');
 
-    assert.equal(currentURL(), '/repositories/datacite.rph');
-    assert.dom('h2.work').hasText('DataCite Test RPH');
+    assert.equal(currentURL(), '/repositories/datacite.test');
+    assert.dom('h2.work').hasText('DataCite Test Repository');
     assert.dom('li a.nav-link.active').hasText('Settings');
     assert.dom('a#edit-repository').includesText('Update Repository');
     assert.dom('a#delete-repository').includesText('Delete');

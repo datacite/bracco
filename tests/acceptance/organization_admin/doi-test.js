@@ -1,18 +1,21 @@
 import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
-import { currentURL, visit } from '@ember/test-helpers';
-import { authenticateSession } from 'ember-simple-auth/test-support';
+import {
+  currentURL,
+  visit,
+  click,
+  fillIn,
+} from '@ember/test-helpers';
+import ENV from 'bracco/config/environment';
 
-module('Acceptance | organization_admin | admin', function(hooks) {
+module('Acceptance | organization_admin | doi', function(hooks) {
   setupApplicationTest(hooks);
 
   hooks.beforeEach(async function() {
-    await authenticateSession({
-      uid: 'datacite',
-      name: 'DataCite',
-      role_id: 'provider_admin',
-      provider_id: 'datacite',
-    });
+    await visit('/sign-in');
+    await fillIn('input#account-field', 'DATACITE');
+    await fillIn('input#password-field', ENV.ORGANIZATION_ADMIN_PASSWORD);
+    await click('button[type=submit]');
   });
 
   test('visiting dois', async function(assert) {
@@ -23,15 +26,9 @@ module('Acceptance | organization_admin | admin', function(hooks) {
   });
 
   test('visiting specific doi', async function(assert) {
-    await authenticateSession({
-      uid: 'datacite',
-      name: 'DataCite',
-      role_id: 'provider_admin',
-      provider_id: 'datacite',
-    });
-    await visit('/dois/10.70048%2Fe605-dg05');
+    await visit('/dois/10.80225%2Fda52-7919');
 
-    assert.equal(currentURL(), '/dois/10.70048%2Fe605-dg05');
-    assert.dom('h2.work').hasText('10.70048/e605-dg05');
+    assert.equal(currentURL(), '/dois/10.80225%2Fda52-7919');
+    assert.dom('h2.work').hasText('10.80225/da52-7919');
   });
 });

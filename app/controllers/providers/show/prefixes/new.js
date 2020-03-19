@@ -5,10 +5,15 @@ export default Controller.extend({
   store: service(),
 
   actions: {
+    searchPrefix(query) {
+      this.set('prefixes', this.store.query('prefix', { query, state: 'unassigned', sort: 'name', 'page[size]': 25 }));
+    },
+    selectPrefix(prefix) {
+      this.model['provider-prefix'].set('prefix', prefix);
+    },
     submit() {
       let self = this;
-      let providerPrefix = this.store.createRecord('providerPrefix', { provider: this.get('model.provider'), prefix: this.get('model.prefix.prefix') });
-      providerPrefix.save().then(function(providerPrefix) {
+      this.model['provider-prefix'].save().then(function(providerPrefix) {
         self.transitionToRoute('providers.show.prefixes', providerPrefix.get('provider'));
       }).catch(function(reason) {
         console.debug(reason);
