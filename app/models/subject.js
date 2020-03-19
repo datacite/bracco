@@ -2,7 +2,6 @@ import DS from 'ember-data';
 import MF from 'ember-data-model-fragments';
 import { validator, buildValidations } from 'ember-cp-validations';
 import { computed } from '@ember/object';
-// import { A } from '@ember/array';
 
 const Validations = buildValidations({
   subject: validator('presence', true),
@@ -27,8 +26,8 @@ export default MF.Fragment.extend(Validations, {
   schemeUri: DS.attr('string', { defaultValue: null }),
   valueUri: DS.attr('string', { defaultValue: null }),
 
-  subjectSchemeUri: computed('schemeUri', 'valueUri', function() {
-    return (this.schemeUri || '').concat(this.schemeUri || '');
+  subjectSchemeUri: computed('valueUri', function() {
+    return (this.valueUri || '');
   }),
 });
 

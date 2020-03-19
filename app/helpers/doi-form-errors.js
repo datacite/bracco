@@ -22,6 +22,21 @@ export function doiFormErrors([ model ]) {
         errorAttributes = errorAttributes.concat(creator.validations.errors.mapBy('attribute'));
       });
     }
+    if (model.contributors) {
+      model.contributors.forEach((contributor) => {
+        errorAttributes = errorAttributes.concat(contributor.validations.errors.mapBy('attribute'));
+      });
+    }
+    if (model.identifiers) {
+      model.identifiers.forEach((identifier) => {
+        errorAttributes = errorAttributes.concat(identifier.validations.errors.mapBy('attribute'));
+      });
+    }
+    if (model.subjects) {
+      model.subjects.forEach((subject) => {
+        errorAttributes = errorAttributes.concat(subject.validations.errors.mapBy('attribute'));
+      });
+    }
   }
 
   return errorAttributes.map(function(attribute) {
