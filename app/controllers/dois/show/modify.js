@@ -38,6 +38,8 @@ export default Controller.extend({
       doi.set('contributors', null);
       doi.set('identifiers', null);
 
+      doi.set('geoLocations', null);
+
       // Don't try and set the landingPage information for DOI Updates
       doi.set('landingPage', null);
 

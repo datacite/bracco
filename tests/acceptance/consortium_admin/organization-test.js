@@ -3,22 +3,19 @@ import { setupApplicationTest } from 'ember-qunit';
 import {
   currentURL,
   visit,
-  // click,
-  // fillIn,
-  // pauseTest,
+  click,
+  fillIn,
 } from '@ember/test-helpers';
-import { authenticateSession } from 'ember-simple-auth/test-support';
+import ENV from 'bracco/config/environment';
 
 module('Acceptance | consortium_admin | organization', function(hooks) {
   setupApplicationTest(hooks);
 
   hooks.beforeEach(async function() {
-    await authenticateSession({
-      uid: 'dc',
-      name: 'DataCite Consortium',
-      role_id: 'consortium_admin',
-      provider_id: 'dc',
-    });
+    await visit('/sign-in');
+    await fillIn('input#account-field', 'DC');
+    await fillIn('input#password-field', ENV.CONSORTIUM_ADMIN_PASSWORD);
+    await click('button[type=submit]');
   });
 
   test('visiting provider DC consortium organizations', async function(assert) {

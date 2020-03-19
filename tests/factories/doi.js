@@ -2,14 +2,16 @@ import FactoryGuy from 'ember-data-factory-guy';
 
 FactoryGuy.define('doi', {
   default: {
-    doi: '10.70048/rph240519',
+    doi: '10.80225/rph240519',
+    url: 'https://datacite.org',
     identifiers: [ {
-      'doi': 'https://handle.test.datacite.org/10.70048/rph240519',
+      'doi': 'https://handle.test.datacite.org/10.80225/rph240519',
     } ],
     creators: FactoryGuy.hasMany('creator'),
     contributors: FactoryGuy.hasMany('contributor'),
     titles: FactoryGuy.hasMany('title'),
     descriptions: FactoryGuy.hasMany('description'),
+    geoLocations: FactoryGuy.hasMany('geoLocation'),
     subjects: FactoryGuy.hasMany('subject'),
     publisher: 'Royal Society of Chemistry',
     types: {
@@ -71,6 +73,12 @@ FactoryGuy.define('identifier', {
 FactoryGuy.define('description', {
   default: {
     description: 'Description of submitted chemical data for InChIKey YAPQBXQYLJRXSA-UHFFFAOYSA-N',
+  },
+});
+
+FactoryGuy.define('geoLocation', {
+  default: {
+    geoLocationPlace: 'Mexico',
   },
 });
 

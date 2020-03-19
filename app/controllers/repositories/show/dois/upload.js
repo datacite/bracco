@@ -30,6 +30,7 @@ export default Controller.extend({
       doi.set('contributors', null);
       doi.set('identifiers', null);
 
+      doi.set('geoLocations', null);
       let self = this;
       doi.save().then(function(doi) {
         self.transitionToRoute('dois.show', doi);
