@@ -16,6 +16,6 @@ module('Integration | Component | provider-list', function(hooks) {
       {{/provider-list}}
     `);
 
-    assert.dom('*').hasText('No providers found.');
+    assert.dom('*').hasText('No members found.');
   });
 });
