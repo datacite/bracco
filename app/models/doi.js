@@ -136,7 +136,6 @@ export default DS.Model.extend(Validations, {
   }),
 
   doi: DS.attr('string'),
-  identifiers: DS.attr(),
   confirmDoi: DS.attr('string', { defaultValue: null }),
   prefix: DS.attr('string'),
   suffix: DS.attr('string'),
@@ -149,6 +148,7 @@ export default DS.Model.extend(Validations, {
   publicationYear: DS.attr('number'),
   subjects: fragmentArray('subject', { defaultValue: [] }),
   contributors: fragmentArray('contributor', { defaultValue: [] }),
+  identifiers: fragmentArray('identifier', { defaultValue: [] }),
   dates: DS.attr(),
   language: DS.attr('string'),
   types: DS.attr(),

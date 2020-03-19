@@ -64,6 +64,13 @@ FactoryGuy.define('title', {
   },
 });
 
+FactoryGuy.define('identifier', {
+  default: {
+    identifier: 'https://handle.test.datacite.org/10.70048/rph240519',
+    identifierType: 'DOI',
+  },
+});
+
 FactoryGuy.define('description', {
   default: {
     description: 'Description of submitted chemical data for InChIKey YAPQBXQYLJRXSA-UHFFFAOYSA-N',
@@ -80,8 +87,8 @@ FactoryGuy.define('subject', {
   default: {
     subject: 'Clinical medicine',
     subjectScheme: 'OECD',
-    schemeURI: 'http://www.oecd.org/science/inno' ,
-    valueURI: '38235147.pdf',
+    schemeUri: 'http://www.oecd.org/science/inno' ,
+    valueUri: 'http://www.oecd.org/science/inno/38235147.pdf',
   },
 });
 

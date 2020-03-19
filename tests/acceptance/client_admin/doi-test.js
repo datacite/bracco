@@ -92,4 +92,16 @@ module('Acceptance | client_admin | doi', function(hooks) {
     assert.equal(currentURL(), 'repositories/datacite.test/dois/new');
     assert.dom('[doi-contributor]').includesText('DataCollector');
   });
+
+  test('visiting the Form and adding Alternate Identfier', async function(assert) {
+
+    await visit('repositories/datacite.test/dois/new');
+    await fillIn('[data-test-alternate-identifier]','https://doi.org/10.70048/rph240519');
+    await fillIn('[data-test-alternate-identifier-type]','DOI');
+
+    // // NOTE: fillIn matches with hasValue but not with includesText
+    assert.equal(currentURL(), 'repositories/datacite.test/dois/new');
+    assert.dom('[data-test-alternate-identifier]').hasValue('https://doi.org/10.70048/rph240519');
+    assert.dom('[data-test-alternate-identifier-type]').hasValue('DOI');
+  });
 });

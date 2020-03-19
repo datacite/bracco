@@ -43,7 +43,7 @@ const Validations = buildValidations({
 
 export default MF.Fragment.extend(Validations,{
   name: DS.attr('string'),
-  contributorType: DS.attr('string'),
+  contributorType: DS.attr('string', { defaultValue: 'Other' }),
   givenName: DS.attr('string', { defaultValue: null }),
   familyName: DS.attr('string', { defaultValue: null }),
   nameType: DS.attr('string', { defaultValue: 'Personal' }),
