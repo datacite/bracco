@@ -4,19 +4,12 @@ import { validator, buildValidations } from 'ember-cp-validations';
 import { computed } from '@ember/object';
 
 const Validations = buildValidations({
-  subject: validator('presence', true),
   subjectSchemeUri: [
     validator('url-format', {
       allowBlank: true,
       require_tld: false,
       message: 'Please enter a valid URL.',
     }),
-    // validator('presence', {
-    //   presence: true,
-    //   isWarning: computed('model.state', function() {
-    //     return this.model.get('state') === 'draft';
-    //   }),
-    // }),
   ],
 });
 
