@@ -32,7 +32,7 @@
       <div class="panel panel-transparent" data-test-prefix>
         <div class="panel-body">
           {{#if (can "update prefix" model)}}
-            <h3 class="work"><LinkTo @route="repositories.show.prefixes.show" @models={{array model.repository.id repositoryPrefix.prefix.id}}>{{repositoryPrefix.prefix.id}}</LinkTo></h3>
+            <h3 class="work"><LinkTo @id={{repositoryPrefix.prefix.id}} @route="repositories.show.prefixes.show" @models={{array model.repository.id repositoryPrefix.prefix.id}}>{{repositoryPrefix.prefix.id}}</LinkTo></h3>
           {{else}}
             <h3 class="member">{{repositoryPrefix.prefix.id}}</h3>
           {{/if}}

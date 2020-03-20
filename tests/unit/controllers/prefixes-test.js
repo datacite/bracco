@@ -4,7 +4,6 @@ import { setupTest } from 'ember-qunit';
 module('Unit | Controller | prefixes', function(hooks) {
   setupTest(hooks);
 
-  // Replace this with your real tests.
   test('it exists', function(assert) {
     let controller = this.owner.lookup('controller:prefixes');
     assert.ok(controller);
