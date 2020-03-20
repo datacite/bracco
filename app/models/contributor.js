@@ -5,26 +5,21 @@ import { computed } from '@ember/object';
 import { A } from '@ember/array';
 
 const Validations = buildValidations({
-  name: [
-    validator('presence', {
-      presence: true,
-    }),
-  ],
   givenName: [
     validator('presence', {
       presence: true,
-      disabled: computed('model.nameType', function() {
+      disabled: computed('model.nameType', 'model.name', function() {
         // only validate if nameType is "Personal"
-        return this.model.get('nameType') !== 'Personal';
+        return this.model.get('nameType') !== 'Personal' || this.model.get('name') == '';
       }),
     }),
   ],
   familyName: [
     validator('presence', {
       presence: true,
-      disabled: computed('model.nameType', function() {
+      disabled: computed('model.nameType', 'model.name', function() {
         // only validate if nameType is "Personal"
-        return this.model.get('nameType') !== 'Personal';
+        return this.model.get('nameType') !== 'Personal' || this.model.get('name') == '';
       }),
     }),
   ],
