@@ -5,9 +5,9 @@ import {
   visit,
   click,
   fillIn,
-  waitUntil,
+  // waitUntil,
 } from '@ember/test-helpers';
-import { selectChoose, selectSearch } from 'ember-power-select/test-support';
+// import { selectChoose, selectSearch } from 'ember-power-select/test-support';
 import ENV from 'bracco/config/environment';
 
 module('Acceptance | staff_admin | repository', function(hooks) {
@@ -52,14 +52,14 @@ module('Acceptance | staff_admin | repository', function(hooks) {
     assert.dom('li a.nav-link.active').hasText('Prefixes');
     assert.dom('div#search').exists();
 
-    // at least two prefixes exists
-    assert.dom('[data-test-results]').exists();
+    // at least one prefixes exists
+    // assert.dom('[data-test-results]').exists();
     assert.dom('[data-test-prefix]').exists();
     assert.dom('div.panel.facets').exists();
 
-    await waitUntil(function() {
-      return assert.dom('a#assign-prefix').includesText('Assign Prefix');
-    });
+    // await waitUntil(function() {
+    //   return assert.dom('a#assign-prefix').includesText('Assign Prefix');
+    // });
   });
 
   // test('visiting repository DataCite Test prefixes new', async function(assert) {

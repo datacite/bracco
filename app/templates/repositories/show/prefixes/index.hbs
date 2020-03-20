@@ -1,5 +1,21 @@
 <div class='col-md-3'>
-  <PrefixAvailable @model={{model}} @link="repositories.show.prefixes.new" />
+  {{#if (and (can "write prefix" model.prefixes) prefixesAvailable)}}
+    <div class="panel facets">
+      <div class="panel-body">
+        <div class="btn-toolbar">
+          <div class="btn-group btn-group-sm">
+            <LinkTo @route="repositories.show.prefixes.new" @model={{model.repository.id}} class="btn btn-warning" @id="assign-prefix">{{fa-icon "link"}}Assign Prefix</LinkTo>
+          </div>
+        </div>
+      </div>
+    </div>
+  {{else}}
+    <div class="panel panel-transparent">
+      <div class="panel-body">
+        <div class="edit"></div>
+      </div>
+    </div>
+  {{/if}}
 
   {{#if model.prefixes.meta.years}}
     <div class="panel facets add">

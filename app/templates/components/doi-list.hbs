@@ -11,9 +11,10 @@
               {{#if (can "upload doi" model)}}
                 <LinkTo @route="repositories.show.dois.upload" @model={{repository.id}} class="btn btn-warning" @id="upload-doi">{{fa-icon "upload"}} Create{{if media.isXl ' DOI'}} (File Upload)</LinkTo>
               {{/if}}
-              {{#if (and (can "move doi" repository) (gt model.length 0))}}
-                <LinkTo @route="repositories.show.transfer" @model={{repository.id}} class="btn btn-warning" @id="transfer-dois">{{fa-icon "arrow-circle-o-right"}}Transfer{{if media.isXl ' DOIs'}}</LinkTo>
-              {{/if}}
+            {{/if}}
+
+            {{#if (and (can "move doi" repository) (gt model.length 0))}}
+              <LinkTo @route="repositories.show.transfer" @model={{repository.id}} class="btn btn-warning" @id="transfer-dois">{{fa-icon "arrow-circle-o-right"}}Transfer{{if media.isXl ' DOIs'}}</LinkTo>
             {{/if}}
           </div>
         </div>
