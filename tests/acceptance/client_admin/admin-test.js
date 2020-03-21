@@ -7,8 +7,17 @@ import {
   fillIn,
 } from '@ember/test-helpers';
 import ENV from 'bracco/config/environment';
+import { authenticateSession } from 'ember-simple-auth/test-support';
+import { setupQunit as setupPolly } from '@pollyjs/core';
 
 module('Acceptance | client_admin | admin', function(hooks) {
+  setupPolly(hooks, {
+    matchRequestsBy: {
+      headers: {
+        exclude: [ 'authorization' ],
+      },
+    },
+  });
   setupApplicationTest(hooks);
 
   hooks.beforeEach(async function() {
@@ -16,6 +25,14 @@ module('Acceptance | client_admin | admin', function(hooks) {
     await fillIn('input#account-field', 'DATACITE.TEST');
     await fillIn('input#password-field', ENV.CLIENT_ADMIN_PASSWORD);
     await click('button[type=submit]');
+
+    await authenticateSession({
+      uid: 'datacite.test',
+      name: 'DataCite Test Repository',
+      role_id: 'client_admin',
+      provider_id: 'datacite',
+      client_id: 'datacite.test',
+    });
   });
 
   test('is logged in', async function(assert) {
