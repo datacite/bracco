@@ -21,6 +21,23 @@ module('Acceptance | client_admin | admin', function(hooks) {
   setupApplicationTest(hooks);
 
   hooks.beforeEach(async function() {
+    const { server } = this.polly;
+
+    server.any().on('beforePersist', (req, recording) => {
+      /* we only want to perform this task when recording */
+      if (req.action !== 'record') {
+        return;
+      }
+      /* hide password and token in oauth password grant requests */
+      if (recording.request.url == 'https://api.test.datacite.org/token') {
+        recording.request.postData.text = 'INFORMATION_HIDDEN';
+        recording.response.content.text = 'INFORMATION_HIDDEN';
+      }
+
+      /* filter out authorization tokens */
+      recording.request.headers = recording.request.headers.filter(({ name }) => name !== 'authorization');
+    });
+
     await visit('/sign-in');
     await fillIn('input#account-field', 'DATACITE.TEST');
     await fillIn('input#password-field', ENV.CLIENT_ADMIN_PASSWORD);
