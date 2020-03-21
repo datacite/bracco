@@ -13,5 +13,11 @@ export default Route.extend({
       'provider-prefix': this.store.createRecord('provider-prefix', { provider }),
     });
   },
+
+  setupController(controller, model) {
+    this._super(controller, model);
+
+    this.controllerFor('providers.show.prefixes.new').send('searchPrefix', null);
+  },
 });
 

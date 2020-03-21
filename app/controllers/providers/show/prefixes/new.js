@@ -3,13 +3,21 @@ import { inject as service } from '@ember/service';
 
 export default Controller.extend({
   store: service(),
+  prefixes: [],
+  disabled: true,
+
+  searchPrefix(query) {
+    this.set('prefixes', this.store.query('prefix', { query, state: 'unassigned', sort: 'name', 'page[size]': 10 }));
+  },
 
   actions: {
     searchPrefix(query) {
-      this.set('prefixes', this.store.query('prefix', { query, state: 'unassigned', sort: 'name', 'page[size]': 25 }));
+      this.searchPrefix(query);
     },
     selectPrefix(prefix) {
       this.model['provider-prefix'].set('prefix', prefix);
+      this.set('disabled', false);
+      this.searchPrefix(null);
     },
     submit() {
       let self = this;
@@ -20,6 +28,8 @@ export default Controller.extend({
       });
     },
     cancel() {
+      this.model['provider-prefix'].set('prefix', null);
+      this.set('disabled', true);
       this.transitionToRoute('providers.show.prefixes', this.get('model.provider'));
     },
   },
