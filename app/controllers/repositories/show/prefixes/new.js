@@ -23,7 +23,8 @@ export default Controller.extend({
       if (this.model['repository-prefix'].get('provider-prefix')) {
         let self = this;
         this.model['repository-prefix'].save().then(function(repositoryPrefix) {
-          self.transitionToRoute('repositories.show.prefixes', repositoryPrefix.get('repository').get('id'));
+          self.set('disabled', true);
+          self.transitionToRoute('repositories.show.prefixes', repositoryPrefix.get('repository.id'));
         }).catch(function(reason) {
           console.debug(reason);
         });

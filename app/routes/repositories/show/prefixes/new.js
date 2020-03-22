@@ -24,4 +24,13 @@ export default Route.extend({
 
     this.controllerFor('repositories.show.prefixes.new').send('searchPrefix', null);
   },
+
+  actions: {
+    queryParamsDidChange() {
+      this.refresh();
+    },
+    refreshCurrentRoute() {
+      this.refresh();
+    },
+  },
 });
