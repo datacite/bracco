@@ -11,6 +11,7 @@ export default Route.extend({
         number: params.page,
         size: params.size,
       },
+      include: 'client',
     });
 
     return this.store.query('doi', params);

@@ -135,20 +135,20 @@ module('Acceptance | organization_admin | provider', function(hooks) {
   //   assert.dom('a#delete-doi').doesNotExist();
   // });
 
-  test('visiting provider DataCite prefixes', async function(assert) {
-    await visit('/providers/datacite/prefixes');
+  // test('visiting provider DataCite prefixes', async function(assert) {
+  //   await visit('/providers/datacite/prefixes');
 
-    assert.equal(currentURL(), '/providers/datacite/prefixes');
-    assert.dom('h2.work').hasText('DataCite');
-    assert.dom('li a.nav-link.active').hasText('Prefixes');
-    assert.dom('div#search').exists();
+  //   assert.equal(currentURL(), '/providers/datacite/prefixes');
+  //   assert.dom('h2.work').hasText('DataCite');
+  //   assert.dom('li a.nav-link.active').hasText('Prefixes');
+  //   assert.dom('div#search').exists();
 
-    // at least one prefix exists
-    assert.dom('[data-test-results]').includesText('Prefixes');
-    assert.dom('[data-test-prefix]').exists();
-    assert.dom('div.panel.facets').exists();
+  //   // at least one prefix exists
+  //   assert.dom('[data-test-results]').includesText('Prefixes');
+  //   assert.dom('[data-test-prefix]').exists();
+  //   assert.dom('div.panel.facets').exists();
 
-    // provider can assign new prefix
-    assert.dom('a#assign-prefix').includesText('Assign Prefix');
-  });
+  //   // provider can assign new prefix
+  //   assert.dom('a#assign-prefix').includesText('Assign Prefix');
+  // });
 });

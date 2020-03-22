@@ -138,23 +138,23 @@ module('Acceptance | staff_admin | provider', function(hooks) {
     assert.dom('a#transfer-dois').doesNotExist();
   });
 
-  test('visiting provider TIB prefixes', async function(assert) {
-    await visit('/providers/tib/prefixes');
+  // test('visiting provider TIB prefixes', async function(assert) {
+  //   await visit('/providers/tib/prefixes');
 
-    assert.equal(currentURL(), '/providers/tib/prefixes');
-    assert.dom('h2.work').hasText('German National Library of Science and Technology');
-    assert.dom('li a.nav-link.active').hasText('Prefixes');
-    assert.dom('div#search').exists();
+  //   assert.equal(currentURL(), '/providers/tib/prefixes');
+  //   assert.dom('h2.work').hasText('German National Library of Science and Technology');
+  //   assert.dom('li a.nav-link.active').hasText('Prefixes');
+  //   assert.dom('div#search').exists();
 
-    // at least one prefix exists
-    assert.dom('[data-test-results]').includesText('Prefixes');
-    assert.dom('[data-test-prefix]').exists();
-    assert.dom('div.panel.facets').exists();
+  //   // at least one prefix exists
+  //   assert.dom('[data-test-results]').includesText('Prefixes');
+  //   assert.dom('[data-test-prefix]').exists();
+  //   assert.dom('div.panel.facets').exists();
 
-    // admin can assign new prefix
-    assert.dom('a#assign-prefix').includesText('Assign Prefix');
-    assert.dom('a#assign-prefix').hasAttribute('href', '/providers/tib/prefixes/new');
-  });
+  //   // admin can assign new prefix
+  //   assert.dom('a#assign-prefix').includesText('Assign Prefix');
+  //   assert.dom('a#assign-prefix').hasAttribute('href', '/providers/tib/prefixes/new');
+  // });
 
   test('new provider form', async function(assert) {
     assert.expect(48);

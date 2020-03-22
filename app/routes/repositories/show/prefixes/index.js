@@ -7,16 +7,18 @@ export default Route.extend({
   can: service(),
 
   model(params) {
+    let repositoryId = this.modelFor('repositories/show').get('id');
+
     params = assign(params, {
       page: {
         number: params.page,
         size: params.size,
       },
-      'repository-id': this.modelFor('repositories/show').get('id'),
+      'repository-id': repositoryId,
     });
 
     return hash({
-      repository: this.modelFor('repositories/show'),
+      repository: this.store.findRecord('repository', repositoryId),
       'repository-prefixes': this.store.query('repository-prefix', params),
     });
   },
