@@ -1,3 +1,4 @@
+{{#if model}}
   <div class="row">
     <div class='col-md-3'>
       {{#if (can "update prefix" model.prefix)}}
@@ -28,3 +29,8 @@
       </div>
     </div>
   </div>
+{{else}}
+  <BsAlert @dismissible={{false}} @type="warning">
+    The prefix was not found.
+  </BsAlert>
+{{/if}}

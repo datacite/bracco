@@ -1,5 +1,21 @@
 <div class='col-md-3'>
-  <PrefixAvailable @model={{model}} @link="repositories.show.prefixes.new" />
+  {{#if (and (can "write prefix" model.prefixes) true)}}
+    <div class="panel facets">
+      <div class="panel-body">
+        <div class="btn-toolbar">
+          <div class="btn-group btn-group-sm">
+            <LinkTo @route="repositories.show.prefixes.new" @model={{model.repository.id}} class="btn btn-warning" @id="assign-prefix">{{fa-icon "link"}}Assign Prefix</LinkTo>
+          </div>
+        </div>
+      </div>
+    </div>
+  {{else}}
+    <div class="panel panel-transparent">
+      <div class="panel-body">
+        <div class="edit"></div>
+      </div>
+    </div>
+  {{/if}}
 
   {{#if model.prefixes.meta.years}}
     <div class="panel facets add">
@@ -32,7 +48,7 @@
       <div class="panel panel-transparent" data-test-prefix>
         <div class="panel-body">
           {{#if (can "update prefix" model)}}
-            <h3 class="work"><LinkTo @route="repositories.show.prefixes.show" @models={{array model.repository.id repositoryPrefix.prefix.id}}>{{repositoryPrefix.prefix.id}}</LinkTo></h3>
+            <h3 class="work"><LinkTo @id={{repositoryPrefix.prefix.id}} @route="repositories.show.prefixes.show" @models={{array model.repository.id repositoryPrefix.prefix.id}}>{{repositoryPrefix.prefix.id}}</LinkTo></h3>
           {{else}}
             <h3 class="member">{{repositoryPrefix.prefix.id}}</h3>
           {{/if}}
