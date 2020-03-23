@@ -12,6 +12,7 @@ export default Route.extend({
         number: params.page,
         size: params.size,
       },
+      include: 'provider',
     });
 
     return hash({

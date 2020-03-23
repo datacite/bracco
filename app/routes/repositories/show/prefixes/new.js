@@ -18,4 +18,19 @@ export default Route.extend({
   //     return this.transitionTo('index');
   //   }
   // },
+
+  setupController(controller, model) {
+    this._super(controller, model);
+
+    this.controllerFor('repositories.show.prefixes.new').send('searchPrefix', null);
+  },
+
+  actions: {
+    queryParamsDidChange() {
+      this.refresh();
+    },
+    refreshCurrentRoute() {
+      this.refresh();
+    },
+  },
 });

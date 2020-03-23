@@ -2,11 +2,36 @@ import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
 import { currentURL, visit } from '@ember/test-helpers';
 import { authenticateSession } from 'ember-simple-auth/test-support';
+import { setupQunit as setupPolly } from '@pollyjs/core';
 
 module('Acceptance | user | doi', function(hooks) {
+  setupPolly(hooks, {
+    matchRequestsBy: {
+      headers: {
+        exclude: [ 'authorization' ],
+      },
+    },
+  });
   setupApplicationTest(hooks);
 
   hooks.beforeEach(async function() {
+    const { server } = this.polly;
+
+    server.any().on('beforePersist', (req, recording) => {
+      /* we only want to perform this task when recording */
+      if (req.action !== 'record') {
+        return;
+      }
+      /* hide password and token in oauth password grant requests */
+      if (recording.request.url == 'https://api.test.datacite.org/token') {
+        recording.request.postData.text = 'INFORMATION_HIDDEN';
+        recording.response.content.text = 'INFORMATION_HIDDEN';
+      }
+
+      /* filter out authorization tokens */
+      recording.request.headers = recording.request.headers.filter(({ name }) => name !== 'authorization');
+    });
+
     await authenticateSession({
       uid: '0000-0001-6528-2027',
       name: 'Martin Fenner',
@@ -27,9 +52,9 @@ module('Acceptance | user | doi', function(hooks) {
       name: 'Martin Fenner',
       role_id: 'user',
     });
-    await visit('/dois/10.80225%2Fda52-79195');
+    await visit('/dois/10.80225%2Fda52-7919');
 
-    assert.equal(currentURL(), '/users/0000-0001-6528-2027');
-    assert.dom('h2.work').hasText('Martin Fenner');
+    assert.equal(currentURL(), '/dois/10.80225%2Fda52-7919');
+    assert.dom('h2.work').hasText('10.80225/da52-7919');
   });
 });

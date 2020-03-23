@@ -27,5 +27,8 @@ export default Route.extend({
     queryParamsDidChange() {
       this.refresh();
     },
+    refreshCurrentRoute() {
+      this.refresh();
+    },
   },
 });

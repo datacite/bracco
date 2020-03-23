@@ -6,7 +6,7 @@ export default Route.extend({
 
   model() {
     let self = this;
-    return this.store.findRecord('doi', this.modelFor('dois/show').get('id'), { include: 'provider,client,resource-type' }).then(function(doi) {
+    return this.store.findRecord('doi', this.modelFor('dois/show').get('id'), { include: 'client' }).then(function(doi) {
       return doi;
     }).catch(function(reason) {
       console.debug(reason);

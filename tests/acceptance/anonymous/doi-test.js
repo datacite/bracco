@@ -1,8 +1,10 @@
 import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
 import { currentURL, visit } from '@ember/test-helpers';
+import { setupQunit as setupPolly } from '@pollyjs/core';
 
 module('Acceptance | anonymous | doi', function(hooks) {
+  setupPolly(hooks);
   setupApplicationTest(hooks);
 
   test('visiting dois', async function(assert) {

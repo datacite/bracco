@@ -5,37 +5,71 @@ import {
   visit,
   click,
   fillIn,
+  // waitUntil,
 } from '@ember/test-helpers';
+// import { selectChoose, selectSearch } from 'ember-power-select/test-support';
 import ENV from 'bracco/config/environment';
+import { authenticateSession } from 'ember-simple-auth/test-support';
+import { setupQunit as setupPolly } from '@pollyjs/core';
 
 module('Acceptance | staff_admin | repository', function(hooks) {
+  setupPolly(hooks, {
+    matchRequestsBy: {
+      headers: {
+        exclude: [ 'authorization' ],
+      },
+    },
+  });
   setupApplicationTest(hooks);
 
   hooks.beforeEach(async function() {
+    const { server } = this.polly;
+
+    server.any().on('beforePersist', (req, recording) => {
+      /* we only want to perform this task when recording */
+      if (req.action !== 'record') {
+        return;
+      }
+      /* hide password and token in oauth password grant requests */
+      if (recording.request.url == 'https://api.test.datacite.org/token') {
+        recording.request.postData.text = 'INFORMATION_HIDDEN';
+        recording.response.content.text = 'INFORMATION_HIDDEN';
+      }
+
+      /* filter out authorization tokens */
+      recording.request.headers = recording.request.headers.filter(({ name }) => name !== 'authorization');
+    });
+
     await visit('/sign-in');
     await fillIn('input#account-field', 'ADMIN');
     await fillIn('input#password-field', ENV.STAFF_ADMIN_PASSWORD);
     await click('button[type=submit]');
+
+    await authenticateSession({
+      uid: 'admin',
+      name: 'Admin',
+      role_id: 'staff_admin',
+    });
   });
 
-  test('visiting repository AWI', async function(assert) {
-    await visit('/repositories/tib.awi');
+  test('visiting repository DataCite Test', async function(assert) {
+    await visit('/repositories/datacite.test');
 
-    assert.equal(currentURL(), '/repositories/tib.awi');
-    assert.dom('h2.work').hasText('Alfred Wegener Institute');
+    assert.equal(currentURL(), '/repositories/datacite.test');
+    assert.dom('h2.work').hasText('DataCite Test Repository');
     assert.dom('li a.nav-link.active').hasText('Settings');
 
     assert.dom('a#edit-repository').includesText('Update Repository');
-    assert.dom('a#edit-repository').hasAttribute('href', '/repositories/tib.awi/edit');
+    assert.dom('a#edit-repository').hasAttribute('href', '/repositories/datacite.test/edit');
     assert.dom('a#delete-repository').includesText('Delete');
-    assert.dom('a#delete-repository').hasAttribute('href', '/repositories/tib.awi/delete');
+    assert.dom('a#delete-repository').hasAttribute('href', '/repositories/datacite.test/delete');
   });
 
-  test('visiting repository AWI info', async function(assert) {
-    await visit('/repositories/tib.awi/info');
+  test('visiting repository DataCite Test info', async function(assert) {
+    await visit('/repositories/datacite.test/info');
 
-    assert.equal(currentURL(), '/repositories/tib.awi/info');
-    assert.dom('h2.work').hasText('Alfred Wegener Institute');
+    assert.equal(currentURL(), '/repositories/datacite.test/info');
+    assert.dom('h2.work').hasText('DataCite Test Repository');
     assert.dom('li a.nav-link.active').hasText('Info');
 
     // repository charts are displayed
@@ -50,16 +84,48 @@ module('Acceptance | staff_admin | repository', function(hooks) {
     assert.dom('li a.nav-link.active').hasText('Prefixes');
     assert.dom('div#search').exists();
 
-    // search result title bar not shown when only one prefix
-    assert.dom('[data-test-results]').doesNotExist();
-
-    // at least one prefix exists
+    // at least one prefixes exists
+    // assert.dom('[data-test-results]').exists();
     assert.dom('[data-test-prefix]').exists();
     assert.dom('div.panel.facets').exists();
 
-    // TODO admin can assign new prefix
-    // assert.dom('a#assign-prefix').includesText('Assign Prefix');
+    // await waitUntil(function() {
+    //   return assert.dom('a#assign-prefix').includesText('Assign Prefix');
+    // });
   });
+
+  // test('visiting repository DataCite Test prefixes new', async function(assert) {
+  //   await visit('/repositories/datacite.test/prefixes/new');
+
+  //   assert.equal(currentURL(), '/repositories/datacite.test/prefixes/new');
+  //   assert.dom('h2.work').hasText('DataCite Test Repository');
+  //   assert.dom('li a.nav-link.active').hasText('Prefixes');
+  //   assert.dom('h3.edit').hasText('Assign Prefix');
+
+  //   // assign prefix 10.80152
+  //   await selectSearch('#provider-prefix-add', '10.8');
+  //   await selectChoose('#provider-prefix-add', '10.80152');
+  //   await click('button[type=submit]');
+
+  //   await waitUntil(function() {
+  //     return assert.dom('a#assign-prefix').includesText('Assign Prefix');
+  //   });
+
+  //   assert.equal(currentURL(), '/repositories/datacite.test/prefixes');
+  //   // assert.dom('a#10.80152').hasText('10.80152');
+
+  //   // delete prefix 10.80152 that was just assigned
+  //   await visit('/repositories/datacite.test/prefixes/10.80152/delete');
+
+  //   assert.equal(currentURL(), '/repositories/datacite.test/prefixes/10.80152/delete');
+  //   assert.dom('h2.work').hasText('DataCite Test Repository');
+  //   assert.dom('li a.nav-link.active').hasText('Prefixes');
+  //   assert.dom('div.alert.alert-danger').hasText('Are you sure you want to remove prefix 10.80152 from this repository?');
+  //   await click('button#prefix-delete');
+
+  //   assert.equal(currentURL(), '/repositories/datacite.test/prefixes');
+  //   assert.dom('*').doesNotIncludeText('10.80152');
+  // });
 
   test('visiting repository DataCite Test dois', async function(assert) {
     await visit('/repositories/datacite.test/dois');
@@ -86,10 +152,10 @@ module('Acceptance | staff_admin | repository', function(hooks) {
   test('new repository form', async function(assert) {
     assert.expect(23);
 
-    await visit('/providers/tib/repositories/new');
+    await visit('/providers/datacite/repositories/new');
 
-    assert.equal(currentURL(), '/providers/tib/repositories/new');
-    assert.dom('h2.work').hasText('German National Library of Science and Technology');
+    assert.equal(currentURL(), '/providers/datacite/repositories/new');
+    assert.dom('h2.work').hasText('DataCite');
     assert.dom('div.tab-content').exists();
 
     assert.dom('input#repository-id-field').exists();
@@ -120,10 +186,10 @@ module('Acceptance | staff_admin | repository', function(hooks) {
   test('editing repository AWI form', async function(assert) {
     assert.expect(23);
 
-    await visit('/repositories/tib.awi/edit');
+    await visit('/repositories/datacite.test/edit');
 
-    assert.equal(currentURL(), '/repositories/tib.awi/edit');
-    assert.dom('h2.work').hasText('Alfred Wegener Institute');
+    assert.equal(currentURL(), '/repositories/datacite.test/edit');
+    assert.dom('h2.work').hasText('DataCite Test Repository');
     assert.dom('div.tab-content').exists();
 
     assert.dom('input#repository-id-field').exists();
@@ -151,11 +217,11 @@ module('Acceptance | staff_admin | repository', function(hooks) {
     assert.dom('button#update-repository').includesText('Update Repository');
   });
 
-  test('editing repository AWI password form', async function(assert) {
-    await visit('/repositories/tib.awi/change');
+  test('editing repository DataCite Test password form', async function(assert) {
+    await visit('/repositories/datacite.test/change');
 
-    assert.equal(currentURL(), '/repositories/tib.awi/change');
-    assert.dom('h2.work').hasText('Alfred Wegener Institute');
+    assert.equal(currentURL(), '/repositories/datacite.test/change');
+    assert.dom('h2.work').hasText('DataCite Test Repository');
     assert.dom('div.tab-content').exists();
 
     assert.dom('input#password-input-field').exists();
@@ -164,14 +230,14 @@ module('Acceptance | staff_admin | repository', function(hooks) {
     assert.dom('button[type=submit]').includesText('Set Password');
   });
 
-  test('editing repository AWI delete form', async function(assert) {
-    await visit('/repositories/tib.awi/delete');
+  test('editing repository DataCite Test delete form', async function(assert) {
+    await visit('/repositories/datacite.test/delete');
 
-    assert.equal(currentURL(), '/repositories/tib.awi/delete');
-    assert.dom('h2.work').hasText('Alfred Wegener Institute');
+    assert.equal(currentURL(), '/repositories/datacite.test/delete');
+    assert.dom('h2.work').hasText('DataCite Test Repository');
     assert.dom('div.tab-content').exists();
 
-    assert.dom('div.alert-danger').hasText('You need to transfer all DOIs to another repository before you can delete the TIB.AWI repository.');
+    assert.dom('div.alert-danger').hasText('You need to transfer all DOIs to another repository before you can delete the DATACITE.TEST repository.');
 
     assert.dom('input#confirm-symbol-field').doesNotExist();
     assert.dom('button#delete').doesNotExist();

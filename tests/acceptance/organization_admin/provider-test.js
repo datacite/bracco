@@ -7,15 +7,48 @@ import {
   fillIn,
 } from '@ember/test-helpers';
 import ENV from 'bracco/config/environment';
+import { authenticateSession } from 'ember-simple-auth/test-support';
+import { setupQunit as setupPolly } from '@pollyjs/core';
 
 module('Acceptance | organization_admin | provider', function(hooks) {
+  setupPolly(hooks, {
+    matchRequestsBy: {
+      headers: {
+        exclude: [ 'authorization' ],
+      },
+    },
+  });
   setupApplicationTest(hooks);
 
   hooks.beforeEach(async function() {
+    const { server } = this.polly;
+
+    server.any().on('beforePersist', (req, recording) => {
+      /* we only want to perform this task when recording */
+      if (req.action !== 'record') {
+        return;
+      }
+      /* hide password and token in oauth password grant requests */
+      if (recording.request.url == 'https://api.test.datacite.org/token') {
+        recording.request.postData.text = 'INFORMATION_HIDDEN';
+        recording.response.content.text = 'INFORMATION_HIDDEN';
+      }
+
+      /* filter out authorization tokens */
+      recording.request.headers = recording.request.headers.filter(({ name }) => name !== 'authorization');
+    });
+
     await visit('/sign-in');
     await fillIn('input#account-field', 'DATACITE');
     await fillIn('input#password-field', ENV.ORGANIZATION_ADMIN_PASSWORD);
     await click('button[type=submit]');
+
+    await authenticateSession({
+      uid: 'datacite',
+      name: 'DataCite',
+      role_id: 'provider_admin',
+      provider_id: 'datacite',
+    });
   });
 
   test('visiting provider DataCite', async function(assert) {
@@ -102,20 +135,20 @@ module('Acceptance | organization_admin | provider', function(hooks) {
   //   assert.dom('a#delete-doi').doesNotExist();
   // });
 
-  test('visiting provider DataCite prefixes', async function(assert) {
-    await visit('/providers/datacite/prefixes');
+  // test('visiting provider DataCite prefixes', async function(assert) {
+  //   await visit('/providers/datacite/prefixes');
 
-    assert.equal(currentURL(), '/providers/datacite/prefixes');
-    assert.dom('h2.work').hasText('DataCite');
-    assert.dom('li a.nav-link.active').hasText('Prefixes');
-    assert.dom('div#search').exists();
+  //   assert.equal(currentURL(), '/providers/datacite/prefixes');
+  //   assert.dom('h2.work').hasText('DataCite');
+  //   assert.dom('li a.nav-link.active').hasText('Prefixes');
+  //   assert.dom('div#search').exists();
 
-    // at least one prefix exists
-    assert.dom('[data-test-results]').includesText('Prefixes');
-    assert.dom('[data-test-prefix]').exists();
-    assert.dom('div.panel.facets').exists();
+  //   // at least one prefix exists
+  //   assert.dom('[data-test-results]').includesText('Prefixes');
+  //   assert.dom('[data-test-prefix]').exists();
+  //   assert.dom('div.panel.facets').exists();
 
-    // provider can assign new prefix
-    assert.dom('a#assign-prefix').includesText('Assign Prefix');
-  });
+  //   // provider can assign new prefix
+  //   assert.dom('a#assign-prefix').includesText('Assign Prefix');
+  // });
 });
