@@ -11,6 +11,7 @@ export default Route.extend({
         number: params.page,
         size: params.size,
       },
+      include: 'providers,clients',
     });
 
     return this.store.query('prefix', params);

@@ -1,5 +1,5 @@
 <div class='col-md-3'>
-  {{#if (and (can "write prefix" model.prefixes) true)}}
+  {{#if (and (can "write prefix" model.repository-prefixes) true)}}
     <div class="panel facets">
       <div class="panel-body">
         <div class="btn-toolbar">
@@ -17,14 +17,14 @@
     </div>
   {{/if}}
 
-  {{#if model.prefixes.meta.years}}
+  {{#if model.repository-prefixes.meta.years}}
     <div class="panel facets add">
       <div class="panel-body">
         <h4>Year created</h4>
         <ul>
-          {{#each model.prefixes.meta.years as |year|}}
+          {{#each model.repository-prefixes.meta.years as |year|}}
             <li>
-              {{#if model.prefixes.query.year}}
+              {{#if model.repository-prefixes.query.year}}
                 <LinkTo @route="repositories.show.prefixes" @query={{hash year=null}}>{{fa-icon "check-square-o"}}</LinkTo>
               {{else}}
                 <LinkTo @route="repositories.show.prefixes" @query={{hash year=year.id}}>{{fa-icon "square-o"}}</LinkTo>
@@ -41,10 +41,10 @@
 </div>
 
 <div class='col-md-9 panel-list' id="content">
-  <ModelSearch @model={{model.prefixes}} @name="Prefix" @link="repositories.show.prefixes" />
+  <ModelSearch @model={{model.repository-prefixes}} @name="Prefix" @link="repositories.show.prefixes" />
 
-  {{#if model.prefixes}}
-    {{#each model.prefixes as |repositoryPrefix|}}
+  {{#if model.repository-prefixes}}
+    {{#each model.repository-prefixes as |repositoryPrefix|}}
       <div class="panel panel-transparent" data-test-prefix>
         <div class="panel-body">
           {{#if (can "update prefix" model)}}
@@ -64,7 +64,7 @@
       </div>
     {{/each}}
     <div class="text-center">
-      {{#if (gt model.prefixes.meta.totalPages 1)}}
+      {{#if (gt model.repository-prefixes.meta.totalPages 1)}}
         <PageNumbers @model={{model.prefixes}} @link="repositories.show.prefixes" />
       {{/if}}
     </div>

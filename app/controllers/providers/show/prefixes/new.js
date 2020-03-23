@@ -22,6 +22,7 @@ export default Controller.extend({
     submit() {
       let self = this;
       this.model['provider-prefix'].save().then(function(providerPrefix) {
+        self.set('disabled', true);
         self.transitionToRoute('providers.show.prefixes', providerPrefix.get('provider'));
       }).catch(function(reason) {
         console.debug(reason);
