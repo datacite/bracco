@@ -1,0 +1,100 @@
+{{#if (gt index 0)}}
+<div class="input-group">
+  <input type="text"
+    class="form-control related-identifier-field no-error {{if (not fragment.relatedIdentifier) 'no-success'}}"
+    value={{fragment.relatedIdentifier}} oninput={{action "updateRelatedIdentifier" value="target.value"}}
+    data-test-related-identifier />
+  <span class="input-group-btn">
+    <BsButton @outline={{true}} @onClick={{action "deleteRelatedIdentifier" index}}>{{fa-icon "trash"}}</BsButton>
+  </span>
+</div>
+{{else}}
+<input type="text" class="form-control related-identifier-field" value={{fragment.relatedIdentifier}}
+  oninput={{action "updateRelatedIdentifier" value="target.value"}} data-test-related-identifier />
+
+{{/if}}
+
+<div
+  class="help-block help-block-fragment related-identifier-field no-error {{if (not fragment.relatedIdentifier) 'no-success'}}">
+  Identifiers of related resources. These must be globally unique identifiers, such as: ARK, arXiv, bibcode, DOI, EAN13,
+  EISSN, Handle, IGSN, ISBN, ISSN, ISTC, LISSN, LSID, PMID, PURL, UPC, URL, URN, w3id.
+</div>
+
+<div class="power-select-label">
+  <label for="relatedIdentifierType" class="subtitle">Related Identifier Type</label> 
+</div> 
+<div class="power-select-fragment" disabled={{this.controlledIdentifierType}} doi-related-identifier-type>
+    {{#form.element
+      controlType="power-select"
+      value=fragment.relatedIdentifierType
+      helpText="The type of the Related Identifier."
+      options=relatedIdentifierTypeList
+      disabled=controlledIdentifierType
+      destination=fragment.relatedIdentifierType as |el|
+    }}
+    {{el.control
+      onChange=(action "selectRelatedIdentifierType")
+      placeholder="Select related Identifier Type"
+    }}
+    {{/form.element}}
+
+</div>
+
+<div class="power-select-label">
+  <label for="relationType" class="subtitle">Relation Type</label> 
+</div> 
+<div class="power-select-fragment" doi-relation-type>
+    {{#form.element
+      controlType="power-select"
+      value=fragment.relationType
+      helpText="The type of the Relation."
+      options=relationTypeList
+      disabled=disabled
+      destination=fragment.relationType as |el|
+    }}
+    {{el.control
+      onChange=(action "selectRelationType")
+      placeholder="Select Relation Type"
+    }}
+    {{/form.element}}
+
+</div>
+
+{{#if this.isMetadataRelationType}}
+  <div class="power-select-label">
+    <label for="relatedMetadataScheme" class="subtitle">Related Metadata Scheme</label> 
+  </div> 
+  <input type="text" class="form-control related-metadata-scheme-field" value={{fragment.relatedMetadataScheme}} 
+    oninput={{action "updateRelatedMetadataScheme" value="target.value"}} data-test-related-metadata-scheme />
+
+  <div
+    class="help-block help-block-fragment related-metadata-scheme-field}}">
+    The name of the scheme.
+  </div>
+
+  <div class="power-select-label">
+    <label for="relatedSchemeURI" class="subtitle">Related Metadata Scheme URI</label> 
+  </div> 
+  <input type="text" class="form-control related-scheme-uri-field" value={{fragment.schemeURI}} 
+    oninput={{action "updateSchemeURI" value="target.value"}} data-test-related-scheme-uri />
+
+  <div
+    class="help-block help-block-fragment related-scheme-uri-field}}">
+    The URI of the relatedMetadataScheme.
+  </div>
+
+  <div class="power-select-label">
+    <label for="relatedSchemeType" class="subtitle">Related Metadata Scheme Type</label> 
+  </div> 
+
+  <input type="text" class="form-control related-scheme-type-field" value={{fragment.schemeType}} 
+    oninput={{action "updateSchemeType" value="target.value"}} data-test-related-scheme-type />
+
+  <div
+    class="help-block help-block-fragment related-scheme-type-field}}">
+    The type of the relatedMetadataScheme, linked with the schemeURI.
+  </div>
+
+{{/if}}
+
+<hr />
