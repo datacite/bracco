@@ -38,6 +38,26 @@ module('Acceptance | client_admin | doi', function(hooks) {
     assert.dom('h2.work').hasText('DataCite Test Repository');
   });
 
+  test('visiting info', async function(assert) {
+    await visit('/repositories/datacite.test/info');
+
+    assert.equal(currentURL(), '/repositories/datacite.test/info');
+    assert.dom('h2.work').hasText('DataCite Test Repository');
+  });
+
+  test('visiting prefixes', async function(assert) {
+    await visit('/repositories/datacite.test/prefixes');
+
+    assert.equal(currentURL(), '/repositories/datacite.test/prefixes');
+    assert.dom('h2.work').hasText('DataCite Test Repository');
+  });
+
+  test('visiting dois', async function(assert) {
+    await visit('/repositories/datacite.test/dois');
+
+    assert.equal(currentURL(), '/repositories/datacite.test/dois');
+    assert.dom('h2.work').hasText('DataCite Test Repository');
+  });
   // test('visiting specific doi', async function(assert) {
   //   await visit('/dois/10.70048%2Fe605-dg05');
 
