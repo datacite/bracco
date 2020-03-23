@@ -158,4 +158,18 @@ module('Acceptance | client_admin | doi', function(hooks) {
     assert.dom('[data-test-alternate-identifier]').hasValue('https://doi.org/10.70048/rph240519');
     assert.dom('[data-test-alternate-identifier-type]').hasValue('DOI');
   });
+
+  test('create draft doi', async function(assert) {
+    await visit('repositories/datacite.test/dois/new');
+    let suffix = '1234-5678';
+    await fillIn('input#suffix-field', suffix);
+    await click('button#doi-create');
+
+    assert.equal(currentURL(), '/dois/10.80225%2F' + suffix);
+
+  //  await visit('repositories/datacite.test/dois/10.80225%2F' + suffix + '/delete');
+  //  await fillIn('input#confirmDoi', '10.80225%2F' + suffix);
+  //  await click('button#destroy');
+  //  assert.equal(currentURL(), '/repositories/datacite.test/dois');
+  });
 });
