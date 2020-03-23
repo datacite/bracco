@@ -37,6 +37,11 @@ export function doiFormErrors([ model ]) {
         errorAttributes = errorAttributes.concat(subject.validations.errors.mapBy('attribute'));
       });
     }
+    if (model.relatedIdentifiers) {
+      model.relatedIdentifiers.forEach((relatedIdentifier) => {
+        errorAttributes = errorAttributes.concat(relatedIdentifier.validations.errors.mapBy('attribute'));
+      });
+    }
   }
 
   return errorAttributes.map(function(attribute) {

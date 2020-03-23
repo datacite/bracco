@@ -152,7 +152,7 @@ export default DS.Model.extend(Validations, {
   dates: DS.attr(),
   language: DS.attr('string'),
   types: DS.attr(),
-  relatedIdentifiers: DS.attr(),
+  relatedIdentifiers: fragmentArray('relatedIdentifier', { defaultValue: [] }),
   sizes: DS.attr(),
   formats: DS.attr(),
   version: DS.attr('string'),
