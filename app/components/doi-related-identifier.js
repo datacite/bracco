@@ -85,32 +85,25 @@ export default Component.extend({
     }
   },
   updateRelatedIdentifier(value) {
-    // const ark = /^(ark:/)?(?[a-zA-Z0-9]\d+)/(?[a-zA-Z0-9]\w+)(/(?[a-zA-Z0-9]\w+))?$/;
-    // const re = /^(http|https):\/\/orcid\.org\/\d{4}-\d{4}-\d{4}-\d{3}[0-9X]+$/;
-    // const issn = /^(ISSN) [\S]{4}\-[\S]{4}/;
-    // const eissn = /^(eISSN) [\S]{4}\-[\S]{4}/;
-    // const istc = /^(ISTC) [A-F0-9]{3}-[\S]{4}\-[A-F0-9]{8}\-[\S]{1}/; //validate
-    // const igsn = /^(IGSN:)[A-Z]{3}[0-9]{6}/;
-    // const legalId =  /[A-Za-z0-9][A-Za-z0-9()+,-.=@;$_!*\'\"%]*/;
+    const ark = /^ark:\/[0-9]{5}\/\S+$/;
     const lsid = /^[uU][rR][nN]:[lL][sS][iI][dD]:(A-Za-z0-9][A-Za-z0-9()+,-.=@;$_!*'"%]):(A-Za-z0-9][A-Za-z0-9()+,-.=@;$_!*'"%]):(A-Za-z0-9][A-Za-z0-9()+,-.=@;$_!*'"%])[:]?(A-Za-z0-9][A-Za-z0-9()+,-.=@;$_!*'"%])?$/;
-    // const lsid = /^(IGSN:)[A-Z]{3}[0-9]{6}/;
     const purl = /^http?:\/\/(purl\.oclc\.org\/)/;
     const isbn = /^(?:ISBN(?:-10)?:?●)?(?=[0-9X]{10}$|(?=(?:[0-9]+[-●]){3})[-●0-9X]{13}$)↵[0-9]{1,5}[-●]?[0-9]+[-●]?[0-9]+[-●]?[0-9X]$/;
     const arxiv = /^(arXiv:)(\d{4}.\d{4,5}|[a-z\-]+(\.[A-Z]{2})?\/\d{7})(v\d+)?/;
-    // const doi = /^(?:(http|https):\/\/(dx\.org|doi\.org)\/)?(10\.\d{4,5}\/.+)/;
     const doi = /^(10\.\d{4,5}\/.+)/;
     const bibcode = /\d{4}[A-Za-z\.\&]{5}[\w\.]{4}[ELPQ-Z\.][\d\.]{4}[A-Z]/;
     const url = /^(http|https)?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/;
-    // const ean13 = /^\d{12}$/;
 
     switch (true) {
-      // case '/^(ark:/)?(?P<naan>\d+)/(?P<name>\w+)(/(?P<qualifier>\w+))?$/'.test(value):
-      //   this.fragment.set('relatedIdentifier', value);
-      //   this.fragment.set('relatedIdentifierType', 'ARK');
-      //   break;
       case value == null:
         this.fragment.set('relatedIdentifier', null);
         this.fragment.set('relatedIdentifierType', null);
+        this.set('controlledIdentifierType', false);
+        break;
+      case ark.test(value):
+        this.fragment.set('relatedIdentifier', value);
+        this.fragment.set('relatedIdentifierType', 'ark');
+        this.set('controlledIdentifierType', true);
         break;
       case arxiv.test(value):
         this.fragment.set('relatedIdentifier', value);
