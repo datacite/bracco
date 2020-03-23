@@ -109,6 +109,7 @@ FactoryGuy.define('relatedIdentifier', {
     relatedMetadataScheme: 'DataCite',
     schemeUri: 'https://schema.datacite.org/meta/kernel-4.3/doc/DataCite-MetadataKernel_v4.3.pdf',
     schemeType: 'XML',
+    resourceTypeGeneral: 'Dataset',
   },
 });
 

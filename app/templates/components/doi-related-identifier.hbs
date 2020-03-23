@@ -97,6 +97,26 @@
     The type of the relatedMetadataScheme, linked with the schemeURI.
   </div>
 
+  <div class="power-select-label">
+    <label for="relatedResourceType" class="subtitle">Resource Type General</label> 
+  </div> 
+  <div class="power-select-fragment" data-test-related-resource-type>
+
+    {{#form.element
+      controlType="power-select"
+      value=fragment.resourceTypeGeneral
+      helpText="The general type of the related resource."
+      options=resourceTypesGeneral
+      disabled=disabled
+      destination=fragment.resourceTypeGeneral as |el|
+    }}
+      {{el.control
+        onChange=(action "selectResourceTypeGeneral")
+        placeholder="Select Resource Type General"
+      }}
+    {{/form.element}}
+  </div>
+
 {{/if}}
 
 <hr />

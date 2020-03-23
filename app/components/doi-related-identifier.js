@@ -60,6 +60,24 @@ const relatedIdentifierTypeList = [
   'w3id',
 ];
 
+const resourceTypeGeneralList = [
+  'Audiovisual',
+  'Collection',
+  'DataPaper',
+  'Dataset',
+  'Event',
+  'Image',
+  'InteractiveResource',
+  'Model',
+  'PhysicalObject',
+  'Service',
+  'Software',
+  'Sound',
+  'Text',
+  'Workflow',
+  'Other',
+];
+
 export default Component.extend({
   store: service(),
   relationTypeList,
@@ -69,6 +87,8 @@ export default Component.extend({
   controlledIdentifierType: false,
   isMetadataRelationType: false,
   isMetadataRelationTypes: [ 'HasMetadata', 'IsMetadataFor' ],
+  resourceTypeGeneralList,
+  resourceTypesGeneral: resourceTypeGeneralList,
 
   didReceiveAttrs() {
     this._super(...arguments);
@@ -102,7 +122,7 @@ export default Component.extend({
         break;
       case ark.test(value):
         this.fragment.set('relatedIdentifier', value);
-        this.fragment.set('relatedIdentifierType', 'ark');
+        this.fragment.set('relatedIdentifierType', 'ARK');
         this.set('controlledIdentifierType', true);
         break;
       case arxiv.test(value):
@@ -146,9 +166,6 @@ export default Component.extend({
         this.set('controlledIdentifierType', false);
         break;
     }
-
-    console.log(this.fragment.get('relatedIdentifier'));
-    console.log(this.fragment.get('relatedIdentifierType'));
   },
   selectRelationType(relationType) {
     if (this.isMetadataRelationTypes.includes(relationType)) {
@@ -162,6 +179,10 @@ export default Component.extend({
   selectRelatedIdentifierType(relatedIdentifierType) {
     this.fragment.set('relatedIdentifierType', relatedIdentifierType);
     this.set('relatedIdentifierTypes', relatedIdentifierTypeList);
+  },
+  selectResourceTypeGeneral(resourceTypeGeneral) {
+    this.fragment.set('resourceTypeGeneral', resourceTypeGeneral);
+    this.set('resourceTypesGeneral', resourceTypeGeneralList);
   },
   actions: {
     updateRelatedIdentifier(value) {
@@ -181,6 +202,9 @@ export default Component.extend({
     },
     selectRelatedIdentifierType(relatedIdentifierType) {
       this.selectRelatedIdentifierType(relatedIdentifierType);
+    },
+    selectResourceTypeGeneral(resourceTypeGeneral) {
+      this.selectResourceTypeGeneral(resourceTypeGeneral);
     },
     deleteRelatedIdentifier() {
       this.model.get('relatedIdentifiers').removeObject(this.fragment);
