@@ -11,6 +11,7 @@ FactoryGuy.define('doi', {
     contributors: FactoryGuy.hasMany('contributor'),
     titles: FactoryGuy.hasMany('title'),
     descriptions: FactoryGuy.hasMany('description'),
+    relatedIdentifiers: FactoryGuy.hasMany('relatedIdentifier'),
     geoLocations: FactoryGuy.hasMany('geoLocation'),
     subjects: FactoryGuy.hasMany('subject'),
     publisher: 'Royal Society of Chemistry',
@@ -97,6 +98,17 @@ FactoryGuy.define('nameIdentifier', {
     nameIdentifier: 'https://orcid.org/0000-0003-1419-2405',
     nameIdentifierScheme: 'ORCID',
     schemeUri: 'https://orcid.org',
+  },
+});
+
+FactoryGuy.define('relatedIdentifier', {
+  default: {
+    relatedIdentifier: '10.80225/rph240519sdfd',
+    relatedIdentifierType: 'DOI',
+    relationType: 'HasMetadata',
+    relatedMetadataScheme: 'DataCite',
+    schemeUri: 'https://schema.datacite.org/meta/kernel-4.3/doc/DataCite-MetadataKernel_v4.3.pdf',
+    schemeType: 'XML',
   },
 });
 

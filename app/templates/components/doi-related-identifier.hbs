@@ -1,16 +1,13 @@
 {{#if (gt index 0)}}
 <div class="input-group">
   <input type="text"
-    class="form-control related-identifier-field no-error {{if (not fragment.relatedIdentifier) 'no-success'}}"
-    value={{fragment.relatedIdentifier}} oninput={{action "updateRelatedIdentifier" value="target.value"}}
-    data-test-related-identifier />
+    class="form-control related-identifier-field no-error {{if (not fragment.relatedIdentifier) 'no-success'}}" value={{fragment.relatedIdentifier}} oninput={{action "updateRelatedIdentifier" value="target.value"}} data-test-related-identifier />
   <span class="input-group-btn">
     <BsButton @outline={{true}} @onClick={{action "deleteRelatedIdentifier" index}}>{{fa-icon "trash"}}</BsButton>
   </span>
 </div>
 {{else}}
-<input type="text" class="form-control related-identifier-field" value={{fragment.relatedIdentifier}}
-  oninput={{action "updateRelatedIdentifier" value="target.value"}} data-test-related-identifier />
+<input type="text" class="form-control related-identifier-field" value={{fragment.relatedIdentifier}} oninput={{action "updateRelatedIdentifier" value="target.value"}} data-test-related-identifier />
 
 {{/if}}
 
@@ -23,7 +20,7 @@
 <div class="power-select-label">
   <label for="relatedIdentifierType" class="subtitle">Related Identifier Type</label> 
 </div> 
-<div class="power-select-fragment" disabled={{this.controlledIdentifierType}} doi-related-identifier-type>
+<div class="power-select-fragment" disabled={{this.controlledIdentifierType}} data-test-related-identifier-type>
     {{#form.element
       controlType="power-select"
       value=fragment.relatedIdentifierType
@@ -43,7 +40,7 @@
 <div class="power-select-label">
   <label for="relationType" class="subtitle">Relation Type</label> 
 </div> 
-<div class="power-select-fragment" doi-relation-type>
+<div class="power-select-fragment" data-related-relation-type>
     {{#form.element
       controlType="power-select"
       value=fragment.relationType
