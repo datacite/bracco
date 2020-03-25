@@ -6,7 +6,7 @@ export default Model.extend({
   meta: attr(),
 
   name: attr('string'),
-  givenNames: attr('string'),
+  givenName: attr('string'),
   familyName: attr('string'),
   createdAt: attr('date'),
   updatedAt: attr('date'),
