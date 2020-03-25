@@ -12,7 +12,6 @@
 </div>
 {{else}}
 <input type="text" class="form-control related-identifier-field" value={{fragment.relatedIdentifier}} oninput={{action "updateRelatedIdentifier" value="target.value"}} data-test-related-identifier />
-<hr />
 
 {{/if}}
 
@@ -77,7 +76,7 @@
   <div class="power-select-label">
     <label for="relatedSchemeURI" class="subtitle">Related Metadata Scheme URI</label> 
   </div> 
-  <input type="text" class="form-control related-scheme-uri-field" value={{fragment.schemeURI}} 
+  <input type="text" class="form-control related-scheme-uri-field" value={{fragment.schemeUri}} 
     oninput={{action "updateSchemeURI" value="target.value"}} data-test-related-scheme-uri />
 
   <div
