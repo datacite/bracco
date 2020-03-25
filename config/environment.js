@@ -59,6 +59,7 @@ module.exports = function(environment) {
     API_URL: process.env.API_URL || 'https://api.test.datacite.org',
     FABRICA_URL: process.env.FABRICA_URL || 'https://doi.test.datacite.org',
     ROR_API_URL: process.env.ROR_API_URL || 'https://api.ror.org',
+    CROSSREF_API_URL: process.env.CROSSREF_API_URL || 'https://api.crossref.org',
     ORCID_API_URL: process.env.ORCID_API_URL || 'https://pub.orcid.org',
     EVENTDATA_URL: process.env.EVENTDATA_URL || 'https://api.test.datacite.org',
     CDN_URL: process.env.CDN_URL || 'https://assets.test.datacite.org',
@@ -87,6 +88,7 @@ module.exports = function(environment) {
     ENV.API_URL = 'https://api.datacite.org';
     ENV.ORCID_URL = 'https://orcid.org';
     ENV.FABRICA_URL = 'https://doi.datacite.org';
+    ENV.CROSSREF_API_URL = 'https://api.crossref.org';
     ENV.EVENTDATA_URL = 'https://api.datacite.org';
     ENV.SEARCH_URL = 'https://search.datacite.org';
     ENV.CDN_URL = 'https://assets.datacite.org';
