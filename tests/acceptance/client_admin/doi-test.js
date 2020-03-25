@@ -5,6 +5,9 @@ import {
   visit,
   click,
   fillIn,
+  // waitUntil,
+  // findAll,
+  // pauseTest,
 } from '@ember/test-helpers';
 import ENV from 'bracco/config/environment';
 import { setupFactoryGuy } from 'ember-data-factory-guy';
@@ -72,41 +75,43 @@ module('Acceptance | client_admin | doi', function(hooks) {
     assert.dom('h2.work').hasText('DataCite Test Repository');
   });
 
-  test('visiting info', async function(assert) {
+  test('visiting repository DataCite Test info', async function(assert) {
     await visit('/repositories/datacite.test/info');
 
     assert.equal(currentURL(), '/repositories/datacite.test/info');
     assert.dom('h2.work').hasText('DataCite Test Repository');
   });
 
-  test('visiting prefixes', async function(assert) {
+  test('visiting repository DataCite Test prefixes', async function(assert) {
     await visit('/repositories/datacite.test/prefixes');
 
     assert.equal(currentURL(), '/repositories/datacite.test/prefixes');
     assert.dom('h2.work').hasText('DataCite Test Repository');
   });
 
-  test('visiting dois', async function(assert) {
+  test('visiting repository DataCite Test dois', async function(assert) {
     await visit('/repositories/datacite.test/dois');
 
     assert.equal(currentURL(), '/repositories/datacite.test/dois');
     assert.dom('h2.work').hasText('DataCite Test Repository');
   });
-  // test('visiting specific doi', async function(assert) {
-  //   await visit('/dois/10.70048%2Fe605-dg05');
 
-  //   assert.equal(currentURL(), '/dois/10.70048%2Fe605-dg05');
-  //   assert.dom('h2.work').hasText('10.70048/e605-dg05');
-  // });
+  test('visiting specific doi', async function(assert) {
+    await visit('/dois/10.80225%2Fda52-7919');
 
-  // test('visiting specific doi in the Form', async function(assert) {
-  //   await visit('/dois/10.70048%2Fe605-dg05/edit');
+    assert.equal(currentURL(), '/dois/10.80225%2Fda52-7919');
+    assert.dom('h2.work').hasText('10.80225/da52-7919');
+  });
 
-  //   assert.equal(currentURL(), '/dois/10.70048%2Fe605-dg05/edit');
-  //   assert.dom('#doi-language').includesText('French');
-  // });
+  test('visiting the form for a specific doi', async function(assert) {
+    await visit('/dois/10.80225%2Fda52-7919/edit');
 
-  test('visiting the Form and selecting language', async function(assert) {
+    assert.equal(currentURL(), '/dois/10.80225%2Fda52-7919/edit');
+    assert.dom('h2.work').hasText('10.80225/da52-7919');
+    assert.dom('#doi-language').includesText('Select Language');
+  });
+
+  test('visiting the form and selecting language', async function(assert) {
     await visit('repositories/datacite.test/dois/new');
 
     await selectChoose('#doi-language', 'English');
@@ -114,7 +119,7 @@ module('Acceptance | client_admin | doi', function(hooks) {
     assert.dom('#doi-language').includesText('English');
   });
 
-  test('visiting the Form and selecting subject', async function(assert) {
+  test('visiting the form and selecting subject', async function(assert) {
     await visit('repositories/datacite.test/dois/new');
 
     await selectSearch('[doi-subject]', 'Materials');
@@ -124,7 +129,7 @@ module('Acceptance | client_admin | doi', function(hooks) {
     assert.dom('[doi-subject]').includesText('Materials engineering');
   });
 
-  test('visiting the Form and adding geoLocationPlace', async function(assert) {
+  test('visiting the form and adding geoLocationPlace', async function(assert) {
     await visit('repositories/datacite.test/dois/new');
 
     await fillIn('[data-test-geo-location-place]', 'Amsterdam, Novoravis hotel');
@@ -132,14 +137,14 @@ module('Acceptance | client_admin | doi', function(hooks) {
     assert.dom('[data-test-geo-location-place]').hasValue('Amsterdam, Novoravis hotel');
   });
 
-  test('visiting the Form and entering new subject', async function(assert) {
+  test('visiting the form and entering new subject', async function(assert) {
     await visit('repositories/datacite.test/dois/new');
 
     await selectSearch('[doi-subject]', 'Optics');
     assert.dom('[doi-subject]').includesText('Search Subject The general type of the resource.');
   });
 
-  test('visiting the Form and adding Contributor', async function(assert) {
+  test('visiting the form and adding contributor', async function(assert) {
     await visit('repositories/datacite.test/dois/new');
 
     await selectChoose('[doi-contributor]', 'DataCollector');
@@ -147,43 +152,46 @@ module('Acceptance | client_admin | doi', function(hooks) {
     assert.dom('[doi-contributor]').includesText('DataCollector');
   });
 
-  test('visiting the Form and adding Alternate Identfier', async function(assert) {
+  test('visiting the form and adding Alternate Identfier', async function(assert) {
 
     await visit('repositories/datacite.test/dois/new');
     await fillIn('[data-test-alternate-identifier]','https://doi.org/10.70048/rph240519');
     await fillIn('[data-test-alternate-identifier-type]','DOI');
 
-    // // NOTE: fillIn matches with hasValue but not with includesText
+    // NOTE: fillIn matches with hasValue but not with includesText
     assert.equal(currentURL(), 'repositories/datacite.test/dois/new');
     assert.dom('[data-test-alternate-identifier]').hasValue('https://doi.org/10.70048/rph240519');
     assert.dom('[data-test-alternate-identifier-type]').hasValue('DOI');
   });
 
-  // test('create draft doi', async function(assert) {
-  //   await visit('repositories/datacite.test/dois/new');
-  //   let suffix = '1234-5678';
-  //   await fillIn('input#suffix-field', suffix);
-  //   await pauseTest();
-  //   await click('button#doi-create');
+  test('update draft doi', async function(assert) {
+    await visit('repositories/datacite.test/dois/10.80225%2Ffjva-vj63/edit');
+    //  await fillIn('input#url-field', 'https://support.datacite.org/docs/doi-states');
+    await click('button#update-doi');
+    await pauseTest();
 
-  //   assert.equal(currentURL(), '/dois/10.80225%2F' + suffix);
+    assert.equal(currentURL(), 'repositories/datacite.test/dois/10.80225%2Ffjva-vj63/');
+    assert.dom('input#url-field').hasValue('https://support.datacite.org/docs/doi-states');
+  });
 
-  //  await visit('repositories/datacite.test/dois/10.80225%2F' + suffix + '/delete');
-  //  await fillIn('input#confirmDoi', '10.80225%2F' + suffix);
-  //  await click('button#destroy');
-  //  assert.equal(currentURL(), '/repositories/datacite.test/dois');
-  // });
+  test('create draft doi', async function(assert) {
+    await visit('repositories/datacite.test/dois/new');
+    let suffix = '2pwf-ry88';
+    await fillIn('input#suffix-field', suffix);
 
-  // test('update draft doi', async function(assert) {
-  // await visit('dois/10.80225%2Ffjva-vj63/edit');
-  // await visit('repositories/datacite.test/dois/new');
+    await click('button#doi-create');
 
-  // assert.dom('input#url-field').hasNoValue();
-  //  await fillIn('input#url-field', 'https://support.datacite.org/docs/doi-states');
-  // await click('button#update-doi');
-  // await pauseTest();
+    assert.equal(currentURL(), '/dois/10.80225%2F' + suffix);
+    assert.dom('h2.work').hasText('10.80225/2pwf-ry88');
+  });
 
-  // assert.equal(currentURL(), 'repositories/datacite.test/dois/10.80225%2Ffjva-vj63/');
-  // assert.dom('input#url-field').hasValue('https://support.datacite.org/docs/doi-states');
-  // });
+  // delete the draft doi that was just created
+  test('delete draft doi', async function(assert) {
+    await visit('dois/10.80225%2F2pwf-ry88/delete');
+    await fillIn('input#confirm-doi-field', '10.80225%2F2pwf-ry88');
+    await click('button#delete-doi');
+
+    assert.equal(currentURL(), '/repositories/datacite.test/dois');
+    assert.dom('h2.work').hasText('DataCite Test Repository');
+  });
 });
