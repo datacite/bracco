@@ -174,13 +174,16 @@ module('Acceptance | client_admin | doi', function(hooks) {
   //  assert.equal(currentURL(), '/repositories/datacite.test/dois');
   // });
 
-  test('update draft doi', async function(assert) {
-    await visit('repositories/datacite.test/dois/10.80225%2Ffjva-vj63/edit');
-    //  await fillIn('input#url-field', 'https://support.datacite.org/docs/doi-states');
-    await click('button#update-doi');
-    await pauseTest();
+  // test('update draft doi', async function(assert) {
+  // await visit('dois/10.80225%2Ffjva-vj63/edit');
+  // await visit('repositories/datacite.test/dois/new');
 
-    assert.equal(currentURL(), 'repositories/datacite.test/dois/10.80225%2Ffjva-vj63/');
-    assert.dom('input#url-field').hasValue('https://support.datacite.org/docs/doi-states');
-  });
+  // assert.dom('input#url-field').hasNoValue();
+  //  await fillIn('input#url-field', 'https://support.datacite.org/docs/doi-states');
+  // await click('button#update-doi');
+  // await pauseTest();
+
+  // assert.equal(currentURL(), 'repositories/datacite.test/dois/10.80225%2Ffjva-vj63/');
+  // assert.dom('input#url-field').hasValue('https://support.datacite.org/docs/doi-states');
+  // });
 });

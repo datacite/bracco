@@ -15,7 +15,7 @@ import { setupFactoryGuy } from 'ember-data-factory-guy';
 import { authenticateSession } from 'ember-simple-auth/test-support';
 import { setupQunit as setupPolly } from '@pollyjs/core';
 
-module('Acceptance | staff_admin | repository', function(hooks) {
+module('Acceptance | staff_admin | doi', function(hooks) {
   setupPolly(hooks, {
     matchRequestsBy: {
       headers: {
@@ -151,7 +151,6 @@ module('Acceptance | staff_admin | repository', function(hooks) {
     assert.expect(18);
 
     await visit('/dois/10.80225%2Fda52-7919/edit');
-
     assert.equal(currentURL(), '/dois/10.80225%2Fda52-7919/edit');
     assert.dom('input#doi-field').exists();
     // assert.dom('input#draft-radio').exists();
@@ -244,6 +243,35 @@ module('Acceptance | staff_admin | repository', function(hooks) {
     assert.dom('input#registered-radio').isNotChecked();
     assert.dom('input#findable-radio').isNotChecked();
     assert.dom('input#suffix-field').hasAnyValue();
+  });
+
+  // test('create draft doi', async function(assert) {
+  //   await visit('repositories/datacite.test/dois/new');
+  //   let suffix = '1234-5678';
+  //   await fillIn('input#suffix-field', suffix);
+
+  //   await click('button#doi-create');
+  //   await pauseTest();
+  //   assert.equal(currentURL(), '/dois/10.80225%2F' + suffix);
+
+  // await visit('repositories/datacite.test/dois/10.80225%2F' + suffix + '/delete');
+  // await fillIn('input#confirmDoi', '10.80225%2F' + suffix);
+  // await click('button#destroy');
+  // assert.equal(currentURL(), '/repositories/datacite.test/dois');
+  // });
+
+  test('update draft doi', async function(assert) {
+    await visit('/dois/10.80225%2Fda52-7919/edit');
+
+    assert.dom('input#url-field').exists();
+    await fillIn('input#url-field', 'https://blog.datacite.org/pids-for-instruments-a-way-forward');
+
+    assert.dom('button#doi-update').exists();
+    await click('button#doi-update');
+
+  //  assert.equal(currentURL(), '/dois/10.80225%2Fda52-7919');
+  //  await pauseTest();
+  //  assert.dom('input#url-field').hasValue('https://support.datacite.org/docs/doi-states');
   });
 
   // test('filling out fields for a new DOI for repository DataCite Test', async function(assert) {
