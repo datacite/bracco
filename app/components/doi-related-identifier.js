@@ -172,7 +172,7 @@ export default Component.extend({
         this.set('controlledIdentifierType', true);
         break;
       default:
-        this.fragment.set('relatedIdentifier', value);
+        this.fragment.set('relatedIdentifier', null);
         this.fragment.set('relatedIdentifierType', null);
         this.set('controlledIdentifierType', false);
         break;
