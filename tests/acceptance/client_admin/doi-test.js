@@ -153,4 +153,19 @@ module('Acceptance | client_admin | doi', function(hooks) {
     assert.dom('[data-test-related-scheme-uri]').hasValue('https://schema.datacite.org/meta/kernel-4.3/doc/DataCite-MetadataKernel_v4.3.pdf');
     assert.dom('[data-test-related-scheme-type]').hasValue('XML');
   });
+
+  test('visiting the Form and adding funding References', async function(assert) {
+
+    await visit('repositories/datacite.test/dois/new');
+    await selectSearch('[doi-funder-reference]', 'Action for M.E.');
+    await selectChoose('[doi-funder-reference]', 'Action for M.E.');
+    await fillIn('[data-test-award-number]', 'G2342342');
+    await fillIn('[data-test-award-uri]', 'https://schema.datacite.org/meta/kernel-4');
+
+    assert.dom('[data-test-funder-name]').hasValue('Action for M.E.');
+    assert.dom('[data-test-funder-identifier]').hasValue('http://dx.doi.org/10.13039/501100001982');
+    assert.dom('[data-test-funder-identifier-type]').includesText('Crossref Funder ID The type of the funderIdentifier.');
+    assert.dom('[data-test-award-number]').hasValue('G2342342');
+    assert.dom('[data-test-award-uri]').hasValue('https://schema.datacite.org/meta/kernel-4');
+  });
 });

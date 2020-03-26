@@ -12,6 +12,7 @@ FactoryGuy.define('doi', {
     titles: FactoryGuy.hasMany('title'),
     descriptions: FactoryGuy.hasMany('description'),
     relatedIdentifiers: FactoryGuy.hasMany('relatedIdentifier'),
+    fundingReferences: FactoryGuy.hasMany('fundingReference'),
     geoLocations: FactoryGuy.hasMany('geoLocation'),
     subjects: FactoryGuy.hasMany('subject'),
     publisher: 'Royal Society of Chemistry',
@@ -109,6 +110,17 @@ FactoryGuy.define('relatedIdentifier', {
     relatedMetadataScheme: 'DataCite',
     schemeUri: 'https://schema.datacite.org/meta/kernel-4.3/doc/DataCite-MetadataKernel_v4.3.pdf',
     schemeType: 'XML',
+  },
+});
+
+FactoryGuy.define('fundingReference', {
+  default: {
+    funderName: 'National Natural Science Foundation of China',
+    funderIdentifier: 'grid.419696.5',
+    funderIdentifierType: 'GRID',
+    awardNumber: '13321312G45',
+    awardUri: 'http://www.nsfc.gov.cn/publish/portal1/',
+    awardTitle: 'COVID-19 Money',
   },
 });
 
