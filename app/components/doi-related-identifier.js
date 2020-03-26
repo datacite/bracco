@@ -1,6 +1,7 @@
 /* eslint-disable no-useless-escape */
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
+import { isURL, isISBN } from 'validator';
 
 const relationTypeList = [
   'IsCitedBy',
@@ -108,11 +109,10 @@ export default Component.extend({
     const ark = /^ark:\/[0-9]{5}\/\S+$/;
     const lsid = /^[uU][rR][nN]:[lL][sS][iI][dD]:(A-Za-z0-9][A-Za-z0-9()+,-.=@;$_!*'"%]):(A-Za-z0-9][A-Za-z0-9()+,-.=@;$_!*'"%]):(A-Za-z0-9][A-Za-z0-9()+,-.=@;$_!*'"%])[:]?(A-Za-z0-9][A-Za-z0-9()+,-.=@;$_!*'"%])?$/;
     const purl = /^http?:\/\/(purl\.oclc\.org\/)/;
-    const isbn = /^(?:ISBN(?:-10)?:?●)?(?=[0-9X]{10}$|(?=(?:[0-9]+[-●]){3})[-●0-9X]{13}$)↵[0-9]{1,5}[-●]?[0-9]+[-●]?[0-9]+[-●]?[0-9X]$/;
     const arxiv = /^(arXiv:)(\d{4}.\d{4,5}|[a-z\-]+(\.[A-Z]{2})?\/\d{7})(v\d+)?/;
     const doi = /^(10\.\d{4,5}\/.+)/;
     const bibcode = /\d{4}[A-Za-z\.\&]{5}[\w\.]{4}[ELPQ-Z\.][\d\.]{4}[A-Z]/;
-    const url = /^(http|https)?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/;
+    const urn = /^urn:[a-z0-9][a-z0-9-]{0,31}:[a-z0-9()+,\-.:=@;$_!*'%/?#]/;
 
     switch (true) {
       case value == null:
@@ -140,11 +140,6 @@ export default Component.extend({
         this.fragment.set('relatedIdentifierType', 'bibcode');
         this.set('controlledIdentifierType', true);
         break;
-      case isbn.test(value):
-        this.fragment.set('relatedIdentifier', value);
-        this.fragment.set('relatedIdentifierType', 'ISBN');
-        this.set('controlledIdentifierType', true);
-        break;
       case lsid.test(value):
         this.fragment.set('relatedIdentifier', value);
         this.fragment.set('relatedIdentifierType', 'LSID');
@@ -155,7 +150,23 @@ export default Component.extend({
         this.fragment.set('relatedIdentifierType', 'PURL');
         this.set('controlledIdentifierType', true);
         break;
-      case url.test(value):
+      case urn.test(value):
+        this.fragment.set('relatedIdentifier', value);
+        this.fragment.set('relatedIdentifierType', 'URN');
+        this.set('controlledIdentifierType', true);
+        break;
+      case isISBN(value):
+        this.fragment.set('relatedIdentifier', value);
+        this.fragment.set('relatedIdentifierType', 'ISBN');
+        this.set('controlledIdentifierType', true);
+        break;
+      // // EAN currently not supported https://github.com/validatorjs/validator.js/issues/797
+      // case isEAN(value):
+      //   this.fragment.set('relatedIdentifier', value);
+      //   this.fragment.set('relatedIdentifierType', 'EAN13');
+      //   this.set('controlledIdentifierType', true);
+      //   break;
+      case isURL(value):
         this.fragment.set('relatedIdentifier', value);
         this.fragment.set('relatedIdentifierType', 'URL');
         this.set('controlledIdentifierType', true);
