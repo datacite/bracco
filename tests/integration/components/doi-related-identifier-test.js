@@ -14,6 +14,6 @@ module('Integration | Component | doi related-identifier', function(hooks) {
     this.set('fragment', make('relatedIdentifier'));
     await render(hbs`{{doi-related-identifier model=model fragment=fragment index=0}}`);
 
-    assert.dom('*').hasText('Identifiers of related resources. These must be globally unique identifiers. Visit our support website for the list of supported unique identifiers. Related Identifier Type Relation Type');
+    assert.dom('*').hasText('Identifiers of related resources. These must be globally unique identifiers. Visit our support website for the list of supported unique identifiers. Related Identifier Type Relation Type Related Metadata Scheme The name of the scheme. Related Metadata Scheme URI The URI of the relatedMetadataScheme. Related Metadata Scheme Type The type of the relatedMetadataScheme, linked with the schemeURI. Resource Type General');
   });
 });
