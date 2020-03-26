@@ -1,0 +1,12 @@
+<div class="form-group {{validationClass}}">
+  <label class="control-label col-md-3">Related Identifier(s) (optional)</label>
+  <div class="col-md-9">
+    {{#each model.relatedIdentifiers as |relatedIdentifier index|}}
+      <DoiRelatedIdentifier @model={{model}} @fragment={{relatedIdentifier}} @form={{form}} @index={{index}} />
+    {{/each}}
+
+    {{#if (lte model.relatedIdentifiers.length 24)}}
+      <BsButton @id="add-related-identifier" @class="btn-sm" @outline={{true}} @onClick={{action "addRelatedIdentifier"}}>{{fa-icon "plus"}} Add another Related Identifier</BsButton>
+    {{/if}}
+  </div>
+</div>
