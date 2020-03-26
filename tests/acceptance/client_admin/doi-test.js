@@ -116,7 +116,7 @@ module('Acceptance | client_admin | doi', function(hooks) {
     await visit('repositories/datacite.test/dois/new');
 
     await selectSearch('[doi-subject]', 'Optics');
-    assert.dom('[doi-subject]').includesText('Search Subject The general type of the resource.');
+    assert.dom('[doi-subject]').includesText('Search Subject from the OECD Fields of Science Subject, keyword, classification code, or key phrase describing the resource.');
   });
 
   test('visiting the Form and adding Contributor', async function(assert) {
