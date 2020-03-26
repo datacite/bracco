@@ -29,8 +29,10 @@ export default Controller.extend({
       doi.set('language', null);
       doi.set('contributors', null);
       doi.set('identifiers', null);
-
+      doi.set('relatedIdentifiers', null);
+      doi.set('fundingReferences', null);
       doi.set('geoLocations', null);
+
       let self = this;
       doi.save().then(function(doi) {
         self.transitionToRoute('dois.show', doi);
