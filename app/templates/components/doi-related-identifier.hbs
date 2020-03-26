@@ -17,8 +17,8 @@
 
 <div
   class="help-block help-block-fragment related-identifier-field no-error {{if (not fragment.relatedIdentifier) 'no-success'}}">
-  Identifiers of related resources. These must be globally unique identifiers, such as: ARK, arXiv, bibcode, DOI, EAN13,
-  EISSN, Handle, IGSN, ISBN, ISSN, ISTC, LISSN, LSID, PMID, PURL, UPC, URL, URN, w3id.
+  Identifiers of related resources. These must be globally unique identifiers. Visit our support website for 
+   <a target="_blank" rel="noopener" href="https://support.datacite.org/docs/connecting-research-outputs#section-related-identifiers"> the list of supported unique identifiers.</a>
 </div>
 
 <div class="power-select-label">
@@ -94,6 +94,26 @@
   <div
     class="help-block help-block-fragment related-scheme-type-field}}">
     The type of the relatedMetadataScheme, linked with the schemeURI.
+  </div>
+
+  <div class="power-select-label">
+    <label for="relatedResourceType" class="subtitle">Resource Type General</label> 
+  </div> 
+  <div class="power-select-fragment" data-test-related-resource-type>
+
+    {{#form.element
+      controlType="power-select"
+      value=fragment.resourceTypeGeneral
+      helpText="The general type of the related resource."
+      options=resourceTypesGeneral
+      disabled=disabled
+      destination=fragment.resourceTypeGeneral as |el|
+    }}
+      {{el.control
+        onChange=(action "selectResourceTypeGeneral")
+        placeholder="Select Resource Type General"
+      }}
+    {{/form.element}}
   </div>
 
 {{/if}}

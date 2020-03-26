@@ -22,6 +22,14 @@ const Validations = buildValidations({
         return ![ 'PURL','URL' ].includes(this.model.get('relatedIdentifierType'));
       }),
     }),
+    validator('identifier-format', {
+      allowBlank: true,
+      dependentKeys: [ 'model.relatedIdentifierType' ],
+      message: 'Please enter a valid Related Identifier.',
+      isWarning: computed('model.state', function() {
+        return this.model.get('state') === 'draft';
+      }),
+    }),
   ],
   relatedIdentifierType: [
     validator('presence', {
@@ -45,6 +53,17 @@ const Validations = buildValidations({
       }),
     }),
   ],
+  resourceTypeGeneral: [
+    validator('presence', {
+      presence: true,
+      isWarning: computed('model.state', function() {
+        return this.model.get('state') === 'draft';
+      }),
+      disabled: computed('model.relatedIdentifier', function() {
+        return this.model.get('relatedIdentifier') == null;
+      }),
+    }),
+  ],
 });
 
 export default Fragment.extend(Validations, {
@@ -54,4 +73,5 @@ export default Fragment.extend(Validations, {
   relatedMetadataScheme: DS.attr('string', { defaultValue: null }),
   schemeUri: DS.attr('string', { defaultValue: null }),
   schemeType: DS.attr('string', { defaultValue: null }),
+  resourceTypeGeneral: DS.attr('string', { defaultValue: null }),
 });

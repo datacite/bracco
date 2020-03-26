@@ -1,41 +1,42 @@
 /* eslint-disable no-useless-escape */
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
+import { isURL, isISBN } from 'validator';
 
 const relationTypeList = [
-  'IsCitedBy',
   'Cites',
-  'IsSupplementTo',
-  'IsSupplementedBy',
-  'IsContinuedBy',
+  'IsCitedBy',
+  'Compiles',
+  'IsCompiledBy',
   'Continues',
-  'IsDescribedBy',
+  'IsContinuedBy',
   'Describes',
+  'IsDescribedBy',
+  'Documents',
+  'IsDocumentedBy',
+  'IsDerivedFrom',
+  'IsSourceOf',
   'HasMetadata',
   'IsMetadataFor',
+  'HasPart',
+  'IsPartOf',
+  'IsSupplementedBy',
+  'IsSupplementTo',
+  'Obsoletes',
+  'IsObsoletedBy',
+  'References',
+  'IsReferencedBy',
+  'Requires',
+  'IsRequiredBy',
+  'Reviews',
+  'IsReviewedBy',
   'HasVersion',
   'IsVersionOf',
   'IsNewVersionOf',
   'IsPreviousVersionOf',
-  'IsPartOf',
-  'HasPart',
-  'IsReferencedBy',
-  'References',
-  'IsDocumentedBy',
-  'Documents',
-  'IsCompiledBy',
-  'Compiles',
   'IsVariantFormOf',
   'IsOriginalFormOf',
   'IsIdenticalTo',
-  'IsReviewedBy',
-  'Reviews',
-  'IsDerivedFrom',
-  'IsSourceOf',
-  'IsRequiredBy',
-  'Requires',
-  'IsObsoletedBy',
-  'Obsoletes',
 ];
 
 const relatedIdentifierTypeList = [
@@ -60,6 +61,24 @@ const relatedIdentifierTypeList = [
   'w3id',
 ];
 
+const resourceTypeGeneralList = [
+  'Audiovisual',
+  'Collection',
+  'DataPaper',
+  'Dataset',
+  'Event',
+  'Image',
+  'InteractiveResource',
+  'Model',
+  'PhysicalObject',
+  'Service',
+  'Software',
+  'Sound',
+  'Text',
+  'Workflow',
+  'Other',
+];
+
 export default Component.extend({
   store: service(),
   relationTypeList,
@@ -69,6 +88,8 @@ export default Component.extend({
   controlledIdentifierType: false,
   isMetadataRelationType: false,
   isMetadataRelationTypes: [ 'HasMetadata', 'IsMetadataFor' ],
+  resourceTypeGeneralList,
+  resourceTypesGeneral: resourceTypeGeneralList,
 
   didReceiveAttrs() {
     this._super(...arguments);
@@ -85,32 +106,24 @@ export default Component.extend({
     }
   },
   updateRelatedIdentifier(value) {
-    // const ark = /^(ark:/)?(?[a-zA-Z0-9]\d+)/(?[a-zA-Z0-9]\w+)(/(?[a-zA-Z0-9]\w+))?$/;
-    // const re = /^(http|https):\/\/orcid\.org\/\d{4}-\d{4}-\d{4}-\d{3}[0-9X]+$/;
-    // const issn = /^(ISSN) [\S]{4}\-[\S]{4}/;
-    // const eissn = /^(eISSN) [\S]{4}\-[\S]{4}/;
-    // const istc = /^(ISTC) [A-F0-9]{3}-[\S]{4}\-[A-F0-9]{8}\-[\S]{1}/; //validate
-    // const igsn = /^(IGSN:)[A-Z]{3}[0-9]{6}/;
-    // const legalId =  /[A-Za-z0-9][A-Za-z0-9()+,-.=@;$_!*\'\"%]*/;
+    const ark = /^ark:\/[0-9]{5}\/\S+$/;
     const lsid = /^[uU][rR][nN]:[lL][sS][iI][dD]:(A-Za-z0-9][A-Za-z0-9()+,-.=@;$_!*'"%]):(A-Za-z0-9][A-Za-z0-9()+,-.=@;$_!*'"%]):(A-Za-z0-9][A-Za-z0-9()+,-.=@;$_!*'"%])[:]?(A-Za-z0-9][A-Za-z0-9()+,-.=@;$_!*'"%])?$/;
-    // const lsid = /^(IGSN:)[A-Z]{3}[0-9]{6}/;
     const purl = /^http?:\/\/(purl\.oclc\.org\/)/;
-    const isbn = /^(?:ISBN(?:-10)?:?●)?(?=[0-9X]{10}$|(?=(?:[0-9]+[-●]){3})[-●0-9X]{13}$)↵[0-9]{1,5}[-●]?[0-9]+[-●]?[0-9]+[-●]?[0-9X]$/;
     const arxiv = /^(arXiv:)(\d{4}.\d{4,5}|[a-z\-]+(\.[A-Z]{2})?\/\d{7})(v\d+)?/;
-    // const doi = /^(?:(http|https):\/\/(dx\.org|doi\.org)\/)?(10\.\d{4,5}\/.+)/;
     const doi = /^(10\.\d{4,5}\/.+)/;
     const bibcode = /\d{4}[A-Za-z\.\&]{5}[\w\.]{4}[ELPQ-Z\.][\d\.]{4}[A-Z]/;
-    const url = /^(http|https)?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/;
-    // const ean13 = /^\d{12}$/;
+    const urn = /^urn:[a-z0-9][a-z0-9-]{0,31}:[a-z0-9()+,\-.:=@;$_!*'%/?#]/;
 
     switch (true) {
-      // case '/^(ark:/)?(?P<naan>\d+)/(?P<name>\w+)(/(?P<qualifier>\w+))?$/'.test(value):
-      //   this.fragment.set('relatedIdentifier', value);
-      //   this.fragment.set('relatedIdentifierType', 'ARK');
-      //   break;
       case value == null:
         this.fragment.set('relatedIdentifier', null);
         this.fragment.set('relatedIdentifierType', null);
+        this.set('controlledIdentifierType', false);
+        break;
+      case ark.test(value):
+        this.fragment.set('relatedIdentifier', value);
+        this.fragment.set('relatedIdentifierType', 'ARK');
+        this.set('controlledIdentifierType', true);
         break;
       case arxiv.test(value):
         this.fragment.set('relatedIdentifier', value);
@@ -127,11 +140,6 @@ export default Component.extend({
         this.fragment.set('relatedIdentifierType', 'bibcode');
         this.set('controlledIdentifierType', true);
         break;
-      case isbn.test(value):
-        this.fragment.set('relatedIdentifier', value);
-        this.fragment.set('relatedIdentifierType', 'ISBN');
-        this.set('controlledIdentifierType', true);
-        break;
       case lsid.test(value):
         this.fragment.set('relatedIdentifier', value);
         this.fragment.set('relatedIdentifierType', 'LSID');
@@ -142,20 +150,34 @@ export default Component.extend({
         this.fragment.set('relatedIdentifierType', 'PURL');
         this.set('controlledIdentifierType', true);
         break;
-      case url.test(value):
+      case urn.test(value):
+        this.fragment.set('relatedIdentifier', value);
+        this.fragment.set('relatedIdentifierType', 'URN');
+        this.set('controlledIdentifierType', true);
+        break;
+      case isISBN(value):
+        this.fragment.set('relatedIdentifier', value);
+        this.fragment.set('relatedIdentifierType', 'ISBN');
+        this.set('controlledIdentifierType', true);
+        break;
+      // // EAN currently not supported https://github.com/validatorjs/validator.js/issues/797
+      // case isEAN(value):
+      //   this.fragment.set('relatedIdentifier', value);
+      //   this.fragment.set('relatedIdentifierType', 'EAN13');
+      //   this.set('controlledIdentifierType', true);
+      //   break;
+      case isURL(value):
         this.fragment.set('relatedIdentifier', value);
         this.fragment.set('relatedIdentifierType', 'URL');
         this.set('controlledIdentifierType', true);
         break;
       default:
+        // // Clears the relatedIdentifierType in case the user changes the relatedIdentifier after selecting it once before.
         this.fragment.set('relatedIdentifier', value);
         this.fragment.set('relatedIdentifierType', null);
         this.set('controlledIdentifierType', false);
         break;
     }
-
-    console.log(this.fragment.get('relatedIdentifier'));
-    console.log(this.fragment.get('relatedIdentifierType'));
   },
   selectRelationType(relationType) {
     if (this.isMetadataRelationTypes.includes(relationType)) {
@@ -169,6 +191,10 @@ export default Component.extend({
   selectRelatedIdentifierType(relatedIdentifierType) {
     this.fragment.set('relatedIdentifierType', relatedIdentifierType);
     this.set('relatedIdentifierTypes', relatedIdentifierTypeList);
+  },
+  selectResourceTypeGeneral(resourceTypeGeneral) {
+    this.fragment.set('resourceTypeGeneral', resourceTypeGeneral);
+    this.set('resourceTypesGeneral', resourceTypeGeneralList);
   },
   actions: {
     updateRelatedIdentifier(value) {
@@ -188,6 +214,9 @@ export default Component.extend({
     },
     selectRelatedIdentifierType(relatedIdentifierType) {
       this.selectRelatedIdentifierType(relatedIdentifierType);
+    },
+    selectResourceTypeGeneral(resourceTypeGeneral) {
+      this.selectResourceTypeGeneral(resourceTypeGeneral);
     },
     deleteRelatedIdentifier() {
       this.model.get('relatedIdentifiers').removeObject(this.fragment);
