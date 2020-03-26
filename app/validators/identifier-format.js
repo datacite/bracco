@@ -13,6 +13,7 @@ const IdentifierFormat = BaseValidator.extend({
     const doi = /^(10\.\d{4,5}\/.+)/;
     const bibcode = /\d{4}[A-Za-z\.\&]{5}[\w\.]{4}[ELPQ-Z\.][\d\.]{4}[A-Z]/;
     const urn = /^urn:[a-z0-9][a-z0-9-]{0,31}:[a-z0-9()+,\-.:=@;$_!*'%/?#]/;
+    const types = [ 'EAN13', 'EISSN', 'Handle', 'IGSN', 'ISSN', 'ISTC', 'LISSN', 'LSID', 'PMID',  'UPC', 'w3id' ];
 
     switch (true) {
       case model.relatedIdentifierType == 'ARK':
@@ -33,6 +34,8 @@ const IdentifierFormat = BaseValidator.extend({
         return isISBN(value) ? true : 'Please enter a valid ISBN.';
       case model.relatedIdentifierType == 'URL':
         return isURL(value) ? true : 'Please enter a valid URL.';
+      case types.includes(model.relatedIdentifierType):
+        return true;
       default:
         return 'Please enter a Related Identedfier type.';
     }
