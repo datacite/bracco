@@ -22,6 +22,14 @@ const Validations = buildValidations({
         return ![ 'PURL','URL' ].includes(this.model.get('relatedIdentifierType'));
       }),
     }),
+    validator('identifier-format', {
+      allowBlank: true,
+      dependentKeys: [ 'model.relatedIdentifierType' ],
+      message: 'Please enter a valid Related Identifier.',
+      isWarning: computed('model.state', function() {
+        return this.model.get('state') === 'draft';
+      }),
+    }),
   ],
   relatedIdentifierType: [
     validator('presence', {
