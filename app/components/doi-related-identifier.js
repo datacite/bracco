@@ -172,6 +172,7 @@ export default Component.extend({
         this.set('controlledIdentifierType', true);
         break;
       default:
+        // // Clears the relatedIdentifierType in case the user changes the relatedIdentifier after selecting it once before.
         this.fragment.set('relatedIdentifier', value);
         this.fragment.set('relatedIdentifierType', null);
         this.set('controlledIdentifierType', false);
