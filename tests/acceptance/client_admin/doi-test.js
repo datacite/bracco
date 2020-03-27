@@ -164,7 +164,7 @@ module('Acceptance | client_admin | doi', function(hooks) {
     assert.dom('[data-test-alternate-identifier-type]').hasValue('DOI');
   });
 
-/*  test('update draft doi', async function(assert) {
+  /*  test('update draft doi', async function(assert) {
     await visit('repositories/datacite.test/dois/10.80225%2Ffjva-vj63/edit');
     await fillIn('input#url-field', 'https://support.datacite.org/docs/doi-states');
     await click('button#doi-update');
@@ -194,4 +194,18 @@ module('Acceptance | client_admin | doi', function(hooks) {
     assert.equal(currentURL(), '/repositories/datacite.test/dois');
     assert.dom('h2.work').hasText('DataCite Test Repository');
   }); */
+  test('visiting the Form and adding related Identifier', async function(assert) {
+
+    await visit('repositories/datacite.test/dois/new');
+    await fillIn('[data-test-related-identifier]','10.70048/rph240519');
+    await selectChoose('[data-test-related-relation-type]', 'HasMetadata');
+    await fillIn('[data-test-related-scheme-uri]','https://schema.datacite.org/meta/kernel-4.3/doc/DataCite-MetadataKernel_v4.3.pdf');
+    await fillIn('[data-test-related-scheme-type]','XML');
+
+    assert.equal(currentURL(), 'repositories/datacite.test/dois/new');
+    assert.dom('[data-test-related-identifier]').hasValue('10.70048/rph240519');
+    assert.dom('[data-test-related-identifier-type]').includesText('DOI');
+    assert.dom('[data-test-related-scheme-uri]').hasValue('https://schema.datacite.org/meta/kernel-4.3/doc/DataCite-MetadataKernel_v4.3.pdf');
+    assert.dom('[data-test-related-scheme-type]').hasValue('XML');
+  });
 });
