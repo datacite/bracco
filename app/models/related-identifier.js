@@ -12,22 +12,25 @@ const Validations = buildValidations({
     }),
   ],
   relatedIdentifier: [
-    validator('url-format', {
-      allowBlank: true,
-      message: 'Please enter a valid URL.',
-      isWarning: computed('model.state', function() {
-        return this.model.get('state') === 'draft';
-      }),
-      disabled: computed('model.relatedIdentifierType', function() {
-        return ![ 'PURL','URL' ].includes(this.model.get('relatedIdentifierType'));
-      }),
-    }),
+    // validator('url-format', {
+    //   allowBlank: true,
+    //   message: 'Please enter a valid URL.',
+    //   isWarning: computed('model.state', function() {
+    //     return this.model.get('state') === 'draft';
+    //   }),
+    //   disabled: computed('model.relatedIdentifierType', function() {
+    //     return ![ 'PURL','URL' ].includes(this.model.get('relatedIdentifierType'));
+    //   }),
+    // }),
     validator('identifier-format', {
       allowBlank: true,
       dependentKeys: [ 'model.relatedIdentifierType' ],
       message: 'Please enter a valid Related Identifier.',
       isWarning: computed('model.state', function() {
         return this.model.get('state') === 'draft';
+      }),
+      disabled: computed('model.relatedIdentifier', function() {
+        return (this.model.get('relatedIdentifier') == null);
       }),
     }),
   ],
@@ -38,7 +41,7 @@ const Validations = buildValidations({
         return this.model.get('state') === 'draft';
       }),
       disabled: computed('model.relatedIdentifier', function() {
-        return this.model.get('relatedIdentifier') == null;
+        return (this.model.get('relatedIdentifier') == null);
       }),
     }),
   ],
@@ -49,21 +52,21 @@ const Validations = buildValidations({
         return this.model.get('state') === 'draft';
       }),
       disabled: computed('model.relatedIdentifier', function() {
-        return this.model.get('relatedIdentifier') == null;
+        return (this.model.get('relatedIdentifier') == null );
       }),
     }),
   ],
-  resourceTypeGeneral: [
-    validator('presence', {
-      presence: true,
-      isWarning: computed('model.state', function() {
-        return this.model.get('state') === 'draft';
-      }),
-      disabled: computed('model.relatedIdentifier', function() {
-        return this.model.get('relatedIdentifier') == null;
-      }),
-    }),
-  ],
+  // resourceTypeGeneral: [
+  //   validator('presence', {
+  //     presence: true,
+  //     isWarning: computed('model.state', function() {
+  //       return this.model.get('state') === 'draft';
+  //     }),
+  //     disabled: computed('model.relatedIdentifierType', function() {
+  //       return [ 'HasMetadata', 'IsMetadataFor' ].includes(this.model.get('relatedIdentifierType')) ? false : true;
+  //     }),
+  //   }),
+  // ],
 });
 
 export default Fragment.extend(Validations, {

@@ -35,6 +35,7 @@
     }}
     {{el.control
       onChange=(action "selectRelatedIdentifierType")
+      allowClear=true
       placeholder="Select related Identifier Type"
     }}
     {{/form.element}}
@@ -51,10 +52,12 @@
       helpText="The type of the Relation."
       options=relationTypeList
       disabled=disabled
+      allowClear=true
       destination=fragment.relationType as |el|
     }}
     {{el.control
       onChange=(action "selectRelationType")
+      allowClear=true
       placeholder="Select Relation Type"
     }}
     {{/form.element}}
@@ -81,7 +84,7 @@
 
   <div
     class="help-block help-block-fragment related-scheme-uri-field}}">
-    The URI of the relatedMetadataScheme.
+    The URI of the relatedMetadataScheme. For example: http://www.ddialliance.org/Specification/DDILifecycle/3.1/XMLSchema/instance.xsd for DDI-L schema.
   </div>
 
   <div class="power-select-label">
@@ -107,10 +110,12 @@
       helpText="The general type of the related resource."
       options=resourceTypesGeneral
       disabled=disabled
+      allowClear=true
       destination=fragment.resourceTypeGeneral as |el|
     }}
       {{el.control
         onChange=(action "selectResourceTypeGeneral")
+        allowClear=true
         placeholder="Select Resource Type General"
       }}
     {{/form.element}}

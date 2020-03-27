@@ -1,6 +1,8 @@
+ {{#if (gt index 0)}}
   <div class="power-select-label">
     <label for="subject" class="subtitle">Subject</label>
   </div> 
+{{/if}}
 <div class="input-group">
   <div class="power-select-fragment" doi-subject>
     {{#form.element
@@ -14,11 +16,12 @@
     {{el.control
       searchEnabled=true
       onChange=(action "updateSubject")
-      placeholder="Search Subject from the OECD Fields of Science"
+      placeholder="Search Subject from the OECD Fields of Science OR fill in to create a keyword"
       onkeydown=(action "createOnEnter")
       search=(action "searchSubject")
-      searchPlaceholder="Type to search..."
-      noMatchesMessage="Press ENTER to add new subject."
+      allowClear=true
+      searchPlaceholder="Type to search subject OR fill in to create a keyword..."
+      noMatchesMessage="Press ENTER to add new subject, keyword, classification code, or key phrase describing the resource."
     }}
     {{/form.element}}
   </div>
@@ -39,6 +42,6 @@
     <BsButton @outline={{true}} @onClick={{action "deleteSubject" index}}>{{fa-icon "trash"}}</BsButton>
   </span>
 </div>
-<div class="help-block help-block-fragment">The URI of the subject term.</div>
+<div class="help-block help-block-fragment">The URI of the subject term. For example, http://www.oecd.org/science/inno/38235147.pdf</div>
 
 <hr />

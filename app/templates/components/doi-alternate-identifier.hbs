@@ -11,11 +11,33 @@
   <div class="help-block help-block-fragment">An identifier or identifiers other than the primary Identifier applied to the resource being registered.</div>
 {{/if}}
 
-  <div class="input-label">
+  {{!-- <div class="input-label">
     <label for="identifierType" class="subtitle">Alternate Identifier Type</label>
   </div>
   <input type="text" class="form-control alternate-identifier-type-field" value={{fragment.identifierType}} oninput={{action "updateIdentifierType" value="target.value"}} data-test-alternate-identifier-type/>
-  <div class="help-block help-block-fragment">The type of the Alternate Identifier.</div>
+  <div class="help-block help-block-fragment">The type of the Alternate Identifier.</div> --}}
 
+<div class="power-select-label">
+  <label for="alternateIdentifierType" class="subtitle">Alternate Identifier Type</label> 
+</div> 
+<div class="power-select-fragment" disabled={{this.controlledIdentifierType}} data-test-alternate-identifier-type>
+    {{#form.element
+      controlType="power-select"
+      value=fragment.identifierType
+      helpText="The type of the Alternate Identifier."
+      options=alternateIdentifierTypeList
+      disabled=controlledIdentifierType
+      destination=fragment.identifierType as |el|
+    }}
+    {{el.control
+      onChange=(action "selectAlternateIdentifierType")
+      allowClear=true
+      onkeydown=(action "createOnEnter")
+      placeholder="Type in or select the Alternate Identifier Type."
+      noMatchesMessage="Press ENTER to add new identifier Type."
+    }}
+    {{/form.element}}
+
+</div>
 
 <hr />

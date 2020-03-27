@@ -10,6 +10,7 @@
       options=funders
       value=fragment.name
       disabled=disabled
+      allowClear=true
       destination=fragment.funderIdentifier as |el|
     }}
     {{#el.control
@@ -78,6 +79,7 @@
       }}
   {{el.control
         onChange=(action "selectFunderIdentifierType")
+        allowClear=true
         placeholder="Select Funder Identifier Type"
       }}
   {{/form.element}}
@@ -113,7 +115,8 @@
   oninput={{action "updateAwardUri" value="target.value"}} data-test-award-uri />
 
 <div class="help-block help-block-fragment award-uri-field}}">
-  The URI leading to a page provided by the funder for more information about the award (grant).
+  The URI leading to a page provided by the funder for more information about the award (grant). For example, https://www.moore.org/gran
+ts/list/GBMF3859.01
 </div>
 
 
