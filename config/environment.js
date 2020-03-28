@@ -70,6 +70,7 @@ module.exports = function(environment) {
     CLIENT_ADMIN_PASSWORD: process.env.CLIENT_ADMIN_PASSWORD,
     VERSION: pkg.version,
     APP_NAME: pkg.name,
+    JWT_BLACKLISTED: process.env.JWT_BLACKLISTED || '',
 
     APP: {
       // Here you can pass flags/options to your application instance

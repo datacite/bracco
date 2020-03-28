@@ -32,6 +32,11 @@ export default Service.extend({
       // using authenticator:oauth2
       let jwt = this.get('session.data.authenticated.access_token');
 
+      // rejecting revoked tokens
+      if (ENV.JWT_BLACKLISTED.split(',').includes(jwt)) {
+        jwt = null;
+        this.get('flashMessages').danger('Unable to authenticate because the token has been revoked.');
+      }
       // RSA public key
       let cert = ENV.JWT_PUBLIC_KEY ? ENV.JWT_PUBLIC_KEY.replace(/\\n/g, '\n') : null;
 
