@@ -1,36 +1,39 @@
-
   <div class="power-select-label">
-    <label for="funder-reference" class="subtitle">Funder Reference Lookup</label>
+    <label for="funder-name" class="subtitle">Funder Name</label>
   </div>
+  
 
-  <div class="power-select-fragment" doi-funder-reference>
+  <div class="power-select-fragment" doi-funder-name>
     {{#form.element
       controlType="power-select"
-      helpText="Look up for funder references in the Crossref Funders Registry."
+      helpText="Information about financial support (funding) for the resource being registered. Look up for funder references in the Crossref Funders Registry."
       options=funders
-      value=fragment.name
+      value=fragment.funderName
       disabled=disabled
       allowClear=true
-      destination=fragment.funderIdentifier as |el|
+      destination=fragment.funderName as |el|
     }}
     {{#el.control
         searchEnabled=true
         onChange=(action "selectFunderReference")
         placeholder="Search Funding Reference"
+        onkeydown=(action "createOnEnter")
         search=(action "searchFundingReferences")
         searchPlaceholder="Type to search..."
         allowClear=true
+        noMatchesMessage="Press ENTER to add new funder name."
         as |item| }}
-      {{if item.name item.name fragment.name}}
+      {{if item.name item.name fragment.funderName}}
     {{/el.control}}
     {{/form.element}}
   </div>
+  {{!-- <div class="input-group">
 
 {{#if (gt index 0)}}
   <div class="power-select-label">
     <label for="funder-name" class="subtitle">Funder Name</label>
   </div>
-  <div class="input-group">
+  
   <input type="text" class="form-control funder-name-field" value={{fragment.funderName}} disabled={{this.isCrossrefId}}
     oninput={{action "updateFunderName" value="target.value"}} data-test-funder-name />
 
@@ -41,7 +44,7 @@
   <span class="input-group-btn">
     <BsButton @outline={{true}} @onClick={{action "deleteFundingReference" index}}>{{fa-icon "trash"}}</BsButton>
   </span>
-  </div>
+ 
 {{else}}
   <div class="power-select-label">
     <label for="funder-name" class="subtitle">Funder Name</label>
@@ -53,7 +56,28 @@
     Information about financial support (funding) for the resource being registered.
   </div>
 {{/if}}
+ </div> --}}
 
+ 
+
+{{#if (gt index 0)}}
+<div class="power-select-label">
+  <label for="funder-identifier" class="subtitle">Funder Identifier</label>
+</div>
+  <div class="input-group">
+<input type="text" class="form-control funder-identifier-field" value={{fragment.funderIdentifier}}
+  disabled={{this.isCrossrefId}} oninput={{action "updateFunderIdentifier" value="target.value"}}
+  data-test-funder-identifier />
+
+<div class="help-block help-block-fragment funder-identifier-field}}">
+  Uniquely identifies a funding entity, according to any of these types: Crossref Funder ID, GRID, ISNI, or ROR.
+</div>
+
+  <span class="input-group-btn">
+    <BsButton @outline={{true}} @onClick={{action "deleteFundingReference" index}}>{{fa-icon "trash"}}</BsButton>
+  </span>
+  </div>
+{{else}}
 <div class="power-select-label">
   <label for="funder-identifier" class="subtitle">Funder Identifier</label>
 </div>
@@ -64,6 +88,19 @@
 <div class="help-block help-block-fragment funder-identifier-field}}">
   Uniquely identifies a funding entity, according to any of these types: Crossref Funder ID, GRID, ISNI, or ROR.
 </div>
+{{/if}}
+
+
+{{!-- <div class="power-select-label">
+  <label for="funder-identifier" class="subtitle">Funder Identifier</label>
+</div>
+<input type="text" class="form-control funder-identifier-field" value={{fragment.funderIdentifier}}
+  disabled={{this.isCrossrefId}} oninput={{action "updateFunderIdentifier" value="target.value"}}
+  data-test-funder-identifier />
+
+<div class="help-block help-block-fragment funder-identifier-field}}">
+  Uniquely identifies a funding entity, according to any of these types: Crossref Funder ID, GRID, ISNI, or ROR.
+</div> --}}
 
 <div class="power-select-label">
   <label for="funderIdentifierType" class="subtitle">Funder Identifier Type</label>

@@ -1,5 +1,6 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
+import { isBlank } from '@ember/utils';
 
 const funderIdentifierTypeList = [
   'Crossref Funder ID',
@@ -52,7 +53,7 @@ export default Component.extend({
     }
   },
   updateFunderReference(funder) {
-    if (funder) {
+    if (funder.uri) {
       this.fragment.set('funderName', funder.name);
       this.fragment.set('funderIdentifierType', 'Crossref Funder ID');
       this.fragment.set('schemeUri', 'https://www.crossref.org/services/funder-registry/');
@@ -60,15 +61,26 @@ export default Component.extend({
       this.set('isCrossrefId', true);
     } else {
       // this.fragment.set('funderName', funder);
-      this.fragment.set('funderIdentifierType', null);
+      this.fragment.set('funderIdentifierType', 'Other');
       this.fragment.set('funderIdentifier', null);
-      this.fragment.set('funderName', null);
+      this.fragment.set('funderName', funder);
       this.updateFunderSchemeAndType(null);
       this.set('isCrossrefId', false);
     }
   },
 
   actions: {
+    createOnEnter(select, e) {
+      if (e.keyCode === 13 && select.isOpen && !select.highlighted && !isBlank(select.searchText)) {
+        if (!this.selected.includes(select.searchText)) {
+          this.funderIdentifierTypes.push(select.searchText);
+          select.actions.choose(select.searchText);
+          this.fragment.set('funderName', select.searchText);
+          this.fragment.set('funderIdentifierType', 'Other');
+          this.set('funderIdentifierTypes', funderIdentifierTypeList);
+        }
+      }
+    },
     updateFunderIdentifierType(value) {
       this.fragment.set('funderIdentifierType', value);
       // this.updateFunderSchemeAndType(value);
