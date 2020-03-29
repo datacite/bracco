@@ -116,7 +116,7 @@ module('Acceptance | client_admin | doi', function(hooks) {
     await visit('repositories/datacite.test/dois/new');
 
     await selectSearch('[doi-subject]', 'Optics');
-    assert.dom('[doi-subject]').includesText('Search Subject from the OECD Fields of Science Subject, keyword, classification code, or key phrase describing the resource.');
+    assert.dom('[doi-subject]').includesText('Subject from the OECD Fields of Science OR fill in to create a keyword Subject, keyword, classification code, or key phrase describing the resource.');
   });
 
   test('visiting the Form and adding Contributor', async function(assert) {
@@ -131,12 +131,12 @@ module('Acceptance | client_admin | doi', function(hooks) {
 
     await visit('repositories/datacite.test/dois/new');
     await fillIn('[data-test-alternate-identifier]','https://doi.org/10.70048/rph240519');
-    await fillIn('[data-test-alternate-identifier-type]','DOI');
+    await selectChoose('[data-test-alternate-identifier-type]','DOI');
 
     // // NOTE: fillIn matches with hasValue but not with includesText
     assert.equal(currentURL(), 'repositories/datacite.test/dois/new');
     assert.dom('[data-test-alternate-identifier]').hasValue('https://doi.org/10.70048/rph240519');
-    assert.dom('[data-test-alternate-identifier-type]').hasValue('DOI');
+    assert.dom('[data-test-alternate-identifier-type]').includesText('DOI');
   });
 
   test('visiting the Form and adding related Identifier', async function(assert) {
@@ -157,12 +157,12 @@ module('Acceptance | client_admin | doi', function(hooks) {
   test('visiting the Form and adding funding References', async function(assert) {
 
     await visit('repositories/datacite.test/dois/new');
-    await selectSearch('[doi-funder-reference]', 'Action for M.E.');
-    await selectChoose('[doi-funder-reference]', 'Action for M.E.');
+    await selectSearch('[data-test-funder-name]', 'Action for M.E.');
+    await selectChoose('[data-test-funder-name]', 'Action for M.E.');
     await fillIn('[data-test-award-number]', 'G2342342');
     await fillIn('[data-test-award-uri]', 'https://schema.datacite.org/meta/kernel-4');
 
-    assert.dom('[data-test-funder-name]').hasValue('Action for M.E.');
+    // assert.dom('[data-test-funder-name]').hasValue('Action for M.E.');
     assert.dom('[data-test-funder-identifier]').hasValue('http://dx.doi.org/10.13039/501100001982');
     assert.dom('[data-test-funder-identifier-type]').includesText('Crossref Funder ID The type of the funderIdentifier.');
     assert.dom('[data-test-award-number]').hasValue('G2342342');
