@@ -7,8 +7,10 @@ const Validations = buildValidations({
   schemeUri: [
     validator('url-format', {
       allowBlank: true,
-      require_tld: false,
       message: 'Please enter a valid URL.',
+      disabled: computed('model.relatedIdentifierType', function() {
+        return [ 'HasMetadata', 'IsMetadataFor' ].includes(this.model.get('relatedIdentifierType'));
+      }),
     }),
   ],
   relatedIdentifier: [
@@ -52,21 +54,21 @@ const Validations = buildValidations({
         return this.model.get('state') === 'draft';
       }),
       disabled: computed('model.relatedIdentifier', function() {
-        return (this.model.get('relatedIdentifier') == null );
+        return (this.model.get('relatedIdentifier') == null);
       }),
     }),
   ],
-  // resourceTypeGeneral: [
-  //   validator('presence', {
-  //     presence: true,
-  //     isWarning: computed('model.state', function() {
-  //       return this.model.get('state') === 'draft';
-  //     }),
-  //     disabled: computed('model.relatedIdentifierType', function() {
-  //       return [ 'HasMetadata', 'IsMetadataFor' ].includes(this.model.get('relatedIdentifierType')) ? false : true;
-  //     }),
-  //   }),
-  // ],
+  resourceTypeGeneral: [
+    validator('presence', {
+      presence: true,
+      isWarning: computed('model.state', function() {
+        return this.model.get('state') === 'draft';
+      }),
+      disabled: computed('model.relatedIdentifierType', function() {
+        return ![ 'HasMetadata', 'IsMetadataFor' ].includes(this.model.get('relatedIdentifierType'));
+      }),
+    }),
+  ],
 });
 
 export default Fragment.extend(Validations, {
