@@ -35,7 +35,7 @@ export default Component.extend({
           this.alternateIdentifierTypes.push(select.searchText);
           select.actions.choose(select.searchText);
           this.fragment.set('identifierType', select.searchText);
-          this.set('identifierType', alternateIdentifierTypeList);
+          this.set('alternateIdentifierTypes', alternateIdentifierTypeList);
         }
       }
     },
