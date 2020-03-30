@@ -101,7 +101,7 @@ module('Acceptance | staff_admin | repository', function(hooks) {
   // });
 
   test('new DOI form for repository Test', async function(assert) {
-    assert.expect(19);
+    assert.expect(22);
 
     await visit('/repositories/datacite.test/dois/new');
 
@@ -127,6 +127,9 @@ module('Acceptance | staff_admin | repository', function(hooks) {
     assert.dom('[doi-contributor]').exists();
     assert.dom('[data-test-alternate-identifier]').exists();
     assert.dom('[data-test-related-identifier]').exists();
+    assert.dom('[data-test-funder-name]').exists();
+    assert.dom('[data-test-funder-identifier-type]').exists();
+    assert.dom('[ data-test-award-number]').exists();
 
     //   assert.equal(currentURL(), '/repositories/datacite.test/dois/new');
     //   assert.dom('input#suffix-field').exists();
@@ -171,7 +174,7 @@ module('Acceptance | staff_admin | repository', function(hooks) {
   });
 
   test('edit DOI form for repository DataCite Test', async function(assert) {
-    assert.expect(19);
+    assert.expect(20);
 
     await visit('/dois/10.80225%2Fda52-7919/edit');
 
@@ -198,6 +201,7 @@ module('Acceptance | staff_admin | repository', function(hooks) {
     assert.dom('[data-test-alternate-identifier]').exists();
     assert.dom('[data-test-related-identifier]').exists();
     // assert.dom('[data-test-related-metadata-scheme]').exists();
+    assert.dom('[data-test-funder-name]').exists();
 
 
     assert.dom('button#doi-update').exists();
