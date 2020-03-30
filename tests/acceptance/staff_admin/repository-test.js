@@ -6,6 +6,8 @@ import {
   click,
   fillIn,
   // waitUntil,
+  // andThen,
+  waitFor,
 } from '@ember/test-helpers';
 import { selectChoose, selectSearch } from 'ember-power-select/test-support';
 import ENV from 'bracco/config/environment';
@@ -102,30 +104,25 @@ module('Acceptance | staff_admin | repository', function(hooks) {
     assert.dom('li a.nav-link.active').hasText('Prefixes');
     assert.dom('h3.edit').hasText('Assign Prefix');
 
-    // assign prefix 10.80152
-    await selectSearch('#provider-prefix-add', '10.8');
-    await selectChoose('#provider-prefix-add', '10.80152');
+    // assign prefix 10.24413
+    await selectSearch('#provider-prefix-add', '10.2');
+    await selectChoose('#provider-prefix-add', '10.24413');
     await click('button[type=submit]');
-
-    //   await waitUntil(function() {
-    //     return assert.dom('a#assign-prefix').includesText('Assign Prefix');
-    //   });
-
-    //   assert.equal(currentURL(), '/repositories/datacite.test/prefixes');
-    //   // assert.dom('a#10.80152').hasText('10.80152');
-
-    //   // delete prefix 10.80152 that was just assigned
-    //   await visit('/repositories/datacite.test/prefixes/10.80152/delete');
-
-    //   assert.equal(currentURL(), '/repositories/datacite.test/prefixes/10.80152/delete');
-    //   assert.dom('h2.work').hasText('DataCite Test Repository');
-    //   assert.dom('li a.nav-link.active').hasText('Prefixes');
-    //   assert.dom('div.alert.alert-danger').hasText('Are you sure you want to remove prefix 10.80152 from this repository?');
-    //   await click('button#prefix-delete');
-
-  //   assert.equal(currentURL(), '/repositories/datacite.test/prefixes');
-  //   assert.dom('*').doesNotIncludeText('10.80152');
   });
+
+  test('delete prefix 10.24413 that was just assigned', async function(assert) {
+    await visit('/repositories/datacite.test/prefixes/10.24413/delete');
+
+    assert.equal(currentURL(), '/repositories/datacite.test/prefixes/10.24413/delete');
+    assert.dom('h2.work').hasText('DataCite Test Repository');
+    assert.dom('li a.nav-link.active').hasText('Prefixes');
+    assert.dom('div.alert.alert-danger').hasText('Are you sure you want to remove prefix 10.24413 from this repository?');
+    await click('button#prefix-delete');
+
+    assert.equal(currentURL(), '/repositories/datacite.test/prefixes');
+    assert.dom('*').doesNotIncludeText('10.24413');
+  });
+
 
   test('visiting repository DataCite Test dois', async function(assert) {
     await visit('/repositories/datacite.test/dois');
