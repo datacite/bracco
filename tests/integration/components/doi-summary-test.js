@@ -14,7 +14,7 @@ module('Integration | Component | doi summary', function(hooks) {
 
     assert.dom('[data-test-doi]').hasText('10.80225/rph240519');
     assert.dom('[data-test-resource-type-general]').hasText('Dataset');
-    assert.dom('[data-test-metadata]').hasText('Substance published 2017 via Royal Society of Chemistry');
+    assert.dom('[data-test-metadata]').hasText('Version 7 of Substance published 2017 via Royal Society of Chemistry');
   });
 
   test('it renders citations', async function(assert) {

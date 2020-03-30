@@ -2,7 +2,7 @@ import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
-// import { selectChoose } from 'ember-power-select/test-support';
+// import { pauseTest } from 'ember-power-select/test-support';
 import { setupFactoryGuy, make } from 'ember-data-factory-guy';
 
 module('Integration | Component | doi size', function(hooks) {
@@ -11,8 +11,9 @@ module('Integration | Component | doi size', function(hooks) {
 
   test('it renders', async function(assert) {
     this.set('model', make('doi'));
-    await render(hbs`{{doi-size model=model fragment=fragment index=0}}`);
+    await render(hbs`{{doi-size model=model fragment="5kb" index=0}}`);
+    // await pauseTest();
 
-    assert.dom('*').hasText('Identifiers of related resources. These must be globally unique identifiers. Visit our support website for the list of supported unique identifiers. Related Identifier Type Relation Type');
+    assert.dom('*').hasText('Size (optional) Size (e.g. bytes, pages, inches, etc.) or duration (extent), e.g. hours, minutes, days, etc., of a resource.');
   });
 });
