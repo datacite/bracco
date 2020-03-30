@@ -127,6 +127,20 @@ module('Acceptance | client_admin | doi', function(hooks) {
     assert.dom('[doi-contributor]').includesText('DataCollector');
   });
 
+  test('visiting the Form and adding format, version and size', async function(assert) {
+
+    await visit('repositories/datacite.test/dois/new');
+    await fillIn('[data-test-format]','json');
+    await fillIn('[data-test-size]','5kb');
+    // await fillIn('[data-test-version]','67');
+
+    // // NOTE: fillIn matches with hasValue but not with includesText
+    assert.equal(currentURL(), 'repositories/datacite.test/dois/new');
+    assert.dom('[data-test-format]').hasValue('json');
+    assert.dom('[data-test-size]').hasValue('5kb');
+    // assert.dom('[data-test-version]').hasValue('67');
+  });
+
   test('visiting the Form and adding Alternate Identfier', async function(assert) {
 
     await visit('repositories/datacite.test/dois/new');
