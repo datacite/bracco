@@ -166,7 +166,7 @@ module('Acceptance | client_admin | doi', function(hooks) {
 
     // assert.dom('[data-test-funder-name]').hasValue('Action for M.E.');
     assert.dom('[data-test-funder-identifier]').hasValue('http://dx.doi.org/10.13039/501100001982');
-    assert.dom('[data-test-funder-identifier-type]').includesText('Crossref Funder ID The type of the funderIdentifier.');
+    assert.dom('[data-test-funder-identifier-type]').includesText('Crossref Funder ID × The type of the funderIdentifier.');
     assert.dom('[data-test-award-number]').hasValue('G2342342');
     assert.dom('[data-test-award-uri]').hasValue('https://schema.datacite.org/meta/kernel-4');
   });
