@@ -75,13 +75,7 @@ export default Component.extend({
         }
       }
     },
-    updateFunderIdentifierType(value) {
-      this.fragment.set('funderIdentifierType', value);
-    },
     updateFunderIdentifier(value) {
-      this.fragment.set('funderIdentifier', value);
-    },
-    searchFunderIdentifier(value) {
       this.fragment.set('funderIdentifier', value);
     },
     selectFunderReference(value) {
