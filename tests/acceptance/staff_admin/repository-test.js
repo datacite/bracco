@@ -9,47 +9,47 @@ import {
 } from '@ember/test-helpers';
 import { selectChoose, selectSearch } from 'ember-power-select/test-support';
 import ENV from 'bracco/config/environment';
-import { authenticateSession } from 'ember-simple-auth/test-support';
-import { setupQunit as setupPolly } from '@pollyjs/core';
+// import { authenticateSession } from 'ember-simple-auth/test-support';
+// import { setupQunit as setupPolly } from '@pollyjs/core';
 
 module('Acceptance | staff_admin | repository', function(hooks) {
-  setupPolly(hooks, {
-    matchRequestsBy: {
-      headers: {
-        exclude: [ 'authorization' ],
-      },
-    },
-  });
+  // setupPolly(hooks, {
+  //   matchRequestsBy: {
+  //     headers: {
+  //       exclude: [ 'authorization' ],
+  //     },
+  //   },
+  // });
   setupApplicationTest(hooks);
 
   hooks.beforeEach(async function() {
-    const { server } = this.polly;
+    // const { server } = this.polly;
 
-    server.any().on('beforePersist', (req, recording) => {
-      /* we only want to perform this task when recording */
-      if (req.action !== 'record') {
-        return;
-      }
-      /* hide password and token in oauth password grant requests */
-      if (recording.request.url == 'https://api.test.datacite.org/token') {
-        recording.request.postData.text = 'INFORMATION_HIDDEN';
-        recording.response.content.text = 'INFORMATION_HIDDEN';
-      }
+    // server.any().on('beforePersist', (req, recording) => {
+    //   /* we only want to perform this task when recording */
+    //   if (req.action !== 'record') {
+    //     return;
+    //   }
+    //   /* hide password and token in oauth password grant requests */
+    //   if (recording.request.url == 'https://api.test.datacite.org/token') {
+    //     recording.request.postData.text = 'INFORMATION_HIDDEN';
+    //     recording.response.content.text = 'INFORMATION_HIDDEN';
+    //   }
 
-      /* filter out authorization tokens */
-      recording.request.headers = recording.request.headers.filter(({ name }) => name !== 'authorization');
-    });
+    //   /* filter out authorization tokens */
+    //   recording.request.headers = recording.request.headers.filter(({ name }) => name !== 'authorization');
+    // });
 
     await visit('/sign-in');
     await fillIn('input#account-field', 'ADMIN');
     await fillIn('input#password-field', ENV.STAFF_ADMIN_PASSWORD);
     await click('button[type=submit]');
 
-    await authenticateSession({
-      uid: 'admin',
-      name: 'Admin',
-      role_id: 'staff_admin',
-    });
+    // await authenticateSession({
+    //   uid: 'admin',
+    //   name: 'Admin',
+    //   role_id: 'staff_admin',
+    // });
   });
 
   test('visiting repository DataCite Test', async function(assert) {
@@ -103,8 +103,8 @@ module('Acceptance | staff_admin | repository', function(hooks) {
     assert.dom('h3.edit').hasText('Assign Prefix');
 
     // assign prefix 10.80152
-    await selectSearch('#provider-prefix-add', '10.0');
-    await selectChoose('#provider-prefix-add', '10.0330');
+    await selectSearch('#provider-prefix-add', '10.8');
+    await selectChoose('#provider-prefix-add', '10.80152');
     await click('button[type=submit]');
 
     //   await waitUntil(function() {

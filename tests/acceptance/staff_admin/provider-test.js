@@ -6,6 +6,7 @@ import {
   click,
   fillIn,
 } from '@ember/test-helpers';
+import { selectChoose, selectSearch } from 'ember-power-select/test-support';
 import ENV from 'bracco/config/environment';
 // import { authenticateSession } from 'ember-simple-auth/test-support';
 // import { setupQunit as setupPolly } from '@pollyjs/core';
@@ -155,23 +156,23 @@ module('Acceptance | staff_admin | provider', function(hooks) {
     assert.dom('a#transfer-dois').doesNotExist();
   });
 
-  // test('visiting provider TIB prefixes', async function(assert) {
-  //   await visit('/providers/tib/prefixes');
+  test('visiting provider datacite prefixes', async function(assert) {
+    await visit('/providers/datacite/prefixes');
 
-  //   assert.equal(currentURL(), '/providers/tib/prefixes');
-  //   assert.dom('h2.work').hasText('German National Library of Science and Technology');
-  //   assert.dom('li a.nav-link.active').hasText('Prefixes');
-  //   assert.dom('div#search').exists();
+    assert.equal(currentURL(), '/providers/datacite/prefixes');
+    assert.dom('h2.work').hasText('DataCite');
+    assert.dom('li a.nav-link.active').hasText('Prefixes');
+    assert.dom('div#search').exists();
 
-  //   // at least one prefix exists
-  //   assert.dom('[data-test-results]').includesText('Prefixes');
-  //   assert.dom('[data-test-prefix]').exists();
-  //   assert.dom('div.panel.facets').exists();
+    // at least one prefix exists
+    assert.dom('[data-test-results]').includesText('Prefixes');
+    assert.dom('[data-test-prefix]').exists();
+    assert.dom('div.panel.facets').exists();
 
-  //   // admin can assign new prefix
-  //   assert.dom('a#assign-prefix').includesText('Assign Prefix');
-  //   assert.dom('a#assign-prefix').hasAttribute('href', '/providers/tib/prefixes/new');
-  // });
+    // admin can assign new prefix
+    assert.dom('a#assign-prefix').includesText('Assign Prefix');
+    assert.dom('a#assign-prefix').hasAttribute('href', '/providers/datacite/prefixes/new');
+  });
 
   test('new provider form', async function(assert) {
     assert.expect(48);
@@ -315,5 +316,34 @@ module('Acceptance | staff_admin | provider', function(hooks) {
 
     assert.dom('input#confirm-symbol-field').doesNotExist();
     assert.dom('button#delete').doesNotExist();
+  });
+
+  test('assign a prefix and remove', async function(assert) {
+    await visit('/providers/datacite/prefixes/new');
+
+    assert.equal(currentURL(), '/providers/datacite/prefixes/new');
+
+    // assign prefix 10.80253
+    await selectSearch('#prefix-add', '10.8');
+    await selectChoose('#prefix-add', '10.80253');
+    await click('button[type=submit]');
+    assert.equal(currentURL(), '/providers/datacite/prefixes');
+
+    await visit('/providers/datacite/prefixes/10.80253/delete');
+    await click('button#remove');
+    assert.equal(currentURL(), '/providers/datacite/prefixes');
+  });
+
+  test('cancel assigning a prefix', async function(assert) {
+    await visit('/providers/datacite/prefixes/new');
+
+    assert.equal(currentURL(), '/providers/datacite/prefixes/new');
+
+    // assign prefix 10.80254
+    await selectSearch('#prefix-add', '10.8');
+    await selectChoose('#prefix-add', '10.80254');
+    await click('button#cancel');
+    assert.equal(currentURL(), '/providers/datacite/prefixes');
+
   });
 });
