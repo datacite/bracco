@@ -18,11 +18,6 @@ export default JSONSerializer.extend({
     payload.id  = payload.message.id;
     return this._super(store, primaryModelClass, payload, id, requestType);
   },
-  // normalizeFindRecordResponse(store, primaryModelClass, payload) {
-  //   payload.data.attributes.meta = payload.meta || {};
-
-  //   return this._super(store, primaryModelClass, payload);
-  // },
   keyForAttribute(attr) {
     return underscore(attr);
   },

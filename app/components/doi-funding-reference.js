@@ -31,23 +31,18 @@ export default Component.extend({
   updateFunderSchemeAndType(scheme) {
     switch (scheme) {
       case scheme == 'ROR':
-        // this.fragment.set('schemeUri', 'https://ror.org/');
         this.fragment.set('funderIdentifierType', 'ROR');
         break;
       case scheme == 'Crossref Funder ID':
-        // this.fragment.set('schemeUri', 'https://www.crossref.org/services/funder-registry/');
         this.fragment.set('funderIdentifierType', 'Crossref Funder ID');
         break;
       case scheme == 'GRID':
-        // this.fragment.set('schemeUri', 'https://www.grid.ac/');
         this.fragment.set('relatedIdentifierType', 'GRID');
         break;
       case scheme == 'ISNI':
-        // this.fragment.set('schemeUri', 'http://www.isni.org/isni/');
         this.fragment.set('funderIdentifierType', 'ISNI');
         break;
       default:
-        // this.fragment.set('schemeUri', null);
         this.fragment.set('funderIdentifierType', 'Other');
         break;
     }
@@ -60,7 +55,6 @@ export default Component.extend({
       this.fragment.set('funderIdentifier', funder.uri);
       this.set('isCrossrefId', true);
     } else {
-      // this.fragment.set('funderName', funder);
       this.fragment.set('funderIdentifierType', 'Other');
       this.fragment.set('funderIdentifier', null);
       this.fragment.set('funderName', funder);
@@ -83,7 +77,6 @@ export default Component.extend({
     },
     updateFunderIdentifierType(value) {
       this.fragment.set('funderIdentifierType', value);
-      // this.updateFunderSchemeAndType(value);
     },
     updateFunderIdentifier(value) {
       this.fragment.set('funderIdentifier', value);
