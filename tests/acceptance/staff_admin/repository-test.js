@@ -6,8 +6,7 @@ import {
   click,
   fillIn,
   // waitUntil,
-  // andThen,
-  waitFor,
+  // pauseTest,
 } from '@ember/test-helpers';
 import { selectChoose, selectSearch } from 'ember-power-select/test-support';
 import ENV from 'bracco/config/environment';
@@ -212,6 +211,19 @@ module('Acceptance | staff_admin | repository', function(hooks) {
     assert.dom('input#is-active-field').exists();
 
     assert.dom('button#update-repository').includesText('Update Repository');
+  });
+
+  test('update repository description', async function(assert) {
+    await visit('/repositories/datacite.test/edit');
+    assert.dom('textarea#description-field').exists();
+    let desc = 'datacite' + Math.round(Math.random() * 1000).toString();
+    await fillIn('textarea#description-field', desc);
+    await click('button#update-repository');
+
+    await visit('/repositories/datacite.test');
+    assert.dom('h2.work').hasText('DataCite Test Repository');
+    assert.dom('p#description').hasText(desc);
+    // await pauseTest();
   });
 
   test('editing repository DataCite Test password form', async function(assert) {
