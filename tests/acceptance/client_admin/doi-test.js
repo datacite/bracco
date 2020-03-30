@@ -160,7 +160,7 @@ module('Acceptance | client_admin | doi', function(hooks) {
     // await selectSearch('[data-test-funder-name]', 'Action for M.E.');
     // await selectChoose('[data-test-funder-name]', 'Action for M.E.');
     await fillIn('[data-test-funder-identifier]', 'http://dx.doi.org/10.13039/501100001982');
-    await selectChoose('[data-test-funder-identifier-type]', 'Crossref Funder ID The type of the funderIdentifier.');
+    await selectChoose('[data-test-funder-identifier-type]', 'Crossref Funder ID');
     await fillIn('[data-test-award-number]', 'G2342342');
     await fillIn('[data-test-award-uri]', 'https://schema.datacite.org/meta/kernel-4');
 
