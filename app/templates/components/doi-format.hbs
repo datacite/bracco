@@ -2,13 +2,13 @@
 <label for="format" class="subtitle">Format (optional)</label>
 {{#if (gt index 0)}}
   <div class="input-group">
-    <input type="text" class="form-control format-field" value={{fragment}} oninput={{action "updateFormat" value="target.value"}} data-test-format/>    
+    <input type="text" class="form-control format-field" value={{fragment}} oninput={{action "updateFormat" value="target.value"}} onblur={{action "selectFormat" }} data-test-format/>    
     <span class="input-group-addon">
       <BsButton @outline={{true}} @onClick={{action "deleteFormat" index}}>{{fa-icon "trash" pull="left" style="margin:0;"}}</BsButton>
     </span>
   </div>
 {{else}}
-  <input type="text" class="form-control format-field" value={{fragment}} oninput={{action "updateFormat" value="target.value"}} data-test-format/>
+  <input type="text" class="form-control format-field" value={{fragment}} oninput={{action "updateFormat" value="target.value"}} onblur={{action "selectFormat" }} data-test-format/>
 {{/if}}
 <div class="help-block help-block-fragment format-field">Technical format of the resource. </div>
 <hr />

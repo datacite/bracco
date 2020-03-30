@@ -1,15 +1,17 @@
 import Component from '@ember/component';
-import { set } from '@ember/object';
 
 export default Component.extend({
 
-
   actions: {
     updateFormat(value) {
-      set(this, 'fragment', value);
+      this.set('fragment', value);
+    },
+    selectFormat() {
+      console.log(this.fragment);
+      this.model.get('formats').replace(this.index, 1, [ this.fragment ]);
     },
     deleteFormat() {
-      this.model.get('formats').removeObject(this.fragment);
+      this.model.get('formats').removeAt(this.index);
     },
   },
 });
