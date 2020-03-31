@@ -1,14 +1,10 @@
 <div class="form-group {{validationClass}}">
   <label class="control-label col-md-3">Language (optional)</label>
-
   <div class="col-md-9">
-     {{!-- <div class="input-group"> --}}
-      {{!-- <span class="input-group-addon"> --}}
-    {{#form.element controlType="power-select" id="doi-language" formLayout="vertical"  disabled=disabled value=language options=languages as |el|}}
-      {{el.control onChange=(action "selectLanguage") search=(action "searchLanguage") placeholder="Select Language" searchPlaceholder="Type to search..." allowClear=true }}
-    {{/form.element}}
-      {{!-- </span> --}}
-    {{!-- </div> --}}
-    <div class="help-block help-block doi-language">The primary language of the resource.</div>
+     <div class="power-select-fragment" doi-language>
+      {{#form.element controlType="power-select" id="doi-language" helpText="The primary language of the resource." formLayout="vertical"  disabled=disabled value=language options=languages as |el|}}
+        {{el.control onChange=(action "selectLanguage") search=(action "searchLanguage") placeholder="Select Language" searchPlaceholder="Type to search..." allowClear=true }}
+      {{/form.element}}
+    </div>
   </div>
 </div>

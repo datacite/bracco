@@ -1,0 +1,122 @@
+  <div class="power-select-label">
+    <label for="funder-name" class="subtitle">Funder Name</label>
+  </div>
+  
+
+  <div class="power-select-fragment" data-test-funder-name>
+    {{#form.element
+      controlType="power-select"
+      helpText="Information about financial support (funding) for the resource being registered. Look up for funder references in the Crossref Funders Registry."
+      options=funders
+      value=fragment.funderName
+      disabled=disabled
+      allowClear=true
+      destination=fragment.funderName as |el|
+    }}
+    {{#el.control
+        searchEnabled=true
+        onChange=(action "selectFunderReference")
+        placeholder="Search Funding Reference"
+        onkeydown=(action "createOnEnter")
+        search=(action "searchFundingReferences")
+        searchPlaceholder="Type to search..."
+        allowClear=true
+        noMatchesMessage="Press ENTER to add new funder name."
+        as |item| }}
+      {{if item.name item.name fragment.funderName}}
+    {{/el.control}}
+    {{/form.element}}
+  </div>
+
+
+ 
+
+{{#if (gt index 0)}}
+<div class="power-select-label">
+  <label for="funder-identifier" class="subtitle">Funder Identifier</label>
+</div>
+  <div class="input-group">
+<input type="text" class="form-control funder-identifier-field" value={{fragment.funderIdentifier}}
+  disabled={{this.isCrossrefId}} oninput={{action "updateFunderIdentifier" value="target.value"}}
+  data-test-funder-identifier />
+
+<div class="help-block help-block-fragment funder-identifier-field}}">
+  Uniquely identifies a funding entity, according to any of these types: Crossref Funder ID, GRID, ISNI, or ROR.
+</div>
+
+  <span class="input-group-btn">
+    <BsButton @outline={{true}} @onClick={{action "deleteFundingReference" index}}>{{fa-icon "trash"}}</BsButton>
+  </span>
+  </div>
+{{else}}
+<div class="power-select-label">
+  <label for="funder-identifier" class="subtitle">Funder Identifier</label>
+</div>
+<input type="text" class="form-control funder-identifier-field" value={{fragment.funderIdentifier}}
+  disabled={{this.isCrossrefId}} oninput={{action "updateFunderIdentifier" value="target.value"}}
+  data-test-funder-identifier />
+
+<div class="help-block help-block-fragment funder-identifier-field}}">
+  Uniquely identifies a funding entity, according to any of these types: Crossref Funder ID, GRID, ISNI, or ROR.
+</div>
+{{/if}}
+
+
+
+
+<div class="power-select-label">
+  <label for="funderIdentifierType" class="subtitle">Funder Identifier Type</label>
+</div>
+<div class="power-select-fragment" data-test-funder-identifier-type>
+  {{#form.element
+        controlType="power-select"
+        value=fragment.funderIdentifierType
+        helpText="The type of the funderIdentifier."
+        options=funderIdentifierTypeList
+        disabled=isCrossrefId
+        destination=fragment.funderIdentifierType as |el|
+      }}
+  {{el.control
+        onChange=(action "selectFunderIdentifierType")
+        allowClear=true
+        placeholder="Select Funder Identifier Type"
+      }}
+  {{/form.element}}
+
+</div>
+
+<div class="power-select-label">
+  <label for="award-number" class="subtitle">Award Number</label>
+</div>
+<input type="text" class="form-control award-number-field" value={{fragment.awardNumber}}
+  oninput={{action "updateAwardNumber" value="target.value"}} data-test-award-number />
+
+<div class="help-block help-block-fragment award-number-field}}">
+  The code assigned by the funder to a sponsored award (grant).
+</div>
+
+<div class="power-select-label">
+  <label for="award-title" class="subtitle">Award Title</label>
+</div>
+
+<input type="text" class="form-control award-title-field" value={{fragment.awardTitle}}
+  oninput={{action "updateAwardTitle" value="target.value"}} data-test-award-title />
+
+<div class="help-block help-block-fragment award-title-field}}">
+  The human readable title or name of the award (grant).
+</div>
+
+<div class="power-select-label">
+  <label for="award-uri" class="subtitle">Award Uri</label>
+</div>
+
+<input type="text" class="form-control award-uri-field" value={{fragment.awardUri}}
+  oninput={{action "updateAwardUri" value="target.value"}} data-test-award-uri />
+
+<div class="help-block help-block-fragment award-uri-field}}">
+  The URI leading to a page provided by the funder for more information about the award (grant). For example, https://www.moore.org/gran
+ts/list/GBMF3859.01
+</div>
+
+
+<hr />
