@@ -17,6 +17,9 @@ export default Controller.extend({
 
       // Reset content to null rather than use default values
       // We want the API to work out the values from the file XML
+      doi.set('formats', null);
+      doi.set('sizes', null);
+      doi.set('version', null);
       doi.set('creators', null);
       doi.set('titles', null);
       doi.set('descriptions', null);

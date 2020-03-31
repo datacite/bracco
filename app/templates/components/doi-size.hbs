@@ -1,0 +1,13 @@
+<label for="size" class="subtitle">Size (optional)</label>
+{{#if (gt index 0)}}
+  <div class="input-group">
+    <input type="text" class="form-control size-field" value={{fragment}} oninput={{action "updateSize" value="target.value"}} onblur={{action "selectSize" }} data-test-size/>    
+    <span class="input-group-addon">
+      <BsButton @outline={{true}} @onClick={{action "deleteSize" index}}>{{fa-icon "trash" pull="left" style="margin:0;"}}</BsButton>
+    </span>
+  </div>
+{{else}}
+  <input type="text" class="form-control size-field" value={{fragment}} oninput={{action "updateSize" value="target.value"}} onblur={{action "selectSize" }} data-test-size/>
+{{/if}}
+<div class="help-block help-block-fragment size-field">Size (e.g. bytes, pages, inches, etc.) or duration (extent), e.g. hours, minutes, days, etc., of a resource. </div>
+<hr />

@@ -30,6 +30,11 @@
       <DoiDescriptions @model={{model}} @form={{form}} />
       
       {{#if (feature-flag 'optionalFields')}}
+        <DoiSizes @model={{model}} @form={{form}} />
+        <DoiFormats @model={{model}} @form={{form}} />
+
+        <form.element @id="version" @controlType="text" @label="Version" @property="version" @helpText="The version number of the resource. "  @required={{false}} data-test-version/>
+
         <DoiGeoLocations @model={{model}} @form={{form}} />
         <DoiSubjects @model={{model}} @form={{form}} />
         <DoiLanguage @model={{model}} @form={{form}} />
