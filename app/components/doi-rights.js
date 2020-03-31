@@ -1,19 +1,15 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 import { isBlank } from '@ember/utils';
+import { spdxLicenseList } from '@ember/public/spdx-licenses.json';
 
-const rightsIdentifierTypeList = [
-  'Crossref Rights ID',
-  'GRID',
-  'ISNI',
-  'ROR',
-  'Other',
-];
+// const spdxLicenseListM = $.getJSON('@ember/public/spdx-licenses.json');
+const spdxLicenseListM = spdxLicenseList;
 
 export default Component.extend({
-  rightsIdentifierTypeList,
-  rightsIdentifierTypes: rightsIdentifierTypeList,
-  isCrossrefId: false,
+  spdxLicenseListM,
+  rightsIdentifierTypes: spdxLicenseListM,
+  isSpdxId: false,
   selected: [],
   store: service(),
 
@@ -22,44 +18,27 @@ export default Component.extend({
   didReceiveAttrs() {
     this._super(...arguments);
 
-    if (rightsIdentifierTypeList.includes(this.fragment.get('subject'))) {
-      this.set('isCrossrefId', true);
+    if (spdxLicenseListM.includes(this.fragment.get('rights'))) {
+      this.set('isSpdxId', true);
     } else {
-      this.set('isCrossrefId', false);
-    }
-  },
-  updateRightsSchemeAndType(scheme) {
-    switch (scheme) {
-      case scheme == 'ROR':
-        this.fragment.set('rightsIdentifierType', 'ROR');
-        break;
-      case scheme == 'Crossref Rights ID':
-        this.fragment.set('rightsIdentifierType', 'Crossref Rights ID');
-        break;
-      case scheme == 'GRID':
-        this.fragment.set('relatedIdentifierType', 'GRID');
-        break;
-      case scheme == 'ISNI':
-        this.fragment.set('rightsIdentifierType', 'ISNI');
-        break;
-      default:
-        this.fragment.set('rightsIdentifierType', 'Other');
-        break;
+      this.set('isSpdxId', false);
     }
   },
   updateRights(rights) {
-    if (rights.uri) {
-      this.fragment.set('rightsName', rights.name);
-      this.fragment.set('rightsIdentifierType', 'Crossref Rights ID');
-      this.fragment.set('schemeUri', 'https://www.crossref.org/services/rights-registry/');
-      this.fragment.set('rightsIdentifier', rights.uri);
-      this.set('isCrossrefId', true);
+    if (rights.name) {
+      this.fragment.set('rights', rights.name);
+      this.fragment.set('rightsUri', rights.url);
+      this.fragment.set('rightsIdentifier', rights.name);
+      this.fragment.set('schemeUri', 'https://spdx.org/licenses/');
+      this.fragment.set('rightsIdentifierScheme', 'SPDX');
+      this.set('isSpdxId', true);
     } else {
-      this.fragment.set('rightsIdentifierType', 'Other');
+      this.fragment.set('rights', null);
+      this.fragment.set('rightsUri', null);
       this.fragment.set('rightsIdentifier', null);
-      this.fragment.set('rightsName', rights);
-      this.updateRightsSchemeAndType(null);
-      this.set('isCrossrefId', false);
+      this.fragment.set('schemeUri', null);
+      this.fragment.set('rightsIdentifierScheme', null);
+      this.set('isSpdxId', false);
     }
   },
 
@@ -69,9 +48,9 @@ export default Component.extend({
         if (!this.selected.includes(select.searchText)) {
           this.rightsIdentifierTypes.push(select.searchText);
           select.actions.choose(select.searchText);
-          this.fragment.set('rightsName', select.searchText);
+          this.fragment.set('rights', select.searchText);
           this.fragment.set('rightsIdentifierType', 'Other');
-          this.set('rightsIdentifierTypes', rightsIdentifierTypeList);
+          this.set('rightsIdentifierTypes', spdxLicenseListM);
         }
       }
     },
@@ -103,10 +82,10 @@ export default Component.extend({
       this.model.get('rights').removeObject(this.fragment);
     },
     searchRights(query) {
-      let self = this;
-      this.store.query('rights', { query }).then(function(rightsArray) {
-        self.set('rights', rightsArray);
+      let rights = spdxLicenseListM.filter(function(rights) {
+        return rights.name.toLowerCase().startsWith(query.toLowerCase());
       });
+      this.set('rights', rights);
     },
   },
 });
