@@ -184,4 +184,20 @@ module('Acceptance | client_admin | doi', function(hooks) {
     assert.dom('[data-test-award-number]').hasValue('G2342342');
     assert.dom('[data-test-award-uri]').hasValue('https://schema.datacite.org/meta/kernel-4');
   });
+
+  test('visiting the Form and adding rights', async function(assert) {
+    // when running on travis This Test can take too much time because it call the Crossref API and the selector might not find the element
+    await visit('repositories/datacite.test/dois/new');
+    await selectSearch('[data-test-rights]', 'Action for M.E.');
+    await selectChoose('[data-test-rights]', 'Action for M.E.');
+    await fillIn('[data-test-rights-identifier]', 'http://dx.doi.org/10.13039/501100001982');
+    await selectChoose('[data-test-rights-uri]', 'Crossref Funder ID');
+    await fillIn('[data-test-rights-scheme-uri]', 'G2342342');
+
+    assert.dom('[data-test-rights]').hasValue('Action for M.E.');
+    assert.dom('[data-test-rights-identifier]').hasValue('http://dx.doi.org/10.13039/501100001982');
+    assert.dom('[data-test-rights-uri]').hasValue('http://dx.doi.org/10.13039/501100001982');
+    assert.dom('[data-test-rights-scheme-uri]').hasValue('http://dx.doi.org/10.13039/501100001982');
+
+  });
 });
