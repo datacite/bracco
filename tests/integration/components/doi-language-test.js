@@ -15,6 +15,6 @@ module('Integration | Component | doi language', function(hooks) {
 
     await render(hbs`{{doi-language model=model.doi}}`);
 
-    assert.dom('*').hasText('Language (optional)  The primary language of the resource.');
+    assert.dom('*').hasText('Language (optional)');
   });
 });

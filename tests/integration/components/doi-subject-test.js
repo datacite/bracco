@@ -13,7 +13,7 @@ module('Integration | Component | doi subject', function(hooks) {
     this.set('fragment', make('subject'));
     await render(hbs`{{doi-subject model=model fragment=fragment index=0}}`);
 
-    assert.dom('*').hasText('Subject Subject Scheme The name of the subject scheme or classification code or authority if one is used. Subject Scheme URI The URI of the subject term.');
+    assert.dom('*').hasText('Subject Scheme The name of the subject scheme or classification code or authority if one is used. Subject Scheme URI The URI of the subject term. For example, http://www.oecd.org/science/inno/38235147.pdf');
   });
 });
 

@@ -30,6 +30,7 @@ export default PersonBaseComponent.extend({
     if (contributorType) {
       this.fragment.set('contributorType', contributorTypes.filter(function(type) {return type === contributorType;}));
       this.set('contributorType', contributorType);
+      [ 'HostingInstitution', 'RegistrationAgency','RegistrationAuthority', 'ResearchGroup' ].includes(contributorType) ? this.set('nameType', 'Organization') : this.set('nameType', 'Person');
     } else {
       this.fragment.set('contributorType', null);
     }

@@ -34,7 +34,7 @@ export default ApplicationSerializer.extend({
     version: { serialize: false },
     rightsList: { serialize: false },
     // geoLocations: { serialize: false },
-    fundingReferences: { serialize: false },
+    // fundingReferences: { serialize: false },
     schemaVersion: { serialize: false },
 
     // don't send back these attributes, as they are managed by the API
