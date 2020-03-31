@@ -47,6 +47,11 @@ export function doiFormErrors([ model ]) {
         errorAttributes = errorAttributes.concat(fundingReference.validations.errors.mapBy('attribute'));
       });
     }
+    if (model.rightsList) {
+      model.rightsList.forEach((fundingReference) => {
+        errorAttributes = errorAttributes.concat(fundingReference.validations.errors.mapBy('attribute'));
+      });
+    }
   }
 
   return errorAttributes.map(function(attribute) {

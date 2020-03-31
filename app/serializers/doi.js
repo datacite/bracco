@@ -32,7 +32,7 @@ export default ApplicationSerializer.extend({
     // sizes: { serialize: false },
     // formats: { serialize: false },
     // version: { serialize: false },
-    rightsList: { serialize: false },
+    // rightsList: { serialize: false },
     // geoLocations: { serialize: false },
     // fundingReferences: { serialize: false },
     schemaVersion: { serialize: false },

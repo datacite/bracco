@@ -30,6 +30,7 @@
       <DoiDescriptions @model={{model}} @form={{form}} />
       
       {{#if (feature-flag 'optionalFields')}}
+        <DoiRightsList @model={{model}} @form={{form}} />
         <DoiSizes @model={{model}} @form={{form}} />
         <DoiFormats @model={{model}} @form={{form}} />
 
