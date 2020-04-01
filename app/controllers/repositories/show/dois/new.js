@@ -28,6 +28,11 @@ export default Controller.extend({
         return !isBlank(subject.subject);
       }));
 
+      // // only store subject with a subject text
+      // doi.set('formats', A(doi.get('formats')).filter(function(format) {
+      //   return !isBlank(format);
+      // }));
+
       // only store name identifiers and affiliations with a value
       A(doi.get('creators')).forEach((creator) => {
         creator.set('nameIdentifiers', A(creator.get('nameIdentifiers')).filter(function(nameIdentifier) {

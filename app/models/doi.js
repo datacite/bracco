@@ -2,7 +2,7 @@ import { computed } from '@ember/object';
 import { validator, buildValidations } from 'ember-cp-validations';
 import ENV from 'bracco/config/environment';
 import DS from 'ember-data';
-import { fragmentArray } from 'ember-data-model-fragments/attributes';
+import { fragmentArray, array } from 'ember-data-model-fragments/attributes';
 import { w } from '@ember/string';
 import { A } from '@ember/array';
 
@@ -153,8 +153,8 @@ export default DS.Model.extend(Validations, {
   language: DS.attr('string'),
   types: DS.attr(),
   relatedIdentifiers: fragmentArray('relatedIdentifier', { defaultValue: [] }),
-  sizes: DS.attr(),
-  formats: DS.attr(),
+  sizes: array(),
+  formats: array(),
   version: DS.attr('string'),
   rightsList: DS.attr(),
   descriptions: fragmentArray('description', { defaultValue: [] }),
