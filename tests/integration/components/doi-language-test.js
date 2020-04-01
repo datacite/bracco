@@ -12,7 +12,6 @@ module('Integration | Component | doi language', function(hooks) {
 
   test('it renders', async function(assert) {
     this.set('model', make('doi'));
-    console.log(this.set('model', make('doi')));
     await render(hbs`{{doi-language model=model.doi}}`);
 
     assert.dom('*').hasText('Language (optional)');
