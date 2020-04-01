@@ -318,7 +318,7 @@ module('Acceptance | staff_admin | provider', function(hooks) {
     assert.dom('button#delete').doesNotExist();
   });
 
-  test('assign a prefix and remove', async function(assert) {
+  test('assign a prefix', async function(assert) {
     await visit('/providers/datacite/prefixes/new');
 
     assert.equal(currentURL(), '/providers/datacite/prefixes/new');
@@ -328,7 +328,10 @@ module('Acceptance | staff_admin | provider', function(hooks) {
     await selectChoose('#prefix-add', '10.80253');
     await click('button[type=submit]');
     assert.equal(currentURL(), '/providers/datacite/prefixes');
+  });
 
+  test('remove assined prefix', async function(assert) {
+    // remove prefix 10.80253
     await visit('/providers/datacite/prefixes/10.80253/delete');
     await click('button#remove');
     assert.equal(currentURL(), '/providers/datacite/prefixes');
@@ -339,9 +342,9 @@ module('Acceptance | staff_admin | provider', function(hooks) {
 
     assert.equal(currentURL(), '/providers/datacite/prefixes/new');
 
-    // assign prefix 10.80254
+    // assign prefix 10.80257
     await selectSearch('#prefix-add', '10.8');
-    await selectChoose('#prefix-add', '10.80254');
+    await selectChoose('#prefix-add', '10.80257');
     await click('button#cancel');
     assert.equal(currentURL(), '/providers/datacite/prefixes');
 

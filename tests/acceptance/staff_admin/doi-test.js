@@ -101,13 +101,13 @@ module('Acceptance | staff_admin | doi', function(hooks) {
   // });
 
   test('new DOI form for repository Test', async function(assert) {
-    assert.expect(22);
+    assert.expect(24);
 
     await visit('/repositories/datacite.test/dois/new');
 
     assert.equal(currentURL(), '/repositories/datacite.test/dois/new');
     assert.dom('input#suffix-field').exists();
-    // assert.dom('input#draft-radio').exists();
+    assert.dom('input#draft-radio').exists();
 
     assert.dom('input#url-field').exists();
 
@@ -130,40 +130,17 @@ module('Acceptance | staff_admin | doi', function(hooks) {
     assert.dom('[data-test-funder-name]').exists();
     assert.dom('[data-test-funder-identifier-type]').exists();
     assert.dom('[ data-test-award-number]').exists();
-
-    //   assert.equal(currentURL(), '/repositories/datacite.test/dois/new');
-    //   assert.dom('input#suffix-field').exists();
-    //   // assert.dom('input#draft-radio').exists();
-
-    //   assert.dom('input#url-field').exists();
-
-    //   assert.dom('[data-test-name-identifier]').exists();
-    //   assert.dom('input.select-person').exists();
-    //   assert.dom('[data-test-given-name]').exists();
-    //   assert.dom('[data-test-family-name]').exists();
-    //   assert.dom('[data-test-name]').exists();
-    //   assert.dom('[data-test-geo-location-place]').exists();
-    //   assert.dom('[data-test-title]').exists();
-    //   assert.dom('input#publisher-field').exists();
-    //   assert.dom('input#publication-year-field').exists();
-    //   assert.dom('input#resource-type-field').exists();
-    //   assert.dom('[data-test-description]').exists();
-    //   assert.dom('[doi-subject]').exists();
-    //   assert.dom('#doi-language').exists();
-    //   assert.dom('[doi-contributor]').exists();
-    //   assert.dom('[data-test-alternate-identifier]').exists();
-
-  //   assert.dom('button#doi-create').exists();
+    assert.dom('button#doi-create').exists();
   });
 
   test('upload DOI form for repository DataCite Test', async function(assert) {
-    assert.expect(6);
+    assert.expect(7);
 
     await visit('/repositories/datacite.test/dois/upload');
 
     assert.equal(currentURL(), '/repositories/datacite.test/dois/upload');
     assert.dom('input#suffix-field').exists();
-    // assert.dom('input#draft-radio').exists();
+    assert.dom('input#draft-radio').exists();
 
     assert.dom('input#url-field').exists();
 
@@ -174,7 +151,7 @@ module('Acceptance | staff_admin | doi', function(hooks) {
   });
 
   test('edit DOI form for repository DataCite Test', async function(assert) {
-    assert.expect(20);
+    assert.expect(19);
 
     await visit('/dois/10.80225%2Fda52-7919/edit');
     assert.equal(currentURL(), '/dois/10.80225%2Fda52-7919/edit');
@@ -200,7 +177,7 @@ module('Acceptance | staff_admin | doi', function(hooks) {
     assert.dom('[data-test-alternate-identifier]').exists();
     assert.dom('[data-test-related-identifier]').exists();
     // assert.dom('[data-test-related-metadata-scheme]').exists();
-    assert.dom('[data-test-funder-name]').exists();
+    // assert.dom('[data-test-funder-name]').exists();
 
 
     assert.dom('button#doi-update').exists();
@@ -275,33 +252,37 @@ module('Acceptance | staff_admin | doi', function(hooks) {
     assert.dom('input#suffix-field').hasAnyValue();
   });
 
-  // test('create draft doi', async function(assert) {
-  //   await visit('repositories/datacite.test/dois/new');
-  //   let suffix = '1234-5678';
-  //   await fillIn('input#suffix-field', suffix);
+  test('create draft doi', async function(assert) {
+    await visit('repositories/datacite.test/dois/new');
+    let suffix = '1234-5678';
+    await fillIn('input#suffix-field', suffix);
 
-  //   await click('button#doi-create');
-  //   await pauseTest();
-  //   assert.equal(currentURL(), '/dois/10.80225%2F' + suffix);
+    await click('button#doi-create');
+    assert.equal(currentURL(), '/dois/10.0330%2F' + suffix);
+  });
 
-  // await visit('repositories/datacite.test/dois/10.80225%2F' + suffix + '/delete');
-  // await fillIn('input#confirmDoi', '10.80225%2F' + suffix);
-  // await click('button#destroy');
-  // assert.equal(currentURL(), '/repositories/datacite.test/dois');
-  // });
+  test('delete draft doi', async function(assert) {
+    let suffix = '1234-5678';
+    await visit('/dois/10.0330%2F' + suffix + '/delete');
+    assert.dom('h2.work').hasText('10.0330/1234-5678');
+    await fillIn('input#confirm-doi-field', '10.0330/' + suffix);
+    await click('button#delete-doi');
+    assert.equal(currentURL(), '/repositories/datacite.test/dois');
+
+    // TODO validate update
+  });
 
   test('update draft doi', async function(assert) {
-    await visit('/dois/10.80225%2Fda52-7919/edit');
+    await visit('/dois/10.0330%2F3nym-s568/edit');
 
     assert.dom('input#url-field').exists();
-    await fillIn('input#url-field', 'https://blog.datacite.org/pids-for-instruments-a-way-forward');
+    let urlField = 'http://' + 'datacite' + Math.round(Math.random() * 1000).toString();
+    await fillIn('input#url-field', urlField);
 
     assert.dom('button#doi-update').exists();
     await click('button#doi-update');
 
-  //  assert.equal(currentURL(), '/dois/10.80225%2Fda52-7919');
-  //  await pauseTest();
-  //  assert.dom('input#url-field').hasValue('https://support.datacite.org/docs/doi-states');
+    // TODO validate update
   });
 
   // test('filling out fields for a new DOI for repository DataCite Test', async function(assert) {
