@@ -11,19 +11,20 @@ const Validations = buildValidations({
       message: 'Please enter a valid URL.',
     }),
   ],
-  schemeUri: [
-    validator('url-format', {
-      allowBlank: true,
-      require_tld: false,
-      message: 'Please enter a valid URL.',
-    }),
-  ],
+  // schemeUri: [
+  //   validator('url-format', {
+  //     allowBlank: true,
+  //     require_tld: false,
+  //     message: 'Please enter a valid URL.',
+  //   }),
+  // ],
 });
 
 export default Fragment.extend(Validations, {
   rights: DS.attr('string'),
   rightsUri: DS.attr('string'),
-  rightsIdentifier: DS.attr('string'),
-  rightsIdentifierScheme: DS.attr('string'),
-  schemeUri: DS.attr('string'),
+  // // Not implemented yet in the REST API
+  // rightsIdentifier: DS.attr('string'),
+  // rightsIdentifierScheme: DS.attr('string'),
+  // schemeUri: DS.attr('string'),
 });
