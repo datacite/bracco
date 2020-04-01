@@ -1,8 +1,16 @@
 import Controller from '@ember/controller';
 import { isBlank } from '@ember/utils';
 import { A } from '@ember/array';
+import fetch from 'fetch';
+
+const spdxUrl = 'https://gitlab.com/gitlab-org/security-products/license-management/-/raw/master/spdx-licenses.json';
+
 
 export default Controller.extend({
+  init() {
+    this._super(...arguments);
+    this.getSpdxList();
+  },
   setEvent(state) {
     if (state === 'registered') {
       return 'register';
@@ -11,6 +19,22 @@ export default Controller.extend({
     } else {
       return null;
     }
+  },
+  getSpdxList() {
+    let self = this;
+    let url = spdxUrl;
+    fetch(url).then(function(response) {
+      if (response.ok) {
+        response.json().then(function(data) {
+          self.set('spdxList', data.licenses);
+          return (data);
+        });
+      } else {
+        console.debug(response);
+      }
+    }).catch(function(error) {
+      console.debug(error);
+    });
   },
 
   actions: {

@@ -22,7 +22,7 @@
       <DoiDescriptions @model={{model.doi}} @form={{form}} />
 
       {{#if (feature-flag 'optionalFields')}}
-        <DoiRightsList @model={{model.doi}} @form={{form}} />
+        <DoiRightsList @model={{model.doi}} @form={{form}} @spdxList={{spdxList}} />
         <DoiSizes @model={{model.doi}} @form={{form}} />
         <DoiFormats @model={{model.doi}} @form={{form}} />
 
