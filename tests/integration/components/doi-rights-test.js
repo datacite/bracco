@@ -16,4 +16,12 @@ module('Integration | Component | doi rights', function(hooks) {
 
     assert.dom('*').hasText('The URI of the license.');
   });
+
+  test('it renders add add right', async function(assert) {
+    this.set('model', make('doi'));
+    this.set('fragment', make('rights'));
+    await render(hbs`{{doi-rights model=model fragment=fragment index=0}}`);
+
+    assert.dom('[data-test-rights-uri]').hasValue('http://creativecommons.org/licenses/by/3.0/de/deed.en');
+  });
 });
