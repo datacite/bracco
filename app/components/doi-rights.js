@@ -14,7 +14,6 @@ export default Component.extend({
     this._super();
     this.set('spdxLicenseListComplete', this.spdxList);
     this.set('spdxLicenseList', this.spdxList);
-
   },
 
   didReceiveAttrs() {
@@ -72,7 +71,7 @@ export default Component.extend({
       this.fragment.set('rightsUri', value);
     },
     deleteRights() {
-      this.model.get('rights').removeAt(this.index);
+      this.model.get('rightsList').removeObject(this.fragment);
     },
     searchRights(query) {
       let rightsFound = this.spdxLicenseListComplete.filter(function(rights) {
