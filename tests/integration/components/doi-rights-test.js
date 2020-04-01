@@ -14,6 +14,6 @@ module('Integration | Component | doi rights', function(hooks) {
     this.set('fragment', make('rights'));
     await render(hbs`{{doi-rights model=model fragment=fragment index=0}}`);
 
-    assert.dom('*').hasText('Funder Name Funder Identifier Uniquely identifies a funding entity, according to any of these types: Crossref Funder ID, GRID, ISNI, or ROR. Funder Identifier Type Award Number The code assigned by the funder to a sponsored award (grant). Award Title The human readable title or name of the award (grant). Award Uri The URI leading to a page provided by the funder for more information about the award (grant). For example, https://www.moore.org/gran ts/list/GBMF3859.01');
+    assert.dom('*').hasText('The URI of the license.');
   });
 });

@@ -189,7 +189,6 @@ module('Acceptance | staff_admin | repository', function(hooks) {
     assert.dom('[data-test-funder-name]').exists();
     assert.dom('[data-test-rights]').exists();
 
-
     assert.dom('button#doi-update').exists();
   });
 
