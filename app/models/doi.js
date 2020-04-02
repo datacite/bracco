@@ -149,7 +149,7 @@ export default DS.Model.extend(Validations, {
   subjects: fragmentArray('subject', { defaultValue: [] }),
   contributors: fragmentArray('contributor', { defaultValue: [] }),
   identifiers: fragmentArray('identifier', { defaultValue: [] }),
-  dates: DS.attr(),
+  dates: fragmentArray('date', { defaultValue: [] }),
   language: DS.attr('string'),
   types: DS.attr(),
   relatedIdentifiers: fragmentArray('relatedIdentifier', { defaultValue: [] }),

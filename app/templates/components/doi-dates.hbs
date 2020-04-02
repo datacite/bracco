@@ -1,0 +1,12 @@
+<div class="form-group {{validationClass}}">
+  <label class="control-label col-md-3">Date(s) (optional)</label>
+  <div class="col-md-9">
+    {{#each model.dates as |date index|}}
+      <DoiDate @model={{model}} @fragment={{date}} @form={{form}} @index={{index}} />
+    {{/each}}
+
+    {{#if (or (not model.dates) (lte model.dates.length 4))}}
+      <BsButton @class="btn-sm" @id="add-date" @outline={{true}} @onClick={{action "addDate"}}>{{fa-icon "plus"}} Add {{if (gt model.dates.length 0) "another "}}date</BsButton>
+    {{/if}}
+  </div>
+</div>

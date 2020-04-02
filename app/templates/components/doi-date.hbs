@@ -1,0 +1,50 @@
+
+{{#if (gt index 0)}}
+<div class="power-select-label">
+  <label for="dateType" class="subtitle">Date Type</label>
+</div>
+{{/if}}
+
+<div class="power-select-fragment">
+  {{#form.element 
+    controlType="power-select" 
+    helpText="Type of date. "
+    value=fragment.dateType 
+    options=dateTypesList 
+    destination=fragment.dateType 
+    disabled=disabled as |el|}}
+  {{el.control onChange=(action "selectDateType") placeholder="Select Date Type" allowClear=false}}
+  {{/form.element}}
+</div>
+
+<div class="power-select-label">
+  <label for="dateInformation" class="subtitle">Date (optional)</label>
+</div>
+
+{{#if (gt index 0)}}
+<div class="input-group">
+  <input class="form-control date-field" value={{fragment.date}} onblur={{action "updateDate" value="target.value"}} placeholder="Date"
+    data-test-date />
+  <span class="input-group-addon">
+    <BsButton @outline={{true}} @onClick={{action "deleteDate" index}}>{{fa-icon "trash" pull="left" style="margin:0;"}}
+    </BsButton>
+  </span>
+</div>
+{{else}}
+<input class="form-control date-field" value={{fragment.date}} onblur={{action "updateDate" value="target.value"}} placeholder="Date"
+  data-test-date />
+    <div class="help-block help-block-fragment">Different dates relevant to the work. </div>
+{{/if}}
+
+
+<div class="power-select-label">
+  <label for="dateInformation" class="subtitle">Date Information (optional)</label>
+</div>
+
+<input class="form-control date-information-field" value={{fragment.dateInformation}}
+  placeholder="Date Information" 
+  oninput={{action "updateDateInformation" value="target.value"}} data-test-date />
+  <div class="help-block help-block-fragment">Specific information about the date, if appropriate.</div>
+
+
+<hr />
