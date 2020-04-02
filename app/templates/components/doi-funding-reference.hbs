@@ -36,7 +36,7 @@
   <label for="funder-identifier" class="subtitle">Funder Identifier</label>
 </div>
   <div class="input-group">
-<input type="text" class="form-control funder-identifier-field" value={{fragment.funderIdentifier}}
+<input type="text" class="form-control funder-identifier-field" value={{fragment.funderIdentifier}} placeholder="Funder Identifier"
   disabled={{this.isCrossrefId}} oninput={{action "updateFunderIdentifier" value="target.value"}}
   data-test-funder-identifier />
 
@@ -52,7 +52,7 @@
 <div class="power-select-label">
   <label for="funder-identifier" class="subtitle">Funder Identifier</label>
 </div>
-<input type="text" class="form-control funder-identifier-field" value={{fragment.funderIdentifier}}
+<input type="text" class="form-control funder-identifier-field" value={{fragment.funderIdentifier}} placeholder="Funder Identifier"
   disabled={{this.isCrossrefId}} oninput={{action "updateFunderIdentifier" value="target.value"}}
   data-test-funder-identifier />
 
@@ -88,7 +88,7 @@
 <div class="power-select-label">
   <label for="award-number" class="subtitle">Award Number</label>
 </div>
-<input type="text" class="form-control award-number-field" value={{fragment.awardNumber}}
+<input type="text" class="form-control award-number-field" value={{fragment.awardNumber}} placeholder="Award Number"
   oninput={{action "updateAwardNumber" value="target.value"}} data-test-award-number />
 
 <div class="help-block help-block-fragment award-number-field}}">
@@ -99,7 +99,7 @@
   <label for="award-title" class="subtitle">Award Title</label>
 </div>
 
-<input type="text" class="form-control award-title-field" value={{fragment.awardTitle}}
+<input type="text" class="form-control award-title-field" value={{fragment.awardTitle}} placeholder="Award Title"
   oninput={{action "updateAwardTitle" value="target.value"}} data-test-award-title />
 
 <div class="help-block help-block-fragment award-title-field}}">
@@ -110,7 +110,7 @@
   <label for="award-uri" class="subtitle">Award Uri</label>
 </div>
 
-<input type="text" class="form-control award-uri-field" value={{fragment.awardUri}}
+<input type="text" class="form-control award-uri-field" value={{fragment.awardUri}} placeholder="Award Uri"
   oninput={{action "updateAwardUri" value="target.value"}} data-test-award-uri />
 
 <div class="help-block help-block-fragment award-uri-field}}">

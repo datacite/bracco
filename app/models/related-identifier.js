@@ -7,7 +7,7 @@ const Validations = buildValidations({
   schemeUri: [
     validator('url-format', {
       allowBlank: true,
-      message: 'Please enter a valid URL.',
+      message: 'Please enter a valid URL for the schemeUri.',
       disabled: computed('model.relatedIdentifierType', function() {
         return [ 'HasMetadata', 'IsMetadataFor' ].includes(this.model.get('relatedIdentifierType'));
       }),
@@ -27,7 +27,6 @@ const Validations = buildValidations({
     validator('identifier-format', {
       allowBlank: true,
       dependentKeys: [ 'model.relatedIdentifierType' ],
-      message: 'Please enter a valid Related Identifier.',
       isWarning: computed('model.state', function() {
         return this.model.get('state') === 'draft';
       }),
@@ -39,6 +38,7 @@ const Validations = buildValidations({
   relatedIdentifierType: [
     validator('presence', {
       presence: true,
+      message: 'Please enter a Related Identifier Type for the Related Identifier.',
       isWarning: computed('model.state', function() {
         return this.model.get('state') === 'draft';
       }),
@@ -50,6 +50,7 @@ const Validations = buildValidations({
   relationType: [
     validator('presence', {
       presence: true,
+      message: 'Please enter a Relation Type for the Related Identifier.',
       isWarning: computed('model.state', function() {
         return this.model.get('state') === 'draft';
       }),
@@ -61,6 +62,7 @@ const Validations = buildValidations({
   resourceTypeGeneral: [
     validator('presence', {
       presence: true,
+      message: 'Please enter a Resource Type for the Related Identifier Metadata.',
       isWarning: computed('model.state', function() {
         return this.model.get('state') === 'draft';
       }),
