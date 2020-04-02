@@ -86,6 +86,18 @@ module('Unit | Validator | date-format', function(hooks) {
     message = validator.validate('2008 February', builtOptions);
     assert.equal(message, 'Please enter a valid date');
   });
+
+  test('500 BC', function(assert) {
+    assert.expect(2);
+
+    builtOptions = validator.buildOptions({}).toObject();
+
+    message = validator.validate('0500 BC', options);
+    assert.equal(message, 'Please enter a valid date');
+
+    message = validator.validate('-0500', builtOptions);
+    assert.equal(message, true);
+  });
 });
 
 

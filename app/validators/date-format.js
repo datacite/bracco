@@ -5,22 +5,24 @@ import  edtf from 'edtf';
 const DateFormat = BaseValidator.extend({
 
   validate(value, options) {
-    if (!value && options.allowBlank) {
-      return true;
-    } else {
-      let status;
-      try {
-        status = edtf.parse(value, { types: [ 'Date', 'Year', 'Decade', 'Century', 'Season', 'Interval' ] });
-        if (typeof status !== 'undefined') {
-          return true;
-        } else {
+    switch (true) {
+      case value.startsWith('-'):
+        return /-\d{4}/.test(value) ? true : 'Please enter a valid date';
+      case (!value && options.allowBlank):
+        return true;
+      default:
+        try {
+          let status = edtf.parse(value, { types: [ 'Date', 'Year', 'Decade', 'Century', 'Season', 'Interval' ] });
+          if (typeof status !== 'undefined') {
+            return true;
+          } else {
+            let message = 'Please enter a valid date';
+            return message;
+          }
+        } catch (error) {
           let message = 'Please enter a valid date';
           return message;
         }
-      } catch (error) {
-        let message = 'Please enter a valid date';
-        return message;
-      }
     }
   },
 });
