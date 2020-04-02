@@ -101,7 +101,7 @@ module('Acceptance | staff_admin | doi', function(hooks) {
   // });
 
   test('new DOI form for repository Test', async function(assert) {
-    assert.expect(25);
+    assert.expect(27);
 
     await visit('/repositories/datacite.test/dois/new');
 
