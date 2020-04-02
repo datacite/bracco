@@ -12,12 +12,11 @@ module('Integration | Component | doi rights-list', function(hooks) {
     this.set('model', make('doi'));
     await render(hbs`{{doi-rights-list model=model}}`);
     await click('#add-rights');
-    let rightsArray = this.element.querySelectorAll('input.rights-field');
+    let rightsArray = this.element.querySelectorAll('[data-test-rights-uri]');
 
-    await fillIn(rightsArray[0], 'Action for M.E.');
+    await fillIn(rightsArray[0], 'http://creativecommons.org/licenses/by/3.0/de/deed.en');
 
-    assert.dom('[data-test-rights]').hasValue('Action for M.E.');
-    assert.dom('[data-test-rights-identifier]').hasValue('501100001982');
+    assert.dom('[data-test-rights-uri]').hasValue('http://creativecommons.org/licenses/by/3.0/de/deed.en');
   });
 
   test('add multiple values', async function(assert) {
@@ -25,12 +24,11 @@ module('Integration | Component | doi rights-list', function(hooks) {
     await render(hbs`{{doi-rights-list model=model}}`);
     await click('#add-rights');
     await click('#add-rights');
-    let rightsArray = this.element.querySelectorAll('input.rights-field');
+    let rightsArray = this.element.querySelectorAll('[data-test-rights-uri]');
 
-    await fillIn(rightsArray[0], 'motzstrasse 56, berlin');
-    await fillIn(rightsArray[1], 'Chihuahahu, Mexico, 1890');
+    await fillIn(rightsArray[0], 'http://creativecommons.org/licenses/by/3.0/de/deed.en');
 
-    assert.dom(rightsArray[0]).hasValue('motzstrasse 56, berlin');
-    assert.dom(rightsArray[1]).hasValue('Chihuahahu, Mexico, 1890');
+    assert.dom('[data-test-rights-uri]').hasValue('http://creativecommons.org/licenses/by/3.0/de/deed.en');
   });
+
 });
