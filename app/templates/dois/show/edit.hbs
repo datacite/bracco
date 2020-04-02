@@ -30,18 +30,25 @@
       <DoiDescriptions @model={{model}} @form={{form}} />
       
       {{#if (feature-flag 'optionalFields')}}
-        <DoiSizes @model={{model}} @form={{form}} />
+
+       <h3 class="member-results">Recommended Fields</h3>
+
+        <DoiSubjects @model={{model}} @form={{form}} />
+        <DoiContributors @model={{model}} @form={{form}} />
         <DoiDates @model={{model}} @form={{form}} />
+        <DoiRelatedIdentifiers @model={{model}} @form={{form}} />
+        <DoiGeoLocations @model={{model}} @form={{form}} />
+
+        <h3 class="member-results">Optional Fields</h3>
+
+        <DoiLanguage @model={{model}} @form={{form}} />
+        <DoiAlternateIdentifiers @model={{model}} @form={{form}} />
+
+        <DoiSizes @model={{model}} @form={{form}} />
         <DoiFormats @model={{model}} @form={{form}} />
 
-        <form.element @id="version" @controlType="text" @label="Version" @property="version" @helpText="The version number of the resource. "  @required={{false}} data-test-version/>
+        <form.element @id="version" @controlType="text" @placeholder="Version" @label="Version" @property="version" @helpText="The version number of the resource. "  @required={{false}} data-test-version/>
 
-        <DoiGeoLocations @model={{model}} @form={{form}} />
-        <DoiSubjects @model={{model}} @form={{form}} />
-        <DoiLanguage @model={{model}} @form={{form}} />
-        <DoiContributors @model={{model}} @form={{form}} />
-        <DoiAlternateIdentifiers @model={{model}} @form={{form}} />
-        <DoiRelatedIdentifiers @model={{model}} @form={{form}} />
         <DoiFundingReferences @model={{model}} @form={{form}} />
       {{/if}}
 

@@ -23,7 +23,7 @@
 
 {{#if (gt index 0)}}
 <div class="input-group">
-  <input class="form-control date-field" value={{fragment.date}} onblur={{action "updateDate" value="target.value"}}
+  <input class="form-control date-field" value={{fragment.date}} onblur={{action "updateDate" value="target.value"}} placeholder="Date"
     data-test-date />
   <span class="input-group-addon">
     <BsButton @outline={{true}} @onClick={{action "deleteDate" index}}>{{fa-icon "trash" pull="left" style="margin:0;"}}
@@ -31,7 +31,7 @@
   </span>
 </div>
 {{else}}
-<input class="form-control date-field" value={{fragment.date}} onblur={{action "updateDate" value="target.value"}}
+<input class="form-control date-field" value={{fragment.date}} onblur={{action "updateDate" value="target.value"}} placeholder="Date"
   data-test-date />
     <div class="help-block help-block-fragment">Different dates relevant to the work. </div>
 {{/if}}
@@ -42,6 +42,7 @@
 </div>
 
 <input class="form-control date-information-field" value={{fragment.dateInformation}}
+  placeholder="Date Information" 
   oninput={{action "updateDateInformation" value="target.value"}} data-test-date />
   <div class="help-block help-block-fragment">Specific information about the date, if appropriate.</div>
 
