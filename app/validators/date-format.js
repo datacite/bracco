@@ -6,10 +6,10 @@ const DateFormat = BaseValidator.extend({
 
   validate(value, options) {
     switch (true) {
-      case value.startsWith('-'):
-        return /-\d{4}/.test(value) ? true : 'Please enter a valid date';
       case (!value && options.allowBlank):
         return true;
+      case value.startsWith('-'):
+        return /-\d{4}/.test(value) ? true : 'Please enter a valid date';
       default:
         try {
           let status = edtf.parse(value, { types: [ 'Date', 'Year', 'Decade', 'Century', 'Season', 'Interval' ] });
