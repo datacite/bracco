@@ -5,13 +5,13 @@
 <div class="input-group">
 
   <input type="text"
-    class="form-control related-identifier-field no-error {{if (not fragment.relatedIdentifier) 'no-success'}}" value={{fragment.relatedIdentifier}} oninput={{action "updateRelatedIdentifier" value="target.value"}} data-test-related-identifier />
+    class="form-control related-identifier-field no-error {{if (not fragment.relatedIdentifier) 'no-success'}}" placeholder="Related Identifier" value={{fragment.relatedIdentifier}} oninput={{action "updateRelatedIdentifier" value="target.value"}} data-test-related-identifier />
   <span class="input-group-btn">
     <BsButton @outline={{true}} @onClick={{action "deleteRelatedIdentifier" index}}>{{fa-icon "trash"}}</BsButton>
   </span>
 </div>
 {{else}}
-<input type="text" class="form-control related-identifier-field" value={{fragment.relatedIdentifier}} oninput={{action "updateRelatedIdentifier" value="target.value"}} data-test-related-identifier />
+<input type="text" class="form-control related-identifier-field" value={{fragment.relatedIdentifier}} placeholder="Related Identifier" oninput={{action "updateRelatedIdentifier" value="target.value"}} data-test-related-identifier />
 
 {{/if}}
 
@@ -68,7 +68,7 @@
   <div class="power-select-label">
     <label for="relatedMetadataScheme" class="subtitle">Related Metadata Scheme</label> 
   </div> 
-  <input type="text" class="form-control related-metadata-scheme-field" value={{fragment.relatedMetadataScheme}} 
+  <input type="text" class="form-control related-metadata-scheme-field" value={{fragment.relatedMetadataScheme}} placeholder="Related Metadata Scheme"
     oninput={{action "updateRelatedMetadataScheme" value="target.value"}} data-test-related-metadata-scheme />
 
   <div
@@ -79,7 +79,7 @@
   <div class="power-select-label">
     <label for="relatedSchemeURI" class="subtitle">Related Metadata Scheme URI</label> 
   </div> 
-  <input type="text" class="form-control related-scheme-uri-field" value={{fragment.schemeUri}} 
+  <input type="text" class="form-control related-scheme-uri-field" value={{fragment.schemeUri}} placeholder="Related Metadata Scheme URI"
     oninput={{action "updateSchemeURI" value="target.value"}} data-test-related-scheme-uri />
 
   <div
@@ -91,7 +91,7 @@
     <label for="relatedSchemeType" class="subtitle">Related Metadata Scheme Type</label> 
   </div> 
 
-  <input type="text" class="form-control related-scheme-type-field" value={{fragment.schemeType}} 
+  <input type="text" class="form-control related-scheme-type-field" value={{fragment.schemeType}} placeholder="Related Metadata Scheme Type"
     oninput={{action "updateSchemeType" value="target.value"}} data-test-related-scheme-type />
 
   <div

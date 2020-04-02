@@ -21,9 +21,9 @@ module('Unit | Validator | identifier-format', function(hooks) {
     builtOptions = validator.buildOptions({}).toObject();
 
     message = validator.validate('offirgolan', options, {relatedIdentifierType: 'ARK'});
-    assert.equal(message, 'Please enter a valid URL.');
+    assert.equal(message, 'Please enter a valid ARK.');
 
-    message = validator.validate('http://www.offirgolan.com', builtOptions, {relatedIdentifierType: 'ARK'});
+    message = validator.validate('ark:/12148/btv1b8449691v/f29', builtOptions, {relatedIdentifierType: 'ARK'});
     assert.equal(message, true);
   });
 
@@ -35,7 +35,7 @@ module('Unit | Validator | identifier-format', function(hooks) {
     message = validator.validate('.org/10.3205', options, {relatedIdentifierType: 'DOI'});
     assert.equal(message, 'Please enter a valid DOI.');
 
-    message = validator.validate('https://doi.org/10.3205/11dgii122 ', builtOptions, {relatedIdentifierType: 'DOI'});
+    message = validator.validate('10.3205/11dgii122 ', builtOptions, {relatedIdentifierType: 'DOI'});
     assert.equal(message, true);
   });
 
@@ -45,7 +45,7 @@ module('Unit | Validator | identifier-format', function(hooks) {
     builtOptions = validator.buildOptions({}).toObject();
 
     message = validator.validate('arsXiv:0706.0001', options, {relatedIdentifierType: 'arXiv'});
-    assert.equal(message, 'Please enter a valid URL.');
+    assert.equal(message, 'Please enter a valid arXiv.');
 
     message = validator.validate('arXiv:0706.0001', builtOptions, {relatedIdentifierType: 'arXiv'});
     assert.equal(message, true);

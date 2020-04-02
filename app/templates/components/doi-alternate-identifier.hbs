@@ -7,7 +7,7 @@
   </div>
   <div class="help-block help-block-fragment">An identifier or identifiers other than the primary Identifier applied to the resource being registered.</div>
 {{else}}
-  <input type="text" class="form-control alternate-identifier-field" value={{fragment.identifier}} oninput={{action "updateIdentifier" value="target.value"}} data-test-alternate-identifier/>
+  <input type="text" placeholder="Alternate Identifier" class="form-control alternate-identifier-field" value={{fragment.identifier}} oninput={{action "updateIdentifier" value="target.value"}} data-test-alternate-identifier/>
   <div class="help-block help-block-fragment">An identifier or identifiers other than the primary Identifier applied to the resource being registered.</div>
 {{/if}}
 

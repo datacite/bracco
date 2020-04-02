@@ -39,17 +39,24 @@ export function doiFormErrors([ model ]) {
     }
     if (model.relatedIdentifiers) {
       model.relatedIdentifiers.forEach((relatedIdentifier) => {
-        errorAttributes = errorAttributes.concat(relatedIdentifier.validations.errors.mapBy('attribute'));
+        errorAttributes = errorAttributes.concat(relatedIdentifier.validations.errors.mapBy('message'));
       });
     }
     if (model.fundingReferences) {
       model.fundingReferences.forEach((fundingReference) => {
-        errorAttributes = errorAttributes.concat(fundingReference.validations.errors.mapBy('attribute'));
+        errorAttributes = errorAttributes.concat(fundingReference.validations.errors.mapBy('message'));
+      });
+    }
+    if (model.dates) {
+      model.dates.forEach((date) => {
+        errorAttributes = errorAttributes.concat(date.validations.errors.mapBy('message'));
       });
     }
   }
 
   return errorAttributes.map(function(attribute) {
+    console.log(attribute);
+
     return labelList[attribute] || attribute;
   }).join(', ');
 }
