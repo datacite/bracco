@@ -7,8 +7,8 @@ export default Component.extend({
 
   init() {
     this._super();
-    this.set('spdxLicenseListComplete', this.spdxList);
-    this.set('spdxLicenseList', this.spdxList);
+    this.set('spdxLicenseListComplete', this.spdx.spdxList);
+    this.set('spdxLicenseList', this.spdx.spdxList);
   },
   updateRights(rights) {
     if (rights instanceof String) {

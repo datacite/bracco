@@ -28,8 +28,8 @@ module('Integration | Component | doi rights', function(hooks) {
   test('it renders add add right', async function(assert) {
     this.set('model', make('doi'));
     this.set('fragment', make('rights'));
-    this.set('spdxList',[ {rightsUri: 'http://creativecommons.org/licenses/by/3.0/de/deed.en' ,name: 'CC-BY 3.0' } ]);
-    await render(hbs`{{doi-rights model=model fragment=fragment spdxList=spdxList index=0}}`);
+    this.set('spdxList', {spdxList: [ {rightsUri: 'http://creativecommons.org/licenses/by/3.0/de/deed.en' ,name: 'CC-BY 3.0' } ]});
+    await render(hbs`{{doi-rights model=model fragment=fragment spdx=spdxList index=0}}`);
 
     assert.dom('[data-test-rights-uri]').hasValue('http://creativecommons.org/licenses/by/3.0/de/deed.en');
   });

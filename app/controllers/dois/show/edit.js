@@ -2,18 +2,11 @@ import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 import { isBlank } from '@ember/utils';
 import { A } from '@ember/array';
-import fetch from 'fetch';
-
-const spdxUrl = 'https://gitlab.com/gitlab-org/security-products/license-management/-/raw/master/spdx-licenses.json';
 
 export default Controller.extend({
+  spdx: service(),
   store: service(),
-  init() {
-    this._super(...arguments);
-    this.getSpdxList();
 
-
-  },
   setEvent(stateChange) {
     if (stateChange[0] === 'draft' && stateChange[1] === 'registered') {
       return 'register';
@@ -24,22 +17,6 @@ export default Controller.extend({
     } else if (stateChange[0] === 'findable' && stateChange[1] === 'registered') {
       return 'hide';
     }
-  },
-  getSpdxList() {
-    let self = this;
-    let url = spdxUrl;
-    fetch(url).then(function(response) {
-      if (response.ok) {
-        response.json().then(function(data) {
-          self.set('spdxList', data.licenses);
-          return (data);
-        });
-      } else {
-        console.debug(response);
-      }
-    }).catch(function(error) {
-      console.debug(error);
-    });
   },
 
   actions: {
