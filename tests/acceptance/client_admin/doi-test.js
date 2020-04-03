@@ -69,9 +69,9 @@ module('Acceptance | client_admin | doi', function(hooks) {
   // };
 
   test('visiting dois', async function(assert) {
-    await visit('/dois');
+    await visit('/repositories/datacite.test/dois');
 
-    assert.equal(currentURL(), '/repositories/datacite.test');
+    assert.equal(currentURL(), '/repositories/datacite.test/dois');
     assert.dom('h2.work').hasText('DataCite Test Repository');
   });
 
