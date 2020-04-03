@@ -11,7 +11,6 @@ const Validations = buildValidations({
         return this.model.get('state') === 'draft';
       }),
       disabled: computed('model.identifier', function() {
-        console.log(this.model.get('identifier'));
         return this.model.get('identifier') == null;
       }),
     }),

@@ -13,6 +13,7 @@ FactoryGuy.define('doi', {
     descriptions: FactoryGuy.hasMany('description'),
     relatedIdentifiers: FactoryGuy.hasMany('relatedIdentifier'),
     fundingReferences: FactoryGuy.hasMany('fundingReference'),
+    rightsList: FactoryGuy.hasMany('rights'),
     geoLocations: FactoryGuy.hasMany('geoLocation'),
     subjects: FactoryGuy.hasMany('subject'),
     publisher: 'Royal Society of Chemistry',
@@ -125,6 +126,16 @@ FactoryGuy.define('fundingReference', {
     awardNumber: '13321312G45',
     awardUri: 'http://www.nsfc.gov.cn/publish/portal1/',
     awardTitle: 'COVID-19 Money',
+  },
+});
+
+FactoryGuy.define('rights', {
+  default: {
+    rights: 'Creative Commons Attribution 3.0 Unported',
+    rightsUri: 'http://creativecommons.org/licenses/by/3.0/de/deed.en',
+    rightsIdentifier: ' CC-BY-3.0',
+    rightsIdentifierScheme: 'SPDX',
+    schemeUri: 'https://spdx.org/licenses/',
   },
 });
 

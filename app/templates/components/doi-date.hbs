@@ -12,8 +12,9 @@
     value=fragment.dateType 
     options=dateTypesList 
     destination=fragment.dateType 
+    allowClear=true
     disabled=disabled as |el|}}
-  {{el.control onChange=(action "selectDateType") placeholder="Select Date Type" allowClear=false}}
+  {{el.control onChange=(action "selectDateType") placeholder="Select Date Type" allowClear=true}}
   {{/form.element}}
 </div>
 
@@ -23,7 +24,7 @@
 
 {{#if (gt index 0)}}
 <div class="input-group">
-  <input class="form-control date-field" value={{fragment.date}} onblur={{action "updateDate" value="target.value"}} placeholder="Date"
+  <input class="form-control date-field" value={{fragment.date}} onblur={{action "updateDate" value="target.value"}} placeholder="Date "
     data-test-date />
   <span class="input-group-addon">
     <BsButton @outline={{true}} @onClick={{action "deleteDate" index}}>{{fa-icon "trash" pull="left" style="margin:0;"}}
@@ -33,7 +34,7 @@
 {{else}}
 <input class="form-control date-field" value={{fragment.date}} onblur={{action "updateDate" value="target.value"}} placeholder="Date"
   data-test-date />
-    <div class="help-block help-block-fragment">Different dates relevant to the work. </div>
+    <div class="help-block help-block-fragment">Different dates relevant to the work. Enter dates such as YYYY, YYYY-MM-DD, YYYYMM-DDThh:mm:ssTZD, or ranges such as 2004-03-02/2005-06-02.</div>
 {{/if}}
 
 

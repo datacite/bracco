@@ -16,4 +16,11 @@ module('Integration | Component | doi size', function(hooks) {
 
     assert.dom('*').hasText('Size (optional) Size (e.g. bytes, pages, inches, etc.) or duration (extent), e.g. hours, minutes, days, etc., of a resource.');
   });
+
+  test('it renders add add size', async function(assert) {
+    this.set('model', make('doi'));
+    await render(hbs`{{doi-size model=model fragment="5kb" index=0}}`);
+
+    assert.dom('[data-test-size]').hasValue('5kb');
+  });
 });

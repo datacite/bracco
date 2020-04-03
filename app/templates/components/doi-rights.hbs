@@ -1,0 +1,60 @@
+   {{#if (gt index 0)}}
+   <div class="power-select-label">
+    <label for="rights" class="subtitle">Rights</label>
+  </div>
+ {{/if}}
+
+  <div class="power-select-fragment" data-test-rights>
+    {{#form.element
+      controlType="power-select"
+      helpText="Any rights information for this resource. The property may be repeated to record complex rights characteristics."
+      options=spdxLicenseList
+      value=fragment.rights
+      disabled=disabled
+      allowClear=true
+      destination=fragment.rights as |el|
+    }}
+    {{#el.control
+        searchEnabled=true
+        onChange=(action "selectRights")
+        placeholder="Search rights in the SPDX index"
+        onkeydown=(action "createOnEnter")
+        search=(action "searchRights")
+        searchPlaceholder="Type to search..."
+        allowClear=true
+        noMatchesMessage="Press ENTER to add new rights name."
+        as |item| }}
+    {{if item.name item.name fragment.rights}}
+    {{/el.control}}
+    {{/form.element}}
+  </div>
+
+
+
+
+  {{#if (gt index 0)}}
+    <div class="power-select-label">
+      <label for="rights-uri" class="subtitle">Rights Uri</label>
+    </div>
+  <div class="input-group">
+    <input type="text" class="form-control rights-uri-field" value={{fragment.rightsUri}} disabled={{this.isSpdxId}} oninput={{action "updateRightsUri" value="target.value"}} data-test-rights-uri />
+
+    <div class="help-block help-block-fragment rights-uri-field}}">
+      The URI of the license.
+    </div>
+    <span class="input-group-btn">
+      <BsButton @outline={{true}} @onClick={{action "deleteRights" index}}>{{fa-icon "trash"}} data-test-delete-rights</BsButton>
+    </span>
+  </div>
+  {{else}}
+
+
+  <input type="text" class="form-control rights-uri-field" value={{fragment.rightsUri}} disabled={{this.isSpdxId}}
+    oninput={{action "updateRightsUri" value="target.value"}} data-test-rights-uri />
+
+  <div class="help-block help-block-fragment rights-uri-field}}">
+    The URI of the license.
+  </div>
+  {{/if}}
+
+  <hr />

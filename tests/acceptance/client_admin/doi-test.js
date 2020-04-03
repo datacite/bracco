@@ -184,4 +184,17 @@ module('Acceptance | client_admin | doi', function(hooks) {
     assert.dom('[data-test-award-number]').hasValue('G2342342');
     assert.dom('[data-test-award-uri]').hasValue('https://schema.datacite.org/meta/kernel-4');
   });
+
+  test('visiting the Form and adding rights', async function(assert) {
+    // when running on travis This Test can take too much time because it call the List and the selector might not find the element
+    await visit('repositories/datacite.test/dois/new');
+    // await selectSearch('[data-test-rights]', 'Attribution Ass');
+    // await selectChoose('[data-test-rights]', 'Attribution Assurance License');
+    await fillIn('[data-test-rights-uri]', 'http://spdx.org/licenses/AA.json');
+
+
+    // assert.dom('[data-test-rights]').includesText('Attribution Assurance License');
+    assert.dom('[data-test-rights-uri]').hasValue('http://spdx.org/licenses/AA.json');
+
+  });
 });
