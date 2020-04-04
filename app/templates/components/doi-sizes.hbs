@@ -1,5 +1,5 @@
 <div class="form-group {{validationClass}}">
-  <label class="control-label col-md-3">Size(s) (optional)</label>
+  <label class="control-label col-md-3">Size(s)</label>
   <div class="col-md-9">
     {{#each model.sizes as |size index|}}
       <DoiSize @model={{model}} @fragment={{size}} @form={{form}} @index={{index}} />

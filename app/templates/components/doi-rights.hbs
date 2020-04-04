@@ -37,7 +37,7 @@
       <label for="rights-uri" class="subtitle">Rights Uri</label>
     </div>
   <div class="input-group">
-    <input type="text" class="form-control rights-uri-field" value={{fragment.rightsUri}} disabled={{this.isSpdxId}} oninput={{action "updateRightsUri" value="target.value"}} data-test-rights-uri />
+    <input type="text" placeholder="Rights Uri" class="form-control rights-uri-field" value={{fragment.rightsUri}} disabled={{this.isSpdxId}} oninput={{action "updateRightsUri" value="target.value"}} data-test-rights-uri />
 
     <div class="help-block help-block-fragment rights-uri-field}}">
       The URI of the license.
@@ -49,7 +49,7 @@
   {{else}}
 
 
-  <input type="text" class="form-control rights-uri-field" value={{fragment.rightsUri}} disabled={{this.isSpdxId}}
+  <input type="text" placeholder="Rights Uri" class="form-control rights-uri-field" value={{fragment.rightsUri}} disabled={{this.isSpdxId}}
     oninput={{action "updateRightsUri" value="target.value"}} data-test-rights-uri />
 
   <div class="help-block help-block-fragment rights-uri-field}}">

@@ -8,7 +8,7 @@
 <div class="power-select-fragment">
   {{#form.element 
     controlType="power-select" 
-    helpText="Type of date. "
+    helpText="Type of date."
     value=fragment.dateType 
     options=dateTypesList 
     destination=fragment.dateType 
@@ -19,7 +19,7 @@
 </div>
 
 <div class="power-select-label">
-  <label for="dateInformation" class="subtitle">Date (optional)</label>
+  <label for="dateInformation" class="subtitle">Date</label>
 </div>
 
 {{#if (gt index 0)}}
@@ -39,7 +39,7 @@
 
 
 <div class="power-select-label">
-  <label for="dateInformation" class="subtitle">Date Information (optional)</label>
+  <label for="dateInformation" class="subtitle">Date Information</label>
 </div>
 
 <input class="form-control date-information-field" value={{fragment.dateInformation}}
