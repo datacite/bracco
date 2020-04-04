@@ -12,13 +12,11 @@ module('Integration | Component | doi funding-references', function(hooks) {
     this.set('model', make('doi'));
     await render(hbs`{{doi-funding-references model=model}}`);
     await click('#add-funding-reference');
-    let fundingReferences = this.element.querySelectorAll('input.funder-name-field');
+    let fundingReferences = this.element.querySelectorAll('[data-test-funder-identifier]');
 
-    await fillIn(fundingReferences[0], 'Action for M.E.');
+    await fillIn(fundingReferences[0], 'Adobe-Glyph');
 
-    assert.dom('[data-test-funder-name]').hasValue('Action for M.E.');
-    assert.dom('[data-test-funder-identifier]').hasValue('501100001982');
-    assert.dom('[data-test-funder-identifier-type]').includesText('Crossref fudner ID');
+    assert.dom('[data-test-funder-identifier]').hasValue('Adobe-Glyph');
   });
 
   test('add multiple values', async function(assert) {
@@ -26,12 +24,12 @@ module('Integration | Component | doi funding-references', function(hooks) {
     await render(hbs`{{doi-funding-references model=model}}`);
     await click('#add-funding-reference');
     await click('#add-funding-reference');
-    let fundingReferences = this.element.querySelectorAll('input.funder-name-field');
+    let fundingReferences = this.element.querySelectorAll('[data-test-award-number]');
 
-    await fillIn(fundingReferences[0], 'motzstrasse 56, berlin');
-    await fillIn(fundingReferences[1], 'Chihuahahu, Mexico, 1890');
+    await fillIn(fundingReferences[0], '234432');
+    await fillIn(fundingReferences[1], '1890');
 
-    assert.dom(fundingReferences[0]).hasValue('motzstrasse 56, berlin');
-    assert.dom(fundingReferences[1]).hasValue('Chihuahahu, Mexico, 1890');
+    assert.dom(fundingReferences[0]).hasValue('234432');
+    assert.dom(fundingReferences[1]).hasValue('1890');
   });
 });

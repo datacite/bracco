@@ -22,7 +22,6 @@
       <DoiDescriptions @model={{model.doi}} @form={{form}} />
 
       {{#if (feature-flag 'optionalFields')}}
-
         <h3 class="member-results">Recommended Fields</h3>
 
         <DoiSubjects @model={{model.doi}} @form={{form}} />
@@ -36,7 +35,7 @@
 
         <DoiLanguage @model={{model.doi}} @form={{form}} />
         <DoiAlternateIdentifiers @model={{model.doi}} @form={{form}} />
-
+        <DoiRightsList @model={{model.doi}} @form={{form}} @spdx={{spdx}} />
         <DoiSizes @model={{model.doi}} @form={{form}} />
         <DoiFormats @model={{model.doi}} @form={{form}} />
 

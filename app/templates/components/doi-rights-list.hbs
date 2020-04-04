@@ -1,0 +1,12 @@
+<div class="form-group {{validationClass}}">
+  <label class="control-label col-md-3">Rights (optional)</label>
+  <div class="col-md-9">
+    {{#each model.rightsList as |rights index|}}
+      <DoiRights @model={{model}} @fragment={{rights}} @form={{form}} @index={{index}} @spdx={{spdx}} />
+    {{/each}}
+
+    {{#if (lte model.rightsList.length 4)}}
+      <BsButton @id="add-rights" @class="btn-sm" @outline={{true}} @onClick={{action "addRights"}}>{{fa-icon "plus"}} Add {{if (gt model.rightsList.length 0) "more "}} Rights</BsButton>
+    {{/if}}
+  </div>
+</div>

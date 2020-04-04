@@ -57,6 +57,11 @@ export function doiFormErrors([ model ]) {
         errorAttributes = errorAttributes.concat(geoLocation.validations.errors.mapBy('message'));
       });
     }
+    if (model.rightsList) {
+      model.rightsList.forEach((fundingReference) => {
+        errorAttributes = errorAttributes.concat(fundingReference.validations.errors.mapBy('attribute'));
+      });
+    }
   }
 
   return errorAttributes.map(function(attribute) {

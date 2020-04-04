@@ -29,8 +29,8 @@ const Validations = buildValidations({
       isWarning: computed('model.state', function() {
         return this.get('model.state') === 'draft';
       }),
-      disabled: computed('model.mode', function() {
-        return ![ 'new', 'edit' ].includes(this.model.get('mode'));
+      disabled: computed('model.name', function() {
+        return this.model.get('name') == null;
       }),
     }),
   ],
@@ -38,10 +38,10 @@ const Validations = buildValidations({
 
 export default MF.Fragment.extend(Validations,{
   name: DS.attr('string'),
-  contributorType: DS.attr('string', { defaultValue: 'Other' }),
+  contributorType: DS.attr('string', { defaultValue: null }),
   givenName: DS.attr('string', { defaultValue: null }),
   familyName: DS.attr('string', { defaultValue: null }),
-  nameType: DS.attr('string', { defaultValue: 'Personal' }),
+  nameType: DS.attr('string', { defaultValue: null }),
   nameIdentifiers: MF.fragmentArray('name-identifier'),
   affiliation: MF.fragmentArray('affiliation'),
 

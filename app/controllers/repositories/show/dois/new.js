@@ -1,8 +1,11 @@
 import Controller from '@ember/controller';
 import { isBlank } from '@ember/utils';
 import { A } from '@ember/array';
+import { inject as service } from '@ember/service';
 
 export default Controller.extend({
+  spdx: service(),
+
   setEvent(state) {
     if (state === 'registered') {
       return 'register';
