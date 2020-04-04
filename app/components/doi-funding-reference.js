@@ -56,7 +56,7 @@ export default Component.extend({
         this.updateFunderSchemeAndType(null);
         this.set('isCrossrefId', false);
         break;
-      case typeof funder.uri === String:
+      case funder.uri.startsWith('http'):
         this.fragment.set('funderName', funder.name);
         this.fragment.set('funderIdentifierType', 'Crossref Funder ID');
         this.fragment.set('schemeUri', 'https://www.crossref.org/services/funder-registry/');
