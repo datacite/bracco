@@ -107,6 +107,7 @@ module('Acceptance | staff_admin | repository', function(hooks) {
     await selectSearch('#provider-prefix-add', '10.2');
     await selectChoose('#provider-prefix-add', '10.24413');
     await click('button[type=submit]');
+    await visit('/repositories/datacite.test/prefixes'); // instead of waiting extra step to enable delete prefix 10.24413 test to pass
   });
 
   test('delete prefix 10.24413 that was just assigned', async function(assert) {

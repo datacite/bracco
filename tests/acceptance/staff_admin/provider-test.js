@@ -328,6 +328,7 @@ module('Acceptance | staff_admin | provider', function(hooks) {
     await selectChoose('#prefix-add', '10.80253');
     await click('button[type=submit]');
     assert.equal(currentURL(), '/providers/datacite/prefixes');
+    await visit('/providers/datacite/prefixes'); // instead of waiting extra step to enable remove assined prefix test to pass
   });
 
   test('remove assined prefix', async function(assert) {
