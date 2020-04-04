@@ -4,6 +4,7 @@ import { isBlank } from '@ember/utils';
 import { A } from '@ember/array';
 
 export default Controller.extend({
+  spdx: service(),
   store: service(),
 
   setEvent(stateChange) {

@@ -8,7 +8,6 @@ export default Component.extend({
       this.set('fragment', value);
     },
     selectSize() {
-      console.log(this.fragment);
       this.model.get('sizes').replace(this.index, 1, [ this.fragment ]);
     },
     deleteSize() {
