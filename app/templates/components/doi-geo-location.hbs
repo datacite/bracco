@@ -1,4 +1,4 @@
-<label for="geoLocationPlace" class="subtitle">GeoLocation Place (optional)</label>
+<label for="geoLocationPlace" class="subtitle">GeoLocation Place</label>
 {{#if (gt index 0)}}
   <div class="input-group">
     <input placeholder="GeoLocation Place" class="form-control geo-location-place-field" value={{fragment.geoLocationPlace}}
@@ -13,11 +13,20 @@
 {{/if}}
 <div class="help-block help-block-fragment geo-location-place-field">Description of a geographic location. </div>
 
+<label for="geoLocationPlace" class="subtitle">GeoLocation Point</label>
+
 <input placeholder="GeoLocation Point Longitude" helpText="Longitudinal dimension of point." class="form-control geo-location-point-longitude-field" value={{fragment.geoLocationPoint.pointLongitude}} 
     oninput={{action "updateGeoLocationPointLongitude" value="target.value"}} data-test-geo-location-point-longitude/>
 
 <input placeholder="GeoLocation Point Latitude" helpText="Longitudinal dimension of point." class="form-control geo-location-point-latitude-field" value={{fragment.geoLocationPoint.pointLatitude}} 
     oninput={{action "updateGeoLocationPointLatitude" value="target.value"}} data-test-geo-location-point-latitude/>
+
+<div class="help-block help-block-fragment geo-location-point-field}}">
+  A point location in space. A point contains a single longitude-latitude pair.
+</div>
+
+
+<label for="geoLocationPlace" class="subtitle">GeoLocation Box</label>
 
 <input placeholder="GeoLocation Box West Longitude" helpText="Longitudinal dimension of point." class="form-control geo-location-box-westBoundLongitude-field" value={{fragment.geoLocationBox.westBoundLongitude}} 
     oninput={{action "updateGeoLocationBoxWestLongitude" value="target.value"}} data-test-geo-location-box-westBoundLongitude/>
@@ -32,5 +41,7 @@
     oninput={{action "updateGeoLocationBoxSouthLatitude" value="target.value"}} data-test-geo-location-point-southBoundLatitude/>
 
 
-
+<div class="help-block help-block-fragment geo-location-box-field}}">
+  The spatial limits of a box. A box is defined by two geographic points. Left low corner and right upper corner. Each point is defined by its longitude and latitude.
+</div>
 <hr />
