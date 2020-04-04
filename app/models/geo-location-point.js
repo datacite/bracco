@@ -9,15 +9,17 @@ const Validations = buildValidations({
   pointLongitude: [
     validator('number', {
       allowString: true,
-      gte: -90,
-      lte: 90,
+      message: 'Domain: -180.00 ≤ pointLongitude ≤ 180.00 ',
+      gte: -180,
+      lte: 180,
     }),
   ],
   pointLatitude: [
     validator('number', {
       allowString: true,
-      gte: -180,
-      lte: 180,
+      message: 'Domain: -90.00 ≤ pointLatitude ≤ 90.00 ',
+      gte: -90,
+      lte: 90,
     }),
   ],
 });

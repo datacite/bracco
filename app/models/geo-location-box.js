@@ -7,29 +7,32 @@ const Validations = buildValidations({
     validator('number', {
       allowString: true,
       message: 'Domain: -180.00 ≤ westBoundLongitude ≤ 180.00 ',
-      gte: -90,
-      lte: 90,
+      gte: -180,
+      lte: 180,
     }),
   ],
   eastBoundLongitude: [
     validator('number', {
       allowString: true,
-      gte: -90,
-      lte: 90,
+      message: 'Domain: -180.00 ≤ eastBoundLongitude ≤ 180.00 ',
+      gte: -180,
+      lte: 180,
     }),
   ],
   southBoundLatitude: [
     validator('number', {
       allowString: true,
-      gte: -180,
-      lte: 180,
+      message: 'Domain: -90.00 ≤ southBoundLatitude ≤ 90.00 ',
+      gte: -90,
+      lte: 90,
     }),
   ],
   northBoundLatitude: [
     validator('number', {
       allowString: true,
-      gte: -180,
-      lte: 180,
+      message: 'Domain: -90.00 ≤ northBoundLatitude ≤ 90.00 ',
+      gte: -90,
+      lte: 90,
     }),
   ],
 });
