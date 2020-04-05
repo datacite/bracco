@@ -12,18 +12,18 @@
       </div>
     </div>
     <BsForm @formLayout="horizontal" @horizontalLabelGridClass="col-md-3" @model={{model}} @onSubmit={{action "submit" model}} as |form|>
-      <form.element @controlType="text" @label="DOI" @id="doi" @property="doi" @helpText="The globally unique string that identifies the resource and can't be changed." @disabled={{true}} />
+      <form.element @controlType="text" @label="⃰DOI" @id="doi" @property="doi" @helpText="The globally unique string that identifies the resource and can't be changed." @disabled={{true}} />
 
       <DoiState @model={{model}} @form={{form}} />
       
-      <form.element @id="url" @controlType="text" @label="URL" @property="url" @helpText="The location of the landing page with more information about the resource."  @required={{false}} />
+      <form.element @id="url" @controlType="text" @label="⃰URL" @property="url" @helpText="The location of the landing page with more information about the resource."  @required={{false}} />
 
       <DoiCreators @model={{model}} @form={{form}} />
       <DoiTitles @model={{model}} @form={{form}} />
 
-      <form.element @id="publisher" @controlType="text" @label="Publisher" @property="publisher" @helpText="The name of the entity that
+      <form.element @id="publisher" @controlType="text" @label="⃰Publisher" @property="publisher" @helpText="The name of the entity that
       holds, archives, publishes prints, distributes, releases, issues, or produces the resource." @required={{false}} />
-      <form.element @id="publication-year" @controlType="text" @label="Publication Year" @property="publicationYear" @helpText="The year when the
+      <form.element @id="publication-year" @controlType="text" @label="⃰Publication Year" @property="publicationYear" @helpText="The year when the
       resource was or will be made publicly available. Must be between 1450 and 2021." @required={{false}} />
 
       <DoiTypes @model={{model}} @form={{form}} />
@@ -32,6 +32,15 @@
       {{#if (feature-flag 'optionalFields')}}
 
        <h3 class="member-results">Recommended Fields</h3>
+
+                  {{!-- {{#if (is-empty (doi-form-errors model))}}
+      {{else}}
+      <div class="col-md-9 col-md-offset-3" style="position: sticky;  top: 0; background-color:white; z-index:99;">
+        <BsAlert @dismissible={{false}} @type="danger" >
+          To save this DOI, first resolve the errors with these fields: {{doi-form-errors model}}.
+        </BsAlert>
+      </div>*
+      {{/if}} --}}
 
         <DoiSubjects @model={{model}} @form={{form}} />
         <DoiContributors @model={{model}} @form={{form}} />

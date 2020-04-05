@@ -1,5 +1,5 @@
 <div class="form-group compound-form">
-  <label class="control-label col-md-3">DOI</label>
+  <label class="control-label col-md-3">⃰DOI</label>
   <div class="col-md-9">
     <div class="input-group">
       <span class="input-group-addon">
@@ -26,7 +26,7 @@
 </div>
 
 <div class="form-group">
-  <label class="control-label col-md-3">State</label>
+  <label class="control-label col-md-3">⃰State</label>
   <div class="col-md-9">
     <div><RadioButton @radioId="draft-radio" @value="draft" @groupValue={{state}} @radioClass="radio" @changed={{action "selectState"}} @disabled={{draft}} />Draft <span class="help-block">only visible in Fabrica, DOI can be deleted</span></div>
     <div><RadioButton @radioId="registered-radio" @value="registered" @groupValue={{state}} @radioClass="radio" @changed={{action "selectState"}} @disabled={{registered}} />Registered <span class="help-block">registered with the DOI Resolver</span></div>

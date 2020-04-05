@@ -10,13 +10,13 @@
     <BsForm @formLayout="horizontal" @horizontalLabelGridClass="col-md-3" @model={{model.doi}} @onSubmit={{action "submit" model.doi}} as |form|>
       <DoiDoi @model={{model.doi}} @repository={{model.repository}} @form={{form}} />
 
-      <form.element @controlType="text" @label="URL" @id="url" @property="url" @helpText="The location of the landing page with more information about the resource." @required={{false}} />
+      <form.element @controlType="text" @label="⃰URL" @id="url" @property="url" @helpText="The location of the landing page with more information about the resource." @required={{false}} />
 
       <DoiCreators @model={{model.doi}} @form={{form}} />
       <DoiTitles @model={{model.doi}} @form={{form}} />
       
-      <form.element @controlType="text" @label="Publisher" @id="publisher" @property="publisher" @helpText="The name of the entity that holds, archives, publishes prints, distributes, releases, issues, or produces the resource." @required={{false}} />
-      <form.element @controlType="text" @label="Publication Year" @id="publication-year" @property="publicationYear" @helpText="The year when the resource was or will be made publicly available. Must be between 1450 and 2021." @required={{false}} />
+      <form.element @controlType="text" @label="⃰Publisher" @id="publisher" @property="publisher" @helpText="The name of the entity that holds, archives, publishes prints, distributes, releases, issues, or produces the resource." @required={{false}} />
+      <form.element @controlType="text" @label="⃰Publication Year" @id="publication-year" @property="publicationYear" @helpText="The year when the resource was or will be made publicly available. Must be between 1450 and 2021." @required={{false}} />
 
       <DoiTypes @model={{model.doi}} @form={{form}} />
       <DoiDescriptions @model={{model.doi}} @form={{form}} />
