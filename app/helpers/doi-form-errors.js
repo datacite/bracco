@@ -54,7 +54,9 @@ export function doiFormErrors([ model ]) {
     }
     if (model.geoLocations) {
       model.geoLocations.forEach((geoLocation) => {
-        errorAttributes = errorAttributes.concat(geoLocation.validations.errors.mapBy('message'));
+        console.log(geoLocation);
+        errorAttributes = errorAttributes.concat(geoLocation.geoLocationPoint.validations.errors.mapBy('message'));
+        errorAttributes = errorAttributes.concat(geoLocation.geoLocationBox.validations.errors.mapBy('message'));
       });
     }
     if (model.rightsList) {
