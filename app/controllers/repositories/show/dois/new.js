@@ -86,19 +86,16 @@ export default Controller.extend({
         return !isBlank(title.title);
       }));
 
-      // // only store name identifiers and affiliations with a value
-      // A(doi.get('geoLocations')).forEach((geoLocation) => {
-      //   geoLocation.set('geoLocationPlace', A(geoLocation.get('geoLocationPlace')).filter(function(geoLocation) {
-      //     return !isBlank(geoLocation.geoLocationPlace);
-      //   }));
-      //   // geoLocation.set('affiliation', A(geoLocation.get('affiliation')).filter(function(affiliation) {
-      //   //   return !isBlank(affiliation.name);
-      //   // }));
-      //   // if (geoLocation.nameType === 'Organizational') {
-      //   //   geoLocation.set('givenName', null);
-      //   //   geoLocation.set('familyName', null);
-      //   // }
-      // });
+      // only store name identifiers and affiliations with a value
+      A(doi.get('geoLocations')).forEach((geoLocation) => {
+        geoLocation.set('geoLocationPlace', geoLocation.get('geoLocationPlace') || null);
+        geoLocation.set('geoLocationPoint.pointLongitude', geoLocation.get('geoLocationPoint.pointLongitude') || null);
+        geoLocation.set('geoLocationPoint.pointLatitude', geoLocation.get('geoLocationPoint.pointLatitude')  || null);
+        geoLocation.set('geoLocationBox.westBoundLongitude', geoLocation.get('geoLocationBox.westBoundLongitude')  || null);
+        geoLocation.set('geoLocationBox.eastBoundLongitude', geoLocation.get('geoLocationBox.eastBoundLongitude')  || null);
+        geoLocation.set('geoLocationBox.northBoundLatitude', geoLocation.get('geoLocationBox.northBoundLatitude')  || null);
+        geoLocation.set('geoLocationBox.southBoundLatitude', geoLocation.get('geoLocationBox.southBoundLatitude')  || null);
+      });
 
       let self = this;
       doi.save().then(function(doi) {

@@ -92,19 +92,6 @@ export default Controller.extend({
         return !isBlank(title.title);
       }));
 
-      // // only store name identifiers and affiliations with a value
-      // A(doi.get('geoLocations')).forEach((geoLocation) => {
-      //   geoLocation.set('geoLocationPlace', A(geoLocation.get('geoLocationPlace')).filter(function(geoLocation) {
-      //     return !isBlank(geoLocation.geoLocationPlace);
-      //   }));
-      //   // geoLocation.set('affiliation', A(geoLocation.get('affiliation')).filter(function(affiliation) {
-      //   //   return !isBlank(affiliation.name);
-      //   // }));
-      //   // if (geoLocation.nameType === 'Organizational') {
-      //   //   geoLocation.set('givenName', null);
-      //   //   geoLocation.set('familyName', null);
-      //   // }
-      // });
 
       let self = this;
       doi.save().then(function(doi) {
