@@ -7,7 +7,7 @@ const Validations = buildValidations({
   schemeUri: [
     validator('url-format', {
       allowBlank: true,
-      message: 'Please enter a valid URL for the schemeUri.',
+      message: 'Related Identifier scheme URI has to be a valid URI',
       disabled: computed('model.relatedIdentifierType', function() {
         return [ 'HasMetadata', 'IsMetadataFor' ].includes(this.model.get('relatedIdentifierType'));
       }),

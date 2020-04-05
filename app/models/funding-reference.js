@@ -28,7 +28,7 @@ const Validations = buildValidations({
 export default Fragment.extend(Validations, {
   funderName: DS.attr('string', { defaultValue: null }),
   funderIdentifier: DS.attr('string', { defaultValue: null }),
-  funderIdentifierType: DS.attr('string', { defaultValue: 'Other' }),
+  funderIdentifierType: DS.attr('string', { defaultValue: null }),
   // schemeUri: DS.attr('string', { defaultValue: null }),
   awardNumber: DS.attr('string', { defaultValue: null }),
   awardUri: DS.attr('string', { defaultValue: null }),

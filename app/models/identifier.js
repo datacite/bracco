@@ -7,6 +7,7 @@ const Validations = buildValidations({
   identifierType: [
     validator('presence', {
       presence: true,
+      message: 'Alternate Identifier must include Identifier Type',
       isWarning: computed('model.state', function() {
         return this.model.get('state') === 'draft';
       }),
