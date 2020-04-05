@@ -56,19 +56,19 @@ export default Component.extend({
         this.updateFunderSchemeAndType(null);
         this.set('isCrossrefId', false);
         break;
-      case funder.uri.startsWith('http'):
-        this.fragment.set('funderName', funder.name);
-        this.fragment.set('funderIdentifierType', 'Crossref Funder ID');
-        this.fragment.set('schemeUri', 'https://www.crossref.org/services/funder-registry/');
-        this.fragment.set('funderIdentifier', funder.uri);
-        this.set('isCrossrefId', true);
-        break;
-      default:
+      case typeof funder == 'string':
         this.fragment.set('funderIdentifierType', 'Other');
         this.fragment.set('funderIdentifier', null);
         this.fragment.set('funderName', funder);
         this.updateFunderSchemeAndType(null);
         this.set('isCrossrefId', false);
+        break;
+      default:
+        this.fragment.set('funderName', funder.name);
+        this.fragment.set('funderIdentifierType', 'Crossref Funder ID');
+        this.fragment.set('schemeUri', 'https://www.crossref.org/services/funder-registry/');
+        this.fragment.set('funderIdentifier', funder.uri);
+        this.set('isCrossrefId', true);
         break;
     }
   },
