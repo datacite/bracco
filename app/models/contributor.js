@@ -3,6 +3,7 @@ import MF from 'ember-data-model-fragments';
 import { validator, buildValidations } from 'ember-cp-validations';
 import { computed } from '@ember/object';
 import { A } from '@ember/array';
+import { isBlank } from '@ember/utils';
 
 const Validations = buildValidations({
   givenName: [
@@ -33,7 +34,7 @@ const Validations = buildValidations({
         return this.get('model.state') === 'draft';
       }),
       disabled: computed('model.name', function() {
-        return this.model.get('name') === '';
+        return isBlank(this.model.get('name'));
       }),
     }),
     validator('contributor-type', {
@@ -41,7 +42,7 @@ const Validations = buildValidations({
         return this.get('model.state') === 'draft';
       }),
       disabled: computed('model.name', function() {
-        return this.model.get('name') === '';
+        return isBlank(this.model.get('name'));
       }),
     }),
   ],
