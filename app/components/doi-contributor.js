@@ -24,13 +24,42 @@ const contributorTypes = [
   'Other',
 ];
 
+const organizationalContributorTypes = [
+  'HostingInstitution',
+  'RegistrationAgency',
+  'RegistrationAuthority',
+  'ResearchGroup',
+  'Distributor',
+];
+
+const personalContributorTypes = [
+  'ContactPerson',
+  'DataCurator',
+  'Editor',
+  'ProjectLeader',
+  'ProjectManager',
+  'ProjectMember',
+  'RelatedPerson',
+  'Researcher',
+  'Supervisor',
+  'WorkPackageLeader',
+];
+
 export default PersonBaseComponent.extend({
   contributorTypes,
   selectContributorType(contributorType) {
     if (contributorType) {
       this.fragment.set('contributorType', contributorTypes.filter(function(type) {return type === contributorType;}));
       this.set('contributorType', contributorType);
-      [ 'HostingInstitution', 'RegistrationAgency','RegistrationAuthority', 'ResearchGroup' ].includes(contributorType) ? this.selectNameType('Organizational') : this.selectNameType('Personal');
+
+      if (organizationalContributorTypes.includes(contributorType)) {
+        this.selectNameType('Organizational');
+      }
+
+      if (personalContributorTypes.includes(contributorType)) {
+        this.selectNameType('Personal');
+      }
+
     } else {
       this.fragment.set('contributorType', null);
     }
