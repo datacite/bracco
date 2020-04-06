@@ -1,5 +1,7 @@
 import DS from 'ember-data';
+// import Fragment from 'ember-data-model-fragments/fragment';
 import Fragment from 'ember-data-model-fragments/fragment';
+import { fragment } from 'ember-data-model-fragments/attributes';
 import { buildValidations } from 'ember-cp-validations';
 // import { validator, buildValidations } from 'ember-cp-validations';
 // import { computed } from '@ember/object';
@@ -19,6 +21,6 @@ const Validations = buildValidations({
 
 export default Fragment.extend(Validations, {
   geoLocationPlace: DS.attr('string', { defaultValue: null }),
-  // geoLocationPoint: DS.attr('string', { defaultValue: null }),
-  // geoLocationBox: DS.attr('string', { defaultValue: null }),
+  geoLocationPoint: fragment('geoLocationPoint',{ defaultValue: {} }),
+  geoLocationBox: fragment('geoLocationBox', { defaultValue: {} }),
 });

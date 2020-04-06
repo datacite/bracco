@@ -1,5 +1,5 @@
 <div class="form-group {{validationClass}}">
-  <label class="control-label col-md-3">GeoLocation(s) (optional)</label>
+  <label class="control-label col-md-3">GeoLocation(s)</label>
   <div class="col-md-9">
     {{#each model.geoLocations as |geoLocation index|}}
       <DoiGeoLocation @model={{model}} @fragment={{geoLocation}} @form={{form}} @index={{index}} />

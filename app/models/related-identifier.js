@@ -2,12 +2,13 @@ import DS from 'ember-data';
 import Fragment from 'ember-data-model-fragments/fragment';
 import { validator, buildValidations } from 'ember-cp-validations';
 import { computed } from '@ember/object';
+import { isBlank } from '@ember/utils';
 
 const Validations = buildValidations({
   schemeUri: [
     validator('url-format', {
       allowBlank: true,
-      message: 'Please enter a valid URL for the schemeUri.',
+      message: 'Related Identifier scheme URI has to be a valid URI',
       disabled: computed('model.relatedIdentifierType', function() {
         return [ 'HasMetadata', 'IsMetadataFor' ].includes(this.model.get('relatedIdentifierType'));
       }),
@@ -31,7 +32,7 @@ const Validations = buildValidations({
         return this.model.get('state') === 'draft';
       }),
       disabled: computed('model.relatedIdentifier', function() {
-        return (this.model.get('relatedIdentifier') == null);
+        return isBlank(this.model.get('relatedIdentifier'));
       }),
     }),
   ],
@@ -43,7 +44,7 @@ const Validations = buildValidations({
         return this.model.get('state') === 'draft';
       }),
       disabled: computed('model.relatedIdentifier', function() {
-        return (this.model.get('relatedIdentifier') == null);
+        return isBlank(this.model.get('relatedIdentifier'));
       }),
     }),
   ],
@@ -55,7 +56,7 @@ const Validations = buildValidations({
         return this.model.get('state') === 'draft';
       }),
       disabled: computed('model.relatedIdentifier', function() {
-        return (this.model.get('relatedIdentifier') == null);
+        return isBlank(this.model.get('relatedIdentifier'));
       }),
     }),
   ],

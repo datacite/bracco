@@ -13,6 +13,6 @@ module('Integration | Component | doi format', function(hooks) {
     this.set('model', make('doi'));
     await render(hbs`{{doi-format model=model fragment=fragment index=0}}`);
 
-    assert.dom('*').hasText('Format (optional) Technical format of the resource.');
+    assert.dom('*').hasText('Technical format of the resource.');
   });
 });

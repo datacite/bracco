@@ -1,5 +1,5 @@
-<label for="size" class="subtitle">Size (optional)</label>
 {{#if (gt index 0)}}
+<label for="size" class="subtitle">Size</label>
   <div class="input-group">
     <input type="text" placeholder="Size" class="form-control size-field" value={{fragment}} oninput={{action "updateSize" value="target.value"}} onblur={{action "selectSize" }} data-test-size/>    
     <span class="input-group-addon">
