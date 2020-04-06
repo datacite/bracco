@@ -6,48 +6,49 @@ import {
   click,
   fillIn,
 } from '@ember/test-helpers';
+import { selectChoose, selectSearch } from 'ember-power-select/test-support';
 import ENV from 'bracco/config/environment';
-import { authenticateSession } from 'ember-simple-auth/test-support';
-import { setupQunit as setupPolly } from '@pollyjs/core';
+// import { authenticateSession } from 'ember-simple-auth/test-support';
+// import { setupQunit as setupPolly } from '@pollyjs/core';
 
 module('Acceptance | staff_admin | provider', function(hooks) {
-  setupPolly(hooks, {
-    matchRequestsBy: {
-      headers: {
-        exclude: [ 'authorization' ],
-      },
-    },
-  });
+  // setupPolly(hooks, {
+  //   matchRequestsBy: {
+  //     headers: {
+  //       exclude: [ 'authorization' ],
+  //     },
+  //   },
+  // });
   setupApplicationTest(hooks);
 
   hooks.beforeEach(async function() {
-    const { server } = this.polly;
+    // const { server } = this.polly;
 
-    server.any().on('beforePersist', (req, recording) => {
-      /* we only want to perform this task when recording */
-      if (req.action !== 'record') {
-        return;
-      }
-      /* hide password and token in oauth password grant requests */
-      if (recording.request.url == 'https://api.test.datacite.org/token') {
-        recording.request.postData.text = 'INFORMATION_HIDDEN';
-        recording.response.content.text = 'INFORMATION_HIDDEN';
-      }
+    // server.any().on('beforePersist', (req, recording) => {
+    //   /* we only want to perform this task when recording */
+    //   if (req.action !== 'record') {
+    //     return;
+    //   }
+    //   /* hide password and token in oauth password grant requests */
+    //   if (recording.request.url == 'https://api.test.datacite.org/token') {
+    //     recording.request.postData.text = 'INFORMATION_HIDDEN';
+    //     recording.response.content.text = 'INFORMATION_HIDDEN';
+    //   }
 
-      /* filter out authorization tokens */
-      recording.request.headers = recording.request.headers.filter(({ name }) => name !== 'authorization');
-    });
+    //   /* filter out authorization tokens */
+    //   recording.request.headers = recording.request.headers.filter(({ name }) => name !== 'authorization');
+    // });
 
     await visit('/sign-in');
     await fillIn('input#account-field', 'ADMIN');
     await fillIn('input#password-field', ENV.STAFF_ADMIN_PASSWORD);
     await click('button[type=submit]');
 
-    await authenticateSession({
-      uid: 'admin',
-      name: 'Admin',
-      role_id: 'staff_admin',
-    });
+    // await authenticateSession({
+    //   uid: 'admin',
+    //   name: 'Admin',
+    //   role_id: 'staff_admin',
+    // });
   });
 
   test('visiting provider TIB', async function(assert) {
@@ -74,6 +75,23 @@ module('Acceptance | staff_admin | provider', function(hooks) {
     assert.dom('a#edit-provider').hasAttribute('href', '/providers/dc/edit');
     assert.dom('a#delete-provider').includesText('Delete Member');
     assert.dom('a#delete-provider').hasAttribute('href', '/providers/dc/delete');
+  });
+
+  test('updating consortium DC', async function(assert) {
+    let twitterUrl = 'datacite' + Math.round(Math.random() * 1000).toString();
+
+    await visit('/providers/dc/edit');
+
+    assert.equal(currentURL(), '/providers/dc/edit');
+    assert.dom('h2.work').hasText('DataCite Consortium');
+
+    await fillIn('input#twitter-handle-field', '@' + twitterUrl);
+    await click('button[type=submit]');
+
+    assert.equal(currentURL(), '/providers/dc');
+    assert.dom('h2.work').hasText('DataCite Consortium');
+    assert.dom('a#twitter-url').hasText('https://twitter.com/' + twitterUrl);
+    assert.dom('a#twitter-url').hasAttribute('href', 'https://twitter.com/' + twitterUrl);
   });
 
   test('visiting provider TIB info', async function(assert) {
@@ -138,23 +156,23 @@ module('Acceptance | staff_admin | provider', function(hooks) {
     assert.dom('a#transfer-dois').doesNotExist();
   });
 
-  // test('visiting provider TIB prefixes', async function(assert) {
-  //   await visit('/providers/tib/prefixes');
+  test('visiting provider datacite prefixes', async function(assert) {
+    await visit('/providers/datacite/prefixes');
 
-  //   assert.equal(currentURL(), '/providers/tib/prefixes');
-  //   assert.dom('h2.work').hasText('German National Library of Science and Technology');
-  //   assert.dom('li a.nav-link.active').hasText('Prefixes');
-  //   assert.dom('div#search').exists();
+    assert.equal(currentURL(), '/providers/datacite/prefixes');
+    assert.dom('h2.work').hasText('DataCite');
+    assert.dom('li a.nav-link.active').hasText('Prefixes');
+    assert.dom('div#search').exists();
 
-  //   // at least one prefix exists
-  //   assert.dom('[data-test-results]').includesText('Prefixes');
-  //   assert.dom('[data-test-prefix]').exists();
-  //   assert.dom('div.panel.facets').exists();
+    // at least one prefix exists
+    assert.dom('[data-test-results]').includesText('Prefixes');
+    assert.dom('[data-test-prefix]').exists();
+    assert.dom('div.panel.facets').exists();
 
-  //   // admin can assign new prefix
-  //   assert.dom('a#assign-prefix').includesText('Assign Prefix');
-  //   assert.dom('a#assign-prefix').hasAttribute('href', '/providers/tib/prefixes/new');
-  // });
+    // admin can assign new prefix
+    assert.dom('a#assign-prefix').includesText('Assign Prefix');
+    assert.dom('a#assign-prefix').hasAttribute('href', '/providers/datacite/prefixes/new');
+  });
 
   test('new provider form', async function(assert) {
     assert.expect(48);
@@ -298,5 +316,38 @@ module('Acceptance | staff_admin | provider', function(hooks) {
 
     assert.dom('input#confirm-symbol-field').doesNotExist();
     assert.dom('button#delete').doesNotExist();
+  });
+
+  test('assign a prefix', async function(assert) {
+    await visit('/providers/datacite/prefixes/new');
+
+    assert.equal(currentURL(), '/providers/datacite/prefixes/new');
+
+    // assign prefix 10.80253
+    await selectSearch('#prefix-add', '10.8');
+    await selectChoose('#prefix-add', '10.80253');
+    await click('button[type=submit]');
+    assert.equal(currentURL(), '/providers/datacite/prefixes');
+    await visit('/providers/datacite/prefixes'); // instead of waiting extra step to enable remove assined prefix test to pass
+  });
+
+  test('remove assined prefix', async function(assert) {
+    // remove prefix 10.80253
+    await visit('/providers/datacite/prefixes/10.80253/delete');
+    await click('button#remove');
+    assert.equal(currentURL(), '/providers/datacite/prefixes');
+  });
+
+  test('cancel assigning a prefix', async function(assert) {
+    await visit('/providers/datacite/prefixes/new');
+
+    assert.equal(currentURL(), '/providers/datacite/prefixes/new');
+
+    // assign prefix 10.80257
+    await selectSearch('#prefix-add', '10.8');
+    await selectChoose('#prefix-add', '10.80257');
+    await click('button#cancel');
+    assert.equal(currentURL(), '/providers/datacite/prefixes');
+
   });
 });

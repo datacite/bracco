@@ -12,48 +12,48 @@ import {
 } from '@ember/test-helpers';
 import ENV from 'bracco/config/environment';
 import { setupFactoryGuy } from 'ember-data-factory-guy';
-import { authenticateSession } from 'ember-simple-auth/test-support';
-import { setupQunit as setupPolly } from '@pollyjs/core';
+// import { authenticateSession } from 'ember-simple-auth/test-support';
+// import { setupQunit as setupPolly } from '@pollyjs/core';
 
-module('Acceptance | staff_admin | repository', function(hooks) {
-  setupPolly(hooks, {
-    matchRequestsBy: {
-      headers: {
-        exclude: [ 'authorization' ],
-      },
-    },
-  });
+module('Acceptance | staff_admin | doi', function(hooks) {
+  // setupPolly(hooks, {
+  //   matchRequestsBy: {
+  //     headers: {
+  //       exclude: [ 'authorization' ],
+  //     },
+  //   },
+  // });
   setupApplicationTest(hooks);
   setupFactoryGuy(hooks);
 
   hooks.beforeEach(async function() {
-    const { server } = this.polly;
+    // const { server } = this.polly;
 
-    server.any().on('beforePersist', (req, recording) => {
-      /* we only want to perform this task when recording */
-      if (req.action !== 'record') {
-        return;
-      }
-      /* hide password and token in oauth password grant requests */
-      if (recording.request.url == 'https://api.test.datacite.org/token') {
-        recording.request.postData.text = 'INFORMATION_HIDDEN';
-        recording.response.content.text = 'INFORMATION_HIDDEN';
-      }
+    // server.any().on('beforePersist', (req, recording) => {
+    //   /* we only want to perform this task when recording */
+    //   if (req.action !== 'record') {
+    //     return;
+    //   }
+    //   /* hide password and token in oauth password grant requests */
+    //   if (recording.request.url == 'https://api.test.datacite.org/token') {
+    //     recording.request.postData.text = 'INFORMATION_HIDDEN';
+    //     recording.response.content.text = 'INFORMATION_HIDDEN';
+    //   }
 
-      /* filter out authorization tokens */
-      recording.request.headers = recording.request.headers.filter(({ name }) => name !== 'authorization');
-    });
+    //   /* filter out authorization tokens */
+    //   recording.request.headers = recording.request.headers.filter(({ name }) => name !== 'authorization');
+    // });
 
     await visit('/sign-in');
     await fillIn('input#account-field', 'ADMIN');
     await fillIn('input#password-field', ENV.STAFF_ADMIN_PASSWORD);
     await click('button[type=submit]');
 
-    await authenticateSession({
-      uid: 'admin',
-      name: 'Admin',
-      role_id: 'staff_admin',
-    });
+    // await authenticateSession({
+    //   uid: 'admin',
+    //   name: 'Admin',
+    //   role_id: 'staff_admin',
+    // });
   });
 
   test('visiting dois', async function(assert) {
@@ -101,13 +101,13 @@ module('Acceptance | staff_admin | repository', function(hooks) {
   // });
 
   test('new DOI form for repository Test', async function(assert) {
-    assert.expect(27);
+    assert.expect(28);
 
     await visit('/repositories/datacite.test/dois/new');
 
     assert.equal(currentURL(), '/repositories/datacite.test/dois/new');
     assert.dom('input#suffix-field').exists();
-    // assert.dom('input#draft-radio').exists();
+    assert.dom('input#draft-radio').exists();
 
     assert.dom('input#url-field').exists();
 
@@ -139,13 +139,13 @@ module('Acceptance | staff_admin | repository', function(hooks) {
   });
 
   test('upload DOI form for repository DataCite Test', async function(assert) {
-    assert.expect(6);
+    assert.expect(7);
 
     await visit('/repositories/datacite.test/dois/upload');
 
     assert.equal(currentURL(), '/repositories/datacite.test/dois/upload');
     assert.dom('input#suffix-field').exists();
-    // assert.dom('input#draft-radio').exists();
+    assert.dom('input#draft-radio').exists();
 
     assert.dom('input#url-field').exists();
 
@@ -159,7 +159,6 @@ module('Acceptance | staff_admin | repository', function(hooks) {
     assert.expect(22);
 
     await visit('/dois/10.80225%2Fda52-7919/edit');
-
     assert.equal(currentURL(), '/dois/10.80225%2Fda52-7919/edit');
     assert.dom('input#doi-field').exists();
     // assert.dom('input#draft-radio').exists();
@@ -259,6 +258,42 @@ module('Acceptance | staff_admin | repository', function(hooks) {
     assert.dom('input#registered-radio').isNotChecked();
     assert.dom('input#findable-radio').isNotChecked();
     assert.dom('input#suffix-field').hasAnyValue();
+  });
+
+  test('create draft doi', async function(assert) {
+    await visit('/repositories/datacite.test/dois/new');
+    let suffix = '1234-5678';
+    await fillIn('input#suffix-field', suffix);
+
+    await click('button#doi-create');
+    await visit('/repositories/datacite.test/dois'); // instead of waiting extra step to enable extra time for creation
+    await visit('/dois/10.0330%2F' + suffix);
+    assert.equal(currentURL(), '/dois/10.0330%2F' + suffix);
+  });
+
+  test('delete draft doi', async function(assert) {
+    let suffix = '1234-5678';
+    await visit('/dois/10.0330%2F' + suffix + '/delete');
+    assert.dom('h2.work').hasText('10.0330/1234-5678');
+    await fillIn('input#confirm-doi-field', '10.0330/' + suffix);
+    await click('button#delete-doi');
+    await visit('/repositories/datacite.test/dois');
+    assert.equal(currentURL(), '/repositories/datacite.test/dois');
+
+    // TODO validate update
+  });
+
+  test('update draft doi', async function(assert) {
+    await visit('/dois/10.0330%2F3nym-s568/edit');
+
+    assert.dom('input#url-field').exists();
+    let urlField = 'http://' + 'datacite' + Math.round(Math.random() * 1000).toString();
+    await fillIn('input#url-field', urlField);
+
+    assert.dom('button#doi-update').exists();
+    await click('button#doi-update');
+
+    // TODO validate update
   });
 
   // test('filling out fields for a new DOI for repository DataCite Test', async function(assert) {
