@@ -8,19 +8,19 @@
   disabled=disabled
   destination=resourceTypeGeneral as |el|
 }}
-  {{el.control
+{{el.control
     onChange=(action "selectResourceTypeGeneral")
     placeholder="Select Resource Type General"
   }}
 {{/form.element}}
 
-  <div class="col-md-9 col-md-offset-3">
+<div class="col-md-9 col-md-offset-3">
   <div class="power-select-label">
     <label for="subject" class="subtitle">Resource Type</label>
-  </div> 
-    <div class="power-select-fragment" doi-resource-type>
+  </div>
+  <div class="power-select-fragment" doi-resource-type>
 
-{{form.element
+    {{form.element
   controlType="text"
   id="resource-type"
   property="types.resourceType"
@@ -28,4 +28,5 @@
   required=false
   disabled=disabled
 }}
- </div></div>
+  </div>
+</div>
