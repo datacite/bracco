@@ -20,7 +20,7 @@ module('Integration | Component | doi summary', function(hooks) {
   test('it renders citations', async function(assert) {
     this.set('model', make('doi'));
     await render(hbs`{{doi-summary isResearcherProfile=true model=model}}`);
-    console.log(this.element);
+
     assert.dom('[citations-test-badge]').hasText('  123 Citations');
   });
 

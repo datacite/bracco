@@ -6,50 +6,51 @@ import {
   click,
   fillIn,
   // waitUntil,
+  // pauseTest,
 } from '@ember/test-helpers';
-// import { selectChoose, selectSearch } from 'ember-power-select/test-support';
+import { selectChoose, selectSearch } from 'ember-power-select/test-support';
 import ENV from 'bracco/config/environment';
-import { authenticateSession } from 'ember-simple-auth/test-support';
-import { setupQunit as setupPolly } from '@pollyjs/core';
+// import { authenticateSession } from 'ember-simple-auth/test-support';
+// import { setupQunit as setupPolly } from '@pollyjs/core';
 
 module('Acceptance | staff_admin | repository', function(hooks) {
-  setupPolly(hooks, {
-    matchRequestsBy: {
-      headers: {
-        exclude: [ 'authorization' ],
-      },
-    },
-  });
+  // setupPolly(hooks, {
+  //   matchRequestsBy: {
+  //     headers: {
+  //       exclude: [ 'authorization' ],
+  //     },
+  //   },
+  // });
   setupApplicationTest(hooks);
 
   hooks.beforeEach(async function() {
-    const { server } = this.polly;
+    // const { server } = this.polly;
 
-    server.any().on('beforePersist', (req, recording) => {
-      /* we only want to perform this task when recording */
-      if (req.action !== 'record') {
-        return;
-      }
-      /* hide password and token in oauth password grant requests */
-      if (recording.request.url == 'https://api.test.datacite.org/token') {
-        recording.request.postData.text = 'INFORMATION_HIDDEN';
-        recording.response.content.text = 'INFORMATION_HIDDEN';
-      }
+    // server.any().on('beforePersist', (req, recording) => {
+    //   /* we only want to perform this task when recording */
+    //   if (req.action !== 'record') {
+    //     return;
+    //   }
+    //   /* hide password and token in oauth password grant requests */
+    //   if (recording.request.url == 'https://api.test.datacite.org/token') {
+    //     recording.request.postData.text = 'INFORMATION_HIDDEN';
+    //     recording.response.content.text = 'INFORMATION_HIDDEN';
+    //   }
 
-      /* filter out authorization tokens */
-      recording.request.headers = recording.request.headers.filter(({ name }) => name !== 'authorization');
-    });
+    //   /* filter out authorization tokens */
+    //   recording.request.headers = recording.request.headers.filter(({ name }) => name !== 'authorization');
+    // });
 
     await visit('/sign-in');
     await fillIn('input#account-field', 'ADMIN');
     await fillIn('input#password-field', ENV.STAFF_ADMIN_PASSWORD);
     await click('button[type=submit]');
 
-    await authenticateSession({
-      uid: 'admin',
-      name: 'Admin',
-      role_id: 'staff_admin',
-    });
+    // await authenticateSession({
+    //   uid: 'admin',
+    //   name: 'Admin',
+    //   role_id: 'staff_admin',
+    // });
   });
 
   test('visiting repository DataCite Test', async function(assert) {
@@ -94,38 +95,34 @@ module('Acceptance | staff_admin | repository', function(hooks) {
     // });
   });
 
-  // test('visiting repository DataCite Test prefixes new', async function(assert) {
-  //   await visit('/repositories/datacite.test/prefixes/new');
+  test('visiting repository DataCite Test prefixes new', async function(assert) {
+    await visit('/repositories/datacite.test/prefixes/new');
 
-  //   assert.equal(currentURL(), '/repositories/datacite.test/prefixes/new');
-  //   assert.dom('h2.work').hasText('DataCite Test Repository');
-  //   assert.dom('li a.nav-link.active').hasText('Prefixes');
-  //   assert.dom('h3.edit').hasText('Assign Prefix');
+    assert.equal(currentURL(), '/repositories/datacite.test/prefixes/new');
+    assert.dom('h2.work').hasText('DataCite Test Repository');
+    assert.dom('li a.nav-link.active').hasText('Prefixes');
+    assert.dom('h3.edit').hasText('Assign Prefix');
 
-  //   // assign prefix 10.80152
-  //   await selectSearch('#provider-prefix-add', '10.8');
-  //   await selectChoose('#provider-prefix-add', '10.80152');
-  //   await click('button[type=submit]');
+    // assign prefix 10.24413
+    await selectSearch('#provider-prefix-add', '10.2');
+    await selectChoose('#provider-prefix-add', '10.24413');
+    await click('button[type=submit]');
+    await visit('/repositories/datacite.test/prefixes'); // instead of waiting extra step to enable delete prefix 10.24413 test to pass
+  });
 
-  //   await waitUntil(function() {
-  //     return assert.dom('a#assign-prefix').includesText('Assign Prefix');
-  //   });
+  test('delete prefix 10.24413 that was just assigned', async function(assert) {
+    await visit('/repositories/datacite.test/prefixes/10.24413/delete');
 
-  //   assert.equal(currentURL(), '/repositories/datacite.test/prefixes');
-  //   // assert.dom('a#10.80152').hasText('10.80152');
+    assert.equal(currentURL(), '/repositories/datacite.test/prefixes/10.24413/delete');
+    assert.dom('h2.work').hasText('DataCite Test Repository');
+    assert.dom('li a.nav-link.active').hasText('Prefixes');
+    assert.dom('div.alert.alert-danger').hasText('Are you sure you want to remove prefix 10.24413 from this repository?');
+    await click('button#prefix-delete');
 
-  //   // delete prefix 10.80152 that was just assigned
-  //   await visit('/repositories/datacite.test/prefixes/10.80152/delete');
+    assert.equal(currentURL(), '/repositories/datacite.test/prefixes');
+    assert.dom('*').doesNotIncludeText('10.24413');
+  });
 
-  //   assert.equal(currentURL(), '/repositories/datacite.test/prefixes/10.80152/delete');
-  //   assert.dom('h2.work').hasText('DataCite Test Repository');
-  //   assert.dom('li a.nav-link.active').hasText('Prefixes');
-  //   assert.dom('div.alert.alert-danger').hasText('Are you sure you want to remove prefix 10.80152 from this repository?');
-  //   await click('button#prefix-delete');
-
-  //   assert.equal(currentURL(), '/repositories/datacite.test/prefixes');
-  //   assert.dom('*').doesNotIncludeText('10.80152');
-  // });
 
   test('visiting repository DataCite Test dois', async function(assert) {
     await visit('/repositories/datacite.test/dois');
@@ -215,6 +212,19 @@ module('Acceptance | staff_admin | repository', function(hooks) {
     assert.dom('input#is-active-field').exists();
 
     assert.dom('button#update-repository').includesText('Update Repository');
+  });
+
+  test('update repository description', async function(assert) {
+    await visit('/repositories/datacite.test/edit');
+    assert.dom('textarea#description-field').exists();
+    let desc = 'datacite' + Math.round(Math.random() * 1000).toString();
+    await fillIn('textarea#description-field', desc);
+    await click('button#update-repository');
+
+    await visit('/repositories/datacite.test');
+    assert.dom('h2.work').hasText('DataCite Test Repository');
+    assert.dom('p#description').hasText(desc);
+    // await pauseTest();
   });
 
   test('editing repository DataCite Test password form', async function(assert) {
