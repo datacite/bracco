@@ -318,25 +318,25 @@ module('Acceptance | staff_admin | provider', function(hooks) {
     assert.dom('button#delete').doesNotExist();
   });
 
-  test('assign a prefix', async function(assert) {
-    await visit('/providers/datacite/prefixes/new');
+  // test('assign a prefix', async function(assert) {
+  //   await visit('/providers/datacite/prefixes/new');
 
-    assert.equal(currentURL(), '/providers/datacite/prefixes/new');
+  //   assert.equal(currentURL(), '/providers/datacite/prefixes/new');
 
-    // assign prefix 10.80253
-    await selectSearch('#prefix-add', '10.8');
-    await selectChoose('#prefix-add', '10.80253');
-    await click('button[type=submit]');
-    assert.equal(currentURL(), '/providers/datacite/prefixes');
-    await visit('/providers/datacite/prefixes'); // instead of waiting extra step to enable remove assined prefix test to pass
-  });
+  //   // assign prefix 10.80253
+  //   await selectSearch('#prefix-add', '10.8');
+  //   await selectChoose('#prefix-add', '10.80253');
+  //   await click('button[type=submit]');
+  //   assert.equal(currentURL(), '/providers/datacite/prefixes');
+  //   await visit('/providers/datacite/prefixes'); // instead of waiting extra step to enable remove assined prefix test to pass
+  // });
 
-  test('remove assined prefix', async function(assert) {
-    // remove prefix 10.80253
-    await visit('/providers/datacite/prefixes/10.80253/delete');
-    await click('button#remove');
-    assert.equal(currentURL(), '/providers/datacite/prefixes');
-  });
+  // test('remove assined prefix', async function(assert) {
+  //   // remove prefix 10.80253
+  //   await visit('/providers/datacite/prefixes/10.80253/delete');
+  //   await click('button#remove');
+  //   assert.equal(currentURL(), '/providers/datacite/prefixes');
+  // });
 
   test('cancel assigning a prefix', async function(assert) {
     await visit('/providers/datacite/prefixes/new');
