@@ -9,24 +9,23 @@
       <div class="help-block">
         More information about DOI registration via form can be found on our <a target="_blank" rel="noopener" href="https://support.datacite.org/docs/fabrica-create-doi-form">Support
           Website</a>.
+        <br/>*Required Field.
       </div>
     </div>
     <BsForm @formLayout="horizontal" @horizontalLabelGridClass="col-md-3" @model={{model}} @onSubmit={{action "submit" model}} as |form|>
-      <form.element @controlType="text" @label="⃰DOI" @id="doi" @property="doi" @helpText="The globally unique string that identifies the resource and can't be changed." @disabled={{true}} />
-
-      <DoiState @model={{model}} @form={{form}} />
+      <form.element @class="required-nested-label" @controlType="text" @id="doi" @label="DOI" @property="doi" @helpText="The globally unique string that identifies the resource and can't be changed." @disabled={{true}} />
       
-      <form.element @id="url" @controlType="text" @label="⃰URL" @property="url" @helpText="The location of the landing page with more information about the resource."  @required={{false}} />
+      <form.element @class="required-nested-label" @id="url" @controlType="text" @label="URL" @property="url" @helpText="The location of the landing page with more information about the resource."  @required={{false}} />
 
       <DoiCreators @model={{model}} @form={{form}} />
       <DoiTitles @model={{model}} @form={{form}} />
 
-      <form.element @id="publisher" @controlType="text" @label="⃰Publisher" @property="publisher" @helpText="The name of the entity that
+      <form.element @class="required-nested-label" @id="publisher" @controlType="text" @label="Publisher" @property="publisher" @helpText="The name of the entity that
       holds, archives, publishes prints, distributes, releases, issues, or produces the resource." @required={{false}} />
-      <form.element @id="publication-year" @controlType="text" @label="⃰Publication Year" @property="publicationYear" @helpText="The year when the
+      <form.element @class="required-nested-label" @id="publication-year" @controlType="text" @label="Publication Year" @property="publicationYear" @helpText="The year when the
       resource was or will be made publicly available. Must be between 1450 and 2021." @required={{false}} />
 
-      <DoiTypes @model={{model}} @form={{form}} />
+      <DoiTypes @class="required-nested-label" @model={{model}} @form={{form}} />
       <DoiDescriptions @model={{model}} @form={{form}} />
       
       {{#if (feature-flag 'optionalFields')}}
