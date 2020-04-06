@@ -14,6 +14,6 @@ module('Integration | Component | doi geo-location', function(hooks) {
     this.set('fragment', make('geoLocation'));
     await render(hbs`{{doi-geo-location model=model fragment=fragment index=0}}`);
 
-    assert.dom('*').hasText('GeoLocation Place Description of a geographic location. GeoLocation Point A point location in space. A point contains a single longitude-latitude pair. GeoLocation Box The spatial limits of a box. A box is defined by two geographic points. Left low corner and right upper corner. Each point is defined by its longitude and latitude.');
+    assert.dom('*').hasText('GeoLocation Place Description of a geographic location. GeoLocation Point A point location in space. A point contains a single longitude-latitude pair. More .. GeoLocation Box The spatial limits of a box. A box is defined by two geographic points. Left low corner and right upper corner. Each point is defined by its longitude and latitude. More ..');
   });
 });
