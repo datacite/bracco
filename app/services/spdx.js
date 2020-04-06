@@ -2,8 +2,8 @@ import Service from '@ember/service';
 import fetch from 'fetch';
 import { A } from '@ember/array';
 
-
-const spdxUrl = 'https://gitlab.com/gitlab-org/security-products/license-management/-/raw/master/spdx-licenses.json';
+// // original file with CORS fix https://gitlab.com/gitlab-org/security-products/license-management/-/raw/master/spdx-licenses.json
+const spdxUrl = 'https://glcdn.githack.com/gitlab-org/security-products/license-management/-/raw/master/spdx-licenses.json';
 
 export default Service.extend({
   spdxList: A([]),
