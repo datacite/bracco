@@ -11,16 +11,17 @@
     <BsForm @formLayout="horizontal" @horizontalLabelGridClass="col-md-3" @model={{model.doi}} @onSubmit={{action "submit" model.doi}} as |form|>
       <DoiDoi @model={{model.doi}} @repository={{model.repository}} @form={{form}} />
 
-      <form.element @controlType="text" @label="⃰URL" @id="url" @property="url" @helpText="The location of the landing page with more information about the resource." @required={{false}} />
+      <form.element @class="required-nested-label" @controlType="text" @label="URL" @id="url" @property="url" @helpText="The location of the landing page with more information about the resource." @required={{false}} />
 
       <DoiCreators @model={{model.doi}} @form={{form}} />
       <DoiTitles @model={{model.doi}} @form={{form}} />
       
-      <form.element @controlType="text" @label="⃰Publisher" @id="publisher" @property="publisher" @helpText="The name of the entity that holds, archives, publishes prints, distributes, releases, issues, or produces the resource." @required={{false}} />
-      <form.element @controlType="text" @label="⃰Publication Year" @id="publication-year" @property="publicationYear" @helpText="The year when the resource was or will be made publicly available. Must be between 1450 and 2021." @required={{false}} />
+      <form.element @class="required-nested-label" @controlType="text" @label="Publisher" @id="publisher" @property="publisher" @helpText="The name of the entity that holds, archives, publishes prints, distributes, releases, issues, or produces the resource." @required={{false}} />
+      <form.element @class="required-nested-label" @controlType="text" @label="Publication Year" @id="publication-year" @property="publicationYear" @helpText="The year when the resource was or will be made publicly available. Must be between 1450 and 2021." @required={{false}} />
 
-      <DoiTypes @model={{model.doi}} @form={{form}} />
+      <DoiTypes @class="required-nested-label" @model={{model.doi}} @form={{form}} />
       <DoiDescriptions @model={{model.doi}} @form={{form}} />
+
 
       {{#if (feature-flag 'optionalFields')}}
         <h3 class="member-results">Recommended Fields</h3>
@@ -43,43 +44,21 @@
         <form.element @id="version" @controlType="text" @placeholder="Version" @label="Version" @property="version" @helpText="The version number of the resource. "  @required={{false}} data-test-version />
 
         <DoiFundingReferences @model={{model.doi}} @form={{form}} />
+      {{/if}}
 
-
-        {{#if (is-empty (doi-form-errors model.doi))}}
-        {{else}}
-        <div  class="col-md-3" style="position: fixed;  left: 0; bottom: 0; z-index:99;">
-          <BsAlert @dismissible={{false}} @type="danger" >
-            To save this DOI, first resolve the errors with these fields: {{doi-form-errors model.doi}}.
-          </BsAlert>
-        </div>
-        {{/if}}
-
-        <div class="col-md-9 col-md-offset-3">
+      <div class="col-md-9 col-md-offset-3">
         {{#if (is-empty (doi-form-errors model.doi))}}
           <button type="submit" id="doi-create" class="btn btn-sm btn-fill" disabled={{false}}>Create DOI</button>
         {{else}}
+          <BsAlert @dismissible={{false}} @type="danger">
+            To save this DOI, first resolve the errors with these fields: {{doi-form-errors model.doi}}.
+          </BsAlert>
+
           <button type="submit" id="doi-create" class="btn btn-sm btn-fill" disabled={{true}}>Create DOI</button>          
         {{/if}}
-          <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
-        </div>
-
-      {{else}}
-
-        <div class="col-md-9 col-md-offset-3">
-          {{#if (is-empty (doi-form-errors model.doi))}}
-            <button type="submit" id="doi-create" class="btn btn-sm btn-fill" disabled={{false}}>Create DOI</button>
-          {{else}}
-            <BsAlert @dismissible={{false}} @type="danger" >
-              To save this DOI, first resolve the errors with these fields: {{doi-form-errors model.doi}}.
-            </BsAlert>
-
-            <button type="submit" id="doi-create" class="btn btn-sm btn-fill" disabled={{true}}>Create DOI</button>          
-          {{/if}}
-          
-          <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
-        </div>
-
-      {{/if}}
+        
+        <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
+      </div>
     </BsForm>
 
     <div class="row">

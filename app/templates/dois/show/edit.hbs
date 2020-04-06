@@ -49,29 +49,8 @@
         <form.element @id="version" @controlType="text" @placeholder="Version" @label="Version" @property="version" @helpText="The version number of the resource. "  @required={{false}} data-test-version/>
 
         <DoiFundingReferences @model={{model}} @form={{form}} />
-      
+      {{/if}}
 
-        {{#if (is-empty (doi-form-errors model))}}
-        {{else}}
-        <div  class="col-md-3" style="position: fixed;  left: 0; bottom: 0; z-index:99;">
-          <BsAlert @dismissible={{false}} @type="danger" >
-            To save this DOI, first resolve the errors with these fields: {{doi-form-errors model}}.
-          </BsAlert>
-        </div>
-        {{/if}}
-
-        <div class="col-md-9 col-md-offset-3">
-        {{#if (is-empty (doi-form-errors model))}}
-          <button type="submit" id="doi-update" class="btn btn-sm btn-fill" disabled={{false}}>Update DOI</button>
-        {{else}}
-          <button type="submit" id="doi-update" class="btn btn-sm btn-fill" disabled={{true}}>Update DOI</button>          
-        {{/if}}
-          <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
-        </div>
-
-      {{else}}
-
-  
       <div class="col-md-9 col-md-offset-3">
         {{#if (is-empty (doi-form-errors model))}}
           <button type="submit" id="doi-update" class="btn btn-sm btn-fill" disabled={{false}}>Update DOI</button>
@@ -85,7 +64,6 @@
 
         <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
       </div>
-      {{/if}}
     </BsForm>
 
   </div>
