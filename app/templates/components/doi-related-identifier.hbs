@@ -18,11 +18,14 @@
 <div
   class="help-block help-block-fragment related-identifier-field no-error {{if (not fragment.relatedIdentifier) 'no-success'}}">
   Identifiers of related resources. These must be globally unique identifiers. Visit our support website for 
-   <a target="_blank" rel="noopener" href="https://support.datacite.org/docs/connecting-research-outputs#section-related-identifiers"> the list of supported unique identifiers.</a>
+   <a target="_blank" rel="noopener" href="https://support.datacite.org/docs/schema-optional-properties-v43#section-12-a-related-identifier-type"> the list of supported unique identifiers.</a>
 </div>
 
+{{#if fragment.relatedIdentifier}}
+
+
 <div class="power-select-label">
-  <label for="relatedIdentifierType" class="subtitle">Related Identifier Type</label> 
+  <label for="relatedIdentifierType" class="required-label subtitle">Related Identifier Type</label> 
 </div> 
 <div class="power-select-fragment" disabled={{this.controlledIdentifierType}} data-test-related-identifier-type>
     {{#form.element
@@ -43,7 +46,7 @@
 </div>
 
 <div class="power-select-label">
-  <label for="relationType" class="subtitle">Relation Type</label> 
+  <label for="relationType" class="required-label subtitle">Relation Type</label> 
 </div> 
 <div class="power-select-fragment" data-test-related-relation-type>
     {{#form.element
@@ -100,7 +103,7 @@
   </div>
 
   <div class="power-select-label">
-    <label for="relatedResourceType" class="subtitle">Resource Type General</label> 
+    <label for="relatedResourceType" class="subtitle required-label">Resource Type General</label> 
   </div> 
   <div class="power-select-fragment" data-test-related-resource-type>
 
@@ -120,6 +123,8 @@
       }}
     {{/form.element}}
   </div>
+
+{{/if}}
 
 {{/if}}
 

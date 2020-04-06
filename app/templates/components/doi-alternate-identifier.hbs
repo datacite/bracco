@@ -17,8 +17,10 @@
   <input type="text" class="form-control alternate-identifier-type-field" value={{fragment.identifierType}} oninput={{action "updateIdentifierType" value="target.value"}} data-test-alternate-identifier-type/>
   <div class="help-block help-block-fragment">The type of the Alternate Identifier.</div> --}}
 
+{{#if fragment.identifier}}
+
 <div class="power-select-label">
-  <label for="alternateIdentifierType" class="subtitle">Alternate Identifier Type</label> 
+  <label for="alternateIdentifierType" class="subtitle required-label">Alternate Identifier Type</label> 
 </div> 
 <div class="power-select-fragment" disabled={{this.controlledIdentifierType}} data-test-alternate-identifier-type>
     {{#form.element
@@ -39,5 +41,7 @@
     {{/form.element}}
 
 </div>
+
+{{/if}}
 
 <hr />

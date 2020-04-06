@@ -1,5 +1,5 @@
 <div class="form-group {{validationClass}}">
-  <label class="control-label col-md-3">Description(s) (optional)</label>
+  <label class="control-label col-md-3">Description(s)</label>
   <div class="col-md-9">
     {{#each model.descriptions as |description index|}}
       <DoiDescription @model={{model}} @fragment={{description}} @form={{form}} @index={{index}} />

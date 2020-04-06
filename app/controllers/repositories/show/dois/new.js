@@ -50,19 +50,33 @@ export default Controller.extend({
         }
       });
 
-      // only store name identifiers and affiliations with a value
-      A(doi.get('contributors')).forEach((contributor) => {
-        contributor.set('nameIdentifiers', A(contributor.get('nameIdentifiers')).filter(function(nameIdentifier) {
+      // // only store name identifiers and affiliations with a value
+      // A(doi.get('contributors')).forEach((contributor) => {
+      //   contributor.set('nameIdentifiers', A(contributor.get('nameIdentifiers')).filter(function(nameIdentifier) {
+      //     return !isBlank(nameIdentifier.nameIdentifier);
+      //   }));
+      //   contributor.set('affiliation', A(contributor.get('affiliation')).filter(function(affiliation) {
+      //     return !isBlank(affiliation.name);
+      //   }));
+      //   if (contributor.nameType === 'Organizational') {
+      //     contributor.set('givenName', null);
+      //     contributor.set('familyName', null);
+      //   }
+      // });
+
+      // only store identifiers with a  text
+      doi.set('contributors', A(doi.get('contributors')).filter(function(contributor) {
+        let nameIdentifiers = A(contributor.get('nameIdentifiers')).filter(function(nameIdentifier) {
           return !isBlank(nameIdentifier.nameIdentifier);
-        }));
-        contributor.set('affiliation', A(contributor.get('affiliation')).filter(function(affiliation) {
+        });
+        let affiliation = A(contributor.get('affiliation')).filter(function(affiliation) {
           return !isBlank(affiliation.name);
-        }));
-        if (contributor.nameType === 'Organizational') {
-          contributor.set('givenName', null);
-          contributor.set('familyName', null);
-        }
-      });
+        });
+
+        let contributorType = !isBlank(contributor.contributorType) ? [ contributor.contributorType ] : [];
+
+        return !isBlank(nameIdentifiers) && !isBlank(affiliation) && !isBlank(contributorType) && !isBlank(contributor.name);
+      }));
 
       // only store descriptions with a description text
       doi.set('descriptions', A(doi.get('descriptions')).filter(function(description) {
@@ -75,6 +89,35 @@ export default Controller.extend({
         return !isBlank(identifier.identifier);
       }));
 
+      // only store identifiers with a  text
+      doi.set('relatedIdentifiers', A(doi.get('relatedIdentifiers')).filter(function(identifier) {
+        return !isBlank(identifier.relatedIdentifier);
+      }));
+
+      // only store identifiers with a  text
+      doi.set('fundingReferences', A(doi.get('fundingReferences')).filter(function(fundingReference) {
+        return !isBlank(fundingReference.funderName);
+      }));
+
+      // only store identifiers with a  text
+      doi.set('rightsList', A(doi.get('rightsList')).filter(function(rights) {
+        return !isBlank(rights.rights);
+      }));
+
+      // only store identifiers with a  text
+      doi.set('dates', A(doi.get('dates')).filter(function(date) {
+        return !isBlank(date.date);
+      }));
+
+      // only store identifiers with a  text
+      doi.set('formats', A(doi.get('formats')).filter(function(format) {
+        return !isBlank(format);
+      }));
+
+      // only store identifiers with a  text
+      doi.set('sizes', A(doi.get('sizes')).filter(function(size) {
+        return !isBlank(size);
+      }));
 
       // only store descriptions with a description text
       // doi.set('language', A(doi.get('language')).filter(function(language) {
@@ -86,16 +129,16 @@ export default Controller.extend({
         return !isBlank(title.title);
       }));
 
-      // only store name identifiers and affiliations with a value
-      A(doi.get('geoLocations')).forEach((geoLocation) => {
-        geoLocation.set('geoLocationPlace', geoLocation.get('geoLocationPlace') || null);
-        geoLocation.set('geoLocationPoint.pointLongitude', geoLocation.get('geoLocationPoint.pointLongitude') || null);
-        geoLocation.set('geoLocationPoint.pointLatitude', geoLocation.get('geoLocationPoint.pointLatitude')  || null);
-        geoLocation.set('geoLocationBox.westBoundLongitude', geoLocation.get('geoLocationBox.westBoundLongitude')  || null);
-        geoLocation.set('geoLocationBox.eastBoundLongitude', geoLocation.get('geoLocationBox.eastBoundLongitude')  || null);
-        geoLocation.set('geoLocationBox.northBoundLatitude', geoLocation.get('geoLocationBox.northBoundLatitude')  || null);
-        geoLocation.set('geoLocationBox.southBoundLatitude', geoLocation.get('geoLocationBox.southBoundLatitude')  || null);
-      });
+      doi.set('geoLocations', A(doi.get('geoLocations')).filter(function(geoLocation) {
+        let point = isBlank(geoLocation.geoLocationPoint.pointLongitude) &&
+         isBlank(geoLocation.geoLocationPoint.pointLatitude) ? [] : [ geoLocation.geoLocationPoint ];
+        let box = isBlank(geoLocation.geoLocationBox.westBoundLongitude) &&
+        isBlank(geoLocation.geoLocationBox.eastBoundLongitude) &&
+        isBlank(geoLocation.geoLocationBox.southBoundLatitude) &&
+        isBlank(geoLocation.geoLocationBox.northBoundLatitude) ? [] : [ geoLocation.geoLocationBox ];
+
+        return !isBlank(geoLocation.geoLocationPlace) || !isBlank(point) || !isBlank(box);
+      }));
 
       let self = this;
       doi.save().then(function(doi) {

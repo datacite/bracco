@@ -1,9 +1,29 @@
-
 {{#if (gt index 0)}}
 <div class="power-select-label">
-  <label for="dateType" class="subtitle">Date Type</label>
+  <label for="dateInformation" class="subtitle">Date</label>
 </div>
+
+<div class="input-group">
+  <input class="form-control date-field" value={{fragment.date}} onblur={{action "updateDate" value="target.value"}} placeholder="Date "
+    data-test-date />
+  <span class="input-group-addon">
+    <BsButton @outline={{true}} @onClick={{action "deleteDate" index}}>{{fa-icon "trash" pull="left" style="margin:0;"}}
+    </BsButton>
+  </span>
+</div>
+{{else}}
+<input class="form-control date-field" value={{fragment.date}} onblur={{action "updateDate" value="target.value"}} placeholder="Date"
+  data-test-date />
+    <div class="help-block help-block-fragment">Different dates relevant to the work. Enter dates such as YYYY, YYYY-MM-DD, YYYYMM-DDThh:mm:ssTZD, or ranges such as 2004-03-02/2005-06-02. <a target="_blank" rel="noopener" href="https://support.datacite.org/docs/schema-optional-properties-v43#section-8-date">More ..</a></div>
 {{/if}}
+
+
+{{#if fragment.date}}
+
+
+<div class="power-select-label">
+  <label for="dateType" class="required-label subtitle">Date Type</label>
+</div>
 
 <div class="power-select-fragment">
   {{#form.element 
@@ -18,24 +38,7 @@
   {{/form.element}}
 </div>
 
-<div class="power-select-label">
-  <label for="dateInformation" class="subtitle">Date</label>
-</div>
 
-{{#if (gt index 0)}}
-<div class="input-group">
-  <input class="form-control date-field" value={{fragment.date}} onblur={{action "updateDate" value="target.value"}} placeholder="Date "
-    data-test-date />
-  <span class="input-group-addon">
-    <BsButton @outline={{true}} @onClick={{action "deleteDate" index}}>{{fa-icon "trash" pull="left" style="margin:0;"}}
-    </BsButton>
-  </span>
-</div>
-{{else}}
-<input class="form-control date-field" value={{fragment.date}} onblur={{action "updateDate" value="target.value"}} placeholder="Date"
-  data-test-date />
-    <div class="help-block help-block-fragment">Different dates relevant to the work. Enter dates such as YYYY, YYYY-MM-DD, YYYYMM-DDThh:mm:ssTZD, or ranges such as 2004-03-02/2005-06-02.</div>
-{{/if}}
 
 
 <div class="power-select-label">
@@ -47,5 +50,6 @@
   oninput={{action "updateDateInformation" value="target.value"}} data-test-date />
   <div class="help-block help-block-fragment">Specific information about the date, if appropriate.</div>
 
+{{/if}}
 
 <hr />

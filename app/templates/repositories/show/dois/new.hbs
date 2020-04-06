@@ -3,23 +3,25 @@
     <div class="col-md-9 col-md-offset-3 form-help-header">
       <h3 class="help-header">Create DOI (Form)</h3>
       <div class="help-block">
-        More information about DOI registration via form can be found on our <a target="_blank" rel="noopener" href="https://support.datacite.org/docs/fabrica-create-doi-form">Support Website</a>.
+        More information about DOI registration via form can be found on our <a target="_blank" rel="noopener" href="https://support.datacite.org/docs/fabrica-create-doi-form">Support Website</a>. 
+        <br/>*Required Field.
       </div>
     </div>
 
     <BsForm @formLayout="horizontal" @horizontalLabelGridClass="col-md-3" @model={{model.doi}} @onSubmit={{action "submit" model.doi}} as |form|>
       <DoiDoi @model={{model.doi}} @repository={{model.repository}} @form={{form}} />
 
-      <form.element @controlType="text" @label="URL" @id="url" @property="url" @helpText="The location of the landing page with more information about the resource." @required={{false}} />
+      <form.element @class="required-nested-label" @controlType="text" @label="URL" @id="url" @property="url" @helpText="The location of the landing page with more information about the resource." @required={{false}} />
 
       <DoiCreators @model={{model.doi}} @form={{form}} />
       <DoiTitles @model={{model.doi}} @form={{form}} />
       
-      <form.element @controlType="text" @label="Publisher" @id="publisher" @property="publisher" @helpText="The name of the entity that holds, archives, publishes prints, distributes, releases, issues, or produces the resource." @required={{false}} />
-      <form.element @controlType="text" @label="Publication Year" @id="publication-year" @property="publicationYear" @helpText="The year when the resource was or will be made publicly available. Must be between 1450 and 2021." @required={{false}} />
+      <form.element @class="required-nested-label" @controlType="text" @label="Publisher" @id="publisher" @property="publisher" @helpText="The name of the entity that holds, archives, publishes prints, distributes, releases, issues, or produces the resource." @required={{false}} />
+      <form.element @class="required-nested-label" @controlType="text" @label="Publication Year" @id="publication-year" @property="publicationYear" @helpText="The year when the resource was or will be made publicly available. Must be between 1450 and 2021." @required={{false}} />
 
-      <DoiTypes @model={{model.doi}} @form={{form}} />
+      <DoiTypes @class="required-nested-label" @model={{model.doi}} @form={{form}} />
       <DoiDescriptions @model={{model.doi}} @form={{form}} />
+
 
       {{#if (feature-flag 'optionalFields')}}
         <h3 class="member-results">Recommended Fields</h3>

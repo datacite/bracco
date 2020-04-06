@@ -10,13 +10,15 @@ module('Integration | Component | doi subjects', function(hooks) {
   setupFactoryGuy(hooks);
 
   test('add multiple values', async function(assert) {
+    this.set('subject', make('subject'));
     this.set('model', make('doi'));
+    this.set('model.subjects', [ this.subject ]);
     await render(hbs`{{doi-subjects model=model}}`);
     await click('#add-subject');
     await click('#add-subject');
     let subjects = this.element.querySelectorAll('[data-test-subject-scheme]');
 
-    await fillIn(subjects[1],'OECD');
-    assert.dom(subjects[1]).hasValue('OECD');
+    await fillIn(subjects[0],'OECD');
+    assert.dom(subjects[0]).hasValue('OECD');
   });
 });
