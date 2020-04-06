@@ -24,12 +24,12 @@ export function doiFormErrors([ model ]) {
     }
     if (model.contributors) {
       model.contributors.forEach((contributor) => {
-        errorAttributes = errorAttributes.concat(contributor.validations.errors.mapBy('attribute'));
+        errorAttributes = errorAttributes.concat(contributor.validations.errors.mapBy('message'));
       });
     }
     if (model.identifiers) {
       model.identifiers.forEach((identifier) => {
-        errorAttributes = errorAttributes.concat(identifier.validations.errors.mapBy('attribute'));
+        errorAttributes = errorAttributes.concat(identifier.validations.errors.mapBy('message'));
       });
     }
     if (model.subjects) {
@@ -52,9 +52,16 @@ export function doiFormErrors([ model ]) {
         errorAttributes = errorAttributes.concat(date.validations.errors.mapBy('message'));
       });
     }
+    if (model.geoLocations) {
+      model.geoLocations.forEach((geoLocation) => {
+        console.log(geoLocation);
+        errorAttributes = errorAttributes.concat(geoLocation.geoLocationPoint.validations.errors.mapBy('message'));
+        errorAttributes = errorAttributes.concat(geoLocation.geoLocationBox.validations.errors.mapBy('message'));
+      });
+    }
     if (model.rightsList) {
       model.rightsList.forEach((fundingReference) => {
-        errorAttributes = errorAttributes.concat(fundingReference.validations.errors.mapBy('attribute'));
+        errorAttributes = errorAttributes.concat(fundingReference.validations.errors.mapBy('message'));
       });
     }
   }

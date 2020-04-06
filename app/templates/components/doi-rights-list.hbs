@@ -1,5 +1,5 @@
 <div class="form-group {{validationClass}}">
-  <label class="control-label col-md-3">Rights (optional)</label>
+  <label class="control-label col-md-3">Rights</label>
   <div class="col-md-9">
     {{#each model.rightsList as |rights index|}}
       <DoiRights @model={{model}} @fragment={{rights}} @form={{form}} @index={{index}} @spdx={{spdx}} />
