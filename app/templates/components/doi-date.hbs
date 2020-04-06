@@ -14,7 +14,7 @@
 {{else}}
 <input class="form-control date-field" value={{fragment.date}} onblur={{action "updateDate" value="target.value"}} placeholder="Date"
   data-test-date />
-    <div class="help-block help-block-fragment">Different dates relevant to the work. Enter dates such as YYYY, YYYY-MM-DD, YYYYMM-DDThh:mm:ssTZD, or ranges such as 2004-03-02/2005-06-02.</div>
+    <div class="help-block help-block-fragment">Different dates relevant to the work. Enter dates such as YYYY, YYYY-MM-DD, YYYYMM-DDThh:mm:ssTZD, or ranges such as 2004-03-02/2005-06-02. <a target="_blank" rel="noopener" href="https://support.datacite.org/docs/schema-optional-properties-v43#section-8-date">More ..</a></div>
 {{/if}}
 
 
@@ -22,7 +22,7 @@
 
 
 <div class="power-select-label">
-  <label for="dateType" class="subtitle">⃰Date Type</label>
+  <label for="dateType" class="required-label subtitle">Date Type</label>
 </div>
 
 <div class="power-select-fragment">
