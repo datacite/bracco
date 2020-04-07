@@ -15,6 +15,8 @@
     <BsForm @formLayout="horizontal" @horizontalLabelGridClass="col-md-3" @model={{model}} @onSubmit={{action "submit" model}} as |form|>
       <form.element @class="required-nested-label" @controlType="text" @id="doi" @label="DOI" @property="doi" @helpText="The globally unique string that identifies the resource and can't be changed." @disabled={{true}} />
       
+      <DoiState @class="required-nested-label" @model={{model}} @form={{form}} />
+
       <form.element @class="required-nested-label" @id="url" @controlType="text" @label="URL" @property="url" @helpText="The location of the landing page with more information about the resource."  @required={{false}} />
 
       <DoiCreators @model={{model}} @form={{form}} />
