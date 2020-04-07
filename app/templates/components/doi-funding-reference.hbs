@@ -32,7 +32,7 @@
  
 
 {{#if (gt index 0)}}
-<div class="power-select-label">
+<div>
   <label for="funder-identifier" class="subtitle">Funder Identifier</label>
 </div>
   <div class="input-group">
@@ -107,10 +107,10 @@
 </div>
 
 <div class="power-select-label">
-  <label for="award-uri" class="subtitle">Award Uri</label>
+  <label for="award-uri" class="subtitle">Award URI</label>
 </div>
 
-<input type="text" class="form-control award-uri-field" value={{fragment.awardUri}} placeholder="Award Uri"
+<input type="text" class="form-control award-uri-field" value={{fragment.awardUri}} placeholder="Award URI"
   oninput={{action "updateAwardUri" value="target.value"}} data-test-award-uri />
 
 <div class="help-block help-block-fragment award-uri-field}}">

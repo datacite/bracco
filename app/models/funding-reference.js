@@ -20,8 +20,7 @@ const Validations = buildValidations({
   awardUri: [
     validator('url-format', {
       allowBlank: true,
-      require_tld: false,
-      message: 'Please enter a valid URL.',
+      message: 'Please enter a valid URI',
     }),
   ],
 });

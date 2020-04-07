@@ -1,4 +1,7 @@
 {{#if (gt index 0)}}
+<div class="input-label">
+    <label for="identifier" class="subtitle">Alternate Identifier</label>
+  </div>
   <div class="input-group">
     <input type="text" class="form-control alternate-identifier-field" value={{fragment.identifier}} oninput={{action "updateIdentifier" value="target.value"}} data-test-alternate-identifier/>
     <span class="input-group-btn">
@@ -35,7 +38,7 @@
       onChange=(action "selectAlternateIdentifierType")
       allowClear=true
       onkeydown=(action "createOnEnter")
-      placeholder="Type in or select the Alternate Identifier Type (required)."
+      placeholder="Type in or select the Alternate Identifier Type."
       noMatchesMessage="Press ENTER to add new identifier Type."
     }}
     {{/form.element}}

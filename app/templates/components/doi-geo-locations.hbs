@@ -6,7 +6,7 @@
     {{/each}}
 
     {{#if (or (not model.geolocations) (lte model.geolocations.length 4))}}
-      <BsButton @class="btn-sm" @id="add-geolocation" @outline={{true}} @onClick={{action "addGeoLocation"}}>{{fa-icon "plus"}} Add {{if (gt model.geolocations.length 0) "another "}}geo location</BsButton>
+      <BsButton @class="btn-sm" @id="add-geolocation" @outline={{true}} @onClick={{action "addGeoLocation"}}>{{fa-icon "plus"}} Add {{if (gt model.geolocations.length 0) "another "}}geolocation</BsButton>
     {{/if}}
   </div>
 </div>

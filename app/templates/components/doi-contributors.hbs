@@ -10,7 +10,7 @@
     {{/each}}
 
     {{#if (lte model.contributors.length 24)}}
-      <BsButton @id="add-contributor" @class="btn-sm" @outline={{true}} @onClick={{action "addContributor"}}>{{fa-icon "plus"}} Add {{if (gt model.contributors.length 0) "another "}} Contributor</BsButton>
+      <BsButton @id="add-contributor" @class="btn-sm" @outline={{true}} @onClick={{action "addContributor"}}>{{fa-icon "plus"}} Add {{if (gt model.contributors.length 0) "another "}} contributor</BsButton>
     {{/if}}
   </div>
 </div>
