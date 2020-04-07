@@ -16,10 +16,9 @@ export default Service.extend({
     let url = spdxUrl;
     fetch(url).then(function(response) {
       if (response.ok) {
-        response.json().then(function(data) {
-          self.set('spdxList', data.licenses);
-          return (data);
-        });
+        self.set('spdxList', response.json().then(function(data) {
+          return (data.licenses);
+        }));
       } else {
         console.debug(response);
       }
