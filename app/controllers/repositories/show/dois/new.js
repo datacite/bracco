@@ -91,12 +91,12 @@ export default Controller.extend({
 
       // only store identifiers with a  text
       doi.set('relatedIdentifiers', A(doi.get('relatedIdentifiers')).filter(function(identifier) {
-        return !isBlank(identifier.relatedIdentifier);
+        return !isBlank(identifier.relatedIdentifier) || !isBlank(identifier.relatedIdentifierType) || !isBlank(identifier.relationType) || !isBlank(identifier.relatedMetadataScheme) || !isBlank(identifier.resourceTypeGeneral);
       }));
 
       // only store identifiers with a  text
       doi.set('fundingReferences', A(doi.get('fundingReferences')).filter(function(fundingReference) {
-        return !isBlank(fundingReference.funderName);
+        return !isBlank(fundingReference.funderName) || !isBlank(fundingReference.funderIdentifier) || !isBlank(fundingReference.funderIdentifierType) || !isBlank(fundingReference.awardNumber) || !isBlank(fundingReference.awardTitle);
       }));
 
       // only store identifiers with a  text
@@ -106,7 +106,7 @@ export default Controller.extend({
 
       // only store identifiers with a  text
       doi.set('dates', A(doi.get('dates')).filter(function(date) {
-        return !isBlank(date.date);
+        return !isBlank(date.date) || !isBlank(date.dateType) || !isBlank(date.dateInformation);
       }));
 
       // only store identifiers with a  text
