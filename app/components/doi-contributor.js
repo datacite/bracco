@@ -1,4 +1,8 @@
 import PersonBaseComponent from './person-base-component';
+import { pascalCase } from 'pascal-case';
+import humanizeString from 'humanize-string';
+import { computed } from '@ember/object';
+import { isBlank } from '@ember/utils';
 
 const contributorTypes = [
   'ContactPerson',
@@ -24,6 +28,8 @@ const contributorTypes = [
   'Other',
 ];
 
+const humanContributorTypes = contributorTypes.map(type => humanizeString(type));
+
 const organizationalContributorTypes = [
   'HostingInstitution',
   'RegistrationAgency',
@@ -46,24 +52,29 @@ const personalContributorTypes = [
 ];
 
 export default PersonBaseComponent.extend({
-  contributorTypes,
+  humanContributorTypes,
+  humanContributorType: computed('fragment.contributorType', function() {
+    return isBlank(this.get('fragment.contributorType')) ? null : humanizeString(this.get('fragment.contributorType'));
+  }),
+
   selectContributorType(contributorType) {
     if (contributorType) {
-      this.fragment.set('contributorType', contributorTypes.filter(function(type) {return type === contributorType;}));
+      let contributorTypeId = pascalCase(contributorType);
+      this.fragment.set('contributorType', contributorTypeId);
       this.set('contributorType', contributorType);
 
-      if (organizationalContributorTypes.includes(contributorType)) {
+      if (organizationalContributorTypes.includes(contributorTypeId)) {
         this.selectNameType('Organizational');
       }
 
-      if (personalContributorTypes.includes(contributorType)) {
+      if (personalContributorTypes.includes(contributorTypeId)) {
         this.selectNameType('Personal');
       }
 
     } else {
       this.fragment.set('contributorType', null);
     }
-    this.set('contributorTypes', contributorTypes);
+    this.set('humanContributorTypes', humanContributorTypes);
   },
 
   actions: {

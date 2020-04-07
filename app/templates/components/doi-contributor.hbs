@@ -3,12 +3,12 @@
   <div class="power-select-fragment" doi-contributor>
     {{#form.element
       controlType="power-select"
-      value=fragment.contributorType
+      value=humanContributorType
       helpText="The type of contributor of the resource."
-      options=contributorTypes
+      options=humanContributorTypes
       formLayout="vertical"
-      selected=contributorType
-      destination=fragment.contributorType
+      selected=humanContributorType
+      destination=humanContributorType
       disabled=disabled as |el|
     }}
       {{el.control

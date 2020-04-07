@@ -70,7 +70,7 @@ export default Controller.extend({
 
         let contributorType = !isBlank(contributor.contributorType) ? [ contributor.contributorType ] : [];
 
-        return !isBlank(nameIdentifiers) && !isBlank(affiliation) && !isBlank(contributorType) && !isBlank(contributor.name);
+        return !isBlank(nameIdentifiers) || !isBlank(affiliation) || !isBlank(contributorType) || !isBlank(contributor.name);
       }));
 
       // only store identifiers with a  text
