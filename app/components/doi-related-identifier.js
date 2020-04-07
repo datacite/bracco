@@ -2,6 +2,7 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 import { isURL, isISBN } from 'validator';
+import { isBlank } from '@ember/utils';
 
 const relationTypeList = [
   'Cites',
@@ -115,10 +116,14 @@ export default Component.extend({
     const urn = /^urn:[a-z0-9][a-z0-9-]{0,31}:[a-z0-9()+,\-.:=@;$_!*'%/?#]/;
 
     switch (true) {
-      case value == null:
+      case isBlank(value):
         this.fragment.set('relatedIdentifier', null);
         this.fragment.set('relatedIdentifierType', null);
         this.set('controlledIdentifierType', false);
+        this.selectResourceTypeGeneral(null);
+        this.fragment.set('schemeType', null);
+        this.fragment.set('relatedMetadataScheme', null);
+        this.fragment.set('relationType', null);
         break;
       case ark.test(value):
         this.fragment.set('relatedIdentifier', value);
@@ -175,6 +180,7 @@ export default Component.extend({
         // // Clears the relatedIdentifierType in case the user changes the relatedIdentifier after selecting it once before.
         this.fragment.set('relatedIdentifier', value);
         this.fragment.set('relatedIdentifierType', null);
+        this.fragment.set('relationType', null);
         this.set('controlledIdentifierType', false);
         break;
     }
@@ -184,6 +190,10 @@ export default Component.extend({
       this.set('isMetadataRelationType', true);
     } else {
       this.set('isMetadataRelationType', false);
+      this.fragment.set('schemeType', null);
+      this.fragment.set('relatedMetadataScheme', null);
+      this.fragment.set('resourceTypeGeneral', null);
+      this.fragment.set('schemeUri', null);
     }
     this.fragment.set('relationType', relationType);
     this.set('relationTypes', relationTypeList);
