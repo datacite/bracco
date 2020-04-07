@@ -147,9 +147,9 @@ module('Acceptance | client_admin | doi', function(hooks) {
   test('visiting the form and adding contributor', async function(assert) {
     await visit('repositories/datacite.test/dois/new');
 
-    await selectChoose('[doi-contributor]', 'DataCollector');
+    await selectChoose('[doi-contributor]', 'Data collector');
     assert.equal(currentURL(), 'repositories/datacite.test/dois/new');
-    assert.dom('[doi-contributor]').includesText('DataCollector');
+    assert.dom('[doi-contributor]').includesText('Data collector');
   });
 
   test('visiting the Form and adding format, version and size', async function(assert) {
