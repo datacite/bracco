@@ -5,7 +5,7 @@
       <DoiFundingReference @model={{model}} @fragment={{fundingReference}} @form={{form}} @index={{index}} />
     {{/each}}
 
-    {{#if (lte model.fundingReferences.length 4)}}
+    {{#if (or (not model.fundingReferences) (lte model.fundingReferences.length 4))}}
       <BsButton @id="add-funding-reference" @class="btn-sm" @outline={{true}} @onClick={{action "addFundingReference"}}>{{fa-icon "plus"}} Add {{if (gt model.fundingReferences.length 0) "another "}}funding reference</BsButton>
     {{/if}}
   </div>

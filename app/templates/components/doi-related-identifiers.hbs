@@ -5,7 +5,7 @@
       <DoiRelatedIdentifier @model={{model}} @fragment={{relatedIdentifier}} @form={{form}} @index={{index}} />
     {{/each}}
 
-    {{#if (lte model.relatedIdentifiers.length 24)}}
+    {{#if (or (not model.relatedIdentifiers) (lte model.relatedIdentifiers.length 24))}}
       <BsButton @id="add-related-identifier" @class="btn-sm" @outline={{true}} @onClick={{action "addRelatedIdentifier"}}>{{fa-icon "plus"}} Add {{if (gt model.relatedIdentifiers.length 0) "another "}} related identifier</BsButton>
     {{/if}}
   </div>

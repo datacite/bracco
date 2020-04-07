@@ -5,7 +5,7 @@
       <DoiSubject @model={{model}} @fragment={{subject}} @form={{form}} @index={{index}} />
     {{/each}}
 
-    {{#if (lte model.subjects.length 6)}}
+    {{#if (or (not model.subjects) (lte model.subjects.length 6))}}
       <BsButton @class="btn-sm" @id="add-subject" @outline={{true}} @onClick={{action "addSubject"}}>{{fa-icon "plus"}} Add {{if (gt model.subjects.length 0) "another "}} subject</BsButton>
     {{/if}}
   </div>
