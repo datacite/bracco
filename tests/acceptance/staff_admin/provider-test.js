@@ -6,7 +6,7 @@ import {
   click,
   fillIn,
 } from '@ember/test-helpers';
-import { selectChoose, selectSearch } from 'ember-power-select/test-support';
+// import { selectChoose, selectSearch } from 'ember-power-select/test-support';
 import ENV from 'bracco/config/environment';
 // import { authenticateSession } from 'ember-simple-auth/test-support';
 // import { setupQunit as setupPolly } from '@pollyjs/core';
