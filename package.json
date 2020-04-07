@@ -64,11 +64,13 @@
     "ember-responsive": "^3.0.5",
     "fastboot-app-server": "^2.0.0",
     "fs-extra": "^8.1.0",
+    "humanize-string": "^2.1.0",
     "is-electron": "^2.2.0",
     "iso-639-1": "^2.1.0",
     "junk": "^3.1.0",
     "langs": "^2.0.0",
     "mime": "^2.4.4",
+    "pascal-case": "^3.1.1",
     "validator": "^12.1.0"
   },
   "fastbootDependencies": [
