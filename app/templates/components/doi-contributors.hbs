@@ -9,7 +9,7 @@
       {{/if}}
     {{/each}}
 
-    {{#if (lte model.contributors.length 24)}}
+    {{#if  (or (not model.contributors) (lte model.contributors.length 24))}}
       <BsButton @id="add-contributor" @class="btn-sm" @outline={{true}} @onClick={{action "addContributor"}}>{{fa-icon "plus"}} Add {{if (gt model.contributors.length 0) "another "}} contributor</BsButton>
     {{/if}}
   </div>
