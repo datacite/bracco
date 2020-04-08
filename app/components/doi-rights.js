@@ -1,5 +1,5 @@
 import Component from '@ember/component';
-import { isBlank } from '@ember/utils';
+import { isBlank, typeOf } from '@ember/utils';
 
 export default Component.extend({
   isSpdxId: false,
@@ -12,13 +12,13 @@ export default Component.extend({
   },
   updateRights(rights) {
     switch (true) {
-      case rights === null:
+      case isBlank(rights):
         this.fragment.set('rights', null);
         this.fragment.set('rightsUri', null);
         this.set('isSpdxId', false);
         break;
-      case rights instanceof String:
-        this.fragment.set('rights', null);
+      case typeOf(rights) === 'string':
+        this.fragment.set('rights', rights);
         this.fragment.set('rightsUri', null);
         this.set('isSpdxId', false);
         break;
@@ -36,7 +36,7 @@ export default Component.extend({
         if (!this.selected.includes(select.searchText)) {
           this.spdxLicenseList.push(select.searchText);
           select.actions.choose(select.searchText);
-          this.fragment.set('rights', select.searchText);
+          this.updateRights(select.searchText);
           this.set('spdxLicenseList', this.spdxLicenseListComplete);
         }
       }
