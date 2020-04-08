@@ -67,8 +67,6 @@ export function doiFormErrors([ model ]) {
   }
 
   return errorAttributes.map(function(attribute) {
-    console.log(attribute);
-
     return labelList[attribute] || attribute;
   }).join(', ');
 }

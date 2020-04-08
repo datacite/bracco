@@ -7,7 +7,6 @@ const Validations = buildValidations({
   rightsUri: [
     validator('url-format', {
       allowBlank: true,
-      require_tld: false,
       message: 'Rights scheme URI has to be a valid URI',
     }),
   ],
