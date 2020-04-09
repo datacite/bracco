@@ -5,8 +5,8 @@
         <DoiAlternateIdentifier @model={{model}} @fragment={{identifier}} @form={{form}} @index={{index}} />
     {{/each}}
 
-    {{#if (lte model.identifiers.length 4)}}
-      <BsButton @class="btn-sm" @id="add-alternate-identifier" @outline={{true}} @onClick={{action "addIdentifier"}}>{{fa-icon "plus"}} Add another alternate identifier</BsButton>
+    {{#if (or (not model.identifiers) (lte model.identifiers.length 4))}}
+      <BsButton @class="btn-sm" @id="add-alternate-identifier" @outline={{true}} @onClick={{action "addIdentifier"}}>{{fa-icon "plus"}} Add {{if (gt model.identifiers.length 0) "another "}} alternate identifier</BsButton>
     {{/if}}
   </div>
 </div>
