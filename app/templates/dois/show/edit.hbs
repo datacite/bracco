@@ -1,7 +1,3 @@
-<div class="col-md-9 col-md-offset-3">
-  <h2 class="doi">{{model.doi}}</h2>
-</div>
-
 <div class="panel panel-transparent">
   <div class="panel-body">
     <div class="col-md-9 col-md-offset-3 form-help-header">
@@ -12,6 +8,10 @@
       </div>
     </div>
     <BsForm @formLayout="horizontal" @horizontalLabelGridClass="col-md-3" @model={{model}} @onSubmit={{action "submit" model}} as |form|>
+      {{#if (feature-flag 'optionalFields')}}
+        <h3 class="member-results">Required Fields</h3>
+      {{/if}}
+
       <form.element @class="required-nested-label" @controlType="text" @id="doi" @label="DOI" @property="doi" @helpText="The globally unique string that identifies the resource and can't be changed." @disabled={{true}} />
       
       <DoiState @class="required-nested-label" @model={{model}} @form={{form}} />
@@ -33,7 +33,7 @@
       {{/if}}
 
       <DoiDescriptions @model={{model}} @form={{form}} />
-      
+
       {{#if (feature-flag 'optionalFields')}}
         <DoiSubjects @model={{model}} @form={{form}} />
         <DoiContributors @model={{model}} @form={{form}} />
