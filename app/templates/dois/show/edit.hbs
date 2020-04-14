@@ -28,12 +28,11 @@
       resource was or will be made publicly available. Must be between 1450 and 2021." @required={{false}} />
 
       <DoiTypes @class="required-nested-label" @model={{model}} @form={{form}} />
-      <DoiDescriptions @model={{model}} @form={{form}} />
       
       {{#if (feature-flag 'optionalFields')}}
+        <h3 class="member-results">Recommended Fields</h3>
 
-       <h3 class="member-results">Recommended Fields</h3>
-
+        <DoiDescriptions @model={{model}} @form={{form}} />
         <DoiSubjects @model={{model}} @form={{form}} />
         <DoiContributors @model={{model}} @form={{form}} />
         <DoiDates @model={{model}} @form={{form}} />

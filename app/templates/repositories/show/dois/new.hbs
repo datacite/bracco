@@ -20,18 +20,16 @@
       <form.element @class="required-nested-label" @controlType="text" @label="Publication Year" @id="publication-year" @property="publicationYear" @helpText="The year when the resource was or will be made publicly available. Must be between 1450 and 2021." @required={{false}} />
 
       <DoiTypes @class="required-nested-label" @model={{model.doi}} @form={{form}} />
-      <DoiDescriptions @model={{model.doi}} @form={{form}} />
-
-
+      
       {{#if (feature-flag 'optionalFields')}}
         <h3 class="member-results">Recommended Fields</h3>
 
+        <DoiDescriptions @model={{model.doi}} @form={{form}} />
         <DoiSubjects @model={{model.doi}} @form={{form}} />
         <DoiContributors @model={{model.doi}} @form={{form}} />
         <DoiDates @model={{model.doi}} @form={{form}} />
         <DoiRelatedIdentifiers @model={{model.doi}} @form={{form}} />
         <DoiGeoLocations @model={{model.doi}} @form={{form}} />
-
 
         <h3 class="member-results">Optional Fields</h3>
 
