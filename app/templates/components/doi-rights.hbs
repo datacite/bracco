@@ -7,7 +7,6 @@
   <div class="power-select-fragment" data-test-rights>
     {{#form.element
       controlType="power-select"
-      helpText="Any rights information for this resource. The property may be repeated to record complex rights characteristics."
       options=spdxLicenseList
       value=fragment.rights
       disabled=disabled
@@ -17,20 +16,22 @@
     {{#el.control
         searchEnabled=true
         onChange=(action "selectRights")
-        placeholder="Search rights in the SPDX index"
+        placeholder="Search standard licenses"
         onkeydown=(action "createOnEnter")
         search=(action "searchRights")
         searchPlaceholder="Type to search..."
         allowClear=true
-        noMatchesMessage="Press ENTER to add new rights name."
+        noMatchesMessage="Press ENTER to add a new license."
         as |item| }}
     {{if item.name item.name fragment.rights}}
     {{/el.control}}
+    <div class="help-block">
+      Rights information for this resource. The property may be repeated to record complex rights characteristics.
+      The list of standard licenses is provided by <a target="_blank" rel="noopener" href="https://spdx.org">SPDX</a>.
+    </div>
     {{/form.element}}
+
   </div>
-
-
-
 
   {{#if (gt index 0)}}
     <div class="power-select-label">
@@ -47,7 +48,6 @@
     </span>
   </div>
   {{else}}
-
 
   <input type="text" placeholder="Rights URI" class="form-control rights-uri-field" value={{fragment.rightsUri}} disabled={{this.isSpdxId}}
     oninput={{action "updateRightsUri" value="target.value"}} data-test-rights-uri />
