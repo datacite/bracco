@@ -75,16 +75,16 @@ module('Acceptance | staff_admin | doi', function(hooks) {
     assert.dom('a#transfer-dois').doesNotExist();
   });
 
-  test('visiting dois with click', async function(assert) {
-    await visit('/dois');
+  // test('visiting dois with click', async function(assert) {
+  //   await visit('/dois');
 
-    // first DOI in list
-    await click('h3.work:first-child a');
+  //   // first DOI in list
+  //   await click('h3.work:first-child a');
 
-    // see buttons for single DOI
-    assert.dom('a#edit-doi').includesText('Update DOI (Form)');
-    assert.dom('a#modify-doi').includesText('Update DOI (File Upload)');
-  });
+  //   // see buttons for single DOI
+  //   assert.dom('a#edit-doi').includesText('Update DOI (Form)');
+  //   assert.dom('a#modify-doi').includesText('Update DOI (File Upload)');
+  // });
 
   test('visiting specific doi', async function(assert) {
     await visit('/dois/10.80225%2Fda52-7919');
