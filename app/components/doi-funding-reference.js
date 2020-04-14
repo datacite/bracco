@@ -67,7 +67,7 @@ export default Component.extend({
         this.fragment.set('funderName', funder.name);
         this.fragment.set('funderIdentifierType', 'Crossref Funder ID');
         this.fragment.set('schemeUri', 'https://www.crossref.org/services/funder-registry/');
-        this.fragment.set('funderIdentifier', funder.uri);
+        this.fragment.set('funderIdentifier', 'https://doi.org' + new URL(funder.uri).pathname);
         this.set('isCrossrefId', true);
         break;
     }
