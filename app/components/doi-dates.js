@@ -15,8 +15,6 @@ export default Component.extend({
   },
   actions: {
     addDate() {
-      console.log(this.model.get('dates'));
-      console.log(this.model);
       this.model.get('dates').createFragment();
     },
   },

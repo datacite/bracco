@@ -7,7 +7,6 @@ export default Component.extend({
       this.set('fragment', value);
     },
     selectFormat() {
-      console.log(this.fragment);
       this.model.get('formats').replace(this.index, 1, [ this.fragment ]);
     },
     deleteFormat() {
