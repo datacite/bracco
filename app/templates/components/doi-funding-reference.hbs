@@ -38,7 +38,7 @@
     data-test-funder-identifier />
 
   <div class="help-block help-block-fragment funder-identifier-field}}">
-    Uniquely identifies a funding entity, according to any of these types: Crossref Funder ID, GRID, ISNI, or ROR.
+    Uniquely identifies a funding entity.
   </div>
 
   <span class="input-group-btn">
@@ -53,7 +53,7 @@
   {{#form.element
     controlType="power-select"
     value=fragment.funderIdentifierType
-    helpText="The type of funder identifier."
+    helpText="The type of funder identifier, one of Crossref Funder ID, GRID, ISNI, or ROR."
     options=funderIdentifierTypeList
     disabled=isCrossrefId
     destination=fragment.funderIdentifierType as |el|

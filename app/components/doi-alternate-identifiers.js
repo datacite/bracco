@@ -9,9 +9,6 @@ export default Component.extend({
     if (!this.model.get('identifiers')) {
       this.model.set('identifiers', []);
     }
-    if (this.model.get('identifiers').length < 2) {
-      this.model.get('identifiers').createFragment();
-    }
   },
 
   actions: {

@@ -28,12 +28,10 @@
     {{/form.element}}
   </div>
 
-{{#if fragment.subject}}
-  <div class="power-select-label">
-    <label for="subjectScheme" class="subtitle">Subject Scheme</label>
-  </div> 
+<div class="power-select-label">
+  <label for="subjectScheme" class="subtitle">Subject Scheme</label>
+</div>
 <div class="input-group">
-
   <input type="text"  placeholder="Subject Scheme" class="form-control subject-scheme-field" disabled={{this.oecdSelected}}
     value={{fragment.subjectScheme}} oninput={{action "updateSubjectScheme" value="target.value"}} data-test-subject-scheme/>
   <div class="help-block help-block-fragment">The name of the subject scheme or classification code or authority if one
@@ -49,6 +47,5 @@
   </span>
 </div>
 <div class="help-block help-block-fragment">The URI of the subject identifier scheme. For example http://id.loc.gov/authorities/subjects</div>
-{{/if}}
 
 <hr />

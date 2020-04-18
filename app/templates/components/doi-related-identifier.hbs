@@ -12,48 +12,45 @@
    <a target="_blank" rel="noopener" href="https://support.datacite.org/docs/schema-optional-properties-v43#section-12-a-related-identifier-type"> the list of supported unique identifiers.</a>
 </div>
 
-{{#if fragment.relatedIdentifier}}
 <div class="power-select-label">
   <label for="relatedIdentifierType" class="required-label subtitle">Related Identifier Type</label> 
 </div> 
 <div class="power-select-fragment" disabled={{this.controlledIdentifierType}} data-test-related-identifier-type>
-    {{#form.element
-      controlType="power-select"
-      value=fragment.relatedIdentifierType
-      helpText="The type of the Related Identifier."
-      options=relatedIdentifierTypeList
-      disabled=controlledIdentifierType
-      destination=fragment.relatedIdentifierType as |el|
-    }}
-    {{el.control
-      onChange=(action "selectRelatedIdentifierType")
-      allowClear=true
-      placeholder="Select related Identifier Type"
-    }}
-    {{/form.element}}
-
+  {{#form.element
+    controlType="power-select"
+    value=fragment.relatedIdentifierType
+    helpText="The type of the Related Identifier."
+    options=relatedIdentifierTypeList
+    disabled=controlledIdentifierType
+    destination=fragment.relatedIdentifierType as |el|
+  }}
+  {{el.control
+    onChange=(action "selectRelatedIdentifierType")
+    allowClear=true
+    placeholder="Select related Identifier Type"
+  }}
+  {{/form.element}}
 </div>
 
 <div class="power-select-label">
   <label for="relationType" class="required-label subtitle">Relation Type</label> 
 </div> 
 <div class="power-select-fragment" data-test-related-relation-type>
-    {{#form.element
-      controlType="power-select"
-      value=fragment.relationType
-      helpText="The type of the Relation."
-      options=relationTypeList
-      disabled=disabled
-      allowClear=true
-      destination=fragment.relationType as |el|
-    }}
-    {{el.control
-      onChange=(action "selectRelationType")
-      allowClear=true
-      placeholder="Select Relation Type"
-    }}
-    {{/form.element}}
-
+  {{#form.element
+    controlType="power-select"
+    value=fragment.relationType
+    helpText="The type of the Relation."
+    options=relationTypeList
+    disabled=disabled
+    allowClear=true
+    destination=fragment.relationType as |el|
+  }}
+  {{el.control
+    onChange=(action "selectRelationType")
+    allowClear=true
+    placeholder="Select Relation Type"
+  }}
+  {{/form.element}}  
 </div>
 
 {{#if this.isMetadataRelationType}}
@@ -95,7 +92,6 @@
     <label for="relatedResourceType" class="subtitle required-label">Resource Type General</label> 
   </div> 
   <div class="power-select-fragment" data-test-related-resource-type>
-
     {{#form.element
       controlType="power-select"
       value=fragment.resourceTypeGeneral
@@ -112,9 +108,6 @@
       }}
     {{/form.element}}
   </div>
-
-{{/if}}
-
 {{/if}}
 
 <hr />

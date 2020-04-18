@@ -1,5 +1,5 @@
 <div class="input-group">
-  <textarea class="form-control description-field {{if (not isSeriesInformation) 'no-error'}}" rows="8" style="resize:none" value={{fragment.description}}
+  <textarea class="form-control description-field {{if (not isSeriesInformation) 'no-error'}}" rows="8" style="resize:none" placeholder="Description" value={{fragment.description}}
     oninput={{action "updateDescription" value="target.value"}} data-test-description/>    
   <span class="input-group-addon">
     <BsButton @outline={{true}} @onClick={{action "deleteDescription" index}}>{{fa-icon "trash" pull="left" style="margin:0;"}}</BsButton>
