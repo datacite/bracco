@@ -1,15 +1,10 @@
-{{#if (gt index 0)}}
-  <div class="input-group">
-    <textarea class="form-control description-field {{if (not isSeriesInformation) 'no-error'}}" rows="8" style="resize:none" value={{fragment.description}}
-      oninput={{action "updateDescription" value="target.value"}} data-test-description/>    
-    <span class="input-group-addon">
-      <BsButton @outline={{true}} @onClick={{action "deleteDescription" index}}>{{fa-icon "trash" pull="left" style="margin:0;"}}</BsButton>
-    </span>
-  </div>
-{{else}}
-  <textarea class="form-control description-field {{if (not isSeriesInformation) 'no-error'}}" rows="8" style="resize:none" value={{fragment.description}} 
-    oninput={{action "updateDescription" value="target.value"}} data-test-description/>
-{{/if}}
+<div class="input-group">
+  <textarea class="form-control description-field {{if (not isSeriesInformation) 'no-error'}}" rows="8" style="resize:none" value={{fragment.description}}
+    oninput={{action "updateDescription" value="target.value"}} data-test-description/>    
+  <span class="input-group-addon">
+    <BsButton @outline={{true}} @onClick={{action "deleteDescription" index}}>{{fa-icon "trash" pull="left" style="margin:0;"}}</BsButton>
+  </span>
+</div>
 {{#if isSeriesInformation}}
   <div class="help-block help-block-fragment description-field">Enter series information in the recommended format of series title, followed by comma and optional volume(issue), firstpage-lastpage</div>
 {{else}}
@@ -17,7 +12,7 @@
 {{/if}}
 
 <div class="power-select-label">
-  <label for="descriptionType" class="subtitle">Description Type</label>
+  <label for="descriptionType" class="subtitle required-label">Description Type</label>
 </div>
 
 <div class="power-select-fragment">
@@ -28,7 +23,7 @@
 
 
 <div class="power-select-label">
-  <label for="descriptionLang" class="subtitle">Language (optional)</label>
+  <label for="descriptionLang" class="subtitle">Language</label>
 </div>
 
 <div class="power-select-fragment description-langs">

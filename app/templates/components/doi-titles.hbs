@@ -1,6 +1,7 @@
 <div class="form-group {{validationClass}}">
   <label class="control-label col-md-3 required-label">Titles</label>
   <div class="col-md-9">
+    <div class="label-vertical">One or more names or titles by which the resource is known.</div>
     {{#each model.titles as |title index|}}
       {{#if (gt index 0)}}
         <DoiTitle @model={{model}} @fragment={{title}} @form={{form}} @index={{index}} />

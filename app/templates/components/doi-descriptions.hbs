@@ -1,6 +1,7 @@
 <div class="form-group {{validationClass}}">
   <label class="control-label col-md-3">Descriptions</label>
   <div class="col-md-9">
+    <div class="label-vertical">All additional information that does not fit in any of the other categories.</div>
     {{#each model.descriptions as |description index|}}
       <DoiDescription @model={{model}} @fragment={{description}} @form={{form}} @index={{index}} />
     {{/each}}

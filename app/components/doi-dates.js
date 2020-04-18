@@ -9,9 +9,6 @@ export default Component.extend({
     if (!this.model.get('dates')) {
       this.model.set('dates', []);
     }
-    if (this.model.get('dates').length == 0) {
-      this.model.get('dates').createFragment();
-    }
   },
   actions: {
     addDate() {

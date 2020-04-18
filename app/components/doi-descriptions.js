@@ -9,9 +9,6 @@ export default Component.extend({
     if (!this.model.get('descriptions')) {
       this.model.set('descriptions', []);
     }
-    if (this.model.get('descriptions').length == 0) {
-      this.model.get('descriptions').createFragment();
-    }
 
     // this.setValidationClass();
   },

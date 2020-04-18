@@ -9,9 +9,6 @@ export default Component.extend({
     if (!this.model.get('fundingReferences')) {
       this.model.set('fundingReferences', []);
     }
-    if (this.model.get('fundingReferences').length == 0) {
-      this.model.get('fundingReferences').createFragment();
-    }
   },
 
   actions: {

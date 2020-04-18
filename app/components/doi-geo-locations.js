@@ -9,9 +9,6 @@ export default Component.extend({
     if (!this.model.get('geoLocations')) {
       this.model.set('geoLocations', []);
     }
-    if (this.model.get('geoLocations').length == 0) {
-      this.model.get('geoLocations').createFragment();
-    }
   },
 
   actions: {

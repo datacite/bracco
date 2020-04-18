@@ -1,12 +1,13 @@
 <div class="form-group {{validationClass}}">
   <label class="control-label col-md-3">Alternate Identifiers</label>
   <div class="col-md-9">
+    <div class="label-vertical">An identifier or identifiers other than the primary Identifier applied to the resource being registered.</div>
     {{#each model.identifiers as |identifier index|}}
-        <DoiAlternateIdentifier @model={{model}} @fragment={{identifier}} @form={{form}} @index={{index}} />
+      <DoiAlternateIdentifier @model={{model}} @fragment={{identifier}} @form={{form}} @index={{index}} />
     {{/each}}
 
     {{#if (or (not model.identifiers) (lte model.identifiers.length 4))}}
-      <BsButton @class="btn-sm" @id="add-alternate-identifier" @outline={{true}} @onClick={{action "addIdentifier"}}>{{fa-icon "plus"}} Add {{if (gt model.identifiers.length 0) "another "}} alternate identifier</BsButton>
+      <BsButton @class="btn-sm" @id="add-alternate-identifier" @outline={{true}} @onClick={{action "addIdentifier"}}>{{fa-icon "plus"}} Add {{if (gt model.identifiers.length 1) "another "}} alternate identifier</BsButton>
     {{/if}}
   </div>
 </div>

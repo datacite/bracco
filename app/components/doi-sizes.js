@@ -9,9 +9,6 @@ export default Component.extend({
     if (!this.model.get('sizes')) {
       this.model.set('sizes', []);
     }
-    if (this.model.get('sizes').length == 0) {
-      this.model.get('sizes').pushObject();
-    }
   },
   actions: {
     addSize() {

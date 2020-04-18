@@ -5,14 +5,12 @@
       <BsButton @outline={{true}} @onClick={{action "deleteTitle" index}}>{{fa-icon "trash"}}</BsButton>
     </span>
   </div>
-  <div class="help-block help-block-fragment">One or more names or titles by which the resource is known.</div>
 {{else}}
   <input type="text" class="form-control title-field" value={{fragment.title}} oninput={{action "updateTitle" value="target.value"}} data-test-title/>
-  <div class="help-block help-block-fragment">One or more names or titles by which the resource is known.</div>
 {{/if}}
 
 <div class="power-select-label">
-  <label for="titleType" class="subtitle">Title Type (optional)</label>
+  <label for="titleType" class="subtitle">Title Type</label>
 </div>
 
 <div class="power-select-fragment title-type">
@@ -22,7 +20,7 @@
 </div>
 
 <div class="power-select-label">
-  <label for="titleType" class="subtitle">Language (optional)</label>
+  <label for="titleType" class="subtitle">Language</label>
 </div>
 
 <div class="power-select-fragment title-lang">

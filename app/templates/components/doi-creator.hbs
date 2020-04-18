@@ -1,5 +1,5 @@
 {{#if (gt fragment.nameIdentifiers.length 0)}}
-  <label for="nameIdentifiers" class="subtitle">Name Identifier (optional)</label>
+  <label for="nameIdentifiers" class="subtitle">Name Identifier</label>
 
   {{#each fragment.nameIdentifiers as |nameIdentifier index|}}
     <DoiNameIdentifier @model={{model}} @creator={{fragment}} @fragment={{nameIdentifier}} @form={{form}} @index={{index}} @joinNameParts={{action "joinNameParts"}} @setNameType={{action "selectNameType"}} @setReadOnly={{action "setReadOnly"}} />
@@ -19,18 +19,18 @@
 {{#if (gt index 0)}}
   {{#if showPersonal}}
     <div>
-      <label for="givenName" class="subtitle">Given Name</label>
+      <label for="givenName" class="subtitle {{if isReadonly 'required-label' }}">Given Name</label>
       <input type="text" class="form-control given-name-field no-error no-success" value={{fragment.givenName}} oninput={{action "updateGivenName" value="target.value"}} readonly={{isReadonlyNameParts}} data-test-given-name/>
     </div>
 
     <div>
-      <label for="familyName" class="subtitle">Family Name</label>
+      <label for="familyName" class="subtitle {{if isReadonly 'required-label' }}">Family Name</label>
       <input type="text" class="form-control family-name-field no-error no-success" value={{fragment.familyName}} oninput={{action "updateFamilyName" value="target.value"}} readonly={{isReadonlyNameParts}} data-test-family-name/>
     </div>
   {{/if}}
 
   <div>
-    <label for="name" class="subtitle">Name{{if isReadonly ' (from Given Name and Family Name)'}}</label>
+    <label for="name" class="subtitle required-label">Name{{if isReadonly ' (from Given Name and Family Name)'}}</label>
   </div>
   <div class="input-group">
     <input type="text" class="form-control name-field no-error no-success" value={{fragment.name}} oninput={{action "updateName" value="target.value"}} readonly={{isReadonly}} data-test-name/>
@@ -38,37 +38,32 @@
       <BsButton @outline={{true}} @onClick={{action "deleteCreator" index}}>{{fa-icon "trash"}}</BsButton>
     </span>
   </div>
-
-  <div class="help-block help-block-fragment no-error no-success">The main {{if showPersonal 'researchers' 'organizations'}} involved in producing the data, or the authors of the publication, in priority order.</div>
 {{else}}
   {{#if showPersonal}}
     <div>
-      <label for="givenName" class="subtitle">Given Name</label>
+      <label for="givenName" class="subtitle {{if isReadonly 'required-label' }}">Given Name</label>
       <input type="text" class="form-control given-name-field" value={{fragment.givenName}} oninput={{action "updateGivenName" value="target.value"}} readonly={{isReadonlyNameParts}} data-test-given-name/>
       <div class="help-block help-block-fragment">The personal or first name of the creator.</div>
     </div>
 
     <div>
-      <label for="familyName" class="subtitle">Family Name</label>
+      <label for="familyName" class="subtitle {{if isReadonly 'required-label' }}">Family Name</label>
       <input type="text" class="form-control family-name-field" value={{fragment.familyName}} oninput={{action "updateFamilyName" value="target.value"}} readonly={{isReadonlyNameParts}} data-test-family-name/>
       <div class="help-block help-block-fragment">The surname or last name of the creator.</div>
     </div>
 
     <div>
-      <label for="name" class="subtitle">Name (from Given Name and Family Name)</label>
+      <label for="name" class="subtitle required-label">Name{{if isReadonly ' (from Given Name and Family Name)'}}</label>
     </div>
     <input type="text" class="form-control name-field no-error no-success" value={{fragment.name}} oninput={{action "updateName" value="target.value"}} readonly={{isReadonly}} data-test-name/>
-    
-    <div class="help-block help-block-fragment no-error no-success">The main researchers involved in producing the data, or the authors of the publication, in priority order.</div>
   {{else}}
-    <div><label for="name" class="subtitle">Name</label></div>
+    <div><label for="name" class="subtitle equired-label">Name</label></div>
     <input type="text" class="form-control name-field" value={{fragment.name}} oninput={{action "updateName" value="target.value"}} readonly={{isReadonly}} data-test-name/>
-    <div class="help-block help-block-fragment no-error">The main organizations involved in producing the data, or the authors of the publication, in priority order.</div>
   {{/if}}
 {{/if}}
 
 {{#if (gt fragment.affiliation.length 0)}}
-  <label for="affiliation" class="subtitle">Affiliation (optional)</label>
+  <label for="affiliation" class="subtitle">Affiliation</label>
 
   {{#each fragment.affiliation as |affiliation index|}}
     <DoiAffiliation @model={{model}} @creator={{fragment}} @fragment={{affiliation}} @form={{form}} @index={{index}} />

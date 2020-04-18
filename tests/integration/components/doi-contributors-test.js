@@ -20,6 +20,6 @@ module('Integration | Component | doi contributors', function(hooks) {
     await click('button#add-contributor');
     await click('button#add-contributor');
 
-    assert.equal(findAll('input.given-name-field').length,3);
+    assert.equal(findAll('input.given-name-field').length, 2);
   });
 });

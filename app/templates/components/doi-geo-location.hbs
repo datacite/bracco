@@ -1,16 +1,11 @@
 <label for="geoLocationPlace" class="subtitle">Geolocation Place</label>
-{{#if (gt index 0)}}
-  <div class="input-group">
-    <input placeholder="Geolocation Place" class="form-control geo-location-place-field" value={{fragment.geoLocationPlace}}
-      oninput={{action "updateGeoLocationPlace" value="target.value"}} data-test-geo-location-place/>    
-    <span class="input-group-addon">
-      <BsButton @outline={{true}} @onClick={{action "deleteGeoLocation" index}}>{{fa-icon "trash" pull="left" style="margin:0;"}}</BsButton>
-    </span>
-  </div>
-{{else}}
-  <input placeholder="Geolocation Place" class="form-control geo-location-place-field" value={{fragment.geoLocationPlace}} 
-    oninput={{action "updateGeoLocationPlace" value="target.value"}} data-test-geo-location-place/>
-{{/if}}
+<div class="input-group">
+  <input placeholder="Geolocation Place" class="form-control geo-location-place-field" value={{fragment.geoLocationPlace}}
+    oninput={{action "updateGeoLocationPlace" value="target.value"}} data-test-geo-location-place/>    
+  <span class="input-group-btn">
+    <BsButton @outline={{true}} @onClick={{action "deleteGeoLocation" index}} data-test-delete-rights>{{fa-icon "trash"}} </BsButton >
+  </span>
+</div>
 <div class="help-block help-block-fragment geo-location-place-field">Description of a geographic location.</div>
 
 <label for="geoLocationPoint" class="subtitle">Geolocation Point</label>

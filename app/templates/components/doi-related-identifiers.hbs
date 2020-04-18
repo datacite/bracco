@@ -1,6 +1,7 @@
 <div class="form-group {{validationClass}}">
   <label class="control-label col-md-3">Related Identifiers</label>
   <div class="col-md-9">
+    <div class="label-vertical">Identifiers of related resources. These must be globally unique identifiers.</div>
     {{#each model.relatedIdentifiers as |relatedIdentifier index|}}
       <DoiRelatedIdentifier @model={{model}} @fragment={{relatedIdentifier}} @form={{form}} @index={{index}} />
     {{/each}}

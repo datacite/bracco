@@ -1,59 +1,42 @@
-   {{#if (gt index 0)}}
-   <div class="power-select-label">
-    <label for="rights" class="subtitle">Rights</label>
-  </div>
- {{/if}}
-
-  <div class="power-select-fragment" data-test-rights>
-    {{#form.element
-      controlType="power-select"
-      options=spdxLicenseList
-      value=fragment.rights
-      disabled=disabled
+<div class="power-select-fragment" data-test-rights>
+  {{#form.element
+    controlType="power-select"
+    options=spdxLicenseList
+    value=fragment.rights
+    disabled=disabled
+    allowClear=true
+    destination=fragment.rights as |el|
+  }}
+  {{#el.control
+      searchEnabled=true
+      onChange=(action "selectRights")
+      placeholder="Search standard licenses"
+      onkeydown=(action "createOnEnter")
+      search=(action "searchRights")
+      searchPlaceholder="Type to search..."
       allowClear=true
-      destination=fragment.rights as |el|
-    }}
-    {{#el.control
-        searchEnabled=true
-        onChange=(action "selectRights")
-        placeholder="Search standard licenses"
-        onkeydown=(action "createOnEnter")
-        search=(action "searchRights")
-        searchPlaceholder="Type to search..."
-        allowClear=true
-        noMatchesMessage="Press ENTER to add a new license."
-        as |item| }}
-    {{if item.name item.name fragment.rights}}
-    {{/el.control}}
-    <div class="help-block">
-      Rights information for this resource. The property may be repeated to record complex rights characteristics.
-      The list of standard licenses is provided by <a target="_blank" rel="noopener" href="https://spdx.org">SPDX</a>.
-    </div>
-    {{/form.element}}
+      noMatchesMessage="Press ENTER to add a new license."
+      as |item| }}
+  {{if item.name item.name fragment.rights}}
+  {{/el.control}}
+  <div class="help-block">
+    The list of standard licenses is provided by <a target="_blank" rel="noopener" href="https://spdx.org">SPDX</a>.
   </div>
+  {{/form.element}}
+</div>
 
-  {{#if (gt index 0)}}
-    <div class="power-select-label">
-      <label for="rights-uri" class="subtitle">Rights URI</label>
-    </div>
-  <div class="input-group">
-    <input type="text" placeholder="Rights URI" class="form-control rights-uri-field" value={{fragment.rightsUri}} disabled={{this.isSpdxId}} oninput={{action "updateRightsUri" value="target.value"}} data-test-rights-uri />
-
-    <div class="help-block help-block-fragment rights-uri-field}}">
-      The URI of the license.
-    </div>
-    <span class="input-group-btn">
-      <BsButton @outline={{true}} @onClick={{action "deleteRights" index}} data-test-delete-rights>{{fa-icon "trash"}} </BsButton >
-    </span>
-  </div>
-  {{else}}
-
-  <input type="text" placeholder="Rights URI" class="form-control rights-uri-field" value={{fragment.rightsUri}} disabled={{this.isSpdxId}}
-    oninput={{action "updateRightsUri" value="target.value"}} data-test-rights-uri />
+<div class="power-select-label">
+  <label for="rights-uri" class="subtitle">Rights URI</label>
+</div>
+<div class="input-group">
+  <input type="text" placeholder="Rights URI" class="form-control rights-uri-field" value={{fragment.rightsUri}} disabled={{this.isSpdxId}} oninput={{action "updateRightsUri" value="target.value"}} data-test-rights-uri />
 
   <div class="help-block help-block-fragment rights-uri-field}}">
     The URI of the license.
   </div>
-  {{/if}}
+  <span class="input-group-btn">
+    <BsButton @outline={{true}} @onClick={{action "deleteRights" index}} data-test-delete-rights>{{fa-icon "trash"}} </BsButton >
+  </span>
+</div>
 
   <hr />

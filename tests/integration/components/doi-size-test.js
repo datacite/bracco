@@ -14,7 +14,7 @@ module('Integration | Component | doi size', function(hooks) {
     await render(hbs`{{doi-size model=model fragment="5kb" index=0}}`);
     // await pauseTest();
 
-    assert.dom('*').hasText('Size (e.g. bytes, pages, inches, etc.) or duration (extent), e.g. hours, minutes, days, etc., of a resource.');
+    assert.dom('*').hasText('');
   });
 
   test('it renders add add size', async function(assert) {

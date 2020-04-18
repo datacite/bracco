@@ -9,9 +9,6 @@ export default Component.extend({
     if (!this.model.get('rightsList')) {
       this.model.set('rightsList', []);
     }
-    if (this.model.get('rightsList').length == 0) {
-      this.model.get('rightsList').createFragment();
-    }
   },
 
   actions: {

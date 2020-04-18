@@ -14,6 +14,6 @@ module('Integration | Component | doi alternate-identifier', function(hooks) {
     this.set('fragment', make('identifier'));
     await render(hbs`{{doi-alternate-identifier model=model fragment=fragment index=0}}`);
 
-    assert.dom('*').hasText('An identifier or identifiers other than the primary Identifier applied to the resource being registered. Alternate Identifier Type');
+    assert.dom('*').hasText('');
   });
 });

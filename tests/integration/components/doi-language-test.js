@@ -14,6 +14,6 @@ module('Integration | Component | doi language', function(hooks) {
     this.set('model', make('doi'));
     await render(hbs`{{doi-language model=model.doi}}`);
 
-    assert.dom('*').hasText('Language');
+    assert.dom('*').hasText('Language The primary language of the resource.');
   });
 });

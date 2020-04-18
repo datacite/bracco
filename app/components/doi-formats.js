@@ -9,9 +9,6 @@ export default Component.extend({
     if (!this.model.get('formats')) {
       this.model.set('formats', []);
     }
-    if (this.model.get('formats').length == 0) {
-      this.model.get('formats').pushObject();
-    }
   },
   actions: {
     addFormat() {

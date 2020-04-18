@@ -9,9 +9,6 @@ export default Component.extend({
     if (!this.model.get('contributors')) {
       this.model.set('contributors', []);
     }
-    if (this.model.get('contributors').length == 0) {
-      this.model.get('contributors').createFragment();
-    }
   },
   actions: {
     addContributor() {
