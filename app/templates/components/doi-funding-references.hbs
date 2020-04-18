@@ -1,5 +1,5 @@
 <div class="form-group {{validationClass}}">
-  <label class="control-label col-md-3">Funding Reference(s)</label>
+  <label class="control-label col-md-3">Funding References</label>
   <div class="col-md-9 compact-select">
     {{#each model.fundingReferences as |fundingReference index|}}
       <DoiFundingReference @model={{model}} @fragment={{fundingReference}} @form={{form}} @index={{index}} />
