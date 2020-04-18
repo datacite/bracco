@@ -80,7 +80,7 @@
 
         {{#if model.description}}
           <h5>Description</h5>
-          <p id="description">{{model.description}}</p>
+          <p id="description">{{markdown-to-html model.description}}</p>
         {{/if}}
 
         {{#if (or model.serviceContact.name model.serviceContact.email)}}
