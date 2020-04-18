@@ -1,7 +1,7 @@
 <div class="form-group {{validationClass}}">
   <label class="control-label col-md-3">Geolocations</label>
   <div class="col-md-9">
-    <div class="label-vertical">Spatial region or named place where the data was gathered or about which the data is focused.</div>
+    <div class="label-vertical">Spatial region or named place where the data was gathered or about which the resource is focused.</div>
     {{#each model.geoLocations as |geoLocation index|}}
       <DoiGeoLocation @model={{model}} @fragment={{geoLocation}} @form={{form}} @index={{index}} />
     {{/each}}
