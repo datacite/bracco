@@ -85,10 +85,11 @@ export default Component.extend({
     this.fragment.set('nameType', value);
     this.set('nameType', value);
 
-    if (this.fragment.get('nameType') === 'Organizational') {
-      this.set('isReadonly', false);
-    } else {
+    if (this.fragment.get('nameType') === 'Personal') {
       this.set('isReadonly', true);
+      this.joinNameParts();
+    } else {
+      this.set('isReadonly', false);
     }
   },
 

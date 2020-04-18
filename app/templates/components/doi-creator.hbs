@@ -30,7 +30,7 @@
   {{/if}}
 
   <div>
-    <label for="name" class="subtitle">Name{{if showPersonal ' (from Given Name and Family Name)'}}</label>
+    <label for="name" class="subtitle">Name{{if isReadonly ' (from Given Name and Family Name)'}}</label>
   </div>
   <div class="input-group">
     <input type="text" class="form-control name-field no-error no-success" value={{fragment.name}} oninput={{action "updateName" value="target.value"}} readonly={{isReadonly}} data-test-name/>

@@ -36,7 +36,7 @@ export default MF.Fragment.extend(Validations, {
   name: DS.attr('string'),
   givenName: DS.attr('string', { defaultValue: null }),
   familyName: DS.attr('string', { defaultValue: null }),
-  nameType: DS.attr('string', { defaultValue: 'Personal' }),
+  nameType: DS.attr('string', { defaultValue: null }),
   nameIdentifiers: MF.fragmentArray('name-identifier'),
   affiliation: MF.fragmentArray('affiliation'),
 
