@@ -3,7 +3,7 @@ import { computed } from '@ember/object';
 
 export default Component.extend({
   showPersonal: computed('fragment.nameType', function() {
-    return this.get('fragment.nameType') === 'Personal';
+    return this.get('fragment.nameType') !== 'Organizational';
   }),
   isReadonlyNameType: false,
   isReadonly: false,
@@ -82,16 +82,13 @@ export default Component.extend({
     }
   },
   selectNameType(value) {
-    if (!value) {
-      value = 'Personal';
-    }
     this.fragment.set('nameType', value);
     this.set('nameType', value);
 
-    if (this.fragment.get('nameType') === 'Personal') {
-      this.set('isReadonly', true);
-    } else {
+    if (this.fragment.get('nameType') === 'Organizational') {
       this.set('isReadonly', false);
+    } else {
+      this.set('isReadonly', true);
     }
   },
 

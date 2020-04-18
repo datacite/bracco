@@ -9,7 +9,7 @@ const Validations = buildValidations({
   givenName: [
     validator('presence', {
       presence: true,
-      message: 'Contributors with nameType Personal must include a Give Name',
+      message: 'Contributors with name type Personal must include a given name',
       disabled: computed('model.nameType', 'model.name', function() {
         // only validate if nameType is "Personal"
         return this.model.get('nameType') !== 'Personal' || this.model.get('name') == '';
@@ -19,7 +19,7 @@ const Validations = buildValidations({
   familyName: [
     validator('presence', {
       presence: true,
-      message: 'Contributors with nameType Personal must include a Family Name',
+      message: 'Contributors with name type Personal must include a family name',
       disabled: computed('model.nameType', 'model.name', function() {
         // only validate if nameType is "Personal"
         return this.model.get('nameType') !== 'Personal' || this.model.get('name') == '';
@@ -29,7 +29,7 @@ const Validations = buildValidations({
   contributorType: [
     validator('presence', {
       presence: true,
-      message: 'Contributors must include a Contributor Type',
+      message: 'Contributors must include a contributor type',
       isWarning: computed('model.state', function() {
         return this.get('model.state') === 'draft';
       }),

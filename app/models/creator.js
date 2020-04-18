@@ -13,6 +13,7 @@ const Validations = buildValidations({
   givenName: [
     validator('presence', {
       presence: true,
+      message: 'Creators with name type Personal must include a given name',
       disabled: computed('model.nameType', function() {
         // only validate if nameType is "Personal"
         return this.model.get('nameType') !== 'Personal';
@@ -22,6 +23,7 @@ const Validations = buildValidations({
   familyName: [
     validator('presence', {
       presence: true,
+      message: 'Creators with name type Personal must include a given name',
       disabled: computed('model.nameType', function() {
         // only validate if nameType is "Personal"
         return this.model.get('nameType') !== 'Personal';
