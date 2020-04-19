@@ -15,7 +15,7 @@
         <BsButton @id="toggle-funding-references" @class="btn-sm" @outline={{true}} @onClick={{action "toggleFundingReferences"}}>{{fa-icon "eye-slash"}} Hide {{pluralize model.fundingReferences.length 'funding reference'}}</BsButton>
       {{/if}}
     {{else}}
-      {{#if (gt model.identifiers.length 0)}}
+      {{#if (gt model.fundingReferences.length 0)}}
         <BsButton @id="toggle-funding-references" @class="btn-sm" @outline={{true}} @onClick={{action "toggleFundingReferences"}}>{{fa-icon "eye"}} Show {{pluralize model.fundingReferences.length 'funding reference'}}</BsButton>
       {{else}}
         <BsButton @class="btn-sm btn-warning" @id="add-funding-reference" @outline={{true}} @onClick={{action "addFundingReference"}}>{{fa-icon "plus"}} Add funding reference</BsButton>
