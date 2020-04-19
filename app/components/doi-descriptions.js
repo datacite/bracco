@@ -2,6 +2,7 @@ import Component from '@ember/component';
 
 export default Component.extend({
   validationClass: null,
+  showDescriptions: false,
 
   didReceiveAttrs() {
     this._super(...arguments);
@@ -26,6 +27,10 @@ export default Component.extend({
   actions: {
     addDescription() {
       this.model.get('descriptions').createFragment();
+      this.set('showDescriptions', true);
+    },
+    toggleDescriptions() {
+      this.set('showDescriptions', !this.get('showDescriptions'));
     },
     // setValidationClass() {
     //   this.setValidationClass();

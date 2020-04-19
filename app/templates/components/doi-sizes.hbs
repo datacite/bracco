@@ -1,13 +1,25 @@
 <div class="form-group {{validationClass}}">
-  <label class="control-label col-md-3">Sizes</label>
+  <label class="control-label col-md-3" data-test-sizes>Sizes</label>
   <div class="col-md-9">
     <div class="label-vertical">Size (e.g. bytes, pages, inches, etc.) or duration (extent), e.g. hours, minutes, days, etc., of the resource.</div>
-    {{#each model.sizes as |size index|}}
-      <DoiSize @model={{model}} @fragment={{size}} @form={{form}} @index={{index}} />
-    {{/each}}
+    {{#if showSizes}}
+      {{#each model.sizes as |size index|}}
+        <DoiSize @model={{model}} @fragment={{size}} @form={{form}} @index={{index}} />
+      {{/each}}
 
-    {{#if (or (not model.sizes) (lte model.sizes.length 5))}}
-      <BsButton @class="btn-sm" @id="add-size" @outline={{true}} @onClick={{action "addSize"}}>{{fa-icon "plus"}} Add {{if (gt model.sizes.length 0) "another "}}size</BsButton>
+      {{#if (lte model.sizes.length 5)}}
+        <BsButton @class="btn-sm" @id="add-size" @outline={{true}} @onClick={{action "addSize"}}>{{fa-icon "plus"}} Add {{if (gt model.sizes.length 0) "another "}}size</BsButton>
+      {{/if}}
+
+      {{#if (gt model.sizes.length 0)}}
+        <BsButton @id="toggle-sizes" @class="btn-sm" @outline={{true}} @onClick={{action "toggleSizes"}}>{{fa-icon "eye-slash"}} Hide {{pluralize model.sizes.length 'size'}}</BsButton>
+      {{/if}}
+    {{else}}
+      {{#if (gt model.sizes.length 0)}}
+        <BsButton @id="toggle-sizes" @class="btn-sm" @outline={{true}} @onClick={{action "toggleSizes"}}>{{fa-icon "eye"}} Show {{pluralize model.sizes.length 'size'}}</BsButton>
+      {{else}}
+        <BsButton @class="btn-sm btn-warning" @id="add-size" @outline={{true}} @onClick={{action "addSize"}}>{{fa-icon "plus"}} Add size</BsButton>
+      {{/if}}
     {{/if}}
   </div>
 </div>

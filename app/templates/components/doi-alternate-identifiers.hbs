@@ -1,13 +1,25 @@
 <div class="form-group {{validationClass}}">
-  <label class="control-label col-md-3">Alternate Identifiers</label>
+  <label class="control-label col-md-3" data-test-alternate-identifiers>Alternate Identifiers</label>
   <div class="col-md-9">
     <div class="label-vertical">An identifier or identifiers other than the primary Identifier applied to the resource being registered.</div>
-    {{#each model.identifiers as |identifier index|}}
-      <DoiAlternateIdentifier @model={{model}} @fragment={{identifier}} @form={{form}} @index={{index}} />
-    {{/each}}
+    {{#if showAlternateIdentifiers}}
+      {{#each model.identifiers as |identifier index|}}
+        <DoiAlternateIdentifier @model={{model}} @fragment={{identifier}} @form={{form}} @index={{index}} />
+      {{/each}}
 
-    {{#if (or (not model.identifiers) (lte model.identifiers.length 4))}}
-      <BsButton @class="btn-sm" @id="add-alternate-identifier" @outline={{true}} @onClick={{action "addIdentifier"}}>{{fa-icon "plus"}} Add {{if (gt model.identifiers.length 1) "another "}} alternate identifier</BsButton>
+      {{#if (lte model.identifiers.length 4)}}
+        <BsButton @class="btn-sm" @id="add-alternate-identifier" @outline={{true}} @onClick={{action "addIdentifier"}}>{{fa-icon "plus"}} Add {{if (gt model.identifiers.length 1) "another "}} alternate identifier</BsButton>
+      {{/if}}
+
+      {{#if (gt model.identifiers.length 0)}}
+        <BsButton @id="toggle-alternate-identifiers" @class="btn-sm" @outline={{true}} @onClick={{action "toggleAlternateIdentifiers"}}>{{fa-icon "eye-slash"}} Hide {{pluralize model.identifiers.length 'alternate identifier'}}</BsButton>
+      {{/if}}
+    {{else}}
+      {{#if (gt model.identifiers.length 0)}}
+        <BsButton @id="toggle-alternate-identifiers" @class="btn-sm" @outline={{true}} @onClick={{action "toggleAlternateIdentifiers"}}>{{fa-icon "eye"}} Show {{pluralize model.identifiers.length 'alternate identifier'}}</BsButton>
+      {{else}}
+        <BsButton @class="btn-sm btn-warning" @id="add-alternate-identifier" @outline={{true}} @onClick={{action "addIdentifier"}}>{{fa-icon "plus"}} Add alternate identifier</BsButton>
+      {{/if}}
     {{/if}}
   </div>
 </div>

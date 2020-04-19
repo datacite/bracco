@@ -1,13 +1,25 @@
 <div class="form-group {{validationClass}}">
-  <label class="control-label col-md-3">Descriptions</label>
+  <label class="control-label col-md-3" data-test-descriptions>Descriptions</label>
   <div class="col-md-9">
     <div class="label-vertical">Additional information about the resource that does not fit in any of the other categories.</div>
-    {{#each model.descriptions as |description index|}}
-      <DoiDescription @model={{model}} @fragment={{description}} @form={{form}} @index={{index}} />
-    {{/each}}
+    {{#if showDescriptions}}
+      {{#each model.descriptions as |description index|}}
+        <DoiDescription @model={{model}} @fragment={{description}} @form={{form}} @index={{index}} />
+      {{/each}}
 
-    {{#if (or (not model.descriptions) (lte model.descriptions.length 4))}}
-      <BsButton @class="btn-sm" @id="add-description" @outline={{true}} @onClick={{action "addDescription"}}>{{fa-icon "plus"}} Add {{if (gt model.descriptions.length 0) "another "}}description</BsButton>
+      {{#if (lte model.descriptions.length 4)}}
+        <BsButton @class="btn-sm" @id="add-description" @outline={{true}} @onClick={{action "addDescription"}}>{{fa-icon "plus"}} Add {{if (gt model.descriptions.length 0) "another "}}description</BsButton>
+      {{/if}}
+
+      {{#if (gt model.descriptions.length 0)}}
+        <BsButton @id="toggle-descriptions" @class="btn-sm" @outline={{true}} @onClick={{action "toggleDescriptions"}}>{{fa-icon "eye-slash"}} Hide {{pluralize model.descriptions.length 'description'}}</BsButton>
+      {{/if}}
+    {{else}}
+      {{#if (gt model.descriptions.length 0)}}
+        <BsButton @id="toggle-descriptions" @class="btn-sm" @outline={{true}} @onClick={{action "toggleDescriptions"}}>{{fa-icon "eye"}} Show {{pluralize model.descriptions.length 'description'}}</BsButton>
+      {{else}}
+        <BsButton @class="btn-sm btn-warning" @id="add-description" @outline={{true}} @onClick={{action "addDescription"}}>{{fa-icon "plus"}} Add description</BsButton>
+      {{/if}}
     {{/if}}
   </div>
 </div>

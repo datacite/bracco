@@ -1,17 +1,25 @@
 <div class="form-group {{validationClass}}">
-  <label class="control-label col-md-3 required-label">Creators</label>
+  <label class="control-label col-md-3 required-label" data-test-creators>Creators</label>
   <div class="col-md-9">
     <div class="label-vertical">The main researchers or organizations involved in producing the resource, in priority order.</div>
-    {{#each model.creators as |creator index|}}
-      {{#if (gt index 0)}}
+    {{#if showCreators}}
+      {{#each model.creators as |creator index|}}
         <DoiCreator @model={{model}} @fragment={{creator}} @form={{form}} @index={{index}} />
-      {{else}}
-        <DoiCreator @model={{model}} @fragment={{creator}} @form={{form}} @index={{index}} />
-      {{/if}}
-    {{/each}}
+      {{/each}}
 
-    {{#if (lte model.creators.length 24)}}
-      <BsButton @id="add-creator" @class="btn-sm" @outline={{true}} @onClick={{action "addCreator"}}>{{fa-icon "plus"}} Add another creator</BsButton>
+      {{#if (lte model.creators.length 24)}}
+        <BsButton @id="add-creator" @class="btn-sm" @outline={{true}} @onClick={{action "addCreator"}}>{{fa-icon "plus"}} Add another creator</BsButton>
+      {{/if}}
+
+      {{#if (gt model.creators.length 0)}}
+        <BsButton @id="toggle-creators" @class="btn-sm" @outline={{true}} @onClick={{action "toggleCreators"}}>{{fa-icon "eye-slash"}} Hide {{pluralize model.creators.length 'creator'}}</BsButton>
+      {{/if}}
+    {{else}}
+      {{#if (gt model.creators.length 0)}}
+        <BsButton @id="toggle-creators" @class="btn-sm" @outline={{true}} @onClick={{action "toggleCreators"}}>{{fa-icon "eye"}} Show {{pluralize model.creators.length 'creator'}}</BsButton>
+      {{else}}
+        <BsButton @class="btn-sm btn-warning" @id="add-creator" @outline={{true}} @onClick={{action "addCreator"}}>{{fa-icon "plus"}} Add creator</BsButton>
+      {{/if}}
     {{/if}}
   </div>
 </div>

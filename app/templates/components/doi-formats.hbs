@@ -1,13 +1,25 @@
 <div class="form-group {{validationClass}}">
-  <label class="control-label col-md-3">Formats</label>
+  <label class="control-label col-md-3" data-test-formats>Formats</label>
   <div class="col-md-9">
     <div class="label-vertical">Technical format of the resource.</div>
-    {{#each model.formats as |format index|}}
-      <DoiFormat @model={{model}} @fragment={{format}} @form={{form}} @index={{index}} />
-    {{/each}}
+    {{#if showFormats}}
+      {{#each model.formats as |format index|}}
+        <DoiFormat @model={{model}} @fragment={{format}} @form={{form}} @index={{index}} />
+      {{/each}}
 
-    {{#if (or (not model.formats) (lte model.formats.length 5))}}
-      <BsButton @class="btn-sm" @id="add-format" @outline={{true}} @onClick={{action "addFormat"}}>{{fa-icon "plus"}} Add {{if (gt model.formats.length 0) "another "}}format</BsButton>
+      {{#if (lte model.formats.length 5)}}
+        <BsButton @class="btn-sm" @id="add-format" @outline={{true}} @onClick={{action "addFormat"}}>{{fa-icon "plus"}} Add {{if (gt model.formats.length 0) "another "}}format</BsButton>
+      {{/if}}
+
+      {{#if (gt model.formats.length 0)}}
+        <BsButton @id="toggle-formats" @class="btn-sm" @outline={{true}} @onClick={{action "toggleFormats"}}>{{fa-icon "eye-slash"}} Hide {{pluralize model.formats.length 'format'}}</BsButton>
+      {{/if}}
+    {{else}}
+      {{#if (gt model.formats.length 0)}}
+        <BsButton @id="toggle-formats" @class="btn-sm" @outline={{true}} @onClick={{action "toggleFormats"}}>{{fa-icon "eye"}} Show {{pluralize model.formats.length 'format'}}</BsButton>
+      {{else}}
+        <BsButton @class="btn-sm btn-warning" @id="add-format" @outline={{true}} @onClick={{action "addFormat"}}>{{fa-icon "plus"}} Add format</BsButton>
+      {{/if}}
     {{/if}}
   </div>
 </div>

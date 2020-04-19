@@ -1,17 +1,25 @@
 <div class="form-group {{validationClass}}">
-  <label class="control-label col-md-3">Contributors</label>
+  <label class="control-label col-md-3" data-test-contributors>Contributors</label>
   <div class="col-md-9">
     <div class="label-vertical">The institution or person responsible for collecting, managing, distributing, or otherwise contributing to the development of the resource.</div>
-    {{#each model.contributors as |contributor index|}}
-      {{#if (gt index 0)}}
+    {{#if showContributors}}
+      {{#each model.contributors as |contributor index|}}
         <DoiContributor @model={{model}} @fragment={{contributor}} @form={{form}} @index={{index}} />
-      {{else}}
-        <DoiContributor @model={{model}} @fragment={{contributor}} @form={{form}} @index={{index}} />
-      {{/if}}
-    {{/each}}
+      {{/each}}
 
-    {{#if  (or (not model.contributors) (lte model.contributors.length 24))}}
-      <BsButton @id="add-contributor" @class="btn-sm" @outline={{true}} @onClick={{action "addContributor"}}>{{fa-icon "plus"}} Add {{if (gt model.contributors.length 0) "another "}} contributor</BsButton>
+      {{#if (lte model.contributors.length 24)}}
+        <BsButton @id="add-contributor" @class="btn-sm" @outline={{true}} @onClick={{action "addContributor"}}>{{fa-icon "plus"}} Add {{if (gt model.contributors.length 0) "another "}} contributor</BsButton>
+      {{/if}}
+
+      {{#if (gt model.contributors.length 0)}}
+        <BsButton @id="toggle-contributors" @class="btn-sm" @outline={{true}} @onClick={{action "toggleContributors"}}>{{fa-icon "eye-slash"}} Hide {{pluralize model.contributors.length 'contributor'}}</BsButton>
+      {{/if}}
+    {{else}}
+      {{#if (gt model.contributors.length 0)}}
+        <BsButton @id="toggle-contributors" @class="btn-sm" @outline={{true}} @onClick={{action "toggleContributors"}}>{{fa-icon "eye"}} Show {{pluralize model.contributors.length 'contributor'}}</BsButton>
+      {{else}}
+         <BsButton @class="btn-sm btn-warning" @id="add-contributor" @outline={{true}} @onClick={{action "addContributor"}}>{{fa-icon "plus"}} Add contributor</BsButton>
+      {{/if}}
     {{/if}}
   </div>
 </div>

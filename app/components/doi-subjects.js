@@ -2,6 +2,7 @@ import Component from '@ember/component';
 
 export default Component.extend({
   validationClass: null,
+  showSubjects: false,
 
   didReceiveAttrs() {
     this._super(...arguments);
@@ -14,6 +15,10 @@ export default Component.extend({
   actions: {
     addSubject() {
       this.model.get('subjects').createFragment();
+      this.set('showSubjects', true);
+    },
+    toggleSubjects() {
+      this.set('showSubjects', !this.get('showSubjects'));
     },
   },
 });

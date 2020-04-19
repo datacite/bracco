@@ -1,13 +1,25 @@
 <div class="form-group {{validationClass}}">
-  <label class="control-label col-md-3">Geolocations</label>
+  <label class="control-label col-md-3" data-test-geolocations>Geolocations</label>
   <div class="col-md-9">
     <div class="label-vertical">Spatial region or named place where the data was gathered or about which the resource is focused.</div>
-    {{#each model.geoLocations as |geoLocation index|}}
-      <DoiGeoLocation @model={{model}} @fragment={{geoLocation}} @form={{form}} @index={{index}} />
-    {{/each}}
+    {{#if showGeoLocations}}
+      {{#each model.geoLocations as |geoLocation index|}}
+        <DoiGeoLocation @model={{model}} @fragment={{geoLocation}} @form={{form}} @index={{index}} />
+      {{/each}}
 
-    {{#if (or (not model.geolocations) (lte model.geolocations.length 4))}}
-      <BsButton @class="btn-sm" @id="add-geolocation" @outline={{true}} @onClick={{action "addGeoLocation"}}>{{fa-icon "plus"}} Add {{if (gt model.geolocations.length 0) "another "}}geolocation</BsButton>
+      {{#if (lte model.geoLocations.length 4)}}
+        <BsButton @class="btn-sm" @id="add-geolocation" @outline={{true}} @onClick={{action "addGeoLocation"}}>{{fa-icon "plus"}} Add {{if (gt model.geoLocations.length 0) "another "}}geolocation</BsButton>
+      {{/if}}
+
+      {{#if (gt model.geoLocations.length 0)}}
+        <BsButton @id="toggle-geolocations" @class="btn-sm" @outline={{true}} @onClick={{action "toggleGeoLocations"}}>{{fa-icon "eye-slash"}} Hide {{pluralize model.geoLocations.length 'geolocation'}}</BsButton>
+      {{/if}}
+    {{else}}
+      {{#if (gt model.geoLocations.length 0)}}
+        <BsButton @id="toggle-geolocations" @class="btn-sm" @outline={{true}} @onClick={{action "toggleGeoLocations"}}>{{fa-icon "eye"}} Show {{pluralize model.geoLocations.length 'geolocation'}}</BsButton>
+      {{else}}
+        <BsButton @class="btn-sm btn-warning btn-warning" @id="add-geolocation" @outline={{true}} @onClick={{action "addGeoLocation"}}>{{fa-icon "plus"}} Add geolocation</BsButton>
+      {{/if}}
     {{/if}}
   </div>
 </div>

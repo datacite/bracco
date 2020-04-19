@@ -2,6 +2,7 @@ import Component from '@ember/component';
 
 export default Component.extend({
   validationClass: null,
+  showSizes: false,
 
   didReceiveAttrs() {
     this._super(...arguments);
@@ -13,6 +14,10 @@ export default Component.extend({
   actions: {
     addSize() {
       this.model.get('sizes').pushObject();
+      this.set('showSizes', true);
+    },
+    toggleSizes() {
+      this.set('showSizes', !this.get('showSizes'));
     },
   },
 });

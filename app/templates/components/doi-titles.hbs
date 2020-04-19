@@ -1,17 +1,25 @@
 <div class="form-group {{validationClass}}">
-  <label class="control-label col-md-3 required-label">Titles</label>
+  <label class="control-label col-md-3 required-label" data-test-titles>Titles</label>
   <div class="col-md-9">
     <div class="label-vertical">One or more names or titles by which the resource is known.</div>
-    {{#each model.titles as |title index|}}
-      {{#if (gt index 0)}}
+    {{#if showTitles}}
+      {{#each model.titles as |title index|}}
         <DoiTitle @model={{model}} @fragment={{title}} @form={{form}} @index={{index}} />
-      {{else}}
-        <DoiTitle @model={{model}} @fragment={{title}} @form={{form}} @index={{index}} />
-      {{/if}}
-    {{/each}}
+      {{/each}}
 
-    {{#if (lte model.titles.length 4)}}
-      <BsButton @class="btn-sm" @id="add-title" @outline={{true}} @onClick={{action "addTitle"}}>{{fa-icon "plus"}} Add another title</BsButton>
+      {{#if (lte model.titles.length 4)}}
+        <BsButton @class="btn-sm" @id="add-title" @outline={{true}} @onClick={{action "addTitle"}}>{{fa-icon "plus"}} Add another title</BsButton>
+      {{/if}}
+
+      {{#if (gt model.titles.length 0)}}
+        <BsButton @id="toggle-titles" @class="btn-sm" @outline={{true}} @onClick={{action "toggleTitles"}}>{{fa-icon "eye-slash"}} Hide {{pluralize model.titles.length 'title'}}</BsButton>
+      {{/if}}
+    {{else}}
+      {{#if (gt model.titles.length 0)}}
+        <BsButton @id="toggle-titles" @class="btn-sm" @outline={{true}} @onClick={{action "toggleTitles"}}>{{fa-icon "eye"}} Show {{pluralize model.titles.length 'title'}}</BsButton>
+      {{else}}
+        <BsButton @class="btn-sm btn-warning" @id="add-title" @outline={{true}} @onClick={{action "addTitle"}}>{{fa-icon "plus"}} Add title</BsButton>
+      {{/if}}
     {{/if}}
   </div>
 </div>

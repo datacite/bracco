@@ -2,6 +2,7 @@ import Component from '@ember/component';
 
 export default Component.extend({
   validationClass: null,
+  showTitles: true,
 
   didReceiveAttrs() {
     this._super(...arguments);
@@ -31,6 +32,10 @@ export default Component.extend({
   actions: {
     addTitle() {
       this.model.get('titles').createFragment();
+      this.set('showTitles', true);
+    },
+    toggleTitles() {
+      this.set('showTitles', !this.get('showTitles'));
     },
     // setValidationClass() {
     //   this.setValidationClass(true);

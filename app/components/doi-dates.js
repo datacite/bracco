@@ -2,6 +2,7 @@ import Component from '@ember/component';
 
 export default Component.extend({
   validationClass: null,
+  showDates: false,
 
   didReceiveAttrs() {
     this._super(...arguments);
@@ -13,6 +14,10 @@ export default Component.extend({
   actions: {
     addDate() {
       this.model.get('dates').createFragment();
+      this.set('showDates', true);
+    },
+    toggleDates() {
+      this.set('showDates', !this.get('showDates'));
     },
   },
 });

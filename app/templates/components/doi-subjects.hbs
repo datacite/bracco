@@ -1,13 +1,25 @@
 <div class="form-group {{validationClass}}">
-  <label class="control-label col-md-3">Subjects</label>
+  <label class="control-label col-md-3" data-test-subjects>Subjects</label>
   <div class="col-md-9">
     <div class="label-vertical">Subject, keyword, classification code, or key phrase describing the resource.</div>
-    {{#each model.subjects as |subject index|}}
-      <DoiSubject @model={{model}} @fragment={{subject}} @form={{form}} @index={{index}} />
-    {{/each}}
+    {{#if showSubjects}}
+      {{#each model.subjects as |subject index|}}
+        <DoiSubject @model={{model}} @fragment={{subject}} @form={{form}} @index={{index}} />
+      {{/each}}
 
-    {{#if (or (not model.subjects) (lte model.subjects.length 6))}}
-      <BsButton @class="btn-sm" @id="add-subject" @outline={{true}} @onClick={{action "addSubject"}}>{{fa-icon "plus"}} Add {{if (gt model.subjects.length 0) "another "}} subject</BsButton>
+      {{#if (lte model.subjects.length 6)}}
+        <BsButton @class="btn-sm" @id="add-subject" @outline={{true}} @onClick={{action "addSubject"}}>{{fa-icon "plus"}} Add {{if (gt model.subjects.length 0) "another "}} subject</BsButton>
+      {{/if}}
+
+      {{#if (gt model.subjects.length 0)}}
+        <BsButton @id="toggle-subjects" @class="btn-sm" @outline={{true}} @onClick={{action "toggleSubjects"}}>{{fa-icon "eye-slash"}} Hide {{pluralize model.subjects.length 'subject'}}</BsButton>
+      {{/if}}
+    {{else}}
+      {{#if (gt model.subjects.length 0)}}
+        <BsButton @id="toggle-subjects" @class="btn-sm" @outline={{true}} @onClick={{action "toggleSubjects"}}>{{fa-icon "eye"}} Show {{pluralize model.subjects.length 'subject'}}</BsButton>
+      {{else}}
+         <BsButton @class="btn-sm btn-warning" @id="add-subject" @outline={{true}} @onClick={{action "addSubject"}}>{{fa-icon "plus"}} Add subject</BsButton>
+      {{/if}}
     {{/if}}
   </div>
 </div>

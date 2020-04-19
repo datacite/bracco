@@ -2,6 +2,7 @@ import Component from '@ember/component';
 
 export default Component.extend({
   validationClass: null,
+  showGeoLocations: false,
 
   didReceiveAttrs() {
     this._super(...arguments);
@@ -14,6 +15,10 @@ export default Component.extend({
   actions: {
     addGeoLocation() {
       this.model.get('geoLocations').createFragment();
+      this.set('showGeoLocations', true);
+    },
+    toggleGeoLocations() {
+      this.set('showGeoLocations', !this.get('showGeoLocations'));
     },
   },
 });

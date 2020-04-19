@@ -2,6 +2,7 @@ import Component from '@ember/component';
 
 export default Component.extend({
   validationClass: null,
+  showFormats: false,
 
   didReceiveAttrs() {
     this._super(...arguments);
@@ -13,6 +14,10 @@ export default Component.extend({
   actions: {
     addFormat() {
       this.model.get('formats').pushObject();
+      this.set('showFormats', true);
+    },
+    toggleFormats() {
+      this.set('showFormats', !this.get('showFormats'));
     },
   },
 });

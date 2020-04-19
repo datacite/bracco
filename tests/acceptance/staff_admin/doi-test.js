@@ -101,7 +101,7 @@ module('Acceptance | staff_admin | doi', function(hooks) {
   // });
 
   test('new DOI form for repository Test', async function(assert) {
-    assert.expect(16);
+    assert.expect(26);
 
     await visit('/repositories/datacite.test/dois/new');
 
@@ -116,24 +116,22 @@ module('Acceptance | staff_admin | doi', function(hooks) {
     assert.dom('[data-test-given-name]').exists();
     assert.dom('[data-test-family-name]').exists();
     assert.dom('[data-test-name]').exists();
-    // assert.dom('[data-test-geo-location-place]').doesNotExist();
+    assert.dom('[data-test-geolocations]').exists();
     assert.dom('[data-test-title]').exists();
     assert.dom('input#publisher-field').exists();
     assert.dom('input#publication-year-field').exists();
     assert.dom('input#resource-type-field').exists();
-    // assert.dom('[data-test-description]').exists();
-    // assert.dom('[doi-subject]').exists();
+    assert.dom('[data-test-descriptions]').exists();
+    assert.dom('[data-test-subjects]').exists();
     assert.dom('#doi-language').exists();
-    // assert.dom('[doi-contributor]').exists();
-    // assert.dom('[data-test-alternate-identifier]').doesNotExist();
-    // assert.dom('[data-test-related-identifier]').exists();
+    assert.dom('[data-test-contributors]').exists();
+    assert.dom('[data-test-alternate-identifiers]').exists();
+    assert.dom('[data-test-related-identifiers]').exists();
     assert.dom('[data-test-version]').exists();
-    // assert.dom('[data-test-format]').exists();
-    // assert.dom('[data-test-size]').exists();
-    // assert.dom('[data-test-funder-name]').exists();
-    // assert.dom('[data-test-funder-identifier-type]').exists();
-    // assert.dom('[data-test-award-number]').exists();
-    // assert.dom('[data-test-rights]').exists();
+    assert.dom('[data-test-formats]').exists();
+    assert.dom('[data-test-sizes]').exists();
+    assert.dom('[data-test-funding-references]').exists();
+    assert.dom('[data-test-rights-list]').exists();
 
     assert.dom('button#doi-create').exists();
   });
@@ -156,7 +154,7 @@ module('Acceptance | staff_admin | doi', function(hooks) {
   });
 
   test('edit DOI form for repository DataCite Test', async function(assert) {
-    assert.expect(21);
+    assert.expect(25);
 
     await visit('/dois/10.80225%2Fda52-7919/edit');
     assert.equal(currentURL(), '/dois/10.80225%2Fda52-7919/edit');
@@ -170,23 +168,22 @@ module('Acceptance | staff_admin | doi', function(hooks) {
     assert.dom('[data-test-given-name]').exists();
     assert.dom('[data-test-family-name]').exists();
     assert.dom('[data-test-name]').exists();
-    // assert.dom('[data-test-geo-location-place]').exists();
+    assert.dom('[data-test-geolocations]').exists();
     assert.dom('[data-test-title]').exists();
     assert.dom('input#publisher-field').exists();
     assert.dom('input#publication-year-field').exists();
     assert.dom('input#resource-type-field').exists();
-    assert.dom('[data-test-description]').exists();
-    assert.dom('[doi-subject]').exists();
+    assert.dom('[data-test-descriptions]').exists();
+    assert.dom('[data-test-subjects]').exists();
     assert.dom('#doi-language').exists();
-    assert.dom('[doi-contributor]').exists();
-    // assert.dom('[data-test-alternate-identifier]').exists();
-    assert.dom('[data-test-related-identifier]').exists();
-    // assert.dom('[data-test-related-metadata-scheme]').exists();
+    assert.dom('[data-test-contributors]').exists();
+    assert.dom('[data-test-alternate-identifiers]').exists();
+    assert.dom('[data-test-related-identifiers]').exists();
     assert.dom('[data-test-version]').exists();
-    // assert.dom('[data-test-format]').exists();
-    // assert.dom('[data-test-size]').exists();
-    assert.dom('[data-test-funder-name]').exists();
-    assert.dom('[data-test-rights]').exists();
+    assert.dom('[data-test-formats]').exists();
+    assert.dom('[data-test-sizes]').exists();
+    assert.dom('[data-test-funding-references]').exists();
+    assert.dom('[data-test-rights-list]').exists();
 
     assert.dom('button#doi-update').exists();
   });

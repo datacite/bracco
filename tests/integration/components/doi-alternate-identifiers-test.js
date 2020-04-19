@@ -11,6 +11,7 @@ module('Integration | Component | doi alternate-identifiers', function(hooks) {
   test('it renders', async function(assert) {
     this.set('model', make('doi'));
     await render(hbs`{{doi-alternate-identifiers model=model}}`);
+    await click('#toggle-alternate-identifiers');
     await click('#add-alternate-identifier');
     let alternateIdentifier = this.element.querySelectorAll('input.alternate-identifier-field');
 
@@ -21,6 +22,7 @@ module('Integration | Component | doi alternate-identifiers', function(hooks) {
   test('add multiple values', async function(assert) {
     this.set('model', make('doi'));
     await render(hbs`{{doi-alternate-identifiers model=model}}`);
+    await click('#toggle-alternate-identifiers');
     await click('#add-alternate-identifier');
     await click('#add-alternate-identifier');
     let alternateIdentifier = this.element.querySelectorAll('input.alternate-identifier-field');

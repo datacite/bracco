@@ -2,6 +2,7 @@ import Component from '@ember/component';
 
 export default Component.extend({
   validationClass: null,
+  showRights: false,
 
   didReceiveAttrs() {
     this._super(...arguments);
@@ -14,6 +15,10 @@ export default Component.extend({
   actions: {
     addRights() {
       this.model.get('rightsList').createFragment();
+      this.set('showRights', true);
+    },
+    toggleRights() {
+      this.set('showRights', !this.get('showRights'));
     },
   },
 });

@@ -14,6 +14,7 @@ module('Integration | Component | doi subjects', function(hooks) {
     this.set('model', make('doi'));
     this.set('model.subjects', [ this.subject ]);
     await render(hbs`{{doi-subjects model=model}}`);
+    await click('#toggle-subjects');
     await click('#add-subject');
     await click('#add-subject');
     let subjects = this.element.querySelectorAll('[data-test-subject-scheme]');

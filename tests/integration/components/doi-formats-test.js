@@ -11,6 +11,7 @@ module('Integration | Component | doi formats', function(hooks) {
   test('it renders', async function(assert) {
     this.set('model', make('doi'));
     await render(hbs`{{doi-formats model=model}}`);
+    await click('#toggle-formats');
     await click('#add-format');
     let formats = this.element.querySelectorAll('input.format-field');
 
@@ -21,6 +22,7 @@ module('Integration | Component | doi formats', function(hooks) {
   test('add multiple values', async function(assert) {
     this.set('model', make('doi'));
     await render(hbs`{{doi-formats model=model}}`);
+    await click('#toggle-formats');
     await click('#add-format');
     await click('#add-format');
     let formats = this.element.querySelectorAll('input.format-field');

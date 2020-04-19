@@ -2,6 +2,7 @@ import Component from '@ember/component';
 
 export default Component.extend({
   // validationClass: null,
+  showContributors: false,
 
   didReceiveAttrs() {
     this._super(...arguments);
@@ -15,6 +16,10 @@ export default Component.extend({
       this.model.get('contributors').createFragment({ nameIdentifiers: [], affiliation: [] });
       this.model.get('contributors').get('lastObject').get('nameIdentifiers').createFragment();
       this.model.get('contributors').get('lastObject').get('affiliation').createFragment();
+      this.set('showContributors', true);
+    },
+    toggleContributors() {
+      this.set('showContributors', !this.get('showContributors'));
     },
   },
 });
