@@ -24,7 +24,7 @@
           <button type="submit" id="doi-modify" class="btn btn-sm btn-fill" disabled={{false}}>Update DOI</button>
         {{else}}
           <BsAlert @dismissible={{false}} @type="danger">
-            To save this DOI, first resolve the errors with these fields: {{doi-form-errors model}}.
+            To save this DOI, first resolve the errors with these properties: {{doi-form-errors model}}.
           </BsAlert>
 
           <button type="submit" id="doi-modify" class="btn btn-sm btn-fill" disabled={{true}}>Update DOI</button>          

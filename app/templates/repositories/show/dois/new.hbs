@@ -82,7 +82,7 @@
           <button type="submit" id="doi-create" class="btn btn-sm btn-fill" disabled={{false}}>Create DOI</button>
         {{else}}
           <BsAlert @dismissible={{false}} @type="danger">
-            To save this DOI, first resolve the errors with these fields: {{doi-form-errors model.doi}}.
+            To save this DOI, first resolve the errors with these properties: {{doi-form-errors model.doi}}.
           </BsAlert>
 
           <button type="submit" id="doi-create" class="btn btn-sm btn-fill" disabled={{true}}>Create DOI</button>          
