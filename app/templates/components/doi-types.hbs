@@ -1,4 +1,4 @@
-<div class="form-group">
+<div class="form-group {{if (v-get model 'types.resourceTypeGeneral' 'isInvalid') 'has-error' 'has-feedback'}}">
   <label class="control-label col-md-3">Resource Type General</label>
   <div class="col-md-9 input-fragment">
     <div class="label-vertical">The general type of the resource.</div>

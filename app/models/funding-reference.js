@@ -9,9 +9,6 @@ const Validations = buildValidations({
     validator('presence', {
       presence: true,
       message: 'Funder Name must be included if you input a funderIdentifier.',
-      isWarning: computed('model.state', function() {
-        return this.model.get('state') === 'draft';
-      }),
       disabled: computed('model.funderIdentifier', function() {
         return isBlank(this.model.get('funderIdentifier'));
       }),

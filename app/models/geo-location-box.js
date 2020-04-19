@@ -17,11 +17,8 @@ const Validations = buildValidations({
       presence: true,
       ignoreBlank: true,
       message: 'westBoundLongitude must be included if you input a GeoLocation Box.',
-      isWarning: computed('model.state', function() {
-        return this.model.get('state') === 'draft';
-      }),
-      disabled: computed('model.eastBoundLongitude','model.southBoundLatitude','model.northBoundLatitude', function() {
-        return isBlank(this.model.get('eastBoundLongitude')) && isBlank(this.model.get('southBoundLatitude')) && isBlank(this.model.get('northBoundLatitude'));
+      disabled: computed('model.eastBoundLongitude','model.southBoundLatitude','model.northBoundLatitude', 'model.state', function() {
+        return this.model.get('state') === 'draft' || isBlank(this.model.get('eastBoundLongitude')) && isBlank(this.model.get('southBoundLatitude')) && isBlank(this.model.get('northBoundLatitude'));
       }),
     }),
   ],
@@ -37,11 +34,8 @@ const Validations = buildValidations({
       presence: true,
       ignoreBlank: true,
       message: 'eastBoundLongitude must be included if you input a GeoLocation Box.',
-      isWarning: computed('model.state', function() {
-        return this.model.get('state') === 'draft';
-      }),
-      disabled: computed('model.westBoundLongitude','model.southBoundLatitude','model.northBoundLatitude', function() {
-        return isBlank(this.model.get('westBoundLongitude')) && isBlank(this.model.get('southBoundLatitude')) && isBlank(this.model.get('northBoundLatitude'));
+      disabled: computed('model.westBoundLongitude','model.southBoundLatitude','model.northBoundLatitude', 'model.state', function() {
+        return this.model.get('state') === 'draft' || isBlank(this.model.get('westBoundLongitude')) && isBlank(this.model.get('southBoundLatitude')) && isBlank(this.model.get('northBoundLatitude'));
       }),
     }),
   ],
@@ -57,11 +51,8 @@ const Validations = buildValidations({
       presence: true,
       ignoreBlank: true,
       message: 'southBoundLatitude must be included if you input a GeoLocation Box.',
-      isWarning: computed('model.state', function() {
-        return this.model.get('state') === 'draft';
-      }),
-      disabled: computed('model.westBoundLongitude','model.eastBoundLongitude','model.northBoundLatitude', function() {
-        return isBlank(this.model.get('westBoundLongitude')) && isBlank(this.model.get('eastBoundLongitude')) && isBlank(this.model.get('northBoundLatitude'));
+      disabled: computed('model.westBoundLongitude','model.eastBoundLongitude','model.northBoundLatitude', 'model.state', function() {
+        return this.model.get('state') === 'draft' || isBlank(this.model.get('westBoundLongitude')) && isBlank(this.model.get('eastBoundLongitude')) && isBlank(this.model.get('northBoundLatitude'));
       }),
     }),
   ],
@@ -77,9 +68,6 @@ const Validations = buildValidations({
       presence: true,
       ignoreBlank: true,
       message: 'northBoundLatitude must be included if you input a GeoLocation Box.',
-      isWarning: computed('model.state', function() {
-        return this.model.get('state') === 'draft';
-      }),
       disabled: computed('model.eastBoundLongitude','model.southBoundLatitude','model.westBoundLongitude', function() {
         return isBlank(this.model.get('eastBoundLongitude')) && isBlank(this.model.get('southBoundLatitude')) && isBlank(this.model.get('westBoundLongitude'));
       }),

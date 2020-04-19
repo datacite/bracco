@@ -10,18 +10,15 @@ const Validations = buildValidations({
     validator('presence', {
       presence: true,
       message: 'Date type must be included when adding a Date',
-      isWarning: computed('model.state', function() {
-        return this.model.get('state') === 'draft';
-      }),
       disabled: computed('model.date', function() {
-        return this.model.get('date') == null;
+        this.model.get('date') == null;
       }),
     }),
   ],
   date: [
     validator('date-format', {
       allowBlank: true,
-      isWarning: computed('model.state', function() {
+      disabled: computed('model.state', function() {
         return this.model.get('state') === 'draft';
       }),
     }),

@@ -19,46 +19,48 @@
 {{#if (gt index 0)}}
   {{#if showPersonal}}
     <div>
-      <label for="givenName" class="subtitle {{if isReadonly 'required-label' }}">Given Name</label>
-      <input type="text" class="form-control given-name-field no-error no-success" value={{fragment.givenName}} placeholder="Given Name" oninput={{action "updateGivenName" value="target.value"}} readonly={{isReadonlyNameParts}} data-test-given-name/>
+      <label for="givenName" class="subtitle">Given Name</label>
+      <input type="text" class="form-control given-name-field" value={{fragment.givenName}} placeholder="Given Name" oninput={{action "updateGivenName" value="target.value"}} readonly={{isReadonlyNameParts}} data-test-given-name/>
     </div>
 
     <div>
-      <label for="familyName" class="subtitle {{if isReadonly 'required-label' }}">Family Name</label>
-      <input type="text" class="form-control family-name-field no-error no-success" value={{fragment.familyName}} placeholder="Family Name" oninput={{action "updateFamilyName" value="target.value"}} readonly={{isReadonlyNameParts}} data-test-family-name/>
+      <label for="familyName" class="subtitle">Family Name</label>
+      <input type="text" class="form-control family-name-field" value={{fragment.familyName}} placeholder="Family Name" oninput={{action "updateFamilyName" value="target.value"}} readonly={{isReadonlyNameParts}} data-test-family-name/>
     </div>
   {{/if}}
 
-  <div>
-    <label for="name" class="subtitle required-label">Name{{if isReadonly ' (from Given Name and Family Name)'}}</label>
-  </div>
-  <div class="input-group">
-    <input type="text" class="form-control name-field no-error no-success" value={{fragment.name}} placeholder="Name" oninput={{action "updateName" value="target.value"}} readonly={{isReadonly}} data-test-name/>
-    <span class="input-group-btn">
-      <BsButton @outline={{true}} @onClick={{action "deleteCreator" index}}>{{fa-icon "trash"}}</BsButton>
-    </span>
+  <div class="form-group required-nested-label">
+    <label for="name" class="subtitle">Name{{if isReadonly ' (from Given Name and Family Name)'}}</label>
+    <div class="input-group">
+      <input type="text" class="form-control name-field" value={{fragment.name}} placeholder="Name" oninput={{action "updateName" value="target.value"}} readonly={{isReadonly}} data-test-name/>
+      <span class="input-group-btn">
+        <BsButton @outline={{true}} @onClick={{action "deleteCreator" index}}>{{fa-icon "trash"}}</BsButton>
+      </span>
+    </div>
   </div>
 {{else}}
   {{#if showPersonal}}
     <div>
-      <label for="givenName" class="subtitle {{if isReadonly 'required-label' }}">Given Name</label>
+      <label for="givenName" class="subtitle">Given Name</label>
       <input type="text" class="form-control given-name-field" value={{fragment.givenName}} placeholder="Given Name" oninput={{action "updateGivenName" value="target.value"}} readonly={{isReadonlyNameParts}} data-test-given-name/>
       <div class="help-block help-block-fragment">The personal or first name of the creator.</div>
     </div>
 
     <div>
-      <label for="familyName" class="subtitle {{if isReadonly 'required-label' }}">Family Name</label>
+      <label for="familyName" class="subtitle">Family Name</label>
       <input type="text" class="form-control family-name-field" value={{fragment.familyName}} placeholder="Family Name" oninput={{action "updateFamilyName" value="target.value"}} readonly={{isReadonlyNameParts}} data-test-family-name/>
       <div class="help-block help-block-fragment">The surname or last name of the creator.</div>
     </div>
 
-    <div>
+    <div class="form-group required-nested-label">
       <label for="name" class="subtitle required-label">Name{{if isReadonly ' (from Given Name and Family Name)'}}</label>
+      <input type="text" class="form-control name-field" value={{fragment.name}} placeholder="Name" oninput={{action "updateName" value="target.value"}} readonly={{isReadonly}} data-test-name/>
     </div>
-    <input type="text" class="form-control name-field no-error no-success" value={{fragment.name}} placeholder="Name" oninput={{action "updateName" value="target.value"}} readonly={{isReadonly}} data-test-name/>
   {{else}}
-    <div><label for="name" class="subtitle equired-label">Name</label></div>
-    <input type="text" class="form-control name-field" value={{fragment.name}} oninput={{action "updateName" value="target.value"}} readonly={{isReadonly}} data-test-name/>
+    <div class="form-group required-nested-label">
+      <div><label for="name" class="subtitle equired-label">Name</label></div>
+      <input type="text" class="form-control name-field" value={{fragment.name}} oninput={{action "updateName" value="target.value"}} readonly={{isReadonly}} data-test-name/>
+    </div>
   {{/if}}
 {{/if}}
 

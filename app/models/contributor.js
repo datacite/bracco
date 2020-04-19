@@ -6,41 +6,23 @@ import { A } from '@ember/array';
 import { isBlank } from '@ember/utils';
 
 const Validations = buildValidations({
-  givenName: [
+  name: [
     validator('presence', {
       presence: true,
-      message: 'Contributors with name type Personal must include a given name',
-      disabled: computed('model.nameType', 'model.name', function() {
-        // only validate if nameType is "Personal"
-        return this.model.get('nameType') !== 'Personal' || this.model.get('name') == '';
-      }),
-    }),
-  ],
-  familyName: [
-    validator('presence', {
-      presence: true,
-      message: 'Contributors with name type Personal must include a family name',
-      disabled: computed('model.nameType', 'model.name', function() {
-        // only validate if nameType is "Personal"
-        return this.model.get('nameType') !== 'Personal' || this.model.get('name') == '';
-      }),
+      // disabled: computed('model.state', function() {
+      //   return this.model.get('state') === 'draft';
+      // }),
     }),
   ],
   contributorType: [
     validator('presence', {
       presence: true,
       message: 'Contributors must include a contributor type',
-      isWarning: computed('model.state', function() {
-        return this.get('model.state') === 'draft';
-      }),
       disabled: computed('model.name', function() {
         return isBlank(this.model.get('name'));
       }),
     }),
     validator('contributor-type', {
-      isWarning: computed('model.state', function() {
-        return this.get('model.state') === 'draft';
-      }),
       disabled: computed('model.name', function() {
         return isBlank(this.model.get('name'));
       }),

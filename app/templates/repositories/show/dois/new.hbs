@@ -14,7 +14,7 @@
 
       <DoiDoi @model={{model.doi}} @repository={{model.repository}} @form={{form}} />
 
-      <div class="form-group required-nested-label">
+      <div class="form-group required-nested-label {{if (v-get model.doi 'url' 'isInvalid') 'has-error' 'has-feedback'}}">
         <label class="control-label col-md-3">URL</label>
         <div class="col-md-9 input-fragment">
           <div class="label-vertical">The location of the landing page with more information about the resource.</div>
@@ -25,7 +25,7 @@
       <DoiCreators @model={{model.doi}} @form={{form}} />
       <DoiTitles @model={{model.doi}} @form={{form}} />
       
-      <div class="form-group required-nested-label">
+      <div class="form-group required-nested-label {{if (v-get model.doi 'publisher' 'isInvalid') 'has-error' 'has-feedback'}}">
         <label class="control-label col-md-3">Publisher</label>
         <div class="col-md-9 input-fragment">
           <div class="label-vertical">The name of the entity that holds, archives, publishes prints, distributes, releases, issues, or produces the resource.</div>
@@ -33,12 +33,11 @@
         </div>
       </div>
 
-      <div class="form-group required-nested-label">
+      <div class="form-group required-nested-label {{if (v-get model.doi 'publicationYear' 'isInvalid') 'has-error' 'has-feedback'}}">
         <label class="control-label col-md-3">Publication Year</label>
         <div class="col-md-9 input-fragment">
           <div class="label-vertical">The year when the resource was or will be made publicly available.</div>
           <form.element @id="publication-year" @controlType="text" @property="publicationYear" @placeholder="Publication Year" @required={{false}} />
-          <span class="help-block help-block-fragment">Must be a year between 1450 and 2021.</span>
         </div>
       </div>
 

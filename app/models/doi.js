@@ -59,7 +59,7 @@ const Validations = buildValidations({
     }),
     validator('presence', {
       presence: true,
-      isWarning: computed('model.state', function() {
+      disabled: computed('model.state', function() {
         return this.model.get('state') === 'draft';
       }),
     }),
@@ -67,22 +67,16 @@ const Validations = buildValidations({
   publisher: [
     validator('presence', {
       presence: true,
-      isWarning: computed('model.state', function() {
-        return this.model.get('state') === 'draft';
-      }),
-      disabled: computed('model.mode', function() {
-        return ![ 'new', 'edit' ].includes(this.model.get('mode'));
+      disabled: computed('model.mode', 'model.state', function() {
+        return this.model.get('state') === 'draft' || ![ 'new', 'edit' ].includes(this.model.get('mode'));
       }),
     }),
   ],
   publicationYear: [
     validator('presence', {
       presence: true,
-      isWarning: computed('model.state', 'model.prefix', function() {
-        return this.model.get('state') === 'draft';
-      }),
-      disabled: computed('model.mode', function() {
-        return ![ 'new', 'edit' ].includes(this.model.get('mode'));
+      disabled: computed('model.mode', 'model.state', function() {
+        return this.model.get('state') === 'draft' || ![ 'new', 'edit' ].includes(this.model.get('mode'));
       }),
     }),
     validator('date', {
@@ -101,11 +95,8 @@ const Validations = buildValidations({
   'types.resourceTypeGeneral': [
     validator('presence', {
       presence: true,
-      isWarning: computed('model.state', function() {
-        return this.model.get('state') === 'draft';
-      }),
-      disabled: computed('model.mode', function() {
-        return ![ 'new', 'edit' ].includes(this.model.get('mode'));
+      disabled: computed('model.mode', 'model.state', function() {
+        return this.model.get('state') === 'draft' || ![ 'new', 'edit' ].includes(this.model.get('mode'));
       }),
     }),
   ],
@@ -120,11 +111,8 @@ const Validations = buildValidations({
     validator('metadata', {
       allowBlank: true,
       dependentKeys: [ 'model.doi' ],
-      isWarning: computed('model.mode', 'model.state', 'model.prefix', function() {
-        return this.model.get('state') === 'draft';
-      }),
-      disabled: computed('model.mode', function() {
-        return ![ 'upload', 'modify' ].includes(this.model.get('mode'));
+      disabled: computed('model.mode', 'model.state', function() {
+        return this.model.get('state') === 'draft' || ![ 'upload', 'modify' ].includes(this.model.get('mode'));
       }),
     }),
   ],
