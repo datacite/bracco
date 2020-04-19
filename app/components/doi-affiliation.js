@@ -12,15 +12,11 @@ export default Component.extend({
       this.fragment.set('affiliationIdentifier', organizationRecord.id);
       this.fragment.set('schemeUri', 'https://ror.org');
       this.fragment.set('affiliationIdentifierScheme', 'ROR');
-
-      // this.setCreatorValidationClass();
     } else {
       this.fragment.set('name', null);
       this.fragment.set('affiliationIdentifier', null);
       this.fragment.set('schemeUri', 'https://ror.org');
       this.fragment.set('affiliationIdentifierScheme', 'ROR');
-
-      // this.setCreatorValidationClass();
     }
   },
 

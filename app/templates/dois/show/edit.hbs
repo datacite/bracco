@@ -12,7 +12,7 @@
         <h3 class="member-results">Required Properties</h3>
       {{/if}}
 
-      <div class="form-group {{validationClass}} required-nested-label">
+      <div class="form-group required-nested-label">
         <label class="control-label col-md-3">DOI</label>
         <div class="col-md-9 input-fragment">
           <div class="label-vertical">The globally unique string that identifies the resource and can't be changed.</div>
@@ -22,7 +22,7 @@
  
       <DoiState @class="required-nested-label" @model={{model}} @form={{form}} />
 
-      <div class="form-group {{validationClass}} required-nested-label">
+      <div class="form-group required-nested-label">
         <label class="control-label col-md-3">URL</label>
         <div class="col-md-9 input-fragment">
           <div class="label-vertical">The location of the landing page with more information about the resource.</div>
@@ -33,7 +33,7 @@
       <DoiCreators @model={{model}} @form={{form}} />
       <DoiTitles @model={{model}} @form={{form}} />
 
-      <div class="form-group {{validationClass}} required-nested-label">
+      <div class="form-group required-nested-label">
         <label class="control-label col-md-3">Publisher</label>
         <div class="col-md-9 input-fragment">
           <div class="label-vertical">The name of the entity that holds, archives, publishes prints, distributes, releases, issues, or produces the resource.</div>
@@ -41,7 +41,7 @@
         </div>
       </div>
 
-      <div class="form-group {{validationClass}} required-nested-label">
+      <div class="form-group required-nested-label">
         <label class="control-label col-md-3">Publication Year</label>
         <div class="col-md-9 input-fragment">
           <div class="label-vertical">The year when the resource was or will be made publicly available.</div>
@@ -74,7 +74,7 @@
         <DoiSizes @model={{model}} @form={{form}} />
         <DoiFormats @model={{model}} @form={{form}} />
 
-        <div class="form-group {{validationClass}}">
+        <div class="form-group">
           <label class="control-label col-md-3">Version</label>
           <div class="col-md-9 input-fragment">
             <div class="label-vertical">The version number of the resource.</div>

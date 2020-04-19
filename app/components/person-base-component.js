@@ -96,15 +96,12 @@ export default Component.extend({
   actions: {
     updateName(value) {
       this.joinNameParts({ name: value });
-      // this.setValidationClass();
     },
     updateGivenName(value) {
       this.joinNameParts({ givenName: value });
-      // this.setValidationClass();
     },
     updateFamilyName(value) {
       this.joinNameParts({ familyName: value });
-      // this.setValidationClass();
     },
     selectNameType(value) {
       this.selectNameType(value);

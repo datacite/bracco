@@ -21,7 +21,6 @@ export default Component.extend({
   actions: {
     updateTitle(value) {
       this.fragment.set('title', value);
-      // this.setValidationClass();
     },
     deleteTitle() {
       this.model.get('titles').removeObject(this.fragment);

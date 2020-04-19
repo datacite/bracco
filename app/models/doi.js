@@ -92,7 +92,7 @@ const Validations = buildValidations({
       precision: 'year',
       format: 'YYYY',
       errorFormat: 'YYYY',
-      message: 'Must be between 1450 and 2021.',
+      message: 'Must be a year between 1450 and 2021.',
       disabled: computed('model.mode', function() {
         return ![ 'new', 'edit' ].includes(this.model.get('mode'));
       }),

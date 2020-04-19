@@ -1,7 +1,6 @@
 import Component from '@ember/component';
 
 export default Component.extend({
-  validationClass: null,
   showRights: false,
 
   didReceiveAttrs() {

@@ -1,7 +1,6 @@
 import Component from '@ember/component';
 
 export default Component.extend({
-  validationClass: null,
   showTitles: true,
 
   didReceiveAttrs() {
@@ -13,21 +12,7 @@ export default Component.extend({
     if (this.model.get('titles').length == 0) {
       this.model.get('titles').createFragment();
     }
-
-    // this.setValidationClass(false);
   },
-
-  // setValidationClass(success) {
-  //   if (this.model.get('validations.attrs.titles.errors').length > 0) {
-  //     this.set('validationClass', 'has-error');
-  //   } else if (this.model.get('validations.attrs.titles.warnings').length > 0) {
-  //     this.set('validationClass', 'has-warning');
-  //   } else if (success) {
-  //     this.set('validationClass', 'has-success');
-  //   } else {
-  //     this.set('validationClass', null);
-  //   }
-  // },
 
   actions: {
     addTitle() {
@@ -37,8 +22,5 @@ export default Component.extend({
     toggleTitles() {
       this.set('showTitles', !this.get('showTitles'));
     },
-    // setValidationClass() {
-    //   this.setValidationClass(true);
-    // },
   },
 });
