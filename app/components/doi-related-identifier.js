@@ -3,41 +3,42 @@ import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 import { isURL, isISBN } from 'validator';
 import { isBlank } from '@ember/utils';
+import { pascalCase } from 'pascal-case';
 
 const relationTypeList = [
   'Cites',
-  'IsCitedBy',
+  'Is cited by',
   'Compiles',
-  'IsCompiledBy',
+  'Is compiled by',
   'Continues',
-  'IsContinuedBy',
+  'Is continued by',
   'Describes',
-  'IsDescribedBy',
+  'Is described by',
   'Documents',
-  'IsDocumentedBy',
-  'IsDerivedFrom',
-  'IsSourceOf',
-  'HasMetadata',
-  'IsMetadataFor',
-  'HasPart',
-  'IsPartOf',
-  'IsSupplementedBy',
-  'IsSupplementTo',
+  'Is documented by',
+  'Is derived from',
+  'Is source of',
+  'Has metadata',
+  'Is metadata for',
+  'Has part',
+  'Is part of',
+  'Is supplemented by',
+  'Is supplement to',
   'Obsoletes',
-  'IsObsoletedBy',
+  'Is obsoleted by',
   'References',
-  'IsReferencedBy',
+  'Is referenced by',
   'Requires',
-  'IsRequiredBy',
+  'Is required by',
   'Reviews',
-  'IsReviewedBy',
-  'HasVersion',
-  'IsVersionOf',
-  'IsNewVersionOf',
-  'IsPreviousVersionOf',
-  'IsVariantFormOf',
-  'IsOriginalFormOf',
-  'IsIdenticalTo',
+  'Is reviewed by',
+  'Has version',
+  'Is version of',
+  'Is new version of',
+  'Is previous version of',
+  'Is variant form of',
+  'Is original form of',
+  'Is identical to',
 ];
 
 const relatedIdentifierTypeList = [
@@ -69,9 +70,9 @@ const resourceTypeGeneralList = [
   'Dataset',
   'Event',
   'Image',
-  'InteractiveResource',
+  'Interactive resource',
   'Model',
-  'PhysicalObject',
+  'Physical object',
   'Service',
   'Software',
   'Sound',
@@ -195,15 +196,15 @@ export default Component.extend({
       this.fragment.set('resourceTypeGeneral', null);
       this.fragment.set('schemeUri', null);
     }
-    this.fragment.set('relationType', relationType);
+    this.fragment.set('relationType', pascalCase(relationType));
     this.set('relationTypes', relationTypeList);
   },
   selectRelatedIdentifierType(relatedIdentifierType) {
-    this.fragment.set('relatedIdentifierType', relatedIdentifierType);
+    this.fragment.set('relatedIdentifierType', pascalCase(relatedIdentifierType));
     this.set('relatedIdentifierTypes', relatedIdentifierTypeList);
   },
   selectResourceTypeGeneral(resourceTypeGeneral) {
-    this.fragment.set('resourceTypeGeneral', resourceTypeGeneral);
+    this.fragment.set('resourceTypeGeneral', pascalCase(resourceTypeGeneral));
     this.set('resourceTypesGeneral', resourceTypeGeneralList);
   },
   actions: {

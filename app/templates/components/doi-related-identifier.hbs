@@ -24,11 +24,11 @@
     disabled=controlledIdentifierType
     destination=fragment.relatedIdentifierType as |el|
   }}
-  {{el.control
-    onChange=(action "selectRelatedIdentifierType")
-    allowClear=true
-    placeholder="Select Related Identifier Type"
-  }}
+    {{el.control
+      onChange=(action "selectRelatedIdentifierType")
+      allowClear=true
+      placeholder="Select related Identifier Type"
+    }}
   {{/form.element}}
 </div>
 
@@ -45,12 +45,34 @@
     allowClear=true
     destination=fragment.relationType as |el|
   }}
-  {{el.control
-    onChange=(action "selectRelationType")
+    <el.control
+      @onChange={{action "selectRelationType"}}
+      @placeholder="Select Relation Type" as |item|>
+        {{humanize (underscore item)}}
+    </el.control>
+  {{/form.element}}
+</div>
+
+<div class="power-select-label">
+  <label for="relatedResourceType" class="subtitle">Resource Type General</label> 
+</div> 
+<div class="power-select-fragment" data-test-related-resource-type>
+  {{#form.element
+    controlType="power-select"
+    value=fragment.resourceTypeGeneral
+    helpText="The general type of the related resource."
+    options=resourceTypesGeneral
+    disabled=disabled
     allowClear=true
-    placeholder="Select Relation Type"
+    destination=fragment.resourceTypeGeneral as |el|
   }}
-  {{/form.element}}  
+    <el.control
+      @onChange={{action "selectResourceTypeGeneral"}}
+      @allowClear={{true}}
+      @placeholder="Select Resource Type General" as |item|>
+        {{humanize (underscore item)}}
+    </el.control>
+  {{/form.element}}
 </div>
 
 {{#if this.isMetadataRelationType}}
@@ -86,27 +108,6 @@
   <div
     class="help-block help-block-fragment related-scheme-type-field}}">
     The type of the relatedMetadataScheme, linked with the schemeURI.
-  </div>
-
-  <div class="power-select-label">
-    <label for="relatedResourceType" class="subtitle required-label">Resource Type General</label> 
-  </div> 
-  <div class="power-select-fragment" data-test-related-resource-type>
-    {{#form.element
-      controlType="power-select"
-      value=fragment.resourceTypeGeneral
-      helpText="The general type of the related resource."
-      options=resourceTypesGeneral
-      disabled=disabled
-      allowClear=true
-      destination=fragment.resourceTypeGeneral as |el|
-    }}
-      {{el.control
-        onChange=(action "selectResourceTypeGeneral")
-        allowClear=true
-        placeholder="Select Resource Type General"
-      }}
-    {{/form.element}}
   </div>
 {{/if}}
 
