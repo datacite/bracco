@@ -15,6 +15,6 @@ module('Integration | Component | doi upload', function(hooks) {
       {{/doi-upload}}
     `);
 
-    assert.dom('*').hasText('Metadata Upload File');
+    assert.dom('*').hasText('Metadata Metadata that describe the resource. Upload File');
   });
 });

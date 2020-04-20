@@ -1,22 +1,32 @@
-<div class="col-md-9 col-md-offset-3">
-  <h2 class="doi">{{model.doi}}</h2>
-</div>
-
 <div class="panel panel-transparent">
   <div class="panel-body">
     <div class="col-md-9 col-md-offset-3 form-help-header">
       <h3 class="help-header">Update DOI (File Upload)</h3>
-      <div class="help-block">
+      <div class="label-vertical">
         More information about DOI registration via file upload can be found on our <a target="_blank" rel="noopener"
           href="https://support.datacite.org/docs/fabrica-create-doi-form">Support Website</a>.
       </div>
     </div>
 
     <BsForm @formLayout="horizontal" @horizontalLabelGridClass="col-md-3" @model={{model}} @onSubmit={{action "submit" model}} as |form|>
-      <form.element @controlType="text" @label="DOI" @id="doi" @property="doi" @helpText="The globally unique string that identifies the resource and can't be changed." @disabled={{true}} />
+      <div class="form-group required-nested-label">
+        <label class="control-label col-md-3">DOI</label>
+        <div class="col-md-9 input-fragment">
+          <div class="label-vertical">The globally unique string that identifies the resource and can't be changed.</div>
+          <form.element @controlType="text" @id="doi" @property="doi" @disabled={{true}} />
+        </div>
+      </div>
 
-      <DoiState @model={{model}} @form={{form}} />
-      <form.element @id="url" @controlType="text" @label="URL" @property="url" @helpText="The location of the landing page with more information about the resource."  @required={{false}} />
+      <DoiState @class="required-nested-label" @model={{model}} @form={{form}} />
+
+      <div class="form-group required-nested-label {{if (v-get model 'url' 'isInvalid') 'has-error' 'has-feedback'}}">
+        <label class="control-label col-md-3">URL</label>
+        <div class="col-md-9 input-fragment">
+          <div class="label-vertical">The location of the landing page with more information about the resource.</div>
+          <form.element @id="url" @controlType="text" @property="url" @placeholder="URL" @required={{false}} />
+        </div>
+      </div>
+
       <DoiUpload @model={{model}} @form={{form}} />
 
       <div class="col-md-9 col-md-offset-3">
