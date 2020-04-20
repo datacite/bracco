@@ -5,7 +5,6 @@ import { isURL, isISBN } from 'validator';
 const IdentifierFormat = BaseValidator.extend({
 
   validate(value, options, model) {
-
     const ark = /^ark:\/[0-9]{5}\/\S+$/;
     const lsid = /^[uU][rR][nN]:[lL][sS][iI][dD]:(A-Za-z0-9][A-Za-z0-9()+,-.=@;$_!*'"%]):(A-Za-z0-9][A-Za-z0-9()+,-.=@;$_!*'"%]):(A-Za-z0-9][A-Za-z0-9()+,-.=@;$_!*'"%])[:]?(A-Za-z0-9][A-Za-z0-9()+,-.=@;$_!*'"%])?$/;
     const purl = /^http?:\/\/(purl\.oclc\.org\/)/;

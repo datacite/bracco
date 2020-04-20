@@ -26,7 +26,7 @@
         <label class="control-label col-md-3">URL</label>
         <div class="col-md-9 input-fragment">
           <div class="label-vertical">The location of the landing page with more information about the resource.</div>
-          <form.element @id="url" @controlType="text" @property="url" @placeholder="URL" @required={{false}} />
+          <form.element @id="url" @controlType="text" @property="url" @placeholder="URL" @helpText="Should be a https URL, http and ftp are also supported." @required={{false}} />
         </div>
       </div>
 
@@ -37,7 +37,7 @@
         <label class="control-label col-md-3">Publisher</label>
         <div class="col-md-9 input-fragment">
           <div class="label-vertical">The name of the entity that holds, archives, publishes prints, distributes, releases, issues, or produces the resource.</div>
-          <form.element @id="publisher" @controlType="text" @property="publisher" @required={{false}} />
+          <form.element @id="publisher" @controlType="text" @property="publisher" @helpText="This property will be used to formulate the citation, so consider the prominence of the role." @required={{false}} />
         </div>
       </div>
 
@@ -45,7 +45,7 @@
         <label class="control-label col-md-3">Publication Year</label>
         <div class="col-md-9 input-fragment">
           <div class="label-vertical">The year when the resource was or will be made publicly available.</div>
-          <form.element @id="publication-year" @controlType="text" @property="publicationYear" @required={{false}} />
+          <form.element @id="publication-year" @controlType="text" @property="publicationYear" @helpText="Must be a year between 1450 and 2021." @required={{false}} />
         </div>
       </div>
 

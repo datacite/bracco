@@ -10,18 +10,6 @@ module('Unit | Validator | url-format', function(hooks) {
     validator = this.owner.lookup('validator:url-format');
   });
 
-  test('no options', function(assert) {
-    assert.expect(1);
-
-    builtOptions = validator.buildOptions({}).toObject();
-
-    try {
-      message = validator.validate(undefined, builtOptions);
-    } catch (e) {
-      assert.ok(true);
-    }
-  });
-
   test('url', function(assert) {
     assert.expect(2);
 
