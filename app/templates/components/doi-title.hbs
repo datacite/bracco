@@ -1,5 +1,5 @@
 {{#if (gt index 0)}}
-  <div class="form-group required-nested-label">
+  <div>
     <div class="input-group">
       <input type="text" class="form-control title-field" value={{fragment.title}} placeholder="Title" oninput={{action "updateTitle" value="target.value"}} data-test-title/>
       <span class="input-group-btn">
@@ -8,7 +8,7 @@
     </div>
   </div>
 {{else}}
-  <div class="form-group required-nested-label">
+  <div>
     <input type="text" class="form-control title-field" value={{fragment.title}} placeholder="Title" oninput={{action "updateTitle" value="target.value"}} data-test-title/>
   </div>
 {{/if}}

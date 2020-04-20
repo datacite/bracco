@@ -47,10 +47,8 @@
   </div>
 {{/if}}
 
-<div class="form-group required-nested-label">
-  <div>
-    <label for="name" class="subtitle required-label">Name{{if isReadonly ' (from Given Name and Family Name)'}}</label>
-  </div>
+<div>
+  <label for="name" class="subtitle required-label">Name{{if isReadonly ' (from Given Name and Family Name)'}}</label>
   <div class="input-group">
     <input type="text" class="form-control name-field" value={{fragment.name}} placeholder="Name" oninput={{action "updateName" value="target.value"}} readonly={{isReadonly}} data-test-name/>
     <span class="input-group-btn">
