@@ -12,11 +12,11 @@
       {{/if}}
 
       {{#if (gt model.rightsList.length 0)}}
-        <BsButton @id="toggle-rights" @class="btn-sm" @outline={{true}} @onClick={{action "toggleRights"}}>{{fa-icon "eye-slash"}} Hide {{pluralize model.rightsList.length 'rights'}}</BsButton>
+        <BsButton @id="toggle-rights" @class="btn-sm" @outline={{true}} @onClick={{action "toggleRights"}}>{{fa-icon "eye-slash"}} Hide {{pluralize model.rightsList.length 'right'}}</BsButton>
       {{/if}}
     {{else}}
       {{#if (gt model.rightsList.length 0)}}
-        <BsButton @id="toggle-rights" @class="btn-sm" @outline={{true}} @onClick={{action "toggleRights"}}>{{fa-icon "eye"}} Show {{pluralize model.rightsList.length 'rights'}}</BsButton>
+        <BsButton @id="toggle-rights" @class="btn-sm" @outline={{true}} @onClick={{action "toggleRights"}}>{{fa-icon "eye"}} Show {{pluralize model.rightsList.length 'right'}}</BsButton>
       {{else}}
         <BsButton @class="btn-sm btn-warning" @id="add-rights" @outline={{true}} @onClick={{action "addRights"}}>{{fa-icon "plus"}} Add rights</BsButton>
       {{/if}}
