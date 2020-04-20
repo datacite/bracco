@@ -76,15 +76,14 @@ const Validations = buildValidations({
       }),
     }),
     validator('date', {
-      allowBlank: true,
-      after: '1449',
+      after: '999',
       before: '2021',
       precision: 'year',
       format: 'YYYY',
       errorFormat: 'YYYY',
-      message: 'Must be a year between 1450 and 2021.',
-      disabled: computed('model.mode', function() {
-        return ![ 'new', 'edit' ].includes(this.model.get('mode'));
+      message: 'Must be a year between 1000 and 2021.',
+      disabled: computed('model.mode', 'model.state', function() {
+        return this.model.get('state') === 'draft' || ![ 'new', 'edit' ].includes(this.model.get('mode'));
       }),
     }),
   ],
