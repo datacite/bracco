@@ -21,4 +21,5 @@ export default Controller.extend({
   page: 1,
   size: 25,
   affiliation: true,
+  composite: true,
 });
