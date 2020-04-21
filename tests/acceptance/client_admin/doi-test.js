@@ -103,13 +103,13 @@ module('Acceptance | client_admin | doi', function(hooks) {
     assert.dom('h2.work').hasText('10.80225/da52-7919');
   });
 
-  test('visiting the form for a specific doi', async function(assert) {
-    await visit('/dois/10.80225%2Fda52-7919/edit');
+  // test('visiting the form for a specific doi', async function(assert) {
+  //   await visit('/dois/10.80225%2Fda52-7919/edit');
 
-    assert.equal(currentURL(), '/dois/10.80225%2Fda52-7919/edit');
-    assert.dom('h2.work').hasText('10.80225/da52-7919');
-    assert.dom('#doi-language').includesText('Select Language');
-  });
+  //   assert.equal(currentURL(), '/dois/10.80225%2Fda52-7919/edit');
+  //   assert.dom('h2.work').hasText('10.80225/da52-7919');
+  //   assert.dom('#doi-language').includesText('Select Language');
+  // });
 
   test('visiting the form and selecting language', async function(assert) {
     await visit('repositories/datacite.test/dois/new');
