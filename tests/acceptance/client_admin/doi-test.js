@@ -21,7 +21,7 @@ module('Acceptance | client_admin | doi', function(hooks) {
         exclude: [ 'authorization' ],
       },
     },
-    recordFailedRequests: true,
+    // recordFailedRequests: true,
   });
   setupApplicationTest(hooks);
 
@@ -96,12 +96,83 @@ module('Acceptance | client_admin | doi', function(hooks) {
   //   // assert.dom('#doi-language').includesText('Select Language');
   // });
 
+  test('visiting the form and adding url', async function(assert) {
+    await visit('repositories/datacite.test/dois/new');
+
+    assert.equal(currentURL(), 'repositories/datacite.test/dois/new');
+    await fillIn('#url-field', 'https://example.org');
+    assert.dom('#url-field').hasValue('https://example.org');
+
+    await click('button#doi-create');
+  });
+
+  test('visiting the form and adding creator', async function(assert) {
+    await visit('repositories/datacite.test/dois/new');
+
+    assert.equal(currentURL(), 'repositories/datacite.test/dois/new');
+    await fillIn('[data-test-name]', 'Miller, Elizabeth');
+    assert.dom('[data-test-name]').hasValue('Miller, Elizabeth');
+
+    await click('#toggle-creators');
+    assert.dom('#toggle-creators').includesText('Show 1 creator');
+
+    await click('button#doi-create');
+  });
+
+  test('visiting the form and selecting title', async function(assert) {
+    await visit('repositories/datacite.test/dois/new');
+
+    assert.equal(currentURL(), 'repositories/datacite.test/dois/new');
+    await fillIn('[data-test-title]', 'The title');
+    assert.dom('[data-test-title]').hasValue('The title');
+
+    await click('#toggle-titles');
+    assert.dom('#toggle-titles').includesText('Show 1 title');
+
+    await click('button#doi-create');
+  });
+
+  test('visiting the form and adding publisher', async function(assert) {
+    await visit('repositories/datacite.test/dois/new');
+
+    assert.equal(currentURL(), 'repositories/datacite.test/dois/new');
+    await fillIn('#publisher-field', 'DataCite');
+    assert.dom('#publisher-field').hasValue('DataCite');
+
+    await click('button#doi-create');
+  });
+
+  test('visiting the form and adding publication year', async function(assert) {
+    await visit('repositories/datacite.test/dois/new');
+
+    assert.equal(currentURL(), 'repositories/datacite.test/dois/new');
+    await fillIn('#publication-year-field', '2020');
+    assert.dom('#publication-year-field').hasValue('2020');
+
+    await click('button#doi-create');
+  });
+
+  test('visiting the form and adding resource type general', async function(assert) {
+    await visit('repositories/datacite.test/dois/new');
+
+    assert.equal(currentURL(), 'repositories/datacite.test/dois/new');
+    await selectChoose('#resource-type-general', 'Text');
+    assert.dom('#resource-type-general').includesText('Text');
+
+    // await fillIn('#resource-type', 'JournalArticle');
+    // assert.dom('#resource-type-field').hasValue('JournalArticle');
+
+    await click('button#doi-create');
+  });
+
   test('visiting the form and selecting language', async function(assert) {
     await visit('repositories/datacite.test/dois/new');
 
     assert.equal(currentURL(), 'repositories/datacite.test/dois/new');
     await selectChoose('#doi-language', 'English');
     assert.dom('#doi-language').includesText('English');
+
+    await click('button#doi-create');
   });
 
   test('visiting the form and selecting subject', async function(assert) {
@@ -115,6 +186,8 @@ module('Acceptance | client_admin | doi', function(hooks) {
 
     await click('#toggle-subjects');
     assert.dom('#toggle-subjects').includesText('Show 1 subject');
+
+    await click('button#doi-create');
   });
 
   test('visiting the form and adding geoLocationPlace', async function(assert) {
@@ -128,6 +201,8 @@ module('Acceptance | client_admin | doi', function(hooks) {
 
     await click('#toggle-geolocations');
     assert.dom('#toggle-geolocations').includesText('Show 1 geolocation');
+
+    await click('button#doi-create');
   });
 
   test('visiting the form and entering new subject', async function(assert) {
@@ -148,6 +223,8 @@ module('Acceptance | client_admin | doi', function(hooks) {
 
     await click('#toggle-contributors');
     assert.dom('#toggle-contributors').includesText('Show 1 contributor');
+
+    await click('button#doi-create');
   });
 
   test('visiting the form and adding version', async function(assert) {
@@ -156,6 +233,8 @@ module('Acceptance | client_admin | doi', function(hooks) {
     assert.equal(currentURL(), 'repositories/datacite.test/dois/new');
     await fillIn('#version-field','67');
     assert.dom('#version-field').hasValue('67');
+
+    await click('button#doi-create');
   });
 
   test('visiting the form and adding format', async function(assert) {
@@ -168,6 +247,8 @@ module('Acceptance | client_admin | doi', function(hooks) {
 
     await click('#toggle-formats');
     assert.dom('#toggle-formats').includesText('Show 1 format');
+
+    await click('button#doi-create');
   });
 
   test('visiting the form and adding size', async function(assert) {
@@ -180,6 +261,8 @@ module('Acceptance | client_admin | doi', function(hooks) {
 
     await click('#toggle-sizes');
     assert.dom('#toggle-sizes').includesText('Show 1 size');
+
+    await click('button#doi-create');
   });
 
   test('visiting the form and adding alternate identfier', async function(assert) {
@@ -194,6 +277,8 @@ module('Acceptance | client_admin | doi', function(hooks) {
 
     await click('#toggle-alternate-identifiers');
     assert.dom('#toggle-alternate-identifiers').includesText('Show 1 alternate identifier');
+
+    await click('button#doi-create');
   });
 
   test('update draft doi', async function(assert) {
@@ -250,6 +335,8 @@ module('Acceptance | client_admin | doi', function(hooks) {
 
     await click('#toggle-related-identifiers');
     assert.dom('#toggle-related-identifiers').includesText('Show 1 related identifier');
+
+    await click('button#doi-create');
   });
 
   test('visiting the Form and adding funding references', async function(assert) {
@@ -285,5 +372,7 @@ module('Acceptance | client_admin | doi', function(hooks) {
 
     await click('#toggle-rights');
     assert.dom('#toggle-rights').includesText('Show 1 right');
+
+    await click('button#doi-create');
   });
 });
