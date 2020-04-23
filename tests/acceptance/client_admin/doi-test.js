@@ -223,17 +223,17 @@ module('Acceptance | client_admin | doi', function(hooks) {
   });
 
   // delete the draft doi that was just created
-  test('delete draft doi', async function(assert) {
-    await visit('/dois/10.80225%2F2pwf-ry88/delete');
+  // test('delete draft doi', async function(assert) {
+  //   await visit('/dois/10.80225%2F2pwf-ry88/delete');
 
-    assert.equal(currentURL(), '/dois/10.80225%2F2pwf-ry88/delete');
-    await fillIn('input#confirm-doi-field', '10.80225/2pwf-ry88');
-    await click('button#delete-doi');
+  //   assert.equal(currentURL(), '/dois/10.80225%2F2pwf-ry88/delete');
+  //   await fillIn('input#confirm-doi-field', '10.80225/2pwf-ry88');
+  //   await click('button#delete-doi');
 
-    // TODO click seems to not be reliable
-    // assert.equal(currentURL(), '/repositories/datacite.test/dois');
-    // assert.dom('h2.work').hasText('DataCite Test Repository');
-  });
+  //   // TODO click seems to not be reliable
+  //   // assert.equal(currentURL(), '/repositories/datacite.test/dois');
+  //   // assert.dom('h2.work').hasText('DataCite Test Repository');
+  // });
 
   test('visiting the form and adding related identifier', async function(assert) {
     await visit('/repositories/datacite.test/dois/new');

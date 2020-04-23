@@ -5,9 +5,9 @@ import {
   visit,
   click,
   fillIn,
-  waitUntil,
+  // waitUntil,
   // triggerKeyEvent,
-  findAll,
+  // findAll,
   // pauseTest,
 } from '@ember/test-helpers';
 import ENV from 'bracco/config/environment';
@@ -228,30 +228,30 @@ module('Acceptance | staff_admin | doi', function(hooks) {
   //   assert.equal(group, 'suffix form-group ember-view');
   // });
 
-  test('creating a new DOI for repository DataCite Test renders', async function(assert) {
-    await visit('/repositories/datacite.test/dois/new');
+  // test('creating a new DOI for repository DataCite Test renders', async function(assert) {
+  //   await visit('/repositories/datacite.test/dois/new');
 
-    // Maybe we do not need this one
-    await waitUntil(() => {
-      let prefix = findAll('span.ember-power-select-selected-item');
-      let suffix = this.element.querySelector('input#suffix-field');
-      let status = this.element.querySelector('input#draft-radio:checked');
-      if (prefix[0].innerText && suffix.value && status.value) {
-        return true;
-      }
-      return false;
-    });
+  //   // Maybe we do not need this one
+  //   await waitUntil(() => {
+  //     let prefix = findAll('span.ember-power-select-selected-item');
+  //     let suffix = this.element.querySelector('input#suffix-field');
+  //     let status = this.element.querySelector('input#draft-radio:checked');
+  //     if (prefix[0].innerText && suffix.value && status.value) {
+  //       return true;
+  //     }
+  //     return false;
+  //   });
 
-    assert.equal(currentURL(), '/repositories/datacite.test/dois/new');
-    assert.dom('h3').hasText('Create DOI (Form)');
-    assert.dom('input#url-field').hasNoValue();
-    assert.dom('input#publisher-field').hasNoValue();
-    assert.dom('input#publication-year-field').hasNoValue();
-    assert.dom('input#draft-radio').isChecked();
-    assert.dom('input#registered-radio').isNotChecked();
-    assert.dom('input#findable-radio').isNotChecked();
-    assert.dom('input#suffix-field').hasAnyValue();
-  });
+  //   assert.equal(currentURL(), '/repositories/datacite.test/dois/new');
+  //   assert.dom('h3').hasText('Create DOI (Form)');
+  //   assert.dom('input#url-field').hasNoValue();
+  //   assert.dom('input#publisher-field').hasNoValue();
+  //   assert.dom('input#publication-year-field').hasNoValue();
+  //   assert.dom('input#draft-radio').isChecked();
+  //   assert.dom('input#registered-radio').isNotChecked();
+  //   assert.dom('input#findable-radio').isNotChecked();
+  //   assert.dom('input#suffix-field').hasAnyValue();
+  // });
 
   // test('create draft doi', async function(assert) {
   //   await visit('/repositories/datacite.test/dois/new');
