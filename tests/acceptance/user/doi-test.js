@@ -1,6 +1,7 @@
 import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
 import { currentURL, visit } from '@ember/test-helpers';
+import ENV from 'bracco/config/environment';
 import { authenticateSession } from 'ember-simple-auth/test-support';
 import { setupQunit as setupPolly } from '@pollyjs/core';
 
@@ -17,15 +18,16 @@ module('Acceptance | user | doi', function(hooks) {
   hooks.beforeEach(async function() {
     const { server } = this.polly;
 
+    server.any().on('request', (req) => {
+      if (req.url !== 'https://api.test.datacite.org/token') {
+        req.headers.authorization = 'Bearer ' + ENV.USER_TOKEN;
+      }
+    });
+
     server.any().on('beforePersist', (req, recording) => {
       /* we only want to perform this task when recording */
       if (req.action !== 'record') {
         return;
-      }
-      /* hide password and token in oauth password grant requests */
-      if (recording.request.url == 'https://api.test.datacite.org/token') {
-        recording.request.postData.text = 'INFORMATION_HIDDEN';
-        recording.response.content.text = 'INFORMATION_HIDDEN';
       }
 
       /* filter out authorization tokens */

@@ -4,7 +4,7 @@
 
 module.exports = function(env) {
   return {
-    enabled: env === 'test',
+    enabled: env !== 'production',
     server: {
       apiNamespace: '/polly',
       recordingsDir: 'recordings',

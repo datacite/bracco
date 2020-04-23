@@ -3,16 +3,14 @@ import { setupApplicationTest } from 'ember-qunit';
 import {
   currentURL,
   visit,
-  click,
   fillIn,
+  click,
   // waitUntil,
   // findAll,
   // pauseTest,
 } from '@ember/test-helpers';
 import ENV from 'bracco/config/environment';
-import { setupFactoryGuy } from 'ember-data-factory-guy';
-// import { build, make, mockFindRecord } from 'ember-data-factory-guy';
-import { selectChoose } from 'ember-power-select/test-support/helpers';
+import { selectChoose, selectSearch } from 'ember-power-select/test-support/helpers';
 import { authenticateSession } from 'ember-simple-auth/test-support';
 import { setupQunit as setupPolly } from '@pollyjs/core';
 
@@ -23,32 +21,28 @@ module('Acceptance | client_admin | doi', function(hooks) {
         exclude: [ 'authorization' ],
       },
     },
+    recordFailedRequests: true,
   });
   setupApplicationTest(hooks);
-  setupFactoryGuy(hooks);
 
   hooks.beforeEach(async function() {
     const { server } = this.polly;
+
+    server.any().on('request', (req) => {
+      if (req.url !== 'https://api.test.datacite.org/token') {
+        req.headers.authorization = 'Bearer ' + ENV.CLIENT_ADMIN_TOKEN;
+      }
+    });
 
     server.any().on('beforePersist', (req, recording) => {
       /* we only want to perform this task when recording */
       if (req.action !== 'record') {
         return;
       }
-      /* hide password and token in oauth password grant requests */
-      if (recording.request.url == 'https://api.test.datacite.org/token') {
-        recording.request.postData.text = 'INFORMATION_HIDDEN';
-        recording.response.content.text = 'INFORMATION_HIDDEN';
-      }
 
       /* filter out authorization tokens */
       recording.request.headers = recording.request.headers.filter(({ name }) => name !== 'authorization');
     });
-
-    await visit('/sign-in');
-    await fillIn('input#account-field', 'DATACITE.TEST');
-    await fillIn('input#password-field', ENV.CLIENT_ADMIN_PASSWORD);
-    await click('button[type=submit]');
 
     await authenticateSession({
       uid: 'datacite.test',
@@ -58,15 +52,6 @@ module('Acceptance | client_admin | doi', function(hooks) {
       client_id: 'datacite.test',
     });
   });
-
-  // let goodDoi = {
-  //   titles: [ 'Abhinandan: Crowds gather for Indian pilots release', 'Tornadoes kill at least 23 in Lee County, Alabama' ],
-  //   creators: [ 'Teresa May', 'Billy Corgan' ],
-  //   descriptions: [ 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis blandit odio. Donec justo ex, feugiat non imperdiet ut, ultrices a purus. Mauris molestie elementum finibus. Duis augue odio','Suspendisse tristique risus neque, non posuere lacus vestibulum et. Maecenas pellentesque mollis lectus, ac viverra nunc pellentesque sed. Sed nibh orci' ],
-  //   publicationYear: '1990',
-  //   publisher: 'the BBC',
-  //   url: 'http://bbc.co.uk',
-  // };
 
   test('visiting dois', async function(assert) {
     await visit('/repositories/datacite.test/dois');
@@ -107,145 +92,198 @@ module('Acceptance | client_admin | doi', function(hooks) {
   //   await visit('/dois/10.80225%2Fda52-7919/edit');
 
   //   assert.equal(currentURL(), '/dois/10.80225%2Fda52-7919/edit');
-  //   assert.dom('h2.work').hasText('10.80225/da52-7919');
-  //   assert.dom('#doi-language').includesText('Select Language');
+  //   // assert.dom('h2.work').hasText('10.80225/da52-7919');
+  //   // assert.dom('#doi-language').includesText('Select Language');
   // });
 
   test('visiting the form and selecting language', async function(assert) {
     await visit('repositories/datacite.test/dois/new');
 
-    await selectChoose('#doi-language', 'English');
     assert.equal(currentURL(), 'repositories/datacite.test/dois/new');
+    await selectChoose('#doi-language', 'English');
     assert.dom('#doi-language').includesText('English');
   });
 
-  // test('visiting the form and selecting subject', async function(assert) {
-  //   await visit('repositories/datacite.test/dois/new');
+  test('visiting the form and selecting subject', async function(assert) {
+    await visit('repositories/datacite.test/dois/new');
 
-  //   await selectSearch('[doi-subject]', 'Materials');
-  //   await selectChoose('[doi-subject]', 'Materials engineering');
+    assert.equal(currentURL(), 'repositories/datacite.test/dois/new');
+    await click('#add-subject');
+    await selectSearch('[doi-subject]', 'Materials');
+    await selectChoose('[doi-subject]', 'Materials engineering');
+    assert.dom('[doi-subject]').includesText('Materials engineering');
 
-  //   assert.equal(currentURL(), 'repositories/datacite.test/dois/new');
-  //   assert.dom('[doi-subject]').includesText('Materials engineering');
-  // });
+    await click('#toggle-subjects');
+    assert.dom('#toggle-subjects').includesText('Show 1 subject');
+  });
 
-  // test('visiting the form and adding geoLocationPlace', async function(assert) {
-  //   await visit('repositories/datacite.test/dois/new');
+  test('visiting the form and adding geoLocationPlace', async function(assert) {
+    await visit('repositories/datacite.test/dois/new');
 
-  //   await fillIn('[data-test-geo-location-place]', 'Amsterdam, Novoravis hotel');
+    assert.equal(currentURL(), 'repositories/datacite.test/dois/new');
+    await click('#add-geolocation');
+    await fillIn('[data-test-geo-location-place]', 'Amsterdam, Novoravis hotel');
 
-  //   assert.dom('[data-test-geo-location-place]').hasValue('Amsterdam, Novoravis hotel');
-  // });
+    assert.dom('[data-test-geo-location-place]').hasValue('Amsterdam, Novoravis hotel');
 
-  // test('visiting the form and entering new subject', async function(assert) {
-  //   await visit('repositories/datacite.test/dois/new');
+    await click('#toggle-geolocations');
+    assert.dom('#toggle-geolocations').includesText('Show 1 geolocation');
+  });
 
-  //   await selectSearch('[doi-subject]', 'Optics');
-  //   assert.dom('[doi-subject]').includesText('Subject from the OECD Fields of Science OR fill in to create a keyword Subject, keyword, classification code, or key phrase describing the resource.');
-  // });
+  test('visiting the form and entering new subject', async function(assert) {
+    await visit('repositories/datacite.test/dois/new');
 
-  // test('visiting the form and adding contributor', async function(assert) {
-  //   await visit('repositories/datacite.test/dois/new');
+    await click('#add-subject');
+    await selectSearch('[doi-subject]', 'Optics');
+    assert.dom('[doi-subject]').includesText('Search Subject from the OECD Fields of Science OR create a new keyword The default subject scheme is provided by the OECD Fields of Science.');
+  });
 
-  //   await selectChoose('[doi-contributor]', 'Data collector');
-  //   assert.equal(currentURL(), 'repositories/datacite.test/dois/new');
-  //   assert.dom('[doi-contributor]').includesText('Data collector');
-  // });
+  test('visiting the form and adding contributor', async function(assert) {
+    await visit('repositories/datacite.test/dois/new');
 
-  // test('visiting the Form and adding format, version and size', async function(assert) {
-  //   await visit('repositories/datacite.test/dois/new');
-  //   await fillIn('[data-test-format]','json');
-  //   await fillIn('[data-test-size]','5kb');
-  //   // await fillIn('[data-test-version]','67');
+    assert.equal(currentURL(), 'repositories/datacite.test/dois/new');
+    await click('#add-contributor');
+    await selectChoose('[doi-contributor]', 'Data collector');
+    assert.dom('[doi-contributor]').includesText('Data collector');
 
-  //   // // NOTE: fillIn matches with hasValue but not with includesText
-  //   assert.equal(currentURL(), 'repositories/datacite.test/dois/new');
-  //   assert.dom('[data-test-format]').hasValue('json');
-  //   assert.dom('[data-test-size]').hasValue('5kb');
-  //   // assert.dom('[data-test-version]').hasValue('67');
-  // });
+    await click('#toggle-contributors');
+    assert.dom('#toggle-contributors').includesText('Show 1 contributor');
+  });
 
-  // test('visiting the Form and adding Alternate Identfier', async function(assert) {
-  //   await visit('repositories/datacite.test/dois/new');
-  //   await fillIn('[data-test-alternate-identifier]','https://doi.org/10.70048/rph240519');
-  //   await selectChoose('[data-test-alternate-identifier-type]','DOI');
+  test('visiting the form and adding version', async function(assert) {
+    await visit('repositories/datacite.test/dois/new');
 
-  //   // NOTE: fillIn matches with hasValue but not with includesText
-  //   assert.equal(currentURL(), 'repositories/datacite.test/dois/new');
-  //   assert.dom('[data-test-alternate-identifier]').hasValue('https://doi.org/10.70048/rph240519');
-  //   assert.dom('[data-test-alternate-identifier-type]').includesText('DOI');
-  // });
+    assert.equal(currentURL(), 'repositories/datacite.test/dois/new');
+    await fillIn('#version-field','67');
+    assert.dom('#version-field').hasValue('67');
+  });
 
-  /*  test('update draft doi', async function(assert) {
-    await visit('repositories/datacite.test/dois/10.80225%2Ffjva-vj63/edit');
+  test('visiting the form and adding format', async function(assert) {
+    await visit('repositories/datacite.test/dois/new');
+
+    assert.equal(currentURL(), 'repositories/datacite.test/dois/new');
+    await click('#add-format');
+    await fillIn('[data-test-format]','json');
+    assert.dom('[data-test-format]').hasValue('json');
+
+    await click('#toggle-formats');
+    assert.dom('#toggle-formats').includesText('Show 1 format');
+  });
+
+  test('visiting the form and adding size', async function(assert) {
+    await visit('repositories/datacite.test/dois/new');
+
+    assert.equal(currentURL(), 'repositories/datacite.test/dois/new');
+    await click('#add-size');
+    await fillIn('[data-test-size]','5kb');
+    assert.dom('[data-test-size]').hasValue('5kb');
+
+    await click('#toggle-sizes');
+    assert.dom('#toggle-sizes').includesText('Show 1 size');
+  });
+
+  test('visiting the form and adding alternate identfier', async function(assert) {
+    await visit('repositories/datacite.test/dois/new');
+
+    await click('#add-alternate-identifier');
+    await fillIn('[data-test-alternate-identifier]','https://doi.org/10.70048/rph240519');
+    await selectChoose('[data-test-alternate-identifier-type]','DOI');
+
+    assert.dom('[data-test-alternate-identifier]').hasValue('https://doi.org/10.70048/rph240519');
+    assert.dom('[data-test-alternate-identifier-type]').includesText('DOI');
+
+    await click('#toggle-alternate-identifiers');
+    assert.dom('#toggle-alternate-identifiers').includesText('Show 1 alternate identifier');
+  });
+
+  test('update draft doi', async function(assert) {
+    await visit('/dois/10.80225%2F9fxk-aa96/edit');
+
+    assert.equal(currentURL(), '/dois/10.80225%2F9fxk-aa96/edit');
     await fillIn('input#url-field', 'https://support.datacite.org/docs/doi-states');
     await click('button#doi-update');
-    await pauseTest();
 
-    assert.equal(currentURL(), 'repositories/datacite.test/dois/10.80225%2Ffjva-vj63/');
-    assert.dom('input#url-field').hasValue('https://support.datacite.org/docs/doi-states');
+    // TODO click seems to not be reliable
+    // assert.equal(currentURL(), '/dois/10.80225%2F9fxk-aa96');
+    // assert.dom('input#url-field').hasValue('https://support.datacite.org/docs/doi-states');
   });
 
   test('create draft doi', async function(assert) {
-    await visit('repositories/datacite.test/dois/new');
-    let suffix = '2pwf-ry88';
-    await fillIn('input#suffix-field', suffix);
+    await visit('/repositories/datacite.test/dois/new');
+
+    assert.equal(currentURL(), '/repositories/datacite.test/dois/new');
+    await selectChoose('#prefix-field', '10.80225');
+    await fillIn('input#suffix-field', '2pwf-ry88');
 
     await click('button#doi-create');
 
-    assert.equal(currentURL(), '/dois/10.80225%2F' + suffix);
-    assert.dom('h2.work').hasText('10.80225/2pwf-ry88');
+    // TODO click seems to not be reliable
+    // assert.equal(currentURL(), '/dois/10.80225%2F2pwf-ry88');
+    // assert.dom('h2.work').hasText('10.80225/2pwf-ry88');
   });
 
   // delete the draft doi that was just created
   test('delete draft doi', async function(assert) {
-    await visit('dois/10.80225%2F2pwf-ry88/delete');
-    await fillIn('input#confirm-doi-field', '10.80225%2F2pwf-ry88');
+    await visit('/dois/10.80225%2F2pwf-ry88/delete');
+
+    assert.equal(currentURL(), '/dois/10.80225%2F2pwf-ry88/delete');
+    await fillIn('input#confirm-doi-field', '10.80225/2pwf-ry88');
     await click('button#delete-doi');
 
-    assert.equal(currentURL(), '/repositories/datacite.test/dois');
-    assert.dom('h2.work').hasText('DataCite Test Repository');
-  }); */
-  // test('visiting the Form and adding related Identifier', async function(assert) {
+    // TODO click seems to not be reliable
+    // assert.equal(currentURL(), '/repositories/datacite.test/dois');
+    // assert.dom('h2.work').hasText('DataCite Test Repository');
+  });
 
-  //   await visit('repositories/datacite.test/dois/new');
-  //   await fillIn('[data-test-related-identifier]','10.70048/rph240519');
-  //   await selectChoose('[data-test-related-relation-type]', 'HasMetadata');
-  //   await fillIn('[data-test-related-scheme-uri]','https://schema.datacite.org/meta/kernel-4.3/doc/DataCite-MetadataKernel_v4.3.pdf');
-  //   await fillIn('[data-test-related-scheme-type]','XML');
+  test('visiting the form and adding related identifier', async function(assert) {
+    await visit('/repositories/datacite.test/dois/new');
 
-  //   assert.equal(currentURL(), 'repositories/datacite.test/dois/new');
-  //   assert.dom('[data-test-related-identifier]').hasValue('10.70048/rph240519');
-  //   assert.dom('[data-test-related-identifier-type]').includesText('DOI');
-  //   assert.dom('[data-test-related-scheme-uri]').hasValue('https://schema.datacite.org/meta/kernel-4.3/doc/DataCite-MetadataKernel_v4.3.pdf');
-  //   assert.dom('[data-test-related-scheme-type]').hasValue('XML');
-  // });
+    assert.equal(currentURL(), '/repositories/datacite.test/dois/new');
+    await click('#add-related-identifier');
+    await fillIn('[data-test-related-identifier]','10.70048/rph240519');
+    await selectChoose('[data-test-related-relation-type]', 'References');
+    await selectChoose('[data-test-related-resource-type]', 'Text');
 
-  // test('visiting the Form and adding funding References', async function(assert) {
-  //   // when running on travis This Test can take too much time because it call the Crossref API and the selector might not find the element
-  //   await visit('repositories/datacite.test/dois/new');
-  //   await selectSearch('[data-test-funder-name]', 'Action for M.E.');
-  //   await selectChoose('[data-test-funder-name]', 'Action for M.E.');
-  //   await fillIn('[data-test-funder-identifier]', 'http://dx.doi.org/10.13039/501100001982');
-  //   await selectChoose('[data-test-funder-identifier-type]', 'Crossref Funder ID');
-  //     await fillIn('[data-test-award-number]', 'G2342342');
-  //     await fillIn('[data-test-award-uri]', 'https://schema.datacite.org/meta/kernel-4');
+    assert.dom('[data-test-related-identifier]').hasValue('10.70048/rph240519');
+    assert.dom('[data-test-related-identifier-type]').includesText('DOI');
+    assert.dom('[data-test-related-resource-type]').includesText('Text');
 
-  //     assert.dom('[data-test-funder-name]').hasValue('Action for M.E.');
-  //     assert.dom('[data-test-funder-identifier]').hasValue('http://dx.doi.org/10.13039/501100001982');
-  //     assert.dom('[data-test-funder-identifier-type]').includesText('Crossref Funder ID × The type of funder identifier.');
-  //     assert.dom('[data-test-award-number]').hasValue('G2342342');
-  //     assert.dom('[data-test-award-uri]').hasValue('https://schema.datacite.org/meta/kernel-4');
-  // });
+    await click('#toggle-related-identifiers');
+    assert.dom('#toggle-related-identifiers').includesText('Show 1 related identifier');
+  });
 
-  // test('visiting the Form and adding rights', async function(assert) {
-  //   // when running on travis This Test can take too much time because it call the List and the selector might not find the element
-  //   await visit('repositories/datacite.test/dois/new');
-  //   await selectSearch('[data-test-rights]', 'Attribution Ass');
-  //   await selectChoose('[data-test-rights]', 'Attribution Assurance License');
-  //   await fillIn('[data-test-rights-uri]', 'http://spdx.org/licenses/AA.json');
+  test('visiting the Form and adding funding references', async function(assert) {
+    await visit('/repositories/datacite.test/dois/new');
 
-  //   assert.dom('[data-test-rights]').includesText('Attribution Assurance License');
-  //   assert.dom('[data-test-rights-uri]').hasValue('http://spdx.org/licenses/AA.json');
-  // });
+    assert.equal(currentURL(), '/repositories/datacite.test/dois/new');
+    // await click('#add-funding-reference');
+    // await selectSearch('[data-test-funder-name]', 'Action');
+    // await selectChoose('[data-test-funder-name]', 'Action for M.E.');
+    // await fillIn('[data-test-funder-identifier]', 'http://dx.doi.org/10.13039/501100001982');
+    // await selectChoose('[data-test-funder-identifier-type]', 'Crossref Funder ID');
+    // await fillIn('[data-test-award-number]', 'G2342342');
+    // await fillIn('[data-test-award-uri]', 'https://schema.datacite.org/meta/kernel-4');
+
+    // assert.dom('[data-test-funder-name]').hasValue('Action for M.E.');
+    // assert.dom('[data-test-funder-identifier]').hasValue('http://dx.doi.org/10.13039/501100001982');
+    // assert.dom('[data-test-funder-identifier-type]').includesText('Crossref Funder ID × The type of funder identifier.');
+    // assert.dom('[data-test-award-number]').hasValue('G2342342');
+    // assert.dom('[data-test-award-uri]').hasValue('https://schema.datacite.org/meta/kernel-4');
+  });
+
+  test('visiting the form and adding rights', async function(assert) {
+    await visit('/repositories/datacite.test/dois/new');
+
+    assert.equal(currentURL(), '/repositories/datacite.test/dois/new');
+    await click('#add-rights');
+    await selectSearch('[data-test-rights]', 'Attribution Ass');
+    await selectChoose('[data-test-rights]', 'Attribution Assurance License');
+    await fillIn('[data-test-rights-uri]', 'http://spdx.org/licenses/AA.json');
+
+    assert.dom('[data-test-rights]').includesText('Attribution Assurance License');
+    assert.dom('[data-test-rights-uri]').hasValue('http://spdx.org/licenses/AA.json');
+
+    await click('#toggle-rights');
+    assert.dom('#toggle-rights').includesText('Show 1 right');
+  });
 });

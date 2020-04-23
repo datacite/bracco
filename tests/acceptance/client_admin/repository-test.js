@@ -3,8 +3,6 @@ import { setupApplicationTest } from 'ember-qunit';
 import {
   currentURL,
   visit,
-  click,
-  fillIn,
 } from '@ember/test-helpers';
 import ENV from 'bracco/config/environment';
 import { setupFactoryGuy } from 'ember-data-factory-guy';
@@ -26,25 +24,21 @@ module('Acceptance | client_admin | repository', function(hooks) {
   hooks.beforeEach(async function() {
     const { server } = this.polly;
 
+    server.any().on('request', (req) => {
+      if (req.url !== 'https://api.test.datacite.org/token') {
+        req.headers.authorization = 'Bearer ' + ENV.CLIENT_ADMIN_TOKEN;
+      }
+    });
+
     server.any().on('beforePersist', (req, recording) => {
       /* we only want to perform this task when recording */
       if (req.action !== 'record') {
         return;
       }
-      /* hide password and token in oauth password grant requests */
-      if (recording.request.url == 'https://api.test.datacite.org/token') {
-        recording.request.postData.text = 'INFORMATION_HIDDEN';
-        recording.response.content.text = 'INFORMATION_HIDDEN';
-      }
 
       /* filter out authorization tokens */
       recording.request.headers = recording.request.headers.filter(({ name }) => name !== 'authorization');
     });
-
-    await visit('/sign-in');
-    await fillIn('input#account-field', 'DATACITE.TEST');
-    await fillIn('input#password-field', ENV.CLIENT_ADMIN_PASSWORD);
-    await click('button[type=submit]');
 
     await authenticateSession({
       uid: 'datacite.test',
@@ -93,10 +87,10 @@ module('Acceptance | client_admin | repository', function(hooks) {
     assert.dom('li a.nav-link.active').hasText('Prefixes');
     assert.dom('div#search').exists();
 
-    // one prefix exists
-    assert.dom('[data-test-prefix]').includesText('10.80225');
+    // at least one prefix exists
+    assert.dom('[data-test-results]').includesText('Prefixes');
+    assert.dom('[data-test-prefix]').exists();
     assert.dom('div.panel.facets').exists();
-    assert.dom('[data-test-results]').doesNotExist();
 
     // client can't assign new prefix
     assert.dom('a#assign-prefix').doesNotExist();
