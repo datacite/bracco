@@ -42,6 +42,9 @@ export default Component.extend({
       if (typeof self.get('model').get('doi') == 'undefined') {
         self.generate();
       }
+    }).catch(function(reason) {
+      console.debug(reason);
+      return [];
     });
   },
   async generate() {

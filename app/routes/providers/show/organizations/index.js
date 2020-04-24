@@ -17,7 +17,12 @@ export default Route.extend({
 
     return hash({
       provider: this.modelFor('providers/show'),
-      organizations: this.store.query('provider', params),
+      organizations: this.store.query('provider', params).then(function(result) {
+        return result;
+      }).catch(function(reason) {
+        console.debug(reason);
+        return [];
+      }),
     });
   },
 

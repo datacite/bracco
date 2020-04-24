@@ -14,7 +14,12 @@ export default Route.extend({
       include: 'providers,clients',
     });
 
-    return this.store.query('prefix', params);
+    return this.store.query('prefix', params).then(function(result) {
+      return result;
+    }).catch(function(reason) {
+      console.debug(reason);
+      return [];
+    });
   },
 
   afterModel() {

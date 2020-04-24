@@ -26,7 +26,12 @@ export default Route.extend({
 
     return hash({
       provider: this.modelFor('providers/show'),
-      prefixes: this.store.query('provider-prefix', params),
+      prefixes: this.store.query('provider-prefix', params).then(function(result) {
+        return result;
+      }).catch(function(reason) {
+        console.debug(reason);
+        return [];
+      }),
     });
   },
 

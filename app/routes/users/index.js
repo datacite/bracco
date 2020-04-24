@@ -14,7 +14,12 @@ export default Route.extend({
       },
     });
 
-    return this.store.query('user', params);
+    return this.store.query('user', params).then(function(result) {
+      return result;
+    }).catch(function(reason) {
+      console.debug(reason);
+      return [];
+    });
   },
 
   queryParams: {

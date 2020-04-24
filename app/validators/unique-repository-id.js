@@ -15,6 +15,9 @@ const UniqueRepositoryId = BaseValidator.extend({
         } else {
           return true;
         }
+      }).catch(function(reason) {
+        console.debug(reason);
+        return 'An error happened while looking up the Repository ID ' + value + '.';
       });
     }
   },

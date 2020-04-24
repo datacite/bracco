@@ -105,7 +105,13 @@ export default Controller.extend({
       this.set('nonProfitStatuses', nonProfitStatusList);
     },
     searchConsortium(query) {
-      this.set('consortia', this.store.query('provider', { query, 'member-type': 'consortium', sort: 'name', 'page[size]': 100 }));
+      let self = this;
+      this.store.query('provider', { query, 'member-type': 'consortium', sort: 'name', 'page[size]': 100 }).then(function(consortia) {
+        self.set('consortia', consortia);
+      }).catch(function(reason) {
+        console.debug(reason);
+        self.set('consortia', []);
+      });
     },
     selectConsortium(consortium) {
       this.model.organization.set('consortium', consortium);
@@ -114,6 +120,9 @@ export default Controller.extend({
       let self = this;
       this.store.query('ror', { query }).then(function(organizations) {
         self.set('organizations', organizations);
+      }).catch(function(reason) {
+        console.debug(reason);
+        self.set('organizations', []);
       });
     },
     selectRor(ror) {

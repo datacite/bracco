@@ -19,7 +19,12 @@ export default Route.extend({
 
     return hash({
       repository: this.store.findRecord('repository', repositoryId),
-      'repository-prefixes': this.store.query('repository-prefix', params),
+      'repository-prefixes': this.store.query('repository-prefix', params).then(function(result) {
+        return result;
+      }).catch(function(reason) {
+        console.debug(reason);
+        return [];
+      }),
     });
   },
 

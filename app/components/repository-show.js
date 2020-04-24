@@ -176,7 +176,13 @@ export default Component.extend({
       });
     },
     searchRe3Data(query) {
-      this.set('repositories', this.store.query('re3data', { query, 'page[size]': 25 }));
+      let self = this;
+      this.store.query('re3data', { query, 'page[size]': 25 }).then(function(repositories) {
+        self.set('repositories', repositories);
+      }).catch(function(reason) {
+        console.debug(reason);
+        self.set('repositories', []);
+      });
     },
     selectRe3Data(re3data) {
       this.selectRe3Data(re3data);

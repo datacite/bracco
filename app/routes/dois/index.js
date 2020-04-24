@@ -14,7 +14,12 @@ export default Route.extend({
       include: 'client',
     });
 
-    return this.store.query('doi', params);
+    return this.store.query('doi', params).then(function(result) {
+      return result;
+    }).catch(function(reason) {
+      console.debug(reason);
+      return [];
+    });
   },
 
   afterModel() {

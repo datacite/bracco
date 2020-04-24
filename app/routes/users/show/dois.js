@@ -20,7 +20,10 @@ export default Route.extend({
       user,
       dois: this.store.query('doi', params).then(function(result) {
         return result;
-      }).catch(error => console.log(error)),
+      }).catch(function(reason) {
+        console.debug(reason);
+        return [];
+      }),
     });
   },
 

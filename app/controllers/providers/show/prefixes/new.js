@@ -7,7 +7,13 @@ export default Controller.extend({
   disabled: true,
 
   searchPrefix(query) {
-    this.set('prefixes', this.store.query('prefix', { query, state: 'unassigned', sort: 'name', 'page[size]': 10 }));
+    let self = this;
+    this.store.query('prefix', { query, state: 'unassigned', sort: 'name', 'page[size]': 10 }).then(function(prefixes) {
+      self.set('prefixes', prefixes);
+    }).catch(function(reason) {
+      console.debug(reason);
+      self.set('prefixes', []);
+    });
   },
 
   actions: {

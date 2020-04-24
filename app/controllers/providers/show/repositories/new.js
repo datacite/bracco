@@ -36,7 +36,13 @@ export default Controller.extend({
 
   actions: {
     searchRe3Data(query) {
-      this.set('repositories', this.store.query('re3data', { query, 'page[size]': 25 }));
+      let self = this;
+      this.store.query('re3data', { query, 'page[size]': 25 }).then(function(repositories) {
+        self.set('repositories', repositories);
+      }).catch(function(reason) {
+        console.debug(reason);
+        self.set('repositories', []);
+      });
     },
     selectRe3Data(re3data) {
       if (re3data) {

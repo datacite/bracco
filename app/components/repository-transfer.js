@@ -21,10 +21,21 @@ export default Component.extend({
   },
 
   searchRepository(query) {
+    let self = this;
     if (this.currentUser.get('isAdmin')) {
-      this.set('repositories', this.store.query('repository', { query, sort: 'name', 'page[size]': 100 }));
+      this.store.query('repository', { query, sort: 'name', 'page[size]': 100 }).then(function(repositories) {
+        self.set('repositories', repositories);
+      }).catch(function(reason) {
+        console.debug(reason);
+        self.set('repositories', []);
+      });
     } else if (this.currentUser.get('isProvider')) {
-      this.set('repositories', this.store.query('repository', { query, 'provider-id': this.currentUser.get('provider_id'), sort: 'name', 'page[size]': 100 }));
+      this.store.query('repository', { query, 'provider-id': this.currentUser.get('provider_id'), sort: 'name', 'page[size]': 100 }).then(function(repositories) {
+        self.set('repositories', repositories);
+      }).catch(function(reason) {
+        console.debug(reason);
+        self.set('repositories', []);
+      });
     }
   },
   selectRepository(repository) {

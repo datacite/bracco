@@ -26,7 +26,12 @@ export default Route.extend({
 
     return hash({
       provider: this.modelFor('providers/show'),
-      dois: this.store.query('doi', params),
+      dois: this.store.query('doi', params).then(function(result) {
+        return result;
+      }).catch(function(reason) {
+        console.debug(reason);
+        return [];
+      }),
     });
   },
 

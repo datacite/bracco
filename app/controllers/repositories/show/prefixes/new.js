@@ -7,7 +7,13 @@ export default Controller.extend({
   disabled: true,
 
   searchPrefix(query) {
-    this.set('provider-prefixes', this.store.query('provider-prefix', { query, 'provider-id': this.model.repository.get('provider.id'), state: 'without-repository', sort: 'name', 'page[size]': 10 }));
+    let self = this;
+    this.store.query('provider-prefix', { query, 'provider-id': this.model.repository.get('provider.id'), state: 'without-repository', sort: 'name', 'page[size]': 10 }).then(function(providerPrefixes) {
+      self.set('provider-prefixes', providerPrefixes);
+    }).catch(function(reason) {
+      console.debug(reason);
+      self.set('provider-prefixes', []);
+    });
   },
 
   actions: {

@@ -23,6 +23,9 @@ export default Controller.extend({
       let self = this;
       this.store.query('ror', { query }).then(function(organizations) {
         self.set('organizations', organizations);
+      }).catch(function(reason) {
+        console.debug(reason);
+        self.set('organizations', []);
       });
     },
     selectRor(ror) {
