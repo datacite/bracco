@@ -8,14 +8,15 @@ export default JSONSerializer.extend({
     let totalPages = Math.min(Math.ceil(total / 20), 500);
     let meta = { meta: { total, totalPages } };
     payload = payload.message.items.map(item => {
+      item.id  = '10.13039/' + item.id;
       return item;
     });
     let data = this._super(store, primaryModelClass, payload, id, requestType);
     return assign(data, meta);
   },
   normalizeSingleResponse(store, primaryModelClass, payload, id, requestType) {
-    // strip "https://" from id
-    payload.id  = payload.message.id;
+    // add DOI prefix
+    payload.id  = '10.13039/' + payload.message.id;
     return this._super(store, primaryModelClass, payload, id, requestType);
   },
   keyForAttribute(attr) {

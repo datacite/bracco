@@ -9,7 +9,7 @@ export default JSONAPIAdapter.extend(DataAdapterMixin, {
     this._super(...arguments);
 
     this.set('headers', {
-      'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+      'Accept': 'application/json',
     });
   },
 
