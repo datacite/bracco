@@ -82,6 +82,20 @@ module('Acceptance | organization_admin | provider', function(hooks) {
     assert.dom('input#member-id-field').exists();
   });
 
+  test('editing provider DataCite password form', async function(assert) {
+    await visit('/providers/datacite/change');
+
+    assert.equal(currentURL(), '/providers/datacite/change');
+    assert.dom('h2.work').hasText('DataCite');
+    assert.dom('div.tab-content').exists();
+
+    assert.dom('[data-test-password-suggestion]').exists();
+    assert.dom('input#password-input-field').exists();
+    assert.dom('input#confirm-password-input-field').exists();
+
+    assert.dom('button[type=submit]').includesText('Set Password');
+  });
+
   test('visiting provider DataCite repositories', async function(assert) {
     await visit('/providers/datacite/repositories');
 

@@ -331,6 +331,7 @@ module('Acceptance | client_admin | doi', function(hooks) {
 
     assert.dom('[data-test-related-identifier]').hasValue('10.70048/rph240519');
     assert.dom('[data-test-related-identifier-type]').includesText('DOI');
+    assert.dom('[data-test-related-relation-type]').includesText('References');
     assert.dom('[data-test-related-resource-type]').includesText('Text');
 
     await click('#toggle-related-identifiers');
@@ -339,24 +340,24 @@ module('Acceptance | client_admin | doi', function(hooks) {
     await click('button#doi-create');
   });
 
-  test('visiting the Form and adding funding references', async function(assert) {
-    await visit('/repositories/datacite.test/dois/new');
+  // test('visiting the Form and adding funding references', async function(assert) {
+  //   await visit('/repositories/datacite.test/dois/new');
 
-    assert.equal(currentURL(), '/repositories/datacite.test/dois/new');
-    // await click('#add-funding-reference');
-    // await selectSearch('[data-test-funder-name]', 'Action');
-    // await selectChoose('[data-test-funder-name]', 'Action for M.E.');
-    // await fillIn('[data-test-funder-identifier]', 'http://dx.doi.org/10.13039/501100001982');
-    // await selectChoose('[data-test-funder-identifier-type]', 'Crossref Funder ID');
-    // await fillIn('[data-test-award-number]', 'G2342342');
-    // await fillIn('[data-test-award-uri]', 'https://schema.datacite.org/meta/kernel-4');
+  //   assert.equal(currentURL(), '/repositories/datacite.test/dois/new');
+  //   await click('#add-funding-reference');
+  //   await selectSearch('[data-test-funder-name]', 'Action');
+  //   await selectChoose('[data-test-funder-name]', 'Action for M.E.');
+  //   await fillIn('[data-test-funder-identifier]', 'http://dx.doi.org/10.13039/501100001982');
+  //   await selectChoose('[data-test-funder-identifier-type]', 'Crossref Funder ID');
+  //   await fillIn('[data-test-award-number]', 'G2342342');
+  //   await fillIn('[data-test-award-uri]', 'https://schema.datacite.org/meta/kernel-4');
 
-    // assert.dom('[data-test-funder-name]').hasValue('Action for M.E.');
-    // assert.dom('[data-test-funder-identifier]').hasValue('http://dx.doi.org/10.13039/501100001982');
-    // assert.dom('[data-test-funder-identifier-type]').includesText('Crossref Funder ID × The type of funder identifier.');
-    // assert.dom('[data-test-award-number]').hasValue('G2342342');
-    // assert.dom('[data-test-award-uri]').hasValue('https://schema.datacite.org/meta/kernel-4');
-  });
+  //   assert.dom('[data-test-funder-name]').hasValue('Action for M.E.');
+  //   assert.dom('[data-test-funder-identifier]').hasValue('http://dx.doi.org/10.13039/501100001982');
+  //   assert.dom('[data-test-funder-identifier-type]').includesText('Crossref Funder ID × The type of funder identifier.');
+  //   assert.dom('[data-test-award-number]').hasValue('G2342342');
+  //   assert.dom('[data-test-award-uri]').hasValue('https://schema.datacite.org/meta/kernel-4');
+  // });
 
   test('visiting the form and adding rights', async function(assert) {
     await visit('/repositories/datacite.test/dois/new');
