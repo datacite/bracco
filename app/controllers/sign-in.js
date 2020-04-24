@@ -23,7 +23,9 @@ export default Controller.extend({
       this.session.authenticate('authenticator:oauth2', identification, password).catch((reason) => {
         this.set('errorMessage', reason.errors && reason.errors[0].title || reason);
       });
-      this.transitionToRoute('/');
+      if (!this.get('errorMessage')) {
+        this.transitionToRoute('/');
+      }
     },
   },
 });
