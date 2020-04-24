@@ -19,13 +19,13 @@ export default Controller.extend({
 
   actions: {
     authenticate() {
+      let self = this;
       let { identification, password } = this;
-      this.session.authenticate('authenticator:oauth2', identification, password).catch((reason) => {
+      this.session.authenticate('authenticator:oauth2', identification, password).then(() => {
+        self.transitionToRoute('/');
+      }).catch((reason) => {
         this.set('errorMessage', reason.errors && reason.errors[0].title || reason);
       });
-      if (!this.get('errorMessage')) {
-        this.transitionToRoute('/');
-      }
     },
   },
 });
