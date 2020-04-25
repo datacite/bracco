@@ -1,7 +1,7 @@
 import DS from 'ember-data';
 import Fragment from 'ember-data-model-fragments/fragment';
 import { validator, buildValidations } from 'ember-cp-validations';
-import { computed } from '@ember/object';
+// import { computed } from '@ember/object';
 
 const Validations = buildValidations({
   rightsUri: [
@@ -10,9 +10,9 @@ const Validations = buildValidations({
       protocols: [ 'http','https','ftp', 'info' ],
       message: 'Rights scheme URI has to be a valid URI',
       // disable url check for info URI
-      disabled: computed('fragment.rightsUri', function() {
-        return this.fragment.get('rightsUri').startsWith('info:');
-      }),
+      // disabled: computed('fragment.rightsUri', function() {
+      //   return this.fragment.get('rightsUri').startsWith('info:');
+      // }),
     }),
   ],
   // schemeUri: [
