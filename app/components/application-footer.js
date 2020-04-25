@@ -1,7 +1,6 @@
 import { htmlSafe } from '@ember/template';
 import Component from '@ember/component';
 import ENV from 'bracco/config/environment';
-import isElectron from 'is-electron';
 
 const data = {
   'about_links': [
@@ -126,7 +125,5 @@ export default Component.extend({
       this.set('type', null);
       this.set('title', htmlSafe(ENV.SITE_TITLE));
     }
-
-    this.set('isElectron', isElectron());
   },
 });

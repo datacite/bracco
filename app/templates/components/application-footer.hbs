@@ -1,40 +1,38 @@
-{{#if (not isElectron)}}
-  <footer class='row footer'>
-    <div class="container-fluid">
-      <div class='col-md-3 col-sm-4 footer-column'>
-        <h4>{{t "footer.about"}}</h4>
-        <ListLinks @links={{data.about_links}} />
-      </div>
-      <div class='col-md-3 col-sm-4 footer-column'>
-        <h4>Services</h4>
-        <ListLinks @links={{data.services_links}} />
-      </div>
-      <div class='col-md-3 col-sm-4 footer-column'>
-        <h4>Resources</h4>
-        <ListLinks @links={{data.resources_links}} />
-        <h4>Community</h4>
-        <ListLinks @links={{data.community_links}} />
-      </div>
-      <div class='col-md-3 footer-column'>
-        <h4 class="share">Contact us</h4>
-        <a href='mailto:support@datacite.org' class="share">
-          {{fa-icon "at"}}
-        </a>
-        <a href='https://blog.datacite.org' class="share">
-          {{fa-icon "rss"}}
-        </a>
-        <a href='https://twitter.com/datacite' class="share">
-          {{fa-icon "twitter"}}
-        </a>
-        <a href='https://github.com/datacite/datacite' class="share">
-          {{fa-icon "github"}}
-        </a>
-        <a href='https://www.linkedin.com/company/datacite' class="share">
-          {{fa-icon "linkedin"}}
-        </a>
-        <ListLinks @links={{data.contact_links}} @class="share" />
-        <FooterStatus />
-      </div>
+<footer class='row footer'>
+  <div class="container-fluid">
+    <div class='col-md-3 col-sm-4 footer-column'>
+      <h4>{{t "footer.about"}}</h4>
+      <ListLinks @links={{data.about_links}} />
     </div>
-  </footer>
-{{/if}}
+    <div class='col-md-3 col-sm-4 footer-column'>
+      <h4>Services</h4>
+      <ListLinks @links={{data.services_links}} />
+    </div>
+    <div class='col-md-3 col-sm-4 footer-column'>
+      <h4>Resources</h4>
+      <ListLinks @links={{data.resources_links}} />
+      <h4>Community</h4>
+      <ListLinks @links={{data.community_links}} />
+    </div>
+    <div class='col-md-3 footer-column'>
+      <h4 class="share">Contact us</h4>
+      <a href='mailto:support@datacite.org' class="share">
+        {{fa-icon "at"}}
+      </a>
+      <a href='https://blog.datacite.org' class="share">
+        {{fa-icon "rss"}}
+      </a>
+      <a href='https://twitter.com/datacite' class="share">
+        {{fa-icon "twitter"}}
+      </a>
+      <a href='https://github.com/datacite/datacite' class="share">
+        {{fa-icon "github"}}
+      </a>
+      <a href='https://www.linkedin.com/company/datacite' class="share">
+        {{fa-icon "linkedin"}}
+      </a>
+      <ListLinks @links={{data.contact_links}} @class="share" />
+      <FooterStatus />
+    </div>
+  </div>
+</footer>
