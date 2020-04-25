@@ -1,6 +1,6 @@
 {
   "name": "bracco",
-  "version": "3.7.6",
+  "version": "3.8.0",
   "private": true,
   "description": "Fabrica",
   "repository": {
@@ -19,38 +19,6 @@
     "start": "ember server",
     "test": "ember test"
   },
-  "config": {
-    "forge": {
-      "make_targets": {
-        "win32": [
-          "squirrel"
-        ],
-        "darwin": [
-          "zip"
-        ],
-        "linux": [
-          "deb",
-          "rpm"
-        ]
-      },
-      "electronPackagerConfig": {
-        "packageManager": "yarn"
-      },
-      "electronWinstallerConfig": {
-        "name": "bracco"
-      },
-      "electronInstallerDebian": {},
-      "electronInstallerRedhat": {},
-      "github_repository": {
-        "owner": "datacite",
-        "name": "bracco"
-      },
-      "windowsStoreConfig": {
-        "packageName": "",
-        "name": "bracco"
-      }
-    }
-  },
   "dependencies": {
     "@fragaria/address-formatter": "^2.2.1",
     "@sentry/browser": "^5.10.2",
@@ -65,7 +33,6 @@
     "fastboot-app-server": "^2.0.0",
     "fs-extra": "^8.1.0",
     "humanize-string": "^2.1.0",
-    "is-electron": "^2.2.0",
     "iso-639-1": "^2.1.0",
     "junk": "^3.1.0",
     "langs": "^2.0.0",
@@ -171,12 +138,16 @@
     "ember-radio-button": "^2.0.1",
     "ember-resolver": "^7.0.0",
     "ember-route-action-helper": "^2.0.7",
+    "ember-service-worker": "^0.8.4",
+    "ember-service-worker-asset-cache": "^0.6.4",
+    "ember-service-worker-index": "^0.7.0",
     "ember-simple-auth": "^1.9.2",
     "ember-source": "^3.12.1",
     "ember-test-selectors": "^3.0.0",
     "ember-tracker": "^1.0.0",
     "ember-truncate": "^2.0.1",
     "ember-truth-helpers": "^2.1.0",
+    "ember-web-app": "^4.0.0",
     "eslint": "^6.8.0",
     "eslint-plugin-ember": "^7.7.2",
     "eslint-plugin-node": "^11.0.0",
@@ -196,6 +167,6 @@
     "xml2js": "^0.4.23"
   },
   "engines": {
-    "node": "8.* || >= 10.*"
+    "node": ">= 10.*"
   }
 }
