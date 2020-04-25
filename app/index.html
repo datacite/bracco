@@ -8,10 +8,13 @@
 
     {{content-for "head"}}
 
+    <link rel="manifest" href="{{rootURL}}manifest.webmanifest">
+    <meta name="msapplication-config" content="{{rootURL}}browserconfig.xml">
+
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600" rel="stylesheet">
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet" type='text/css'>
-    <link href="//cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/themes/prism.min.css" rel="stylesheet" type='text/css'>
-    <link href="//cdnjs.cloudflare.com/ajax/libs/cc-icons/1.2.1/css/cc-icons.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet" type='text/css'>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/themes/prism.min.css" rel="stylesheet" type='text/css'>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/cc-icons/1.2.1/css/cc-icons.min.css" rel="stylesheet">
     <link href="{{content-for 'cdn-url'}}" rel='stylesheet' type='text/css'>
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
@@ -21,7 +24,7 @@
   <body>
     {{content-for "body"}}
 
-    <script src="//cdn.statuspage.io/se-v2.js"></script>
+    <script src="https://cdn.statuspage.io/se-v2.js"></script>
 
     <script src="{{rootURL}}assets/vendor.js"></script>
     <script src="{{rootURL}}assets/bracco.js"></script>
@@ -31,7 +34,7 @@
               p = document.createElement("script");
           p.type = "text/javascript";
           p.async = true;
-          p.src = '//api.usersnap.com/load/6d0c32c3-844a-47f4-b3c6-3a4cb9e9af7c.js';
+          p.src = 'https://api.usersnap.com/load/6d0c32c3-844a-47f4-b3c6-3a4cb9e9af7c.js';
           s.parentNode.insertBefore(p, s);
       })();
     </script>
