@@ -5,14 +5,22 @@ module.exports = function(/* environment, appConfig */) {
   // supported properties
 
   return {
-    name: "DataCite Fabrica",
-    short_name: "Fabrica",
-    description: "DataCite Fabrica is the one place for you to create and find, connect and track every single DataCite DOI from your organization. Fabrica complements the REST, MDS, EZ, and OAI-PMH APIs. Fabrica includes all the functionalities needed to manage repositories, prefixes, DOIs and their metadata.",
-    start_url: "/",
-    display: "standalone",
-    background_color: "#fff",
-    theme_color: "#fff",
+    name: 'DataCite Fabrica',
+    short_name: 'Fabrica',
+    description: 'DataCite Fabrica is the one place for you to create and find, connect and track every single DataCite DOI from your organization. Fabrica complements the REST, MDS, EZ, and OAI-PMH APIs. Fabrica includes all the functionalities needed to manage repositories, prefixes, DOIs and their metadata.',
+    start_url: '/',
+    display: 'standalone',
+    background_color: '#fff',
+    theme_color: '#fff',
     icons: [
+      {
+        src: '/assets/images/bracco-512.png',
+        sizes: '512x512',
+      },
+      {
+        src: '/assets/images/bracco-192.png',
+        sizes: '192x192',
+      },
     ],
     ms: {
       tileColor: '#fff',
