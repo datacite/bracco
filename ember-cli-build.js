@@ -37,6 +37,9 @@ module.exports = function(defaults) {
     'ember-power-select': {
       theme: 'bootstrap',
     },
+    'ember-math-helpers': {
+      only: [ 'add', 'sub' ],
+    },
   });
 
   return app.toTree();
