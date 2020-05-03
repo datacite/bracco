@@ -8,6 +8,9 @@ const UrlFormat = BaseValidator.extend({
     } else if (!value) {
       let message = 'This field can\'t be blank.';
       return message;
+    // don't validate info URIs (not handled by validator)
+    } else if (value.startsWith('info:')) {
+      return true;
     } else {
       // default options for this validator, require_protocol set to true
       let defaultOptions = { protocols: [ 'http','https','ftp' ], require_tld: true, require_protocol: true, require_host: true, require_valid_protocol: true, allow_underscores: false, host_whitelist: false, host_blacklist: false, allow_trailing_dot: false, allow_protocol_relative_urls: false, disallow_auth: false };
