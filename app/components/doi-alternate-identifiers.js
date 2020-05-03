@@ -6,14 +6,14 @@ export default Component.extend({
   didReceiveAttrs() {
     this._super(...arguments);
 
-    if (!this.model.get('identifiers')) {
-      this.model.set('identifiers', []);
+    if (!this.model.get('alternateIdentifiers')) {
+      this.model.set('alternateIdentifiers', []);
     }
   },
 
   actions: {
-    addIdentifier() {
-      this.model.get('identifiers').createFragment();
+    addAlternateIdentifier() {
+      this.model.get('alternateIdentifiers').createFragment();
       this.set('showAlternateIdentifiers', true);
     },
     toggleAlternateIdentifiers() {

@@ -4,8 +4,8 @@ FactoryGuy.define('doi', {
   default: {
     doi: '10.80225/rph240519',
     url: 'https://datacite.org',
-    identifiers: [ {
-      'doi': 'https://handle.test.datacite.org/10.80225/rph240519',
+    alternateIdentifiers: [ {
+      'doi': 'https://handle.test.datacite.org/10.80225/rph24',
     } ],
     creators: FactoryGuy.hasMany('creator'),
     contributors: FactoryGuy.hasMany('contributor'),
@@ -70,7 +70,7 @@ FactoryGuy.define('title', {
   },
 });
 
-FactoryGuy.define('identifier', {
+FactoryGuy.define('alternateIdentifier', {
   default: {
     identifier: 'https://handle.test.datacite.org/10.70048/rph240519',
     identifierType: 'DOI',

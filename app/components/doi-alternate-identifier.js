@@ -50,7 +50,7 @@ export default Component.extend({
       this.set('alternateIdentifierTypes', alternateIdentifierTypeList);
     },
     deleteIdentifier() {
-      this.model.get('identifiers').removeObject(this.fragment);
+      this.model.get('alternateIdentifiers').removeObject(this.fragment);
     },
   },
 });
