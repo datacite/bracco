@@ -72,8 +72,8 @@ FactoryGuy.define('title', {
 
 FactoryGuy.define('alternateIdentifier', {
   default: {
-    identifier: 'https://handle.test.datacite.org/10.70048/rph240519',
-    identifierType: 'DOI',
+    alternateIdentifier: 'https://handle.test.datacite.org/10.70048/rph240519',
+    alternateIdentifierType: 'DOI',
   },
 });
 

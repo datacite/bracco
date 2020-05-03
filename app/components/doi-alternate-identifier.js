@@ -34,19 +34,19 @@ export default Component.extend({
         if (!this.selected.includes(select.searchText)) {
           this.alternateIdentifierTypes.push(select.searchText);
           select.actions.choose(select.searchText);
-          this.fragment.set('identifierType', select.searchText);
+          this.fragment.set('alternativeIdentifierType', select.searchText);
           this.set('alternateIdentifierTypes', alternateIdentifierTypeList);
         }
       }
     },
-    updateIdentifier(value) {
-      this.fragment.set('identifier', value);
+    updateAlternateIdentifier(value) {
+      this.fragment.set('alternateIdentifier', value);
     },
-    updateIdentifierType(value) {
-      this.fragment.set('identifierType', value);
+    updateAlternateIdentifierType(value) {
+      this.fragment.set('alternativeIdentifierType', value);
     },
     selectAlternateIdentifierType(alternateIdentifierType) {
-      this.fragment.set('identifierType', alternateIdentifierType);
+      this.fragment.set('alternativeIdentifierType', alternateIdentifierType);
       this.set('alternateIdentifierTypes', alternateIdentifierTypeList);
     },
     deleteIdentifier() {
