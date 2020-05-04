@@ -9,8 +9,8 @@ const Validations = buildValidations({
     validator('presence', {
       presence: true,
       message: 'Alternate Identifier must include Identifier Type',
-      disabled: computed('model.identifier', function() {
-        return isBlank(this.model.get('identifier'));
+      disabled: computed('model.alternateIdentifier', function() {
+        return isBlank(this.model.get('alternateIdentifier'));
       }),
     }),
   ],

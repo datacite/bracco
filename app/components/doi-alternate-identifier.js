@@ -49,7 +49,7 @@ export default Component.extend({
       this.fragment.set('alternativeIdentifierType', alternateIdentifierType);
       this.set('alternateIdentifierTypes', alternateIdentifierTypeList);
     },
-    deleteIdentifier() {
+    deleteAlternateIdentifier() {
       this.model.get('alternateIdentifiers').removeObject(this.fragment);
     },
   },
