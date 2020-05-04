@@ -34,7 +34,7 @@ export default Component.extend({
         if (!this.selected.includes(select.searchText)) {
           this.alternateIdentifierTypes.push(select.searchText);
           select.actions.choose(select.searchText);
-          this.fragment.set('alternativeIdentifierType', select.searchText);
+          this.fragment.set('alternateIdentifierType', select.searchText);
           this.set('alternateIdentifierTypes', alternateIdentifierTypeList);
         }
       }
@@ -42,11 +42,8 @@ export default Component.extend({
     updateAlternateIdentifier(value) {
       this.fragment.set('alternateIdentifier', value);
     },
-    updateAlternateIdentifierType(value) {
-      this.fragment.set('alternativeIdentifierType', value);
-    },
     selectAlternateIdentifierType(alternateIdentifierType) {
-      this.fragment.set('alternativeIdentifierType', alternateIdentifierType);
+      this.fragment.set('alternateIdentifierType', alternateIdentifierType);
       this.set('alternateIdentifierTypes', alternateIdentifierTypeList);
     },
     deleteAlternateIdentifier() {
