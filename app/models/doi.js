@@ -131,7 +131,7 @@ export default DS.Model.extend(Validations, {
   publicationYear: DS.attr('number'),
   subjects: fragmentArray('subject', { defaultValue: [] }),
   contributors: fragmentArray('contributor', { defaultValue: [] }),
-  identifiers: fragmentArray('identifier', { defaultValue: [] }),
+  alternateIdentifiers: fragmentArray('alternateIdentifier', { defaultValue: [] }),
   dates: fragmentArray('date', { defaultValue: [] }),
   language: DS.attr('string'),
   types: DS.attr(),

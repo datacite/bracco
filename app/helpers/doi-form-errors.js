@@ -27,9 +27,9 @@ export function doiFormErrors([ model ]) {
         errorAttributes = errorAttributes.concat(contributor.validations.errors.mapBy('attribute'));
       });
     }
-    if (model.identifiers) {
-      model.identifiers.forEach((identifier) => {
-        errorAttributes = errorAttributes.concat(identifier.validations.errors.mapBy('attribute'));
+    if (model.alternateIdentifiers) {
+      model.alternateIdentifiers.forEach((alternateIdentifier) => {
+        errorAttributes = errorAttributes.concat(alternateIdentifier.validations.errors.mapBy('attribute'));
       });
     }
     if (model.subjects) {

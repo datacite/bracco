@@ -1,7 +1,7 @@
 <div class="input-group">
-  <input type="text" class="form-control alternate-identifier-field" value={{fragment.identifier}} placeholder="Alternate Identifier" oninput={{action "updateIdentifier" value="target.value"}} data-test-alternate-identifier/>
+  <input type="text" class="form-control alternate-identifier-field" value={{fragment.alternateIdentifier}} placeholder="Alternate Identifier" oninput={{action "updateAlternateIdentifier" value="target.value"}} data-test-alternate-identifier/>
   <span class="input-group-btn">
-    <BsButton @outline={{true}} @onClick={{action "deleteIdentifier" index}}>{{fa-icon "trash"}}</BsButton>
+    <BsButton @outline={{true}} @onClick={{action "deleteAlternateIdentifier" index}}>{{fa-icon "trash"}}</BsButton>
   </span>
 </div>
 
@@ -11,11 +11,11 @@
 <div class="power-select-fragment" disabled={{this.controlledIdentifierType}} data-test-alternate-identifier-type>
   {{#form.element
     controlType="power-select"
-    value=fragment.identifierType
+    value=fragment.alternateIdentifierType
     helpText="The type of Alternate Identifier."
     options=alternateIdentifierTypeList
     disabled=controlledIdentifierType
-    destination=fragment.identifierType as |el|
+    destination=fragment.alternateIdentifierType as |el|
   }}
   {{el.control
     onChange=(action "selectAlternateIdentifierType")
