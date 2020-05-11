@@ -64,7 +64,7 @@ export default Component.extend({
 
         this.fragment.set('givenName', options.givenName);
         this.fragment.set('familyName', options.familyName);
-  
+
         if (options.givenName && options.familyName) {
           this.fragment.set('name', options.familyName + ', ' + options.givenName);
         } else if (options.givenName) {
