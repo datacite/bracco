@@ -7,7 +7,6 @@ import { validator, buildValidations } from 'ember-cp-validations';
 const Validations = buildValidations({
   symbol: [
     validator('presence', true),
-    validator('repository-id', true),
     validator('unique-repository-id', {
       presence: true,
       disabled: computed('model', function() {
