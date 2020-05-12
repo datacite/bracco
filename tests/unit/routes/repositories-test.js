@@ -49,6 +49,11 @@ module('Unit | Route | repositories', function(hooks) {
     assert.ok(route);
   });
 
+  test('transfer exists', function(assert) {
+    let route = this.owner.lookup('route:repositories/show/transfer-repository');
+    assert.ok(route);
+  });
+
   test('prefixes/show exists', function(assert) {
     let route = this.owner.lookup('route:repositories/show/prefixes/show');
     assert.ok(route);
