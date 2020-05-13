@@ -16,7 +16,7 @@ export default Component.extend({
 
   didReceiveAttrs() {
     this._super(...arguments);
-
+    this.model.set('mode', 'transfer');
     this.searchProvider(null);
   },
 

@@ -137,6 +137,7 @@ export default DS.Model.extend(Validations, {
   updated: DS.attr('date'),
 
   targetId: DS.attr(),
+  mode: DS.attr('string'),
 
   domainList: computed('domains', function() {
     return this.domains.split(',').map(function(item) {
