@@ -51,10 +51,10 @@ export default Component.extend({
         timeout: 5000,
         sticky: true,
       });
-      this.router.transitionTo('providers.show', this.model);
+      this.router.transitionTo('repositories.show', this.model);
     },
     cancel() {
-      this.router.transitionTo('providers.show.repositories', this.model);
+      this.router.transitionTo('repositories.show', this.model);
     },
   },
 });
