@@ -132,22 +132,22 @@ module('Acceptance | staff_admin | doi', function(hooks) {
   //   assert.dom('button#doi-create').exists();
   // });
 
-  test('upload DOI form for repository DataCite Test', async function(assert) {
-    assert.expect(7);
+  // test('upload DOI form for repository DataCite Test', async function(assert) {
+  //   assert.expect(7);
 
-    await visit('/repositories/datacite.test/dois/upload');
+  //   await visit('/repositories/datacite.test/dois/upload');
 
-    assert.equal(currentURL(), '/repositories/datacite.test/dois/upload');
-    assert.dom('input#suffix-field').exists();
-    assert.dom('input#draft-radio').exists();
+  //   assert.equal(currentURL(), '/repositories/datacite.test/dois/upload');
+  //   assert.dom('input#suffix-field').exists();
+  //   assert.dom('input#draft-radio').exists();
 
-    assert.dom('input#url-field').exists();
+  //   assert.dom('input#url-field').exists();
 
-    assert.dom('#upload-file').exists();
-    assert.dom('textarea#metadata-field').exists();
+  //   assert.dom('#upload-file').exists();
+  //   assert.dom('textarea#metadata-field').exists();
 
-    assert.dom('button#doi-create').exists();
-  });
+  //   assert.dom('button#doi-create').exists();
+  // });
 
   // test('edit DOI form for repository DataCite Test', async function(assert) {
   //   assert.expect(25);
