@@ -5,6 +5,7 @@ import { inject as service } from '@ember/service';
 
 export default Route.extend({
   can: service(),
+  flashMessages: service(),
 
   model() {
     let repository = this.modelFor('repositories/show');
@@ -16,9 +17,9 @@ export default Route.extend({
     });
   },
 
-  // afterModel(model) {
-  //   if (this.get('can').cannot('create doi', model)) {
-  //     return this.transitionTo('index');
-  //   }
-  // }
+  afterModel() {
+    this.flashMessages.warning('This form is in BETA. Send feedback to support@datacite.org.', {
+      sticky: true,
+    });
+  },
 });
