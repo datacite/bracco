@@ -46,7 +46,6 @@ module.exports = function(environment) {
     },
     featureFlags: {
       'show-researchers': false,
-      'optional-fields': false,
     },
     fastboot: {
       hostWhitelist: [ 'doi.datacite.org', 'doi.test.datacite.org', /^10\.0\.\d{1,3}\.\d{1,3}$/, /^localhost:\d+$/ ],
@@ -123,7 +122,6 @@ module.exports = function(environment) {
     ENV.APP.rootElement = '#ember-testing';
 
     ENV.featureFlags['show-researchers'] = true;
-    ENV.featureFlags['optional-fields'] = true;
 
     ENV.APP.autoboot = false;
 

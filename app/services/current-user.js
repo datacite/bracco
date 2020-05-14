@@ -77,7 +77,6 @@ export default Service.extend({
 
         this.features.setup({
           'show-researchers': true,
-          'optional-fields': true,
         });
       } else if (payload.role_id === 'consortium_admin') {
         this.set('isConsortium', true);
@@ -110,13 +109,12 @@ export default Service.extend({
       if (payload.beta_tester) {
         this.features.setup({
           'show-researchers': true,
-          'optional-fields': true,
         });
       }
 
-      if (![ 'user', 'temporary' ].includes(payload.role_id)) {
-        this.flashMessages.info('Welcome ' + this.name + ' to the Fabrica administration area.');
-      }
+      // if (![ 'user', 'temporary' ].includes(payload.role_id)) {
+      //   this.flashMessages.info('Welcome ' + this.name + ' to the Fabrica administration area.');
+      // }
     }
   },
 });
