@@ -9,4 +9,9 @@ module('Unit | Controller | repositories', function(hooks) {
     let controller = this.owner.lookup('controller:repositories');
     assert.ok(controller);
   });
+
+  test('should list organisation type list', function(assert) {
+    let controller = this.owner.lookup('controller:repositories.show.transfer-repository');
+    assert.ok(controller);
+  });
 });
