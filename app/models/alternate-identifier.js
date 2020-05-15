@@ -5,18 +5,18 @@ import { computed } from '@ember/object';
 import { isBlank } from '@ember/utils';
 
 const Validations = buildValidations({
-  identifierType: [
+  alternateIdentifierType: [
     validator('presence', {
       presence: true,
       message: 'Alternate Identifier must include Identifier Type',
-      disabled: computed('model.identifier', function() {
-        return isBlank(this.model.get('identifier'));
+      disabled: computed('model.alternateIdentifier', function() {
+        return isBlank(this.model.get('alternateIdentifier'));
       }),
     }),
   ],
 });
 
 export default Fragment.extend(Validations, {
-  identifier: DS.attr('string', { defaultValue: null }),
-  identifierType: DS.attr('string', { defaultValue: null }),
+  alternateIdentifier: DS.attr('string', { defaultValue: null }),
+  alternateIdentifierType: DS.attr('string', { defaultValue: null }),
 });

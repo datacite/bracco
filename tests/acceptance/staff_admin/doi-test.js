@@ -96,58 +96,58 @@ module('Acceptance | staff_admin | doi', function(hooks) {
   //   assert.dom('h2.work').hasText('10.14454/0sd6-bh17');
   // });
 
-  test('new DOI form for repository Test', async function(assert) {
-    assert.expect(26);
+  // test('new DOI form for repository Test', async function(assert) {
+  //   assert.expect(26);
 
-    await visit('/repositories/datacite.test/dois/new');
+  //   await visit('/repositories/datacite.test/dois/new');
 
-    assert.equal(currentURL(), '/repositories/datacite.test/dois/new');
-    assert.dom('input#suffix-field').exists();
-    assert.dom('input#draft-radio').exists();
+  //   assert.equal(currentURL(), '/repositories/datacite.test/dois/new');
+  //   assert.dom('input#suffix-field').exists();
+  //   assert.dom('input#draft-radio').exists();
 
-    assert.dom('input#url-field').exists();
+  //   assert.dom('input#url-field').exists();
 
-    assert.dom('[data-test-name-identifier]').exists();
-    assert.dom('input.select-person').exists();
-    assert.dom('[data-test-given-name]').exists();
-    assert.dom('[data-test-family-name]').exists();
-    assert.dom('[data-test-name]').exists();
-    assert.dom('[data-test-geolocations]').exists();
-    assert.dom('[data-test-title]').exists();
-    assert.dom('input#publisher-field').exists();
-    assert.dom('input#publication-year-field').exists();
-    assert.dom('input#resource-type-field').exists();
-    assert.dom('[data-test-descriptions]').exists();
-    assert.dom('[data-test-subjects]').exists();
-    assert.dom('#doi-language').exists();
-    assert.dom('[data-test-contributors]').exists();
-    assert.dom('[data-test-alternate-identifiers]').exists();
-    assert.dom('[data-test-related-identifiers]').exists();
-    assert.dom('[data-test-version]').exists();
-    assert.dom('[data-test-formats]').exists();
-    assert.dom('[data-test-sizes]').exists();
-    assert.dom('[data-test-funding-references]').exists();
-    assert.dom('[data-test-rights-list]').exists();
+  //   assert.dom('[data-test-name-identifier]').exists();
+  //   assert.dom('input.select-person').exists();
+  //   assert.dom('[data-test-given-name]').exists();
+  //   assert.dom('[data-test-family-name]').exists();
+  //   assert.dom('[data-test-name]').exists();
+  //   assert.dom('[data-test-geolocations]').exists();
+  //   assert.dom('[data-test-title]').exists();
+  //   assert.dom('input#publisher-field').exists();
+  //   assert.dom('input#publication-year-field').exists();
+  //   assert.dom('input#resource-type-field').exists();
+  //   assert.dom('[data-test-descriptions]').exists();
+  //   assert.dom('[data-test-subjects]').exists();
+  //   assert.dom('#doi-language').exists();
+  //   assert.dom('[data-test-contributors]').exists();
+  //   assert.dom('[data-test-alternate-identifiers]').exists();
+  //   assert.dom('[data-test-related-identifiers]').exists();
+  //   assert.dom('[data-test-version]').exists();
+  //   assert.dom('[data-test-formats]').exists();
+  //   assert.dom('[data-test-sizes]').exists();
+  //   assert.dom('[data-test-funding-references]').exists();
+  //   assert.dom('[data-test-rights-list]').exists();
 
-    assert.dom('button#doi-create').exists();
-  });
+  //   assert.dom('button#doi-create').exists();
+  // });
 
-  test('upload DOI form for repository DataCite Test', async function(assert) {
-    assert.expect(7);
+  // test('upload DOI form for repository DataCite Test', async function(assert) {
+  //   assert.expect(7);
 
-    await visit('/repositories/datacite.test/dois/upload');
+  //   await visit('/repositories/datacite.test/dois/upload');
 
-    assert.equal(currentURL(), '/repositories/datacite.test/dois/upload');
-    assert.dom('input#suffix-field').exists();
-    assert.dom('input#draft-radio').exists();
+  //   assert.equal(currentURL(), '/repositories/datacite.test/dois/upload');
+  //   assert.dom('input#suffix-field').exists();
+  //   assert.dom('input#draft-radio').exists();
 
-    assert.dom('input#url-field').exists();
+  //   assert.dom('input#url-field').exists();
 
-    assert.dom('#upload-file').exists();
-    assert.dom('textarea#metadata-field').exists();
+  //   assert.dom('#upload-file').exists();
+  //   assert.dom('textarea#metadata-field').exists();
 
-    assert.dom('button#doi-create').exists();
-  });
+  //   assert.dom('button#doi-create').exists();
+  // });
 
   // test('edit DOI form for repository DataCite Test', async function(assert) {
   //   assert.expect(25);

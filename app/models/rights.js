@@ -7,7 +7,7 @@ const Validations = buildValidations({
   rightsUri: [
     validator('url-format', {
       allowBlank: true,
-      protocols: [ 'http','https','ftp', 'info' ],
+      protocols: [ 'http','https','ftp' ],
       message: 'Rights scheme URI has to be a valid URI',
       // disable url check for info URI
       // disabled: computed('fragment.rightsUri', function() {

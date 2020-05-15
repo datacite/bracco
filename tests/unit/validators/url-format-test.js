@@ -64,18 +64,14 @@ module('Unit | Validator | url-format', function(hooks) {
     assert.equal(message, 'Please enter a valid URL.');
   });
 
-  // test('info uri', function(assert) {
-  //   assert.expect(1);
+  test('info uri', function(assert) {
+    assert.expect(1);
 
-  //   options = {
-  //     require_host: false,
-  //     protocols: [ 'http','https','info' ],
-  //   };
-  //   options = validator.buildOptions(options, {}).toObject();
+    builtOptions = validator.buildOptions({}).toObject();
 
-  //   message = validator.validate('info:eu-repo/semantics/openAccess', options);
-  //   assert.equal(message, true);
-  // });
+    message = validator.validate('info:eu-repo/semantics/openAccess', builtOptions);
+    assert.equal(message, true);
+  });
 
   test('allow blank', function(assert) {
     assert.expect(2);

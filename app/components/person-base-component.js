@@ -58,27 +58,35 @@ export default Component.extend({
       this.set('isReadonlyNameParts', false);
       this.set('isReadonlyNameType', false);
     }
+    switch (true) {
+      case this.fragment.get('nameType') === 'Personal':
+        this.set('isReadonly', true);
 
-    if (this.fragment.get('nameType') === 'Personal') {
-      this.set('isReadonly', true);
+        this.fragment.set('givenName', options.givenName);
+        this.fragment.set('familyName', options.familyName);
 
-      this.fragment.set('givenName', options.givenName);
-      this.fragment.set('familyName', options.familyName);
-
-      if (options.givenName && options.familyName) {
-        this.fragment.set('name', options.familyName + ', ' + options.givenName);
-      } else if (options.givenName) {
-        this.fragment.set('name', options.givenName);
-      } else if (options.familyName) {
-        this.fragment.set('name', options.familyName);
-      } else {
-        this.fragment.set('name', '');
-      }
-    } else {
-      this.fragment.set('givenName', null);
-      this.fragment.set('familyName', null);
-      this.fragment.set('name', options.name);
-      this.set('isReadonly', false);
+        if (options.givenName && options.familyName) {
+          this.fragment.set('name', options.familyName + ', ' + options.givenName);
+        } else if (options.givenName) {
+          this.fragment.set('name', options.givenName);
+        } else if (options.familyName) {
+          this.fragment.set('name', options.familyName);
+        } else {
+          this.fragment.set('name', '');
+        }
+        return true;
+      case this.fragment.get('nameType') === 'Organizational':
+        this.fragment.set('givenName', null);
+        this.fragment.set('familyName', null);
+        this.fragment.set('name', options.name);
+        this.set('isReadonly', false);
+        return true;
+      default:
+        this.fragment.set('givenName', options.givenName);
+        this.fragment.set('familyName', options.familyName);
+        this.fragment.set('name', options.name);
+        this.set('isReadonly', false);
+        return true;
     }
   },
   selectNameType(value) {

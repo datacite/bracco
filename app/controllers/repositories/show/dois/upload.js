@@ -31,7 +31,7 @@ export default Controller.extend({
       doi.set('subjects', null);
       doi.set('language', null);
       doi.set('contributors', null);
-      doi.set('identifiers', null);
+      doi.set('alternateIdentifiers', null);
       doi.set('relatedIdentifiers', null);
       doi.set('fundingReferences', null);
       doi.set('geoLocations', null);
