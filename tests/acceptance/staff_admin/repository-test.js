@@ -8,7 +8,7 @@ import {
   // waitUntil,
   // pauseTest,
 } from '@ember/test-helpers';
-// import { selectChoose, selectSearch } from 'ember-power-select/test-support';
+import { selectChoose, selectSearch } from 'ember-power-select/test-support/helpers';
 import ENV from 'bracco/config/environment';
 import { authenticateSession } from 'ember-simple-auth/test-support';
 import { setupQunit as setupPolly } from '@pollyjs/core';
@@ -234,6 +234,23 @@ module('Acceptance | staff_admin | repository', function(hooks) {
     assert.dom('input#confirm-password-input-field').exists();
 
     assert.dom('button[type=submit]').includesText('Set Password');
+  });
+
+  test('transfer repository DataCite Test ', async function(assert) {
+    await visit('/repositories/datacite.test/change');
+
+    await visit('/repositories/datacite.test/transfer-repository');
+    assert.dom('*').containsText('DataCite Consortium');
+
+    assert.equal(currentURL(), '/repositories/datacite.test/transfer-repository');
+    assert.dom('h3.edit').hasText('Transfer Repository');
+
+    await selectSearch('[data-test-transfer-select]', 'American University');
+    await selectChoose('[data-test-transfer-select]', 'American University');
+    assert.dom('[data-test-transfer-select]').includesText('American University');
+
+    await click('[data-test-transfer-button]');
+    assert.dom('*').containsText('American University');
   });
 
   test('editing repository DataCite Test delete form', async function(assert) {

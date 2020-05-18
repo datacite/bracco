@@ -36,6 +36,7 @@ Router.map(function() {
       this.route('change');
       this.route('delete');
       this.route('info');
+      this.route('transfer-repository');
       this.route('dois', function() {
         this.route('new');
         this.route('upload');

@@ -11,6 +11,10 @@
               {{#if (can "delete repository" model)}}
                 <LinkTo @route="repositories.show.delete" @model={{model.id}} class="btn btn-warning" @id="delete-repository">{{fa-icon "trash"}} Delete Repository</LinkTo>
               {{/if}}
+
+              {{#if (can "transfer repository" model)}}
+                <LinkTo @route="repositories.show.transfer-repository" @model={{model.id}} class="btn btn-warning" @id="transfer-repository">{{fa-icon "arrow-circle-o-right"}}Transfer{{if media.isXl ' Repository'}}</LinkTo>
+              {{/if}}
             </div>
           </div>
         </div>

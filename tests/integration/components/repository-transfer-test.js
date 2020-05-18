@@ -13,7 +13,7 @@ module('Integration | Component | repository transfer', function(hooks) {
 
     await render(hbs`{{repository-transfer model=model}}`);
 
-    assert.dom('*').hasText('Transfer DOIs Repository Transfer all DOIs to this repository. It can take up to one hour for the transfer to complete. Transfer DOIs Cancel');
+    assert.dom('*').hasText('Transfer Repository Member/Consortium Type to search... Transfer this repository to another member/consortium. It can take up to one hour for the transfer to complete. Transfer Repository Cancel');
 
     // Template block usage:
     await render(hbs`
@@ -22,6 +22,6 @@ module('Integration | Component | repository transfer', function(hooks) {
       {{/repository-transfer}}
     `);
 
-    assert.dom('*').hasText('Transfer DOIs Repository Transfer all DOIs to this repository. It can take up to one hour for the transfer to complete. Transfer DOIs Cancel');
+    assert.dom('*').hasText('Transfer Repository Member/Consortium Type to search... Transfer this repository to another member/consortium. It can take up to one hour for the transfer to complete. Transfer Repository Cancel');
   });
 });
