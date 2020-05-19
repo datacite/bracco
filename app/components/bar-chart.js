@@ -25,6 +25,10 @@ export default Component.extend({
         if (currentYear) {
           return currentYear.count;
         } else {
+          let lastYear = A(this.data).findBy('id', (new Date().getFullYear() - 1).toString());
+          if (lastYear) {
+            return lastYear.count;
+          }
           return 0;
         }
       }
