@@ -11,45 +11,45 @@ export default Component.extend({
   classNames: [ 'row' ],
   provider: null,
   repository: null,
-  repositories: [],
+  providers: [],
   isDisabled: true,
+
+  remainingProviders(providers) {
+    return providers.filter(function(item) {
+      console.log(item);
+      return [ 'direct_member', 'consortium_organization' ].includes(item.memberType);
+    });
+  },
 
   didReceiveAttrs() {
     this._super(...arguments);
-
-    this.searchRepository(null);
+    this.model.set('mode', 'transfer');
+    this.searchProvider(null);
   },
 
-  searchRepository(query) {
+  searchProvider(query) {
     let self = this;
     if (this.currentUser.get('isAdmin')) {
-      this.store.query('repository', { query, sort: 'name', 'page[size]': 100 }).then(function(repositories) {
-        self.set('repositories', repositories);
+      this.store.query('provider', { query, sort: 'name', 'page[size]': 100 }).then(function(providers) {
+        self.set('providers', self.remainingProviders(providers));
       }).catch(function(reason) {
         console.debug(reason);
-        self.set('repositories', []);
-      });
-    } else if (this.currentUser.get('isProvider')) {
-      this.store.query('repository', { query, 'provider-id': this.currentUser.get('provider_id'), sort: 'name', 'page[size]': 100 }).then(function(repositories) {
-        self.set('repositories', repositories);
-      }).catch(function(reason) {
-        console.debug(reason);
-        self.set('repositories', []);
+        self.set('providers', []);
       });
     }
   },
-  selectRepository(repository) {
-    this.set('repository', repository);
-    this.set('isDisabled', (repository === null) || (repository.id === this.get('model.id')));
-    this.model.set('targetId', repository.id);
+  selectProvider(provider) {
+    this.set('provider', provider);
+    this.set('isDisabled', false);
+    this.model.set('targetId', provider.uid);
   },
 
   actions: {
-    searchRepository(query) {
-      this.searchRepository(query);
+    searchProvider(query) {
+      this.searchProvider(query);
     },
-    selectRepository(repository) {
-      this.selectRepository(repository);
+    selectProvider(provider) {
+      this.selectProvider(provider);
     },
     submit() {
       this.model.save();
@@ -61,7 +61,7 @@ export default Component.extend({
       this.router.transitionTo('repositories.show', this.model);
     },
     cancel() {
-      this.router.transitionTo('repositories.show.dois', this.model);
+      this.router.transitionTo('repositories.show', this.model);
     },
   },
 });
