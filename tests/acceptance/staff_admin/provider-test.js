@@ -25,7 +25,7 @@ module('Acceptance | staff_admin | provider', function(hooks) {
     const { server } = this.polly;
 
     server.any().on('request', (req) => {
-      if (req.url !== 'https://api.test.datacite.org/token') {
+      if (req.url !== 'https://api.stage.datacite.org/token') {
         req.headers.authorization = 'Bearer ' + ENV.STAFF_ADMIN_TOKEN;
       }
     });

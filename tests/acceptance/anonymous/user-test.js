@@ -11,7 +11,7 @@ module('Acceptance | anonymous | user', function(hooks) {
     await visit('/users');
 
     assert.equal(currentURL(), '/');
-    assert.dom('div.motto h1').hasText('DataCite Fabrica Test');
+    assert.dom('div.motto h1').hasText('DataCite Fabrica Stage');
   });
 
   test('visiting specific user', async function(assert) {

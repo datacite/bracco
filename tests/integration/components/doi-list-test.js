@@ -17,6 +17,6 @@ module('Integration | Component | doi-list', function(hooks) {
     assert.dom('[data-test-resource-type-general]').hasText('Dataset');
     assert.dom('[data-test-metadata]').hasText('Version 7 of Substance published 2017 via Royal Society of Chemistry');
     assert.dom('[data-test-created]').hasText('Created September 27, 2017, 14:08:02 UTC. Findable');
-    assert.dom('[data-test-identifier]').hasText('https://handle.test.datacite.org/' + this.model[0].doi);
+    assert.dom('[data-test-identifier]').hasText('https://handle.stage.datacite.org/' + this.model[0].doi);
   });
 });

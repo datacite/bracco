@@ -17,7 +17,7 @@ module('Acceptance | anonymous | admin', function(hooks) {
     await visit('/');
 
     assert.equal(currentURL(), '/');
-    assert.dom('div.motto h1').hasText('DataCite Fabrica Test');
+    assert.dom('div.motto h1').hasText('DataCite Fabrica Stage');
   });
 
   // the following pages require authentication. Redirects to homepage otherwise
@@ -25,28 +25,28 @@ module('Acceptance | anonymous | admin', function(hooks) {
     await visit('/info');
 
     assert.equal(currentURL(), '/');
-    assert.dom('div.motto h1').hasText('DataCite Fabrica Test');
+    assert.dom('div.motto h1').hasText('DataCite Fabrica Stage');
   });
 
   test('visiting providers', async function(assert) {
     await visit('/providers');
 
     assert.equal(currentURL(), '/');
-    assert.dom('div.motto h1').hasText('DataCite Fabrica Test');
+    assert.dom('div.motto h1').hasText('DataCite Fabrica Stage');
   });
 
   test('visiting repositories', async function(assert) {
     await visit('/repositories');
 
     assert.equal(currentURL(), '/');
-    assert.dom('div.motto h1').hasText('DataCite Fabrica Test');
+    assert.dom('div.motto h1').hasText('DataCite Fabrica Stage');
   });
 
   test('visiting prefixes', async function(assert) {
     await visit('/prefixes');
 
     assert.equal(currentURL(), '/');
-    assert.dom('div.motto h1').hasText('DataCite Fabrica Test');
+    assert.dom('div.motto h1').hasText('DataCite Fabrica Stage');
   });
 
   test('visiting prefix 10.80225', async function(assert) {

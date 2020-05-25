@@ -165,7 +165,7 @@ export default DS.Model.extend(Validations, {
     if (ENV.API_URL == 'https://api.datacite.org' || (w('crossref.citations medra.citations kisti.citations jalc.citations op.citations').includes(this.repository.get('id')))) {
       return 'https://doi.org/' + this.doi;
     } else {
-      return 'https://handle.test.datacite.org/' + this.doi;
+      return 'https://handle.stage.datacite.org/' + this.doi;
     }
   }),
   isDraft: computed('state', function() {

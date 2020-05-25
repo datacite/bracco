@@ -11,7 +11,7 @@ module('Acceptance | anonymous | doi', function(hooks) {
     await visit('/dois');
 
     assert.equal(currentURL(), '/');
-    assert.dom('div.motto h1').hasText('DataCite Fabrica Test');
+    assert.dom('div.motto h1').hasText('DataCite Fabrica Stage');
   });
 
   test('visiting specific doi', async function(assert) {

@@ -11,27 +11,27 @@ module('Acceptance | anonymous | repository', function(hooks) {
     await visit('/repositories/tib.awi');
 
     assert.equal(currentURL(), '/');
-    assert.dom('div.motto h1').hasText('DataCite Fabrica Test');
+    assert.dom('div.motto h1').hasText('DataCite Fabrica Stage');
   });
 
   test('visiting repository AWI info', async function(assert) {
     await visit('/repositories/tib.awi/info');
 
     assert.equal(currentURL(), '/');
-    assert.dom('div.motto h1').hasText('DataCite Fabrica Test');
+    assert.dom('div.motto h1').hasText('DataCite Fabrica Stage');
   });
 
   test('visiting repository AWI prefixes', async function(assert) {
     await visit('/repositories/tib.awi/prefixes');
 
     assert.equal(currentURL(), '/');
-    assert.dom('div.motto h1').hasText('DataCite Fabrica Test');
+    assert.dom('div.motto h1').hasText('DataCite Fabrica Stage');
   });
 
   test('visiting repository AWI dois', async function(assert) {
     await visit('/repositories/tib.awi/dois');
 
     assert.equal(currentURL(), '/');
-    assert.dom('div.motto h1').hasText('DataCite Fabrica Test');
+    assert.dom('div.motto h1').hasText('DataCite Fabrica Stage');
   });
 });
