@@ -67,12 +67,12 @@ after_success:
 
       git clone "https://${TRAVIS_SECURE_TOKEN}@github.com/datacite/mastino.git";
       ./dockerize -template vendor/docker/_bracco.auto.tfvars.tmpl:mastino/stage/services/doi/_bracco.auto.tfvars;
+      ./dockerize -template vendor/docker/_bracco.auto.tfvars.tmpl:mastino/test/services/doi/_bracco.auto.tfvars;
 
       sentry-cli releases new bracco:${GIT_TAG} --finalize --project bracco;
 
       if [ "${TRAVIS_TAG?}" ]; then
         ./dockerize -template vendor/docker/_bracco.auto.tfvars.tmpl:mastino/prod-eu-west/services/doi/_bracco.auto.tfvars;
-        ./dockerize -template vendor/docker/_bracco.auto.tfvars.tmpl:mastino/test/services/doi/_bracco.auto.tfvars;
         sentry-cli releases deploys bracco:${GIT_TAG} new -e production;
       else
         sentry-cli releases deploys bracco:${GIT_TAG} new -e stage;
@@ -91,6 +91,7 @@ after_success:
         git push "https://${TRAVIS_SECURE_TOKEN}@github.com/datacite/mastino.git" master;
       else
         git add stage/services/doi/_bracco.auto.tfvars;
+        git add test/services/doi/_bracco.auto.tfvars;
         git commit -m "Adding bracco git variables for latest commit";
         git push "https://${TRAVIS_SECURE_TOKEN}@github.com/datacite/mastino.git" master;
       fi
