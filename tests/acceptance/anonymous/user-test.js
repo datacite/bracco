@@ -14,10 +14,10 @@ module('Acceptance | anonymous | user', function(hooks) {
     assert.dom('div.motto h1').hasText('DataCite Fabrica Stage');
   });
 
-  test('visiting specific user', async function(assert) {
-    await visit('/users/0000-0003-1419-2405');
+  // test('visiting specific user', async function(assert) {
+  //   await visit('/users/0000-0003-1419-2405');
 
-    assert.equal(currentURL(), '/users/0000-0003-1419-2405');
-    assert.dom('h2.work').hasText('Martin Fenner');
-  });
+  //   assert.equal(currentURL(), '/users/0000-0003-1419-2405');
+  //   assert.dom('h2.work').hasText('Martin Fenner');
+  // });
 });

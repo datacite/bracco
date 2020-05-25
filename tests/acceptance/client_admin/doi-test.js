@@ -21,7 +21,7 @@ module('Acceptance | client_admin | doi', function(hooks) {
         exclude: [ 'authorization' ],
       },
     },
-    // recordFailedRequests: true,
+    recordFailedRequests: true,
   });
   setupApplicationTest(hooks);
 

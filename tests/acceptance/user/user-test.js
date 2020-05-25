@@ -48,10 +48,10 @@ module('Acceptance | user | user', function(hooks) {
     assert.dom('h2.work').hasText('Martin Fenner');
   });
 
-  test('visiting specific user', async function(assert) {
-    await visit('/users/0000-0003-1419-2405');
+  // test('visiting specific user', async function(assert) {
+  //   await visit('/users/0000-0003-1419-2405');
 
-    assert.equal(currentURL(), '/users/0000-0003-1419-2405');
-    assert.dom('h2.work').hasText('Martin Fenner');
-  });
+  //   assert.equal(currentURL(), '/users/0000-0003-1419-2405');
+  //   assert.dom('h2.work').hasText('Martin Fenner');
+  // });
 });
