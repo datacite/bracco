@@ -14,13 +14,6 @@ export default Component.extend({
   providers: [],
   isDisabled: true,
 
-  remainingProviders(providers) {
-    return providers.filter(function(item) {
-      console.log(item);
-      return [ 'direct_member', 'consortium_organization' ].includes(item.memberType);
-    });
-  },
-
   didReceiveAttrs() {
     this._super(...arguments);
     this.model.set('mode', 'transfer');
@@ -30,8 +23,8 @@ export default Component.extend({
   searchProvider(query) {
     let self = this;
     if (this.currentUser.get('isAdmin')) {
-      this.store.query('provider', { query, sort: 'name', 'page[size]': 100 }).then(function(providers) {
-        self.set('providers', self.remainingProviders(providers));
+      this.store.query('provider', { query, sort: 'name', 'member-type': 'direct_member,consortium_organization', 'page[size]': 100 }).then(function(providers) {
+        self.set('providers', providers);
       }).catch(function(reason) {
         console.debug(reason);
         self.set('providers', []);
