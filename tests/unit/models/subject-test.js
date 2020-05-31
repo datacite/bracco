@@ -19,7 +19,7 @@ module('Unit | Model | subject', function(hooks) {
     model.set('schemeUri', subject.schemeUri);
     model.set('valueUri', subject.valueUri);
 
-    assert.equal(model.get('valueUri'), 'http://www.oecd.org/science/inno/38235147.pdf');
+    assert.equal(model.get('schemeUri'), 'http://www.oecd.org/science/inno/38235147.pdf');
   });
 });
 

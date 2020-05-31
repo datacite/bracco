@@ -92,9 +92,8 @@ FactoryGuy.define('geoLocation', {
 FactoryGuy.define('subject', {
   default: {
     subject: 'Clinical medicine',
-    subjectScheme: 'OECD',
-    schemeUri: 'http://www.oecd.org/science/inno' ,
-    valueUri: 'http://www.oecd.org/science/inno/38235147.pdf',
+    subjectScheme: 'Fields of Science and Technology (FOS)',
+    schemeUri: 'http://www.oecd.org/science/inno/38235147.pdf',
   },
 });
 
