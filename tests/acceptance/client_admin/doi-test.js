@@ -175,20 +175,20 @@ module('Acceptance | client_admin | doi', function(hooks) {
     await click('button#doi-create');
   });
 
-  // test('visiting the form and selecting subject', async function(assert) {
-  //   await visit('repositories/datacite.test/dois/new');
+  test('visiting the form and selecting subject', async function(assert) {
+    await visit('repositories/datacite.test/dois/new');
 
-  //   assert.equal(currentURL(), 'repositories/datacite.test/dois/new');
-  //   await click('#add-subject');
-  //   await selectSearch('[doi-subject]', 'Materials');
-  //   await selectChoose('[doi-subject]', 'Materials engineering');
-  //   assert.dom('[doi-subject]').includesText('Materials engineering');
+    assert.equal(currentURL(), 'repositories/datacite.test/dois/new');
+    await click('#add-subject');
+    await selectSearch('[doi-subject]', 'Materials');
+    await selectChoose('[doi-subject]', 'Materials engineering');
+    assert.dom('[doi-subject]').includesText('Materials engineering');
 
-  //   await click('#toggle-subjects');
-  //   assert.dom('#toggle-subjects').includesText('Show 1 subject');
+    await click('#toggle-subjects');
+    assert.dom('#toggle-subjects').includesText('Show 1 subject');
 
-  //   await click('button#doi-create');
-  // });
+    await click('button#doi-create');
+  });
 
   test('visiting the form and adding geoLocationPlace', async function(assert) {
     await visit('repositories/datacite.test/dois/new');
@@ -237,33 +237,33 @@ module('Acceptance | client_admin | doi', function(hooks) {
     await click('button#doi-create');
   });
 
-  // test('visiting the form and adding format', async function(assert) {
-  //   await visit('repositories/datacite.test/dois/new');
+  test('visiting the form and adding format', async function(assert) {
+    await visit('repositories/datacite.test/dois/new');
 
-  //   assert.equal(currentURL(), 'repositories/datacite.test/dois/new');
-  //   await click('#add-format');
-  //   await fillIn('[data-test-format]','json');
-  //   assert.dom('[data-test-format]').hasValue('json');
+    assert.equal(currentURL(), 'repositories/datacite.test/dois/new');
+    await click('#add-format');
+    await fillIn('[data-test-format]','json');
+    assert.dom('[data-test-format]').hasValue('json');
 
-  //   await click('#toggle-formats');
-  //   assert.dom('#toggle-formats').includesText('Show 1 format');
+    await click('#toggle-formats');
+    assert.dom('#toggle-formats').includesText('Show 1 format');
 
-  //   await click('button#doi-create');
-  // });
+    await click('button#doi-create');
+  });
 
-  // test('visiting the form and adding size', async function(assert) {
-  //   await visit('repositories/datacite.test/dois/new');
+  test('visiting the form and adding size', async function(assert) {
+    await visit('repositories/datacite.test/dois/new');
 
-  //   assert.equal(currentURL(), 'repositories/datacite.test/dois/new');
-  //   await click('#add-size');
-  //   await fillIn('[data-test-size]','5kb');
-  //   assert.dom('[data-test-size]').hasValue('5kb');
+    assert.equal(currentURL(), 'repositories/datacite.test/dois/new');
+    await click('#add-size');
+    await fillIn('[data-test-size]','5kb');
+    assert.dom('[data-test-size]').hasValue('5kb');
 
-  //   await click('#toggle-sizes');
-  //   assert.dom('#toggle-sizes').includesText('Show 1 size');
+    await click('#toggle-sizes');
+    assert.dom('#toggle-sizes').includesText('Show 1 size');
 
-  //   await click('button#doi-create');
-  // });
+    await click('button#doi-create');
+  });
 
   test('visiting the form and adding alternate identfier', async function(assert) {
     await visit('repositories/datacite.test/dois/new');

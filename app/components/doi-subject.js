@@ -76,7 +76,7 @@ export default Component.extend({
   didReceiveAttrs() {
     this._super(...arguments);
 
-    if (completeSubjectList.includes(this.fragment.get('subject'))) {
+    if (completeSubjectList.includes('FOS: ' + this.fragment.get('subject'))) {
       this.set('oecdSelected', true);
     } else {
       this.set('oecdSelected', false);
