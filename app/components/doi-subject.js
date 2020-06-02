@@ -8,12 +8,12 @@ const completeSubjectList = [
   'Computer and information sciences',
   'Physical sciences',
   'Chemical sciences',
-  'Earth and related Environmental sciences',
+  'Earth and related environmental sciences',
   'Biological sciences',
   'Other natural sciences',
   'Engineering and technology',
   'Civil engineering',
-  'Electrical engineering, Electronic engineering, Information engineering',
+  'Electrical engineering, electronic engineering, information engineering',
   'Mechanical engineering',
   'Chemical engineering',
   'Materials engineering',
@@ -23,21 +23,21 @@ const completeSubjectList = [
   'Industrial biotechnology',
   'Nano-technology',
   'Other engineering and technologies',
-  'Medical and Health sciences',
+  'Medical and health sciences',
   'Basic medicine',
   'Clinical medicine',
   'Health sciences',
   'Medical biotechnology',
   'Other medical sciences',
   'Agricultural sciences',
-  'Agriculture, Forestry, and Fisheries',
-  'Animal and Dairy science',
+  'Agriculture, forestry, and fisheries',
+  'Animal and dairy science',
   'Veterinary science',
   'Agricultural biotechnology',
   'Other agricultural sciences',
   'Social sciences',
   'Psychology',
-  'Economics and Business',
+  'Economics and business',
   'Educational sciences',
   'Sociology',
   'Law',
@@ -46,14 +46,14 @@ const completeSubjectList = [
   'Media and communications',
   'Other social sciences',
   'Humanities',
-  'History and Archaeology',
-  'Languages and Literature',
-  'Philosophy, Ethics and Religion',
+  'History and archaeology',
+  'Languages and literature',
+  'Philosophy, ethics and religion',
   'Arts (arts, history of arts, performing arts, music)',
   'Other humanities',
 ];
 
-const oecdScheme = 'OECD';
+const oecdScheme = 'Fields of Science and Technology (FOS)';
 const oecdSchemeUri = 'http://www.oecd.org/science/inno/38235147.pdf';
 
 export default Component.extend({
@@ -76,7 +76,7 @@ export default Component.extend({
   didReceiveAttrs() {
     this._super(...arguments);
 
-    if (completeSubjectList.includes(this.fragment.get('subject'))) {
+    if (this.fragment.get('subject') && completeSubjectList.includes(this.fragment.get('subject').replace('FOS: ', ''))) {
       this.set('oecdSelected', true);
     } else {
       this.set('oecdSelected', false);
@@ -95,12 +95,13 @@ export default Component.extend({
       }
     },
     updateSubject(value) {
-      this.fragment.set('subject', value);
       if (completeSubjectList.includes(value)) {
+        this.fragment.set('subject', 'FOS: ' + value);
         this.setScheme(oecdScheme);
         this.setSchemeUri(oecdSchemeUri);
         this.set('oecdSelected', true);
       } else {
+        this.fragment.set('subject', value);
         this.setScheme(null);
         this.set('schemeUri', null);
         this.fragment.set('subjectSchemeUri', null);

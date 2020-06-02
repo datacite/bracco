@@ -15,7 +15,7 @@
     {{el.control
       searchEnabled=true
       onChange=(action "updateSubject")
-      placeholder="Search Subject from the OECD Fields of Science OR create a new keyword"
+      placeholder="Search Subject from the OECD Fields of Science and Technology (FOS) OR create a new keyword"
       onkeydown=(action "createOnEnter")
       search=(action "searchSubject")
       allowClear=true
@@ -23,7 +23,7 @@
       noMatchesMessage="Press ENTER to add new subject, keyword, classification code, or key phrase describing the resource."
     }}
     <div class="help-block">
-      The default subject scheme is provided by the <a target="_blank" rel="noopener" href="https://www.oecd.org/science/inno/38235147.pdf">OECD Fields of Science</a>.
+      The default subject scheme is provided by the <a target="_blank" rel="noopener" href="https://www.oecd.org/science/inno/38235147.pdf">OECD Fields of Science and Technology (FOS)</a>.
     </div>
     {{/form.element}}
   </div>

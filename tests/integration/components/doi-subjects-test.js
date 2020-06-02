@@ -19,7 +19,7 @@ module('Integration | Component | doi subjects', function(hooks) {
     await click('#add-subject');
     let subjects = this.element.querySelectorAll('[data-test-subject-scheme]');
 
-    await fillIn(subjects[0],'OECD');
-    assert.dom(subjects[0]).hasValue('OECD');
+    await fillIn(subjects[0],'Fields of Science and Technology (FOS)');
+    assert.dom(subjects[0]).hasValue('Fields of Science and Technology (FOS)');
   });
 });
