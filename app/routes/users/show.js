@@ -31,7 +31,11 @@ export default Route.extend({
         }).catch(function(reason) {
           console.debug(reason);
 
-          self.get('flashMessages').warning('We have not found Datasets with the ORCID record ' + params.user_id + '. Please visit the repository where your resources are deposited and include the ORCID record there.');
+          self.get('flashMessages').add({
+            message: 'No results found. The ORCID record ' + params.user_id + ' has not been linked to any DOIs. Contact the repository where your resources are deposited to request your ORCID record is linked to your contents DOIs. Or visit our support website, at https://support.datacite.org/docs/datacite-researcher-profiles, for more information.',
+            href: 'https://support.datacite.org/docs/datacite-researcher-profiles',
+            type: 'warning',
+          });
           self.transitionTo('/');
         }),
         self.store.query('doi', parameters).then(function(result) {
