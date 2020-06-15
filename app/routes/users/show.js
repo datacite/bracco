@@ -31,7 +31,11 @@ export default Route.extend({
         }).catch(function(reason) {
           console.debug(reason);
 
-          self.get('flashMessages').warning('Fabrica is currently unavailable due to a DataCite API problem. We apologize for the inconvenience and are working hard to restore the service. Please check back later or contact DataCite Support if you have a question.');
+          self.get('flashMessages').add({
+            message: 'No results found. The ORCID record ' + params.user_id + ' has not been linked to any DOIs. Contact the repository where your resources are deposited to request your ORCID record is linked to your contents DOIs. Or visit our support website, at https://support.datacite.org/docs/datacite-researcher-profiles, for more information.',
+            href: 'https://support.datacite.org/docs/datacite-researcher-profiles',
+            type: 'warning',
+          });
           self.transitionTo('/');
         }),
         self.store.query('doi', parameters).then(function(result) {
