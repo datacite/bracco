@@ -200,7 +200,7 @@ export default Component.extend({
     this.set('relationTypes', relationTypeList);
   },
   selectRelatedIdentifierType(relatedIdentifierType) {
-    this.fragment.set('relatedIdentifierType', pascalCase(relatedIdentifierType));
+    this.fragment.set('relatedIdentifierType', relatedIdentifierType);
     this.set('relatedIdentifierTypes', relatedIdentifierTypeList);
   },
   selectResourceTypeGeneral(resourceTypeGeneral) {
