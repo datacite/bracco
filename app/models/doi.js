@@ -77,7 +77,7 @@ const Validations = buildValidations({
     }),
     validator('date', {
       after: '999',
-      before: '2021',
+      before: '2022',
       precision: 'year',
       format: 'YYYY',
       errorFormat: 'YYYY',
