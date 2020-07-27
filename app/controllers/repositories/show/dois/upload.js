@@ -42,7 +42,7 @@ export default Controller.extend({
         self.transitionToRoute('dois.show', doi);
       }).catch(function(reason) {
         console.debug(reason);
-        self.get('flashMessages').warning('An error occured and this DOI could not be saved:' + reason.title );
+        self.get('flashMessages').warning('An error occured and this DOI could not be saved:' + reason.title);
 
       });
     },

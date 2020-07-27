@@ -23,5 +23,5 @@ export default JSONAPIAdapter.extend(DataAdapterMixin, {
       return payload.errors[0];
     }
     return this._super(...arguments);
-  }
+  },
 });
