@@ -29,7 +29,7 @@ export default Controller.extend({
       }
 
       // schema-version will be determined by API
-      doi.set('schemaVersion', null);
+      doi.set('schemaVersion', "http://datacite.org/schema/kernel-4");
 
       // track use of the form
       doi.set('source', 'fabricaForm');
