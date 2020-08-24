@@ -18,4 +18,10 @@ export default JSONAPIAdapter.extend(DataAdapterMixin, {
 
     return headers;
   }),
+  handleResponse(status, headers, payload) {
+    if ([ 422, 409 , 500 ].includes(status)) {
+      return payload.errors[0];
+    }
+    return this._super(...arguments);
+  },
 });
