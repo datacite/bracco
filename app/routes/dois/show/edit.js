@@ -8,6 +8,9 @@ export default Route.extend({
   model() {
     let self = this;
     return this.store.findRecord('doi', this.modelFor('dois/show').get('id'), { include: 'client' }).then(function(doi) {
+      if (!doi.schemaVersion.endsWith('kernel-4')) {
+        self.get('flashMessages').warning('Using the Form would update this DOI to the lasest schema version.');
+      }
       return doi;
     }).catch(function(reason) {
       console.debug(reason);
