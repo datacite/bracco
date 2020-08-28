@@ -24,7 +24,7 @@ export default Component.extend({
         break;
       default:
         this.fragment.set('rights', rights.name);
-        this.fragment.set('rightsUri', rights.detailsUrl);
+        this.fragment.set('rightsUri', rights.seeAlso[0]);
         this.set('isSpdxId', true);
         break;
     }
@@ -58,4 +58,3 @@ export default Component.extend({
     },
   },
 });
-
