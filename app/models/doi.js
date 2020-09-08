@@ -94,6 +94,12 @@ const Validations = buildValidations({
         return this.model.get('state') === 'draft' || ![ 'new', 'edit' ].includes(this.model.get('mode'));
       }),
     }),
+    validator('resource-type', {
+      presence: true,
+      disabled: computed('model.mode', 'model.state', function() {
+        return this.model.get('state') === 'draft' || ![ 'new', 'edit' ].includes(this.model.get('mode'));
+      }),
+    }),
   ],
   xml: [
     validator('presence', {

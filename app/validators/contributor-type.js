@@ -12,6 +12,30 @@ const ContributorType = BaseValidator.extend({
       'Distributor',
     ];
 
+    const contributorTypes = [
+      'ContactPerson',
+      'DataCollector',
+      'DataCurator',
+      'DataManager',
+      'Distributor',
+      'Editor',
+      'HostingInstitution',
+      'Producer',
+      'ProjectLeader',
+      'ProjectManager',
+      'ProjectMember',
+      'RegistrationAgency',
+      'RegistrationAuthority',
+      'RelatedPerson',
+      'Researcher',
+      'ResearchGroup',
+      'RightsHolder',
+      'Sponsor',
+      'Supervisor',
+      'WorkPackageLeader',
+      'Other',
+    ];
+
     const personalContributorTypes = [
       'ContactPerson',
       'DataCurator',
@@ -30,12 +54,14 @@ const ContributorType = BaseValidator.extend({
     switch (true) {
       case (!value && options.allowBlank):
         return true;
-      case organizationalContributorTypes.includes(value[0]) && model.nameType == 'Personal':
+      case organizationalContributorTypes.includes(String(value)) && model.nameType == 'Personal':
         return message;
-      case personalContributorTypes.includes(value[0]) && model.nameType == 'Organizational':
+      case personalContributorTypes.includes(String(value)) && model.nameType == 'Organizational':
         return message;
-      default:
+      case contributorTypes.includes(String(value)):
         return true;
+      default:
+        return 'The value ' + value + ' is not a valid type';
     }
   },
 });
