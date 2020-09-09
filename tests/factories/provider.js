@@ -12,7 +12,7 @@ FactoryGuy.define('provider', {
     description: '',
     region: 'APAC',
     country: 'AU',
-    logoUrl: 'https://assets.datacite.org/images/members/ands.png?1583249855',
+    logoUrl: 'https://datacite.org/images/members/ands.png?1583249855',
     memberType: 'direct_member',
     organizationType: 'nationalInstitution',
     focusArea: 'general',

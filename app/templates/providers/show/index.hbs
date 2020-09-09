@@ -5,10 +5,10 @@
         <div class="panel-body">
           <div class="btn-toolbar">
             <div class="btn-group-vertical btn-group-sm">
-              <LinkTo @route="providers.show.change" @model={{model.id}} class="btn btn-warning" @id="set-password-provider">{{fa-icon "key"}} Set Password</LinkTo>
-              <LinkTo @route="providers.show.edit" @model={{model.id}} class="btn btn-warning" @id="edit-provider">{{fa-icon "pencil"}} Update {{if (eq model.memberType "consortium_organization") 'Organization' 'Member'}}</LinkTo>
+              <LinkTo @route="providers.show.change" @model={{model.id}} class="btn btn-warning" @id="set-password-provider"><i class="fas fa-key"></i> Set Password</LinkTo>
+              <LinkTo @route="providers.show.edit" @model={{model.id}} class="btn btn-warning" @id="edit-provider"><i class="fas fa-pencil-alt"></i> Update {{if (eq model.memberType "consortium_organization") 'Organization' 'Member'}}</LinkTo>
               {{#if (and (not admin) (can "delete provider" model))}}
-                <LinkTo @route="providers.show.delete" @model={{model.id}} class="btn btn-warning" @id="delete-provider">{{fa-icon "trash"}} Delete {{if (eq model.memberType "consortium_organization") 'Organization' 'Member'}}</LinkTo>
+                <LinkTo @route="providers.show.delete" @model={{model.id}} class="btn btn-warning" @id="delete-provider"><i class="fas fa-trash"></i> Delete {{if (eq model.memberType "consortium_organization") 'Organization' 'Member'}}</LinkTo>
               {{/if}}
             </div>
           </div>

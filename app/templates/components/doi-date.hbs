@@ -2,7 +2,7 @@
   <input class="form-control date-field" value={{fragment.date}} onblur={{action "updateDate" value="target.value"}} placeholder="Date "
     data-test-date />
   <span class="input-group-btn">
-    <BsButton @outline={{true}} @onClick={{action "deleteDate" index}}>{{fa-icon "trash"}}</BsButton>
+    <BsButton @outline={{true}} @onClick={{action "deleteDate" index}}><i class="fas fa-trash"></i></BsButton>
   </span>
 </div>
 

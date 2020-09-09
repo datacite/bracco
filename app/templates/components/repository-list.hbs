@@ -4,7 +4,7 @@
       <div class="panel-body">
         <div class="btn-toolbar">
           <div class="btn-group btn-group-sm">
-            <LinkTo @route="providers.show.repositories.new" @model={{model.provider.id}} class="btn btn-warning" @id="add-repository">{{fa-icon "plus"}} Add Repository</LinkTo>
+            <LinkTo @route="providers.show.repositories.new" @model={{model.provider.id}} class="btn btn-warning" @id="add-repository"><i class="fas fa-plus"></i> Add Repository</LinkTo>
           </div>
         </div>
       </div>
@@ -26,9 +26,9 @@
             {{#each model.repositories.meta.years as |year|}}
               <li>
                 {{#if model.repositories.query.year}}
-                  <LinkTo @route={{link}} @query={{hash year=""}}>{{fa-icon "check-square-o"}}</LinkTo>
+                  <LinkTo @route={{link}} @query={{hash year=""}}><i class="far fa-check-square"></i></LinkTo>
                 {{else}}
-                  <LinkTo @route={{link}} @query={{hash year=year.id}}>{{fa-icon "square-o"}}</LinkTo>
+                  <LinkTo @route={{link}} @query={{hash year=year.id}}><i class="far fa-square"></i></LinkTo>
                 {{/if}}
                 <div class="facet-title">{{year.title}}</div>
                 <span class="number pull-right">{{year.count}}</span>
@@ -37,7 +37,7 @@
             {{/each}}
           {{else}}
             <li>
-              <LinkTo @route="repositories" @query={{hash year=""}}>{{fa-icon "check-square-o"}}</LinkTo>
+              <LinkTo @route="repositories" @query={{hash year=""}}><i class="far fa-check-square"></i></LinkTo>
               <div class="facet-title">{{model.repositories.query.year}}</div>
               <span class="number pull-right">0</span>
               <div class="clearfix"/>
@@ -56,9 +56,9 @@
             {{#each model.repositories.meta.providers as |provider|}}
               <li>
                 {{#if model.repositories.query.provider-id}}
-                  <LinkTo @route={{link}} @query={{hash provider-id=""}}>{{fa-icon "check-square-o"}}</LinkTo>
+                  <LinkTo @route={{link}} @query={{hash provider-id=""}}><i class="far fa-check-square"></i></LinkTo>
                 {{else}}
-                  <LinkTo @route={{link}} @query={{hash provider-id=provider.id}}>{{fa-icon "square-o"}}</LinkTo>
+                  <LinkTo @route={{link}} @query={{hash provider-id=provider.id}}><i class="far fa-square"></i></LinkTo>
                 {{/if}}
                 <div class="facet-title">{{provider.title}}</div>
                 <span class="number pull-right">{{provider.count}}</span>
@@ -67,7 +67,7 @@
             {{/each}}
           {{else}}
             <li>
-              <LinkTo @route={{link}} @query={{hash provider=""}}>{{fa-icon "check-square-o"}}</LinkTo>
+              <LinkTo @route={{link}} @query={{hash provider=""}}><i class="far fa-check-square"></i></LinkTo>
               <div class="facet-title">{{titleize model.repositories.query.provider}}</div>
               <span class="number pull-right">0</span>
               <div class="clearfix"/>
@@ -86,9 +86,9 @@
             {{#each model.repositories.meta.clientTypes as |clientType|}}
               <li>
                 {{#if model.repositories.query.client-type}}
-                  <LinkTo @route={{link}} @query={{hash client-type=""}}>{{fa-icon "check-square-o"}}</LinkTo>
+                  <LinkTo @route={{link}} @query={{hash client-type=""}}><i class="far fa-check-square"></i></LinkTo>
                 {{else}}
-                  <LinkTo @route={{link}} @query={{hash client-type=clientType.id}}>{{fa-icon "square-o"}}</LinkTo>
+                  <LinkTo @route={{link}} @query={{hash client-type=clientType.id}}><i class="far fa-check-square"></i></LinkTo>
                 {{/if}}
                 <div class="facet-title">{{clientType.title}}</div>
                 <span class="number pull-right">{{clientType.count}}</span>
@@ -97,7 +97,7 @@
             {{/each}}
           {{else}}
             <li>
-              <LinkTo @route={{link}} @query={{hash client-type=""}}>{{fa-icon "check-square-o"}}</LinkTo>
+              <LinkTo @route={{link}} @query={{hash client-type=""}}><i class="far fa-check-square"></i></LinkTo>
               <div class="facet-title">{{titleize model.repositories.query.client-type}}</div>
               <span class="number pull-right">0</span>
               <div class="clearfix"/>
@@ -116,9 +116,9 @@
             {{#each model.repositories.meta.repositoryTypes as |repositoryType|}}
               <li>
                 {{#if model.repositories.query.repository-type}}
-                  <LinkTo @route={{link}} @query={{hash repository-type=""}}>{{fa-icon "check-square-o"}}</LinkTo>
+                  <LinkTo @route={{link}} @query={{hash repository-type=""}}><i class="far fa-check-square"></i></LinkTo>
                 {{else}}
-                  <LinkTo @route={{link}} @query={{hash repository-type=repositoryType.id}}>{{fa-icon "square-o"}}</LinkTo>
+                  <LinkTo @route={{link}} @query={{hash repository-type=repositoryType.id}}><i class="far fa-check-square"></i></LinkTo>
                 {{/if}}
                 <div class="facet-title">{{repositoryType.title}}</div>
                 <span class="number pull-right">{{repositoryType.count}}</span>
@@ -127,7 +127,7 @@
             {{/each}}
           {{else}}
             <li>
-              <LinkTo @route={{link}} @query={{hash repository-type=""}}>{{fa-icon "check-square-o"}}</LinkTo>
+              <LinkTo @route={{link}} @query={{hash repository-type=""}}><i class="far fa-check-square"></i></LinkTo>
               <div class="facet-title"><model.repositories.query.repository-type /></div>
               <span class="number pull-right">0</span>
               <div class="clearfix"/>
@@ -146,9 +146,9 @@
             {{#each model.repositories.meta.certificates as |certificate|}}
               <li>
                 {{#if model.repositories.query.certificate}}
-                  <LinkTo @route={{link}} @query={{hash certificate=""}}>{{fa-icon "check-square-o"}}</LinkTo>
+                  <LinkTo @route={{link}} @query={{hash certificate=""}}><i class="far fa-check-square"></i></LinkTo>
                 {{else}}
-                  <LinkTo @route={{link}} @query={{hash certificate=certificate.id}}>{{fa-icon "square-o"}}</LinkTo>
+                  <LinkTo @route={{link}} @query={{hash certificate=certificate.id}}><i class="far fa-check-square"></i></LinkTo>
                 {{/if}}
                 <div class="facet-title">{{certificate.title}}</div>
                 <span class="number pull-right">{{certificate.count}}</span>
@@ -157,7 +157,7 @@
             {{/each}}
           {{else}}
             <li>
-              <LinkTo @route={{link}} @query={{hash certificate=""}}>{{fa-icon "check-square-o"}}</LinkTo>
+              <LinkTo @route={{link}} @query={{hash certificate=""}}><i class="far fa-check-square"></i></LinkTo>
               <div class="facet-title">{{model.repositories.query.certificate}}</div>
               <span class="number pull-right">0</span>
               <div class="clearfix"/>
@@ -176,9 +176,9 @@
             {{#each model.repositories.meta.software as |software|}}
               <li>
                 {{#if model.repositories.query.software}}
-                  <LinkTo @route={{link}} @query={{hash software=""}}>{{fa-icon "check-square-o"}}</LinkTo>
+                  <LinkTo @route={{link}} @query={{hash software=""}}><i class="far fa-check-square"></i></LinkTo>
                 {{else}}
-                  <LinkTo @route={{link}} @query={{hash software=software.id}}>{{fa-icon "square-o"}}</LinkTo>
+                  <LinkTo @route={{link}} @query={{hash software=software.id}}><i class="far fa-square"></i></LinkTo>
                 {{/if}}
                 <div class="facet-title">{{software.title}}</div>
                 <span class="number pull-right">{{software.count}}</span>
@@ -187,7 +187,7 @@
             {{/each}}
           {{else}}
             <li>
-              <LinkTo @route={{link}} @query={{hash software=""}}>{{fa-icon "check-square-o"}}</LinkTo>
+              <LinkTo @route={{link}} @query={{hash software=""}}><i class="far fa-check-square"></i></LinkTo>
               <div class="facet-title">{{model.repositories.query.software}}</div>
               <span class="number pull-right">0</span>
               <div class="clearfix"/>
@@ -220,7 +220,7 @@
           <h5 class="repository-id">
             Repository ID
             <span>
-              {{fa-icon "question-circle-o"}}
+              <i class="fas fa-question-circle"></i>
               <BsTooltip @placement="top" @viewportPadding={{10}}>The Repository ID is a unique identifier for each repository in DataCite. It must contain only upper case letters and numbers, and must start with the Member ID.</BsTooltip>
             </span>
           </h5>
@@ -230,7 +230,7 @@
             <h5>
               re3data Record
               <span>
-                {{fa-icon "question-circle-o"}}
+                <i class="fas fa-question-circle"></i>
                 <BsTooltip @placement="top" @viewportPadding={{10}}>re3data is a registry of research data repositories.</BsTooltip>
               </span>
             </h5>

@@ -3,7 +3,7 @@
   <input placeholder="Geolocation Place" class="form-control geo-location-place-field" value={{fragment.geoLocationPlace}}
     oninput={{action "updateGeoLocationPlace" value="target.value"}} data-test-geo-location-place/>    
   <span class="input-group-btn">
-    <BsButton @outline={{true}} @onClick={{action "deleteGeoLocation" index}} data-test-delete-rights>{{fa-icon "trash"}} </BsButton >
+    <BsButton @outline={{true}} @onClick={{action "deleteGeoLocation" index}} data-test-delete-rights><i class="fas fa-trash"></i> </BsButton >
   </span>
 </div>
 <div class="help-block help-block-fragment geo-location-place-field">Description of a geographic location.</div>

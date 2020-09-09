@@ -1,7 +1,7 @@
 <div class="input-group">
   <input type="text" class="form-control alternate-identifier-field" value={{fragment.alternateIdentifier}} placeholder="Alternate Identifier" oninput={{action "updateAlternateIdentifier" value="target.value"}} data-test-alternate-identifier/>
   <span class="input-group-btn">
-    <BsButton @outline={{true}} @onClick={{action "deleteAlternateIdentifier" index}}>{{fa-icon "trash"}}</BsButton>
+    <BsButton @outline={{true}} @onClick={{action "deleteAlternateIdentifier" index}}><i class="fas fa-trash"></i></BsButton>
   </span>
 </div>
 

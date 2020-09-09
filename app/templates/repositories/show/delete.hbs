@@ -8,7 +8,7 @@
         <div class="pseudo-footer">
           <div class="btn-toolbar btn-sm pull-right">
             <button {{action "cancel" model}} class="btn btn-sm">Cancel</button>
-            <LinkTo @route="repositories.show.transfer" @model={{model.id}} class="btn btn-sm">{{fa-icon "arrow-circle-o-right"}}Transfer DOIs</LinkTo>
+            <LinkTo @route="repositories.show.transfer" @model={{model.id}} class="btn btn-sm"><i class="fas fa-arrow-circle-right"></i>Transfer DOIs</LinkTo>
           </div>
           <div class="clearfix"/>
         </div>

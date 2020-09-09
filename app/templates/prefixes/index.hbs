@@ -10,7 +10,7 @@
           <div class="panel-body">
             <div class="btn-toolbar">
               <div class="btn-group btn-group-sm">
-                <LinkTo @route="prefixes.new" class="btn btn-warning" @id="add-prefixes">{{fa-icon "link"}}Add Prefixes</LinkTo>
+                <LinkTo @route="prefixes.new" class="btn btn-warning" @id="add-prefixes"><i class="fas fa-link"></i>Add Prefixes</LinkTo>
               </div>
             </div>
           </div>
@@ -26,14 +26,14 @@
       {{#if model.meta.states}}
         <div class="panel facets add">
           <div class="panel-body">
-            <h4>State <span class="small">{{fa-icon "question-circle-o"}}<BsTooltip @placement="top">Filter prefixes by whether they have been assigned to a provider and/or repository.</BsTooltip></span></h4>
+            <h4>State <span class="small"><i class="fas fa-question-circle"></i><BsTooltip @placement="top">Filter prefixes by whether they have been assigned to a provider and/or repository.</BsTooltip></span></h4>
             <ul>
               {{#each model.meta.states as |state|}}
                 <li>
                   {{#if model.query.state}}
-                    <LinkTo @route="prefixes" @query={{hash state=null}}>{{fa-icon "check-square-o"}}</LinkTo>
+                    <LinkTo @route="prefixes" @query={{hash state=null}}><i class="far fa-check-square"></i></LinkTo>
                   {{else}}
-                    <LinkTo @route="prefixes" @query={{hash state=state.id}}>{{fa-icon "square-o"}}</LinkTo>
+                    <LinkTo @route="prefixes" @query={{hash state=state.id}}><i class="far fa-square"></i></LinkTo>
                   {{/if}}
                   <div class="facet-title">{{state.title}}</div>
                   <span class="number pull-right">{{state.count}}</span>
@@ -53,9 +53,9 @@
               {{#each model.meta.years as |year|}}
                 <li>
                   {{#if model.query.year}}
-                    <LinkTo @route="prefixes" @query={{hash year=null}}>{{fa-icon "check-square-o"}}</LinkTo>
+                    <LinkTo @route="prefixes" @query={{hash year=null}}><i class="far fa-check-square"></i></LinkTo>
                   {{else}}
-                    <LinkTo @route="prefixes" @query={{hash year=year.id}}>{{fa-icon "square-o"}}</LinkTo>
+                    <LinkTo @route="prefixes" @query={{hash year=year.id}}><i class="far fa-square"></i></LinkTo>
                   {{/if}}
                   <div class="facet-title">{{year.title}}</div>
                   <span class="number pull-right">{{year.count}}</span>
@@ -74,9 +74,9 @@
               {{#each model.meta.providers as |provider|}}
                 <li>
                   {{#if model.query.provider-id}}
-                    <LinkTo @route="prefixes" @query={{hash provider-id=null}}>{{fa-icon "check-square-o"}}</LinkTo>
+                    <LinkTo @route="prefixes" @query={{hash provider-id=null}}><i class="far fa-check-square"></i></LinkTo>
                   {{else}}
-                    <LinkTo @route="prefixes" @query={{hash provider-id=provider.id}}>{{fa-icon "square-o"}}</LinkTo>
+                    <LinkTo @route="prefixes" @query={{hash provider-id=provider.id}}><i class="far fa-square"></i></LinkTo>
                   {{/if}}
                   <div class="facet-title">{{provider.title}}</div>
                   <span class="number pull-right">{{provider.count}}</span>

@@ -8,17 +8,17 @@
       {{/each}}
 
       {{#if (lte model.subjects.length 6)}}
-        <BsButton @class="btn-sm" @id="add-subject" @outline={{true}} @onClick={{action "addSubject"}}>{{fa-icon "plus"}} Add {{if (gt model.subjects.length 0) "another "}} subject</BsButton>
+        <BsButton @class="btn-sm" @id="add-subject" @outline={{true}} @onClick={{action "addSubject"}}><i class="fas fa-plus"></i> Add {{if (gt model.subjects.length 0) "another "}} subject</BsButton>
       {{/if}}
 
       {{#if (gt model.subjects.length 0)}}
-        <BsButton @id="toggle-subjects" @class="btn-sm" @outline={{true}} @onClick={{action "toggleSubjects"}}>{{fa-icon "eye-slash"}} Hide {{pluralize model.subjects.length 'subject'}}</BsButton>
+        <BsButton @id="toggle-subjects" @class="btn-sm" @outline={{true}} @onClick={{action "toggleSubjects"}}><i class="fas fa-eye-slash"></i> Hide {{pluralize model.subjects.length 'subject'}}</BsButton>
       {{/if}}
     {{else}}
       {{#if (gt model.subjects.length 0)}}
-        <BsButton @id="toggle-subjects" @class="btn-sm" @outline={{true}} @onClick={{action "toggleSubjects"}}>{{fa-icon "eye"}} Show {{pluralize model.subjects.length 'subject'}}</BsButton>
+        <BsButton @id="toggle-subjects" @class="btn-sm" @outline={{true}} @onClick={{action "toggleSubjects"}}><i class="fas fa-eye"></i> Show {{pluralize model.subjects.length 'subject'}}</BsButton>
       {{else}}
-         <BsButton @class="btn-sm btn-warning" @id="add-subject" @outline={{true}} @onClick={{action "addSubject"}}>{{fa-icon "plus"}} Add subject</BsButton>
+         <BsButton @class="btn-sm btn-warning" @id="add-subject" @outline={{true}} @onClick={{action "addSubject"}}><i class="fas fa-plus"></i> Add subject</BsButton>
       {{/if}}
     {{/if}}
   </div>

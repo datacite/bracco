@@ -11,15 +11,15 @@
           <div class="btn-group-vertical btn-group-sm">
             {{#if (gt repository.meta.prefixCount 0)}}
               {{#if (can "create doi" model)}}
-                <LinkTo @route="repositories.show.dois.new" @model={{repository.id}} class="btn btn-warning" @id="new-doi">{{fa-icon "wpforms"}} Create{{if media.isXl ' DOI'}} (Form)</LinkTo>
+                <LinkTo @route="repositories.show.dois.new" @model={{repository.id}} class="btn btn-warning" @id="new-doi"><i class="fab fa-wpforms"></i> Create{{if media.isXl ' DOI'}} (Form)</LinkTo>
               {{/if}}
               {{#if (can "upload doi" model)}}
-                <LinkTo @route="repositories.show.dois.upload" @model={{repository.id}} class="btn btn-warning" @id="upload-doi">{{fa-icon "upload"}} Create{{if media.isXl ' DOI'}} (File Upload)</LinkTo>
+                <LinkTo @route="repositories.show.dois.upload" @model={{repository.id}} class="btn btn-warning" @id="upload-doi"><i class="fas fa-upload"></i> Create{{if media.isXl ' DOI'}} (File Upload)</LinkTo>
               {{/if}}
             {{/if}}
 
             {{#if (and (can "move doi" repository) (gt model.length 0))}}
-              <LinkTo @route="repositories.show.transfer" @model={{repository.id}} class="btn btn-warning" @id="transfer-dois">{{fa-icon "arrow-circle-o-right"}}Transfer{{if media.isXl ' DOIs'}}</LinkTo>
+              <LinkTo @route="repositories.show.transfer" @model={{repository.id}} class="btn btn-warning" @id="transfer-dois"><i class="fas fa-arrow-circle-right"></i>Transfer{{if media.isXl ' DOIs'}}</LinkTo>
             {{/if}}
           </div>
         </div>
@@ -42,9 +42,9 @@
             {{#each model.meta.states as |state|}}
               <li>
                 {{#if model.query.state}}
-                  <LinkTo @route={{link}} @query={{hash state=null}}>{{fa-icon "check-square-o"}}</LinkTo>
+                  <LinkTo @route={{link}} @query={{hash state=null}}><i class="far fa-check-square"></i></LinkTo>
                 {{else}}
-                  <LinkTo @route={{link}} @query={{hash state=state.id}}>{{fa-icon "square-o"}}</LinkTo>
+                  <LinkTo @route={{link}} @query={{hash state=state.id}}><i class="far fa-square"></i></LinkTo>
                 {{/if}}
                 <div class="facet-title">{{state.title}}</div>
                 <span class="number pull-right">{{format-number state.count}}</span>
@@ -53,7 +53,7 @@
             {{/each}}
           {{else}}
             <li>
-              <LinkTo @route={{link}} @query={{hash state=''}}>{{fa-icon "check-square-o"}}</LinkTo>
+              <LinkTo @route={{link}} @query={{hash state=''}}><i class="far fa-check-square"></i></LinkTo>
               <div class="facet-title">{{titleize model.query.state}}</div>
               <span class="number pull-right">0</span>
               <div class="clearfix"/>
@@ -72,9 +72,9 @@
             {{#each model.meta.resourceTypes as |resourceType|}}
               <li>
                 {{#if model.query.resource-type-id}}
-                  <LinkTo @route={{link}} @query={{hash resource-type-id=''}}>{{fa-icon "check-square-o"}}</LinkTo>
+                  <LinkTo @route={{link}} @query={{hash resource-type-id=''}}><i class="far fa-check-square"></i></LinkTo>
                 {{else}}
-                  <LinkTo @route={{link}} @query={{hash resource-type-id=resourceType.id}}>{{fa-icon "square-o"}}</LinkTo>
+                  <LinkTo @route={{link}} @query={{hash resource-type-id=resourceType.id}}><i class="far fa-square"></i></LinkTo>
                 {{/if}}
                 <div class="facet-title">{{resourceType.title}}</div>
                 <span class="number pull-right">{{format-number resourceType.count}}</span>
@@ -83,7 +83,7 @@
             {{/each}}
           {{else}}
             <li>
-              <LinkTo @route={{link}} @query={{hash resource-type-id=''}}>{{fa-icon "check-square-o"}}</LinkTo>
+              <LinkTo @route={{link}} @query={{hash resource-type-id=''}}><i class="far fa-check-square"></i></LinkTo>
               <div class="facet-title">{{humanize (underscore model.query.resource-type-id)}}</div>
               <span class="number pull-right">0</span>
               <div class="clearfix"/>
@@ -103,9 +103,9 @@
               {{#each model.meta.published as |year|}}
                 <li>
                   {{#if model.query.published}}
-                    {{#link-to link (query-params published='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+                    {{#link-to link (query-params published='')}}<i class="far fa-check-square"></i>{{/link-to}}
                   {{else}}
-                    {{#link-to link (query-params published=year.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                    {{#link-to link (query-params published=year.id)}}<i class="far fa-square"></i>{{/link-to}}
                   {{/if}}
                   <div class="facet-title">{{year.title}}</div>
                   <span class="number pull-right">{{format-number year.count}}</span>
@@ -114,7 +114,7 @@
               {{/each}}
             {{else}}
               <li>
-                {{#link-to link (query-params published='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+                {{#link-to link (query-params published='')}}<i class="far fa-check-square"></i>{{/link-to}}
                 <div class="facet-title">{{model.query.published}}</div>
                 <span class="number pull-right">0</span>
                 <div class="clearfix"/>
@@ -134,9 +134,9 @@
               {{#each model.meta.created as |year|}}
                 <li>
                   {{#if model.query.created}}
-                    {{#link-to link (query-params created='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+                    {{#link-to link (query-params created='')}}<i class="far fa-check-square"></i>{{/link-to}}
                   {{else}}
-                    {{#link-to link (query-params created=year.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                    {{#link-to link (query-params created=year.id)}}<i class="far fa-square"></i>{{/link-to}}
                   {{/if}}
                   <div class="facet-title">{{year.title}}</div>
                   <span class="number pull-right">{{format-number year.count}}</span>
@@ -145,7 +145,7 @@
               {{/each}}
             {{else}}
               <li>
-                {{#link-to link (query-params created='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+                {{#link-to link (query-params created='')}}<i class="far fa-check-square"></i>{{/link-to}}
                 <div class="facet-title">{{model.query.created}}</div>
                 <span class="number pull-right">0</span>
                 <div class="clearfix"/>
@@ -165,9 +165,9 @@
             {{#each model.meta.registered as |year|}}
               <li>
                 {{#if model.query.registered}}
-                  <LinkTo @route={{link}} @query={{hash registered=''}}>{{fa-icon "check-square-o"}}</LinkTo>
+                  <LinkTo @route={{link}} @query={{hash registered=''}}><i class="far fa-check-square"></i></LinkTo>
                 {{else}}
-                  <LinkTo @route={{link}} @query={{hash registered=year.id}}>{{fa-icon "square-o"}}</LinkTo>
+                  <LinkTo @route={{link}} @query={{hash registered=year.id}}><i class="far fa-square"></i></LinkTo>
                 {{/if}}
                 <div class="facet-title">{{year.title}}</div>
                 <span class="number pull-right">{{format-number year.count}}</span>
@@ -176,7 +176,7 @@
             {{/each}}
           {{else}}
             <li>
-              <LinkTo @route={{link}} @query={{hash registered=''}}>{{fa-icon "check-square-o"}}</LinkTo>
+              <LinkTo @route={{link}} @query={{hash registered=''}}><i class="far fa-check-square"></i></LinkTo>
               <div class="facet-title">{{model.query.registered}}</div>
               <span class="number pull-right">0</span>
               <div class="clearfix"/>
@@ -195,9 +195,9 @@
             {{#each model.meta.clients as |client|}}
               <li>
                 {{#if model.query.client-id}}
-                  <LinkTo @route={{link}} @query={{hash client-id=''}}>{{fa-icon "check-square-o"}}</LinkTo>
+                  <LinkTo @route={{link}} @query={{hash client-id=''}}><i class="far fa-check-square"></i></LinkTo>
                 {{else}}
-                  <LinkTo @route={{link}} @query={{hash client-id=client.id}}>{{fa-icon "square-o"}}</LinkTo>
+                  <LinkTo @route={{link}} @query={{hash client-id=client.id}}><i class="far fa-square"></i></LinkTo>
                 {{/if}}
                 <div class="facet-title">{{client.title}}</div>
                 <span class="number pull-right">{{format-number client.count}}</span>
@@ -206,7 +206,7 @@
             {{/each}}
           {{else}}
             <li>
-              <LinkTo @route={{link}} @query={{hash client-id=''}}>{{fa-icon "check-square-o"}}</LinkTo>
+              <LinkTo @route={{link}} @query={{hash client-id=''}}><i class="far fa-check-square"></i></LinkTo>
               <div class="facet-title"><model.query.client-id /></div>
               <span class="number pull-right">0</span>
               <div class="clearfix"/>
@@ -226,9 +226,9 @@
               {{#if (not-eq affiliation.id affiliation.title)}}
                 <li>
                   {{#if model.query.affiliation-id}}
-                    <LinkTo @route={{link}} @query={{hash affiliation-id=null}}>{{fa-icon "check-square-o"}}</LinkTo>
+                    <LinkTo @route={{link}} @query={{hash affiliation-id=null}}><i class="far fa-check-square"></i></LinkTo>
                   {{else}}
-                    <LinkTo @route={{link}} @query={{hash affiliation-id=affiliation.id}}>{{fa-icon "square-o"}}</LinkTo>
+                    <LinkTo @route={{link}} @query={{hash affiliation-id=affiliation.id}}><i class="far fa-square"></i></LinkTo>
                   {{/if}}
                   <div class="facet-title">{{affiliation.title}}</div>
                   <span class="number pull-right">{{format-number affiliation.count}}</span>
@@ -238,7 +238,7 @@
             {{/each}}
           {{else}}
             <li>
-              <LinkTo @route={{link}} @query={{hash affiliation-id=''}}>{{fa-icon "check-square-o"}}</LinkTo>
+              <LinkTo @route={{link}} @query={{hash affiliation-id=''}}><i class="far fa-check-square"></i></LinkTo>
               <div class="facet-title"><model.query.affiliation-id /></div>
               <span class="number pull-right">0</span>
               <div class="clearfix"/>
@@ -258,9 +258,9 @@
               {{#each model.meta.prefixes as |prefix|}}
                 <li>
                   {{#if model.query.prefix}}
-                    {{#link-to link (query-params prefix='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+                    {{#link-to link (query-params prefix='')}}<i class="far fa-check-square"></i>{{/link-to}}
                   {{else}}
-                    {{#link-to link (query-params prefix=prefix.id)}}{{fa-icon "square-o"}}{{/link-to}}
+                    {{#link-to link (query-params prefix=prefix.id)}}<i class="far fa-square"></i>{{/link-to}}
                   {{/if}}
                   <div class="facet-title">{{prefix.title}}</div>
                   <span class="number pull-right">{{format-number prefix.count}}</span>
@@ -269,7 +269,7 @@
               {{/each}}
             {{else}}
               <li>
-                {{#link-to link (query-params prefix='')}}{{fa-icon "check-square-o"}}{{/link-to}}
+                {{#link-to link (query-params prefix='')}}<i class="far fa-check-square"></i>{{/link-to}}
                 <div class="facet-title">{{model.query.prefix}}</div>
                 <span class="number pull-right">0</span>
                 <div class="clearfix"/>
@@ -289,9 +289,9 @@
             {{#each model.meta.certificates as |certificate|}}
               <li>
                 {{#if model.query.certificate}}
-                  <LinkTo @route={{link}} @query={{hash certificate=""}}>{{fa-icon "check-square-o"}}</LinkTo>
+                  <LinkTo @route={{link}} @query={{hash certificate=""}}><i class="far fa-check-square"></i></LinkTo>
                 {{else}}
-                  <LinkTo @route={{link}} @query={{hash certificate=certificate.id}}>{{fa-icon "square-o"}}</LinkTo>
+                  <LinkTo @route={{link}} @query={{hash certificate=certificate.id}}><i class="far fa-square"></i></LinkTo>
                 {{/if}}
                 <div class="facet-title">{{certificate.title}}</div>
                 <span class="number pull-right">{{certificate.count}}</span>
@@ -300,7 +300,7 @@
             {{/each}}
           {{else}}
             <li>
-              <LinkTo @route={{link}} @query={{hash certificate=""}}>{{fa-icon "check-square-o"}}</LinkTo>
+              <LinkTo @route={{link}} @query={{hash certificate=""}}><i class="far fa-check-square"></i></LinkTo>
               <div class="facet-title">{{titleize model.query.certificate}}</div>
               <span class="number pull-right">0</span>
               <div class="clearfix"/>
@@ -320,9 +320,9 @@
               {{#each model.meta.schemaVersions as |schemaVersion|}}
                 <li>
                   {{#if model.query.schema-version}}
-                    <LinkTo @route={{link}} @query={{hash schema-version=''}}>{{fa-icon "check-square-o"}}</LinkTo>
+                    <LinkTo @route={{link}} @query={{hash schema-version=''}}><i class="far fa-check-square"></i></LinkTo>
                   {{else}}
-                    <LinkTo @route={{link}} @query={{hash schema-version=schemaVersion.id}}>{{fa-icon "square-o"}}</LinkTo>
+                    <LinkTo @route={{link}} @query={{hash schema-version=schemaVersion.id}}><i class="far fa-square"></i></LinkTo>
                   {{/if}}
                   <div class="facet-title">{{schemaVersion.title}}</div>
                   <span class="number pull-right">{{format-number schemaVersion.count}}</span>
@@ -331,7 +331,7 @@
               {{/each}}
             {{else}}
               <li>
-                <LinkTo @route={{link}} @query={{hash schema-version=''}}>{{fa-icon "check-square-o"}}</LinkTo>
+                <LinkTo @route={{link}} @query={{hash schema-version=''}}><i class="far fa-check-square"></i></LinkTo>
                 <div class="facet-title"><model.query.schema-version /></div>
                 <span class="number pull-right">0</span>
                 <div class="clearfix"/>
@@ -351,9 +351,9 @@
             {{#each model.meta.sources as |source|}}
               <li>
                 {{#if model.query.source}}
-                  <LinkTo @route={{link}} @query={{hash source=null}}>{{fa-icon "check-square-o"}}</LinkTo>
+                  <LinkTo @route={{link}} @query={{hash source=null}}><i class="far fa-check-square"></i></LinkTo>
                 {{else}}
-                  <LinkTo @route={{link}} @query={{hash source=source.id}}>{{fa-icon "square-o"}}</LinkTo>
+                  <LinkTo @route={{link}} @query={{hash source=source.id}}><i class="far fa-square"></i></LinkTo>
                 {{/if}}
                 <div class="facet-title">{{lowercase source.title}}</div>
                 <span class="number pull-right">{{format-number source.count}}</span>
@@ -362,7 +362,7 @@
             {{/each}}
           {{else}}
             <li>
-              <LinkTo @route={{link}} @query={{hash source=''}}>{{fa-icon "check-square-o"}}</LinkTo>
+              <LinkTo @route={{link}} @query={{hash source=''}}><i class="far fa-check-square"></i></LinkTo>
               <div class="facet-title">{{model.query.source}}</div>
               <span class="number pull-right">0</span>
               <div class="clearfix"/>
@@ -381,9 +381,9 @@
             {{#each model.meta.linkChecksStatus as |linkCheckStatus|}}
               <li>
                 {{#if model.query.link-check-status}}
-                  <LinkTo @route={{link}} @query={{hash link-check-status=null}}>{{fa-icon "check-square-o"}}</LinkTo>
+                  <LinkTo @route={{link}} @query={{hash link-check-status=null}}><i class="far fa-check-square"></i></LinkTo>
                 {{else}}
-                  <LinkTo @route={{link}} @query={{hash link-check-status=linkCheckStatus.id}}>{{fa-icon "square-o"}}</LinkTo>
+                  <LinkTo @route={{link}} @query={{hash link-check-status=linkCheckStatus.id}}><i class="far fa-square"></i></LinkTo>
                 {{/if}}
                 <div class="facet-title">{{linkCheckStatus.id}}</div>
                 <span class="number pull-right">{{format-number linkCheckStatus.count}}</span>
@@ -392,7 +392,7 @@
             {{/each}}
           {{else}}
             <li>
-              <LinkTo @route={{link}} @query={{hash link-check-status=''}}>{{fa-icon "check-square-o"}}</LinkTo>
+              <LinkTo @route={{link}} @query={{hash link-check-status=''}}><i class="far fa-check-square"></i></LinkTo>
               <div class="facet-title"><model.query.link-check-status /></div>
               <span class="number pull-right">0</span>
               <div class="clearfix"/>
@@ -415,9 +415,9 @@
         <DoiSummary @model={{doi}} @isList={{true}}  @isResearcherProfile={{isResearcherProfile}} />
         <div class="panel-footer">
           {{#if doi.isDraft}}
-            {{fa-icon "info-circle"}} {{doi.doi}}
+            <i class="fas fa-info-circle"></i> {{doi.doi}}
           {{else}}
-            <a href={{doi.identifier}} data-test-identifier>{{fa-icon "external-link"}} {{doi.identifier}}</a>
+            <a href={{doi.identifier}} data-test-identifier><i class="fas fa-external-link-alt"></i> {{doi.identifier}}</a>
           {{/if}}
         </div>
         <br/>

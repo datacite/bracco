@@ -8,17 +8,17 @@
       {{/each}}
 
       {{#if (lte model.dates.length 4)}}
-        <BsButton @class="btn-sm" @id="add-date" @outline={{true}} @onClick={{action "addDate"}}>{{fa-icon "plus"}} Add {{if (gt model.dates.length 0) "another "}}date</BsButton>
+        <BsButton @class="btn-sm" @id="add-date" @outline={{true}} @onClick={{action "addDate"}}><i class="fas fa-plus"></i> Add {{if (gt model.dates.length 0) "another "}}date</BsButton>
       {{/if}}
 
       {{#if (gt model.dates.length 0)}}
-        <BsButton @id="toggle-dates" @class="btn-sm" @outline={{true}} @onClick={{action "toggleDates"}}>{{fa-icon "eye-slash"}} Hide {{pluralize model.dates.length 'date'}}</BsButton>
+        <BsButton @id="toggle-dates" @class="btn-sm" @outline={{true}} @onClick={{action "toggleDates"}}><i class="fas fa-eye-slash"></i> Hide {{pluralize model.dates.length 'date'}}</BsButton>
       {{/if}}
     {{else}}
       {{#if (gt model.dates.length 0)}}
-        <BsButton @id="toggle-dates" @class="btn-sm" @outline={{true}} @onClick={{action "toggleDates"}}>{{fa-icon "eye"}} Show {{pluralize model.dates.length 'date'}}</BsButton>
+        <BsButton @id="toggle-dates" @class="btn-sm" @outline={{true}} @onClick={{action "toggleDates"}}><i class="fas fa-eye"></i> Show {{pluralize model.dates.length 'date'}}</BsButton>
       {{else}}
-        <BsButton @class="btn-sm btn-warning" @id="add-date" @outline={{true}} @onClick={{action "addDate"}}>{{fa-icon "plus"}} Add date</BsButton>
+        <BsButton @class="btn-sm btn-warning" @id="add-date" @outline={{true}} @onClick={{action "addDate"}}><i class="fas fa-plus"></i> Add date</BsButton>
       {{/if}}
     {{/if}}
   </div>

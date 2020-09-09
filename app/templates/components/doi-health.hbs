@@ -10,11 +10,11 @@
       <ul class="checkbox">
         <li>
           {{#if isFound.isChecked}}
-            {{fa-icon "check-circle-o"}}
+            <i class="far fa-check-circle"></i>
             {{isFound.text}}
             <div class="help-block checkbox-list">{{{isFound.helpText}}}</div>
           {{else}}
-            {{fa-icon "circle-o"}}
+            <i class="far fa-circle"></i>
             {{isFound.text}}
             <div class="help-block checkbox-list text-warning">{{{isFound.helpText}}}</div>
           {{/if}}
@@ -22,22 +22,22 @@
         {{#if isFound.isChecked}}
           <li>
             {{#if hasLandingPage.isChecked}}
-              {{fa-icon "check-circle-o"}}
+              <i class="far fa-check-circle"></i>
               {{hasLandingPage.text}}
               <div class="help-block checkbox-list">{{{hasLandingPage.helpText}}}</div>
             {{else}}
-              {{fa-icon "circle-o"}}
+              <i class="far fa-circle"></i>
               {{hasLandingPage.text}}
               <div class="help-block checkbox-list text-warning">{{{hasLandingPage.helpText}}}</div>
             {{/if}}
           </li>
           <li>
             {{#if hasDoi.isChecked}}
-              {{fa-icon "check-circle-o"}}
+              <i class="far fa-check-circle"></i>
               {{hasDoi.text}}
               <div class="help-block checkbox-list">{{{hasDoi.helpText}}}</div>
             {{else}}
-              {{fa-icon "circle-o"}}
+              <i class="far fa-circle"></i>
               {{hasDoi.text}}
               <div class="help-block checkbox-list text-warning">{{{hasDoi.helpText}}}</div>
             {{/if}}
@@ -45,11 +45,11 @@
           {{#if (eq model.types.resourceTypeGeneral 'Dataset')}}
             <li>
               {{#if hasSchemaOrg.isChecked}}
-                {{fa-icon "check-circle-o"}}
+                <i class="far fa-check-circle"></i>
                 {{hasSchemaOrg.text}}
                 <div class="help-block checkbox-list">{{{hasSchemaOrg.helpText}}}</div>
               {{else}}
-                {{fa-icon "circle-o"}}
+                <i class="far fa-circle"></i>
                 {{hasSchemaOrg.text}}
                 <div class="help-block checkbox-list text-warning">{{{hasSchemaOrg.helpText}}}</div>
               {{/if}}

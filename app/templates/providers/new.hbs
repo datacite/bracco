@@ -87,7 +87,7 @@
               <div class="btn-toolbar btn-sm btn-file">
                 <FileUpload @name="files" @id="upload-file" @multiple={{false}} @accept="image/png,image/jpeg" @onfileadd={{action "didSelectFiles"}}>
                   <span class="btn btn-sm">
-                    {{fa-icon "upload"}} {{if model.logo 'Replace' 'Upload'}} Logo
+                    <i class="fas fa-upload"></i> {{if model.logo 'Replace' 'Upload'}} Logo
                   </span>
                 </FileUpload>
               </div>
@@ -273,6 +273,16 @@
 
           <form.element @controlType="checkbox" @id="is-active" @label="Account is active" @property="isActive" @required={{false}} @helpText="This account can manage repositories and prefixes" />
           
+          <div class="col-md-offset-3">
+            <BsAlert @dismissible={{false}} class="opt-in" @type="warning">
+              The contacts entered may receive notifications about administration, webinars, product testing, 
+              or news that will impact the use of DataCite services and/or membership. Individuals may remove 
+              themselves from mailings by following the unsubscribe link provided in every DataCite email. 
+              For information about our privacy practices and commitment to protecting your privacy, please 
+              review our <a target="_blank" rel="noreferrer" href="https://datacite.org/privacy.html">Privacy Policy</a>.
+            </BsAlert>
+          </div>
+
           <div class="col-md-9 col-md-offset-3">
             {{#if (is-empty (provider-form-errors model))}}
               <button type="submit" id="add-provider" class="btn btn-sm btn-fill" disabled={{false}}>Add Member</button>

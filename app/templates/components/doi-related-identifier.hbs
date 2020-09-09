@@ -2,7 +2,7 @@
   <input type="text"
     class="form-control related-identifier-field no-error {{if (not fragment.relatedIdentifier) 'no-success'}}" placeholder="Related Identifier" value={{fragment.relatedIdentifier}} oninput={{action "updateRelatedIdentifier" value="target.value"}} data-test-related-identifier />
   <span class="input-group-btn">
-    <BsButton @outline={{true}} @onClick={{action "deleteRelatedIdentifier" index}}>{{fa-icon "trash"}}</BsButton>
+    <BsButton @outline={{true}} @onClick={{action "deleteRelatedIdentifier" index}}><i class="fas fa-trash"></i></BsButton>
   </span>
 </div>
 

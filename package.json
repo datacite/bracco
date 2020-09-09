@@ -122,7 +122,6 @@
     "ember-export-application-global": "^2.0.1",
     "ember-feature-flags": "^6.0.0",
     "ember-fetch": "^7.0.0",
-    "ember-font-awesome": "^4.0.0-rc.4",
     "ember-inflector": "^3.0.1",
     "ember-intl": "^4.2.2",
     "ember-load-initializers": "^2.1.1",

@@ -69,7 +69,7 @@
             {{/each}}
           {{/if}}
           {{#if (lte model.language.length 2)}}
-            <BsButton @class="btn-sm add-language" @outline={{true}} @onClick={{action "addLanguage"}}>{{fa-icon "plus-circle"}} Add Language</BsButton>
+            <BsButton @class="btn-sm add-language" @outline={{true}} @onClick={{action "addLanguage"}}><i class="fas fa-plus-circle"></i> Add Language</BsButton>
           {{/if}}
         </div>
       </div>
@@ -91,7 +91,7 @@
               {{/each}}
             {{/if}}
             {{#if (lte model.repositoryType.length 2)}}
-              <BsButton @class="btn-sm add-repositoryType" @outline={{true}} @onClick={{action "addRepositoryType"}}>{{fa-icon "plus-circle"}} Add Repository Type</BsButton>
+              <BsButton @class="btn-sm add-repositoryType" @outline={{true}} @onClick={{action "addRepositoryType"}}><i class="fas fa-plus-circle"></i> Add Repository Type</BsButton>
             {{/if}}
           </div>
         </div>
@@ -105,7 +105,7 @@
               {{/each}}
             {{/if}}
             {{#if (lte model.certificate.length 2)}}
-              <BsButton @class="btn-sm add-certificate" @outline={{true}} @onClick={{action "addCertificate"}}>{{fa-icon "plus-circle"}} Add Certificate</BsButton>
+              <BsButton @class="btn-sm add-certificate" @outline={{true}} @onClick={{action "addCertificate"}}><i class="fas fa-plus-circle"></i> Add Certificate</BsButton>
             {{/if}}
           </div>
         </div>
@@ -114,6 +114,16 @@
       {{#if (can "create repository" model)}}
         <form.element @controlType="checkbox" @id="is-active" @label="Account is active" @property="isActive" @helpText="This account can register and update DOIs" />
       {{/if}}
+
+      <div class="col-md-offset-3">
+        <BsAlert @dismissible={{false}} class="opt-in" @type="warning">
+          The contacts entered may receive notifications about administration, webinars, product testing, 
+          or news that will impact the use of DataCite services and/or membership. Individuals may remove 
+          themselves from mailings by following the unsubscribe link provided in every DataCite email. 
+          For information about our privacy practices and commitment to protecting your privacy, please 
+          review our <a target="_blank" rel="noreferrer" href="https://datacite.org/privacy.html">Privacy Policy</a>.
+        </BsAlert>
+      </div>
 
       <div class="col-md-9 col-md-offset-3">
         {{#if (is-empty (repository-form-errors model))}}

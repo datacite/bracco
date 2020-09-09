@@ -28,16 +28,16 @@
                 Role: {{currentUser.roleName}}
               </menu.item>
               <menu.item>
-                <DynamicLink @params={{settings}}>{{fa-icon "cog"}} Settings</DynamicLink>
+                <DynamicLink @params={{settings}}><i class="fas fa-cog"></i> Settings</DynamicLink>
               </menu.item>
               <menu.divider/>
               <menu.item>
-                <a {{action "invalidateSession"}}>{{fa-icon "sign-out"}} Sign out</a>
+                <a {{action "invalidateSession"}}><i class="fas fa-sign-out-alt"></i> Sign out</a>
               </menu.item>
             </dd.menu>
           </nav.dropdown>
         {{else}}
-          <nav.item><LinkTo @route="sign-in" @id="sign-in" class="btn btn-sm btn-neutral">{{fa-icon "sign-in"}} {{t "user.signin"}}</LinkTo></nav.item>
+          <nav.item><LinkTo @route="sign-in" @id="sign-in" class="btn btn-sm btn-neutral"><i class="fas fa-sign-in-alt"></i> {{t "user.signin"}}</LinkTo></nav.item>
         {{/if}}
       {{/if}}
     </navbar.nav>

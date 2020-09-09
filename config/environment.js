@@ -61,7 +61,7 @@ module.exports = function(environment) {
     CROSSREF_API_URL: process.env.CROSSREF_API_URL || 'https://api.crossref.org',
     ORCID_API_URL: process.env.ORCID_API_URL || 'https://pub.orcid.org',
     EVENTDATA_URL: process.env.EVENTDATA_URL || 'https://api.stage.datacite.org',
-    CDN_URL: process.env.CDN_URL || 'https://assets.stage.datacite.org',
+    CDN_URL: process.env.CDN_URL || 'https://www.stage.datacite.org',
     JWT_PUBLIC_KEY: process.env.JWT_PUBLIC_KEY || '-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxWfFGoaO4d9s7OoW34UD\nbEbFdh1FrAXT5QmWVocZIP0Y+1KtNGNjpRpazlSWeSMFuswoDG/cKiJX3BQkP7fw\nbHCujQoNpQqznsI8rRJYZh/L+THxjY7OEoFg7QohqnEHRr9YW4wPzh+I0xj2puVr\ngyQzREYckeBUEJnS2uXdiZ32LzbiH4pE+wwZNVQv0BbadnTc2mJWMaEcUfuh0Qko\nxIVpPwTCzyD4kMriETe+/AOw/2DEwbNJakh8N2ySMhXbso/zHxStEw2YesJkNJWG\n+aG5ApSbwTba8DVHKvTgCsE1d+1tHFyeruTxPIfamwA/VkVBuUpYR7CmJaoNuk1e\nKwIDAQAB\n-----END PUBLIC KEY-----\n',
     SENTRY_DSN: process.env.SENTRY_DSN || 'https://63201db022924202b697e03bc5e0d0ba@sentry.io/1420435',
     STAFF_ADMIN_TOKEN: process.env.STAFF_ADMIN_TOKEN,
@@ -92,7 +92,7 @@ module.exports = function(environment) {
     ENV.CROSSREF_API_URL = 'https://api.crossref.org';
     ENV.EVENTDATA_URL = 'https://api.datacite.org';
     ENV.SEARCH_URL = 'https://search.datacite.org';
-    ENV.CDN_URL = 'https://assets.datacite.org';
+    ENV.CDN_URL = 'https://datacite.org';
     ENV.COOKIE_DOMAIN = '.datacite.org';
   }
 

@@ -5,7 +5,7 @@
         <div class="panel-body">
           <div class="btn-toolbar">
             <div class="btn-group btn-group-sm">
-              <LinkTo @route="providers.show.prefixes.new" @model={{model.provider.id}} class="btn btn-warning" id="assign-prefix">{{fa-icon "link"}}Assign Prefix</LinkTo>
+              <LinkTo @route="providers.show.prefixes.new" @model={{model.provider.id}} class="btn btn-warning" id="assign-prefix"><i class="fas fa-link"></i>Assign Prefix</LinkTo>
             </div>
           </div>
         </div>
@@ -21,15 +21,15 @@
     {{#if model.prefixes.meta.states}}
       <div class="panel facets add">
         <div class="panel-body">
-          <h4>State <span class="small">{{fa-icon "question-circle-o"}}<BsTooltip @placement="top">Filter prefixes by whether they have been assigned to a repository.</BsTooltip></span></h4>
+          <h4>State <span class="small"><i class="fas fa-question-circle"></i><BsTooltip @placement="top">Filter prefixes by whether they have been assigned to a repository.</BsTooltip></span></h4>
           <ul>
             {{#each model.prefixes.meta.states as |state|}}
               <li>
                 {{#if model.prefixes.query.state}}
-                  <LinkTo @route="providers.show.prefixes" @query={{hash state=null}}>{{fa-icon "check-square-o"}}
+                  <LinkTo @route="providers.show.prefixes" @query={{hash state=null}}><i class="far fa-check-square"></i>
                   </LinkTo>
                 {{else}}
-                  <LinkTo @route="providers.show.prefixes" @query={{hash state=state.id}}>{{fa-icon "square-o"}}</LinkTo>
+                  <LinkTo @route="providers.show.prefixes" @query={{hash state=state.id}}><i class="far fa-square"></i></LinkTo>
                 {{/if}}
                 <div class="facet-title">{{state.title}}</div>
                 <span class="number pull-right">{{state.count}}</span>
@@ -49,10 +49,10 @@
             {{#each model.prefixes.meta.years as |year|}}
               <li>
                 {{#if model.prefixes.query.year}}
-                  <LinkTo @route="providers.show.prefixes" @query={{hash year=null}}>{{fa-icon "check-square-o"}}
+                  <LinkTo @route="providers.show.prefixes" @query={{hash year=null}}><i class="far fa-check-square"></i>
                   </LinkTo>
                 {{else}}
-                  <LinkTo @route="providers.show.prefixes" @query={{hash year=year.id}}>{{fa-icon "square-o"}}
+                  <LinkTo @route="providers.show.prefixes" @query={{hash year=year.id}}><i class="far fa-square"></i>
                   </LinkTo>
                 {{/if}}
                 <div class="facet-title">{{year.title}}</div>
@@ -73,9 +73,9 @@
             {{#each model.prefixes.meta.providers as |consortium-organization|}}
               <li>
                 {{#if model.prefixes.query.consortium-organization-id}}
-                  <LinkTo @route="providers.show.prefixes" @query={{hash consortium-organization-id=null}}>{{fa-icon "check-square-o"}}</LinkTo>
+                  <LinkTo @route="providers.show.prefixes" @query={{hash consortium-organization-id=null}}><i class="far fa-check-square"></i></LinkTo>
                 {{else}}
-                  <LinkTo @route="providers.show.prefixes" @query={{hash consortium-organization-id=consortium-organization.id}}>{{fa-icon "square-o"}}</LinkTo>
+                  <LinkTo @route="providers.show.prefixes" @query={{hash consortium-organization-id=consortium-organization.id}}><i class="far fa-square"></i></LinkTo>
                 {{/if}}
                 <div class="facet-title">{{consortium-organization.title}}</div>
                 <span class="number pull-right">{{consortium-organization.count}}</span>

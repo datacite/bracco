@@ -43,7 +43,7 @@
   <input type="text" placeholder="Subject Scheme URI" class="form-control subject-scheme-uri-field" disabled={{this.oecdSelected}}
     value={{fragment.subjectSchemeUri}} oninput={{action "updateSubjectSchemeUri" value="target.value"}} data-test-subject-uri/>
   <span class="input-group-btn">
-    <BsButton @outline={{true}} @onClick={{action "deleteSubject" index}}>{{fa-icon "trash"}}</BsButton>
+    <BsButton @outline={{true}} @onClick={{action "deleteSubject" index}}><i class="fas fa-trash"></i></BsButton>
   </span>
 </div>
 <div class="help-block help-block-fragment">The URI of the subject identifier scheme. For example http://id.loc.gov/authorities/subjects</div>

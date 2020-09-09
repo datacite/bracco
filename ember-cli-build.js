@@ -31,7 +31,7 @@ module.exports = function(defaults) {
         content: (process.env.SITE_TITLE || 'DataCite Fabrica'),
       },
       'cdn-url': {
-        content: (process.env.CDN_URL || 'https://assets.datacite.org') + '/stylesheets/doi.css?version=' + (pkg.version || '1.0'),
+        content: (process.env.CDN_URL || 'https://datacite.org') + '/stylesheets/doi.css?version=' + (pkg.version || '1.0'),
       },
     },
     'ember-power-select': {

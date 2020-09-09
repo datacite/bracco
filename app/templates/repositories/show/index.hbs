@@ -5,15 +5,15 @@
         <div class="panel-body">
           <div class="btn-toolbar">
             <div class="btn-group-vertical btn-group-sm">
-              <LinkTo @route="repositories.show.change" @model={{model.id}} class="btn btn-warning" @id="set-password-repository">{{fa-icon "key"}} Set Password</LinkTo>
-              <LinkTo @route="repositories.show.edit" @model={{model.id}} class="btn btn-warning" @id="edit-repository">{{fa-icon "pencil"}} Update {{if (eq currentUser.uid model.id) 'Account' 'Repository'}}</LinkTo>
+              <LinkTo @route="repositories.show.change" @model={{model.id}} class="btn btn-warning" @id="set-password-repository"><i class="fas fa-key"></i> Set Password</LinkTo>
+              <LinkTo @route="repositories.show.edit" @model={{model.id}} class="btn btn-warning" @id="edit-repository"><i class="fas -alt"></i> Update {{if (eq currentUser.uid model.id) 'Account' 'Repository'}}</LinkTo>
             
               {{#if (can "delete repository" model)}}
-                <LinkTo @route="repositories.show.delete" @model={{model.id}} class="btn btn-warning" @id="delete-repository">{{fa-icon "trash"}} Delete Repository</LinkTo>
+                <LinkTo @route="repositories.show.delete" @model={{model.id}} class="btn btn-warning" @id="delete-repository"><i class="fas fa-trash"></i> Delete Repository</LinkTo>
               {{/if}}
 
               {{#if (can "transfer repository" model)}}
-                <LinkTo @route="repositories.show.transfer-repository" @model={{model.id}} class="btn btn-warning" @id="transfer-repository">{{fa-icon "arrow-circle-o-right"}}Transfer{{if media.isXl ' Repository'}}</LinkTo>
+                <LinkTo @route="repositories.show.transfer-repository" @model={{model.id}} class="btn btn-warning" @id="transfer-repository"><i class="fas fa-arrow-circle-right"></i>Transfer{{if media.isXl ' Repository'}}</LinkTo>
               {{/if}}
             </div>
           </div>
@@ -37,7 +37,7 @@
         <h5>
           Repository ID
           <span>
-            {{fa-icon "question-circle-o"}}
+            <i class="fas fa-question-circle"></i>
             <BsTooltip @placement="top" @viewportPadding={{10}}>The Repository ID is a unique identifier for each repository in DataCite. It must contain only upper case letters and numbers, and must start with the Member ID.</BsTooltip>
           </span>
         </h5>
@@ -47,7 +47,7 @@
           <h5>
             re3data Record
             <span>
-              {{fa-icon "question-circle-o"}}
+              <i class="fas fa-question-circle"></i>
               <BsTooltip @placement="top" @viewportPadding={{10}}>re3data is a registry of research data repositories.</BsTooltip>
             </span>
           </h5>
@@ -110,7 +110,7 @@
         {{#if model.domainList}}
           <h5>
             {{pluralize model.domainList.length "Domain" without-count=true}}
-            <span>{{fa-icon "question-circle-o"}}
+            <span><i class="fas fa-question-circle"></i>
               <BsTooltip @placement="top" @viewportPadding={{10}}>URLs for DOIs must use {{#if (gt model.domainList.length 1)}}one of these (sub-)domains{{else}}this (sub-)domain{{/if}}.</BsTooltip>
             </span>
           </h5>

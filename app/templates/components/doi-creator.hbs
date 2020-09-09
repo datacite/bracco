@@ -7,7 +7,7 @@
 {{/if}}
 
 {{#if (lte fragment.nameIdentifiers.length 2)}}
-  <BsButton @class="btn-sm add-name-identifier" @outline={{true}} @onClick={{action "addNameIdentifier"}}>{{fa-icon "plus-circle"}} Add another name identifier</BsButton>
+  <BsButton @class="btn-sm add-name-identifier" @outline={{true}} @onClick={{action "addNameIdentifier"}}><i class="fas fa-plus-circle"></i> Add another name identifier</BsButton>
 {{/if}}
 
 <div class="radio-fragment">
@@ -34,7 +34,7 @@
     <div class="input-group">
       <input type="text" class="form-control name-field" value={{fragment.name}} placeholder="Name" oninput={{action "updateName" value="target.value"}} readonly={{isReadonly}} data-test-name/>
       <span class="input-group-btn">
-        <BsButton @outline={{true}} @onClick={{action "deleteCreator" index}}>{{fa-icon "trash"}}</BsButton>
+        <BsButton @outline={{true}} @onClick={{action "deleteCreator" index}}><i class="fas fa-trash"></i></BsButton>
       </span>
     </div>
   </div>
@@ -78,7 +78,7 @@
   {{/if}}
 
   {{#if (lte fragment.affiliation.length 2)}}
-    <BsButton @class="btn-sm add-affiliation" @outline={{true}} @onClick={{action "addAffiliation"}}>{{fa-icon "plus-circle"}} Add another affiliation</BsButton>
+    <BsButton @class="btn-sm add-affiliation" @outline={{true}} @onClick={{action "addAffiliation"}}><i class="fas fa-plus-circle"></i> Add another affiliation</BsButton>
   {{/if}}
 {{/if}}
 

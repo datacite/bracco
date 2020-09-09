@@ -35,22 +35,22 @@
     <div class="metrics-counter">
       {{#if (add model.citationCount model.viewCount model.downloadCount)}}
           {{#if model.citationCount}}
-            <i class="metrics-icons" citations-test-badge> {{fa-icon "quote-right"}} {{ format-numbers model.citationCount }} {{ pluralize model.citationCount 'Citation' without-count=true}}</i>
+            <i class="metrics-icons" citations-test-badge> <i class="fas fa-quote-right"></i> {{ format-numbers model.citationCount }} {{ pluralize model.citationCount 'Citation' without-count=true}}</i>
           {{else}}
-            <i class="metrics-icons" citations-test-badge>{{fa-icon "info-circle"}}  No citations were reported.</i>
+            <i class="metrics-icons" citations-test-badge><i class="fas fa-info-circle"></i> No citations were reported.</i>
           {{/if}}
           {{#if (add model.viewCount model.downloadCount) }}
             {{#if model.viewCount}}
-              <i class="metrics-icons"> {{fa-icon "eye"}}  {{ format-numbers model.viewCount }}  {{ pluralize model.viewCount 'View' without-count=true }} </i>
+              <i class="metrics-icons"><i class="fas fa-eye"></i> {{ format-numbers model.viewCount }}  {{ pluralize model.viewCount 'View' without-count=true }} </i>
             {{/if}}
             {{#if model.downloadCount}}
-              <i class="metrics-icons"> {{fa-icon "download"}}  {{ format-numbers model.downloadCount }}   {{ pluralize model.downloadCount 'Download' without-count=true }} </i>
+              <i class="metrics-icons"><i class="fas fa-download"></i> {{ format-numbers model.downloadCount }}   {{ pluralize model.downloadCount 'Download' without-count=true }} </i>
             {{/if}}
           {{else}}
-            <i class="metrics-icons">{{fa-icon "info-circle"}}  No usage information was reported.</i>
+            <i class="metrics-icons"><i class="fas fa-info-circle"></i> No usage information was reported.</i>
           {{/if}}
       {{else}}
-        <i>{{fa-icon "info-circle"}}  No citations were reported. No usage information was reported.</i>
+        <i><i class="fas fa-info-circle"></i> No citations were reported. No usage information was reported.</i>
       {{/if}}
     </div>
   </div>

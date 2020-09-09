@@ -8,17 +8,17 @@
       {{/each}}
 
       {{#if (lte model.geoLocations.length 4)}}
-        <BsButton @class="btn-sm" @id="add-geolocation" @outline={{true}} @onClick={{action "addGeoLocation"}}>{{fa-icon "plus"}} Add {{if (gt model.geoLocations.length 0) "another "}}geolocation</BsButton>
+        <BsButton @class="btn-sm" @id="add-geolocation" @outline={{true}} @onClick={{action "addGeoLocation"}}><i class="fas fa-plus"></i> Add {{if (gt model.geoLocations.length 0) "another "}}geolocation</BsButton>
       {{/if}}
 
       {{#if (gt model.geoLocations.length 0)}}
-        <BsButton @id="toggle-geolocations" @class="btn-sm" @outline={{true}} @onClick={{action "toggleGeoLocations"}}>{{fa-icon "eye-slash"}} Hide {{pluralize model.geoLocations.length 'geolocation'}}</BsButton>
+        <BsButton @id="toggle-geolocations" @class="btn-sm" @outline={{true}} @onClick={{action "toggleGeoLocations"}}><i class="fas fa-eye-slash"></i> Hide {{pluralize model.geoLocations.length 'geolocation'}}</BsButton>
       {{/if}}
     {{else}}
       {{#if (gt model.geoLocations.length 0)}}
-        <BsButton @id="toggle-geolocations" @class="btn-sm" @outline={{true}} @onClick={{action "toggleGeoLocations"}}>{{fa-icon "eye"}} Show {{pluralize model.geoLocations.length 'geolocation'}}</BsButton>
+        <BsButton @id="toggle-geolocations" @class="btn-sm" @outline={{true}} @onClick={{action "toggleGeoLocations"}}><i class="fas fa-eye"></i> Show {{pluralize model.geoLocations.length 'geolocation'}}</BsButton>
       {{else}}
-        <BsButton @class="btn-sm btn-warning btn-warning" @id="add-geolocation" @outline={{true}} @onClick={{action "addGeoLocation"}}>{{fa-icon "plus"}} Add geolocation</BsButton>
+        <BsButton @class="btn-sm btn-warning btn-warning" @id="add-geolocation" @outline={{true}} @onClick={{action "addGeoLocation"}}><i class="fas fa-plus"></i> Add geolocation</BsButton>
       {{/if}}
     {{/if}}
   </div>

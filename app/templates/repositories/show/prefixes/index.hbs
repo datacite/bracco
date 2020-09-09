@@ -4,7 +4,7 @@
       <div class="panel-body">
         <div class="btn-toolbar">
           <div class="btn-group btn-group-sm">
-            <LinkTo @route="repositories.show.prefixes.new" @model={{model.repository.id}} class="btn btn-warning" @id="assign-prefix">{{fa-icon "link"}}Assign Prefix</LinkTo>
+            <LinkTo @route="repositories.show.prefixes.new" @model={{model.repository.id}} class="btn btn-warning" @id="assign-prefix"><i class="fas fa-link"></i>Assign Prefix</LinkTo>
           </div>
         </div>
       </div>
@@ -25,9 +25,9 @@
           {{#each model.repository-prefixes.meta.years as |year|}}
             <li>
               {{#if model.repository-prefixes.query.year}}
-                <LinkTo @route="repositories.show.prefixes" @query={{hash year=null}}>{{fa-icon "check-square-o"}}</LinkTo>
+                <LinkTo @route="repositories.show.prefixes" @query={{hash year=null}}><i class="far fa-check-square"></i></LinkTo>
               {{else}}
-                <LinkTo @route="repositories.show.prefixes" @query={{hash year=year.id}}>{{fa-icon "square-o"}}</LinkTo>
+                <LinkTo @route="repositories.show.prefixes" @query={{hash year=year.id}}><i class="far fa-square"></i></LinkTo>
               {{/if}}
               <div class="facet-title">{{year.title}}</div>
               <span class="number pull-right">{{year.count}}</span>

@@ -20,9 +20,9 @@
 
   <div class="pseudo-footer">
     {{model.uid}}
-    <span>{{fa-icon "question-circle-o"}}
+    <span><i class="fas fa-question-circle"></i>
       <BsTooltip @placement="top" @viewportPadding={{10}}>Each provider has a unique ID.</BsTooltip>
     </span>
-    <button {{action "edit" model}} class="btn-link">{{fa-icon "pencil"}}</button>
+    <button {{action "edit" model}} class="btn-link"><i class="fas fa-pencil-alt"></i></button>
   </div>
 {{/if}}

@@ -3,114 +3,126 @@ import Component from '@ember/component';
 import ENV from 'bracco/config/environment';
 
 const data = {
-  'about_links': [
+  about_links: [
     {
-      'name': 'What we do',
-      'url': 'https://www.datacite.org/mission.html',
+      name: 'What we do',
+      url: ENV.CDN_URL + '/value.html',
     },
     {
-      'name': 'Governance',
-      'url': 'https://www.datacite.org/governance.html',
+      name: 'Governance',
+      url: ENV.CDN_URL + '/governance.html',
     },
     {
-      'name': 'Steering groups',
-      'url': 'https://www.datacite.org/steering.html',
+      name: 'Members',
+      url: ENV.CDN_URL + '/members.html',
     },
     {
-      'name': 'Staff',
-      'url': 'https://www.datacite.org/staff.html',
+      name: 'Steering groups',
+      url: ENV.CDN_URL + '/steering.html',
     },
     {
-      'name': 'Job opportunities',
-      'url': 'https://www.datacite.org/jobopportunities.html',
-    },
-  ],
-  'services_links': [
-    {
-      'name': 'Assign DOIs',
-      'url': 'https://www.datacite.org/dois.html',
+      name: 'Staff',
+      url: ENV.CDN_URL + '/staff.html',
     },
     {
-      'name': 'Metadata search',
-      'url': 'https://www.datacite.org/search.html',
-    },
-    {
-      'name': 'Event data',
-      'url': 'https://www.datacite.org/eventdata.html',
-    },
-    {
-      'name': 'Profiles',
-      'url': 'https://www.datacite.org/profiles.html',
-    },
-    {
-      'name': 're3data',
-      'url': 'https://www.datacite.org/re3data.html',
-    },
-    {
-      'name': 'Citation formatter',
-      'url': 'https://www.datacite.org/citation.html',
-    },
-    {
-      'name': 'Statistics',
-      'url': 'https://www.datacite.org/stats.html',
-    },
-    {
-      'name': 'Content negotiation',
-      'url': 'https://www.datacite.org/content.html',
-    },
-    {
-      'name': 'OAI-PMH',
-      'url': 'https://www.datacite.org/oaipmh.html',
+      name: 'Job opportunities',
+      url: ENV.CDN_URL + '/jobopportunities.html',
     },
   ],
-  'resources_links': [
+  services_links: [
     {
-      'name': 'Metadata schema',
-      'url': 'https://schema.datacite.org',
+      name: 'Assign DOIs',
+      url: ENV.CDN_URL + '/dois.html',
     },
     {
-      'name': 'Support',
-      'url': 'https://support.datacite.org',
+      name: 'Metadata search',
+      url: ENV.CDN_URL + '/search.html',
+    },
+    {
+      name: 'Event data',
+      url: ENV.CDN_URL + '/eventdata.html',
+    },
+    {
+      name: 'Profiles',
+      url: ENV.CDN_URL + '/profiles.html',
+    },
+    {
+      name: 're3data',
+      url: ENV.CDN_URL + '/re3data.html',
+    },
+    {
+      name: 'Citation formatter',
+      url: ENV.CDN_URL + '/citation.html',
+    },
+    {
+      name: 'Statistics',
+      url: ENV.CDN_URL + '/stats.html',
+    },
+    {
+      name: 'Service status',
+      url: ENV.CDN_URL + '/service.html',
+    },
+    {
+      name: 'Content negotiation',
+      url: ENV.CDN_URL + '/content.html',
+    },
+    {
+      name: 'OAI-PMH',
+      url: ENV.CDN_URL + '/oaipmh.html',
+    },
+    {
+      name: 'Test environment',
+      url: ENV.CDN_URL + '/test.html',
     },
   ],
-  'community_links': [
+  resources_links: [
     {
-      'name': 'Members',
-      'url': 'https://www.datacite.org/members.html',
+      name: 'Metadata schema',
+      url: 'https://schema.datacite.org',
     },
     {
-      'name': 'Partners',
-      'url': 'https://www.datacite.org/partners.html',
+      name: 'Support',
+      url: 'https://support.datacite.org',
     },
     {
-      'name': 'Steering groups',
-      'url': 'https://www.datacite.org/steering.html',
-    },
-    {
-      'name': 'Events',
-      'url': 'https://www.datacite.org/events.html',
-    },
-    {
-      'name': 'Roadmap',
-      'url': 'https://www.datacite.org/roadmap.html',
-    },
-    {
-      'name': 'User Stories',
-      'url': 'https://www.datacite.org/user-stories.html',
+      name: 'Fee Model',
+      url: ENV.CDN_URL + '/feemodel.html',
     },
   ],
-  'contact_links': [
+  community_links: [
     {
-      'name': 'Terms and conditions',
-      'url': 'https://www.datacite.org/terms.html',
+      name: 'Members',
+      url: ENV.CDN_URL + '/members.html',
     },
     {
-      'name': 'Privacy policy',
-      'url': 'https://www.datacite.org/privacy.html',
+      name: 'Partners',
+      url: ENV.CDN_URL + '/partners.html',
     },
     {
-      'name': 'Acknowledgements',
-      'url': 'https://www.datacite.org/acknowledgments.html',
+      name: 'Steering groups',
+      url: ENV.CDN_URL + '/steering.html',
+    },
+    {
+      name: 'Service providers',
+      url: ENV.CDN_URL + '/service-providers.html',
+    },
+    {
+      name: 'Roadmap',
+      url: ENV.CDN_URL + '/roadmap.html',
+    },
+  ],
+  contact_links: [
+    {
+      name: 'Imprint',
+      url: ENV.CDN_URL + '/imprint.html',
+    },
+    {
+      name: 'Terms and conditions',
+      url: ENV.CDN_URL + '/terms.html',
+    },
+    {
+      name: 'Privacy policy',
+      url: ENV.CDN_URL + '/privacy.html',
     },
   ],
 };

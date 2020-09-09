@@ -4,9 +4,9 @@
       <div class="btn-toolbar">
         <div class="btn-group btn-group-sm">
           {{#if model.repository}}
-            <LinkTo @route={{link}} @model={{model.repository.id}} class="btn btn-warning" @id="assign-prefix">{{fa-icon "link"}}Assign Prefix</LinkTo>
+            <LinkTo @route={{link}} @model={{model.repository.id}} class="btn btn-warning" @id="assign-prefix"><i class="fas fa-link"></i>Assign Prefix</LinkTo>
           {{else}}
-            <LinkTo @route={{link}} @model={{model.repository.id}} class="btn btn-warning" @id="assign-prefix">{{fa-icon "link"}}Assign Prefix</LinkTo>
+            <LinkTo @route={{link}} @model={{model.repository.id}} class="btn btn-warning" @id="assign-prefix"><i class="fas fa-link"></i>Assign Prefix</LinkTo>
           {{/if}}
         </div>
       </div>

@@ -1,39 +1,44 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Bracco Tests</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    {{content-for "head"}}
-    {{content-for "test-head"}}
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Bracco Tests</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600" rel="stylesheet">
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet" type='text/css'>
-    <link href="//cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/themes/prism.min.css" rel="stylesheet" type='text/css'>
-    <link href="//cdnjs.cloudflare.com/ajax/libs/cc-icons/1.2.1/css/cc-icons.min.css" rel="stylesheet">
-    <link href="{{content-for 'cdn-url'}}/stylesheets/doi.css" rel='stylesheet' type='text/css'>
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  {{content-for "head"}}
+  {{content-for "test-head"}}
 
-    <link rel="stylesheet" href="{{rootURL}}assets/test-support.css">
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+    integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
+    rel="stylesheet" crossorigin="anonymous" />
+  <link href="//cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/themes/prism.min.css" rel="stylesheet" type='text/css'>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/cc-icons/1.2.1/css/cc-icons.min.css" rel="stylesheet">
+  <link href="{{content-for 'cdn-url'}}/stylesheets/doi.css" rel='stylesheet' type='text/css'>
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
 
-    {{content-for "head-footer"}}
-    {{content-for "test-head-footer"}}
-  </head>
-  <body>
-    {{content-for "body"}}
-    {{content-for "test-body"}}
+  <link rel="stylesheet" href="{{rootURL}}assets/test-support.css">
 
-    <script src="/testem.js" integrity=""></script>
-    <script src="{{rootURL}}assets/vendor.js"></script>
-    <script src="{{rootURL}}assets/test-support.js"></script>
-    <script src="{{rootURL}}assets/bracco.js"></script>
-    <script src="{{rootURL}}assets/tests.js"></script>
+  {{content-for "head-footer"}}
+  {{content-for "test-head-footer"}}
+</head>
 
-    {{content-for "body-footer"}}
-    {{content-for "test-body-footer"}}
-  </body>
+<body>
+  {{content-for "body"}}
+  {{content-for "test-body"}}
+
+  <script src="/testem.js" integrity=""></script>
+  <script src="{{rootURL}}assets/vendor.js"></script>
+  <script src="{{rootURL}}assets/test-support.js"></script>
+  <script src="{{rootURL}}assets/bracco.js"></script>
+  <script src="{{rootURL}}assets/tests.js"></script>
+
+  {{content-for "body-footer"}}
+  {{content-for "test-body-footer"}}
+</body>
+
 </html>
