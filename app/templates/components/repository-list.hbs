@@ -88,7 +88,7 @@
                 {{#if model.repositories.query.client-type}}
                   <LinkTo @route={{link}} @query={{hash client-type=""}}><i class="far fa-check-square"></i></LinkTo>
                 {{else}}
-                  <LinkTo @route={{link}} @query={{hash client-type=clientType.id}}><i class="far fa-check-square"></i></LinkTo>
+                  <LinkTo @route={{link}} @query={{hash client-type=clientType.id}}><i class="far fa-square"></i></LinkTo>
                 {{/if}}
                 <div class="facet-title">{{clientType.title}}</div>
                 <span class="number pull-right">{{clientType.count}}</span>
@@ -118,7 +118,7 @@
                 {{#if model.repositories.query.repository-type}}
                   <LinkTo @route={{link}} @query={{hash repository-type=""}}><i class="far fa-check-square"></i></LinkTo>
                 {{else}}
-                  <LinkTo @route={{link}} @query={{hash repository-type=repositoryType.id}}><i class="far fa-check-square"></i></LinkTo>
+                  <LinkTo @route={{link}} @query={{hash repository-type=repositoryType.id}}><i class="far fa-square"></i></LinkTo>
                 {{/if}}
                 <div class="facet-title">{{repositoryType.title}}</div>
                 <span class="number pull-right">{{repositoryType.count}}</span>
@@ -148,7 +148,7 @@
                 {{#if model.repositories.query.certificate}}
                   <LinkTo @route={{link}} @query={{hash certificate=""}}><i class="far fa-check-square"></i></LinkTo>
                 {{else}}
-                  <LinkTo @route={{link}} @query={{hash certificate=certificate.id}}><i class="far fa-check-square"></i></LinkTo>
+                  <LinkTo @route={{link}} @query={{hash certificate=certificate.id}}><i class="far fa-square"></i></LinkTo>
                 {{/if}}
                 <div class="facet-title">{{certificate.title}}</div>
                 <span class="number pull-right">{{certificate.count}}</span>
