@@ -6,7 +6,7 @@
           <div class="btn-toolbar">
             <div class="btn-group-vertical btn-group-sm">
               <LinkTo @route="repositories.show.change" @model={{model.id}} class="btn btn-warning" @id="set-password-repository"><i class="fas fa-key"></i> Set Password</LinkTo>
-              <LinkTo @route="repositories.show.edit" @model={{model.id}} class="btn btn-warning" @id="edit-repository"><i class="fas -alt"></i> Update {{if (eq currentUser.uid model.id) 'Account' 'Repository'}}</LinkTo>
+              <LinkTo @route="repositories.show.edit" @model={{model.id}} class="btn btn-warning" @id="edit-repository"><i class="fas fa-pencil-alt"></i> Update {{if (eq currentUser.uid model.id) 'Account' 'Repository'}}</LinkTo>
             
               {{#if (can "delete repository" model)}}
                 <LinkTo @route="repositories.show.delete" @model={{model.id}} class="btn btn-warning" @id="delete-repository"><i class="fas fa-trash"></i> Delete Repository</LinkTo>
