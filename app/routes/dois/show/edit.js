@@ -25,9 +25,6 @@ export default Route.extend({
       this.transitionTo('index');
     } else {
       this.modelFor('dois/show').set('mode', 'edit');
-      this.flashMessages.warning('This form is in BETA. Send feedback to support@datacite.org.', {
-        sticky: true,
-      });
     }
   },
 });

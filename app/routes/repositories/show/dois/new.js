@@ -16,10 +16,4 @@ export default Route.extend({
       doi,
     });
   },
-
-  afterModel() {
-    this.flashMessages.warning('This form is in BETA. Send feedback to support@datacite.org.', {
-      sticky: true,
-    });
-  },
 });
