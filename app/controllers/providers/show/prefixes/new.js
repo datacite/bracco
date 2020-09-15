@@ -29,7 +29,10 @@ export default Controller.extend({
       let self = this;
       this.model['provider-prefix'].save().then(function(providerPrefix) {
         self.set('disabled', true);
-        self.transitionToRoute('providers.show.prefixes', providerPrefix.get('provider'));
+        // We need a timeout because ElasticSearch indexing is very slow for this transition to work properly
+        setTimeout(() => {  
+          self.transitionToRoute('providers.show.prefixes', providerPrefix.get('provider'));
+        }, 1200);
       }).catch(function(reason) {
         console.debug(reason);
       });

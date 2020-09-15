@@ -30,7 +30,10 @@ export default Controller.extend({
         let self = this;
         this.model['repository-prefix'].save().then(function(repositoryPrefix) {
           self.set('disabled', true);
-          self.transitionToRoute('repositories.show.prefixes', repositoryPrefix.get('repository.id'));
+          // We need a timeout because ElasticSearch indexing is very slow for this transition to work properly
+          setTimeout(() => {  
+            self.transitionToRoute('repositories.show.prefixes', repositoryPrefix.get('repository.id')); 
+          }, 1200);
         }).catch(function(reason) {
           console.debug(reason);
         });
