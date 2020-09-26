@@ -29,6 +29,13 @@ export default Component.extend({
         console.debug(reason);
         self.set('providers', []);
       });
+    } else if (this.currentUser.get('isConsortium')) {
+      this.store.query('provider', { query, 'consortium-id': this.currentUser.get('provider_id'), sort: 'name', 'member-type': 'consortium_organization', 'page[size]': 100 }).then(function(providers) {
+        self.set('providers', providers);
+      }).catch(function(reason) {
+        console.debug(reason);
+        self.set('providers', []);
+      });
     }
   },
   selectProvider(provider) {
