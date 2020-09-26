@@ -1,7 +1,7 @@
 <div class="content">
   <div class="row content">
     {{#if (eq model.memberType "consortium")}}
-      <BarChart @data={{json.organizations}} @label="Organization" @model={{model}} @link="providers.show.organizations" />
+      <BarChart @data={{json.providers}} @label="Organization" @model={{model}} @link="providers.show.organizations" />
     {{/if}}
     {{#if (not-eq model.memberType "member_only")}}
       <BarChart @data={{json.clients}} @label="Repository" @model={{model}} @link="providers.show.repositories" />
