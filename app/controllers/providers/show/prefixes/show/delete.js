@@ -8,14 +8,17 @@ export default Controller.extend({
       let providerId = this.model.get('provider.id');
       this.store.findRecord('providerPrefix', this.model.get('id'), { backgroundReload: false }).then(function(providerPrefix) {
         providerPrefix.destroyRecord().then(function() {
-          self.transitionToRoute('providers.show.prefixes', providerId);
+          // We need a timeout because ElasticSearch indexing is very slow for this transition to work properly
+          setTimeout(() => {
+            self.transitionToRoute('providers.show.prefixes', providerId);
+          }, 1200);
         });
       }).catch(function(reason) {
         console.debug(reason);
       });
     },
     cancel() {
-      this.transitionToRoute('providers.show.prefixes', this.get('model.provider'));
+      this.transitionToRoute('providers.show.prefixes', this.model.get('provider.id'));
     },
   },
 });

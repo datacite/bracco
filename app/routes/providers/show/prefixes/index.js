@@ -26,7 +26,7 @@ export default Route.extend({
 
     return hash({
       provider: this.modelFor('providers/show'),
-      prefixes: this.store.query('provider-prefix', params).then(function(result) {
+      prefixes: this.store.query('provider-prefix', params, { reload: true }).then(function(result) {
         return result;
       }).catch(function(reason) {
         console.debug(reason);
