@@ -29,6 +29,13 @@ export default Component.extend({
         console.debug(reason);
         self.set('repositories', []);
       });
+    } else if (this.currentUser.get('isConsortium')) {
+      this.store.query('repository', { query, 'consortium-id': this.currentUser.get('provider_id'), sort: 'name', 'page[size]': 100 }).then(function(repositories) {
+        self.set('repositories', repositories);
+      }).catch(function(reason) {
+        console.debug(reason);
+        self.set('repositories', []);
+      });
     } else if (this.currentUser.get('isProvider')) {
       this.store.query('repository', { query, 'provider-id': this.currentUser.get('provider_id'), sort: 'name', 'page[size]': 100 }).then(function(repositories) {
         self.set('repositories', repositories);
