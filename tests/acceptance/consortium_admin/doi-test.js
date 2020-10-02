@@ -48,7 +48,7 @@ module('Acceptance | consortium_admin | doi', function(hooks) {
   test('visiting dois', async function(assert) {
     await visit('/dois');
 
-    assert.equal(currentURL(), '/providers/dc/organizations');
+    assert.equal(currentURL(), '/providers/dc');
     assert.dom('h2.work').hasText('DataCite Consortium');
   });
 

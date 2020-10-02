@@ -15,6 +15,7 @@ module('Acceptance | organization_admin | doi', function(hooks) {
         exclude: [ 'authorization' ],
       },
     },
+    mode: 'record',
   });
   setupApplicationTest(hooks);
 
@@ -48,7 +49,7 @@ module('Acceptance | organization_admin | doi', function(hooks) {
   test('visiting dois', async function(assert) {
     await visit('/dois');
 
-    assert.equal(currentURL(), '/providers/datacite/repositories');
+    assert.equal(currentURL(), '/providers/datacite');
     assert.dom('h2.work').hasText('DataCite');
   });
 
