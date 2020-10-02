@@ -85,7 +85,7 @@ export default Service.extend({
         this.set('roleName', 'Consortium');
       } else if (payload.role_id === 'provider_admin') {
         this.set('isProvider', true);
-        this.set('home', { route: 'providers.show.repositories', id: this.uid });
+        this.set('home', { route: 'providers.show', id: this.uid });
         this.set('settings', { route: 'providers.show', id: this.uid });
         this.set('roleName', 'Member');
       } else if (payload.role_id === 'client_admin') {
