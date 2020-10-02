@@ -15,7 +15,6 @@ module('Acceptance | organization_admin | user', function(hooks) {
         exclude: [ 'authorization' ],
       },
     },
-    mode: 'record',
   });
   setupApplicationTest(hooks);
 
