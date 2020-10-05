@@ -22,6 +22,7 @@ module('Acceptance | consortium_admin | admin', function(hooks) {
     const { server } = this.polly;
 
     server.any().on('request', (req) => {
+
       if (req.url !== 'https://api.stage.datacite.org/token') {
         req.headers.authorization = 'Bearer ' + ENV.CONSORTIUM_ADMIN_TOKEN;
       }
@@ -54,7 +55,7 @@ module('Acceptance | consortium_admin | admin', function(hooks) {
   test('visiting homepage', async function(assert) {
     await visit('/');
 
-    assert.equal(currentURL(), '/providers/dc/organizations');
+    assert.equal(currentURL(), '/providers/dc');
     assert.dom('h2.work').hasText('DataCite Consortium');
   });
 
@@ -62,28 +63,28 @@ module('Acceptance | consortium_admin | admin', function(hooks) {
   test('visiting info', async function(assert) {
     await visit('/info');
 
-    assert.equal(currentURL(), '/providers/dc/organizations');
+    assert.equal(currentURL(), '/providers/dc');
     assert.dom('h2.work').hasText('DataCite Consortium');
   });
 
   test('visiting providers', async function(assert) {
     await visit('/providers');
 
-    assert.equal(currentURL(), '/providers/dc/organizations');
+    assert.equal(currentURL(), '/providers/dc');
     assert.dom('h2.work').hasText('DataCite Consortium');
   });
 
   test('visiting repositories', async function(assert) {
     await visit('/repositories');
 
-    assert.equal(currentURL(), '/providers/dc/organizations');
+    assert.equal(currentURL(), '/providers/dc');
     assert.dom('h2.work').hasText('DataCite Consortium');
   });
 
   test('visiting prefixes', async function(assert) {
     await visit('/prefixes');
 
-    assert.equal(currentURL(), '/providers/dc/organizations');
+    assert.equal(currentURL(), '/providers/dc');
     assert.dom('h2.work').hasText('DataCite Consortium');
   });
 
