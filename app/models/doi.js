@@ -59,6 +59,11 @@ const Validations = buildValidations({
         return this.model.get('state') === 'draft';
       }),
     }),
+    validator('url-domain', {
+      disabled: computed('model.state', function() {
+        return this.model.get('state') === 'draft';
+      }),
+    }),
   ],
   publisher: [
     validator('presence', {

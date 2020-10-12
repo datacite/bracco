@@ -79,7 +79,7 @@
           {{item}}
         </el.control>
       </form.element>
-      <form.element @controlType="textarea" @id="domains" @label="Domains" @property="domains" @required={{false}} @helpText="List of (sub-)domains used for DOI registration, or use * to allow all domains" />
+      <form.element @controlType="textarea" @id="domains" @label="Domains" @property="domains" @required={{false}} @helpText="List of domains (one per line) used for DOI registration, or use *. (e.g. *.example.org) to allow all subdomains, or use * to allow all domains." />
 
       {{#if (eq model.clientType "repository")}}
         <div class="form-group" id="repository-type">
