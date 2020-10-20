@@ -1,12 +1,23 @@
 ---
 language: node_js
 node_js:
-  - "10"
+  - "12"
 
 sudo: required
 
+# if using Ubuntu 16 need this library
+# https://github.com/cypress-io/cypress-documentation/pull/1647
+addons:
+  apt:
+    packages:
+    - libgconf-2-4
+
 cache:
   yarn: true
+  # cache both npm modules and Cypress binary
+  directories:
+    - ~/.npm
+    - ~/.cache
 
 before_install:
   - set -e
@@ -27,6 +38,7 @@ before_install:
 
 install:
   - yarn install --non-interactive
+  - cypress install
   - sudo pip install awscli
   - curl -sL https://sentry.io/get-cli/ | bash
   - sentry-cli --version
@@ -38,6 +50,7 @@ before_script:
 
 script:
   - COVERAGE=true ember test
+  - yarn ci
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 
 after_success:
