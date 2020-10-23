@@ -110,7 +110,7 @@ export default Component.extend({
   updateRelatedIdentifier(value) {
     const ark = /^ark:\/[0-9]{5}\/\S+$/;
     const lsid = /^[uU][rR][nN]:[lL][sS][iI][dD]:(A-Za-z0-9][A-Za-z0-9()+,-.=@;$_!*'"%]):(A-Za-z0-9][A-Za-z0-9()+,-.=@;$_!*'"%]):(A-Za-z0-9][A-Za-z0-9()+,-.=@;$_!*'"%])[:]?(A-Za-z0-9][A-Za-z0-9()+,-.=@;$_!*'"%])?$/;
-    const purl = /^http?:\/\/(purl\.oclc\.org\/)/;
+    const purl = {require_host: true, host_whitelist: ['purl.org', 'oclc.org']}
     const arxiv = /^(arXiv:)(\d{4}.\d{4,5}|[a-z\-]+(\.[A-Z]{2})?\/\d{7})(v\d+)?/;
     const doi = /^(10\.\d{4,5}\/.+)/;
     const bibcode = /\d{4}[A-Za-z\.\&]{5}[\w\.]{4}[ELPQ-Z\.][\d\.]{4}[A-Z]/;
@@ -151,7 +151,7 @@ export default Component.extend({
         this.fragment.set('relatedIdentifierType', 'LSID');
         this.set('controlledIdentifierType', true);
         break;
-      case purl.test(value):
+      case isURL(value, purl):
         this.fragment.set('relatedIdentifier', value);
         this.fragment.set('relatedIdentifierType', 'PURL');
         this.set('controlledIdentifierType', true);
