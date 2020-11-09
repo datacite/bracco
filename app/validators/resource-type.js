@@ -2,9 +2,7 @@
 import BaseValidator from 'ember-cp-validations/validators/base';
 
 const ResourceType = BaseValidator.extend({
-
   validate(value, options) {
-
     const resourceTypeGeneralList = [
       'Audiovisual',
       'Collection',
@@ -12,9 +10,9 @@ const ResourceType = BaseValidator.extend({
       'Dataset',
       'Event',
       'Image',
-      'Interactive resource',
+      'InteractiveResource',
       'Model',
-      'Physical object',
+      'PhysicalObject',
       'Service',
       'Software',
       'Sound',
@@ -26,7 +24,7 @@ const ResourceType = BaseValidator.extend({
     const message = 'Resource of the Type is not valid.';
 
     switch (true) {
-      case (!value && options.allowBlank):
+      case !value && options.allowBlank:
         return true;
       case resourceTypeGeneralList.includes(String(value)):
         return true;
