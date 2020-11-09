@@ -1,22 +1,22 @@
-import Component from "@ember/component";
-import { pascalCase } from "pascal-case";
+import Component from '@ember/component';
+import { pascalCase } from 'pascal-case';
 
 const resourceTypeGeneralList = [
-  "Audiovisual",
-  "Collection",
-  "DataPaper",
-  "Dataset",
-  "Event",
-  "Image",
-  "InteractiveResource",
-  "Model",
-  "PhysicalObject",
-  "Service",
-  "Software",
-  "Sound",
-  "Text",
-  "Workflow",
-  "Other",
+  'Audiovisual',
+  'Collection',
+  'DataPaper',
+  'Dataset',
+  'Event',
+  'Image',
+  'InteractiveResource',
+  'Model',
+  'PhysicalObject',
+  'Service',
+  'Software',
+  'Sound',
+  'Text',
+  'Workflow',
+  'Other',
 ];
 
 export default Component.extend({
@@ -24,10 +24,10 @@ export default Component.extend({
   resourceTypesGeneral: resourceTypeGeneralList,
 
   selectResourceTypeGeneral(resourceTypeGeneral) {
-    this.model.set("types", {
+    this.model.set('types', {
       resourceTypeGeneral: pascalCase(resourceTypeGeneral),
     });
-    this.set("resourceTypesGeneral", resourceTypeGeneralList);
+    this.set('resourceTypesGeneral', resourceTypeGeneralList);
   },
 
   actions: {
