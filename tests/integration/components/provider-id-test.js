@@ -13,6 +13,6 @@ module('Integration | Component | provider-id', function(hooks) {
 
     await render(hbs`{{provider-id model=model}}`);
 
-    assert.dom(this.element).hasText('Click the circle icon for a new random ID, or the cross icon to delete the random ID and enter a value manually.');
+    assert.dom(this.element).hasText('Click the refresh icon for a new random ID, or the cross icon to delete the random ID and enter a value manually.');
   });
 });

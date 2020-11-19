@@ -4,8 +4,8 @@ import BaseValidator from 'ember-cp-validations/validators/base';
 const UniqueProviderId = BaseValidator.extend({
   store: service(),
 
-  validate(value) {
-    if (value.length < 2) {
+  validate(value, options, model) {
+    if (value.length < 2 || !model.get('isNew')) {
       return true;
     } else {
       return this.store.query('provider', { id: value }).then((result) => {

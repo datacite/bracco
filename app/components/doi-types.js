@@ -8,9 +8,9 @@ const resourceTypeGeneralList = [
   'Dataset',
   'Event',
   'Image',
-  'Interactive resource',
+  'InteractiveResource',
   'Model',
-  'Physical object',
+  'PhysicalObject',
   'Service',
   'Software',
   'Sound',
@@ -24,7 +24,9 @@ export default Component.extend({
   resourceTypesGeneral: resourceTypeGeneralList,
 
   selectResourceTypeGeneral(resourceTypeGeneral) {
-    this.model.set('types', { resourceTypeGeneral: pascalCase(resourceTypeGeneral) });
+    this.model.set('types', {
+      resourceTypeGeneral: pascalCase(resourceTypeGeneral),
+    });
     this.set('resourceTypesGeneral', resourceTypeGeneralList);
   },
 
