@@ -1,5 +1,13 @@
 # Changelog
 
+## [Unreleased](https://github.com/datacite/bracco/tree/HEAD)
+
+[Full Changelog](https://github.com/datacite/bracco/compare/3.9.11...HEAD)
+
+**Closed issues:**
+
+- Delete one test DOI [\#358](https://github.com/datacite/bracco/issues/358)
+
 ## [3.9.11](https://github.com/datacite/bracco/tree/3.9.11) (2020-11-21)
 
 [Full Changelog](https://github.com/datacite/bracco/compare/3.9.10...3.9.11)
@@ -14,7 +22,6 @@
 
 **Fixed bugs:**
 
-- Prefixes appear to be assigned to 2 members/consortium organizations at the same time [\#480](https://github.com/datacite/bracco/issues/480)
 - Physical object resource type not valid [\#479](https://github.com/datacite/bracco/issues/479)
 -  The circle icon is not appearing in the member ID field in Fabrica [\#471](https://github.com/datacite/bracco/issues/471)
 
@@ -321,6 +328,7 @@
 **Merged pull requests:**
 
 - Improvement for large form [\#394](https://github.com/datacite/bracco/pull/394) ([kjgarza](https://github.com/kjgarza))
+- Feature geolocation point [\#392](https://github.com/datacite/bracco/pull/392) ([kjgarza](https://github.com/kjgarza))
 - abilities user-test [\#391](https://github.com/datacite/bracco/pull/391) ([sarala](https://github.com/sarala))
 - Feature rights field [\#389](https://github.com/datacite/bracco/pull/389) ([kjgarza](https://github.com/kjgarza))
 - Acceptance tests [\#379](https://github.com/datacite/bracco/pull/379) ([sarala](https://github.com/sarala))
@@ -340,7 +348,6 @@
 
 **Merged pull requests:**
 
-- Feature geolocation point [\#392](https://github.com/datacite/bracco/pull/392) ([kjgarza](https://github.com/kjgarza))
 - Feature dates field [\#390](https://github.com/datacite/bracco/pull/390) ([kjgarza](https://github.com/kjgarza))
 - size, format and version fields in DOI form  [\#388](https://github.com/datacite/bracco/pull/388) ([kjgarza](https://github.com/kjgarza))
 - Feature funder ID  [\#383](https://github.com/datacite/bracco/pull/383) ([kjgarza](https://github.com/kjgarza))
@@ -2549,16 +2556,13 @@
 
 [Full Changelog](https://github.com/datacite/bracco/compare/v.0.9.11...v.0.9.12)
 
-**Fixed bugs:**
-
-- TypeError: Error.captureStackTrace is not a function. [\#19](https://github.com/datacite/bracco/issues/19)
-
 ## [v.0.9.11](https://github.com/datacite/bracco/tree/v.0.9.11) (2017-11-22)
 
 [Full Changelog](https://github.com/datacite/bracco/compare/v.0.9.10...v.0.9.11)
 
 **Fixed bugs:**
 
+- TypeError: Error.captureStackTrace is not a function. [\#19](https://github.com/datacite/bracco/issues/19)
 - ExampleException in home\#example [\#18](https://github.com/datacite/bracco/issues/18)
 
 **Closed issues:**
