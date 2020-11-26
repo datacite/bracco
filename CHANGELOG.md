@@ -2,7 +2,15 @@
 
 ## [Unreleased](https://github.com/datacite/bracco/tree/HEAD)
 
-[Full Changelog](https://github.com/datacite/bracco/compare/3.9.11...HEAD)
+[Full Changelog](https://github.com/datacite/bracco/compare/3.9.12...HEAD)
+
+**Fixed bugs:**
+
+- Fix CORS in ROR API calls [\#485](https://github.com/datacite/bracco/issues/485)
+
+## [3.9.12](https://github.com/datacite/bracco/tree/3.9.12) (2020-11-26)
+
+[Full Changelog](https://github.com/datacite/bracco/compare/3.9.11...3.9.12)
 
 **Closed issues:**
 
@@ -175,6 +183,7 @@
 
 - fix: reverse pascal casing [\#437](https://github.com/datacite/bracco/pull/437) ([kjgarza](https://github.com/kjgarza))
 - docs: change not found message for researcher profile [\#423](https://github.com/datacite/bracco/pull/423) ([kjgarza](https://github.com/kjgarza))
+- support info-uri for rights [\#406](https://github.com/datacite/bracco/pull/406) ([mfenner](https://github.com/mfenner))
 
 ## [3.8.3](https://github.com/datacite/bracco/tree/3.8.3) (2020-06-02)
 
@@ -253,10 +262,6 @@
 **Closed issues:**
 
 - Internal testing DOI form new fields [\#398](https://github.com/datacite/bracco/issues/398)
-
-**Merged pull requests:**
-
-- support info-uri for rights [\#406](https://github.com/datacite/bracco/pull/406) ([mfenner](https://github.com/mfenner))
 
 ## [3.7.7](https://github.com/datacite/bracco/tree/3.7.7) (2020-04-26)
 
@@ -485,15 +490,15 @@
 
 ## [3.5.7](https://github.com/datacite/bracco/tree/3.5.7) (2020-02-29)
 
-[Full Changelog](https://github.com/datacite/bracco/compare/3.5.6...3.5.7)
-
-## [3.5.6](https://github.com/datacite/bracco/tree/3.5.6) (2020-02-29)
-
-[Full Changelog](https://github.com/datacite/bracco/compare/3.5.5...3.5.6)
+[Full Changelog](https://github.com/datacite/bracco/compare/3.5.5...3.5.7)
 
 ## [3.5.5](https://github.com/datacite/bracco/tree/3.5.5) (2020-02-29)
 
-[Full Changelog](https://github.com/datacite/bracco/compare/3.5.4...3.5.5)
+[Full Changelog](https://github.com/datacite/bracco/compare/3.5.6...3.5.5)
+
+## [3.5.6](https://github.com/datacite/bracco/tree/3.5.6) (2020-02-29)
+
+[Full Changelog](https://github.com/datacite/bracco/compare/3.5.4...3.5.6)
 
 **Implemented enhancements:**
 
@@ -2164,6 +2169,7 @@
 
 **Fixed bugs:**
 
+- Client should not be able to assign prefix [\#78](https://github.com/datacite/bracco/issues/78)
 - Validate required form fields [\#69](https://github.com/datacite/bracco/issues/69)
 
 ## [v.0.9.70](https://github.com/datacite/bracco/tree/v.0.9.70) (2018-05-07)
@@ -2172,7 +2178,6 @@
 
 **Fixed bugs:**
 
-- Client should not be able to assign prefix [\#78](https://github.com/datacite/bracco/issues/78)
 - Make sure editing via form doesn't affect existing metadata [\#76](https://github.com/datacite/bracco/issues/76)
 - Reset model on cancel form [\#5](https://github.com/datacite/bracco/issues/5)
 
