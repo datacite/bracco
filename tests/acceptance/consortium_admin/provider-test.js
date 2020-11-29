@@ -1,25 +1,21 @@
 import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
-import {
-  currentURL,
-  visit,
-  click,
-} from '@ember/test-helpers';
+import { currentURL, visit, click } from '@ember/test-helpers';
 import ENV from 'bracco/config/environment';
 import { authenticateSession } from 'ember-simple-auth/test-support';
 import { setupQunit as setupPolly } from '@pollyjs/core';
 
-module('Acceptance | consortium_admin | provider', function(hooks) {
+module('Acceptance | consortium_admin | provider', function (hooks) {
   setupPolly(hooks, {
     matchRequestsBy: {
       headers: {
-        exclude: [ 'authorization' ],
-      },
-    },
+        exclude: ['authorization']
+      }
+    }
   });
   setupApplicationTest(hooks);
 
-  hooks.beforeEach(async function() {
+  hooks.beforeEach(async function () {
     const { server } = this.polly;
 
     server.any().on('request', (req) => {
@@ -35,18 +31,20 @@ module('Acceptance | consortium_admin | provider', function(hooks) {
       }
 
       /* filter out authorization tokens */
-      recording.request.headers = recording.request.headers.filter(({ name }) => name !== 'authorization');
+      recording.request.headers = recording.request.headers.filter(
+        ({ name }) => name !== 'authorization'
+      );
     });
 
     await authenticateSession({
       uid: 'dc',
       name: 'DataCite Consortium',
       role_id: 'consortium_admin',
-      provider_id: 'dc',
+      provider_id: 'dc'
     });
   });
 
-  test('visiting provider DC', async function(assert) {
+  test('visiting provider DC', async function (assert) {
     await visit('/providers/dc');
 
     assert.equal(currentURL(), '/providers/dc');
@@ -58,7 +56,7 @@ module('Acceptance | consortium_admin | provider', function(hooks) {
     assert.dom('a#delete-provider').doesNotExist();
   });
 
-  test('visiting provider DC info', async function(assert) {
+  test('visiting provider DC info', async function (assert) {
     await visit('/providers/dc/info');
 
     assert.equal(currentURL(), '/providers/dc/info');
@@ -66,12 +64,14 @@ module('Acceptance | consortium_admin | provider', function(hooks) {
     assert.dom('li a.nav-link.active').hasText('Info');
 
     // consortium charts are displayed
-    assert.dom('#chart-organization-title').includesText('Organizations by year');
+    assert
+      .dom('#chart-organization-title')
+      .includesText('Organizations by year');
     assert.dom('#chart-repository-title').includesText('Repositories by year');
     assert.dom('#chart-doi-title').includesText('DOIs by year');
   });
 
-  test('going to provider DC edit form', async function(assert) {
+  test('going to provider DC edit form', async function (assert) {
     await visit('/providers/dc');
 
     assert.equal(currentURL(), '/providers/dc');
@@ -84,7 +84,7 @@ module('Acceptance | consortium_admin | provider', function(hooks) {
     assert.dom('input#member-id-field').exists();
   });
 
-  test('visiting provider DC repositories', async function(assert) {
+  test('visiting provider DC repositories', async function (assert) {
     await visit('/providers/dc/repositories');
 
     assert.equal(currentURL(), '/providers/dc/repositories');
@@ -101,7 +101,7 @@ module('Acceptance | consortium_admin | provider', function(hooks) {
     assert.dom('a#add-repository').doesNotExist();
   });
 
-  test('visiting provider DataCite repositories', async function(assert) {
+  test('visiting provider DataCite repositories', async function (assert) {
     await visit('/providers/datacite/repositories');
 
     assert.equal(currentURL(), '/providers/datacite/repositories');
@@ -118,7 +118,7 @@ module('Acceptance | consortium_admin | provider', function(hooks) {
     assert.dom('a#add-repository').includesText('Add Repository');
   });
 
-  test('visiting provider DC dois', async function(assert) {
+  test('visiting provider DC dois', async function (assert) {
     await visit('/providers/dc/dois');
 
     assert.equal(currentURL(), '/providers/dc/dois');
@@ -149,7 +149,7 @@ module('Acceptance | consortium_admin | provider', function(hooks) {
   //   assert.dom('a#delete-doi').doesNotExist();
   // });
 
-  test('visiting provider DC prefixes', async function(assert) {
+  test('visiting provider DC prefixes', async function (assert) {
     await visit('/providers/dc/prefixes');
 
     assert.equal(currentURL(), '/providers/dc/prefixes');

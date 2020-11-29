@@ -13,7 +13,7 @@ const EmailFormat = BaseValidator.extend({
         return message;
       }
     }
-  },
+  }
 });
 
 export default EmailFormat;

@@ -1,6 +1,6 @@
 /* jshint node:true*/
 
-module.exports = function(/* env */) {
+module.exports = function (/* env */) {
   return {
     /**
      * The locales that our application supports.
@@ -89,6 +89,6 @@ module.exports = function(/* env */) {
      * @type {Boolean}
      * @default false
      */
-    stripEmptyTranslations: false,
+    stripEmptyTranslations: false
   };
 };

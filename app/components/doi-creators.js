@@ -16,13 +16,23 @@ export default Component.extend({
 
   actions: {
     addCreator() {
-      this.model.get('creators').createFragment({ nameIdentifiers: [], affiliation: [] });
-      this.model.get('creators').get('lastObject').get('nameIdentifiers').createFragment();
-      this.model.get('creators').get('lastObject').get('affiliation').createFragment();
+      this.model
+        .get('creators')
+        .createFragment({ nameIdentifiers: [], affiliation: [] });
+      this.model
+        .get('creators')
+        .get('lastObject')
+        .get('nameIdentifiers')
+        .createFragment();
+      this.model
+        .get('creators')
+        .get('lastObject')
+        .get('affiliation')
+        .createFragment();
       this.set('showCreators', true);
     },
     toggleCreators() {
-      this.set('showCreators', !this.get('showCreators'));
-    },
-  },
+      this.set('showCreators', !this.showCreators);
+    }
+  }
 });

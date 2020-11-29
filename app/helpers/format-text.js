@@ -7,10 +7,20 @@ const Entities = HtmlEntities.AllHtmlEntities;
 const entities = new Entities();
 
 // sanitize and truncate text
-export function formatText([ text ], hash) {
+export function formatText([text], hash) {
   text = entities.decode(text);
 
-  let allowedTags = [ 'strong', 'em', 'b', 'i', 'code', 'pre', 'sub', 'sup', 'br' ];
+  let allowedTags = [
+    'strong',
+    'em',
+    'b',
+    'i',
+    'code',
+    'pre',
+    'sub',
+    'sup',
+    'br'
+  ];
   let sanitizedText = SanitizeHtml(text, { allowedTags });
   let words = sanitizedText.split(' ');
   let len = hash.limit || 500;

@@ -3,16 +3,17 @@ import { assign } from '@ember/polyfills';
 import Component from '@ember/component';
 
 const placeholders = {
-  'doi': 'DOI',
-  'provider': 'Provider',
-  'organization': 'Organization',
-  'repository': 'Repository',
-  'prefix': 'Prefix',
+  doi: 'DOI',
+  provider: 'Provider',
+  organization: 'Organization',
+  repository: 'Repository',
+  prefix: 'Prefix',
   'repository-prefix': 'Prefix',
-  'provider-prefix': 'Prefix' };
+  'provider-prefix': 'Prefix'
+};
 
 export default Component.extend({
-  classNames: [ 'div' ],
+  classNames: ['div'],
 
   hasInput: notEmpty('query'),
   hasFilters: true,
@@ -37,16 +38,31 @@ export default Component.extend({
     }
 
     if (this.modelName === 'DOI') {
-      this.set('formats', { '-updated': 'Sort by Date Updated', '-created': 'Sort by Date Created', 'name': 'Sort by DOI', 'relevance': 'Sort by Relevance' });
+      this.set('formats', {
+        '-updated': 'Sort by Date Updated',
+        '-created': 'Sort by Date Created',
+        name: 'Sort by DOI',
+        relevance: 'Sort by Relevance'
+      });
     } else if (this.modelName === 'Prefix') {
-      this.set('formats', { 'name': 'Sort by Prefix', '-created': 'Sort by Date Created' });
+      this.set('formats', {
+        name: 'Sort by Prefix',
+        '-created': 'Sort by Date Created'
+      });
     } else {
-      this.set('formats', { 'name': 'Sort by Name', '-created': 'Sort by Date Joined', 'relevance': 'Sort by Relevance' });
+      this.set('formats', {
+        name: 'Sort by Name',
+        '-created': 'Sort by Date Joined',
+        relevance: 'Sort by Relevance'
+      });
     }
   },
 
   search() {
-    let params = assign(this.model.get('query'), { query: this.query, sort: this.sort });
+    let params = assign(this.model.get('query'), {
+      query: this.query,
+      sort: this.sort
+    });
 
     this.router.transitionTo({ queryParams: params });
   },
@@ -73,6 +89,6 @@ export default Component.extend({
     sort(sort) {
       this.set('sort', sort);
       this.search();
-    },
-  },
+    }
+  }
 });

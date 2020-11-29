@@ -3,21 +3,21 @@ import { setupTest } from 'ember-qunit';
 import Service from '@ember/service';
 import { setupFactoryGuy, make } from 'ember-data-factory-guy';
 
-module('Unit | Ability | provider', function(hooks) {
+module('Unit | Ability | provider', function (hooks) {
   setupTest(hooks);
   setupFactoryGuy(hooks);
 
-  test('it exists', function(assert) {
+  test('it exists', function (assert) {
     let ability = this.owner.lookup('ability:provider');
     assert.ok(ability);
   });
 
-  test('role staff_admin', function(assert) {
+  test('role staff_admin', function (assert) {
     const ability = this.owner.lookup('ability:provider');
     const currentUser = Service.extend({
       uid: 'admin',
       name: 'Admin',
-      role_id: 'staff_admin',
+      role_id: 'staff_admin'
     });
     this.owner.register('service:current-user', currentUser);
 
@@ -28,13 +28,13 @@ module('Unit | Ability | provider', function(hooks) {
     assert.equal(ability.canRead, true);
   });
 
-  test('role provider_admin', function(assert) {
+  test('role provider_admin', function (assert) {
     const ability = this.owner.lookup('ability:provider');
     const currentUser = Service.extend({
       uid: 'ands',
       name: 'Australian National Data Service',
       role_id: 'provider_admin',
-      provider_id: 'ands',
+      provider_id: 'ands'
     });
     this.owner.register('service:current-user', currentUser);
 
@@ -48,13 +48,13 @@ module('Unit | Ability | provider', function(hooks) {
     assert.equal(ability.canRead, true);
   });
 
-  test('role provider_admin globus', function(assert) {
+  test('role provider_admin globus', function (assert) {
     const ability = this.owner.lookup('ability:provider');
     const currentUser = Service.extend({
       uid: 'globus',
       name: 'Globus',
       role_id: 'provider_admin',
-      provider_id: 'globus',
+      provider_id: 'globus'
     });
     this.owner.register('service:current-user', currentUser);
 
@@ -65,13 +65,13 @@ module('Unit | Ability | provider', function(hooks) {
     assert.equal(ability.canRead, true);
   });
 
-  test('role provider_admin should not acess other member accounts', function(assert) {
+  test('role provider_admin should not acess other member accounts', function (assert) {
     const ability = this.owner.lookup('ability:provider');
     const currentUser = Service.extend({
       uid: 'ands',
       name: 'Australian National Data Service',
       role_id: 'provider_admin',
-      provider_id: 'ands',
+      provider_id: 'ands'
     });
     this.owner.register('service:current-user', currentUser);
 
@@ -85,13 +85,13 @@ module('Unit | Ability | provider', function(hooks) {
     assert.equal(ability.canRead, false);
   });
 
-  test('role client_admin', function(assert) {
+  test('role client_admin', function (assert) {
     const ability = this.owner.lookup('ability:provider');
     const currentUser = Service.extend({
       uid: 'ands.centre9',
       name: 'Australian Data Archive',
       role_id: 'client_admin',
-      client_id: 'ands.centre9',
+      client_id: 'ands.centre9'
     });
     this.owner.register('service:current-user', currentUser);
 

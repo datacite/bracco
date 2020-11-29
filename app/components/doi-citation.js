@@ -17,28 +17,30 @@ export default Component.extend({
     this.selectStyle('apa');
 
     let citationFormats = {
-      'apa': 'APA',
+      apa: 'APA',
       'harvard-cite-them-right': 'Harvard',
       'modern-language-association': 'MLA',
-      'vancouver': 'Vancouver',
+      vancouver: 'Vancouver',
       'chicago-fullnote-bibliography': 'Chicago',
-      'ieee': 'IEEE' };
+      ieee: 'IEEE'
+    };
     this.set('citationFormats', citationFormats);
   },
 
   selectStyle(style) {
     let self = this;
-    let url = ENV.API_URL + '/dois/' + this.model.get('doi') + '?style=' + style;
-    let headers = { 'Accept': 'text/x-bibliography' };
+    let url =
+      ENV.API_URL + '/dois/' + this.model.get('doi') + '?style=' + style;
+    let headers = { Accept: 'text/x-bibliography' };
     if (this.currentUser.get('jwt')) {
       headers = {
-        'Authorization': 'Bearer ' + this.currentUser.get('jwt'),
-        'Accept': 'text/x-bibliography',
+        Authorization: 'Bearer ' + this.currentUser.get('jwt'),
+        Accept: 'text/x-bibliography'
       };
     }
     let result = fetch(url, {
-      headers,
-    }).then(function(response) {
+      headers
+    }).then(function (response) {
       if (response.ok) {
         return response.blob();
       } else {
@@ -46,16 +48,19 @@ export default Component.extend({
       }
     });
 
-    result.then(function(response) {
+    result.then(function (response) {
       if (typeof response === 'string') {
         self.set('citationOutput', response);
       } else {
         let reader = new FileReader();
-        reader.readAsText(response).then((result) => {
-          self.set('citationOutput', result);
-        }, (err) => {
-          console.error(err);
-        });
+        reader.readAsText(response).then(
+          (result) => {
+            self.set('citationOutput', result);
+          },
+          (err) => {
+            console.error(err);
+          }
+        );
       }
     });
     // this.get('router').transitionTo({ queryParams: { citation: citation } });
@@ -64,8 +69,8 @@ export default Component.extend({
   actions: {
     selectStyle(style) {
       // APA is default citation style
-      style = (style === undefined) ? 'apa' : style;
+      style = style === undefined ? 'apa' : style;
       this.selectStyle(style);
-    },
-  },
+    }
+  }
 });

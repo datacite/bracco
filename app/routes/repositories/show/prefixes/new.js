@@ -9,7 +9,9 @@ export default Route.extend({
     let repository = this.modelFor('repositories/show');
     return hash({
       repository: this.store.findRecord('repository', repository.get('id')),
-      'repository-prefix': this.store.createRecord('repositoryPrefix', { repository }),
+      'repository-prefix': this.store.createRecord('repositoryPrefix', {
+        repository
+      })
     });
   },
 
@@ -22,7 +24,10 @@ export default Route.extend({
   setupController(controller, model) {
     this._super(controller, model);
 
-    this.controllerFor('repositories.show.prefixes.new').send('searchPrefix', null);
+    this.controllerFor('repositories.show.prefixes.new').send(
+      'searchPrefix',
+      null
+    );
   },
 
   actions: {
@@ -31,6 +36,6 @@ export default Route.extend({
     },
     refreshCurrentRoute() {
       this.refresh();
-    },
-  },
+    }
+  }
 });

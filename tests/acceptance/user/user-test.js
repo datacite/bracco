@@ -5,17 +5,17 @@ import ENV from 'bracco/config/environment';
 import { authenticateSession } from 'ember-simple-auth/test-support';
 import { setupQunit as setupPolly } from '@pollyjs/core';
 
-module('Acceptance | user | user', function(hooks) {
+module('Acceptance | user | user', function (hooks) {
   setupPolly(hooks, {
     matchRequestsBy: {
       headers: {
-        exclude: [ 'authorization' ],
-      },
-    },
+        exclude: ['authorization']
+      }
+    }
   });
   setupApplicationTest(hooks);
 
-  hooks.beforeEach(async function() {
+  hooks.beforeEach(async function () {
     const { server } = this.polly;
 
     server.any().on('request', (req) => {
@@ -31,17 +31,19 @@ module('Acceptance | user | user', function(hooks) {
       }
 
       /* filter out authorization tokens */
-      recording.request.headers = recording.request.headers.filter(({ name }) => name !== 'authorization');
+      recording.request.headers = recording.request.headers.filter(
+        ({ name }) => name !== 'authorization'
+      );
     });
 
     await authenticateSession({
       uid: '0000-0001-6528-2027',
       name: 'Martin Fenner',
-      role_id: 'user',
+      role_id: 'user'
     });
   });
 
-  test('visiting users', async function(assert) {
+  test('visiting users', async function (assert) {
     await visit('/users');
 
     assert.equal(currentURL(), '/users/0000-0001-6528-2027');

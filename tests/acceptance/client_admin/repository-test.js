@@ -1,27 +1,24 @@
 import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
-import {
-  currentURL,
-  visit,
-} from '@ember/test-helpers';
+import { currentURL, visit } from '@ember/test-helpers';
 import ENV from 'bracco/config/environment';
 import { setupFactoryGuy } from 'ember-data-factory-guy';
 // import { build, make, mockFindRecord } from 'ember-data-factory-guy';
 import { authenticateSession } from 'ember-simple-auth/test-support';
 import { setupQunit as setupPolly } from '@pollyjs/core';
 
-module('Acceptance | client_admin | repository', function(hooks) {
+module('Acceptance | client_admin | repository', function (hooks) {
   setupPolly(hooks, {
     matchRequestsBy: {
       headers: {
-        exclude: [ 'authorization' ],
-      },
-    },
+        exclude: ['authorization']
+      }
+    }
   });
   setupApplicationTest(hooks);
   setupFactoryGuy(hooks);
 
-  hooks.beforeEach(async function() {
+  hooks.beforeEach(async function () {
     const { server } = this.polly;
 
     server.any().on('request', (req) => {
@@ -37,7 +34,9 @@ module('Acceptance | client_admin | repository', function(hooks) {
       }
 
       /* filter out authorization tokens */
-      recording.request.headers = recording.request.headers.filter(({ name }) => name !== 'authorization');
+      recording.request.headers = recording.request.headers.filter(
+        ({ name }) => name !== 'authorization'
+      );
     });
 
     await authenticateSession({
@@ -45,7 +44,7 @@ module('Acceptance | client_admin | repository', function(hooks) {
       name: 'DataCite Test Repository',
       role_id: 'client_admin',
       provider_id: 'datacite',
-      client_id: 'datacite.test',
+      client_id: 'datacite.test'
     });
   });
 
@@ -58,7 +57,7 @@ module('Acceptance | client_admin | repository', function(hooks) {
   //   url: 'http://bbc.co.uk',
   // };
 
-  test('visiting repository DataCite Test', async function(assert) {
+  test('visiting repository DataCite Test', async function (assert) {
     await visit('/repositories/datacite.test');
 
     assert.equal(currentURL(), '/repositories/datacite.test');
@@ -68,7 +67,7 @@ module('Acceptance | client_admin | repository', function(hooks) {
     assert.dom('a#delete-repository').doesNotExist();
   });
 
-  test('visiting repository DataCite Test info', async function(assert) {
+  test('visiting repository DataCite Test info', async function (assert) {
     await visit('/repositories/datacite.test/info');
 
     assert.equal(currentURL(), '/repositories/datacite.test/info');
@@ -79,7 +78,7 @@ module('Acceptance | client_admin | repository', function(hooks) {
     assert.dom('#chart-doi-title').includesText('DOIs by year');
   });
 
-  test('visiting repository DataCite Test prefixes', async function(assert) {
+  test('visiting repository DataCite Test prefixes', async function (assert) {
     await visit('/repositories/datacite.test/prefixes');
 
     assert.equal(currentURL(), '/repositories/datacite.test/prefixes');
@@ -96,7 +95,7 @@ module('Acceptance | client_admin | repository', function(hooks) {
     assert.dom('a#assign-prefix').doesNotExist();
   });
 
-  test('visiting repository DataCite Test dois', async function(assert) {
+  test('visiting repository DataCite Test dois', async function (assert) {
     await visit('/repositories/datacite.test/dois');
 
     assert.equal(currentURL(), '/repositories/datacite.test/dois');
@@ -115,7 +114,7 @@ module('Acceptance | client_admin | repository', function(hooks) {
     assert.dom('a#transfer-dois').doesNotExist();
   });
 
-  test('editing repository DataCite Test form', async function(assert) {
+  test('editing repository DataCite Test form', async function (assert) {
     await visit('/repositories/datacite.test/edit');
 
     assert.equal(currentURL(), '/repositories/datacite.test/edit');
@@ -124,7 +123,7 @@ module('Acceptance | client_admin | repository', function(hooks) {
     assert.dom('button#update-repository').includesText('Update Account');
   });
 
-  test('editing repository DataCite Test password form', async function(assert) {
+  test('editing repository DataCite Test password form', async function (assert) {
     await visit('/repositories/datacite.test/change');
 
     assert.equal(currentURL(), '/repositories/datacite.test/change');

@@ -14,5 +14,5 @@ export default Transform.extend({
 
   serialize(deserialized) {
     return deserialized;
-  },
+  }
 });

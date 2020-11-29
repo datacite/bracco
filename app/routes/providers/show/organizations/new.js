@@ -18,12 +18,12 @@ export default Route.extend({
       serviceContact: this.store.createFragment('contact'),
       secondaryServiceContact: this.store.createFragment('contact'),
       votingContact: this.store.createFragment('contact'),
-      isActive: true,
+      isActive: true
     });
 
     return hash({
       provider,
-      organization,
+      organization
     });
-  },
+  }
 });

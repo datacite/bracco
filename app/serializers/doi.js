@@ -49,7 +49,7 @@ export default ApplicationSerializer.extend({
     citationCount: { serialize: false },
     downloadCount: { serialize: false },
     viewCount: { serialize: false },
-    meta: { serialize: false },
+    meta: { serialize: false }
   },
   keyForAttribute(key) {
     return key;
@@ -66,5 +66,5 @@ export default ApplicationSerializer.extend({
     payload.data.attributes.meta = payload.meta || {};
 
     return this._super.apply(this, arguments);
-  },
+  }
 });

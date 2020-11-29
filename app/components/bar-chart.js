@@ -12,16 +12,19 @@ import { A } from '@ember/array';
 
 export default Component.extend({
   tagName: 'div',
-  classNames: [ 'col-lg-3', 'col-md-4' ],
+  classNames: ['col-lg-3', 'col-md-4'],
   data: null,
-  count: computed('data', function() {
+  count: computed('data', function () {
     if (this.data) {
       if (this.summarize) {
-        return A(this.data).reduce(function(a, b) {
+        return A(this.data).reduce(function (a, b) {
           return a + b.count;
         }, 0);
       } else {
-        let currentYear = A(this.data).findBy('id', new Date().getFullYear().toString());
+        let currentYear = A(this.data).findBy(
+          'id',
+          new Date().getFullYear().toString()
+        );
         if (currentYear) {
           return currentYear.count;
         } else {
@@ -33,7 +36,7 @@ export default Component.extend({
     }
   }),
   label: 'Chart',
-  chartId: computed('label', function() {
+  chartId: computed('label', function () {
     return 'chart-' + this.label.toLowerCase();
   }),
   cumulative: true,
@@ -42,7 +45,7 @@ export default Component.extend({
   init() {
     this._super();
 
-    schedule('afterRender', this, function() {
+    schedule('afterRender', this, function () {
       this.send('barChart');
     });
   },
@@ -58,7 +61,7 @@ export default Component.extend({
     // let formatFixed = format(",.0f");
 
     let chartId = this.chartId;
-    let data = (this.data) ? this.data : [];
+    let data = this.data ? this.data : [];
 
     let height = 100;
     let margin = { top: 10, right: 5, bottom: 20, left: 5 };
@@ -66,22 +69,22 @@ export default Component.extend({
     let currentYear = new Date().getFullYear();
     let startDate = new Date(`${currentYear - 10}-01-01`);
     let endDate = new Date(`${currentYear + 1}-01-01`);
-    let domain = [ startDate, endDate ];
+    let domain = [startDate, endDate];
     let length = timeYears(startDate, endDate).length;
     let width = length * 22;
 
-    let x = scaleTime()
-      .domain(domain)
-      .rangeRound([ 0, width ]);
+    let x = scaleTime().domain(domain).rangeRound([0, width]);
 
     let y = scaleLinear()
-      .domain([ 0, max(data, function(d) { return d.count; }) ])
-      .rangeRound([ height, 0 ]);
+      .domain([
+        0,
+        max(data, function (d) {
+          return d.count;
+        })
+      ])
+      .rangeRound([height, 0]);
 
-    let xAxis = axisBottom()
-      .scale(x)
-      .tickSize(0)
-      .ticks(0);
+    let xAxis = axisBottom().scale(x).tickSize(0).ticks(0);
 
     // var tip = d3Tip()
     //   .attr('class', 'tooltip')
@@ -90,29 +93,38 @@ export default Component.extend({
     // remove chart before building new one
     // wrap in try/catch block to handle fastboot
     try {
-      select('#' + chartId).selectAll('*').remove();
+      select('#' + chartId)
+        .selectAll('*')
+        .remove();
 
-      let chart = select('#' + chartId).append('svg')
-        .data([ data ])
+      let chart = select('#' + chartId)
+        .append('svg')
+        .data([data])
         .attr('width', margin.left + width + margin.right)
         .attr('height', margin.top + height + margin.bottom)
         .attr('class', 'chart barchart')
         .append('svg:g')
         .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
-      chart.selectAll('.bar')
+      chart
+        .selectAll('.bar')
         .data(data)
-        .enter().append('rect')
-        .attr('id', function(d) {
+        .enter()
+        .append('rect')
+        .attr('id', function (d) {
           return chartId + '-' + d.id;
         })
         .attr('class', 'bar relations')
-        .attr('x', function(d) {
+        .attr('x', function (d) {
           return x(new Date(Date.parse(d.id + '-01T12:00:00Z')));
         })
         .attr('width', width / length - 1)
-        .attr('y', function(d) { return y(d.count); })
-        .attr('height', function(d) { return height - y(d.count); });
+        .attr('y', function (d) {
+          return y(d.count);
+        })
+        .attr('height', function (d) {
+          return height - y(d.count);
+        });
       // .on('mouseover', function(d) {
       //   // var id = '#' + chartId + '-' + d.id;
       //   var title = formatFixed(d.count);
@@ -124,21 +136,27 @@ export default Component.extend({
       //   console.log(d)
       //  });
 
-      chart.append('g')
+      chart
+        .append('g')
         .attr('class', 'x axis')
         .attr('transform', 'translate(0,' + height + ')')
         .call(xAxis);
 
-      chart.append('text')
+      chart
+        .append('text')
         .attr('class', 'label')
         .attr('text-anchor', 'middle')
         .attr('transform', 'translate(11,' + (height + 18) + ')')
         .text(formatYear(startDate));
 
-      chart.append('text')
+      chart
+        .append('text')
         .attr('class', 'label')
         .attr('text-anchor', 'middle')
-        .attr('transform', 'translate(' + (width - 11) + ',' + (height + 18) + ')')
+        .attr(
+          'transform',
+          'translate(' + (width - 11) + ',' + (height + 18) + ')'
+        )
         .text(formatYear(endDate) - 1);
 
       // let self = this;
@@ -163,6 +181,6 @@ export default Component.extend({
   actions: {
     barChart() {
       this.barChart();
-    },
-  },
+    }
+  }
 });

@@ -8,17 +8,24 @@ export default Controller.extend({
     submit() {
       let self = this;
       let providerId = this.model.get('provider.id');
-      this.store.findRecord('repository', this.model.get('id'), { backgroundReload: false }).then(function(repository) {
-        repository.destroyRecord().then(function() {
-          self.transitionToRoute('providers.show.repositories', providerId);
-        }).catch(function(reason) {
-          console.debug(reason);
+      this.store
+        .findRecord('repository', this.model.get('id'), {
+          backgroundReload: false
+        })
+        .then(function (repository) {
+          repository
+            .destroyRecord()
+            .then(function () {
+              self.transitionToRoute('providers.show.repositories', providerId);
+            })
+            .catch(function (reason) {
+              console.debug(reason);
+            });
         });
-      });
     },
     cancel() {
       this.model.rollbackAttributes();
       this.transitionToRoute('repositories.show', this.model);
-    },
-  },
+    }
+  }
 });

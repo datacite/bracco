@@ -20,7 +20,7 @@ FactoryGuy.define('provider', {
     isActive: true,
     hasPassword: true,
     joined: '2010-02-05',
-    rorId: 'https://ror.org/038sjwq14',
+    rorId: 'https://ror.org/038sjwq14'
   },
 
   carl: {
@@ -42,6 +42,6 @@ FactoryGuy.define('provider', {
     isActive: true,
     hasPassword: true,
     joined: null,
-    rorId: 'https://ror.org/001tw8739',
-  },
+    rorId: 'https://ror.org/001tw8739'
+  }
 });

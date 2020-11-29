@@ -17,7 +17,7 @@ export default Component.extend({
       this.set('showFundingReferences', true);
     },
     toggleFundingReferences() {
-      this.set('showFundingReferences', !this.get('showFundingReferences'));
-    },
-  },
+      this.set('showFundingReferences', !this.showFundingReferences);
+    }
+  }
 });

@@ -32,7 +32,12 @@ export default Component.extend({
 
   actions: {
     createOnEnter(select, e) {
-      if (e.keyCode === 13 && select.isOpen && !select.highlighted && !isBlank(select.searchText)) {
+      if (
+        e.keyCode === 13 &&
+        select.isOpen &&
+        !select.highlighted &&
+        !isBlank(select.searchText)
+      ) {
         if (!this.selected.includes(select.searchText)) {
           this.spdxLicenseList.push(select.searchText);
           select.actions.choose(select.searchText);
@@ -51,10 +56,10 @@ export default Component.extend({
       this.model.get('rightsList').removeObject(this.fragment);
     },
     searchRights(query) {
-      let rightsFound = this.spdxLicenseListComplete.filter(function(rights) {
+      let rightsFound = this.spdxLicenseListComplete.filter(function (rights) {
         return rights.name.toLowerCase().startsWith(query.toLowerCase());
       });
       this.set('spdxLicenseList', rightsFound);
-    },
-  },
+    }
+  }
 });

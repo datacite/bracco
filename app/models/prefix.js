@@ -1,20 +1,20 @@
-import DS from 'ember-data';
+import Model, { hasMany, attr } from '@ember-data/model';
 
-export default DS.Model.extend({
-  providers: DS.hasMany('provider', {
-    async: true,
+export default Model.extend({
+  providers: hasMany('provider', {
+    async: true
   }),
-  repositories: DS.hasMany('repository', {
-    async: true,
+  repositories: hasMany('repository', {
+    async: true
   }),
-  'provider-prefixes': DS.hasMany('provider-prefix', {
-    async: true,
+  'provider-prefixes': hasMany('provider-prefix', {
+    async: true
   }),
-  'repository-prefixes': DS.hasMany('repository-prefix', {
-    async: true,
+  'repository-prefixes': hasMany('repository-prefix', {
+    async: true
   }),
 
-  meta: DS.attr(),
+  meta: attr(),
 
-  createdAt: DS.attr('date'),
+  createdAt: attr('date')
 });

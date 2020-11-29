@@ -14,13 +14,13 @@ export default Route.extend({
       serviceContact: this.store.createFragment('contact'),
       secondaryServiceContact: this.store.createFragment('contact'),
       votingContact: this.store.createFragment('contact'),
-      isActive: true,
+      isActive: true
     });
   },
 
   afterModel(model) {
-    if (this.get('can').cannot('create provider', model)) {
+    if (this.can.cannot('create provider', model)) {
       return this.transitionTo('index');
     }
-  },
+  }
 });

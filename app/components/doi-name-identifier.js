@@ -6,23 +6,40 @@ export default Component.extend({
 
   validateOrcidIdentifier(id) {
     let self = this;
-    this.store.findRecord('person', id).then(function(person) {
-      self.joinNameParts({ givenName: person.givenName, familyName: person.familyName, nameIdentifierScheme: 'ORCID' });
-    }).catch(function() {
-      self.joinNameParts({ givenName: null, familyName: null, nameIdentifierScheme: 'ORCID' });
-    });
+    this.store
+      .findRecord('person', id)
+      .then(function (person) {
+        self.joinNameParts({
+          givenName: person.givenName,
+          familyName: person.familyName,
+          nameIdentifierScheme: 'ORCID'
+        });
+      })
+      .catch(function () {
+        self.joinNameParts({
+          givenName: null,
+          familyName: null,
+          nameIdentifierScheme: 'ORCID'
+        });
+      });
   },
   validateRorIdentifier(value) {
     let self = this;
     let id = 'ror.org/' + value.substr(value.indexOf('0'));
-    this.store.findRecord('ror', id).then(function(ror) {
-      self.joinNameParts({ name: ror.name, nameIdentifierScheme: 'ROR' });
-    }).catch(function() {
-      self.joinNameParts({ name: null, nameIdentifierScheme: 'ROR' });
-    });
+    this.store
+      .findRecord('ror', id)
+      .then(function (ror) {
+        self.joinNameParts({ name: ror.name, nameIdentifierScheme: 'ROR' });
+      })
+      .catch(function () {
+        self.joinNameParts({ name: null, nameIdentifierScheme: 'ROR' });
+      });
   },
   updateNameIdentifier(value) {
-    if (value.startsWith('https://orcid.org') || value.startsWith('http://orcid.org')) {
+    if (
+      value.startsWith('https://orcid.org') ||
+      value.startsWith('http://orcid.org')
+    ) {
       let id = value.substr(value.indexOf('0'));
       this.fragment.set('schemeUri', 'https://orcid.org');
       this.fragment.set('nameIdentifierScheme', 'ORCID');
@@ -63,6 +80,6 @@ export default Component.extend({
     },
     deleteNameIdentifier() {
       this.creator.get('nameIdentifiers').removeObject(this.fragment);
-    },
-  },
+    }
+  }
 });

@@ -10,55 +10,58 @@ export default Route.extend({
     params = assign(params, {
       page: {
         number: params.page,
-        size: params.size,
+        size: params.size
       },
-      include: 'provider',
+      include: 'provider'
     });
 
     return hash({
       provider: null,
-      repositories: this.store.query('repository', params).then(function(result) {
-        return result;
-      }).catch(function(reason) {
-        console.debug(reason);
-        return [];
-      }),
+      repositories: this.store
+        .query('repository', params)
+        .then(function (result) {
+          return result;
+        })
+        .catch(function (reason) {
+          console.debug(reason);
+          return [];
+        })
     });
   },
 
   queryParams: {
     page: {
-      refreshModel: true,
+      refreshModel: true
     },
     size: {
-      refreshModel: true,
+      refreshModel: true
     },
     year: {
-      refreshModel: true,
+      refreshModel: true
     },
     software: {
-      refreshModel: true,
+      refreshModel: true
     },
     language: {
-      refreshModel: true,
+      refreshModel: true
     },
     certificate: {
-      refreshModel: true,
+      refreshModel: true
     },
     'provider-id': {
-      refreshModel: true,
+      refreshModel: true
     },
     'client-type': {
-      refreshModel: true,
+      refreshModel: true
     },
     'repository-type': {
-      refreshModel: true,
-    },
+      refreshModel: true
+    }
   },
 
   afterModel() {
     if (this.can.cannot('read index')) {
       this.transitionTo('index');
     }
-  },
+  }
 });

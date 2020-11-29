@@ -1,11 +1,11 @@
 /* eslint-env node */
 'use strict';
 
-module.exports = function(deployTarget) {
+module.exports = function (deployTarget) {
   let ENV = {
     build: {
-      outputPath: 'dist',
-    },
+      outputPath: 'dist'
+    }
   };
 
   if (deployTarget === 'development') {

@@ -3,11 +3,11 @@ import { setupApplicationTest } from 'ember-qunit';
 import { currentURL, visit } from '@ember/test-helpers';
 import { setupQunit as setupPolly } from '@pollyjs/core';
 
-module('Acceptance | anonymous | user', function(hooks) {
+module('Acceptance | anonymous | user', function (hooks) {
   setupPolly(hooks);
   setupApplicationTest(hooks);
 
-  test('visiting users', async function(assert) {
+  test('visiting users', async function (assert) {
     await visit('/users');
 
     assert.equal(currentURL(), '/');

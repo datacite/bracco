@@ -5,27 +5,12 @@
 {{/if}}
 
   <div class="power-select-fragment" doi-subject>
-    {{#form.element
-    controlType="power-select"
-    options=subjects
-    value=fragment.subject
-    disabled=disabled
-    destination=fragment.subject as |el|
-  }}
-    {{el.control
-      searchEnabled=true
-      onChange=(action "updateSubject")
-      placeholder="Search Subject from the OECD Fields of Science and Technology (FOS) OR create a new keyword"
-      onkeydown=(action "createOnEnter")
-      search=(action "searchSubject")
-      allowClear=true
-      searchPlaceholder="Type to search subject OR create a new keyword..."
-      noMatchesMessage="Press ENTER to add new subject, keyword, classification code, or key phrase describing the resource."
-    }}
+    <form.element @controlType="power-select" @options={{subjects}} @value={{fragment.subject}} @disabled={{disabled}} @destination={{fragment.subject}} as |el|>
+    <el.control @searchEnabled={{true}} @onChange={{action "updateSubject"}} @placeholder="Search Subject from the OECD Fields of Science and Technology (FOS) OR create a new keyword" @onkeydown={{action "createOnEnter"}} @search={{action "searchSubject"}} @allowClear={{true}} @searchPlaceholder="Type to search subject OR create a new keyword..." @noMatchesMessage="Press ENTER to add new subject, keyword, classification code, or key phrase describing the resource." />
     <div class="help-block">
       The default subject scheme is provided by the <a target="_blank" rel="noopener" href="https://www.oecd.org/science/inno/38235147.pdf">OECD Fields of Science and Technology (FOS)</a>.
     </div>
-    {{/form.element}}
+    </form.element>
   </div>
 
 <div class="power-select-label">

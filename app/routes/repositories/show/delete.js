@@ -13,5 +13,5 @@ export default Route.extend({
     if (this.can.cannot('read repository', model)) {
       this.transitionTo('index');
     }
-  },
+  }
 });

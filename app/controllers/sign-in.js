@@ -7,13 +7,13 @@ import { isPresent } from '@ember/utils';
 export default Controller.extend({
   session: service(),
 
-  queryParams: [ 'globus' ],
+  queryParams: ['globus'],
   globus: null,
   orcidLogoUrl: ENV.CDN_URL + '/images/orcid.png',
   globusLogoUrl: ENV.CDN_URL + '/images/globus.png',
   oidcAuthUrl: 'http://localhost:8080/users/auth/globus', // ENV.FABRICA_URL + '/authorize',
 
-  showGlobus: computed('globus', function() {
+  showGlobus: computed('globus', function () {
     return isPresent(this.globus);
   }),
 
@@ -21,11 +21,17 @@ export default Controller.extend({
     authenticate() {
       let self = this;
       let { identification, password } = this;
-      this.session.authenticate('authenticator:oauth2', identification, password).then(() => {
-        self.transitionToRoute('/');
-      }).catch((reason) => {
-        this.set('errorMessage', reason.errors && reason.errors[0].title || reason);
-      });
-    },
-  },
+      this.session
+        .authenticate('authenticator:oauth2', identification, password)
+        .then(() => {
+          self.transitionToRoute('/');
+        })
+        .catch((reason) => {
+          this.set(
+            'errorMessage',
+            (reason.errors && reason.errors[0].title) || reason
+          );
+        });
+    }
+  }
 });

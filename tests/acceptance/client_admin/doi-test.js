@@ -4,28 +4,31 @@ import {
   currentURL,
   visit,
   fillIn,
-  click,
+  click
   // waitUntil,
   // findAll,
   // pauseTest,
 } from '@ember/test-helpers';
 import ENV from 'bracco/config/environment';
-import { selectChoose, selectSearch } from 'ember-power-select/test-support/helpers';
+import {
+  selectChoose,
+  selectSearch
+} from 'ember-power-select/test-support/helpers';
 import { authenticateSession } from 'ember-simple-auth/test-support';
 import { setupQunit as setupPolly } from '@pollyjs/core';
 
-module('Acceptance | client_admin | doi', function(hooks) {
+module('Acceptance | client_admin | doi', function (hooks) {
   setupPolly(hooks, {
     matchRequestsBy: {
       headers: {
-        exclude: [ 'authorization' ],
-      },
-    },
+        exclude: ['authorization']
+      }
+    }
     // recordFailedRequests: true,
   });
   setupApplicationTest(hooks);
 
-  hooks.beforeEach(async function() {
+  hooks.beforeEach(async function () {
     const { server } = this.polly;
 
     server.any().on('request', (req) => {
@@ -41,7 +44,9 @@ module('Acceptance | client_admin | doi', function(hooks) {
       }
 
       /* filter out authorization tokens */
-      recording.request.headers = recording.request.headers.filter(({ name }) => name !== 'authorization');
+      recording.request.headers = recording.request.headers.filter(
+        ({ name }) => name !== 'authorization'
+      );
     });
 
     await authenticateSession({
@@ -49,39 +54,39 @@ module('Acceptance | client_admin | doi', function(hooks) {
       name: 'DataCite Test Repository',
       role_id: 'client_admin',
       provider_id: 'datacite',
-      client_id: 'datacite.test',
+      client_id: 'datacite.test'
     });
   });
 
-  test('visiting dois', async function(assert) {
+  test('visiting dois', async function (assert) {
     await visit('/repositories/datacite.test/dois');
 
     assert.equal(currentURL(), '/repositories/datacite.test/dois');
     assert.dom('h2.work').hasText('DataCite Test Repository');
   });
 
-  test('visiting repository DataCite Test info', async function(assert) {
+  test('visiting repository DataCite Test info', async function (assert) {
     await visit('/repositories/datacite.test/info');
 
     assert.equal(currentURL(), '/repositories/datacite.test/info');
     assert.dom('h2.work').hasText('DataCite Test Repository');
   });
 
-  test('visiting repository DataCite Test prefixes', async function(assert) {
+  test('visiting repository DataCite Test prefixes', async function (assert) {
     await visit('/repositories/datacite.test/prefixes');
 
     assert.equal(currentURL(), '/repositories/datacite.test/prefixes');
     assert.dom('h2.work').hasText('DataCite Test Repository');
   });
 
-  test('visiting repository DataCite Test dois', async function(assert) {
+  test('visiting repository DataCite Test dois', async function (assert) {
     await visit('/repositories/datacite.test/dois');
 
     assert.equal(currentURL(), '/repositories/datacite.test/dois');
     assert.dom('h2.work').hasText('DataCite Test Repository');
   });
 
-  test('visiting specific doi', async function(assert) {
+  test('visiting specific doi', async function (assert) {
     await visit('/dois/10.80225%2Fda52-7919');
 
     assert.equal(currentURL(), '/dois/10.80225%2Fda52-7919');
@@ -96,7 +101,7 @@ module('Acceptance | client_admin | doi', function(hooks) {
   //   // assert.dom('#doi-language').includesText('Select Language');
   // });
 
-  test('visiting the form and adding url', async function(assert) {
+  test('visiting the form and adding url', async function (assert) {
     await visit('repositories/datacite.test/dois/new');
 
     assert.equal(currentURL(), 'repositories/datacite.test/dois/new');
@@ -106,7 +111,7 @@ module('Acceptance | client_admin | doi', function(hooks) {
     await click('button#doi-create');
   });
 
-  test('visiting the form and adding creator', async function(assert) {
+  test('visiting the form and adding creator', async function (assert) {
     await visit('repositories/datacite.test/dois/new');
 
     assert.equal(currentURL(), 'repositories/datacite.test/dois/new');
@@ -119,7 +124,7 @@ module('Acceptance | client_admin | doi', function(hooks) {
     await click('button#doi-create');
   });
 
-  test('visiting the form and selecting title', async function(assert) {
+  test('visiting the form and selecting title', async function (assert) {
     await visit('repositories/datacite.test/dois/new');
 
     assert.equal(currentURL(), 'repositories/datacite.test/dois/new');
@@ -132,7 +137,7 @@ module('Acceptance | client_admin | doi', function(hooks) {
     await click('button#doi-create');
   });
 
-  test('visiting the form and adding publisher', async function(assert) {
+  test('visiting the form and adding publisher', async function (assert) {
     await visit('repositories/datacite.test/dois/new');
 
     assert.equal(currentURL(), 'repositories/datacite.test/dois/new');
@@ -142,7 +147,7 @@ module('Acceptance | client_admin | doi', function(hooks) {
     await click('button#doi-create');
   });
 
-  test('visiting the form and adding publication year', async function(assert) {
+  test('visiting the form and adding publication year', async function (assert) {
     await visit('repositories/datacite.test/dois/new');
 
     assert.equal(currentURL(), 'repositories/datacite.test/dois/new');
@@ -152,7 +157,7 @@ module('Acceptance | client_admin | doi', function(hooks) {
     await click('button#doi-create');
   });
 
-  test('visiting the form and adding resource type general', async function(assert) {
+  test('visiting the form and adding resource type general', async function (assert) {
     await visit('repositories/datacite.test/dois/new');
 
     assert.equal(currentURL(), 'repositories/datacite.test/dois/new');
@@ -165,7 +170,7 @@ module('Acceptance | client_admin | doi', function(hooks) {
     await click('button#doi-create');
   });
 
-  test('visiting the form and selecting language', async function(assert) {
+  test('visiting the form and selecting language', async function (assert) {
     await visit('repositories/datacite.test/dois/new');
 
     assert.equal(currentURL(), 'repositories/datacite.test/dois/new');
@@ -175,7 +180,7 @@ module('Acceptance | client_admin | doi', function(hooks) {
     await click('button#doi-create');
   });
 
-  test('visiting the form and selecting subject', async function(assert) {
+  test('visiting the form and selecting subject', async function (assert) {
     await visit('repositories/datacite.test/dois/new');
 
     assert.equal(currentURL(), 'repositories/datacite.test/dois/new');
@@ -190,14 +195,19 @@ module('Acceptance | client_admin | doi', function(hooks) {
     await click('button#doi-create');
   });
 
-  test('visiting the form and adding geoLocationPlace', async function(assert) {
+  test('visiting the form and adding geoLocationPlace', async function (assert) {
     await visit('repositories/datacite.test/dois/new');
 
     assert.equal(currentURL(), 'repositories/datacite.test/dois/new');
     await click('#add-geolocation');
-    await fillIn('[data-test-geo-location-place]', 'Amsterdam, Novoravis hotel');
+    await fillIn(
+      '[data-test-geo-location-place]',
+      'Amsterdam, Novoravis hotel'
+    );
 
-    assert.dom('[data-test-geo-location-place]').hasValue('Amsterdam, Novoravis hotel');
+    assert
+      .dom('[data-test-geo-location-place]')
+      .hasValue('Amsterdam, Novoravis hotel');
 
     await click('#toggle-geolocations');
     assert.dom('#toggle-geolocations').includesText('Show 1 geolocation');
@@ -205,15 +215,19 @@ module('Acceptance | client_admin | doi', function(hooks) {
     await click('button#doi-create');
   });
 
-  test('visiting the form and entering new subject', async function(assert) {
+  test('visiting the form and entering new subject', async function (assert) {
     await visit('repositories/datacite.test/dois/new');
 
     await click('#add-subject');
     await selectSearch('[doi-subject]', 'Optics');
-    assert.dom('[doi-subject]').includesText('Search Subject from the OECD Fields of Science and Technology (FOS) OR create a new keyword The default subject scheme is provided by the OECD Fields of Science and Technology (FOS).');
+    assert
+      .dom('[doi-subject]')
+      .includesText(
+        'Search Subject from the OECD Fields of Science and Technology (FOS) OR create a new keyword The default subject scheme is provided by the OECD Fields of Science and Technology (FOS).'
+      );
   });
 
-  test('visiting the form and adding contributor', async function(assert) {
+  test('visiting the form and adding contributor', async function (assert) {
     await visit('repositories/datacite.test/dois/new');
 
     assert.equal(currentURL(), 'repositories/datacite.test/dois/new');
@@ -227,22 +241,22 @@ module('Acceptance | client_admin | doi', function(hooks) {
     await click('button#doi-create');
   });
 
-  test('visiting the form and adding version', async function(assert) {
+  test('visiting the form and adding version', async function (assert) {
     await visit('repositories/datacite.test/dois/new');
 
     assert.equal(currentURL(), 'repositories/datacite.test/dois/new');
-    await fillIn('#version-field','67');
+    await fillIn('#version-field', '67');
     assert.dom('#version-field').hasValue('67');
 
     await click('button#doi-create');
   });
 
-  test('visiting the form and adding format', async function(assert) {
+  test('visiting the form and adding format', async function (assert) {
     await visit('repositories/datacite.test/dois/new');
 
     assert.equal(currentURL(), 'repositories/datacite.test/dois/new');
     await click('#add-format');
-    await fillIn('[data-test-format]','json');
+    await fillIn('[data-test-format]', 'json');
     assert.dom('[data-test-format]').hasValue('json');
 
     await click('#toggle-formats');
@@ -251,12 +265,12 @@ module('Acceptance | client_admin | doi', function(hooks) {
     await click('button#doi-create');
   });
 
-  test('visiting the form and adding size', async function(assert) {
+  test('visiting the form and adding size', async function (assert) {
     await visit('repositories/datacite.test/dois/new');
 
     assert.equal(currentURL(), 'repositories/datacite.test/dois/new');
     await click('#add-size');
-    await fillIn('[data-test-size]','5kb');
+    await fillIn('[data-test-size]', '5kb');
     assert.dom('[data-test-size]').hasValue('5kb');
 
     await click('#toggle-sizes');
@@ -265,27 +279,37 @@ module('Acceptance | client_admin | doi', function(hooks) {
     await click('button#doi-create');
   });
 
-  test('visiting the form and adding alternate identfier', async function(assert) {
+  test('visiting the form and adding alternate identfier', async function (assert) {
     await visit('repositories/datacite.test/dois/new');
 
     await click('#add-alternate-identifier');
-    await fillIn('[data-test-alternate-identifier]','https://doi.org/10.70048/rph240519');
-    await selectChoose('[data-test-alternate-identifier-type]','DOI');
+    await fillIn(
+      '[data-test-alternate-identifier]',
+      'https://doi.org/10.70048/rph240519'
+    );
+    await selectChoose('[data-test-alternate-identifier-type]', 'DOI');
 
-    assert.dom('[data-test-alternate-identifier]').hasValue('https://doi.org/10.70048/rph240519');
+    assert
+      .dom('[data-test-alternate-identifier]')
+      .hasValue('https://doi.org/10.70048/rph240519');
     assert.dom('[data-test-alternate-identifier-type]').includesText('DOI');
 
     await click('#toggle-alternate-identifiers');
-    assert.dom('#toggle-alternate-identifiers').includesText('Show 1 alternate identifier');
+    assert
+      .dom('#toggle-alternate-identifiers')
+      .includesText('Show 1 alternate identifier');
 
     await click('button#doi-create');
   });
 
-  test('update draft doi', async function(assert) {
+  test('update draft doi', async function (assert) {
     await visit('/dois/10.80225%2F9fxk-aa96/edit');
 
     assert.equal(currentURL(), '/dois/10.80225%2F9fxk-aa96/edit');
-    await fillIn('input#url-field', 'https://support.datacite.org/docs/doi-states');
+    await fillIn(
+      'input#url-field',
+      'https://support.datacite.org/docs/doi-states'
+    );
     await click('button#doi-update');
 
     // TODO click seems to not be reliable
@@ -320,12 +344,12 @@ module('Acceptance | client_admin | doi', function(hooks) {
   //   // assert.dom('h2.work').hasText('DataCite Test Repository');
   // });
 
-  test('visiting the form and adding related identifier', async function(assert) {
+  test('visiting the form and adding related identifier', async function (assert) {
     await visit('/repositories/datacite.test/dois/new');
 
     assert.equal(currentURL(), '/repositories/datacite.test/dois/new');
     await click('#add-related-identifier');
-    await fillIn('[data-test-related-identifier]','10.70048/rph240519');
+    await fillIn('[data-test-related-identifier]', '10.70048/rph240519');
     await selectChoose('[data-test-related-relation-type]', 'References');
     await selectChoose('[data-test-related-resource-type]', 'Text');
 
@@ -335,7 +359,9 @@ module('Acceptance | client_admin | doi', function(hooks) {
     assert.dom('[data-test-related-resource-type]').includesText('Text');
 
     await click('#toggle-related-identifiers');
-    assert.dom('#toggle-related-identifiers').includesText('Show 1 related identifier');
+    assert
+      .dom('#toggle-related-identifiers')
+      .includesText('Show 1 related identifier');
 
     await click('button#doi-create');
   });
@@ -359,7 +385,7 @@ module('Acceptance | client_admin | doi', function(hooks) {
   //   assert.dom('[data-test-award-uri]').hasValue('https://schema.datacite.org/meta/kernel-4');
   // });
 
-  test('visiting the form and adding rights', async function(assert) {
+  test('visiting the form and adding rights', async function (assert) {
     await visit('/repositories/datacite.test/dois/new');
 
     assert.equal(currentURL(), '/repositories/datacite.test/dois/new');
@@ -368,8 +394,12 @@ module('Acceptance | client_admin | doi', function(hooks) {
     await selectChoose('[data-test-rights]', 'Attribution Assurance License');
     await fillIn('[data-test-rights-uri]', 'http://spdx.org/licenses/AA.json');
 
-    assert.dom('[data-test-rights]').includesText('Attribution Assurance License');
-    assert.dom('[data-test-rights-uri]').hasValue('http://spdx.org/licenses/AA.json');
+    assert
+      .dom('[data-test-rights]')
+      .includesText('Attribution Assurance License');
+    assert
+      .dom('[data-test-rights-uri]')
+      .hasValue('http://spdx.org/licenses/AA.json');
 
     await click('#toggle-rights');
     assert.dom('#toggle-rights').includesText('Show 1 right');

@@ -1,4 +1,4 @@
-import DS from 'ember-data';
+import { attr } from '@ember-data/model';
 import Fragment from 'ember-data-model-fragments/fragment';
 // import { validator, buildValidations } from 'ember-cp-validations';
 
@@ -9,7 +9,7 @@ import Fragment from 'ember-data-model-fragments/fragment';
 // });
 
 export default Fragment.extend({
-  nameIdentifier: DS.attr('string'),
-  nameIdentifierScheme: DS.attr('string'),
-  schemeUri: DS.attr('string'),
+  nameIdentifier: attr('string'),
+  nameIdentifierScheme: attr('string'),
+  schemeUri: attr('string')
 });

@@ -6,24 +6,24 @@ import { inject as service } from '@ember/service';
 export default Controller.extend({
   session: service(),
 
-  queryParams: [ 'jwt' ],
+  queryParams: ['jwt'],
   jwt: null,
 
   actions: {
     invalidateSession() {
       this.session.invalidate();
-    },
-  },
+    }
+  }
 });
 
 import ApplicationController from './application';
 
 ApplicationController.reopen({
-  unsetToken: observer('jwt', function() {
+  unsetToken: observer('jwt', function () {
     if (this.jwt) {
-      next(this, function() {
+      next(this, function () {
         this.set('jwt', null);
       });
     }
-  }),
+  })
 });

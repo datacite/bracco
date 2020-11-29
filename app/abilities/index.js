@@ -5,7 +5,7 @@ import { Ability } from 'ember-can';
 export default Ability.extend({
   currentUser: service(),
 
-  canWrite: computed(function() {
+  canWrite: computed(function () {
     switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
@@ -13,12 +13,12 @@ export default Ability.extend({
         return false;
     }
   }),
-  canRead: computed(function() {
+  canRead: computed(function () {
     switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
       default:
         return false;
     }
-  }),
+  })
 });

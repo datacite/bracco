@@ -18,7 +18,7 @@ const ResourceType = BaseValidator.extend({
       'Sound',
       'Text',
       'Workflow',
-      'Other',
+      'Other'
     ];
 
     const message = 'Resource of the Type is not valid.';
@@ -31,7 +31,7 @@ const ResourceType = BaseValidator.extend({
       default:
         return message;
     }
-  },
+  }
 });
 
 export default ResourceType;

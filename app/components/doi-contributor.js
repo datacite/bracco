@@ -25,17 +25,19 @@ const contributorTypes = [
   'Sponsor',
   'Supervisor',
   'WorkPackageLeader',
-  'Other',
+  'Other'
 ];
 
-const humanContributorTypes = contributorTypes.map(type => humanizeString(type));
+const humanContributorTypes = contributorTypes.map((type) =>
+  humanizeString(type)
+);
 
 const organizationalContributorTypes = [
   'HostingInstitution',
   'RegistrationAgency',
   'RegistrationAuthority',
   'ResearchGroup',
-  'Distributor',
+  'Distributor'
 ];
 
 const personalContributorTypes = [
@@ -48,13 +50,15 @@ const personalContributorTypes = [
   'RelatedPerson',
   'Researcher',
   'Supervisor',
-  'WorkPackageLeader',
+  'WorkPackageLeader'
 ];
 
 export default PersonBaseComponent.extend({
   humanContributorTypes,
-  humanContributorType: computed('fragment.contributorType', function() {
-    return isBlank(this.get('fragment.contributorType')) ? null : humanizeString(this.get('fragment.contributorType'));
+  humanContributorType: computed('fragment.contributorType', function () {
+    return isBlank(this.get('fragment.contributorType'))
+      ? null
+      : humanizeString(this.get('fragment.contributorType'));
   }),
 
   selectContributorType(contributorType) {
@@ -70,7 +74,6 @@ export default PersonBaseComponent.extend({
       if (personalContributorTypes.includes(contributorTypeId)) {
         this.selectNameType('Personal');
       }
-
     } else {
       this.fragment.set('contributorType', null);
     }
@@ -83,6 +86,6 @@ export default PersonBaseComponent.extend({
     },
     selectContributorType(contributorType) {
       this.selectContributorType(contributorType);
-    },
-  },
+    }
+  }
 });

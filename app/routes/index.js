@@ -9,24 +9,35 @@ export default Route.extend({
   model() {
     if (this.can.can('read index')) {
       let self = this;
-      return this.store.findRecord('provider', 'admin').then(function(model) {
-        return model;
-      }).catch(function(reason) {
-        console.debug(reason);
+      return this.store
+        .findRecord('provider', 'admin')
+        .then(function (model) {
+          return model;
+        })
+        .catch(function (reason) {
+          console.debug(reason);
 
-        self.get('flashMessages').warning('Fabrica is currently unavailable due to a DataCite API problem. We apologize for the inconvenience and are working hard to restore the service. Please check back later or contact DataCite Support if you have a question.');
-      });
+          self
+            .get('flashMessages')
+            .warning(
+              'Fabrica is currently unavailable due to a DataCite API problem. We apologize for the inconvenience and are working hard to restore the service. Please check back later or contact DataCite Support if you have a question.'
+            );
+        });
     }
   },
 
   afterModel() {
     if (this.get('currentUser.role_id') === 'staff_admin') {
       this.transitionTo('index');
-    } else if (w('provider_admin consortium_admin client_admin user').includes(this.get('currentUser.role_id'))) {
+    } else if (
+      w('provider_admin consortium_admin client_admin user').includes(
+        this.get('currentUser.role_id')
+      )
+    ) {
       let home = this.currentUser.get('home');
       this.transitionTo(home.route, home.id);
     } else if (this.get('currentUser.role_id') === 'temporary') {
       this.transitionTo('password');
     }
-  },
+  }
 });

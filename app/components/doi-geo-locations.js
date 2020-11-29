@@ -17,7 +17,7 @@ export default Component.extend({
       this.set('showGeoLocations', true);
     },
     toggleGeoLocations() {
-      this.set('showGeoLocations', !this.get('showGeoLocations'));
-    },
-  },
+      this.set('showGeoLocations', !this.showGeoLocations);
+    }
+  }
 });

@@ -3,14 +3,14 @@ import { setupTest } from 'ember-qunit';
 
 let options, builtOptions, validator, message;
 
-module('Unit | Validator | uuid-format', function(hooks) {
+module('Unit | Validator | uuid-format', function (hooks) {
   setupTest(hooks);
 
-  hooks.beforeEach(function() {
+  hooks.beforeEach(function () {
     validator = this.owner.lookup('validator:uuid-format');
   });
 
-  test('no options', function(assert) {
+  test('no options', function (assert) {
     assert.expect(1);
 
     builtOptions = validator.buildOptions({}).toObject();
@@ -22,7 +22,7 @@ module('Unit | Validator | uuid-format', function(hooks) {
     }
   });
 
-  test('uuid', function(assert) {
+  test('uuid', function (assert) {
     assert.expect(2);
 
     builtOptions = validator.buildOptions({}).toObject();
@@ -30,30 +30,36 @@ module('Unit | Validator | uuid-format', function(hooks) {
     message = validator.validate('offirgolan', builtOptions);
     assert.equal(message, 'Please enter a valid UUID.');
 
-    message = validator.validate('9885f0b1-7d67-4df0-a282-0f422bd1b7eb', builtOptions);
+    message = validator.validate(
+      '9885f0b1-7d67-4df0-a282-0f422bd1b7eb',
+      builtOptions
+    );
     assert.equal(message, true);
   });
 
-  test('uuid version 4', function(assert) {
+  test('uuid version 4', function (assert) {
     assert.expect(2);
 
     options = {
-      version: 4,
+      version: 4
     };
     options = validator.buildOptions(options, {}).toObject();
 
-    message = validator.validate('9885f0b1-7d67-4df0-a282-0f422bd1b7eb', options);
+    message = validator.validate(
+      '9885f0b1-7d67-4df0-a282-0f422bd1b7eb',
+      options
+    );
     assert.equal(message, true);
 
     message = validator.validate('abc', options);
     assert.equal(message, 'Please enter a valid UUID (version 4).');
   });
 
-  test('allow blank', function(assert) {
+  test('allow blank', function (assert) {
     assert.expect(2);
 
     options = {
-      allowBlank: true,
+      allowBlank: true
     };
     options = validator.buildOptions(options, {}).toObject();
 

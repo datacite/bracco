@@ -9,9 +9,15 @@ export default Controller.extend({
       return 'register';
     } else if (stateChange[0] === 'draft' && stateChange[1] === 'findable') {
       return 'publish';
-    } else if (stateChange[0] === 'registered' && stateChange[1] === 'findable') {
+    } else if (
+      stateChange[0] === 'registered' &&
+      stateChange[1] === 'findable'
+    ) {
       return 'publish';
-    } else if (stateChange[0] === 'findable' && stateChange[1] === 'registered') {
+    } else if (
+      stateChange[0] === 'findable' &&
+      stateChange[1] === 'registered'
+    ) {
       return 'hide';
     }
   },
@@ -49,13 +55,13 @@ export default Controller.extend({
       doi.set('landingPage', null);
 
       let self = this;
-      doi.save().then(function(doi) {
+      doi.save().then(function (doi) {
         self.transitionToRoute('dois.show', doi);
       });
     },
     cancel() {
       this.model.rollbackAttributes();
       this.transitionToRoute('dois.show', this.model);
-    },
-  },
+    }
+  }
 });

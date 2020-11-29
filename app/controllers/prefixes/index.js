@@ -4,7 +4,16 @@ import { inject as service } from '@ember/service';
 export default Controller.extend({
   features: service(),
 
-  queryParams: [ 'query', 'provider-id', 'client-id', 'year', 'state', 'sort', 'page', 'size' ],
+  queryParams: [
+    'query',
+    'provider-id',
+    'client-id',
+    'year',
+    'state',
+    'sort',
+    'page',
+    'size'
+  ],
   query: null,
   'provider-id': null,
   'client-id': null,
@@ -12,5 +21,5 @@ export default Controller.extend({
   state: null,
   sort: null,
   page: 1,
-  size: 25,
+  size: 25
 });

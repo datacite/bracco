@@ -10,16 +10,19 @@ export default Controller.extend({
     destroy() {
       let self = this;
       let repositoryId = this.model.get('repository.id');
-      this.store.findRecord('doi', this.model.get('id'), { backgroundReload: false }).then(function(doi) {
-        doi.destroyRecord().then(function() {
-          self.transitionToRoute('repositories.show.dois', repositoryId);
+      this.store
+        .findRecord('doi', this.model.get('id'), { backgroundReload: false })
+        .then(function (doi) {
+          doi.destroyRecord().then(function () {
+            self.transitionToRoute('repositories.show.dois', repositoryId);
+          });
+        })
+        .catch(function (reason) {
+          console.debug(reason);
         });
-      }).catch(function(reason) {
-        console.debug(reason);
-      });
     },
     cancel() {
       this.transitionToRoute('dois.show', this.model);
-    },
-  },
+    }
+  }
 });

@@ -55,6 +55,6 @@ export default Component.extend({
     },
     invalidateSession() {
       this.session.invalidate();
-    },
-  },
+    }
+  }
 });

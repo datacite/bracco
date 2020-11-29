@@ -11,9 +11,8 @@ const dateTypesCompleteList = [
   'Updated',
   'Valid',
   'Withdrawn',
-  'Other',
+  'Other'
 ];
-
 
 export default Component.extend({
   dateTypesCompleteList,
@@ -33,6 +32,6 @@ export default Component.extend({
     },
     deleteDate() {
       this.model.get('dates').removeObject(this.fragment);
-    },
-  },
+    }
+  }
 });

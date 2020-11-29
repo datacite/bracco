@@ -11,34 +11,37 @@ export default Route.extend({
     params = assign(params, {
       page: {
         number: params.page,
-        size: params.size,
+        size: params.size
       },
-      'user-id': user.get('id'),
+      'user-id': user.get('id')
     });
 
     return hash({
       user,
-      dois: this.store.query('doi', params).then(function(result) {
-        return result;
-      }).catch(function(reason) {
-        console.debug(reason);
-        return [];
-      }),
+      dois: this.store
+        .query('doi', params)
+        .then(function (result) {
+          return result;
+        })
+        .catch(function (reason) {
+          console.debug(reason);
+          return [];
+        })
     });
   },
 
   queryParams: {
     page: {
-      refreshModel: true,
+      refreshModel: true
     },
     size: {
-      refreshModel: true,
-    },
+      refreshModel: true
+    }
   },
 
   afterModel() {
     if (this.can.cannot('read user', this.modelFor('users/show').user)) {
       this.transitionTo('index');
     }
-  },
+  }
 });

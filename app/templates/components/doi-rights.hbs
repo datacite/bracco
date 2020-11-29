@@ -1,28 +1,12 @@
 <div class="power-select-fragment" data-test-rights>
-  {{#form.element
-    controlType="power-select"
-    options=spdxLicenseList
-    value=fragment.rights
-    disabled=disabled
-    allowClear=true
-    destination=fragment.rights as |el|
-  }}
-  {{#el.control
-      searchEnabled=true
-      onChange=(action "selectRights")
-      placeholder="Search standard licenses"
-      onkeydown=(action "createOnEnter")
-      search=(action "searchRights")
-      searchPlaceholder="Type to search..."
-      allowClear=true
-      noMatchesMessage="Press ENTER to add a new license."
-      as |item| }}
+  <form.element @controlType="power-select" @options={{spdxLicenseList}} @value={{fragment.rights}} @disabled={{disabled}} @allowClear={{true}} @destination={{fragment.rights}} as |el|>
+  <el.control @searchEnabled={{true}} @onChange={{action "selectRights"}} @placeholder="Search standard licenses" @onkeydown={{action "createOnEnter"}} @search={{action "searchRights"}} @searchPlaceholder="Type to search..." @allowClear={{true}} @noMatchesMessage="Press ENTER to add a new license." as |item|>
   {{if item.name item.name fragment.rights}}
-  {{/el.control}}
+  </el.control>
   <div class="help-block">
     The list of standard licenses is provided by <a target="_blank" rel="noopener" href="https://spdx.org">SPDX</a>.
   </div>
-  {{/form.element}}
+  </form.element>
 </div>
 
 <div class="power-select-label">

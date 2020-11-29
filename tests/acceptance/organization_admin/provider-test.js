@@ -1,25 +1,21 @@
 import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
-import {
-  currentURL,
-  visit,
-  click,
-} from '@ember/test-helpers';
+import { currentURL, visit, click } from '@ember/test-helpers';
 import ENV from 'bracco/config/environment';
 import { authenticateSession } from 'ember-simple-auth/test-support';
 import { setupQunit as setupPolly } from '@pollyjs/core';
 
-module('Acceptance | organization_admin | provider', function(hooks) {
+module('Acceptance | organization_admin | provider', function (hooks) {
   setupPolly(hooks, {
     matchRequestsBy: {
       headers: {
-        exclude: [ 'authorization' ],
-      },
-    },
+        exclude: ['authorization']
+      }
+    }
   });
   setupApplicationTest(hooks);
 
-  hooks.beforeEach(async function() {
+  hooks.beforeEach(async function () {
     const { server } = this.polly;
 
     server.any().on('request', (req) => {
@@ -35,18 +31,20 @@ module('Acceptance | organization_admin | provider', function(hooks) {
       }
 
       /* filter out authorization tokens */
-      recording.request.headers = recording.request.headers.filter(({ name }) => name !== 'authorization');
+      recording.request.headers = recording.request.headers.filter(
+        ({ name }) => name !== 'authorization'
+      );
     });
 
     await authenticateSession({
       uid: 'datacite',
       name: 'DataCite',
       role_id: 'provider_admin',
-      provider_id: 'datacite',
+      provider_id: 'datacite'
     });
   });
 
-  test('visiting provider DataCite', async function(assert) {
+  test('visiting provider DataCite', async function (assert) {
     await visit('/providers/datacite');
 
     assert.equal(currentURL(), '/providers/datacite');
@@ -57,7 +55,7 @@ module('Acceptance | organization_admin | provider', function(hooks) {
     assert.dom('a#delete-provider').doesNotExist();
   });
 
-  test('visiting provider DataCite info', async function(assert) {
+  test('visiting provider DataCite info', async function (assert) {
     await visit('/providers/datacite/info');
 
     assert.equal(currentURL(), '/providers/datacite/info');
@@ -69,7 +67,7 @@ module('Acceptance | organization_admin | provider', function(hooks) {
     assert.dom('#chart-doi-title').includesText('DOIs by year');
   });
 
-  test('going to provider DataCite edit form', async function(assert) {
+  test('going to provider DataCite edit form', async function (assert) {
     await visit('/providers/datacite');
 
     assert.equal(currentURL(), '/providers/datacite');
@@ -82,7 +80,7 @@ module('Acceptance | organization_admin | provider', function(hooks) {
     assert.dom('input#member-id-field').exists();
   });
 
-  test('editing provider DataCite password form', async function(assert) {
+  test('editing provider DataCite password form', async function (assert) {
     await visit('/providers/datacite/change');
 
     assert.equal(currentURL(), '/providers/datacite/change');
@@ -96,7 +94,7 @@ module('Acceptance | organization_admin | provider', function(hooks) {
     assert.dom('button[type=submit]').includesText('Set Password');
   });
 
-  test('visiting provider DataCite repositories', async function(assert) {
+  test('visiting provider DataCite repositories', async function (assert) {
     await visit('/providers/datacite/repositories');
 
     assert.equal(currentURL(), '/providers/datacite/repositories');
@@ -113,7 +111,7 @@ module('Acceptance | organization_admin | provider', function(hooks) {
     assert.dom('a#add-repository').includesText('Add Repository');
   });
 
-  test('visiting provider DataCite dois', async function(assert) {
+  test('visiting provider DataCite dois', async function (assert) {
     await visit('/providers/datacite/dois');
 
     assert.equal(currentURL(), '/providers/datacite/dois');

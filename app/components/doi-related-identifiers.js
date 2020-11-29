@@ -16,7 +16,7 @@ export default Component.extend({
       this.set('showRelatedIdentifiers', true);
     },
     toggleRelatedIdentifiers() {
-      this.set('showRelatedIdentifiers', !this.get('showRelatedIdentifiers'));
-    },
-  },
+      this.set('showRelatedIdentifiers', !this.showRelatedIdentifiers);
+    }
+  }
 });

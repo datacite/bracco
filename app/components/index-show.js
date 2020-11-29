@@ -18,6 +18,6 @@ export default Component.extend({
     },
     cancel() {
       this.set('edit', false);
-    },
-  },
+    }
+  }
 });

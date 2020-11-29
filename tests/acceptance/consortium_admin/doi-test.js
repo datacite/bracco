@@ -1,24 +1,21 @@
 import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
-import {
-  currentURL,
-  visit,
-} from '@ember/test-helpers';
+import { currentURL, visit } from '@ember/test-helpers';
 import ENV from 'bracco/config/environment';
 import { authenticateSession } from 'ember-simple-auth/test-support';
 import { setupQunit as setupPolly } from '@pollyjs/core';
 
-module('Acceptance | consortium_admin | doi', function(hooks) {
+module('Acceptance | consortium_admin | doi', function (hooks) {
   setupPolly(hooks, {
     matchRequestsBy: {
       headers: {
-        exclude: [ 'authorization' ],
-      },
-    },
+        exclude: ['authorization']
+      }
+    }
   });
   setupApplicationTest(hooks);
 
-  hooks.beforeEach(async function() {
+  hooks.beforeEach(async function () {
     const { server } = this.polly;
 
     server.any().on('request', (req) => {
@@ -34,25 +31,27 @@ module('Acceptance | consortium_admin | doi', function(hooks) {
       }
 
       /* filter out authorization tokens */
-      recording.request.headers = recording.request.headers.filter(({ name }) => name !== 'authorization');
+      recording.request.headers = recording.request.headers.filter(
+        ({ name }) => name !== 'authorization'
+      );
     });
 
     await authenticateSession({
       uid: 'dc',
       name: 'DataCite Consortium',
       role_id: 'consortium_admin',
-      provider_id: 'dc',
+      provider_id: 'dc'
     });
   });
 
-  test('visiting dois', async function(assert) {
+  test('visiting dois', async function (assert) {
     await visit('/dois');
 
     assert.equal(currentURL(), '/providers/dc');
     assert.dom('h2.work').hasText('DataCite Consortium');
   });
 
-  test('visiting specific doi', async function(assert) {
+  test('visiting specific doi', async function (assert) {
     await visit('/dois/10.80225%2Fda52-7919');
 
     assert.equal(currentURL(), '/dois/10.80225%2Fda52-7919');

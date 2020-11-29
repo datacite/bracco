@@ -23,18 +23,21 @@ export default Component.extend({
   actions: {
     searchRor(query) {
       let self = this;
-      this.store.query('ror', { query }).then(function(organizations) {
-        self.set('organizations', organizations);
-      }).catch(function(reason) {
-        console.debug(reason);
-        return [];
-      });
+      this.store
+        .query('ror', { query })
+        .then(function (organizations) {
+          self.set('organizations', organizations);
+        })
+        .catch(function (reason) {
+          console.debug(reason);
+          return [];
+        });
     },
     selectRor(ror) {
       this.updateAffiliation(ror);
     },
     deleteAffiliation() {
       this.creator.get('affiliation').removeObject(this.fragment);
-    },
-  },
+    }
+  }
 });

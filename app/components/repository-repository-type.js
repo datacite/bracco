@@ -7,7 +7,7 @@ const repositoryTypeList = [
   'institutional',
   'multidisciplinary',
   'project-related',
-  'other',
+  'other'
 ];
 
 export default Component.extend({
@@ -19,17 +19,19 @@ export default Component.extend({
 
   actions: {
     searchRepositoryType(query) {
-      let repositoryTypes = repositoryTypeList.filter(function(repositoryType) {
+      let repositoryTypes = repositoryTypeList.filter(function (
+        repositoryType
+      ) {
         return repositoryType.toLowerCase().startsWith(query.toLowerCase());
       });
       this.set('repositoryTypes', repositoryTypes);
     },
     selectRepositoryType(repositoryType) {
-      this.model.get('repositoryType').replace(this.index, 1, [ repositoryType ]);
+      this.model.get('repositoryType').replace(this.index, 1, [repositoryType]);
       this.set('repositoryTypes', repositoryTypeList);
     },
     deleteRepositoryType() {
       this.model.get('repositoryType').removeAt(this.index);
-    },
-  },
+    }
+  }
 });

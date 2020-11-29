@@ -1,4 +1,4 @@
-import DS from 'ember-data';
+import { attr } from '@ember-data/model';
 import Fragment from 'ember-data-model-fragments/fragment';
 import { validator, buildValidations } from 'ember-cp-validations';
 // import { computed } from '@ember/object';
@@ -7,14 +7,14 @@ const Validations = buildValidations({
   rightsUri: [
     validator('url-format', {
       allowBlank: true,
-      protocols: [ 'http','https','ftp' ],
-      message: 'Rights scheme URI has to be a valid URI',
+      protocols: ['http', 'https', 'ftp'],
+      message: 'Rights scheme URI has to be a valid URI'
       // disable url check for info URI
       // disabled: computed('fragment.rightsUri', function() {
       //   return this.fragment.get('rightsUri').startsWith('info:');
       // }),
-    }),
-  ],
+    })
+  ]
   // schemeUri: [
   //   validator('url-format', {
   //     allowBlank: true,
@@ -25,8 +25,8 @@ const Validations = buildValidations({
 });
 
 export default Fragment.extend(Validations, {
-  rights: DS.attr('string'),
-  rightsUri: DS.attr('string'),
+  rights: attr('string'),
+  rightsUri: attr('string')
   // // Not implemented yet in the REST API
   // rightsIdentifier: DS.attr('string'),
   // rightsIdentifierScheme: DS.attr('string'),

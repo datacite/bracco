@@ -10,7 +10,7 @@ const organizationTypeList = [
   'professionalSociety',
   'publisher',
   'serviceProvider',
-  'other',
+  'other'
 ];
 const memberTypeList = [
   'consortium',
@@ -18,7 +18,7 @@ const memberTypeList = [
   'contractual_member',
   'direct_member',
   'member_only',
-  'registration_agency',
+  'registration_agency'
 ];
 const focusAreaList = [
   'naturalSciences',
@@ -27,13 +27,10 @@ const focusAreaList = [
   'agriculturalSciences',
   'socialSciences',
   'humanities',
-  'general',
+  'general'
 ];
 
-const nonProfitStatusList = [
-  'non-profit',
-  'for-profit',
-];
+const nonProfitStatusList = ['non-profit', 'for-profit'];
 
 export default Controller.extend({
   store: service(),
@@ -55,7 +52,7 @@ export default Controller.extend({
 
   actions: {
     searchCountry(query) {
-      let countries = countryList.filter(function(country) {
+      let countries = countryList.filter(function (country) {
         return country.name.toLowerCase().startsWith(query.toLowerCase());
       });
       this.set('countries', countries);
@@ -65,7 +62,9 @@ export default Controller.extend({
       this.set('countries', countryList);
     },
     searchOrganizationType(query) {
-      let organizationTypes = organizationTypeList.filter(function(organizationType) {
+      let organizationTypes = organizationTypeList.filter(function (
+        organizationType
+      ) {
         return organizationType.startsWith(query.toLowerCase());
       });
       this.set('organizationTypes', organizationTypes);
@@ -75,7 +74,7 @@ export default Controller.extend({
       this.set('organizationTypes', organizationTypeList);
     },
     searchMemberType(query) {
-      let memberTypes = memberTypeList.filter(function(memberType) {
+      let memberTypes = memberTypeList.filter(function (memberType) {
         return memberType.startsWith(query.toLowerCase());
       });
       this.set('memberTypes', memberTypes);
@@ -85,7 +84,7 @@ export default Controller.extend({
       this.set('memberTypes', memberTypeList);
     },
     searchFocusArea(query) {
-      let focusAreas = focusAreaList.filter(function(focusArea) {
+      let focusAreas = focusAreaList.filter(function (focusArea) {
         return focusArea.startsWith(query.toLowerCase());
       });
       this.set('focusAreas', focusAreas);
@@ -95,7 +94,9 @@ export default Controller.extend({
       this.set('focusAreas', focusAreaList);
     },
     searchNonProfitStatus(query) {
-      let nonProfitStatuses = nonProfitStatusList.filter(function(nonProfitStatus) {
+      let nonProfitStatuses = nonProfitStatusList.filter(function (
+        nonProfitStatus
+      ) {
         return nonProfitStatus.startsWith(query.toLowerCase());
       });
       this.set('nonProfitStatuses', nonProfitStatuses);
@@ -106,24 +107,35 @@ export default Controller.extend({
     },
     searchConsortium(query) {
       let self = this;
-      this.store.query('provider', { query, 'member-type': 'consortium', sort: 'name', 'page[size]': 100 }).then(function(consortia) {
-        self.set('consortia', consortia);
-      }).catch(function(reason) {
-        console.debug(reason);
-        self.set('consortia', []);
-      });
+      this.store
+        .query('provider', {
+          query,
+          'member-type': 'consortium',
+          sort: 'name',
+          'page[size]': 100
+        })
+        .then(function (consortia) {
+          self.set('consortia', consortia);
+        })
+        .catch(function (reason) {
+          console.debug(reason);
+          self.set('consortia', []);
+        });
     },
     selectConsortium(consortium) {
       this.model.organization.set('consortium', consortium);
     },
     searchRor(query) {
       let self = this;
-      this.store.query('ror', { query }).then(function(organizations) {
-        self.set('organizations', organizations);
-      }).catch(function(reason) {
-        console.debug(reason);
-        self.set('organizations', []);
-      });
+      this.store
+        .query('ror', { query })
+        .then(function (organizations) {
+          self.set('organizations', organizations);
+        })
+        .catch(function (reason) {
+          console.debug(reason);
+          self.set('organizations', []);
+        });
     },
     selectRor(ror) {
       if (ror) {
@@ -139,23 +151,32 @@ export default Controller.extend({
       let reader = new FileReader();
       let self = this;
 
-      reader.readAsDataURL(file.blob).then((logo) => {
-        self.model.organization.set('logo', logo);
-      }, (err) => {
-        console.error(err);
-      });
+      reader.readAsDataURL(file.blob).then(
+        (logo) => {
+          self.model.organization.set('logo', logo);
+        },
+        (err) => {
+          console.error(err);
+        }
+      );
     },
     submit() {
       let self = this;
-      this.model.organization.save().then(function(provider) {
-        self.transitionToRoute('providers.show', provider.id);
-      }).catch(function(reason) {
-        console.debug(reason);
-      });
+      this.model.organization
+        .save()
+        .then(function (provider) {
+          self.transitionToRoute('providers.show', provider.id);
+        })
+        .catch(function (reason) {
+          console.debug(reason);
+        });
     },
     cancel() {
       this.model.organization.rollbackAttributes();
-      this.transitionToRoute('providers.show.organizations', this.get('model.provider.id'));
-    },
-  },
+      this.transitionToRoute(
+        'providers.show.organizations',
+        this.get('model.provider.id')
+      );
+    }
+  }
 });

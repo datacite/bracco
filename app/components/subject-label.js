@@ -13,5 +13,5 @@ export default Component.extend({
     } else {
       this.set('text', text.toLowerCase());
     }
-  },
+  }
 });

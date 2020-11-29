@@ -19,24 +19,30 @@ export default Component.extend({
     this._super(...arguments);
 
     // show metadata if at least one of these attributes is set
-    if (isPresent(this.get('model.publicationYear')) ||
-        isPresent(this.get('model.titles')) ||
-        isPresent(this.get('model.publisher')) ||
-        isPresent(this.get('model.creators')) ||
-        this.get('model.types') instanceof Object && !!this.get('model.types.resourceTypeGeneral') ||
-        this.get('model.types') instanceof Object && !!this.get('model.types.resourceType')) {
+    if (
+      isPresent(this.get('model.publicationYear')) ||
+      isPresent(this.get('model.titles')) ||
+      isPresent(this.get('model.publisher')) ||
+      isPresent(this.get('model.creators')) ||
+      (this.get('model.types') instanceof Object &&
+        !!this.get('model.types.resourceTypeGeneral')) ||
+      (this.get('model.types') instanceof Object &&
+        !!this.get('model.types.resourceType'))
+    ) {
       this.set('hasMetadata', true);
     }
 
-    let formats = { 'summary': 'Summary View',
-      'datacite': 'DataCite XML',
-      'datacite_json': 'DataCite JSON',
-      'schema_org': 'Schema.org JSON-LD',
-      'citeproc': 'Citeproc JSON',
-      'codemeta': 'Codemeta JSON',
-      'bibtex': 'BibTeX',
-      'ris': 'RIS',
-      'jats': 'JATS XML' };
+    let formats = {
+      summary: 'Summary View',
+      datacite: 'DataCite XML',
+      datacite_json: 'DataCite JSON',
+      schema_org: 'Schema.org JSON-LD',
+      citeproc: 'Citeproc JSON',
+      codemeta: 'Codemeta JSON',
+      bibtex: 'BibTeX',
+      ris: 'RIS',
+      jats: 'JATS XML'
+    };
     this.set('formats', formats);
   },
 
@@ -48,24 +54,25 @@ export default Component.extend({
       let self = this;
       let url = ENV.API_URL + '/dois/' + this.model.get('doi');
       let acceptHeaders = {
-        'datacite': 'application/vnd.datacite.datacite+xml',
-        'datacite_json': 'application/vnd.datacite.datacite+json',
-        'schema_org': 'application/vnd.schemaorg.ld+json',
-        'citeproc': 'application/vnd.citationstyles.csl+json',
-        'codemeta': 'application/vnd.codemeta.ld+json',
-        'bibtex': 'application/x-bibtex',
-        'ris': 'application/x-research-info-systems',
-        'jats': 'application/vnd.jats+xml' };
-      let headers = { 'Accept': acceptHeaders[metadata] };
+        datacite: 'application/vnd.datacite.datacite+xml',
+        datacite_json: 'application/vnd.datacite.datacite+json',
+        schema_org: 'application/vnd.schemaorg.ld+json',
+        citeproc: 'application/vnd.citationstyles.csl+json',
+        codemeta: 'application/vnd.codemeta.ld+json',
+        bibtex: 'application/x-bibtex',
+        ris: 'application/x-research-info-systems',
+        jats: 'application/vnd.jats+xml'
+      };
+      let headers = { Accept: acceptHeaders[metadata] };
       if (this.currentUser.get('jwt')) {
         headers = {
-          'Authorization': 'Bearer ' + this.currentUser.get('jwt'),
-          'Accept': acceptHeaders[metadata],
+          Authorization: 'Bearer ' + this.currentUser.get('jwt'),
+          Accept: acceptHeaders[metadata]
         };
       }
       let result = fetch(url, {
-        headers,
-      }).then(function(response) {
+        headers
+      }).then(function (response) {
         if (response.ok) {
           return response.blob();
         } else {
@@ -73,16 +80,19 @@ export default Component.extend({
         }
       });
 
-      result.then(function(response) {
+      result.then(function (response) {
         if (typeof response === 'string') {
           self.set('output', vkbeautify.json(JSON.stringify(response)));
         } else {
           let reader = new FileReader();
-          reader.readAsText(response).then((result) => {
-            self.set('output', vkbeautify.xml(result));
-          }, (err) => {
-            console.error(err);
-          });
+          reader.readAsText(response).then(
+            (result) => {
+              self.set('output', vkbeautify.xml(result));
+            },
+            (err) => {
+              console.error(err);
+            }
+          );
         }
       });
     }
@@ -92,6 +102,6 @@ export default Component.extend({
   actions: {
     selectMetadata(metadata) {
       this.showMetadata(metadata);
-    },
-  },
+    }
+  }
 });

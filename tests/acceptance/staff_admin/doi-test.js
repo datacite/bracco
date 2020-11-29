@@ -4,7 +4,7 @@ import {
   currentURL,
   visit,
   click,
-  fillIn,
+  fillIn
   // waitUntil,
   // triggerKeyEvent,
   // findAll,
@@ -15,18 +15,18 @@ import { setupFactoryGuy } from 'ember-data-factory-guy';
 import { authenticateSession } from 'ember-simple-auth/test-support';
 import { setupQunit as setupPolly } from '@pollyjs/core';
 
-module('Acceptance | staff_admin | doi', function(hooks) {
+module('Acceptance | staff_admin | doi', function (hooks) {
   setupPolly(hooks, {
     matchRequestsBy: {
       headers: {
-        exclude: [ 'authorization' ],
-      },
-    },
+        exclude: ['authorization']
+      }
+    }
   });
   setupApplicationTest(hooks);
   setupFactoryGuy(hooks);
 
-  hooks.beforeEach(async function() {
+  hooks.beforeEach(async function () {
     const { server } = this.polly;
 
     server.any().on('request', (req) => {
@@ -42,17 +42,19 @@ module('Acceptance | staff_admin | doi', function(hooks) {
       }
 
       /* filter out authorization tokens */
-      recording.request.headers = recording.request.headers.filter(({ name }) => name !== 'authorization');
+      recording.request.headers = recording.request.headers.filter(
+        ({ name }) => name !== 'authorization'
+      );
     });
 
     await authenticateSession({
       uid: 'admin',
       name: 'Admin',
-      role_id: 'staff_admin',
+      role_id: 'staff_admin'
     });
   });
 
-  test('visiting dois', async function(assert) {
+  test('visiting dois', async function (assert) {
     await visit('/dois');
 
     assert.equal(currentURL(), '/dois');
@@ -82,7 +84,7 @@ module('Acceptance | staff_admin | doi', function(hooks) {
   //   assert.dom('a#modify-doi').includesText('Update DOI (File Upload)');
   // });
 
-  test('visiting specific doi', async function(assert) {
+  test('visiting specific doi', async function (assert) {
     await visit('/dois/10.80225%2Fda52-7919');
 
     assert.equal(currentURL(), '/dois/10.80225%2Fda52-7919');
@@ -185,7 +187,7 @@ module('Acceptance | staff_admin | doi', function(hooks) {
   // });
 
   // TODO fix validations
-  test('modify DOI form for repository DataCite Test', async function(assert) {
+  test('modify DOI form for repository DataCite Test', async function (assert) {
     assert.expect(6);
 
     await visit('/dois/10.80225%2Fda52-7919/modify');
@@ -276,11 +278,12 @@ module('Acceptance | staff_admin | doi', function(hooks) {
   //   // TODO validate update
   // });
 
-  test('update draft doi', async function(assert) {
+  test('update draft doi', async function (assert) {
     await visit('/dois/10.0330%2F3nym-s568/edit');
 
     assert.dom('input#url-field').exists();
-    let urlField = 'http://' + 'datacite' + Math.round(Math.random() * 1000).toString();
+    let urlField =
+      'http://' + 'datacite' + Math.round(Math.random() * 1000).toString();
     await fillIn('input#url-field', urlField);
 
     assert.dom('button#doi-update').exists();

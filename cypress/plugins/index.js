@@ -17,15 +17,15 @@
 
 /// <reference types="cypress" />
 
-const browserify = require('@cypress/browserify-preprocessor')
+const browserify = require('@cypress/browserify-preprocessor');
 
 module.exports = (on, config) => {
-  let options = browserify.defaultOptions
-  options.browserifyOptions.transform[1][1].babelrc = true
-  options.typescript = require.resolve('typescript')
+  let options = browserify.defaultOptions;
+  options.browserifyOptions.transform[1][1].babelrc = true;
+  options.typescript = require.resolve('typescript');
   on('file:preprocessor', browserify(options));
 
-  require('@cypress/code-coverage/task')(on, config)
+  require('@cypress/code-coverage/task')(on, config);
 
-  return config
-}
+  return config;
+};

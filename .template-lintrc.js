@@ -7,7 +7,7 @@ module.exports = {
     'attribute-indentation': false,
     'block-indentation': false,
     'no-inline-styles': false,
-    'quotes': false,
+    quotes: false,
     'self-closing-void-elements': false,
     'no-unnecessary-concat': false,
     'img-alt-attributes': false,
@@ -15,6 +15,6 @@ module.exports = {
     'no-triple-curlies': false,
     'no-unused-block-params': false,
     'simple-unless': false,
-    'no-bare-strings': false,
-  },
+    'no-bare-strings': false
+  }
 };

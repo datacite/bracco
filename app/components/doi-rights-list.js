@@ -17,7 +17,7 @@ export default Component.extend({
       this.set('showRights', true);
     },
     toggleRights() {
-      this.set('showRights', !this.get('showRights'));
-    },
-  },
+      this.set('showRights', !this.showRights);
+    }
+  }
 });

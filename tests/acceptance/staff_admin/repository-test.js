@@ -4,26 +4,29 @@ import {
   currentURL,
   visit,
   click,
-  fillIn,
+  fillIn
   // waitUntil,
   // pauseTest,
 } from '@ember/test-helpers';
-import { selectChoose, selectSearch } from 'ember-power-select/test-support/helpers';
+import {
+  selectChoose,
+  selectSearch
+} from 'ember-power-select/test-support/helpers';
 import ENV from 'bracco/config/environment';
 import { authenticateSession } from 'ember-simple-auth/test-support';
 import { setupQunit as setupPolly } from '@pollyjs/core';
 
-module('Acceptance | staff_admin | repository', function(hooks) {
+module('Acceptance | staff_admin | repository', function (hooks) {
   setupPolly(hooks, {
     matchRequestsBy: {
       headers: {
-        exclude: [ 'authorization' ],
-      },
-    },
+        exclude: ['authorization']
+      }
+    }
   });
   setupApplicationTest(hooks);
 
-  hooks.beforeEach(async function() {
+  hooks.beforeEach(async function () {
     const { server } = this.polly;
 
     server.any().on('request', (req) => {
@@ -39,17 +42,19 @@ module('Acceptance | staff_admin | repository', function(hooks) {
       }
 
       /* filter out authorization tokens */
-      recording.request.headers = recording.request.headers.filter(({ name }) => name !== 'authorization');
+      recording.request.headers = recording.request.headers.filter(
+        ({ name }) => name !== 'authorization'
+      );
     });
 
     await authenticateSession({
       uid: 'admin',
       name: 'Admin',
-      role_id: 'staff_admin',
+      role_id: 'staff_admin'
     });
   });
 
-  test('visiting repository DataCite Test', async function(assert) {
+  test('visiting repository DataCite Test', async function (assert) {
     await visit('/repositories/datacite.test');
 
     assert.equal(currentURL(), '/repositories/datacite.test');
@@ -57,12 +62,16 @@ module('Acceptance | staff_admin | repository', function(hooks) {
     assert.dom('li a.nav-link.active').hasText('Settings');
 
     assert.dom('a#edit-repository').includesText('Update Repository');
-    assert.dom('a#edit-repository').hasAttribute('href', '/repositories/datacite.test/edit');
+    assert
+      .dom('a#edit-repository')
+      .hasAttribute('href', '/repositories/datacite.test/edit');
     assert.dom('a#delete-repository').includesText('Delete');
-    assert.dom('a#delete-repository').hasAttribute('href', '/repositories/datacite.test/delete');
+    assert
+      .dom('a#delete-repository')
+      .hasAttribute('href', '/repositories/datacite.test/delete');
   });
 
-  test('visiting repository DataCite Test info', async function(assert) {
+  test('visiting repository DataCite Test info', async function (assert) {
     await visit('/repositories/datacite.test/info');
 
     assert.equal(currentURL(), '/repositories/datacite.test/info');
@@ -73,7 +82,7 @@ module('Acceptance | staff_admin | repository', function(hooks) {
     assert.dom('#chart-doi-title').includesText('DOIs by year');
   });
 
-  test('visiting repository DataCite Test prefixes', async function(assert) {
+  test('visiting repository DataCite Test prefixes', async function (assert) {
     await visit('/repositories/datacite.test/prefixes');
 
     assert.equal(currentURL(), '/repositories/datacite.test/prefixes');
@@ -119,8 +128,7 @@ module('Acceptance | staff_admin | repository', function(hooks) {
   //   // assert.dom('*').doesNotIncludeText('10.24413');
   // });
 
-
-  test('visiting repository DataCite Test dois', async function(assert) {
+  test('visiting repository DataCite Test dois', async function (assert) {
     await visit('/repositories/datacite.test/dois');
 
     assert.equal(currentURL(), '/repositories/datacite.test/dois');
@@ -135,14 +143,20 @@ module('Acceptance | staff_admin | repository', function(hooks) {
 
     // admin can add dois
     assert.dom('a#new-doi').includesText('Create (Form)');
-    assert.dom('a#new-doi').hasAttribute('href', '/repositories/datacite.test/dois/new');
+    assert
+      .dom('a#new-doi')
+      .hasAttribute('href', '/repositories/datacite.test/dois/new');
     assert.dom('a#upload-doi').includesText('Create (File Upload)');
-    assert.dom('a#upload-doi').hasAttribute('href', '/repositories/datacite.test/dois/upload');
+    assert
+      .dom('a#upload-doi')
+      .hasAttribute('href', '/repositories/datacite.test/dois/upload');
     assert.dom('a#transfer-dois').includesText('Transfer');
-    assert.dom('a#transfer-dois').hasAttribute('href', '/repositories/datacite.test/transfer');
+    assert
+      .dom('a#transfer-dois')
+      .hasAttribute('href', '/repositories/datacite.test/transfer');
   });
 
-  test('new repository form', async function(assert) {
+  test('new repository form', async function (assert) {
     assert.expect(23);
 
     await visit('/providers/datacite/repositories/new');
@@ -176,7 +190,7 @@ module('Acceptance | staff_admin | repository', function(hooks) {
     assert.dom('button#add-repository').includesText('Add Repository');
   });
 
-  test('editing repository AWI form', async function(assert) {
+  test('editing repository AWI form', async function (assert) {
     assert.expect(23);
 
     await visit('/repositories/datacite.test/edit');
@@ -210,7 +224,7 @@ module('Acceptance | staff_admin | repository', function(hooks) {
     assert.dom('button#update-repository').includesText('Update Repository');
   });
 
-  test('update repository description', async function(assert) {
+  test('update repository description', async function (assert) {
     await visit('/repositories/datacite.test/edit');
     assert.dom('textarea#description-field').exists();
     let desc = 'datacite' + Math.round(Math.random() * 1000).toString();
@@ -223,7 +237,7 @@ module('Acceptance | staff_admin | repository', function(hooks) {
     // await pauseTest();
   });
 
-  test('editing repository DataCite Test password form', async function(assert) {
+  test('editing repository DataCite Test password form', async function (assert) {
     await visit('/repositories/datacite.test/change');
 
     assert.equal(currentURL(), '/repositories/datacite.test/change');
@@ -236,31 +250,40 @@ module('Acceptance | staff_admin | repository', function(hooks) {
     assert.dom('button[type=submit]').includesText('Set Password');
   });
 
-  test('transfer repository DataCite Test ', async function(assert) {
+  test('transfer repository DataCite Test ', async function (assert) {
     await visit('/repositories/datacite.test/change');
 
     await visit('/repositories/datacite.test/transfer-repository');
     assert.dom('*').containsText('DataCite Consortium');
 
-    assert.equal(currentURL(), '/repositories/datacite.test/transfer-repository');
+    assert.equal(
+      currentURL(),
+      '/repositories/datacite.test/transfer-repository'
+    );
     assert.dom('h3.edit').hasText('Transfer Repository');
 
     await selectSearch('[data-test-transfer-select]', 'American University');
     await selectChoose('[data-test-transfer-select]', 'American University');
-    assert.dom('[data-test-transfer-select]').includesText('American University');
+    assert
+      .dom('[data-test-transfer-select]')
+      .includesText('American University');
 
     await click('[data-test-transfer-button]');
     assert.dom('*').containsText('American University');
   });
 
-  test('editing repository DataCite Test delete form', async function(assert) {
+  test('editing repository DataCite Test delete form', async function (assert) {
     await visit('/repositories/datacite.test/delete');
 
     assert.equal(currentURL(), '/repositories/datacite.test/delete');
     assert.dom('h2.work').hasText('DataCite Test Repository');
     assert.dom('div.tab-content').exists();
 
-    assert.dom('div.alert-danger').hasText('You need to transfer all DOIs to another repository before you can delete the DATACITE.TEST repository.');
+    assert
+      .dom('div.alert-danger')
+      .hasText(
+        'You need to transfer all DOIs to another repository before you can delete the DATACITE.TEST repository.'
+      );
 
     assert.dom('input#confirm-symbol-field').doesNotExist();
     assert.dom('button#delete').doesNotExist();

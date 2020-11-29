@@ -17,7 +17,7 @@ export default Component.extend({
       this.set('showSubjects', true);
     },
     toggleSubjects() {
-      this.set('showSubjects', !this.get('showSubjects'));
-    },
-  },
+      this.set('showSubjects', !this.showSubjects);
+    }
+  }
 });

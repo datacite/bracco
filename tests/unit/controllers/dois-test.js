@@ -2,12 +2,12 @@ import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
 // import { setupFactoryGuy, make } from 'ember-data-factory-guy';
 
-module('Unit | Controller | dois', function(hooks) {
+module('Unit | Controller | dois', function (hooks) {
   setupTest(hooks);
   // setupFactoryGuy(hooks);
 
   // Replace this with your real tests.
-  test('it exists', function(assert) {
+  test('it exists', function (assert) {
     let controller = this.owner.lookup('controller:dois');
     assert.ok(controller);
   });
@@ -25,5 +25,4 @@ module('Unit | Controller | dois', function(hooks) {
     assert.equal(targetSource,'fabricaForm');
   });
   */
-
 });

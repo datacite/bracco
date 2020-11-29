@@ -9,7 +9,7 @@ export default Service.extend({
     this.getSpdxList();
   },
   getSpdxList() {
-    this.set('spdxList',spdx.licenses);
+    this.set('spdxList', spdx.licenses);
     return true;
-  },
+  }
 });

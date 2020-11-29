@@ -3,11 +3,10 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-module('Integration | Component | doi upload', function(hooks) {
+module('Integration | Component | doi upload', function (hooks) {
   setupRenderingTest(hooks);
 
-  test('it renders', async function(assert) {
-
+  test('it renders', async function (assert) {
     // Template block usage:
     await render(hbs`
       {{#doi-upload}}
@@ -15,6 +14,8 @@ module('Integration | Component | doi upload', function(hooks) {
       {{/doi-upload}}
     `);
 
-    assert.dom('*').hasText('Metadata Metadata that describe the resource. Upload File');
+    assert
+      .dom('*')
+      .hasText('Metadata Metadata that describe the resource. Upload File');
   });
 });

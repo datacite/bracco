@@ -7,7 +7,7 @@ const funderIdentifierTypeList = [
   'GRID',
   'ISNI',
   'ROR',
-  'Other',
+  'Other'
 ];
 
 export default Component.extend({
@@ -66,7 +66,10 @@ export default Component.extend({
       default:
         this.fragment.set('funderName', funder.name);
         this.fragment.set('funderIdentifierType', 'Crossref Funder ID');
-        this.fragment.set('schemeUri', 'https://www.crossref.org/services/funder-registry/');
+        this.fragment.set(
+          'schemeUri',
+          'https://www.crossref.org/services/funder-registry/'
+        );
         this.fragment.set('funderIdentifier', 'https://doi.org/' + funder.id);
         this.set('isCrossrefId', true);
         break;
@@ -75,7 +78,12 @@ export default Component.extend({
 
   actions: {
     createOnEnter(select, e) {
-      if (e.keyCode === 13 && select.isOpen && !select.highlighted && !isBlank(select.searchText)) {
+      if (
+        e.keyCode === 13 &&
+        select.isOpen &&
+        !select.highlighted &&
+        !isBlank(select.searchText)
+      ) {
         if (!this.selected.includes(select.searchText)) {
           this.funderIdentifierTypes.push(select.searchText);
           select.actions.choose(select.searchText);
@@ -114,13 +122,15 @@ export default Component.extend({
     },
     searchFundingReferences(query) {
       let self = this;
-      this.store.query('funder', { query }).then(function(funders) {
-        self.set('funders', funders);
-      }).catch(function(reason) {
-        console.debug(reason);
-        return [];
-      });
-    },
-  },
+      this.store
+        .query('funder', { query })
+        .then(function (funders) {
+          self.set('funders', funders);
+        })
+        .catch(function (reason) {
+          console.debug(reason);
+          return [];
+        });
+    }
+  }
 });
-

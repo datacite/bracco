@@ -20,7 +20,7 @@ export default Component.extend({
       this.set('showTitles', true);
     },
     toggleTitles() {
-      this.set('showTitles', !this.get('showTitles'));
-    },
-  },
+      this.set('showTitles', !this.showTitles);
+    }
+  }
 });

@@ -1,24 +1,21 @@
 import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
-import {
-  currentURL,
-  visit,
-} from '@ember/test-helpers';
+import { currentURL, visit } from '@ember/test-helpers';
 import ENV from 'bracco/config/environment';
 import { authenticateSession } from 'ember-simple-auth/test-support';
 import { setupQunit as setupPolly } from '@pollyjs/core';
 
-module('Acceptance | staff_admin | admin', function(hooks) {
+module('Acceptance | staff_admin | admin', function (hooks) {
   setupPolly(hooks, {
     matchRequestsBy: {
       headers: {
-        exclude: [ 'authorization' ],
-      },
-    },
+        exclude: ['authorization']
+      }
+    }
   });
   setupApplicationTest(hooks);
 
-  hooks.beforeEach(async function() {
+  hooks.beforeEach(async function () {
     const { server } = this.polly;
 
     server.any().on('request', (req) => {
@@ -34,23 +31,25 @@ module('Acceptance | staff_admin | admin', function(hooks) {
       }
 
       /* filter out authorization tokens */
-      recording.request.headers = recording.request.headers.filter(({ name }) => name !== 'authorization');
+      recording.request.headers = recording.request.headers.filter(
+        ({ name }) => name !== 'authorization'
+      );
     });
 
     await authenticateSession({
       uid: 'admin',
       name: 'Admin',
-      role_id: 'staff_admin',
+      role_id: 'staff_admin'
     });
   });
 
-  test('is logged in', async function(assert) {
+  test('is logged in', async function (assert) {
     await visit('/');
 
     assert.dom('a#account_menu_link').hasText('ADMIN');
   });
 
-  test('visiting homepage', async function(assert) {
+  test('visiting homepage', async function (assert) {
     await visit('/');
 
     assert.equal(currentURL(), '/');
@@ -59,7 +58,7 @@ module('Acceptance | staff_admin | admin', function(hooks) {
   });
 
   // the following pages require authentication. Redirects to homepage otherwise
-  test('visiting info', async function(assert) {
+  test('visiting info', async function (assert) {
     await visit('/info');
 
     assert.equal(currentURL(), '/info');
@@ -68,7 +67,7 @@ module('Acceptance | staff_admin | admin', function(hooks) {
     assert.dom('li a.nav-link.active').hasText('Info');
   });
 
-  test('editing admin form', async function(assert) {
+  test('editing admin form', async function (assert) {
     assert.expect(11);
 
     await visit('/edit');
@@ -88,7 +87,7 @@ module('Acceptance | staff_admin | admin', function(hooks) {
     assert.dom('button#update-provider').includesText('Update Account');
   });
 
-  test('editing admin password form', async function(assert) {
+  test('editing admin password form', async function (assert) {
     await visit('/change');
 
     assert.equal(currentURL(), '/change');
@@ -101,7 +100,7 @@ module('Acceptance | staff_admin | admin', function(hooks) {
     assert.dom('button[type=submit]').includesText('Set Password');
   });
 
-  test('visiting members', async function(assert) {
+  test('visiting members', async function (assert) {
     await visit('/providers');
 
     assert.equal(currentURL(), '/providers');
@@ -119,7 +118,7 @@ module('Acceptance | staff_admin | admin', function(hooks) {
     assert.dom('a#add-provider').hasAttribute('href', '/providers/new');
   });
 
-  test('visiting repositories', async function(assert) {
+  test('visiting repositories', async function (assert) {
     await visit('/repositories');
 
     assert.equal(currentURL(), '/repositories');
@@ -136,7 +135,7 @@ module('Acceptance | staff_admin | admin', function(hooks) {
     assert.dom('a#add-repository').doesNotExist();
   });
 
-  test('visiting prefixes', async function(assert) {
+  test('visiting prefixes', async function (assert) {
     await visit('/prefixes');
 
     assert.equal(currentURL(), '/prefixes');
@@ -154,7 +153,7 @@ module('Acceptance | staff_admin | admin', function(hooks) {
     assert.dom('a#add-prefixes').hasAttribute('href', '/prefixes/new');
   });
 
-  test('visiting prefix 10.80225', async function(assert) {
+  test('visiting prefix 10.80225', async function (assert) {
     await visit('/prefixes/10.80225');
 
     assert.equal(currentURL(), '/prefixes/10.80225');

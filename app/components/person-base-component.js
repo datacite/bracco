@@ -2,7 +2,7 @@ import Component from '@ember/component';
 import { computed } from '@ember/object';
 
 export default Component.extend({
-  showPersonal: computed('fragment.nameType', function() {
+  showPersonal: computed('fragment.nameType', function () {
     return this.get('fragment.nameType') !== 'Organizational';
   }),
   isReadonlyNameType: false,
@@ -15,11 +15,15 @@ export default Component.extend({
     this.selectNameType(this.fragment.get('nameType'));
 
     // if no givenName and familyName, and set for nameType "Personal"
-    if (this.fragment.get('name') && this.fragment.get('nameType') === 'Personal' && (!this.fragment.get('givenName') || this.fragment.get('familyName'))) {
+    if (
+      this.fragment.get('name') &&
+      this.fragment.get('nameType') === 'Personal' &&
+      (!this.fragment.get('givenName') || this.fragment.get('familyName'))
+    ) {
       let familyName = this.fragment.get('name').split(',', 2)[0];
       let givenName = this.fragment.get('name').split(',', 2)[1];
-      familyName = (familyName) ? familyName.trim() : null;
-      givenName = (givenName) ? givenName.trim() : null;
+      familyName = familyName ? familyName.trim() : null;
+      givenName = givenName ? givenName.trim() : null;
       this.fragment.set('givenName', givenName);
       this.fragment.set('familyName', familyName);
     }
@@ -52,7 +56,8 @@ export default Component.extend({
       this.set('isReadonlyNameType', true);
     } else {
       options.givenName = options.givenName || this.fragment.get('givenName');
-      options.familyName = options.familyName || this.fragment.get('familyName');
+      options.familyName =
+        options.familyName || this.fragment.get('familyName');
       options.name = options.name || this.fragment.get('name');
 
       this.set('isReadonlyNameParts', false);
@@ -66,7 +71,10 @@ export default Component.extend({
         this.fragment.set('familyName', options.familyName);
 
         if (options.givenName && options.familyName) {
-          this.fragment.set('name', options.familyName + ', ' + options.givenName);
+          this.fragment.set(
+            'name',
+            options.familyName + ', ' + options.givenName
+          );
         } else if (options.givenName) {
           this.fragment.set('name', options.givenName);
         } else if (options.familyName) {
@@ -125,6 +133,6 @@ export default Component.extend({
     },
     joinNameParts(options) {
       this.joinNameParts(options);
-    },
-  },
+    }
+  }
 });

@@ -16,7 +16,7 @@ const resourceTypeGeneralList = [
   'Sound',
   'Text',
   'Workflow',
-  'Other',
+  'Other'
 ];
 
 export default Component.extend({
@@ -25,7 +25,7 @@ export default Component.extend({
 
   selectResourceTypeGeneral(resourceTypeGeneral) {
     this.model.set('types', {
-      resourceTypeGeneral: pascalCase(resourceTypeGeneral),
+      resourceTypeGeneral: pascalCase(resourceTypeGeneral)
     });
     this.set('resourceTypesGeneral', resourceTypeGeneralList);
   },
@@ -33,6 +33,6 @@ export default Component.extend({
   actions: {
     selectResourceTypeGeneral(resourceTypeGeneral) {
       this.selectResourceTypeGeneral(resourceTypeGeneral);
-    },
-  },
+    }
+  }
 });

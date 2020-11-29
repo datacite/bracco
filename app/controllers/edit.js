@@ -10,7 +10,7 @@ export default Controller.extend({
 
   actions: {
     searchCountry(query) {
-      let countries = countryList.filter(function(country) {
+      let countries = countryList.filter(function (country) {
         return country.name.toLowerCase().startsWith(query.toLowerCase());
       });
       this.set('countries', countries);
@@ -21,12 +21,15 @@ export default Controller.extend({
     },
     searchRor(query) {
       let self = this;
-      this.store.query('ror', { query }).then(function(organizations) {
-        self.set('organizations', organizations);
-      }).catch(function(reason) {
-        console.debug(reason);
-        self.set('organizations', []);
-      });
+      this.store
+        .query('ror', { query })
+        .then(function (organizations) {
+          self.set('organizations', organizations);
+        })
+        .catch(function (reason) {
+          console.debug(reason);
+          self.set('organizations', []);
+        });
     },
     selectRor(ror) {
       if (ror) {
@@ -40,15 +43,18 @@ export default Controller.extend({
     },
     submit(provider) {
       let self = this;
-      provider.save().then(function() {
-        self.transitionToRoute('index');
-      }).catch(function(reason) {
-        console.debug(reason);
-      });
+      provider
+        .save()
+        .then(function () {
+          self.transitionToRoute('index');
+        })
+        .catch(function (reason) {
+          console.debug(reason);
+        });
     },
     cancel() {
       this.model.rollbackAttributes();
       this.transitionToRoute('index');
-    },
-  },
+    }
+  }
 });

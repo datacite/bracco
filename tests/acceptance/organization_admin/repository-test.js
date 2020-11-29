@@ -1,24 +1,21 @@
 import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
-import {
-  currentURL,
-  visit,
-} from '@ember/test-helpers';
+import { currentURL, visit } from '@ember/test-helpers';
 import ENV from 'bracco/config/environment';
 import { authenticateSession } from 'ember-simple-auth/test-support';
 import { setupQunit as setupPolly } from '@pollyjs/core';
 
-module('Acceptance | organization_admin | repository', function(hooks) {
+module('Acceptance | organization_admin | repository', function (hooks) {
   setupPolly(hooks, {
     matchRequestsBy: {
       headers: {
-        exclude: [ 'authorization' ],
-      },
-    },
+        exclude: ['authorization']
+      }
+    }
   });
   setupApplicationTest(hooks);
 
-  hooks.beforeEach(async function() {
+  hooks.beforeEach(async function () {
     const { server } = this.polly;
 
     server.any().on('request', (req) => {
@@ -34,18 +31,20 @@ module('Acceptance | organization_admin | repository', function(hooks) {
       }
 
       /* filter out authorization tokens */
-      recording.request.headers = recording.request.headers.filter(({ name }) => name !== 'authorization');
+      recording.request.headers = recording.request.headers.filter(
+        ({ name }) => name !== 'authorization'
+      );
     });
 
     await authenticateSession({
       uid: 'datacite',
       name: 'DataCite',
       role_id: 'provider_admin',
-      provider_id: 'datacite',
+      provider_id: 'datacite'
     });
   });
 
-  test('visiting repository DataCite Journal', async function(assert) {
+  test('visiting repository DataCite Journal', async function (assert) {
     await visit('/repositories/datacite.datacite/info');
 
     assert.equal(currentURL(), '/repositories/datacite.datacite/info');
@@ -56,7 +55,7 @@ module('Acceptance | organization_admin | repository', function(hooks) {
     assert.dom('#chart-doi-title').includesText('by year');
   });
 
-  test('visiting repository DataCite Journal', async function(assert) {
+  test('visiting repository DataCite Journal', async function (assert) {
     await visit('/repositories/datacite.datacite');
 
     assert.equal(currentURL(), '/repositories/datacite.datacite');
@@ -66,7 +65,7 @@ module('Acceptance | organization_admin | repository', function(hooks) {
     assert.dom('a#delete-repository').includesText('Delete');
   });
 
-  test('visiting repository DataCite Test', async function(assert) {
+  test('visiting repository DataCite Test', async function (assert) {
     await visit('/repositories/datacite.test');
 
     assert.equal(currentURL(), '/repositories/datacite.test');
@@ -76,7 +75,7 @@ module('Acceptance | organization_admin | repository', function(hooks) {
     assert.dom('a#delete-repository').includesText('Delete');
   });
 
-  test('visiting repository DataCite Journal prefixes', async function(assert) {
+  test('visiting repository DataCite Journal prefixes', async function (assert) {
     await visit('/repositories/datacite.datacite/prefixes');
 
     assert.equal(currentURL(), '/repositories/datacite.datacite/prefixes');
@@ -93,7 +92,7 @@ module('Acceptance | organization_admin | repository', function(hooks) {
     // assert.dom('a#assign-prefix').includesText('Assign Prefix');
   });
 
-  test('visiting repository DataCite Journal dois', async function(assert) {
+  test('visiting repository DataCite Journal dois', async function (assert) {
     await visit('/repositories/datacite.datacite/dois');
 
     assert.equal(currentURL(), '/repositories/datacite.datacite/dois');

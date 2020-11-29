@@ -1,21 +1,9 @@
 
 <label for="contributorType" class="subtitle">Contributor Type</label>
   <div class="power-select-fragment" doi-contributor>
-    {{#form.element
-      controlType="power-select"
-      value=humanContributorType
-      helpText="The type of contributor of the resource."
-      options=humanContributorTypes
-      formLayout="vertical"
-      selected=humanContributorType
-      destination=humanContributorType
-      disabled=disabled as |el|
-    }}
-      {{el.control
-        onChange=(action "selectContributorType")
-        placeholder="Select Contributor Type"
-      }}
-    {{/form.element}}
+    <form.element @controlType="power-select" @value={{humanContributorType}} @helpText="The type of contributor of the resource." @options={{humanContributorTypes}} @formLayout="vertical" @selected={{humanContributorType}} @destination={{humanContributorType}} @disabled={{disabled}} as |el|>
+      <el.control @onChange={{action "selectContributorType"}} @placeholder="Select Contributor Type" />
+    </form.element>
 </div>  
 {{#if (gt fragment.nameIdentifiers.length 0)}}
   <label for="nameIdentifiers" class="subtitle">Name Identifier</label>

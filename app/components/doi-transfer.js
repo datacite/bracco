@@ -20,26 +20,45 @@ export default Component.extend({
   searchRepository(query) {
     let self = this;
     if (this.currentUser.get('isAdmin')) {
-      this.store.query('repository', { query, sort: 'name', 'page[size]': 100 }).then(function(repositories) {
-        self.set('repositories', repositories);
-      }).catch(function(reason) {
-        console.debug(reason);
-        self.set('repositories', []);
-      });
+      this.store
+        .query('repository', { query, sort: 'name', 'page[size]': 100 })
+        .then(function (repositories) {
+          self.set('repositories', repositories);
+        })
+        .catch(function (reason) {
+          console.debug(reason);
+          self.set('repositories', []);
+        });
     } else if (this.currentUser.get('isConsortium')) {
-      this.store.query('repository', { query, 'consortium-id': this.currentUser.get('provider_id'), sort: 'name', 'page[size]': 100 }).then(function(repositories) {
-        self.set('repositories', repositories);
-      }).catch(function(reason) {
-        console.debug(reason);
-        self.set('repositories', []);
-      });
+      this.store
+        .query('repository', {
+          query,
+          'consortium-id': this.currentUser.get('provider_id'),
+          sort: 'name',
+          'page[size]': 100
+        })
+        .then(function (repositories) {
+          self.set('repositories', repositories);
+        })
+        .catch(function (reason) {
+          console.debug(reason);
+          self.set('repositories', []);
+        });
     } else if (this.currentUser.get('isProvider')) {
-      this.store.query('repository', { query, 'provider-id': this.currentUser.get('provider_id'), sort: 'name', 'page[size]': 100 }).then(function(repositories) {
-        self.set('repositories', repositories);
-      }).catch(function(reason) {
-        console.debug(reason);
-        self.set('repositories', []);
-      });
+      this.store
+        .query('repository', {
+          query,
+          'provider-id': this.currentUser.get('provider_id'),
+          sort: 'name',
+          'page[size]': 100
+        })
+        .then(function (repositories) {
+          self.set('repositories', repositories);
+        })
+        .catch(function (reason) {
+          console.debug(reason);
+          self.set('repositories', []);
+        });
     }
   },
   selectRepository(repository) {
@@ -58,12 +77,12 @@ export default Component.extend({
     },
     submit(doi) {
       let self = this;
-      doi.save().then(function(doi) {
+      doi.save().then(function (doi) {
         self.router.transitionTo('dois.show', doi);
       });
     },
     cancel() {
       this.router.transitionTo('dois.show', this.model);
-    },
-  },
+    }
+  }
 });

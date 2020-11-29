@@ -38,7 +38,7 @@ const relationTypeList = [
   'Is previous version of',
   'Is variant form of',
   'Is original form of',
-  'Is identical to',
+  'Is identical to'
 ];
 
 const relatedIdentifierTypeList = [
@@ -60,7 +60,7 @@ const relatedIdentifierTypeList = [
   'UPC',
   'URL',
   'URN',
-  'w3id',
+  'w3id'
 ];
 
 const resourceTypeGeneralList = [
@@ -78,7 +78,7 @@ const resourceTypeGeneralList = [
   'Sound',
   'Text',
   'Workflow',
-  'Other',
+  'Other'
 ];
 
 export default Component.extend({
@@ -89,7 +89,7 @@ export default Component.extend({
   relatedIdentifierTypes: relatedIdentifierTypeList,
   controlledIdentifierType: false,
   isMetadataRelationType: false,
-  isMetadataRelationTypes: [ 'HasMetadata', 'IsMetadataFor' ],
+  isMetadataRelationTypes: ['HasMetadata', 'IsMetadataFor'],
   resourceTypeGeneralList,
   resourceTypesGeneral: resourceTypeGeneralList,
 
@@ -98,7 +98,7 @@ export default Component.extend({
 
     if (
       relatedIdentifierTypeList.includes(
-        this.fragment.get('relatedIdentifierType'),
+        this.fragment.get('relatedIdentifierType')
       )
     ) {
       this.set('controlledIdentifierType', true);
@@ -118,7 +118,7 @@ export default Component.extend({
     const lsid = /^[uU][rR][nN]:[lL][sS][iI][dD]:(A-Za-z0-9][A-Za-z0-9()+,-.=@;$_!*'"%]):(A-Za-z0-9][A-Za-z0-9()+,-.=@;$_!*'"%]):(A-Za-z0-9][A-Za-z0-9()+,-.=@;$_!*'"%])[:]?(A-Za-z0-9][A-Za-z0-9()+,-.=@;$_!*'"%])?$/;
     const purl = {
       require_host: true,
-      host_whitelist: [ 'purl.org', 'oclc.org' ],
+      host_whitelist: ['purl.org', 'oclc.org']
     };
     const arxiv = /^(arXiv:)(\d{4}.\d{4,5}|[a-z\-]+(\.[A-Z]{2})?\/\d{7})(v\d+)?/;
     const doi = /^(10\.\d{4,5}\/.+)/;
@@ -240,6 +240,6 @@ export default Component.extend({
     },
     deleteRelatedIdentifier() {
       this.model.get('relatedIdentifiers').removeObject(this.fragment);
-    },
-  },
+    }
+  }
 });

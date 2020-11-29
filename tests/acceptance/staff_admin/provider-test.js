@@ -1,27 +1,22 @@
 import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
-import {
-  currentURL,
-  visit,
-  click,
-  fillIn,
-} from '@ember/test-helpers';
+import { currentURL, visit, click, fillIn } from '@ember/test-helpers';
 // import { selectChoose, selectSearch } from 'ember-power-select/test-support';
 import ENV from 'bracco/config/environment';
 import { authenticateSession } from 'ember-simple-auth/test-support';
 import { setupQunit as setupPolly } from '@pollyjs/core';
 
-module('Acceptance | staff_admin | provider', function(hooks) {
+module('Acceptance | staff_admin | provider', function (hooks) {
   setupPolly(hooks, {
     matchRequestsBy: {
       headers: {
-        exclude: [ 'authorization' ],
-      },
-    },
+        exclude: ['authorization']
+      }
+    }
   });
   setupApplicationTest(hooks);
 
-  hooks.beforeEach(async function() {
+  hooks.beforeEach(async function () {
     const { server } = this.polly;
 
     server.any().on('request', (req) => {
@@ -37,30 +32,36 @@ module('Acceptance | staff_admin | provider', function(hooks) {
       }
 
       /* filter out authorization tokens */
-      recording.request.headers = recording.request.headers.filter(({ name }) => name !== 'authorization');
+      recording.request.headers = recording.request.headers.filter(
+        ({ name }) => name !== 'authorization'
+      );
     });
 
     await authenticateSession({
       uid: 'admin',
       name: 'Admin',
-      role_id: 'staff_admin',
+      role_id: 'staff_admin'
     });
   });
 
-  test('visiting provider TIB', async function(assert) {
+  test('visiting provider TIB', async function (assert) {
     await visit('/providers/tib');
 
     assert.equal(currentURL(), '/providers/tib');
-    assert.dom('h2.work').hasText('German National Library of Science and Technology');
+    assert
+      .dom('h2.work')
+      .hasText('German National Library of Science and Technology');
     assert.dom('li a.nav-link.active').hasText('Settings');
 
     assert.dom('a#edit-provider').includesText('Update Member');
     assert.dom('a#edit-provider').hasAttribute('href', '/providers/tib/edit');
     assert.dom('a#delete-provider').includesText('Delete Member');
-    assert.dom('a#delete-provider').hasAttribute('href', '/providers/tib/delete');
+    assert
+      .dom('a#delete-provider')
+      .hasAttribute('href', '/providers/tib/delete');
   });
 
-  test('visiting consortium DC', async function(assert) {
+  test('visiting consortium DC', async function (assert) {
     await visit('/providers/dc');
 
     assert.equal(currentURL(), '/providers/dc');
@@ -70,10 +71,12 @@ module('Acceptance | staff_admin | provider', function(hooks) {
     assert.dom('a#edit-provider').includesText('Update Member');
     assert.dom('a#edit-provider').hasAttribute('href', '/providers/dc/edit');
     assert.dom('a#delete-provider').includesText('Delete Member');
-    assert.dom('a#delete-provider').hasAttribute('href', '/providers/dc/delete');
+    assert
+      .dom('a#delete-provider')
+      .hasAttribute('href', '/providers/dc/delete');
   });
 
-  test('updating consortium DC', async function(assert) {
+  test('updating consortium DC', async function (assert) {
     let twitterUrl = 'datacite' + Math.round(Math.random() * 1000).toString();
 
     await visit('/providers/dc/edit');
@@ -90,11 +93,13 @@ module('Acceptance | staff_admin | provider', function(hooks) {
     // assert.dom('a#twitter-url').hasAttribute('href', 'https://twitter.com/' + twitterUrl);
   });
 
-  test('visiting provider TIB info', async function(assert) {
+  test('visiting provider TIB info', async function (assert) {
     await visit('/providers/tib/info');
 
     assert.equal(currentURL(), '/providers/tib/info');
-    assert.dom('h2.work').hasText('German National Library of Science and Technology');
+    assert
+      .dom('h2.work')
+      .hasText('German National Library of Science and Technology');
     assert.dom('a.nav-link.active').hasText('Info');
 
     // direct member charts are displayed
@@ -102,7 +107,7 @@ module('Acceptance | staff_admin | provider', function(hooks) {
     assert.dom('#chart-doi-title').includesText('DOIs by year');
   });
 
-  test('visiting consortium DC info', async function(assert) {
+  test('visiting consortium DC info', async function (assert) {
     await visit('/providers/dc/info');
 
     assert.equal(currentURL(), '/providers/dc/info');
@@ -110,16 +115,20 @@ module('Acceptance | staff_admin | provider', function(hooks) {
     assert.dom('a.nav-link.active').hasText('Info');
 
     // consortium charts are displayed
-    assert.dom('#chart-organization-title').includesText('Organizations by year');
+    assert
+      .dom('#chart-organization-title')
+      .includesText('Organizations by year');
     assert.dom('#chart-repository-title').includesText('Repositories by year');
     assert.dom('#chart-doi-title').includesText('DOIs by year');
   });
 
-  test('visiting provider TIB repositories', async function(assert) {
+  test('visiting provider TIB repositories', async function (assert) {
     await visit('/providers/tib/repositories');
 
     assert.equal(currentURL(), '/providers/tib/repositories');
-    assert.dom('h2.work').hasText('German National Library of Science and Technology');
+    assert
+      .dom('h2.work')
+      .hasText('German National Library of Science and Technology');
     assert.dom('a.nav-link.active').hasText('Repositories');
     assert.dom('div#search').exists();
 
@@ -130,14 +139,18 @@ module('Acceptance | staff_admin | provider', function(hooks) {
 
     // admin can add repository
     assert.dom('a#add-repository').includesText('Add Repository');
-    assert.dom('a#add-repository').hasAttribute('href', '/providers/tib/repositories/new');
+    assert
+      .dom('a#add-repository')
+      .hasAttribute('href', '/providers/tib/repositories/new');
   });
 
-  test('visiting provider TIB dois', async function(assert) {
+  test('visiting provider TIB dois', async function (assert) {
     await visit('/providers/tib/dois');
 
     assert.equal(currentURL(), '/providers/tib/dois');
-    assert.dom('h2.work').hasText('German National Library of Science and Technology');
+    assert
+      .dom('h2.work')
+      .hasText('German National Library of Science and Technology');
     assert.dom('li a.nav-link.active').hasText('DOIs');
     assert.dom('div#search').exists();
 
@@ -152,7 +165,7 @@ module('Acceptance | staff_admin | provider', function(hooks) {
     assert.dom('a#transfer-dois').doesNotExist();
   });
 
-  test('visiting provider datacite prefixes', async function(assert) {
+  test('visiting provider datacite prefixes', async function (assert) {
     await visit('/providers/datacite/prefixes');
 
     assert.equal(currentURL(), '/providers/datacite/prefixes');
@@ -167,10 +180,12 @@ module('Acceptance | staff_admin | provider', function(hooks) {
 
     // admin can assign new prefix
     assert.dom('a#assign-prefix').includesText('Assign Prefix');
-    assert.dom('a#assign-prefix').hasAttribute('href', '/providers/datacite/prefixes/new');
+    assert
+      .dom('a#assign-prefix')
+      .hasAttribute('href', '/providers/datacite/prefixes/new');
   });
 
-  test('new provider form', async function(assert) {
+  test('new provider form', async function (assert) {
     assert.expect(48);
 
     await visit('/providers/new');
@@ -229,13 +244,15 @@ module('Acceptance | staff_admin | provider', function(hooks) {
     assert.dom('button#add-provider').includesText('Add Member');
   });
 
-  test('editing provider TIB form', async function(assert) {
+  test('editing provider TIB form', async function (assert) {
     assert.expect(48);
 
     await visit('/providers/tib/edit');
 
     assert.equal(currentURL(), '/providers/tib/edit');
-    assert.dom('h2.work').hasText('German National Library of Science and Technology');
+    assert
+      .dom('h2.work')
+      .hasText('German National Library of Science and Technology');
     assert.dom('div.tab-content').exists();
 
     assert.dom('input#member-id-field').exists();
@@ -288,11 +305,13 @@ module('Acceptance | staff_admin | provider', function(hooks) {
     assert.dom('button#update-provider').includesText('Update Member');
   });
 
-  test('editing provider TIB password form', async function(assert) {
+  test('editing provider TIB password form', async function (assert) {
     await visit('/providers/tib/change');
 
     assert.equal(currentURL(), '/providers/tib/change');
-    assert.dom('h2.work').hasText('German National Library of Science and Technology');
+    assert
+      .dom('h2.work')
+      .hasText('German National Library of Science and Technology');
     assert.dom('div.tab-content').exists();
 
     assert.dom('input#password-input-field').exists();
@@ -301,20 +320,26 @@ module('Acceptance | staff_admin | provider', function(hooks) {
     assert.dom('button[type=submit]').includesText('Set Password');
   });
 
-  test('editing provider TIB delete form', async function(assert) {
+  test('editing provider TIB delete form', async function (assert) {
     await visit('/providers/tib/delete');
 
     assert.equal(currentURL(), '/providers/tib/delete');
-    assert.dom('h2.work').hasText('German National Library of Science and Technology');
+    assert
+      .dom('h2.work')
+      .hasText('German National Library of Science and Technology');
     assert.dom('div.tab-content').exists();
 
-    assert.dom('div.alert-danger').hasText('You need to delete all repositories before you can delete the TIB provider.');
+    assert
+      .dom('div.alert-danger')
+      .hasText(
+        'You need to delete all repositories before you can delete the TIB provider.'
+      );
 
     assert.dom('input#confirm-symbol-field').doesNotExist();
     assert.dom('button#delete').doesNotExist();
   });
 
-  test('assign a prefix', async function(assert) {
+  test('assign a prefix', async function (assert) {
     await visit('/providers/datacite/prefixes/new');
 
     assert.equal(currentURL(), '/providers/datacite/prefixes/new');
@@ -334,7 +359,7 @@ module('Acceptance | staff_admin | provider', function(hooks) {
   //   assert.equal(currentURL(), '/providers/datacite/prefixes');
   // });
 
-  test('cancel assigning a prefix', async function(assert) {
+  test('cancel assigning a prefix', async function (assert) {
     await visit('/providers/datacite/prefixes/new');
 
     assert.equal(currentURL(), '/providers/datacite/prefixes/new');
@@ -344,6 +369,5 @@ module('Acceptance | staff_admin | provider', function(hooks) {
     // await selectChoose('#prefix-add', '10.80257');
     // await click('button#cancel');
     // assert.equal(currentURL(), '/providers/datacite/prefixes');
-
   });
 });

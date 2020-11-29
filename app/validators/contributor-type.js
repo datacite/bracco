@@ -2,14 +2,13 @@
 import BaseValidator from 'ember-cp-validations/validators/base';
 
 const ContributorType = BaseValidator.extend({
-
   validate(value, options, model) {
     const organizationalContributorTypes = [
       'HostingInstitution',
       'RegistrationAgency',
       'RegistrationAuthority',
       'ResearchGroup',
-      'Distributor',
+      'Distributor'
     ];
 
     const contributorTypes = [
@@ -33,7 +32,7 @@ const ContributorType = BaseValidator.extend({
       'Sponsor',
       'Supervisor',
       'WorkPackageLeader',
-      'Other',
+      'Other'
     ];
 
     const personalContributorTypes = [
@@ -46,24 +45,26 @@ const ContributorType = BaseValidator.extend({
       'RelatedPerson',
       'Researcher',
       'Supervisor',
-      'WorkPackageLeader',
+      'WorkPackageLeader'
     ];
 
     const message = 'Contributor of the Type cannot be of that Name Type.';
 
     switch (true) {
-      case (!value && options.allowBlank):
+      case !value && options.allowBlank:
         return true;
-      case organizationalContributorTypes.includes(String(value)) && model.nameType == 'Personal':
+      case organizationalContributorTypes.includes(String(value)) &&
+        model.nameType == 'Personal':
         return message;
-      case personalContributorTypes.includes(String(value)) && model.nameType == 'Organizational':
+      case personalContributorTypes.includes(String(value)) &&
+        model.nameType == 'Organizational':
         return message;
       case contributorTypes.includes(String(value)):
         return true;
       default:
         return 'The value ' + value + ' is not a valid type';
     }
-  },
+  }
 });
 
 export default ContributorType;

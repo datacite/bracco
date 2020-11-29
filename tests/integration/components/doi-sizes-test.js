@@ -4,11 +4,11 @@ import { setupFactoryGuy, make } from 'ember-data-factory-guy';
 import { render, fillIn, click } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-module('Integration | Component | doi sizes', function(hooks) {
+module('Integration | Component | doi sizes', function (hooks) {
   setupRenderingTest(hooks);
   setupFactoryGuy(hooks);
 
-  test('it renders', async function(assert) {
+  test('it renders', async function (assert) {
     this.set('model', make('doi'));
     await render(hbs`{{doi-sizes model=model}}`);
     await click('#toggle-sizes');
@@ -19,7 +19,7 @@ module('Integration | Component | doi sizes', function(hooks) {
     assert.dom(sizes[0]).hasValue('3 pages');
   });
 
-  test('add multiple values', async function(assert) {
+  test('add multiple values', async function (assert) {
     this.set('model', make('doi'));
     await render(hbs`{{doi-sizes model=model}}`);
     await click('#toggle-sizes');

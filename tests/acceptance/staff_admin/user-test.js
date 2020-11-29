@@ -1,24 +1,21 @@
 import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
-import {
-  currentURL,
-  visit,
-} from '@ember/test-helpers';
+import { currentURL, visit } from '@ember/test-helpers';
 import ENV from 'bracco/config/environment';
 import { authenticateSession } from 'ember-simple-auth/test-support';
 import { setupQunit as setupPolly } from '@pollyjs/core';
 
-module('Acceptance | staff_admin | user', function(hooks) {
+module('Acceptance | staff_admin | user', function (hooks) {
   setupPolly(hooks, {
     matchRequestsBy: {
       headers: {
-        exclude: [ 'authorization' ],
-      },
-    },
+        exclude: ['authorization']
+      }
+    }
   });
   setupApplicationTest(hooks);
 
-  hooks.beforeEach(async function() {
+  hooks.beforeEach(async function () {
     const { server } = this.polly;
 
     server.any().on('request', (req) => {
@@ -34,17 +31,19 @@ module('Acceptance | staff_admin | user', function(hooks) {
       }
 
       /* filter out authorization tokens */
-      recording.request.headers = recording.request.headers.filter(({ name }) => name !== 'authorization');
+      recording.request.headers = recording.request.headers.filter(
+        ({ name }) => name !== 'authorization'
+      );
     });
 
     await authenticateSession({
       uid: 'admin',
       name: 'Admin',
-      role_id: 'staff_admin',
+      role_id: 'staff_admin'
     });
   });
 
-  test('visiting users', async function(assert) {
+  test('visiting users', async function (assert) {
     await visit('/users');
 
     assert.equal(currentURL(), '/users');
@@ -60,7 +59,7 @@ module('Acceptance | staff_admin | user', function(hooks) {
     assert.dom('div.panel.facets').doesNotExist();
   });
 
-  test('visiting specific user', async function(assert) {
+  test('visiting specific user', async function (assert) {
     await visit('/users/0000-0003-1419-2405');
 
     assert.equal(currentURL(), '/users/0000-0003-1419-2405');

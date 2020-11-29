@@ -4,11 +4,11 @@ import { setupFactoryGuy, make } from 'ember-data-factory-guy';
 import { render, fillIn, click } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-module('Integration | Component | doi formats', function(hooks) {
+module('Integration | Component | doi formats', function (hooks) {
   setupRenderingTest(hooks);
   setupFactoryGuy(hooks);
 
-  test('it renders', async function(assert) {
+  test('it renders', async function (assert) {
     this.set('model', make('doi'));
     await render(hbs`{{doi-formats model=model}}`);
     await click('#toggle-formats');
@@ -19,7 +19,7 @@ module('Integration | Component | doi formats', function(hooks) {
     assert.dom(formats[0]).hasValue('doc/xml');
   });
 
-  test('add multiple values', async function(assert) {
+  test('add multiple values', async function (assert) {
     this.set('model', make('doi'));
     await render(hbs`{{doi-formats model=model}}`);
     await click('#toggle-formats');

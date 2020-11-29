@@ -7,7 +7,7 @@ export function startSentry() {
   Sentry.init({
     dsn: config.SENTRY_DSN,
     release: config.APP_NAME + ':' + config.VERSION,
-    integrations: [ new Ember() ],
-    ignoreErrors: [ 'TransitionAborted' ],
+    integrations: [new Ember()],
+    ignoreErrors: ['TransitionAborted']
   });
 }

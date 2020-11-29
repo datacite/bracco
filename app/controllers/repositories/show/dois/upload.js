@@ -38,16 +38,25 @@ export default Controller.extend({
       doi.set('dates', null);
 
       let self = this;
-      doi.save().then(function(doi) {
-        self.transitionToRoute('dois.show', doi);
-      }).catch(function(reason) {
-        console.debug(reason);
-        self.get('flashMessages').warning('An error occured and this DOI could not be saved:' + reason.title);
-
-      });
+      doi
+        .save()
+        .then(function (doi) {
+          self.transitionToRoute('dois.show', doi);
+        })
+        .catch(function (reason) {
+          console.debug(reason);
+          self
+            .get('flashMessages')
+            .warning(
+              'An error occured and this DOI could not be saved:' + reason.title
+            );
+        });
     },
     cancel() {
-      this.transitionToRoute('repositories.show.dois', this.get('model.repository.id'));
-    },
-  },
+      this.transitionToRoute(
+        'repositories.show.dois',
+        this.get('model.repository.id')
+      );
+    }
+  }
 });

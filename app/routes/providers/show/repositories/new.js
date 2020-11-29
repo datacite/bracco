@@ -15,7 +15,7 @@ export default Route.extend({
       repositoryType: [],
       certificate: [],
       serviceContact: this.store.createFragment('contact'),
-      issn: this.store.createFragment('issn'),
+      issn: this.store.createFragment('issn')
     });
 
     repository.get('language').pushObject('');
@@ -24,7 +24,7 @@ export default Route.extend({
 
     return hash({
       provider,
-      repository,
+      repository
     });
-  },
+  }
 });

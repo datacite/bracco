@@ -50,7 +50,7 @@ const completeSubjectList = [
   'Languages and literature',
   'Philosophy, ethics and religion',
   'Arts (arts, history of arts, performing arts, music)',
-  'Other humanities',
+  'Other humanities'
 ];
 
 const oecdScheme = 'Fields of Science and Technology (FOS)';
@@ -76,7 +76,12 @@ export default Component.extend({
   didReceiveAttrs() {
     this._super(...arguments);
 
-    if (this.fragment.get('subject') && completeSubjectList.includes(this.fragment.get('subject').replace('FOS: ', ''))) {
+    if (
+      this.fragment.get('subject') &&
+      completeSubjectList.includes(
+        this.fragment.get('subject').replace('FOS: ', '')
+      )
+    ) {
       this.set('oecdSelected', true);
     } else {
       this.set('oecdSelected', false);
@@ -85,7 +90,12 @@ export default Component.extend({
 
   actions: {
     createOnEnter(select, e) {
-      if (e.keyCode === 13 && select.isOpen && !select.highlighted && !isBlank(select.searchText)) {
+      if (
+        e.keyCode === 13 &&
+        select.isOpen &&
+        !select.highlighted &&
+        !isBlank(select.searchText)
+      ) {
         if (!this.selected.includes(select.searchText)) {
           this.subjects.push(select.searchText);
           select.actions.choose(select.searchText);
@@ -118,10 +128,10 @@ export default Component.extend({
       this.model.get('subjects').removeObject(this.fragment);
     },
     searchSubject(query) {
-      let subjects = completeSubjectList.filter(function(subject) {
+      let subjects = completeSubjectList.filter(function (subject) {
         return subject.toLowerCase().startsWith(query.toLowerCase());
       });
       this.set('subjects', subjects);
-    },
-  },
+    }
+  }
 });

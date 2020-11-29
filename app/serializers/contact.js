@@ -7,5 +7,5 @@ export default JSONSerializer.extend({
     if (!isEmpty(snapshot.attr(key))) {
       this._super(...arguments);
     }
-  },
+  }
 });
