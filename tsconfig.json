@@ -21,6 +21,9 @@
     "module": "es6",
     "experimentalDecorators": true,
     "paths": {
+      "stream": [
+        "node_modules/stream-browserify"
+      ],
       "bracco/tests/*": [
         "tests/*"
       ],

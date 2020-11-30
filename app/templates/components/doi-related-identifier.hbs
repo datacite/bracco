@@ -1,87 +1,155 @@
 <div class="input-group">
-  <input type="text"
-    class="form-control related-identifier-field no-error {{if (not fragment.relatedIdentifier) 'no-success'}}" placeholder="Related Identifier" value={{fragment.relatedIdentifier}} oninput={{action "updateRelatedIdentifier" value="target.value"}} data-test-related-identifier />
+  <input
+    type="text"
+    class="form-control related-identifier-field no-error
+      {{if (not fragment.relatedIdentifier) 'no-success'}}"
+    placeholder="Related Identifier"
+    value={{fragment.relatedIdentifier}}
+    oninput={{action 'updateRelatedIdentifier' value='target.value'}}
+    data-test-related-identifier
+  />
   <span class="input-group-btn">
-    <BsButton @outline={{true}} @onClick={{action "deleteRelatedIdentifier" index}}><i class="fas fa-trash"></i></BsButton>
+    <BsButton
+      @outline={{true}}
+      @onClick={{action 'deleteRelatedIdentifier' index}}
+    >
+      <i class="fas fa-trash"></i>
+    </BsButton>
   </span>
 </div>
-
 <div
-  class="help-block help-block-fragment related-identifier-field no-error {{if (not fragment.relatedIdentifier) 'no-success'}}">
-  Must be a globally unique identifier. Visit our support website for 
-   <a target="_blank" rel="noopener" href="https://support.datacite.org/docs/schema-optional-properties-v43#section-12-a-related-identifier-type"> the list of supported unique identifiers.</a>
+  class="help-block help-block-fragment related-identifier-field no-error
+    {{if (not fragment.relatedIdentifier) 'no-success'}}"
+>
+  Must be a globally unique identifier. Visit our support website for
+  <a
+    target="_blank"
+    rel="noopener"
+    href="https://support.datacite.org/docs/schema-optional-properties-v43#section-12-a-related-identifier-type"
+  >
+    the list of supported unique identifiers.
+  </a>
 </div>
-
 <div class="power-select-label">
-  <label for="relatedIdentifierType" class="required-label subtitle">Related Identifier Type</label> 
-</div> 
-<div class="power-select-fragment" disabled={{this.controlledIdentifierType}} data-test-related-identifier-type>
-  <form.element @controlType="power-select" @value={{fragment.relatedIdentifierType}} @helpText="The type of the Related Identifier." @options={{relatedIdentifierTypeList}} @disabled={{controlledIdentifierType}} @destination={{fragment.relatedIdentifierType}} as |el|>
-    <el.control @onChange={{action "selectRelatedIdentifierType"}} @allowClear={{true}} @placeholder="Select related Identifier Type" />
-  </form.element>
+  <label for="relatedIdentifierType" class="required-label subtitle">
+    Related Identifier Type
+  </label>
 </div>
-
+<div
+  class="power-select-fragment"
+  disabled={{this.controlledIdentifierType}}
+  data-test-related-identifier-type
+>
+  {{#form.element
+    controlType='power-select'
+    value=fragment.relatedIdentifierType
+    helpText='The type of the Related Identifier.'
+    options=relatedIdentifierTypeList
+    disabled=controlledIdentifierType
+    destination=fragment.relatedIdentifierType as |el|
+  }}
+    {{el.control
+      onChange=(action 'selectRelatedIdentifierType')
+      allowClear=true
+      placeholder='Select related Identifier Type'
+    }}
+  {{/form.element}}
+</div>
 <div class="power-select-label">
-  <label for="relationType" class="required-label subtitle">Relation Type</label> 
-</div> 
+  <label for="relationType" class="required-label subtitle">
+    Relation Type
+  </label>
+</div>
 <div class="power-select-fragment" data-test-related-relation-type>
-  <form.element @controlType="power-select" @value={{fragment.relationType}} @helpText="The type of the Relation." @options={{relationTypeList}} @disabled={{disabled}} @allowClear={{true}} @destination={{fragment.relationType}} as |el|>
+  {{#form.element
+    controlType='power-select'
+    value=fragment.relationType
+    helpText='The type of the Relation.'
+    options=relationTypeList
+    disabled=disabled
+    allowClear=true
+    destination=fragment.relationType as |el|
+  }}
     <el.control
-      @onChange={{action "selectRelationType"}}
-      @placeholder="Select Relation Type" as |item|>
-        {{humanize (underscore item)}}
+      @onChange={{action 'selectRelationType'}}
+      @placeholder="Select Relation Type" as |item|
+    >
+      {{humanize (underscore item)}}
     </el.control>
-  </form.element>
+  {{/form.element}}
 </div>
-
 <div class="power-select-label">
-  <label for="relatedResourceType" class="subtitle">Resource Type General</label> 
-</div> 
-<div class="power-select-fragment" data-test-related-resource-type>
-  <form.element @controlType="power-select" @value={{fragment.resourceTypeGeneral}} @helpText="The general type of the related resource." @options={{resourceTypesGeneral}} @disabled={{disabled}} @allowClear={{true}} @destination={{fragment.resourceTypeGeneral}} as |el|>
-    <el.control
-      @onChange={{action "selectResourceTypeGeneral"}}
-      @allowClear={{true}}
-      @placeholder="Select Resource Type General" as |item|>
-        {{humanize (underscore item)}}
-    </el.control>
-  </form.element>
+  <label for="relatedResourceType" class="subtitle">
+    Resource Type General
+  </label>
 </div>
-
+<div class="power-select-fragment" data-test-related-resource-type>
+  {{#form.element
+    controlType='power-select'
+    value=fragment.resourceTypeGeneral
+    helpText='The general type of the related resource.'
+    options=resourceTypesGeneral
+    disabled=disabled
+    allowClear=true
+    destination=fragment.resourceTypeGeneral as |el|
+  }}
+    <el.control
+      @onChange={{action 'selectResourceTypeGeneral'}}
+      @allowClear={{true}}
+      @placeholder="Select Resource Type General" as |item|
+    >
+      {{humanize (underscore item)}}
+    </el.control>
+  {{/form.element}}
+</div>
 {{#if this.isMetadataRelationType}}
   <div class="power-select-label">
-    <label for="relatedMetadataScheme" class="subtitle">Related Metadata Scheme</label> 
-  </div> 
-  <input type="text" class="form-control related-metadata-scheme-field" value={{fragment.relatedMetadataScheme}} placeholder="Related Metadata Scheme"
-    oninput={{action "updateRelatedMetadataScheme" value="target.value"}} data-test-related-metadata-scheme />
-
-  <div
-    class="help-block help-block-fragment related-metadata-scheme-field}}">
+    <label for="relatedMetadataScheme" class="subtitle">
+      Related Metadata Scheme
+    </label>
+  </div>
+  <input
+    type="text"
+    class="form-control related-metadata-scheme-field"
+    value={{fragment.relatedMetadataScheme}}
+    placeholder="Related Metadata Scheme"
+    oninput={{action 'updateRelatedMetadataScheme' value='target.value'}}
+    data-test-related-metadata-scheme
+  />
+  <div class="help-block help-block-fragment related-metadata-scheme-field}}">
     The name of the scheme.
   </div>
-
   <div class="power-select-label">
-    <label for="relatedSchemeURI" class="subtitle">Related Metadata Scheme URI</label> 
-  </div> 
-  <input type="text" class="form-control related-scheme-uri-field" value={{fragment.schemeUri}} placeholder="Related Metadata Scheme URI"
-    oninput={{action "updateSchemeURI" value="target.value"}} data-test-related-scheme-uri />
-
-  <div
-    class="help-block help-block-fragment related-scheme-uri-field}}">
+    <label for="relatedSchemeURI" class="subtitle">
+      Related Metadata Scheme URI
+    </label>
+  </div>
+  <input
+    type="text"
+    class="form-control related-scheme-uri-field"
+    value={{fragment.schemeUri}}
+    placeholder="Related Metadata Scheme URI"
+    oninput={{action 'updateSchemeURI' value='target.value'}}
+    data-test-related-scheme-uri
+  />
+  <div class="help-block help-block-fragment related-scheme-uri-field}}">
     The URI of the relatedMetadataScheme. For example: http://www.ddialliance.org/Specification/DDILifecycle/3.1/XMLSchema/instance.xsd for DDI-L schema.
   </div>
-
   <div class="power-select-label">
-    <label for="relatedSchemeType" class="subtitle">Related Metadata Scheme Type</label> 
-  </div> 
-
-  <input type="text" class="form-control related-scheme-type-field" value={{fragment.schemeType}} placeholder="Related Metadata Scheme Type"
-    oninput={{action "updateSchemeType" value="target.value"}} data-test-related-scheme-type />
-
-  <div
-    class="help-block help-block-fragment related-scheme-type-field}}">
+    <label for="relatedSchemeType" class="subtitle">
+      Related Metadata Scheme Type
+    </label>
+  </div>
+  <input
+    type="text"
+    class="form-control related-scheme-type-field"
+    value={{fragment.schemeType}}
+    placeholder="Related Metadata Scheme Type"
+    oninput={{action 'updateSchemeType' value='target.value'}}
+    data-test-related-scheme-type
+  />
+  <div class="help-block help-block-fragment related-scheme-type-field}}">
     The type of the relatedMetadataScheme, linked with the schemeURI.
   </div>
 {{/if}}
-
 <hr />

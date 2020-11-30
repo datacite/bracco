@@ -1,17 +1,45 @@
 <div class="input-group">
-  <input type="text" class="form-control alternate-identifier-field" value={{fragment.alternateIdentifier}} placeholder="Alternate Identifier" oninput={{action "updateAlternateIdentifier" value="target.value"}} data-test-alternate-identifier/>
+  <input
+    type="text"
+    class="form-control alternate-identifier-field"
+    value={{fragment.alternateIdentifier}}
+    placeholder="Alternate Identifier"
+    oninput={{action 'updateAlternateIdentifier' value='target.value'}}
+    data-test-alternate-identifier
+  />
   <span class="input-group-btn">
-    <BsButton @outline={{true}} @onClick={{action "deleteAlternateIdentifier" index}}><i class="fas fa-trash"></i></BsButton>
+    <BsButton
+      @outline={{true}}
+      @onClick={{action 'deleteAlternateIdentifier' index}}
+    >
+      <i class="fas fa-trash"></i>
+    </BsButton>
   </span>
 </div>
-
 <div class="power-select-label">
-  <label for="alternateIdentifierType" class="subtitle required-label">Alternate Identifier Type</label> 
-</div> 
-<div class="power-select-fragment" disabled={{this.controlledIdentifierType}} data-test-alternate-identifier-type>
-  <form.element @controlType="power-select" @value={{fragment.alternateIdentifierType}} @helpText="The type of Alternate Identifier." @options={{alternateIdentifierTypeList}} @disabled={{controlledIdentifierType}} @destination={{fragment.alternateIdentifierType}} as |el|>
-  <el.control @onChange={{action "selectAlternateIdentifierType"}} @onkeydown={{action "createOnEnter"}} @placeholder="Type in or select the Alternate Identifier Type." @noMatchesMessage="Press ENTER to add new identifier Type." />
-  </form.element>
+  <label for="alternateIdentifierType" class="subtitle required-label">
+    Alternate Identifier Type
+  </label>
 </div>
-
+<div
+  class="power-select-fragment"
+  disabled={{this.controlledIdentifierType}}
+  data-test-alternate-identifier-type
+>
+  {{#form.element
+    controlType='power-select'
+    value=fragment.alternateIdentifierType
+    helpText='The type of Alternate Identifier.'
+    options=alternateIdentifierTypeList
+    disabled=controlledIdentifierType
+    destination=fragment.alternateIdentifierType as |el|
+  }}
+    {{el.control
+      onChange=(action 'selectAlternateIdentifierType')
+      onkeydown=(action 'createOnEnter')
+      placeholder='Type in or select the Alternate Identifier Type.'
+      noMatchesMessage='Press ENTER to add new identifier Type.'
+    }}
+  {{/form.element}}
+</div>
 <hr />
