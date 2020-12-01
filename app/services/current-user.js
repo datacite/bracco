@@ -1,7 +1,7 @@
 import { resolve } from 'rsvp';
 import Service, { inject as service } from '@ember/service';
 import { isEmpty } from '@ember/utils';
-import { verifyJWT } from 'jsrasign';
+import KJUR from 'jsrsasign';
 import ENV from 'bracco/config/environment';
 
 export default Service.extend({
@@ -46,25 +46,20 @@ export default Service.extend({
 
       // verify asymmetric token, using RSA with SHA-256 hash algorithm
       let self = this;
-      verifyJWT.verify(
-        jwt,
-        cert,
-        { algorithms: ['RS256'] },
-        function (error, payload) {
-          if (payload) {
-            self.set('jwt', jwt);
-            self.initUser(payload);
-          } else if (error.message !== 'jwt must be provided') {
-            self.session.invalidate().then(function () {
-              self
-                .get('flashMessages')
-                .danger(
-                  'Unable to authenticate because the token was wrong or has expired.'
-                );
-            });
-          }
+      KJUR.jws.JWS.verify(jwt, cert, ['RS256'], function (error, payload) {
+        if (payload) {
+          self.set('jwt', jwt);
+          self.initUser(payload);
+        } else if (error.message !== 'jwt must be provided') {
+          self.session.invalidate().then(function () {
+            self
+              .get('flashMessages')
+              .danger(
+                'Unable to authenticate because the token was wrong or has expired.'
+              );
+          });
         }
-      );
+      });
     } else if (this.get('session.data.authenticated.role_id')) {
       // using authenticator:test
       this.initUser(this.get('session.data.authenticated'));
