@@ -1,29 +1,19 @@
 /* eslint-disable no-useless-escape */
 import BaseValidator from 'ember-cp-validations/validators/base';
-import edtf from 'edtf';
+import { parseISO } from 'date-fns';
 
 const DateFormat = BaseValidator.extend({
   validate(value, options) {
-    switch (true) {
-      case !value && options.allowBlank:
+    if (!value && options.allowBlank) {
+      return true;
+    } else {
+      // check that date can be parsed
+      if (parseISO(value).toString() !== 'Invalid Date') {
         return true;
-      case value.startsWith('-'):
-        return /-\d{4}/.test(value) ? true : 'Please enter a valid date';
-      default:
-        try {
-          let status = edtf.parse(value, {
-            types: ['Date', 'Year', 'Decade', 'Century', 'Season', 'Interval']
-          });
-          if (typeof status !== 'undefined') {
-            return true;
-          } else {
-            let message = 'Please enter a valid date';
-            return message;
-          }
-        } catch (error) {
-          let message = 'Please enter a valid date';
-          return message;
-        }
+      } else {
+        let message = 'Please enter a valid date.';
+        return message;
+      }
     }
   }
 });
