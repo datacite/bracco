@@ -1,6 +1,5 @@
 {
   "baseUrl": "http://localhost:4200",
-  "experimentalNetworkStubbing": true,
   "experimentalFetchPolyfill": true,
   "testFiles": "**/*.test.*",
   "video": false,
