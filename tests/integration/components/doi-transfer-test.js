@@ -15,7 +15,7 @@ module('Integration | Component | doi transfer', function (hooks) {
     assert
       .dom('*')
       .hasText(
-        'Transfer DOI Repository Transfer the DOI to this repository. Transfer DOI Cancel'
+        'Transfer DOI Repository Australian Data Archive Transfer the DOI to this repository. Transfer DOI Cancel'
       );
   });
 });
