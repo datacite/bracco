@@ -16,7 +16,7 @@ module('Integration | Component | repository transfer', function (hooks) {
     assert
       .dom('*')
       .hasText(
-        'Transfer Repository Member/Consortium Type to search... Transfer this repository to another member/consortium. It can take up to one hour for the transfer to complete. Transfer Repository Cancel'
+        'Transfer Repository Member/Consortium Transfer this repository to another member/consortium. It can take up to one hour for the transfer to complete. Transfer Repository Cancel'
       );
 
     // Template block usage:
@@ -29,7 +29,7 @@ module('Integration | Component | repository transfer', function (hooks) {
     assert
       .dom('*')
       .hasText(
-        'Transfer Repository Member/Consortium Type to search... Transfer this repository to another member/consortium. It can take up to one hour for the transfer to complete. Transfer Repository Cancel'
+        'Transfer Repository Member/Consortium Transfer this repository to another member/consortium. It can take up to one hour for the transfer to complete. Transfer Repository Cancel'
       );
   });
 });

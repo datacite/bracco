@@ -10,6 +10,9 @@ module.exports = function (defaults) {
     'ember-cli-babel': {
       includePolyfill: true
     },
+    'ember-fetch': {
+      preferNative: true
+    },
     sourcemaps: {
       enabled: true,
       extensions: ['js']

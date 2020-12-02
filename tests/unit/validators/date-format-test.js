@@ -1,7 +1,7 @@
 import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
 
-let options, builtOptions, validator, message;
+let validator, message;
 
 module('Unit | Validator | date-format', function (hooks) {
   setupTest(hooks);
@@ -10,92 +10,74 @@ module('Unit | Validator | date-format', function (hooks) {
     validator = this.owner.lookup('validator:date-format');
   });
 
-  test('it works', function (assert) {
-    let validator = this.owner.lookup('validator:date-format');
-    assert.ok(validator);
-  });
-
   test('year', function (assert) {
     assert.expect(2);
 
-    builtOptions = validator.buildOptions({}).toObject();
+    message = validator.validate('20008');
+    assert.equal(message, 'Please enter a valid date.');
 
-    message = validator.validate('20008', options);
-    assert.equal(message, 'Please enter a valid date');
-
-    message = validator.validate('2008', builtOptions);
+    message = validator.validate('2008');
     assert.equal(message, true);
   });
 
   test('year-month', function (assert) {
     assert.expect(2);
 
-    builtOptions = validator.buildOptions({}).toObject();
+    message = validator.validate('2008-20');
+    assert.equal(message, 'Please enter a valid date.');
 
-    message = validator.validate('2008-20', options);
-    assert.equal(message, 'Please enter a valid date');
-
-    message = validator.validate('2008-12', builtOptions);
+    message = validator.validate('2008-12');
     assert.equal(message, true);
   });
 
   test('date', function (assert) {
     assert.expect(2);
 
-    builtOptions = validator.buildOptions({}).toObject();
+    message = validator.validate('2001-11-09d');
+    assert.equal(message, 'Please enter a valid date.');
 
-    message = validator.validate('2001-11-09d', options);
-    assert.equal(message, 'Please enter a valid date');
-
-    message = validator.validate('2001-11-09', builtOptions);
+    message = validator.validate('2001-11-09');
     assert.equal(message, true);
   });
 
   test('timestamp', function (assert) {
     assert.expect(2);
 
-    builtOptions = validator.buildOptions({}).toObject();
+    message = validator.validate('2015-07-02T06:000:005.000Z');
+    assert.equal(message, 'Please enter a valid date.');
 
-    message = validator.validate('2015-07-02T06:000:005.000Z', options);
-    assert.equal(message, 'Please enter a valid date');
-
-    message = validator.validate('2015-07-02T06:00:05.000Z', builtOptions);
+    message = validator.validate('2015-07-02T06:00:05.000Z');
     assert.equal(message, true);
   });
 
   test('range', function (assert) {
     assert.expect(2);
 
-    builtOptions = validator.buildOptions({}).toObject();
+    message = validator.validate('2004-03-02~1999-06-02');
+    assert.equal(message, 'Please enter a valid date.');
 
-    message = validator.validate('2004-03-02~1999-06-02', options);
-    assert.equal(message, 'Please enter a valid date');
-
-    message = validator.validate('2004-03-02/2005-06-02', builtOptions);
-    assert.equal(message, true);
+    // date ranges are not supported by the date-fms library
+    message = validator.validate('2004-03-02/2005-06-02');
+    assert.equal(message, 'Please enter a valid date.');
   });
 
   test('text', function (assert) {
     assert.expect(2);
 
-    builtOptions = validator.buildOptions({}).toObject();
+    message = validator.validate('Febrera');
+    assert.equal(message, 'Please enter a valid date.');
 
-    message = validator.validate('Febrera', options);
-    assert.equal(message, 'Please enter a valid date');
-
-    message = validator.validate('2008 February', builtOptions);
-    assert.equal(message, 'Please enter a valid date');
+    message = validator.validate('2008 February');
+    assert.equal(message, 'Please enter a valid date.');
   });
 
   test('500 BC', function (assert) {
     assert.expect(2);
 
-    builtOptions = validator.buildOptions({}).toObject();
+    message = validator.validate('0500 BC');
+    assert.equal(message, 'Please enter a valid date.');
 
-    message = validator.validate('0500 BC', options);
-    assert.equal(message, 'Please enter a valid date');
-
-    message = validator.validate('-0500', builtOptions);
+    message = validator.validate('-0500');
     assert.equal(message, true);
   });
 });
