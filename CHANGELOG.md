@@ -7,6 +7,7 @@
 **Fixed bugs:**
 
 - Fix CORS in ROR API calls [\#485](https://github.com/datacite/bracco/issues/485)
+- New test DOIs do not resolve via test handle [\#482](https://github.com/datacite/bracco/issues/482)
 - Prefixes appear to be assigned to 2 members/consortium organizations at the same time [\#480](https://github.com/datacite/bracco/issues/480)
 
 **Closed issues:**
