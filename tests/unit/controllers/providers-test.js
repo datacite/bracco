@@ -6,7 +6,6 @@ module('Unit | Controller | providers', function (hooks) {
   setupTest(hooks);
   setupFactoryGuy(hooks);
 
-  // Replace this with your real tests.
   test('it exists', function (assert) {
     let controller = this.owner.lookup('controller:providers');
     assert.ok(controller);
@@ -94,7 +93,6 @@ module('Unit | Controller | providers', function (hooks) {
     assert.equal(controller.focusAreas.length, 1);
   });
 
-  // I don't know how to test for consortium either
   // test('should list consortium', function(assert) {
   //   let controller = this.owner.lookup('controller:providers.show.organizations.new');
   //   let model = {

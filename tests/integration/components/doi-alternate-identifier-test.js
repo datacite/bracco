@@ -1,7 +1,7 @@
+import { hbs } from 'ember-cli-htmlbars';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
-import hbs from 'htmlbars-inline-precompile';
 // import { selectChoose } from 'ember-power-select/test-support';
 import { setupFactoryGuy, make } from 'ember-data-factory-guy';
 
@@ -16,6 +16,6 @@ module('Integration | Component | doi alternate-identifier', function (hooks) {
       hbs`{{doi-alternate-identifier model=model fragment=fragment index=0}}`
     );
 
-    assert.dom('*').hasText('Alternate Identifier Type');
+    assert.dom(this.element).hasText('Alternate Identifier Type');
   });
 });

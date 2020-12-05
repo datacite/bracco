@@ -1,7 +1,7 @@
+import { hbs } from 'ember-cli-htmlbars';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
-import hbs from 'htmlbars-inline-precompile';
 // import { selectChoose } from 'ember-power-select/test-support';
 import { setupFactoryGuy, make } from 'ember-data-factory-guy';
 
@@ -24,7 +24,7 @@ module('Integration | Component | doi rights', function (hooks) {
       hbs`{{doi-rights model=model fragment=fragment spdx=spdx index=0}}`
     );
 
-    assert.dom('*').hasText('Rights URI The URI of the license.');
+    assert.dom(this.element).hasText('Rights URI The URI of the license.');
   });
 
   test('it renders add add right', async function (assert) {

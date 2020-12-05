@@ -1,7 +1,7 @@
+import { hbs } from 'ember-cli-htmlbars';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
-import hbs from 'htmlbars-inline-precompile';
 
 module('helper:is-equal', function (hooks) {
   setupRenderingTest(hooks);
@@ -11,6 +11,6 @@ module('helper:is-equal', function (hooks) {
 
     await render(hbs`{{is-equal inputValue}}`);
 
-    assert.dom('*').exists();
+    assert.dom(this.element).hasAnyText();
   });
 });

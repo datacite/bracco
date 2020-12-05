@@ -1,7 +1,7 @@
+import { hbs } from 'ember-cli-htmlbars';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
-import hbs from 'htmlbars-inline-precompile';
 import ENV from 'bracco/config/environment';
 
 module('helper:cdn-url', function (hooks) {
@@ -10,6 +10,6 @@ module('helper:cdn-url', function (hooks) {
   test('it renders', async function (assert) {
     await render(hbs`{{cdn-url}}`);
 
-    assert.dom('*').hasText(ENV.CDN_URL);
+    assert.equal(this.element.textContent.trim(), ENV.CDN_URL);
   });
 });

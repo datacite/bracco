@@ -1,7 +1,7 @@
+import { hbs } from 'ember-cli-htmlbars';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
-import hbs from 'htmlbars-inline-precompile';
 import { setupFactoryGuy, make } from 'ember-data-factory-guy';
 
 module('Integration | Component | doi-title', function (hooks) {
@@ -10,8 +10,14 @@ module('Integration | Component | doi-title', function (hooks) {
 
   test('it renders', async function (assert) {
     this.set('model', make('doi'));
-    await render(hbs`{{doi-title model=model}}`);
+    await render(hbs`
+      <BsForm @model={{model}} as |form index|>
+        <DoiTitle @model={{model}} @fragment={{model.titles.[index]}} @form={{form}} @index={{index}} />
+      </BsForm>
+    `);
 
-    assert.dom('*').hasText('Title Type Language');
+    assert
+      .dom(this.element)
+      .hasText('Title Type Select Title Type Language Select Language');
   });
 });

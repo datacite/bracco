@@ -1,36 +1,44 @@
+import { hbs } from 'ember-cli-htmlbars';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { setupFactoryGuy, make } from 'ember-data-factory-guy';
 import { render, fillIn, click } from '@ember/test-helpers';
-import hbs from 'htmlbars-inline-precompile';
 
-module('Integration | Component | doi formats', function (hooks) {
+module('Integration | Component | doi-formats', function (hooks) {
   setupRenderingTest(hooks);
   setupFactoryGuy(hooks);
 
   test('it renders', async function (assert) {
-    this.set('model', make('doi'));
-    await render(hbs`{{doi-formats model=model}}`);
+    this.set('model', make('doi', { formats: ['tiff', 'jpeg'] }));
+    await render(hbs`
+      <BsForm @model={{model}} as |form|>
+        <DoiFormats @model={{model}} @form={{form}} />
+      </BsForm>
+    `);
+
     await click('#toggle-formats');
-    await click('#add-format');
     let formats = this.element.querySelectorAll('input.format-field');
 
-    await fillIn(formats[0], 'doc/xml');
-    assert.dom(formats[0]).hasValue('doc/xml');
+    assert.dom(formats[0]).hasValue('tiff');
+    assert.dom(formats[1]).hasValue('jpeg');
   });
 
   test('add multiple values', async function (assert) {
-    this.set('model', make('doi'));
-    await render(hbs`{{doi-formats model=model}}`);
-    await click('#toggle-formats');
-    await click('#add-format');
-    await click('#add-format');
-    let formats = this.element.querySelectorAll('input.format-field');
+    this.set('model', make('doi', { formats: ['tiff', 'jpeg'] }));
+    await render(hbs`
+      <BsForm @model={{model}} as |form|>
+        <DoiFormats @model={{model}} @form={{form}} />
+      </BsForm>
+    `);
 
-    await fillIn(formats[0], 'jpeg');
+    await click('#toggle-formats');
+    // await click('#add-format');
+    // await click('#add-format');
+    let formats = this.element.querySelectorAll('input.format-field');
+    await fillIn(formats[0], 'gif');
     await fillIn(formats[1], 'png');
 
-    assert.dom(formats[0]).hasValue('jpeg');
+    assert.dom(formats[0]).hasValue('gif');
     assert.dom(formats[1]).hasValue('png');
   });
 });

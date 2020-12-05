@@ -1,4 +1,3 @@
-/* global describe, it, cy */
 /// <reference types="cypress" />
 
 describe('Consent', () => {
@@ -11,8 +10,6 @@ describe('Consent', () => {
     );
     cy.get('#rcc-confirm-button').click();
     cy.getCookie('_consent').should('have.property', 'value', 'true');
-    cy.get('.motto h1', { timeout: 30000 }).contains('DataCite Fabrica Stage');
+    cy.get('.navbar-brand', { timeout: 30000 }).contains('DataCite Commons');
   });
 });
-
-export {};

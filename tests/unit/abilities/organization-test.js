@@ -7,7 +7,6 @@ module('Unit | Ability | organization', function (hooks) {
   setupTest(hooks);
   setupFactoryGuy(hooks);
 
-  // Replace this with your real tests.
   test('it exists', function (assert) {
     let ability = this.owner.lookup('ability:organization');
     assert.ok(ability);

@@ -6,6 +6,8 @@ FactoryGuy.define('repository', {
     name: 'Australian Data Archive',
     systemEmail: 'ada@anu.edu.au',
     domains: 'ada.edu.au,nesstar.ada.edu.au',
+    created: '2017-09-27T14:08:02.000Z',
+    updated: '2017-09-27T14:08:02.000Z',
     isActive: true,
     provider: FactoryGuy.belongsTo('provider')
   },

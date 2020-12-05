@@ -138,18 +138,4 @@ module('Unit | Ability | doi', function (hooks) {
     assert.equal(ability.canDetail, true);
     assert.equal(ability.canRead, true);
   });
-  // test('it canViewHealth', function(assert) {
-  //   let ability = this.owner.lookup('ability:doi');
-  //   const currentUser = Service.extend({
-  //     uid: 'tib.awi',
-  //     name: 'Alfred Wegener Institute',
-  //     role_id: 'client_admin',
-  //     provider_id: 'tib',
-  //     client_id: 'tib.awi',
-  //   });
-  //   this.owner.register('service: ', currentUser);
-  //   console.log(ability.currentUser);
-  //   assert.equal(ability.canViewHealth, true);
-  //   assert.equal(ability.canViewState, true);
-  // });
 });

@@ -1,37 +1,56 @@
+import { hbs } from 'ember-cli-htmlbars';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
-import hbs from 'htmlbars-inline-precompile';
-// import { selectChoose } from 'ember-power-select/test-support';
+import { render, fillIn } from '@ember/test-helpers';
+import {
+  selectChoose
+  // clickTrigger
+} from 'ember-power-select/test-support/helpers';
 import { setupFactoryGuy, make } from 'ember-data-factory-guy';
 
 module('Integration | Component | doi description', function (hooks) {
   setupRenderingTest(hooks);
   setupFactoryGuy(hooks);
-
   test('it renders', async function (assert) {
     this.set('model', make('doi'));
     this.set('fragment', make('description'));
-    await render(
-      hbs`{{doi-description model=model fragment=fragment index=0}}`
-    );
+    await render(hbs`
+      <BsForm @model={{model}} as |form|>
+        <DoiDescription @model={{model}} @fragment={{fragment}} @form={{form}} @index={{0}}/>
+      </BsForm>
+    `);
 
     assert
-      .dom('*')
+      .dom(this.element)
       .hasText(
-        'All additional information that does not fit in any of the other categories. Description Type Language'
+        'All additional information that does not fit in any of the other categories. Description Type Abstract Language Select Language'
       );
   });
 
-  // test('select type and language values', async function(assert) {
-  //   this.set('model', make('doi'));
-  //   this.set('fragment', make('description'));
-  //   await render(hbs`{{doi-description model=model fragment=fragment index=0}}`);
+  test('select type and language values', async function (assert) {
+    this.set('model', make('doi'));
+    this.set('fragment', make('description'));
+    await render(hbs`
+      <BsForm @model={{model}} as |form|>
+        <DoiDescription @model={{model}} @fragment={{fragment}} @form={{form}} @index={{0}}/>
+      </BsForm>
+    `);
 
-  //   await selectChoose('.description-langs', '.ember-power-select-option', 'Akan');
-  //   await selectChoose('.description-types', '.ember-power-select-option', 'Methods');
+    await fillIn(
+      '.description-field',
+      'Abhinandan: Crowds gather for Indian pilots release'
+    );
 
-  //   assert.dom('.description-types').hasText('Methods');
-  //   assert.dom('.description-langs').hasText('Akan');
-  // });
+    // await clickTrigger('.description-types');
+    await selectChoose('.description-types', 'Methods');
+
+    // await clickTrigger('.description-langs');
+    await selectChoose('.description-langs', 'Arabic');
+
+    assert
+      .dom('.description-field')
+      .hasText('Abhinandan: Crowds gather for Indian pilots release');
+    assert.dom('.description-types').hasText('Methods');
+    assert.dom('.description-langs').hasText('Arabic');
+  });
 });

@@ -1,7 +1,7 @@
+import { hbs } from 'ember-cli-htmlbars';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
-import hbs from 'htmlbars-inline-precompile';
 
 module('Integration | Component | footer status', function (hooks) {
   setupRenderingTest(hooks);
@@ -9,6 +9,6 @@ module('Integration | Component | footer status', function (hooks) {
   test('it renders', async function (assert) {
     await render(hbs`{{footer-status}}`);
 
-    assert.dom('*').hasText('');
+    assert.dom(this.element).hasText('');
   });
 });

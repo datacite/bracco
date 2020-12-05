@@ -1,8 +1,8 @@
+import { hbs } from 'ember-cli-htmlbars';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { setupFactoryGuy, make } from 'ember-data-factory-guy';
 import { render } from '@ember/test-helpers';
-import hbs from 'htmlbars-inline-precompile';
 
 module('Integration | Component | doi transfer', function (hooks) {
   setupRenderingTest(hooks);
@@ -13,7 +13,7 @@ module('Integration | Component | doi transfer', function (hooks) {
     await render(hbs`{{doi-transfer model=model}}`);
 
     assert
-      .dom('*')
+      .dom(this.element)
       .hasText(
         'Transfer DOI Repository Australian Data Archive Transfer the DOI to this repository. Transfer DOI Cancel'
       );

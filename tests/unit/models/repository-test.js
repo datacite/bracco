@@ -14,12 +14,12 @@ module('Unit | Model | repository', function (hooks) {
   });
 
   test('should belong to a provider', function (assert) {
-    const Repository = this.owner
+    const repository = this.owner
       .lookup('service:store')
       .modelFor('repository');
 
     // lookup the relationship on the repository model
-    const relationship = get(Repository, 'relationshipsByName').get('provider');
+    const relationship = get(repository, 'relationshipsByName').get('provider');
 
     assert.equal(
       relationship.key,
@@ -33,10 +33,15 @@ module('Unit | Model | repository', function (hooks) {
     );
   });
 
-  // test('should correctly compute domainList', function(assert) {
-  //   let model = this.subject();
-  //   model.set('domains', 'datacite.org, datacite.de, datacite.fr');
-  //
-  //   assert.equal(model.get('domainList'), 'computed baz');
-  // });
+  test('should correctly compute domainList', function (assert) {
+    let model = run(() =>
+      this.owner.lookup('service:store').createRecord('repository')
+    );
+    model.set('domains', 'datacite.org, datacite.de, datacite.fr');
+
+    assert.equal(
+      model.get('domainList'),
+      'datacite.org,datacite.de,datacite.fr'
+    );
+  });
 });

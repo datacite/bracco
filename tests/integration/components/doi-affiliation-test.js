@@ -1,8 +1,8 @@
+import { hbs } from 'ember-cli-htmlbars';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { setupFactoryGuy, make } from 'ember-data-factory-guy';
 import { render } from '@ember/test-helpers';
-import hbs from 'htmlbars-inline-precompile';
 
 module('Integration | Component | doi affiliation', function (hooks) {
   setupRenderingTest(hooks);
@@ -17,6 +17,6 @@ module('Integration | Component | doi affiliation', function (hooks) {
       hbs`{{doi-affiliation model=model creator=creator fragment=affiliation index=0}}`
     );
 
-    assert.dom('*').hasText('');
+    assert.dom(this.element).hasText('');
   });
 });

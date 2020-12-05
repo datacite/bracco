@@ -1,7 +1,7 @@
+import { hbs } from 'ember-cli-htmlbars';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
-import hbs from 'htmlbars-inline-precompile';
 import { setupFactoryGuy, makeList } from 'ember-data-factory-guy';
 
 module('Integration | Component | doi-list', function (hooks) {
@@ -13,7 +13,7 @@ module('Integration | Component | doi-list', function (hooks) {
     this.set('model', makeList('doi', 1));
     await render(hbs`{{doi-list model=model}}`);
 
-    // assert.dom('[data-test-doi]').hasText(this.model[0].doi);
+    assert.dom('[data-test-doi]').includesText(this.model[0].doi);
     assert.dom('[data-test-resource-type-general]').hasText('Dataset');
     assert
       .dom('[data-test-metadata]')
