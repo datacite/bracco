@@ -1,30 +1,30 @@
-{{#if (can "read repository" model provider=model.provider)}}
+{{#if (can "read repository" this.model provider=this.model.provider)}}
   <ApplicationHeader @default={{true}} />
 
   <div class="container-fluid">
-    {{#if (can "read provider" model.provider)}}
+    {{#if (can "read provider" this.model.provider)}}
       <ol class="breadcrumb">
         {{#if (can "read index")}}
           <li class="breadcrumb-item"><LinkTo @route="index">DataCite</LinkTo></li>
           <li class="breadcrumb-item"><LinkTo @route="providers">Members</LinkTo></li>
         {{/if}}
-        {{#if (and (can "read provider" model.provider.consortium) (eq model.provider.memberType "consortium_organization"))}}
-          <li class="breadcrumb-item"><LinkTo @route="providers.show.index" @model={{model.provider.consortium.id}}>{{model.provider.consortium.name}}</LinkTo></li>
-          <li class="breadcrumb-item"><LinkTo @route="providers.show.organizations" @model={{model.provider.consortium.id}}>Consortium Organizations</LinkTo></li>
+        {{#if (and (can "read provider" this.model.provider.consortium) (eq this.model.provider.memberType "consortium_organization"))}}
+          <li class="breadcrumb-item"><LinkTo @route="providers.show.index" @model={{this.model.provider.consortium.id}}>{{this.model.provider.consortium.name}}</LinkTo></li>
+          <li class="breadcrumb-item"><LinkTo @route="providers.show.organizations" @model={{this.model.provider.consortium.id}}>Consortium Organizations</LinkTo></li>
         {{/if}}
-        <li class="breadcrumb-item"><LinkTo @route="providers.show" @model={{model.provider.id}}>{{model.provider.name}}</LinkTo></li>
-        <li class="breadcrumb-item"><LinkTo @route="providers.show.repositories" @model={{model.provider.id}}>Repositories</LinkTo></li>
+        <li class="breadcrumb-item"><LinkTo @route="providers.show" @model={{this.model.provider.id}}>{{this.model.provider.name}}</LinkTo></li>
+        <li class="breadcrumb-item"><LinkTo @route="providers.show.repositories" @model={{this.model.provider.id}}>Repositories</LinkTo></li>
       </ol>
     {{/if}}
 
     <div id="show">
-      {{#if model.re3data}}
+      {{#if this.model.re3data}}
         <div class="pull-right">
-          <a href="{{model.re3data}}"><img class="img-responsive" src="{{model.badgeUrl}}"></a>
+          <a href="{{this.model.re3data}}"><img class="img-responsive" src="{{this.model.badgeUrl}}"></a>
         </div>
       {{/if}}
 
-      <h2 class="work">{{model.name}}{{#if (not model.isActive)}} <span class="small icon-warning">account not active</span>{{/if}}</h2>
+      <h2 class="work">{{this.model.name}}{{#if (not this.model.isActive)}} <span class="small icon-warning">account not active</span>{{/if}}</h2>
 
       <div class="tab-content nav-tabs-member">
         <BsNav

@@ -1,9 +1,9 @@
-{{#if creators}}
-  {{#each creators as |creator index|}}
+{{#if this.creators}}
+  {{#each this.creators as |creator index|}}
     {{#if (and creator.orcid (feature-flag 'showResearchers'))}}
-      <LinkTo @route="users.show" @model={{creator.orcid}}>{{creator.displayName~}}</LinkTo>{{format-creator creators index=index}}
+      <LinkTo @route="users.show" @model={{creator.orcid}}>{{creator.displayName~}}</LinkTo>{{format-creator this.creators index=index}}
     {{else}}
-      {{creator.displayName~}}{{format-creator creators index=index}}
+      {{creator.displayName~}}{{format-creator this.creators index=index}}
     {{/if}}
   {{/each}}
 {{/if}}

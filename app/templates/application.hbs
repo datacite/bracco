@@ -4,9 +4,7 @@
       <pg.bar @value={{random-number 90}} @type="info" />
     </BsProgress>
   </WhileLoading>
-
   <HeadLayout />
   {{outlet}}
-
-  <ApplicationFooter @model={{model}} />
+  <ApplicationFooter @model={{this.model}} />
 </div>

@@ -1,24 +1,24 @@
 <div class="pagination-centered">
   <ul class="pagination">
-    {{#if previousPage}}
+    {{#if this.previousPage}}
       <li class="arrow prev enabled-arrow">
-        <LinkTo @route={{link}} @query={{hash page=previousPage
+        <LinkTo @route={{this.link}} @query={{hash page=this.previousPage
           size=25
-          created=model.query.created
-          registered=model.query.registered  
-          state=model.query.state 
-          resource-type-id=model.query.resource-type-id 
-          schema-version=model.query.schema-version
-          prefix=model.query.prefix 
-          client-id=model.query.client-id 
-          source=model.query.source 
-          year=model.query.year 
-          region=model.query.region
-          member-type=model.query.member-type
-          organization-type=model.query.organization-type
-          focus-area=model.query.focus-area
-          link-check-status=model.query.link-check-status
-          software=model.query.software}}>&laquo;
+          created=this.model.query.created
+          registered=this.model.query.registered
+          state=this.model.query.state
+          resource-type-id=this.model.query.resource-type-id
+          schema-version=this.model.query.schema-version
+          prefix=this.model.query.prefix
+          client-id=this.model.query.client-id
+          source=this.model.query.source
+          year=this.model.query.year
+          region=this.model.query.region
+          member-type=this.model.query.member-type
+          organization-type=this.model.query.organization-type
+          focus-area=this.model.query.focus-area
+          link-check-status=this.model.query.link-check-status
+          software=this.model.query.software}}>&laquo;
         </LinkTo>
       </li>
     {{else}}
@@ -27,7 +27,7 @@
       </li>
     {{/if}}
 
-    {{#each pageItems as |item|}}
+    {{#each this.pageItems as |item|}}
       {{#if item.dots}}
         <li class="dots disabled">
           <span>...</span>
@@ -38,47 +38,47 @@
         </li>
       {{else}}
         <li class="page-number">
-          <LinkTo @route={{link}} @query={{hash page=item.page
+          <LinkTo @route={{this.link}} @query={{hash page=item.page
             size=25
-            created=model.query.created
-            registered=model.query.registered  
-            state=model.query.state 
-            resource-type-id=model.query.resource-type-id 
-            schema-version=model.query.schema-version
-            prefix=model.query.prefix 
-            client-id=model.query.client-id 
-            source=model.query.source 
-            year=model.query.year 
-            region=model.query.region
-            member-type=model.query.member-type
-            organization-type=model.query.organization-type
-            focus-area=model.query.focus-area
-            link-check-status=model.query.link-check-status
-            software=model.query.software}}>{{item.page}}
+            created=this.model.query.created
+            registered=this.model.query.registered
+            state=this.model.query.state
+            resource-type-id=this.model.query.resource-type-id
+            schema-version=this.model.query.schema-version
+            prefix=this.model.query.prefix
+            client-id=this.model.query.client-id
+            source=this.model.query.source
+            year=this.model.query.year
+            region=this.model.query.region
+            member-type=this.model.query.member-type
+            organization-type=this.model.query.organization-type
+            focus-area=this.model.query.focus-area
+            link-check-status=this.model.query.link-check-status
+            software=this.model.query.software}}>{{item.page}}
           </LinkTo>
         </li>
       {{/if}}
     {{/each}}
 
-    {{#if nextPage}}
+    {{#if this.nextPage}}
       <li class="arrow next enabled-arrow">
-        <LinkTo @route={{link}} @query={{hash page=nextPage
+        <LinkTo @route={{this.link}} @query={{hash page=this.nextPage
           size=25
-          created=model.query.created
-          registered=model.query.registered  
-          state=model.query.state 
-          resource-type-id=model.query.resource-type-id 
-          schema-version=model.query.schema-version
-          prefix=model.query.prefix 
-          client-id=model.query.client-id 
-          source=model.query.source 
-          year=model.query.year 
-          region=model.query.region
-          member-type=model.query.member-type
-          organization-type=model.query.organization-type
-          focus-area=model.query.focus-area
-          link-check-status=model.query.link-check-status
-          software=model.query.software}}>&raquo;
+          created=this.model.query.created
+          registered=this.model.query.registered
+          state=this.model.query.state
+          resource-type-id=this.model.query.resource-type-id
+          schema-version=this.model.query.schema-version
+          prefix=this.model.query.prefix
+          client-id=this.model.query.client-id
+          source=this.model.query.source
+          year=this.model.query.year
+          region=this.model.query.region
+          member-type=this.model.query.member-type
+          organization-type=this.model.query.organization-type
+          focus-area=this.model.query.focus-area
+          link-check-status=this.model.query.link-check-status
+          software=this.model.query.software}}>&raquo;
         </LinkTo>
       </li>
     {{else}}

@@ -26,8 +26,8 @@
           <BsForm
             @formLayout="horizontal"
             @horizontalLabelGridClass="col-md-3"
-            @model={{model}}
-            @onSubmit={{action 'submit' model}}
+            @model={{this.model}}
+            @onSubmit={{action 'submit' this.model}}
             @submitOnEnter={{true}} as |form|
           >
             <form.element
@@ -52,7 +52,7 @@
                 <button
                   class="btn btn-sm"
                   id="cancel"
-                  {{action 'cancel' model}}
+                  {{action 'cancel' this.model}}
                 >
                   Cancel
                 </button>

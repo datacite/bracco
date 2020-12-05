@@ -1,14 +1,14 @@
 <div class="content">
   <div class="row">
-    <BarChart @data={{json.providers}} @label="Member" @link="providers" />
-    <BarChart @data={{json.clients}} @label="Repository" @link="repositories" />
-    <BarChart @data={{json.dois}} @label="DOI" @link="dois" @cumulative={{false}} />
+    <BarChart @data={{this.json.providers}} @label="Member" @link="providers" />
+    <BarChart @data={{this.json.clients}} @label="Repository" @link="repositories" />
+    <BarChart @data={{this.json.dois}} @label="DOI" @link="dois" @cumulative={{false}} />
   </div>
 
-  {{#if (can "read messages" model)}}
+  {{#if (can "read messages" this.model)}}
     <div class="row">
       <div class="col-md-9">
-        {{#each flashMessages.queue as |flash|}}
+        {{#each this.flashMessages.queue as |flash|}}
           <FlashMessage @flash={{flash}} />
         {{/each}}
       </div>

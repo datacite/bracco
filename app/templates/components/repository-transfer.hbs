@@ -5,14 +5,14 @@
     </div>
 
     <BsForm @formLayout="horizontal" @horizontalLabelGridClass="col-md-3" @model={{this}} @onSubmit={{action "submit"}} @submitOnEnter={{false}} data-test-transfer-select as |form|>
-      <form.element @controlType="power-select" @id="target-id" @label="Member/Consortium" @value={{provider}} @helpText="Transfer this repository to another member/consortium. It can take up to one hour for the transfer to complete." @options={{providers}} @destination={{provider}} as |el|>
+      <form.element @controlType="power-select" @id="target-id" @label="Member/Consortium" @value={{this.provider}} @helpText="Transfer this repository to another member/consortium. It can take up to one hour for the transfer to complete." @options={{this.providers}} @destination={{this.provider}} as |el|>
         <el.control @onChange={{action "selectProvider"}} @allowClear={{true}} @searchEnabled={{true}} @search={{action "searchProvider"}} @placeholder="Type to search..." as |item|>
         {{item.name}}
         </el.control>
       </form.element>
 
       <div class="col-md-9 col-md-offset-3">
-        <button {{action "submit"}} class="btn btn-sm btn-fill" disabled={{isDisabled}} data-test-transfer-button >Transfer Repository</button>
+        <button {{action "submit"}} class="btn btn-sm btn-fill" disabled={{this.isDisabled}} data-test-transfer-button >Transfer Repository</button>
         <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
       </div>
     </BsForm>

@@ -2,7 +2,7 @@
   <input
     type="text"
     class="form-control alternate-identifier-field"
-    value={{fragment.alternateIdentifier}}
+    value={{this.fragment.alternateIdentifier}}
     placeholder="Alternate Identifier"
     oninput={{action 'updateAlternateIdentifier' value='target.value'}}
     data-test-alternate-identifier
@@ -10,7 +10,7 @@
   <span class="input-group-btn">
     <BsButton
       @outline={{true}}
-      @onClick={{action 'deleteAlternateIdentifier' index}}
+      @onClick={{action 'deleteAlternateIdentifier' this.index}}
     >
       <i class="fas fa-trash"></i>
     </BsButton>
@@ -28,11 +28,11 @@
 >
   {{#form.element
     controlType='power-select'
-    value=fragment.alternateIdentifierType
+    value=this.fragment.alternateIdentifierType
     helpText='The type of Alternate Identifier.'
-    options=alternateIdentifierTypeList
-    disabled=controlledIdentifierType
-    destination=fragment.alternateIdentifierType as |el|
+    options=this.alternateIdentifierTypeList
+    disabled=this.controlledIdentifierType
+    destination=this.fragment.alternateIdentifierType as |el|
   }}
     {{el.control
       onChange=(action 'selectAlternateIdentifierType')

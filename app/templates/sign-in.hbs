@@ -8,8 +8,8 @@
           <div class="register-card">
             <h3 class="title">Sign In</h3>
             
-            {{#if showGlobus}}
-              <a href="{{oidcAuthUrl}}" class="btn btn-block btn-social btn-globus btn-fill"><img id="globus-logo" src="{{globusLogoUrl}}" alt="Globus icon"/> Sign In with Globus</a>
+            {{#if this.showGlobus}}
+              <a href="{{this.oidcAuthUrl}}" class="btn btn-block btn-social btn-globus btn-fill"><img id="globus-logo" src="{{this.globusLogoUrl}}" alt="Globus icon" /> Sign In with Globus</a>
               
               <div id="or">or</div>
             {{/if}}
@@ -18,8 +18,8 @@
               <form.element @controlType="text" @property="identification" @id="account" @label="Account ID" @required={{false}} data-test-account/>
               <form.element @controlType="password" @property="password" @id="password" @label="Password" @required={{false}} data-test-password />
 
-              {{#if errorMessage}}
-                <div class="alert alert-danger">{{errorMessage}}</div>
+              {{#if this.errorMessage}}
+                <div class="alert alert-danger">{{this.errorMessage}}</div>
               {{/if}}
 
               <div>

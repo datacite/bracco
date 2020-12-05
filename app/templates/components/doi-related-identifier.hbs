@@ -2,16 +2,16 @@
   <input
     type="text"
     class="form-control related-identifier-field no-error
-      {{if (not fragment.relatedIdentifier) 'no-success'}}"
+      {{if (not this.fragment.relatedIdentifier) 'no-success'}}"
     placeholder="Related Identifier"
-    value={{fragment.relatedIdentifier}}
+    value={{this.fragment.relatedIdentifier}}
     oninput={{action 'updateRelatedIdentifier' value='target.value'}}
     data-test-related-identifier
   />
   <span class="input-group-btn">
     <BsButton
       @outline={{true}}
-      @onClick={{action 'deleteRelatedIdentifier' index}}
+      @onClick={{action 'deleteRelatedIdentifier' this.index}}
     >
       <i class="fas fa-trash"></i>
     </BsButton>
@@ -19,7 +19,7 @@
 </div>
 <div
   class="help-block help-block-fragment related-identifier-field no-error
-    {{if (not fragment.relatedIdentifier) 'no-success'}}"
+    {{if (not this.fragment.relatedIdentifier) 'no-success'}}"
 >
   Must be a globally unique identifier. Visit our support website for
   <a
@@ -42,11 +42,11 @@
 >
   {{#form.element
     controlType='power-select'
-    value=fragment.relatedIdentifierType
+    value=this.fragment.relatedIdentifierType
     helpText='The type of the Related Identifier.'
-    options=relatedIdentifierTypeList
-    disabled=controlledIdentifierType
-    destination=fragment.relatedIdentifierType as |el|
+    options=this.relatedIdentifierTypeList
+    disabled=this.controlledIdentifierType
+    destination=this.fragment.relatedIdentifierType as |el|
   }}
     {{el.control
       onChange=(action 'selectRelatedIdentifierType')
@@ -63,12 +63,12 @@
 <div class="power-select-fragment" data-test-related-relation-type>
   {{#form.element
     controlType='power-select'
-    value=fragment.relationType
+    value=this.fragment.relationType
     helpText='The type of the Relation.'
-    options=relationTypeList
-    disabled=disabled
+    options=this.relationTypeList
+    disabled=this.disabled
     allowClear=true
-    destination=fragment.relationType as |el|
+    destination=this.fragment.relationType as |el|
   }}
     <el.control
       @onChange={{action 'selectRelationType'}}
@@ -86,12 +86,12 @@
 <div class="power-select-fragment" data-test-related-resource-type>
   {{#form.element
     controlType='power-select'
-    value=fragment.resourceTypeGeneral
+    value=this.fragment.resourceTypeGeneral
     helpText='The general type of the related resource.'
-    options=resourceTypesGeneral
-    disabled=disabled
+    options=this.resourceTypesGeneral
+    disabled=this.disabled
     allowClear=true
-    destination=fragment.resourceTypeGeneral as |el|
+    destination=this.fragment.resourceTypeGeneral as |el|
   }}
     <el.control
       @onChange={{action 'selectResourceTypeGeneral'}}
@@ -111,7 +111,7 @@
   <input
     type="text"
     class="form-control related-metadata-scheme-field"
-    value={{fragment.relatedMetadataScheme}}
+    value={{this.fragment.relatedMetadataScheme}}
     placeholder="Related Metadata Scheme"
     oninput={{action 'updateRelatedMetadataScheme' value='target.value'}}
     data-test-related-metadata-scheme
@@ -127,7 +127,7 @@
   <input
     type="text"
     class="form-control related-scheme-uri-field"
-    value={{fragment.schemeUri}}
+    value={{this.fragment.schemeUri}}
     placeholder="Related Metadata Scheme URI"
     oninput={{action 'updateSchemeURI' value='target.value'}}
     data-test-related-scheme-uri
@@ -143,7 +143,7 @@
   <input
     type="text"
     class="form-control related-scheme-type-field"
-    value={{fragment.schemeType}}
+    value={{this.fragment.schemeType}}
     placeholder="Related Metadata Scheme Type"
     oninput={{action 'updateSchemeType' value='target.value'}}
     data-test-related-scheme-type

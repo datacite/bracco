@@ -1,39 +1,39 @@
 <div class="panel panel-transparent">
   <div class="panel-body">
     <div class="col-md-9 col-md-offset-3">
-      {{#if (and (eq model.memberType "consortium") (gt model.meta.consortiumOrganizationCount 0))}}
+      {{#if (and (eq this.model.memberType "consortium") (gt this.model.meta.consortiumOrganizationCount 0))}}
         <div class="alert alert-danger" role="alert">
-          You need to delete all consortium organizations before you can delete the {{uppercase model.id}} consortium.
+          You need to delete all consortium organizations before you can delete the {{uppercase this.model.id}} consortium.
         </div>
         <div class="pseudo-footer">
           <div class="btn-toolbar btn-sm pull-right">
-            <button {{action "cancel" model}} class="btn btn-sm">Cancel</button>
-            <LinkTo @route="providers.show.organizations" @model={{model.id}} class="btn btn-sm">All Consortium Organizations</LinkTo>
+            <button {{action "cancel" this.model}} class="btn btn-sm">Cancel</button>
+            <LinkTo @route="providers.show.organizations" @model={{this.model.id}} class="btn btn-sm">All Consortium Organizations</LinkTo>
           </div>
           <div class="clearfix"/>
         </div>
-      {{else if (gt model.meta.repositoryCount 0)}}
+      {{else if (gt this.model.meta.repositoryCount 0)}}
         <div class="alert alert-danger" role="alert">
-          You need to delete all repositories before you can delete the {{uppercase model.id}} provider.
+          You need to delete all repositories before you can delete the {{uppercase this.model.id}} provider.
         </div>
         <div class="pseudo-footer">
           <div class="btn-toolbar btn-sm pull-right">
-            <button {{action "cancel" model}} class="btn btn-sm">Cancel</button>
-            <LinkTo @route="providers.show.repositories" @model={{model.id}} class="btn btn-sm">All Repositories</LinkTo>
+            <button {{action "cancel" this.model}} class="btn btn-sm">Cancel</button>
+            <LinkTo @route="providers.show.repositories" @model={{this.model.id}} class="btn btn-sm">All Repositories</LinkTo>
           </div>
           <div class="clearfix"/>
         </div>
       {{else}}
-        <BsForm @formLayout="vertical" @model={{model}} @onSubmit={{action "submit" model}} @submitOnEnter={{true}} as |form|>
+        <BsForm @formLayout="vertical" @model={{this.model}} @onSubmit={{action "submit" this.model}} @submitOnEnter={{true}} as |form|>
           <form.group>
-            <label class="control-label">Are you sure you want to delete the {{uppercase model.id}} {{if (eq model.memberType "consortium_organization") 'organization' 'member'}}? This action cannot be undone.</label>
-            <form.element @controlType="text" @id="confirm-symbol" @property="confirmSymbol" @showValidationOn="input" @autofocus={{true}} @helpText="Please add the {{if (eq model.memberType "consortium_organization") 'Organization' 'Member'}} ID to delete." />
+            <label class="control-label">Are you sure you want to delete the {{uppercase this.model.id}} {{if (eq this.model.memberType "consortium_organization") 'organization' 'member'}}? This action cannot be undone.</label>
+            <form.element @controlType="text" @id="confirm-symbol" @property="confirmSymbol" @showValidationOn="input" @autofocus={{true}} @helpText="Please add the {{if (eq this.model.memberType "consortium_organization") 'Organization' 'Member'}} ID to delete." />
           </form.group>
           
           <div class="pseudo-footer">
             <div class="btn-toolbar pull-right">
-              <button {{action "cancel" model}} id="cancel" class="btn btn-sm">Cancel</button>
-              <button {{action "submit"}} id="delete" disabled={{v-get model 'confirmSymbol' 'isInvalid'}} class="btn btn-sm btn-fill">Delete</button>
+              <button {{action "cancel" this.model}} id="cancel" class="btn btn-sm">Cancel</button>
+              <button {{action "submit"}} id="delete" disabled={{v-get this.model 'confirmSymbol' 'isInvalid'}} class="btn btn-sm btn-fill">Delete</button>
             </div>
             <div class="clearfix"/>
           </div>

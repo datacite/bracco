@@ -11,9 +11,9 @@
         controlType='power-select'
         id='doi-language'
         formLayout='vertical'
-        disabled=disabled
-        value=language
-        options=languages as |el|
+        disabled=this.disabled
+        value=this.language
+        options=this.languages as |el|
       }}
         {{el.control
           onChange=(action 'selectLanguage')

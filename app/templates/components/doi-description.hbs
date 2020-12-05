@@ -1,21 +1,21 @@
 <div class="input-group">
   <textarea
     class="form-control description-field
-      {{if (not isSeriesInformation) 'no-error'}}"
+      {{if (not this.isSeriesInformation) 'no-error'}}"
     rows="8"
     style="resize:none"
     placeholder="Description"
-    value={{fragment.description}}
+    value={{this.fragment.description}}
     oninput={{action 'updateDescription' value='target.value'}}
     data-test-description
   ></textarea>
   <span class="input-group-addon">
-    <BsButton @outline={{true}} @onClick={{action 'deleteDescription' index}}>
+    <BsButton @outline={{true}} @onClick={{action 'deleteDescription' this.index}}>
       <i class="fas fa-trash pull-left"></i>
     </BsButton>
   </span>
 </div>
-{{#if isSeriesInformation}}
+{{#if this.isSeriesInformation}}
   <div class="help-block help-block-fragment description-field">
     Enter series information in the recommended format of series title, followed by comma and optional volume(issue), firstpage-lastpage
   </div>
@@ -32,10 +32,10 @@
 <div class="power-select-fragment">
   {{#form.element
     controlType='power-select'
-    value=fragment.descriptionType
-    options=descriptionTypes
-    destination=fragment.descriptionType
-    disabled=disabled as |el|
+    value=this.fragment.descriptionType
+    options=this.descriptionTypes
+    destination=this.fragment.descriptionType
+    disabled=this.disabled as |el|
   }}
     {{el.control
       class='description-types'
@@ -53,9 +53,9 @@
 <div class="power-select-fragment description-langs">
   {{#form.element
     controlType='power-select'
-    disabled=disabled
-    value=language
-    options=languages as |el|
+    disabled=this.disabled
+    value=this.language
+    options=this.languages as |el|
   }}
     {{el.control
       class='description-langs'

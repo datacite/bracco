@@ -1,13 +1,13 @@
 <div class="input-group">
   <input
     class="form-control date-field"
-    value={{fragment.date}}
+    value={{this.fragment.date}}
     onblur={{action 'updateDate' value='target.value'}}
     placeholder="Date"
     data-test-date
   />
   <span class="input-group-btn">
-    <BsButton @outline={{true}} @onClick={{action 'deleteDate' index}}>
+    <BsButton @outline={{true}} @onClick={{action 'deleteDate' this.index}}>
       <i class="fas fa-trash"></i>
     </BsButton>
   </span>
@@ -21,10 +21,10 @@
   {{#form.element
     controlType='power-select'
     helpText='Type of date.'
-    value=fragment.dateType
-    options=dateTypesList
-    destination=fragment.dateType
-    disabled=disabled as |el|
+    value=this.fragment.dateType
+    options=this.dateTypesList
+    destination=this.fragment.dateType
+    disabled=this.disabled as |el|
   }}
     {{el.control
       onChange=(action 'selectDateType')
@@ -39,7 +39,7 @@
 </div>
 <input
   class="form-control date-information-field"
-  value={{fragment.dateInformation}}
+  value={{this.fragment.dateInformation}}
   placeholder="Date Information"
   oninput={{action 'updateDateInformation' value='target.value'}}
   data-test-date

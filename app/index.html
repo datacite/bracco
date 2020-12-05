@@ -4,7 +4,6 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>{{content-for 'site-title'}}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   {{content-for "head"}}
@@ -18,11 +17,9 @@
     rel="stylesheet" crossorigin="anonymous" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/themes/prism.min.css" rel="stylesheet" type='text/css'>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/cc-icons/1.2.1/css/cc-icons.min.css" rel="stylesheet">
-  <link href="{{content-for 'cdn-url'}}" rel='stylesheet' type='text/css'>
   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
 
-  <script async defer data-domain="doi.datacite.org" src="https://plausible.io/js/plausible.js"></script>
   {{content-for "head-footer"}}
 </head>
 

@@ -1,7 +1,7 @@
 <div class="input-group">
-  <input type="text" placeholder="Size" class="form-control size-field" value={{fragment}} oninput={{action "updateSize" value="target.value"}} onblur={{action "selectSize" }} data-test-size/>    
+  <input type="text" placeholder="Size" class="form-control size-field" value={{this.fragment}} oninput={{action "updateSize" value="target.value"}} onblur={{action "selectSize" }} data-test-size />    
   <span class="input-group-btn">
-    <BsButton @outline={{true}} @onClick={{action "deleteSize" index}}><i class="fas fa-trash"></i></BsButton>
+    <BsButton @outline={{true}} @onClick={{action "deleteSize" this.index}}><i class="fas fa-trash"></i></BsButton>
   </span>
 </div>
 <hr />

@@ -13,14 +13,14 @@
           id='prefix-field'
           formLayout='vertical'
           property='prefix'
-          options=repositoryPrefixes
-          destination=prefix
+          options=this.repositoryPrefixes
+          destination=this.prefix
           searchEnabled=false as |el|
         }}
           {{#el.control
             onChange=(action 'selectPrefix')
             searchPlaceholder='Select Prefix'
-            optionLabelPath=id as |item|
+            optionLabelPath=this.id as |item|
           }}
             {{if item.prefix.id item.prefix.id item}}
           {{/el.control}}
@@ -74,10 +74,10 @@
       <RadioButton
         @radioId="draft-radio"
         @value="draft"
-        @groupValue={{state}}
+        @groupValue={{this.state}}
         @radioClass="radio"
         @changed={{action 'selectState'}}
-        @disabled={{draft}}
+        @disabled={{this.draft}}
       />
       Draft
       <span class="help-block">
@@ -88,10 +88,10 @@
       <RadioButton
         @radioId="registered-radio"
         @value="registered"
-        @groupValue={{state}}
+        @groupValue={{this.state}}
         @radioClass="radio"
         @changed={{action 'selectState'}}
-        @disabled={{registered}}
+        @disabled={{this.registered}}
       />
       Registered
       <span class="help-block">
@@ -102,10 +102,10 @@
       <RadioButton
         @radioId="findable-radio"
         @value="findable"
-        @groupValue={{state}}
+        @groupValue={{this.state}}
         @radioClass="radio"
         @changed={{action 'selectState'}}
-        @disabled={{findable}}
+        @disabled={{this.findable}}
       />
       Findable
       <span class="help-block">

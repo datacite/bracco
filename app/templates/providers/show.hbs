@@ -1,26 +1,26 @@
-{{#if (can "read provider" model)}}
+{{#if (can "read provider" this.model)}}
   <ApplicationHeader @default={{true}} />
 
   <div class="container-fluid">
-    {{#if (or (can "read index") (can "read provider" model.consortium))}}
+    {{#if (or (can "read index") (can "read provider" this.model.consortium))}}
       <ol class="breadcrumb">
         {{#if (can "read index")}}
           <li class="breadcrumb-item"><LinkTo @route="index">DataCite</LinkTo></li>
           <li class="breadcrumb-item"><LinkTo @route="providers">Members</LinkTo></li>
         {{/if}}
-        {{#if (and (can "read provider" model.consortium) (eq model.memberType "consortium_organization"))}}
-          <li class="breadcrumb-item"><LinkTo @route="providers.show.index" @model={{model.consortium.id}}>{{model.consortium.name}}</LinkTo></li>
-          <li class="breadcrumb-item"><LinkTo @route="providers.show.organizations" @model={{model.consortium.id}}>Consortium Organizations</LinkTo></li>
+        {{#if (and (can "read provider" this.model.consortium) (eq this.model.memberType "consortium_organization"))}}
+          <li class="breadcrumb-item"><LinkTo @route="providers.show.index" @model={{this.model.consortium.id}}>{{this.model.consortium.name}}</LinkTo></li>
+          <li class="breadcrumb-item"><LinkTo @route="providers.show.organizations" @model={{this.model.consortium.id}}>Consortium Organizations</LinkTo></li>
         {{/if}}
       </ol>
     {{/if}}
 
-    {{#if model.logoUrl}}
+    {{#if this.model.logoUrl}}
       <div class="pull-right">
-        <img class="img-small" alt="logo" src={{model.logoUrl}}>
+        <img class="img-small" alt="logo" src={{this.model.logoUrl}}>
       </div>
     {{/if}}
-    <h2 class="work">{{model.displayName}}{{#if (not model.isActive)}} <span class="small icon-warning">account not active</span>{{/if}}</h2>
+    <h2 class="work">{{this.model.displayName}}{{#if (not this.model.isActive)}} <span class="small icon-warning">account not active</span>{{/if}}</h2>
 
     <div class="tab-content nav-tabs-member">
       <BsNav
@@ -36,13 +36,13 @@
           <nav.link-to @route="providers.show.index" model="model.id" class="nav-link">Settings</nav.link-to>
         </nav.item>
 
-        {{#if (eq model.memberType "consortium")}}
+        {{#if (eq this.model.memberType "consortium")}}
           <nav.item>
             <nav.link-to @route="providers.show.organizations" class="nav-link">Consortium Organizations</nav.link-to>
           </nav.item>
         {{/if}}
 
-        {{#if (not-eq model.memberType "member_only")}}
+        {{#if (not-eq this.model.memberType "member_only")}}
           <nav.item>
             <nav.link-to @route="providers.show.repositories" model="model.id" class="nav-link">Repositories</nav.link-to>
           </nav.item>

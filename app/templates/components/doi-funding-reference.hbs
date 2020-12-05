@@ -6,11 +6,11 @@
 <div class="power-select-fragment" data-test-funder-name>
   {{#form.element
     controlType='power-select'
-    options=funders
-    value=fragment.funderName
-    disabled=disabled
+    options=this.funders
+    value=this.fragment.funderName
+    disabled=this.disabled
     allowClear=true
-    destination=fragment.funderName as |el|
+    destination=this.fragment.funderName as |el|
   }}
     {{#el.control
       searchEnabled=true
@@ -22,7 +22,7 @@
       allowClear=true
       noMatchesMessage='Press ENTER to add new funder name.' as |item|
     }}
-      {{if item.name item.name fragment.funderName}}
+      {{if item.name item.name this.fragment.funderName}}
     {{/el.control}}
     <div class="help-block">
       Funder names and identifiers are provided by the
@@ -46,7 +46,7 @@
   <input
     type="text"
     class="form-control funder-identifier-field"
-    value={{fragment.funderIdentifier}}
+    value={{this.fragment.funderIdentifier}}
     placeholder="Funder Identifier"
     disabled={{this.isCrossrefId}}
     oninput={{action 'updateFunderIdentifier' value='target.value'}}
@@ -58,7 +58,7 @@
   <span class="input-group-btn">
     <BsButton
       @outline={{true}}
-      @onClick={{action 'deleteFundingReference' index}}
+      @onClick={{action 'deleteFundingReference' this.index}}
     >
       <i class="fas fa-trash"></i>
     </BsButton>
@@ -72,11 +72,11 @@
 <div class="power-select-fragment" data-test-funder-identifier-type>
   {{#form.element
     controlType='power-select'
-    value=fragment.funderIdentifierType
+    value=this.fragment.funderIdentifierType
     helpText='The type of funder identifier, one of Crossref Funder ID, GRID, ISNI, or ROR.'
-    options=funderIdentifierTypeList
-    disabled=isCrossrefId
-    destination=fragment.funderIdentifierType as |el|
+    options=this.funderIdentifierTypeList
+    disabled=this.isCrossrefId
+    destination=this.fragment.funderIdentifierType as |el|
   }}
     {{el.control
       onChange=(action 'selectFunderIdentifierType')
@@ -93,7 +93,7 @@
 <input
   type="text"
   class="form-control award-number-field"
-  value={{fragment.awardNumber}}
+  value={{this.fragment.awardNumber}}
   placeholder="Award Number"
   oninput={{action 'updateAwardNumber' value='target.value'}}
   data-test-award-number
@@ -109,7 +109,7 @@
 <input
   type="text"
   class="form-control award-title-field"
-  value={{fragment.awardTitle}}
+  value={{this.fragment.awardTitle}}
   placeholder="Award Title"
   oninput={{action 'updateAwardTitle' value='target.value'}}
   data-test-award-title
@@ -125,7 +125,7 @@
 <input
   type="text"
   class="form-control award-uri-field"
-  value={{fragment.awardUri}}
+  value={{this.fragment.awardUri}}
   placeholder="Award URI"
   oninput={{action 'updateAwardUri' value='target.value'}}
   data-test-award-uri

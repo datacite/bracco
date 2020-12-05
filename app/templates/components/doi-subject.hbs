@@ -1,4 +1,4 @@
-{{#if (gt index 0)}}
+{{#if (gt this.index 0)}}
   <div class="power-select-label">
     <label for="subject" class="subtitle">
       Subject
@@ -8,10 +8,10 @@
 <div class="power-select-fragment" doi-subject>
   {{#form.element
     controlType='power-select'
-    options=subjects
-    value=fragment.subject
-    disabled=disabled
-    destination=fragment.subject as |el|
+    options=this.subjects
+    value=this.fragment.subject
+    disabled=this.disabled
+    destination=this.fragment.subject as |el|
   }}
     {{el.control
       searchEnabled=true
@@ -47,7 +47,7 @@
     placeholder="Subject Scheme"
     class="form-control subject-scheme-field"
     disabled={{this.oecdSelected}}
-    value={{fragment.subjectScheme}}
+    value={{this.fragment.subjectScheme}}
     oninput={{action 'updateSubjectScheme' value='target.value'}}
     data-test-subject-scheme
   />
@@ -65,12 +65,12 @@
     placeholder="Subject Scheme URI"
     class="form-control subject-scheme-uri-field"
     disabled={{this.oecdSelected}}
-    value={{fragment.subjectSchemeUri}}
+    value={{this.fragment.subjectSchemeUri}}
     oninput={{action 'updateSubjectSchemeUri' value='target.value'}}
     data-test-subject-uri
   />
   <span class="input-group-btn">
-    <BsButton @outline={{true}} @onClick={{action 'deleteSubject' index}}>
+    <BsButton @outline={{true}} @onClick={{action 'deleteSubject' this.index}}>
       <i class="fas fa-trash"></i>
     </BsButton>
   </span>

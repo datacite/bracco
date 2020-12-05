@@ -1,11 +1,11 @@
-{{#if (gt index 0)}}
+{{#if (gt this.index 0)}}
   <div class="input-group" style="padding-top:30px;">
     <div class="power-select-fragment">
       {{#form.element
         controlType='power-select'
-        disabled=disabled
-        value=fragment.name
-        options=organizations as |el|
+        disabled=this.disabled
+        value=this.fragment.name
+        options=this.organizations as |el|
       }}
         {{#el.control
           onChange=(action 'selectRor')
@@ -14,7 +14,7 @@
           searchPlaceholder='Type to search...'
           allowClear=true as |item|
         }}
-          {{if item.name item.name fragment.name}}
+          {{if item.name item.name this.fragment.name}}
         {{/el.control}}
       {{/form.element}}
     </div>
@@ -22,7 +22,7 @@
       class="input-group-addon"
       style="vertical-align:top;padding-top:3px;background-color:white;"
     >
-      <BsButton @outline={{true}} @onClick={{action 'deleteAffiliation' index}}>
+      <BsButton @outline={{true}} @onClick={{action 'deleteAffiliation' this.index}}>
         <i class="fas fa-trash pull-left"></i>
       </BsButton>
     </span>
@@ -31,9 +31,9 @@
   <div class="power-select-fragment" data-test-affiliation>
     {{#form.element
       controlType='power-select'
-      disabled=disabled
-      value=fragment.name
-      options=organizations as |el|
+      disabled=this.disabled
+      value=this.fragment.name
+      options=this.organizations as |el|
     }}
       {{#el.control
         onChange=(action 'selectRor')
@@ -42,16 +42,16 @@
         searchPlaceholder='Type to search...'
         allowClear=true as |item|
       }}
-        {{if item.name item.name fragment.name}}
+        {{if item.name item.name this.fragment.name}}
       {{/el.control}}
     {{/form.element}}
   </div>
 {{/if}}
-{{#if fragment.affiliationIdentifier}}
+{{#if this.fragment.affiliationIdentifier}}
   <input
     type="text"
     class="form-control affiliation-identifier-field no-error no-success"
-    value={{fragment.affiliationIdentifier}}
+    value={{this.fragment.affiliationIdentifier}}
     readonly="true"
   />
 {{/if}}

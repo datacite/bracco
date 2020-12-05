@@ -6,11 +6,11 @@
     <div class="label-vertical">
       Technical format of the resource.
     </div>
-    {{#if showFormats}}
-      {{#each model.formats as |format index|}}
+    {{#if this.showFormats}}
+      {{#each this.model.formats as |format index|}}
         <DoiFormat @fragment={{format}} @form={{form}} @index={{index}} />
       {{/each}}
-      {{#if (lte model.formats.length 5)}}
+      {{#if (lte this.model.formats.length 5)}}
         <BsButton
           @class="btn-sm"
           @id="add-format"
@@ -19,11 +19,11 @@
         >
           <i class="fas fa-plus"></i>
           Add
-          {{if (gt model.formats.length 0) 'another '}}
+          {{if (gt this.model.formats.length 0) 'another '}}
           format
         </BsButton>
       {{/if}}
-      {{#if (gt model.formats.length 0)}}
+      {{#if (gt this.model.formats.length 0)}}
         <BsButton
           @id="toggle-formats"
           @class="btn-sm"
@@ -32,10 +32,10 @@
         >
           <i class="fas fa-eye-slash"></i>
           Hide
-          {{pluralize model.formats.length 'format'}}
+          {{pluralize this.model.formats.length 'format'}}
         </BsButton>
       {{/if}}
-    {{else if (gt model.formats.length 0)}}
+    {{else if (gt this.model.formats.length 0)}}
       <BsButton
         @id="toggle-formats"
         @class="btn-sm"
@@ -44,7 +44,7 @@
       >
         <i class="fas fa-eye"></i>
         Show
-        {{pluralize model.formats.length 'format'}}
+        {{pluralize this.model.formats.length 'format'}}
       </BsButton>
     {{else}}
       <BsButton

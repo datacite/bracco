@@ -1,12 +1,12 @@
-{{#if model}}
+{{#if this.model}}
   <div class="row">
     <div class="col-md-3">
-      {{#if (and (can "update prefix" model) (not model.repositories))}}
+      {{#if (and (can "update prefix" this.model) (not this.model.repositories))}}
         <div class="panel facets add">
           <div class="panel-body">
             <div class="btn-toolbar">
               <div class="btn-group btn-group-sm">
-                <LinkTo @route="providers.show.prefixes.show.delete" @models={{array model.provider.id model.prefix.id}} class="btn btn-warning"><i class="fas fa-pencil-alt"></i> Remove Prefix
+                <LinkTo @route="providers.show.prefixes.show.delete" @models={{array this.model.provider.id this.model.prefix.id}} class="btn btn-warning"><i class="fas fa-pencil-alt"></i> Remove Prefix
                 </LinkTo>
               </div>
             </div>
@@ -15,21 +15,21 @@
       {{/if}}
     </div>
     <div class="col-md-9">
-      <h2 class="work">{{model.prefix.id}}</h2>
+      <h2 class="work">{{this.model.prefix.id}}</h2>
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-3">
-      <RepositorySidebar @model={{model}} />
+      <RepositorySidebar @model={{this.model}} />
     </div>
     <div class="col-md-9">
       <div class="panel panel-transparent">
         <div class="panel-body">
-          <h5>{{pluralize model.repositories.length "Repository" without-count=true}}</h5>
-          {{#if model.repositories}}
-            {{#each model.repositories as |repository|}}
-              <LinkTo @route="repositories.show.prefixes.show" @models={{array repository.id model.prefix.id}}>{{repository.name}}</LinkTo><br>
+          <h5>{{pluralize this.model.repositories.length "Repository" without-count=true}}</h5>
+          {{#if this.model.repositories}}
+            {{#each this.model.repositories as |repository|}}
+              <LinkTo @route="repositories.show.prefixes.show" @models={{array repository.id this.model.prefix.id}}>{{repository.name}}</LinkTo><br>
             {{/each}}
           {{else}}
             <span class="icon-warning">No repositories found.</span>

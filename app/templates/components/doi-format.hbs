@@ -1,7 +1,7 @@
 <div class="input-group">
-  <input type="text" placeholder="Format" class="form-control format-field" value={{fragment}} oninput={{action "updateFormat" value="target.value"}} onblur={{action "selectFormat" }} data-test-format/>    
+  <input type="text" placeholder="Format" class="form-control format-field" value={{this.fragment}} oninput={{action "updateFormat" value="target.value"}} onblur={{action "selectFormat" }} data-test-format />    
   <span class="input-group-btn">
-    <BsButton @outline={{true}} @onClick={{action "deleteFormat" index}}><i class="fas fa-trash"></i></BsButton>
+    <BsButton @outline={{true}} @onClick={{action "deleteFormat" this.index}}><i class="fas fa-trash"></i></BsButton>
   </span>
 </div>
 <hr />

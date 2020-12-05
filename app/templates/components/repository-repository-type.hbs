@@ -1,11 +1,11 @@
-{{#if (gt index 0)}}
+{{#if (gt this.index 0)}}
   <div class="input-group">
     <div class="power-select-fragment">
       {{#form.element
         controlType='power-select'
-        disabled=disabled
-        value=repositoryType
-        options=repositoryTypes as |el|
+        disabled=this.disabled
+        value=this.repositoryType
+        options=this.repositoryTypes as |el|
       }}
         <el.control
           @onChange={{action 'selectRepositoryType'}}
@@ -21,7 +21,7 @@
     <span class="input-group-addon" style="vertical-align:top;padding-top:3px;">
       <BsButton
         @outline={{true}}
-        @onClick={{action 'deleteRepositoryType' index}}
+        @onClick={{action 'deleteRepositoryType' this.index}}
       >
         <i class="fas fa-trash pull-left"></i>
       </BsButton>
@@ -31,9 +31,9 @@
   <div class="power-select-fragment">
     {{#form.element
       controlType='power-select'
-      disabled=disabled
-      value=repositoryType
-      options=repositoryTypes as |el|
+      disabled=this.disabled
+      value=this.repositoryType
+      options=this.repositoryTypes as |el|
     }}
       <el.control
         @onChange={{action 'selectRepositoryType'}}

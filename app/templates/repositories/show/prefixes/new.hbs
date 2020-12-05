@@ -8,7 +8,7 @@
     <BsForm
       @formLayout="horizontal"
       @horizontalLabelGridClass="col-md-3"
-      @model={{model.repository-prefix}}
+      @model={{this.model.repository-prefix}}
       @onSubmit={{action 'submit'}} as |form|
     >
       <form.element
@@ -16,11 +16,11 @@
         @id="provider-prefix-add"
         @label="Prefix"
         @property="provider-prefix"
-        @options={{provider-prefixes}} as |el|
+        @options={{this.provider-prefixes}} as |el|
       >
         <el.control
           @onChange={{action 'selectPrefix'}}
-          @selected={{prefix}}
+          @selected={{this.prefix}}
           @search={{action 'searchPrefix'}}
           @optionLabelPath="id"
           @searchField="id"
@@ -34,7 +34,7 @@
         <div class="btn-toolbar">
           <button
             type="submit"
-            disabled={{disabled}}
+            disabled={{this.disabled}}
             class="btn btn-sm btn-fill"
           >
             Assign Prefix

@@ -2,21 +2,21 @@
   <label class="control-label col-md-3" data-test-contributors>Contributors</label>
   <div class="col-md-9">
     <div class="label-vertical">The institution or person responsible for collecting, managing, distributing, or otherwise contributing to the development of the resource.</div>
-    {{#if showContributors}}
-      {{#each model.contributors as |contributor index|}}
-        <DoiContributor @model={{model}} @fragment={{contributor}} @form={{form}} @index={{index}} />
+    {{#if this.showContributors}}
+      {{#each this.model.contributors as |contributor index|}}
+        <DoiContributor @model={{this.model}} @fragment={{contributor}} @form={{form}} @index={{index}} />
       {{/each}}
 
-      {{#if (lte model.contributors.length 24)}}
-        <BsButton @id="add-contributor" @class="btn-sm" @outline={{true}} @onClick={{action "addContributor"}}><i class="fas fa-plush"></i> Add {{if (gt model.contributors.length 0) "another "}} contributor</BsButton>
+      {{#if (lte this.model.contributors.length 24)}}
+        <BsButton @id="add-contributor" @class="btn-sm" @outline={{true}} @onClick={{action "addContributor"}}><i class="fas fa-plush"></i> Add {{if (gt this.model.contributors.length 0) "another "}} contributor</BsButton>
       {{/if}}
 
-      {{#if (gt model.contributors.length 0)}}
-        <BsButton @id="toggle-contributors" @class="btn-sm" @outline={{true}} @onClick={{action "toggleContributors"}}><i class="fas fa-eye-slash"></i> Hide {{pluralize model.contributors.length 'contributor'}}</BsButton>
+      {{#if (gt this.model.contributors.length 0)}}
+        <BsButton @id="toggle-contributors" @class="btn-sm" @outline={{true}} @onClick={{action "toggleContributors"}}><i class="fas fa-eye-slash"></i> Hide {{pluralize this.model.contributors.length 'contributor'}}</BsButton>
       {{/if}}
     {{else}}
-      {{#if (gt model.contributors.length 0)}}
-        <BsButton @id="toggle-contributors" @class="btn-sm" @outline={{true}} @onClick={{action "toggleContributors"}}><i class="fas fa-eye"></i> Show {{pluralize model.contributors.length 'contributor'}}</BsButton>
+      {{#if (gt this.model.contributors.length 0)}}
+        <BsButton @id="toggle-contributors" @class="btn-sm" @outline={{true}} @onClick={{action "toggleContributors"}}><i class="fas fa-eye"></i> Show {{pluralize this.model.contributors.length 'contributor'}}</BsButton>
       {{else}}
          <BsButton @class="btn-sm btn-warning" @id="add-contributor" @outline={{true}} @onClick={{action "addContributor"}}><i class="fas fa-plus"></i> Add contributor</BsButton>
       {{/if}}

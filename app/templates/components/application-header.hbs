@@ -1,9 +1,9 @@
 <BsNavbar
-  @type={{type}} 
+  @type={{this.type}} 
   @fluid={{true}} 
-  @collapsed={{collapsed}} 
-  @onCollapse={{action (mut collapsed) true}} 
-  @onExpand={{action (mut collapsed) false}} as |navbar|>
+  @collapsed={{this.collapsed}} 
+  @onCollapse={{action (mut this.collapsed) true}} 
+  @onExpand={{action (mut this.collapsed) false}} as |navbar|>
 
   <div class="navbar-header">
     {{navbar.toggle}}
@@ -12,23 +12,23 @@
   <navbar.content>
     <navbar.nav class="navbar-right" as |nav|>
       <nav.item><a target="_blank" rel="noopener" href="https://support.datacite.org">Support</a></nav.item>
-      {{#if user}}
-        {{#if session.isAuthenticated}}
+      {{#if this.user}}
+        {{#if this.session.isAuthenticated}}
           <nav.dropdown as |dd|>
             <dd.toggle id="account_menu_link">
-              {{#if currentUser.isUser}}
-                {{currentUser.name}}
+              {{#if this.currentUser.isUser}}
+                {{this.currentUser.name}}
               {{else}}
-                {{uppercase currentUser.uid}}
+                {{uppercase this.currentUser.uid}}
               {{/if}}
               <span class="caret"></span>
             </dd.toggle> 
             <dd.menu class="navbar-menu" as |menu|>
               <menu.item class="dropdown-header">
-                Role: {{currentUser.roleName}}
+                Role: {{this.currentUser.roleName}}
               </menu.item>
               <menu.item>
-                <DynamicLink @params={{settings}}><i class="fas fa-cog"></i> Settings</DynamicLink>
+                <DynamicLink @params={{this.settings}}><i class="fas fa-cog"></i> Settings</DynamicLink>
               </menu.item>
               <menu.divider/>
               <menu.item>

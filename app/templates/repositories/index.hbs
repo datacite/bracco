@@ -3,7 +3,7 @@
 
   <div class="container-fluid">
     <IndexHeader />
-    <RepositoryList @model={{model}} @link="repositories" @searchable={{true}} />
+    <RepositoryList @model={{this.model}} @link="repositories" @searchable={{true}} />
   </div>
 {{else}}
   <ApplicationHeader />

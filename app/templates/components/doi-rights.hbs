@@ -1,11 +1,11 @@
 <div class="power-select-fragment" data-test-rights>
   {{#form.element
     controlType='power-select'
-    options=spdxLicenseList
-    value=fragment.rights
-    disabled=disabled
+    options=this.spdxLicenseList
+    value=this.fragment.rights
+    disabled=this.disabled
     allowClear=true
-    destination=fragment.rights as |el|
+    destination=this.fragment.rights as |el|
   }}
     {{#el.control
       searchEnabled=true
@@ -17,7 +17,7 @@
       allowClear=true
       noMatchesMessage='Press ENTER to add a new license.' as |item|
     }}
-      {{if item.name item.name fragment.rights}}
+      {{if item.name item.name this.fragment.rights}}
     {{/el.control}}
     <div class="help-block">
       The list of standard licenses is provided by
@@ -38,7 +38,7 @@
     type="text"
     placeholder="Rights URI"
     class="form-control rights-uri-field"
-    value={{fragment.rightsUri}}
+    value={{this.fragment.rightsUri}}
     disabled={{this.isSpdxId}}
     oninput={{action 'updateRightsUri' value='target.value'}}
     data-test-rights-uri
@@ -49,7 +49,7 @@
   <span class="input-group-btn">
     <BsButton
       @outline={{true}}
-      @onClick={{action 'deleteRights' index}}
+      @onClick={{action 'deleteRights' this.index}}
       data-test-delete-rights
     >
       <i class="fas fa-trash"></i>

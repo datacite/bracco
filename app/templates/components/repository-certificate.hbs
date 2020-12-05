@@ -1,11 +1,11 @@
-{{#if (gt index 0)}}
+{{#if (gt this.index 0)}}
   <div class="input-group">
     <div class="power-select-fragment">
       {{#form.element
         controlType='power-select'
-        disabled=disabled
-        value=certificate
-        options=certificates as |el|
+        disabled=this.disabled
+        value=this.certificate
+        options=this.certificates as |el|
       }}
         {{el.control
           onChange=(action 'selectCertificate')
@@ -17,7 +17,7 @@
       {{/form.element}}
     </div>
     <span class="input-group-addon" style="vertical-align:top;padding-top:3px;">
-      <BsButton @outline={{true}} @onClick={{action 'deleteCertificate' index}}>
+      <BsButton @outline={{true}} @onClick={{action 'deleteCertificate' this.index}}>
         <i class="fas fa-trash pull-left"></i>
       </BsButton>
     </span>
@@ -26,9 +26,9 @@
   <div class="power-select-fragment">
     {{#form.element
       controlType='power-select'
-      disabled=disabled
-      value=certificate
-      options=certificates as |el|
+      disabled=this.disabled
+      value=this.certificate
+      options=this.certificates as |el|
     }}
       {{el.control
         onChange=(action 'selectCertificate')

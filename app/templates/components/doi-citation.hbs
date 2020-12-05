@@ -1,8 +1,8 @@
-{{#if model.publicationYear}}
+{{#if this.model.publicationYear}}
   <div id="citation" class="input-group pull-right">
     <select onchange={{action 'selectStyle' value="target.value"}}>
-      {{#each-in citationFormats as |key value|}}
-        <option name="citation" value={{key}} selected={{eq citation key}}>{{value}}</option>
+      {{#each-in this.citationFormats as |key value|}}
+        <option name="citation" value={{key}} selected={{eq this.citation key}}>{{value}}</option>
       {{/each-in}}
     </select>
   </div>
@@ -11,7 +11,7 @@
 
   <div class="panel panel-transparent">
     <div class="panel-body" data-test-citation>
-      {{format-text citationOutput}}
+      {{format-text this.citationOutput}}
     </div>
   </div>
 {{/if}}

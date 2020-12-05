@@ -1,20 +1,17 @@
 <label for="geoLocationPlace" class="subtitle">Geolocation Place</label>
 <div class="input-group">
-  <input placeholder="Geolocation Place" class="form-control geo-location-place-field" value={{fragment.geoLocationPlace}}
-    oninput={{action "updateGeoLocationPlace" value="target.value"}} data-test-geo-location-place/>    
+  <input placeholder="Geolocation Place" class="form-control geo-location-place-field" value={{this.fragment.geoLocationPlace}} oninput={{action "updateGeoLocationPlace" value="target.value"}} data-test-geo-location-place />    
   <span class="input-group-btn">
-    <BsButton @outline={{true}} @onClick={{action "deleteGeoLocation" index}} data-test-delete-rights><i class="fas fa-trash"></i> </BsButton >
+    <BsButton @outline={{true}} @onClick={{action "deleteGeoLocation" this.index}} data-test-delete-rights><i class="fas fa-trash"></i> </BsButton>
   </span>
 </div>
 <div class="help-block help-block-fragment geo-location-place-field">Description of a geographic location.</div>
 
 <label for="geoLocationPoint" class="subtitle">Geolocation Point</label>
 
-<input placeholder="Geolocation Point Longitude" helpText="Longitudinal dimension of point." class="form-control geo-location-point-longitude-field" value={{fragment.geoLocationPoint.pointLongitude}} 
-    oninput={{action "updateGeoLocationPointLongitude" value="target.value"}} data-test-geo-location-point-longitude/>
+<input placeholder="Geolocation Point Longitude" helpText="Longitudinal dimension of point." class="form-control geo-location-point-longitude-field" value={{this.fragment.geoLocationPoint.pointLongitude}} oninput={{action "updateGeoLocationPointLongitude" value="target.value"}} data-test-geo-location-point-longitude />
 
-<input placeholder="Geolocation Point Latitude" helpText="Longitudinal dimension of point." class="form-control geo-location-point-latitude-field" value={{fragment.geoLocationPoint.pointLatitude}} 
-    oninput={{action "updateGeoLocationPointLatitude" value="target.value"}} data-test-geo-location-point-latitude/>
+<input placeholder="Geolocation Point Latitude" helpText="Longitudinal dimension of point." class="form-control geo-location-point-latitude-field" value={{this.fragment.geoLocationPoint.pointLatitude}} oninput={{action "updateGeoLocationPointLatitude" value="target.value"}} data-test-geo-location-point-latitude />
 
 <div class="help-block help-block-fragment geo-location-point-field}}">
   A point location in space. A point contains a single longitude-latitude pair.
@@ -23,17 +20,13 @@
 
 <label for="geoLocationPlace" class="subtitle">Geolocation Box</label>
 
-<input placeholder="Geolocation Box West Longitude" helpText="Longitudinal dimension of point." class="form-control geo-location-box-westBoundLongitude-field" value={{fragment.geoLocationBox.westBoundLongitude}} 
-    oninput={{action "updateGeoLocationBoxWestLongitude" value="target.value"}} data-test-geo-location-box-westBoundLongitude/>
+<input placeholder="Geolocation Box West Longitude" helpText="Longitudinal dimension of point." class="form-control geo-location-box-westBoundLongitude-field" value={{this.fragment.geoLocationBox.westBoundLongitude}} oninput={{action "updateGeoLocationBoxWestLongitude" value="target.value"}} data-test-geo-location-box-westBoundLongitude />
 
-<input placeholder="Geolocation Box East Longitude" helpText="Longitudinal dimension of box." class="form-control geo-location-box-eastBoundLongitude-field" value={{fragment.geoLocationBox.eastBoundLongitude}} 
-    oninput={{action "updateGeoLocationBoxEastLongitude" value="target.value"}} data-test-geo-location-box-eastBoundLongitude/>
+<input placeholder="Geolocation Box East Longitude" helpText="Longitudinal dimension of box." class="form-control geo-location-box-eastBoundLongitude-field" value={{this.fragment.geoLocationBox.eastBoundLongitude}} oninput={{action "updateGeoLocationBoxEastLongitude" value="target.value"}} data-test-geo-location-box-eastBoundLongitude />
 
-<input placeholder="Geolocation Box North Latitude" helpText="Longitudinal dimension of box." class="form-control geo-location-box-northBoundLatitude-field" value={{fragment.geoLocationBox.northBoundLatitude}} 
-    oninput={{action "updateGeoLocationBoxNorthLatitude" value="target.value"}} data-test-geo-location-box-northBoundLatitude/>
+<input placeholder="Geolocation Box North Latitude" helpText="Longitudinal dimension of box." class="form-control geo-location-box-northBoundLatitude-field" value={{this.fragment.geoLocationBox.northBoundLatitude}} oninput={{action "updateGeoLocationBoxNorthLatitude" value="target.value"}} data-test-geo-location-box-northBoundLatitude />
 
-<input placeholder="Geolocation Box South Latitude" helpText="Longitudinal dimension of box." class="form-control geo-location-box-southBoundLatitude-field" value={{fragment.geoLocationBox.southBoundLatitude}} 
-    oninput={{action "updateGeoLocationBoxSouthLatitude" value="target.value"}} data-test-geo-location-point-southBoundLatitude/>
+<input placeholder="Geolocation Box South Latitude" helpText="Longitudinal dimension of box." class="form-control geo-location-box-southBoundLatitude-field" value={{this.fragment.geoLocationBox.southBoundLatitude}} oninput={{action "updateGeoLocationBoxSouthLatitude" value="target.value"}} data-test-geo-location-point-southBoundLatitude />
 
 <div class="help-block help-block-fragment geo-location-box-field}}">
   The spatial limits of a box. A box is defined by two geographic points. Left low corner and right upper corner. Each point is defined by its longitude and latitude.

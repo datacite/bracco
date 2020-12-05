@@ -1,7 +1,7 @@
 <div
   class="form-group
     {{if
-      (v-get model 'types.resourceTypeGeneral' 'isInvalid')
+      (v-get this.model 'types.resourceTypeGeneral' 'isInvalid')
       'has-error'
       'has-feedback'
     }}"
@@ -17,10 +17,10 @@
       controlType='power-select'
       id='resource-type-general'
       property='types.resourceTypeGeneral'
-      options=resourceTypesGeneral
-      disabled=disabled
+      options=this.resourceTypesGeneral
+      disabled=this.disabled
       helpText='If none of the provided values matches, use Other and specify the resource type in the field below.'
-      destination=resourceTypeGeneral as |el|
+      destination=this.resourceTypeGeneral as |el|
     }}
       <el.control
         @onChange={{action 'selectResourceTypeGeneral'}}
@@ -46,7 +46,7 @@
         helpText='A description of the resource, the preferred format is a single term of some detail.'
         placeholder='Resource Type'
         required=false
-        disabled=disabled
+        disabled=this.disabled
       }}
     </div>
   </div>

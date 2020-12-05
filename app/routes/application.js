@@ -30,6 +30,16 @@ export default Route.extend(ApplicationRouteMixin, {
       });
     }
   },
+  afterModel() {
+    set(this, 'headData.title', ENV.SITE_TITLE || 'DataCite Fabrica');
+    set(this, 'headData.dataDomain', ENV.DATA_DOMAIN);
+    set(
+      this,
+      'headData.contentUrl',
+      (ENV.CDN_URL || 'https://datacite.org') +
+        '/stylesheets/doi.css?version=1.0'
+    );
+  },
   sessionAuthenticated() {
     if (!this.isTokenAuthenticating) {
       this._super(...arguments);

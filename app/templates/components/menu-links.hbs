@@ -1,9 +1,9 @@
 <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="services">Services <span class="caret"></span></a>
 <ul class="dropdown-menu" role="menu">
-  {{#if navmenuTitle}}
-    <li class="dropdown-header">{{navmenuTitle}}</li>
+  {{#if this.navmenuTitle}}
+    <li class="dropdown-header">{{this.navmenuTitle}}</li>
   {{/if}}
-  {{#each links as |link| }}
+  {{#each this.links as |link| }}
     {{#if (eq link.name "divider")}}
       <li class="divider"></li>
     {{else}}

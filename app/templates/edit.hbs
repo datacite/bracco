@@ -13,8 +13,8 @@
           <BsForm
             @formLayout="horizontal"
             @horizontalLabelGridClass="col-md-3"
-            @model={{model}}
-            @onSubmit={{action 'submit' model}} as |form|
+            @model={{this.model}}
+            @onSubmit={{action 'submit' this.model}} as |form|
           >
             <form.element
               @controlType="text"
@@ -30,8 +30,8 @@
               @label="Organization identifier (optional)"
               @property="rorId"
               @optionLabelPath="name"
-              @options={{organizations}}
-              @destination={{rorId}}
+              @options={{this.organizations}}
+              @destination={{this.rorId}}
               @helpText="Organization identifiers are provided by the Research Organization Registry (ROR)." as |el|
             >
               <el.control
@@ -41,7 +41,7 @@
                 @searchPlaceholder="Type to search..."
                 @allowClear={{true}} as |item|
               >
-                {{if item.name item.name model.rorId}}
+                {{if item.name item.name this.model.rorId}}
               </el.control>
             </form.element>
             <form.element
@@ -84,8 +84,8 @@
               @label="Country (optional)"
               @property="country"
               @optionLabelPath="name"
-              @options={{countries}}
-              @destination={{country}}
+              @options={{this.countries}}
+              @destination={{this.country}}
               @helpText="Country where the member is located." as |el|
             >
               <el.control
@@ -100,7 +100,7 @@
               </el.control>
             </form.element>
             <div class="col-md-9 col-md-offset-3">
-              {{#if (is-empty (provider-form-errors model))}}
+              {{#if (is-empty (provider-form-errors this.model))}}
                 <button
                   type="submit"
                   id="update-provider"
@@ -112,7 +112,7 @@
               {{else}}
                 <BsAlert @dismissible={{false}} @type="danger">
                   To save this member, first resolve the errors with these fields:
-                  {{provider-form-errors model}}
+                  {{provider-form-errors this.model}}
                   .
                 </BsAlert>
                 <button
@@ -124,7 +124,7 @@
                   Update Account
                 </button>
               {{/if}}
-              <button class="btn btn-sm" id="cancel" {{action 'cancel' model}}>
+              <button class="btn btn-sm" id="cancel" {{action 'cancel' this.model}}>
                 Cancel
               </button>
             </div>

@@ -1,16 +1,16 @@
-{{#if (gt index 0)}}
+{{#if (gt this.index 0)}}
   <div>
     <div class="input-group">
       <input
         type="text"
         class="form-control title-field"
-        value={{fragment.title}}
+        value={{this.fragment.title}}
         placeholder="Title"
         oninput={{action 'updateTitle' value='target.value'}}
         data-test-title
       />
       <span class="input-group-btn">
-        <BsButton @outline={{true}} @onClick={{action 'deleteTitle' index}}>
+        <BsButton @outline={{true}} @onClick={{action 'deleteTitle' this.index}}>
           <i class="fas fa-trash"></i>
         </BsButton>
       </span>
@@ -21,7 +21,7 @@
     <input
       type="text"
       class="form-control title-field"
-      value={{fragment.title}}
+      value={{this.fragment.title}}
       placeholder="Title"
       oninput={{action 'updateTitle' value='target.value'}}
       data-test-title
@@ -36,10 +36,10 @@
 <div class="power-select-fragment title-type">
   {{#form.element
     controlType='power-select'
-    value=fragment.titleType
-    options=titleTypes
-    destination=fragment.titleType
-    disabled=disabled as |el|
+    value=this.fragment.titleType
+    options=this.titleTypes
+    destination=this.fragment.titleType
+    disabled=this.disabled as |el|
   }}
     {{el.control
       onChange=(action 'selectTitleType')
@@ -56,9 +56,9 @@
 <div class="power-select-fragment title-lang">
   {{#form.element
     controlType='power-select'
-    disabled=disabled
-    value=language
-    options=languages as |el|
+    disabled=this.disabled
+    value=this.language
+    options=this.languages as |el|
   }}
     {{el.control
       onChange=(action 'selectLanguage')

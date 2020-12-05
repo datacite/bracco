@@ -1,24 +1,24 @@
 <div class="content">
   <div class="row content">
-    {{#if (eq model.memberType "consortium")}}
-      <BarChart @data={{json.providers}} @label="Organization" @model={{model}} @link="providers.show.organizations" />
+    {{#if (eq this.model.memberType "consortium")}}
+      <BarChart @data={{this.json.providers}} @label="Organization" @model={{this.model}} @link="providers.show.organizations" />
     {{/if}}
-    {{#if (not-eq model.memberType "member_only")}}
-      <BarChart @data={{json.clients}} @label="Repository" @model={{model}} @link="providers.show.repositories" />
-      <BarChart @data={{json.dois}} @label="DOI" @model={{model}} @link="providers.show.dois" @cumulative={{false}} />
+    {{#if (not-eq this.model.memberType "member_only")}}
+      <BarChart @data={{this.json.clients}} @label="Repository" @model={{this.model}} @link="providers.show.repositories" />
+      <BarChart @data={{this.json.dois}} @label="DOI" @model={{this.model}} @link="providers.show.dois" @cumulative={{false}} />
     {{else}}
       <div class="panel panel-transparent">
         <div class="panel-body">
-          {{model.displayName}} does not provide DOI registration services.
+          {{this.model.displayName}} does not provide DOI registration services.
         </div>
       </div>
     {{/if}}
   </div>
 
-  {{#if (can "read messages" model)}}
+  {{#if (can "read messages" this.model)}}
     <div class="row">
       <div class="col-md-9">
-        {{#each flashMessages.queue as |flash|}}
+        {{#each this.flashMessages.queue as |flash|}}
           <FlashMessage @flash={{flash}} />
         {{/each}}
       </div>

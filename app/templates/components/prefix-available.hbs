@@ -1,12 +1,12 @@
-{{#if (and (can "write prefix" model.prefixes) prefixesAvailable)}}
+{{#if (and (can "write prefix" this.model.prefixes) this.prefixesAvailable)}}
   <div class="panel facets">
     <div class="panel-body">
       <div class="btn-toolbar">
         <div class="btn-group btn-group-sm">
-          {{#if model.repository}}
-            <LinkTo @route={{link}} @model={{model.repository.id}} class="btn btn-warning" @id="assign-prefix"><i class="fas fa-link"></i>Assign Prefix</LinkTo>
+          {{#if this.model.repository}}
+            <LinkTo @route={{this.link}} @model={{this.model.repository.id}} class="btn btn-warning" @id="assign-prefix"><i class="fas fa-link"></i>Assign Prefix</LinkTo>
           {{else}}
-            <LinkTo @route={{link}} @model={{model.repository.id}} class="btn btn-warning" @id="assign-prefix"><i class="fas fa-link"></i>Assign Prefix</LinkTo>
+            <LinkTo @route={{this.link}} @model={{this.model.repository.id}} class="btn btn-warning" @id="assign-prefix"><i class="fas fa-link"></i>Assign Prefix</LinkTo>
           {{/if}}
         </div>
       </div>
