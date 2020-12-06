@@ -1,5 +1,6 @@
 import Model, { belongsTo, hasMany, attr } from '@ember-data/model';
-import { not, reads, computed } from '@ember/object/computed';
+import { computed } from '@ember/object';
+import { not, reads } from '@ember/object/computed';
 // import ENV from 'bracco/config/environment';
 import { validator, buildValidations } from 'ember-cp-validations';
 import { fragment } from 'ember-data-model-fragments/attributes';
@@ -161,9 +162,7 @@ export default Model.extend(Validations, {
     return this.id.toUpperCase();
   }),
   formattedBillingInformation: computed(
-    'billingInformation.country.{code,name}',
-    'billingInformation.state.name',
-    'billingInformation.{address,city,postCode}',
+    'billingInformation.{address,city,postCode,country.code,country.name,state.name}',
     function () {
       if (this.billingInformation) {
         return addressFormatter.format(

@@ -1,3 +1,5 @@
+/* eslint-disable ember/no-get */
+
 import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { Ability } from 'ember-can';
@@ -46,10 +48,10 @@ export default Ability.extend({
           if (
             w(
               'crossref.citations medra.citations kisti.citations jalc.citations op.citations'
-            ).includes(this.model.repository.id) ||
+            ).includes(this.get('model.repository.id')) ||
             w(
               'crossref.citations medra.citations kisti.citations jalc.citations op.citations'
-            ).includes(this.model.query['client-id'])
+            ).includes(this.get('model.query.client-id'))
           ) {
             return false;
           } else {
@@ -58,15 +60,15 @@ export default Ability.extend({
         case 'consortium_admin':
           return (
             this.currentUser.provider_id ===
-              this.model.repository.provider.consortium.id ||
+              this.get('model.repository.provider.consortium.id') ||
             this.currentUser.provider_id ===
-              this.repository.provider.consortium.id
+              this.get('repository.provider.consortium.id')
           );
         case 'provider_admin':
           return (
             this.currentUser.provider_id ===
-              this.model.repository.provider.id ||
-            this.currentUser.provider_id === this.repository.provider.id
+              this.get('model.repository.provider.id') ||
+            this.currentUser.provider_id === this.get('repository.provider.id')
           );
         default:
           return false;
@@ -82,7 +84,7 @@ export default Ability.extend({
           if (
             w(
               'crossref.citations medra.citations kisti.citations jalc.citations op.citations'
-            ).includes(this.repository.id)
+            ).includes(this.get('repository.id'))
           ) {
             return false;
           } else {
@@ -91,7 +93,7 @@ export default Ability.extend({
         case 'consortium_admin':
           return true;
         case 'provider_admin':
-          return true; // this.currentUser.provider_id === this.repository.provider.id;
+          return true; // this.currentUser.provider_id === this.get('repository.provider.id');
         default:
           return false;
       }
@@ -104,7 +106,7 @@ export default Ability.extend({
       if (
         w(
           'crossref.citations medra.citations kisti.citations jalc.citations op.citations'
-        ).includes(this.model.id)
+        ).includes(this.get('model.id'))
       ) {
         return false;
       } else {
@@ -114,7 +116,9 @@ export default Ability.extend({
           case 'provider_admin':
             return true;
           case 'client_admin':
-            return this.currentUser.client_id === this.model.repository.id;
+            return (
+              this.currentUser.client_id === this.get('model.repository.id')
+            );
           default:
             return false;
         }
@@ -128,7 +132,7 @@ export default Ability.extend({
       if (
         w(
           'crossref.citations medra.citations kisti.citations jalc.citations op.citations'
-        ).includes(this.model.query['client-id'])
+        ).includes(this.get('model.query.client-id'))
       ) {
         return false;
       } else {
@@ -137,8 +141,8 @@ export default Ability.extend({
             return true;
           case 'client_admin':
             return (
-              this.currentUser.client_id === this.model.query['client-id'] ||
-              this.model.id
+              this.currentUser.client_id ===
+                this.get('model.query.client-id') || this.get('model.id')
             );
           default:
             return false;
@@ -153,7 +157,7 @@ export default Ability.extend({
       if (
         w(
           'crossref.citations medra.citations kisti.citations jalc.citations op.citations'
-        ).includes(this.model.query['client-id'])
+        ).includes(this.get('model.query.client-id'))
       ) {
         return false;
       } else {
@@ -162,8 +166,8 @@ export default Ability.extend({
             return true;
           case 'client_admin':
             return (
-              this.currentUser.client_id === this.model.query['client-id'] ||
-              this.model.id
+              this.currentUser.client_id ===
+                this.get('model.query.client-id') || this.get('model.id')
             );
           default:
             return false;
@@ -179,7 +183,7 @@ export default Ability.extend({
         case 'staff_admin':
           return true;
         case 'client_admin':
-          return this.currentUser.client_id === this.model.repository.id;
+          return this.currentUser.client_id === this.get('model.repository.id');
         default:
           return false;
       }
@@ -192,7 +196,7 @@ export default Ability.extend({
       if (
         w(
           'crossref.citations medra.citations kisti.citations jalc.citations op.citations'
-        ).includes(this.model.repository.id)
+        ).includes(this.get('model.repository.id'))
       ) {
         return false;
       } else {
@@ -200,7 +204,9 @@ export default Ability.extend({
           case 'staff_admin':
             return true;
           case 'client_admin':
-            return this.currentUser.client_id === this.model.repository.id;
+            return (
+              this.currentUser.client_id === this.get('model.repository.id')
+            );
           default:
             return false;
         }
@@ -214,7 +220,7 @@ export default Ability.extend({
       if (
         w(
           'crossref.citations medra.citations kisti.citations jalc.citations op.citations'
-        ).includes(this.model.repository.id)
+        ).includes(this.get('model.repository.id'))
       ) {
         return false;
       } else {
@@ -222,7 +228,9 @@ export default Ability.extend({
           case 'staff_admin':
             return true;
           case 'client_admin':
-            return this.currentUser.client_id === this.model.repository.id;
+            return (
+              this.currentUser.client_id === this.get('model.repository.id')
+            );
           default:
             return false;
         }
@@ -239,7 +247,7 @@ export default Ability.extend({
         case 'client_admin':
           return (
             this.currentUser.client_id === 'demo.datacite' &&
-            this.currentUser.client_id === this.model.repository.id
+            this.currentUser.client_id === this.get('model.repository.id')
           );
         default:
           return false;
@@ -257,14 +265,15 @@ export default Ability.extend({
         case 'consortium_admin':
           return (
             this.currentUser.provider_id ===
-            this.model.repository.provider.consortium.id
+            this.model.get('repository.provider.consortium.id')
           );
         case 'provider_admin':
           return (
-            this.currentUser.provider_id === this.model.repository.provider.id
+            this.currentUser.provider_id ===
+            this.model.get('repository.provider.id')
           );
         case 'client_admin':
-          return this.currentUser.client_id === this.model.repository.id;
+          return this.currentUser.client_id === this.get('model.repository.id');
         case 'user':
           return this.model.state === 'findable';
         default:
@@ -283,14 +292,15 @@ export default Ability.extend({
         case 'consortium_admin':
           return (
             this.currentUser.provider_id ===
-            this.model.repository.provider.consortium.id
+            this.model.get('repository.provider.consortium.id')
           );
         case 'provider_admin':
           return (
-            this.currentUser.provider_id === this.model.repository.provider.id
+            this.currentUser.provider_id ===
+            this.model.get('repository.provider.id')
           );
         case 'client_admin':
-          return this.currentUser.client_id === this.model.repository.id;
+          return this.currentUser.client_id === this.get('model.repository.id');
         case 'user':
           return this.model.state === 'findable';
         default:

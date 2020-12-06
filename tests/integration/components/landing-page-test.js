@@ -13,17 +13,5 @@ module('Integration | Component | landing page', function (hooks) {
       /^DataCite Fabrica+/.test(find('*').textContent.trim()),
       'begins with "DataCite Fabrica"'
     );
-
-    // Template block usage:
-    await render(hbs`
-      {{#landing-page}}
-
-      {{/landing-page}}
-    `);
-
-    assert.ok(
-      /^DataCite Fabrica+/.test(find('*').textContent.trim()),
-      'begins with "DataCite Fabrica"'
-    );
   });
 });

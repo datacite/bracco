@@ -1,5 +1,6 @@
 import Model, { belongsTo, attr } from '@ember-data/model';
-import { computed, not } from '@ember/object/computed';
+import { computed } from '@ember/object';
+import { reads, not } from '@ember/object/computed';
 import ENV from 'bracco/config/environment';
 import { array, fragment } from 'ember-data-model-fragments/attributes';
 import { validator, buildValidations } from 'ember-cp-validations';
@@ -26,14 +27,14 @@ const Validations = buildValidations({
   confirmSymbol: [
     validator('presence', {
       presence: true,
-      disabled: computed('model', function () {
+      disabled: reads('model', function () {
         return this.model.isNew;
       })
     }),
     validator('confirmation', {
       on: 'symbol',
       message: 'Repository ID does not match',
-      disabled: computed('model', function () {
+      disabled: reads('model', function () {
         return this.model.isNew;
       })
     })
@@ -41,13 +42,13 @@ const Validations = buildValidations({
   passwordInput: [
     validator('presence', {
       presence: true,
-      disabled: computed('model', function () {
+      disabled: reads('model', function () {
         return this.model.keepPassword;
       })
     }),
     validator('length', {
       min: 8,
-      disabled: computed('model', function () {
+      disabled: reads('model', function () {
         return this.model.keepPassword;
       })
     })
@@ -55,14 +56,14 @@ const Validations = buildValidations({
   confirmPasswordInput: [
     validator('presence', {
       presence: true,
-      disabled: computed('model', function () {
+      disabled: reads('model', function () {
         return this.model.keepPassword;
       })
     }),
     validator('confirmation', {
       on: 'passwordInput',
       message: 'Password does not match',
-      disabled: computed('model', function () {
+      disabled: reads('model', function () {
         return this.model.keepPassword;
       })
     })

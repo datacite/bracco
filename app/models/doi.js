@@ -1,5 +1,6 @@
 import Model, { belongsTo, attr } from '@ember-data/model';
-import { computed, equal } from '@ember/object/computed';
+import { computed } from '@ember/object';
+import { equal } from '@ember/object/computed';
 import { validator, buildValidations } from 'ember-cp-validations';
 import ENV from 'bracco/config/environment';
 import { fragmentArray, array } from 'ember-data-model-fragments/attributes';
@@ -67,7 +68,7 @@ const Validations = buildValidations({
   publisher: [
     validator('presence', {
       presence: true,
-      disabled: computed('model.mode', 'model.state', function () {
+      disabled: computed('model.{mode,state}', function () {
         return (
           this.model.state === 'draft' ||
           !['new', 'edit'].includes(this.model.mode)
@@ -92,7 +93,7 @@ const Validations = buildValidations({
       format: 'YYYY',
       errorFormat: 'YYYY',
       message: 'Must be a year between 1000 and 2021.',
-      disabled: computed('model.mode', 'model.state', function () {
+      disabled: computed('model.{mode,state}', function () {
         return (
           this.model.state === 'draft' ||
           !['new', 'edit'].includes(this.model.mode)
@@ -103,7 +104,7 @@ const Validations = buildValidations({
   'types.resourceTypeGeneral': [
     validator('presence', {
       presence: true,
-      disabled: computed('model.mode', 'model.state', function () {
+      disabled: computed('model.{mode,state}', function () {
         return (
           this.model.state === 'draft' ||
           !['new', 'edit'].includes(this.model.mode)
@@ -112,7 +113,7 @@ const Validations = buildValidations({
     }),
     validator('resource-type', {
       presence: true,
-      disabled: computed('model.mode', 'model.state', function () {
+      disabled: computed('model.{mode,state}', function () {
         return (
           this.model.state === 'draft' ||
           !['new', 'edit'].includes(this.model.mode)
@@ -124,7 +125,7 @@ const Validations = buildValidations({
     validator('presence', {
       presence: true,
       message: 'Please include valid metadata.',
-      disabled: computed('model.mode', 'model.state', function () {
+      disabled: computed('model.{mode,state}', function () {
         return (
           !['upload', 'modify'].includes(this.model.mode) ||
           this.model.state === 'draft'
@@ -134,7 +135,7 @@ const Validations = buildValidations({
     validator('metadata', {
       allowBlank: true,
       dependentKeys: ['model.doi'],
-      disabled: computed('model.mode', 'model.state', function () {
+      disabled: computed('model.{mode,state}', function () {
         return (
           this.model.state === 'draft' ||
           !['upload', 'modify'].includes(this.model.mode)
@@ -194,12 +195,12 @@ export default Model.extend(Validations, {
   viewCount: attr('number'),
   downloadCount: attr('number'),
 
-  identifier: computed('doi', 'repository', function () {
+  identifier: computed('doi', 'repository.id', function () {
     if (
       ENV.API_URL == 'https://api.datacite.org' ||
       w(
         'crossref.citations medra.citations kisti.citations jalc.citations op.citations'
-      ).includes(this.repository.id)
+      ).includes(this.repository.get('id'))
     ) {
       return 'https://doi.org/' + this.doi;
     } else {
@@ -207,12 +208,12 @@ export default Model.extend(Validations, {
     }
   }),
   isDraft: computed.equal('state', 'draft'),
-  showCitation: computed('client', 'registered', 'repository', function () {
+  showCitation: computed('client', 'registered', 'repository.id', function () {
     return (
       this.registered ||
       w(
         'crossref.citations medra.citations kisti.citations jalc.citations op.citations'
-      ).includes(this.repository.id)
+      ).includes(this.repository.get('id'))
     );
   }),
   schemaVersionString: computed('schemaVersion', function () {

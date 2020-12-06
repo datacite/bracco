@@ -7,13 +7,12 @@ module('Integration | Component | page-numbers', function (hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function (assert) {
-    // Template block usage:
     await render(hbs`
       {{#page-numbers}}
         template block text
       {{/page-numbers}}
     `);
 
-    assert.dom('*').hasText('« 1 »');
+    assert.dom(this.element).hasText('« 1 »');
   });
 });

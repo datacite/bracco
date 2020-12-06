@@ -10,14 +10,5 @@ module('Integration | Component | index show', function (hooks) {
     await render(hbs`{{index-show}}`);
 
     assert.dom('*').hasText('');
-
-    // Template block usage:
-    await render(hbs`
-      {{#index-show}}
-        
-      {{/index-show}}
-    `);
-
-    assert.dom('*').hasText('');
   });
 });

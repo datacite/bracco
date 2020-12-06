@@ -14,20 +14,7 @@ module('Integration | Component | repository dois transfer', function (hooks) {
     await render(hbs`{{repository-dois-transfer model=model}}`);
 
     assert
-      .dom('*')
-      .hasText(
-        'Transfer DOIs Repository Transfer all DOIs to this repository. It can take up to one hour for the transfer to complete. Transfer DOIs Cancel'
-      );
-
-    // Template block usage:
-    await render(hbs`
-      {{#repository-dois-transfer model=model}}
-        
-      {{/repository-dois-transfer}}
-    `);
-
-    assert
-      .dom('*')
+      .dom(this.element)
       .hasText(
         'Transfer DOIs Repository Transfer all DOIs to this repository. It can take up to one hour for the transfer to complete. Transfer DOIs Cancel'
       );

@@ -7,7 +7,6 @@ module('Integration | Component | prefix new', function (hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function (assert) {
-    // Template block usage:
     await render(hbs`
       {{#prefix-new}}
         template block text
@@ -15,7 +14,7 @@ module('Integration | Component | prefix new', function (hooks) {
     `);
 
     assert
-      .dom('*')
+      .dom(this.element)
       .hasText(
         'From First prefix in range of new prefixes provided by CNRI. To Last prefix in range of new prefixes provided by CNRI. Add Prefixes Cancel'
       );

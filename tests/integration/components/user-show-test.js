@@ -7,7 +7,6 @@ module('Integration | Component | user-show', function (hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function (assert) {
-    // Template block usage:
     await render(hbs`
       <UserShow>
         template block text

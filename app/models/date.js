@@ -1,7 +1,7 @@
 import { attr } from '@ember-data/model';
 import MF from 'ember-data-model-fragments';
 import { validator, buildValidations } from 'ember-cp-validations';
-import { computed, not } from '@ember/object/computed';
+import { reads, not } from '@ember/object/computed';
 
 const Validations = buildValidations({
   dateType: [
@@ -16,7 +16,7 @@ const Validations = buildValidations({
   date: [
     validator('date-format', {
       allowBlank: true,
-      disabled: computed('model.state', function () {
+      disabled: reads('model.state', function () {
         return this.model.state === 'draft';
       })
     })

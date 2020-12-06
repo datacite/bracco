@@ -7,7 +7,6 @@ module('Integration | Component | doi upload', function (hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function (assert) {
-    // Template block usage:
     await render(hbs`
       {{#doi-upload}}
         template block text

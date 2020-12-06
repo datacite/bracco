@@ -13,17 +13,5 @@ module('Integration | Component | doi media', function (hooks) {
       /There are no media+/.test(find('*').textContent.trim()),
       'begins with "There are no media"'
     );
-
-    // Template block usage:
-    await render(hbs`
-      {{#doi-media}}
-
-      {{/doi-media}}
-    `);
-
-    assert.ok(
-      /There are no media+/.test(find('*').textContent.trim()),
-      'begins with "There are no media"'
-    );
   });
 });

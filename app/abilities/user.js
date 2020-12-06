@@ -1,3 +1,5 @@
+/* eslint-disable ember/no-get */
+
 import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { Ability } from 'ember-can';
@@ -13,7 +15,7 @@ export default Ability.extend({
       case 'provider_admin':
       case 'client_admin':
       case 'user':
-        return this.currentUser.uid === this.model.id;
+        return this.currentUser.uid === this.get('model.id');
       default:
         return false;
     }

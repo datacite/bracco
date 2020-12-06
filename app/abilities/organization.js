@@ -1,3 +1,5 @@
+/* eslint-disable ember/no-get */
+
 import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { Ability } from 'ember-can';
@@ -15,7 +17,7 @@ export default Ability.extend({
         case 'consortium_admin':
           return (
             this.currentUser.provider_id ===
-            this.model.organizations.query['consortium-id']
+            this.get('model.organizations.query.consortium-id')
           );
         default:
           return false;
@@ -30,7 +32,9 @@ export default Ability.extend({
         case 'staff_admin':
           return true;
         case 'consortium_admin':
-          return this.currentUser.provider_id === this.model.consortium.id;
+          return (
+            this.currentUser.provider_id === this.get('model.consortium.id')
+          );
         default:
           return false;
       }
@@ -44,9 +48,11 @@ export default Ability.extend({
         case 'staff_admin':
           return true;
         case 'consortium_admin':
-          return this.currentUser.provider_id === this.model.consortium.id;
+          return (
+            this.currentUser.provider_id === this.get('model.consortium.id')
+          );
         case 'provider_admin':
-          return this.currentUser.provider_id === this.model.id;
+          return this.currentUser.provider_id === this.get('model.id');
         default:
           return false;
       }
@@ -60,9 +66,11 @@ export default Ability.extend({
         case 'staff_admin':
           return true;
         case 'consortium_admin':
-          return this.currentUser.provider_id === this.model.consortium.id;
+          return (
+            this.currentUser.provider_id === this.get('model.consortium.id')
+          );
         case 'provider_admin':
-          return this.currentUser.provider_id === this.model.id;
+          return this.currentUser.provider_id === this.get('model.id');
         default:
           return false;
       }

@@ -1,6 +1,6 @@
 import { typeOf } from '@ember/utils';
 import { htmlSafe } from '@ember/template';
-import Component from '@glimmer/component';
+import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 import ENV from 'bracco/config/environment';
 

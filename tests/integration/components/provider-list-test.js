@@ -9,13 +9,12 @@ module('Integration | Component | provider-list', function (hooks) {
   setupFactoryGuy(hooks);
 
   test('it renders', async function (assert) {
-    // Template block usage:
     await render(hbs`
       {{#provider-list model=model link="repositories.index"}}
 
       {{/provider-list}}
     `);
 
-    assert.dom('*').hasText('No members found.');
+    assert.dom(this.element).hasText('No members found.');
   });
 });
