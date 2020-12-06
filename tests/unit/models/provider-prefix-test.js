@@ -1,5 +1,6 @@
 import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
+import { get } from '@ember/object';
 import { run } from '@ember/runloop';
 
 module('Unit | Model | provider-prefix', function (hooks) {
@@ -17,8 +18,11 @@ module('Unit | Model | provider-prefix', function (hooks) {
       .lookup('service:store')
       .modelFor('providerPrefix');
 
-    // lookup the relationship on the repository model
-    const relationship = ProviderPrefix.relationshipsByName.provider;
+    // lookup the relationship on the provider model
+    /* eslint-disable-next-line ember/no-get */
+    const relationship = get(ProviderPrefix, 'relationshipsByName').get(
+      'provider'
+    );
 
     assert.equal(
       relationship.key,
@@ -37,8 +41,11 @@ module('Unit | Model | provider-prefix', function (hooks) {
       .lookup('service:store')
       .modelFor('providerPrefix');
 
-    // lookup the relationship on the repository model
-    const relationship = ProviderPrefix.relationshipsByName.prefix;
+    // lookup the relationship on the prefix model
+    /* eslint-disable-next-line ember/no-get */
+    const relationship = get(ProviderPrefix, 'relationshipsByName').get(
+      'prefix'
+    );
 
     assert.equal(relationship.key, 'prefix', 'has relationship with prefix');
     assert.equal(
@@ -54,7 +61,10 @@ module('Unit | Model | provider-prefix', function (hooks) {
       .modelFor('providerPrefix');
 
     // lookup the relationship on the consortiumOrganization model
-    const relationship = ProviderPrefix.relationshipsByName.repositories;
+    /* eslint-disable-next-line ember/no-get */
+    const relationship = get(ProviderPrefix, 'relationshipsByName').get(
+      'repositories'
+    );
 
     assert.equal(
       relationship.key,

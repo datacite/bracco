@@ -1,5 +1,6 @@
 import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
+import { get } from '@ember/object';
 import { run } from '@ember/runloop';
 
 module('Unit | Model | doi', function (hooks) {
@@ -16,7 +17,8 @@ module('Unit | Model | doi', function (hooks) {
     const Doi = this.owner.lookup('service:store').modelFor('doi');
 
     // lookup the relationship on the doi model
-    const relationship = Doi.relationshipsByName.repository;
+    /* eslint-disable-next-line ember/no-get */
+    const relationship = get(Doi, 'relationshipsByName').get('repository');
 
     assert.equal(
       relationship.key,

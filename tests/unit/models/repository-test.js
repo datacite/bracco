@@ -1,5 +1,6 @@
 import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
+import { get } from '@ember/object';
 import { run } from '@ember/runloop';
 
 module('Unit | Model | repository', function (hooks) {
@@ -13,12 +14,13 @@ module('Unit | Model | repository', function (hooks) {
   });
 
   test('should belong to a provider', function (assert) {
-    const repository = this.owner
+    const Repository = this.owner
       .lookup('service:store')
       .modelFor('repository');
 
     // lookup the relationship on the repository model
-    const relationship = repository.relationshipsByName.provider;
+    /* eslint-disable-next-line ember/no-get */
+    const relationship = get(Repository, 'relationshipsByName').get('provider');
 
     assert.equal(
       relationship.key,

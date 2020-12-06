@@ -1,5 +1,6 @@
 import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
+import { get } from '@ember/object';
 import { run } from '@ember/runloop';
 
 module('Unit | Model | prefix', function (hooks) {
@@ -17,7 +18,8 @@ module('Unit | Model | prefix', function (hooks) {
     const Prefix = this.owner.lookup('service:store').modelFor('prefix');
 
     // lookup the relationship on the providers model
-    const relationship = Prefix.relationshipsByName.providers;
+    /* eslint-disable-next-line ember/no-get */
+    const relationship = get(Prefix, 'relationshipsByName').get('providers');
 
     assert.equal(
       relationship.key,
@@ -35,7 +37,8 @@ module('Unit | Model | prefix', function (hooks) {
     const Prefix = this.owner.lookup('service:store').modelFor('prefix');
 
     // lookup the relationship on the consortiumOrganization model
-    const relationship = Prefix.relationshipsByName.repositories;
+    /* eslint-disable-next-line ember/no-get */
+    const relationship = get(Prefix, 'relationshipsByName').get('repositories');
 
     assert.equal(
       relationship.key,
