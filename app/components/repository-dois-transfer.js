@@ -22,7 +22,7 @@ export default Component.extend({
 
   searchRepository(query) {
     let self = this;
-    if (this.currentUser.get('isAdmin')) {
+    if (this.currentUser.isAdmin) {
       this.store
         .query('repository', { query, sort: 'name', 'page[size]': 100 })
         .then(function (repositories) {
@@ -32,11 +32,11 @@ export default Component.extend({
           console.debug(reason);
           self.set('repositories', []);
         });
-    } else if (this.currentUser.get('isConsortium')) {
+    } else if (this.currentUser.isConsortium) {
       this.store
         .query('repository', {
           query,
-          'consortium-id': this.currentUser.get('provider_id'),
+          'consortium-id': this.currentUser.provider_id,
           sort: 'name',
           'page[size]': 100
         })
@@ -47,11 +47,11 @@ export default Component.extend({
           console.debug(reason);
           self.set('repositories', []);
         });
-    } else if (this.currentUser.get('isProvider')) {
+    } else if (this.currentUser.isProvider) {
       this.store
         .query('repository', {
           query,
-          'provider-id': this.currentUser.get('provider_id'),
+          'provider-id': this.currentUser.provider_id,
           sort: 'name',
           'page[size]': 100
         })
@@ -68,7 +68,7 @@ export default Component.extend({
     this.set('repository', repository);
     this.set(
       'isDisabled',
-      repository === null || repository.id === this.get('model.id')
+      repository === null || repository.id === this.model.id
     );
     this.model.set('targetId', repository.id);
   },
@@ -82,7 +82,7 @@ export default Component.extend({
     },
     submit() {
       this.model.save();
-      let count = this.model.get('meta.doiCount');
+      let count = this.model.meta.doiCount;
       this.flashMessages.success(
         'DOI transfer for ' +
           this.intl.formatNumber(count) +

@@ -24,7 +24,7 @@ export default Component.extend({
       this.fragment.set('geoLocationBox.southBoundLatitude', value);
     },
     deleteGeoLocation() {
-      this.model.get('geoLocations').removeObject(this.fragment);
+      this.model.geoLocations.removeObject(this.fragment);
     }
   }
 });

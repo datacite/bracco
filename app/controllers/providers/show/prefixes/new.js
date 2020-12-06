@@ -43,7 +43,7 @@ export default Controller.extend({
           setTimeout(() => {
             self.transitionToRoute(
               'providers.show.prefixes',
-              providerPrefix.get('provider.id')
+              providerPrefix.provider.id
             );
           }, 1200);
         })
@@ -54,10 +54,7 @@ export default Controller.extend({
     cancel() {
       this.model['provider-prefix'].set('prefix', null);
       this.set('disabled', true);
-      this.transitionToRoute(
-        'providers.show.prefixes',
-        this.get('model.provider')
-      );
+      this.transitionToRoute('providers.show.prefixes', this.model.provider);
     }
   }
 });

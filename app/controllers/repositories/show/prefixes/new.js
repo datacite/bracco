@@ -11,7 +11,7 @@ export default Controller.extend({
     this.store
       .query('provider-prefix', {
         query,
-        'provider-id': this.model.repository.get('provider.id'),
+        'provider-id': this.model.repository.provider.id,
         state: 'without-repository',
         sort: 'name',
         'page[size]': 10
@@ -31,14 +31,11 @@ export default Controller.extend({
     },
     selectPrefix(providerPrefix) {
       this.model['repository-prefix'].set('provider-prefix', providerPrefix);
-      this.model['repository-prefix'].set(
-        'prefix',
-        providerPrefix.get('prefix')
-      );
+      this.model['repository-prefix'].set('prefix', providerPrefix.prefix);
       this.set('disabled', false);
     },
     submit() {
-      if (this.model['repository-prefix'].get('provider-prefix')) {
+      if (this.model['repository-prefix']['provider-prefix']) {
         let self = this;
         this.model['repository-prefix']
           .save()
@@ -48,7 +45,7 @@ export default Controller.extend({
             setTimeout(() => {
               self.transitionToRoute(
                 'repositories.show.prefixes',
-                repositoryPrefix.get('repository.id')
+                repositoryPrefix.repository.id
               );
             }, 1200);
           })
@@ -58,7 +55,7 @@ export default Controller.extend({
       } else {
         this.transitionToRoute(
           'repositories.show.prefixes',
-          this.get('model.repository')
+          this.model.repository
         );
       }
     },
@@ -68,7 +65,7 @@ export default Controller.extend({
       this.set('disabled', true);
       this.transitionToRoute(
         'repositories.show.prefixes',
-        this.get('model.repository')
+        this.model.repository
       );
     }
   }

@@ -13,7 +13,7 @@ export default Route.extend({
         number: params.page,
         size: params.size
       },
-      'user-id': user.get('id')
+      'user-id': user.id
     });
 
     return hash({

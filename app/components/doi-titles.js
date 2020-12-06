@@ -6,17 +6,17 @@ export default Component.extend({
   didReceiveAttrs() {
     this._super(...arguments);
 
-    if (!this.model.get('titles')) {
+    if (!this.model.titles) {
       this.model.set('titles', []);
     }
-    if (this.model.get('titles').length == 0) {
-      this.model.get('titles').createFragment();
+    if (this.model.titles.length == 0) {
+      this.model.titles.createFragment();
     }
   },
 
   actions: {
     addTitle() {
-      this.model.get('titles').createFragment();
+      this.model.titles.createFragment();
       this.set('showTitles', true);
     },
     toggleTitles() {

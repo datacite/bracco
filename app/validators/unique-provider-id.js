@@ -5,7 +5,7 @@ const UniqueProviderId = BaseValidator.extend({
   store: service(),
 
   validate(value, options, model) {
-    if (value.length < 2 || !model.get('isNew')) {
+    if (value.length < 2 || !model.isNew) {
       return true;
     } else {
       return this.store

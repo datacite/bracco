@@ -11,7 +11,7 @@ const Validations = buildValidations({
       message: 'Related Identifier scheme URI has to be a valid URI',
       disabled: computed('model.relatedIdentifierType', function () {
         return ['HasMetadata', 'IsMetadataFor'].includes(
-          this.model.get('relatedIdentifierType')
+          this.model.relatedIdentifierType
         );
       })
     })
@@ -21,14 +21,14 @@ const Validations = buildValidations({
     //   allowBlank: true,
     //   message: 'Please enter a valid URL.',
     //   disabled: computed('model.relatedIdentifierType', 'model.state', function() {
-    //     return this.model.get('state') === 'draft' || ![ 'PURL','URL' ].includes(this.model.get('relatedIdentifierType'));
+    //     return this.model.state === 'draft' || ![ 'PURL','URL' ].includes(this.model.relatedIdentifierType);
     //   }),
     // }),
     validator('identifier-format', {
       allowBlank: true,
       dependentKeys: ['model.relatedIdentifierType'],
       disabled: computed('model.relatedIdentifier', function () {
-        return isBlank(this.model.get('relatedIdentifier'));
+        return isBlank(this.model.relatedIdentifier);
       })
     })
   ],
@@ -37,10 +37,9 @@ const Validations = buildValidations({
       presence: true,
       message:
         'Please enter a Related Identifier Type for the Related Identifier.',
-      disabled: computed('model.relatedIdentifier', 'model.state', function () {
+      disabled: computed('model.{relatedIdentifier,state}', function () {
         return (
-          this.model.get('state') === 'draft' ||
-          isBlank(this.model.get('relatedIdentifier'))
+          this.model.state === 'draft' || isBlank(this.model.relatedIdentifier)
         );
       })
     })
@@ -49,10 +48,9 @@ const Validations = buildValidations({
     validator('presence', {
       presence: true,
       message: 'Please enter a Relation Type for the Related Identifier.',
-      disabled: computed('model.relatedIdentifier', 'model.state', function () {
+      disabled: computed('model.{relatedIdentifier,state}', function () {
         return (
-          this.model.get('state') === 'draft' ||
-          isBlank(this.model.get('relatedIdentifier'))
+          this.model.state === 'draft' || isBlank(this.model.relatedIdentifier)
         );
       })
     })
@@ -62,18 +60,14 @@ const Validations = buildValidations({
       presence: true,
       message:
         'Please enter a Resource Type for the Related Identifier Metadata.',
-      disabled: computed(
-        'model.relatedIdentifierType',
-        'model.state',
-        function () {
-          return (
-            this.model.get('state') === 'draft' ||
-            !['HasMetadata', 'IsMetadataFor'].includes(
-              this.model.get('relatedIdentifierType')
-            )
-          );
-        }
-      )
+      disabled: computed('model.{relatedIdentifierType,state}', function () {
+        return (
+          this.model.state === 'draft' ||
+          !['HasMetadata', 'IsMetadataFor'].includes(
+            this.model.relatedIdentifierType
+          )
+        );
+      })
     })
   ]
 });

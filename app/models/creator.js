@@ -9,7 +9,7 @@ const Validations = buildValidations({
     validator('presence', {
       presence: true
       // disabled: computed('model.state', function() {
-      //   return this.model.get('state') === 'draft';
+      //   return this.model.state === 'draft';
       // }),
     })
   ]

@@ -14,34 +14,30 @@ export default Model.extend({
   orcid: computed('id', function () {
     return 'https://orcid.org/' + this.id;
   }),
-  doiCount: computed('meta.published', function () {
-    return this.get('meta.published');
-  }),
+  doiCount: computed.reads('meta.published'),
   totalDoiCount: computed('meta.published', function () {
-    return this.get('meta.published').reduce(function (a, b) {
+    return this.meta.published.reduce(function (a, b) {
       return a + b.count;
     }, 0);
   }),
-  resourceTypeCount: computed('meta.resourceTypes', function () {
-    return this.get('meta.resourceTypes');
-  }),
+  resourceTypeCount: computed.reads('meta.resourceTypes'),
   totalResourceTypeCount: computed('meta.resourceTypes', function () {
-    return this.get('meta.resourceTypes').reduce(function (a, b) {
+    return this.meta.resourceTypes.reduce(function (a, b) {
       return a + b.count;
     }, 0);
   }),
   totalCitationCount: computed('meta.citations', function () {
-    return this.get('meta.citations').reduce(function (a, b) {
+    return this.meta.citations.reduce(function (a, b) {
       return a + b.count;
     }, 0);
   }),
   totalViewCount: computed('meta.views', function () {
-    return this.get('meta.views').reduce(function (a, b) {
+    return this.meta.views.reduce(function (a, b) {
       return a + b.count;
     }, 0);
   }),
   totalDownloadCount: computed('meta.downloads', function () {
-    return this.get('meta.downloads').reduce(function (a, b) {
+    return this.meta.downloads.reduce(function (a, b) {
       return a + b.count;
     }, 0);
   }),

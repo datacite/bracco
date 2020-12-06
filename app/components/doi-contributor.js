@@ -56,9 +56,9 @@ const personalContributorTypes = [
 export default PersonBaseComponent.extend({
   humanContributorTypes,
   humanContributorType: computed('fragment.contributorType', function () {
-    return isBlank(this.get('fragment.contributorType'))
+    return isBlank(this.fragment.contributorType)
       ? null
-      : humanizeString(this.get('fragment.contributorType'));
+      : humanizeString(this.fragment.contributorType);
   }),
 
   selectContributorType(contributorType) {
@@ -82,7 +82,7 @@ export default PersonBaseComponent.extend({
 
   actions: {
     deleteContributor() {
-      this.model.get('contributors').removeObject(this.fragment);
+      this.model.contributors.removeObject(this.fragment);
     },
     selectContributorType(contributorType) {
       this.selectContributorType(contributorType);

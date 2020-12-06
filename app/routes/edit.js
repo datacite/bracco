@@ -9,17 +9,15 @@ export default Route.extend({
     return this.store
       .findRecord('provider', 'admin')
       .then(function (model) {
-        model.set('confirmSymbol', model.get('symbol'));
+        model.set('confirmSymbol', model.symbol);
         return model;
       })
       .catch(function (reason) {
         console.debug(reason);
 
-        self
-          .get('flashMessages')
-          .warning(
-            'Fabrica is currently unavailable due to a DataCite API problem. We apologize for the inconvenience and are working hard to restore the service. Please check back later or contact DataCite Support if you have a question.'
-          );
+        self.flashMessages.warning(
+          'Fabrica is currently unavailable due to a DataCite API problem. We apologize for the inconvenience and are working hard to restore the service. Please check back later or contact DataCite Support if you have a question.'
+        );
       });
   },
 

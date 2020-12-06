@@ -97,17 +97,13 @@ export default Component.extend({
     this._super(...arguments);
 
     if (
-      relatedIdentifierTypeList.includes(
-        this.fragment.get('relatedIdentifierType')
-      )
+      relatedIdentifierTypeList.includes(this.fragment.relatedIdentifierType)
     ) {
       this.set('controlledIdentifierType', true);
     } else {
       this.set('controlledIdentifierType', false);
     }
-    if (
-      this.isMetadataRelationTypes.includes(this.fragment.get('relationType'))
-    ) {
+    if (this.isMetadataRelationTypes.includes(this.fragment.relationType)) {
       this.set('isMetadataRelationType', true);
     } else {
       this.set('isMetadataRelationType', false);
@@ -239,7 +235,7 @@ export default Component.extend({
       this.selectResourceTypeGeneral(resourceTypeGeneral);
     },
     deleteRelatedIdentifier() {
-      this.model.get('relatedIdentifiers').removeObject(this.fragment);
+      this.model.relatedIdentifiers.removeObject(this.fragment);
     }
   }
 });

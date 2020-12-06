@@ -19,7 +19,7 @@ export default Controller.extend({
 
   actions: {
     submit(doi) {
-      doi.set('event', this.setEvent(doi.get('state')));
+      doi.set('event', this.setEvent(doi.state));
 
       // track use of the form
       doi.set('source', 'fabricaForm');
@@ -28,16 +28,16 @@ export default Controller.extend({
       doi.set('xml', null);
 
       // only store name identifiers and affiliations with a value
-      A(doi.get('creators')).forEach((creator) => {
+      A(doi.creators).forEach((creator) => {
         creator.set(
           'nameIdentifiers',
-          A(creator.get('nameIdentifiers')).filter(function (nameIdentifier) {
+          A(creator.nameIdentifiers).filter(function (nameIdentifier) {
             return !isBlank(nameIdentifier.nameIdentifier);
           })
         );
         creator.set(
           'affiliation',
-          A(creator.get('affiliation')).filter(function (affiliation) {
+          A(creator.affiliation).filter(function (affiliation) {
             return !isBlank(affiliation.name);
           })
         );
@@ -50,7 +50,7 @@ export default Controller.extend({
       // only store titles with a title text
       doi.set(
         'titles',
-        A(doi.get('titles')).filter(function (title) {
+        A(doi.titles).filter(function (title) {
           return !isBlank(title.title);
         })
       );
@@ -58,7 +58,7 @@ export default Controller.extend({
       // only store subject with a subject text
       doi.set(
         'subjects',
-        A(doi.get('subjects')).filter(function (subject) {
+        A(doi.subjects).filter(function (subject) {
           return !isBlank(subject.subject);
         })
       );
@@ -66,13 +66,13 @@ export default Controller.extend({
       // only store name identifiers and affiliations for contributor with a value
       doi.set(
         'contributors',
-        A(doi.get('contributors')).filter(function (contributor) {
-          let nameIdentifiers = A(contributor.get('nameIdentifiers')).filter(
-            function (nameIdentifier) {
-              return !isBlank(nameIdentifier.nameIdentifier);
-            }
-          );
-          let affiliation = A(contributor.get('affiliation')).filter(function (
+        A(doi.contributors).filter(function (contributor) {
+          let nameIdentifiers = A(contributor.nameIdentifiers).filter(function (
+            nameIdentifier
+          ) {
+            return !isBlank(nameIdentifier.nameIdentifier);
+          });
+          let affiliation = A(contributor.affiliation).filter(function (
             affiliation
           ) {
             return !isBlank(affiliation.name);
@@ -94,7 +94,7 @@ export default Controller.extend({
       // only store dates with a text
       doi.set(
         'dates',
-        A(doi.get('dates')).filter(function (date) {
+        A(doi.dates).filter(function (date) {
           return (
             !isBlank(date.date) ||
             !isBlank(date.dateType) ||
@@ -106,7 +106,7 @@ export default Controller.extend({
       // only store related identifiers with a text
       doi.set(
         'relatedIdentifiers',
-        A(doi.get('relatedIdentifiers')).filter(function (identifier) {
+        A(doi.relatedIdentifiers).filter(function (identifier) {
           return (
             !isBlank(identifier.relatedIdentifier) ||
             !isBlank(identifier.relatedIdentifierType) ||
@@ -120,14 +120,14 @@ export default Controller.extend({
       // only store descriptions with a description text
       doi.set(
         'descriptions',
-        A(doi.get('descriptions')).filter(function (description) {
+        A(doi.descriptions).filter(function (description) {
           return !isBlank(description.description);
         })
       );
 
       doi.set(
         'geoLocations',
-        A(doi.get('geoLocations')).filter(function (geoLocation) {
+        A(doi.geoLocations).filter(function (geoLocation) {
           let point =
             isBlank(geoLocation.geoLocationPoint.pointLongitude) &&
             isBlank(geoLocation.geoLocationPoint.pointLatitude)
@@ -152,9 +152,7 @@ export default Controller.extend({
       // only store identifiers with a  text
       doi.set(
         'alternateIdentifiers',
-        A(doi.get('alternateIdentifiers')).filter(function (
-          alternateIdentifier
-        ) {
+        A(doi.alternateIdentifiers).filter(function (alternateIdentifier) {
           return !isBlank(alternateIdentifier.identifier);
         })
       );
@@ -162,7 +160,7 @@ export default Controller.extend({
       // only store rights with a text
       doi.set(
         'rightsList',
-        A(doi.get('rightsList')).filter(function (rights) {
+        A(doi.rightsList).filter(function (rights) {
           return !isBlank(rights.rights);
         })
       );
@@ -170,7 +168,7 @@ export default Controller.extend({
       // only store sizes with a text
       doi.set(
         'sizes',
-        A(doi.get('sizes')).filter(function (size) {
+        A(doi.sizes).filter(function (size) {
           return !isBlank(size);
         })
       );
@@ -178,7 +176,7 @@ export default Controller.extend({
       // only store formats with a text
       doi.set(
         'formats',
-        A(doi.get('formats')).filter(function (format) {
+        A(doi.formats).filter(function (format) {
           return !isBlank(format);
         })
       );
@@ -186,7 +184,7 @@ export default Controller.extend({
       // only store funding references with a text
       doi.set(
         'fundingReferences',
-        A(doi.get('fundingReferences')).filter(function (fundingReference) {
+        A(doi.fundingReferences).filter(function (fundingReference) {
           return (
             !isBlank(fundingReference.funderName) ||
             !isBlank(fundingReference.funderIdentifier) ||
@@ -206,17 +204,18 @@ export default Controller.extend({
         .catch(function (reason) {
           console.debug(reason);
 
-          self
-            .get('flashMessages')
-            .warning('An error occured and this DOI could not be saved.', {
+          self.flashMessages.warning(
+            'An error occured and this DOI could not be saved.',
+            {
               componentName: 'doi-error'
-            });
+            }
+          );
         });
     },
     cancel() {
       this.transitionToRoute(
         'repositories.show.dois',
-        this.get('model.repository.id')
+        this.model.repository.id
       );
     }
   }

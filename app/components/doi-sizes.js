@@ -6,13 +6,13 @@ export default Component.extend({
   didReceiveAttrs() {
     this._super(...arguments);
 
-    if (!this.model.get('sizes')) {
+    if (!this.model.sizes) {
       this.model.set('sizes', []);
     }
   },
   actions: {
     addSize() {
-      this.model.get('sizes').pushObject();
+      this.model.sizes.pushObject();
       this.set('showSizes', true);
     },
     toggleSizes() {

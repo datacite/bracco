@@ -7,10 +7,10 @@ export default Component.extend({
       this.set('fragment', value);
     },
     selectSize() {
-      this.model.get('sizes').replace(this.index, 1, [this.fragment]);
+      this.model.sizes.replace(this.index, 1, [this.fragment]);
     },
     deleteSize() {
-      this.model.get('sizes').removeAt(this.index);
+      this.model.sizes.removeAt(this.index);
     }
   }
 });

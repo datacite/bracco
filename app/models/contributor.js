@@ -10,7 +10,7 @@ const Validations = buildValidations({
     validator('presence', {
       presence: true
       // disabled: computed('model.state', function() {
-      //   return this.model.get('state') === 'draft';
+      //   return this.model.state === 'draft';
       // }),
     })
   ],
@@ -19,12 +19,12 @@ const Validations = buildValidations({
       presence: true,
       message: 'Contributors must include a contributor type',
       disabled: computed('model.name', function () {
-        return isBlank(this.model.get('name'));
+        return isBlank(this.model.name);
       })
     }),
     validator('contributor-type', {
       disabled: computed('model.name', function () {
-        return isBlank(this.model.get('name'));
+        return isBlank(this.model.name);
       })
     })
   ]

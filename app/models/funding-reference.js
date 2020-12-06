@@ -10,7 +10,7 @@ const Validations = buildValidations({
       presence: true,
       message: 'Funder Name must be included if you input a funderIdentifier.',
       disabled: computed('model.funderIdentifier', function () {
-        return isBlank(this.model.get('funderIdentifier'));
+        return isBlank(this.model.funderIdentifier);
       })
     })
   ],

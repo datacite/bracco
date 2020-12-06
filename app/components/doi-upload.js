@@ -21,7 +21,7 @@ export default Component.extend({
 
       reader.readAsText(file.blob).then(
         (xml) => {
-          self.get('model').set('xml', xml);
+          self.model.set('xml', xml);
         },
         (err) => {
           console.error(err);

@@ -6,13 +6,13 @@ export default Component.extend({
   didReceiveAttrs() {
     this._super(...arguments);
 
-    if (!this.model.get('relatedIdentifiers')) {
+    if (!this.model.relatedIdentifiers) {
       this.model.set('relatedIdentifiers', []);
     }
   },
   actions: {
     addRelatedIdentifier() {
-      this.model.get('relatedIdentifiers').createFragment();
+      this.model.relatedIdentifiers.createFragment();
       this.set('showRelatedIdentifiers', true);
     },
     toggleRelatedIdentifiers() {

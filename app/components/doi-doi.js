@@ -33,24 +33,20 @@ export default Component.extend({
     let self = this;
     this.store
       .query('repository-prefix', {
-        'repository-id': this.repository.get('id'),
+        'repository-id': this.repository.id,
         sort: 'name',
         'page[size]': 25
       })
       .then(function (repositoryPrefixes) {
-        if (typeof self.get('model').get('doi') == 'undefined') {
+        if (typeof self.model.doi == 'undefined') {
           self.set('repositoryPrefixes', repositoryPrefixes);
         }
 
         let repositoryPrefix =
-          repositoryPrefixes.length > 0
-            ? repositoryPrefixes.get('firstObject')
-            : null;
-        self
-          .get('model')
-          .set('prefix', repositoryPrefix.get('prefix').get('id'));
+          repositoryPrefixes.length > 0 ? repositoryPrefixes.firstObject : null;
+        self.model.set('prefix', repositoryPrefix.prefix.id);
 
-        if (typeof self.get('model').get('doi') == 'undefined') {
+        if (typeof self.model.doi == 'undefined') {
           self.generate();
         }
       })
@@ -61,20 +57,20 @@ export default Component.extend({
   },
   async generate() {
     let self = this;
-    let url = ENV.API_URL + '/dois/random?prefix=' + this.model.get('prefix');
+    let url = ENV.API_URL + '/dois/random?prefix=' + this.model.prefix;
     try {
       const response = await fetch(url, {
         headers: {
-          Authorization: 'Bearer ' + this.currentUser.get('jwt')
+          Authorization: 'Bearer ' + this.currentUser.jwt
         }
       });
       if (response.ok) {
         return response.json().then(function (data) {
           let suffix = data.dois[0].split('/', 2)[1];
-          self.get('model').set('suffix', suffix);
-          let doi = self.get('model').get('prefix') + '/' + suffix;
-          self.get('model').set('doi', doi);
-          self.selectState(self.get('model').get('state'));
+          self.model.set('suffix', suffix);
+          let doi = self.model.prefix + '/' + suffix;
+          self.model.set('doi', doi);
+          self.selectState(self.model.state);
           return suffix;
         });
       } else {
@@ -104,16 +100,16 @@ export default Component.extend({
 
   actions: {
     selectPrefix(repositoryPrefix) {
-      this.model.set('prefix', repositoryPrefix.prefix.get('id'));
+      this.model.set('prefix', repositoryPrefix.prefix.id);
       this.model.set(
         'doi',
-        repositoryPrefix.prefix.get('id') + '/' + this.model.get('suffix')
+        repositoryPrefix.prefix.id + '/' + this.model.suffix
       );
-      this.selectState(this.model.get('state'));
+      this.selectState(this.model.state);
     },
     selectSuffix(suffix) {
       this.model.set('suffix', suffix);
-      this.model.set('doi', this.model.get('prefix') + '/' + suffix);
+      this.model.set('doi', this.model.prefix + '/' + suffix);
     },
     generate() {
       this.generate();

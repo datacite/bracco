@@ -14,7 +14,7 @@ export default Component.extend({
   tagName: 'div',
   classNames: ['col-lg-3', 'col-md-4'],
   data: null,
-  count: computed('data', function () {
+  count: computed('data', 'summarize', function () {
     if (this.data) {
       if (this.summarize) {
         return A(this.data).reduce(function (a, b) {

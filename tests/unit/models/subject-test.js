@@ -24,7 +24,7 @@ module('Unit | Model | subject', function (hooks) {
     model.set('valueUri', subject.valueUri);
 
     assert.equal(
-      model.get('schemeUri'),
+      model.schemeUri,
       'http://www.oecd.org/science/inno/38235147.pdf'
     );
   });

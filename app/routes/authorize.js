@@ -11,7 +11,7 @@ export default Route.extend({
     let url = ENV.FABRICA_URL + '/authorize';
     fetch(url)
       .then(function (response) {
-        let jwt = response.headers.get('x-amzn-oidc-data');
+        let jwt = response.headers['x-amzn-oidc-data'];
 
         if (jwt) {
           console.log(jwt);

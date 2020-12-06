@@ -7,7 +7,7 @@ export default Ability.extend({
   currentUser: service(),
 
   canViewHealth: computed('currentUser.role_id', function () {
-    switch (this.get('currentUser.role_id')) {
+    switch (this.currentUser.role_id) {
       case 'staff_admin':
       case 'consortium_admin':
       case 'provider_admin':
@@ -17,7 +17,7 @@ export default Ability.extend({
     }
   }),
   canViewState: computed('currentUser.role_id', function () {
-    switch (this.get('currentUser.role_id')) {
+    switch (this.currentUser.role_id) {
       case 'staff_admin':
       case 'consortium_admin':
       case 'provider_admin':
@@ -28,7 +28,7 @@ export default Ability.extend({
     }
   }),
   canSource: computed('currentUser.role_id', function () {
-    switch (this.get('currentUser.role_id')) {
+    switch (this.currentUser.role_id) {
       case 'staff_admin':
         return true;
       default:
@@ -36,24 +36,20 @@ export default Ability.extend({
     }
   }),
   canTransfer: computed(
-    'currentUser.role_id',
-    'currentUser.provider_id',
-    'model.repository.provider.id',
-    'repository.provider.id',
-    'model.repository.provider.consortium.id',
-    'repository.provider.consortium.id',
-    'model.repository.id',
+    'currentUser.{role_id,provider_id}',
+    'model.repository.{id,provider.id,provider.consortium.id}',
     'model.query.client-id',
+    'repository.provider.{id,consortium.id}',
     function () {
-      switch (this.get('currentUser.role_id')) {
+      switch (this.currentUser.role_id) {
         case 'staff_admin':
           if (
             w(
               'crossref.citations medra.citations kisti.citations jalc.citations op.citations'
-            ).includes(this.get('model.repository.id')) ||
+            ).includes(this.model.repository.id) ||
             w(
               'crossref.citations medra.citations kisti.citations jalc.citations op.citations'
-            ).includes(this.get('model.query.client-id'))
+            ).includes(this.model.query['client-id'])
           ) {
             return false;
           } else {
@@ -61,17 +57,16 @@ export default Ability.extend({
           }
         case 'consortium_admin':
           return (
-            this.get('currentUser.provider_id') ===
-              this.get('model.repository.provider.consortium.id') ||
-            this.get('currentUser.provider_id') ===
-              this.get('repository.provider.consortium.id')
+            this.currentUser.provider_id ===
+              this.model.repository.provider.consortium.id ||
+            this.currentUser.provider_id ===
+              this.repository.provider.consortium.id
           );
         case 'provider_admin':
           return (
-            this.get('currentUser.provider_id') ===
-              this.get('model.repository.provider.id') ||
-            this.get('currentUser.provider_id') ===
-              this.get('repository.provider.id')
+            this.currentUser.provider_id ===
+              this.model.repository.provider.id ||
+            this.currentUser.provider_id === this.repository.provider.id
           );
         default:
           return false;
@@ -79,17 +74,15 @@ export default Ability.extend({
     }
   ),
   canMove: computed(
-    'currentUser.role_id',
-    'currentUser.provider_id',
-    'repository.id',
-    'repository.provider.id',
+    'currentUser.{role_id,provider_id}',
+    'repository.{id,provider.id}',
     function () {
-      switch (this.get('currentUser.role_id')) {
+      switch (this.currentUser.role_id) {
         case 'staff_admin':
           if (
             w(
               'crossref.citations medra.citations kisti.citations jalc.citations op.citations'
-            ).includes(this.get('repository.id'))
+            ).includes(this.repository.id)
           ) {
             return false;
           } else {
@@ -98,34 +91,30 @@ export default Ability.extend({
         case 'consortium_admin':
           return true;
         case 'provider_admin':
-          return true; // this.get('currentUser.provider_id') === this.get('repository.provider.id');
+          return true; // this.currentUser.provider_id === this.repository.provider.id;
         default:
           return false;
       }
     }
   ),
   canUpdate: computed(
-    'currentUser.role_id',
-    'currentUser.client_id',
-    'model.id',
+    'currentUser.{client_id,role_id}',
+    'model.{id,repository.id}',
     function () {
       if (
         w(
           'crossref.citations medra.citations kisti.citations jalc.citations op.citations'
-        ).includes(this.get('model.id'))
+        ).includes(this.model.id)
       ) {
         return false;
       } else {
-        switch (this.get('currentUser.role_id')) {
+        switch (this.currentUser.role_id) {
           case 'staff_admin':
           case 'consortium_admin':
           case 'provider_admin':
             return true;
           case 'client_admin':
-            return (
-              this.get('currentUser.client_id') ===
-              this.get('model.repository.id')
-            );
+            return this.currentUser.client_id === this.model.repository.id;
           default:
             return false;
         }
@@ -133,24 +122,23 @@ export default Ability.extend({
     }
   ),
   canUpload: computed(
-    'currentUser.role_id',
-    'currentUser.client_id',
-    'model.query.client-id',
+    'currentUser.{client_id,role_id}',
+    'model.{id,query.client-id}',
     function () {
       if (
         w(
           'crossref.citations medra.citations kisti.citations jalc.citations op.citations'
-        ).includes(this.get('model.query.client-id'))
+        ).includes(this.model.query['client-id'])
       ) {
         return false;
       } else {
-        switch (this.get('currentUser.role_id')) {
+        switch (this.currentUser.role_id) {
           case 'staff_admin':
             return true;
           case 'client_admin':
             return (
-              this.get('currentUser.client_id') ===
-                this.get('model.query.client-id') || this.get('model.id')
+              this.currentUser.client_id === this.model.query['client-id'] ||
+              this.model.id
             );
           default:
             return false;
@@ -159,24 +147,23 @@ export default Ability.extend({
     }
   ),
   canCreate: computed(
-    'currentUser.role_id',
-    'currentUser.client_id',
-    'model.query.client-id',
+    'currentUser.{client_id,role_id}',
+    'model.{id,query.client-id}',
     function () {
       if (
         w(
           'crossref.citations medra.citations kisti.citations jalc.citations op.citations'
-        ).includes(this.get('model.query.client-id'))
+        ).includes(this.model.query['client-id'])
       ) {
         return false;
       } else {
-        switch (this.get('currentUser.role_id')) {
+        switch (this.currentUser.role_id) {
           case 'staff_admin':
             return true;
           case 'client_admin':
             return (
-              this.get('currentUser.client_id') ===
-                this.get('model.query.client-id') || this.get('model.id')
+              this.currentUser.client_id === this.model.query['client-id'] ||
+              this.model.id
             );
           default:
             return false;
@@ -185,43 +172,35 @@ export default Ability.extend({
     }
   ),
   canDelete: computed(
-    'currentUser.role_id',
-    'currentUser.client_id',
+    'currentUser.{role_id,client_id}',
     'model.repository.id',
     function () {
-      switch (this.get('currentUser.role_id')) {
+      switch (this.currentUser.role_id) {
         case 'staff_admin':
           return true;
         case 'client_admin':
-          return (
-            this.get('currentUser.client_id') ===
-            this.get('model.repository.id')
-          );
+          return this.currentUser.client_id === this.model.repository.id;
         default:
           return false;
       }
     }
   ),
   canModify: computed(
-    'currentUser.role_id',
-    'currentUser.client_id',
+    'currentUser.{role_id,client_id}',
     'model.repository.id',
     function () {
       if (
         w(
           'crossref.citations medra.citations kisti.citations jalc.citations op.citations'
-        ).includes(this.get('model.repository.id'))
+        ).includes(this.model.repository.id)
       ) {
         return false;
       } else {
-        switch (this.get('currentUser.role_id')) {
+        switch (this.currentUser.role_id) {
           case 'staff_admin':
             return true;
           case 'client_admin':
-            return (
-              this.get('currentUser.client_id') ===
-              this.get('model.repository.id')
-            );
+            return this.currentUser.client_id === this.model.repository.id;
           default:
             return false;
         }
@@ -229,25 +208,21 @@ export default Ability.extend({
     }
   ),
   canEdit: computed(
-    'currentUser.role_id',
-    'currentUser.client_id',
+    'currentUser.{role_id,client_id}',
     'model.repository.id',
     function () {
       if (
         w(
           'crossref.citations medra.citations kisti.citations jalc.citations op.citations'
-        ).includes(this.get('model.repository.id'))
+        ).includes(this.model.repository.id)
       ) {
         return false;
       } else {
-        switch (this.get('currentUser.role_id')) {
+        switch (this.currentUser.role_id) {
           case 'staff_admin':
             return true;
           case 'client_admin':
-            return (
-              this.get('currentUser.client_id') ===
-              this.get('model.repository.id')
-            );
+            return this.currentUser.client_id === this.model.repository.id;
           default:
             return false;
         }
@@ -255,18 +230,16 @@ export default Ability.extend({
     }
   ),
   canForm: computed(
-    'currentUser.role_id',
-    'currentUser.client_id',
+    'currentUser.{role_id,client_id}',
     'model.repository.id',
     function () {
-      switch (this.get('currentUser.role_id')) {
+      switch (this.currentUser.role_id) {
         case 'staff_admin':
           return true;
         case 'client_admin':
           return (
-            this.get('currentUser.client_id') === 'demo.datacite' &&
-            this.get('currentUser.client_id') ===
-              this.get('model.repository.id')
+            this.currentUser.client_id === 'demo.datacite' &&
+            this.currentUser.client_id === this.model.repository.id
           );
         default:
           return false;
@@ -274,70 +247,54 @@ export default Ability.extend({
     }
   ),
   canDetail: computed(
-    'currentUser.role_id',
-    'currentUser.provider_id',
-    'currentUser.client_id',
-    'model.repository.id',
-    'model.repository.provider.id',
-    'model.repository.provider.consortium.id',
+    'currentUser.{role_id,provider_id,client_id}',
+    'model.repository.{id,provider.id,provider.consortium.id}',
     'model.state',
     function () {
-      switch (this.get('currentUser.role_id')) {
+      switch (this.currentUser.role_id) {
         case 'staff_admin':
           return true;
         case 'consortium_admin':
           return (
-            this.get('currentUser.provider_id') ===
-            this.get('model.repository.provider.consortium.id')
+            this.currentUser.provider_id ===
+            this.model.repository.provider.consortium.id
           );
         case 'provider_admin':
           return (
-            this.get('currentUser.provider_id') ===
-            this.get('model.repository.provider.id')
+            this.currentUser.provider_id === this.model.repository.provider.id
           );
         case 'client_admin':
-          return (
-            this.get('currentUser.client_id') ===
-            this.get('model.repository.id')
-          );
+          return this.currentUser.client_id === this.model.repository.id;
         case 'user':
-          return this.get('model.state') === 'findable';
+          return this.model.state === 'findable';
         default:
           return false;
       }
     }
   ),
   canRead: computed(
-    'currentUser.role_id',
-    'currentUser.provider_id',
-    'currentUser.client_id',
-    'model.repository.id',
-    'model.repository.provider.id',
-    'model.repository.provider.consortium.id',
+    'currentUser.{role_id,provider_id,client_id}',
+    'model.repository.{id,provider.id,provider.consortium.id}',
     'model.state',
     function () {
-      switch (this.get('currentUser.role_id')) {
+      switch (this.currentUser.role_id) {
         case 'staff_admin':
           return true;
         case 'consortium_admin':
           return (
-            this.get('currentUser.provider_id') ===
-            this.get('model.repository.provider.consortium.id')
+            this.currentUser.provider_id ===
+            this.model.repository.provider.consortium.id
           );
         case 'provider_admin':
           return (
-            this.get('currentUser.provider_id') ===
-            this.get('model.repository.provider.id')
+            this.currentUser.provider_id === this.model.repository.provider.id
           );
         case 'client_admin':
-          return (
-            this.get('currentUser.client_id') ===
-            this.get('model.repository.id')
-          );
+          return this.currentUser.client_id === this.model.repository.id;
         case 'user':
-          return this.get('model.state') === 'findable';
+          return this.model.state === 'findable';
         default:
-          return this.get('model.state') === 'findable';
+          return this.model.state === 'findable';
       }
     }
   )

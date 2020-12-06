@@ -13,7 +13,7 @@ export default Controller.extend({
 
   actions: {
     submit(doi) {
-      doi.set('event', this.setEvent(doi.get('state')));
+      doi.set('event', this.setEvent(doi.state));
 
       // Reset content to null rather than use default values
       // We want the API to work out the values from the file XML
@@ -45,17 +45,15 @@ export default Controller.extend({
         })
         .catch(function (reason) {
           console.debug(reason);
-          self
-            .get('flashMessages')
-            .warning(
-              'An error occured and this DOI could not be saved:' + reason.title
-            );
+          self.flashMessages.warning(
+            'An error occured and this DOI could not be saved:' + reason.title
+          );
         });
     },
     cancel() {
       this.transitionToRoute(
         'repositories.show.dois',
-        this.get('model.repository.id')
+        this.model.repository.id
       );
     }
   }

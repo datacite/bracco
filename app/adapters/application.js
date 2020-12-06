@@ -11,7 +11,7 @@ export default JSONAPIAdapter.extend(DataAdapterMixin, {
 
   headers: computed('session.data.authenticated.token', function () {
     const headers = {};
-    let { access_token } = this.get('session.data.authenticated');
+    let { access_token } = this.session.data.authenticated;
     if (isPresent(access_token)) {
       headers.Authorization = `Bearer ${access_token}`;
     }

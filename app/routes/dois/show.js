@@ -20,17 +20,15 @@ export default Route.extend({
       .catch(function (reason) {
         console.debug(reason);
 
-        self
-          .get('flashMessages')
-          .warning(
-            'An error occurred. Please contact DataCite Support if the problem persists.'
-          );
+        self.flashMessages.warning(
+          'An error occurred. Please contact DataCite Support if the problem persists.'
+        );
         self.transitionTo('/');
       });
   }
 
   // afterModel(model) {
-  //   if (this.get('can').cannot('view doi', model)) {
+  //   if (this.can.cannot('view doi', model)) {
   //     return this.transitionTo('index');
   //   }
   // }

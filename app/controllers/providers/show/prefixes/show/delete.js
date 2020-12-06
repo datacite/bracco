@@ -4,9 +4,9 @@ export default Controller.extend({
   actions: {
     submit() {
       let self = this;
-      let providerId = this.model.get('provider.id');
+      let providerId = this.model.provider.id;
       this.store
-        .findRecord('providerPrefix', this.model.get('id'), {
+        .findRecord('providerPrefix', this.model.id, {
           backgroundReload: false
         })
         .then(function (providerPrefix) {
@@ -22,10 +22,7 @@ export default Controller.extend({
         });
     },
     cancel() {
-      this.transitionToRoute(
-        'providers.show.prefixes',
-        this.model.get('provider.id')
-      );
+      this.transitionToRoute('providers.show.prefixes', this.model.provider.id);
     }
   }
 });

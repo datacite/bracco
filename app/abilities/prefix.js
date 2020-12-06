@@ -6,7 +6,7 @@ export default Ability.extend({
   currentUser: service(),
 
   canWrite: computed('currentUser.role_id', function () {
-    switch (this.get('currentUser.role_id')) {
+    switch (this.currentUser.role_id) {
       case 'staff_admin':
         return true;
       case 'consortium_admin':
@@ -18,22 +18,19 @@ export default Ability.extend({
     }
   }),
   canUpdate: computed(
-    'currentUser.role_id',
-    'currentUser.provider_id',
-    'currentUser.client_id',
-    'model.repositories',
-    'model.providers',
+    'currentUser.{role_id,provider_id,client_id}',
+    'model.{repositories,providers}',
     function () {
       // let self = this;
-      switch (this.get('currentUser.role_id')) {
+      switch (this.currentUser.role_id) {
         case 'staff_admin':
           return true;
         case 'consortium_admin':
           return true;
         case 'provider_admin':
           return true;
-        // return this.get('model.providers').any(function(provider, index, providers) {
-        //   return provider.get('id') === self.get('currentUser.provider_id');
+        // return this.model.providers.any(function(provider, index, providers) {
+        //   return provider.id === self.currentUser.provider_id;
         // });
         default:
           return false;
@@ -41,26 +38,23 @@ export default Ability.extend({
     }
   ),
   canRead: computed(
-    'currentUser.role_id',
-    'currentUser.provider_id',
-    'currentUser.client_id',
-    'model.repositories',
-    'model.providers',
+    'currentUser.{role_id,provider_id,client_id}',
+    'model.{repositories,providers}',
     function () {
       let self = this;
-      switch (this.get('currentUser.role_id')) {
+      switch (this.currentUser.role_id) {
         case 'staff_admin':
           return true;
         case 'consortium_admin':
           return true;
         case 'provider_admin':
           return true;
-        // return this.get('model.providers').any(function(provider, index, providers) {
-        //   return provider.get('id') === self.get('currentUser.provider_id');
+        // return this.model.providers.any(function(provider, index, providers) {
+        //   return provider.id === self.currentUser.provider_id;
         // });
         case 'client_admin':
-          return this.get('model.repositories').any(function (repository) {
-            return repository.get('id') === self.get('currentUser.client_id');
+          return this.model.repositories.any(function (repository) {
+            return repository.id === self.currentUser.client_id;
           });
         default:
           return false;

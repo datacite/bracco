@@ -6,14 +6,14 @@ export default Component.extend({
   didReceiveAttrs() {
     this._super(...arguments);
 
-    if (!this.model.get('rightsList')) {
+    if (!this.model.rightsList) {
       this.model.set('rightsList', []);
     }
   },
 
   actions: {
     addRights() {
-      this.model.get('rightsList').createFragment();
+      this.model.rightsList.createFragment();
       this.set('showRights', true);
     },
     toggleRights() {

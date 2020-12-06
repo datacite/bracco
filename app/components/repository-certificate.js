@@ -26,11 +26,11 @@ export default Component.extend({
       this.set('certificates', certificates);
     },
     selectCertificate(certificate) {
-      this.model.get('certificate').replace(this.index, 1, [certificate]);
+      this.model.certificate.replace(this.index, 1, [certificate]);
       this.set('certificates', certificateList);
     },
     deleteCertificate() {
-      this.model.get('certificate').removeAt(this.index);
+      this.model.certificate.removeAt(this.index);
     }
   }
 });

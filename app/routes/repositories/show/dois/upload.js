@@ -20,7 +20,7 @@ export default Route.extend({
   }
 
   // afterModel(model) {
-  //   if (this.get('can').cannot('create doi', model)) {
+  //   if (this.can.cannot('create doi', model)) {
   //     return this.transitionTo('index');
   //   }
   // }

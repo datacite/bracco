@@ -18,7 +18,7 @@ export default Component.extend({
           response.json().then(function (data) {
             self.model.set(
               'symbol',
-              self.provider.get('id').toUpperCase() + '.' + data.symbol
+              self.provider.id.toUpperCase() + '.' + data.symbol
             );
           });
         } else {

@@ -6,13 +6,13 @@ export default Component.extend({
   didReceiveAttrs() {
     this._super(...arguments);
 
-    if (!this.model.get('dates')) {
+    if (!this.model.dates) {
       this.model.set('dates', []);
     }
   },
   actions: {
     addDate() {
-      this.model.get('dates').createFragment();
+      this.model.dates.createFragment();
       this.set('showDates', true);
     },
     toggleDates() {

@@ -56,16 +56,16 @@ export default Controller.extend({
           .then(function (repo) {
             self.set('re3data', repo);
             self.model.set('clientType', 'repository');
-            self.model.set('re3data', 'https://doi.org/' + repo.get('id'));
-            self.model.set('name', repo.get('repositoryName'));
-            self.model.set('description', repo.get('description'));
+            self.model.set('re3data', 'https://doi.org/' + repo.id);
+            self.model.set('name', repo.repositoryName);
+            self.model.set('description', repo.description);
             self.model.set(
               'alternateName',
-              A(repo.get('additionalNames')).get('firstObject').text
+              A(repo.additionalNames).firstObject.text
             );
-            self.model.set('url', repo.get('repositoryUrl'));
-            if (repo.get('software').length > 0) {
-              let software = repo.get('software')[0].name;
+            self.model.set('url', repo.repositoryUrl);
+            if (repo.software.length > 0) {
+              let software = A(repo.software).firstObject.name;
               if (software === 'DataVerse') {
                 software = 'Dataverse';
               } else if (software === 'unknown') {
@@ -73,25 +73,19 @@ export default Controller.extend({
               }
               self.model.set('software', capitalize(software));
             }
-            if (repo.get('repositoryLanguages').length > 0) {
-              self.get('repository').set(
+            if (repo.repositoryLanguages.length > 0) {
+              self.repository.set(
                 'language',
-                A(repo.get('repositoryLanguages')).map(function (l) {
+                A(repo.repositoryLanguages).map(function (l) {
                   return langs.where('2', l.text)['1'];
                 })
               );
             }
-            if (repo.get('types').length > 0) {
-              self.model.set(
-                'repositoryType',
-                A(repo.get('types')).mapBy('text')
-              );
+            if (repo.types.length > 0) {
+              self.model.set('repositoryType', A(repo.types).mapBy('text'));
             }
-            if (repo.get('certificates').length > 0) {
-              self.model.set(
-                'certificate',
-                A(repo.get('certificates')).mapBy('text')
-              );
+            if (repo.certificates.length > 0) {
+              self.model.set('certificate', A(repo.certificates).mapBy('text'));
             }
           })
           .catch(function (reason) {
@@ -122,13 +116,13 @@ export default Controller.extend({
       this.set('softwares', softwareList);
     },
     addLanguage() {
-      this.model.get('language').pushObject(null);
+      this.model.language.pushObject(null);
     },
     addCertificate() {
-      this.model.get('certificate').pushObject(null);
+      this.model.certificate.pushObject(null);
     },
     addRepositoryType() {
-      this.model.get('repositoryType').pushObject(null);
+      this.model.repositoryType.pushObject(null);
     },
     submit(repository) {
       let self = this;

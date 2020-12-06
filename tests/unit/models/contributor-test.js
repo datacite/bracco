@@ -21,7 +21,7 @@ module('Unit | Model | contributor', function (hooks) {
 
     contributor.set('givenName', 'alan');
     contributor.set('familyName', 'smith');
-    assert.equal(contributor.get('displayName'), 'alan smith');
+    assert.equal(contributor.displayName, 'alan smith');
   });
 
   test('orcid', function (assert) {
@@ -31,6 +31,6 @@ module('Unit | Model | contributor', function (hooks) {
 
     let nameIds = [this.set('model', make('nameIdentifier'))];
     contributor.set('nameIdentifiers', nameIds);
-    assert.equal(contributor.get('orcid'), '0000-0003-1419-2405');
+    assert.equal(contributor.orcid, '0000-0003-1419-2405');
   });
 });

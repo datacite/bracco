@@ -9,7 +9,7 @@ import Fragment from 'ember-data-model-fragments/fragment';
 //       regex: /^([^,]+)(, \w+(\(\w+\))?, \w+(-\w+)?)?$/,
 //       message: 'Series information not in recommended format of series title, followed by comma and optional volume(issue), firstpage-lastpage',
 //       disabled: computed('model.descriptionType', function() {
-//         return this.model.get('descriptionType') !== 'SeriesInformation';
+//         return this.model.descriptionType !== 'SeriesInformation';
 //       }),
 //       isWarning: true,
 //     }),

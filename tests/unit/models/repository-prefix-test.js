@@ -1,6 +1,5 @@
 import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
-import { get } from '@ember/object';
 import { run } from '@ember/runloop';
 
 module('Unit | Model | repository-prefix', function (hooks) {
@@ -19,9 +18,7 @@ module('Unit | Model | repository-prefix', function (hooks) {
       .modelFor('repositoryPrefix');
 
     // lookup the relationship on the repository model
-    const relationship = get(RepositoryPrefix, 'relationshipsByName').get(
-      'repository'
-    );
+    const relationship = RepositoryPrefix.relationshipsByName.repository;
 
     assert.equal(
       relationship.key,
@@ -41,9 +38,7 @@ module('Unit | Model | repository-prefix', function (hooks) {
       .modelFor('repositoryPrefix');
 
     // lookup the relationship on the repository model
-    const relationship = get(RepositoryPrefix, 'relationshipsByName').get(
-      'prefix'
-    );
+    const relationship = RepositoryPrefix.relationshipsByName.prefix;
 
     assert.equal(relationship.key, 'prefix', 'has relationship with prefix');
     assert.equal(
@@ -59,9 +54,8 @@ module('Unit | Model | repository-prefix', function (hooks) {
       .modelFor('repositoryPrefix');
 
     // lookup the relationship on the repository model
-    const relationship = get(RepositoryPrefix, 'relationshipsByName').get(
-      'provider-prefix'
-    );
+    const relationship =
+      RepositoryPrefix.relationshipsByName['provider-prefix'];
 
     assert.equal(
       relationship.key,

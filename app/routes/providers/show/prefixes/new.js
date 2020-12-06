@@ -9,7 +9,7 @@ export default Route.extend({
     let provider = this.modelFor('providers/show');
 
     return hash({
-      provider: this.store.findRecord('provider', provider.get('id')),
+      provider: this.store.findRecord('provider', provider.id),
       'provider-prefix': this.store.createRecord('provider-prefix', {
         provider
       })

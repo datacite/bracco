@@ -22,13 +22,11 @@ export default Component.extend({
       this.set('languages', languages);
     },
     selectLanguage(language) {
-      this.model
-        .get('language')
-        .replace(this.index, 1, [ISO6391.getCode(language)]);
+      this.model.language.replace(this.index, 1, [ISO6391.getCode(language)]);
       this.set('languages', languageList);
     },
     deleteLanguage() {
-      this.model.get('language').removeAt(this.index);
+      this.model.language.removeAt(this.index);
     }
   }
 });

@@ -79,7 +79,7 @@ export default Component.extend({
       this.updateNameIdentifier(value);
     },
     deleteNameIdentifier() {
-      this.creator.get('nameIdentifiers').removeObject(this.fragment);
+      this.creator.nameIdentifiers.removeObject(this.fragment);
     }
   }
 });

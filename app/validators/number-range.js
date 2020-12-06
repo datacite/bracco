@@ -3,8 +3,8 @@ import BaseValidator from 'ember-cp-validations/validators/base';
 
 const NumberRange = BaseValidator.extend({
   validate(value, options, model) {
-    let first = A(model.firstPrefix.split('.')).get('lastObject');
-    let last = A(value.split('.')).get('lastObject');
+    let first = A(model.firstPrefix.split('.')).lastObject;
+    let last = A(value.split('.')).lastObject;
 
     if (last - first < 0) {
       let message =

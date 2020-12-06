@@ -19,7 +19,7 @@ export default Component.extend({
 
   searchRepository(query) {
     let self = this;
-    if (this.currentUser.get('isAdmin')) {
+    if (this.currentUser.isAdmin) {
       this.store
         .query('repository', { query, sort: 'name', 'page[size]': 100 })
         .then(function (repositories) {
@@ -29,11 +29,11 @@ export default Component.extend({
           console.debug(reason);
           self.set('repositories', []);
         });
-    } else if (this.currentUser.get('isConsortium')) {
+    } else if (this.currentUser.isConsortium) {
       this.store
         .query('repository', {
           query,
-          'consortium-id': this.currentUser.get('provider_id'),
+          'consortium-id': this.currentUser.provider_id,
           sort: 'name',
           'page[size]': 100
         })
@@ -44,11 +44,11 @@ export default Component.extend({
           console.debug(reason);
           self.set('repositories', []);
         });
-    } else if (this.currentUser.get('isProvider')) {
+    } else if (this.currentUser.isProvider) {
       this.store
         .query('repository', {
           query,
-          'provider-id': this.currentUser.get('provider_id'),
+          'provider-id': this.currentUser.provider_id,
           sort: 'name',
           'page[size]': 100
         })
@@ -62,9 +62,9 @@ export default Component.extend({
     }
   },
   selectRepository(repository) {
-    this.set('oldRepository', this.model.get('repository.id'));
+    this.set('oldRepository', this.model.repository.id);
     this.model.set('repository', repository);
-    this.model.set('provider', repository.get('provider'));
+    this.model.set('provider', repository.provider);
     this.set('isDisabled', repository.id === this.oldRepository);
   },
 

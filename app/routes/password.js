@@ -8,31 +8,31 @@ export default Route.extend(AuthenticatedRouteMixin, {
   authenticationRoute: 'sign-in',
 
   model() {
-    if (this.currentUser.get('client_id')) {
+    if (this.currentUser.client_id) {
       return this.store
-        .findRecord('repository', this.currentUser.get('uid'))
+        .findRecord('repository', this.currentUser.uid)
         .then(function (repository) {
-          repository.set('confirmSymbol', repository.get('symbol'));
+          repository.set('confirmSymbol', repository.symbol);
           return repository;
         })
         .catch(function (reason) {
           console.debug(reason);
         });
-    } else if (this.currentUser.get('provider_id')) {
+    } else if (this.currentUser.provider_id) {
       return this.store
-        .findRecord('provider', this.currentUser.get('uid'))
+        .findRecord('provider', this.currentUser.uid)
         .then(function (provider) {
-          provider.set('confirmSymbol', provider.get('symbol'));
+          provider.set('confirmSymbol', provider.symbol);
           return provider;
         })
         .catch(function (reason) {
           console.debug(reason);
         });
-    } else if (this.currentUser.get('uid') === 'admin') {
+    } else if (this.currentUser.uid === 'admin') {
       return this.store
         .findRecord('provider', 'admin')
         .then(function (provider) {
-          provider.set('confirmSymbol', provider.get('symbol'));
+          provider.set('confirmSymbol', provider.symbol);
           return provider;
         })
         .catch(function (reason) {

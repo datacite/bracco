@@ -30,9 +30,7 @@ export default Model.extend(Validations, {
   created: attr('date'),
   updated: attr('date'),
 
-  name: computed('repositoryName', function () {
-    return this.repositoryName;
-  }),
+  name: computed.reads('repositoryName'),
 
   // combine subject areas and keywords
   tags: union('subjects', 'keywords')

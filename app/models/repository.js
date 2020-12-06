@@ -1,5 +1,5 @@
 import Model, { belongsTo, attr } from '@ember-data/model';
-import { computed } from '@ember/object';
+import { computed, not } from '@ember/object/computed';
 import ENV from 'bracco/config/environment';
 import { array, fragment } from 'ember-data-model-fragments/attributes';
 import { validator, buildValidations } from 'ember-cp-validations';
@@ -9,8 +9,8 @@ const Validations = buildValidations({
     validator('presence', true),
     validator('unique-repository-id', {
       presence: true,
-      disabled: computed('model', function () {
-        return !this.model.get('isNew');
+      disabled: not('model', function () {
+        return this.model.isNew;
       })
     }),
     validator('format', {
@@ -27,14 +27,14 @@ const Validations = buildValidations({
     validator('presence', {
       presence: true,
       disabled: computed('model', function () {
-        return this.model.get('isNew');
+        return this.model.isNew;
       })
     }),
     validator('confirmation', {
       on: 'symbol',
       message: 'Repository ID does not match',
       disabled: computed('model', function () {
-        return this.model.get('isNew');
+        return this.model.isNew;
       })
     })
   ],
@@ -42,13 +42,13 @@ const Validations = buildValidations({
     validator('presence', {
       presence: true,
       disabled: computed('model', function () {
-        return this.model.get('keepPassword');
+        return this.model.keepPassword;
       })
     }),
     validator('length', {
       min: 8,
       disabled: computed('model', function () {
-        return this.model.get('keepPassword');
+        return this.model.keepPassword;
       })
     })
   ],
@@ -56,14 +56,14 @@ const Validations = buildValidations({
     validator('presence', {
       presence: true,
       disabled: computed('model', function () {
-        return this.model.get('keepPassword');
+        return this.model.keepPassword;
       })
     }),
     validator('confirmation', {
       on: 'passwordInput',
       message: 'Password does not match',
       disabled: computed('model', function () {
-        return this.model.get('keepPassword');
+        return this.model.keepPassword;
       })
     })
   ],

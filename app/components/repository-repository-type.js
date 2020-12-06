@@ -27,11 +27,11 @@ export default Component.extend({
       this.set('repositoryTypes', repositoryTypes);
     },
     selectRepositoryType(repositoryType) {
-      this.model.get('repositoryType').replace(this.index, 1, [repositoryType]);
+      this.model.repositoryType.replace(this.index, 1, [repositoryType]);
       this.set('repositoryTypes', repositoryTypeList);
     },
     deleteRepositoryType() {
-      this.model.get('repositoryType').removeAt(this.index);
+      this.model.repositoryType.removeAt(this.index);
     }
   }
 });

@@ -1,6 +1,5 @@
 import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
-import { get } from '@ember/object';
 import { run } from '@ember/runloop';
 
 module('Unit | Model | repository', function (hooks) {
@@ -19,7 +18,7 @@ module('Unit | Model | repository', function (hooks) {
       .modelFor('repository');
 
     // lookup the relationship on the repository model
-    const relationship = get(repository, 'relationshipsByName').get('provider');
+    const relationship = repository.relationshipsByName.provider;
 
     assert.equal(
       relationship.key,
@@ -39,9 +38,6 @@ module('Unit | Model | repository', function (hooks) {
     );
     model.set('domains', 'datacite.org, datacite.de, datacite.fr');
 
-    assert.equal(
-      model.get('domainList'),
-      'datacite.org,datacite.de,datacite.fr'
-    );
+    assert.equal(model.domainList, 'datacite.org,datacite.de,datacite.fr');
   });
 });

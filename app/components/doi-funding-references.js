@@ -6,14 +6,14 @@ export default Component.extend({
   didReceiveAttrs() {
     this._super(...arguments);
 
-    if (!this.model.get('fundingReferences')) {
+    if (!this.model.fundingReferences) {
       this.model.set('fundingReferences', []);
     }
   },
 
   actions: {
     addFundingReference() {
-      this.model.get('fundingReferences').createFragment();
+      this.model.fundingReferences.createFragment();
       this.set('showFundingReferences', true);
     },
     toggleFundingReferences() {

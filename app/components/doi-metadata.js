@@ -20,14 +20,13 @@ export default Component.extend({
 
     // show metadata if at least one of these attributes is set
     if (
-      isPresent(this.get('model.publicationYear')) ||
-      isPresent(this.get('model.titles')) ||
-      isPresent(this.get('model.publisher')) ||
-      isPresent(this.get('model.creators')) ||
-      (this.get('model.types') instanceof Object &&
-        !!this.get('model.types.resourceTypeGeneral')) ||
-      (this.get('model.types') instanceof Object &&
-        !!this.get('model.types.resourceType'))
+      isPresent(this.model.publicationYear) ||
+      isPresent(this.model.titles) ||
+      isPresent(this.model.publisher) ||
+      isPresent(this.model.creators) ||
+      (this.model.types instanceof Object &&
+        !!this.model.types.resourceTypeGeneral) ||
+      (this.model.types instanceof Object && !!this.model.types.resourceType)
     ) {
       this.set('hasMetadata', true);
     }
@@ -52,7 +51,7 @@ export default Component.extend({
     } else {
       this.set('output', null);
       let self = this;
-      let url = ENV.API_URL + '/dois/' + this.model.get('doi');
+      let url = ENV.API_URL + '/dois/' + this.model.doi;
       let acceptHeaders = {
         datacite: 'application/vnd.datacite.datacite+xml',
         datacite_json: 'application/vnd.datacite.datacite+json',
@@ -64,9 +63,9 @@ export default Component.extend({
         jats: 'application/vnd.jats+xml'
       };
       let headers = { Accept: acceptHeaders[metadata] };
-      if (this.currentUser.get('jwt')) {
+      if (this.currentUser.jwt) {
         headers = {
-          Authorization: 'Bearer ' + this.currentUser.get('jwt'),
+          Authorization: 'Bearer ' + this.currentUser.jwt,
           Accept: acceptHeaders[metadata]
         };
       }
@@ -96,7 +95,7 @@ export default Component.extend({
         }
       });
     }
-    // this.get('router').transitionTo({ queryParams: { metadata: metadata } });
+    // this.router.transitionTo({ queryParams: { metadata: metadata } });
   },
 
   actions: {

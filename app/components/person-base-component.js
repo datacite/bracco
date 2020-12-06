@@ -3,7 +3,7 @@ import { computed } from '@ember/object';
 
 export default Component.extend({
   showPersonal: computed('fragment.nameType', function () {
-    return this.get('fragment.nameType') !== 'Organizational';
+    return this.fragment.nameType !== 'Organizational';
   }),
   isReadonlyNameType: false,
   isReadonly: false,
@@ -12,16 +12,16 @@ export default Component.extend({
   didReceiveAttrs() {
     this._super(...arguments);
 
-    this.selectNameType(this.fragment.get('nameType'));
+    this.selectNameType(this.fragment.nameType);
 
     // if no givenName and familyName, and set for nameType "Personal"
     if (
-      this.fragment.get('name') &&
-      this.fragment.get('nameType') === 'Personal' &&
-      (!this.fragment.get('givenName') || this.fragment.get('familyName'))
+      this.fragment.name &&
+      this.fragment.nameType === 'Personal' &&
+      (!this.fragment.givenName || this.fragment.familyName)
     ) {
-      let familyName = this.fragment.get('name').split(',', 2)[0];
-      let givenName = this.fragment.get('name').split(',', 2)[1];
+      let familyName = this.fragment.name.split(',', 2)[0];
+      let givenName = this.fragment.name.split(',', 2)[1];
       familyName = familyName ? familyName.trim() : null;
       givenName = givenName ? givenName.trim() : null;
       this.fragment.set('givenName', givenName);
@@ -29,18 +29,18 @@ export default Component.extend({
     }
     this.joinNameParts({});
 
-    if (!this.fragment.get('nameIdentifiers')) {
+    if (!this.fragment.nameIdentifiers) {
       this.fragment.set('nameIdentifiers', []);
     }
-    if (this.fragment.get('nameIdentifiers').length == 0) {
-      this.fragment.get('nameIdentifiers').createFragment();
+    if (this.fragment.nameIdentifiers.length == 0) {
+      this.fragment.nameIdentifiers.createFragment();
     }
 
-    if (!this.fragment.get('affiliation')) {
+    if (!this.fragment.affiliation) {
       this.fragment.set('affiliation', []);
     }
-    if (this.fragment.get('affiliation').length == 0) {
-      this.fragment.get('affiliation').createFragment();
+    if (this.fragment.affiliation.length == 0) {
+      this.fragment.affiliation.createFragment();
     }
   },
 
@@ -55,16 +55,15 @@ export default Component.extend({
       this.set('nameType', 'Organizational');
       this.set('isReadonlyNameType', true);
     } else {
-      options.givenName = options.givenName || this.fragment.get('givenName');
-      options.familyName =
-        options.familyName || this.fragment.get('familyName');
-      options.name = options.name || this.fragment.get('name');
+      options.givenName = options.givenName || this.fragment.givenName;
+      options.familyName = options.familyName || this.fragment.familyName;
+      options.name = options.name || this.fragment.name;
 
       this.set('isReadonlyNameParts', false);
       this.set('isReadonlyNameType', false);
     }
     switch (true) {
-      case this.fragment.get('nameType') === 'Personal':
+      case this.fragment.nameType === 'Personal':
         this.set('isReadonly', true);
 
         this.fragment.set('givenName', options.givenName);
@@ -83,7 +82,7 @@ export default Component.extend({
           this.fragment.set('name', '');
         }
         return true;
-      case this.fragment.get('nameType') === 'Organizational':
+      case this.fragment.nameType === 'Organizational':
         this.fragment.set('givenName', null);
         this.fragment.set('familyName', null);
         this.fragment.set('name', options.name);
@@ -101,7 +100,7 @@ export default Component.extend({
     this.fragment.set('nameType', value);
     this.set('nameType', value);
 
-    if (this.fragment.get('nameType') === 'Personal') {
+    if (this.fragment.nameType === 'Personal') {
       this.set('isReadonly', true);
       this.joinNameParts();
     } else {
@@ -123,10 +122,10 @@ export default Component.extend({
       this.selectNameType(value);
     },
     addNameIdentifier() {
-      this.fragment.get('nameIdentifiers').createFragment();
+      this.fragment.nameIdentifiers.createFragment();
     },
     addAffiliation() {
-      this.fragment.get('affiliation').createFragment();
+      this.fragment.affiliation.createFragment();
     },
     setReadOnly(value) {
       this.set('isReadonly', value);

@@ -5,7 +5,7 @@ const UniqueRepositoryId = BaseValidator.extend({
   store: service(),
 
   validate(value, options, model) {
-    let providerId = model.get('provider').get('symbol') + '.';
+    let providerId = model.provider.symbol + '.';
     if (value === providerId) {
       return true;
     } else {

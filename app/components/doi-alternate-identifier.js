@@ -52,7 +52,7 @@ export default Component.extend({
       this.set('alternateIdentifierTypes', alternateIdentifierTypeList);
     },
     deleteAlternateIdentifier() {
-      this.model.get('alternateIdentifiers').removeObject(this.fragment);
+      this.model.alternateIdentifiers.removeObject(this.fragment);
     }
   }
 });

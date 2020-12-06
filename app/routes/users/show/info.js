@@ -7,14 +7,14 @@ export default Route.extend({
   model() {
     let self = this;
     return this.store
-      .findRecord('user', this.modelFor('users/show').get('id'))
+      .findRecord('user', this.modelFor('users/show').id
       .then(function (user) {
         return user;
       })
       .catch(function (reason) {
         console.debug(reason);
 
-        self.get('flashMessages').add({
+        self.flashMessages.add({
           message:
             'No results found. The ORCID record has not been linked to any DOIs. Contact the repository where your resources are deposited to request your ORCID record is linked to your contents DOIs. Or visit our support website, at https://support.datacite.org/docs/datacite-researcher-profiles, for more information.',
           href:

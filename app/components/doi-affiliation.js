@@ -37,7 +37,7 @@ export default Component.extend({
       this.updateAffiliation(ror);
     },
     deleteAffiliation() {
-      this.creator.get('affiliation').removeObject(this.fragment);
+      this.creator.affiliation.removeObject(this.fragment);
     }
   }
 });

@@ -7,9 +7,9 @@ export default Controller.extend({
   actions: {
     submit() {
       let self = this;
-      let providerId = this.model.get('provider.id');
+      let providerId = this.model.provider.id;
       this.store
-        .findRecord('repository', this.model.get('id'), {
+        .findRecord('repository', this.model.id, {
           backgroundReload: false
         })
         .then(function (repository) {

@@ -28,9 +28,9 @@ export default Service.extend({
   isBetaTester: false,
 
   load() {
-    if (this.get('session.data.authenticated.access_token')) {
+    if (this.session.data.authenticated.access_token) {
       // using authenticator:oauth2
-      let jwt = this.get('session.data.authenticated.access_token');
+      let jwt = this.session.data.authenticated.access_token;
 
       // rejecting revoked tokens
       if (ENV.JWT_BLACKLISTED.split(',').includes(jwt)) {
@@ -53,9 +53,9 @@ export default Service.extend({
         this.set('jwt', jwt);
         this.initUser(payload);
       }
-    } else if (this.get('session.data.authenticated.role_id')) {
+    } else if (this.session.data.authenticated.role_id) {
       // using authenticator:test
-      this.initUser(this.get('session.data.authenticated'));
+      this.initUser(this.session.data.authenticated);
     }
     return resolve();
   },

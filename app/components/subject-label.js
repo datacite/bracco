@@ -6,7 +6,7 @@ export default Component.extend({
   didReceiveAttrs() {
     this._super(...arguments);
 
-    let text = this.get('tag.text');
+    let text = this.tag.text;
 
     if (text.match(/^\d/)) {
       this.set('text', text.substr(text.indexOf(' ') + 1).toLowerCase());

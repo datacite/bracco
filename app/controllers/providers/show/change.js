@@ -12,13 +12,13 @@ export default Controller.extend({
       let url = ENV.API_URL + '/random';
       fetch(url, {
         headers: {
-          Authorization: 'Bearer ' + this.currentUser.get('jwt')
+          Authorization: 'Bearer ' + this.currentUser.jwt
         }
       })
         .then(function (response) {
           if (response.ok) {
             response.json().then(function (data) {
-              self.get('model').set('passwordInput', data.phrase);
+              self.model.set('passwordInput', data.phrase);
             });
           } else {
             console.debug(response);

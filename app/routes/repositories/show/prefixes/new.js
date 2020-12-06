@@ -8,7 +8,7 @@ export default Route.extend({
   model() {
     let repository = this.modelFor('repositories/show');
     return hash({
-      repository: this.store.findRecord('repository', repository.get('id')),
+      repository: this.store.findRecord('repository', repository.id),
       'repository-prefix': this.store.createRecord('repositoryPrefix', {
         repository
       })
@@ -16,7 +16,7 @@ export default Route.extend({
   },
 
   // afterModel() {
-  //   if (this.get('can').cannot('create prefix')) {
+  //   if (this.can.cannot('create prefix')) {
   //     return this.transitionTo('index');
   //   }
   // },

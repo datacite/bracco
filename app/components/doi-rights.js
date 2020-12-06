@@ -53,7 +53,7 @@ export default Component.extend({
       this.fragment.set('rightsUri', value);
     },
     deleteRights() {
-      this.model.get('rightsList').removeObject(this.fragment);
+      this.model.rightsList.removeObject(this.fragment);
     },
     searchRights(query) {
       let rightsFound = this.spdxLicenseListComplete.filter(function (rights) {

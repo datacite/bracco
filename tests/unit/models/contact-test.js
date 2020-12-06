@@ -21,6 +21,6 @@ module('Unit | Model | contact', function (hooks) {
     const contact = make('contact');
     model.set('givenName', contact.givenName);
     model.set('familyName', contact.familyName);
-    assert.equal(model.get('name'), 'John Smith');
+    assert.equal(model.name, 'John Smith');
   });
 });

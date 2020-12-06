@@ -41,7 +41,7 @@ export default Component.extend({
   }),
   doiLink: computed('link', 'model.id', function () {
     if (this.link === 'users.show.dois') {
-      return '/users/' + this.model.get('id') + '/dois';
+      return '/users/' + this.model.id + '/dois';
     } else {
       return null;
     }

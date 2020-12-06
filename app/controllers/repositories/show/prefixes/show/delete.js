@@ -4,9 +4,9 @@ export default Controller.extend({
   actions: {
     submit() {
       let self = this;
-      let repositoryId = this.model.get('repository.id');
+      let repositoryId = this.model.repository.id;
       this.store
-        .findRecord('repositoryPrefix', this.model.get('id'), {
+        .findRecord('repositoryPrefix', this.model.id, {
           backgroundReload: false
         })
         .then(function (repositoryPrefix) {
@@ -26,7 +26,7 @@ export default Controller.extend({
     cancel() {
       this.transitionToRoute(
         'repositories.show.prefixes',
-        this.model.get('repository.id')
+        this.model.repository.id
       );
     }
   }

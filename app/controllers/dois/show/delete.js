@@ -9,9 +9,9 @@ export default Controller.extend({
   actions: {
     destroy() {
       let self = this;
-      let repositoryId = this.model.get('repository.id');
+      let repositoryId = this.model.repository.id;
       this.store
-        .findRecord('doi', this.model.get('id'), { backgroundReload: false })
+        .findRecord('doi', this.model.id, { backgroundReload: false })
         .then(function (doi) {
           doi.destroyRecord().then(function () {
             self.transitionToRoute('repositories.show.dois', repositoryId);

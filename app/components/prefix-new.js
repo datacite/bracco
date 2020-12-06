@@ -28,8 +28,8 @@ export default Component.extend(Validations, {
   lastPrefix: '',
 
   addPrefixes() {
-    let first = A(this.firstPrefix.split('.')).get('lastObject');
-    let last = A(this.lastPrefix.split('.')).get('lastObject');
+    let first = A(this.firstPrefix.split('.')).lastObject;
+    let last = A(this.lastPrefix.split('.')).lastObject;
 
     while (first <= last) {
       let prefix = this.store.createRecord('prefix', { id: '10.' + first });

@@ -77,10 +77,8 @@ export default Component.extend({
     this._super(...arguments);
 
     if (
-      this.fragment.get('subject') &&
-      completeSubjectList.includes(
-        this.fragment.get('subject').replace('FOS: ', '')
-      )
+      this.fragment.subject &&
+      completeSubjectList.includes(this.fragment.subject.replace('FOS: ', ''))
     ) {
       this.set('oecdSelected', true);
     } else {
@@ -125,7 +123,7 @@ export default Component.extend({
       this.setSchemeUri(value);
     },
     deleteSubject() {
-      this.model.get('subjects').removeObject(this.fragment);
+      this.model.subjects.removeObject(this.fragment);
     },
     searchSubject(query) {
       let subjects = completeSubjectList.filter(function (subject) {

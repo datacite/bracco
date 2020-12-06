@@ -1,15 +1,15 @@
 import { attr } from '@ember-data/model';
 import MF from 'ember-data-model-fragments';
 import { validator, buildValidations } from 'ember-cp-validations';
-import { computed } from '@ember/object';
+import { computed, not } from '@ember/object/computed';
 
 const Validations = buildValidations({
   dateType: [
     validator('presence', {
       presence: true,
       message: 'Date type must be included when adding a Date',
-      disabled: computed('model.date', function () {
-        this.model.get('date') == null;
+      disabled: not('model.date', function () {
+        this.model.date;
       })
     })
   ],
@@ -17,7 +17,7 @@ const Validations = buildValidations({
     validator('date-format', {
       allowBlank: true,
       disabled: computed('model.state', function () {
-        return this.model.get('state') === 'draft';
+        return this.model.state === 'draft';
       })
     })
   ]

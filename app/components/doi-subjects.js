@@ -6,14 +6,14 @@ export default Component.extend({
   didReceiveAttrs() {
     this._super(...arguments);
 
-    if (!this.model.get('subjects')) {
+    if (!this.model.subjects) {
       this.model.set('subjects', []);
     }
   },
 
   actions: {
     addSubject() {
-      this.model.get('subjects').createFragment();
+      this.model.subjects.createFragment();
       this.set('showSubjects', true);
     },
     toggleSubjects() {

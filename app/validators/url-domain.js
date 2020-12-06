@@ -11,7 +11,7 @@ const UrlDomain = BaseValidator.extend({
       return true;
     } else {
       return this.store
-        .findRecord('repository', model.get('repository.id'), { reload: true })
+        .findRecord('repository', model.repository.id, { reload: true })
         .then(function (repository) {
           // if any domain is allowed
           if (repository.domains === '*') {

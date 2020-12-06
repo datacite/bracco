@@ -8,7 +8,7 @@ export default Controller.extend({
     submit() {
       let self = this;
       this.store
-        .findRecord('provider', this.model.get('id'), {
+        .findRecord('provider', this.model.id, {
           backgroundReload: false
         })
         .then(function (provider) {

@@ -18,9 +18,9 @@ export default Route.extend({
       issn: this.store.createFragment('issn')
     });
 
-    repository.get('language').pushObject('');
-    repository.get('repositoryType').pushObject('');
-    repository.get('certificate').pushObject('');
+    repository.language.pushObject('');
+    repository.repositoryType.pushObject('');
+    repository.certificate.pushObject('');
 
     return hash({
       provider,

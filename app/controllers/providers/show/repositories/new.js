@@ -52,19 +52,16 @@ export default Controller.extend({
           .then(function (repo) {
             self.set('re3data', repo);
             self.model.repository.set('clientType', 'repository');
-            self.model.repository.set(
-              're3data',
-              'https://doi.org/' + repo.get('id')
-            );
-            self.model.repository.set('name', repo.get('repositoryName'));
-            self.model.repository.set('description', repo.get('description'));
+            self.model.repository.set('re3data', 'https://doi.org/' + repo.id);
+            self.model.repository.set('name', repo.repositoryName);
+            self.model.repository.set('description', repo.description);
             self.model.repository.set(
               'alternateName',
-              A(repo.get('additionalNames')).get('firstObject').text
+              A(repo.additionalNames).firstObject.text
             );
-            self.model.repository.set('url', repo.get('repositoryUrl'));
-            if (repo.get('software').length > 0) {
-              let software = repo.get('software')[0].name;
+            self.model.repository.set('url', repo.repositoryUrl);
+            if (repo.software.length > 0) {
+              let software = repo.software[0].name;
               if (software === 'DataVerse') {
                 software = 'Dataverse';
               } else if (software === 'unknown') {
@@ -72,24 +69,24 @@ export default Controller.extend({
               }
               self.model.repository.set('software', capitalize(software));
             }
-            if (repo.get('repositoryLanguages').length > 0) {
+            if (repo.repositoryLanguages.length > 0) {
               self.model.repository.set(
                 'language',
-                A(repo.get('repositoryLanguages')).map(function (l) {
+                A(repo.repositoryLanguages).map(function (l) {
                   return langs.where('2', l.text)['1'];
                 })
               );
             }
-            if (repo.get('types').length > 0) {
+            if (repo.types.length > 0) {
               self.model.repository.set(
                 'repositoryType',
-                A(repo.get('types')).mapBy('text')
+                A(repo.types).mapBy('text')
               );
             }
-            if (repo.get('certificates').length > 0) {
+            if (repo.certificates.length > 0) {
               self.model.repository.set(
                 'certificate',
-                A(repo.get('certificates')).mapBy('text')
+                A(repo.certificates).mapBy('text')
               );
             }
           })
@@ -121,40 +118,40 @@ export default Controller.extend({
       this.set('softwares', softwareList);
     },
     addLanguage() {
-      this.model.repository.get('language').pushObject(null);
+      this.model.repository.language.pushObject(null);
     },
     addCertificate() {
-      this.model.repository.get('certificate').pushObject(null);
+      this.model.repository.certificate.pushObject(null);
     },
     addRepositoryType() {
-      this.model.repository.get('repositoryType').pushObject(null);
+      this.model.repository.repositoryType.pushObject(null);
     },
     submit(repository) {
       let self = this;
 
       // Remove all whitespace on domains.
-      if (this.model.repository.get('domains')) {
-        let domains = this.model.repository.get('domains');
+      if (this.model.repository.domains) {
+        let domains = this.model.repository.domains;
         this.model.repository.set('domains', domains.replace(/\s/g, ''));
       }
 
       repository.set(
         'language',
-        repository.get('language').filter(function (language) {
+        repository.language.filter(function (language) {
           return !isBlank(language);
         })
       );
 
       repository.set(
         'repositoryType',
-        repository.get('repositoryType').filter(function (repositoryType) {
+        repository.repositoryType.filter(function (repositoryType) {
           return !isBlank(repositoryType);
         })
       );
 
       repository.set(
         'certificate',
-        repository.get('certificate').filter(function (certificate) {
+        repository.certificate.filter(function (certificate) {
           return !isBlank(certificate);
         })
       );
@@ -172,7 +169,7 @@ export default Controller.extend({
       this.model.repository.rollbackAttributes();
       this.transitionToRoute(
         'providers.show.repositories',
-        this.get('model.provider.id')
+        this.model.provider.id
       );
     }
   }

@@ -6,7 +6,7 @@ export default Route.extend({
 
   model() {
     let repository = this.modelFor('repositories/show');
-    repository.set('confirmSymbol', repository.get('symbol'));
+    repository.set('confirmSymbol', repository.symbol);
     return repository;
   },
 

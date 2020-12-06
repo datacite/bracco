@@ -7,7 +7,7 @@ export default Route.extend({
 
   model() {
     let provider = this.modelFor('providers/show');
-    provider.set('confirmSymbol', provider.get('symbol'));
+    provider.set('confirmSymbol', provider.symbol);
     return provider;
   },
 

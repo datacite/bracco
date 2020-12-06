@@ -9,7 +9,7 @@ export default Route.extend({
   model() {
     let self = this;
     return this.store
-      .findRecord('doi', this.modelFor('dois/show').get('id'), {
+      .findRecord('doi', this.modelFor('dois/show').id, {
         include: 'client'
       })
       .then(function (doi) {
@@ -17,22 +17,18 @@ export default Route.extend({
           isBlank(doi.schemaVersion) ||
           !doi.schemaVersion.endsWith('kernel-4')
         ) {
-          self
-            .get('flashMessages')
-            .warning(
-              'Using the Form would update this DOI to the latest schema version.'
-            );
+          self.flashMessages.warning(
+            'Using the Form would update this DOI to the latest schema version.'
+          );
         }
         return doi;
       })
       .catch(function (reason) {
         console.debug(reason);
 
-        self
-          .get('flashMessages')
-          .warning(
-            'Fabrica is currently unavailable due to a DataCite API problem. We apologize for the inconvenience and are working hard to restore the service. Please check back later or contact DataCite Support if you have a question.'
-          );
+        self.flashMessages.warning(
+          'Fabrica is currently unavailable due to a DataCite API problem. We apologize for the inconvenience and are working hard to restore the service. Please check back later or contact DataCite Support if you have a question.'
+        );
         self.transitionTo('/');
       });
   },

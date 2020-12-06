@@ -22,7 +22,7 @@ export default Component.extend({
   didReceiveAttrs() {
     this._super(...arguments);
 
-    if (funderIdentifierTypeList.includes(this.fragment.get('subject'))) {
+    if (funderIdentifierTypeList.includes(this.fragment.subject)) {
       this.set('isCrossrefId', true);
     } else {
       this.set('isCrossrefId', false);
@@ -118,7 +118,7 @@ export default Component.extend({
       this.fragment.set('awardUri', value);
     },
     deleteFundingReference() {
-      this.model.get('fundingReferences').removeObject(this.fragment);
+      this.model.fundingReferences.removeObject(this.fragment);
     },
     searchFundingReferences(query) {
       let self = this;

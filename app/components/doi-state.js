@@ -18,7 +18,7 @@ export default Component.extend({
   didReceiveAttrs() {
     this._super(...arguments);
 
-    this.selectState(this.model.get('state'));
+    this.selectState(this.model.state);
   },
 
   selectState(state) {

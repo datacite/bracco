@@ -12,7 +12,7 @@ export default Route.extend({
         number: params.page,
         size: params.size
       },
-      'consortium-id': this.modelFor('providers/show').get('id')
+      'consortium-id': this.modelFor('providers/show').id
     });
 
     return hash({

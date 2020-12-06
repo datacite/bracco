@@ -27,14 +27,14 @@ export default Component.extend({
   didReceiveAttrs() {
     this._super(...arguments);
 
-    this.set('query', this.model.get('query.query'));
-    this.set('sort', this.model.get('query.sort'));
-    this.set('filters', this.model.get('query'));
+    this.set('query', this.model.query.query);
+    this.set('sort', this.model.query.sort);
+    this.set('filters', this.model.query);
 
     if (this.name) {
       this.set('modelName', this.name);
     } else {
-      this.set('modelName', placeholders[this.model.get('modelName')]);
+      this.set('modelName', placeholders[this.model.modelName]);
     }
 
     if (this.modelName === 'DOI') {
@@ -59,7 +59,7 @@ export default Component.extend({
   },
 
   search() {
-    let params = assign(this.model.get('query'), {
+    let params = assign(this.model.query, {
       query: this.query,
       sort: this.sort
     });

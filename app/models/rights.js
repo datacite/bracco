@@ -11,7 +11,7 @@ const Validations = buildValidations({
       message: 'Rights scheme URI has to be a valid URI'
       // disable url check for info URI
       // disabled: computed('fragment.rightsUri', function() {
-      //   return this.fragment.get('rightsUri').startsWith('info:');
+      //   return this.fragment.rightsUri.startsWith('info:');
       // }),
     })
   ]

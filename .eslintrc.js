@@ -1,17 +1,21 @@
 module.exports = {
   root: true,
+  parser: 'babel-eslint',
   parserOptions: {
     ecmaVersion: 2018,
     sourceType: 'module'
   },
-  extends: ['eslint:recommended'],
+  plugins: ['ember'],
+  extends: ['eslint:recommended', 'plugin:ember/recommended'],
   env: {
     browser: true,
     node: true,
     es6: true
   },
   rules: {
-    'no-console': 'off'
+    'no-console': 'off',
+    'ember/no-classic-classes': 0,
+    'ember/no-classic-components': 0
   },
   overrides: [
     // node files

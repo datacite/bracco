@@ -26,7 +26,7 @@ export default Component.extend({
       this.set('user', false);
     }
 
-    let home = this.currentUser.get('home');
+    let home = this.currentUser.home;
     if (typeOf(home) == 'object') {
       this.set('home', { route: home.route, model: home.id });
     } else if (home === 'password') {
@@ -37,7 +37,7 @@ export default Component.extend({
       this.set('home', null);
     }
 
-    let settings = this.currentUser.get('settings');
+    let settings = this.currentUser.settings;
     if (typeOf(settings) == 'object') {
       this.set('settings', { route: settings.route, model: settings.id });
     } else if (home === 'password') {

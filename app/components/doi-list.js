@@ -6,7 +6,7 @@ export default Component.extend({
   can: service(),
   tagName: 'div',
   classNames: ['row'],
-  isResearcherProfile: computed(function () {
+  isResearcherProfile: computed('attrs.link', 'data', function () {
     if (this.data == undefined) {
       return false;
     }

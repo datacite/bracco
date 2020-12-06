@@ -22,7 +22,7 @@ export default Component.extend({
 
   searchProvider(query) {
     let self = this;
-    if (this.currentUser.get('isAdmin')) {
+    if (this.currentUser.isAdmin) {
       this.store
         .query('provider', {
           query,
@@ -37,11 +37,11 @@ export default Component.extend({
           console.debug(reason);
           self.set('providers', []);
         });
-    } else if (this.currentUser.get('isConsortium')) {
+    } else if (this.currentUser.isConsortium) {
       this.store
         .query('provider', {
           query,
-          'consortium-id': this.currentUser.get('provider_id'),
+          'consortium-id': this.currentUser.provider_id,
           sort: 'name',
           'member-type': 'consortium_organization',
           'page[size]': 100
@@ -70,7 +70,7 @@ export default Component.extend({
     },
     submit() {
       this.model.save();
-      let count = this.model.get('meta.doiCount');
+      let count = this.model.meta.doiCount;
       this.flashMessages.success(
         'DOI transfer for ' +
           this.intl.formatNumber(count) +

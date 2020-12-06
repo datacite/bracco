@@ -21,10 +21,10 @@ module('Unit | Model | creator', function (hooks) {
     const creator = make('creator');
     model.set('givenName', creator.givenName);
     model.set('familyName', creator.familyName);
-    assert.equal(model.get('displayName'), 'Mitesh Patel');
+    assert.equal(model.displayName, 'Mitesh Patel');
 
     const nameIdentifier = [make('nameIdentifier')];
     model.set('nameIdentifiers', nameIdentifier);
-    assert.equal(model.get('orcid'), '0000-0003-1419-2405');
+    assert.equal(model.orcid, '0000-0003-1419-2405');
   });
 });

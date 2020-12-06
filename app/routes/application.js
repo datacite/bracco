@@ -21,7 +21,7 @@ export default Route.extend(ApplicationRouteMixin, {
     const { jwt } = params;
     if (jwt) {
       this.set('isTokenAuthenticating', true);
-      if (this.get('session.isAuthenticated')) {
+      if (this.session.isAuthenticated) {
         this.session.invalidate();
       }
       let self = this;

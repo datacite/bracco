@@ -21,7 +21,7 @@ module('Unit | Controller | providers', function (hooks) {
     };
     controller.set('model', model);
     controller.send('selectCountry', 'Australia');
-    assert.equal(controller.model.organization.get('country'), 'Australia');
+    assert.equal(controller.model.organization.country, 'Australia');
     controller.send('searchCountry', 'Australia');
     assert.equal(controller.countries.length, 1);
   });
@@ -38,7 +38,7 @@ module('Unit | Controller | providers', function (hooks) {
     controller.set('model', model);
     controller.send('selectOrganizationType', 'nationalInstitution');
     assert.equal(
-      controller.model.organization.get('organizationType'),
+      controller.model.organization.organizationType,
       'nationalInstitution'
     );
     controller.send('searchOrganizationType', 'National');
@@ -55,10 +55,7 @@ module('Unit | Controller | providers', function (hooks) {
     };
     controller.set('model', model);
     controller.send('selectMemberType', 'direct_member');
-    assert.equal(
-      controller.model.organization.get('memberType'),
-      'direct_member'
-    );
+    assert.equal(controller.model.organization.memberType, 'direct_member');
     controller.send('searchMemberType', 'direct_member');
     assert.equal(controller.memberTypes.length, 1);
   });
@@ -73,7 +70,7 @@ module('Unit | Controller | providers', function (hooks) {
     };
     controller.set('model', model);
     controller.send('selectFocusArea', 'general');
-    assert.equal(controller.model.organization.get('focusArea'), 'general');
+    assert.equal(controller.model.organization.focusArea, 'general');
     controller.send('searchFocusArea', 'general');
     assert.equal(controller.focusAreas.length, 1);
   });
@@ -88,7 +85,7 @@ module('Unit | Controller | providers', function (hooks) {
     };
     controller.set('model', model);
     controller.send('selectFocusArea', 'general');
-    assert.equal(controller.model.organization.get('focusArea'), 'general');
+    assert.equal(controller.model.organization.focusArea, 'general');
     controller.send('searchFocusArea', 'general');
     assert.equal(controller.focusAreas.length, 1);
   });
@@ -101,9 +98,9 @@ module('Unit | Controller | providers', function (hooks) {
   //   };
   //   controller.set('model', model);
   //   controller.send('searchConsortium', '');
-  //   assert.equal(controller.model.organization.get('consortia'), '');
+  //   assert.equal(controller.model.organization.consortia, '');
   //   controller.send('selectConsortium', '');
-  //   assert.equal(controller.get('consortium').length,1);
+  //   assert.equal(controller.consortium.length,1);
   // });
 
   // test('should list ror id', function(assert) {
@@ -119,8 +116,8 @@ module('Unit | Controller | providers', function (hooks) {
   //   };
   //   controller.set('model', model);
   //   controller.send('searchRor', ror.name); // what should be sent here
-  //   assert.equal(controller.model.organization.get('organizations'), '');
+  //   assert.equal(controller.model.organization.organizations, '');
   //   controller.send('selectRor', ror);
-  //   assert.equal(controller.get('organizations').length,0); // why is organisations set to 0
+  //   assert.equal(controller.organizations.length,0); // why is organisations set to 0
   // });
 });

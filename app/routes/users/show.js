@@ -33,7 +33,7 @@ export default Route.extend({
           .catch(function (reason) {
             console.debug(reason);
 
-            self.get('flashMessages').add({
+            self.flashMessages.add({
               message:
                 'No results found. The ORCID record ' +
                 params.user_id +

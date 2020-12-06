@@ -6,13 +6,13 @@ export default Component.extend({
   didReceiveAttrs() {
     this._super(...arguments);
 
-    if (!this.model.get('formats')) {
+    if (!this.model.formats) {
       this.model.set('formats', []);
     }
   },
   actions: {
     addFormat() {
-      this.model.get('formats').pushObject();
+      this.model.formats.pushObject();
       this.set('showFormats', true);
     },
     toggleFormats() {

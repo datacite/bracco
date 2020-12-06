@@ -11,28 +11,26 @@ export default Component.extend({
   didReceiveAttrs() {
     this._super(...arguments);
 
-    if (this.model.get('landingPage').status == 200) {
+    if (this.model.landingPage.status == 200) {
       let redirectText = 'resolved ';
-      if (this.model.get('landingPage').redirectCount > 1) {
-        let redirectUrls = this.model
-          .get('landingPage')
-          .redirectUrls.join(', ');
+      if (this.model.landingPage.redirectCount > 1) {
+        let redirectUrls = this.model.landingPage.redirectUrls.join(', ');
         redirectText =
           'redirected <strong>' +
-          this.model.get('landingPage').redirectCount +
+          this.model.landingPage.redirectCount +
           ' </strong> times (' +
           redirectUrls +
           '), and resolved to <a href="' +
-          this.model.get('landingPage').url +
+          this.model.landingPage.url +
           '">' +
-          this.model.get('landingPage').url +
+          this.model.landingPage.url +
           '</a> ';
-      } else if (this.model.get('landingPage').redirectCount > 0) {
+      } else if (this.model.landingPage.redirectCount > 0) {
         redirectText =
           'redirected <strong>once</strong>, and resolved to <a href="' +
-          this.model.get('landingPage').url +
+          this.model.landingPage.url +
           '">' +
-          this.model.get('landingPage').url +
+          this.model.landingPage.url +
           '</a> ';
       }
       this.set('isFound', {
@@ -41,7 +39,7 @@ export default Component.extend({
           'The link check ' +
           redirectText +
           'with HTTP status code <strong>' +
-          this.model.get('landingPage').status +
+          this.model.landingPage.status +
           '</strong>.',
         isChecked: true
       });
@@ -50,14 +48,14 @@ export default Component.extend({
         text: 'The URL resolves properly.',
         helpText:
           'The link check returned the HTTP status code <strong>' +
-          this.model.get('landingPage').status +
+          this.model.landingPage.status +
           '</strong>. This can be a temporal problem and we will repeat the link check.',
         isChecked: false
       });
     }
-    let contentType = this.model.get('landingPage').contentType;
+    let contentType = this.model.landingPage.contentType;
     if (contentType) {
-      contentType = A(contentType.split(';')).get('firstObject').trim();
+      contentType = A(contentType.split(';')).firstObject.trim();
     } else {
       contentType = 'unknown';
     }
@@ -80,7 +78,7 @@ export default Component.extend({
         isChecked: false
       });
     }
-    if (this.model.get('landingPage').bodyHasPid) {
+    if (this.model.landingPage.bodyHasPid) {
       this.set('hasDoi', {
         text: 'The landing page includes the DOI.',
         helpText: 'The link check found the DOI in the landing page HTML.',
@@ -94,7 +92,7 @@ export default Component.extend({
         isChecked: false
       });
     }
-    if (this.model.get('landingPage').hasSchemaOrg) {
+    if (this.model.landingPage.hasSchemaOrg) {
       this.set('hasSchemaOrg', {
         text: 'The landing page includes metadata in schema.org format.',
         helpText:

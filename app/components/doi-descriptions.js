@@ -6,14 +6,14 @@ export default Component.extend({
   didReceiveAttrs() {
     this._super(...arguments);
 
-    if (!this.model.get('descriptions')) {
+    if (!this.model.descriptions) {
       this.model.set('descriptions', []);
     }
   },
 
   actions: {
     addDescription() {
-      this.model.get('descriptions').createFragment();
+      this.model.descriptions.createFragment();
       this.set('showDescriptions', true);
     },
     toggleDescriptions() {

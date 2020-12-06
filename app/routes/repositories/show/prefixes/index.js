@@ -7,7 +7,7 @@ export default Route.extend({
   can: service(),
 
   model(params) {
-    let repositoryId = this.modelFor('repositories/show').get('id');
+    let repositoryId = this.modelFor('repositories/show').id;
 
     params = assign(params, {
       page: {

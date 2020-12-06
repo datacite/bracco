@@ -175,7 +175,7 @@ export default Controller.extend({
       this.model.organization.rollbackAttributes();
       this.transitionToRoute(
         'providers.show.organizations',
-        this.get('model.provider.id')
+        this.model.provider.id
       );
     }
   }

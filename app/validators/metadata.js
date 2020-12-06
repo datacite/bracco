@@ -12,18 +12,18 @@ const metadata = BaseValidator.extend({
     } else {
       let xml = this.b64EncodeUnicode(value);
       let url = ENV.API_URL + '/dois/validate';
-      let repositoryId = model.get('repository').get('id');
+      let repositoryId = model.repository.id;
       return fetch(url, {
         method: 'post',
         headers: {
-          authorization: 'Bearer ' + this.currentUser.get('jwt'),
+          authorization: 'Bearer ' + this.currentUser.jwt,
           'content-type': 'application/vnd.api+json; charset=utf-8'
         },
         body: JSON.stringify({
           data: {
             type: 'dois',
             attributes: {
-              doi: this.get(options.dependentKeys[0]),
+              doi: this.options.dependentKeys[0],
               xml
             },
             relationships: {

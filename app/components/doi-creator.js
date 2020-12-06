@@ -3,7 +3,7 @@ import PersonBaseComponent from './person-base-component';
 export default PersonBaseComponent.extend({
   actions: {
     deleteCreator() {
-      this.model.get('creators').removeObject(this.fragment);
+      this.model.creators.removeObject(this.fragment);
     }
   }
 });

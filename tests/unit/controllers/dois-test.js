@@ -17,10 +17,10 @@ module('Unit | Controller | dois', function (hooks) {
     let controller = this.owner.lookup('controller:dois.show.edit');
     let doi = make('doi');
     let store = this.owner.lookup('service:store');
-    let originalSource = store.peekRecord('doi', 1).get('source');
+    let originalSource = store.peekRecord('doi', 1).source;
     assert.equal(originalSource,'fabrica');
     controller.send('submit', doi);
-    let targetSource = store.peekRecord('doi', 1).get('source');
+    let targetSource = store.peekRecord('doi', 1).source;
     assert.equal(targetSource,'fabricaForm');
   });
   */

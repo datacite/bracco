@@ -9,20 +9,18 @@ export default Route.extend({
     let self = this;
     return this.store
       .query('provider-prefix', {
-        'provider-id': this.modelFor('providers/show').get('id'),
+        'provider-id': this.modelFor('providers/show').id,
         'prefix-id': params.prefix_id
       })
       .then(function (providerPrefixes) {
-        return A(providerPrefixes).get('firstObject');
+        return A(providerPrefixes).firstObject;
       })
       .catch(function (reason) {
         console.debug(reason);
 
-        self
-          .get('flashMessages')
-          .warning(
-            'Fabrica is currently unavailable due to a DataCite API problem. We apologize for the inconvenience and are working hard to restore the service. Please check back later or contact DataCite Support if you have a question.'
-          );
+        self.flashMessages.warning(
+          'Fabrica is currently unavailable due to a DataCite API problem. We apologize for the inconvenience and are working hard to restore the service. Please check back later or contact DataCite Support if you have a question.'
+        );
         self.transitionTo('/');
       });
   },

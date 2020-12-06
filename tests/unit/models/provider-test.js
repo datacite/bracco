@@ -1,6 +1,5 @@
 import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
-import { get } from '@ember/object';
 import { run } from '@ember/runloop';
 
 module('Unit | Model | provider', function (hooks) {
@@ -17,7 +16,7 @@ module('Unit | Model | provider', function (hooks) {
     const Provider = this.owner.lookup('service:store').modelFor('provider');
 
     // lookup the relationship on the consortium model
-    const relationship = get(Provider, 'relationshipsByName').get('consortium');
+    const relationship = Provider.relationshipsByName.consortium;
 
     assert.equal(
       relationship.key,
@@ -35,9 +34,7 @@ module('Unit | Model | provider', function (hooks) {
     const Provider = this.owner.lookup('service:store').modelFor('provider');
 
     // lookup the relationship on the consortiumOrganization model
-    const relationship = get(Provider, 'relationshipsByName').get(
-      'consortiumOrganizations'
-    );
+    const relationship = Provider.relationshipsByName.consortiumOrganizations;
 
     assert.equal(
       relationship.key,

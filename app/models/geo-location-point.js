@@ -19,7 +19,7 @@ const Validations = buildValidations({
       message:
         'Point Longitude must be included if you input a GeoLocation Point.',
       disabled: computed('model.pointLatitude', function () {
-        return isBlank(this.model.get('pointLatitude'));
+        return isBlank(this.model.pointLatitude);
       })
     })
   ],
@@ -37,7 +37,7 @@ const Validations = buildValidations({
       message:
         'Point Latitude must be included if you input a GeoLocation Point.',
       disabled: computed('model.pointLongitude', function () {
-        return isBlank(this.model.get('pointLongitude'));
+        return isBlank(this.model.pointLongitude);
       })
     })
   ]

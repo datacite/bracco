@@ -29,12 +29,11 @@ export default Component.extend({
 
   selectStyle(style) {
     let self = this;
-    let url =
-      ENV.API_URL + '/dois/' + this.model.get('doi') + '?style=' + style;
+    let url = ENV.API_URL + '/dois/' + this.model.doi + '?style=' + style;
     let headers = { Accept: 'text/x-bibliography' };
-    if (this.currentUser.get('jwt')) {
+    if (this.currentUser.jwt) {
       headers = {
-        Authorization: 'Bearer ' + this.currentUser.get('jwt'),
+        Authorization: 'Bearer ' + this.currentUser.jwt,
         Accept: 'text/x-bibliography'
       };
     }
@@ -63,7 +62,7 @@ export default Component.extend({
         );
       }
     });
-    // this.get('router').transitionTo({ queryParams: { citation: citation } });
+    // this.router.transitionTo({ queryParams: { citation: citation } });
   },
 
   actions: {

@@ -182,10 +182,8 @@ export default Controller.extend({
   // we are storing state/province information for US, CA, AU and CN
   showStateSearch: computed('model.billingInformation.country', function () {
     return (
-      this.model.get('billingInformation.country') &&
-      w('US CA AU CN').includes(
-        this.model.get('billingInformation.country.code')
-      )
+      this.model.billingInformation.country &&
+      w('US CA AU CN').includes(this.model.billingInformation.country.code)
     );
   }),
 
@@ -205,19 +203,19 @@ export default Controller.extend({
     },
     searchState(query) {
       let states = null;
-      if (this.model.get('billingInformation.country.code') === 'US') {
+      if (this.model.billingInformation.country.code === 'US') {
         states = stateList.filter(function (state) {
           return state.name.toLowerCase().startsWith(query.toLowerCase());
         });
-      } else if (this.model.get('billingInformation.country.code') === 'CA') {
+      } else if (this.model.billingInformation.country.code === 'CA') {
         states = provinceListCanada.filter(function (state) {
           return state.name.toLowerCase().startsWith(query.toLowerCase());
         });
-      } else if (this.model.get('billingInformation.country.code') === 'CN') {
+      } else if (this.model.billingInformation.country.code === 'CN') {
         states = provinceListChina.filter(function (state) {
           return state.name.toLowerCase().startsWith(query.toLowerCase());
         });
-      } else if (this.model.get('billingInformation.country.code') === 'AU') {
+      } else if (this.model.billingInformation.country.code === 'AU') {
         states = stateListAustralia.filter(function (state) {
           return state.name.toLowerCase().startsWith(query.toLowerCase());
         });
@@ -329,7 +327,7 @@ export default Controller.extend({
 
       reader.readAsDataURL(file.blob).then(
         (logo) => {
-          self.get('model').set('logo', logo);
+          self.model.set('logo', logo);
         },
         (err) => {
           console.error(err);

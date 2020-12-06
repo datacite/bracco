@@ -10,9 +10,9 @@ export default Component.extend({
   languageList,
   languages: languageList,
   language: computed('fragment.lang', function () {
-    return ISO6391.getName(this.get('fragment.lang')) !== ''
-      ? ISO6391.getName(this.get('fragment.lang'))
-      : this.get('fragment.lang');
+    return ISO6391.getName(this.fragment.lang) !== ''
+      ? ISO6391.getName(this.fragment.lang)
+      : this.fragment.lang;
   }),
 
   actions: {
@@ -20,7 +20,7 @@ export default Component.extend({
       this.fragment.set('title', value);
     },
     deleteTitle() {
-      this.model.get('titles').removeObject(this.fragment);
+      this.model.titles.removeObject(this.fragment);
     },
     selectTitleType(titleType) {
       this.fragment.set('titleType', titleType);

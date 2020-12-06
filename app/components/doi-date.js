@@ -31,7 +31,7 @@ export default Component.extend({
       this.fragment.set('dateInformation', value);
     },
     deleteDate() {
-      this.model.get('dates').removeObject(this.fragment);
+      this.model.dates.removeObject(this.fragment);
     }
   }
 });
