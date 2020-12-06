@@ -14,14 +14,14 @@ export default Route.extend({
         provider
       })
     });
-  },
-
-  setupController(controller, model) {
-    this._super(controller, model);
-
-    this.controllerFor('providers.show.prefixes.new').send(
-      'searchPrefix',
-      null
-    );
   }
+
+  // setupController(controller, model) {
+  //   this._super(controller, model);
+
+  //   this.controllerFor('providers.show.prefixes.new').send(
+  //     'searchPrefix',
+  //     null
+  //   );
+  // }
 });

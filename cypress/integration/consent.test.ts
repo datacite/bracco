@@ -1,3 +1,5 @@
+/* global describe it cy */
+
 /// <reference types="cypress" />
 
 describe('Consent', () => {

@@ -7,7 +7,7 @@ export default Route.extend({
   model() {
     let self = this;
     return this.store
-      .findRecord('user', this.modelFor('users/show').id
+      .findRecord('user', this.modelFor('users/show').id)
       .then(function (user) {
         return user;
       })

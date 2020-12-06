@@ -6,11 +6,11 @@ export default Component.extend({
   can: service(),
   tagName: 'div',
   classNames: ['row'],
-  isResearcherProfile: computed('attrs.link', 'data', function () {
+  isResearcherProfile: computed('link', 'data', function () {
     if (this.data == undefined) {
       return false;
     }
-    if (this.attrs.link == 'users.show.dois') {
+    if (this.link == 'users.show.dois') {
       return true;
     } else {
       return false;

@@ -4,7 +4,11 @@ import { inject as service } from '@ember/service';
 export default Component.extend({
   store: service(),
 
-  organizations: [],
+  init(...args) {
+    this._super(...args);
+
+    this.organizations = this.organizations || [];
+  },
 
   updateAffiliation(organizationRecord) {
     if (organizationRecord) {

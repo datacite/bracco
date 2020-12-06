@@ -21,14 +21,14 @@ export default Route.extend({
   //   }
   // },
 
-  setupController(controller, model) {
-    this._super(controller, model);
+  // setupController(controller, model) {
+  //   this._super(controller, model);
 
-    this.controllerFor('repositories.show.prefixes.new').send(
-      'searchPrefix',
-      null
-    );
-  },
+  //   this.controllerFor('repositories.show.prefixes.new').send(
+  //     'searchPrefix',
+  //     null
+  //   );
+  // },
 
   actions: {
     queryParamsDidChange() {

@@ -1,3 +1,5 @@
+/* global Cypress */
+
 import '@cypress/code-coverage/support';
 require('cypress-react-unit-test/support');
 
@@ -6,7 +8,7 @@ require('cypress-react-unit-test/support');
 
 // To turn off all uncaught exception handling
 
-Cypress.on('uncaught:exception', (err, runnable) => {
+Cypress.on('uncaught:exception', () => {
   // returning false here prevents Cypress from
   // failing the test
   return false;

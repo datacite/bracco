@@ -47,8 +47,12 @@ export default Controller.extend({
   nonProfitStatusList,
   nonProfitStatuses: nonProfitStatusList,
 
-  organizations: [],
-  consortia: [],
+  init(...args) {
+    this._super(...args);
+
+    this.organizations = this.organizations || [];
+    this.consortia = this.consortia || [];
+  },
 
   actions: {
     searchCountry(query) {

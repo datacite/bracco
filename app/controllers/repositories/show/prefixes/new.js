@@ -3,8 +3,13 @@ import { inject as service } from '@ember/service';
 
 export default Controller.extend({
   store: service(),
-  'provider-prefixes': [],
   disabled: true,
+
+  init(...args) {
+    this._super(...args);
+
+    this['provider-prefixes'] = this['provider-prefixes'] || [];
+  },
 
   searchPrefix(query) {
     let self = this;

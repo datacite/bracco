@@ -25,7 +25,6 @@ const categoryList = [
 export default Component.extend({
   tagName: 'div',
   classNames: ['col-lg-3', 'col-md-4'],
-  data: [],
   count: computed('data', function () {
     if (this.data) {
       return this.data.reduce(function (a, b) {
@@ -48,9 +47,10 @@ export default Component.extend({
   }),
   categories: categoryList,
 
-  init() {
-    this._super();
+  init(...args) {
+    this._super(...args);
 
+    this.set(this, this.data, []);
     schedule('afterRender', this, function () {
       this.send('donutChart');
     });

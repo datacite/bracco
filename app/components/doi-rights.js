@@ -3,13 +3,15 @@ import { isBlank, typeOf } from '@ember/utils';
 
 export default Component.extend({
   isSpdxId: false,
-  selected: [],
 
-  init() {
-    this._super();
+  init(...args) {
+    this._super(...args);
+
+    this.selected = this.selected || [];
     this.set('spdxLicenseListComplete', this.spdx.spdxList);
     this.set('spdxLicenseList', this.spdx.spdxList);
   },
+
   updateRights(rights) {
     switch (true) {
       case isBlank(rights):

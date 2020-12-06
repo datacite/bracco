@@ -26,7 +26,12 @@ const alternateIdentifierTypeList = [
 export default Component.extend({
   alternateIdentifierTypeList,
   alternateIdentifierTypes: alternateIdentifierTypeList,
-  selected: [],
+
+  init(...args) {
+    this._super(...args);
+
+    this.selected = this.selected || [];
+  },
 
   actions: {
     createOnEnter(select, e) {

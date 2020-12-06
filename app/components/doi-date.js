@@ -17,7 +17,12 @@ const dateTypesCompleteList = [
 export default Component.extend({
   dateTypesCompleteList,
   dateTypesList: dateTypesCompleteList,
-  dateTypes: [],
+
+  init(...args) {
+    this._super(...args);
+
+    this.dateTypes = this.dateTypes || [];
+  },
 
   actions: {
     updateDate(value) {

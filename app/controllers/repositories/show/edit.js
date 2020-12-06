@@ -29,11 +29,16 @@ export default Controller.extend({
   provider: null,
   setPassword: false,
   re3data: null,
-  repositories: [],
   softwareList,
   softwares: softwareList,
   clientTypeList,
   clientTypes: clientTypeList,
+
+  init(...args) {
+    this._super(...args);
+
+    this.repositories = this.repositories || [];
+  },
 
   actions: {
     searchRe3Data(query) {

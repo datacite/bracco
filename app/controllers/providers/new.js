@@ -178,15 +178,24 @@ export default Controller.extend({
   focusAreas: focusAreaList,
   nonProfitStatusList,
   nonProfitStatuses: nonProfitStatusList,
-  organizations: [],
-  consortia: [],
+
   // we are storing state/province information for US, CA, AU and CN
-  showStateSearch: computed('model.billingInformation.country', function () {
-    return (
-      this.model.billingInformation.country &&
-      w('US CA AU CN').includes(this.model.billingInformation.country.code)
-    );
-  }),
+  showStateSearch: computed(
+    'model.billingInformation.{country,country.code}',
+    function () {
+      return (
+        this.model.billingInformation.country &&
+        w('US CA AU CN').includes(this.model.billingInformation.country.code)
+      );
+    }
+  ),
+
+  init(...args) {
+    this._super(...args);
+
+    this.organizations = this.organizations || [];
+    this.consortia = this.consortia || [];
+  },
 
   actions: {
     searchCountry(query) {

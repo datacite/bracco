@@ -14,10 +14,14 @@ export default Component.extend({
   funderIdentifierTypeList,
   funderIdentifierTypes: funderIdentifierTypeList,
   isCrossrefId: false,
-  selected: [],
   store: service(),
 
-  funders: [],
+  init(...args) {
+    this._super(...args);
+
+    this.selected = this.selected || [];
+    this.funders = this.funders || [];
+  },
 
   didReceiveAttrs() {
     this._super(...arguments);

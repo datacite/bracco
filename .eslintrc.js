@@ -15,7 +15,12 @@ module.exports = {
   rules: {
     'no-console': 'off',
     'ember/no-classic-classes': 0,
-    'ember/no-classic-components': 0
+    'ember/no-classic-components': 0,
+    'ember/no-actions-hash': 0,
+    'ember/no-component-lifecycle-hooks': 0,
+    'ember/require-tagless-components': 0,
+    'ember/no-mixins': 0,
+    'ember/no-shadow-route-definition': 0
   },
   overrides: [
     // node files

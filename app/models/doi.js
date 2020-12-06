@@ -1,5 +1,5 @@
 import Model, { belongsTo, attr } from '@ember-data/model';
-import { computed } from '@ember/object';
+import { computed, equal } from '@ember/object/computed';
 import { validator, buildValidations } from 'ember-cp-validations';
 import ENV from 'bracco/config/environment';
 import { fragmentArray, array } from 'ember-data-model-fragments/attributes';
@@ -50,7 +50,7 @@ const Validations = buildValidations({
     validator('unique-doi', {
       dependentKeys: ['model.prefix'],
       disabled: computed('model.mode', function () {
-        return !['new', 'upload'].includes(this.model.mode));
+        return !['new', 'upload'].includes(this.model.mode);
       })
     })
   ],
@@ -58,14 +58,10 @@ const Validations = buildValidations({
     validator('url-format', {
       require_tld: false,
       message: 'Please enter a valid URL that the DOI should resolve to.',
-      disabled: computed('model.state', function () {
-        return this.model.state === 'draft';
-      })
+      disabled: equal('model.state', 'draft')
     }),
     validator('url-domain', {
-      disabled: computed('model.state', function () {
-        return this.model.state === 'draft';
-      })
+      disabled: equal('model.state', 'draft')
     })
   ],
   publisher: [

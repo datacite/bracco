@@ -60,7 +60,6 @@ export default Component.extend({
   completeSubjectList,
   subjects: completeSubjectList,
   oecdSelected: false,
-  selected: [],
 
   setSchemeUri(value) {
     let uri = URI(value);
@@ -73,6 +72,13 @@ export default Component.extend({
     this.fragment.set('subjectScheme', value);
     this.set('subjectScheme', value);
   },
+
+  init(...args) {
+    this._super(...args);
+
+    this.selected = this.selected || [];
+  },
+
   didReceiveAttrs() {
     this._super(...arguments);
 

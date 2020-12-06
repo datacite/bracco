@@ -89,9 +89,17 @@ export default Component.extend({
   relatedIdentifierTypes: relatedIdentifierTypeList,
   controlledIdentifierType: false,
   isMetadataRelationType: false,
-  isMetadataRelationTypes: ['HasMetadata', 'IsMetadataFor'],
   resourceTypeGeneralList,
   resourceTypesGeneral: resourceTypeGeneralList,
+
+  init(...args) {
+    this._super(...args);
+
+    this.isMetadataRelationTypes = this.isMetadataRelationTypes || [
+      'HasMetadata',
+      'IsMetadataFor'
+    ];
+  },
 
   didReceiveAttrs() {
     this._super(...arguments);

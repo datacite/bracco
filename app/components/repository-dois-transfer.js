@@ -11,8 +11,13 @@ export default Component.extend({
   classNames: ['row'],
   provider: null,
   repository: null,
-  repositories: [],
   isDisabled: true,
+
+  init(...args) {
+    this._super(...args);
+
+    this.repositories = this.repositories || [];
+  },
 
   didReceiveAttrs() {
     this._super(...arguments);

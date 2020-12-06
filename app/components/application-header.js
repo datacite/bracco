@@ -1,6 +1,6 @@
 import { typeOf } from '@ember/utils';
 import { htmlSafe } from '@ember/template';
-import Component from '@ember/component';
+import Component from '@glimmer/component';
 import { inject as service } from '@ember/service';
 import ENV from 'bracco/config/environment';
 
@@ -13,7 +13,12 @@ export default Component.extend({
   title: null,
   home: '/',
   user: true,
-  data: {},
+
+  init(...args) {
+    this._super(...args);
+
+    this.data = this.data || {};
+  },
 
   didReceiveAttrs() {
     this._super(...arguments);
