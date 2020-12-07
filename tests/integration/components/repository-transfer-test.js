@@ -4,7 +4,7 @@ import { setupRenderingTest } from 'ember-qunit';
 import { setupFactoryGuy, make } from 'ember-data-factory-guy';
 import { render } from '@ember/test-helpers';
 
-module('Integration | Component | repository transfer', function (hooks) {
+module('Integration | Component | repository-transfer', function (hooks) {
   setupRenderingTest(hooks);
   setupFactoryGuy(hooks);
 
@@ -18,7 +18,7 @@ module('Integration | Component | repository transfer', function (hooks) {
     assert
       .dom(this.element)
       .hasText(
-        'Transfer Repository Member/Consortium Type to search... Transfer this repository to another member/consortium. It can take up to one hour for the transfer to complete. Transfer Repository Cancel'
+        'Transfer Repository Member/Consortium Transfer this repository to another member/consortium. It can take up to one hour for the transfer to complete. Transfer Repository Cancel'
       );
   });
 });

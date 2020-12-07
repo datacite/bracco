@@ -12,7 +12,7 @@ const metadata = BaseValidator.extend({
     } else {
       let xml = this.b64EncodeUnicode(value);
       let url = ENV.API_URL + '/dois/validate';
-      let repositoryId = model.repository.id;
+      let repositoryId = model.get('repository').get('id');
       return fetch(url, {
         method: 'post',
         headers: {
@@ -23,7 +23,7 @@ const metadata = BaseValidator.extend({
           data: {
             type: 'dois',
             attributes: {
-              doi: this.options.dependentKeys[0],
+              doi: this.get(options.dependentKeys[0]),
               xml
             },
             relationships: {

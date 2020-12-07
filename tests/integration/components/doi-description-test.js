@@ -8,7 +8,7 @@ import {
 } from 'ember-power-select/test-support/helpers';
 import { setupFactoryGuy, make } from 'ember-data-factory-guy';
 
-module('Integration | Component | doi description', function (hooks) {
+module('Integration | Component | doi-description', function (hooks) {
   setupRenderingTest(hooks);
   setupFactoryGuy(hooks);
   test('it renders', async function (assert) {
@@ -23,7 +23,7 @@ module('Integration | Component | doi description', function (hooks) {
     assert
       .dom(this.element)
       .hasText(
-        'All additional information that does not fit in any of the other categories. Description Type Abstract Language Select Language'
+        'All additional information that does not fit in any of the other categories. Description Type'
       );
   });
 

@@ -13,6 +13,6 @@ module('Integration | Helper | repository-form-errors', function (hooks) {
 
     await render(hbs`{{repository-form-errors model}}`);
 
-    assert.dom(this.element).hasText('repository ID, confirm repository ID');
+    assert.dom(this.element).hasText('repository ID');
   });
 });

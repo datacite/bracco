@@ -16,8 +16,6 @@ module('Integration | Component | doi-title', function (hooks) {
       </BsForm>
     `);
 
-    assert
-      .dom(this.element)
-      .hasText('Title Type Select Title Type Language Select Language');
+    assert.dom(this.element).hasText('Title Type Language');
   });
 });
