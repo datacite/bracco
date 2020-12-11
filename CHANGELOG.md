@@ -7,6 +7,7 @@
 **Fixed bugs:**
 
 - Fix CORS in ROR API calls [\#485](https://github.com/datacite/bracco/issues/485)
+- Investigate why CDCC DOIs not indexed in Fabrica [\#484](https://github.com/datacite/bracco/issues/484)
 - New test DOIs do not resolve via test handle [\#482](https://github.com/datacite/bracco/issues/482)
 - Prefixes appear to be assigned to 2 members/consortium organizations at the same time [\#480](https://github.com/datacite/bracco/issues/480)
 
@@ -175,8 +176,8 @@
 
 **Fixed bugs:**
 
-- newly created repositories not appearing in Fabrica test [\#431](https://github.com/datacite/bracco/issues/431)
 - Dois not appearing in Fabrica test [\#430](https://github.com/datacite/bracco/issues/430)
+- newly created repositories not appearing in Fabrica test [\#431](https://github.com/datacite/bracco/issues/431)
 - Adding ISSN to existing DOI in relatedIdentifiers field in the form generates error [\#415](https://github.com/datacite/bracco/issues/415)
 
 **Closed issues:**
@@ -1569,10 +1570,6 @@
 
 [Full Changelog](https://github.com/datacite/bracco/compare/v2.1.7...v2.1.8)
 
-**Merged pull requests:**
-
-- Form disable meta [\#133](https://github.com/datacite/bracco/pull/133) ([richardhallett](https://github.com/richardhallett))
-
 ## [v2.1.7](https://github.com/datacite/bracco/tree/v2.1.7) (2019-01-10)
 
 [Full Changelog](https://github.com/datacite/bracco/compare/v.2.1.6...v2.1.7)
@@ -2368,6 +2365,7 @@
 
 **Merged pull requests:**
 
+- Form disable meta [\#133](https://github.com/datacite/bracco/pull/133) ([richardhallett](https://github.com/richardhallett))
 - Submission form [\#59](https://github.com/datacite/bracco/pull/59) ([mfenner](https://github.com/mfenner))
 
 ## [v.0.9.38](https://github.com/datacite/bracco/tree/v.0.9.38) (2018-03-03)
