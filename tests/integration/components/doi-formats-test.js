@@ -16,7 +16,7 @@ module('Integration | Component | doi-formats', function (hooks) {
       </BsForm>
     `);
 
-    await click('#toggle-formats');
+    await click('[data-test-toggle-formats]');
     let formats = this.element.querySelectorAll('input.format-field');
 
     assert.dom(formats[0]).hasValue('tiff');
@@ -31,7 +31,7 @@ module('Integration | Component | doi-formats', function (hooks) {
       </BsForm>
     `);
 
-    await click('#toggle-formats');
+    await click('[data-test-toggle-formats]');
     // await click('#add-format');
     // await click('#add-format');
     let formats = this.element.querySelectorAll('input.format-field');

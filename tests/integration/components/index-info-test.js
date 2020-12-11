@@ -7,7 +7,9 @@ module('Integration | Component | index-info', function (hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function (assert) {
-    await render(hbs`{{index-info}}`);
+    await render(hbs`
+      <IndexInfo @model={{this.model}} />
+    `);
 
     assert
       .dom(this.element)

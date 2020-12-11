@@ -26,6 +26,22 @@ module('Unit | Ability | message', function (hooks) {
     assert.equal(ability.canRead, true);
   });
 
+  test('role consortium_admin', function (assert) {
+    const ability = this.owner.lookup('ability:message');
+    const currentUser = Service.extend({
+      uid: 'carl',
+      name: 'Admin',
+      provider_id: 'carl',
+      role_id: 'consortium_admin',
+      consortium_id: 'carl.frdr'
+    });
+    this.owner.register('service:current-user', currentUser);
+
+    this.set('model', make('provider', { id: 'carl' }));
+    ability.model = this.model;
+    assert.equal(ability.canRead, true);
+  });
+
   test('role provider_admin', function (assert) {
     const ability = this.owner.lookup('ability:message');
     const currentUser = Service.extend({
@@ -56,22 +72,6 @@ module('Unit | Ability | message', function (hooks) {
     assert.equal(ability.canRead, true);
   });
 
-  test('role consortium_admin', function (assert) {
-    const ability = this.owner.lookup('ability:message');
-    const currentUser = Service.extend({
-      uid: 'carl',
-      name: 'Admin',
-      provider_id: 'carl',
-      role_id: 'consortium_admin',
-      consortium_id: 'carl.frdr'
-    });
-    this.owner.register('service:current-user', currentUser);
-
-    this.set('model', make('provider', { id: 'carl' }));
-    ability.model = this.model;
-    assert.equal(ability.canRead, true);
-  });
-
   test('role user', function (assert) {
     const ability = this.owner.lookup('ability:message');
     const currentUser = Service.extend({
@@ -81,6 +81,14 @@ module('Unit | Ability | message', function (hooks) {
       consortium_id: 'carl.frdr'
     });
     this.owner.register('service:current-user', currentUser);
+
+    this.set('model', make('doi', { id: 'carl' }));
+    ability.model = this.model;
+    assert.equal(ability.canRead, false);
+  });
+
+  test('role anonymous', function (assert) {
+    const ability = this.owner.lookup('ability:message');
 
     this.set('model', make('doi', { id: 'carl' }));
     ability.model = this.model;

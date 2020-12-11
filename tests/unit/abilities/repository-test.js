@@ -27,6 +27,32 @@ module('Unit | Ability | repository', function (hooks) {
     assert.equal(ability.canUpdate, true);
     assert.equal(ability.canToken, true);
     assert.equal(ability.canRead, true);
+    assert.equal(ability.canTransfer, true);
+    assert.equal(ability.canMove, true);
+  });
+
+  test('role consortium_admin', function (assert) {
+    const ability = this.owner.lookup('ability:doi');
+    const currentUser = Service.extend({
+      uid: 'carl',
+      name: 'Admin',
+      role_id: 'consortium_admin',
+      provider_id: 'carl'
+    });
+    this.owner.register('service:current-user', currentUser);
+
+    this.set('provider', make('provider', { consortium_id: 'carl' }));
+    this.set('model', make('repository', { provider: this.provider }));
+    ability.model = this.model;
+
+    assert.equal(ability.canSource, false);
+    assert.equal(ability.canCreate, true);
+    assert.equal(ability.canDelete, true);
+    assert.equal(ability.canUpdate, true);
+    assert.equal(ability.canToken, false);
+    assert.equal(ability.canRead, true);
+    assert.equal(ability.canTransfer, true);
+    assert.equal(ability.canMove, true);
   });
 
   test('role provider_admin', function (assert) {
@@ -49,6 +75,8 @@ module('Unit | Ability | repository', function (hooks) {
     assert.equal(ability.canUpdate, true);
     assert.equal(ability.canToken, false);
     assert.equal(ability.canRead, true);
+    assert.equal(ability.canTransfer, false);
+    assert.equal(ability.canMove, false);
   });
 
   test('role provider_admin globus', function (assert) {
@@ -92,5 +120,26 @@ module('Unit | Ability | repository', function (hooks) {
     assert.equal(ability.canUpdate, true);
     assert.equal(ability.canToken, false);
     assert.equal(ability.canRead, true);
+    assert.equal(ability.canTransfer, false);
+    assert.equal(ability.canMove, false);
+  });
+
+  test('role anonymous', function (assert) {
+    const ability = this.owner.lookup('ability:repository');
+    this.set('provider', make('ands'));
+    this.set(
+      'model',
+      make('repository', { id: 'ands.centre9', provider: this.provider })
+    );
+    ability.model = this.model;
+
+    assert.equal(ability.canSource, false);
+    assert.equal(ability.canCreate, false);
+    assert.equal(ability.canDelete, false);
+    assert.equal(ability.canUpdate, false);
+    assert.equal(ability.canToken, false);
+    assert.equal(ability.canRead, false);
+    assert.equal(ability.canTransfer, false);
+    assert.equal(ability.canMove, false);
   });
 });

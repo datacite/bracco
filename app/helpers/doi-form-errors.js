@@ -32,6 +32,13 @@ export function doiFormErrors([model]) {
         );
       });
     }
+    if (model.descriptions) {
+      model.descriptions.forEach((description) => {
+        errorAttributes = errorAttributes.concat(
+          description.validations.errors.mapBy('attribute')
+        );
+      });
+    }
     if (model.alternateIdentifiers) {
       model.alternateIdentifiers.forEach((alternateIdentifier) => {
         errorAttributes = errorAttributes.concat(

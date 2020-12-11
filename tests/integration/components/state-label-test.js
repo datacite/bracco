@@ -8,16 +8,18 @@ module('Integration | Component | state label', function (hooks) {
 
   test('it renders registered', async function (assert) {
     this.set('state', 'registered');
-
-    await render(hbs`{{state-label state=state}}`);
+    await render(hbs`
+      <StateLabel @state={{state}} />
+    `);
 
     assert.dom('span.label-info').hasText('Registered');
   });
 
   test('it renders findable', async function (assert) {
     this.set('state', 'findable');
-
-    await render(hbs`{{state-label state=state}}`);
+    await render(hbs`
+      <StateLabel @state={{state}} />
+    `);
 
     assert.dom('span.label-primary').hasText('Findable');
   });

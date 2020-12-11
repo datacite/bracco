@@ -1,13 +1,14 @@
 import { helper as buildHelper } from '@ember/component/helper';
 import { htmlSafe } from '@ember/template';
 import HtmlEntities from 'html-entities';
+import truncate from 'lodash/truncate';
 import SanitizeHtml from 'sanitize-html';
 
 const Entities = HtmlEntities.AllHtmlEntities;
 const entities = new Entities();
 
 // sanitize and truncate text
-export function formatText([text], hash) {
+export function formatText([text]) {
   text = entities.decode(text);
 
   let allowedTags = [
@@ -22,17 +23,10 @@ export function formatText([text], hash) {
     'br'
   ];
   let sanitizedText = SanitizeHtml(text, { allowedTags });
-  let words = sanitizedText.split(' ');
-  let len = hash.limit || 500;
-  let out = '';
-
-  if (words) {
-    out = words.splice(0, len).join(' ');
-
-    if (words.length > len) {
-      out += ' …';
-    }
-  }
+  let out = truncate(sanitizedText, {
+    length: 2500,
+    separator: '… '
+  });
 
   return htmlSafe(out);
 }

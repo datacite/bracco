@@ -8,7 +8,6 @@
     controlType='power-select'
     options=this.funders
     value=this.fragment.funderName
-    disabled=this.disabled
     allowClear=true
     destination=this.fragment.funderName as |el|
   }}
@@ -16,6 +15,7 @@
       searchEnabled=true
       onChange=(action 'selectFunderReference')
       placeholder='Search Funders'
+      disabled=this.disabled
       onkeydown=(action 'createOnEnter')
       search=(action 'searchFundingReferences')
       searchPlaceholder='Type to search...'
@@ -75,13 +75,13 @@
     value=this.fragment.funderIdentifierType
     helpText='The type of funder identifier, one of Crossref Funder ID, GRID, ISNI, or ROR.'
     options=this.funderIdentifierTypeList
-    disabled=this.isCrossrefId
     destination=this.fragment.funderIdentifierType as |el|
   }}
     {{el.control
       onChange=(action 'selectFunderIdentifierType')
       allowClear=true
       placeholder='Select Funder Identifier Type'
+      disabled=this.isCrossrefId
     }}
   {{/form.element}}
 </div>

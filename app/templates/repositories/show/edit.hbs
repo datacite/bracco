@@ -1,142 +1,348 @@
 <div class="panel panel-transparent" id="content-member">
   <div class="panel-body">
-    <div class="col-md-9 col-md-offset-3"><h3 class="edit">Update {{if (eq this.currentUser.uid this.model.id) 'Account' 'Repository'}}</h3>
+    <div class="col-md-9 col-md-offset-3">
+      <h3 class="edit">
+        Update
+        {{if (eq this.currentUser.uid this.model.id) 'Account' 'Repository'}}
+      </h3>
       {{#each this.flashMessages.queue as |flash|}}
         <FlashMessage @flash={{flash}} />
       {{/each}}
     </div>
-
-    <BsForm @formLayout="horizontal" @horizontalLabelGridClass="col-md-3" @model={{this.model}} @onSubmit={{action "submit" this.model}} @submitOnEnter={{true}} as |form|>
-      <form.element @controlType="text" @id="repository-id" @label="Repository ID" @property="symbol" @helpText="The Repository ID is the unique identifier for each repository in DataCite and can't be changed." @disabled={{true}} />
-      <form.element @controlType="power-select" @id="client-type" @label="Type" @property="clientType" @options={{this.clientTypes}} @destination={{this.clientType}} as |el|>
-        <el.control @onChange={{action "selectClientType"}} @search={{action "searchClientType"}} @placeholder="Select Client Type" @searchPlaceholder="Type to search..." as |item|>
+    <BsForm
+      @formLayout="horizontal"
+      @horizontalLabelGridClass="col-md-3"
+      @model={{this.model}}
+      @onSubmit={{action 'submit' this.model}}
+      @submitOnEnter={{true}} as |form|
+    >
+      <form.element
+        @controlType="text"
+        @id="repository-id"
+        @label="Repository ID"
+        @property="symbol"
+        @helpText="The Repository ID is the unique identifier for each repository in DataCite and can't be changed." as |el|
+      >
+        <el.control disabled />
+      </form.element>
+      <form.element
+        @controlType="power-select"
+        @id="client-type"
+        @label="Type"
+        @property="clientType"
+        @options={{this.clientTypes}}
+        @destination={{this.clientType}} as |el|
+      >
+        <el.control
+          @onChange={{action 'selectClientType'}}
+          @search={{action 'searchClientType'}}
+          @placeholder="Select Client Type"
+          @searchPlaceholder="Type to search..." as |item|
+        >
           {{titleize item}}
         </el.control>
       </form.element>
-
-      {{#if (can "create provider")}}
-        <form.element @controlType="text" @id="salesforce-id" @label="Salesforce ID" @property="salesforceId" @required={{false}} @helpText="The 18 digit ID in Salesforce." />
+      {{#if (can 'create provider')}}
+        <form.element
+          @controlType="text"
+          @id="salesforce-id"
+          @label="Salesforce ID"
+          @property="salesforceId"
+          @helpText="The 18 digit ID in Salesforce."
+        />
       {{/if}}
-
-      {{#if (can "token provider")}}
-        <form.element @controlType="text" @id="globus-uuid" @label="Globus UUID (optional)" @property="globusUuid" @required={{false}} @helpText="The Globus UUID used for token authentication." />
+      {{#if (can 'token provider')}}
+        <form.element
+          @controlType="text"
+          @id="globus-uuid"
+          @label="Globus UUID (optional)"
+          @property="globusUuid"
+          @helpText="The Globus UUID used for token authentication."
+        />
       {{/if}}
-
-      {{#if (eq this.model.clientType "repository")}}
-        <form.element @controlType="power-select" @id="re3data" @property="re3data" @label="re3data Record (optional)" @optionLabelPath="re3data" @options={{this.repositories}} @destination={{this.re3data}} @helpText="re3data is a registry of research data repositories." as |el|>
-          <el.control @onChange={{action "selectRe3Data"}} @search={{action "searchRe3Data"}} @searchField="repositoryName" @searchPlaceholder="Type to search..." @allowClear={{true}} as |item|>
+      {{#if (eq this.model.clientType 'repository')}}
+        <form.element
+          @controlType="power-select"
+          @id="re3data"
+          @property="re3data"
+          @label="re3data Record (optional)"
+          @optionLabelPath="re3data"
+          @options={{this.repositories}}
+          @destination={{this.re3data}}
+          @helpText="re3data is a registry of research data repositories." as |el|
+        >
+          <el.control
+            @onChange={{action 'selectRe3Data'}}
+            @search={{action 'searchRe3Data'}}
+            @searchField="repositoryName"
+            @searchPlaceholder="Type to search..."
+            @allowClear={{true}} as |item|
+          >
             {{if item.name item.name this.model.re3data}}
           </el.control>
         </form.element>
       {{else}}
-        <RepositoryIssn @model={{this.model}} @fragment={{this.model.issn}} @form={{form}} />
+        <RepositoryIssn
+          @model={{this.model}}
+          @fragment={{this.model.issn}}
+          @form={{form}}
+        />
       {{/if}}
-
-      <form.element @controlType="text" @id="name" @label="Repository Name" @property="name" @required={{false}} />
-      <form.element @controlType="text" @id="alternate-name" @label="Repository Alternate Name (optional)" @property="alternateName" @required={{false}} />
-      <form.element @controlType="email" @id="system-email" @label="System Email" @property="systemEmail" @helpText="This is the email used for sending password reset requests and similar system notifications." @required={{false}} />
-      
+      <form.element
+        @controlType="text"
+        @id="name"
+        @label="Repository Name"
+        @property="name"
+      />
+      <form.element
+        @controlType="text"
+        @id="alternate-name"
+        @label="Repository Alternate Name (optional)"
+        @property="alternateName"
+      />
+      <form.element
+        @controlType="email"
+        @id="system-email"
+        @label="System Email"
+        @property="systemEmail"
+        @helpText="This is the email used for sending password reset requests and similar system notifications."
+      />
       <div class="form-group">
-        <label class="control-label col-md-3">Service Contact (optional)</label>
+        <label class="control-label col-md-3">
+          Service Contact (optional)
+        </label>
         <div class="col-md-9">
           <div>
-            <label for="givenName" class="subtitle">Given Name (optional)</label>
-            <Input @type="text" class="form-control" @id="service-contact-given-name" @value={{this.model.serviceContact.givenName}} required={{false}} />
+            <label for="givenName" class="subtitle">
+              Given Name (optional)
+            </label>
+            <Input
+              @type="text"
+              class="form-control"
+              @id="service-contact-given-name"
+              @value={{this.model.serviceContact.givenName}}
+            />
           </div>
           <div>
-            <label for="familyName" class="subtitle">Family Name (optional)</label>
-            <Input @type="text" class="form-control" @id="service-contact-family-name" @value={{this.model.serviceContact.familyName}} required={{false}} />
+            <label for="familyName" class="subtitle">
+              Family Name (optional)
+            </label>
+            <Input
+              @type="text"
+              class="form-control"
+              @id="service-contact-family-name"
+              @value={{this.model.serviceContact.familyName}}
+            />
           </div>
-          <div class="{{if (v-get this.model.serviceContact 'isInvalid') 'has-error has-feedback'}}">
-            <label for="email" class="subtitle control-label">Email (optional)</label>
-            <Input @type="text" class="form-control" @id="service-contact-email" @value={{this.model.serviceContact.email}} required={{false}} />
+          <div
+            class="{{if
+                (v-get this.model.serviceContact 'isInvalid')
+                'has-error has-feedback'
+              }}"
+          >
+            <label for="email" class="subtitle control-label">
+              Email (optional)
+            </label>
+            <Input
+              @type="text"
+              class="form-control"
+              @id="service-contact-email"
+              @value={{this.model.serviceContact.email}}
+            />
             {{#if (v-get this.model.serviceContact 'isInvalid')}}
-              <div class="help-block help-block-fragment" data-test-service-contact-email-help>{{v-get this.model.serviceContact 'message'}}</div>
+              <div
+                class="help-block help-block-fragment"
+                data-test-service-contact-email-help
+              >
+                {{v-get this.model.serviceContact 'message'}}
+              </div>
             {{/if}}
           </div>
         </div>
       </div>
-      
-      <form.element @controlType="textarea" @id="description" @label="Description (optional)" @property="description" @rows="10" @helpText="Description of the repository. Please use markdown for formatting." @required={{false}} />
-      <form.element @controlType="text" @id="url" @label="URL (optional)" @property="url" @helpText="The homepage of the repository." @required={{false}} />
-      
+      <form.element
+        @controlType="textarea"
+        @id="description"
+        @label="Description (optional)"
+        @property="description"
+        @helpText="Description of the repository. Please use markdown for formatting." as |el|
+      >
+        <el.control rows="10" />
+      </form.element>
+      <form.element
+        @controlType="text"
+        @id="url"
+        @label="URL (optional)"
+        @property="url"
+        @helpText="The homepage of the repository."
+      />
       <div class="form-group" id="language">
-        <label class="control-label col-md-3">Language (optional)</label>
+        <label class="control-label col-md-3">
+          Language (optional)
+        </label>
         <div class="col-md-9">
           {{#if (gt this.model.language.length 0)}}
             {{#each this.model.language as |language index|}}
-              <RepositoryLanguage @model={{this.model}} @language={{language}} @form={{form}} @index={{index}} />
+              <RepositoryLanguage
+                @model={{this.model}}
+                @language={{language}}
+                @form={{form}}
+                @index={{index}}
+              />
             {{/each}}
           {{/if}}
           {{#if (lte this.model.language.length 2)}}
-            <BsButton @class="btn-sm add-language" @outline={{true}} @onClick={{action "addLanguage"}}><i class="fas fa-plus-circle"></i> Add Language</BsButton>
+            <BsButton
+              @class="btn-sm add-language"
+              @outline={{true}}
+              @onClick={{action 'addLanguage'}}
+            >
+              <i class="fas fa-plus-circle"></i>
+              Add Language
+            </BsButton>
           {{/if}}
         </div>
       </div>
-
-      <form.element @controlType="power-select" @id="software" @label="Software (optional)" @property="software" @options={{this.softwares}} @destination={{this.software}} @helpText="The name of the software that is used to run the repository." as |el|>
-        <el.control @onChange={{action "selectSoftware"}} @search={{action "searchSoftware"}} @placeholder="Select Software" @searchPlaceholder="Type to search..." @allowClear={{true}} as |item|>
+      <form.element
+        @controlType="power-select"
+        @id="software"
+        @label="Software (optional)"
+        @property="software"
+        @options={{this.softwares}}
+        @destination={{this.software}}
+        @helpText="The name of the software that is used to run the repository." as |el|
+      >
+        <el.control
+          @onChange={{action 'selectSoftware'}}
+          @search={{action 'searchSoftware'}}
+          @placeholder="Select Software"
+          @searchPlaceholder="Type to search..."
+          @allowClear={{true}} as |item|
+        >
           {{item}}
         </el.control>
       </form.element>
-      <form.element @controlType="textarea" @id="domains" @label="Domains" @property="domains" @required={{false}} @helpText="List of domains, separated by comma, used for DOI registration, or use *. (e.g. *.example.org) to allow all subdomains, or use * to allow all domains." />
-
-      {{#if (eq this.model.clientType "repository")}}
+      <form.element
+        @controlType="textarea"
+        @id="domains"
+        @label="Domains"
+        @property="domains"
+        @helpText="List of domains, separated by comma, used for DOI registration, or use *. (e.g. *.example.org) to allow all subdomains, or use * to allow all domains."
+      />
+      {{#if (eq this.model.clientType 'repository')}}
         <div class="form-group" id="repository-type">
-          <label class="control-label col-md-3">Repository Type (optional)</label>
+          <label class="control-label col-md-3">
+            Repository Type (optional)
+          </label>
           <div class="col-md-9">
             {{#if (gt this.model.repositoryType.length 0)}}
               {{#each this.model.repositoryType as |repositoryType index|}}
-                <RepositoryRepositoryType @model={{this.model}} @repositoryType={{repositoryType}} @form={{form}} @index={{index}} />
+                <RepositoryRepositoryType
+                  @model={{this.model}}
+                  @repositoryType={{repositoryType}}
+                  @form={{form}}
+                  @index={{index}}
+                />
               {{/each}}
             {{/if}}
             {{#if (lte this.model.repositoryType.length 2)}}
-              <BsButton @class="btn-sm add-repositoryType" @outline={{true}} @onClick={{action "addRepositoryType"}}><i class="fas fa-plus-circle"></i> Add Repository Type</BsButton>
+              <BsButton
+                @class="btn-sm add-repositoryType"
+                @outline={{true}}
+                @onClick={{action 'addRepositoryType'}}
+              >
+                <i class="fas fa-plus-circle"></i>
+                Add Repository Type
+              </BsButton>
             {{/if}}
           </div>
         </div>
-
         <div class="form-group" id="certificate">
-          <label class="control-label col-md-3">Certificate (optional)</label>
+          <label class="control-label col-md-3">
+            Certificate (optional)
+          </label>
           <div class="col-md-9">
             {{#if (gt this.model.certificate.length 0)}}
               {{#each this.model.certificate as |certificate index|}}
-                <RepositoryCertificate @model={{this.model}} @certificate={{certificate}} @form={{form}} @index={{index}} />
+                <RepositoryCertificate
+                  @model={{this.model}}
+                  @certificate={{certificate}}
+                  @form={{form}}
+                  @index={{index}}
+                />
               {{/each}}
             {{/if}}
             {{#if (lte this.model.certificate.length 2)}}
-              <BsButton @class="btn-sm add-certificate" @outline={{true}} @onClick={{action "addCertificate"}}><i class="fas fa-plus-circle"></i> Add Certificate</BsButton>
+              <BsButton
+                @class="btn-sm add-certificate"
+                @outline={{true}}
+                @onClick={{action 'addCertificate'}}
+              >
+                <i class="fas fa-plus-circle"></i>
+                Add Certificate
+              </BsButton>
             {{/if}}
           </div>
         </div>
       {{/if}}
-
-      {{#if (can "create repository" this.model)}}
-        <form.element @controlType="checkbox" @id="is-active" @label="Account is active" @property="isActive" @helpText="This account can register and update DOIs" />
+      {{#if (can 'create repository' this.model)}}
+        <form.element
+          @controlType="checkbox"
+          @id="is-active"
+          @label="Account is active"
+          @property="isActive"
+          @helpText="This account can register and update DOIs"
+        />
       {{/if}}
-
       <div class="col-md-offset-3">
         <BsAlert @dismissible={{false}} class="opt-in" @type="warning">
           The contacts entered may receive notifications about administration, webinars, product testing, 
           or news that will impact the use of DataCite services and/or membership. Individuals may remove 
           themselves from mailings by following the unsubscribe link provided in every DataCite email. 
           For information about our privacy practices and commitment to protecting your privacy, please 
-          review our <a target="_blank" rel="noreferrer" href="https://datacite.org/privacy.html">Privacy Policy</a>.
+          review our
+          <a
+            target="_blank"
+            rel="noreferrer"
+            href="https://datacite.org/privacy.html"
+          >
+            Privacy Policy
+          </a>
+          .
         </BsAlert>
       </div>
-
       <div class="col-md-9 col-md-offset-3">
         {{#if (is-empty (repository-form-errors this.model))}}
-          <button type="submit" id="update-repository" class="btn btn-sm btn-fill" disabled={{false}}>Update {{if (eq this.currentUser.uid this.model.id) 'Account' 'Repository'}}</button>
+          <button
+            type="submit"
+            id="update-repository"
+            class="btn btn-sm btn-fill"
+            disabled={{false}}
+          >
+            Update
+            {{if (eq this.currentUser.uid this.model.id) 'Account' 'Repository'
+            }}
+          </button>
         {{else}}
           <BsAlert @dismissible={{false}} @type="danger">
-            To save this repository, first resolve the errors with these fields: {{repository-form-errors this.model}}.
+            To save this repository, first resolve the errors with these fields:
+            {{repository-form-errors this.model}}
+            .
           </BsAlert>
-
-          <button type="submit" id="update-repository" class="btn btn-sm btn-fill" disabled={{true}}>Update {{if (eq this.currentUser.uid this.model.id) 'Account' 'Repository'}}</button>          
+          <button
+            type="submit"
+            id="update-repository"
+            class="btn btn-sm btn-fill"
+            disabled={{true}}
+          >
+            Update
+            {{if (eq this.currentUser.uid this.model.id) 'Account' 'Repository'
+            }}
+          </button>
         {{/if}}
-
-        <button {{action "cancel" this.model}} class="btn btn-sm">Cancel</button>
+        <button class="btn btn-sm" {{action 'cancel' this.model}}>
+          Cancel
+        </button>
       </div>
     </BsForm>
   </div>

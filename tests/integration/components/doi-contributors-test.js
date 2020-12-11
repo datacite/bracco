@@ -4,7 +4,7 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render, click } from '@ember/test-helpers';
 import { setupFactoryGuy, make } from 'ember-data-factory-guy';
 
-module('Integration | Component | doi contributors', function (hooks) {
+module('Integration | Component | doi-contributors', function (hooks) {
   setupRenderingTest(hooks);
   setupFactoryGuy(hooks);
 
@@ -12,9 +12,8 @@ module('Integration | Component | doi contributors', function (hooks) {
     this.set('model', make('doi'));
 
     await render(hbs`{{doi-contributors model=model}}`);
-    await click('button#add-contributor');
-    await click('button#add-contributor');
+    await click('[data-test-add-contributor]');
 
-    assert.dom('input.given-name-field').exists({ count: 2 });
+    assert.dom('input.given-name-field').exists({ count: 1 });
   });
 });

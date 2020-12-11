@@ -91,4 +91,17 @@ module('Unit | Ability | prefix', function (hooks) {
     assert.equal(ability.canUpdate, true);
     assert.equal(ability.canRead, true);
   });
+
+  test('role anonymous', function (assert) {
+    const ability = this.owner.lookup('ability:repository');
+
+    this.set('model', make('carl'));
+    ability.model = this.model;
+
+    assert.equal(ability.canCreate, false);
+    assert.equal(ability.canDelete, false);
+    assert.equal(ability.canUpdate, false);
+    assert.equal(ability.canToken, false);
+    assert.equal(ability.canRead, false);
+  });
 });

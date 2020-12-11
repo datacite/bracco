@@ -1,7 +1,7 @@
 import { helper } from '@ember/component/helper';
 import ENV from 'bracco/config/environment';
 
-export function contentNegotiationUrl([doi], hash) {
+export function contentNegotiationUrl([hash]) {
   let mimeType = '';
   switch (hash.format) {
     case 'datacite':
@@ -35,7 +35,7 @@ export function contentNegotiationUrl([doi], hash) {
       mimeType = 'application/vnd.schemaorg.ld+json';
   }
 
-  return ENV.API_URL + '/dois/' + mimeType + '/' + doi;
+  return ENV.API_URL + '/dois/' + mimeType + '/' + hash.doi;
 }
 
 export default helper(contentNegotiationUrl);

@@ -4,7 +4,7 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import { setupFactoryGuy, makeList, mockQuery } from 'ember-data-factory-guy';
 
-module('Integration | Component | model search', function (hooks) {
+module('Integration | Component | model-search', function (hooks) {
   setupRenderingTest(hooks);
   setupFactoryGuy(hooks);
 
@@ -16,9 +16,7 @@ module('Integration | Component | model search', function (hooks) {
     );
 
     await render(hbs`
-      <ModelSearch @model={{model}} @query='chemical' @total={{2}} @sortable={{true}}>
-
-      </ModelSearch>
+      <ModelSearch @model={{model}} @query='chemical' @total={{2}} @sortable={{true}} />
     `);
     assert.dom(this.element).hasText('Search Reset All');
   });
@@ -33,9 +31,7 @@ module('Integration | Component | model search', function (hooks) {
     );
 
     await render(hbs`
-      {{#model-search model=model name='Member' query='university' total=31 sortable=true}}
-
-      {{/model-search}}
+      <ModelSearch @model={{model}} @name='Member' @query='university' @total={{31}} sortable={{true}} />
     `);
     assert.dom(this.element).hasText('Search Reset All');
   });
@@ -48,12 +44,10 @@ module('Integration | Component | model search', function (hooks) {
         models: repositories
       })
     );
-
     await render(hbs`
-      {{#model-search model=model name='Repository' query='university' total=22 sortable=true}}
-
-      {{/model-search}}
+      <ModelSearch @model={{model}} @name='Repository' query='university' @total={{22}} @sortable={{true}} />
     `);
+
     assert.dom(this.element).hasText('Search Reset All');
   });
 
@@ -65,12 +59,10 @@ module('Integration | Component | model search', function (hooks) {
         models: prefixes
       })
     );
-
     await render(hbs`
-      {{#model-search model=model name='Prefix' query='10.5038' total=3 sortable=true}}
-
-      {{/model-search}}
+      <ModelSearch @model={{model}} @name='Prefix' @query='10.5038' @total={{3}} @sortable={{true}} />
     `);
+
     assert.dom(this.element).hasText('Search Reset All');
   });
 

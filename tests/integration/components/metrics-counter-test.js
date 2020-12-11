@@ -14,11 +14,11 @@ module('Integration | Component | metrics counter', function (hooks) {
     this.set('link', 'users.show.dois');
     this.set('query', { 'has-views': true });
 
-    await render(
-      hbs`{{metrics-counter label="Views" model=model count=count link=link query=query}}`
-    );
+    await render(hbs`
+      <MetricsCounter @label="Views" @model={{model}} @count={{count}} @link={{link}} @query={{query}} />
+    `);
 
-    assert.dom('div#metrics-counter-doi').hasText('232.3K');
+    assert.dom('.user-metrics-counter').hasText('232.3K');
     assert.dom('h3.panel-title').hasText('Views total');
   });
 });

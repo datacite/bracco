@@ -7,7 +7,9 @@ module('Integration | Component | doi media', function (hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function (assert) {
-    await render(hbs`{{doi-media}}`);
+    await render(hbs`
+      <DoiMedia />
+  `);
 
     assert.ok(
       /There are no media+/.test(find('*').textContent.trim()),

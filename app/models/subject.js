@@ -4,6 +4,11 @@ import { validator, buildValidations } from 'ember-cp-validations';
 import { computed } from '@ember/object';
 
 const Validations = buildValidations({
+  subject: [
+    validator('presence', {
+      presence: true
+    })
+  ],
   subjectSchemeUri: [
     validator('url-format', {
       allowBlank: true,

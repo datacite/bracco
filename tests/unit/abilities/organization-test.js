@@ -77,4 +77,43 @@ module('Unit | Ability | organization', function (hooks) {
     assert.equal(ability.canUpdate, true);
     assert.equal(ability.canRead, true);
   });
+
+  test('role client_admin', function (assert) {
+    const ability = this.owner.lookup('ability:organization');
+    const currentUser = Service.extend({
+      uid: 'ands.centre9',
+      name: 'Australian Data Archive',
+      role_id: 'client_admin',
+      client_id: 'ands.centre9'
+    });
+    this.owner.register('service:current-user', currentUser);
+
+    let model = {
+      id: 'carl',
+      provider: make('carl'),
+      organization: make('provider', { memberType: 'consortium_organization' })
+    };
+
+    ability.model = model;
+    assert.equal(ability.canCreate, false);
+    assert.equal(ability.canDelete, false);
+    assert.equal(ability.canUpdate, false);
+    assert.equal(ability.canRead, false);
+  });
+
+  test('role anonymous', function (assert) {
+    const ability = this.owner.lookup('ability:organization');
+
+    let model = {
+      id: 'carl',
+      provider: make('carl'),
+      organization: make('provider', { memberType: 'consortium_organization' })
+    };
+
+    ability.model = model;
+    assert.equal(ability.canCreate, false);
+    assert.equal(ability.canDelete, false);
+    assert.equal(ability.canUpdate, false);
+    assert.equal(ability.canRead, false);
+  });
 });

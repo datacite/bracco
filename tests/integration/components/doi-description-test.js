@@ -11,19 +11,19 @@ import { setupFactoryGuy, make } from 'ember-data-factory-guy';
 module('Integration | Component | doi-description', function (hooks) {
   setupRenderingTest(hooks);
   setupFactoryGuy(hooks);
+
   test('it renders', async function (assert) {
     this.set('model', make('doi'));
-    this.set('fragment', make('description'));
     await render(hbs`
       <BsForm @model={{model}} as |form|>
-        <DoiDescription @model={{model}} @fragment={{fragment}} @form={{form}} @index={{0}}/>
+        <DoiDescription @model={{model}} @fragment={{model.descriptions.[0]}} @form={{form}} @index={{0}}/>
       </BsForm>
     `);
 
     assert
-      .dom(this.element)
+      .dom('[data-test-description]')
       .hasText(
-        'All additional information that does not fit in any of the other categories. Description Type'
+        'All additional information that does not fit in any of the other categories. Description Type Language'
       );
   });
 

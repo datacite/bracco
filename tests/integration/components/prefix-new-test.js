@@ -2,15 +2,16 @@ import { hbs } from 'ember-cli-htmlbars';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
+import { setupFactoryGuy, make } from 'ember-data-factory-guy';
 
 module('Integration | Component | prefix new', function (hooks) {
   setupRenderingTest(hooks);
+  setupFactoryGuy(hooks);
 
   test('it renders', async function (assert) {
+    this.set('model', make('prefix'));
     await render(hbs`
-      {{#prefix-new}}
-        template block text
-      {{/prefix-new}}
+      <PrefixNew @model={{this.model}} />
     `);
 
     assert

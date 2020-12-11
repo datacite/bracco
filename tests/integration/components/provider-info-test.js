@@ -7,7 +7,9 @@ module('Integration | Component | provider-info', function (hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function (assert) {
-    await render(hbs`{{provider-info}}`);
+    await render(hbs`
+      <ProviderInfo />
+    `);
 
     assert
       .dom(this.element)

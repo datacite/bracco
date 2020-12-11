@@ -95,6 +95,22 @@ module('Unit | Ability | provider', function (hooks) {
     });
     this.owner.register('service:current-user', currentUser);
 
+    this.set('model', make('carl'));
+    ability.model = this.model;
+
+    assert.equal(ability.canCreate, false);
+    assert.equal(ability.canDelete, false);
+    assert.equal(ability.canUpdate, false);
+    assert.equal(ability.canToken, false);
+    assert.equal(ability.canRead, false);
+  });
+
+  test('role anonymous', function (assert) {
+    const ability = this.owner.lookup('ability:provider');
+
+    this.set('model', make('carl'));
+    ability.model = this.model;
+
     assert.equal(ability.canCreate, false);
     assert.equal(ability.canDelete, false);
     assert.equal(ability.canUpdate, false);

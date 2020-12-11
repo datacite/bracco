@@ -6,10 +6,9 @@ const UrlFormat = BaseValidator.extend({
     if (!value && options.allowBlank) {
       return true;
     } else if (!value) {
-      let message = "This field can't be blank.";
-      return message;
-      // don't validate info URIs (not handled by validator)
+      return "This field can't be blank.";
     } else if (value.startsWith('info:')) {
+      // don't validate info URIs (not handled by validator)
       return true;
     } else {
       // default options for this validator, require_protocol set to true

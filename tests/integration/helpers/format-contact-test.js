@@ -7,43 +7,39 @@ module('Integration | Helper | format-contact', function (hooks) {
   setupRenderingTest(hooks);
 
   test('it renders email and name', async function (assert) {
-    let contact = {
+    this.set('contact', {
       email: 'info@example.org',
       givenName: 'Jack',
       familyName: 'Slater'
-    };
-    this.set('inputValue', contact);
+    });
 
-    await render(hbs`{{format-contact inputValue}}`);
+    await render(hbs`{{format-contact contact}}`);
 
-    assert.dom(this.element).hasText('Jack Slater');
-    // assert.dom(this.element).hasAttribute('href', 'mailto:info@example.org');
+    assert.dom('a').hasText('Jack Slater');
+    assert.dom('a').hasAttribute('href', 'mailto:info@example.org');
   });
 
   test('it renders email', async function (assert) {
-    let contact = { email: 'info@example.org' };
-    this.set('inputValue', contact);
+    this.set('contact', { email: 'info@example.org' });
 
-    await render(hbs`{{format-contact inputValue}}`);
+    await render(hbs`{{format-contact contact}}`);
 
-    assert.dom(this.element).hasText('info@example.org');
-    // assert.dom(this.element).hasAttribute('href', 'mailto:info@example.org');
+    assert.dom('a').hasText('info@example.org');
+    assert.dom('a').hasAttribute('href', 'mailto:info@example.org');
   });
 
   test('it renders name', async function (assert) {
-    let contact = { givenName: 'Jack', familyName: 'Slater' };
-    this.set('inputValue', contact);
+    this.set('contact', { givenName: 'Jack', familyName: 'Slater' });
 
-    await render(hbs`{{format-contact inputValue}}`);
+    await render(hbs`{{format-contact contact}}`);
 
     assert.dom(this.element).hasText('Jack Slater');
   });
 
   test('it renders null', async function (assert) {
-    let contact = {};
-    this.set('inputValue', contact);
+    this.set('contact', {});
 
-    await render(hbs`{{format-contact inputValue}}`);
+    await render(hbs`{{format-contact contact}}`);
 
     assert.dom(this.element).hasText('');
   });

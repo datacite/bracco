@@ -45,13 +45,13 @@
     value=this.fragment.relatedIdentifierType
     helpText='The type of the Related Identifier.'
     options=this.relatedIdentifierTypeList
-    disabled=this.controlledIdentifierType
     destination=this.fragment.relatedIdentifierType as |el|
   }}
     {{el.control
       onChange=(action 'selectRelatedIdentifierType')
       allowClear=true
       placeholder='Select related Identifier Type'
+      disabled=this.controlledIdentifierType
     }}
   {{/form.element}}
 </div>
@@ -66,12 +66,12 @@
     value=this.fragment.relationType
     helpText='The type of the Relation.'
     options=this.relationTypeList
-    disabled=this.disabled
     allowClear=true
     destination=this.fragment.relationType as |el|
   }}
     <el.control
       @onChange={{action 'selectRelationType'}}
+      @disabled="this.disabled"
       @placeholder="Select Relation Type" as |item|
     >
       {{humanize (underscore item)}}
@@ -89,13 +89,13 @@
     value=this.fragment.resourceTypeGeneral
     helpText='The general type of the related resource.'
     options=this.resourceTypesGeneral
-    disabled=this.disabled
     allowClear=true
     destination=this.fragment.resourceTypeGeneral as |el|
   }}
     <el.control
       @onChange={{action 'selectResourceTypeGeneral'}}
       @allowClear={{true}}
+      @disabled="this.disabled"
       @placeholder="Select Resource Type General" as |item|
     >
       {{humanize (underscore item)}}

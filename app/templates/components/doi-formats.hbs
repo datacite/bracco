@@ -8,14 +8,19 @@
     </div>
     {{#if this.showFormats}}
       {{#each this.model.formats as |format index|}}
-        <DoiFormat @fragment={{format}} @form={{form}} @index={{index}} />
+        <DoiFormat
+          @model={{model}}
+          @fragment={{format}}
+          @form={{form}}
+          @index={{index}}
+        />
       {{/each}}
       {{#if (lte this.model.formats.length 5)}}
         <BsButton
           @class="btn-sm"
-          @id="add-format"
           @outline={{true}}
           @onClick={{action 'addFormat'}}
+          data-test-add-format
         >
           <i class="fas fa-plus"></i>
           Add
@@ -25,10 +30,10 @@
       {{/if}}
       {{#if (gt this.model.formats.length 0)}}
         <BsButton
-          @id="toggle-formats"
           @class="btn-sm"
           @outline={{true}}
           @onClick={{action 'toggleFormats'}}
+          data-test-toggle-formats
         >
           <i class="fas fa-eye-slash"></i>
           Hide
@@ -37,10 +42,10 @@
       {{/if}}
     {{else if (gt this.model.formats.length 0)}}
       <BsButton
-        @id="toggle-formats"
         @class="btn-sm"
         @outline={{true}}
         @onClick={{action 'toggleFormats'}}
+        data-test-toggle-formats
       >
         <i class="fas fa-eye"></i>
         Show
@@ -49,9 +54,9 @@
     {{else}}
       <BsButton
         @class="btn-sm btn-warning"
-        @id="add-format"
         @outline={{true}}
         @onClick={{action 'addFormat'}}
+        data-test-add-format
       >
         <i class="fas fa-plus"></i>
         Add format

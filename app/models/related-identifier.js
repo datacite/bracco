@@ -17,6 +17,9 @@ const Validations = buildValidations({
     })
   ],
   relatedIdentifier: [
+    validator('presence', {
+      presence: true
+    }),
     // validator('url-format', {
     //   allowBlank: true,
     //   message: 'Please enter a valid URL.',

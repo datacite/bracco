@@ -3,28 +3,63 @@
     <div class="col-md-9 col-md-offset-3">
       {{#if (gt this.model.meta.doiCount 0)}}
         <div class="alert alert-danger" role="alert">
-          You need to transfer all DOIs to another repository before you can delete the {{uppercase this.model.id}} repository.
+          You need to transfer all DOIs to another repository before you can delete the
+          {{uppercase this.model.id}}
+          repository.
         </div>
         <div class="pseudo-footer">
           <div class="btn-toolbar btn-sm pull-right">
-            <button {{action "cancel" this.model}} class="btn btn-sm">Cancel</button>
-            <LinkTo @route="repositories.show.transfer" @model={{this.model.id}} class="btn btn-sm"><i class="fas fa-arrow-circle-right"></i>Transfer DOIs</LinkTo>
+            <button class="btn btn-sm" {{action 'cancel' this.model}}>
+              Cancel
+            </button>
+            <LinkTo
+              @route="repositories.show.transfer"
+              @model={{this.model.id}}
+              class="btn btn-sm"
+            >
+              <i class="fas fa-arrow-circle-right"></i>
+              Transfer DOIs
+            </LinkTo>
           </div>
-          <div class="clearfix"/>
+          <div class="clearfix"></div>
         </div>
       {{else}}
-        <BsForm @formLayout="vertical" @model={{this.model}} @onSubmit={{action "submit"}} @submitOnEnter={{true}} as |form|>
+        <BsForm
+          @formLayout="vertical"
+          @model={{this.model}}
+          @onSubmit={{action 'submit'}}
+          @submitOnEnter={{true}} as |form|
+        >
           <form.group>
-            <label class="control-label">Are you sure you want to delete the {{uppercase this.model.id}} repository? This action cannot be undone.</label>
-            <form.element @controlType="text" @id="confirm-symbol" @property="confirmSymbol" @showValidationOn="input" @autofocus={{true}} @helpText="Please add the Repository ID to delete." />
+            <label class="control-label">
+              Are you sure you want to delete the
+              {{uppercase this.model.id}}
+              repository? This action cannot be undone.
+            </label>
+            <form.element
+              @controlType="text"
+              @id="confirm-symbol"
+              @property="confirmSymbol"
+              @showValidationOn="input"
+              @autofocus={{true}}
+              @helpText="Please add the Repository ID to delete."
+            />
           </form.group>
-
           <div class="pseudo-footer">
             <div class="btn-toolbar pull-right">
-              <button {{action "cancel"}} id="cancel" class="btn btn-sm">Cancel</button>
-              <button {{action "submit"}} disabled={{v-get this.model 'confirmSymbol' 'isInvalid'}} id="delete" class="btn btn-sm btn-fill">Delete</button>
+              <button id="cancel" class="btn btn-sm" {{action 'cancel'}}>
+                Cancel
+              </button>
+              <button
+                disabled={{v-get this.model 'confirmSymbol' 'isInvalid'}}
+                id="delete"
+                class="btn btn-sm btn-fill"
+                {{action 'submit'}}
+              >
+                Delete
+              </button>
             </div>
-            <div class="clearfix"/>
+            <div class="clearfix"></div>
           </div>
         </BsForm>
       {{/if}}

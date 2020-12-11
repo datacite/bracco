@@ -1,25 +1,66 @@
 <div class="form-group">
-  <label class="control-label col-md-3" data-test-geolocations>Geolocations</label>
+  <label class="control-label col-md-3" data-test-geolocations>
+    Geolocations
+  </label>
   <div class="col-md-9">
-    <div class="label-vertical">Spatial region or named place where the data was gathered or about which the resource is focused.</div>
+    <div class="label-vertical">
+      Spatial region or named place where the data was gathered or about which the resource is focused.
+    </div>
     {{#if this.showGeoLocations}}
       {{#each this.model.geoLocations as |geoLocation index|}}
-        <DoiGeoLocation @model={{this.model}} @fragment={{geoLocation}} @form={{form}} @index={{index}} />
+        <DoiGeoLocation
+          @model={{this.model}}
+          @fragment={{geoLocation}}
+          @form={{form}}
+          @index={{index}}
+        />
       {{/each}}
-
       {{#if (lte this.model.geoLocations.length 4)}}
-        <BsButton @class="btn-sm" @id="add-geolocation" @outline={{true}} @onClick={{action "addGeoLocation"}}><i class="fas fa-plus"></i> Add {{if (gt this.model.geoLocations.length 0) "another "}}geolocation</BsButton>
+        <BsButton
+          @class="btn-sm"
+          @outline={{true}}
+          @onClick={{action 'addGeoLocation'}}
+          data-test-add-geolocation
+        >
+          <i class="fas fa-plus"></i>
+          Add
+          {{if (gt this.model.geoLocations.length 0) 'another '}}
+          geolocation
+        </BsButton>
       {{/if}}
-
       {{#if (gt this.model.geoLocations.length 0)}}
-        <BsButton @id="toggle-geolocations" @class="btn-sm" @outline={{true}} @onClick={{action "toggleGeoLocations"}}><i class="fas fa-eye-slash"></i> Hide {{pluralize this.model.geoLocations.length 'geolocation'}}</BsButton>
+        <BsButton
+          @id="toggle-geolocations"
+          @class="btn-sm"
+          @outline={{true}}
+          @onClick={{action 'toggleGeoLocations'}}
+        >
+          <i class="fas fa-eye-slash"></i>
+          Hide
+          {{pluralize this.model.geoLocations.length 'geolocation'}}
+        </BsButton>
       {{/if}}
+    {{else if (gt this.model.geoLocations.length 0)}}
+      <BsButton
+        @id="toggle-geolocations"
+        @class="btn-sm"
+        @outline={{true}}
+        @onClick={{action 'toggleGeoLocations'}}
+      >
+        <i class="fas fa-eye"></i>
+        Show
+        {{pluralize this.model.geoLocations.length 'geolocation'}}
+      </BsButton>
     {{else}}
-      {{#if (gt this.model.geoLocations.length 0)}}
-        <BsButton @id="toggle-geolocations" @class="btn-sm" @outline={{true}} @onClick={{action "toggleGeoLocations"}}><i class="fas fa-eye"></i> Show {{pluralize this.model.geoLocations.length 'geolocation'}}</BsButton>
-      {{else}}
-        <BsButton @class="btn-sm btn-warning btn-warning" @id="add-geolocation" @outline={{true}} @onClick={{action "addGeoLocation"}}><i class="fas fa-plus"></i> Add geolocation</BsButton>
-      {{/if}}
+      <BsButton
+        @class="btn-sm btn-warning btn-warning"
+        @outline={{true}}
+        @onClick={{action 'addGeoLocation'}}
+        data-test-add-geolocation
+      >
+        <i class="fas fa-plus"></i>
+        Add geolocation
+      </BsButton>
     {{/if}}
   </div>
 </div>

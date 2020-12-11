@@ -7,7 +7,9 @@ module('Integration | Component | footer status', function (hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function (assert) {
-    await render(hbs`{{footer-status}}`);
+    await render(hbs`
+      <FooterStatus />
+    `);
 
     assert.dom(this.element).hasText('');
   });

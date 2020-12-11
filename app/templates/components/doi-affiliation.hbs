@@ -3,7 +3,6 @@
     <div class="power-select-fragment">
       {{#form.element
         controlType='power-select'
-        disabled=this.disabled
         value=this.fragment.name
         options=this.organizations as |el|
       }}
@@ -11,6 +10,7 @@
           onChange=(action 'selectRor')
           search=(action 'searchRor')
           placeholder='Select Affiliation'
+          disabled=this.disabled
           searchPlaceholder='Type to search...'
           allowClear=true as |item|
         }}
@@ -22,7 +22,10 @@
       class="input-group-addon"
       style="vertical-align:top;padding-top:3px;background-color:white;"
     >
-      <BsButton @outline={{true}} @onClick={{action 'deleteAffiliation' this.index}}>
+      <BsButton
+        @outline={{true}}
+        @onClick={{action 'deleteAffiliation' this.index}}
+      >
         <i class="fas fa-trash pull-left"></i>
       </BsButton>
     </span>
@@ -31,7 +34,6 @@
   <div class="power-select-fragment" data-test-affiliation>
     {{#form.element
       controlType='power-select'
-      disabled=this.disabled
       value=this.fragment.name
       options=this.organizations as |el|
     }}
@@ -39,6 +41,7 @@
         onChange=(action 'selectRor')
         search=(action 'searchRor')
         placeholder='Select Affiliation'
+        disabled=this.disabled
         searchPlaceholder='Type to search...'
         allowClear=true as |item|
       }}

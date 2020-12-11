@@ -3,7 +3,6 @@
     controlType='power-select'
     options=this.spdxLicenseList
     value=this.fragment.rights
-    disabled=this.disabled
     allowClear=true
     destination=this.fragment.rights as |el|
   }}
@@ -11,6 +10,7 @@
       searchEnabled=true
       onChange=(action 'selectRights')
       placeholder='Search standard licenses'
+      disabled=this.disabled
       onkeydown=(action 'createOnEnter')
       search=(action 'searchRights')
       searchPlaceholder='Type to search...'

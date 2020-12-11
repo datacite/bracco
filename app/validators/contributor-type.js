@@ -48,21 +48,17 @@ const ContributorType = BaseValidator.extend({
       'WorkPackageLeader'
     ];
 
-    const message = 'Contributor of the Type cannot be of that Name Type.';
+    const message = 'Contributor of the type cannot be of that name type.';
 
     switch (true) {
-      case !value && options.allowBlank:
-        return true;
       case organizationalContributorTypes.includes(String(value)) &&
         model.nameType == 'Personal':
         return message;
       case personalContributorTypes.includes(String(value)) &&
         model.nameType == 'Organizational':
         return message;
-      case contributorTypes.includes(String(value)):
-        return true;
       default:
-        return 'The value ' + value + ' is not a valid type';
+        return contributorTypes.includes(String(value));
     }
   }
 });

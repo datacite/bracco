@@ -1,25 +1,64 @@
 <div class="form-group">
-  <label class="control-label col-md-3 required-label" data-test-creators>Creators</label>
+  <label class="control-label col-md-3 required-label" data-test-creators>
+    Creators
+  </label>
   <div class="col-md-9">
-    <div class="label-vertical">The main researchers or organizations involved in producing the resource, in priority order.</div>
+    <div class="label-vertical">
+      The main researchers or organizations involved in producing the resource, in priority order.
+    </div>
     {{#if this.showCreators}}
       {{#each this.model.creators as |creator index|}}
-        <DoiCreator @model={{this.model}} @fragment={{creator}} @form={{form}} @index={{index}} />
+        <DoiCreator
+          @model={{this.model}}
+          @fragment={{creator}}
+          @form={{form}}
+          @index={{index}}
+        />
       {{/each}}
-
       {{#if (lte this.model.creators.length 24)}}
-        <BsButton @id="add-creator" @class="btn-sm" @outline={{true}} @onClick={{action "addCreator"}}><i class="fas fa-plus"></i> Add another creator</BsButton>
+        <BsButton
+          @class="btn-sm"
+          @outline={{true}}
+          @onClick={{action 'addCreator'}}
+          data-test-add-creator
+        >
+          <i class="fas fa-plus"></i>
+          Add another creator
+        </BsButton>
       {{/if}}
-
       {{#if (gt this.model.creators.length 0)}}
-        <BsButton @id="toggle-creators" @class="btn-sm" @outline={{true}} @onClick={{action "toggleCreators"}}><i class="fas fa-eye-slash"></i> Hide {{pluralize this.model.creators.length 'creator'}}</BsButton>
+        <BsButton
+          @class="btn-sm"
+          @outline={{true}}
+          @onClick={{action 'toggleCreators'}}
+          data-test-toggle-creators
+        >
+          <i class="fas fa-eye-slash"></i>
+          Hide
+          {{pluralize this.model.creators.length 'creator'}}
+        </BsButton>
       {{/if}}
+    {{else if (gt this.model.creators.length 0)}}
+      <BsButton
+        @class="btn-sm"
+        @outline={{true}}
+        @onClick={{action 'toggleCreators'}}
+        data-test-toggle-creators
+      >
+        <i class="fas fa-eye"></i>
+        Show
+        {{pluralize this.model.creators.length 'creator'}}
+      </BsButton>
     {{else}}
-      {{#if (gt this.model.creators.length 0)}}
-        <BsButton @id="toggle-creators" @class="btn-sm" @outline={{true}} @onClick={{action "toggleCreators"}}><i class="fas fa-eye"></i> Show {{pluralize this.model.creators.length 'creator'}}</BsButton>
-      {{else}}
-        <BsButton @class="btn-sm btn-warning" @id="add-creator" @outline={{true}} @onClick={{action "addCreator"}}><i class="fas fa-plus"></i> Add creator</BsButton>
-      {{/if}}
+      <BsButton
+        @class="btn-sm btn-warning"
+        @outline={{true}}
+        @onClick={{action 'addCreator'}}
+        data-test-add-creator
+      >
+        <i class="fas fa-plus"></i>
+        Add creator
+      </BsButton>
     {{/if}}
   </div>
 </div>

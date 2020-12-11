@@ -12,14 +12,16 @@ module('Integration | Component | doi related-identifier', function (hooks) {
   test('it renders', async function (assert) {
     this.set('model', make('doi'));
     this.set('fragment', make('relatedIdentifier'));
-    await render(
-      hbs`{{doi-related-identifier model=model fragment=fragment index=0}}`
-    );
+    await render(hbs`
+      <BsForm @model={{model}} as |form|>
+        <DoiRelatedIdentifier @model={{model}} @fragment={{fragment}} @form={{form}} @index={{0}} />
+      </BsForm>
+    `);
 
     assert
-      .dom('*')
+      .dom(this.element)
       .hasText(
-        'Must be a globally unique identifier. Visit our support website for the list of supported unique identifiers. Related Identifier Type Relation Type Resource Type General Related Metadata Scheme The name of the scheme. Related Metadata Scheme URI The URI of the relatedMetadataScheme. For example: http://www.ddialliance.org/Specification/DDILifecycle/3.1/XMLSchema/instance.xsd for DDI-L schema. Related Metadata Scheme Type The type of the relatedMetadataScheme, linked with the schemeURI.'
+        'Must be a globally unique identifier. Visit our support website for the list of supported unique identifiers. Related Identifier Type The type of the Related Identifier. Relation Type The type of the Relation. Resource Type General The general type of the related resource. Related Metadata Scheme The name of the scheme. Related Metadata Scheme URI The URI of the relatedMetadataScheme. For example: http://www.ddialliance.org/Specification/DDILifecycle/3.1/XMLSchema/instance.xsd for DDI-L schema. Related Metadata Scheme Type The type of the relatedMetadataScheme, linked with the schemeURI.'
       );
   });
 });

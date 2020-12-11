@@ -13,4 +13,12 @@ module('Integration | Helper | twitter-url', function (hooks) {
 
     assert.dom(this.element).hasText('https://twitter.com/datacite');
   });
+
+  test('it renders null', async function (assert) {
+    this.set('inputValue', null);
+
+    await render(hbs`{{twitter-url inputValue}}`);
+
+    assert.dom(this.element).hasText('');
+  });
 });

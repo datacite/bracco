@@ -23,12 +23,12 @@
     helpText='Type of date.'
     value=this.fragment.dateType
     options=this.dateTypesList
-    destination=this.fragment.dateType
-    disabled=this.disabled as |el|
+    destination=this.fragment.dateType as |el|
   }}
     {{el.control
       onChange=(action 'selectDateType')
       placeholder='Select Date Type'
+      disabled=this.disabled
     }}
   {{/form.element}}
 </div>

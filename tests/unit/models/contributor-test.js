@@ -14,14 +14,14 @@ module('Unit | Model | contributor', function (hooks) {
     assert.ok(!!model);
   });
 
-  test('displayNAme', function (assert) {
+  test('displayName', function (assert) {
     let contributor = run(() =>
       this.owner.lookup('service:store').createRecord('contributor')
     );
 
-    contributor.set('givenName', 'alan');
-    contributor.set('familyName', 'smith');
-    assert.equal(contributor.displayName, 'alan smith');
+    contributor.set('givenName', 'Alan');
+    contributor.set('familyName', 'Smith');
+    assert.equal(contributor.displayName, 'Alan Smith');
   });
 
   test('orcid', function (assert) {

@@ -7,7 +7,10 @@ module('Integration | Component | menu-links', function (hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function (assert) {
-    await render(hbs`{{menu-links}}`);
+    await render(hbs`
+      <MenuLinks />
+    `);
+
     assert.ok(
       /^Services+/.test(find('*').textContent.trim()),
       'begins with Services'

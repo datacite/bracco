@@ -11,7 +11,6 @@
         controlType='power-select'
         id='doi-language'
         formLayout='vertical'
-        disabled=this.disabled
         value=this.language
         options=this.languages as |el|
       }}
@@ -19,6 +18,7 @@
           onChange=(action 'selectLanguage')
           search=(action 'searchLanguage')
           placeholder='Select Language'
+          disabled=this.disabled
           searchPlaceholder='Type to search...'
           allowClear=true
         }}

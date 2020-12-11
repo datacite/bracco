@@ -8,20 +8,23 @@ import {
   findAll,
   triggerKeyEvent,
   fillIn
-  // pauseTest
 } from '@ember/test-helpers';
 import { setupFactoryGuy, make } from 'ember-data-factory-guy';
 
-module('Integration | Component | doi creators', function (hooks) {
+module('Integration | Component | doi-creators', function (hooks) {
   setupRenderingTest(hooks);
   setupFactoryGuy(hooks);
 
   test('adding multiple persons', async function (assert) {
     this.set('model', make('doi'));
+    await render(hbs`
+      <BsForm @model={{model}} as |form|>
+        <DoiCreators @model={{model}} @form={{form}} />
+      </BsForm>
+    `);
 
-    await render(hbs`{{doi-creators model=model}}`);
-    await click('button#add-creator');
-    await click('button#add-creator');
+    await click('[data-test-add-creator]');
+    await click('[data-test-add-creator]');
 
     var persons = findAll('.select-person');
     var givenNames = findAll('input.given-name-field');
@@ -45,9 +48,13 @@ module('Integration | Component | doi creators', function (hooks) {
 
   test('incorrect value(s)', async function (assert) {
     this.set('model', make('doi'));
+    await render(hbs`
+      <BsForm @model={{model}} as |form|>
+        <DoiCreators @model={{model}} @form={{form}} />
+      </BsForm>
+    `);
 
-    await render(hbs`{{doi-creators model=model}}`);
-    await click('button#add-creator');
+    await click('[data-test-add-creator]');
 
     let nameIdentifiers = findAll('input.name-identifier-field');
     let organisations = findAll('input.select-organisation');
@@ -67,7 +74,6 @@ module('Integration | Component | doi creators', function (hooks) {
     await click(organisations[0]);
     await typeIn(nameIdentifiers[0], 'Nilly May');
     await triggerKeyEvent(creators[0], 'keyup', 'Tab');
-    // await pauseTest()
 
     assert.equal(
       nameIdentifiers[0].className,
@@ -79,24 +85,20 @@ module('Integration | Component | doi creators', function (hooks) {
 
   test('no value(s)', async function (assert) {
     this.set('model', make('doi'));
+    await render(hbs`
+      <BsForm @model={{model}} as |form|>
+        <DoiCreators @model={{model}} @form={{form}} />
+      </BsForm>
+    `);
 
-    await render(hbs`{{doi-creators model=model}}`);
-    await click('button#add-creator');
-    await click('button#add-creator');
+    await click('[data-test-add-creator]');
     var creators = findAll('input.creator-field');
     await typeIn(creators[0], '');
-    await typeIn(creators[1], '');
     await triggerKeyEvent(creators[0], 'keyup', 'Tab');
-    await triggerKeyEvent(creators[1], 'keyup', 'Tab');
 
     assert.equal(findAll('input.creator-field')[0].value, '');
-    assert.equal(findAll('input.creator-field')[1].value, '');
     assert.equal(
-      creators[1].className,
-      'form-control creator-field no-error no-success'
-    );
-    assert.equal(
-      creators[1].className,
+      creators[0].className,
       'form-control creator-field no-error no-success'
     );
   });

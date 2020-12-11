@@ -11,7 +11,6 @@ module('Unit | Validator | contributor-type', function (hooks) {
   });
 
   test('it works', function (assert) {
-    let validator = this.owner.lookup('validator:contributor-type');
     assert.ok(validator);
   });
 
@@ -25,7 +24,7 @@ module('Unit | Validator | contributor-type', function (hooks) {
     });
     assert.equal(
       message,
-      'Contributor of the Type cannot be of that Name Type.'
+      'Contributor of the type cannot be of that name type.'
     );
 
     message = validator.validate(['HostingInstitution'], builtOptions, {
@@ -44,7 +43,7 @@ module('Unit | Validator | contributor-type', function (hooks) {
     });
     assert.equal(
       message,
-      'Contributor of the Type cannot be of that Name Type.'
+      'Contributor of the type cannot be of that name type.'
     );
 
     message = validator.validate(['DataCurator'], builtOptions, {

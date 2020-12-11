@@ -8,10 +8,10 @@ const NumberRange = BaseValidator.extend({
 
     if (last - first < 0) {
       let message =
-        'The last prefix must be or come after ' + model.firstPrefix;
+        'The last prefix must be or come after ' + model.firstPrefix + '.';
       return message;
     } else if (last - first >= 500) {
-      let message = "Can't add more than 500 prefixed at a time";
+      let message = "Can't add more than 500 prefixed at a time.";
       return message;
     } else {
       return true;

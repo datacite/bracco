@@ -33,6 +33,15 @@ const Validations = buildValidations({
       })
     })
   ],
+  prefix: [
+    validator('presence', {
+      presence: true,
+      message: "The DOI prefix can't be blank.",
+      disabled: computed('model.mode', function () {
+        return !['new', 'upload'].includes(this.model.mode);
+      })
+    })
+  ],
   suffix: [
     validator('presence', {
       presence: true,
@@ -56,6 +65,10 @@ const Validations = buildValidations({
     })
   ],
   url: [
+    validator('presence', {
+      presence: true,
+      disabled: equal('model.state', 'draft')
+    }),
     validator('url-format', {
       require_tld: false,
       message: 'Please enter a valid URL that the DOI should resolve to.',
@@ -112,7 +125,6 @@ const Validations = buildValidations({
       })
     }),
     validator('resource-type', {
-      presence: true,
       disabled: computed('model.{mode,state}', function () {
         return (
           this.model.state === 'draft' ||

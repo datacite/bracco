@@ -4,28 +4,35 @@ import { setupRenderingTest } from 'ember-qunit';
 import { setupFactoryGuy, make } from 'ember-data-factory-guy';
 import { render, fillIn, click } from '@ember/test-helpers';
 
-module('Integration | Component | doi funding-references', function (hooks) {
+module('Integration | Component | doi-funding-references', function (hooks) {
   setupRenderingTest(hooks);
   setupFactoryGuy(hooks);
 
   test('it renders', async function (assert) {
-    this.set('model', make('doi', { fundingReferences: [] }));
-    await render(hbs`{{doi-funding-references model=model}}`);
-    await click('#add-funding-reference');
-    let fundingReferences = this.element.querySelectorAll(
-      '[data-test-funder-identifier]'
-    );
+    this.set('model', make('doi'));
+    await render(hbs`
+      <BsForm @model={{model}} as |form|>
+        <DoiFundingReferences @model={{model}} @form={{form}} />
+      </BsForm>
+    `);
 
-    await fillIn(fundingReferences[0], 'Adobe-Glyph');
-
-    assert.dom('[data-test-funder-identifier]').hasValue('Adobe-Glyph');
+    assert
+      .dom(this.element)
+      .hasText(
+        'Funding References Information about financial support (funding) for the resource being registered. Add funding reference'
+      );
   });
 
   test('add multiple values', async function (assert) {
     this.set('model', make('doi', { fundingReferences: [] }));
-    await render(hbs`{{doi-funding-references model=model}}`);
-    await click('#add-funding-reference');
-    await click('#add-funding-reference');
+    await render(hbs`
+      <BsForm @model={{model}} as |form|>
+        <DoiFormats @model={{model}} @form={{form}} />
+      </BsForm>
+    `);
+
+    await click('[data-test-add-funding-reference]');
+    await click('[data-test-add-funding-reference]');
     let fundingReferences = this.element.querySelectorAll(
       '[data-test-award-number]'
     );

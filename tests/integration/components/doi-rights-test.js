@@ -20,14 +20,20 @@ module('Integration | Component | doi rights', function (hooks) {
         }
       ]
     });
-    await render(
-      hbs`{{doi-rights model=model fragment=fragment spdx=spdx index=0}}`
-    );
+    await render(hbs`
+      <BsForm @model={{model}} as |form|>
+        <DoiRights @model={{model}} @fragment={{fragment}} @spdx={{spdx}} @form={{form}} @index={{0}} />
+      </BsForm>
+    `);
 
-    assert.dom(this.element).hasText('Rights URI The URI of the license.');
+    assert
+      .dom(this.element)
+      .hasText(
+        'The list of standard licenses is provided by SPDX . Rights URI The URI of the license.'
+      );
   });
 
-  test('it renders add add right', async function (assert) {
+  test('it renders and adds right', async function (assert) {
     this.set('model', make('doi'));
     this.set('fragment', make('rights'));
     this.set('spdx', {
@@ -38,9 +44,11 @@ module('Integration | Component | doi rights', function (hooks) {
         }
       ]
     });
-    await render(
-      hbs`{{doi-rights model=model fragment=fragment spdx=spdx index=0}}`
-    );
+    await render(hbs`
+      <BsForm @model={{model}} as |form|>
+        <DoiRights @model={{model}} @fragment={{fragment}} @spdx={{spdx}} @form={{form}} @index={{0}} />
+      </BsForm>
+    `);
 
     assert
       .dom('[data-test-rights-uri]')
@@ -58,9 +66,11 @@ module('Integration | Component | doi rights', function (hooks) {
         }
       ]
     });
-    await render(
-      hbs`{{doi-rights model=model fragment=fragment spdx=spdx index=0}}`
-    );
+    await render(hbs`
+      <BsForm @model={{model}} as |form|>
+        <DoiRights @model={{model}} @fragment={{fragment}} @spdx={{spdx}} @form={{form}} @index={{0}} />
+      </BsForm>
+    `);
 
     assert
       .dom('[data-test-rights-uri]')

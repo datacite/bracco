@@ -3,7 +3,7 @@ import FactoryGuy from 'ember-data-factory-guy';
 FactoryGuy.define('doi', {
   default: {
     doi: '10.80225/rph240519',
-    url: 'https://datacite.org',
+    url: 'https://ada.edu.au/bla',
     alternateIdentifiers: [
       {
         doi: 'https://handle.stage.datacite.org/10.80225/rph24'
@@ -13,6 +13,7 @@ FactoryGuy.define('doi', {
     contributors: FactoryGuy.hasMany('contributor'),
     titles: FactoryGuy.hasMany('title'),
     descriptions: FactoryGuy.hasMany('description'),
+    dates: FactoryGuy.hasMany('date'),
     relatedIdentifiers: FactoryGuy.hasMany('relatedIdentifier'),
     fundingReferences: FactoryGuy.hasMany('fundingReference'),
     rightsList: FactoryGuy.hasMany('rights'),
@@ -38,8 +39,31 @@ FactoryGuy.define('doi', {
     citationCount: 123,
     repository: FactoryGuy.belongsTo('repository')
   },
-  empty: {
-    creators: []
+  emptyDoi: {
+    doi: null,
+    url: null,
+    creators: FactoryGuy.hasMany('creator', { name: null }),
+    contributors: FactoryGuy.hasMany('contributor', { name: null }),
+    titles: FactoryGuy.hasMany('title', { title: null }),
+    subjects: FactoryGuy.hasMany('subject', { subject: null }),
+    relatedIdentifiers: FactoryGuy.hasMany('relatedIdentifier', {
+      relatedIdentifierType: null
+    }),
+    fundingReferences: FactoryGuy.hasMany('fundingReference', {
+      funderName: null
+    }),
+    rightsList: FactoryGuy.hasMany('rights', { rights: null }),
+    geoLocations: FactoryGuy.hasMany('geoLocation', {
+      geoLocation: { geoLocationPoint: {} }
+    }),
+    dates: FactoryGuy.hasMany('date', { date: null }),
+    descriptions: FactoryGuy.hasMany('description', { description: null }),
+    publisher: null,
+    publicationYear: null,
+    state: 'findable'
+  },
+  draft: {
+    state: 'draft'
   }
 });
 
@@ -89,6 +113,13 @@ FactoryGuy.define('description', {
 FactoryGuy.define('geoLocation', {
   default: {
     geoLocationPlace: 'Mexico'
+  }
+});
+
+FactoryGuy.define('date', {
+  default: {
+    date: '2020-12-10',
+    dateType: 'Issued'
   }
 });
 

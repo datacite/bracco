@@ -81,19 +81,4 @@ module('Unit | Validator | url-format', function (hooks) {
     );
     assert.equal(message, true);
   });
-
-  test('allow blank', function (assert) {
-    assert.expect(2);
-
-    options = {
-      allowBlank: true
-    };
-    options = validator.buildOptions(options, {}).toObject();
-
-    message = validator.validate(undefined, options);
-    assert.equal(message, true);
-
-    message = validator.validate('url', options);
-    assert.equal(message, 'Please enter a valid URL.');
-  });
 });

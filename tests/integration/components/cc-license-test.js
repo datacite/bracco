@@ -3,18 +3,26 @@ import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 
-module('Integration | Component | cc license', function (hooks) {
+module('Integration | Component | cc-license', function (hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function (assert) {
     this.set(
-      'licenseURL',
+      'licenseUrl',
       'http://creativecommons.org/licenses/by-nc/4.0/legalcode'
     );
 
-    await render(hbs`{{cc-license licenseURL=licenseURL}}`);
+    await render(hbs`
+      <CcLicense @licenseURL={{licenseUrl}} />
+    `);
 
     // logos for cc, by and nc
-    assert.dom('i').exists({ count: 3 });
+    assert
+      .dom('a')
+      .hasAttribute(
+        'href',
+        'http://creativecommons.org/licenses/by-nc/4.0/legalcode'
+      );
+    assert.dom('a i').exists({ count: 3 });
   });
 });

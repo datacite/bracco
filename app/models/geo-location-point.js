@@ -1,7 +1,5 @@
 import { attr } from '@ember-data/model';
 import MF from 'ember-data-model-fragments';
-import { computed } from '@ember/object';
-import { isBlank } from '@ember/utils';
 import { validator, buildValidations } from 'ember-cp-validations';
 
 const Validations = buildValidations({
@@ -14,13 +12,7 @@ const Validations = buildValidations({
       lte: 180
     }),
     validator('presence', {
-      presence: true,
-      ignoreBlank: true,
-      message:
-        'Point Longitude must be included if you input a GeoLocation Point.',
-      disabled: computed('model.pointLatitude', function () {
-        return isBlank(this.model.pointLatitude);
-      })
+      presence: true
     })
   ],
   pointLatitude: [
@@ -32,13 +24,7 @@ const Validations = buildValidations({
       lte: 90
     }),
     validator('presence', {
-      presence: true,
-      ignoreBlank: true,
-      message:
-        'Point Latitude must be included if you input a GeoLocation Point.',
-      disabled: computed('model.pointLongitude', function () {
-        return isBlank(this.model.pointLongitude);
-      })
+      presence: true
     })
   ]
 });

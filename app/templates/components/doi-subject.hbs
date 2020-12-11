@@ -10,13 +10,13 @@
     controlType='power-select'
     options=this.subjects
     value=this.fragment.subject
-    disabled=this.disabled
     destination=this.fragment.subject as |el|
   }}
     {{el.control
       searchEnabled=true
       onChange=(action 'updateSubject')
       placeholder='Search Subject from the OECD Fields of Science and Technology (FOS) OR create a new keyword'
+      disabled=this.disabled
       onkeydown=(action 'createOnEnter')
       search=(action 'searchSubject')
       allowClear=true

@@ -31,13 +31,13 @@
     value=this.fragment.alternateIdentifierType
     helpText='The type of Alternate Identifier.'
     options=this.alternateIdentifierTypeList
-    disabled=this.controlledIdentifierType
     destination=this.fragment.alternateIdentifierType as |el|
   }}
     {{el.control
       onChange=(action 'selectAlternateIdentifierType')
       onkeydown=(action 'createOnEnter')
       placeholder='Type in or select the Alternate Identifier Type.'
+      disabled=this.controlledIdentifierType
       noMatchesMessage='Press ENTER to add new identifier Type.'
     }}
   {{/form.element}}

@@ -4,95 +4,186 @@
       {{#each this.flashMessages.queue as |flash|}}
         <FlashMessage @flash={{flash}} />
       {{/each}}
-
-      <h3 class="help-header">Create DOI (Form)</h3>
+      <h3 class="help-header">
+        Create DOI (Form)
+      </h3>
       <div class="label-vertical">
-        More information about DOI registration via form can be found on our <a target="_blank" rel="noopener" href="https://support.datacite.org/docs/fabrica-create-doi-form">Support Website</a>. Required properties are marked with a red asterix.
+        More information about DOI registration via form can be found on our
+        <a
+          target="_blank"
+          rel="noopener"
+          href="https://support.datacite.org/docs/fabrica-create-doi-form"
+        >
+          Support Website
+        </a>
+        . Required properties are marked with a red asterix.
       </div>
     </div>
-
-    <BsForm @formLayout="horizontal" @horizontalLabelGridClass="col-md-3" @model={{this.model.doi}} @onSubmit={{action "submit" this.model.doi}} as |form|>
-      <h3 class="member-results">Required Properties</h3>
-
-      <DoiDoi @model={{this.model.doi}} @repository={{this.model.repository}} @form={{form}} />
-
-      <div class="form-group required-nested-label {{if (v-get this.model.doi 'url' 'isInvalid') 'has-error' 'has-feedback'}}">
-        <label class="control-label col-md-3">URL</label>
+    <BsForm
+      @formLayout="horizontal"
+      @horizontalLabelGridClass="col-md-3"
+      @model={{this.model.doi}}
+      @onSubmit={{action 'submit' this.model.doi}} as |form|
+    >
+      <h3 class="member-results">
+        Required Properties
+      </h3>
+      <DoiDoi
+        @model={{this.model.doi}}
+        @repository={{this.model.repository}}
+        @form={{form}}
+      />
+      <div
+        class="form-group required-nested-label
+          {{if
+            (v-get this.model.doi 'url' 'isInvalid')
+            'has-error'
+            'has-feedback'
+          }}"
+      >
+        <label class="control-label col-md-3">
+          URL
+        </label>
         <div class="col-md-9 input-fragment">
-          <div class="label-vertical">The location of the landing page with more information about the resource.</div>
-          <form.element @id="url" @controlType="text" @property="url" @placeholder="URL" @helpText="Should be a https URL – within the allowed domain(s) of your repository if domain restrictions are enabled in the repository settings. Http and ftp are also supported." @required={{false}} />
+          <div class="label-vertical">
+            The location of the landing page with more information about the resource.
+          </div>
+          <form.element
+            @id="url"
+            @controlType="text"
+            @property="url"
+            @helpText="Should be a https URL – within the allowed domain(s) of your repository if domain restrictions are enabled in the repository settings. Http and ftp are also supported." as |el|
+          >
+            <el.control placeholder="URL" />
+          </form.element>
         </div>
       </div>
-
       <DoiCreators @model={{this.model.doi}} @form={{form}} />
       <DoiTitles @model={{this.model.doi}} @form={{form}} />
-      
-      <div class="form-group required-nested-label {{if (v-get this.model.doi 'publisher' 'isInvalid') 'has-error' 'has-feedback'}}">
-        <label class="control-label col-md-3">Publisher</label>
+      <div
+        class="form-group required-nested-label
+          {{if
+            (v-get this.model.doi 'publisher' 'isInvalid')
+            'has-error'
+            'has-feedback'
+          }}"
+      >
+        <label class="control-label col-md-3">
+          Publisher
+        </label>
         <div class="col-md-9 input-fragment">
-          <div class="label-vertical">The name of the entity that holds, archives, publishes prints, distributes, releases, issues, or produces the resource.</div>
-          <form.element @id="publisher" @controlType="text" @property="publisher" @placeholder="Publisher" @helpText="This property will be used to formulate the citation, so consider the prominence of the role." @required={{false}} />
+          <div class="label-vertical">
+            The name of the entity that holds, archives, publishes prints, distributes, releases, issues, or produces the resource.
+          </div>
+          <form.element
+            @id="publisher"
+            @controlType="text"
+            @property="publisher"
+            @helpText="This property will be used to formulate the citation, so consider the prominence of the role." as |el|
+          >
+            <el.control placeholder="Publisher" />
+          </form.element>
         </div>
       </div>
-
-      <div class="form-group required-nested-label {{if (v-get this.model.doi 'publicationYear' 'isInvalid') 'has-error' 'has-feedback'}}">
-        <label class="control-label col-md-3">Publication Year</label>
+      <div
+        class="form-group required-nested-label
+          {{if
+            (v-get this.model.doi 'publicationYear' 'isInvalid')
+            'has-error'
+            'has-feedback'
+          }}"
+      >
+        <label class="control-label col-md-3">
+          Publication Year
+        </label>
         <div class="col-md-9 input-fragment">
-          <div class="label-vertical">The year when the resource was or will be made publicly available.</div>
-          <form.element @id="publication-year" @controlType="text" @property="publicationYear" @placeholder="Publication Year" @helpText="Must be a year between 1000 and 2021." @required={{false}} />
+          <div class="label-vertical">
+            The year when the resource was or will be made publicly available.
+          </div>
+          <form.element
+            @id="publication-year"
+            @controlType="text"
+            @property="publicationYear"
+            @helpText="Must be a year between 1000 and 2021." as |el|
+          >
+            <el.control placeholder="Publication Year" />
+          </form.element>
         </div>
       </div>
-
-      <DoiTypes @class="required-nested-label" @model={{this.model.doi}} @form={{form}} />
-      
-      <h3 class="member-results">Recommended Properties</h3>
-
+      <DoiTypes
+        @class="required-nested-label"
+        @model={{this.model.doi}}
+        @form={{form}}
+      />
+      <h3 class="member-results">
+        Recommended Properties
+      </h3>
       <DoiSubjects @model={{this.model.doi}} @form={{form}} />
       <DoiContributors @model={{this.model.doi}} @form={{form}} />
       <DoiDates @model={{this.model.doi}} @form={{form}} />
       <DoiRelatedIdentifiers @model={{this.model.doi}} @form={{form}} />
-
       <DoiDescriptions @model={{this.model.doi}} @form={{form}} />
-
       <DoiGeoLocations @model={{this.model.doi}} @form={{form}} />
-
-      <h3 class="member-results">Optional Properties</h3>
-
+      <h3 class="member-results">
+        Optional Properties
+      </h3>
       <DoiLanguage @model={{this.model.doi}} @form={{form}} />
       <DoiAlternateIdentifiers @model={{this.model.doi}} @form={{form}} />
-      <DoiRightsList @model={{this.model.doi}} @form={{form}} @spdx={{this.spdx}} />
+      <DoiRightsList
+        @model={{this.model.doi}}
+        @form={{form}}
+        @spdx={{this.spdx}}
+      />
       <DoiSizes @model={{this.model.doi}} @form={{form}} />
       <DoiFormats @model={{this.model.doi}} @form={{form}} />
-
       <div class="form-group">
-        <label class="control-label col-md-3">Version</label>
+        <label class="control-label col-md-3">
+          Version
+        </label>
         <div class="col-md-9 input-fragment">
-          <div class="label-vertical">The version number of the resource.</div>
-          <form.element @id="version" @controlType="text" @placeholder="Version" @property="version" @required={{false}} data-test-version/>
+          <div class="label-vertical">
+            The version number of the resource.
+          </div>
+          <form.element
+            @id="version"
+            @controlType="text"
+            @property="version"
+            data-test-version as |el|
+          >
+            <el.control placeholder="Version" />
+          </form.element>
         </div>
       </div>
-
       <DoiFundingReferences @model={{this.model.doi}} @form={{form}} />
-
       <div class="col-md-9 col-md-offset-3">
         {{#if (is-empty (doi-form-errors this.model.doi))}}
-          <button type="submit" id="doi-create" class="btn btn-sm btn-fill" disabled={{false}}>Create DOI</button>
+          <button type="submit" id="doi-create" class="btn btn-sm btn-fill">
+            Create DOI
+          </button>
         {{else}}
           <BsAlert @dismissible={{false}} @type="danger">
-            To save this DOI, first resolve the errors with these properties: {{doi-form-errors this.model.doi}}.
+            To save this DOI, first resolve the errors with these properties:
+            {{doi-form-errors this.model.doi}}
+            .
           </BsAlert>
-
-          <button type="submit" id="doi-create" class="btn btn-sm btn-fill" disabled={{true}}>Create DOI</button>          
+          <button
+            type="submit"
+            id="doi-create"
+            class="btn btn-sm btn-fill"
+            disabled={{true}}
+          >
+            Create DOI
+          </button>
         {{/if}}
-        
-        <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
+        <button class="btn btn-sm" {{action 'cancel'}}>
+          Cancel
+        </button>
       </div>
     </BsForm>
-
     <div class="row">
       <div class="col-md-9 col-md-offset-3">
         {{#each this.flashMessages.queue as |flash|}}
-          {{#if (eq flash.componentName "doi-error") }}
+          {{#if (eq flash.componentName 'doi-error')}}
             <FlashMessage @flash={{flash}} />
           {{/if}}
         {{/each}}

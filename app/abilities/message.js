@@ -13,7 +13,6 @@ export default Ability.extend({
         case 'staff_admin':
           return 'admin' === this.model.id;
         case 'consortium_admin':
-          return this.currentUser.provider_id === this.model.id;
         case 'provider_admin':
           return this.currentUser.provider_id === this.model.id;
         case 'client_admin':

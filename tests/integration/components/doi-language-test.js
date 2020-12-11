@@ -11,7 +11,11 @@ module('Integration | Component | doi language', function (hooks) {
 
   test('it renders', async function (assert) {
     this.set('model', make('doi'));
-    await render(hbs`{{doi-language model=model.doi}}`);
+    await render(hbs`
+    <BsForm @model={{doi}} as |form|>
+      <DoiLanguage @model={{doi}} @form={{form}}/>
+    </BsForm>
+  `);
 
     assert
       .dom(this.element)

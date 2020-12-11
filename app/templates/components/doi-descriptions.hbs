@@ -1,25 +1,66 @@
 <div class="form-group">
-  <label class="control-label col-md-3" data-test-descriptions>Descriptions</label>
+  <label class="control-label col-md-3" data-test-descriptions>
+    Descriptions
+  </label>
   <div class="col-md-9">
-    <div class="label-vertical">Additional information about the resource that does not fit in any of the other categories.</div>
+    <div class="label-vertical">
+      Additional information about the resource that does not fit in any of the other categories.
+    </div>
     {{#if this.showDescriptions}}
       {{#each this.model.descriptions as |description index|}}
-        <DoiDescription @model={{this.model}} @fragment={{description}} @form={{form}} @index={{index}} />
+        <DoiDescription
+          @model={{this.model}}
+          @fragment={{description}}
+          @form={{form}}
+          @index={{index}}
+        />
       {{/each}}
-
       {{#if (lte this.model.descriptions.length 4)}}
-        <BsButton @class="btn-sm" @id="add-description" @outline={{true}} @onClick={{action "addDescription"}}><i class="fas fa-plus"></i> Add {{if (gt this.model.descriptions.length 0) "another "}}description</BsButton>
+        <BsButton
+          @class="btn-sm"
+          @outline={{true}}
+          @onClick={{action 'addDescription'}}
+          data-test-add-description
+        >
+          <i class="fas fa-plus"></i>
+          Add
+          {{if (gt this.model.descriptions.length 0) 'another '}}
+          description
+        </BsButton>
       {{/if}}
-
       {{#if (gt this.model.descriptions.length 0)}}
-        <BsButton @id="toggle-descriptions" @class="btn-sm" @outline={{true}} @onClick={{action "toggleDescriptions"}}><i class="fas fa-eye-slash"></i> Hide {{pluralize this.model.descriptions.length 'description'}}</BsButton>
+        <BsButton
+          @id="toggle-descriptions"
+          @class="btn-sm"
+          @outline={{true}}
+          @onClick={{action 'toggleDescriptions'}}
+        >
+          <i class="fas fa-eye-slash"></i>
+          Hide
+          {{pluralize this.model.descriptions.length 'description'}}
+        </BsButton>
       {{/if}}
+    {{else if (gt this.model.descriptions.length 0)}}
+      <BsButton
+        @id="toggle-descriptions"
+        @class="btn-sm"
+        @outline={{true}}
+        @onClick={{action 'toggleDescriptions'}}
+      >
+        <i class="fas fa-eye"></i>
+        Show
+        {{pluralize this.model.descriptions.length 'description'}}
+      </BsButton>
     {{else}}
-      {{#if (gt this.model.descriptions.length 0)}}
-        <BsButton @id="toggle-descriptions" @class="btn-sm" @outline={{true}} @onClick={{action "toggleDescriptions"}}><i class="fas fa-eye"></i> Show {{pluralize this.model.descriptions.length 'description'}}</BsButton>
-      {{else}}
-        <BsButton @class="btn-sm btn-warning" @id="add-description" @outline={{true}} @onClick={{action "addDescription"}}><i class="fas fa-plus"></i> Add description</BsButton>
-      {{/if}}
+      <BsButton
+        @class="btn-sm btn-warning"
+        @outline={{true}}
+        @onClick={{action 'addDescription'}}
+        data-test-add-description
+      >
+        <i class="fas fa-plus"></i>
+        Add description
+      </BsButton>
     {{/if}}
   </div>
 </div>

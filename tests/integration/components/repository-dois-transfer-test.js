@@ -10,11 +10,12 @@ module('Integration | Component | repository dois transfer', function (hooks) {
 
   test('it renders', async function (assert) {
     this.set('model', make('repository'));
-
-    await render(hbs`{{repository-dois-transfer model=model}}`);
+    await render(hbs`
+      <RepositoryDoisTransfer @model={{model}} />
+    `);
 
     assert
-      .dom(this.element)
+      .dom('*')
       .hasText(
         'Transfer DOIs Repository Transfer all DOIs to this repository. It can take up to one hour for the transfer to complete. Transfer DOIs Cancel'
       );

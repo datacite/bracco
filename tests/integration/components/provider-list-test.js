@@ -10,9 +10,7 @@ module('Integration | Component | provider-list', function (hooks) {
 
   test('it renders', async function (assert) {
     await render(hbs`
-      {{#provider-list model=model link="repositories.index"}}
-
-      {{/provider-list}}
+      <ProviderList @model={{model}} @link="repositories.index" />
     `);
 
     assert.dom(this.element).hasText('No members found.');

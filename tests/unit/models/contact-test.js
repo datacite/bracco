@@ -14,13 +14,13 @@ module('Unit | Model | contact', function (hooks) {
     assert.ok(!!model);
   });
 
-  test('should correct contact name', function (assert) {
+  test('should have correct contact name', function (assert) {
     let model = run(() =>
       this.owner.lookup('service:store').createRecord('contact')
     );
     const contact = make('contact');
     model.set('givenName', contact.givenName);
     model.set('familyName', contact.familyName);
-    assert.equal(model.name, 'John Smith');
+    assert.equal(model.name, 'Mitesh Patel');
   });
 });

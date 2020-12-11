@@ -8,9 +8,7 @@ module('Integration | Component | user-show', function (hooks) {
 
   test('it renders', async function (assert) {
     await render(hbs`
-      <UserShow>
-        template block text
-      </UserShow>
+      <UserShow />
     `);
 
     assert.dom(this.element).hasText('ORCID ID');

@@ -10,7 +10,11 @@ module('Integration | Component | doi-state', function (hooks) {
 
   test('it renders', async function (assert) {
     this.set('model', make('doi'));
-    await render(hbs`{{doi-state model=model}}`);
+    await render(hbs`
+      <BsForm @model={{model}} as |form|>
+        <DoiState @model={{model}} @form={{form}} />
+      </BsForm>
+    `);
 
     assert
       .dom('*')

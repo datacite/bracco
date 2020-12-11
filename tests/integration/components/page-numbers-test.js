@@ -8,9 +8,7 @@ module('Integration | Component | page-numbers', function (hooks) {
 
   test('it renders', async function (assert) {
     await render(hbs`
-      {{#page-numbers}}
-        template block text
-      {{/page-numbers}}
+      <PageNumbers />
     `);
 
     assert.dom(this.element).hasText('« 1 »');

@@ -11,7 +11,9 @@ module('Integration | Component | provider-id', function (hooks) {
   test('it renders', async function (assert) {
     this.set('model', make('provider'));
 
-    await render(hbs`{{provider-id model=model}}`);
+    await render(hbs`
+      <ProviderId @model={{model}} />
+    `);
 
     assert
       .dom(this.element)

@@ -10,7 +10,10 @@ module('Integration | Component | doi transfer', function (hooks) {
 
   test('it renders', async function (assert) {
     this.set('model', make('doi'));
-    await render(hbs`{{doi-transfer model=model}}`);
+
+    await render(hbs`
+      <DoiTransfer @model={{this.model}} />
+    `);
 
     assert
       .dom(this.element)

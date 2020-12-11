@@ -1,25 +1,64 @@
 <div class="form-group">
-  <label class="control-label col-md-3 required-label" data-test-titles>Titles</label>
+  <label class="control-label col-md-3 required-label" data-test-titles>
+    Titles
+  </label>
   <div class="col-md-9">
-    <div class="label-vertical">One or more names or titles by which the resource is known.</div>
+    <div class="label-vertical">
+      One or more names or titles by which the resource is known.
+    </div>
     {{#if this.showTitles}}
       {{#each this.model.titles as |title index|}}
-        <DoiTitle @model={{this.model}} @fragment={{title}} @form={{form}} @index={{index}} />
+        <DoiTitle
+          @model={{this.model}}
+          @fragment={{title}}
+          @form={{form}}
+          @index={{index}}
+        />
       {{/each}}
-
       {{#if (lte this.model.titles.length 4)}}
-        <BsButton @class="btn-sm" @id="add-title" @outline={{true}} @onClick={{action "addTitle"}}><i class="fas fa-plus"></i> Add another title</BsButton>
+        <BsButton
+          @class="btn-sm"
+          @outline={{true}}
+          @onClick={{action 'addTitle'}}
+          data-test-add-title
+        >
+          <i class="fas fa-plus"></i>
+          Add another title
+        </BsButton>
       {{/if}}
-
       {{#if (gt this.model.titles.length 0)}}
-        <BsButton @id="toggle-titles" @class="btn-sm" @outline={{true}} @onClick={{action "toggleTitles"}}><i class="fas fa-eye-slash"></i> Hide {{pluralize this.model.titles.length 'title'}}</BsButton>
+        <BsButton
+          @id="toggle-titles"
+          @class="btn-sm"
+          @outline={{true}}
+          @onClick={{action 'toggleTitles'}}
+        >
+          <i class="fas fa-eye-slash"></i>
+          Hide
+          {{pluralize this.model.titles.length 'title'}}
+        </BsButton>
       {{/if}}
+    {{else if (gt this.model.titles.length 0)}}
+      <BsButton
+        @id="toggle-titles"
+        @class="btn-sm"
+        @outline={{true}}
+        @onClick={{action 'toggleTitles'}}
+      >
+        <i class="fas fa-eye"></i>
+        Show
+        {{pluralize this.model.titles.length 'title'}}
+      </BsButton>
     {{else}}
-      {{#if (gt this.model.titles.length 0)}}
-        <BsButton @id="toggle-titles" @class="btn-sm" @outline={{true}} @onClick={{action "toggleTitles"}}><i class="fas fa-eye"></i> Show {{pluralize this.model.titles.length 'title'}}</BsButton>
-      {{else}}
-        <BsButton @class="btn-sm btn-warning" @id="add-title" @outline={{true}} @onClick={{action "addTitle"}}><i class="fas fa-plus"></i> Add title</BsButton>
-      {{/if}}
+      <BsButton
+        @class="btn-sm btn-warning"
+        @outline={{true}}
+        @onClick={{action 'addTitle'}}
+        data-test-add-title
+      >
+        <i class="fas fa-plus"></i>
+        Add title
+      </BsButton>
     {{/if}}
   </div>
 </div>

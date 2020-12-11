@@ -3,14 +3,25 @@ import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 
-module('helper:format-test', function (hooks) {
+module('Integration | Helper | format-text', function (hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function (assert) {
-    this.set('inputValue', '1234');
+    this.set('text', '<p>A <strong>paragraph with words</strong>.</p>');
 
-    await render(hbs`{{format-metadata inputValue}}`);
+    await render(hbs`{{format-text text}}`);
 
-    assert.dom(this.element).hasText('published 1234');
+    assert.dom('strong').hasText('paragraph with words');
+  });
+
+  test('it removes tags not whitelisted', async function (assert) {
+    this.set(
+      'text',
+      '<p>A <strong>paragraph with words</strong> is a wonderful thing.</p>'
+    );
+
+    await render(hbs`{{format-text text}}`);
+
+    assert.dom('p').doesNotExist();
   });
 });

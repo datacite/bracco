@@ -11,12 +11,15 @@ module('Integration | Component | doi-subject', function (hooks) {
   test('it renders', async function (assert) {
     this.set('model', make('doi'));
     this.set('fragment', make('subject'));
-    await render(hbs`{{doi-subject model=model fragment=fragment index=0}}`);
-
+    await render(hbs`
+      <BsForm @model={{model}} as |form|>
+        <DoiSubject @model={{model}} @fragment={{fragment}} @form={{form}} @index={{0}}/>
+      </BsForm>
+    `);
     assert
-      .dom('*')
+      .dom(this.element)
       .hasText(
-        'Subject Scheme The name of the subject scheme or classification code or authority if one is used. Subject Scheme URI The URI of the subject identifier scheme. For example http://id.loc.gov/authorities/subjects'
+        'The default subject scheme is provided by the OECD Fields of Science and Technology (FOS) . Subject Scheme The name of the subject scheme or classification code or authority if one is used. Subject Scheme URI The URI of the subject identifier scheme. For example http://id.loc.gov/authorities/subjects'
       );
   });
 });

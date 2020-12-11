@@ -11,7 +11,7 @@ module('Integration | Component | doi descriptions', function (hooks) {
   test('it renders', async function (assert) {
     this.set('model', make('doi'));
     await render(hbs`{{doi-descriptions model=model}}`);
-    await click('#add-description');
+    await click('[data-test-add-description]');
     let descriptions = this.element.querySelectorAll(
       'textarea.description-field'
     );
@@ -27,9 +27,12 @@ module('Integration | Component | doi descriptions', function (hooks) {
 
   test('add multiple values', async function (assert) {
     this.set('model', make('doi'));
-    await render(hbs`{{doi-descriptions model=model}}`);
-    await click('#add-description');
-    await click('#add-description');
+    await render(hbs`
+      <DoiDescriptions @model={{model}} />
+    `);
+
+    await click('[data-test-add-description]');
+    await click('[data-test-add-description]');
     let descriptions = this.element.querySelectorAll(
       'textarea.description-field'
     );

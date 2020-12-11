@@ -18,7 +18,6 @@
       id='resource-type-general'
       property='types.resourceTypeGeneral'
       options=this.resourceTypesGeneral
-      disabled=this.disabled
       helpText='If none of the provided values matches, use Other and specify the resource type in the field below.'
       destination=this.resourceTypeGeneral as |el|
     }}
@@ -39,15 +38,14 @@
       </label>
     </div>
     <div class="power-select-fragment" doi-resource-type>
-      {{form.element
+      {{#form.element
         controlType='text'
         id='resource-type'
         property='types.resourceType'
-        helpText='A description of the resource, the preferred format is a single term of some detail.'
-        placeholder='Resource Type'
-        required=false
-        disabled=this.disabled
+        helpText='A description of the resource, the preferred format is a single term of some detail.' as |el|
       }}
+        <el.control @placeholder="Resource Type" />
+      {{/form.element}}
     </div>
   </div>
 </div>

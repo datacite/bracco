@@ -20,7 +20,36 @@ FactoryGuy.define('provider', {
     isActive: true,
     hasPassword: true,
     joined: '2010-02-05',
-    rorId: 'https://ror.org/038sjwq14'
+    rorId: 'https://ror.org/038sjwq14',
+    technicalContact: FactoryGuy.belongsTo('contact'),
+    billingContact: FactoryGuy.belongsTo('contact'),
+    serviceContact: FactoryGuy.belongsTo('contact'),
+    secondaryTechnicalContact: FactoryGuy.belongsTo('contact'),
+    secondaryBillingContact: FactoryGuy.belongsTo('contact'),
+    secondaryServiceContact: FactoryGuy.belongsTo('contact'),
+    votingContact: FactoryGuy.belongsTo('contact')
+  },
+
+  blco: {
+    id: 'blco',
+    name: 'British Library',
+    displayName: 'The British Library',
+    symbol: 'BLCO',
+    website: 'https://www.british.co.uk',
+    systemEmail: 'datasets@bl.uk',
+    groupEmail: null,
+    description: '',
+    region: 'EMEA',
+    country: 'GB',
+    logoUrl: null,
+    memberType: 'consortium',
+    organizationType: 'nationalInstitution',
+    focusArea: 'general',
+    nonProfitStatus: 'non-profit',
+    isActive: true,
+    hasPassword: true,
+    joined: '2010-02-05',
+    rorId: 'https://ror.org/05dhe8b71'
   },
 
   carl: {
@@ -28,7 +57,7 @@ FactoryGuy.define('provider', {
     name: 'Canadian Association of Research Libraries',
     displayName: 'Canadian Association of Research Libraries',
     symbol: 'CARL',
-    website: '',
+    website: null,
     systemEmail: 'portageservices@carl-abrc.ca',
     groupEmail: null,
     description: '',
@@ -42,6 +71,21 @@ FactoryGuy.define('provider', {
     isActive: true,
     hasPassword: true,
     joined: null,
-    rorId: 'https://ror.org/001tw8739'
+    rorId: 'https://ror.org/001tw8739',
+    technicalContact: FactoryGuy.belongsTo('contact'),
+    billingContact: FactoryGuy.belongsTo('contact'),
+    serviceContact: FactoryGuy.belongsTo('contact'),
+    secondaryTechnicalContact: FactoryGuy.belongsTo('contact'),
+    secondaryBillingContact: FactoryGuy.belongsTo('contact'),
+    secondaryServiceContact: FactoryGuy.belongsTo('contact')
+  }
+});
+
+FactoryGuy.define('contact', {
+  default: {
+    name: 'Patel, Mitesh',
+    givenName: 'Mitesh',
+    familyName: 'Patel',
+    email: 'patel@example.org'
   }
 });

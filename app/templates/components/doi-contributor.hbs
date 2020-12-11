@@ -9,12 +9,12 @@
     options=this.humanContributorTypes
     formLayout='vertical'
     selected=this.humanContributorType
-    destination=this.humanContributorType
-    disabled=this.disabled as |el|
+    destination=this.humanContributorType as |el|
   }}
     {{el.control
       onChange=(action 'selectContributorType')
       placeholder='Select Contributor Type'
+      disabled=this.disabled
     }}
   {{/form.element}}
 </div>
@@ -123,7 +123,10 @@
       data-test-name
     />
     <span class="input-group-btn">
-      <BsButton @outline={{true}} @onClick={{action 'deleteContributor' this.index}}>
+      <BsButton
+        @outline={{true}}
+        @onClick={{action 'deleteContributor' this.index}}
+      >
         <i class="fas fa-trash"></i>
       </BsButton>
     </span>

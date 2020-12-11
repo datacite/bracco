@@ -10,15 +10,11 @@ module('Integration | Component | doi-size', function (hooks) {
 
   test('it renders', async function (assert) {
     this.set('model', make('doi'));
-    await render(hbs`{{doi-size model=model fragment="5kb" index=0}}`);
-    // await pauseTest();
-
-    assert.dom(this.element).hasText('');
-  });
-
-  test('it renders size', async function (assert) {
-    this.set('model', make('doi'));
-    await render(hbs`{{doi-size model=model fragment="5kb" index=0}}`);
+    await render(hbs`
+      <BsForm @model={{model}} as |form|>
+        <DoiSize @model={{model}} @fragment="5kb" @form={{form}} @index={{0}}/>
+      </BsForm>
+    `);
 
     assert.dom('[data-test-size]').hasValue('5kb');
   });

@@ -7,7 +7,9 @@ module('Integration | Component | landing page', function (hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function (assert) {
-    await render(hbs`{{landing-page}}`);
+    await render(hbs`
+      <LandingPage />
+    `);
 
     assert.ok(
       /^DataCite Fabrica+/.test(find('*').textContent.trim()),

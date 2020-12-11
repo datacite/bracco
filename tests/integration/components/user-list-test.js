@@ -8,9 +8,7 @@ module('Integration | Component | user-list', function (hooks) {
 
   test('it renders', async function (assert) {
     await render(hbs`
-      <UserList>
-        template block text
-      </UserList>
+      <UserList />
     `);
 
     assert.dom(this.element).hasText('No users found.');

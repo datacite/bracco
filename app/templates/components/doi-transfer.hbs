@@ -1,20 +1,46 @@
 <div class="panel panel-transparent">
   <div class="panel-body">
     <div class="col-md-9 col-md-offset-3 form-help-header">
-      <h3 class="help-header">Transfer DOI</h3>
+      <h3 class="help-header">
+        Transfer DOI
+      </h3>
     </div>
-
-    <BsForm @formLayout="horizontal" @horizontalLabelGridClass="col-md-3" @model={{this.model}} @onSubmit={{action "submit" this.model}} as |form|>
-      <form.element @controlType="hidden" @property="doi" @required={{false}} />
-      <form.element @controlType="power-select" @property="repository" @label="Repository" @helpText="Transfer the DOI to this repository." @optionLabelPath="name" @options={{this.repositories}} @destination={{this.repository.id}} as |el|>
-        <el.control @onChange={{action "selectRepository"}} @search={{action "searchRepository"}} @searchField="name" @searchPlaceholder="Type to search..." as |item|>
+    <BsForm
+      @formLayout="horizontal"
+      @horizontalLabelGridClass="col-md-3"
+      @model={{this.model}}
+      @onSubmit={{action 'submit' this.model}} as |form|
+    >
+      <form.element @controlType="hidden" @property="doi" />
+      <form.element
+        @controlType="power-select"
+        @property="repository"
+        @label="Repository"
+        @helpText="Transfer the DOI to this repository."
+        @optionLabelPath="name"
+        @options={{this.repositories}}
+        @destination={{this.repository.id}} as |el|
+      >
+        <el.control
+          @onChange={{action 'selectRepository'}}
+          @search={{action 'searchRepository'}}
+          @searchField="name"
+          @searchPlaceholder="Type to search..." as |item|
+        >
           {{item.name}}
         </el.control>
       </form.element>
-
       <div class="col-md-9 col-md-offset-3">
-        <button type="submit" disabled={{this.isDisabled}} class="btn btn-sm btn-fill">Transfer DOI</button>
-        <button {{action "cancel" this.model}} class="btn btn-sm">Cancel</button>
+        <button
+          type="submit"
+          disabled={{this.isDisabled}}
+          class="btn btn-sm btn-fill"
+        >
+          Transfer DOI
+        </button>
+        <button class="btn btn-sm" {{action 'cancel' this.model}}>
+          Cancel
+        </button>
       </div>
     </BsForm>
   </div>

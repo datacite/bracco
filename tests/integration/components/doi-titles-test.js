@@ -16,7 +16,7 @@ module('Integration | Component | doi-titles', function (hooks) {
       </BsForm>
     `);
 
-    await click('#add-title');
+    await click('[data-test-add-title]');
     let titles = this.element.querySelectorAll('input.title-field');
 
     await fillIn(
@@ -36,7 +36,7 @@ module('Integration | Component | doi-titles', function (hooks) {
         <DoiTitles @model={{model}} @form={{form}} />
       </BsForm>
     `);
-    await click('#add-title');
+    await click('[data-test-add-title]');
     let titles = this.element.querySelectorAll('input.title-field');
 
     await fillIn(
@@ -63,7 +63,7 @@ module('Integration | Component | doi-titles', function (hooks) {
         <DoiTitles @model={{model}} @form={{form}} />
       </BsForm>
     `);
-    await click('#add-title');
+    await click('[data-test-add-title]');
     let titles = this.element.querySelector('input.title-field');
 
     assert.dom(titles).hasNoValue();

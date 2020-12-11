@@ -1,25 +1,66 @@
 <div class="form-group">
-  <label class="control-label col-md-3" data-test-subjects>Subjects</label>
+  <label class="control-label col-md-3" data-test-subjects>
+    Subjects
+  </label>
   <div class="col-md-9">
-    <div class="label-vertical">Subject, keyword, classification code, or key phrase describing the resource.</div>
+    <div class="label-vertical">
+      Subject, keyword, classification code, or key phrase describing the resource.
+    </div>
     {{#if this.showSubjects}}
       {{#each this.model.subjects as |subject index|}}
-        <DoiSubject @model={{this.model}} @fragment={{subject}} @form={{form}} @index={{index}} />
+        <DoiSubject
+          @model={{this.model}}
+          @fragment={{subject}}
+          @form={{form}}
+          @index={{index}}
+        />
       {{/each}}
-
       {{#if (lte this.model.subjects.length 6)}}
-        <BsButton @class="btn-sm" @id="add-subject" @outline={{true}} @onClick={{action "addSubject"}}><i class="fas fa-plus"></i> Add {{if (gt this.model.subjects.length 0) "another "}} subject</BsButton>
+        <BsButton
+          @class="btn-sm"
+          @outline={{true}}
+          @onClick={{action 'addSubject'}}
+          data-test-add-subject
+        >
+          <i class="fas fa-plus"></i>
+          Add
+          {{if (gt this.model.subjects.length 0) 'another '}}
+          subject
+        </BsButton>
       {{/if}}
-
       {{#if (gt this.model.subjects.length 0)}}
-        <BsButton @id="toggle-subjects" @class="btn-sm" @outline={{true}} @onClick={{action "toggleSubjects"}}><i class="fas fa-eye-slash"></i> Hide {{pluralize this.model.subjects.length 'subject'}}</BsButton>
+        <BsButton
+          @class="btn-sm"
+          @outline={{true}}
+          @onClick={{action 'toggleSubjects'}}
+          data-test-toggle-subjects
+        >
+          <i class="fas fa-eye-slash"></i>
+          Hide
+          {{pluralize this.model.subjects.length 'subject'}}
+        </BsButton>
       {{/if}}
+    {{else if (gt this.model.subjects.length 0)}}
+      <BsButton
+        @class="btn-sm"
+        @outline={{true}}
+        @onClick={{action 'toggleSubjects'}}
+        data-test-toggle-subjects
+      >
+        <i class="fas fa-eye"></i>
+        Show
+        {{pluralize this.model.subjects.length 'subject'}}
+      </BsButton>
     {{else}}
-      {{#if (gt this.model.subjects.length 0)}}
-        <BsButton @id="toggle-subjects" @class="btn-sm" @outline={{true}} @onClick={{action "toggleSubjects"}}><i class="fas fa-eye"></i> Show {{pluralize this.model.subjects.length 'subject'}}</BsButton>
-      {{else}}
-         <BsButton @class="btn-sm btn-warning" @id="add-subject" @outline={{true}} @onClick={{action "addSubject"}}><i class="fas fa-plus"></i> Add subject</BsButton>
-      {{/if}}
+      <BsButton
+        @class="btn-sm btn-warning"
+        @outline={{true}}
+        @onClick={{action 'addSubject'}}
+        data-test-add-subject
+      >
+        <i class="fas fa-plus"></i>
+        Add subject
+      </BsButton>
     {{/if}}
   </div>
 </div>

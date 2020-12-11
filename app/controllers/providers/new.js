@@ -184,8 +184,10 @@ export default Controller.extend({
     'model.billingInformation.{country,country.code}',
     function () {
       return (
-        this.model.billingInformation.country &&
-        w('US CA AU CN').includes(this.model.billingInformation.country.code)
+        this.model.get('billingInformation.country') &&
+        w('US CA AU CN').includes(
+          this.model.get('billingInformation.country.code')
+        )
       );
     }
   ),

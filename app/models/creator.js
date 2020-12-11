@@ -8,9 +8,6 @@ const Validations = buildValidations({
   name: [
     validator('presence', {
       presence: true
-      // disabled: computed('model.state', function() {
-      //   return this.model.state === 'draft';
-      // }),
     })
   ]
 });
