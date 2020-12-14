@@ -1,4 +1,3 @@
-import { htmlSafe } from '@ember/template';
 import Component from '@ember/component';
 import ENV from 'bracco/config/environment';
 
@@ -78,11 +77,11 @@ const data = {
   resources_links: [
     {
       name: 'Metadata schema',
-      url: 'https://schema.datacite.org'
+      url: 'https://schema.datacite.org/'
     },
     {
       name: 'Support',
-      url: 'https://support.datacite.org'
+      url: 'https://support.datacite.org/'
     },
     {
       name: 'Fee Model',
@@ -128,14 +127,5 @@ const data = {
 };
 
 export default Component.extend({
-  data,
-
-  didReceiveAttrs() {
-    this._super(...arguments);
-
-    if (this.default) {
-      this.set('type', null);
-      this.set('title', htmlSafe(ENV.SITE_TITLE));
-    }
-  }
+  data
 });

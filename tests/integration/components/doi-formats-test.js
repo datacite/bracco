@@ -19,26 +19,38 @@ module('Integration | Component | doi-formats', function (hooks) {
     await click('[data-test-toggle-formats]');
     let formats = this.element.querySelectorAll('input.format-field');
 
+    assert.equal(formats.length, 2);
     assert.dom(formats[0]).hasValue('tiff');
     assert.dom(formats[1]).hasValue('jpeg');
+    assert.dom('[data-test-toggle-formats]').hasText('Hide 2 formats');
+    assert.dom('[data-test-add-format]').hasText('Add another format');
   });
 
-  test('add multiple values', async function (assert) {
-    this.set('model', make('doi', { formats: ['tiff', 'jpeg'] }));
+  test('no formats', async function (assert) {
+    this.set('model', make('doi', { formats: null }));
     await render(hbs`
       <BsForm @model={{model}} as |form|>
         <DoiFormats @model={{model}} @form={{form}} />
       </BsForm>
     `);
 
-    await click('[data-test-toggle-formats]');
-    // await click('#add-format');
-    // await click('#add-format');
-    let formats = this.element.querySelectorAll('input.format-field');
-    await fillIn(formats[0], 'gif');
-    await fillIn(formats[1], 'png');
+    assert.dom('[data-test-toggle-formats]').doesNotExist();
+    assert.dom('[data-test-add-format]').hasText('Add format');
+  });
 
-    assert.dom(formats[0]).hasValue('gif');
-    assert.dom(formats[1]).hasValue('png');
+  test('add format', async function (assert) {
+    this.set('model', make('doi', { formats: [] }));
+    await render(hbs`
+      <BsForm @model={{model}} as |form|>
+        <DoiFormats @model={{model}} @form={{form}} />
+      </BsForm>
+    `);
+
+    await click('[data-test-add-format]');
+    await fillIn('input.format-field', 'gif');
+
+    assert.dom('input.format-field').hasValue('gif');
+    assert.dom('[data-test-toggle-formats]').hasText('Hide 1 format');
+    assert.dom('[data-test-add-format]').hasText('Add another format');
   });
 });

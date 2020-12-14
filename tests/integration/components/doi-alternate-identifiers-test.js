@@ -24,6 +24,21 @@ module('Integration | Component | doi alternate-identifiers', function (hooks) {
     assert.dom(alternateIdentifier[0]).hasValue('doi.org/10.223/34gfdkhjr');
   });
 
+  test('no alternateIdentifiers', async function (assert) {
+    this.set('model', make('doi', { alternateIdentifiers: null }));
+    await render(hbs`
+      <BsForm @model={{model}} as |form|>
+        <DoiAlternateIdentifiers @model={{model}} @form={{form}} />
+      </BsForm>
+    `);
+
+    assert
+      .dom(this.element)
+      .hasText(
+        'Alternate Identifiers An identifier or identifiers other than the primary Identifier applied to the resource being registered. Add alternate identifier'
+      );
+  });
+
   test('add multiple values', async function (assert) {
     this.set('model', make('doi'));
     await render(hbs`

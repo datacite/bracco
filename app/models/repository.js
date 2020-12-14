@@ -10,9 +10,7 @@ const Validations = buildValidations({
     validator('presence', true),
     validator('unique-repository-id', {
       presence: true,
-      disabled: not('model', function () {
-        return this.model.isNew;
-      })
+      disabled: not('model.isNew')
     }),
     validator('format', {
       regex: /^[A-Z]+\.[A-Z0-9]+(-[A-Z0-9]+)?$/,
@@ -27,45 +25,33 @@ const Validations = buildValidations({
   confirmSymbol: [
     validator('presence', {
       presence: true,
-      disabled: reads('model', function () {
-        return this.model.isNew;
-      })
+      disabled: not('model.isNew')
     }),
     validator('confirmation', {
       on: 'symbol',
       message: 'Repository ID does not match',
-      disabled: reads('model', function () {
-        return this.model.isNew;
-      })
+      disabled: not('model.isNew')
     })
   ],
   passwordInput: [
     validator('presence', {
       presence: true,
-      disabled: reads('model', function () {
-        return this.model.keepPassword;
-      })
+      disabled: reads('model.keepPassword')
     }),
     validator('length', {
       min: 8,
-      disabled: reads('model', function () {
-        return this.model.keepPassword;
-      })
+      disabled: reads('model.keepPassword')
     })
   ],
   confirmPasswordInput: [
     validator('presence', {
       presence: true,
-      disabled: reads('model', function () {
-        return this.model.keepPassword;
-      })
+      disabled: reads('model.keepPassword')
     }),
     validator('confirmation', {
       on: 'passwordInput',
       message: 'Password does not match',
-      disabled: reads('model', function () {
-        return this.model.keepPassword;
-      })
+      disabled: reads('model.keepPassword')
     })
   ],
   name: validator('presence', true),

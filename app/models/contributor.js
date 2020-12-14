@@ -37,7 +37,7 @@ export default MF.Fragment.extend(Validations, {
   affiliation: MF.fragmentArray('affiliation'),
 
   displayName: computed('name', 'givenName', 'familyName', function () {
-    return this.familyName
+    return this.givenName && this.familyName
       ? [this.givenName, this.familyName].join(' ')
       : this.name;
   }),
@@ -48,6 +48,7 @@ export default MF.Fragment.extend(Validations, {
         typeof id !== 'undefined' &&
         typeof id.nameIdentifier !== 'undefined'
       ) {
+        // ORCID ID could be expressed as ID or URL
         return id.nameIdentifier.substr(id.nameIdentifier.indexOf('0'));
       } else {
         return null;

@@ -29,7 +29,7 @@ module('Integration | Component | doi-titles', function (hooks) {
       .hasValue('Abhinandan: Crowds gather for Indian pilots release');
   });
 
-  test('add multiple titles', async function (assert) {
+  test('add title', async function (assert) {
     this.set('model', make('doi'));
     await render(hbs`
       <BsForm @model={{model}} as |form|>

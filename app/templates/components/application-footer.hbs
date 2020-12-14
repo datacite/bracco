@@ -1,37 +1,50 @@
-<footer class='row footer'>
+<footer class="row footer">
   <div class="container-fluid">
-    <div class='col-md-3 col-sm-4 footer-column'>
-      <h4>{{t "footer.about"}}</h4>
+    <div class="col-md-3 col-sm-4 footer-column" data-test-about-column>
+      <h4>
+        {{t 'footer.about'}}
+      </h4>
       <ListLinks @links={{this.data.about_links}} />
     </div>
-    <div class='col-md-3 col-sm-4 footer-column'>
-      <h4>Services</h4>
+    <div class="col-md-3 col-sm-4 footer-column" data-test-services-column>
+      <h4>
+        Services
+      </h4>
       <ListLinks @links={{this.data.services_links}} />
     </div>
-    <div class='col-md-3 col-sm-4 footer-column'>
-      <h4>Resources</h4>
+    <div class="col-md-3 col-sm-4 footer-column" data-test-resources-column>
+      <h4>
+        Resources
+      </h4>
       <ListLinks @links={{this.data.resources_links}} />
-      <h4>Community</h4>
+      <h4>
+        Community
+      </h4>
       <ListLinks @links={{this.data.community_links}} />
     </div>
-    <div class='col-md-3 footer-column'>
-      <h4 class="share">Contact us</h4>
-      <a href='mailto:support@datacite.org' class="share">
+    <div class="col-md-3 footer-column" data-test-contact-column>
+      <h4 class="share">
+        Contact us
+      </h4>
+      <a href="mailto:support@datacite.org" class="share">
         <i class="fas fa-envelope"></i>
       </a>
-      <a href='https://blog.datacite.org' class="share">
+      <a href="https://blog.datacite.org" class="share">
         <i class="fas fa-blog"></i>
       </a>
-      <a href='https://twitter.com/datacite' class="share">
+      <a href="https://twitter.com/datacite" class="share">
         <i class="fab fa-twitter"></i>
       </a>
-      <a href='https://github.com/datacite/datacite' class="share">
+      <a href="https://github.com/datacite/datacite" class="share">
         <i class="fab fa-github"></i>
       </a>
-      <a href='https://www.youtube.com/channel/UCVsSDZhIN_WbnD_v5o9eB_A' class="share">
+      <a
+        href="https://www.youtube.com/channel/UCVsSDZhIN_WbnD_v5o9eB_A"
+        class="share"
+      >
         <i class="fab fa-youtube"></i>
       </a>
-      <a href='https://www.linkedin.com/company/datacite' class="share">
+      <a href="https://www.linkedin.com/company/datacite" class="share">
         <i class="fab fa-linkedin"></i>
       </a>
       <ListLinks @links={{this.data.contact_links}} @class="share" />

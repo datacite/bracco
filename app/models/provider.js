@@ -1,6 +1,6 @@
 import Model, { belongsTo, hasMany, attr } from '@ember-data/model';
 import { computed } from '@ember/object';
-import { not, reads } from '@ember/object/computed';
+import { reads, not } from '@ember/object/computed';
 // import ENV from 'bracco/config/environment';
 import { validator, buildValidations } from 'ember-cp-validations';
 import { fragment } from 'ember-data-model-fragments/attributes';
@@ -11,9 +11,7 @@ const Validations = buildValidations({
     validator('presence', true),
     validator('unique-provider-id', {
       presence: true,
-      disabled: not('model', function () {
-        return this.model.isNew;
-      })
+      disabled: not('model.isNew')
     }),
     validator('format', {
       regex: /^[A-Z]+$/,
@@ -27,16 +25,12 @@ const Validations = buildValidations({
   confirmSymbol: [
     validator('presence', {
       presence: true,
-      disabled: reads('model', function () {
-        return this.model.isNew;
-      })
+      disabled: not('model.isNew')
     }),
     validator('confirmation', {
       on: 'symbol',
       message: 'Member ID does not match',
-      disabled: reads('model', function () {
-        return this.model.isNew;
-      })
+      disabled: not('model.isNew')
     })
   ],
   globusUuid: [
@@ -64,30 +58,22 @@ const Validations = buildValidations({
   passwordInput: [
     validator('presence', {
       presence: true,
-      disabled: reads('model', function () {
-        return this.model.keepPassword;
-      })
+      disabled: reads('model.keepPassword')
     }),
     validator('length', {
       min: 8,
-      disabled: reads('model', function () {
-        return this.model.keepPassword;
-      })
+      disabled: reads('model.keepPassword')
     })
   ],
   confirmPasswordInput: [
     validator('presence', {
       presence: true,
-      disabled: reads('model', function () {
-        return this.model.keepPassword;
-      })
+      disabled: reads('model.keepPassword')
     }),
     validator('confirmation', {
       on: 'passwordInput',
       message: 'Password does not match',
-      disabled: reads('model', function () {
-        return this.model.keepPassword;
-      })
+      disabled: reads('model.keepPassword')
     })
   ],
   website: [
@@ -169,9 +155,7 @@ export default Model.extend(Validations, {
           {
             road: this.billingInformation.address,
             city: this.billingInformation.city,
-            postcode: this.billingInformation.postCode
-              ? this.billingInformation.postCode
-              : null,
+            postcode: this.billingInformation.postCode,
             state: this.billingInformation.state
               ? this.billingInformation.state.name
               : null,

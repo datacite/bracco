@@ -42,4 +42,27 @@ module('Unit | Model | repository', function (hooks) {
 
     assert.equal(model.domainList, 'datacite.org,datacite.de,datacite.fr');
   });
+
+  test('should correctly compute badgeUrl', function (assert) {
+    let model = run(() =>
+      this.owner.lookup('service:store').createRecord('repository')
+    );
+
+    model.set('re3data', 'https://doi.org/10.17616/R3088K');
+    assert.equal(model.re3data, 'https://doi.org/10.17616/R3088K');
+    assert.equal(
+      model.badgeUrl,
+      'https://api.stage.datacite.org/re3data/10.17616/R3088K/badge'
+    );
+  });
+
+  test('no badgeUrl', function (assert) {
+    let model = run(() =>
+      this.owner.lookup('service:store').createRecord('repository')
+    );
+
+    model.set('re3data', null);
+    assert.equal(model.re3data, null);
+    assert.equal(model.badgeUrl, null);
+  });
 });

@@ -220,14 +220,6 @@ export default Model.extend(Validations, {
     }
   }),
   isDraft: computed.equal('state', 'draft'),
-  showCitation: computed('client', 'registered', 'repository.id', function () {
-    return (
-      this.registered ||
-      w(
-        'crossref.citations medra.citations kisti.citations jalc.citations op.citations'
-      ).includes(this.repository.get('id'))
-    );
-  }),
   schemaVersionString: computed('schemaVersion', function () {
     if (this.schemaVersion) {
       return A(this.schemaVersion.split('-')).lastObject;

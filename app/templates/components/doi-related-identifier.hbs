@@ -18,7 +18,7 @@
   </span>
 </div>
 <div
-  class="help-block help-block-fragment related-identifier-field no-error
+  class="help-block help-block-fragment no-error
     {{if (not this.fragment.relatedIdentifier) 'no-success'}}"
 >
   Must be a globally unique identifier. Visit our support website for
@@ -35,11 +35,7 @@
     Related Identifier Type
   </label>
 </div>
-<div
-  class="power-select-fragment"
-  disabled={{this.controlledIdentifierType}}
-  data-test-related-identifier-type
->
+<div class="power-select-fragment" disabled={{this.controlledIdentifierType}}>
   {{#form.element
     controlType='power-select'
     value=this.fragment.relatedIdentifierType
@@ -47,12 +43,13 @@
     options=this.relatedIdentifierTypeList
     destination=this.fragment.relatedIdentifierType as |el|
   }}
-    {{el.control
-      onChange=(action 'selectRelatedIdentifierType')
-      allowClear=true
-      placeholder='Select related Identifier Type'
-      disabled=this.controlledIdentifierType
-    }}
+    <el.control
+      @onChange={{action 'selectRelatedIdentifierType'}}
+      @allowClear={{true}}
+      @placeholder="Select related Identifier Type"
+      @disabled={{this.controlledIdentifierType}}
+      data-test-related-identifier-type
+    />
   {{/form.element}}
 </div>
 <div class="power-select-label">
@@ -60,7 +57,7 @@
     Relation Type
   </label>
 </div>
-<div class="power-select-fragment" data-test-related-relation-type>
+<div class="power-select-fragment">
   {{#form.element
     controlType='power-select'
     value=this.fragment.relationType
@@ -72,6 +69,7 @@
     <el.control
       @onChange={{action 'selectRelationType'}}
       @disabled="this.disabled"
+      data-test-relation-type
       @placeholder="Select Relation Type" as |item|
     >
       {{humanize (underscore item)}}
