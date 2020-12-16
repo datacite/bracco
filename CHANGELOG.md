@@ -219,7 +219,6 @@
 **Merged pull requests:**
 
 - Simplify search provider [\#416](https://github.com/datacite/bracco/pull/416) ([mfenner](https://github.com/mfenner))
-- Feature client transfer [\#411](https://github.com/datacite/bracco/pull/411) ([kjgarza](https://github.com/kjgarza))
 
 ## [3.8.1](https://github.com/datacite/bracco/tree/3.8.1) (2020-05-14)
 
@@ -363,6 +362,7 @@
 
 **Merged pull requests:**
 
+- Feature client transfer [\#411](https://github.com/datacite/bracco/pull/411) ([kjgarza](https://github.com/kjgarza))
 - Feature dates field [\#390](https://github.com/datacite/bracco/pull/390) ([kjgarza](https://github.com/kjgarza))
 - size, format and version fields in DOI form  [\#388](https://github.com/datacite/bracco/pull/388) ([kjgarza](https://github.com/kjgarza))
 - Feature funder ID  [\#383](https://github.com/datacite/bracco/pull/383) ([kjgarza](https://github.com/kjgarza))
@@ -1570,6 +1570,10 @@
 
 [Full Changelog](https://github.com/datacite/bracco/compare/v2.1.7...v2.1.8)
 
+**Merged pull requests:**
+
+- Form disable meta [\#133](https://github.com/datacite/bracco/pull/133) ([richardhallett](https://github.com/richardhallett))
+
 ## [v2.1.7](https://github.com/datacite/bracco/tree/v2.1.7) (2019-01-10)
 
 [Full Changelog](https://github.com/datacite/bracco/compare/v.2.1.6...v2.1.7)
@@ -2173,10 +2177,6 @@
 
 [Full Changelog](https://github.com/datacite/bracco/compare/v.0.9.70...v.0.9.71)
 
-**Fixed bugs:**
-
-- Validate required form fields [\#69](https://github.com/datacite/bracco/issues/69)
-
 ## [v.0.9.70](https://github.com/datacite/bracco/tree/v.0.9.70) (2018-05-07)
 
 [Full Changelog](https://github.com/datacite/bracco/compare/v.0.9.69...v.0.9.70)
@@ -2230,6 +2230,7 @@
 **Fixed bugs:**
 
 - ResourceTypeGeneral not saved properly [\#71](https://github.com/datacite/bracco/issues/71)
+- Validate required form fields [\#69](https://github.com/datacite/bracco/issues/69)
 
 **Closed issues:**
 
@@ -2365,7 +2366,6 @@
 
 **Merged pull requests:**
 
-- Form disable meta [\#133](https://github.com/datacite/bracco/pull/133) ([richardhallett](https://github.com/richardhallett))
 - Submission form [\#59](https://github.com/datacite/bracco/pull/59) ([mfenner](https://github.com/mfenner))
 
 ## [v.0.9.38](https://github.com/datacite/bracco/tree/v.0.9.38) (2018-03-03)
