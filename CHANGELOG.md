@@ -6,6 +6,7 @@
 
 **Fixed bugs:**
 
+- Submit password button does not react after resetting a password or receiving a password set email [\#489](https://github.com/datacite/bracco/issues/489)
 - Fix CORS in ROR API calls [\#485](https://github.com/datacite/bracco/issues/485)
 - Investigate why CDCC DOIs not indexed in Fabrica [\#484](https://github.com/datacite/bracco/issues/484)
 - New test DOIs do not resolve via test handle [\#482](https://github.com/datacite/bracco/issues/482)
@@ -219,6 +220,7 @@
 **Merged pull requests:**
 
 - Simplify search provider [\#416](https://github.com/datacite/bracco/pull/416) ([mfenner](https://github.com/mfenner))
+- Feature client transfer [\#411](https://github.com/datacite/bracco/pull/411) ([kjgarza](https://github.com/kjgarza))
 
 ## [3.8.1](https://github.com/datacite/bracco/tree/3.8.1) (2020-05-14)
 
@@ -362,7 +364,6 @@
 
 **Merged pull requests:**
 
-- Feature client transfer [\#411](https://github.com/datacite/bracco/pull/411) ([kjgarza](https://github.com/kjgarza))
 - Feature dates field [\#390](https://github.com/datacite/bracco/pull/390) ([kjgarza](https://github.com/kjgarza))
 - size, format and version fields in DOI form  [\#388](https://github.com/datacite/bracco/pull/388) ([kjgarza](https://github.com/kjgarza))
 - Feature funder ID  [\#383](https://github.com/datacite/bracco/pull/383) ([kjgarza](https://github.com/kjgarza))
@@ -443,7 +444,6 @@
 
 - Reorder tabs [\#363](https://github.com/datacite/bracco/pull/363) ([mfenner](https://github.com/mfenner))
 - allow free text languages to be rendered [\#360](https://github.com/datacite/bracco/pull/360) ([kjgarza](https://github.com/kjgarza))
-- Feature subject form [\#359](https://github.com/datacite/bracco/pull/359) ([kjgarza](https://github.com/kjgarza))
 
 ## [3.5.14](https://github.com/datacite/bracco/tree/3.5.14) (2020-03-03)
 
@@ -496,6 +496,7 @@
 
 **Merged pull requests:**
 
+- Feature subject form [\#359](https://github.com/datacite/bracco/pull/359) ([kjgarza](https://github.com/kjgarza))
 - show loading indicator [\#346](https://github.com/datacite/bracco/pull/346) ([mfenner](https://github.com/mfenner))
 
 ## [3.5.7](https://github.com/datacite/bracco/tree/3.5.7) (2020-02-29)
@@ -2177,6 +2178,10 @@
 
 [Full Changelog](https://github.com/datacite/bracco/compare/v.0.9.70...v.0.9.71)
 
+**Fixed bugs:**
+
+- Validate required form fields [\#69](https://github.com/datacite/bracco/issues/69)
+
 ## [v.0.9.70](https://github.com/datacite/bracco/tree/v.0.9.70) (2018-05-07)
 
 [Full Changelog](https://github.com/datacite/bracco/compare/v.0.9.69...v.0.9.70)
@@ -2230,7 +2235,6 @@
 **Fixed bugs:**
 
 - ResourceTypeGeneral not saved properly [\#71](https://github.com/datacite/bracco/issues/71)
-- Validate required form fields [\#69](https://github.com/datacite/bracco/issues/69)
 
 **Closed issues:**
 
