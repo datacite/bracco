@@ -1,18 +1,26 @@
 module.exports = {
   root: true,
+  parser: 'babel-eslint',
   parserOptions: {
     ecmaVersion: 2018,
-    sourceType: 'module',
+    sourceType: 'module'
   },
-  extends: [
-    'eslint:recommended',
-    '@thoughtbot/eslint-config',
-  ],
+  plugins: ['ember'],
+  extends: ['eslint:recommended', 'plugin:ember/recommended'],
   env: {
     browser: true,
+    node: true,
+    es6: true
   },
   rules: {
     'no-console': 'off',
+    'ember/no-classic-classes': 0,
+    'ember/no-classic-components': 0,
+    'ember/no-actions-hash': 0,
+    'ember/no-component-lifecycle-hooks': 0,
+    'ember/require-tagless-components': 0,
+    'ember/no-mixins': 0,
+    'ember/no-shadow-route-definition': 0
   },
   overrides: [
     // node files
@@ -25,23 +33,27 @@ module.exports = {
         'blueprints/*/index.js',
         'config/**/*.js',
         'lib/*/index.js',
-        'server/**/*.js',
+        'server/**/*.js'
       ],
       parserOptions: {
-        sourceType: 'script',
+        sourceType: 'script'
       },
       env: {
         browser: false,
-        node: true,
+        node: true
       },
-      plugins: [ 'node' ],
-      rules: Object.assign({}, require('eslint-plugin-node').configs.recommended.rules, {
-        // add your custom rules and overrides for node files here
+      plugins: ['node'],
+      rules: Object.assign(
+        {},
+        require('eslint-plugin-node').configs.recommended.rules,
+        {
+          // add your custom rules and overrides for node files here
 
-        // this can be removed once the following is fixed
-        // https://github.com/mysticatea/eslint-plugin-node/issues/77
-        'node/no-unpublished-require': 'off',
-      }),
-    },
-  ],
+          // this can be removed once the following is fixed
+          // https://github.com/mysticatea/eslint-plugin-node/issues/77
+          'node/no-unpublished-require': 'off'
+        }
+      )
+    }
+  ]
 };
