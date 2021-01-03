@@ -1,5 +1,3 @@
-
-
 import DS from 'ember-data';
 import MF from 'ember-data-model-fragments';
 import { validator, buildValidations } from 'ember-cp-validations';
@@ -10,23 +8,23 @@ const Validations = buildValidations({
     validator('presence', {
       presence: true,
       message: 'Date type must be included when adding a Date',
-      disabled: computed('model.date', function() {
-        this.model.get('date') == null;
-      }),
-    }),
+      disabled: computed('model.date', function () {
+        return this.model.get('date') == null;
+      })
+    })
   ],
   date: [
     validator('date-format', {
       allowBlank: true,
-      disabled: computed('model.state', function() {
+      disabled: computed('model.state', function () {
         return this.model.get('state') === 'draft';
-      }),
-    }),
-  ],
+      })
+    })
+  ]
 });
 
 export default MF.Fragment.extend(Validations, {
   date: DS.attr('string'),
   dateType: DS.attr('string'),
-  dateInformation: DS.attr('string'),
+  dateInformation: DS.attr('string')
 });

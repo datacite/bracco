@@ -1,6 +1,6 @@
 import Component from '@ember/component';
 
-export default class CreatorShowComponent extends Component {
+export default Component.extend({
   didReceiveAttrs() {
     this._super(...arguments);
 
@@ -9,4 +9,4 @@ export default class CreatorShowComponent extends Component {
       this.set('creators', creators);
     }
   }
-}
+});

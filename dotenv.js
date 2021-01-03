@@ -1,8 +1,7 @@
-/* global module */
-
-module.exports = function() {
+module.exports = function () {
   return {
-    clientAllowedKeys: [ 'SITE_TITLE',
+    clientAllowedKeys: [
+      'SITE_TITLE',
       'NAVMENU_TITLE',
       'SEARCH_URL',
       'ORCID_URL',
@@ -21,8 +20,10 @@ module.exports = function() {
       'STAFF_ADMIN_PASSWORD',
       'CONSORTIUM_ADMIN_PASSWORD',
       'ORGANIZATION_ADMIN_PASSWORD',
-      'CLIENT_ADMIN_PASSWORD' ],
-    fastbootAllowedKeys: [ 'SITE_TITLE',
+      'CLIENT_ADMIN_PASSWORD'
+    ],
+    fastbootAllowedKeys: [
+      'SITE_TITLE',
       'NAVMENU_TITLE',
       'SEARCH_URL',
       'ORCID_URL',
@@ -41,7 +42,8 @@ module.exports = function() {
       'STAFF_ADMIN_PASSWORD',
       'CONSORTIUM_ADMIN_PASSWORD',
       'ORGANIZATION_ADMIN_PASSWORD',
-      'CLIENT_ADMIN_PASSWORD' ],
-    failOnMissingKey: false,
+      'CLIENT_ADMIN_PASSWORD'
+    ],
+    failOnMissingKey: false
   };
 };

@@ -15,7 +15,10 @@
   },
   "scripts": {
     "build": "ember build",
+    "lint": "./node_modules/.bin/eslint . --ext .js",
     "lint:hbs": "ember-template-lint .",
+    "format:hbs": "prettier --config .prettierrc.json **/*.hbs --write",
+    "format": "prettier --config .prettierrc.json '**/*.js|ts' --write",
     "start": "ember server",
     "test": "ember test",
     "ci": "NODE_ENV=test ember serve & wait-on http://localhost:4200 && yarn cy:run --record --quiet",

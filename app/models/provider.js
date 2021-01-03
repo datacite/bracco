@@ -10,116 +10,115 @@ const Validations = buildValidations({
     validator('presence', true),
     validator('unique-provider-id', {
       presence: true,
-      disabled: computed('model', function() {
+      disabled: computed('model', function () {
         return !this.model.get('isNew');
-      }),
+      })
     }),
     validator('format', {
       regex: /^[A-Z]+$/,
-      message: 'The Member ID can contain only upper case letters',
+      message: 'The Member ID can contain only upper case letters'
     }),
     validator('length', {
       min: 2,
-      max: 8,
-    }),
+      max: 8
+    })
   ],
   confirmSymbol: [
     validator('presence', {
       presence: true,
-      disabled: computed('model', function() {
+      disabled: computed('model', function () {
         return this.model.get('isNew');
-      }),
+      })
     }),
     validator('confirmation', {
       on: 'symbol',
       message: 'Member ID does not match',
-      disabled: computed('model', function() {
+      disabled: computed('model', function () {
         return this.model.get('isNew');
-      }),
-    }),
+      })
+    })
   ],
   globusUuid: [
     validator('uuid-format', {
       version: 4,
       allowBlank: true,
-      message: 'Must be a valid UUID (version 4).',
-    }),
+      message: 'Must be a valid UUID (version 4).'
+    })
   ],
   twitterHandle: [
     validator('format', {
       regex: /^@[a-zA-Z0-9_]{0,15}$/,
       allowBlank: true,
-      message: 'Must start with @ followed by up to 15 alphanumeric characters.',
-    }),
+      message: 'Must start with @ followed by up to 15 alphanumeric characters.'
+    })
   ],
   name: validator('presence', true),
   displayName: validator('presence', true),
-  systemEmail: [
-    validator('presence', true),
-    validator('email-format', true),
-  ],
+  systemEmail: [validator('presence', true), validator('email-format', true)],
   groupEmail: [
     validator('email-format', {
-      allowBlank: true,
-    }),
+      allowBlank: true
+    })
   ],
   passwordInput: [
     validator('presence', {
       presence: true,
-      disabled: computed('model', function() {
+      disabled: computed('model', function () {
         return this.model.get('keepPassword');
-      }),
+      })
     }),
     validator('length', {
       min: 8,
-      disabled: computed('model', function() {
+      disabled: computed('model', function () {
         return this.model.get('keepPassword');
-      }),
-    }),
+      })
+    })
   ],
   confirmPasswordInput: [
     validator('presence', {
       presence: true,
-      disabled: computed('model', function() {
+      disabled: computed('model', function () {
         return this.model.get('keepPassword');
-      }),
+      })
     }),
     validator('confirmation', {
       on: 'passwordInput',
       message: 'Password does not match',
-      disabled: computed('model', function() {
+      disabled: computed('model', function () {
         return this.model.get('keepPassword');
-      }),
-    }),
+      })
+    })
   ],
   website: [
     validator('url-format', {
       allowBlank: true,
       require_tld: false,
-      message: 'Please enter a valid website URL.',
-    }),
+      message: 'Please enter a valid website URL.'
+    })
   ],
   rorId: [
     validator('url-format', {
       allowBlank: true,
-      message: 'Please enter a valid ROR ID expressed as URL.',
-    }),
+      message: 'Please enter a valid ROR ID expressed as URL.'
+    })
   ],
   salesforceId: [
     validator('format', {
       regex: /[a-zA-Z0-9]{18}/,
       allowBlank: true,
-      message: 'Please enter a valid 18 digit Salesforce ID.',
-    }),
-  ],
+      message: 'Please enter a valid 18 digit Salesforce ID.'
+    })
+  ]
 });
 
 export default DS.Model.extend(Validations, {
   consortium: DS.belongsTo('provider', {
-    inverse: 'consortiumOrganizations', async: true,
+    inverse: 'consortiumOrganizations',
+    async: true
   }),
   consortiumOrganizations: DS.hasMany('provider', {
-    inverse: 'consortium', async: true,
+    inverse: 'consortium',
+    async: true
   }),
   meta: DS.attr(),
 
@@ -158,23 +157,44 @@ export default DS.Model.extend(Validations, {
   created: DS.attr('date'),
   updated: DS.attr('date'),
 
-  uid: computed('id', function() {
+  uid: computed('id', function () {
     return this.id.toUpperCase();
   }),
-  formattedBillingInformation: computed('billingInformation', 'billingInformation', 'billingInformation', 'billingInformation', 'billingInformation', function() {
-    if (this.billingInformation) {
-      return addressFormatter.format({
-        'road': this.billingInformation.address,
-        'city': this.billingInformation.city,
-        'postcode': this.billingInformation.postCode ? this.billingInformation.postCode : null,
-        'state': this.billingInformation.state ? this.billingInformation.state.name : null,
-        'country': this.billingInformation.country ? this.billingInformation.country.name : null,
-        'countryCode': this.billingInformation.country ? this.billingInformation.country.code : null,
-      }, {
-        output: 'array',
-      });
-    } else {
-      return null;
+  formattedBillingInformation: computed(
+    'billingInformation',
+    'billingInformation.address',
+    'billingInformation.city',
+    'billingInformation.postCode',
+    'billingInformation.state.name',
+    'billingInformation.country',
+    'billingInformation.country.name',
+    'billingInformation.country.code',
+    function () {
+      if (this.billingInformation) {
+        return addressFormatter.format(
+          {
+            road: this.billingInformation.address,
+            city: this.billingInformation.city,
+            postcode: this.billingInformation.postCode
+              ? this.billingInformation.postCode
+              : null,
+            state: this.billingInformation.state
+              ? this.billingInformation.state.name
+              : null,
+            country: this.billingInformation.country
+              ? this.billingInformation.country.name
+              : null,
+            countryCode: this.billingInformation.country
+              ? this.billingInformation.country.code
+              : null
+          },
+          {
+            output: 'array'
+          }
+        );
+      } else {
+        return null;
+      }
     }
-  }),
+  )
 });
