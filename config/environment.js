@@ -1,7 +1,7 @@
 /* eslint-env node */
 'use strict';
 
-module.exports = function(environment) {
+module.exports = function (environment) {
   const pkg = require('../package.json');
   let deployTarget = process.env.DEPLOY_TARGET;
 
@@ -15,26 +15,33 @@ module.exports = function(environment) {
         // Here you can enable experimental features on an ember canary build
         // e.g. EMBER_NATIVE_DECORATOR_SUPPORT: true
       },
-      EXTEND_PROTOTYPES: false,
+      EXTEND_PROTOTYPES: false
     },
-    sentry: {
-      environment,
+    '@sentry/ember': {
+      sentry: {
+        dsn:
+          process.env.SENTRY_DSN ||
+          'https://63201db022924202b697e03bc5e0d0ba@o239790.ingest.sentry.io/1420435'
+
+        // Set tracesSampleRate to 1.0 to capture 100%
+        // of transactions for performance monitoring.
+        // We recommend adjusting this value in production,
+        disablePerformance: true
+      }
     },
     'ember-cli-string-helpers': {
-      only: [ 'humanize', 'html-safe', 'truncate', 'titleize' ],
+      only: ['humanize', 'html-safe', 'truncate', 'titleize']
     },
     'polyfill-io': {
-      features: [
-        'default-3.6',
-      ],
+      features: ['default-3.6']
     },
     'ember-loading': {
-      preDelay: 500,
+      preDelay: 500
     },
     emberTracker: {
       analyticsSettings: {
-        trackingId: process.env.TRACKING_ID || 'UA-22806196-13',
-      },
+        trackingId: process.env.TRACKING_ID || 'UA-22806196-13'
+      }
     },
     flashMessageDefaults: {
       timeout: 5000,
@@ -42,13 +49,19 @@ module.exports = function(environment) {
       priority: 200,
       sticky: true,
       showProgress: true,
-      preventDuplicates: true,
+      preventDuplicates: true
     },
     featureFlags: {
-      'show-researchers': false,
+      'show-researchers': false
     },
     fastboot: {
-      hostWhitelist: [ 'doi.datacite.org', 'doi.stage.datacite.org', 'doi.test.datacite.org', /^10\.0\.\d{1,3}\.\d{1,3}$/, /^localhost:\d+$/ ],
+      hostWhitelist: [
+        'doi.datacite.org',
+        'doi.stage.datacite.org',
+        'doi.test.datacite.org',
+        /^10\.0\.\d{1,3}\.\d{1,3}$/,
+        /^localhost:\d+$/
+      ]
     },
 
     SITE_TITLE: process.env.SITE_TITLE || 'DataCite Fabrica Stage',
@@ -58,12 +71,15 @@ module.exports = function(environment) {
     API_URL: process.env.API_URL || 'https://api.stage.datacite.org',
     FABRICA_URL: process.env.FABRICA_URL || 'https://doi.stage.datacite.org',
     ROR_API_URL: process.env.ROR_API_URL || 'https://api.ror.org',
-    CROSSREF_API_URL: process.env.CROSSREF_API_URL || 'https://api.crossref.org',
+    CROSSREF_API_URL:
+      process.env.CROSSREF_API_URL || 'https://api.crossref.org',
     ORCID_API_URL: process.env.ORCID_API_URL || 'https://pub.orcid.org',
-    EVENTDATA_URL: process.env.EVENTDATA_URL || 'https://api.stage.datacite.org',
+    EVENTDATA_URL:
+      process.env.EVENTDATA_URL || 'https://api.stage.datacite.org',
     CDN_URL: process.env.CDN_URL || 'https://www.stage.datacite.org',
-    JWT_PUBLIC_KEY: process.env.JWT_PUBLIC_KEY || '-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxWfFGoaO4d9s7OoW34UD\nbEbFdh1FrAXT5QmWVocZIP0Y+1KtNGNjpRpazlSWeSMFuswoDG/cKiJX3BQkP7fw\nbHCujQoNpQqznsI8rRJYZh/L+THxjY7OEoFg7QohqnEHRr9YW4wPzh+I0xj2puVr\ngyQzREYckeBUEJnS2uXdiZ32LzbiH4pE+wwZNVQv0BbadnTc2mJWMaEcUfuh0Qko\nxIVpPwTCzyD4kMriETe+/AOw/2DEwbNJakh8N2ySMhXbso/zHxStEw2YesJkNJWG\n+aG5ApSbwTba8DVHKvTgCsE1d+1tHFyeruTxPIfamwA/VkVBuUpYR7CmJaoNuk1e\nKwIDAQAB\n-----END PUBLIC KEY-----\n',
-    SENTRY_DSN: process.env.SENTRY_DSN || 'https://63201db022924202b697e03bc5e0d0ba@sentry.io/1420435',
+    JWT_PUBLIC_KEY:
+      process.env.JWT_PUBLIC_KEY ||
+      '-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA22lpr1ntJQYKa+aCRjre\nPKTze/00S0SCdsWKhvk3honfjdebuxc54YdvfqKQk/1jLOPJj++vqIGwytKRI9uC\n1BmMRLrOluACiOgTc5DpzMm68lZss5D5g7tzjxB7NlFiKiYav1BtVDfvVxwuNqkY\njyNupf1Gjqp2/8wbsZ6SGIkzgovgjcHI5S8HZ7DE7rcrStISNJqTvpuMUXp++eie\nPkTgcrdZScKjO6VYu9epuhoyD2mbZdjAUbxYyjQ3vgftseLo4hXFEXpfIQzwxOLS\njmg1S/qxOzZHOMrp31pS1ricMtd4frvXztHPfh5XuyiOEozR0An9OIIwzKQsn+0q\np5QKfN+lHJflYGZ1TD8QruinWf8a5uWYd3q9c1V8RYgwgmfoxgHX5TmMbcQsBTuB\nyIy3io3rBiRnJEAgSu4PxNuQqVqqsaJ4cCmQrATLViZmXhZcbHJyWl3GJnZMpv8P\nor6m239QGZdoy5ijoOdVLQowtnsr+SWWrcYKF4J66223xjGBse7o3Q+gJUkyQKtB\nLifDld9XMTpgvEsZtZKEQ9S5gAWkiAzcjSMV0J4XMOzvHAalyNTucLc6ljG8HnjO\n34SrkvkkTlUwNsJOygRNJQujfQaStvb3MTagSqPteGhy9qSitSJPrDmN/W79stIe\nSvqHoJznDJsFfKUcypEG4l0CAwEAAQ==\n-----END PUBLIC KEY-----\n',
     STAFF_ADMIN_TOKEN: process.env.STAFF_ADMIN_TOKEN,
     CONSORTIUM_ADMIN_TOKEN: process.env.CONSORTIUM_ADMIN_TOKEN,
     ORGANIZATION_ADMIN_TOKEN: process.env.ORGANIZATION_ADMIN_TOKEN,
@@ -76,7 +92,7 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
-    },
+    }
   };
 
   if (deployTarget === 'staging') {
@@ -104,7 +120,6 @@ module.exports = function(environment) {
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
 
     ENV.COOKIE_DOMAIN = 'localhost';
-    ENV.SENTRY_DSN = null;
   }
 
   if (environment === 'test') {
@@ -116,10 +131,10 @@ module.exports = function(environment) {
     ENV.APP.LOG_VIEW_LOOKUPS = false;
 
     ENV['simple-auth'] = {
-      store: 'simple-auth-session-store:ephemeral',
+      store: 'simple-auth-session-store:ephemeral'
     };
-    ENV.API_JWT = process.env.API_JWT || '',
-    ENV.APP.rootElement = '#ember-testing';
+    (ENV.API_JWT = process.env.API_JWT || ''),
+      (ENV.APP.rootElement = '#ember-testing');
 
     ENV.featureFlags['show-researchers'] = true;
 
@@ -128,7 +143,6 @@ module.exports = function(environment) {
     ENV.SITE_TITLE = 'DataCite Fabrica Stage';
     ENV.COOKIE_DOMAIN = 'localhost';
     ENV.API_URL = 'https://api.stage.datacite.org';
-    ENV.SENTRY_DSN = null;
   }
 
   return ENV;
