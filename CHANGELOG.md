@@ -1,8 +1,8 @@
 # Changelog
 
-## [Unreleased](https://github.com/datacite/bracco/tree/HEAD)
+## [3.9.13](https://github.com/datacite/bracco/tree/3.9.13) (2021-01-03)
 
-[Full Changelog](https://github.com/datacite/bracco/compare/3.9.12...HEAD)
+[Full Changelog](https://github.com/datacite/bracco/compare/3.9.12...3.9.13)
 
 **Fixed bugs:**
 
@@ -444,6 +444,7 @@
 
 - Reorder tabs [\#363](https://github.com/datacite/bracco/pull/363) ([mfenner](https://github.com/mfenner))
 - allow free text languages to be rendered [\#360](https://github.com/datacite/bracco/pull/360) ([kjgarza](https://github.com/kjgarza))
+- Feature subject form [\#359](https://github.com/datacite/bracco/pull/359) ([kjgarza](https://github.com/kjgarza))
 
 ## [3.5.14](https://github.com/datacite/bracco/tree/3.5.14) (2020-03-03)
 
@@ -496,7 +497,6 @@
 
 **Merged pull requests:**
 
-- Feature subject form [\#359](https://github.com/datacite/bracco/pull/359) ([kjgarza](https://github.com/kjgarza))
 - show loading indicator [\#346](https://github.com/datacite/bracco/pull/346) ([mfenner](https://github.com/mfenner))
 
 ## [3.5.7](https://github.com/datacite/bracco/tree/3.5.7) (2020-02-29)
