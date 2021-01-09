@@ -21,7 +21,7 @@ module.exports = function (environment) {
       sentry: {
         dsn:
           process.env.SENTRY_DSN ||
-          'https://63201db022924202b697e03bc5e0d0ba@o239790.ingest.sentry.io/1420435'
+          'https://63201db022924202b697e03bc5e0d0ba@o239790.ingest.sentry.io/1420435',
 
         // Set tracesSampleRate to 1.0 to capture 100%
         // of transactions for performance monitoring.
