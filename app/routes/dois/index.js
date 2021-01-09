@@ -9,17 +9,20 @@ export default Route.extend({
     params = assign(params, {
       page: {
         number: params.page,
-        size: params.size,
+        size: params.size
       },
-      include: 'client',
+      include: 'client'
     });
 
-    return this.store.query('doi', params).then(function(result) {
-      return result;
-    }).catch(function(reason) {
-      console.debug(reason);
-      return [];
-    });
+    return this.store
+      .query('doi', params)
+      .then(function (result) {
+        return result;
+      })
+      .catch(function (reason) {
+        console.debug(reason);
+        return null;
+      });
   },
 
   afterModel() {
@@ -30,40 +33,40 @@ export default Route.extend({
 
   queryParams: {
     page: {
-      refreshModel: true,
+      refreshModel: true
     },
     size: {
-      refreshModel: true,
+      refreshModel: true
     },
     state: {
-      refreshModel: true,
+      refreshModel: true
     },
     'resource-type-id': {
-      refreshModel: true,
+      refreshModel: true
     },
     year: {
-      refreshModel: true,
+      refreshModel: true
     },
     registered: {
-      refreshModel: true,
+      refreshModel: true
     },
     'client-id': {
-      refreshModel: true,
+      refreshModel: true
     },
     'affiliation-id': {
-      refreshModel: true,
+      refreshModel: true
     },
     prefix: {
-      refreshModel: true,
+      refreshModel: true
     },
     'schema-version': {
-      refreshModel: true,
+      refreshModel: true
     },
     source: {
-      refreshModel: true,
+      refreshModel: true
     },
     'link-check-status': {
-      refreshModel: true,
-    },
-  },
+      refreshModel: true
+    }
+  }
 });

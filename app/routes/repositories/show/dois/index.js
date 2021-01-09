@@ -10,34 +10,39 @@ export default Route.extend({
     params = assign(params, {
       page: {
         number: params.page,
-        size: params.size,
+        size: params.size
       },
-      'client-id': this.modelFor('repositories/show').get('id'),
+      'client-id': this.modelFor('repositories/show').get('id')
     });
 
     return hash({
       repository: this.modelFor('repositories/show'),
-      dois: this.store.query('doi', params).then(function(result) {
-        return result;
-      }).catch(function(reason) {
-        console.debug(reason);
-        return [];
-      }),
+      dois: this.store
+        .query('doi', params)
+        .then(function (result) {
+          return result;
+        })
+        .catch(function (reason) {
+          console.debug(reason);
+          return null;
+        })
     });
   },
 
   queryParams: {
     page: {
-      refreshModel: true,
+      refreshModel: true
     },
     size: {
-      refreshModel: true,
-    },
+      refreshModel: true
+    }
   },
 
   afterModel() {
-    if (this.can.cannot('read repository', this.modelFor('repositories/show'))) {
+    if (
+      this.can.cannot('read repository', this.modelFor('repositories/show'))
+    ) {
       this.transitionTo('index');
     }
-  },
+  }
 });

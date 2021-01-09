@@ -1,1 +1,14 @@
-<DoiList @model={{model.dois}} @repository={{model.repository}} @link="repositories.show.dois" @searchable={{true}} />
+{{#if model.dois}}
+  <DoiList
+    @model={{model.dois}}
+    @repository={{model.repository}}
+    @link="repositories.show.dois"
+    @searchable={{true}}
+  />
+{{else}}
+  <div class="col-md-9 col-md-offset-3">
+    <BsAlert @dismissible={{false}} @type="warning">
+      An error occured fetching DOIs. Please contact DataCite Support.
+    </BsAlert>
+  </div>
+{{/if}}

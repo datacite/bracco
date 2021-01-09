@@ -10,36 +10,39 @@ export default Route.extend({
     params = assign(params, {
       page: {
         number: params.page,
-        size: params.size,
-      },
+        size: params.size
+      }
     });
 
-    return this.store.query('user', params).then(function(result) {
-      return result;
-    }).catch(function(reason) {
-      console.debug(reason);
-      return [];
-    });
+    return this.store
+      .query('user', params)
+      .then(function (result) {
+        return result;
+      })
+      .catch(function (reason) {
+        console.debug(reason);
+        return null;
+      });
   },
 
   queryParams: {
     page: {
-      refreshModel: true,
+      refreshModel: true
     },
     size: {
-      refreshModel: true,
+      refreshModel: true
     },
     'provider-id': {
-      refreshModel: true,
+      refreshModel: true
     },
     'repository-id': {
-      refreshModel: true,
-    },
+      refreshModel: true
+    }
   },
 
   afterModel() {
     if (this.can.cannot('read index')) {
       this.transitionTo('index');
     }
-  },
+  }
 });
