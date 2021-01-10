@@ -1,6 +1,6 @@
 import DS from 'ember-data';
 import { union } from '@ember/object/computed';
-import { computed } from '@ember/object';
+import { reads } from '@ember/object/computed';
 import { validator, buildValidations } from 'ember-cp-validations';
 
 const Validations = buildValidations({
@@ -8,9 +8,9 @@ const Validations = buildValidations({
   repositoryUrl: [
     validator('url-format', {
       allowBlank: true,
-      require_tld: false,
-    }),
-  ],
+      require_tld: false
+    })
+  ]
 });
 
 export default DS.Model.extend(Validations, {
@@ -30,10 +30,8 @@ export default DS.Model.extend(Validations, {
   created: DS.attr('date'),
   updated: DS.attr('date'),
 
-  name: computed('repositoryName', function() {
-    return this.repositoryName;
-  }),
+  name: reads('repositoryName'),
 
   // combine subject areas and keywords
-  tags: union('subjects', 'keywords'),
+  tags: union('subjects', 'keywords')
 });
