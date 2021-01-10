@@ -2,7 +2,7 @@ import { computed } from '@ember/object';
 import { equal } from '@ember/object/computed';
 import { validator, buildValidations } from 'ember-cp-validations';
 import ENV from 'bracco/config/environment';
-import DS from 'ember-data';
+import Model, { attr, belongsTo } from '@ember-data/model';
 import { fragmentArray, array } from 'ember-data-model-fragments/attributes';
 import { w } from '@ember/string';
 import { A } from '@ember/array';
@@ -149,55 +149,55 @@ const Validations = buildValidations({
   ]
 });
 
-export default DS.Model.extend(Validations, {
-  repository: DS.belongsTo('repository', {
+export default Model.extend(Validations, {
+  repository: belongsTo('repository', {
     async: true
   }),
 
-  doi: DS.attr('string'),
-  confirmDoi: DS.attr('string', { defaultValue: null }),
-  prefix: DS.attr('string'),
-  suffix: DS.attr('string'),
-  url: DS.attr('string'),
-  contentUrl: DS.attr(),
+  doi: attr('string'),
+  confirmDoi: attr('string', { defaultValue: null }),
+  prefix: attr('string'),
+  suffix: attr('string'),
+  url: attr('string'),
+  contentUrl: attr(),
   creators: fragmentArray('creator', { defaultValue: [] }),
   titles: fragmentArray('title', { defaultValue: [] }),
-  publisher: DS.attr('string'),
-  bcontainer: DS.attr(),
-  publicationYear: DS.attr('number'),
+  publisher: attr('string'),
+  bcontainer: attr(),
+  publicationYear: attr('number'),
   subjects: fragmentArray('subject', { defaultValue: [] }),
   contributors: fragmentArray('contributor', { defaultValue: [] }),
   alternateIdentifiers: fragmentArray('alternateIdentifier', {
     defaultValue: []
   }),
   dates: fragmentArray('date', { defaultValue: [] }),
-  language: DS.attr('string'),
-  types: DS.attr(),
+  language: attr('string'),
+  types: attr(),
   relatedIdentifiers: fragmentArray('relatedIdentifier', { defaultValue: [] }),
   sizes: array(),
   formats: array(),
-  version: DS.attr('string'),
+  version: attr('string'),
   rightsList: fragmentArray('rights', { defaultValue: [] }),
   descriptions: fragmentArray('description', { defaultValue: [] }),
   geoLocations: fragmentArray('geoLocation', { defaultValue: [] }),
   fundingReferences: fragmentArray('fundingReference', { defaultValue: [] }),
-  landingPage: DS.attr(),
-  xml: DS.attr('xml'),
-  metadataVersion: DS.attr('string'),
-  schemaVersion: DS.attr('string'),
-  source: DS.attr('string', { defaultValue: 'fabrica' }),
-  state: DS.attr('string'),
-  breason: DS.attr('string', { defaultValue: null }),
-  isActive: DS.attr('boolean', { defaultValue: true }),
-  event: DS.attr('string'),
-  created: DS.attr('date'),
-  registered: DS.attr('date'),
-  updated: DS.attr('date'),
-  mode: DS.attr('string'),
-  meta: DS.attr(),
-  citationCount: DS.attr('number'),
-  viewCount: DS.attr('number'),
-  downloadCount: DS.attr('number'),
+  landingPage: attr(),
+  xml: attr('xml'),
+  metadataVersion: attr('string'),
+  schemaVersion: attr('string'),
+  source: attr('string', { defaultValue: 'fabrica' }),
+  state: attr('string'),
+  breason: attr('string', { defaultValue: null }),
+  isActive: attr('boolean', { defaultValue: true }),
+  event: attr('string'),
+  created: attr('date'),
+  registered: attr('date'),
+  updated: attr('date'),
+  mode: attr('string'),
+  meta: attr(),
+  citationCount: attr('number'),
+  viewCount: attr('number'),
+  downloadCount: attr('number'),
 
   identifier: computed('doi', 'repository', function () {
     if (

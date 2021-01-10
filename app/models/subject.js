@@ -1,5 +1,5 @@
-import DS from 'ember-data';
-import MF from 'ember-data-model-fragments';
+import { attr } from '@ember-data/model';
+import Fragment from 'ember-data-model-fragments/fragment';
 import { validator, buildValidations } from 'ember-cp-validations';
 import { computed } from '@ember/object';
 
@@ -8,20 +8,18 @@ const Validations = buildValidations({
     validator('url-format', {
       allowBlank: true,
       require_tld: false,
-      message: 'Please enter a valid URL.',
-    }),
-  ],
+      message: 'Please enter a valid URL.'
+    })
+  ]
 });
 
-export default MF.Fragment.extend(Validations, {
-  subject: DS.attr('string'),
-  subjectScheme: DS.attr('string', { defaultValue: null }),
-  schemeUri: DS.attr('string', { defaultValue: null }),
-  valueUri: DS.attr('string', { defaultValue: null }),
+export default Fragment.extend(Validations, {
+  subject: attr('string'),
+  subjectScheme: attr('string', { defaultValue: null }),
+  schemeUri: attr('string', { defaultValue: null }),
+  valueUri: attr('string', { defaultValue: null }),
 
-  subjectSchemeUri: computed('valueUri', function() {
-    return (this.valueUri || '');
-  }),
+  subjectSchemeUri: computed('valueUri', function () {
+    return this.valueUri || '';
+  })
 });
-
-

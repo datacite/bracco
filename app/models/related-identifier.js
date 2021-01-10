@@ -1,4 +1,4 @@
-import DS from 'ember-data';
+import { attr } from '@ember-data/model';
 import Fragment from 'ember-data-model-fragments/fragment';
 import { validator, buildValidations } from 'ember-cp-validations';
 import { computed } from '@ember/object';
@@ -9,10 +9,12 @@ const Validations = buildValidations({
     validator('url-format', {
       allowBlank: true,
       message: 'Related Identifier scheme URI has to be a valid URI',
-      disabled: computed('model.relatedIdentifierType', function() {
-        return [ 'HasMetadata', 'IsMetadataFor' ].includes(this.model.get('relatedIdentifierType'));
-      }),
-    }),
+      disabled: computed('model.relatedIdentifierType', function () {
+        return ['HasMetadata', 'IsMetadataFor'].includes(
+          this.model.get('relatedIdentifierType')
+        );
+      })
+    })
   ],
   relatedIdentifier: [
     // validator('url-format', {
@@ -24,47 +26,64 @@ const Validations = buildValidations({
     // }),
     validator('identifier-format', {
       allowBlank: true,
-      dependentKeys: [ 'model.relatedIdentifierType' ],
-      disabled: computed('model.relatedIdentifier', function() {
+      dependentKeys: ['model.relatedIdentifierType'],
+      disabled: computed('model.relatedIdentifier', function () {
         return isBlank(this.model.get('relatedIdentifier'));
-      }),
-    }),
+      })
+    })
   ],
   relatedIdentifierType: [
     validator('presence', {
       presence: true,
-      message: 'Please enter a Related Identifier Type for the Related Identifier.',
-      disabled: computed('model.relatedIdentifier', 'model.state', function() {
-        return this.model.get('state') === 'draft' || isBlank(this.model.get('relatedIdentifier'));
-      }),
-    }),
+      message:
+        'Please enter a Related Identifier Type for the Related Identifier.',
+      disabled: computed('model.relatedIdentifier', 'model.state', function () {
+        return (
+          this.model.get('state') === 'draft' ||
+          isBlank(this.model.get('relatedIdentifier'))
+        );
+      })
+    })
   ],
   relationType: [
     validator('presence', {
       presence: true,
       message: 'Please enter a Relation Type for the Related Identifier.',
-      disabled: computed('model.relatedIdentifier', 'model.state', function() {
-        return this.model.get('state') === 'draft' || isBlank(this.model.get('relatedIdentifier'));
-      }),
-    }),
+      disabled: computed('model.relatedIdentifier', 'model.state', function () {
+        return (
+          this.model.get('state') === 'draft' ||
+          isBlank(this.model.get('relatedIdentifier'))
+        );
+      })
+    })
   ],
   resourceTypeGeneral: [
     validator('presence', {
       presence: true,
-      message: 'Please enter a Resource Type for the Related Identifier Metadata.',
-      disabled: computed('model.relatedIdentifierType', 'model.state', function() {
-        return this.model.get('state') === 'draft' || ![ 'HasMetadata', 'IsMetadataFor' ].includes(this.model.get('relatedIdentifierType'));
-      }),
-    }),
-  ],
+      message:
+        'Please enter a Resource Type for the Related Identifier Metadata.',
+      disabled: computed(
+        'model.relatedIdentifierType',
+        'model.state',
+        function () {
+          return (
+            this.model.get('state') === 'draft' ||
+            !['HasMetadata', 'IsMetadataFor'].includes(
+              this.model.get('relatedIdentifierType')
+            )
+          );
+        }
+      )
+    })
+  ]
 });
 
 export default Fragment.extend(Validations, {
-  relatedIdentifier: DS.attr('string', { defaultValue: null }),
-  relatedIdentifierType: DS.attr('string', { defaultValue: null }),
-  relationType: DS.attr('string', { defaultValue: null }),
-  relatedMetadataScheme: DS.attr('string', { defaultValue: null }),
-  schemeUri: DS.attr('string', { defaultValue: null }),
-  schemeType: DS.attr('string', { defaultValue: null }),
-  resourceTypeGeneral: DS.attr('string', { defaultValue: null }),
+  relatedIdentifier: attr('string', { defaultValue: null }),
+  relatedIdentifierType: attr('string', { defaultValue: null }),
+  relationType: attr('string', { defaultValue: null }),
+  relatedMetadataScheme: attr('string', { defaultValue: null }),
+  schemeUri: attr('string', { defaultValue: null }),
+  schemeType: attr('string', { defaultValue: null }),
+  resourceTypeGeneral: attr('string', { defaultValue: null })
 });

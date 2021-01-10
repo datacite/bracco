@@ -1,5 +1,5 @@
-import DS from 'ember-data';
-import MF from 'ember-data-model-fragments';
+import { attr } from '@ember-data/model';
+import Fragment from 'ember-data-model-fragments/fragment';
 import { validator, buildValidations } from 'ember-cp-validations';
 import { computed } from '@ember/object';
 
@@ -23,8 +23,8 @@ const Validations = buildValidations({
   ]
 });
 
-export default MF.Fragment.extend(Validations, {
-  date: DS.attr('string'),
-  dateType: DS.attr('string'),
-  dateInformation: DS.attr('string')
+export default Fragment.extend(Validations, {
+  date: attr('string'),
+  dateType: attr('string'),
+  dateInformation: attr('string')
 });
