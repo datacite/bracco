@@ -21,17 +21,8 @@ module.exports = {
     'ember/require-tagless-components': 0,
     'ember/no-mixins': 0,
     'ember/no-shadow-route-definition': 0,
-    // TODO
-    'ember/no-get': 0,
-    'ember/avoid-leaking-state-in-ember-objects': 0,
-    'ember/use-ember-data-rfc-395-imports': 0,
-    'ember/no-controller-access-in-routes': 0,
-    'ember/require-computed-macros': 0,
-    'ember/use-brace-expansion': 0,
-    'ember/require-computed-property-dependencies': 0,
-    'ember/no-attrs-in-components': 0,
-    'ember/no-observers': 0,
-    'ember/classic-decorator-no-classic-methods': 0
+    'ember/classic-decorator-no-classic-methods': 0,
+    'ember/no-get': 0
   },
   overrides: [
     // node files
