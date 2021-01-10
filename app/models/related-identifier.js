@@ -37,7 +37,7 @@ const Validations = buildValidations({
       presence: true,
       message:
         'Please enter a Related Identifier Type for the Related Identifier.',
-      disabled: computed('model.relatedIdentifier', 'model.state', function () {
+      disabled: computed('model.{relatedIdentifier,state}', function () {
         return (
           this.model.get('state') === 'draft' ||
           isBlank(this.model.get('relatedIdentifier'))
@@ -49,7 +49,7 @@ const Validations = buildValidations({
     validator('presence', {
       presence: true,
       message: 'Please enter a Relation Type for the Related Identifier.',
-      disabled: computed('model.relatedIdentifier', 'model.state', function () {
+      disabled: computed('model.{relatedIdentifier,state}', function () {
         return (
           this.model.get('state') === 'draft' ||
           isBlank(this.model.get('relatedIdentifier'))
@@ -62,18 +62,14 @@ const Validations = buildValidations({
       presence: true,
       message:
         'Please enter a Resource Type for the Related Identifier Metadata.',
-      disabled: computed(
-        'model.relatedIdentifierType',
-        'model.state',
-        function () {
-          return (
-            this.model.get('state') === 'draft' ||
-            !['HasMetadata', 'IsMetadataFor'].includes(
-              this.model.get('relatedIdentifierType')
-            )
-          );
-        }
-      )
+      disabled: computed('model.{relatedIdentifierType,state}', function () {
+        return (
+          this.model.get('state') === 'draft' ||
+          !['HasMetadata', 'IsMetadataFor'].includes(
+            this.model.get('relatedIdentifierType')
+          )
+        );
+      })
     })
   ]
 });

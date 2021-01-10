@@ -19,16 +19,15 @@ const categoryList = [
   'other1',
   'other2',
   'other3',
-  'other4',
+  'other4'
 ];
 
 export default Component.extend({
   tagName: 'div',
-  classNames: [ 'col-lg-3', 'col-md-4' ],
-  data: [],
-  count: computed('data', function() {
+  classNames: ['col-lg-3', 'col-md-4'],
+  count: computed('data', function () {
     if (this.data) {
-      return this.data.reduce(function(a, b) {
+      return this.data.reduce(function (a, b) {
         return a + b.count;
       }, 0);
     } else {
@@ -36,10 +35,10 @@ export default Component.extend({
     }
   }),
   label: 'Chart',
-  chartId: computed('label', function() {
+  chartId: computed('label', function () {
     return 'chart-donut-' + this.label.toLowerCase();
   }),
-  doiLink: computed('link','model.id', function() {
+  doiLink: computed('link', 'model.id', function () {
     if (this.link === 'users.show.dois') {
       return '/users/' + this.model.get('id') + '/dois';
     } else {
@@ -48,10 +47,11 @@ export default Component.extend({
   }),
   categories: categoryList,
 
-  init() {
-    this._super();
+  init(...args) {
+    this._super(...args);
 
-    schedule('afterRender', this, function() {
+    this.set(this, this.data, []);
+    schedule('afterRender', this, function () {
       this.send('donutChart');
     });
   },
@@ -66,7 +66,7 @@ export default Component.extend({
     let formatFixed = format(',.0f');
 
     let chartId = this.chartId;
-    let data = (this.data) ? this.data : [];
+    let data = this.data ? this.data : [];
     let radius = 80;
 
     let title = this.count;
@@ -74,9 +74,7 @@ export default Component.extend({
     let categories = this.categories;
 
     // use colors from colorbrewer
-    let color = scaleOrdinal()
-      .domain(categories)
-      .range(schemeSet3);
+    let color = scaleOrdinal().domain(categories).range(schemeSet3);
 
     // var tip = d3Tip()
     //   .attr('class', 'tooltip')
@@ -85,15 +83,21 @@ export default Component.extend({
     // remove chart before building new one
     // wrap in try/catch block to handle fastboot
     try {
-      select('#' + chartId).selectAll('*').remove();
+      select('#' + chartId)
+        .selectAll('*')
+        .remove();
 
-      let chart = select('#' + chartId).append('svg')
-        .data([ data ])
+      let chart = select('#' + chartId)
+        .append('svg')
+        .data([data])
         .attr('width', radius * 2 + 50)
         .attr('height', radius * 2 + 10)
         .attr('class', 'chart donut')
         .append('svg:g')
-        .attr('transform', 'translate(' + (radius + 20) + ',' + (radius + 10) + ')');
+        .attr(
+          'transform',
+          'translate(' + (radius + 20) + ',' + (radius + 10) + ')'
+        );
 
       let myArc = arc()
         .outerRadius(radius - 5)
@@ -101,9 +105,12 @@ export default Component.extend({
 
       let myPie = pie()
         .sort(null)
-        .value(function(d) { return d.count; });
+        .value(function (d) {
+          return d.count;
+        });
 
-      let arcs = chart.selectAll('g.slice')
+      let arcs = chart
+        .selectAll('g.slice')
         .data(myPie)
         .enter()
         .append('svg:g')
@@ -111,9 +118,10 @@ export default Component.extend({
 
       // arcs.call(tip)
 
-      arcs.append('svg:path')
-        .attr('fill', function(d) {
-          if (!(categories.includes(d.data.id))) {
+      arcs
+        .append('svg:path')
+        .attr('fill', function (d) {
+          if (!categories.includes(d.data.id)) {
             d.data.id = 'other';
           }
           return color(d.data.id);
@@ -127,19 +135,22 @@ export default Component.extend({
       //  })
 
       if (subtitle !== null) {
-        chart.append('text')
+        chart
+          .append('text')
           .attr('dy', 0)
           .attr('text-anchor', 'middle')
           .attr('class', 'title')
           .text(formatFixed(title));
 
-        chart.append('text')
+        chart
+          .append('text')
           .attr('dy', 21)
           .attr('text-anchor', 'middle')
           .attr('class', 'subtitle')
           .text(subtitle);
       } else {
-        chart.append('text')
+        chart
+          .append('text')
           .attr('dy', 8)
           .attr('text-anchor', 'middle')
           .attr('class', 'title-only')
@@ -156,6 +167,6 @@ export default Component.extend({
   actions: {
     donutChart() {
       this.donutChart();
-    },
-  },
+    }
+  }
 });

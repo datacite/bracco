@@ -3,17 +3,30 @@ import { inject as service } from '@ember/service';
 
 export default Controller.extend({
   store: service(),
-  prefixes: [],
   disabled: true,
+
+  init(...args) {
+    this._super(...args);
+
+    this.prefixes = this.prefixes || [];
+  },
 
   searchPrefix(query) {
     let self = this;
-    this.store.query('prefix', { query, state: 'unassigned', sort: 'name', 'page[size]': 10 }).then(function(prefixes) {
-      self.set('prefixes', prefixes);
-    }).catch(function(reason) {
-      console.debug(reason);
-      self.set('prefixes', []);
-    });
+    this.store
+      .query('prefix', {
+        query,
+        state: 'unassigned',
+        sort: 'name',
+        'page[size]': 10
+      })
+      .then(function (prefixes) {
+        self.set('prefixes', prefixes);
+      })
+      .catch(function (reason) {
+        console.debug(reason);
+        self.set('prefixes', []);
+      });
   },
 
   actions: {
@@ -27,20 +40,29 @@ export default Controller.extend({
     },
     submit() {
       let self = this;
-      this.model['provider-prefix'].save().then(function(providerPrefix) {
-        self.set('disabled', true);
-        // We need a timeout because ElasticSearch indexing is very slow for this transition to work properly
-        setTimeout(() => {
-          self.transitionToRoute('providers.show.prefixes', providerPrefix.get('provider.id'));
-        }, 1200);
-      }).catch(function(reason) {
-        console.debug(reason);
-      });
+      this.model['provider-prefix']
+        .save()
+        .then(function (providerPrefix) {
+          self.set('disabled', true);
+          // We need a timeout because ElasticSearch indexing is very slow for this transition to work properly
+          setTimeout(() => {
+            self.transitionToRoute(
+              'providers.show.prefixes',
+              providerPrefix.get('provider.id')
+            );
+          }, 1200);
+        })
+        .catch(function (reason) {
+          console.debug(reason);
+        });
     },
     cancel() {
       this.model['provider-prefix'].set('prefix', null);
       this.set('disabled', true);
-      this.transitionToRoute('providers.show.prefixes', this.get('model.provider'));
-    },
-  },
+      this.transitionToRoute(
+        'providers.show.prefixes',
+        this.get('model.provider')
+      );
+    }
+  }
 });

@@ -22,7 +22,8 @@ module.exports = {
     'ember/no-mixins': 0,
     'ember/no-shadow-route-definition': 0,
     'ember/classic-decorator-no-classic-methods': 0,
-    'ember/no-get': 0
+    'ember/no-get': 0,
+    'ember/no-controller-access-in-routes': 0
   },
   overrides: [
     // node files

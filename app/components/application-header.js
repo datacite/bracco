@@ -13,7 +13,12 @@ export default Component.extend({
   title: null,
   home: '/',
   user: true,
-  data: {},
+
+  init(...args) {
+    this._super(...args);
+
+    this.data = this.data || {};
+  },
 
   didReceiveAttrs() {
     this._super(...arguments);
@@ -55,6 +60,6 @@ export default Component.extend({
     },
     invalidateSession() {
       this.session.invalidate();
-    },
-  },
+    }
+  }
 });

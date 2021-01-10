@@ -19,10 +19,7 @@ const Validations = buildValidations({
       message:
         'westBoundLongitude must be included if you input a GeoLocation Box.',
       disabled: computed(
-        'model.eastBoundLongitude',
-        'model.southBoundLatitude',
-        'model.northBoundLatitude',
-        'model.state',
+        'model.{eastBoundLongitude,southBoundLatitude,northBoundLatitude,state}',
         function () {
           return (
             this.model.get('state') === 'draft' ||
@@ -48,10 +45,7 @@ const Validations = buildValidations({
       message:
         'eastBoundLongitude must be included if you input a GeoLocation Box.',
       disabled: computed(
-        'model.westBoundLongitude',
-        'model.southBoundLatitude',
-        'model.northBoundLatitude',
-        'model.state',
+        'model.{eastBoundLongitude,southBoundLatitude,northBoundLatitude,state}',
         function () {
           return (
             this.model.get('state') === 'draft' ||
@@ -77,10 +71,7 @@ const Validations = buildValidations({
       message:
         'southBoundLatitude must be included if you input a GeoLocation Box.',
       disabled: computed(
-        'model.westBoundLongitude',
-        'model.eastBoundLongitude',
-        'model.northBoundLatitude',
-        'model.state',
+        'model.{eastBoundLongitude,southBoundLatitude,northBoundLatitude,state}',
         function () {
           return (
             this.model.get('state') === 'draft' ||
@@ -106,9 +97,7 @@ const Validations = buildValidations({
       message:
         'northBoundLatitude must be included if you input a GeoLocation Box.',
       disabled: computed(
-        'model.eastBoundLongitude',
-        'model.southBoundLatitude',
-        'model.westBoundLongitude',
+        'model.{eastBoundLongitude,southBoundLatitude,northBoundLatitude}',
         function () {
           return (
             isBlank(this.model.get('eastBoundLongitude')) &&

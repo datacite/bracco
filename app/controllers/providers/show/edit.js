@@ -63,7 +63,7 @@ const stateList = [
   { code: 'US-MP', name: 'Northern Mariana Islands' },
   { code: 'US-PR', name: 'Puerto Rico' },
   { code: 'US-UM', name: 'United States Minor Outlying Islands' },
-  { code: 'US-VI', name: 'Virgin Islands, U.S.' },
+  { code: 'US-VI', name: 'Virgin Islands, U.S.' }
 ];
 
 const provinceListCanada = [
@@ -79,7 +79,7 @@ const provinceListCanada = [
   { code: 'CA-SK', name: 'Saskatchewan' },
   { code: 'CA-NT', name: 'Northwest Territories (Territoires du Nord-Ouest)' },
   { code: 'CA-NU', name: 'Nunavut' },
-  { code: 'CA-YT', name: 'Yukon Territory (Teritoire du Yukon)' },
+  { code: 'CA-YT', name: 'Yukon Territory (Teritoire du Yukon)' }
 ];
 
 const provinceListChina = [
@@ -115,7 +115,7 @@ const provinceListChina = [
   { code: 'CN-65', name: 'Xinjiang' },
   { code: 'CN-54', name: 'Xizang' },
   { code: 'CN-53', name: 'Yunnan' },
-  { code: 'CN-33', name: 'Zhejiang' },
+  { code: 'CN-33', name: 'Zhejiang' }
 ];
 
 const stateListAustralia = [
@@ -126,7 +126,7 @@ const stateListAustralia = [
   { code: 'AU-VIC', name: 'Victoria' },
   { code: 'AU-WA', name: 'Western Australia' },
   { code: 'AU-ACT', name: 'Australian Capital Territory' },
-  { code: 'AU-NT', name: 'Northern Territory' },
+  { code: 'AU-NT', name: 'Northern Territory' }
 ];
 
 const organizationTypeList = [
@@ -137,7 +137,7 @@ const organizationTypeList = [
   'professionalSociety',
   'publisher',
   'serviceProvider',
-  'other',
+  'other'
 ];
 const memberTypeList = [
   'consortium',
@@ -145,7 +145,7 @@ const memberTypeList = [
   'contractual_member',
   'direct_member',
   'member_only',
-  'registration_agency',
+  'registration_agency'
 ];
 const focusAreaList = [
   'naturalSciences',
@@ -154,13 +154,10 @@ const focusAreaList = [
   'agriculturalSciences',
   'socialSciences',
   'humanities',
-  'general',
+  'general'
 ];
 
-const nonProfitStatusList = [
-  'non-profit',
-  'for-profit',
-];
+const nonProfitStatusList = ['non-profit', 'for-profit'];
 
 export default Controller.extend({
   store: service(),
@@ -181,46 +178,61 @@ export default Controller.extend({
   focusAreas: focusAreaList,
   nonProfitStatusList,
   nonProfitStatuses: nonProfitStatusList,
-  organizations: [],
   // we are storing state/province information for US, CA, AU and CN
-  showStateSearch: computed('model.billingInformation.country', function() {
-    return this.model.get('billingInformation.country') && w('US CA AU CN').includes(this.model.get('billingInformation.country.code'));
+  showStateSearch: computed('model.billingInformation.country', function () {
+    return (
+      this.model.get('billingInformation.country') &&
+      w('US CA AU CN').includes(
+        this.model.get('billingInformation.country.code')
+      )
+    );
   }),
+
+  init(...args) {
+    this._super(...args);
+
+    this.organizations = this.organizations || [];
+  },
 
   actions: {
     searchCountry(query) {
-      let countries = countryList.filter(function(country) {
+      let countries = countryList.filter(function (country) {
         return country.name.toLowerCase().startsWith(query.toLowerCase());
       });
       this.set('countries', countries);
     },
     selectCountry(country) {
-      this.model.set('country', { code: country.code, name: countryList.name(country.code) });
+      this.model.set('country', {
+        code: country.code,
+        name: countryList.name(country.code)
+      });
       this.set('countries', countryList);
     },
     searchState(query) {
       let states = null;
       if (this.model.get('billingInformation.country.code') === 'US') {
-        states = stateList.filter(function(state) {
+        states = stateList.filter(function (state) {
           return state.name.toLowerCase().startsWith(query.toLowerCase());
         });
       } else if (this.model.get('billingInformation.country.code') === 'CA') {
-        states = provinceListCanada.filter(function(state) {
+        states = provinceListCanada.filter(function (state) {
           return state.name.toLowerCase().startsWith(query.toLowerCase());
         });
       } else if (this.model.get('billingInformation.country.code') === 'CN') {
-        states = provinceListChina.filter(function(state) {
+        states = provinceListChina.filter(function (state) {
           return state.name.toLowerCase().startsWith(query.toLowerCase());
         });
       } else if (this.model.get('billingInformation.country.code') === 'AU') {
-        states = stateListAustralia.filter(function(state) {
+        states = stateListAustralia.filter(function (state) {
           return state.name.toLowerCase().startsWith(query.toLowerCase());
         });
       }
       this.set('states', states);
     },
     searchOrganizationType(query) {
-      let organizationTypes = organizationTypeList.filter(function(organizationType) {
+      let organizationTypes = organizationTypeList.filter(function (
+        organizationType
+      ) {
         return organizationType.startsWith(query.toLowerCase());
       });
       this.set('organizationTypes', organizationTypes);
@@ -230,7 +242,7 @@ export default Controller.extend({
       this.set('organizationTypes', organizationTypeList);
     },
     searchMemberType(query) {
-      let memberTypes = memberTypeList.filter(function(memberType) {
+      let memberTypes = memberTypeList.filter(function (memberType) {
         return memberType.startsWith(query.toLowerCase());
       });
       this.set('memberTypes', memberTypes);
@@ -240,7 +252,7 @@ export default Controller.extend({
       this.set('memberTypes', memberTypeList);
     },
     searchFocusArea(query) {
-      let focusAreas = focusAreaList.filter(function(focusArea) {
+      let focusAreas = focusAreaList.filter(function (focusArea) {
         return focusArea.startsWith(query.toLowerCase());
       });
       this.set('focusAreas', focusAreas);
@@ -250,7 +262,9 @@ export default Controller.extend({
       this.set('focusAreas', focusAreaList);
     },
     searchNonProfitStatus(query) {
-      let nonProfitStatuses = nonProfitStatusList.filter(function(nonProfitStatus) {
+      let nonProfitStatuses = nonProfitStatusList.filter(function (
+        nonProfitStatus
+      ) {
         return nonProfitStatus.startsWith(query.toLowerCase());
       });
       this.set('nonProfitStatuses', nonProfitStatuses);
@@ -261,19 +275,30 @@ export default Controller.extend({
     },
     searchConsortium(query) {
       let self = this;
-      this.store.query('provider', { query, 'member-type': 'consortium', sort: 'name', 'page[size]': 100 }).then(function(consortia) {
-        self.set('consortia', consortia);
-      }).catch(function(reason) {
-        console.debug(reason);
-        self.set('consortia', []);
-      });
+      this.store
+        .query('provider', {
+          query,
+          'member-type': 'consortium',
+          sort: 'name',
+          'page[size]': 100
+        })
+        .then(function (consortia) {
+          self.set('consortia', consortia);
+        })
+        .catch(function (reason) {
+          console.debug(reason);
+          self.set('consortia', []);
+        });
     },
     selectConsortium(consortium) {
       this.model.set('consortium', consortium);
     },
     selectBillingCountry(billingCountry) {
       if (billingCountry) {
-        this.model.set('billingInformation.country', { code: billingCountry.code, name: countryList.name(billingCountry.code) });
+        this.model.set('billingInformation.country', {
+          code: billingCountry.code,
+          name: countryList.name(billingCountry.code)
+        });
         this.model.set('billingInformation.state', null);
         this.set('countries', countryList);
       }
@@ -283,12 +308,15 @@ export default Controller.extend({
     },
     searchRor(query) {
       let self = this;
-      this.store.query('ror', { query }).then(function(organizations) {
-        self.set('organizations', organizations);
-      }).catch(function(reason) {
-        console.debug(reason);
-        self.set('organizations', []);
-      });
+      this.store
+        .query('ror', { query })
+        .then(function (organizations) {
+          self.set('organizations', organizations);
+        })
+        .catch(function (reason) {
+          console.debug(reason);
+          self.set('organizations', []);
+        });
     },
     selectRor(ror) {
       if (ror) {
@@ -304,23 +332,29 @@ export default Controller.extend({
       let reader = new FileReader();
       let self = this;
 
-      reader.readAsDataURL(file.blob).then((logo) => {
-        self.get('model').set('logo', logo);
-      }, (err) => {
-        console.error(err);
-      });
+      reader.readAsDataURL(file.blob).then(
+        (logo) => {
+          self.get('model').set('logo', logo);
+        },
+        (err) => {
+          console.error(err);
+        }
+      );
     },
     submit() {
       let self = this;
-      this.model.save().then(function(provider) {
-        self.transitionToRoute('providers.show', provider);
-      }).catch(function(reason) {
-        console.debug(reason);
-      });
+      this.model
+        .save()
+        .then(function (provider) {
+          self.transitionToRoute('providers.show', provider);
+        })
+        .catch(function (reason) {
+          console.debug(reason);
+        });
     },
     cancel() {
       this.model.rollbackAttributes();
       this.transitionToRoute('providers.show', this.model);
-    },
-  },
+    }
+  }
 });

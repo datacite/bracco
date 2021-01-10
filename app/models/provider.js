@@ -162,13 +162,7 @@ export default Model.extend(Validations, {
   }),
   formattedBillingInformation: computed(
     'billingInformation',
-    'billingInformation.address',
-    'billingInformation.city',
-    'billingInformation.postCode',
-    'billingInformation.state.name',
-    'billingInformation.country',
-    'billingInformation.country.name',
-    'billingInformation.country.code',
+    'billingInformation.{address,city,postCode,state.name,country,country.name,country.code}',
     function () {
       if (this.billingInformation) {
         return addressFormatter.format(

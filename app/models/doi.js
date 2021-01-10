@@ -1,16 +1,15 @@
 import { computed } from '@ember/object';
-import { equal } from '@ember/object/computed';
+import { equal, reads } from '@ember/object/computed';
 import { validator, buildValidations } from 'ember-cp-validations';
 import ENV from 'bracco/config/environment';
 import Model, { attr, belongsTo } from '@ember-data/model';
 import { fragmentArray, array } from 'ember-data-model-fragments/attributes';
-import { w } from '@ember/string';
 import { A } from '@ember/array';
 
 const Validations = buildValidations({
   details: [
     validator('belongs-to', {
-      disabled: computed('model.mode', 'model.state', function () {
+      disabled: computed('model.{mode,state}', function () {
         return (
           !['new', 'edit'].includes(this.model.get('mode')) ||
           this.model.get('state') === 'draft'
@@ -72,7 +71,7 @@ const Validations = buildValidations({
   publisher: [
     validator('presence', {
       presence: true,
-      disabled: computed('model.mode', 'model.state', function () {
+      disabled: computed('model.{mode,state}', function () {
         return (
           this.model.get('state') === 'draft' ||
           !['new', 'edit'].includes(this.model.get('mode'))
@@ -83,7 +82,7 @@ const Validations = buildValidations({
   publicationYear: [
     validator('presence', {
       presence: true,
-      disabled: computed('model.mode', 'model.state', function () {
+      disabled: computed('model.{mode,state}', function () {
         return (
           this.model.get('state') === 'draft' ||
           !['new', 'edit'].includes(this.model.get('mode'))
@@ -97,7 +96,7 @@ const Validations = buildValidations({
       format: 'YYYY',
       errorFormat: 'YYYY',
       message: 'Must be a year between 1000 and 2021.',
-      disabled: computed('model.mode', 'model.state', function () {
+      disabled: computed('model.{mode,state}', function () {
         return (
           this.model.get('state') === 'draft' ||
           !['new', 'edit'].includes(this.model.get('mode'))
@@ -108,7 +107,7 @@ const Validations = buildValidations({
   'types.resourceTypeGeneral': [
     validator('presence', {
       presence: true,
-      disabled: computed('model.mode', 'model.state', function () {
+      disabled: computed('model.{mode,state}', function () {
         return (
           this.model.get('state') === 'draft' ||
           !['new', 'edit'].includes(this.model.get('mode'))
@@ -117,7 +116,7 @@ const Validations = buildValidations({
     }),
     validator('resource-type', {
       presence: true,
-      disabled: computed('model.mode', 'model.state', function () {
+      disabled: computed('model.{mode,state}', function () {
         return (
           this.model.get('state') === 'draft' ||
           !['new', 'edit'].includes(this.model.get('mode'))
@@ -129,7 +128,7 @@ const Validations = buildValidations({
     validator('presence', {
       presence: true,
       message: 'Please include valid metadata.',
-      disabled: computed('model.mode', 'model.state', function () {
+      disabled: computed('model.{mode,state}', function () {
         return (
           !['upload', 'modify'].includes(this.model.get('mode')) ||
           this.model.get('state') === 'draft'
@@ -139,7 +138,7 @@ const Validations = buildValidations({
     validator('metadata', {
       allowBlank: true,
       dependentKeys: ['model.doi'],
-      disabled: computed('model.mode', 'model.state', function () {
+      disabled: computed('model.{mode,state}', function () {
         return (
           this.model.get('state') === 'draft' ||
           !['upload', 'modify'].includes(this.model.get('mode'))
@@ -200,26 +199,14 @@ export default Model.extend(Validations, {
   downloadCount: attr('number'),
 
   identifier: computed('doi', 'repository', function () {
-    if (
-      ENV.API_URL == 'https://api.datacite.org' ||
-      w(
-        'crossref.citations medra.citations kisti.citations jalc.citations op.citations'
-      ).includes(this.repository.get('id'))
-    ) {
+    if (ENV.API_URL == 'https://api.datacite.org') {
       return 'https://doi.org/' + this.doi;
     } else {
       return 'https://handle.stage.datacite.org/' + this.doi;
     }
   }),
   isDraft: equal('state', 'draft'),
-  showCitation: computed('registered', 'client', function () {
-    return (
-      this.registered ||
-      w(
-        'crossref.citations medra.citations kisti.citations jalc.citations op.citations'
-      ).includes(this.repository.get('id'))
-    );
-  }),
+  showCitation: reads('registered'),
   schemaVersionString: computed('schemaVersion', function () {
     if (this.schemaVersion) {
       return A(this.schemaVersion.split('-')).get('lastObject');
@@ -227,14 +214,14 @@ export default Model.extend(Validations, {
       return null;
     }
   }),
-  title: computed('titles', function () {
+  title: computed('titles.length', function () {
     if (this.titles.length > 0) {
       return A(this.titles).get('firstObject').get('title');
     } else {
       return null;
     }
   }),
-  description: computed('descriptions', function () {
+  description: computed('descriptions.length', function () {
     if (this.descriptions.length > 0) {
       return A(this.descriptions).get('firstObject').get('description');
     } else {

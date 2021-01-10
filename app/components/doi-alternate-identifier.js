@@ -20,17 +20,27 @@ const alternateIdentifierTypeList = [
   'UPC',
   'URL',
   'URN',
-  'w3id',
+  'w3id'
 ];
 
 export default Component.extend({
   alternateIdentifierTypeList,
   alternateIdentifierTypes: alternateIdentifierTypeList,
-  selected: [],
+
+  init(...args) {
+    this._super(...args);
+
+    this.selected = this.selected || [];
+  },
 
   actions: {
     createOnEnter(select, e) {
-      if (e.keyCode === 13 && select.isOpen && !select.highlighted && !isBlank(select.searchText)) {
+      if (
+        e.keyCode === 13 &&
+        select.isOpen &&
+        !select.highlighted &&
+        !isBlank(select.searchText)
+      ) {
         if (!this.selected.includes(select.searchText)) {
           this.alternateIdentifierTypes.push(select.searchText);
           select.actions.choose(select.searchText);
@@ -48,6 +58,6 @@ export default Component.extend({
     },
     deleteAlternateIdentifier() {
       this.model.get('alternateIdentifiers').removeObject(this.fragment);
-    },
-  },
+    }
+  }
 });
