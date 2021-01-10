@@ -20,7 +20,7 @@ module.exports = {
     'ember/no-component-lifecycle-hooks': 0,
     'ember/require-tagless-components': 0,
     'ember/no-mixins': 0,
-    'ember/no-shadow-route-definition': 0,
+    // TODO
     'ember/classic-decorator-no-classic-methods': 0,
     'ember/no-get': 0,
     'ember/no-controller-access-in-routes': 0
