@@ -16,7 +16,7 @@ jobs:
           COVERAGE: true
         run: |
           yarn
-          ember test
+          node/modules/ember test
           yarn ci
           echo $?
       - name: Publish code coverage
