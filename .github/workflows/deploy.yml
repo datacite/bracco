@@ -12,8 +12,10 @@ jobs:
         run:
           yarn 
       - name: Lint and Test
+        env:
+          COVERAGE: true
         run: |
-          COVERAGE=true ember test
+          ember test
           yarn ci
           echo $?
       - name: Publish code coverage
