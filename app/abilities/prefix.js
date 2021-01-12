@@ -10,9 +10,8 @@ export default Ability.extend({
       case 'staff_admin':
         return true;
       case 'consortium_admin':
-        return true;
       case 'provider_admin':
-        return true;
+        return false;
       default:
         return false;
     }
@@ -26,9 +25,8 @@ export default Ability.extend({
         case 'staff_admin':
           return true;
         case 'consortium_admin':
-          return true;
         case 'provider_admin':
-          return true;
+          return false;
         // return this.get('model.providers').any(function(provider, index, providers) {
         //   return provider.get('id') === self.get('currentUser.provider_id');
         // });
