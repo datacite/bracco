@@ -8,14 +8,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Install
-        run:
-          npm install -g ember-cli@3.12
-          yarn
-      - name: Lint and Test
+      - name: Install and Test
         env:
           COVERAGE: true
         run: |
+          yarn
           ember test
           yarn ci
           echo $?
