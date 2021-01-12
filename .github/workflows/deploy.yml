@@ -10,7 +10,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Install
         run:
-          yarn add cypress   
+          yarn 
       - name: Lint and Test
         run: |
           COVERAGE=true ember test
