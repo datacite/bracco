@@ -9,17 +9,20 @@ export default Route.extend({
     params = assign(params, {
       page: {
         number: params.page,
-        size: params.size,
+        size: params.size
       },
-      include: 'providers,clients',
+      include: 'providers,clients'
     });
 
-    return this.store.query('prefix', params).then(function(result) {
-      return result;
-    }).catch(function(reason) {
-      console.debug(reason);
-      return [];
-    });
+    return this.store
+      .query('prefix', params)
+      .then(function (result) {
+        return result;
+      })
+      .catch(function (reason) {
+        console.debug(reason);
+        return null;
+      });
   },
 
   afterModel() {
@@ -30,19 +33,19 @@ export default Route.extend({
 
   queryParams: {
     page: {
-      refreshModel: true,
+      refreshModel: true
     },
     size: {
-      refreshModel: true,
+      refreshModel: true
     },
     state: {
-      refreshModel: true,
+      refreshModel: true
     },
     year: {
-      refreshModel: true,
+      refreshModel: true
     },
     'provider-id': {
-      refreshModel: true,
-    },
-  },
+      refreshModel: true
+    }
+  }
 });

@@ -1,45 +1,88 @@
 <div class="row">
-  <div class='col-md-3'>
-    <div class="panel facets add">
-      <div class="panel-body">
-        <div class="btn-toolbar">
-          <div class="btn-group-vertical btn-group-sm">
-            {{#if (can "edit doi" model)}}
-            <LinkTo @route="dois.show.edit" @model={{model.id}} class="btn btn-warning" @id="edit-doi"><i class="fab fa-wpforms"></i> Update DOI (Form)</LinkTo>
-            {{/if}}
-            {{#if (can "modify doi" model)}}
-            <LinkTo @route="dois.show.modify" @model={{model.id}} class="btn btn-warning" @id="modify-doi"><i class="fas fa-upload"></i> Update DOI (File Upload)</LinkTo>
-            {{/if}}
-            {{#if (can "transfer doi" model)}}
-            <LinkTo @route="dois.show.transfer" @model={{model.id}} class="btn btn-warning" @id="transfer-doi"><i class="fas fa-arrow-circle-right"></i> Transfer DOI</LinkTo>
-            {{/if}}
-            {{#if (and (can "delete doi" model) model.isDraft)}}
-            <LinkTo @route="dois.show.delete" @model={{model.id}} class="btn btn-warning" @id="delete-doi"><i class="fas fa-trash"></i> Delete DOI</LinkTo>
-            {{/if}}
+  <div class="col-md-3">
+    {{#if model}}
+      <div class="panel facets add">
+        <div class="panel-body">
+          <div class="btn-toolbar">
+            <div class="btn-group-vertical btn-group-sm">
+              {{#if (can 'edit doi' model)}}
+                <LinkTo
+                  @route="dois.show.edit"
+                  @model={{model.id}}
+                  class="btn btn-warning"
+                  @id="edit-doi"
+                >
+                  <i class="fab fa-wpforms"></i>
+                  Update DOI (Form)
+                </LinkTo>
+              {{/if}}
+              {{#if (can 'modify doi' model)}}
+                <LinkTo
+                  @route="dois.show.modify"
+                  @model={{model.id}}
+                  class="btn btn-warning"
+                  @id="modify-doi"
+                >
+                  <i class="fas fa-upload"></i>
+                  Update DOI (File Upload)
+                </LinkTo>
+              {{/if}}
+              {{#if (can 'transfer doi' model)}}
+                <LinkTo
+                  @route="dois.show.transfer"
+                  @model={{model.id}}
+                  class="btn btn-warning"
+                  @id="transfer-doi"
+                >
+                  <i class="fas fa-arrow-circle-right"></i>
+                  Transfer DOI
+                </LinkTo>
+              {{/if}}
+              {{#if (and (can 'delete doi' model) model.isDraft)}}
+                <LinkTo
+                  @route="dois.show.delete"
+                  @model={{model.id}}
+                  class="btn btn-warning"
+                  @id="delete-doi"
+                >
+                  <i class="fas fa-trash"></i>
+                  Delete DOI
+                </LinkTo>
+              {{/if}}
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <RepositorySidebar @model={{model}} />
+      <RepositorySidebar @model={{model}} />
+    {{/if}}
   </div>
-  <div class='col-md-9'>
-    {{#if model.url}}
-      <h3 class="member-results">URL</h3>
-      <div class="panel panel-transparent url">
-        <div class="panel-body">
-          <a href="{{model.url}}">{{model.url}}</a>
+  <div class="col-md-9">
+    {{#if model}}
+      {{#if model.url}}
+        <h3 class="member-results">
+          URL
+        </h3>
+        <div class="panel panel-transparent url">
+          <div class="panel-body">
+            <a href="{{model.url}}">
+              {{model.url}}
+            </a>
+          </div>
         </div>
+      {{/if}}
+      <DoiMetadata @model={{model}} />
+      {{#if model.showCitation}}
+        <DoiCitation @model={{model}} />
+      {{/if}}
+      {{#if (and model.landingPage.checked (can 'viewHealth doi' model))}}
+        <DoiHealth @model={{model}} />
+      {{/if}}
+    {{else}}
+      <div class="col-md-9">
+        <BsAlert @dismissible={{false}} @type="warning">
+          An error occured fetching the DOI metadata. Please contact DataCite Support.
+        </BsAlert>
       </div>
-    {{/if}}
-
-    <DoiMetadata @model={{model}} />
-
-    {{#if model.showCitation}}
-      <DoiCitation @model={{model}} />
-    {{/if}}
-
-    {{#if (and model.landingPage.checked (can "viewHealth doi" model))}}
-      <DoiHealth @model={{model}} />
     {{/if}}
   </div>
 </div>

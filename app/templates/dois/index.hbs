@@ -1,11 +1,17 @@
-{{#if (can "read index")}}
+{{#if (can 'read index')}}
   <ApplicationHeader @default={{true}} />
-
   <div class="container-fluid">
     <IndexHeader />
-    <DoiList @model={{model}} @link="dois" @searchable={{true}} />
+    {{#if model}}
+      <DoiList @model={{model}} @link="dois" @searchable={{true}} />
+    {{else}}
+      <div class="col-md-9 col-md-offset-3">
+        <BsAlert @dismissible={{false}} @type="warning">
+          An error occured fetching DOIs. Please contact DataCite Support.
+        </BsAlert>
+      </div>
+    {{/if}}
   </div>
 {{else}}
-  <ApplicationHeader />
-  <LandingPage />
+  <ApplicationHeader /><LandingPage />
 {{/if}}

@@ -12,24 +12,29 @@ export default Route.extend({
     params = assign(params, {
       page: {
         number: params.page,
-        size: params.size,
+        size: params.size
       },
-      'repository-id': repositoryId,
+      'repository-id': repositoryId
     });
 
     return hash({
       repository: this.store.findRecord('repository', repositoryId),
-      'repository-prefixes': this.store.query('repository-prefix', params, { reload: true }).then(function(result) {
-        return result;
-      }).catch(function(reason) {
-        console.debug(reason);
-        return [];
-      }),
+      'repository-prefixes': this.store
+        .query('repository-prefix', params, { reload: true })
+        .then(function (result) {
+          return result;
+        })
+        .catch(function (reason) {
+          console.debug(reason);
+          return null;
+        })
     });
   },
 
   afterModel() {
-    if (this.can.cannot('read repository', this.modelFor('repositories/show'))) {
+    if (
+      this.can.cannot('read repository', this.modelFor('repositories/show'))
+    ) {
       this.transitionTo('index');
     }
   },
@@ -40,6 +45,6 @@ export default Route.extend({
     },
     refreshCurrentRoute() {
       this.refresh();
-    },
-  },
+    }
+  }
 });
