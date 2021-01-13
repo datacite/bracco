@@ -57,14 +57,14 @@ jobs:
       - name: Get git tag
         run: |
           echo "::set-output name=GIT_TAG::$(git describe --tags $(git rev-list --tags --max-count=1))"
-        id: extract_variables
+        id: extract_tag
       - name: Build and push 
         uses: docker/build-push-action@v2
         with:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ github.repository }}:${{ steps.extract_variables.outputs.GIT_TAG }}
+          tags: ${{ github.repository }}:${{ steps.extract_tag.outputs.GIT_TAG }}
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
   
