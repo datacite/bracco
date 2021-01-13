@@ -17,8 +17,19 @@ jobs:
         run: |
           yarn
           ./node_modules/.bin/ember test
-          yarn ci
-          echo $?
+              - name: Cypress run
+      - uses: cypress-io/github-action@v2
+        with:
+          start: ./node_modules/.bin/ember serve
+          wait-on: 'http://localhost:4200'
+          quiet: true
+          record: true
+          parallel: true
+          group: 'Tests'
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Publish code coverage
         uses: paambaati/codeclimate-action@v2.7.5
         env:
