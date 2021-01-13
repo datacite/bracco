@@ -26,10 +26,10 @@ export default Ability.extend({
           return true;
         case 'consortium_admin':
         case 'provider_admin':
+          // return this.get('model.providers').any(function(provider, index, providers) {
+          //   return provider.get('id') === self.get('currentUser.provider_id');
+          // });
           return false;
-        // return this.get('model.providers').any(function(provider, index, providers) {
-        //   return provider.get('id') === self.get('currentUser.provider_id');
-        // });
         default:
           return false;
       }
