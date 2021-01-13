@@ -1,8 +1,7 @@
-name: Deploy
+name: Release
 on:
-  push:
-    branches:
-      - "master"
+  release:
+    types: [published]
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -98,11 +97,13 @@ jobs:
           wget https://github.com/jwilder/dockerize/releases/download/v0.6.0/dockerize-linux-amd64-v0.6.0.tar.gz
           tar -xzvf dockerize-linux-amd64-v0.6.0.tar.gz
           rm dockerize-linux-amd64-v0.6.0.tar.gz
-          ./dockerize -template stage/services/doi/_bracco.auto.tfvars.tmpl:stage/services/doi/_bracco.auto.tfvars
+          ./dockerize -template prod-eu-west/services/doi/_bracco.auto.tfvars.tmpl:prod-eu-west/services/doi/_bracco.auto.tfvars
+          ./dockerize -template test/services/doi/_bracco.auto.tfvars.tmpl:test/services/doi/_bracco.auto.tfvars
           
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add stage/services/doi/_bracco.auto.tfvars
+          git add prod-eu-west/services/doi/_bracco.auto.tfvars
+          git add test/services/doi/_bracco.auto.tfvars
           git commit -m "Adding bracco git variables for commit ${{ steps.extract_variables.outputs.GIT_SHA }}"
       - name: Push changes
         uses: ad-m/github-push-action@v0.6.0
@@ -117,11 +118,10 @@ jobs:
         with:
           channel: '#ops'
           color: 'good'
-          text: 'A new version of <https://doi.stage.datacite.org|Fabrica> is been deployed to stage.'
+          text: 'Version <https://github.com/${{ github.repository }}/releases/tag/${{ steps.extract_variables.outputs.TAG }}|${{ steps.extract_variables.outputs.TAG }}> of <https://doi.datacite.org|Fabrica> is being released to test and production.'
           failure_text: '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) build failed'
           fields: |
-            [{ "title": "Commit message", "value": "${{ github.event.head_commit.message }}" },
-             { "title": "Committed by", "value": "<https://github.com/${{ github.repository }}/commits?author=${{ github.actor }}|${{ github.actor }}>", "short": true },
+            [{ "title": "Committed by", "value": "<https://github.com/${{ github.repository }}/commits?author=${{ github.actor }}|${{ github.actor }}>", "short": true },
              { "title": "Commit SHA", "value": "<https://github.com/${{ github.repository }}/commit/${{ steps.extract_variables.outputs.GIT_SHA }}|${{ steps.extract_variables.outputs.GIT_SHA_SHORT }}>", "short": true },
              { "title": "Repository", "value": "<https://github.com/${{ github.repository }}|${{ github.repository }}>", "short": true },
-             { "title": "Branch", "value": "<https://github.com/${{ github.repository }}/tree/${{ steps.extract_variables.outputs.BRANCH }}|${{ steps.extract_variables.outputs.BRANCH }}>", "short": true }]
+             { "title": "Release", "value": "<https://github.com/${{ github.repository }}/releases/tag/${{ steps.extract_variables.outputs.TAG }}|${{ steps.extract_variables.outputs.TAG }}>", "short": true }]
