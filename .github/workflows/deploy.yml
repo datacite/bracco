@@ -18,7 +18,7 @@ jobs:
           yarn
           ./node_modules/.bin/ember test
       - name: Cypress run
-      - uses: cypress-io/github-action@v2
+        uses: cypress-io/github-action@v2
         with:
           start: ./node_modules/.bin/ember serve
           wait-on: 'http://localhost:4200'
