@@ -111,18 +111,18 @@ module('Acceptance | client_admin | doi', function (hooks) {
     await click('button#doi-create');
   });
 
-  test('visiting the form and adding creator', async function (assert) {
-    await visit('repositories/datacite.test/dois/new');
+  // test('visiting the form and adding creator', async function (assert) {
+  //   await visit('repositories/datacite.test/dois/new');
 
-    assert.equal(currentURL(), 'repositories/datacite.test/dois/new');
-    await fillIn('[data-test-name]', 'Miller, Elizabeth');
-    assert.dom('[data-test-name]').hasValue('Miller, Elizabeth');
+  //   assert.equal(currentURL(), 'repositories/datacite.test/dois/new');
+  //   await fillIn('[data-test-name]', 'Miller, Elizabeth');
+  //   assert.dom('[data-test-name]').hasValue('Miller, Elizabeth');
 
-    await click('#toggle-creators');
-    assert.dom('#toggle-creators').includesText('Show 1 creator');
+  //   await click('#toggle-creators');
+  //   assert.dom('#toggle-creators').includesText('Show 1 creator');
 
-    await click('button#doi-create');
-  });
+  //   await click('button#doi-create');
+  // });
 
   test('visiting the form and selecting title', async function (assert) {
     await visit('repositories/datacite.test/dois/new');
