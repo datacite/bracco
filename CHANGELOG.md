@@ -1,5 +1,9 @@
 # Changelog
 
+## [3.9.20](https://github.com/datacite/bracco/tree/3.9.20) (2021-01-13)
+
+[Full Changelog](https://github.com/datacite/bracco/compare/3.9.19...3.9.20)
+
 ## [3.9.19](https://github.com/datacite/bracco/tree/3.9.19) (2021-01-13)
 
 [Full Changelog](https://github.com/datacite/bracco/compare/3.9.18...3.9.19)
@@ -718,7 +722,7 @@
 
 ## [3.3.16](https://github.com/datacite/bracco/tree/3.3.16) (2020-02-06)
 
-[Full Changelog](https://github.com/datacite/bracco/compare/3.3.14...3.3.16)
+[Full Changelog](https://github.com/datacite/bracco/compare/3.3.15...3.3.16)
 
 **Fixed bugs:**
 
@@ -739,13 +743,13 @@
 - reincorporate changes [\#306](https://github.com/datacite/bracco/pull/306) ([kjgarza](https://github.com/kjgarza))
 - Researcher profile integration [\#297](https://github.com/datacite/bracco/pull/297) ([kjgarza](https://github.com/kjgarza))
 
-## [3.3.14](https://github.com/datacite/bracco/tree/3.3.14) (2020-01-25)
-
-[Full Changelog](https://github.com/datacite/bracco/compare/3.3.15...3.3.14)
-
 ## [3.3.15](https://github.com/datacite/bracco/tree/3.3.15) (2020-01-25)
 
-[Full Changelog](https://github.com/datacite/bracco/compare/3.3.13...3.3.15)
+[Full Changelog](https://github.com/datacite/bracco/compare/3.3.14...3.3.15)
+
+## [3.3.14](https://github.com/datacite/bracco/tree/3.3.14) (2020-01-25)
+
+[Full Changelog](https://github.com/datacite/bracco/compare/3.3.13...3.3.14)
 
 ## [3.3.13](https://github.com/datacite/bracco/tree/3.3.13) (2020-01-25)
 
