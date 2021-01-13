@@ -1,5 +1,37 @@
 # Changelog
 
+## [3.9.19](https://github.com/datacite/bracco/tree/3.9.19) (2021-01-13)
+
+[Full Changelog](https://github.com/datacite/bracco/compare/3.9.18...3.9.19)
+
+## [3.9.18](https://github.com/datacite/bracco/tree/3.9.18) (2021-01-12)
+
+[Full Changelog](https://github.com/datacite/bracco/compare/3.9.17...3.9.18)
+
+## [3.9.17](https://github.com/datacite/bracco/tree/3.9.17) (2021-01-12)
+
+[Full Changelog](https://github.com/datacite/bracco/compare/3.9.16...3.9.17)
+
+## [3.9.16](https://github.com/datacite/bracco/tree/3.9.16) (2021-01-12)
+
+[Full Changelog](https://github.com/datacite/bracco/compare/3.9.15...3.9.16)
+
+**Fixed bugs:**
+
+- API errors displaying DOI metadata [\#492](https://github.com/datacite/bracco/issues/492)
+
+**Merged pull requests:**
+
+- More gracefully handle errors in dois api requests [\#494](https://github.com/datacite/bracco/pull/494) ([mfenner](https://github.com/mfenner))
+
+## [3.9.15](https://github.com/datacite/bracco/tree/3.9.15) (2021-01-11)
+
+[Full Changelog](https://github.com/datacite/bracco/compare/3.9.14...3.9.15)
+
+## [3.9.14](https://github.com/datacite/bracco/tree/3.9.14) (2021-01-09)
+
+[Full Changelog](https://github.com/datacite/bracco/compare/3.9.13...3.9.14)
+
 ## [3.9.13](https://github.com/datacite/bracco/tree/3.9.13) (2021-01-03)
 
 [Full Changelog](https://github.com/datacite/bracco/compare/3.9.12...3.9.13)
