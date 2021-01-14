@@ -1,11 +1,19 @@
 <div class="row">
   <div class="col-md-3">
-    {{#if (and (can "write prefix" model.prefixes) (not-eq model.provider.memberType "consortium"))}}
+    {{#if (can 'write index')}}
       <div class="panel facets">
         <div class="panel-body">
           <div class="btn-toolbar">
             <div class="btn-group btn-group-sm">
-              <LinkTo @route="providers.show.prefixes.new" @model={{model.provider.id}} class="btn btn-warning" id="assign-prefix"><i class="fas fa-link"></i>Assign Prefix</LinkTo>
+              <LinkTo
+                @route="providers.show.prefixes.new"
+                @model={{model.provider.id}}
+                class="btn btn-warning"
+                id="assign-prefix"
+              >
+                <i class="fas fa-link"></i>
+                Assign Prefix
+              </LinkTo>
             </div>
           </div>
         </div>
@@ -13,73 +21,125 @@
     {{else}}
       <div class="panel panel-transparent">
         <div class="panel-body">
-          <div class="edit"></div>
+          <div class="alert alert-warning">
+            Please reach out to DataCite Staff if you want to add a prefix.
+          </div>
         </div>
       </div>
     {{/if}}
-
     {{#if model.prefixes.meta.states}}
       <div class="panel facets add">
         <div class="panel-body">
-          <h4>State <span class="small"><i class="fas fa-question-circle"></i><BsTooltip @placement="top">Filter prefixes by whether they have been assigned to a repository.</BsTooltip></span></h4>
+          <h4>
+            State
+            <span class="small">
+              <i class="fas fa-question-circle"></i>
+              <BsTooltip @placement="top">
+                Filter prefixes by whether they have been assigned to a repository.
+              </BsTooltip>
+            </span>
+          </h4>
           <ul>
             {{#each model.prefixes.meta.states as |state|}}
               <li>
                 {{#if model.prefixes.query.state}}
-                  <LinkTo @route="providers.show.prefixes" @query={{hash state=null}}><i class="far fa-check-square"></i>
+                  <LinkTo
+                    @route="providers.show.prefixes"
+                    @query={{hash state=null}}
+                  >
+                    <i class="far fa-check-square"></i>
                   </LinkTo>
                 {{else}}
-                  <LinkTo @route="providers.show.prefixes" @query={{hash state=state.id}}><i class="far fa-square"></i></LinkTo>
+                  <LinkTo
+                    @route="providers.show.prefixes"
+                    @query={{hash state=state.id}}
+                  >
+                    <i class="far fa-square"></i>
+                  </LinkTo>
                 {{/if}}
-                <div class="facet-title">{{state.title}}</div>
-                <span class="number pull-right">{{state.count}}</span>
-                <div class="clearfix"/>
+                <div class="facet-title">
+                  {{state.title}}
+                </div>
+                <span class="number pull-right">
+                  {{state.count}}
+                </span>
+                <div class="clearfix"></div>
               </li>
             {{/each}}
           </ul>
         </div>
       </div>
     {{/if}}
-
     {{#if model.prefixes.meta.years}}
       <div class="panel facets add">
         <div class="panel-body">
-          <h4>Year created</h4>
+          <h4>
+            Year created
+          </h4>
           <ul>
             {{#each model.prefixes.meta.years as |year|}}
               <li>
                 {{#if model.prefixes.query.year}}
-                  <LinkTo @route="providers.show.prefixes" @query={{hash year=null}}><i class="far fa-check-square"></i>
+                  <LinkTo
+                    @route="providers.show.prefixes"
+                    @query={{hash year=null}}
+                  >
+                    <i class="far fa-check-square"></i>
                   </LinkTo>
                 {{else}}
-                  <LinkTo @route="providers.show.prefixes" @query={{hash year=year.id}}><i class="far fa-square"></i>
+                  <LinkTo
+                    @route="providers.show.prefixes"
+                    @query={{hash year=year.id}}
+                  >
+                    <i class="far fa-square"></i>
                   </LinkTo>
                 {{/if}}
-                <div class="facet-title">{{year.title}}</div>
-                <span class="number pull-right">{{year.count}}</span>
-                <div class="clearfix"/>
+                <div class="facet-title">
+                  {{year.title}}
+                </div>
+                <span class="number pull-right">
+                  {{year.count}}
+                </span>
+                <div class="clearfix"></div>
               </li>
             {{/each}}
           </ul>
         </div>
       </div>
     {{/if}}
-
-    {{#if (eq model.provider.memberType "consortium")}}
+    {{#if (eq model.provider.memberType 'consortium')}}
       <div class="panel facets">
         <div class="panel-body">
-          <h4>Consortium Organizations</h4>
+          <h4>
+            Consortium Organizations
+          </h4>
           <ul>
             {{#each model.prefixes.meta.providers as |consortium-organization|}}
               <li>
                 {{#if model.prefixes.query.consortium-organization-id}}
-                  <LinkTo @route="providers.show.prefixes" @query={{hash consortium-organization-id=null}}><i class="far fa-check-square"></i></LinkTo>
+                  <LinkTo
+                    @route="providers.show.prefixes"
+                    @query={{hash consortium-organization-id=null}}
+                  >
+                    <i class="far fa-check-square"></i>
+                  </LinkTo>
                 {{else}}
-                  <LinkTo @route="providers.show.prefixes" @query={{hash consortium-organization-id=consortium-organization.id}}><i class="far fa-square"></i></LinkTo>
+                  <LinkTo
+                    @route="providers.show.prefixes"
+                    @query={{hash
+                      consortium-organization-id=consortium-organization.id
+                    }}
+                  >
+                    <i class="far fa-square"></i>
+                  </LinkTo>
                 {{/if}}
-                <div class="facet-title">{{consortium-organization.title}}</div>
-                <span class="number pull-right">{{consortium-organization.count}}</span>
-                <div class="clearfix"/>
+                <div class="facet-title">
+                  {{consortium-organization.title}}
+                </div>
+                <span class="number pull-right">
+                  {{consortium-organization.count}}
+                </span>
+                <div class="clearfix"></div>
               </li>
             {{/each}}
           </ul>
@@ -88,46 +148,111 @@
     {{/if}}
   </div>
   <div class="col-md-9 panel-list" id="content">
-    <ModelSearch @model={{model.prefixes}} @name="Prefix" @sortable={{true}} @link="providers.show.prefixes" />
-    
+    <ModelSearch
+      @model={{model.prefixes}}
+      @name="Prefix"
+      @sortable={{true}}
+      @link="providers.show.prefixes"
+    />
     {{#if model.prefixes}}
       {{#each model.prefixes as |providerPrefix|}}
         <div class="panel panel-transparent" data-test-prefix>
           <div class="panel-body">
-            {{#if (not-eq model.provider.memberType "consortium")}}
-              <h3 class="work"><LinkTo @route="providers.show.prefixes.show" @models={{array providerPrefix.provider.id providerPrefix.prefix.id}}>{{providerPrefix.prefix.id}}</LinkTo></h3>
+            {{#if (not-eq model.provider.memberType 'consortium')}}
+              <h3 class="work">
+                <LinkTo
+                  @route="providers.show.prefixes.show"
+                  @models={{array
+                    providerPrefix.provider.id
+                    providerPrefix.prefix.id
+                  }}
+                >
+                  {{providerPrefix.prefix.id}}
+                </LinkTo>
+              </h3>
             {{else}}
-              <h3 class="member">{{providerPrefix.prefix.id}}</h3>
-
-              <h5>Consortium Organization</h5>
+              <h3 class="member">
+                {{providerPrefix.prefix.id}}
+              </h3>
+              <h5>
+                Consortium Organization
+              </h5>
               {{#if providerPrefix.provider}}
-                <LinkTo @route="providers.show.prefixes.show" @models={{array providerPrefix.provider.id providerPrefix.prefix.id}}>{{providerPrefix.provider.name}}</LinkTo><br/>
+                <LinkTo
+                  @route="providers.show.prefixes.show"
+                  @models={{array
+                    providerPrefix.provider.id
+                    providerPrefix.prefix.id
+                  }}
+                >
+                  {{providerPrefix.provider.name}}
+                </LinkTo>
+                <br />
               {{else}}
-                <span class="icon-warning">No member found.</span>
+                <span class="icon-warning">
+                  No member found.
+                </span>
               {{/if}}
             {{/if}}
-
-            <h5>{{pluralize providerPrefix.repositories.length "Repository" without-count=true}}</h5>
+            <h5>
+              {{pluralize
+                providerPrefix.repositories.length
+                'Repository'
+                without-count=true
+              }}
+            </h5>
             {{#if providerPrefix.repositories}}
               {{#each providerPrefix.repositories as |repository|}}
-                <LinkTo @route="repositories.show.prefixes.show" @models={{array repository.id providerPrefix.prefix.id}}>{{repository.name}}</LinkTo><br/>
+                <LinkTo
+                  @route="repositories.show.prefixes.show"
+                  @models={{array repository.id providerPrefix.prefix.id}}
+                >
+                  {{repository.name}}
+                </LinkTo>
+                <br />
               {{/each}}
               {{#if features.useElasticsearch}}
-                <h5>DOIs</h5>
-                <LinkTo @route="providers.show.dois" @model={{providerPrefix.provider.id}} @query={{hash prefix=providerPrefix.prefix.id}}>DOIs for prefix {{providerPrefix.prefix.id}}</LinkTo>
+                <h5>
+                  DOIs
+                </h5>
+                <LinkTo
+                  @route="providers.show.dois"
+                  @model={{providerPrefix.provider.id}}
+                  @query={{hash prefix=providerPrefix.prefix.id}}
+                >
+                  DOIs for prefix
+                  {{providerPrefix.prefix.id}}
+                </LinkTo>
               {{/if}}
             {{else}}
-              <span class="icon-warning">No repository found.</span>
+              <span class="icon-warning">
+                No repository found.
+              </span>
             {{/if}}
-
-            <h5>Added</h5>
-            {{format-time providerPrefix.createdAt year='numeric' month='long' day='numeric' hour='numeric' minute='numeric' second='numeric' timeZone='UTC' timeZoneName='short' hour12=false}}
+            <h5>
+              Added
+            </h5>
+            {{format-time
+              providerPrefix.createdAt
+              year='numeric'
+              month='long'
+              day='numeric'
+              hour='numeric'
+              minute='numeric'
+              second='numeric'
+              timeZone='UTC'
+              timeZoneName='short'
+              hour12=false
+            }}
           </div>
         </div>
       {{/each}}
       <div class="text-center">
         {{#if (gt model.prefixes.meta.totalPages 1)}}
-          <PageNumbers @model={{model.prefixes}} @link="providers.show.prefixes" />
+          <PageNumbers
+            @model={{model.prefixes}}
+            @link="providers.show.prefixes"
+          />
         {{/if}}
       </div>
     {{else}}

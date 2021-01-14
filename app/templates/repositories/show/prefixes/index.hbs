@@ -1,10 +1,18 @@
-<div class='col-md-3'>
-  {{#if (and (can "write prefix" model.repository-prefixes) true)}}
+<div class="col-md-3">
+  {{#if (can 'write index')}}
     <div class="panel facets">
       <div class="panel-body">
         <div class="btn-toolbar">
           <div class="btn-group btn-group-sm">
-            <LinkTo @route="repositories.show.prefixes.new" @model={{model.repository.id}} class="btn btn-warning" @id="assign-prefix"><i class="fas fa-link"></i>Assign Prefix</LinkTo>
+            <LinkTo
+              @route="repositories.show.prefixes.new"
+              @model={{model.repository.id}}
+              class="btn btn-warning"
+              @id="assign-prefix"
+            >
+              <i class="fas fa-link"></i>
+              Assign Prefix
+            </LinkTo>
           </div>
         </div>
       </div>
@@ -12,26 +20,43 @@
   {{else}}
     <div class="panel panel-transparent">
       <div class="panel-body">
-        <div class="edit"></div>
+        <div class="alert alert-warning">
+          Please reach out to DataCite Staff if you want to add a prefix.
+        </div>
       </div>
     </div>
   {{/if}}
-
   {{#if model.repository-prefixes.meta.years}}
     <div class="panel facets add">
       <div class="panel-body">
-        <h4>Year created</h4>
+        <h4>
+          Year created
+        </h4>
         <ul>
           {{#each model.repository-prefixes.meta.years as |year|}}
             <li>
               {{#if model.repository-prefixes.query.year}}
-                <LinkTo @route="repositories.show.prefixes" @query={{hash year=null}}><i class="far fa-check-square"></i></LinkTo>
+                <LinkTo
+                  @route="repositories.show.prefixes"
+                  @query={{hash year=null}}
+                >
+                  <i class="far fa-check-square"></i>
+                </LinkTo>
               {{else}}
-                <LinkTo @route="repositories.show.prefixes" @query={{hash year=year.id}}><i class="far fa-square"></i></LinkTo>
+                <LinkTo
+                  @route="repositories.show.prefixes"
+                  @query={{hash year=year.id}}
+                >
+                  <i class="far fa-square"></i>
+                </LinkTo>
               {{/if}}
-              <div class="facet-title">{{year.title}}</div>
-              <span class="number pull-right">{{year.count}}</span>
-              <div class="clearfix"/>
+              <div class="facet-title">
+                {{year.title}}
+              </div>
+              <span class="number pull-right">
+                {{year.count}}
+              </span>
+              <div class="clearfix"></div>
             </li>
           {{/each}}
         </ul>
@@ -39,33 +64,68 @@
     </div>
   {{/if}}
 </div>
-
-<div class='col-md-9 panel-list' id="content">
-  <ModelSearch @model={{model.repository-prefixes}} @name="Prefix" @link="repositories.show.prefixes" />
-
+<div class="col-md-9 panel-list" id="content">
+  <ModelSearch
+    @model={{model.repository-prefixes}}
+    @name="Prefix"
+    @link="repositories.show.prefixes"
+  />
   {{#if model.repository-prefixes}}
     {{#each model.repository-prefixes as |repositoryPrefix|}}
       <div class="panel panel-transparent" data-test-prefix>
         <div class="panel-body">
-          {{#if (can "update prefix" model)}}
-            <h3 class="work"><LinkTo @id={{repositoryPrefix.prefix.id}} @route="repositories.show.prefixes.show" @models={{array model.repository.id repositoryPrefix.prefix.id}}>{{repositoryPrefix.prefix.id}}</LinkTo></h3>
+          {{#if (can 'update prefix' model)}}
+            <h3 class="work">
+              <LinkTo
+                @id={{repositoryPrefix.prefix.id}}
+                @route="repositories.show.prefixes.show"
+                @models={{array model.repository.id repositoryPrefix.prefix.id}}
+              >
+                {{repositoryPrefix.prefix.id}}
+              </LinkTo>
+            </h3>
           {{else}}
-            <h3 class="member">{{repositoryPrefix.prefix.id}}</h3>
+            <h3 class="member">
+              {{repositoryPrefix.prefix.id}}
+            </h3>
           {{/if}}
-
           {{#if features.useElasticsearch}}
-            <h5>DOIs</h5>
-            <LinkTo @route="repositories.show.dois" @model={{repositoryPrefix.repository.id}} @query={{hash prefix=repositoryPrefix.prefix.id}}>DOIs for prefix {{repositoryPrefix.prefix.id}}</LinkTo>
+            <h5>
+              DOIs
+            </h5>
+            <LinkTo
+              @route="repositories.show.dois"
+              @model={{repositoryPrefix.repository.id}}
+              @query={{hash prefix=repositoryPrefix.prefix.id}}
+            >
+              DOIs for prefix
+              {{repositoryPrefix.prefix.id}}
+            </LinkTo>
           {{/if}}
-
-          <h5>Added</h5>
-          {{format-time repositoryPrefix.createdAt year='numeric' month='long' day='numeric' hour='numeric' minute='numeric' second='numeric' timeZone='UTC' timeZoneName='short' hour12=false}}
+          <h5>
+            Added
+          </h5>
+          {{format-time
+            repositoryPrefix.createdAt
+            year='numeric'
+            month='long'
+            day='numeric'
+            hour='numeric'
+            minute='numeric'
+            second='numeric'
+            timeZone='UTC'
+            timeZoneName='short'
+            hour12=false
+          }}
         </div>
       </div>
     {{/each}}
     <div class="text-center">
       {{#if (gt model.repository-prefixes.meta.totalPages 1)}}
-        <PageNumbers @model={{model.prefixes}} @link="repositories.show.prefixes" />
+        <PageNumbers
+          @model={{model.prefixes}}
+          @link="repositories.show.prefixes"
+        />
       {{/if}}
     </div>
   {{else}}
