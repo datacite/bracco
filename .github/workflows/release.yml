@@ -56,7 +56,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Get git tag
         run: |
-          echo "::set-output name=GIT_TAG::$(git describe --tags $(git rev-list --tags --max-count=1))"
+          echo "::set-output name=GIT_TAG::$(git tag --points-at HEAD)"
         id: extract_tag
       - name: Build and push 
         uses: docker/build-push-action@v2
@@ -115,7 +115,6 @@ jobs:
           github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           repository: 'datacite/mastino'
           branch: 'refs/heads/master'
-          tags: false
 
       - name: Notify Slack
         uses: edge/simple-slack-notify@master
