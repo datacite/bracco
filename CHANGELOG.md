@@ -1,5 +1,9 @@
 # Changelog
 
+## [3.9.21](https://github.com/datacite/bracco/tree/3.9.21) (2021-01-13)
+
+[Full Changelog](https://github.com/datacite/bracco/compare/3.9.20...3.9.21)
+
 ## [3.9.20](https://github.com/datacite/bracco/tree/3.9.20) (2021-01-13)
 
 [Full Changelog](https://github.com/datacite/bracco/compare/3.9.19...3.9.20)
@@ -136,10 +140,6 @@
 
 - Logging into Fabrica with consortium organization account directs user to repositories tab [\#467](https://github.com/datacite/bracco/issues/467)
 
-**Merged pull requests:**
-
-- send logged in user to settings [\#468](https://github.com/datacite/bracco/pull/468) ([kjgarza](https://github.com/kjgarza))
-
 ## [3.9.2](https://github.com/datacite/bracco/tree/3.9.2) (2020-09-28)
 
 [Full Changelog](https://github.com/datacite/bracco/compare/3.9.1...3.9.2)
@@ -202,6 +202,7 @@
 
 **Merged pull requests:**
 
+- send logged in user to settings [\#468](https://github.com/datacite/bracco/pull/468) ([kjgarza](https://github.com/kjgarza))
 - fix: add condition [\#458](https://github.com/datacite/bracco/pull/458) ([kjgarza](https://github.com/kjgarza))
 - feat: add validators for older versions [\#457](https://github.com/datacite/bracco/pull/457) ([kjgarza](https://github.com/kjgarza))
 - feat: force all the dois updated with the form to become schema 4 [\#452](https://github.com/datacite/bracco/pull/452) ([kjgarza](https://github.com/kjgarza))
@@ -537,15 +538,15 @@
 
 ## [3.5.7](https://github.com/datacite/bracco/tree/3.5.7) (2020-02-29)
 
-[Full Changelog](https://github.com/datacite/bracco/compare/3.5.5...3.5.7)
-
-## [3.5.5](https://github.com/datacite/bracco/tree/3.5.5) (2020-02-29)
-
-[Full Changelog](https://github.com/datacite/bracco/compare/3.5.6...3.5.5)
+[Full Changelog](https://github.com/datacite/bracco/compare/3.5.6...3.5.7)
 
 ## [3.5.6](https://github.com/datacite/bracco/tree/3.5.6) (2020-02-29)
 
-[Full Changelog](https://github.com/datacite/bracco/compare/3.5.4...3.5.6)
+[Full Changelog](https://github.com/datacite/bracco/compare/3.5.5...3.5.6)
+
+## [3.5.5](https://github.com/datacite/bracco/tree/3.5.5) (2020-02-29)
+
+[Full Changelog](https://github.com/datacite/bracco/compare/3.5.4...3.5.5)
 
 **Implemented enhancements:**
 
@@ -722,7 +723,7 @@
 
 ## [3.3.16](https://github.com/datacite/bracco/tree/3.3.16) (2020-02-06)
 
-[Full Changelog](https://github.com/datacite/bracco/compare/3.3.15...3.3.16)
+[Full Changelog](https://github.com/datacite/bracco/compare/3.3.14...3.3.16)
 
 **Fixed bugs:**
 
@@ -743,13 +744,13 @@
 - reincorporate changes [\#306](https://github.com/datacite/bracco/pull/306) ([kjgarza](https://github.com/kjgarza))
 - Researcher profile integration [\#297](https://github.com/datacite/bracco/pull/297) ([kjgarza](https://github.com/kjgarza))
 
-## [3.3.15](https://github.com/datacite/bracco/tree/3.3.15) (2020-01-25)
-
-[Full Changelog](https://github.com/datacite/bracco/compare/3.3.14...3.3.15)
-
 ## [3.3.14](https://github.com/datacite/bracco/tree/3.3.14) (2020-01-25)
 
-[Full Changelog](https://github.com/datacite/bracco/compare/3.3.13...3.3.14)
+[Full Changelog](https://github.com/datacite/bracco/compare/3.3.15...3.3.14)
+
+## [3.3.15](https://github.com/datacite/bracco/tree/3.3.15) (2020-01-25)
+
+[Full Changelog](https://github.com/datacite/bracco/compare/3.3.13...3.3.15)
 
 ## [3.3.13](https://github.com/datacite/bracco/tree/3.3.13) (2020-01-25)
 
