@@ -78,7 +78,7 @@ jobs:
         shell: bash
         run: |
           echo "::set-output name=BRANCH::$(echo ${GITHUB_REF#refs/heads/} | sed 's/\//_/g')"
-          echo "::set-output name=TAG::$(git tag --points-at HEAD)"
+          echo "::set-output name=GIT_TAG::$(git tag --points-at HEAD)"
           echo "::set-output name=GIT_SHA::$(git rev-parse HEAD)"
           echo "::set-output name=GIT_SHA_SHORT::$(git rev-parse --short HEAD)"  
         id: extract_variables
