@@ -65,8 +65,6 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ${{ github.repository }}:${{ steps.extract_tag.outputs.GIT_TAG }}
-          cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to: type=local,dest=/tmp/.buildx-cache
   
   deploy:
     needs: [test, build]
