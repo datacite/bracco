@@ -1,5 +1,5 @@
 <div class="col-md-3">
-  {{#if (can 'write index')}}
+  {{#if (and (can 'write index') (eq model.isActive true))}}
     <div class="panel facets">
       <div class="panel-body">
         <div class="btn-toolbar">
@@ -17,6 +17,8 @@
         </div>
       </div>
     </div>
+  {{else if (not-eq model.isActive true)}}
+
   {{else}}
     <div class="panel panel-transparent">
       <div class="panel-body">
