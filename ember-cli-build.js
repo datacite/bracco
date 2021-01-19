@@ -10,9 +10,6 @@ module.exports = function (defaults) {
     'ember-cli-babel': {
       includePolyfill: true
     },
-    'ember-service-worker': {
-      enabled: false
-    },
     sourcemaps: {
       enabled: true,
       extensions: ['js']
