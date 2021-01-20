@@ -76,7 +76,7 @@
     {{#each model.repository-prefixes as |repositoryPrefix|}}
       <div class="panel panel-transparent" data-test-prefix>
         <div class="panel-body">
-          {{#if (can 'update prefix' model)}}
+          {{#if (and (can 'update prefix' model) model.isActive)}}
             <h3 class="work">
               <LinkTo
                 @id={{repositoryPrefix.prefix.id}}

@@ -1,27 +1,58 @@
-{{#if (can "read provider" model)}}
+{{#if (can 'read provider' model)}}
   <ApplicationHeader @default={{true}} />
-
   <div class="container-fluid">
-    {{#if (or (can "read index") (can "read provider" model.consortium))}}
+    {{#if (or (can 'read index') (can 'read provider' model.consortium))}}
       <ol class="breadcrumb">
-        {{#if (can "read index")}}
-          <li class="breadcrumb-item"><LinkTo @route="index">DataCite</LinkTo></li>
-          <li class="breadcrumb-item"><LinkTo @route="providers">Members</LinkTo></li>
+        {{#if (can 'read index')}}
+          <li class="breadcrumb-item">
+            <LinkTo @route="index">
+              DataCite
+            </LinkTo>
+          </li>
+          <li class="breadcrumb-item">
+            <LinkTo @route="providers">
+              Members
+            </LinkTo>
+          </li>
         {{/if}}
-        {{#if (and (can "read provider" model.consortium) (eq model.memberType "consortium_organization"))}}
-          <li class="breadcrumb-item"><LinkTo @route="providers.show.index" @model={{model.consortium.id}}>{{model.consortium.name}}</LinkTo></li>
-          <li class="breadcrumb-item"><LinkTo @route="providers.show.organizations" @model={{model.consortium.id}}>Consortium Organizations</LinkTo></li>
+        {{#if
+          (and
+            (can 'read provider' model.consortium)
+            (eq model.memberType 'consortium_organization')
+          )
+        }}
+          <li class="breadcrumb-item">
+            <LinkTo
+              @route="providers.show.index"
+              @model={{model.consortium.id}}
+            >
+              {{model.consortium.name}}
+            </LinkTo>
+          </li>
+          <li class="breadcrumb-item">
+            <LinkTo
+              @route="providers.show.organizations"
+              @model={{model.consortium.id}}
+            >
+              Consortium Organizations
+            </LinkTo>
+          </li>
         {{/if}}
       </ol>
     {{/if}}
-
     {{#if model.logoUrl}}
       <div class="pull-right">
-        <img class="img-small" alt="logo" src={{model.logoUrl}}>
+        <img class="img-small" alt="logo" src={{model.logoUrl}} />
       </div>
     {{/if}}
-    <h2 class="work">{{model.displayName}}{{#if (not model.isActive)}} <span class="small icon-warning">account not active</span>{{/if}}</h2>
-
+    <h2 class="work">
+      {{model.displayName}}
+      {{#if (not model.isActive)}}
+        <span class="label label-warning-inv">
+          Inactive
+        </span>
+      {{/if}}
+    </h2>
     <div class="tab-content nav-tabs-member">
       <BsNav
         @type="tabs"
@@ -30,35 +61,63 @@
         @fill={{false}} as |nav|
       >
         <nav.item>
-          <nav.link-to @route="providers.show.info" model="model.id" class="nav-link">Info</nav.link-to>
+          <nav.link-to
+            @route="providers.show.info"
+            model="model.id"
+            class="nav-link"
+          >
+            Info
+          </nav.link-to>
         </nav.item>
         <nav.item>
-          <nav.link-to @route="providers.show.index" model="model.id" class="nav-link">Settings</nav.link-to>
+          <nav.link-to
+            @route="providers.show.index"
+            model="model.id"
+            class="nav-link"
+          >
+            Settings
+          </nav.link-to>
         </nav.item>
-
-        {{#if (eq model.memberType "consortium")}}
+        {{#if (eq model.memberType 'consortium')}}
           <nav.item>
-            <nav.link-to @route="providers.show.organizations" class="nav-link">Consortium Organizations</nav.link-to>
+            <nav.link-to @route="providers.show.organizations" class="nav-link">
+              Consortium Organizations
+            </nav.link-to>
           </nav.item>
         {{/if}}
-
-        {{#if (not-eq model.memberType "member_only")}}
+        {{#if (not-eq model.memberType 'member_only')}}
           <nav.item>
-            <nav.link-to @route="providers.show.repositories" model="model.id" class="nav-link">Repositories</nav.link-to>
+            <nav.link-to
+              @route="providers.show.repositories"
+              model="model.id"
+              class="nav-link"
+            >
+              Repositories
+            </nav.link-to>
           </nav.item>
           <nav.item>
-            <nav.link-to @route="providers.show.prefixes" model="model.id" class="nav-link">Prefixes</nav.link-to>
+            <nav.link-to
+              @route="providers.show.prefixes"
+              model="model.id"
+              class="nav-link"
+            >
+              Prefixes
+            </nav.link-to>
           </nav.item>
           <nav.item>
-            <nav.link-to @route="providers.show.dois" model="model.id" class="nav-link">DOIs</nav.link-to>
+            <nav.link-to
+              @route="providers.show.dois"
+              model="model.id"
+              class="nav-link"
+            >
+              DOIs
+            </nav.link-to>
           </nav.item>
         {{/if}}
       </BsNav>
     </div>
-
     {{outlet}}
   </div>
 {{else}}
-  <ApplicationHeader />
-  <LandingPage />
+  <ApplicationHeader /><LandingPage />
 {{/if}}

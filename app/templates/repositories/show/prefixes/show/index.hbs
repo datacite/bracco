@@ -1,31 +1,40 @@
 {{#if model}}
   <div class="row">
-    <div class='col-md-3'>
-      {{#if (can "update prefix" model.prefix)}}
+    <div class="col-md-3">
+      {{#if (can 'update prefix' model.prefix)}}
         <div class="panel facets add">
           <div class="panel-body">
-            <div class="btn-toolbar">
-              <div class="btn-group btn-group-sm">
-                 <LinkTo @route="repositories.show.prefixes.show.delete" @models={{array model.repository.id model.prefix.id}} class="btn btn-warning"><i class="fas fa-pencil-alt"></i> Remove Prefix</LinkTo>
+            {{#if model.repository.isActive}}
+              <div class="btn-toolbar">
+                <div class="btn-group btn-group-sm">
+                  <LinkTo
+                    @route="repositories.show.prefixes.show.delete"
+                    @models={{array model.repository.id model.prefix.id}}
+                    class="btn btn-warning"
+                  >
+                    <i class="fas fa-pencil-alt"></i>
+                    Remove Prefix
+                  </LinkTo>
+                </div>
               </div>
-            </div>
+            {{/if}}
           </div>
         </div>
       {{/if}}
     </div>
-    <div class='col-md-9'>
-      <h2 class="work">{{model.prefix.id}}</h2>
+    <div class="col-md-9">
+      <h2 class="work">
+        {{model.prefix.id}}
+      </h2>
     </div>
   </div>
-
   <div class="row">
-    <div class='col-md-3'>
+    <div class="col-md-3">
       <RepositorySidebar @model={{model}} />
     </div>
     <div class="col-md-9">
       <div class="panel panel-transparent">
-        <div class="panel-body">
-        </div>
+        <div class="panel-body"></div>
       </div>
     </div>
   </div>
