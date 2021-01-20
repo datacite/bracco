@@ -1,5 +1,5 @@
 [![Identifier](https://img.shields.io/badge/doi-10.5438%2Fcxe5--rg55-fca709.svg)](https://doi.org/10.5438/cxe5-rg55)
-[![Build Status](https://travis-ci.org/datacite/bracco.svg?branch=test)](https://travis-ci.org/datacite/bracco)
+![Release](https://github.com/datacite/bracco/workflows/Release/badge.svg)
 [![Code Climate](https://codeclimate.com/github/datacite/bracco/badges/gpa.svg)](https://codeclimate.com/github/datacite/bracco)
 [![Test Coverage](https://codeclimate.com/github/datacite/bracco/badges/coverage.svg)](https://codeclimate.com/github/datacite/bracco/coverage)
 
@@ -11,23 +11,22 @@ The web frontend for the DataCite Fabrica service.
 
 You will need the following things properly installed on your computer.
 
-* [Git](https://git-scm.com/)
-* [Node.js](https://nodejs.org/) (with NPM)
-* [Ember CLI](https://ember-cli.com/)
-* [PhantomJS](http://phantomjs.org/)
+- [Git](https://git-scm.com/)
+- [Node.js](https://nodejs.org/) (with NPM)
+- [Ember CLI](https://ember-cli.com/)
 
 ## Installation
 
-* `git clone <repository-url>` this repository
-* `cd bracco`
-* `cp .env.example .env`
-* `npm install`
-* `yarn`
+- `git clone <repository-url>` this repository
+- `cd bracco`
+- `cp .env.example .env`
+- `npm install`
+- `yarn`
 
 ## Running / Development
 
-* `ember serve`
-* Visit your app at [http://localhost:4200](http://localhost:4200).
+- `ember serve`
+- Visit your app at [http://localhost:4200](http://localhost:4200).
 
 ### Code Generators
 
@@ -35,25 +34,23 @@ Make use of the many generators for code, try `ember help generate` for more det
 
 ### Running Tests
 
-* `ember test`
-* `ember test --server`
+- `ember test`
+- `ember test --server`
 
 ### Linting
 
-* `npm run lint:hbs`
-* `npm run lint:js`
-* `npm run lint:js -- --fix`
+- `npm run lint:hbs`
+- `npm run lint:js`
+- `npm run lint:js -- --fix`
 
 ### Building
 
-* `ember build` (development)
-* `ember build --environment production` (production)
+- `ember build` (development)
+- `ember build --environment production` (production)
 
 ### Deploying
 
-The application is deployed to Amazon S3 via Travis CI. See `.travis.yml` for the configuration.
-Assets are served from S3, everything else is redirected to `index.html` so that the Ember router
-can handle all requests:
+The application as Docker containers via GitHub Actions and AWS Fargate.
 
 #### Nginx
 
@@ -88,11 +85,12 @@ custom_error_response {
 
 ### Note on Patches/Pull Requests
 
-* Fork the project
-* Write tests for your new feature or a test that reproduces a bug
-* Implement your feature or make a bug fix
-* Do not mess with Rakefile, version or history
-* Commit, push and make a pull request. Bonus points for topical branches.
+- Fork the project
+- Write tests for your new feature or a test that reproduces a bug
+- Implement your feature or make a bug fix
+- Do not mess with Rakefile, version or history
+- Commit, push and make a pull request. Bonus points for topical branches.
 
 ## License
+
 **bracco** is released under the [MIT License](https://github.com/datacite/bracco/blob/master/LICENSE).
