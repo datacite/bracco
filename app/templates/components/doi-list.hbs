@@ -16,7 +16,7 @@
             Can't create DOI without a prefix.
           </BsAlert>
         {{/if}}
-        {{#if (eq repository.isActive true)}}
+        {{#if repository.isActive}}
           <div class="btn-toolbar">
             <div class="btn-group-vertical btn-group-sm">
               {{#if (gt repository.meta.prefixCount 0)}}

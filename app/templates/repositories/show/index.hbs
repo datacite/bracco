@@ -39,9 +39,7 @@
                   Delete Repository
                 </LinkTo>
               {{/if}}
-              {{#if
-                (and (can 'transfer repository' model) (eq model.isActive true))
-              }}
+              {{#if (and (can 'transfer repository' model) model.isActive)}}
                 <LinkTo
                   @route="repositories.show.transfer-repository"
                   @model={{model.id}}
