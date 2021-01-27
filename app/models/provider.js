@@ -2,7 +2,7 @@ import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
 import { computed } from '@ember/object';
 // import ENV from 'bracco/config/environment';
 import { validator, buildValidations } from 'ember-cp-validations';
-import { fragment } from 'ember-data-model-fragments/attributes';
+// import { fragment } from 'ember-data-model-fragments/attributes';
 import addressFormatter from '@fragaria/address-formatter';
 
 const Validations = buildValidations({
@@ -146,13 +146,13 @@ export default Model.extend(Validations, {
   twitterHandle: attr('string'),
   logo: attr(),
   billingInformation: attr('billingInformation'),
-  technicalContact: fragment('contact'),
-  secondaryTechnicalContact: fragment('contact'),
-  billingContact: fragment('contact'),
-  secondaryBillingContact: fragment('contact'),
-  secondaryServiceContact: fragment('contact'),
-  serviceContact: fragment('contact'),
-  votingContact: fragment('contact'),
+  // technicalContact: fragment('contact'),
+  // secondaryTechnicalContact: fragment('contact'),
+  // billingContact: fragment('contact'),
+  // secondaryBillingContact: fragment('contact'),
+  // secondaryServiceContact: fragment('contact'),
+  // serviceContact: fragment('contact'),
+  // votingContact: fragment('contact'),
   joined: attr('date'),
   created: attr('date'),
   updated: attr('date'),

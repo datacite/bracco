@@ -1,6 +1,4 @@
-import { attr } from '@ember-data/model';
-import Fragment from 'ember-data-model-fragments/fragment';
-import { computed } from '@ember/object';
+import Model, { attr, belongsTo } from '@ember-data/model';
 import { validator, buildValidations } from 'ember-cp-validations';
 
 const Validations = buildValidations({
@@ -11,16 +9,18 @@ const Validations = buildValidations({
   ]
 });
 
-export default Fragment.extend(Validations, {
+export default Model.extend(Validations, {
+  provider: belongsTo('provider', {
+    async: true
+  }),
+
+  meta: attr(),
+
   email: attr('string'),
   givenName: attr('string'),
   familyName: attr('string'),
-
-  name: computed('givenName', 'familyName', function () {
-    let name = null;
-    if (this.givenName || this.familyName) {
-      name = [this.givenName, this.familyName].join(' ');
-    }
-    return name;
-  })
+  name: attr('string'),
+  created: attr('date'),
+  updated: attr('date'),
+  deleted: attr('date')
 });

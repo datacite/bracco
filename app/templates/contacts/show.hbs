@@ -1,0 +1,80 @@
+{{#if (can 'read contact' model provider=model.provider)}}
+  <ApplicationHeader @default={{true}} />
+  <div class="container-fluid">
+    {{#if (can 'read provider' model.provider)}}
+      <ol class="breadcrumb">
+        {{#if (can 'read index')}}
+          <li class="breadcrumb-item">
+            <LinkTo @route="index">
+              DataCite
+            </LinkTo>
+          </li>
+          <li class="breadcrumb-item">
+            <LinkTo @route="providers">
+              Members
+            </LinkTo>
+          </li>
+        {{/if}}
+        {{#if
+          (and
+            (can 'read provider' model.provider.consortium)
+            (eq model.provider.memberType 'consortium_organization')
+          )
+        }}
+          <li class="breadcrumb-item">
+            <LinkTo
+              @route="providers.show.index"
+              @model={{model.provider.consortium.id}}
+            >
+              {{model.provider.consortium.name}}
+            </LinkTo>
+          </li>
+          <li class="breadcrumb-item">
+            <LinkTo
+              @route="providers.show.organizations"
+              @model={{model.provider.consortium.id}}
+            >
+              Consortium Organizations
+            </LinkTo>
+          </li>
+        {{/if}}
+        <li class="breadcrumb-item">
+          <LinkTo @route="providers.show" @model={{model.provider.id}}>
+            {{model.provider.name}}
+          </LinkTo>
+        </li>
+        <li class="breadcrumb-item">
+          <LinkTo @route="providers.show.contacts" @model={{model.provider.id}}>
+            Contacts
+          </LinkTo>
+        </li>
+      </ol>
+    {{/if}}
+    <div id="show">
+      <h2 class="work">
+        {{model.name}}
+      </h2>
+      <div class="tab-content nav-tabs-member">
+        <BsNav
+          @type="tabs"
+          @justified={{false}}
+          @stacked={{false}}
+          @fill={{false}} as |nav|
+        >
+          <nav.item>
+            <nav.link-to
+              @route="contacts.show.index"
+              model="model.id"
+              class="nav-link"
+            >
+              Settings
+            </nav.link-to>
+          </nav.item>
+        </BsNav>
+      </div>
+    </div>
+    {{outlet}}
+  </div>
+{{else}}
+  <ApplicationHeader /><LandingPage />
+{{/if}}
