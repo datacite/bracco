@@ -113,16 +113,3 @@ jobs:
           github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           repository: 'datacite/mastino'
           branch: 'refs/heads/master'
-
-      - name: Notify Slack
-        uses: edge/simple-slack-notify@master
-        with:
-          channel: '#ops'
-          color: 'good'
-          text: 'Version <https://github.com/${{ github.repository }}/releases/tag/${{ steps.extract_variables.outputs.GIT_TAG }}|${{ steps.extract_variables.outputs.GIT_TAG }}> of <https://doi.datacite.org|Fabrica> is being released to test and production.'
-          failure_text: '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) build failed'
-          fields: |
-            [{ "title": "Committed by", "value": "<https://github.com/${{ github.repository }}/commits?author=${{ github.actor }}|${{ github.actor }}>", "short": true },
-             { "title": "Commit SHA", "value": "<https://github.com/${{ github.repository }}/commit/${{ steps.extract_variables.outputs.GIT_SHA }}|${{ steps.extract_variables.outputs.GIT_SHA_SHORT }}>", "short": true },
-             { "title": "Repository", "value": "<https://github.com/${{ github.repository }}|${{ github.repository }}>", "short": true },
-             { "title": "Release", "value": "<https://github.com/${{ github.repository }}/releases/tag/${{ steps.extract_variables.outputs.GIT_TAG }}|${{ steps.extract_variables.outputs.GIT_TAG }}>", "short": true }]

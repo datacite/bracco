@@ -15,12 +15,6 @@ export default Route.extend({
     });
   },
 
-  // afterModel() {
-  //   if (this.get('can').cannot('create prefix')) {
-  //     return this.transitionTo('index');
-  //   }
-  // },
-
   setupController(controller, model) {
     this._super(controller, model);
 
@@ -36,6 +30,15 @@ export default Route.extend({
     },
     refreshCurrentRoute() {
       this.refresh();
+    }
+  },
+
+  afterModel() {
+    if (this.can.cannot('read index')) {
+      this.transitionTo(
+        'repositories.show.prefixes',
+        this.modelFor('repositories/show')
+      );
     }
   }
 });

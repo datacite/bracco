@@ -1,6 +1,6 @@
 {
   "name": "bracco",
-  "version": "3.9.29",
+  "version": "3.9.31",
   "private": true,
   "description": "Fabrica",
   "repository": {
@@ -168,8 +168,5 @@
     "urijs": "^1.19.2",
     "vkbeautify": "^0.99.3",
     "xml2js": "^0.4.23"
-  },
-  "engines": {
-    "node": ">= 10.*"
   }
 }
