@@ -2,24 +2,24 @@ import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
 import {
   currentURL,
-  visit,
+  visit
   // pauseTest,
 } from '@ember/test-helpers';
 import ENV from 'bracco/config/environment';
 import { authenticateSession } from 'ember-simple-auth/test-support';
 import { setupQunit as setupPolly } from '@pollyjs/core';
 
-module('Acceptance | staff_admin | organization', function(hooks) {
+module('Acceptance | staff_admin | organization', function (hooks) {
   setupPolly(hooks, {
     matchRequestsBy: {
       headers: {
-        exclude: [ 'authorization' ],
-      },
-    },
+        exclude: ['authorization']
+      }
+    }
   });
   setupApplicationTest(hooks);
 
-  hooks.beforeEach(async function() {
+  hooks.beforeEach(async function () {
     const { server } = this.polly;
 
     server.any().on('request', (req) => {
@@ -35,17 +35,19 @@ module('Acceptance | staff_admin | organization', function(hooks) {
       }
 
       /* filter out authorization tokens */
-      recording.request.headers = recording.request.headers.filter(({ name }) => name !== 'authorization');
+      recording.request.headers = recording.request.headers.filter(
+        ({ name }) => name !== 'authorization'
+      );
     });
 
     await authenticateSession({
       uid: 'admin',
       name: 'Admin',
-      role_id: 'staff_admin',
+      role_id: 'staff_admin'
     });
   });
 
-  test('visiting provider DC consortium organizations', async function(assert) {
+  test('visiting provider DC consortium organizations', async function (assert) {
     await visit('/providers/dc/organizations');
 
     assert.equal(currentURL(), '/providers/dc/organizations');
@@ -60,10 +62,12 @@ module('Acceptance | staff_admin | organization', function(hooks) {
 
     // consortium member can add consortium organizations
     assert.dom('a#add-organization').includesText('Add Organization');
-    assert.dom('a#add-organization').hasAttribute('href', '/providers/dc/organizations/new');
+    assert
+      .dom('a#add-organization')
+      .hasAttribute('href', '/providers/dc/organizations/new');
   });
 
-  test('visiting provider DC consortium organization workshop', async function(assert) {
+  test('visiting provider DC consortium organization workshop', async function (assert) {
     await visit('/providers/workshop');
 
     assert.equal(currentURL(), '/providers/workshop');
@@ -72,15 +76,19 @@ module('Acceptance | staff_admin | organization', function(hooks) {
 
     // staff can edit or delete consortium organization
     assert.dom('a#edit-provider').includesText('Update Organization');
-    assert.dom('a#edit-provider').hasAttribute('href', '/providers/workshop/edit');
+    assert
+      .dom('a#edit-provider')
+      .hasAttribute('href', '/providers/workshop/edit');
 
     // staff can edit or delete consortium organization
     assert.dom('a#delete-provider').includesText('Delete Organization');
-    assert.dom('a#delete-provider').hasAttribute('href', '/providers/workshop/delete');
+    assert
+      .dom('a#delete-provider')
+      .hasAttribute('href', '/providers/workshop/delete');
   });
 
-  test('new organization form', async function(assert) {
-    assert.expect(33);
+  test('new organization form', async function (assert) {
+    assert.expect(21);
 
     await visit('/providers/dc/organizations/new');
 
@@ -105,25 +113,27 @@ module('Acceptance | staff_admin | organization', function(hooks) {
     assert.dom('div#focus-area').exists();
     assert.dom('textarea#description-field').exists();
 
-    assert.dom('input#service-contact-given-name').exists();
-    assert.dom('input#service-contact-family-name').exists();
-    assert.dom('input#service-contact-email').exists();
-    assert.dom('input#secondary-service-contact-given-name').exists();
-    assert.dom('input#secondary-service-contact-family-name').exists();
-    assert.dom('input#secondary-service-contact-email').exists();
-    assert.dom('input#technical-contact-given-name').exists();
-    assert.dom('input#technical-contact-family-name').exists();
-    assert.dom('input#technical-contact-email').exists();
-    assert.dom('input#secondary-technical-contact-given-name').exists();
-    assert.dom('input#secondary-technical-contact-family-name').exists();
-    assert.dom('input#secondary-technical-contact-email').exists();
+    // assert.dom('input#service-contact-given-name').exists();
+    // assert.dom('input#service-contact-family-name').exists();
+    // assert.dom('input#service-contact-email').exists();
+    // assert.dom('input#secondary-service-contact-given-name').exists();
+    // assert.dom('input#secondary-service-contact-family-name').exists();
+    // assert.dom('input#secondary-service-contact-email').exists();
+    // assert.dom('input#technical-contact-given-name').exists();
+    // assert.dom('input#technical-contact-family-name').exists();
+    // assert.dom('input#technical-contact-email').exists();
+    // assert.dom('input#secondary-technical-contact-given-name').exists();
+    // assert.dom('input#secondary-technical-contact-family-name').exists();
+    // assert.dom('input#secondary-technical-contact-email').exists();
     assert.dom('input#is-active-field').exists();
 
-    assert.dom('button#add-organization').includesText('Add Consortium Organization');
+    assert
+      .dom('button#add-organization')
+      .includesText('Add Consortium Organization');
   });
 
-  test('editing organization DataCite form', async function(assert) {
-    assert.expect(33);
+  test('editing organization DataCite form', async function (assert) {
+    assert.expect(21);
 
     await visit('/providers/datacite/edit');
 
@@ -148,18 +158,18 @@ module('Acceptance | staff_admin | organization', function(hooks) {
     assert.dom('div#focus-area').exists();
     assert.dom('textarea#description-field').exists();
 
-    assert.dom('input#service-contact-given-name').exists();
-    assert.dom('input#service-contact-family-name').exists();
-    assert.dom('input#service-contact-email').exists();
-    assert.dom('input#secondary-service-contact-given-name').exists();
-    assert.dom('input#secondary-service-contact-family-name').exists();
-    assert.dom('input#secondary-service-contact-email').exists();
-    assert.dom('input#technical-contact-given-name').exists();
-    assert.dom('input#technical-contact-family-name').exists();
-    assert.dom('input#technical-contact-email').exists();
-    assert.dom('input#secondary-technical-contact-given-name').exists();
-    assert.dom('input#secondary-technical-contact-family-name').exists();
-    assert.dom('input#secondary-technical-contact-email').exists();
+    // assert.dom('input#service-contact-given-name').exists();
+    // assert.dom('input#service-contact-family-name').exists();
+    // assert.dom('input#service-contact-email').exists();
+    // assert.dom('input#secondary-service-contact-given-name').exists();
+    // assert.dom('input#secondary-service-contact-family-name').exists();
+    // assert.dom('input#secondary-service-contact-email').exists();
+    // assert.dom('input#technical-contact-given-name').exists();
+    // assert.dom('input#technical-contact-family-name').exists();
+    // assert.dom('input#technical-contact-email').exists();
+    // assert.dom('input#secondary-technical-contact-given-name').exists();
+    // assert.dom('input#secondary-technical-contact-family-name').exists();
+    // assert.dom('input#secondary-technical-contact-email').exists();
     assert.dom('input#is-active-field').exists();
 
     assert.dom('button#update-provider').includesText('Update Organization');

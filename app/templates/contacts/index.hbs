@@ -3,7 +3,7 @@
   <div class="container-fluid">
     <IndexHeader />
     <div class="col-md-3">
-      {{#if model.meta.roles}}
+      {{#if model.contacts.meta.roles}}
         <div class="panel facets add">
           <div class="panel-body">
             <h4>
@@ -16,14 +16,14 @@
               </span>
             </h4>
             <ul>
-              {{#each model.meta.roles as |role|}}
+              {{#each model.contacts.meta.roles as |role|}}
                 <li>
-                  {{#if model.query.role}}
-                    <LinkTo @route="contacts" @query={{hash role=null}}>
+                  {{#if (eq model.contacts.query.role-name role.id)}}
+                    <LinkTo @route="contacts" @query={{hash role-name=null}}>
                       <i class="far fa-check-square"></i>
                     </LinkTo>
                   {{else}}
-                    <LinkTo @route="contacts" @query={{hash role=role.id}}>
+                    <LinkTo @route="contacts" @query={{hash role-name=role.id}}>
                       <i class="far fa-square"></i>
                     </LinkTo>
                   {{/if}}
@@ -40,63 +40,51 @@
           </div>
         </div>
       {{/if}}
-      {{#if model.meta.providers}}
-        <div class="panel facets">
-          <div class="panel-body">
-            <h4>
-              Member
-            </h4>
-            <ul>
-              {{#each model.meta.providers as |provider|}}
-                <li>
-                  {{#if model.query.provider-id}}
-                    <LinkTo @route="prefixes" @query={{hash provider-id=null}}>
-                      <i class="far fa-check-square"></i>
-                    </LinkTo>
-                  {{else}}
-                    <LinkTo
-                      @route="prefixes"
-                      @query={{hash provider-id=provider.id}}
-                    >
-                      <i class="far fa-square"></i>
-                    </LinkTo>
-                  {{/if}}
-                  <div class="facet-title">
-                    {{provider.title}}
-                  </div>
-                  <span class="number pull-right">
-                    {{provider.count}}
-                  </span>
-                  <div class="clearfix"></div>
-                </li>
-              {{/each}}
-            </ul>
-          </div>
-        </div>
-      {{/if}}
     </div>
     <div class="col-md-9 panel-list" id="content">
       <ModelSearch
-        @model={{model}}
+        @model={{model.contacts}}
         @name="Contact"
         @sortable={{true}}
         @link="contacts"
       />
-      {{#if model}}
-        {{#each model as |contact|}}
+      {{#if (gt model.contacts.length 0)}}
+        {{#each model.contacts as |contact|}}
           <div class="panel panel-transparent" data-test-prefix>
             <div class="panel-body">
               <h3 class="member">
-                {{contact.id}}
+                {{contact.name}}
               </h3>
               <h5>
-                {{contact.provider.name 'Member'}}
+                Member
               </h5>
+              <LinkTo
+                @route="providers.show.contacts"
+                @model={{contact.provider.id}}
+              >
+                {{contact.provider.name}}
+              </LinkTo>
+              <h5>
+                Email
+              </h5>
+              <a href="mailto:{{contact.email}}">
+                {{contact.email}}
+              </a>
+              <h5>
+                Roles
+              </h5>
+              {{#if (gt contact.roleName.length 0)}}
+                {{contact.roleNameString}}
+              {{else}}
+                <span class="icon-warning">
+                  No roles found.
+                </span>
+              {{/if}}
               <h5>
                 Created
               </h5>
               {{format-time
-                contact.createdAt
+                contact.created
                 year='numeric'
                 month='long'
                 day='numeric'
@@ -111,8 +99,8 @@
           </div>
         {{/each}}
         <div class="text-center">
-          {{#if (gt model.meta.totalPages 1)}}
-            <PageNumbers @model={{model}} @link="contacts" />
+          {{#if (gt model.contacts.meta.totalPages 1)}}
+            <PageNumbers @model={{model.contacts}} @link="contacts" />
           {{/if}}
         </div>
       {{else}}

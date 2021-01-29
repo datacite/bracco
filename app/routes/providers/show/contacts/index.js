@@ -5,18 +5,28 @@ import { inject as service } from '@ember/service';
 
 export default Route.extend({
   can: service(),
+  features: service(),
 
   model(params) {
+    let providerId = null;
+    let consortiumId = null;
+    let model = this.modelFor('providers/show');
+    if (model.memberType === 'consortium') {
+      consortiumId = model.get('id');
+    } else {
+      providerId = model.get('id');
+    }
     params = assign(params, {
       page: {
         number: params.page,
         size: params.size
       },
-      include: 'provider'
+      'provider-id': providerId,
+      'consortium-id': consortiumId
     });
 
     return hash({
-      provider: null,
+      provider: this.modelFor('providers/show'),
       contacts: this.store
         .query('contact', params)
         .then(function (result) {
@@ -42,7 +52,7 @@ export default Route.extend({
   },
 
   afterModel() {
-    if (this.can.cannot('read index')) {
+    if (this.can.cannot('read provider', this.modelFor('providers/show'))) {
       this.transitionTo('index');
     }
   }

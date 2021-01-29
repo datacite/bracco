@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
-import { currentURL, visit, click, fillIn } from '@ember/test-helpers';
+import { currentURL, visit } from '@ember/test-helpers';
 // import { selectChoose, selectSearch } from 'ember-power-select/test-support';
 import ENV from 'bracco/config/environment';
 import { authenticateSession } from 'ember-simple-auth/test-support';
@@ -186,7 +186,7 @@ module('Acceptance | staff_admin | provider', function (hooks) {
   });
 
   test('new provider form', async function (assert) {
-    assert.expect(48);
+    assert.expect(27);
 
     await visit('/providers/new');
 
@@ -211,27 +211,27 @@ module('Acceptance | staff_admin | provider', function (hooks) {
     assert.dom('div#focus-area').exists();
     assert.dom('textarea#description-field').exists();
 
-    assert.dom('input#service-contact-given-name').exists();
-    assert.dom('input#service-contact-family-name').exists();
-    assert.dom('input#service-contact-email').exists();
-    assert.dom('input#secondary-service-contact-given-name').exists();
-    assert.dom('input#secondary-service-contact-family-name').exists();
-    assert.dom('input#secondary-service-contact-email').exists();
-    assert.dom('input#technical-contact-given-name').exists();
-    assert.dom('input#technical-contact-family-name').exists();
-    assert.dom('input#technical-contact-email').exists();
-    assert.dom('input#secondary-technical-contact-given-name').exists();
-    assert.dom('input#secondary-technical-contact-family-name').exists();
-    assert.dom('input#secondary-technical-contact-email').exists();
-    assert.dom('input#voting-contact-given-name').exists();
-    assert.dom('input#voting-contact-family-name').exists();
-    assert.dom('input#voting-contact-email').exists();
-    assert.dom('input#billing-contact-given-name').exists();
-    assert.dom('input#billing-contact-family-name').exists();
-    assert.dom('input#billing-contact-email').exists();
-    assert.dom('input#secondary-billing-contact-given-name').exists();
-    assert.dom('input#secondary-billing-contact-family-name').exists();
-    assert.dom('input#secondary-billing-contact-email').exists();
+    // assert.dom('input#service-contact-given-name').exists();
+    // assert.dom('input#service-contact-family-name').exists();
+    // assert.dom('input#service-contact-email').exists();
+    // assert.dom('input#secondary-service-contact-given-name').exists();
+    // assert.dom('input#secondary-service-contact-family-name').exists();
+    // assert.dom('input#secondary-service-contact-email').exists();
+    // assert.dom('input#technical-contact-given-name').exists();
+    // assert.dom('input#technical-contact-family-name').exists();
+    // assert.dom('input#technical-contact-email').exists();
+    // assert.dom('input#secondary-technical-contact-given-name').exists();
+    // assert.dom('input#secondary-technical-contact-family-name').exists();
+    // assert.dom('input#secondary-technical-contact-email').exists();
+    // assert.dom('input#voting-contact-given-name').exists();
+    // assert.dom('input#voting-contact-family-name').exists();
+    // assert.dom('input#voting-contact-email').exists();
+    // assert.dom('input#billing-contact-given-name').exists();
+    // assert.dom('input#billing-contact-family-name').exists();
+    // assert.dom('input#billing-contact-email').exists();
+    // assert.dom('input#secondary-billing-contact-given-name').exists();
+    // assert.dom('input#secondary-billing-contact-family-name').exists();
+    // assert.dom('input#secondary-billing-contact-email').exists();
 
     assert.dom('input#billing-information-organization-field').exists();
     assert.dom('input#billing-information-department-field').exists();
@@ -245,7 +245,7 @@ module('Acceptance | staff_admin | provider', function (hooks) {
   });
 
   test('editing provider TIB form', async function (assert) {
-    assert.expect(48);
+    assert.expect(27);
 
     await visit('/providers/tib/edit');
 
@@ -272,27 +272,27 @@ module('Acceptance | staff_admin | provider', function (hooks) {
     assert.dom('div#focus-area').exists();
     assert.dom('textarea#description-field').exists();
 
-    assert.dom('input#service-contact-given-name').exists();
-    assert.dom('input#service-contact-family-name').exists();
-    assert.dom('input#service-contact-email').exists();
-    assert.dom('input#secondary-service-contact-given-name').exists();
-    assert.dom('input#secondary-service-contact-family-name').exists();
-    assert.dom('input#secondary-service-contact-email').exists();
-    assert.dom('input#technical-contact-given-name').exists();
-    assert.dom('input#technical-contact-family-name').exists();
-    assert.dom('input#technical-contact-email').exists();
-    assert.dom('input#secondary-technical-contact-given-name').exists();
-    assert.dom('input#secondary-technical-contact-family-name').exists();
-    assert.dom('input#secondary-technical-contact-email').exists();
-    assert.dom('input#voting-contact-given-name').exists();
-    assert.dom('input#voting-contact-family-name').exists();
-    assert.dom('input#voting-contact-email').exists();
-    assert.dom('input#billing-contact-given-name').exists();
-    assert.dom('input#billing-contact-family-name').exists();
-    assert.dom('input#billing-contact-email').exists();
-    assert.dom('input#secondary-billing-contact-given-name').exists();
-    assert.dom('input#secondary-billing-contact-family-name').exists();
-    assert.dom('input#secondary-billing-contact-email').exists();
+    // assert.dom('input#service-contact-given-name').exists();
+    // assert.dom('input#service-contact-family-name').exists();
+    // assert.dom('input#service-contact-email').exists();
+    // assert.dom('input#secondary-service-contact-given-name').exists();
+    // assert.dom('input#secondary-service-contact-family-name').exists();
+    // assert.dom('input#secondary-service-contact-email').exists();
+    // assert.dom('input#technical-contact-given-name').exists();
+    // assert.dom('input#technical-contact-family-name').exists();
+    // assert.dom('input#technical-contact-email').exists();
+    // assert.dom('input#secondary-technical-contact-given-name').exists();
+    // assert.dom('input#secondary-technical-contact-family-name').exists();
+    // assert.dom('input#secondary-technical-contact-email').exists();
+    // assert.dom('input#voting-contact-given-name').exists();
+    // assert.dom('input#voting-contact-family-name').exists();
+    // assert.dom('input#voting-contact-email').exists();
+    // assert.dom('input#billing-contact-given-name').exists();
+    // assert.dom('input#billing-contact-family-name').exists();
+    // assert.dom('input#billing-contact-email').exists();
+    // assert.dom('input#secondary-billing-contact-given-name').exists();
+    // assert.dom('input#secondary-billing-contact-family-name').exists();
+    // assert.dom('input#secondary-billing-contact-email').exists();
 
     assert.dom('input#billing-information-organization-field').exists();
     assert.dom('input#billing-information-department-field').exists();

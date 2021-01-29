@@ -1,5 +1,7 @@
 import Model, { attr, belongsTo } from '@ember-data/model';
 import { validator, buildValidations } from 'ember-cp-validations';
+import { computed } from '@ember/object';
+import _string from 'lodash/string';
 
 const Validations = buildValidations({
   email: [
@@ -20,7 +22,16 @@ export default Model.extend(Validations, {
   givenName: attr('string'),
   familyName: attr('string'),
   name: attr('string'),
+  roleName: attr(),
   created: attr('date'),
   updated: attr('date'),
-  deleted: attr('date')
+  deleted: attr('date'),
+
+  roleNameString: computed('roleName', function () {
+    return this.roleName
+      .map(function (role) {
+        return _string.upperFirst(_string.lowerCase(role));
+      })
+      .join(', ');
+  })
 });

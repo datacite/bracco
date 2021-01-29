@@ -21,6 +21,9 @@ Router.map(function () {
         });
         this.route('new');
       });
+      this.route('contacts', function () {
+        this.route('new');
+      });
       this.route('organizations', function () {
         this.route('new');
       });

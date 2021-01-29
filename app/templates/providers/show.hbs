@@ -85,6 +85,15 @@
             </nav.link-to>
           </nav.item>
         {{/if}}
+        <nav.item>
+          <nav.link-to
+            @route="providers.show.contacts"
+            model="model.id"
+            class="nav-link"
+          >
+            Contacts
+          </nav.link-to>
+        </nav.item>
         {{#if (not-eq model.memberType 'member_only')}}
           <nav.item>
             <nav.link-to

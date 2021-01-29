@@ -1,47 +1,67 @@
-<form {{action "doSearch" query on="submit"}} class="form-horizontal">
+<form class="form-horizontal" {{action 'doSearch' query on='submit'}}>
   <div id="search" class="input-group">
-    <Input @name="query" @value={{query}} class="form-control" placeholder="Type to search..." @escape-press={{action "clear"}} @enter={{action "doSearch"}} />
+    <Input
+      @name="query"
+      @value={{query}}
+      class="form-control"
+      placeholder="Type to search..."
+      @escape-press={{action 'clear'}}
+      @enter={{action 'doSearch'}}
+    />
     {{#if hasInput}}
-      <span id="search-clear" title="Clear" aria-label="Clear" {{action "clear"}}>
+      <span
+        id="search-clear"
+        title="Clear"
+        aria-label="Clear"
+        {{action 'clear'}}
+      >
         <i class="fas fa-times-circle"></i>
       </span>
     {{/if}}
     <div class="input-group-btn">
-      <button type="submit" class="btn btn-primary hidden-xs">Search</button>
+      <button type="submit" class="btn btn-primary hidden-xs">
+        Search
+      </button>
     </div>
   </div>
-
-  {{#if hasFilters}}  
+  {{#if hasFilters}}
     <span class="help-block">
-      <LinkTo @route={{link}} @query={{hash page=1
-        size=25
-        sort=null
-        query=null 
-        created=null 
-        registered=null 
-        state=null 
-        resource-type-id=null 
-        schema-version=null 
-        prefix=null 
-        client-id=null
-        consortium-organization-id=null
-        affiliation-id=null 
-        source=null 
-        year=null 
-        provider-id=null 
-        region=null
-        member-type=null 
-        organization-type=null 
-        focus-area=null 
-        link-check-status=null
-        client-type=null
-        repository-type=null
-        non-profit-status=null
-        certificate=null
-        software=null
-        has-citations=null
-        has-views=null
-        has-downloads=null}}>Reset All
+      <LinkTo
+        @route={{link}}
+        @query={{hash
+          page=1
+          size=25
+          sort=null
+          query=null
+          created=null
+          registered=null
+          state=null
+          resource-type-id=null
+          schema-version=null
+          prefix=null
+          client-id=null
+          consortium-organization-id=null
+          affiliation-id=null
+          source=null
+          year=null
+          provider-id=null
+          region=null
+          member-type=null
+          organization-type=null
+          focus-area=null
+          link-check-status=null
+          client-type=null
+          repository-type=null
+          non-profit-status=null
+          certificate=null
+          software=null
+          has-citations=null
+          has-views=null
+          has-downloads=null
+          role-name=null
+        }}
+      >
+        Reset All
       </LinkTo>
     </span>
   {{/if}}
@@ -49,13 +69,17 @@
 {{#if (gt model.meta.total 1)}}
   {{#if sortable}}
     <div id="sort" class="input-group pull-right">
-      <select onchange={{action "sort" value="target.value"}}>
+      <select onchange={{action 'sort' value='target.value'}}>
         {{#each-in formats as |key value|}}
-          <option name="sort" value={{key}} selected={{eq sort key}}>{{value}}</option>
+          <option name="sort" value={{key}} selected={{eq sort key}}>
+            {{value}}
+          </option>
         {{/each-in}}
       </select>
     </div>
   {{/if}}
-
-  <h3 class="member-results" data-test-results>{{format-number model.meta.total}} {{pluralize model.meta.total modelName without-count=true}}</h3>
+  <h3 class="member-results" data-test-results>
+    {{format-number model.meta.total}}
+    {{pluralize model.meta.total modelName without-count=true}}
+  </h3>
 {{/if}}
