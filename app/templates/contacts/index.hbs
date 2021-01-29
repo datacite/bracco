@@ -52,8 +52,10 @@
         {{#each model.contacts as |contact|}}
           <div class="panel panel-transparent" data-test-prefix>
             <div class="panel-body">
-              <h3 class="member">
-                {{contact.name}}
+              <h3 class="work">
+                <LinkTo @route="contacts.show" @model={{contact.id}}>
+                  {{contact.name}}
+                </LinkTo>
               </h3>
               <h5>
                 Member

@@ -1,0 +1,60 @@
+<div class="row">
+  <div class="col-md-3">
+    {{#if (can 'update contact' model)}}
+      <div class="panel facets">
+        <div class="panel-body">
+          <div class="btn-toolbar">
+            <div class="btn-group-vertical btn-group-sm">
+              <LinkTo
+                @route="contacts.show.edit"
+                @model={{model.id}}
+                class="btn btn-warning"
+                @id="edit-contact"
+              >
+                <i class="fas fa-pencil-alt"></i>
+                Update Contact
+              </LinkTo>
+              {{#if (can 'delete contact' model)}}
+                <LinkTo
+                  @route="contacts.show.delete"
+                  @model={{model.id}}
+                  class="btn btn-warning"
+                  @id="delete-contact"
+                >
+                  <i class="fas fa-trash"></i>
+                  Delete Contact
+                </LinkTo>
+              {{/if}}
+            </div>
+          </div>
+        </div>
+      </div>
+    {{/if}}
+    <RepositorySidebar @model={{model}} />
+  </div>
+  <div class="col-md-9">
+    <h3 class="member-results">
+      Contact Information
+    </h3>
+    <div class="panel panel-transparent">
+      <div class="panel-body">
+        <h5>
+          Email
+        </h5>
+        <a href="mailto:{{model.email}}">
+          {{model.email}}
+        </a>
+        <h5>
+          Roles
+        </h5>
+        {{#if (gt model.roleName.length 0)}}
+          {{model.roleNameString}}
+        {{else}}
+          <span class="icon-warning">
+            No roles found.
+          </span>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</div>

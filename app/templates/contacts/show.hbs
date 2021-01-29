@@ -54,26 +54,8 @@
       <h2 class="work">
         {{model.name}}
       </h2>
-      <div class="tab-content nav-tabs-member">
-        <BsNav
-          @type="tabs"
-          @justified={{false}}
-          @stacked={{false}}
-          @fill={{false}} as |nav|
-        >
-          <nav.item>
-            <nav.link-to
-              @route="contacts.show.index"
-              model="model.id"
-              class="nav-link"
-            >
-              Settings
-            </nav.link-to>
-          </nav.item>
-        </BsNav>
-      </div>
+      {{outlet}}
     </div>
-    {{outlet}}
   </div>
 {{else}}
   <ApplicationHeader /><LandingPage />
