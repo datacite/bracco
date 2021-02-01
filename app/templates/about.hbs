@@ -1,0 +1,45 @@
+<ApplicationHeader @default={{true}} />
+<div class="wrapper">
+  <div class="section section-white">
+    <div class="row row-section">
+      <div class="container-fluid">
+        <div class="col-md-6">
+          <h3 class="member">
+            About
+          </h3>
+          <p>
+            DataCite Fabrica is the one place for you to create and find, connect and track every single DOI from your organization.
+            Fabrica complements the
+            <a href="https://api.datacite.org">
+              REST
+            </a>
+            ,
+            <a href="https://mds.datacite.org">
+              MDS
+            </a>
+            ,
+            <a href="https://ez.datacite.org">
+              EZ
+            </a>
+            ,
+            <a href="https://oai.datacite.org">
+              OAI-PMH
+            </a>
+            , and
+            <a href="https://api.datacite.org/graphql">
+              GraphQL
+            </a>
+            APIs. Fabrica includes all the functionalities needed to manage 
+            repositories, prefixes, DOIs and their metadata. Please sign in with your member credentials to use the service.
+          </p>
+          <h3 class="member">
+            Version
+          </h3>
+          {{app-version versionOnly=true}}
+          -
+          {{app-version shaOnly=true}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
