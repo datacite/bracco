@@ -17,12 +17,13 @@ jobs:
         run: |
           yarn
           ./node_modules/.bin/ember test
-          
+
       - name: Cypress run
         uses: cypress-io/github-action@v2
         with:
           start: yarn start
           wait-on: 'http://localhost:4200'
+          wait-on-timeout: 600
           quiet: true
           record: true
           parallel: true
