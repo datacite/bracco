@@ -1,8 +1,8 @@
-name: Deploy
+name: Deploy Master
 on:
   push:
     branches:
-      - "stage"
+      - "master"
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -60,18 +60,16 @@ jobs:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.ORG_ID}}
           vercel-project-id: ${{ secrets.PROJECT_ID}}
+          vercel-args: '--prod'
           scope: ${{ secrets.TEAM_ID}}
           vercel-project-name: 'bracco'
-          alias-domains: |
-            doi.datacite.vercel.app
-            doi.stage.datacite.org
     
       - name: Notify Slack
         uses: edge/simple-slack-notify@master
         with:
           channel: '#ops'
           color: 'good'
-          text: 'A new version of <https://doi.stage.datacite.org|Fabrica> has been deployed to stage.'
+          text: 'A new version of <https://doi.stage.datacite.org|Fabrica> has been deployed to master.'
           failure_text: '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) build failed'
           fields: |
             [{ "title": "Commit message", "value": "${{ github.event.head_commit.message }}" },
