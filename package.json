@@ -22,8 +22,8 @@
     "start": "ember server",
     "test": "ember test",
     "ci": "NODE_ENV=test ember serve & wait-on http://localhost:4200 && yarn cy:run --record --quiet",
-    "cy:open": "cypress open",
-    "cy:run": "cypress run"
+    "cy:open": "./node_modules/.bin/cypress open",
+    "cy:run": "./node_modules/.bin/cypress run"
   },
   "dependencies": {
     "@fragaria/address-formatter": "^2.2.1",
@@ -75,7 +75,7 @@
     "broccoli-asset-rev": "^3.0.0",
     "checkdigit": "^1.1.1",
     "compression": "^1.7.4",
-    "cypress": "6.2.1",
+    "cypress": "6.4.0",
     "d3-array": "^2.4.0",
     "d3-axis": "^1.0.12",
     "d3-format": "^1.4.3",

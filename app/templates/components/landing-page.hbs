@@ -1,13 +1,19 @@
 <div class="wrapper">
-  <div class="landing-header" style="background-image: url('https://datacite.org/images/fabrica/header.png');">
+  <div
+    class="landing-header"
+    style="background-image: url('https://datacite.org/images/fabrica/header.png');"
+  >
     <div class="container-fluid">
       <div class="motto">
-        <h1>{{site-title}}</h1>
-        <p>Register and manage DOIs and metadata.</p>
+        <h1>
+          {{site-title}}
+        </h1>
+        <p>
+          Register and manage DOIs and metadata.
+        </p>
       </div>
     </div>
   </div>
-
   <div class="section section-white">
     <div class="row row-section">
       <div class="container-fluid">
@@ -15,16 +21,35 @@
           {{#each flashMessages.queue as |flash|}}
             <FlashMessage @flash={{flash}} />
           {{/each}}
-
-          <p>DataCite Fabrica is the one place for you to create and find, connect and track every single DOI from your organization.
-            Fabrica complements the <a href="https://api.datacite.org">REST</a>, <a href="https://mds.datacite.org">MDS</a>, 
-            <a href="https://ez.datacite.org">EZ</a>, <a href="https://oai.datacite.org">OAI-PMH</a>, and <a href="https://api.datacite.org/graphql">GraphQL</a> APIs. Fabrica includes all the functionalities needed to manage 
-            repositories, prefixes, DOIs and their metadata. Please sign in to use the service.</p>
+          <p>
+            DataCite Fabrica is the one place for you to create and find, connect and track every single DOI from your organization.
+            Fabrica complements the
+            <a href="https://api.datacite.org">
+              REST
+            </a>
+            ,
+            <a href="https://mds.datacite.org">
+              MDS
+            </a>
+            ,
+            <a href="https://ez.datacite.org">
+              EZ
+            </a>
+            ,
+            <a href="https://oai.datacite.org">
+              OAI-PMH
+            </a>
+            , and
+            <a href="https://api.datacite.org/graphql">
+              GraphQL
+            </a>
+            APIs. Fabrica includes all the functionalities needed to manage 
+            repositories, prefixes, DOIs and their metadata. Please sign in with your member credentials to use the service.
+          </p>
         </div>
       </div>
     </div>
   </div>
-
   <div class="section section-white">
     <div class="row row-section">
       <div class="container-fluid">
@@ -32,27 +57,39 @@
           <div class="icon icon-landing">
             <i class="fas fa-sitemap"></i>
           </div>
-          <h3>Repositories</h3>
+          <h3>
+            Repositories
+          </h3>
           <div class="description-centered">
-            <p>Use Fabrica to manage your repositories.</p>
+            <p>
+              Use Fabrica to manage your repositories.
+            </p>
           </div>
         </div>
         <div class="col-sm-2 col-sm-offset-1 info">
           <div class="icon icon-landing">
             <i class="fas fa-tags"></i>
           </div>
-          <h3>Prefixes</h3>
+          <h3>
+            Prefixes
+          </h3>
           <div class="description-centered">
-            <p>Use Fabrica to manage your prefixes.</p>
+            <p>
+              Use Fabrica to manage your prefixes.
+            </p>
           </div>
         </div>
         <div class="col-sm-2 col-sm-offset-1 info">
           <div class="icon icon-landing">
             <i class="fas fa-file-alt"></i>
           </div>
-          <h3>DOIs</h3>
+          <h3>
+            DOIs
+          </h3>
           <div class="description-centered">
-            <p>Register and manage DOIs and their metadata through Fabrica.</p>
+            <p>
+              Register and manage DOIs and their metadata through Fabrica.
+            </p>
           </div>
         </div>
       </div>

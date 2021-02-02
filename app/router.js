@@ -82,6 +82,8 @@ Router.map(function () {
   this.route('change');
   this.route('info');
 
+  this.route('about');
+
   this.route('sign-in');
   this.route('authorize');
   this.route('reset');

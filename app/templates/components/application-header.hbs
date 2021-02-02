@@ -1,17 +1,28 @@
 <BsNavbar
-  @type={{type}} 
-  @fluid={{true}} 
-  @collapsed={{collapsed}} 
-  @onCollapse={{action (mut collapsed) true}} 
-  @onExpand={{action (mut collapsed) false}} as |navbar|>
-
+  @type={{type}}
+  @fluid={{true}}
+  @collapsed={{collapsed}}
+  @onCollapse={{action (mut collapsed) true}}
+  @onExpand={{action (mut collapsed) false}} as |navbar|
+>
   <div class="navbar-header">
     {{navbar.toggle}}
-    <a href="/" class="navbar-brand">{{title}}</a>
+    <a href="/" class="navbar-brand">
+      {{title}}
+    </a>
   </div>
   <navbar.content>
     <navbar.nav class="navbar-right" as |nav|>
-      <nav.item><a target="_blank" rel="noopener" href="https://support.datacite.org">Support</a></nav.item>
+      <nav.item>
+        <LinkTo @route="about" @id="about">
+          About
+        </LinkTo>
+      </nav.item>
+      <nav.item>
+        <a target="_blank" rel="noopener" href="https://support.datacite.org">
+          Support
+        </a>
+      </nav.item>
       {{#if user}}
         {{#if session.isAuthenticated}}
           <nav.dropdown as |dd|>
@@ -22,22 +33,38 @@
                 {{uppercase currentUser.uid}}
               {{/if}}
               <span class="caret"></span>
-            </dd.toggle> 
+            </dd.toggle>
             <dd.menu class="navbar-menu" as |menu|>
               <menu.item class="dropdown-header">
-                Role: {{currentUser.roleName}}
+                Role:
+                {{currentUser.roleName}}
               </menu.item>
               <menu.item>
-                <DynamicLink @params={{settings}}><i class="fas fa-cog"></i> Settings</DynamicLink>
+                <DynamicLink @params={{settings}}>
+                  <i class="fas fa-cog"></i>
+                  Settings
+                </DynamicLink>
               </menu.item>
-              <menu.divider/>
+              <menu.divider />
               <menu.item>
-                <a {{action "invalidateSession"}}><i class="fas fa-sign-out-alt"></i> Sign out</a>
+                <a {{action 'invalidateSession'}}>
+                  <i class="fas fa-sign-out-alt"></i>
+                  Sign out
+                </a>
               </menu.item>
             </dd.menu>
           </nav.dropdown>
         {{else}}
-          <nav.item><LinkTo @route="sign-in" @id="sign-in" class="btn btn-sm btn-neutral"><i class="fas fa-sign-in-alt"></i> {{t "user.signin"}}</LinkTo></nav.item>
+          <nav.item>
+            <LinkTo
+              @route="sign-in"
+              @id="sign-in"
+              class="btn btn-sm btn-neutral"
+            >
+              <i class="fas fa-sign-in-alt"></i>
+              {{t 'user.signin'}}
+            </LinkTo>
+          </nav.item>
         {{/if}}
       {{/if}}
     </navbar.nav>
