@@ -36,8 +36,11 @@
             Version
           </h3>
           {{app-version versionOnly=true}}
-          -
-          {{app-version shaOnly=true}}
+          {{#if
+            (not-eq (app-version versionOnly=true) (app-version shaOnly=true))
+          }}
+            -{{' '}}{{app-version shaOnly=true}}
+          {{/if}}
         </div>
       </div>
     </div>
