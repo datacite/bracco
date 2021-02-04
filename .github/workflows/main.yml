@@ -63,13 +63,23 @@ jobs:
           vercel-args: '--prod'
           scope: ${{ secrets.TEAM_ID}}
           vercel-project-name: 'bracco'
+
+      - name: Vercel deploy test
+        uses: amondnet/vercel-action@v20.0.0
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.ORG_ID}}
+          vercel-project-id: ${{ secrets.PROJECT_ID}}
+          vercel-args: '--prod'
+          scope: ${{ secrets.TEAM_ID}}
+          vercel-project-name: 'bracco-test'
     
       - name: Notify Slack
         uses: edge/simple-slack-notify@master
         with:
           channel: '#ops'
           color: 'good'
-          text: 'A new version of <https://doi.stage.datacite.org|Fabrica> has been deployed to main.'
+          text: 'A new version of <https://doi.stage.datacite.org|Fabrica> has been deployed to test and main.'
           failure_text: '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) build failed'
           fields: |
             [{ "title": "Commit message", "value": "${{ github.event.head_commit.message }}" },
