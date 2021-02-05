@@ -5,6 +5,9 @@ import _string from 'lodash/string';
 
 const Validations = buildValidations({
   email: [
+    validator('presence', {
+      presence: true
+    }),
     validator('email-format', {
       allowBlank: true
     })

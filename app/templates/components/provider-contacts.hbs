@@ -1,0 +1,79 @@
+<h3 class="member-results">
+  Contact Information
+</h3>
+<div class="panel panel-transparent">
+  <div class="panel-body">
+    {{#if (not-eq model.memberType 'consortium_organization')}}
+      <h5>
+        Voting Representative
+      </h5>
+      <div>
+        {{#if model.votingContact}}
+          {{format-contact model.votingContact}}
+        {{else}}
+          <span class="small icon-warning">
+            Please provide this information.
+          </span>
+        {{/if}}
+      </div>
+    {{/if}}
+    <h5>
+      Service Contact
+    </h5>
+    <div>
+      {{#if model.serviceContact}}
+        {{format-contact model.serviceContact}}
+      {{else}}
+        <span class="small icon-warning">
+          Please provide this information.
+        </span>
+      {{/if}}
+    </div>
+    {{#if model.secondaryServiceContact}}
+      <h5>
+        Secondary Service Contact
+      </h5>
+      <div>
+        {{format-contact model.secondaryServiceContact}}
+      </div>
+    {{/if}}
+    {{#if model.technicalContact}}
+      <h5>
+        Technical Contact
+      </h5>
+      <div>
+        {{format-contact model.technicalContact}}
+      </div>
+    {{/if}}
+    {{#if model.secondaryTechnicalContact}}
+      <h5>
+        Secondary Technical Contact
+      </h5>
+      <div>
+        {{format-contact model.secondaryTechnicalContact}}
+      </div>
+    {{/if}}
+    {{#if (not-eq model.memberType 'consortium_organization')}}
+      <h5>
+        Billing Contact
+      </h5>
+      <div>
+        {{#if model.billingContact}}
+          {{format-contact model.billingContact}}
+        {{else}}
+          <span class="small icon-warning">
+            Please provide this information.
+          </span>
+        {{/if}}
+      </div>
+      {{#if model.secondaryBillingContact}}
+        <h5>
+          Secondary Billing Contact
+        </h5>
+        <div>
+          {{format-contact model.secondaryBillingContact}}
+        </div>
+      {{/if}}
+    {{/if}}
+  </div>
+</div>

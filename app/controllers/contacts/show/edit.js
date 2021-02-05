@@ -10,8 +10,8 @@ export default Controller.extend({
       let self = this;
       contact
         .save()
-        .then(function (contact) {
-          self.transitionToRoute('contacts.show', contact);
+        .then(function (con) {
+          self.transitionToRoute('contacts.show', con);
         })
         .catch(function (reason) {
           console.debug(reason);

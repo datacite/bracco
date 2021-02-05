@@ -4,6 +4,7 @@ import { computed } from '@ember/object';
 import { w } from '@ember/string';
 import countryList from 'iso-3166-country-list';
 import FileReader from 'ember-file-upload/system/file-reader';
+import { reads } from '@ember/object/computed';
 
 // states and provinces use iso-3166-2 codes
 const stateList = [
@@ -192,9 +193,233 @@ export default Controller.extend({
     this._super(...args);
 
     this.organizations = this.organizations || [];
+    this.votingContacts = this.votingContacts || [];
+    this.serviceContacts = this.serviceContacts || [];
+    this.secondaryServiceContacts = this.secondaryServiceContacts || [];
+    this.technicalContacts = this.technicalContacts || [];
+    this.secondaryTechnicalContacts = this.secondaryTechnicalContacts || [];
+    this.billingContacts = this.billingContacts || [];
+    this.secondaryBillingContacts = this.secondaryBillingContacts || [];
   },
 
   actions: {
+    searchVotingContact(query) {
+      let self = this;
+      this.store
+        .query('contact', {
+          query,
+          'provider-id': this.model.id,
+          'page[size]': 25
+        })
+        .then(function (contacts) {
+          self.set('votingContacts', contacts);
+        })
+        .catch(function (reason) {
+          console.debug(reason);
+          self.set('votingContacts', []);
+        });
+    },
+    selectVotingContact(contact) {
+      if (contact) {
+        // let self = this;
+        this.store
+          .findRecord('contact', contact.id)
+          .then(function (con) {
+            console.log(con);
+          })
+          .catch(function (reason) {
+            console.debug(reason);
+          });
+      } else {
+        // this.model.set('contact', null);
+      }
+    },
+    searchServiceContact(query) {
+      let self = this;
+      this.store
+        .query('contact', {
+          query,
+          'provider-id': this.model.id,
+          'page[size]': 25
+        })
+        .then(function (contacts) {
+          self.set('serviceContacts', contacts);
+        })
+        .catch(function (reason) {
+          console.debug(reason);
+          self.set('serviceContacts', []);
+        });
+    },
+    selectServiceContact(contact) {
+      if (contact) {
+        let self = this;
+        this.store
+          .findRecord('contact', contact.id)
+          .then(function (con) {
+            console.log(self.model.get('contacts'));
+          })
+          .catch(function (reason) {
+            console.debug(reason);
+          });
+      } else {
+        // this.model.set('contact', null);
+      }
+    },
+    searchSecondaryServiceContact(query) {
+      let self = this;
+      this.store
+        .query('contact', {
+          query,
+          'provider-id': this.model.id,
+          'page[size]': 25
+        })
+        .then(function (contacts) {
+          self.set('secondaryServiceContacts', contacts);
+        })
+        .catch(function (reason) {
+          console.debug(reason);
+          self.set('secondaryServiceContacts', []);
+        });
+    },
+    selectSecondaryServiceContact(contact) {
+      if (contact) {
+        // let self = this;
+        this.store
+          .findRecord('contact', contact.id)
+          .then(function (con) {
+            console.log(con);
+          })
+          .catch(function (reason) {
+            console.debug(reason);
+          });
+      } else {
+        // this.model.set('contact', null);
+      }
+    },
+    searchTechnicalContact(query) {
+      let self = this;
+      this.store
+        .query('contact', {
+          query,
+          'provider-id': this.model.id,
+          'page[size]': 25
+        })
+        .then(function (contacts) {
+          self.set('technicalContacts', contacts);
+        })
+        .catch(function (reason) {
+          console.debug(reason);
+          self.set('technicalContacts', []);
+        });
+    },
+    selectTechnicalContact(contact) {
+      if (contact) {
+        // let self = this;
+        this.store
+          .findRecord('contact', contact.id)
+          .then(function (con) {
+            console.log(con);
+          })
+          .catch(function (reason) {
+            console.debug(reason);
+          });
+      } else {
+        // this.model.set('contact', null);
+      }
+    },
+    searchSecondaryTechnicalContact(query) {
+      let self = this;
+      this.store
+        .query('contact', {
+          query,
+          'provider-id': this.model.id,
+          'page[size]': 25
+        })
+        .then(function (contacts) {
+          self.set('secondaryTechnicalContacts', contacts);
+        })
+        .catch(function (reason) {
+          console.debug(reason);
+          self.set('secondaryTechnicalContacts', []);
+        });
+    },
+    selectSecondaryTechnicalContact(contact) {
+      if (contact) {
+        // let self = this;
+        this.store
+          .findRecord('contact', contact.id)
+          .then(function (con) {
+            console.log(con);
+          })
+          .catch(function (reason) {
+            console.debug(reason);
+          });
+      } else {
+        // this.model.set('contact', null);
+      }
+    },
+    searchBillingContact(query) {
+      let self = this;
+      this.store
+        .query('contact', {
+          query,
+          'provider-id': this.model.id,
+          'page[size]': 25
+        })
+        .then(function (contacts) {
+          self.set('billingContacts', contacts);
+        })
+        .catch(function (reason) {
+          console.debug(reason);
+          self.set('billingContacts', []);
+        });
+    },
+    selectBillingContact(contact) {
+      if (contact) {
+        // let self = this;
+        this.store
+          .findRecord('contact', contact.id)
+          .then(function (con) {
+            console.log(con);
+          })
+          .catch(function (reason) {
+            console.debug(reason);
+          });
+      } else {
+        // this.model.set('contact', null);
+      }
+    },
+    searchSecondaryBillingContact(query) {
+      let self = this;
+      this.store
+        .query('contact', {
+          query,
+          'provider-id': this.model.id,
+          'page[size]': 25
+        })
+        .then(function (contacts) {
+          self.set('secondaryBillingContacts', contacts);
+        })
+        .catch(function (reason) {
+          console.debug(reason);
+          self.set('secondaryBillingContacts', []);
+        });
+    },
+    selectSecondaryBillingContact(contact) {
+      if (contact) {
+        // let self = this;
+        this.store
+          .findRecord('contact', contact.id)
+          .then(function (con) {
+            console.log(con);
+          })
+          .catch(function (reason) {
+            console.debug(reason);
+          });
+      } else {
+        // this.model.set('contact', null);
+      }
+    },
     searchCountry(query) {
       let countries = countryList.filter(function (country) {
         return country.name.toLowerCase().startsWith(query.toLowerCase());

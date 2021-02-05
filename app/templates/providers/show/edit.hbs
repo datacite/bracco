@@ -277,6 +277,149 @@
           </div>
         </div>
       {{/if}}
+      <h3 class="member-results">
+        Contact Information
+      </h3>
+      {{#if (not-eq model.memberType 'consortium_organization')}}
+        <form.element
+          @controlType="power-select"
+          @id="voting-contact"
+          @label="Voting Representative"
+          @property="billingInformation.country"
+          @optionLabelPath="name"
+          @options={{votingContacts}}
+          @helpText="Your organization's voting representative."
+          @destination={{billingInformation.country}}
+          @allowClear={{true}} as |el|
+        >
+          <el.control
+            @onChange={{action 'selectVotingContact'}}
+            @search={{action 'searchVotingContact'}}
+            @searchPlaceholder="Type to search..."
+            @placeholder="Select Contact" as |item|
+          >
+            {{item.name}}
+          </el.control>
+        </form.element>
+      {{/if}}
+      <form.element
+        @controlType="power-select"
+        @id="service-contact"
+        @label="Service Contact"
+        @property="billingInformation.country"
+        @optionLabelPath="name"
+        @options={{serviceContacts}}
+        @helpText="Your organization's service contact."
+        @destination={{billingInformation.country}}
+        @allowClear={{true}} as |el|
+      >
+        <el.control
+          @onChange={{action 'selectServiceContact'}}
+          @search={{action 'searchServiceContact'}}
+          @searchPlaceholder="Type to search..."
+          @placeholder="Select Contact" as |item|
+        >
+          {{item.name}}
+        </el.control>
+      </form.element>
+      <form.element
+        @controlType="power-select"
+        @id="secondary-service-contact"
+        @label="Secondary Service Contact"
+        @property="billingInformation.country"
+        @optionLabelPath="name"
+        @options={{secondaryServiceContacts}}
+        @helpText="Your organization's secondary service contact."
+        @destination={{billingInformation.country}} as |el|
+      >
+        <el.control
+          @onChange={{action 'selectSecondaryServiceContact'}}
+          @search={{action 'searchSecondaryServiceContact'}}
+          @searchPlaceholder="Type to search..."
+          @placeholder="Select Contact" as |item|
+        >
+          {{item.name}}
+        </el.control>
+      </form.element>
+      <form.element
+        @controlType="power-select"
+        @id="technical-contact"
+        @label="Technical Contact"
+        @property="billingInformation.country"
+        @optionLabelPath="name"
+        @options={{technicalContacts}}
+        @helpText="Your organization's technical contact."
+        @destination={{billingInformation.country}} as |el|
+      >
+        <el.control
+          @onChange={{action 'selectTechnicalContact'}}
+          @search={{action 'searchTechnicalContact'}}
+          @searchPlaceholder="Type to search..."
+          @placeholder="Select Contact" as |item|
+        >
+          {{item.name}}
+        </el.control>
+      </form.element>
+      <form.element
+        @controlType="power-select"
+        @id="secondary-technical-contact"
+        @label="Secondary Technical Contact"
+        @property="billingInformation.country"
+        @optionLabelPath="name"
+        @options={{secondaryTechnicalContacts}}
+        @helpText="Your organization's secondary technical contact."
+        @destination={{billingInformation.country}} as |el|
+      >
+        <el.control
+          @onChange={{action 'selectSecondaryTechnicalContact'}}
+          @search={{action 'searchSecondaryTechnicalContact'}}
+          @searchPlaceholder="Type to search..."
+          @placeholder="Select Contact" as |item|
+        >
+          {{item.name}}
+        </el.control>
+      </form.element>
+      {{#if (not-eq model.memberType 'consortium_organization')}}
+        <form.element
+          @controlType="power-select"
+          @id="billing-contact"
+          @label="Billing Contact"
+          @property="billingInformation.country"
+          @optionLabelPath="name"
+          @options={{billingContacts}}
+          @helpText="Your organization's billing contact."
+          @destination={{billingInformation.country}} as |el|
+        >
+          <el.control
+            @onChange={{action 'selectBillingContact'}}
+            @search={{action 'searchBillingContact'}}
+            @searchPlaceholder="Type to search..."
+            @placeholder="Select Contact" as |item|
+          >
+            {{item.name}}
+          </el.control>
+        </form.element>
+        <form.element
+          @controlType="power-select"
+          @id="secondary-billing-contact"
+          @label="Secondary Billing Contact"
+          @property="billingInformation.country"
+          @optionLabelPath="name"
+          @options={{secondaryBillingContacts}}
+          @helpText="Your organization's secondary billing contact."
+          @destination={{billingInformation.country}}
+          @allowClear={{true}} as |el|
+        >
+          <el.control
+            @onChange={{action 'selectSecondaryBillingContact'}}
+            @search={{action 'searchSecondaryBillingContact'}}
+            @searchPlaceholder="Type to search..."
+            @placeholder="Select Contact" as |item|
+          >
+            {{item.name}}
+          </el.control>
+        </form.element>
+      {{/if}}
       {{#if (not-eq model.memberType 'consortium_organization')}}
         <h3 class="member-results">
           Billing Information

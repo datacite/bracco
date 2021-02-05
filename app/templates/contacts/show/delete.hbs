@@ -25,7 +25,12 @@
             <button id="cancel" class="btn btn-sm" {{action 'cancel'}}>
               Cancel
             </button>
-            <button id="delete" class="btn btn-sm btn-fill" {{action 'submit'}}>
+            <button
+              disabled={{v-get model 'confirmName' 'isInvalid'}}
+              id="delete"
+              class="btn btn-sm btn-fill"
+              {{action 'submit'}}
+            >
               Delete
             </button>
           </div>

@@ -4,6 +4,7 @@ import { computed } from '@ember/object';
 import { validator, buildValidations } from 'ember-cp-validations';
 // import { fragment } from 'ember-data-model-fragments/attributes';
 import addressFormatter from '@fragaria/address-formatter';
+import { A } from '@ember/array';
 
 const Validations = buildValidations({
   symbol: [
@@ -120,6 +121,11 @@ export default Model.extend(Validations, {
     inverse: 'consortium',
     async: true
   }),
+  contacts: hasMany('contact', {
+    inverse: 'provider',
+    async: true
+  }),
+
   meta: attr(),
 
   name: attr('string'),
