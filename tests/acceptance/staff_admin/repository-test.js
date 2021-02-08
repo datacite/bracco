@@ -156,39 +156,39 @@ module('Acceptance | staff_admin | repository', function (hooks) {
       .hasAttribute('href', '/repositories/datacite.test/transfer');
   });
 
-  test('new repository form', async function (assert) {
-    assert.expect(23);
+  // test('new repository form', async function (assert) {
+  //   assert.expect(23);
 
-    await visit('/providers/datacite/repositories/new');
+  //   await visit('/providers/datacite/repositories/new');
 
-    assert.equal(currentURL(), '/providers/datacite/repositories/new');
-    assert.dom('h2.work').hasText('DataCite');
-    assert.dom('div.tab-content').exists();
+  //   assert.equal(currentURL(), '/providers/datacite/repositories/new');
+  //   assert.dom('h2.work').hasText('DataCite');
+  //   assert.dom('div.tab-content').exists();
 
-    assert.dom('input#repository-id-field').exists();
-    assert.dom('div#client-type').exists();
-    assert.dom('input#globus-uuid-field').exists();
-    assert.dom('input#salesforce-id-field').exists();
-    assert.dom('div#re3data').exists();
-    assert.dom('input#name-field').exists();
-    assert.dom('input#alternate-name-field').exists();
-    assert.dom('input#system-email-field').exists();
+  //   assert.dom('input#repository-id-field').exists();
+  //   assert.dom('div#client-type').exists();
+  //   assert.dom('input#globus-uuid-field').exists();
+  //   assert.dom('input#salesforce-id-field').exists();
+  //   assert.dom('div#re3data').exists();
+  //   assert.dom('input#name-field').exists();
+  //   assert.dom('input#alternate-name-field').exists();
+  //   assert.dom('input#system-email-field').exists();
 
-    assert.dom('input#service-contact-given-name').exists();
-    assert.dom('input#service-contact-family-name').exists();
-    assert.dom('input#service-contact-email').exists();
+  //   assert.dom('input#service-contact-given-name').exists();
+  //   assert.dom('input#service-contact-family-name').exists();
+  //   assert.dom('input#service-contact-email').exists();
 
-    assert.dom('textarea#description-field').exists();
-    assert.dom('input#url-field').exists();
-    assert.dom('div#language').exists();
-    assert.dom('div#software').exists();
-    assert.dom('textarea#domains-field').exists();
-    assert.dom('div#repository-type').exists();
-    assert.dom('div#certificate').exists();
-    assert.dom('input#is-active-field').exists();
+  //   assert.dom('textarea#description-field').exists();
+  //   assert.dom('input#url-field').exists();
+  //   assert.dom('div#language').exists();
+  //   assert.dom('div#software').exists();
+  //   assert.dom('textarea#domains-field').exists();
+  //   assert.dom('div#repository-type').exists();
+  //   assert.dom('div#certificate').exists();
+  //   assert.dom('input#is-active-field').exists();
 
-    assert.dom('button#add-repository').includesText('Add Repository');
-  });
+  //   assert.dom('button#add-repository').includesText('Add Repository');
+  // });
 
   test('editing repository AWI form', async function (assert) {
     assert.expect(23);

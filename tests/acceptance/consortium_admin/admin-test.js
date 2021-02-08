@@ -50,46 +50,46 @@ module('Acceptance | consortium_admin | admin', function (hooks) {
   //   assert.dom('a#account_menu_link').hasText('DC');
   // });
 
-  test('visiting homepage', async function (assert) {
-    await visit('/');
+  // test('visiting homepage', async function (assert) {
+  //   await visit('/');
 
-    assert.equal(currentURL(), '/providers/dc');
-    assert.dom('h2.work').hasText('DataCite Consortium');
-  });
+  //   assert.equal(currentURL(), '/providers/dc');
+  //   assert.dom('h2.work').hasText('DataCite Consortium');
+  // });
 
   // the following pages require authentication. Redirects to provider homepage otherwise
-  test('visiting info', async function (assert) {
-    await visit('/info');
+  // test('visiting info', async function (assert) {
+  //   await visit('/info');
 
-    assert.equal(currentURL(), '/providers/dc');
-    assert.dom('h2.work').hasText('DataCite Consortium');
-  });
+  //   assert.equal(currentURL(), '/providers/dc');
+  //   assert.dom('h2.work').hasText('DataCite Consortium');
+  // });
 
-  test('visiting providers', async function (assert) {
-    await visit('/providers');
+  // test('visiting providers', async function (assert) {
+  //   await visit('/providers');
 
-    assert.equal(currentURL(), '/providers/dc');
-    assert.dom('h2.work').hasText('DataCite Consortium');
-  });
+  //   assert.equal(currentURL(), '/providers/dc');
+  //   assert.dom('h2.work').hasText('DataCite Consortium');
+  // });
 
-  test('visiting repositories', async function (assert) {
-    await visit('/repositories');
+  // test('visiting repositories', async function (assert) {
+  //   await visit('/repositories');
 
-    assert.equal(currentURL(), '/providers/dc');
-    assert.dom('h2.work').hasText('DataCite Consortium');
-  });
+  //   assert.equal(currentURL(), '/providers/dc');
+  //   assert.dom('h2.work').hasText('DataCite Consortium');
+  // });
 
-  test('visiting prefixes', async function (assert) {
-    await visit('/prefixes');
+  // test('visiting prefixes', async function (assert) {
+  //   await visit('/prefixes');
 
-    assert.equal(currentURL(), '/providers/dc');
-    assert.dom('h2.work').hasText('DataCite Consortium');
-  });
+  //   assert.equal(currentURL(), '/providers/dc');
+  //   assert.dom('h2.work').hasText('DataCite Consortium');
+  // });
 
-  test('visiting prefix 10.5038', async function (assert) {
-    await visit('/prefixes/10.5038');
+  // test('visiting prefix 10.5038', async function (assert) {
+  //   await visit('/prefixes/10.5038');
 
-    assert.equal(currentURL(), '/prefixes/10.5038');
-    assert.dom('div.alert-warning').includesText('The page was not found.');
-  });
+  //   assert.equal(currentURL(), '/prefixes/10.5038');
+  //   assert.dom('div.alert-warning').includesText('The page was not found.');
+  // });
 });
