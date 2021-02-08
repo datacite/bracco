@@ -346,7 +346,6 @@ export default Controller.extend({
       let m = this.model;
       // iterate through all contacts and update roles
       this.model.get('contacts').forEach(function (contact) {
-        console.log(m.get('votingContact'));
         let roleName = [];
         if (contact.id === m.get('votingContact.id')) {
           roleName.push('voting');

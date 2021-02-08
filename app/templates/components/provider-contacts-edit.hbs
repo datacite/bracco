@@ -7,15 +7,14 @@
     id='voting-contact'
     label='Voting Representative'
     property='votingContact'
+    searchEnabled=false
     optionLabelPath='name'
-    options=model.votingContacts
+    options=model.contacts
     helpText="Your organization's voting representative."
     destination='votingContact' as |el|
   }}
     <el.control
       @onChange={{action 'selectVotingContact'}}
-      @search={{action 'searchVotingContact'}}
-      @searchPlaceholder="Type to search..."
       @placeholder="Select Contact" as |item|
     >
       {{item.name}}
@@ -27,15 +26,14 @@
   id='service-contact'
   label='Service Contact'
   property='serviceContact'
+  searchEnabled=false
   optionLabelPath='name'
-  options=model.serviceContacts
+  options=model.contacts
   helpText="Your organization's service contact."
   destination=serviceContact as |el|
 }}
   <el.control
     @onChange={{action 'selectServiceContact'}}
-    @search={{action 'searchServiceContact'}}
-    @searchPlaceholder="Type to search..."
     @placeholder="Select Contact" as |item|
   >
     {{item.name}}
@@ -46,15 +44,14 @@
   id='secondary-service-contact'
   label='Secondary Service Contact'
   property='secondaryServiceContact'
+  searchEnabled=false
   optionLabelPath='name'
-  options=model.secondaryServiceContacts
+  options=model.contacts
   helpText="Your organization's secondary service contact."
   destination=secondaryServiceContact as |el|
 }}
   <el.control
     @onChange={{action 'selectSecondaryServiceContact'}}
-    @search={{action 'searchSecondaryServiceContact'}}
-    @searchPlaceholder="Type to search..."
     @placeholder="Select Contact"
     @allowClear={{true}} as |item|
   >
@@ -66,15 +63,14 @@
   id='technical-contact'
   label='Technical Contact'
   property='technicalContact'
+  searchEnabled=false
   optionLabelPath='name'
-  options=model.technicalContacts
+  options=model.contacts
   helpText="Your organization's technical contact."
   destination=technicalContact as |el|
 }}
   <el.control
     @onChange={{action 'selectTechnicalContact'}}
-    @search={{action 'searchTechnicalContact'}}
-    @searchPlaceholder="Type to search..."
     @placeholder="Select Contact"
     @allowClear={{true}} as |item|
   >
@@ -86,15 +82,14 @@
   id='secondary-technical-contact'
   label='Secondary Technical Contact'
   property='secondaryTechnicalContact'
+  searchEnabled=false
   optionLabelPath='name'
-  options=model.secondaryTechnicalContacts
+  options=model.contacts
   helpText="Your organization's secondary technical contact."
   destination=secondaryTechnicalContact as |el|
 }}
   <el.control
     @onChange={{action 'selectSecondaryTechnicalContact'}}
-    @search={{action 'searchSecondaryTechnicalContact'}}
-    @searchPlaceholder="Type to search..."
     @placeholder="Select Contact"
     @allowClear={{true}} as |item|
   >
@@ -107,15 +102,14 @@
     id='billing-contact'
     label='Billing Contact'
     property='billingContact'
+    searchEnabled=false
     optionLabelPath='name'
-    options=model.billingContacts
+    options=model.contacts
     helpText="Your organization's billing contact."
     destination='billingContact' as |el|
   }}
     <el.control
       @onChange={{action 'selectBillingContact'}}
-      @search={{action 'searchBillingContact'}}
-      @searchPlaceholder="Type to search..."
       @placeholder="Select Contact" as |item|
     >
       {{item.name}}
@@ -125,16 +119,15 @@
     controlType='power-select'
     id='secondary-billing-contact'
     label='Secondary Billing Contact'
-    property='model.secondaryBillingContact'
+    property='secondaryBillingContact'
+    searchEnabled=false
     optionLabelPath='name'
-    options=model.secondaryBillingContacts
+    options=model.contacts
     helpText="Your organization's secondary billing contact."
     destination=secondaryBillingContact as |el|
   }}
     <el.control
       @onChange={{action 'selectSecondaryBillingContact'}}
-      @search={{action 'searchSecondaryBillingContact'}}
-      @searchPlaceholder="Type to search..."
       @placeholder="Select Contact"
       @allowClear={{true}} as |item|
     >
