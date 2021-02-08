@@ -79,6 +79,17 @@
                 {{contact.name}}
               </LinkTo>
             </h3>
+            {{#if (eq contact.provider.memberType 'consortium')}}
+              <h5>
+                Member
+              </h5>
+              <LinkTo
+                @route="providers.show.contacts"
+                @model={{contact.provider.id}}
+              >
+                {{contact.provider.name}}
+              </LinkTo>
+            {{/if}}
             <h5>
               Email
             </h5>
