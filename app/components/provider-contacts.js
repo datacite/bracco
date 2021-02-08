@@ -7,16 +7,14 @@ export default Component.extend({
   didReceiveAttrs() {
     this._super(...arguments);
 
-    if (!this.model.get('serviceContact')) {
-      this.getContacts();
-    }
+    this.getContacts();
   },
 
   getContacts() {
     let self = this;
     return this.store
       .query('contact', {
-        'provider-id': this.model.id,
+        'provider-id': this.get('model.id'),
         'page[size]': 25
       })
       .then(function (contacts) {

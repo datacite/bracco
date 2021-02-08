@@ -344,6 +344,35 @@ export default Controller.extend({
     },
     submit() {
       let self = this;
+      // iterate through all contacts and update roles
+      let m = this.model;
+      this.model.get('contacts').forEach(function (contact) {
+        console.log(m.get('votingContact'));
+        let roleName = [];
+        if (contact.id === m.get('votingContact.id')) {
+          roleName.push('voting');
+        }
+        if (contact.id === m.get('serviceContact.id')) {
+          roleName.push('service');
+        }
+        if (contact.id === m.get('secondaryServiceContact.id')) {
+          roleName.push('secondary_service');
+        }
+        if (contact.id === m.get('technicalContact.id')) {
+          roleName.push('technical');
+        }
+        if (contact.id === m.get('secondaryTechnicalContact.id')) {
+          roleName.push('secondary_technical');
+        }
+        if (contact.id === m.get('billingContact.id')) {
+          roleName.push('billing');
+        }
+        if (contact.id === m.get('secondaryBillingContact.id')) {
+          roleName.push('secondary_billing');
+        }
+        contact.set('roleName', roleName);
+        contact.save();
+      });
       this.model
         .save()
         .then(function (provider) {

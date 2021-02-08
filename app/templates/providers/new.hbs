@@ -261,6 +261,7 @@
               </div>
             </div>
           {{/if}}
+          <ProviderContactsEdit @model={{model}} @form={{form}} />
           {{#if (not-eq model.memberType 'consortium_organization')}}
             <h3 class="member-results">
               Billing Information
@@ -358,7 +359,7 @@
             @required={{false}}
             @helpText="This account can manage repositories and prefixes"
           />
-          <div class="col-md-offset-3">
+          <div class="col-md-9 col-md-offset-3">
             <BsAlert @dismissible={{false}} class="opt-in" @type="warning">
               The contacts entered may receive notifications about administration, webinars, product testing, 
               or news that will impact the use of DataCite services and/or membership. Individuals may remove 

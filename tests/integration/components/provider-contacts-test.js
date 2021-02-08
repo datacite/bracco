@@ -1,26 +1,22 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
+import { setupFactoryGuy, make } from 'ember-data-factory-guy';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-module('Integration | Component | provider-contacts', function(hooks) {
+module('Integration | Component | provider-contacts', function (hooks) {
   setupRenderingTest(hooks);
+  setupFactoryGuy(hooks);
 
-  test('it renders', async function(assert) {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.set('myAction', function(val) { ... });
+  test('it renders', async function (assert) {
+    this.set('model', make('provider'));
 
-    await render(hbs`{{provider-contacts}}`);
+    await render(hbs`{{provider-contacts model=model}}`);
 
-    assert.equal(this.element.textContent.trim(), '');
-
-    // Template block usage:
-    await render(hbs`
-      {{#provider-contacts}}
-        template block text
-      {{/provider-contacts}}
-    `);
-
-    assert.equal(this.element.textContent.trim(), 'template block text');
+    assert
+      .dom('*')
+      .containsText(
+        'Contact Information Voting Representative Please provide this information. Service Contact Please provide this information. Billing Contact Please provide this information.'
+      );
   });
 });

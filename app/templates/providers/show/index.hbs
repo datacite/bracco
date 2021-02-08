@@ -173,7 +173,7 @@
         {{/if}}
       </div>
     </div>
-    <ProviderContacts @model={{model}} />
+    <ProviderContacts @model={{model}} @contacts={{model.contacts}} />
     {{#if (not-eq model.memberType 'consortium_organization')}}
       <h3 class="member-results">
         Billing Information
