@@ -23,7 +23,11 @@
                       <i class="far fa-check-square"></i>
                     </LinkTo>
                   {{else}}
-                    <LinkTo @route="contacts" @query={{hash role-name=role.id}}>
+                    <LinkTo
+                      @route="contacts"
+                      @query={{hash role-name=role.id}}
+                      @id="role-name-{{role.id}}"
+                    >
                       <i class="far fa-square"></i>
                     </LinkTo>
                   {{/if}}
@@ -50,7 +54,7 @@
       />
       {{#if (gt model.contacts.length 0)}}
         {{#each model.contacts as |contact|}}
-          <div class="panel panel-transparent" data-test-prefix>
+          <div class="panel panel-transparent" data-test-contact>
             <div class="panel-body">
               <h3 class="work">
                 <LinkTo @route="contacts.show" @model={{contact.id}}>

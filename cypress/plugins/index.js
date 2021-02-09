@@ -31,6 +31,8 @@ module.exports = (on, config) => {
 
   // env variables
   config.env.staff_admin_cookie = process.env.CYPRESS_STAFF_ADMIN_COOKIE;
+  config.env.organization_admin_cookie =
+    process.env.CYPRESS_ORGANIZATION_ADMIN_COOKIE;
 
   return config;
 };

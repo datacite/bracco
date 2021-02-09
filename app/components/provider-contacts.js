@@ -11,7 +11,7 @@ export default Component.extend({
   },
 
   getContacts() {
-    if (this.model) {
+    if (this.model && Array.isArray(this.model.get('contacts'))) {
       this.model.set(
         'votingContact',
         this.model
