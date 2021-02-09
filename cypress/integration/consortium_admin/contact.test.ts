@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 /* eslint-disable no-undef */
 
-describe('Organization Admin: Contact', () => {
+describe('Consortium Admin: Contact', () => {
   beforeEach(() => {
     cy.setCookie('_consent', 'true');
     cy.setCookie('_fabrica', Cypress.env('consortium_admin_cookie'), {

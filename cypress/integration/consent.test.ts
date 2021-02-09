@@ -2,7 +2,7 @@
 /* eslint-disable no-undef */
 
 describe('Consent', () => {
-  const sizes = ['ipad-2', [1024, 768]];
+  const sizes = ['iphone-6', 'samsung-s10', 'ipad-2', [1024, 768]];
 
   sizes.forEach((size) => {
     it(`index on ${size} screen`, () => {

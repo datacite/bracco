@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 /* eslint-disable no-undef */
 
-describe('Anonymous: Provider', () => {
+describe('Anonymous: DOI', () => {
   beforeEach(() => {
     cy.setCookie('_consent', 'true');
   });
