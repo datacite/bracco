@@ -17,6 +17,8 @@
 
 /// <reference types="cypress" />
 
+require('dotenv').config();
+
 const browserify = require('@cypress/browserify-preprocessor');
 
 module.exports = (on, config) => {
@@ -26,6 +28,9 @@ module.exports = (on, config) => {
   on('file:preprocessor', browserify(options));
 
   require('@cypress/code-coverage/task')(on, config);
+
+  // env variables
+  config.env.staff_admin_cookie = process.env.CYPRESS_STAFF_ADMIN_COOKIE;
 
   return config;
 };
