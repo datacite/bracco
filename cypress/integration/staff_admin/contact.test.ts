@@ -107,26 +107,26 @@ describe('Admin: Contact', () => {
     cy.get('button#delete').contains('Delete');
   });
 
-  it('show member settings', () => {
-    cy.visit('/providers/issda');
-    cy.location().should((loc) => {
-      expect(loc.pathname).to.eq('/providers/issda');
-    });
+  // it('show member settings', () => {
+  //   cy.visit('/providers/issda');
+  //   cy.location().should((loc) => {
+  //     expect(loc.pathname).to.eq('/providers/issda');
+  //   });
 
-    cy.get('h2.work').contains('Irish Social Science Data Archive (ISSDA)');
-    cy.get('h3.member-results').contains('Contact Information');
-    cy.get('[cy-data="service"]').contains('John Howard');
-  });
+  //   cy.get('h2.work').contains('Irish Social Science Data Archive (ISSDA)');
+  //   cy.get('h3.member-results').contains('Contact Information');
+  //   cy.get('[cy-data="service"]').contains('John Howard');
+  // });
 
-  it('edit member settings', () => {
-    cy.visit('/providers/issda/edit');
-    cy.location().should((loc) => {
-      expect(loc.pathname).to.eq('/providers/issda/edit');
-    });
+  // it('edit member settings', () => {
+  //   cy.visit('/providers/issda/edit');
+  //   cy.location().should((loc) => {
+  //     expect(loc.pathname).to.eq('/providers/issda/edit');
+  //   });
 
-    cy.get('h2.work').contains('Irish Social Science Data Archive (ISSDA)');
-    cy.get('h3.edit').contains('Update Organization');
-    cy.get('h3.member-results').contains('Contact Information');
-    cy.get('div#service-contact').contains('John Howard');
-  });
+  //   cy.get('h2.work').contains('Irish Social Science Data Archive (ISSDA)');
+  //   cy.get('h3.edit').contains('Update Organization');
+  //   cy.get('h3.member-results').contains('Contact Information');
+  //   cy.get('div#service-contact').contains('John Howard');
+  // });
 });
