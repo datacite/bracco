@@ -65,8 +65,6 @@ export default Component.extend({
     },
     selectServiceContact(contact) {
       if (contact) {
-        console.log(contact);
-        // contact.roleName.set(['service_contact']);
         this.model.set('serviceContact', contact);
       }
     },
