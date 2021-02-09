@@ -11,7 +11,7 @@ describe('Anonymous: Admin', () => {
     cy.location().should((loc) => {
       expect(loc.pathname).to.eq('/');
     });
-    cy.get('a#account_menu_link', { timeout: 30000 }).should('not.exist');
+    cy.get('a#account_menu_link').should('not.exist');
   });
 
   // the following pages require authentication. Redirects to homepage otherwise
@@ -20,9 +20,7 @@ describe('Anonymous: Admin', () => {
     cy.location().should((loc) => {
       expect(loc.pathname).to.eq('/');
     });
-    cy.get('div.motto h1', { timeout: 30000 }).contains(
-      'DataCite Fabrica Stage'
-    );
+    cy.get('div.motto h1').contains('DataCite Fabrica Stage');
   });
 
   it('visiting providers', () => {
@@ -30,9 +28,7 @@ describe('Anonymous: Admin', () => {
     cy.location().should((loc) => {
       expect(loc.pathname).to.eq('/');
     });
-    cy.get('div.motto h1', { timeout: 30000 }).contains(
-      'DataCite Fabrica Stage'
-    );
+    cy.get('div.motto h1').contains('DataCite Fabrica Stage');
   });
 
   it('visiting repositories', () => {
@@ -40,9 +36,15 @@ describe('Anonymous: Admin', () => {
     cy.location().should((loc) => {
       expect(loc.pathname).to.eq('/');
     });
-    cy.get('div.motto h1', { timeout: 30000 }).contains(
-      'DataCite Fabrica Stage'
-    );
+    cy.get('div.motto h1').contains('DataCite Fabrica Stage');
+  });
+
+  it('visiting contacts', () => {
+    cy.visit('/contacts');
+    cy.location().should((loc) => {
+      expect(loc.pathname).to.eq('/');
+    });
+    cy.get('div.motto h1').contains('DataCite Fabrica Stage');
   });
 
   it('visiting prefixes', () => {
@@ -50,9 +52,7 @@ describe('Anonymous: Admin', () => {
     cy.location().should((loc) => {
       expect(loc.pathname).to.eq('/');
     });
-    cy.get('div.motto h1', { timeout: 30000 }).contains(
-      'DataCite Fabrica Stage'
-    );
+    cy.get('div.motto h1').contains('DataCite Fabrica Stage');
   });
 
   it('visiting prefix 10.80225', () => {
@@ -60,9 +60,7 @@ describe('Anonymous: Admin', () => {
     cy.location().should((loc) => {
       expect(loc.pathname).to.eq('/prefixes/10.80225');
     });
-    cy.get('div.alert-warning', { timeout: 30000 }).contains(
-      'The page was not found.'
-    );
+    cy.get('div.alert-warning').contains('The page was not found.');
   });
 
   it('visiting dois', () => {
@@ -70,8 +68,6 @@ describe('Anonymous: Admin', () => {
     cy.location().should((loc) => {
       expect(loc.pathname).to.eq('/');
     });
-    cy.get('div.motto h1', { timeout: 30000 }).contains(
-      'DataCite Fabrica Stage'
-    );
+    cy.get('div.motto h1').contains('DataCite Fabrica Stage');
   });
 });

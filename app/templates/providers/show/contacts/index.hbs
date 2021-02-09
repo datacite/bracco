@@ -1,4 +1,4 @@
-{{#if (can 'read provider')}}
+{{#if (can 'read provider' model.provider)}}
   <div class="col-md-3">
     <div class="panel facets">
       <div class="panel-body">
@@ -44,6 +44,7 @@
                   <LinkTo
                     @route="providers.show.contacts"
                     @model={{model.provider.id}}
+                    @id="role-name-{{role.id}}"
                     @query={{hash role-name=role.id}}
                   >
                     <i class="far fa-square"></i>
@@ -72,14 +73,14 @@
     />
     {{#if (gt model.contacts.length 0)}}
       {{#each model.contacts as |contact|}}
-        <div class="panel panel-transparent" data-test-prefix>
+        <div class="panel panel-transparent" data-test-contact>
           <div class="panel-body">
             <h3 class="work">
               <LinkTo @route="contacts.show" @model={{contact.id}}>
                 {{contact.name}}
               </LinkTo>
             </h3>
-            {{#if (eq contact.provider.memberType 'consortium')}}
+            {{#if (eq model.provider.memberType 'consortium')}}
               <h5>
                 Member
               </h5>

@@ -12,9 +12,7 @@ describe('Anonymous: Provider', () => {
     cy.location().should((loc) => {
       expect(loc.pathname).to.eq('/');
     });
-    cy.get('div.motto h1', { timeout: 30000 }).contains(
-      'DataCite Fabrica Stage'
-    );
+    cy.get('div.motto h1').contains('DataCite Fabrica Stage');
   });
 
   it('visiting provider TIB info', () => {
@@ -22,9 +20,7 @@ describe('Anonymous: Provider', () => {
     cy.location().should((loc) => {
       expect(loc.pathname).to.eq('/');
     });
-    cy.get('div.motto h1', { timeout: 30000 }).contains(
-      'DataCite Fabrica Stage'
-    );
+    cy.get('div.motto h1').contains('DataCite Fabrica Stage');
   });
 
   it('visiting provider TIB repositories', () => {
@@ -32,9 +28,7 @@ describe('Anonymous: Provider', () => {
     cy.location().should((loc) => {
       expect(loc.pathname).to.eq('/');
     });
-    cy.get('div.motto h1', { timeout: 30000 }).contains(
-      'DataCite Fabrica Stage'
-    );
+    cy.get('div.motto h1').contains('DataCite Fabrica Stage');
   });
 
   it('visiting provider TIB prefixes', () => {
@@ -42,9 +36,7 @@ describe('Anonymous: Provider', () => {
     cy.location().should((loc) => {
       expect(loc.pathname).to.eq('/');
     });
-    cy.get('div.motto h1', { timeout: 30000 }).contains(
-      'DataCite Fabrica Stage'
-    );
+    cy.get('div.motto h1').contains('DataCite Fabrica Stage');
   });
 
   it('visiting provider TIB dois', () => {
@@ -52,8 +44,6 @@ describe('Anonymous: Provider', () => {
     cy.location().should((loc) => {
       expect(loc.pathname).to.eq('/');
     });
-    cy.get('div.motto h1', { timeout: 30000 }).contains(
-      'DataCite Fabrica Stage'
-    );
+    cy.get('div.motto h1').contains('DataCite Fabrica Stage');
   });
 });

@@ -36,6 +36,7 @@ jobs:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CYPRESS_STAFF_ADMIN_COOKIE: ${{ secrets.CYPRESS_STAFF_ADMIN_COOKIE }}
+          CYPRESS_CONSORTIUM_ADMIN_COOKIE: ${{ secrets.CYPRESS_CONSORTIUM_ADMIN_COOKIE }}
           CYPRESS_ORGANIZATION_ADMIN_COOKIE: ${{ secrets.CYPRESS_ORGANIZATION_ADMIN_COOKIE }}
 
       - name: Publish code coverage
