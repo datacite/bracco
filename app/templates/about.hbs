@@ -35,9 +35,11 @@
           <h3 class="member">
             Version
           </h3>
-          {{app-version versionOnly=true}}
-          -
-          {{app-version shaOnly=true}}
+          <div data-cy="version">
+            {{app-version versionOnly=true}}
+            -
+            {{app-version shaOnly=true}}
+          </div>
         </div>
       </div>
     </div>

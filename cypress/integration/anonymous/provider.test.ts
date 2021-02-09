@@ -1,14 +1,14 @@
 /// <reference types="cypress" />
 /* eslint-disable no-undef */
 
-describe('Anonymous: Repository', () => {
+describe('Anonymous: Provider', () => {
   beforeEach(() => {
     cy.setCookie('_consent', 'true');
   });
 
   // the following pages require authentication. Redirects to homepage otherwise
-  it('visiting repository AWI', () => {
-    cy.visit('/repositories/tib.awi');
+  it('visiting provider TIB', () => {
+    cy.visit('/providers/tib');
     cy.location().should((loc) => {
       expect(loc.pathname).to.eq('/');
     });
@@ -17,8 +17,8 @@ describe('Anonymous: Repository', () => {
     );
   });
 
-  it('visiting repository AWI info', () => {
-    cy.visit('/repositories/tib.awi/info');
+  it('visiting provider TIB info', () => {
+    cy.visit('/providers/tib/info');
     cy.location().should((loc) => {
       expect(loc.pathname).to.eq('/');
     });
@@ -27,8 +27,8 @@ describe('Anonymous: Repository', () => {
     );
   });
 
-  it('visiting repository AWI prefixes', () => {
-    cy.visit('/repositories/tib.awi/prefixes');
+  it('visiting provider TIB repositories', () => {
+    cy.visit('/providers/tib/repositories');
     cy.location().should((loc) => {
       expect(loc.pathname).to.eq('/');
     });
@@ -37,8 +37,18 @@ describe('Anonymous: Repository', () => {
     );
   });
 
-  it('visiting repository AWI dois', () => {
-    cy.visit('/repositories/tib.awi/dois');
+  it('visiting provider TIB prefixes', () => {
+    cy.visit('/providers/tib/prefixes');
+    cy.location().should((loc) => {
+      expect(loc.pathname).to.eq('/');
+    });
+    cy.get('div.motto h1', { timeout: 30000 }).contains(
+      'DataCite Fabrica Stage'
+    );
+  });
+
+  it('visiting provider TIB dois', () => {
+    cy.visit('/providers/tib/dois');
     cy.location().should((loc) => {
       expect(loc.pathname).to.eq('/');
     });
