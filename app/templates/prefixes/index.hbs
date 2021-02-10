@@ -1,16 +1,21 @@
-{{#if (can "read index")}}
+{{#if (can 'read index')}}
   <ApplicationHeader @default={{true}} />
-
   <div class="container-fluid">
     <IndexHeader />
-
-    <div class='col-md-3'>
-      {{#if (can "write prefix")}}
+    <div class="col-md-3">
+      {{#if (can 'write prefix')}}
         <div class="panel facets">
           <div class="panel-body">
             <div class="btn-toolbar">
               <div class="btn-group btn-group-sm">
-                <LinkTo @route="prefixes.new" class="btn btn-warning" @id="add-prefixes"><i class="fas fa-link"></i>Add Prefixes</LinkTo>
+                <LinkTo
+                  @route="prefixes.new"
+                  class="btn btn-warning"
+                  @id="add-prefixes"
+                >
+                  <i class="fas fa-link"></i>
+                  Add Prefixes
+                </LinkTo>
               </div>
             </div>
           </div>
@@ -22,44 +27,72 @@
           </div>
         </div>
       {{/if}}
-
       {{#if model.meta.states}}
         <div class="panel facets add">
           <div class="panel-body">
-            <h4>State <span class="small"><i class="fas fa-question-circle"></i><BsTooltip @placement="top">Filter prefixes by whether they have been assigned to a provider and/or repository.</BsTooltip></span></h4>
+            <h4>
+              State
+              <span class="small">
+                <i class="fas fa-question-circle"></i>
+                <BsTooltip @placement="top">
+                  Filter prefixes by whether they have been assigned to a provider and/or repository.
+                </BsTooltip>
+              </span>
+            </h4>
             <ul>
               {{#each model.meta.states as |state|}}
                 <li>
                   {{#if model.query.state}}
-                    <LinkTo @route="prefixes" @query={{hash state=null}}><i class="far fa-check-square"></i></LinkTo>
+                    <LinkTo @route="prefixes" @query={{hash state=null}}>
+                      <i class="far fa-check-square"></i>
+                    </LinkTo>
                   {{else}}
-                    <LinkTo @route="prefixes" @query={{hash state=state.id}}><i class="far fa-square"></i></LinkTo>
+                    <LinkTo
+                      @id="prefix-{{state.id}}"
+                      @route="prefixes"
+                      @query={{hash state=state.id}}
+                    >
+                      <i class="far fa-square"></i>
+                    </LinkTo>
                   {{/if}}
-                  <div class="facet-title">{{state.title}}</div>
-                  <span class="number pull-right">{{state.count}}</span>
-                  <div class="clearfix"/>
+                  <div class="facet-title">
+                    {{state.title}}
+                  </div>
+                  <span class="number pull-right">
+                    {{state.count}}
+                  </span>
+                  <div class="clearfix"></div>
                 </li>
               {{/each}}
             </ul>
           </div>
         </div>
       {{/if}}
-
       {{#if model.meta.years}}
         <div class="panel facets add">
           <div class="panel-body">
-            <h4>Year created</h4>
+            <h4>
+              Year created
+            </h4>
             <ul>
               {{#each model.meta.years as |year|}}
                 <li>
                   {{#if model.query.year}}
-                    <LinkTo @route="prefixes" @query={{hash year=null}}><i class="far fa-check-square"></i></LinkTo>
+                    <LinkTo @route="prefixes" @query={{hash year=null}}>
+                      <i class="far fa-check-square"></i>
+                    </LinkTo>
                   {{else}}
-                    <LinkTo @route="prefixes" @query={{hash year=year.id}}><i class="far fa-square"></i></LinkTo>
+                    <LinkTo @route="prefixes" @query={{hash year=year.id}}>
+                      <i class="far fa-square"></i>
+                    </LinkTo>
                   {{/if}}
-                  <div class="facet-title">{{year.title}}</div>
-                  <span class="number pull-right">{{year.count}}</span>
-                  <div class="clearfix"/>
+                  <div class="facet-title">
+                    {{year.title}}
+                  </div>
+                  <span class="number pull-right">
+                    {{year.count}}
+                  </span>
+                  <div class="clearfix"></div>
                 </li>
               {{/each}}
             </ul>
@@ -69,18 +102,31 @@
       {{#if model.meta.providers}}
         <div class="panel facets">
           <div class="panel-body">
-            <h4>Member</h4>
+            <h4>
+              Member
+            </h4>
             <ul>
               {{#each model.meta.providers as |provider|}}
                 <li>
                   {{#if model.query.provider-id}}
-                    <LinkTo @route="prefixes" @query={{hash provider-id=null}}><i class="far fa-check-square"></i></LinkTo>
+                    <LinkTo @route="prefixes" @query={{hash provider-id=null}}>
+                      <i class="far fa-check-square"></i>
+                    </LinkTo>
                   {{else}}
-                    <LinkTo @route="prefixes" @query={{hash provider-id=provider.id}}><i class="far fa-square"></i></LinkTo>
+                    <LinkTo
+                      @route="prefixes"
+                      @query={{hash provider-id=provider.id}}
+                    >
+                      <i class="far fa-square"></i>
+                    </LinkTo>
                   {{/if}}
-                  <div class="facet-title">{{provider.title}}</div>
-                  <span class="number pull-right">{{provider.count}}</span>
-                  <div class="clearfix"/>
+                  <div class="facet-title">
+                    {{provider.title}}
+                  </div>
+                  <span class="number pull-right">
+                    {{provider.count}}
+                  </span>
+                  <div class="clearfix"></div>
                 </li>
               {{/each}}
             </ul>
@@ -88,40 +134,85 @@
         </div>
       {{/if}}
     </div>
-      
     <div class="col-md-9 panel-list" id="content">
-      <ModelSearch @model={{model}} @name="Prefix" @sortable={{true}} @link="prefixes" />
-
+      <ModelSearch
+        @model={{model}}
+        @name="Prefix"
+        @sortable={{true}}
+        @link="prefixes"
+      />
       {{#if model}}
         {{#each model as |prefix|}}
           <div class="panel panel-transparent" data-test-prefix>
             <div class="panel-body">
-              <h3 class="member">{{prefix.id}}</h3>
-
-              <h5>{{pluralize prefix.providers.length "Member" without-count=true}}</h5>
+              <h3 class="member">
+                {{prefix.id}}
+              </h3>
+              <h5>
+                {{pluralize prefix.providers.length 'Member' without-count=true
+                }}
+              </h5>
               {{#if prefix.providers}}
                 {{#each prefix.providers as |provider|}}
-                  <LinkTo @route="providers.show.prefixes.show" @models={{array provider.id prefix.id}}>{{provider.name}}</LinkTo><br/>
+                  <LinkTo
+                    @route="providers.show.prefixes.show"
+                    @models={{array provider.id prefix.id}}
+                  >
+                    {{provider.name}}
+                  </LinkTo>
+                  <br />
                 {{/each}}
               {{else}}
-                <span class="icon-warning">No member found.</span>
+                <span class="icon-warning">
+                  No member found.
+                </span>
               {{/if}}
-
-              <h5>{{pluralize prefix.repositories.length "Repository" without-count=true}}</h5>
+              <h5>
+                {{pluralize
+                  prefix.repositories.length
+                  'Repository'
+                  without-count=true
+                }}
+              </h5>
               {{#if prefix.repositories}}
                 {{#each prefix.repositories as |repository|}}
-                  <LinkTo @route="repositories.show.prefixes.show" @models={{array repository.id prefix.id}}>{{repository.name}}</LinkTo><br/>
+                  <LinkTo
+                    @route="repositories.show.prefixes.show"
+                    @models={{array repository.id prefix.id}}
+                  >
+                    {{repository.name}}
+                  </LinkTo>
+                  <br />
                 {{/each}}
                 {{#if features.useElasticsearch}}
-                  <h5>DOIs</h5>
-                  <LinkTo @route="dois" @query={{hash prefix=prefix.id}}>DOIs for prefix {{prefix.id}}</LinkTo>
+                  <h5>
+                    DOIs
+                  </h5>
+                  <LinkTo @route="dois" @query={{hash prefix=prefix.id}}>
+                    DOIs for prefix
+                    {{prefix.id}}
+                  </LinkTo>
                 {{/if}}
               {{else}}
-                <span class="icon-warning">No repository found.</span>
+                <span class="icon-warning">
+                  No repository found.
+                </span>
               {{/if}}
-
-              <h5>Created</h5>
-              {{format-time prefix.createdAt year='numeric' month='long' day='numeric' hour='numeric' minute='numeric' second='numeric' timeZone='UTC' timeZoneName='short' hour12=false}}
+              <h5>
+                Created
+              </h5>
+              {{format-time
+                prefix.createdAt
+                year='numeric'
+                month='long'
+                day='numeric'
+                hour='numeric'
+                minute='numeric'
+                second='numeric'
+                timeZone='UTC'
+                timeZoneName='short'
+                hour12=false
+              }}
             </div>
           </div>
         {{/each}}
@@ -138,6 +229,5 @@
     </div>
   </div>
 {{else}}
-  <ApplicationHeader />
-  <LandingPage />
+  <ApplicationHeader /><LandingPage />
 {{/if}}

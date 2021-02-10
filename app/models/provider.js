@@ -122,7 +122,7 @@ export default Model.extend(Validations, {
   }),
   contacts: hasMany('contact', {
     inverse: 'provider',
-    async: true
+    async: false
   }),
 
   meta: attr(),
