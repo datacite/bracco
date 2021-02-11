@@ -11,50 +11,48 @@ export default Component.extend({
   },
 
   getContacts() {
-    if (this.model && Array.isArray(this.model.get('contacts'))) {
-      this.model.set(
-        'votingContact',
-        this.model
-          .get('contacts')
-          .find((contact) => contact.roleName.includes('voting'))
-      );
-      this.model.set(
-        'serviceContact',
-        this.model
-          .get('contacts')
-          .find((contact) => contact.roleName.includes('service'))
-      );
-      this.model.set(
-        'secondaryServiceContact',
-        this.model
-          .get('contacts')
-          .find((contact) => contact.roleName.includes('secondary_service'))
-      );
-      this.model.set(
-        'technicalContact',
-        this.model
-          .get('contacts')
-          .find((contact) => contact.roleName.includes('technical'))
-      );
-      this.model.set(
-        'secondaryTechnicalContact',
-        this.model
-          .get('contacts')
-          .find((contact) => contact.roleName.includes('secondary_technical'))
-      );
-      this.model.set(
-        'billingContact',
-        this.model
-          .get('contacts')
-          .find((contact) => contact.roleName.includes('billing'))
-      );
-      this.model.set(
-        'secondaryBillingContact',
-        this.model
-          .get('contacts')
-          .find((contact) => contact.roleName.includes('secondary_billing'))
-      );
-    }
+    this.model.set(
+      'votingContact',
+      this.model
+        .get('contacts')
+        .find((contact) => contact.roleName.includes('voting'))
+    );
+    this.model.set(
+      'serviceContact',
+      this.model
+        .get('contacts')
+        .find((contact) => contact.roleName.includes('service'))
+    );
+    this.model.set(
+      'secondaryServiceContact',
+      this.model
+        .get('contacts')
+        .find((contact) => contact.roleName.includes('secondary_service'))
+    );
+    this.model.set(
+      'technicalContact',
+      this.model
+        .get('contacts')
+        .find((contact) => contact.roleName.includes('technical'))
+    );
+    this.model.set(
+      'secondaryTechnicalContact',
+      this.model
+        .get('contacts')
+        .find((contact) => contact.roleName.includes('secondary_technical'))
+    );
+    this.model.set(
+      'billingContact',
+      this.model
+        .get('contacts')
+        .find((contact) => contact.roleName.includes('billing'))
+    );
+    this.model.set(
+      'secondaryBillingContact',
+      this.model
+        .get('contacts')
+        .find((contact) => contact.roleName.includes('secondary_billing'))
+    );
   },
 
   actions: {
