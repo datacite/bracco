@@ -30,11 +30,22 @@ export default Model.extend(Validations, {
   updated: attr('date'),
   deleted: attr('date'),
 
+  displayName: computed('name', 'email', function () {
+    if (this.name) {
+      return this.name;
+    } else {
+      return this.email;
+    }
+  }),
   roleNameString: computed('roleName', function () {
-    return this.roleName
-      .map(function (role) {
-        return _string.upperFirst(_string.lowerCase(role));
-      })
-      .join(', ');
+    if (this.roleName) {
+      return this.roleName
+        .map(function (role) {
+          return _string.upperFirst(_string.lowerCase(role));
+        })
+        .join(', ');
+    } else {
+      return null;
+    }
   })
 });

@@ -17,7 +17,7 @@
       @onChange={{action 'selectVotingContact'}}
       @placeholder="Select Contact" as |item|
     >
-      {{item.name}}
+      {{item.displayName}}
     </el.control>
   {{/form.element}}
 {{/if}}
@@ -36,7 +36,7 @@
     @onChange={{action 'selectServiceContact'}}
     @placeholder="Select Contact" as |item|
   >
-    {{item.name}}
+    {{item.displayName}}
   </el.control>
 {{/form.element}}
 {{#form.element
@@ -55,7 +55,7 @@
     @placeholder="Select Contact"
     @allowClear={{true}} as |item|
   >
-    {{item.name}}
+    {{item.displayName}}
   </el.control>
 {{/form.element}}
 {{#form.element
@@ -74,7 +74,7 @@
     @placeholder="Select Contact"
     @allowClear={{true}} as |item|
   >
-    {{item.name}}
+    {{item.displayName}}
   </el.control>
 {{/form.element}}
 {{#form.element
@@ -93,7 +93,7 @@
     @placeholder="Select Contact"
     @allowClear={{true}} as |item|
   >
-    {{item.name}}
+    {{item.displayName}}
   </el.control>
 {{/form.element}}
 {{#if (not-eq model.memberType 'consortium_organization')}}
@@ -112,7 +112,7 @@
       @onChange={{action 'selectBillingContact'}}
       @placeholder="Select Contact" as |item|
     >
-      {{item.name}}
+      {{item.displayName}}
     </el.control>
   {{/form.element}}
   {{#form.element
@@ -131,7 +131,7 @@
       @placeholder="Select Contact"
       @allowClear={{true}} as |item|
     >
-      {{item.name}}
+      {{item.displayName}}
     </el.control>
   {{/form.element}}
 {{/if}}
