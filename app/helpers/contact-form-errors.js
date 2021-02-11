@@ -1,11 +1,8 @@
 import { helper } from '@ember/component/helper';
 
 const labelList = {
-  confirmName: 'confirm name',
   givenName: 'given name',
-  familyName: 'family name',
-  name: 'name',
-  email: 'email'
+  familyName: 'family name'
 };
 
 export function contactFormErrors([model]) {

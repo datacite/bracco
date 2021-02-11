@@ -11,6 +11,21 @@ const Validations = buildValidations({
     validator('email-format', {
       allowBlank: true
     })
+  ],
+  confirmName: [
+    validator('presence', {
+      presence: true,
+      disabled: computed('model', function () {
+        return this.model.get('isNew');
+      })
+    }),
+    validator('confirmation', {
+      on: 'name',
+      message: 'Name does not match.',
+      disabled: computed('model', function () {
+        return this.model.get('isNew');
+      })
+    })
   ]
 });
 
