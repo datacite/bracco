@@ -173,7 +173,85 @@
         {{/if}}
       </div>
     </div>
-    <ProviderContacts @model={{model}} @contacts={{model.contacts}} />
+    <h3 class="member-results">
+      Contact Information
+    </h3>
+    <div class="panel panel-transparent">
+      <div class="panel-body">
+        {{#if (not-eq model.memberType 'consortium_organization')}}
+          <h5>
+            Voting Representative
+          </h5>
+          <div cy-data="voting">
+            {{#if model.votingContact}}
+              {{format-contact model.votingContact}}
+            {{else}}
+              <span class="small icon-warning">
+                Please provide this information.
+              </span>
+            {{/if}}
+          </div>
+        {{/if}}
+        <h5>
+          Service Contact
+        </h5>
+        <div cy-data="service">
+          {{#if model.serviceContact}}
+            {{format-contact model.serviceContact}}
+          {{else}}
+            <span class="small icon-warning">
+              Please provide this information.
+            </span>
+          {{/if}}
+        </div>
+        {{#if model.secondaryServiceContact}}
+          <h5>
+            Secondary Service Contact
+          </h5>
+          <div cy-data="secondary-service">
+            {{format-contact model.secondaryServiceContact}}
+          </div>
+        {{/if}}
+        {{#if model.technicalContact}}
+          <h5>
+            Technical Contact
+          </h5>
+          <div cy-data="technical">
+            {{format-contact model.technicalContact}}
+          </div>
+        {{/if}}
+        {{#if model.secondaryTechnicalContact}}
+          <h5>
+            Secondary Technical Contact
+          </h5>
+          <div cy-data="secondary-technical">
+            {{format-contact model.secondaryTechnicalContact}}
+          </div>
+        {{/if}}
+        {{#if (not-eq model.memberType 'consortium_organization')}}
+          <h5>
+            Billing Contact
+          </h5>
+          <div cy-data="billing">
+            {{#if model.billingContact}}
+              {{format-contact model.billingContact}}
+            {{else}}
+              <span class="small icon-warning">
+                Please provide this information.
+              </span>
+            {{/if}}
+          </div>
+          {{#if model.secondaryBillingContact}}
+            <h5>
+              Secondary Billing Contact
+            </h5>
+            <div cy-data="secondary-billing">
+              {{format-contact model.secondaryBillingContact}}
+            </div>
+          {{/if}}
+        {{/if}}
+      </div>
+    </div>
     {{#if (not-eq model.memberType 'consortium_organization')}}
       <h3 class="member-results">
         Billing Information

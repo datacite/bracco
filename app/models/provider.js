@@ -108,6 +108,42 @@ const Validations = buildValidations({
       allowBlank: true,
       message: 'Please enter a valid 18 digit Salesforce ID.'
     })
+  ],
+  votingContact: [
+    validator('presence', {
+      presence: true,
+      message:
+        'Please first add a contact for the voting role via the contacts menu.',
+      disabled: computed('model', function () {
+        return (
+          this.model.get('isNew') ||
+          this.model.get('memberType') === 'consortium_organization'
+        );
+      })
+    })
+  ],
+  serviceContact: [
+    validator('presence', {
+      presence: true,
+      message:
+        'Please first add a contact for the service role via the contacts menu.',
+      disabled: computed('model', function () {
+        return this.model.get('isNew');
+      })
+    })
+  ],
+  billingContact: [
+    validator('presence', {
+      presence: true,
+      message:
+        'Please first add a contact for the billing role via the contacts menu.',
+      disabled: computed('model', function () {
+        return (
+          this.model.get('isNew') ||
+          this.model.get('memberType') === 'consortium_organization'
+        );
+      })
+    })
   ]
 });
 
@@ -157,6 +193,39 @@ export default Model.extend(Validations, {
 
   uid: computed('id', function () {
     return this.id.toUpperCase();
+  }),
+  votingContact: computed('contacts', function () {
+    return this.contacts.find((contact) => contact.roleName.includes('voting'));
+  }),
+  serviceContact: computed('contacts', function () {
+    return this.contacts.find((contact) =>
+      contact.roleName.includes('service')
+    );
+  }),
+  secondaryServiceContact: computed('contacts', function () {
+    return this.contacts.find((contact) =>
+      contact.roleName.includes('secondary_service')
+    );
+  }),
+  technicalContact: computed('contacts', function () {
+    return this.contacts.find((contact) =>
+      contact.roleName.includes('technical')
+    );
+  }),
+  secondaryTechnicalContact: computed('contacts', function () {
+    return this.contacts.find((contact) =>
+      contact.roleName.includes('secondary_technical')
+    );
+  }),
+  billingContact: computed('contacts', function () {
+    return this.contacts.find((contact) =>
+      contact.roleName.includes('billing')
+    );
+  }),
+  secondaryBillingContact: computed('contacts', function () {
+    return this.contacts.find((contact) =>
+      contact.roleName.includes('secondary_billing')
+    );
   }),
   formattedBillingInformation: computed(
     'billingInformation',

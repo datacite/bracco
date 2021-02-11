@@ -7,6 +7,13 @@ export default Route.extend({
   model() {
     return this.store.createRecord('provider', {
       billingInformation: {},
+      votingContact: null,
+      serviceContact: null,
+      secondaryServiceContact: null,
+      technicalContact: null,
+      secondaryTechnicalContact: null,
+      billingContact: null,
+      secondaryBillingContact: null,
       isActive: true
     });
   },

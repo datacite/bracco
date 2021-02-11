@@ -341,6 +341,49 @@ export default Controller.extend({
         }
       );
     },
+    selectVotingContact(contact) {
+      if (contact) {
+        this.model.set('votingContact', contact);
+      }
+    },
+    selectServiceContact(contact) {
+      if (contact) {
+        this.model.set('serviceContact', contact);
+      }
+    },
+    selectSecondaryServiceContact(contact) {
+      if (contact) {
+        this.model.set('secondaryServiceContact', contact);
+      } else {
+        this.model.set('secondaryServiceContact', null);
+      }
+    },
+    selectTechnicalContact(contact) {
+      if (contact) {
+        this.model.set('technicalContact', contact);
+      } else {
+        this.model.set('technicalContact', null);
+      }
+    },
+    selectSecondaryTechnicalContact(contact) {
+      if (contact) {
+        this.model.set('secondaryTechnicalContact', contact);
+      } else {
+        this.model.set('secondaryTechnicalContact', null);
+      }
+    },
+    selectBillingContact(contact) {
+      if (contact) {
+        this.model.set('billingContact', contact);
+      }
+    },
+    selectSecondaryBillingContact(contact) {
+      if (contact) {
+        this.model.set('secondaryBillingContact', contact);
+      } else {
+        this.model.set('secondaryBillingContact', null);
+      }
+    },
     submit() {
       let self = this;
       let m = this.model;

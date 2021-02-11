@@ -11,6 +11,13 @@ export default Route.extend({
       consortium: provider,
       memberType: 'consortium_organization',
       billingInformation: {},
+      votingContact: null,
+      serviceContact: null,
+      secondaryServiceContact: null,
+      technicalContact: null,
+      secondaryTechnicalContact: null,
+      billingContact: null,
+      secondaryBillingContact: null,
       isActive: true
     });
 
