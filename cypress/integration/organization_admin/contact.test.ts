@@ -9,26 +9,26 @@ describe('Organization Admin: Contact', () => {
     });
   });
 
-  it('search contacts', () => {
-    cy.visit('/providers/datacite/contacts');
-    cy.location().should((loc) => {
-      expect(loc.pathname).to.eq('/providers/datacite/contacts');
-    });
-    cy.waitUntil(function () {
-      return cy.get('input[name="query"]').should('not.be.disabled');
-    });
-    cy.get('input[name="query"]')
-      .type('Fenner{enter}')
-      .get('[data-test-contact]')
-      .should('contain', 'Fenner');
+  // it('search contacts', () => {
+  //   cy.visit('/providers/datacite/contacts');
+  //   cy.location().should((loc) => {
+  //     expect(loc.pathname).to.eq('/providers/datacite/contacts');
+  //   });
+  //   cy.waitUntil(function () {
+  //     return cy.get('input[name="query"]').should('not.be.disabled');
+  //   });
+  //   cy.get('input[name="query"]')
+  //     .type('Fenner{enter}')
+  //     .get('[data-test-contact]')
+  //     .should('contain', 'Fenner');
 
-    cy.get('h2.work').contains('DataCite');
-    cy.get('li a.nav-link.active').contains('Contacts');
-    cy.get('div#search').should('exist');
-    cy.get('div.panel.facets').should('exist');
+  //   cy.get('h2.work').contains('DataCite');
+  //   cy.get('li a.nav-link.active').contains('Contacts');
+  //   cy.get('div#search').should('exist');
+  //   cy.get('div.panel.facets').should('exist');
 
-    cy.get('a#add-contact').should('exist');
-  });
+  //   cy.get('a#add-contact').should('exist');
+  // });
 
   it('filter contacts', () => {
     cy.visit('/providers/datacite/contacts');
