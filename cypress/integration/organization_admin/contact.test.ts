@@ -14,6 +14,9 @@ describe('Organization Admin: Contact', () => {
     cy.location().should((loc) => {
       expect(loc.pathname).to.eq('/providers/datacite/contacts');
     });
+    cy.waitUntil(function () {
+      return cy.get('input[name="query"]').should('not.be.disabled');
+    });
     cy.get('input[name="query"]')
       .type('Fenner{enter}')
       .get('[data-test-contact]')
