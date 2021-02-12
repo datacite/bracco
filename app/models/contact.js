@@ -12,16 +12,16 @@ const Validations = buildValidations({
       allowBlank: true
     })
   ],
-  confirmName: [
+  confirmDelete: [
     validator('presence', {
       presence: true,
       disabled: computed('model', function () {
         return this.model.get('isNew');
       })
     }),
-    validator('confirmation', {
-      on: 'name',
-      message: 'Name does not match.',
+    validator('inclusion', {
+      in: ['Delete'],
+      message: "The entered text does not match 'Delete'.",
       disabled: computed('model', function () {
         return this.model.get('isNew');
       })

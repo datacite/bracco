@@ -25,7 +25,7 @@ export default Controller.extend({
     },
     cancel() {
       this.model.rollbackAttributes();
-      this.model.set('confirmName', null);
+      this.model.set('confirmDelete', null);
       this.transitionToRoute('contacts.show', this.model);
     }
   }

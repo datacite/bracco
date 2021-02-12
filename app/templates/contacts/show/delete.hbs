@@ -13,11 +13,11 @@
           </label>
           <form.element
             @controlType="text"
-            @id="confirmName"
-            @property="confirmName"
+            @id="confirmDelete"
+            @property="confirmDelete"
             @showValidationOn="input"
             @autofocus={{true}}
-            @helpText="Please add the name to confirm."
+            @helpText="Please type 'Delete' to confirm."
           />
         </form.group>
         <div class="pseudo-footer">
@@ -26,7 +26,7 @@
               Cancel
             </button>
             <button
-              disabled={{v-get model 'confirmName' 'isInvalid'}}
+              disabled={{v-get model 'confirmDelete' 'isInvalid'}}
               id="delete"
               class="btn btn-sm btn-fill"
               {{action 'submit'}}

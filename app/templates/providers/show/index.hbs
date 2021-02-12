@@ -52,6 +52,17 @@
     <RepositorySidebar @model={{model}} />
   </div>
   <div class="col-md-9">
+    {{#if (is-empty model.contacts)}}
+      <BsAlert @dismissible={{false}} @type="danger">
+        Please register at least one contact for this
+        {{if
+          (eq model.memberType 'consortium_organization')
+          'organization'
+          'member'
+        }}
+        .
+      </BsAlert>
+    {{/if}}
     <h3 class="member-results">
       Organization Information
     </h3>
