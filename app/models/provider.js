@@ -1,5 +1,6 @@
 import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
 import { computed } from '@ember/object';
+import { reads } from '@ember/object/computed';
 // import ENV from 'bracco/config/environment';
 import { validator, buildValidations } from 'ember-cp-validations';
 // import { fragment } from 'ember-data-model-fragments/attributes';
@@ -194,37 +195,43 @@ export default Model.extend(Validations, {
   uid: computed('id', function () {
     return this.id.toUpperCase();
   }),
+  filteredContacts: reads('contacts'),
   votingContact: computed('contacts', function () {
-    return this.contacts.find((contact) => contact.roleName.includes('voting'));
+    return this.contacts.find(
+      (contact) => contact.roleName && contact.roleName.includes('voting')
+    );
   }),
   serviceContact: computed('contacts', function () {
-    return this.contacts.find((contact) =>
-      contact.roleName.includes('service')
+    return this.contacts.find(
+      (contact) => contact.roleName && contact.roleName.includes('service')
     );
   }),
   secondaryServiceContact: computed('contacts', function () {
-    return this.contacts.find((contact) =>
-      contact.roleName.includes('secondary_service')
+    return this.contacts.find(
+      (contact) =>
+        contact.roleName && contact.roleName.includes('secondary_service')
     );
   }),
   technicalContact: computed('contacts', function () {
-    return this.contacts.find((contact) =>
-      contact.roleName.includes('technical')
+    return this.contacts.find(
+      (contact) => contact.roleName && contact.roleName.includes('technical')
     );
   }),
   secondaryTechnicalContact: computed('contacts', function () {
-    return this.contacts.find((contact) =>
-      contact.roleName.includes('secondary_technical')
+    return this.contacts.find(
+      (contact) =>
+        contact.roleName && contact.roleName.includes('secondary_technical')
     );
   }),
   billingContact: computed('contacts', function () {
-    return this.contacts.find((contact) =>
-      contact.roleName.includes('billing')
+    return this.contacts.find(
+      (contact) => contact.roleName && contact.roleName.includes('billing')
     );
   }),
   secondaryBillingContact: computed('contacts', function () {
-    return this.contacts.find((contact) =>
-      contact.roleName.includes('secondary_billing')
+    return this.contacts.find(
+      (contact) =>
+        contact.roleName && contact.roleName.includes('secondary_billing')
     );
   }),
   formattedBillingInformation: computed(

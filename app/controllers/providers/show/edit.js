@@ -341,14 +341,25 @@ export default Controller.extend({
         }
       );
     },
+    searchContact(query) {
+      let filteredContacts = this.model.contacts.filter(function (contact) {
+        console.log(contact.displayName.toLowerCase);
+        return contact.displayName
+          .toLowerCase()
+          .startsWith(query.toLowerCase());
+      });
+      this.model.set('filteredContacts', filteredContacts);
+    },
     selectVotingContact(contact) {
       if (contact) {
         this.model.set('votingContact', contact);
+        this.model.set('filteredContacts', this.model.contacts);
       }
     },
     selectServiceContact(contact) {
       if (contact) {
         this.model.set('serviceContact', contact);
+        this.model.set('filteredContacts', this.model.contacts);
       }
     },
     selectSecondaryServiceContact(contact) {
@@ -364,6 +375,7 @@ export default Controller.extend({
       } else {
         this.model.set('technicalContact', null);
       }
+      this.model.set('filteredContacts', this.model.contacts);
     },
     selectSecondaryTechnicalContact(contact) {
       if (contact) {
@@ -371,11 +383,13 @@ export default Controller.extend({
       } else {
         this.model.set('secondaryTechnicalContact', null);
       }
+      this.model.set('filteredContacts', this.model.contacts);
     },
     selectBillingContact(contact) {
       if (contact) {
         this.model.set('billingContact', contact);
       }
+      this.model.set('filteredContacts', this.model.contacts);
     },
     selectSecondaryBillingContact(contact) {
       if (contact) {
@@ -383,6 +397,7 @@ export default Controller.extend({
       } else {
         this.model.set('secondaryBillingContact', null);
       }
+      this.model.set('filteredContacts', this.model.contacts);
     },
     submit() {
       let self = this;

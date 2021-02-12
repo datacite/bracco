@@ -1,12 +1,13 @@
- {{#if (gt index 0)}}
+{{#if (gt index 0)}}
   <div class="power-select-label">
-    <label for="subject" class="subtitle">Subject</label>
-  </div> 
+    <label for="subject" class="subtitle">
+      Subject
+    </label>
+  </div>
 {{/if}}
-
-  <div class="power-select-fragment" doi-subject>
-    {{#form.element
-    controlType="power-select"
+<div class="power-select-fragment" doi-subject>
+  {{#form.element
+    controlType='power-select'
     options=subjects
     value=fragment.subject
     disabled=disabled
@@ -14,38 +15,67 @@
   }}
     {{el.control
       searchEnabled=true
-      onChange=(action "updateSubject")
-      placeholder="Search Subject from the OECD Fields of Science and Technology (FOS) OR create a new keyword"
-      onkeydown=(action "createOnEnter")
-      search=(action "searchSubject")
+      onChange=(action 'updateSubject')
+      placeholder='Search Subject from the OECD Fields of Science and Technology (FOS) OR create a new keyword'
+      onkeydown=(action 'createOnEnter')
+      search=(action 'searchSubject')
       allowClear=true
-      searchPlaceholder="Type to search subject OR create a new keyword..."
-      noMatchesMessage="Press ENTER to add new subject, keyword, classification code, or key phrase describing the resource."
+      searchPlaceholder='Type to search subject OR create a new keyword...'
+      noMatchesMessage='Press ENTER to add new subject, keyword, classification code, or key phrase describing the resource.'
     }}
     <div class="help-block">
-      The default subject scheme is provided by the <a target="_blank" rel="noopener" href="https://www.oecd.org/science/inno/38235147.pdf">OECD Fields of Science and Technology (FOS)</a>.
+      The default subject scheme is provided by the
+      <a
+        target="_blank"
+        rel="noopener"
+        href="https://www.oecd.org/science/inno/38235147.pdf"
+      >
+        OECD Fields of Science and Technology (FOS)
+      </a>
+      .
     </div>
-    {{/form.element}}
-  </div>
-
+  {{/form.element}}
+</div>
 <div class="power-select-label">
-  <label for="subjectScheme" class="subtitle">Subject Scheme</label>
+  <label for="subjectScheme" class="subtitle">
+    Subject Scheme
+  </label>
 </div>
 <div class="input-group">
-  <input type="text"  placeholder="Subject Scheme" class="form-control subject-scheme-field" disabled={{this.oecdSelected}}
-    value={{fragment.subjectScheme}} oninput={{action "updateSubjectScheme" value="target.value"}} data-test-subject-scheme/>
-  <div class="help-block help-block-fragment">The name of the subject scheme or classification code or authority if one
-    is used.</div>
-
-  <div class="power-select-label">
-    <label for="subjectSchemeUri" class="subtitle">Subject Scheme URI</label>
+  <input
+    type="text"
+    placeholder="Subject Scheme"
+    class="form-control subject-scheme-field"
+    disabled={{this.oecdSelected}}
+    value={{fragment.subjectScheme}}
+    oninput={{action 'updateSubjectScheme' value='target.value'}}
+    data-test-subject-scheme
+  />
+  <div class="help-block help-block-fragment">
+    The name of the subject scheme or classification code or authority if one
+    is used.
   </div>
-  <input type="text" placeholder="Subject Scheme URI" class="form-control subject-scheme-uri-field" disabled={{this.oecdSelected}}
-    value={{fragment.subjectSchemeUri}} oninput={{action "updateSubjectSchemeUri" value="target.value"}} data-test-subject-uri/>
+  <div class="power-select-label">
+    <label for="subjectSchemeUri" class="subtitle">
+      Subject Scheme URI
+    </label>
+  </div>
+  <input
+    type="text"
+    placeholder="Subject Scheme URI"
+    class="form-control subject-scheme-uri-field"
+    disabled={{this.oecdSelected}}
+    value={{fragment.subjectSchemeUri}}
+    oninput={{action 'updateSubjectSchemeUri' value='target.value'}}
+    data-test-subject-uri
+  />
   <span class="input-group-btn">
-    <BsButton @outline={{true}} @onClick={{action "deleteSubject" index}}><i class="fas fa-trash"></i></BsButton>
+    <BsButton @outline={{true}} @onClick={{action 'deleteSubject' index}}>
+      <i class="fas fa-trash"></i>
+    </BsButton>
   </span>
 </div>
-<div class="help-block help-block-fragment">The URI of the subject identifier scheme. For example http://id.loc.gov/authorities/subjects</div>
-
+<div class="help-block help-block-fragment">
+  The URI of the subject identifier scheme. For example http://id.loc.gov/authorities/subjects
+</div>
 <hr />
