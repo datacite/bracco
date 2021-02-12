@@ -102,7 +102,7 @@ describe('Admin: Contact', () => {
       'Are you sure you want to delete this contact? This action cannot be undone.'
     );
 
-    cy.get('input#confirm-name-field').should('exist');
+    cy.get('input#confirm-delete-field').should('exist');
 
     cy.get('button#delete').contains('Delete');
   });
