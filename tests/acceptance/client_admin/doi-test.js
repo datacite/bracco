@@ -223,7 +223,7 @@ module('Acceptance | client_admin | doi', function (hooks) {
     assert
       .dom('[doi-subject]')
       .includesText(
-        'Search Subject from the OECD Fields of Science and Technology (FOS) OR create a new keyword The default subject scheme is provided by the OECD Fields of Science and Technology (FOS).'
+        'Search Subject from the OECD Fields of Science and Technology (FOS) OR create a new keyword The default subject scheme is provided by the OECD Fields of Science and Technology (FOS) .'
       );
   });
 
