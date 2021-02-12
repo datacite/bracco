@@ -6,6 +6,7 @@ export default Route.extend({
 
   model() {
     let contact = this.modelFor('contacts/show');
+    contact.set('confirmDelete', 'Delete');
     return contact;
   },
 
