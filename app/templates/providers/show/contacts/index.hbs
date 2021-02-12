@@ -82,7 +82,11 @@
             </h3>
             {{#if (eq model.provider.memberType 'consortium')}}
               <h5>
-                Member
+                {{if
+                  (eq contact.provider.memberType 'consortium_organization')
+                  'Consortium Organization'
+                  'Member'
+                }}
               </h5>
               <LinkTo
                 @route="providers.show.contacts"
