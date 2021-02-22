@@ -10044,6 +10044,13 @@ ember-cli-get-component-path-option@^1.0.0:
   resolved "https://registry.yarnpkg.com/ember-cli-get-component-path-option/-/ember-cli-get-component-path-option-1.0.0.tgz#0d7b595559e2f9050abed804f1d8eff1b08bc771"
   integrity sha1-DXtZVVni+QUKvtgE8djv8bCLx3E=
 
+ember-cli-google-tag-manager@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/ember-cli-google-tag-manager/-/ember-cli-google-tag-manager-1.0.0.tgz#e417b14ad84940fe5ae8481eef1c33b8ef7e8397"
+  integrity sha512-OsItGuysRinkeEOoSnL82+bzcNYFpRLQT76IhLdN/xn6UuTb393BF6kYTS4r0fBcOoe8GoK91ow3hEtGZBimUQ==
+  dependencies:
+    ember-cli-babel "^7.7.3"
+
 ember-cli-head@^0.4.1:
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/ember-cli-head/-/ember-cli-head-0.4.1.tgz#28b7ee86439746640834b232a3b34ab1329f3cf3"
