@@ -51,7 +51,15 @@
           {{model.roleNameString}}
         {{else}}
           <span class="icon-warning">
-            No roles found.
+            No roles found. Please assign roles in the <LinkTo
+              @route="providers.show.edit"
+              @model={{model.provider.id}}
+              @id="edit-provider"
+            >
+              {{if (eq this.model.provider.memberType 'consortium_organization')
+          'Consortium Organization'
+          'Member'}} Settings
+            </LinkTo>.
           </span>
         {{/if}}
       </div>

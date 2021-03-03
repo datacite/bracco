@@ -261,6 +261,20 @@
               </div>
             </div>
           {{/if}}
+          <h3 class="member-results">
+            Contact Information
+          </h3>
+          <div class="col-md-9 col-md-offset-3">
+            <BsAlert @dismissible={{false}} @type="danger">
+              There are no contacts in your contacts list, please first <LinkTo
+                @route="providers.show.contacts.new"
+                @model={{model.id}}
+                @id="add-contact"
+              >
+                add a contact
+              </LinkTo> before assigning roles.
+            </BsAlert>
+          </div>
           {{#if (not-eq model.memberType 'consortium_organization')}}
             <h3 class="member-results">
               Billing Information
