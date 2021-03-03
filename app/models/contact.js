@@ -10,7 +10,8 @@ const Validations = buildValidations({
     }),
     validator('email-format', {
       allowBlank: true
-    })
+    }),
+    validator('unique-email')
   ],
   confirmDelete: [
     validator('presence', {
