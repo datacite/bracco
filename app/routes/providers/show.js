@@ -17,7 +17,6 @@ export default Route.extend({
         set(self, 'headData.title', provider.displayName);
         set(self, 'headData.description', provider.description);
         set(self, 'headData.image', provider.logoUrl);
-        set(self, 'contacts', provider.contacts || []);
         return provider;
       })
       .catch(function (reason) {
