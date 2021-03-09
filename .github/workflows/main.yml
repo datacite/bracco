@@ -75,7 +75,7 @@ jobs:
           vercel-project-name: 'bracco-test'
 
       - name: Notify Slack
-        uses: edge/simple-slack-notify@main
+        uses: edge/simple-slack-notify@master
         with:
           channel: '#ops'
           color: 'good'
