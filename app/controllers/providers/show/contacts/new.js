@@ -11,8 +11,11 @@ export default Controller.extend({
 
       contact
         .save()
-        .then(function (contact) {
-          self.transitionToRoute('contacts.show', contact.id);
+        .then(function (c) {
+          self.transitionToRoute(
+            'providers.show.contacts',
+            c.provider.get('id')
+          );
         })
         .catch(function (reason) {
           console.debug(reason);

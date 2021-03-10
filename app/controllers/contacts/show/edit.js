@@ -10,8 +10,11 @@ export default Controller.extend({
       let self = this;
       contact
         .save()
-        .then(function (con) {
-          self.transitionToRoute('contacts.show', con);
+        .then(function (c) {
+          self.transitionToRoute(
+            'providers.show.contacts',
+            c.provider.get('id')
+          );
         })
         .catch(function (reason) {
           console.debug(reason);
@@ -19,7 +22,10 @@ export default Controller.extend({
     },
     cancel() {
       this.model.rollbackAttributes();
-      this.transitionToRoute('contacts.show', this.model);
+      this.transitionToRoute(
+        'providers.show.contacts',
+        this.model.get('provider.id')
+      );
     }
   }
 });
