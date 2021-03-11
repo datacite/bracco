@@ -110,6 +110,14 @@ const Validations = buildValidations({
       message: 'Please enter a valid 18 digit Salesforce ID.'
     })
   ],
+  contacts: [
+    validator('presence', {
+      presence: true,
+      disabled: computed('model', function () {
+        return this.model.get('isNew');
+      })
+    })
+  ],
   votingContact: [
     validator('presence', {
       presence: true,
@@ -117,6 +125,7 @@ const Validations = buildValidations({
         'Please first add a contact for the voting role via the contacts menu.',
       disabled: computed('model', function () {
         return (
+          this.model.get('contacts').length === 0 ||
           this.model.get('isNew') ||
           this.model.get('memberType') === 'consortium_organization'
         );
@@ -129,7 +138,9 @@ const Validations = buildValidations({
       message:
         'Please first add a contact for the service role via the contacts menu.',
       disabled: computed('model', function () {
-        return this.model.get('isNew');
+        return (
+          this.model.get('contacts').length === 0 || this.model.get('isNew')
+        );
       })
     })
   ],
@@ -140,6 +151,7 @@ const Validations = buildValidations({
         'Please first add a contact for the billing role via the contacts menu.',
       disabled: computed('model', function () {
         return (
+          this.model.get('contacts').length === 0 ||
           this.model.get('isNew') ||
           this.model.get('memberType') === 'consortium_organization'
         );
