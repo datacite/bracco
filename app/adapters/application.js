@@ -8,7 +8,6 @@ import { isPresent } from '@ember/utils';
 export default JSONAPIAdapter.extend(DataAdapterMixin, {
   session: service(),
   host: ENV.API_URL,
-  namespace: 'v3',
 
   headers: computed('session.data.authenticated.token', function () {
     const headers = {};
