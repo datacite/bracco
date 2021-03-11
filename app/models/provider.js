@@ -1,6 +1,7 @@
 import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
 import { computed } from '@ember/object';
 import { reads } from '@ember/object/computed';
+import { isPresent } from '@ember/utils';
 // import ENV from 'bracco/config/environment';
 import { validator, buildValidations } from 'ember-cp-validations';
 // import { fragment } from 'ember-data-model-fragments/attributes';
@@ -207,6 +208,23 @@ export default Model.extend(Validations, {
   uid: computed('id', function () {
     return this.id.toUpperCase();
   }),
+  hasRequiredContacts: computed(
+    'memberType',
+    'votingContact',
+    'serviceContact',
+    'billingContact',
+    function () {
+      if (this.memberType === 'consortium_organization') {
+        return isPresent(this.serviceContact);
+      } else {
+        return (
+          isPresent(this.votingContact) &&
+          isPresent(this.serviceContact) &&
+          isPresent(this.billingContact)
+        );
+      }
+    }
+  ),
   filteredContacts: reads('contacts'),
   votingContact: computed('contacts', function () {
     return this.contacts.find(
