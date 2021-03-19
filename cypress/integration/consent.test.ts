@@ -5,25 +5,30 @@ describe('Consent', () => {
   const sizes = ['iphone-6', 'samsung-s10', 'ipad-2', [1024, 768]];
 
   sizes.forEach((size) => {
-    it(`index on ${size} screen`, () => {
+    it(`index on ${size} viewport`, () => {
       if (Cypress._.isArray(size)) {
         cy.viewport(size[0], size[1]);
       } else {
         cy.viewport(size);
       }
 
-      //cy.getCookie('_consent').should('not.exist');
-
-      cy.visit('/').pause
-      //cy.get('.CookieConsent', { timeout: 30000 }).contains(
-       // 'We use cookies on our website. Some are technically necessary, others help us improve your user experience.'
-      //);
-      //Cypress.$('div.motto').visible()
+      cy.clearCookies()
+      cy.visit('/')
+      cy.get('.CookieConsent').contains(
+        'We use cookies on our website.'
+      );
+      cy.get('#rcc-decline-button').isInViewport()
       cy.get('#rcc-confirm-button').isInViewport().click()
-      cy.get('i.fas.fa-envelope').isInViewport()
-      //cy.get('#rcc-confirm-button').click();
-      //cy.getCookie('_consent').should('have.property', 'value', 'true');
-      //cy.get('h1', { timeout: 30000 }).contains('DataCite Fabrica Stage');
+      cy.getCookie('_consent').should('have.property', 'value', 'true');
+
+      cy.clearCookies()
+      cy.visit('/')
+      cy.get('.CookieConsent').contains(
+        'We use cookies on our website.'
+      );
+      cy.get('#rcc-confirm-button').isInViewport()
+      cy.get('#rcc-decline-button').isInViewport().click()
+      cy.getCookie('_consent').should('have.property', 'value', 'false');
     });
   });
 });

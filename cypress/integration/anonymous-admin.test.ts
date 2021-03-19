@@ -36,10 +36,9 @@ describe('My First Test', function () {
     cy.get('div.motto h1').should('contain', Cypress.env('site_title'));
   })
 
-  it('visiting prefix 10.80225', function () {
+  it.only('visiting prefix 10.80225', function () {
     cy.visit('/prefix/10.80225')
-    cy.url().should('eq', Cypress.config('baseUrl') + '/')
-    cy.get('div.motto h1').should('contain', Cypress.env('site_title'));
+    cy.get('div.alert-warning').should('contain', 'The page was not found.');
   })
 
 })
