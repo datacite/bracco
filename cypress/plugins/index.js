@@ -36,5 +36,9 @@ module.exports = (on, config) => {
   config.env.organization_admin_cookie =
     process.env.CYPRESS_ORGANIZATION_ADMIN_COOKIE;
 
-  return config;
-};
+  require('dotenv').config()
+  config.env.site_title = process.env.SITE_TITLE || ""
+  config.baseUrl = process.env.FABRICA_URL || Cypress.config.baseUrl || ""
+
+  return config
+}

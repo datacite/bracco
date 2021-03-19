@@ -48,3 +48,7 @@ corber/cordova/www/*
 !corber/cordova/www/.gitkeep
 
 .vscode
+
+# cypress
+screenshotsFolder
+videosFolder
