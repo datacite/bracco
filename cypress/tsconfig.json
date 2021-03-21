@@ -7,6 +7,6 @@
     "types": ["cypress", "cypress-wait-until"]
   },
   "include": [
-    "**/*.ts"
+    "**/**.ts"
   ]
 }

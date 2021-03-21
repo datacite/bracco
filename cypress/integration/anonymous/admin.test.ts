@@ -1,73 +1,44 @@
-/// <reference types="cypress" />
-/* eslint-disable no-undef */
+describe('My First Test', function () {
 
-describe('Anonymous: Admin', () => {
-  beforeEach(() => {
-    cy.setCookie('_consent', 'true');
-  });
-
-  it('is not logged in', () => {
-    cy.visit('/');
-    cy.location().should((loc) => {
-      expect(loc.pathname).to.eq('/');
-    });
+  it('is not logged in', function () {
+    cy.visit('/')
     cy.get('a#account_menu_link').should('not.exist');
-  });
+  })
 
-  // the following pages require authentication. Redirects to homepage otherwise
-  it('visiting info', () => {
-    cy.visit('/info');
-    cy.location().should((loc) => {
-      expect(loc.pathname).to.eq('/');
-    });
-    cy.get('div.motto h1').contains('DataCite Fabrica Stage');
-  });
+  it('visiting homepage', function () {
+    cy.visit('/')
+    cy.url().should('eq', Cypress.config('baseUrl') + '/')
+    cy.get('div.motto h1').should('contain', Cypress.env('site_title');
+  })
 
-  it('visiting providers', () => {
-    cy.visit('/providers');
-    cy.location().should((loc) => {
-      expect(loc.pathname).to.eq('/');
-    });
-    cy.get('div.motto h1').contains('DataCite Fabrica Stage');
-  });
+  // the following pages require authentication. Redirects to homepage otherwise.
+  it('visiting info', function () {
+    cy.visit('/info')
+    cy.url().should('eq', Cypress.config('baseUrl') + '/')
+    cy.get('div.motto h1').should('contain', Cypress.env('site_title'));
+  })
 
-  it('visiting repositories', () => {
-    cy.visit('/repositories');
-    cy.location().should((loc) => {
-      expect(loc.pathname).to.eq('/');
-    });
-    cy.get('div.motto h1').contains('DataCite Fabrica Stage');
-  });
+   it('visiting providers', function () {
+    cy.visit('/providers')
+    cy.url().should('eq', Cypress.config('baseUrl') + '/')
+    cy.get('div.motto h1').should('contain', Cypress.env('site_title'));
+  })
 
-  it('visiting contacts', () => {
-    cy.visit('/contacts');
-    cy.location().should((loc) => {
-      expect(loc.pathname).to.eq('/');
-    });
-    cy.get('div.motto h1').contains('DataCite Fabrica Stage');
-  });
+  it('visiting repositories', function () {
+    cy.visit('/repositories')
+    cy.url().should('eq', Cypress.config('baseUrl') + '/')
+    cy.get('div.motto h1').should('contain', Cypress.env('site_title'));
+  })
 
-  it('visiting prefixes', () => {
-    cy.visit('/prefixes');
-    cy.location().should((loc) => {
-      expect(loc.pathname).to.eq('/');
-    });
-    cy.get('div.motto h1').contains('DataCite Fabrica Stage');
-  });
+  it('visiting prefixes', function () {
+    cy.visit('/prefixes')
+    cy.url().should('eq', Cypress.config('baseUrl') + '/')
+    cy.get('div.motto h1').should('contain', Cypress.env('site_title'));
+  })
 
-  it('visiting prefix 10.80225', () => {
-    cy.visit('/prefixes/10.80225');
-    cy.location().should((loc) => {
-      expect(loc.pathname).to.eq('/prefixes/10.80225');
-    });
-    cy.get('div.alert-warning').contains('The page was not found.');
-  });
+  it.only('visiting prefix 10.80225', function () {
+    cy.visit('/prefix/10.80225')
+    cy.get('div.alert-warning').should('contain', 'The page was not found.');
+  })
 
-  it('visiting dois', () => {
-    cy.visit('/dois');
-    cy.location().should((loc) => {
-      expect(loc.pathname).to.eq('/');
-    });
-    cy.get('div.motto h1').contains('DataCite Fabrica Stage');
-  });
-});
+})
