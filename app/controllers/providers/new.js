@@ -348,25 +348,25 @@ export default Controller.extend({
       let m = this.model;
       this.model.get('contacts').forEach(function (contact) {
         let roleName = [];
-        if (contact.id === m.get('votingContact.id')) {
+        if (contact.email === m.get('votingContact.email')) {
           roleName.push('voting');
         }
-        if (contact.id === m.get('serviceContact.id')) {
+        if (contact.email === m.get('serviceContact.email')) {
           roleName.push('service');
         }
-        if (contact.id === m.get('secondaryServiceContact.id')) {
+        if (contact.email === m.get('secondaryServiceContact.email')) {
           roleName.push('secondary_service');
         }
-        if (contact.id === m.get('technicalContact.id')) {
+        if (contact.email === m.get('technicalContact.email')) {
           roleName.push('technical');
         }
-        if (contact.id === m.get('secondaryTechnicalContact.id')) {
+        if (contact.email === m.get('secondaryTechnicalContact.email')) {
           roleName.push('secondary_technical');
         }
-        if (contact.id === m.get('billingContact.id')) {
+        if (contact.email === m.get('billingContact.email')) {
           roleName.push('billing');
         }
-        if (contact.id === m.get('secondaryBillingContact.id')) {
+        if (contact.email === m.get('secondaryBillingContact.email')) {
           roleName.push('secondary_billing');
         }
         contact.set('roleName', roleName);

@@ -4,7 +4,7 @@ import { reads } from '@ember/object/computed';
 import { isPresent } from '@ember/utils';
 // import ENV from 'bracco/config/environment';
 import { validator, buildValidations } from 'ember-cp-validations';
-// import { fragment } from 'ember-data-model-fragments/attributes';
+import { fragment } from 'ember-data-model-fragments/attributes';
 import addressFormatter from '@fragaria/address-formatter';
 
 const Validations = buildValidations({
@@ -123,7 +123,7 @@ const Validations = buildValidations({
     validator('presence', {
       presence: true,
       message:
-        'Please first add a contact for the voting role via the contacts menu.',
+        'A voting representative is required.',
       disabled: computed('model', function () {
         return (
           this.model.get('contacts').length === 0 ||
@@ -137,7 +137,7 @@ const Validations = buildValidations({
     validator('presence', {
       presence: true,
       message:
-        'Please first add a contact for the service role via the contacts menu.',
+        'A service contact is required.',
       disabled: computed('model', function () {
         return (
           this.model.get('contacts').length === 0 || this.model.get('isNew')
@@ -149,7 +149,7 @@ const Validations = buildValidations({
     validator('presence', {
       presence: true,
       message:
-        'Please first add a contact for the billing role via the contacts menu.',
+        'A billing contact is required.',
       disabled: computed('model', function () {
         return (
           this.model.get('contacts').length === 0 ||
@@ -201,6 +201,13 @@ export default Model.extend(Validations, {
   twitterHandle: attr('string'),
   logo: attr(),
   billingInformation: attr('billingInformation'),
+  technicalContact: fragment('provider-contact'),
+  secondaryTechnicalContact: fragment('provider-contact'),
+  billingContact: fragment('provider-contact'),
+  secondaryBillingContact: fragment('provider-contact'),
+  secondaryServiceContact: fragment('provider-contact'),
+  serviceContact: fragment('provider-contact'),
+  votingContact: fragment('provider-contact'),
   joined: attr('date'),
   created: attr('date'),
   updated: attr('date'),
@@ -226,44 +233,6 @@ export default Model.extend(Validations, {
     }
   ),
   filteredContacts: reads('contacts'),
-  votingContact: computed('contacts', function () {
-    return this.contacts.find(
-      (contact) => contact.roleName && contact.roleName.includes('voting')
-    );
-  }),
-  serviceContact: computed('contacts', function () {
-    return this.contacts.find(
-      (contact) => contact.roleName && contact.roleName.includes('service')
-    );
-  }),
-  secondaryServiceContact: computed('contacts', function () {
-    return this.contacts.find(
-      (contact) =>
-        contact.roleName && contact.roleName.includes('secondary_service')
-    );
-  }),
-  technicalContact: computed('contacts', function () {
-    return this.contacts.find(
-      (contact) => contact.roleName && contact.roleName.includes('technical')
-    );
-  }),
-  secondaryTechnicalContact: computed('contacts', function () {
-    return this.contacts.find(
-      (contact) =>
-        contact.roleName && contact.roleName.includes('secondary_technical')
-    );
-  }),
-  billingContact: computed('contacts', function () {
-    return this.contacts.find(
-      (contact) => contact.roleName && contact.roleName.includes('billing')
-    );
-  }),
-  secondaryBillingContact: computed('contacts', function () {
-    return this.contacts.find(
-      (contact) =>
-        contact.roleName && contact.roleName.includes('secondary_billing')
-    );
-  }),
   formattedBillingInformation: computed(
     'billingInformation',
     'billingInformation.{address,city,postCode,state.name,country,country.name,country.code}',

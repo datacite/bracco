@@ -16,7 +16,7 @@ module('Integration | Helper | provider-form-errors', function (hooks) {
     assert
       .dom(this.element)
       .hasText(
-        'member ID, confirm member ID, provider name, provider display name, system email, voting representative, service contact, billing contact'
+        'member ID, confirm member ID, provider name, provider display name, system email, contacts'
       );
   });
 });

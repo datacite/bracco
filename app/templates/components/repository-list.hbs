@@ -26,7 +26,20 @@
   {{else}}
     <div class="panel panel-transparent">
       <div class="panel-body">
-        <div class="edit"></div>
+        {{#if (not-eq link 'providers.show.repositories')}}
+          <BsAlert @dismissible={{false}} @type="warning">
+            New repositories can't be created from this page.
+          </BsAlert>
+        {{else if (not model.provider.hasRequiredContacts)}}
+          <BsAlert @dismissible={{false}} @type="warning">
+            New repositories can't be created unless all required contacts exist.
+          </BsAlert>
+        {{else if (cannot 'create repository' model)}}
+          <BsAlert @dismissible={{false}} @type="warning">
+            New repositories can't be created unless the user has the correct
+            permissions.
+          </BsAlert>
+        {{/if}}
       </div>
     </div>
   {{/if}}

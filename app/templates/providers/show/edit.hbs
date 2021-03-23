@@ -293,19 +293,29 @@
           </BsAlert>
         </div>
       {{else}}
+        <div class="col-md-9 col-md-offset-3">
+          <BsAlert @dismissible={{false}} @type="info">
+            Contacts are created and <LinkTo
+              @route="providers.show.contacts"
+              @model={{model.id}}
+            >
+              in the contacts section
+            </LinkTo> and then assigned roles here.
+          </BsAlert>
+        </div>
         {{#if (not-eq model.memberType 'consortium_organization')}}
           {{#form.element
             controlType='power-select'
             id='voting-contact'
             label='Voting Representative'
             property='votingContact'
-            searchEnabled=true
             optionLabelPath='name'
             options=model.filteredContacts
             helpText="Your organization's voting representative."
-            destination='votingContact' as |el|
+            destination=votingContact as |el|
           }}
             <el.control
+              @searchEnabled={{false}}
               @search={{action 'searchContact'}}
               @searchField="name"
               @searchPlaceholder="Search contact..."
@@ -321,13 +331,13 @@
           id='service-contact'
           label='Service Contact'
           property='serviceContact'
-          searchEnabled=true
           optionLabelPath='displayName'
           options=model.filteredContacts
           helpText="Your organization's service contact."
           destination=serviceContact as |el|
         }}
           <el.control
+            @searchEnabled={{false}}
             @search={{action 'searchContact'}}
             @searchField="name"
             @searchPlaceholder="Search contact..."
@@ -342,13 +352,13 @@
           id='secondary-service-contact'
           label='Secondary Service Contact'
           property='secondaryServiceContact'
-          searchEnabled=true
           optionLabelPath='name'
           options=model.filteredContacts
           helpText="Your organization's secondary service contact."
           destination=secondaryServiceContact as |el|
         }}
           <el.control
+            @searchEnabled={{false}}
             @search={{action 'searchContact'}}
             @searchField="name"
             @searchPlaceholder="Search contact..."
@@ -364,13 +374,13 @@
           id='technical-contact'
           label='Technical Contact'
           property='technicalContact'
-          searchEnabled=true
           optionLabelPath='name'
           options=model.filteredContacts
           helpText="Your organization's technical contact."
           destination=technicalContact as |el|
         }}
           <el.control
+            @searchEnabled={{false}}
             @search={{action 'searchContact'}}
             @searchField="name"
             @searchPlaceholder="Search contact..."
@@ -386,13 +396,13 @@
           id='secondary-technical-contact'
           label='Secondary Technical Contact'
           property='secondaryTechnicalContact'
-          searchEnabled=true
           optionLabelPath='name'
           options=model.filteredContacts
           helpText="Your organization's secondary technical contact."
           destination=secondaryTechnicalContact as |el|
         }}
           <el.control
+            @searchEnabled={{false}}
             @search={{action 'searchContact'}}
             @searchField="name"
             @searchPlaceholder="Search contact..."
@@ -409,13 +419,13 @@
             id='billing-contact'
             label='Billing Contact'
             property='billingContact'
-            searchEnabled=true
             optionLabelPath='name'
             options=model.filteredContacts
             helpText="Your organization's billing contact."
             destination='billingContact' as |el|
           }}
             <el.control
+              @searchEnabled={{false}}
               @search={{action 'searchContact'}}
               @searchField="name"
               @searchPlaceholder="Search contact..."
@@ -430,13 +440,13 @@
             id='secondary-billing-contact'
             label='Secondary Billing Contact'
             property='secondaryBillingContact'
-            searchEnabled=true
             optionLabelPath='name'
             options=model.filteredContacts
             helpText="Your organization's secondary billing contact."
             destination=secondaryBillingContact as |el|
           }}
             <el.control
+              @searchEnabled={{false}}
               @search={{action 'searchContact'}}
               @searchField="name"
               @searchPlaceholder="Search contact..."

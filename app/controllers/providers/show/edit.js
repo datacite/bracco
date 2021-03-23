@@ -352,26 +352,46 @@ export default Controller.extend({
     },
     selectVotingContact(contact) {
       if (contact) {
-        this.model.set('votingContact', contact);
+        let votingContact = { 
+          givenName: contact.givenName,
+          familyName: contact.familyName,
+          displayName: contact.displayName,
+          email: contact.email }
+        this.model.set('votingContact', votingContact);
         this.model.set('filteredContacts', this.model.contacts);
       }
     },
     selectServiceContact(contact) {
       if (contact) {
-        this.model.set('serviceContact', contact);
+        let serviceContact = { 
+          givenName: contact.givenName,
+          familyName: contact.familyName,
+          displayName: contact.displayName,
+          email: contact.email }
+        this.model.set('serviceContact', serviceContact);
         this.model.set('filteredContacts', this.model.contacts);
       }
     },
     selectSecondaryServiceContact(contact) {
       if (contact) {
-        this.model.set('secondaryServiceContact', contact);
+        let secondaryServiceContact = { 
+          givenName: contact.givenName,
+          familyName: contact.familyName,
+          displayName: contact.displayName,
+          email: contact.email }
+        this.model.set('secondaryServiceContact', secondaryServiceContact);
       } else {
         this.model.set('secondaryServiceContact', null);
       }
     },
     selectTechnicalContact(contact) {
       if (contact) {
-        this.model.set('technicalContact', contact);
+        let technicalContact = { 
+          givenName: contact.givenName,
+          familyName: contact.familyName,
+          displayName: contact.displayName,
+          email: contact.email }
+        this.model.set('technicalContact', technicalContact);
       } else {
         this.model.set('technicalContact', null);
       }
@@ -379,7 +399,12 @@ export default Controller.extend({
     },
     selectSecondaryTechnicalContact(contact) {
       if (contact) {
-        this.model.set('secondaryTechnicalContact', contact);
+        let secondaryTechnicalContact = { 
+          givenName: contact.givenName,
+          familyName: contact.familyName,
+          displayName: contact.displayName,
+          email: contact.email }
+        this.model.set('secondaryTechnicalContact', secondaryTechnicalContact);
       } else {
         this.model.set('secondaryTechnicalContact', null);
       }
@@ -387,13 +412,23 @@ export default Controller.extend({
     },
     selectBillingContact(contact) {
       if (contact) {
-        this.model.set('billingContact', contact);
+        let billingContact = { 
+          givenName: contact.givenName,
+          familyName: contact.familyName,
+          displayName: contact.displayName,
+          email: contact.email }
+        this.model.set('billingContact', billingContact);
       }
       this.model.set('filteredContacts', this.model.contacts);
     },
     selectSecondaryBillingContact(contact) {
       if (contact) {
-        this.model.set('secondaryBillingContact', contact);
+        let secondaryBillingContact = { 
+          givenName: contact.givenName,
+          familyName: contact.familyName,
+          displayName: contact.displayName,
+          email: contact.email }
+        this.model.set('secondaryBillingContact', secondaryBillingContact);
       } else {
         this.model.set('secondaryBillingContact', null);
       }
@@ -405,25 +440,25 @@ export default Controller.extend({
       // iterate through all contacts and update roles
       this.model.get('contacts').forEach(function (contact) {
         let roleName = [];
-        if (contact.id === m.get('votingContact.id')) {
+        if (contact.email === m.get('votingContact.email')) {
           roleName.push('voting');
         }
-        if (contact.id === m.get('serviceContact.id')) {
+        if (contact.email === m.get('serviceContact.email')) {
           roleName.push('service');
         }
-        if (contact.id === m.get('secondaryServiceContact.id')) {
+        if (contact.email === m.get('secondaryServiceContact.email')) {
           roleName.push('secondary_service');
         }
-        if (contact.id === m.get('technicalContact.id')) {
+        if (contact.email === m.get('technicalContact.email')) {
           roleName.push('technical');
         }
-        if (contact.id === m.get('secondaryTechnicalContact.id')) {
+        if (contact.email === m.get('secondaryTechnicalContact.email')) {
           roleName.push('secondary_technical');
         }
-        if (contact.id === m.get('billingContact.id')) {
+        if (contact.email === m.get('billingContact.email')) {
           roleName.push('billing');
         }
-        if (contact.id === m.get('secondaryBillingContact.id')) {
+        if (contact.email === m.get('secondaryBillingContact.email')) {
           roleName.push('secondary_billing');
         }
         contact.set('roleName', roleName);
