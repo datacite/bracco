@@ -1,135 +1,135 @@
-/// <reference types="cypress" />
-/* eslint-disable no-undef */
+// /// <reference types="cypress" />
+// /* eslint-disable no-undef */
 
-describe('Admin: Admin', () => {
-  beforeEach(() => {
-    cy.setCookie('_consent', 'true');
-    cy.setCookie('_fabrica', Cypress.env('staff_admin_cookie'), { log: false });
-  });
+// describe('Admin: Admin', () => {
+//   beforeEach(() => {
+//     cy.setCookie('_consent', 'true');
+//     cy.setCookie('_fabrica', Cypress.env('staff_admin_cookie'), { log: false });
+//   });
 
-  it('is logged in', () => {
-    cy.visit('/');
-    cy.location().should((loc) => {
-      expect(loc.pathname).to.eq('/');
-    });
-    cy.get('a#account_menu_link').contains('ADMIN');
-  });
+//   it('is logged in', () => {
+//     cy.visit('/');
+//     cy.location().should((loc) => {
+//       expect(loc.pathname).to.eq('/');
+//     });
+//     cy.get('a#account_menu_link').contains('ADMIN');
+//   });
 
-  it('editing admin form', () => {
-    cy.visit('/edit');
-    cy.location().should((loc) => {
-      expect(loc.pathname).to.eq('/edit');
-    });
-    cy.get('input#member-id-field').should('exist');
-    cy.get('input#system-email-field').should('exist');
-    cy.get('input#website-field').should('exist');
-    cy.get('input#twitter-handle-field').should('exist');
-    cy.get('div#ror-id').should('exist');
-    cy.get('div#country').should('exist');
-    cy.get('textarea#description-field').should('exist');
+//   it('editing admin form', () => {
+//     cy.visit('/edit');
+//     cy.location().should((loc) => {
+//       expect(loc.pathname).to.eq('/edit');
+//     });
+//     cy.get('input#member-id-field').should('exist');
+//     cy.get('input#system-email-field').should('exist');
+//     cy.get('input#website-field').should('exist');
+//     cy.get('input#twitter-handle-field').should('exist');
+//     cy.get('div#ror-id').should('exist');
+//     cy.get('div#country').should('exist');
+//     cy.get('textarea#description-field').should('exist');
 
-    cy.get('button#update-provider').contains('Update Account');
-  });
+//     cy.get('button#update-provider').contains('Update Account');
+//   });
 
-  it('editing admin password form', () => {
-    cy.visit('/change');
-    cy.location().should((loc) => {
-      expect(loc.pathname).to.eq('/change');
-    });
-    cy.get('input#password-input-field').should('exist');
-    cy.get('input#confirm-password-input-field').should('exist');
+//   it('editing admin password form', () => {
+//     cy.visit('/change');
+//     cy.location().should((loc) => {
+//       expect(loc.pathname).to.eq('/change');
+//     });
+//     cy.get('input#password-input-field').should('exist');
+//     cy.get('input#confirm-password-input-field').should('exist');
 
-    cy.get('button[type=submit]').contains('Set Password');
-  });
+//     cy.get('button[type=submit]').contains('Set Password');
+//   });
 
-  it('visiting homepage', () => {
-    cy.visit('/');
-    cy.get('h2.work').contains('DataCite');
-    cy.get('li a.nav-link.active').contains('Settings');
-  });
+//   it('visiting homepage', () => {
+//     cy.visit('/');
+//     cy.get('h2.work').contains('DataCite');
+//     cy.get('li a.nav-link.active').contains('Settings');
+//   });
 
-  it('visiting info', () => {
-    cy.visit('/info');
-    cy.location().should((loc) => {
-      expect(loc.pathname).to.eq('/info');
-    });
-    cy.get('h2.work').contains('DataCite');
-    cy.get('li a.nav-link.active').contains('Info');
-  });
+//   it('visiting info', () => {
+//     cy.visit('/info');
+//     cy.location().should((loc) => {
+//       expect(loc.pathname).to.eq('/info');
+//     });
+//     cy.get('h2.work').contains('DataCite');
+//     cy.get('li a.nav-link.active').contains('Info');
+//   });
 
-  it('visiting members', () => {
-    cy.visit('/providers');
-    cy.location().should((loc) => {
-      expect(loc.pathname).to.eq('/providers');
-    });
-    cy.get('h2.work').contains('DataCite');
-    cy.get('li a.nav-link.active').contains('Members');
-    cy.get('div#search').should('exist');
-    cy.get('div.panel.facets').should('exist');
+//   it('visiting members', () => {
+//     cy.visit('/providers');
+//     cy.location().should((loc) => {
+//       expect(loc.pathname).to.eq('/providers');
+//     });
+//     cy.get('h2.work').contains('DataCite');
+//     cy.get('li a.nav-link.active').contains('Members');
+//     cy.get('div#search').should('exist');
+//     cy.get('div.panel.facets').should('exist');
 
-    cy.get('a#add-provider').contains('Add Member');
-  });
+//     cy.get('a#add-provider').contains('Add Member');
+//   });
 
-  it('visiting repositories', () => {
-    cy.visit('/repositories');
-    cy.location().should((loc) => {
-      expect(loc.pathname).to.eq('/repositories');
-    });
-    cy.get('h2.work').contains('DataCite');
-    cy.get('li a.nav-link.active').contains('Repositories');
-    cy.get('div#search').should('exist');
-    cy.get('div.panel.facets').should('exist');
+//   it('visiting repositories', () => {
+//     cy.visit('/repositories');
+//     cy.location().should((loc) => {
+//       expect(loc.pathname).to.eq('/repositories');
+//     });
+//     cy.get('h2.work').contains('DataCite');
+//     cy.get('li a.nav-link.active').contains('Repositories');
+//     cy.get('div#search').should('exist');
+//     cy.get('div.panel.facets').should('exist');
 
-    // staff can't add repositories here (needs to go to provider first)
-    cy.get('a#add-repository').should('not.exist');
-  });
+//     // staff can't add repositories here (needs to go to provider first)
+//     cy.get('a#add-repository').should('not.exist');
+//   });
 
-  it('visiting contacts', () => {
-    cy.visit('/contacts');
-    cy.location().should((loc) => {
-      expect(loc.pathname).to.eq('/contacts');
-    });
-    cy.get('h2.work').contains('DataCite');
-    cy.get('li a.nav-link.active').contains('Contacts');
-    cy.get('div#search').should('exist');
-    cy.get('div.panel.facets').should('exist');
+//   it('visiting contacts', () => {
+//     cy.visit('/contacts');
+//     cy.location().should((loc) => {
+//       expect(loc.pathname).to.eq('/contacts');
+//     });
+//     cy.get('h2.work').contains('DataCite');
+//     cy.get('li a.nav-link.active').contains('Contacts');
+//     cy.get('div#search').should('exist');
+//     cy.get('div.panel.facets').should('exist');
 
-    // staff can't add contacts here (needs to go to provider first)
-    cy.get('a#add-contact').should('not.exist');
-  });
+//     // staff can't add contacts here (needs to go to provider first)
+//     cy.get('a#add-contact').should('not.exist');
+//   });
 
-  it('visiting prefixes', () => {
-    cy.visit('/prefixes');
-    cy.location().should((loc) => {
-      expect(loc.pathname).to.eq('/prefixes');
-    });
-    cy.get('h2.work').contains('DataCite');
-    cy.get('li a.nav-link.active').contains('Prefixes');
-    cy.get('div#search').should('exist');
-    cy.get('div.panel.facets').should('exist');
+//   it('visiting prefixes', () => {
+//     cy.visit('/prefixes');
+//     cy.location().should((loc) => {
+//       expect(loc.pathname).to.eq('/prefixes');
+//     });
+//     cy.get('h2.work').contains('DataCite');
+//     cy.get('li a.nav-link.active').contains('Prefixes');
+//     cy.get('div#search').should('exist');
+//     cy.get('div.panel.facets').should('exist');
 
-    cy.get('a#add-prefixes').contains('Add Prefixes');
-  });
+//     cy.get('a#add-prefixes').contains('Add Prefixes');
+//   });
 
-  it('visiting prefix 10.80225', () => {
-    cy.visit('/prefixes/10.80225');
-    cy.location().should((loc) => {
-      expect(loc.pathname).to.eq('/prefixes/10.80225');
-    });
-    cy.get('div.alert-warning').contains('The page was not found.');
-  });
+//   it('visiting prefix 10.80225', () => {
+//     cy.visit('/prefixes/10.80225');
+//     cy.location().should((loc) => {
+//       expect(loc.pathname).to.eq('/prefixes/10.80225');
+//     });
+//     cy.get('div.alert-warning').contains('The page was not found.');
+//   });
 
-  it('visiting dois', () => {
-    cy.visit('/dois');
-    cy.location().should((loc) => {
-      expect(loc.pathname).to.eq('/dois');
-    });
-    cy.get('h2.work').contains('DataCite');
-    cy.get('li a.nav-link.active').contains('DOIs');
-    cy.get('div#search').should('exist');
-    cy.get('div.panel.facets').should('exist');
+//   it('visiting dois', () => {
+//     cy.visit('/dois');
+//     cy.location().should((loc) => {
+//       expect(loc.pathname).to.eq('/dois');
+//     });
+//     cy.get('h2.work').contains('DataCite');
+//     cy.get('li a.nav-link.active').contains('DOIs');
+//     cy.get('div#search').should('exist');
+//     cy.get('div.panel.facets').should('exist');
 
-    // staff can't add doi here (needs to go to repository first)
-    cy.get('a#add-doi').should('not.exist');
-  });
-});
+//     // staff can't add doi here (needs to go to repository first)
+//     cy.get('a#add-doi').should('not.exist');
+//   });
+// });
