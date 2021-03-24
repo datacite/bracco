@@ -1,6 +1,12 @@
 <div class="row">
   <div class="col-md-3">
-    {{#if (and (can 'write index') model.provider.hasRequiredContacts)}}
+    {{#if
+      (and
+        (can 'write index' model)
+        (not-eq model.provider.memberType 'consortium')
+        (or (eq model.currentUser.role_id 'staff_admin') model.provider.hasRequiredContacts)
+      )
+    }}
       <div class="panel facets">
         <div class="panel-body">
           <div class="btn-toolbar">
@@ -21,13 +27,18 @@
     {{else}}
       <div class="panel panel-transparent">
         <div class="panel-body">
-          {{#if (not model.provider.hasRequiredContacts)}}
+          {{link}}
+          {{#if (eq model.provider.memberType 'consortium')}}
             <BsAlert @dismissible={{false}} @type="warning">
-              New prefixes can't be assigned unless all required contacts exist.
+              New prefixes can't be assigned from this page.
             </BsAlert>
-          {{else}}
+          {{else if (cannot 'create prefix' model)}}
             <BsAlert @dismissible={{false}} @type="warning">
               Please ask DataCite Staff if you want to add a prefix.
+            </BsAlert>
+          {{else if (not model.provider.hasRequiredContacts)}}
+            <BsAlert @dismissible={{false}} @type="warning">
+              New prefixes can't be assigned unless all required contacts are assigned.
             </BsAlert>
           {{/if}}
         </div>

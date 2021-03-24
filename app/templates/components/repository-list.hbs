@@ -5,7 +5,7 @@
         (can 'create repository' model)
         (eq link 'providers.show.repositories')
         (not-eq model.provider.memberType 'consortium')
-        model.provider.hasRequiredContacts
+        (or (eq model.currentUser.role_id 'staff_admin') model.provider.hasRequiredContacts)
       )
     }}
       <div class="panel facets">
@@ -27,19 +27,19 @@
       </div>
     {{else}}
       <div class="panel panel-transparent">
-        <div class="panel-body">
-          {{#if (not-eq link 'providers.show.repositories')}}
+        <div class="panel-body" cy-data="alert">
+          {{#if (or (not-eq link 'providers.show.repositories') (eq model.provider.memberType 'consortium'))}}
             <BsAlert @dismissible={{false}} @type="warning">
               New repositories can't be created from this page.
-            </BsAlert>
-          {{else if (not model.provider.hasRequiredContacts)}}
-            <BsAlert @dismissible={{false}} @type="warning">
-              New repositories can't be created unless all required contacts exist.
             </BsAlert>
           {{else if (cannot 'create repository' model)}}
             <BsAlert @dismissible={{false}} @type="warning">
               New repositories can't be created unless the user has the correct
               permissions.
+            </BsAlert>
+          {{else if (not model.provider.hasRequiredContacts)}}
+            <BsAlert @dismissible={{false}} @type="warning">
+              New repositories can't be created unless all required contacts are assigned.
             </BsAlert>
           {{/if}}
         </div>

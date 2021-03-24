@@ -134,4 +134,38 @@ describe('Consortium Admin: Contact', () => {
     cy.get('h3.member-results').contains('Contact Information');
     cy.get('div#service-contact').should('exist');
   });
+
+  it('show repositories', () => {
+    cy.visit('/providers/dc/repositories');
+    cy.location().should((loc) => {
+      expect(loc.pathname).to.eq('/providers/dc/repositories');
+    });
+
+    cy.get('h2.work').contains('DataCite');
+    cy.get('h3.member-results').contains('Repositories');
+    cy.get('[cy-data="alert"]').contains('New repositories can\'t be created from this page.');
+  });
+
+  it('show repositories for consortium organization', () => {
+    cy.visit('/providers/datacite/repositories');
+    cy.location().should((loc) => {
+      expect(loc.pathname).to.eq('/providers/datacite/repositories');
+    });
+
+    cy.get('h2.work').contains('DataCite');
+    cy.get('h3.member-results').contains('Repositories');
+    cy.get('#add-repository').should('exist');
+  });
+
+  it('show repositories for consortium organization with missing contacts', () => {
+    cy.visit('/providers/mgxi/repositories');
+    cy.location().should((loc) => {
+      expect(loc.pathname).to.eq('/providers/mgxi/repositories');
+    });
+
+    cy.get('h2.work').contains('ETH Zurich');
+    cy.get('h3.work').contains('Atlas of Innovations');
+    cy.get('#add-repository').should('not.exist');
+    cy.get('[cy-data="alert"]').contains('New repositories can\'t be created unless all required contacts are assigned.');
+  });
 });

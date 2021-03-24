@@ -31,8 +31,8 @@ export default Ability.extend({
     }
   ),
   canCreate: computed(
-    'currentUser.{role_id,provider_id,provider.hasRequiredContacts}',
-    'model.provider.{id,memberType,consortium.id}',
+    'currentUser.{role_id,provider_id}',
+    'model.provider.{id,consortium.id}',
     function () {
       switch (this.get('currentUser.role_id')) {
         case 'staff_admin':
@@ -40,14 +40,12 @@ export default Ability.extend({
         case 'consortium_admin':
           return (
             this.get('currentUser.provider_id') ===
-              this.get('model.provider.consortium.id') &&
-            this.get('currentUser.provider.hasRequiredContacts')
+              this.get('model.provider.consortium.id')
           );
         case 'provider_admin':
           return (
             this.get('currentUser.provider_id') ===
-              this.get('model.provider.id') &&
-            this.get('currentUser.provider.hasRequiredContacts')
+              this.get('model.provider.id')
           );
         default:
           return false;

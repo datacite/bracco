@@ -126,4 +126,15 @@ describe('Organization Admin: Contact', () => {
     cy.get('h3.member-results').contains('Contact Information');
     cy.get('div#service-contact').should('exist');
   });
+
+  it('show repositories', () => {
+    cy.visit('/providers/datacite/repositories');
+    cy.location().should((loc) => {
+      expect(loc.pathname).to.eq('/providers/datacite/repositories');
+    });
+
+    cy.get('h2.work').contains('DataCite');
+    cy.get('h3.member-results').contains('Repositories');
+    cy.get('#add-repository').should('exist');
+  });
 });

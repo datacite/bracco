@@ -5,6 +5,7 @@ import { inject as service } from '@ember/service';
 
 export default Route.extend({
   can: service(),
+  currentUser: service(),
 
   model(params) {
     let providerId = null;
@@ -26,6 +27,7 @@ export default Route.extend({
 
     return hash({
       provider: this.modelFor('providers/show'),
+      currentUser: this.currentUser,
       prefixes: this.store
         .query('provider-prefix', params, { reload: true })
         .then(function (result) {
