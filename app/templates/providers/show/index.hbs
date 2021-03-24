@@ -226,7 +226,7 @@
               </span>
             {{/if}}
           </div>
-          {{#if model.secondaryServiceContact}}
+          {{#if model.secondaryServiceContact.email}}
             <h5>
               Secondary Service Contact
             </h5>
@@ -234,7 +234,7 @@
               {{format-contact model.secondaryServiceContact}}
             </div>
           {{/if}}
-          {{#if model.technicalContact}}
+          {{#if model.technicalContact.email}}
             <h5>
               Technical Contact
             </h5>
@@ -242,7 +242,7 @@
               {{format-contact model.technicalContact}}
             </div>
           {{/if}}
-          {{#if model.secondaryTechnicalContact}}
+          {{#if model.secondaryTechnicalContact.email}}
             <h5>
               Secondary Technical Contact
             </h5>
@@ -263,7 +263,7 @@
                 </span>
               {{/if}}
             </div>
-            {{#if model.secondaryBillingContact}}
+            {{#if model.secondaryBillingContact.email}}
               <h5>
                 Secondary Billing Contact
               </h5>
