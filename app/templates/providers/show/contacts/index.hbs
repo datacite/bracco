@@ -1,150 +1,152 @@
 {{#if (can 'read provider' model.provider)}}
-  <div class="col-md-3">
-    <div class="panel facets">
-      <div class="panel-body">
-        <div class="btn-toolbar">
-          <div class="btn-group btn-group-sm">
-            <LinkTo
-              @route="providers.show.contacts.new"
-              @model={{model.provider.id}}
-              class="btn btn-warning"
-              @id="add-contact"
-            >
-              <i class="fas fa-plus"></i>
-              Add Contact
-            </LinkTo>
-          </div>
-        </div>
-      </div>
-    </div>
-    {{#if model.contacts.meta.roles}}
-      <div class="panel facets add">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="panel facets">
         <div class="panel-body">
-          <h4>
-            Role
-            <span class="small">
-              <i class="fas fa-question-circle"></i>
-              <BsTooltip @placement="top">
-                Filter contacts by their role.
-              </BsTooltip>
-            </span>
-          </h4>
-          <ul>
-            {{#each model.contacts.meta.roles as |role|}}
-              <li>
-                {{#if (eq model.contacts.query.role-name role.id)}}
-                  <LinkTo
-                    @route="providers.show.contacts"
-                    @model={{model.provider.id}}
-                    @query={{hash role-name=null}}
-                  >
-                    <i class="far fa-check-square"></i>
-                  </LinkTo>
-                {{else}}
-                  <LinkTo
-                    @route="providers.show.contacts"
-                    @model={{model.provider.id}}
-                    @id="role-name-{{role.id}}"
-                    @query={{hash role-name=role.id}}
-                  >
-                    <i class="far fa-square"></i>
-                  </LinkTo>
-                {{/if}}
-                <div class="facet-title">
-                  {{role.title}}
-                </div>
-                <span class="number pull-right">
-                  {{role.count}}
-                </span>
-                <div class="clearfix"></div>
-              </li>
-            {{/each}}
-          </ul>
-        </div>
-      </div>
-    {{/if}}
-  </div>
-  <div class="col-md-9 panel-list" id="content">
-    <ModelSearch
-      @model={{model.contacts}}
-      @name="Contact"
-      @sortable={{true}}
-      @link="providers.show.contacts"
-    />
-    {{#if (gt model.contacts.length 0)}}
-      {{#each model.contacts as |contact|}}
-        <div class="panel panel-transparent" data-test-contact>
-          <div class="panel-body">
-            <h3 class="work">
-              <LinkTo @route="contacts.show" @model={{contact.id}}>
-                {{contact.displayName}}
-              </LinkTo>
-            </h3>
-            {{#if (eq model.provider.memberType 'consortium')}}
-              <h5>
-                {{if
-                  (eq contact.provider.memberType 'consortium_organization')
-                  'Consortium Organization'
-                  'Member'
-                }}
-              </h5>
+          <div class="btn-toolbar">
+            <div class="btn-group btn-group-sm">
               <LinkTo
-                @route="providers.show.contacts"
-                @model={{contact.provider.id}}
-              >
-                {{contact.provider.name}}
-              </LinkTo>
-            {{/if}}
-            <h5>
-              Email
-            </h5>
-            <a href="mailto:{{contact.email}}">
-              {{contact.email}}
-            </a>
-            <h5>
-              Roles
-            </h5>
-            {{#if (gt contact.roleName.length 0)}}
-              {{contact.roleNameString}}
-            {{else}}
-              <span class="icon-warning">
-                No roles found. Please assign roles in the <LinkTo
-                @route="providers.show.edit"
+                @route="providers.show.contacts.new"
                 @model={{model.provider.id}}
+                class="btn btn-warning"
+                @id="add-contact"
               >
-                {{if (eq this.model.provider.memberType 'consortium_organization')
-            'Consortium Organization'
-            'Member'}} Settings
-            </LinkTo>.
-              </span>
-            {{/if}}
-            <h5>
-              Created
-            </h5>
-            {{format-time
-              contact.created
-              year='numeric'
-              month='long'
-              day='numeric'
-              hour='numeric'
-              minute='numeric'
-              second='numeric'
-              timeZone='UTC'
-              timeZoneName='short'
-              hour12=false
-            }}
+                <i class="fas fa-plus"></i>
+                Add Contact
+              </LinkTo>
+            </div>
           </div>
         </div>
-      {{/each}}
-      <div class="text-center">
-        {{#if (gt model.contacts.meta.totalPages 1)}}
-          <PageNumbers @model={{model.contacts}} @link="contacts" />
-        {{/if}}
       </div>
-    {{else}}
-      <BsAlert @dismissible={{false}} @type="warning">
-        No contacts found.
-      </BsAlert>
-    {{/if}}
+      {{#if model.contacts.meta.roles}}
+        <div class="panel facets add">
+          <div class="panel-body">
+            <h4>
+              Role
+              <span class="small">
+                <i class="fas fa-question-circle"></i>
+                <BsTooltip @placement="top">
+                  Filter contacts by their role.
+                </BsTooltip>
+              </span>
+            </h4>
+            <ul>
+              {{#each model.contacts.meta.roles as |role|}}
+                <li>
+                  {{#if (eq model.contacts.query.role-name role.id)}}
+                    <LinkTo
+                      @route="providers.show.contacts"
+                      @model={{model.provider.id}}
+                      @query={{hash role-name=null}}
+                    >
+                      <i class="far fa-check-square"></i>
+                    </LinkTo>
+                  {{else}}
+                    <LinkTo
+                      @route="providers.show.contacts"
+                      @model={{model.provider.id}}
+                      @id="role-name-{{role.id}}"
+                      @query={{hash role-name=role.id}}
+                    >
+                      <i class="far fa-square"></i>
+                    </LinkTo>
+                  {{/if}}
+                  <div class="facet-title">
+                    {{role.title}}
+                  </div>
+                  <span class="number pull-right">
+                    {{role.count}}
+                  </span>
+                  <div class="clearfix"></div>
+                </li>
+              {{/each}}
+            </ul>
+          </div>
+        </div>
+      {{/if}}
+    </div>
+    <div class="col-md-9 panel-list" id="content">
+      <ModelSearch
+        @model={{model.contacts}}
+        @name="Contact"
+        @sortable={{true}}
+        @link="providers.show.contacts"
+      />
+      {{#if (gt model.contacts.length 0)}}
+        {{#each model.contacts as |contact|}}
+          <div class="panel panel-transparent" data-test-contact>
+            <div class="panel-body">
+              <h3 class="work">
+                <LinkTo @route="contacts.show" @model={{contact.id}}>
+                  {{contact.displayName}}
+                </LinkTo>
+              </h3>
+              {{#if (eq model.provider.memberType 'consortium')}}
+                <h5>
+                  {{if
+                    (eq contact.provider.memberType 'consortium_organization')
+                    'Consortium Organization'
+                    'Member'
+                  }}
+                </h5>
+                <LinkTo
+                  @route="providers.show.contacts"
+                  @model={{contact.provider.id}}
+                >
+                  {{contact.provider.name}}
+                </LinkTo>
+              {{/if}}
+              <h5>
+                Email
+              </h5>
+              <a href="mailto:{{contact.email}}">
+                {{contact.email}}
+              </a>
+              <h5>
+                Roles
+              </h5>
+              {{#if (gt contact.roleName.length 0)}}
+                {{contact.roleNameString}}
+              {{else}}
+                <span class="icon-warning">
+                  No roles found. Please assign roles in the <LinkTo
+                  @route="providers.show.edit"
+                  @model={{model.provider.id}}
+                >
+                  {{if (eq this.model.provider.memberType 'consortium_organization')
+              'Consortium Organization'
+              'Member'}} Settings
+              </LinkTo>.
+                </span>
+              {{/if}}
+              <h5>
+                Created
+              </h5>
+              {{format-time
+                contact.created
+                year='numeric'
+                month='long'
+                day='numeric'
+                hour='numeric'
+                minute='numeric'
+                second='numeric'
+                timeZone='UTC'
+                timeZoneName='short'
+                hour12=false
+              }}
+            </div>
+          </div>
+        {{/each}}
+        <div class="text-center">
+          {{#if (gt model.contacts.meta.totalPages 1)}}
+            <PageNumbers @model={{model.contacts}} @link="contacts" />
+          {{/if}}
+        </div>
+      {{else}}
+        <BsAlert @dismissible={{false}} @type="warning">
+          No contacts found.
+        </BsAlert>
+      {{/if}}
+    </div>
   </div>
 {{/if}}

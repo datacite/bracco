@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-3">
-    {{#if (can 'write index')}}
+    {{#if (and (can 'write index') model.provider.hasRequiredContacts)}}
       <div class="panel facets">
         <div class="panel-body">
           <div class="btn-toolbar">
@@ -21,9 +21,15 @@
     {{else}}
       <div class="panel panel-transparent">
         <div class="panel-body">
-          <div class="alert alert-warning">
-            Please ask DataCite Staff if you want to add a prefix.
-          </div>
+          {{#if (not model.provider.hasRequiredContacts)}}
+            <BsAlert @dismissible={{false}} @type="warning">
+              New prefixes can't be assigned unless all required contacts exist.
+            </BsAlert>
+          {{else}}
+            <BsAlert @dismissible={{false}} @type="warning">
+              Please ask DataCite Staff if you want to add a prefix.
+            </BsAlert>
+          {{/if}}
         </div>
       </div>
     {{/if}}

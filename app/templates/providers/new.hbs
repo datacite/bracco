@@ -266,13 +266,13 @@
           </h3>
           <div class="col-md-9 col-md-offset-3">
             <BsAlert @dismissible={{false}} @type="danger">
-              There are no contacts in your contacts list, please first <LinkTo
+              There are no contacts in your contacts list. Please <LinkTo
                 @route="providers.show.contacts.new"
                 @model={{model.id}}
                 @id="add-contact"
               >
-                add a contact
-              </LinkTo> before assigning roles.
+                add at least one contact
+              </LinkTo>.
             </BsAlert>
           </div>
           {{#if (not-eq model.memberType 'consortium_organization')}}

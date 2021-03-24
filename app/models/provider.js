@@ -222,12 +222,12 @@ export default Model.extend(Validations, {
     'billingContact',
     function () {
       if (this.memberType === 'consortium_organization') {
-        return isPresent(this.serviceContact);
+        return isPresent(this.serviceContact.email);
       } else {
         return (
-          isPresent(this.votingContact) &&
-          isPresent(this.serviceContact) &&
-          isPresent(this.billingContact)
+          isPresent(this.votingContact.email) &&
+          isPresent(this.serviceContact.email) &&
+          isPresent(this.billingContact.email)
         );
       }
     }

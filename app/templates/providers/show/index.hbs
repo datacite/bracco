@@ -52,17 +52,6 @@
     <RepositorySidebar @model={{model}} />
   </div>
   <div class="col-md-9">
-    {{#if (is-empty model.contacts)}}
-      <BsAlert @dismissible={{false}} @type="danger">
-        Please register at least one contact for this
-        {{if
-          (eq model.memberType 'consortium_organization')
-          'organization'
-          'member'
-        }}
-        .
-      </BsAlert>
-    {{/if}}
     <h3 class="member-results">
       Organization Information
     </h3>
@@ -191,13 +180,13 @@
       <div class="panel-body">
         {{#if (is-empty model.contacts)}}
           <BsAlert @dismissible={{false}} @type="danger">
-            There are no contacts in your contacts list, please first <LinkTo
+            There are no contacts in your contacts list. Please <LinkTo
               @route="providers.show.contacts.new"
               @model={{model.id}}
               @id="add-contact"
             >
-              add a contact
-            </LinkTo> before assigning roles.
+              add at least one contact
+            </LinkTo>.
           </BsAlert>
         {{else}}
           {{#if (not-eq model.memberType 'consortium_organization')}}
