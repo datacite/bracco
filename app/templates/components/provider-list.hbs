@@ -380,7 +380,7 @@
               Voting Representative
             </h5>
             <div cy-data="voting">
-              {{#if provider.votingContact}}
+              {{#if provider.votingContact.email}}
                 {{format-contact provider.votingContact}}
               {{else}}
                 <span class="small icon-warning">
@@ -393,7 +393,7 @@
             Service Contact
           </h5>
           <div cy-data="service">
-            {{#if provider.serviceContact}}
+            {{#if provider.serviceContact.email}}
               {{format-contact provider.serviceContact}}
             {{else}}
               <span class="small icon-warning">
@@ -406,7 +406,7 @@
               Billing Contact
             </h5>
             <div cy-data="billing">
-              {{#if provider.billingContact}}
+              {{#if provider.billingContact.email}}
                 {{format-contact provider.billingContact}}
               {{else}}
                 <span class="small icon-warning">
