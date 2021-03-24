@@ -8,10 +8,18 @@ export default Controller.extend({
   actions: {
     submit(contact) {
       let self = this;
+      let provider = contact.get('provider');
       contact
         .save()
-        .then(function (c) {
-          self.transitionToRoute('contacts.show', c);
+        .then(function () {
+          return new Promise(function(resolve, reject) { 
+            setTimeout(function () {
+              resolve();
+            }, 2000)
+          });
+        })
+        .then(function (contact) {
+          self.transitionToRoute('providers.show.contacts', provider);
         })
         .catch(function (reason) {
           console.debug(reason);
@@ -19,7 +27,7 @@ export default Controller.extend({
     },
     cancel() {
       this.model.rollbackAttributes();
-      this.transitionToRoute('contacts.show', this.model);
+      this.transitionToRoute('providers.show.contacts', this.model.get('provider'));
     }
   }
 });

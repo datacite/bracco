@@ -15,6 +15,13 @@ export default Controller.extend({
         .then(function (contact) {
           contact
             .destroyRecord()
+            .then(() => {
+              return new Promise(function(resolve, reject) { 
+                setTimeout(() => {
+                  resolve();
+                }, 2000)
+              });
+            })
             .then(function () {
               self.transitionToRoute('providers.show.contacts', providerId);
             })
