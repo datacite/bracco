@@ -10,8 +10,8 @@ export default Route.extend({
   },
 
   afterModel(model) {
-    if (this.can.cannot('read contact', model)) {
-      this.transitionTo('index');
+    if (this.can.cannot('delete contact', model)) {
+      this.transitionTo('providers.show', model);
     }
   }
 });

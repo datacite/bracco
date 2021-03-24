@@ -6,24 +6,28 @@ export default Ability.extend({
   currentUser: service(),
 
   canDelete: computed(
-    'currentUser.{role_id,provider_id}',
-    'model.provider.{id,memberType,consortium.id}',
+    'currentUser.{role_id,provider_id}','model.roleName',
+    'model.provider.{id,memberType,consortium.id,contacts}',
     function () {
-      switch (this.get('currentUser.role_id')) {
-        case 'staff_admin':
-          return true;
-        case 'consortium_admin':
-          return (
-            this.get('currentUser.provider_id') ===
-            this.get('model.provider.consortium.id')
-          );
-        case 'provider_admin':
-          return (
-            this.get('currentUser.provider_id') ===
-            this.get('model.provider.id')
-          );
-        default:
-          return false;
+      if (this.get('model.roleName').length > 0 || this.get('model.provider.contacts').length == 1) {
+        return false;
+      } else {
+        switch (this.get('currentUser.role_id')) {
+          case 'staff_admin':
+            return true;
+          case 'consortium_admin':
+            return (
+              this.get('currentUser.provider_id') ===
+              this.get('model.provider.consortium.id')
+            );
+          case 'provider_admin':
+            return (
+              this.get('currentUser.provider_id') ===
+              this.get('model.provider.id')
+            );
+          default:
+            return false;
+        }
       }
     }
   ),
