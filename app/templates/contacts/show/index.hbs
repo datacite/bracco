@@ -14,7 +14,7 @@
                 <i class="fas fa-pencil-alt"></i>
                 Update Contact
               </LinkTo>
-              {{#if (can 'delete contact' model)}}
+              {{#if (and (can 'delete contact' model) (gt model.contacts.length 1))}}
                 <LinkTo
                   @route="contacts.show.delete"
                   @model={{model.id}}
