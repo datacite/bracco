@@ -42,7 +42,7 @@ module('Unit | Ability | contact', function (hooks) {
     ability.model = this.model;
 
     assert.equal(ability.canCreate, true);
-    assert.equal(ability.canDelete, true);
+    assert.equal(ability.canDelete, false);
     assert.equal(ability.canUpdate, true);
     assert.equal(ability.canRead, true);
   });

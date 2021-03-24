@@ -9,7 +9,7 @@ export default Ability.extend({
     'currentUser.{role_id,provider_id}','model.roleName',
     'model.provider.{id,memberType,consortium.id,contacts}',
     function () {
-      if (this.get('model.roleName').length > 0 || this.get('model.provider.contacts').length == 1) {
+      if (this.get('model.roleName') && this.get('model.roleName').length > 0 || this.get('model.provider.contacts') && this.get('model.provider.contacts').length == 1) {
         return false;
       } else {
         switch (this.get('currentUser.role_id')) {
