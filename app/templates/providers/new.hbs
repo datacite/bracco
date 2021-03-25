@@ -266,13 +266,7 @@
           </h3>
           <div class="col-md-9 col-md-offset-3">
             <BsAlert @dismissible={{false}} @type="danger">
-              There are no contacts in your contacts list. Please <LinkTo
-                @route="providers.show.contacts.new"
-                @model={{model.id}}
-                @id="add-contact"
-              >
-                add at least one contact
-              </LinkTo>.
+              Please add at least one contact via the member contacts menu after creating this member.
             </BsAlert>
           </div>
           {{#if (not-eq model.memberType 'consortium_organization')}}
@@ -373,7 +367,7 @@
             @helpText="This account can manage repositories and prefixes"
           />
           <div class="col-md-9 col-md-offset-3">
-            <BsAlert @dismissible={{false}} class="opt-in" @type="warning">
+            <BsAlert @dismissible={{false}} @type="warning">
               The contacts entered may receive notifications about administration, webinars, product testing, 
               or news that will impact the use of DataCite services and/or membership. Individuals may remove 
               themselves from mailings by following the unsubscribe link provided in every DataCite email. 
