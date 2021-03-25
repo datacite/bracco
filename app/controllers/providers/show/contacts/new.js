@@ -1,6 +1,5 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
-import { isBlank } from '@ember/utils';
 
 export default Controller.extend({
   store: service(),
@@ -12,13 +11,13 @@ export default Controller.extend({
       contact
         .save()
         .then(function () {
-          return new Promise(function(resolve, reject) { 
+          return new Promise(function (resolve, reject) {
             setTimeout(function () {
               resolve();
-            }, 2000)
+            }, 2000);
           });
         })
-        .then(function (contact) {
+        .then(function () {
           self.transitionToRoute('providers.show.contacts', provider);
         })
         .catch(function (reason) {
@@ -26,8 +25,7 @@ export default Controller.extend({
         });
     },
     cancel() {
-      this.model.contact.rollbackAttributes();
-      this.transitionToRoute('contacts.show', this.model);
+      this.transitionToRoute('providers.show.contacts', this.model.provider);
     }
   }
 });

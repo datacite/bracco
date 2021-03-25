@@ -12,13 +12,13 @@ export default Controller.extend({
       contact
         .save()
         .then(function () {
-          return new Promise(function(resolve, reject) { 
+          return new Promise(function (resolve, reject) {
             setTimeout(function () {
               resolve();
-            }, 2000)
+            }, 2000);
           });
         })
-        .then(function (contact) {
+        .then(function () {
           self.transitionToRoute('providers.show.contacts', provider);
         })
         .catch(function (reason) {
@@ -27,7 +27,10 @@ export default Controller.extend({
     },
     cancel() {
       this.model.rollbackAttributes();
-      this.transitionToRoute('providers.show.contacts', this.model.get('provider'));
+      this.transitionToRoute(
+        'providers.show.contacts',
+        this.model.get('provider')
+      );
     }
   }
 });
