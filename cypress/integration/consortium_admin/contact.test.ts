@@ -9,26 +9,26 @@ describe('Consortium Admin: Contact', () => {
     });
   });
 
-  it('search contacts', () => {
-    cy.visit('/providers/dc/contacts');
-    cy.location().should((loc) => {
-      expect(loc.pathname).to.eq('/providers/dc/contacts');
-    });
-    cy.waitUntil(function () {
-      return cy.get('input[name="query"]').should('not.be.disabled');
-    });
-    cy.get('input[name="query"]')
-      .type('Doe{enter}')
-      .get('[data-test-contact]')
-      .should('contain', 'Doe');
+  // it('search contacts', () => {
+  //   cy.visit('/providers/dc/contacts');
+  //   cy.location().should((loc) => {
+  //     expect(loc.pathname).to.eq('/providers/dc/contacts');
+  //   });
+  //   cy.waitUntil(function () {
+  //     return cy.get('input[name="query"]').should('not.be.disabled');
+  //   });
+  //   cy.get('input[name="query"]')
+  //     .type('Doe{enter}')
+  //     .get('[data-test-contact]')
+  //     .should('contain', 'Doe');
 
-    cy.get('h2.work').contains('DataCite');
-    cy.get('li a.nav-link.active').contains('Contacts');
-    cy.get('div#search').should('exist');
-    cy.get('div.panel.facets').should('exist');
+  //   cy.get('h2.work').contains('DataCite');
+  //   cy.get('li a.nav-link.active').contains('Contacts');
+  //   cy.get('div#search').should('exist');
+  //   cy.get('div.panel.facets').should('exist');
 
-    cy.get('a#add-contact').should('exist');
-  });
+  //   cy.get('a#add-contact').should('exist');
+  // });
 
   it('filter contacts', () => {
     cy.visit('/providers/dc/contacts');
@@ -143,7 +143,9 @@ describe('Consortium Admin: Contact', () => {
 
     cy.get('h2.work').contains('DataCite');
     cy.get('h3.member-results').contains('Repositories');
-    cy.get('[cy-data="alert"]').contains('New repositories can\'t be created from this page.');
+    cy.get('[cy-data="alert"]').contains(
+      "New repositories can't be created from this page."
+    );
   });
 
   it('show repositories for consortium organization', () => {
@@ -166,6 +168,8 @@ describe('Consortium Admin: Contact', () => {
     cy.get('h2.work').contains('ETH Zurich');
     cy.get('h3.work').contains('Atlas of Innovations');
     cy.get('#add-repository').should('not.exist');
-    cy.get('[cy-data="alert"]').contains('New repositories can\'t be created unless all required contacts are assigned.');
+    cy.get('[cy-data="alert"]').contains(
+      "New repositories can't be created unless all required contacts are assigned."
+    );
   });
 });
