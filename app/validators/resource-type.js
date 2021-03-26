@@ -5,20 +5,32 @@ const ResourceType = BaseValidator.extend({
   validate(value, options) {
     const resourceTypeGeneralList = [
       'Audiovisual',
+      'Book',
+      'BookChapter',
       'Collection',
+      'ComputationalNotebook',
+      'ConferencePaper',
+      'ConferenceProceeding',
       'DataPaper',
       'Dataset',
+      'Dissertation',
       'Event',
       'Image',
       'InteractiveResource',
+      'Journal',
+      'JournalArticle',
       'Model',
+      'OutputManagementPlan',
+      'PeerReview',
       'PhysicalObject',
+      'Preprint',
       'Service',
       'Software',
       'Sound',
+      'Standard',
       'Text',
       'Workflow',
-      'Other',
+      'Other'
     ];
 
     const message = 'Resource of the Type is not valid.';
@@ -31,7 +43,7 @@ const ResourceType = BaseValidator.extend({
       default:
         return message;
     }
-  },
+  }
 });
 
 export default ResourceType;

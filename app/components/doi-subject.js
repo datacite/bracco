@@ -78,6 +78,10 @@ export default Component.extend({
     this.fragment.set('subjectScheme', value);
     this.set('subjectScheme', value);
   },
+  setClassificationCode(value) {
+    this.fragment.set('classificationCode', value);
+    this.set('classificationCode', value);
+  },
   didReceiveAttrs() {
     this._super(...arguments);
 
@@ -128,6 +132,9 @@ export default Component.extend({
     },
     updateSubjectSchemeUri(value) {
       this.setSchemeUri(value);
+    },
+    updateClassificationCode(value) {
+      this.setClassificationCode(value);
     },
     deleteSubject() {
       this.model.get('subjects').removeObject(this.fragment);
