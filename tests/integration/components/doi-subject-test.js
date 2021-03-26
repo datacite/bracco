@@ -1,8 +1,8 @@
-import { module, test } from 'qunit';
+import { module } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
-import hbs from 'htmlbars-inline-precompile';
-import { setupFactoryGuy, make } from 'ember-data-factory-guy';
+// import { render } from '@ember/test-helpers';
+// import hbs from 'htmlbars-inline-precompile';
+import { setupFactoryGuy } from 'ember-data-factory-guy';
 
 module('Integration | Component | doi subject', function (hooks) {
   setupRenderingTest(hooks);
