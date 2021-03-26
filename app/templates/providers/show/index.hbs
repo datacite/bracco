@@ -180,13 +180,15 @@
       <div class="panel-body">
         {{#if (is-empty model.contacts)}}
           <BsAlert @dismissible={{false}} @type="danger">
-            There are no contacts in your contacts list. Please <LinkTo
+            There are no contacts in your contacts list. Please
+            <LinkTo
               @route="providers.show.contacts.new"
               @model={{model.id}}
               @id="add-contact"
             >
               add at least one contact
-            </LinkTo>.
+            </LinkTo>
+            .
           </BsAlert>
         {{else}}
           {{#if (not-eq model.memberType 'consortium_organization')}}
@@ -194,7 +196,7 @@
               Voting Representative
             </h5>
             <div cy-data="voting">
-              {{#if model.votingContact}}
+              {{#if model.votingContact.email}}
                 {{format-contact model.votingContact}}
               {{else}}
                 <span class="small icon-warning">
@@ -207,7 +209,7 @@
             Service Contact
           </h5>
           <div cy-data="service">
-            {{#if model.serviceContact}}
+            {{#if model.serviceContact.email}}
               {{format-contact model.serviceContact}}
             {{else}}
               <span class="small icon-warning">
@@ -244,7 +246,7 @@
               Billing Contact
             </h5>
             <div cy-data="billing">
-              {{#if model.billingContact}}
+              {{#if model.billingContact.email}}
                 {{format-contact model.billingContact}}
               {{else}}
                 <span class="small icon-warning">

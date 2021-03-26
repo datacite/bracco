@@ -5,6 +5,7 @@ import { validator, buildValidations } from 'ember-cp-validations';
 
 const Validations = buildValidations({
   email: [
+    validator('presence', true),
     validator('email-format', {
       allowBlank: true
     })
@@ -29,5 +30,5 @@ export default Fragment.extend(Validations, {
     } else {
       return this.email;
     }
-  }),
+  })
 });

@@ -283,24 +283,25 @@
       {{#if (is-empty model.contacts)}}
         <div class="col-md-9 col-md-offset-3">
           <BsAlert @dismissible={{false}} @type="danger">
-            There are no contacts in your contacts list. Please <LinkTo
+            There are no contacts in your contacts list. Please
+            <LinkTo
               @route="providers.show.contacts.new"
               @model={{model.id}}
               @id="add-contact"
             >
               add at least one contact
-            </LinkTo>.
+            </LinkTo>
+            .
           </BsAlert>
         </div>
       {{else}}
         <div class="col-md-9 col-md-offset-3">
           <BsAlert @dismissible={{false}} @type="info">
-            Contacts are created and <LinkTo
-              @route="providers.show.contacts"
-              @model={{model.id}}
-            >
+            Contacts are created
+            <LinkTo @route="providers.show.contacts" @model={{model.id}}>
               in the contacts section
-            </LinkTo> and then assigned roles here.
+            </LinkTo>
+            and then assigned roles here.
           </BsAlert>
         </div>
         {{#if (not-eq model.memberType 'consortium_organization')}}
@@ -558,8 +559,8 @@
           @helpText="This account can manage repositories and prefixes"
         />
       {{/if}}
-      <div class="col-md-offset-3">
-        <BsAlert @dismissible={{false}} class="opt-in" @type="warning">
+      <div class="col-md-9 col-md-offset-3">
+        <BsAlert @dismissible={{false}} @type="warning">
           The contacts entered may receive notifications about administration, webinars, product testing, 
           or news that will impact the use of DataCite services and/or membership. Individuals may remove 
           themselves from mailings by following the unsubscribe link provided in every DataCite email. 
@@ -592,7 +593,13 @@
           </button>
         {{else}}
           <BsAlert @dismissible={{false}} @type="danger">
-            To save this member, first resolve the errors with these fields:
+            To save this
+            {{if
+              (eq model.memberType 'consortium_organization')
+              'organization,'
+              'member,'
+            }}
+            first resolve the errors with these fields:
             {{provider-form-errors model}}
             .
           </BsAlert>
