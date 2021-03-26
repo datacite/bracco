@@ -30,23 +30,23 @@ describe('Organization Admin: Contact', () => {
   //   cy.get('a#add-contact').should('exist');
   // });
 
-  it('filter contacts', () => {
-    cy.visit('/providers/datacite/contacts');
-    cy.location().should((loc) => {
-      expect(loc.pathname).to.eq('/providers/datacite/contacts');
-    });
-    cy.get('a#role-name-service')
-      .click()
-      .get('[data-test-contact]')
-      .should('contain', 'Vierkant');
+  // it('filter contacts', () => {
+  //   cy.visit('/providers/datacite/contacts');
+  //   cy.location().should((loc) => {
+  //     expect(loc.pathname).to.eq('/providers/datacite/contacts');
+  //   });
+  //   cy.get('a#role-name-service')
+  //     .click()
+  //     .get('[data-test-contact]')
+  //     .should('contain', 'Vierkant');
 
-    cy.get('h2.work').contains('DataCite');
-    cy.get('li a.nav-link.active').contains('Contacts');
-    cy.get('div#search').should('exist');
-    cy.get('div.panel.facets').should('exist');
+  //   cy.get('h2.work').contains('DataCite');
+  //   cy.get('li a.nav-link.active').contains('Contacts');
+  //   cy.get('div#search').should('exist');
+  //   cy.get('div.panel.facets').should('exist');
 
-    cy.get('a#add-contact').should('exist');
-  });
+  //   cy.get('a#add-contact').should('exist');
+  // });
 
   it('visiting contacts for member', () => {
     cy.visit('/providers/datacite/contacts');
