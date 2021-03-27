@@ -7,18 +7,10 @@ export default Controller.extend({
   actions: {
     submit(contact) {
       let self = this;
-      let provider = contact.get('provider');
       contact
         .save()
-        .then(function () {
-          return new Promise(function (resolve, reject) {
-            setTimeout(function () {
-              resolve();
-            }, 2000);
-          });
-        })
-        .then(function () {
-          self.transitionToRoute('providers.show.contacts', provider);
+        .then(function (c) {
+          self.transitionToRoute('contacts.show', c);
         })
         .catch(function (reason) {
           console.debug(reason);
