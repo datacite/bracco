@@ -1,7 +1,8 @@
 import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
 import { computed } from '@ember/object';
 import { reads } from '@ember/object/computed';
-import { isPresent } from '@ember/utils';
+import { isPresent, isBlank } from '@ember/utils';
+import { w } from '@ember/string';
 // import ENV from 'bracco/config/environment';
 import { validator, buildValidations } from 'ember-cp-validations';
 import { fragment } from 'ember-data-model-fragments/attributes';
@@ -122,8 +123,7 @@ const Validations = buildValidations({
   votingContact: [
     validator('presence', {
       presence: true,
-      message:
-        'A voting representative is required.',
+      message: 'A voting representative is required.',
       disabled: computed('model', function () {
         return (
           this.model.get('contacts').length === 0 ||
@@ -136,8 +136,7 @@ const Validations = buildValidations({
   serviceContact: [
     validator('presence', {
       presence: true,
-      message:
-        'A service contact is required.',
+      message: 'A service contact is required.',
       disabled: computed('model', function () {
         return (
           this.model.get('contacts').length === 0 || this.model.get('isNew')
@@ -148,8 +147,7 @@ const Validations = buildValidations({
   billingContact: [
     validator('presence', {
       presence: true,
-      message:
-        'A billing contact is required.',
+      message: 'A billing contact is required.',
       disabled: computed('model', function () {
         return (
           this.model.get('contacts').length === 0 ||
@@ -158,7 +156,8 @@ const Validations = buildValidations({
         );
       })
     })
-  ]
+  ],
+  'billingInformation.state': [validator('billing-state')]
 });
 
 export default Model.extend(Validations, {

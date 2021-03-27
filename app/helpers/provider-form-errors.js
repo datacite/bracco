@@ -11,7 +11,8 @@ const providerLabelList = {
   systemEmail: 'system email',
   votingContact: 'voting representative',
   serviceContact: 'service contact',
-  billingContact: 'billing contact'
+  billingContact: 'billing contact',
+  'billingInformation.state': 'billing state/province information'
 };
 const organizationLabelList = {
   symbol: 'member ID',
