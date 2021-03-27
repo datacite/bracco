@@ -300,9 +300,11 @@ export default Controller.extend({
           code: billingCountry.code,
           name: countryList.name(billingCountry.code)
         });
-        this.model.set('billingInformation.state', null);
-        this.set('countries', countryList);
+      } else {
+        this.model.set('billingInformation.country', null);
       }
+      this.model.set('billingInformation.state', null);
+      this.set('countries', countryList);
     },
     selectBillingState(billingState) {
       this.model.set('billingInformation.state', billingState);

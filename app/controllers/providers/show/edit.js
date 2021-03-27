@@ -299,9 +299,11 @@ export default Controller.extend({
           code: billingCountry.code,
           name: countryList.name(billingCountry.code)
         });
-        this.model.set('billingInformation.state', null);
-        this.set('countries', countryList);
+      } else {
+        this.model.set('billingInformation.country', null);
       }
+      this.model.set('billingInformation.state', null);
+      this.set('countries', countryList);
     },
     selectBillingState(billingState) {
       this.model.set('billingInformation.state', billingState);
@@ -352,33 +354,36 @@ export default Controller.extend({
     },
     selectVotingContact(contact) {
       if (contact) {
-        let votingContact = { 
+        let votingContact = {
           givenName: contact.givenName,
           familyName: contact.familyName,
           displayName: contact.displayName,
-          email: contact.email }
+          email: contact.email
+        };
         this.model.set('votingContact', votingContact);
         this.model.set('filteredContacts', this.model.contacts);
       }
     },
     selectServiceContact(contact) {
       if (contact) {
-        let serviceContact = { 
+        let serviceContact = {
           givenName: contact.givenName,
           familyName: contact.familyName,
           displayName: contact.displayName,
-          email: contact.email }
+          email: contact.email
+        };
         this.model.set('serviceContact', serviceContact);
         this.model.set('filteredContacts', this.model.contacts);
       }
     },
     selectSecondaryServiceContact(contact) {
       if (contact) {
-        let secondaryServiceContact = { 
+        let secondaryServiceContact = {
           givenName: contact.givenName,
           familyName: contact.familyName,
           displayName: contact.displayName,
-          email: contact.email }
+          email: contact.email
+        };
         this.model.set('secondaryServiceContact', secondaryServiceContact);
       } else {
         this.model.set('secondaryServiceContact', null);
@@ -386,11 +391,12 @@ export default Controller.extend({
     },
     selectTechnicalContact(contact) {
       if (contact) {
-        let technicalContact = { 
+        let technicalContact = {
           givenName: contact.givenName,
           familyName: contact.familyName,
           displayName: contact.displayName,
-          email: contact.email }
+          email: contact.email
+        };
         this.model.set('technicalContact', technicalContact);
       } else {
         this.model.set('technicalContact', null);
@@ -399,11 +405,12 @@ export default Controller.extend({
     },
     selectSecondaryTechnicalContact(contact) {
       if (contact) {
-        let secondaryTechnicalContact = { 
+        let secondaryTechnicalContact = {
           givenName: contact.givenName,
           familyName: contact.familyName,
           displayName: contact.displayName,
-          email: contact.email }
+          email: contact.email
+        };
         this.model.set('secondaryTechnicalContact', secondaryTechnicalContact);
       } else {
         this.model.set('secondaryTechnicalContact', null);
@@ -412,22 +419,24 @@ export default Controller.extend({
     },
     selectBillingContact(contact) {
       if (contact) {
-        let billingContact = { 
+        let billingContact = {
           givenName: contact.givenName,
           familyName: contact.familyName,
           displayName: contact.displayName,
-          email: contact.email }
+          email: contact.email
+        };
         this.model.set('billingContact', billingContact);
       }
       this.model.set('filteredContacts', this.model.contacts);
     },
     selectSecondaryBillingContact(contact) {
       if (contact) {
-        let secondaryBillingContact = { 
+        let secondaryBillingContact = {
           givenName: contact.givenName,
           familyName: contact.familyName,
           displayName: contact.displayName,
-          email: contact.email }
+          email: contact.email
+        };
         this.model.set('secondaryBillingContact', secondaryBillingContact);
       } else {
         this.model.set('secondaryBillingContact', null);
