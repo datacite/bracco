@@ -4,8 +4,7 @@
       (and
         (can 'create repository' model)
         (eq link 'providers.show.repositories')
-        (not-eq model.provider.memberType 'consortium')
-        (or (eq model.currentUser.role_id 'staff_admin') model.provider.hasRequiredContacts)
+        (eq hasRequiredContacts true)
       )
     }}
       <div class="panel facets">
@@ -28,7 +27,7 @@
     {{else}}
       <div class="panel panel-transparent">
         <div class="panel-body" cy-data="alert">
-          {{#if (or (not-eq link 'providers.show.repositories') (eq model.provider.memberType 'consortium'))}}
+          {{#if (or (not-eq link 'providers.show.repositories'))}}
             <BsAlert @dismissible={{false}} @type="warning">
               New repositories can't be created from this page.
             </BsAlert>
@@ -37,9 +36,38 @@
               New repositories can't be created unless the user has the correct
               permissions.
             </BsAlert>
-          {{else if (not model.provider.hasRequiredContacts)}}
+          {{else if (not-eq hasRequiredContacts true)}}
             <BsAlert @dismissible={{false}} @type="warning">
-              New repositories can't be created unless all required contacts are assigned.
+              New repositories can't be created because you have not provided the 
+              required
+              {{if
+                (eq model.provider.memberType 'consortium_organization')
+                'service contact'
+                'billing, service and voting contacts'
+              }}
+              for your organization. Please
+              <LinkTo
+                @route="providers.show.contacts.new"
+                @model={{model.provider.id}}
+                @id="add-contact"
+              >
+                add at least one contact.
+              </LinkTo>
+            </BsAlert>
+            <BsAlert @dismissible={{false}} @type="warning">
+              After adding contacts, please assign roles in the
+              <LinkTo
+                @route="providers.show.edit"
+                @model={{model.provider.id}}
+                @id="edit-provider"
+              >
+                {{if
+                  (eq this.model.provider.memberType 'consortium_organization')
+                  'Consortium Organization'
+                  'Member'
+                }}
+                Settings.
+              </LinkTo>
             </BsAlert>
           {{/if}}
         </div>
@@ -213,7 +241,8 @@
           </h4>
           <ul>
             {{#if model.repositories.meta.repositoryTypes}}
-              {{#each model.repositories.meta.repositoryTypes as |repositoryType|
+              {{#each
+                model.repositories.meta.repositoryTypes as |repositoryType|
               }}
                 <li>
                   {{#if model.repositories.query.repository-type}}
@@ -257,7 +286,8 @@
     {{/if}}
     {{#if
       (or
-        model.repositories.meta.certificates model.repositories.query.certificate
+        model.repositories.meta.certificates
+        model.repositories.query.certificate
       )
     }}
       <div class="panel facets">
@@ -308,7 +338,8 @@
         </div>
       </div>
     {{/if}}
-    {{#if (or model.repositories.meta.software model.repositories.query.software)
+    {{#if
+      (or model.repositories.meta.software model.repositories.query.software)
     }}
       <div class="panel facets">
         <div class="panel-body">
@@ -324,7 +355,10 @@
                       <i class="far fa-check-square"></i>
                     </LinkTo>
                   {{else}}
-                    <LinkTo @route={{link}} @query={{hash software=software.id}}>
+                    <LinkTo
+                      @route={{link}}
+                      @query={{hash software=software.id}}
+                    >
                       <i class="far fa-square"></i>
                     </LinkTo>
                   {{/if}}
