@@ -4,6 +4,7 @@
       (and
         (can 'create repository' model)
         (eq link 'providers.show.repositories')
+        (not-eq model.provider.memberType 'consortium')
         (eq hasRequiredContacts true)
       )
     }}
@@ -27,7 +28,12 @@
     {{else}}
       <div class="panel panel-transparent">
         <div class="panel-body" cy-data="alert">
-          {{#if (or (not-eq link 'providers.show.repositories'))}}
+          {{#if
+            (or
+              (not-eq link 'providers.show.repositories')
+              (eq model.provider.memberType 'consortium')
+            )
+          }}
             <BsAlert @dismissible={{false}} @type="warning">
               New repositories can't be created from this page.
             </BsAlert>
