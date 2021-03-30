@@ -1,5 +1,6 @@
-<h2 class="work">DataCite</h2>
-
+<h2 class="work">
+  DataCite
+</h2>
 <div class="tab-content nav-tabs-member">
   <BsNav
     @type="tabs"
@@ -8,27 +9,46 @@
     @fill={{false}} as |nav|
   >
     <nav.item>
-      <nav.link-to @route="info" class="nav-link">Info</nav.link-to>
+      <nav.link-to @route="info" class="nav-link">
+        Info
+      </nav.link-to>
     </nav.item>
     <nav.item>
-      <nav.link-to @route="index" class="nav-link">Settings</nav.link-to>
+      <nav.link-to @route="index" class="nav-link">
+        Settings
+      </nav.link-to>
     </nav.item>
     <nav.item>
-      <nav.link-to @route="providers" class="nav-link">Members</nav.link-to>
+      <nav.link-to @route="providers" class="nav-link">
+        Members
+      </nav.link-to>
     </nav.item>
     <nav.item>
-      <nav.link-to @route="repositories" class="nav-link">Repositories</nav.link-to>
+      <nav.link-to @route="contacts" class="nav-link">
+        Contacts
+      </nav.link-to>
     </nav.item>
     {{#if (feature-flag 'showResearchers')}}
       <nav.item>
-        <nav.link-to @route="users" class="nav-link">Users</nav.link-to>
+        <nav.link-to @route="users" class="nav-link">
+          Users
+        </nav.link-to>
       </nav.item>
     {{/if}}
     <nav.item>
-      <nav.link-to @route="prefixes" class="nav-link">Prefixes</nav.link-to>
+      <nav.link-to @route="repositories" class="nav-link">
+        Repositories
+      </nav.link-to>
     </nav.item>
     <nav.item>
-      <nav.link-to @route="dois" class="nav-link">DOIs</nav.link-to>
+      <nav.link-to @route="prefixes" class="nav-link">
+        Prefixes
+      </nav.link-to>
+    </nav.item>
+    <nav.item>
+      <nav.link-to @route="dois" class="nav-link">
+        DOIs
+      </nav.link-to>
     </nav.item>
   </BsNav>
 </div>

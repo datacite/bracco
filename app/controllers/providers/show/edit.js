@@ -299,9 +299,11 @@ export default Controller.extend({
           code: billingCountry.code,
           name: countryList.name(billingCountry.code)
         });
-        this.model.set('billingInformation.state', null);
-        this.set('countries', countryList);
+      } else {
+        this.model.set('billingInformation.country', null);
       }
+      this.model.set('billingInformation.state', null);
+      this.set('countries', countryList);
     },
     selectBillingState(billingState) {
       this.model.set('billingInformation.state', billingState);
@@ -341,8 +343,136 @@ export default Controller.extend({
         }
       );
     },
+    searchContact(query) {
+      let filteredContacts = this.model.contacts.filter(function (contact) {
+        console.log(contact.displayName.toLowerCase);
+        return contact.displayName
+          .toLowerCase()
+          .startsWith(query.toLowerCase());
+      });
+      this.model.set('filteredContacts', filteredContacts);
+    },
+    selectVotingContact(contact) {
+      if (contact) {
+        let votingContact = {
+          givenName: contact.givenName,
+          familyName: contact.familyName,
+          displayName: contact.displayName,
+          email: contact.email
+        };
+        this.model.set('votingContact', votingContact);
+        this.model.set('filteredContacts', this.model.contacts);
+      }
+    },
+    selectServiceContact(contact) {
+      if (contact) {
+        let serviceContact = {
+          givenName: contact.givenName,
+          familyName: contact.familyName,
+          displayName: contact.displayName,
+          email: contact.email
+        };
+        this.model.set('serviceContact', serviceContact);
+        this.model.set('filteredContacts', this.model.contacts);
+      }
+    },
+    selectSecondaryServiceContact(contact) {
+      if (contact) {
+        let secondaryServiceContact = {
+          givenName: contact.givenName,
+          familyName: contact.familyName,
+          displayName: contact.displayName,
+          email: contact.email
+        };
+        this.model.set('secondaryServiceContact', secondaryServiceContact);
+      } else {
+        this.model.set('secondaryServiceContact', null);
+      }
+    },
+    selectTechnicalContact(contact) {
+      if (contact) {
+        let technicalContact = {
+          givenName: contact.givenName,
+          familyName: contact.familyName,
+          displayName: contact.displayName,
+          email: contact.email
+        };
+        this.model.set('technicalContact', technicalContact);
+      } else {
+        this.model.set('technicalContact', null);
+      }
+      this.model.set('filteredContacts', this.model.contacts);
+    },
+    selectSecondaryTechnicalContact(contact) {
+      if (contact) {
+        let secondaryTechnicalContact = {
+          givenName: contact.givenName,
+          familyName: contact.familyName,
+          displayName: contact.displayName,
+          email: contact.email
+        };
+        this.model.set('secondaryTechnicalContact', secondaryTechnicalContact);
+      } else {
+        this.model.set('secondaryTechnicalContact', null);
+      }
+      this.model.set('filteredContacts', this.model.contacts);
+    },
+    selectBillingContact(contact) {
+      if (contact) {
+        let billingContact = {
+          givenName: contact.givenName,
+          familyName: contact.familyName,
+          displayName: contact.displayName,
+          email: contact.email
+        };
+        this.model.set('billingContact', billingContact);
+      }
+      this.model.set('filteredContacts', this.model.contacts);
+    },
+    selectSecondaryBillingContact(contact) {
+      if (contact) {
+        let secondaryBillingContact = {
+          givenName: contact.givenName,
+          familyName: contact.familyName,
+          displayName: contact.displayName,
+          email: contact.email
+        };
+        this.model.set('secondaryBillingContact', secondaryBillingContact);
+      } else {
+        this.model.set('secondaryBillingContact', null);
+      }
+      this.model.set('filteredContacts', this.model.contacts);
+    },
     submit() {
       let self = this;
+      let m = this.model;
+      // iterate through all contacts and update roles
+      this.model.get('contacts').forEach(function (contact) {
+        let roleName = [];
+        if (contact.email === m.get('votingContact.email')) {
+          roleName.push('voting');
+        }
+        if (contact.email === m.get('serviceContact.email')) {
+          roleName.push('service');
+        }
+        if (contact.email === m.get('secondaryServiceContact.email')) {
+          roleName.push('secondary_service');
+        }
+        if (contact.email === m.get('technicalContact.email')) {
+          roleName.push('technical');
+        }
+        if (contact.email === m.get('secondaryTechnicalContact.email')) {
+          roleName.push('secondary_technical');
+        }
+        if (contact.email === m.get('billingContact.email')) {
+          roleName.push('billing');
+        }
+        if (contact.email === m.get('secondaryBillingContact.email')) {
+          roleName.push('secondary_billing');
+        }
+        contact.set('roleName', roleName);
+        contact.save();
+      });
       this.model
         .save()
         .then(function (provider) {

@@ -1,5 +1,8 @@
 import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
 import { computed } from '@ember/object';
+import { reads } from '@ember/object/computed';
+import { isPresent, isBlank } from '@ember/utils';
+import { w } from '@ember/string';
 // import ENV from 'bracco/config/environment';
 import { validator, buildValidations } from 'ember-cp-validations';
 import { fragment } from 'ember-data-model-fragments/attributes';
@@ -108,7 +111,53 @@ const Validations = buildValidations({
       allowBlank: true,
       message: 'Please enter a valid 18 digit Salesforce ID.'
     })
-  ]
+  ],
+  contacts: [
+    validator('presence', {
+      presence: true,
+      disabled: computed('model', function () {
+        return this.model.get('isNew');
+      })
+    })
+  ],
+  votingContact: [
+    validator('presence', {
+      presence: true,
+      message: 'A voting representative is required.',
+      disabled: computed('model', function () {
+        return (
+          this.model.get('contacts').length === 0 ||
+          this.model.get('isNew') ||
+          this.model.get('memberType') === 'consortium_organization'
+        );
+      })
+    })
+  ],
+  serviceContact: [
+    validator('presence', {
+      presence: true,
+      message: 'A service contact is required.',
+      disabled: computed('model', function () {
+        return (
+          this.model.get('contacts').length === 0 || this.model.get('isNew')
+        );
+      })
+    })
+  ],
+  billingContact: [
+    validator('presence', {
+      presence: true,
+      message: 'A billing contact is required.',
+      disabled: computed('model', function () {
+        return (
+          this.model.get('contacts').length === 0 ||
+          this.model.get('isNew') ||
+          this.model.get('memberType') === 'consortium_organization'
+        );
+      })
+    })
+  ],
+  'billingInformation.state': [validator('billing-state')]
 });
 
 export default Model.extend(Validations, {
@@ -120,6 +169,11 @@ export default Model.extend(Validations, {
     inverse: 'consortium',
     async: true
   }),
+  contacts: hasMany('contact', {
+    inverse: 'provider',
+    async: true
+  }),
+
   meta: attr(),
 
   name: attr('string'),
@@ -146,13 +200,13 @@ export default Model.extend(Validations, {
   twitterHandle: attr('string'),
   logo: attr(),
   billingInformation: attr('billingInformation'),
-  technicalContact: fragment('contact'),
-  secondaryTechnicalContact: fragment('contact'),
-  billingContact: fragment('contact'),
-  secondaryBillingContact: fragment('contact'),
-  secondaryServiceContact: fragment('contact'),
-  serviceContact: fragment('contact'),
-  votingContact: fragment('contact'),
+  technicalContact: fragment('provider-contact'),
+  secondaryTechnicalContact: fragment('provider-contact'),
+  billingContact: fragment('provider-contact'),
+  secondaryBillingContact: fragment('provider-contact'),
+  secondaryServiceContact: fragment('provider-contact'),
+  serviceContact: fragment('provider-contact'),
+  votingContact: fragment('provider-contact'),
   joined: attr('date'),
   created: attr('date'),
   updated: attr('date'),
@@ -160,6 +214,24 @@ export default Model.extend(Validations, {
   uid: computed('id', function () {
     return this.id.toUpperCase();
   }),
+  hasRequiredContacts: computed(
+    'memberType',
+    'votingContact',
+    'serviceContact',
+    'billingContact',
+    function () {
+      if (this.memberType === 'consortium_organization') {
+        return isPresent(this.serviceContact.email);
+      } else {
+        return (
+          isPresent(this.votingContact.email) &&
+          isPresent(this.serviceContact.email) &&
+          isPresent(this.billingContact.email)
+        );
+      }
+    }
+  ),
+  filteredContacts: reads('contacts'),
   formattedBillingInformation: computed(
     'billingInformation',
     'billingInformation.{address,city,postCode,state.name,country,country.name,country.code}',

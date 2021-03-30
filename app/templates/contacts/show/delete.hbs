@@ -1,0 +1,42 @@
+<div class="panel panel-transparent">
+  <div class="panel-body">
+    <div class="col-md-9 col-md-offset-3">
+      <BsForm
+        @formLayout="vertical"
+        @model={{model}}
+        @onSubmit={{action 'submit'}}
+        @submitOnEnter={{true}} as |form|
+      >
+        <form.group>
+          <label class="control-label">
+            Are you sure you want to delete this contact? This action cannot be undone.
+          </label>
+          <form.element
+            @controlType="text"
+            @id="confirm-delete"
+            @property="confirmDelete"
+            @showValidationOn="input"
+            @autofocus={{true}}
+            @helpText="Please type 'Delete' to confirm."
+          />
+        </form.group>
+        <div class="pseudo-footer">
+          <div class="btn-toolbar pull-right">
+            <button id="cancel" class="btn btn-sm" {{action 'cancel'}}>
+              Cancel
+            </button>
+            <button
+              disabled={{v-get model 'confirmDelete' 'isInvalid'}}
+              id="delete"
+              class="btn btn-sm btn-fill"
+              {{action 'submit'}}
+            >
+              Delete
+            </button>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+      </BsForm>
+    </div>
+  </div>
+</div>

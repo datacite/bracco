@@ -10,7 +10,8 @@ export default Route.extend({
     params = assign(params, {
       page: {
         number: params.page,
-        size: params.size
+        size: params.size,
+        include: 'contacts'
       },
       'consortium-id': this.modelFor('providers/show').get('id')
     });

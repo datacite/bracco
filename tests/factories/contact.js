@@ -5,5 +5,6 @@ FactoryGuy.define('contact', {
     givenName: 'John',
     familyName: 'Smith',
     email: 'john.smith@gmail.com',
-  },
+    provider: FactoryGuy.belongsTo('provider')
+  }
 });

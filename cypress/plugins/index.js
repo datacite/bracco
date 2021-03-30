@@ -17,15 +17,24 @@
 
 /// <reference types="cypress" />
 
-const browserify = require('@cypress/browserify-preprocessor')
+require('dotenv').config();
+
+const browserify = require('@cypress/browserify-preprocessor');
 
 module.exports = (on, config) => {
-  let options = browserify.defaultOptions
-  options.browserifyOptions.transform[1][1].babelrc = true
-  options.typescript = require.resolve('typescript')
+  let options = browserify.defaultOptions;
+  options.browserifyOptions.transform[1][1].babelrc = true;
+  options.typescript = require.resolve('typescript');
   on('file:preprocessor', browserify(options));
 
-  require('@cypress/code-coverage/task')(on, config)
+  require('@cypress/code-coverage/task')(on, config);
 
-  return config
-}
+  // env variables
+  config.env.staff_admin_cookie = process.env.CYPRESS_STAFF_ADMIN_COOKIE;
+  config.env.consortium_admin_cookie =
+    process.env.CYPRESS_CONSORTIUM_ADMIN_COOKIE;
+  config.env.organization_admin_cookie =
+    process.env.CYPRESS_ORGANIZATION_ADMIN_COOKIE;
+
+  return config;
+};

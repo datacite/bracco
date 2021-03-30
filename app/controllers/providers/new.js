@@ -300,9 +300,11 @@ export default Controller.extend({
           code: billingCountry.code,
           name: countryList.name(billingCountry.code)
         });
-        this.model.set('billingInformation.state', null);
-        this.set('countries', countryList);
+      } else {
+        this.model.set('billingInformation.country', null);
       }
+      this.model.set('billingInformation.state', null);
+      this.set('countries', countryList);
     },
     selectBillingState(billingState) {
       this.model.set('billingInformation.state', billingState);
@@ -344,6 +346,34 @@ export default Controller.extend({
     },
     submit() {
       let self = this;
+      // iterate through all contacts and update roles
+      let m = this.model;
+      this.model.get('contacts').forEach(function (contact) {
+        let roleName = [];
+        if (contact.email === m.get('votingContact.email')) {
+          roleName.push('voting');
+        }
+        if (contact.email === m.get('serviceContact.email')) {
+          roleName.push('service');
+        }
+        if (contact.email === m.get('secondaryServiceContact.email')) {
+          roleName.push('secondary_service');
+        }
+        if (contact.email === m.get('technicalContact.email')) {
+          roleName.push('technical');
+        }
+        if (contact.email === m.get('secondaryTechnicalContact.email')) {
+          roleName.push('secondary_technical');
+        }
+        if (contact.email === m.get('billingContact.email')) {
+          roleName.push('billing');
+        }
+        if (contact.email === m.get('secondaryBillingContact.email')) {
+          roleName.push('secondary_billing');
+        }
+        contact.set('roleName', roleName);
+        contact.save();
+      });
       this.model
         .save()
         .then(function (provider) {

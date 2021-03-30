@@ -11,19 +11,19 @@ export default Route.extend({
       consortium: provider,
       memberType: 'consortium_organization',
       billingInformation: {},
-      technicalContact: this.store.createFragment('contact'),
-      secondaryTechnicalContact: this.store.createFragment('contact'),
-      billingContact: this.store.createFragment('contact'),
-      secondaryBillingContact: this.store.createFragment('contact'),
-      serviceContact: this.store.createFragment('contact'),
-      secondaryServiceContact: this.store.createFragment('contact'),
-      votingContact: this.store.createFragment('contact'),
-      isActive: true,
+      votingContact: null,
+      serviceContact: null,
+      secondaryServiceContact: null,
+      technicalContact: null,
+      secondaryTechnicalContact: null,
+      billingContact: null,
+      secondaryBillingContact: null,
+      isActive: true
     });
 
     return hash({
       provider,
-      organization,
+      organization
     });
-  },
+  }
 });

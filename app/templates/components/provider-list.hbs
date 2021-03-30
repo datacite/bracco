@@ -377,6 +377,44 @@
           {{/if}}
           {{#if (not-eq provider.memberType 'consortium_organization')}}
             <h5>
+              Voting Representative
+            </h5>
+            <div cy-data="voting">
+              {{#if provider.votingContact.email}}
+                {{format-contact provider.votingContact}}
+              {{else}}
+                <span class="small icon-warning">
+                  Please provide this information.
+                </span>
+              {{/if}}
+            </div>
+          {{/if}}
+          <h5>
+            Service Contact
+          </h5>
+          <div cy-data="service">
+            {{#if provider.serviceContact.email}}
+              {{format-contact provider.serviceContact}}
+            {{else}}
+              <span class="small icon-warning">
+                Please provide this information.
+              </span>
+            {{/if}}
+          </div>
+          {{#if (not-eq provider.memberType 'consortium_organization')}}
+            <h5>
+              Billing Contact
+            </h5>
+            <div cy-data="billing">
+              {{#if provider.billingContact.email}}
+                {{format-contact provider.billingContact}}
+              {{else}}
+                <span class="small icon-warning">
+                  Please provide this information.
+                </span>
+              {{/if}}
+            </div>
+            <h5>
               Billing Information
             </h5>
             {{#if provider.formattedBillingInformation}}

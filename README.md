@@ -1,5 +1,6 @@
 [![Identifier](https://img.shields.io/badge/doi-10.5438%2Fcxe5--rg55-fca709.svg)](https://doi.org/10.5438/cxe5-rg55)
 ![Release](https://github.com/datacite/bracco/workflows/Release/badge.svg)
+[![bracco](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/detailed/8j7yje&style=flat&logo=cypress)](https://dashboard.cypress.io/projects/8j7yje/runs)
 [![Code Climate](https://codeclimate.com/github/datacite/bracco/badges/gpa.svg)](https://codeclimate.com/github/datacite/bracco)
 [![Test Coverage](https://codeclimate.com/github/datacite/bracco/badges/coverage.svg)](https://codeclimate.com/github/datacite/bracco/coverage)
 
@@ -20,7 +21,6 @@ You will need the following things properly installed on your computer.
 - `git clone <repository-url>` this repository
 - `cd bracco`
 - `cp .env.example .env`
-- `npm install`
 - `yarn`
 
 ## Running / Development

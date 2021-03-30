@@ -4,23 +4,14 @@ import { setupFactoryGuy, make } from 'ember-data-factory-guy';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-module('Integration | Component | repository sidebar', function(hooks) {
+module('Integration | Component | repository sidebar', function (hooks) {
   setupRenderingTest(hooks);
   setupFactoryGuy(hooks);
 
-  test('it renders', async function(assert) {
+  test('it renders', async function (assert) {
     this.set('model', make('repository'));
 
     await render(hbs`{{repository-sidebar model=model}}`);
-
-    assert.dom('*').hasText('');
-
-    // Template block usage:
-    await render(hbs`
-      {{#repository-sidebar model=model}}
-        
-      {{/repository-sidebar}}
-    `);
 
     assert.dom('*').hasText('');
   });

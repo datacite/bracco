@@ -49,7 +49,7 @@ export default Controller.extend({
           .save()
           .then(function (repositoryPrefix) {
             self.set('disabled', true);
-            // We need a timeout because ElasticSearch indexing is very slow for this transition to work properly
+            // We need a timeout because of ElasticSearch indexing
             setTimeout(() => {
               self.transitionToRoute(
                 'repositories.show.prefixes',

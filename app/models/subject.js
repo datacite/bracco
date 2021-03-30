@@ -18,6 +18,7 @@ export default Fragment.extend(Validations, {
   subjectScheme: attr('string', { defaultValue: null }),
   schemeUri: attr('string', { defaultValue: null }),
   valueUri: attr('string', { defaultValue: null }),
+  classificationCode: attr('string', { defaultValue: null }),
 
   subjectSchemeUri: computed('valueUri', function () {
     return this.valueUri || '';

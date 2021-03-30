@@ -286,6 +286,18 @@
             </h5>
             {{titleize (humanize (underscore provider.focusArea))}}
           {{/if}}
+          <h5>
+            Service Contact
+          </h5>
+          <div cy-data="service">
+            {{#if provider.serviceContact.email}}
+              {{format-contact provider.serviceContact}}
+            {{else}}
+              <span class="small icon-warning">
+                Please provide this information.
+              </span>
+            {{/if}}
+          </div>
         </div>
       </div>
     {{/each}}

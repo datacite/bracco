@@ -1,18 +1,12 @@
 import { computed } from '@ember/object';
+import { equal } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
 import { Ability } from 'ember-can';
 
 export default Ability.extend({
   currentUser: service(),
 
-  canSource: computed('currentUser.role_id', function () {
-    switch (this.get('currentUser.role_id')) {
-      case 'staff_admin':
-        return true;
-      default:
-        return false;
-    }
-  }),
+  canSource: equal('currentUser.role_id', 'staff_admin'),
 
   canDelete: computed(
     'currentUser.{role_id,provider_id}',
@@ -38,7 +32,7 @@ export default Ability.extend({
   ),
   canCreate: computed(
     'currentUser.{role_id,provider_id}',
-    'model.provider.{id,memberType,consortium.id}',
+    'model.provider.{id,consortium.id}',
     function () {
       switch (this.get('currentUser.role_id')) {
         case 'staff_admin':
@@ -46,12 +40,12 @@ export default Ability.extend({
         case 'consortium_admin':
           return (
             this.get('currentUser.provider_id') ===
-            this.get('model.provider.consortium.id')
+              this.get('model.provider.consortium.id')
           );
         case 'provider_admin':
           return (
             this.get('currentUser.provider_id') ===
-            this.get('model.provider.id')
+              this.get('model.provider.id')
           );
         default:
           return false;

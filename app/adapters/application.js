@@ -9,7 +9,7 @@ export default JSONAPIAdapter.extend(DataAdapterMixin, {
   session: service(),
   host: ENV.API_URL,
 
-  headers: computed('session.data.authenticated.token', function() {
+  headers: computed('session.data.authenticated.token', function () {
     const headers = {};
     let { access_token } = this.get('session.data.authenticated');
     if (isPresent(access_token)) {
@@ -19,9 +19,9 @@ export default JSONAPIAdapter.extend(DataAdapterMixin, {
     return headers;
   }),
   handleResponse(status, headers, payload) {
-    if ([ 422, 409 , 500 ].includes(status)) {
+    if ([422, 409, 500].includes(status)) {
       return payload.errors[0];
     }
     return this._super(...arguments);
-  },
+  }
 });

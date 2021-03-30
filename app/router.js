@@ -21,6 +21,9 @@ Router.map(function () {
         });
         this.route('new');
       });
+      this.route('contacts', function () {
+        this.route('new');
+      });
       this.route('organizations', function () {
         this.route('new');
       });
@@ -67,6 +70,13 @@ Router.map(function () {
       this.route('info');
       this.route('dois');
     });
+  });
+  this.route('contacts', function () {
+    this.route('show', { path: '/:contact_id' }, function () {
+      this.route('edit');
+      this.route('delete');
+    });
+    this.route('new');
   });
   this.route('edit');
   this.route('change');

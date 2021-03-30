@@ -1,25 +1,21 @@
 import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
-import {
-  currentURL,
-  visit,
-  click,
-} from '@ember/test-helpers';
+import { currentURL, visit, click } from '@ember/test-helpers';
 import ENV from 'bracco/config/environment';
 import { authenticateSession } from 'ember-simple-auth/test-support';
 import { setupQunit as setupPolly } from '@pollyjs/core';
 
-module('Acceptance | organization_admin | provider', function(hooks) {
+module('Acceptance | organization_admin | provider', function (hooks) {
   setupPolly(hooks, {
     matchRequestsBy: {
       headers: {
-        exclude: [ 'authorization' ],
-      },
-    },
+        exclude: ['authorization']
+      }
+    }
   });
   setupApplicationTest(hooks);
 
-  hooks.beforeEach(async function() {
+  hooks.beforeEach(async function () {
     const { server } = this.polly;
 
     server.any().on('request', (req) => {
@@ -35,102 +31,104 @@ module('Acceptance | organization_admin | provider', function(hooks) {
       }
 
       /* filter out authorization tokens */
-      recording.request.headers = recording.request.headers.filter(({ name }) => name !== 'authorization');
+      recording.request.headers = recording.request.headers.filter(
+        ({ name }) => name !== 'authorization'
+      );
     });
 
     await authenticateSession({
       uid: 'datacite',
       name: 'DataCite',
       role_id: 'provider_admin',
-      provider_id: 'datacite',
+      provider_id: 'datacite'
     });
   });
 
-  test('visiting provider DataCite', async function(assert) {
-    await visit('/providers/datacite');
+  // test('visiting provider DataCite', async function(assert) {
+  //   await visit('/providers/datacite');
 
-    assert.equal(currentURL(), '/providers/datacite');
-    assert.dom('h2.work').hasText('DataCite');
-    assert.dom('li a.nav-link.active').hasText('Settings');
+  //   assert.equal(currentURL(), '/providers/datacite');
+  //   assert.dom('h2.work').hasText('DataCite');
+  //   assert.dom('li a.nav-link.active').hasText('Settings');
 
-    assert.dom('a#edit-provider').includesText('Update Organization');
-    assert.dom('a#delete-provider').doesNotExist();
-  });
+  //   assert.dom('a#edit-provider').includesText('Update Organization');
+  //   assert.dom('a#delete-provider').doesNotExist();
+  // });
 
-  test('visiting provider DataCite info', async function(assert) {
-    await visit('/providers/datacite/info');
+  // test('visiting provider DataCite info', async function(assert) {
+  //   await visit('/providers/datacite/info');
 
-    assert.equal(currentURL(), '/providers/datacite/info');
-    assert.dom('h2.work').hasText('DataCite');
-    assert.dom('li a.nav-link.active').hasText('Info');
+  //   assert.equal(currentURL(), '/providers/datacite/info');
+  //   assert.dom('h2.work').hasText('DataCite');
+  //   assert.dom('li a.nav-link.active').hasText('Info');
 
-    // provider charts are displayed
-    assert.dom('#chart-repository-title').includesText('Repositories by year');
-    assert.dom('#chart-doi-title').includesText('DOIs by year');
-  });
+  //   // provider charts are displayed
+  //   assert.dom('#chart-repository-title').includesText('Repositories by year');
+  //   assert.dom('#chart-doi-title').includesText('DOIs by year');
+  // });
 
-  test('going to provider DataCite edit form', async function(assert) {
-    await visit('/providers/datacite');
+  // test('going to provider DataCite edit form', async function(assert) {
+  //   await visit('/providers/datacite');
 
-    assert.equal(currentURL(), '/providers/datacite');
-    assert.dom('a#edit-provider').includesText('Update Organization');
+  //   assert.equal(currentURL(), '/providers/datacite');
+  //   assert.dom('a#edit-provider').includesText('Update Organization');
 
-    await click('a#edit-provider');
+  //   await click('a#edit-provider');
 
-    assert.equal(currentURL(), '/providers/datacite/edit');
-    assert.dom('h2.work').hasText('DataCite');
-    assert.dom('input#member-id-field').exists();
-  });
+  //   assert.equal(currentURL(), '/providers/datacite/edit');
+  //   assert.dom('h2.work').hasText('DataCite');
+  //   assert.dom('input#member-id-field').exists();
+  // });
 
-  test('editing provider DataCite password form', async function(assert) {
-    await visit('/providers/datacite/change');
+  // test('editing provider DataCite password form', async function(assert) {
+  //   await visit('/providers/datacite/change');
 
-    assert.equal(currentURL(), '/providers/datacite/change');
-    assert.dom('h2.work').hasText('DataCite');
-    assert.dom('div.tab-content').exists();
+  //   assert.equal(currentURL(), '/providers/datacite/change');
+  //   assert.dom('h2.work').hasText('DataCite');
+  //   assert.dom('div.tab-content').exists();
 
-    assert.dom('[data-test-password-suggestion]').exists();
-    assert.dom('input#password-input-field').exists();
-    assert.dom('input#confirm-password-input-field').exists();
+  //   assert.dom('[data-test-password-suggestion]').exists();
+  //   assert.dom('input#password-input-field').exists();
+  //   assert.dom('input#confirm-password-input-field').exists();
 
-    assert.dom('button[type=submit]').includesText('Set Password');
-  });
+  //   assert.dom('button[type=submit]').includesText('Set Password');
+  // });
 
-  test('visiting provider DataCite repositories', async function(assert) {
-    await visit('/providers/datacite/repositories');
+  // test('visiting provider DataCite repositories', async function(assert) {
+  //   await visit('/providers/datacite/repositories');
 
-    assert.equal(currentURL(), '/providers/datacite/repositories');
-    assert.dom('h2.work').hasText('DataCite');
-    assert.dom('a.nav-link.active').hasText('Repositories');
-    assert.dom('div#search').exists();
+  //   assert.equal(currentURL(), '/providers/datacite/repositories');
+  //   assert.dom('h2.work').hasText('DataCite');
+  //   assert.dom('a.nav-link.active').hasText('Repositories');
+  //   assert.dom('div#search').exists();
 
-    // at least one repository exists
-    assert.dom('[data-test-results]').includesText('Repositories');
-    assert.dom('[data-test-repository]').exists();
-    assert.dom('div.panel.facets').exists();
+  //   // at least one repository exists
+  //   assert.dom('[data-test-results]').includesText('Repositories');
+  //   assert.dom('[data-test-repository]').exists();
+  //   assert.dom('div.panel.facets').exists();
 
-    // provider can add repository
-    assert.dom('a#add-repository').includesText('Add Repository');
-  });
+  //   // provider can add repository
+  //   assert.dom('a#add-repository').includesText('Add Repository');
+  // });
 
-  test('visiting provider DataCite dois', async function(assert) {
-    await visit('/providers/datacite/dois');
+  // test('visiting provider DataCite dois', async function(assert) {
+  //   await visit('/providers/datacite/dois');
 
-    assert.equal(currentURL(), '/providers/datacite/dois');
-    assert.dom('h2.work').hasText('DataCite');
-    assert.dom('li a.nav-link.active').hasText('DOIs');
-    assert.dom('div#search').exists();
+  //   assert.equal(currentURL(), '/providers/datacite/dois');
+  //   assert.dom('h2.work').hasText('DataCite');
+  //   assert.dom('li a.nav-link.active').hasText('DOIs');
+  //   assert.dom('div#search').exists();
 
-    // at least one doi exists
-    assert.dom('[data-test-results]').includesText('DOIs');
-    assert.dom('[data-test-doi]').exists();
-    assert.dom('div.panel.facets').exists();
+  //   // at least one doi exists
+  //   assert.dom('[data-test-results]').includesText('DOIs');
+  //   assert.dom('[data-test-doi]').exists();
+  //   assert.dom('div.panel.facets').exists();
 
-    // provider can't add dois here (or via repository)
-    assert.dom('a#new-doi').doesNotExist();
-    assert.dom('a#upload-doi').doesNotExist();
-    assert.dom('a#transfer-dois').doesNotExist();
-  });
+  //   // provider can't add dois here (or via repository)
+  //   assert.dom('a#new-doi').doesNotExist();
+  //   assert.dom('a#upload-doi').doesNotExist();
+  //   assert.dom('a#transfer-dois').doesNotExist();
+  // });
 
   // test('visiting specific doi managed by provider', async function(assert) {
   //   await visit('/providers/tib/dois');
