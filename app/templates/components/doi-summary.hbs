@@ -13,7 +13,8 @@
   {{/if}}
 </h3>
 {{#if model.creators}}
-  <CreatorShow @creators={{model.creators}} />
+
+  <CreatorShow @creators={{model.creators}}  @showOnly=50 />
 {{/if}}
 <div class="metadata" data-test-metadata>
   {{format-metadata model.publicationYear resourceTypeGeneral=model.types.resourceTypeGeneral resourceType=model.types.resourceType container=model.bcontainer publisher=model.publisher version=model.version}}
