@@ -85,6 +85,7 @@ const resourceTypeGeneralList = [
   'PeerReview',
   'PhysicalObject',
   'Preprint',
+  'Report',
   'Service',
   'Software',
   'Sound',

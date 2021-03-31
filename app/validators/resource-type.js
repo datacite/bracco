@@ -24,6 +24,7 @@ const ResourceType = BaseValidator.extend({
       'PeerReview',
       'PhysicalObject',
       'Preprint',
+      'Report',
       'Service',
       'Software',
       'Sound',
