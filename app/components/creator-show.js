@@ -8,7 +8,7 @@ export default Component.extend({
     let n = this.creators.length;
     if (n > limit) {
       for ( var i = (n-1); i >= limit; i--) {
-        this.creators.pop;
+        this.creators.popObject;
       }
     }
   }
