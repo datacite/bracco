@@ -83,7 +83,7 @@ describe('Logging In - HTML Web Form', function () {
       cy.url().should('include', '/login')
     })
 
-    it.only('redirects to account SETTINGS tab on success', function () {
+    it('redirects to account SETTINGS tab on success', function () {
       cy.get('input#account-field').type(username)
       cy.get('input#password-field').type(password)
       cy.get('div.register-card form').submit()

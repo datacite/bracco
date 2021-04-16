@@ -445,7 +445,7 @@ describe('Acceptance: client_admin | dois', () => {
     cy.get('div').contains('DOI created');
   });
 
-  it.only('visiting the Form and adding funding references', () => {
+  it('visiting the Form and adding funding references', () => {
     cy.visit('/repositories/datacite.test/dois/new');
     cy.url().should('include', '/repositories/datacite.test/dois/new');
     cy.wait(waitTime);
