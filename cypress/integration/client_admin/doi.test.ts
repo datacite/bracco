@@ -3,7 +3,7 @@
 // https://github.com/cypress-io/cypress/issues/5830
 
 describe('Admin: Client Admin', () => {
-  const waitTimeBetIt = 1000; 
+  const waitTimeBetIt = 1000;
   const waitTime = 1000;
 
   beforeEach(() => {
@@ -444,7 +444,7 @@ describe('Admin: Client Admin', () => {
     cy.get('div').contains('DOI created');
   });
 
-  it('visiting the Form and adding funding references', () => {
+  it.only('visiting the Form and adding funding references', () => {
     cy.visit('/repositories/datacite.test/dois/new');
     cy.url().should('include', '/repositories/datacite.test/dois/new');
     cy.wait(waitTime);
@@ -455,25 +455,43 @@ describe('Admin: Client Admin', () => {
     // Causes the aria dropdown to be populated and displayed so that selection can be made.
     cy.get('[data-test-funder-name] div[role="button"]').click( { force: true } );
     cy.wait(waitTime);
-    // Makes the selection from the dropdown.
-    //cy.get("ul.ember-power-select-options li").contains("Action for M.E.").click( { force: true } );
-    cy.get('input.ember-power-select-search-input').type('Action for M.E.{enter}', { force: true } );
-
-    cy.get('[data-test-funder-identifier]').should('be.visible').type('http://dx.doi.org/10.13039/501100001982', { force: true });
+    // The aria dropdown does a search in this case is dynamically populated as the user types in
+    // the search box. We must type enough here to make sure our option comes up in the search box.
+    // Then we click the selection.
+    cy.get('input.ember-power-select-search-input').type('Action for', { force: true } );
+    cy.wait(waitTime);
+    cy.get("ul.ember-power-select-options li").contains("Action for M.E.").click( { force: true } );
     cy.wait(waitTime);
 
-    // Causes the aria dropdown to be populated and displayed so that selection can be made.
-    cy.get('[data-test-funder-identifier-type] div[role="button"]').click( { force: true } );
+    // Test a successful choice of an option in this list, in this case the choice is: 'Action for M.E.',
+    // A succerssful choice causes autofilling of a couple of fields
+    // with values associated with the choice.
+    // Autofilled fields are also disabled, which limits our abiilty to test.
+
+    // An autofilled field.  TO DO: there should be a way to test that the autofilled
+    // value is valid. Not sure what that is.  We can test that the field is disabled, but
+    // if you search the document, the field value is nowhere to be found.  Then how is it displayed?
+    cy.get('[data-test-funder-identifier]').should('be.disabled')
     cy.wait(waitTime);
-    // Makes the selection from the dropdown.
-    cy.get("ul.ember-power-select-options li").contains("Crossref Funder ID").click( { force: true } );
+
+    // An autofilled field.  Because this is an aria-disabled element (not disabled) we can do more.
+    // We can test for aria-disabled, then test the autofilled, 'selected' item.
+    cy.get('[data-test-funder-identifier-type] div[role="button"]')
+      .within(($obj) => {
+        cy.wrap($obj).should('have.attr', 'aria-disabled');
+        cy.wrap($obj).get('.ember-power-select-selected-item').contains('Crossref Funder ID');
+      });
     cy.wait(waitTime);
+
+    cy.pause();
 
     cy.get('[data-test-award-number]').should('be.visible').type('G2342342', { force: true });
     cy.wait(waitTime);
 
     cy.get('[data-test-award-uri]').should('be.visible').type('https://schema.datacite.org/meta/kernel-4', { force: true });
     cy.wait(waitTime);
+
+    cy.pause();
 
     cy.get('button#doi-create').click( { force: true } );
     cy.wait(waitTime);
