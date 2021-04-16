@@ -27,6 +27,8 @@
 // The following 2 commands that can be used to test if an object is within a viewport.
 // https://github.com/cypress-io/cypress/issues/877
 
+import 'cypress-wait-until';
+
 Cypress.Commands.add('isInViewport', { prevSubject: true },(subject) => {
   const bottom = Cypress.$(cy.state('window')).height();
   const rect = subject[0].getBoundingClientRect();
