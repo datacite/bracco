@@ -66,12 +66,12 @@ module('Acceptance | client_admin | admin', function (hooks) {
     assert.dom('h2.work').hasText('DataCite Test Repository');
   });
 
-  test('visiting providers', async function (assert) {
-    await visit('/providers');
+  // test('visiting providers', async function (assert) {
+  //   await visit('/providers');
 
-    assert.equal(currentURL(), '/repositories/datacite.test');
-    assert.dom('h2.work').hasText('DataCite Test Repository');
-  });
+  //   assert.equal(currentURL(), '/repositories/datacite.test');
+  //   assert.dom('h2.work').hasText('DataCite Test Repository');
+  // });
 
   test('visiting repositories', async function (assert) {
     await visit('/repositories');
