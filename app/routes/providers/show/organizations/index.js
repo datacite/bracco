@@ -54,6 +54,9 @@ export default Route.extend({
     },
     'non-profit-status': {
       refreshModel: true
+    },
+    'has-required-contacts': {
+      refreshModel: true
     }
   },
 

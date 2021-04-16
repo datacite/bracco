@@ -318,6 +318,63 @@
         </div>
       </div>
     {{/if}}
+    {{#if (or model.meta.hasRequiredContacts model.query.has-required-contacts)
+    }}
+      <div class="panel facets">
+        <div class="panel-body">
+          <h4>
+            All Required Contacts
+          </h4>
+          <ul>
+            {{#if model.meta.hasRequiredContacts}}
+              {{#each model.meta.hasRequiredContacts as |hasRequiredContacts|}}
+                <li>
+                  {{#if model.query.has-required-contacts}}
+                    <LinkTo
+                      @route="providers"
+                      @query={{hash has-required-contacts=''}}
+                    >
+                      <i class="far fa-check-square"></i>
+                    </LinkTo>
+                  {{else}}
+                    <LinkTo
+                      @route="providers"
+                      @query={{hash has-required-contacts=hasRequiredContacts.id
+                      }}
+                    >
+                      <i class="far fa-square"></i>
+                    </LinkTo>
+                  {{/if}}
+                  <div class="facet-title">
+                    {{hasRequiredContacts.title}}
+                  </div>
+                  <span class="number pull-right">
+                    {{hasRequiredContacts.count}}
+                  </span>
+                  <div class="clearfix"></div>
+                </li>
+              {{/each}}
+            {{else}}
+              <li>
+                <LinkTo
+                  @route="providers"
+                  @query={{hash has-required-contacts=''}}
+                >
+                  <i class="far fa-check-square"></i>
+                </LinkTo>
+                <div class="facet-title">
+                  <model.query.has-required-contacts />
+                </div>
+                <span class="number pull-right">
+                  0
+                </span>
+                <div class="clearfix"></div>
+              </li>
+            {{/if}}
+          </ul>
+        </div>
+      </div>
+    {{/if}}
   {{/if}}
 </div>
 <div class="col-md-9 panel-list" id="content">
