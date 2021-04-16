@@ -464,7 +464,7 @@ describe('Admin: Client Admin', () => {
     cy.wait(waitTime);
 
     // Test a successful choice of an option in this list, in this case the choice is: 'Action for M.E.',
-    // A succerssful choice causes autofilling of a couple of fields
+    // A successful choice causes autofilling of a couple of fields
     // with values associated with the choice.
     // Autofilled fields are also disabled, which limits our abiilty to test.
 
@@ -483,15 +483,11 @@ describe('Admin: Client Admin', () => {
       });
     cy.wait(waitTime);
 
-    cy.pause();
-
     cy.get('[data-test-award-number]').should('be.visible').type('G2342342', { force: true });
     cy.wait(waitTime);
 
     cy.get('[data-test-award-uri]').should('be.visible').type('https://schema.datacite.org/meta/kernel-4', { force: true });
     cy.wait(waitTime);
-
-    cy.pause();
 
     cy.get('button#doi-create').click( { force: true } );
     cy.wait(waitTime);
