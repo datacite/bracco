@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 /* eslint-disable no-undef */
 
-describe('Acceptance: client_admin', () => {
+describe('Acceptance: client_admin | provider', () => {
   const waitTimeBetIt = 1000;
   const waitTime = 1000;
   const waitTime1 = 1000;
@@ -12,23 +12,16 @@ describe('Acceptance: client_admin', () => {
     cy.wait(waitTimeBetIt);
   });
 
-  it('is logged in', () => {
-    cy.visit('/');
-    cy.url().should('include', '/repositories/datacite.test')
-    cy.get('ul.nav-tabs li.active a').should('contain', 'Settings')
-    cy.get('a#account_menu_link').should('contain', 'DATACITE.TEST');
-  });
-
-  it('visiting homepage', () => {
-    cy.visit('/');
+  it('visiting provider DataCite info', () => {
+    cy.visit('/providers/datacite/info');
     cy.url().should('include', '/repositories/datacite.test');
     cy.get('h2.work').contains('DataCite Test Repository');
     cy.get('ul.nav-tabs li.active a').should('contain', 'Settings');
     cy.get('a#account_menu_link').should('contain', 'DATACITE.TEST');
   });
 
-  it('visiting info', () => {
-    cy.visit('/info');
+  it('visiting provider DataCite repositories', () => {
+    cy.visit('/providers/datacite/repositories');
     cy.url().should('include', '/repositories/datacite.test');
     cy.get('h2.work').contains('DataCite Test Repository');
     cy.get('ul.nav-tabs li.active a').should('contain', 'Settings');
@@ -43,37 +36,19 @@ describe('Acceptance: client_admin', () => {
     cy.get('a#account_menu_link').should('contain', 'DATACITE.TEST');
   });
 
-
-  it('visiting repositories', () => {
-    cy.visit('/repositories');
+  it('visiting provider DataCite prefixes', () => {
+    cy.visit('/providers/datacite/prefixes');
     cy.url().should('include', '/repositories/datacite.test');
     cy.get('h2.work').contains('DataCite Test Repository');
     cy.get('ul.nav-tabs li.active a').should('contain', 'Settings');
     cy.get('a#account_menu_link').should('contain', 'DATACITE.TEST');
   });
 
-
-  it('visiting settings', () => {
-    cy.visit('/');
+  it('visiting provider DataCite dois', () => {
+    cy.visit('providers/datacite/dois');
     cy.url().should('include', '/repositories/datacite.test');
     cy.get('h2.work').contains('DataCite Test Repository');
     cy.get('ul.nav-tabs li.active a').should('contain', 'Settings');
     cy.get('a#account_menu_link').should('contain', 'DATACITE.TEST');
   });
-
-  it('visiting prefixes', () => {
-    cy.visit('/prefixes');
-    cy.url().should('include', '/repositories/datacite.test');
-    cy.get('h2.work').contains('DataCite Test Repository');
-    cy.get('ul.nav-tabs li.active a').should('contain', 'Settings');
-    cy.get('a#account_menu_link').should('contain', 'DATACITE.TEST');
-  });
-
-  it('visiting dois', () => {
-    cy.visit('/dois');
-    cy.url().should('include', '/repositories/datacite.test');
-    cy.get('h2.work').contains('DataCite Test Repository');
-    cy.get('ul.nav-tabs li.active a').should('contain', 'Settings');
-    cy.get('a#account_menu_link').should('contain', 'DATACITE.TEST');
-  });
-}];
+});

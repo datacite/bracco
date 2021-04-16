@@ -2,7 +2,7 @@
 /* eslint-disable no-undef */
 // https://github.com/cypress-io/cypress/issues/5830
 
-describe('Admin: Client_Admin, doi', () => {
+describe('Acceptance: client_admin | dois', () => {
   const waitTimeBetIt = 1000;
   const waitTime = 1000;
   const waitTime1 = 1000;
