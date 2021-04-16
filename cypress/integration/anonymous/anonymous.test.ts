@@ -24,9 +24,9 @@ describe('Anonymous: Anonymous', () => {
       cy.get('h3.member').contains('About');
     });
 
-    it('Version', () => {
-      cy.visit('/about');
-      cy.get('[data-cy="version"]').contains('3.9');
-    });
+    // it('Version', () => {
+    //   cy.visit('/about');
+    //   cy.get('[data-cy="version"]').contains('3.9');
+    // });
   });
 });
