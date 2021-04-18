@@ -28,7 +28,7 @@ describe('Acceptance: consortium_admin, admin', () => {
     cy.get('button#update-provider').contains('Update Member');
   });
 
-  it.only('editing admin password form', () => {
+  it('editing admin password form', () => {
     cy.visit('/providers/dc/change');
     cy.url().should('include', '/providers/dc/change');
     cy.wait(waitTime);
