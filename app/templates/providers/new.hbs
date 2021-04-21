@@ -389,7 +389,7 @@
                 type="submit"
                 id="add-provider"
                 class="btn btn-sm btn-fill"
-                onclick="this.disabled=true;"
+                disabled={{if (or form.isSubmitting form.isSubmitted) true false }}
               >
                 Add Member
               </button>
