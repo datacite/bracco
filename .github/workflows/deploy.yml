@@ -22,22 +22,22 @@ jobs:
           yarn
           ./node_modules/.bin/ember test
 
-      - name: Cypress run
-        uses: cypress-io/github-action@v2
-        with:
-          start: yarn start
-          wait-on: 'http://localhost:4200'
-          wait-on-timeout: 600
-          quiet: true
-          record: true
-          parallel: true
-          group: 'Tests'
-        env:
-          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          CYPRESS_STAFF_ADMIN_COOKIE: ${{ secrets.CYPRESS_STAFF_ADMIN_COOKIE }}
-          CYPRESS_CONSORTIUM_ADMIN_COOKIE: ${{ secrets.CYPRESS_CONSORTIUM_ADMIN_COOKIE }}
-          CYPRESS_ORGANIZATION_ADMIN_COOKIE: ${{ secrets.CYPRESS_ORGANIZATION_ADMIN_COOKIE }}
+      # - name: Cypress run
+      #   uses: cypress-io/github-action@v2
+      #   with:
+      #     start: yarn start
+      #     wait-on: 'http://localhost:4200'
+      #     wait-on-timeout: 600
+      #     quiet: true
+      #     record: true
+      #     parallel: true
+      #     group: 'Tests'
+      #   env:
+      #     CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     CYPRESS_STAFF_ADMIN_COOKIE: ${{ secrets.CYPRESS_STAFF_ADMIN_COOKIE }}
+      #     CYPRESS_CONSORTIUM_ADMIN_COOKIE: ${{ secrets.CYPRESS_CONSORTIUM_ADMIN_COOKIE }}
+      #     CYPRESS_ORGANIZATION_ADMIN_COOKIE: ${{ secrets.CYPRESS_ORGANIZATION_ADMIN_COOKIE }}
 
       - name: Publish code coverage
         uses: paambaati/codeclimate-action@v2.7.5
