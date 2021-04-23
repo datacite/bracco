@@ -85,43 +85,45 @@
             </nav.link-to>
           </nav.item>
         {{/if}}
-        <nav.item>
-          <nav.link-to
-            @route="providers.show.contacts"
-            model="model.id"
-            class="nav-link"
-          >
-            Contacts
-          </nav.link-to>
-        </nav.item>
-        {{#if (not-eq model.memberType 'member_only')}}
+        {{#if (not-eq model.memberType 'developer')}}
           <nav.item>
             <nav.link-to
-              @route="providers.show.repositories"
+              @route="providers.show.contacts"
               model="model.id"
               class="nav-link"
             >
-              Repositories
+              Contacts
             </nav.link-to>
           </nav.item>
-          <nav.item>
-            <nav.link-to
-              @route="providers.show.prefixes"
-              model="model.id"
-              class="nav-link"
-            >
-              Prefixes
-            </nav.link-to>
-          </nav.item>
-          <nav.item>
-            <nav.link-to
-              @route="providers.show.dois"
-              model="model.id"
-              class="nav-link"
-            >
-              DOIs
-            </nav.link-to>
-          </nav.item>
+          {{#if (not-eq model.memberType 'member_only')}}
+            <nav.item>
+              <nav.link-to
+                @route="providers.show.repositories"
+                model="model.id"
+                class="nav-link"
+              >
+                Repositories
+              </nav.link-to>
+            </nav.item>
+            <nav.item>
+              <nav.link-to
+                @route="providers.show.prefixes"
+                model="model.id"
+                class="nav-link"
+              >
+                Prefixes
+              </nav.link-to>
+            </nav.item>
+            <nav.item>
+              <nav.link-to
+                @route="providers.show.dois"
+                model="model.id"
+                class="nav-link"
+              >
+                DOIs
+              </nav.link-to>
+            </nav.item>
+          {{/if}}
         {{/if}}
       </BsNav>
     </div>

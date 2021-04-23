@@ -25,6 +25,7 @@ export default Service.extend({
   isProvider: false,
   isClient: false,
   isUser: false,
+  isDeveloper: false,
   isBetaTester: false,
 
   load() {
@@ -35,23 +36,36 @@ export default Service.extend({
       // rejecting revoked tokens
       if (ENV.JWT_BLACKLISTED.split(',').includes(jwt)) {
         jwt = null;
-        this.get('flashMessages').danger('Unable to authenticate because the token has been revoked.');
+        this.get('flashMessages').danger(
+          'Unable to authenticate because the token has been revoked.'
+        );
       }
       // RSA public key
-      let cert = ENV.JWT_PUBLIC_KEY ? ENV.JWT_PUBLIC_KEY.replace(/\\n/g, '\n') : null;
+      let cert = ENV.JWT_PUBLIC_KEY
+        ? ENV.JWT_PUBLIC_KEY.replace(/\\n/g, '\n')
+        : null;
 
       // verify asymmetric token, using RSA with SHA-256 hash algorithm
       let self = this;
-      nodeJsonWebToken.verify(jwt, cert, { algorithms: [ 'RS256' ] }, function(error, payload) {
-        if (payload) {
-          self.set('jwt', jwt);
-          self.initUser(payload);
-        } else if (error.message !== 'jwt must be provided') {
-          self.session.invalidate().then(function() {
-            self.get('flashMessages').danger('Unable to authenticate because the token was wrong or has expired.');
-          });
+      nodeJsonWebToken.verify(
+        jwt,
+        cert,
+        { algorithms: ['RS256'] },
+        function (error, payload) {
+          if (payload) {
+            self.set('jwt', jwt);
+            self.initUser(payload);
+          } else if (error.message !== 'jwt must be provided') {
+            self.session.invalidate().then(function () {
+              self
+                .get('flashMessages')
+                .danger(
+                  'Unable to authenticate because the token was wrong or has expired.'
+                );
+            });
+          }
         }
-      });
+      );
     } else if (this.get('session.data.authenticated.role_id')) {
       // using authenticator:test
       this.initUser(this.get('session.data.authenticated'));
@@ -76,7 +90,7 @@ export default Service.extend({
         this.set('roleName', 'Staff');
 
         this.features.setup({
-          'show-researchers': true,
+          'show-researchers': true
         });
       } else if (payload.role_id === 'consortium_admin') {
         this.set('isConsortium', true);
@@ -93,6 +107,13 @@ export default Service.extend({
         this.set('home', { route: 'repositories.show', id: this.uid });
         this.set('settings', { route: 'repositories.show', id: this.uid });
         this.set('roleName', 'Repository');
+      } else if (payload.role_id === 'developer') {
+        this.set('isDeveloper', true);
+        this.set('isAdmin', true);
+        this.set('home', { route: 'providers.show', id: this.uid });
+        this.set('settings', { route: 'providers.show', id: this.uid });
+        this.set('roleName', 'Developer');
+        this.set('role_id', 'staff_admin');
       } else if (payload.role_id === 'user') {
         this.set('home', { route: 'users.show', id: this.uid });
         this.set('settings', { route: 'users.show', id: this.uid });
@@ -108,7 +129,7 @@ export default Service.extend({
 
       if (payload.beta_tester) {
         this.features.setup({
-          'show-researchers': true,
+          'show-researchers': true
         });
       }
 
@@ -116,5 +137,5 @@ export default Service.extend({
       //   this.flashMessages.info('Welcome ' + this.name + ' to the Fabrica administration area.');
       // }
     }
-  },
+  }
 });

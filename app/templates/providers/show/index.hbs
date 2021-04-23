@@ -173,100 +173,107 @@
         {{/if}}
       </div>
     </div>
-    <h3 class="member-results">
-      Contact Information
-    </h3>
-    <div class="panel panel-transparent">
-      <div class="panel-body">
-        {{#if (is-empty model.contacts)}}
-          <BsAlert @dismissible={{false}} @type="danger">
-            There are no contacts in your contacts list. Please
-            <LinkTo
-              @route="providers.show.contacts.new"
-              @model={{model.id}}
-              @id="add-contact"
-            >
-              add at least one contact
-            </LinkTo>
-            .
-          </BsAlert>
-        {{else}}
-          {{#if (not-eq model.memberType 'consortium_organization')}}
-            <h5>
-              Voting Representative
-            </h5>
-            <div cy-data="voting">
-              {{#if model.votingContact.email}}
-                {{format-contact model.votingContact}}
-              {{else}}
-                <span class="small icon-warning">
-                  Please provide this information.
-                </span>
-              {{/if}}
-            </div>
-          {{/if}}
-          <h5>
-            Service Contact
-          </h5>
-          <div cy-data="service">
-            {{#if model.serviceContact.email}}
-              {{format-contact model.serviceContact}}
-            {{else}}
-              <span class="small icon-warning">
-                Please provide this information.
-              </span>
-            {{/if}}
-          </div>
-          {{#if model.secondaryServiceContact.email}}
-            <h5>
-              Secondary Service Contact
-            </h5>
-            <div cy-data="secondary-service">
-              {{format-contact model.secondaryServiceContact}}
-            </div>
-          {{/if}}
-          {{#if model.technicalContact.email}}
-            <h5>
-              Technical Contact
-            </h5>
-            <div cy-data="technical">
-              {{format-contact model.technicalContact}}
-            </div>
-          {{/if}}
-          {{#if model.secondaryTechnicalContact.email}}
-            <h5>
-              Secondary Technical Contact
-            </h5>
-            <div cy-data="secondary-technical">
-              {{format-contact model.secondaryTechnicalContact}}
-            </div>
-          {{/if}}
-          {{#if (not-eq model.memberType 'consortium_organization')}}
-            <h5>
-              Billing Contact
-            </h5>
-            <div cy-data="billing">
-              {{#if model.billingContact.email}}
-                {{format-contact model.billingContact}}
-              {{else}}
-                <span class="small icon-warning">
-                  Please provide this information.
-                </span>
-              {{/if}}
-            </div>
-            {{#if model.secondaryBillingContact.email}}
+    {{#if (not-eq model.memberType 'developer')}}
+      <h3 class="member-results">
+        Contact Information
+      </h3>
+      <div class="panel panel-transparent">
+        <div class="panel-body">
+          {{#if (is-empty model.contacts)}}
+            <BsAlert @dismissible={{false}} @type="danger">
+              There are no contacts in your contacts list. Please
+              <LinkTo
+                @route="providers.show.contacts.new"
+                @model={{model.id}}
+                @id="add-contact"
+              >
+                add at least one contact
+              </LinkTo>
+              .
+            </BsAlert>
+          {{else}}
+            {{#if (not-eq model.memberType 'consortium_organization')}}
               <h5>
-                Secondary Billing Contact
+                Voting Representative
               </h5>
-              <div cy-data="secondary-billing">
-                {{format-contact model.secondaryBillingContact}}
+              <div cy-data="voting">
+                {{#if model.votingContact.email}}
+                  {{format-contact model.votingContact}}
+                {{else}}
+                  <span class="small icon-warning">
+                    Please provide this information.
+                  </span>
+                {{/if}}
               </div>
             {{/if}}
+            <h5>
+              Service Contact
+            </h5>
+            <div cy-data="service">
+              {{#if model.serviceContact.email}}
+                {{format-contact model.serviceContact}}
+              {{else}}
+                <span class="small icon-warning">
+                  Please provide this information.
+                </span>
+              {{/if}}
+            </div>
+            {{#if model.secondaryServiceContact.email}}
+              <h5>
+                Secondary Service Contact
+              </h5>
+              <div cy-data="secondary-service">
+                {{format-contact model.secondaryServiceContact}}
+              </div>
+            {{/if}}
+            {{#if model.technicalContact.email}}
+              <h5>
+                Technical Contact
+              </h5>
+              <div cy-data="technical">
+                {{format-contact model.technicalContact}}
+              </div>
+            {{/if}}
+            {{#if model.secondaryTechnicalContact.email}}
+              <h5>
+                Secondary Technical Contact
+              </h5>
+              <div cy-data="secondary-technical">
+                {{format-contact model.secondaryTechnicalContact}}
+              </div>
+            {{/if}}
+            {{#if (not-eq model.memberType 'consortium_organization')}}
+              <h5>
+                Billing Contact
+              </h5>
+              <div cy-data="billing">
+                {{#if model.billingContact.email}}
+                  {{format-contact model.billingContact}}
+                {{else}}
+                  <span class="small icon-warning">
+                    Please provide this information.
+                  </span>
+                {{/if}}
+              </div>
+              {{#if model.secondaryBillingContact.email}}
+                <h5>
+                  Secondary Billing Contact
+                </h5>
+                <div cy-data="secondary-billing">
+                  {{format-contact model.secondaryBillingContact}}
+                </div>
+              {{/if}}
+            {{/if}}
           {{/if}}
-        {{/if}}
+        </div>
       </div>
-    </div>
-    {{#if (not-eq model.memberType 'consortium_organization')}}
+    {{/if}}
+    {{#if
+      (and
+        (not-eq model.memberType 'consortium_organization')
+        (not-eq model.memberType 'developer')
+      )
+    }}
       <h3 class="member-results">
         Billing Information
       </h3>

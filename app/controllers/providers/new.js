@@ -145,7 +145,7 @@ const memberTypeList = [
   'contractual_member',
   'direct_member',
   'member_only',
-  'registration_agency'
+  'developer'
 ];
 const focusAreaList = [
   'naturalSciences',

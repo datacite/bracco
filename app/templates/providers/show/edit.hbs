@@ -76,6 +76,7 @@
           @id="member-type"
           @label="Member Type"
           @property="memberType"
+          @disabled={{eq model.memberType 'developer'}}
           @options={{memberTypes}}
           @destination={{memberType}} as |el|
         >
@@ -277,160 +278,73 @@
           </div>
         </div>
       {{/if}}
-      <h3 class="member-results">
-        Contact Information
-      </h3>
-      {{#if (is-empty model.contacts)}}
-        <div class="col-md-9 col-md-offset-3">
-          <BsAlert @dismissible={{false}} @type="danger">
-            There are no contacts in your contacts list. Please
-            <LinkTo
-              @route="providers.show.contacts.new"
-              @model={{model.id}}
-              @id="add-contact"
-            >
-              add at least one contact
-            </LinkTo>
-            .
-          </BsAlert>
-        </div>
-      {{else}}
-        <div class="col-md-9 col-md-offset-3">
-          <BsAlert @dismissible={{false}} @type="info">
-            Contacts are created
-            <LinkTo @route="providers.show.contacts" @model={{model.id}}>
-              in the contacts section
-            </LinkTo>
-            and then assigned roles here.
-          </BsAlert>
-        </div>
-        {{#if (not-eq model.memberType 'consortium_organization')}}
+      {{#if (not-eq model.memberType 'developer')}}
+        <h3 class="member-results">
+          Contact Information
+        </h3>
+        {{#if (is-empty model.contacts)}}
+          <div class="col-md-9 col-md-offset-3">
+            <BsAlert @dismissible={{false}} @type="danger">
+              There are no contacts in your contacts list. Please
+              <LinkTo
+                @route="providers.show.contacts.new"
+                @model={{model.id}}
+                @id="add-contact"
+              >
+                add at least one contact
+              </LinkTo>
+              .
+            </BsAlert>
+          </div>
+        {{else}}
+          <div class="col-md-9 col-md-offset-3">
+            <BsAlert @dismissible={{false}} @type="info">
+              Contacts are created
+              <LinkTo @route="providers.show.contacts" @model={{model.id}}>
+                in the contacts section
+              </LinkTo>
+              and then assigned roles here.
+            </BsAlert>
+          </div>
+          {{#if (not-eq model.memberType 'consortium_organization')}}
+            {{#form.element
+              controlType='power-select'
+              id='voting-contact'
+              label='Voting Representative'
+              property='votingContact'
+              optionLabelPath='name'
+              options=model.filteredContacts
+              helpText="Your organization's voting representative."
+              destination=votingContact as |el|
+            }}
+              <el.control
+                @searchEnabled={{false}}
+                @search={{action 'searchContact'}}
+                @searchField="name"
+                @searchPlaceholder="Search contact..."
+                @onChange={{action 'selectVotingContact'}}
+                @placeholder="Select Contact" as |item|
+              >
+                {{item.displayName}}
+              </el.control>
+            {{/form.element}}
+          {{/if}}
           {{#form.element
             controlType='power-select'
-            id='voting-contact'
-            label='Voting Representative'
-            property='votingContact'
-            optionLabelPath='name'
+            id='service-contact'
+            label='Service Contact'
+            property='serviceContact'
+            optionLabelPath='displayName'
             options=model.filteredContacts
-            helpText="Your organization's voting representative."
-            destination=votingContact as |el|
+            helpText="Your organization's service contact."
+            destination=serviceContact as |el|
           }}
             <el.control
               @searchEnabled={{false}}
               @search={{action 'searchContact'}}
               @searchField="name"
               @searchPlaceholder="Search contact..."
-              @onChange={{action 'selectVotingContact'}}
-              @placeholder="Select Contact" as |item|
-            >
-              {{item.displayName}}
-            </el.control>
-          {{/form.element}}
-        {{/if}}
-        {{#form.element
-          controlType='power-select'
-          id='service-contact'
-          label='Service Contact'
-          property='serviceContact'
-          optionLabelPath='displayName'
-          options=model.filteredContacts
-          helpText="Your organization's service contact."
-          destination=serviceContact as |el|
-        }}
-          <el.control
-            @searchEnabled={{false}}
-            @search={{action 'searchContact'}}
-            @searchField="name"
-            @searchPlaceholder="Search contact..."
-            @onChange={{action 'selectServiceContact'}}
-            @placeholder="Select Contact" as |item|
-          >
-            {{item.displayName}}
-          </el.control>
-        {{/form.element}}
-        {{#form.element
-          controlType='power-select'
-          id='secondary-service-contact'
-          label='Secondary Service Contact'
-          property='secondaryServiceContact'
-          optionLabelPath='name'
-          options=model.filteredContacts
-          helpText="Your organization's secondary service contact."
-          destination=secondaryServiceContact as |el|
-        }}
-          <el.control
-            @searchEnabled={{false}}
-            @search={{action 'searchContact'}}
-            @searchField="name"
-            @searchPlaceholder="Search contact..."
-            @onChange={{action 'selectSecondaryServiceContact'}}
-            @placeholder="Select Contact"
-            @allowClear={{true}} as |item|
-          >
-            {{item.displayName}}
-          </el.control>
-        {{/form.element}}
-        {{#form.element
-          controlType='power-select'
-          id='technical-contact'
-          label='Technical Contact'
-          property='technicalContact'
-          optionLabelPath='name'
-          options=model.filteredContacts
-          helpText="Your organization's technical contact."
-          destination=technicalContact as |el|
-        }}
-          <el.control
-            @searchEnabled={{false}}
-            @search={{action 'searchContact'}}
-            @searchField="name"
-            @searchPlaceholder="Search contact..."
-            @onChange={{action 'selectTechnicalContact'}}
-            @placeholder="Select Contact"
-            @allowClear={{true}} as |item|
-          >
-            {{item.displayName}}
-          </el.control>
-        {{/form.element}}
-        {{#form.element
-          controlType='power-select'
-          id='secondary-technical-contact'
-          label='Secondary Technical Contact'
-          property='secondaryTechnicalContact'
-          optionLabelPath='name'
-          options=model.filteredContacts
-          helpText="Your organization's secondary technical contact."
-          destination=secondaryTechnicalContact as |el|
-        }}
-          <el.control
-            @searchEnabled={{false}}
-            @search={{action 'searchContact'}}
-            @searchField="name"
-            @searchPlaceholder="Search contact..."
-            @onChange={{action 'selectSecondaryTechnicalContact'}}
-            @placeholder="Select Contact"
-            @allowClear={{true}} as |item|
-          >
-            {{item.displayName}}
-          </el.control>
-        {{/form.element}}
-        {{#if (not-eq model.memberType 'consortium_organization')}}
-          {{#form.element
-            controlType='power-select'
-            id='billing-contact'
-            label='Billing Contact'
-            property='billingContact'
-            optionLabelPath='name'
-            options=model.filteredContacts
-            helpText="Your organization's billing contact."
-            destination='billingContact' as |el|
-          }}
-            <el.control
-              @searchEnabled={{false}}
-              @search={{action 'searchContact'}}
-              @searchField="name"
-              @searchPlaceholder="Search contact..."
-              @onChange={{action 'selectBillingContact'}}
+              @onChange={{action 'selectServiceContact'}}
               @placeholder="Select Contact" as |item|
             >
               {{item.displayName}}
@@ -438,29 +352,123 @@
           {{/form.element}}
           {{#form.element
             controlType='power-select'
-            id='secondary-billing-contact'
-            label='Secondary Billing Contact'
-            property='secondaryBillingContact'
+            id='secondary-service-contact'
+            label='Secondary Service Contact'
+            property='secondaryServiceContact'
             optionLabelPath='name'
             options=model.filteredContacts
-            helpText="Your organization's secondary billing contact."
-            destination=secondaryBillingContact as |el|
+            helpText="Your organization's secondary service contact."
+            destination=secondaryServiceContact as |el|
           }}
             <el.control
               @searchEnabled={{false}}
               @search={{action 'searchContact'}}
               @searchField="name"
               @searchPlaceholder="Search contact..."
-              @onChange={{action 'selectSecondaryBillingContact'}}
+              @onChange={{action 'selectSecondaryServiceContact'}}
               @placeholder="Select Contact"
               @allowClear={{true}} as |item|
             >
               {{item.displayName}}
             </el.control>
           {{/form.element}}
+          {{#form.element
+            controlType='power-select'
+            id='technical-contact'
+            label='Technical Contact'
+            property='technicalContact'
+            optionLabelPath='name'
+            options=model.filteredContacts
+            helpText="Your organization's technical contact."
+            destination=technicalContact as |el|
+          }}
+            <el.control
+              @searchEnabled={{false}}
+              @search={{action 'searchContact'}}
+              @searchField="name"
+              @searchPlaceholder="Search contact..."
+              @onChange={{action 'selectTechnicalContact'}}
+              @placeholder="Select Contact"
+              @allowClear={{true}} as |item|
+            >
+              {{item.displayName}}
+            </el.control>
+          {{/form.element}}
+          {{#form.element
+            controlType='power-select'
+            id='secondary-technical-contact'
+            label='Secondary Technical Contact'
+            property='secondaryTechnicalContact'
+            optionLabelPath='name'
+            options=model.filteredContacts
+            helpText="Your organization's secondary technical contact."
+            destination=secondaryTechnicalContact as |el|
+          }}
+            <el.control
+              @searchEnabled={{false}}
+              @search={{action 'searchContact'}}
+              @searchField="name"
+              @searchPlaceholder="Search contact..."
+              @onChange={{action 'selectSecondaryTechnicalContact'}}
+              @placeholder="Select Contact"
+              @allowClear={{true}} as |item|
+            >
+              {{item.displayName}}
+            </el.control>
+          {{/form.element}}
+          {{#if (not-eq model.memberType 'consortium_organization')}}
+            {{#form.element
+              controlType='power-select'
+              id='billing-contact'
+              label='Billing Contact'
+              property='billingContact'
+              optionLabelPath='name'
+              options=model.filteredContacts
+              helpText="Your organization's billing contact."
+              destination='billingContact' as |el|
+            }}
+              <el.control
+                @searchEnabled={{false}}
+                @search={{action 'searchContact'}}
+                @searchField="name"
+                @searchPlaceholder="Search contact..."
+                @onChange={{action 'selectBillingContact'}}
+                @placeholder="Select Contact" as |item|
+              >
+                {{item.displayName}}
+              </el.control>
+            {{/form.element}}
+            {{#form.element
+              controlType='power-select'
+              id='secondary-billing-contact'
+              label='Secondary Billing Contact'
+              property='secondaryBillingContact'
+              optionLabelPath='name'
+              options=model.filteredContacts
+              helpText="Your organization's secondary billing contact."
+              destination=secondaryBillingContact as |el|
+            }}
+              <el.control
+                @searchEnabled={{false}}
+                @search={{action 'searchContact'}}
+                @searchField="name"
+                @searchPlaceholder="Search contact..."
+                @onChange={{action 'selectSecondaryBillingContact'}}
+                @placeholder="Select Contact"
+                @allowClear={{true}} as |item|
+              >
+                {{item.displayName}}
+              </el.control>
+            {{/form.element}}
+          {{/if}}
         {{/if}}
       {{/if}}
-      {{#if (not-eq model.memberType 'consortium_organization')}}
+      {{#if
+        (and
+          (not-eq model.memberType 'consortium_organization')
+          (not-eq model.memberType 'developer')
+        )
+      }}
         <h3 class="member-results">
           Billing Information
         </h3>

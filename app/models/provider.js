@@ -116,7 +116,10 @@ const Validations = buildValidations({
     validator('presence', {
       presence: true,
       disabled: computed('model', function () {
-        return this.model.get('isNew');
+        return (
+          this.model.get('isNew') ||
+          this.model.get('memberType') === 'developer'
+        );
       })
     })
   ],
@@ -222,7 +225,7 @@ export default Model.extend(Validations, {
     function () {
       if (this.memberType === 'consortium_organization') {
         return isPresent(this.serviceContact.email);
-      } else {
+      } else if (this.memberType !== 'developer') {
         return (
           isPresent(this.votingContact.email) &&
           isPresent(this.serviceContact.email) &&

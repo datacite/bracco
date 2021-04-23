@@ -42,7 +42,10 @@ export function providerFormErrors([model]) {
     }
 
     // the following fields are disabled for consortium organizations
-    if (model.memberType !== 'consortium_organization') {
+    if (
+      model.memberType !== 'consortium_organization' &&
+      model.memberType !== 'developer'
+    ) {
       if (
         model.billingContact &&
         isPresent(model.billingContact.validations.errors)

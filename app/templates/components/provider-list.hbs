@@ -432,71 +432,73 @@
             </h5>
             {{titleize (humanize (underscore provider.focusArea))}}
           {{/if}}
-          {{#if (not-eq provider.memberType 'consortium_organization')}}
-            <h5>
-              Voting Representative
-            </h5>
-            <div cy-data="voting">
-              {{#if provider.votingContact.email}}
-                {{format-contact provider.votingContact}}
-              {{else}}
-                <span class="small icon-warning">
-                  Please provide this information.
-                </span>
-              {{/if}}
-            </div>
-          {{/if}}
-          <h5>
-            Service Contact
-          </h5>
-          <div cy-data="service">
-            {{#if provider.serviceContact.email}}
-              {{format-contact provider.serviceContact}}
-            {{else}}
-              <span class="small icon-warning">
-                Please provide this information.
-              </span>
+          {{#if (not-eq provider.memberType 'developer')}}
+            {{#if (not-eq provider.memberType 'consortium_organization')}}
+              <h5>
+                Voting Representative
+              </h5>
+              <div cy-data="voting">
+                {{#if provider.votingContact.email}}
+                  {{format-contact provider.votingContact}}
+                {{else}}
+                  <span class="small icon-warning">
+                    Please provide this information.
+                  </span>
+                {{/if}}
+              </div>
             {{/if}}
-          </div>
-          {{#if (not-eq provider.memberType 'consortium_organization')}}
             <h5>
-              Billing Contact
+              Service Contact
             </h5>
-            <div cy-data="billing">
-              {{#if provider.billingContact.email}}
-                {{format-contact provider.billingContact}}
+            <div cy-data="service">
+              {{#if provider.serviceContact.email}}
+                {{format-contact provider.serviceContact}}
               {{else}}
                 <span class="small icon-warning">
                   Please provide this information.
                 </span>
               {{/if}}
             </div>
-            <h5>
-              Billing Information
-            </h5>
-            {{#if provider.formattedBillingInformation}}
-              {{#if provider.billingContact.familyName}}
-                {{provider.billingContact.givenName}}
-                {{provider.billingContact.familyName}}
-                <br />
-              {{/if}}
-              {{#if provider.billingInformation.department}}
-                {{provider.billingInformation.department}}<br />
-              {{/if}}
-              {{#if provider.billingInformation.organization}}
-                {{provider.billingInformation.organization}}<br />
-              {{else}}
-                {{provider.name}}<br />
-              {{/if}}
+            {{#if (not-eq provider.memberType 'consortium_organization')}}
+              <h5>
+                Billing Contact
+              </h5>
+              <div cy-data="billing">
+                {{#if provider.billingContact.email}}
+                  {{format-contact provider.billingContact}}
+                {{else}}
+                  <span class="small icon-warning">
+                    Please provide this information.
+                  </span>
+                {{/if}}
+              </div>
+              <h5>
+                Billing Information
+              </h5>
               {{#if provider.formattedBillingInformation}}
-                {{#each provider.formattedBillingInformation as |line|}}
-                  {{line}}<br />
-                {{/each}}
+                {{#if provider.billingContact.familyName}}
+                  {{provider.billingContact.givenName}}
+                  {{provider.billingContact.familyName}}
+                  <br />
+                {{/if}}
+                {{#if provider.billingInformation.department}}
+                  {{provider.billingInformation.department}}<br />
+                {{/if}}
+                {{#if provider.billingInformation.organization}}
+                  {{provider.billingInformation.organization}}<br />
+                {{else}}
+                  {{provider.name}}<br />
+                {{/if}}
+                {{#if provider.formattedBillingInformation}}
+                  {{#each provider.formattedBillingInformation as |line|}}
+                    {{line}}<br />
+                  {{/each}}
+                {{/if}}
+              {{else}}
+                <span class="small icon-warning">
+                  Please provide this information.
+                </span>
               {{/if}}
-            {{else}}
-              <span class="small icon-warning">
-                Please provide this information.
-              </span>
             {{/if}}
           {{/if}}
         </div>
