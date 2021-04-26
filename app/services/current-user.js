@@ -74,6 +74,7 @@ export default Service.extend({
   },
 
   initUser(payload) {
+    console.log(payload);
     if (!isEmpty(payload) && !isEmpty(payload.uid)) {
       this.set('uid', payload.uid);
       this.set('name', payload.name);
@@ -83,7 +84,7 @@ export default Service.extend({
       this.set('role_id', payload.role_id);
       this.set('isBetaTester', payload.beta_tester);
 
-      if (payload.role_id === 'staff_admin') {
+      if (payload.role_id === 'staff_admin' && payload.uid === 'admin') {
         this.set('isAdmin', true);
         this.set('home', { route: 'providers' });
         this.set('settings', { route: 'index' });
@@ -92,6 +93,13 @@ export default Service.extend({
         this.features.setup({
           'show-researchers': true
         });
+      } else if (payload.role_id === 'staff_admin') {
+        // other users with role_id staff_admin are developers
+        this.set('isDeveloper', true);
+        this.set('isAdmin', true);
+        this.set('home', { route: 'providers.show', id: this.uid });
+        this.set('settings', { route: 'providers.show', id: this.uid });
+        this.set('roleName', 'Developer');
       } else if (payload.role_id === 'consortium_admin') {
         this.set('isConsortium', true);
         this.set('home', { route: 'providers.show', id: this.uid });
@@ -107,13 +115,6 @@ export default Service.extend({
         this.set('home', { route: 'repositories.show', id: this.uid });
         this.set('settings', { route: 'repositories.show', id: this.uid });
         this.set('roleName', 'Repository');
-      } else if (payload.role_id === 'developer') {
-        this.set('isDeveloper', true);
-        this.set('isAdmin', true);
-        this.set('home', { route: 'providers.show', id: this.uid });
-        this.set('settings', { route: 'providers.show', id: this.uid });
-        this.set('roleName', 'Developer');
-        this.set('role_id', 'staff_admin');
       } else if (payload.role_id === 'user') {
         this.set('home', { route: 'users.show', id: this.uid });
         this.set('settings', { route: 'users.show', id: this.uid });
