@@ -74,7 +74,6 @@ export default Service.extend({
   },
 
   initUser(payload) {
-    console.log(payload);
     if (!isEmpty(payload) && !isEmpty(payload.uid)) {
       this.set('uid', payload.uid);
       this.set('name', payload.name);
