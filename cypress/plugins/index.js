@@ -17,8 +17,6 @@
 
 /// <reference types="cypress" />
 
-require('dotenv').config();
-
 const browserify = require('@cypress/browserify-preprocessor');
 
 module.exports = (on, config) => {
@@ -38,10 +36,9 @@ module.exports = (on, config) => {
   config.env.client_admin_cookie =
     process.env.CYPRESS_CLIENT_ADMIN_COOKIE;
 
-  require('dotenv').config()
   config.env.site_title = process.env.SITE_TITLE || ""
-  config.baseUrl = process.env.FABRICA_URL || Cypress.config.baseUrl || ""
-
+  config.baseUrl = process.env.FABRICA_URL || config.baseUrl || ""
+  
   config.env.client_admin_password = process.env.CLIENT_ADMIN_PASSWORD
 
   return config
