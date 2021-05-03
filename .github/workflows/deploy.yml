@@ -32,7 +32,7 @@ jobs:
           record: true
           parallel: true
           group: 'Tests'
-          spec: cypress/integration/client_admin/**
+          spec: cypress/integration/client_admin/admin.test.ts
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
