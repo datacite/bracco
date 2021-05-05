@@ -33,9 +33,9 @@ jobs:
           parallel: true
           group: 'Tests'
           spec: |
-            cypress/integration/staff_admin/admin.test.ts
             cypress/integration/client_admin/admin.test.ts
-        env:
+            cypress/integration/consortium_admin/admin.test.ts
+       env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CYPRESS_STAFF_ADMIN_COOKIE: ${{ secrets.CYPRESS_STAFF_ADMIN_COOKIE }}

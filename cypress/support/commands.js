@@ -29,6 +29,39 @@
 
 import 'cypress-wait-until';
 
+function cookie(jwt, expires_in) {
+  var future = new Date();
+
+  var cookie = {
+    "authenticated": {
+      "authenticator": "authenticator:oauth2",
+      "access_token": jwt,
+      "expires_in": expires_in,
+      "expires_at": future.setDate(future.getDate() + 30)
+    }
+  }
+
+  return encodeURIComponent(JSON.stringify(cookie));
+}
+
+Cypress.Commands.add('login', (username, password) => {
+  const options = {
+    method: 'POST',
+    url: Cypress.env('api_url') + '/token',
+    body: {
+      grant_type: 'password',
+      username: username,
+      password: password,
+    },
+  };
+  cy.request(options).then(resp => {
+    var jwt = resp.body.access_token;
+    var expires_in = resp.body.expires_in;
+    var my_cookie = cookie(jwt, expires_in);
+    cy.setCookie('_fabrica', my_cookie);
+  });
+});
+
 Cypress.Commands.add('isInViewport', { prevSubject: true },(subject) => {
   const bottom = Cypress.$(cy.state('window')).height();
   const rect = subject[0].getBoundingClientRect();
