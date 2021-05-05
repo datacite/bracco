@@ -50,5 +50,5 @@ corber/cordova/www/*
 .vscode
 
 # cypress
-screenshotsFolder
-videosFolder
+cypress/screenshotsFolder
+cypress/videosFolder
