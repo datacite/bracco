@@ -38,7 +38,8 @@ module.exports = (on, config) => {
   config.env.organization_admin_password = process.env.ORGANIZATION_ADMIN_PASSWORD;
   config.env.client_admin_username = process.env.CLIENT_ADMIN_USERNAME;
   config.env.client_admin_password = process.env.CLIENT_ADMIN_PASSWORD;
-  config.env.api_url = process.env.API_URL;
+  config.env.api_url = process.env.API_URL || 'https://api.stage.datacite.org';
+  ;
 
   config.env.staff_admin_cookie = process.env.CYPRESS_STAFF_ADMIN_COOKIE;
   config.env.consortium_admin_cookie =
