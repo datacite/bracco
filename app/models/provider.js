@@ -119,7 +119,8 @@ const Validations = buildValidations({
         return (
           this.model.get('isNew') ||
           this.model.get('mode') === 'change' ||
-          this.model.get('memberType') === 'developer'
+          this.model.get('memberType') === 'developer' ||
+          !this.model.get('memberType') // memberType is null for admin account
         );
       })
     })
@@ -132,7 +133,10 @@ const Validations = buildValidations({
         return (
           this.model.get('contacts').length === 0 ||
           this.model.get('isNew') ||
-          this.model.get('memberType') === 'consortium_organization'
+          this.model.get('mode') === 'change' ||
+          this.model.get('memberType') === 'consortium_organization' ||
+          this.model.get('memberType') === 'developer' ||
+          !this.model.get('memberType') // memberType is null for admin account
         );
       })
     })
@@ -143,7 +147,12 @@ const Validations = buildValidations({
       message: 'A service contact is required.',
       disabled: computed('model', function () {
         return (
-          this.model.get('contacts').length === 0 || this.model.get('isNew')
+          this.model.get('contacts').length === 0 || 
+          this.model.get('isNew') ||
+          this.model.get('mode') === 'change' ||
+          this.model.get('memberType') === 'consortium_organization' ||
+          this.model.get('memberType') === 'developer' ||
+          !this.model.get('memberType') // memberType is null for admin account
         );
       })
     })
@@ -156,7 +165,10 @@ const Validations = buildValidations({
         return (
           this.model.get('contacts').length === 0 ||
           this.model.get('isNew') ||
-          this.model.get('memberType') === 'consortium_organization'
+          this.model.get('mode') === 'change' ||
+          this.model.get('memberType') === 'consortium_organization' ||
+          this.model.get('memberType') === 'developer' ||
+          !this.model.get('memberType') // memberType is null for admin account
         );
       })
     })
