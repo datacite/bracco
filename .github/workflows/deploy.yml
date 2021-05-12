@@ -32,13 +32,20 @@ jobs:
           record: true
           parallel: true
           group: 'Tests'
-          spec: cypress/integration/client_admin/admin.test.ts
+          spec: |
+            cypress/integration/client_admin/admin.test.ts
+            cypress/integration/consortium_admin/admin.test.ts
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          CYPRESS_STAFF_ADMIN_COOKIE: ${{ secrets.CYPRESS_STAFF_ADMIN_COOKIE }}
-          CYPRESS_CONSORTIUM_ADMIN_COOKIE: ${{ secrets.CYPRESS_CONSORTIUM_ADMIN_COOKIE }}
-          CYPRESS_ORGANIZATION_ADMIN_COOKIE: ${{ secrets.CYPRESS_ORGANIZATION_ADMIN_COOKIE }}
+          CLIENT_ADMIN_USERNAME: ${{ secrets.CLIENT_ADMIN_USERNAME }}
+          CLIENT_ADMIN_PASSWORD: ${{ secrets.CLIENT_ADMIN_PASSWORD }}
+          CONSORTIUM_ADMIN_USERNAME: ${{ secrets.CONSORTIUM_ADMIN_USERNAME }}
+          CONSORTIUM_ADMIN_PASSWORD: ${{ secrets.CONSORTIUM_ADMIN_PASSWORD }}
+          ORGANIZATION_ADMIN_USERNAME: ${{ secrets.ORGANIZATION_ADMIN_USERNAME }}
+          ORGANIZATION_ADMIN_PASSWORD: ${{ secrets.ORGANIZATION_ADMIN_PASSWORD }}
+          STAFF_ADMIN_USERNAME: ${{ secrets.STAFF_ADMIN_USERNAME }}
+          STAFF_ADMIN_PASSWORD: ${{ secrets.STAFF_ADMIN_PASSWORD }}
 
  #     - name: Publish code coverage
  #       uses: paambaati/codeclimate-action@v2.7.5

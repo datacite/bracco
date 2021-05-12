@@ -30,6 +30,17 @@ module.exports = (on, config) => {
   require('@cypress/code-coverage/task')(on, config);
 
   // env variables
+  config.env.staff_admin_username = process.env.STAFF_ADMIN_USERNAME;
+  config.env.staff_admin_password = process.env.STAFF_ADMIN_PASSWORD;
+  config.env.consortium_admin_username = process.env.CONSORTIUM_ADMIN_USERNAME;
+  config.env.consortium_admin_password = process.env.CONSORTIUM_ADMIN_PASSWORD;
+  config.env.organization_admin_username = process.env.ORGANIZATION_ADMIN_USERNAME;
+  config.env.organization_admin_password = process.env.ORGANIZATION_ADMIN_PASSWORD;
+  config.env.client_admin_username = process.env.CLIENT_ADMIN_USERNAME;
+  config.env.client_admin_password = process.env.CLIENT_ADMIN_PASSWORD;
+  config.env.api_url = process.env.API_URL || 'https://api.stage.datacite.org';
+  ;
+
   config.env.staff_admin_cookie = process.env.CYPRESS_STAFF_ADMIN_COOKIE;
   config.env.consortium_admin_cookie =
     process.env.CYPRESS_CONSORTIUM_ADMIN_COOKIE;
