@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://datacite.org/schema/kernel-4" xsi:schemaLocation="http://datacite.org/schema/kernel-4 http://schema.datacite.org/meta/kernel-4/metadata.xsd">
+  <identifier identifierType="DOI">10.80225/DA52-7919</identifier>
+  <creators>
+    <creator>
+      <creatorName nameType="Personal">Buys, Matt</creatorName>
+      <givenName>Matt</givenName>
+      <familyName>Buys</familyName>
+    </creator>
+    <creator>
+      <creatorName nameType="Personal">Dasler, Robin</creatorName>
+      <givenName>Robin</givenName>
+      <familyName>Dasler</familyName>
+      <nameIdentifier nameIdentifierScheme="ORCID" schemeURI="https://orcid.org">https://orcid.org/0000-0002-4695-7874</nameIdentifier>
+    </creator>
+    <creator>
+      <creatorName nameType="Personal">Fenner, Martin</creatorName>
+      <givenName>Martin</givenName>
+      <familyName>Fenner</familyName>
+      <nameIdentifier nameIdentifierScheme="ORCID" schemeURI="https://orcid.org">https://orcid.org/0000-0003-1419-2405</nameIdentifier>
+    </creator>
+  </creators>
+  <titles>
+    <title>PIDs for instruments: a way forward</title>
+  </titles>
+  <publisher>DataCite</publisher>
+  <publicationYear>2020</publicationYear>
+  <resourceType resourceTypeGeneral="Text">ScholarlyArticle</resourceType>
+  <subjects>
+    <subject>instrument</subject>
+    <subject>rda</subject>
+    <subject>featured</subject>
+  </subjects>
+  <contributors>
+    <contributor contributorType="ContactPerson">
+      <contributorName nameType="Personal">Garza, Kristian</contributorName>
+      <givenName>Kristian</givenName>
+      <familyName>Garza</familyName>
+      <nameIdentifier nameIdentifierScheme="ORCID" schemeURI="https://orcid.org">https://orcid.org/0000-0003-3484-6875</nameIdentifier>
+    </contributor>
+  </contributors>
+  <dates>
+    <date dateType="Issued">2020</date>
+  </dates>
+  <relatedIdentifiers>
+    <relatedIdentifier relatedIdentifierType="DOI" relationType="IsPartOf" resourceTypeGeneral="InteractiveResource">10.5438/0000-00ss</relatedIdentifier>
+    <relatedIdentifier relatedIdentifierType="DOI" relationType="HasMetadata">10.7914/sn/sh</relatedIdentifier>
+  </relatedIdentifiers>
+  <sizes/>
+  <formats/>
+  <version>1.0</version>
+  <rightsList>
+    <rights rightsURI="https://opensource.org/licenses/MIT">MIT License</rights>
+  </rightsList>
+  <descriptions>
+    <description descriptionType="Abstract">As a community-driven organization, we continue to focus and explore use cases with our members. The persistent identification and citation of scientific instruments is a particular use case that continues to gain momentum across community stakeholders...</description>
+  </descriptions>
+  <fundingReferences>
+    <fundingReference>
+      <funderName>American Red Cross</funderName>
+      <funderIdentifier funderIdentifierType="Crossref Funder ID">https://doi.org/10.13039/100006744</funderIdentifier>
+    </fundingReference>
+  </fundingReferences>
+</resource>

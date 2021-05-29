@@ -28,6 +28,8 @@
 // https://github.com/cypress-io/cypress/issues/877
 
 import 'cypress-wait-until';
+import { copySync } from 'fs-extra';
+import 'cypress-file-upload';
 
 function cookie(jwt, expires_in) {
   var future = new Date();
@@ -59,6 +61,7 @@ Cypress.Commands.add('login', (username, password) => {
     var expires_in = resp.body.expires_in;
     var my_cookie = cookie(jwt, expires_in);
     cy.setCookie('_fabrica', my_cookie);
+    cy.setCookie('_jwt', jwt);
   });
 });
 
@@ -81,3 +84,54 @@ Cypress.Commands.add('isNotInViewport', { prevSubject: true },(subject) => {
 
   return subject;
 })
+
+Cypress.Commands.add("createDoi", (prefix, api_url, jwt) => {
+  return cy.request({
+    method: 'POST',
+    url: api_url + '/dois',
+    body: {
+      'data': {
+        'type': 'dois',
+        'attributes': { 'prefix': prefix }
+      }
+    },
+    headers: {
+      authorization: 'Bearer ' + jwt,
+    }
+  }).then((response) => {
+    // redirect status code is 302
+    expect(response.status).to.eq(201)
+    return(response.body.data.id);
+  });
+})
+
+Cypress.Commands.add("createDoiXmlUpload", (prefix, fixture, api_url, jwt) => {
+
+  cy.readFile('cypress/fixtures/' + fixture, 'base64').then(text => {
+    return cy.request({
+      method: 'POST',
+      url: api_url + '/dois',
+      body: {
+        'data': {
+          'type': 'dois',
+          'attributes': {
+            'prefix': prefix,
+            "url": "https://schema.datacite.org/meta/kernel-4.0/index.html",
+            "xml": text,
+          }
+        }
+      },
+      headers: {
+        authorization: 'Bearer ' + jwt,
+      }
+    }).then((response) => {
+      // redirect status code is 302
+      expect(response.status).to.eq(201)
+      return(response.body.data.id);
+    });
+  });
+})
+
+Cypress.Commands.add('clickOutside', function(): Chainable<any> {
+  return cy.get('body').click(0,0); //0,0 here are the x and y coordinates
+});
