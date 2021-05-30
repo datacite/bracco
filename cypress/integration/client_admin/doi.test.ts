@@ -74,14 +74,6 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
 
       ////////// FILL IN FORM
 
-      // Set 'prefix'. Random suffix.
-      cy.get('#prefix-field div[role="button"]').click({ force: true }).then(() => {
-        cy.wait(waitTime2);
-        cy.get('div.ember-power-select-dropdown').within(() => {
-          cy.get("ul.ember-power-select-options li").contains(prefix).click({ force: true });
-        });
-      });
-
       // Leave state at 'draft'.
 
       // Set 'url'.
@@ -225,6 +217,15 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
           });
         });
       });
+
+      // Set 'prefix'. Random suffix.
+      cy.get('#prefix-field div[role="button"]').click({ force: true }).then(() => {
+        cy.wait(waitTime);
+        cy.get('div.ember-power-select-dropdown').within(() => {
+          cy.get("ul.ember-power-select-options li").contains(prefix).click({ force: true });
+        });
+      });
+
     }).then(() => {
 
       ////////// DONE FILLING IN FORM.  PRESS THE CREATE BUTTON.
@@ -238,14 +239,6 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
   it('is creating a doi - FILE UPLOAD', () => {
     cy.visit('/repositories/datacite.test/dois/upload');
     cy.url().should('include', '/repositories/datacite.test/dois/upload').then(() => {
-
-      // Set 'prefix'. Random suffix.
-      cy.get('#prefix-field div[role="button"]').click({ force: true }).then(() => {
-        cy.wait(waitTime2);
-        cy.get('div.ember-power-select-dropdown').within(() => {
-          cy.get("ul.ember-power-select-options li").contains(prefix).click({ force: true });
-        });
-      });
 
       // Leave state at 'draft'.
 
@@ -261,6 +254,14 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
             fileContent: fileContent.toString(),
             fileName: 'doi_sample_1.xml',
             mimeType: 'application/xml'
+        });
+      });
+
+      // Set 'prefix'. Random suffix.
+      cy.get('#prefix-field div[role="button"]').click({ force: true }).then(() => {
+        cy.wait(waitTime);
+        cy.get('div.ember-power-select-dropdown').within(() => {
+          cy.get("ul.ember-power-select-options li").contains(prefix).click({ force: true });
         });
       });
     }).then(() => {
@@ -357,7 +358,7 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
       });
     });
   });
-  
+
   it('visiting specific doi', () => {
     cy.getCookie('_jwt').then((cookie) => {
 
