@@ -37,7 +37,7 @@ jobs:
             cypress/integration/client_admin/info.test.ts
             cypress/integration/client_admin/prefixes.test.ts
             cypress/integration/client_admin/settings.test.ts
-            #cypress/integration/consortium_admin/admin.test.ts
+#            cypress/integration/consortium_admin/admin.test.ts
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

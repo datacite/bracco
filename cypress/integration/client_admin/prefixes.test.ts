@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 /* eslint-disable no-undef */
 
-describe('Acceptance: client_admin | dois', () => {
+describe('ACCEPTANCE: CLIENT_ADMIN | PREFIXES', () => {
   const waitTime = 1000;
   const waitTime2 = 2000;
   let prefix = '10.80225';

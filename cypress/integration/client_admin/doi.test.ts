@@ -6,7 +6,7 @@ function escapeRE(string) {
   return string.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
 }
 
-describe('Acceptance: client_admin | dois', () => {
+describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
   const waitTime = 1000;
   const waitTime2 = 2000;
   const prefix = '10.80225';
@@ -76,7 +76,7 @@ describe('Acceptance: client_admin | dois', () => {
 
       // Set 'prefix'. Random suffix.
       cy.get('#prefix-field div[role="button"]').click({ force: true }).then(() => {
-        cy.wait(waitTime);
+        cy.wait(waitTime2);
         cy.get('div.ember-power-select-dropdown').within(() => {
           cy.get("ul.ember-power-select-options li").contains(prefix).click({ force: true });
         });
@@ -241,7 +241,7 @@ describe('Acceptance: client_admin | dois', () => {
 
       // Set 'prefix'. Random suffix.
       cy.get('#prefix-field div[role="button"]').click({ force: true }).then(() => {
-        cy.wait(waitTime);
+        cy.wait(waitTime2);
         cy.get('div.ember-power-select-dropdown').within(() => {
           cy.get("ul.ember-power-select-options li").contains(prefix).click({ force: true });
         });

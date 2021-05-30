@@ -6,7 +6,7 @@ function escapeRE(string) {
   return string.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
 }
 
-describe('Acceptance: client_admin | settings', () => {
+describe('ACCEPTANCE: CLIENT_ADMIN | SETTINGS', () => {
   const waitTime = 1000;
   const waitTime2 = 2000;
 

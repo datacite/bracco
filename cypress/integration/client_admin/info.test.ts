@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 /* eslint-disable no-undef */
 
-describe('Acceptance: client_admin | info', () => {
+describe('ACCEPTANCE: CLIENT_ADMIN | INFO', () => {
   const waitTime = 1000;
   const waitTime2 = 2000;
 
