@@ -96,9 +96,9 @@ describe('Acceptance: client_admin | settings', () => {
         cy.get('button[type=submit]').should('be.visible');
       });
     }).then (() => {
-      cy.get('button#cancel').should('be.visible').click({force: true});
-      cy.wait(waitTime);
-      cy.url().should('match', (new RegExp(escapeRE('/repositories/datacite.test') + '$')));
+      cy.get('button#cancel').should('be.visible').click({force: true}).then (() => {
+        cy.url().should('match', (new RegExp(escapeRE('/repositories/datacite.test') + '$')));
+      });
     });
   });
 
@@ -137,9 +137,9 @@ describe('Acceptance: client_admin | settings', () => {
         cy.get('button#update-repository').should('be.visible');
       })
     }).then(() => {
-      cy.get('button').contains(/Cancel/i).should('be.visible').click({force: true});
-      cy.wait(waitTime);
-      cy.url().should('include', '/repositories/datacite.test');
+      cy.get('button').contains(/Cancel/i).should('be.visible').click({force: true}).then (() => {
+        cy.url().should('include', '/repositories/datacite.test');
+      });
     });
   });
 });
