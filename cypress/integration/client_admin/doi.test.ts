@@ -265,6 +265,7 @@ describe('Acceptance: client_admin | dois', () => {
       });
     }).then(() => {
       ////////// DONE FILLING IN FORM.  PRESS THE CREATE BUTTON.
+      cy.wait(waitTime);
       cy.get('button#doi-create').should('be.visible').click();
       cy.wait(waitTime);
       cy.location('pathname').should('contain', '/dois/' + prefix)
@@ -332,7 +333,7 @@ describe('Acceptance: client_admin | dois', () => {
         cy.url().should('include', uri).then(() => {
 
           cy.get('#metadata textarea').clear({force: true}).then((textarea) => {
-            cy.wait(waitTime));
+            cy.wait(waitTime);
             // Do the file upload. (just xml for now).  (Wow. That was easy!)
             cy.fixture('doi_sample_1-update.xml').then((fileContent) => {
               cy.get('#upload-file input[type="file"]').attachFile({
@@ -356,7 +357,7 @@ describe('Acceptance: client_admin | dois', () => {
       });
     });
   });
-
+  
   it('visiting specific doi', () => {
     cy.getCookie('_jwt').then((cookie) => {
 
