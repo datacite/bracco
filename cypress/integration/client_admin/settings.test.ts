@@ -35,7 +35,6 @@ describe('ACCEPTANCE: CLIENT_ADMIN | SETTINGS', () => {
       cy.get('ul.nav-tabs li a').contains(/DOIs/i)
         .and('have.attr', 'href').and('include', '/repositories/datacite.test/dois');
 
-
       cy.get('.btn-toolbar').within(($btnToolbar) => {
         cy.get('.btn-group-vertical a#set-password-repository').contains(/Set\s*Password/i)
           .and('have.attr', 'href').and('include', '/repositories/datacite.test/change');
