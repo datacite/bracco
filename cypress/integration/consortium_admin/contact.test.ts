@@ -1,22 +1,36 @@
 /// <reference types="cypress" />
 /* eslint-disable no-undef */
 
-describe('Acceptance: consortium_admin | contacts', () => {
-  const waitTimeBetIt = 1000;
+function escapeRE(string) {
+  //return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+  return string.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+}
+
+function randomIntFromInterval(min, max) { // min and max included
+  return Math.floor(Math.random() * (max - min + 1) + min)
+}
+
+describe('ACCEPTANCE: CONSORTIUM_ADMIN | CONTACTS', () => {
   const waitTime = 1000;
-  const waitTime1 = 1000;
+  const waitTime2 = 2000;
+  const waitTime3 = 3000;
+  const waitTime4 = 4000;
+
+  before(function () {
+    cy.login(Cypress.env('consortium_admin_username'), Cypress.env('consortium_admin_password'));
+    cy.setCookie('_consent', 'true');
+  })
 
   beforeEach(() => {
-    cy.setCookie('_consent', 'true');
-    cy.setCookie('_fabrica', Cypress.env('consortium_admin_cookie'), { log: false });
-    cy.wait(waitTimeBetIt);
+    Cypress.Cookies.preserveOnce('_fabrica', '_jwt', '_consent');
+    cy.wait(waitTime2);
   });
 
   it('visiting contacts for member', () => {
     cy.visit('/providers/dc/contacts');
     cy.url().should('include', '/providers/dc/contacts')
     cy.wait(waitTime);
-    
+
     cy.get('h2.work').contains('DataCite Consortium');
     cy.get('li a.nav-link.active').contains('Contacts');
     cy.get('div#search').should('exist');
@@ -26,74 +40,219 @@ describe('Acceptance: consortium_admin | contacts', () => {
   });
 
   it('search contacts', () => {
-    cy.visit('/providers/dc/contacts');
-    cy.url().should('include', '/providers/dc/contacts')
-    cy.wait(waitTime);
+    // Create a contact to be searched for.
+    const rndInt = randomIntFromInterval(1, 9999);
+    given_name = 'John';
+    family_name = 'Doe' + rndInt;
+    email = given_name + '.' + family_name + '@example.org';
+    type = 'providers';
+    id = 'dc';
+    roles = [];
 
-    cy.get('input[name="query"]')
-      .type('Doe{enter}', { force: true } )
-      .get('[data-test-contact]')
-      .should('contain', 'Doe');
+    cy.getCookie('_jwt').then((cookie) => {
+      cy.createContact(email, given_name, family_name, roles, type, id, Cypress.env('api_url'), cookie.value).then((id) => {
+        cy.log('CREATED CONTACT: ' + given_name + ' ' + family_name + ' (' + id + ')');
+
+        // Give it a little extra time to process the new contact so that we can search for it.
+        cy.visit('/providers/dc/contacts');
+        cy.url().should('include', '/providers/dc/contacts')
+        cy.wait(waitTime)
+
+        cy.get('input[name="query"]')
+          .type(family_name + '{enter}', { force: true } )
+          .get('[data-test-contact]')
+          .should('contain', family_name);
+      });
+    });
   });
 
-  // TO DO: more filter tests?
+  // filters are [service, billing, technical, secondary_service, secondary_technical]
   it('filter contacts', () => {
-    cy.visit('/providers/dc/contacts');
-    cy.url().should('include', '/providers/dc/contacts')
-    cy.wait(waitTime);
-    
-    cy.get('a#role-name-service')
-      .click()
-      .get('[data-test-contact]')
-      .should('contain', 'Doe');
+    // Create a contact to be searched for.
+    const rndInt = randomIntFromInterval(1, 9999);
+    given_name = 'John';
+    family_name = 'Doe' + rndInt;
+    email = given_name + '.' + family_name + '@example.org';
+    type = 'providers';
+    id = 'dc';
+    roles = ["service", "secondary_service", "technical", "secondary_technical", "billing"];
+
+    cy.getCookie('_jwt').then((cookie) => {
+      cy.createContact(email, given_name, family_name, roles, type, id, Cypress.env('api_url'), cookie.value).then((id) => {
+        cy.log('CREATED CONTACT: ' + given_name + ' ' + family_name + ' (' + id + ')');
+
+        // Give it a little extra time to process the new contact so that we can search for it.
+        cy.visit('/providers/dc/contacts');
+        cy.url().should('include', '/providers/dc/contacts')
+        cy.wait(waitTime)
+
+        cy.get('a#role-name-service')
+          .click()
+          .get('[data-test-contact]')
+          .should('contain', family_name);
+
+        cy.wait(waitTime);
+        cy.get('a#role-name-technical')
+          .click()
+          .get('[data-test-contact]')
+          .should('contain', family_name);
+
+        cy.wait(waitTime);
+        cy.get('a#role-name-billing')
+          .click()
+          .get('[data-test-contact]')
+          .should('contain', family_name);
+
+        cy.wait(waitTime);
+        cy.get('a#role-name-secondary_service')
+          .click()
+          .get('[data-test-contact]')
+          .should('contain', family_name);
+
+        cy.wait(waitTime);
+        cy.get('a#role-name-secondary_technical')
+          .click()
+          .get('[data-test-contact]')
+          .should('contain', family_name);
+      });
+    });
   });
 
-  // The following 3 tests should work.  (view/edit/delete)
-  // TO DO: Commenting it out waiting for a bug fix.
-  // it('visiting specific contact', () => {
-  //   cy.visit('/contacts/93109080-a0de-49a8-a6ce-120cb4a3ccb0');
-  //   cy.url().should('include', '/contacts/93109080-a0de-49a8-a6ce-120cb4a3ccb0')
-  //   cy.wait(waitTime);
+  it.only('create a contact', () => {
+    const rndInt = randomIntFromInterval(1, 9999);
+    given_name = 'John';
+    family_name = 'Doe' + rndInt;
+    email = given_name + '.' + family_name + '@example.org';
 
-  //   cy.get('h2.work').contains('Martin Fenner');
-  //   cy.get('h3.member-results').contains('Contact Information');
+    cy.visit('/providers/dc/contacts/new');
+    cy.url().should('include', '/providers/dc/contacts/new').then(() => {
+      cy.wait(waitTime);
 
-  //   cy.get('a#edit-contact').contains('Update Contact');
-  //   cy.get('a#delete-contact').contains('Delete Contact');
-  // });
+      cy.get('h3.edit').contains('Add Contact');
+      
+      cy.get('input#givenName-field').should('be.visible').type(given_name, { force: true })
+        .clickOutside();
+      cy.get('input#familyName-field').should('be.visible').type(family_name, { force: true })
+        .clickOutside();
+      cy.get('input#email-field').should('be.visible').type(email, { force: true })
+        .clickOutside();
 
-  // it('update specific contact', () => {
-  //   cy.visit('/contacts/93109080-a0de-49a8-a6ce-120cb4a3ccb0/edit');
-  //   cy.url().should('include', '/contacts/93109080-a0de-49a8-a6ce-120cb4a3ccb0/edit')
-  //   cy.wait(waitTime);
+      cy.get('.alert-warning').contains(/The contact entered may receive notifications/i)
+        .within(() => {
+          cy.get('a[href*="privacy.html"]').should('be.visible');
+        }
+      );
+    
+      ////////// DONE FILLING IN FORM.  PRESS THE CREATE BUTTON.
+      cy.get('button#add-contact').should('be.visible').click({force: true}).then(() => {
+        cy.wait(waitTime);
+        cy.location().should((loc) => {
+          expect(loc.pathname).to.contain('/providers/dc');
+        });
+      });
+    });
+  });
 
-  //   cy.get('h2.work').contains('John Doe');
-  //   cy.get('h3.edit').contains('Update Contact');
+  /* 
+     TO DO: Commenting out the next 3 tests waiting for a bug fix.  (visit, update, delete)
+     Cannot get to contact pages with '/contacts/uid'.
+   */
 
-  //   cy.get('input#givenName-field').should('exist');
-  //   cy.get('input#familyName-field').should('exist');
-  //   cy.get('input#email-field').should('exist');
+  it.skip('visiting specific contact', () => {
+    // Create a contact to be visited.
+    const rndInt = randomIntFromInterval(1, 9999);
+    given_name = 'John';
+    family_name = 'Doe' + rndInt;
+    email = given_name + '.' + family_name + '@example.org';
+    type = 'providers';
+    id = 'dc';
+    //roles = ["service", "secondary_service", "technical", "secondary_technical", "billing"];
+    roles = [];
 
-  //   cy.get('.alert-warning').contains(
-  //     'The contact may receive notifications about administration'
-  //   );
-  //   cy.get('button#update-contact').contains('Update Contact');
-  // });
+    cy.getCookie('_jwt').then((cookie) => {
+      cy.createContact(email, given_name, family_name, roles, type, id, Cypress.env('api_url'), cookie.value).then((id) => {
+        cy.log('CREATED CONTACT: ' + given_name + ' ' + family_name + ' (' + id + ')');
 
-  // it('delete specific contact', () => {
-  //   cy.visit('/contacts/93109080-a0de-49a8-a6ce-120cb4a3ccb0/delete');
-  //   cy.url().should('include', '/contacts/93109080-a0de-49a8-a6ce-120cb4a3ccb0/delete')
-  //   cy.wait(waitTime);
-  
-  //   cy.get('h2.work').contains('John Doe');
-  //   cy.get('label.control-label').contains(
-  //     'Are you sure you want to delete this contact? This action cannot be undone.'
-  //   );
+        cy.visit('/contacts/' + id);
+        cy.url().should('include', '/contacts/' + id)
+        cy.wait(waitTime);
 
-  //   cy.get('input#confirm-delete-field').should('exist');
-  //   cy.get('button#delete').contains('Delete');
-  // });
+        cy.get('h2.work').contains(given_name + ' ' + family_name);
+        cy.get('h3.member-results').contains('Contact Information');
 
+        cy.get('a#edit-contact').contains('Update Contact');
+        cy.get('a#delete-contact').contains('Delete Contact');
+     });
+   });
+  });
+
+  it.skip('update specific contact', () => {
+    // Create a contact to be updated.
+    const rndInt = randomIntFromInterval(1, 9999);
+    given_name = 'John';
+    family_name = 'Doe' + rndInt;
+    email = given_name + '.' + family_name + '@example.org';
+    type = 'providers';
+    id = 'dc';
+    //roles = ["service", "secondary_service", "technical", "secondary_technical", "billing"];
+    roles = [];
+
+    cy.getCookie('_jwt').then((cookie) => {
+      cy.createContact(email, given_name, family_name, roles, type, id, Cypress.env('api_url'), cookie.value).then((id) => {
+        cy.log('CREATED CONTACT: ' + given_name + ' ' + family_name + ' (' + id + ')');
+
+        cy.visit('/contacts/' + id + '/edit');
+        cy.url().should('include', '/contacts/' + id + '/edit')
+        cy.wait(waitTime);
+
+        cy.get('h2.work').contains(given_name + ' ' + family_name);
+        cy.get('h3.edit').contains('Update Contact');
+
+        cy.get('input#givenName-field').should('exist');
+        cy.get('input#familyName-field').should('exist');
+        cy.get('input#email-field').should('exist');
+
+        cy.get('.alert-warning').contains(
+          'The contact may receive notifications about administration'
+        );
+        cy.get('button#update-contact').contains('Update Contact');
+
+        // TO DO: Update a field. Press the update button. Check for update on resulting page.
+      });
+    });
+  });
+
+  it.skip('delete specific contact', () => {
+    // Create a contact to be deleted.
+    const rndInt = randomIntFromInterval(1, 9999);
+    given_name = 'John';
+    family_name = 'Doe' + rndInt;
+    email = given_name + '.' + family_name + '@example.org';
+    type = 'providers';
+    id = 'dc';
+    //roles = ["service", "secondary_service", "technical", "secondary_technical", "billing"];
+    roles = [];
+
+    cy.getCookie('_jwt').then((cookie) => {
+      cy.createContact(email, given_name, family_name, roles, type, id, Cypress.env('api_url'), cookie.value).then((id) => {
+        cy.log('CREATED CONTACT: ' + given_name + ' ' + family_name + ' (' + id + ')');
+
+        cy.visit('/contacts/' + id + '/delete');
+        cy.url().should('include', '/contacts/' + id + '/delete');
+        cy.wait(waitTime);
+
+        cy.get('h2.work').contains(given_name + ' ' + family_name);
+        cy.get('label.control-label').contains(
+          'Are you sure you want to delete this contact? This action cannot be undone.'
+        );
+
+        cy.get('input#confirm-delete-field').should('exist');
+        cy.get('button#delete').contains('Delete');
+      });
+    });
+  });
+
+  // TBD: need custom command to create a repository with missing contacts.
   it('show repositories for consortium organization with missing contacts', () => {
     cy.visit('/providers/mgxi/repositories');
     cy.url().should('include', '/providers/mgxi/repositories')

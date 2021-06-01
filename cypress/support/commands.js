@@ -135,3 +135,37 @@ Cypress.Commands.add("createDoiXmlUpload", (prefix, fixture, api_url, jwt) => {
 Cypress.Commands.add('clickOutside', function(): Chainable<any> {
   return cy.get('body').click(0,0); //0,0 here are the x and y coordinates
 });
+
+Cypress.Commands.add("createContact", (email, given_name, family_name, roles, type, id, api_url, jwt) => {
+  return cy.request({
+    method: 'POST',
+    url: api_url + '/contacts',
+    body: {
+      'data': {
+        'attributes': {
+          'email': email,
+          'givenName': given_name,
+          'familyName': family_name,
+          'name': '',
+          'roleName': roles,
+        },
+        "relationships": {
+          "provider": {
+            "data": {
+              'type': type,
+              'id': id
+            }
+          }
+        },
+        'type': 'contacts'
+      }
+    },
+    headers: {
+      authorization: 'Bearer ' + jwt,
+    }
+  }).then((response) => {
+    // redirect status code is 302
+    expect(response.status).to.eq(201)
+    return(response.body.data.id);
+  });
+})

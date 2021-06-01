@@ -19,7 +19,6 @@ describe('ACCEPTANCE: CLIENT_ADMIN | SETTINGS', () => {
     Cypress.Cookies.preserveOnce('_fabrica', '_jwt', '_consent');
     cy.wait(waitTime2);
   });
-
   it('is logged in to homepage', () => {
     cy.visit('/');
     cy.url().should('include', '/repositories/datacite.test').then (() => {
