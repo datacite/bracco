@@ -118,7 +118,7 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | CONTACTS', () => {
     });
   });
 
-  it.only('create a contact', () => {
+  it('create a contact', () => {
     const rndInt = randomIntFromInterval(1, 9999);
     given_name = 'John';
     family_name = 'Doe' + rndInt;
@@ -129,7 +129,7 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | CONTACTS', () => {
       cy.wait(waitTime);
 
       cy.get('h3.edit').contains('Add Contact');
-      
+
       cy.get('input#givenName-field').should('be.visible').type(given_name, { force: true })
         .clickOutside();
       cy.get('input#familyName-field').should('be.visible').type(family_name, { force: true })
@@ -142,7 +142,7 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | CONTACTS', () => {
           cy.get('a[href*="privacy.html"]').should('be.visible');
         }
       );
-    
+
       ////////// DONE FILLING IN FORM.  PRESS THE CREATE BUTTON.
       cy.get('button#add-contact').should('be.visible').click({force: true}).then(() => {
         cy.wait(waitTime);
@@ -153,7 +153,7 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | CONTACTS', () => {
     });
   });
 
-  /* 
+  /*
      TO DO: Commenting out the next 3 tests waiting for a bug fix.  (visit, update, delete)
      Cannot get to contact pages with '/contacts/uid'.
    */

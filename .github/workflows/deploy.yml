@@ -37,10 +37,13 @@ jobs:
             cypress/integration/client_admin/info.test.ts
             cypress/integration/client_admin/prefixes.test.ts
             cypress/integration/client_admin/settings.test.ts
+            cypress/integration/consortium_admin/contacts.test.ts
             cypress/integration/consortium_admin/info.test.ts
             cypress/integration/consortium_admin/settings.test.ts
+            cypress/integration/organization_admin/contacts.test.ts
             cypress/integration/organization_admin/info.test.ts
             cypress/integration/organization_admin/settings.test.ts
+            cypress/integration/staff_admin/contacts.test.ts
             cypress/integration/staff_admin/info.test.ts
             cypress/integration/staff_admin/settings.test.ts
         env:
