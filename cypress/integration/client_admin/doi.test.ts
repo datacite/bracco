@@ -45,7 +45,7 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
       cy.get('ul.nav-tabs li.active a').contains(/DOIs/i)
         .and('have.attr', 'href').and('include', '/repositories/datacite.test/dois');
 
-      // Has left sidebar functions.
+      // Has left sidebar buttons.
       cy.get('.btn-toolbar').within(($btnToolbar) => {
         cy.get('.btn-group-vertical a#new-doi').contains(/Create\s*\(Form\)/i)
           .and('have.attr', 'href').and('include', '/repositories/datacite.test/dois/new');

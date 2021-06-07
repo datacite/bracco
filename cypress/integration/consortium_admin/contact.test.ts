@@ -15,6 +15,8 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | CONTACTS', () => {
   const waitTime2 = 2000;
   const waitTime3 = 3000;
   const waitTime4 = 4000;
+  const min = 5000;
+  const max = 9999;
 
   before(function () {
     cy.login(Cypress.env('consortium_admin_username'), Cypress.env('consortium_admin_password'));
@@ -41,7 +43,7 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | CONTACTS', () => {
 
   it('search contacts', () => {
     // Create a contact to be searched for.
-    const rndInt = randomIntFromInterval(1, 9999);
+    const rndInt = randomIntFromInterval(min, max);
     given_name = 'John';
     family_name = 'Doe' + rndInt;
     email = given_name + '.' + family_name + '@example.org';
@@ -69,7 +71,7 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | CONTACTS', () => {
   // filters are [service, billing, technical, secondary_service, secondary_technical]
   it('filter contacts', () => {
     // Create a contact to be searched for.
-    const rndInt = randomIntFromInterval(1, 9999);
+    const rndInt = randomIntFromInterval(min, max);
     given_name = 'John';
     family_name = 'Doe' + rndInt;
     email = given_name + '.' + family_name + '@example.org';
@@ -119,7 +121,7 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | CONTACTS', () => {
   });
 
   it('create a contact', () => {
-    const rndInt = randomIntFromInterval(1, 9999);
+    const rndInt = randomIntFromInterval(min, max);
     given_name = 'John';
     family_name = 'Doe' + rndInt;
     email = given_name + '.' + family_name + '@example.org';
@@ -160,7 +162,7 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | CONTACTS', () => {
 
   it.skip('visiting specific contact', () => {
     // Create a contact to be visited.
-    const rndInt = randomIntFromInterval(1, 9999);
+    const rndInt = randomIntFromInterval(min, max);
     given_name = 'John';
     family_name = 'Doe' + rndInt;
     email = given_name + '.' + family_name + '@example.org';
@@ -188,7 +190,7 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | CONTACTS', () => {
 
   it.skip('update specific contact', () => {
     // Create a contact to be updated.
-    const rndInt = randomIntFromInterval(1, 9999);
+    const rndInt = randomIntFromInterval(min, max);
     given_name = 'John';
     family_name = 'Doe' + rndInt;
     email = given_name + '.' + family_name + '@example.org';
@@ -224,7 +226,7 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | CONTACTS', () => {
 
   it.skip('delete specific contact', () => {
     // Create a contact to be deleted.
-    const rndInt = randomIntFromInterval(1, 9999);
+    const rndInt = randomIntFromInterval(min, max);
     given_name = 'John';
     family_name = 'Doe' + rndInt;
     email = given_name + '.' + family_name + '@example.org';

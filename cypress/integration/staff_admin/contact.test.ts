@@ -18,6 +18,8 @@ describe('ACCEPTANCE: STAFF_ADMIN | CONTACTS', () => {
   const waitTime2 = 2000;
   const waitTime3 = 3000;
   const waitTime4 = 4000;
+  const min = 5000;
+  const max = 9999;
 
   before(function () {
     cy.login(Cypress.env('staff_admin_username'), Cypress.env('staff_admin_password'));
@@ -31,7 +33,7 @@ describe('ACCEPTANCE: STAFF_ADMIN | CONTACTS', () => {
 
   it('search contacts', () => {
     // Create a contact to be searched for.
-    const rndInt = randomIntFromInterval(1, 9999);
+    const rndInt = randomIntFromInterval(min, max);
     given_name = 'John';
     family_name = 'Doe' + rndInt;
     email = given_name + '.' + family_name + '@example.org';
@@ -66,7 +68,7 @@ describe('ACCEPTANCE: STAFF_ADMIN | CONTACTS', () => {
   // TBD - bug uncovered.  Add github issue. Skip this test until the issue is fixed.
   it.skip('filter contacts', () => {
     // Create a contact for filters.
-    const rndInt = randomIntFromInterval(1, 9999);
+    const rndInt = randomIntFromInterval(min, max);
     given_name = 'John';
     family_name = 'Doe' + rndInt;
     email = given_name + '.' + family_name + '@example.org';
@@ -131,7 +133,7 @@ describe('ACCEPTANCE: STAFF_ADMIN | CONTACTS', () => {
   });
 
   it('create a contact', () => {
-    const rndInt = randomIntFromInterval(1, 9999);
+    const rndInt = randomIntFromInterval(min, max);
     given_name = 'John';
     family_name = 'Doe' + rndInt;
     email = given_name + '.' + family_name + '@example.org';
@@ -169,7 +171,7 @@ describe('ACCEPTANCE: STAFF_ADMIN | CONTACTS', () => {
 
   it('visiting specific contact', () => {
     // Create a contact to be visited.
-    const rndInt = randomIntFromInterval(1, 9999);
+    const rndInt = randomIntFromInterval(min, max);
     given_name = 'John';
     family_name = 'Doe' + rndInt;
     email = given_name + '.' + family_name + '@example.org';
@@ -197,7 +199,7 @@ describe('ACCEPTANCE: STAFF_ADMIN | CONTACTS', () => {
 
   it('update specific contact', () => {
     // Create a contact to be updated.
-    const rndInt = randomIntFromInterval(1, 9999);
+    const rndInt = randomIntFromInterval(min, max);
     given_name = 'John';
     family_name = 'Doe' + rndInt;
     email = given_name + '.' + family_name + '@example.org';
@@ -242,7 +244,7 @@ describe('ACCEPTANCE: STAFF_ADMIN | CONTACTS', () => {
 
   it('delete specific contact', () => {
     // Create a contact to be deleted.
-    const rndInt = randomIntFromInterval(1, 9999);
+    const rndInt = randomIntFromInterval(min, max);
     given_name = 'John';
     family_name = 'Doe' + rndInt;
     email = given_name + '.' + family_name + '@example.org';
