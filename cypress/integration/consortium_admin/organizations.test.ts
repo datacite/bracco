@@ -65,4 +65,48 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | CONSORTIUM ORGANIZATIONS', () => {
       });
     });
   });
+
+  // TBD - Shows application error.  Skip for now
+  it.skip('add organization', () => {
+    cy.visit('/providers/dc/organizations/new');
+    cy.url().should('include', '/providers/dc/organizations/new').then(() => {
+
+      cy.get('h2.work').contains('DataCite Consortium');
+      cy.get('a#account_menu_link').should('contain', 'DC');
+
+      cy.get ('h3.edit').contains('Create Consortium Organization');
+
+      cy.get('form').within(($form) => {
+        cy.get('#member-id').should('be.visible');
+        cy.get('#member-type').should('be.visible');
+        cy.get('#display-name-field').should('be.visible');
+        cy.get('#ror-id').should('be.visible');
+        cy.get('#system-email').should('be.visible');
+        cy.get('#group-email').should('be.visible');
+        cy.get('#website').should('be.visible');
+        cy.get('#twitter-handle').should('be.visible');
+        cy.get('#country').should('be.visible');
+        cy.get('#organization-type').should('be.visible');
+        cy.get('#focus-area').should('be.visible');
+        cy.get('#description').should('be.visible');
+        cy.get('#is-active').should('be.visible');
+        cy.get ('h3.member-results').contains('Contact Information');
+        cy.get('.alert').contains(/Please add at least one contact via the consortium organization contacts menu after creating this consortium organization./i)
+        cy.get('.alert').contains(/The contacts entered may receive notifications about administration,/i);
+        cy.get('.alert').contains(/The contacts entered may receive notifications/i)
+          .within(() => {
+            cy.get('a[href*="privacy.html"]').should('be.visible');
+          }
+        );
+        cy.get('button#add-organization').should('be.visible');
+      }).then(() => {
+        cy.get('button').contains(/Cancel/i).should('be.visible').click({force: true}).then(() => {
+          cy.wait(waitTime2);
+          cy.location().should((loc) => {
+            expect(loc.pathname).to.eq('/providers/dc/organizations');
+          });
+        });
+      });
+    });
+  });
 });
