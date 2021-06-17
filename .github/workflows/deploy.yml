@@ -50,6 +50,7 @@ jobs:
             cypress/integration/staff_admin/info.test.ts
             cypress/integration/staff_admin/settings.test.ts
             cypress/integration/ui/consent.test.ts
+            cypress/integration/ui/login.test.ts
 
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
