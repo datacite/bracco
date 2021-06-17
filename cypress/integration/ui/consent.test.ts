@@ -3,7 +3,7 @@
 
 // NOTE: this is not a full end-to-end test.  A full test would see what the effects are of accepting
 // or rejecting cookies.
-describe('Consent', () => {
+describe('ACCEPTANCE: UI | CONSENT', () => {
   const sizes = ['iphone-6', 'samsung-s10', 'ipad-2', [1024, 768]];
 
   sizes.forEach((size) => {

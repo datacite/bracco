@@ -63,7 +63,7 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | SETTINGS', () => {
         cy.get('h5').contains(/Tax\s*Status/i);
         cy.get('div.panel-body').contains(/Non-Profit/i);
         cy.get('h5').contains(/Organization\s*Name/i);
-        cy.get('div.panel-body').contains(/DataCite\s*Consortium/i);       
+        cy.get('div.panel-body').contains(/DataCite\s*Consortium/i);
         cy.get('h5').contains(/System\s*Email/i);
         cy.get('a').contains('info@datacite.org').and('have.attr', 'href').and('include', 'mailto:info@datacite.org');
         cy.get('h5').contains(/Website/i);
@@ -112,14 +112,14 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | SETTINGS', () => {
       cy.get('a#account_menu_link').should('contain', 'DC');
     });
   });
-  
+
   it('/repositories redirects to homepage', () => {
     cy.visit('/repositories');
     cy.url().should('include', '/providers/dc').then (() => {
       cy.get('a#account_menu_link').should('contain', 'DC');
     });
   });
-  
+
   it('/prefixes redirects to homepage', () => {
     cy.visit('/prefixes');
     cy.url().should('include', '/providers/dc').then (() => {
@@ -193,7 +193,7 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | SETTINGS', () => {
         cy.get('#secondary-technical-contact').should('be.visible');
         cy.get('#billing-contact').should('be.visible');
         cy.get('#secondary-billing-contact').should('be.visible');
-       
+
         cy.get('h3.member-results').contains('Billing Information');
         cy.get('#billing-information-department').should('be.visible');
         cy.get('#billing-information-organization').should('be.visible');
@@ -208,11 +208,11 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | SETTINGS', () => {
       })
     }).then(() => {
       cy.get('button').contains(/Cancel/i).should('be.visible').click({force: true}).then(() => {
-        cy.wait(waitTime);
+        cy.wait(waitTime2);
         cy.location().should((loc) => {
           expect(loc.pathname).to.eq('/providers/dc');
         });
-      });      
+      });
     });
   });
 });

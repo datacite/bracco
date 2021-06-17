@@ -194,6 +194,7 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | SETTINGS', () => {
       })
     }).then(() => {
       cy.get('button').contains(/Cancel/i).should('be.visible').click({force: true}).then(() => {
+        cy.wait(waitTime2);
         cy.location('pathname').should('equal', '/providers/datacite');
       });
     });
