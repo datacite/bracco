@@ -106,14 +106,14 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | SETTINGS', () => {
       cy.get('a#account_menu_link').should('contain', 'DATACITE');
     });
   });
-  
+
   it('/repositories redirects to homepage', () => {
     cy.visit('/repositories');
     cy.url().should('include', '/providers/datacite').then (() => {
       cy.get('a#account_menu_link').should('contain', 'DATACITE');
     });
   });
-  
+
   it('/prefixes redirects to homepage', () => {
     cy.visit('/prefixes');
     cy.url().should('include', '/providers/datacite').then (() => {
@@ -194,11 +194,8 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | SETTINGS', () => {
       })
     }).then(() => {
       cy.get('button').contains(/Cancel/i).should('be.visible').click({force: true}).then(() => {
-        cy.wait(waitTime);
-        cy.location().should((loc) => {
-          expect(loc.pathname).to.eq('/providers/datacite');
-        });
-      });      
+        cy.location('pathname').should('equal', '/providers/datacite');
+      });
     });
   });
 });
