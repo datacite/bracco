@@ -48,7 +48,7 @@ module.exports = (on, config) => {
   config.env.client_admin_cookie =
     process.env.CYPRESS_CLIENT_ADMIN_COOKIE;
 
-  config.env.site_title = process.env.SITE_TITLE || ""
+  config.env.site_title = process.env.SITE_TITLE || "DataCite Fabrica Test"
   config.baseUrl = process.env.FABRICA_URL || config.baseUrl || ""
 
   config.env.client_admin_password = process.env.CLIENT_ADMIN_PASSWORD
