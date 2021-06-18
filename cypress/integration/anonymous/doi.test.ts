@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 /* eslint-disable no-undef */
 
-describe('Anonymous: DOI', () => {
+describe('ACCEPTANCE: ANONYMOUS - DOI', () => {
   beforeEach(() => {
     cy.setCookie('_consent', 'true');
   });
@@ -12,6 +12,8 @@ describe('Anonymous: DOI', () => {
     cy.location().should((loc) => {
       expect(loc.pathname).to.eq('/dois/10.80225%2Fda52-7919');
     });
+    cy.get('a#sign-in').should('exist');
+
     cy.get('h2.work').contains('10.80225/da52-7919');
   });
 });

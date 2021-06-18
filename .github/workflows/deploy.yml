@@ -51,7 +51,11 @@ jobs:
             cypress/integration/staff_admin/settings.test.ts
             cypress/integration/ui/consent.test.ts
             cypress/integration/ui/login.test.ts
-
+            cypress/integration/anonymous/admin.test.ts
+            cypress/integration/anonymous/anonymous.test.ts
+            cypress/integration/anonymous/doi.test.ts
+            cypress/integration/anonymous/provider.test.ts
+            cypress/integration/anonymous/repository.test.ts
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

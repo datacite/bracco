@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 /* eslint-disable no-undef */
 
-describe('Anonymous: Provider', () => {
+describe('ACCEPTANCE: ANONYMOUS - PROVIDER', () => {
   beforeEach(() => {
     cy.setCookie('_consent', 'true');
   });
@@ -12,7 +12,9 @@ describe('Anonymous: Provider', () => {
     cy.location().should((loc) => {
       expect(loc.pathname).to.eq('/');
     });
-    cy.get('div.motto h1').contains('DataCite Fabrica Stage');
+    cy.get('a#sign-in').should('exist');
+
+    cy.get('div.motto h1').contains(Cypress.env('site_title'));
   });
 
   it('visiting provider TIB info', () => {
@@ -20,7 +22,9 @@ describe('Anonymous: Provider', () => {
     cy.location().should((loc) => {
       expect(loc.pathname).to.eq('/');
     });
-    cy.get('div.motto h1').contains('DataCite Fabrica Stage');
+    cy.get('a#sign-in').should('exist');
+
+    cy.get('div.motto h1').contains(Cypress.env('site_title'));
   });
 
   it('visiting provider TIB repositories', () => {
@@ -28,7 +32,9 @@ describe('Anonymous: Provider', () => {
     cy.location().should((loc) => {
       expect(loc.pathname).to.eq('/');
     });
-    cy.get('div.motto h1').contains('DataCite Fabrica Stage');
+    cy.get('a#sign-in').should('exist');
+
+    cy.get('div.motto h1').contains(Cypress.env('site_title'));
   });
 
   it('visiting provider TIB prefixes', () => {
@@ -36,7 +42,9 @@ describe('Anonymous: Provider', () => {
     cy.location().should((loc) => {
       expect(loc.pathname).to.eq('/');
     });
-    cy.get('div.motto h1').contains('DataCite Fabrica Stage');
+    cy.get('a#sign-in').should('exist');
+
+    cy.get('div.motto h1').contains(Cypress.env('site_title'));
   });
 
   it('visiting provider TIB dois', () => {
@@ -44,6 +52,8 @@ describe('Anonymous: Provider', () => {
     cy.location().should((loc) => {
       expect(loc.pathname).to.eq('/');
     });
-    cy.get('div.motto h1').contains('DataCite Fabrica Stage');
+    cy.get('a#sign-in').should('exist');
+
+    cy.get('div.motto h1').contains(Cypress.env('site_title'));
   });
 });

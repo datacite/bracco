@@ -1,14 +1,15 @@
-describe('My First Test', function () {
+describe('ACCEPTANCE: ANONYMOUS | NO ADMIN ACCESS', function () {
 
   it('is not logged in', function () {
     cy.visit('/')
-    cy.get('a#account_menu_link').should('not.exist');
+    cy.get('a#sign-in').should('exist');
   })
 
   it('visiting homepage', function () {
     cy.visit('/')
     cy.url().should('eq', Cypress.config('baseUrl') + '/')
     cy.get('div.motto h1').should('contain', Cypress.env('site_title');
+    cy.get('a#sign-in').should('exist');
   })
 
   // the following pages require authentication. Redirects to homepage otherwise.
@@ -16,29 +17,34 @@ describe('My First Test', function () {
     cy.visit('/info')
     cy.url().should('eq', Cypress.config('baseUrl') + '/')
     cy.get('div.motto h1').should('contain', Cypress.env('site_title'));
+    cy.get('a#sign-in').should('exist');
   })
 
    it('visiting providers', function () {
     cy.visit('/providers')
     cy.url().should('eq', Cypress.config('baseUrl') + '/')
     cy.get('div.motto h1').should('contain', Cypress.env('site_title'));
+    cy.get('a#sign-in').should('exist');
   })
 
   it('visiting repositories', function () {
     cy.visit('/repositories')
     cy.url().should('eq', Cypress.config('baseUrl') + '/')
     cy.get('div.motto h1').should('contain', Cypress.env('site_title'));
+    cy.get('a#sign-in').should('exist');
   })
 
   it('visiting prefixes', function () {
     cy.visit('/prefixes')
     cy.url().should('eq', Cypress.config('baseUrl') + '/')
     cy.get('div.motto h1').should('contain', Cypress.env('site_title'));
+    cy.get('a#sign-in').should('exist');
   })
 
-  it.only('visiting prefix 10.80225', function () {
+  it('visiting prefix 10.80225', function () {
     cy.visit('/prefix/10.80225')
     cy.get('div.alert-warning').should('contain', 'The page was not found.');
+    cy.get('a#sign-in').should('exist');
   })
 
 })

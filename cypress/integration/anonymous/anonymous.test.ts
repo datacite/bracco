@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 /* eslint-disable no-undef */
 
-describe('Anonymous: Anonymous', () => {
+describe('ACCEPTANCE: ANONYMOUS - AVAILABLE PAGES', () => {
   beforeEach(() => {
     cy.setCookie('_consent', 'true');
   });
@@ -9,12 +9,8 @@ describe('Anonymous: Anonymous', () => {
   describe('Homepage', () => {
     it('Header', () => {
       cy.visit('/');
-      cy.get('div.motto h1').contains('DataCite Fabrica Stage');
-    });
-
-    it('Footer', () => {
-      cy.visit('/');
-      cy.get('div.footer-column h4').contains('About DataCite');
+      cy.get('div.motto h1').contains(Cypress.env('site_title'));
+      cy.get('a#sign-in').should('exist');
     });
   });
 
@@ -22,6 +18,7 @@ describe('Anonymous: Anonymous', () => {
     it('Header', () => {
       cy.visit('/about');
       cy.get('h3.member').contains('About');
+      cy.get('a#sign-in').should('exist');
     });
 
     // it('Version', () => {
