@@ -5,11 +5,12 @@ describe('ACCEPTANCE: ANONYMOUS - AVAILABLE PAGES', () => {
   beforeEach(() => {
     cy.setCookie('_consent', 'true');
   });
+  const site_title = new RegExp('Datacite.*Fabrica', 'i')
 
   describe('Homepage', () => {
     it('Header', () => {
       cy.visit('/');
-      cy.get('div.motto h1').contains(Cypress.env('site_title'));
+      cy.get('div.motto h1').contains(site_title);
       cy.get('a#sign-in').should('exist');
     });
   });

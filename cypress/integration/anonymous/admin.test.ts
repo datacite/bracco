@@ -1,4 +1,5 @@
 describe('ACCEPTANCE: ANONYMOUS | NO ADMIN ACCESS', function () {
+  const site_title = new RegExp('Datacite.*Fabrica', 'i')
 
   it('is not logged in', function () {
     cy.visit('/')
@@ -8,7 +9,7 @@ describe('ACCEPTANCE: ANONYMOUS | NO ADMIN ACCESS', function () {
   it('visiting homepage', function () {
     cy.visit('/')
     cy.url().should('eq', Cypress.config('baseUrl') + '/')
-    cy.get('div.motto h1').should('contain', Cypress.env('site_title');
+    cy.get('div.motto h1').contains(site_title);
     cy.get('a#sign-in').should('exist');
   })
 
@@ -16,28 +17,28 @@ describe('ACCEPTANCE: ANONYMOUS | NO ADMIN ACCESS', function () {
   it('visiting info', function () {
     cy.visit('/info')
     cy.url().should('eq', Cypress.config('baseUrl') + '/')
-    cy.get('div.motto h1').should('contain', Cypress.env('site_title'));
+    cy.get('div.motto h1').contains(site_title);
     cy.get('a#sign-in').should('exist');
   })
 
    it('visiting providers', function () {
     cy.visit('/providers')
     cy.url().should('eq', Cypress.config('baseUrl') + '/')
-    cy.get('div.motto h1').should('contain', Cypress.env('site_title'));
+    cy.get('div.motto h1').contains(site_title);
     cy.get('a#sign-in').should('exist');
   })
 
   it('visiting repositories', function () {
     cy.visit('/repositories')
     cy.url().should('eq', Cypress.config('baseUrl') + '/')
-    cy.get('div.motto h1').should('contain', Cypress.env('site_title'));
+    cy.get('div.motto h1').contains(site_title);
     cy.get('a#sign-in').should('exist');
   })
 
   it('visiting prefixes', function () {
     cy.visit('/prefixes')
     cy.url().should('eq', Cypress.config('baseUrl') + '/')
-    cy.get('div.motto h1').should('contain', Cypress.env('site_title'));
+    cy.get('div.motto h1').contains(site_title);
     cy.get('a#sign-in').should('exist');
   })
 
