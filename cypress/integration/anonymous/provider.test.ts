@@ -5,6 +5,7 @@ describe('ACCEPTANCE: ANONYMOUS - PROVIDER', () => {
   beforeEach(() => {
     cy.setCookie('_consent', 'true');
   });
+  const site_title = new RegExp('Datacite.*Fabrica', 'i')
 
   // the following pages require authentication. Redirects to homepage otherwise
   it('visiting provider TIB', () => {
@@ -14,7 +15,7 @@ describe('ACCEPTANCE: ANONYMOUS - PROVIDER', () => {
     });
     cy.get('a#sign-in').should('exist');
 
-    cy.get('div.motto h1').contains(Cypress.env('site_title'));
+    cy.get('div.motto h1').contains(site_title);
   });
 
   it('visiting provider TIB info', () => {
@@ -24,7 +25,7 @@ describe('ACCEPTANCE: ANONYMOUS - PROVIDER', () => {
     });
     cy.get('a#sign-in').should('exist');
 
-    cy.get('div.motto h1').contains(Cypress.env('site_title'));
+    cy.get('div.motto h1').contains(site_title);
   });
 
   it('visiting provider TIB repositories', () => {
@@ -34,7 +35,7 @@ describe('ACCEPTANCE: ANONYMOUS - PROVIDER', () => {
     });
     cy.get('a#sign-in').should('exist');
 
-    cy.get('div.motto h1').contains(Cypress.env('site_title'));
+    cy.get('div.motto h1').contains(site_title);
   });
 
   it('visiting provider TIB prefixes', () => {
@@ -44,7 +45,7 @@ describe('ACCEPTANCE: ANONYMOUS - PROVIDER', () => {
     });
     cy.get('a#sign-in').should('exist');
 
-    cy.get('div.motto h1').contains(Cypress.env('site_title'));
+    cy.get('div.motto h1').contains(site_title);
   });
 
   it('visiting provider TIB dois', () => {
@@ -54,6 +55,6 @@ describe('ACCEPTANCE: ANONYMOUS - PROVIDER', () => {
     });
     cy.get('a#sign-in').should('exist');
 
-    cy.get('div.motto h1').contains(Cypress.env('site_title'));
+    cy.get('div.motto h1').contains(site_title);
   });
 });
