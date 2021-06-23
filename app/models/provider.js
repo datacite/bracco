@@ -120,7 +120,8 @@ const Validations = buildValidations({
           this.model.get('isNew') ||
           this.model.get('mode') === 'change' ||
           this.model.get('memberType') === 'developer' ||
-          !this.model.get('memberType') // memberType is null for admin account
+          !this.model.get('memberType') || // memberType is null for admin account
+          !this.model.get('hasPassword') // Allows users with no contacts to set their password.
         );
       })
     })
@@ -147,7 +148,7 @@ const Validations = buildValidations({
       message: 'A service contact is required.',
       disabled: computed('model', function () {
         return (
-          this.model.get('contacts').length === 0 || 
+          this.model.get('contacts').length === 0 ||
           this.model.get('isNew') ||
           this.model.get('mode') === 'change' ||
           this.model.get('memberType') === 'consortium_organization' ||
