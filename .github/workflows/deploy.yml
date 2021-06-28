@@ -67,6 +67,7 @@ jobs:
           echo "::set-output name=BRANCH::$(echo ${GITHUB_REF#refs/heads/} | sed 's/\//_/g')"
           echo "::set-output name=GIT_SHA::$(git rev-parse HEAD)"
           echo "::set-output name=GIT_SHA_SHORT::$(git rev-parse --short HEAD)"
+          echo "::set-output name=MESSAGE::$(git log --format=%B -n 1 ${{ github.event.after }})"
         id: extract_variables
 
       - name: Vercel deploy
