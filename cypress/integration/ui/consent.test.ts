@@ -3,7 +3,7 @@
 
 // NOTE: this is not a full end-to-end test.  A full test would see what the effects are of accepting
 // or rejecting cookies.
-describe('Consent', () => {
+describe('ACCEPTANCE: UI | CONSENT', () => {
   const sizes = ['iphone-6', 'samsung-s10', 'ipad-2', [1024, 768]];
 
   sizes.forEach((size) => {
@@ -19,8 +19,9 @@ describe('Consent', () => {
       cy.get('.CookieConsent').contains(
         'We use cookies on our website.'
       );
-      cy.get('#rcc-decline-button').isInViewport()
-      cy.get('#rcc-confirm-button').isInViewport().click()
+
+      cy.isInViewport('#rcc-decline-button')
+      cy.isInViewport('#rcc-confirm-button').click()
       cy.getCookie('_consent').should('have.property', 'value', 'true');
 
       cy.clearCookies()
@@ -28,8 +29,9 @@ describe('Consent', () => {
       cy.get('.CookieConsent').contains(
         'We use cookies on our website.'
       );
-      cy.get('#rcc-confirm-button').isInViewport()
-      cy.get('#rcc-decline-button').isInViewport().click()
+
+      cy.isInViewport('#rcc-confirm-button')
+      cy.isInViewport('#rcc-decline-button').click()
       cy.getCookie('_consent').should('have.property', 'value', 'false');
     });
   });

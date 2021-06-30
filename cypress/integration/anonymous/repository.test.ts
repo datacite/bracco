@@ -5,6 +5,8 @@ describe('Anonymous: Repository', () => {
   beforeEach(() => {
     cy.setCookie('_consent', 'true');
   });
+  const site_title = new RegExp('Datacite.*Fabrica', 'i')
+
 
   // the following pages require authentication. Redirects to homepage otherwise
   it('visiting repository AWI', () => {
@@ -12,7 +14,9 @@ describe('Anonymous: Repository', () => {
     cy.location().should((loc) => {
       expect(loc.pathname).to.eq('/');
     });
-    cy.get('div.motto h1').contains('DataCite Fabrica Stage');
+    cy.get('a#sign-in').should('exist');
+
+    cy.get('div.motto h1').contains(site_title);
   });
 
   it('visiting repository AWI info', () => {
@@ -20,7 +24,9 @@ describe('Anonymous: Repository', () => {
     cy.location().should((loc) => {
       expect(loc.pathname).to.eq('/');
     });
-    cy.get('div.motto h1').contains('DataCite Fabrica Stage');
+    cy.get('a#sign-in').should('exist');
+
+    cy.get('div.motto h1').contains(site_title);
   });
 
   it('visiting repository AWI prefixes', () => {
@@ -28,7 +34,9 @@ describe('Anonymous: Repository', () => {
     cy.location().should((loc) => {
       expect(loc.pathname).to.eq('/');
     });
-    cy.get('div.motto h1').contains('DataCite Fabrica Stage');
+    cy.get('a#sign-in').should('exist');
+
+    cy.get('div.motto h1').contains(site_title);
   });
 
   it('visiting repository AWI dois', () => {
@@ -36,6 +44,8 @@ describe('Anonymous: Repository', () => {
     cy.location().should((loc) => {
       expect(loc.pathname).to.eq('/');
     });
-    cy.get('div.motto h1').contains('DataCite Fabrica Stage');
+    cy.get('a#sign-in').should('exist');
+
+    cy.get('div.motto h1').contains(site_title);
   });
 });
