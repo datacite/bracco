@@ -9,6 +9,6 @@ module('Integration | Component | repository-info', function (hooks) {
   test('it renders', async function (assert) {
     await render(hbs`{{repository-info}}`);
 
-    assert.dom(this.element).hasText('DOIs by year 0 in 2021 20112021');
+    assert.dom(this.element).hasText('DOIs by year 0 in 2021 20102020');
   });
 });
