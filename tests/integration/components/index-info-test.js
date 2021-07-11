@@ -12,7 +12,7 @@ module('Integration | Component | index-info', function (hooks) {
     assert
       .dom(this.element)
       .hasText(
-        'Members by year 0 20102020 Repositories by year 0 20102020 DOIs by year 0 in 2021 20102020'
+        'Members by year 0 20112022 Repositories by year 0 20112021 DOIs by year 0 in 2021 20112021'
       );
   });
 });
