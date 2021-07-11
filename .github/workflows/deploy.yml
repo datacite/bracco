@@ -15,12 +15,12 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '12'
-     - name: Install and Test
-       env:
-         COVERAGE: true
-       run: |
-         yarn
-         ./node_modules/.bin/ember test
+      - name: Install and Test
+        env:
+          COVERAGE: true
+        run: |
+          yarn
+          ./node_modules/.bin/ember test
 
       - name: Cypress run
         uses: cypress-io/github-action@v2
