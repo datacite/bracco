@@ -15,12 +15,12 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '12'
-#      - name: Install and Test
-#        env:
-#          COVERAGE: true
-#        run: |
-#          yarn
-#          ./node_modules/.bin/ember test
+      - name: Install and Test
+        env:
+          COVERAGE: true
+        run: |
+          yarn
+          ./node_modules/.bin/ember test
 
       - name: Cypress run
         uses: cypress-io/github-action@v2
@@ -68,10 +68,10 @@ jobs:
           STAFF_ADMIN_USERNAME: ${{ secrets.STAFF_ADMIN_USERNAME }}
           STAFF_ADMIN_PASSWORD: ${{ secrets.STAFF_ADMIN_PASSWORD }}
 
- #     - name: Publish code coverage
- #       uses: paambaati/codeclimate-action@v2.7.5
- #       env:
- #         CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+      - name: Publish code coverage
+        uses: paambaati/codeclimate-action@v2.7.5
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
 
   deploy:
     needs: test
