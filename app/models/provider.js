@@ -117,6 +117,7 @@ const Validations = buildValidations({
       presence: true,
       disabled: computed('model', function () {
         return (
+          this.model.get('disableValidations') ||
           this.model.get('isNew') ||
           this.model.get('mode') === 'change' ||
           this.model.get('memberType') === 'developer' ||
