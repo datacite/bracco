@@ -44,6 +44,7 @@ Router.map(function () {
         this.route('new');
         this.route('upload');
       });
+      this.route('analytics');
       this.route('transfer');
       this.route('prefixes', function () {
         this.route('show', { path: '/:prefix_id' }, function () {
