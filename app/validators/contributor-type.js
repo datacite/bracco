@@ -38,7 +38,6 @@ const ContributorType = BaseValidator.extend({
 
     const personalContributorTypes = [
       'ContactPerson',
-      'DataCurator',
       'Editor',
       'ProjectLeader',
       'ProjectManager',
