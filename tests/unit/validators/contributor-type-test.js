@@ -35,7 +35,7 @@ module('Unit | Validator | contributor-type', function(hooks) {
     message = validator.validate([ 'Supervisor' ], options, {nameType: 'Organizational'});
     assert.equal(message, 'Contributor of the Type cannot be of that Name Type.');
 
-    message = validator.validate([ 'DataCurator' ], builtOptions, {nameType: 'Personal'});
+    message = validator.validate([ 'ProjectManager' ], builtOptions, {nameType: 'Personal'});
     assert.equal(message, true);
   });
 
