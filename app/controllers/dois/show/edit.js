@@ -106,7 +106,7 @@ export default Controller.extend({
 
       // only store identifiers with a  text
       doi.set('alternateIdentifiers', A(doi.get('alternateIdentifiers')).filter(function(alternateIdentifier) {
-        return !isBlank(alternateIdentifier.identifier);
+        return !isBlank(alternateIdentifier);
       }));
 
       // only store rights with a text
