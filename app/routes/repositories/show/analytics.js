@@ -7,8 +7,6 @@ export default Route.extend({
   model() {
     let self = this;
 
-    console.log("GOT HERE!!! ANALYTICS 1111");
-
     return this.store
       .findRecord('repository', this.modelFor('repositories/show').get('id'), {
         include: 'provider'
