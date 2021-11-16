@@ -1,7 +1,6 @@
 import { helper } from '@ember/component/helper';
 import { htmlSafe } from '@ember/template';
 import ENV from 'bracco/config/environment';
-//import modelSearch from 'bracco/components/model-search';
 
 function isEmpty(val){
   return (val === undefined || val == null || val.length <= 0) ? true : false;

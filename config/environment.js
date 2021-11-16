@@ -23,7 +23,8 @@ module.exports = function (environment) {
           process.env.SENTRY_DSN ||
           'https://63201db022924202b697e03bc5e0d0ba@o239790.ingest.sentry.io/1420435',
 
-        disablePerformance: true
+        disablePerformance: true,
+        environment: process.env.DEPLOY_TARGET || "stage"
       }
     },
     'ember-cli-string-helpers': {
