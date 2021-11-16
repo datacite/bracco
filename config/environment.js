@@ -24,7 +24,7 @@ module.exports = function (environment) {
           'https://63201db022924202b697e03bc5e0d0ba@o239790.ingest.sentry.io/1420435',
 
         disablePerformance: true,
-        environment: process.env.DEPLOY_TARGET || "stage"
+        environment: deployTarget || "staging"
       }
     },
     'ember-cli-string-helpers': {
@@ -50,7 +50,8 @@ module.exports = function (environment) {
       preventDuplicates: true
     },
     featureFlags: {
-      'show-researchers': false
+      'show-researchers': false,
+      'show-analytics': true
     },
     fastboot: {
       hostWhitelist: [
@@ -101,6 +102,7 @@ module.exports = function (environment) {
   if (deployTarget === 'staging') {
     // add staging-specific settings here
     ENV.COOKIE_DOMAIN = '.stage.datacite.org';
+    ENV.featureFlags['show-analytics'] = true;
   }
 
   if (deployTarget === 'production') {
@@ -113,6 +115,7 @@ module.exports = function (environment) {
     ENV.SEARCH_URL = 'https://search.datacite.org';
     ENV.CDN_URL = 'https://datacite.org';
     ENV.COOKIE_DOMAIN = '.datacite.org';
+    ENV.featureFlags['show-analytics'] = false;
   }
 
   if (environment === 'development') {
@@ -121,6 +124,8 @@ module.exports = function (environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
+    ENV.featureFlags['show-analytics'] = true;
+
 
     ENV.COOKIE_DOMAIN = 'localhost';
   }
@@ -140,6 +145,7 @@ module.exports = function (environment) {
       (ENV.APP.rootElement = '#ember-testing');
 
     ENV.featureFlags['show-researchers'] = true;
+    ENV.featureFlags['show-analytics'] = true;
 
     ENV.APP.autoboot = false;
 
