@@ -3,6 +3,7 @@ import { computed } from '@ember/object';
 import ENV from 'bracco/config/environment';
 import { array, fragment } from 'ember-data-model-fragments/attributes';
 import { validator, buildValidations } from 'ember-cp-validations';
+import isEmpty from 'bracco/utils/is-empty';
 
 const Validations = buildValidations({
   symbol: [
@@ -133,7 +134,7 @@ export default Model.extend(Validations, {
   keepPassword: attr('boolean', { defaultValue: true }),
   created: attr('date'),
   updated: attr('date'),
-
+  analyticsSlug: attr('string'),
   targetId: attr(),
   mode: attr('string'),
 
@@ -153,5 +154,20 @@ export default Model.extend(Validations, {
     } else {
       return null;
     }
+  }),
+  analyticsDashboardUrl: computed('analyticsSlug', 'url', function () {
+    var domain = (!isEmpty(this.url) ? (new URL(this.url)).hostname  : '') ;
+    var slug = (!isEmpty(this.analyticsSlug) ? this.analyticsSlug : '');
+    var ret = '';
+
+    if (!isEmpty(domain) && !isEmpty(slug) && !isEmpty(ENV.ANALYTICS_URL)) {
+      ret = ENV.ANALYTICS_URL + '/share/' + domain + '?auth=' + slug + '&embed=true&theme=light';
+    } else if (!isEmpty(ENV.ANALYTICS_DASHBOARD_URL)) {
+      ret = ENV.ANALYTICS_DASHBOARD_URL;
+    } else {
+      ret = '';
+    }
+
+    return ret;
   })
 });
