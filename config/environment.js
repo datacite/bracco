@@ -5,6 +5,9 @@ module.exports = function (environment) {
   const pkg = require('../package.json');
   let deployTarget = process.env.DEPLOY_TARGET;
 
+  console.log("SHOW_ANALYTICS:");
+  console.log(process.env.SHOW_ANALYTICS);
+
   let ENV = {
     modulePrefix: 'bracco',
     environment,
@@ -51,7 +54,7 @@ module.exports = function (environment) {
     },
     featureFlags: {
       'show-researchers': false,
-      'show-analytics': true
+      'show-analytics': (process.env.SHOW_ANALYTICS && !(process.env.SHOW_ANALYTICS == "0" || process.env.SHOW_ANALYTICS == "false")) || false
     },
     fastboot: {
       hostWhitelist: [
@@ -104,7 +107,6 @@ module.exports = function (environment) {
   if (deployTarget === 'staging') {
     // add staging-specific settings here
     ENV.COOKIE_DOMAIN = '.stage.datacite.org';
-    ENV.featureFlags['show-analytics'] = true;
   }
 
   if (deployTarget === 'production') {
@@ -126,8 +128,6 @@ module.exports = function (environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
-    ENV.featureFlags['show-analytics'] = true;
-
 
     ENV.COOKIE_DOMAIN = 'localhost';
   }
@@ -145,9 +145,6 @@ module.exports = function (environment) {
     };
     (ENV.API_JWT = process.env.API_JWT || ''),
       (ENV.APP.rootElement = '#ember-testing');
-
-    ENV.featureFlags['show-researchers'] = true;
-    ENV.featureFlags['show-analytics'] = true;
 
     ENV.APP.autoboot = false;
 
