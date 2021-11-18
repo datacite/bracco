@@ -5,9 +5,6 @@ module.exports = function (environment) {
   const pkg = require('../package.json');
   let deployTarget = process.env.DEPLOY_TARGET;
 
-  console.log("SHOW_ANALYTICS:");
-  console.log(process.env.SHOW_ANALYTICS);
-
   let ENV = {
     modulePrefix: 'bracco',
     environment,
@@ -54,7 +51,7 @@ module.exports = function (environment) {
     },
     featureFlags: {
       'show-researchers': false,
-      'show-analytics': (process.env.SHOW_ANALYTICS && !(process.env.SHOW_ANALYTICS == "0" || process.env.SHOW_ANALYTICS == "false")) || false
+      // 'show-analytics': (process.env.SHOW_ANALYTICS && !(process.env.SHOW_ANALYTICS == "0" || process.env.SHOW_ANALYTICS == "false")) || false
     },
     fastboot: {
       hostWhitelist: [
@@ -81,6 +78,7 @@ module.exports = function (environment) {
     CDN_URL: process.env.CDN_URL || 'https://www.stage.datacite.org',
     ANALYTICS_URL: process.env.ANALYTICS_URL || 'https://analytics.stage.datacite.org',
     ANALYTICS_DASHBOARD_URL: process.env.ANALYTICS_DASHBOARD_URL || '',
+    SHOW_ANALYTICS: (process.env.SHOW_ANALYTICS && !(process.env.SHOW_ANALYTICS == "0" || process.env.SHOW_ANALYTICS == "false")) || false,
 
     JWT_PUBLIC_KEY:
       process.env.JWT_PUBLIC_KEY ||
@@ -119,7 +117,8 @@ module.exports = function (environment) {
     ENV.SEARCH_URL = 'https://search.datacite.org';
     ENV.CDN_URL = 'https://datacite.org';
     ENV.COOKIE_DOMAIN = '.datacite.org';
-    ENV.featureFlags['show-analytics'] = false;
+    // ENV.featureFlags['show-analytics'] = false;
+    ENV.SHOW_ANALYTICS = false;
   }
 
   if (environment === 'development') {

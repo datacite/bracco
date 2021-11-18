@@ -111,7 +111,8 @@
         </div>
       {{/if}}
 
-      {{#if (feature-flag 'showAnalytics')}}
+      {{!--  {{#if (feature-flag 'showAnalytics')}} --}}
+      {{#if (show-analytics)}}
         <form.element @controlType="text" @id="analytics-slug" @label="Analytics Slug" @property="string" @helpText="The Analytics ID is the unique identifier for the repository analytics dashboard in DataCite.  It should only be set if analytics has been turned on for a repository." />
       {{/if}}
 
