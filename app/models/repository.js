@@ -134,7 +134,7 @@ export default Model.extend(Validations, {
   keepPassword: attr('boolean', { defaultValue: true }),
   created: attr('date'),
   updated: attr('date'),
-  analyticsSlug: attr('string'),
+  analyticsDashboardUrl: attr('string'),
   targetId: attr(),
   mode: attr('string'),
 
@@ -155,15 +155,14 @@ export default Model.extend(Validations, {
       return null;
     }
   }),
-  analyticsDashboardUrl: computed('analyticsSlug', 'url', function () {
-    var domain = (!isEmpty(this.url) ? (new URL(this.url)).hostname  : '') ;
-    var slug = (!isEmpty(this.analyticsSlug) ? this.analyticsSlug : '');
+  analyticsDashboardUrlCmp: computed('analyticsDashboardUrl', function () {
+    const theme = '&embed=true&theme=light';
     var ret = '';
 
-    if (!isEmpty(domain) && !isEmpty(slug) && !isEmpty(ENV.ANALYTICS_URL)) {
-      ret = ENV.ANALYTICS_URL + '/share/' + domain + '?auth=' + slug + '&embed=true&theme=light';
+    if (!isEmpty(this.analyticsDashboardUrl)) {
+      ret = this.analyticsDashboardUrl + theme;
     } else if (!isEmpty(ENV.ANALYTICS_DASHBOARD_URL)) {
-      ret = ENV.ANALYTICS_DASHBOARD_URL;
+      ret = ENV.ANALYTICS_DASHBOARD_URL + theme;
     } else {
       ret = '';
     }

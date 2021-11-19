@@ -113,7 +113,7 @@
 
       {{!--  {{#if (feature-flag 'showAnalytics')}} --}}
       {{#if (show-analytics)}}
-        <form.element @controlType="text" @id="analytics-slug" @label="Analytics Slug" @property="string" @helpText="The Analytics ID is the unique identifier for the repository analytics dashboard in DataCite.  It should only be set if analytics has been turned on for a repository." />
+        <form.element @controlType="text" @id="analytics-dashboard-url" @label="Analytics Dashboard URL" @property="analyticsDashboardUrl" @helpText="The Analytics Dashboard URL is the shared link generated within the analytics app settings for this repository.  It should only be set if analytics has been turned on for a repository." />
       {{/if}}
 
       <form.element @controlType="checkbox" @id="is-active" @label="Account is active" @property="isActive" @helpText="This account can register and update DOIs" />

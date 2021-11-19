@@ -50,7 +50,7 @@ module.exports = function (environment) {
       preventDuplicates: true
     },
     featureFlags: {
-      'show-researchers': false,
+      'show-researchers': false
       // 'show-analytics': (process.env.SHOW_ANALYTICS && !(process.env.SHOW_ANALYTICS == "0" || process.env.SHOW_ANALYTICS == "false")) || false
     },
     fastboot: {
