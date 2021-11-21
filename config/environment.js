@@ -78,7 +78,7 @@ module.exports = function (environment) {
     CDN_URL: process.env.CDN_URL || 'https://www.stage.datacite.org',
     ANALYTICS_URL: process.env.ANALYTICS_URL || 'https://analytics.stage.datacite.org',
     ANALYTICS_DASHBOARD_URL: process.env.ANALYTICS_DASHBOARD_URL || '',
-    SHOW_ANALYTICS: (process.env.SHOW_ANALYTICS && !(process.env.SHOW_ANALYTICS == "0" || process.env.SHOW_ANALYTICS == "false")) || true,
+    SHOW_ANALYTICS: ((process.env.SHOW_ANALYTICS && !(process.env.SHOW_ANALYTICS == "0" || process.env.SHOW_ANALYTICS == "false")) ? true : false),
 
     JWT_PUBLIC_KEY:
       process.env.JWT_PUBLIC_KEY ||
