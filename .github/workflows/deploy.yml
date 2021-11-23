@@ -1,8 +1,9 @@
-name: Deploy
+name: Deploy to Staging
 on:
   push:
     branches:
       - "stage"
+      - "master"
 jobs:
   test:
     runs-on: ubuntu-latest
