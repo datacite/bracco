@@ -35,7 +35,7 @@
       <form.element @controlType="text" @id="name" @label="Repository Name" @property="name" @required={{false}} />
       <form.element @controlType="text" @id="alternate-name" @label="Repository Alternate Name (optional)" @property="alternateName" @required={{false}} />
       <form.element @controlType="email" @id="system-email" @label="System Email" @property="systemEmail" @helpText="This is the email used for sending password reset requests and similar system notifications." @required={{false}} />
-      
+
       <div class="form-group">
         <label class="control-label col-md-3">Service Contact (optional)</label>
         <div class="col-md-9">
@@ -56,10 +56,10 @@
           </div>
         </div>
       </div>
-      
+
       <form.element @controlType="textarea" @id="description" @label="Description (optional)" @property="description" @rows="10" @helpText="Description of the repository. Please use markdown for formatting." @required={{false}} />
       <form.element @controlType="text" @id="url" @label="URL (optional)" @property="url" @helpText="The homepage of the repository." @required={{false}} />
-      
+
       <div class="form-group" id="language">
         <label class="control-label col-md-3">Language (optional)</label>
         <div class="col-md-9">
@@ -111,16 +111,21 @@
         </div>
       {{/if}}
 
+      {{!--  {{#if (feature-flag 'showAnalytics')}} --}}
+      {{#if (show-analytics)}}
+        <form.element @controlType="text" @id="analytics-dashboard-url" @label="Analytics Dashboard URL" @property="analyticsDashboardUrl" @helpText="The Analytics Dashboard URL is the shared link generated within the analytics app settings for this repository.  It should only be set if analytics has been turned on for a repository." />
+      {{/if}}
+
       {{#if (can "create repository" model)}}
         <form.element @controlType="checkbox" @id="is-active" @label="Account is active" @property="isActive" @helpText="This account can register and update DOIs" />
       {{/if}}
 
       <div class="col-md-offset-3">
         <BsAlert @dismissible={{false}} class="opt-in" @type="warning">
-          The contacts entered may receive notifications about administration, webinars, product testing, 
-          or news that will impact the use of DataCite services and/or membership. Individuals may remove 
-          themselves from mailings by following the unsubscribe link provided in every DataCite email. 
-          For information about our privacy practices and commitment to protecting your privacy, please 
+          The contacts entered may receive notifications about administration, webinars, product testing,
+          or news that will impact the use of DataCite services and/or membership. Individuals may remove
+          themselves from mailings by following the unsubscribe link provided in every DataCite email.
+          For information about our privacy practices and commitment to protecting your privacy, please
           review our <a target="_blank" rel="noreferrer" href="https://datacite.org/privacy.html">Privacy Policy</a>.
         </BsAlert>
       </div>
@@ -133,7 +138,7 @@
             To save this repository, first resolve the errors with these fields: {{repository-form-errors model}}.
           </BsAlert>
 
-          <button type="submit" id="update-repository" class="btn btn-sm btn-fill" disabled={{true}}>Update {{if (eq currentUser.uid model.id) 'Account' 'Repository'}}</button>          
+          <button type="submit" id="update-repository" class="btn btn-sm btn-fill" disabled={{true}}>Update {{if (eq currentUser.uid model.id) 'Account' 'Repository'}}</button>
         {{/if}}
 
         <button {{action "cancel" model}} class="btn btn-sm">Cancel</button>

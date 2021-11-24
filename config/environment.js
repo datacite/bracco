@@ -23,7 +23,8 @@ module.exports = function (environment) {
           process.env.SENTRY_DSN ||
           'https://63201db022924202b697e03bc5e0d0ba@o239790.ingest.sentry.io/1420435',
 
-        disablePerformance: true
+        disablePerformance: true,
+        environment: deployTarget || "staging"
       }
     },
     'ember-cli-string-helpers': {
@@ -50,6 +51,7 @@ module.exports = function (environment) {
     },
     featureFlags: {
       'show-researchers': false
+      // 'show-analytics': (process.env.SHOW_ANALYTICS && !(process.env.SHOW_ANALYTICS == "0" || process.env.SHOW_ANALYTICS == "false")) || false
     },
     fastboot: {
       hostWhitelist: [
@@ -74,6 +76,10 @@ module.exports = function (environment) {
     EVENTDATA_URL:
       process.env.EVENTDATA_URL || 'https://api.stage.datacite.org',
     CDN_URL: process.env.CDN_URL || 'https://www.stage.datacite.org',
+    ANALYTICS_URL: process.env.ANALYTICS_URL || 'https://analytics.stage.datacite.org',
+    ANALYTICS_DASHBOARD_URL: process.env.ANALYTICS_DASHBOARD_URL || '',
+    SHOW_ANALYTICS: ((process.env.SHOW_ANALYTICS && !(process.env.SHOW_ANALYTICS == "0" || process.env.SHOW_ANALYTICS == "false")) ? true : false),
+
     JWT_PUBLIC_KEY:
       process.env.JWT_PUBLIC_KEY ||
       '-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA22lpr1ntJQYKa+aCRjre\nPKTze/00S0SCdsWKhvk3honfjdebuxc54YdvfqKQk/1jLOPJj++vqIGwytKRI9uC\n1BmMRLrOluACiOgTc5DpzMm68lZss5D5g7tzjxB7NlFiKiYav1BtVDfvVxwuNqkY\njyNupf1Gjqp2/8wbsZ6SGIkzgovgjcHI5S8HZ7DE7rcrStISNJqTvpuMUXp++eie\nPkTgcrdZScKjO6VYu9epuhoyD2mbZdjAUbxYyjQ3vgftseLo4hXFEXpfIQzwxOLS\njmg1S/qxOzZHOMrp31pS1ricMtd4frvXztHPfh5XuyiOEozR0An9OIIwzKQsn+0q\np5QKfN+lHJflYGZ1TD8QruinWf8a5uWYd3q9c1V8RYgwgmfoxgHX5TmMbcQsBTuB\nyIy3io3rBiRnJEAgSu4PxNuQqVqqsaJ4cCmQrATLViZmXhZcbHJyWl3GJnZMpv8P\nor6m239QGZdoy5ijoOdVLQowtnsr+SWWrcYKF4J66223xjGBse7o3Q+gJUkyQKtB\nLifDld9XMTpgvEsZtZKEQ9S5gAWkiAzcjSMV0J4XMOzvHAalyNTucLc6ljG8HnjO\n34SrkvkkTlUwNsJOygRNJQujfQaStvb3MTagSqPteGhy9qSitSJPrDmN/W79stIe\nSvqHoJznDJsFfKUcypEG4l0CAwEAAQ==\n-----END PUBLIC KEY-----\n',
@@ -89,7 +95,7 @@ module.exports = function (environment) {
     googleTagManager: {
       appId: process.env.GOOGLE_TAG_MANAGER_ID
     },
-    
+
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
@@ -111,6 +117,8 @@ module.exports = function (environment) {
     ENV.SEARCH_URL = 'https://search.datacite.org';
     ENV.CDN_URL = 'https://datacite.org';
     ENV.COOKIE_DOMAIN = '.datacite.org';
+    // ENV.featureFlags['show-analytics'] = false;
+    ENV.SHOW_ANALYTICS = false;
   }
 
   if (environment === 'development') {
@@ -136,8 +144,6 @@ module.exports = function (environment) {
     };
     (ENV.API_JWT = process.env.API_JWT || ''),
       (ENV.APP.rootElement = '#ember-testing');
-
-    ENV.featureFlags['show-researchers'] = true;
 
     ENV.APP.autoboot = false;
 

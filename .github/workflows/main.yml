@@ -1,8 +1,7 @@
-name: Deploy Main
+name: Deploy to Test and Production
 on:
-  push:
-    branches:
-      - "main"
+  release:
+    types: [published]
 jobs:
   test:
     runs-on: ubuntu-latest

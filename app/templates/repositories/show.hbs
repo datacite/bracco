@@ -85,6 +85,18 @@
               Info
             </nav.link-to>
           </nav.item>
+          {{!-- {{#if (feature-flag 'showAnalytics')}} --}}
+          {{#if (show-analytics)}}
+          <nav.item>
+            <nav.link-to
+              @route="repositories.show.analytics"
+              model="model.id"
+              class="nav-link"
+            >
+              Usage Dashboard
+            </nav.link-to>
+          </nav.item>
+          {{/if}}
           <nav.item>
             <nav.link-to
               @route="repositories.show.index"
