@@ -16,12 +16,11 @@ jobs:
         run: |
           yarn
           ./node_modules/.bin/ember build --output-path="test_build" --environment=test
-      - name: Upload modules and test build
+      - name: Upload test build
         uses: actions/upload-artifact@v2
         with:
           name: bracco_test
           path: |
-            node_modules
             test_build
           if-no-files-found: error
 
@@ -35,7 +34,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '12'
-      - name: Download modules and test build
+      - name: Download test build
         uses: actions/download-artifact@v2
         with: 
           name: bracco_test
@@ -67,7 +66,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '12'
-      - name: Download modules and test build
+      - name: Download test build
         uses: actions/download-artifact@v2
         with: 
           name: bracco_test 
