@@ -82,7 +82,7 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | SETTINGS', () => {
         cy.get('h5').contains(/Voting\s*Representative/i);
         cy.get('[cy-data="voting"] a').contains(/John\s*Doe/i).and('have.attr', 'href').and('include', 'mailto:info@datacite.org');
         cy.get('h5').contains(/Service\s*Contact/i);
-        cy.get('[cy-data="service"] a').contains(/Martin\s*Fenner/i).and('have.attr', 'href').and('include', 'mailto:martin.fenner@datacite.org');
+        cy.get('[cy-data="service"] a').contains(/John\s*Doe/i).and('have.attr', 'href').and('include', 'mailto:John.Doe9200@example.org');
         cy.get('h5').contains(/Billing\s*Contact/i);
         cy.get('[cy-data="billing"] a').contains(/John\s*Smith/i).and('have.attr', 'href').and('include', 'mailto:john.smith@gmail.com');
       });
