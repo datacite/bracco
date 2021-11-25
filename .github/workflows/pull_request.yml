@@ -4,29 +4,29 @@ on:
     branches:
       - main
 jobs:
-  # build:
-  #   name: Install packages + build
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - uses: actions/setup-node@v2
-  #       with:
-  #         node-version: '12'
-  #     - name: Build
-  #       run: |
-  #         yarn
-  #         ./node_modules/.bin/ember build --output-path="test_build" --environment=test
-  #     - name: Upload test build
-  #       uses: actions/upload-artifact@v2
-  #       with:
-  #         name: bracco_test
-  #         path: |
-  #           test_build
-  #         if-no-files-found: error
+  build:
+    name: Install packages + build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '12'
+      - name: Build
+        run: |
+          yarn
+          ./node_modules/.bin/ember build --output-path="test_build" --environment=test
+      - name: Upload test build
+        uses: actions/upload-artifact@v2
+        with:
+          name: bracco_test
+          path: |
+            test_build
+          if-no-files-found: error
 
   ember_test:
     name: Ember Testing
-    #needs: build
+    needs: build
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -34,79 +34,78 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '12'
-      #- name: Download test build
-      #  uses: actions/download-artifact@v2
-      #  with: 
-      #    name: bracco_test
+      - name: Download test build
+        uses: actions/download-artifact@v2
+        with: 
+          name: bracco_test
       - name: Run tests
         env:
           COVERAGE: true
         run: |
           yarn global add ember-cli@3.15.1 --tilde
-          yarn global bin
-          ~/.yarn/bin/ember test --path=test_build  
+          /usr/local/bin/ember test --path=test_build  
 
-  # cypress_test:
-  #   name: Cypress Testing
-  #   needs: build
-  #   runs-on: ubuntu-latest
-  #   strategy:
-  #     fail-fast: false
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - uses: actions/setup-node@v2
-  #       with:
-  #         node-version: '12'
-  #     - name: Download test build
-  #       uses: actions/download-artifact@v2
-  #       with: 
-  #         name: bracco_test
-  #     - name: Install Ember and Cypress
-  #       run: |
-  #         yarn global add ember-cli@3.15.1 --tilde
-  #         yarn global add cypress@7.4.0
-  #     - name: Cypress run
-  #       uses: cypress-io/github-action@v2
-  #       with:
-  #         start: ~/.yarn/bin/ember serve --path=test_build
-  #         wait-on: 'http://localhost:4200'
-  #         wait-on-timeout: 600
-  #         quiet: true
-  #         record: true
-  #         parallel: true
-  #         group: 'Tests'
-  #         spec: |
-  #           cypress/integration/client_admin/doi.test.ts
-  #           cypress/integration/client_admin/info.test.ts
-  #           cypress/integration/client_admin/prefixes.test.ts
-  #           cypress/integration/client_admin/settings.test.ts
-  #           cypress/integration/consortium_admin/contacts.test.ts
-  #           cypress/integration/consortium_admin/info.test.ts
-  #           cypress/integration/consortium_admin/settings.test.ts
-  #           cypress/integration/organization_admin/contacts.test.ts
-  #           cypress/integration/organization_admin/doi.test.ts
-  #           cypress/integration/organization_admin/info.test.ts
-  #           cypress/integration/organization_admin/prefixes.test.ts
-  #           cypress/integration/organization_admin/repositories.test.ts
-  #           cypress/integration/organization_admin/settings.test.ts
-  #           cypress/integration/staff_admin/contacts.test.ts
-  #           cypress/integration/staff_admin/info.test.ts
-  #           cypress/integration/staff_admin/settings.test.ts
-  #           cypress/integration/ui/consent.test.ts
-  #           cypress/integration/ui/login.test.ts
-  #           cypress/integration/anonymous/admin.test.ts
-  #           cypress/integration/anonymous/anonymous.test.ts
-  #           cypress/integration/anonymous/doi.test.ts
-  #           cypress/integration/anonymous/provider.test.ts
-  #           cypress/integration/anonymous/repository.test.ts
-  #       env:
-  #         CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  #         CLIENT_ADMIN_USERNAME: ${{ secrets.CLIENT_ADMIN_USERNAME }}
-  #         CLIENT_ADMIN_PASSWORD: ${{ secrets.CLIENT_ADMIN_PASSWORD }}
-  #         CONSORTIUM_ADMIN_USERNAME: ${{ secrets.CONSORTIUM_ADMIN_USERNAME }}
-  #         CONSORTIUM_ADMIN_PASSWORD: ${{ secrets.CONSORTIUM_ADMIN_PASSWORD }}
-  #         ORGANIZATION_ADMIN_USERNAME: ${{ secrets.ORGANIZATION_ADMIN_USERNAME }}
-  #         ORGANIZATION_ADMIN_PASSWORD: ${{ secrets.ORGANIZATION_ADMIN_PASSWORD }}
-  #         STAFF_ADMIN_USERNAME: ${{ secrets.STAFF_ADMIN_USERNAME }}
-  #         STAFF_ADMIN_PASSWORD: ${{ secrets.STAFF_ADMIN_PASSWORD }}
+  cypress_test:
+    name: Cypress Testing
+    needs: build
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '12'
+      - name: Download test build
+        uses: actions/download-artifact@v2
+        with: 
+          name: bracco_test
+      - name: Install Ember and Cypress
+        run: |
+          yarn global add ember-cli@3.15.1 --tilde
+          yarn global add cypress@7.4.0
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
+        with:
+          start: /usr/local/bin/ember serve --path=test_build
+          wait-on: 'http://localhost:4200'
+          wait-on-timeout: 600
+          quiet: true
+          record: true
+          parallel: true
+          group: 'Tests'
+          spec: |
+            cypress/integration/client_admin/doi.test.ts
+            cypress/integration/client_admin/info.test.ts
+            cypress/integration/client_admin/prefixes.test.ts
+            cypress/integration/client_admin/settings.test.ts
+            cypress/integration/consortium_admin/contacts.test.ts
+            cypress/integration/consortium_admin/info.test.ts
+            cypress/integration/consortium_admin/settings.test.ts
+            cypress/integration/organization_admin/contacts.test.ts
+            cypress/integration/organization_admin/doi.test.ts
+            cypress/integration/organization_admin/info.test.ts
+            cypress/integration/organization_admin/prefixes.test.ts
+            cypress/integration/organization_admin/repositories.test.ts
+            cypress/integration/organization_admin/settings.test.ts
+            cypress/integration/staff_admin/contacts.test.ts
+            cypress/integration/staff_admin/info.test.ts
+            cypress/integration/staff_admin/settings.test.ts
+            cypress/integration/ui/consent.test.ts
+            cypress/integration/ui/login.test.ts
+            cypress/integration/anonymous/admin.test.ts
+            cypress/integration/anonymous/anonymous.test.ts
+            cypress/integration/anonymous/doi.test.ts
+            cypress/integration/anonymous/provider.test.ts
+            cypress/integration/anonymous/repository.test.ts
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CLIENT_ADMIN_USERNAME: ${{ secrets.CLIENT_ADMIN_USERNAME }}
+          CLIENT_ADMIN_PASSWORD: ${{ secrets.CLIENT_ADMIN_PASSWORD }}
+          CONSORTIUM_ADMIN_USERNAME: ${{ secrets.CONSORTIUM_ADMIN_USERNAME }}
+          CONSORTIUM_ADMIN_PASSWORD: ${{ secrets.CONSORTIUM_ADMIN_PASSWORD }}
+          ORGANIZATION_ADMIN_USERNAME: ${{ secrets.ORGANIZATION_ADMIN_USERNAME }}
+          ORGANIZATION_ADMIN_PASSWORD: ${{ secrets.ORGANIZATION_ADMIN_PASSWORD }}
+          STAFF_ADMIN_USERNAME: ${{ secrets.STAFF_ADMIN_USERNAME }}
+          STAFF_ADMIN_PASSWORD: ${{ secrets.STAFF_ADMIN_PASSWORD }}
