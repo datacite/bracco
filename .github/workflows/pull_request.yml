@@ -45,18 +45,6 @@ jobs:
           yarn global add ember-cli@3.15.1 --tilde
           ~/.yarn/bin/ember test --path=test_build  
 
-
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '12'
-      - name: Install and Test
-        env:
-          COVERAGE: true
-        run: |
-          yarn
-          ~/.yarn/bin/ember test
-
   cypress_test:
     name: Cypress Testing
     needs: build
