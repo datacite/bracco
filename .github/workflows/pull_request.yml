@@ -37,7 +37,8 @@ jobs:
           node-version: '12'
       - name: Download modules and test build
         uses: actions/download-artifact@v2
-        with: bracco_test
+        with: 
+          name: bracco_test
       - name: Run tests
         env:
           COVERAGE: true
@@ -68,7 +69,8 @@ jobs:
           node-version: '12'
       - name: Download modules and test build
         uses: actions/download-artifact@v2
-        with: bracco_test 
+        with: 
+          name: bracco_test 
       - name: Cypress run
         uses: cypress-io/github-action@v2
         with:
