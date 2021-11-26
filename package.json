@@ -14,7 +14,7 @@
     "test": "tests"
   },
   "scripts": {
-    "build": "./node_modules/.bin/ember build",
+    "build": "./node_modules/.bin/ember build --environment=production",
     "lint": "./node_modules/.bin/eslint . --ext .js",
     "lint:hbs": "./node_modules/.bin/ember-template-lint .",
     "format:hbs": "prettier --config .prettierrc.json **/*.hbs --write",
