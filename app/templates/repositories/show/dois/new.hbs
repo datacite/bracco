@@ -26,7 +26,7 @@
 
       <DoiCreators @model={{model.doi}} @form={{form}} />
       <DoiTitles @model={{model.doi}} @form={{form}} />
-      
+
       <div class="form-group required-nested-label {{if (v-get model.doi 'publisher' 'isInvalid') 'has-error' 'has-feedback'}}">
         <label class="control-label col-md-3">Publisher</label>
         <div class="col-md-9 input-fragment">
@@ -39,12 +39,13 @@
         <label class="control-label col-md-3">Publication Year</label>
         <div class="col-md-9 input-fragment">
           <div class="label-vertical">The year when the resource was or will be made publicly available.</div>
-          <form.element @id="publication-year" @controlType="text" @property="publicationYear" @placeholder="Publication Year" @helpText="Must be a year between 1000 and 2021." @required={{false}} />
+          <form.element @id="publication-year" @controlType="text" @property="publicationYear" @placeholder="Publication Year"
+            @helpText="Must be a year between 1000 and 2022." @required={{false}} />
         </div>
       </div>
 
       <DoiTypes @class="required-nested-label" @model={{model.doi}} @form={{form}} />
-      
+
       <h3 class="member-results">Recommended Properties</h3>
 
       <DoiSubjects @model={{model.doi}} @form={{form}} />
@@ -82,9 +83,9 @@
             To save this DOI, first resolve the errors with these properties: {{doi-form-errors model.doi}}.
           </BsAlert>
 
-          <button type="submit" id="doi-create" class="btn btn-sm btn-fill" disabled={{true}}>Create DOI</button>          
+          <button type="submit" id="doi-create" class="btn btn-sm btn-fill" disabled={{true}}>Create DOI</button>
         {{/if}}
-        
+
         <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
       </div>
     </BsForm>

@@ -21,7 +21,7 @@
           <form.element @controlType="text" @id="doi" @property="doi" @disabled={{true}} />
         </div>
       </div>
- 
+
       <DoiState @class="required-nested-label" @model={{model}} @form={{form}} />
 
       <div class="form-group required-nested-label {{if (v-get model 'url' 'isInvalid') 'has-error' 'has-feedback'}}">
@@ -47,12 +47,13 @@
         <label class="control-label col-md-3">Publication Year</label>
         <div class="col-md-9 input-fragment">
           <div class="label-vertical">The year when the resource was or will be made publicly available.</div>
-          <form.element @id="publication-year" @controlType="text" @property="publicationYear" @helpText="Must be a year between 1000 and 2021." @required={{false}} />
+          <form.element @id="publication-year" @controlType="text" @property="publicationYear"
+            @helpText="Must be a year between 1000 and 2022." @required={{false}} />
         </div>
       </div>
 
       <DoiTypes @class="required-nested-label" @model={{model}} @form={{form}} />
-      
+
       <h3 class="member-results">Recommended Properties</h3>
 
       <DoiSubjects @model={{model}} @form={{form}} />
@@ -63,7 +64,7 @@
       <DoiDescriptions @model={{model}} @form={{form}} />
 
       <DoiGeoLocations @model={{model}} @form={{form}} />
-      
+
       <h3 class="member-results">Optional Properties</h3>
 
       <DoiLanguage @model={{model}} @form={{form}} />
@@ -90,7 +91,7 @@
             To save this DOI, first resolve the errors with these properties: {{doi-form-errors model}}.
           </BsAlert>
 
-          <button type="submit" id="doi-update" class="btn btn-sm btn-fill" disabled={{true}}>Update DOI</button>          
+          <button type="submit" id="doi-update" class="btn btn-sm btn-fill" disabled={{true}}>Update DOI</button>
         {{/if}}
 
         <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
