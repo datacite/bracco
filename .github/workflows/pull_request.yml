@@ -12,6 +12,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '12'
+          cache: 'yarn'
       - name: Build
         run: |
           yarn
@@ -34,6 +35,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '12'
+          cache: 'yarn'
       - name: Download test build
         uses: actions/download-artifact@v2
         with: 
@@ -42,8 +44,7 @@ jobs:
         env:
           COVERAGE: true
         run: |
-          yarn global add ember-cli@3.15.1 --tilde
-          /usr/local/bin/ember test --path=test_build  
+          ./node_modules/.bin/ember test --path=test_build  
 
   cypress_test:
     name: Cypress Testing
@@ -56,18 +57,15 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '12'
+          cache: 'yarn'
       - name: Download test build
         uses: actions/download-artifact@v2
         with: 
           name: bracco_test
-      - name: Install Ember and Cypress
-        run: |
-          yarn global add ember-cli@3.15.1 --tilde
-          yarn global add cypress@7.4.0
       - name: Cypress run
         uses: cypress-io/github-action@v2
         with:
-          start: /usr/local/bin/ember serve --path=test_build
+          start: ./node_modules/.bin/ember serve --path=test_build
           wait-on: 'http://localhost:4200'
           wait-on-timeout: 600
           quiet: true
