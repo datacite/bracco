@@ -13,9 +13,12 @@ jobs:
         with:
           node-version: '12'
           cache: 'yarn'
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
       - name: Build
         run: |
-          yarn --frozen-lockfile
+          yarn --frozen-lockfile --offline
           ./node_modules/.bin/ember build --output-path="test_build" --environment=test
       - name: Upload test build
         uses: actions/upload-artifact@v2
