@@ -12,7 +12,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '12'
-          cache: 'yarn'   
+          # cache: 'yarn'   
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
@@ -47,7 +47,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '12'
-          cache: 'yarn'
+          # cache: 'yarn'
       - name: Download test build
         uses: actions/download-artifact@v2
         with: 
@@ -70,7 +70,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '12'
-          cache: 'yarn'
+          # cache: 'yarn'
       - name: Download test build
         uses: actions/download-artifact@v2
         with: 
