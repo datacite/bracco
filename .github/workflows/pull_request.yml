@@ -69,6 +69,7 @@ jobs:
         env:
           COVERAGE: true
         run: |
+          ls
           yarn --frozen-lockfile
           ./node_modules/.bin/ember test --path=test_build  
 
