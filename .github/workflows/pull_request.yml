@@ -28,7 +28,6 @@ jobs:
       - name: Build
         run: |
           yarn --frozen-lockfile
-          ls -la node_modules/.bin
           ./node_modules/.bin/ember build --output-path="test_build" --environment=test
       - name: Upload test build
         uses: actions/upload-artifact@v2
@@ -70,9 +69,8 @@ jobs:
         env:
           COVERAGE: true
         run: |
-          ls -la node_modules/.bin
           yarn --frozen-lockfile
-          ./node_modules/.bin/ember test --path=test_build  
+          node_modules/.bin/ember test --path=test_build  
 
   cypress_test:
     name: Cypress Testing
