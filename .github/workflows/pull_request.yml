@@ -26,7 +26,7 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
       - name: Build
         run: |
-          yarn --frozen-lockfile --offline
+          yarn --frozen-lockfile
           ./node_modules/.bin/ember build --output-path="test_build" --environment=test
       - name: Upload test build
         uses: actions/upload-artifact@v2
