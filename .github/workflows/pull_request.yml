@@ -15,7 +15,7 @@ jobs:
           cache: 'yarn'
       - name: Build
         run: |
-          yarn
+          yarn --frozen-lockfile
           ./node_modules/.bin/ember build --output-path="test_build" --environment=test
       - name: Upload test build
         uses: actions/upload-artifact@v2
@@ -45,6 +45,7 @@ jobs:
         env:
           COVERAGE: true
         run: |
+          yarn --frozen-lockfile
           ./node_modules/.bin/ember test --path=test_build  
 
   cypress_test:
@@ -63,6 +64,8 @@ jobs:
         uses: actions/download-artifact@v2
         with: 
           name: bracco_test
+      - name: Run Yarn
+        run: yarn --frozen-lockfile
       - name: Cypress run
         uses: cypress-io/github-action@v2
         with:
