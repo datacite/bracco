@@ -41,8 +41,8 @@ jobs:
       - name: Ember Testing
         # needs: build
         # runs-on: ubuntu-latest
-        strategy:
-          fail-fast: false
+        # strategy:
+        #   fail-fast: false
         # steps:
         #   - uses: actions/checkout@v2
         #   - uses: actions/setup-node@v2
