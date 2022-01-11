@@ -12,7 +12,7 @@ module('Integration | Component | provider-info', function (hooks) {
     assert
       .dom(this.element)
       .hasText(
-        'Repositories by year 0 20112021 DOIs by year 0 in 2021 20112021'
+        'Repositories by year 0 20122022 DOIs by year 0 in 2021 20122022'
       );
   });
 });
