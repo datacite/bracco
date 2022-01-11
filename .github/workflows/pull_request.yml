@@ -27,6 +27,7 @@ jobs:
             **/node_modules
             **/.eslintcache
             ${{ steps.yarn-cache-dir-path.outputs.dir }}
+            ~/.cache/Cypress
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
 
       - name: Build
@@ -42,12 +43,13 @@ jobs:
       - name: Cypress Testing
         uses: cypress-io/github-action@v2
         with:
+          install: false
           start: ./node_modules/.bin/ember serve --path=test_build
           wait-on: 'http://localhost:4200'
           wait-on-timeout: 600
-          quiet: true
+          # quiet: true
           record: true
-          parallel: true
+          parallel: false
           group: 'Tests'
           spec: |
             cypress/integration/client_admin/doi.test.ts
@@ -74,6 +76,7 @@ jobs:
             cypress/integration/anonymous/provider.test.ts
             cypress/integration/anonymous/repository.test.ts
         env:
+          DEBUG: '@cypress/github-action'
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CLIENT_ADMIN_USERNAME: ${{ secrets.CLIENT_ADMIN_USERNAME }}
