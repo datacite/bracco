@@ -44,7 +44,7 @@ jobs:
         uses: cypress-io/github-action@v2
         with:
           install: false
-          start: ./node_modules/.bin/ember serve --path=test_build
+          start: yarn start --path=test_build
           wait-on: 'http://localhost:4200'
           wait-on-timeout: 600
           # quiet: true
