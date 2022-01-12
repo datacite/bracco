@@ -33,7 +33,7 @@ jobs:
       - name: Build
         run: |
           yarn --frozen-lockfile
-          ./node_modules/.bin/ember build --output-path="test_build" --environment=test
+          ./node_modules/.bin/ember build --output-path="test_build" --environment=development
 
       - name: Ember Testing
         env:
