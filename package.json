@@ -148,7 +148,6 @@
     "ember-radio-button": "^2.0.1",
     "ember-resolver": "^7.0.0",
     "ember-route-action-helper": "^2.0.7",
-    "ember-service-worker-unregistration": "^1.1.0",
     "ember-simple-auth": "^1.9.2",
     "ember-source": "^3.12.1",
     "ember-test-selectors": "^3.0.0",
