@@ -139,7 +139,7 @@
         {{/each}}
         <div class="text-center">
           {{#if (gt model.contacts.meta.totalPages 1)}}
-            <PageNumbers @model={{model.contacts}} @link="contacts" />
+            <PageNumbers @model={{model.contacts}} @link="providers.show.contacts" />
           {{/if}}
         </div>
       {{else}}
