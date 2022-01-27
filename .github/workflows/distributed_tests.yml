@@ -73,6 +73,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: test_build
+          path: test_build/
 
       - name: Ember Testing
         env:
