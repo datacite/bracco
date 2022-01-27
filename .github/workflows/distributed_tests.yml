@@ -77,7 +77,7 @@ jobs:
         env:
           COVERAGE: true
         run: |
-          ember test --path=test_build 
+          yarn run ember test --path=test_build 
 
 
 
