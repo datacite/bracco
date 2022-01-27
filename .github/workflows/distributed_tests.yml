@@ -25,6 +25,7 @@ jobs:
           path: |
             ${{ steps.yarn-cache-dir-path.outputs.dir }}
             node_modules
+            ~/.cache/Cypress
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: ${{ runner.os }}-yarn-
 
@@ -62,6 +63,7 @@ jobs:
           path: |
             ${{ steps.yarn-cache-dir-path.outputs.dir }}
             node_modules
+            ~/.cache/Cypress
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: ${{ runner.os }}-yarn-
            
@@ -101,6 +103,7 @@ jobs:
           path: |
             ${{ steps.yarn-cache-dir-path.outputs.dir }}
             node_modules
+            ~/.cache/Cypress
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: ${{ runner.os }}-yarn-
            
@@ -109,7 +112,7 @@ jobs:
         with:
           name: test_build
           path: test_build/
-          
+
       - name: Cypress Testing
         uses: cypress-io/github-action@v2
         with:
