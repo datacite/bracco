@@ -46,6 +46,7 @@ jobs:
   ember_test:
     name: Ember Testing
     runs-on: ubuntu-latest
+    needs: build
     strategy:
       fail-fast: true
     steps:
