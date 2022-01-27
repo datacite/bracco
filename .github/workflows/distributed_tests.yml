@@ -30,7 +30,7 @@ jobs:
 
       - name: Build
         run: |
-          yarn --frozen-lockfile --prefer-offline --verbose
+          yarn --frozen-lockfile --prefer-offline
           ./node_modules/.bin/ember build --output-path="test_build" --environment=development
 
       - name: Upload Test Build artifact
@@ -67,7 +67,7 @@ jobs:
       
       - name: Install dependencies
         run: |
-          yarn --frozen-lockfile --prefer-offline --verbose
+          yarn --frozen-lockfile --prefer-offline
       
       - name: Download Test Build artifact
         uses: actions/download-artifact@v2
