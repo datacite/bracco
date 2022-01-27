@@ -68,7 +68,10 @@ jobs:
       - name: Ember Testing
         env:
           COVERAGE: true
-        run: ./node_modules/.bin/ember test --path=test_build 
+        run: |
+          pwd
+          ls -R
+          ./node_modules/.bin/ember test --path=test_build 
 
 
 
