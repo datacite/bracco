@@ -63,9 +63,9 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: ${{ runner.os }}-yarn-
       
-      - name: Install dependencies
-        run: |
-          yarn --frozen-lockfile --prefer-offline
+      # - name: Install dependencies
+      #   run: |
+      #     yarn --frozen-lockfile --prefer-offline
       
       - name: Download Test Build artifact
         uses: actions/download-artifact@v2
@@ -77,8 +77,6 @@ jobs:
         env:
           COVERAGE: true
         run: |
-          pwd
-          ls -lta
           ./node_modules/.bin/ember test --path=test_build 
 
 
