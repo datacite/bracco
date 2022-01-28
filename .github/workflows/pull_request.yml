@@ -119,7 +119,7 @@ jobs:
         uses: cypress-io/github-action@v2
         with:
           install: false
-          config: defaultCommandTimeout=10000
+          config: defaultCommandTimeout=15000
           start: yarn start --path=test_build
           wait-on: 'http://localhost:4200'
           wait-on-timeout: 600

@@ -3,6 +3,6 @@
   "experimentalFetchPolyfill": true,
   "testFiles": "**/*.test.*",
   "video": false,
-  "retries": 2,
+  "retries": 3,
   "projectId": "8j7yje"
 }
