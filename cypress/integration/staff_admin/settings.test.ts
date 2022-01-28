@@ -140,7 +140,7 @@ describe('ACCEPTANCE: STAFF_ADMIN | SETTINGS', () => {
       });
     }).then (() => {
       cy.get('button').contains(/Cancel/i).should('be.visible').click({force: true}).then(() => {
-        cy.wait(waitTime);
+        cy.wait(waitTime2);
         cy.location().should((loc) => {
           expect(loc.pathname).to.eq('/');
         });
@@ -169,7 +169,7 @@ describe('ACCEPTANCE: STAFF_ADMIN | SETTINGS', () => {
       })
     }).then(() => {
       cy.get('button').contains(/Cancel/i).should('be.visible').click({force: true}).then(() => {
-        cy.wait(waitTime);
+        cy.wait(waitTime2);
         cy.location().should((loc) => {
           expect(loc.pathname).to.eq('/');
         });
