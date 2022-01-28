@@ -172,5 +172,11 @@
     "urijs": "^1.19.2",
     "vkbeautify": "^0.99.3",
     "xml2js": "^0.4.23"
+  },
+  "resolutions": {
+    "**/handlebars": "^4.7.7",
+    "**/xmlhttprequest-ssl": "^1.6.1",
+    "**/caniuse-lite": "^1.0.30001303",
+    "**/lodash": "^4.17.21"
   }
 }
