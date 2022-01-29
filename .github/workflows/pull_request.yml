@@ -31,7 +31,7 @@ jobs:
 
       - name: Build
         run: |
-          yarn --frozen-lockfile --prefer-offline
+          yarn --prefer-offline
           ./node_modules/.bin/ember build --output-path="test_build" --environment=development
 
       - name: Upload Test Build artifact
