@@ -196,6 +196,7 @@
     "**/underscore": "^1.12.1",
     "**/websocket-extensions": "^0.1.4",
     "**/y18n": "^4.0.1",
-    "**/kind-of": "^6.0.3"
+    "**/kind-of": "^6.0.3",
+    "**/ansi-html": "https://registry.yarnpkg.com/ansi-html-community/-/ansi-html-community-0.0.8.tgz"
   }
 }
