@@ -91,11 +91,11 @@ const Validations = buildValidations({
     }),
     validator('date', {
       after: '999',
-      before: new Date().getFullYear() + 2,
+      before: new Date().getFullYear() + 6,
       precision: 'year',
       format: 'YYYY',
       errorFormat: 'YYYY',
-      message: `Must be a year between 1000 and ${new Date().getFullYear() + 1 }.`,
+      message: `Must be a year between 1000 and ${new Date().getFullYear() + 5 }.`,
       disabled: computed('model.{mode,state}', function () {
         return (
           this.model.get('state') === 'draft' ||
