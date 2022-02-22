@@ -22,7 +22,8 @@ const organizationLabelList = {
   name: 'organization name',
   displayName: 'organization display name',
   systemEmail: 'system email',
-  serviceContact: 'service contact'
+  serviceContact: 'service contact',
+  doiEstimateYearOne: 'doi estimate'
 };
 
 export function providerFormErrors([model]) {
