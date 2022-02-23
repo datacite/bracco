@@ -177,10 +177,6 @@ const Validations = buildValidations({
   ],
   'billingInformation.state': [validator('billing-state')],
   doiEstimateYearOne: [
-    validator('presence', {
-      presence: true,
-      ignoreBlank: true
-    }),
     validator('number', {
       allowString: true,
       integer: true,
@@ -188,13 +184,6 @@ const Validations = buildValidations({
     })
   ]
 });
-
-
-validator('presence', {
-  presence: true,
-  ignoreBlank: true,
-  message: 'should not be empty or consist only of spaces'
-})
 
 export default Model.extend(Validations, {
   consortium: belongsTo('provider', {
