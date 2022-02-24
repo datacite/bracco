@@ -176,13 +176,24 @@ const Validations = buildValidations({
     })
   ],
   'billingInformation.state': [validator('billing-state')],
-  doiEstimateYearOne: [
-    validator('number', {
-      allowString: true,
-      integer: true,
-      positive: true
-    })
-  ]
+  doiEstimateYearOne:
+    [
+      validator('presence', {
+        presence: true,
+        disabled: computed('model', function () {
+          return (
+            this.model.get('memberType') !== 'consortium_organization'
+          )
+        }),
+        ignoreBlank: true,
+        message: 'A doi estimate is required.'
+      }),
+      validator('number', {
+        allowString: true,
+        integer: true,
+        positive: true
+      })
+    ]
 });
 
 export default Model.extend(Validations, {
