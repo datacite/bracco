@@ -7,6 +7,7 @@ import { w } from '@ember/string';
 import { validator, buildValidations } from 'ember-cp-validations';
 import { fragment } from 'ember-data-model-fragments/attributes';
 import addressFormatter from '@fragaria/address-formatter';
+import ENV from 'bracco/config/environment';
 
 const Validations = buildValidations({
   symbol: [
@@ -182,7 +183,8 @@ const Validations = buildValidations({
         presence: true,
         disabled: computed('model', function () {
           return (
-            this.model.get('memberType') !== 'consortium_organization'
+            this.model.get('memberType') !== 'consortium_organization' ||
+            !ENV.featureFlags['enable-doi-estimate']
           )
         }),
         ignoreBlank: true,
