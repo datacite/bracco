@@ -30,9 +30,6 @@ const organizationLabelList = {
 export function providerFormErrors([model]) {
   let errorAttributes = model.validations.errors.mapBy('attribute');
 
-  console.debug("SKV - provider-form-errors.js - listing the errors.");
-  console.debug("SKV - errorAttributes are: " + errorAttributes);
-
   // check validation errors for embedded data model fragments
   // but only if contacts exist
   if (model.get('contacts').length > 0) {

@@ -184,7 +184,6 @@ const Validations = buildValidations({
       ignoreBlank: true,
       message: 'A doi estimate is required.',
       disabled: computed('model', function () {
-        console.debug("skv - got here!");
         return (
           this.model.get('memberType') !== 'consortium_organization' ||
           !ENV.featureFlags['enable-doi-estimate']
@@ -196,7 +195,6 @@ const Validations = buildValidations({
       integer: true,
       positive: true,
       disabled: computed('model', function () {
-        console.debug("skv - got here 2!!!")
         return (
           this.model.get('memberType') !== 'consortium_organization' ||
           !ENV.featureFlags['enable-doi-estimate']
