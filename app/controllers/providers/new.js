@@ -196,6 +196,13 @@ export default Controller.extend({
   },
 
   actions: {
+    // Purpose is to force validation on this field.
+    toggleInput() {
+      let estimate = this.model.get('doiEstimateYearOne');
+
+      this.model.set('doiEstimateYearOne', '0');
+      this.model.set('doiEstimateYearOne', estimate);
+    },
     searchCountry(query) {
       let countries = countryList.filter(function (country) {
         return country.name.toLowerCase().startsWith(query.toLowerCase());
@@ -251,6 +258,7 @@ export default Controller.extend({
     selectMemberType(memberType) {
       this.model.set('memberType', memberType);
       this.set('memberTypes', memberTypeList);
+      this.send('toggleInput');
     },
     searchFocusArea(query) {
       let focusAreas = focusAreaList.filter(function (focusArea) {

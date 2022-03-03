@@ -12,7 +12,8 @@ const providerLabelList = {
   votingContact: 'voting representative',
   serviceContact: 'service contact',
   billingContact: 'billing contact',
-  'billingInformation.state': 'billing state/province information'
+  'billingInformation.state': 'billing state/province information',
+  doiEstimateYearOne: 'doi estimate'
 };
 const organizationLabelList = {
   symbol: 'member ID',
@@ -28,6 +29,9 @@ const organizationLabelList = {
 
 export function providerFormErrors([model]) {
   let errorAttributes = model.validations.errors.mapBy('attribute');
+
+  console.debug("SKV - provider-form-errors.js - listing the errors.");
+  console.debug("SKV - errorAttributes are: " + errorAttributes);
 
   // check validation errors for embedded data model fragments
   // but only if contacts exist
