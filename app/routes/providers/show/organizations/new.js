@@ -19,7 +19,7 @@ export default Route.extend({
       billingContact: null,
       secondaryBillingContact: null,
       isActive: true,
-      //doiEstimateYearOne: 0
+      //doiEstimate: 0
     });
 
     return hash({

@@ -177,7 +177,7 @@ const Validations = buildValidations({
     })
   ],
   'billingInformation.state': [validator('billing-state')],
-  doiEstimateYearOne:
+  doiEstimate:
   [
     validator('presence', {
       presence: true,
@@ -254,7 +254,7 @@ export default Model.extend(Validations, {
   joined: attr('date'),
   created: attr('date'),
   updated: attr('date'),
-  doiEstimateYearOne: attr('number'),
+  doiEstimate: attr('number'),
 
   uid: computed('id', function () {
     return this.id.toUpperCase();

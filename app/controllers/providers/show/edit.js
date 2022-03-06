@@ -196,10 +196,10 @@ export default Controller.extend({
 
   actions: {
     toggleInput() {
-      let estimate = this.model.get('doiEstimateYearOne');
+      let estimate = this.model.get('doiEstimate');
 
-      this.model.set('doiEstimateYearOne', '0');
-      this.model.set('doiEstimateYearOne', estimate);
+      this.model.set('doiEstimate', '0');
+      this.model.set('doiEstimate', estimate);
     },
     searchCountry(query) {
       let countries = countryList.filter(function (country) {
