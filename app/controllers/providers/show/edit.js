@@ -4,6 +4,7 @@ import { computed } from '@ember/object';
 import { w } from '@ember/string';
 import countryList from 'iso-3166-country-list';
 import FileReader from 'ember-file-upload/system/file-reader';
+import ENV from 'bracco/config/environment';
 
 // states and provinces use iso-3166-2 codes
 const stateList = [
@@ -196,10 +197,12 @@ export default Controller.extend({
 
   actions: {
     toggleInput() {
-      let estimate = this.model.get('doiEstimate');
+      if (ENV.featureFlags['enable-doi-estimate']) {
+        let estimate = this.model.get('doiEstimate');
 
-      this.model.set('doiEstimate', '0');
-      this.model.set('doiEstimate', estimate);
+        this.model.set('doiEstimate', '0');
+        this.model.set('doiEstimate', estimate);
+      }
     },
     searchCountry(query) {
       let countries = countryList.filter(function (country) {
