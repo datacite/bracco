@@ -199,12 +199,10 @@ export default Controller.extend({
   actions: {
     // Purpose is to force validation on this field.
     toggleInput() {
-      if (ENV.featureFlags['enable-doi-estimate']) {
-        let estimate = this.model.get('doiEstimate');
+      let estimate = this.model.get('doiEstimate');
 
-        this.model.set('doiEstimate', '0');
-        this.model.set('doiEstimate', estimate);      //if (this.get('features').isEnabled('doiEstimate')) {
-      }
+      this.model.set('doiEstimate', '0');
+      this.model.set('doiEstimate', estimate);      //if (this.get('features').isEnabled('doiEstimate')) {
     },
     searchCountry(query) {
       let countries = countryList.filter(function (country) {
@@ -261,7 +259,9 @@ export default Controller.extend({
     selectMemberType(memberType) {
       this.model.set('memberType', memberType);
       this.set('memberTypes', memberTypeList);
-      this.send('toggleInput');
+      if (this.get('features').isEnabled('enable-doi-estimate')) {
+        this.send('toggleInput');
+      }
     },
     searchFocusArea(query) {
       let focusAreas = focusAreaList.filter(function (focusArea) {

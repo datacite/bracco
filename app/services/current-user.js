@@ -88,10 +88,7 @@ export default Service.extend({
         this.set('home', { route: 'providers' });
         this.set('settings', { route: 'index' });
         this.set('roleName', 'Staff');
-
-        this.features.setup({
-          'show-researchers': true
-        });
+        this.get('features').enable('showResearchers');
       } else if (payload.role_id === 'staff_admin') {
         // other users with role_id staff_admin are developers
         this.set('isDeveloper', true);
