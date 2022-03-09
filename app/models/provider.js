@@ -7,6 +7,7 @@ import { w } from '@ember/string';
 import { validator, buildValidations } from 'ember-cp-validations';
 import { fragment } from 'ember-data-model-fragments/attributes';
 import addressFormatter from '@fragaria/address-formatter';
+import ENV from 'bracco/config/environment';
 
 const Validations = buildValidations({
   symbol: [
@@ -175,7 +176,32 @@ const Validations = buildValidations({
       })
     })
   ],
-  'billingInformation.state': [validator('billing-state')]
+  'billingInformation.state': [validator('billing-state')],
+  doiEstimate:
+  [
+    validator('presence', {
+      presence: true,
+      ignoreBlank: true,
+      message: 'A doi estimate is required.',
+      disabled: computed('model', function () {
+        return (
+          this.model.get('memberType') !== 'consortium_organization' ||
+          !ENV.featureFlags['enable-doi-estimate']
+        )
+      }).volatile(),
+    }),
+    validator('number', {
+      allowString: true,
+      integer: true,
+      positive: true,
+      disabled: computed('model', function () {
+        return (
+          this.model.get('memberType') !== 'consortium_organization' ||
+          !ENV.featureFlags['enable-doi-estimate']
+        )
+      }).volatile(),
+    })
+  ]
 });
 
 export default Model.extend(Validations, {
@@ -228,6 +254,7 @@ export default Model.extend(Validations, {
   joined: attr('date'),
   created: attr('date'),
   updated: attr('date'),
+  doiEstimate: attr('number'),
 
   uid: computed('id', function () {
     return this.id.toUpperCase();

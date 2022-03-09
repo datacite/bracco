@@ -47,6 +47,17 @@
         @required={{false}}
         @helpText="Name of your organization as you would like it to appear in Fabrica and on DataCite’s website."
       />
+      {{#if features.enableDoiEstimate}}
+        <form.element
+          @controlType="text"
+          @id="doi-estimate"
+          @label="Estimated DOIs"
+          @placeholder = "0"
+          @property="doiEstimate"
+          @required={{true}}
+          @helpText={{html-safe "Enter a best estimate of the number of DOIs the consortium organization plans to register in the first year, excluding backlogs.  Please refer to our <a href='https://support.datacite.org' target='_blank'>support documentation</a> for more information."}}
+        />
+      {{/if}}
       <form.element
         @controlType="power-select"
         @id="ror-id"
@@ -219,14 +230,14 @@
       </h3>
       <div class="col-md-9 col-md-offset-3">
         <BsAlert @dismissible={{false}} @type="danger">
-          Please add at least one contact via the consortium organization contacts menu after creating 
+          Please add at least one contact via the consortium organization contacts menu after creating
           this consortium organization.
         </BsAlert>
         <BsAlert @dismissible={{false}} @type="warning">
-          The contacts entered may receive notifications about administration, webinars, product testing, 
-            or news that will impact the use of DataCite services and/or membership. Individuals may remove 
-            themselves from mailings by following the unsubscribe link provided in every DataCite email. 
-            For information about our privacy practices and commitment to protecting your privacy, please 
+          The contacts entered may receive notifications about administration, webinars, product testing,
+            or news that will impact the use of DataCite services and/or membership. Individuals may remove
+            themselves from mailings by following the unsubscribe link provided in every DataCite email.
+            For information about our privacy practices and commitment to protecting your privacy, please
             review our
           <a
             target="_blank"

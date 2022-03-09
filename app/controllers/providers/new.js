@@ -3,6 +3,7 @@ import { inject as service } from '@ember/service';
 import { computed } from '@ember/object';
 import { w } from '@ember/string';
 import countryList from 'iso-3166-country-list';
+import ENV from 'bracco/config/environment';
 
 // states and provinces use iso-3166-2 codes
 // TODO add Brazil, India, Ireland, Italy, Mexico, all supported in Salesforce
@@ -196,6 +197,13 @@ export default Controller.extend({
   },
 
   actions: {
+    // Purpose is to force validation on this field.
+    toggleInput() {
+      let estimate = this.model.get('doiEstimate');
+
+      this.model.set('doiEstimate', '0');
+      this.model.set('doiEstimate', estimate);      //if (this.get('features').isEnabled('doiEstimate')) {
+    },
     searchCountry(query) {
       let countries = countryList.filter(function (country) {
         return country.name.toLowerCase().startsWith(query.toLowerCase());
@@ -251,6 +259,9 @@ export default Controller.extend({
     selectMemberType(memberType) {
       this.model.set('memberType', memberType);
       this.set('memberTypes', memberTypeList);
+      if (this.get('features').isEnabled('enable-doi-estimate')) {
+        this.send('toggleInput');
+      }
     },
     searchFocusArea(query) {
       let focusAreas = focusAreaList.filter(function (focusArea) {

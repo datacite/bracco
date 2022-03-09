@@ -7,6 +7,7 @@ import ENV from 'bracco/config/environment';
 export default Component.extend({
   session: service(),
   currentUser: service(),
+  features: service(),
 
   default: false,
   type: 'transparent',
@@ -16,6 +17,12 @@ export default Component.extend({
 
   init(...args) {
     this._super(...args);
+
+    if (ENV.featureFlags['enable-doi-estimate']) {
+      this.get('features').enable('enableDoiEstimate');
+    } else {
+      this.get('features').disable('enableDoiEstimate');
+    }
 
     this.data = this.data || {};
   },
