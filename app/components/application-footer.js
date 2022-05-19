@@ -1,6 +1,7 @@
 import { htmlSafe } from '@ember/template';
 import Component from '@ember/component';
 import ENV from 'bracco/config/environment';
+import { inject as service } from '@ember/service';
 
 const data = {
   about_links: [
@@ -125,9 +126,11 @@ const data = {
       url: ENV.CDN_URL + '/privacy.html',
     },
   ],
+  available: 0,
 };
 
 export default Component.extend({
+  prefixes: service(),
   data,
 
   didReceiveAttrs() {
@@ -137,5 +140,12 @@ export default Component.extend({
       this.set('type', null);
       this.set('title', htmlSafe(ENV.SITE_TITLE));
     }
+
+    let self = this;
+    this.prefixes.available().then(function(value) {
+      self.set('data.available', value);
+    }, function(reason) {
+      console.debug(reason);
+    });
   },
 });
