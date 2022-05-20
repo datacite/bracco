@@ -1,10 +1,17 @@
 {{#if (can "read index")}}
   <ApplicationHeader @default={{true}} />
-
   <div class="container-fluid">
     <IndexHeader />
+    <div class="row">
+      <div class="col-md-9" style="margin-left: 10px; margin-right: 10px;">
+        {{#each flashMessages.queue as |flash|}}
+          <FlashMessage @flash={{flash}} />
+        {{/each}}
+      </div>
+    </div>
     <RepositoryList @model={{model}} @link="repositories" @searchable={{true}} />
   </div>
+
 {{else}}
   <ApplicationHeader />
   <LandingPage />
