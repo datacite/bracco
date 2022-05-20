@@ -18,8 +18,9 @@ export default Service.extend({
               response.responseJSON = json;
               reject(response);
             } else {
-              // resolve(json);
-              resolve(json.meta.total)
+              // resolve(json.meta.total);
+              // For testing in development:
+               resolve(0);
             }
           } catch (SyntaxError) {
             response.responseText = text;

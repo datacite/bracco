@@ -2,6 +2,15 @@
   <ApplicationHeader @default={{true}} />
   <div class="container-fluid">
     <IndexHeader />
+    {{!-- {{#if (can "read messages" model)}} --}}
+    <div class="row">
+      <div class="col-md-9" style="margin-left: 10px; margin-right: 10px;">
+        {{#each flashMessages.queue as |flash|}}
+          <FlashMessage @flash={{flash}} />
+        {{/each}}
+      </div>
+    </div>
+    {{!-- {{/if}} --}}
     <div class="col-md-3">
       {{#if model.contacts.meta.roles}}
         <div class="panel facets add">
