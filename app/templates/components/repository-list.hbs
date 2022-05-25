@@ -8,6 +8,17 @@
         (eq hasRequiredContacts true)
       )
     }}
+      {{#if
+        (eq (await this.prefixes.n) 0)
+      }}
+        <div class="panel panel-transparent">
+          <div class="panel-body" cy-data="alert">
+              <BsAlert @dismissible={{false}} @type="warning">
+                Contact Support to get more prefixes for new repositories.
+              </BsAlert>
+          </div>
+        </div>
+      {{/if}}
       <div class="panel facets">
         <div class="panel-body">
           <div class="btn-toolbar">
@@ -17,6 +28,7 @@
                 @model={{model.provider.id}}
                 class="btn btn-warning"
                 @id="add-repository"
+                @disabled={{if (eq (await this.prefixes.n) 0) "true" ""}}
               >
                 <i class="fas fa-plus"></i>
                 Add Repository
@@ -44,7 +56,7 @@
             </BsAlert>
           {{else if (not-eq hasRequiredContacts true)}}
             <BsAlert @dismissible={{false}} @type="warning">
-              New repositories can't be created because you have not provided the 
+              New repositories can't be created because you have not provided the
               required
               {{if
                 (eq model.provider.memberType 'consortium_organization')

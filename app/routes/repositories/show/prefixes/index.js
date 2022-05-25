@@ -5,6 +5,7 @@ import { inject as service } from '@ember/service';
 
 export default Route.extend({
   can: service(),
+  prefixes: service(),
 
   model(params) {
     let repositoryId = this.modelFor('repositories/show').get('id');

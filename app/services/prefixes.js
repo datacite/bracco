@@ -26,11 +26,11 @@ export default Service.extend({
               response.responseJSON = json;
               reject(response);
             } else {
-              resolve(json.meta.total);
+              // resolve(json.meta.total);
               // For testing in development:
-              // resolve(0);
+              resolve(0);
               // resolve(30);
-              // resolve(50); 
+              // resolve(50);
             }
           } catch (SyntaxError) {
             response.responseText = text;
@@ -52,5 +52,4 @@ export default Service.extend({
     let n = await this.available();
     return n;
   }
-
 })

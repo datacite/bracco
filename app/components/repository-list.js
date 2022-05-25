@@ -4,6 +4,7 @@ import { inject as service } from '@ember/service';
 export default Component.extend({
   currentUser: service(),
   store: service(),
+  prefixes: service(),
 
   hasRequiredContacts: false,
 
