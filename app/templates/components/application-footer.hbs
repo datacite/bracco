@@ -9,12 +9,22 @@
       <ListLinks @links={{data.services_links}} />
     </div>
     <div class='col-md-3 col-sm-4 footer-column'>
+      <h4>AVAILABLE PREFIXES</h4>
+      <div>available prefixes  => {{ await this.prefixes.n }}</div>
+      <div>available prefixes => {{if (lt (await this.prefixes.n) this.prefixes.min) "less than" "NOT less than"}}</div>
+      <div>available prefixes  => {{#if (lt (await this.prefixes.n) this.prefixes.min)}}
+         less than
+      {{else}}
+        "NOT less than"
+      {{/if}}
+      </div>
+      <div>THE LAST TEST!!!! (1)</div>
+      <div>available prefixes   => {{ await this.prefixes.n }}</div>
+      <div>THE LAST TEST!!!! (2)</div>
       <h4>Resources</h4>
       <ListLinks @links={{data.resources_links}} />
       <h4>Community</h4>
       <ListLinks @links={{data.community_links}} />
-      <h4>AVAILABLE PREFIXES</h4>
-      <div>{{data.available}}</div>
     </div>
     <div class='col-md-3 footer-column'>
       <h4 class="share">Contact us</h4>

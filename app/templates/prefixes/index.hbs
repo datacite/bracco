@@ -21,6 +21,7 @@
                   @route="prefixes.new"
                   class="btn btn-warning"
                   @id="add-prefixes"
+                  @disabled={{if (eq (await this.prefixes.n) 0) "true" ""}}
                 >
                   <i class="fas fa-link"></i>
                   Add Prefixes

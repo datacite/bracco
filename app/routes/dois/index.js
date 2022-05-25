@@ -35,7 +35,7 @@ export default Route.extend({
       let self = this;
       this.prefixes.available().then(function(value) {
         if (value <= 0) {
-          self.get('flashMessages').danger("There are 0 prefixes available. Request new prefixes to CNRI.");
+          self.get('flashMessages').danger(self.prefixes.msg_zero);
         }
       }, function(reason) {
         console.debug(reason);

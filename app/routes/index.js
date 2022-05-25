@@ -30,13 +30,18 @@ export default Route.extend({
       let self = this;
       this.prefixes.available().then(function(value) {
         if (value <= 0) {
-          self.get('flashMessages').danger("There are 0 prefixes available. Request new prefixes to CNRI.");
-        } else if (value < 50) {
-          self.get('flashMessages').warning("There are fewer than 50 prefixes available. Contact CNRI and request more prefixes.");
+          self.get('flashMessages').danger(self.prefixes.msg_zero);
+        }
+
+        if (value <= 0) {
+          self.get('flashMessages').danger(self.prefixes.msg_zero);
+        } else if (value < self.prefixes.min) {
+          self.get('flashMessages').warning(self.prefixes.msg_min);
         }
       }, function(reason) {
         console.debug(reason);
       });
+
     } else if (
       w('provider_admin consortium_admin client_admin user').includes(
         this.get('currentUser.role_id')
