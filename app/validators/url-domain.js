@@ -20,7 +20,7 @@ const UrlDomain = BaseValidator.extend({
         let uri = new URI(value);
         let domainList = A(repository.domains.split(','));
         let matchedDomain = domainList.any(d => {
-          // strip asterix for subdomain
+          // strip asterisk for subdomain
           if (d.startsWith('*.')) {
             d = d.substr(1);
             return uri.hostname().endsWith(d);
