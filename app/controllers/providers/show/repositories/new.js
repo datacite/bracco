@@ -4,6 +4,7 @@ import { isBlank } from '@ember/utils';
 import { capitalize } from '@ember/string';
 import langs from 'langs';
 import { A } from '@ember/array';
+import prefix from 'bracco/abilities/prefix';
 
 const clientTypeList = ['repository', 'periodical'];
 const softwareList = [
@@ -34,6 +35,55 @@ export default Controller.extend({
     this._super(...args);
 
     this.repositories = this.repositories || [];
+  },
+
+  // Looks for a prefix to assign to a new repository.
+  // First checks provider prefixes for an unassigned prefix.
+  // Then, if necessary, checks the general prefix pool.
+  findPrefix() {
+    let self = this;
+
+    this.store
+      // Get provider prefix, if any.
+      .query('provider-prefix', {
+        'provider-id': this.model.repository.get('provider.id'),
+        state: 'without-repository',
+        sort: 'name',
+        'page[size]': 1
+      })
+      .then(function (providerPrefixes) {
+        if (providerPrefixes.length > 0) {
+          let providerPrefix = A(providerPrefixes).get('firstObject');
+          self.model['repository-prefix'].set('provider-prefix', providerPrefix);
+          self.model['repository-prefix'].set('prefix', providerPrefix.get('prefix'));
+        } else {
+          // Get pool prefix.
+          let provider = self.model.provider
+          self.store
+            .query('prefix', {
+              'state': 'unassigned',
+              sort: 'name',
+              'page[size]': 1
+            })
+            .then(function (prefixes) {
+              if (prefixes.length > 0) {
+                let prefix = A(prefixes).get('firstObject');
+                // Create a providerPrefix record.
+                let providerPrefix = self.model['provider-prefix'] = self.store.createRecord('providerPrefix', {
+                  provider, prefix
+                });
+                self.model['repository-prefix'].set('provider-prefix', providerPrefix);
+                self.model['repository-prefix'].set('prefix', prefix);
+              }
+            })
+            .catch(function (reason) {
+              console.debug(reason);
+            });
+        }
+      })
+      .catch(function (reason) {
+        console.debug(reason);
+      });
   },
 
   actions: {
@@ -134,6 +184,7 @@ export default Controller.extend({
     addRepositoryType() {
       this.model.repository.get('repositoryType').pushObject(null);
     },
+
     submit(repository) {
       let self = this;
 
@@ -164,10 +215,29 @@ export default Controller.extend({
         })
       );
 
+      this.findPrefix();
+
+      // Save repository and, if necessary, provider-prefix and repository-prefix.
       repository
         .save()
         .then(function (repository) {
-          self.transitionToRoute('repositories.show', repository.id);
+          if (self.model['provider-prefix']) {
+            return self.model['provider-prefix'].save();
+          } else {
+            return null;
+          }
+        })
+        .then(function (value) {
+          if (self.model['repository-prefix']) {
+            return self.model['repository-prefix'].save();
+          } else {
+            return null;
+          }
+        }).then(function (value) {
+          // We need a timeout because of ElasticSearch indexing
+          setTimeout(() => {
+            self.transitionToRoute('repositories.show', self.model.repository.id, { queryParams: { assignedPrefix: self.model['repository-prefix'].prefix.get('id') } });
+          }, 1200);
         })
         .catch(function (reason) {
           console.debug(reason);

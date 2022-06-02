@@ -4,6 +4,7 @@ import { inject as service } from '@ember/service';
 
 export default Route.extend({
   can: service(),
+  store: service(),
 
   model() {
     let provider = this.modelFor('providers/show');
@@ -15,7 +16,7 @@ export default Route.extend({
       repositoryType: [],
       certificate: [],
       issn: this.store.createFragment('issn')
-    });
+    })
 
     repository.get('language').pushObject('');
     repository.get('repositoryType').pushObject('');
@@ -23,7 +24,11 @@ export default Route.extend({
 
     return hash({
       provider,
-      repository
+      repository,
+      'provider-prefix': null,
+      'repository-prefix': this.store.createRecord('repositoryPrefix', {
+        repository
+      })
     });
   }
 });

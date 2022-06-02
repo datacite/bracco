@@ -9,6 +9,11 @@ export default Route.extend({
 
   model(params) {
     let self = this;
+
+    if (params.assignedPrefix) {
+      self.get('flashMessages').success('Assigned prefix is: ' + params.assignedPrefix);
+    }
+
     return this.store
       .findRecord('repository', params.repository_id, { include: 'provider' })
       .then(function (repository) {
