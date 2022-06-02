@@ -2,9 +2,17 @@
 /* eslint-disable no-undef */
 
 describe('Admin: Prefix', () => {
-  beforeEach(() => {
+  const waitTime = 1000;
+  const waitTime2 = 2000;
+
+  before(function () {
+    cy.login(Cypress.env('staff_admin_username'), Cypress.env('staff_admin_password'));
     cy.setCookie('_consent', 'true');
-    cy.setCookie('_fabrica', Cypress.env('staff_admin_cookie'), { log: false });
+  })
+
+  beforeEach(() => {
+    Cypress.Cookies.preserveOnce('_fabrica', '_jwt', '_consent');
+    cy.wait(waitTime2);
   });
 
   it('search prefixes', () => {
@@ -22,7 +30,8 @@ describe('Admin: Prefix', () => {
     cy.get('div#search').should('exist');
     cy.get('div.panel.facets').should('exist');
 
-    cy.get('a#add-prefixes').contains('Add Prefixes');
+    // THIS BUTTON WAS REMOVED:
+    // cy.get('a#add-prefixes').contains('Add Prefixes');
   });
 
   it('filter prefixes', () => {

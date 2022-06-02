@@ -41,7 +41,7 @@ describe('ACCEPTANCE: CLIENT_ADMIN | PREFIXES', () => {
         .and('have.attr', 'href').and('include', '/repositories/datacite.test/dois');
 
       // Has left sidebar message box.
-      cy.get('div.alert').contains(/Please ask DataCite Staff if you want to add a prefix./i);
+      // cy.get('div.alert').contains(/Please ask DataCite Staff if you want to add a prefix./i);
 
       // Has left sidebar facets.
       cy.get('.facets h4').contains(/Year\s*created/i);
