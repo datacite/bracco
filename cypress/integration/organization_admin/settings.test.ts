@@ -19,7 +19,7 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | SETTINGS', () => {
     Cypress.Cookies.preserveOnce('_fabrica', '_jwt', '_consent');
     cy.wait(waitTime2);
   });
-  
+
   it('is logged in to homepage', () => {
     cy.visit('/providers/datacite');
     cy.url().should('include', '/providers/datacite').then (() => {
@@ -93,7 +93,6 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | SETTINGS', () => {
         cy.get('h5').contains(/Secondary\s*Technical\s*Contact/i);
         // cy.get('[cy-data="secondary-technical"] a').contains(/John\s*Doe/i).and('have.attr', 'href').and('include', 'mailto:John.Doe7426@example.org');
         cy.get('[cy-data="secondary-technical"] a').contains(/John\s*Doe/i).and('have.attr', 'href').and('contain', 'mailto:John.Doe');
-      });
     });
   });
 
