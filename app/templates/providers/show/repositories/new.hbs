@@ -111,10 +111,9 @@
         </div>
       {{/if}}
 
-      {{!--  {{#if (feature-flag 'showAnalytics')}} --}}
-      {{#if (show-analytics)}}
+      {{!-- {{#if (show-analytics)}} --}}
         <form.element @controlType="text" @id="analytics-dashboard-url" @label="Analytics Dashboard URL" @property="analyticsDashboardUrl" @helpText="The Analytics Dashboard URL is the shared link generated within the analytics app settings for this repository.  It should only be set if analytics has been turned on for a repository." />
-      {{/if}}
+      {{!-- {{/if}} --}}
 
       <form.element @controlType="checkbox" @id="is-active" @label="Account is active" @property="isActive" @helpText="This account can register and update DOIs" />
 

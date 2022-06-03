@@ -85,8 +85,7 @@
               Info
             </nav.link-to>
           </nav.item>
-          {{!-- {{#if (feature-flag 'showAnalytics')}} --}}
-          {{#if (show-analytics)}}
+          {{!-- {{#if (show-analytics)}} --}}
           <nav.item>
             <nav.link-to
               @route="repositories.show.analytics"
@@ -96,7 +95,7 @@
               Usage Dashboard
             </nav.link-to>
           </nav.item>
-          {{/if}}
+          {{!-- {{/if}} --}}
           <nav.item>
             <nav.link-to
               @route="repositories.show.index"
