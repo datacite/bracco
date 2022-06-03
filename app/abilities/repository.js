@@ -143,5 +143,13 @@ export default Ability.extend({
       default:
         return false;
     }
+  }),
+  canSetAnalyticsUrl: computed('currentUser.role_id', function () {
+    switch (this.get('currentUser.role_id')) {
+      case 'staff_admin':
+        return true;
+      default:
+        return false;
+    }
   })
 });
