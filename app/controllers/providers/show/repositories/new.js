@@ -234,10 +234,7 @@ export default Controller.extend({
             return null;
           }
         }).then(function (value) {
-          // We need a timeout because of ElasticSearch indexing
-          setTimeout(() => {
-            self.transitionToRoute('repositories.show', self.model.repository.id, { queryParams: { assignedPrefix: self.model['repository-prefix'].prefix.get('id') } });
-          }, 1200);
+          self.transitionToRoute('repositories.show', self.model.repository.id, { queryParams: { assignedPrefix: self.model['repository-prefix'].prefix.get('id') } });
         })
         .catch(function (reason) {
           console.debug(reason);

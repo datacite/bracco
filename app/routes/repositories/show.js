@@ -10,10 +10,6 @@ export default Route.extend({
   model(params) {
     let self = this;
 
-    if (params.assignedPrefix) {
-      self.get('flashMessages').success('Assigned prefix is: ' + params.assignedPrefix);
-    }
-
     return this.store
       .findRecord('repository', params.repository_id, { include: 'provider' })
       .then(function (repository) {
@@ -34,8 +30,13 @@ export default Route.extend({
   afterModel(model) {
     if (this.can.cannot('read repository', model)) {
       this.transitionTo('index');
+    } else {
+      if (this.paramsFor(this.routeName).assignedPrefix) {
+        this.get('flashMessages').success('Assigned prefix is: ' + this.paramsFor(this.routeName).assignedPrefix);
+      }
     }
   },
+
 
   actions: {
     queryParamsDidChange() {
