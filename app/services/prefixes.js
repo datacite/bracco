@@ -1,5 +1,6 @@
 import Service from '@ember/service';
 import ENV from 'bracco/config/environment';
+import environment from 'config/environment';
 import fetch from 'fetch';
 
 export default Service.extend({
@@ -8,7 +9,7 @@ export default Service.extend({
     this._super(...arguments);
     this.n = this.available();
     this.min = 50;
-    this.msg_zero = "There are 0 prefixes available. Request new prefixes to CNRI.";
+    this.msg_zero = "There are 0 prefixes available. Request new prefixes from CNRI.";
     this.msg_min = "There are fewer than 50 prefixes available. Contact CNRI and request more prefixes.";
   },
 
@@ -26,11 +27,13 @@ export default Service.extend({
               response.responseJSON = json;
               reject(response);
             } else {
-              resolve(json.meta.total);
-              // For testing in development:
-              // resolve(0);
-              // resolve(30);
-              // resolve(50);
+              // ENV.PREFIXES_AVAILABLE only for development/staging/testing.
+              let total = json.meta.total;
+              if (ENV.PREFIXES_AVAILABLE !== null) {
+                total = ENV.PREFIXES_AVAILABLE;
+              }
+              console.log("Prefixes available = " + total);
+              resolve(total);
             }
           } catch (SyntaxError) {
             response.responseText = text;

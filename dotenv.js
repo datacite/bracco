@@ -25,7 +25,8 @@ module.exports = function () {
       'CONSORTIUM_ADMIN_USERNAME',
       'ORGANIZATION_ADMIN_USERNAME',
       'CLIENT_ADMIN_USERNAME',
-      'ENABLE_DOI_ESTIMATE'
+      'ENABLE_DOI_ESTIMATE',
+      'PREFIXES_AVAILABLE'
     ],
     fastbootAllowedKeys: [
       'SITE_TITLE',
@@ -52,7 +53,8 @@ module.exports = function () {
       'CONSORTIUM_ADMIN_USERNAME',
       'ORGANIZATION_ADMIN_USERNAME',
       'CLIENT_ADMIN_USERNAME',
-      'ENABLE_DOI_ESTIMATE'
+      'ENABLE_DOI_ESTIMATE',
+      'PREFIXES_AVAILABLE'
     ],
     failOnMissingKey: false
   };
