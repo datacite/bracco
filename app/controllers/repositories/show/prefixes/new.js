@@ -74,10 +74,6 @@ export default Controller.extend({
       this.searchPrefix(query);
     },
     selectPrefix(providerPrefix) {
-      if ((typeof providerPrefix.get('createdAt')) == 'undefined') {
-        providerPrefix.set('provider', this.model.repository.provider);
-        providerPrefix.save();
-      }
       this.model['repository-prefix'].set('provider-prefix', providerPrefix);
       this.model['repository-prefix'].set(
         'prefix',
@@ -88,20 +84,45 @@ export default Controller.extend({
     submit() {
       if (this.model['repository-prefix'].get('provider-prefix')) {
         let self = this;
-        this.model['repository-prefix']
-          .save()
-          .then(function (repositoryPrefix) {
-            self.set('disabled', true);
-            // We need a timeout because of ElasticSearch indexing
-            setTimeout(() => {
-              self.transitionToRoute(
-                'repositories.show.prefixes',
-                repositoryPrefix.get('repository.id')
-              );
-            }, 1200);
-          })
-          .catch(function (reason) {
-            console.debug(reason);
+
+        this.model['repository-prefix'].get('provider-prefix')
+          .then ( m => { 
+            if (typeof m.get('createdAt') == 'undefined') {
+              m.save()
+              .then(function(value) {
+                self.model['repository-prefix']
+                .save()
+                .then(function (repositoryPrefix) {
+                  self.set('disabled', true);
+                  // We need a timeout because of ElasticSearch indexing
+                  setTimeout(() => {
+                    self.transitionToRoute(
+                      'repositories.show.prefixes',
+                      repositoryPrefix.get('repository.id')
+                    );
+                  }, 1200);
+                })
+                .catch(function (reason) {
+                  console.debug(reason);
+                });
+              })
+            } else {
+              self.model['repository-prefix']
+              .save()
+              .then(function (repositoryPrefix) {
+                self.set('disabled', true);
+                // We need a timeout because of ElasticSearch indexing
+                setTimeout(() => {
+                  self.transitionToRoute(
+                    'repositories.show.prefixes',
+                    repositoryPrefix.get('repository.id')
+                  );
+                }, 1200);
+              })
+              .catch(function (reason) {
+                console.debug(reason);
+              });
+            }
           });
       } else {
         this.transitionToRoute(
