@@ -1,10 +1,4 @@
 <div class="content">
-  <div class="row">
-    <BarChart @data={{json.providers}} @label="Member" @link="providers" />
-    <BarChart @data={{json.clients}} @label="Repository" @link="repositories" />
-    <BarChart @data={{json.dois}} @label="DOI" @link="dois" @cumulative={{false}} />
-  </div>
-
   {{#if (can "read messages" model)}}
     <div class="row">
       <div class="col-md-9">
@@ -14,4 +8,9 @@
       </div>
     </div>
   {{/if}}
+  <div class="row">
+    <BarChart @data={{json.providers}} @label="Member" @link="providers" />
+    <BarChart @data={{json.clients}} @label="Repository" @link="repositories" />
+    <BarChart @data={{json.dois}} @label="DOI" @link="dois" @cumulative={{false}} />
+  </div>
 </div>
