@@ -1,5 +1,7 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
+import { A } from '@ember/array';
+import prefix from 'bracco/abilities/prefix';
 
 export default Controller.extend({
   store: service(),
@@ -22,7 +24,44 @@ export default Controller.extend({
         'page[size]': 10
       })
       .then(function (providerPrefixes) {
-        self.set('provider-prefixes', providerPrefixes);
+        if (providerPrefixes.length >= 10) {
+          self.set('provider-prefixes', providerPrefixes);
+        } else {
+          let n = 10 - providerPrefixes.length;
+          // Get pool prefixes.
+          let provider = self.model.repository.provider;
+          self.store
+            .query('prefix', {
+              'state': 'unassigned',
+              sort: 'name',
+              'page[size]': n
+            })
+            .then(function (prefixes) {
+              let input = [];
+              if (providerPrefixes.length > 0) {
+                providerPrefixes.forEach(function(providerPrefix) {
+                  input.push(providerPrefix);
+                })
+              }
+              if (prefixes.length > 0) {
+                providerPrefixes = input;
+                prefixes.forEach(
+                  function(prefix) {
+                    let providerPrefix;
+                    providerPrefix = self.store.createRecord('providerPrefix', {
+                      provider, prefix
+                    });
+                    providerPrefixes.push(providerPrefix);
+                  }
+                )
+                self.set('provider-prefixes', providerPrefixes);
+              }
+            })
+            .catch(function (reason) {
+              console.debug(reason);
+              self.set('provider-prefixes', []);
+            });
+        }
       })
       .catch(function (reason) {
         console.debug(reason);
@@ -35,6 +74,8 @@ export default Controller.extend({
       this.searchPrefix(query);
     },
     selectPrefix(providerPrefix) {
+      providerPrefix.set('provider', this.model.repository.provider);
+      providerPrefix.save();
       this.model['repository-prefix'].set('provider-prefix', providerPrefix);
       this.model['repository-prefix'].set(
         'prefix',
