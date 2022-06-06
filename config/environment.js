@@ -19,7 +19,7 @@ module.exports = function (environment) {
       },
       EXTEND_PROTOTYPES: false
     },
-    '@sentry/ember':
+    '@sentry/ember': {
       sentry: {
         dsn:
           process.env.SENTRY_DSN ||
