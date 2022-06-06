@@ -74,8 +74,10 @@ export default Controller.extend({
       this.searchPrefix(query);
     },
     selectPrefix(providerPrefix) {
-      providerPrefix.set('provider', this.model.repository.provider);
-      providerPrefix.save();
+      if ((typeof providerPrefix.get('createdAt')) == 'undefined') {
+        providerPrefix.set('provider', this.model.repository.provider);
+        providerPrefix.save();
+      }
       this.model['repository-prefix'].set('provider-prefix', providerPrefix);
       this.model['repository-prefix'].set(
         'prefix',
