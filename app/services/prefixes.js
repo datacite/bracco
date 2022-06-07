@@ -29,11 +29,13 @@ export default Service.extend({
             } else {
               // ENV.PREFIXES_AVAILABLE only for development/staging/testing.
               let total = json.meta.total;
-              if (ENV.PREFIXES_AVAILABLE !== null) {
-                total = ENV.PREFIXES_AVAILABLE;
-              }
+              // let total = 0;
+              //if (ENV.PREFIXES_AVAILABLE !== null) {
+              //  total = ENV.PREFIXES_AVAILABLE;
+              //}
               console.log("Prefixes available = " + total);
               resolve(total);
+              // resolve(0);
             }
           } catch (SyntaxError) {
             response.responseText = text;
