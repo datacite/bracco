@@ -31,15 +31,7 @@
   <script src="{{rootURL}}assets/vendor.js"></script>
   <script src="{{rootURL}}assets/bracco.js"></script>
   <script type="text/javascript">
-    (function() {
-      var s = document.createElement("script");
-      s.type = "text/javascript";
-      s.async = true;
-      s.src = 'https://api.usersnap.com/load/6d0c32c3-844a-47f4-b3c6-3a4cb9e9af7c.js';
-      var x = document.getElementsByTagName('script')[0];
-      x.parentNode.insertBefore(s, x);
-    })();
-
+    (function(){window.onUsersnapCXLoad=function(e){e.init()};var e=document.createElement("script");e.defer=1,e.src="https://widget.usersnap.com/global/load/b4393e90-ec13-4338-b299-7b6f122b7de3?onload=onUsersnapCXLoad",document.getElementsByTagName("head")[0].appendChild(e)})();
   </script>
   <div id="consent"></div>
   <script src="https://datacite.org/javascripts/consent.js"></script>
