@@ -103,7 +103,7 @@ describe('ACCEPTANCE: CLIENT_ADMIN | SETTINGS', () => {
     })
   });
 
-  // TBD - Could do more testing here. Only cursory testing for
+ // TBD - Could do more testing here. Only cursory testing for
   // presence of field objects. No testing of form behavior yet.
   it('has repository settings page', () => {
     cy.visit('/repositories/datacite.test/edit');
@@ -136,14 +136,14 @@ describe('ACCEPTANCE: CLIENT_ADMIN | SETTINGS', () => {
           }
         );
         cy.get('button#update-repository').should('be.visible');
+        cy.get('button').contains(/Cancel/i).should('be.visible');
+
+        cy.get('button').contains(/Cancel/i).click({force:true});
       })
-    }).then(() => {
-      cy.get('button').contains(/Cancel/i).should('be.visible').click({force: true}).then(() => {
-        cy.wait(waitTime2);
-        cy.location().should((loc) => {
-          expect(loc.pathname).to.eq('/repositories/datacite.test');
-        });
-      });
+    });
+
+    cy.on("url:changed", (newUrl) => {
+      expect(newUrl).to.contain("/repositories/datacite.test");
     });
   });
 });
