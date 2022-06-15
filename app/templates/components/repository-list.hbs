@@ -9,7 +9,7 @@
       )
     }}
       {{#if
-        (eq (await this.prefixes.n) 0)
+        (eq (await (prefixes-available model.provider.id)) 0)
       }}
         <div class="panel panel-transparent">
           <div class="panel-body" cy-data="alert">
@@ -28,10 +28,10 @@
                 @model={{model.provider.id}}
                 class="btn btn-warning"
                 @id="add-repository"
-                @disabled={{if (eq (await this.prefixes.n) 0) "true" ""}}
+                @disabled={{if (eq (await (prefixes-available model.provider.id)) 0) "true" ""}}
               >
                 <i class="fas fa-plus"></i>
-                Add Repository
+                Add Repository - {{ await (prefixes-available model.provider.id) }} Prefixes
               </LinkTo>
             </div>
           </div>

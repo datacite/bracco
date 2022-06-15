@@ -9,7 +9,7 @@
               @model={{model.repository.id}}
               class="btn btn-warning"
               @id="assign-prefix"
-              @disabled={{if (eq (await this.prefixes.n) 0) "true" ""}}
+              @disabled={{if (eq (await (prefixes-available model.provider.id)) 0) "true" ""}}
             >
               <i class="fas fa-link"></i>
               Assign Prefix
