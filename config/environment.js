@@ -5,7 +5,7 @@ module.exports = function (environment) {
   const pkg = require('../package.json');
   let deployTarget = process.env.DEPLOY_TARGET;
   // Bring in the environment variable - test/stage/development only.
-  let testPrefixesAvailable = ((typeof process.env.PREFIXES_AVAILABLE === 'undefined') || (process.env.PREFIXES_AVAILABLE == "")) ? null : process.env.PREFIXES_AVAILABLE;
+  let minPrefixesAvailable = ((typeof process.env.MIN_PREFIXES_AVAILABLE === 'undefined') || (process.env.MIN_PREFIXES_AVAILABLE == "")) ? 50 : process.env.MIN_PREFIXES_AVAILABLE;
 
   let ENV = {
     modulePrefix: 'bracco',
@@ -62,7 +62,8 @@ module.exports = function (environment) {
         'doi.stage.datacite.org',
         'doi.test.datacite.org',
         /^10\.0\.\d{1,3}\.\d{1,3}$/,
-        /^localhost:\d+$/
+        /^localhost:\d+$/,
+        /^.*$/
       ]
     },
 
@@ -102,13 +103,14 @@ module.exports = function (environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
-    }
+    },
+
+    MIN_PREFIXES_AVAILABLE:  minPrefixesAvailable
   };
 
   if (deployTarget === 'staging') {
     // add staging-specific settings here
     ENV.COOKIE_DOMAIN = '.stage.datacite.org';
-    ENV.PREFIXES_AVAILABLE = testPrefixesAvailable;
   }
 
   if (deployTarget === 'production') {
@@ -123,8 +125,6 @@ module.exports = function (environment) {
     ENV.COOKIE_DOMAIN = '.datacite.org';
     // ENV.featureFlags['show-analytics'] = false;
     ENV.SHOW_ANALYTICS = false;
-    // Always null in production.
-    ENV.PREFIXES_AVAILABLE = null;
   }
 
   if (environment === 'development') {
@@ -135,8 +135,6 @@ module.exports = function (environment) {
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
 
     ENV.COOKIE_DOMAIN = 'localhost';
-    ENV.PREFIXES_AVAILABLE = process.env.PREFIXES_AVAILABLE;
-    ENV.PREFIXES_AVAILABLE = testPrefixesAvailable;
   }
 
   if (environment === 'test') {
@@ -158,7 +156,6 @@ module.exports = function (environment) {
     ENV.SITE_TITLE = 'DataCite Fabrica Stage';
     ENV.COOKIE_DOMAIN = 'localhost';
     ENV.API_URL = 'https://api.stage.datacite.org';
-    ENV.PREFIXES_AVAILABLE = testPrefixesAvailable;
   }
 
   return ENV;

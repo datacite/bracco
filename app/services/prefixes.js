@@ -7,9 +7,9 @@ export default Service.extend({
 
   init() {
     this._super(...arguments);
-    this.min = 50;
+    this.min = ENV.MIN_PREFIXES_AVAILABLE || 50;
     this.msg_zero = "There are 0 prefixes available. Request new prefixes from CNRI.";
-    this.msg_min = "There are fewer than 50 prefixes available. Contact CNRI and request more prefixes.";
+    this.msg_min = "There are fewer than " + this.min + " prefixes available. Contact CNRI and request more prefixes.";
   },
 
   get_n_available() {
