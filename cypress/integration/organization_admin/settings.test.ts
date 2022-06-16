@@ -19,7 +19,7 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | SETTINGS', () => {
     Cypress.Cookies.preserveOnce('_fabrica', '_jwt', '_consent');
     cy.wait(waitTime2);
   });
-
+  
   it('is logged in to homepage', () => {
     cy.visit('/providers/datacite');
     cy.url().should('include', '/providers/datacite').then (() => {
@@ -82,13 +82,17 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | SETTINGS', () => {
 
       cy.get('h5').contains(/Service\s*Contact/i).parent().parent('.panel').within((panel) => {
         cy.get('h5').contains(/Service\s*Contact/i);
-        cy.get('[cy-data="service"] a').contains(/John\s*Doe/i).and('have.attr', 'href').and('include', 'mailto:John.Doe7426@example.org');
+        // cy.get('[cy-data="service"] a').contains(/John\s*Doe/i).and('have.attr', 'href').and('include', 'mailto:John.Doe7426@example.org');
+        cy.get('[cy-data="service"] a').contains(/John\s*Doe/i).and('have.attr', 'href').and('contain', 'mailto:John.Doe');
         cy.get('h5').contains(/Secondary\s*Service\s*Contact/i);
-        cy.get('[cy-data="secondary-service"] a').contains(/John\s*Doe/i).and('have.attr', 'href').and('include', 'mailto:John.Doe7426@example.org');
+        //cy.get('[cy-data="secondary-service"] a').contains(/John\s*Doe/i).and('have.attr', 'href').and('include', 'mailto:John.Doe7426@example.org');
+        cy.get('[cy-data="secondary-service"] a').contains(/John\s*Doe/i).and('have.attr', 'href').and('contain', 'mailto:John.Doe');
         cy.get('h5').contains(/Technical\s*Contact/i);
-        cy.get('[cy-data="technical"] a').contains(/John\s*Doe/i).and('have.attr', 'href').and('include', 'mailto:John.Doe7426@example.org');
+        // cy.get('[cy-data="technical"] a').contains(/John\s*Doe/i).and('have.attr', 'href').and('include', 'mailto:John.Doe7426@example.org');
+        cy.get('[cy-data="technical"] a').contains(/John\s*Doe/i).and('have.attr', 'href').and('contain', 'mailto:John.Doe');
         cy.get('h5').contains(/Secondary\s*Technical\s*Contact/i);
-        cy.get('[cy-data="secondary-technical"] a').contains(/John\s*Doe/i).and('have.attr', 'href').and('include', 'mailto:John.Doe7426@example.org');
+        // cy.get('[cy-data="secondary-technical"] a').contains(/John\s*Doe/i).and('have.attr', 'href').and('include', 'mailto:John.Doe7426@example.org');
+        cy.get('[cy-data="secondary-technical"] a').contains(/John\s*Doe/i).and('have.attr', 'href').and('contain', 'mailto:John.Doe');
       });
     });
   });
@@ -141,14 +145,14 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | SETTINGS', () => {
         cy.get('input#password-input-field').should('be.visible');
         cy.get('input#confirm-password-input-field').should('be.visible');
         cy.get('button[type=submit]').should('be.visible');
+        cy.get('button').contains(/Cancel/i).should('be.visible')
+
+        cy.get('button').contains(/Cancel/i).click({force: true});
       });
-    }).then (() => {
-      cy.get('button').contains(/Cancel/i).should('be.visible').click({force: true}).then(() => {
-        cy.wait(waitTime2);
-        cy.location().should((loc) => {
-          expect(loc.pathname).to.eq('/providers/datacite');
-        });
-      });
+    })
+
+    cy.on("url:changed", (newUrl) => {
+      expect(newUrl).to.contain("/providers/datacite");
     });
   });
 
@@ -189,14 +193,15 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | SETTINGS', () => {
             cy.get('a[href*="privacy.html"]').should('be.visible');
           }
         );
-
         cy.get('button#update-provider').should('be.visible');
+        cy.get('button').contains(/Cancel/i).should('be.visible');
+
+        cy.get('button').contains(/Cancel/i).click({force: true});
       })
-    }).then(() => {
-      cy.get('button').contains(/Cancel/i).should('be.visible').click({force: true}).then(() => {
-        cy.wait(waitTime2);
-        cy.location('pathname').should('equal', '/providers/datacite');
-      });
+    });
+
+    cy.on("url:changed", (newUrl) => {
+      expect(newUrl).to.contain("/providers/datacite");
     });
   });
 });
