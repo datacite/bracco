@@ -78,6 +78,7 @@ export default Service.extend({
     let n = await this.get_n_available();
 
     return m+n;
+    // return 0;
   },
 
   // Returns total available: provider prefixes

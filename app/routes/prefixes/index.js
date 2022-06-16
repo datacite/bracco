@@ -31,6 +31,8 @@ export default Route.extend({
   afterModel() {
     if (this.can.cannot('read index')) {
       this.transitionTo('index');
+    }
+    /*
     } else if (this.get('currentUser.role_id') === 'staff_admin') {
       let self = this;
       this.prefixes.available().then(function(value) {
@@ -41,6 +43,7 @@ export default Route.extend({
         console.debug(reason);
       });
     }
+    */
   },
 
   queryParams: {

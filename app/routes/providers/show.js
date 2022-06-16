@@ -33,12 +33,14 @@ export default Route.extend({
     if (this.get('currentUser.role_id') === 'staff_admin') {
       let self = this;
       this.prefixes.available().then(function(value) {
-        if (value < self.prefixes.min) {
-            self.get('flashMessages').warning(self.prefixes.msg_min);
-          }
-        }, function(reason) {
-          console.debug(reason);
-        });
+        if (value <= 0) {
+          self.get('flashMessages').danger(self.prefixes.msg_zero);
+        } else if (value < self.prefixes.min) {
+          self.get('flashMessages').warning(self.prefixes.msg_min);
+        }
+      }, function(reason) {
+        console.debug(reason);
+      });
     }
   },
 
