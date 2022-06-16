@@ -1,4 +1,12 @@
 <div class="row">
+  <div class="col-md-9">
+    {{#each flashMessages.queue as |flash|}}
+      <FlashMessage @flash={{flash}} />
+    {{/each}}
+  </div>
+</div>
+
+<div class="row">
   <div class="col-md-3">
     {{#if (can 'update provider' model)}}
       <div class="panel facets">

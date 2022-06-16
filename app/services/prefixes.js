@@ -66,7 +66,9 @@ export default Service.extend({
     return promise;
   },
 
-  // Returns a promise.
+  //// These return a promise.
+
+  // Returns total available: pool prefixes + provider prefixes (0 if no provider_id given)
   async available(provider_id = null) {
     let m = 0;
     if (provider_id) {
@@ -76,8 +78,15 @@ export default Service.extend({
     let n = await this.get_n_available();
 
     return m+n;
+  },
 
-    // FOR DEV/TESTING ONLY:
-    // return 0;
+  // Returns total available: provider prefixes
+  async available_pp(provider_id = null) {
+    let m = 0;
+    if (provider_id) {
+      m = await this.get_n_available_pp(provider_id);
+    }
+
+    return m;
   }
 })
