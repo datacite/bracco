@@ -24,7 +24,7 @@
         </div>
       </div>
 
-      <DoiCreators @model={{model.doi}} @form={{form}} />
+      <DoiCreators @model={{model.doi}} @form={{form}}   />
       <DoiTitles @model={{model.doi}} @form={{form}} />
 
       <div class="form-group required-nested-label {{if (v-get model.doi 'publisher' 'isInvalid') 'has-error' 'has-feedback'}}">
