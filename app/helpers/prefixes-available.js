@@ -1,6 +1,5 @@
 import Helper from '@ember/component/helper';
 import { inject as service } from '@ember/service';
-import { resolve } from 'cypress/types/bluebird';
 
 export default Helper.extend({
   prefixes: service(),
