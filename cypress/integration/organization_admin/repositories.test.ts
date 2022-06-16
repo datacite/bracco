@@ -132,7 +132,8 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | REPOSITORIES', () => {
 
         cy.get('button#add-repository').should('be.visible');
       });
-    })
+    });
+    /*
     .then(() => {
       cy.get('button').contains(/Cancel/i).should('be.visible').click({force: true}).then(() => {
         cy.wait(waitTime);
@@ -141,5 +142,6 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | REPOSITORIES', () => {
         });
       });
     });
+    */
   });
 });
