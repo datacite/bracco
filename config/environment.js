@@ -14,7 +14,7 @@ module.exports = function (environment) {
     locationType: process.env.EMBER_CLI_ELECTRON ? 'hash' : 'auto',
     EmberENV: {
       FEATURES: {
-        // Here you can enable experimental features on an ember canary build ()
+        // Here you can enable experimental features on an ember canary build
         // e.g. EMBER_NATIVE_DECORATOR_SUPPORT: true
       },
       EXTEND_PROTOTYPES: false
@@ -53,7 +53,6 @@ module.exports = function (environment) {
     },
     featureFlags: {
       'show-researchers': false,
-      // 'show-analytics': (process.env.SHOW_ANALYTICS && !(process.env.SHOW_ANALYTICS == "0" || process.env.SHOW_ANALYTICS == "false")) || false
       'enable-doi-estimate': (process.env.ENABLE_DOI_ESTIMATE === '1' ? true : false)
     },
     fastboot: {
@@ -62,8 +61,7 @@ module.exports = function (environment) {
         'doi.stage.datacite.org',
         'doi.test.datacite.org',
         /^10\.0\.\d{1,3}\.\d{1,3}$/,
-        /^localhost:\d+$/,
-        /^.*$/
+        /^localhost:\d+$/
       ]
     },
 
@@ -82,7 +80,6 @@ module.exports = function (environment) {
     CDN_URL: process.env.CDN_URL || 'https://www.stage.datacite.org',
     ANALYTICS_URL: process.env.ANALYTICS_URL || 'https://analytics.stage.datacite.org',
     ANALYTICS_DASHBOARD_URL: process.env.ANALYTICS_DASHBOARD_URL || '',
-    SHOW_ANALYTICS: ((process.env.SHOW_ANALYTICS && !(process.env.SHOW_ANALYTICS == "0" || process.env.SHOW_ANALYTICS == "false")) ? true : false),
 
     JWT_PUBLIC_KEY:
       process.env.JWT_PUBLIC_KEY ||
@@ -123,8 +120,6 @@ module.exports = function (environment) {
     ENV.SEARCH_URL = 'https://search.datacite.org';
     ENV.CDN_URL = 'https://datacite.org';
     ENV.COOKIE_DOMAIN = '.datacite.org';
-    // ENV.featureFlags['show-analytics'] = false;
-    ENV.SHOW_ANALYTICS = false;
   }
 
   if (environment === 'development') {

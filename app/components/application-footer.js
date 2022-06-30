@@ -129,7 +129,6 @@ const data = {
 };
 
 export default Component.extend({
-  prefixes: service(),
   data,
 
   didReceiveAttrs() {
