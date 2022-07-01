@@ -137,14 +137,14 @@ describe('ACCEPTANCE: STAFF_ADMIN | SETTINGS', () => {
         cy.get('input#password-input-field').should('be.visible');
         cy.get('input#confirm-password-input-field').should('be.visible');
         cy.get('button[type=submit]').should('be.visible');
+        cy.get('button').contains(/Cancel/i).should('be.visible');
+
+        cy.get('button').contains(/Cancel/i).click({force:true});
       });
-    }).then (() => {
-      cy.get('button').contains(/Cancel/i).should('be.visible').click({force: true}).then(() => {
-        cy.wait(waitTime2);
-        cy.location().should((loc) => {
-          expect(loc.pathname).to.eq('/');
-        });
-      });
+    });
+
+    cy.on("url:changed", (newUrl) => {
+      expect(newUrl).to.contain("/");
     });
   });
 
@@ -166,14 +166,14 @@ describe('ACCEPTANCE: STAFF_ADMIN | SETTINGS', () => {
         cy.get('#description').should('be.visible');
         cy.get('#country').should('be.visible');
         cy.get('button#update-provider').should('be.visible');
-      })
-    }).then(() => {
-      cy.get('button').contains(/Cancel/i).should('be.visible').click({force: true}).then(() => {
-        cy.wait(waitTime2);
-        cy.location().should((loc) => {
-          expect(loc.pathname).to.eq('/');
-        });
-      });      
+        cy.get('button').contains(/Cancel/i).should('be.visible');
+
+        cy.get('button').contains(/Cancel/i).click({force:true});
+      });
+    });
+
+    cy.on("url:changed", (newUrl) => {
+      expect(newUrl).to.contain("/");
     });
   });
 });

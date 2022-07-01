@@ -128,17 +128,18 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | REPOSITORIES', () => {
             cy.get('a[href*="privacy.html"]').should('be.visible');
           }
         );
-        cy.get('.alert').contains(/To save this repository, first resolve the errors with these fields: repository name, system email./i )
+        cy.get('.alert').contains(/To save this repository, first resolve the errors with these fields:/i)
+        cy.get('.alert').contains(/repository name, system email./i)
 
         cy.get('button#add-repository').should('be.visible');
+        cy.get('button').contains(/Cancel/i).should('be.visible')
+
+        cy.get('button').contains(/Cancel/i).click({force: true});
       })
-    }).then(() => {
-      cy.get('button').contains(/Cancel/i).should('be.visible').click({force: true}).then(() => {
-        cy.wait(waitTime);
-        cy.location().should((loc) => {
-          expect(loc.pathname).to.eq('/providers/datacite/repositories');
-        });
-      });      
+    })
+    
+    cy.on("url:changed", (newUrl) => {
+      expect(newUrl).to.contain('/providers/datacite/repositories');
     });
   });
 });

@@ -81,9 +81,8 @@ describe('ACCEPTANCE: CLIENT_ADMIN | SETTINGS', () => {
   });
 
   it('has password settings page', () => {
-    cy.visit('/repositories/datacite.test/change');
-    cy.url().should('include', '/repositories/datacite.test/change').then (() => {
-
+    cy.visit('/repositories/datacite.test/change').then (() => {
+      cy.url().should('include', '/repositories/datacite.test/change');
       cy.get('h2.work').contains('DataCite Test Repository');
       cy.get('a#account_menu_link').should('contain', 'DATACITE.TEST');
 
@@ -93,18 +92,18 @@ describe('ACCEPTANCE: CLIENT_ADMIN | SETTINGS', () => {
         cy.get('input#password-input-field').should('be.visible');
         cy.get('input#confirm-password-input-field').should('be.visible');
         cy.get('button[type=submit]').should('be.visible');
-      });
-    }).then (() => {
-      cy.get('button').contains(/Cancel/i).should('be.visible').click({force: true}).then(() => {
-        cy.wait(waitTime2);
-        cy.location().should((loc) => {
-          expect(loc.pathname).to.eq('/repositories/datacite.test');
-        });
+        cy.get('button#cancel').should('be.visible');
+
+        cy.get('button#cancel').click({force:true});
       });
     });
+
+    cy.on("url:changed", (newUrl) => {
+      expect(newUrl).to.contain("/repositories/datacite.test")
+    })
   });
 
-  // TBD - Could do more testing here. Only cursory testing for
+ // TBD - Could do more testing here. Only cursory testing for
   // presence of field objects. No testing of form behavior yet.
   it('has repository settings page', () => {
     cy.visit('/repositories/datacite.test/edit');
@@ -137,14 +136,14 @@ describe('ACCEPTANCE: CLIENT_ADMIN | SETTINGS', () => {
           }
         );
         cy.get('button#update-repository').should('be.visible');
+        cy.get('button').contains(/Cancel/i).should('be.visible');
+
+        cy.get('button').contains(/Cancel/i).click({force:true});
       })
-    }).then(() => {
-      cy.get('button').contains(/Cancel/i).should('be.visible').click({force: true}).then(() => {
-        cy.wait(waitTime2);
-        cy.location().should((loc) => {
-          expect(loc.pathname).to.eq('/repositories/datacite.test');
-        });
-      });
+    });
+
+    cy.on("url:changed", (newUrl) => {
+      expect(newUrl).to.contain("/repositories/datacite.test");
     });
   });
 });
