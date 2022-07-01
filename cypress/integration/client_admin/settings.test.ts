@@ -50,7 +50,6 @@ describe('ACCEPTANCE: CLIENT_ADMIN | SETTINGS', () => {
         cy.get('h5').contains(/Repository\s*ID/i);
         cy.get('div.panel-body').contains(/DATACITE.TEST/i);
         cy.get('h5').contains(/Description/i);
-        //cy.get('#description').contains(/datacite741/i);
         cy.get('h5').contains(/System\s*Email/i);
         cy.get('a').contains('mfenner@datacite.org').and('have.attr', 'href').and('include', 'mailto:mfenner@datacite.org');
         cy.get('h5').contains(/Domain/i);      });
@@ -103,7 +102,7 @@ describe('ACCEPTANCE: CLIENT_ADMIN | SETTINGS', () => {
     })
   });
 
- // TBD - Could do more testing here. Only cursory testing for
+  // TBD - Could do more testing here. Only cursory testing for
   // presence of field objects. No testing of form behavior yet.
   it('has repository settings page', () => {
     cy.visit('/repositories/datacite.test/edit');

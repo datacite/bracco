@@ -66,94 +66,74 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | REPOSITORIES', () => {
         cy.get('[data-test-repository]').its('length').should('be.gte', 1);
       });
     });
-<<<<<<< HEAD
-    /*
-    .then(() => {
-      cy.get('button').contains(/Cancel/i).should('be.visible').click({force: true}).then(() => {
-        cy.wait(waitTime);
-        cy.location().should((loc) => {
-          expect(loc.pathname).to.eq('/providers/datacite/repositories');
-        });
-      });
-    });
-    */
-=======
->>>>>>> Prefix workflow. (A couple of fixes.)
   });
 
-// TBD - Could do more testing here. Only cursory testing for
-// presence of field objects. No testing of form behavior yet.
-it.only('has an add repository page', () => {
-  cy.visit('/providers/datacite/repositories/new');
-  cy.url().should('include', '/providers/datacite/repositories/new').then(() => {
+  // TBD - Could do more testing here. Only cursory testing for
+  // presence of field objects. No testing of form behavior yet.
+  it.only('has an add repository page', () => {
+    cy.visit('/providers/datacite/repositories/new');
+    cy.url().should('include', '/providers/datacite/repositories/new').then(() => {
 
-    cy.get('h2.work').contains('DataCite');
-    cy.get('a#account_menu_link').should('contain', 'DATACITE');
+      cy.get('h2.work').contains('DataCite');
+      cy.get('a#account_menu_link').should('contain', 'DATACITE');
 
-    cy.get('h3.edit').contains(/Add\s*Repository/);
+      cy.get('h3.edit').contains(/Add\s*Repository/);
 
-    cy.get('form').within(($form) => {
-      cy.get('#repository-id').should('be.visible');
-      cy.get('#client-type').should('be.visible');
-      cy.get('#re3data').should('be.visible');
-      cy.get('#name').should('be.visible');
-      cy.get('#alternate-name').should('be.visible');
-      cy.get('#system-email').should('be.visible');
-      cy.get('.form-group')
-        .within(($form_group) => {
-          cy.get('label').contains(/Service Contact/);
-          cy.get('input#service-contact-given-name').should('be.visible');
-          cy.get('input#service-contact-family-name').should('be.visible');
-          cy.get('input#service-contact-email').should('be.visible');
-        }
-      );
-      cy.get('#description').should('be.visible')
-      cy.get('#url').should('be.visible');
-      cy.get('#language')
-        .within(($form_group) => {
-          // test for lamguage
-          cy.get('button.add-language').should('be.visible');
-        }
-      );
-      cy.get('#software').should('be.visible');
-      cy.get('#domains').should('be.visible');
-      cy.get('#repository-type')
-        .within(($form_group) => {
-          // test for lamguage
-          cy.get('button.add-repositoryType').should('be.visible');
-        }
-      );
-      cy.get('#certificate')
-        .within(($form_group) => {
-          // test for lamguage
-          cy.get('button.add-certificate').should('be.visible');
-        }
-      );
-      cy.get('#is-active')
-        .within(($form_group) => {
-          // test for lamguage
-          cy.get('input[type="checkbox"]#is-active-field').should('be.visible');
-        }
-      );
+      cy.get('form').within(($form) => {
+        cy.get('#repository-id').should('be.visible');
+        cy.get('#client-type').should('be.visible');
+        cy.get('#re3data').should('be.visible');
+        cy.get('#name').should('be.visible');
+        cy.get('#alternate-name').should('be.visible');
+        cy.get('#system-email').should('be.visible');
+        cy.get('.form-group')
+          .within(($form_group) => {
+            cy.get('label').contains(/Service Contact/);
+            cy.get('input#service-contact-given-name').should('be.visible');
+            cy.get('input#service-contact-family-name').should('be.visible');
+            cy.get('input#service-contact-email').should('be.visible');
+          }
+        );
+        cy.get('#description').should('be.visible')
+        cy.get('#url').should('be.visible');
+        cy.get('#language')
+          .within(($form_group) => {
+            // test for lamguage
+            cy.get('button.add-language').should('be.visible');
+          }
+        );
+        cy.get('#software').should('be.visible');
+        cy.get('#domains').should('be.visible');
+        cy.get('#repository-type')
+          .within(($form_group) => {
+            // test for lamguage
+            cy.get('button.add-repositoryType').should('be.visible');
+          }
+        );
+        cy.get('#certificate')
+          .within(($form_group) => {
+            // test for lamguage
+            cy.get('button.add-certificate').should('be.visible');
+          }
+        );
+        cy.get('#is-active')
+          .within(($form_group) => {
+            // test for lamguage
+            cy.get('input[type="checkbox"]#is-active-field').should('be.visible');
+          }
+        );
 
-      cy.get('.alert').contains(/The contacts entered may receive notifications/i)
-        .within(() => {
-          cy.get('a[href*="privacy.html"]').should('be.visible');
-        }
-      );
-      cy.get('.alert').contains(/To save this repository, first resolve the errors with these fields:/i)
-      cy.get('.alert').contains(/repository name, system email./i)
+        cy.get('.alert').contains(/The contacts entered may receive notifications/i)
+          .within(() => {
+            cy.get('a[href*="privacy.html"]').should('be.visible');
+          }
+        );
+        cy.get('.alert').contains(/To save this repository, first resolve the errors with these fields:/i)
+        cy.get('.alert').contains(/repository name, system email./i)
 
-      cy.get('button#add-repository').should('be.visible');
-      cy.get('button').contains(/Cancel/i).should('be.visible')
-
-      //cy.get('button').contains(/Cancel/i).click({force: true});
+        cy.get('button#add-repository').should('be.visible');
+        cy.get('button').contains(/Cancel/i).should('be.visible')
+      })
     })
-  })
-  /*
-  cy.on("url:changed", (newUrl) => {
-    expect(newUrl).to.contain('/providers/datacite/repositories');
   });
-  */
-});
 });

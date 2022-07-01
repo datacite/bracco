@@ -2,7 +2,6 @@
 /* eslint-disable no-undef */
 
 function escapeRE(string) {
-  //return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
   return string.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
 }
 
