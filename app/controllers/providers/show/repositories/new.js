@@ -24,6 +24,7 @@ const softwareList = [
 
 export default Controller.extend({
   store: service(),
+  prefixes: service(),
 
   re3data: null,
   softwareList,
@@ -43,47 +44,31 @@ export default Controller.extend({
   findPrefix() {
     let self = this;
 
-    this.store
-      // Get provider prefix, if any.
-      .query('provider-prefix', {
-        'provider-id': this.model.repository.get('provider.id'),
-        state: 'without-repository',
-        sort: 'name',
-        'page[size]': 1
-      })
-      .then(function (providerPrefixes) {
-        if (providerPrefixes.length > 0) {
-          let providerPrefix = A(providerPrefixes).get('firstObject');
-          self.model['repository-prefix'].set('provider-prefix', providerPrefix);
-          self.model['repository-prefix'].set('prefix', providerPrefix.get('prefix'));
+    this.prefixes.get_prefixes(1, this.model.repository.get('provider.id'))
+    .then((values) => {
+      if (values.length > 0) {
+        let provider = self.model.provider;
+        let value = A(values).get('firstObject');
+        let providerPrefix;
+        let prefix;
+
+        if (value.constructor.modelName == 'provider-prefix') {
+          providerPrefix = value;
+          prefix = providerPrefix.get('prefix');
+        } else if (value.constructor.modelName == 'prefix') {
+          prefix = value;
+          providerPrefix = self.model['provider-prefix'] = self.store.createRecord('providerPrefix', {
+            provider, prefix
+          });
         } else {
-          // Get pool prefix.
-          let provider = self.model.provider
-          self.store
-            .query('prefix', {
-              'state': 'unassigned',
-              sort: 'name',
-              'page[size]': 1
-            })
-            .then(function (prefixes) {
-              if (prefixes.length > 0) {
-                let prefix = A(prefixes).get('firstObject');
-                // Create a providerPrefix record.
-                let providerPrefix = self.model['provider-prefix'] = self.store.createRecord('providerPrefix', {
-                  provider, prefix
-                });
-                self.model['repository-prefix'].set('provider-prefix', providerPrefix);
-                self.model['repository-prefix'].set('prefix', prefix);
-              }
-            })
-            .catch(function (reason) {
-              console.debug(reason);
-            });
+          throw new Error("Expecting a prefix object. Got something else.");
         }
-      })
-      .catch(function (reason) {
-        console.debug(reason);
-      });
+        self.model['repository-prefix'].set('provider-prefix', providerPrefix);
+        self.model['repository-prefix'].set('prefix', prefix);
+      }
+    }).catch(function (reason) {
+      console.debug(reason);
+    });
   },
 
   actions: {

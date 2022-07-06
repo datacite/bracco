@@ -1,9 +1,10 @@
 import Service from '@ember/service';
+import { inject as service } from '@ember/service';
 import ENV from 'bracco/config/environment';
-import environment from 'config/environment';
 import fetch from 'fetch';
 
 export default Service.extend({
+  store: service(),
 
   init() {
     this._super(...arguments);
@@ -66,6 +67,45 @@ export default Service.extend({
     return promise;
   },
 
+  prefix_list(n = 1, provider_id = null) {
+    let tot = ( (n < 0) ? 0 : n);
+    let query = '';
+    let prefixes = [];
+
+    let promise = new Promise((resolve, reject) => {
+      this.store.query('provider-prefix', {
+        query,
+        'provider-id': provider_id,
+        state: 'without-repository',
+        sort: 'name',
+        'page[size]': ((provider_id == null) ? 0 : tot)
+      }).then((values) => {
+        values.forEach(
+          function(value) {
+            prefixes.push(value);
+         }
+        );
+        this.store.query('prefix', {
+          'state': 'unassigned',
+          sort: 'name',
+          'page[size]': tot - values.length
+        }).then(function (values) {
+          values.forEach(
+            function(value) {
+              prefixes.push(value);
+            }
+          );
+          resolve(prefixes);
+        });
+      }).catch(function (reason) {
+        console.debug(reason);
+        reject(reason);
+      });
+    });
+
+    return promise;
+  },
+
   //// These return a promise.
 
   // Returns total available: pool prefixes + provider prefixes (0 if no provider_id given)
@@ -78,7 +118,6 @@ export default Service.extend({
     let n = await this.get_n_available();
 
     return m+n;
-    // return 0;
   },
 
   // Returns total available: provider prefixes
@@ -89,5 +128,13 @@ export default Service.extend({
     }
 
     return m;
+  },
+
+  // Returns a mixed array of prefixes including available pool prefixes, and
+  // available provider_prefixes (if a provider is given).
+  async get_prefixes(n = 1, provider_id = null) {
+    let prefixes = await this.prefix_list(n, provider_id);
+
+    return prefixes;
   }
 })

@@ -6,64 +6,41 @@ import prefix from 'bracco/abilities/prefix';
 export default Controller.extend({
   store: service(),
   disabled: true,
+  prefixes: service(),
 
   init(...args) {
     this._super(...args);
 
     this['provider-prefixes'] = this['provider-prefixes'] || [];
   },
-
   searchPrefix(query) {
     let self = this;
-    this.store
-      .query('provider-prefix', {
-        query,
-        'provider-id': this.model.repository.get('provider.id'),
-        state: 'without-repository',
-        sort: 'name',
-        'page[size]': 10
-      })
-      .then(function (providerPrefixes) {
-        if (providerPrefixes.length >= 10) {
-          self.set('provider-prefixes', providerPrefixes);
-        } else {
-          let n = 10 - providerPrefixes.length;
-          // Get pool prefixes.
-          let provider = self.model.repository.provider;
-          self.store
-            .query('prefix', {
-              'state': 'unassigned',
-              sort: 'name',
-              'page[size]': n
-            })
-            .then(function (prefixes) {
-              let input = [];
-              if (providerPrefixes.length > 0) {
-                providerPrefixes.forEach(function(providerPrefix) {
-                  input.push(providerPrefix);
-                })
-              }
-              if (prefixes.length > 0) {
-                providerPrefixes = input;
-                prefixes.forEach(
-                  function(prefix) {
-                    let providerPrefix;
-                    providerPrefix = self.store.createRecord('providerPrefix', {
-                      provider, prefix
-                    });
-                    providerPrefixes.push(providerPrefix);
-                  }
-                )
-                self.set('provider-prefixes', providerPrefixes);
-              }
-            })
-            .catch(function (reason) {
-              console.debug(reason);
-              self.set('provider-prefixes', []);
-            });
-        }
-      })
-      .catch(function (reason) {
+    let prefixes = [];
+
+    this.prefixes.get_prefixes(10, this.model.repository.get('provider.id'))
+      .then((values) => {
+        let provider = this.model.repository.provider;
+
+        values.forEach(
+          function(value) {
+            if (value.constructor.modelName == 'provider-prefix') {
+              prefixes.push(value);
+            } else if (value.constructor.modelName == 'prefix') {
+              let prefix = value;
+              let providerPrefix;
+              providerPrefix = self.store.createRecord('providerPrefix', {
+                provider, prefix
+              });
+              prefixes.push(providerPrefix);
+            } else {
+              throw new Error("Expecting a prefix object. Got something else.");
+            }
+          }
+        );
+
+        self.set('provider-prefixes', prefixes);
+
+      }).catch(function (reason) {
         console.debug(reason);
         self.set('provider-prefixes', []);
       });
@@ -86,7 +63,7 @@ export default Controller.extend({
         let self = this;
 
         this.model['repository-prefix'].get('provider-prefix')
-          .then ( m => { 
+          .then ( m => {
             if (typeof m.get('createdAt') == 'undefined') {
               m.save()
               .then(function(value) {
