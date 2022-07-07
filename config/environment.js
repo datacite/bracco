@@ -4,6 +4,8 @@
 module.exports = function (environment) {
   const pkg = require('../package.json');
   let deployTarget = process.env.DEPLOY_TARGET;
+  // Bring in the environment variable - test/stage/development only.
+  let minPrefixesAvailable = ((typeof process.env.MIN_PREFIXES_AVAILABLE === 'undefined') || (process.env.MIN_PREFIXES_AVAILABLE == "")) ? 50 : process.env.MIN_PREFIXES_AVAILABLE;
 
   let ENV = {
     modulePrefix: 'bracco',
@@ -98,7 +100,9 @@ module.exports = function (environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
-    }
+    },
+
+    MIN_PREFIXES_AVAILABLE:  minPrefixesAvailable
   };
 
   if (deployTarget === 'staging') {

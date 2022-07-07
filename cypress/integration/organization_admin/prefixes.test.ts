@@ -35,7 +35,7 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | PREFIXES', () => {
           .and('have.attr', 'href').and('include', '/providers/datacite/prefixes');
   
         // Has left sidebar message box.
-        cy.get('div.alert').contains(/Please ask DataCite Staff if you want to add a prefix./i);
+        // cy.get('div.alert').contains(/Please ask DataCite Staff if you want to add a prefix./i);
   
         // Has left sidebar facets.
         cy.get('.facets h4').contains(/State/i);

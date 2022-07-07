@@ -9,6 +9,7 @@
               @model={{model.repository.id}}
               class="btn btn-warning"
               @id="assign-prefix"
+              @disabled={{if (eq (await (prefixes-available model.provider.id)) 0) "true" ""}}
             >
               <i class="fas fa-link"></i>
               Assign Prefix
@@ -19,14 +20,6 @@
     </div>
   {{else if (not model.repository.isActive)}}
 
-  {{else}}
-    <div class="panel panel-transparent">
-      <div class="panel-body">
-        <div class="alert alert-warning">
-          Please ask DataCite Staff if you want to add a prefix.
-        </div>
-      </div>
-    </div>
   {{/if}}
   {{#if model.repository-prefixes.meta.years}}
     <div class="panel facets add">

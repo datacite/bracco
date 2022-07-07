@@ -17,6 +17,7 @@
                 @model={{model.provider.id}}
                 class="btn btn-warning"
                 @id="add-repository"
+                @disabled={{if (eq (await (prefixes-available model.provider.id)) 0) "true" ""}}
               >
                 <i class="fas fa-plus"></i>
                 Add Repository
@@ -44,7 +45,7 @@
             </BsAlert>
           {{else if (not-eq hasRequiredContacts true)}}
             <BsAlert @dismissible={{false}} @type="warning">
-              New repositories can't be created because you have not provided the 
+              New repositories can't be created because you have not provided the
               required
               {{if
                 (eq model.provider.memberType 'consortium_organization')

@@ -23,6 +23,7 @@ const Validations = buildValidations({
 
 export default Component.extend(Validations, {
   store: service(),
+  prefixes: service(),
 
   firstPrefix: '',
   lastPrefix: '',

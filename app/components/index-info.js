@@ -34,6 +34,9 @@ export default Component.extend({
 
     let self = this;
     promise.then(function(value) {
+      // Error without checking is: 'TypeError: Cannot read property 'isDestroyed' of undefined'.
+      if (self.isDestroyed) { return; }
+
       self.set('json', value);
     }, function(reason) {
       console.debug(reason);

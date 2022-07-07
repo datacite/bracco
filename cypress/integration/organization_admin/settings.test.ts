@@ -2,7 +2,6 @@
 /* eslint-disable no-undef */
 
 function escapeRE(string) {
-  //return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
   return string.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
 }
 
@@ -19,7 +18,7 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | SETTINGS', () => {
     Cypress.Cookies.preserveOnce('_fabrica', '_jwt', '_consent');
     cy.wait(waitTime2);
   });
-  
+
   it('is logged in to homepage', () => {
     cy.visit('/providers/datacite');
     cy.url().should('include', '/providers/datacite').then (() => {

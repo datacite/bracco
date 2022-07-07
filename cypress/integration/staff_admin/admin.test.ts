@@ -2,9 +2,17 @@
 /* eslint-disable no-undef */
 
 describe('Admin: Admin', () => {
-  beforeEach(() => {
+  const waitTime = 1000;
+  const waitTime2 = 2000;
+
+  before(function () {
+    cy.login(Cypress.env('staff_admin_username'), Cypress.env('staff_admin_password'));
     cy.setCookie('_consent', 'true');
-    cy.setCookie('_fabrica', Cypress.env('staff_admin_cookie'), { log: false });
+  })
+
+  beforeEach(() => {
+    Cypress.Cookies.preserveOnce('_fabrica', '_jwt', '_consent');
+    cy.wait(waitTime2);
   });
 
   it('is logged in', () => {

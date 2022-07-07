@@ -2,71 +2,71 @@
 /* eslint-disable no-undef */
 
 describe('ACCEPTANCE: ORGANIZATION_ADMIN | REPOSITORIES', () => {
-    const waitTime = 1000;
-    const waitTime2 = 2000;
-    let prefix = '';
-    let suffix = '';
-  
-    before(function () {
-      cy.login(Cypress.env('organization_admin_username'), Cypress.env('organization_admin_password'));
-      cy.setCookie('_consent', 'true');
-    });
-  
-    beforeEach(() => {
-      Cypress.Cookies.preserveOnce('_fabrica', '_jwt', '_consent');
-      cy.wait(waitTime2);
-    });
-  
-    after(function () {
-      // cy.log('TBD - CLEAN UP RESOURCES AFTER TEST');
-    });
-  
-    // Check for page elements.
-    it('is logged in to repositories page', () => {
-      cy.visit('/providers/datacite/repositories');
-      cy.url().should('include', '/providers/datacite/repositories').then(() => {
-  
-        // Has upper right user profile link.
-        cy.get('h2.work').contains('DataCite');
-        cy.get('a#account_menu_link').should('contain', 'DATACITE');
-  
-        // Has tabs with correct one activated.
-        cy.get('ul.nav-tabs li.active a').contains(/Repositories/i)
-          .and('have.attr', 'href').and('include', '/providers/datacite/repositories');
+  const waitTime = 1000;
+  const waitTime2 = 2000;
+  let prefix = '';
+  let suffix = '';
 
-        cy.get('.btn-toolbar').within(($btnToolbar) => {
-          cy.get('.btn-group a#add-repository').contains(/Add\s*Repositor/i)
-            .and('have.attr', 'href').and('include', '/providers/datacite/repositories/new');
-        });
-  
-        // Has left sidebar facets.
-        cy.get('.facets h4').contains(/Year\s*joined/i);
-        cy.get('.facets h4').contains(/Type/i);
-        cy.get('.facets h4').contains(/Repository\s*Type/);
-        cy.get('.facets h4').contains(/Certificate/i);
-        cy.get('.facets h4').contains(/Software/i);
-  
-        // Has search form.
-        cy.get('form #search').within(($searchBar) => {
-          cy.get('input[name="query"]')
-            .and('have.attr', 'placeholder').should('match', /Type\s*to\s*search.../i);
-          cy.get('button').contains(/Search/i);
-        });
-  
-        // Repository total.
-        cy.get('[data-test-results]').contains(/Repositories/i);
-  
-        // Sort.
-        cy.get('#sort select').contains(/Sort by Name/i);
-        cy.get('#sort select').contains(/Sort by Date Joined/i);
-        cy.get('#sort select').contains(/Sort by Relevance/i);
-  
-        // Has search results as content.
-        cy.get('#content').within(($content) => {
-          cy.get('[data-test-repository]').its('length').should('be.gte', 1);
-        });
+  before(function () {
+    cy.login(Cypress.env('organization_admin_username'), Cypress.env('organization_admin_password'));
+    cy.setCookie('_consent', 'true');
+  });
+
+  beforeEach(() => {
+    Cypress.Cookies.preserveOnce('_fabrica', '_jwt', '_consent');
+    cy.wait(waitTime2);
+  });
+
+  after(function () {
+    // cy.log('TBD - CLEAN UP RESOURCES AFTER TEST');
+  });
+
+  // Check for page elements.
+  it('is logged in to repositories page', () => {
+    cy.visit('/providers/datacite/repositories');
+    cy.url().should('include', '/providers/datacite/repositories').then(() => {
+
+      // Has upper right user profile link.
+      cy.get('h2.work').contains('DataCite');
+      cy.get('a#account_menu_link').should('contain', 'DATACITE');
+
+      // Has tabs with correct one activated.
+      cy.get('ul.nav-tabs li.active a').contains(/Repositories/i)
+        .and('have.attr', 'href').and('include', '/providers/datacite/repositories');
+
+      cy.get('.btn-toolbar').within(($btnToolbar) => {
+        cy.get('.btn-group a#add-repository').contains(/Add\s*Repositor/i)
+          .and('have.attr', 'href').and('include', '/providers/datacite/repositories/new');
+      });
+
+      // Has left sidebar facets.
+      cy.get('.facets h4').contains(/Year\s*joined/i);
+      cy.get('.facets h4').contains(/Type/i);
+      cy.get('.facets h4').contains(/Repository\s*Type/);
+      cy.get('.facets h4').contains(/Certificate/i);
+      cy.get('.facets h4').contains(/Software/i);
+
+      // Has search form.
+      cy.get('form #search').within(($searchBar) => {
+        cy.get('input[name="query"]')
+          .and('have.attr', 'placeholder').should('match', /Type\s*to\s*search.../i);
+        cy.get('button').contains(/Search/i);
+      });
+
+      // Repository total.
+      cy.get('[data-test-results]').contains(/Repositories/i);
+
+      // Sort.
+      cy.get('#sort select').contains(/Sort by Name/i);
+      cy.get('#sort select').contains(/Sort by Date Joined/i);
+      cy.get('#sort select').contains(/Sort by Relevance/i);
+
+      // Has search results as content.
+      cy.get('#content').within(($content) => {
+        cy.get('[data-test-repository]').its('length').should('be.gte', 1);
       });
     });
+  });
 
   // TBD - Could do more testing here. Only cursory testing for
   // presence of field objects. No testing of form behavior yet.
@@ -133,14 +133,7 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | REPOSITORIES', () => {
 
         cy.get('button#add-repository').should('be.visible');
         cy.get('button').contains(/Cancel/i).should('be.visible')
-
-        cy.get('button').contains(/Cancel/i).click({force: true});
       })
     })
-    
-    cy.on("url:changed", (newUrl) => {
-      expect(newUrl).to.contain('/providers/datacite/repositories');
-    });
   });
 });
-  

@@ -6,6 +6,8 @@ export default Route.extend({
   can: service(),
   features: service(),
   headData: service(),
+  currentUser: service(),
+  prefixes: service(),
 
   model(params) {
     let self = this;
@@ -25,6 +27,21 @@ export default Route.extend({
         self.get('flashMessages').warning(reason);
         self.transitionTo('/');
       });
+  },
+
+  afterModel() {
+    if (this.get('currentUser.role_id') === 'staff_admin') {
+      let self = this;
+      this.prefixes.available().then(function(value) {
+        if (value <= 0) {
+          self.get('flashMessages').danger(self.prefixes.msg_zero);
+        } else if (value < self.prefixes.min) {
+          self.get('flashMessages').warning(self.prefixes.msg_min);
+        }
+      }, function(reason) {
+        console.debug(reason);
+      });
+    }
   },
 
   redirect(model) {

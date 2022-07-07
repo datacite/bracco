@@ -1,30 +1,46 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
+import { A } from '@ember/array';
+import prefix from 'bracco/abilities/prefix';
 
 export default Controller.extend({
   store: service(),
   disabled: true,
+  prefixes: service(),
 
   init(...args) {
     this._super(...args);
 
     this['provider-prefixes'] = this['provider-prefixes'] || [];
   },
-
   searchPrefix(query) {
     let self = this;
-    this.store
-      .query('provider-prefix', {
-        query,
-        'provider-id': this.model.repository.get('provider.id'),
-        state: 'without-repository',
-        sort: 'name',
-        'page[size]': 10
-      })
-      .then(function (providerPrefixes) {
-        self.set('provider-prefixes', providerPrefixes);
-      })
-      .catch(function (reason) {
+    let prefixes = [];
+
+    this.prefixes.get_prefixes(10, this.model.repository.get('provider.id'))
+      .then((values) => {
+        let provider = this.model.repository.provider;
+
+        values.forEach(
+          function(value) {
+            if (value.constructor.modelName == 'provider-prefix') {
+              prefixes.push(value);
+            } else if (value.constructor.modelName == 'prefix') {
+              let prefix = value;
+              let providerPrefix;
+              providerPrefix = self.store.createRecord('providerPrefix', {
+                provider, prefix
+              });
+              prefixes.push(providerPrefix);
+            } else {
+              throw new Error("Expecting a prefix object. Got something else.");
+            }
+          }
+        );
+
+        self.set('provider-prefixes', prefixes);
+
+      }).catch(function (reason) {
         console.debug(reason);
         self.set('provider-prefixes', []);
       });
@@ -45,20 +61,45 @@ export default Controller.extend({
     submit() {
       if (this.model['repository-prefix'].get('provider-prefix')) {
         let self = this;
-        this.model['repository-prefix']
-          .save()
-          .then(function (repositoryPrefix) {
-            self.set('disabled', true);
-            // We need a timeout because of ElasticSearch indexing
-            setTimeout(() => {
-              self.transitionToRoute(
-                'repositories.show.prefixes',
-                repositoryPrefix.get('repository.id')
-              );
-            }, 1200);
-          })
-          .catch(function (reason) {
-            console.debug(reason);
+
+        this.model['repository-prefix'].get('provider-prefix')
+          .then ( m => {
+            if (typeof m.get('createdAt') == 'undefined') {
+              m.save()
+              .then(function(value) {
+                self.model['repository-prefix']
+                .save()
+                .then(function (repositoryPrefix) {
+                  self.set('disabled', true);
+                  // We need a timeout because of ElasticSearch indexing
+                  setTimeout(() => {
+                    self.transitionToRoute(
+                      'repositories.show.prefixes',
+                      repositoryPrefix.get('repository.id')
+                    );
+                  }, 1200);
+                })
+                .catch(function (reason) {
+                  console.debug(reason);
+                });
+              })
+            } else {
+              self.model['repository-prefix']
+              .save()
+              .then(function (repositoryPrefix) {
+                self.set('disabled', true);
+                // We need a timeout because of ElasticSearch indexing
+                setTimeout(() => {
+                  self.transitionToRoute(
+                    'repositories.show.prefixes',
+                    repositoryPrefix.get('repository.id')
+                  );
+                }, 1200);
+              })
+              .catch(function (reason) {
+                console.debug(reason);
+              });
+            }
           });
       } else {
         this.transitionToRoute(

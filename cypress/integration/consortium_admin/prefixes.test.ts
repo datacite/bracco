@@ -35,7 +35,7 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | PREFIXES', () => {
         .and('have.attr', 'href').and('include', '/providers/dc/prefixes');
 
       // Has left sidebar message box.
-      cy.get('div.alert').contains(/New prefixes can't be assigned from this page./i);
+      // cy.get('div.alert').contains(/New prefixes can't be assigned from this page./i);
 
       // Has left sidebar facets.
       cy.get('.facets h4').contains(/State/i);

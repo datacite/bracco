@@ -1,6 +1,7 @@
 import { htmlSafe } from '@ember/template';
 import Component from '@ember/component';
 import ENV from 'bracco/config/environment';
+import { inject as service } from '@ember/service';
 
 const data = {
   about_links: [
@@ -124,7 +125,7 @@ const data = {
       name: 'Privacy policy',
       url: ENV.CDN_URL + '/privacy.html',
     },
-  ],
+  ]
 };
 
 export default Component.extend({
@@ -137,5 +138,5 @@ export default Component.extend({
       this.set('type', null);
       this.set('title', htmlSafe(ENV.SITE_TITLE));
     }
-  },
+  }
 });

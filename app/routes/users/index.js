@@ -4,7 +4,9 @@ import { assign } from '@ember/polyfills';
 
 export default Route.extend({
   can: service(),
+  currentUser: service(),
   flashMessages: service(),
+  prefixes: service(),
 
   model(params) {
     params = assign(params, {

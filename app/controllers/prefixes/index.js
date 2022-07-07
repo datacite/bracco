@@ -3,6 +3,7 @@ import { inject as service } from '@ember/service';
 
 export default Controller.extend({
   features: service(),
+  prefixes: service(),
 
   queryParams: [ 'query', 'provider-id', 'client-id', 'year', 'state', 'sort', 'page', 'size' ],
   query: null,
