@@ -8,6 +8,17 @@
         (eq hasRequiredContacts true)
       )
     }}
+      {{#if
+        (eq (await (prefixes-available model.provider.id)) 0)
+      }}
+        <div class="panel panel-transparent">
+          <div class="panel-body" cy-data="alert">
+              <BsAlert @dismissible={{false}} @type="warning">
+                Contact Support to get more prefixes for new repositories.
+              </BsAlert>
+          </div>
+        </div>
+      {{/if}}
       <div class="panel facets">
         <div class="panel-body">
           <div class="btn-toolbar">
