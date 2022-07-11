@@ -3,7 +3,10 @@
 
 module.exports = function (environment) {
   const pkg = require('../package.json');
-  let deployTarget = process.env.DEPLOY_TARGET;
+
+  // Determines the deployment target for fabrica i.e. the different versions doi.datacite.org/doi.test.datacite.org/doi.stage.datacite.org/
+  let fabricaDeployTarget = process.env.FABRICA_DEPLOY_TARGET;
+
   // Bring in the environment variable - test/stage/development only.
   let minPrefixesAvailable = ((typeof process.env.MIN_PREFIXES_AVAILABLE === 'undefined') || (process.env.MIN_PREFIXES_AVAILABLE == "")) ? 50 : process.env.MIN_PREFIXES_AVAILABLE;
 
@@ -26,7 +29,7 @@ module.exports = function (environment) {
           'https://63201db022924202b697e03bc5e0d0ba@o239790.ingest.sentry.io/1420435',
 
         disablePerformance: true,
-        environment: deployTarget || "staging"
+        environment: fabricaDeployTarget || "stage"
       }
     },
     'ember-cli-string-helpers': {
@@ -105,12 +108,12 @@ module.exports = function (environment) {
     MIN_PREFIXES_AVAILABLE:  minPrefixesAvailable
   };
 
-  if (deployTarget === 'staging') {
+  if (fabricaDeployTarget === 'stage') {
     // add staging-specific settings here
     ENV.COOKIE_DOMAIN = '.stage.datacite.org';
   }
 
-  if (deployTarget === 'production') {
+  if (fabricaDeployTarget === 'production') {
     ENV.SITE_TITLE = 'DataCite Fabrica';
     ENV.API_URL = 'https://api.datacite.org';
     ENV.ORCID_URL = 'https://orcid.org';
@@ -122,16 +125,7 @@ module.exports = function (environment) {
     ENV.COOKIE_DOMAIN = '.datacite.org';
   }
 
-  if (environment === 'development') {
-    // ENV.APP.LOG_RESOLVER = true;
-    // ENV.APP.LOG_ACTIVE_GENERATION = true;
-    // ENV.APP.LOG_TRANSITIONS = true;
-    // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
-    // ENV.APP.LOG_VIEW_LOOKUPS = true;
-
-    ENV.COOKIE_DOMAIN = 'localhost';
-  }
-
+  // Environment named 'test' here is the ember environment, not related to fabrica environments.
   if (environment === 'test') {
     // Testem prefers this...
     ENV.locationType = 'none';
