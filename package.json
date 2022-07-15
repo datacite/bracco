@@ -39,7 +39,7 @@
     "ember-promise-helpers": "^2.0.0",
     "ember-responsive": "^5.0.0",
     "fastboot-app-server": "^2.0.0",
-    "fs-extra": "^8.1.0",
+    "fs-extra": "^10.1.0",
     "humanize-string": "^2.1.0",
     "iso-639-1": "^2.1.15",
     "junk": "^3.1.0",
