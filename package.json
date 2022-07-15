@@ -166,7 +166,7 @@
     "minimatch": "^5.1.0",
     "morgan": "^1.10.0",
     "qunit-dom": "^2.0.0",
-    "sanitize-html": "^1.20.1",
+    "sanitize-html": "^2.7.0",
     "typescript": "^3.7.4",
     "urijs": "^1.19.11",
     "vkbeautify": "^0.99.3",
