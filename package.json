@@ -30,7 +30,7 @@
     "@sentry/ember": "5.29.2",
     "@types/ember-feature-flags": "^6.0.1",
     "acorn": "^8.7.1",
-    "cldr-core": "^36.0.0",
+    "cldr-core": "^41.0.0",
     "cypress-file-upload": "^5.0.8",
     "ember-cli-google-tag-manager": "^1.0.0",
     "ember-cli-version-checker": "^3.1.3",
