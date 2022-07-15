@@ -21,6 +21,8 @@ dist/*
 
 .yarn_cache/*
 !.yarn_cache/.gitkeep
+.yarn
+.yarnrc
 
 package-lock.json
 
