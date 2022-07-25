@@ -48,7 +48,7 @@
         <div class="col-md-9 input-fragment">
           <div class="label-vertical">The year when the resource was or will be made publicly available.</div>
           <form.element @id="publication-year" @controlType="text" @property="publicationYear"
-            @helpText="Must be a year between 1000 and {{current-year currentYear 5}}." @required={{false}} />
+             @helpText="Must be a year between 1000 and {{current-year model.maxMintFutureOffset }}." @required={{false}} />
         </div>
       </div>
 

@@ -10,6 +10,9 @@ module.exports = function (environment) {
   // Bring in the environment variable - test/stage/development only.
   let minPrefixesAvailable = ((typeof process.env.MIN_PREFIXES_AVAILABLE === 'undefined') || (process.env.MIN_PREFIXES_AVAILABLE == "")) ? 50 : process.env.MIN_PREFIXES_AVAILABLE;
 
+  // Bring in environment variables.
+  let maxMintFutureOffset = parseInt(((typeof process.env.MAX_MINT_FUTURE_OFFSET === 'undefined') || (process.env.MAX_MINT_FUTURE_OFFSET == "")) ? 5 : process.env.MAX_MINT_FUTURE_OFFSET);
+
   let ENV = {
     modulePrefix: 'bracco',
     environment,
@@ -105,7 +108,8 @@ module.exports = function (environment) {
       // when it is created
     },
 
-    MIN_PREFIXES_AVAILABLE:  minPrefixesAvailable
+    MIN_PREFIXES_AVAILABLE:  minPrefixesAvailable,
+    MAX_MINT_FUTURE_OFFSET:  maxMintFutureOffset
   };
 
   if (fabricaDeployTarget === 'stage') {
