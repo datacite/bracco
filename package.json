@@ -176,6 +176,6 @@
     "node": "14.*"
   },
   "resolutions": {
-
+    "caniuse-lite": "1.0.30001370"
   }
 }
