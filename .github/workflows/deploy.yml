@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
-          node-version: '12'
+          node-version: '14'
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
@@ -50,7 +50,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
-          node-version: '12'
+          node-version: '14'
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
@@ -65,7 +65,7 @@ jobs:
             ~/.cache/Cypress
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: ${{ runner.os }}-yarn-
-           
+
       - name: Download Test Build artifact
         uses: actions/download-artifact@v2
         with:
@@ -76,8 +76,8 @@ jobs:
         env:
           COVERAGE: true
         run: |
-          yarn run ember test --path=test_build 
-      
+          yarn run ember test --path=test_build
+
 #       - name: Publish code coverage
 #         uses: paambaati/codeclimate-action@v2.7.5
 #         env:
@@ -97,7 +97,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
-          node-version: '12'
+          node-version: '14'
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
@@ -112,7 +112,7 @@ jobs:
             ~/.cache/Cypress
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: ${{ runner.os }}-yarn-
-           
+
       - name: Download Test Build artifact
         uses: actions/download-artifact@v2
         with:
