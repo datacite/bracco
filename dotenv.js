@@ -55,11 +55,8 @@ module.exports = function () {
       'ORGANIZATION_ADMIN_USERNAME',
       'CLIENT_ADMIN_USERNAME',
       'ENABLE_DOI_ESTIMATE',
-<<<<<<< HEAD
-      'PREFIXES_AVAILABLE'
-=======
+      'PREFIXES_AVAILABLE',
       'MAX_MINT_FUTURE_OFFSET'
->>>>>>> make max_mint_future_offset settable in one place and enable it to be imported from an environment variable
     ],
     failOnMissingKey: false
   };
