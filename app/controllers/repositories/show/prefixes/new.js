@@ -17,7 +17,7 @@ export default Controller.extend({
     let self = this;
     let prefixes = [];
 
-    this.prefixes.get_prefixes(10, this.model.repository.get('provider.id'))
+    this.prefixes.get_prefixes(50, this.model.repository.get('provider.id'))
       .then((values) => {
         let provider = this.model.repository.provider;
 
