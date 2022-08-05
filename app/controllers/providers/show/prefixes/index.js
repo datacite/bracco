@@ -1,4 +1,5 @@
 import Controller from '@ember/controller';
+import { inject as service } from '@ember/service';
 
 export default Controller.extend({
   queryParams: [ 'query', 'client-id', 'consortium-organization-id', 'year', 'state', 'sort', 'page', 'size' ],

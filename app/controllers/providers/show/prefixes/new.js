@@ -4,6 +4,7 @@ import { inject as service } from '@ember/service';
 export default Controller.extend({
   store: service(),
   disabled: true,
+  prefixes_service: service('prefixes'),
 
   init(...args) {
     this._super(...args);
@@ -13,17 +14,24 @@ export default Controller.extend({
 
   searchPrefix(query) {
     let self = this;
-    this.store
-      .query('prefix', {
-        query,
-        state: 'unassigned',
-        sort: 'name',
-        'page[size]': 10
-      })
-      .then(function (prefixes) {
+    let prefixes = [];
+
+    this.prefixes_service.get_prefixes(50)
+      .then((values) => {
+        values.forEach(
+          function(value) {
+            if (value.constructor.modelName == 'prefix') {
+              let prefix = value;
+              prefixes.push(prefix);
+            } else {
+              throw new Error("Expecting a prefix object. Got something else.");
+            }
+          }
+        );
+
         self.set('prefixes', prefixes);
-      })
-      .catch(function (reason) {
+
+      }).catch(function (reason) {
         console.debug(reason);
         self.set('prefixes', []);
       });
