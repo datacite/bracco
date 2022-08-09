@@ -67,9 +67,8 @@ export default Service.extend({
     return promise;
   },
 
-  prefix_list(n = 1, provider_id = null) {
+  prefix_list(n = 1, provider_id = null, query = "") {
     let tot = ( (n < 0) ? 0 : n);
-    let query = '';
     let prefixes = [];
 
     let promise = new Promise((resolve, reject) => {
@@ -86,6 +85,7 @@ export default Service.extend({
          }
         );
         this.store.query('prefix', {
+          query,
           'state': 'unassigned',
           sort: 'name',
           'page[size]': tot - values.length
@@ -132,8 +132,8 @@ export default Service.extend({
 
   // Returns a mixed array of prefixes including available pool prefixes, and
   // available provider_prefixes (if a provider is given).
-  async get_prefixes(n = 1, provider_id = null) {
-    let prefixes = await this.prefix_list(n, provider_id);
+  async get_prefixes(n = 1, provider_id = null, query = "") {
+    let prefixes = await this.prefix_list(n, provider_id, query);
 
     return prefixes;
   }

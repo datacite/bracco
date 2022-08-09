@@ -16,7 +16,7 @@ export default Controller.extend({
     let self = this;
     let prefixes = [];
 
-    this.prefixes_service.get_prefixes(50)
+    this.prefixes_service.get_prefixes(2, null, query)
       .then((values) => {
         values.forEach(
           function(value) {
