@@ -1,0 +1,38 @@
+<style>
+
+  .create-doi-button-repo-sidebar {
+    margin-left: -5px;
+  }
+  .create-doi-button .btn-group>.btn:first-child:not(:last-child):not(.dropdown-toggle) {
+    border-top-left-radius: 13px;
+    border-bottom-left-radius: 13px;
+  }
+  .create-doi-button .btn-group>.btn:last-child:not(:first-child), .btn-group>.dropdown-toggle:not(:first-child) {
+    border-top-right-radius: 13px;
+    border-bottom-right-radius: 13px;
+  }
+  .create-doi-button .dropdown-menu {
+    margin-top: 2px;
+  }
+  .create-doi-button .dropdown-menu ul li:hover {
+    background: #e6e6e6;
+  }
+
+</style>
+
+<div class="panel-body">
+  <div class="create-doi-button create-doi-button-repo-sidebar">
+<BsDropdown as |dd|>
+  <BsButton>Create DOI</BsButton>
+  <dd.button><span class="caret"></span></dd.button>
+  <dd.menu as |ddm|>
+    <ddm.item>
+      <ddm.linkTo @route="repositories.show.dois.new">DOI Form</ddm.linkTo>
+    </ddm.item>
+    <ddm.item>
+      <ddm.linkTo @route="repositories.show.dois.new">File Upload</ddm.linkTo>
+    </ddm.item>
+  </dd.menu>
+</BsDropdown>
+  </div>
+</div>

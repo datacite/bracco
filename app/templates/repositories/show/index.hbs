@@ -1,1 +1,13 @@
-<RepositoryInfo @model={{model}} />
+<div class="row">
+  <div class="col-md-3">
+    {{#if (can 'update repository' model)}}
+      {{#if (and (or eq currentUser.role_id 'staff_admin'  eq currentUser.role_id 'client_admin') model.isActive) }}
+        <CreateDoiButton @model={{model}} />
+      {{/if}}
+    {{/if}}
+  </div>
+  <div class="col-md-9">
+    <RepositoryInfo @model={{model}} />
+  </div>div>
+</div>
+
