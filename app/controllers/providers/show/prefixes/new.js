@@ -1,5 +1,6 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
+import ENV from 'bracco/config/environment';
 
 export default Controller.extend({
   store: service(),
@@ -16,7 +17,7 @@ export default Controller.extend({
     let self = this;
     let prefixes = [];
 
-    this.prefixes_service.get_prefixes(2, null, query)
+    this.prefixes_service.get_prefixes(ENV.SHOW_N_PREFIXES, null, query)
       .then((values) => {
         values.forEach(
           function(value) {

@@ -26,7 +26,8 @@ module.exports = function () {
       'ORGANIZATION_ADMIN_USERNAME',
       'CLIENT_ADMIN_USERNAME',
       'ENABLE_DOI_ESTIMATE',
-      'PREFIXES_AVAILABLE'
+      'MIN_PREFIXES_AVAILABLE',
+      'SHOW_N_PREFIXES'
     ],
     fastbootAllowedKeys: [
       'SITE_TITLE',
@@ -54,7 +55,8 @@ module.exports = function () {
       'ORGANIZATION_ADMIN_USERNAME',
       'CLIENT_ADMIN_USERNAME',
       'ENABLE_DOI_ESTIMATE',
-      'PREFIXES_AVAILABLE'
+      'MIN_PREFIXES_AVAILABLE',
+      'SHOW_N_PREFIXES'
     ],
     failOnMissingKey: false
   };
