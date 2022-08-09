@@ -7,8 +7,9 @@ module.exports = function (environment) {
   // Determines the deployment target for fabrica i.e. the different versions doi.datacite.org/doi.test.datacite.org/doi.stage.datacite.org/
   let fabricaDeployTarget = process.env.FABRICA_DEPLOY_TARGET;
 
-  // Bring in the environment variable - test/stage/development only.
+  // Bring in the environment variables.
   let minPrefixesAvailable = ((typeof process.env.MIN_PREFIXES_AVAILABLE === 'undefined') || (process.env.MIN_PREFIXES_AVAILABLE == "")) ? 50 : process.env.MIN_PREFIXES_AVAILABLE;
+  let showNPrefixes = ((typeof process.env.SHOW_N_PREFIXES === 'undefined') || (process.env.SHOW_N_PREFIXES == "")) ? 10 : process.env.SHOW_N_PREFIXES;
 
   let ENV = {
     modulePrefix: 'bracco',
@@ -105,7 +106,8 @@ module.exports = function (environment) {
       // when it is created
     },
 
-    MIN_PREFIXES_AVAILABLE:  minPrefixesAvailable
+    MIN_PREFIXES_AVAILABLE:  minPrefixesAvailable,
+    SHOW_N_PREFIXES: showNPrefixes
   };
 
   if (fabricaDeployTarget === 'stage') {
