@@ -1,6 +1,14 @@
 <div class="col-md-3">
-  {{#if (and (can 'write index') model.repository.isActive)}}
+  {{#if (and (can 'create doi') model.repository.isActive)}}
     <div class="panel facets">
+      <div class="panel-body">
+        <CreateDoiButton @model={{model}} class="create-doi-button" />
+      </div>
+    </div>
+  {{/if}}
+
+  {{#if (and (can 'write index') model.repository.isActive)}}
+    <div class="panel facets add-25">
       <div class="panel-body">
         <div class="btn-toolbar">
           <div class="btn-group btn-group-sm">

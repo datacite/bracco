@@ -1,0 +1,33 @@
+.create-doi-button {
+  z-index: 1;
+  position: relative;
+}
+
+.create-doi-button ul.dropdown-menu.show {
+  margin-top: 5px;
+}
+
+.create-doi-button ul.dropdown-menu.show a {
+  width: 100%;
+  color: #e67e22;
+}
+
+.create-doi-button ul.dropdown-menu.show a:hover {
+  background-color: rgb(128, 128, 128, .1);
+}
+
+.create-doi-button button.btn {
+  border-radius: 26px;
+}
+
+.panel.facets.add-25 {
+  margin-top: .25em;
+}
+
+.panel.facets.add-50 {
+  margin-top: .50em;
+}
+
+.panel.facets.add-75 {
+  margin-top: .75em;
+}

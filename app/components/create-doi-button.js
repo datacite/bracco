@@ -4,7 +4,8 @@ import { inject as service } from '@ember/service';
 export default Component.extend({
   currentUser: service(),
 
-  classNames: [ 'panel', 'facets', 'add' ],
+  //classNames: [ 'panel', 'facets' ],
+  classNames: [],
 
   didReceiveAttrs() {
     this._super(...arguments);
