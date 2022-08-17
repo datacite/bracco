@@ -1,9 +1,7 @@
-/* global window */
-
-window.deprecationWorkflow = window.deprecationWorkflow || {};
-window.deprecationWorkflow.config = {
+self.deprecationWorkflow = self.deprecationWorkflow || {};
+self.deprecationWorkflow.config = {
   workflow: [
-    { handler: 'silence', matchId: 'computed-property.volatile' },
-    { handler: 'silence', matchId: 'computed-property.override' },
-  ],
+    { handler: "silence", matchId: "computed-property.override" },
+    { handler: "silence", matchId: "computed-property.volatile" }
+  ]
 };
