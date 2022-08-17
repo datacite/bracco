@@ -178,6 +178,9 @@
   "engines": {
     "node": "14.*"
   },
+  "ember": {
+    "edition": "classic"
+  },
   "resolutions": {
     "**/ajv": "^6.12.3",
     "**/ansi-html": "https://registry.yarnpkg.com/ansi-html-community/-/ansi-html-community-0.0.8.tgz",
