@@ -99,7 +99,6 @@
     "ember-cli-dependency-checker": "^3.3.1",
     "ember-cli-deprecation-workflow": "^1.0.1",
     "ember-cli-dotenv": "^3.1.0",
-    "ember-cli-fastboot": "^2.2.1",
     "ember-cli-flash": "^1.8.0",
     "ember-cli-head": "^0.4.1",
     "ember-cli-htmlbars": "^4.2.0",
@@ -171,7 +170,8 @@
     "@babel/eslint-parser": "^7.18.9",
     "compression": "^1.7.4",
     "morgan": "^1.10.0",
-    "fastboot-express-middleware": "^3.3.2"
+    "fastboot-express-middleware": "^3.3.2",
+    "ember-cli-fastboot": "^3.3.2"
   },
   "engines": {
     "node": "14.*"
