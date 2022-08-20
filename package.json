@@ -140,7 +140,6 @@
     "ember-resolver": "^7.0.0",
     "ember-route-action-helper": "^2.0.8",
     "ember-simple-auth": "^1.9.2",
-    "ember-source": "^3.12.1",
     "ember-test-selectors": "^3.0.0",
     "ember-tracker": "^1.0.0",
     "ember-truncate": "^2.0.1",
@@ -171,7 +170,8 @@
     "compression": "^1.7.4",
     "morgan": "^1.10.0",
     "fastboot-express-middleware": "^3.3.2",
-    "ember-cli-fastboot": "^3.3.2"
+    "ember-cli-fastboot": "^3.3.2",
+    "ember-source": "~3.15.0"
   },
   "engines": {
     "node": "14.*"
