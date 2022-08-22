@@ -157,7 +157,7 @@
     "urijs": "^1.19.11",
     "vkbeautify": "^0.99.3",
     "xml2js": "^0.4.23",
-    "webpack": "4.0.0",
+    "webpack": "^4.0.0",
     "@babel/core": "^7.18.10",
     "ember-cli-babel": "^7.26.11",
     "babel-loader": "8.2.5",
