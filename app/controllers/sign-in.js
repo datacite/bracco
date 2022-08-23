@@ -24,7 +24,8 @@ export default Controller.extend({
       this.session.authenticate('authenticator:oauth2', identification, password).then(() => {
         self.transitionToRoute('/');
       }).catch((reason) => {
-        this.set('errorMessage', reason.errors && reason.errors[0].title || reason);
+        console.log("BAD AUTH");
+        this.set('errorMessage', reason.responseJSON.errors && reason.responseJSON.errors[0].title || reason.responseJSON.errors[0].title );
       });
     },
   },

@@ -138,7 +138,7 @@
     "ember-radio-button": "^2.0.1",
     "ember-resolver": "^7.0.0",
     "ember-route-action-helper": "^2.0.8",
-    "ember-simple-auth": "^1.9.2",
+    "ember-simple-auth": "^4.2.2",
     "ember-test-selectors": "^6.0.0",
     "ember-tracker": "^1.0.0",
     "ember-truncate": "^2.0.1",
