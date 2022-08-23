@@ -10720,7 +10720,7 @@ ember-cli-babel@^7.10.0, ember-cli-babel@^7.11.0, ember-cli-babel@^7.11.1, ember
     ensure-posix-path "^1.0.2"
     semver "^5.5.0"
 
-ember-cli-babel@^7.19.0, ember-cli-babel@^7.23.1, ember-cli-babel@^7.26.11, ember-cli-babel@^7.26.3, ember-cli-babel@^7.26.5, ember-cli-babel@^7.26.6, ember-cli-babel@^7.8.0:
+ember-cli-babel@^7.19.0, ember-cli-babel@^7.22.1, ember-cli-babel@^7.23.1, ember-cli-babel@^7.26.11, ember-cli-babel@^7.26.3, ember-cli-babel@^7.26.5, ember-cli-babel@^7.26.6, ember-cli-babel@^7.8.0:
   version "7.26.11"
   resolved "https://registry.yarnpkg.com/ember-cli-babel/-/ember-cli-babel-7.26.11.tgz#50da0fe4dcd99aada499843940fec75076249a9f"
   integrity sha512-JJYeYjiz/JTn34q7F5DSOjkkZqy8qwFOOxXfE6pe9yEJqWGu4qErKxlz8I22JoVEQ/aBUO+OcKTpmctvykM9YA==
@@ -11126,12 +11126,12 @@ ember-cli-path-utils@^1.0.0:
   resolved "https://registry.yarnpkg.com/ember-cli-path-utils/-/ember-cli-path-utils-1.0.0.tgz#4e39af8b55301cddc5017739b77a804fba2071ed"
   integrity sha1-Tjmvi1UwHN3FAXc5t3qAT7ogce0=
 
-ember-cli-polyfill-io@^1.2.3:
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/ember-cli-polyfill-io/-/ember-cli-polyfill-io-1.2.3.tgz#a7ce367aedfc5e3fef00d802abd778eddcbe72ea"
-  integrity sha1-p842eu38Xj/vANgCq9d47dy+cuo=
+ember-cli-polyfill-io@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/ember-cli-polyfill-io/-/ember-cli-polyfill-io-2.0.0.tgz#b12e40e5930cf6ab6cbf67c0385dd5ad20548963"
+  integrity sha512-596kXCE6IAlH54X+qIZpv6w43JcDhzEEZRqFQWIWRZfbeKiyKfw69zy0qg0nSw9arbSmQaTdkn0qt2NpJvR96Q==
   dependencies:
-    debug "^2.6.8"
+    debug "^4.1.1"
 
 ember-cli-preprocess-registry@^3.3.0:
   version "3.3.0"
@@ -11508,12 +11508,19 @@ ember-concurrency@^0.10.0:
     ember-cli-babel "^7.1.0"
     ember-getowner-polyfill "^1.1.0 || ^2.0.0"
 
-ember-copy@1.0.0, ember-copy@^1.0.0:
+ember-copy@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/ember-copy/-/ember-copy-1.0.0.tgz#426554ba6cf65920f31d24d0a3ca2cb1be16e4aa"
   integrity sha512-aiZNAvOmdemHdvZNn0b5b/0d9g3JFpcOsrDgfhYEbfd7SzE0b69YiaVK2y3wjqfjuuiA54vOllGN4pjSzECNSw==
   dependencies:
     ember-cli-babel "^6.6.0"
+
+ember-copy@^2.0.0:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/ember-copy/-/ember-copy-2.0.1.tgz#13192b12a250324bb4a8b4547a680b113f4e3041"
+  integrity sha512-N/XFvZszrzyyX4IcNoeK4mJvIItNuONumhPLqi64T8NDjJkxBj4Pq61rvMkJx/9eZ8alzE4I8vYKOLxT0FvRuQ==
+  dependencies:
+    ember-cli-babel "^7.22.1"
 
 ember-cp-validations@^4.0.0-beta.10:
   version "4.0.0-beta.10"
@@ -11831,7 +11838,7 @@ ember-macro-helpers@^4.2.2:
     ember-cli-string-utils "^1.1.0"
     ember-cli-test-info "^1.0.0"
 
-ember-math-helpers@^2.18.2:
+ember-math-helpers@^2.15.0:
   version "2.18.2"
   resolved "https://registry.yarnpkg.com/ember-math-helpers/-/ember-math-helpers-2.18.2.tgz#5778f0aae08f3502be8defbacd383794f42b177e"
   integrity sha512-ikAXlIiT0wk8X8uuMtHkrRYt8HnDt9Wk+iNoY9IoBmt6IRZjCD5BmuxrIPj5Eop2/afMfKmNKnc4L1StkXM3wg==
@@ -11882,10 +11889,10 @@ ember-modifier-manager-polyfill@^1.1.0, ember-modifier-manager-polyfill@^1.2.0:
     ember-cli-version-checker "^2.1.2"
     ember-compatibility-helpers "^1.2.0"
 
-ember-moment@^8.0.0:
-  version "8.0.0"
-  resolved "https://registry.yarnpkg.com/ember-moment/-/ember-moment-8.0.0.tgz#f3993711df0af444558f0f3922dc3f412af72410"
-  integrity sha512-JbwmTiS75EEXFWGR5P8rXykISpDf6EH8L8IpxsF6FaRwJ/4odXV/yf8cKh6gpzxoags9OJ8qxyQqG0Prhgs9Sg==
+ember-moment@^8.0.2:
+  version "8.0.2"
+  resolved "https://registry.yarnpkg.com/ember-moment/-/ember-moment-8.0.2.tgz#6e5034045e9d1447fa6c0af80983b93ee62bb1be"
+  integrity sha512-2S4byvP7sSj8vn30280EA6mA62moe9TCpg2mtuioWYQV3shAUAX4FrfC2oCzNBU+TcKw3dSXnhGi9Pt5krMhAg==
   dependencies:
     ember-cli-babel "^6.7.2"
     ember-getowner-polyfill "^2.2.0"
