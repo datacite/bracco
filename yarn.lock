@@ -101,7 +101,7 @@
     semver "^5.4.1"
     source-map "^0.5.0"
 
-"@babel/core@^7.13.10", "@babel/core@^7.4.4":
+"@babel/core@^7.13.10", "@babel/core@^7.18.13", "@babel/core@^7.4.4":
   version "7.18.13"
   resolved "https://registry.yarnpkg.com/@babel/core/-/core-7.18.13.tgz#9be8c44512751b05094a4d3ab05fc53a47ce00ac"
   integrity sha512-ZisbOvRRusFktksHSG6pjj1CSvkPkcZq/KHD45LAkVP/oiHJkNBZWfpvlLmX8OtHDG8IuzsFlVRWo08w7Qxn0A==
@@ -122,7 +122,7 @@
     json5 "^2.2.1"
     semver "^6.3.0"
 
-"@babel/core@^7.16.0", "@babel/core@^7.18.10":
+"@babel/core@^7.16.0":
   version "7.18.10"
   resolved "https://registry.yarnpkg.com/@babel/core/-/core-7.18.10.tgz#39ad504991d77f1f3da91be0b8b949a5bc466fb8"
   integrity sha512-JQM6k6ENcBFKVtWvLavlvi/mPcpYZ3+R+2EySDEMSMbp7Mn4FexlbbJVrx2R7Ijhr01T8gyqrOaABWIOgxeUyw==
@@ -10285,10 +10285,10 @@ ember-bootstrap-power-select@^1.1.0:
     fs-extra "^7.0.0"
     rsvp "^4.0.1"
 
-ember-bootstrap@^3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/ember-bootstrap/-/ember-bootstrap-3.1.0.tgz#6152b029640f7eb9543049e0be6d1ba77e841a82"
-  integrity sha512-v9mUpdCdcFMJiKq0YdmI9IKyLmgM08ttQF5QXEFqHs6Dk4maEyZurhr/0zsWbrikzLft1d+Cky9EP0t/8X77Hg==
+ember-bootstrap@^3.1.4:
+  version "3.1.4"
+  resolved "https://registry.yarnpkg.com/ember-bootstrap/-/ember-bootstrap-3.1.4.tgz#1919248cedc5aa4c147daae86819e1504b339add"
+  integrity sha512-mFQGFzLuJvKkZnZS3NyvRFT09NFzNnDyzDgoU5buUlLz39sPF9sVpBeCXGRWJus74RQ5tm1OVPp4iz/Rwl1RCw==
   dependencies:
     broccoli-debug "^0.6.3"
     broccoli-funnel "^2.0.0"
@@ -10296,9 +10296,9 @@ ember-bootstrap@^3.1.0:
     broccoli-stew "^2.0.0"
     chalk "^2.1.0"
     ember-angle-bracket-invocation-polyfill "^2.0.1"
-    ember-cli-babel "^7.7.3"
+    ember-cli-babel "^7.13.0"
     ember-cli-build-config-editor "0.5.0"
-    ember-cli-htmlbars "^3.0.1"
+    ember-cli-htmlbars "^4.2.0"
     ember-cli-version-checker "^3.0.0"
     ember-concurrency "^1.0.0"
     ember-decorators "^6.1.0"
@@ -11054,10 +11054,10 @@ ember-cli-version-checker@^5.1.1, ember-cli-version-checker@^5.1.2:
     semver "^7.3.4"
     silent-error "^1.1.1"
 
-ember-cli@~3.15.1:
-  version "3.15.1"
-  resolved "https://registry.yarnpkg.com/ember-cli/-/ember-cli-3.15.1.tgz#389604474c40f02870432659072304f192db07c5"
-  integrity sha512-KBL6ylTpYD6k0B2iHMvdgNnbKCdFnOHzruosQqTmbHpyJljVE1sLsTP8ErROH/PnbFzc1vZg1qQcf6tHRvyTrw==
+ember-cli@~3.15.2:
+  version "3.15.2"
+  resolved "https://registry.yarnpkg.com/ember-cli/-/ember-cli-3.15.2.tgz#c2a5871850da7537e0cb3cd0e7d59fd76cd3184e"
+  integrity sha512-ciuFaLokZDJfEzltH3QUxZYnQcigCzNrjyyVbeNtr3qUMICHZEzrreQjqIdmuOzmog+BOFddgAB2i/b7ewmV0Q==
   dependencies:
     "@babel/core" "^7.7.2"
     "@babel/plugin-transform-modules-amd" "^7.5.0"
