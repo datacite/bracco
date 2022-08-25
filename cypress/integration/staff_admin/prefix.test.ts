@@ -15,7 +15,7 @@ describe('Admin: Prefix', () => {
     cy.wait(waitTime2);
   });
 
-  it('search prefixes', () => {
+  it.skip('search prefixes', () => {
     cy.visit('/prefixes');
     cy.location().should((loc) => {
       expect(loc.pathname).to.eq('/prefixes');

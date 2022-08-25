@@ -7,7 +7,7 @@ describe('ACCEPTANCE: UI | CONSENT', () => {
   const sizes = ['iphone-6', 'samsung-s10', 'ipad-2', [1024, 768]];
 
   sizes.forEach((size) => {
-    it(`index on ${size} viewport`, () => {
+    it.skip(`index on ${size} viewport`, () => {
       if (Cypress._.isArray(size)) {
         cy.viewport(size[0], size[1]);
       } else {
