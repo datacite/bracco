@@ -10415,7 +10415,7 @@ ember-cli-babel@^7.10.0, ember-cli-babel@^7.11.0, ember-cli-babel@^7.11.1, ember
     ensure-posix-path "^1.0.2"
     semver "^5.5.0"
 
-ember-cli-babel@^7.19.0, ember-cli-babel@^7.22.1, ember-cli-babel@^7.23.1, ember-cli-babel@^7.26.11, ember-cli-babel@^7.26.3, ember-cli-babel@^7.26.4, ember-cli-babel@^7.26.5, ember-cli-babel@^7.26.6, ember-cli-babel@^7.8.0:
+ember-cli-babel@^7.19.0, ember-cli-babel@^7.22.1, ember-cli-babel@^7.23.1, ember-cli-babel@^7.26.10, ember-cli-babel@^7.26.11, ember-cli-babel@^7.26.3, ember-cli-babel@^7.26.4, ember-cli-babel@^7.26.5, ember-cli-babel@^7.26.6, ember-cli-babel@^7.8.0:
   version "7.26.11"
   resolved "https://registry.yarnpkg.com/ember-cli-babel/-/ember-cli-babel-7.26.11.tgz#50da0fe4dcd99aada499843940fec75076249a9f"
   integrity sha512-JJYeYjiz/JTn34q7F5DSOjkkZqy8qwFOOxXfE6pe9yEJqWGu4qErKxlz8I22JoVEQ/aBUO+OcKTpmctvykM9YA==
@@ -10649,7 +10649,7 @@ ember-cli-htmlbars@^3.0.0, ember-cli-htmlbars@^3.0.1, ember-cli-htmlbars@^3.1.0:
     json-stable-stringify "^1.0.1"
     strip-bom "^3.0.0"
 
-ember-cli-htmlbars@^4.0.8, ember-cli-htmlbars@^4.3.1:
+ember-cli-htmlbars@^4.0.8, ember-cli-htmlbars@^4.3.1, ember-cli-htmlbars@^4.5.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/ember-cli-htmlbars/-/ember-cli-htmlbars-4.5.0.tgz#d299e4f7eba6f30dc723ee086906cc550beb252e"
   integrity sha512-bYJpK1pqFu9AadDAGTw05g2LMNzY8xTCIqQm7dMJmKEoUpLRFbPf4SfHXrktzDh7Q5iggl6Skzf1M0bPlIxARw==
@@ -11212,14 +11212,14 @@ ember-copy@^2.0.0:
   dependencies:
     ember-cli-babel "^7.22.1"
 
-ember-cp-validations@^4.0.0-beta.10:
-  version "4.0.0-beta.10"
-  resolved "https://registry.yarnpkg.com/ember-cp-validations/-/ember-cp-validations-4.0.0-beta.10.tgz#756f3a136b30c1fe745dc724c2421e88153e595a"
-  integrity sha512-XaBdrtG6jGJBsCWyDpkdPAPziI1HBRAtdKhr1dNXIPDtBpMeGsgGM57n41O63i6KbA8efOpEgGUf/OvzZChoJg==
+ember-cp-validations@^4.0.0-beta.13:
+  version "4.0.0-beta.13"
+  resolved "https://registry.yarnpkg.com/ember-cp-validations/-/ember-cp-validations-4.0.0-beta.13.tgz#f521824beb72862c0bd3d8fc57d6871f12faa250"
+  integrity sha512-S+RwiN3iVNPKupULvxLvGN99a7zidiYWZQ65DaY6mA5CpgxH7jkDIP0e9G/hxLQTIAWdRmTNuFKpbRCj5PjkEg==
   dependencies:
-    ember-cli-babel "^7.1.2"
-    ember-require-module "^0.3.0"
-    ember-validators "^2.0.0"
+    ember-cli-babel "^7.26.10"
+    ember-require-module "^0.4.0"
+    ember-validators "^4.1.1"
 
 ember-data-factory-guy@^3.9.9:
   version "3.9.9"
@@ -11683,12 +11683,12 @@ ember-ref-modifier@^0.1.2:
     ember-cli-babel "^7.1.2"
     ember-modifier-manager-polyfill "^1.0.1"
 
-ember-require-module@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/ember-require-module/-/ember-require-module-0.3.0.tgz#65aff7908b5b846467e4526594d33cfe0c23456b"
-  integrity sha512-rYN4YoWbR9VlJISSmx0ZcYZOgMcXZLGR7kdvp3zDerjIvYmHm/3p+K56fEAYmJILA6W4F+cBe41Tq2HuQAZizA==
+ember-require-module@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/ember-require-module/-/ember-require-module-0.4.0.tgz#2f86bae244f70c3d4cb8b9ef8abbd617e7a95218"
+  integrity sha512-P8q/F/DhEjVSNVdgbMctIZ4tEB1nTalPTd0ZrRxRYgiJE/g1B+eQ5z6GSCzxeeMFTJhVjvIRFtzlFUIRN+EDFQ==
   dependencies:
-    ember-cli-babel "^6.9.2"
+    ember-cli-babel "^7.26.11"
 
 ember-resolver@^7.0.0:
   version "7.0.0"
@@ -11873,13 +11873,13 @@ ember-truth-helpers@2.1.0, ember-truth-helpers@^2.1.0:
   dependencies:
     ember-cli-babel "^6.6.0"
 
-ember-validators@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/ember-validators/-/ember-validators-2.0.0.tgz#4100e17feb9c3a6cf4072732010697bbd674f8cb"
-  integrity sha512-OhXGN2UbFQY+lhkWOdW347NZsIWGj/fpTJbOfNxjyMQW/c3fvPEIvrhlvWf1JwHGKQTJDHpMQJgA/Luq39GDgQ==
+ember-validators@^4.1.1:
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/ember-validators/-/ember-validators-4.1.2.tgz#e70c0ac80f6b66c8288ffe5860c96e81bf621691"
+  integrity sha512-aNyJW52eWvWhdcRfnb0pGYSDuQU4i4XjA682aDG1ocmz7eUEDw7bXXvKEYGtVsPTtPLtUPvTtaH9mXKpMG+1xA==
   dependencies:
-    ember-cli-babel "^6.9.2"
-    ember-require-module "^0.3.0"
+    "@embroider/macros" "^1.0.0"
+    ember-cli-babel "^7.26.11"
 
 ember-wormhole@^0.5.5:
   version "0.5.5"
