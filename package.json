@@ -155,7 +155,7 @@
     "ember-tracker": "^1.0.0",
     "ember-truncate": "^2.0.1",
     "ember-truth-helpers": "^2.1.0",
-    "eslint-plugin-ember": "^10.0.2",
+    "eslint-plugin-ember": "^10.1.1",
     "eslint-plugin-node": "^11.1.0",
     "eslint": "~7.32.0",
     "fastboot-express-middleware": "^3.3.2",
@@ -182,6 +182,6 @@
   "resolutions": {
     "**/axios": "^0.21.2",
     "**/highlight.js": "^10.4.1",
-    "**/caniuse-lite": "1.0.30001378"
+    "**/caniuse-lite": "1.0.30001383"
   }
 }
