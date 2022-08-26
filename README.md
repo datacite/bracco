@@ -13,7 +13,7 @@ The web frontend for the DataCite Fabrica service.
 You will need the following things properly installed on your computer.
 
 - [Git](https://git-scm.com/)
-- [Node.js](https://nodejs.org/) (with NPM)
+- [Node.js](https://nodejs.org/) (with NPM) - 14.x
 - [Ember CLI](https://ember-cli.com/)
 
 ## Installation
@@ -25,7 +25,7 @@ You will need the following things properly installed on your computer.
 
 ## Running / Development
 
-- `ember serve`
+- `yarn ember serve`
 - Visit your app at [http://localhost:4200](http://localhost:4200).
 
 ### Code Generators
