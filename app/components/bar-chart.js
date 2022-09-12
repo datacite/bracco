@@ -14,7 +14,7 @@ export default Component.extend({
   tagName: 'div',
   classNames: ['col-lg-3', 'col-md-4'],
   data: null,
-  count: computed('data', 'summarize', function () {
+  count: computed('data', 'summarize', 'currentYear', function () {
     if (this.data) {
       if (this.summarize) {
         return A(this.data).reduce(function (a, b) {
@@ -23,7 +23,7 @@ export default Component.extend({
       } else {
         let currentYear = A(this.data).findBy(
           'id',
-          new Date().getFullYear().toString()
+          this.currentYear.toString()
         );
         if (currentYear) {
           return currentYear.count;
@@ -39,6 +39,7 @@ export default Component.extend({
   chartId: computed('label', function () {
     return 'chart-' + this.label.toLowerCase();
   }),
+  currentYear: new Date().getFullYear(),
   cumulative: true,
   summarize: false,
 
@@ -66,9 +67,9 @@ export default Component.extend({
     let height = 100;
     let margin = { top: 10, right: 5, bottom: 20, left: 5 };
 
-    let currentYear = new Date().getFullYear();
-    let startDate = new Date(`${currentYear - 10}-01-01`);
-    let endDate = new Date(`${currentYear + 1}-01-01`);
+    let currentYear = this.currentYear;
+    let startDate = new Date(`${currentYear - 10}-01-01 00:00:00`);
+    let endDate = new Date(`${currentYear + 1}-01-01 00:00:00`);
     let domain = [startDate, endDate];
     let length = timeYears(startDate, endDate).length;
     let width = length * 22;
