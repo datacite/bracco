@@ -9,6 +9,10 @@ module('Integration | Component | repository-info', function (hooks) {
   test('it renders', async function (assert) {
     await render(hbs`{{repository-info}}`);
 
-    assert.dom(this.element).hasText('DOIs by year 0 in 2021 20122022');
+    let currentYear = new Date().getFullYear();
+    let startDate = (currentYear - 10).toString();
+    let endDate = currentYear.toString();
+
+    assert.dom(this.element).hasText(`DOIs by year 0 in ${currentYear} ${startDate+endDate}`);
   });
 });
