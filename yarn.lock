@@ -9021,9 +9021,9 @@ cli-width@^2.0.0:
   integrity sha1-/xnt6Kml5XkyQUewwR8PvLq+1jk=
 
 clipboard@^2.0.0:
-  version "2.0.4"
-  resolved "https://registry.yarnpkg.com/clipboard/-/clipboard-2.0.4.tgz#836dafd66cf0fea5d71ce5d5b0bf6e958009112d"
-  integrity sha512-Vw26VSLRpJfBofiVaFb/I8PVfdI1OxKcYShe6fm0sP/DtmiWQNCjhM/okTvdCo0G+lMMm1rMYbk4IK4x1X+kgQ==
+  version "2.0.11"
+  resolved "https://registry.yarnpkg.com/clipboard/-/clipboard-2.0.11.tgz#62180360b97dd668b6b3a84ec226975762a70be5"
+  integrity sha512-C+0bbOqkezLIsmWSvlsXS0Q0bmkugu7jcfMIACB+RDEntIzQIkdr148we28AfSloQLRdZlYL/QYyrq05j/3Faw==
   dependencies:
     good-listener "^1.2.2"
     select "^1.1.2"
@@ -10737,7 +10737,7 @@ ember-cli-build-config-editor@^0.5.0:
   dependencies:
     recast "^0.12.0"
 
-ember-cli-clipboard@^0.13.0:
+ember-cli-clipboard@~0.13.0:
   version "0.13.0"
   resolved "https://registry.yarnpkg.com/ember-cli-clipboard/-/ember-cli-clipboard-0.13.0.tgz#47d3de3aec09987409c162cbff36f966a2c138b7"
   integrity sha512-AA2J5lliP/DXUFKnQ+r/D3e4xiN3ttlmN8W+8WfZg7K8VeOYlWpMyGcUjmuLa7inLUCMjLbtG6nXc20AQ5OjDg==
