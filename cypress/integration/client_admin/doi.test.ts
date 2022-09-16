@@ -136,6 +136,7 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
         cy.get('[doi-subject] div[role="button"]').click({ force: true }).then(($dropdown) => {
           // Makes the selection from the dropdown.
           cy.get('input.ember-power-select-search-input').type('Optics{enter}', { force: true });
+          cy.get('input.subject-classification-code-field').type('O123', { force: true });
           cy.get('#toggle-subjects').should('be.visible').click({ force: true }).then(($toggle) => {
             cy.get('#toggle-subjects').contains('Show 1 subject');
           });
@@ -228,6 +229,26 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
           });
         });
       });
+
+      // Set related item.
+      cy.get('#add-related-item').click({ force: true}).then(($subform) => {
+        // Fill in the title
+        cy.get('[data-test-related-item-title]').should('be.visible').type('HEPP Yearly', { force: true });
+        // Select the type
+        cy.get('[data-test-related-item-type] div[role="button"]').click({ force: true}).then(($dropdown) => {
+          cy.get("ul.ember-power-select-options li").contains("Journal").click({ force: true });
+        })
+        // Add related item identifier
+        cy.get('[data-test-related-item-identifier]').should('be.visible').type('10.12345/example').then(() => {
+          // Check that the type is set
+          cy.get('[data-test-related-item-identifier-type]').contains('DOI')
+        })
+
+        // Check the toggle
+        cy.get('#toggle-related-items').should('be.visible').click({ force: true }).then(($toggle) => {
+          cy.get('#toggle-related-items').contains('Show 1 related item');
+        });
+      })
 
       // Set 'prefix'. Random suffix.
       cy.get('#prefix-field div[role="button"]').click({ force: true }).then(() => {

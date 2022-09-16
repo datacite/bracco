@@ -180,6 +180,7 @@ export default Model.extend(Validations, {
   descriptions: fragmentArray('description', { defaultValue: [] }),
   geoLocations: fragmentArray('geoLocation', { defaultValue: [] }),
   fundingReferences: fragmentArray('fundingReference', { defaultValue: [] }),
+  relatedItems: fragmentArray('relatedItem', { defaultValue: [] }),
   landingPage: attr(),
   xml: attr('xml'),
   metadataVersion: attr('string'),
