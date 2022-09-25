@@ -166,7 +166,7 @@ export default Controller.extend({
       repository
         .save()
         .then(function (repository) {
-          self.transitionToRoute('repositories.show', repository.id);
+          self.transitionToRoute('repositories.show', self.model.repository.id, { queryParams: { assignedPrefix: repository.prefixes.firstObject.id } })
         })
         .catch(function (reason) {
           console.debug(reason);
