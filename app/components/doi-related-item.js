@@ -77,6 +77,8 @@ export default Component.extend({
   relationTypes: relationTypeList,
   relatedItemTypeList,
   relatedItemTypes: relatedItemTypeList,
+  showRelatedItemCreators: true,
+  showRelatedItemContributors: true,
 
   init(...args) {
     this._super(...args);
@@ -157,6 +159,20 @@ export default Component.extend({
     },
     deleteRelatedItem() {
       this.model.get('relatedItems').removeObject(this.fragment);
+    },
+    addRelatedItemCreator() {
+      this.fragment.get('creators').createFragment();
+      this.set('showRelatedItemCreators', true);
+    },
+    toggleRelatedItemCreators() {
+      this.set('showRelatedItemCreators', !this.get('showRelatedItemCreators'));
+    },
+    addRelatedItemContributor() {
+      this.fragment.get('contributors').createFragment();
+      this.set('showRelatedItemContributors', true);
+    },
+    toggleRelatedItemContributors() {
+      this.set('showRelatedItemContributors', !this.get('showRelatedItemContributors'));
     },
   }
 });

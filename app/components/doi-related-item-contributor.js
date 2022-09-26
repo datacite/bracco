@@ -168,5 +168,8 @@ export default Component.extend({
     selectContributorType(contributorType) {
       this.selectContributorType(contributorType);
     },
+    deleteRelatedItemContributor() {
+      this.creator.get('contributors').removeObject(this.fragment);
+    },
   },
 });
