@@ -92,5 +92,8 @@ export default Component.extend({
     updateName(value) {
       this.joinNameParts({ name: value });
     },
+    deleteRelatedItemCreator() {
+      this.creator.get('creators').removeObject(this.fragment);
+    },
   },
 });
