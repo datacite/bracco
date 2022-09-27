@@ -171,7 +171,8 @@
     "typescript": "^3.7.4",
     "urijs": "^1.19.11",
     "vkbeautify": "^0.99.3",
-    "xml2js": "^0.4.23"
+    "xml2js": "^0.4.23",
+    "@babel/helper-string-parser": "^7.18.10"
   },
   "engines": {
     "node": "14.*"
