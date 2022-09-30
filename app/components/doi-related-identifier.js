@@ -144,6 +144,7 @@ export default Component.extend({
     };
     const arxiv = /^(arXiv:)(\d{4}.\d{4,5}|[a-z\-]+(\.[A-Z]{2})?\/\d{7})(v\d+)?/;
     const doi = /^(10\.\d{4,5}\/.+)/;
+    const doiUrl = /^(?:(http|https):\/\/(dx.)?(doi.org|handle.test.datacite.org)?\/)(10\.\d{4,5}\/.+)/
     const bibcode = /\d{4}[A-Za-z\.\&]{5}[\w\.]{4}[ELPQ-Z\.][\d\.]{4}[A-Z]/;
     const urn = /^urn:[a-z0-9][a-z0-9-]{0,31}:[a-z0-9()+,\-.:=@;$_!*'%/?#]/;
 
@@ -168,6 +169,11 @@ export default Component.extend({
         this.set('controlledIdentifierType', true);
         break;
       case doi.test(value):
+        this.fragment.set('relatedIdentifier', value);
+        this.fragment.set('relatedIdentifierType', 'DOI');
+        this.set('controlledIdentifierType', true);
+        break;
+      case doiUrl.test(value):
         this.fragment.set('relatedIdentifier', value);
         this.fragment.set('relatedIdentifierType', 'DOI');
         this.set('controlledIdentifierType', true);
