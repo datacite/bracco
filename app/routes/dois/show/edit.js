@@ -8,9 +8,13 @@ export default Route.extend({
 
   model() {
     let self = this;
+    let id = this.modelFor('dois/show').get('id');
     return this.store
-      .findRecord('doi', this.modelFor('dois/show').get('id'), {
-        include: 'client'
+      .findRecord('doi', id, {
+        include: 'client',
+        adapterOptions: {
+          affiliation: true
+        }
       })
       .then(function (doi) {
         if (
