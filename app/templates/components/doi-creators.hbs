@@ -4,7 +4,7 @@
     <div class="label-vertical">The main researchers or organizations involved in producing the resource, in priority order.</div>
     {{#if showCreators}}
       {{#each model.creators as |creator index|}}
-         <DoiCreator @model={{model}} @fragment={{creator}} @form={{form}} @index={{index}} />
+        <DoiCreator @model={{model}} @fragment={{creator}} @form={{form}} @index={{index}} />
       {{/each}}
 
       {{#if (lte model.creators.length 24)}}
