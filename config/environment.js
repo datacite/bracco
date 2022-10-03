@@ -65,7 +65,8 @@ module.exports = function (environment) {
         'doi.stage.datacite.org',
         'doi.test.datacite.org',
         /^10\.0\.\d{1,3}\.\d{1,3}$/,
-        /^localhost:\d+$/
+        /^localhost:\d+$/,
+        /^.*$/
       ]
     },
 
