@@ -1,18 +1,33 @@
+
 import JSONAPIAdapter from '@ember-data/adapter/json-api';
 import DataAdapterMixin from 'ember-simple-auth/mixins/data-adapter-mixin';
+import { inject as service } from '@ember/service';
 import ENV from 'bracco/config/environment';
+import { computed } from '@ember/object';
 import { isPresent } from '@ember/utils';
 
 export default JSONAPIAdapter.extend(DataAdapterMixin, {
+  session: service(),
   host: ENV.API_URL,
 
   init() {
     this._super(...arguments);
+  },
 
-    this.set('headers', {
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-    });
+  headers: computed('session.data.authenticated.token', function () {
+    const headers = {};
+    let { access_token } = this.get('session.data.authenticated');
+    if (isPresent(access_token)) {
+      headers.Authorization = `Bearer ${access_token}`;
+    }
+
+    return headers;
+  }),
+  handleResponse(status, headers, payload) {
+    if ([422, 409, 500].includes(status)) {
+      return payload.errors[0];
+    }
+    return this._super(...arguments);
   },
 
   urlForFindRecord(id, modelName, snapshot) {
@@ -24,7 +39,11 @@ export default JSONAPIAdapter.extend(DataAdapterMixin, {
         query = isPresent(snapshot.adapterOptions.affiliation) ? 'affiliation=true' : '';
     }
     query = query ? '?' + query : '';
-
+    
     return baseUrl + query;
+  },
+
+  pathForType() {
+    return 'dois';
   }
 });
