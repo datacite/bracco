@@ -1,4 +1,3 @@
-
 import ApplicationAdapter from './application';
 import { isPresent } from '@ember/utils';
 
