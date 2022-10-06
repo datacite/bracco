@@ -8,10 +8,19 @@ export default ApplicationAdapter.extend({
     let query = '';
 
     if (snapshot.adapterOptions !== undefined) {
-        //query = snapshot.adapterOptions.affiliation !== undefined ? 'affiliation=true' : '';
         query = isPresent(snapshot.adapterOptions.affiliation) ? 'affiliation=true' : '';
     }
     query = query ? '?' + query : '';
+    
+    return baseUrl + query;
+  },
+
+  // For API requests from doi.save() 
+  urlForUpdateRecord(id, modelName, snapshot) {
+    let baseUrl = this.buildURL(modelName, id, snapshot);
+    let query = '';
+
+    query = '?' + 'affiliation=true';
     
     return baseUrl + query;
   }
