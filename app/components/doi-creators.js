@@ -9,6 +9,9 @@ export default Component.extend({
     if (!this.model.get('creators')) {
       this.model.set('creators', []);
     }
+    if (this.model.get('creators').length == 0) {
+      this.model.get('creators').createFragment();
+    }
   },
 
   actions: {
