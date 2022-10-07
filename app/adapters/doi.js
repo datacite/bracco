@@ -1,4 +1,5 @@
 import ApplicationAdapter from './application';
+import ENV from 'bracco/config/environment';
 import { isPresent } from '@ember/utils';
 
 export default ApplicationAdapter.extend({
@@ -15,7 +16,7 @@ export default ApplicationAdapter.extend({
     return baseUrl + query;
   },
 
-  // For API requests from doi.save() 
+  // For API requests from doi.save()/PATCH 
   urlForUpdateRecord(id, modelName, snapshot) {
     let baseUrl = this.buildURL(modelName, id, snapshot);
     let query = '';
@@ -23,6 +24,19 @@ export default ApplicationAdapter.extend({
     query = '?' + 'affiliation=true';
     
     return baseUrl + query;
+  },
+
+  // For API requests from doi.save()/POST
+  urlForCreateRecord(modelName, snapshot) {
+    //let baseUrl = super.urlForCreateRecord(...arguments);
+    let baseUrl = ENV.API_URL  + '/' + this.pathForType();
+    let query = '?' + 'affiliation=true';
+
+    return baseUrl + query;
+  },
+
+  pathForType() {
+    return 'dois';
   }
 
 });
