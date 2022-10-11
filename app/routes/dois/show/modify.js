@@ -8,7 +8,10 @@ export default Route.extend({
     let self = this;
     return this.store
       .findRecord('doi', this.modelFor('dois/show').get('id'), {
-        include: 'client'
+        include: 'client',
+        adapterOptions: {
+          affiliation: true
+        }
       })
       .then(function (doi) {
         return doi;

@@ -134,12 +134,12 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
       });
 
       // Set contributor.
-      cy.get('#add-contributor').click({ force: true }).then(($subform) => {
+      cy.get('#add-contributor').click({ waitForAnimations: true }).then(($subform) => {
         // Causes the aria dropdown to be populated and displayed so that selection can be made.
         cy.get('[doi-contributor] div[role="button"]').click({ force: true }).then(($dropdown) => {
           // Makes the selection from the dropdown.
-          cy.get("ul.ember-power-select-options li").contains("Data collector").click({ force: true });
-          cy.get('#toggle-contributors').should('be.visible').click({ force: true }).then(($toggle) => {
+          cy.get("ul.ember-power-select-options li").contains("Data collector").click({ waitForAnimations: true });
+          cy.get('#toggle-contributors').should('be.visible').click({ waitForAnimations: true }).then(($toggle) => {
             cy.get('#toggle-contributors').contains('Show 1 contributor');
           })
         })
@@ -149,7 +149,7 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
       cy.get('#version-field').should('be.visible').type('67', { force: true });
 
       // Set format.
-      cy.get('#add-format').click({ force: true }).then(($subform) => {
+      cy.get('#add-format').click({ waitForAnimations: true }).then(($subform) => {
         cy.get('[data-test-format]').should('be.visible').type('json', { force: true });
         cy.get('#toggle-formats').should('be.visible').click({ force: true }).then(($toggle) => {
           cy.get('#toggle-formats').contains('Show 1 format');
@@ -160,7 +160,7 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
       cy.get('#add-alternate-identifier').click({ force: true }).then(($subform) => {
         cy.get('[data-test-alternate-identifier-type] div[role="button"]').click({ force: true }).then(($dropdown) => {
           cy.get("ul.ember-power-select-options li").contains("DOI").click({ force: true });
-          cy.get('#toggle-alternate-identifiers').should('be.visible').click({ force: true }).then(($toggle) => {
+          cy.get('#toggle-alternate-identifiers').should('be.visible').click({ waitForAnimations: true }).then(($toggle) => {
             cy.get('#toggle-alternate-identifiers').contains('Show 1 alternate identifier');
           });
         });
@@ -180,7 +180,7 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
               // Causes the aria dropdown to be populated and displayed so that selection can be made.
               cy.get('[data-test-related-resource-type] div[role="button"]').click({ force: true }).then(() => {
                 // Makes the selection from the dropdown. (Type or click on it.  Since choices change as you type, that is the better method.)
-                cy.get('input.ember-power-select-search-input').type('Text{enter}', { force: true }).then(() => {
+                cy.get('input.ember-power-select-search-input').first().type('Text{enter}', { force: true }).then(() => {
 
                   cy.get('#toggle-related-identifiers').should('be.visible').click({ force: true }).then(($toggle) => {
                     cy.get('#toggle-related-identifiers').contains('Show 1 related identifier');

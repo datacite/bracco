@@ -8,7 +8,12 @@ export default Route.extend({
   model(params) {
     // let self = this;
     return this.store
-      .findRecord('doi', params.doi_id, { include: 'client' })
+      .findRecord('doi', params.doi_id, {
+        include: 'client',
+        adapterOptions: {
+          affiliation: true
+        }
+      })
       .then(function (doi) {
         // TODO fix metadata injection
         // set(self, 'headData.title', doi.titles[0].title);
