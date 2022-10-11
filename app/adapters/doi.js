@@ -28,8 +28,7 @@ export default ApplicationAdapter.extend({
 
   // For API requests from doi.save()/POST
   urlForCreateRecord(modelName, snapshot) {
-    //let baseUrl = super.urlForCreateRecord(...arguments);
-    let baseUrl = ENV.API_URL  + '/' + this.pathForType();
+    let baseUrl = this._super(...arguments)
     let query = '?' + 'affiliation=true';
 
     return baseUrl + query;
