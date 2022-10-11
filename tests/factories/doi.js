@@ -16,6 +16,7 @@ FactoryGuy.define('doi', {
     rightsList: FactoryGuy.hasMany('rights'),
     geoLocations: FactoryGuy.hasMany('geoLocation'),
     subjects: FactoryGuy.hasMany('subject'),
+    relatedItems: FactoryGuy.hasMany('relatedItem'),
     publisher: 'Royal Society of Chemistry',
     types: {
       resourceTypeGeneral: 'Dataset',
@@ -146,3 +147,34 @@ FactoryGuy.define('affiliation', {
     schemeUri: 'https://ror.org',
   },
 });
+
+FactoryGuy.define('relatedItem', {
+  default: {
+    relatedItemType: 'Journal',
+    relationType: 'IsPublishedIn',
+    relatedItemIdentifier: { 
+      relatedItemIdentifier: "10.1016/j.physletb.2017.11.044", 
+      relatedItemIdentifierType: 'DOI'
+    },
+    titles: [
+      { title: 'Physics letters / B'}
+    ],
+    publicationYear: '2018',
+    volume: '776',
+    creators: [
+      {
+        name: 'Goodman, Steve',
+        givenName: 'Steve',
+        familyName: 'Goodman',
+        nameType: 'Personal'
+      }
+    ],
+    contributors: [
+      {
+        name: 'RelItem Publishing Inc',
+        nameType: 'Organizational',
+        contributorType: 'HostingInstitution'
+      }
+    ]
+  }
+})

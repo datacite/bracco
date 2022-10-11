@@ -1,0 +1,144 @@
+<div class="power-select-label">
+  <label for="relatedItemTitle" class="required-label subtitle">Title</label> 
+</div> 
+
+<div class="input-group">
+  <input type="text" class="form-control related-item-title-field" value={{fragment.title}} placeholder=""
+  oninput={{action "updateRelatedItemTitle" value="target.value"}} data-test-related-item-title />
+  <span class="input-group-btn">
+    <BsButton @outline={{true}} @onClick={{action "deleteRelatedItem" index}}><i class="fas fa-trash"></i></BsButton>
+  </span>
+</div>
+
+<div
+  class="help-block help-block-fragment related-item-title-field}}">
+  One title by which the resource is known.
+</div>
+
+<div class="power-select-label">
+  <label for="relatedItemType" class="required-label subtitle">Related Item Type</label> 
+</div> 
+<div class="power-select-fragment" data-test-related-item-type>
+  {{#form.element
+    controlType="power-select"
+    value=fragment.relatedItemType
+    helpText="The type of the Related Item."
+    options=relatedItemTypeList
+    destination=fragment.relatedItemType as |el|
+  }}
+    {{el.control
+      onChange=(action "selectRelatedItemType")
+      allowClear=true
+      placeholder="Select related item Type"
+    }}
+  {{/form.element}}
+</div>
+
+<div class="power-select-label">
+  <label for="relationType" class="required-label subtitle">Relation Type</label> 
+</div> 
+<div class="power-select-fragment" data-test-related-relation-type>
+  {{#form.element
+    controlType="power-select"
+    value=fragment.relationType
+    helpText="The type of the Relation."
+    options=relationTypeList
+    disabled=disabled
+    allowClear=true
+    destination=fragment.relationType as |el|
+  }}
+    <el.control
+      @onChange={{action "selectRelationType"}}
+      @placeholder="Select Relation Type" as |item|>
+        {{humanize (underscore item)}}
+    </el.control>
+  {{/form.element}}
+</div>
+
+<DoiRelatedItemIdentifier @model={{model}} @form={{form}} @fragment={{fragment.relatedItemIdentifier}} />
+
+<div class="power-select-label">
+  <label for="relatedItemVolume" class="subtitle">Volume</label> 
+</div> 
+<input type="text"
+    class="form-control related-item-volume-field" placeholder="" value={{fragment.volume}} oninput={{action "updateRelatedItemVolume" value="target.value"}} data-test-related-item-volume />
+
+<div
+  class="help-block help-block-fragment related-item-volume-field">
+  Volume of the related item.
+</div>
+
+<div class="power-select-label">
+  <label for="relatedItemIssue" class="subtitle">Issue</label> 
+</div> 
+<input type="text"
+    class="form-control related-item-issue-field" placeholder="" value={{fragment.issue}} oninput={{action "updateRelatedItemIssue" value="target.value"}} data-test-related-item-issue />
+
+<div
+  class="help-block help-block-fragment related-item-issue-field">
+  Issue number or name of the related item.
+</div>
+
+<div class="power-select-label">
+  <label for="relatedItemNumber" class="subtitle">Number</label> 
+</div> 
+<input type="text"
+    class="form-control related-item-number-field" placeholder="" value={{fragment.number}} oninput={{action "updateRelatedItemNumber" value="target.value"}} data-test-related-item-number />
+
+<div
+  class="help-block help-block-fragment related-item-number-field">
+  Number of the related item e.g. report number of article number.
+</div>
+
+<div class="power-select-label">
+  <label for="relatedItemPublicationYear" class="subtitle">Publication Year</label> 
+</div> 
+<input type="text"
+    class="form-control related-item-publication-year-field" placeholder="" value={{fragment.publicationYear}} oninput={{action "updateRelatedItemPublicationYear" value="target.value"}} data-test-related-item-publication-year />
+
+<div
+  class="help-block help-block-fragment related-item-volume-field">
+  The year when the resource was or will be made publicly available.
+</div>
+
+<div>
+{{#if showRelatedItemCreators}}
+  {{#each fragment.creators as |creator index|}}
+      <DoiRelatedItemCreator @model={{model}} @fragment={{creator}} @creator={{fragment}} @form={{form}} @index={{index}} />
+  {{/each}}
+  {{#if (lte fragment.creators.length 24)}}
+    <BsButton @class="btn-sm add-related-item-creator" @outline={{true}} @onClick={{action "addRelatedItemCreator"}}><i class="fas fa-plus"></i> Add another creator</BsButton>
+  {{/if}}
+
+  {{#if (gt fragment.creators.length 1)}}
+    <BsButton @id="toggle-related-item-creators" @class="btn-sm" @outline={{true}} @onClick={{action "toggleRelatedItemCreators"}}><i class="fas fa-eye-slash"></i> Hide {{pluralize fragment.creators.length 'creator'}}</BsButton>
+  {{/if}}
+{{else}}
+  {{#if (gt fragment.creators.length 0)}}
+    <BsButton @id="toggle-related-item-creators" @class="btn-sm" @outline={{true}} @onClick={{action "toggleRelatedItemCreators"}}><i class="fas fa-eye"></i> Show {{pluralize fragment.creators.length 'creator'}}</BsButton>
+  {{else}}
+    <BsButton @class="btn-sm btn-warning add-related-item-creator" @outline={{true}} @onClick={{action "addRelatedItemCreator"}}><i class="fas fa-plus"></i> Add creator</BsButton>
+  {{/if}}
+{{/if}}
+</div>
+<div>
+{{#if showRelatedItemContributors}}
+  {{#each fragment.contributors as |contributor index|}}
+      <DoiRelatedItemContributor @model={{model}} @fragment={{contributor}} @creator={{fragment}} @form={{form}} @index={{index}} />
+  {{/each}}
+  {{#if (lte fragment.contributors.length 24)}}
+    <BsButton @class="btn-sm add-related-item-contributor" @outline={{true}} @onClick={{action "addRelatedItemContributor"}}><i class="fas fa-plus"></i> Add another contributor</BsButton>
+  {{/if}}
+
+  {{#if (gt fragment.contributors.length 1)}}
+    <BsButton @id="toggle-related-item-contributors" @class="btn-sm" @outline={{true}} @onClick={{action "toggleRelatedItemContributors"}}><i class="fas fa-eye-slash"></i> Hide {{pluralize fragment.contributors.length 'contributor'}}</BsButton>
+  {{/if}}
+{{else}}
+  {{#if (gt fragment.contributors.length 0)}}
+    <BsButton @id="toggle-related-item-contributors" @class="btn-sm" @outline={{true}} @onClick={{action "toggleRelatedItemContributors"}}><i class="fas fa-eye"></i> Show {{pluralize fragment.contributors.length 'contributor'}}</BsButton>
+  {{else}}
+    <BsButton @class="btn-sm btn-warning add-related-item-contributors" @outline={{true}} @onClick={{action "addRelatedItemContributor"}}><i class="fas fa-plus"></i> Add contributor</BsButton>
+  {{/if}}
+{{/if}}
+</div>
+<hr />

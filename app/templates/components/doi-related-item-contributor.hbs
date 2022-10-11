@@ -1,0 +1,28 @@
+<div>
+  <label for="name" class="subtitle">Contributor Name</label>
+  <div class="input-group">
+    <input type="text" class="form-control name-field" value={{fragment.name}} placeholder="Name" oninput={{action "updateName" value="target.value"}} data-test-related-item-contributor-name/>
+    <span class="input-group-btn">
+        <BsButton @outline={{true}} @onClick={{action "deleteRelatedItemContributor" index}}><i class="fas fa-trash"></i></BsButton>
+    </span>
+  </div>
+</div>
+
+<label for="contributorType" class="subtitle">Contributor Type</label>
+  <div class="power-select-fragment" doi-related-item-contributor-type>
+    {{#form.element
+      controlType="power-select"
+      value=humanContributorType
+      helpText="The type of contributor of the resource."
+      options=humanContributorTypes
+      formLayout="vertical"
+      selected=humanContributorType
+      destination=humanContributorType
+      disabled=disabled as |el|
+    }}
+      {{el.control
+        onChange=(action "selectContributorType")
+        placeholder="Select Contributor Type"
+      }}
+    {{/form.element}}
+</div>  
