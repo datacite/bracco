@@ -8,25 +8,25 @@
   <div class="navbar-header">
     {{navbar.toggle}}
     <a href="/" class="navbar-brand">
-      <img src="/assets/images/fabrica-logo.svg" height="50" class="fabrica-logo"/>
+      {{#if title}}<img src="/assets/images/fabrica-logo.svg" height="50" class="fabrica-logo"/>{{/if}}
     </a>
   </div>
   <navbar.content>
-    <navbar.nav class="navbar-right" as |nav|>
+    <navbar.nav class="navbar-right {{if (or (eq currentUser.roleName 'Staff') (eq currentUser.roleName 'Developer') (eq currentUser.roleName 'Consortium')) 'navbar-lead' 'navbar-user'}}" as |nav|>
       <nav.item>
-        <LinkTo @route="about" @id="about">
+        <LinkTo @route="about" @id="about" class="navbar-button">
           About
         </LinkTo>
       </nav.item>
       <nav.item>
-        <a target="_blank" rel="noopener" href="https://support.datacite.org">
+        <a target="_blank" rel="noopener" href="https://support.datacite.org" class="navbar-button">
           Support
         </a>
       </nav.item>
       {{#if user}}
         {{#if session.isAuthenticated}}
           <nav.dropdown as |dd|>
-            <dd.toggle id="account_menu_link">
+            <dd.toggle id="account_menu_link" class="navbar-button">
               {{#if currentUser.isUser}}
                 {{currentUser.name}}
               {{else}}
