@@ -28,33 +28,34 @@
       {{/if}}
     {{/if}}
 
-    {{#if (and (can 'move doi' repository) (gt model.length 0))}}
+    {{#if (and repository.isActive (gt model.length 0))}}
       <div class="panel facets add-25">
         <div class="panel-body">
-            <div class="btn-toolbar">
-              <div class="btn-group-vertical btn-group-sm">
-                  <LinkTo
-                    @route="repositories.show.transfer"
-                    @model={{repository.id}}
-                    class="btn btn-warning"
-                    @id="transfer-dois"
-                  >
-                    <i class="fas fa-arrow-circle-right"></i>
-                    Transfer
-                    {{if media.isXl ' DOIs'}}
-                  </LinkTo>
-              </div>
+          <div class="btn-toolbar">
+            <div class="btn-group-vertical btn-group-sm">
+              <ExportBasicMetadata @model={{model}} class="btn btn-warning" />
+              {{#if (and (can 'move doi' repository))}} 
+                <LinkTo
+                  @route="repositories.show.transfer"
+                  @model={{repository.id}}
+                  class="btn btn-warning"
+                  @id="transfer-dois"
+                >
+                  <i class="fas fa-arrow-circle-right"></i>
+                  Transfer
+                  {{if media.isXl ' DOIs'}}
+                </LinkTo>
+              {{/if}}
             </div>
+          </div>
         </div>
       </div>
     {{else}}
       <div class="panel panel-transparent">
         <div class="panel-body">
-          {{#if (eq repository.meta.prefixCount 0)}}
-            <BsAlert @dismissible={{false}} @type="warning">
-              No DOIs available to transfer.
-            </BsAlert>
-          {{/if}}
+          <BsAlert @dismissible={{false}} @type="warning">
+            No DOIs available to transfer.
+          </BsAlert>
         </div>
       </div>
     {{/if}}
