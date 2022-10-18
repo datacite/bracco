@@ -22,6 +22,11 @@ describe('ACCEPTANCE: CLIENT_ADMIN | SETTINGS', () => {
   it('is logged in to homepage', () => {
     cy.visit('/');
     cy.url().should('include', '/repositories/datacite.test').then (() => {
+
+      // Has Fabrica logo and correct navbar color
+      cy.get('img.fabrica-logo').should('exist').should('have.attr', 'src').should('include', 'fabrica-logo.svg');
+      cy.get('ul.navbar-nav').should('have.css', 'background-color', 'rgb(0, 177, 226)');
+      
       cy.get('h2.work').contains('DataCite Test Repository');
       cy.get('a#account_menu_link').should('contain', 'DATACITE.TEST');
 

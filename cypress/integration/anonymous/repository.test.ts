@@ -17,6 +17,7 @@ describe('Anonymous: Repository', () => {
     cy.get('a#sign-in').should('exist');
 
     cy.get('div.motto h1').contains(site_title);
+    cy.get('ul.navbar-nav').should('have.css', 'background-color', 'rgb(0, 177, 226)');
   });
 
   it('visiting repository AWI info', () => {
@@ -27,6 +28,7 @@ describe('Anonymous: Repository', () => {
     cy.get('a#sign-in').should('exist');
 
     cy.get('div.motto h1').contains(site_title);
+    cy.get('ul.navbar-nav').should('have.css', 'background-color', 'rgb(0, 177, 226)');
   });
 
   it('visiting repository AWI prefixes', () => {
@@ -37,6 +39,7 @@ describe('Anonymous: Repository', () => {
     cy.get('a#sign-in').should('exist');
 
     cy.get('div.motto h1').contains(site_title);
+    cy.get('ul.navbar-nav').should('have.css', 'background-color', 'rgb(0, 177, 226)');
   });
 
   it('visiting repository AWI dois', () => {
@@ -47,5 +50,6 @@ describe('Anonymous: Repository', () => {
     cy.get('a#sign-in').should('exist');
 
     cy.get('div.motto h1').contains(site_title);
+    cy.get('ul.navbar-nav').should('have.css', 'background-color', 'rgb(0, 177, 226)');
   });
 });

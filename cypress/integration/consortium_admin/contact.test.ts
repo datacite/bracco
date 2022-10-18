@@ -33,6 +33,10 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | CONTACTS', () => {
     cy.url().should('include', '/providers/dc/contacts')
     cy.wait(waitTime);
 
+    // Has Fabrica logo and correct navbar color
+    cy.get('img.fabrica-logo').should('exist').should('have.attr', 'src').should('include', 'fabrica-logo.svg');
+    cy.get('ul.navbar-nav').should('have.css', 'background-color', 'rgb(36, 59, 84)');
+
     cy.get('h2.work').contains('DataCite Consortium');
     cy.get('li a.nav-link.active').contains('Contacts');
     cy.get('div#search').should('exist');
