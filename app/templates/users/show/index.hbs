@@ -1,4 +1,5 @@
 <div class="content">
+	<UserRole />
 	<div class="row row-chart">
 		<BarChart @data={{model.doiCount}} @label="DOI" @model={{model}} @link="users.show.dois" @summarize={{true}} />
 		<DonutChart @data={{model.resourceTypeCount}} @label="DOI" @model={{model}} @link="users.show.dois" />

@@ -8,6 +8,7 @@
       </div>
     </div>
   {{/if}}
+  <UserRole />
   <div class="row">
     <BarChart @data={{json.providers}} @label="Member" @link="providers" />
     <BarChart @data={{json.clients}} @label="Repository" @link="repositories" />
