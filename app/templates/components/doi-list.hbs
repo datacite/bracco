@@ -679,7 +679,7 @@
 </div>
 <div class="col-md-9 panel-list" id="content">
   {{#if searchable}}
-    <ModelSearch @model={{model}} @link={{link}} @sortable={{true}} />
+    <ModelSearch @model={{model}} @link={{link}} @sortable={{true}} @placeholder="Type to search. For example 10.4121/17185607.v1" />
   {{/if}}
   {{#if model}}
     {{#each model as |doi|}}

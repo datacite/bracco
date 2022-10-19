@@ -56,7 +56,7 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | DOIS', () => {
       // Has search form
       cy.get('form #search').within(($searchBar) => {
         cy.get('input[name="query"]')
-          .and('have.attr', 'placeholder').should('match', /Type\s*to\s*search.../i);
+          .and('have.attr', 'placeholder').should('match', /Type\sto\ssearch\.\sFor\sexample\s10\.4121\/17185607\.v1/i);
         cy.get('button').contains(/Search/i);
       });
 
