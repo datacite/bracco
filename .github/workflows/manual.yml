@@ -1,7 +1,6 @@
 name: Manually Test and Deploy Branch to Vercel
 on:
   workflow_dispatch:
-
 jobs:
   build:
     name: Build
@@ -9,6 +8,8 @@ jobs:
     strategy:
       fail-fast: false
     steps:
+      - name: Branch name
+        run: echo running on branch ${GITHUB_REF##*/}
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
