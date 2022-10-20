@@ -1,4 +1,4 @@
-import { module, test } from 'qunit';
+import { module, test, skip } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
@@ -8,7 +8,7 @@ module('Integration | Component | doi-list', function(hooks) {
   setupRenderingTest(hooks);
   setupFactoryGuy(hooks);
 
-  test('it renders', async function(assert) {
+  skip('it renders', async function(assert) {
     // model is list of DOIs
     this.set('model', makeList('doi', 1));
     await render(hbs`{{doi-list model=model}}`);

@@ -114,9 +114,9 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
 
       // Set language.
       // Causes the aria dropdown to be populated and displayed so that selection can be made.
-      cy.get('div#doi-language div[role="button"]').click({ force: true }).then(($dropdown) => {
+      cy.get('div#doi-language div[role="button"]').click({ waitForAnimations: true }).then(($dropdown) => {
         // Makes the selection.
-        cy.get("ul.ember-power-select-options li").contains("English").click({ force: true });
+        cy.get("ul.ember-power-select-options li").contains("English").click({ waitForAnimations: true });
       });
 
       // Set geolocation.
@@ -144,10 +144,10 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
       cy.get('#add-contributor').click({ force: true }).then(($subform) => {
         cy.get('.help-block.name-identifier-field').should('be.visible').should('have.text','Use name identifier expressed as URL. Uniquely identifies an individual or legal entity, according to various schemas, e.g. ORCID, ROR or ISNI. The Given Name, Family Name, and Name will automatically be filled out for ORCID and ROR identifiers.')
         // Causes the aria dropdown to be populated and displayed so that selection can be made.
-        cy.get('[doi-contributor] div[role="button"]').click({ force: true }).then(($dropdown) => {
+        cy.get('[doi-contributor] div[role="button"]').click({ waitForAnimations: true }).then(($dropdown) => {
           // Makes the selection from the dropdown.
-          cy.get("ul.ember-power-select-options li").contains("Data collector").click({ force: true });
-          cy.get('#toggle-contributors').should('be.visible').click({ force: true }).then(($toggle) => {
+          cy.get("ul.ember-power-select-options li").contains("Data collector").click({ waitForAnimations: true });
+          cy.get('#toggle-contributors').should('be.visible').click({ waitForAnimations: true }).then(($toggle) => {
             cy.get('#toggle-contributors').contains('Show 1 contributor');
           })
         })
