@@ -20,8 +20,9 @@ describe('Admin: Prefix', () => {
     cy.location().should((loc) => {
       expect(loc.pathname).to.eq('/prefixes');
     });
+    cy.wait(waitTime2);
     cy.get('input[name="query"]')
-      .type('10.5438{enter}')
+      .type('10.5438{enter}', {waitForAnimations: true})
       .get('[data-test-prefix]')
       .should('contain', '10.5438');
 

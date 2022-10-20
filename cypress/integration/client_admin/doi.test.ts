@@ -62,7 +62,7 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
       // Has search form
       cy.get('form #search').within(($searchBar) => {
         cy.get('input[name="query"]')
-          .and('have.attr', 'placeholder').should('match', /Type\s*to\s*search.../i);
+          .and('have.attr', 'placeholder').should('match', /Type\sto\ssearch\.\sFor\sexample\s10\.4121\/17185607\.v1/i);
         cy.get('button').contains(/Search/i);
       });
     });
@@ -77,9 +77,11 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
       // Leave state at 'draft'.
 
       // Set 'url'.
+      cy.get("#url-help").should('be.visible').should('have.text', 'Should be a https URL — within the allowed domain(s) of your repository if domain restrictions are enabled in the repository settings. Http and ftp are also supported. For example http://example.org')
       cy.get('input#url-field').should('be.visible').type('https://example.org', { force: true });
 
       // Set creator.
+      cy.get('.help-block.name-identifier-field').should('be.visible').should('have.text','Use name identifier expressed as URL. Uniquely identifies an individual or legal entity, according to various schemas, e.g. ORCID, ROR or ISNI. The Given Name, Family Name, and Name will automatically be filled out for ORCID and ROR identifiers.')
       cy.get('input[data-test-name]').should('be.visible').type('Miller, Elizabeth', { force: true });
       cy.get('#toggle-creators').should('be.visible').click({ force: true }).then(($toggle) => {
         cy.get('#toggle-creators').contains('Show 1 creator');
@@ -134,6 +136,7 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
 
       // Set contributor.
       cy.get('#add-contributor').click({ force: true }).then(($subform) => {
+        cy.get('.help-block.name-identifier-field').should('be.visible').should('have.text','Use name identifier expressed as URL. Uniquely identifies an individual or legal entity, according to various schemas, e.g. ORCID, ROR or ISNI. The Given Name, Family Name, and Name will automatically be filled out for ORCID and ROR identifiers.')
         // Causes the aria dropdown to be populated and displayed so that selection can be made.
         cy.get('[doi-contributor] div[role="button"]').click({ force: true }).then(($dropdown) => {
           // Makes the selection from the dropdown.
@@ -244,6 +247,7 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
 
       // Set 'url'.
       cy.wait(waitTime);
+      cy.get("#url-help").should('be.visible').should('have.text', 'Should be a https URL — within the allowed domain(s) of your repository if domain restrictions are enabled in the repository settings. Http and ftp are also supported. For example http://example.org')
       cy.get('input#url-field').should('be.visible').type('https://example.org', { force: true })
         .clickOutside();
       cy.get('#url').should('have.class', 'has-success');
