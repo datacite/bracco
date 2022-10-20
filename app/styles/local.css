@@ -47,20 +47,12 @@
   }
 }
 
-/*
-/* Make this look more like other "buttons" in the left sidebar. /
+/* Make this look more like other "buttons" in the left sidebar. */
 .btn-group-sm.btn-single>.btn {
   border-radius: 13px;
 }
 
-/* Remove padding and height from a transparent column top element. /
-.panel-transparent.panel-top {
-  height: 0;
-  margin-bottom: 0;
-}
-
-/* Why does this have a left-margin of -5px.  Correcting to 0. /
+/* Why does this have a left-margin of -5px.  Correcting to 0. */
 .btn-toolbar {
   margin-left: 0;
 }
-*/
