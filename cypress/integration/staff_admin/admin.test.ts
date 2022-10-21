@@ -21,10 +21,6 @@ describe('Admin: Admin', () => {
       expect(loc.pathname).to.eq('/');
     });
     cy.get('a#account_menu_link').contains('ADMIN');
-
-    // Has Fabrica logo and correct navbar color
-    cy.get('img.fabrica-logo').should('exist').should('have.attr', 'src').should('include', 'fabrica-logo.svg');
-    cy.get('ul.navbar-nav').should('have.css', 'background-color', 'rgb(36, 59, 84)');
   });
 
   it('editing admin form', () => {
@@ -58,10 +54,6 @@ describe('Admin: Admin', () => {
     cy.visit('/');
     cy.get('h2.work').contains('DataCite');
     cy.get('li a.nav-link.active').contains('Settings');
-
-    // Has Fabrica logo and correct navbar color
-    cy.get('img.fabrica-logo').should('exist').should('have.attr', 'src').should('include', 'fabrica-logo.svg');
-    cy.get('ul.navbar-nav').should('have.css', 'background-color', 'rgb(36, 59, 84)');
   });
 
   it('visiting info', () => {
