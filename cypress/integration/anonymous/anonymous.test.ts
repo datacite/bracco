@@ -12,7 +12,6 @@ describe('ACCEPTANCE: ANONYMOUS - AVAILABLE PAGES', () => {
       cy.visit('/');
       cy.get('div.motto h1').contains(site_title);
       cy.get('a#sign-in').should('exist');
-      cy.get('ul.navbar-nav').should('have.css', 'background-color', 'rgb(0, 177, 226)');
     });
   });
 
@@ -22,11 +21,6 @@ describe('ACCEPTANCE: ANONYMOUS - AVAILABLE PAGES', () => {
       cy.get('h3.member').contains('About');
       cy.get('a#sign-in').should('exist');
       cy.get('img.fabrica-logo').should('exist').should('have.attr', 'src').should('include', 'fabrica-logo.svg');
-      cy.get('ul.navbar-nav').should(
-        'have.css',
-        'background-color',
-        'rgb(0, 177, 226)'
-      );
     });
 
     // it('Version', () => {

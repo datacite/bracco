@@ -16,7 +16,6 @@ describe('ACCEPTANCE: ANONYMOUS - PROVIDER', () => {
     cy.get('a#sign-in').should('exist');
 
     cy.get('div.motto h1').contains(site_title);
-    cy.get('ul.navbar-nav').should('have.css', 'background-color', 'rgb(0, 177, 226)');
   });
 
   it('visiting provider TIB info', () => {
@@ -27,7 +26,6 @@ describe('ACCEPTANCE: ANONYMOUS - PROVIDER', () => {
     cy.get('a#sign-in').should('exist');
 
     cy.get('div.motto h1').contains(site_title);
-    cy.get('ul.navbar-nav').should('have.css', 'background-color', 'rgb(0, 177, 226)');
   });
 
   it('visiting provider TIB repositories', () => {
@@ -38,7 +36,6 @@ describe('ACCEPTANCE: ANONYMOUS - PROVIDER', () => {
     cy.get('a#sign-in').should('exist');
 
     cy.get('div.motto h1').contains(site_title);
-    cy.get('ul.navbar-nav').should('have.css', 'background-color', 'rgb(0, 177, 226)');
   });
 
   it('visiting provider TIB prefixes', () => {
@@ -49,7 +46,6 @@ describe('ACCEPTANCE: ANONYMOUS - PROVIDER', () => {
     cy.get('a#sign-in').should('exist');
 
     cy.get('div.motto h1').contains(site_title);
-    cy.get('ul.navbar-nav').should('have.css', 'background-color', 'rgb(0, 177, 226)');
   });
 
   it('visiting provider TIB dois', () => {
@@ -60,6 +56,5 @@ describe('ACCEPTANCE: ANONYMOUS - PROVIDER', () => {
     cy.get('a#sign-in').should('exist');
 
     cy.get('div.motto h1').contains(site_title);
-    cy.get('ul.navbar-nav').should('have.css', 'background-color', 'rgb(0, 177, 226)');
   });
 });

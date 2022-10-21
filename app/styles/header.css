@@ -8,22 +8,22 @@
 	border-bottom-right-radius: 30px;
 }
 
-.navbar-lead {
+.navbar-member {
+	background-color: #00B1E2;
+}
+
+.navbar-consortium {
 	background-color: #243B54;
 }
 
-.navbar-user {
-  background-color: #00B1E2;
-}
-
-.navbar-button {
+.navbar-button-member, .navbar-button-consortium {
 	color: white !important;
 }
 
-.navbar-button:hover, .navbar-button:focus {
-	color: #3498db !important;
+.navbar-button-member:hover, .navbar-button-member:focus {
+	color: #243B54 !important;
 }
 
-.navbar-transparent {
-	padding-top: 0;
+.navbar-button-consortium:hover, .navbar-button-consortium:focus {
+	color: #00B1E2 !important;
 }

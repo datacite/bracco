@@ -26,9 +26,8 @@ describe('ACCEPTANCE: CLIENT_ADMIN | PREFIXES', () => {
     cy.visit('/repositories/datacite.test/prefixes');
     cy.url().should('include', '/repositories/datacite.test/prefixes').then(() => {
 
-      // Has Fabrica logo and correct navbar color
+      // Has Fabrica logo
       cy.get('img.fabrica-logo').should('exist').should('have.attr', 'src').should('include', 'fabrica-logo.svg');
-      cy.get('ul.navbar-nav').should('have.css', 'background-color', 'rgb(0, 177, 226)');
 
       // Has upper right user profile link.
       cy.get('h2.work').contains('DataCite Test Repository');
