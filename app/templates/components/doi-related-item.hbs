@@ -15,91 +15,130 @@
   One title by which the resource is known.
 </div>
 
-<div class="power-select-label">
-  <label for="relatedItemType" class="required-label subtitle">Related Item Type</label> 
-</div> 
-<div class="power-select-fragment" data-test-related-item-type>
-  {{#form.element
-    controlType="power-select"
-    value=fragment.relatedItemType
-    helpText="The type of the Related Item."
-    options=relatedItemTypeList
-    destination=fragment.relatedItemType as |el|
-  }}
-    {{el.control
+<div class="row">
+  <div class="col-sm-4">
+    <div class="power-select-label">
+      <label for="relatedItemType" class="required-label subtitle">Related Item Type</label>
+    </div>
+    <div class="power-select-fragment" data-test-related-item-type>
+      {{#form.element
+      controlType="power-select"
+      value=fragment.relatedItemType
+      helpText="The type of the Related Item."
+      options=relatedItemTypeList
+      destination=fragment.relatedItemType as |el|
+      }}
+      {{el.control
       onChange=(action "selectRelatedItemType")
       allowClear=true
       placeholder="Select related item Type"
-    }}
-  {{/form.element}}
+      }}
+      {{/form.element}}
+    </div>
+  </div>
+  <div class="col-sm-8">
+  </div>
 </div>
 
-<div class="power-select-label">
-  <label for="relationType" class="required-label subtitle">Relation Type</label> 
-</div> 
-<div class="power-select-fragment" data-test-related-relation-type>
-  {{#form.element
-    controlType="power-select"
-    value=fragment.relationType
-    helpText="The type of the Relation."
-    options=relationTypeList
-    disabled=disabled
-    allowClear=true
-    destination=fragment.relationType as |el|
-  }}
-    <el.control
-      @onChange={{action "selectRelationType"}}
-      @placeholder="Select Relation Type" as |item|>
+
+<div class="row">
+  <div class="col-sm-4">
+    <div class="power-select-label">
+      <label for="relationType" class="required-label subtitle">Relation Type</label>
+    </div>
+    <div class="power-select-fragment" data-test-related-relation-type>
+      {{#form.element
+      controlType="power-select"
+      value=fragment.relationType
+      helpText="The type of the Relation."
+      options=relationTypeList
+      disabled=disabled
+      allowClear=true
+      destination=fragment.relationType as |el|
+      }}
+      <el.control @onChange={{action "selectRelationType" }} @placeholder="Select Relation Type" as |item|>
         {{humanize (underscore item)}}
-    </el.control>
-  {{/form.element}}
+      </el.control>
+      {{/form.element}}
+    </div>
+  </div>
+  <div class="col-sm-8">
+  </div>
 </div>
 
 <DoiRelatedItemIdentifier @model={{model}} @form={{form}} @fragment={{fragment.relatedItemIdentifier}} />
 
-<div class="power-select-label">
-  <label for="relatedItemVolume" class="subtitle">Volume</label> 
-</div> 
-<input type="text"
-    class="form-control related-item-volume-field" placeholder="" value={{fragment.volume}} oninput={{action "updateRelatedItemVolume" value="target.value"}} data-test-related-item-volume />
+<div class="row">
+  <div class="col-sm-4">
+    <div class="power-select-label">
+      <label for="relatedItemVolume" class="subtitle">Volume</label>
+    </div>
+    <input type="text" class="form-control related-item-volume-field" placeholder="" value={{fragment.volume}}
+      oninput={{action "updateRelatedItemVolume" value="target.value" }} data-test-related-item-volume />
 
-<div
-  class="help-block help-block-fragment related-item-volume-field">
-  Volume of the related item.
+    <div class="help-block help-block-fragment related-item-volume-field">
+      Volume of the related item.
+    </div>
+  </div>
+  <div class="col-sm-8">
+  </div>
 </div>
 
-<div class="power-select-label">
-  <label for="relatedItemIssue" class="subtitle">Issue</label> 
-</div> 
-<input type="text"
-    class="form-control related-item-issue-field" placeholder="" value={{fragment.issue}} oninput={{action "updateRelatedItemIssue" value="target.value"}} data-test-related-item-issue />
+<div class="row">
+  <div class="col-sm-4">
+    <div class="power-select-label">
+      <label for="relatedItemIssue" class="subtitle">Issue</label>
+    </div>
+    <input type="text" class="form-control related-item-issue-field" placeholder="" value={{fragment.issue}}
+      oninput={{action "updateRelatedItemIssue" value="target.value" }} data-test-related-item-issue />
 
-<div
-  class="help-block help-block-fragment related-item-issue-field">
-  Issue number or name of the related item.
+    <div class="help-block help-block-fragment related-item-issue-field">
+      Issue number or name of the related item.
+    </div>
+  </div>
+  <div class="col-sm-8">
+  </div>
 </div>
 
-<div class="power-select-label">
-  <label for="relatedItemNumber" class="subtitle">Number</label> 
-</div> 
-<input type="text"
-    class="form-control related-item-number-field" placeholder="" value={{fragment.number}} oninput={{action "updateRelatedItemNumber" value="target.value"}} data-test-related-item-number />
+<div class="row">
+  <div class="col-sm-4">
+    <div class="power-select-label">
+      <label for="relatedItemNumber" class="subtitle">Number</label>
+    </div>
+    <input type="text" class="form-control related-item-number-field" placeholder="" value={{fragment.number}}
+      oninput={{action "updateRelatedItemNumber" value="target.value" }} data-test-related-item-number />
 
-<div
-  class="help-block help-block-fragment related-item-number-field">
-  Number of the related item e.g. report number of article number.
+    <div class="help-block help-block-fragment related-item-number-field">
+      Number of the related item e.g. report number of article number.
+    </div>
+  </div>
+  <div class="col-sm-8">
+  </div>
 </div>
 
-<div class="power-select-label">
-  <label for="relatedItemPublicationYear" class="subtitle">Publication Year</label> 
-</div> 
-<input type="text"
-    class="form-control related-item-publication-year-field" placeholder="" value={{fragment.publicationYear}} oninput={{action "updateRelatedItemPublicationYear" value="target.value"}} data-test-related-item-publication-year />
+<div class="row">
+  <div class="col-sm-4">
+    <div class="power-select-label">
+      <label for="relatedItemPublicationYear" class="subtitle">Publication Year</label>
+    </div>
+    <input type="text" class="form-control related-item-publication-year-field" placeholder=""
+      value={{fragment.publicationYear}} oninput={{action "updateRelatedItemPublicationYear" value="target.value" }}
+      data-test-related-item-publication-year />
 
-<div
-  class="help-block help-block-fragment related-item-volume-field">
-  The year when the resource was or will be made publicly available.
+    <div class="help-block help-block-fragment related-item-volume-field">
+      The year when the resource was or will be made publicly available.
+    </div>
+  </div>
+  <div class="col-sm-8">
+  </div>
 </div>
+
+{{!-- <div class="row">
+  <div class="col-sm-4">
+  </div>
+  <div class="col-sm-8">
+  </div>
+</div> --}}
 
 <div>
 {{#if showRelatedItemCreators}}
@@ -121,10 +160,12 @@
   {{/if}}
 {{/if}}
 </div>
+<hr />
+
 <div>
 {{#if showRelatedItemContributors}}
   {{#each fragment.contributors as |contributor index|}}
-      <DoiRelatedItemContributor @model={{model}} @fragment={{contributor}} @creator={{fragment}} @form={{form}} @index={{index}} />
+      <DoiRelatedItemContributor @model={{model}} @fragment={{contributor}} @creator={{fragment}} @form={{form}} @index={{index}}/>
   {{/each}}
   {{#if (lte fragment.contributors.length 24)}}
     <BsButton @class="btn-sm add-related-item-contributor" @outline={{true}} @onClick={{action "addRelatedItemContributor"}}><i class="fas fa-plus"></i> Add another contributor</BsButton>

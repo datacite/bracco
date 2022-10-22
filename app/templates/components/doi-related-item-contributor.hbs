@@ -1,5 +1,5 @@
 <div>
-  <label for="name" class="subtitle">Contributor Name</label>
+  <label for="name" class="subtitle">Related Item's Contributor Name</label>
   <div class="input-group">
     <input type="text" class="form-control name-field" value={{fragment.name}} placeholder="Name" oninput={{action "updateName" value="target.value"}} data-test-related-item-contributor-name/>
     <span class="input-group-btn">
@@ -8,9 +8,11 @@
   </div>
 </div>
 
-<label for="contributorType" class="subtitle">Contributor Type</label>
-  <div class="power-select-fragment" doi-related-item-contributor-type>
-    {{#form.element
+<div class="row">
+  <div class="col-sm-4">
+    <label for="contributorType" class="subtitle">Related Item's Contributor Type</label>
+    <div class="power-select-fragment" doi-related-item-contributor-type>
+      {{#form.element
       controlType="power-select"
       value=humanContributorType
       helpText="The type of contributor of the resource."
@@ -19,10 +21,15 @@
       selected=humanContributorType
       destination=humanContributorType
       disabled=disabled as |el|
-    }}
-      {{el.control
-        onChange=(action "selectContributorType")
-        placeholder="Select Contributor Type"
       }}
-    {{/form.element}}
-</div>  
+      {{el.control
+      onChange=(action "selectContributorType")
+      placeholder="Select Contributor Type"
+      }}
+      {{/form.element}}
+    </div>
+
+  </div>
+  <div class="col-sm-8"></div>
+</div>
+ 
