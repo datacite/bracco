@@ -65,17 +65,14 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
 
       // Has left sidebar buttons.
       cy.get('div.col-md-3').should('be.visible').within(($sidebar) => {
-       //cy.get('.create-doi-button .dropdown-toggle').should('be.visible').click().then(() => {
-          //cy.get('ul.dropdown-menu').should('be.visible');
-        //});
-        cy.get('ember-bootstrap-dropdown-bs3-popper.dropdown-menu').invoke('show');
-          /*
-          cy.get('.btn-group-vertical a#new-doi').contains(/Create\s*\(Form\)/i)
-            .and('have.attr', 'href').and('include', '/repositories/datacite.test/dois/new');
-          cy.get('.btn-group-vertical a#upload-doi').contains(/Create\s*\(File Upload\)/i)
-            .and('have.attr', 'href').and('include', '/repositories/datacite.test/dois/upload');
-            */
-        //});
+
+        // Create DOI button - would like to do more testing but seems impossible in Cypress.
+        cy.get('.create-doi-button').contains(/Create DOI/i);
+        cy.get('.create-doi-button button.dropdown-toggle').click({ force: true }).then(($obj) => {
+          //cy.get('.create-doi-button ul.dropdown-menu')
+          //cy.get('.create-doi-button ul.dropdown-menu ul li a').contains(/DOI\s*Form/i);
+          //cy.get('.create-doi-button ul.dropdown-menu ul li a').contains(/File\s*Upload/i);
+        });
 
         // Has left sidebar facets.
         cy.get('.facets h4').contains(/Resource\s*Type/i);
