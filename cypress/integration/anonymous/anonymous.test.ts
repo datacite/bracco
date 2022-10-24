@@ -12,6 +12,9 @@ describe('ACCEPTANCE: ANONYMOUS - AVAILABLE PAGES', () => {
       cy.visit('/');
       cy.get('div.motto h1').contains(site_title);
       cy.get('a#sign-in').should('exist');
+
+    // Create DOI button
+    cy.get('.create-doi-button').should('not.exist');      
     });
   });
 

@@ -1,12 +1,7 @@
 <div class="content">
   <UserRole />
   <div class="row row-chart">
-<<<<<<< HEAD
     <BarChart @data={{json.dois}} @label="DOI" @model={{model}} @link="repositories.show.dois" @cumulative={{false}} @offset={{true}} />
-=======
-    {{!-- Need to override component classes due to addition of a sidebar. --}}
-    <BarChart class="col-md-5 col-lg-4"  @data={{json.dois}} @label="DOI" @model={{model}} @link="repositories.show.dois" @cumulative={{false}} />
->>>>>>> Fabrica Improvements - task 1 (create doi button - fix miscalculated privileges for prefixes tab)).
   </div>
 
   {{#if (can "read messages" model)}}
