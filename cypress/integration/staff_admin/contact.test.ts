@@ -62,7 +62,7 @@ describe('ACCEPTANCE: STAFF_ADMIN | CONTACTS', () => {
 
           cy.get('a#add-contact').should('not.exist');
 
-          // Create DOI button - would like to do more testing but seems impossible in Cypress.
+          // Create DOI button
           cy.get('.create-doi-button').should('not.exist');
       });
     });

@@ -94,6 +94,9 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | SETTINGS', () => {
         // cy.get('[cy-data="secondary-technical"] a').contains(/John\s*Doe/i).and('have.attr', 'href').and('include', 'mailto:John.Doe7426@example.org');
         cy.get('[cy-data="secondary-technical"] a').contains(/John\s*Doe/i).and('have.attr', 'href').and('contain', 'mailto:John.Doe');
       });
+
+      // Create DOI button
+      cy.get('.create-doi-button').should('not.exist');
     });
   });
 });

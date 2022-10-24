@@ -71,6 +71,9 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | CONTACTS', () => {
           .get('[data-test-contact]')
           .should('contain', family_name);
       });
+
+      // Create DOI button
+      cy.get('.create-doi-button').should('not.exist');      
     });
   });
 
