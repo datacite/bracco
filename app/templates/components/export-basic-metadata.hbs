@@ -1,0 +1,13 @@
+{{#if (eq link 'repositories.show.dois')}}
+  <a target="_blank" rel="noopener" class="ember-view btn btn-warning" id="export-basic-metadata"
+    href="{{{export-basic-metadata-url repositoryId this.router.currentRoute}}}"><i class="fas fa-download"></i> Export DOI Metadata
+  </a>
+{{else if (eq link 'providers.show.dois')}}
+  <a target="_blank" rel="noopener" class="ember-view btn btn-warning" id="export-basic-metadata"
+    href="{{{export-basic-metadata-url providerId this.router.currentRoute}}}"><i class="fas fa-download"></i>Export DOI Metadata
+  </a>
+{{else}}
+  <a target="_blank" rel="noopener" class="ember-view btn btn-warning" id="export-basic-metadata"
+    href="{{{export-basic-metadata-url providerId this.router.currentRoute}}}"><i class="fas fa-download"></i> Export DOI Metadata
+  </a>
+{{/if}}
