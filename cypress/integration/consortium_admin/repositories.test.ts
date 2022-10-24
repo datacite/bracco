@@ -67,6 +67,36 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | REPOSITORIES', () => {
       cy.get('#content').within(($content) => {
         cy.get('[data-test-repository]').its('length').should('be.gte', 1);
       });
+
+      // Create DOI button
+      cy.get('.create-doi-button').should('not.exist');    
     });
+  });
+
+  // ASSUMING DATACITE.TEST EXISTS:
+  it('check repositories tabs for required components - assumes datacite.test exists', () => {
+    cy.visit('/repositories/datacite.test');
+    cy.wait(waitTime2);
+
+    // Create DOI button
+    cy.get('.create-doi-button').should('not.exist');    
+
+    cy.visit('/repositories/datacite.test/info');
+    cy.wait(waitTime2);
+
+    // Create DOI button
+    cy.get('.create-doi-button').should('not.exist');    
+
+    cy.visit('/repositories/datacite.test/prefixes');
+    cy.wait(waitTime2);
+
+    // Create DOI button
+    cy.get('.create-doi-button').should('not.exist');    
+
+    cy.visit('/repositories/datacite.test/dois');
+    cy.wait(waitTime2);
+
+    // Create DOI button
+    cy.get('.create-doi-button').should('not.exist');    
   });
 });

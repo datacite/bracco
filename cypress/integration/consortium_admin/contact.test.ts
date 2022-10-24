@@ -43,6 +43,9 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | CONTACTS', () => {
     cy.get('div.panel.facets').should('exist');
 
     cy.get('a#add-contact').contains('Add Contact');
+
+    // Create DOI button
+    cy.get('.create-doi-button').should('not.exist');    
   });
 
   it('search contacts', () => {
