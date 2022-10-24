@@ -1,5 +1,5 @@
 <div>
-  <label for="name" class="subtitle">Related Item's Contributor Name</label>
+  <label for="name" class="subtitle">Contributor Name</label>
   <div class="input-group">
     <input type="text" class="form-control name-field" value={{fragment.name}} placeholder="Name" oninput={{action "updateName" value="target.value"}} data-test-related-item-contributor-name/>
     <span class="input-group-btn">
@@ -10,7 +10,7 @@
 
 <div class="row">
   <div class="col-sm-4">
-    <label for="contributorType" class="subtitle">Related Item's Contributor Type</label>
+    <label for="contributorType" class="subtitle">Contributor Type</label>
     <div class="power-select-fragment" doi-related-item-contributor-type>
       {{#form.element
       controlType="power-select"
