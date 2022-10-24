@@ -6,21 +6,6 @@ function escapeRE(string) {
   return string.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
 }
 
-/*
-ember-bootstrap-dropdown-bs3-popper.dropdown-menu
-
-describe('Tutorialspoint Test', function () {
-   // test case
-   it('Scenario 1', function (){
-      // launch URL
-      cy.visit("https://www.amazon.com/");
-      // show hidden element with invoke
-      cy.get('#nav-flyout-ya-signin').invoke('show');
-      //click hidden element
-      cy.contains('Sign').click();
-   });
-*/
-
 describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
   const waitTime = 1000;
   const waitTime2 = 2000;
@@ -42,7 +27,7 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
     // cy.log('TBD - CLEAN UP RESOURCES AFTER TEST');
   });
 
-  it.only('is logged in to dois page', () => {
+  it('is logged in to dois page', () => {
     cy.visit('/repositories/datacite.test/dois');
     cy.url().should('include', '/repositories/datacite.test/dois').then (() => {
 
@@ -65,7 +50,6 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
 
       // Has left sidebar buttons.
       cy.get('div.col-md-3').should('be.visible').within(($sidebar) => {
-
         // Create DOI button - would like to do more testing but seems impossible in Cypress.
         cy.get('.create-doi-button').contains(/Create DOI/i);
         cy.get('.create-doi-button button.dropdown-toggle').click({ force: true }).then(($obj) => {
@@ -73,13 +57,13 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
           //cy.get('.create-doi-button ul.dropdown-menu ul li a').contains(/DOI\s*Form/i);
           //cy.get('.create-doi-button ul.dropdown-menu ul li a').contains(/File\s*Upload/i);
         });
-
-        // Has left sidebar facets.
-        cy.get('.facets h4').contains(/Resource\s*Type/i);
-        cy.get('.facets h4').contains(/Year\s*created/i);
-        cy.get('.facets h4').contains(/Prefix/i);
-        cy.get('.facets h4').contains(/Schema\s*Version/i);
       });
+
+      // Has left sidebar facets.
+      cy.get('.facets h4').contains(/Resource\s*Type/i);
+      cy.get('.facets h4').contains(/Year\s*created/i);
+      cy.get('.facets h4').contains(/Prefix/i);
+      cy.get('.facets h4').contains(/Schema\s*Version/i);
 
       // Has search form
       cy.get('form #search').within(($searchBar) => {

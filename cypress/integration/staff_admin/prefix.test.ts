@@ -31,8 +31,10 @@ describe('Admin: Prefix', () => {
     cy.get('div#search').should('exist');
     cy.get('div.panel.facets').should('exist');
 
-    // THIS BUTTON WAS REMOVED:
-    // cy.get('a#add-prefixes').contains('Add Prefixes');
+    cy.get('a#add-prefixes').contains('Add Prefixes');
+
+    // Create DOI button - would like to do more testing but seems impossible in Cypress.
+    cy.get('.create-doi-button').should('not.exist');
   });
 
   it('filter prefixes', () => {

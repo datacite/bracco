@@ -46,6 +46,9 @@ describe('ACCEPTANCE: STAFF_ADMIN | SETTINGS', () => {
           .and('have.attr', 'href').and('include', '/edit');
       });
 
+      // Create DOI button - would like to do more testing but seems impossible in Cypress.
+      cy.get('.create-doi-button').should('not.exist');
+
       cy.get('.metadata').within(($metadata) => {
         cy.get('h5').contains(/Record\s*created/i);
         cy.get('h5').contains(/Record\s*last\s*modified/i);

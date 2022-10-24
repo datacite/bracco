@@ -63,6 +63,9 @@ describe('ACCEPTANCE: STAFF_ADMIN | INFO', () => {
           .and('include', '/dois');
         cy.get('#chart-doi');
       });
+
+      // Create DOI button - would like to do more testing but seems impossible in Cypress.
+      cy.get('.create-doi-button').should('not.exist');
     });
   });
 

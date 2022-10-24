@@ -34,6 +34,18 @@ describe('ACCEPTANCE: CLIENT_ADMIN | SETTINGS', () => {
       cy.get('ul.nav-tabs li a').contains(/DOIs/i)
         .and('have.attr', 'href').and('include', '/repositories/datacite.test/dois');
 
+      // Has left sidebar buttons.
+      cy.get('div.col-md-3').should('be.visible').within(($sidebar) => {
+
+        // Create DOI button - would like to do more testing but seems impossible in Cypress.
+        cy.get('.create-doi-button').contains(/Create DOI/i);
+        cy.get('.create-doi-button button.dropdown-toggle').click({ force: true }).then(($obj) => {
+          //cy.get('.create-doi-button ul.dropdown-menu')
+          //cy.get('.create-doi-button ul.dropdown-menu ul li a').contains(/DOI\s*Form/i);
+          //cy.get('.create-doi-button ul.dropdown-menu ul li a').contains(/File\s*Upload/i);
+        });
+      });
+
       cy.get('.btn-toolbar').within(($btnToolbar) => {
         cy.get('.btn-group-vertical a#set-password-repository').contains(/Set\s*Password/i)
           .and('have.attr', 'href').and('include', '/repositories/datacite.test/change');
