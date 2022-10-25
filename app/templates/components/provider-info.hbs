@@ -7,6 +7,7 @@
         @label="Organization"
         @model={{model}}
         @link="providers.show.organizations"
+        @offset={{true}}
       />
     {{/if}}
     {{#if
@@ -20,6 +21,7 @@
         @label="Repository"
         @model={{model}}
         @link="providers.show.repositories"
+        @offset={{if (not-eq model.memberType 'consortium') true}}
       />
       <BarChart
         @data={{json.dois}}
@@ -39,7 +41,7 @@
   </div>
   {{#if (can 'read messages' model)}}
     <div class="row">
-      <div class="col-md-9">
+      <div class="col-md-9 col-lg-offset-3">
         {{#each flashMessages.queue as |flash|}}
           <FlashMessage @flash={{flash}} />
         {{/each}}
