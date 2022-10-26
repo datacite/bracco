@@ -5,6 +5,24 @@ import { array, fragment } from 'ember-data-model-fragments/attributes';
 import { validator, buildValidations } from 'ember-cp-validations';
 import isEmpty from 'bracco/utils/is-empty';
 
+export const clientTypeList = ['repository', 'periodical'];
+export const softwareList = [
+  'CKAN',
+  'Dataverse',
+  'DSpace',
+  'EPrints',
+  'Fedora',
+  'Invenio',
+  'Islandora',
+  'Nesstar',
+  'Open Journal Systems (OJS)',
+  'Samvera',
+  'OPUS',
+  'Pubman',
+  'MyCoRe',
+  'Other'
+];
+
 const Validations = buildValidations({
   symbol: [
     validator('presence', true),
