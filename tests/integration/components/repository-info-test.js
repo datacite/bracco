@@ -13,6 +13,6 @@ module('Integration | Component | repository-info', function (hooks) {
     let startDate = (currentYear - 10).toString();
     let endDate = currentYear.toString();
 
-    assert.dom(this.element).hasText(`DOIs by year 0 in ${currentYear} ${startDate+endDate}`);
+    assert.dom(this.element).hasText(`Role: DOIs by year 0 in ${currentYear} ${startDate+endDate}`);
   });
 });

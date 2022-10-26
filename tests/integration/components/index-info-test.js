@@ -16,7 +16,7 @@ module('Integration | Component | index-info', function (hooks) {
     assert
       .dom(this.element)
       .hasText(
-        `Members by year 0 ${startDate+endDate} Repositories by year 0 ${startDate+endDate} DOIs by year 0 in ${currentYear.toString()} ${startDate+endDate}`
+        `Role: Members by year 0 ${startDate+endDate} Repositories by year 0 ${startDate+endDate} DOIs by year 0 in ${currentYear.toString()} ${startDate+endDate}`
       );
   });
 });

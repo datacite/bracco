@@ -16,7 +16,7 @@ module('Integration | Component | provider-info', function (hooks) {
     assert
       .dom(this.element)
       .hasText(
-        `Repositories by year 0 20122022 DOIs by year 0 in ${currentYear} ${startDate+endDate}`
+        `Role: Repositories by year 0 20122022 DOIs by year 0 in ${currentYear} ${startDate+endDate}`
       );
   });
 });
