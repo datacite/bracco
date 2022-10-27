@@ -10825,17 +10825,6 @@ ember-cli-fastboot@^2.2.1:
     md5-hex "^2.0.0"
     silent-error "^1.1.0"
 
-ember-cli-file-saver@~2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/ember-cli-file-saver/-/ember-cli-file-saver-2.0.0.tgz#99c218710ba77f52d61c7b486e66635add4bbdf7"
-  integrity sha512-Cr7s+1EgT/eMabDdrpIrmQ/wqOe+/eDunxOb1IIc8GHDyK6ytgwjjpHG2vo/a6k3LEYRUcm7MRa9B1MVw4AKoQ==
-  dependencies:
-    broccoli-funnel "^2.0.1"
-    broccoli-merge-trees "^2.0.0"
-    broccoli-stew "^1.5.0"
-    ember-cli-babel "^6.3.0"
-    file-saver "2.0.0"
-
 ember-cli-flash@^1.8.0:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/ember-cli-flash/-/ember-cli-flash-1.8.0.tgz#365decadc850e77b70c1c64ce6ab6f58662f7c38"
@@ -13045,10 +13034,10 @@ file-entry-cache@^6.0.0:
   dependencies:
     flat-cache "^3.0.4"
 
-file-saver@2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/file-saver/-/file-saver-2.0.0.tgz#74eef7748159503b60008a15af2f1930fb5df7ab"
-  integrity sha512-cYM1ic5DAkg25pHKgi5f10ziAM7RJU37gaH1XQlyNDrtUnzhC/dfoV9zf2OmF0RMKi42jG5B0JWBnPQqyj/G6g==
+file-saver@2.0.4:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/file-saver/-/file-saver-2.0.4.tgz#44c40e835319c9836a84221b4e255d4bb4cb7bb5"
+  integrity sha512-QqJr2lQUcwRg9QeCSi1nZFSv4Mx7MYL7oZFFWdjihHfChIC/Qk3PSNCn+pz5OF8fQvmvOPDi+8eN5ienicWXiQ==
 
 fileset@^2.0.3:
   version "2.0.3"

@@ -1,15 +1,10 @@
 import Component from '@ember/component';
-//import { inject as service } from '@ember/service';
-//import { reads } from '@ember/object/computed';
 import Papa from 'papaparse';
-import FileSaverMixin from 'ember-cli-file-saver/mixins/file-saver';
+import FileSaver from 'file-saver';
 
-export default Component.extend(FileSaverMixin, {
-  //router: service(),
+export default Component.extend({
   tagName: '',
   classNames: ['export-basic-metadata'],
-  //repositoryId: reads('router.currentRoute.attributes.repository.id'),
-  //providerId: reads('router.currentRoute.attributes.provider.id'),
 
   actions: {
     exportBasicMetadata(model) {
@@ -30,10 +25,12 @@ export default Component.extend(FileSaverMixin, {
         });
         i++;
       });
-
+      
       var csv = Papa.unparse(dois);
 
-      this.saveFileAs('dois.csv', csv, 'text/csv');
+      var FileSaver = require('file-saver');
+      var blob = new Blob([csv], {type: "text/csv;charset=utf-8"});
+      FileSaver.saveAs(blob, "dois.csv");
     }
   }
 })
