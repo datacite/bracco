@@ -47,7 +47,9 @@
     "mime": "^2.4.4",
     "pascal-case": "^3.1.1",
     "validator": "^13.7.0",
-    "wait-on": "^5.2.0"
+    "wait-on": "^5.2.0",
+    "ember-papaparse": "~1.0.0",
+    "ember-cli-file-saver": "~2.0.0"
   },
   "fastbootDependencies": [
     "node-fetch",

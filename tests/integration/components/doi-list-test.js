@@ -8,7 +8,7 @@ module('Integration | Component | doi-list', function(hooks) {
   setupRenderingTest(hooks);
   setupFactoryGuy(hooks);
 
-  skip('it renders', async function(assert) {
+  test('it renders', async function(assert) {
     // model is list of DOIs
     this.set('model', makeList('doi', 1));
     await render(hbs`{{doi-list model=model}}`);

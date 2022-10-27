@@ -10825,6 +10825,17 @@ ember-cli-fastboot@^2.2.1:
     md5-hex "^2.0.0"
     silent-error "^1.1.0"
 
+ember-cli-file-saver@~2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/ember-cli-file-saver/-/ember-cli-file-saver-2.0.0.tgz#99c218710ba77f52d61c7b486e66635add4bbdf7"
+  integrity sha512-Cr7s+1EgT/eMabDdrpIrmQ/wqOe+/eDunxOb1IIc8GHDyK6ytgwjjpHG2vo/a6k3LEYRUcm7MRa9B1MVw4AKoQ==
+  dependencies:
+    broccoli-funnel "^2.0.1"
+    broccoli-merge-trees "^2.0.0"
+    broccoli-stew "^1.5.0"
+    ember-cli-babel "^6.3.0"
+    file-saver "2.0.0"
+
 ember-cli-flash@^1.8.0:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/ember-cli-flash/-/ember-cli-flash-1.8.0.tgz#365decadc850e77b70c1c64ce6ab6f58662f7c38"
@@ -11805,6 +11816,16 @@ ember-on-helper@^0.1.0:
   integrity sha512-jjafBnWfoA4VSSje476ft5G+urlvvuSDddwAJjKDCjKY9mbe3hAEsJiMBAaPObJRMm1FOglCuKjQZfwDDls6MQ==
   dependencies:
     ember-cli-babel "^7.7.3"
+
+ember-papaparse@~1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/ember-papaparse/-/ember-papaparse-1.0.0.tgz#7116ad3392f0f3179e4b062341b88cb86092ca44"
+  integrity sha512-NxdUghiJSb4QeRGojJ8ruAC5hiij8bP3zZoUm/aSQIgiYBj4v+QDvs+JO3Z7S1Gao3PoZZeaePsey5H+yey4Wg==
+  dependencies:
+    broccoli-funnel "^2.0.1"
+    broccoli-merge-trees "^2.0.0"
+    ember-cli-babel "^6.6.0"
+    papaparse "^4.3.6"
 
 ember-popper@^0.10.3:
   version "0.10.3"
@@ -13023,6 +13044,11 @@ file-entry-cache@^6.0.0:
   integrity sha512-fqoO76jZ3ZnYrXLDRxBR1YvOvc0k844kcOg40bgsPrE25LAb/PDqTY+ho64Xh2c8ZXgIKldchCFHczG2UVRcWA==
   dependencies:
     flat-cache "^3.0.4"
+
+file-saver@2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/file-saver/-/file-saver-2.0.0.tgz#74eef7748159503b60008a15af2f1930fb5df7ab"
+  integrity sha512-cYM1ic5DAkg25pHKgi5f10ziAM7RJU37gaH1XQlyNDrtUnzhC/dfoV9zf2OmF0RMKi42jG5B0JWBnPQqyj/G6g==
 
 fileset@^2.0.3:
   version "2.0.3"
@@ -17091,6 +17117,11 @@ pako@~1.0.5:
   version "1.0.10"
   resolved "https://registry.yarnpkg.com/pako/-/pako-1.0.10.tgz#4328badb5086a426aa90f541977d4955da5c9732"
   integrity sha512-0DTvPVU3ed8+HNXOu5Bs+o//Mbdj9VNQMUOe9oKCwh8l0GNwpTDMKCWbRjgtD291AWnkAgkqA/LOnQS8AmS1tw==
+
+papaparse@^4.3.6:
+  version "4.6.3"
+  resolved "https://registry.yarnpkg.com/papaparse/-/papaparse-4.6.3.tgz#742e5eaaa97fa6c7e1358d2934d8f18f44aee781"
+  integrity sha512-LRq7BrHC2kHPBYSD50aKuw/B/dGcg29omyJbKWY3KsYUZU69RKwaBHu13jGmCYBtOc4odsLCrFyk6imfyNubJQ==
 
 parallel-transform@^1.1.0:
   version "1.1.0"
