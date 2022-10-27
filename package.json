@@ -47,9 +47,7 @@
     "mime": "^2.4.4",
     "pascal-case": "^3.1.1",
     "validator": "^13.7.0",
-    "wait-on": "^5.2.0",
-    "ember-papaparse": "~1.0.0",
-    "ember-cli-file-saver": "~2.0.0"
+    "wait-on": "^5.2.0"
   },
   "fastbootDependencies": [
     "node-fetch",
@@ -173,7 +171,9 @@
     "typescript": "^3.7.4",
     "urijs": "^1.19.11",
     "vkbeautify": "^0.99.3",
-    "xml2js": "^0.4.23"
+    "xml2js": "^0.4.23",
+    "ember-papaparse": "~1.0.0",
+    "ember-cli-file-saver": "~2.0.0"
   },
   "engines": {
     "node": "14.*"
