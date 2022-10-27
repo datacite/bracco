@@ -105,7 +105,7 @@
 <h5>Related Item's Creators</h5>
 
 <div class="row">
-  <div class="col-sm-12" style="padding-left:30px">
+  <div class="col-sm-12">
     {{#if showRelatedItemCreators}}
     {{#each fragment.creators as |creator index|}}
     <DoiRelatedItemCreator @model={{model}} @fragment={{creator}} @creator={{fragment}} @form={{form}}
@@ -133,12 +133,11 @@
     {{/if}}
   </div>
 </div>
-<hr />
 
 <h5>Related Item's Contributors</h5>
 
 <div class="row">
-  <div class="col-sm-12" style="padding-left:30px">
+  <div class="col-sm-12">
 
     {{#if showRelatedItemContributors}}
     {{#each fragment.contributors as |contributor index|}}
