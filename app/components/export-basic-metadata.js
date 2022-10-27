@@ -10,20 +10,19 @@ export default Component.extend({
     exportBasicMetadata(model) {
       let dois = [];
 
-      this.model.forEach(function(doi, meta = this.model.meta, i = 0) {
+      this.model.forEach(function(doi) {
         dois.push({ 
           "doi" : doi.doi,
           "url" : doi.url,
           "registered": doi.registered,
           "state": doi.state,
-          //"resourceTypeGeneral": meta.resourceTypes[i].title,
-          //"resourceTypes": ??,
+          "resourceTypeGeneral": doi.types.resourceTypeGeneral,
+          "resourceType": doi.types.resourceType,
           "title": doi.title,
           "author": doi.author,
           "publisher": doi.publisher,
           "publicationYear": doi.publicationYear
         });
-        i++;
       });
       
       var csv = Papa.unparse(dois);
