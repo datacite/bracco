@@ -1,10 +1,9 @@
-.btn-group-vertical {
-  margin-left: 5px;
-}
+/*
+ Overrides to shared css/scss/sass styles pulled from:
+    https://datacite.org/stylesheets/doi.css?version=3.9.43
+*/
 
-.create-doi-button button {
-  font-size: 16px;
-}
+/* create-doi-button */
 
 /* Otherwise drop-down menu falls behind other objects. */
 .create-doi-button .ember-bootstrap-dropdown-bs3-popper {
@@ -12,31 +11,22 @@
 }
 
 .create-doi-button ul.dropdown-menu.show {
-  margin-top: 5px;
+  margin-top: -2px;
+  margin-left: 10px;
 }
 
 .create-doi-button ul.dropdown-menu.show a {
   width: 100%;
   color: #e67e22;
   font-size: 16px !important;
+  padding-left: 5px;
 }
 
 .create-doi-button ul.dropdown-menu.show a:hover {
   background-color: rgb(128, 128, 128, .1);
 }
 
-.create-doi-button button.btn {
-  border-radius: 26px;
-}
-
-.panel.facets.add-25 {
-  margin-top: .25em;
-}
-
-.panel.facets.add-50 {
-  margin-top: .50em;
-}
-
-.panel.facets.add-75 {
-  margin-top: .75em;
+/* To make a left sidebar button line up with the others. */
+.btn-group-vertical {
+  margin-left: 5px;
 }
