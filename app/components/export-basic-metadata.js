@@ -6,7 +6,7 @@ import formatCreators from '../utils/format-creators';
 
 export default Component.extend({
   tagName: '',
-  classNames: ['export-basic-metadata'],
+  classNames: [],
 
   actions: {
     exportBasicMetadata(model) {

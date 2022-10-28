@@ -41,6 +41,8 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | PREFIXES', () => {
         // Has left sidebar message box.
         // cy.get('div.alert').contains(/Please ask DataCite Staff if you want to add a prefix./i);
   
+        cy.get('button.export-basic-metadata').should('not.exist');
+
         // Has left sidebar facets.
         cy.get('.facets h4').contains(/State/i);
         cy.get('.facets h4').contains(/Year\s*created/i);

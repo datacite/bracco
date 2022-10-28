@@ -59,6 +59,8 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
         });
       });
 
+      cy.get('button.export-basic-metadata').should('exist');
+
       // Has left sidebar facets.
       cy.get('.facets h4').contains(/Resource\s*Type/i);
       cy.get('.facets h4').contains(/Year\s*created/i);

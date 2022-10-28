@@ -42,7 +42,8 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | DOIS', () => {
         cy.get('.btn-group-vertical a#new-doi').should('not.exist');
         cy.get('.btn-group-vertical a#upload-doi').should('not.exist');
   
-  
+        cy.get('button.export-basic-metadata').should('exist');
+
         // Has left sidebar facets.
         cy.get('.facets h4').contains(/State/i);
         cy.get('.facets h4').contains(/Resource\s*Type/i);

@@ -190,6 +190,7 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | INFO', () => {
 
     cy.on("url:changed", (newUrl) => {
       expect(newUrl).to.contain("/providers/dc");
+      cy.get('button.export-basic-metadata').should('not.exist');
     });
   });
 });

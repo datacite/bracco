@@ -43,6 +43,8 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | REPOSITORIES', () => {
           .and('have.attr', 'href').and('include', '/providers/datacite/repositories/new');
       });
 
+      cy.get('button.export-basic-metadata').should('not.exist');
+
       // Has left sidebar facets.
       cy.get('.facets h4').contains(/Year\s*joined/i);
       cy.get('.facets h4').contains(/Type/i);

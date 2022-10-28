@@ -139,6 +139,8 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | CONTACTS', () => {
 
       cy.get('h3.edit').contains('Add Contact');
 
+      cy.get('button.export-basic-metadata').should('not.exist');
+
       cy.get('input#givenName-field').should('be.visible').type(given_name, { force: true })
         .clickOutside();
       cy.get('input#familyName-field').should('be.visible').type(family_name, { force: true })
