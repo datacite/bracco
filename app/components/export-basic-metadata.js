@@ -1,6 +1,8 @@
 import Component from '@ember/component';
 import Papa from 'papaparse';
 import FileSaver from 'file-saver';
+import isEmpty from 'bracco/utils/is-empty';
+import formatCreators from '../utils/format-creators';
 
 export default Component.extend({
   tagName: '',
@@ -19,12 +21,12 @@ export default Component.extend({
           "resourceTypeGeneral": doi.types.resourceTypeGeneral,
           "resourceType": doi.types.resourceType,
           "title": doi.title,
-          "author": doi.author,
+          "author": formatCreators(doi.creators, {}),
           "publisher": doi.publisher,
           "publicationYear": doi.publicationYear
         });
       });
-      
+
       var csv = Papa.unparse(dois);
 
       var FileSaver = require('file-saver');
