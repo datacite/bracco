@@ -8,18 +8,18 @@ import isEmpty from 'bracco/utils/is-empty';
 export const clientTypeList = ['repository', 'periodical'];
 export const softwareList = [
   'CKAN',
-  'Dataverse',
   'DSpace',
+  'Dataverse',
   'EPrints',
   'Fedora',
   'Invenio',
   'Islandora',
-  'Nesstar',
-  'Open Journal Systems (OJS)',
-  'Samvera',
-  'OPUS',
-  'Pubman',
   'MyCoRe',
+  'Nesstar',
+  'OPUS',
+  'Open Journal Systems (OJS)',
+  'Pubman',
+  'Samvera',
   'Other'
 ];
 
