@@ -35,9 +35,9 @@ describe('ACCEPTANCE: CLIENT_ADMIN | PREFIXES', () => {
 
       // Has tabs with correct one activated.
       cy.get('ul.nav-tabs li a').contains(/Info/i)
-        .and('have.attr', 'href').and('include', '/repositories/datacite.test/info');
-      cy.get('ul.nav-tabs li a').contains(/Settings/i)
         .and('have.attr', 'href').and('include', '/repositories/datacite.test');
+      cy.get('ul.nav-tabs li a').contains(/Settings/i)
+        .and('have.attr', 'href').and('include', '/repositories/datacite.test/settings');
       cy.get('ul.nav-tabs li.active a').contains(/Prefixes/i)
         .and('have.attr', 'href').and('include', '/repositories/datacite.test/prefixes');
       cy.get('ul.nav-tabs li a').contains(/DOIs/i)

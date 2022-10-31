@@ -19,8 +19,8 @@ describe('Anonymous: Repository', () => {
     cy.get('div.motto h1').contains(site_title);
   });
 
-  it('visiting repository AWI info', () => {
-    cy.visit('/repositories/tib.awi/info');
+  it('visiting repository AWI settings', () => {
+    cy.visit('/repositories/tib.awi/settings');
     cy.location().should((loc) => {
       expect(loc.pathname).to.eq('/');
     });

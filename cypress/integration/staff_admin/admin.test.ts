@@ -53,16 +53,16 @@ describe('Admin: Admin', () => {
   it('visiting homepage', () => {
     cy.visit('/');
     cy.get('h2.work').contains('DataCite');
-    cy.get('li a.nav-link.active').contains('Settings');
+    cy.get('li a.nav-link.active').contains('Info');
   });
 
-  it('visiting info', () => {
-    cy.visit('/info');
+  it('visiting settings', () => {
+    cy.visit('/settings');
     cy.location().should((loc) => {
-      expect(loc.pathname).to.eq('/info');
+      expect(loc.pathname).to.eq('/settings');
     });
     cy.get('h2.work').contains('DataCite');
-    cy.get('li a.nav-link.active').contains('Info');
+    cy.get('li a.nav-link.active').contains('Settings');
   });
 
   it('visiting members', () => {

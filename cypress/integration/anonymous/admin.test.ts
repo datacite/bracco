@@ -14,8 +14,8 @@ describe('ACCEPTANCE: ANONYMOUS | NO ADMIN ACCESS', function () {
   })
 
   // the following pages require authentication. Redirects to homepage otherwise.
-  it('visiting info', function () {
-    cy.visit('/info')
+  it('visiting settings', function () {
+    cy.visit('/settings')
     cy.url().should('eq', Cypress.config('baseUrl') + '/')
     cy.get('div.motto h1').contains(site_title);
     cy.get('a#sign-in').should('exist');

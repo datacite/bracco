@@ -18,8 +18,8 @@ describe('ACCEPTANCE: ANONYMOUS - PROVIDER', () => {
     cy.get('div.motto h1').contains(site_title);
   });
 
-  it('visiting provider TIB info', () => {
-    cy.visit('/providers/tib/info');
+  it('visiting provider TIB settings', () => {
+    cy.visit('/providers/tib/settings');
     cy.location().should((loc) => {
       expect(loc.pathname).to.eq('/');
     });
