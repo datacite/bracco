@@ -13,11 +13,11 @@ export const organizationTypeList = [
   'researchInstitution',
   'academicInstitution',
   'governmentAgency',
+  'internationalOrganization',
   'nationalInstitution',
   'professionalSociety',
   'publisher',
   'serviceProvider',
-  'internationalOrganization',
   'other'
 ];
 export const memberTypeList = [
