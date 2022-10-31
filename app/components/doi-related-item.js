@@ -128,11 +128,21 @@ export default Component.extend({
       this.fragment.set('relatedMetadataScheme', null);
       this.fragment.set('schemeUri', null);
     }
-    this.fragment.set('relationType', pascalCase(relationType));
+    if (relationType) {
+      this.fragment.set('relationType', pascalCase(relationType));
+    }
+    else {
+      this.fragment.set('relationType', null)
+    }
     this.set('relationTypes', relationTypeList);
   },
   selectRelatedItemType(relatedItemType) {
-    this.fragment.set('relatedItemType', pascalCase(relatedItemType));
+    if (relatedItemType) {
+      this.fragment.set('relatedItemType', pascalCase(relatedItemType));
+    }
+    else {
+      this.fragment.set('relatedItemType', null)
+    }
     this.set('relatedItemTypes', relatedItemTypeList);
   },
   actions: {

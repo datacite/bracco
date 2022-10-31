@@ -12,10 +12,10 @@ const Validations = buildValidations({
       presence: true,
       message:
         'Please enter a Related Item Type for the Related Item.',
-      disabled: computed('model.{relatedItem,state}', function () {
+      disabled: computed('model.{title,state}', function () {
         return (
           this.model.get('state') === 'draft' ||
-          isBlank(this.model.get('relatedItem'))
+          isBlank(this.model.get('title'))
         );
       })
     })
@@ -24,22 +24,21 @@ const Validations = buildValidations({
     validator('presence', {
       presence: true,
       message: 'Please enter a Relation Type for the Related Item.',
-      disabled: computed('model.{relatedItem,state}', function () {
+      disabled: computed('model.{title,state}', function () {
         return (
           this.model.get('state') === 'draft' ||
-          isBlank(this.model.get('relatedItem'))
+          isBlank(this.model.get('title'))
         );
       })
     })
   ],
-  titles: [
-    validator('length', {
-      min: 1,
-      message: 'Related Item must have at least one Title',
-      disabled: computed('model.{relatedItem,state}', function () {
+  title: [
+    validator('presence', {
+      presence: true,
+      message: 'Related Item must have a Title',
+      disabled: computed('model.state', function () {
         return (
-          this.model.get('state') === 'draft' ||
-          isBlank(this.model.get('relatedItem'))
+          this.model.get('state') === 'draft'
         );
       })
     })
@@ -47,10 +46,10 @@ const Validations = buildValidations({
   publicationYear: [
     validator('date-format', {
       allowBlank: true,
-      disabled: computed('model.{relatedItem,state}', function () {
+      disabled: computed('model.{title,state}', function () {
         return (
           this.model.get('state') === 'draft' ||
-          isBlank(this.model.get('relatedItem'))
+          isBlank(this.model.get('title'))
         );
       })
     })
@@ -70,7 +69,7 @@ export default Fragment.extend(Validations, {
   publicationYear: attr('string', { defaultValue: null }),
   contributors: fragmentArray('related-item-contributor', { defaultValue: [] }),
 
-  title: computed('titles.length', function () {
+  title: computed('titles.@each.title', function () {
     if (this.titles.length > 0) {
       return A(this.titles).get('firstObject').title;
     } else {

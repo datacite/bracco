@@ -18,9 +18,11 @@
       formLayout="vertical"
       selected=humanContributorType
       destination=humanContributorType
+      allowClear=true
       disabled=disabled as |el|
     }}
       {{el.control
+        allowClear=true
         onChange=(action "selectContributorType")
         placeholder="Select Contributor Type"
       }}
