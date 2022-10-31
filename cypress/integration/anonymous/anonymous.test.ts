@@ -5,7 +5,7 @@ describe('ACCEPTANCE: ANONYMOUS - AVAILABLE PAGES', () => {
   beforeEach(() => {
     cy.setCookie('_consent', 'true');
   });
-  const site_title = new RegExp('Datacite.*Fabrica', 'i')
+  const site_title = new RegExp('Datacite.*Fabrica', 'i');
 
   describe('Homepage', () => {
     it('Header', () => {
@@ -20,6 +20,7 @@ describe('ACCEPTANCE: ANONYMOUS - AVAILABLE PAGES', () => {
       cy.visit('/about');
       cy.get('h3.member').contains('About');
       cy.get('a#sign-in').should('exist');
+      cy.get('img.fabrica-logo').should('exist').should('have.attr', 'src').should('include', 'fabrica-logo.svg');
     });
 
     // it('Version', () => {

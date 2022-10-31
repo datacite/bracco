@@ -24,6 +24,9 @@ describe('ACCEPTANCE: CLIENT_ADMIN | INFO', () => {
     cy.visit('/');
     cy.url().should('include', '/repositories/datacite.test').then(() => {
 
+      // Has Fabrica logo
+      cy.get('img.fabrica-logo').should('exist').should('have.attr', 'src').should('include', 'fabrica-logo.svg');
+
       cy.get('h2.work').contains('DataCite Test Repository');
       cy.get('a#account_menu_link').should('contain', 'DATACITE.TEST');
 

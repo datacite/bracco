@@ -18,6 +18,7 @@ describe('ACCEPTANCE: STAFF_ADMIN | SETTINGS', () => {
   it('is logged in to settings page', () => {
     cy.visit('/settings');
     cy.url().should('include', '/settings').then (() => {
+
       cy.get('h2.work').contains('DataCite');
       cy.get('a#account_menu_link').should('contain', 'ADMIN');
 

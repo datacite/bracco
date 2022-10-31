@@ -14,9 +14,14 @@ describe('ACCEPTANCE: CLIENT_ADMIN | SETTINGS', () => {
     Cypress.Cookies.preserveOnce('_fabrica', '_jwt', '_consent');
     cy.wait(waitTime2);
   });
+
   it('is logged in to settings page', () => {
     cy.visit('/repositories/datacite.test/settings');
     cy.url().should('include', '/repositories/datacite.test/settings').then (() => {
+
+      // Has Fabrica logo
+      cy.get('img.fabrica-logo').should('exist').should('have.attr', 'src').should('include', 'fabrica-logo.svg');
+      
       cy.get('h2.work').contains('DataCite Test Repository');
       cy.get('a#account_menu_link').should('contain', 'DATACITE.TEST');
 

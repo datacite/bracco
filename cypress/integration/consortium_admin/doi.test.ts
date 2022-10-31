@@ -29,7 +29,11 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | DOIS', () => {
   // Check for page elements.
   it('is logged in to dois page', () => {
     cy.visit('/providers/dc/dois');
-    cy.url().should('include', '/providers/dc/dois').then (() => {
+    cy.url().should('include', '/providers/dc/dois').then(() => {
+      
+      // Has Fabrica logo and correct navbar color
+      cy.get('img.fabrica-logo').should('exist').should('have.attr', 'src').should('include', 'fabrica-logo.svg');
+      cy.get('ul.navbar-nav').should('have.css', 'background-color', 'rgb(36, 59, 84)');
 
       // Has upper right user profile link.
       cy.get('h2.work').contains('DataCite Consortium');
@@ -56,7 +60,7 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | DOIS', () => {
       // Has search form
       cy.get('form #search').within(($searchBar) => {
         cy.get('input[name="query"]')
-          .and('have.attr', 'placeholder').should('match', /Type\s*to\s*search.../i);
+          .and('have.attr', 'placeholder').should('match', /Type\sto\ssearch\.\sFor\sexample\s10\.4121\/17185607\.v1/i);
         cy.get('button').contains(/Search/i);
       });
 

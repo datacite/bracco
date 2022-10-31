@@ -33,6 +33,12 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | CONTACTS', () => {
     cy.location().should((loc) => {
       expect(loc.pathname).to.eq('/providers/datacite/contacts');
     });
+
+    // Has Fabrica logo and correct navbar color
+    cy.get('img.fabrica-logo').should('exist').should('have.attr', 'src').should('include', 'fabrica-logo.svg');
+    cy.get('ul.navbar-nav').should('have.css', 'background-color', 'rgb(0, 177, 226)');
+    
+
     cy.get('h2.work').contains('DataCite');
     cy.get('li a.nav-link.active').contains('Contacts');
     cy.get('div#search').should('exist');
