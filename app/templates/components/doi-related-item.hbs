@@ -49,7 +49,7 @@
     destination=fragment.relationType as |el|
   }}
     <el.control
-      @allowClear=true
+      @allowClear={{true}}
       @onChange={{action "selectRelationType"}}
       @placeholder="Select Relation Type" as |item|>
         {{humanize (underscore item)}}
