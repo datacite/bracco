@@ -65,6 +65,9 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | INFO', () => {
           .and('include', '/providers/dc/dois');
         cy.get('#chart-doi');
       });
+
+      // Create DOI button
+      cy.get('.create-doi-button').should('not.exist');    
     });
   });
 

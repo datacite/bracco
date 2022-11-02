@@ -1,0 +1,14 @@
+<BsDropdown as |dd|>
+  <dd.button class="btn btn-warning">
+    Create DOI
+    <span class="caret"></span>
+  </dd.button>
+  <dd.menu as |menu|>
+    <menu.item>
+      <menu.link-to  @route="repositories.show.dois.new">DOI Form</menu.link-to>
+    </menu.item>
+    <menu.item>
+      <menu.link-to @route="repositories.show.dois.upload">File Upload</menu.link-to>
+    </menu.item>
+  </dd.menu>
+</BsDropdown>

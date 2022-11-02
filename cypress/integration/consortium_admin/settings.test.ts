@@ -89,6 +89,9 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | SETTINGS', () => {
 
       cy.get('h3.member-results').contains('Billing Information');
       cy.get('.icon-warning').contains(/Please provide this information./);
+
+      // Create DOI button
+      cy.get('.create-doi-button').should('not.exist');    
     });
   });
 });

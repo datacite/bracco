@@ -1,0 +1,48 @@
+/*
+ Overrides to shared css/scss/sass styles pulled from:
+    https://datacite.org/stylesheets/doi.css?version=3.9.43
+*/
+
+/* create-doi-button */
+
+/* Otherwise drop-down menu falls behind other objects. */
+.create-doi-button .ember-bootstrap-dropdown-bs3-popper {
+  z-index: 10000;
+}
+
+.create-doi-button ul.dropdown-menu.show {
+  margin-top: -2px;
+  margin-left: 10px;
+}
+
+.create-doi-button ul.dropdown-menu.show a {
+  width: 100%;
+  color: #e67e22;
+  font-size: 16px !important;
+  padding-left: 5px;
+}
+
+.create-doi-button ul.dropdown-menu.show a:hover {
+  background-color: rgb(128, 128, 128, .1);
+}
+
+/* To make a left sidebar button line up with the others. */
+.btn-group-vertical {
+  margin-left: 5px;
+}
+
+/* Fix info tab bar chart resize at upper breakpoints.  Div width @ 33% causes svg to overflow the box.*/
+
+@media (min-width: 992px) {
+  .row-chart .col-md-4 {
+      width: auto;
+  }
+}
+
+/* Fix info tab bar chart indent at upper breakpoint.*/
+@media (min-width: 1200px) {
+  .col-lg-offset-3 {
+      /* margin-left: 25%; */
+      margin-left: 0;
+  }
+}

@@ -11,6 +11,9 @@ describe('ACCEPTANCE: ANONYMOUS | NO ADMIN ACCESS', function () {
     cy.url().should('eq', Cypress.config('baseUrl') + '/')
     cy.get('div.motto h1').contains(site_title);
     cy.get('a#sign-in').should('exist');
+
+    // Create DOI button
+    cy.get('.create-doi-button').should('not.exist');      
   })
 
   // the following pages require authentication. Redirects to homepage otherwise.

@@ -67,6 +67,9 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | CONSORTIUM ORGANIZATIONS', () => {
       cy.get('#content').within(($content) => {
         cy.get('[data-test-organization]').its('length').should('be.gte', 1);
       });
+
+      // Create DOI button
+      cy.get('.create-doi-button').should('not.exist');    
     });
   });
 

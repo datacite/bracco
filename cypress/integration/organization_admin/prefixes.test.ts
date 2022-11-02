@@ -65,6 +65,9 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | PREFIXES', () => {
         cy.get('#content').within(($content) => {
           cy.get('[data-test-prefix]').its('length').should('be.gte', 1);
         });
+
+        // Create DOI button
+        cy.get('.create-doi-button').should('not.exist');
       });
     });
   });

@@ -42,7 +42,7 @@
                 {{currentUser.roleName}}
               </menu.item>
               <menu.item>
-                <DynamicLink @params={{settings}}>
+                <DynamicLink @route="{{settings-route settings.route}}" @model="{{settings.model}}">
                   <i class="fas fa-cog"></i>
                   Settings
                 </DynamicLink>

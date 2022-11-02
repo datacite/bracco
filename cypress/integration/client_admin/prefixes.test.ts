@@ -46,6 +46,17 @@ describe('ACCEPTANCE: CLIENT_ADMIN | PREFIXES', () => {
       // Has left sidebar message box.
       // cy.get('div.alert').contains(/Please ask DataCite Staff if you want to add a prefix./i);
 
+      // Has left sidebar buttons.
+      cy.get('div.col-md-3').should('be.visible').within(($sidebar) => {
+        // Create DOI button - would like to do more testing but seems impossible in Cypress.
+        cy.get('.create-doi-button').contains(/Create DOI/i);
+        cy.get('.create-doi-button button.dropdown-toggle').click({ force: true }).then(($obj) => {
+          //cy.get('.create-doi-button ul.dropdown-menu')
+          //cy.get('.create-doi-button ul.dropdown-menu ul li a').contains(/DOI\s*Form/i);
+          //cy.get('.create-doi-button ul.dropdown-menu ul li a').contains(/File\s*Upload/i);
+        });
+      });
+
       // Has left sidebar facets.
       cy.get('.facets h4').contains(/Year\s*created/i);
 

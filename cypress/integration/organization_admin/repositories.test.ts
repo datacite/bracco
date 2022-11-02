@@ -69,12 +69,15 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | REPOSITORIES', () => {
       cy.get('#content').within(($content) => {
         cy.get('[data-test-repository]').its('length').should('be.gte', 1);
       });
+
+      // Create DOI button
+      cy.get('.create-doi-button').should('not.exist');
     });
   });
 
   // TBD - Could do more testing here. Only cursory testing for
   // presence of field objects. No testing of form behavior yet.
-  it.only('has an add repository page', () => {
+  it('has an add repository page', () => {
     cy.visit('/providers/datacite/repositories/new');
     cy.url().should('include', '/providers/datacite/repositories/new').then(() => {
 
@@ -139,5 +142,32 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | REPOSITORIES', () => {
         cy.get('button').contains(/Cancel/i).should('be.visible')
       })
     })
+  });
+
+  // ASSUMING DATACITE.TEST EXISTS:
+  it('check repositories tabs for required components - assumes datacite.test exists', () => {
+    cy.visit('/repositories/datacite.test');
+    cy.wait(waitTime2);
+
+    // Create DOI button
+    cy.get('.create-doi-button').should('not.exist');
+
+    cy.visit('/repositories/datacite.test/info');
+    cy.wait(waitTime2);
+
+    // Create DOI button
+    cy.get('.create-doi-button').should('not.exist');
+
+    cy.visit('/repositories/datacite.test/prefixes');
+    cy.wait(waitTime2);
+
+    // Create DOI button
+    cy.get('.create-doi-button').should('not.exist');
+
+    cy.visit('/repositories/datacite.test/dois');
+    cy.wait(waitTime2);
+
+    // Create DOI button
+    cy.get('.create-doi-button').should('not.exist');
   });
 });

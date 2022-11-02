@@ -56,6 +56,9 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | INFO', () => {
           .and('include', '/providers/datacite/dois');
         cy.get('#chart-doi');
       });
+
+        // Create DOI button
+        cy.get('.create-doi-button').should('not.exist');
     });
   });
 

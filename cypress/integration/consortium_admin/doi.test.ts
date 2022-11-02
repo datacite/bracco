@@ -77,6 +77,9 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | DOIS', () => {
       cy.get('#content').within(($content) => {
         cy.get('[data-test-doi]').its('length').should('be.gte', 1);
       });
+
+      // Create DOI button
+      cy.get('.create-doi-button').should('not.exist');    
     });
   });
 });

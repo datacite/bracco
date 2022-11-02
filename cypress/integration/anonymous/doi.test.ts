@@ -16,5 +16,8 @@ describe('ACCEPTANCE: ANONYMOUS - DOI', () => {
 
     cy.get('h2.work').contains('10.80225/da52-7919');
     cy.get('img.fabrica-logo').should('exist').should('have.attr', 'src').should('include', 'fabrica-logo.svg');
+
+    // Create DOI button
+    cy.get('.create-doi-button').should('not.exist');      
   });
 });

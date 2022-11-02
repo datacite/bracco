@@ -9,7 +9,7 @@
     </div>
   {{/if}}
   <UserRole />
-  <div class="row">
+  <div class="row row-chart">
     <BarChart @data={{json.providers}} @label="Member" @link="providers" @offset={{true}} />
     <BarChart @data={{json.clients}} @label="Repository" @link="repositories" />
     <BarChart @data={{json.dois}} @label="DOI" @link="dois" @cumulative={{false}} />
