@@ -48,6 +48,8 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | SETTINGS', () => {
           .and('have.attr', 'href').and('include', '/providers/dc/edit');
       });
 
+      cy.get('button.export-basic-metadata').should('not.exist');
+
       cy.get('.metadata').within(($metadata) => {
         cy.get('h5').contains(/Record\s*created/i);
         cy.get('h5').contains(/Record\s*last\s*modified/i);

@@ -56,6 +56,7 @@ describe('ACCEPTANCE: CLIENT_ADMIN | PREFIXES', () => {
           //cy.get('.create-doi-button ul.dropdown-menu ul li a').contains(/File\s*Upload/i);
         });
       });
+      cy.get('button.export-basic-metadata').should('not.exist');
 
       // Has left sidebar facets.
       cy.get('.facets h4').contains(/Year\s*created/i);

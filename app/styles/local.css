@@ -46,3 +46,8 @@
       margin-left: 0;
   }
 }
+
+/* Make this look more like other "buttons" in the left sidebar. */
+.btn-group-sm.btn-single>.btn {
+  border-radius: 13px;
+}

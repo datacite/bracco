@@ -50,6 +50,8 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | INFO', () => {
         cy.get('#chart-repository');
       });
 
+      cy.get('button.export-basic-metadata').should('not.exist');
+
       cy.get('#chart-doi-title').parent().parent('.panel').within((panel) => {
         cy.get('#chart-doi-title').contains(/DOIs/i);
         cy.get('.member.graphs a').and('have.attr', 'href')

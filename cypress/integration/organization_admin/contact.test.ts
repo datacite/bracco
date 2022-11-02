@@ -45,6 +45,8 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | CONTACTS', () => {
     cy.get('div.panel.facets').should('exist');
 
     cy.get('a#add-contact').contains('Add Contact');
+
+    cy.get('button.export-basic-metadata').should('not.exist');
   });
 
   it('search contacts', () => {

@@ -41,6 +41,8 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | PREFIXES', () => {
       // Has left sidebar message box.
       // cy.get('div.alert').contains(/New prefixes can't be assigned from this page./i);
 
+      cy.get('button.export-basic-metadata').should('not.exist');
+
       // Has left sidebar facets.
       cy.get('.facets h4').contains(/State/i);
       cy.get('.facets h4').contains(/Year\s*created/i);

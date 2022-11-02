@@ -39,6 +39,8 @@ describe('ACCEPTANCE: CLIENT_ADMIN | INFO', () => {
       cy.get('ul.nav-tabs li a').contains(/DOIs/i)
         .and('have.attr', 'href').and('include', '/repositories/datacite.test/dois');
 
+      cy.get('button.export-basic-metadata').should('not.exist');
+
       cy.get('#chart-doi-title').parent().parent('.panel').within((panel) => {
         cy.get('#chart-doi-title').contains(/DOIs\s*by\s*year/i);
         cy.get('.member.graphs a').and('have.attr', 'href')

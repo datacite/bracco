@@ -41,6 +41,8 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | REPOSITORIES', () => {
       // Has left sidebar message box.
       cy.get('div.alert').contains(/New repositories can't be created from this page./i);
 
+      cy.get('button.export-basic-metadata').should('not.exist');
+
       // Has left sidebar facets.
       cy.get('.facets h4').contains(/Year\s*joined/i);
       cy.get('.facets h4').contains(/Type/i);

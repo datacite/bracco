@@ -53,6 +53,8 @@ describe('ACCEPTANCE: CLIENT_ADMIN | SETTINGS', () => {
           .and('have.attr', 'href').and('include', '/repositories/datacite.test/edit');
       })
 
+      cy.get('button.export-basic-metadata').should('not.exist');
+
       cy.get('.metadata').within(($metadata) => {
         cy.get('h5').contains(/Record\s*created/i);
         cy.get('h5').contains(/Record\s*last\s*modified/i);

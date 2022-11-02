@@ -44,6 +44,8 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | CONSORTIUM ORGANIZATIONS', () => {
           .and('have.attr', 'href').and('include', '/providers/dc/organizations/new');
       });
 
+      cy.get('button.export-basic-metadata').should('not.exist');
+
       // Has left sidebar facets.
       cy.get('.facets h4').contains(/Year\s*joined/i);
       cy.get('.facets h4').contains(/Region/i);
