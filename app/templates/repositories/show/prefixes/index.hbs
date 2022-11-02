@@ -2,28 +2,29 @@
   {{#if
     (and
       model.repository.isActive
-      (gt model.repository.meta.prefixCount 0)
       (or
         (can 'create doi' model)
         (can 'upload doi' model)
       )
     )
   }}
-    <div class="panel facets">
-      <div class="panel-body">
-        <CreateDoiButton @model={{model}} class="create-doi-button" />
+    {{#if
+      (gt model.repository-prefixes.length 0)
+    }}
+      <div class="panel facets">
+        <div class="panel-body">
+          <CreateDoiButton @model={{model}} class="create-doi-button" />
+        </div>
       </div>
-    </div>
-  {{else}}
-    <div class="panel panel-transparent">
-      <div class="panel-body">
-        {{#if (eq model.repository.meta.prefixCount 0)}}
+    {{else}}
+      <div class="panel panel-transparent">
+        <div class="panel-body">
           <BsAlert @dismissible={{false}} @type="warning">
             Can't create DOI without a prefix.
           </BsAlert>
-        {{/if}}
+        </div>
       </div>
-    </div>
+    {{/if}}
   {{/if}}
 
   {{#if (and (can 'write index') model.repository.isActive)}}

@@ -1,42 +1,32 @@
 <div class="row">
   <div class="col-md-3">
-    {{#if (can 'update repository' model)}}
-
-      {{#if
-        (and
-          model.isActive
-          (or
-            (can 'create doi' model)
-            (can 'upload doi' model)
-          )
+    {{#if
+      (and
+        model.isActive
+        (can 'update repository' model)
+        (or
+          (can 'create doi' model)
+          (can 'upload doi' model)
         )
+      )
+    }}
+      {{#if
+        (gt model.meta.prefixCount 0)
       }}
-        {{#if
-          (gt model.meta.prefixCount 0)
-        }}
-          <div class="panel facets">
-            <div class="panel-body">
-              <CreateDoiButton @model={{model}} class="create-doi-button" />
-            </div>
+        <div class="panel facets">
+          <div class="panel-body">
+            <CreateDoiButton @model={{model}} class="create-doi-button" />
           </div>
-        {{else}}
-          <div class="panel panel-transparent">
-            <div class="panel-body">
-              {{#if (eq model.meta.prefixCount 0)}}
-                <BsAlert @dismissible={{false}} @type="warning">
-                  Can't create DOI without a prefix.
-                </BsAlert>
-              {{/if}}
-            </div>
-          </div>
-        {{/if}}
-      {{/if}}
-
-      <div class="panel facets add-25">
-        <div class="panel-body">
-          <CreateDoiButton @model={{model}} class="create-doi-button" />
         </div>
-      </div>
+      {{else}}
+        <div class="panel panel-transparent">
+          <div class="panel-body">
+            <BsAlert @dismissible={{false}} @type="warning">
+              Can't create DOI without a prefix.
+            </BsAlert>
+          </div>
+        </div>
+      {{/if}}
     {{/if}}
   </div>
   <div class="col-md-9">

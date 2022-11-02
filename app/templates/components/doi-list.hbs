@@ -5,28 +5,27 @@
     {{#if
       (and
         repository.isActive
-        (gt repository.meta.prefixCount 0)
         (or
           (can 'create doi' model)
           (can 'upload doi' model)
         )
       )
     }}
-      <div class="panel facets">
-        <div class="panel-body">
-          <CreateDoiButton @model={{model}} class="create-doi-button" />
+      {{#if (gt repository.meta.prefixCount 0) }}
+        <div class="panel facets">
+          <div class="panel-body">
+            <CreateDoiButton @model={{model}} class="create-doi-button" />
+          </div>
         </div>
-      </div>
-    {{else}}
-      <div class="panel panel-transparent">
-        <div class="panel-body">
-          {{#if (eq repository.meta.prefixCount 0)}}
+      {{else}}
+        <div class="panel panel-transparent">
+          <div class="panel-body">
             <BsAlert @dismissible={{false}} @type="warning">
               Can't create DOI without a prefix.
             </BsAlert>
-          {{/if}}
+          </div>
         </div>
-      </div>
+      {{/if}}
     {{/if}}
 
     {{#if (and (can 'move doi' repository) (gt model.length 0))}}

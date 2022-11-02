@@ -30,3 +30,19 @@
 .btn-group-vertical {
   margin-left: 5px;
 }
+
+/* Fix info tab bar chart resize at upper breakpoints.  Div width @ 33% causes svg to overflow the box.*/
+
+@media (min-width: 992px) {
+  .row-chart .col-md-4 {
+      width: auto;
+  }
+}
+
+/* Fix info tab bar chart indent at upper breakpoint.*/
+@media (min-width: 1200px) {
+  .col-lg-offset-3 {
+      /* margin-left: 25%; */
+      margin-left: 0;
+  }
+}
