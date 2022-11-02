@@ -51,8 +51,3 @@
 .btn-group-sm.btn-single>.btn {
   border-radius: 13px;
 }
-
-/* Why does this have a left-margin of -5px.  Correcting to 0. */
-.btn-toolbar {
-  margin-left: 0;
-}
