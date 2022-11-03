@@ -184,13 +184,14 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | INFO', () => {
         cy.get('button#update-provider').should('be.visible');
         cy.get('button').contains(/Cancel/i).should('be.visible');
 
+        cy.get('button.export-basic-metadata').should('not.exist');
+
         cy.get('button').contains(/Cancel/i).should('be.visible').click({force: true});
       })
     });
 
     cy.on("url:changed", (newUrl) => {
       expect(newUrl).to.contain("/providers/dc");
-      cy.get('button.export-basic-metadata').should('not.exist');
     });
   });
 });
