@@ -10,11 +10,13 @@ export default Component.extend({
   store: service(),
   isResearcherProfile: false,
 
+  /*
   didInsertElement() {
     this._super(...arguments);
     
     window.MathJax.typeset([this.get('element')]);
   },
+*/
   didRender() {
     this._super(...arguments);
     

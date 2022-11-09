@@ -73,11 +73,13 @@ export default Component.extend({
       this.selectStyle(style);
     }
   },
+  /*
   didInsertElement() {
     this._super(...arguments);
     
     window.MathJax.typeset([this.get('element')]);
   },
+  */
   didRender() {
     this._super(...arguments);
     
