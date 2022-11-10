@@ -176,6 +176,9 @@
   "engines": {
     "node": "14.*"
   },
+  "ember": {
+    "edition": "classic"
+  },
   "resolutions": {
   }
 }
