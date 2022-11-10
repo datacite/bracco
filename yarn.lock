@@ -12992,10 +12992,10 @@ ember-rfc176-data@^0.3.17:
   resolved "https://registry.yarnpkg.com/ember-rfc176-data/-/ember-rfc176-data-0.3.17.tgz#d4fc6c33abd6ef7b3440c107a28e04417b49860a"
   integrity sha512-EVzTTKqxv9FZbEh6Ktw56YyWRAA0MijKvl7H8C06wVF+8f/cRRz3dXxa4nkwjzyVwx4rzKGuIGq77hxJAQhWWw==
 
-ember-route-action-helper@^2.0.7:
-  version "2.0.7"
-  resolved "https://registry.yarnpkg.com/ember-route-action-helper/-/ember-route-action-helper-2.0.7.tgz#3b946a613c88bb82a039c974f64f5b6f56d5e0bf"
-  integrity sha512-8GEnB9hfPdh5U19ubmojVZQBu6aUIfQuiv6xnsdss7V3TMspjI1Ak8lqoqEzww8Dv+sxv8YWma0IhKPFxrVJag==
+ember-route-action-helper@^2.0.8:
+  version "2.0.8"
+  resolved "https://registry.yarnpkg.com/ember-route-action-helper/-/ember-route-action-helper-2.0.8.tgz#f227fcccb73e839b65e9b814e241b322fe8c02fc"
+  integrity sha512-V+4uKwqaYveriVt2rl4e+9mzHJiQOr1B8dCPQQ2TS3iAcmi5RD2giRDFGtCK9d2XY9Arb/f9hJh0obP20iyt3A==
   dependencies:
     ember-cli-babel "^6.8.1"
     ember-getowner-polyfill "^2.0.0"
@@ -19731,10 +19731,10 @@ sane@^4.0.0, sane@^4.1.0:
     minimist "^1.1.1"
     walker "~1.0.5"
 
-sanitize-html@^2.3.2:
-  version "2.7.1"
-  resolved "https://registry.yarnpkg.com/sanitize-html/-/sanitize-html-2.7.1.tgz#a6c2c1a88054a79eeacfac9b0a43f1b393476901"
-  integrity sha512-oOpe8l4J8CaBk++2haoN5yNI5beekjuHv3JRPKUx/7h40Rdr85pemn4NkvUB3TcBP7yjat574sPlcMAyv4UQig==
+sanitize-html@^2.7.3:
+  version "2.7.3"
+  resolved "https://registry.yarnpkg.com/sanitize-html/-/sanitize-html-2.7.3.tgz#166c868444ee4f9fd7352ac8c63fa86c343fc2bd"
+  integrity sha512-jMaHG29ak4miiJ8wgqA1849iInqORgNv7SLfSw9LtfOhEUQ1C0YHKH73R+hgyufBW9ZFeJrb057k9hjlfBCVlw==
   dependencies:
     deepmerge "^4.2.2"
     escape-string-regexp "^4.0.0"
