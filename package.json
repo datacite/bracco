@@ -68,7 +68,7 @@
     "@types/ember-qunit": "^3.4.7",
     "@types/ember__test-helpers": "^0.7.9",
     "@types/qunit": "^2.9.0",
-    "@types/rsvp": "^4.0.3",
+    "@types/rsvp": "^4.0.4",
     "async-promise-queue": "^1.0.5",
     "babel-eslint": "^10.0.3",
     "babel-plugin-transform-async-to-generator": "^6.24.1",
