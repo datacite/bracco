@@ -4329,7 +4329,7 @@
     core-js-compat "^3.8.0"
     semver "^5.5.0"
 
-"@babel/preset-env@^7.16.0":
+"@babel/preset-env@^7.16.0", "@babel/preset-env@^7.20.2":
   version "7.20.2"
   resolved "https://registry.yarnpkg.com/@babel/preset-env/-/preset-env-7.20.2.tgz#9b1642aa47bb9f43a86f9630011780dab7f86506"
   integrity sha512-1G0efQEWR1EHkKvKHqbG+IN/QdgwfByUpM5V5QroDzGV2t3S/WXNQd693cHiHTlCFMpr9B6FkPFXDA2lQcKoDg==
