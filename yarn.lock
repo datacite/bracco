@@ -15848,10 +15848,10 @@ isexe@^2.0.0:
   resolved "https://registry.yarnpkg.com/isexe/-/isexe-2.0.0.tgz#e8fbf374dc556ff8947a10dcb0572d633f2cfa10"
   integrity sha1-6PvzdNxVb/iUehDcsFctYz8s+hA=
 
-iso-3166-country-list@^0.1.2:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/iso-3166-country-list/-/iso-3166-country-list-0.1.2.tgz#16523b8984547af65f2ff42a628ebdbd127abd1f"
-  integrity sha1-FlI7iYRUevZfL/QqYo69vRJ6vR8=
+iso-3166-country-list@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/iso-3166-country-list/-/iso-3166-country-list-0.2.0.tgz#314f828d036d983e6035a8f3d502634831831833"
+  integrity sha512-pkuQBF5qDjmj4qITlriiQ88k0jZZhDYh5v1V0MOP8KeZ8PrTfvJTlpOCYJsEnkBG2BI8MZvW1byR6sUvT7pJ2g==
 
 iso-639-1@^2.1.15:
   version "2.1.15"
