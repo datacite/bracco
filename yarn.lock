@@ -12030,10 +12030,10 @@ ember-modifier-manager-polyfill@^1.1.0, ember-modifier-manager-polyfill@^1.2.0:
     ember-cli-version-checker "^2.1.2"
     ember-compatibility-helpers "^1.2.0"
 
-ember-moment@^8.0.0:
-  version "8.0.0"
-  resolved "https://registry.yarnpkg.com/ember-moment/-/ember-moment-8.0.0.tgz#f3993711df0af444558f0f3922dc3f412af72410"
-  integrity sha512-JbwmTiS75EEXFWGR5P8rXykISpDf6EH8L8IpxsF6FaRwJ/4odXV/yf8cKh6gpzxoags9OJ8qxyQqG0Prhgs9Sg==
+ember-moment@^8.0.2:
+  version "8.0.2"
+  resolved "https://registry.yarnpkg.com/ember-moment/-/ember-moment-8.0.2.tgz#6e5034045e9d1447fa6c0af80983b93ee62bb1be"
+  integrity sha512-2S4byvP7sSj8vn30280EA6mA62moe9TCpg2mtuioWYQV3shAUAX4FrfC2oCzNBU+TcKw3dSXnhGi9Pt5krMhAg==
   dependencies:
     ember-cli-babel "^6.7.2"
     ember-getowner-polyfill "^2.2.0"
