@@ -11717,10 +11717,10 @@ ember-cli-fastboot@^3.3.2:
     recast "^0.19.1"
     silent-error "^1.1.1"
 
-ember-cli-flash@^1.8.0:
-  version "1.8.0"
-  resolved "https://registry.yarnpkg.com/ember-cli-flash/-/ember-cli-flash-1.8.0.tgz#365decadc850e77b70c1c64ce6ab6f58662f7c38"
-  integrity sha512-Iymt+7MnYPXzz1c23aYNVqj4aq7HGc8oGUSzNsgs9SwLpIoiYafYB3M81x/mqOyLLUVPjBst3Z6cF42FKAAyMw==
+ember-cli-flash@^1.9.1:
+  version "1.9.1"
+  resolved "https://registry.yarnpkg.com/ember-cli-flash/-/ember-cli-flash-1.9.1.tgz#fda9f7b92fdb4bb85688e4df554beb514c1749e7"
+  integrity sha512-9AN0BD27owvnNpFBELy5zSNIbJBUP8xW6mFV98L0qHnfJk2gG7bXbXOzt6VtRqWC+Pm5rCRqUoCz+NiwsPvObw==
   dependencies:
     ember-cli-babel "^7.1.2"
     ember-cli-htmlbars "^3.0.0"
