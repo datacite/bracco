@@ -159,7 +159,7 @@
     "eslint": "8.27.0",
     "eslint-plugin-ember": "^11.2.0",
     "eslint-plugin-node": "^11.1.0",
-    "fastboot-express-middleware": "^2.0.0",
+    "fastboot-express-middleware": "^3.3.2",
     "html-entities": "^1.2.1",
     "iso-3166-country-list": "^0.2.0",
     "jquery-visible": "^1.2.0",
