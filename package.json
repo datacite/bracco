@@ -118,7 +118,7 @@
     "ember-cli-moment-shim": "^3.8.0",
     "ember-cli-polyfill-io": "^2.0.0",
     "ember-cli-shims": "^1.2.0",
-    "ember-cli-showdown": "^4.5.0",
+    "ember-cli-showdown": "^6.0.1",
     "ember-cli-spinjs": "^2.1.1",
     "ember-cli-sri": "^2.1.1",
     "ember-cli-string-helpers": "^4.0.5",
