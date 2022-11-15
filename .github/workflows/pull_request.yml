@@ -121,7 +121,7 @@ jobs:
       - name: Cypress Testing
         uses: cypress-io/github-action@v3
         with:
-          config-file: cypress-config.json
+          config-file: cypress.config.ts
           install: false
           config: defaultCommandTimeout=15000
           start: yarn start --path=test_build
