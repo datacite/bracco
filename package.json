@@ -39,7 +39,7 @@
     "ember-file-upload": "^2.7.1",
     "ember-promise-helpers": "^2.0.0",
     "ember-responsive": "^3.0.5",
-    "fastboot-app-server": "^2.0.0",
+    "fastboot-app-server": "^3.2.2",
     "fs-extra": "^10.1.0",
     "humanize-string": "^2.1.0",
     "iso-639-1": "^2.1.15",
