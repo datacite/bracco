@@ -67,7 +67,7 @@
     "@cypress/browserify-preprocessor": "^3.0.2",
     "@cypress/code-coverage": "^3.10.0",
     "@ember/optional-features": "^2.0.0",
-    "@pollyjs/ember": "^4.0.4",
+    "@pollyjs/ember": "^5.2.0",
     "@thoughtbot/eslint-config": "^0.1.0",
     "@types/ember": "^3.1.1",
     "@types/ember-data": "^3.1.9",
