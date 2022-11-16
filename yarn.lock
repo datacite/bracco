@@ -12302,7 +12302,7 @@ ember-source-channel-url@^2.0.1:
   dependencies:
     got "^8.0.1"
 
-ember-source@^3.12.1:
+ember-source@~3.15.0:
   version "3.15.0"
   resolved "https://registry.yarnpkg.com/ember-source/-/ember-source-3.15.0.tgz#f6500c6d289ce58231bf1e6695c4974df2be7390"
   integrity sha512-daTELJBDMGqAmQb/Puxdk1YR204/zs1DEiEMQWlqbtmhphAoDUbGi9ifJu20ajP/IcOCWw9Vp7aPzguTohWF7w==
