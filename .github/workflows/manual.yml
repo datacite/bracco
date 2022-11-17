@@ -17,7 +17,7 @@ jobs:
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
+        run: echo "name=dir::$(yarn cache dir)" >> $GITHUB_OUTPUT
 
       - uses: actions/cache@v3
         id: cypress-cache
@@ -54,7 +54,7 @@ jobs:
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
+        run: echo "name=dir::$(yarn cache dir)" >> $GITHUB_OUTPUT
 
       - uses: actions/cache@v3
         id: cypress-cache
@@ -99,7 +99,7 @@ jobs:
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
+        run: echo "name=dir::$(yarn cache dir)" >> $GITHUB_OUTPUT
 
       - uses: actions/cache@v3
         id: cypress-cache
@@ -177,10 +177,10 @@ jobs:
       - name: Extract variables
         shell: bash
         run: |
-          echo "::set-output name=BRANCH::$(echo ${GITHUB_REF#refs/heads/} | sed 's/\//_/g')"
-          echo "::set-output name=GIT_SHA::$(git rev-parse HEAD)"
-          echo "::set-output name=GIT_SHA_SHORT::$(git rev-parse --short HEAD)"
-          echo "::set-output name=MESSAGE::$(git log --format='%f %b' -n 1 ${{ github.event.after }})"
+          echo "name=BRANCH::$(echo ${GITHUB_REF#refs/heads/} | sed 's/\//_/g')" >> $GITHUB_OUTPUT
+          echo "name=GIT_SHA::$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
+          echo "name=GIT_SHA_SHORT::$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+          echo "name=MESSAGE::$(git log --format='%f %b' -n 1 ${{ github.event.after }})" >> $GITHUB_OUTPUT
         id: extract_variables
 
       - name: Vercel deploy
