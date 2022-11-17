@@ -10,16 +10,16 @@ jobs:
     strategy:
       fail-fast: false
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: '14'
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
+        run: echo "name=dir::$(yarn cache dir)" >> $GITHUB_OUTPUT
 
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         id: cypress-cache
         with:
           path: |
@@ -35,7 +35,7 @@ jobs:
           ./node_modules/.bin/ember build --output-path="test_build" --environment=development
 
       - name: Upload Test Build artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: test_build
           path: test_build/
@@ -47,16 +47,16 @@ jobs:
     strategy:
       fail-fast: true
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: '14'
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
+        run: echo "name=dir::$(yarn cache dir)" >> $GITHUB_OUTPUT
 
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         id: cypress-cache
         with:
           path: |
@@ -67,7 +67,7 @@ jobs:
           restore-keys: ${{ runner.os }}-yarn-
 
       - name: Download Test Build artifact
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: test_build
           path: test_build/
@@ -94,16 +94,16 @@ jobs:
       matrix:
         containers: [1, 2, 3, 4, 5]
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: '14'
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
+        run: echo "name=dir::$(yarn cache dir)" >> $GITHUB_OUTPUT
 
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         id: cypress-cache
         with:
           path: |
@@ -114,13 +114,13 @@ jobs:
           restore-keys: ${{ runner.os }}-yarn-
 
       - name: Download Test Build artifact
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: test_build
           path: test_build/
 
       - name: Cypress Testing
-        uses: cypress-io/github-action@v2
+        uses: cypress-io/github-action@v3
         with:
           install: false
           config: defaultCommandTimeout=15000
@@ -174,15 +174,15 @@ jobs:
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Extract variables
         shell: bash
         run: |
-          echo "::set-output name=BRANCH::$(echo ${GITHUB_REF#refs/heads/} | sed 's/\//_/g')"
-          echo "::set-output name=GIT_SHA::$(git rev-parse HEAD)"
-          echo "::set-output name=GIT_SHA_SHORT::$(git rev-parse --short HEAD)"
-          echo "::set-output name=MESSAGE::$(git log --format='%f %b' -n 1 ${{ github.event.after }})"
+          echo "name=BRANCH::$(echo ${GITHUB_REF#refs/heads/} | sed 's/\//_/g')" >> $GITHUB_OUTPUT
+          echo "name=GIT_SHA::$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
+          echo "name=GIT_SHA_SHORT::$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+          echo "name=MESSAGE::$(git log --format='%f %b' -n 1 ${{ github.event.after }})" >> $GITHUB_OUTPUT
         id: extract_variables
 
       - name: Vercel deploy
