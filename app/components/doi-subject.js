@@ -3,12 +3,7 @@ import URI from 'urijs';
 import { isBlank } from '@ember/utils';
 import fosMapping from '../utils/fos-mappings';
 
-const completeSubjectList = fosMapping.fosFields.map( function(fosField ) {
-  return fosField.fosLabel
-});
-
-const oecdScheme = 'Fields of Science and Technology (FOS)';
-const oecdSchemeUri = 'http://www.oecd.org/science/inno/38235147.pdf';
+const completeSubjectList = fosMapping.allLabels();
 
 export default Component.extend({
   completeSubjectList,
@@ -68,18 +63,19 @@ export default Component.extend({
       }
     },
     updateSubject(value) {
-      var fos = fosMapping.fosFields.find( fosField => fosField.fosLabel == value );
+      var fos = fosMapping.findSubjectByLabel(value);
       if (fos) {
-        this.fragment.set('subject', 'FOS: ' + value);
-        this.setScheme(oecdScheme);
-        this.setSchemeUri(oecdSchemeUri);
-        this.setClassificationCode(fos.fosId);
+        this.fragment.set('subject', 'FOS: ' + fos.subject);
+        this.setScheme(fos.scheme);
+        this.setSchemeUri(fos.schemeUri);
+        this.setClassificationCode(fos.classificationCode);
         this.set('oecdSelected', true);
       } else {
         this.fragment.set('subject', value);
         this.setScheme(null);
         this.set('schemeUri', null);
         this.fragment.set('subjectSchemeUri', null);
+        this.setClassificationCode(null);
         this.set('oecdSelected', false);
       }
     },
