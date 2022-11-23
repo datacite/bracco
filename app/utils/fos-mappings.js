@@ -1,4 +1,6 @@
-export default {
+const OECD_SCHEME = 'Fields of Science and Technology (FOS)';
+const OECD_SCHEME_URI = 'http://www.oecd.org/science/inno/38235147.pdf';
+const MAPPING = {
   "mappingListVersion": "1.0",
   "originalUrl": "https://www.oecd.org/science/inno/38235147.pdf",
   "fosFields": [
@@ -195,4 +197,31 @@ export default {
       "fosLabel": "Other humanities"
     }
   ]
+};
+
+export default {
+  data: MAPPING,
+  scheme: OECD_SCHEME,
+  schemeUri: OECD_SCHEME_URI,
+  allLabels: function() {
+    return this.data.fosFields.map( function(fosField ) {
+      return fosField.fosLabel
+    })
+  },
+
+  findByLabel: function(value) {
+    return this.data.fosFields.find( fosField => fosField.fosLabel == value );
+  },
+  findSubjectByLabel: function( value ) {
+      var fos = this.findByLabel(value);
+      if (fos) {
+        return {
+          subject: fos.fosLabel,
+          scheme: OECD_SCHEME,
+          schemeUri: OECD_SCHEME_URI,
+          classificationCode: fos.fosId
+        }
+      }
+      return fos;
+  }
 };
