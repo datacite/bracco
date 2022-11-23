@@ -1,7 +1,7 @@
 import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
 import { computed } from '@ember/object';
 import ENV from 'bracco/config/environment';
-import { array, fragment } from 'ember-data-model-fragments/attributes';
+import { array, fragment, fragmentArray } from 'ember-data-model-fragments/attributes';
 import { validator, buildValidations } from 'ember-cp-validations';
 import isEmpty from 'bracco/utils/is-empty';
 
@@ -169,6 +169,7 @@ export default Model.extend(Validations, {
   keepPassword: attr('boolean', { defaultValue: true }),
   created: attr('date'),
   updated: attr('date'),
+  subjects: fragmentArray('subject', { defaultValue: [] }),
   targetId: attr(),
   mode: attr('string'),
 
