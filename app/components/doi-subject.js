@@ -1,57 +1,11 @@
 import Component from '@ember/component';
 import URI from 'urijs';
 import { isBlank } from '@ember/utils';
+import fosMapping from '../utils/fos-mappings';
 
-const completeSubjectList = [
-  'Natural sciences',
-  'Mathematics',
-  'Computer and information sciences',
-  'Physical sciences',
-  'Chemical sciences',
-  'Earth and related environmental sciences',
-  'Biological sciences',
-  'Other natural sciences',
-  'Engineering and technology',
-  'Civil engineering',
-  'Electrical engineering, electronic engineering, information engineering',
-  'Mechanical engineering',
-  'Chemical engineering',
-  'Materials engineering',
-  'Medical engineering',
-  'Environmental engineering',
-  'Environmental biotechnology',
-  'Industrial biotechnology',
-  'Nano-technology',
-  'Other engineering and technologies',
-  'Medical and health sciences',
-  'Basic medicine',
-  'Clinical medicine',
-  'Health sciences',
-  'Medical biotechnology',
-  'Other medical sciences',
-  'Agricultural sciences',
-  'Agriculture, forestry, and fisheries',
-  'Animal and dairy science',
-  'Veterinary science',
-  'Agricultural biotechnology',
-  'Other agricultural sciences',
-  'Social sciences',
-  'Psychology',
-  'Economics and business',
-  'Educational sciences',
-  'Sociology',
-  'Law',
-  'Political science',
-  'Social and economic geography',
-  'Media and communications',
-  'Other social sciences',
-  'Humanities',
-  'History and archaeology',
-  'Languages and literature',
-  'Philosophy, ethics and religion',
-  'Arts (arts, history of arts, performing arts, music)',
-  'Other humanities'
-];
+const completeSubjectList = fosMapping.fosFields.map( function(fosField ) {
+  return fosField.fosLabel
+});
 
 const oecdScheme = 'Fields of Science and Technology (FOS)';
 const oecdSchemeUri = 'http://www.oecd.org/science/inno/38235147.pdf';
@@ -114,10 +68,12 @@ export default Component.extend({
       }
     },
     updateSubject(value) {
-      if (completeSubjectList.includes(value)) {
+      var fos = fosMapping.fosFields.find( fosField => fosField.fosLabel == value );
+      if (fos) {
         this.fragment.set('subject', 'FOS: ' + value);
         this.setScheme(oecdScheme);
         this.setSchemeUri(oecdSchemeUri);
+        this.setClassificationCode(fos.fosId);
         this.set('oecdSelected', true);
       } else {
         this.fragment.set('subject', value);
