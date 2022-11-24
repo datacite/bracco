@@ -97,7 +97,10 @@
         </div>
 
 
+        {{#if model.isDisciplinary }}
         <DoiSubjects @model={{model}} @form={{form}} />
+        {{/if}}
+
         <div class="form-group" id="certificate">
           <label class="control-label col-md-3">Certificate (optional)</label>
           <div class="col-md-9">
