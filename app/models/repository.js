@@ -178,6 +178,7 @@ export default Model.extend(Validations, {
       return item.trim();
     });
   }),
+
   badgeUrl: computed('re3data', function () {
     if (this.re3data) {
       return (
@@ -189,5 +190,9 @@ export default Model.extend(Validations, {
     } else {
       return null;
     }
-  })
+  }),
+
+  get isDisciplinary() {
+    return this.repositoryType.includes("disciplinary");
+  },
 });
