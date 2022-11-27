@@ -54,7 +54,8 @@
     "node-fetch",
     "compression",
     "morgan",
-    "fastboot-express-middleware"
+    "fastboot-express-middleware",
+    "crypto"
   ],
   "devDependencies": {
     "@babel/core": "^7.20.2",
