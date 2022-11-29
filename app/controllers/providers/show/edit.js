@@ -257,7 +257,7 @@ export default Controller.extend({
     selectMemberType(memberType) {
       this.model.set('memberType', memberType);
       this.set('memberTypes', memberTypeList);
-      if (this.get('features').isEnabled('enable-doi-estimate')) {
+      if (this.features.isEnabled('enable-doi-estimate')) {
         this.send('toggleInput');
       }
     },

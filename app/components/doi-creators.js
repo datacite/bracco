@@ -22,7 +22,7 @@ export default Component.extend({
       this.set('showCreators', true);
     },
     toggleCreators() {
-      this.set('showCreators', !this.get('showCreators'));
+      this.set('showCreators', !this.showCreators);
     },
   },
 });

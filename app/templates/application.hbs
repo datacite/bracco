@@ -1,8 +1,8 @@
-{{#while-loading}}
+<WhileLoading>
   <BsProgress as |pg|>
     <pg.bar @value={{random-number 90}} @type="info" />
   </BsProgress>
-{{/while-loading}}
+</WhileLoading>
 
 <HeadLayout />
 {{outlet}}

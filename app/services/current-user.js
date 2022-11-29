@@ -36,7 +36,7 @@ export default Service.extend({
       // rejecting revoked tokens
       if (ENV.JWT_BLACKLISTED.split(',').includes(jwt)) {
         jwt = null;
-        this.get('flashMessages').danger(
+        this.flashMessages.danger(
           'Unable to authenticate because the token has been revoked.'
         );
       }
@@ -88,7 +88,7 @@ export default Service.extend({
         this.set('home', { route: 'providers' });
         this.set('settings', { route: 'index' });
         this.set('roleName', 'Staff');
-        this.get('features').enable('showResearchers');
+        this.features.enable('showResearchers');
       } else if (payload.role_id === 'staff_admin') {
         // other users with role_id staff_admin are developers
         this.set('isDeveloper', true);

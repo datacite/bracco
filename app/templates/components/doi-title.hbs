@@ -18,9 +18,11 @@
 </div>
 
 <div class="power-select-fragment title-type">
-  {{#form.element controlType="power-select" value=fragment.titleType options=titleTypes destination=fragment.titleType disabled=disabled as |el|}}
-    {{el.control onChange=(action "selectTitleType") placeholder="Select Title Type" allowClear=true}}
-  {{/form.element}}
+  <!--
+  <form.element @controlType="power-select" @value={{fragment.titleType}} @options={{titleTypes}} @destination={{fragment.titleType}} @disabled={{disabled}} as |el|>
+    <el.control @onChange={{action "selectTitleType"}} @placeholder="Select Title Type" @allowClear={{true}} />
+  </form.element>
+  -->
 </div>
 
 <div class="power-select-label">
@@ -28,9 +30,11 @@
 </div>
 
 <div class="power-select-fragment title-lang">
-  {{#form.element controlType="power-select" disabled=disabled value=language options=languages as |el|}}
-    {{el.control onChange=(action "selectLanguage") search=(action "searchLanguage") placeholder="Select Language" searchPlaceholder="Type to search..." allowClear=true}}
-  {{/form.element}}
+  <!--
+  <form.element @controlType="power-select" @disabled={{disabled}} @value={{language}} @options={{languages}} as |el|>
+    <el.control @onChange={{action "selectLanguage"}} @search={{action "searchLanguage"}} @placeholder="Select Language" @searchPlaceholder="Type to search..." @allowClear={{true}} />
+  </form.element>
+  -->
 </div>
 
 <hr />

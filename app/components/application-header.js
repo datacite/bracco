@@ -19,9 +19,9 @@ export default Component.extend({
     this._super(...args);
 
     if (ENV.featureFlags['enable-doi-estimate']) {
-      this.get('features').enable('enableDoiEstimate');
+      this.features.enable('enableDoiEstimate');
     } else {
-      this.get('features').disable('enableDoiEstimate');
+      this.features.disable('enableDoiEstimate');
     }
 
     this.data = this.data || {};

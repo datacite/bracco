@@ -17,7 +17,7 @@ export default Component.extend({
       this.set('showDescriptions', true);
     },
     toggleDescriptions() {
-      this.set('showDescriptions', !this.get('showDescriptions'));
+      this.set('showDescriptions', !this.showDescriptions);
     },
   },
 });

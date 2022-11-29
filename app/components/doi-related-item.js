@@ -165,14 +165,14 @@ export default Component.extend({
       this.set('showRelatedItemCreators', true);
     },
     toggleRelatedItemCreators() {
-      this.set('showRelatedItemCreators', !this.get('showRelatedItemCreators'));
+      this.set('showRelatedItemCreators', !this.showRelatedItemCreators);
     },
     addRelatedItemContributor() {
       this.fragment.get('contributors').createFragment();
       this.set('showRelatedItemContributors', true);
     },
     toggleRelatedItemContributors() {
-      this.set('showRelatedItemContributors', !this.get('showRelatedItemContributors'));
+      this.set('showRelatedItemContributors', !this.showRelatedItemContributors);
     },
   }
 });

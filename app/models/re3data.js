@@ -1,6 +1,5 @@
 import Model, { attr } from '@ember-data/model';
-import { union } from '@ember/object/computed';
-import { reads } from '@ember/object/computed';
+import { union, reads } from '@ember/object/computed';
 import { validator, buildValidations } from 'ember-cp-validations';
 
 const Validations = buildValidations({

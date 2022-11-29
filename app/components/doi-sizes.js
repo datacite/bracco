@@ -16,7 +16,7 @@ export default Component.extend({
       this.set('showSizes', true);
     },
     toggleSizes() {
-      this.set('showSizes', !this.get('showSizes'));
+      this.set('showSizes', !this.showSizes);
     },
   },
 });

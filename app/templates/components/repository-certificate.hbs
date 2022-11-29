@@ -1,9 +1,11 @@
 {{#if (gt index 0)}}
   <div class="input-group">
     <div class="power-select-fragment">
-      {{#form.element controlType="power-select" disabled=disabled value=certificate options=certificates as |el|}}
-        {{el.control onChange=(action "selectCertificate") search=(action "searchCertificate") placeholder="Select Certificate" searchPlaceholder="Type to search..." allowClear=true}}
-      {{/form.element}}
+      <!--
+      <form.element @controlType="power-select" @disabled={{disabled}} @value={{certificate}} @options={{certificates}} as |el|>
+        <el.control @onChange={{action "selectCertificate"}} @search={{action "searchCertificate"}} @placeholder="Select Certificate" @searchPlaceholder="Type to search..." @allowClear={{true}} />
+      </form.element>
+      -->
     </div>
     <span class="input-group-addon" style="vertical-align:top;padding-top:3px;">
     <BsButton @outline={{true}} @onClick={{action "deleteCertificate" index}}><i class="fas fa-trash pull-left"></i></BsButton>
@@ -11,8 +13,10 @@
   </div>
 {{else}}
   <div class="power-select-fragment">
-    {{#form.element controlType="power-select" disabled=disabled value=certificate options=certificates as |el|}}
-      {{el.control onChange=(action "selectCertificate") search=(action "searchCertificate") placeholder="Select Certificate" searchPlaceholder="Type to search..." allowClear=true}}
-    {{/form.element}}
+    <!--
+    <form.element @controlType="power-select" @disabled={{disabled}} @value={{certificate}} @options={{certificates}} as |el|>
+      <el.control @onChange={{action "selectCertificate"}} @search={{action "searchCertificate"}} @placeholder="Select Certificate" @searchPlaceholder="Type to search..." @allowClear={{true}} />
+    </form.element>
+    -->
   </div>
 {{/if}}

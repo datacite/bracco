@@ -17,7 +17,7 @@ export default Component.extend({
       this.set('showAlternateIdentifiers', true);
     },
     toggleAlternateIdentifiers() {
-      this.set('showAlternateIdentifiers', !this.get('showAlternateIdentifiers'));
+      this.set('showAlternateIdentifiers', !this.showAlternateIdentifiers);
     },
   },
 });

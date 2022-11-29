@@ -42,7 +42,7 @@ export default Component.extend({
 
     if (
       relatedItemIdentifierTypeList.includes(
-        this.get('relatedItemIdentifierType')
+        this.relatedItemIdentifierType
       )
     ) {
       this.set('controlledIdentifierType', true);

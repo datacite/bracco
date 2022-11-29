@@ -183,23 +183,25 @@ const Validations = buildValidations({
       presence: true,
       ignoreBlank: true,
       message: 'A doi estimate is required.',
-      disabled: computed('model', function () {
+
+      get disabled() {
         return (
           this.model.get('memberType') !== 'consortium_organization' ||
           !ENV.featureFlags['enable-doi-estimate']
         )
-      }).volatile(),
+      }
     }),
     validator('number', {
       allowString: true,
       integer: true,
       positive: true,
-      disabled: computed('model', function () {
+
+      get disabled() {
         return (
           this.model.get('memberType') !== 'consortium_organization' ||
           !ENV.featureFlags['enable-doi-estimate']
         )
-      }).volatile(),
+      }
     })
   ]
 });

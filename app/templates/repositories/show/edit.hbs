@@ -2,7 +2,7 @@
   <div class="panel-body">
     <div class="col-md-9 col-md-offset-3"><h3 class="edit">Update {{if (eq currentUser.uid model.id) 'Account' 'Repository'}}</h3>
       {{#each flashMessages.queue as |flash|}}
-        {{flash-message flash=flash}}
+        <FlashMessage @flash={{flash}} />
       {{/each}}
     </div>
 

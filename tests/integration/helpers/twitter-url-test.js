@@ -11,6 +11,6 @@ module('Integration | Helper | twitter-url', function(hooks) {
 
     await render(hbs`{{twitter-url inputValue}}`);
 
-    assert.equal(this.element.textContent.trim(), 'https://twitter.com/datacite');
+    assert.dom(this.element).hasText('https://twitter.com/datacite');
   });
 });
