@@ -19,26 +19,22 @@
   <label for="relatedItemType" class="required-label subtitle">Related Item Type</label> 
 </div> 
 <div class="power-select-fragment" data-test-related-item-type>
-  <!--
-  <form.element @controlType="power-select" @value={{fragment.relatedItemType}} @helpText="The type of the Related Item." @options={{relatedItemTypeList}} @destination={{fragment.relatedItemType}} as |el|>
+  <@form.element @controlType="power-select" @value={{fragment.relatedItemType}} @helpText="The type of the Related Item." @options={{relatedItemTypeList}} @destination={{fragment.relatedItemType}} as |el|>
     <el.control @onChange={{action "selectRelatedItemType"}} @allowClear={{true}} @placeholder="Select related item Type" />
-  </form.element>
-  -->
+  </@form.element>
 </div>
 
 <div class="power-select-label">
   <label for="relationType" class="required-label subtitle">Relation Type</label> 
 </div> 
 <div class="power-select-fragment" data-test-related-relation-type>
-  <!--
-  <form.element @controlType="power-select" @value={{fragment.relationType}} @helpText="The type of the Relation." @options={{relationTypeList}} @disabled={{disabled}} @allowClear={{true}} @destination={{fragment.relationType}} as |el|>
+  <@form.element @controlType="power-select" @value={{fragment.relationType}} @helpText="The type of the Relation." @options={{relationTypeList}} @disabled={{disabled}} @allowClear={{true}} @destination={{fragment.relationType}} as |el|>
     <el.control
       @onChange={{action "selectRelationType"}}
       @placeholder="Select Relation Type" as |item|>
         {{humanize (underscore item)}}
     </el.control>
-  </form.element>
-  -->
+  </@form.element>
 </div>
 
 <DoiRelatedItemIdentifier @model={{model}} @form={{form}} @fragment={{fragment.relatedItemIdentifier}} />

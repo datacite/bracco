@@ -1,13 +1,11 @@
 {{#if (gt index 0)}}
   <div class="input-group">
     <div class="power-select-fragment">
-      <!--
-      <form.element @controlType="power-select" @disabled={{disabled}} @value={{repositoryType}} @options={{repositoryTypes}} as |el|>
+      <@form.element @controlType="power-select" @disabled={{disabled}} @value={{repositoryType}} @options={{repositoryTypes}} as |el|>
         <el.control @onChange={{action "selectRepositoryType"}} @search={{action "searchRepositoryType"}} @placeholder="Select RepositoryType" @searchPlaceholder="Type to search..." @allowClear={{true}} as |item|>
           {{titleize item}}
         </el.control>
-      </form.element>
-      -->
+      </@form.element>
     </div>
     <span class="input-group-addon" style="vertical-align:top;padding-top:3px;">
     <BsButton @outline={{true}} @onClick={{action "deleteRepositoryType" index}}><i class="fas fa-trash pull-left"></i></BsButton>
@@ -15,12 +13,10 @@
   </div>
 {{else}}
   <div class="power-select-fragment">
-    <!--
-    <form.element @controlType="power-select" @disabled={{disabled}} @value={{repositoryType}} @options={{repositoryTypes}} as |el|>
+    <@form.element @controlType="power-select" @disabled={{disabled}} @value={{repositoryType}} @options={{repositoryTypes}} as |el|>
       <el.control @onChange={{action "selectRepositoryType"}} @search={{action "searchRepositoryType"}} @placeholder="Select RepositoryType" @searchPlaceholder="Type to search..." @allowClear={{true}} as |item|>
         {{titleize item}}
       </el.control>
-    </form.element>
-    -->
+    </@form.element>
   </div>
 {{/if}}

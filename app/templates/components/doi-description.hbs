@@ -16,11 +16,9 @@
 </div>
 
 <div class="power-select-fragment">
-  <!--
-  <form.element @controlType="power-select" @value={{fragment.descriptionType}} @options={{descriptionTypes}} @destination={{fragment.descriptionType}} @disabled={{disabled}} as |el|>
+  <@form.element @controlType="power-select" @value={{fragment.descriptionType}} @options={{descriptionTypes}} @destination={{fragment.descriptionType}} @disabled={{disabled}} as |el|>
     <el.control @class="description-types" @onChange={{action "selectDescriptionType"}} @placeholder="Select Description Type" @allowClear={{false}} />
-  </form.element>
-  -->
+  </@form.element>
 </div>
 
 
@@ -29,11 +27,9 @@
 </div>
 
 <div class="power-select-fragment description-langs">
-  <!--
-  <form.element @controlType="power-select" @disabled={{disabled}} @value={{language}} @options={{languages}} as |el|>
+  <@form.element @controlType="power-select" @disabled={{disabled}} @value={{language}} @options={{languages}} as |el|>
     <el.control @class="description-langs" @onChange={{action "selectLanguage"}} @search={{action "searchLanguage"}} @placeholder="Select Language" @searchPlaceholder="Type to search..." @allowClear={{true}} />
-  </form.element>
-  -->
+  </@form.element>
 </div>
 
 <hr />
