@@ -1,5 +1,4 @@
 import Component from '@ember/component';
-import URI from 'urijs';
 import { isBlank } from '@ember/utils';
 import fosMapping from '../utils/fos-mappings';
 
@@ -12,15 +11,12 @@ export default Component.extend({
 
   init(...args) {
     this._super(...args);
-
     this.selected = this.selected || [];
   },
 
   setSchemeUri(value) {
-    let uri = URI(value);
     this.fragment.set('subjectSchemeUri', value);
-    this.fragment.set('valueUri', value);
-    this.fragment.set('schemeUri', uri.origin().concat(uri.directory()));
+    this.fragment.set('schemeUri', value);
     this.set('schemeUri', value);
   },
   setScheme(value) {
@@ -66,7 +62,7 @@ export default Component.extend({
       var fos = fosMapping.findSubjectByLabel(value);
       if (fos) {
         this.fragment.set('subject', 'FOS: ' + fos.subject);
-        this.setScheme(fos.scheme);
+        this.setScheme(fos.subjectScheme);
         this.setSchemeUri(fos.schemeUri);
         this.setClassificationCode(fos.classificationCode);
         this.set('oecdSelected', true);
