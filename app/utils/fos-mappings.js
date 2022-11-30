@@ -217,7 +217,7 @@ export default {
       if (fos) {
         return {
           subject: fos.fosLabel,
-          scheme: OECD_SCHEME,
+          subjectScheme: OECD_SCHEME,
           schemeUri: OECD_SCHEME_URI,
           classificationCode: fos.fosId
         }
