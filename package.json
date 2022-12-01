@@ -186,5 +186,7 @@
   "ember": {
     "edition": "classic"
   },
-  "resolutions": {}
+  "resolutions": {
+    "**/loader-utils": "^1.4.2"
+  }
 }
