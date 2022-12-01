@@ -190,7 +190,9 @@
     "**/loader-utils": "^1.4.2",
     "**/mout": "^1.2.4",
     "**/moment-timezone": "^0.5.37",
+    "**/shell-quote": "^1.7.3",
     "**/socket.io-parser": "^4.2.1",
-    "**/terser": "^4.8.1"
+    "**/terser": "^4.8.1",
+    "**/tmpl": "^1.0.5"
   }
 }
