@@ -38,7 +38,7 @@
     "ember-decorators": "^6.1.1",
     "ember-file-upload": "^2.7.1",
     "ember-promise-helpers": "^2.0.0",
-    "ember-responsive": "^3.0.5",
+    "ember-responsive": "^3.0.6",
     "fastboot-app-server": "^3.2.2",
     "fs-extra": "^10.1.0",
     "humanize-string": "^2.1.0",
