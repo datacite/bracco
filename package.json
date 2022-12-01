@@ -187,6 +187,10 @@
     "edition": "classic"
   },
   "resolutions": {
+    "**/@pollyjs/ember/**/acorn": "^5.7.4",
+    "**/ember-data/**/acorn": "^6.4.1",
+    "**/ember-fetch/**/broccoli-rollup/**/acorn": "^5.7.4",
+    "**/ember-simple-auth/**/broccoli-rollup/**/acorn": "^5.7.4",
     "**/handlebars": "^4.7.7",
     "**/json-schema": "^0.4.0",
     "**/loader-utils": "^1.4.2",
