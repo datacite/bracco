@@ -187,6 +187,7 @@
     "edition": "classic"
   },
   "resolutions": {
-    "**/loader-utils": "^1.4.2"
+    "**/loader-utils": "^1.4.2",
+    "**/socket.io-parser": "^3.4.2"
   }
 }
