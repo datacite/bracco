@@ -28,7 +28,7 @@
   "dependencies": {
     "@fragaria/address-formatter": "^2.2.1",
     "@sentry/ember": "5.29.2",
-    "@types/ember-feature-flags": "^4.0.6",
+    "@types/ember-feature-flags": "^6.0.1",
     "acorn": "^8.8.1",
     "cldr-core": "^36.0.0",
     "cypress-file-upload": "^5.0.8",

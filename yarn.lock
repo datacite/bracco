@@ -2311,12 +2311,12 @@
     "@types/ember__object" "*"
     "@types/rsvp" "*"
 
-"@types/ember-feature-flags@^4.0.6":
-  version "4.0.6"
-  resolved "https://registry.yarnpkg.com/@types/ember-feature-flags/-/ember-feature-flags-4.0.6.tgz#726f4561651b1f9a565cb0934059fd49569bf6e0"
-  integrity sha512-+mtugEeeB9+6Wbev+CvAqBBaUvkyxZ8gJhI9cX5SQKRbeQA7d5B1U/PdnnHj3TQYpKBgvR7yWpuuOICIgCQK1A==
+"@types/ember-feature-flags@^6.0.1":
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/@types/ember-feature-flags/-/ember-feature-flags-6.0.1.tgz#6155f73404bc81b5e2c0d53f7b25dbda8fb03394"
+  integrity sha512-absD860Db+yr2LMHAhSbtAqLph00sQXpA/Tlvkt3JFdvbEhM3KJ4BoxeOR4ONCFlx60PJxYa0H5NMBxRiM5j5Q==
   dependencies:
-    "@types/ember" "*"
+    "@types/ember__service" "*"
 
 "@types/ember-qunit@^5.0.2":
   version "5.0.2"
