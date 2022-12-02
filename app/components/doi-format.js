@@ -1,16 +1,49 @@
 import Component from '@ember/component';
+import { inject as service } from '@ember/service';
 
 export default Component.extend({
+  store: service(),
+
+  init(...args) {
+    this._super(...args);
+
+    this.organizations = this.organizations || [];
+    console.log(this.fragment)  },
+
+  updateAffiliation(organizationRecord) {
+    console.log('HERE')
+    console.log(organizationRecord)
+    if (organizationRecord) {
+      this.fragment.set('name', organizationRecord.name);
+      this.fragment.set('affiliationIdentifier', organizationRecord.id);
+      this.fragment.set('schemeUri', 'https://ror.org');
+      this.fragment.set('affiliationIdentifierScheme', 'ROR');
+    } else {
+      this.fragment.set('name', null);
+      this.fragment.set('affiliationIdentifier', null);
+      this.fragment.set('schemeUri', 'https://ror.org');
+      this.fragment.set('affiliationIdentifierScheme', 'ROR');
+    }
+  },
 
   actions: {
-    updateFormat(value) {
-      this.set('fragment', value);
+    searchRor(query) {
+      let self = this;
+      this.store
+        .query('ror', { query })
+        .then(function (organizations) {
+          self.set('organizations', organizations);
+        })
+        .catch(function (reason) {
+          console.debug(reason);
+          return [];
+        });
     },
-    selectFormat() {
-      this.model.get('formats').replace(this.index, 1, [ this.fragment ]);
+    selectRor(ror) {
+      this.updateAffiliation(ror);
     },
     deleteFormat() {
       this.model.get('formats').removeAt(this.index);
     },
-  },
+  }
 });
