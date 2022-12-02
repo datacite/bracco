@@ -192,6 +192,7 @@
     "**/@humanwhocodes/config-array/**/minimatch": "^3.1.2",
     "**/@pollyjs/ember/**/acorn": "^5.7.4",
     "**/ansi-regex": "^5.0.1",
+    "**/ansi-html": "^0.0.9",
     "**/async-promise-queue/**/async": "2.6.4",
     "**/cypress/**/async": "3.2.2",
     "**/ember-bootstrap/**/async": "2.6.4",
