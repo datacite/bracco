@@ -187,13 +187,16 @@
     "edition": "classic"
   },
   "resolutions": {
+    "**/@humanwhocodes/config-array/**/minimatch": "^3.1.2",
     "**/@pollyjs/ember/**/acorn": "^5.7.4",
     "**/ember-data/**/acorn": "^6.4.1",
     "**/ember-fetch/**/broccoli-rollup/**/acorn": "^5.7.4",
     "**/ember-simple-auth/**/broccoli-rollup/**/acorn": "^5.7.4",
+    "**/eslint/**/minimatch": "^3.1.2",
     "**/handlebars": "^4.7.7",
     "**/json-schema": "^0.4.0",
     "**/loader-utils": "^1.4.2",
+    "**/minimatch": "^3.0.5",
     "**/minimist": "^1.2.6",
     "**/mout": "^1.2.4",
     "**/moment-timezone": "^0.5.37",
