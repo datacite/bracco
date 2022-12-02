@@ -181,7 +181,7 @@
     "xml2js": "^0.4.23"
   },
   "engines": {
-    "node": "10.* || >= 12"
+    "node": "14.*"
   },
   "ember": {
     "edition": "classic"
