@@ -41,7 +41,7 @@
     "ember-responsive": "^3.0.6",
     "fastboot-app-server": "^3.2.2",
     "fs-extra": "^10.1.0",
-    "humanize-string": "^2.1.0",
+    "humanize-string": "^3.0.0",
     "iso-639-1": "^2.1.15",
     "junk": "^3.1.0",
     "langs": "^2.0.0",
