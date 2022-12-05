@@ -32,6 +32,10 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: ${{ runner.os }}-yarn-
 
+      - name: Get branch name
+        run: |
+          echo "### CURRENT BRANCH NAME:  ${{ github.ref_name }}."
+
       - name: Build
         run: |
           yarn --prefer-offline
