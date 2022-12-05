@@ -5,6 +5,7 @@ import fosMapping from '../utils/fos-mappings';
 const completeSubjectList = fosMapping.allLabels();
 
 export default Component.extend({
+  attributeBindings: ['simple'],
   completeSubjectList,
   subjects: completeSubjectList,
   oecdSelected: false,
@@ -41,6 +42,12 @@ export default Component.extend({
       this.set('oecdSelected', false);
     }
   },
+  subjectText(value){
+    if (this.simple) {
+      return value;
+    }
+    return "FOS: " + value;
+  },
 
   actions: {
     createOnEnter(select, e) {
@@ -61,7 +68,7 @@ export default Component.extend({
     updateSubject(value) {
       var fos = fosMapping.findSubjectByLabel(value);
       if (fos) {
-        this.fragment.set('subject', 'FOS: ' + fos.subject);
+        this.fragment.set('subject', this.subjectText(fos.subject));
         this.setScheme(fos.subjectScheme);
         this.setSchemeUri(fos.schemeUri);
         this.setClassificationCode(fos.classificationCode);
