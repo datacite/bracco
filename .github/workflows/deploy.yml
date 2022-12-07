@@ -182,7 +182,6 @@ jobs:
           echo "BRANCH=$(echo ${GITHUB_REF#refs/heads/} | sed 's/\//_/g')" >> $GITHUB_OUTPUT
           echo "GIT_SHA=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
           echo "GIT_SHA_SHORT=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
-          # echo "MESSAGE=$(git log --format='%f %b' -n 1 ${{ github.event.after }})" >> $GITHUB_OUTPUT
         id: extract_variables
 
       - name: Vercel deploy
@@ -205,7 +204,6 @@ jobs:
           text: 'A new version of <https://doi.stage.datacite.org|Fabrica> has been deployed to stage.'
           failure_text: '${env.GITHUB_WORKFLOW} (${env.GITHUB_RUN_NUMBER}) build failed'
           fields: |
-            # [{ "title": "Commit message", "value": "${{ steps.extract_variables.outputs.MESSAGE }}" },
             [{ "title": "Committed by", "value": "<https://github.com/${{ github.repository }}/commits?author=${{ github.actor }}|${{ github.actor }}>", "short": true },
              { "title": "Commit SHA", "value": "<https://github.com/${{ github.repository }}/commit/${{ steps.extract_variables.outputs.GIT_SHA }}|${{ steps.extract_variables.outputs.GIT_SHA_SHORT }}>", "short": true },
              { "title": "Repository", "value": "<https://github.com/${{ github.repository }}|${{ github.repository }}>", "short": true },
