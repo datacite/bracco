@@ -13,16 +13,16 @@ jobs:
     steps:
       - name: Branch name
         run: echo running on branch ${GITHUB_REF##*/}
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: '14'
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
+        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
 
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         id: cypress-cache
         with:
           path: |
@@ -38,7 +38,7 @@ jobs:
           ./node_modules/.bin/ember build --output-path="test_build" --environment=development
 
       - name: Upload Test Build artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: test_build
           path: test_build/
@@ -51,16 +51,16 @@ jobs:
     strategy:
       fail-fast: true
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: '14'
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
+        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
 
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         id: cypress-cache
         with:
           path: |
@@ -71,7 +71,7 @@ jobs:
           restore-keys: ${{ runner.os }}-yarn-
 
       - name: Download Test Build artifact
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: test_build
           path: test_build/
@@ -93,16 +93,16 @@ jobs:
       matrix:
         containers: [1, 2, 3, 4, 5]
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: '14'
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
+        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
 
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         id: cypress-cache
         with:
           path: |
@@ -113,13 +113,13 @@ jobs:
           restore-keys: ${{ runner.os }}-yarn-
 
       - name: Download Test Build artifact
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: test_build
           path: test_build/
 
       - name: Cypress Testing
-        uses: cypress-io/github-action@v2
+        uses: cypress-io/github-action@v3
         with:
           install: false
           config: defaultCommandTimeout=15000
