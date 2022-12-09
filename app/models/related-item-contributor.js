@@ -9,20 +9,25 @@ const Validations = buildValidations({
     validator('presence', {
       presence: true,
       message: 'Related Item contributor must have a name',
-    })
+    }),
+    validator(function(value, options) { 
+      console.log("RIC INLINE CALLED")
+      return true
+    }),
   ],
   contributorType: [
     validator('presence', {
       presence: true,
       message: 'Contributors must include a contributor type',
-      disabled: computed('model.name', function () {
-        return isBlank(this.model.get('name'));
-      })
+      // disabled: computed('name', function () {
+      //   console.log("VALIDATOR COMPUTED DETECTED NAME CHANGE");
+      //   return isBlank(this.name);
+      // })
     }),
     validator('contributor-type', {
-      disabled: computed('model.name', function () {
-        return isBlank(this.model.get('name'));
-      })
+      // disabled: computed('model.name', function () {
+      //   return isBlank(this.model.get('name'));
+      // })
     })
   ]
 });
