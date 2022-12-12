@@ -58,11 +58,8 @@ const Validations = buildValidations({
     validator(function(value, options) {
       let valid = true
       this.model.get('contributors').forEach(element => {
-        // console.log("===start contrib===")
-        // console.log(element.get('name'))
         const {m, validations} = element.validateSync();
         valid = validations.get('isValid')
-        // console.log("===done contrib===")
       });
       return valid;
     },
@@ -82,7 +79,6 @@ const Validations = buildValidations({
     validator(function(value, options) {
       let rii = this.model.get('relatedItemIdentifier');
       const {m, validations} = rii.validateSync();
-      console.log(validations.get('message'))
       return validations.get('isValid');
     },
     {
