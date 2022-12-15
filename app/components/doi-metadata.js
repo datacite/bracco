@@ -93,17 +93,5 @@ export default Component.extend({
     selectMetadata(metadata) {
       this.showMetadata(metadata);
     },
-  },
-  /*
-  didInsertElement() {
-    this._super(...arguments);
-    
-    window.MathJax.typeset([this.get('element')]);
-  },
-  */
-  didRender() {
-    this._super(...arguments);
-    
-    window.MathJax.typeset([this.get('element')]);
-  },
+  }
 });

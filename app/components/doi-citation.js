@@ -3,6 +3,7 @@ import { inject as service } from '@ember/service';
 import fetch from 'fetch';
 import ENV from 'bracco/config/environment';
 import FileReader from 'ember-file-upload/system/file-reader';
+import checkForTex from '../utils/check-for-tex';
 
 export default Component.extend({
   currentUser: service(),
@@ -52,6 +53,11 @@ export default Component.extend({
       if (typeof response === 'string') {
         self.set('citationOutput', response);
       } else {
+        try {
+          self.set('citationOutput', '');
+        } catch(e) {
+          /////// Workaround for 'destroyed object' Error (breaks 'select' action )
+        }
         let reader = new FileReader();
         reader.readAsText(response).then(
           (r) => {
@@ -73,16 +79,21 @@ export default Component.extend({
       this.selectStyle(style);
     }
   },
-  /*
-  didInsertElement() {
-    this._super(...arguments);
-    
-    window.MathJax.typeset([this.get('element')]);
-  },
-  */
+
   didRender() {
     this._super(...arguments);
-    
-    window.MathJax.typeset([this.get('element')]);
+  
+    let element = this.get('element');
+    let citation = element.querySelector('[data-test-citation');
+    let citationOutput = this.get('citationOutput')
+
+    if (checkForTex(citationOutput))  {
+      if (citationOutput) {
+        window.MathJax.typesetClear([this.get('element')]);  
+        citation.innerHTML = citationOutput;
+      }
+
+      window.MathJax.typeset([this.get('element')]);
+    }
   },
 });
