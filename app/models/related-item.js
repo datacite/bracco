@@ -57,6 +57,27 @@ const Validations = buildValidations({
       })
     })
   ],
+  relatedItemContributors: [
+    validator(function() {
+      let valid = true
+      this.model.get('contributors').forEach(element => {
+        const {validations} = element.validateSync();
+        valid = validations.get('isValid')
+      });
+      return valid;
+    },
+    {
+      dependentKeys: ['model.contributors.@each.name', 'model.contributors.@each.contributorType'],
+      attributeDescription: 'Related Items Contributors',
+      disabled: computed('model.{title,state}', function () {
+        return (
+          this.model.get('state') === 'draft' ||
+          isBlank(this.model.get('title'))
+        );
+      })
+    }
+    ),
+  ],
 });
 
 
@@ -83,4 +104,5 @@ export default Fragment.extend(Validations, {
       return null;
     }
   }),
+  relatedItemContributors: computed.reads('contributors')
 });
