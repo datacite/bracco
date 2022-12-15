@@ -117,7 +117,7 @@
         class="fas fa-plus"></i> Add another creator</BsButton>
     {{/if}}
 
-    {{#if (gt fragment.creators.length 1)}}
+    {{#if (gt fragment.creators.length 0)}}
     <BsButton @id="toggle-related-item-creators" @class="btn-sm" @outline={{true}}
       @onClick={{action "toggleRelatedItemCreators" }}><i class="fas fa-eye-slash"></i> Hide {{pluralize
       fragment.creators.length 'creator'}}</BsButton>
@@ -147,10 +147,10 @@
     {{/each}}
     {{#if (lte fragment.contributors.length 24)}}
     <BsButton @class="btn-sm add-related-item-contributor" @outline={{true}}
-      @onClick={{action "addRelatedItemContributor" }}><i class="fas fa-plus"></i> Add another contributor</BsButton>
+      @onClick={{action "addRelatedItemContributor" }}><i class="fas fa-plus"></i> Add {{if (gt model.relatedIdentifiers.length 0) "another "}} contributor</BsButton>
     {{/if}}
 
-    {{#if (gt fragment.contributors.length 1)}}
+    {{#if (gt fragment.contributors.length 0)}}
     <BsButton @id="toggle-related-item-contributors" @class="btn-sm" @outline={{true}}
       @onClick={{action "toggleRelatedItemContributors" }}><i class="fas fa-eye-slash"></i> Hide {{pluralize
       fragment.contributors.length 'contributor'}}</BsButton>
