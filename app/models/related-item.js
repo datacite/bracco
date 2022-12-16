@@ -36,9 +36,12 @@ const Validations = buildValidations({
     validator('presence', {
       presence: true,
       message: 'Related Item must have a Title',
-      disabled: computed('model.state', function () {
+      disabled: computed('model.{title,relatedItemType,relationType,state}', function () {
         return (
-          this.model.get('state') === 'draft'
+          this.model.get('state') === 'draft' ||
+          (isBlank(this.model.get('title')) &&
+          isBlank(this.model.get('relatedItemType')) &&
+          isBlank(this.model.get('relationType')))
         );
       })
     })
@@ -55,10 +58,10 @@ const Validations = buildValidations({
     })
   ],
   relatedItemContributors: [
-    validator(function(value, options) {
+    validator(function() {
       let valid = true
       this.model.get('contributors').forEach(element => {
-        const {m, validations} = element.validateSync();
+        const {validations} = element.validateSync();
         valid = validations.get('isValid')
       });
       return valid;
@@ -66,24 +69,6 @@ const Validations = buildValidations({
     {
       dependentKeys: ['model.contributors.@each.name', 'model.contributors.@each.contributorType'],
       attributeDescription: 'Related Items Contributors',
-      disabled: computed('model.{title,state}', function () {
-        return (
-          this.model.get('state') === 'draft' ||
-          isBlank(this.model.get('title'))
-        );
-      })
-    }
-    ),
-  ],
-  relatedItemIdentifier: [
-    validator(function(value, options) {
-      let rii = this.model.get('relatedItemIdentifier');
-      const {m, validations} = rii.validateSync();
-      return validations.get('isValid');
-    },
-    {
-      dependentKeys: ['model.relatedItemIdentifier.relatedItemIdentifier', 'model.relatedItemIdentifier.relatedItemIdentifierType'],
-      attributeDescription: 'Related Item Identifier',
       disabled: computed('model.{title,state}', function () {
         return (
           this.model.get('state') === 'draft' ||
@@ -119,6 +104,5 @@ export default Fragment.extend(Validations, {
       return null;
     }
   }),
-
   relatedItemContributors: computed.reads('contributors')
 });

@@ -30,27 +30,6 @@ const contributorTypes = [
 
 const humanContributorTypes = contributorTypes.map(type => humanizeString(type));
 
-const organizationalContributorTypes = [
-  'HostingInstitution',
-  'RegistrationAgency',
-  'RegistrationAuthority',
-  'ResearchGroup',
-  'Distributor',
-];
-
-const personalContributorTypes = [
-  'ContactPerson',
-  'DataCurator',
-  'Editor',
-  'ProjectLeader',
-  'ProjectManager',
-  'ProjectMember',
-  'RelatedPerson',
-  'Researcher',
-  'Supervisor',
-  'WorkPackageLeader',
-];
-
 export default Component.extend({
   humanContributorTypes,
   humanContributorType: computed('fragment.contributorType', function() {
