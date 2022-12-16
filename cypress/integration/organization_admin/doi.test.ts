@@ -67,6 +67,7 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | DOIS', () => {
         cy.get('#sort select').contains(/Sort by Date Updated/i);
         cy.get('#sort select').contains(/Sort by Date Created/i);
         cy.get('#sort select').contains(/Sort by DOI/i);
+        cy.get('#sort select').contains(/Sort Alphabetically/i);
         cy.get('#sort select').contains(/Sort by Relevance/i);
   
         // Has search results as content.
