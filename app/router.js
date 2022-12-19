@@ -67,11 +67,6 @@ Router.map(function () {
     this.route('new');
   });
   this.route('users', function () {
-    this.route('show', { path: '/:user_id' }, function () {
-      this.route('info');
-      this.route('settings');
-      this.route('dois');
-    });
   });
   this.route('contacts', function () {
     this.route('show', { path: '/:contact_id' }, function () {
