@@ -91,11 +91,15 @@ const Validations = buildValidations({
     }),
     validator('date', {
       after: '999',
-      before: '2023',
+      before: computed('model.maxMintFutureOffset', function () {
+        return new Date().getFullYear() + this.model.get('maxMintFutureOffset') +1;
+      }),
       precision: 'year',
       format: 'YYYY',
       errorFormat: 'YYYY',
-      message: 'Must be a year between 1000 and 2023.',
+      message: computed('model.maxMintFutureOffset', function () {
+        return `Must be a year between 1000 and ${new Date().getFullYear() + this.model.get('maxMintFutureOffset') }.`;
+      }),
       disabled: computed('model.{mode,state}', function () {
         return (
           this.model.get('state') === 'draft' ||
@@ -227,5 +231,8 @@ export default Model.extend(Validations, {
     } else {
       return null;
     }
+  }),
+  maxMintFutureOffset: computed(function () {
+    return ENV.MAX_MINT_FUTURE_OFFSET;
   })
 });

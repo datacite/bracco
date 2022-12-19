@@ -10,6 +10,8 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
   const waitTime = 1000;
   const waitTime2 = 2000;
   const prefix = '10.80225';
+  const dayjs = require('dayjs');
+  const yearPlus = dayjs().add(Cypress.env('max_mint_future_offset'), 'year').format('YYYY'); 
   let suffix = '';
 
   before(function () {
@@ -105,7 +107,8 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
       cy.get('#publisher-field').should('be.visible').type('DataCite', { force: true });
 
       // Set publication year.
-      cy.get('#publication-year-field').should('be.visible').type('2020', { force: true });
+      cy.get('#publication-year-help').should('be.visible').should('have.text', 'Must be a year between 1000 and ' + yearPlus + '.');
+      cy.get('#publication-year-field').should('be.visible').type(yearPlus, { force: true });
 
       // Set resource type.
       // Causes the aria dropdown to be populated and displayed so that selection can be made.
