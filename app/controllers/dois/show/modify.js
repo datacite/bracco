@@ -44,6 +44,7 @@ export default Controller.extend({
       doi.set('fundingReferences', null);
       doi.set('geoLocations', null);
       doi.set('dates', null);
+      doi.set('relatedItems', null);
 
       // Don't try and set the landingPage information for DOI Updates
       doi.set('landingPage', null);

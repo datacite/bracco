@@ -1,0 +1,32 @@
+<div class="power-select-label">
+  <label for="relatedItemIdentifier" class="subtitle">Related Item Identifier</label> 
+</div> 
+<input type="text"
+    class="form-control related-item-identifier-field" placeholder="" value={{fragment.relatedItemIdentifier}} oninput={{action "updateRelatedItemIdentifier" value="target.value"}} data-test-related-item-identifier />
+
+<div
+  class="help-block help-block-fragment related-item-identifier-field">
+  Must be a globally unique identifier. Visit our support website for 
+   <a target="_blank" rel="noopener" href="https://support.datacite.org/docs/schema-optional-properties-v43#section-12-a-related-identifier-type"> the list of supported unique identifiers.</a>
+</div>
+
+<div class="power-select-label">
+  <label for="relatedItemIdentifierType" class="subtitle">Related Identifier Type</label> 
+</div> 
+<div class="power-select-fragment" disabled={{this.controlledIdentifierType}} data-test-related-item-identifier-type>
+  {{#form.element
+    controlType="power-select"
+    value=fragment.relatedItemIdentifierType
+    helpText="The type of the Related Identifier."
+    options=relatedItemIdentifierTypeList
+    disabled=this.controlledIdentifierType
+    allowClear=true
+    destination=relatedItemIdentifierType as |el|
+  }}
+    {{el.control
+      onChange=(action "selectRelatedItemIdentifierType")
+      allowClear=true
+      placeholder="Select related Identifier Type"
+    }}
+  {{/form.element}}
+</div>

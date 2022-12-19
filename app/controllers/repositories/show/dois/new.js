@@ -116,6 +116,15 @@ export default Controller.extend({
         return !isBlank(fundingReference.funderName) || !isBlank(fundingReference.funderIdentifier) || !isBlank(fundingReference.funderIdentifierType) || !isBlank(fundingReference.awardNumber) || !isBlank(fundingReference.awardTitle);
       }));
 
+      // only store related items with a type, a relation type and a title
+      doi.set('relatedItems', A(doi.get('relatedItems')).filter(function(item) {
+        let titles = A(item.get('titles')).filter(function(title) {
+          return !isBlank(title.title);
+        });
+
+        return !isBlank(item.relatedItemType) || !isBlank(item.relationType) || !isBlank(titles);
+      }));
+
       let self = this;
       doi.save().then(function(doi) {
         self.transitionToRoute('dois.show', doi);

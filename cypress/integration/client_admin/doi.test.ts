@@ -139,6 +139,7 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
         cy.get('[doi-subject] div[role="button"]').click({ force: true }).then(($dropdown) => {
           // Makes the selection from the dropdown.
           cy.get('input.ember-power-select-search-input').type('Optics{enter}', { force: true });
+          cy.get('input.subject-classification-code-field').type('O123', { force: true });
           cy.get('#toggle-subjects').should('be.visible').click({ force: true }).then(($toggle) => {
             cy.get('#toggle-subjects').contains('Show 1 subject');
           });
@@ -146,7 +147,7 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
       });
 
       // Set contributor.
-      cy.get('#add-contributor').click({ force: true }).then(($subform) => {
+      cy.get('#add-contributor').click({ waitForAnimations: true }).then(($subform) => {
         cy.get('.help-block.name-identifier-field').should('be.visible').should('have.text','Use name identifier expressed as URL. Uniquely identifies an individual or legal entity, according to various schemas, e.g. ORCID, ROR or ISNI. The Given Name, Family Name, and Name will automatically be filled out for ORCID and ROR identifiers.')
         // Causes the aria dropdown to be populated and displayed so that selection can be made.
         cy.get('[doi-contributor] div[role="button"]').click({ waitForAnimations: true }).then(($dropdown) => {
@@ -162,7 +163,7 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
       cy.get('#version-field').should('be.visible').type('67', { force: true });
 
       // Set format.
-      cy.get('#add-format').click({ force: true }).then(($subform) => {
+      cy.get('#add-format').click({ waitForAnimations: true }).then(($subform) => {
         cy.get('[data-test-format]').should('be.visible').type('json', { force: true });
         cy.get('#toggle-formats').should('be.visible').click({ force: true }).then(($toggle) => {
           cy.get('#toggle-formats').contains('Show 1 format');
@@ -173,7 +174,7 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
       cy.get('#add-alternate-identifier').click({ force: true }).then(($subform) => {
         cy.get('[data-test-alternate-identifier-type] div[role="button"]').click({ force: true }).then(($dropdown) => {
           cy.get("ul.ember-power-select-options li").contains("DOI").click({ force: true });
-          cy.get('#toggle-alternate-identifiers').should('be.visible').click({ force: true }).then(($toggle) => {
+          cy.get('#toggle-alternate-identifiers').should('be.visible').click({ waitForAnimations: true }).then(($toggle) => {
             cy.get('#toggle-alternate-identifiers').contains('Show 1 alternate identifier');
           });
         });
@@ -193,7 +194,7 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
               // Causes the aria dropdown to be populated and displayed so that selection can be made.
               cy.get('[data-test-related-resource-type] div[role="button"]').click({ force: true }).then(() => {
                 // Makes the selection from the dropdown. (Type or click on it.  Since choices change as you type, that is the better method.)
-                cy.get('input.ember-power-select-search-input').type('Text{enter}', { force: true }).then(() => {
+                cy.get('input.ember-power-select-search-input').first().type('Text{enter}', { force: true }).then(() => {
 
                   cy.get('#toggle-related-identifiers').should('be.visible').click({ force: true }).then(($toggle) => {
                     cy.get('#toggle-related-identifiers').contains('Show 1 related identifier');
@@ -231,6 +232,26 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
           });
         });
       });
+
+      // Set related item.
+      cy.get('#add-related-item').click({ force: true}).then(($subform) => {
+        // Fill in the title
+        cy.get('[data-test-related-item-title]').should('be.visible').type('HEPP Yearly', { force: true });
+        // Select the type
+        cy.get('[data-test-related-item-type] div[role="button"]').click({ force: true}).then(($dropdown) => {
+          cy.get("ul.ember-power-select-options li").contains("Journal").click({ force: true });
+        })
+        // Add related item identifier
+        cy.get('[data-test-related-item-identifier]').should('be.visible').type('10.12345/example').then(() => {
+          // Check that the type is set
+          cy.get('[data-test-related-item-identifier-type]').contains('DOI')
+        })
+
+        // Check the toggle
+        cy.get('#toggle-related-items').should('be.visible').click({ force: true }).then(($toggle) => {
+          cy.get('#toggle-related-items').contains('Show 1 related item');
+        });
+      })
 
       // Set 'prefix'. Random suffix.
       cy.get('#prefix-field div[role="button"]').click({ force: true }).then(() => {

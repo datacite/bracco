@@ -63,6 +63,11 @@ export function doiFormErrors([ model ]) {
         errorAttributes = errorAttributes.concat(rights.validations.errors.mapBy('attribute'));
       });
     }
+    if (model.relatedItems) {
+      model.relatedItems.forEach((relatedItem) => {
+        errorAttributes = errorAttributes.concat(relatedItem.validations.errors.mapBy('attribute'));
+      });
+    }
   }
 
   return errorAttributes.map(function(attribute) {

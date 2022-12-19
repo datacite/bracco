@@ -36,6 +36,7 @@ export default Controller.extend({
       doi.set('fundingReferences', null);
       doi.set('geoLocations', null);
       doi.set('dates', null);
+      doi.set('relatedItems', null)
 
       let self = this;
       doi
