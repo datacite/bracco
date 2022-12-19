@@ -1,17 +1,18 @@
 import Component from '@ember/component';
-import { inject as service } from '@ember/service';
 
 export default Component.extend({
   tagName: 'div',
-  classNames: [ 'panel-body' ],
-  isList: false,
-  store: service(),
-  isResearcherProfile: false,
+
+  didReceiveAttrs() {
+    this._super(...arguments);
+
+  },
 
   didRender() {
     this._super(...arguments);
 
+    window.MathJax.typesetClear([this.get('element')]);
+    this.element.innerHTML = this.text
     window.MathJax.typeset([this.get('element')]);
-  },
-  
+  }
 });

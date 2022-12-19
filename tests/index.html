@@ -23,6 +23,20 @@
 
   <link rel="stylesheet" href="{{rootURL}}assets/test-support.css">
 
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      },
+      svg: {
+        fontCache: 'global'
+      },
+    };
+  </script>
+  <script type="application/javascript" id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+
   {{content-for "head-footer"}}
   {{content-for "test-head-footer"}}
 </head>
