@@ -53,6 +53,8 @@ module.exports = (on, config) => {
 
   config.env.client_admin_password = process.env.CLIENT_ADMIN_PASSWORD
 
+  config.env.max_mint_future_offset = process.env.MAX_MINT_FUTURE_OFFSET || 5
+
   on('task', {
     // deconstruct the individual properties
     hello({ greeting, name }) {

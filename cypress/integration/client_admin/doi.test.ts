@@ -10,8 +10,8 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
   const waitTime = 1000;
   const waitTime2 = 2000;
   const prefix = '10.80225';
-  const dayjs = require('dayjs')
-  const yearPlusFive = dayjs().add(5, 'year').format('YYYY');
+  const dayjs = require('dayjs');
+  const yearPlus = dayjs().add(Cypress.env('max_mint_future_offset'), 'year').format('YYYY'); 
   let suffix = '';
 
   before(function () {
@@ -78,7 +78,7 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
     });
   });
 
-  it('is creating a doi - FORM', () => {
+  it.only('is creating a doi - FORM', () => {
     cy.visit('/repositories/datacite.test/dois/new');
     cy.url().should('include', '/repositories/datacite.test/dois/new').then(() => {
 
@@ -106,11 +106,9 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
       // Set publisher.
       cy.get('#publisher-field').should('be.visible').type('DataCite', { force: true });
 
-      cy.log('Year + 5 = ' + yearPlusFive);
-
       // Set publication year.
-      cy.get('#publication-year-help').should('be.visible').should('have.text', 'Must be a year between 1000 and ' + yearPlusFive + '.');
-      cy.get('#publication-year-field').should('be.visible').type(yearPlusFive, { force: true });
+      cy.get('#publication-year-help').should('be.visible').should('have.text', 'Must be a year between 1000 and ' + yearPlus + '.');
+      cy.get('#publication-year-field').should('be.visible').type(yearPlus, { force: true });
 
       // Set resource type.
       // Causes the aria dropdown to be populated and displayed so that selection can be made.
