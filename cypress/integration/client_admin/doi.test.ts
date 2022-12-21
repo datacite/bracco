@@ -79,7 +79,7 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
     });
   });
 
-  it.only('is creating a doi - FORM', () => {
+  it('is creating a doi - FORM', () => {
     cy.visit('/repositories/datacite.test/dois/new');
     cy.url().should('include', '/repositories/datacite.test/dois/new').then(() => {
 
