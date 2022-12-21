@@ -12,7 +12,7 @@ export default Component.extend({
   },
   actions: {
     addFormat() {
-      this.model.get('formats').pushObject();
+      this.model.get('formats').createFragment();
       this.set('showFormats', true);
     },
     toggleFormats() {

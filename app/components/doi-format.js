@@ -1,46 +1,32 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
+import mime from 'mime/lite'
+
+const FORMATS = Object.keys(mime._extensions)
+
+function getMatchingFormats(input) {
+  const matchingFormats = FORMATS.filter(ext => ext.includes(input.toLowerCase()))
+  return matchingFormats
+}
 
 export default Component.extend({
   store: service(),
 
   init(...args) {
     this._super(...args);
-
-    this.organizations = this.organizations || [];
-    console.log(this.fragment)  },
-
-  updateAffiliation(organizationRecord) {
-    console.log('HERE')
-    console.log(organizationRecord)
-    if (organizationRecord) {
-      this.fragment.set('name', organizationRecord.name);
-      this.fragment.set('affiliationIdentifier', organizationRecord.id);
-      this.fragment.set('schemeUri', 'https://ror.org');
-      this.fragment.set('affiliationIdentifierScheme', 'ROR');
-    } else {
-      this.fragment.set('name', null);
-      this.fragment.set('affiliationIdentifier', null);
-      this.fragment.set('schemeUri', 'https://ror.org');
-      this.fragment.set('affiliationIdentifierScheme', 'ROR');
-    }
+    this.formats = FORMATS;
   },
 
   actions: {
-    searchRor(query) {
-      let self = this;
-      this.store
-        .query('ror', { query })
-        .then(function (organizations) {
-          self.set('organizations', organizations);
-        })
-        .catch(function (reason) {
-          console.debug(reason);
-          return [];
-        });
+    searchFormat(query) {
+      this.set('formats', getMatchingFormats(query))
     },
-    selectRor(ror) {
-      this.updateAffiliation(ror);
+    selectFormat(format) {
+      if (format) {
+        this.fragment.set('format', format);
+      } else {
+        this.fragment.set('format', null);
+      }
     },
     deleteFormat() {
       this.model.get('formats').removeAt(this.index);

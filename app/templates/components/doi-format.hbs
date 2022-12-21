@@ -1,15 +1,15 @@
 <div class="input-group" style="padding-top:30px;">
   <div class="power-select-fragment">
-    {{#form.element controlType="power-select" disabled=disabled value=fragment.name options=organizations as |el|}}
+    {{#form.element controlType="power-select" disabled=disabled value=fragment.format options=formats as |el|}}
       {{#el.control
-        onChange=(action "selectRor")
-        search=(action "searchRor")
+        onChange=(action "selectFormat")
+        search=(action "searchFormat")
         placeholder="Search standard formats OR create a new format"
         searchPlaceholder="Type to search format OR create a new format..."
         noMatchesMessage='Press ENTER to add new format.'
         allowClear=true as |item|
       }}
-        {{if item.name item.name fragment.name}}
+        {{if item item fragment.format}}
       {{/el.control}}
       <div class="help-block">
         The default format scheme is provided by the
