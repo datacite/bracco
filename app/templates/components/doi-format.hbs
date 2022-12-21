@@ -1,5 +1,5 @@
 <div class="input-group" style="padding-top:30px;">
-  <div class="power-select-fragment">
+  <div class="power-select-fragment" doi-format>
     {{#form.element controlType="power-select" disabled=disabled value=fragment.format options=formats as |el|}}
       {{#el.control
         onChange=(action "selectFormat")
