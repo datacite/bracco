@@ -79,7 +79,7 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
     });
   });
 
-  it('is creating a doi - FORM', () => {
+  it.only('is creating a doi - FORM', () => {
     cy.visit('/repositories/datacite.test/dois/new');
     cy.url().should('include', '/repositories/datacite.test/dois/new').then(() => {
 
@@ -107,21 +107,24 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
       // Set publisher.
       cy.get('#publisher-field').should('be.visible').type('DataCite', { force: true });
 
-      // Set state to 'registered' to test out of range year.
+      // Set state to 'registered'. Test out-of-range year.
 
       cy.get('#registered-radio').check({ waitForAnimations: true });
       cy.get('#publication-year-field').should('be.visible').type(yearOutOfRange, { force: true, waitForAnimations: true });
       cy.get('body').click(0,0);
       cy.get('div#publication-year').should('have.class', 'has-error')
 
-      // Set state to 'draft' to test in range year.
+      // Test in-range year.
 
-      cy.get('#draft-radio').check({ waitForAnimations: true });
       cy.get('#publication-year-field').should('be.visible').clear({ force: true, waitForAnimations: true });
       cy.get('#publication-year-field').should('be.visible').type(yearInRange, { force: true, waitForAnimations: true });
       cy.get('body').click(0,0);
       cy.get('div#publication-year').should('have.class', 'has-success')
       cy.get('#publication-year-help').should('be.visible').should('have.text', 'Must be a year between 1000 and ' + yearInRange + '.');
+
+      // Set state back to draft
+
+      cy.get('#draft-radio').check({ waitForAnimations: true });
     
       // Set resource type.
       // Causes the aria dropdown to be populated and displayed so that selection can be made.
