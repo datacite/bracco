@@ -64,7 +64,7 @@ export default Component.extend({
     }
 
     let route = this.router.currentRouteName;
-    console.log(route);
+
     if (route === 'index' || route === 'sign-in' || route === '404') {
       this.showLogo = false;
     }
