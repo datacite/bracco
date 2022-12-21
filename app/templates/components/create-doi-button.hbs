@@ -1,14 +1,12 @@
 <BsDropdown as |dd|>
-  <dd.button class="btn btn-warning">
-    Create DOI
-    <span class="caret"></span>
-  </dd.button>
-  <dd.menu as |menu|>
-    <menu.item>
-      <menu.link-to  @route="repositories.show.dois.new">DOI Form</menu.link-to>
-    </menu.item>
-    <menu.item>
-      <menu.link-to @route="repositories.show.dois.upload">File Upload</menu.link-to>
-    </menu.item>
-  </dd.menu>
+<BsButton class="btn-warning"><i class="fas fa-edit"></i>{{#link-to "repositories.show.dois.new" class='btn-warning transparent-background' title='Using DOI Form'}}Create DOI{{/link-to}}</BsButton>
+<dd.button class="btn-warning"><span class="caret caret-point"></span></dd.button>
+<dd.menu as |ddm|>
+<ddm.item>
+<ddm.linkTo @route="repositories.show.dois.new">DOI Form</ddm.linkTo>
+</ddm.item>
+<ddm.item>
+<ddm.linkTo @route="repositories.show.dois.upload">File Upload</ddm.linkTo>
+</ddm.item>
+</dd.menu>
 </BsDropdown>

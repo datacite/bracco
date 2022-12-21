@@ -51,3 +51,20 @@
 .btn-group-sm.btn-single>.btn {
   border-radius: 13px;
 }
+
+/* Style to change the caret icon orientation on aria state. Start orientation is point down.*/
+
+button[aria-expanded="true"] > .caret.caret-point{
+  transform: rotate(0deg);
+}
+
+button[aria-expanded="false"] .caret.caret-point{
+  /*transform: rotate(-90deg);*/
+  transform: rotate(-90deg);
+}
+
+/* Transparent background for button anchor tag */
+
+.transparent-background {
+  background: rgb(0, 0, 0, 0) !important;
+}
