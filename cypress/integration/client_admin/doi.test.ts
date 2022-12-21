@@ -11,7 +11,8 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
   const waitTime2 = 2000;
   const prefix = '10.80225';
   const dayjs = require('dayjs');
-  const yearPlus = dayjs().add(Cypress.env('max_mint_future_offset'), 'year').format('YYYY'); 
+  const yearInRange = dayjs().add(Cypress.env('max_mint_future_offset'), 'year').format('YYYY');
+  const yearOutOfRange = String(Number(yearInRange) + 1);
   let suffix = '';
 
   before(function () {
@@ -106,10 +107,22 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
       // Set publisher.
       cy.get('#publisher-field').should('be.visible').type('DataCite', { force: true });
 
-      // Set publication year.
-      cy.get('#publication-year-help').should('be.visible').should('have.text', 'Must be a year between 1000 and ' + yearPlus + '.');
-      cy.get('#publication-year-field').should('be.visible').type(yearPlus, { force: true });
+      // Set state to 'registered' to test out of range year.
 
+      cy.get('#registered-radio').check({ waitForAnimations: true });
+      cy.get('#publication-year-field').should('be.visible').type(yearOutOfRange, { force: true, waitForAnimations: true });
+      cy.get('body').click(0,0);
+      cy.get('div#publication-year').should('have.class', 'has-error')
+
+      // Set state to 'draft' to test in range year.
+
+      cy.get('#draft-radio').check({ waitForAnimations: true });
+      cy.get('#publication-year-field').should('be.visible').clear({ force: true, waitForAnimations: true });
+      cy.get('#publication-year-field').should('be.visible').type(yearInRange, { force: true, waitForAnimations: true });
+      cy.get('body').click(0,0);
+      cy.get('div#publication-year').should('have.class', 'has-success')
+      cy.get('#publication-year-help').should('be.visible').should('have.text', 'Must be a year between 1000 and ' + yearInRange + '.');
+    
       // Set resource type.
       // Causes the aria dropdown to be populated and displayed so that selection can be made.
       cy.get('div#resource-type-general div[role="button"]').click({ force: true }).then(($dropdown) => {
