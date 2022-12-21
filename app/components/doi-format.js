@@ -21,11 +21,11 @@ export default Component.extend({
     searchFormat(query) {
       this.set('formats', getMatchingFormats(query))
     },
-    selectFormat(format) {
-      if (format) {
-        this.fragment.set('format', format);
+    selectFormat(formatExtension) {
+      if (formatExtension) {
+        this.fragment.set('formatExtension', formatExtension);
       } else {
-        this.fragment.set('format', null);
+        this.fragment.set('formatExtension', null);
       }
     },
     deleteFormat() {

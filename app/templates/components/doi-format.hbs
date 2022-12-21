@@ -1,6 +1,6 @@
 <div class="input-group" style="padding-top:30px;">
   <div class="power-select-fragment" doi-format>
-    {{#form.element controlType="power-select" disabled=disabled value=fragment.format options=formats as |el|}}
+    {{#form.element controlType="power-select" disabled=disabled value=fragment.formatExtension options=formats as |el|}}
       {{#el.control
         onChange=(action "selectFormat")
         search=(action "searchFormat")
@@ -9,7 +9,7 @@
         noMatchesMessage='Press ENTER to add new format.'
         allowClear=true as |item|
       }}
-        {{if item item fragment.format}}
+        {{if item item fragment.formatExtension}}
       {{/el.control}}
       <div class="help-block">
         The default format scheme is provided by the
