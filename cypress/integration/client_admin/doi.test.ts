@@ -100,6 +100,7 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
 
       // Set title.
       cy.get('input.title-field').should('be.visible').type('The title', { force: true });
+      cy.get('.help-block.title-field').should('be.visible').should('have.text','The default Language vocabulary is provided by ISO 639-1.')
       cy.get('#toggle-titles').should('be.visible').click({ force: true }).then(($toggle) => {
         cy.get('#toggle-titles').contains('Show 1 title');
       });
@@ -139,6 +140,7 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
         // Makes the selection.
         cy.get("ul.ember-power-select-options li").contains("English").click({ waitForAnimations: true });
       });
+      cy.get('.help-block.language-field').should('be.visible').should('have.text','The default Language vocabulary is provided by ISO 639-1.')
 
       // Set geolocation.
       cy.get('#add-geolocation').click({ force: true }).then(($subform) => {
@@ -171,6 +173,19 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
           cy.get("ul.ember-power-select-options li").contains("Data collector").click({ waitForAnimations: true });
           cy.get('#toggle-contributors').should('be.visible').click({ waitForAnimations: true }).then(($toggle) => {
             cy.get('#toggle-contributors').contains('Show 1 contributor');
+          })
+        })
+      });
+
+      // Set description.
+      cy.get('#add-description').click({ force: true }).then(($subform) => {
+        // Causes the aria dropdown to be populated and displayed so that selection can be made.
+        cy.get('.description-types div[role="button"]').click({ waitForAnimations: true }).then(($dropdown) => {
+          cy.get('.description-langs .help-block.description-field').should('be.visible').should('have.text','The default Language vocabulary is provided by ISO 639-1.')
+          // Makes the selection from the dropdown.
+          cy.get("ul.ember-power-select-options li").contains("Abstract").click({ waitForAnimations: true });
+          cy.get('#toggle-descriptions').should('be.visible').click({ waitForAnimations: true }).then(($toggle) => {
+            cy.get('#toggle-descriptions').contains('Show 1 description');
           })
         })
       });

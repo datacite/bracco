@@ -30,6 +30,7 @@
 <div class="power-select-fragment title-lang">
   {{#form.element controlType="power-select" disabled=disabled value=language options=languages as |el|}}
     {{el.control onChange=(action "selectLanguage") search=(action "searchLanguage") placeholder="Select Language" searchPlaceholder="Type to search..." allowClear=true}}
+    <div class='help-block help-block-fragment title-field'>The default Language vocabulary is provided by ISO 639-1.</div>
   {{/form.element}}
 </div>
 
