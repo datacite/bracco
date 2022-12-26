@@ -3,6 +3,7 @@
     {{#form.element controlType="power-select" disabled=disabled value=fragment.formatExtension options=formats as |el|}}
       {{#el.control
         onChange=(action "selectFormat")
+        onkeydown=(action 'createOnEnter')
         search=(action "searchFormat")
         placeholder="Search standard formats OR create a new format"
         searchPlaceholder="Type to search format OR create a new format..."

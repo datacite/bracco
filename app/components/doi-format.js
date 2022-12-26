@@ -1,5 +1,6 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
+import { isBlank } from '@ember/utils';
 import mime from 'mime/lite'
 
 const FORMATS = Object.keys(mime._extensions)
@@ -15,9 +16,26 @@ export default Component.extend({
   init(...args) {
     this._super(...args);
     this.formats = FORMATS;
+
+    this.selected = this.selected || [];
   },
 
   actions: {
+    createOnEnter(select, e) {
+      if (
+        e.keyCode === 13 &&
+        select.isOpen &&
+        !select.highlighted &&
+        !isBlank(select.searchText)
+      ) {
+        if (!this.selected.includes(select.searchText)) {
+          this.formats.push(select.searchText);
+          select.actions.choose(select.searchText);
+          this.fragment.set('formatExtension', select.searchText);
+          this.set('formats', FORMATS);
+        }
+      }
+    },
     searchFormat(query) {
       this.set('formats', getMatchingFormats(query))
     },
