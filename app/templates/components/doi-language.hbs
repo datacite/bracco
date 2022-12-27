@@ -1,10 +1,26 @@
-<div class="form-group">
-  <label class="control-label col-md-3">Language</label>
-  <div class="col-md-9">
-    <div class="label-vertical">The primary language of the resource.</div>
-    <div class="power-select-fragment" doi-language>
-      {{#form.element controlType="power-select" id="doi-language" formLayout="vertical"  disabled=disabled value=language options=languages as |el|}}
-        {{el.control onChange=(action "selectLanguage") search=(action "searchLanguage") placeholder="Select Language" searchPlaceholder="Type to search..." allowClear=true }}
+<div class='form-group'>
+  <label class='control-label col-md-3'>Language</label>
+  <div class='col-md-9'>
+    <div class='label-vertical'>The primary language of the resource.</div>
+    <div class='power-select-fragment' doi-language>
+      {{#form.element
+        controlType='power-select'
+        id='doi-language'
+        formLayout='vertical'
+        disabled=disabled
+        value=language
+        options=languages
+        as |el|
+      }}
+        {{el.control
+          onChange=(action 'selectLanguage')
+          search=(action 'searchLanguage')
+          placeholder='Search standard format OR create a new Language'
+          onkeydown=(action 'createOnEnter')
+          searchPlaceholder='Type to search...'
+          noMatchesMessage='Press ENTER to add a new language.'
+          allowClear=true
+        }}
         <div class='help-block language-field'>The default Language vocabulary is provided by ISO 639-1.</div>
       {{/form.element}}
     </div>
