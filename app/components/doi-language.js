@@ -19,11 +19,10 @@ export default Component.extend({
   },
 
   setLanguage(language) {
-    if (ISO6391.getCode(language)) {
+    if (language ? ISO6391.getCode(language) : null) {
       this.model.set('language', ISO6391.getCode(language));
     } else if (language) {
       this.model.set('language', language);
-      this.get('model.language')
     } else {
       this.model.set('language', null);
     }
@@ -39,6 +38,7 @@ export default Component.extend({
       ) {
         if (!this.selected.includes(select.searchText)) {
           this.setLanguage(select.searchText)
+          this.languageList.push(select.searchText)
           select.actions.choose(select.searchText);
         }
       }

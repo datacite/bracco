@@ -1,4 +1,7 @@
-<div class='form-group'>
+<div
+  class='form-group
+    {{if (v-get model "language" "isInvalid") "has-error" "has-feedback"}}'
+>
   <label class='control-label col-md-3'>Language</label>
   <div class='col-md-9'>
     <div class='label-vertical'>The primary language of the resource.</div>
@@ -10,18 +13,21 @@
         disabled=disabled
         value=language
         options=languages
+        helpText='The default Language vocabulary is provided by ISO 639-1. Any new language should be provided using two-letter or three-letter language codes.'
         as |el|
       }}
         {{el.control
           onChange=(action 'selectLanguage')
           search=(action 'searchLanguage')
-          placeholder='Search standard format OR create a new Language'
+          placeholder='Search standard format OR add a new Language code'
           onkeydown=(action 'createOnEnter')
           searchPlaceholder='Type to search...'
-          noMatchesMessage='Press ENTER to add a new language.'
+          noMatchesMessage='Press ENTER to add a new Language code.'
           allowClear=true
         }}
-        <div class='help-block language-field'>The default Language vocabulary is provided by ISO 639-1.</div>
+        {{#if (v-get model 'language' 'isInvalid')}}
+          <div class='help-block'>{{v-get model 'language' 'message'}}</div>
+        {{/if}}
       {{/form.element}}
     </div>
   </div>
