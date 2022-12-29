@@ -136,8 +136,19 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
       // Set language.
       // Causes the aria dropdown to be populated and displayed so that selection can be made.
       cy.get('div#doi-language div[role="button"]').click({ waitForAnimations: true }).then(($dropdown) => {
-        // Makes the selection.
+        // Creates a new invalid language.
+        cy.get('input.ember-power-select-search-input').type('Borgesian{enter}', { force: true });
+        cy.get('.help-block').contains('Must be a valid Language code.');
+      });
+      cy.get('div#doi-language div[role="button"]').click({ waitForAnimations: true }).then(($dropdown) => {
+        // Creates a new valid language.
+        cy.get('input.ember-power-select-search-input').type('pre-US{enter}', { force: true });
+        cy.get('.help-block').contains('The default Language vocabulary is provided by ISO 639-1. Any new language should be provided using two-letter or three-letter language codes.');
+      });
+      cy.get('div#doi-language div[role="button"]').click({ waitForAnimations: true }).then(($dropdown) => {
+        // Makes a default selection.
         cy.get("ul.ember-power-select-options li").contains("English").click({ waitForAnimations: true });
+        cy.get('.help-block').contains('The default Language vocabulary is provided by ISO 639-1. Any new language should be provided using two-letter or three-letter language codes.');
       });
 
       // Set geolocation.
