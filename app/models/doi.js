@@ -185,7 +185,7 @@ export default Model.extend(Validations, {
   types: attr(),
   relatedIdentifiers: fragmentArray('relatedIdentifier', { defaultValue: [] }),
   sizes: array(),
-  formats: fragmentArray('format', { defaultValue: [] }),
+  formats: array(),
   version: attr('string'),
   rightsList: fragmentArray('rights', { defaultValue: [] }),
   descriptions: fragmentArray('description', { defaultValue: [] }),

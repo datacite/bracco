@@ -19,6 +19,9 @@ export default Component.extend({
 
     this.selected = this.selected || [];
   },
+  didReceiveAttrs() {
+    this._super(...arguments);
+  },
 
   actions: {
     createOnEnter(select, e) {
@@ -31,7 +34,7 @@ export default Component.extend({
         if (!this.selected.includes(select.searchText)) {
           this.formats.push(select.searchText);
           select.actions.choose(select.searchText);
-          this.fragment.set('formatExtension', select.searchText);
+          this.set('fragment', select.searchText);
           this.set('formats', FORMATS);
         }
       }
@@ -40,14 +43,13 @@ export default Component.extend({
       this.set('formats', getMatchingFormats(query))
     },
     selectFormat(formatExtension) {
-      if (formatExtension) {
-        this.fragment.set('formatExtension', formatExtension);
-      } else {
-        this.fragment.set('formatExtension', null);
-      }
+      this.set('fragment', formatExtension);
+    },
+    onBlur() {
+      this.model.get('formats').replace(this.index, 1, [ this.fragment ]);
     },
     deleteFormat() {
       this.model.get('formats').removeAt(this.index);
-    },
+    }
   }
 });
