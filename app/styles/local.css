@@ -4,9 +4,6 @@
 */
 
 /* create-doi-button */
-/* .create-doi-button .btn.btn-default.ember-view.btn-warning {
-  width: 500px;
-} */
 
 /* Otherwise drop-down menu falls behind other objects. */
 .create-doi-button .ember-bootstrap-dropdown-bs3-popper {
@@ -21,7 +18,6 @@
 
 .create-doi-button ul.dropdown-menu.show a {
   width: 100%;
-  /* color: #e67e22; */
   font-size: 16px !important;
   padding: 6px 15px;
 }
