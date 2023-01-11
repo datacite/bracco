@@ -2,22 +2,8 @@
   {{#if
     (eq link 'repositories.show.dois')
   }}
-    {{#if
-      (and
-        repository.isActive
-        (or
-          (can 'create doi' model)
-          (can 'upload doi' model)
-        )
-      )
-    }}
-      {{#if (gt repository.meta.prefixCount 0) }}
-        <div class="panel facets">
-          <div class="panel-body">
-            <CreateDoiButton @model={{model}} class="create-doi-button" />
-          </div>
-        </div>
-      {{else}}
+    {{#if repository.isActive}}
+      {{#if (and repository.isActive (or (can 'create doi' model) (can 'upload doi' model)) (not (gt repository.meta.prefixCount 0)))}}
         <div class="panel panel-transparent">
           <div class="panel-body">
             <BsAlert @dismissible={{false}} @type="warning">
@@ -26,40 +12,86 @@
           </div>
         </div>
       {{/if}}
-    {{/if}}
 
-    {{#if (and repository.isActive (gt model.length 0))}}
-      <div class="panel facets add-25">
-        <div class="panel-body">
-          <div class="btn-toolbar">
-            <div class="btn-group-vertical btn-group-sm">
-              <ExportBasicMetadata @model={{model}} class="btn btn-warning" />
-              {{#if (and (can 'move doi' repository))}} 
-                <LinkTo
-                  @route="repositories.show.transfer"
-                  @model={{repository.id}}
-                  class="btn btn-warning"
-                  @id="transfer-dois"
-                >
-                  <i class="fas fa-arrow-circle-right"></i>
-                  Transfer
-                  {{if media.isXl ' DOIs'}}
-                </LinkTo>
-              {{/if}}
+      {{#if (gt model.length 0) }} 
+        <div class="panel facets add-25">
+          <div class="panel-body">
+            <div class="btn-toolbar">
+              <div class="shrink">
+                {{#if (and repository.isActive (or (can 'create doi' model) (can 'upload doi' model)) (gt repository.meta.prefixCount 0))}}
+                  <CreateDoiButton @model={{model}} class="create-doi-button" />
+                {{/if}}
+                <div class="btn-group-vertical btn-group-sm">
+                  <ExportBasicMetadata @model={{model}} class="btn btn-warning" />
+                  {{#if (and (can 'move doi' repository))}} 
+                    <LinkTo
+                      @route="repositories.show.transfer"
+                      @model={{repository.id}}
+                      class="btn btn-warning"
+                      @id="transfer-dois"
+                    >
+                      <i class="fas fa-arrow-circle-right"></i>
+                      Transfer
+                      {{if media.isXl ' DOIs'}}
+                    </LinkTo>
+                  {{/if}}
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      {{else}}
+        {{#if (and repository.isActive (or (can 'create doi' model) (can 'upload doi' model)) (gt repository.meta.prefixCount 0))}}
+          <div class="panel facets">
+            <div class="panel-body">
+              <CreateDoiButton @model={{model}} class="create-doi-button" />
+            </div>
+          </div>
+        {{/if}}
+        <div class="panel panel-transparent">
+          <div class="panel-body">
+            <BsAlert @dismissible={{false}} @type="warning">
+              No DOIs available to transfer.
+            </BsAlert>
+          </div>
+        </div> 
+      {{/if}}
     {{else}}
-      <div class="panel panel-transparent">
-        <div class="panel-body">
-          <BsAlert @dismissible={{false}} @type="warning">
-            No DOIs available to transfer.
-          </BsAlert>
+      <!-- repo is inactive -->
+      {{#if (gt model.length 0) }} 
+        <div class="panel facets add-25">
+          <div class="panel-body">
+            <div class="btn-toolbar">
+              <div class="btn-group-vertical btn-group-sm">
+                <ExportBasicMetadata @model={{model}} class="btn btn-warning" />
+                {{#if (and (can 'move doi' repository))}} 
+                  <LinkTo
+                    @route="repositories.show.transfer"
+                    @model={{repository.id}}
+                    class="btn btn-warning"
+                    @id="transfer-dois"
+                  >
+                    <i class="fas fa-arrow-circle-right"></i>
+                    Transfer
+                    {{if media.isXl ' DOIs'}}
+                  </LinkTo>
+                {{/if}}
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
+      {{else}}
+        <div class="panel panel-transparent">
+          <div class="panel-body">
+            <BsAlert @dismissible={{false}} @type="warning">
+              No DOIs available to transfer.
+            </BsAlert>
+          </div>
+        </div>  
+      {{/if}}
     {{/if}}
-  {{else}} {{#if (gt model.length 0)}}
+  {{else}} 
+    {{#if (gt model.length 0)}}
       <div class="panel facets">
         <div class="panel-body">
           <div class="btn-toolbar">
