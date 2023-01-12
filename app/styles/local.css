@@ -3,7 +3,7 @@
     https://datacite.org/stylesheets/doi.css?version=3.9.43
 */
 
-/* create-doi-button */
+/* create-doi-button - lot of styling to make it more consistent with app styling */
 
 /* Otherwise drop-down menu falls behind other objects. */
 .create-doi-button .ember-bootstrap-dropdown-bs3-popper {
@@ -13,18 +13,51 @@
 .create-doi-button ul.dropdown-menu.show {
   margin-top: -2px;
   margin-left: 10px;
+  padding: 3px 0px;
 }
 
 .create-doi-button ul.dropdown-menu.show a {
   width: 100%;
-  color: #e67e22;
   font-size: 16px !important;
-  padding-left: 5px;
+  padding: 6px 15px;
+}
+
+.create-doi-button ul.dropdown-menu.show a i {
+  margin-right: 3px;
 }
 
 .create-doi-button ul.dropdown-menu.show a:hover {
   background-color: rgb(128, 128, 128, .1);
 }
+
+.create-doi-button button a {
+  font-size: 16px !important;
+}
+
+.create-doi-button .btn, .navbar .navbar-nav>li>a.btn {
+  padding: 5px 10px;
+}
+
+.create-doi-button {
+  margin-left: 5px;
+  margin-bottom: 15px;
+}
+
+/* Enclosing block - control the size of child content blocks. */
+.shrink {
+  width: min-content;
+}
+
+.create-doi-button .btn-group {
+  width: 100%;
+  display: flex;
+}
+
+.create-doi-button .btn-group>.btn:first-child:not(:last-child):not(.dropdown-toggle) {
+  width: 100%;
+}
+
+/****************/
 
 /* To make a left sidebar button line up with the others. */
 .btn-group-vertical {

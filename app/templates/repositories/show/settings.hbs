@@ -1,21 +1,25 @@
 <div class="row">
   <div class="col-md-3">
-    {{#if
-      (and
-        model.isActive
-        (or
-          (can 'create doi' model)
-          (can 'upload doi' model)
-        )
-      )
-    }}
-      {{#if (gt model.meta.prefixCount 0) }}
-        <div class="panel facets">
-          <div class="panel-body">
-            <CreateDoiButton @model={{model}} class="create-doi-button" />
+    {{#if (not (can 'update repository' model))}}
+      {{#if (and model.isActive (or (can 'create doi' model) (can 'upload doi' model)))}}
+        {{#if (gt model.meta.prefixCount 0) }}
+          <div class="panel facets">
+            <div class="panel-body">
+              <CreateDoiButton @model={{model}} class="create-doi-button" />
+            </div>
           </div>
-        </div>
-      {{else}}
+        {{else}}
+          <div class="panel panel-transparent">
+            <div class="panel-body">
+              <BsAlert @dismissible={{false}} @type="warning">
+                Can't create DOI without a prefix.
+              </BsAlert>
+            </div>
+          </div>
+        {{/if}}
+      {{/if}}
+    {{else}}
+      {{#if (and model.isActive (or (can 'create doi' model) (can 'upload doi' model)) (not (gt model.meta.prefixCount 0)))}}
         <div class="panel panel-transparent">
           <div class="panel-body">
             <BsAlert @dismissible={{false}} @type="warning">
@@ -24,63 +28,68 @@
           </div>
         </div>
       {{/if}}
-    {{/if}}
 
-    {{#if (can 'update repository' model)}}
-      <div class="panel facets">
-        <div class="panel-body">
-          <div class="btn-toolbar">
-            <div class="btn-group-vertical btn-group-sm">
-              {{#if model.isActive}}
-                <LinkTo
-                  @route="repositories.show.change"
-                  @model={{model.id}}
-                  class="btn btn-warning"
-                  @id="set-password-repository"
-                >
-                  <i class="fas fa-key"></i>
-                  Set Password
-                </LinkTo>
-              {{/if}}
-              {{#if (or (can 'delete repository' model) model.isActive)}}
-                <LinkTo
-                  @route="repositories.show.edit"
-                  @model={{model.id}}
-                  class="btn btn-warning"
-                  @id="edit-repository"
-                >
-                  <i class="fas fa-pencil-alt"></i>
-                  Update
-                  {{if (eq currentUser.uid model.id) 'Account' 'Repository'}}
-                </LinkTo>
-              {{/if}}
-              {{#if (can 'delete repository' model)}}
-                <LinkTo
-                  @route="repositories.show.delete"
-                  @model={{model.id}}
-                  class="btn btn-warning"
-                  @id="delete-repository"
-                >
-                  <i class="fas fa-trash"></i>
-                  Delete Repository
-                </LinkTo>
-              {{/if}}
-              {{#if (and (can 'transfer repository' model) model.isActive)}}
-                <LinkTo
-                  @route="repositories.show.transfer-repository"
-                  @model={{model.id}}
-                  class="btn btn-warning"
-                  @id="transfer-repository"
-                >
-                  <i class="fas fa-arrow-circle-right"></i>
-                  Transfer
-                  {{if media.isXl ' Repository'}}
-                </LinkTo>
-              {{/if}}
+      {{#if (can 'update repository' model)}}
+        <div class="panel facets">
+          <div class="panel-body">
+            <div class="btn-toolbar">
+              <div class="shrink">
+                {{#if (and model.isActive (or (can 'create doi' model) (can 'upload doi' model)) (gt model.meta.prefixCount 0))}}
+                  <CreateDoiButton @model={{model}} class="create-doi-button" />
+                {{/if}}
+                <div class="btn-group-vertical btn-group-sm">
+                  {{#if model.isActive}}
+                    <LinkTo
+                      @route="repositories.show.change"
+                      @model={{model.id}}
+                      class="btn btn-warning"
+                      @id="set-password-repository"
+                    >
+                      <i class="fas fa-key"></i>
+                      Set Password
+                    </LinkTo>
+                  {{/if}}
+                  {{#if (or (can 'delete repository' model) model.isActive)}}
+                    <LinkTo
+                      @route="repositories.show.edit"
+                      @model={{model.id}}
+                      class="btn btn-warning"
+                      @id="edit-repository"
+                    >
+                      <i class="fas fa-pencil-alt"></i>
+                      Update
+                      {{if (eq currentUser.uid model.id) 'Account' 'Repository'}}
+                    </LinkTo>
+                  {{/if}}
+                  {{#if (can 'delete repository' model)}}
+                    <LinkTo
+                      @route="repositories.show.delete"
+                      @model={{model.id}}
+                      class="btn btn-warning"
+                      @id="delete-repository"
+                    >
+                      <i class="fas fa-trash"></i>
+                      Delete Repository
+                    </LinkTo>
+                  {{/if}}
+                  {{#if (and (can 'transfer repository' model) model.isActive)}}
+                    <LinkTo
+                      @route="repositories.show.transfer-repository"
+                      @model={{model.id}}
+                      class="btn btn-warning"
+                      @id="transfer-repository"
+                    >
+                      <i class="fas fa-arrow-circle-right"></i>
+                      Transfer
+                      {{if media.isXl ' Repository'}}
+                    </LinkTo>
+                  {{/if}}
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      {{/if}}
     {{/if}}
     <RepositorySidebar @model={{model}} />
   </div>
