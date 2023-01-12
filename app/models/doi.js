@@ -149,6 +149,13 @@ const Validations = buildValidations({
         );
       })
     })
+  ],
+  language: [
+    validator('format', {
+      allowBlank: true,
+      regex: /^[a-zA-Z]{1,8}(-[a-zA-Z0-9]{1,8})*$/,
+      message: 'Must be a valid Language code.'
+    })
   ]
 });
 

@@ -4,14 +4,11 @@ const labelList = {
 };
 
 export function doiFormErrors([ model ]) {
-  if (model.state === 'draft') {
-    return [];
-  }
 
   let errorAttributes = model.validations.errors.mapBy('attribute');
 
-  // check validation errors for data model fragments
-  if ([ 'new', 'edit' ].includes(model.mode)) {
+  // check validation errors for data model fragments if not in draft state
+  if (model.state !== 'draft' && [ 'new', 'edit' ].includes(model.mode)) {
     if (model.titles) {
       model.titles.forEach((title) => {
         errorAttributes = errorAttributes.concat(title.validations.errors.mapBy('attribute'));

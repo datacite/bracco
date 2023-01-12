@@ -101,3 +101,9 @@ button[aria-expanded="false"] .caret.caret-point{
 .transparent-background {
   background: rgb(0, 0, 0, 0) !important;
 }
+
+/* Adds a 'has-error' visual state to .ember-power-select-trigger .*/
+.form-group.has-error .ember-power-select-trigger {
+  color: #e74c3c;
+  border-color: #e74c3c;
+}
