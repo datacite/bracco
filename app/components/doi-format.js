@@ -35,7 +35,6 @@ export default Component.extend({
           this.formats.push(select.searchText);
           select.actions.choose(select.searchText);
           this.model.get('formats').replace(this.index, 1, [ select.searchText ]);
-          // this.set('fragment', select.searchText);
           this.set('formats', FORMATS);
         }
       }
@@ -45,12 +44,6 @@ export default Component.extend({
     },
     selectFormat(formatExtension) {
       this.model.get('formats').replace(this.index, 1, [ formatExtension ]);
-      // this.set('fragment', formatExtension);
-    },
-    onBlur() {
-      console.log(0)
-      // this.model.get('formats').replace(this.index, 1, [ this.fragment ]);
-      console.log(9)
     },
     deleteFormat() {
       this.model.get('formats').removeAt(this.index);
