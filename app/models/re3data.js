@@ -46,6 +46,9 @@ export default Model.extend(Validations, {
     });
   },
   get fosSubjects() {
+    if (this.subjects.length > 1) {
+      return []
+    }
     var subjects = this.subjects.filter( (sub) => {
       return sub.scheme == "DFG";
     });
