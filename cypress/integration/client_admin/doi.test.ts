@@ -190,10 +190,15 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
       cy.get('#version-field').should('be.visible').type('67', { force: true });
 
       // Set format.
-      cy.get('#add-format').click({ waitForAnimations: true }).then(($subform) => {
-        cy.get('[data-test-format]').should('be.visible').type('json', { force: true });
-        cy.get('#toggle-formats').should('be.visible').click({ force: true }).then(($toggle) => {
-          cy.get('#toggle-formats').contains('Show 1 format');
+      cy.get('#add-format').click({ force: true }).then(($subform) => {
+        cy.get('.ember-power-select-placeholder').contains('Search standard formats OR create a new format');
+        // Causes the aria dropdown to be populated and displayed so that selection can be made.
+        cy.get('[doi-format] div[role="button"]').click({ force: true }).then(($dropdown) => {
+          // Makes the selection from the dropdown.
+          cy.get('input.ember-power-select-search-input').type('Optics{enter}', { force: true });
+          cy.get('#toggle-formats').should('be.visible').click({ force: true }).then(($toggle) => {
+            cy.get('#toggle-formats').contains('Show 1 format');
+          });
         });
       });
 
