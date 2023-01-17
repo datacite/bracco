@@ -1,7 +1,7 @@
 import Component from '@ember/component';
 import Papa from 'papaparse';
 import FileSaver from 'file-saver';
-import isEmpty from 'bracco/utils/is-empty';
+import currentDate from '../utils/current-date';
 import formatCreators from '../utils/format-creators';
 
 export default Component.extend({
@@ -31,7 +31,11 @@ export default Component.extend({
 
       var FileSaver = require('file-saver');
       var blob = new Blob([csv], {type: "text/csv;charset=utf-8"});
-      FileSaver.saveAs(blob, "dois.csv");
+      var filename = currentDate() 
+        + (this.client_id ? '-' + this.client_id : '-' + 'dois')
+        + (this.page ? '-' + this.page : '') 
+        + ".csv";
+      FileSaver.saveAs(blob, filename);
     }
   }
 })
