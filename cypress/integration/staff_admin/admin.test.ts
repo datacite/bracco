@@ -142,7 +142,7 @@ describe('Admin: Admin', () => {
     cy.get('li a.nav-link.active').contains('DOIs');
     cy.get('div#search').should('exist');
     cy.get('div.panel.facets').should('exist');
-    cy.get('button.export-basic-metadata').should('exist');
+    cy.get('button.export-basic-metadata').should('not.exist');
 
     // staff can't add doi here (needs to go to repository first)
     cy.get('a#add-doi').should('not.exist');
