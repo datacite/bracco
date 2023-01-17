@@ -1,15 +1,15 @@
 <div style="display: inline-block; width: 100%;">
 <BsDropdown as |dd|>
   <BsButton class="btn-warning">
-    {{#link-to "repositories.show.dois.new" class='btn-warning transparent-background' title='Using DOI Form'}}<i class="fas fa-edit"></i>Create DOI{{/link-to}}
+    {{#link-to "repositories.show.dois.new" class='btn-warning transparent-background' title='Using DOI Form' id="omnipresent-new-doi"}}<i class="fas fa-edit"></i>Create DOI{{/link-to}}
   </BsButton>
   <dd.button class="btn-warning"><span class="caret caret-point"></span></dd.button>
   <dd.menu as |ddm|>
     <ddm.item>
-      <ddm.linkTo @route="repositories.show.dois.new"><i class="fab fa-wpforms"></i> DOI Form</ddm.linkTo>
+      <ddm.linkTo @route="repositories.show.dois.new" @id="omnipresent-secondary-new-doi"><i class="fab fa-wpforms"></i> DOI Form</ddm.linkTo>
     </ddm.item>
     <ddm.item>
-      <ddm.linkTo @route="repositories.show.dois.upload"><i class="fas fa-upload"></i> File Upload</ddm.linkTo>
+      <ddm.linkTo @route="repositories.show.dois.upload" @id="omnipresent-upload-doi"><i class="fas fa-upload"></i> File Upload</ddm.linkTo>
     </ddm.item>
   </dd.menu>
 </BsDropdown>
