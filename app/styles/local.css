@@ -107,3 +107,8 @@ button[aria-expanded="false"] .caret.caret-point{
   color: #e74c3c;
   border-color: #e74c3c;
 }
+
+/* Power select - doi-format */
+div[doi-format].power-select-fragment .ember-basic-dropdown-trigger div.ember-view{
+  display:inline-block;
+}
