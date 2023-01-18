@@ -118,7 +118,7 @@ jobs:
           path: test_build/
 
       - name: Cypress Testing
-        uses: cypress-io/github-action@v3
+        uses: cypress-io/github-action@v5.0.5
         with:
           install: false
           config: defaultCommandTimeout=15000
@@ -183,7 +183,7 @@ jobs:
         id: extract_variables
 
       - name: Vercel deploy
-        uses: amondnet/vercel-action@v20.0.0
+        uses: amondnet/vercel-action@v25.1.0
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.ORG_ID}}
