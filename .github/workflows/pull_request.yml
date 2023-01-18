@@ -119,7 +119,7 @@ jobs:
           path: test_build/
 
       - name: Cypress Testing
-        uses: cypress-io/github-action@v3
+        uses: cypress-io/github-action@v5.0.5
         with:
           install: false
           config: defaultCommandTimeout=15000
