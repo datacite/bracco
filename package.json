@@ -184,7 +184,7 @@
     "**/ansi-html": "https://registry.yarnpkg.com/ansi-html-community/-/ansi-html-community-0.0.8.tgz",
     "**/axios": "^0.21.2",
     "**/cached-path-relative": "^1.1.0",
-    "**/caniuse-lite": "1.0.30001370",
+    "**/caniuse-lite": "1.0.30001445",
     "**/elliptic": "^6.5.4",
     "**/follow-redirects": "^1.14.8",
     "**/glob-parent": "^5.1.2",
