@@ -16,6 +16,7 @@ module('Integration | Component | doi related-item', function(hooks) {
     assert.dom('*').includesText('One title by which the resource is known.');
     assert.dom('*').includesText('Issue number or name of the related item.');
     assert.dom('*').includesText('Related Item Identifier')
-    assert.dom('*').includesText('Creator Name')
+    assert.dom('*').includesText("Related Item's Creators Show 1 creator")
+    assert.dom('*').includesText("Related Item's Contributors Show 1 contributor")
   });
 });

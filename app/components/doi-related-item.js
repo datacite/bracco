@@ -77,8 +77,8 @@ export default Component.extend({
   relationTypes: relationTypeList,
   relatedItemTypeList,
   relatedItemTypes: relatedItemTypeList,
-  showRelatedItemCreators: true,
-  showRelatedItemContributors: true,
+  showRelatedItemCreators: false,
+  showRelatedItemContributors: false,
 
   init(...args) {
     this._super(...args);
@@ -108,15 +108,9 @@ export default Component.extend({
     if (!this.fragment.get('creators')) {
       this.fragment.set('creators', []);
     }
-    if (this.fragment.get('creators').length == 0) {
-      this.fragment.get('creators').createFragment();
-    }
 
     if (!this.fragment.get('contributors')) {
       this.fragment.set('contributors', []);
-    }
-    if (this.fragment.get('contributors').length == 0) {
-      this.fragment.get('contributors').createFragment();
     }
   },
   selectRelationType(relationType) {
@@ -128,11 +122,21 @@ export default Component.extend({
       this.fragment.set('relatedMetadataScheme', null);
       this.fragment.set('schemeUri', null);
     }
-    this.fragment.set('relationType', pascalCase(relationType));
+    if (relationType) {
+      this.fragment.set('relationType', pascalCase(relationType));
+    }
+    else {
+      this.fragment.set('relationType', null)
+    }
     this.set('relationTypes', relationTypeList);
   },
   selectRelatedItemType(relatedItemType) {
-    this.fragment.set('relatedItemType', pascalCase(relatedItemType));
+    if (relatedItemType) {
+      this.fragment.set('relatedItemType', pascalCase(relatedItemType));
+    }
+    else {
+      this.fragment.set('relatedItemType', null)
+    }
     this.set('relatedItemTypes', relatedItemTypeList);
   },
   actions: {

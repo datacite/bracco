@@ -17,8 +17,9 @@ const Validations = buildValidations({
     })
   ],
   relatedItemIdentifier: [
-    validator('identifier-format', {
+    validator('related-item-identifier-format', {
       allowBlank: true,
+      message: 'Identifier format is wrong',
       dependentKeys: ['model.relatedItemIdentifierType'],
       disabled: computed('model.relatedItemIdentifier', function () {
         return isBlank(this.model.get('relatedItemIdentifier'));

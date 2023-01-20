@@ -12,10 +12,10 @@ const Validations = buildValidations({
       presence: true,
       message:
         'Please enter a Related Item Type for the Related Item.',
-      disabled: computed('model.{relatedItem,state}', function () {
+      disabled: computed('model.{title,state}', function () {
         return (
           this.model.get('state') === 'draft' ||
-          isBlank(this.model.get('relatedItem'))
+          isBlank(this.model.get('title'))
         );
       })
     })
@@ -24,22 +24,24 @@ const Validations = buildValidations({
     validator('presence', {
       presence: true,
       message: 'Please enter a Relation Type for the Related Item.',
-      disabled: computed('model.{relatedItem,state}', function () {
+      disabled: computed('model.{title,state}', function () {
         return (
           this.model.get('state') === 'draft' ||
-          isBlank(this.model.get('relatedItem'))
+          isBlank(this.model.get('title'))
         );
       })
     })
   ],
-  titles: [
-    validator('length', {
-      min: 1,
-      message: 'Related Item must have at least one Title',
-      disabled: computed('model.{relatedItem,state}', function () {
+  title: [
+    validator('presence', {
+      presence: true,
+      message: 'Related Item must have a Title',
+      disabled: computed('model.{title,relatedItemType,relationType,state}', function () {
         return (
           this.model.get('state') === 'draft' ||
-          isBlank(this.model.get('relatedItem'))
+          (isBlank(this.model.get('title')) &&
+          isBlank(this.model.get('relatedItemType')) &&
+          isBlank(this.model.get('relationType')))
         );
       })
     })
@@ -47,14 +49,35 @@ const Validations = buildValidations({
   publicationYear: [
     validator('date-format', {
       allowBlank: true,
-      disabled: computed('model.{relatedItem,state}', function () {
+      disabled: computed('model.{title,state}', function () {
         return (
           this.model.get('state') === 'draft' ||
-          isBlank(this.model.get('relatedItem'))
+          isBlank(this.model.get('title'))
         );
       })
     })
-  ]
+  ],
+  relatedItemContributors: [
+    validator(function() {
+      let valid = true
+      this.model.get('contributors').forEach(element => {
+        const {validations} = element.validateSync();
+        valid = validations.get('isValid')
+      });
+      return valid;
+    },
+    {
+      dependentKeys: ['model.contributors.@each.name', 'model.contributors.@each.contributorType'],
+      attributeDescription: 'Related Items Contributors',
+      disabled: computed('model.{title,state}', function () {
+        return (
+          this.model.get('state') === 'draft' ||
+          isBlank(this.model.get('title'))
+        );
+      })
+    }
+    ),
+  ],
 });
 
 
@@ -66,16 +89,20 @@ export default Fragment.extend(Validations, {
   titles: fragmentArray('title', { defaultValue: [] }),
   volume: attr('string', { defaultValue: null }),
   issue: attr('string', { defaultValue: null }),
-  number: attr('string', { defaultValue: null }),
+  number: attr(),
   publicationYear: attr('string', { defaultValue: null }),
   contributors: fragmentArray('related-item-contributor', { defaultValue: [] }),
+  firstPage: attr('string', { defaultValue: null }),
+  lastPage: attr('string', { defaultValue: null }),
+  publisher: attr('string', { defaultValue: null }),
+  edition: attr('string', { defaultValue: null }),
 
-  title: computed('titles.length', function () {
+  title: computed('titles.@each.title', function () {
     if (this.titles.length > 0) {
       return A(this.titles).get('firstObject').title;
     } else {
       return null;
     }
   }),
-
+  relatedItemContributors: computed.reads('contributors')
 });

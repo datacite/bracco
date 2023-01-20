@@ -19,12 +19,12 @@ module('Unit | Model | user', function (hooks) {
 
     let meta = {
       dois: [
-        { id: '2012', title: '2012', count: 1 },
-        { id: '2022', title: '2022', count: 1 }
+        { id: '2013', title: '2013', count: 1 },
+        { id: '2023', title: '2023', count: 1 }
       ],
       published: [
         { id: '2018', title: '2018', count: 1 },
-        { id: '2022', title: '2022', count: 1 }
+        { id: '2023', title: '2023', count: 1 }
       ],
       resourceTypes: [
         { id: 'text', title: 'Text', count: 1 },
