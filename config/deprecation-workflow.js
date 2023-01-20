@@ -7,5 +7,6 @@ window.deprecationWorkflow.config = {
     { handler: 'silence', matchId: 'computed-property.override' },
     { handler: 'silence', matchId: 'ember.globals-resolver' },
     { handler: 'silence', matchId: 'implicit-modifier-manager-capabilities' },
+    { handler: 'silence', matchId: 'ember-cp-validations'}
   ],
 };
