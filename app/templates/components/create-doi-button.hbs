@@ -1,7 +1,7 @@
 <div style="display: inline-block; width: 100%;">
 <BsDropdown as |dd|>
-  <BsButton class="btn-warning">
-    {{#link-to "repositories.show.dois.new" class='btn-warning transparent-background' title='Using DOI Form' id="omnipresent-new-doi"}}<i class="fas fa-edit"></i>Create DOI{{/link-to}}
+  <BsButton class="btn-warning" @onClick={{action "createDoi"}} id="omnipresent-new-doi" title='Create DOI Using Form'>
+    <i class="fas fa-edit"></i>Create DOI
   </BsButton>
   <dd.button class="btn-warning"><span class="caret caret-point"></span></dd.button>
   <dd.menu as |ddm|>
