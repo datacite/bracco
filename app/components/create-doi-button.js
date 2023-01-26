@@ -11,4 +11,10 @@ export default Component.extend({
 
     this.set('currentUser', this.currentUser);
   },
+
+  actions: {
+    createDoi() {
+      this.router.transitionTo('repositories.show.dois.new');
+    }
+  }
 });
