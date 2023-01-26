@@ -1,0 +1,115 @@
+/*
+ Overrides to shared css/scss/sass styles pulled from:
+    https://datacite.org/stylesheets/doi.css?version=3.9.43
+*/
+
+/* create-doi-button - lot of styling to make it more consistent with app styling */
+
+/* Otherwise drop-down menu falls behind other objects. */
+.create-doi-button .ember-bootstrap-dropdown-bs3-popper {
+  z-index: 10000;
+}
+
+.create-doi-button ul.dropdown-menu.show {
+  margin-top: -2px;
+  margin-left: 10px;
+  padding: 3px 0px;
+}
+
+.create-doi-button ul.dropdown-menu.show a {
+  width: 100%;
+  font-size: 16px !important;
+  padding: 6px 15px;
+}
+
+.create-doi-button ul.dropdown-menu.show a i {
+  margin-right: 3px;
+}
+
+.create-doi-button ul.dropdown-menu.show a:hover {
+  background-color: rgb(128, 128, 128, .1);
+}
+
+.create-doi-button button a {
+  font-size: 16px !important;
+}
+
+.create-doi-button .btn, .navbar .navbar-nav>li>a.btn {
+  padding: 5px 10px;
+}
+
+.create-doi-button {
+  margin-left: 5px;
+  margin-bottom: 15px;
+}
+
+/* Enclosing block - control the size of child content blocks. */
+.shrink {
+  width: min-content;
+}
+
+.create-doi-button .btn-group {
+  width: 100%;
+  display: flex;
+}
+
+.create-doi-button .btn-group>.btn:first-child:not(:last-child):not(.dropdown-toggle) {
+  width: 100%;
+}
+
+/****************/
+
+/* To make a left sidebar button line up with the others. */
+.btn-group-vertical {
+  margin-left: 5px;
+}
+
+/* Fix info tab bar chart resize at upper breakpoints.  Div width @ 33% causes svg to overflow the box.*/
+
+@media (min-width: 992px) {
+  .row-chart .col-md-4 {
+      width: auto;
+  }
+}
+
+/* Fix info tab bar chart indent at upper breakpoint.*/
+@media (min-width: 1200px) {
+  .col-lg-offset-3 {
+      /* margin-left: 25%; */
+      margin-left: 0;
+  }
+}
+
+/* Make this look more like other "buttons" in the left sidebar. */
+.btn-group-sm.btn-single>.btn {
+  border-radius: 13px;
+}
+
+/* Style to change the caret icon orientation on aria state. Start orientation is point down.*/
+
+button[aria-expanded="true"] > .caret.caret-point{
+  transform: rotate(0deg);
+}
+
+button[aria-expanded="false"] .caret.caret-point{
+  /*transform: rotate(-90deg);*/
+  transform: rotate(-90deg);
+}
+
+/* Transparent background for button anchor tag */
+
+.transparent-background {
+  background: rgb(0, 0, 0, 0) !important;
+}
+
+/* Adds a 'has-error' visual state to .ember-power-select-trigger .*/
+.form-group.has-error .ember-power-select-trigger {
+  color: #e74c3c;
+  border-color: #e74c3c;
+}
+
+/* Power select - doi-format */
+div[doi-format].power-select-fragment .ember-basic-dropdown-trigger div.ember-view{
+  display:inline-block;
+  padding-left: 5px;
+}

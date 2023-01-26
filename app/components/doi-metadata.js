@@ -93,5 +93,5 @@ export default Component.extend({
     selectMetadata(metadata) {
       this.showMetadata(metadata);
     },
-  },
+  }
 });

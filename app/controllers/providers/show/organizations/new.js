@@ -1,36 +1,7 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 import countryList from 'iso-3166-country-list';
-
-const organizationTypeList = [
-  'researchInstitution',
-  'academicInstitution',
-  'governmentAgency',
-  'nationalInstitution',
-  'professionalSociety',
-  'publisher',
-  'serviceProvider',
-  'other'
-];
-const memberTypeList = [
-  'consortium',
-  'consortium_organization',
-  'contractual_member',
-  'direct_member',
-  'member_only',
-  'registration_agency'
-];
-const focusAreaList = [
-  'naturalSciences',
-  'engineeringAndTechnology',
-  'medicalAndHealthSciences',
-  'agriculturalSciences',
-  'socialSciences',
-  'humanities',
-  'general'
-];
-
-const nonProfitStatusList = ['non-profit', 'for-profit'];
+import { organizationTypeList, memberTypeList, focusAreaList, nonProfitStatusList } from 'bracco/models/provider';
 
 export default Controller.extend({
   store: service(),

@@ -7,4 +7,11 @@ export default Component.extend({
   isList: false,
   store: service(),
   isResearcherProfile: false,
+
+  didRender() {
+    this._super(...arguments);
+
+    window.MathJax.typeset([this.get('element')]);
+  },
+  
 });

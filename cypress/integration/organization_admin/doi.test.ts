@@ -42,7 +42,8 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | DOIS', () => {
         cy.get('.btn-group-vertical a#new-doi').should('not.exist');
         cy.get('.btn-group-vertical a#upload-doi').should('not.exist');
   
-  
+        cy.get('button.export-basic-metadata').should('not.exist');
+
         // Has left sidebar facets.
         cy.get('.facets h4').contains(/State/i);
         cy.get('.facets h4').contains(/Resource\s*Type/i);
@@ -55,7 +56,7 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | DOIS', () => {
         // Has search form
         cy.get('form #search').within(($searchBar) => {
           cy.get('input[name="query"]')
-            .and('have.attr', 'placeholder').should('match', /Type\s*to\s*search.../i);
+            .and('have.attr', 'placeholder').should('match', /Type\sto\ssearch\.\sFor\sexample\s10\.4121\/17185607\.v1/i);
           cy.get('button').contains(/Search/i);
         });
   
@@ -66,12 +67,16 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | DOIS', () => {
         cy.get('#sort select').contains(/Sort by Date Updated/i);
         cy.get('#sort select').contains(/Sort by Date Created/i);
         cy.get('#sort select').contains(/Sort by DOI/i);
+        cy.get('#sort select').contains(/Sort Alphabetically/i);
         cy.get('#sort select').contains(/Sort by Relevance/i);
   
         // Has search results as content.
         cy.get('#content').within(($content) => {
           cy.get('[data-test-doi]').its('length').should('be.gte', 1);
         });
+
+        // Create DOI button
+        cy.get('.create-doi-button').should('not.exist');
       });
     });
   });

@@ -26,15 +26,18 @@ describe('ACCEPTANCE: CLIENT_ADMIN | PREFIXES', () => {
     cy.visit('/repositories/datacite.test/prefixes');
     cy.url().should('include', '/repositories/datacite.test/prefixes').then(() => {
 
+      // Has Fabrica logo
+      cy.get('img.fabrica-logo').should('exist').should('have.attr', 'src').should('include', 'fabrica-logo.svg');
+
       // Has upper right user profile link.
       cy.get('h2.work').contains('DataCite Test Repository');
       cy.get('a#account_menu_link').should('contain', 'DATACITE.TEST');
 
       // Has tabs with correct one activated.
       cy.get('ul.nav-tabs li a').contains(/Info/i)
-        .and('have.attr', 'href').and('include', '/repositories/datacite.test/info');
-      cy.get('ul.nav-tabs li a').contains(/Settings/i)
         .and('have.attr', 'href').and('include', '/repositories/datacite.test');
+      cy.get('ul.nav-tabs li a').contains(/Settings/i)
+        .and('have.attr', 'href').and('include', '/repositories/datacite.test/settings');
       cy.get('ul.nav-tabs li.active a').contains(/Prefixes/i)
         .and('have.attr', 'href').and('include', '/repositories/datacite.test/prefixes');
       cy.get('ul.nav-tabs li a').contains(/DOIs/i)
@@ -42,6 +45,18 @@ describe('ACCEPTANCE: CLIENT_ADMIN | PREFIXES', () => {
 
       // Has left sidebar message box.
       // cy.get('div.alert').contains(/Please ask DataCite Staff if you want to add a prefix./i);
+
+      // Has left sidebar buttons.
+      cy.get('div.col-md-3').should('be.visible').within(($sidebar) => {
+        // Create DOI button - would like to do more testing but seems impossible in Cypress.
+        cy.get('.create-doi-button').contains(/Create DOI/i);
+        cy.get('.create-doi-button button.dropdown-toggle').click({ force: true }).then(($obj) => {
+          //cy.get('.create-doi-button ul.dropdown-menu')
+          //cy.get('.create-doi-button ul.dropdown-menu ul li a').contains(/DOI\s*Form/i);
+          //cy.get('.create-doi-button ul.dropdown-menu ul li a').contains(/File\s*Upload/i);
+        });
+      });
+      cy.get('button.export-basic-metadata').should('not.exist');
 
       // Has left sidebar facets.
       cy.get('.facets h4').contains(/Year\s*created/i);

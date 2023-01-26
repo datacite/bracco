@@ -25,6 +25,10 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | PREFIXES', () => {
     it('is logged in to prefixes page', () => {
       cy.visit('/providers/datacite/prefixes');
       cy.url().should('include', '/providers/datacite/prefixes').then(() => {
+
+        // Has Fabrica logo and correct navbar color
+        cy.get('img.fabrica-logo').should('exist').should('have.attr', 'src').should('include', 'fabrica-logo.svg');
+        cy.get('ul.navbar-nav').should('have.css', 'background-color', 'rgb(0, 177, 226)');
   
         // Has upper right user profile link.
         cy.get('h2.work').contains('DataCite');
@@ -37,6 +41,8 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | PREFIXES', () => {
         // Has left sidebar message box.
         // cy.get('div.alert').contains(/Please ask DataCite Staff if you want to add a prefix./i);
   
+        cy.get('button.export-basic-metadata').should('not.exist');
+
         // Has left sidebar facets.
         cy.get('.facets h4').contains(/State/i);
         cy.get('.facets h4').contains(/Year\s*created/i);
@@ -61,6 +67,9 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | PREFIXES', () => {
         cy.get('#content').within(($content) => {
           cy.get('[data-test-prefix]').its('length').should('be.gte', 1);
         });
+
+        // Create DOI button
+        cy.get('.create-doi-button').should('not.exist');
       });
     });
   });
