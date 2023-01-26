@@ -30,7 +30,7 @@
   background-color: rgb(128, 128, 128, .1);
 }
 
-.create-doi-button button a {
+.create-doi-button button {
   font-size: 16px !important;
 }
 
