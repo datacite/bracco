@@ -44,14 +44,14 @@ describe('ACCEPTANCE: UI | LOGIN', function () {
       cy.url().should('include', '/sign-in')
     })
 
-    it('redirects to account SETTINGS tab on success', function () {
+    it('redirects to account INFO tab on success', function () {
       cy.get('input#account-field').type(username)
       cy.get('input#password-field').type(password, { log: false })
       cy.get('div.register-card form').submit()
 
-      // we should be redirected to SETTINGS for this account
+      // we should be redirected to INFO for this account
       cy.url().should('include', '/repositories/datacite.test')
-      cy.contains('ul.nav-tabs li.active a', "Settings")
+      cy.contains('ul.nav-tabs li.active a', "Info")
 
       // account link should have our username
       cy.get('#account_menu_link').contains(new RegExp(username, 'i'))

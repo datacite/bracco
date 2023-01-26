@@ -4,22 +4,7 @@ import { isBlank } from '@ember/utils';
 import { capitalize } from '@ember/string';
 import langs from 'langs';
 import { A } from '@ember/array';
-
-const clientTypeList = ['repository', 'periodical'];
-const softwareList = [
-  'CKAN',
-  'Dataverse',
-  'DSpace',
-  'EPrints',
-  'Fedora',
-  'Invenio',
-  'Islandora',
-  'Nesstar',
-  'Open Journal Systems (OJS)',
-  'Opus',
-  'Samvera',
-  'Other'
-];
+import { clientTypeList, softwareList } from 'bracco/models/repository'
 
 export default Controller.extend({
   store: service(),

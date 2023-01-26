@@ -27,6 +27,7 @@ module.exports = function () {
       'CLIENT_ADMIN_USERNAME',
       'ENABLE_DOI_ESTIMATE',
       'MIN_PREFIXES_AVAILABLE',
+      'MAX_MINT_FUTURE_OFFSET',
       'SHOW_N_PREFIXES'
     ],
     fastbootAllowedKeys: [
@@ -56,6 +57,7 @@ module.exports = function () {
       'CLIENT_ADMIN_USERNAME',
       'ENABLE_DOI_ESTIMATE',
       'MIN_PREFIXES_AVAILABLE',
+      'MAX_MINT_FUTURE_OFFSET',
       'SHOW_N_PREFIXES'
     ],
     failOnMissingKey: false

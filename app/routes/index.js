@@ -5,6 +5,7 @@ import { w } from '@ember/string';
 export default Route.extend({
   can: service(),
   currentUser: service(),
+  flashMessages: service(),
   prefixes: service(),
 
   model() {
@@ -12,13 +13,14 @@ export default Route.extend({
       let self = this;
       return this.store
         .findRecord('provider', 'admin')
-        .then(function (model) {
-          return model;
+        .then(function (admin) {
+          return admin;
         })
         .catch(function (reason) {
           console.debug(reason);
 
           self.get('flashMessages').warning(reason);
+          self.transitionTo('index');
         });
     }
   },

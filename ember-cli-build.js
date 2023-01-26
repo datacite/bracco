@@ -7,6 +7,9 @@ module.exports = function (defaults) {
   const pkg = require('./package.json');
 
   let app = new EmberApp(defaults, {
+    minifyCSS: {
+      options: { processImport: true }
+    },
     'ember-cli-babel': {
       includePolyfill: true
     },

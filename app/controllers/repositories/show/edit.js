@@ -3,21 +3,7 @@ import { inject as service } from '@ember/service';
 import { A } from '@ember/array';
 import { capitalize } from '@ember/string';
 import langs from 'langs';
-
-const clientTypeList = ['repository', 'periodical'];
-const softwareList = [
-  'CKAN',
-  'Dataverse',
-  'DSpace',
-  'EPrints',
-  'Fedora',
-  'Invenio',
-  'Islandora',
-  'Nesstar',
-  'Open Journal Systems (OJS)',
-  'Samvera',
-  'Other'
-];
+import { clientTypeList, softwareList } from 'bracco/models/repository'
 
 export default Controller.extend({
   currentUser: service(),

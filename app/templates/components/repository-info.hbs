@@ -1,11 +1,12 @@
 <div class="content">
+  <UserRole />
   <div class="row row-chart">
-    <BarChart @data={{json.dois}} @label="DOI" @model={{model}} @link="repositories.show.dois" @cumulative={{false}} />
+    <BarChart @data={{json.dois}} @label="DOI" @model={{model}} @link="repositories.show.dois" @cumulative={{false}} @offset={{true}} />
   </div>
 
   {{#if (can "read messages" model)}}
     <div class="row">
-      <div class="col-md-9">
+      <div class="col-md-9 col-lg-offset-3">
         {{#each flashMessages.queue as |flash|}}
           <FlashMessage @flash={{flash}} />
         {{/each}}

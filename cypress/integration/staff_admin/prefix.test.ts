@@ -20,8 +20,9 @@ describe('Admin: Prefix', () => {
     cy.location().should((loc) => {
       expect(loc.pathname).to.eq('/prefixes');
     });
+    cy.wait(waitTime2);
     cy.get('input[name="query"]')
-      .type('10.5438{enter}')
+      .type('10.5438{enter}', {waitForAnimations: true})
       .get('[data-test-prefix]')
       .should('contain', '10.5438');
 
@@ -30,8 +31,10 @@ describe('Admin: Prefix', () => {
     cy.get('div#search').should('exist');
     cy.get('div.panel.facets').should('exist');
 
-    // THIS BUTTON WAS REMOVED:
-    // cy.get('a#add-prefixes').contains('Add Prefixes');
+    cy.get('a#add-prefixes').contains('Add Prefixes');
+
+    // Create DOI button
+    cy.get('.create-doi-button').should('not.exist');
   });
 
   it('filter prefixes', () => {

@@ -9,6 +9,36 @@ import { fragment } from 'ember-data-model-fragments/attributes';
 import addressFormatter from '@fragaria/address-formatter';
 import ENV from 'bracco/config/environment';
 
+export const organizationTypeList = [
+  'researchInstitution',
+  'academicInstitution',
+  'governmentAgency',
+  'internationalOrganization',
+  'nationalInstitution',
+  'professionalSociety',
+  'publisher',
+  'serviceProvider',
+  'other'
+];
+export const memberTypeList = [
+  'consortium',
+  'consortium_organization',
+  'contractual_member',
+  'direct_member',
+  'member_only',
+  'registration_agency'
+];
+export const focusAreaList = [
+  'naturalSciences',
+  'engineeringAndTechnology',
+  'medicalAndHealthSciences',
+  'agriculturalSciences',
+  'socialSciences',
+  'humanities',
+  'general'
+];
+export const nonProfitStatusList = ['non-profit', 'for-profit'];
+
 const Validations = buildValidations({
   symbol: [
     validator('presence', true),

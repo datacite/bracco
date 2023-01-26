@@ -72,5 +72,10 @@ export default Component.extend({
       style = style === undefined ? 'apa' : style;
       this.selectStyle(style);
     }
-  }
+  },
+
+  didRender() {
+    this._super(...arguments);
+
+  },
 });
