@@ -53,16 +53,18 @@ describe('Admin: Admin', () => {
   it('visiting homepage', () => {
     cy.visit('/');
     cy.get('h2.work').contains('DataCite');
-    cy.get('li a.nav-link.active').contains('Settings');
+    cy.get('li a.nav-link.active').contains('Info');
+    cy.get('button.export-basic-metadata').should('not.exist');
   });
 
-  it('visiting info', () => {
-    cy.visit('/info');
+  it('visiting settings', () => {
+    cy.visit('/settings');
     cy.location().should((loc) => {
-      expect(loc.pathname).to.eq('/info');
+      expect(loc.pathname).to.eq('/settings');
     });
     cy.get('h2.work').contains('DataCite');
-    cy.get('li a.nav-link.active').contains('Info');
+    cy.get('li a.nav-link.active').contains('Settings');
+    cy.get('button.export-basic-metadata').should('not.exist');
   });
 
   it('visiting members', () => {
@@ -74,6 +76,7 @@ describe('Admin: Admin', () => {
     cy.get('li a.nav-link.active').contains('Members');
     cy.get('div#search').should('exist');
     cy.get('div.panel.facets').should('exist');
+    cy.get('button.export-basic-metadata').should('not.exist');
 
     cy.get('a#add-provider').contains('Add Member');
   });
@@ -87,6 +90,7 @@ describe('Admin: Admin', () => {
     cy.get('li a.nav-link.active').contains('Repositories');
     cy.get('div#search').should('exist');
     cy.get('div.panel.facets').should('exist');
+    cy.get('button.export-basic-metadata').should('not.exist');
 
     // staff can't add repositories here (needs to go to provider first)
     cy.get('a#add-repository').should('not.exist');
@@ -101,6 +105,7 @@ describe('Admin: Admin', () => {
     cy.get('li a.nav-link.active').contains('Contacts');
     cy.get('div#search').should('exist');
     cy.get('div.panel.facets').should('exist');
+    cy.get('button.export-basic-metadata').should('not.exist');
 
     // staff can't add contacts here (needs to go to provider first)
     cy.get('a#add-contact').should('not.exist');
@@ -115,6 +120,7 @@ describe('Admin: Admin', () => {
     cy.get('li a.nav-link.active').contains('Prefixes');
     cy.get('div#search').should('exist');
     cy.get('div.panel.facets').should('exist');
+    cy.get('button.export-basic-metadata').should('not.exist');
 
     cy.get('a#add-prefixes').contains('Add Prefixes');
   });
@@ -136,6 +142,7 @@ describe('Admin: Admin', () => {
     cy.get('li a.nav-link.active').contains('DOIs');
     cy.get('div#search').should('exist');
     cy.get('div.panel.facets').should('exist');
+    cy.get('button.export-basic-metadata').should('not.exist');
 
     // staff can't add doi here (needs to go to repository first)
     cy.get('a#add-doi').should('not.exist');

@@ -8,8 +8,5 @@
 {{else}}
   <input type="text" class="form-control name-identifier-field" value={{fragment.nameIdentifier}} placeholder="Name Identifier" oninput={{action "updateNameIdentifier" value="target.value"}} data-test-name-identifier/>
   
-  <div class="help-block help-block-fragment name-identifier-field no-error {{if (not fragment.nameIdentifier) 'no-success'}}">
-    Uniquely identifies an individual or legal entity, according to various schemas, e.g. ORCID, ROR or ISNI. 
-    Use name identifier expressed as URL. The Given Name, Family Name and Name will automatically be filled out for ORCID and ROR identifiers.
-  </div>
+  <div class="help-block help-block-fragment name-identifier-field no-error {{if (not fragment.nameIdentifier) 'no-success'}}">Use name identifier expressed as URL. Uniquely identifies an individual or legal entity, according to various schemas, e.g. ORCID, ROR or ISNI. The Given Name, Family Name, and Name will automatically be filled out for ORCID and ROR identifiers.</div>
 {{/if}}

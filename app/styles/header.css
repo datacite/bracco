@@ -1,0 +1,29 @@
+.fabrica-logo {
+	height: 50;
+	margin-top: -18px;
+}
+
+.navbar-right {
+	border-bottom-left-radius: 30px;
+	border-bottom-right-radius: 30px;
+}
+
+.navbar-member {
+	background-color: #00B1E2;
+}
+
+.navbar-consortium {
+	background-color: #243B54;
+}
+
+.navbar-button-member, .navbar-button-consortium {
+	color: white !important;
+}
+
+.navbar-button-member:hover, .navbar-button-member:focus {
+	color: #243B54 !important;
+}
+
+.navbar-button-consortium:hover, .navbar-button-consortium:focus {
+	color: #00B1E2 !important;
+}

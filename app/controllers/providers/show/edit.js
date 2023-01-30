@@ -5,6 +5,7 @@ import { w } from '@ember/string';
 import countryList from 'iso-3166-country-list';
 import FileReader from 'ember-file-upload/system/file-reader';
 import ENV from 'bracco/config/environment';
+import { organizationTypeList, memberTypeList, focusAreaList, nonProfitStatusList } from 'bracco/models/provider';
 
 // states and provinces use iso-3166-2 codes
 const stateList = [
@@ -129,36 +130,6 @@ const stateListAustralia = [
   { code: 'AU-ACT', name: 'Australian Capital Territory' },
   { code: 'AU-NT', name: 'Northern Territory' }
 ];
-
-const organizationTypeList = [
-  'researchInstitution',
-  'academicInstitution',
-  'governmentAgency',
-  'nationalInstitution',
-  'professionalSociety',
-  'publisher',
-  'serviceProvider',
-  'other'
-];
-const memberTypeList = [
-  'consortium',
-  'consortium_organization',
-  'contractual_member',
-  'direct_member',
-  'member_only',
-  'developer'
-];
-const focusAreaList = [
-  'naturalSciences',
-  'engineeringAndTechnology',
-  'medicalAndHealthSciences',
-  'agriculturalSciences',
-  'socialSciences',
-  'humanities',
-  'general'
-];
-
-const nonProfitStatusList = ['non-profit', 'for-profit'];
 
 export default Controller.extend({
   store: service(),

@@ -13,6 +13,8 @@ import { A } from '@ember/array';
 export default Component.extend({
   tagName: 'div',
   classNames: ['col-lg-3', 'col-md-4'],
+  classNameBindings: ['offset:col-lg-offset-3'],
+  offset: false,
   data: null,
   count: computed('data', 'summarize', 'currentYear', function () {
     if (this.data) {

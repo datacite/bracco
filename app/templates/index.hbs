@@ -1,88 +1,15 @@
 {{#if (can "read index")}}
   <ApplicationHeader @default={{true}} />
-
   <div class="container-fluid">
     <IndexHeader />
-
-    <div class="content">
-      {{#if (can "read messages" model)}}
-        <div class="row">
-          <div class="col-md-9">
-            {{#each flashMessages.queue as |flash|}}
-              <FlashMessage @flash={{flash}} />
-            {{/each}}
-          </div>
-        </div>
-      {{/if}}
-
-      <div class="row">
-        <div class='col-md-3'>
-          {{#if (can "update provider" model)}}
-            <div class="panel facets">
-              <div class="panel-body">
-                <div class="btn-toolbar">
-                  <div class="btn-group-vertical btn-group-sm">
-                    <LinkTo @route="change" class="btn btn-warning" @id="set-password-provider"><i class="fas fa-key"></i> Set Password</LinkTo>
-                    <LinkTo @route="edit" class="btn btn-warning" @id="edit-provider"><i class="fas fa-pencil-alt"></i> Update Account</LinkTo>
-                  </div>
-                </div>
-              </div>
-            </div>
-          {{/if}}
-
-          <RepositorySidebar @model={{model}} />
-        </div>
-        <div class="col-md-9">
-          <div class="panel panel-transparent">
-            <div class="panel-body">
-              <h5>Account ID</h5>
-              {{model.symbol}}
-
-              {{#if model.rorId}}
-                <h5>ROR ID</h5>
-                <a href="{{model.rorId}}">{{model.rorId}}</a>
-              {{/if}}
-
-              <h5>System Email</h5>
-              <a href="mailto:{{model.systemEmail}}">{{model.systemEmail}}</a>
-
-              {{#if model.groupEmail}}
-                <h5>Group Email</h5>
-                <a href="mailto:{{model.groupEmail}}">{{model.groupEmail}}</a>
-              {{/if}}
-
-              {{#if model.website}}
-                <h5>Website</h5>
-                <a href="{{model.website}}">{{model.website}}</a>
-              {{/if}}
-
-              {{#if model.twitterHandle}}
-                <h5>Twitter</h5>
-                <a href="{{twitter-url model.twitterHandle}}">{{twitter-url model.twitterHandle}}</a>
-              {{/if}}
-
-              {{#if model.country}}
-                <h5>Country</h5>
-                {{model.country.name}}
-              {{/if}}
-
-              {{#if model.description}}
-                <h5>Description</h5>
-                {{markdown-to-html model.description}}
-              {{/if}}
-
-              {{#if (not model.hasPassword)}}
-                <h5>Password</h5>
-                <span class="small icon-warning">has not been set</span>
-              {{/if}}
-            </div>
-          </div>
-        </div>
+    <div class="row">
+      <div class="col-md-3">
       </div>
-
-
+      <div class="col-md-9">
+        <IndexInfo @model={{model}} />
+      </div>
     </div>
-  </div>
+  </div>  
 {{else}}
   <ApplicationHeader />
   <LandingPage />

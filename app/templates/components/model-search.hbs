@@ -4,7 +4,7 @@
       @name="query"
       @value={{query}}
       class="form-control"
-      placeholder="Type to search..."
+      placeholder={{if placeholder placeholder "Type to search..."}}
       @escape-press={{action 'clear'}}
       @enter={{action 'doSearch'}}
     />

@@ -61,6 +61,9 @@ describe('ACCEPTANCE: STAFF_ADMIN | CONTACTS', () => {
           //cy.get('div.panel.facets').should('exist');
 
           cy.get('a#add-contact').should('not.exist');
+
+          // Create DOI button
+          cy.get('.create-doi-button').should('not.exist');
       });
     });
   });

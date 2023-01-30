@@ -78,9 +78,10 @@
         >
           <nav.item>
             <nav.link-to
-              @route="repositories.show.info"
+              @route="repositories.show.index"
               model="model.id"
               class="nav-link"
+              @query={{hash assignedPrefix=null}}
             >
               Info
             </nav.link-to>
@@ -91,6 +92,7 @@
               @route="repositories.show.analytics"
               model="model.id"
               class="nav-link"
+              @query={{hash assignedPrefix=null}}
             >
               Usage Dashboard
             </nav.link-to>
@@ -98,7 +100,7 @@
           {{/if}}
           <nav.item>
             <nav.link-to
-              @route="repositories.show.index"
+              @route="repositories.show.settings"
               model="model.id"
               class="nav-link"
             >
@@ -110,6 +112,7 @@
               @route="repositories.show.prefixes"
               model="model.id"
               class="nav-link"
+              @query={{hash assignedPrefix=null}}
             >
               Prefixes
             </nav.link-to>
@@ -119,6 +122,7 @@
               @route="repositories.show.dois"
               model="model.id"
               class="nav-link"
+              @query={{hash assignedPrefix=null}}
             >
               DOIs
             </nav.link-to>

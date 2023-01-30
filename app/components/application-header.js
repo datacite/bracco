@@ -14,6 +14,9 @@ export default Component.extend({
   title: null,
   home: '/',
   user: true,
+  showLogo: true,
+  navBgColor: '',
+  navButtonColor: '',
 
   init(...args) {
     this._super(...args);
@@ -58,6 +61,21 @@ export default Component.extend({
       this.set('settings', { href: settings });
     } else {
       this.set('settings', null);
+    }
+
+    let route = this.router.currentRouteName;
+
+    if (route === 'index' || route === 'sign-in' || route === '404') {
+      this.showLogo = false;
+    }
+
+    let role = this.currentUser.get('roleName');
+    if (role === 'Member') {
+      this.set('navBgColor', 'navbar-member');
+      this.set('navButtonColor', 'navbar-button-member');
+    } else if (role === 'Consortium') {
+      this.set('navBgColor', 'navbar-consortium');
+      this.set('navButtonColor', 'navbar-button-consortium');
     }
   },
 
