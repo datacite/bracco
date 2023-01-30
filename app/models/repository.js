@@ -1,4 +1,4 @@
-import Model, { attr, belongsTo } from '@ember-data/model';
+import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
 import { computed } from '@ember/object';
 import ENV from 'bracco/config/environment';
 import { array, fragment } from 'ember-data-model-fragments/attributes';
@@ -124,6 +124,9 @@ const Validations = buildValidations({
 
 export default Model.extend(Validations, {
   provider: belongsTo('provider', {
+    async: true
+  }),
+  prefixes: hasMany('prefix', {
     async: true
   }),
   meta: attr(),

@@ -4,12 +4,10 @@ import { isBlank } from '@ember/utils';
 import { capitalize } from '@ember/string';
 import langs from 'langs';
 import { A } from '@ember/array';
-import prefix from 'bracco/abilities/prefix';
 import { clientTypeList, softwareList } from 'bracco/models/repository'
 
 export default Controller.extend({
   store: service(),
-  prefixes: service(),
 
   re3data: null,
   softwareList,
@@ -22,40 +20,6 @@ export default Controller.extend({
 
     this.repositories = this.repositories || [];
   },
-
-  // Looks for a prefix to assign to a new repository.
-  // First checks provider prefixes for an unassigned prefix.
-  // Then, if necessary, checks the general prefix pool.
-  findPrefix() {
-    let self = this;
-
-    this.prefixes.get_prefixes(1, this.model.repository.get('provider.id'))
-    .then((values) => {
-      if (values.length > 0) {
-        let provider = self.model.provider;
-        let value = A(values).get('firstObject');
-        let providerPrefix;
-        let prefix;
-
-        if (value.constructor.modelName == 'provider-prefix') {
-          providerPrefix = value;
-          prefix = providerPrefix.get('prefix');
-        } else if (value.constructor.modelName == 'prefix') {
-          prefix = value;
-          providerPrefix = self.model['provider-prefix'] = self.store.createRecord('providerPrefix', {
-            provider, prefix
-          });
-        } else {
-          throw new Error("Expecting a prefix object. Got something else.");
-        }
-        self.model['repository-prefix'].set('provider-prefix', providerPrefix);
-        self.model['repository-prefix'].set('prefix', prefix);
-      }
-    }).catch(function (reason) {
-      console.debug(reason);
-    });
-  },
-
   actions: {
     searchRe3Data(query) {
       let self = this;
@@ -154,7 +118,6 @@ export default Controller.extend({
     addRepositoryType() {
       this.model.repository.get('repositoryType').pushObject(null);
     },
-
     submit(repository) {
       let self = this;
 
@@ -185,26 +148,10 @@ export default Controller.extend({
         })
       );
 
-      this.findPrefix();
-
-      // Save repository and, if necessary, provider-prefix and repository-prefix.
       repository
         .save()
         .then(function (repository) {
-          if (self.model['provider-prefix']) {
-            return self.model['provider-prefix'].save();
-          } else {
-            return null;
-          }
-        })
-        .then(function (value) {
-          if (self.model['repository-prefix']) {
-            return self.model['repository-prefix'].save();
-          } else {
-            return null;
-          }
-        }).then(function (value) {
-          self.transitionToRoute('repositories.show', self.model.repository.id, { queryParams: { assignedPrefix: self.model['repository-prefix'].prefix.get('id') } });
+          self.transitionToRoute('repositories.show.settings', self.model.repository.id, { queryParams: { assignedPrefix: repository.prefixes.firstObject.id } })
         })
         .catch(function (reason) {
           console.debug(reason);

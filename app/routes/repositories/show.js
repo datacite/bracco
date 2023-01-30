@@ -11,7 +11,7 @@ export default Route.extend({
     let self = this;
 
     return this.store
-      .findRecord('repository', params.repository_id, { include: 'provider' })
+      .findRecord('repository', params.repository_id, { include: 'provider,prefixes' })
       .then(function (repository) {
         self.headData.set('title', repository.name);
         self.headData.set('description', repository.description);
