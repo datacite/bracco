@@ -223,6 +223,9 @@
     "**/terser": "^4.8.1",
     "**/terser-webpack-plugin/serialize-javascript": "^4.0.0",
     "**/tmpl": "^1.0.5",
-    "**/wait-on/axios": "^0.21.2"
+    "**/wait-on/axios": "^0.21.2",
+    "**/@babel/core/json5": "2.2.2",
+    "**/loader-utils/json5": "1.0.2",
+    "**/papaparse": "^5.2.0"
   }
 }
