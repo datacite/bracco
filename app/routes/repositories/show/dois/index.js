@@ -25,7 +25,8 @@ export default Route.extend({
         .catch(function (reason) {
           console.debug(reason);
           return null;
-        })
+        }),
+      page: params['page']['number']
     });
   },
 

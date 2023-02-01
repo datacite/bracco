@@ -10,6 +10,9 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
   const waitTime = 1000;
   const waitTime2 = 2000;
   const prefix = '10.80225';
+  const dayjs = require('dayjs');
+  const yearInRange = dayjs().add(Cypress.env('max_mint_future_offset'), 'year').format('YYYY');
+  const yearOutOfRange = String(Number(yearInRange) + 1);
   let suffix = '';
 
   before(function () {
@@ -31,27 +34,35 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
     cy.visit('/repositories/datacite.test/dois');
     cy.url().should('include', '/repositories/datacite.test/dois').then (() => {
 
+      // Has Fabrica logo
+      cy.get('img.fabrica-logo').should('exist').should('have.attr', 'src').should('include', 'fabrica-logo.svg');
+      
       // Has upper right user profile link.
       cy.get('h2.work').contains('DataCite Test Repository');
       cy.get('a#account_menu_link').should('contain', 'DATACITE.TEST');
 
       // Has tabs with correct one activated.
       cy.get('ul.nav-tabs li a').contains(/Info/i)
-        .and('have.attr', 'href').and('include', '/repositories/datacite.test/info');
-      cy.get('ul.nav-tabs li a').contains(/Settings/i)
         .and('have.attr', 'href').and('include', '/repositories/datacite.test');
+      cy.get('ul.nav-tabs li a').contains(/Settings/i)
+        .and('have.attr', 'href').and('include', '/repositories/datacite.test/settings');
       cy.get('ul.nav-tabs li a').contains(/Prefixes/i)
         .and('have.attr', 'href').and('include', '/repositories/datacite.test/prefixes');
       cy.get('ul.nav-tabs li.active a').contains(/DOIs/i)
         .and('have.attr', 'href').and('include', '/repositories/datacite.test/dois');
 
       // Has left sidebar buttons.
-      cy.get('.btn-toolbar').within(($btnToolbar) => {
-        cy.get('.btn-group-vertical a#new-doi').contains(/Create\s*\(Form\)/i)
-          .and('have.attr', 'href').and('include', '/repositories/datacite.test/dois/new');
-        cy.get('.btn-group-vertical a#upload-doi').contains(/Create\s*\(File Upload\)/i)
-          .and('have.attr', 'href').and('include', '/repositories/datacite.test/dois/upload');
+      cy.get('div.col-md-3').should('be.visible').within(($sidebar) => {
+        // Create DOI button - would like to do more testing but seems impossible in Cypress.
+        cy.get('.create-doi-button').contains(/Create DOI/i);
+        cy.get('.create-doi-button button.dropdown-toggle').click({ force: true }).then(($obj) => {
+          //cy.get('.create-doi-button ul.dropdown-menu')
+          //cy.get('.create-doi-button ul.dropdown-menu ul li a').contains(/DOI\s*Form/i);
+          //cy.get('.create-doi-button ul.dropdown-menu ul li a').contains(/File\s*Upload/i);
+        });
       });
+
+      cy.get('button.export-basic-metadata').should('exist');
 
       // Has left sidebar facets.
       cy.get('.facets h4').contains(/Resource\s*Type/i);
@@ -62,7 +73,7 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
       // Has search form
       cy.get('form #search').within(($searchBar) => {
         cy.get('input[name="query"]')
-          .and('have.attr', 'placeholder').should('match', /Type\s*to\s*search.../i);
+          .and('have.attr', 'placeholder').should('match', /Type\sto\ssearch\.\sFor\sexample\s10\.4121\/17185607\.v1/i);
         cy.get('button').contains(/Search/i);
       });
     });
@@ -77,9 +88,11 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
       // Leave state at 'draft'.
 
       // Set 'url'.
+      cy.get("#url-help").should('be.visible').should('have.text', 'Should be a https URL — within the allowed domain(s) of your repository if domain restrictions are enabled in the repository settings. Http and ftp are also supported. For example http://example.org')
       cy.get('input#url-field').should('be.visible').type('https://example.org', { force: true });
 
       // Set creator.
+      cy.get('.help-block.name-identifier-field').should('be.visible').should('have.text','Use name identifier expressed as URL. Uniquely identifies an individual or legal entity, according to various schemas, e.g. ORCID, ROR or ISNI. The Given Name, Family Name, and Name will automatically be filled out for ORCID and ROR identifiers.')
       cy.get('input[data-test-name]').should('be.visible').type('Miller, Elizabeth', { force: true });
       cy.get('#toggle-creators').should('be.visible').click({ force: true }).then(($toggle) => {
         cy.get('#toggle-creators').contains('Show 1 creator');
@@ -94,9 +107,25 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
       // Set publisher.
       cy.get('#publisher-field').should('be.visible').type('DataCite', { force: true });
 
-      // Set publication year.
-      cy.get('#publication-year-field').should('be.visible').type('2020', { force: true });
+      // Set state to 'registered'. Test out-of-range year.
 
+      cy.get('#registered-radio').check({ waitForAnimations: true });
+      cy.get('#publication-year-field').should('be.visible').type(yearOutOfRange, { force: true, waitForAnimations: true });
+      cy.get('body').click(0,0);
+      cy.get('div#publication-year').should('have.class', 'has-error')
+
+      // Test in-range year.
+
+      cy.get('#publication-year-field').should('be.visible').clear({ force: true, waitForAnimations: true });
+      cy.get('#publication-year-field').should('be.visible').type(yearInRange, { force: true, waitForAnimations: true });
+      cy.get('body').click(0,0);
+      cy.get('div#publication-year').should('have.class', 'has-success')
+      cy.get('#publication-year-help').should('be.visible').should('have.text', 'Must be a year between 1000 and ' + yearInRange + '.');
+
+      // Set state back to draft
+
+      cy.get('#draft-radio').check({ waitForAnimations: true });
+    
       // Set resource type.
       // Causes the aria dropdown to be populated and displayed so that selection can be made.
       cy.get('div#resource-type-general div[role="button"]').click({ force: true }).then(($dropdown) => {
@@ -106,9 +135,20 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
 
       // Set language.
       // Causes the aria dropdown to be populated and displayed so that selection can be made.
-      cy.get('div#doi-language div[role="button"]').click({ force: true }).then(($dropdown) => {
-        // Makes the selection.
-        cy.get("ul.ember-power-select-options li").contains("English").click({ force: true });
+      cy.get('div#doi-language div[role="button"]').click({ waitForAnimations: true }).then(($dropdown) => {
+        // Creates a new invalid language.
+        cy.get('input.ember-power-select-search-input').type('Borgesian{enter}', { force: true });
+        cy.get('.help-block').contains('Must be a valid Language code.');
+      });
+      cy.get('div#doi-language div[role="button"]').click({ waitForAnimations: true }).then(($dropdown) => {
+        // Creates a new valid language.
+        cy.get('input.ember-power-select-search-input').type('pre-US{enter}', { force: true });
+        cy.get('.help-block').contains('The default Language vocabulary is provided by ISO 639-1. Any new language should be provided using two-letter or three-letter language codes.');
+      });
+      cy.get('div#doi-language div[role="button"]').click({ waitForAnimations: true }).then(($dropdown) => {
+        // Makes a default selection.
+        cy.get("ul.ember-power-select-options li").contains("English").click({ waitForAnimations: true });
+        cy.get('.help-block').contains('The default Language vocabulary is provided by ISO 639-1. Any new language should be provided using two-letter or three-letter language codes.');
       });
 
       // Set geolocation.
@@ -135,8 +175,9 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
 
       // Set contributor.
       cy.get('#add-contributor').click({ waitForAnimations: true }).then(($subform) => {
+        cy.get('.help-block.name-identifier-field').should('be.visible').should('have.text','Use name identifier expressed as URL. Uniquely identifies an individual or legal entity, according to various schemas, e.g. ORCID, ROR or ISNI. The Given Name, Family Name, and Name will automatically be filled out for ORCID and ROR identifiers.')
         // Causes the aria dropdown to be populated and displayed so that selection can be made.
-        cy.get('[doi-contributor] div[role="button"]').click({ force: true }).then(($dropdown) => {
+        cy.get('[doi-contributor] div[role="button"]').click({ waitForAnimations: true }).then(($dropdown) => {
           // Makes the selection from the dropdown.
           cy.get("ul.ember-power-select-options li").contains("Data collector").click({ waitForAnimations: true });
           cy.get('#toggle-contributors').should('be.visible').click({ waitForAnimations: true }).then(($toggle) => {
@@ -149,10 +190,15 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
       cy.get('#version-field').should('be.visible').type('67', { force: true });
 
       // Set format.
-      cy.get('#add-format').click({ waitForAnimations: true }).then(($subform) => {
-        cy.get('[data-test-format]').should('be.visible').type('json', { force: true });
-        cy.get('#toggle-formats').should('be.visible').click({ force: true }).then(($toggle) => {
-          cy.get('#toggle-formats').contains('Show 1 format');
+      cy.get('#add-format').click({ force: true }).then(($subform) => {
+        cy.get('.ember-power-select-placeholder').contains('Search standard formats OR create a new format');
+        // Causes the aria dropdown to be populated and displayed so that selection can be made.
+        cy.get('[doi-format] div[role="button"]').click({ force: true }).then(($dropdown) => {
+          // Makes the selection from the dropdown.
+          cy.get('input.ember-power-select-search-input').type('Optics{enter}', { force: true });
+          cy.get('#toggle-formats').should('be.visible').click({ force: true }).then(($toggle) => {
+            cy.get('#toggle-formats').contains('Show 1 format');
+          });
         });
       });
 
@@ -265,6 +311,7 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
 
       // Set 'url'.
       cy.wait(waitTime);
+      cy.get("#url-help").should('be.visible').should('have.text', 'Should be a https URL — within the allowed domain(s) of your repository if domain restrictions are enabled in the repository settings. Http and ftp are also supported. For example http://example.org')
       cy.get('input#url-field').should('be.visible').type('https://example.org', { force: true })
         .clickOutside();
       cy.get('#url').should('have.class', 'has-success');

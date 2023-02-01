@@ -1,9 +1,27 @@
-import Model, { attr, belongsTo } from '@ember-data/model';
+import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
 import { computed } from '@ember/object';
 import ENV from 'bracco/config/environment';
 import { array, fragment } from 'ember-data-model-fragments/attributes';
 import { validator, buildValidations } from 'ember-cp-validations';
 import isEmpty from 'bracco/utils/is-empty';
+
+export const clientTypeList = ['repository', 'periodical'];
+export const softwareList = [
+  'CKAN',
+  'DSpace',
+  'Dataverse',
+  'EPrints',
+  'Fedora',
+  'Invenio',
+  'Islandora',
+  'MyCoRe',
+  'Nesstar',
+  'OPUS',
+  'Open Journal Systems (OJS)',
+  'Pubman',
+  'Samvera',
+  'Other'
+];
 
 const Validations = buildValidations({
   symbol: [
@@ -106,6 +124,9 @@ const Validations = buildValidations({
 
 export default Model.extend(Validations, {
   provider: belongsTo('provider', {
+    async: true
+  }),
+  prefixes: hasMany('prefix', {
     async: true
   }),
   meta: attr(),

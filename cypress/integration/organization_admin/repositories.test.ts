@@ -26,6 +26,10 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | REPOSITORIES', () => {
     cy.visit('/providers/datacite/repositories');
     cy.url().should('include', '/providers/datacite/repositories').then(() => {
 
+      // Has Fabrica logo and correct navbar color
+      cy.get('img.fabrica-logo').should('exist').should('have.attr', 'src').should('include', 'fabrica-logo.svg');
+      cy.get('ul.navbar-nav').should('have.css', 'background-color', 'rgb(0, 177, 226)');
+
       // Has upper right user profile link.
       cy.get('h2.work').contains('DataCite');
       cy.get('a#account_menu_link').should('contain', 'DATACITE');
@@ -38,6 +42,8 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | REPOSITORIES', () => {
         cy.get('.btn-group a#add-repository').contains(/Add\s*Repositor/i)
           .and('have.attr', 'href').and('include', '/providers/datacite/repositories/new');
       });
+
+      cy.get('button.export-basic-metadata').should('not.exist');
 
       // Has left sidebar facets.
       cy.get('.facets h4').contains(/Year\s*joined/i);
@@ -65,12 +71,15 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | REPOSITORIES', () => {
       cy.get('#content').within(($content) => {
         cy.get('[data-test-repository]').its('length').should('be.gte', 1);
       });
+
+      // Create DOI button
+      cy.get('.create-doi-button').should('not.exist');
     });
   });
 
   // TBD - Could do more testing here. Only cursory testing for
   // presence of field objects. No testing of form behavior yet.
-  it.only('has an add repository page', () => {
+  it('has an add repository page', () => {
     cy.visit('/providers/datacite/repositories/new');
     cy.url().should('include', '/providers/datacite/repositories/new').then(() => {
 
@@ -135,5 +144,32 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | REPOSITORIES', () => {
         cy.get('button').contains(/Cancel/i).should('be.visible')
       })
     })
+  });
+
+  // ASSUMING DATACITE.TEST EXISTS:
+  it('check repositories tabs for required components - assumes datacite.test exists', () => {
+    cy.visit('/repositories/datacite.test');
+    cy.wait(waitTime2);
+
+    // Create DOI button
+    cy.get('.create-doi-button').should('not.exist');
+
+    cy.visit('/repositories/datacite.test/info');
+    cy.wait(waitTime2);
+
+    // Create DOI button
+    cy.get('.create-doi-button').should('not.exist');
+
+    cy.visit('/repositories/datacite.test/prefixes');
+    cy.wait(waitTime2);
+
+    // Create DOI button
+    cy.get('.create-doi-button').should('not.exist');
+
+    cy.visit('/repositories/datacite.test/dois');
+    cy.wait(waitTime2);
+
+    // Create DOI button
+    cy.get('.create-doi-button').should('not.exist');
   });
 });

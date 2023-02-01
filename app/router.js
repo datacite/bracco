@@ -13,7 +13,7 @@ Router.map(function () {
       this.route('edit');
       this.route('change');
       this.route('delete');
-      this.route('info');
+      this.route('settings');
       this.route('dois');
       this.route('prefixes', function () {
         this.route('show', { path: '/:prefix_id' }, function () {
@@ -38,7 +38,7 @@ Router.map(function () {
       this.route('edit');
       this.route('change');
       this.route('delete');
-      this.route('info');
+      this.route('settings');
       this.route('transfer-repository');
       this.route('dois', function () {
         this.route('new');
@@ -66,10 +66,6 @@ Router.map(function () {
     this.route('new');
   });
   this.route('users', function () {
-    this.route('show', { path: '/:user_id' }, function () {
-      this.route('info');
-      this.route('dois');
-    });
   });
   this.route('contacts', function () {
     this.route('show', { path: '/:contact_id' }, function () {
@@ -80,7 +76,7 @@ Router.map(function () {
   });
   this.route('edit');
   this.route('change');
-  this.route('info');
+  this.route('settings');
 
   this.route('about');
 
