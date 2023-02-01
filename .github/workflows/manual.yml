@@ -1,8 +1,6 @@
 name: Manually Test and Deploy Branch to Vercel
 on:
   workflow_dispatch:
-env:
-  VERCEL_ARGS: ""
 jobs:
   build:
     name: Build

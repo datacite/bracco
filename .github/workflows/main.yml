@@ -189,7 +189,7 @@ jobs:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.ORG_ID}}
           vercel-project-id: ${{ secrets.PROJECT_ID}}
-          vercel-args: '--prod'
+          vercel-args: ${{ vars.VERCEL_NOCACHE  == 'true' && '--prod --force' || '--prod' }}
           scope: ${{ secrets.TEAM_ID}}
           vercel-project-name: 'bracco'
 
@@ -199,7 +199,7 @@ jobs:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.ORG_ID}}
           vercel-project-id: ${{ secrets.TEST_PROJECT_ID}}
-          vercel-args: '--prod'
+          vercel-args: ${{ vars.VERCEL_NOCACHE  == 'true' && '--prod --force' || '--prod' }}
           scope: ${{ secrets.TEAM_ID}}
           vercel-project-name: 'bracco-test'
 
