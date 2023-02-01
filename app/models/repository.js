@@ -155,7 +155,6 @@ export default Model.extend(Validations, {
   keepPassword: attr('boolean', { defaultValue: true }),
   created: attr('date'),
   updated: attr('date'),
-  analyticsDashboardUrl: attr('string'),
   targetId: attr(),
   mode: attr('string'),
 
@@ -175,19 +174,5 @@ export default Model.extend(Validations, {
     } else {
       return null;
     }
-  }),
-  analyticsDashboardUrlCmp: computed('analyticsDashboardUrl', function () {
-    const theme = '&embed=true&theme=light';
-    var ret = '';
-
-    if (!isEmpty(this.analyticsDashboardUrl)) {
-      ret = this.analyticsDashboardUrl + theme;
-    } else if (!isEmpty(ENV.ANALYTICS_DASHBOARD_URL)) {
-      ret = ENV.ANALYTICS_DASHBOARD_URL + theme;
-    } else {
-      ret = '';
-    }
-
-    return ret;
   })
 });
