@@ -83,8 +83,6 @@ module.exports = function (environment) {
     EVENTDATA_URL:
       process.env.EVENTDATA_URL || 'https://api.stage.datacite.org',
     CDN_URL: process.env.CDN_URL || 'https://www.stage.datacite.org',
-    ANALYTICS_URL: process.env.ANALYTICS_URL || 'https://analytics.stage.datacite.org',
-    ANALYTICS_DASHBOARD_URL: process.env.ANALYTICS_DASHBOARD_URL || '',
 
     JWT_PUBLIC_KEY:
       process.env.JWT_PUBLIC_KEY ||
