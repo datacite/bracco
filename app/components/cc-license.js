@@ -24,7 +24,7 @@ export default Component.extend({
       let uri = new URI(this.licenseURL);
       let licenseLogo = null;
       if (uri.hostname() === 'creativecommons.org') {
-        let labels = A(uri.segment(1).split('-'));
+        let labels = A(uri.segment(1)?.split('-'));
         labels.unshift('cc');
         let val = null;
 
