@@ -28,7 +28,6 @@
 // https://github.com/cypress-io/cypress/issues/877
 
 import 'cypress-wait-until';
-import { copySync } from 'fs-extra';
 import 'cypress-file-upload';
 
 function cookie(jwt, expires_in) {

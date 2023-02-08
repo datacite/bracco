@@ -2,7 +2,7 @@
   <div class="panel-body">
     <div class="col-md-9 col-md-offset-3 form-help-header">
       {{#each flashMessages.queue as |flash|}}
-        {{flash-message flash=flash}}
+        <FlashMessage @flash={{flash}} />
       {{/each}}
 
       <h3 class="help-header">Update DOI (Form)</h3>

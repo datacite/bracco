@@ -19,7 +19,7 @@ export default Route.extend({
   },
 
   afterModel(model) {
-    if (this.get('can').cannot('create provider', model)) {
+    if (this.can.cannot('create provider', model)) {
       return this.transitionTo('index');
     }
   }

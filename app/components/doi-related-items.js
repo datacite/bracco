@@ -16,7 +16,7 @@ export default Component.extend({
       this.set('showRelatedItems', true);
     },
     toggleRelatedItems() {
-      this.set('showRelatedItems', !this.get('showRelatedItems'));
+      this.set('showRelatedItems', !this.showRelatedItems);
     },
   },
 });

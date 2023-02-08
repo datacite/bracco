@@ -1,7 +1,7 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { setupFactoryGuy, make } from 'ember-data-factory-guy';
-import { render, fillIn,  click } from '@ember/test-helpers';
+import { render, fillIn, click } from '@ember/test-helpers';
 
 import hbs from 'htmlbars-inline-precompile';
 

@@ -213,23 +213,27 @@ const Validations = buildValidations({
       presence: true,
       ignoreBlank: true,
       message: 'A doi estimate is required.',
+
       disabled: computed('model', function () {
         return (
           this.model.get('memberType') !== 'consortium_organization' ||
+          !this.model.get('memberType') || // memberType is null for admin account
           !ENV.featureFlags['enable-doi-estimate']
         )
-      }).volatile(),
+      })
     }),
     validator('number', {
       allowString: true,
       integer: true,
       positive: true,
+
       disabled: computed('model', function () {
         return (
           this.model.get('memberType') !== 'consortium_organization' ||
+          !this.model.get('memberType') || // memberType is null for admin account
           !ENV.featureFlags['enable-doi-estimate']
         )
-      }).volatile(),
+      })
     })
   ]
 });

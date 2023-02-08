@@ -22,7 +22,7 @@ module('Unit | Controller | providers', function(hooks) {
     controller.send('selectCountry', 'Australia');
     assert.equal(controller.model.organization.get('country'), 'Australia');
     controller.send('searchCountry', 'Australia');
-    assert.equal(controller.get('countries').length,1);
+    assert.equal(controller.countries.length,1);
   });
 
   test('should list organisation type list', function(assert) {
@@ -36,7 +36,7 @@ module('Unit | Controller | providers', function(hooks) {
     controller.send('selectOrganizationType', 'nationalInstitution');
     assert.equal(controller.model.organization.get('organizationType'), 'nationalInstitution');
     controller.send('searchOrganizationType', 'National');
-    assert.equal(controller.get('organizationTypes').length,1);
+    assert.equal(controller.organizationTypes.length,1);
   });
 
   test('should list member type list', function(assert) {
@@ -49,7 +49,7 @@ module('Unit | Controller | providers', function(hooks) {
     controller.send('selectMemberType', 'direct_member');
     assert.equal(controller.model.organization.get('memberType'), 'direct_member');
     controller.send('searchMemberType', 'direct_member');
-    assert.equal(controller.get('memberTypes').length,1);
+    assert.equal(controller.memberTypes.length,1);
   });
 
   test('should list focus area list', function(assert) {
@@ -62,7 +62,7 @@ module('Unit | Controller | providers', function(hooks) {
     controller.send('selectFocusArea', 'general');
     assert.equal(controller.model.organization.get('focusArea'), 'general');
     controller.send('searchFocusArea', 'general');
-    assert.equal(controller.get('focusAreas').length,1);
+    assert.equal(controller.focusAreas.length,1);
   });
 
   test('should list non profit status list', function(assert) {
@@ -75,7 +75,7 @@ module('Unit | Controller | providers', function(hooks) {
     controller.send('selectFocusArea', 'general');
     assert.equal(controller.model.organization.get('focusArea'), 'general');
     controller.send('searchFocusArea', 'general');
-    assert.equal(controller.get('focusAreas').length,1);
+    assert.equal(controller.focusAreas.length,1);
   });
 
   // I don't know how to test for consortium either

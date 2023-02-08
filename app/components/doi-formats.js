@@ -16,7 +16,7 @@ export default Component.extend({
       this.set('showFormats', true);
     },
     toggleFormats() {
-      this.set('showFormats', !this.get('showFormats'));
+      this.set('showFormats', !this.showFormats);
     },
   },
 });

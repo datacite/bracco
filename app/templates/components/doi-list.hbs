@@ -198,13 +198,13 @@
               {{#each model.meta.published as |year|}}
                 <li>
                   {{#if model.query.published}}
-                    {{#link-to link (query-params published='')}}
+                    <LinkTo @route={{link}} @query={{hash published=''}}>
                       <i class="far fa-check-square"></i>
-                    {{/link-to}}
+                    </LinkTo>
                   {{else}}
-                    {{#link-to link (query-params published=year.id)}}
+                    <LinkTo @route={{link}} @query={{hash published=year.id}}>
                       <i class="far fa-square"></i>
-                    {{/link-to}}
+                    </LinkTo>
                   {{/if}}
                   <div class="facet-title">
                     {{year.title}}
@@ -217,9 +217,9 @@
               {{/each}}
             {{else}}
               <li>
-                {{#link-to link (query-params published='')}}
+                <LinkTo @route={{link}} @query={{hash published=''}}>
                   <i class="far fa-check-square"></i>
-                {{/link-to}}
+                </LinkTo>
                 <div class="facet-title">
                   {{model.query.published}}
                 </div>
@@ -244,13 +244,13 @@
             {{#each model.meta.created as |year|}}
               <li>
                 {{#if model.query.created}}
-                  {{#link-to link (query-params created='')}}
+                  <LinkTo @route={{link}} @query={{hash created=''}}>
                     <i class="far fa-check-square"></i>
-                  {{/link-to}}
+                  </LinkTo>
                 {{else}}
-                  {{#link-to link (query-params created=year.id)}}
+                  <LinkTo @route={{link}} @query={{hash created=year.id}}>
                     <i class="far fa-square"></i>
-                  {{/link-to}}
+                  </LinkTo>
                 {{/if}}
                 <div class="facet-title">
                   {{year.title}}
@@ -263,9 +263,9 @@
             {{/each}}
           {{else}}
             <li>
-              {{#link-to link (query-params created='')}}
+              <LinkTo @route={{link}} @query={{hash created=''}}>
                 <i class="far fa-check-square"></i>
-              {{/link-to}}
+              </LinkTo>
               <div class="facet-title">
                 {{model.query.created}}
               </div>
@@ -455,13 +455,13 @@
               {{#each model.meta.prefixes as |prefix|}}
                 <li>
                   {{#if model.query.prefix}}
-                    {{#link-to link (query-params prefix='')}}
+                    <LinkTo @route={{link}} @query={{hash prefix=''}}>
                       <i class="far fa-check-square"></i>
-                    {{/link-to}}
+                    </LinkTo>
                   {{else}}
-                    {{#link-to link (query-params prefix=prefix.id)}}
+                    <LinkTo @route={{link}} @query={{hash prefix=prefix.id}}>
                       <i class="far fa-square"></i>
-                    {{/link-to}}
+                    </LinkTo>
                   {{/if}}
                   <div class="facet-title">
                     {{prefix.title}}
@@ -474,9 +474,9 @@
               {{/each}}
             {{else}}
               <li>
-                {{#link-to link (query-params prefix='')}}
+                <LinkTo @route={{link}} @query={{hash prefix=''}}>
                   <i class="far fa-check-square"></i>
-                {{/link-to}}
+                </LinkTo>
                 <div class="facet-title">
                   {{model.query.prefix}}
                 </div>

@@ -1,8 +1,0 @@
-{
-  "baseUrl": "http://localhost:4200",
-  "experimentalFetchPolyfill": true,
-  "testFiles": "**/*.test.*",
-  "video": false,
-  "retries": 3,
-  "projectId": "8j7yje"
-}

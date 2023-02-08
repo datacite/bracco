@@ -32,6 +32,10 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: ${{ runner.os }}-yarn-
 
+      - name: Get branch name
+        run: |
+          echo "### CURRENT BRANCH NAME:  ${{ github.ref_name }}."
+
       - name: Build
         run: |
           yarn --prefer-offline
@@ -42,7 +46,6 @@ jobs:
         with:
           name: test_build
           path: test_build/
-
 
   ember_test:
     name: Ember Testing
@@ -82,8 +85,6 @@ jobs:
         run: |
           yarn run ember test --path=test_build
 
-
-
   cypress_test:
     name: Cypress Testing
     runs-on: ubuntu-latest
@@ -121,6 +122,7 @@ jobs:
       - name: Cypress Testing
         uses: cypress-io/github-action@v5.0.5
         with:
+          config-file: cypress.config.ts
           install: false
           config: defaultCommandTimeout=15000
           start: yarn start --path=test_build
@@ -131,29 +133,29 @@ jobs:
           parallel: true
           group: 'Tests'
           spec: |
-            cypress/integration/client_admin/doi.test.ts
-            cypress/integration/client_admin/info.test.ts
-            cypress/integration/client_admin/prefixes.test.ts
-            cypress/integration/client_admin/settings.test.ts
-            cypress/integration/consortium_admin/contacts.test.ts
-            cypress/integration/consortium_admin/info.test.ts
-            cypress/integration/consortium_admin/settings.test.ts
-            cypress/integration/organization_admin/contacts.test.ts
-            cypress/integration/organization_admin/doi.test.ts
-            cypress/integration/organization_admin/info.test.ts
-            cypress/integration/organization_admin/prefixes.test.ts
-            cypress/integration/organization_admin/repositories.test.ts
-            cypress/integration/organization_admin/settings.test.ts
-            cypress/integration/staff_admin/contacts.test.ts
-            cypress/integration/staff_admin/info.test.ts
-            cypress/integration/staff_admin/settings.test.ts
-            cypress/integration/ui/consent.test.ts
-            cypress/integration/ui/login.test.ts
-            cypress/integration/anonymous/admin.test.ts
-            cypress/integration/anonymous/anonymous.test.ts
-            cypress/integration/anonymous/doi.test.ts
-            cypress/integration/anonymous/provider.test.ts
-            cypress/integration/anonymous/repository.test.ts
+            cypress/e2e/client_admin/doi.test.ts
+            cypress/e2e/client_admin/info.test.ts
+            cypress/e2e/client_admin/prefixes.test.ts
+            cypress/e2e/client_admin/settings.test.ts
+            cypress/e2e/consortium_admin/contacts.test.ts
+            cypress/e2e/consortium_admin/info.test.ts
+            cypress/e2e/consortium_admin/settings.test.ts
+            cypress/e2e/organization_admin/contacts.test.ts
+            cypress/e2e/organization_admin/doi.test.ts
+            cypress/e2e/organization_admin/info.test.ts
+            cypress/e2e/organization_admin/prefixes.test.ts
+            cypress/e2e/organization_admin/repositories.test.ts
+            cypress/e2e/organization_admin/settings.test.ts
+            cypress/e2e/staff_admin/contacts.test.ts
+            cypress/e2e/staff_admin/info.test.ts
+            cypress/e2e/staff_admin/settings.test.ts
+            cypress/e2e/ui/consent.test.ts
+            cypress/e2e/ui/login.test.ts
+            cypress/e2e/anonymous/admin.test.ts
+            cypress/e2e/anonymous/anonymous.test.ts
+            cypress/e2e/anonymous/doi.test.ts
+            cypress/e2e/anonymous/provider.test.ts
+            cypress/e2e/anonymous/repository.test.ts
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -18,7 +18,7 @@ export default Component.extend({
       this.set('showContributors', true);
     },
     toggleContributors() {
-      this.set('showContributors', !this.get('showContributors'));
+      this.set('showContributors', !this.showContributors);
     },
   },
 });

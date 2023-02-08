@@ -32,7 +32,7 @@ export default Route.extend({
       this.transitionTo('index');
     } else {
       if (this.paramsFor(this.routeName).assignedPrefix) {
-        this.get('flashMessages').success('Assigned prefix is: ' + this.paramsFor(this.routeName).assignedPrefix);
+        this.flashMessages.success('Assigned prefix is: ' + this.paramsFor(this.routeName).assignedPrefix);
       }
     }
   },
