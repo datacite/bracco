@@ -113,12 +113,12 @@ export default Component.extend({
   },
   searchClientType(query) {
     let clientTypes = clientTypeList.filter(function (clientType) {
-      return clientType.startsWith(query.toLowerCase());
+      return clientType.label.toLowerCase().startsWith(query.toLowerCase());
     });
     this.set('clientTypes', clientTypes);
   },
   selectClientType(clientType) {
-    this.repository.set('clientType', clientType);
+    this.repository.set('clientType', clientType.value);
     this.set('clientTypes', clientTypeList);
   },
   searchSoftware(query) {

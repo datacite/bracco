@@ -8,11 +8,14 @@
 
     <BsForm @formLayout="horizontal" @horizontalLabelGridClass="col-md-3" @model={{model.repository}} @onSubmit={{action "submit" model.repository model}} @submitOnEnter={{true}} as |form|>
       <RepositoryId @model={{model.repository}} @provider={{model.provider}} @form={{form}} />
-      <form.element @controlType="power-select" @id="client-type" @label="Type" @property="clientType" @options={{clientTypes}} @destination={{clientType}} as |el|>
+      <form.element @controlType="power-select" @id="client-type" @label="Type" @property="clientType" @options={{clientTypes}} @optionLabelPath="label" @destination={{clientType}} as |el|>
         <el.control @onChange={{action "selectClientType"}} @search={{action "searchClientType"}} @placeholder="Select Client Type" @searchPlaceholder="Type to search..." as |item|>
-          {{titleize item}}
+          {{item.label}}
         </el.control>
       </form.element>
+      {{#if (eq model.clientType "igsnCatalog")}}
+        <div class="help-block help-block-fragment" data-igsn-catalog-help>This repository will only be able to mint IGSN IDs.</div>
+      {{/if}}
 
       {{#if (can "create provider")}}
         <form.element @controlType="text" @id="salesforce-id" @label="Salesforce ID" @property="salesforceId" @required={{false}} @helpText="The 18 digit ID in Salesforce." />
@@ -22,14 +25,14 @@
         <form.element @controlType="text" @id="globus-uuid" @label="Globus UUID (optional)" @property="globusUuid" @required={{false}} @helpText="The Globus UUID used for token authentication." />
       {{/if}}
 
-      {{#if (eq model.repository.clientType "repository")}}
-        <form.element @id="re3data" @controlType="power-select" @property="re3data" @label="re3data Record (optional)" @optionLabelPath="re3data" @options={{repositories}} @destination={{re3data}} @helpText="re3data is a registry of research data repositories." as |el|>
+      {{#if (eq model.clientType "periodical")}}
+        <RepositoryIssn @model={{model}} @fragment={{model.issn}} @form={{form}} />
+      {{else}}
+        <form.element @controlType="power-select" @id="re3data" @property="re3data" @label="re3data Record (optional)" @optionLabelPath="re3data" @options={{repositories}} @destination={{re3data}} @helpText="re3data is a registry of research data repositories." as |el|>
           <el.control @onChange={{action "selectRe3Data"}} @search={{action "searchRe3Data"}} @searchField="repositoryName" @searchPlaceholder="Type to search..." @allowClear={{true}} as |item|>
-            {{if item.name item.name model.repository.re3data}}
+            {{if item.name item.name model.re3data}}
           </el.control>
         </form.element>
-      {{else if (eq model.repository.clientType "periodical")}}
-        <RepositoryIssn @model={{model.repository}} @fragment={{model.repository.issn}} @form={{form}} />
       {{/if}}
 
       <form.element @controlType="text" @id="name" @label="Repository Name" @property="name" @useIcons={{false}} @required={{false}} />

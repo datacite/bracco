@@ -3,6 +3,7 @@ import { inject as service } from '@ember/service';
 import { A } from '@ember/array';
 import { capitalize } from '@ember/string';
 import langs from 'langs';
+import { computed } from '@ember/object';
 import { clientTypeList, softwareList } from 'bracco/models/repository'
 
 export default Controller.extend({
@@ -94,12 +95,12 @@ export default Controller.extend({
     },
     searchClientType(query) {
       let clientTypes = clientTypeList.filter(function (clientType) {
-        return clientType.startsWith(query.toLowerCase());
+        return clientType.label.toLowerCase().startsWith(query.toLowerCase());
       });
       this.set('clientTypes', clientTypes);
     },
     selectClientType(clientType) {
-      this.model.set('clientType', clientType);
+      this.model.set('clientType', clientType.value);
       this.set('clientTypes', clientTypeList);
     },
     searchSoftware(query) {
