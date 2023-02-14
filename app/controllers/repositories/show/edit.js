@@ -20,6 +20,9 @@ export default Controller.extend({
   softwares: softwareList,
   clientTypeList,
   clientTypes: clientTypeList,
+  clientType: computed('model.clientType', function() {    
+    return this.get('clientTypeList').find(item => item.value === this.get('model.clientType'));
+  }),
 
   init(...args) {
     this._super(...args);
@@ -94,14 +97,14 @@ export default Controller.extend({
       }
     },
     searchClientType(query) {
-      let clientTypes = clientTypeList.filter(function (clientType) {
+      let clientTypes = this.clientTypeList.filter(function (clientType) {
         return clientType.label.toLowerCase().startsWith(query.toLowerCase());
       });
       this.set('clientTypes', clientTypes);
     },
     selectClientType(clientType) {
       this.model.set('clientType', clientType.value);
-      this.set('clientTypes', clientTypeList);
+      this.set('clientTypes', this.clientTypeList);
     },
     searchSoftware(query) {
       let softwares = softwareList.filter(function (software) {

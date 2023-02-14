@@ -8,7 +8,7 @@ import isEmpty from 'bracco/utils/is-empty';
 export const clientTypeList = [
   {
     label: "Repository",
-    code: "repository"
+    value: "repository"
   },
   {
     label: "Periodical",

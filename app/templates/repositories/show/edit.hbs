@@ -8,10 +8,11 @@
 
     <BsForm @formLayout="horizontal" @horizontalLabelGridClass="col-md-3" @model={{model}} @onSubmit={{action "submit" model}} @submitOnEnter={{true}} as |form|>
       <form.element @controlType="text" @id="repository-id" @label="Repository ID" @property="symbol" @helpText="The Repository ID is the unique identifier for each repository in DataCite and can't be changed." @disabled={{true}} />
-      <form.element @controlType="power-select" @id="client-type" @label="Type" @property="clientType" @options={{clientTypes}} @optionLabelPath="label" @destination={{clientType}} as |el|>
-        <el.control @onChange={{action "selectClientType"}} @search={{action "searchClientType"}} @placeholder="Select Client Type" @searchPlaceholder="Type to search..." as |item|>
-          {{item.label}}
-        </el.control>
+      <form.element @controlType="power-select" @id="client-type" @label="Type" @value={{clientType}} @options={{clientTypes}} @optionLabelPath="label" @disabled={{if (eq model.clientType "igsnCatalog") true false}} as |el|>
+        <el.control @onChange={{action "selectClientType"}} @search={{action "searchClientType"}} @placeholder="Select Client Type" @searchPlaceholder="Type to search..."  />
+        {{#if (eq model.clientType "igsnCatalog")}}
+          <BsTooltip @placement="top" @viewportPadding={{10}}>IGSN ID Catalogs cannot be edited.</BsTooltip>
+        {{/if}}
       </form.element>
 
       {{#if (can "create provider")}}
