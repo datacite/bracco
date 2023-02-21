@@ -163,7 +163,7 @@ describe('ACCEPTANCE: CLIENT_ADMIN | INFO', () => {
       cy.get('button').contains(/Cancel/i).should('be.visible');
 
       cy.get('button').contains(/Cancel/i).click({force:true});
-    )});
+    });
 
     cy.on("url:changed", (newUrl) => {
       expect(newUrl).to.contain("/repositories/datacite.test");

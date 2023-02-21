@@ -170,7 +170,7 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | REPOSITORIES', () => {
 
       cy.get('button#add-repository').should('be.visible');
       cy.get('button').contains(/Cancel/i).should('be.visible')  
-    )})
+      })
   });
 
   // ASSUMING DATACITE.TEST EXISTS:
