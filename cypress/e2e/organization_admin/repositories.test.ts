@@ -88,62 +88,88 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | REPOSITORIES', () => {
 
       cy.get('h3.edit').contains(/Add\s*Repository/);
 
-      cy.get('form').within(($form) => {
-        cy.get('#repository-id').should('be.visible');
-        cy.get('#client-type').should('be.visible');
-        cy.get('#re3data').should('be.visible');
-        cy.get('#name').should('be.visible');
-        cy.get('#alternate-name').should('be.visible');
-        cy.get('#system-email').should('be.visible');
-        cy.get('.form-group')
-          .within(($form_group) => {
-            cy.get('label').contains(/Service Contact/);
-            cy.get('input#service-contact-given-name').should('be.visible');
-            cy.get('input#service-contact-family-name').should('be.visible');
-            cy.get('input#service-contact-email').should('be.visible');
-          }
-        );
-        cy.get('#description').should('be.visible')
-        cy.get('#url').should('be.visible');
-        cy.get('#language')
-          .within(($form_group) => {
-            // test for lamguage
-            cy.get('button.add-language').should('be.visible');
-          }
-        );
-        cy.get('#software').should('be.visible');
-        cy.get('#domains').should('be.visible');
-        cy.get('#repository-type')
-          .within(($form_group) => {
-            // test for lamguage
-            cy.get('button.add-repositoryType').should('be.visible');
-          }
-        );
-        cy.get('#certificate')
-          .within(($form_group) => {
-            // test for lamguage
-            cy.get('button.add-certificate').should('be.visible');
-          }
-        );
-        cy.get('#is-active')
-          .within(($form_group) => {
-            // test for lamguage
-            cy.get('input[type="checkbox"]#is-active-field').should('be.visible');
-          }
-        );
+      cy.get('#repository-id').should('be.visible');
+      cy.get('#client-type').should('be.visible');
+      cy.get('#client-type .ember-power-select-selected-item').should('contain', 'Repository');
 
-        cy.get('.alert').contains(/The contacts entered may receive notifications/i)
-          .within(() => {
-            cy.get('a[href*="privacy.html"]').should('be.visible');
-          }
-        );
-        cy.get('.alert').contains(/To save this repository, first resolve the errors with these fields:/i)
-        cy.get('.alert').contains(/repository name, system email./i)
+      // Set client_type to Periodical
+      cy.get('div#client-type div[role="button"]').click({ waitForAnimations: true }).then(($dropdown) => {
+        cy.get('ul.ember-power-select-options li').contains('Periodical').click({ waitForAnimations: true }).then(() => {
+          // Periodical client_type divs should be visible and Repository client_type divs should not exist
+          cy.get('#repository-issn').should('be.visible');
+          cy.get('#repository-type').should('not.exist');
+          cy.get('#certificate').should('not.exist');   
+        })
+      });
 
-        cy.get('button#add-repository').should('be.visible');
-        cy.get('button').contains(/Cancel/i).should('be.visible')
-      })
-    })
+      // Set client_type to IGSN ID Catalog
+      cy.get('div#client-type div[role="button"]').click({ waitForAnimations: true }).then(($dropdown) => {
+        cy.get('ul.ember-power-select-options li').contains('IGSN ID Catalog').click({ waitForAnimations: true }).then(() => {
+          // IGSN ID Catalog client_type divs should be visible and others should not
+          cy.get('.help-block').should('contain', 'This repository will only be able to mint IGSN IDs.');          
+          cy.get('#repository-issn').should('not.exist');
+          cy.get('#repository-type').should('not.exist');
+          cy.get('#certificate').should('not.exist');   
+        })
+      });
+
+      // Set client_type back to Repository
+      cy.get('div#client-type div[role="button"]').click({ waitForAnimations: true }).then(($dropdown) => {
+        cy.get('ul.ember-power-select-options li').contains('Repository').click({ waitForAnimations: true })
+      });
+
+      cy.get('#re3data').should('be.visible');
+      cy.get('#name').should('be.visible');
+      cy.get('#alternate-name').should('be.visible');
+      cy.get('#system-email').should('be.visible');
+      cy.get('.form-group')
+        .within(($form_group) => {
+          cy.get('label').contains(/Service Contact/);
+          cy.get('input#service-contact-given-name').should('be.visible');
+          cy.get('input#service-contact-family-name').should('be.visible');
+          cy.get('input#service-contact-email').should('be.visible');
+        }
+      );
+      cy.get('#description').should('be.visible')
+      cy.get('#url').should('be.visible');
+      cy.get('#language')
+        .within(($form_group) => {
+          // test for lamguage
+          cy.get('button.add-language').should('be.visible');
+        }
+      );
+      cy.get('#software').should('be.visible');
+      cy.get('#domains').should('be.visible');
+      cy.get('#repository-type')
+        .within(($form_group) => {
+          // test for lamguage
+          cy.get('button.add-repositoryType').should('be.visible');
+        }
+      );
+      cy.get('#certificate')
+        .within(($form_group) => {
+          // test for lamguage
+          cy.get('button.add-certificate').should('be.visible');
+        }
+      );
+      cy.get('#is-active')
+        .within(($form_group) => {
+          // test for lamguage
+          cy.get('input[type="checkbox"]#is-active-field').should('be.visible');
+        }
+      );
+
+      cy.get('.alert').contains(/The contacts entered may receive notifications/i)
+        .within(() => {
+          cy.get('a[href*="privacy.html"]').should('be.visible');
+        }
+      );
+      cy.get('.alert').contains(/To save this repository, first resolve the errors with these fields:/i)
+      cy.get('.alert').contains(/repository name, system email./i)
+
+      cy.get('button#add-repository').should('be.visible');
+      cy.get('button').contains(/Cancel/i).should('be.visible')  
+    )})
   });
 
   // ASSUMING DATACITE.TEST EXISTS:
