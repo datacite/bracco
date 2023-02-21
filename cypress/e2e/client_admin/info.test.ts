@@ -113,6 +113,7 @@ describe('ACCEPTANCE: CLIENT_ADMIN | INFO', () => {
     cy.visit('/repositories/datacite.test/edit');
     cy.url().should('include', '/repositories/datacite.test/edit').then(() => {
 
+      cy.wait(waitTime);
       cy.get('h2.work').contains('DataCite Test Repository');
       cy.get('a#account_menu_link').should('contain', 'DATACITE.TEST');
 
@@ -120,7 +121,7 @@ describe('ACCEPTANCE: CLIENT_ADMIN | INFO', () => {
       cy.get('#client-type').should('be.visible');
       cy.get('#client-type .ember-power-select-selected-item').should('contain', 'Repository');
 
-      cy.get('div#client-type div[role="button"]').click({ waitForAnimations: true, force: true }).then(($dropdown) => {
+      cy.get('div#client-type div[role="button"]').click({ waitForAnimations: true }).then(($dropdown) => {
         // IGSN ID Catalog option should not exist for existing Periodical and Repository client_types
         cy.get('ul.ember-power-select-options li').contains('IGSN ID Catalog').should('not.exist');
 

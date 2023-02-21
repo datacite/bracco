@@ -83,6 +83,7 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | REPOSITORIES', () => {
     cy.visit('/providers/datacite/repositories/new');
     cy.url().should('include', '/providers/datacite/repositories/new').then(() => {
 
+      cy.wait(waitTime);
       cy.get('h2.work').contains('DataCite');
       cy.get('a#account_menu_link').should('contain', 'DATACITE');
 
