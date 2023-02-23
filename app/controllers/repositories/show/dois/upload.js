@@ -49,10 +49,12 @@ export default Controller.extend({
           self
             .get('flashMessages')
             .warning(
-              'An error occured and this DOI could not be saved:' +
+              'An error occured and this DOI could not be saved.' + (reason?.title ? '  ' + reason.title : '')
+              /*
                 reason.errors[0]
                 ? reason.errors[0].title
                 : reason
+                */
             );
         });
     },

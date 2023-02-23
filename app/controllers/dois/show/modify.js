@@ -25,26 +25,26 @@ export default Controller.extend({
       }
 
       // set individual attributes to null so that they don't overwrite what is in the xml attribute
-      doi.set('formats', []);
-      doi.set('sizes', []);
+      doi.set('formats', null);
+      doi.set('sizes', null);
       doi.set('version', null);
-      doi.set('creators', []);
-      doi.set('titles', []);
-      doi.set('descriptions', []);
+      doi.set('creators', null);
+      doi.set('titles', null);
+      doi.set('descriptions', null);
       doi.set('publisher', null);
       doi.set('publicationYear', null);
-      doi.set('types', []);
+      doi.set('types', null);
       doi.set('rightsList', null);
       doi.set('schemaVersion', null);
       doi.set('language', null);
-      doi.set('subjects', []);
-      doi.set('contributors', []);
-      doi.set('alternateIdentifiers', []);
-      doi.set('relatedIdentifiers', []);
-      doi.set('fundingReferences', []);
-      doi.set('geoLocations', []);
-      doi.set('dates', []);
-      doi.set('relatedItems', []);
+      doi.set('subjects', null);
+      doi.set('contributors', null);
+      doi.set('alternateIdentifiers', null);
+      doi.set('relatedIdentifiers', null);
+      doi.set('fundingReferences', null);
+      doi.set('geoLocations', null);
+      doi.set('dates', null);
+      doi.set('relatedItems', null);
 
       // Don't try and set the landingPage information for DOI Updates
       doi.set('landingPage', null);

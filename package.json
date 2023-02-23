@@ -150,7 +150,7 @@
     "ember-moment": "^8.0.2",
     "ember-power-select": "^3.0.6",
     "ember-power-select-blockless": "^0.5.0",
-    "ember-prism": "^0.8.2",
+    "ember-prism": "^0.10.0",
     "ember-qunit": "^4.6.0",
     "ember-radio-button": "^2.0.1",
     "ember-resolver": "^7.0.0",

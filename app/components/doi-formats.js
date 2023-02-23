@@ -12,7 +12,8 @@ export default Component.extend({
   },
   actions: {
     addFormat() {
-      this.model.get('formats').pushObject();
+      this.model.get('formats').push('');
+      this.model.set('formats', Array.from(this.model.get('formats')));
       this.set('showFormats', true);
     },
     toggleFormats() {

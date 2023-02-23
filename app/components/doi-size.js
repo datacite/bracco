@@ -1,5 +1,4 @@
 import Component from '@ember/component';
-// import { set } from '@ember/object';
 
 export default Component.extend({
 
@@ -8,10 +7,12 @@ export default Component.extend({
       this.set('fragment', value);
     },
     selectSize() {
-      this.model.get('sizes').replace(this.index, 1, [ this.fragment ]);
+      this.model.get('sizes').splice(this.index, 1, this.fragment );
+      this.model.set('sizes', Array.from(this.model.get('sizes')));
     },
     deleteSize() {
-      this.model.get('sizes').removeAt(this.index);
+      this.model.get('sizes').splice(this.index, 1);
+      this.model.set('sizes', Array.from(this.model.get('sizes')));
     },
   },
 });
