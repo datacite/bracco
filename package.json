@@ -49,7 +49,8 @@
     "mime": "^3.0.0",
     "pascal-case": "^3.1.2",
     "validator": "^13.7.0",
-    "wait-on": "^6.0.1"
+    "wait-on": "^6.0.1",
+    "file-saver": "^2.0.5"
   },
   "fastbootDependencies": [
     "node-fetch",
