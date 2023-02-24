@@ -82,7 +82,7 @@
       </form.element>
       <form.element @controlType="textarea" @id="domains" @label="Domains" @property="domains" @required={{false}} @helpText="List of domains, separated by comma, used for DOI registration, or use *. (e.g. *.example.org) to allow all subdomains, or use * to allow all domains." />
 
-      {{#if (eq model.clientType "repository")}}
+      {{#unless (eq model.clientType "periodical")}}
         <div class="form-group" id="repository-type">
           <label class="control-label col-md-3">Repository Type (optional)</label>
           <div class="col-md-9">
@@ -110,7 +110,7 @@
             {{/if}}
           </div>
         </div>
-      {{/if}}
+      {{/unless}}
 
       {{#if (can "create repository" model)}}
         <form.element @controlType="checkbox" @id="is-active" @label="Account is active" @property="isActive" @helpText="This account can register and update DOIs" />

@@ -106,11 +106,11 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | REPOSITORIES', () => {
       // Set client_type to IGSN ID Catalog
       cy.get('div#client-type div[role="button"]').click({ waitForAnimations: true }).then(($dropdown) => {
         cy.get('ul.ember-power-select-options li').contains('IGSN ID Catalog').click({ waitForAnimations: true }).then(() => {
-          // IGSN ID Catalog client_type divs should be visible and others should not
+          // IGSN ID Catalog client_type divs should be visible
           cy.get('.help-block').should('contain', 'This repository will only be able to mint IGSN IDs.');          
           cy.get('#repository-issn').should('not.exist');
-          cy.get('#repository-type').should('not.exist');
-          cy.get('#certificate').should('not.exist');   
+          cy.get('#repository-type').should('be.visible');
+          cy.get('#certificate').should('be.visible');   
         })
       });
 
