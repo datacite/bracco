@@ -82,7 +82,7 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | SETTINGS', () => {
 
       cy.get('h5').contains(/Voting\s*Representative/i).parent().parent('.panel').within((panel) => {
         cy.get('h5').contains(/Voting\s*Representative/i);
-        cy.get('[cy-data="voting"] a').contains(/John\s*Doe/i).and('have.attr', 'href').and('include', 'mailto:info@datacite.org');
+        cy.get('[cy-data="voting"] a').contains(/John\s*Doe/i).and('have.attr', 'href').and('contain', 'mailto:John.Doe');
         cy.get('h5').contains(/Service\s*Contact/i);
         cy.get('[cy-data="service"] a').contains(/John\s*Doe/i).and('have.attr', 'href').and('contain', 'mailto:John.Doe');
         cy.get('h5').contains(/Billing\s*Contact/i);
