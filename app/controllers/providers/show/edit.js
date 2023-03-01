@@ -459,8 +459,16 @@ export default Controller.extend({
         .then(function (provider) {
           self.transitionToRoute('providers.show', provider);
         })
+        // Report the reason (error) to the user.  Without that, the form appears to be frozen.
         .catch(function (reason) {
           console.debug(reason);
+          let msg = (reason?.errors[0]?.title ? reason.errors[0].title : ( reason?.title? reason.title : 'Error is unknown.  Please contact support.' ));
+
+          self
+          .get('flashMessages')
+          .danger(
+            'An error occurred and this provider could not be saved.' + '  ' + msg
+          );
         });
     },
     cancel() {
