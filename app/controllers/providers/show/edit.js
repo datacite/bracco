@@ -448,11 +448,16 @@ export default Controller.extend({
         if (contact.email === m.get('billingContact.email')) {
           roleName.push('billing');
         }
-        if (contact.email === m.get('secondaryBillingContact.email')) {
+        if (contact.eail === m.get('secondaryBillingContact.email')) {
           roleName.push('secondary_billing');
         }
-        contact.set('roleName', roleName);
-        contact.save();
+
+        // Stop unnecessary requests to save contacts.
+        if ((contact && contact.roleName == null) ||  (roleName.length > 0))
+        {
+          contact.set('roleName', roleName);
+          contact.save();
+        }
       });
       this.model
         .save()
