@@ -448,7 +448,7 @@ export default Controller.extend({
         if (contact.email === m.get('billingContact.email')) {
           roleName.push('billing');
         }
-        if (contact.eail === m.get('secondaryBillingContact.email')) {
+        if (contact.email === m.get('secondaryBillingContact.email')) {
           roleName.push('secondary_billing');
         }
 
@@ -467,12 +467,12 @@ export default Controller.extend({
         // Report the reason (error) to the user.  Without that, the form appears to be frozen.
         .catch(function (reason) {
           console.debug(reason);
-          let msg = (reason?.errors[0]?.title ? reason.errors[0].title : ( reason?.title? reason.title : 'Error is unknown.  Please contact support.' ));
+          let msg = (reason?.errors[0]?.title ? reason.errors[0].title : ( reason?.title? reason.title : 'Cause is unknown.  Please contact support.' ));
 
           self
           .get('flashMessages')
           .danger(
-            'An error occurred and this provider could not be saved.' + '  ' + msg
+            'An error occurred and while saving this provider.' + '  ' + msg
           );
         });
     },
