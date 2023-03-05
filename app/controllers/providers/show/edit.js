@@ -6,6 +6,7 @@ import countryList from 'iso-3166-country-list';
 import FileReader from 'ember-file-upload/system/file-reader';
 import ENV from 'bracco/config/environment';
 import { organizationTypeList, memberTypeList, focusAreaList, nonProfitStatusList } from 'bracco/models/provider';
+import _arr from 'lodash';
 
 // states and provinces use iso-3166-2 codes
 const stateList = [
@@ -452,13 +453,17 @@ export default Controller.extend({
           roleName.push('secondary_billing');
         }
 
-        // Stop unnecessary requests to save contacts.
-        if ((contact && contact.roleName == null) ||  (roleName.length > 0))
+        // Stop unnecessary requests to save contacts by adding some conditions.
+        if (
+          (contact.roleName == null) || 
+          !_arr.isEqual(contact.roleName, roleName)
+        )
         {
           contact.set('roleName', roleName);
           contact.save();
         }
       });
+
       this.model
         .save()
         .then(function (provider) {
