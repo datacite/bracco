@@ -31,7 +31,9 @@ module.exports = function (environment) {
           'https://63201db022924202b697e03bc5e0d0ba@o239790.ingest.sentry.io/1420435',
 
         disablePerformance: true,
-        environment: fabricaDeployTarget || "stage"
+        environment: fabricaDeployTarget || "stage",
+        // Workaround per bug: https://github.com/getsentry/sentry-javascript/issues/3391
+        disableInitialLoadInstrumentation: false
       }
     },
     'ember-cli-string-helpers': {
