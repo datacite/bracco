@@ -12,9 +12,7 @@
   <div class="panel panel-transparent">
     {{#if output}}
       <div class="panel-body">
-        <CodeBlock @class="metadata">
-{{output}}
-        </CodeBlock>
+        <CodeBlock @class="metadata" @code="{{output}}" />
       </div>
     {{else}}
       <DoiSummary @model={{model}} />

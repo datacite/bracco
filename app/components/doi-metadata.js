@@ -42,9 +42,9 @@ export default Component.extend({
 
   showMetadata(metadata) {
     if (metadata === 'summary') {
-      this.set('output', false);
+      this.set('output', '');
     } else {
-      this.set('output', null);
+      this.set('output', '');
       let self = this;
       let url = ENV.API_URL + '/dois/' + this.model.get('doi');
       let acceptHeaders = {

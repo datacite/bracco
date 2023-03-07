@@ -6,6 +6,7 @@ import countryList from 'iso-3166-country-list';
 import FileReader from 'ember-file-upload/system/file-reader';
 import ENV from 'bracco/config/environment';
 import { organizationTypeList, memberTypeList, focusAreaList, nonProfitStatusList } from 'bracco/models/provider';
+import _arr from 'lodash';
 
 // states and provinces use iso-3166-2 codes
 const stateList = [
@@ -451,16 +452,33 @@ export default Controller.extend({
         if (contact.email === m.get('secondaryBillingContact.email')) {
           roleName.push('secondary_billing');
         }
-        contact.set('roleName', roleName);
-        contact.save();
+
+        // Stop unnecessary requests to save contacts by adding some conditions.
+        if (
+          (contact.roleName == null) || 
+          !_arr.isEqual(contact.roleName, roleName)
+        )
+        {
+          contact.set('roleName', roleName);
+          contact.save();
+        }
       });
+
       this.model
         .save()
         .then(function (provider) {
           self.transitionToRoute('providers.show', provider);
         })
+        // Report the reason (error) to the user.  Without that, the form appears to be frozen.
         .catch(function (reason) {
           console.debug(reason);
+          let msg = (reason?.errors[0]?.title ? reason.errors[0].title : ( reason?.title? reason.title : 'Cause is unknown.  Please contact support.' ));
+
+          self
+          .get('flashMessages')
+          .danger(
+            'An error occurred and while saving this provider.' + '  ' + msg
+          );
         });
     },
     cancel() {

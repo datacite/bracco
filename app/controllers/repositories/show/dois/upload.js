@@ -17,26 +17,26 @@ export default Controller.extend({
 
       // Reset content to null rather than use default values
       // We want the API to work out the values from the file XML
-      doi.set('formats', []);
-      doi.set('sizes', []);
+      doi.set('formats', null);
+      doi.set('sizes', null);
       doi.set('version', null);
-      doi.set('creators', []);
-      doi.set('titles', []);
-      doi.set('descriptions', []);
+      doi.set('creators', null);
+      doi.set('titles', null);
+      doi.set('descriptions', null);
       doi.set('publisher', null);
       doi.set('publicationYear', null);
-      doi.set('types', []);
+      doi.set('types', null);
       doi.set('rightsList', null);
       doi.set('schemaVersion', null);
-      doi.set('subjects', []);
+      doi.set('subjects', null);
       doi.set('language', null);
-      doi.set('contributors', []);
-      doi.set('alternateIdentifiers', []);
-      doi.set('relatedIdentifiers', []);
-      doi.set('fundingReferences', []);
-      doi.set('geoLocations', []);
-      doi.set('dates', []);
-      doi.set('relatedItems', []);
+      doi.set('contributors', null);
+      doi.set('alternateIdentifiers', null);
+      doi.set('relatedIdentifiers', null);
+      doi.set('fundingReferences', null);
+      doi.set('geoLocations', null);
+      doi.set('dates', null);
+      doi.set('relatedItems', null);
 
       let self = this;
       doi
@@ -49,10 +49,12 @@ export default Controller.extend({
           self
             .get('flashMessages')
             .warning(
-              'An error occured and this DOI could not be saved:' +
+              'An error occured and this DOI could not be saved.' + (reason?.title ? '  ' + reason.title : '')
+              /*
                 reason.errors[0]
                 ? reason.errors[0].title
                 : reason
+                */
             );
         });
     },

@@ -12,7 +12,8 @@ export default Component.extend({
   },
   actions: {
     addSize() {
-      this.model.get('sizes').pushObject();
+      this.model.get('sizes').push('');
+      this.model.set('sizes', Array.from(this.model.get('sizes')));
       this.set('showSizes', true);
     },
     toggleSizes() {

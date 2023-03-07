@@ -13,6 +13,11 @@ export default Controller.extend({
           self.transitionToRoute('providers.show.repositories', providerId);
         }).catch(function(reason) {
           console.debug(reason);
+          self
+          .get('flashMessages')
+          .danger(
+            'An error occurred while deleting this repository.  Please contact support.'
+          );
         });
       });
     },
