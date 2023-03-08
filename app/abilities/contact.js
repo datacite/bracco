@@ -17,8 +17,10 @@ export default Ability.extend({
             return true;
           case 'consortium_admin':
             return (
-              this.get('currentUser.provider_id') ===
-              this.get('model.provider.consortium.id')
+              ((this.get('model.provider.memberType') === 'consortium_organization') &&
+               (this.get('currentUser.provider_id') === this.get('model.provider.consortium.id'))) ||
+              ((this.get('model.provider.memberType') === 'consortium') &&
+               (this.get('currentUser.provider_id') === this.get('model.provider.id')))
             );
           case 'provider_admin':
             return (
@@ -40,8 +42,10 @@ export default Ability.extend({
           return true;
         case 'consortium_admin':
           return (
-            this.get('currentUser.provider_id') ===
-            this.get('model.provider.consortium.id')
+            ((this.get('model.provider.memberType') === 'consortium_organization') &&
+             (this.get('currentUser.provider_id') === this.get('model.provider.consortium.id'))) ||
+            ((this.get('model.provider.memberType') === 'consortium') &&
+             (this.get('currentUser.provider_id') === this.get('model.provider.id')))
           );
         case 'provider_admin':
           return (
@@ -62,8 +66,10 @@ export default Ability.extend({
           return true;
         case 'consortium_admin':
           return (
-            this.get('currentUser.provider_id') ===
-            this.get('model.provider.consortium.id')
+            ((this.get('model.provider.memberType') === 'consortium_organization') &&
+             (this.get('currentUser.provider_id') === this.get('model.provider.consortium.id'))) ||
+            ((this.get('model.provider.memberType') === 'consortium') &&
+             (this.get('currentUser.provider_id') === this.get('model.provider.id')))
           );
         case 'provider_admin':
           return (
@@ -77,7 +83,7 @@ export default Ability.extend({
   ),
   canRead: computed(
     'currentUser.{role_id,provider_id,client_id}',
-    'model.{id,provider.id,provider.consortium.id}',
+    'model.{id,provider.id,provider.consortium.id,provider.memberType}',
     function () {
       this.get('currentUser.role_id');
       switch (this.get('currentUser.role_id')) {
@@ -85,8 +91,10 @@ export default Ability.extend({
           return true;
         case 'consortium_admin':
           return (
-            this.get('currentUser.provider_id') ===
-            this.get('model.provider.consortium.id')
+            ((this.get('model.provider.memberType') === 'consortium_organization') &&
+             (this.get('currentUser.provider_id') === this.get('model.provider.consortium.id'))) ||
+            ((this.get('model.provider.memberType') === 'consortium') &&
+             (this.get('currentUser.provider_id') === this.get('model.provider.id')))
           );
         case 'provider_admin':
           return (
