@@ -5,21 +5,7 @@ import { array, fragment } from 'ember-data-model-fragments/attributes';
 import { validator, buildValidations } from 'ember-cp-validations';
 import isEmpty from 'bracco/utils/is-empty';
 
-export const clientTypeList = [
-  {
-    label: "Repository",
-    value: "repository"
-  },
-  {
-    label: "Periodical",
-    value: "periodical"
-  },
-  {
-    label: "IGSN ID Catalog",
-    value: "igsnCatalog"
-  }
-]
-
+export const clientTypeList = ['repository', 'periodical'];
 export const softwareList = [
   'CKAN',
   'DSpace',
