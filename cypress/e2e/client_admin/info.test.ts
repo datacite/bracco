@@ -113,37 +113,56 @@ describe('ACCEPTANCE: CLIENT_ADMIN | INFO', () => {
     cy.visit('/repositories/datacite.test/edit');
     cy.url().should('include', '/repositories/datacite.test/edit').then(() => {
 
+      cy.wait(waitTime);
       cy.get('h2.work').contains('DataCite Test Repository');
       cy.get('a#account_menu_link').should('contain', 'DATACITE.TEST');
 
-      cy.get('form').within(($form) => {
-        cy.get('#repository-id').should('be.visible');
-        cy.get('#client-type').should('be.visible');
-        cy.get('#re3data').should('be.visible');
-        cy.get('#name').should('be.visible');
-        cy.get('#name-field').should('be.visible');
-        cy.get('#alternate-name').should('be.visible');
-        cy.get('#system-email').should('be.visible');
-        cy.get('#service-contact-given-name').should('be.visible');
-        cy.get('#service-contact-family-name').should('be.visible');
-        cy.get('#service-contact-email').should('be.visible');
-        cy.get('#description').should('be.visible');
-        cy.get('#url').should('be.visible');
-        cy.get('#language').should('be.visible');
-        cy.get('#software').should('be.visible');
-        cy.get('#domains').should('be.visible');
-        cy.get('#repository-type').should('be.visible');
-        cy.get('#certificate').should('be.visible');
-        cy.get('.alert.opt-in').contains(/The contacts entered may receive notifications/i)
-          .within(() => {
-            cy.get('a[href*="privacy.html"]').should('be.visible');
-          }
-        );
-        cy.get('button#update-repository').should('be.visible');
-        cy.get('button').contains(/Cancel/i).should('be.visible');
+      cy.get('#repository-id').should('be.visible');
+      cy.get('#client-type').should('be.visible');
+      cy.get('#client-type .ember-power-select-selected-item').should('contain', 'Repository');
 
-        cy.get('button').contains(/Cancel/i).click({force:true});
-      })
+      cy.get('div#client-type div[role="button"]').click({ waitForAnimations: true }).then(($dropdown) => {
+        // IGSN ID Catalog option should not exist for existing Periodical and Repository client_types
+        cy.get('ul.ember-power-select-options li').contains('IGSN ID Catalog').should('not.exist');
+
+        // Set client_type to Periodical
+        cy.get('ul.ember-power-select-options li').contains('Periodical').click({ waitForAnimations: true }).then(() => {
+          // Periodical client_type divs should be visible and Repository client_type divs shoudl not exist
+          cy.get('#repository-issn').should('be.visible');
+          cy.get('#repository-type').should('not.exist');
+          cy.get('#certificate').should('not.exist');
+        })
+      });
+
+      // Set client_type back to Repository
+      cy.get('div#client-type div[role="button"]').click({ waitForAnimations: true, force: true }).then(($dropdown) => {
+        cy.get('ul.ember-power-select-options li').contains('Repository').click({ waitForAnimations: true })
+      });
+
+      cy.get('#re3data').should('be.visible');
+      cy.get('#name').should('be.visible');
+      cy.get('#name-field').should('be.visible');
+      cy.get('#alternate-name').should('be.visible');
+      cy.get('#system-email').should('be.visible');
+      cy.get('#service-contact-given-name').should('be.visible');
+      cy.get('#service-contact-family-name').should('be.visible');
+      cy.get('#service-contact-email').should('be.visible');
+      cy.get('#description').should('be.visible');
+      cy.get('#url').should('be.visible');
+      cy.get('#language').should('be.visible');
+      cy.get('#software').should('be.visible');
+      cy.get('#domains').should('be.visible');
+      cy.get('#repository-type').should('be.visible');
+      cy.get('#certificate').should('be.visible');
+      cy.get('.alert.opt-in').contains(/The contacts entered may receive notifications/i)
+        .within(() => {
+          cy.get('a[href*="privacy.html"]').should('be.visible');
+        }
+      );
+      cy.get('button#update-repository').should('be.visible');
+      cy.get('button').contains(/Cancel/i).should('be.visible');
+
+      cy.get('button').contains(/Cancel/i).click({force:true});
     });
 
     cy.on("url:changed", (newUrl) => {
