@@ -4,6 +4,7 @@ import { isBlank } from '@ember/utils';
 import { capitalize } from '@ember/string';
 import langs from 'langs';
 import { A } from '@ember/array';
+import { computed } from '@ember/object';
 import { clientTypeList, softwareList } from 'bracco/models/repository'
 
 export default Controller.extend({
@@ -14,6 +15,9 @@ export default Controller.extend({
   softwares: softwareList,
   clientTypeList,
   clientTypes: clientTypeList,
+  clientType: computed('model.repository.clientType', function(){    
+    return this.get('clientTypeList').find(item => item.value === this.get('model.repository.clientType'));
+  }),
 
   init(...args) {
     this._super(...args);
@@ -90,14 +94,14 @@ export default Controller.extend({
       }
     },
     searchClientType(query) {
-      let clientTypes = clientTypeList.filter(function (clientType) {
-        return clientType.startsWith(query.toLowerCase());
+      let clientTypes = this.clientTypeList.filter(function (clientType) {
+        return clientType.label.toLowerCase().startsWith(query.toLowerCase());
       });
       this.set('clientTypes', clientTypes);
     },
     selectClientType(clientType) {
-      this.model.repository.set('clientType', clientType);
-      this.set('clientTypes', clientTypeList);
+      this.model.repository.set('clientType', clientType.value);
+      this.set('clientTypes', this.clientTypeList);
     },
     searchSoftware(query) {
       let softwares = softwareList.filter(function (software) {
