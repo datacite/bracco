@@ -25,7 +25,7 @@ export default Route.extend({
       'consortium-id': consortiumId
     });
 
-    let ret = hash({
+    return hash({
       provider: this.modelFor('providers/show'),
       contacts: this.store
         .query('contact', params)
@@ -36,12 +36,6 @@ export default Route.extend({
           console.debug(reason);
           return null;
         })
-    });
-
-    return ret.then( function(ret) {
-      // Workaround - going back to settings tab, contacts disappear.
-      ret.provider.contacts = ret.contacts;
-      return ret;
     });
   },
 
