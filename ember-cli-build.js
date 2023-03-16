@@ -25,6 +25,9 @@ module.exports = function (defaults) {
       importBootstrapFont: false,
       bootstrapVersion: 3
     },
+    'ember-cli-terser': {
+      enabled: true
+    },
     'ember-prism': {
       theme: 'default',
       plugins: ['line-highlight']
