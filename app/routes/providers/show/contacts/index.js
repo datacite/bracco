@@ -12,9 +12,9 @@ export default Route.extend({
     let consortiumId = null;
     let model = this.modelFor('providers/show');
     if (model.memberType === 'consortium') {
-      consortiumId = model.get('id');
+      consortiumId = model.get('id').toLowerCase();
     } else {
-      providerId = model.get('id');
+      providerId = model.get('id').toLowerCase();
     }
     params = assign(params, {
       page: {
@@ -43,6 +43,7 @@ export default Route.extend({
       ret.provider.contacts = ret.contacts;
       return ret;
     });
+
   },
 
   queryParams: {
