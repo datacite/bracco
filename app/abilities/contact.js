@@ -1,6 +1,7 @@
 import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { Ability } from 'ember-can';
+import isAbleTo from '../utils/is-able-to';
 
 export default Ability.extend({
   currentUser: service(),
@@ -16,12 +17,7 @@ export default Ability.extend({
           case 'staff_admin':
             return true;
           case 'consortium_admin':
-            return (
-              ((this.get('model.provider.memberType') === 'consortium_organization') &&
-               (this.get('currentUser.provider_id') === this.get('model.provider.consortium.id'))) ||
-              ((this.get('model.provider.memberType') === 'consortium') &&
-               (this.get('currentUser.provider_id') === this.get('model.provider.id')))
-            );
+            return (isAbleTo(this));
           case 'provider_admin':
             return (
               this.get('currentUser.provider_id') ===
@@ -41,12 +37,7 @@ export default Ability.extend({
         case 'staff_admin':
           return true;
         case 'consortium_admin':
-          return (
-            ((this.get('model.provider.memberType') === 'consortium_organization') &&
-             (this.get('currentUser.provider_id') === this.get('model.provider.consortium.id'))) ||
-            ((this.get('model.provider.memberType') === 'consortium') &&
-             (this.get('currentUser.provider_id') === this.get('model.provider.id')))
-          );
+          return (isAbleTo(this));
         case 'provider_admin':
           return (
             this.get('currentUser.provider_id') ===
@@ -65,12 +56,7 @@ export default Ability.extend({
         case 'staff_admin':
           return true;
         case 'consortium_admin':
-          return (
-            ((this.get('model.provider.memberType') === 'consortium_organization') &&
-             (this.get('currentUser.provider_id') === this.get('model.provider.consortium.id'))) ||
-            ((this.get('model.provider.memberType') === 'consortium') &&
-             (this.get('currentUser.provider_id') === this.get('model.provider.id')))
-          );
+          return (isAbleTo(this));
         case 'provider_admin':
           return (
             this.get('currentUser.provider_id') ===
@@ -90,12 +76,7 @@ export default Ability.extend({
         case 'staff_admin':
           return true;
         case 'consortium_admin':
-          return (
-            ((this.get('model.provider.memberType') === 'consortium_organization') &&
-             (this.get('currentUser.provider_id') === this.get('model.provider.consortium.id'))) ||
-            ((this.get('model.provider.memberType') === 'consortium') &&
-             (this.get('currentUser.provider_id') === this.get('model.provider.id')))
-          );
+          return (isAbleTo(this));
         case 'provider_admin':
           return (
             this.get('currentUser.provider_id') ===
