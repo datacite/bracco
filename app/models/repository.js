@@ -21,19 +21,28 @@ export const clientTypeList = [
 ]
 
 export const softwareList = [
+  'Cayuse',
   'CKAN',
-  'DSpace',
   'Dataverse',
+  'dLibra',
+  'DSpace',
   'EPrints',
+  'Ex Libris Esploro',
   'Fedora',
+  'Figshare',
   'Invenio',
   'Islandora',
   'MyCoRe',
   'Nesstar',
+  'Omega-PSIR',
+  'Omeka S',
   'OPUS',
   'Open Journal Systems (OJS)',
   'Pubman',
+  'Pure',
+  'Redivis',
   'Samvera',
+  'Ubiquity',
   'Other'
 ];
 
