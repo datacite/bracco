@@ -159,6 +159,13 @@ export default Controller.extend({
         })
         .catch(function (reason) {
           console.debug(reason);
+          let msg = (reason?.errors[0]?.title ? reason.errors[0].title : ( reason?.title? reason.title : 'Cause is unknown.  Please contact support.' ));
+
+          self
+          .get('flashMessages')
+          .danger(
+            'An error occurred and while saving this repository.' + '  ' + msg
+          );
         });
     },
     cancel() {
