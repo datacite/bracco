@@ -1870,11 +1870,14 @@ const MAPPING = {
 export default {
   data: MAPPING,
   findByIds: function(ids) {
-    var subjects = this.data.dfgFields.filter( (subject) => {
+    let subjects = this.data.dfgFields.filter( (subject) => {
       return ids.includes(subject.dfgId);
     });
+    let unique_subjects = [
+      ...new Map(subjects.map((subject) => [subject["fosId"], subject])).values()
+    ];
 
-    return subjects.map( (subject) => {
+    return unique_subjects.map( (subject) => {
         return {
           subject: subject.fosLabel,
           subjectScheme: OECD_SCHEME,
