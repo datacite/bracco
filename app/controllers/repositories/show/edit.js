@@ -59,9 +59,6 @@ export default Controller.extend({
               A(repo.get('additionalNames')).get('firstObject').text
             );
             self.model.set('url', repo.get('repositoryUrl'));
-            if (repo.get('subjects').length > 0) {
-              self.model.set('subjects', repo.get('fosSubjects'));
-            }
             if (repo.get('software').length > 0) {
               let software = repo.get('software')[0].name;
               if (software === 'DataVerse') {
@@ -84,6 +81,9 @@ export default Controller.extend({
                 'repositoryType',
                 A(repo.get('types')).mapBy('text')
               );
+            }
+            if (repo.get('subjects').length > 0  && self.model.get('isDisciplinary')) {
+                self.model.set('subjects', repo.get('fosSubjects'));
             }
             if (repo.get('certificates').length > 0) {
               self.model.set(
