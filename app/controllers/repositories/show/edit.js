@@ -20,7 +20,7 @@ export default Controller.extend({
   softwares: softwareList,
   clientTypeList,
   clientTypes: clientTypeList,
-  clientType: computed('model.clientType', function() {    
+  clientType: computed('model.clientType', function() {
     return this.get('clientTypeList').find(item => item.value === this.get('model.clientType'));
   }),
 
@@ -72,7 +72,7 @@ export default Controller.extend({
               self.model.set('software', capitalize(software));
             }
             if (repo.get('repositoryLanguages').length > 0) {
-              self.get('repository').set(
+              self.model.set(
                 'language',
                 A(repo.get('repositoryLanguages')).map(function (l) {
                   return langs.where('2', l.text)['1'];
