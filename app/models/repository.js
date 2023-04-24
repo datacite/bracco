@@ -195,4 +195,13 @@ export default Model.extend(Validations, {
   get isDisciplinary() {
     return this.repositoryType.includes("disciplinary");
   },
+
+  clearSubjects() {
+    this.subjects = [];
+  },
+  certifyDisciplinaryRepository() {
+    if (!this.get('isDisciplinary')) {
+      this.clearSubjects();
+    }
+  }
 });
