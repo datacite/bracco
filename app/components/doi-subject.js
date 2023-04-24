@@ -1,77 +1,23 @@
 import Component from '@ember/component';
-import URI from 'urijs';
 import { isBlank } from '@ember/utils';
+import fosMapping from '../utils/fos-mappings';
 
-const completeSubjectList = [
-  'Natural sciences',
-  'Mathematics',
-  'Computer and information sciences',
-  'Physical sciences',
-  'Chemical sciences',
-  'Earth and related environmental sciences',
-  'Biological sciences',
-  'Other natural sciences',
-  'Engineering and technology',
-  'Civil engineering',
-  'Electrical engineering, electronic engineering, information engineering',
-  'Mechanical engineering',
-  'Chemical engineering',
-  'Materials engineering',
-  'Medical engineering',
-  'Environmental engineering',
-  'Environmental biotechnology',
-  'Industrial biotechnology',
-  'Nano-technology',
-  'Other engineering and technologies',
-  'Medical and health sciences',
-  'Basic medicine',
-  'Clinical medicine',
-  'Health sciences',
-  'Medical biotechnology',
-  'Other medical sciences',
-  'Agricultural sciences',
-  'Agriculture, forestry, and fisheries',
-  'Animal and dairy science',
-  'Veterinary science',
-  'Agricultural biotechnology',
-  'Other agricultural sciences',
-  'Social sciences',
-  'Psychology',
-  'Economics and business',
-  'Educational sciences',
-  'Sociology',
-  'Law',
-  'Political science',
-  'Social and economic geography',
-  'Media and communications',
-  'Other social sciences',
-  'Humanities',
-  'History and archaeology',
-  'Languages and literature',
-  'Philosophy, ethics and religion',
-  'Arts (arts, history of arts, performing arts, music)',
-  'Other humanities'
-];
-
-const oecdScheme = 'Fields of Science and Technology (FOS)';
-const oecdSchemeUri = 'http://www.oecd.org/science/inno/38235147.pdf';
+const completeSubjectList = fosMapping.allLabels();
 
 export default Component.extend({
+  attributeBindings: ['simple'],
   completeSubjectList,
   subjects: completeSubjectList,
   oecdSelected: false,
 
   init(...args) {
     this._super(...args);
-
     this.selected = this.selected || [];
   },
 
   setSchemeUri(value) {
-    let uri = URI(value);
     this.fragment.set('subjectSchemeUri', value);
-    this.fragment.set('valueUri', value);
-    this.fragment.set('schemeUri', uri.origin().concat(uri.directory()));
+    this.fragment.set('schemeUri', value);
     this.set('schemeUri', value);
   },
   setScheme(value) {
@@ -96,6 +42,12 @@ export default Component.extend({
       this.set('oecdSelected', false);
     }
   },
+  subjectText(value){
+    if (this.simple) {
+      return value;
+    }
+    return "FOS: " + value;
+  },
 
   actions: {
     createOnEnter(select, e) {
@@ -114,16 +66,19 @@ export default Component.extend({
       }
     },
     updateSubject(value) {
-      if (completeSubjectList.includes(value)) {
-        this.fragment.set('subject', 'FOS: ' + value);
-        this.setScheme(oecdScheme);
-        this.setSchemeUri(oecdSchemeUri);
+      var fos = fosMapping.findSubjectByLabel(value);
+      if (fos) {
+        this.fragment.set('subject', this.subjectText(fos.subject));
+        this.setScheme(fos.subjectScheme);
+        this.setSchemeUri(fos.schemeUri);
+        this.setClassificationCode(fos.classificationCode);
         this.set('oecdSelected', true);
       } else {
         this.fragment.set('subject', value);
         this.setScheme(null);
         this.set('schemeUri', null);
         this.fragment.set('subjectSchemeUri', null);
+        this.setClassificationCode(null);
         this.set('oecdSelected', false);
       }
     },

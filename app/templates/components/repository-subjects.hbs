@@ -1,0 +1,13 @@
+<div class="form-group">
+  <label class="control-label col-md-3" data-test-subjects>Repository Discipline (optional)</label>
+  <div class="col-md-9">
+    <div class="label-vertical">Subject, keyword, classification code, or key phrase describing the resource.</div>
+    {{#each model.subjects as |subject index|}}
+      <DoiSubject @model={{model}} @fragment={{subject}} @form={{form}} @index={{index}} @simple={{true}} />
+    {{/each}}
+
+    {{#if (lte model.subjects.length 6)}}
+      <BsButton @class="btn-sm" @id="add-subject" @outline={{true}} @onClick={{action "addSubject"}}><i class="fas fa-plus"></i> Add {{if (gt model.subjects.length 0) "another "}} Discipline</BsButton>
+    {{/if}}
+  </div>
+</div>
