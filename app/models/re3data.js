@@ -1,6 +1,7 @@
 import Model, { attr } from '@ember-data/model';
 import { union, reads } from '@ember/object/computed';
 import { validator, buildValidations } from 'ember-cp-validations';
+import dfgMapping from '../utils/dfg-mappings';
 
 const Validations = buildValidations({
   name: validator('presence', true),
@@ -32,5 +33,28 @@ export default Model.extend(Validations, {
   name: reads('repositoryName'),
 
   // combine subject areas and keywords
-  tags: union('subjects', 'keywords')
+  tags: union('subjects', 'keywords'),
+
+  get reformattedSubjects() {
+    return this.subjects.map( (sub) => {
+      var [code, ...rest] = sub.text.split(" ");
+      return {
+        classificationCode: code,
+        subject: rest.join(" "),
+        scheme: sub.scheme
+      };
+    });
+  },
+  get fosSubjects() {
+    var subjects = this.subjects.filter( (sub) => {
+      return sub.scheme == "DFG";
+    });
+
+    var ids = subjects.map( (sub) => {
+      var [code] = sub.text.split(" ",1);
+      return code;
+    });
+
+    return dfgMapping.findByIds(ids);
+  }
 });
