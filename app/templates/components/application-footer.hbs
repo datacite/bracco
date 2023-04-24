@@ -19,19 +19,19 @@
       <a href='mailto:support@datacite.org' class="share">
         <i class="fas fa-envelope"></i>
       </a>
-      <a href='https://blog.datacite.org' class="share">
+      <a href={{get (links) 'BLOG'}} class="share">
         <i class="fas fa-blog"></i>
       </a>
-      <a href='https://twitter.com/datacite' class="share">
+      <a href={{get (links) 'TWITTER'}} class="share">
         <i class="fab fa-twitter"></i>
       </a>
-      <a href='https://github.com/datacite/datacite' class="share">
+      <a href={{get (links) 'GITHUB'}} class="share">
         <i class="fab fa-github"></i>
       </a>
-      <a href='https://www.youtube.com/channel/UCVsSDZhIN_WbnD_v5o9eB_A' class="share">
+      <a href={{get (links) 'YOUTUBE'}} class="share">
         <i class="fab fa-youtube"></i>
       </a>
-      <a href='https://www.linkedin.com/company/datacite' class="share">
+      <a href={{get (links) 'LINKEDIN'}} class="share">
         <i class="fab fa-linkedin"></i>
       </a>
       <ListLinks @links={{data.contact_links}} @class="share" />

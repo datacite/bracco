@@ -1,6 +1,6 @@
 /*
  Overrides to shared css/scss/sass styles pulled from:
-    https://datacite.org/stylesheets/doi.css?version=3.9.43
+    {{ENV.CDN_URL}}/stylesheets/doi.css?version=3.9.43
 */
 
 /* create-doi-button - lot of styling to make it more consistent with app styling */

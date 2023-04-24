@@ -7,125 +7,125 @@ const data = {
   about_links: [
     {
       name: 'What we do',
-      url: ENV.CDN_URL + '/value.html',
+      url: ENV.LINKS.WHAT_WE_DO,
     },
     {
       name: 'Governance',
-      url: ENV.CDN_URL + '/governance.html',
+      url: ENV.LINKS.GOVERNANCE,
     },
     {
       name: 'Members',
-      url: ENV.CDN_URL + '/members.html',
+      url: ENV.LINKS.MEMBERS,
     },
     {
       name: 'Steering groups',
-      url: ENV.CDN_URL + '/steering.html',
+      url: ENV.LINKS.STEERING,
     },
     {
       name: 'Staff',
-      url: ENV.CDN_URL + '/staff.html',
+      url: ENV.LINKS.STAFF,
     },
     {
       name: 'Job opportunities',
-      url: ENV.CDN_URL + '/jobopportunities.html',
+      url: ENV.LINKS.JOB_OPPORTUNITIES,
     },
   ],
   services_links: [
     {
       name: 'Assign DOIs',
-      url: ENV.CDN_URL + '/dois.html',
+      url: ENV.LINKS.ASSIGN_DOIS,
     },
     {
       name: 'Metadata search',
-      url: ENV.CDN_URL + '/search.html',
+      url: ENV.LINKS.METADATA_SEARCH,
     },
     {
       name: 'Event data',
-      url: ENV.CDN_URL + '/eventdata.html',
+      url: ENV.LINKS.EVENT_DATA,
     },
     {
       name: 'Profiles',
-      url: ENV.CDN_URL + '/profiles.html',
+      url: ENV.LINKS.PROFILES,
     },
     {
       name: 're3data',
-      url: ENV.CDN_URL + '/re3data.html',
+      url: ENV.LINKS.RE3DATA,
     },
     {
       name: 'Citation formatter',
-      url: ENV.CDN_URL + '/citation.html',
+      url: ENV.LINKS.CITATION_FORMATTER,
     },
     {
       name: 'Statistics',
-      url: ENV.CDN_URL + '/stats.html',
+      url: ENV.LINKS.STATISTICS,
     },
     {
       name: 'Service status',
-      url: ENV.CDN_URL + '/service.html',
+      url: ENV.LINKS.SERVICE_STATUS,
     },
     {
       name: 'Content negotiation',
-      url: ENV.CDN_URL + '/content.html',
+      url: ENV.LINKS.CONTENT_NEGOTIATION,
     },
     {
       name: 'OAI-PMH',
-      url: ENV.CDN_URL + '/oaipmh.html',
+      url: ENV.LINKS.OAI_PMH,
     },
     {
       name: 'Test environment',
-      url: ENV.CDN_URL + '/test.html',
+      url: ENV.LINKS.TEST_ENVIRONMENT,
     },
   ],
   resources_links: [
     {
       name: 'Metadata schema',
-      url: 'https://schema.datacite.org',
+      url: ENV.LINKS.METADATA_SCHEMA,
     },
     {
       name: 'Support',
-      url: 'https://support.datacite.org',
+      url: ENV.LINKS.SUPPORT,
     },
     {
       name: 'Fee Model',
-      url: ENV.CDN_URL + '/feemodel.html',
+      url: ENV.LINKS.FEE_MODEL,
     },
   ],
   community_links: [
     {
       name: 'Members',
-      url: ENV.CDN_URL + '/members.html',
+      url: ENV.LINKS.MEMBERS,
     },
     {
       name: 'Partners',
-      url: ENV.CDN_URL + '/partners.html',
+      url: ENV.LINKS.PARTNERS,
     },
     {
       name: 'Steering groups',
-      url: ENV.CDN_URL + '/steering.html',
+      url: ENV.LINKS.STEERING,
     },
     {
       name: 'Service providers',
-      url: ENV.CDN_URL + '/service-providers.html',
+      url: ENV.LINKS.SERVICE_PROVIDERS,
     },
     {
       name: 'Roadmap',
-      url: ENV.CDN_URL + '/roadmap.html',
+      url: ENV.LINKS.ROADMAP,
     },
   ],
   contact_links: [
     {
       name: 'Imprint',
-      url: ENV.CDN_URL + '/imprint.html',
+      url: ENV.LINKS.IMPRINT,
     },
     {
       name: 'Terms and conditions',
-      url: ENV.CDN_URL + '/terms.html',
+      url: ENV.LINKS.TERMS_AND_CONDITIONS,
     },
     {
       name: 'Privacy policy',
-      url: ENV.CDN_URL + '/privacy.html',
+      url: ENV.LINKS.PRIVACY_POLICY,
     },
-  ]
+  ],
 };
 
 export default Component.extend({

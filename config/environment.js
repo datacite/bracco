@@ -77,13 +77,52 @@ module.exports = function (environment) {
     API_URL: process.env.API_URL || 'https://api.stage.datacite.org',
     FABRICA_URL: process.env.FABRICA_URL || 'https://doi.stage.datacite.org',
     ROR_API_URL: process.env.ROR_API_URL || 'https://api.ror.org',
-    CROSSREF_API_URL:
-      process.env.CROSSREF_API_URL || 'https://api.crossref.org',
+    CROSSREF_API_URL: process.env.CROSSREF_API_URL || 'https://api.crossref.org',
     ORCID_API_URL: process.env.ORCID_API_URL || 'https://pub.orcid.org',
-    EVENTDATA_URL:
-      process.env.EVENTDATA_URL || 'https://api.stage.datacite.org',
-    CDN_URL: process.env.CDN_URL || 'https://www.stage.datacite.org',
-
+    EVENTDATA_URL: process.env.EVENTDATA_URL || 'https://api.stage.datacite.org',
+    CDN_URL: process.env.CDN_URL || 'https://assets.stage.datacite.org',
+    HOME_URL: process.env.HOME_URL || 'https://www.stage.datacite.org',
+    // informational links - mostly to the home page, collected here for easier maintenance.
+    LINKS: {
+      ASSIGN_DOIS: 'https://datacite.org/dois.html',
+      BLOG: 'https://blog.datacite.org',
+      CITATION_FORMATTER: 'https://datacite.org/citation.html',
+      CONTENT_NEGOTIATION: 'https://datacite.org/content.html',
+      CREATE_A_FABRICA_ACCOUNT: 'https://support.datacite.org/docs/create-a-fabrica-account',
+      EVENT_DATA: 'https://datacite.org/eventddata.html',
+      FEE_MODEL: 'https://datacite.org/feemodel.html',
+      GITHUB: 'https://github.com/datacite/datacite',
+      GOVERNANCE: 'https://datacite.org/governance.html',
+      IMPRINT: 'https://datacite.org/imprint.html',
+      JOB_OPPORTUNITIES: 'https://datacite.org/jobopportunities.html',
+      LINKEDIN: 'https://www.linkedin.com/company/datacite',
+      MEMBERS: 'https://datacite.org/members.html',
+      METADATA_SCHEMA: 'https://schema.datacite.org',
+      METADATA_SEARCH: 'https://datacite.org/search.html',
+      OAI_PMH: 'https://datacite.org/oaipmh.html',
+      PARTNERS: 'https://datacite.org/partners.html',
+      PRIVACY_POLICY: 'https://datacite.org/privacy.html',
+      PROFILES: 'https://datacite.org/profiles.html',
+      RE3DATA: 'https://datacite.org/re3data.html',
+      ROADMAP: 'https://datacite.org/roadmap.html',
+      SERVICE_PROVIDERS: 'https://datacite.org/service-providers.html',
+      SERVICE_STATUS: 'https://datacite.org/service.html',
+      STAFF: 'https://datacite.org/staff.html',
+      STATUS: 'https://status.datacite.org',
+      STATISTICS: 'https://datacite.org/stats.html',
+      STEERING: 'https://datacite.org/steering.html',
+      SUPPORT: 'https://support.datacite.org',
+      TERMS_AND_CONDITIONS: 'https://datacite.org/terms.html',
+      TEST_ENVIRONMENT: 'https://datacite.org/test.html',
+      TWITTER: 'https://twitter.com/datacite',
+      WHAT_WE_DO: 'https://datacite.org/value.html',
+      YOUTUBE: 'https://www.youtube.com/channel/UCVsSDZhIN_WbnD_v5o9eB_A',
+      API_DOC: 'https://api.datacite.org',
+      MDS_DOC: 'https://mds.datacite.org',
+      OAI_DOC: 'https://oai.datacite.org',
+      GRAPHQL_TOOL: 'https://api.datacite.org/graphql',
+      FABRICA_DOC: 'https://support.datacite.org/docs/doi-fabrica',
+    },
     JWT_PUBLIC_KEY:
       process.env.JWT_PUBLIC_KEY ||
       '-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA22lpr1ntJQYKa+aCRjre\nPKTze/00S0SCdsWKhvk3honfjdebuxc54YdvfqKQk/1jLOPJj++vqIGwytKRI9uC\n1BmMRLrOluACiOgTc5DpzMm68lZss5D5g7tzjxB7NlFiKiYav1BtVDfvVxwuNqkY\njyNupf1Gjqp2/8wbsZ6SGIkzgovgjcHI5S8HZ7DE7rcrStISNJqTvpuMUXp++eie\nPkTgcrdZScKjO6VYu9epuhoyD2mbZdjAUbxYyjQ3vgftseLo4hXFEXpfIQzwxOLS\njmg1S/qxOzZHOMrp31pS1ricMtd4frvXztHPfh5XuyiOEozR0An9OIIwzKQsn+0q\np5QKfN+lHJflYGZ1TD8QruinWf8a5uWYd3q9c1V8RYgwgmfoxgHX5TmMbcQsBTuB\nyIy3io3rBiRnJEAgSu4PxNuQqVqqsaJ4cCmQrATLViZmXhZcbHJyWl3GJnZMpv8P\nor6m239QGZdoy5ijoOdVLQowtnsr+SWWrcYKF4J66223xjGBse7o3Q+gJUkyQKtB\nLifDld9XMTpgvEsZtZKEQ9S5gAWkiAzcjSMV0J4XMOzvHAalyNTucLc6ljG8HnjO\n34SrkvkkTlUwNsJOygRNJQujfQaStvb3MTagSqPteGhy9qSitSJPrDmN/W79stIe\nSvqHoJznDJsFfKUcypEG4l0CAwEAAQ==\n-----END PUBLIC KEY-----\n',
@@ -123,7 +162,8 @@ module.exports = function (environment) {
     ENV.CROSSREF_API_URL = 'https://api.crossref.org';
     ENV.EVENTDATA_URL = 'https://api.datacite.org';
     ENV.SEARCH_URL = 'https://search.datacite.org';
-    ENV.CDN_URL = 'https://datacite.org';
+    ENV.CDN_URL = 'https://assets.datacite.org';
+    ENV.HOME_URL = 'https://datacite.org';
     ENV.COOKIE_DOMAIN = '.datacite.org';
   }
 

@@ -14,7 +14,7 @@
     rel="stylesheet" crossorigin="anonymous" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/themes/prism.min.css" rel="stylesheet" type='text/css'>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/cc-icons/1.2.1/css/cc-icons.min.css" rel="stylesheet">
-  <link href="{{content-for 'cdn-url'}}" rel='stylesheet' type='text/css'>
+  <link href="{{content-for 'cdn-url'}}/stylesheets/doi.css" rel='stylesheet' type='text/css'>
   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <link integrity="" rel="stylesheet" type="text/css" href="{{rootURL}}assets/bracco.css">
@@ -49,7 +49,7 @@
     (function(){window.onUsersnapCXLoad=function(e){e.init()};var e=document.createElement("script");e.defer=1,e.src="https://widget.usersnap.com/global/load/b4393e90-ec13-4338-b299-7b6f122b7de3?onload=onUsersnapCXLoad",document.getElementsByTagName("head")[0].appendChild(e)})();
   </script>
   <div id="consent"></div>
-  <script src="https://datacite.org/javascripts/consent.js"></script>
+  <script src='{{content-for "cdn-url"}}/javascripts/consent.js'></script>
 
   {{content-for "body-footer"}}
 </body>
