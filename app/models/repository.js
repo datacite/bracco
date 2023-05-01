@@ -1,7 +1,7 @@
 import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
 import { computed } from '@ember/object';
 import ENV from 'bracco/config/environment';
-import { array, fragment, fragmentArray } from 'ember-data-model-fragments/attributes';
+import { array, fragment } from 'ember-data-model-fragments/attributes';
 import { validator, buildValidations } from 'ember-cp-validations';
 import isEmpty from 'bracco/utils/is-empty';
 
@@ -21,19 +21,28 @@ export const clientTypeList = [
 ]
 
 export const softwareList = [
+  'Cayuse',
   'CKAN',
-  'DSpace',
   'Dataverse',
+  'dLibra',
+  'DSpace',
   'EPrints',
+  'Ex Libris Esploro',
   'Fedora',
+  'Figshare',
   'Invenio',
   'Islandora',
   'MyCoRe',
   'Nesstar',
-  'OPUS',
+  'Omega-PSIR',
+  'Omeka S',
   'Open Journal Systems (OJS)',
+  'OPUS',
   'Pubman',
+  'Pure',
+  'Redivis',
   'Samvera',
+  'Ubiquity',
   'Other'
 ];
 
@@ -169,7 +178,6 @@ export default Model.extend(Validations, {
   keepPassword: attr('boolean', { defaultValue: true }),
   created: attr('date'),
   updated: attr('date'),
-  subjects: fragmentArray('subject', { defaultValue: [] }),
   targetId: attr(),
   mode: attr('string'),
 
@@ -178,7 +186,6 @@ export default Model.extend(Validations, {
       return item.trim();
     });
   }),
-
   badgeUrl: computed('re3data', function () {
     if (this.re3data) {
       return (
@@ -190,18 +197,5 @@ export default Model.extend(Validations, {
     } else {
       return null;
     }
-  }),
-
-  get isDisciplinary() {
-    return this.repositoryType.includes("disciplinary");
-  },
-
-  clearSubjects() {
-    this.subjects = [];
-  },
-  certifyDisciplinaryRepository() {
-    if (!this.get('isDisciplinary')) {
-      this.clearSubjects();
-    }
-  }
+  })
 });
