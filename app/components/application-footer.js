@@ -32,49 +32,21 @@ const data = {
   ],
   services_links: [
     {
-      name: 'Assign DOIs',
-      url: ENV.CDN_URL + '/dois.html',
+      name: 'Create DOIs with Fabrica',
+      url: 'https://doi.datacite.org',
     },
     {
-      name: 'Metadata search',
-      url: ENV.CDN_URL + '/search.html',
+      name: 'Discover metadata with Commons',
+      url: 'https://commons.datacite.org',
     },
     {
-      name: 'Event data',
-      url: ENV.CDN_URL + '/eventdata.html',
+      name: 'Integrate with APIs',
+      url: 'https://datacite.org/integratorapis.html',
     },
     {
-      name: 'Profiles',
-      url: ENV.CDN_URL + '/profiles.html',
-    },
-    {
-      name: 're3data',
-      url: ENV.CDN_URL + '/re3data.html',
-    },
-    {
-      name: 'Citation formatter',
-      url: ENV.CDN_URL + '/citation.html',
-    },
-    {
-      name: 'Statistics',
-      url: ENV.CDN_URL + '/stats.html',
-    },
-    {
-      name: 'Service status',
-      url: ENV.CDN_URL + '/service.html',
-    },
-    {
-      name: 'Content negotiation',
-      url: ENV.CDN_URL + '/content.html',
-    },
-    {
-      name: 'OAI-PMH',
-      url: ENV.CDN_URL + '/oaipmh.html',
-    },
-    {
-      name: 'Test environment',
-      url: ENV.CDN_URL + '/test.html',
-    },
+      name: 'Partner Services',
+      url: 'https://datacite.org/partnerservices.html',
+    }
   ],
   resources_links: [
     {
