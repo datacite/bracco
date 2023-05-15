@@ -87,7 +87,7 @@ const data = {
   contact_links: [
     {
       name: 'Imprint',
-      url: ENV.LINKS.IMPRINT,
+      url: ENV.LINKS.IMPRINT_URL,
     },
     {
       name: 'Terms and conditions',

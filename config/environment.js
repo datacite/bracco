@@ -90,6 +90,7 @@ module.exports = function (environment) {
       FEE_MODEL_URL: 'https://datacite.org/feemodel.html',
       GITHUB_URL: 'https://github.com/datacite/datacite',
       GOVERNANCE_URL: 'https://datacite.org/governance.html',
+      IMPRINT_URL: 'https://www.stage.datacite.org/imprint.html',
       INTEGRATOR_URL: 'https://datacite.org/integratorapis.html',
       JOB_OPPORTUNITIES_URL: 'https://datacite.org/jobopportunities.html',
       LINKEDIN_URL: 'https://www.linkedin.com/company/datacite',
