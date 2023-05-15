@@ -38,7 +38,7 @@ module.exports = function (defaults) {
       },
       'cdn-url': {
         content:
-          (process.env.CDN_URL || 'https://assets.stage.datacite.org')
+          (process.env.CDN_URL || 'https://assets.datacite.org')
       }
     },
     'ember-power-select': {
