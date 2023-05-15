@@ -32,49 +32,21 @@ const data = {
   ],
   services_links: [
     {
-      name: 'Assign DOIs',
-      url: ENV.LINKS.ASSIGN_DOIS,
+      name: 'Create DOIs with Fabrica',
+      url: ENV.FABRICA_URL,
     },
     {
-      name: 'Metadata search',
-      url: ENV.LINKS.METADATA_SEARCH,
+      name: 'Discover metadata with Commons',
+      url: ENV.LINKS.COMMONS_URL,
     },
     {
-      name: 'Event data',
-      url: ENV.LINKS.EVENT_DATA,
+      name: 'Integrate with APIs',
+      url: ENV.LINKS.INTEGRATOR_URL,
     },
     {
-      name: 'Profiles',
-      url: ENV.LINKS.PROFILES,
-    },
-    {
-      name: 're3data',
-      url: ENV.LINKS.RE3DATA,
-    },
-    {
-      name: 'Citation formatter',
-      url: ENV.LINKS.CITATION_FORMATTER,
-    },
-    {
-      name: 'Statistics',
-      url: ENV.LINKS.STATISTICS,
-    },
-    {
-      name: 'Service status',
-      url: ENV.LINKS.SERVICE_STATUS,
-    },
-    {
-      name: 'Content negotiation',
-      url: ENV.LINKS.CONTENT_NEGOTIATION,
-    },
-    {
-      name: 'OAI-PMH',
-      url: ENV.LINKS.OAI_PMH,
-    },
-    {
-      name: 'Test environment',
-      url: ENV.LINKS.TEST_ENVIRONMENT,
-    },
+      name: 'Partner Services',
+      url: ENV.LINKS.PARTNER_SERVICES_URL,
+    }
   ],
   resources_links: [
     {

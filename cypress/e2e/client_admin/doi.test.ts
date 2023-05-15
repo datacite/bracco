@@ -215,23 +215,22 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
       // Set related identifier.
       cy.get('#add-related-identifier').click({ force: true }).then(($subform) => {
         cy.get('[data-test-related-identifier]').should('be.visible').type('10.0330/skv0002', { force: true }).then(() => {
-
           cy.get('[data-test-related-identifier-type] .ember-power-select-selected-item').contains('DOI');
+        });
+        cy.get('[data-test-related-identifier]').should('be.visible').type('{selectAll}https://doi.org/10.1080/00393630.2018.1504449', { force: true }).then(() => {
+          cy.get('[data-test-related-identifier-type] .ember-power-select-selected-item').contains('DOI');
+        });
+        // Causes the aria dropdown to be populated and displayed so that selection can be made.
+        cy.get('[data-test-related-relation-type] div[role="button"]').click({ force: true }).then(() => {
+          // Makes the selection from the dropdown. (Type it.)
+          cy.get('input.ember-power-select-search-input').type('References{enter}', { force: true }).then(() => {
 
-          // Causes the aria dropdown to be populated and displayed so that selection can be made.
-          cy.get('[data-test-related-relation-type] div[role="button"]').click({ force: true }).then(() => {
-            // Makes the selection from the dropdown. (Type it.)
-            cy.get('input.ember-power-select-search-input').type('References{enter}', { force: true }).then(() => {
-
-              // Causes the aria dropdown to be populated and displayed so that selection can be made.
-              cy.get('[data-test-related-resource-type] div[role="button"]').click({ force: true }).then(() => {
-                // Makes the selection from the dropdown. (Type or click on it.  Since choices change as you type, that is the better method.)
-                cy.get('input.ember-power-select-search-input').first().type('Text{enter}', { force: true }).then(() => {
-
-                  cy.get('#toggle-related-identifiers').should('be.visible').click({ force: true }).then(($toggle) => {
-                    cy.get('#toggle-related-identifiers').contains('Show 1 related identifier');
-                  });
-
+            // Causes the aria dropdown to be populated and displayed so that selection can be made.
+            cy.get('[data-test-related-resource-type] div[role="button"]').click({ force: true }).then(() => {
+              // Makes the selection from the dropdown. (Type or click on it.  Since choices change as you type, that is the better method.)
+              cy.get('input.ember-power-select-search-input').first().type('Text{enter}', { force: true }).then(() => {
+                cy.get('#toggle-related-identifiers').should('be.visible').click({ force: true }).then(($toggle) => {
+                  cy.get('#toggle-related-identifiers').contains('Show 1 related identifier');
                 });
               });
             });
@@ -278,7 +277,10 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
           // Check that the type is set
           cy.get('[data-test-related-item-identifier-type]').contains('DOI')
         })
-
+        cy.get('[data-test-related-item-identifier]').should('be.visible').type('{selectAll}https://doi.org/10.1080/00393630.2018.1504449').then(() => {
+          // Check that the type is set
+          cy.get('[data-test-related-item-identifier-type]').contains('DOI')
+        })
         // Check the toggle
         cy.get('#toggle-related-items').should('be.visible').click({ force: true }).then(($toggle) => {
           cy.get('#toggle-related-items').contains('Show 1 related item');

@@ -20,7 +20,7 @@ export default Fragment.extend(Validations, {
   valueUri: attr('string', { defaultValue: "" }),
   classificationCode: attr('string', { defaultValue: null }),
 
-  subjectSchemeUri: computed('valueUri', function () {
-    return this.valueUri || '';
+  subjectSchemeUri: computed('schemeUri', function () {
+    return this.schemeUri || '';
   })
 });
