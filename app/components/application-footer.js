@@ -7,97 +7,97 @@ const data = {
   about_links: [
     {
       name: 'What we do',
-      url: ENV.CDN_URL + '/value.html',
+      url: ENV.LINKS.WHAT_WE_DO_URL,
     },
     {
       name: 'Governance',
-      url: ENV.CDN_URL + '/governance.html',
+      url: ENV.LINKS.GOVERNANCE_URL,
     },
     {
       name: 'Members',
-      url: ENV.CDN_URL + '/members.html',
+      url: ENV.LINKS.MEMBERS_URL,
     },
     {
       name: 'Steering groups',
-      url: ENV.CDN_URL + '/steering.html',
+      url: ENV.LINKS.STEERING_URL,
     },
     {
       name: 'Staff',
-      url: ENV.CDN_URL + '/staff.html',
+      url: ENV.LINKS.STAFF,
     },
     {
       name: 'Job opportunities',
-      url: ENV.CDN_URL + '/jobopportunities.html',
+      url: ENV.LINKS.JOB_OPPORTUNITIES_URL,
     },
   ],
   services_links: [
     {
       name: 'Create DOIs with Fabrica',
-      url: 'https://doi.datacite.org',
+      url: ENV.FABRICA_URL,
     },
     {
       name: 'Discover metadata with Commons',
-      url: 'https://commons.datacite.org',
+      url: ENV.LINKS.COMMONS_URL,
     },
     {
       name: 'Integrate with APIs',
-      url: 'https://datacite.org/integratorapis.html',
+      url: ENV.LINKS.INTEGRATOR_URL,
     },
     {
       name: 'Partner Services',
-      url: 'https://datacite.org/partnerservices.html',
+      url: ENV.LINKS.PARTNER_SERVICES_URL,
     }
   ],
   resources_links: [
     {
       name: 'Metadata schema',
-      url: 'https://schema.datacite.org',
+      url: ENV.LINKS.METADATA_SCHEMA_URL,
     },
     {
       name: 'Support',
-      url: 'https://support.datacite.org',
+      url: ENV.LINKS.SUPPORT_URL,
     },
     {
       name: 'Fee Model',
-      url: ENV.CDN_URL + '/feemodel.html',
+      url: ENV.LINKS.FEE_MODEL_URL,
     },
   ],
   community_links: [
     {
       name: 'Members',
-      url: ENV.CDN_URL + '/members.html',
+      url: ENV.LINKS.MEMBERS_URL,
     },
     {
       name: 'Partners',
-      url: ENV.CDN_URL + '/partners.html',
+      url: ENV.LINKS.PARTNERS_URL,
     },
     {
       name: 'Steering groups',
-      url: ENV.CDN_URL + '/steering.html',
+      url: ENV.LINKS.STEERING_URL,
     },
     {
       name: 'Service providers',
-      url: ENV.CDN_URL + '/service-providers.html',
+      url: ENV.LINKS.SERVICE_PROVIDERS_URL,
     },
     {
       name: 'Roadmap',
-      url: ENV.CDN_URL + '/roadmap.html',
+      url: ENV.LINKS.ROADMAP_URL,
     },
   ],
   contact_links: [
     {
       name: 'Imprint',
-      url: ENV.CDN_URL + '/imprint.html',
+      url: ENV.LINKS.IMPRINT_URL,
     },
     {
       name: 'Terms and conditions',
-      url: ENV.CDN_URL + '/terms.html',
+      url: ENV.LINKS.TERMS_AND_CONDITIONS_URL,
     },
     {
       name: 'Privacy policy',
-      url: ENV.CDN_URL + '/privacy.html',
+      url: ENV.LINKS.PRIVACY_POLICY_URL,
     },
-  ]
+  ],
 };
 
 export default Component.extend({

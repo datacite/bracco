@@ -77,13 +77,44 @@ module.exports = function (environment) {
     API_URL: process.env.API_URL || 'https://api.stage.datacite.org',
     FABRICA_URL: process.env.FABRICA_URL || 'https://doi.stage.datacite.org',
     ROR_API_URL: process.env.ROR_API_URL || 'https://api.ror.org',
-    CROSSREF_API_URL:
-      process.env.CROSSREF_API_URL || 'https://api.crossref.org',
+    CROSSREF_API_URL: process.env.CROSSREF_API_URL || 'https://api.crossref.org',
     ORCID_API_URL: process.env.ORCID_API_URL || 'https://pub.orcid.org',
-    EVENTDATA_URL:
-      process.env.EVENTDATA_URL || 'https://api.stage.datacite.org',
-    CDN_URL: process.env.CDN_URL || 'https://www.stage.datacite.org',
-
+    EVENTDATA_URL: process.env.EVENTDATA_URL || 'https://api.stage.datacite.org',
+    CDN_URL: process.env.CDN_URL || 'https://assets.stage.datacite.org',
+    HOME_URL: process.env.HOME_URL || 'https://www.stage.datacite.org',
+    // informational links - mostly to the home page, collected here for easier maintenance.
+    LINKS: {
+      BLOG_URL: 'https://blog.datacite.org',
+      COMMONS_URL: 'https://commons.datacite.org',
+      CREATE_A_FABRICA_ACCOUNT_URL: 'https://support.datacite.org/docs/create-a-fabrica-account',
+      FEE_MODEL_URL: 'https://datacite.org/feemodel.html',
+      GITHUB_URL: 'https://github.com/datacite/datacite',
+      GOVERNANCE_URL: 'https://datacite.org/governance.html',
+      IMPRINT_URL: 'https://www.stage.datacite.org/imprint.html',
+      INTEGRATOR_URL: 'https://datacite.org/integratorapis.html',
+      JOB_OPPORTUNITIES_URL: 'https://datacite.org/jobopportunities.html',
+      LINKEDIN_URL: 'https://www.linkedin.com/company/datacite',
+      MEMBERS_URL: 'https://datacite.org/members.html',
+      METADATA_SCHEMA_URL: 'https://schema.datacite.org',
+      PARTNERS_URL: 'https://datacite.org/partners.html',
+      PARTNER_SERVICES_URL: 'https://datacite.org/partnerservices.html',
+      PRIVACY_POLICY_URL: 'https://datacite.org/privacy.html',
+      ROADMAP_URL: 'https://datacite.org/roadmap.html',
+      SERVICE_PROVIDERS_URL: 'https://datacite.org/service-providers.html',
+      STAFF: 'https://datacite.org/staff.html',
+      STATUS_URL: 'https://status.datacite.org',
+      STEERING_URL: 'https://datacite.org/steering.html',
+      SUPPORT_URL: 'https://support.datacite.org',
+      TERMS_AND_CONDITIONS_URL: 'https://datacite.org/terms.html',
+      TWITTER_URL: 'https://twitter.com/datacite',
+      WHAT_WE_DO_URL: 'https://datacite.org/value.html',
+      YOUTUBE_URL: 'https://www.youtube.com/channel/UCVsSDZhIN_WbnD_v5o9eB_A',
+      API_DOC_URL: 'https://api.datacite.org',
+      MDS_DOC_URL: 'https://mds.datacite.org',
+      OAI_DOC_URL: 'https://oai.datacite.org',
+      GRAPHQL_TOOL_URL: 'https://api.datacite.org/graphql',
+      FABRICA_DOC_URL: 'https://support.datacite.org/docs/doi-fabrica',
+    },
     JWT_PUBLIC_KEY:
       process.env.JWT_PUBLIC_KEY ||
       '-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA22lpr1ntJQYKa+aCRjre\nPKTze/00S0SCdsWKhvk3honfjdebuxc54YdvfqKQk/1jLOPJj++vqIGwytKRI9uC\n1BmMRLrOluACiOgTc5DpzMm68lZss5D5g7tzjxB7NlFiKiYav1BtVDfvVxwuNqkY\njyNupf1Gjqp2/8wbsZ6SGIkzgovgjcHI5S8HZ7DE7rcrStISNJqTvpuMUXp++eie\nPkTgcrdZScKjO6VYu9epuhoyD2mbZdjAUbxYyjQ3vgftseLo4hXFEXpfIQzwxOLS\njmg1S/qxOzZHOMrp31pS1ricMtd4frvXztHPfh5XuyiOEozR0An9OIIwzKQsn+0q\np5QKfN+lHJflYGZ1TD8QruinWf8a5uWYd3q9c1V8RYgwgmfoxgHX5TmMbcQsBTuB\nyIy3io3rBiRnJEAgSu4PxNuQqVqqsaJ4cCmQrATLViZmXhZcbHJyWl3GJnZMpv8P\nor6m239QGZdoy5ijoOdVLQowtnsr+SWWrcYKF4J66223xjGBse7o3Q+gJUkyQKtB\nLifDld9XMTpgvEsZtZKEQ9S5gAWkiAzcjSMV0J4XMOzvHAalyNTucLc6ljG8HnjO\n34SrkvkkTlUwNsJOygRNJQujfQaStvb3MTagSqPteGhy9qSitSJPrDmN/W79stIe\nSvqHoJznDJsFfKUcypEG4l0CAwEAAQ==\n-----END PUBLIC KEY-----\n',
@@ -123,7 +154,8 @@ module.exports = function (environment) {
     ENV.CROSSREF_API_URL = 'https://api.crossref.org';
     ENV.EVENTDATA_URL = 'https://api.datacite.org';
     ENV.SEARCH_URL = 'https://search.datacite.org';
-    ENV.CDN_URL = 'https://datacite.org';
+    ENV.CDN_URL = 'https://assets.datacite.org';
+    ENV.HOME_URL = 'https://datacite.org';
     ENV.COOKIE_DOMAIN = '.datacite.org';
   }
 
