@@ -1,3 +1,4 @@
+import { reads } from '@ember/object/computed';
 import { attr } from '@ember-data/model';
 import Fragment from 'ember-data-model-fragments/fragment';
 import { fragmentArray, fragment } from 'ember-data-model-fragments/attributes';
@@ -104,5 +105,5 @@ export default Fragment.extend(Validations, {
       return null;
     }
   }),
-  relatedItemContributors: computed.reads('contributors')
+  relatedItemContributors: reads('contributors')
 });

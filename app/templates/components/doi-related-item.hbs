@@ -19,20 +19,9 @@
   <label for="relatedItemType" class="required-label subtitle">Related Item Type</label> 
 </div> 
 <div class="power-select-fragment" data-test-related-item-type>
-  {{#form.element
-    controlType="power-select"
-    value=fragment.relatedItemType
-    helpText="The type of the Related Item."
-    options=relatedItemTypeList
-    allowClear=true
-    destination=fragment.relatedItemType as |el|
-  }}
-    {{el.control
-      onChange=(action "selectRelatedItemType")
-      allowClear=true
-      placeholder="Select related item Type"
-    }}
-  {{/form.element}}
+  <form.element @controlType="power-select" @value={{fragment.relatedItemType}} @helpText="The type of the Related Item." @options={{relatedItemTypeList}} @allowClear={{true}} @destination={{fragment.relatedItemType}} as |el|>
+    <el.control @onChange={{action "selectRelatedItemType"}} @allowClear={{true}} @placeholder="Select related item Type" />
+  </form.element>
 </div>
 
 <div class="power-select-label">

@@ -1,7 +1,12 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 import countryList from 'iso-3166-country-list';
-import { organizationTypeList, memberTypeList, focusAreaList, nonProfitStatusList } from 'bracco/models/provider';
+import {
+  organizationTypeList,
+  memberTypeList,
+  focusAreaList,
+  nonProfitStatusList
+} from 'bracco/models/provider';
 
 export default Controller.extend({
   store: service(),

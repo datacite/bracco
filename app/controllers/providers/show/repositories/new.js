@@ -16,7 +16,7 @@ export default Controller.extend({
   clientTypeList,
   clientTypes: clientTypeList,
   clientType: computed('model.repository.clientType', function(){    
-    return this.get('clientTypeList').find(item => item.value === this.get('model.repository.clientType'));
+    return this.clientTypeList.find(item => item.value === this.get('model.repository.clientType'));
   }),
 
   init(...args) {

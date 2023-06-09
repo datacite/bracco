@@ -11,8 +11,8 @@ export default Component.extend({
   didRender() {
     this._super(...arguments);
 
-    window.MathJax.typesetClear([this.get('element')]);
+    window.MathJax.typesetClear([this.element]);
     this.element.innerHTML = this.text
-    window.MathJax.typeset([this.get('element')]);
+    window.MathJax.typeset([this.element]);
   }
 });
