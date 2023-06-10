@@ -74,14 +74,12 @@
     "@cypress/browserify-preprocessor": "^3.0.2",
     "@cypress/code-coverage": "^3.10.0",
     "@ember/optional-features": "^2.0.0",
-    "@ember/test-helpers": "^2.4.0",
     "@glimmer/component": "^1.1.2",
     "@glimmer/tracking": "^1.1.2",
     "@pollyjs/ember": "^5.2.0",
     "@thoughtbot/eslint-config": "^0.1.0",
     "@types/ember": "^3.1.1",
     "@types/ember-data": "^3.1.9",
-    "@types/ember-qunit": "^5.0.2",
     "@types/qunit": "^2.19.3",
     "@types/rsvp": "^4.0.4",
     "async-promise-queue": "^1.0.5",
@@ -153,7 +151,6 @@
     "ember-page-title": "^6.0.3",
     "ember-power-select": "^5.0.4",
     "ember-prism": "^0.10.0",
-    "ember-qunit": "^5.1.1",
     "ember-resolver": "^8.0.2",
     "ember-simple-auth": "^3.1.0",
     "ember-source": "~3.24.0",
@@ -185,7 +182,11 @@
     "urijs": "^1.19.11",
     "vkbeautify": "^0.99.3",
     "webpack": "^4.0.0",
-    "xml2js": "^0.4.23"
+    "xml2js": "^0.4.23",
+    "@ember/string": "3.1.1",
+    "@types/ember__string": "3.0.10",
+    "@ember/test-helpers": "^2.4.0",
+    "@types/ember__owner": "^4.0.3"
   },
   "engines": {
     "node": "18.*"
