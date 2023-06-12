@@ -1,8 +1,8 @@
-<div class="panel panel-transparent">
+  <div class="panel panel-transparent">
   <div class="panel-body">
     <div class="col-md-9 col-md-offset-3"><h3 class="edit">Assign Prefix</h3></div>
 
-    <BsForm @formLayout="horizontal" @horizontalLabelGridClass="col-md-3" @model=<model.provider-prefix /> @onSubmit={{action "submit"}} as |form|>
+    <BsForm @formLayout="horizontal" @horizontalLabelGridClass="col-md-3" @model=<model.provider-prefix @onSubmit={{action "submit"}} as |form|>
       <form.element @controlType="power-select" @id="prefix-add" @label="Prefix" @property="prefix" @options={{prefixes}} as |el|>
         <el.control @onChange={{action "selectPrefix"}} @selected={{prefix}} @search={{action "searchPrefix"}} @optionLabelPath="id" @searchField="id" @searchPlaceholder="Select from list or type to search..." @searchEnabled={{true}} as |item|>
           {{if item.id item.id item}}
