@@ -16,6 +16,10 @@ window.deprecationWorkflow.config = {
     { handler: 'silence', matchId: 'ember.globals-resolver' },
     { handler: 'silence', matchId: 'ember-simple-auth.mixins.unauthenticated-route-mixin' },
     { handler: 'silence', matchId: 'ember-simple-auth.mixins.application-route-mixin' },
-    { handler: 'silence', matchId: 'ember-simple-auth.mixins.data-adapter-mixin' }
+    { handler: 'silence', matchId: 'ember-simple-auth.mixins.data-adapter-mixin' },
+    { handler: 'silence', matchId: 'ember-modifier.use-destroyables' },
+    { handler: 'silence', matchId: 'ember-modifier.use-modify' },
+    { handler: 'silence', matchId: 'ember-modifier.no-args-property' },
+    { handler: 'silence', matchId: 'ember-modifier.no-element-property' }
   ],
 };
