@@ -190,7 +190,7 @@
     "@types/ember__owner": "^4.0.3"
   },
   "engines": {
-    "node": "18.*"
+    "node": "^18"
   },
   "ember": {
     "edition": "classic"
