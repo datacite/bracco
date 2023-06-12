@@ -12,7 +12,7 @@
       {{else}}
         <LinkTo @route={{link}}>{{format-number count}}</LinkTo>
       {{/if}}
-      {{#if (not cumulative)}}<span class="small">in <CurrentYear /></span>{{/if}}
+      {{#if (not cumulative)}}<span class="small">in {{current-year}}</span>{{/if}}
     </h2>
     <div class="graphs" id={{chartId}}></div>
   </div>
