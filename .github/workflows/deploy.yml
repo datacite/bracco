@@ -29,8 +29,10 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
 
       - name: Build
+        env:
+          NODE_OPTIONS: "--openssl-legacy-provider"
         run: |
-          NODE_OPTIONS=--openssl-legacy-provider yarn --frozen-lockfile --prefer-offline
+          yarn --frozen-lockfile --prefer-offline
           ./node_modules/.bin/ember build --output-path="test_build" --environment=development
 
       - name: Upload Test Build artifact
