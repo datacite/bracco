@@ -7,8 +7,8 @@
       </div>
 
       <BsForm @formLayout="horizontal" @horizontalLabelGridClass="col-md-3" @model={{model}} @onSubmit={{action "submit"}} @submitOnEnter={{true}} as |form|>
-        <form.element @controlType="password" @id="password-input" @property="passwordInput" @label="New Password" @required={{false}} />
-        <form.element @controlType="password" @id="confirm-password-input" @property="confirmPasswordInput" @label="Confirm Password" @required={{false}} />
+        <form.element @controlType="password" @id="password-input" @property="passwordInput" @label="New Password" />
+        <form.element @controlType="password" @id="confirm-password-input" @property="confirmPasswordInput" @label="Confirm Password" />
 
         <div class="col-md-9 col-md-offset-3">
           <button type="submit" class="btn btn-sm btn-fill">Set Password</button>

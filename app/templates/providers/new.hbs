@@ -45,10 +45,9 @@
           </form.element>
           <form.element
             @controlType="text"
-            @id="name"
+            @id="name"   
             @label="Member Name"
             @property="name"
-            @required={{false}}
             @helpText="The official name of your organization."
           />
           <form.element
@@ -56,7 +55,6 @@
             @id="display-name"
             @label="Member Display Name"
             @property="displayName"
-            @required={{false}}
             @helpText="Name of your organization as you would like it to appear in Fabrica and on DataCite’s website."
           />
           {{#if (eq model.memberType 'consortium_organization')}}
@@ -67,7 +65,7 @@
                 @label="Estimated DOIs"
                 @placeholder = "0"
                 @property="doiEstimate"
-                @required={{true}}
+                required
                 @helpText={{html-safe (concat "Enter the number of DOIs expected to be registered annually. This amount will be pro-rated for the remaining months of the year. If the consortium fee cap applies enter zero (0). See more details in our <a href='" (get (links) "FEE_MODEL_URL" ) "' target='_blank'>fee model</a>.")}}
               />
             {{/if}}
@@ -78,7 +76,6 @@
               @id="salesforce-id"
               @label="Salesforce ID"
               @property="salesforceId"
-              @required={{false}}
               @helpText="The 18 digit ID in Salesforce."
             />
           {{/if}}
@@ -88,7 +85,6 @@
               @id="globus-uuid"
               @label="Globus UUID (optional)"
               @property="globusUuid"
-              @required={{false}}
               @helpText="The Globus UUID used for token authentication."
             />
           {{/if}}
@@ -155,7 +151,6 @@
             @label="System Email"
             @property="systemEmail"
             @helpText="This is the email used for sending password reset requests and similar system notifications."
-            @required={{false}}
           />
           <form.element
             @controlType="text"
@@ -163,7 +158,6 @@
             @label="Group Email (optional)"
             @property="groupEmail"
             @helpText="A generic shared email address (such as info@datacite.org or similar) where you would like to receive communications from DataCite."
-            @required={{false}}
           />
           <form.element
             @controlType="text"
@@ -171,7 +165,6 @@
             @label="Website (optional)"
             @property="website"
             @helpText="Website of the member."
-            @required={{false}}
           />
           <form.element
             @controlType="text"
@@ -180,7 +173,6 @@
             @property="twitterHandle"
             @placeholder="Add @twitter account"
             @helpText="DataCite will follow you on twitter."
-            @required={{false}}
           />
           <form.element
             @controlType="power-select"
@@ -244,10 +236,10 @@
             @controlType="textarea"
             @id="description"
             @label="Description (optional)"
-            @property="description"
+            @property="description"app/templates/providers/new.hbs
             @rows="10"
             @helpText="Description of the member. Please use markdown for formatting."
-            @required={{false}}
+
           />
           {{#if (not-eq model.memberType 'consortium_organization')}}
             <label class="control-label col-md-3">
@@ -292,7 +284,6 @@
               @label="Billing Department"
               @property="billingInformation.department"
               @helpText="Your organization's specific department that is responsible for payment"
-              @required={{false}}
             />
             <form.element
               @controlType="text"
@@ -300,7 +291,6 @@
               @label="Billing Organization"
               @property="billingInformation.organization"
               @helpText="Your organization's name for billing purposes if different from the official name"
-              @required={{false}}
             />
             <form.element
               @controlType="text"
@@ -308,7 +298,6 @@
               @label="Billing Street"
               @property="billingInformation.address"
               @helpText="Your organization's street for billing purposes"
-              @required={{false}}
             />
             <form.element
               @controlType="text"
@@ -316,7 +305,6 @@
               @label="Billing City"
               @property="billingInformation.city"
               @helpText="Your organization's city for billing purposes"
-              @required={{false}}
             />
             <form.element
               @controlType="text"
@@ -324,7 +312,6 @@
               @label="Billing Zip/Post Code"
               @property="billingInformation.postCode"
               @helpText="Your organization's Zip/post code for billing purposes"
-              @required={{false}}
             />
             <form.element
               @controlType="power-select"
@@ -376,7 +363,6 @@
             @id="is-active"
             @label="Account is active"
             @property="isActive"
-            @required={{false}}
             @helpText="This account can manage repositories and prefixes"
           />
           <div class="col-md-9 col-md-offset-3">

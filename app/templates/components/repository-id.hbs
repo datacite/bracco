@@ -2,7 +2,7 @@
   Click the circle icon for a new random ID, or the cross icon to delete the random ID and enter a value manually.
 </div>
 
-<@form.element @controlType="text" @id="repository-id" @label="Repository ID" @property="symbol" @helpText="The Repository ID is the unique identifier for each repository in DataCite and can't be changed. The Repository ID must start with the Member ID, followed by a dot. It can then contain only upper case letters, numbers, and at most one hyphen." @required={{false}} as |el|>
+<@form.element @controlType="text" @id="repository-id" @label="Repository ID" @property="symbol" @helpText="The Repository ID is the unique identifier for each repository in DataCite and can't be changed. The Repository ID must start with the Member ID, followed by a dot. It can then contain only upper case letters, numbers, and at most one hyphen." as |el|>
   
   <div class="input-group-no-float">
     {{el.control}}

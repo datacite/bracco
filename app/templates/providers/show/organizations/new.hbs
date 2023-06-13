@@ -21,7 +21,6 @@
       <form.element
         @controlType="hidden"
         @property="consortium"
-        @required={{false}}
       />
       <ProviderId @model={{model.organization}} @form={{form}} />
       <form.element
@@ -36,7 +35,6 @@
         @id="name"
         @label="Organization Name"
         @property="name"
-        @required={{false}}
         @helpText="The official name of your organization."
       />
       <form.element
@@ -44,7 +42,6 @@
         @id="display-name"
         @label="Organization Display Name"
         @property="displayName"
-        @required={{false}}
         @helpText="Name of your organization as you would like it to appear in Fabrica and on DataCite’s website."
       />
       {{#if features.enableDoiEstimate}}
@@ -54,7 +51,7 @@
           @label="Estimated DOIs"
           @placeholder = "0"
           @property="doiEstimate"
-          @required={{true}}
+          required
           @helpText={{html-safe (concat "Enter the number of DOIs expected to be registered annually. This amount will be pro-rated for the remaining months of the year. If the consortium fee cap applies enter zero (0). See more details in our <a href='" (get (links) "FEE_MODEL_URL" ) "' target='_blank'>fee model</a>.")}}
         />
       {{/if}}
@@ -84,7 +81,6 @@
           @id="salesforce-id"
           @label="Salesforce ID"
           @property="salesforceId"
-          @required={{false}}
           @helpText="The 18 digit ID in Salesforce."
         />
       {{/if}}
@@ -94,7 +90,6 @@
           @id="globus-uuid"
           @label="Globus UUID (optional)"
           @property="globusUuid"
-          @required={{false}}
           @helpText="The Globus UUID used for token authentication."
         />
       {{/if}}
@@ -123,7 +118,6 @@
         @label="System Email"
         @property="systemEmail"
         @helpText="This is the email used for sending password reset requests and similar system notifications."
-        @required={{false}}
       />
       <form.element
         @controlType="text"
@@ -131,7 +125,6 @@
         @label="Group Email (optional)"
         @property="groupEmail"
         @helpText="A generic shared email address (such as info@datacite.org or similar) where you would like to receive communications from DataCite."
-        @required={{false}}
       />
       <form.element
         @controlType="text"
@@ -139,7 +132,6 @@
         @label="Website"
         @property="website (optional)"
         @helpText="Website of the organization."
-        @required={{false}}
       />
       <form.element
         @controlType="text"
@@ -148,7 +140,6 @@
         @property="twitterHandle"
         @placeholder="Add @twitter account"
         @helpText="DataCite will follow you on twitter."
-        @required={{false}}
       />
       <form.element
         @controlType="power-select"
@@ -215,14 +206,12 @@
         @property="description"
         @rows="10"
         @helpText="Description of the organization. Please use markdown for formatting."
-        @required={{false}}
       />
       <form.element
         @controlType="checkbox"
         @id="is-active"
         @label="Account is active"
         @property="isActive"
-        @required={{false}}
         @helpText="This account can manage repositories and prefixes"
       />
       <h3 class="member-results">
