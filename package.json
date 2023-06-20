@@ -183,7 +183,7 @@
     "xml2js": "^0.4.23"
   },
   "engines": {
-    "node": "^14 || ^16 || ^18"
+    "node": "^18"
   },
   "ember": {
     "edition": "classic"

@@ -117,7 +117,7 @@ jobs:
           path: test_build/
 
       - name: Cypress Testing
-        uses: cypress-io/github-action@v5.0.5
+        uses: cypress-io/github-action@v5
         with:
           config-file: cypress.config.ts
           install: false
