@@ -52,17 +52,18 @@ export default Component.extend({
       if (typeof response === 'string') {
         self.set('citationOutput', response);
       } else {
-        if (!self.isDestroyed) {
-          let reader = new FileReader();
-          reader.readAsText(response).then(
-            (r) => {
-              self.set('citationOutput', r);
-            },
-            (err) => {
-              console.error(err);
-            }
-          );
+        if (self.isDestroying || self.isDestroyed) {
+          return;
         }
+        let reader = new FileReader();
+        reader.readAsText(response).then(
+          (r) => {
+            self.set('citationOutput', r);
+          },
+          (err) => {
+            console.error(err);
+          }
+        );
       }
     });
     // this.get('router').transitionTo({ queryParams: { citation: citation } });

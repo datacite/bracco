@@ -34,9 +34,10 @@ export default Component.extend({
 
     let self = this;
     promise.then(function(value) {
-      if (!self.isDestroyed) {
-        self.set('json', value);
+      if (self.isDestroying || self.isDestroyed) {
+        return;
       }
+      self.set('json', value);
     }, function(reason) {
       console.debug(reason);
     });
