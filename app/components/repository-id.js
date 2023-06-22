@@ -15,6 +15,9 @@ export default Component.extend({
     fetch(url).then(function(response) {
       if (response.ok) {
         response.json().then(function(data) {
+          if (self.isDestroying || self.isDestroyed) {
+            return;
+          }
           self.model.set('symbol', self.provider.get('id').toUpperCase() + '.' + data.symbol);
         });
       } else {
