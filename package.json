@@ -1,6 +1,6 @@
 {
   "name": "bracco",
-  "version": "4.0.8",
+  "version": "4.2.0",
   "private": true,
   "description": "Fabrica",
   "repository": {
@@ -14,14 +14,14 @@
     "test": "tests"
   },
   "scripts": {
-    "build": "ember build --environment=production",
+    "build": "NODE_OPTIONS=--openssl-legacy-provider ember build --environment=production",
     "lint": "./node_modules/.bin/eslint . --ext .js",
     "lint:hbs": "./node_modules/.bin/ember-template-lint .",
     "format:hbs": "prettier --config .prettierrc.json **/*.hbs --write",
     "format": "prettier --config .prettierrc.json '**/*.js|ts' --write",
-    "start": "./node_modules/.bin/ember serve",
-    "test": "./node_modules/.bin/ember test",
-    "ci": "NODE_ENV=test ember serve & wait-on http://localhost:4200 && yarn cy:run --record --quiet",
+    "start": "NODE_OPTIONS=--openssl-legacy-provider ./node_modules/.bin/ember serve",
+    "test": "NODE_OPTIONS=--openssl-legacy-provider ./node_modules/.bin/ember test",
+    "ci": "NODE_ENV=test NODE_OPTIONS=--openssl-legacy-provider ember serve & wait-on http://localhost:4200 && yarn cy:run --record --quiet",
     "cy:open": "./node_modules/.bin/cypress open",
     "cy:run": "./node_modules/.bin/cypress run"
   },
@@ -183,7 +183,7 @@
     "xml2js": "^0.4.23"
   },
   "engines": {
-    "node": "14.*"
+    "node": "^18"
   },
   "ember": {
     "edition": "classic"
@@ -226,6 +226,7 @@
     "**/wait-on/axios": "^0.21.2",
     "**/@babel/core/json5": "2.2.2",
     "**/loader-utils/json5": "1.0.2",
-    "**/papaparse": "^5.2.0"
+    "**/papaparse": "^5.2.0",
+    "**/dynamic-link/ember-cli-babel/broccoli-babel-transpiler/workerpool": "2.3.4"
   }
 }

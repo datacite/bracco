@@ -52,6 +52,9 @@ export default Component.extend({
       if (typeof response === 'string') {
         self.set('citationOutput', response);
       } else {
+        if (self.isDestroying || self.isDestroyed) {
+          return;
+        }
         let reader = new FileReader();
         reader.readAsText(response).then(
           (r) => {
