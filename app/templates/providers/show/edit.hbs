@@ -32,7 +32,7 @@
       />
       <form.element
         @controlType="power-select"
-        @id="ror-id"
+        id="ror-id"
         @label="Organization identifier (optional)"
         @property="rorId"
         @optionLabelPath="rorId"
@@ -45,7 +45,8 @@
           @search={{action 'searchRor'}}
           @placeholder="Select Organization"
           @searchPlaceholder="Type to search..."
-          @allowClear={{true}} as |item|
+          @allowClear={{true}}
+          @searchEnabled={{true}} as |item|
         >
           {{if item.name item.name model.rorId}}
         </el.control>
@@ -71,10 +72,9 @@
       {{#if (can 'create provider')}}
         <form.element
           @controlType="power-select"
-          @id="member-type"
+          id="member-type"
           @label="Member Type"
           @property="memberType"
-          @disabled={{eq model.memberType 'developer'}}
           @options={{memberTypes}}
           @destination={{memberType}} as |el|
         >
@@ -82,14 +82,16 @@
             @onChange={{action 'selectMemberType'}}
             @search={{action 'searchMemberType'}}
             @placeholder="Select Member Type"
-            @searchPlaceholder="Type to search..." as |item|
+            @searchPlaceholder="Type to search..."
+            @searchEnabled={{true}}
+            @disabled={{eq model.memberType 'developer'}} as |item|
           >
             {{titleize (humanize item)}}
           </el.control>
         </form.element>
         <form.element
           @controlType="power-select"
-          @id="tax-status"
+          id="tax-status"
           @label="Tax Status"
           @property="nonProfitStatus"
           @options={{nonProfitStatuses}}
@@ -99,7 +101,8 @@
             @onChange={{action 'selectNonProfitStatus'}}
             @search={{action 'searchNonProfitStatus'}}
             @placeholder="Tax Status"
-            @searchPlaceholder="Type to search..." as |item|
+            @searchPlaceholder="Type to search..."
+            @searchEnabled={{true}} as |item|
           >
             {{titleize item}}
           </el.control>
@@ -118,7 +121,8 @@
               @onChange={{action 'selectConsortium'}}
               @search={{action 'searchConsortium'}}
               @searchField="name"
-              @searchPlaceholder="Type to search..." as |item|
+              @searchPlaceholder="Type to search..."
+              @searchEnabled={{true}} as |item|
             >
               {{item.name}}
             </el.control>
@@ -193,7 +197,7 @@
       />
       <form.element
         @controlType="power-select"
-        @id="country"
+        id="country"
         @label="Country (optional)"
         @property="country"
         @optionLabelPath="name"
@@ -207,14 +211,15 @@
           @searchField="name"
           @placeholder="Select Country"
           @searchPlaceholder="Type to search..."
-          @allowClear={{true}} as |item|
+          @allowClear={{true}}
+          @searchEnabled={{true}} as |item|
         >
           {{item.name}}
         </el.control>
       </form.element>
       <form.element
         @controlType="power-select"
-        @id="organization-type"
+        id="organization-type"
         @label="Organization Type (optional)"
         @property="organizationType"
         @options={{organizationTypes}}
@@ -225,14 +230,15 @@
           @search={{action 'searchOrganizationType'}}
           @placeholder="Select Organization Type"
           @searchPlaceholder="Type to search..."
-          @allowClear={{true}} as |item|
+          @allowClear={{true}}
+          @searchEnabled={{true}} as |item|
         >
           {{titleize (humanize (underscore item))}}
         </el.control>
       </form.element>
       <form.element
         @controlType="power-select"
-        @id="focus-area"
+        id="focus-area"
         @label="Focus Area (optional)"
         @property="focusArea"
         @options={{focusAreas}}
@@ -244,7 +250,8 @@
           @search={{action 'searchFocusArea'}}
           @placeholder="Select Focus Area"
           @searchPlaceholder="Type to search..."
-          @allowClear={{true}} as |item|
+          @allowClear={{true}}
+          @searchEnabled={{true}} as |item|
         >
           {{titleize (humanize (underscore item))}}
         </el.control>
@@ -311,7 +318,7 @@
             </BsAlert>
           </div>
           {{#if (not-eq model.memberType 'consortium_organization')}}
-            <form.element @controlType="power-select" @id="voting-contact" @label="Voting Representative" @property="votingContact" @optionLabelPath="name" @options={{model.filteredContacts}} @helpText="Your organization's voting representative." @destination={{votingContact}} as |el|>
+            <form.element @controlType="power-select" id="voting-contact" @label="Voting Representative" @property="votingContact" @optionLabelPath="name" @options={{model.filteredContacts}} @helpText="Your organization's voting representative." @destination={{votingContact}} as |el|>
               <el.control
                 @searchEnabled={{false}}
                 @search={{action 'searchContact'}}
@@ -324,7 +331,7 @@
               </el.control>
             </form.element>
           {{/if}}
-          <form.element @controlType="power-select" @id="service-contact" @label="Service Contact" @property="serviceContact" @optionLabelPath="displayName" @options={{model.filteredContacts}} @helpText="Your organization's service contact." @destination={{serviceContact}} as |el|>
+          <form.element @controlType="power-select" id="service-contact" @label="Service Contact" @property="serviceContact" @optionLabelPath="displayName" @options={{model.filteredContacts}} @helpText="Your organization's service contact." @destination={{serviceContact}} as |el|>
             <el.control
               @searchEnabled={{false}}
               @search={{action 'searchContact'}}
@@ -336,7 +343,7 @@
               {{item.displayName}}
             </el.control>
           </form.element>
-          <form.element @controlType="power-select" @id="secondary-service-contact" @label="Secondary Service Contact" @property="secondaryServiceContact" @optionLabelPath="name" @options={{model.filteredContacts}} @helpText="Your organization's secondary service contact." @destination={{secondaryServiceContact}} as |el|>
+          <form.element @controlType="power-select" id="secondary-service-contact" @label="Secondary Service Contact" @property="secondaryServiceContact" @optionLabelPath="name" @options={{model.filteredContacts}} @helpText="Your organization's secondary service contact." @destination={{secondaryServiceContact}} as |el|>
             <el.control
               @searchEnabled={{false}}
               @search={{action 'searchContact'}}
@@ -349,7 +356,7 @@
               {{item.displayName}}
             </el.control>
           </form.element>
-          <form.element @controlType="power-select" @id="technical-contact" @label="Technical Contact" @property="technicalContact" @optionLabelPath="name" @options={{model.filteredContacts}} @helpText="Your organization's technical contact." @destination={{technicalContact}} as |el|>
+          <form.element @controlType="power-select" id="technical-contact" @label="Technical Contact" @property="technicalContact" @optionLabelPath="name" @options={{model.filteredContacts}} @helpText="Your organization's technical contact." @destination={{technicalContact}} as |el|>
             <el.control
               @searchEnabled={{false}}
               @search={{action 'searchContact'}}
@@ -362,7 +369,7 @@
               {{item.displayName}}
             </el.control>
           </form.element>
-          <form.element @controlType="power-select" @id="secondary-technical-contact" @label="Secondary Technical Contact" @property="secondaryTechnicalContact" @optionLabelPath="name" @options={{model.filteredContacts}} @helpText="Your organization's secondary technical contact." @destination={{secondaryTechnicalContact}} as |el|>
+          <form.element @controlType="power-select" id="secondary-technical-contact" @label="Secondary Technical Contact" @property="secondaryTechnicalContact" @optionLabelPath="name" @options={{model.filteredContacts}} @helpText="Your organization's secondary technical contact." @destination={{secondaryTechnicalContact}} as |el|>
             <el.control
               @searchEnabled={{false}}
               @search={{action 'searchContact'}}
@@ -376,7 +383,7 @@
             </el.control>
           </form.element>
           {{#if (not-eq model.memberType 'consortium_organization')}}
-            <form.element @controlType="power-select" @id="billing-contact" @label="Billing Contact" @property="billingContact" @optionLabelPath="name" @options={{model.filteredContacts}} @helpText="Your organization's billing contact." @destination="billingContact" as |el|>
+            <form.element @controlType="power-select" id="billing-contact" @label="Billing Contact" @property="billingContact" @optionLabelPath="name" @options={{model.filteredContacts}} @helpText="Your organization's billing contact." @destination="billingContact" as |el|>
               <el.control
                 @searchEnabled={{false}}
                 @search={{action 'searchContact'}}
@@ -388,7 +395,7 @@
                 {{item.displayName}}
               </el.control>
             </form.element>
-            <form.element @controlType="power-select" @id="secondary-billing-contact" @label="Secondary Billing Contact" @property="secondaryBillingContact" @optionLabelPath="name" @options={{model.filteredContacts}} @helpText="Your organization's secondary billing contact." @destination={{secondaryBillingContact}} as |el|>
+            <form.element @controlType="power-select" id="secondary-billing-contact" @label="Secondary Billing Contact" @property="secondaryBillingContact" @optionLabelPath="name" @options={{model.filteredContacts}} @helpText="Your organization's secondary billing contact." @destination={{secondaryBillingContact}} as |el|>
               <el.control
                 @searchEnabled={{false}}
                 @search={{action 'searchContact'}}
@@ -450,7 +457,7 @@
         />
         <form.element
           @controlType="power-select"
-          @id="billing-information-country"
+          id="billing-information-country"
           @label="Billing Country"
           @property="billingInformation.country"
           @optionLabelPath="name"
@@ -464,7 +471,8 @@
             @searchField="name"
             @placeholder="Select Country"
             @searchPlaceholder="Type to search..."
-            @allowClear={{true}} as |item|
+            @allowClear={{true}}
+            @searchEnabled={{true}} as |item|
           >
             {{item.name}}
           </el.control>
@@ -472,7 +480,7 @@
         {{#if showStateSearch}}
           <form.element
             @controlType="power-select"
-            @id="billing-information-state"
+            id="billing-information-state"
             @label="Billing State/Province"
             @property="billingInformation.state"
             @optionLabelPath="name"
@@ -486,7 +494,8 @@
               @searchField="name"
               @placeholder="Select State/Province"
               @searchPlaceholder="Type to search..."
-              @allowClear={{true}} as |item|
+              @allowClear={{true}}
+              @searchEnabled={{true}} as |item|
             >
               {{item.name}}
             </el.control>

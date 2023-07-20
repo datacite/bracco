@@ -1,6 +1,6 @@
 <div class="power-select-fragment" data-test-rights>
-  <@form.element @controlType="power-select" @options={{spdxLicenseList}} @value={{fragment.rights}} @disabled={{disabled}} @allowClear={{true}} @destination={{fragment.rights}} as |el|>
-    <el.control @searchEnabled={{true}} @onChange={{action "selectRights"}} @placeholder="Search standard licenses" @onkeydown={{action "createOnEnter"}} @search={{action "searchRights"}} @searchPlaceholder="Type to search..." @allowClear={{true}} @noMatchesMessage="Press ENTER to add a new license." as |item|>
+  <@form.element @controlType="power-select" @options={{spdxLicenseList}} @value={{fragment.rights}} @destination={{fragment.rights}} as |el|>
+    <el.control @searchEnabled={{true}} @onChange={{action "selectRights"}} @placeholder="Search standard licenses" @onKeydown={{action "createOnEnter"}} @search={{action "searchRights"}} @searchPlaceholder="Type to search..." @allowClear={{true}} @noMatchesMessage="Press ENTER to add a new license." @disabled={{disabled}} @allowClear={{true}} as |item|>
       {{if item.name item.name fragment.rights}}
     </el.control>
     <div class="help-block">

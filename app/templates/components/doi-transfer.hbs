@@ -7,7 +7,7 @@
     <BsForm @formLayout="horizontal" @horizontalLabelGridClass="col-md-3" @model={{model}} @onSubmit={{action "submit" model}} as |form|>
       <form.element @controlType="hidden" @property="doi" />
       <form.element @controlType="power-select" @property="repository" @label="Repository" @helpText="Transfer the DOI to this repository." @optionLabelPath="name" @options={{repositories}} @destination={{repository.id}} as |el|>
-        <el.control @onChange={{action "selectRepository"}} @search={{action "searchRepository"}} @searchField="name" @searchPlaceholder="Type to search..." as |item|>
+        <el.control @onChange={{action "selectRepository"}} @search={{action "searchRepository"}} @searchField="name" @searchPlaceholder="Type to search..." @searchEnabled={{true}} as |item|>
           {{item.name}}
         </el.control>
       </form.element>

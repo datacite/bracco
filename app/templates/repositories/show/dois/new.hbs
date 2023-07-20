@@ -20,7 +20,9 @@
         <label class="control-label col-md-3">URL</label>
         <div class="col-md-9 input-fragment">
           <div class="label-vertical">The location of the landing page with more information about the resource.</div>
-          <form.element @id="url" @controlType="text" @property="url" @placeholder="URL" @helpText="Should be a https URL — within the allowed domain(s) of your repository if domain restrictions are enabled in the repository settings. Http and ftp are also supported. For example http://example.org" />
+          <form.element @id="url" @controlType="text" @property="url" @helpText="Should be a https URL — within the allowed domain(s) of your repository if domain restrictions are enabled in the repository settings. Http and ftp are also supported. For example http://example.org" as |el| >
+            <el.control placeholder="URL" />
+          </form.element>
         </div>
       </div>
 
@@ -31,7 +33,9 @@
         <label class="control-label col-md-3">Publisher</label>
         <div class="col-md-9 input-fragment">
           <div class="label-vertical">The name of the entity that holds, archives, publishes prints, distributes, releases, issues, or produces the resource.</div>
-          <form.element @id="publisher" @controlType="text" @property="publisher" @placeholder="Publisher" @helpText="This property will be used to formulate the citation, so consider the prominence of the role." />
+          <form.element @id="publisher" @controlType="text" @property="publisher" @helpText="This property will be used to formulate the citation, so consider the prominence of the role."  as |el| >
+            <el.control placeholder="Publisher" />
+          </form.element>
         </div>
       </div>
 
@@ -39,8 +43,9 @@
         <label class="control-label col-md-3">Publication Year</label>
         <div class="col-md-9 input-fragment">
           <div class="label-vertical">The year when the resource was or will be made publicly available.</div>
-          <form.element @id="publication-year" @controlType="text" @property="publicationYear" @placeholder="Publication Year"
-            @helpText="Must be a year between 1000 and {{current-year model.doi.maxMintFutureOffset}}." />
+          <form.element @id="publication-year" @controlType="text" @property="publicationYear" @helpText="Must be a year between 1000 and {{current-year model.doi.maxMintFutureOffset}}."  as |el| >
+            <el.control placeholder="Publication Year" />
+          </form.element>
         </div>
       </div>
 

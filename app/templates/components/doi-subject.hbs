@@ -11,18 +11,18 @@
        @controlType="power-select"
        @options={{subjects}}
        @value={{fragment.subject}}
-       @disabled={{disabled}}
        @destination={{fragment.subject}} as |el|
        >
        <el.control
          @searchEnabled={{true}}
          @onChange={{action "updateSubject"}}
          @placeholder="Search Subject from the OECD Fields of Science and Technology (FOS) OR create a new keyword"
-         @onkeydown={{ action "createOnEnter" }}
+         @onKeydown={{ action "createOnEnter" }}
          @search={{ action "searchSubject" }}
          @allowClear={{true}}
          @searchPlaceholder="Type to search subject OR create a new keyword..."
          @noMatchesMessage="Press ENTER to add new subject, keyword, classification code, or key phrase describing the resource."
+         @disabled={{disabled}}
          />
        {{#unless this.simple }}
          <div class="help-block">

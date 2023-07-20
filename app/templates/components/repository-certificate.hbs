@@ -1,8 +1,8 @@
 {{#if (gt index 0)}}
   <div class="input-group">
     <div class="power-select-fragment">
-      <@form.element @controlType="power-select" @disabled={{disabled}} @value={{certificate}} @options={{certificates}} as |el|>
-        <el.control @onChange={{action "selectCertificate"}} @search={{action "searchCertificate"}} @placeholder="Select Certificate" @searchPlaceholder="Type to search..." @allowClear={{true}} />
+      <@form.element @controlType="power-select" @value={{certificate}} @options={{certificates}} as |el|>
+        <el.control @onChange={{action "selectCertificate"}} @search={{action "searchCertificate"}} @placeholder="Select Certificate" @searchPlaceholder="Type to search..." @allowClear={{true}} @disabled={{disabled}} @searchEnabled={{true}} />
       </@form.element>
     </div>
     <span class="input-group-addon" style="vertical-align:top;padding-top:3px;">
@@ -12,7 +12,7 @@
 {{else}}
   <div class="power-select-fragment">
     <@form.element @controlType="power-select" @disabled={{disabled}} @value={{certificate}} @options={{certificates}} as |el|>
-      <el.control @onChange={{action "selectCertificate"}} @search={{action "searchCertificate"}} @placeholder="Select Certificate" @searchPlaceholder="Type to search..." @allowClear={{true}} />
+      <el.control @onChange={{action "selectCertificate"}} @search={{action "searchCertificate"}} @placeholder="Select Certificate" @searchPlaceholder="Type to search..." @allowClear={{true}} @searchEnabled={{true}} />
     </@form.element>
   </div>
 {{/if}}

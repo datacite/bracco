@@ -57,7 +57,7 @@
       {{/if}}
       <form.element
         @controlType="power-select"
-        @id="ror-id"
+        id="ror-id"
         @label="Organization identifier (optional)"
         @property="rorId"
         @optionLabelPath="rorId"
@@ -70,7 +70,8 @@
           @search={{action 'searchRor'}}
           @placeholder="Select Organization"
           @searchPlaceholder="Type to search..."
-          @allowClear={{true}} as |item|
+          @allowClear={{true}}
+          @searchEnabled={{true}} as |item|
         >
           {{if item.name item.name model.organization.rorId}}
         </el.control>
@@ -96,7 +97,7 @@
       {{#if (can 'create provider')}}
         <form.element
           @controlType="power-select"
-          @id="tax-status"
+          id="tax-status"
           @label="Tax Status"
           @property="nonProfitStatus"
           @options={{nonProfitStatuses}}
@@ -106,7 +107,8 @@
             @onChange={{action 'selectNonProfitStatus'}}
             @search={{action 'searchNonProfitStatus'}}
             @placeholder="Tax Status"
-            @searchPlaceholder="Type to search..." as |item|
+            @searchPlaceholder="Type to search..."
+            @searchEnabled={{true}} as |item|
           >
             {{titleize item}}
           </el.control>
@@ -143,7 +145,7 @@
       />
       <form.element
         @controlType="power-select"
-        @id="country"
+        id="country"
         @label="Country (optional)"
         @property="country"
         @optionLabelPath="name"
@@ -157,14 +159,15 @@
           @searchField="name"
           @placeholder="Select Country"
           @searchPlaceholder="Type to search..."
-          @allowClear={{true}} as |item|
+          @allowClear={{true}}
+          @searchEnabled={{true}} as |item|
         >
           {{item.name}}
         </el.control>
       </form.element>
       <form.element
         @controlType="power-select"
-        @id="organization-type"
+        id="organization-type"
         @label="Organization Type (optional)"
         @property="organizationType"
         @options={{organizationTypes}}
@@ -175,14 +178,15 @@
           @search={{action 'searchOrganizationType'}}
           @placeholder="Select Organization Type"
           @searchPlaceholder="Type to search..."
-          @allowClear={{true}} as |item|
+          @allowClear={{true}}
+          @searchEnabled={{true}} as |item|
         >
           {{titleize (humanize (underscore item))}}
         </el.control>
       </form.element>
       <form.element
         @controlType="power-select"
-        @id="focus-area"
+        id="focus-area"
         @label="Focus Area (optional)"
         @property="focusArea"
         @options={{focusAreas}}
@@ -194,7 +198,8 @@
           @search={{action 'searchFocusArea'}}
           @placeholder="Select Focus Area"
           @searchPlaceholder="Type to search..."
-          @allowClear={{true}} as |item|
+          @allowClear={{true}}
+          @searchEnabled={{true}} as |item|
         >
           {{titleize (humanize (underscore item))}}
         </el.control>

@@ -8,8 +8,8 @@
 
     <BsForm @formLayout="horizontal" @horizontalLabelGridClass="col-md-3" @model={{model}} @onSubmit={{action "submit" model}} @submitOnEnter={{true}} as |form|>
       <form.element @controlType="text" @id="repository-id" @label="Repository ID" @property="symbol" @helpText="The Repository ID is the unique identifier for each repository in DataCite and can't be changed." disabled />
-      <form.element @controlType="power-select" @id="client-type" @label="Type" @value={{clientType}} @options={{clientTypes}} @optionLabelPath="label" @disabled={{if (eq model.clientType "igsnCatalog") true false}} as |el|>
-        <el.control @onChange={{action "selectClientType"}} @search={{action "searchClientType"}} @placeholder="Select Client Type" @searchPlaceholder="Type to search..."  />
+      <form.element @controlType="power-select" id="client-type" @label="Type" @value={{clientType}} @options={{clientTypes}} @optionLabelPath="label" as |el|>
+        <el.control @onChange={{action "selectClientType"}} @search={{action "searchClientType"}} @placeholder="Select Client Type" @searchPlaceholder="Type to search..." @disabled={{if (eq model.clientType "igsnCatalog") true false}} @searchEnabled={{true}}/>
         {{#if (eq model.clientType "igsnCatalog")}}
           <BsTooltip @placement="top" @viewportPadding={{10}}>IGSN ID Catalogs cannot be edited.</BsTooltip>
         {{/if}}
@@ -26,8 +26,8 @@
       {{#if (eq model.clientType "periodical")}}
         <RepositoryIssn @model={{model}} @fragment={{model.issn}} @form={{form}} />
       {{else}}
-        <form.element @controlType="power-select" @id="re3data" @property="re3data" @label="re3data Record (optional)" @optionLabelPath="re3data" @options={{repositories}} @destination={{re3data}} @helpText="re3data is a registry of research data repositories." as |el|>
-          <el.control @onChange={{action "selectRe3Data"}} @search={{action "searchRe3Data"}} @searchField="repositoryName" @searchPlaceholder="Type to search..." @allowClear={{true}} as |item|>
+        <form.element @controlType="power-select" id="re3data" @property="re3data" @label="re3data Record (optional)" @optionLabelPath="re3data" @options={{repositories}} @destination={{re3data}} @helpText="re3data is a registry of research data repositories." as |el|>
+          <el.control @onChange={{action "selectRe3Data"}} @search={{action "searchRe3Data"}} @searchField="repositoryName" @searchPlaceholder="Type to search..." @allowClear={{true}} @searchEnabled={{true}} as |item|>
             {{if item.name item.name model.re3data}}
           </el.control>
         </form.element>
@@ -75,8 +75,8 @@
         </div>
       </div>
 
-      <form.element @controlType="power-select" @id="software" @label="Software (optional)" @property="software" @options={{softwares}} @destination={{software}} @helpText="The name of the software that is used to run the repository." as |el|>
-        <el.control @onChange={{action "selectSoftware"}} @search={{action "searchSoftware"}} @placeholder="Select Software" @searchPlaceholder="Type to search..." @allowClear={{true}} as |item|>
+      <form.element @controlType="power-select" id="software" @label="Software (optional)" @property="software" @options={{softwares}} @destination={{software}} @helpText="The name of the software that is used to run the repository." as |el|>
+        <el.control @onChange={{action "selectSoftware"}} @search={{action "searchSoftware"}} @placeholder="Select Software" @searchPlaceholder="Type to search..." @allowClear={{true}} @searchEnabled={{true}} as |item|>
           {{item}}
         </el.control>
       </form.element>

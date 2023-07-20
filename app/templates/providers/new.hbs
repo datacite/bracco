@@ -38,7 +38,8 @@
               @search={{action 'searchRor'}}
               @placeholder="Select Organization"
               @searchPlaceholder="Type to search..."
-              @allowClear={{true}} as |item|
+              @allowClear={{true}} 
+              @searchEnabled={{true}} as |item|
             >
               {{if item.name item.name model.rorId}}
             </el.control>
@@ -101,7 +102,8 @@
                 @onChange={{action 'selectMemberType'}}
                 @search={{action 'searchMemberType'}}
                 @placeholder="Select Member Type"
-                @searchPlaceholder="Type to search..." as |item|
+                @searchPlaceholder="Type to search..."
+                @searchEnabled={{true}} as |item|
               >
                 {{titleize (humanize item)}}
               </el.control>
@@ -118,7 +120,8 @@
                 @onChange={{action 'selectNonProfitStatus'}}
                 @search={{action 'searchNonProfitStatus'}}
                 @placeholder="Tax Status"
-                @searchPlaceholder="Type to search..." as |item|
+                @searchPlaceholder="Type to search..."
+                @searchEnabled={{true}} as |item|
               >
                 {{titleize item}}
               </el.control>
@@ -138,7 +141,8 @@
                   @search={{action 'searchConsortium'}}
                   @searchField="name"
                   @searchPlaceholder="Type to search..."
-                  @allowClear={{true}} as |item|
+                  @allowClear={{true}}
+                  @searchEnabled={{true}} as |item|
                 >
                   {{item.name}}
                 </el.control>
@@ -190,7 +194,8 @@
               @searchField="name"
               @placeholder="Select Country"
               @searchPlaceholder="Type to search..."
-              @allowClear={{true}} as |item|
+              @allowClear={{true}}
+              @searchEnabled={{true}} as |item|
             >
               {{item.name}}
             </el.control>
@@ -208,7 +213,8 @@
               @search={{action 'searchOrganizationType'}}
               @placeholder="Select Organization Type"
               @searchPlaceholder="Type to search..."
-              @allowClear={{true}} as |item|
+              @allowClear={{true}}
+              @searchEnabled={{true}} as |item|
             >
               {{titleize (humanize (underscore item))}}
             </el.control>
@@ -227,7 +233,8 @@
               @search={{action 'searchFocusArea'}}
               @placeholder="Select Focus Area"
               @searchPlaceholder="Type to search..."
-              @allowClear={{true}} as |item|
+              @allowClear={{true}}
+              @searchEnabled={{true}} as |item|
             >
               {{titleize (humanize (underscore item))}}
             </el.control>
@@ -329,7 +336,8 @@
                 @searchField="name"
                 @placeholder="Select Country"
                 @searchPlaceholder="Type to search..."
-                @allowClear={{true}} as |item|
+                @allowClear={{true}}
+                @searchEnabled={{true}} as |item|
               >
                 {{item.name}}
               </el.control>
@@ -351,7 +359,8 @@
                   @searchField="name"
                   @placeholder="Select State/Province"
                   @searchPlaceholder="Type to search..."
-                  @allowClear={{true}} as |item|
+                  @allowClear={{true}}
+                  @searchEnabled={{true}} as |item|
                 >
                   {{item.name}}
                 </el.control>

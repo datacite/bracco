@@ -4,7 +4,7 @@
 
     <BsForm @formLayout="horizontal" @horizontalLabelGridClass="col-md-3" @model={{this}} @onSubmit={{action "submit"}} @submitOnEnter={{true}} as |form|>
       <form.element @controlType="power-select" @property="repository" @label="Repository" @helpText="Transfer all DOIs to this repository. It can take up to one hour for the transfer to complete." @optionLabelPath="name" @options={{repositories}} @destination={{repository}} as |el|>
-        <el.control @onChange={{action "selectRepository"}} @search={{action "searchRepository"}} @searchField="name" @searchPlaceholder="Type to search..." @allowClear={{true}} as |item|>
+        <el.control @onChange={{action "selectRepository"}} @search={{action "searchRepository"}} @searchField="name" @searchPlaceholder="Type to search..." @allowClear={{true}} @searchEnabled={{true}} as |item|>
           {{item.name}}
         </el.control>
       </form.element>
