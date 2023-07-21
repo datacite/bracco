@@ -15,8 +15,12 @@
             {{/if}}
 
             <BsForm @formLayout="vertical" @model={{this}} @onSubmit={{action "authenticate"}} @submitOnEnter={{true}} as |form|>
-              <form.element @controlType="text" @property="identification" @id="account" @label="Account ID" data-test-account/>
-              <form.element @controlType="password" @property="password" @id="password" @label="Password" data-test-password />
+              <form.element @controlType="text" @property="identification" id="account" @label="Account ID" data-test-account as |el| >
+                <el.control id="account-field" />
+              </form.element>
+              <form.element @controlType="password" @property="password" id="password" @label="Password" data-test-password as |el| >
+                <el.control id="password-field" />
+              </form.element>
 
               {{#if errorMessage}}
                 <div class="alert alert-danger">{{errorMessage}}</div>
