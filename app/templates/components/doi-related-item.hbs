@@ -95,22 +95,22 @@
         @index={{index}} />
       {{/each}}
       {{#if (lte fragment.creators.length 24)}}
-      <BsButton @id="add-related-item-creator" @class="btn-sm" @outline={{true}} @onClick={{action "addRelatedItemCreator" }}><i
+      <BsButton id="add-related-item-creator" class="btn-sm" @outline={{true}} @onClick={{action "addRelatedItemCreator" }}><i
           class="fas fa-plus"></i> Add another creator</BsButton>
       {{/if}}
 
       {{#if (gt fragment.creators.length 0)}}
-      <BsButton @id="toggle-related-item-creators_1" @class="btn-sm" @outline={{true}}
+      <BsButton id="toggle-related-item-creators_1" class="btn-sm" @outline={{true}}
         @onClick={{action "toggleRelatedItemCreators" }}><i class="fas fa-eye-slash"></i> Hide {{pluralize
         fragment.creators.length 'creator'}}</BsButton>
       {{/if}}
     {{else}}
       {{#if (gt fragment.creators.length 0)}}
-      <BsButton @id="toggle-related-item-creators_0" @class="btn-sm" @outline={{true}}
+      <BsButton id="toggle-related-item-creators_0" class="btn-sm" @outline={{true}}
         @onClick={{action "toggleRelatedItemCreators" }}><i class="fas fa-eye"></i> Show {{pluralize
         fragment.creators.length 'creator'}}</BsButton>
       {{else}}
-      <BsButton @id="add-related-item-creator" @class="btn-sm btn-warnin" @outline={{true}}
+      <BsButton id="add-related-item-creator" class="btn-sm btn-warnin" @outline={{true}}
         @onClick={{action "addRelatedItemCreator" }}><i class="fas fa-plus"></i> Add creator</BsButton>
       {{/if}}
     {{/if}}
@@ -128,22 +128,22 @@
         @index={{index}} />
       {{/each}}
       {{#if (lte fragment.contributors.length 24)}}
-      <BsButton @id="add-related-item-contributor" @class="btn-sm" @outline={{true}}
+      <BsButton id="add-related-item-contributor" class="btn-sm" @outline={{true}}
         @onClick={{action "addRelatedItemContributor" }}><i class="fas fa-plus"></i> Add {{if (gt model.relatedIdentifiers.length 0) "another "}} contributor</BsButton>
       {{/if}}
 
       {{#if (gt fragment.contributors.length 0)}}
-      <BsButton @id="toggle-related-item-contributors_1" @class="btn-sm" @outline={{true}}
+      <BsButton id="toggle-related-item-contributors_1" class="btn-sm" @outline={{true}}
         @onClick={{action "toggleRelatedItemContributors" }}><i class="fas fa-eye-slash"></i> Hide {{pluralize
         fragment.contributors.length 'contributor'}}</BsButton>
       {{/if}}
     {{else}}
       {{#if (gt fragment.contributors.length 0)}}
-      <BsButton @id="toggle-related-item-contributors_0" @class="btn-sm" @outline={{true}}
+      <BsButton id="toggle-related-item-contributors_0" class="btn-sm" @outline={{true}}
         @onClick={{action "toggleRelatedItemContributors" }}><i class="fas fa-eye"></i> Show {{pluralize
         fragment.contributors.length 'contributor'}}</BsButton>
       {{else}}
-      <BsButton @id="add-related-item-contributor" @class="btn-sm btn-warnin" @outline={{true}}
+      <BsButton id="add-related-item-contributor" class="btn-sm btn-warnin" @outline={{true}}
         @onClick={{action "addRelatedItemContributor" }}><i class="fas fa-plus"></i> Add contributor</BsButton>
       {{/if}}
     {{/if}}

@@ -8,17 +8,17 @@
       {{/each}}
 
       {{#if (lte model.alternateIdentifiers.length 4)}}
-        <BsButton @class="btn-sm" @id="add-alternate-identifier" @outline={{true}} @onClick={{action "addAlternateIdentifier"}}><i class="fas fa-plus"></i> Add {{if (gt model.alternateIdentifiers.length 1) "another "}} alternate identifier</BsButton>
+        <BsButton class="btn-sm" id="add-alternate-identifier" @outline={{true}} @onClick={{action "addAlternateIdentifier"}}><i class="fas fa-plus"></i> Add {{if (gt model.alternateIdentifiers.length 1) "another "}} alternate identifier</BsButton>
       {{/if}}
 
       {{#if (gt model.alternateIdentifiers.length 0)}}
-        <BsButton @id="toggle-alternate-identifiers" @class="btn-sm" @outline={{true}} @onClick={{action "toggleAlternateIdentifiers"}}><i class="fas fa-eye-slash"></i> Hide {{pluralize model.alternateIdentifiers.length 'alternate identifier'}}</BsButton>
+        <BsButton id="toggle-alternate-identifiers" class="btn-sm" @outline={{true}} @onClick={{action "toggleAlternateIdentifiers"}}><i class="fas fa-eye-slash"></i> Hide {{pluralize model.alternateIdentifiers.length 'alternate identifier'}}</BsButton>
       {{/if}}
     {{else}}
       {{#if (gt model.alternateIdentifiers.length 0)}}
-        <BsButton @id="toggle-alternate-identifiers" @class="btn-sm" @outline={{true}} @onClick={{action "toggleAlternateIdentifiers"}}><i class="fas fa-eye"></i> Show {{pluralize model.alternateIdentifiers.length 'alternate identifier'}}</BsButton>
+        <BsButton id="toggle-alternate-identifiers" class="btn-sm" @outline={{true}} @onClick={{action "toggleAlternateIdentifiers"}}><i class="fas fa-eye"></i> Show {{pluralize model.alternateIdentifiers.length 'alternate identifier'}}</BsButton>
       {{else}}
-        <BsButton @class="btn-sm btn-warning" @id="add-alternate-identifier" @outline={{true}} @onClick={{action "addAlternateIdentifier"}}><i class="fas fa-plus"></i> Add alternate identifier</BsButton>
+        <BsButton class="btn-sm btn-warning" Id="add-alternate-identifier" @outline={{true}} @onClick={{action "addAlternateIdentifier"}}><i class="fas fa-plus"></i> Add alternate identifier</BsButton>
       {{/if}}
     {{/if}}
   </div>
