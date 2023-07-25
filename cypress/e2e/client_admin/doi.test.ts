@@ -13,7 +13,8 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
   const dayjs = require('dayjs');
   const yearInRange = dayjs().add(Cypress.env('max_mint_future_offset'), 'year').format('YYYY');
   const yearOutOfRange = String(Number(yearInRange) + 1);
-  let suffix = '';
+
+  const creator = 'Miller, Elizabeth';
 
   before(function () {
     cy.login(Cypress.env('client_admin_username'), Cypress.env('client_admin_password'));
@@ -93,7 +94,7 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
 
       // Set creator.
       cy.get('.help-block.name-identifier-field').should('be.visible').should('have.text','Use name identifier expressed as URL. Uniquely identifies an individual or legal entity, according to various schemas, e.g. ORCID, ROR or ISNI. The Given Name, Family Name, and Name will automatically be filled out for ORCID and ROR identifiers.')
-      cy.get('input[data-test-name]').should('be.visible').type('Miller, Elizabeth', { force: true });
+      cy.get('input[data-test-name]').should('be.visible').type(creator, { force: true });
       cy.get('#toggle-creators').should('be.visible').click({ force: true }).then(($toggle) => {
         cy.get('#toggle-creators').contains('Show 1 creator');
       });
@@ -297,6 +298,11 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
 
     }).then(() => {
 
+      // Get the suffix for later tests
+      cy.get("#suffix-field").invoke('val').then( (value) => {
+        Cypress.env('suffix', value)
+      });
+
       ////////// DONE FILLING IN FORM.  PRESS THE CREATE BUTTON.
 
       cy.get('button#doi-create').should('be.visible').click();
@@ -304,6 +310,19 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
       cy.location('pathname').should('contain', '/dois/' + prefix)
     });
   });
+
+  it('is editing a doi - FORM', () => {
+    cy.visit('/dois/' + encodeURIComponent(prefix + '/' + Cypress.env('suffix')) + '/edit');
+    cy.url().should('include', '/dois/' + encodeURIComponent(prefix + '/' + Cypress.env('suffix')) + '/edit').then(() => {
+
+      cy.wait(waitTime);
+      // Get entered creator.
+      cy.get('input[data-test-name]').should('be.visible').should('have.value', creator)
+      cy.get('.add-name-identifier').should('be.visible')
+      cy.get('.add-affiliation').should('be.visible')
+
+    })
+  })
 
   it('is creating a doi - FILE UPLOAD', () => {
     cy.visit('/repositories/datacite.test/dois/upload');
