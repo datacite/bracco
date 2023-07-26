@@ -76,10 +76,10 @@
       Affiliation names and identifiers are provided by the Research Organization Registry (ROR).
     </div>
   {{/if}}
+{{/if}}
 
-  {{#if (lte fragment.affiliation.length 2)}}
-    <BsButton @class="btn-sm add-affiliation" @outline={{true}} @onClick={{action "addAffiliation"}}><i class="fas fa-plus-circle"></i> Add another affiliation</BsButton>
-  {{/if}}
+{{#if (lte fragment.affiliation.length 2)}}
+  <BsButton @class="btn-sm add-affiliation" @outline={{true}} @onClick={{action "addAffiliation"}}><i class="fas fa-plus-circle"></i> Add another affiliation</BsButton>
 {{/if}}
 
 <hr />
