@@ -6,12 +6,13 @@
   </div>
 {{/if}}
 <div class="input-group">
-  <div class="power-select-fragment" doi-subject>
+  <div class="power-select-fragment" data-test-doi-subject>
     <@form.element
        @controlType="power-select"
        @options={{subjects}}
        @value={{fragment.subject}}
-       @destination={{fragment.subject}} as |el|
+       @destination={{fragment.subject}}
+       class="power-select-subject" as |el|
        >
        <el.control
          @searchEnabled={{true}}
@@ -23,6 +24,7 @@
          @searchPlaceholder="Type to search subject OR create a new keyword..."
          @noMatchesMessage="Press ENTER to add new subject, keyword, classification code, or key phrase describing the resource."
          @disabled={{disabled}}
+         class="power-select-subject-field"
          />
        {{#unless this.simple }}
          <div class="help-block">

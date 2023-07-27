@@ -95,6 +95,7 @@ FactoryGuy.define('subject', {
     subject: 'Clinical medicine',
     subjectScheme: 'Fields of Science and Technology (FOS)',
     schemeUri: 'http://www.oecd.org/science/inno/38235147.pdf',
+    classificationCode: '3.2'
   },
 });
 
