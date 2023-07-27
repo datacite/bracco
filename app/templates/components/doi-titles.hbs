@@ -8,7 +8,7 @@
       {{/each}}
 
       {{#if (lte model.titles.length 4)}}
-        <BsButton @lass="btn-sm" id="add-title" @outline={{true}} @onClick={{action "addTitle"}}><i class="fas fa-plus"></i> Add another title</BsButton>
+        <BsButton class="btn-sm" id="add-title" @outline={{true}} @onClick={{action "addTitle"}}><i class="fas fa-plus"></i> Add another title</BsButton>
       {{/if}}
 
       {{#if (gt model.titles.length 0)}}
