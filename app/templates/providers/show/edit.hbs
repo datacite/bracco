@@ -43,7 +43,7 @@
         <el.control
           @onChange={{action 'selectRor'}}
           @search={{action 'searchRor'}}
-          @placeholder="Select Organization"
+          placeholder="Select Organization"
           @searchPlaceholder="Type to search..."
           @allowClear={{true}}
           @searchEnabled={{true}} as |item|
@@ -81,7 +81,7 @@
           <el.control
             @onChange={{action 'selectMemberType'}}
             @search={{action 'searchMemberType'}}
-            @placeholder="Select Member Type"
+            placeholder="Select Member Type"
             @searchPlaceholder="Type to search..."
             @searchEnabled={{true}}
             @disabled={{eq model.memberType 'developer'}} as |item|
@@ -100,7 +100,7 @@
           <el.control
             @onChange={{action 'selectNonProfitStatus'}}
             @search={{action 'searchNonProfitStatus'}}
-            @placeholder="Tax Status"
+            placeholder="Tax Status"
             @searchPlaceholder="Type to search..."
             @searchEnabled={{true}} as |item|
           >
@@ -159,11 +159,12 @@
             @controlType="text"
             @id="doi-estimate"
             @label="Estimated DOIs"
-            @placeholder = "0"
             @property="doiEstimate"
             required
-           @helpText={{html-safe (concat "Enter the number of DOIs expected to be registered annually. This amount will be pro-rated for the remaining months of the year. If the consortium fee cap applies enter zero (0). See more details in our <a href='" (get (links) "FEE_MODEL_URL" ) "' target='_blank'>fee model</a>.")}}
-          />
+            @helpText={{html-safe (concat "Enter the number of DOIs expected to be registered annually. This amount will be pro-rated for the remaining months of the year. If the consortium fee cap applies enter zero (0). See more details in our <a href='" (get (links) "FEE_MODEL_URL" ) "' target='_blank'>fee model</a>.")}} as |el|
+          >
+            <el.control placeholder="0" />
+          </form.element>
         {{/if}}
       {{/if}}
       <form.element
@@ -192,9 +193,10 @@
         @id="twitter-handle"
         @label="Twitter (optional)"
         @property="twitterHandle"
-        @placeholder="Add @twitter account"
-        @helpText="DataCite will follow you on Twitter."
-      />
+        @helpText="DataCite will follow you on Twitter." as |el|
+      >
+        <el.control placeholder="Add @twitter account" />
+      </form.element>
       <form.element
         @controlType="power-select"
         id="country"
@@ -209,7 +211,7 @@
           @onChange={{action 'selectCountry'}}
           @search={{action 'searchCountry'}}
           @searchField="name"
-          @placeholder="Select Country"
+          placeholder="Select Country"
           @searchPlaceholder="Type to search..."
           @allowClear={{true}}
           @searchEnabled={{true}} as |item|
@@ -228,7 +230,7 @@
         <el.control
           @onChange={{action 'selectOrganizationType'}}
           @search={{action 'searchOrganizationType'}}
-          @placeholder="Select Organization Type"
+          placeholder="Select Organization Type"
           @searchPlaceholder="Type to search..."
           @allowClear={{true}}
           @searchEnabled={{true}} as |item|
@@ -248,7 +250,7 @@
         <el.control
           @onChange={{action 'selectFocusArea'}}
           @search={{action 'searchFocusArea'}}
-          @placeholder="Select Focus Area"
+          placeholder="Select Focus Area"
           @searchPlaceholder="Type to search..."
           @allowClear={{true}}
           @searchEnabled={{true}} as |item|
@@ -261,9 +263,10 @@
         @id="description"
         @label="Description (optional)"
         @property="description"
-        @rows={{10}}
-        @helpText="Description of the member. Please use markdown for formatting."
-      />
+        @helpText="Description of the member. Please use markdown for formatting." as |el|
+      >
+        <el.control rows={{10}} />
+      </form.element>
       {{#if (not-eq model.memberType 'consortium_organization')}}
         <label class="control-label col-md-3">
           Logo
@@ -325,7 +328,7 @@
                 @searchField="name"
                 @searchPlaceholder="Search contact..."
                 @onChange={{action 'selectVotingContact'}}
-                @placeholder="Select Contact" as |item|
+                placeholder="Select Contact" as |item|
               >
                 {{item.displayName}}
               </el.control>
@@ -338,7 +341,7 @@
               @searchField="name"
               @searchPlaceholder="Search contact..."
               @onChange={{action 'selectServiceContact'}}
-              @placeholder="Select Contact" as |item|
+              placeholder="Select Contact" as |item|
             >
               {{item.displayName}}
             </el.control>
@@ -350,7 +353,7 @@
               @searchField="name"
               @searchPlaceholder="Search contact..."
               @onChange={{action 'selectSecondaryServiceContact'}}
-              @placeholder="Select Contact"
+              placeholder="Select Contact"
               @allowClear={{true}} as |item|
             >
               {{item.displayName}}
@@ -363,7 +366,7 @@
               @searchField="name"
               @searchPlaceholder="Search contact..."
               @onChange={{action 'selectTechnicalContact'}}
-              @placeholder="Select Contact"
+              placeholder="Select Contact"
               @allowClear={{true}} as |item|
             >
               {{item.displayName}}
@@ -376,7 +379,7 @@
               @searchField="name"
               @searchPlaceholder="Search contact..."
               @onChange={{action 'selectSecondaryTechnicalContact'}}
-              @placeholder="Select Contact"
+              placeholder="Select Contact"
               @allowClear={{true}} as |item|
             >
               {{item.displayName}}
@@ -390,7 +393,7 @@
                 @searchField="name"
                 @searchPlaceholder="Search contact..."
                 @onChange={{action 'selectBillingContact'}}
-                @placeholder="Select Contact" as |item|
+                placeholder="Select Contact" as |item|
               >
                 {{item.displayName}}
               </el.control>
@@ -402,7 +405,7 @@
                 @searchField="name"
                 @searchPlaceholder="Search contact..."
                 @onChange={{action 'selectSecondaryBillingContact'}}
-                @placeholder="Select Contact"
+                placeholder="Select Contact"
                 @allowClear={{true}} as |item|
               >
                 {{item.displayName}}
@@ -469,7 +472,7 @@
             @onChange={{action 'selectBillingCountry'}}
             @search={{action 'searchCountry'}}
             @searchField="name"
-            @placeholder="Select Country"
+            placeholder="Select Country"
             @searchPlaceholder="Type to search..."
             @allowClear={{true}}
             @searchEnabled={{true}} as |item|
@@ -492,7 +495,7 @@
               @onChange={{action 'selectBillingState'}}
               @search={{action 'searchState'}}
               @searchField="name"
-              @placeholder="Select State/Province"
+              placeholder="Select State/Province"
               @searchPlaceholder="Type to search..."
               @allowClear={{true}}
               @searchEnabled={{true}} as |item|
