@@ -52,4 +52,5 @@ corber/cordova/www/*
 
 # cypress
 cypress/screenshotsFolder
+cypress/screenshots
 cypress/videosFolder

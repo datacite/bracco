@@ -16,11 +16,11 @@
       </form.element>
 
       {{#if (can "create provider")}}
-        <form.element @controlType="text" @id="salesforce-id" @label="Salesforce ID" @property="salesforceId" @helpText="The 18 digit ID in Salesforce." />
+        <form.element @controlType="text" id="salesforce-id" @label="Salesforce ID" @property="salesforceId" @helpText="The 18 digit ID in Salesforce." />
       {{/if}}
 
       {{#if (can "token provider")}}
-        <form.element @controlType="text" @id="globus-uuid" @label="Globus UUID (optional)" @property="globusUuid" @helpText="The Globus UUID used for token authentication." />
+        <form.element @controlType="text" id="globus-uuid" @label="Globus UUID (optional)" @property="globusUuid" @helpText="The Globus UUID used for token authentication." />
       {{/if}}
 
       {{#if (eq model.repository.clientType "periodical")}}
@@ -33,9 +33,9 @@
         </form.element>
       {{/if}}
 
-      <form.element @controlType="text" @id="name" @label="Repository Name" @property="name" @useIcons={{false}} />
-      <form.element @controlType="text" @id="alternate-name" @label="Repository Alternate Name (optional)" @property="alternateName" />
-      <form.element @controlType="email" @id="system-email" @label="System Email" @property="systemEmail" @helpText="This is the email used for sending password reset requests and similar system notifications." @useIcons={{false}} />
+      <form.element @controlType="text" id="name" @label="Repository Name" @property="name" @useIcons={{false}} />
+      <form.element @controlType="text" id="alternate-name" @label="Repository Alternate Name (optional)" @property="alternateName" />
+      <form.element @controlType="email" id="system-email" @label="System Email" @property="systemEmail" @helpText="This is the email used for sending password reset requests and similar system notifications." @useIcons={{false}} />
 
       <div class="form-group">
         <label class="control-label col-md-3">Service Contact</label>
@@ -58,8 +58,10 @@
         </div>
       </div>
 
-      <form.element @controlType="textarea" @id="description" @label="Description (optional)" @property="description" @rows="10" @helpText="Description of the repository. Please use markdown for formatting." />
-      <form.element @controlType="text" @id="url" @label="URL (optional)" @property="url" @helpText="The homepage of the repository." />
+      <form.element @controlType="textarea" id="description" @label="Description (optional)" @property="description" @helpText="Description of the repository. Please use markdown for formatting." as |el| >
+        <el.control rows="10" />
+      </form.element>
+      <form.element @controlType="text" id="url" @label="URL (optional)" @property="url" @helpText="The homepage of the repository." />
 
       <div class="form-group" id="language">
         <label class="control-label col-md-3">Language (optional)</label>
@@ -80,7 +82,7 @@
           {{item}}
         </el.control>
       </form.element>
-      <form.element @controlType="textarea" @id="domains" @label="Domains" @property="domains" @helpText="List of domains, separated by comma, used for DOI registration, or use *. (e.g. *.example.org) to allow all subdomains, or use * to allow all domains." />
+      <form.element @controlType="textarea" id="domains" @label="Domains" @property="domains" @helpText="List of domains, separated by comma, used for DOI registration, or use *. (e.g. *.example.org) to allow all subdomains, or use * to allow all domains." />
 
       {{#unless (eq model.repository.clientType "periodical")}}
         <div class="form-group" id="repository-type">
@@ -116,7 +118,9 @@
         </div>
       {{/unless}}
 
-      <form.element @controlType="checkbox" @id="is-active" @label="Account is active" @property="isActive" @helpText="This account can register and update DOIs" />
+      <form.element @controlType="checkbox" id="is-active" @label="Account is active" @property="isActive" @helpText="This account can register and update DOIs" as |el| >
+        <el.control id="is-active-field" />
+      </form.element>
 
       <div class="col-md-offset-3">
         <BsAlert @dismissible={{false}} class="opt-in" @type="warning">
@@ -141,6 +145,7 @@
 
         <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
       </div>
+
     </BsForm>
   </div>
 </div>

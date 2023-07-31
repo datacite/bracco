@@ -90,9 +90,11 @@ const Validations = buildValidations({
       })
     }),
     validator('date', {
+      //after: '999',
       after: '999',
       before: computed('model.maxMintFutureOffset', function () {
-        return new Date().getFullYear() + this.model.get('maxMintFutureOffset') +1;
+        let mydate =  (new Date().getFullYear() + Number(this.model.get('maxMintFutureOffset')) + 1).toString();
+        return mydate;
       }),
       precision: 'year',
       format: 'YYYY',

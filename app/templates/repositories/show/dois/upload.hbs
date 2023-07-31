@@ -39,12 +39,13 @@
             The location of the landing page with more information about the resource.
           </div>
           <form.element
-            @id="url"
+            id="url"
             @controlType="text"
             @property="url"
-            @placeholder="URL"
-            @helpText="Should be a https URL — within the allowed domain(s) of your repository if domain restrictions are enabled in the repository settings. Http and ftp are also supported. For example http://example.org"
-          />
+            @helpText="Should be a https URL — within the allowed domain(s) of your repository if domain restrictions are enabled in the repository settings. Http and ftp are also supported. For example http://example.org" as |el|
+          >
+            <el.control id="url-field" placeholder="URL" />
+          </form.element>
         </div>
       </div>
       <DoiUpload @model={{model.doi}} @form={{form}} />
