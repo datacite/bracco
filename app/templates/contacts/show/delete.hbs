@@ -13,12 +13,13 @@
           </label>
           <form.element
             @controlType="text"
-            @id="confirm-delete"
+            id="confirm-delete"
             @property="confirmDelete"
             @showValidationOn="input"
-            @autofocus={{true}}
-            @helpText="Please type 'Delete' to confirm."
-          />
+            @helpText="Please type 'Delete' to confirm." as |el|
+          >
+            <el.control id="confirm-delete-field" autofocus={{true}} />
+          </form.element>
         </form.group>
         <div class="pseudo-footer">
           <div class="btn-toolbar pull-right">

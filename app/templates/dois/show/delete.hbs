@@ -5,7 +5,7 @@
         <form.group>
           <label class="control-label">Are you sure you want to delete the DOI {{model.doi}}? This action cannot be undone.</label>
           <form.element @controlType="text" @property="confirmDoi" id="confirm-doi" @helpText="Please add the DOI to confirm." @showValidationOn="input" as |el|>
-            <el.control autofocus={{true}} id="confirm-doi-field" />
+            <el.control id="confirm-doi-field" autofocus={{true}} />
           </form.element>
         </form.group>
 

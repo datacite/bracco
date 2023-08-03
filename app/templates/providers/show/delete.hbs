@@ -27,7 +27,9 @@
         <BsForm @formLayout="vertical" @model={{model}} @onSubmit={{action "submit" model}} @submitOnEnter={{true}} as |form|>
           <form.group>
             <label class="control-label">Are you sure you want to delete the {{uppercase model.id}} {{if (eq model.memberType "consortium_organization") 'organization' 'member'}}? This action cannot be undone.</label>
-            <form.element @controlType="text" @id="confirm-symbol" @property="confirmSymbol" @showValidationOn="input" @autofocus={{true}} @helpText="Please add the {{if (eq model.memberType "consortium_organization") 'Organization' 'Member'}} ID to delete." />
+            <form.element @controlType="text" id="confirm-symbol" @property="confirmSymbol" @showValidationOn="input" @helpText="Please add the {{if (eq model.memberType "consortium_organization") 'Organization' 'Member'}} ID to delete." as |el| >
+              <el.control id="confirm-symbol-field" autofocus={{true}}/>
+            </form.element>
           </form.group>
           
           <div class="pseudo-footer">
