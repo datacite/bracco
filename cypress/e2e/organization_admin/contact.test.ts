@@ -52,8 +52,8 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | CONTACTS', () => {
   it('search contacts', () => {
     // Create a contact to be searched for.
     const rndInt = randomIntFromInterval(min, max);
-    given_name = 'John';
-    family_name = 'Doe' + rndInt;
+    given_name = 'Jack';
+    family_name = 'Smith' + rndInt;
     email = given_name + '.' + family_name + '@example.org';
     type = 'providers';
     id = 'datacite';
@@ -82,8 +82,8 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | CONTACTS', () => {
   it('filter contacts', () => {
     // Create a contact for filters.
     const rndInt = randomIntFromInterval(min, max);
-    given_name = 'John';
-    family_name = 'Doe' + rndInt;
+    given_name = 'Jack';
+    family_name = 'Smith' + rndInt;
     email = given_name + '.' + family_name + '@example.org';
     type = 'providers';
     id = 'datacite';
@@ -132,8 +132,8 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | CONTACTS', () => {
 
   it('create a contact', () => {
     const rndInt = randomIntFromInterval(min, max);
-    given_name = 'John';
-    family_name = 'Doe' + rndInt;
+    given_name = 'Jack';
+    family_name = 'Smith' + rndInt;
     email = given_name + '.' + family_name + '@example.org';
 
     cy.visit('/providers/datacite/contacts/new');
@@ -170,8 +170,8 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | CONTACTS', () => {
   it('visiting specific contact', () => {
     // Create a contact to be visited.
     const rndInt = randomIntFromInterval(min, max);
-    given_name = 'John';
-    family_name = 'Doe' + rndInt;
+    given_name = 'Jack';
+    family_name = 'Smith' + rndInt;
     email = given_name + '.' + family_name + '@example.org';
     type = 'providers';
     id = 'datacite';
@@ -198,8 +198,8 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | CONTACTS', () => {
   it('update specific contact', () => {
     // Create a contact to be updated.
     const rndInt = randomIntFromInterval(min, max);
-    given_name = 'John';
-    family_name = 'Doe' + rndInt;
+    given_name = 'Jack';
+    family_name = 'Smith' + rndInt;
     email = given_name + '.' + family_name + '@example.org';
     updated_given_name = 'Jonathan';
     updated_email = updated_given_name + '.' + family_name + '@example.org';
@@ -243,8 +243,8 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | CONTACTS', () => {
   it('delete specific contact', () => {
     // Create a contact to be deleted.
     const rndInt = randomIntFromInterval(min, max);
-    given_name = 'John';
-    family_name = 'Doe' + rndInt;
+    given_name = 'Jack';
+    family_name = 'Smith' + rndInt;
     email = given_name + '.' + family_name + '@example.org';
     type = 'providers';
     id = 'datacite';
