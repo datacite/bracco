@@ -158,7 +158,8 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | CONTACTS', () => {
       cy.get('button#add-contact').should('be.visible').click({force: true}).then(() => {
         cy.wait(waitTime);
         cy.location().should((loc) => {
-          expect(loc.pathname).to.contain('/providers/dc');
+          //expect(loc.pathname).to.contain('/providers/dc');
+          expect(loc.pathname).to.contain('/contacts/');
         });
       });
     });
