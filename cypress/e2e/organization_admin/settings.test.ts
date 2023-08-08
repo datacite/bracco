@@ -85,16 +85,16 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | SETTINGS', () => {
       cy.get('h5').contains(/Service\s*Contact/i).parent().parent('.panel').within((panel) => {
         cy.get('h5').contains(/Service\s*Contact/i);
         // cy.get('[cy-data="service"] a').contains(/John\s*Doe/i).and('have.attr', 'href').and('include', 'mailto:John.Doe7426@example.org');
-        cy.get('[cy-data="service"] a').contains(/John\s*Doe/i).and('have.attr', 'href').and('contain', 'mailto:John.Doe');
+        cy.get('[cy-data="service"] a').contains(/Jack\s*Smith/i).and('have.attr', 'href').and('contain', 'mailto:Jack.Smith');
         cy.get('h5').contains(/Secondary\s*Service\s*Contact/i);
         //cy.get('[cy-data="secondary-service"] a').contains(/John\s*Doe/i).and('have.attr', 'href').and('include', 'mailto:John.Doe7426@example.org');
-        cy.get('[cy-data="secondary-service"] a').contains(/John\s*Doe/i).and('have.attr', 'href').and('contain', 'mailto:John.Doe');
+        cy.get('[cy-data="secondary-service"] a').contains(/Jack\s*Smith/i).and('have.attr', 'href').and('contain', 'mailto:Jack.Smith');
         cy.get('h5').contains(/Technical\s*Contact/i);
         // cy.get('[cy-data="technical"] a').contains(/John\s*Doe/i).and('have.attr', 'href').and('include', 'mailto:John.Doe7426@example.org');
-        cy.get('[cy-data="technical"] a').contains(/John\s*Doe/i).and('have.attr', 'href').and('contain', 'mailto:John.Doe');
+        cy.get('[cy-data="technical"] a').contains(/Jack\s*Smith/i).and('have.attr', 'href').and('contain', 'mailto:Jack.Smith');
         cy.get('h5').contains(/Secondary\s*Technical\s*Contact/i);
         // cy.get('[cy-data="secondary-technical"] a').contains(/John\s*Doe/i).and('have.attr', 'href').and('include', 'mailto:John.Doe7426@example.org');
-        cy.get('[cy-data="secondary-technical"] a').contains(/John\s*Doe/i).and('have.attr', 'href').and('contain', 'mailto:John.Doe');
+        cy.get('[cy-data="secondary-technical"] a').contains(/Jack\s*Smith/i).and('have.attr', 'href').and('contain', 'mailto:Jack.Smith');
       });
 
       // Create DOI button
