@@ -283,9 +283,9 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | CONTACTS', () => {
 
   // TBD - custom command for adding service contact to repository so we can test this.
   it('show member settings', () => {
-    cy.visit('/providers/datacite');
+    cy.visit('/providers/datacite/settings');
     cy.location().should((loc) => {
-      expect(loc.pathname).to.eq('/providers/datacite');
+      expect(loc.pathname).to.eq('/providers/datacite/settings');
     });
 
     cy.get('h2.work').contains('DataCite');
