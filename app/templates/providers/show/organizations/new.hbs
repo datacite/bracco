@@ -25,35 +25,41 @@
       <ProviderId @model={{model.organization}} @form={{form}} />
       <form.element
         @controlType="text"
-        @id="member-type"
+        id="member-type"
         @label="Member Type"
-        @value="Consortium Organization"
-        @readonly={{true}}
-      />
+        @value="Consortium Organization" as |el|
+      >
+        <el.control readonly={{true}} id="member-type-field" />
+      </form.element>
       <form.element
         @controlType="text"
-        @id="name"
+        id="name"
         @label="Organization Name"
         @property="name"
-        @helpText="The official name of your organization."
-      />
+        @helpText="The official name of your organization." as |el|
+      >
+        <el.control id="name-field" />
+      </form.element>
       <form.element
         @controlType="text"
-        @id="display-name"
+        id="display-name"
         @label="Organization Display Name"
         @property="displayName"
-        @helpText="Name of your organization as you would like it to appear in Fabrica and on DataCite’s website."
-      />
+        @helpText="Name of your organization as you would like it to appear in Fabrica and on DataCite’s website." as |el|
+      >
+        <el.control id="display-name-field" />
+      </form.element>
       {{#if features.enableDoiEstimate}}
         <form.element
           @controlType="text"
-          @id="doi-estimate"
+          id="doi-estimate"
           @label="Estimated DOIs"
-          @placeholder = "0"
           @property="doiEstimate"
           required
-          @helpText={{html-safe (concat "Enter the number of DOIs expected to be registered annually. This amount will be pro-rated for the remaining months of the year. If the consortium fee cap applies enter zero (0). See more details in our <a href='" (get (links) "FEE_MODEL_URL" ) "' target='_blank'>fee model</a>.")}}
-        />
+          @helpText={{html-safe (concat "Enter the number of DOIs expected to be registered annually. This amount will be pro-rated for the remaining months of the year. If the consortium fee cap applies enter zero (0). See more details in our <a href='" (get (links) "FEE_MODEL_URL" ) "' target='_blank'>fee model</a>.")}} as |el|
+        >
+          <el.control id="doi-estimate-field" placeholder = "0" required={{true}} />
+        </form.element>
       {{/if}}
       <form.element
         @controlType="power-select"
@@ -79,20 +85,24 @@
       {{#if (can 'create provider')}}
         <form.element
           @controlType="text"
-          @id="salesforce-id"
+          id="salesforce-id"
           @label="Salesforce ID"
           @property="salesforceId"
-          @helpText="The 18 digit ID in Salesforce."
-        />
+          @helpText="The 18 digit ID in Salesforce." as |el|
+        >
+          <el.control id="salesforce-id-field" />
+        </form.element>
       {{/if}}
       {{#if (can 'token provider')}}
         <form.element
           @controlType="text"
-          @id="globus-uuid"
+          id="globus-uuid"
           @label="Globus UUID (optional)"
           @property="globusUuid"
-          @helpText="The Globus UUID used for token authentication."
-        />
+          @helpText="The Globus UUID used for token authentication." as |el|
+        >
+          <el.control id="globus-uuid-field" />
+        </form.element>
       {{/if}}
       {{#if (can 'create provider')}}
         <form.element
@@ -116,33 +126,40 @@
       {{/if}}
       <form.element
         @controlType="text"
-        @id="system-email"
+        id="system-email"
         @label="System Email"
         @property="systemEmail"
-        @helpText="This is the email used for sending password reset requests and similar system notifications."
-      />
+        @helpText="This is the email used for sending password reset requests and similar system notifications." as |el|
+      >
+        <el.control id="system-email-field" />
+      </form.element>
       <form.element
         @controlType="text"
-        @id="group-email"
+        id="group-email"
         @label="Group Email (optional)"
         @property="groupEmail"
-        @helpText="A generic shared email address (such as info@datacite.org or similar) where you would like to receive communications from DataCite."
-      />
+        @helpText="A generic shared email address (such as info@datacite.org or similar) where you would like to receive communications from DataCite." as |el|
+      >
+        <el.control id="group-email-field" />
+      </form.element>
       <form.element
         @controlType="text"
-        @id="website"
+        id="website"
         @label="Website"
         @property="website (optional)"
-        @helpText="Website of the organization."
-      />
+        @helpText="Website of the organization." as |el|
+      >
+        <el.control id="website-field" />
+      </form.element>
       <form.element
         @controlType="text"
-        @id="twitter-handle"
+        id="twitter-handle"
         @label="Twitter (optional)"
         @property="twitterHandle"
-        @placeholder="Add @twitter account"
-        @helpText="DataCite will follow you on twitter."
-      />
+        @helpText="DataCite will follow you on twitter." as |el|
+      >
+        <el.control id="twitter-handle-field" placeholder="Add @twitter account" />
+      </form.element>
       <form.element
         @controlType="power-select"
         id="country"
@@ -206,19 +223,22 @@
       </form.element>
       <form.element
         @controlType="textarea"
-        @id="description"
+        id="description"
         @label="Description (optional)"
         @property="description"
-        @rows="10"
-        @helpText="Description of the organization. Please use markdown for formatting."
-      />
+        @helpText="Description of the organization. Please use markdown for formatting." as |el|
+      >
+        <el.control id="description-field" rows=10 />
+      </form.element>
       <form.element
         @controlType="checkbox"
-        @id="is-active"
+        id="is-active"
         @label="Account is active"
         @property="isActive"
-        @helpText="This account can manage repositories and prefixes"
-      />
+        @helpText="This account can manage repositories and prefixes" as |el|
+      >
+        <el.control id="is-active-field" />
+      </form.element>
       <h3 class="member-results">
         Contact Information
       </h3>

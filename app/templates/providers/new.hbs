@@ -25,7 +25,7 @@
           <ProviderId @model={{model}} @form={{form}} />
           <form.element
             @controlType="power-select"
-            @id="ror-id"
+            id="ror-id"
             @label="Organization identifier (optional)"
             @property="rorId"
             @optionLabelPath="rorId"
@@ -46,53 +46,61 @@
           </form.element>
           <form.element
             @controlType="text"
-            @id="name"   
+            id="name"   
             @label="Member Name"
             @property="name"
-            @helpText="The official name of your organization."
-          />
+            @helpText="The official name of your organization." as |el|
+          >
+            <el.control id="name-field" />
+          </form.element>
           <form.element
             @controlType="text"
-            @id="display-name"
+            id="display-name"
             @label="Member Display Name"
             @property="displayName"
-            @helpText="Name of your organization as you would like it to appear in Fabrica and on DataCite’s website."
-          />
+            @helpText="Name of your organization as you would like it to appear in Fabrica and on DataCite’s website." as |el|
+          >
+            <el.control id="display-name-field" />
+          </form.element>
           {{#if (eq model.memberType 'consortium_organization')}}
             {{#if features.enableDoiEstimate}}
               <form.element
                 @controlType="text"
-                @id="doi-estimate"
+                id="doi-estimate"
                 @label="Estimated DOIs"
-                @placeholder = "0"
                 @property="doiEstimate"
-                required
-                @helpText={{html-safe (concat "Enter the number of DOIs expected to be registered annually. This amount will be pro-rated for the remaining months of the year. If the consortium fee cap applies enter zero (0). See more details in our <a href='" (get (links) "FEE_MODEL_URL" ) "' target='_blank'>fee model</a>.")}}
-              />
+                @helpText={{html-safe (concat "Enter the number of DOIs expected to be registered annually. This amount will be pro-rated for the remaining months of the year. If the consortium fee cap applies enter zero (0). See more details in our <a href='" (get (links) "FEE_MODEL_URL" ) "' target='_blank'>fee model</a>.")}} as |el|
+              >
+                <el.control id="doi-estimate-field" placeholder = "0" required={{true}} />
+              </form.element>
             {{/if}}
           {{/if}}
           {{#if (can 'create provider')}}
             <form.element
               @controlType="text"
-              @id="salesforce-id"
+              id="salesforce-id"
               @label="Salesforce ID"
               @property="salesforceId"
-              @helpText="The 18 digit ID in Salesforce."
-            />
+              @helpText="The 18 digit ID in Salesforce." as |el|
+            >
+              <el.control id="salesforce-id-field" />
+            </form.element>
           {{/if}}
           {{#if (can 'token provider')}}
             <form.element
               @controlType="text"
-              @id="globus-uuid"
+              id="globus-uuid"
               @label="Globus UUID (optional)"
               @property="globusUuid"
-              @helpText="The Globus UUID used for token authentication."
-            />
+              @helpText="The Globus UUID used for token authentication." as |el|
+            >
+              <el.control id="globus-uuid-field" />
+           </form.element>
           {{/if}}
           {{#if (can 'create provider')}}
             <form.element
               @controlType="power-select"
-              @id="member-type"
+              id="member-type"
               @label="Member Type"
               @property="memberType"
               @options={{memberTypes}}
@@ -110,7 +118,7 @@
             </form.element>
             <form.element
               @controlType="power-select"
-              @id="tax-status"
+              id="tax-status"
               @label="Tax Status"
               @property="nonProfitStatus"
               @options={{nonProfitStatuses}}
@@ -151,36 +159,43 @@
           {{/if}}
           <form.element
             @controlType="text"
-            @id="system-email"
+            id="system-email"
             @label="System Email"
             @property="systemEmail"
-            @helpText="This is the email used for sending password reset requests and similar system notifications."
-          />
+            @helpText="This is the email used for sending password reset requests and similar system notifications." as |el|
+          >
+            <el.control id="system-email-field" />
+          </form.element>
           <form.element
             @controlType="text"
-            @id="group-email"
+            id="group-email"
             @label="Group Email (optional)"
             @property="groupEmail"
-            @helpText="A generic shared email address (such as info@datacite.org or similar) where you would like to receive communications from DataCite."
-          />
+            @helpText="A generic shared email address (such as info@datacite.org or similar) where you would like to receive communications from DataCite." as |el|
+          >
+            <el.control id="group-email-field" />
+          </form.element>
           <form.element
             @controlType="text"
-            @id="website"
+            id="website"
             @label="Website (optional)"
             @property="website"
-            @helpText="Website of the member."
-          />
+            @helpText="Website of the member." as |el|
+          >
+            <el.control id="website-field" />
+          </form.element>
           <form.element
             @controlType="text"
-            @id="twitter-handle"
+            id="twitter-handle"
             @label="Twitter (optional)"
             @property="twitterHandle"
-            @placeholder="Add @twitter account"
-            @helpText="DataCite will follow you on twitter."
-          />
+            @helpText="DataCite will follow you on twitter." as |el|
+          >
+            <el.control id="twitter-handle-field" placeholder="Add @twitter account" />
+          </form.element>
           <form.element
             @controlType="power-select"
-            @id="country"
+            id="country"
             @label="Country (optional)"
             @property="country"
             @optionLabelPath="name"
@@ -202,7 +217,7 @@
           </form.element>
           <form.element
             @controlType="power-select"
-            @id="organization-type"
+            id="organization-type"
             @label="Organization Type (optional)"
             @property="organizationType"
             @options={{organizationTypes}}
@@ -221,7 +236,7 @@
           </form.element>
           <form.element
             @controlType="power-select"
-            @id="focus-area"
+            id="focus-area"
             @label="Focus Area (optional)"
             @property="focusArea"
             @options={{focusAreas}}
@@ -241,13 +256,13 @@
           </form.element>
           <form.element
             @controlType="textarea"
-            @id="description"
+            id="description"
             @label="Description (optional)"
             @property="description"app/templates/providers/new.hbs
-            @rows="10"
-            @helpText="Description of the member. Please use markdown for formatting."
-
-          />
+            @helpText="Description of the member. Please use markdown for formatting." as |el|
+          >
+            <el.control rows="10" id="description-field" />
+          </form.element>
           {{#if (not-eq model.memberType 'consortium_organization')}}
             <label class="control-label col-md-3">
               Logo
@@ -287,42 +302,52 @@
             </h3>
             <form.element
               @controlType="text"
-              @id="billing-information-department"
+              id="billing-information-department"
               @label="Billing Department"
               @property="billingInformation.department"
-              @helpText="Your organization's specific department that is responsible for payment"
-            />
+              @helpText="Your organization's specific department that is responsible for payment" as |el|
+            >
+              <el.control id="billing-information-department-field" />
+            </form.element>
             <form.element
               @controlType="text"
-              @id="billing-information-organization"
+              id="billing-information-organization"
               @label="Billing Organization"
               @property="billingInformation.organization"
-              @helpText="Your organization's name for billing purposes if different from the official name"
-            />
+              @helpText="Your organization's name for billing purposes if different from the official name" as |el|
+            >
+              <el.control id="billing-information-organization-field" />
+            </form.element>
             <form.element
               @controlType="text"
-              @id="billing-information-street"
+              id="billing-information-street"
               @label="Billing Street"
               @property="billingInformation.address"
-              @helpText="Your organization's street for billing purposes"
-            />
+              @helpText="Your organization's street for billing purposes" as |el|
+            >
+              <el.control id="billing-information-street-field" />
+            </form.element>
             <form.element
               @controlType="text"
-              @id="billing-information-city"
+              id="billing-information-city"
               @label="Billing City"
               @property="billingInformation.city"
-              @helpText="Your organization's city for billing purposes"
-            />
+              @helpText="Your organization's city for billing purposes" as |el|
+            >
+              <el.control id="billing-information-city-field" />
+            </form.element>
             <form.element
               @controlType="text"
-              @id="billing-information-postcode"
+              id="billing-information-postcode"
               @label="Billing Zip/Post Code"
               @property="billingInformation.postCode"
-              @helpText="Your organization's Zip/post code for billing purposes"
-            />
+              @helpText="Your organization's Zip/post code for billing purposes" as |el|
+            >
+              <el.control id="billing-information-postcode-field" />
+            </form.element>
             <form.element
               @controlType="power-select"
-              @id="billing-information-country"
+              id="billing-information-country"
               @label="Billing Country"
               @property="billingInformation.country"
               @optionLabelPath="name"
@@ -345,7 +370,7 @@
             {{#if showStateSearch}}
               <form.element
                 @controlType="power-select"
-                @id="billing-information-state"
+                id="billing-information-state"
                 @label="Billing State/Province"
                 @property="billingInformation.state"
                 @optionLabelPath="name"
@@ -369,11 +394,13 @@
           {{/if}}
           <form.element
             @controlType="checkbox"
-            @id="is-active"
+            id="is-active"
             @label="Account is active"
             @property="isActive"
-            @helpText="This account can manage repositories and prefixes"
-          />
+            @helpText="This account can manage repositories and prefixes" as |el|
+          >
+            <el.control id="is-active-field" />
+          </form.element>
           <div class="col-md-9 col-md-offset-3">
             <BsAlert @dismissible={{false}} @type="warning">
               The contacts entered may receive notifications about administration, webinars, product testing,

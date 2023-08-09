@@ -8,6 +8,7 @@
 
     <BsForm @formLayout="horizontal" @horizontalLabelGridClass="col-md-3" @model={{model.repository}} @onSubmit={{action "submit" model.repository model}} @submitOnEnter={{true}} as |form|>
       <RepositoryId @model={{model.repository}} @provider={{model.provider}} @form={{form}} />
+      
       <form.element @controlType="power-select" id="client-type" @label="Type" @value={{clientType}} @options={{clientTypes}} @optionLabelPath="label" as |el|>
         <el.control @onChange={{action "selectClientType"}} @search={{action "searchClientType"}} @placeholder="Select Client Type" @searchPlaceholder="Type to search..." @searchEnabled={{true}} />
       {{#if (eq model.repository.clientType "igsnCatalog")}}
