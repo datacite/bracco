@@ -31,7 +31,7 @@ describe('Admin: Repositories Tabs', () => {
         });
       });
 
-      cy.visit('/repositories/datacite.test/info');
+      cy.visit('/repositories/datacite.test/settings');
       cy.wait(waitTime2);
   
       // Has left sidebar with create doi button.
