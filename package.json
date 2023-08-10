@@ -122,7 +122,7 @@
     "ember-cli-deprecation-workflow": "^2.1.0",
     "ember-cli-dotenv": "^3.1.0",
     "ember-cli-fastboot": "^3.3.2",
-    "ember-cli-flash": "^1.9.1",
+    "ember-cli-flash": "^2.2.2",
     "ember-cli-head": "^1.0.0",
     "ember-cli-htmlbars": "^5.3.1",
     "ember-cli-inject-live-reload": "^2.0.2",
