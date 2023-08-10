@@ -15,12 +15,16 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | CONTACTS', () => {
   const waitTime2 = 2000;
   const waitTime3 = 3000;
   const waitTime4 = 4000;
-  const min = 5000;
-  const max = 9999;
+  const min = 500000;
+  const max = 999999;
+  const consortium_id = Cypress.env('consortium_admin_username').toLowerCase()
 
   before(function () {
     cy.login(Cypress.env('consortium_admin_username'), Cypress.env('consortium_admin_password'));
     cy.setCookie('_consent', 'true');
+    cy.getCookie('_jwt').then((cookie) => {
+      cy.deleteProviderContacts(consortium_id, Cypress.env('api_url'), cookie.value)
+    })
   })
 
   beforeEach(() => {
@@ -29,8 +33,8 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | CONTACTS', () => {
   });
 
   it('visiting contacts for member', () => {
-    cy.visit('/providers/dc/contacts');
-    cy.url().should('include', '/providers/dc/contacts')
+    cy.visit('/providers/' + consortium_id + '/contacts');
+    cy.url().should('include', '/providers/' + consortium_id + '/contacts')
     cy.wait(waitTime);
 
     // Has Fabrica logo and correct navbar color
@@ -55,16 +59,15 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | CONTACTS', () => {
     family_name = 'Smith' + rndInt;
     email = given_name + '.' + family_name + '@example.org';
     type = 'providers';
-    id = 'dc';
     roles = [];
 
     cy.getCookie('_jwt').then((cookie) => {
-      cy.createContact(email, given_name, family_name, roles, type, id, Cypress.env('api_url'), cookie.value).then((id) => {
+      cy.createContact(email, given_name, family_name, roles, type, consortium_id, Cypress.env('api_url'), cookie.value).then((id) => {
         cy.log('CREATED CONTACT: ' + given_name + ' ' + family_name + ' (' + id + ')');
 
         // Give it a little extra time to process the new contact so that we can search for it.
-        cy.visit('/providers/dc/contacts');
-        cy.url().should('include', '/providers/dc/contacts')
+        cy.visit('/providers/' + consortium_id + '/contacts');
+        cy.url().should('include', '/providers/' + consortium_id + '/contacts')
         cy.wait(waitTime)
 
         cy.get('input[name="query"]')
@@ -83,16 +86,15 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | CONTACTS', () => {
     family_name = 'Smith' + rndInt;
     email = given_name + '.' + family_name + '@example.org';
     type = 'providers';
-    id = 'dc';
     roles = ["service", "secondary_service", "technical", "secondary_technical", "billing"];
 
     cy.getCookie('_jwt').then((cookie) => {
-      cy.createContact(email, given_name, family_name, roles, type, id, Cypress.env('api_url'), cookie.value).then((id) => {
+      cy.createContact(email, given_name, family_name, roles, type, consortium_id, Cypress.env('api_url'), cookie.value).then((id) => {
         cy.log('CREATED CONTACT: ' + given_name + ' ' + family_name + ' (' + id + ')');
 
         // Give it a little extra time to process the new contact so that we can search for it.
-        cy.visit('/providers/dc/contacts');
-        cy.url().should('include', '/providers/dc/contacts')
+        cy.visit('/providers/' + consortium_id + '/contacts');
+        cy.url().should('include', '/providers/' + consortium_id + '/contacts')
         cy.wait(waitTime)
 
         cy.get('a#role-name-service')
@@ -133,8 +135,8 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | CONTACTS', () => {
     family_name = 'Smith' + rndInt;
     email = given_name + '.' + family_name + '@example.org';
 
-    cy.visit('/providers/dc/contacts/new');
-    cy.url().should('include', '/providers/dc/contacts/new').then(() => {
+    cy.visit('/providers/' + consortium_id + '/contacts/new');
+    cy.url().should('include', '/providers/' + consortium_id + '/contacts/new').then(() => {
       cy.wait(waitTime);
 
       cy.get('h3.edit').contains('Add Contact');
@@ -158,7 +160,7 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | CONTACTS', () => {
       cy.get('button#add-contact').should('be.visible').click({force: true}).then(() => {
         cy.wait(waitTime);
         cy.location().should((loc) => {
-          //expect(loc.pathname).to.contain('/providers/dc');
+          //expect(loc.pathname).to.contain('/providers/' + consortium_id);
           expect(loc.pathname).to.contain('/contacts/');
         });
       });
@@ -177,12 +179,11 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | CONTACTS', () => {
     family_name = 'Smith' + rndInt;
     email = given_name + '.' + family_name + '@example.org';
     type = 'providers';
-    id = 'dc';
     //roles = ["service", "secondary_service", "technical", "secondary_technical", "billing"];
     roles = [];
 
     cy.getCookie('_jwt').then((cookie) => {
-      cy.createContact(email, given_name, family_name, roles, type, id, Cypress.env('api_url'), cookie.value).then((id) => {
+      cy.createContact(email, given_name, family_name, roles, type, consortium_id, Cypress.env('api_url'), cookie.value).then((id) => {
         cy.log('CREATED CONTACT: ' + given_name + ' ' + family_name + ' (' + id + ')');
 
         cy.visit('/contacts/' + id);
@@ -205,12 +206,11 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | CONTACTS', () => {
     family_name = 'Smith' + rndInt;
     email = given_name + '.' + family_name + '@example.org';
     type = 'providers';
-    id = 'dc';
     //roles = ["service", "secondary_service", "technical", "secondary_technical", "billing"];
     roles = [];
 
     cy.getCookie('_jwt').then((cookie) => {
-      cy.createContact(email, given_name, family_name, roles, type, id, Cypress.env('api_url'), cookie.value).then((id) => {
+      cy.createContact(email, given_name, family_name, roles, type, consortium_id, Cypress.env('api_url'), cookie.value).then((id) => {
         cy.log('CREATED CONTACT: ' + given_name + ' ' + family_name + ' (' + id + ')');
 
         cy.visit('/contacts/' + id + '/edit');
@@ -241,12 +241,11 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | CONTACTS', () => {
     family_name = 'Smith' + rndInt;
     email = given_name + '.' + family_name + '@example.org';
     type = 'providers';
-    id = 'dc';
     //roles = ["service", "secondary_service", "technical", "secondary_technical", "billing"];
     roles = [];
 
     cy.getCookie('_jwt').then((cookie) => {
-      cy.createContact(email, given_name, family_name, roles, type, id, Cypress.env('api_url'), cookie.value).then((id) => {
+      cy.createContact(email, given_name, family_name, roles, type, consortium_id, Cypress.env('api_url'), cookie.value).then((id) => {
         cy.log('CREATED CONTACT: ' + given_name + ' ' + family_name + ' (' + id + ')');
 
         cy.visit('/contacts/' + id + '/delete');
