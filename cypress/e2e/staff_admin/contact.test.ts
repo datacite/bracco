@@ -26,7 +26,7 @@ describe('ACCEPTANCE: STAFF_ADMIN | CONTACTS', () => {
     cy.login(Cypress.env('staff_admin_username'), Cypress.env('staff_admin_password'));
     cy.setCookie('_consent', 'true');
     cy.getCookie('_jwt').then((cookie) => {
-      cy.deleteProviderContacts(provider_id, Cypress.env('api_url'), cookie.value)
+      cy.deleteProviderTestContacts(provider_id, Cypress.env('api_url'), cookie.value)
     })
   })
 
@@ -34,6 +34,12 @@ describe('ACCEPTANCE: STAFF_ADMIN | CONTACTS', () => {
     Cypress.Cookies.preserveOnce('_fabrica', '_jwt', '_consent');
     cy.wait(waitTime2);
   });
+
+  after(() => {
+    cy.getCookie('_jwt').then((cookie) => {
+      cy.deleteProviderTestContacts(provider_id, Cypress.env('api_url'), cookie.value)
+    })
+  })
 
   it('search contacts', () => {
     // Create a contact to be searched for.
@@ -217,8 +223,8 @@ describe('ACCEPTANCE: STAFF_ADMIN | CONTACTS', () => {
       cy.createContact(email, given_name, family_name, roles, type, provider_id, Cypress.env('api_url'), cookie.value).then((id) => {
         cy.log('CREATED CONTACT: ' + given_name + ' ' + family_name + ' (' + id + ')');
 
-        cy.visit('/contacts/' + provider_id + '/edit');
-        cy.url().should('include', '/contacts/' + provider_id + '/edit')
+        cy.visit('/contacts/' + id + '/edit');
+        cy.url().should('include', '/contacts/' + id + '/edit')
         cy.wait(waitTime);
 
         cy.get('h2.work').contains(given_name + ' ' + family_name);
@@ -237,7 +243,7 @@ describe('ACCEPTANCE: STAFF_ADMIN | CONTACTS', () => {
           .then(() => {
             cy.wait(waitTime);
             cy.location().should((loc) => {
-              expect(loc.pathname).to.eq('/contacts/' + provider_id);
+              expect(loc.pathname).to.eq('/contacts/' + id);
             });
             cy.get('h2.work').contains(updated_given_name + ' ' + family_name);
           });
@@ -260,8 +266,8 @@ describe('ACCEPTANCE: STAFF_ADMIN | CONTACTS', () => {
         cy.log('CREATED CONTACT: ' + given_name + ' ' + family_name + ' (' + id + ')');
 
 
-        cy.visit('/contacts/' + provider_id);
-        cy.url().should('include', '/contacts/' + provider_id);
+        cy.visit('/contacts/' + id);
+        cy.url().should('include', '/contacts/' + id);
         cy.wait(waitTime);
 
         cy.get('a#delete-contact').contains('Delete Contact').click();

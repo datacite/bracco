@@ -23,7 +23,7 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | CONTACTS', () => {
     cy.login(Cypress.env('consortium_admin_username'), Cypress.env('consortium_admin_password'));
     cy.setCookie('_consent', 'true');
     cy.getCookie('_jwt').then((cookie) => {
-      cy.deleteProviderContacts(consortium_id, Cypress.env('api_url'), cookie.value)
+      cy.deleteProviderTestContacts(consortium_id, Cypress.env('api_url'), cookie.value)
     })
   })
 
@@ -31,6 +31,12 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | CONTACTS', () => {
     Cypress.Cookies.preserveOnce('_fabrica', '_jwt', '_consent');
     cy.wait(waitTime2);
   });
+
+  after(() => {
+    cy.getCookie('_jwt').then((cookie) => {
+      cy.deleteProviderTestContacts(consortium_id, Cypress.env('api_url'), cookie.value)
+    })
+  })
 
   it('visiting contacts for member', () => {
     cy.visit('/providers/' + consortium_id + '/contacts');
