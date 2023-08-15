@@ -21,13 +21,11 @@ describe('ACCEPTANCE: STAFF_ADMIN | CONTACTS', () => {
   const min = 500000;
   const max = 999999;
   const provider_id = Cypress.env('organization_admin_username').toLowerCase()
+  const test_contact_family_name_prefix = "ABCD"
 
   before(function () {
     cy.login(Cypress.env('staff_admin_username'), Cypress.env('staff_admin_password'));
     cy.setCookie('_consent', 'true');
-    cy.getCookie('_jwt').then((cookie) => {
-      cy.deleteProviderTestContacts(provider_id, Cypress.env('api_url'), cookie.value)
-    })
   })
 
   beforeEach(() => {
@@ -37,7 +35,7 @@ describe('ACCEPTANCE: STAFF_ADMIN | CONTACTS', () => {
 
   after(() => {
     cy.getCookie('_jwt').then((cookie) => {
-      cy.deleteProviderTestContacts(provider_id, Cypress.env('api_url'), cookie.value)
+      cy.deleteProviderTestContacts(provider_id, test_contact_family_name_prefix, Cypress.env('api_url'), cookie.value)
     })
   })
 
@@ -45,7 +43,7 @@ describe('ACCEPTANCE: STAFF_ADMIN | CONTACTS', () => {
     // Create a contact to be searched for.
     const rndInt = randomIntFromInterval(min, max);
     given_name = 'Jack';
-    family_name = 'Smith' + rndInt;
+    family_name = test_contact_family_name_prefix + rndInt;
     email = given_name + '.' + family_name + '@example.org';
     type = 'providers';
     roles = [];
@@ -82,7 +80,7 @@ describe('ACCEPTANCE: STAFF_ADMIN | CONTACTS', () => {
     // Create a contact for filters.
     const rndInt = randomIntFromInterval(min, max);
     given_name = 'Sack';
-    family_name = 'Smith' + rndInt;
+    family_name = test_contact_family_name_prefix + rndInt;
     email = given_name + '.' + family_name + '@example.org';
     type = 'providers';
     roles = ["service", "secondary_service", "technical", "secondary_technical", "billing", "voting", "secondary_billing"];
@@ -146,7 +144,7 @@ describe('ACCEPTANCE: STAFF_ADMIN | CONTACTS', () => {
   it('create a contact', () => {
     const rndInt = randomIntFromInterval(min, max);
     given_name = 'Jack';
-    family_name = 'Smith' + rndInt;
+    family_name = test_contact_family_name_prefix + rndInt;
     email = given_name + '.' + family_name + '@example.org';
 
     cy.visit('/providers/' + provider_id + '/contacts/new');
@@ -184,7 +182,7 @@ describe('ACCEPTANCE: STAFF_ADMIN | CONTACTS', () => {
     // Create a contact to be visited.
     const rndInt = randomIntFromInterval(min, max);
     given_name = 'Jack';
-    family_name = 'Smith' + rndInt;
+    family_name = test_contact_family_name_prefix + rndInt;
     email = given_name + '.' + family_name + '@example.org';
     type = 'providers';
     //roles = ["service", "secondary_service", "technical", "secondary_technical", "billing"];
@@ -211,7 +209,7 @@ describe('ACCEPTANCE: STAFF_ADMIN | CONTACTS', () => {
     // Create a contact to be updated.
     const rndInt = randomIntFromInterval(min, max);
     given_name = 'Jack';
-    family_name = 'Smith' + rndInt;
+    family_name = test_contact_family_name_prefix + rndInt;
     email = given_name + '.' + family_name + '@example.org';
     updated_given_name = 'Jonathan';
     updated_email = updated_given_name + '.' + family_name + '@example.org';
@@ -255,7 +253,7 @@ describe('ACCEPTANCE: STAFF_ADMIN | CONTACTS', () => {
     // Create a contact to be deleted.
     const rndInt = randomIntFromInterval(min, max);
     given_name = 'Jack';
-    family_name = 'Smith' + rndInt;
+    family_name = test_contact_family_name_prefix + rndInt;
     email = given_name + '.' + family_name + '@example.org';
     type = 'providers';
     //roles = ["service", "secondary_service", "technical", "secondary_technical", "billing"];
