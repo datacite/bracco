@@ -168,3 +168,38 @@ Cypress.Commands.add("createContact", (email, given_name, family_name, roles, ty
     return(response.body.data.id);
   });
 })
+
+Cypress.Commands.add("deleteProviderTestContacts", (provider, test_contact_family_name_prefix, api_url, jwt) => {
+  return cy.request({
+    method: 'GET',
+    url: api_url + '/contacts?page[size]=1000&provider-id=' + provider + "&query=family_name:" + test_contact_family_name_prefix + "*",
+    headers: {
+      authorization: 'Bearer ' + jwt,
+    },
+    failOnStatusCode: true,
+  }).then((response) => {
+    expect(response.status).to.eq(200)
+
+    const deleteContactsByIds = async (contact_ids) => {
+      const requests = contact_ids.map(contact_id =>
+        cy.request({
+          method: 'DELETE',
+          url: api_url + '/contacts/' + contact_id,
+          headers: {
+            authorization: 'Bearer ' + jwt,
+          },
+          failOnStatusCode: true,
+        })
+      );
+      const responses = await Promise.all(requests)
+      return responses
+    };
+
+    const contacts = response.body.data
+    const contact_ids = contacts.map(obj => obj.id)
+
+    deleteContactsByIds(contact_ids).then(responses => {
+      return responses
+    });
+  });
+})
