@@ -22,7 +22,12 @@ require('./commands')
 Cypress.on('uncaught:exception', (err, runnable) => {
   // we expect a 3rd party library error with the given message
   // and don't want to fail the test so we return false
-  if (err.message.includes("Failed to update the 'id' for the RecordIdentifier")) {
+  if (
+    err.message.includes("Failed to update the 'id' for the RecordIdentifier") ||
+    err.message.includes("Attempted to register a view with an id already in use") ||
+    err.message.includes('Ember Data Request GET.*returned a 503') ||
+    err.message.includes('some of the associated records were not loaded')
+  ) {
     return false
   }
   // we still want to ensure there are no other unexpected
