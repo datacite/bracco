@@ -264,14 +264,22 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | CONTACTS', () => {
     });
   });
 
-  // TBD: need custom command to create a repository with missing contacts.
   it('show repositories for consortium organization with missing contacts', () => {
-    cy.visit('/providers/mgxi/repositories');
-    cy.url().should('include', '/providers/mgxi/repositories')
+    const provider_id = Cypress.env('organization_admin_username').toLowerCase()
+    
+    cy.getCookie('_jwt').then((cookie) => {
+      cy.deleteProviderTestContacts(provider_id, test_contact_family_name_prefix, Cypress.env('api_url'), cookie.value)
+    })
+
+    cy.visit('/providers/' + provider_id + '/repositories');
+    cy.url().should('include', '/providers/' + provider_id + '/repositories')
     cy.wait(waitTime);
 
-    cy.get('h2.work').contains('ETH Zurich');
-    cy.get('h3.work').contains('Atlas of Innovations');
-    cy.get('#add-repository').should('exist');
+    cy.get('h2.work').contains('DataCite');
+    cy.get('h3.work').contains('AEKOS Data Portal');
+
+    cy.get('#add-repository').should('not.exist');
+    cy.get('.alert').contains("New repositories can't be created because you have not provided the")
+    cy.get('.alert').contains("After adding contacts, please assign roles in the")
   });
 });
