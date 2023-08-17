@@ -58,12 +58,12 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | CONTACTS', () => {
 
   it('search contacts', () => {
     // Create a contact to be searched for.
-    const rndInt = randomIntFromInterval(min, max);
-    given_name = 'Jack';
-    family_name = test_contact_family_name_prefix + rndInt;
-    email = given_name + '.' + family_name + '@example.org';
-    type = 'providers';
-    roles = [];
+    var rndInt = randomIntFromInterval(min, max);
+    var given_name = 'Jack';
+    var family_name = test_contact_family_name_prefix + rndInt;
+    var email = given_name + '.' + family_name + '@example.org';
+    var type = 'providers';
+    var roles: never[] = [];
 
     cy.getCookie('_jwt').then((cookie) => {
       cy.createContact(email, given_name, family_name, roles, type, consortium_id, Cypress.env('api_url'), cookie.value).then((id) => {
@@ -85,12 +85,12 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | CONTACTS', () => {
   // filters are [service, billing, technical, secondary_service, secondary_technical]
   it('filter contacts', () => {
     // Create a contact to be searched for.
-    const rndInt = randomIntFromInterval(min, max);
-    given_name = 'Jack';
-    family_name = test_contact_family_name_prefix + rndInt;
-    email = given_name + '.' + family_name + '@example.org';
-    type = 'providers';
-    roles = ["service", "secondary_service", "technical", "secondary_technical", "billing"];
+    var rndInt = randomIntFromInterval(min, max);
+    var given_name = 'Jack';
+    var family_name = test_contact_family_name_prefix + rndInt;
+    var email = given_name + '.' + family_name + '@example.org';
+    var type = 'providers';
+    var roles = ["service", "secondary_service", "technical", "secondary_technical", "billing"];
 
     cy.getCookie('_jwt').then((cookie) => {
       cy.createContact(email, given_name, family_name, roles, type, consortium_id, Cypress.env('api_url'), cookie.value).then((id) => {
@@ -134,10 +134,10 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | CONTACTS', () => {
   });
 
   it('create a contact', () => {
-    const rndInt = randomIntFromInterval(min, max);
-    given_name = 'Jack';
-    family_name = test_contact_family_name_prefix + rndInt;
-    email = given_name + '.' + family_name + '@example.org';
+    var rndInt = randomIntFromInterval(min, max);
+    var given_name = 'Jack';
+    var family_name = test_contact_family_name_prefix + rndInt;
+    var email = given_name + '.' + family_name + '@example.org';
 
     cy.visit('/providers/' + consortium_id + '/contacts/new');
     cy.url().should('include', '/providers/' + consortium_id + '/contacts/new').then(() => {
@@ -147,12 +147,9 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | CONTACTS', () => {
 
       cy.get('button.export-basic-metadata').should('not.exist');
 
-      cy.get('input#givenName-field').should('be.visible').type(given_name, { force: true })
-        .clickOutside();
-      cy.get('input#familyName-field').should('be.visible').type(family_name, { force: true })
-        .clickOutside();
-      cy.get('input#email-field').should('be.visible').type(email, { force: true })
-        .clickOutside();
+      cy.get('#givenName').find('input#givenName-field').click({ force: true }).type(given_name + '{enter}', { force: true, waitForAnimations: true })
+      cy.get('#familyName').find('input#familyName-field').click({ force: true }).type(family_name + '{enter}', { force: true, waitForAnimations: true })
+      cy.get('#email').find('input#email-field').click({ force: true }).type(email + '{enter}', { force: true, waitForAnimations: true })
 
       cy.get('.alert-warning').contains(/The contact entered may receive notifications/i)
         .within(() => {
@@ -178,13 +175,13 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | CONTACTS', () => {
 
   it.skip('visiting specific contact', () => {
     // Create a contact to be visited.
-    const rndInt = randomIntFromInterval(min, max);
-    given_name = 'Jack';
-    family_name = test_contact_family_name_prefix + rndInt;
-    email = given_name + '.' + family_name + '@example.org';
-    type = 'providers';
+    var rndInt = randomIntFromInterval(min, max);
+    var given_name = 'Jack';
+    var family_name = test_contact_family_name_prefix + rndInt;
+    var email = given_name + '.' + family_name + '@example.org';
+    var type = 'providers';
     //roles = ["service", "secondary_service", "technical", "secondary_technical", "billing"];
-    roles = [];
+    var roles: never[] = [];
 
     cy.getCookie('_jwt').then((cookie) => {
       cy.createContact(email, given_name, family_name, roles, type, consortium_id, Cypress.env('api_url'), cookie.value).then((id) => {
@@ -205,13 +202,13 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | CONTACTS', () => {
 
   it.skip('update specific contact', () => {
     // Create a contact to be updated.
-    const rndInt = randomIntFromInterval(min, max);
-    given_name = 'Jack';
-    family_name = test_contact_family_name_prefix + rndInt;
-    email = given_name + '.' + family_name + '@example.org';
-    type = 'providers';
+    var rndInt = randomIntFromInterval(min, max);
+    var given_name = 'Jack';
+    var family_name = test_contact_family_name_prefix + rndInt;
+    var email = given_name + '.' + family_name + '@example.org';
+    var type = 'providers';
     //roles = ["service", "secondary_service", "technical", "secondary_technical", "billing"];
-    roles = [];
+    var roles: never[] = [];
 
     cy.getCookie('_jwt').then((cookie) => {
       cy.createContact(email, given_name, family_name, roles, type, consortium_id, Cypress.env('api_url'), cookie.value).then((id) => {
@@ -240,13 +237,13 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | CONTACTS', () => {
 
   it.skip('delete specific contact', () => {
     // Create a contact to be deleted.
-    const rndInt = randomIntFromInterval(min, max);
-    given_name = 'Jack';
-    family_name = test_contact_family_name_prefix + rndInt;
-    email = given_name + '.' + family_name + '@example.org';
-    type = 'providers';
+    var rndInt = randomIntFromInterval(min, max);
+    var given_name = 'Jack';
+    var family_name = test_contact_family_name_prefix + rndInt;
+    var email = given_name + '.' + family_name + '@example.org';
+    var type = 'providers';
     //roles = ["service", "secondary_service", "technical", "secondary_technical", "billing"];
-    roles = [];
+    var roles: never[] = [];
 
     cy.getCookie('_jwt').then((cookie) => {
       cy.createContact(email, given_name, family_name, roles, type, consortium_id, Cypress.env('api_url'), cookie.value).then((id) => {
