@@ -50,7 +50,7 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | SETTINGS', () => {
       cy.get('ul.navbar-nav').should('have.css', 'background-color', 'rgb(0, 177, 226)');
       
       cy.get('h2.work').contains('DataCite');
-      cy.get('a#account_menu_link').should('contain', Cypress.env('organization_admin_username'));
+      cy.get('a#account_menu_link').should('contain', Cypress.env('organization_admin_username').toUpperCase());
 
       cy.get('ul.nav-tabs li a').contains(/Info/i)
         .and('have.attr', 'href').and('include', '/providers/' + provider_id);
@@ -83,7 +83,7 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | SETTINGS', () => {
 
       cy.get('h5').contains(/Member\s*ID/i).parent().parent('.panel').within((panel) => {
         cy.get('h5').contains(/Member\s*ID/i);
-        cy.get('div.panel-body').contains(/DATACITE/i);
+        cy.get('div.panel-body').contains(Cypress.env('organization_admin_username').toUpperCase());
         cy.get('h5').contains(/ROR ID/i);
         cy.get('a').contains('https://ror.org').and('have.attr', 'href').and('include', 'https://ror.org');
         cy.get('h5').contains(/Member\s*Type/i);
