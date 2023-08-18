@@ -12,7 +12,7 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | SETTINGS', () => {
   const max = 999999;
   const provider_id = Cypress.env('organization_admin_username').toLowerCase()
   const test_contact_given_name = "Jack"
-  const test_contact_family_name_prefix = "ABCD"
+  const test_contact_family_name_prefix = "OrganizationAdmin"
 
   before(function () {
     const rndInt = randomIntFromInterval(min, max);

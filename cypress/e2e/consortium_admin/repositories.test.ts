@@ -13,7 +13,7 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | REPOSITORIES', () => {
   const min = 500000;
   const max = 999999;
   const consortium_id = Cypress.env('consortium_admin_username').toLowerCase()
-  const test_contact_family_name_prefix = "ABCD"
+  const test_contact_family_name_prefix = "ConsortiumAdmin"
 
   before(function () {
     const rndInt = randomIntFromInterval(min, max);

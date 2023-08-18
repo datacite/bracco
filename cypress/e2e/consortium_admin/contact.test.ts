@@ -18,7 +18,7 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | CONTACTS', () => {
   const min = 500000;
   const max = 999999;
   const consortium_id = Cypress.env('consortium_admin_username').toLowerCase()
-  const test_contact_family_name_prefix = "ABCD"
+  const test_contact_family_name_prefix = "ConsortiumAdmin"
 
   before(function () {
     cy.login(Cypress.env('consortium_admin_username'), Cypress.env('consortium_admin_password'));
@@ -147,11 +147,11 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | CONTACTS', () => {
 
       cy.get('button.export-basic-metadata').should('not.exist');
 
-      cy.get('#givenName').find('input#givenName-field').click({ force: true }).type(given_name + '{enter}', { force: true, waitForAnimations: true })
+      cy.get('#givenName').find('input#givenName-field').click({ force: true }).type(given_name, { force: true, waitForAnimations: true })
       cy.wait(waitTime)
-      cy.get('#familyName').find('input#familyName-field').click({ force: true }).type(family_name + '{enter}', { force: true, waitForAnimations: true })
+      cy.get('#familyName').find('input#familyName-field').click({ force: true }).type(family_name, { force: true, waitForAnimations: true })
       cy.wait(waitTime)
-      cy.get('#email').find('input#email-field').click({ force: true }).type(email + '{enter}', { force: true, waitForAnimations: true })
+      cy.get('#email').find('input#email-field').click({ force: true }).type(email, { force: true, waitForAnimations: true })
       cy.wait(waitTime)
 
       cy.get('.alert-warning').contains(/The contact entered may receive notifications/i)
