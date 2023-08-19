@@ -21,7 +21,7 @@ describe('ACCEPTANCE: STAFF_ADMIN | CONTACTS', () => {
   const min = 500000;
   const max = 999999;
   const provider_id = Cypress.env('organization_admin_username').toLowerCase()
-  const test_contact_family_name_prefix = "ABCD"
+  const test_contact_family_name_prefix = "StaffAdmin"
 
   before(function () {
     cy.login(Cypress.env('staff_admin_username'), Cypress.env('staff_admin_password'));
@@ -285,7 +285,7 @@ describe('ACCEPTANCE: STAFF_ADMIN | CONTACTS', () => {
         cy.get('#confirm-delete').should('have.class', 'has-success');
 
         cy.get('button#delete').contains('Delete').click({force: true});
-        cy.wait(waitTime2);
+        cy.wait(waitTime3);
         cy.location().should((loc) => {
           expect(loc.pathname).to.eq('/providers/' + provider_id + '/contacts');
         });
