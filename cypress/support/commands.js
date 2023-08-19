@@ -55,12 +55,20 @@ Cypress.Commands.add('login', (username, password) => {
       password: password,
     },
   };
-  cy.request(options).then(resp => {
-    var jwt = resp.body.access_token;
-    var expires_in = resp.body.expires_in;
-    var my_cookie = cookie(jwt, expires_in);
-    cy.setCookie('_fabrica', my_cookie);
-    cy.setCookie('_jwt', jwt);
+
+  cy.session(username, () => {
+    cy.request(options).then(resp => {
+      var jwt = resp.body.access_token;
+      var expires_in = resp.body.expires_in;
+      var my_cookie = cookie(jwt, expires_in);
+      cy.setCookie('_fabrica', my_cookie);
+      cy.setCookie('_jwt', jwt);
+      // Maybe delete next line.
+      //window.localStorage.setItem('authToken', resp.body.access_token)
+    });
+  },
+  {
+    //cacheAcrossSpecs: true,
   });
 });
 

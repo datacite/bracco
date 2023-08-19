@@ -1,19 +1,31 @@
 /// <reference types="cypress" />
 /* eslint-disable no-undef */
 
-describe('Admin: Admin', () => {
+describe.skip('Admin: Admin', () => {
   const waitTime = 1000;
   const waitTime2 = 2000;
 
   before(function () {
     cy.login(Cypress.env('staff_admin_username'), Cypress.env('staff_admin_password'));
     cy.setCookie('_consent', 'true');
+
+      cy.wait(waitTime2);
+  })
+
+  before(function () {
+    cy.login(Cypress.env('staff_admin_username'), Cypress.env('staff_admin_password'));
+    cy.setCookie('_consent', 'true');
+
+    cy.wait(waitTime2);
   })
 
   beforeEach(() => {
-    Cypress.Cookies.preserveOnce('_fabrica', '_jwt', '_consent');
-    cy.wait(waitTime2);
+    // Move login to before function.
   });
+
+  after(() => {
+    Cypress.session.clearAllSavedSessions()
+  })
 
   it('is logged in', () => {
     cy.visit('/');

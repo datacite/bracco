@@ -31,8 +31,7 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | SETTINGS', () => {
   })
 
   beforeEach(() => {
-    Cypress.Cookies.preserveOnce('_fabrica', '_jwt', '_consent');
-    cy.wait(waitTime2);
+    // Move login to before function.
   });
 
   after(() => {

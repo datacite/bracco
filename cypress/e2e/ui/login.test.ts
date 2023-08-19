@@ -13,6 +13,21 @@
 // before running the tests below.
 
 describe('ACCEPTANCE: UI | LOGIN', function () {
+  const waitTime = 1000;
+  const waitTime2 = 2000;
+
+  before(function () {
+    //Cypress.session.clearAllSavedSessions()
+    Cypress.session.clearCurrentSessionData()
+    cy.clearCookies()
+    cy.clearAllCookies()
+    cy.clearAllLocalStorage()
+    cy.clearAllSessionStorage()
+    
+    cy.wait(waitTime2);
+  })
+
+
   beforeEach(() => {
     cy.setCookie('_consent', 'true');
     // cy.setCookie('_fabrica', Cypress.env('client_admin_cookie'), { log: false });

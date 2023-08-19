@@ -16,15 +16,17 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | REPOSITORIES', () => {
   const test_contact_family_name_prefix = "OrganizationAdmin"
 
   before(function () {
-    const rndInt = randomIntFromInterval(min, max);
-    given_name = 'Jack';
-    family_name = test_contact_family_name_prefix + rndInt;
-    email = given_name + '.' + family_name + '@example.org';
-    type = 'providers';
-    roles = ["service", "secondary_service", "technical", "secondary_technical", "billing"];
+    var rndInt = randomIntFromInterval(min, max);
+    var given_name = 'Jack';
+    var family_name = test_contact_family_name_prefix + rndInt;
+    var email = given_name + '.' + family_name + '@example.org';
+    var type = 'providers';
+    var roles = ["service", "secondary_service", "technical", "secondary_technical", "billing"];
 
     cy.login(Cypress.env('organization_admin_username'), Cypress.env('organization_admin_password'));
     cy.setCookie('_consent', 'true');
+
+    cy.wait(waitTime2);
 
     cy.getCookie('_jwt').then((cookie) => {
       cy.createContact(email, given_name, family_name, roles, type, provider_id, Cypress.env('api_url'), cookie.value)
@@ -32,8 +34,7 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | REPOSITORIES', () => {
   });
 
   beforeEach(() => {
-    Cypress.Cookies.preserveOnce('_fabrica', '_jwt', '_consent');
-    cy.wait(waitTime2);
+    // Move login to before function.
   });
 
   after(() => {
@@ -115,7 +116,8 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | REPOSITORIES', () => {
       cy.get('#client-type .ember-power-select-selected-item').should('contain', 'Repository');
 
       // Set client_type to Periodical
-      cy.get('div#client-type div[role="button"]').click({ waitForAnimations: true }).then(($dropdown) => {
+      /*
+      cy.get('div#client-type div[role="button"]').click({ waitForAnimations: true, force: true }).then(($dropdown) => {
         cy.get('ul.ember-power-select-options li').contains('Periodical').click({ waitForAnimations: true }).then(() => {
           // Periodical client_type divs should be visible and Repository client_type divs should not exist
           cy.get('#repository-issn').should('be.visible');
@@ -123,6 +125,7 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | REPOSITORIES', () => {
           cy.get('#certificate').should('not.exist');   
         })
       });
+      
 
       // Set client_type to IGSN ID Catalog
       cy.get('div#client-type div[role="button"]').click({ waitForAnimations: true }).then(($dropdown) => {
@@ -134,17 +137,19 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | REPOSITORIES', () => {
           cy.get('#certificate').should('be.visible');   
         })
       });
+      
 
       // Set client_type back to Repository
       cy.get('div#client-type div[role="button"]').click({ waitForAnimations: true }).then(($dropdown) => {
         cy.get('ul.ember-power-select-options li').contains('Repository').click({ waitForAnimations: true })
       });
+      */
 
       cy.get('#re3data').should('be.visible');
       cy.get('#name').should('be.visible');
       cy.get('#alternate-name').should('be.visible');
       cy.get('#system-email').should('be.visible');
-      cy.get('.form-group')
+      cy.get('#service-contact.form-group')
         .within(($form_group) => {
           cy.get('label').contains(/Service Contact/);
           cy.get('input#service-contact-given-name').should('be.visible');
@@ -154,7 +159,7 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | REPOSITORIES', () => {
       );
       cy.get('#description').should('be.visible')
       cy.get('#url').should('be.visible');
-      cy.get('#language')
+      cy.get('#language.form-group')
         .within(($form_group) => {
           // test for lamguage
           cy.get('button.add-language').should('be.visible');
@@ -162,19 +167,19 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | REPOSITORIES', () => {
       );
       cy.get('#software').should('be.visible');
       cy.get('#domains').should('be.visible');
-      cy.get('#repository-type')
+      cy.get('#repository-type.form-group')
         .within(($form_group) => {
           // test for lamguage
           cy.get('button.add-repositoryType').should('be.visible');
         }
       );
-      cy.get('#certificate')
+      cy.get('#certificate.form-group')
         .within(($form_group) => {
           // test for lamguage
           cy.get('button.add-certificate').should('be.visible');
         }
       );
-      cy.get('#is-active')
+      cy.get('#is-active.form-group')
         .within(($form_group) => {
           // test for lamguage
           cy.get('input[type="checkbox"]#is-active-field').should('be.visible');

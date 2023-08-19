@@ -3,7 +3,7 @@ import { defineConfig } from 'cypress'
 export default defineConfig({
   experimentalFetchPolyfill: true,
   video: false,
-  retries: 3,
+  retries: 0,
   projectId: '8j7yje',
   e2e: {
     // We've imported your old cypress plugins here.
@@ -13,5 +13,6 @@ export default defineConfig({
     },
     baseUrl: 'http://localhost:4200',
     specPattern: 'cypress/e2e/**/*.test.*',
+    testIsolation: false,
   },
 })

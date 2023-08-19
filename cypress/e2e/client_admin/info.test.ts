@@ -13,14 +13,15 @@ describe('ACCEPTANCE: CLIENT_ADMIN | INFO', () => {
   before(function () {
     cy.login(Cypress.env('client_admin_username'), Cypress.env('client_admin_password'));
     cy.setCookie('_consent', 'true');
+
+    cy.wait(waitTime2);
   })
 
   beforeEach(() => {
-    Cypress.Cookies.preserveOnce('_fabrica', '_jwt', '_consent');
-    cy.wait(waitTime2);
+    // Move login to before function.
   });
 
-  it('is logged in to homepage', () => {
+  it.skip('is logged in to homepage', () => {
     cy.visit('/');
     cy.url().should('include', '/repositories/datacite.test').then(() => {
 

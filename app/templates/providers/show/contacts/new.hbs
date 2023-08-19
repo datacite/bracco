@@ -21,7 +21,7 @@
         @label="Given Name"
         @property="givenName" as |el|
       >
-        <el.control id="givenName-field" />
+        <el.control id="givenName-field" disabled={{false}} />
       </form.element>
       <form.element
         @controlType="text"
@@ -29,7 +29,7 @@
         @label="Family Name"
         @property="familyName" as |el|
       >
-        <el.control id="familyName-field" />
+        <el.control id="familyName-field" disabled={{false}} />
       </form.element>
       <form.element
         @controlType="email"
@@ -38,7 +38,7 @@
         @property="email"
         @helpText="Please enter a valid email address." as |el|
       >
-        <el.control id="email-field" />
+        <el.control id="email-field" disabled={{false}} />
       </form.element>
       <div class="col-md-9 col-md-offset-3">
         <BsAlert @dismissible={{false}} @type="warning">

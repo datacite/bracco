@@ -1,5 +1,19 @@
 describe('ACCEPTANCE: ANONYMOUS | NO ADMIN ACCESS', function () {
+  const waitTime = 1000;
+  const waitTime2 = 2000;
+
   const site_title = new RegExp('Datacite.*Fabrica', 'i')
+
+  before(function () {
+    //Cypress.session.clearAllSavedSessions()
+    Cypress.session.clearCurrentSessionData()
+    cy.clearCookies()
+    cy.clearAllCookies()
+    cy.clearAllLocalStorage()
+    cy.clearAllSessionStorage()
+
+    cy.wait(waitTime2);
+  })
 
   it('is not logged in', function () {
     cy.visit('/')

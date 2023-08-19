@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-3">
+  <div data-test-left-sidebar class="col-md-3">
     {{#if (and model.repository.isActive (or (can 'create doi' model) (can 'upload doi' model)) (not (gt model.repository-prefixes.length 0)))}}
       <div class="panel panel-transparent">
         <div class="panel-body">

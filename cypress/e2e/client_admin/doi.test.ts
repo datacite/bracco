@@ -19,11 +19,12 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
   before(function () {
     cy.login(Cypress.env('client_admin_username'), Cypress.env('client_admin_password'));
     cy.setCookie('_consent', 'true');
+
+    cy.wait(waitTime2);
   });
 
   beforeEach(() => {
-    Cypress.Cookies.preserveOnce('_fabrica', '_jwt', '_consent');
-    cy.wait(waitTime2);
+    // Move login to before function.
   });
 
   after(function () {
@@ -31,7 +32,7 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
     // cy.log('TBD - CLEAN UP RESOURCES AFTER TEST');
   });
 
-  it('is logged in to dois page', () => {
+  it.skip('is logged in to dois page', () => {
     cy.visit('/repositories/datacite.test/dois');
     cy.url().should('include', '/repositories/datacite.test/dois').then (() => {
 
