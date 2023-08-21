@@ -8,6 +8,7 @@ function randomIntFromInterval(min, max) { // min and max included
 describe('ACCEPTANCE: ORGANIZATION_ADMIN | REPOSITORIES', () => {
   const waitTime = 1000;
   const waitTime2 = 2000;
+  const waitTime3 = 3000;
   let prefix = '';
   let suffix = '';
   const min = 500000;
@@ -116,8 +117,7 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | REPOSITORIES', () => {
       cy.get('#client-type .ember-power-select-selected-item').should('contain', 'Repository');
 
       // Set client_type to Periodical
-      /*
-      cy.get('div#client-type div[role="button"]').click({ waitForAnimations: true, force: true }).then(($dropdown) => {
+      cy.get('div#client-type div[role="button"]').click({ waitForAnimations: true }).then(() => {
         cy.get('ul.ember-power-select-options li').contains('Periodical').click({ waitForAnimations: true }).then(() => {
           // Periodical client_type divs should be visible and Repository client_type divs should not exist
           cy.get('#repository-issn').should('be.visible');
@@ -125,10 +125,11 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | REPOSITORIES', () => {
           cy.get('#certificate').should('not.exist');   
         })
       });
-      
+
+      cy.wait(waitTime);
 
       // Set client_type to IGSN ID Catalog
-      cy.get('div#client-type div[role="button"]').click({ waitForAnimations: true }).then(($dropdown) => {
+      cy.get('div#client-type div[role="button"]').click({ waitForAnimations: true }).then(() => {
         cy.get('ul.ember-power-select-options li').contains('IGSN ID Catalog').click({ waitForAnimations: true }).then(() => {
           // IGSN ID Catalog client_type divs should be visible
           cy.get('.help-block').should('contain', 'This repository will only be able to mint IGSN IDs.');          
@@ -137,13 +138,14 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | REPOSITORIES', () => {
           cy.get('#certificate').should('be.visible');   
         })
       });
-      
+
+      cy.wait(waitTime3);
 
       // Set client_type back to Repository
-      cy.get('div#client-type div[role="button"]').click({ waitForAnimations: true }).then(($dropdown) => {
+      cy.get('div#client-type div[role="button"]').click({ waitForAnimations: true }).then(() => {
         cy.get('ul.ember-power-select-options li').contains('Repository').click({ waitForAnimations: true })
       });
-      */
+      cy.get('#client-type .ember-power-select-selected-item').should('contain', 'Repository');
 
       cy.get('#re3data').should('be.visible');
       cy.get('#name').should('be.visible');

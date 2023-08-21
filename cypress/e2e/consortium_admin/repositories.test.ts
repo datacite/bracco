@@ -8,6 +8,7 @@ function randomIntFromInterval(min, max) { // min and max included
 describe('ACCEPTANCE: CONSORTIUM_ADMIN | REPOSITORIES', () => {
   const waitTime = 1000;
   const waitTime2 = 2000;
+  const waitTime2 = 3000;
   let prefix = '';
   let suffix = '';
   const min = 500000;
