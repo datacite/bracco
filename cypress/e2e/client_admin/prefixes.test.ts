@@ -78,4 +78,13 @@ describe('ACCEPTANCE: CLIENT_ADMIN | PREFIXES', () => {
       });
     });
   });
+
+  it('can see prefixes when using capitalized identifier URL subdirectory', () => {
+    cy.visit('/repositories/DATACITE.TEST/prefixes');
+    cy.url().should('include', '/repositories/DATACITE.TEST/prefixes').then(() => {
+
+      // Prefix page should be populated.
+      cy.contains('No prefixes found.').should('not.exist')
+    });
+  });
 });

@@ -8,7 +8,7 @@ export default Route.extend({
   model(params) {
     // let self = this;
     return this.store
-      .findRecord('doi', params.doi_id, {
+      .findRecord('doi', params.doi_id.toLowerCase(), {
         include: 'client',
         adapterOptions: {
           affiliation: true

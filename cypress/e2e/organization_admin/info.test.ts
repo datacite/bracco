@@ -8,6 +8,7 @@ function escapeRE(string) {
 describe('ACCEPTANCE: ORGANIZATION_ADMIN | INFO', () => {
   const waitTime = 1000;
   const waitTime2 = 2000;
+  const waitTime3 = 3000;
 
   before(function () {
     cy.login(Cypress.env('organization_admin_username'), Cypress.env('organization_admin_password'));
@@ -174,6 +175,16 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | INFO', () => {
     });
     cy.on("url:changed", (newUrl) => {
       expect(newUrl).to.contain("/providers/datacite");
+    });
+  });
+
+  it.only('can see info when using capitalized identifier URL subdirectory', () => {
+    cy.visit('/providers/DATACITE');
+    cy.url().should('include', '/providers/DATACITE').then(() => {
+      
+      cy.wait(waitTime3)
+      // Info page should be populated with non-zero graph data.
+      cy.get('.graphs > a').contains(/^0$/).should('not.exist')
     });
   });
 });

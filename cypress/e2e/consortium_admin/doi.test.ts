@@ -86,4 +86,13 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | DOIS', () => {
       cy.get('.create-doi-button').should('not.exist');    
     });
   });
+
+  it('can see dois when using capitalized identifier URL subdirectory', () => {
+    cy.visit('/providers/DC/dois');
+    cy.url().should('include', '/providers/DC/dois').then(() => {
+
+      // Prefix page should be populated.
+      cy.contains('No DOIs found.').should('not.exist')
+    });
+  });
 });
