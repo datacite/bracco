@@ -116,6 +116,8 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | REPOSITORIES', () => {
       cy.get('#client-type').should('be.visible');
       cy.get('#client-type .ember-power-select-selected-item').should('contain', 'Repository');
 
+      cy.wait(waitTime);
+
       // Set client_type to Periodical
       cy.get('div#client-type div[role="button"]').click({ waitForAnimations: true }).then(() => {
         cy.get('ul.ember-power-select-options li').contains('Periodical').click({ waitForAnimations: true }).then(() => {
