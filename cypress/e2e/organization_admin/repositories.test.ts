@@ -1,15 +1,34 @@
 /// <reference types="cypress" />
 /* eslint-disable no-undef */
 
+function randomIntFromInterval(min, max) { // min and max included
+  return Math.floor(Math.random() * (max - min + 1) + min)
+}
+
 describe('ACCEPTANCE: ORGANIZATION_ADMIN | REPOSITORIES', () => {
   const waitTime = 1000;
   const waitTime2 = 2000;
   let prefix = '';
   let suffix = '';
+  const min = 500000;
+  const max = 999999;
+  const provider_id = Cypress.env('organization_admin_username').toLowerCase()
+  const test_contact_family_name_prefix = "OrganizationAdmin"
 
   before(function () {
+    const rndInt = randomIntFromInterval(min, max);
+    given_name = 'Jack';
+    family_name = test_contact_family_name_prefix + rndInt;
+    email = given_name + '.' + family_name + '@example.org';
+    type = 'providers';
+    roles = ["service", "secondary_service", "technical", "secondary_technical", "billing"];
+
     cy.login(Cypress.env('organization_admin_username'), Cypress.env('organization_admin_password'));
     cy.setCookie('_consent', 'true');
+
+    cy.getCookie('_jwt').then((cookie) => {
+      cy.createContact(email, given_name, family_name, roles, type, provider_id, Cypress.env('api_url'), cookie.value)
+    })
   });
 
   beforeEach(() => {
@@ -17,14 +36,16 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | REPOSITORIES', () => {
     cy.wait(waitTime2);
   });
 
-  after(function () {
-    // cy.log('TBD - CLEAN UP RESOURCES AFTER TEST');
-  });
+  after(() => {
+    cy.getCookie('_jwt').then((cookie) => {
+      cy.deleteProviderTestContacts(provider_id, test_contact_family_name_prefix, Cypress.env('api_url'), cookie.value)
+    })
+  })
 
   // Check for page elements.
   it('is logged in to repositories page', () => {
-    cy.visit('/providers/datacite/repositories');
-    cy.url().should('include', '/providers/datacite/repositories').then(() => {
+    cy.visit('/providers/' + provider_id + '/repositories');
+    cy.url().should('include', '/providers/' + provider_id + '/repositories').then(() => {
 
       // Has Fabrica logo and correct navbar color
       cy.get('img.fabrica-logo').should('exist').should('have.attr', 'src').should('include', 'fabrica-logo.svg');
@@ -32,15 +53,15 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | REPOSITORIES', () => {
 
       // Has upper right user profile link.
       cy.get('h2.work').contains('DataCite');
-      cy.get('a#account_menu_link').should('contain', 'DATACITE');
+      cy.get('a#account_menu_link').should('contain', Cypress.env('organization_admin_username').toUpperCase());
 
       // Has tabs with correct one activated.
       cy.get('ul.nav-tabs li.active a').contains(/Repositories/i)
-        .and('have.attr', 'href').and('include', '/providers/datacite/repositories');
+        .and('have.attr', 'href').and('include', '/providers/' + provider_id + '/repositories');
 
       cy.get('.btn-toolbar').within(($btnToolbar) => {
         cy.get('.btn-group a#add-repository').contains(/Add\s*Repositor/i)
-          .and('have.attr', 'href').and('include', '/providers/datacite/repositories/new');
+          .and('have.attr', 'href').and('include', '/providers/' + provider_id + '/repositories/new');
       });
 
       cy.get('button.export-basic-metadata').should('not.exist');
@@ -80,12 +101,12 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | REPOSITORIES', () => {
   // TBD - Could do more testing here. Only cursory testing for
   // presence of field objects. No testing of form behavior yet.
   it('has an add repository page', () => {
-    cy.visit('/providers/datacite/repositories/new');
-    cy.url().should('include', '/providers/datacite/repositories/new').then(() => {
+    cy.visit('/providers/' + provider_id + '/repositories/new');
+    cy.url().should('include', '/providers/' + provider_id + '/repositories/new').then(() => {
 
-      cy.wait(waitTime);
+      cy.wait(waitTime2);
       cy.get('h2.work').contains('DataCite');
-      cy.get('a#account_menu_link').should('contain', 'DATACITE');
+      cy.get('a#account_menu_link').should('contain', Cypress.env('organization_admin_username').toUpperCase());
 
       cy.get('h3.edit').contains(/Add\s*Repository/);
 

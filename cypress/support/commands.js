@@ -188,7 +188,7 @@ Cypress.Commands.add("deleteProviderTestContacts", (provider, test_contact_famil
           headers: {
             authorization: 'Bearer ' + jwt,
           },
-          failOnStatusCode: true,
+          failOnStatusCode: false,
         })
       );
       const responses = await Promise.all(requests)

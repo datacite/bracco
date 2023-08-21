@@ -18,7 +18,7 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | CONTACTS', () => {
   const min = 500000;
   const max = 999999;
   const provider_id = Cypress.env('organization_admin_username').toLowerCase()
-  const test_contact_family_name_prefix = "ABCD"
+  const test_contact_family_name_prefix = "OrganizationAdmin"
 
   before(function () {
     cy.login(Cypress.env('organization_admin_username'), Cypress.env('organization_admin_password'));
@@ -59,12 +59,12 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | CONTACTS', () => {
 
   it('search contacts', () => {
     // Create a contact to be searched for.
-    const rndInt = randomIntFromInterval(min, max);
-    given_name = 'Jack';
-    family_name = test_contact_family_name_prefix + rndInt;
-    email = given_name + '.' + family_name + '@example.org';
-    type = 'providers';
-    roles = [];
+    var rndInt = randomIntFromInterval(min, max);
+    var given_name = 'Jack';
+    var family_name = test_contact_family_name_prefix + rndInt;
+    var email = given_name + '.' + family_name + '@example.org';
+    var type = 'providers';
+    var roles: never[] = [];
 
     cy.getCookie('_jwt').then((cookie) => {
       cy.createContact(email, given_name, family_name, roles, type, provider_id, Cypress.env('api_url'), cookie.value).then((id) => {
@@ -88,12 +88,12 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | CONTACTS', () => {
 
   it('filter contacts', () => {
     // Create a contact for filters.
-    const rndInt = randomIntFromInterval(min, max);
-    given_name = 'Jack';
-    family_name = test_contact_family_name_prefix + rndInt;
-    email = given_name + '.' + family_name + '@example.org';
-    type = 'providers';
-    roles = ["service", "secondary_service", "technical", "secondary_technical", "billing"];
+    var rndInt = randomIntFromInterval(min, max);
+    var given_name = 'Jack';
+    var family_name = test_contact_family_name_prefix + rndInt;
+    var email = given_name + '.' + family_name + '@example.org';
+    var type = 'providers';
+    var roles = ["service", "secondary_service", "technical", "secondary_technical", "billing"];
 
     cy.getCookie('_jwt').then((cookie) => {
       cy.createContact(email, given_name, family_name, roles, type, provider_id, Cypress.env('api_url'), cookie.value).then((id) => {
@@ -137,23 +137,26 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | CONTACTS', () => {
   });
 
   it('create a contact', () => {
-    const rndInt = randomIntFromInterval(min, max);
-    given_name = 'Jack';
-    family_name = test_contact_family_name_prefix + rndInt;
-    email = given_name + '.' + family_name + '@example.org';
+    var rndInt = randomIntFromInterval(min, max);
+    var given_name = 'Jack';
+    var family_name = test_contact_family_name_prefix + rndInt;
+    var email = given_name + '.' + family_name + '@example.org';
 
     cy.visit('/providers/' + provider_id + '/contacts/new');
     cy.url().should('include', '/providers/' + provider_id + '/contacts/new').then(() => {
       cy.wait(waitTime);
 
       cy.get('h3.edit').contains('Add Contact');
-      
-      cy.get('input#givenName-field').should('be.visible').type(given_name, { force: true })
-        .clickOutside();
-      cy.get('input#familyName-field').should('be.visible').type(family_name, { force: true })
-        .clickOutside();
-      cy.get('input#email-field').should('be.visible').type(email, { force: true })
-        .clickOutside();
+      cy.wait(waitTime)
+
+      cy.get('input#givenName-field').should('be.visible').clear({ force: true }).type(given_name, { force: true })
+      cy.wait(waitTime);
+
+      cy.get('input#familyName-field').should('be.visible').clear({ force: true }).type(family_name, { force: true })
+      cy.wait(waitTime);
+
+      cy.get('input#email-field').should('be.visible').clear({ force: true }).type(email, { force: true })
+      cy.wait(waitTime);
 
       cy.get('.alert-warning').contains(/The contact entered may receive notifications/i)
         .within(() => {
@@ -175,13 +178,13 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | CONTACTS', () => {
 
   it('visiting specific contact', () => {
     // Create a contact to be visited.
-    const rndInt = randomIntFromInterval(min, max);
-    given_name = 'Jack';
-    family_name = test_contact_family_name_prefix + rndInt;
-    email = given_name + '.' + family_name + '@example.org';
-    type = 'providers';
+    var  rndInt = randomIntFromInterval(min, max);
+    var given_name = 'Jack';
+    var family_name = test_contact_family_name_prefix + rndInt;
+    var email = given_name + '.' + family_name + '@example.org';
+    var type = 'providers';
     //roles = ["service", "secondary_service", "technical", "secondary_technical", "billing"];
-    roles = [];
+    var roles: never[] = [];
 
     cy.getCookie('_jwt').then((cookie) => {
       cy.createContact(email, given_name, family_name, roles, type, provider_id, Cypress.env('api_url'), cookie.value).then((id) => {
@@ -202,15 +205,15 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | CONTACTS', () => {
 
   it('update specific contact', () => {
     // Create a contact to be updated.
-    const rndInt = randomIntFromInterval(min, max);
-    given_name = 'Jack';
-    family_name = test_contact_family_name_prefix + rndInt;
-    email = given_name + '.' + family_name + '@example.org';
-    updated_given_name = 'Jonathan';
-    updated_email = updated_given_name + '.' + family_name + '@example.org';
-    type = 'providers';
+    var  rndInt = randomIntFromInterval(min, max);
+    var given_name = 'Jack';
+    var family_name = test_contact_family_name_prefix + rndInt;
+    var email = given_name + '.' + family_name + '@example.org';
+    var updated_given_name = 'Jonathan';
+    var updated_email = updated_given_name + '.' + family_name + '@example.org';
+    var type = 'providers';
     //roles = ["service", "secondary_service", "technical", "secondary_technical", "billing"];
-    roles = [];
+    var roles: never[] = [];
 
     cy.getCookie('_jwt').then((cookie) => {
       cy.createContact(email, given_name, family_name, roles, type, provider_id, Cypress.env('api_url'), cookie.value).then((id) => {
@@ -246,18 +249,17 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | CONTACTS', () => {
 
   it('delete specific contact', () => {
     // Create a contact to be deleted.
-    const rndInt = randomIntFromInterval(min, max);
-    given_name = 'Jack';
-    family_name = test_contact_family_name_prefix + rndInt;
-    email = given_name + '.' + family_name + '@example.org';
-    type = 'providers';
+    var rndInt = randomIntFromInterval(min, max);
+    var given_name = 'Jack';
+    var family_name = test_contact_family_name_prefix + rndInt;
+    var email = given_name + '.' + family_name + '@example.org';
+    var type = 'providers';
     //roles = ["service", "secondary_service", "technical", "secondary_technical", "billing"];
-    roles = [];
+    var roles: never[] = [];
 
     cy.getCookie('_jwt').then((cookie) => {
       cy.createContact(email, given_name, family_name, roles, type, provider_id, Cypress.env('api_url'), cookie.value).then((id) => {
         cy.log('CREATED CONTACT: ' + given_name + ' ' + family_name + ' (' + id + ')');
-
 
         cy.visit('/contacts/' + id);
         cy.url().should('include', '/contacts/' + id);
@@ -277,6 +279,7 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | CONTACTS', () => {
         cy.get('#confirm-delete').should('have.class', 'has-success');
 
         cy.get('button#delete').contains('Delete').click({force: true});
+        cy.wait(waitTime3);
         cy.location().should((loc) => {
           expect(loc.pathname).to.eq('/providers/' + provider_id + '/contacts');
         });
