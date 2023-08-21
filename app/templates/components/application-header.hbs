@@ -37,9 +37,11 @@
               <span class="caret"></span>
             </dd.toggle>
             <dd.menu class="navbar-menu" as |menu|>
-              <menu.item class="dropdown-header">
-                Role:
-                {{currentUser.roleName}}
+              <menu.item>
+                <span  class="dropdown-header">
+                  Role:
+                  {{currentUser.roleName}}
+                </span>
               </menu.item>
               <menu.item>
                 <DynamicLink @route="{{settings-route settings.route}}" @model="{{settings.model}}">
