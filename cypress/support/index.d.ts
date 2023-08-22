@@ -10,10 +10,16 @@ declare namespace Cypress {
     login(username: string, password: string): Chainable<Element>;
 
     /**
-     * Custom command to create a test contact.
-     * @example cy.createCpmtact(email, given_name, family_name, roles, type, id, api_url, jwt)
+     * Custom command to click body(0,0) to force DOM to resolve another action.
+     * @example cy.clickOutside()
      */
-    createContact(email: string, given_name: string, family_name: string, roles: never[], type: string, id: string, api_url: string, jwt: string): Chainable<Element>;
+    clickOutside(): Chainable<Element>;
+
+    /**
+     * Custom command to create a test contact.
+     * @example cy.createContact(email, given_name, family_name, roles, type, id, api_url, jwt)
+     */
+    createContact(email: string, given_name: string, family_name: string, roles: Array<string>, type: string, id: string, api_url: string, jwt: string): Chainable<Element>;
 
     /**
      * Custom command to create a test doi.

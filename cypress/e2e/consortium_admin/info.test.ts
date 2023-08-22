@@ -12,12 +12,11 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | INFO', () => {
   before(function () {
     cy.login(Cypress.env('consortium_admin_username'), Cypress.env('consortium_admin_password'));
     cy.setCookie('_consent', 'true');
-
     cy.wait(waitTime2);
   })
 
   beforeEach(() => {
-    // Move login to before function.
+    // TBD - set up test environment
   });
 
   it('is logged in to homepage', () => {

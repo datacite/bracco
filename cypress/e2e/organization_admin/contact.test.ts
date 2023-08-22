@@ -10,7 +10,7 @@ function randomIntFromInterval(min, max) { // min and max included
   return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
-describe.skip('ACCEPTANCE: ORGANIZATION_ADMIN | CONTACTS', () => {
+describe('ACCEPTANCE: ORGANIZATION_ADMIN | CONTACTS', () => {
   const waitTime = 1000;
   const waitTime2 = 2000;
   const waitTime3 = 3000;
@@ -23,12 +23,11 @@ describe.skip('ACCEPTANCE: ORGANIZATION_ADMIN | CONTACTS', () => {
   before(function () {
     cy.login(Cypress.env('organization_admin_username'), Cypress.env('organization_admin_password'));
     cy.setCookie('_consent', 'true');
-
     cy.wait(waitTime2);
   })
 
   beforeEach(() => {
-    // Move login to before function.
+    // TBD - set up test environment
   });
 
   after(() => {
@@ -47,7 +46,6 @@ describe.skip('ACCEPTANCE: ORGANIZATION_ADMIN | CONTACTS', () => {
     cy.get('img.fabrica-logo').should('exist').should('have.attr', 'src').should('include', 'fabrica-logo.svg');
     cy.get('ul.navbar-nav').should('have.css', 'background-color', 'rgb(0, 177, 226)');
     
-
     cy.get('h2.work').contains('DataCite');
     cy.get('li a.nav-link.active').contains('Contacts');
     cy.get('div#search').should('exist');
@@ -137,7 +135,7 @@ describe.skip('ACCEPTANCE: ORGANIZATION_ADMIN | CONTACTS', () => {
     });
   });
 
-  it.skip('create a contact', () => {
+  it('create a contact', () => {
     var rndInt = randomIntFromInterval(min, max);
     var given_name = 'Jack';
     var family_name = test_contact_family_name_prefix + rndInt;
@@ -147,20 +145,18 @@ describe.skip('ACCEPTANCE: ORGANIZATION_ADMIN | CONTACTS', () => {
     cy.url().should('include', '/providers/' + provider_id + '/contacts/new').then(() => {
       cy.wait(waitTime);
 
+      cy.get('h3.edit').contains('Add Contact');
+      cy.wait(waitTime);
+
+      cy.get('input#givenName-field').should('be.visible').type(given_name, { force: true }).clickOutside();
+      cy.get('input#familyName-field').should('be.visible').type(family_name, { force: true }).clickOutside();
+      cy.get('input#email-field').should('be.visible').type(email, { force: true }).clickOutside();
+
       cy.get('.alert-warning').contains(/The contact entered may receive notifications/i)
         .within(() => {
           cy.get('a[href*="privacy.html"]').should('be.visible');
         }
       );
-      
-      cy.wait(waitTime);
-
-      cy.get('h3.edit').contains('Add Contact');
-      cy.get('input#givenName-field').should('be.visible').type(given_name, { waitForAnimations: true, force: true })
-      cy.get('input#familyName-field').should('be.visible').type(family_name, { waitForAnimations: true, force: true })
-      cy.get('input#email-field').should('be.visible').type(email, { waitForAnimations: true, force: true })
-
-      cy.wait(waitTime);
 
       ////////// DONE FILLING IN FORM.  PRESS THE CREATE BUTTON.
       cy.get('button#add-contact').should('be.visible').click({force: true}).then(() => {
@@ -245,7 +241,7 @@ describe.skip('ACCEPTANCE: ORGANIZATION_ADMIN | CONTACTS', () => {
     });
   });
 
-  it.skip('delete specific contact', () => {
+  it('delete specific contact', () => {
     // Create a contact to be deleted.
     var rndInt = randomIntFromInterval(min, max);
     var given_name = 'Jack';

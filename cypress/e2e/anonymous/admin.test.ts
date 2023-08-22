@@ -5,13 +5,11 @@ describe('ACCEPTANCE: ANONYMOUS | NO ADMIN ACCESS', function () {
   const site_title = new RegExp('Datacite.*Fabrica', 'i')
 
   before(function () {
-    //Cypress.session.clearAllSavedSessions()
     Cypress.session.clearCurrentSessionData()
     cy.clearCookies()
     cy.clearAllCookies()
     cy.clearAllLocalStorage()
     cy.clearAllSessionStorage()
-
     cy.wait(waitTime2);
   })
 

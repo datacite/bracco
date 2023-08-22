@@ -12,16 +12,15 @@ describe('ACCEPTANCE: STAFF_ADMIN | INFO', () => {
   before(function () {
     cy.login(Cypress.env('staff_admin_username'), Cypress.env('staff_admin_password'));
     cy.setCookie('_consent', 'true');
-
     cy.wait(waitTime2);
   })
 
   beforeEach(() => {
-    // Move login to before function.
+    // TBD - set up test environment
   });
 
   after(() => {
-    Cypress.session.clearAllSavedSessions()
+    // TBD - clean up after tests
   })
 
   it('is logged in to info page', () => {

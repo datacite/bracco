@@ -31,7 +31,7 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | SETTINGS', () => {
   })
 
   beforeEach(() => {
-    // Move login to before function.
+    // TBD - set up test environment
   });
 
   after(() => {

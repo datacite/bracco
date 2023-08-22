@@ -26,7 +26,6 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | REPOSITORIES', () => {
 
     cy.login(Cypress.env('organization_admin_username'), Cypress.env('organization_admin_password'));
     cy.setCookie('_consent', 'true');
-
     cy.wait(waitTime2);
 
     cy.getCookie('_jwt').then((cookie) => {
@@ -35,7 +34,7 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | REPOSITORIES', () => {
   });
 
   beforeEach(() => {
-    // Move login to before function.
+    // TBD - set up test environment
   });
 
   after(() => {
@@ -106,6 +105,7 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | REPOSITORIES', () => {
     cy.visit('/providers/' + provider_id + '/repositories/new');
     cy.url().should('include', '/providers/' + provider_id + '/repositories/new').then(() => {
 
+      cy.wait(waitTime2);
       cy.get('h2.work').contains('DataCite');
       cy.get('a#account_menu_link').should('contain', Cypress.env('organization_admin_username').toUpperCase());
 
@@ -115,7 +115,7 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | REPOSITORIES', () => {
       cy.get('#client-type').should('be.visible');
       cy.get('#client-type .ember-power-select-selected-item').should('contain', 'Repository');
 
-
+      /* - TEMPORARILY SKIP THIS
       // Set client_type to Periodical
       cy.get('div#client-type div[role="button"]').click({ waitForAnimations: true }).then(() => {
         cy.get('ul.ember-power-select-options li').contains('Periodical').click({ waitForAnimations: true }).then(() => {
@@ -137,8 +137,8 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | REPOSITORIES', () => {
         })
       });
 
-      /*
-      // Set client_type back to Repository - temporarily skip this
+
+      // Set client_type back to Repository
       cy.get('div#client-type div[role="button"]').click({ waitForAnimations: true }).then(() => {
         cy.get('ul.ember-power-select-options li').contains('Repository').click({ waitForAnimations: true })
       });

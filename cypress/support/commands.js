@@ -139,7 +139,13 @@ Cypress.Commands.add("createDoiXmlUpload", (prefix, fixture, api_url, jwt) => {
   });
 })
 
+/*
 Cypress.Commands.add('clickOutside', function(): Chainable<any> {
+  return cy.get('body').click(0,0); //0,0 here are the x and y coordinates
+});
+*/
+
+Cypress.Commands.add("clickOutside", () => {
   return cy.get('body').click(0,0); //0,0 here are the x and y coordinates
 });
 

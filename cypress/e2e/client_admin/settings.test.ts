@@ -8,15 +8,14 @@ describe('ACCEPTANCE: CLIENT_ADMIN | SETTINGS', () => {
   before(function () {
     cy.login(Cypress.env('client_admin_username'), Cypress.env('client_admin_password'));
     cy.setCookie('_consent', 'true');
-
     cy.wait(waitTime2);
   })
 
   beforeEach(() => {
-    // Move login to before function.
+    // TBD - set up test environment
   });
 
-  it.skip('is logged in to settings page', () => {
+  it('is logged in to settings page', () => {
     cy.visit('/repositories/datacite.test/settings');
     cy.url().should('include', '/repositories/datacite.test/settings').then (() => {
 

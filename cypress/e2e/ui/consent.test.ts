@@ -10,13 +10,11 @@ describe('ACCEPTANCE: UI | CONSENT', () => {
   const waitTime2 = 2000;
 
   before(function () {
-    //Cypress.session.clearAllSavedSessions()
     Cypress.session.clearCurrentSessionData()
     cy.clearCookies()
     cy.clearAllCookies()
     cy.clearAllLocalStorage()
     cy.clearAllSessionStorage()
-    
     cy.wait(waitTime2);
   })
 

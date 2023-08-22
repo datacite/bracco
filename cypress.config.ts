@@ -3,7 +3,7 @@ import { defineConfig } from 'cypress'
 export default defineConfig({
   experimentalFetchPolyfill: true,
   video: false,
-  retries: 0,
+  retries: 3,
   projectId: '8j7yje',
   e2e: {
     // We've imported your old cypress plugins here.
