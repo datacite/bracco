@@ -41,6 +41,7 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | REPOSITORIES', () => {
     cy.getCookie('_jwt').then((cookie) => {
       cy.deleteProviderTestContacts(consortium_id, test_contact_family_name_prefix, Cypress.env('api_url'), cookie.value)
     })
+    cy.clearAllSessionStorage()
   })
 
   // Check for page elements.

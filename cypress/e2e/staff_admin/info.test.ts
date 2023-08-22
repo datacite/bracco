@@ -19,9 +19,11 @@ describe('ACCEPTANCE: STAFF_ADMIN | INFO', () => {
     // TBD - set up test environment
   });
 
-  after(() => {
-    // TBD - clean up after tests
-  })
+  after(function () {
+    // TBD - Clean up any resources created for the test. (only local dev and stage).
+    // cy.log('TBD - CLEAN UP RESOURCES AFTER TEST');
+    cy.clearAllSessionStorage()
+  });
 
   it('is logged in to info page', () => {
     cy.visit('/');

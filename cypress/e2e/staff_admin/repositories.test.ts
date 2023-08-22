@@ -15,9 +15,11 @@ describe('Admin: Repositories Tabs', () => {
       // TBD - Set up test environment.
     });
 
-    after(() => {
-      // TBD - clean up after testing.
-    })
+    after(function () {
+      // TBD - Clean up any resources created for the test. (only local dev and stage).
+      // cy.log('TBD - CLEAN UP RESOURCES AFTER TEST');
+      cy.clearAllSessionStorage()
+    });
   
     // ASSUMING DATACITE.TEST EXISTS:
     it('check repositories tabs for required components - assumes datacite.test exists', () => {

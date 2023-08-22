@@ -15,9 +15,11 @@ describe('Admin: Prefix', () => {
     // TBD - set up test environment
   });
 
-  after(() => {
-    // TBD - clean up after tests
-  })
+  after(function () {
+    // TBD - Clean up any resources created for the test. (only local dev and stage).
+    // cy.log('TBD - CLEAN UP RESOURCES AFTER TEST');
+    cy.clearAllSessionStorage()
+  });
 
   it('search prefixes', () => {
     cy.visit('/prefixes');

@@ -15,6 +15,12 @@ describe('ACCEPTANCE: CLIENT_ADMIN | SETTINGS', () => {
     // TBD - set up test environment
   });
 
+  after(function () {
+    // TBD - Clean up any resources created for the test. (only local dev and stage).
+    // cy.log('TBD - CLEAN UP RESOURCES AFTER TEST');
+    cy.clearAllSessionStorage()
+  });
+
   it('is logged in to settings page', () => {
     cy.visit('/repositories/datacite.test/settings');
     cy.url().should('include', '/repositories/datacite.test/settings').then (() => {

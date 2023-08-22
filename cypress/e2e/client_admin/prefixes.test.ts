@@ -18,8 +18,9 @@ describe('ACCEPTANCE: CLIENT_ADMIN | PREFIXES', () => {
   });
 
   after(function () {
-    // TBD - CLEAN UP DOIS and other resources from test run.
+    // TBD - Clean up any resources created for the test. (only local dev and stage).
     // cy.log('TBD - CLEAN UP RESOURCES AFTER TEST');
+    cy.clearAllSessionStorage()
   });
 
   it('is logged in to prefixes page', () => {

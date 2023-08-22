@@ -27,8 +27,9 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
   });
 
   after(function () {
-    // TBD - CLEAN UP DOIS and other resources from test run. (only local dev and stage).
+    // TBD - Clean up any resources created for the test. (only local dev and stage).
     // cy.log('TBD - CLEAN UP RESOURCES AFTER TEST');
+    cy.clearAllSessionStorage()
   });
 
   it('is logged in to dois page', () => {
@@ -307,6 +308,12 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
       cy.get('button#doi-create').should('be.visible').click();
       cy.wait(waitTime);
       cy.location('pathname').should('contain', '/dois/' + prefix)
+      
+      // Cypress form bug? The suffix is not always available from the form field (above).  Get it from the url.
+      cy.url().then( (url) => {
+        Cypress.env('suffix', decodeURIComponent(url).split('/').pop())
+      })
+      
     });
   });
 

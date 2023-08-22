@@ -19,6 +19,12 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | INFO', () => {
     // TBD - set up test environment
   });
 
+  after(function () {
+    // TBD - Clean up any resources created for the test. (only local dev and stage).
+    // cy.log('TBD - CLEAN UP RESOURCES AFTER TEST');
+    cy.clearAllSessionStorage()
+  });
+
   it('is logged in to homepage', () => {
     cy.visit('/providers/dc/');
     cy.url().should('include', '/providers/dc/').then(() => {

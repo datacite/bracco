@@ -38,6 +38,7 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | SETTINGS', () => {
     cy.getCookie('_jwt').then((cookie) => {
       cy.deleteProviderTestContacts(provider_id, test_contact_family_name_prefix, Cypress.env('api_url'), cookie.value)
     })
+    cy.clearAllSessionStorage()
   })
 
   it('is logged in to settings page', () => {

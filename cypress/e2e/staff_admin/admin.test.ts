@@ -14,10 +14,12 @@ describe('Admin: Admin', () => {
   beforeEach(() => {
     // TBD - set up test environment
   });
-
-  after(() => {
-    // TBD - Clean up after tests
-  })
+  
+  after(function () {
+    // TBD - Clean up any resources created for the test. (only local dev and stage).
+    // cy.log('TBD - CLEAN UP RESOURCES AFTER TEST');
+    cy.clearAllSessionStorage()
+  });
 
   it('is logged in', () => {
     cy.visit('/');
