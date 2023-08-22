@@ -141,8 +141,8 @@ describe('ACCEPTANCE: STAFF_ADMIN | CONTACTS', () => {
     });
   });
 
-  // Temporarily skip this.  Something is clearing the input fields after they have been typed into.
-  it.skip('create a contact', () => {
+  // Temporarily skip form submit checking.  Something is clearing the input fields after they have been typed into.
+  it('create a contact', () => {
     var rndInt = randomIntFromInterval(min, max);
     var given_name = 'Jack';
     var family_name = test_contact_family_name_prefix + rndInt;
@@ -167,18 +167,12 @@ describe('ACCEPTANCE: STAFF_ADMIN | CONTACTS', () => {
       ////////// DONE FILLING IN FORM.  PRESS THE CREATE BUTTON.
       cy.get('button#add-contact').should('be.visible').click({force: true}).then(() => {
         cy.wait(waitTime);
-        /*
-        cy.location().then((loc) => {
-          cy.wait(waitTime);
-          //expect(loc.pathname).to.contain('/contacts/');
-          cy.get('h2.work').contains(given_name + ' ' + family_name);
-        });
-        */
         cy.location().then((loc) => {
           expect(loc.pathname).to.contain('/contacts/');
         });
-        cy.get('h2.work').contains(given_name + ' ' + family_name);
-        cy.get('h3.member-results').contains('Contact Information');
+        // TBD: Re-enable these when form filling bug is fixed.  These fields are filled and then cleared before the form submit.
+        //cy.get('h2.work').contains(given_name + ' ' + family_name);
+        //cy.get('h3.member-results').contains('Contact Information');
       });
     });
   });
