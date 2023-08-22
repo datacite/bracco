@@ -18,7 +18,6 @@ describe('ACCEPTANCE: UI | CONSENT', () => {
     cy.wait(waitTime2);
   })
 
-
   sizes.forEach((size) => {
     it(`index on ${size} viewport`, () => {
       if (Cypress._.isArray(size)) {

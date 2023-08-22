@@ -39,5 +39,11 @@ declare namespace Cypress {
      */
     deleteProviderTestContacts(provider_id: string, test_contact_family_name_prefix: string, api_url: string, cookie_value: string): Chainable<Element>;
 
+    /**
+     * Custom command to delete test contacts created as a result of a test run.
+     * @example cy.deleteProviderTestContacts(provider_id, test_contact_family_name_prefix, Cypress.env('api_url'), cookie.value)
+     */
+      isInViewport(element: string): Chainable<Element>;
+
   }
 }

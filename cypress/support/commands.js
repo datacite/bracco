@@ -1,3 +1,6 @@
+/* eslint-disable prettier/prettier */
+/// <reference types="cypress" />
+
 // ***********************************************
 // This example commands.js shows you how to
 // create various custom commands and overwrite
@@ -34,13 +37,13 @@ function cookie(jwt, expires_in) {
   var future = new Date();
 
   var cookie = {
-    "authenticated": {
-      "authenticator": "authenticator:oauth2",
-      "access_token": jwt,
-      "expires_in": expires_in,
-      "expires_at": future.setDate(future.getDate() + 30)
+    authenticated: {
+      authenticator: 'authenticator:oauth2',
+      access_token: jwt,
+      expires_in: expires_in,
+      expires_at: future.setDate(future.getDate() + 30)
     }
-  }
+  };
 
   return encodeURIComponent(JSON.stringify(cookie));
 }
@@ -53,7 +56,7 @@ Cypress.Commands.add('login', (username, password) => {
       grant_type: 'password',
       username: username,
       password: password,
-    },
+    }
   };
 
   cy.session(username, () => {
@@ -89,8 +92,8 @@ Cypress.Commands.add('isInViewport', (element) => {
 
     expect(rect.top).not.to.be.greaterThan(bottom)
     expect(rect.bottom).not.to.be.greaterThan(bottom)
-  })
-})
+  });
+});
 
 Cypress.Commands.add("createDoi", (prefix, api_url, jwt) => {
   return cy.request({
@@ -110,7 +113,7 @@ Cypress.Commands.add("createDoi", (prefix, api_url, jwt) => {
     expect(response.status).to.eq(201)
     return(response.body.data.id);
   });
-})
+});
 
 Cypress.Commands.add("createDoiXmlUpload", (prefix, fixture, api_url, jwt) => {
 
@@ -137,7 +140,7 @@ Cypress.Commands.add("createDoiXmlUpload", (prefix, fixture, api_url, jwt) => {
       return(response.body.data.id);
     });
   });
-})
+});
 
 /*
 Cypress.Commands.add('clickOutside', function(): Chainable<any> {
@@ -181,7 +184,7 @@ Cypress.Commands.add("createContact", (email, given_name, family_name, roles, ty
     expect(response.status).to.eq(201)
     return(response.body.data.id);
   });
-})
+});
 
 Cypress.Commands.add("deleteProviderTestContacts", (provider, test_contact_family_name_prefix, api_url, jwt) => {
   return cy.request({
@@ -216,4 +219,4 @@ Cypress.Commands.add("deleteProviderTestContacts", (provider, test_contact_famil
       return responses
     });
   });
-})
+});

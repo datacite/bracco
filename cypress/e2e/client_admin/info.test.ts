@@ -49,7 +49,7 @@ describe('ACCEPTANCE: CLIENT_ADMIN | INFO', () => {
       });
 
       // Has left sidebar buttons.
-      cy.get('div.col-md-3').should('be.visible').within(($sidebar) => {
+      cy.get('[data-test-left-sidebar]').should('be.visible').within(($sidebar) => {
         // Create DOI button - would like to do more testing but seems impossible in Cypress.
         cy.get('.create-doi-button').contains(/Create DOI/i);
         cy.get('.create-doi-button button.dropdown-toggle').click({ force: true }).then(($obj) => {

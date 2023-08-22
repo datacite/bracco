@@ -35,7 +35,7 @@ describe('ACCEPTANCE: CLIENT_ADMIN | SETTINGS', () => {
         .and('have.attr', 'href').and('include', '/repositories/datacite.test/dois');
 
       // Has left sidebar buttons.
-      cy.get('div.col-md-3').should('be.visible').within(($sidebar) => {
+      cy.get('[data-test-left-sidebar]').should('be.visible').within(($sidebar) => {
 
         // Create DOI button - would like to do more testing but seems impossible in Cypress.
         cy.get('.create-doi-button').contains(/Create DOI/i);
