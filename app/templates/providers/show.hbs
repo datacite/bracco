@@ -60,69 +60,45 @@
         @stacked={{false}}
         @fill={{false}} as |nav|
       >
-        <nav.item>
-          <nav.link-to
-            @route="providers.show.index"
-            model="model.id"
-            class="nav-link"
-          >
-            Info
-          </nav.link-to>
-        </nav.item>
-        <nav.item>
-          <nav.link-to
-            @route="providers.show.settings"
-            model="model.id"
-            class="nav-link"
-          >
-            Settings
-          </nav.link-to>
-        </nav.item>
+        {{#link-to route='providers.show.index' tagName="li" model=model.id}}
+            {{#link-to route='providers.show.index' class='nav-link'}}
+                Info
+            {{/link-to}}
+        {{/link-to}}
+        {{#link-to route='providers.show.settings' tagName="li" model=model.id}}
+            {{#link-to route='providers.show.settings' class='nav-link'}}
+                Settings
+            {{/link-to}}
+        {{/link-to}}
         {{#if (eq model.memberType 'consortium')}}
-          <nav.item>
-            <nav.link-to @route="providers.show.organizations" class="nav-link">
-              Consortium Organizations
-            </nav.link-to>
-          </nav.item>
+          {{#link-to route='providers.show.organizations' tagName="li"}}
+              {{#link-to route='providers.show.organizations' class='nav-link'}}
+                  Consortium Organizations
+              {{/link-to}}
+          {{/link-to}}
         {{/if}}
         {{#if (not-eq model.memberType 'developer')}}
-          <nav.item>
-            <nav.link-to
-              @route="providers.show.contacts"
-              model="model.id"
-              class="nav-link"
-            >
-              Contacts
-            </nav.link-to>
-          </nav.item>
+          {{#link-to route='providers.show.contacts' tagName="li" model=model.id}}
+              {{#link-to route='providers.show.contacts' class='nav-link'}}
+                  Contacts
+              {{/link-to}}
+          {{/link-to}}
           {{#if (not-eq model.memberType 'member_only')}}
-            <nav.item>
-              <nav.link-to
-                @route="providers.show.repositories"
-                model="model.id"
-                class="nav-link"
-              >
-                Repositories
-              </nav.link-to>
-            </nav.item>
-            <nav.item>
-              <nav.link-to
-                @route="providers.show.prefixes"
-                model="model.id"
-                class="nav-link"
-              >
-                Prefixes
-              </nav.link-to>
-            </nav.item>
-            <nav.item>
-              <nav.link-to
-                @route="providers.show.dois"
-                model="model.id"
-                class="nav-link"
-              >
-                DOIs
-              </nav.link-to>
-            </nav.item>
+            {{#link-to route='providers.show.repositories' tagName="li" model=model.id}}
+                {{#link-to route='providers.show.repositories' class='nav-link'}}
+                    Repositories
+                {{/link-to}}
+            {{/link-to}}
+            {{#link-to route='providers.show.prefixes' tagName="li" model=model.id}}
+                {{#link-to route='providers.show.prefixes' class='nav-link'}}
+                    Prefixes
+                {{/link-to}}
+            {{/link-to}}
+            {{#link-to route='providers.show.dois' tagName="li" model=model.id}}
+                {{#link-to route='providers.show.dois' class='nav-link'}}
+                    DOIs
+                {{/link-to}}
+            {{/link-to}}
           {{/if}}
         {{/if}}
       </BsNav>
