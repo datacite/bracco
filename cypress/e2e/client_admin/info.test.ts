@@ -13,11 +13,17 @@ describe('ACCEPTANCE: CLIENT_ADMIN | INFO', () => {
   before(function () {
     cy.login(Cypress.env('client_admin_username'), Cypress.env('client_admin_password'));
     cy.setCookie('_consent', 'true');
+    cy.wait(waitTime2);
   })
 
   beforeEach(() => {
-    Cypress.Cookies.preserveOnce('_fabrica', '_jwt', '_consent');
-    cy.wait(waitTime2);
+    // TBD - Set up test environment.
+  });
+
+  after(function () {
+    // TBD - Clean up any resources created for the test. (only local dev and stage).
+    // cy.log('TBD - CLEAN UP RESOURCES AFTER TEST');
+    cy.clearAllSessionStorage()
   });
 
   it('is logged in to homepage', () => {
@@ -49,7 +55,7 @@ describe('ACCEPTANCE: CLIENT_ADMIN | INFO', () => {
       });
 
       // Has left sidebar buttons.
-      cy.get('div.col-md-3').should('be.visible').within(($sidebar) => {
+      cy.get('[data-test-left-sidebar]').should('be.visible').within(($sidebar) => {
         // Create DOI button - would like to do more testing but seems impossible in Cypress.
         cy.get('.create-doi-button').contains(/Create DOI/i);
         cy.get('.create-doi-button button.dropdown-toggle').click({ force: true }).then(($obj) => {

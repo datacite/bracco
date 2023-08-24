@@ -10,16 +10,17 @@ describe('ACCEPTANCE: CLIENT_ADMIN | PREFIXES', () => {
   before(function () {
     cy.login(Cypress.env('client_admin_username'), Cypress.env('client_admin_password'));
     cy.setCookie('_consent', 'true');
-  });
-
-  beforeEach(() => {
-    Cypress.Cookies.preserveOnce('_fabrica', '_jwt', '_consent');
     cy.wait(waitTime2);
   });
 
+  beforeEach(() => {
+    // TBD - set up test environment
+  });
+
   after(function () {
-    // TBD - CLEAN UP DOIS and other resources from test run.
+    // TBD - Clean up any resources created for the test. (only local dev and stage).
     // cy.log('TBD - CLEAN UP RESOURCES AFTER TEST');
+    cy.clearAllSessionStorage()
   });
 
   it('is logged in to prefixes page', () => {
@@ -47,7 +48,7 @@ describe('ACCEPTANCE: CLIENT_ADMIN | PREFIXES', () => {
       // cy.get('div.alert').contains(/Please ask DataCite Staff if you want to add a prefix./i);
 
       // Has left sidebar buttons.
-      cy.get('div.col-md-3').should('be.visible').within(($sidebar) => {
+      cy.get('[data-test-left-sidebar]').should('be.visible').within(($sidebar) => {
         // Create DOI button - would like to do more testing but seems impossible in Cypress.
         cy.get('.create-doi-button').contains(/Create DOI/i);
         cy.get('.create-doi-button button.dropdown-toggle').click({ force: true }).then(($obj) => {
