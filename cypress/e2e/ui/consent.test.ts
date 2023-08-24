@@ -6,6 +6,18 @@
 describe('ACCEPTANCE: UI | CONSENT', () => {
   const sizes = ['iphone-6', 'samsung-s10', 'ipad-2', [1024, 768]];
 
+  const waitTime = 1000;
+  const waitTime2 = 2000;
+
+  before(function () {
+    Cypress.session.clearCurrentSessionData()
+    cy.clearCookies()
+    cy.clearAllCookies()
+    cy.clearAllLocalStorage()
+    cy.clearAllSessionStorage()
+    cy.wait(waitTime2);
+  })
+
   sizes.forEach((size) => {
     it(`index on ${size} viewport`, () => {
       if (Cypress._.isArray(size)) {

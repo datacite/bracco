@@ -24,6 +24,7 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | SETTINGS', () => {
 
     cy.login(Cypress.env('consortium_admin_username'), Cypress.env('consortium_admin_password'));
     cy.setCookie('_consent', 'true');
+    cy.wait(waitTime2);
 
     cy.getCookie('_jwt').then((cookie) => {
       cy.createContact(email, given_name, family_name, roles, type, consortium_id, Cypress.env('api_url'), cookie.value)
@@ -31,14 +32,14 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | SETTINGS', () => {
   })
 
   beforeEach(() => {
-    Cypress.Cookies.preserveOnce('_fabrica', '_jwt', '_consent');
-    cy.wait(waitTime2);
+    // TBD - set up test environment
   });
 
   after(() => {
     cy.getCookie('_jwt').then((cookie) => {
       cy.deleteProviderTestContacts(consortium_id, test_contact_family_name_prefix, Cypress.env('api_url'), cookie.value)
     })
+    cy.clearAllSessionStorage()
   })
 
   it('is logged in to settings page', () => {

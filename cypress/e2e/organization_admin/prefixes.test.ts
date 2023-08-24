@@ -10,15 +10,17 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | PREFIXES', () => {
     before(function () {
       cy.login(Cypress.env('organization_admin_username'), Cypress.env('organization_admin_password'));
       cy.setCookie('_consent', 'true');
-    });
-  
-    beforeEach(() => {
-      Cypress.Cookies.preserveOnce('_fabrica', '_jwt', '_consent');
       cy.wait(waitTime2);
     });
   
+    beforeEach(() => {
+      // TBD - set up test environment
+    });
+  
     after(function () {
+      // TBD - Clean up any resources created for the test. (only local dev and stage).
       // cy.log('TBD - CLEAN UP RESOURCES AFTER TEST');
+      cy.clearAllSessionStorage()
     });
   
     // Check for page elements.

@@ -19,16 +19,17 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
   before(function () {
     cy.login(Cypress.env('client_admin_username'), Cypress.env('client_admin_password'));
     cy.setCookie('_consent', 'true');
-  });
-
-  beforeEach(() => {
-    Cypress.Cookies.preserveOnce('_fabrica', '_jwt', '_consent');
     cy.wait(waitTime2);
   });
 
+  beforeEach(() => {
+    // TBD - set up test environment
+  });
+
   after(function () {
-    // TBD - CLEAN UP DOIS and other resources from test run. (only local dev and stage).
+    // TBD - Clean up any resources created for the test. (only local dev and stage).
     // cy.log('TBD - CLEAN UP RESOURCES AFTER TEST');
+    cy.clearAllSessionStorage()
   });
 
   it('is logged in to dois page', () => {
@@ -53,7 +54,7 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
         .and('have.attr', 'href').and('include', '/repositories/datacite.test/dois');
 
       // Has left sidebar buttons.
-      cy.get('div.col-md-3').should('be.visible').within(($sidebar) => {
+      cy.get('[data-test-left-sidebar]').should('be.visible').within(($sidebar) => {
         // Create DOI button - would like to do more testing but seems impossible in Cypress.
         cy.get('.create-doi-button').contains(/Create DOI/i);
         cy.get('.create-doi-button button.dropdown-toggle').click({ force: true }).then(($obj) => {
@@ -307,6 +308,12 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
       cy.get('button#doi-create').should('be.visible').click();
       cy.wait(waitTime);
       cy.location('pathname').should('contain', '/dois/' + prefix)
+      
+      // Cypress form bug? The suffix is not always available from the form field (above).  Get it from the url.
+      cy.url().then( (url) => {
+        Cypress.env('suffix', decodeURIComponent(url).split('/').pop())
+      })
+      
     });
   });
 

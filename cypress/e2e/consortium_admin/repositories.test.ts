@@ -8,6 +8,7 @@ function randomIntFromInterval(min, max) { // min and max included
 describe('ACCEPTANCE: CONSORTIUM_ADMIN | REPOSITORIES', () => {
   const waitTime = 1000;
   const waitTime2 = 2000;
+  const waitTime2 = 3000;
   let prefix = '';
   let suffix = '';
   const min = 500000;
@@ -25,6 +26,7 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | REPOSITORIES', () => {
 
     cy.login(Cypress.env('consortium_admin_username'), Cypress.env('consortium_admin_password'));
     cy.setCookie('_consent', 'true');
+    cy.wait(waitTime2);
 
     cy.getCookie('_jwt').then((cookie) => {
       cy.createContact(email, given_name, family_name, roles, type, consortium_id, Cypress.env('api_url'), cookie.value)
@@ -32,14 +34,14 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | REPOSITORIES', () => {
   });
 
   beforeEach(() => {
-    Cypress.Cookies.preserveOnce('_fabrica', '_jwt', '_consent');
-    cy.wait(waitTime2);
+    // TBD - set up test environment
   });
 
   after(() => {
     cy.getCookie('_jwt').then((cookie) => {
       cy.deleteProviderTestContacts(consortium_id, test_contact_family_name_prefix, Cypress.env('api_url'), cookie.value)
     })
+    cy.clearAllSessionStorage()
   })
 
   // Check for page elements.

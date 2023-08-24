@@ -8,11 +8,17 @@ describe('Admin: Repositories Tabs', () => {
     before(function () {
       cy.login(Cypress.env('staff_admin_username'), Cypress.env('staff_admin_password'));
       cy.setCookie('_consent', 'true');
+      cy.wait(waitTime2);
     })
   
     beforeEach(() => {
-      Cypress.Cookies.preserveOnce('_fabrica', '_jwt', '_consent');
-      cy.wait(waitTime2);
+      // TBD - Set up test environment.
+    });
+
+    after(function () {
+      // TBD - Clean up any resources created for the test. (only local dev and stage).
+      // cy.log('TBD - CLEAN UP RESOURCES AFTER TEST');
+      cy.clearAllSessionStorage()
     });
   
     // ASSUMING DATACITE.TEST EXISTS:
@@ -21,8 +27,9 @@ describe('Admin: Repositories Tabs', () => {
       cy.wait(waitTime2);
   
       // Has left sidebar with create doi button.
-      cy.get('div.col-md-3').should('be.visible').within(($sidebar) => {
-        // Create DOI button - would like to do more testing but seems impossible in Cypress.
+      //cy.get('div#left-sidebar.col-md-3').should('be.visible').within(($sidebar) => {
+      cy.get('[data-test-left-sidebar]').should('be.visible').within(($sidebar) => {
+          // Create DOI button - would like to do more testing but seems impossible in Cypress.
         cy.get('.create-doi-button').contains(/Create DOI/i);
         cy.get('.create-doi-button button.dropdown-toggle').click({ force: true }).then(($obj) => {
           //cy.get('.create-doi-button ul.dropdown-menu')
@@ -35,8 +42,9 @@ describe('Admin: Repositories Tabs', () => {
       cy.wait(waitTime2);
   
       // Has left sidebar with create doi button.
-      cy.get('div.col-md-3').should('be.visible').within(($sidebar) => {
-        // Create DOI button - would like to do more testing but seems impossible in Cypress.
+      //cy.get('div#left-sidebar.col-md-3').should('be.visible').within(($sidebar) => {
+      cy.get('[data-test-left-sidebar]').should('be.visible').within(($sidebar) => {
+          // Create DOI button - would like to do more testing but seems impossible in Cypress.
         cy.get('.create-doi-button').contains(/Create DOI/i);
         cy.get('.create-doi-button button.dropdown-toggle').click({ force: true }).then(($obj) => {
           //cy.get('.create-doi-button ul.dropdown-menu')
@@ -49,7 +57,8 @@ describe('Admin: Repositories Tabs', () => {
       cy.wait(waitTime2);
   
       // Has left sidebar with create doi button.
-      cy.get('div.col-md-3').should('be.visible').within(($sidebar) => {
+      //cy.get('div#left-sidebar.col-md-3').should('be.visible').within(($sidebar) => {
+      cy.get('[data-test-left-sidebar]').should('be.visible').within(($sidebar) => {
         // Create DOI button - would like to do more testing but seems impossible in Cypress.
         cy.get('.create-doi-button').contains(/Create DOI/i);
         cy.get('.create-doi-button button.dropdown-toggle').click({ force: true }).then(($obj) => {
@@ -63,7 +72,8 @@ describe('Admin: Repositories Tabs', () => {
       cy.wait(waitTime2);
   
       // Has left sidebar with create doi button.
-      cy.get('div.col-md-3').should('be.visible').within(($sidebar) => {
+      //cy.get('div#left-sidebar.col-md-3').should('be.visible').within(($sidebar) => {
+      cy.get('[data-test-left-sidebar]').should('be.visible').within(($sidebar) => {
         // Create DOI button - would like to do more testing but seems impossible in Cypress.
         cy.get('.create-doi-button').contains(/Create DOI/i);
         cy.get('.create-doi-button button.dropdown-toggle').click({ force: true }).then(($obj) => {
