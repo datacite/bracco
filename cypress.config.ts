@@ -14,6 +14,7 @@ export default defineConfig({
     baseUrl: 'http://localhost:4200',
     specPattern: 'cypress/e2e/**/*.test.*',
     testIsolation: false,
-    experimentalRunAllSpecs: true
+    experimentalRunAllSpecs: true,
+    numTestsKeptInMemory: 10
   },
 })
