@@ -10,6 +10,7 @@ window.deprecationWorkflow.config = {
     { handler: 'silence', matchId: 'ember-cp-validations'},
     { handler: 'silence', matchId: 'ember-cp-validations.inline-validator'},
     { handler: 'silence', matchId: 'globals-resolver'},
+    // Added these for ember v3.28
     { handler: 'silence', matchId: 'ember-simple-auth.events.session-service' },
     { handler: 'silence', matchId: 'ember-source.deprecation-without-for' },
     { handler: 'silence', matchId: 'ember-source.deprecation-without-since' },
@@ -20,6 +21,8 @@ window.deprecationWorkflow.config = {
     { handler: 'silence', matchId: 'ember-modifier.use-destroyables' },
     { handler: 'silence', matchId: 'ember-modifier.use-modify' },
     { handler: 'silence', matchId: 'ember-modifier.no-args-property' },
-    { handler: 'silence', matchId: 'ember-modifier.no-element-property' }
-  ],
+    { handler: 'silence', matchId: 'ember-modifier.no-element-property' },
+    { handler: 'silence', matchId: 'ember-modifier.no-element-property' },
+    { handler: 'silence', matchId: 'template-compiler.registerPlugin' }
+  ]
 };
