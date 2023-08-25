@@ -5,7 +5,12 @@ import { w } from '@ember/string';
 import countryList from 'iso-3166-country-list';
 import FileReader from 'ember-file-upload/system/file-reader';
 import ENV from 'bracco/config/environment';
-import { organizationTypeList, memberTypeList, focusAreaList, nonProfitStatusList } from 'bracco/models/provider';
+import {
+  organizationTypeList,
+  memberTypeList,
+  focusAreaList,
+  nonProfitStatusList
+} from 'bracco/models/provider';
 import _arr from 'lodash';
 
 // states and provinces use iso-3166-2 codes
