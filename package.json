@@ -225,6 +225,7 @@
     "**/chokidar": "^3.0.0",
     "**/json5": "^1.0.2",
     "**/ember-fetch/**/browserslist": "^4.16.5",
-    "**/@sentry/ember/**/jsdom": "^16.5.0"
+    "**/@sentry/ember/**/jsdom": "^16.5.0",
+    "**/@types/estree": "0.0.47"
   }
 }
