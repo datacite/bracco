@@ -1,3 +1,4 @@
+
 {{#if (can 'read repository' model provider=model.provider)}}
   <ApplicationHeader @default={{true}} />
   <div class="container-fluid">
@@ -76,26 +77,28 @@
           @stacked={{false}}
           @fill={{false}} as |nav|
         >
-          {{#link-to route='repositories.show.index' tagName="li" model=model.id}}
-              {{#link-to route='repositories.show.index' class='nav-link' query=assignedPrefix}}
-                  Info
-              {{/link-to}}
-          {{/link-to}}
-          {{#link-to route='repositories.show.settings' tagName="li" model=model.id}}
-              {{#link-to route='repositories.show.settings' class='nav-link' query=assignedPrefix}}
-                  Settings
-              {{/link-to}}
-          {{/link-to}}
-          {{#link-to route='repositories.show.prefixes' tagName="li" model=model.id}}
-              {{#link-to route='repositories.show.prefixes' class='nav-link' query=assignedPrefix}}
-                  Prefixes
-              {{/link-to}}
-          {{/link-to}}
-          {{#link-to route='repositories.show.dois' tagName="li" model=model.id}}
-              {{#link-to route='repositories.show.dois' class='nav-link' query=assignedPrefix}}
-                  DOIs
-              {{/link-to}}
-          {{/link-to}}
+          <LinkTo @route="change" class="btn btn-warning" id="set-password-provider"><i class="fas fa-key"></i> Set Password</LinkTo>
+
+          <LinkTo @route='repositories.show.index' @tagName="li" @model=model.id>
+            <LinkTo @route='repositories.show.index' class='nav-link' @query=assignedPrefix>
+              Info
+            </LinkTo>
+          </LinkTo>
+          <LinkTo @route='repositories.show.settings' @tagName="li" @model=model.id>
+            <LinkTo @route='repositories.show.settings' class='nav-link' @query=assignedPrefix>
+              Settings
+            </LinkTo>
+          </LinkTo>
+          <LinkTo @route='repositories.show.prefixes' @tagName="li" @model=model.id>
+            <LinkTo @route='repositories.show.prefixes' class='nav-link' @query=assignedPrefix>
+              Prefixes
+            </LinkTo>
+          </LinkTo>
+          <LinkTo @route='repositories.show.dois' @tagName="li" @model=model.id>
+            <LinkTo @route='repositories.show.dois' class='nav-link' @query=assignedPrefix>
+              DOIs
+            </LinkTo>
+          </LinkTo>
         </BsNav>
       </div>
     </div>

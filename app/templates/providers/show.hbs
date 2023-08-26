@@ -1,3 +1,4 @@
+
 {{#if (can 'read provider' model)}}
   <ApplicationHeader @default={{true}} />
   <div class="container-fluid">
@@ -60,45 +61,45 @@
         @stacked={{false}}
         @fill={{false}} as |nav|
       >
-        {{#link-to route='providers.show.index' tagName="li" model=model.id}}
-            {{#link-to route='providers.show.index' class='nav-link'}}
+        <LinkTo @route='providers.show.index' @tagName="li" @model=model.id>
+            <LinkTo @route='providers.show.index' class='nav-link'>
                 Info
-            {{/link-to}}
-        {{/link-to}}
-        {{#link-to route='providers.show.settings' tagName="li" model=model.id}}
-            {{#link-to route='providers.show.settings' class='nav-link'}}
+            </LinkTo>
+        </LinkTo>
+        <LinkTo @route='providers.show.settings' @tagName="li" @model=model.id>
+            <LinkTo @route='providers.show.settings' class='nav-link'>
                 Settings
-            {{/link-to}}
-        {{/link-to}}
+            </LinkTo>
+        </LinkTo>
         {{#if (eq model.memberType 'consortium')}}
-          {{#link-to route='providers.show.organizations' tagName="li"}}
-              {{#link-to route='providers.show.organizations' class='nav-link'}}
+          <LinkTo @route='providers.show.organizations' @tagName="li">
+              <LinkTo @route='providers.show.organizations' class='nav-link'>
                   Consortium Organizations
-              {{/link-to}}
-          {{/link-to}}
+              </LinkTo>
+          </LinkTo>
         {{/if}}
         {{#if (not-eq model.memberType 'developer')}}
-          {{#link-to route='providers.show.contacts' tagName="li" model=model.id}}
-              {{#link-to route='providers.show.contacts' class='nav-link'}}
+          <LinkTo @route='providers.show.contacts' @tagName="li" @model=model.id>
+              <LinkTo @route='providers.show.contacts' class='nav-link'>
                   Contacts
-              {{/link-to}}
-          {{/link-to}}
+              </LinkTo>
+          </LinkTo>
           {{#if (not-eq model.memberType 'member_only')}}
-            {{#link-to route='providers.show.repositories' tagName="li" model=model.id}}
-                {{#link-to route='providers.show.repositories' class='nav-link'}}
+            <LinkTo @route='providers.show.repositories' @tagName="li" @model=model.id>
+                <LinkTo @route='providers.show.repositories' class='nav-link'>
                     Repositories
-                {{/link-to}}
-            {{/link-to}}
-            {{#link-to route='providers.show.prefixes' tagName="li" model=model.id}}
-                {{#link-to route='providers.show.prefixes' class='nav-link'}}
+                </LinkTo>
+            </LinkTo>
+            <LinkTo @route='providers.show.prefixes' @tagName="li" @model=model.id>
+                <LinkTo @route='providers.show.prefixes' class='nav-link'>
                     Prefixes
-                {{/link-to}}
-            {{/link-to}}
-            {{#link-to route='providers.show.dois' tagName="li" model=model.id}}
-                {{#link-to route='providers.show.dois' class='nav-link'}}
+                </LinkTo>
+            </LinkTo>
+            <LinkTo @route='providers.show.dois' @tagName="li" @model=model.id>
+                <LinkTo @route='providers.show.dois' class='nav-link'>
                     DOIs
-                {{/link-to}}
-            {{/link-to}}
+                </LinkTo>
+            </LinkTo>
           {{/if}}
         {{/if}}
       </BsNav>
