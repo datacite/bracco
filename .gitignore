@@ -54,3 +54,7 @@ corber/cordova/www/*
 cypress/screenshotsFolder
 cypress/screenshots
 cypress/videosFolder
+
+# os-dependent files
+.DS_Store
+._.DS_Store
