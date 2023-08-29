@@ -120,4 +120,13 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | CONSORTIUM ORGANIZATIONS', () => {
       });
     });
   });
+
+  it('can see consortium organizations when using capitalized identifier URL subdirectory', () => {
+    cy.visit('/providers/DC/organizations');
+    cy.url().should('include', '/providers/DC/organizations').then(() => {
+
+      // Prefix page should be populated.
+      cy.contains('No consortium organizations found.').should('not.exist')
+    });
+  });
 });

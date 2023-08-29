@@ -9,6 +9,7 @@ function escapeRE(string) {
 describe('ACCEPTANCE: CLIENT_ADMIN | INFO', () => {
   const waitTime = 1000;
   const waitTime2 = 2000;
+  const waitTime3 = 3000;
 
   before(function () {
     cy.login(Cypress.env('client_admin_username'), Cypress.env('client_admin_password'));
@@ -173,6 +174,16 @@ describe('ACCEPTANCE: CLIENT_ADMIN | INFO', () => {
 
     cy.on("url:changed", (newUrl) => {
       expect(newUrl).to.contain("/repositories/datacite.test");
+    });
+  });
+
+  it.only('can see info when using capitalized identifier URL subdirectory', () => {
+    cy.visit('/repositories/DATACITE.TEST');
+    cy.url().should('include', '/repositories/DATACITE.TEST').then(() => {
+      
+      cy.wait(waitTime3)
+      // Info page should be populated with non-zero graph data.
+      cy.get('.graphs > a').contains(/^0$/).should('not.exist')
     });
   });
 });

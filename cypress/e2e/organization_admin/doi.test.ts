@@ -81,5 +81,14 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | DOIS', () => {
         cy.get('.create-doi-button').should('not.exist');
       });
     });
+
+    it('can see dois when using capitalized identifier URL subdirectory', () => {
+      cy.visit('/providers/DATACITE/dois');
+      cy.url().should('include', '/providers/DATACITE/dois').then(() => {
+  
+        // Prefix page should be populated.
+        cy.contains('No DOIs found.').should('not.exist')
+      });
+    });
   });
   

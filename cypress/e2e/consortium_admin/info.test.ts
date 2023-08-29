@@ -8,7 +8,8 @@ function escapeRE(string) {
 describe('ACCEPTANCE: CONSORTIUM_ADMIN | INFO', () => {
   const waitTime = 1000;
   const waitTime2 = 2000;
-
+  const waitTime3 = 3000;
+  
   before(function () {
     cy.login(Cypress.env('consortium_admin_username'), Cypress.env('consortium_admin_password'));
     cy.setCookie('_consent', 'true');
@@ -198,6 +199,16 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | INFO', () => {
 
     cy.on("url:changed", (newUrl) => {
       expect(newUrl).to.contain("/providers/dc");
+    });
+  });
+
+  it.only('can see info when using capitalized identifier URL subdirectory', () => {
+    cy.visit('/providers/DC');
+    cy.url().should('include', '/providers/DC').then(() => {
+      
+      cy.wait(waitTime3)
+      // Info page should be populated with non-zero graph data.
+      cy.get('.graphs > a').contains(/^0$/).should('not.exist')
     });
   });
 });

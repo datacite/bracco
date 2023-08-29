@@ -74,5 +74,14 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | PREFIXES', () => {
         cy.get('.create-doi-button').should('not.exist');
       });
     });
+
+    it('can see prefixes when using capitalized identifier URL subdirectory', () => {
+      cy.visit('/providers/DATACITE/prefixes');
+      cy.url().should('include', '/providers/DATACITE/prefixes').then(() => {
+
+        // Prefix page should be populated.
+        cy.contains('No prefixes found.').should('not.exist')
+      });
+    });
   });
   

@@ -12,7 +12,7 @@ export default Route.extend({
   model(params) {
     let self = this;
     return this.store
-      .findRecord('provider', params.provider_id, {
+      .findRecord('provider', params.provider_id.toLowerCase(), {
         include: 'consortium,consortium-organizations,contacts'
       })
       .then(function (provider) {

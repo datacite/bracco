@@ -468,4 +468,28 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
       });
     });
   });
+
+  it('visiting specific doi with uppercase identifier in URL subdirectory', () => {
+    cy.getCookie('_jwt').then((cookie) => {
+
+      // Create a doi to be visited.
+      cy.createDoi(prefix, Cypress.env('api_url'), cookie.value).then((id) => {
+        cy.log('DOI: ' + id);
+        const uri = 'dois/' +  encodeURIComponent(id).toUpperCase() + '/edit';
+        const target_uri = '/dois/' +  encodeURIComponent(id);
+
+        cy.visit(uri);
+        cy.url().should('include', uri);
+      });
+    });
+  });
+
+  it('can see dois when using capitalized identifier URL subdirectory', () => {
+    cy.visit('/repositories/DATACITE.TEST/dois');
+    cy.url().should('include', '/repositories/DATACITE.TEST/dois').then(() => {
+
+      // Prefix page should be populated.
+      cy.contains('No DOIs found.').should('not.exist')
+    });
+  });
 });
