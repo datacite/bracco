@@ -13,8 +13,10 @@ The web frontend for the DataCite Fabrica service.
 You will need the following things properly installed on your computer.
 
 - [Git](https://git-scm.com/)
-- [Node.js](https://nodejs.org/) (with NPM) - 14.x
-- [Ember CLI](https://ember-cli.com/)
+- [Node.js](https://nodejs.org/) (with NPM) - 18.x
+- [Ember CLI](https://ember-cli.com/) - 3.24
+- [Yarn Classic](https://classic.yarnpkg.com/) - 1.29.x
+
 
 ## Installation
 
