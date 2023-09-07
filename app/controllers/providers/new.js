@@ -4,7 +4,12 @@ import { computed } from '@ember/object';
 import { w } from '@ember/string';
 import countryList from 'iso-3166-country-list';
 import ENV from 'bracco/config/environment';
-import { organizationTypeList, memberTypeList, focusAreaList, nonProfitStatusList } from 'bracco/models/provider';
+import {
+  organizationTypeList,
+  memberTypeList,
+  focusAreaList,
+  nonProfitStatusList
+} from 'bracco/models/provider';
 
 // states and provinces use iso-3166-2 codes
 // TODO add Brazil, India, Ireland, Italy, Mexico, all supported in Salesforce

@@ -1,17 +1,9 @@
 <div class="input-group" style="padding-top:30px;">
   <div class="power-select-fragment" doi-format>
-    {{#form.element controlType="power-select" disabled=disabled value=fragment options=formats as |el|}}
-      {{#el.control
-        onChange=(action "selectFormat")
-        onkeydown=(action "createOnEnter")
-        search=(action "searchFormat")
-        placeholder="Search standard formats OR create a new format"
-        searchPlaceholder="Type to search format OR create a new format..."
-        noMatchesMessage="Press ENTER to add new format."
-        allowClear=true as |item|
-      }}
+    <@form.element @controlType="power-select" @value={{fragment}} @options={{formats}} as |el|>
+      <el.control @onChange={{action "selectFormat"}} @onKeydown={{action "createOnEnter"}} @search={{action "searchFormat"}} @placeholder="Search standard formats OR create a new format" @searchPlaceholder="Type to search format OR create a new format..." @noMatchesMessage="Press ENTER to add new format." @allowClear={{true}} @disabled={{disabled}} @searchEnabled={{true}}  as |item|>
         {{if item item fragment}}
-      {{/el.control}}
+      </el.control>
       <div class="help-block">
         The default format scheme is provided by the
         <a
@@ -23,7 +15,7 @@
         </a>
         .
       </div>
-    {{/form.element}}
+    </@form.element>
   </div>
   <span class="input-group-addon" style="vertical-align:top;padding-top:3px;background-color:white;">
   <BsButton @outline={{true}} @onClick={{action "deleteFormat" index}}><i class="fas fa-trash pull-left"></i></BsButton>

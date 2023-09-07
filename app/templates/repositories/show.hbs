@@ -76,45 +76,26 @@
           @stacked={{false}}
           @fill={{false}} as |nav|
         >
-          <nav.item>
-            <nav.link-to
-              @route="repositories.show.index"
-              model="model.id"
-              class="nav-link"
-              @query={{hash assignedPrefix=null}}
-            >
-              Info
-            </nav.link-to>
-          </nav.item>
-          <nav.item>
-            <nav.link-to
-              @route="repositories.show.settings"
-              model="model.id"
-              class="nav-link"
-            >
-              Settings
-            </nav.link-to>
-          </nav.item>
-          <nav.item>
-            <nav.link-to
-              @route="repositories.show.prefixes"
-              model="model.id"
-              class="nav-link"
-              @query={{hash assignedPrefix=null}}
-            >
-              Prefixes
-            </nav.link-to>
-          </nav.item>
-          <nav.item>
-            <nav.link-to
-              @route="repositories.show.dois"
-              model="model.id"
-              class="nav-link"
-              @query={{hash assignedPrefix=null}}
-            >
-              DOIs
-            </nav.link-to>
-          </nav.item>
+          {{#link-to route='repositories.show.index' tagName="li" model=model.id}}
+              {{#link-to route='repositories.show.index' class='nav-link' query=assignedPrefix}}
+                  Info
+              {{/link-to}}
+          {{/link-to}}
+          {{#link-to route='repositories.show.settings' tagName="li" model=model.id}}
+              {{#link-to route='repositories.show.settings' class='nav-link' query=assignedPrefix}}
+                  Settings
+              {{/link-to}}
+          {{/link-to}}
+          {{#link-to route='repositories.show.prefixes' tagName="li" model=model.id}}
+              {{#link-to route='repositories.show.prefixes' class='nav-link' query=assignedPrefix}}
+                  Prefixes
+              {{/link-to}}
+          {{/link-to}}
+          {{#link-to route='repositories.show.dois' tagName="li" model=model.id}}
+              {{#link-to route='repositories.show.dois' class='nav-link' query=assignedPrefix}}
+                  DOIs
+              {{/link-to}}
+          {{/link-to}}
         </BsNav>
       </div>
     </div>

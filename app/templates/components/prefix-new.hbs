@@ -1,6 +1,6 @@
   <BsForm @formLayout="horizontal" @horizontalLabelGridClass="col-md-3" @model={{this}} @onSubmit={{action "submit"}} as |form|>
-    <form.element @controlType="text" @label="From" @onChange={{action "submitFirstPrefix"}} @property="firstPrefix" @helpText="First prefix in range of new prefixes provided by CNRI." @required={{false}} />
-    <form.element @controlType="text" @label="To" @onChange={{action "submitLastPrefix"}} @property="lastPrefix" @helpText="Last prefix in range of new prefixes provided by CNRI." @required={{false}} />
+    <form.element @controlType="text" @label="From" @onChange={{action "submitFirstPrefix"}} @property="firstPrefix" @helpText="First prefix in range of new prefixes provided by CNRI." />
+    <form.element @controlType="text" @label="To" @onChange={{action "submitLastPrefix"}} @property="lastPrefix" @helpText="Last prefix in range of new prefixes provided by CNRI." />
 
     <div class="col-md-9 col-md-offset-3">
       <button type="submit" class="btn btn-sm btn-fill">Add Prefixes</button>

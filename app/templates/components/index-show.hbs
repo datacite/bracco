@@ -1,8 +1,8 @@
 {{#if edit}}
   <BsForm @formLayout="vertical" @model={{model}} @onSubmit={{action "submit" model}} as |form|>
-    <form.element @controlType="text" @label="Name" @property="name" @required={{false}} />
-    <form.element @controlType="text" @label="Contact" @property="contact" @required={{false}} />
-    <form.element @controlType="email" @label="Email" @property="email" @required={{false}} />
+    <form.element @controlType="text" @label="Name" @property="name" />
+    <form.element @controlType="text" @label="Contact" @property="contact" />
+    <form.element @controlType="email" @label="Email" @property="email" />
 
     <div class="pseudo-footer">
       <div class="btn-toolbar pull-right">

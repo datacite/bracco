@@ -8,17 +8,17 @@
       {{/each}}
 
       {{#if (lte model.formats.length 5)}}
-        <BsButton @class="btn-sm" @id="add-format" @outline={{true}} @onClick={{action "addFormat"}}><i class="fas fa-plus"></i> Add {{if (gt model.formats.length 0) "another "}}format</BsButton>
+        <BsButton class="btn-sm" id="add-format" @outline={{true}} @onClick={{action "addFormat"}}><i class="fas fa-plus"></i> Add {{if (gt model.formats.length 0) "another "}}format</BsButton>
       {{/if}}
 
       {{#if (gt model.formats.length 0)}}
-        <BsButton @id="toggle-formats" @class="btn-sm" @outline={{true}} @onClick={{action "toggleFormats"}}><i class="fas fa-eye-slash"></i> Hide {{pluralize model.formats.length 'format'}}</BsButton>
+        <BsButton id="toggle-formats" class="btn-sm" @outline={{true}} @onClick={{action "toggleFormats"}}><i class="fas fa-eye-slash"></i> Hide {{pluralize model.formats.length 'format'}}</BsButton>
       {{/if}}
     {{else}}
       {{#if (gt model.formats.length 0)}}
-        <BsButton @id="toggle-formats" @class="btn-sm" @outline={{true}} @onClick={{action "toggleFormats"}}><i class="fas fa-eye"></i> Show {{pluralize model.formats.length 'format'}}</BsButton>
+        <BsButton id="toggle-formats" class="btn-sm" @outline={{true}} @onClick={{action "toggleFormats"}}><i class="fas fa-eye"></i> Show {{pluralize model.formats.length 'format'}}</BsButton>
       {{else}}
-        <BsButton @class="btn-sm btn-warning" @id="add-format" @outline={{true}} @onClick={{action "addFormat"}}><i class="fas fa-plus"></i> Add format</BsButton>
+        <BsButton class="btn-sm btn-warning" id="add-format" @outline={{true}} @onClick={{action "addFormat"}}><i class="fas fa-plus"></i> Add format</BsButton>
       {{/if}}
     {{/if}}
   </div>

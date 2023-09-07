@@ -8,17 +8,17 @@
       {{/each}}
 
       {{#if (lte model.sizes.length 5)}}
-        <BsButton @class="btn-sm" @id="add-size" @outline={{true}} @onClick={{action "addSize"}}><i class="fas fa-plus"></i> Add {{if (gt model.sizes.length 0) "another "}}size</BsButton>
+        <BsButton class="btn-sm" id="add-size" @outline={{true}} @onClick={{action "addSize"}}><i class="fas fa-plus"></i> Add {{if (gt model.sizes.length 0) "another "}}size</BsButton>
       {{/if}}
 
       {{#if (gt model.sizes.length 0)}}
-        <BsButton @id="toggle-sizes" @class="btn-sm" @outline={{true}} @onClick={{action "toggleSizes"}}><i class="fas fa-eye-slash"></i> Hide {{pluralize model.sizes.length 'size'}}</BsButton>
+        <BsButton id="toggle-sizes" class="btn-sm" @outline={{true}} @onClick={{action "toggleSizes"}}><i class="fas fa-eye-slash"></i> Hide {{pluralize model.sizes.length 'size'}}</BsButton>
       {{/if}}
     {{else}}
       {{#if (gt model.sizes.length 0)}}
-        <BsButton @id="toggle-sizes" @class="btn-sm" @outline={{true}} @onClick={{action "toggleSizes"}}><i class="fas fa-eye"></i> Show {{pluralize model.sizes.length 'size'}}</BsButton>
+        <BsButton id="toggle-sizes" class="btn-sm" @outline={{true}} @onClick={{action "toggleSizes"}}><i class="fas fa-eye"></i> Show {{pluralize model.sizes.length 'size'}}</BsButton>
       {{else}}
-        <BsButton @class="btn-sm btn-warning" @id="add-size" @outline={{true}} @onClick={{action "addSize"}}><i class="fas fa-plus"></i> Add size</BsButton>
+        <BsButton class="btn-sm btn-warning" id="add-size" @outline={{true}} @onClick={{action "addSize"}}><i class="fas fa-plus"></i> Add size</BsButton>
       {{/if}}
     {{/if}}
   </div>

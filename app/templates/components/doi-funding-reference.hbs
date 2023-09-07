@@ -3,8 +3,8 @@
 </div>
   
 <div class="power-select-fragment" data-test-funder-name>
-  <@form.element @controlType="power-select" @options={{funders}} @value={{fragment.funderName}} @disabled={{disabled}} @allowClear={{true}} @destination={{fragment.funderName}} as |el|>
-    <el.control @searchEnabled={{true}} @onChange={{action "selectFunderReference"}} @placeholder="Search Funders" @onkeydown={{action "createOnEnter"}} @search={{action "searchFundingReferences"}} @searchPlaceholder="Type to search..." @allowClear={{true}} @noMatchesMessage="Press ENTER to add new funder name." as |item|>
+  <@form.element @controlType="power-select" @options={{funders}} @value={{fragment.funderName}} @destination={{fragment.funderName}} as |el|>
+    <el.control @searchEnabled={{true}} @onChange={{action "selectFunderReference"}} @placeholder="Search Funders" @onKeydown={{action "createOnEnter"}} @search={{action "searchFundingReferences"}} @searchPlaceholder="Type to search..." @allowClear={{true}} @noMatchesMessage="Press ENTER to add new funder name." @allowClear={{true}} @disabled={{disabled}} as |item|>
       {{if item.name item.name fragment.funderName}}
     </el.control>
   <div class="help-block">
@@ -34,8 +34,8 @@
   <label for="funderIdentifierType" class="subtitle">Funder Identifier Type</label>
 </div>
 <div class="power-select-fragment" data-test-funder-identifier-type>
-  <@form.element @controlType="power-select" @value={{fragment.funderIdentifierType}} @helpText="The type of funder identifier, one of Crossref Funder ID, GRID, ISNI, or ROR." @options={{funderIdentifierTypeList}} @disabled={{isCrossrefId}} @destination={{fragment.funderIdentifierType}} as |el|>
-    <el.control @onChange={{action "selectFunderIdentifierType"}} @allowClear={{true}} @placeholder="Select Funder Identifier Type" />
+  <@form.element @controlType="power-select" @value={{fragment.funderIdentifierType}} @helpText="The type of funder identifier, one of Crossref Funder ID, GRID, ISNI, or ROR." @options={{funderIdentifierTypeList}} @destination={{fragment.funderIdentifierType}} as |el|>
+    <el.control @onChange={{action "selectFunderIdentifierType"}} @allowClear={{true}} @placeholder="Select Funder Identifier Type" @disabled={{isCrossrefId}} />
   </@form.element>
 </div>
 

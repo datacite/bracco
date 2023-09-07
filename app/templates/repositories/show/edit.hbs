@@ -7,35 +7,37 @@
     </div>
 
     <BsForm @formLayout="horizontal" @horizontalLabelGridClass="col-md-3" @model={{model}} @onSubmit={{action "submit" model}} @submitOnEnter={{true}} as |form|>
-      <form.element @controlType="text" @id="repository-id" @label="Repository ID" @property="symbol" @helpText="The Repository ID is the unique identifier for each repository in DataCite and can't be changed." @disabled={{true}} />
-      <form.element @controlType="power-select" @id="client-type" @label="Type" @value={{clientType}} @options={{clientTypes}} @optionLabelPath="label" @disabled={{if (eq model.clientType "igsnCatalog") true false}} as |el|>
-        <el.control @onChange={{action "selectClientType"}} @search={{action "searchClientType"}} @placeholder="Select Client Type" @searchPlaceholder="Type to search..."  />
+      <form.element @controlType="text" id="repository-id" @label="Repository ID" @property="symbol" @helpText="The Repository ID is the unique identifier for each repository in DataCite and can't be changed." as |el| >
+        <el.control disabled={{true}} />
+      </form.element>
+      <form.element @controlType="power-select" id="client-type" @label="Type" @value={{clientType}} @options={{clientTypes}} @optionLabelPath="label" as |el|>
+        <el.control @onChange={{action "selectClientType"}} @search={{action "searchClientType"}} @placeholder="Select Client Type" @searchPlaceholder="Type to search..." @disabled={{if (eq model.clientType "igsnCatalog") true false}} @searchEnabled={{true}}/>
         {{#if (eq model.clientType "igsnCatalog")}}
           <BsTooltip @placement="top" @viewportPadding={{10}}>IGSN ID Catalogs cannot be edited.</BsTooltip>
         {{/if}}
       </form.element>
 
       {{#if (can "create provider")}}
-        <form.element @controlType="text" @id="salesforce-id" @label="Salesforce ID" @property="salesforceId" @required={{false}} @helpText="The 18 digit ID in Salesforce." />
+        <form.element @controlType="text" id="salesforce-id" @label="Salesforce ID" @property="salesforceId" @helpText="The 18 digit ID in Salesforce." />
       {{/if}}
 
       {{#if (can "token provider")}}
-        <form.element @controlType="text" @id="globus-uuid" @label="Globus UUID (optional)" @property="globusUuid" @required={{false}} @helpText="The Globus UUID used for token authentication." />
+        <form.element @controlType="text" id="globus-uuid" @label="Globus UUID (optional)" @property="globusUuid" @helpText="The Globus UUID used for token authentication." />
       {{/if}}
 
       {{#if (eq model.clientType "periodical")}}
         <RepositoryIssn @model={{model}} @fragment={{model.issn}} @form={{form}} />
       {{else}}
-        <form.element @controlType="power-select" @id="re3data" @property="re3data" @label="re3data Record (optional)" @optionLabelPath="re3data" @options={{repositories}} @destination={{re3data}} @helpText="re3data is a registry of research data repositories." as |el|>
-          <el.control @onChange={{action "selectRe3Data"}} @search={{action "searchRe3Data"}} @searchField="repositoryName" @searchPlaceholder="Type to search..." @allowClear={{true}} as |item|>
+        <form.element @controlType="power-select" id="re3data" @property="re3data" @label="re3data Record (optional)" @optionLabelPath="re3data" @options={{repositories}} @destination={{re3data}} @helpText="re3data is a registry of research data repositories." as |el|>
+          <el.control @onChange={{action "selectRe3Data"}} @search={{action "searchRe3Data"}} @searchField="repositoryName" @searchPlaceholder="Type to search..." @allowClear={{true}} @searchEnabled={{true}} as |item|>
             {{if item.name item.name model.re3data}}
           </el.control>
         </form.element>
       {{/if}}
 
-      <form.element @controlType="text" @id="name" @label="Repository Name" @property="name" @required={{false}} />
-      <form.element @controlType="text" @id="alternate-name" @label="Repository Alternate Name (optional)" @property="alternateName" @required={{false}} />
-      <form.element @controlType="email" @id="system-email" @label="System Email" @property="systemEmail" @helpText="This is the email used for sending password reset requests and similar system notifications." @required={{false}} />
+      <form.element @controlType="text" id="name" @label="Repository Name" @property="name" as |el| ><el.control id="name-field" /></form.element>
+      <form.element @controlType="text" id="alternate-name" @label="Repository Alternate Name (optional)" @property="alternateName" />
+      <form.element @controlType="email" id="system-email" @label="System Email" @property="systemEmail" @helpText="This is the email used for sending password reset requests and similar system notifications." />
 
       <div class="form-group">
         <label class="control-label col-md-3">Service Contact (optional)</label>
@@ -58,8 +60,8 @@
         </div>
       </div>
 
-      <form.element @controlType="textarea" @id="description" @label="Description (optional)" @property="description" @rows="10" @helpText="Description of the repository. Please use markdown for formatting." @required={{false}} />
-      <form.element @controlType="text" @id="url" @label="URL (optional)" @property="url" @helpText="The homepage of the repository." @required={{false}} />
+      <form.element @controlType="textarea" id="description" @label="Description (optional)" @property="description" @helpText="Description of the repository. Please use markdown for formatting." as |el| ><el.control rows="10" /></form.element>
+      <form.element @controlType="text" id="url" @label="URL (optional)" @property="url" @helpText="The homepage of the repository." />
 
       <div class="form-group" id="language">
         <label class="control-label col-md-3">Language (optional)</label>
@@ -70,17 +72,17 @@
             {{/each}}
           {{/if}}
           {{#if (lte model.language.length 2)}}
-            <BsButton @class="btn-sm add-language" @outline={{true}} @onClick={{action "addLanguage"}}><i class="fas fa-plus-circle"></i> Add Language</BsButton>
+            <BsButton class="btn-sm add-language" @outline={{true}} @onClick={{action "addLanguage"}}><i class="fas fa-plus-circle"></i> Add Language</BsButton>
           {{/if}}
         </div>
       </div>
 
-      <form.element @controlType="power-select" @id="software" @label="Software (optional)" @property="software" @options={{softwares}} @destination={{software}} @helpText="The name of the software that is used to run the repository." as |el|>
-        <el.control @onChange={{action "selectSoftware"}} @search={{action "searchSoftware"}} @placeholder="Select Software" @searchPlaceholder="Type to search..." @allowClear={{true}} as |item|>
+      <form.element @controlType="power-select" id="software" @label="Software (optional)" @property="software" @options={{softwares}} @destination={{software}} @helpText="The name of the software that is used to run the repository." as |el|>
+        <el.control @onChange={{action "selectSoftware"}} @search={{action "searchSoftware"}} @placeholder="Select Software" @searchPlaceholder="Type to search..." @allowClear={{true}} @searchEnabled={{true}} as |item|>
           {{item}}
         </el.control>
       </form.element>
-      <form.element @controlType="textarea" @id="domains" @label="Domains" @property="domains" @required={{false}} @helpText="List of domains, separated by comma, used for DOI registration, or use *. (e.g. *.example.org) to allow all subdomains, or use * to allow all domains." />
+      <form.element @controlType="textarea" id="domains" @label="Domains" @property="domains" @helpText="List of domains, separated by comma, used for DOI registration, or use *. (e.g. *.example.org) to allow all subdomains, or use * to allow all domains." />
 
       {{#unless (eq model.clientType "periodical")}}
         <div class="form-group" id="repository-type">
@@ -92,7 +94,7 @@
               {{/each}}
             {{/if}}
             {{#if (lte model.repositoryType.length 2)}}
-              <BsButton @class="btn-sm add-repositoryType" @outline={{true}} @onClick={{action "addRepositoryType"}}><i class="fas fa-plus-circle"></i> Add Repository Type</BsButton>
+              <BsButton class="btn-sm add-repositoryType" @outline={{true}} @onClick={{action "addRepositoryType"}}><i class="fas fa-plus-circle"></i> Add Repository Type</BsButton>
             {{/if}}
           </div>
         </div>
@@ -111,14 +113,16 @@
               {{/each}}
             {{/if}}
             {{#if (lte model.certificate.length 2)}}
-              <BsButton @class="btn-sm add-certificate" @outline={{true}} @onClick={{action "addCertificate"}}><i class="fas fa-plus-circle"></i> Add Certificate</BsButton>
+              <BsButton class="btn-sm add-certificate" @outline={{true}} @onClick={{action "addCertificate"}}><i class="fas fa-plus-circle"></i> Add Certificate</BsButton>
             {{/if}}
           </div>
         </div>
       {{/unless}}
 
       {{#if (can "create repository" model)}}
-        <form.element @controlType="checkbox" @id="is-active" @label="Account is active" @property="isActive" @helpText="This account can register and update DOIs" />
+        <form.element @controlType="checkbox" id="is-active" @label="Account is active" @property="isActive" @helpText="This account can register and update DOIs" as |el| >
+          <el.control id="is-active-field" />
+        </form.element>
       {{/if}}
 
       <div class="col-md-offset-3">

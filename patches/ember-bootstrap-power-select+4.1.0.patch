@@ -1,0 +1,13 @@
+diff --git a/node_modules/ember-bootstrap-power-select/addon/components/bs-form/element/control/power-select.hbs b/node_modules/ember-bootstrap-power-select/addon/components/bs-form/element/control/power-select.hbs
+index 92c5d94..9703aca 100644
+--- a/node_modules/ember-bootstrap-power-select/addon/components/bs-form/element/control/power-select.hbs
++++ b/node_modules/ember-bootstrap-power-select/addon/components/bs-form/element/control/power-select.hbs
+@@ -31,7 +31,7 @@
+     @onClose={{@onClose}}
+     @onFocus={{@onFocus}}
+     @onInput={{@onInput}}
+-    @onKeyDown={{@onKeyDown}}
++    @onKeydown={{@onKeydown}}
+     @onOpen={{@onOpen}}
+     @options={{@options}}
+     @optionsComponent={{@optionsComponent}}

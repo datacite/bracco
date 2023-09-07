@@ -13,7 +13,9 @@
         <label class="control-label col-md-3">DOI</label>
         <div class="col-md-9 input-fragment">
           <div class="label-vertical">The globally unique string that identifies the resource and can't be changed.</div>
-          <form.element @controlType="text" @id="doi" @property="doi" @disabled={{true}} />
+          <form.element @controlType="text" id="doi" @property="doi" as |el| >
+            <el.control disabled={{true}} />
+          </form.element>
         </div>
       </div>
 
@@ -23,7 +25,9 @@
         <label class="control-label col-md-3">URL</label>
         <div class="col-md-9 input-fragment">
           <div class="label-vertical">The location of the landing page with more information about the resource.</div>
-          <form.element @id="url" @controlType="text" @property="url" @placeholder="URL" @helpText="Should be a https URL — within the allowed domain(s) of your repository if domain restrictions are enabled in the repository settings. Http and ftp are also supported. For example http://example.org" @required={{false}} />
+          <form.element id="url" @controlType="text" @property="url" @helpText="Should be a https URL — within the allowed domain(s) of your repository if domain restrictions are enabled in the repository settings. Http and ftp are also supported. For example http://example.org"  as |el| >
+            <el.control id="url-field" placeholder="URL" />
+          </form.element>
         </div>
       </div>
 

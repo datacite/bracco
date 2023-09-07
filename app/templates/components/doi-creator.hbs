@@ -7,7 +7,7 @@
 {{/if}}
 
 {{#if (lte fragment.nameIdentifiers.length 2)}}
-  <BsButton @class="btn-sm add-name-identifier" @outline={{true}} @onClick={{action "addNameIdentifier"}}><i class="fas fa-plus-circle"></i> Add another name identifier</BsButton>
+  <BsButton class="btn-sm add-name-identifier" @outline={{true}} @onClick={{action "addNameIdentifier"}}><i class="fas fa-plus-circle"></i> Add another name identifier</BsButton>
 {{/if}}
 
 <div class="radio-fragment">
@@ -79,7 +79,7 @@
 {{/if}}
 
 {{#if (lte fragment.affiliation.length 2)}}
-  <BsButton @class="btn-sm add-affiliation" @outline={{true}} @onClick={{action "addAffiliation"}}><i class="fas fa-plus-circle"></i> Add another affiliation</BsButton>
+  <BsButton class="btn-sm add-affiliation" @outline={{true}} @onClick={{action "addAffiliation"}}><i class="fas fa-plus-circle"></i> Add another affiliation</BsButton>
 {{/if}}
 
 <hr />

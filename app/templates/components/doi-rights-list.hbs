@@ -8,17 +8,17 @@
       {{/each}}
 
       {{#if (lte model.rightsList.length 4)}}
-        <BsButton @id="add-rights" @class="btn-sm" @outline={{true}} @onClick={{action "addRights"}}><i class="fas fa-plus"></i> Add {{if (gt model.rightsList.length 0) "more "}} rights</BsButton>
+        <BsButton id="add-rights" class="btn-sm" @outline={{true}} @onClick={{action "addRights"}}><i class="fas fa-plus"></i> Add {{if (gt model.rightsList.length 0) "more "}} rights</BsButton>
       {{/if}}
 
       {{#if (gt model.rightsList.length 0)}}
-        <BsButton @id="toggle-rights" @class="btn-sm" @outline={{true}} @onClick={{action "toggleRights"}}><i class="fas fa-eye-slash"></i> Hide {{pluralize model.rightsList.length 'right'}}</BsButton>
+        <BsButton id="toggle-rights" class="btn-sm" @outline={{true}} @onClick={{action "toggleRights"}}><i class="fas fa-eye-slash"></i> Hide {{pluralize model.rightsList.length 'right'}}</BsButton>
       {{/if}}
     {{else}}
       {{#if (gt model.rightsList.length 0)}}
-        <BsButton @id="toggle-rights" @class="btn-sm" @outline={{true}} @onClick={{action "toggleRights"}}><i class="fas fa-eye"></i> Show {{pluralize model.rightsList.length 'right'}}</BsButton>
+        <BsButton id="toggle-rights" class="btn-sm" @outline={{true}} @onClick={{action "toggleRights"}}><i class="fas fa-eye"></i> Show {{pluralize model.rightsList.length 'right'}}</BsButton>
       {{else}}
-        <BsButton @class="btn-sm btn-warning" @id="add-rights" @outline={{true}} @onClick={{action "addRights"}}><i class="fas fa-plus"></i> Add rights</BsButton>
+        <BsButton class="btn-sm btn-warning" id="add-rights" @outline={{true}} @onClick={{action "addRights"}}><i class="fas fa-plus"></i> Add rights</BsButton>
       {{/if}}
     {{/if}}    
   </div>

@@ -136,16 +136,16 @@ jobs:
             cypress/e2e/client_admin/info.test.ts
             cypress/e2e/client_admin/prefixes.test.ts
             cypress/e2e/client_admin/settings.test.ts
-            cypress/e2e/consortium_admin/contacts.test.ts
+            cypress/e2e/consortium_admin/contact.test.ts
             cypress/e2e/consortium_admin/info.test.ts
             cypress/e2e/consortium_admin/settings.test.ts
-            cypress/e2e/organization_admin/contacts.test.ts
+            cypress/e2e/organization_admin/contact.test.ts
             cypress/e2e/organization_admin/doi.test.ts
             cypress/e2e/organization_admin/info.test.ts
             cypress/e2e/organization_admin/prefixes.test.ts
             cypress/e2e/organization_admin/repositories.test.ts
             cypress/e2e/organization_admin/settings.test.ts
-            cypress/e2e/staff_admin/contacts.test.ts
+            cypress/e2e/staff_admin/contact.test.ts
             cypress/e2e/staff_admin/info.test.ts
             cypress/e2e/staff_admin/settings.test.ts
             cypress/e2e/ui/consent.test.ts

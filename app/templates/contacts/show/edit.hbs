@@ -17,29 +17,32 @@
     >
       <form.element
         @controlType="text"
-        @id="givenName"
+        id="givenName"
         @label="Given Name"
-        @property="givenName"
-        @required={{false}}
-      />
+        @property="givenName" as |el|
+      >
+        <el.control id="givenName-field" />
+      </form.element>
       <form.element
         @controlType="text"
-        @id="familyName"
+        id="familyName"
         @label="Family Name"
-        @property="familyName"
-        @required={{false}}
-      />
+        @property="familyName"as |el|
+      >
+        <el.control id="familyName-field" />
+      </form.element>
       <form.element
         @controlType="email"
-        @id="email"
+        id="email"
         @label="Email"
         @property="email"
-        @helpText="Please enter a valid email address."
-        @required={{false}}
-      />
+        @helpText="Please enter a valid email address." as |el|
+      >
+        <el.control id="email-field" />
+      </form.element>
       <form.element
         @controlType="text"
-        @id="roles"
+        id="roles"
         @label="Roles"
         @property="roleNameString"
         @helpText="Please assign roles in the
@@ -49,8 +52,10 @@
             'Member'
           }}
            Settings."
-        @readonly={{true}}
-      />
+        readonly as |el|
+      >
+        <el.control id="roles-field" />
+      </form.element>
       <div class="col-md-offset-3">
         <BsAlert @dismissible={{false}} class="opt-in" @type="warning">
           The contact may receive notifications about administration, webinars, product testing, 

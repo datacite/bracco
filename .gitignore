@@ -12,6 +12,7 @@ dist/*
 /.env*
 /.pnp*
 /.sass-cache
+/.eslintcache
 /connect.lock
 /coverage/
 /libpeerconnection.log
@@ -51,4 +52,5 @@ corber/cordova/www/*
 
 # cypress
 cypress/screenshotsFolder
+cypress/screenshots
 cypress/videosFolder

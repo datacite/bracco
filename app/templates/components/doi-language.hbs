@@ -6,29 +6,12 @@
   <div class='col-md-9'>
     <div class='label-vertical'>The primary language of the resource.</div>
     <div class='power-select-fragment' doi-language>
-      {{#form.element
-        controlType='power-select'
-        id='doi-language'
-        formLayout='vertical'
-        disabled=disabled
-        value=language
-        options=languages
-        helpText='The default Language vocabulary is provided by ISO 639-1. Any new language should be provided using two-letter or three-letter language codes.'
-        as |el|
-      }}
-        {{el.control
-          onChange=(action 'selectLanguage')
-          search=(action 'searchLanguage')
-          placeholder='Search standard format OR add a new Language code'
-          onkeydown=(action 'createOnEnter')
-          searchPlaceholder='Type to search...'
-          noMatchesMessage='Press ENTER to add a new Language code.'
-          allowClear=true
-        }}
+      <@form.element @controlType="power-select" id="doi-language" @formLayout="vertical" @value={{language}} @options={{languages}} @helpText="The default Language vocabulary is provided by ISO 639-1. Any new language should be provided using two-letter or three-letter language codes." as |el|>
+        <el.control @onChange={{action "selectLanguage"}} @search={{action "searchLanguage"}} @placeholder="Search standard format OR add a new Language code" @onKeydown={{action "createOnEnter"}} @searchPlaceholder="Type to search..." @noMatchesMessage="Press ENTER to add a new Language code." @allowClear={{true}} @disabled={{disabled}} @searchEnabled={{true}} @ />
         {{#if (v-get model 'language' 'isInvalid')}}
           <div class='help-block'>{{v-get model 'language' 'message'}}</div>
         {{/if}}
-      {{/form.element}}
+      </@form.element>
     </div>
   </div>
 </div>

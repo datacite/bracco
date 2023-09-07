@@ -8,15 +8,22 @@ function escapeRE(string) {
 describe('ACCEPTANCE: CONSORTIUM_ADMIN | INFO', () => {
   const waitTime = 1000;
   const waitTime2 = 2000;
-
+  const waitTime3 = 3000;
+  
   before(function () {
     cy.login(Cypress.env('consortium_admin_username'), Cypress.env('consortium_admin_password'));
     cy.setCookie('_consent', 'true');
+    cy.wait(waitTime2);
   })
 
   beforeEach(() => {
-    Cypress.Cookies.preserveOnce('_fabrica', '_jwt', '_consent');
-    cy.wait(waitTime2);
+    // TBD - set up test environment
+  });
+
+  after(function () {
+    // TBD - Clean up any resources created for the test. (only local dev and stage).
+    // cy.log('TBD - CLEAN UP RESOURCES AFTER TEST');
+    cy.clearAllSessionStorage()
   });
 
   it('is logged in to homepage', () => {
@@ -192,6 +199,16 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | INFO', () => {
 
     cy.on("url:changed", (newUrl) => {
       expect(newUrl).to.contain("/providers/dc");
+    });
+  });
+
+  it.only('can see info when using capitalized identifier URL subdirectory', () => {
+    cy.visit('/providers/DC');
+    cy.url().should('include', '/providers/DC').then(() => {
+      
+      cy.wait(waitTime3)
+      // Info page should be populated with non-zero graph data.
+      cy.get('.graphs > a').contains(/^0$/).should('not.exist')
     });
   });
 });

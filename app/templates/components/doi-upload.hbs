@@ -11,7 +11,7 @@
     </div>
   </div>
 
-  <@form.element @controlType="textarea" @property="xml" @rows={{15}} @showValidationOn="focusOut" @id="metadata" @helpText="Upload a file with metadata in DataCite XML format, or one of the other supported formats. The DOI in the metadata will be replaced with the DOI in the DOI field if different." @required={{false}} as |el|>
-    <el.control @class="form-control metadata" />
+  <@form.element @controlType="textarea" @property="xml" @showValidationOn="focusOut" id="metadata" @helpText="Upload a file with metadata in DataCite XML format, or one of the other supported formats. The DOI in the metadata will be replaced with the DOI in the DOI field if different." as |el|>
+    <el.control class="form-control metadata" rows={{15}} />
   </@form.element>
 </div>

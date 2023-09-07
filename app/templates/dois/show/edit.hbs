@@ -18,7 +18,9 @@
         <label class="control-label col-md-3">DOI</label>
         <div class="col-md-9 input-fragment">
           <div class="label-vertical">The globally unique string that identifies the resource and can't be changed.</div>
-          <form.element @controlType="text" @id="doi" @property="doi" @disabled={{true}} />
+          <form.element @controlType="text" id="doi" @property="doi" as |el|>
+            <el.control disabled={{true}} />
+          </form.element>
         </div>
       </div>
 
@@ -28,7 +30,9 @@
         <label class="control-label col-md-3">URL</label>
         <div class="col-md-9 input-fragment">
           <div class="label-vertical">The location of the landing page with more information about the resource.</div>
-          <form.element @id="url" @controlType="text" @property="url" @placeholder="URL" @helpText="Should be a https URL — within the allowed domain(s) of your repository if domain restrictions are enabled in the repository settings. Http and ftp are also supported. For example http://example.org" @required={{false}} />
+          <form.element id="url" @controlType="text" @property="url" @helpText="Should be a https URL — within the allowed domain(s) of your repository if domain restrictions are enabled in the repository settings. Http and ftp are also supported. For example http://example.org" as |el| >
+            <el.control placeholder="URL" />
+          </form.element>
         </div>
       </div>
 
@@ -39,7 +43,7 @@
         <label class="control-label col-md-3">Publisher</label>
         <div class="col-md-9 input-fragment">
           <div class="label-vertical">The name of the entity that holds, archives, publishes prints, distributes, releases, issues, or produces the resource.</div>
-          <form.element @id="publisher" @controlType="text" @property="publisher" @helpText="This property will be used to formulate the citation, so consider the prominence of the role." @required={{false}} />
+          <form.element @id="publisher" @controlType="text" @property="publisher" @helpText="This property will be used to formulate the citation, so consider the prominence of the role." />
         </div>
       </div>
 
@@ -48,7 +52,7 @@
         <div class="col-md-9 input-fragment">
           <div class="label-vertical">The year when the resource was or will be made publicly available.</div>
           <form.element @id="publication-year" @controlType="text" @property="publicationYear"
-            @helpText="Must be a year between 1000 and {{current-year model.maxMintFutureOffset}}." @required={{false}} />
+            @helpText="Must be a year between 1000 and {{current-year model.maxMintFutureOffset}}." />
         </div>
       </div>
 
@@ -77,7 +81,9 @@
         <label class="control-label col-md-3">Version</label>
         <div class="col-md-9 input-fragment">
           <div class="label-vertical">The version number of the resource.</div>
-          <form.element @id="version" @controlType="text" @placeholder="Version" @property="version" @required={{false}} data-test-version/>
+          <form.element id="version" @controlType="text" @property="version" data-test-version as |el| >
+            <el.control placeholder="Version" id="version-field" />
+          </form.element>
         </div>
       </div>
 

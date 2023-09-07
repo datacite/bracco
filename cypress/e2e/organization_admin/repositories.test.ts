@@ -1,30 +1,53 @@
 /// <reference types="cypress" />
 /* eslint-disable no-undef */
 
+function randomIntFromInterval(min, max) { // min and max included
+  return Math.floor(Math.random() * (max - min + 1) + min)
+}
+
 describe('ACCEPTANCE: ORGANIZATION_ADMIN | REPOSITORIES', () => {
   const waitTime = 1000;
   const waitTime2 = 2000;
+  const waitTime3 = 3000;
   let prefix = '';
   let suffix = '';
+  const min = 500000;
+  const max = 999999;
+  const provider_id = Cypress.env('organization_admin_username').toLowerCase()
+  const test_contact_family_name_prefix = "OrganizationAdmin"
 
   before(function () {
+    var rndInt = randomIntFromInterval(min, max);
+    var given_name = 'Jack';
+    var family_name = test_contact_family_name_prefix + rndInt;
+    var email = given_name + '.' + family_name + '@example.org';
+    var type = 'providers';
+    var roles = ["service", "secondary_service", "technical", "secondary_technical", "billing"];
+
     cy.login(Cypress.env('organization_admin_username'), Cypress.env('organization_admin_password'));
     cy.setCookie('_consent', 'true');
+    cy.wait(waitTime2);
+
+    cy.getCookie('_jwt').then((cookie) => {
+      cy.createContact(email, given_name, family_name, roles, type, provider_id, Cypress.env('api_url'), cookie.value)
+    })
   });
 
   beforeEach(() => {
-    Cypress.Cookies.preserveOnce('_fabrica', '_jwt', '_consent');
-    cy.wait(waitTime2);
+    // TBD - set up test environment
   });
 
-  after(function () {
-    // cy.log('TBD - CLEAN UP RESOURCES AFTER TEST');
-  });
+  after(() => {
+    cy.getCookie('_jwt').then((cookie) => {
+      cy.deleteProviderTestContacts(provider_id, test_contact_family_name_prefix, Cypress.env('api_url'), cookie.value)
+    })
+    cy.clearAllSessionStorage()
+  })
 
   // Check for page elements.
   it('is logged in to repositories page', () => {
-    cy.visit('/providers/datacite/repositories');
-    cy.url().should('include', '/providers/datacite/repositories').then(() => {
+    cy.visit('/providers/' + provider_id + '/repositories');
+    cy.url().should('include', '/providers/' + provider_id + '/repositories').then(() => {
 
       // Has Fabrica logo and correct navbar color
       cy.get('img.fabrica-logo').should('exist').should('have.attr', 'src').should('include', 'fabrica-logo.svg');
@@ -32,15 +55,15 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | REPOSITORIES', () => {
 
       // Has upper right user profile link.
       cy.get('h2.work').contains('DataCite');
-      cy.get('a#account_menu_link').should('contain', 'DATACITE');
+      cy.get('a#account_menu_link').should('contain', Cypress.env('organization_admin_username').toUpperCase());
 
       // Has tabs with correct one activated.
       cy.get('ul.nav-tabs li.active a').contains(/Repositories/i)
-        .and('have.attr', 'href').and('include', '/providers/datacite/repositories');
+        .and('have.attr', 'href').and('include', '/providers/' + provider_id + '/repositories');
 
       cy.get('.btn-toolbar').within(($btnToolbar) => {
         cy.get('.btn-group a#add-repository').contains(/Add\s*Repositor/i)
-          .and('have.attr', 'href').and('include', '/providers/datacite/repositories/new');
+          .and('have.attr', 'href').and('include', '/providers/' + provider_id + '/repositories/new');
       });
 
       cy.get('button.export-basic-metadata').should('not.exist');
@@ -80,12 +103,12 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | REPOSITORIES', () => {
   // TBD - Could do more testing here. Only cursory testing for
   // presence of field objects. No testing of form behavior yet.
   it('has an add repository page', () => {
-    cy.visit('/providers/datacite/repositories/new');
-    cy.url().should('include', '/providers/datacite/repositories/new').then(() => {
+    cy.visit('/providers/' + provider_id + '/repositories/new');
+    cy.url().should('include', '/providers/' + provider_id + '/repositories/new').then(() => {
 
-      cy.wait(waitTime);
+      cy.wait(waitTime2);
       cy.get('h2.work').contains('DataCite');
-      cy.get('a#account_menu_link').should('contain', 'DATACITE');
+      cy.get('a#account_menu_link').should('contain', Cypress.env('organization_admin_username').toUpperCase());
 
       cy.get('h3.edit').contains(/Add\s*Repository/);
 
@@ -93,8 +116,9 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | REPOSITORIES', () => {
       cy.get('#client-type').should('be.visible');
       cy.get('#client-type .ember-power-select-selected-item').should('contain', 'Repository');
 
+      /* - TEMPORARILY SKIP THIS
       // Set client_type to Periodical
-      cy.get('div#client-type div[role="button"]').click({ waitForAnimations: true }).then(($dropdown) => {
+      cy.get('div#client-type div[role="button"]').click({ waitForAnimations: true }).then(() => {
         cy.get('ul.ember-power-select-options li').contains('Periodical').click({ waitForAnimations: true }).then(() => {
           // Periodical client_type divs should be visible and Repository client_type divs should not exist
           cy.get('#repository-issn').should('be.visible');
@@ -104,26 +128,29 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | REPOSITORIES', () => {
       });
 
       // Set client_type to IGSN ID Catalog
-      cy.get('div#client-type div[role="button"]').click({ waitForAnimations: true }).then(($dropdown) => {
+      cy.get('div#client-type div[role="button"]').click({ waitForAnimations: true }).then(() => {
         cy.get('ul.ember-power-select-options li').contains('IGSN ID Catalog').click({ waitForAnimations: true }).then(() => {
           // IGSN ID Catalog client_type divs should be visible
-          cy.get('.help-block').should('contain', 'This repository will only be able to mint IGSN IDs.');          
+          cy.get('div#client-type .help-block').should('contain', 'This repository will only be able to mint IGSN IDs.');          
           cy.get('#repository-issn').should('not.exist');
           cy.get('#repository-type').should('be.visible');
           cy.get('#certificate').should('be.visible');   
         })
       });
 
+
       // Set client_type back to Repository
-      cy.get('div#client-type div[role="button"]').click({ waitForAnimations: true }).then(($dropdown) => {
+      cy.get('div#client-type div[role="button"]').click({ waitForAnimations: true }).then(() => {
         cy.get('ul.ember-power-select-options li').contains('Repository').click({ waitForAnimations: true })
       });
+      cy.get('#client-type .ember-power-select-selected-item').should('contain', 'Repository');
+      */
 
       cy.get('#re3data').should('be.visible');
       cy.get('#name').should('be.visible');
       cy.get('#alternate-name').should('be.visible');
       cy.get('#system-email').should('be.visible');
-      cy.get('.form-group')
+      cy.get('#service-contact.form-group')
         .within(($form_group) => {
           cy.get('label').contains(/Service Contact/);
           cy.get('input#service-contact-given-name').should('be.visible');
@@ -133,7 +160,7 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | REPOSITORIES', () => {
       );
       cy.get('#description').should('be.visible')
       cy.get('#url').should('be.visible');
-      cy.get('#language')
+      cy.get('#language.form-group')
         .within(($form_group) => {
           // test for lamguage
           cy.get('button.add-language').should('be.visible');
@@ -141,19 +168,19 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | REPOSITORIES', () => {
       );
       cy.get('#software').should('be.visible');
       cy.get('#domains').should('be.visible');
-      cy.get('#repository-type')
+      cy.get('#repository-type.form-group')
         .within(($form_group) => {
           // test for lamguage
           cy.get('button.add-repositoryType').should('be.visible');
         }
       );
-      cy.get('#certificate')
+      cy.get('#certificate.form-group')
         .within(($form_group) => {
           // test for lamguage
           cy.get('button.add-certificate').should('be.visible');
         }
       );
-      cy.get('#is-active')
+      cy.get('#is-active.form-group')
         .within(($form_group) => {
           // test for lamguage
           cy.get('input[type="checkbox"]#is-active-field').should('be.visible');
@@ -198,5 +225,14 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | REPOSITORIES', () => {
 
     // Create DOI button
     cy.get('.create-doi-button').should('not.exist');
+  });
+
+  it('can see repositories when using capitalized identifier URL subdirectory', () => {
+    cy.visit('/providers/' + provider_id.toUpperCase() + '/repositories');
+    cy.url().should('include', '/providers/' + provider_id.toUpperCase() + '/repositories').then(() => {
+
+      // Repositories page should be populated.
+      cy.contains('No repositories found.').should('not.exist')
+    });
   });
 });

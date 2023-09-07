@@ -1,8 +1,8 @@
 
 <label for="contributorType" class="subtitle">Contributor Type</label>
   <div class="power-select-fragment" doi-contributor>
-    <@form.element @controlType="power-select" @value={{humanContributorType}} @helpText="The type of contributor of the resource." @options={{humanContributorTypes}} @formLayout="vertical" @selected={{humanContributorType}} @destination={{humanContributorType}} @disabled={{disabled}} as |el|>
-      <el.control @onChange={{action "selectContributorType"}} @placeholder="Select Contributor Type" />
+    <@form.element @controlType="power-select" @value={{humanContributorType}} @helpText="The type of contributor of the resource." @options={{humanContributorTypes}} @formLayout="vertical" @selected={{humanContributorType}} @destination={{humanContributorType}}  as |el|>
+      <el.control @onChange={{action "selectContributorType"}} @placeholder="Select Contributor Type" @disabled={{disabled}} @searchEnabled={{true}} />
     </@form.element>
 </div>  
 {{#if (gt fragment.nameIdentifiers.length 0)}}
@@ -14,7 +14,7 @@
 {{/if}}
 
 {{#if (lte fragment.nameIdentifiers.length 2)}}
-  <BsButton @class="btn-sm add-name-identifier" @outline={{true}} @onClick={{action "addNameIdentifier"}}><i class="fas fa-plus-circle"></i> Add another name identifier</BsButton>
+  <BsButton class="btn-sm add-name-identifier" @outline={{true}} @onClick={{action "addNameIdentifier"}}><i class="fas fa-plus-circle"></i> Add another name identifier</BsButton>
 {{/if}}
 
 <div class="radio-fragment">
@@ -59,7 +59,7 @@
   {{/if}}
 
   {{#if (lte fragment.affiliation.length 2)}}
-    <BsButton @class="btn-sm add-affiliation" @outline={{true}} @onClick={{action "addAffiliation"}}><i class="fas fa-plus-circle"></i> Add another affiliation</BsButton>
+    <BsButton class="btn-sm add-affiliation" @outline={{true}} @onClick={{action "addAffiliation"}}><i class="fas fa-plus-circle"></i> Add another affiliation</BsButton>
   {{/if}}
 {{/if}}
 

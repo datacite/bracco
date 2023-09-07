@@ -48,12 +48,12 @@ module.exports = (on, config) => {
   config.env.client_admin_cookie =
     process.env.CYPRESS_CLIENT_ADMIN_COOKIE;
 
-  config.env.site_title = process.env.SITE_TITLE || "DataCite Fabrica Test"
-  config.baseUrl = process.env.FABRICA_URL || config.baseUrl || ""
+  config.env.site_title = process.env.SITE_TITLE || 'DataCite Fabrica Test';
+  config.baseUrl = process.env.FABRICA_URL || config.baseUrl || '';
 
-  config.env.client_admin_password = process.env.CLIENT_ADMIN_PASSWORD
+  config.env.client_admin_password = process.env.CLIENT_ADMIN_PASSWORD;
 
-  config.env.max_mint_future_offset = process.env.MAX_MINT_FUTURE_OFFSET || 5
+  config.env.max_mint_future_offset = process.env.MAX_MINT_FUTURE_OFFSET || 5;
 
   on('task', {
     // deconstruct the individual properties
@@ -69,12 +69,12 @@ module.exports = (on, config) => {
       return null
     },
 
-    // seed db - create a doi using a file (to be updated or deleted)
-    create_doi({ prefix }) {
-      console.log('HERE IS THE PREFIX:  %s', prefix);
-      return null
-    },
-  })
+    // Allow messages to be logged to the terminal for command line test invocations.
+    log(message) {
+      console.log('  ' + message);
+      return null;
+    }
+  });
 
-  return config
-}
+  return config;
+};

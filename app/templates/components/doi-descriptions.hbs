@@ -8,17 +8,17 @@
       {{/each}}
 
       {{#if (lte model.descriptions.length 4)}}
-        <BsButton @class="btn-sm" @id="add-description" @outline={{true}} @onClick={{action "addDescription"}}><i class="fas fa-plus"></i> Add {{if (gt model.descriptions.length 0) "another "}}description</BsButton>
+        <BsButton class="btn-sm" id="add-description" @outline={{true}} @onClick={{action "addDescription"}}><i class="fas fa-plus"></i> Add {{if (gt model.descriptions.length 0) "another "}}description</BsButton>
       {{/if}}
 
       {{#if (gt model.descriptions.length 0)}}
-        <BsButton @id="toggle-descriptions" @class="btn-sm" @outline={{true}} @onClick={{action "toggleDescriptions"}}><i class="fas fa-eye-slash"></i> Hide {{pluralize model.descriptions.length 'description'}}</BsButton>
+        <BsButton id="toggle-descriptions" class="btn-sm" @outline={{true}} @onClick={{action "toggleDescriptions"}}><i class="fas fa-eye-slash"></i> Hide {{pluralize model.descriptions.length 'description'}}</BsButton>
       {{/if}}
     {{else}}
       {{#if (gt model.descriptions.length 0)}}
-        <BsButton @id="toggle-descriptions" @class="btn-sm" @outline={{true}} @onClick={{action "toggleDescriptions"}}><i class="fas fa-eye"></i> Show {{pluralize model.descriptions.length 'description'}}</BsButton>
+        <BsButton id="toggle-descriptions" class="btn-sm" @outline={{true}} @onClick={{action "toggleDescriptions"}}><i class="fas fa-eye"></i> Show {{pluralize model.descriptions.length 'description'}}</BsButton>
       {{else}}
-        <BsButton @class="btn-sm btn-warning" @id="add-description" @outline={{true}} @onClick={{action "addDescription"}}><i class="fas fa-plus"></i> Add description</BsButton>
+        <BsButton class="btn-sm btn-warning" id="add-description" @outline={{true}} @onClick={{action "addDescription"}}><i class="fas fa-plus"></i> Add description</BsButton>
       {{/if}}
     {{/if}}
   </div>

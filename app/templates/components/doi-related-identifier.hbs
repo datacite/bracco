@@ -16,8 +16,8 @@
   <label for="relatedIdentifierType" class="required-label subtitle">Related Identifier Type</label> 
 </div> 
 <div class="power-select-fragment" disabled={{this.controlledIdentifierType}} data-test-related-identifier-type>
-  <@form.element @controlType="power-select" @value={{fragment.relatedIdentifierType}} @helpText="The type of the Related Identifier." @options={{relatedIdentifierTypeList}} @disabled={{controlledIdentifierType}} @destination={{fragment.relatedIdentifierType}} as |el|>
-    <el.control @onChange={{action "selectRelatedIdentifierType"}} @allowClear={{true}} @placeholder="Select related Identifier Type" />
+  <@form.element @controlType="power-select" @value={{fragment.relatedIdentifierType}} @helpText="The type of the Related Identifier." @options={{relatedIdentifierTypeList}} @destination={{fragment.relatedIdentifierType}} as |el|>
+    <el.control @onChange={{action "selectRelatedIdentifierType"}} @allowClear={{true}} @placeholder="Select related Identifier Type" @disabled={{controlledIdentifierType}} @searchEnabled={{true}} />
   </@form.element>
 </div>
 
@@ -25,10 +25,13 @@
   <label for="relationType" class="required-label subtitle">Relation Type</label> 
 </div> 
 <div class="power-select-fragment" data-test-related-relation-type>
-  <@form.element @controlType="power-select" @value={{fragment.relationType}} @helpText="The type of the Relation." @options={{relationTypeList}} @disabled={{disabled}} @allowClear={{true}} @destination={{fragment.relationType}} as |el|>
+  <@form.element @controlType="power-select" @value={{fragment.relationType}} @helpText="The type of the Relation." @options={{relationTypeList}} @destination={{fragment.relationType}} as |el|>
     <el.control
       @onChange={{action "selectRelationType"}}
-      @placeholder="Select Relation Type" as |item|>
+      @placeholder="Select Relation Type" 
+      @disabled={{disabled}}
+      @allowClear={{true}} 
+      @searchEnabled={{true}} as |item|>
         {{humanize (underscore item)}}
     </el.control>
   </@form.element>
@@ -38,11 +41,14 @@
   <label for="relatedResourceType" class="subtitle">Resource Type General</label> 
 </div> 
 <div class="power-select-fragment" data-test-related-resource-type>
-  <@form.element @controlType="power-select" @value={{fragment.resourceTypeGeneral}} @helpText="The general type of the related resource." @options={{resourceTypesGeneral}} @disabled={{disabled}} @allowClear={{true}} @destination={{fragment.resourceTypeGeneral}} as |el|>
+  <@form.element @controlType="power-select" @value={{fragment.resourceTypeGeneral}} @helpText="The general type of the related resource." @options={{resourceTypesGeneral}} @destination={{fragment.resourceTypeGeneral}} as |el|>
     <el.control
       @onChange={{action "selectResourceTypeGeneral"}}
       @allowClear={{true}}
-      @placeholder="Select Resource Type General" as |item|>
+      @placeholder="Select Resource Type General" 
+      @disabled={{disabled}}
+      @allowClear={{true}}
+      @searchEnabled={{true}} as |item|>
         {{humanize (underscore item)}}
     </el.control>
   </@form.element>

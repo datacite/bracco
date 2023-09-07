@@ -19,16 +19,17 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
   before(function () {
     cy.login(Cypress.env('client_admin_username'), Cypress.env('client_admin_password'));
     cy.setCookie('_consent', 'true');
-  });
-
-  beforeEach(() => {
-    Cypress.Cookies.preserveOnce('_fabrica', '_jwt', '_consent');
     cy.wait(waitTime2);
   });
 
+  beforeEach(() => {
+    // TBD - set up test environment
+  });
+
   after(function () {
-    // TBD - CLEAN UP DOIS and other resources from test run. (only local dev and stage).
+    // TBD - Clean up any resources created for the test. (only local dev and stage).
     // cy.log('TBD - CLEAN UP RESOURCES AFTER TEST');
+    cy.clearAllSessionStorage()
   });
 
   it('is logged in to dois page', () => {
@@ -53,7 +54,7 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
         .and('have.attr', 'href').and('include', '/repositories/datacite.test/dois');
 
       // Has left sidebar buttons.
-      cy.get('div.col-md-3').should('be.visible').within(($sidebar) => {
+      cy.get('[data-test-left-sidebar]').should('be.visible').within(($sidebar) => {
         // Create DOI button - would like to do more testing but seems impossible in Cypress.
         cy.get('.create-doi-button').contains(/Create DOI/i);
         cy.get('.create-doi-button button.dropdown-toggle').click({ force: true }).then(($obj) => {
@@ -89,7 +90,7 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
       // Leave state at 'draft'.
 
       // Set 'url'.
-      cy.get("#url-help").should('be.visible').should('have.text', 'Should be a https URL — within the allowed domain(s) of your repository if domain restrictions are enabled in the repository settings. Http and ftp are also supported. For example http://example.org')
+      cy.get('div#url .help-block').contains('Should be a https URL — within the allowed domain(s) of your repository if domain restrictions are enabled in the repository settings. Http and ftp are also supported. For example http://example.org')
       cy.get('input#url-field').should('be.visible').type('https://example.org', { force: true });
 
       // Set creator.
@@ -121,7 +122,7 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
       cy.get('#publication-year-field').should('be.visible').type(yearInRange, { force: true, waitForAnimations: true });
       cy.get('body').click(0,0);
       cy.get('div#publication-year').should('have.class', 'has-success')
-      cy.get('#publication-year-help').should('be.visible').should('have.text', 'Must be a year between 1000 and ' + yearInRange + '.');
+      cy.get('div#publication-year .help-block').contains('Must be a year between 1000 and ' + yearInRange + '.');
 
       // Set state back to draft
 
@@ -164,7 +165,7 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
       cy.get('#add-subject').click({ force: true }).then(($subform) => {
         cy.get('.ember-power-select-placeholder').contains('Search Subject from the OECD Fields of Science and Technology (FOS) OR create a new keyword');
         // Causes the aria dropdown to be populated and displayed so that selection can be made.
-        cy.get('[doi-subject] div[role="button"]').click({ force: true }).then(($dropdown) => {
+        cy.get('[data-test-doi-subject] div[role="button"]').click({ force: true }).then(($dropdown) => {
           // Makes the selection from the dropdown.
           cy.get('input.ember-power-select-search-input').type('Optics{enter}', { force: true });
           cy.get('input.subject-classification-code-field').type('O123', { force: true });
@@ -297,7 +298,6 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
       });
 
     }).then(() => {
-
       // Get the suffix for later tests
       cy.get("#suffix-field").invoke('val').then( (value) => {
         Cypress.env('suffix', value)
@@ -308,6 +308,12 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
       cy.get('button#doi-create').should('be.visible').click();
       cy.wait(waitTime);
       cy.location('pathname').should('contain', '/dois/' + prefix)
+      
+      // Cypress form bug? The suffix is not always available from the form field (above).  Get it from the url.
+      cy.url().then( (url) => {
+        Cypress.env('suffix', decodeURIComponent(url).split('/').pop())
+      })
+      
     });
   });
 
@@ -322,7 +328,7 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
       cy.get('.add-affiliation').should('be.visible')
 
     })
-  })
+  });
 
   it('is creating a doi - FILE UPLOAD', () => {
     cy.visit('/repositories/datacite.test/dois/upload');
@@ -332,7 +338,7 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
 
       // Set 'url'.
       cy.wait(waitTime);
-      cy.get("#url-help").should('be.visible').should('have.text', 'Should be a https URL — within the allowed domain(s) of your repository if domain restrictions are enabled in the repository settings. Http and ftp are also supported. For example http://example.org')
+      cy.get('div#url .help-block').contains('Should be a https URL — within the allowed domain(s) of your repository if domain restrictions are enabled in the repository settings. Http and ftp are also supported. For example http://example.org')
       cy.get('input#url-field').should('be.visible').type('https://example.org', { force: true })
         .clickOutside();
       cy.get('#url').should('have.class', 'has-success');
@@ -375,7 +381,7 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
         cy.url().should('include', uri).then(() => {
 
           cy.wait(waitTime);
-          cy.get('#confirm-doi-field[aria-describedby=confirm-doi-help]').click({ force: true }).type(id, { force: true });
+          cy.get('#confirm-doi-field').click({ force: true }).type(id, { force: true });
           cy.wait(waitTime);
           cy.get('#confirm-doi').should('have.class', 'has-success');
         }).then (() => {
@@ -460,6 +466,30 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
         cy.visit(uri);
         cy.url().should('include', uri);
       });
+    });
+  });
+
+  it('visiting specific doi with uppercase identifier in URL subdirectory', () => {
+    cy.getCookie('_jwt').then((cookie) => {
+
+      // Create a doi to be visited.
+      cy.createDoi(prefix, Cypress.env('api_url'), cookie.value).then((id) => {
+        cy.log('DOI: ' + id);
+        const uri = 'dois/' +  encodeURIComponent(id).toUpperCase() + '/edit';
+        const target_uri = '/dois/' +  encodeURIComponent(id);
+
+        cy.visit(uri);
+        cy.url().should('include', uri);
+      });
+    });
+  });
+
+  it('can see dois when using capitalized identifier URL subdirectory', () => {
+    cy.visit('/repositories/DATACITE.TEST/dois');
+    cy.url().should('include', '/repositories/DATACITE.TEST/dois').then(() => {
+
+      // Prefix page should be populated.
+      cy.contains('No DOIs found.').should('not.exist')
     });
   });
 });

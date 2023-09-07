@@ -11,8 +11,8 @@
 </div>
 
 <div class="power-select-fragment">
-  <@form.element @controlType="power-select" @helpText="Type of date." @value={{fragment.dateType}} @options={{dateTypesList}} @destination={{fragment.dateType}} @disabled={{disabled}} as |el|>
-    <el.control @onChange={{action "selectDateType"}} @placeholder="Select Date Type" />
+  <@form.element @controlType="power-select" @helpText="Type of date." @value={{fragment.dateType}} @options={{dateTypesList}} @destination={{fragment.dateType}} as |el|>
+    <el.control @onChange={{action "selectDateType"}} @placeholder="Select Date Type"  @disabled={{disabled}} @searchEnabled={{true}}/>
   </@form.element>
 </div>
 

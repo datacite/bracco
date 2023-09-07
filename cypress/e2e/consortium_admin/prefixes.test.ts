@@ -10,15 +10,17 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | PREFIXES', () => {
   before(function () {
     cy.login(Cypress.env('consortium_admin_username'), Cypress.env('consortium_admin_password'));
     cy.setCookie('_consent', 'true');
-  });
-
-  beforeEach(() => {
-    Cypress.Cookies.preserveOnce('_fabrica', '_jwt', '_consent');
     cy.wait(waitTime2);
   });
 
+  beforeEach(() => {
+    // TBD - set up test environment
+  });
+
   after(function () {
+    // TBD - Clean up any resources created for the test. (only local dev and stage).
     // cy.log('TBD - CLEAN UP RESOURCES AFTER TEST');
+    cy.clearAllSessionStorage()
   });
 
   // Check for page elements.
@@ -71,6 +73,15 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | PREFIXES', () => {
 
       // Create DOI button
       cy.get('.create-doi-button').should('not.exist');    
+    });
+  });
+
+  it('can see prefixes when using capitalized identifier URL subdirectory', () => {
+    cy.visit('/providers/DC/prefixes');
+    cy.url().should('include', '/providers/DC/prefixes').then(() => {
+
+      // Prefix page should be populated.
+      cy.contains('No prefixes found.').should('not.exist')
     });
   });
 });

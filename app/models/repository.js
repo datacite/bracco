@@ -209,7 +209,7 @@ export default Model.extend(Validations, {
     this.subjects = [];
   },
   certifyDisciplinaryRepository() {
-    if (!this.get('isDisciplinary')) {
+    if (!this.isDisciplinary) {
       this.clearSubjects();
     }
   }

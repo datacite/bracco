@@ -8,17 +8,17 @@
       {{/each}}
 
       {{#if (lte model.relatedItems.length 24)}}
-        <BsButton @id="add-related-item" @class="btn-sm btn-warning" @outline={{true}} @onClick={{action "addRelatedItem"}}><i class="fas fa-plus"></i> Add {{if (gt model.relatedItems.length 0) "another "}} related item</BsButton>
+        <BsButton id="add-related-item" class="btn-sm btn-warning" @outline={{true}} @onClick={{action "addRelatedItem"}}><i class="fas fa-plus"></i> Add {{if (gt model.relatedItems.length 0) "another "}} related item</BsButton>
       {{/if}}
 
       {{#if (gt model.relatedItems.length 0)}}
-        <BsButton @id="toggle-related-items" @class="btn-sm btn-warning" @outline={{true}} @onClick={{action "toggleRelatedItems"}}><i class="fas fa-eye-slash"></i> Hide {{pluralize model.relatedItems.length 'related item'}}</BsButton>
+        <BsButton id="toggle-related-items" class="btn-sm btn-warning" @outline={{true}} @onClick={{action "toggleRelatedItems"}}><i class="fas fa-eye-slash"></i> Hide {{pluralize model.relatedItems.length 'related item'}}</BsButton>
       {{/if}}
     {{else}}
       {{#if (gt model.relatedItems.length 0)}}
-        <BsButton @id="toggle-related-items" @class="btn-sm" @outline={{true}} @onClick={{action "toggleRelatedItems"}}><i class="fas fa-eye"></i> Show {{pluralize model.relatedItems.length 'related item'}}</BsButton>
+        <BsButton id="toggle-related-items" class="btn-sm" @outline={{true}} @onClick={{action "toggleRelatedItems"}}><i class="fas fa-eye"></i> Show {{pluralize model.relatedItems.length 'related item'}}</BsButton>
       {{else}}
-        <BsButton @class="btn-sm btn-warning" @id="add-related-item" @outline={{true}} @onClick={{action "addRelatedItem"}}><i class="fas fa-plus"></i> Add related item</BsButton>
+        <BsButton class="btn-sm btn-warning" id="add-related-item" @outline={{true}} @onClick={{action "addRelatedItem"}}><i class="fas fa-plus"></i> Add related item</BsButton>
       {{/if}}
     {{/if}}
   </div>

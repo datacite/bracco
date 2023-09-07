@@ -8,17 +8,17 @@
       {{/each}}
 
     {{#if (lte model.fundingReferences.length 4)}}
-      <BsButton @id="add-funding-reference" @class="btn-sm" @outline={{true}} @onClick={{action "addFundingReference"}}><i class="fas fa-plus"></i> Add {{if (gt model.fundingReferences.length 0) "another "}}funding reference</BsButton>
+      <BsButton id="add-funding-reference" class="btn-sm" @outline={{true}} @onClick={{action "addFundingReference"}}><i class="fas fa-plus"></i> Add {{if (gt model.fundingReferences.length 0) "another "}}funding reference</BsButton>
     {{/if}}
 
       {{#if (gt model.fundingReferences.length 0)}}
-        <BsButton @id="toggle-funding-references" @class="btn-sm" @outline={{true}} @onClick={{action "toggleFundingReferences"}}><i class="fas fa-eye-slash"></i> Hide {{pluralize model.fundingReferences.length 'funding reference'}}</BsButton>
+        <BsButton id="toggle-funding-references" class="btn-sm" @outline={{true}} @onClick={{action "toggleFundingReferences"}}><i class="fas fa-eye-slash"></i> Hide {{pluralize model.fundingReferences.length 'funding reference'}}</BsButton>
       {{/if}}
     {{else}}
       {{#if (gt model.fundingReferences.length 0)}}
-        <BsButton @id="toggle-funding-references" @class="btn-sm" @outline={{true}} @onClick={{action "toggleFundingReferences"}}><i class="fas fa-eye"></i> Show {{pluralize model.fundingReferences.length 'funding reference'}}</BsButton>
+        <BsButton id="toggle-funding-references" class="btn-sm" @outline={{true}} @onClick={{action "toggleFundingReferences"}}><i class="fas fa-eye"></i> Show {{pluralize model.fundingReferences.length 'funding reference'}}</BsButton>
       {{else}}
-        <BsButton @class="btn-sm btn-warning" @id="add-funding-reference" @outline={{true}} @onClick={{action "addFundingReference"}}><i class="fas fa-plus"></i> Add funding reference</BsButton>
+        <BsButton class="btn-sm btn-warning" id="add-funding-reference" @outline={{true}} @onClick={{action "addFundingReference"}}><i class="fas fa-plus"></i> Add funding reference</BsButton>
       {{/if}}
     {{/if}}
   </div>

@@ -3,6 +3,7 @@ import { inject as service } from '@ember/service';
 import ENV from 'bracco/config/environment';
 import { computed } from '@ember/object';
 import { isPresent } from '@ember/utils';
+import reasonUtil from '../utils/reason-util';
 
 export default Controller.extend({
   session: service(),
@@ -22,10 +23,10 @@ export default Controller.extend({
       let self = this;
       let { identification, password } = this;
       this.session.authenticate('authenticator:oauth2', identification, password).then(() => {
-        self.transitionToRoute('/');
+          self.transitionToRoute('/');
       }).catch((reason) => {
-        this.set('errorMessage', reason.errors && reason.errors[0].title || reason);
+        this.set('errorMessage', reasonUtil(reason, { default: 'Error logging in.' }));
       });
-    },
-  },
+    }
+  }
 });
