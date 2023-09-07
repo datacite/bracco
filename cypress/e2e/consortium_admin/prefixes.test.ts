@@ -75,4 +75,13 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | PREFIXES', () => {
       cy.get('.create-doi-button').should('not.exist');    
     });
   });
+
+  it('can see prefixes when using capitalized identifier URL subdirectory', () => {
+    cy.visit('/providers/DC/prefixes');
+    cy.url().should('include', '/providers/DC/prefixes').then(() => {
+
+      // Prefix page should be populated.
+      cy.contains('No prefixes found.').should('not.exist')
+    });
+  });
 });

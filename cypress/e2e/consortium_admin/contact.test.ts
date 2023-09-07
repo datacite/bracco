@@ -286,4 +286,13 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | CONTACTS', () => {
     cy.get('.alert').contains("New repositories can't be created because you have not provided the")
     cy.get('.alert').contains("After adding contacts, please assign roles in the")
   });
+
+  it('can see contacts when using capitalized identifier URL subdirectory', () => {
+    cy.visit('/providers/' + consortium_id.toUpperCase() + '/contacts');
+    cy.url().should('include', '/providers/' + consortium_id.toUpperCase() + '/contacts').then(() => {
+
+      // Prefix page should be populated.
+      cy.contains('No contacts found.').should('not.exist')
+    });
+  });
 });

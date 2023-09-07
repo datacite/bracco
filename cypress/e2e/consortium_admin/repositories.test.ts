@@ -124,4 +124,13 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | REPOSITORIES', () => {
     // Create DOI button
     cy.get('.create-doi-button').should('not.exist');    
   });
+
+  it('can see repositories when using capitalized identifier URL subdirectory', () => {
+    cy.visit('/providers/' + consortium_id.toUpperCase() + '/repositories');
+    cy.url().should('include', '/providers/' + consortium_id.toUpperCase() + '/repositories').then(() => {
+
+      // Repositories page should be populated.
+      cy.contains('No repositories found.').should('not.exist')
+    });
+  });
 });

@@ -295,4 +295,13 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | CONTACTS', () => {
     cy.get('h3.member-results').contains('Contact Information');
     cy.get('[cy-data="service"]').should('exist');
   });
+
+  it('can see contacts when using capitalized identifier URL subdirectory', () => {
+    cy.visit('/providers/' + provider_id.toUpperCase() + '/contacts');
+    cy.url().should('include', '/providers/' + provider_id.toUpperCase() + '/contacts').then(() => {
+
+      // Prefix page should be populated.
+      cy.contains('No contacts found.').should('not.exist')
+    });
+  });
 });

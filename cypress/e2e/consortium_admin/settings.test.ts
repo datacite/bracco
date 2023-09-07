@@ -125,4 +125,13 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | SETTINGS', () => {
       cy.get('.create-doi-button').should('not.exist');    
     });
   });
+
+  it('can see settings when using capitalized identifier URL subdirectory', () => {
+    cy.visit('/providers/' + consortium_id.toUpperCase() + '/settings');
+    cy.url().should('include', '/providers/' + consortium_id.toUpperCase() + '/settings').then(() => {
+
+      // Settings page should be populated.
+      cy.get('div.panel-body').contains(Cypress.env('consortium_admin_username').toUpperCase());
+    });
+  });
 });

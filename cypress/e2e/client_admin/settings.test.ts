@@ -75,4 +75,13 @@ describe('ACCEPTANCE: CLIENT_ADMIN | SETTINGS', () => {
         cy.get('h5').contains(/Domain/i);      });
     });
   });
+
+  it('can see settings when using capitalized identifier URL subdirectory', () => {
+    cy.visit('/repositories/DATACITE.TEST/settings');
+    cy.url().should('include', '/repositories/DATACITE.TEST/settings').then(() => {
+
+      // Settings page should be populated.
+      cy.get('div.panel-body').contains('DATACITE.TEST');
+    });
+  });
 });
