@@ -163,7 +163,7 @@ describe('ACCEPTANCE: CLIENT_ADMIN | INFO', () => {
       cy.get('#certificate').should('be.visible');
       cy.get('.alert.opt-in').contains(/The contacts entered may receive notifications/i)
         .within(() => {
-          cy.get('a[href*="privacy.html"]').should('be.visible');
+          cy.get('a[href*="privacy-policy"]').should('be.visible');
         }
       );
       cy.get('button#update-repository').should('be.visible');
