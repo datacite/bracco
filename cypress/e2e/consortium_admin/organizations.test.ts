@@ -106,7 +106,7 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | CONSORTIUM ORGANIZATIONS', () => {
         cy.get('.alert').contains(/The contacts entered may receive notifications about administration,/i);
         cy.get('.alert').contains(/The contacts entered may receive notifications/i)
           .within(() => {
-            cy.get('a[href*="privacy.html"]').should('be.visible');
+            cy.get('a[href*="privacy-policy"]').should('be.visible');
           }
         );
         cy.get('button#add-organization').should('be.visible');

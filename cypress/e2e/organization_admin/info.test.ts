@@ -164,7 +164,7 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | INFO', () => {
         cy.get('#secondary-technical-contact').should('be.visible');
         cy.get('.alert-warning').contains(/The contacts entered may receive notifications/i)
           .within(() => {
-            cy.get('a[href*="privacy.html"]').should('be.visible');
+            cy.get('a[href*="privacy-policy"]').should('be.visible');
           }
         );
         cy.get('button#update-provider').should('be.visible');
