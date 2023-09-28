@@ -166,7 +166,7 @@ export default Model.extend(Validations, {
   description: attr('string'),
   language: array(),
   certificate: array(),
-  // serviceContact: fragment('contact'),
+  serviceContact: fragment('contact'),
   issn: fragment('issn'),
   url: attr('string'),
   clientType: attr('string'),
