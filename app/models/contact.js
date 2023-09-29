@@ -2,17 +2,35 @@ import Model, { attr, belongsTo } from '@ember-data/model';
 import { validator, buildValidations } from 'ember-cp-validations';
 import { computed } from '@ember/object';
 import _string from 'lodash/string';
-import Fragment from 'ember-data-model-fragments/fragment';
 
 const Validations = buildValidations({
   email: [
+    validator('presence', {
+      presence: true
+    }),
     validator('email-format', {
       allowBlank: true
+    }),
+    validator('unique-email')
+  ],
+  confirmDelete: [
+    validator('presence', {
+      presence: true,
+      disabled: computed('model', function () {
+        return this.model.get('isNew');
+      })
+    }),
+    validator('inclusion', {
+      in: ['Delete'],
+      message: "The entered text does not match 'Delete'.",
+      disabled: computed('model', function () {
+        return this.model.get('isNew');
+      })
     })
   ]
 });
 
-export default Fragment.extend(Validations, {
+export default Model.extend(Validations, {
   provider: belongsTo('provider', {
     async: true
   }),
