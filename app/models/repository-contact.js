@@ -21,7 +21,7 @@ export default Fragment.extend(Validations, {
     if (this.givenName || this.familyName) {
       name = [this.givenName, this.familyName].join(' ');
     }
-    return name;
+    return name.trim();
   }),
   displayName: computed('name', 'email', function () {
     if (this.name) {
