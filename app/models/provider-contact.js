@@ -22,11 +22,11 @@ export default Fragment.extend(Validations, {
     if (this.givenName || this.familyName) {
       name = [this.givenName, this.familyName].join(' ');
     }
-    return name.trim();
+    return name;
   }),
   displayName: computed('name', 'email', function () {
     if (this.name) {
-      return this.name;
+      return this.name.trim();
     } else {
       return this.email;
     }
