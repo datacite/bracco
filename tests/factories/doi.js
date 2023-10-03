@@ -92,6 +92,7 @@ FactoryGuy.define('geoLocation', {
 
 FactoryGuy.define('subject', {
   default: {
+    lang: 'en',
     subject: 'Clinical medicine',
     subjectScheme: 'Fields of Science and Technology (FOS)',
     schemeUri: 'http://www.oecd.org/science/inno/38235147.pdf',
@@ -132,6 +133,7 @@ FactoryGuy.define('fundingReference', {
 
 FactoryGuy.define('rights', {
   default: {
+    lang: 'en',
     rights: 'Creative Commons Attribution 3.0 Unported',
     rightsUri: 'http://creativecommons.org/licenses/by/3.0/de/deed.en',
     rightsIdentifier: ' CC-BY-3.0',
