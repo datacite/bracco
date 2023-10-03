@@ -1,14 +1,8 @@
 import Component from '@ember/component';
 import { isBlank, typeOf } from '@ember/utils';
-import ISO6391 from 'iso-639-1';
-import LanguageComputedMixin from '../mixins/language-computed';
 
-const languageList = ISO6391.getAllNames();
-
-export default Component.extend(LanguageComputedMixin, {
+export default Component.extend({
   isSpdxId: false,
-  languageList,
-  languages: languageList,
 
   init(...args) {
     this._super(...args);
@@ -68,20 +62,6 @@ export default Component.extend(LanguageComputedMixin, {
         return rights.name.toLowerCase().startsWith(query.toLowerCase());
       });
       this.set('spdxLicenseList', rightsFound);
-    },
-    searchLanguage(query) {
-      let languages = languageList.filter(function(language) {
-        return language.toLowerCase().startsWith(query.toLowerCase());
-      });
-      this.set('languages', languages);
-    },
-    selectLanguage(language) {
-      if (language) {
-        this.fragment.set('lang', ISO6391.getCode(language));
-      } else {
-        this.fragment.set('lang', null);
-      }
-      this.set('languages', languageList);
-    },
+    }
   }
 });

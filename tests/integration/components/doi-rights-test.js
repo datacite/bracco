@@ -15,7 +15,7 @@ module('Integration | Component | doi rights', function(hooks) {
     this.set('spdx', {spdxList: [ {rightsUri: 'http://creativecommons.org/licenses/by/3.0/de/deed.en' ,name: 'CC-BY 3.0' } ]});
     await render(hbs`{{doi-rights model=model fragment=fragment spdx=spdx index=0}}`);
 
-    assert.dom('*').hasText('Rights URI The URI of the license. Language');
+    assert.dom('*').hasText('Rights URI The URI of the license.');
   });
 
   test('it renders add add right', async function(assert) {

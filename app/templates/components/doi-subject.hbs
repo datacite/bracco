@@ -107,14 +107,5 @@
 <div class="help-block help-block-fragment">
   The classification code used for the subject term in the subject scheme
 </div>
-<div class="power-select-label">
-  <label for="subjectLang" class="subtitle">Language</label>
-</div>
-
-<div class="power-select-fragment subject-langs">
-  <@form.element @controlType="power-select" @value={{language}} @options={{languages}} as |el|>
-    <el.control @class="subject-langs" @onChange={{action "selectLanguage"}} @search={{action "searchLanguage"}} @placeholder="Select Language" @searchPlaceholder="Type to search..." @allowClear={{true}} @disabled={{disabled}} @searchEnabled={{true}} />
-  </@form.element>
-</div>
 <hr />
 {{/unless}}

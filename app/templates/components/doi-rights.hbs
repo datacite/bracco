@@ -23,13 +23,4 @@
   </span>
 </div>
 
-<div class="power-select-label">
-  <label for="rightsLang" class="subtitle">Language</label>
-</div>
-
-<div class="power-select-fragment rights-langs">
-  <@form.element @controlType="power-select" @value={{language}} @options={{languages}} as |el|>
-    <el.control @class="rights-langs" @onChange={{action "selectLanguage"}} @search={{action "searchLanguage"}} @placeholder="Select Language" @searchPlaceholder="Type to search..." @allowClear={{true}} @disabled={{disabled}} @searchEnabled={{true}} />
-  </@form.element>
-</div>
-<hr />
+  <hr />
