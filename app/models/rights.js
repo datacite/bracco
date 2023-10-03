@@ -26,7 +26,8 @@ const Validations = buildValidations({
 
 export default Fragment.extend(Validations, {
   rights: attr('string'),
-  rightsUri: attr('string')
+  rightsUri: attr('string'),
+  lang: attr('string', { defaultValue: null })
   // // Not implemented yet in the REST API
   // rightsIdentifier: attr('string'),
   // rightsIdentifierScheme: attr('string'),
