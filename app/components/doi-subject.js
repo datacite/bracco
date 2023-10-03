@@ -1,22 +1,19 @@
 import Component from '@ember/component';
 import { isBlank } from '@ember/utils';
 import fosMapping from '../utils/fos-mappings';
-import { computed } from '@ember/object';
 import ISO6391 from 'iso-639-1';
+import LanguageComputedMixin from '../mixins/language-computed';
 
 const completeSubjectList = fosMapping.allLabels();
 const languageList = ISO6391.getAllNames();
 
-export default Component.extend({
+export default Component.extend(LanguageComputedMixin, {
   attributeBindings: ['simple'],
   completeSubjectList,
   subjects: completeSubjectList,
   oecdSelected: false,
   languageList,
   languages: languageList,
-  language: computed('fragment.lang', function() {
-    return ISO6391.getName(this.get('fragment.lang')) !== '' ? ISO6391.getName(this.get('fragment.lang')) : this.get('fragment.lang');
-  }),
 
   init(...args) {
     this._super(...args);

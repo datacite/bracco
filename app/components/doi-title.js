@@ -1,6 +1,7 @@
 import Component from '@ember/component';
 import ISO6391 from 'iso-639-1';
 import { computed } from '@ember/object';
+import LanguageComputedMixin from '../mixins/language-computed';
 
 const titleTypes = [
   'AlternativeTitle',
@@ -10,13 +11,10 @@ const titleTypes = [
 ];
 const languageList = ISO6391.getAllNames();
 
-export default Component.extend({
+export default Component.extend(LanguageComputedMixin, {
   titleTypes,
   languageList,
   languages: languageList,
-  language: computed('fragment.lang', function() {
-    return ISO6391.getName(this.get('fragment.lang')) !== '' ? ISO6391.getName(this.get('fragment.lang')) : this.get('fragment.lang');
-  }),
 
   actions: {
     updateTitle(value) {

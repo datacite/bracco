@@ -1,17 +1,14 @@
 import Component from '@ember/component';
 import { isBlank, typeOf } from '@ember/utils';
-import { computed } from '@ember/object';
 import ISO6391 from 'iso-639-1';
+import LanguageComputedMixin from '../mixins/language-computed';
 
 const languageList = ISO6391.getAllNames();
 
-export default Component.extend({
+export default Component.extend(LanguageComputedMixin, {
   isSpdxId: false,
   languageList,
   languages: languageList,
-  language: computed('fragment.lang', function() {
-    return ISO6391.getName(this.get('fragment.lang')) !== '' ? ISO6391.getName(this.get('fragment.lang')) : this.get('fragment.lang');
-  }),
 
   init(...args) {
     this._super(...args);
