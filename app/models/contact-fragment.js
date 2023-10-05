@@ -1,11 +1,10 @@
-import { attr } from '@ember-data/model';
-import Fragment from 'ember-data-model-fragments/fragment';
-import { computed } from '@ember/object';
+import{ attr } from '@ember-data/model';
 import { validator, buildValidations } from 'ember-cp-validations';
+import { computed } from '@ember/object';
+import Fragment from 'ember-data-model-fragments/fragment';
 
 const Validations = buildValidations({
   email: [
-    validator('presence', true),
     validator('email-format', {
       allowBlank: true
     })
@@ -26,7 +25,7 @@ export default Fragment.extend(Validations, {
   }),
   displayName: computed('name', 'email', function () {
     if (this.name) {
-      return this.name;
+      return this.name.trim();
     } else {
       return this.email;
     }
