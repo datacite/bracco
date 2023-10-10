@@ -9,6 +9,7 @@ const languageList = ISO6391.getAllNames();
 export default Component.extend(LanguageComputedMixin, {
   languageList,
   languages: languageList,
+  languagePropertyPath: 'model.language',
 
   init(...args) {
     this._super(...args);
