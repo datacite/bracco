@@ -2,14 +2,15 @@ import Component from '@ember/component';
 import { computed } from '@ember/object';
 import ISO6391 from 'iso-639-1';
 import { isBlank } from '@ember/utils';
-import LanguageComputedMixin from '../mixins/language-computed';
 
 const languageList = ISO6391.getAllNames();
 
-export default Component.extend(LanguageComputedMixin, {
+export default Component.extend({
   languageList,
   languages: languageList,
-  languagePropertyPath: 'model.language',
+  language: computed('model.language', function() {
+    return ISO6391.getName(this.get('model.language')) !== '' ? ISO6391.getName(this.get('model.language')) : this.get('model.language');
+  }),
 
   init(...args) {
     this._super(...args);
