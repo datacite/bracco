@@ -20,6 +20,7 @@ jobs:
           vercel-args: ${{ vars.VERCEL_NOCACHE  == 'true' && '--force' || '' }}
           scope: ${{ secrets.TEAM_ID}}
           vercel-project-name: 'bracco'
+          github-comment: true
       - name: Remove label
         uses: fastruby/pr-unlabeler@v1
         with:
