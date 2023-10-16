@@ -1,0 +1,193 @@
+name: Vercel preview apps on label
+
+env:
+  VERCEL_ACCESS_TOKEN: ${{ secrets.VERCEL_ACCESS_TOKEN }}
+  VERCEL_PROJECT_ID: ${{ secrets.PROJECT_ID }}
+
+on:
+  pull_request:
+    types: [labeled]
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+    steps:
+      - name: Branch name
+        run: echo running on branch ${GITHUB_REF##*/}
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+
+      - uses: actions/cache@v3
+        id: cypress-cache
+        with:
+          path: |
+            ${{ steps.yarn-cache-dir-path.outputs.dir }}
+            node_modules
+            ~/.cache/Cypress
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Build
+        env:
+          NODE_OPTIONS: "--openssl-legacy-provider"
+        run: |
+          yarn --frozen-lockfile --prefer-offline
+          ./node_modules/.bin/ember build --output-path="test_build" --environment=development
+
+      - name: Upload Test Build artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: test_build
+          path: test_build/
+
+  ember_test:
+    name: Ember Testing
+    runs-on: ubuntu-latest
+    needs: build
+    strategy:
+      fail-fast: true
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+
+      - uses: actions/cache@v3
+        id: cypress-cache
+        with:
+          path: |
+            ${{ steps.yarn-cache-dir-path.outputs.dir }}
+            node_modules
+            ~/.cache/Cypress
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Download Test Build artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: test_build
+          path: test_build/
+
+      - name: Ember Testing
+        env:
+          COVERAGE: true
+        run: |
+          yarn run ember test --path=test_build
+
+  cypress_test:
+    name: Cypress Testing
+    runs-on: ubuntu-latest
+    needs: build
+    strategy:
+      fail-fast: false
+      matrix:
+        containers: [1, 2, 3, 4, 5]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+
+      - uses: actions/cache@v3
+        id: cypress-cache
+        with:
+          path: |
+            ${{ steps.yarn-cache-dir-path.outputs.dir }}
+            node_modules
+            ~/.cache/Cypress
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Download Test Build artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: test_build
+          path: test_build/
+
+      - name: Cypress Testing
+        uses: cypress-io/github-action@v5
+        with:
+          config-file: cypress.config.ts
+          install: false
+          config: defaultCommandTimeout=15000
+          start: yarn start --path=test_build
+          wait-on: 'http://localhost:4200'
+          wait-on-timeout: 600
+          quiet: true
+          record: true
+          parallel: true
+          group: 'Tests'
+          spec: |
+            cypress/e2e/client_admin/doi.test.ts
+            cypress/e2e/client_admin/info.test.ts
+            cypress/e2e/client_admin/prefixes.test.ts
+            cypress/e2e/client_admin/settings.test.ts
+            cypress/e2e/consortium_admin/contacts.test.ts
+            cypress/e2e/consortium_admin/info.test.ts
+            cypress/e2e/consortium_admin/settings.test.ts
+            cypress/e2e/organization_admin/contacts.test.ts
+            cypress/e2e/organization_admin/doi.test.ts
+            cypress/e2e/organization_admin/info.test.ts
+            cypress/e2e/organization_admin/prefixes.test.ts
+            cypress/e2e/organization_admin/repositories.test.ts
+            cypress/e2e/organization_admin/settings.test.ts
+            cypress/e2e/staff_admin/contacts.test.ts
+            cypress/e2e/staff_admin/info.test.ts
+            cypress/e2e/staff_admin/settings.test.ts
+            cypress/e2e/ui/consent.test.ts
+            cypress/e2e/ui/login.test.ts
+            cypress/e2e/anonymous/admin.test.ts
+            cypress/e2e/anonymous/anonymous.test.ts
+            cypress/e2e/anonymous/doi.test.ts
+            cypress/e2e/anonymous/provider.test.ts
+            cypress/e2e/anonymous/repository.test.ts
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CLIENT_ADMIN_USERNAME: ${{ secrets.CLIENT_ADMIN_USERNAME }}
+          CLIENT_ADMIN_PASSWORD: ${{ secrets.CLIENT_ADMIN_PASSWORD }}
+          CONSORTIUM_ADMIN_USERNAME: ${{ secrets.CONSORTIUM_ADMIN_USERNAME }}
+          CONSORTIUM_ADMIN_PASSWORD: ${{ secrets.CONSORTIUM_ADMIN_PASSWORD }}
+          ORGANIZATION_ADMIN_USERNAME: ${{ secrets.ORGANIZATION_ADMIN_USERNAME }}
+          ORGANIZATION_ADMIN_PASSWORD: ${{ secrets.ORGANIZATION_ADMIN_PASSWORD }}
+          STAFF_ADMIN_USERNAME: ${{ secrets.STAFF_ADMIN_USERNAME }}
+          STAFF_ADMIN_PASSWORD: ${{ secrets.STAFF_ADMIN_PASSWORD }}
+
+  deploy:
+    if: ${{ github.event.label.name == 'create-preview-app' }}
+    needs: [ember_test, cypress_test]
+    runs-on: ubuntu-latest
+    env:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+    steps:
+      - uses: snaplet/vercel-action@v3
+  
+      - name: Remove label
+        uses: fastruby/pr-unlabeler@v1
+        with:
+          label-to-remove: "create-preview-app"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  
+  delete:
+    if: ${{ github.event.label.name == 'delete-preview-app' }}
+    runs-on: ubuntu-latest
+    env:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+    steps:
+      - uses: snaplet/vercel-action@v3
+        with:
+          delete: true
