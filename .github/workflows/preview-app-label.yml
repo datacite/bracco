@@ -27,7 +27,7 @@ jobs:
           yarn --frozen-lockfile --prefer-offline
           ./node_modules/.bin/ember build --output-path="test_build" --environment=development
   deploy:
-    if: ${{ github.event.label.name == 'create-preview-app' }}
+    if: ${{ github.event.label.name == 'create preview app' }}
     needs: build
     runs-on: ubuntu-latest
     env:
@@ -56,6 +56,6 @@ jobs:
       - name: Remove label
         uses: fastruby/pr-unlabeler@v1
         with:
-          label-to-remove: "create-preview-app"
+          label-to-remove: "create preview app"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
