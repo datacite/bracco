@@ -183,7 +183,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   
   delete:
-    if: ${{ github.event.label.name == 'delete-preview-app' }}
+    if: ${{ github.event.label.name == 'destroy-preview-app' }}
     runs-on: ubuntu-latest
     env:
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
