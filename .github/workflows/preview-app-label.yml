@@ -28,6 +28,7 @@ jobs:
           ./node_modules/.bin/ember build --output-path="test_build" --environment=development
   deploy:
     if: ${{ github.event.label.name == 'create-preview-app' }}
+    needs: build
     runs-on: ubuntu-latest
     env:
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
