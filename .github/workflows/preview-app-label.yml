@@ -8,53 +8,24 @@ jobs:
     runs-on: ubuntu-latest
     env:
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-      VERCEL_ACCESS_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-      VERCEL_PROJECT_ID: ${{ secrets.PROJECT_ID }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - uses: snaplet/vercel-action@v3
+      - name: Vercel deploy
+        uses: amondnet/vercel-action@v25.1.1
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.ORG_ID}}
+          vercel-project-id: ${{ secrets.PROJECT_ID}}
+          vercel-args: ${{ vars.VERCEL_NOCACHE  == 'true' && '--force' || '' }}
+          scope: ${{ secrets.TEAM_ID}}
+          vercel-project-name: 'bracco'
+          github-comment: true
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-deployment: true
       - name: Remove label
         uses: fastruby/pr-unlabeler@v1
         with:
           label-to-remove: "create preview app"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  delete:
-    if: ${{ github.event.label.name == 'destroy preview app' || github.event.action == 'closed' }}
-    runs-on: ubuntu-latest
-    steps:
-      - uses: snaplet/vercel-action@v3
-        with:
-          delete: true
-      - name: Remove label
-        uses: fastruby/pr-unlabeler@v1
-        with:
-          label-to-remove: "destroy preview app"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-  # deploy:
-  #   if: ${{ github.event.label.name == 'create preview app' }}
-  #   runs-on: ubuntu-latest
-  #   env:
-  #     SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v3
-  #     - name: Vercel deploy
-  #       uses: amondnet/vercel-action@v25.1.1
-  #       with:
-  #         vercel-token: ${{ secrets.VERCEL_TOKEN }}
-  #         vercel-org-id: ${{ secrets.ORG_ID}}
-  #         vercel-project-id: ${{ secrets.PROJECT_ID}}
-  #         vercel-args: ${{ vars.VERCEL_NOCACHE  == 'true' && '--force' || '' }}
-  #         scope: ${{ secrets.TEAM_ID}}
-  #         vercel-project-name: 'bracco'
-  #         github-comment: true
-  #     - name: Remove label
-  #       uses: fastruby/pr-unlabeler@v1
-  #       with:
-  #         label-to-remove: "create preview app"
-  #       env:
-  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
