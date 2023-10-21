@@ -1,8 +1,36 @@
 import Component from '@ember/component';
 import { pascalCase } from 'pascal-case';
-import { RESOURCE_TYPE_GENERAL_LIST } from '../constants/resource-type-general-list';
 
-const resourceTypeGeneralList = RESOURCE_TYPE_GENERAL_LIST
+const resourceTypeGeneralList = [
+  'Audiovisual',
+  'Book',
+  'BookChapter',
+  'Collection',
+  'ComputationalNotebook',
+  'ConferencePaper',
+  'ConferenceProceeding',
+  'DataPaper',
+  'Dataset',
+  'Dissertation',
+  'Event',
+  'Image',
+  'InteractiveResource',
+  'Journal',
+  'JournalArticle',
+  'Model',
+  'OutputManagementPlan',
+  'PeerReview',
+  'PhysicalObject',
+  'Preprint',
+  'Report',
+  'Service',
+  'Software',
+  'Sound',
+  'Standard',
+  'Text',
+  'Workflow',
+  'Other'
+];
 
 export default Component.extend({
   resourceTypeGeneralList,
