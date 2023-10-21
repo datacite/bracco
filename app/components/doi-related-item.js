@@ -53,6 +53,7 @@ const relatedItemTypeList = [
   'Dissertation',
   'Event',
   'Image',
+  'Instrument',
   'InteractiveResource',
   'Journal',
   'JournalArticle',
@@ -66,6 +67,7 @@ const relatedItemTypeList = [
   'Software',
   'Sound',
   'Standard',
+  'StudyRegistration', 
   'Text',
   'Workflow',
   'Other'
