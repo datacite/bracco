@@ -91,6 +91,7 @@ const resourceTypeGeneralList = [
   'Software',
   'Sound',
   'Standard',
+  'StudyRegistration', 
   'Text',
   'Workflow',
   'Other'
