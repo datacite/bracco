@@ -37,7 +37,9 @@ const relationTypeList = [
   'Is published in',
   'Is variant form of',
   'Is original form of',
-  'Is identical to'
+  'Is identical to',
+  'Is collected by',
+  'Collects'
 ];
 
 const relatedItemTypeList = [
