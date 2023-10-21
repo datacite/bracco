@@ -2,74 +2,12 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 import { pascalCase } from 'pascal-case';
+import { RESOURCE_TYPE_GENERAL_LIST } from '../constants/resource-type-general-list';
+import { RELATION_TYPE_LIST } from '../constants/relation-type-list';
 
-const relationTypeList = [
-  'Cites',
-  'Is cited by',
-  'Compiles',
-  'Is compiled by',
-  'Continues',
-  'Is continued by',
-  'Describes',
-  'Is described by',
-  'Documents',
-  'Is documented by',
-  'Is derived from',
-  'Is source of',
-  'Has metadata',
-  'Is metadata for',
-  'Has part',
-  'Is part of',
-  'Is supplemented by',
-  'Is supplement to',
-  'Obsoletes',
-  'Is obsoleted by',
-  'References',
-  'Is referenced by',
-  'Requires',
-  'Is required by',
-  'Reviews',
-  'Is reviewed by',
-  'Has version',
-  'Is version of',
-  'Is new version of',
-  'Is previous version of',
-  'Is published in',
-  'Is variant form of',
-  'Is original form of',
-  'Is identical to'
-];
+const relationTypeList = RELATION_TYPE_LIST;
 
-const relatedItemTypeList = [
-  'Audiovisual',
-  'Book',
-  'BookChapter',
-  'Collection',
-  'ComputationalNotebook',
-  'ConferencePaper',
-  'ConferenceProceeding',
-  'DataPaper',
-  'Dataset',
-  'Dissertation',
-  'Event',
-  'Image',
-  'InteractiveResource',
-  'Journal',
-  'JournalArticle',
-  'Model',
-  'OutputManagementPlan',
-  'PeerReview',
-  'PhysicalObject',
-  'Preprint',
-  'Report',
-  'Service',
-  'Software',
-  'Sound',
-  'Standard',
-  'Text',
-  'Workflow',
-  'Other'
-];
+const relatedItemTypeList = RESOURCE_TYPE_GENERAL_LIST;
 
 export default Component.extend({
   store: service(),

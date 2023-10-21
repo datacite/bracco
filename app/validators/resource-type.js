@@ -1,38 +1,10 @@
 /* eslint-disable no-useless-escape */
 import BaseValidator from 'ember-cp-validations/validators/base';
+import { RESOURCE_TYPE_GENERAL_LIST } from '../constants/resource-type-general-list';
 
 const ResourceType = BaseValidator.extend({
   validate(value, options) {
-    const resourceTypeGeneralList = [
-      'Audiovisual',
-      'Book',
-      'BookChapter',
-      'Collection',
-      'ComputationalNotebook',
-      'ConferencePaper',
-      'ConferenceProceeding',
-      'DataPaper',
-      'Dataset',
-      'Dissertation',
-      'Event',
-      'Image',
-      'InteractiveResource',
-      'Journal',
-      'JournalArticle',
-      'Model',
-      'OutputManagementPlan',
-      'PeerReview',
-      'PhysicalObject',
-      'Preprint',
-      'Report',
-      'Service',
-      'Software',
-      'Sound',
-      'Standard',
-      'Text',
-      'Workflow',
-      'Other'
-    ];
+    const resourceTypeGeneralList = RESOURCE_TYPE_GENERAL_LIST;
 
     const message = 'Resource of the Type is not valid.';
 
