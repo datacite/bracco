@@ -13,8 +13,9 @@ const resourceTypeGeneralList = [
   'Dataset',
   'Dissertation',
   'Event',
-  'Image',
+  'Instrument',
   'InteractiveResource',
+  'Image',
   'Journal',
   'JournalArticle',
   'Model',
@@ -27,6 +28,7 @@ const resourceTypeGeneralList = [
   'Software',
   'Sound',
   'Standard',
+  'StudyRegistration',
   'Text',
   'Workflow',
   'Other'
