@@ -11,7 +11,8 @@ export default Route.extend({
       .findRecord('doi', params.doi_id.toLowerCase(), {
         include: 'client',
         adapterOptions: {
-          affiliation: true
+          affiliation: true,
+          publisher: true
         }
       })
       .then(function (doi) {

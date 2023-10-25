@@ -13,7 +13,8 @@ export default Route.extend({
       .findRecord('doi', id, {
         include: 'client',
         adapterOptions: {
-          affiliation: true
+          affiliation: true,
+          publisher: true
         }
       })
       .then(function (doi) {

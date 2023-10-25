@@ -9,7 +9,7 @@ export default ApplicationAdapter.extend({
     let query = '';
 
     if (snapshot.adapterOptions !== undefined) {
-        query = isPresent(snapshot.adapterOptions.affiliation) ? 'affiliation=true' : '';
+        query = this.buildQuery(snapshot.adapterOptions);
     }
     query = query ? '?' + query : '';
     
@@ -21,7 +21,7 @@ export default ApplicationAdapter.extend({
     let baseUrl = this.buildURL(modelName, id, snapshot);
     let query = '';
 
-    query = '?' + 'affiliation=true';
+    query = '?' + 'affiliation=true&publisher=true';
     
     return baseUrl + query;
   },
@@ -29,13 +29,27 @@ export default ApplicationAdapter.extend({
   // For API requests from doi.save()/POST
   urlForCreateRecord(modelName, snapshot) {
     let baseUrl = this._super(...arguments)
-    let query = '?' + 'affiliation=true';
+    let query = '?' + 'affiliation=true&publisher=true';
 
     return baseUrl + query;
   },
 
   pathForType() {
     return 'dois';
+  },
+
+  buildQuery(options) {
+    const allowedKeys = ['affiliation', 'publisher'];
+    const queryParts = [];
+
+    if (typeof options === 'object') {
+      for (const [key, value] of Object.entries(options)) {
+        if (allowedKeys.includes(key) && value) {
+          queryParts.push(`${key}=${value}`);
+        }
+      }
+    }
+    return queryParts.length > 0 ? queryParts.join('&') : '';
   }
 
 });
