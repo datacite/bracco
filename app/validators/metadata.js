@@ -11,7 +11,7 @@ const metadata = BaseValidator.extend({
       return true;
     } else {
       let xml = this.b64EncodeUnicode(value);
-      let url = ENV.API_URL + '/dois/validate';
+      let url = ENV.API_URL + '/dois/validate?publisher=true';
       let repositoryId = model.get('repository').get('id');
       return fetch(url, {
         method: 'post',
