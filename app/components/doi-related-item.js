@@ -69,7 +69,7 @@ const relatedItemTypeList = [
   'Software',
   'Sound',
   'Standard',
-  'StudyRegistration', 
+  'StudyRegistration',
   'Text',
   'Workflow',
   'Other'

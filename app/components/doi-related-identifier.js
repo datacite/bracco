@@ -93,7 +93,7 @@ const resourceTypeGeneralList = [
   'Software',
   'Sound',
   'Standard',
-  'StudyRegistration', 
+  'StudyRegistration',
   'Text',
   'Workflow',
   'Other'
