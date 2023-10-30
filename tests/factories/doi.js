@@ -17,7 +17,12 @@ FactoryGuy.define('doi', {
     geoLocations: FactoryGuy.hasMany('geoLocation'),
     subjects: FactoryGuy.hasMany('subject'),
     relatedItems: FactoryGuy.hasMany('relatedItem'),
-    publisher: 'Royal Society of Chemistry',
+    publisher: {
+      name: 'Royal Society of Chemistry',
+      publisherIdentifier: 'https://ror.org/04z8jg394',
+      publisherIdentifierScheme: 'ROR',
+      schemeUri: 'https://ror.org/'
+    },
     types: {
       resourceTypeGeneral: 'Dataset',
       resourceType: 'Substance',
