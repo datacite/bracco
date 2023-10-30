@@ -40,16 +40,19 @@ export default ApplicationAdapter.extend({
 
   buildQuery(options) {
     const allowedKeys = ['affiliation', 'publisher'];
+
+    if (typeof options !== 'object') {
+      return '';
+    }
+
     const queryParts = [];
 
-    if (typeof options === 'object') {
-      for (const [key, value] of Object.entries(options)) {
-        if (allowedKeys.includes(key) && value) {
-          queryParts.push(`${key}=${value}`);
-        }
+    for (const [key, value] of Object.entries(options)) {
+      if (allowedKeys.includes(key) && value) {
+        queryParts.push(`${key}=${value}`);
       }
     }
-    return queryParts.length > 0 ? queryParts.join('&') : '';
+    return queryParts.join('&');
   }
 
 });
