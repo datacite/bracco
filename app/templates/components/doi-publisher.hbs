@@ -1,4 +1,4 @@
-<div class="form-group required-nested-label {{if (v-get model 'publisher.name' 'isInvalid') 'has-error' 'has-feedback'}}">
+<div class="form-group required-nested-label">
   <label class="control-label col-md-3">Publisher</label>
   <div class="col-md-9 input-fragment">
     <div class="label-vertical">The name of the entity that holds, archives, publishes prints, distributes, releases, issues, or produces the resource.</div>
@@ -14,7 +14,7 @@
 
 <div class="form-group required-nested-label {{if (v-get model 'publisher.publisherIdentifier' 'isInvalid') 'has-error' 'has-feedback'}}">
   <div class="col-md-9 col-md-offset-3">
-    <div class="label-vertical">
+    <div class="power-select-label">
       <label for="subject" class="subtitle">Publisher identifier</label>
     </div>
     <div class="power-select-fragment">
