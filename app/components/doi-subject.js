@@ -76,8 +76,7 @@ export default Component.extend({
       } else {
         this.fragment.set('subject', value);
         this.setScheme(null);
-        this.set('schemeUri', null);
-        this.fragment.set('subjectSchemeUri', null);
+        this.setSchemeUri(null);
         this.setClassificationCode(null);
         this.set('oecdSelected', false);
       }
