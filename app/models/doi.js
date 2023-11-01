@@ -3,8 +3,9 @@ import { equal, reads } from '@ember/object/computed';
 import { validator, buildValidations } from 'ember-cp-validations';
 import ENV from 'bracco/config/environment';
 import Model, { attr, belongsTo } from '@ember-data/model';
-import { fragment, fragmentArray, array } from 'ember-data-model-fragments/attributes';
+import { fragment, fragmentArray } from 'ember-data-model-fragments/attributes';
 import { A } from '@ember/array';
+import { isPresent } from '@ember/utils';
 
 const Validations = buildValidations({
   details: [
@@ -68,7 +69,7 @@ const Validations = buildValidations({
       })
     })
   ],
-  publisher: [
+  'publisher.name': [
     validator('presence', {
       presence: true,
       disabled: computed('model.{mode,state}', function () {
@@ -77,6 +78,18 @@ const Validations = buildValidations({
           !['new', 'edit'].includes(this.model.get('mode'))
         );
       })
+    })
+  ],
+  'publisher.publisherIdentifierScheme': [
+    validator('presence', {
+      presence: true,
+      disabled: computed('model.{state,publisher.publisherIdentifier}', function () {
+          return (
+            this.model.get('state') === 'draft' &&
+            !isPresent(this.model.get('publisher.publisherIdentifier'))
+          );
+        }
+      )
     })
   ],
   publicationYear: [
