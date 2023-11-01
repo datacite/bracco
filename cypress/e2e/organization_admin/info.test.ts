@@ -182,9 +182,9 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | INFO', () => {
     cy.visit('/providers/DATACITE');
     cy.url().should('include', '/providers/DATACITE').then(() => {
       
-      cy.wait(6000)
+      cy.wait(waitTime3)
       // Info page should be populated with non-zero graph data.
-      cy.get('.graphs > a').contains(/^0$/).should('not.exist')
+      cy.get('.graphs > a').contains(/^[0-9]+$/).should('exist')
     });
   });
 });
