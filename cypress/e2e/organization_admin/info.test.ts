@@ -181,10 +181,13 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | INFO', () => {
   it.only('can see info when using capitalized identifier URL subdirectory', () => {
     cy.visit('/providers/DATACITE');
     cy.url().should('include', '/providers/DATACITE').then(() => {
-      
-      cy.wait(waitTime3)
+      // Increase timeout because requests that return these totals can be slow.
+      cy.wait(waitTime3*2)
       // Info page should be populated with non-zero graph data.
-      cy.get('.graphs > a').contains(/^[0-9]+$/).should('exist')
+      // Iterate over each element to test.
+      cy.get('.graphs > a').each(($el, index, $list) => {
+        expect($el.text()).to.match(/^[0-9]+$/)
+      })
     });
   });
 });
