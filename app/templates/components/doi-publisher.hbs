@@ -13,41 +13,28 @@
 </div>
 
 <div class="form-group required-nested-label {{if (v-get model 'publisher.publisherIdentifier' 'isInvalid') 'has-error' 'has-feedback'}}">
-  <div class="col-md-9 col-md-offset-3">
-    <div class="power-select-label">
-      <label for="subject" class="subtitle">Publisher identifier</label>
-    </div>
-    <div class="power-select-fragment">
-      <@form.element @id="publisher-identifier" @controlType="text" @property="publisher.publisherIdentifier" @helpText="Uniquely identifies the publisher, according to various schemes." as |el| >
-        <el.control  placeholder="Publisher identifier" />
-      </@form.element>
-    </div>
+  <div class="col-md-9 col-md-offset-3 input-fragment">
+    <div class="label-vertical">Publisher identifier</div>
+    <@form.element @id="publisher-identifier" @controlType="text" @property="publisher.publisherIdentifier" @helpText="Uniquely identifies the publisher, according to various schemes." as |el| >
+      <el.control  placeholder="Publisher identifier" />
+    </@form.element>
   </div>
 </div>
 
-<div class="form-group">
-  <div class="col-md-9 col-md-offset-3">
-    <div class="power-select-label">
-      <label for="subject" class="subtitle">Identifier Scheme</label>
-    </div>
-    <div class="power-select-fragment">
-      <@form.element @id="publisher-identifier-scheme" @controlType="text" @property="publisher.publisherIdentifierScheme" @helpText="The name of the publisher identifier scheme." as |el| >
-        <el.control  placeholder="Publisher identifier scheme" />
-      </@form.element>
-    </div>
+<div class="form-group required-nested-label">
+  <div class="col-md-9 col-md-offset-3 input-fragment">
+    <div class="label-vertical">Identifier Scheme</div>
+    <@form.element @id="publisher-identifier-scheme" @controlType="text" @property="publisher.publisherIdentifierScheme" @helpText="The name of the publisher identifier scheme." as |el| >
+      <el.control  placeholder="Publisher identifier scheme" />
+    </@form.element>
   </div>
 </div>
 
-<div class="form-group">
-  <div class="col-md-9 col-md-offset-3">
-    <div class="power-select-label">
-      <label for="subject" class="subtitle">Scheme uri</label>
-    </div>
-    <div class="power-select-fragment">
-      <@form.element @id="publisher-scheme-uri" @controlType="text" @property="publisher.schemeUri" @helpText="The name of the publisher identifier scheme." as |el| >
-        <el.control  placeholder="Publisher scheme uri" />
-      </@form.element>
-    </div>
+<div class="form-group required-nested-label">
+  <div class="col-md-9 col-md-offset-3 input-fragment">
+    <div class="label-vertical">Scheme uri</div>
+    <@form.element @id="publisher-scheme-uri" @controlType="text" @property="publisher.schemeUri" @helpText="The name of the publisher identifier scheme." as |el| >
+      <el.control  placeholder="Publisher scheme uri" />
+    </@form.element>
   </div>
 </div>
-
