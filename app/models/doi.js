@@ -186,7 +186,7 @@ export default Model.extend(Validations, {
   contentUrl: attr(),
   creators: fragmentArray('creator', { defaultValue: [] }),
   titles: fragmentArray('title', { defaultValue: [] }),
-  publisher: fragment('publisher'),
+  publisher: fragment('publisher', { defaultValue: {} }),
   bcontainer: attr(),
   publicationYear: attr('number'),
   subjects: fragmentArray('subject', { defaultValue: [] }),
