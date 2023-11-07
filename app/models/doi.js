@@ -83,7 +83,9 @@ const Validations = buildValidations({
   'publisher.publisherIdentifierScheme': [
     validator('presence', {
       presence: true,
-      disabled: computed('model.{state,publisher.publisherIdentifier}', function () {
+      disabled: computed(
+        'model.{state,publisher.publisherIdentifier}',
+        function () {
           return (
             this.model.get('state') === 'draft' &&
             !isPresent(this.model.get('publisher.publisherIdentifier'))
