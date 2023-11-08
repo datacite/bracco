@@ -18,6 +18,7 @@ FactoryGuy.define('doi', {
     subjects: FactoryGuy.hasMany('subject'),
     relatedItems: FactoryGuy.hasMany('relatedItem'),
     publisher: {
+      lang: 'en',
       name: 'Royal Society of Chemistry',
       publisherIdentifier: 'https://ror.org/04z8jg394',
       publisherIdentifierScheme: 'ROR',
