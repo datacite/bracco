@@ -5,7 +5,6 @@ import ENV from 'bracco/config/environment';
 import Model, { attr, belongsTo } from '@ember-data/model';
 import { fragment, fragmentArray } from 'ember-data-model-fragments/attributes';
 import { A } from '@ember/array';
-import { isPresent } from '@ember/utils';
 
 const Validations = buildValidations({
   details: [
