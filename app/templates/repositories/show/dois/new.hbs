@@ -28,7 +28,7 @@
 
       <DoiCreators @model={{model.doi}} @form={{form}} />
       <DoiTitles @model={{model.doi}} @form={{form}} />
-      <DoiPublisher @model={{model.doi}} @form={{form}} />
+      <DoiPublisher @model={{model.doi}} @form={{form}} @fragment={{model.doi}} />
 
       <div class="form-group required-nested-label {{if (v-get model.doi 'publicationYear' 'isInvalid') 'has-error' 'has-feedback'}}">
         <label class="control-label col-md-3">Publication Year</label>

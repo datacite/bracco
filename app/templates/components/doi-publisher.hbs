@@ -2,8 +2,10 @@
   <label class="control-label col-md-3">Publisher</label>
   <div class="col-md-9 input-fragment">
     <div class="label-vertical">The name of the entity that holds, archives, publishes prints, distributes, releases, issues, or produces the resource.</div>
-    <@form.element @id="publisher-name" @controlType="text" @property="publisher.name" @helpText="Uniquely identifies the publisher, according to various schemes." as |el| >
-      <el.control  placeholder="Publisher name" />
+    <@form.element @controlType="power-select" @value={{fragment.name}} @options={{organizations}} @helpText="Uniquely identifies the publisher, according to various schemes." as |el| >
+      <el.control @onChange={{action "selectRor"}} @search={{action "searchRor"}} @placeholder="Select publisher" @searchPlaceholder="Type to search..." @allowClear={{true}} @disabled={{disabled}} @searchEnabled={{true}} as |item|>
+          {{if item.name item.name fragment.name}}
+        </el.control>
     </@form.element>
   </div>
 </div>
@@ -11,7 +13,7 @@
 <div class="form-group required-nested-label {{if (v-get model 'publisher.publisherIdentifier' 'isInvalid') 'has-error' 'has-feedback'}}">
   <div class="col-md-9 col-md-offset-3 input-fragment">
     <div class="label-vertical">Publisher identifier</div>
-    <@form.element @id="publisher-identifier" @controlType="text" @property="publisher.publisherIdentifier" @helpText="Uniquely identifies the publisher, according to various schemes." as |el| >
+    <@form.element @id="publisher-identifier" @controlType="text" @value={{fragment.publisherIdentifier}} @helpText="Uniquely identifies the publisher, according to various schemes." as |el| >
       <el.control  placeholder="Publisher identifier" />
     </@form.element>
   </div>
@@ -20,17 +22,13 @@
 <div class="form-group required-nested-label">
   <div class="col-md-9 col-md-offset-3 input-fragment">
     <div class="label-vertical">Identifier Scheme</div>
-    <@form.element @id="publisher-identifier-scheme" @controlType="text" @property="publisher.publisherIdentifierScheme" @helpText="The name of the publisher identifier scheme." as |el| >
-      <el.control  placeholder="Publisher identifier scheme" />
-    </@form.element>
+    <input type="text" class="form-control publisher-identifier-scheme-field no-error no-success" value={{fragment.publisherIdentifierScheme}} readonly="true"/>
   </div>
 </div>
 
 <div class="form-group required-nested-label">
   <div class="col-md-9 col-md-offset-3 input-fragment">
     <div class="label-vertical">Scheme uri</div>
-    <@form.element @id="publisher-scheme-uri" @controlType="text" @property="publisher.schemeUri" @helpText="The name of the publisher identifier scheme." as |el| >
-      <el.control  placeholder="Publisher scheme uri" />
-    </@form.element>
+    <input type="text" class="form-control publisher-scheme-uri-field no-error no-success" value={{fragment.schemeUri}} readonly="true"/>
   </div>
 </div>
