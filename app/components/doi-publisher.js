@@ -18,17 +18,17 @@ export default Component.extend({
   },
   updatePublisher(organizationRecord) {
     if (organizationRecord) {
-      console.log(organizationRecord.name);
       this.fragment.set('name', organizationRecord.name);
       this.set('name', organizationRecord.name);
       this.fragment.set('publisherIdentifier', organizationRecord.id);
       this.fragment.set('schemeUri', 'https://ror.org');
       this.fragment.set('publisherIdentifierScheme', 'ROR');
     } else {
-      this.fragment.set('name', null);
+      this.fragment.set('name', '');
       this.fragment.set('publisherIdentifier', null);
-      this.fragment.set('schemeUri', 'https://ror.org');
-      this.fragment.set('publisherIdentifierScheme', 'ROR');
+      this.fragment.set('schemeUri', null);
+      this.fragment.set('publisherIdentifierScheme', null);
+      this.fragment.set('lang', null);
     }
   },
 
@@ -47,6 +47,9 @@ export default Component.extend({
     },
     selectRor(ror) {
       this.updatePublisher(ror);
+    },
+    updatePublisherIdentifier(value) {
+      this.fragment.set('publisherIdentifier', value);
     }
   }
 });

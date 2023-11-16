@@ -13,7 +13,7 @@
 <div class="form-group required-nested-label {{if (v-get model 'publisher.publisherIdentifier' 'isInvalid') 'has-error' 'has-feedback'}}">
   <div class="col-md-9 col-md-offset-3 input-fragment">
     <div class="label-vertical">Publisher identifier</div>
-    <@form.element @id="publisher-identifier" @controlType="text" @value={{fragment.publisherIdentifier}} @helpText="Uniquely identifies the publisher, according to various schemes." as |el| >
+    <@form.element oninput={{action 'updatePublisherIdentifier' value='target.value'}} @controlType="text" @value={{fragment.publisherIdentifier}} @helpText="Uniquely identifies the publisher, according to various schemes." as |el| >
       <el.control  placeholder="Publisher identifier" />
     </@form.element>
   </div>
