@@ -1,4 +1,5 @@
 import Component from '@ember/component';
+import { isBlank } from '@ember/utils';
 import { inject as service } from '@ember/service';
 
 export default Component.extend({
@@ -33,6 +34,17 @@ export default Component.extend({
   },
 
   actions: {
+    createOnEnter(select, e) {
+      if (
+        e.keyCode === 13 &&
+        select.isOpen &&
+        !select.highlighted &&
+        !isBlank(select.searchText)
+      ) {
+        select.actions.choose(select.searchText);
+        this.fragment.set('name', select.searchText);
+      }
+    },
     searchRor(query) {
       let self = this;
       this.store

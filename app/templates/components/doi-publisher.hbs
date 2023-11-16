@@ -3,7 +3,17 @@
   <div class="col-md-9 input-fragment">
     <div class="label-vertical">The name of the entity that holds, archives, publishes prints, distributes, releases, issues, or produces the resource.</div>
     <@form.element @controlType="power-select" @value={{fragment.name}} @options={{organizations}} @helpText="Uniquely identifies the publisher, according to various schemes." as |el| >
-      <el.control @onChange={{action "selectRor"}} @search={{action "searchRor"}} @placeholder="Select publisher" @searchPlaceholder="Type to search..." @allowClear={{true}} @disabled={{disabled}} @searchEnabled={{true}} as |item|>
+      <el.control
+        @onChange={{action "selectRor"}}
+        @search={{action "searchRor"}}
+        @placeholder="Select publisher"
+        @searchPlaceholder="Type to search..."
+        @allowClear={{true}}
+        @disabled={{disabled}}
+        @searchEnabled={{true}}
+        @onKeydown={{ action "createOnEnter" }}
+        @noMatchesMessage="Press ENTER to use own publisher."
+      as |item|>
           {{if item.name item.name fragment.name}}
         </el.control>
     </@form.element>
