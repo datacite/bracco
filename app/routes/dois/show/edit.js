@@ -28,6 +28,9 @@ export default Route.extend({
               'Using the Form would update this DOI to the latest schema version.'
             );
         }
+        if (!doi.publisher) {
+          doi.publisher = {};
+        }
         return doi;
       })
       .catch(function (reason) {

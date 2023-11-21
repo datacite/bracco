@@ -7,7 +7,7 @@ export function formatMetadata([ publicationYear ], hash) {
   if (hash.container && hash.container.title) {
     container = ' via ' + hash.container.title;
   } else if (hash.publisher) {
-    container = ' via ' + hash.publisher.name;
+    container = ' via ' + hash.publisher.name || '';
   }
   let published = publicationYear ? ' published ' + publicationYear : '';
   let version = hash.version ? 'Version ' + hash.version + ' of ' : '';
