@@ -33,6 +33,9 @@ export default Route.extend({
     if (this.get('currentUser.role_id') === 'staff_admin') {
       let self = this;
       this.prefixes.available().then(function(value) {
+        if (self.get('flashMessages').isDestroying || self.get('flashMessages').isDestroyed) {
+          return;
+        }
         if (value <= 0) {
           self.get('flashMessages').danger(self.prefixes.msg_zero);
         } else if (value < self.prefixes.min) {

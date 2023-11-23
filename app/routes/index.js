@@ -31,6 +31,9 @@ export default Route.extend({
 
       let self = this;
       this.prefixes.available().then(function(value) {
+        if (self.get('flashMessages').isDestroying || self.get('flashMessages').isDestroyed) {
+          return;
+        }
         if (value <= 0) {
           self.get('flashMessages').danger(self.prefixes.msg_zero);
         } else if (value < self.prefixes.min) {
