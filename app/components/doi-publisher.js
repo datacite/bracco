@@ -10,6 +10,13 @@ export default Component.extend({
 
     this.organizations = this.organizations || [];
   },
+  didReceiveAttrs() {
+    this._super(...arguments);
+
+    if (!this.model.get('publisher')) {
+      this.model.set('publisher', this.store.createFragment('publisher'));
+    }
+  },
   updatePublisher(organizationRecord) {
     if (organizationRecord) {
       this.fragment.set('name', organizationRecord.name);
