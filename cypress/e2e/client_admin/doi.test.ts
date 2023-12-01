@@ -108,8 +108,7 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
 
       // Set publisher.
       cy.get('[data-test-doi-publisher]').first().click();
-      cy.get('#publisher-identifier-scheme-field').should('have.value', 'ROR');
-      cy.get('#publisher-scheme-uri-field').should('have.value', 'https://ror.org');
+      cy.get('#publisher-identifier-field').should('include.value', 'ror.org');
 
       // Set state to 'registered'. Test out-of-range year.
 
