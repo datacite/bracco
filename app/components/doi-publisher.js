@@ -38,6 +38,10 @@ export default Component.extend({
       if (e.keyCode === 13 && select.isOpen && !isBlank(select.searchText)) {
         select.actions.choose(select.searchText);
         this.fragment.set('name', select.searchText);
+        this.fragment.set('publisherIdentifier', null);
+        this.fragment.set('schemeUri', null);
+        this.fragment.set('publisherIdentifierScheme', null);
+        this.fragment.set('lang', null);
       }
     },
     searchRor(query) {

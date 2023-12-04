@@ -23,8 +23,10 @@
 {{#if fragment.publisherIdentifier}}
   <div class="form-group required-nested-label">
     <div class="col-md-9 col-md-offset-3 input-fragment">
-      <div class="label-vertical">Publisher identifier</div>
       <input type="text" class="form-control affiliation-identifier-field no-error no-success" value={{fragment.publisherIdentifier}} readonly="true"/>
+      <div class="help-block help-block-fragment affiliation-field">
+        Publisher names and identifiers are provided by the Research Organization Registry (ROR).
+      </div>
     </div>
   </div>
 {{/if}}
