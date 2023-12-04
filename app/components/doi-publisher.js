@@ -35,12 +35,7 @@ export default Component.extend({
 
   actions: {
     createOnEnter(select, e) {
-      if (
-        e.keyCode === 13 &&
-        select.isOpen &&
-        !select.highlighted &&
-        !isBlank(select.searchText)
-      ) {
+      if (e.keyCode === 13 && select.isOpen && !isBlank(select.searchText)) {
         select.actions.choose(select.searchText);
         this.fragment.set('name', select.searchText);
       }
