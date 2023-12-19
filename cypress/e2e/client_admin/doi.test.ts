@@ -107,8 +107,11 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
       });
 
       // Set publisher.
-      cy.get('[data-test-doi-publisher]').first().click();
-      cy.get('#publisher-identifier-field').should('include.value', 'ror.org');
+      cy.get('[data-test-doi-publisher]').click({ waitForAnimations: true }).then(($dropdown) => {
+        // Creates a new publisher
+        cy.get('input.ember-power-select-search-input').type('something{enter}', { force: true });
+        cy.get('[data-test-doi-publisher] .ember-power-select-selected-item').contains("something")
+      });
 
       // Set state to 'registered'. Test out-of-range year.
 
