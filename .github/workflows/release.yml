@@ -1,8 +1,7 @@
-name: Deploy to Staging
+name: Deploy to Test and Production
 on:
-  push:
-    branches:
-      - "main"
+  release:
+    types: [published]
 
 jobs:
   call_build:
@@ -39,15 +38,22 @@ jobs:
           echo "GIT_SHA_SHORT=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
         id: extract_variables
 
-      - name: Vercel deploy
+      - name: Vercel deploy production
         uses: amondnet/vercel-action@v25.1.1
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.ORG_ID}}
           vercel-project-id: ${{ secrets.PROJECT_ID}}
-          vercel-args: ${{ vars.VERCEL_NOCACHE  == 'true' && '--force' || '' }}
+          vercel-args: ${{ vars.VERCEL_NOCACHE  == 'true' && '--prod --force' || '--prod' }}
           scope: ${{ secrets.TEAM_ID}}
           vercel-project-name: 'bracco'
-          alias-domains: |
-            doi.datacite.vercel.app
-            doi.stage.datacite.org
+
+      - name: Vercel deploy test
+        uses: amondnet/vercel-action@v25.1.1
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.ORG_ID}}
+          vercel-project-id: ${{ secrets.TEST_PROJECT_ID}}
+          vercel-args: ${{ vars.VERCEL_NOCACHE  == 'true' && '--prod --force' || '--prod' }}
+          scope: ${{ secrets.TEAM_ID}}
+          vercel-project-name: 'bracco-test'

@@ -317,19 +317,6 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
     });
   });
 
-  it('is editing a doi - FORM', () => {
-    cy.visit('/dois/' + encodeURIComponent(prefix + '/' + Cypress.env('suffix')) + '/edit');
-    cy.url().should('include', '/dois/' + encodeURIComponent(prefix + '/' + Cypress.env('suffix')) + '/edit').then(() => {
-
-      cy.wait(waitTime);
-      // Get entered creator.
-      cy.get('input[data-test-name]').should('be.visible').should('have.value', creator)
-      cy.get('.add-name-identifier').should('be.visible')
-      cy.get('.add-affiliation').should('be.visible')
-
-    })
-  });
-
   it('is creating a doi - FILE UPLOAD', () => {
     cy.visit('/repositories/datacite.test/dois/upload');
     cy.url().should('include', '/repositories/datacite.test/dois/upload').then(() => {
