@@ -2,8 +2,7 @@ name: Cypress Tests
 on:
   workflow_call:   
 jobs:
-  ember_test:
-    name: Ember Testing
+  ember-test:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: true
