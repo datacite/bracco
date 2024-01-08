@@ -1,4 +1,4 @@
-name: Cypress Tests
+name: Ember Tests
 on:
   workflow_call:   
 jobs:
