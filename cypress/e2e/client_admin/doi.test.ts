@@ -317,7 +317,6 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
     });
   });
 
-
   it('is editing a doi - FORM', () => {
     cy.visit('/dois/' + encodeURIComponent(prefix + '/' + Cypress.env('suffix')) + '/edit');
     cy.url().should('include', '/dois/' + encodeURIComponent(prefix + '/' + Cypress.env('suffix')) + '/edit').then(() => {
