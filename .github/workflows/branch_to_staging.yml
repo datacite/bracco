@@ -1,8 +1,6 @@
-name: Deploy to Staging
+name: Manually Test and Deploy Branch to Vercel
 on:
-  push:
-    branches:
-      - "main"
+  workflow_dispatch:
 
 jobs:
   call_build:
@@ -39,7 +37,7 @@ jobs:
           echo "GIT_SHA_SHORT=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
         id: extract_variables
 
-      - name: Vercel deploy
+      - name: Vercel deploy staging
         uses: amondnet/vercel-action@v25.1.1
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
@@ -48,6 +46,3 @@ jobs:
           vercel-args: ${{ vars.VERCEL_NOCACHE  == 'true' && '--force' || '' }}
           scope: ${{ secrets.TEAM_ID}}
           vercel-project-name: 'bracco'
-          alias-domains: |
-            doi.datacite.vercel.app
-            doi.stage.datacite.org

@@ -1,0 +1,46 @@
+name: Build
+on:
+  workflow_call:
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+    steps:
+      - name: Branch name
+        run: echo running on branch ${GITHUB_REF##*/}
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+
+      - uses: actions/cache@v3
+        id: cypress-cache
+        with:
+          path: |
+            ${{ steps.yarn-cache-dir-path.outputs.dir }}
+            node_modules
+            ~/.cache/Cypress
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Get branch name
+        run: |
+          echo "### CURRENT BRANCH NAME:  ${{ github.ref_name }}."
+
+      - name: Build
+        env:
+          NODE_OPTIONS: "--openssl-legacy-provider"
+        run: |
+          yarn --prefer-offline
+          ./node_modules/.bin/ember build --output-path="test_build" --environment=development
+
+      - name: Upload Test Build artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: test_build
+          path: test_build/
