@@ -13,18 +13,23 @@ module('Unit | Model | user', function (hooks) {
   });
 
   test('should have meta data', function (assert) {
+    let currentYear = new Date().getFullYear();
+    let startDate10 = (currentYear - 10).toString();
+    let startDate5 = (currentYear - 5).toString();
+    let endDate = currentYear.toString();
+
     let model = run(() =>
       this.owner.lookup('service:store').createRecord('user')
     );
 
     let meta = {
       dois: [
-        { id: '2013', title: '2013', count: 1 },
-        { id: '2023', title: '2023', count: 1 }
+        { id: startDate10, title: startDate10, count: 1 },
+        { id: endDate, title: endDate, count: 1 }
       ],
       published: [
-        { id: '2018', title: '2018', count: 1 },
-        { id: '2023', title: '2023', count: 1 }
+        { id: startDate5, title: startDate5, count: 1 },
+        { id: endDate, title: endDate, count: 1 }
       ],
       resourceTypes: [
         { id: 'text', title: 'Text', count: 1 },
