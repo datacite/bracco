@@ -25,7 +25,8 @@ export default Route.extend({
           self
             .get('flashMessages')
             .warning(
-              'Using the Form would update this DOI to the latest schema version.'
+              'Using the Form would update this DOI to the latest schema version.',
+              { destroyOnClick: false }
             );
         }
         if (!doi.publisher) {
