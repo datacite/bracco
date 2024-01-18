@@ -1,5 +1,5 @@
 <div class="form-group {{if (v-get model 'publisher.name' 'isInvalid') 'has-error' 'has-feedback'}}">
-  <label class="control-label col-md-3">Publisher</label>
+  <label class="control-label col-md-3 required-label">Publisher</label>
   <div class="col-md-9 input-fragment">
     <div class="label-vertical">The name of the entity that holds, archives, publishes prints, distributes, releases, issues, or produces the resource.</div>
     <@form.element @controlType="power-select" data-test-doi-publisher @value={{fragment.name}} @options={{organizations}} as |el| >
