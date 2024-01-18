@@ -21,6 +21,9 @@ export default Controller.extend({
     submit(doi) {
       doi.set('event', this.setEvent(doi.get('state')));
 
+      // schema-version will be determined by API
+      doi.set('schemaVersion', 'http://datacite.org/schema/kernel-4');
+
       // track use of the form
       doi.set('source', 'fabricaForm');
 
