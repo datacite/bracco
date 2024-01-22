@@ -10,7 +10,8 @@ export default Route.extend({
       .findRecord('doi', this.modelFor('dois/show').get('id'), {
         include: 'client',
         adapterOptions: {
-          affiliation: true
+          affiliation: true,
+          publisher: true
         }
       })
       .then(function (doi) {

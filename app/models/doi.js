@@ -3,7 +3,7 @@ import { equal, reads } from '@ember/object/computed';
 import { validator, buildValidations } from 'ember-cp-validations';
 import ENV from 'bracco/config/environment';
 import Model, { attr, belongsTo } from '@ember-data/model';
-import { fragmentArray, array } from 'ember-data-model-fragments/attributes';
+import { fragment, fragmentArray } from 'ember-data-model-fragments/attributes';
 import { A } from '@ember/array';
 
 const Validations = buildValidations({
@@ -68,7 +68,7 @@ const Validations = buildValidations({
       })
     })
   ],
-  publisher: [
+  'publisher.name': [
     validator('presence', {
       presence: true,
       disabled: computed('model.{mode,state}', function () {
@@ -173,7 +173,7 @@ export default Model.extend(Validations, {
   contentUrl: attr(),
   creators: fragmentArray('creator', { defaultValue: [] }),
   titles: fragmentArray('title', { defaultValue: [] }),
-  publisher: attr('string'),
+  publisher: fragment('publisher', { defaultValue: {} }),
   bcontainer: attr(),
   publicationYear: attr('number'),
   subjects: fragmentArray('subject', { defaultValue: [] }),

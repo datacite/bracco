@@ -1,0 +1,32 @@
+<div class="form-group {{if (v-get model 'publisher.name' 'isInvalid') 'has-error' 'has-feedback'}}">
+  <label class="control-label col-md-3 required-label">Publisher</label>
+  <div class="col-md-9 input-fragment">
+    <div class="label-vertical">The name of the entity that holds, archives, publishes prints, distributes, releases, issues, or produces the resource.</div>
+    <@form.element @controlType="power-select" data-test-doi-publisher @value={{fragment.name}} @options={{organizations}} as |el| >
+      <el.control
+        @onChange={{action "selectRor"}}
+        @search={{action "searchRor"}}
+        @placeholder="Select publisher"
+        @searchPlaceholder="Type to search..."
+        @allowClear={{true}}
+        @disabled={{disabled}}
+        @searchEnabled={{true}}
+        @onKeydown={{ action "createOnEnter" }}
+        @noMatchesMessage="Press ENTER to use own publisher."
+      as |item|>
+          {{if item.name item.name fragment.name}}
+        </el.control>
+    </@form.element>
+  </div>
+</div>
+
+{{#if fragment.publisherIdentifier}}
+  <div class="form-group required-nested-label">
+    <div class="col-md-9 col-md-offset-3 input-fragment">
+      <input type="text" class="form-control affiliation-identifier-field no-error no-success" value={{fragment.publisherIdentifier}} readonly="true"/>
+      <div class="help-block help-block-fragment affiliation-field">
+        Publisher names and identifiers are provided by the Research Organization Registry (ROR).
+      </div>
+    </div>
+  </div>
+{{/if}}

@@ -37,7 +37,9 @@ const relationTypeList = [
   'Is published in',
   'Is variant form of',
   'Is original form of',
-  'Is identical to'
+  'Is identical to',
+  'Is collected by',
+  'Collects'
 ];
 
 const relatedItemTypeList = [
@@ -53,6 +55,7 @@ const relatedItemTypeList = [
   'Dissertation',
   'Event',
   'Image',
+  'Instrument',
   'InteractiveResource',
   'Journal',
   'JournalArticle',
@@ -66,6 +69,7 @@ const relatedItemTypeList = [
   'Software',
   'Sound',
   'Standard',
+  'StudyRegistration',
   'Text',
   'Workflow',
   'Other'

@@ -102,7 +102,10 @@
   "schemaVersion": "http://datacite.org/schema/kernel-4",
   "publisher": {
     "@type": "Organization",
-    "name": "DataCite"
+    "name": "DataCite",
+    "publisherIdentifier": "https://ror.org/04z8jg394",
+    "publisherIdentifierScheme": "ROR",
+    "schemeURI": "https://ror.org/"
   },
   "funder": {
     "@id": "https://doi.org/10.13039/100000001",

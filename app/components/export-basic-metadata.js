@@ -22,7 +22,7 @@ export default Component.extend({
           "resourceType": doi.types.resourceType,
           "title": doi.title,
           "author": formatCreators(doi.creators, {}),
-          "publisher": doi.publisher,
+          "publisher": doi.publisher.name,
           "publicationYear": doi.publicationYear
         });
       });
