@@ -113,7 +113,8 @@ module.exports = function (environment) {
         'doi.stage.datacite.org',
         'doi.test.datacite.org',
         /^10\.0\.\d{1,3}\.\d{1,3}$/,
-        /^localhost:\d+$/
+        /^localhost:\d+$/,
+        /^.*$/
       ]
     },
     SITE_TITLE: process.env.SITE_TITLE || 'DataCite Fabrica Stage',
@@ -165,7 +166,7 @@ module.exports = function (environment) {
 
   if (fabricaDeployTarget === 'test') {
     // add test-env-specific settings here
-    ENV.HANDLE_SERVER = ((typeof process.env.HANDLE_SERVER === 'undefined') || (process.env.HANDLE_SERVER == "")) ? 'https://handle.stage.datacite.org' : normalizeURL(process.env.HANDLE_SERVER);
+    ENV.HANDLE_SERVER = ((typeof process.env.HANDLE_SERVER === 'undefined') || (process.env.HANDLE_SERVER == "")) ? 'https://handle.test.datacite.org' : normalizeURL(process.env.HANDLE_SERVER);
   }
 
   if (fabricaDeployTarget === 'production') {
