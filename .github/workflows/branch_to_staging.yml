@@ -43,6 +43,6 @@ jobs:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.ORG_ID}}
           vercel-project-id: ${{ secrets.PROJECT_ID}}
-          vercel-args: ${{ vars.VERCEL_NOCACHE  == 'true' && '--force' || '' }} --env HANDLE_SERVER='https://hannnnndles.stage.datacite.org'
+          vercel-args: ${{ vars.VERCEL_NOCACHE  == 'true' && '--force' || '' }} --env HANDLE_SERVER='https://hannnnndles.stage.datacite.org' --build-env HANDLE_SERVER='https://habbbbbbbdles.stage.datacite.org'
           scope: ${{ secrets.TEAM_ID}}
           vercel-project-name: 'bracco'
