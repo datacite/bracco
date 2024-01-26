@@ -23,7 +23,7 @@ jobs:
   deploy:
     needs: [call_build, ember_test, cypress_test]
     runs-on: ubuntu-latest
-    environment: bracco-preview
+    environment: vercel-bracco-preview
     env:
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
     steps:
