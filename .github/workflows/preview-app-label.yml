@@ -6,6 +6,7 @@ jobs:
   deploy:
     if: ${{ github.event.label.name == 'create preview app' }}
     runs-on: ubuntu-latest
+    environment: vercel-bracco-preview
     env:
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
     steps:
@@ -17,7 +18,7 @@ jobs:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.ORG_ID}}
           vercel-project-id: ${{ secrets.PROJECT_ID}}
-          vercel-args: ${{ vars.VERCEL_NOCACHE  == 'true' && '--force' || '' }}
+          vercel-args: ${{ vars.VERCEL_NOCACHE  == 'true' && '--force' || '' }}  --build-env HANDLE_SERVER=${{vars.HANDLE_SERVER}}
           scope: ${{ secrets.TEAM_ID}}
           vercel-project-name: 'bracco'
           github-comment: true
