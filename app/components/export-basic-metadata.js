@@ -1,6 +1,5 @@
 import Component from '@ember/component';
 import Papa from 'papaparse';
-import FileSaver from 'file-saver';
 import currentDate from '../utils/current-date';
 import formatCreators from '../utils/format-creators';
 
@@ -22,7 +21,7 @@ export default Component.extend({
           "resourceType": doi.types.resourceType,
           "title": doi.title,
           "author": formatCreators(doi.creators, {}),
-          "publisher": doi.publisher.name,
+          "publisher": doi.publisher ? doi.publisher.name : null,
           "publicationYear": doi.publicationYear
         });
       });
