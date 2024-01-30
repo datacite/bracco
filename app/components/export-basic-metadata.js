@@ -1,6 +1,5 @@
 import Component from '@ember/component';
 import Papa from 'papaparse';
-import FileSaver from 'file-saver';
 import currentDate from '../utils/current-date';
 import formatCreators from '../utils/format-creators';
 
