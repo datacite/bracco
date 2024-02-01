@@ -1,6 +1,10 @@
 /* eslint-env node */
 'use strict';
 
+function normalizeURL(val) {
+  return val.trim().replace(/\/$/, '');
+}
+
 module.exports = function (environment) {
   const pkg = require('../package.json');
 
@@ -74,7 +78,7 @@ module.exports = function (environment) {
           'https://63201db022924202b697e03bc5e0d0ba@o239790.ingest.sentry.io/1420435',
 
         disablePerformance: true,
-        environment: fabricaDeployTarget || "stage"
+        environment: fabricaDeployTarget || 'stage'
       }
     },
     'ember-cli-string-helpers': {
@@ -148,14 +152,21 @@ module.exports = function (environment) {
       // when it is created
     },
 
-    MIN_PREFIXES_AVAILABLE:  minPrefixesAvailable,
+    MIN_PREFIXES_AVAILABLE: minPrefixesAvailable,
     SHOW_N_PREFIXES: showNPrefixes,
-    MAX_MINT_FUTURE_OFFSET:  maxMintFutureOffset
+    MAX_MINT_FUTURE_OFFSET: maxMintFutureOffset,
+    HANDLE_SERVER: ((typeof process.env.HANDLE_SERVER === 'undefined') || (process.env.HANDLE_SERVER == "")) ? 'https://handle.stage.datacite.org' : normalizeURL(process.env.HANDLE_SERVER)
   };
 
   if (fabricaDeployTarget === 'stage') {
     // add staging-specific settings here
     ENV.COOKIE_DOMAIN = '.stage.datacite.org';
+    ENV.HANDLE_SERVER = ((typeof process.env.HANDLE_SERVER === 'undefined') || (process.env.HANDLE_SERVER == "")) ? 'https://handle.stage.datacite.org' : normalizeURL(process.env.HANDLE_SERVER);
+  }
+
+  if (fabricaDeployTarget === 'test') {
+    // add test-env-specific settings here
+    ENV.HANDLE_SERVER = ((typeof process.env.HANDLE_SERVER === 'undefined') || (process.env.HANDLE_SERVER == "")) ? 'https://handle.test.datacite.org' : normalizeURL(process.env.HANDLE_SERVER);
   }
 
   if (fabricaDeployTarget === 'production') {
@@ -169,6 +180,7 @@ module.exports = function (environment) {
     ENV.CDN_URL = 'https://assets.datacite.org';
     ENV.HOME_URL = 'https://datacite.org';
     ENV.COOKIE_DOMAIN = '.datacite.org';
+    ENV.HANDLE_SERVER = ((typeof process.env.HANDLE_SERVER === 'undefined') || (process.env.HANDLE_SERVER == "")) ? 'https://doi.org' : normalizeURL(process.env.HANDLE_SERVER);
   }
 
   // Environment named 'test' here is the ember environment, not related to fabrica environments.

@@ -212,11 +212,7 @@ export default Model.extend(Validations, {
   downloadCount: attr('number'),
 
   identifier: computed('doi', 'repository', function () {
-    if (ENV.API_URL == 'https://api.datacite.org') {
-      return 'https://doi.org/' + this.doi;
-    } else {
-      return 'https://handle.stage.datacite.org/' + this.doi;
-    }
+    return ENV.HANDLE_SERVER + '/' + this.doi;
   }),
   isDraft: equal('state', 'draft'),
   showCitation: reads('registered'),
