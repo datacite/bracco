@@ -26,7 +26,8 @@ module.exports = function (defaults) {
       bootstrapVersion: 3
     },
     'ember-cli-terser': {
-      enabled: true
+      //enabled: true
+      enabled: false
     },
     'ember-prism': {
       theme: 'default',
