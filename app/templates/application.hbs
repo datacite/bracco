@@ -1,10 +1,12 @@
-<WhileLoading>
-  <BsProgress as |pg|>
-    <pg.bar @value={{random-number 90}} @type="info" />
-  </BsProgress>
-</WhileLoading>
+<div class="ember-view">
+  <WhileLoading>
+    <BsProgress as |pg|>
+      <pg.bar @value={{random-number 90}} @type="info" />
+    </BsProgress>
+  </WhileLoading>
 
-<HeadLayout />
-{{outlet}}
+  <HeadLayout />
+  {{outlet}}
 
-<ApplicationFooter @model={{model}} />
+  <ApplicationFooter @model={{model}} />
+</div>
