@@ -6,98 +6,94 @@ import { inject as service } from '@ember/service';
 const data = {
   about_links: [
     {
-      name: 'What we do',
-      url: ENV.LINKS.WHAT_WE_DO_URL,
+      name: ENV.FOOTER_LINKS.WHAT_WE_DO.NAME,
+      url: ENV.FOOTER_LINKS.WHAT_WE_DO.URL
     },
     {
-      name: 'Governance',
-      url: ENV.LINKS.GOVERNANCE_URL,
+      name: ENV.FOOTER_LINKS.GOVERNANCE.NAME,
+      url: ENV.FOOTER_LINKS.GOVERNANCE.URL
     },
     {
-      name: 'Members',
-      url: ENV.LINKS.MEMBERS_URL,
+      name: ENV.FOOTER_LINKS.STEERING_AND_WORKING_GROUPS.NAME,
+      url: ENV.FOOTER_LINKS.STEERING_AND_WORKING_GROUPS.URL
     },
     {
-      name: 'Steering groups',
-      url: ENV.LINKS.STEERING_URL,
+      name: ENV.FOOTER_LINKS.TEAM.NAME,
+      url: ENV.FOOTER_LINKS.TEAM.URL
     },
     {
-      name: 'Staff',
-      url: ENV.LINKS.STAFF,
+      name: ENV.FOOTER_LINKS.JOB_OPPORTUNITIES.NAME,
+      url: ENV.FOOTER_LINKS.JOB_OPPORTUNITIES.URL
     },
     {
-      name: 'Job opportunities',
-      url: ENV.LINKS.JOB_OPPORTUNITIES_URL,
-    },
+      name: ENV.FOOTER_LINKS.PROJECTS.NAME,
+      url: ENV.FOOTER_LINKS.PROJECTS.URL
+    }
   ],
-  services_links: [
+  work_with_us_links: [
     {
-      name: 'Create DOIs with Fabrica',
-      url: ENV.FABRICA_URL,
+      name: ENV.FOOTER_LINKS.CREATE_DOIS.NAME,
+      url: ENV.FOOTER_LINKS.CREATE_DOIS.URL
     },
     {
-      name: 'Discover metadata with Commons',
-      url: ENV.LINKS.COMMONS_URL,
+      name: ENV.FOOTER_LINKS.INTEGRATE_WORKFLOWS.NAME,
+      url: ENV.FOOTER_LINKS.INTEGRATE_WORKFLOWS.URL
     },
     {
-      name: 'Integrate with APIs',
-      url: ENV.LINKS.INTEGRATOR_URL,
+      name: ENV.FOOTER_LINKS.ENABLE_DISCOVERY.NAME,
+      url: ENV.FOOTER_LINKS.ENABLE_DISCOVERY.URL
     },
     {
-      name: 'Partner Services',
-      url: ENV.LINKS.PARTNER_SERVICES_URL,
+      name: ENV.FOOTER_LINKS.PROMOTE_REUSE.NAME,
+      url: ENV.FOOTER_LINKS.PROMOTE_REUSE.URL
+    },
+    {
+      name: ENV.FOOTER_LINKS.STRATEGIC_INITIATIVES.NAME,
+      url: ENV.FOOTER_LINKS.STRATEGIC_INITIATIVES.URL
+    }
+  ],
+  membership_links: [
+    {
+      name: ENV.FOOTER_LINKS.BECOME_A_MEMBER.NAME,
+      url: ENV.FOOTER_LINKS.BECOME_A_MEMBER.URL
+    },
+    {
+      name: ENV.FOOTER_LINKS.DATACITE_FEE_MODEL.NAME,
+      url: ENV.FOOTER_LINKS.DATACITE_FEE_MODEL.URL
+    },
+    {
+      name: ENV.FOOTER_LINKS.MEMBERSHIP_ENQUIRY.NAME,
+      url: ENV.FOOTER_LINKS.MEMBERSHIP_ENQUIRY.URL
+    },
+    {
+      name: ENV.FOOTER_LINKS.DATACITE_MEMBERS.NAME,
+      url: ENV.FOOTER_LINKS.DATACITE_MEMBERS.URL
     }
   ],
   resources_links: [
     {
-      name: 'Metadata schema',
-      url: ENV.LINKS.METADATA_SCHEMA_URL,
+      name: ENV.FOOTER_LINKS.METADATA_SCHEMA.NAME,
+      url: ENV.FOOTER_LINKS.METADATA_SCHEMA.URL
     },
     {
-      name: 'Support',
-      url: ENV.LINKS.SUPPORT_URL,
-    },
-    {
-      name: 'Fee Model',
-      url: ENV.LINKS.FEE_MODEL_URL,
-    },
-  ],
-  community_links: [
-    {
-      name: 'Members',
-      url: ENV.LINKS.MEMBERS_URL,
-    },
-    {
-      name: 'Partners',
-      url: ENV.LINKS.PARTNERS_URL,
-    },
-    {
-      name: 'Steering groups',
-      url: ENV.LINKS.STEERING_URL,
-    },
-    {
-      name: 'Service providers',
-      url: ENV.LINKS.SERVICE_PROVIDERS_URL,
-    },
-    {
-      name: 'Roadmap',
-      url: ENV.LINKS.ROADMAP_URL,
-    },
+      name: ENV.FOOTER_LINKS.DATACITE_MEMBERS.NAME,
+      url: ENV.FOOTER_LINKS.DATACITE_MEMBERS.URL
+    }
   ],
   contact_links: [
     {
-      name: 'Imprint',
-      url: ENV.LINKS.IMPRINT_URL,
+      name: ENV.FOOTER_LINKS.PRIVACY_POLICY.NAME,
+      url: ENV.FOOTER_LINKS.PRIVACY_POLICY.URL
     },
     {
-      name: 'Terms and conditions',
-      url: ENV.LINKS.TERMS_AND_CONDITIONS_URL,
+      name: ENV.FOOTER_LINKS.TERMS_AND_CONDITIONS.NAME,
+      url: ENV.FOOTER_LINKS.TERMS_AND_CONDITIONS.URL
     },
     {
-      name: 'Privacy policy',
-      url: ENV.LINKS.PRIVACY_POLICY_URL,
-    },
-  ],
+      name: ENV.FOOTER_LINKS.IMPRINT.NAME,
+      url: ENV.FOOTER_LINKS.IMPRINT.URL
+    }
+  ]
 };
 
 export default Component.extend({

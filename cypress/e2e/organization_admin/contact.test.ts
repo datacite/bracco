@@ -156,7 +156,7 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | CONTACTS', () => {
 
       cy.get('.alert-warning').contains(/The contact entered may receive notifications/i)
         .within(() => {
-          cy.get('a[href*="privacy.html"]').should('be.visible');
+          cy.get('a[href*="privacy-policy"]').should('be.visible');
         }
       );
 

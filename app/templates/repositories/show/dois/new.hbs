@@ -28,16 +28,8 @@
 
       <DoiCreators @model={{model.doi}} @form={{form}} />
       <DoiTitles @model={{model.doi}} @form={{form}} />
+      <DoiPublisher @model={{model.doi}} @form={{form}} @fragment={{model.doi.publisher}} />
 
-      <div class="form-group required-nested-label {{if (v-get model.doi 'publisher' 'isInvalid') 'has-error' 'has-feedback'}}">
-        <label class="control-label col-md-3">Publisher</label>
-        <div class="col-md-9 input-fragment">
-          <div class="label-vertical">The name of the entity that holds, archives, publishes prints, distributes, releases, issues, or produces the resource.</div>
-          <form.element id="publisher" @controlType="text" @property="publisher" @helpText="This property will be used to formulate the citation, so consider the prominence of the role."  as |el| >
-            <el.control id="publisher-field" placeholder="Publisher" />
-          </form.element>
-        </div>
-      </div>
       <div class="form-group required-nested-label {{if (v-get model.doi 'publicationYear' 'isInvalid') 'has-error' 'has-feedback'}}">
         <label class="control-label col-md-3">Publication Year</label>
         <div class="col-md-9 input-fragment">

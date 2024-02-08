@@ -3,7 +3,7 @@ import { equal, reads } from '@ember/object/computed';
 import { validator, buildValidations } from 'ember-cp-validations';
 import ENV from 'bracco/config/environment';
 import Model, { attr, belongsTo } from '@ember-data/model';
-import { fragmentArray, array } from 'ember-data-model-fragments/attributes';
+import { fragment, fragmentArray } from 'ember-data-model-fragments/attributes';
 import { A } from '@ember/array';
 
 const Validations = buildValidations({
@@ -68,7 +68,7 @@ const Validations = buildValidations({
       })
     })
   ],
-  publisher: [
+  'publisher.name': [
     validator('presence', {
       presence: true,
       disabled: computed('model.{mode,state}', function () {
@@ -90,10 +90,9 @@ const Validations = buildValidations({
       })
     }),
     validator('date', {
-      //after: '999',
-      after: '999',
-      before: computed('model.maxMintFutureOffset', function () {
-        let mydate =  (new Date().getFullYear() + Number(this.model.get('maxMintFutureOffset')) + 1).toString();
+      onOrAfter: '1000',
+      onOrBefore: computed('model.maxMintFutureOffset', function () {
+        let mydate = (new Date().getFullYear() + Number(this.model.get('maxMintFutureOffset'))).toString();
         return mydate;
       }),
       precision: 'year',
@@ -174,7 +173,7 @@ export default Model.extend(Validations, {
   contentUrl: attr(),
   creators: fragmentArray('creator', { defaultValue: [] }),
   titles: fragmentArray('title', { defaultValue: [] }),
-  publisher: attr('string'),
+  publisher: fragment('publisher', { defaultValue: {} }),
   bcontainer: attr(),
   publicationYear: attr('number'),
   subjects: fragmentArray('subject', { defaultValue: [] }),
@@ -213,11 +212,7 @@ export default Model.extend(Validations, {
   downloadCount: attr('number'),
 
   identifier: computed('doi', 'repository', function () {
-    if (ENV.API_URL == 'https://api.datacite.org') {
-      return 'https://doi.org/' + this.doi;
-    } else {
-      return 'https://handle.stage.datacite.org/' + this.doi;
-    }
+    return ENV.HANDLE_SERVER + '/' + this.doi;
   }),
   isDraft: equal('state', 'draft'),
   showCitation: reads('registered'),

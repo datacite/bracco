@@ -17,7 +17,13 @@ FactoryGuy.define('doi', {
     geoLocations: FactoryGuy.hasMany('geoLocation'),
     subjects: FactoryGuy.hasMany('subject'),
     relatedItems: FactoryGuy.hasMany('relatedItem'),
-    publisher: 'Royal Society of Chemistry',
+    publisher: {
+      lang: 'en',
+      name: 'Royal Society of Chemistry',
+      publisherIdentifier: 'https://ror.org/04z8jg394',
+      publisherIdentifierScheme: 'ROR',
+      schemeUri: 'https://ror.org/'
+    },
     types: {
       resourceTypeGeneral: 'Dataset',
       resourceType: 'Substance',
@@ -92,6 +98,7 @@ FactoryGuy.define('geoLocation', {
 
 FactoryGuy.define('subject', {
   default: {
+    lang: 'en',
     subject: 'Clinical medicine',
     subjectScheme: 'Fields of Science and Technology (FOS)',
     schemeUri: 'http://www.oecd.org/science/inno/38235147.pdf',
@@ -132,6 +139,7 @@ FactoryGuy.define('fundingReference', {
 
 FactoryGuy.define('rights', {
   default: {
+    lang: 'en',
     rights: 'Creative Commons Attribution 3.0 Unported',
     rightsUri: 'http://creativecommons.org/licenses/by/3.0/de/deed.en',
     rightsIdentifier: ' CC-BY-3.0',

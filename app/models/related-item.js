@@ -95,7 +95,7 @@ export default Fragment.extend(Validations, {
   contributors: fragmentArray('related-item-contributor', { defaultValue: [] }),
   firstPage: attr('string', { defaultValue: null }),
   lastPage: attr('string', { defaultValue: null }),
-  publisher: attr('string', { defaultValue: null }),
+  publisher: fragment('publisher'),
   edition: attr('string', { defaultValue: null }),
 
   title: computed('titles.@each.title', function () {

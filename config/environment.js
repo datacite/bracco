@@ -1,8 +1,55 @@
 /* eslint-env node */
 'use strict';
 
+function normalizeURL(val) {
+  return val.trim().replace(/\/$/, '');
+}
+
 module.exports = function (environment) {
   const pkg = require('../package.json');
+
+  const links = {
+    MAIL_URL: 'mailto:support@datacite.org',
+    BLOG_URL: 'https://blog.datacite.org',
+    GITHUB_URL: 'https://github.com/datacite/datacite',
+    TWITTER_URL: 'https://twitter.com/datacite',
+    MASTODON_URL: 'https://openbiblio.social/@datacite',
+    LINKEDIN_URL: 'https://www.linkedin.com/company/datacite',
+    YOUTUBE_URL: 'https://www.youtube.com/channel/UCVsSDZhIN_WbnD_v5o9eB_A',
+    CREATE_A_FABRICA_ACCOUNT_URL: 'https://support.datacite.org/docs/create-a-fabrica-account',      
+    FEE_MODEL_URL: 'https://datacite.org/fee-model',
+    PRIVACY_POLICY_URL: 'https://datacite.org/privacy-policy',
+    STATUS_URL: 'https://status.datacite.org',
+    SUPPORT_URL: 'https://support.datacite.org',
+    API_DOC_URL: 'https://api.datacite.org',
+    MDS_DOC_URL: 'https://mds.datacite.org',
+    OAI_DOC_URL: 'https://oai.datacite.org',
+    GRAPHQL_TOOL_URL: 'https://api.datacite.org/graphql',
+    FABRICA_DOC_URL: 'https://support.datacite.org/docs/doi-fabrica'
+  };
+
+  const footer_links = {
+    WHAT_WE_DO: { NAME: 'What we do', URL: 'https://datacite.org/what-we-do/' },
+    GOVERNANCE: { NAME: 'Governance', URL: 'https://datacite.org/governance/' },
+    STEERING_AND_WORKING_GROUPS: { NAME: 'Steering and Working Groups', URL: 'https://datacite.org/#' },
+    TEAM: { NAME: 'Team', URL: 'https://datacite.org/team/' },
+    JOB_OPPORTUNITIES: { NAME: 'Job Opportunities', URL: 'https://datacite.org/job-opportunities/' },
+    PROJECTS: { NAME: 'Projects', URL: 'https://datacite.org/projects/' },
+    CREATE_DOIS: { NAME: 'Create DOIs', URL: 'https://datacite.org/create-dois/' },
+    INTEGRATE_WORKFLOWS: { NAME: 'Integrate Workflows', URL: 'https://datacite.org/integrate-workflows/' },
+    ENABLE_DISCOVERY: { NAME: 'Enable Discovery', URL: 'https://datacite.org/enable-discovery/' },
+    PROMOTE_REUSE: { NAME: 'Promote Reuse', URL: 'https://datacite.org/promote-reuse/' },
+    STRATEGIC_INITIATIVES: { NAME: 'Strategic Initiatives', URL: 'https://datacite.org/#' },
+    BECOME_A_MEMBER: { NAME: 'Become a Member', URL: 'https://datacite.org/become-a-member/' },
+    DATACITE_FEE_MODEL: { NAME: 'DataCite Fee Model', URL: links.FEE_MODEL },
+    MEMBERSHIP_ENQUIRY: { NAME: 'Membership Enquiry', URL: 'https://datacite.org/membership-enquiry/' },
+    DATACITE_MEMBERS: { NAME: 'DataCite Members', URL: 'https://datacite.org/members/' },
+    METADATA_SCHEMA: { NAME: 'Metadata Schema', URL: 'https://schema.datacite.org/' },
+    SUPPORT: { NAME: 'Support', URL: links.SUPPORT_URL },
+    PRIVACY_POLICY: { NAME: 'Privacy Policy', URL: links.PRIVACY_POLICY_URL },
+    TERMS_AND_CONDITIONS: { NAME: 'Terms and Conditions', URL: 'https://datacite.org/terms-and-conditions/' },
+    IMPRINT: { NAME: 'Imprint', URL: 'https://datacite.org/imprint/' }
+  };
 
   // Determines the deployment target for fabrica i.e. the different versions doi.datacite.org/doi.test.datacite.org/doi.stage.datacite.org/
   let fabricaDeployTarget = process.env.FABRICA_DEPLOY_TARGET;
@@ -31,7 +78,7 @@ module.exports = function (environment) {
           'https://63201db022924202b697e03bc5e0d0ba@o239790.ingest.sentry.io/1420435',
 
         disablePerformance: true,
-        environment: fabricaDeployTarget || "stage"
+        environment: fabricaDeployTarget || 'stage'
       }
     },
     'ember-cli-string-helpers': {
@@ -69,10 +116,9 @@ module.exports = function (environment) {
         /^localhost:\d+$/
       ]
     },
-
     SITE_TITLE: process.env.SITE_TITLE || 'DataCite Fabrica Stage',
     NAVMENU_TITLE: process.env.NAVMENU_TITLE,
-    SEARCH_URL: process.env.SEARCH_URL || 'https://search.stage.datacite.org',
+    SEARCH_URL: process.env.SEARCH_URL || 'https://commons.stage.datacite.org',
     ORCID_URL: process.env.ORCID_URL || 'https://orcid.org',
     API_URL: process.env.API_URL || 'https://api.stage.datacite.org',
     FABRICA_URL: process.env.FABRICA_URL || 'https://doi.stage.datacite.org',
@@ -83,38 +129,8 @@ module.exports = function (environment) {
     CDN_URL: process.env.CDN_URL || 'https://assets.stage.datacite.org',
     HOME_URL: process.env.HOME_URL || 'https://www.stage.datacite.org',
     // informational links - mostly to the home page, collected here for easier maintenance.
-    LINKS: {
-      BLOG_URL: 'https://blog.datacite.org',
-      COMMONS_URL: 'https://commons.datacite.org',
-      CREATE_A_FABRICA_ACCOUNT_URL: 'https://support.datacite.org/docs/create-a-fabrica-account',
-      FEE_MODEL_URL: 'https://datacite.org/feemodel.html',
-      GITHUB_URL: 'https://github.com/datacite/datacite',
-      GOVERNANCE_URL: 'https://datacite.org/governance.html',
-      IMPRINT_URL: 'https://www.stage.datacite.org/imprint.html',
-      INTEGRATOR_URL: 'https://datacite.org/integratorapis.html',
-      JOB_OPPORTUNITIES_URL: 'https://datacite.org/jobopportunities.html',
-      LINKEDIN_URL: 'https://www.linkedin.com/company/datacite',
-      MEMBERS_URL: 'https://datacite.org/members.html',
-      METADATA_SCHEMA_URL: 'https://schema.datacite.org',
-      PARTNERS_URL: 'https://datacite.org/partners.html',
-      PARTNER_SERVICES_URL: 'https://datacite.org/partnerservices.html',
-      PRIVACY_POLICY_URL: 'https://datacite.org/privacy.html',
-      ROADMAP_URL: 'https://datacite.org/roadmap.html',
-      SERVICE_PROVIDERS_URL: 'https://datacite.org/service-providers.html',
-      STAFF: 'https://datacite.org/staff.html',
-      STATUS_URL: 'https://status.datacite.org',
-      STEERING_URL: 'https://datacite.org/steering.html',
-      SUPPORT_URL: 'https://support.datacite.org',
-      TERMS_AND_CONDITIONS_URL: 'https://datacite.org/terms.html',
-      TWITTER_URL: 'https://twitter.com/datacite',
-      WHAT_WE_DO_URL: 'https://datacite.org/value.html',
-      YOUTUBE_URL: 'https://www.youtube.com/channel/UCVsSDZhIN_WbnD_v5o9eB_A',
-      API_DOC_URL: 'https://api.datacite.org',
-      MDS_DOC_URL: 'https://mds.datacite.org',
-      OAI_DOC_URL: 'https://oai.datacite.org',
-      GRAPHQL_TOOL_URL: 'https://api.datacite.org/graphql',
-      FABRICA_DOC_URL: 'https://support.datacite.org/docs/doi-fabrica',
-    },
+    FOOTER_LINKS: footer_links,
+    LINKS: links,
     JWT_PUBLIC_KEY:
       process.env.JWT_PUBLIC_KEY ||
       '-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA22lpr1ntJQYKa+aCRjre\nPKTze/00S0SCdsWKhvk3honfjdebuxc54YdvfqKQk/1jLOPJj++vqIGwytKRI9uC\n1BmMRLrOluACiOgTc5DpzMm68lZss5D5g7tzjxB7NlFiKiYav1BtVDfvVxwuNqkY\njyNupf1Gjqp2/8wbsZ6SGIkzgovgjcHI5S8HZ7DE7rcrStISNJqTvpuMUXp++eie\nPkTgcrdZScKjO6VYu9epuhoyD2mbZdjAUbxYyjQ3vgftseLo4hXFEXpfIQzwxOLS\njmg1S/qxOzZHOMrp31pS1ricMtd4frvXztHPfh5XuyiOEozR0An9OIIwzKQsn+0q\np5QKfN+lHJflYGZ1TD8QruinWf8a5uWYd3q9c1V8RYgwgmfoxgHX5TmMbcQsBTuB\nyIy3io3rBiRnJEAgSu4PxNuQqVqqsaJ4cCmQrATLViZmXhZcbHJyWl3GJnZMpv8P\nor6m239QGZdoy5ijoOdVLQowtnsr+SWWrcYKF4J66223xjGBse7o3Q+gJUkyQKtB\nLifDld9XMTpgvEsZtZKEQ9S5gAWkiAzcjSMV0J4XMOzvHAalyNTucLc6ljG8HnjO\n34SrkvkkTlUwNsJOygRNJQujfQaStvb3MTagSqPteGhy9qSitSJPrDmN/W79stIe\nSvqHoJznDJsFfKUcypEG4l0CAwEAAQ==\n-----END PUBLIC KEY-----\n',
@@ -136,14 +152,21 @@ module.exports = function (environment) {
       // when it is created
     },
 
-    MIN_PREFIXES_AVAILABLE:  minPrefixesAvailable,
+    MIN_PREFIXES_AVAILABLE: minPrefixesAvailable,
     SHOW_N_PREFIXES: showNPrefixes,
-    MAX_MINT_FUTURE_OFFSET:  maxMintFutureOffset
+    MAX_MINT_FUTURE_OFFSET: maxMintFutureOffset,
+    HANDLE_SERVER: ((typeof process.env.HANDLE_SERVER === 'undefined') || (process.env.HANDLE_SERVER == "")) ? 'https://handle.stage.datacite.org' : normalizeURL(process.env.HANDLE_SERVER)
   };
 
   if (fabricaDeployTarget === 'stage') {
     // add staging-specific settings here
     ENV.COOKIE_DOMAIN = '.stage.datacite.org';
+    ENV.HANDLE_SERVER = ((typeof process.env.HANDLE_SERVER === 'undefined') || (process.env.HANDLE_SERVER == "")) ? 'https://handle.stage.datacite.org' : normalizeURL(process.env.HANDLE_SERVER);
+  }
+
+  if (fabricaDeployTarget === 'test') {
+    // add test-env-specific settings here
+    ENV.HANDLE_SERVER = ((typeof process.env.HANDLE_SERVER === 'undefined') || (process.env.HANDLE_SERVER == "")) ? 'https://handle.test.datacite.org' : normalizeURL(process.env.HANDLE_SERVER);
   }
 
   if (fabricaDeployTarget === 'production') {
@@ -157,6 +180,7 @@ module.exports = function (environment) {
     ENV.CDN_URL = 'https://assets.datacite.org';
     ENV.HOME_URL = 'https://datacite.org';
     ENV.COOKIE_DOMAIN = '.datacite.org';
+    ENV.HANDLE_SERVER = ((typeof process.env.HANDLE_SERVER === 'undefined') || (process.env.HANDLE_SERVER == "")) ? 'https://doi.org' : normalizeURL(process.env.HANDLE_SERVER);
   }
 
   // Environment named 'test' here is the ember environment, not related to fabrica environments.

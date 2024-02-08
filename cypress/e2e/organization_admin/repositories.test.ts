@@ -189,7 +189,7 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | REPOSITORIES', () => {
 
       cy.get('.alert').contains(/The contacts entered may receive notifications/i)
         .within(() => {
-          cy.get('a[href*="privacy.html"]').should('be.visible');
+          cy.get('a[href*="privacy-policy"]').should('be.visible');
         }
       );
       cy.get('.alert').contains(/To save this repository, first resolve the errors with these fields:/i)

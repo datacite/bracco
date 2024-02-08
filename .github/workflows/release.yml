@@ -1,0 +1,78 @@
+name: Deploy to Test and Production
+on:
+  release:
+    types: [published]
+
+jobs:
+  call_build:
+    name: Build
+    uses: ./.github/workflows/build.yml
+    secrets: inherit
+
+  ember_test:
+    name: Ember Testing
+    needs: call_build
+    uses: ./.github/workflows/ember_test.yml
+    secrets: inherit
+
+  cypress_test:
+    name: Cypress Testing
+    needs: call_build
+    uses: ./.github/workflows/cypress_test.yml
+    secrets: inherit
+
+  deploy-to-production:
+    needs: [call_build, ember_test, cypress_test]
+    runs-on: ubuntu-latest
+    environment: vercel-bracco-production
+    env:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Extract variables
+        shell: bash
+        run: |
+          echo "BRANCH=$(echo ${GITHUB_REF#refs/heads/} | sed 's/\//_/g')" >> $GITHUB_OUTPUT
+          echo "GIT_SHA=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
+          echo "GIT_SHA_SHORT=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+        id: extract_variables
+
+      - name: Vercel deploy production
+        uses: amondnet/vercel-action@v25.1.1
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.ORG_ID}}
+          vercel-project-id: ${{ secrets.PROJECT_ID}}
+          vercel-args: ${{ vars.VERCEL_NOCACHE  == 'true' && '--prod --force' || '--prod' }}  --build-env HANDLE_SERVER=${{vars.HANDLE_SERVER}}
+          scope: ${{ secrets.TEAM_ID}}
+          vercel-project-name: 'bracco'
+
+  deploy-to-test:
+    needs: [call_build, ember_test, cypress_test]
+    runs-on: ubuntu-latest
+    environment: vercel-bracco-test
+    env:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Extract variables
+        shell: bash
+        run: |
+          echo "BRANCH=$(echo ${GITHUB_REF#refs/heads/} | sed 's/\//_/g')" >> $GITHUB_OUTPUT
+          echo "GIT_SHA=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
+          echo "GIT_SHA_SHORT=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+        id: extract_variables
+
+      - name: Vercel deploy test
+        uses: amondnet/vercel-action@v25.1.1
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.ORG_ID}}
+          vercel-project-id: ${{ secrets.TEST_PROJECT_ID}}
+          vercel-args: ${{ vars.VERCEL_NOCACHE  == 'true' && '--prod --force' || '--prod' }} --build-env HANDLE_SERVER=${{vars.HANDLE_SERVER}}
+          scope: ${{ secrets.TEAM_ID}}
+          vercel-project-name: 'bracco-test'

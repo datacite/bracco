@@ -29,7 +29,8 @@ module.exports = function () {
       'ENABLE_DOI_ESTIMATE',
       'MIN_PREFIXES_AVAILABLE',
       'MAX_MINT_FUTURE_OFFSET',
-      'SHOW_N_PREFIXES'
+      'SHOW_N_PREFIXES',
+      'HANDLE_SERVER'
     ],
     fastbootAllowedKeys: [
       'SITE_TITLE',
@@ -60,7 +61,8 @@ module.exports = function () {
       'ENABLE_DOI_ESTIMATE',
       'MIN_PREFIXES_AVAILABLE',
       'MAX_MINT_FUTURE_OFFSET',
-      'SHOW_N_PREFIXES'
+      'SHOW_N_PREFIXES',
+      'HANDLE_SERVER'
     ],
     failOnMissingKey: false
   };

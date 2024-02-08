@@ -1,0 +1,32 @@
+name: Vercel preview apps on label
+on:
+  pull_request:
+    types: [labeled]
+jobs:
+  deploy:
+    if: ${{ github.event.label.name == 'create preview app' }}
+    runs-on: ubuntu-latest
+    environment: vercel-bracco-preview
+    env:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Vercel deploy
+        uses: amondnet/vercel-action@v25.1.1
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.ORG_ID}}
+          vercel-project-id: ${{ secrets.PROJECT_ID}}
+          vercel-args: ${{ vars.VERCEL_NOCACHE  == 'true' && '--force' || '' }}  --build-env HANDLE_SERVER=${{vars.HANDLE_SERVER}}
+          scope: ${{ secrets.TEAM_ID}}
+          vercel-project-name: 'bracco'
+          github-comment: true
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-deployment: true
+      - name: Remove label
+        uses: fastruby/pr-unlabeler@v1
+        with:
+          label-to-remove: "create preview app"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

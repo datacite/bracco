@@ -13,7 +13,8 @@ export default Route.extend({
       .findRecord('doi', id, {
         include: 'client',
         adapterOptions: {
-          affiliation: true
+          affiliation: true,
+          publisher: true
         }
       })
       .then(function (doi) {
@@ -24,8 +25,12 @@ export default Route.extend({
           self
             .get('flashMessages')
             .warning(
-              'Using the Form would update this DOI to the latest schema version.'
+              'Using the Form would update this DOI to the latest schema version.',
+              { destroyOnClick: false }
             );
+        }
+        if (!doi.publisher) {
+          doi.publisher = {};
         }
         return doi;
       })

@@ -41,7 +41,12 @@
       "titleType": "Subtitle"
     }
   ],
-  "publisher": "DataCite",
+  "publisher": {
+    "name": "DataCite",
+    "publisherIdentifier": "https://ror.org/04z8jg394",
+    "publisherIdentifierScheme": "ROR",
+    "schemeURI": "https://ror.org/"
+  },
   "container": {},
   "subjects": [
     {

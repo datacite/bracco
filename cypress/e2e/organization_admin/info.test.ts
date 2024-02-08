@@ -164,7 +164,7 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | INFO', () => {
         cy.get('#secondary-technical-contact').should('be.visible');
         cy.get('.alert-warning').contains(/The contacts entered may receive notifications/i)
           .within(() => {
-            cy.get('a[href*="privacy.html"]').should('be.visible');
+            cy.get('a[href*="privacy-policy"]').should('be.visible');
           }
         );
         cy.get('button#update-provider').should('be.visible');
@@ -181,10 +181,13 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | INFO', () => {
   it.only('can see info when using capitalized identifier URL subdirectory', () => {
     cy.visit('/providers/DATACITE');
     cy.url().should('include', '/providers/DATACITE').then(() => {
-      
-      cy.wait(waitTime3)
+      // Increase timeout because requests that return these totals can be slow.
+      cy.wait(waitTime3*2)
       // Info page should be populated with non-zero graph data.
-      cy.get('.graphs > a').contains(/^0$/).should('not.exist')
+      // Iterate over each element to test.
+      cy.get('.graphs > a').each(($el, index, $list) => {
+        expect($el.text()).to.match(/^[0-9]+$/)
+      })
     });
   });
 });

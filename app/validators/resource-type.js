@@ -16,6 +16,7 @@ const ResourceType = BaseValidator.extend({
       'Dissertation',
       'Event',
       'Image',
+      'Instrument',
       'InteractiveResource',
       'Journal',
       'JournalArticle',
@@ -29,6 +30,7 @@ const ResourceType = BaseValidator.extend({
       'Software',
       'Sound',
       'Standard',
+      'StudyRegistration', 
       'Text',
       'Workflow',
       'Other'
