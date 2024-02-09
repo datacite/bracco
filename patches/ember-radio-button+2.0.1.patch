@@ -1,0 +1,10 @@
+diff --git a/node_modules/ember-radio-button/addon/templates/components/radio-button.hbs b/node_modules/ember-radio-button/addon/templates/components/radio-button.hbs
+index a50d346..62d60f9 100644
+--- a/node_modules/ember-radio-button/addon/templates/components/radio-button.hbs
++++ b/node_modules/ember-radio-button/addon/templates/components/radio-button.hbs
+@@ -1,4 +1,4 @@
+-{{#if hasBlock}}
++{{#if (has-block)}}
+   <label class="ember-radio-button {{if checked checkedClass}} {{joinedClassNames}}" for={{radioId}}>
+     {{radio-button-input
+         class=radioClass
