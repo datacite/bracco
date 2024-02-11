@@ -1,38 +1,38 @@
 <BsNavbar
-  @type={{type}}
+  @type={{this.type}}
   @fluid={{true}}
-  @collapsed={{collapsed}}
+  @collapsed={{this.collapsed}}
   @onCollapse={{action (mut collapsed) true}}
   @onExpand={{action (mut collapsed) false}} as |navbar|
 >
   <div class="navbar-header">
     {{navbar.toggle}}
     <a href="/" class="navbar-brand">
-      {{#if showLogo}}<img src="/assets/images/fabrica-logo.svg" height="50" class="fabrica-logo"/>
-      {{else}}{{title}}
+      {{#if this.showLogo}}<img src="/assets/images/fabrica-logo.svg" height="50" class="fabrica-logo"/>
+      {{else}}{{this.title}}
       {{/if}}
     </a>
   </div>
   <navbar.content>
-    <navbar.nav class="navbar-right {{navBgColor}}" as |nav|>
+    <navbar.nav class="navbar-right {{this.navBgColor}}" as |nav|>
       <nav.item>
-        <LinkTo @route="about" @id="about" class="{{navButtonColor}}">
+        <LinkTo @route="about" @id="about" class="{{this.navButtonColor}}">
           About
         </LinkTo>
       </nav.item>
       <nav.item>
-        <a target="_blank" rel="noopener" href={{get (links) "SUPPORT_URL" }} class="{{navButtonColor}}">
+        <a target="_blank" rel="noopener" href={{get (links) "SUPPORT_URL" }} class="{{this.navButtonColor}}">
           Support
         </a>
       </nav.item>
-      {{#if user}}
-        {{#if session.isAuthenticated}}
+      {{#if this.user}}
+        {{#if this.session.isAuthenticated}}
           <nav.dropdown as |dd|>
-            <dd.toggle id="account_menu_link" class="{{navButtonColor}}">
-              {{#if currentUser.isUser}}
+            <dd.toggle id="account_menu_link" class="{{this.navButtonColor}}">
+              {{#if this.currentUser.isUser}}
                 {{currentUser.name}}
               {{else}}
-                {{uppercase currentUser.uid}}
+                {{uppercase this.currentUser.uid}}
               {{/if}}
               <span class="caret"></span>
             </dd.toggle>

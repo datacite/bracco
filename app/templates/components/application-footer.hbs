@@ -2,17 +2,17 @@
   <div class="container-fluid">
     <div class='col-md-3 col-sm-4 footer-column'>
       <h4>About Us</h4>
-      <ListLinks @links={{data.about_links}} />
+      <ListLinks @links={{this.data.about_links}} />
     </div>
     <div class='col-md-3 col-sm-4 footer-column'>
       <h4>Work With Us</h4>
-      <ListLinks @links={{data.work_with_us_links}} />
+      <ListLinks @links={{this.data.work_with_us_links}} />
     </div>
     <div class='col-md-3 col-sm-4 footer-column'>
       <h4>Membership</h4>
-      <ListLinks @links={{data.membership_links}} />
+      <ListLinks @links={{this.data.membership_links}} />
       <h4>Resources</h4>
-      <ListLinks @links={{data.resources_links}} />
+      <ListLinks @links={{this.data.resources_links}} />
     </div>
     <div class='col-md-3 footer-column'>
       <h4 class="share">Contact us</h4>
@@ -37,7 +37,7 @@
       <a href={{get (links) 'YOUTUBE_URL'}} class="share">
         <i class="fab fa-youtube"></i>
       </a>
-      <ListLinks @links={{data.contact_links}} @class="share" />
+      <ListLinks @links={{this.data.contact_links}} @class="share" />
       <FooterStatus />
     </div>
   </div>
