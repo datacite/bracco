@@ -12,7 +12,8 @@ export default Route.extend(ApplicationRouteMixin, {
 
   isTokenAuthenticating: null,
 
-  beforeModel() {
+  async beforeModel() {
+    await this.session.setup();
     this.intl.setLocale([ 'en-us' ]);
     set(this, 'headData.siteName', ENV.SITE_TITLE);
     return this._loadCurrentUser();
