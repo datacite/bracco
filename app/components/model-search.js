@@ -1,6 +1,7 @@
 import { notEmpty } from '@ember/object/computed';
 import { assign } from '@ember/polyfills';
 import Component from '@ember/component';
+import { inject as service } from '@ember/service';
 
 const placeholders = {
   doi: 'DOI',
@@ -14,6 +15,8 @@ const placeholders = {
 };
 
 export default Component.extend({
+  router: service(),
+
   classNames: ['div'],
 
   hasInput: notEmpty('query'),

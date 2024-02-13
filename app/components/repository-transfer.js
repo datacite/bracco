@@ -6,6 +6,7 @@ export default Component.extend({
   store: service(),
   flashMessages: service(),
   intl: service(),
+  router: service(),
 
   tagName: 'div',
   classNames: ['row'],

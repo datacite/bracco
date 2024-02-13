@@ -4,6 +4,7 @@ import Component from '@ember/component';
 export default Component.extend({
   currentUser: service(),
   store: service(),
+  router: service(),
 
   oldRepository: null,
   repositories: null,
