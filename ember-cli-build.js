@@ -47,6 +47,9 @@ module.exports = function (defaults) {
     },
     'ember-math-helpers': {
       only: ['add', 'sub']
+    },
+    'ember-simple-auth': {
+      useSessionSetupMethod: true
     }
   });
 
