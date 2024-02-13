@@ -24,7 +24,7 @@
                     @route="repositories.show.prefixes.new"
                     @model={{model.repository.id}}
                     class="btn btn-warning"
-                    @id="assign-prefix"
+                    id="assign-prefix"
                     @disabled={{if (eq (await (prefixes-available model.provider.id)) 0) "true" ""}}
                   >
                     <i class="fas fa-link"></i>
@@ -102,7 +102,7 @@
             {{#if (and (can 'update prefix' model) model.isActive)}}
               <h3 class="work">
                 <LinkTo
-                  @id={{repositoryPrefix.prefix.id}}
+                  id={{repositoryPrefix.prefix.id}}
                   @route="repositories.show.prefixes.show"
                   @models={{array model.repository.id repositoryPrefix.prefix.id}}
                 >

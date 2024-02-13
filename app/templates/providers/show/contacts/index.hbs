@@ -9,7 +9,7 @@
                 @route="providers.show.contacts.new"
                 @model={{model.provider.id}}
                 class="btn btn-warning"
-                @id="add-contact"
+                id="add-contact"
               >
                 <i class="fas fa-plus"></i>
                 Add Contact
@@ -45,7 +45,7 @@
                     <LinkTo
                       @route="providers.show.contacts"
                       @model={{model.provider.id}}
-                      @id="role-name-{{role.id}}"
+                      id="role-name-{{role.id}}"
                       @query={{hash role-name=role.id}}
                     >
                       <i class="far fa-square"></i>

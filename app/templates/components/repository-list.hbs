@@ -27,7 +27,7 @@
                 @route="providers.show.repositories.new"
                 @model={{model.provider.id}}
                 class="btn btn-warning"
-                @id="add-repository"
+                id="add-repository"
                 @disabled={{if (eq (await (prefixes-available model.provider.id)) 0) "true" ""}}
               >
                 <i class="fas fa-plus"></i>
@@ -67,7 +67,7 @@
               <LinkTo
                 @route="providers.show.contacts.new"
                 @model={{model.provider.id}}
-                @id="add-contact"
+                id="add-contact"
               >
                 add at least one contact.
               </LinkTo>
@@ -77,7 +77,7 @@
               <LinkTo
                 @route="providers.show.edit"
                 @model={{model.provider.id}}
-                @id="edit-provider"
+                id="edit-provider"
               >
                 {{if
                   (eq this.model.provider.memberType 'consortium_organization')
