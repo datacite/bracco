@@ -43,15 +43,15 @@
         <div class="col-md-9">
           <div>
             <label for="givenName" class="subtitle">Given Name (optional)</label>
-            <Input @type="text" class="form-control" @id="service-contact-given-name" @value={{model.repository.serviceContact.givenName}} required={{false}} />
+            <Input @type="text" class="form-control" id="service-contact-given-name" @value={{model.repository.serviceContact.givenName}} required={{false}} />
           </div>
           <div>
             <label for="familyName" class="subtitle">Family Name (optional)</label>
-            <Input @type="text" class="form-control" @id="service-contact-family-name" @value={{model.repository.serviceContact.familyName}} required={{false}} />
+            <Input @type="text" class="form-control" id="service-contact-family-name" @value={{model.repository.serviceContact.familyName}} required={{false}} />
           </div>
           <div class="{{if (v-get model.repository.serviceContact 'isInvalid') 'has-error has-feedback'}}">
             <label for="email" class="subtitle control-label">Email (optional)</label>
-            <Input @type="text" class="form-control" @id="service-contact-email" @value={{model.repository.serviceContact.email}} required={{false}} />
+            <Input @type="text" class="form-control" id="service-contact-email" @value={{model.repository.serviceContact.email}} required={{false}} />
             {{#if (v-get model.repository.serviceContact 'isInvalid')}}
               <div class="help-block help-block-fragment" data-test-service-contact-email-help>{{v-get model.repository.serviceContact 'message'}}</div>
             {{/if}}

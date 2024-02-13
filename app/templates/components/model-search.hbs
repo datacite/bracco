@@ -1,7 +1,7 @@
 <form class="form-horizontal" {{action 'doSearch' this.query on='submit'}}>
   <div id="search" class="input-group">
     <Input
-      @name="query"
+      name="query"
       @value={{this.query}}
       class="form-control"
       placeholder={{if this.placeholder this.placeholder "Type to search..."}}
