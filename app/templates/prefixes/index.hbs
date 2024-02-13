@@ -20,7 +20,7 @@
                 <LinkTo
                   @route="prefixes.new"
                   class="btn btn-warning"
-                  @id="add-prefixes"
+                  id="add-prefixes"
                 >
                   <i class="fas fa-link"></i>
                   Add Prefixes
@@ -57,7 +57,7 @@
                     </LinkTo>
                   {{else}}
                     <LinkTo
-                      @id="prefix-{{state.id}}"
+                      id="prefix-{{state.id}}"
                       @route="prefixes"
                       @query={{hash state=state.id}}
                     >
