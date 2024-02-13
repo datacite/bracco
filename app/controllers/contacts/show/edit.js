@@ -4,6 +4,7 @@ import { inject as service } from '@ember/service';
 export default Controller.extend({
   currentUser: service(),
   store: service(),
+  router: service(),
 
   actions: {
     submit(contact) {
@@ -11,7 +12,7 @@ export default Controller.extend({
       contact
         .save()
         .then(function (c) {
-          self.transitionToRoute('contacts.show', c);
+          self.router.transitionToRoute('contacts.show', c);
         })
         .catch(function (reason) {
           console.debug(reason);
@@ -19,7 +20,7 @@ export default Controller.extend({
     },
     cancel() {
       this.model.rollbackAttributes();
-      this.transitionToRoute('contacts.show', this.model);
+      this.router.transitionToRoute('contacts.show', this.model);
     }
   }
 });

@@ -4,6 +4,7 @@ import { A } from '@ember/array';
 
 export default Route.extend({
   can: service(),
+  router: service(),
 
   model(params) {
     let self = this;
@@ -19,13 +20,13 @@ export default Route.extend({
         console.debug(reason);
 
         self.get('flashMessages').warning(reason);
-        self.transitionTo('/');
+        self.router.transitionTo('/');
       });
   },
 
   afterModel(model) {
     if (this.can.cannot('read prefix', model)) {
-      this.transitionTo('index');
+      this.router.transitionTo('index');
     }
   },
 

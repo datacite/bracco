@@ -9,6 +9,7 @@ export default Route.extend(ApplicationRouteMixin, {
   currentUser: service(),
   headData: service(),
   intl: service(),
+  router: service(),
 
   isTokenAuthenticating: null,
 
@@ -35,7 +36,7 @@ export default Route.extend(ApplicationRouteMixin, {
     if (!this.isTokenAuthenticating) {
       this._super(...arguments);
       this._loadCurrentUser();
-      this.transitionTo('providers');
+      this.router.transitionTo('providers');
     } else {
       this.set('isTokenAuthenticating', false);
     }

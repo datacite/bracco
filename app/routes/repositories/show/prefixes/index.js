@@ -6,6 +6,7 @@ import { inject as service } from '@ember/service';
 export default Route.extend({
   can: service(),
   prefixes: service(),
+  router: service(),
 
   model(params) {
     let repositoryId = this.modelFor('repositories/show').get('id');
@@ -36,7 +37,7 @@ export default Route.extend({
     if (
       this.can.cannot('read repository', this.modelFor('repositories/show'))
     ) {
-      this.transitionTo('index');
+      this.router.transitionTo('index');
     }
   },
 

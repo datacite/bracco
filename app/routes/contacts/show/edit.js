@@ -3,6 +3,7 @@ import { inject as service } from '@ember/service';
 
 export default Route.extend({
   can: service(),
+  router: service(),
 
   model() {
     let contact = this.modelFor('contacts/show');
@@ -12,7 +13,7 @@ export default Route.extend({
 
   afterModel() {
     if (this.can.cannot('update contact', this.modelFor('contacts/show'))) {
-      this.transitionTo('index');
+      this.router.transitionTo('index');
     }
   }
 });

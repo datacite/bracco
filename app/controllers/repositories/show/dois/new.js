@@ -6,6 +6,7 @@ import { inject as service } from '@ember/service';
 export default Controller.extend({
   spdx: service(),
   features: service(),
+  router: service(),
 
   setEvent(state) {
     if (state === 'registered') {
@@ -130,7 +131,7 @@ export default Controller.extend({
 
       let self = this;
       doi.save().then(function(doi) {
-        self.transitionToRoute('dois.show', doi);
+        self.router.transitionToRoute('dois.show', doi);
       }).catch(function(reason) {
         console.debug(reason);
 
@@ -138,7 +139,7 @@ export default Controller.extend({
       });
     },
     cancel() {
-      this.transitionToRoute('repositories.show.dois', this.get('model.repository.id'));
+      this.router.transitionToRoute('repositories.show.dois', this.get('model.repository.id'));
     },
   },
 });

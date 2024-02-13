@@ -7,6 +7,7 @@ import reasonUtil from '../utils/reason-util';
 
 export default Controller.extend({
   session: service(),
+  router: service(),
 
   queryParams: [ 'globus' ],
   globus: null,
@@ -23,7 +24,7 @@ export default Controller.extend({
       let self = this;
       let { identification, password } = this;
       this.session.authenticate('authenticator:oauth2', identification, password).then(() => {
-          self.transitionToRoute('/');
+          self.router.transitionToRoute('/');
       }).catch((reason) => {
         this.set('errorMessage', reasonUtil(reason, { default: 'Error logging in.' }));
       });

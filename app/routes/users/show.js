@@ -9,6 +9,7 @@ export default Route.extend({
   can: service(),
   features: service(),
   headData: service(),
+  router: service(),
 
   model(params) {
 
@@ -36,7 +37,7 @@ export default Route.extend({
             href: 'https://support.datacite.org/docs/datacite-researcher-profiles',
             type: 'warning',
           });
-          self.transitionTo('/');
+          self.router.transitionTo('/');
         }),
         self.store.query('doi', parameters).then(function(result) {
           return result.meta;
@@ -50,7 +51,7 @@ export default Route.extend({
 
   afterModel(model) {
     if (this.can.cannot('read user', model)) {
-      this.transitionTo('index');
+      this.router.transitionTo('index');
     }
   },
 

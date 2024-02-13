@@ -5,6 +5,7 @@ import { inject as service } from '@ember/service';
 
 export default Route.extend({
   session: service(),
+  router: service(),
 
   model() {
     let self = this;
@@ -16,15 +17,15 @@ export default Route.extend({
         console.log(jwt);
         self.session.authenticate('authenticator:globus', jwt).catch((reason) => {
           self.set('errorMessage', reason.errors && reason.errors[0].title || reason);
-          self.transitionTo('/');
+          self.router.transitionTo('/');
         });
       } else {
         console.log(response);
-        self.transitionTo('/sign-in?globus');
+        self.router.transitionTo('/sign-in?globus');
       }
     }).catch(function(error) {
       console.log(error);
-      this.transitionTo('/sign-in?globus');
+      this.router.transitionTo('/sign-in?globus');
     });
   },
 });

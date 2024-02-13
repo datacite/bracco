@@ -4,6 +4,8 @@ import ENV from 'bracco/config/environment';
 
 export default Controller.extend({
   store: service(),
+  router: service(),
+
   disabled: true,
   prefixes_service: service('prefixes'),
 
@@ -55,7 +57,7 @@ export default Controller.extend({
           self.set('disabled', true);
           // We need a timeout because of ElasticSearch indexing
           setTimeout(() => {
-            self.transitionToRoute(
+            self.router.transitionToRoute(
               'providers.show.prefixes',
               providerPrefix.get('provider.id')
             );
@@ -68,7 +70,7 @@ export default Controller.extend({
     cancel() {
       this.model['provider-prefix'].set('prefix', null);
       this.set('disabled', true);
-      this.transitionToRoute(
+      this.router.transitionToRoute(
         'providers.show.prefixes',
         this.get('model.provider')
       );

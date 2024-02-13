@@ -11,6 +11,7 @@ import {
 export default Controller.extend({
   store: service(),
   features: service(),
+  router: service(),
 
   countryList,
   countries: null,
@@ -145,7 +146,7 @@ export default Controller.extend({
       this.model.organization
         .save()
         .then(function (provider) {
-          self.transitionToRoute('providers.show', provider.id);
+          self.router.transitionToRoute('providers.show', provider.id);
         })
         .catch(function (reason) {
           console.debug(reason);
@@ -153,7 +154,7 @@ export default Controller.extend({
     },
     cancel() {
       this.model.organization.rollbackAttributes();
-      this.transitionToRoute(
+      this.router.transitionToRoute(
         'providers.show.organizations',
         this.get('model.provider.id')
       );

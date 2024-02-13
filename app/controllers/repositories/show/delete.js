@@ -3,6 +3,7 @@ import { inject as service } from '@ember/service';
 
 export default Controller.extend({
   store: service(),
+  router: service(),
 
   actions: {
     submit() {
@@ -10,7 +11,7 @@ export default Controller.extend({
       let providerId = this.model.get('provider.id');
       this.store.findRecord('repository', this.model.get('id'), { backgroundReload: false }).then(function(repository) {
         repository.destroyRecord().then(function() {
-          self.transitionToRoute('providers.show.repositories', providerId);
+          self.router.transitionToRoute('providers.show.repositories', providerId);
         }).catch(function(reason) {
           console.debug(reason);
           self
@@ -23,7 +24,7 @@ export default Controller.extend({
     },
     cancel() {
       this.model.rollbackAttributes();
-      this.transitionToRoute('repositories.show', this.model);
+      this.router.transitionToRoute('repositories.show', this.model);
     },
   },
 });

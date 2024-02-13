@@ -4,6 +4,7 @@ import countryList from 'iso-3166-country-list';
 
 export default Controller.extend({
   store: service(),
+  router: service(),
 
   countryList,
   countries: null,
@@ -41,14 +42,14 @@ export default Controller.extend({
     submit(provider) {
       let self = this;
       provider.save().then(function() {
-        self.transitionToRoute('index');
+        self.router.transitionToRoute('index');
       }).catch(function(reason) {
         console.debug(reason);
       });
     },
     cancel() {
       this.model.rollbackAttributes();
-      this.transitionToRoute('index');
+      this.router.transitionToRoute('index');
     },
   },
 });

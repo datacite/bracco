@@ -7,6 +7,7 @@ export default Route.extend({
   currentUser: service(),
   flashMessages: service(),
   prefixes: service(),
+  router: service(),
 
   model() {
     if (this.can.can('read index')) {
@@ -20,14 +21,14 @@ export default Route.extend({
           console.debug(reason);
 
           self.get('flashMessages').warning(reason);
-          self.transitionTo('index');
+          self.router.transitionTo('index');
         });
     }
   },
 
   afterModel() {
     if (this.get('currentUser.role_id') === 'staff_admin') {
-      this.transitionTo('index');
+      this.router.transitionTo('index');
 
       let self = this;
       this.prefixes.available().then(function(value) {
@@ -48,9 +49,9 @@ export default Route.extend({
       )
     ) {
       let home = this.currentUser.get('home');
-      this.transitionTo(home.route, home.id);
+      this.router.transitionTo(home.route, home.id);
     } else if (this.get('currentUser.role_id') === 'temporary') {
-      this.transitionTo('password');
+      this.riyter,transitionTo('password');
     }
   }
 });

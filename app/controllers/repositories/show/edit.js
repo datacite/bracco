@@ -9,6 +9,7 @@ import { clientTypeList, softwareList } from 'bracco/models/repository'
 export default Controller.extend({
   currentUser: service(),
   store: service(),
+  router: service(),
 
   edit: false,
   change: false,
@@ -133,7 +134,7 @@ export default Controller.extend({
       repository
         .save()
         .then(function (repository) {
-          self.transitionToRoute('repositories.show', repository);
+          self.router.transitionToRoute('repositories.show', repository);
         })
         .catch(function (reason) {
           console.debug(reason);
@@ -141,7 +142,7 @@ export default Controller.extend({
     },
     cancel() {
       this.model.rollbackAttributes();
-      this.transitionToRoute('repositories.show', this.model);
+      this.router.transitionToRoute('repositories.show', this.model);
     }
   }
 });

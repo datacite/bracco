@@ -6,6 +6,7 @@ export default Route.extend({
   features: service(),
   flashMessages: service(),
   headData: service(),
+  router: service(),
 
   model(params) {
     let self = this;
@@ -20,13 +21,13 @@ export default Route.extend({
         console.debug(reason);
 
         self.get('flashMessages').warning(reason);
-        self.transitionTo('index');
+        self.router.transitionTo('index');
       });
   },
 
   afterModel(model) {
     if (this.can.cannot('read contact', model)) {
-      this.transitionTo('index');
+      this.router.transitionTo('index');
     }
   },
 

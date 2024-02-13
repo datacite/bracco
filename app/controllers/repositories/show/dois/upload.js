@@ -1,6 +1,9 @@
 import Controller from '@ember/controller';
+import { inject as service } from '@ember/service';
 
 export default Controller.extend({
+  router: service(),
+
   setEvent(state) {
     if (state === 'registered') {
       return 'register';
@@ -42,7 +45,7 @@ export default Controller.extend({
       doi
         .save()
         .then(function (doi) {
-          self.transitionToRoute('dois.show', doi);
+          self.router.transitionToRoute('dois.show', doi);
         })
         .catch(function (reason) {
           console.debug(reason);
@@ -59,7 +62,7 @@ export default Controller.extend({
         });
     },
     cancel() {
-      this.transitionToRoute(
+      this.router.transitionToRoute(
         'repositories.show.dois',
         this.get('model.repository.id')
       );

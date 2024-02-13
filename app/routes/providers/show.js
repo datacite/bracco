@@ -8,6 +8,7 @@ export default Route.extend({
   headData: service(),
   currentUser: service(),
   prefixes: service(),
+  router: service(),
 
   model(params) {
     let self = this;
@@ -25,7 +26,7 @@ export default Route.extend({
         console.debug(reason);
 
         self.get('flashMessages').warning(reason);
-        self.transitionTo('/');
+        self.router.transitionTo('/');
       });
   },
 
@@ -49,7 +50,7 @@ export default Route.extend({
 
   redirect(model) {
     if (this.can.cannot('read provider', model)) {
-      this.transitionTo('index');
+      this.router.transitionTo('index');
     }
   },
 

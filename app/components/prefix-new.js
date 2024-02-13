@@ -24,6 +24,7 @@ const Validations = buildValidations({
 export default Component.extend(Validations, {
   store: service(),
   prefixes: service(),
+  router: service(),
 
   firstPrefix: '',
   lastPrefix: '',

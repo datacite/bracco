@@ -139,6 +139,7 @@ const stateListAustralia = [
 export default Controller.extend({
   store: service(),
   features: service(),
+  router: service(),
 
   countryList,
   countries: null,
@@ -364,7 +365,7 @@ export default Controller.extend({
       this.model
         .save()
         .then(function (provider) {
-          self.transitionToRoute('providers.show', provider);
+          self.router.transitionToRoute('providers.show', provider);
         })
         .catch(function (reason) {
           console.debug(reason);
@@ -372,7 +373,7 @@ export default Controller.extend({
     },
     cancel() {
       this.model.rollbackAttributes();
-      this.transitionToRoute('providers');
+      this.router.transitionToRoute('providers');
     }
   }
 });

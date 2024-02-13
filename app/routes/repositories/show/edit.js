@@ -4,6 +4,7 @@ import { clientTypeList } from 'bracco/models/repository';
 
 export default Route.extend({
   can: service(),
+  router: service(),
 
   model() {
     let repository = this.modelFor('repositories/show');
@@ -13,7 +14,7 @@ export default Route.extend({
 
   afterModel() {
     if (this.can.cannot('update repository', this.modelFor('repositories/show'))) {
-      this.transitionTo('index');
+      this.router.transitionTo('index');
     }
   },
 

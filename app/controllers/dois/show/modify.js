@@ -3,6 +3,7 @@ import { inject as service } from '@ember/service';
 
 export default Controller.extend({
   store: service(),
+  router: service(),
 
   setEvent(stateChange) {
     if (stateChange[0] === 'draft' && stateChange[1] === 'registered') {
@@ -51,12 +52,12 @@ export default Controller.extend({
 
       let self = this;
       doi.save().then(function(doi) {
-        self.transitionToRoute('dois.show', doi);
+        self.router.transitionToRoute('dois.show', doi);
       });
     },
     cancel() {
       this.model.rollbackAttributes();
-      this.transitionToRoute('dois.show', this.model);
+      this.router.transitionToRoute('dois.show', this.model);
     },
   },
 });

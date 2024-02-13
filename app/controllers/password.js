@@ -6,6 +6,7 @@ import ENV from 'bracco/config/environment';
 export default Controller.extend({
   session: service(),
   currentUser: service(),
+  router: service(),
 
   actions: {
     submit(user) {
@@ -19,7 +20,7 @@ export default Controller.extend({
     cancel() {
       let self = this;
       this.session.invalidate().then(function() {
-        self.transitionTo('index');
+        self.router.transitionTo('index');
       });
     },
     generate() {

@@ -5,6 +5,7 @@ import ENV from 'bracco/config/environment';
 
 export default Controller.extend({
   currentUser: service(),
+  router: service(),
 
   actions: {
     generate() {
@@ -30,14 +31,14 @@ export default Controller.extend({
       let self = this;
       this.model.set('keepPassword', false);
       this.model.save().then(function(provider) {
-        self.transitionToRoute('providers.show', provider);
+        self.router.transitionToRoute('providers.show', provider);
       }).catch(function(reason) {
         console.debug(reason);
       });
     },
     cancel() {
       this.model.rollbackAttributes();
-      this.transitionToRoute('providers.show', this.model);
+      this.router.transitionToRoute('providers.show', this.model);
     },
   },
 });

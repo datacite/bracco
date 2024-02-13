@@ -9,6 +9,7 @@ import { clientTypeList, softwareList } from 'bracco/models/repository'
 
 export default Controller.extend({
   store: service(),
+  router: service(),
 
   re3data: null,
   softwareList,
@@ -155,7 +156,7 @@ export default Controller.extend({
       repository
         .save()
         .then(function (repository) {
-          self.transitionToRoute('repositories.show.settings', self.model.repository.id, { queryParams: { assignedPrefix: repository.prefixes.firstObject.id } })
+          self.router.transitionToRoute('repositories.show.settings', self.model.repository.id, { queryParams: { assignedPrefix: repository.prefixes.firstObject.id } })
         })
         .catch(function (reason) {
           console.debug(reason);
@@ -170,7 +171,7 @@ export default Controller.extend({
     },
     cancel() {
       this.model.repository.rollbackAttributes();
-      this.transitionToRoute(
+      this.router.transitionToRoute(
         'providers.show.repositories',
         this.get('model.provider.id')
       );

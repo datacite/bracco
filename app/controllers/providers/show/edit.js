@@ -140,6 +140,7 @@ const stateListAustralia = [
 export default Controller.extend({
   store: service(),
   features: service(),
+  router: service(),
 
   countryList,
   countries: null,
@@ -472,7 +473,7 @@ export default Controller.extend({
       this.model
         .save()
         .then(function (provider) {
-          self.transitionToRoute('providers.show', provider);
+          self.router.transitionToRoute('providers.show', provider);
         })
         // Report the reason (error) to the user.  Without that, the form appears to be frozen.
         .catch(function (reason) {
@@ -488,7 +489,7 @@ export default Controller.extend({
     },
     cancel() {
       this.model.rollbackAttributes();
-      this.transitionToRoute('providers.show', this.model);
+      this.router.transitionToRoute('providers.show', this.model);
     }
   }
 });
