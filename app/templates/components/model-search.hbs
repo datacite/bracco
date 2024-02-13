@@ -1,14 +1,14 @@
-<form class="form-horizontal" {{action 'doSearch' query on='submit'}}>
+<form class="form-horizontal" {{action 'doSearch' this.query on='submit'}}>
   <div id="search" class="input-group">
     <Input
       @name="query"
-      @value={{query}}
+      @value={{this.query}}
       class="form-control"
-      placeholder={{if placeholder placeholder "Type to search..."}}
+      placeholder={{if this.placeholder this.placeholder "Type to search..."}}
       @escape-press={{action 'clear'}}
       @enter={{action 'doSearch'}}
     />
-    {{#if hasInput}}
+    {{#if this.hasInput}}
       <span
         id="search-clear"
         title="Clear"
@@ -24,10 +24,10 @@
       </button>
     </div>
   </div>
-  {{#if hasFilters}}
+  {{#if this.hasFilters}}
     <span class="help-block">
       <LinkTo
-        @route={{link}}
+        @route={{this.link}}
         @query={{hash
           page=1
           size=25
@@ -67,12 +67,12 @@
     </span>
   {{/if}}
 </form>
-{{#if (gt model.meta.total 1)}}
-  {{#if sortable}}
+{{#if (gt this.model.meta.total 1)}}
+  {{#if this.sortable}}
     <div id="sort" class="input-group pull-right">
       <select onchange={{action 'sort' value='target.value'}}>
-        {{#each-in formats as |key value|}}
-          <option name="sort" value={{key}} selected={{eq sort key}}>
+        {{#each-in this.formats as |key value|}}
+          <option name="sort" value={{key}} selected={{eq this.sort key}}>
             {{value}}
           </option>
         {{/each-in}}
@@ -80,7 +80,7 @@
     </div>
   {{/if}}
   <h3 class="member-results" data-test-results>
-    {{format-number model.meta.total}}
-    {{pluralize model.meta.total modelName without-count=true}}
+    {{format-number this.model.meta.total}}
+    {{pluralize this.model.meta.total this.modelName without-count=true}}
   </h3>
 {{/if}}
