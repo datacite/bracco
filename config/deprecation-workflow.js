@@ -6,7 +6,6 @@ window.deprecationWorkflow.config = {
     { handler: 'silence', matchId: 'computed-property.volatile' },
     { handler: 'silence', matchId: 'computed-property.override' },
     { handler: 'silence', matchId: 'ember.globals-resolver' },
-    { handler: 'silence', matchId: 'implicit-modifier-manager-capabilities' },
     { handler: 'silence', matchId: 'ember-cp-validations'},
     { handler: 'silence', matchId: 'ember-cp-validations.inline-validator'},
     { handler: 'silence', matchId: 'globals-resolver'},
@@ -23,6 +22,8 @@ window.deprecationWorkflow.config = {
     { handler: 'silence', matchId: 'ember-modifier.no-args-property' },
     { handler: 'silence', matchId: 'ember-modifier.no-element-property' },
     { handler: 'silence', matchId: 'ember-modifier.no-element-property' },
-    { handler: 'silence', matchId: 'template-compiler.registerPlugin' }
+    { handler: 'silence', matchId: 'template-compiler.registerPlugin' },
+    // New - v3.28 - 2024
+    { handler: 'silence', matchId: 'manager-capabilities.modifiers-3-13' }
   ]
 };
