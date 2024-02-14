@@ -5,7 +5,7 @@
     {{!-- {{#if (can "read messages" model)}} --}}
     <div class="row">
       <div class="col-md-9" style="margin-left: 10px; margin-right: 10px;">
-        {{#each flashMessages.queue as |flash|}}
+        {{#each this.flashMessages.queue as |flash|}}
           <FlashMessage @flash={{flash}} />
         {{/each}}
       </div>
@@ -36,7 +36,7 @@
           </div>
         </div>
       {{/if}}
-      {{#if model.meta.states}}
+      {{#if this.model.meta.states}}
         <div class="panel facets add">
           <div class="panel-body">
             <h4>
@@ -49,9 +49,9 @@
               </span>
             </h4>
             <ul>
-              {{#each model.meta.states as |state|}}
+              {{#each this.model.meta.states as |state|}}
                 <li>
-                  {{#if model.query.state}}
+                  {{#if this.model.query.state}}
                     <LinkTo @route="prefixes" @query={{hash state=null}}>
                       <i class="far fa-check-square"></i>
                     </LinkTo>
@@ -77,16 +77,16 @@
           </div>
         </div>
       {{/if}}
-      {{#if model.meta.years}}
+      {{#if this.model.meta.years}}
         <div class="panel facets add">
           <div class="panel-body">
             <h4>
               Year created
             </h4>
             <ul>
-              {{#each model.meta.years as |year|}}
+              {{#each this.model.meta.years as |year|}}
                 <li>
-                  {{#if model.query.year}}
+                  {{#if this.model.query.year}}
                     <LinkTo @route="prefixes" @query={{hash year=null}}>
                       <i class="far fa-check-square"></i>
                     </LinkTo>
@@ -108,16 +108,16 @@
           </div>
         </div>
       {{/if}}
-      {{#if model.meta.providers}}
+      {{#if this.model.meta.providers}}
         <div class="panel facets">
           <div class="panel-body">
             <h4>
               Member
             </h4>
             <ul>
-              {{#each model.meta.providers as |provider|}}
+              {{#each this.model.meta.providers as |provider|}}
                 <li>
-                  {{#if model.query.provider-id}}
+                  {{#if this.model.query.provider-id}}
                     <LinkTo @route="prefixes" @query={{hash provider-id=null}}>
                       <i class="far fa-check-square"></i>
                     </LinkTo>
@@ -145,13 +145,13 @@
     </div>
     <div class="col-md-9 panel-list" id="content">
       <ModelSearch
-        @model={{model}}
+        @model={{this.model}}
         @name="Prefix"
         @sortable={{true}}
         @link="prefixes"
       />
-      {{#if model}}
-        {{#each model as |prefix|}}
+      {{#if this.model}}
+        {{#each this.model as |prefix|}}
           <div class="panel panel-transparent" data-test-prefix>
             <div class="panel-body">
               <h3 class="member">
@@ -193,7 +193,7 @@
                   </LinkTo>
                   <br />
                 {{/each}}
-                {{#if features.useElasticsearch}}
+                {{#if this.features.useElasticsearch}}
                   <h5>
                     DOIs
                   </h5>
@@ -226,8 +226,8 @@
           </div>
         {{/each}}
         <div class="text-center">
-          {{#if (gt model.meta.totalPages 1)}}
-            <PageNumbers @model={{model}} @link="prefixes" />
+          {{#if (gt this.model.meta.totalPages 1)}}
+            <PageNumbers @model={{this.model}} @link="prefixes" />
           {{/if}}
         </div>
       {{else}}
