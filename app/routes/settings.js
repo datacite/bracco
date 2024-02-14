@@ -6,6 +6,7 @@ export default Route.extend({
   currentUser: service(),
   prefixes: service(),
   router: service(),
+  store: service(),
 
   model() {
     if (this.can.can('read index')) {
