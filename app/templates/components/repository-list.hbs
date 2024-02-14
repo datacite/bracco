@@ -1,15 +1,16 @@
 <div class="row">
   <div data-test-left-sidebar class="col-md-3">
     {{#if
+
       (and
-        (can 'create repository' model)
-        (eq link 'providers.show.repositories')
-        (not-eq model.provider.memberType 'consortium')
-        (eq hasRequiredContacts true)
+        (can 'create repository' this.model)
+        (eq this.link 'providers.show.repositories')
+        (not-eq this.model.provider.memberType 'consortium')
+        (eq this.hasRequiredContacts true)
       )
     }}
       {{#if
-        (eq (await (prefixes-available model.provider.id)) 0)
+        (eq (await (prefixes-available this.model.provider.id)) 0)
       }}
         <div class="panel panel-transparent">
           <div class="panel-body" cy-data="alert">
@@ -25,10 +26,10 @@
             <div class="btn-group btn-group-sm">
               <LinkTo
                 @route="providers.show.repositories.new"
-                @model={{model.provider.id}}
+                @model={{this.model.provider.id}}
                 class="btn btn-warning"
                 id="add-repository"
-                @disabled={{if (eq (await (prefixes-available model.provider.id)) 0) "true" ""}}
+                @disabled={{if (eq (await (prefixes-available this.model.provider.id)) 0) "true" ""}}
               >
                 <i class="fas fa-plus"></i>
                 Add Repository
@@ -42,31 +43,31 @@
         <div class="panel-body" cy-data="alert">
           {{#if
             (or
-              (not-eq link 'providers.show.repositories')
-              (eq model.provider.memberType 'consortium')
+              (not-eq this.link 'providers.show.repositories')
+              (eq this.model.provider.memberType 'consortium')
             )
           }}
             <BsAlert @dismissible={{false}} @type="warning">
               New repositories can't be created from this page.
             </BsAlert>
-          {{else if (cannot 'create repository' model)}}
+          {{else if (cannot 'create repository' this.model)}}
             <BsAlert @dismissible={{false}} @type="warning">
               New repositories can't be created unless the user has the correct
               permissions.
             </BsAlert>
-          {{else if (not-eq hasRequiredContacts true)}}
+          {{else if (not-eq this.hasRequiredContacts true)}}
             <BsAlert @dismissible={{false}} @type="warning">
               New repositories can't be created because you have not provided the
               required
               {{if
-                (eq model.provider.memberType 'consortium_organization')
+                (eq this.model.provider.memberType 'consortium_organization')
                 'service contact'
                 'billing, service and voting contacts'
               }}
               for your organization. Please
               <LinkTo
                 @route="providers.show.contacts.new"
-                @model={{model.provider.id}}
+                @model={{this.model.provider.id}}
                 id="add-contact"
               >
                 add at least one contact.
@@ -76,7 +77,7 @@
               After adding contacts, please assign roles in the
               <LinkTo
                 @route="providers.show.edit"
-                @model={{model.provider.id}}
+                @model={{this.model.provider.id}}
                 id="edit-provider"
               >
                 {{if
@@ -91,22 +92,22 @@
         </div>
       </div>
     {{/if}}
-    {{#if (or model.repositories.meta.years model.repositories.query.year)}}
+    {{#if (or this.model.repositories.meta.years this.model.repositories.query.year)}}
       <div class="panel facets add">
         <div class="panel-body">
           <h4>
             Year joined
           </h4>
           <ul>
-            {{#if model.repositories.meta.years}}
-              {{#each model.repositories.meta.years as |year|}}
+            {{#if this.model.repositories.meta.years}}
+              {{#each this.model.repositories.meta.years as |year|}}
                 <li>
-                  {{#if model.repositories.query.year}}
-                    <LinkTo @route={{link}} @query={{hash year=''}}>
+                  {{#if this.model.repositories.query.year}}
+                    <LinkTo @route={{this.link}} @query={{hash year=''}}>
                       <i class="far fa-check-square"></i>
                     </LinkTo>
                   {{else}}
-                    <LinkTo @route={{link}} @query={{hash year=year.id}}>
+                    <LinkTo @route={{this.link}} @query={{hash year=year.id}}>
                       <i class="far fa-square"></i>
                     </LinkTo>
                   {{/if}}
@@ -125,7 +126,7 @@
                   <i class="far fa-check-square"></i>
                 </LinkTo>
                 <div class="facet-title">
-                  {{model.repositories.query.year}}
+                  {{this.model.repositories.query.year}}
                 </div>
                 <span class="number pull-right">
                   0
@@ -139,9 +140,9 @@
     {{/if}}
     {{#if
       (and
-        (eq link 'repositories')
+        (eq this.link 'repositories')
         (or
-          model.repositories.meta.providers model.repositories.query.provider-id
+          this.model.repositories.meta.providers this.model.repositories.query.provider-id
         )
       )
     }}
@@ -151,16 +152,16 @@
             Provider
           </h4>
           <ul>
-            {{#if model.repositories.meta.providers}}
-              {{#each model.repositories.meta.providers as |provider|}}
+            {{#if this.model.repositories.meta.providers}}
+              {{#each this.model.repositories.meta.providers as |provider|}}
                 <li>
-                  {{#if model.repositories.query.provider-id}}
-                    <LinkTo @route={{link}} @query={{hash provider-id=''}}>
+                  {{#if this.model.repositories.query.provider-id}}
+                    <LinkTo @route={{this.link}} @query={{hash provider-id=''}}>
                       <i class="far fa-check-square"></i>
                     </LinkTo>
                   {{else}}
                     <LinkTo
-                      @route={{link}}
+                      @route={{this.link}}
                       @query={{hash provider-id=provider.id}}
                     >
                       <i class="far fa-square"></i>
@@ -177,11 +178,11 @@
               {{/each}}
             {{else}}
               <li>
-                <LinkTo @route={{link}} @query={{hash provider=''}}>
+                <LinkTo @route={{this.link}} @query={{hash provider=''}}>
                   <i class="far fa-check-square"></i>
                 </LinkTo>
                 <div class="facet-title">
-                  {{titleize model.repositories.query.provider}}
+                  {{titleize this.model.repositories.query.provider}}
                 </div>
                 <span class="number pull-right">
                   0
@@ -195,7 +196,7 @@
     {{/if}}
     {{#if
       (or
-        model.repositories.meta.clientTypes model.repositories.query.client-type
+        this.model.repositories.meta.clientTypes this.model.repositories.query.client-type
       )
     }}
       <div class="panel facets">
@@ -204,16 +205,16 @@
             Type
           </h4>
           <ul>
-            {{#if model.repositories.meta.clientTypes}}
-              {{#each model.repositories.meta.clientTypes as |clientType|}}
+            {{#if this.model.repositories.meta.clientTypes}}
+              {{#each this.model.repositories.meta.clientTypes as |clientType|}}
                 <li>
-                  {{#if model.repositories.query.client-type}}
-                    <LinkTo @route={{link}} @query={{hash client-type=''}}>
+                  {{#if this.model.repositories.query.client-type}}
+                    <LinkTo @route={{this.link}} @query={{hash client-type=''}}>
                       <i class="far fa-check-square"></i>
                     </LinkTo>
                   {{else}}
                     <LinkTo
-                      @route={{link}}
+                      @route={{this.link}}
                       @query={{hash client-type=clientType.id}}
                     >
                       <i class="far fa-square"></i>
@@ -230,11 +231,11 @@
               {{/each}}
             {{else}}
               <li>
-                <LinkTo @route={{link}} @query={{hash client-type=''}}>
+                <LinkTo @route={{this.link}} @query={{hash client-type=''}}>
                   <i class="far fa-check-square"></i>
                 </LinkTo>
                 <div class="facet-title">
-                  {{titleize model.repositories.query.client-type}}
+                  {{titleize this.model.repositories.query.client-type}}
                 </div>
                 <span class="number pull-right">
                   0
@@ -248,8 +249,8 @@
     {{/if}}
     {{#if
       (or
-        model.repositories.meta.repositoryTypes
-        model.repositories.query.repository-type
+        this.model.repositories.meta.repositoryTypes
+        this.model.repositories.query.repository-type
       )
     }}
       <div class="panel facets">
@@ -258,18 +259,18 @@
             Repository Type
           </h4>
           <ul>
-            {{#if model.repositories.meta.repositoryTypes}}
+            {{#if this.model.repositories.meta.repositoryTypes}}
               {{#each
-                model.repositories.meta.repositoryTypes as |repositoryType|
+                this.model.repositories.meta.repositoryTypes as |repositoryType|
               }}
                 <li>
-                  {{#if model.repositories.query.repository-type}}
-                    <LinkTo @route={{link}} @query={{hash repository-type=''}}>
+                  {{#if this.model.repositories.query.repository-type}}
+                    <LinkTo @route={{this.link}} @query={{hash repository-type=''}}>
                       <i class="far fa-check-square"></i>
                     </LinkTo>
                   {{else}}
                     <LinkTo
-                      @route={{link}}
+                      @route={{this.link}}
                       @query={{hash repository-type=repositoryType.id}}
                     >
                       <i class="far fa-square"></i>
@@ -286,11 +287,11 @@
               {{/each}}
             {{else}}
               <li>
-                <LinkTo @route={{link}} @query={{hash repository-type=''}}>
+                <LinkTo @route={{this.link}} @query={{hash repository-type=''}}>
                   <i class="far fa-check-square"></i>
                 </LinkTo>
                 <div class="facet-title">
-                  {{model.repositories.query.repository-type}}
+                  {{this.model.repositories.query.repository-type}}
                 </div>
                 <span class="number pull-right">
                   0
@@ -304,8 +305,8 @@
     {{/if}}
     {{#if
       (or
-        model.repositories.meta.certificates
-        model.repositories.query.certificate
+        this.model.repositories.meta.certificates
+        this.model.repositories.query.certificate
       )
     }}
       <div class="panel facets">
@@ -314,16 +315,16 @@
             Certificate
           </h4>
           <ul>
-            {{#if model.repositories.meta.certificates}}
-              {{#each model.repositories.meta.certificates as |certificate|}}
+            {{#if this.model.repositories.meta.certificates}}
+              {{#each this.model.repositories.meta.certificates as |certificate|}}
                 <li>
-                  {{#if model.repositories.query.certificate}}
-                    <LinkTo @route={{link}} @query={{hash certificate=''}}>
+                  {{#if this.model.repositories.query.certificate}}
+                    <LinkTo @route={{this.link}} @query={{hash certificate=''}}>
                       <i class="far fa-check-square"></i>
                     </LinkTo>
                   {{else}}
                     <LinkTo
-                      @route={{link}}
+                      @route={{this.link}}
                       @query={{hash certificate=certificate.id}}
                     >
                       <i class="far fa-square"></i>
@@ -340,11 +341,11 @@
               {{/each}}
             {{else}}
               <li>
-                <LinkTo @route={{link}} @query={{hash certificate=''}}>
+                <LinkTo @route={{this.link}} @query={{hash certificate=''}}>
                   <i class="far fa-check-square"></i>
                 </LinkTo>
                 <div class="facet-title">
-                  {{model.repositories.query.certificate}}
+                  {{this.model.repositories.query.certificate}}
                 </div>
                 <span class="number pull-right">
                   0
@@ -357,7 +358,7 @@
       </div>
     {{/if}}
     {{#if
-      (or model.repositories.meta.software model.repositories.query.software)
+      (or this.model.repositories.meta.software this.model.repositories.query.software)
     }}
       <div class="panel facets">
         <div class="panel-body">
@@ -365,16 +366,16 @@
             Software
           </h4>
           <ul>
-            {{#if model.repositories.meta.software}}
-              {{#each model.repositories.meta.software as |software|}}
+            {{#if this.model.repositories.meta.software}}
+              {{#each this.model.repositories.meta.software as |software|}}
                 <li>
-                  {{#if model.repositories.query.software}}
-                    <LinkTo @route={{link}} @query={{hash software=''}}>
+                  {{#if this.model.repositories.query.software}}
+                    <LinkTo @route={{this.link}} @query={{hash software=''}}>
                       <i class="far fa-check-square"></i>
                     </LinkTo>
                   {{else}}
                     <LinkTo
-                      @route={{link}}
+                      @route={{this.link}}
                       @query={{hash software=software.id}}
                     >
                       <i class="far fa-square"></i>
@@ -391,11 +392,11 @@
               {{/each}}
             {{else}}
               <li>
-                <LinkTo @route={{link}} @query={{hash software=''}}>
+                <LinkTo @route={{this.link}} @query={{hash software=''}}>
                   <i class="far fa-check-square"></i>
                 </LinkTo>
                 <div class="facet-title">
-                  {{model.repositories.query.software}}
+                  {{this.model.repositories.query.software}}
                 </div>
                 <span class="number pull-right">
                   0
@@ -409,16 +410,16 @@
     {{/if}}
   </div>
   <div class="col-md-9 panel-list" id="content">
-    {{#if searchable}}
+    {{#if this.searchable}}
       <ModelSearch
-        @model={{model.repositories}}
+        @model={{this.model.repositories}}
         @name="Repository"
         @sortable={{true}}
-        @link={{link}}
+        @link={{this.link}}
       />
     {{/if}}
-    {{#if model.repositories}}
-      {{#each model.repositories as |repository|}}
+    {{#if this.model.repositories}}
+      {{#each this.model.repositories as |repository|}}
         <div class="panel panel-transparent" data-test-repository>
           <div class="panel-body">
             <h3 class="work">
@@ -508,8 +509,8 @@
         </div>
       {{/each}}
       <div class="text-center">
-        {{#if (gt model.repositories.meta.totalPages 1)}}
-          <PageNumbers @model={{model.repositories}} @link={{link}} />
+        {{#if (gt this.model.repositories.meta.totalPages 1)}}
+          <PageNumbers @model={{this.model.repositories}} @link={{this.link}} />
         {{/if}}
       </div>
     {{else}}

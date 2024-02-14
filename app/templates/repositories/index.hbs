@@ -5,13 +5,13 @@
     {{!-- {{#if (can "read messages" model)}} --}}
     <div class="row">
       <div class="col-md-9" style="margin-left: 10px; margin-right: 10px;">
-        {{#each flashMessages.queue as |flash|}}
+        {{#each this.flashMessages.queue as |flash|}}
           <FlashMessage @flash={{flash}} />
         {{/each}}
       </div>
     </div>
     {{!-- {{/if}} --}}
-    <RepositoryList @model={{model}} @link="repositories" @searchable={{true}} />
+    <RepositoryList @model={{this.model}} @link="repositories" @searchable={{true}} />
   </div>
 
 {{else}}
