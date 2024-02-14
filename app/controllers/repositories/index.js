@@ -1,6 +1,9 @@
 import Controller from '@ember/controller';
+import { inject as service } from '@ember/service';
 
 export default Controller.extend({
+  flashMessages: service(),
+
   queryParams: [ 'query', 'year', 'provider-id', 'client-type', 'repository-type', 'certificate', 'software', 'include-deleted', 'sort', 'page', 'size' ],
   query: null,
   year: null,

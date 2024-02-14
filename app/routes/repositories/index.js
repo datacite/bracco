@@ -9,6 +9,7 @@ export default Route.extend({
   flashMessages: service(),
   prefixes: service(),
   router: service(),
+  store: service(),
 
   model(params) {
     params = assign(params, {
