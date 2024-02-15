@@ -1,15 +1,15 @@
-{{#if (gt index 0)}}
+{{#if (gt this.index 0)}}
   <div>
     <div class="input-group">
-      <input type="text" class="form-control title-field" value={{fragment.title}} placeholder="Title" oninput={{action "updateTitle" value="target.value"}} data-test-title/>
+      <input type="text" class="form-control title-field" value={{this.fragment.title}} placeholder="Title" oninput={{action "updateTitle" value="target.value"}} data-test-title/>
       <span class="input-group-btn">
-        <BsButton @outline={{true}} @onClick={{action "deleteTitle" index}}><i class="fas fa-trash"></i></BsButton>
+        <BsButton @outline={{true}} @onClick={{action "deleteTitle" this.index}}><i class="fas fa-trash"></i></BsButton>
       </span>
     </div>
   </div>
 {{else}}
   <div>
-    <input type="text" class="form-control title-field" value={{fragment.title}} placeholder="Title" oninput={{action "updateTitle" value="target.value"}} data-test-title/>
+    <input type="text" class="form-control title-field" value={{this.fragment.title}} placeholder="Title" oninput={{action "updateTitle" value="target.value"}} data-test-title/>
   </div>
 {{/if}}
 
@@ -18,8 +18,8 @@
 </div>
 
 <div class="power-select-fragment title-type">
-  <@form.element @controlType="power-select" @value={{fragment.titleType}} @options={{titleTypes}} @destination={{fragment.titleType}} as |el|>
-    <el.control @onChange={{action "selectTitleType"}} @placeholder="Select Title Type" @allowClear={{true}} @disabled={{disabled}} @searchEnabled={{true}} />
+  <@form.element @controlType="power-select" @value={{this.fragment.titleType}} @options={{this.titleTypes}} @destination={{this.fragment.titleType}} as |el|>
+    <el.control @onChange={{action "selectTitleType"}} @placeholder="Select Title Type" @allowClear={{true}} @disabled={{this.disabled}} @searchEnabled={{true}} />
   </@form.element>
 </div>
 
@@ -28,8 +28,8 @@
 </div>
 
 <div class="power-select-fragment title-lang">
-  <@form.element @controlType="power-select" @value={{language}} @options={{languages}} as |el|>
-    <el.control @onChange={{action "selectLanguage"}} @search={{action "searchLanguage"}} @placeholder="Select Language" @searchPlaceholder="Type to search..." @allowClear={{true}} @disabled={{disabled}} @searchEnabled={{true}} />
+  <@form.element @controlType="power-select" @value={{this.language}} @options={{this.languages}} as |el|>
+    <el.control @onChange={{action "selectLanguage"}} @search={{action "searchLanguage"}} @placeholder="Select Language" @searchPlaceholder="Type to search..." @allowClear={{true}} @disabled={{this.disabled}} @searchEnabled={{true}} />
   </@form.element>
 </div>
 

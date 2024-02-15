@@ -7,6 +7,7 @@ export default Route.extend({
   can: service(),
   features: service(),
   router: service(),
+  store: service(),
 
   model(params) {
     let providerId = null;

@@ -2,21 +2,21 @@
   <label class="control-label col-md-3" data-test-related-identifiers>Related Identifiers</label>
   <div class="col-md-9">
     <div class="label-vertical">Identifiers of related resources.</div>
-    {{#if showRelatedIdentifiers}}
-      {{#each model.relatedIdentifiers as |relatedIdentifier index|}}
-        <DoiRelatedIdentifier @model={{model}} @fragment={{relatedIdentifier}} @form={{form}} @index={{index}} />
+    {{#if this.showRelatedIdentifiers}}
+      {{#each this.model.relatedIdentifiers as |relatedIdentifier index|}}
+        <DoiRelatedIdentifier @model={{this.model}} @fragment={{relatedIdentifier}} @form={{this.form}} @index={{index}} />
       {{/each}}
 
-      {{#if (lte model.relatedIdentifiers.length 24)}}
-        <BsButton id="add-related-identifier" class="btn-sm" @outline={{true}} @onClick={{action "addRelatedIdentifier"}}><i class="fas fa-plus"></i> Add {{if (gt model.relatedIdentifiers.length 0) "another "}} related identifier</BsButton>
+      {{#if (lte this.model.relatedIdentifiers.length 24)}}
+        <BsButton id="add-related-identifier" class="btn-sm" @outline={{true}} @onClick={{action "addRelatedIdentifier"}}><i class="fas fa-plus"></i> Add {{if (gt this.model.relatedIdentifiers.length 0) "another "}} related identifier</BsButton>
       {{/if}}
 
-      {{#if (gt model.relatedIdentifiers.length 0)}}
-        <BsButton id="toggle-related-identifiers" class="btn-sm" @outline={{true}} @onClick={{action "toggleRelatedIdentifiers"}}><i class="fas fa-eye-slash"></i> Hide {{pluralize model.relatedIdentifiers.length 'related identififier'}}</BsButton>
+      {{#if (gt this.model.relatedIdentifiers.length 0)}}
+        <BsButton id="toggle-related-identifiers" class="btn-sm" @outline={{true}} @onClick={{action "toggleRelatedIdentifiers"}}><i class="fas fa-eye-slash"></i> Hide {{pluralize this.model.relatedIdentifiers.length 'related identififier'}}</BsButton>
       {{/if}}
     {{else}}
-      {{#if (gt model.relatedIdentifiers.length 0)}}
-        <BsButton id="toggle-related-identifiers" class="btn-sm" @outline={{true}} @onClick={{action "toggleRelatedIdentifiers"}}><i class="fas fa-eye"></i> Show {{pluralize model.relatedIdentifiers.length 'related identifier'}}</BsButton>
+      {{#if (gt this.model.relatedIdentifiers.length 0)}}
+        <BsButton id="toggle-related-identifiers" class="btn-sm" @outline={{true}} @onClick={{action "toggleRelatedIdentifiers"}}><i class="fas fa-eye"></i> Show {{pluralize this.model.relatedIdentifiers.length 'related identifier'}}</BsButton>
       {{else}}
         <BsButton class="btn-sm btn-warning" id="add-related-identifier" @outline={{true}} @onClick={{action "addRelatedIdentifier"}}><i class="fas fa-plus"></i> Add related identifier</BsButton>
       {{/if}}

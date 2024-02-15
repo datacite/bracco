@@ -1,8 +1,8 @@
 
-{{#if (can 'read provider' model)}}
+{{#if (can 'read provider' this.model)}}
   <ApplicationHeader @default={{true}} />
   <div class="container-fluid">
-    {{#if (or (can 'read index') (can 'read provider' model.consortium))}}
+    {{#if (or (can 'read index') (can 'read provider' this.model.consortium))}}
       <ol class="breadcrumb">
         {{#if (can 'read index')}}
           <li class="breadcrumb-item">
@@ -18,22 +18,22 @@
         {{/if}}
         {{#if
           (and
-            (can 'read provider' model.consortium)
-            (eq model.memberType 'consortium_organization')
+            (can 'read provider' this.model.consortium)
+            (eq this.model.memberType 'consortium_organization')
           )
         }}
           <li class="breadcrumb-item">
             <LinkTo
               @route="providers.show.index"
-              @model={{model.consortium.id}}
+              @model={{this.model.consortium.id}}
             >
-              {{model.consortium.name}}
+              {{this.model.consortium.name}}
             </LinkTo>
           </li>
           <li class="breadcrumb-item">
             <LinkTo
               @route="providers.show.organizations"
-              @model={{model.consortium.id}}
+              @model={{this.model.consortium.id}}
             >
               Consortium Organizations
             </LinkTo>
@@ -41,14 +41,14 @@
         {{/if}}
       </ol>
     {{/if}}
-    {{#if model.logoUrl}}
+    {{#if this.model.logoUrl}}
       <div class="pull-right">
-        <img class="img-small" alt="logo" src={{model.logoUrl}} />
+        <img class="img-small" alt="logo" src={{this.model.logoUrl}} />
       </div>
     {{/if}}
     <h2 class="work">
-      {{model.displayName}}
-      {{#if (not model.isActive)}}
+      {{this.model.displayName}}
+      {{#if (not this.model.isActive)}}
         <span class="label label-warning-inv">
           Inactive
         </span>
@@ -61,41 +61,41 @@
         @stacked={{false}}
         @fill={{false}} as |nav|
       >
-        <LinkTo @route='providers.show.index' @tagName="li" @model=model.id>
+        <LinkTo @route='providers.show.index' @tagName="li" @model=this.model.id>
             <LinkTo @route='providers.show.index' class='nav-link'>
                 Info
             </LinkTo>
         </LinkTo>
-        <LinkTo @route='providers.show.settings' @tagName="li" @model=model.id>
+        <LinkTo @route='providers.show.settings' @tagName="li" @model=this.model.id>
             <LinkTo @route='providers.show.settings' class='nav-link'>
                 Settings
             </LinkTo>
         </LinkTo>
-        {{#if (eq model.memberType 'consortium')}}
+        {{#if (eq this.model.memberType 'consortium')}}
           <LinkTo @route='providers.show.organizations' @tagName="li">
               <LinkTo @route='providers.show.organizations' class='nav-link'>
                   Consortium Organizations
               </LinkTo>
           </LinkTo>
         {{/if}}
-        {{#if (not-eq model.memberType 'developer')}}
-          <LinkTo @route='providers.show.contacts' @tagName="li" @model=model.id>
+        {{#if (not-eq this.model.memberType 'developer')}}
+          <LinkTo @route='providers.show.contacts' @tagName="li" @model=this.model.id>
               <LinkTo @route='providers.show.contacts' class='nav-link'>
                   Contacts
               </LinkTo>
           </LinkTo>
-          {{#if (not-eq model.memberType 'member_only')}}
-            <LinkTo @route='providers.show.repositories' @tagName="li" @model=model.id>
+          {{#if (not-eq this.model.memberType 'member_only')}}
+            <LinkTo @route='providers.show.repositories' @tagName="li" @model=this.model.id>
                 <LinkTo @route='providers.show.repositories' class='nav-link'>
                     Repositories
                 </LinkTo>
             </LinkTo>
-            <LinkTo @route='providers.show.prefixes' @tagName="li" @model=model.id>
+            <LinkTo @route='providers.show.prefixes' @tagName="li" @model=this.model.id>
                 <LinkTo @route='providers.show.prefixes' class='nav-link'>
                     Prefixes
                 </LinkTo>
             </LinkTo>
-            <LinkTo @route='providers.show.dois' @tagName="li" @model=model.id>
+            <LinkTo @route='providers.show.dois' @tagName="li" @model=this.model.id>
                 <LinkTo @route='providers.show.dois' class='nav-link'>
                     DOIs
                 </LinkTo>

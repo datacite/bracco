@@ -2,21 +2,21 @@
   <label class="control-label col-md-3">Subjects</label>
   <div class="col-md-9">
     <div class="label-vertical">Subject, keyword, classification code, or key phrase describing the resource.</div>
-    {{#if showSubjects}}
-      {{#each model.subjects as |subject index|}}
-        <DoiSubject @model={{model}} @fragment={{subject}} @form={{form}} @index={{index}} />
+    {{#if this.showSubjects}}
+      {{#each this.subjects as |subject index|}}
+        <DoiSubject @model={{this.model}} @fragment={{subject}} @form={{this.form}} @index={{index}} />
       {{/each}}
 
-      {{#if (lte model.subjects.length 6)}}
-        <BsButton class="btn-sm" id="add-subject" @outline={{true}} @onClick={{action "addSubject"}}><i class="fas fa-plus"></i> Add {{if (gt model.subjects.length 0) "another "}} subject</BsButton>
+      {{#if (lte this.model.subjects.length 6)}}
+        <BsButton class="btn-sm" id="add-subject" @outline={{true}} @onClick={{action "addSubject"}}><i class="fas fa-plus"></i> Add {{if (gt this.model.subjects.length 0) "another "}} subject</BsButton>
       {{/if}}
 
-      {{#if (gt model.subjects.length 0)}}
-        <BsButton id="toggle-subjects" class="btn-sm" @outline={{true}} @onClick={{action "toggleSubjects"}}><i class="fas fa-eye-slash"></i> Hide {{pluralize model.subjects.length 'subject'}}</BsButton>
+      {{#if (gt this.model.subjects.length 0)}}
+        <BsButton id="toggle-subjects" class="btn-sm" @outline={{true}} @onClick={{action "toggleSubjects"}}><i class="fas fa-eye-slash"></i> Hide {{pluralize this.model.subjects.length 'subject'}}</BsButton>
       {{/if}}
     {{else}}
-      {{#if (gt model.subjects.length 0)}}
-        <BsButton id="toggle-subjects" class="btn-sm" @outline={{true}} @onClick={{action "toggleSubjects"}}><i class="fas fa-eye"></i> Show {{pluralize model.subjects.length 'subject'}}</BsButton>
+      {{#if (gt this.model.subjects.length 0)}}
+        <BsButton id="toggle-subjects" class="btn-sm" @outline={{true}} @onClick={{action "toggleSubjects"}}><i class="fas fa-eye"></i> Show {{pluralize this.model.subjects.length 'subject'}}</BsButton>
       {{else}}
         <BsButton class="btn-sm btn-warning" id="add-subject" @outline={{true}} @onClick={{action "addSubject"}}><i class="fas fa-plus"></i> Add subject</BsButton>
       {{/if}}

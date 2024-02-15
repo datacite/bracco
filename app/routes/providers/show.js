@@ -9,6 +9,8 @@ export default Route.extend({
   currentUser: service(),
   prefixes: service(),
   router: service(),
+  store: service(),
+  flashMessages: service(),
 
   model(params) {
     let self = this;

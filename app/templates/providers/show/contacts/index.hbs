@@ -1,4 +1,4 @@
-{{#if (can 'read provider' model.provider)}}
+{{#if (can 'read provider' this.model.provider)}}
   <div class="row">
     <div class="col-md-3">
       <div class="panel facets">
@@ -7,7 +7,7 @@
             <div class="btn-group btn-group-sm">
               <LinkTo
                 @route="providers.show.contacts.new"
-                @model={{model.provider.id}}
+                @model={{this.model.provider.id}}
                 class="btn btn-warning"
                 id="add-contact"
               >
@@ -18,7 +18,7 @@
           </div>
         </div>
       </div>
-      {{#if model.contacts.meta.roles}}
+      {{#if this.model.contacts.meta.roles}}
         <div class="panel facets add">
           <div class="panel-body">
             <h4>
@@ -31,12 +31,12 @@
               </span>
             </h4>
             <ul>
-              {{#each model.contacts.meta.roles as |role|}}
+              {{#each this.model.contacts.meta.roles as |role|}}
                 <li>
-                  {{#if (eq model.contacts.query.role-name role.id)}}
+                  {{#if (eq this.model.contacts.query.role-name role.id)}}
                     <LinkTo
                       @route="providers.show.contacts"
-                      @model={{model.provider.id}}
+                      @model={{this.model.provider.id}}
                       @query={{hash role-name=null}}
                     >
                       <i class="far fa-check-square"></i>
@@ -44,7 +44,7 @@
                   {{else}}
                     <LinkTo
                       @route="providers.show.contacts"
-                      @model={{model.provider.id}}
+                      @model={{this.model.provider.id}}
                       id="role-name-{{role.id}}"
                       @query={{hash role-name=role.id}}
                     >
@@ -67,13 +67,13 @@
     </div>
     <div class="col-md-9 panel-list" id="content">
       <ModelSearch
-        @model={{model.contacts}}
+        @model={{this.model.contacts}}
         @name="Contact"
         @sortable={{true}}
         @link="providers.show.contacts"
       />
-      {{#if (gt model.contacts.length 0)}}
-        {{#each model.contacts as |contact|}}
+      {{#if (gt this.model.contacts.length 0)}}
+        {{#each this.model.contacts as |contact|}}
           <div class="panel panel-transparent" data-test-contact>
             <div class="panel-body">
               <h3 class="work">
@@ -81,7 +81,7 @@
                   {{contact.displayName}}
                 </LinkTo>
               </h3>
-              {{#if (eq model.provider.memberType 'consortium')}}
+              {{#if (eq this.model.provider.memberType 'consortium')}}
                 <h5>
                   {{if
                     (eq contact.provider.memberType 'consortium_organization')
@@ -111,7 +111,7 @@
                 <span class="icon-warning">
                   No roles found. Please assign roles in the <LinkTo
                   @route="providers.show.edit"
-                  @model={{model.provider.id}}
+                  @model={{this.model.provider.id}}
                 >
                   {{if (eq this.model.provider.memberType 'consortium_organization')
               'Consortium Organization'
@@ -138,8 +138,8 @@
           </div>
         {{/each}}
         <div class="text-center">
-          {{#if (gt model.contacts.meta.totalPages 1)}}
-            <PageNumbers @model={{model.contacts}} @link="providers.show.contacts" />
+          {{#if (gt this.model.contacts.meta.totalPages 1)}}
+            <PageNumbers @model={{this.model.contacts}} @link="providers.show.contacts" />
           {{/if}}
         </div>
       {{else}}

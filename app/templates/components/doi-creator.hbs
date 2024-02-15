@@ -1,84 +1,84 @@
-{{#if (gt fragment.nameIdentifiers.length 0)}}
+{{#if (gt this.fragment.nameIdentifiers.length 0)}}
   <label for="nameIdentifiers" class="subtitle">Name Identifier</label>
 
-  {{#each fragment.nameIdentifiers as |nameIdentifier index|}}
-    <DoiNameIdentifier @model={{model}} @creator={{fragment}} @fragment={{nameIdentifier}} @form={{form}} @index={{index}} @joinNameParts={{action "joinNameParts"}} @setNameType={{action "selectNameType"}} @setReadOnly={{action "setReadOnly"}} />
+  {{#each this.fragment.nameIdentifiers as |nameIdentifier index|}}
+    <DoiNameIdentifier @model={{this.model}} @creator={{this.fragment}} @fragment={{this.nameIdentifier}} @form={{this.form}} @index={{this.index}} @joinNameParts={{action "joinNameParts"}} @setNameType={{action "selectNameType"}} @setReadOnly={{action "setReadOnly"}} />
   {{/each}}
 {{/if}}
 
-{{#if (lte fragment.nameIdentifiers.length 2)}}
+{{#if (lte this.fragment.nameIdentifiers.length 2)}}
   <BsButton class="btn-sm add-name-identifier" @outline={{true}} @onClick={{action "addNameIdentifier"}}><i class="fas fa-plus-circle"></i> Add another name identifier</BsButton>
 {{/if}}
 
 <div class="radio-fragment">
-  <RadioButton @value="Personal" @groupValue={{nameType}} @radioClass="radio select-person" @changed={{action "selectNameType"}} @disabled={{isReadonlyNameType}}/><span class="subtitle">Person</span>
-  <RadioButton @value="Organizational" @groupValue={{nameType}} @radioClass="radio select-organisation" @changed={{action "selectNameType"}} @disabled={{isReadonlyNameType}} /><span class="subtitle">Organization</span>
-  <RadioButton @value={{null}} @groupValue={{nameType}} @radioClass="radio select-unknown" @changed={{action "selectNameType"}} @disabled={{isReadonlyNameType}} /><span class="subtitle">Unknown</span>
+  <RadioButton @value="Personal" @groupValue={{this.nameType}} @radioClass="radio select-person" @changed={{action "selectNameType"}} @disabled={{this.isReadonlyNameType}}/><span class="subtitle">Person</span>
+  <RadioButton @value="Organizational" @groupValue={{this.nameType}} @radioClass="radio select-organisation" @changed={{action "selectNameType"}} @disabled={{this.isReadonlyNameType}} /><span class="subtitle">Organization</span>
+  <RadioButton @value={{null}} @groupValue={{this.nameType}} @radioClass="radio select-unknown" @changed={{action "selectNameType"}} @disabled={{this.isReadonlyNameType}} /><span class="subtitle">Unknown</span>
 </div>
 
-{{#if (gt index 0)}}
-  {{#if showPersonal}}
+{{#if (gt this.index 0)}}
+  {{#if this.showPersonal}}
     <div>
       <label for="givenName" class="subtitle">Given Name</label>
-      <input type="text" class="form-control given-name-field" value={{fragment.givenName}} placeholder="Given Name" oninput={{action "updateGivenName" value="target.value"}} readonly={{isReadonlyNameParts}} data-test-given-name/>
+      <input type="text" class="form-control given-name-field" value={{this.fragment.givenName}} placeholder="Given Name" oninput={{action "updateGivenName" value="target.value"}} readonly={{this.isReadonlyNameParts}} data-test-given-name/>
     </div>
 
     <div>
       <label for="familyName" class="subtitle">Family Name</label>
-      <input type="text" class="form-control family-name-field" value={{fragment.familyName}} placeholder="Family Name" oninput={{action "updateFamilyName" value="target.value"}} readonly={{isReadonlyNameParts}} data-test-family-name/>
+      <input type="text" class="form-control family-name-field" value={{this.fragment.familyName}} placeholder="Family Name" oninput={{action "updateFamilyName" value="target.value"}} readonly={{this.isReadonlyNameParts}} data-test-family-name/>
     </div>
   {{/if}}
 
   <div>
-    <label for="name" class="subtitle required-label">Name{{if isReadonly ' (from Given Name and Family Name)'}}</label>
+    <label for="name" class="subtitle required-label">Name{{if this.isReadonly ' (from Given Name and Family Name)'}}</label>
     <div class="input-group">
-      <input type="text" class="form-control name-field" value={{fragment.name}} placeholder="Name" oninput={{action "updateName" value="target.value"}} readonly={{isReadonly}} data-test-name/>
+      <input type="text" class="form-control name-field" value={{this.fragment.name}} placeholder="Name" oninput={{action "updateName" value="target.value"}} readonly={{this.isReadonly}} data-test-name/>
       <span class="input-group-btn">
-        <BsButton @outline={{true}} @onClick={{action "deleteCreator" index}}><i class="fas fa-trash"></i></BsButton>
+        <BsButton @outline={{true}} @onClick={{action "deleteCreator" this.index}}><i class="fas fa-trash"></i></BsButton>
       </span>
     </div>
   </div>
 {{else}}
-  {{#if showPersonal}}
+  {{#if this.showPersonal}}
     <div>
       <label for="givenName" class="subtitle">Given Name</label>
-      <input type="text" class="form-control given-name-field" value={{fragment.givenName}} placeholder="Given Name" oninput={{action "updateGivenName" value="target.value"}} readonly={{isReadonlyNameParts}} data-test-given-name/>
+      <input type="text" class="form-control given-name-field" value={{this.fragment.givenName}} placeholder="Given Name" oninput={{action "updateGivenName" value="target.value"}} readonly={{this.isReadonlyNameParts}} data-test-given-name/>
       <div class="help-block help-block-fragment">The personal or first name of the creator.</div>
     </div>
 
     <div>
       <label for="familyName" class="subtitle">Family Name</label>
-      <input type="text" class="form-control family-name-field" value={{fragment.familyName}} placeholder="Family Name" oninput={{action "updateFamilyName" value="target.value"}} readonly={{isReadonlyNameParts}} data-test-family-name/>
+      <input type="text" class="form-control family-name-field" value={{this.fragment.familyName}} placeholder="Family Name" oninput={{action "updateFamilyName" value="target.value"}} readonly={{this.isReadonlyNameParts}} data-test-family-name/>
       <div class="help-block help-block-fragment">The surname or last name of the creator.</div>
     </div>
 
     <div>
-      <label for="name" class="subtitle required-label">Name{{if isReadonly ' (from Given Name and Family Name)'}}</label>
-      <input type="text" class="form-control name-field" value={{fragment.name}} placeholder="Name" oninput={{action "updateName" value="target.value"}} readonly={{isReadonly}} data-test-name/>
+      <label for="name" class="subtitle required-label">Name{{if this.isReadonly ' (from Given Name and Family Name)'}}</label>
+      <input type="text" class="form-control name-field" value={{this.fragment.name}} placeholder="Name" oninput={{action "updateName" value="target.value"}} readonly={{this.isReadonly}} data-test-name/>
     </div>
   {{else}}
     <div>
       <div><label for="name" class="subtitle required-label">Name</label></div>
-      <input type="text" class="form-control name-field" value={{fragment.name}} oninput={{action "updateName" value="target.value"}} readonly={{isReadonly}} data-test-name/>
+      <input type="text" class="form-control name-field" value={{this.fragment.name}} oninput={{action "updateName" value="target.value"}} readonly={{this.isReadonly}} data-test-name/>
     </div>
   {{/if}}
 {{/if}}
 
-{{#if (gt fragment.affiliation.length 0)}}
+{{#if (gt this.fragment.affiliation.length 0)}}
   <label for="affiliation" class="subtitle">Affiliation</label>
 
-  {{#each fragment.affiliation as |affiliation index|}}
-    <DoiAffiliation @model={{model}} @creator={{fragment}} @fragment={{affiliation}} @form={{form}} @index={{index}} />
+  {{#each this.fragment.affiliation as |affiliation index|}}
+    <DoiAffiliation @model={{this.model}} @creator={{this.fragment}} @fragment={{affiliation}} @form={{this.form}} @index={{this.index}} />
   {{/each}}
 
-  {{#if (not hasErrors)}}
+  {{#if (not this.hasErrors)}}
     <div class="help-block help-block-fragment affiliation-field no-error no-success">
       Affiliation names and identifiers are provided by the Research Organization Registry (ROR).
     </div>
   {{/if}}
 {{/if}}
 
-{{#if (lte fragment.affiliation.length 2)}}
+{{#if (lte this.fragment.affiliation.length 2)}}
   <BsButton class="btn-sm add-affiliation" @outline={{true}} @onClick={{action "addAffiliation"}}><i class="fas fa-plus-circle"></i> Add another affiliation</BsButton>
 {{/if}}
 

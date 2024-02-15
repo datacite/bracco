@@ -8,6 +8,7 @@ export default Route.extend({
   features: service(),
   currentUser: service(),
   router: service(),
+  store: service(),
 
   model(params) {
     let providerId = null;

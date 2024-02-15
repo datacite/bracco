@@ -1,27 +1,27 @@
-{{#if (gt index 0)}}
+{{#if (gt this.index 0)}}
   <div class="input-group" style="padding-top:30px;">
     <div class="power-select-fragment">
-      <@form.element @controlType="power-select" @value={{fragment.name}} @options={{organizations}} as |el|>
-        <el.control @onChange={{action "selectRor"}} @search={{action "searchRor"}} @placeholder="Select Affiliation" @searchPlaceholder="Type to search..." @allowClear={{true}} @disabled={{disabled}} @searchEnabled={{true}} as |item|>
-          {{if item.name item.name fragment.name}}
+      <@form.element @controlType="power-select" @value={{this.fragment.name}} @options={{this.organizations}} as |el|>
+        <el.control @onChange={{action "selectRor"}} @search={{action "searchRor"}} @placeholder="Select Affiliation" @searchPlaceholder="Type to search..." @allowClear={{true}} @disabled={{this.disabled}} @searchEnabled={{true}} as |item|>
+          {{if item.name item.name this.fragment.name}}
         </el.control>
       </@form.element>
 
     </div>
     <span class="input-group-addon" style="vertical-align:top;padding-top:3px;background-color:white;">
-    <BsButton @outline={{true}} @onClick={{action "deleteAffiliation" index}}><i class="fas fa-trash pull-left"></i></BsButton>
+    <BsButton @outline={{true}} @onClick={{action "deleteAffiliation" this.index}}><i class="fas fa-trash pull-left"></i></BsButton>
     </span>
   </div>
 {{else}}
   <div class="power-select-fragment" data-test-affiliation>
-    <@form.element @controlType="power-select" @value={{fragment.name}} @options={{organizations}} as |el|>
-      <el.control @onChange={{action "selectRor"}} @search={{action "searchRor"}} @placeholder="Select Affiliation" @searchPlaceholder="Type to search..." @allowClear={{true}} @disabled={{disabled}} @searchEnabled={{true}} as |item|>
-        {{if item.name item.name fragment.name}}
+    <@form.element @controlType="power-select" @value={{this.fragment.name}} @options={{this.organizations}} as |el|>
+      <el.control @onChange={{action "selectRor"}} @search={{action "searchRor"}} @placeholder="Select Affiliation" @searchPlaceholder="Type to search..." @allowClear={{true}} @disabled={{this.disabled}} @searchEnabled={{true}} as |item|>
+        {{if item.name item.name this.fragment.name}}
       </el.control>
     </@form.element>
   </div>
 {{/if}}
 
-{{#if fragment.affiliationIdentifier}}
-  <input type="text" class="form-control affiliation-identifier-field no-error no-success" value={{fragment.affiliationIdentifier}} readonly="true"/>
+{{#if this.fragment.affiliationIdentifier}}
+  <input type="text" class="form-control affiliation-identifier-field no-error no-success" value={{this.fragment.affiliationIdentifier}} readonly="true"/>
 {{/if}}
