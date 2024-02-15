@@ -143,12 +143,12 @@ export default Controller.extend({
 
       let self = this;
       doi.save().then(function(doi) {
-        self.router.transitionToRoute('dois.show', doi);
+        self.router.transitionTo('dois.show', doi);
       });
     },
     cancel() {
       this.model.rollbackAttributes();
-      this.router.transitionToRoute('dois.show', this.model);
+      this.router.transitionTo('dois.show', this.model);
     },
   },
 });
