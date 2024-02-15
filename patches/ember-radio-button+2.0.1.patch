@@ -1,10 +1,61 @@
 diff --git a/node_modules/ember-radio-button/addon/templates/components/radio-button.hbs b/node_modules/ember-radio-button/addon/templates/components/radio-button.hbs
-index a50d346..62d60f9 100644
+index a50d346..1f06973 100644
 --- a/node_modules/ember-radio-button/addon/templates/components/radio-button.hbs
 +++ b/node_modules/ember-radio-button/addon/templates/components/radio-button.hbs
-@@ -1,4 +1,4 @@
+@@ -1,33 +1,33 @@
 -{{#if hasBlock}}
 +{{#if (has-block)}}
    <label class="ember-radio-button {{if checked checkedClass}} {{joinedClassNames}}" for={{radioId}}>
      {{radio-button-input
-         class=radioClass
+-        class=radioClass
+-        id=radioId
+-        autofocus=autofocus
+-        disabled=disabled
+-        name=name
+-        required=required
+-        tabindex=tabindex
+-        groupValue=groupValue
+-        value=value
+-        ariaLabelledby=ariaLabelledby
+-        ariaDescribedby=ariaDescribedby
++        class=this.radioClass
++        id=this.radioId
++        autofocus=this.autofocus
++        disabled=this.disabled
++        name=this.name
++        required=this.required
++        tabindex=this.tabindex
++        groupValue=this.groupValue
++        value=this.value
++        ariaLabelledby=this.ariaLabelledby
++        ariaDescribedby=this.ariaDescribedby
+         changed=(action "changed")}}
+ 
+     {{yield}}
+   </label>
+ {{else}}
+   {{radio-button-input
+-      class=radioClass
+-      id=radioId
+-      autofocus=autofocus
+-      disabled=disabled
+-      name=name
+-      required=required
+-      tabindex=tabindex
+-      groupValue=groupValue
+-      value=value
+-      ariaLabelledby=ariaLabelledby
+-      ariaDescribedby=ariaDescribedby
++      class=this.radioClass
++      id=this.radioId
++      autofocus=this.autofocus
++      disabled=this.disabled
++      name=this.name
++      required=this.required
++      tabindex=this.tabindex
++      groupValue=this.groupValue
++      value=this.value
++      ariaLabelledby=this.ariaLabelledby
++      ariaDescribedby=this.ariaDescribedby
+       changed=(action "changed")}}
+ {{/if}}
