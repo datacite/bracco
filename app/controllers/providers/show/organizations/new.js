@@ -146,7 +146,7 @@ export default Controller.extend({
       this.model.organization
         .save()
         .then(function (provider) {
-          self.router.transitionToRoute('providers.show', provider.id);
+          self.router.transitionTo('providers.show', provider.id);
         })
         .catch(function (reason) {
           console.debug(reason);
@@ -154,7 +154,7 @@ export default Controller.extend({
     },
     cancel() {
       this.model.organization.rollbackAttributes();
-      this.router.transitionToRoute(
+      this.router.transitionTo(
         'providers.show.organizations',
         this.get('model.provider.id')
       );

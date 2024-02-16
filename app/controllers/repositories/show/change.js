@@ -31,14 +31,14 @@ export default Controller.extend({
       let self = this;
       repository.set('keepPassword', false);
       repository.save().then(function(repository) {
-        self.router.transitionToRoute('repositories.show', repository);
+        self.router.transitionTo('repositories.show', repository);
       }).catch(function(reason) {
         console.debug(reason);
       });
     },
     cancel() {
       this.model.rollbackAttributes();
-      this.router.transitionToRoute('repositories.show', this.model);
+      this.router.transitionTo('repositories.show', this.model);
     },
   },
 });

@@ -16,7 +16,7 @@ export default Controller.extend({
           repositoryPrefix.destroyRecord().then(function () {
             // We need a timeout because of ElasticSearch indexing
             setTimeout(() => {
-              self.router.transitionToRoute(
+              self.router.transitionTo(
                 'repositories.show.prefixes',
                 repositoryId
               );
@@ -28,7 +28,7 @@ export default Controller.extend({
         });
     },
     cancel() {
-      this.router.transitionToRoute(
+      this.router.transitionTo(
         'repositories.show.prefixes',
         this.model.get('repository.id')
       );

@@ -131,7 +131,7 @@ export default Controller.extend({
 
       let self = this;
       doi.save().then(function(doi) {
-        self.router.transitionToRoute('dois.show', doi);
+        self.router.transitionTo('dois.show', doi);
       }).catch(function(reason) {
         console.debug(reason);
 
@@ -139,7 +139,7 @@ export default Controller.extend({
       });
     },
     cancel() {
-      this.router.transitionToRoute('repositories.show.dois', this.get('model.repository.id'));
+      this.router.transitionTo('repositories.show.dois', this.get('model.repository.id'));
     },
   },
 });

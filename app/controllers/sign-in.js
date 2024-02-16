@@ -24,7 +24,7 @@ export default Controller.extend({
       let self = this;
       let { identification, password } = this;
       this.session.authenticate('authenticator:oauth2', identification, password).then(() => {
-          self.router.transitionToRoute('/');
+          self.router.transitionTo('/');
       }).catch((reason) => {
         this.set('errorMessage', reasonUtil(reason, { default: 'Error logging in.' }));
       });

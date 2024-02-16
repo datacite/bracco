@@ -365,7 +365,7 @@ export default Controller.extend({
       this.model
         .save()
         .then(function (provider) {
-          self.router.transitionToRoute('providers.show', provider);
+          self.router.transitionTo('providers.show', provider);
         })
         .catch(function (reason) {
           console.debug(reason);
@@ -373,7 +373,7 @@ export default Controller.extend({
     },
     cancel() {
       this.model.rollbackAttributes();
-      this.router.transitionToRoute('providers');
+      this.router.transitionTo('providers');
     }
   }
 });

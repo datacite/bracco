@@ -19,7 +19,7 @@ export default Controller.extend({
             .then(function () {
               // We need a timeout because of ElasticSearch indexing
               setTimeout(() => {
-                self.router.transitionToRoute('providers.show.contacts', providerId);
+                self.router.transitionTo('providers.show.contacts', providerId);
               }, 1200);
             })
             .catch(function (reason) {
@@ -30,7 +30,7 @@ export default Controller.extend({
     cancel() {
       this.model.rollbackAttributes();
       this.model.set('confirmDelete', null);
-      this.router.transitionToRoute('contacts.show', this.model);
+      this.router.transitionTo('contacts.show', this.model);
     }
   }
 });

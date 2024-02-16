@@ -473,7 +473,7 @@ export default Controller.extend({
       this.model
         .save()
         .then(function (provider) {
-          self.router.transitionToRoute('providers.show', provider);
+          self.router.transitionTo('providers.show', provider);
         })
         // Report the reason (error) to the user.  Without that, the form appears to be frozen.
         .catch(function (reason) {
@@ -489,7 +489,7 @@ export default Controller.extend({
     },
     cancel() {
       this.model.rollbackAttributes();
-      this.router.transitionToRoute('providers.show', this.model);
+      this.router.transitionTo('providers.show', this.model);
     }
   }
 });

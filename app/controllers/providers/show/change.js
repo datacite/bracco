@@ -31,14 +31,14 @@ export default Controller.extend({
       let self = this;
       this.model.set('keepPassword', false);
       this.model.save().then(function(provider) {
-        self.router.transitionToRoute('providers.show', provider);
+        self.router.transitionTo('providers.show', provider);
       }).catch(function(reason) {
         console.debug(reason);
       });
     },
     cancel() {
       this.model.rollbackAttributes();
-      this.router.transitionToRoute('providers.show', this.model);
+      this.router.transitionTo('providers.show', this.model);
     },
   },
 });

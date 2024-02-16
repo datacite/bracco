@@ -57,7 +57,7 @@ export default Controller.extend({
           self.set('disabled', true);
           // We need a timeout because of ElasticSearch indexing
           setTimeout(() => {
-            self.router.transitionToRoute(
+            self.router.transitionTo(
               'providers.show.prefixes',
               providerPrefix.get('provider.id')
             );
@@ -70,7 +70,7 @@ export default Controller.extend({
     cancel() {
       this.model['provider-prefix'].set('prefix', null);
       this.set('disabled', true);
-      this.router.transitionToRoute(
+      this.router.transitionTo(
         'providers.show.prefixes',
         this.get('model.provider')
       );

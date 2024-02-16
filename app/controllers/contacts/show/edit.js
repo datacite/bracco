@@ -12,7 +12,7 @@ export default Controller.extend({
       contact
         .save()
         .then(function (c) {
-          self.router.transitionToRoute('contacts.show', c);
+          self.router.transitionTo('contacts.show', c);
         })
         .catch(function (reason) {
           console.debug(reason);
@@ -20,7 +20,7 @@ export default Controller.extend({
     },
     cancel() {
       this.model.rollbackAttributes();
-      this.router.transitionToRoute('contacts.show', this.model);
+      this.router.transitionTo('contacts.show', this.model);
     }
   }
 });

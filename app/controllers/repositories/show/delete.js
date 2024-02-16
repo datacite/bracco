@@ -11,7 +11,7 @@ export default Controller.extend({
       let providerId = this.model.get('provider.id');
       this.store.findRecord('repository', this.model.get('id'), { backgroundReload: false }).then(function(repository) {
         repository.destroyRecord().then(function() {
-          self.router.transitionToRoute('providers.show.repositories', providerId);
+          self.router.transitionTo('providers.show.repositories', providerId);
         }).catch(function(reason) {
           console.debug(reason);
           self
@@ -24,7 +24,7 @@ export default Controller.extend({
     },
     cancel() {
       this.model.rollbackAttributes();
-      this.router.transitionToRoute('repositories.show', this.model);
+      this.router.transitionTo('repositories.show', this.model);
     },
   },
 });

@@ -11,14 +11,14 @@ export default Controller.extend({
       contact
         .save()
         .then(function (c) {
-          self.router.transitionToRoute('contacts.show', c);
+          self.router.transitionTo('contacts.show', c);
         })
         .catch(function (reason) {
           console.debug(reason);
         });
     },
     cancel() {
-      this.router.transitionToRoute('providers.show.contacts', this.model.provider);
+      this.router.transitionTo('providers.show.contacts', this.model.provider);
     }
   }
 });

@@ -75,7 +75,7 @@ export default Controller.extend({
                   self.set('disabled', true);
                   // We need a timeout because of ElasticSearch indexing
                   setTimeout(() => {
-                    self.router.transitionToRoute(
+                    self.router.transitionTo(
                       'repositories.show.prefixes',
                       repositoryPrefix.get('repository.id')
                     );
@@ -92,7 +92,7 @@ export default Controller.extend({
                 self.set('disabled', true);
                 // We need a timeout because of ElasticSearch indexing
                 setTimeout(() => {
-                  self.router.transitionToRoute(
+                  self.router.transitionTo(
                     'repositories.show.prefixes',
                     repositoryPrefix.get('repository.id')
                   );
@@ -104,7 +104,7 @@ export default Controller.extend({
             }
           });
       } else {
-        this.router.transitionToRoute(
+        this.router.transitionTo(
           'repositories.show.prefixes',
           this.get('model.repository')
         );
@@ -114,7 +114,7 @@ export default Controller.extend({
       this.model['repository-prefix'].set('provider-prefix', null);
       this.model['repository-prefix'].set('prefix', null);
       this.set('disabled', true);
-      this.router.transitionToRoute(
+      this.router.transitionTo(
         'repositories.show.prefixes',
         this.get('model.repository')
       );

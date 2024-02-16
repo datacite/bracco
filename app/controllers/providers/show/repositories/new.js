@@ -156,7 +156,7 @@ export default Controller.extend({
       repository
         .save()
         .then(function (repository) {
-          self.router.transitionToRoute('repositories.show.settings', self.model.repository.id, { queryParams: { assignedPrefix: repository.prefixes.firstObject.id } })
+          self.router.transitionTo('repositories.show.settings', self.model.repository.id, { queryParams: { assignedPrefix: repository.prefixes.firstObject.id } })
         })
         .catch(function (reason) {
           console.debug(reason);
@@ -171,7 +171,7 @@ export default Controller.extend({
     },
     cancel() {
       this.model.repository.rollbackAttributes();
-      this.router.transitionToRoute(
+      this.router.transitionTo(
         'providers.show.repositories',
         this.get('model.provider.id')
       );
