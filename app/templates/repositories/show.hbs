@@ -1,8 +1,8 @@
 
-{{#if (can 'read repository' model provider=model.provider)}}
+{{#if (can 'read repository' this.model provider=this.model.provider)}}
   <ApplicationHeader @default={{true}} />
   <div class="container-fluid">
-    {{#if (can 'read provider' model.provider)}}
+    {{#if (can 'read provider' this.model.provider)}}
       <ol class="breadcrumb">
         {{#if (can 'read index')}}
           <li class="breadcrumb-item">
@@ -18,36 +18,36 @@
         {{/if}}
         {{#if
           (and
-            (can 'read provider' model.provider.consortium)
-            (eq model.provider.memberType 'consortium_organization')
+            (can 'read provider' this.model.provider.consortium)
+            (eq this.model.provider.memberType 'consortium_organization')
           )
         }}
           <li class="breadcrumb-item">
             <LinkTo
               @route="providers.show.index"
-              @model={{model.provider.consortium.id}}
+              @model={{this.model.provider.consortium.id}}
             >
-              {{model.provider.consortium.name}}
+              {{this.model.provider.consortium.name}}
             </LinkTo>
           </li>
           <li class="breadcrumb-item">
             <LinkTo
               @route="providers.show.organizations"
-              @model={{model.provider.consortium.id}}
+              @model={{this.model.provider.consortium.id}}
             >
               Consortium Organizations
             </LinkTo>
           </li>
         {{/if}}
         <li class="breadcrumb-item">
-          <LinkTo @route="providers.show" @model={{model.provider.id}}>
-            {{model.provider.name}}
+          <LinkTo @route="providers.show" @model={{this.model.provider.id}}>
+            {{this.model.provider.name}}
           </LinkTo>
         </li>
         <li class="breadcrumb-item">
           <LinkTo
             @route="providers.show.repositories"
-            @model={{model.provider.id}}
+            @model={{this.model.provider.id}}
           >
             Repositories
           </LinkTo>
@@ -55,16 +55,16 @@
       </ol>
     {{/if}}
     <div id="show">
-      {{#if model.re3data}}
+      {{#if this.model.re3data}}
         <div class="pull-right">
-          <a href="{{model.re3data}}">
-            <img class="img-responsive" src="{{model.badgeUrl}}" />
+          <a href="{{this.model.re3data}}">
+            <img class="img-responsive" src="{{this.model.badgeUrl}}" />
           </a>
         </div>
       {{/if}}
       <h2 class="work">
-        {{model.name}}
-        {{#if (not model.isActive)}}
+        {{this.model.name}}
+        {{#if (not this.model.isActive)}}
           <span class="label label-warning-inv">
             Inactive
           </span>
@@ -79,26 +79,52 @@
         >
           <LinkTo @route="change" class="btn btn-warning" id="set-password-provider"><i class="fas fa-key"></i> Set Password</LinkTo>
 
-          <LinkTo @route='repositories.show.index' @tagName="li" @model=model.id>
+          <!--
+          <LinkTo @route='repositories.show.index' @tagName="li" @model=this.model.id>
             <LinkTo @route='repositories.show.index' class='nav-link' @query=assignedPrefix>
               Info
             </LinkTo>
           </LinkTo>
-          <LinkTo @route='repositories.show.settings' @tagName="li" @model=model.id>
+          <LinkTo @route='repositories.show.settings' @tagName="li" @model=this.model.id>
             <LinkTo @route='repositories.show.settings' class='nav-link' @query=assignedPrefix>
               Settings
             </LinkTo>
           </LinkTo>
-          <LinkTo @route='repositories.show.prefixes' @tagName="li" @model=model.id>
+          <LinkTo @route='repositories.show.prefixes' @tagName="li" @model=this.model.id>
             <LinkTo @route='repositories.show.prefixes' class='nav-link' @query=assignedPrefix>
               Prefixes
             </LinkTo>
           </LinkTo>
-          <LinkTo @route='repositories.show.dois' @tagName="li" @model=model.id>
+          <LinkTo @route='repositories.show.dois' @tagName="li" @model=this.model.id>
             <LinkTo @route='repositories.show.dois' class='nav-link' @query=assignedPrefix>
               DOIs
             </LinkTo>
           </LinkTo>
+          -->
+          
+          <!-- NEEDS FIX FOR ASSIGNED PREFIX -->
+
+          <LinkTo @route='repositories.show.index' @tagName="li" @model=this.model.id>
+            <LinkTo @route='repositories.show.index' class='nav-link'>
+              Info
+            </LinkTo>
+          </LinkTo>
+          <LinkTo @route='repositories.show.settings' @tagName="li" @model=this.model.id>
+            <LinkTo @route='repositories.show.settings' class='nav-link'>
+              Settings
+            </LinkTo>
+          </LinkTo>
+          <LinkTo @route='repositories.show.prefixes' @tagName="li" @model=this.model.id>
+            <LinkTo @route='repositories.show.prefixes' class='nav-link'>
+              Prefixes
+            </LinkTo>
+          </LinkTo>
+          <LinkTo @route='repositories.show.dois' @tagName="li" @model=this.model.id>
+            <LinkTo @route='repositories.show.dois' class='nav-link'>
+              DOIs
+            </LinkTo>
+          </LinkTo>
+
         </BsNav>
       </div>
     </div>

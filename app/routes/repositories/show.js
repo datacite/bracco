@@ -7,6 +7,7 @@ export default Route.extend({
   flashMessages: service(),
   headData: service(),
   router: service(),
+  store: service(),
 
   model(params) {
     let self = this;
