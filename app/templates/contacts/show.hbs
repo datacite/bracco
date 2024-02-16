@@ -1,7 +1,7 @@
-{{#if (can 'read contact' model provider=model.provider)}}
+{{#if (can 'read contact' this.model provider=this.model.provider)}}
   <ApplicationHeader @default={{true}} />
   <div class="container-fluid">
-    {{#if (can 'read provider' model.provider)}}
+    {{#if (can 'read provider' this.model.provider)}}
       <ol class="breadcrumb">
         {{#if (can 'read index')}}
           <li class="breadcrumb-item">
@@ -17,34 +17,34 @@
         {{/if}}
         {{#if
           (and
-            (can 'read provider' model.provider.consortium)
-            (eq model.provider.memberType 'consortium_organization')
+            (can 'read provider' this.model.provider.consortium)
+            (eq this.model.provider.memberType 'consortium_organization')
           )
         }}
           <li class="breadcrumb-item">
             <LinkTo
               @route="providers.show.index"
-              @model={{model.provider.consortium.id}}
+              @model={{this.model.provider.consortium.id}}
             >
-              {{model.provider.consortium.name}}
+              {{this.model.provider.consortium.name}}
             </LinkTo>
           </li>
           <li class="breadcrumb-item">
             <LinkTo
               @route="providers.show.organizations"
-              @model={{model.provider.consortium.id}}
+              @model={{this.model.provider.consortium.id}}
             >
               Consortium Organizations
             </LinkTo>
           </li>
         {{/if}}
         <li class="breadcrumb-item">
-          <LinkTo @route="providers.show" @model={{model.provider.id}}>
-            {{model.provider.name}}
+          <LinkTo @route="providers.show" @model={{this.model.provider.id}}>
+            {{this.model.provider.name}}
           </LinkTo>
         </li>
         <li class="breadcrumb-item">
-          <LinkTo @route="providers.show.contacts" @model={{model.provider.id}}>
+          <LinkTo @route="providers.show.contacts" @model={{this.model.provider.id}}>
             Contacts
           </LinkTo>
         </li>
@@ -52,7 +52,7 @@
     {{/if}}
     <div id="show">
       <h2 class="work">
-        {{model.displayName}}
+        {{this.model.displayName}}
       </h2>
       {{outlet}}
     </div>

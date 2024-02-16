@@ -5,6 +5,7 @@ export default Controller.extend({
   currentUser: service(),
   store: service(),
   router: service(),
+  flashMessages: service(),
 
   actions: {
     submit(contact) {

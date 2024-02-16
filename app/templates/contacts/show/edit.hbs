@@ -4,15 +4,15 @@
       <h3 class="edit">
         Update Contact
       </h3>
-      {{#each flashMessages.queue as |flash|}}
+      {{#each this.flashMessages.queue as |flash|}}
         <FlashMessage @flash={{flash}} />
       {{/each}}
     </div>
     <BsForm
       @formLayout="horizontal"
       @horizontalLabelGridClass="col-md-3"
-      @model={{model}}
-      @onSubmit={{action 'submit' model}}
+      @model={{this.model}}
+      @onSubmit={{action 'submit' this.model}}
       @submitOnEnter={{true}} as |form|
     >
       <form.element
@@ -74,7 +74,7 @@
         </BsAlert>
       </div>
       <div class="col-md-9 col-md-offset-3">
-        {{#if (is-empty (contact-form-errors model))}}
+        {{#if (is-empty (contact-form-errors this.model))}}
           <button
             type="submit"
             id="update-contact"
@@ -86,7 +86,7 @@
         {{else}}
           <BsAlert @dismissible={{false}} @type="danger">
             To save this contact, first resolve the errors with these fields:
-            {{contact-form-errors model}}
+            {{contact-form-errors this.model}}
             .
           </BsAlert>
           <button
@@ -98,7 +98,7 @@
             Update Contact
           </button>
         {{/if}}
-        <button class="btn btn-sm" {{action 'cancel' model}}>
+        <button class="btn btn-sm" {{action 'cancel' this.model}}>
           Cancel
         </button>
       </div>

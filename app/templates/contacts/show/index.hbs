@@ -1,23 +1,23 @@
 <div class="row">
   <div class="col-md-3">
-    {{#if (can 'update contact' model)}}
+    {{#if (can 'update contact' this.model)}}
       <div class="panel facets">
         <div class="panel-body">
           <div class="btn-toolbar">
             <div class="btn-group-vertical btn-group-sm">
               <LinkTo
                 @route="contacts.show.edit"
-                @model={{model.id}}
+                @model={{this.model.id}}
                 class="btn btn-warning"
                 id="edit-contact"
               >
                 <i class="fas fa-pencil-alt"></i>
                 Update Contact
               </LinkTo>
-              {{#if (can 'delete contact' model)}}
+              {{#if (can 'delete contact' this.model)}}
                 <LinkTo
                   @route="contacts.show.delete"
-                  @model={{model.id}}
+                  @model={{this.model.id}}
                   class="btn btn-warning"
                   id="delete-contact"
                 >
@@ -30,7 +30,7 @@
         </div>
       </div>
     {{/if}}
-    <RepositorySidebar @model={{model}} />
+    <RepositorySidebar @model={{this.model}} />
   </div>
   <div class="col-md-9">
     <h3 class="member-results">
@@ -41,19 +41,19 @@
         <h5>
           Email
         </h5>
-        <a href="mailto:{{model.email}}">
-          {{model.email}}
+        <a href="mailto:{{this.model.email}}">
+          {{this.model.email}}
         </a>
         <h5>
           Roles
         </h5>
-        {{#if (gt model.roleName.length 0)}}
-          {{model.roleNameString}}
+        {{#if (gt this.model.roleName.length 0)}}
+          {{this.model.roleNameString}}
         {{else}}
           <span class="icon-warning">
             No roles found. Please assign roles in the <LinkTo
               @route="providers.show.edit"
-              @model={{model.provider.id}}
+              @model={{this.model.provider.id}}
               @id="edit-provider"
             >
               {{if (eq this.model.provider.memberType 'consortium_organization')
