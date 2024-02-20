@@ -104,6 +104,7 @@
     "ember-auto-import-typescript": "^0.6.4",
     "ember-bootstrap": "^4.9.0",
     "ember-bootstrap-cp-validations": "^2.1.0",
+    "ember-bootstrap-icons": "^0.0.1",
     "ember-bootstrap-power-select": "^4.1.0",
     "ember-can": "^4.2.0",
     "ember-cli": "~3.24.0",
