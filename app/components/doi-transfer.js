@@ -20,6 +20,9 @@ export default Component.extend({
 
   searchRepository(query) {
     let self = this;
+    if (self.isDestroying || self.isDestroyed) {
+      return;
+    }
     if (this.currentUser.get('isAdmin')) {
       this.store.query('repository', { query, sort: 'name', 'page[size]': 100 }).then(function(repositories) {
         self.set('repositories', repositories);
