@@ -2,8 +2,8 @@
   {{#if
     (eq this.link 'repositories.show.dois')
   }}
-    {{#if repository.isActive}}
-      {{#if (and repository.isActive (or (can 'create doi' this.model) (can 'upload doi' this.model)) (not (gt repository.meta.prefixCount 0)))}}
+    {{#if this.repository.isActive}}
+      {{#if (and this.repository.isActive (or (can 'create doi' this.model) (can 'upload doi' this.model)) (not (gt this.repository.meta.prefixCount 0)))}}
         <div class="panel panel-transparent">
           <div class="panel-body">
             <BsAlert @dismissible={{false}} @type="warning">
@@ -18,21 +18,21 @@
           <div class="panel-body">
             <div class="btn-toolbar">
               <div class="shrink">
-                {{#if (and repository.isActive (or (can 'create doi' this.model) (can 'upload doi' this.model)) (gt repository.meta.prefixCount 0))}}
+                {{#if (and this.repository.isActive (or (can 'create doi' this.model) (can 'upload doi' this.model)) (gt this.repository.meta.prefixCount 0))}}
                   <CreateDoiButton @model={{this.model}} class="create-doi-button" />
                 {{/if}}
                 <div class="btn-group-vertical btn-group-sm">
-                  <ExportBasicMetadata @model={{this.model}} @client_id={{repository.id}} @page={{page}} class="btn btn-warning" />
-                  {{#if (and (can 'move doi' repository))}} 
+                  <ExportBasicMetadata @model={{this.model}} @client_id={{this.repository.id}} @page={{this.page}} class="btn btn-warning" />
+                  {{#if (and (can 'move doi' this.repository))}} 
                     <LinkTo
                       @route="repositories.show.transfer"
-                      @model={{repository.id}}
+                      @model={{this.repository.id}}
                       class="btn btn-warning"
                       id="transfer-dois"
                     >
                       <i class="fas fa-arrow-circle-right"></i>
                       Transfer
-                      {{if media.isXl ' DOIs'}}
+                      {{if this.media.isXl ' DOIs'}}
                     </LinkTo>
                   {{/if}}
                 </div>
@@ -41,7 +41,7 @@
           </div>
         </div>
       {{else}}
-        {{#if (and repository.isActive (or (can 'create doi' this.model) (can 'upload doi' this.model)) (gt repository.meta.prefixCount 0))}}
+        {{#if (and this.repository.isActive (or (can 'create doi' this.model) (can 'upload doi' this.model)) (gt this.repository.meta.prefixCount 0))}}
           <div class="panel facets">
             <div class="panel-body">
               <CreateDoiButton @model={{this.model}} class="create-doi-button" />
@@ -62,17 +62,17 @@
           <div class="panel-body">
             <div class="btn-toolbar">
               <div class="btn-group-vertical btn-group-sm">
-                <ExportBasicMetadata @model={{this.model}} @client_id={{repository.id}} @page={{page}} class="btn btn-warning" />
-                {{#if (and (can 'move doi' repository))}} 
+                <ExportBasicMetadata @model={{this.model}} @client_id={{this.repository.id}} @page={{this.page}} class="btn btn-warning" />
+                {{#if (and (can 'move doi' this.repository))}} 
                   <LinkTo
                     @route="repositories.show.transfer"
-                    @model={{repository.id}}
+                    @model={{this.repository.id}}
                     class="btn btn-warning"
                     id="transfer-dois"
                   >
                     <i class="fas fa-arrow-circle-right"></i>
                     Transfer
-                    {{if media.isXl ' DOIs'}}
+                    {{if this.media.isXl ' DOIs'}}
                   </LinkTo>
                 {{/if}}
               </div>

@@ -1,10 +1,10 @@
-{{#if model}}
+{{#if this.model}}
   <DoiList
-    @model={{model.dois}}
-    @repository={{model.repository}}
+    @model={{this.model.dois}}
+    @repository={{this.model.repository}}
     @link="repositories.show.dois"
     @searchable={{true}}
-    @page={{model.page}}
+    @page={{this.model.page}}
   />
 {{else}}
   <div class="col-md-9 col-md-offset-3">
