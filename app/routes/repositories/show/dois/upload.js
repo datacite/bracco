@@ -4,6 +4,7 @@ import { inject as service } from '@ember/service';
 
 export default Route.extend({
   can: service(),
+  store: service(),
 
   model() {
     let repository = this.modelFor('repositories/show');

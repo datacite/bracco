@@ -19,17 +19,17 @@
     <BsForm
       @formLayout="horizontal"
       @horizontalLabelGridClass="col-md-3"
-      @model={{model.doi}}
-      @onSubmit={{action 'submit' model.doi}} as |form|
+      @model={{this.model.doi}}
+      @onSubmit={{action 'submit' this.model.doi}} as |form|
     >
       <DoiDoi
-        @model={{model.doi}}
-        @repository={{model.repository}}
+        @model={{this.model.doi}}
+        @repository={{this.model.repository}}
         @form={{form}}
       />
       <div
         class="form-group required-nested-label
-          {{if (v-get model.doi 'url' 'isInvalid') 'has-error' 'has-feedback'}}"
+          {{if (v-get this.model.doi 'url' 'isInvalid') 'has-error' 'has-feedback'}}"
       >
         <label class="control-label col-md-3">
           URL
@@ -48,14 +48,14 @@
           </form.element>
         </div>
       </div>
-      <DoiUpload @model={{model.doi}} @form={{form}} />
+      <DoiUpload @model={{this.model.doi}} @form={{form}} />
       <div class="col-md-9 col-md-offset-3">
-        {{#each flashMessages.queue as |flash|}}
+        {{#each this.flashMessages.queue as |flash|}}
           <FlashMessage @flash={{flash}} />
         {{/each}}
       </div>
       <div class="col-md-9 col-md-offset-3">
-        {{#if (is-empty (doi-form-errors model.doi))}}
+        {{#if (is-empty (doi-form-errors this.model.doi))}}
           <button
             type="submit"
             id="doi-create"
@@ -67,7 +67,7 @@
         {{else}}
           <BsAlert @dismissible={{false}} @type="danger">
             To save this DOI, first resolve the errors with these properties:
-            {{doi-form-errors model.doi}}
+            {{doi-form-errors this.model.doi}}
             .
           </BsAlert>
           <button

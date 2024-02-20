@@ -7,6 +7,7 @@ export default Controller.extend({
   spdx: service(),
   features: service(),
   router: service(),
+  flashMessages: service(),
 
   setEvent(state) {
     if (state === 'registered') {

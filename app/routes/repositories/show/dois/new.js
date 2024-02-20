@@ -2,10 +2,10 @@ import { hash } from 'rsvp';
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
 
-
 export default Route.extend({
   can: service(),
   flashMessages: service(),
+  store: service(),
 
   model() {
     let repository = this.modelFor('repositories/show');
