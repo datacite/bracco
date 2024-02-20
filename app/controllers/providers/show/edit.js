@@ -141,6 +141,7 @@ export default Controller.extend({
   store: service(),
   features: service(),
   router: service(),
+  flashMessages: service(),
 
   countryList,
   countries: null,

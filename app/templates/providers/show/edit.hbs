@@ -4,20 +4,20 @@
       <h3 class="edit">
         Update
         {{if
-          (eq model.memberType 'consortium_organization')
+          (eq this.model.memberType 'consortium_organization')
           'Organization'
           'Member'
         }}
       </h3>
-      {{#each flashMessages.queue as |flash|}}
+      {{#each this.flashMessages.queue as |flash|}}
         <FlashMessage @flash={{flash}} />
       {{/each}}
     </div>
     <BsForm
       @formLayout="horizontal"
       @horizontalLabelGridClass="col-md-3"
-      @model={{model}}
-      @onSubmit={{action 'submit' model}} as |form|
+      @model={{this.model}}
+      @onSubmit={{action 'submit' this.model}} as |form|
     >
       <h3 class="member-results">
         Organization Information
@@ -37,8 +37,8 @@
         @label="Organization identifier (optional)"
         @property="rorId"
         @optionLabelPath="rorId"
-        @options={{organizations}}
-        @destination={{rorId}}
+        @options={{this.organizations}}
+        @destination={{this.rorId}}
         @helpText="Organization identifiers are provided by the Research Organization Registry (ROR)." as |el|
       >
         <el.control
@@ -49,7 +49,7 @@
           @allowClear={{true}}
           @searchEnabled={{true}} as |item|
         >
-          {{if item.name item.name model.rorId}}
+          {{if item.name item.name this.model.rorId}}
         </el.control>
       </form.element>
       {{#if (can 'create provider')}}
@@ -76,8 +76,8 @@
           id="member-type"
           @label="Member Type"
           @property="memberType"
-          @options={{memberTypes}}
-          @destination={{memberType}} as |el|
+          @options={{this.memberTypes}}
+          @destination={{this.memberType}} as |el|
         >
           <el.control
             @onChange={{action 'selectMemberType'}}
@@ -85,7 +85,7 @@
             @placeholder="Select Member Type"
             @searchPlaceholder="Type to search..."
             @searchEnabled={{true}}
-            disabled={{eq model.memberType 'developer'}} as |item|
+            disabled={{eq this.model.memberType 'developer'}} as |item|
           >
             {{titleize (humanize item)}}
           </el.control>
@@ -95,8 +95,8 @@
           id="tax-status"
           @label="Tax Status"
           @property="nonProfitStatus"
-          @options={{nonProfitStatuses}}
-          @destination={{nonProfitStatus}} as |el|
+          @options={{this.nonProfitStatuses}}
+          @destination={{this.nonProfitStatus}} as |el|
         >
           <el.control
             @onChange={{action 'selectNonProfitStatus'}}
@@ -108,7 +108,7 @@
             {{titleize item}}
           </el.control>
         </form.element>
-        {{#if (eq model.memberType 'consortium_organization')}}
+        {{#if (eq this.model.memberType 'consortium_organization')}}
           <form.element
             @controlType="power-select"
             @property="consortium"
@@ -134,7 +134,7 @@
         @controlType="text"
         id="name"
         @label="{{if
-            (eq model.memberType 'consortium_organization')
+            (eq this.model.memberType 'consortium_organization')
             'Organization'
             'Member'
           }}
@@ -146,7 +146,7 @@
         @controlType="text"
         id="display-name"
         @label="{{if
-            (eq model.memberType 'consortium_organization')
+            (eq this.model.memberType 'consortium_organization')
             'Organization'
             'Member'
           }}
@@ -154,7 +154,7 @@
         @property="displayName"
         @helpText="Name of your organization as you would like it to appear in Fabrica and on DataCite’s website."
       />
-      {{#if (eq model.memberType 'consortium_organization')}}
+      {{#if (eq this.model.memberType 'consortium_organization')}}
         {{#if features.enableDoiEstimate}}
           <form.element
             @controlType="text"
@@ -204,8 +204,8 @@
         @label="Country (optional)"
         @property="country"
         @optionLabelPath="name"
-        @options={{countries}}
-        @destination={{country}}
+        @options={{this.countries}}
+        @destination={{this.country}}
         @helpText="Country where the member is located." as |el|
       >
         <el.control
@@ -225,8 +225,8 @@
         id="organization-type"
         @label="Organization Type (optional)"
         @property="organizationType"
-        @options={{organizationTypes}}
-        @destination={{organizationType}} as |el|
+        @options={{this.organizationTypes}}
+        @destination={{this.organizationType}} as |el|
       >
         <el.control
           @onChange={{action 'selectOrganizationType'}}
@@ -244,8 +244,8 @@
         id="focus-area"
         @label="Focus Area (optional)"
         @property="focusArea"
-        @options={{focusAreas}}
-        @destination={{focusArea}}
+        @options={{this.focusAreas}}
+        @destination={{this.focusArea}}
         @helpText="Field of research covered by the member." as |el|
       >
         <el.control
@@ -268,7 +268,7 @@
       >
         <el.control rows={{10}} />
       </form.element>
-      {{#if (not-eq model.memberType 'consortium_organization')}}
+      {{#if (not-eq this.model.memberType 'consortium_organization')}}
         <label class="control-label col-md-3">
           Logo
         </label>
@@ -283,7 +283,7 @@
             >
               <span class="btn btn-sm">
                 <i class="fas fa-upload"></i>
-                {{if model.logo 'Replace' 'Upload'}}
+                {{if this.model.logo 'Replace' 'Upload'}}
                 Logo
               </span>
             </FileUpload>
@@ -293,17 +293,17 @@
           </div>
         </div>
       {{/if}}
-      {{#if (not-eq model.memberType 'developer')}}
+      {{#if (not-eq this.model.memberType 'developer')}}
         <h3 class="member-results">
           Contact Information
         </h3>
-        {{#if (is-empty model.contacts)}}
+        {{#if (is-empty this.model.contacts)}}
           <div class="col-md-9 col-md-offset-3">
             <BsAlert @dismissible={{false}} @type="danger">
               There are no contacts in your contacts list. Please
               <LinkTo
                 @route="providers.show.contacts.new"
-                @model={{model.id}}
+                @model={{this.model.id}}
                 id="add-contact"
               >
                 add at least one contact
@@ -315,14 +315,14 @@
           <div class="col-md-9 col-md-offset-3">
             <BsAlert @dismissible={{false}} @type="info">
               Contacts are created
-              <LinkTo @route="providers.show.contacts" @model={{model.id}}>
+              <LinkTo @route="providers.show.contacts" @model={{this.model.id}}>
                 in the contacts section
               </LinkTo>
               and then assigned roles here.
             </BsAlert>
           </div>
-          {{#if (not-eq model.memberType 'consortium_organization')}}
-            <form.element @controlType="power-select" id="voting-contact" @label="Voting Representative" @property="votingContact" @optionLabelPath="name" @options={{model.filteredContacts}} @helpText="Your organization's voting representative." @destination={{votingContact}} as |el|>
+          {{#if (not-eq this.model.memberType 'consortium_organization')}}
+            <form.element @controlType="power-select" id="voting-contact" @label="Voting Representative" @property="votingContact" @optionLabelPath="name" @options={{this.model.filteredContacts}} @helpText="Your organization's voting representative." @destination={{this.votingContact}} as |el|>
               <el.control
                 @searchEnabled={{false}}
                 @search={{action 'searchContact'}}
@@ -335,7 +335,7 @@
               </el.control>
             </form.element>
           {{/if}}
-          <form.element @controlType="power-select" id="service-contact" @label="Service Contact" @property="serviceContact" @optionLabelPath="displayName" @options={{model.filteredContacts}} @helpText="Your organization's service contact." @destination={{serviceContact}} as |el|>
+          <form.element @controlType="power-select" id="service-contact" @label="Service Contact" @property="serviceContact" @optionLabelPath="displayName" @options={{this.model.filteredContacts}} @helpText="Your organization's service contact." @destination={{this.serviceContact}} as |el|>
             <el.control
               @searchEnabled={{false}}
               @search={{action 'searchContact'}}
@@ -347,7 +347,7 @@
               {{item.displayName}}
             </el.control>
           </form.element>
-          <form.element @controlType="power-select" id="secondary-service-contact" @label="Secondary Service Contact" @property="secondaryServiceContact" @optionLabelPath="name" @options={{model.filteredContacts}} @helpText="Your organization's secondary service contact." @destination={{secondaryServiceContact}} as |el|>
+          <form.element @controlType="power-select" id="secondary-service-contact" @label="Secondary Service Contact" @property="secondaryServiceContact" @optionLabelPath="name" @options={{this.model.filteredContacts}} @helpText="Your organization's secondary service contact." @destination={{this.secondaryServiceContact}} as |el|>
             <el.control
               @searchEnabled={{false}}
               @search={{action 'searchContact'}}
@@ -360,7 +360,7 @@
               {{item.displayName}}
             </el.control>
           </form.element>
-          <form.element @controlType="power-select" id="technical-contact" @label="Technical Contact" @property="technicalContact" @optionLabelPath="name" @options={{model.filteredContacts}} @helpText="Your organization's technical contact." @destination={{technicalContact}} as |el|>
+          <form.element @controlType="power-select" id="technical-contact" @label="Technical Contact" @property="technicalContact" @optionLabelPath="name" @options={{this.model.filteredContacts}} @helpText="Your organization's technical contact." @destination={{this.technicalContact}} as |el|>
             <el.control
               @searchEnabled={{false}}
               @search={{action 'searchContact'}}
@@ -373,7 +373,7 @@
               {{item.displayName}}
             </el.control>
           </form.element>
-          <form.element @controlType="power-select" id="secondary-technical-contact" @label="Secondary Technical Contact" @property="secondaryTechnicalContact" @optionLabelPath="name" @options={{model.filteredContacts}} @helpText="Your organization's secondary technical contact." @destination={{secondaryTechnicalContact}} as |el|>
+          <form.element @controlType="power-select" id="secondary-technical-contact" @label="Secondary Technical Contact" @property="secondaryTechnicalContact" @optionLabelPath="name" @options={{this.model.filteredContacts}} @helpText="Your organization's secondary technical contact." @destination={{this.secondaryTechnicalContact}} as |el|>
             <el.control
               @searchEnabled={{false}}
               @search={{action 'searchContact'}}
@@ -386,8 +386,8 @@
               {{item.displayName}}
             </el.control>
           </form.element>
-          {{#if (not-eq model.memberType 'consortium_organization')}}
-            <form.element @controlType="power-select" id="billing-contact" @label="Billing Contact" @property="billingContact" @optionLabelPath="name" @options={{model.filteredContacts}} @helpText="Your organization's billing contact." @destination="billingContact" as |el|>
+          {{#if (not-eq this.model.memberType 'consortium_organization')}}
+            <form.element @controlType="power-select" id="billing-contact" @label="Billing Contact" @property="billingContact" @optionLabelPath="name" @options={{this.model.filteredContacts}} @helpText="Your organization's billing contact." @destination="billingContact" as |el|>
               <el.control
                 @searchEnabled={{false}}
                 @search={{action 'searchContact'}}
@@ -399,7 +399,7 @@
                 {{item.displayName}}
               </el.control>
             </form.element>
-            <form.element @controlType="power-select" id="secondary-billing-contact" @label="Secondary Billing Contact" @property="secondaryBillingContact" @optionLabelPath="name" @options={{model.filteredContacts}} @helpText="Your organization's secondary billing contact." @destination={{secondaryBillingContact}} as |el|>
+            <form.element @controlType="power-select" id="secondary-billing-contact" @label="Secondary Billing Contact" @property="secondaryBillingContact" @optionLabelPath="name" @options={{this.model.filteredContacts}} @helpText="Your organization's secondary billing contact." @destination={{this.secondaryBillingContact}} as |el|>
               <el.control
                 @searchEnabled={{false}}
                 @search={{action 'searchContact'}}
@@ -417,8 +417,8 @@
       {{/if}}
       {{#if
         (and
-          (not-eq model.memberType 'consortium_organization')
-          (not-eq model.memberType 'developer')
+          (not-eq this.model.memberType 'consortium_organization')
+          (not-eq this.model.memberType 'developer')
         )
       }}
         <h3 class="member-results">
@@ -465,9 +465,9 @@
           @label="Billing Country"
           @property="billingInformation.country"
           @optionLabelPath="name"
-          @options={{countries}}
+          @options={{this.countries}}
           @helpText="Your organization's country for billing purposes."
-          @destination={{billingInformation.country}} as |el|
+          @destination={{this.billingInformation.country}} as |el|
         >
           <el.control
             @onChange={{action 'selectBillingCountry'}}
@@ -481,7 +481,7 @@
             {{item.name}}
           </el.control>
         </form.element>
-        {{#if showStateSearch}}
+        {{#if this.showStateSearch}}
           <form.element
             @controlType="power-select"
             id="billing-information-state"
@@ -490,7 +490,7 @@
             @optionLabelPath="name"
             @options={{states}}
             @helpText="Your organization's state/province for billing purposes."
-            @destination={{billingInformation.country}} as |el|
+            @destination={{this.billingInformation.country}} as |el|
           >
             <el.control
               @onChange={{action 'selectBillingState'}}
@@ -535,7 +535,7 @@
         </BsAlert>
       </div>
       <div class="col-md-9 col-md-offset-3">
-        {{#if (is-empty (provider-form-errors model))}}
+        {{#if (is-empty (provider-form-errors this.model))}}
           <button
             type="submit"
             id="update-provider"
@@ -544,7 +544,7 @@
           >
             Update
             {{if
-              (eq model.memberType 'consortium_organization')
+              (eq this.model.memberType 'consortium_organization')
               'Organization'
               'Member'
             }}
@@ -553,12 +553,12 @@
           <BsAlert @dismissible={{false}} @type="danger">
             To save this
             {{if
-              (eq model.memberType 'consortium_organization')
+              (eq this.model.memberType 'consortium_organization')
               'organization,'
               'member,'
             }}
             first resolve the errors with these fields:
-            {{provider-form-errors model}}
+            {{provider-form-errors this.model}}
             .
           </BsAlert>
           <button
@@ -569,13 +569,13 @@
           >
             Update
             {{if
-              (eq model.memberType 'consortium_organization')
+              (eq this.model.memberType 'consortium_organization')
               'Organization'
               'Member'
             }}
           </button>
         {{/if}}
-        <button class="btn btn-sm" id="cancel" {{action 'cancel' model}}>
+        <button class="btn btn-sm" id="cancel" {{action 'cancel' this.model}}>
           Cancel
         </button>
       </div>
