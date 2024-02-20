@@ -10,8 +10,18 @@ export default Route.extend(ApplicationRouteMixin, {
   headData: service(),
   intl: service(),
   router: service(),
+  metrics: service(),
 
   isTokenAuthenticating: null,
+
+  actions: {
+    didTransition() {
+      const page = this.router.currentURL;
+      const title = this.router.currentRouteName || 'unknown';
+
+      this.metrics.trackPage({ page, title });
+    }
+  },
 
   async beforeModel() {
     await this.session.setup();
