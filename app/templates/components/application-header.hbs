@@ -44,10 +44,17 @@
                 </span>
               </menu.item>
               <menu.item>
-                <LinkTo @route="{{settings-route this.settings.route}}">
-                  <i class="fas fa-cog"></i>
-                   Settings
-                </LinkTo>
+                {{#if (is-empty this.settings.model)}}
+                  <LinkTo @route="{{settings-route this.settings.route}}">
+                    <i class="fas fa-cog"></i>
+                      Settings
+                  </LinkTo>
+                {{else}}
+                  <LinkTo @route="{{settings-route this.settings.route}}" @model="{{this.settings.model}}">
+                    <i class="fas fa-cog"></i>
+                      Settings
+                  </LinkTo>
+                {{/if}}
               </menu.item>
               <menu.divider />
               <menu.item>
