@@ -147,7 +147,7 @@
     "ember-power-select": "6.0.1",
     "ember-prism": "^0.10.0",
     "ember-qunit": "^5.1.5",
-    "ember-radio-button": "^2.0.1",
+    "ember-radio-button": "3.0.0-beta.1",
     "ember-resolver": "^8.0.3",
     "ember-simple-auth": "^4.2.2",
     "ember-source": "~3.28.8",
@@ -226,6 +226,7 @@
     "**/json5": "^1.0.2",
     "**/ember-fetch/**/browserslist": "^4.16.5",
     "**/@sentry/ember/**/jsdom": "^16.5.0",
-    "**/@types/estree": "0.0.47"
+    "**/@types/estree": "1.0.5",
+    "**/@types/eslint": "^7.2.13"
   }
 }
