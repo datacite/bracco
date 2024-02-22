@@ -215,7 +215,6 @@
     "**/papaparse": "^5.2.0",
     "**/ember-raf-scheduler": "^0.3.0",
     "**/ember-compatibility-helpers": "1.2.6",
-    "**/dynamic-link/ember-cli-babel/broccoli-babel-transpiler/workerpool": "2.3.4",
     "**/socket.io-parser": "^4.2.3",
     "**/word-wrap": "1.2.4",
     "**/@sideway/formula": "3.0.1",
