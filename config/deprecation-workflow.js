@@ -24,6 +24,7 @@ window.deprecationWorkflow.config = {
     { handler: 'silence', matchId: 'ember-modifier.no-element-property' },
     { handler: 'silence', matchId: 'template-compiler.registerPlugin' },
     // New - v3.28 - 2024
-    { handler: 'silence', matchId: 'manager-capabilities.modifiers-3-13' }
+    { handler: 'silence', matchId: 'manager-capabilities.modifiers-3-13' },
+    { handler: 'silence', matchId: 'ember-global' }
   ]
 };
