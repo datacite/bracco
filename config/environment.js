@@ -90,14 +90,6 @@ module.exports = function (environment) {
     'ember-loading': {
       preDelay: 500
     },
-    metricsAdapters: [
-      {
-        name: 'GoogleAnalytics',
-        config: {
-          id: process.env.TRACKING_ID || 'UA-22806196-13'
-        }
-      },
-    ],
     flashMessageDefaults: {
       timeout: 5000,
       extendedTimeout: 0,
