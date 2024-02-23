@@ -151,7 +151,6 @@
     "ember-source": "~3.28.8",
     "ember-template-lint": "^3.15.0",
     "ember-test-selectors": "^6.0.0",
-    "ember-tracker": "^1.0.0",
     "ember-truth-helpers": "^3.1.1",
     "eslint": "7.32.0",
     "eslint-config-prettier": "^8.3.0",
@@ -170,6 +169,7 @@
     "loader.js": "^4.7.0",
     "minimatch": "^5.1.6",
     "morgan": "^1.10.0",
+    "node-polyfill-webpack-plugin": "^3.0.0",
     "npm-run-all": "^4.1.5",
     "patch-package": "^7.0.2",
     "postinstall-postinstall": "^2.1.0",
@@ -181,8 +181,7 @@
     "urijs": "^1.19.11",
     "vkbeautify": "^0.99.3",
     "webpack": "^5.90.3",
-    "xml2js": "^0.4.23",
-    "node-polyfill-webpack-plugin": "^3.0.0"
+    "xml2js": "^0.4.23"
   },
   "engines": {
     "node": "12.* || 14.* || >= 16"
