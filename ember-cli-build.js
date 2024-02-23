@@ -2,6 +2,7 @@
 'use strict';
 
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
+const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
 
 module.exports = function (defaults) {
   const pkg = require('./package.json');
@@ -25,10 +26,9 @@ module.exports = function (defaults) {
       importBootstrapFont: false,
       bootstrapVersion: 3
     },
-    'ember-cli-terser': {
-      //enabled: true
-      enabled: false
-    },
+    // 'ember-cli-terser': {
+    //    enabled: true
+    // },
     'ember-prism': {
       theme: 'default',
       plugins: ['line-highlight']
@@ -50,6 +50,25 @@ module.exports = function (defaults) {
     },
     'ember-simple-auth': {
       useSessionSetupMethod: true
+    },
+    autoImport: {
+      forbidEval: true,
+      webpack: {
+        plugins: [new NodePolyfillPlugin()]
+        /*
+        resolve: {
+          fallback: {
+            crypto: require.resolve('crypto-browserify'),
+            stream: require.resolve('stream-browserify'),
+            timers: require.resolve('timers-browserify'),
+            vm: require.resolve('vm-browserify')
+          },
+          alias: {
+            process: 'process/browser'
+          }
+        }
+        */
+      }
     }
   });
 
