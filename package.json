@@ -99,8 +99,7 @@
     "d3-time-format": "^4.1.0",
     "devtron": "^1.4.0",
     "edtf": "^2.7.1",
-    "ember-auto-import": "^1.12.0",
-    "ember-auto-import-typescript": "^0.6.4",
+    "ember-auto-import": "^2.7.2",
     "ember-bootstrap": "^4.9.0",
     "ember-bootstrap-cp-validations": "^2.1.0",
     "ember-bootstrap-power-select": "^4.1.0",
@@ -181,8 +180,9 @@
     "typescript": "^4.9.5",
     "urijs": "^1.19.11",
     "vkbeautify": "^0.99.3",
-    "webpack": "^4.0.0",
-    "xml2js": "^0.4.23"
+    "webpack": "^5.90.3",
+    "xml2js": "^0.4.23",
+    "node-polyfill-webpack-plugin": "^3.0.0"
   },
   "engines": {
     "node": "12.* || 14.* || >= 16"
