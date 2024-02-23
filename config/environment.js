@@ -90,11 +90,6 @@ module.exports = function (environment) {
     'ember-loading': {
       preDelay: 500
     },
-    emberTracker: {
-      analyticsSettings: {
-        trackingId: process.env.TRACKING_ID || 'UA-22806196-13'
-      }
-    },
     flashMessageDefaults: {
       timeout: 5000,
       extendedTimeout: 0,
