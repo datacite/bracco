@@ -102,26 +102,26 @@
           
           <!-- NEEDS FIX FOR ASSIGNED PREFIX -->
 
-          <LinkTo @route='repositories.show.index' @tagName="li" @model={{this.model.id}}>
-            <LinkTo @route='repositories.show.index' class='nav-link'>
+          <nav.item>
+            <nav.linkTo @route='repositories.show.index' class='nav-link'>
               Info
-            </LinkTo>
-          </LinkTo>
-          <LinkTo @route='repositories.show.settings' @tagName="li" @model={{this.model.id}}>
-            <LinkTo @route='repositories.show.settings' class='nav-link'>
+            </nav.linkTo>
+          </nav.item>
+          <nav.item>
+            <nav.linkTo @route='repositories.show.settings' class='nav-link'>
               Settings
-            </LinkTo>
-          </LinkTo>
-          <LinkTo @route='repositories.show.prefixes' @tagName="li" @model={{this.model.id}}>
-            <LinkTo @route='repositories.show.prefixes' class='nav-link'>
+            </nav.linkTo>
+          </nav.item>
+          <nav.item>
+            <nav.linkTo @route='repositories.show.prefixes' class='nav-link'>
               Prefixes
-            </LinkTo>
-          </LinkTo>
-          <LinkTo @route='repositories.show.dois' @tagName="li" @model={{this.model.id}}>
-            <LinkTo @route='repositories.show.dois' class='nav-link'>
+            </nav.linkTo>
+          </nav.item>
+          <nav.item>
+            <nav.linkTo @route='repositories.show.dois' class='nav-link'>
               DOIs
-            </LinkTo>
-          </LinkTo>
+            </nav.linkTo>
+          </nav.item>
 
         </BsNav>
       </div>
