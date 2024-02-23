@@ -30,7 +30,7 @@
           <nav.dropdown as |dd|>
             <dd.toggle id="account_menu_link" class="{{this.navButtonColor}}">
               {{#if this.currentUser.isUser}}
-                {{currentUser.name}}
+                {{this.currentUser.name}}
               {{else}}
                 {{uppercase this.currentUser.uid}}
               {{/if}}
@@ -40,14 +40,21 @@
               <menu.item>
                 <span  class="dropdown-header">
                   Role:
-                  {{currentUser.roleName}}
+                  {{this.currentUser.roleName}}
                 </span>
               </menu.item>
               <menu.item>
-                <DynamicLink @route="{{settings-route settings.route}}" @model="{{settings.model}}">
-                  <i class="fas fa-cog"></i>
-                  Settings
-                </DynamicLink>
+                {{#if (is-empty this.settings.model)}}
+                  <LinkTo @route="{{settings-route this.settings.route}}">
+                    <i class="fas fa-cog"></i>
+                      Settings
+                  </LinkTo>
+                {{else}}
+                  <LinkTo @route="{{settings-route this.settings.route}}" @model="{{this.settings.model}}">
+                    <i class="fas fa-cog"></i>
+                      Settings
+                  </LinkTo>
+                {{/if}}
               </menu.item>
               <menu.divider />
               <menu.item>
