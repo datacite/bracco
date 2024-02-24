@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "@fragaria/address-formatter": "^2.2.1",
-    "@sentry/ember": "6.3.1",
+    "@sentry/ember": "7.102.1",
     "@types/ember-feature-flags": "^6.0.1",
     "cypress-file-upload": "^5.0.8",
     "ember-cli-google-tag-manager": "^1.0.0",
@@ -222,7 +222,6 @@
     "**/chokidar": "^3.0.0",
     "**/json5": "^1.0.2",
     "**/ember-fetch/**/browserslist": "^4.16.5",
-    "**/@sentry/ember/**/jsdom": "^16.5.0",
     "**/@types/estree": "1.0.5",
     "**/@types/eslint": "^7.2.13"
   }
