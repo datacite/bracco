@@ -82,7 +82,7 @@
     "@types/qunit": "^2.19.3",
     "@types/rsvp": "^4.0.4",
     "babel-loader": "^8.3.0",
-    "bootstrap": "^3.4.1",
+    "bootstrap": "^5.0.0",
     "broccoli-asset-rev": "^3.0.0",
     "checkdigit": "^1.1.1",
     "compression": "^1.7.4",
@@ -100,7 +100,7 @@
     "devtron": "^1.4.0",
     "edtf": "^2.7.1",
     "ember-auto-import": "^2.7.2",
-    "ember-bootstrap": "^4.9.0",
+    "ember-bootstrap": "^5.1.1",
     "ember-bootstrap-cp-validations": "^2.1.0",
     "ember-bootstrap-power-select": "^4.1.0",
     "ember-can": "^4.2.0",
@@ -181,7 +181,8 @@
     "urijs": "^1.19.11",
     "vkbeautify": "^0.99.3",
     "webpack": "^5.90.3",
-    "xml2js": "^0.4.23"
+    "xml2js": "^0.4.23",
+    "@popperjs/core": "^2.11.8"
   },
   "engines": {
     "node": "12.* || 14.* || >= 16"

@@ -24,7 +24,7 @@ module.exports = function (defaults) {
     'ember-bootstrap': {
       importBootstrapCSS: false,
       importBootstrapFont: false,
-      bootstrapVersion: 3
+      bootstrapVersion: 5
     },
     // 'ember-cli-terser': {
     //    enabled: true
