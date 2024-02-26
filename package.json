@@ -144,7 +144,6 @@
     "ember-loading": "^2.0.0",
     "ember-lodash": "^4.19.5",
     "ember-math-helpers": "^2.18.2",
-    "ember-maybe-import-regenerator": "^0.1.6",
     "ember-moment": "^9.0.1",
     "ember-page-title": "^6.2.2",
     "ember-power-select": "6.0.1",
