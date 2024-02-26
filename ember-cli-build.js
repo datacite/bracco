@@ -54,7 +54,11 @@ module.exports = function (defaults) {
     autoImport: {
       forbidEval: true,
       webpack: {
-        plugins: [new NodePolyfillPlugin()]
+        plugins: [new NodePolyfillPlugin()],
+        node: {
+          global: true,
+          // fs: 'empty'
+        }
         /*
         resolve: {
           fallback: {
