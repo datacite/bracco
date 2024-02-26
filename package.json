@@ -38,7 +38,6 @@
     "ember-cli-typescript": "^5.2.1",
     "ember-decorators": "^6.1.1",
     "ember-file-upload": "^3.0.6",
-    "ember-papaparse": "~1.0.0",
     "ember-promise-helpers": "^2.0.0",
     "ember-responsive": "^3.0.6",
     "fastboot-app-server": "^3.3.2",
@@ -188,7 +187,8 @@
     "vkbeautify": "^0.99.3",
     "webpack": "^5.90.3",
     "xml2js": "^0.4.23",
-    "@popperjs/core": "^2.11.8"
+    "@popperjs/core": "^2.11.8",
+    "papaparse": "^5.4.1"
   },
   "engines": {
     "node": "12.* || 14.* || >= 16"
@@ -218,7 +218,6 @@
     "**/shell-quote": "^1.7.3",
     "**/tmpl": "^1.0.5",
     "**/wait-on/axios": "^0.21.2",
-    "**/papaparse": "^5.2.0",
     "**/ember-raf-scheduler": "^0.3.0",
     "**/ember-compatibility-helpers": "1.2.6",
     "**/socket.io-parser": "^4.2.3",

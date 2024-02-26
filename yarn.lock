@@ -9627,16 +9627,6 @@ ember-page-title@^6.2.2:
   dependencies:
     ember-cli-babel "^7.23.1"
 
-ember-papaparse@~1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/ember-papaparse/-/ember-papaparse-1.0.0.tgz#7116ad3392f0f3179e4b062341b88cb86092ca44"
-  integrity sha512-NxdUghiJSb4QeRGojJ8ruAC5hiij8bP3zZoUm/aSQIgiYBj4v+QDvs+JO3Z7S1Gao3PoZZeaePsey5H+yey4Wg==
-  dependencies:
-    broccoli-funnel "^2.0.1"
-    broccoli-merge-trees "^2.0.0"
-    ember-cli-babel "^6.6.0"
-    papaparse "^4.3.6"
-
 ember-popper-modifier@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/ember-popper-modifier/-/ember-popper-modifier-2.0.1.tgz#bb20b997c6cb944b66638aeda426f002a97aa423"
@@ -15007,10 +14997,10 @@ pako@~1.0.5:
   resolved "https://registry.yarnpkg.com/pako/-/pako-1.0.10.tgz#4328badb5086a426aa90f541977d4955da5c9732"
   integrity sha512-0DTvPVU3ed8+HNXOu5Bs+o//Mbdj9VNQMUOe9oKCwh8l0GNwpTDMKCWbRjgtD291AWnkAgkqA/LOnQS8AmS1tw==
 
-papaparse@^4.3.6, papaparse@^5.2.0:
-  version "5.3.2"
-  resolved "https://registry.yarnpkg.com/papaparse/-/papaparse-5.3.2.tgz#d1abed498a0ee299f103130a6109720404fbd467"
-  integrity sha512-6dNZu0Ki+gyV0eBsFKJhYr+MdQYAzFUGlBMNj3GNrmHxmz1lfRa24CjFObPXtjcetlOv5Ad299MhIK0znp3afw==
+papaparse@^5.4.1:
+  version "5.4.1"
+  resolved "https://registry.yarnpkg.com/papaparse/-/papaparse-5.4.1.tgz#f45c0f871853578bd3a30f92d96fdcfb6ebea127"
+  integrity sha512-HipMsgJkZu8br23pW15uvo6sib6wne/4woLZPlFf3rpDyMe9ywEXUsuD7+6K9PRkJlVT51j/sCOYDKGGS3ZJrw==
 
 parallel-transform@^1.1.0:
   version "1.1.0"
