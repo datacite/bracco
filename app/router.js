@@ -61,8 +61,7 @@ Router.map(function () {
   this.route('prefixes', function () {
     this.route('new');
   });
-  this.route('users', function () {
-  });
+  this.route('users', function () {});
   this.route('contacts', function () {
     this.route('show', { path: '/:contact_id' }, function () {
       this.route('edit');

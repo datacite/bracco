@@ -1,24 +1,28 @@
 import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
 import { computed } from '@ember/object';
 import ENV from 'bracco/config/environment';
-import { array, fragment, fragmentArray } from 'ember-data-model-fragments/attributes';
+import {
+  array,
+  fragment,
+  fragmentArray
+} from 'ember-data-model-fragments/attributes';
 import { validator, buildValidations } from 'ember-cp-validations';
 import isEmpty from 'bracco/utils/is-empty';
 
 export const clientTypeList = [
   {
-    label: "Repository",
-    value: "repository"
+    label: 'Repository',
+    value: 'repository'
   },
   {
-    label: "Periodical",
-    value: "periodical"
+    label: 'Periodical',
+    value: 'periodical'
   },
   {
-    label: "IGSN ID Catalog",
-    value: "igsnCatalog"
+    label: 'IGSN ID Catalog',
+    value: 'igsnCatalog'
   }
-]
+];
 
 export const softwareList = [
   'Cayuse',
@@ -202,7 +206,7 @@ export default Model.extend(Validations, {
   }),
 
   get isDisciplinary() {
-    return this.repositoryType.includes("disciplinary");
+    return this.repositoryType.includes('disciplinary');
   },
 
   clearSubjects() {

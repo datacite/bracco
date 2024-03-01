@@ -6,7 +6,7 @@
 
     <div class="pseudo-footer">
       <div class="btn-toolbar pull-right">
-        <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
+        <button class="btn btn-sm" type="button" {{action "cancel"}}>Cancel</button>
         <button type="submit" class="btn btn-sm btn-fill">Save</button>
       </div>
       <div class="clearfix"/>
@@ -23,6 +23,6 @@
     <span><i class="fas fa-question-circle"></i>
       <BsTooltip @placement="top" @viewportPadding={{10}}>Each provider has a unique ID.</BsTooltip>
     </span>
-    <button {{action "edit" model}} class="btn-link"><i class="fas fa-pencil-alt"></i></button>
+    <button class="btn-link" type="button" {{action "edit" model}}><i class="fas fa-pencil-alt"></i></button>
   </div>
 {{/if}}

@@ -64,11 +64,11 @@
       {{/if}}
       <h2 class="work">
         {{this.model.name}}
-        {{#if (not this.model.isActive)}}
+        {{#unless this.model.isActive}}
           <span class="label label-warning-inv">
             Inactive
           </span>
-        {{/if}}
+        {{/unless}}
       </h2>
       <div class="tab-content nav-tabs-member">
         <BsNav

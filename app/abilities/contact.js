@@ -7,17 +7,22 @@ export default Ability.extend({
   currentUser: service(),
 
   canDelete: computed(
-    'currentUser.{role_id,provider_id}','model.roleName',
+    'currentUser.{role_id,provider_id}',
+    'model.roleName',
     'model.provider.{id,memberType,consortium.id,contacts}',
     function () {
-      if (this.get('model.roleName') && this.get('model.roleName').length > 0 || this.get('model.provider.contacts') && this.get('model.provider.contacts').length == 1) {
+      if (
+        (this.get('model.roleName') && this.get('model.roleName').length > 0) ||
+        (this.get('model.provider.contacts') &&
+          this.get('model.provider.contacts').length == 1)
+      ) {
         return false;
       } else {
         switch (this.get('currentUser.role_id')) {
           case 'staff_admin':
             return true;
           case 'consortium_admin':
-            return (isAbleTo(this));
+            return isAbleTo(this);
           case 'provider_admin':
             return (
               this.get('currentUser.provider_id') ===
@@ -37,7 +42,7 @@ export default Ability.extend({
         case 'staff_admin':
           return true;
         case 'consortium_admin':
-          return (isAbleTo(this));
+          return isAbleTo(this);
         case 'provider_admin':
           return (
             this.get('currentUser.provider_id') ===
@@ -56,7 +61,7 @@ export default Ability.extend({
         case 'staff_admin':
           return true;
         case 'consortium_admin':
-          return (isAbleTo(this));
+          return isAbleTo(this);
         case 'provider_admin':
           return (
             this.get('currentUser.provider_id') ===
@@ -76,7 +81,7 @@ export default Ability.extend({
         case 'staff_admin':
           return true;
         case 'consortium_admin':
-          return (isAbleTo(this));
+          return isAbleTo(this);
         case 'provider_admin':
           return (
             this.get('currentUser.provider_id') ===

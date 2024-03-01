@@ -64,9 +64,7 @@
           For information about our privacy practices and commitment to protecting your privacy, please 
           review our
           <a
-            target="_blank"
-            rel="noreferrer"
-            href={{get (links) "PRIVACY_POLICY_URL" }}
+            target="_blank" rel="noopener noreferrer" href={{get (links) "PRIVACY_POLICY_URL" }}
           >
             Privacy Policy 
           </a>
@@ -98,7 +96,7 @@
             Update Contact
           </button>
         {{/if}}
-        <button class="btn btn-sm" {{action 'cancel' this.model}}>
+        <button class="btn btn-sm" type="button" {{action 'cancel' this.model}}>
           Cancel
         </button>
       </div>

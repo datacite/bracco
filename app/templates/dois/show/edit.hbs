@@ -7,11 +7,11 @@
 
       <h3 class="help-header">Update DOI (Form)</h3>
       <div class="label-vertical">
-        More information about DOI registration via form can be found on our <a target="_blank" rel="noopener" href="https://support.datacite.org/docs/fabrica-create-doi-form">Support
+        More information about DOI registration via form can be found on our <a target="_blank" rel="noopener noreferrer" href="https://support.datacite.org/docs/fabrica-create-doi-form">Support
           Website</a>. Required properties are marked with a red asterisk.
       </div>
     </div>
-    <BsForm @formLayout="horizontal" @horizontalLabelGridClass="col-md-3" @model={{this.model}} @onSubmit={{action "submit" this.model}} as |form|>
+    <BsForm @formLayout="horizontal" class="form-horizontal" @horizontalLabelGridClass="col-md-3" @model={{this.model}} @onSubmit={{action "submit" this.model}} as |form|>
       <h3 class="member-results">Required Properties</h3>
 
       <div class="form-group required-nested-label">
@@ -95,7 +95,7 @@
           <button type="submit" id="doi-update" class="btn btn-sm btn-fill" disabled={{true}}>Update DOI</button>
         {{/if}}
 
-        <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
+        <button class="btn btn-sm" type="button" {{action "cancel"}}>Cancel</button>
       </div>
     </BsForm>
 

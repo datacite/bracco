@@ -19,22 +19,21 @@ export default Controller.extend({
     let self = this;
     let prefixes = [];
 
-    this.prefixes_service.get_prefixes(ENV.SHOW_N_PREFIXES, null, query)
+    this.prefixes_service
+      .get_prefixes(ENV.SHOW_N_PREFIXES, null, query)
       .then((values) => {
-        values.forEach(
-          function(value) {
-            if (value.constructor.modelName == 'prefix') {
-              let prefix = value;
-              prefixes.push(prefix);
-            } else {
-              throw new Error("Expecting a prefix object. Got something else.");
-            }
+        values.forEach(function (value) {
+          if (value.constructor.modelName == 'prefix') {
+            let prefix = value;
+            prefixes.push(prefix);
+          } else {
+            throw new Error('Expecting a prefix object. Got something else.');
           }
-        );
+        });
 
         self.set('prefixes', prefixes);
-
-      }).catch(function (reason) {
+      })
+      .catch(function (reason) {
         console.debug(reason);
         self.set('prefixes', []);
       });

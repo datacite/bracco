@@ -40,12 +40,11 @@ export default Route.extend({
         })
     });
 
-    return ret.then( function(ret) {
+    return ret.then(function (ret) {
       // Workaround - going back to settings tab, contacts disappear.
       ret.provider.contacts = ret.contacts;
       return ret;
     });
-
   },
 
   queryParams: {

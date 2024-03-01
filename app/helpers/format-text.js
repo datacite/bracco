@@ -4,15 +4,24 @@ import HtmlEntities from 'html-entities';
 import SanitizeHtml from 'sanitize-html';
 import checkForTex from '../utils/check-for-tex';
 
-
 const Entities = HtmlEntities.AllHtmlEntities;
 const entities = new Entities();
 
 // sanitize and truncate text
-export function formatText([ text ], hash) {
+export function formatText([text], hash) {
   text = entities.decode(text);
 
-  let allowedTags = [ 'strong', 'em', 'b', 'i', 'code', 'pre', 'sub', 'sup', 'br' ];
+  let allowedTags = [
+    'strong',
+    'em',
+    'b',
+    'i',
+    'code',
+    'pre',
+    'sub',
+    'sup',
+    'br'
+  ];
   let sanitizedText = SanitizeHtml(text, { allowedTags });
 
   let out = '';
@@ -21,15 +30,14 @@ export function formatText([ text ], hash) {
   if (!checkForTex(sanitizedText)) {
     let words = sanitizedText.split(' ');
     let len = hash.limit || 500;
-  
+
     if (words) {
       out = words.splice(0, len).join(' ');
-  
+
       if (words.length > len) {
         out += ' …';
       }
     }
-
   } else {
     out = sanitizedText;
   }

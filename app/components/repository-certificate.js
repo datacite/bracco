@@ -8,7 +8,7 @@ const certificateList = [
   'DINI',
   'DSA',
   'RatSWD',
-  'WDS',
+  'WDS'
 ];
 
 export default Component.extend({
@@ -20,17 +20,17 @@ export default Component.extend({
 
   actions: {
     searchCertificate(query) {
-      let certificates = certificateList.filter(function(certificate) {
+      let certificates = certificateList.filter(function (certificate) {
         return certificate.toLowerCase().startsWith(query.toLowerCase());
       });
       this.set('certificates', certificates);
     },
     selectCertificate(certificate) {
-      this.model.get('certificate').replace(this.index, 1, [ certificate ]);
+      this.model.get('certificate').replace(this.index, 1, [certificate]);
       this.set('certificates', certificateList);
     },
     deleteCertificate() {
       this.model.get('certificate').removeAt(this.index);
-    },
-  },
+    }
+  }
 });

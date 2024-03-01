@@ -9,10 +9,9 @@ const Validations = buildValidations({
       presence: true,
       message: 'Related Item contributor must have a name',
       disabled: computed('model.{name,state}', function () {
-        return (
-          this.model.get('state') === 'draft' 
-        )})
-    }),
+        return this.model.get('state') === 'draft';
+      })
+    })
   ],
   contributorType: [
     validator('presence', {
@@ -20,8 +19,7 @@ const Validations = buildValidations({
       message: 'Contributors must include a contributor type',
       disabled: computed('model.{name,state}', function () {
         return (
-          this.model.get('state') === 'draft' ||
-          this.model.get('name') === null 
+          this.model.get('state') === 'draft' || this.model.get('name') === null
         );
       })
     })
@@ -30,7 +28,7 @@ const Validations = buildValidations({
 
 export default Fragment.extend(Validations, {
   name: attr('string'),
-  contributorType: attr('string', { defaultValue: "Other" }),
+  contributorType: attr('string', { defaultValue: 'Other' }),
   givenName: attr('string', { defaultValue: null }),
   familyName: attr('string', { defaultValue: null }),
   nameType: attr('string', { defaultValue: null })

@@ -38,8 +38,7 @@ module.exports = function (defaults) {
         content: process.env.SITE_TITLE || 'DataCite Fabrica'
       },
       'cdn-url': {
-        content:
-          (process.env.CDN_URL || 'https://assets.datacite.org')
+        content: process.env.CDN_URL || 'https://assets.datacite.org'
       }
     },
     'ember-power-select': {
@@ -56,7 +55,7 @@ module.exports = function (defaults) {
       webpack: {
         plugins: [new NodePolyfillPlugin()],
         node: {
-          global: true,
+          global: true
           // fs: 'empty'
         }
         /*

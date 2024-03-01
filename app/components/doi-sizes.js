@@ -18,6 +18,6 @@ export default Component.extend({
     },
     toggleSizes() {
       this.set('showSizes', !this.showSizes);
-    },
-  },
+    }
+  }
 });

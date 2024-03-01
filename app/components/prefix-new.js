@@ -8,17 +8,17 @@ const Validations = buildValidations({
     validator('presence', true),
     validator('format', {
       regex: /^10\.\d{4,5}$/,
-      message: 'Must be a valid DOI prefix',
-    }),
+      message: 'Must be a valid DOI prefix'
+    })
   ],
   lastPrefix: [
     validator('presence', true),
     validator('format', {
       regex: /^10\.\d{4,5}$/,
-      message: 'Must be a valid DOI prefix',
+      message: 'Must be a valid DOI prefix'
     }),
-    validator('number-range', true),
-  ],
+    validator('number-range', true)
+  ]
 });
 
 export default Component.extend(Validations, {
@@ -42,9 +42,7 @@ export default Component.extend(Validations, {
   },
 
   actions: {
-    new() {
-
-    },
+    new() {},
     submitFirstPrefix(firstPrefix) {
       this.set('firstPrefix', firstPrefix);
     },
@@ -57,6 +55,6 @@ export default Component.extend(Validations, {
     },
     cancel() {
       this.router.transitionTo('prefixes');
-    },
-  },
+    }
+  }
 });

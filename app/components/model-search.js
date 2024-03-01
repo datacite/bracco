@@ -46,7 +46,7 @@ export default Component.extend({
         '-updated': 'Sort by Date Updated',
         '-created': 'Sort by Date Created',
         name: 'Sort by DOI',
-        'title': 'Sort Alphabetically',
+        title: 'Sort Alphabetically',
         relevance: 'Sort by Relevance'
       });
     } else if (this.modelName === 'Prefix') {

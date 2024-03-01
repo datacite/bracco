@@ -18,6 +18,6 @@ export default Component.extend({
     },
     toggleSubjects() {
       this.set('showSubjects', !this.showSubjects);
-    },
-  },
+    }
+  }
 });

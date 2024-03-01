@@ -13,32 +13,37 @@ export default Controller.extend({
       let url = ENV.API_URL + '/random';
       fetch(url, {
         headers: {
-          'Authorization': 'Bearer ' + this.currentUser.get('jwt'),
-        },
-      }).then(function(response) {
-        if (response.ok) {
-          response.json().then(function(data) {
-            self.get('model').set('passwordInput', data.phrase);
-          });
-        } else {
-          console.debug(response);
+          Authorization: 'Bearer ' + this.currentUser.get('jwt')
         }
-      }).catch(function(error) {
-        console.debug(error);
-      });
+      })
+        .then(function (response) {
+          if (response.ok) {
+            response.json().then(function (data) {
+              self.get('model').set('passwordInput', data.phrase);
+            });
+          } else {
+            console.debug(response);
+          }
+        })
+        .catch(function (error) {
+          console.debug(error);
+        });
     },
     submit() {
       let self = this;
       this.model.set('keepPassword', false);
-      this.model.save().then(function(provider) {
-        self.router.transitionTo('providers.show', provider);
-      }).catch(function(reason) {
-        console.debug(reason);
-      });
+      this.model
+        .save()
+        .then(function (provider) {
+          self.router.transitionTo('providers.show', provider);
+        })
+        .catch(function (reason) {
+          console.debug(reason);
+        });
     },
     cancel() {
       this.model.rollbackAttributes();
       this.router.transitionTo('providers.show', this.model);
-    },
-  },
+    }
+  }
 });

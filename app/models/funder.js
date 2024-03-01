@@ -5,5 +5,5 @@ export default Model.extend({
 
   name: attr('string'),
   altNames: attr('array'),
-  location: attr('string'),
+  location: attr('string')
 });

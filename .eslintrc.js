@@ -8,14 +8,14 @@ module.exports = {
     sourceType: 'module',
     requireConfigFile: false,
     ecmaFeatures: {
-      legacyDecorators: true,
-    },
+      legacyDecorators: true
+    }
   },
   plugins: ['ember'],
   extends: [
     'eslint:recommended',
     'plugin:ember/recommended',
-    'plugin:prettier/recommended',
+    'plugin:prettier/recommended'
   ],
   env: {
     browser: true,
@@ -47,27 +47,27 @@ module.exports = {
         './blueprints/*/index.js',
         './config/**/*.js',
         './lib/*/index.js',
-        './server/**/*.js',
+        './server/**/*.js'
       ],
       parserOptions: {
-        sourceType: 'script',
+        sourceType: 'script'
       },
       env: {
         browser: false,
-        node: true,
+        node: true
       },
       plugins: ['node'],
       extends: ['plugin:node/recommended'],
       rules: {
         // this can be removed once the following is fixed
         // https://github.com/mysticatea/eslint-plugin-node/issues/77
-        'node/no-unpublished-require': 'off',
-      },
+        'node/no-unpublished-require': 'off'
+      }
     },
     {
       // Test files:
       files: ['tests/**/*-test.{js,ts}'],
-      extends: ['plugin:qunit/recommended'],
-    },
-  ],
+      extends: ['plugin:qunit/recommended']
+    }
+  ]
 };

@@ -1,19 +1,14 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import {
-  render,
-  click,
-  findAll,
-} from '@ember/test-helpers';
+import { render, click, findAll } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import { setupFactoryGuy, make } from 'ember-data-factory-guy';
 
-
-module('Integration | Component | doi contributors', function(hooks) {
+module('Integration | Component | doi contributors', function (hooks) {
   setupRenderingTest(hooks);
   setupFactoryGuy(hooks);
 
-  test('adding multiple persons', async function(assert) {
+  test('adding multiple persons', async function (assert) {
     this.set('model', make('doi'));
 
     await render(hbs`{{doi-contributors model=model}}`);

@@ -3,16 +3,32 @@ import BaseValidator from 'ember-cp-validations/validators/base';
 import { isURL, isISBN } from 'validator';
 
 const RelatedItemIdentifierFormat = BaseValidator.extend({
-
   validate(value, options, model) {
     const ark = /^ark:\/[0-9]{5}\/\S+$/;
-    const lsid = /^[uU][rR][nN]:[lL][sS][iI][dD]:(A-Za-z0-9][A-Za-z0-9()+,-.=@;$_!*'"%]):(A-Za-z0-9][A-Za-z0-9()+,-.=@;$_!*'"%]):(A-Za-z0-9][A-Za-z0-9()+,-.=@;$_!*'"%])[:]?(A-Za-z0-9][A-Za-z0-9()+,-.=@;$_!*'"%])?$/;
-    const purl = {require_host: true, host_whitelist: [ 'purl.org', 'oclc.org' ]};
-    const arxiv = /^(arXiv:)(\d{4}.\d{4,5}|[a-z\-]+(\.[A-Z]{2})?\/\d{7})(v\d+)?/;
+    const lsid =
+      /^[uU][rR][nN]:[lL][sS][iI][dD]:(A-Za-z0-9][A-Za-z0-9()+,-.=@;$_!*'"%]):(A-Za-z0-9][A-Za-z0-9()+,-.=@;$_!*'"%]):(A-Za-z0-9][A-Za-z0-9()+,-.=@;$_!*'"%])[:]?(A-Za-z0-9][A-Za-z0-9()+,-.=@;$_!*'"%])?$/;
+    const purl = {
+      require_host: true,
+      host_whitelist: ['purl.org', 'oclc.org']
+    };
+    const arxiv =
+      /^(arXiv:)(\d{4}.\d{4,5}|[a-z\-]+(\.[A-Z]{2})?\/\d{7})(v\d+)?/;
     const doi = /^(10\.\d{4,5}\/.+)/;
     const bibcode = /\d{4}[A-Za-z\.\&]{5}[\w\.]{4}[ELPQ-Z\.][\d\.]{4}[A-Z]/;
     const urn = /^urn:[a-z0-9][a-z0-9-]{0,31}:[a-z0-9()+,\-.:=@;$_!*'%/?#]/;
-    const types = [ 'EAN13', 'EISSN', 'Handle', 'IGSN', 'ISSN', 'ISTC', 'LISSN', 'LSID', 'PMID',  'UPC', 'w3id' ];
+    const types = [
+      'EAN13',
+      'EISSN',
+      'Handle',
+      'IGSN',
+      'ISSN',
+      'ISTC',
+      'LISSN',
+      'LSID',
+      'PMID',
+      'UPC',
+      'w3id'
+    ];
 
     switch (true) {
       case model.relatedItemIdentifierType == 'ARK':
@@ -38,7 +54,7 @@ const RelatedItemIdentifierFormat = BaseValidator.extend({
       default:
         return 'Please enter a Related Identedfier type.';
     }
-  },
+  }
 });
 
 export default RelatedItemIdentifierFormat;

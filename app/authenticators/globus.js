@@ -17,25 +17,27 @@ export default Base.extend({
       fetch(serverTokenEndpoint, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
+          'Content-Type': 'application/x-www-form-urlencoded'
         },
-        body: 'token=' + jwt,
-      }).then((response) => {
-        response.text().then((text) => {
-          try {
-            let json = JSON.parse(text);
-            if (!response.ok) {
-              response.responseJSON = json;
+        body: 'token=' + jwt
+      })
+        .then((response) => {
+          response.text().then((text) => {
+            try {
+              let json = JSON.parse(text);
+              if (!response.ok) {
+                response.responseJSON = json;
+                reject(response);
+              } else {
+                resolve(json);
+              }
+            } catch (SyntaxError) {
+              response.responseText = text;
               reject(response);
-            } else {
-              resolve(json);
             }
-          } catch (SyntaxError) {
-            response.responseText = text;
-            reject(response);
-          }
-        });
-      }).catch(reject);
+          });
+        })
+        .catch(reject);
     });
   },
   invalidate() {
@@ -43,5 +45,5 @@ export default Base.extend({
   },
   _validate(data) {
     return !isEmpty(data.access_token);
-  },
+  }
 });

@@ -1,6 +1,6 @@
 <div class="input-group">
-  <textarea class="form-control description-field {{if (not isSeriesInformation) 'no-error'}}" rows="8" style="resize:none" placeholder="Description" value={{fragment.description}}
-    oninput={{action "updateDescription" value="target.value"}} data-test-description/>    
+  <textarea class="form-control description-field {{unless isSeriesInformation 'no-error'}}" rows="8" style="resize:none" placeholder="Description" value={{fragment.description}}
+    oninput={{action "updateDescription" value="target.value"}} data-test-description />    
   <span class="input-group-addon">
     <BsButton @outline={{true}} @onClick={{action "deleteDescription" index}}><i class="fas fa-trash pull-left"></i></BsButton>
   </span>

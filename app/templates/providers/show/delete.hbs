@@ -7,7 +7,7 @@
         </div>
         <div class="pseudo-footer">
           <div class="btn-toolbar btn-sm pull-right">
-            <button {{action "cancel" this.model}} class="btn btn-sm">Cancel</button>
+            <button class="btn btn-sm" type="button" {{action "cancel" this.model}}>Cancel</button>
             <LinkTo @route="providers.show.organizations" @model={{this.model.id}} class="btn btn-sm">All Consortium Organizations</LinkTo>
           </div>
           <div class="clearfix"/>
@@ -18,7 +18,7 @@
         </div>
         <div class="pseudo-footer">
           <div class="btn-toolbar btn-sm pull-right">
-            <button {{action "cancel" this.model}} class="btn btn-sm">Cancel</button>
+            <button class="btn btn-sm" type="button" {{action "cancel" this.model}}>Cancel</button>
             <LinkTo @route="providers.show.repositories" @model={{this.model.id}} class="btn btn-sm">All Repositories</LinkTo>
           </div>
           <div class="clearfix"/>
@@ -34,8 +34,8 @@
           
           <div class="pseudo-footer">
             <div class="btn-toolbar pull-right">
-              <button {{action "cancel" this.model}} id="cancel" class="btn btn-sm">Cancel</button>
-              <button {{action "submit"}} id="delete" disabled={{v-get this.model 'confirmSymbol' 'isInvalid'}} class="btn btn-sm btn-fill">Delete</button>
+              <button id="cancel" class="btn btn-sm" type="button" {{action "cancel" this.model}}>Cancel</button>
+              <button id="delete" disabled={{v-get this.model 'confirmSymbol' 'isInvalid'}} class="btn btn-sm btn-fill" type="button" {{action "submit"}}>Delete</button>
             </div>
             <div class="clearfix"/>
           </div>

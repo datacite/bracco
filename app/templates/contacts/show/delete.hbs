@@ -23,14 +23,13 @@
         </form.group>
         <div class="pseudo-footer">
           <div class="btn-toolbar pull-right">
-            <button id="cancel" class="btn btn-sm" {{action 'cancel'}}>
+            <button id="cancel" class="btn btn-sm" type="button" {{action 'cancel'}}>
               Cancel
             </button>
             <button
               disabled={{v-get model 'confirmDelete' 'isInvalid'}}
               id="delete"
-              class="btn btn-sm btn-fill"
-              {{action 'submit'}}
+              class="btn btn-sm btn-fill" type="button" {{action 'submit'}}
             >
               Delete
             </button>

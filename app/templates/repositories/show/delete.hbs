@@ -10,7 +10,7 @@
         </div>
         <div class="pseudo-footer">
           <div class="btn-toolbar btn-sm pull-right">
-            <button {{action "cancel" model}} class="btn btn-sm">Cancel</button>
+            <button class="btn btn-sm" type="button" {{action "cancel" model}}>Cancel</button>
             <LinkTo @route="repositories.show.transfer" @model={{model.id}} class="btn btn-sm"><i class="fas fa-arrow-circle-right"></i>Transfer DOIs</LinkTo>
           </div>
           <div class="clearfix"/>
@@ -26,8 +26,8 @@
 
           <div class="pseudo-footer">
             <div class="btn-toolbar pull-right">
-              <button {{action "cancel"}} id="cancel" class="btn btn-sm">Cancel</button>
-              <button {{action "submit"}} disabled={{v-get model 'confirmSymbol' 'isInvalid'}} id="delete" class="btn btn-sm btn-fill">Delete</button>
+              <button id="cancel" class="btn btn-sm" type="button" {{action "cancel"}}>Cancel</button>
+              <button disabled={{v-get model 'confirmSymbol' 'isInvalid'}} id="delete" class="btn btn-sm btn-fill" type="button" {{action "submit"}}>Delete</button>
             </div>
             <div class="clearfix"/>
           </div>

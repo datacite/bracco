@@ -21,6 +21,6 @@ export default Component.extend({
     },
     toggleTitles() {
       this.set('showTitles', !this.showTitles);
-    },
-  },
+    }
+  }
 });

@@ -11,8 +11,8 @@
 
         <div class="pseudo-footer">
           <div class="btn-toolbar pull-right">
-            <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
-            <button {{action "destroy"}} disabled={{v-get this.model 'confirmDoi' 'isInvalid'}} id="delete-doi" class="btn btn-sm btn-fill">Delete</button>
+            <button class="btn btn-sm" type="button" {{action "cancel"}}>Cancel</button>
+            <button disabled={{v-get this.model 'confirmDoi' 'isInvalid'}} id="delete-doi" class="btn btn-sm btn-fill" type="button" {{action "destroy"}}>Delete</button>
           </div>
           <div class="clearfix"/>
         </div>

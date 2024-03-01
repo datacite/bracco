@@ -1,6 +1,6 @@
 /* jshint node:true*/
 
-module.exports = function(/* env */) {
+module.exports = function (/* env */) {
   return {
     /**
      * prevents the translations from being bundled with the application code.
@@ -55,6 +55,6 @@ module.exports = function(/* env */) {
      * @type {Boolean}
      * @default false
      */
-    stripEmptyTranslations: false,
+    stripEmptyTranslations: false
   };
 };

@@ -17,5 +17,5 @@ export default Route.extend({
     if (this.can.cannot('read provider', model)) {
       this.router.transitionTo('index');
     }
-  },
+  }
 });

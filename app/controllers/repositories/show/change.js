@@ -13,32 +13,37 @@ export default Controller.extend({
       let url = ENV.API_URL + '/random';
       fetch(url, {
         headers: {
-          'Authorization': 'Bearer ' + this.currentUser.get('jwt'),
-        },
-      }).then(function(response) {
-        if (response.ok) {
-          response.json().then(function(data) {
-            self.get('model').set('passwordInput', data.phrase);
-          });
-        } else {
-          console.debug(response);
+          Authorization: 'Bearer ' + this.currentUser.get('jwt')
         }
-      }).catch(function(error) {
-        console.debug(error);
-      });
+      })
+        .then(function (response) {
+          if (response.ok) {
+            response.json().then(function (data) {
+              self.get('model').set('passwordInput', data.phrase);
+            });
+          } else {
+            console.debug(response);
+          }
+        })
+        .catch(function (error) {
+          console.debug(error);
+        });
     },
     submit(repository) {
       let self = this;
       repository.set('keepPassword', false);
-      repository.save().then(function(repository) {
-        self.router.transitionTo('repositories.show', repository);
-      }).catch(function(reason) {
-        console.debug(reason);
-      });
+      repository
+        .save()
+        .then(function (repository) {
+          self.router.transitionTo('repositories.show', repository);
+        })
+        .catch(function (reason) {
+          console.debug(reason);
+        });
     },
     cancel() {
       this.model.rollbackAttributes();
       this.router.transitionTo('repositories.show', this.model);
-    },
-  },
+    }
+  }
 });

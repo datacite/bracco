@@ -96,8 +96,8 @@ export default Component.extend({
   didReceiveAttrs() {
     this._super(...arguments);
 
-    if(!this.fragment.get('relatedItemIdentifier')) {
-      this.fragment.set('relatedIdentifier', {})
+    if (!this.fragment.get('relatedItemIdentifier')) {
+      this.fragment.set('relatedIdentifier', {});
       // this.fragment.get('relatedIdentifier').createFragment();
     }
 
@@ -107,7 +107,6 @@ export default Component.extend({
     if (this.fragment.get('titles').length == 0) {
       this.fragment.get('titles').createFragment();
     }
-
 
     if (!this.fragment.get('creators')) {
       this.fragment.set('creators', []);
@@ -128,24 +127,22 @@ export default Component.extend({
     }
     if (relationType) {
       this.fragment.set('relationType', pascalCase(relationType));
-    }
-    else {
-      this.fragment.set('relationType', null)
+    } else {
+      this.fragment.set('relationType', null);
     }
     this.set('relationTypes', relationTypeList);
   },
   selectRelatedItemType(relatedItemType) {
     if (relatedItemType) {
       this.fragment.set('relatedItemType', pascalCase(relatedItemType));
-    }
-    else {
-      this.fragment.set('relatedItemType', null)
+    } else {
+      this.fragment.set('relatedItemType', null);
     }
     this.set('relatedItemTypes', relatedItemTypeList);
   },
   actions: {
     updateRelatedItemTitle(value) {
-      this.fragment.set('titles', [{title: value}]);
+      this.fragment.set('titles', [{ title: value }]);
     },
     updateRelatedItemVolume(value) {
       this.fragment.set('volume', value);
@@ -180,7 +177,10 @@ export default Component.extend({
       this.set('showRelatedItemContributors', true);
     },
     toggleRelatedItemContributors() {
-      this.set('showRelatedItemContributors', !this.showRelatedItemContributors);
-    },
+      this.set(
+        'showRelatedItemContributors',
+        !this.showRelatedItemContributors
+      );
+    }
   }
 });

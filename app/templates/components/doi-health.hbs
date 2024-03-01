@@ -3,7 +3,7 @@
 
   <div class="panel panel-transparent">
     <div class="panel-body">
-      The URL <a target="_blank" rel="noopener" href="{{model.url}}">{{model.url}}</a> registered for
+      The URL <a target="_blank" rel="noopener noreferrer" href="{{model.url}}">{{model.url}}</a> registered for
       this DOI was last checked <strong>{{moment-from model.landingPage.checked }}</strong> on 
       {{format-time model.landingPage.checked year='numeric' month='long' day='numeric'}}.
 

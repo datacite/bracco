@@ -17,6 +17,6 @@ export default Component.extend({
     },
     toggleRelatedIdentifiers() {
       this.set('showRelatedIdentifiers', !this.showRelatedIdentifiers);
-    },
-  },
+    }
+  }
 });

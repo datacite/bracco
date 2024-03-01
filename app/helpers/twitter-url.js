@@ -1,6 +1,6 @@
 import { helper } from '@ember/component/helper';
 
-export function twitterUrl([ twitter ]) {
+export function twitterUrl([twitter]) {
   if (twitter) {
     return 'https://twitter.com/' + twitter.substr(1);
   } else {

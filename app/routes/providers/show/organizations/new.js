@@ -18,7 +18,7 @@ export default Route.extend({
       secondaryTechnicalContact: null,
       billingContact: null,
       secondaryBillingContact: null,
-      isActive: true,
+      isActive: true
       //doiEstimate: 0
     });
 

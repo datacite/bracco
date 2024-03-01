@@ -25,17 +25,21 @@ const contributorTypes = [
   'Sponsor',
   'Supervisor',
   'WorkPackageLeader',
-  'Other',
+  'Other'
 ];
 
-const humanContributorTypes = contributorTypes.map(type => humanizeString(type));
+const humanContributorTypes = contributorTypes.map((type) =>
+  humanizeString(type)
+);
 
 export default Component.extend({
   humanContributorTypes,
-  humanContributorType: computed('fragment.contributorType', function() {
-    return isBlank(this.get('fragment.contributorType')) ? null : humanizeString(this.get('fragment.contributorType'));
+  humanContributorType: computed('fragment.contributorType', function () {
+    return isBlank(this.get('fragment.contributorType'))
+      ? null
+      : humanizeString(this.get('fragment.contributorType'));
   }),
-  showPersonal: computed('fragment.nameType', function() {
+  showPersonal: computed('fragment.nameType', function () {
     return this.get('fragment.nameType') !== 'Organizational';
   }),
   isReadonlyNameType: false,
@@ -58,7 +62,8 @@ export default Component.extend({
       this.set('isReadonlyNameType', true);
     } else {
       options.givenName = options.givenName || this.fragment.get('givenName');
-      options.familyName = options.familyName || this.fragment.get('familyName');
+      options.familyName =
+        options.familyName || this.fragment.get('familyName');
       options.name = options.name || this.fragment.get('name');
 
       this.set('isReadonlyNameParts', false);
@@ -72,7 +77,10 @@ export default Component.extend({
         this.fragment.set('familyName', options.familyName);
 
         if (options.givenName && options.familyName) {
-          this.fragment.set('name', options.familyName + ', ' + options.givenName);
+          this.fragment.set(
+            'name',
+            options.familyName + ', ' + options.givenName
+          );
         } else if (options.givenName) {
           this.fragment.set('name', options.givenName);
         } else if (options.familyName) {
@@ -109,13 +117,13 @@ export default Component.extend({
 
   actions: {
     updateName(value) {
-      this.fragment.set('name', value)
+      this.fragment.set('name', value);
     },
     selectContributorType(contributorType) {
       this.selectContributorType(contributorType);
     },
     deleteRelatedItemContributor() {
       this.creator.get('contributors').removeObject(this.fragment);
-    },
-  },
+    }
+  }
 });

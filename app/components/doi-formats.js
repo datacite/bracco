@@ -18,6 +18,6 @@ export default Component.extend({
     },
     toggleFormats() {
       this.set('showFormats', !this.showFormats);
-    },
-  },
+    }
+  }
 });

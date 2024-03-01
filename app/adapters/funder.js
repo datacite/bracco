@@ -9,14 +9,13 @@ export default JSONAPIAdapter.extend(DataAdapterMixin, {
     this._super(...arguments);
 
     this.set('headers', {
-      'Accept': 'application/json',
+      Accept: 'application/json'
     });
   },
 
-  authorize() {
-  },
+  authorize() {},
 
   pathForType() {
     return 'funders';
-  },
+  }
 });

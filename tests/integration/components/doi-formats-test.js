@@ -4,7 +4,7 @@ import { setupFactoryGuy, make } from 'ember-data-factory-guy';
 import { render, fillIn, click } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-module('Integration | Component | doi formats', function(hooks) {
+module('Integration | Component | doi formats', function (hooks) {
   setupRenderingTest(hooks);
   setupFactoryGuy(hooks);
 

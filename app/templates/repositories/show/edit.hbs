@@ -131,7 +131,7 @@
           or news that will impact the use of DataCite services and/or membership. Individuals may remove
           themselves from mailings by following the unsubscribe link provided in every DataCite email.
           For information about our privacy practices and commitment to protecting your privacy, please
-          review our <a target="_blank" rel="noreferrer" href={{get (links) "PRIVACY_POLICY_URL" }}>Privacy Policy</a>.
+          review our <a target="_blank" rel="noopener noreferrer" href={{get (links) "PRIVACY_POLICY_URL" }}>Privacy Policy</a>.
         </BsAlert>
       </div>
 
@@ -146,7 +146,7 @@
           <button type="submit" id="update-repository" class="btn btn-sm btn-fill" disabled={{true}}>Update {{if (eq currentUser.uid model.id) 'Account' 'Repository'}}</button>
         {{/if}}
 
-        <button {{action "cancel" model}} class="btn btn-sm">Cancel</button>
+        <button class="btn btn-sm" type="button" {{action "cancel" model}}>Cancel</button>
       </div>
     </BsForm>
   </div>

@@ -13,7 +13,9 @@ export default Route.extend({
   },
 
   afterModel() {
-    if (this.can.cannot('update repository', this.modelFor('repositories/show'))) {
+    if (
+      this.can.cannot('update repository', this.modelFor('repositories/show'))
+    ) {
       this.router.transitionTo('index');
     }
   },

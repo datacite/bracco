@@ -4,9 +4,11 @@ FactoryGuy.define('doi', {
   default: {
     doi: '10.80225/rph240519',
     url: 'https://datacite.org',
-    alternateIdentifiers: [ {
-      'doi': 'https://handle.stage.datacite.org/10.80225/rph24',
-    } ],
+    alternateIdentifiers: [
+      {
+        doi: 'https://handle.stage.datacite.org/10.80225/rph24'
+      }
+    ],
     creators: FactoryGuy.hasMany('creator'),
     contributors: FactoryGuy.hasMany('contributor'),
     titles: FactoryGuy.hasMany('title'),
@@ -26,7 +28,7 @@ FactoryGuy.define('doi', {
     },
     types: {
       resourceTypeGeneral: 'Dataset',
-      resourceType: 'Substance',
+      resourceType: 'Substance'
     },
     schemaVersion: 'http://datacite.org/schema/kernel-4',
     state: 'findable',
@@ -36,16 +38,16 @@ FactoryGuy.define('doi', {
     updated: '2017-09-27T14:08:02.000Z',
     language: 'en',
     downloadCount: 4,
-    sizes: [ '1 page', '500kb' ],
-    formats: [ 'html', 'word' ],
+    sizes: ['1 page', '500kb'],
+    formats: ['html', 'word'],
     version: '7',
     viewCount: 111111,
     citationCount: 123,
-    repository: FactoryGuy.belongsTo('repository'),
+    repository: FactoryGuy.belongsTo('repository')
   },
   empty: {
-    creators: [],
-  },
+    creators: []
+  }
 });
 
 FactoryGuy.define('creator', {
@@ -55,8 +57,8 @@ FactoryGuy.define('creator', {
     familyName: 'Patel',
     nameType: 'Personal',
     nameIdentifiers: FactoryGuy.hasMany('nameIdentifier'),
-    affiliation: FactoryGuy.hasMany('affiliation'),
-  },
+    affiliation: FactoryGuy.hasMany('affiliation')
+  }
 });
 
 FactoryGuy.define('contributor', {
@@ -67,33 +69,34 @@ FactoryGuy.define('contributor', {
     familyName: 'Patel',
     nameType: 'Personal',
     nameIdentifiers: FactoryGuy.hasMany('nameIdentifier'),
-    affiliation: FactoryGuy.hasMany('affiliation'),
-  },
+    affiliation: FactoryGuy.hasMany('affiliation')
+  }
 });
 
 FactoryGuy.define('title', {
   default: {
-    title: 'Submitted chemical data for InChIKey YAPQBXQYLJRXSA-UHFFFAOYSA-N',
-  },
+    title: 'Submitted chemical data for InChIKey YAPQBXQYLJRXSA-UHFFFAOYSA-N'
+  }
 });
 
 FactoryGuy.define('alternateIdentifier', {
   default: {
     alternateIdentifier: 'https://handle.stage.datacite.org/10.70048/rph240519',
-    alternateIdentifierType: 'DOI',
-  },
+    alternateIdentifierType: 'DOI'
+  }
 });
 
 FactoryGuy.define('description', {
   default: {
-    description: 'Description of submitted chemical data for InChIKey YAPQBXQYLJRXSA-UHFFFAOYSA-N',
-  },
+    description:
+      'Description of submitted chemical data for InChIKey YAPQBXQYLJRXSA-UHFFFAOYSA-N'
+  }
 });
 
 FactoryGuy.define('geoLocation', {
   default: {
-    geoLocationPlace: 'Mexico',
-  },
+    geoLocationPlace: 'Mexico'
+  }
 });
 
 FactoryGuy.define('subject', {
@@ -103,15 +106,15 @@ FactoryGuy.define('subject', {
     subjectScheme: 'Fields of Science and Technology (FOS)',
     schemeUri: 'http://www.oecd.org/science/inno/38235147.pdf',
     classificationCode: '3.2'
-  },
+  }
 });
 
 FactoryGuy.define('nameIdentifier', {
   default: {
     nameIdentifier: 'https://orcid.org/0000-0003-1419-2405',
     nameIdentifierScheme: 'ORCID',
-    schemeUri: 'https://orcid.org',
-  },
+    schemeUri: 'https://orcid.org'
+  }
 });
 
 FactoryGuy.define('relatedIdentifier', {
@@ -120,10 +123,11 @@ FactoryGuy.define('relatedIdentifier', {
     relatedIdentifierType: 'DOI',
     relationType: 'HasMetadata',
     relatedMetadataScheme: 'DataCite',
-    schemeUri: 'https://schema.datacite.org/meta/kernel-4.3/doc/DataCite-MetadataKernel_v4.3.pdf',
+    schemeUri:
+      'https://schema.datacite.org/meta/kernel-4.3/doc/DataCite-MetadataKernel_v4.3.pdf',
     schemeType: 'XML',
-    resourceTypeGeneral: 'Dataset',
-  },
+    resourceTypeGeneral: 'Dataset'
+  }
 });
 
 FactoryGuy.define('fundingReference', {
@@ -133,8 +137,8 @@ FactoryGuy.define('fundingReference', {
     funderIdentifierType: 'GRID',
     awardNumber: '13321312G45',
     awardUri: 'http://www.nsfc.gov.cn/publish/portal1/',
-    awardTitle: 'COVID-19 Money',
-  },
+    awardTitle: 'COVID-19 Money'
+  }
 });
 
 FactoryGuy.define('rights', {
@@ -144,8 +148,8 @@ FactoryGuy.define('rights', {
     rightsUri: 'http://creativecommons.org/licenses/by/3.0/de/deed.en',
     rightsIdentifier: ' CC-BY-3.0',
     rightsIdentifierScheme: 'SPDX',
-    schemeUri: 'https://spdx.org/licenses/',
-  },
+    schemeUri: 'https://spdx.org/licenses/'
+  }
 });
 
 FactoryGuy.define('affiliation', {
@@ -153,21 +157,19 @@ FactoryGuy.define('affiliation', {
     name: 'University of Cambridge',
     affiliationIdentifier: 'https://ror.org/013meh722',
     affiliationIdentifierScheme: 'ROR',
-    schemeUri: 'https://ror.org',
-  },
+    schemeUri: 'https://ror.org'
+  }
 });
 
 FactoryGuy.define('relatedItem', {
   default: {
     relatedItemType: 'Journal',
     relationType: 'IsPublishedIn',
-    relatedItemIdentifier: { 
-      relatedItemIdentifier: "10.1016/j.physletb.2017.11.044", 
+    relatedItemIdentifier: {
+      relatedItemIdentifier: '10.1016/j.physletb.2017.11.044',
       relatedItemIdentifierType: 'DOI'
     },
-    titles: [
-      { title: 'Physics letters / B'}
-    ],
+    titles: [{ title: 'Physics letters / B' }],
     publicationYear: '2018',
     volume: '776',
     creators: [
@@ -186,4 +188,4 @@ FactoryGuy.define('relatedItem', {
       }
     ]
   }
-})
+});

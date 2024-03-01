@@ -436,11 +436,11 @@
                   Periodical
                 </span>
               {{/if}}
-              {{#if (not repository.isActive)}}
+              {{#unless repository.isActive}}
                 <span class="label label-warning-inv">
                   Inactive
                 </span>
-              {{/if}}
+              {{/unless}}
             </h3>
             <h5 class="repository-id">
               Repository ID
