@@ -26,7 +26,7 @@
 
       <DoiState @class="required-nested-label" @model={{this.model}} @form={{form}} />
 
-      <div class="form-group required-nested-label {{if (v-get this.model 'url' 'isInvalid') 'has-error' 'has-feedback'}}  {{el.validation}}">
+      <div class="form-group required-nested-label {{if (v-get this.model 'url' 'isInvalid') 'has-error' 'has-feedback'}}">
         <label class="control-label col-md-3">URL</label>
         <div class="col-md-9 input-fragment">
           <div class="label-vertical">The location of the landing page with more information about the resource.</div>
@@ -45,8 +45,10 @@
         <label class="control-label col-md-3">Publication Year</label>
         <div class="col-md-9 input-fragment">
           <div class="label-vertical">The year when the resource was or will be made publicly available.</div>
-          <form.element @id="publication-year" @controlType="text" @property="publicationYear"
-            @helpText="Must be a year between 1000 and {{current-year this.model.maxMintFutureOffset}}." />
+          <form.element id="publication-year" class="form-group" @controlType="text" @property="publicationYear" as |el| >
+            <el.control />
+            <div class="{{el.validation}} help-block">Must be a year between 1000 and {{current-year this.model.maxMintFutureOffset}}.</div>
+          </form.element>
         </div>
       </div>
 
