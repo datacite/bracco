@@ -26,12 +26,13 @@
 
       <DoiState @class="required-nested-label" @model={{this.model}} @form={{form}} />
 
-      <div class="form-group required-nested-label {{if (v-get this.model 'url' 'isInvalid') 'has-error' 'has-feedback'}}">
+      <div class="form-group required-nested-label {{if (v-get this.model 'url' 'isInvalid') 'has-error' 'has-feedback'}}  {{el.validation}}">
         <label class="control-label col-md-3">URL</label>
         <div class="col-md-9 input-fragment">
           <div class="label-vertical">The location of the landing page with more information about the resource.</div>
-          <form.element id="url" @controlType="text" @property="url" @helpText="Should be a https URL — within the allowed domain(s) of your repository if domain restrictions are enabled in the repository settings. Http and ftp are also supported. For example http://example.org" as |el| >
+          <form.element id="url" class="form-group" @controlType="text" @property="url" as |el| >
             <el.control placeholder="URL" />
+            <div class="{{el.validation}} help-block">Should be a https URL — within the allowed domain(s) of your repository if domain restrictions are enabled in the repository settings. Http and ftp are also supported. For example http://example.org</div>
           </form.element>
         </div>
       </div>

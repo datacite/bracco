@@ -113,3 +113,52 @@ div[doi-format].power-select-fragment .ember-basic-dropdown-trigger div.ember-vi
   display:inline-block;
   padding-left: 5px;
 }
+
+/***********************/
+/* ember-bootstrap 5 */
+/***********************/
+
+/* DOI UPDATE FORM - text input box tweeks. */
+
+.form-group .form-text {
+  font-size: 16px;
+  display: block;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  color: #737373;
+  font-size: 16px;
+}
+
+.form-group.has-error input, .form-group.has-error select {
+  color: #e74c3c; 
+  border-color: #e74c3c;
+}
+
+.form-group.has-error .help-block {
+  display: none;
+}
+
+.form-group.has-error .invalid-feedback {
+  color: #e74c3c;
+}
+
+.form-group .help-block.success {
+  color: #2ecc71;
+}
+
+.form-group input.is-valid, .form-group select.is-valid {
+  color: #2ecc71; 
+  border-color: #2ecc71;
+}
+
+/* Fix a slight spacing problem. */
+.input-fragment .form-group div.col-md-9 {
+  padding-left: 0;
+  width: 100%;
+}
+
+/** flashmessage box at the bottom of the form - style changed from 'in' ti 'show' **/
+
+.fade.show {
+  opacity: 1;
+}
