@@ -5,7 +5,7 @@ import { capitalize } from '@ember/string';
 import langs from 'langs';
 import { A } from '@ember/array';
 import { computed } from '@ember/object';
-import { clientTypeList, softwareList } from 'bracco/models/repository'
+import { clientTypeList, softwareList } from 'bracco/models/repository';
 
 export default Controller.extend({
   store: service(),
@@ -16,9 +16,15 @@ export default Controller.extend({
   softwares: softwareList,
   clientTypeList,
   clientTypes: clientTypeList,
-  clientType: computed('model.repository.clientType', function(){    
-    return this.clientTypeList.find(item => item.value === this.get('model.repository.clientType'));
-  }),
+  clientType: computed(
+    'clientTypeList',
+    'model.repository.clientType',
+    function () {
+      return this.clientTypeList.find(
+        (item) => item.value === this.get('model.repository.clientType')
+      );
+    }
+  ),
 
   init(...args) {
     this._super(...args);
@@ -156,17 +162,29 @@ export default Controller.extend({
       repository
         .save()
         .then(function (repository) {
-          self.router.transitionTo('repositories.show.settings', self.model.repository.id, { queryParams: { assignedPrefix: repository.prefixes.firstObject.id } })
+          self.router.transitionTo(
+            'repositories.show.settings',
+            self.model.repository.id,
+            {
+              queryParams: {
+                assignedPrefix: repository.prefixes.firstObject.id
+              }
+            }
+          );
         })
         .catch(function (reason) {
           console.debug(reason);
-          let msg = (reason?.errors[0]?.title ? reason.errors[0].title : ( reason?.title? reason.title : 'Cause is unknown.  Please contact support.' ));
+          let msg = reason?.errors[0]?.title
+            ? reason.errors[0].title
+            : reason?.title
+            ? reason.title
+            : 'Cause is unknown.  Please contact support.';
 
           self
-          .get('flashMessages')
-          .danger(
-            'An error occurred and while saving this repository.' + '  ' + msg
-          );
+            .get('flashMessages')
+            .danger(
+              'An error occurred and while saving this repository.' + '  ' + msg
+            );
         });
     },
     cancel() {

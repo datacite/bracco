@@ -71,11 +71,11 @@
     <DoiAffiliation @model={{this.model}} @creator={{this.fragment}} @fragment={{affiliation}} @form={{this.form}} @index={{this.index}} />
   {{/each}}
 
-  {{#if (not this.hasErrors)}}
+  {{#unless this.hasErrors}}
     <div class="help-block help-block-fragment affiliation-field no-error no-success">
       Affiliation names and identifiers are provided by the Research Organization Registry (ROR).
     </div>
-  {{/if}}
+  {{/unless}}
 {{/if}}
 
 {{#if (lte this.fragment.affiliation.length 2)}}

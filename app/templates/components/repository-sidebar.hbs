@@ -8,16 +8,16 @@
     {{#if (and (eq this.model.state 'findable') this.model.xml)}}
       <h5>Metadata Export</h5>
       <div class="download">
-        <a target="_blank" rel="noopener" href="{{{content-negotiation-url this.model.doi format='datacite'}}}">DataCite XML</a>
+        <a target="_blank" rel="noopener noreferrer" href="{{{content-negotiation-url this.model.doi format='datacite'}}}">DataCite XML</a>
       </div>
       <div class="download">
-        <a target="_blank" rel="noopener" href="{{{content-negotiation-url this.model.doi format='datacite_json'}}}">DataCite JSON</a>
+        <a target="_blank" rel="noopener noreferrer" href="{{{content-negotiation-url this.model.doi format='datacite_json'}}}">DataCite JSON</a>
       </div>
       <div class="download">
-        <a target="_blank" rel="noopener" href="{{{content-negotiation-url this.model.doi format='schema_org'}}}">Schema.org JSON-LD</a>
+        <a target="_blank" rel="noopener noreferrer" href="{{{content-negotiation-url this.model.doi format='schema_org'}}}">Schema.org JSON-LD</a>
       </div>
       <div class="download">
-        <a target="_blank" rel="noopener" href="{{{content-negotiation-url this.model.doi format='bibtex'}}}">BibTeX</a>
+        <a target="_blank" rel="noopener noreferrer" href="{{{content-negotiation-url this.model.doi format='bibtex'}}}">BibTeX</a>
       </div>
     {{/if}}
     {{#if (can "detail doi" this.model)}}

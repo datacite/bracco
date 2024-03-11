@@ -18,6 +18,6 @@ export default Component.extend({
     },
     toggleDescriptions() {
       this.set('showDescriptions', !this.showDescriptions);
-    },
-  },
+    }
+  }
 });

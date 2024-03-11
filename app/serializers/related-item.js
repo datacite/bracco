@@ -15,7 +15,9 @@ export default JSONSerializer.extend({
       } else {
         json[key] = this.filterNull(json[key]);
         if (typeOf(json[key]) == 'array') {
-          json[key] = json[key].filter((item) => { return Object.keys(item).length > 0})
+          json[key] = json[key].filter((item) => {
+            return Object.keys(item).length > 0;
+          });
         }
       }
     });
@@ -33,15 +35,14 @@ export default JSONSerializer.extend({
 
     if (typeOf(snapshot) === 'array') {
       if (snapshot.length > 0) {
-        return snapshot.map((item) => this.filterNull(item))
-      }
-      else {
-        return {}
+        return snapshot.map((item) => this.filterNull(item));
+      } else {
+        return {};
       }
     }
 
     let json = {
-      id: snapshot.id,
+      id: snapshot.id
     };
 
     snapshot.eachAttribute((key) => {
@@ -51,6 +52,5 @@ export default JSONSerializer.extend({
     Object.keys(json).forEach((key) => isBlank(json[key]) && delete json[key]);
 
     return json;
-  },
+  }
 });
-

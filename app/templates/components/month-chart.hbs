@@ -14,7 +14,7 @@
       {{else}}
         {{format-number count}}
       {{/if}}
-      {{#if (not cumulative)}}<span class="small">in 2019</span>{{/if}}
+      {{#unless cumulative}}<span class="small">in 2019</span>{{/unless}}
     </h2>
     <div class="graphs" id={{chartId}}></div>
   </div>

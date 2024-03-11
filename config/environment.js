@@ -16,7 +16,8 @@ module.exports = function (environment) {
     MASTODON_URL: 'https://openbiblio.social/@datacite',
     LINKEDIN_URL: 'https://www.linkedin.com/company/datacite',
     YOUTUBE_URL: 'https://www.youtube.com/channel/UCVsSDZhIN_WbnD_v5o9eB_A',
-    CREATE_A_FABRICA_ACCOUNT_URL: 'https://support.datacite.org/docs/create-a-fabrica-account',      
+    CREATE_A_FABRICA_ACCOUNT_URL:
+      'https://support.datacite.org/docs/create-a-fabrica-account',
     FEE_MODEL_URL: 'https://datacite.org/fee-model',
     PRIVACY_POLICY_URL: 'https://datacite.org/privacy-policy',
     STATUS_URL: 'https://status.datacite.org',
@@ -31,23 +32,59 @@ module.exports = function (environment) {
   const footer_links = {
     WHAT_WE_DO: { NAME: 'What we do', URL: 'https://datacite.org/what-we-do/' },
     GOVERNANCE: { NAME: 'Governance', URL: 'https://datacite.org/governance/' },
-    STEERING_AND_WORKING_GROUPS: { NAME: 'Steering and Working Groups', URL: 'https://datacite.org/#' },
+    STEERING_AND_WORKING_GROUPS: {
+      NAME: 'Steering and Working Groups',
+      URL: 'https://datacite.org/#'
+    },
     TEAM: { NAME: 'Team', URL: 'https://datacite.org/team/' },
-    JOB_OPPORTUNITIES: { NAME: 'Job Opportunities', URL: 'https://datacite.org/job-opportunities/' },
+    JOB_OPPORTUNITIES: {
+      NAME: 'Job Opportunities',
+      URL: 'https://datacite.org/job-opportunities/'
+    },
     PROJECTS: { NAME: 'Projects', URL: 'https://datacite.org/projects/' },
-    CREATE_DOIS: { NAME: 'Create DOIs', URL: 'https://datacite.org/create-dois/' },
-    INTEGRATE_WORKFLOWS: { NAME: 'Integrate Workflows', URL: 'https://datacite.org/integrate-workflows/' },
-    ENABLE_DISCOVERY: { NAME: 'Enable Discovery', URL: 'https://datacite.org/enable-discovery/' },
-    PROMOTE_REUSE: { NAME: 'Promote Reuse', URL: 'https://datacite.org/promote-reuse/' },
-    STRATEGIC_INITIATIVES: { NAME: 'Strategic Initiatives', URL: 'https://datacite.org/#' },
-    BECOME_A_MEMBER: { NAME: 'Become a Member', URL: 'https://datacite.org/become-a-member/' },
+    CREATE_DOIS: {
+      NAME: 'Create DOIs',
+      URL: 'https://datacite.org/create-dois/'
+    },
+    INTEGRATE_WORKFLOWS: {
+      NAME: 'Integrate Workflows',
+      URL: 'https://datacite.org/integrate-workflows/'
+    },
+    ENABLE_DISCOVERY: {
+      NAME: 'Enable Discovery',
+      URL: 'https://datacite.org/enable-discovery/'
+    },
+    PROMOTE_REUSE: {
+      NAME: 'Promote Reuse',
+      URL: 'https://datacite.org/promote-reuse/'
+    },
+    STRATEGIC_INITIATIVES: {
+      NAME: 'Strategic Initiatives',
+      URL: 'https://datacite.org/#'
+    },
+    BECOME_A_MEMBER: {
+      NAME: 'Become a Member',
+      URL: 'https://datacite.org/become-a-member/'
+    },
     DATACITE_FEE_MODEL: { NAME: 'DataCite Fee Model', URL: links.FEE_MODEL },
-    MEMBERSHIP_ENQUIRY: { NAME: 'Membership Enquiry', URL: 'https://datacite.org/membership-enquiry/' },
-    DATACITE_MEMBERS: { NAME: 'DataCite Members', URL: 'https://datacite.org/members/' },
-    METADATA_SCHEMA: { NAME: 'Metadata Schema', URL: 'https://schema.datacite.org/' },
+    MEMBERSHIP_ENQUIRY: {
+      NAME: 'Membership Enquiry',
+      URL: 'https://datacite.org/membership-enquiry/'
+    },
+    DATACITE_MEMBERS: {
+      NAME: 'DataCite Members',
+      URL: 'https://datacite.org/members/'
+    },
+    METADATA_SCHEMA: {
+      NAME: 'Metadata Schema',
+      URL: 'https://schema.datacite.org/'
+    },
     SUPPORT: { NAME: 'Support', URL: links.SUPPORT_URL },
     PRIVACY_POLICY: { NAME: 'Privacy Policy', URL: links.PRIVACY_POLICY_URL },
-    TERMS_AND_CONDITIONS: { NAME: 'Terms and Conditions', URL: 'https://datacite.org/terms-and-conditions/' },
+    TERMS_AND_CONDITIONS: {
+      NAME: 'Terms and Conditions',
+      URL: 'https://datacite.org/terms-and-conditions/'
+    },
     IMPRINT: { NAME: 'Imprint', URL: 'https://datacite.org/imprint/' }
   };
 
@@ -55,9 +92,22 @@ module.exports = function (environment) {
   let fabricaDeployTarget = process.env.FABRICA_DEPLOY_TARGET;
 
   // Bring in the environment variables.
-  let minPrefixesAvailable = ((typeof process.env.MIN_PREFIXES_AVAILABLE === 'undefined') || (process.env.MIN_PREFIXES_AVAILABLE == "")) ? 50 : process.env.MIN_PREFIXES_AVAILABLE;
-  let showNPrefixes = ((typeof process.env.SHOW_N_PREFIXES === 'undefined') || (process.env.SHOW_N_PREFIXES == "")) ? 10 : process.env.SHOW_N_PREFIXES;
-  let maxMintFutureOffset = parseInt(((typeof process.env.MAX_MINT_FUTURE_OFFSET === 'undefined') || (process.env.MAX_MINT_FUTURE_OFFSET == "")) ? 5 : process.env.MAX_MINT_FUTURE_OFFSET);
+  let minPrefixesAvailable =
+    typeof process.env.MIN_PREFIXES_AVAILABLE === 'undefined' ||
+    process.env.MIN_PREFIXES_AVAILABLE == ''
+      ? 50
+      : process.env.MIN_PREFIXES_AVAILABLE;
+  let showNPrefixes =
+    typeof process.env.SHOW_N_PREFIXES === 'undefined' ||
+    process.env.SHOW_N_PREFIXES == ''
+      ? 10
+      : process.env.SHOW_N_PREFIXES;
+  let maxMintFutureOffset = parseInt(
+    typeof process.env.MAX_MINT_FUTURE_OFFSET === 'undefined' ||
+      process.env.MAX_MINT_FUTURE_OFFSET == ''
+      ? 5
+      : process.env.MAX_MINT_FUTURE_OFFSET
+  );
 
   let ENV = {
     modulePrefix: 'bracco',
@@ -100,7 +150,8 @@ module.exports = function (environment) {
     },
     featureFlags: {
       'show-researchers': false,
-      'enable-doi-estimate': (process.env.ENABLE_DOI_ESTIMATE === '1' ? true : false)
+      'enable-doi-estimate':
+        process.env.ENABLE_DOI_ESTIMATE === '1' ? true : false
     },
     fastboot: {
       hostWhitelist: [
@@ -118,9 +169,11 @@ module.exports = function (environment) {
     API_URL: process.env.API_URL || 'https://api.stage.datacite.org',
     FABRICA_URL: process.env.FABRICA_URL || 'https://doi.stage.datacite.org',
     ROR_API_URL: process.env.ROR_API_URL || 'https://api.ror.org',
-    CROSSREF_API_URL: process.env.CROSSREF_API_URL || 'https://api.crossref.org',
+    CROSSREF_API_URL:
+      process.env.CROSSREF_API_URL || 'https://api.crossref.org',
     ORCID_API_URL: process.env.ORCID_API_URL || 'https://pub.orcid.org',
-    EVENTDATA_URL: process.env.EVENTDATA_URL || 'https://api.stage.datacite.org',
+    EVENTDATA_URL:
+      process.env.EVENTDATA_URL || 'https://api.stage.datacite.org',
     CDN_URL: process.env.CDN_URL || 'https://assets.stage.datacite.org',
     HOME_URL: process.env.HOME_URL || 'https://www.stage.datacite.org',
     // informational links - mostly to the home page, collected here for easier maintenance.
@@ -150,18 +203,30 @@ module.exports = function (environment) {
     MIN_PREFIXES_AVAILABLE: minPrefixesAvailable,
     SHOW_N_PREFIXES: showNPrefixes,
     MAX_MINT_FUTURE_OFFSET: maxMintFutureOffset,
-    HANDLE_SERVER: ((typeof process.env.HANDLE_SERVER === 'undefined') || (process.env.HANDLE_SERVER == "")) ? 'https://handle.stage.datacite.org' : normalizeURL(process.env.HANDLE_SERVER)
+    HANDLE_SERVER:
+      typeof process.env.HANDLE_SERVER === 'undefined' ||
+      process.env.HANDLE_SERVER == ''
+        ? 'https://handle.stage.datacite.org'
+        : normalizeURL(process.env.HANDLE_SERVER)
   };
 
   if (fabricaDeployTarget === 'stage') {
     // add staging-specific settings here
     ENV.COOKIE_DOMAIN = '.stage.datacite.org';
-    ENV.HANDLE_SERVER = ((typeof process.env.HANDLE_SERVER === 'undefined') || (process.env.HANDLE_SERVER == "")) ? 'https://handle.stage.datacite.org' : normalizeURL(process.env.HANDLE_SERVER);
+    ENV.HANDLE_SERVER =
+      typeof process.env.HANDLE_SERVER === 'undefined' ||
+      process.env.HANDLE_SERVER == ''
+        ? 'https://handle.stage.datacite.org'
+        : normalizeURL(process.env.HANDLE_SERVER);
   }
 
   if (fabricaDeployTarget === 'test') {
     // add test-env-specific settings here
-    ENV.HANDLE_SERVER = ((typeof process.env.HANDLE_SERVER === 'undefined') || (process.env.HANDLE_SERVER == "")) ? 'https://handle.test.datacite.org' : normalizeURL(process.env.HANDLE_SERVER);
+    ENV.HANDLE_SERVER =
+      typeof process.env.HANDLE_SERVER === 'undefined' ||
+      process.env.HANDLE_SERVER == ''
+        ? 'https://handle.test.datacite.org'
+        : normalizeURL(process.env.HANDLE_SERVER);
   }
 
   if (fabricaDeployTarget === 'production') {
@@ -175,7 +240,11 @@ module.exports = function (environment) {
     ENV.CDN_URL = 'https://assets.datacite.org';
     ENV.HOME_URL = 'https://datacite.org';
     ENV.COOKIE_DOMAIN = '.datacite.org';
-    ENV.HANDLE_SERVER = ((typeof process.env.HANDLE_SERVER === 'undefined') || (process.env.HANDLE_SERVER == "")) ? 'https://doi.org' : normalizeURL(process.env.HANDLE_SERVER);
+    ENV.HANDLE_SERVER =
+      typeof process.env.HANDLE_SERVER === 'undefined' ||
+      process.env.HANDLE_SERVER == ''
+        ? 'https://doi.org'
+        : normalizeURL(process.env.HANDLE_SERVER);
   }
 
   // Environment named 'test' here is the ember environment, not related to fabrica environments.

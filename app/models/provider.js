@@ -207,8 +207,7 @@ const Validations = buildValidations({
     })
   ],
   'billingInformation.state': [validator('billing-state')],
-  doiEstimate:
-  [
+  doiEstimate: [
     validator('presence', {
       presence: true,
       ignoreBlank: true,
@@ -219,7 +218,7 @@ const Validations = buildValidations({
           this.model.get('memberType') !== 'consortium_organization' ||
           !this.model.get('memberType') || // memberType is null for admin account
           !ENV.featureFlags['enable-doi-estimate']
-        )
+        );
       })
     }),
     validator('number', {
@@ -232,7 +231,7 @@ const Validations = buildValidations({
           this.model.get('memberType') !== 'consortium_organization' ||
           !this.model.get('memberType') || // memberType is null for admin account
           !ENV.featureFlags['enable-doi-estimate']
-        )
+        );
       })
     })
   ]
@@ -294,10 +293,10 @@ export default Model.extend(Validations, {
     return this.id.toUpperCase();
   }),
   hasRequiredContacts: computed(
+    'billingContact.email',
     'memberType',
-    'votingContact',
-    'serviceContact',
-    'billingContact',
+    'serviceContact.email',
+    'votingContact.email',
     function () {
       if (this.memberType === 'consortium_organization') {
         return isPresent(this.serviceContact.email);

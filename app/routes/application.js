@@ -15,7 +15,7 @@ export default Route.extend(ApplicationRouteMixin, {
 
   async beforeModel() {
     await this.session.setup();
-    this.intl.setLocale([ 'en-us' ]);
+    this.intl.setLocale(['en-us']);
     set(this, 'headData.siteName', ENV.SITE_TITLE);
     return this._loadCurrentUser();
   },
@@ -27,7 +27,7 @@ export default Route.extend(ApplicationRouteMixin, {
         this.session.invalidate();
       }
       let self = this;
-      this.session.authenticate('authenticator:jwt', jwt).then(function() {
+      this.session.authenticate('authenticator:jwt', jwt).then(function () {
         return self._loadCurrentUser();
       });
     }
@@ -48,5 +48,5 @@ export default Route.extend(ApplicationRouteMixin, {
   },
   _loadCurrentUser() {
     return this.currentUser.load().catch(() => this.session.invalidate());
-  },
+  }
 });

@@ -28,7 +28,7 @@ export default JSONSerializer.extend({
     }
 
     let json = {
-      id: snapshot.id,
+      id: snapshot.id
     };
 
     snapshot.eachAttribute((key) => {
@@ -38,6 +38,5 @@ export default JSONSerializer.extend({
     Object.keys(json).forEach((key) => isBlank(json[key]) && delete json[key]);
 
     return json;
-  },
+  }
 });
-

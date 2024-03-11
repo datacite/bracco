@@ -34,8 +34,10 @@ module.exports = (on, config) => {
   config.env.staff_admin_password = process.env.STAFF_ADMIN_PASSWORD;
   config.env.consortium_admin_username = process.env.CONSORTIUM_ADMIN_USERNAME;
   config.env.consortium_admin_password = process.env.CONSORTIUM_ADMIN_PASSWORD;
-  config.env.organization_admin_username = process.env.ORGANIZATION_ADMIN_USERNAME;
-  config.env.organization_admin_password = process.env.ORGANIZATION_ADMIN_PASSWORD;
+  config.env.organization_admin_username =
+    process.env.ORGANIZATION_ADMIN_USERNAME;
+  config.env.organization_admin_password =
+    process.env.ORGANIZATION_ADMIN_PASSWORD;
   config.env.client_admin_username = process.env.CLIENT_ADMIN_USERNAME;
   config.env.client_admin_password = process.env.CLIENT_ADMIN_PASSWORD;
   config.env.api_url = process.env.API_URL || 'https://api.stage.datacite.org';
@@ -45,8 +47,7 @@ module.exports = (on, config) => {
     process.env.CYPRESS_CONSORTIUM_ADMIN_COOKIE;
   config.env.organization_admin_cookie =
     process.env.CYPRESS_ORGANIZATION_ADMIN_COOKIE;
-  config.env.client_admin_cookie =
-    process.env.CYPRESS_CLIENT_ADMIN_COOKIE;
+  config.env.client_admin_cookie = process.env.CYPRESS_CLIENT_ADMIN_COOKIE;
 
   config.env.site_title = process.env.SITE_TITLE || 'DataCite Fabrica Test';
   config.baseUrl = process.env.FABRICA_URL || config.baseUrl || '';
@@ -58,15 +59,15 @@ module.exports = (on, config) => {
   on('task', {
     // deconstruct the individual properties
     hello({ greeting, name }) {
-      console.log('%s, %s', greeting, name)
+      console.log('%s, %s', greeting, name);
 
-      return null
+      return null;
     },
 
     // seed db - create a doi (to be updated or deleted)
     create_doi({ prefix }) {
       console.log('HERE IS THE PREFIX:  %s', prefix);
-      return null
+      return null;
     },
 
     // Allow messages to be logged to the terminal for command line test invocations.

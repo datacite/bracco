@@ -1,7 +1,6 @@
 import Component from '@ember/component';
 
 export default Component.extend({
-
   didReceiveAttrs() {
     this._super(...arguments);
     if (!this.model.get('subjects')) {
@@ -12,6 +11,6 @@ export default Component.extend({
   actions: {
     addSubject() {
       this.model.get('subjects').createFragment();
-    },
-  },
+    }
+  }
 });

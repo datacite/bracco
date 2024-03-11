@@ -18,6 +18,6 @@ export default Component.extend({
     },
     toggleFundingReferences() {
       this.set('showFundingReferences', !this.showFundingReferences);
-    },
-  },
+    }
+  }
 });

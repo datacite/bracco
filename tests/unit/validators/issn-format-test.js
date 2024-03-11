@@ -3,14 +3,14 @@ import { setupTest } from 'ember-qunit';
 
 let options, builtOptions, validator, message;
 
-module('Unit | Validator | issn-format', function(hooks) {
+module('Unit | Validator | issn-format', function (hooks) {
   setupTest(hooks);
 
-  hooks.beforeEach(function() {
+  hooks.beforeEach(function () {
     validator = this.owner.lookup('validator:issn-format');
   });
 
-  test('no options', function(assert) {
+  test('no options', function (assert) {
     assert.expect(1);
 
     builtOptions = validator.buildOptions({}).toObject();
@@ -22,7 +22,7 @@ module('Unit | Validator | issn-format', function(hooks) {
     }
   });
 
-  test('issn', function(assert) {
+  test('issn', function (assert) {
     assert.expect(2);
 
     builtOptions = validator.buildOptions({}).toObject();
@@ -31,34 +31,34 @@ module('Unit | Validator | issn-format', function(hooks) {
     assert.equal(message, 'Please enter a valid ISSN.');
 
     message = validator.validate('2050-084X', builtOptions);
-    assert.equal(message, true);
+    assert.true(message);
   });
 
-  test('uuid require_hyphen', function(assert) {
+  test('uuid require_hyphen', function (assert) {
     assert.expect(2);
 
     options = {
-      require_hyphen: true,
+      require_hyphen: true
     };
     options = validator.buildOptions(options, {}).toObject();
 
     message = validator.validate('2050-084X', options);
-    assert.equal(message, true);
+    assert.true(message);
 
     message = validator.validate('2050084X', options);
     assert.equal(message, 'Please enter a valid ISSN.');
   });
 
-  test('allow blank', function(assert) {
+  test('allow blank', function (assert) {
     assert.expect(2);
 
     options = {
-      allowBlank: true,
+      allowBlank: true
     };
     options = validator.buildOptions(options, {}).toObject();
 
     message = validator.validate(undefined, options);
-    assert.equal(message, true);
+    assert.true(message);
 
     message = validator.validate('abc', options);
     assert.equal(message, 'Please enter a valid ISSN.');

@@ -8,7 +8,7 @@ module('Integration | Component | index-info', function (hooks) {
 
   test('it renders', async function (assert) {
     await render(hbs`{{index-info}}`);
-    
+
     let currentYear = new Date().getFullYear();
     let startDate = (currentYear - 10).toString();
     let endDate = currentYear.toString();
@@ -16,7 +16,11 @@ module('Integration | Component | index-info', function (hooks) {
     assert
       .dom(this.element)
       .hasText(
-        `Role: Members by year 0 ${startDate+endDate} Repositories by year 0 ${startDate+endDate} DOIs by year 0 in ${currentYear.toString()} ${startDate+endDate}`
+        `Role: Members by year 0 ${
+          startDate + endDate
+        } Repositories by year 0 ${
+          startDate + endDate
+        } DOIs by year 0 in ${currentYear.toString()} ${startDate + endDate}`
       );
   });
 });

@@ -65,12 +65,12 @@
     </h3>
     <div class="panel panel-transparent">
       <div class="panel-body">
-        {{#if (not this.admin)}}
+        {{#unless this.admin}}
           <h5>
             Member ID
           </h5>
           {{this.model.symbol}}
-        {{/if}}
+        {{/unless}}
         {{#if this.model.rorId}}
           <h5>
             ROR ID
@@ -91,7 +91,7 @@
           </h5>
           {{this.model.globusUuid}}
         {{/if}}
-        {{#if (not this.admin)}}
+        {{#unless this.admin}}
           <h5>
             Member Type
           </h5>
@@ -104,7 +104,7 @@
             Organization Name
           </h5>
           {{this.model.name}}
-        {{/if}}
+        {{/unless}}
         {{#if (eq this.model.memberType 'consortium_organization')}}
           <h5>
             Consortium
@@ -171,14 +171,14 @@
           </h5>
           {{format-time this.model.joined year='numeric' month='long' day='numeric'}}
         {{/if}}
-        {{#if (not this.model.hasPassword)}}
+        {{#unless this.model.hasPassword}}
           <h5>
             Password
           </h5>
           <span class="small icon-warning">
             has not been set
           </span>
-        {{/if}}
+        {{/unless}}
       </div>
     </div>
     {{#if (not-eq this.model.memberType 'developer')}}

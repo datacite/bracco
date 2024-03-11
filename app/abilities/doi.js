@@ -122,7 +122,9 @@ export default Ability.extend({
         case 'client_admin':
           return (
             this.get('currentUser.client_id') ===
-              this.get('model.query.client-id') || this.get('model.id') || this.get('model.repository.id')   
+              this.get('model.query.client-id') ||
+            this.get('model.id') ||
+            this.get('model.repository.id')
           );
         default:
           return false;

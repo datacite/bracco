@@ -11,35 +11,40 @@ export default Component.extend({
 
     let promise = new Promise((resolve, reject) => {
       const url = ENV.API_URL + '/providers/' + this.model.get('id') + '/stats';
-      const headers = { 'Accept': 'application/json' };
+      const headers = { Accept: 'application/json' };
       fetch(url, {
-        headers,
-      }).then((response) => {
-        response.text().then((text) => {
-          try {
-            let json = JSON.parse(text);
-            if (!response.ok) {
-              response.responseJSON = json;
+        headers
+      })
+        .then((response) => {
+          response.text().then((text) => {
+            try {
+              let json = JSON.parse(text);
+              if (!response.ok) {
+                response.responseJSON = json;
+                reject(response);
+              } else {
+                resolve(json);
+              }
+            } catch (SyntaxError) {
+              response.responseText = text;
               reject(response);
-            } else {
-              resolve(json);
             }
-          } catch (SyntaxError) {
-            response.responseText = text;
-            reject(response);
-          }
-        });
-      }).catch(reject);
+          });
+        })
+        .catch(reject);
     });
 
     let self = this;
-    promise.then(function(value) {
-      if (self.isDestroying || self.isDestroyed) {
-        return;
+    promise.then(
+      function (value) {
+        if (self.isDestroying || self.isDestroyed) {
+          return;
+        }
+        self.set('json', value);
+      },
+      function (reason) {
+        console.debug(reason);
       }
-      self.set('json', value);
-    }, function(reason) {
-      console.debug(reason);
-    });
-  },
+    );
+  }
 });

@@ -1,13 +1,15 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 import { isBlank } from '@ember/utils';
-import mime from 'mime/lite'
+import mime from 'mime/lite';
 
-const FORMATS = Object.keys(mime._extensions)
+const FORMATS = Object.keys(mime._extensions);
 
 function getMatchingFormats(input) {
-  const matchingFormats = FORMATS.filter(ext => ext.includes(input.toLowerCase()))
-  return matchingFormats
+  const matchingFormats = FORMATS.filter((ext) =>
+    ext.includes(input.toLowerCase())
+  );
+  return matchingFormats;
 }
 
 export default Component.extend({
@@ -35,16 +37,16 @@ export default Component.extend({
           this.formats.push(select.searchText);
           select.actions.choose(select.searchText);
 
-          this.model.get('formats').splice(this.index, 1, select.searchText );
+          this.model.get('formats').splice(this.index, 1, select.searchText);
           this.set('formats', FORMATS);
         }
       }
     },
     searchFormat(query) {
-      this.set('formats', getMatchingFormats(query))
+      this.set('formats', getMatchingFormats(query));
     },
     selectFormat(formatExtension) {
-      this.model.get('formats').splice(this.index, 1, formatExtension );
+      this.model.get('formats').splice(this.index, 1, formatExtension);
       this.model.set('formats', Array.from(this.model.get('formats')));
     },
     deleteFormat() {

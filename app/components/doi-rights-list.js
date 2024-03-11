@@ -18,6 +18,6 @@ export default Component.extend({
     },
     toggleRights() {
       this.set('showRights', !this.showRights);
-    },
-  },
+    }
+  }
 });

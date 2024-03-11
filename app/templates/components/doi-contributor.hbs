@@ -52,11 +52,11 @@
     <DoiAffiliation @model={{model}} @creator={{fragment}} @fragment={{affiliation}} @form={{form}} @index={{index}} />
   {{/each}}
 
-  {{#if (not hasErrors)}}
+  {{#unless hasErrors}}
     <div class="help-block help-block-fragment affiliation-field">
       Affiliation names and identifiers are provided by the Research Organization Registry (ROR).
     </div>
-  {{/if}}
+  {{/unless}}
 
   {{#if (lte fragment.affiliation.length 2)}}
     <BsButton class="btn-sm add-affiliation" @outline={{true}} @onClick={{action "addAffiliation"}}><i class="fas fa-plus-circle"></i> Add another affiliation</BsButton>

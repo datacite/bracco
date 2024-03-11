@@ -7,11 +7,11 @@
 
       <h3 class="help-header">Update DOI (Form)</h3>
       <div class="label-vertical">
-        More information about DOI registration via form can be found on our <a target="_blank" rel="noopener" href="https://support.datacite.org/docs/fabrica-create-doi-form">Support
+        More information about DOI registration via form can be found on our <a target="_blank" rel="noopener noreferrer" href="https://support.datacite.org/docs/fabrica-create-doi-form">Support
           Website</a>. Required properties are marked with a red asterisk.
       </div>
     </div>
-    <BsForm @formLayout="horizontal" @horizontalLabelGridClass="col-md-3" @model={{this.model}} @onSubmit={{action "submit" this.model}} as |form|>
+    <BsForm @formLayout="horizontal" class="form-horizontal" @horizontalLabelGridClass="col-md-3" @model={{this.model}} @onSubmit={{action "submit" this.model}} as |form|>
       <h3 class="member-results">Required Properties</h3>
 
       <div class="form-group required-nested-label">
@@ -30,8 +30,9 @@
         <label class="control-label col-md-3">URL</label>
         <div class="col-md-9 input-fragment">
           <div class="label-vertical">The location of the landing page with more information about the resource.</div>
-          <form.element id="url" @controlType="text" @property="url" @helpText="Should be a https URL — within the allowed domain(s) of your repository if domain restrictions are enabled in the repository settings. Http and ftp are also supported. For example http://example.org" as |el| >
+          <form.element id="url" class="form-group" @controlType="text" @property="url" as |el| >
             <el.control placeholder="URL" />
+            <div class="{{el.validation}} help-block">Should be a https URL — within the allowed domain(s) of your repository if domain restrictions are enabled in the repository settings. Http and ftp are also supported. For example http://example.org</div>
           </form.element>
         </div>
       </div>
@@ -44,8 +45,10 @@
         <label class="control-label col-md-3">Publication Year</label>
         <div class="col-md-9 input-fragment">
           <div class="label-vertical">The year when the resource was or will be made publicly available.</div>
-          <form.element @id="publication-year" @controlType="text" @property="publicationYear"
-            @helpText="Must be a year between 1000 and {{current-year this.model.maxMintFutureOffset}}." />
+          <form.element id="publication-year" class="form-group" @controlType="text" @property="publicationYear" as |el| >
+            <el.control />
+            <div class="{{el.validation}} help-block">Must be a year between 1000 and {{current-year this.model.maxMintFutureOffset}}.</div>
+          </form.element>
         </div>
       </div>
 
@@ -95,7 +98,7 @@
           <button type="submit" id="doi-update" class="btn btn-sm btn-fill" disabled={{true}}>Update DOI</button>
         {{/if}}
 
-        <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
+        <button class="btn btn-sm" type="button" {{action "cancel"}}>Cancel</button>
       </div>
     </BsForm>
 

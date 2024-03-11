@@ -17,6 +17,6 @@ export default Component.extend({
     },
     toggleDates() {
       this.set('showDates', !this.showDates);
-    },
-  },
+    }
+  }
 });

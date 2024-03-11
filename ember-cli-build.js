@@ -24,7 +24,7 @@ module.exports = function (defaults) {
     'ember-bootstrap': {
       importBootstrapCSS: false,
       importBootstrapFont: false,
-      bootstrapVersion: 3
+      bootstrapVersion: 5
     },
     // 'ember-cli-terser': {
     //    enabled: true
@@ -38,8 +38,7 @@ module.exports = function (defaults) {
         content: process.env.SITE_TITLE || 'DataCite Fabrica'
       },
       'cdn-url': {
-        content:
-          (process.env.CDN_URL || 'https://assets.datacite.org')
+        content: process.env.CDN_URL || 'https://assets.datacite.org'
       }
     },
     'ember-power-select': {
@@ -54,7 +53,11 @@ module.exports = function (defaults) {
     autoImport: {
       forbidEval: true,
       webpack: {
-        plugins: [new NodePolyfillPlugin()]
+        plugins: [new NodePolyfillPlugin()],
+        node: {
+          global: true
+          // fs: 'empty'
+        }
         /*
         resolve: {
           fallback: {

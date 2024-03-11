@@ -394,11 +394,11 @@
             <LinkTo @route="providers.show" @model={{provider.id}}>
               {{provider.displayName}}
             </LinkTo>
-            {{#if (not provider.isActive)}}
+            {{#unless provider.isActive}}
               <span class="label label-warning-inv">
                 Inactive
               </span>
-            {{/if}}
+            {{/unless}}
           </h3>
           <h5>
             Member ID

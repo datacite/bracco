@@ -7,7 +7,7 @@
 
       <h3 class="help-header">Create DOI (Form)</h3>
       <div class="label-vertical">
-        More information about DOI registration via form can be found on our <a target="_blank" rel="noopener" href="https://support.datacite.org/docs/fabrica-create-doi-form">Support Website</a>. Required properties are marked with a red asterisk.
+        More information about DOI registration via form can be found on our <a target="_blank" rel="noopener noreferrer" href="https://support.datacite.org/docs/fabrica-create-doi-form">Support Website</a>. Required properties are marked with a red asterisk.
       </div>
     </div>
 
@@ -86,7 +86,7 @@
           <button type="submit" id="doi-create" class="btn btn-sm btn-fill" disabled={{true}}>Create DOI</button>
         {{/if}}
 
-        <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
+        <button class="btn btn-sm" type="button" {{action "cancel"}}>Cancel</button>
       </div>
     </BsForm>
 

@@ -14,6 +14,6 @@ module('Integration | Component | bar chart', function (hooks) {
     let endDate = currentYear.toString();
 
     assert.dom('h3.panel-title').hasText('Charts by year');
-    assert.dom('div.panel-body').hasText(`0  ${startDate+endDate}`);
+    assert.dom('div.panel-body').hasText(`0  ${startDate + endDate}`);
   });
 });

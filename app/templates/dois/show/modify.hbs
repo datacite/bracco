@@ -3,8 +3,7 @@
     <div class="col-md-9 col-md-offset-3 form-help-header">
       <h3 class="help-header">Update DOI (File Upload)</h3>
       <div class="label-vertical">
-        More information about DOI registration via file upload can be found on our <a target="_blank" rel="noopener"
-          href="https://support.datacite.org/docs/fabrica-create-doi-form">Support Website</a>.
+        More information about DOI registration via file upload can be found on our <a target="_blank" rel="noopener noreferrer" href="https://support.datacite.org/docs/fabrica-create-doi-form">Support Website</a>.
       </div>
     </div>
 
@@ -44,7 +43,7 @@
           <button type="submit" id="doi-modify" class="btn btn-sm btn-fill" disabled={{true}}>Update DOI</button>          
         {{/if}}
 
-        <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
+        <button class="btn btn-sm" type="button" {{action "cancel"}}>Cancel</button>
       </div>
     </BsForm>
   </div>

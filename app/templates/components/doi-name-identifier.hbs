@@ -1,6 +1,6 @@
 {{#if (gt this.index 0)}}
   <div class="input-group">
-    <input type="text" class="form-control name-identifier-field no-error {{if (not this.fragment.nameIdentifier) 'no-success'}}" value={{this.fragment.nameIdentifier}} placeholder="Name Identifier" oninput={{action "updateNameIdentifier" value="target.value"}} data-test-name-identifier/>
+    <input type="text" class="form-control name-identifier-field no-error {{unless this.fragment.nameIdentifier 'no-success'}}" value={{this.fragment.nameIdentifier}} placeholder="Name Identifier" oninput={{action "updateNameIdentifier" value="target.value"}} data-test-name-identifier />
     <span class="input-group-btn">
       <BsButton @outline={{true}} @onClick={{action "deleteNameIdentifier" this.index}}><i class="fas fa-trash"></i></BsButton>
     </span>
@@ -8,5 +8,5 @@
 {{else}}
   <input type="text" class="form-control name-identifier-field" value={{this.fragment.nameIdentifier}} placeholder="Name Identifier" oninput={{action "updateNameIdentifier" value="target.value"}} data-test-name-identifier/>
   
-  <div class="help-block help-block-fragment name-identifier-field no-error {{if (not this.fragment.nameIdentifier) 'no-success'}}">Use name identifier expressed as URL. Uniquely identifies an individual or legal entity, according to various schemas, e.g. ORCID, ROR or ISNI. The Given Name, Family Name, and Name will automatically be filled out for ORCID and ROR identifiers.</div>
+  <div class="help-block help-block-fragment name-identifier-field no-error {{unless this.fragment.nameIdentifier 'no-success'}}">Use name identifier expressed as URL. Uniquely identifies an individual or legal entity, according to various schemas, e.g. ORCID, ROR or ISNI. The Given Name, Family Name, and Name will automatically be filled out for ORCID and ROR identifiers.</div>
 {{/if}}

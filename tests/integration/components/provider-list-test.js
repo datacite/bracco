@@ -4,11 +4,11 @@ import { setupFactoryGuy } from 'ember-data-factory-guy';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-module('Integration | Component | provider-list', function(hooks) {
+module('Integration | Component | provider-list', function (hooks) {
   setupRenderingTest(hooks);
   setupFactoryGuy(hooks);
 
-  test('it renders', async function(assert) {
+  test('it renders', async function (assert) {
     // Template block usage:
     await render(hbs`
       {{#provider-list model=model link="repositories.index"}}

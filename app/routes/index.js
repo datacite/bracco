@@ -32,18 +32,24 @@ export default Route.extend({
       this.router.transitionTo('index');
 
       let self = this;
-      this.prefixes.available().then(function(value) {
-        if (self.get('flashMessages').isDestroying || self.get('flashMessages').isDestroyed) {
-          return;
+      this.prefixes.available().then(
+        function (value) {
+          if (
+            self.get('flashMessages').isDestroying ||
+            self.get('flashMessages').isDestroyed
+          ) {
+            return;
+          }
+          if (value <= 0) {
+            self.get('flashMessages').danger(self.prefixes.msg_zero);
+          } else if (value < self.prefixes.min) {
+            self.get('flashMessages').warning(self.prefixes.msg_min);
+          }
+        },
+        function (reason) {
+          console.debug(reason);
         }
-        if (value <= 0) {
-          self.get('flashMessages').danger(self.prefixes.msg_zero);
-        } else if (value < self.prefixes.min) {
-          self.get('flashMessages').warning(self.prefixes.msg_min);
-        }
-      }, function(reason) {
-        console.debug(reason);
-      });
+      );
     } else if (
       w('provider_admin consortium_admin client_admin user').includes(
         this.get('currentUser.role_id')
@@ -52,7 +58,7 @@ export default Route.extend({
       let home = this.currentUser.get('home');
       this.router.transitionTo(home.route, home.id);
     } else if (this.get('currentUser.role_id') === 'temporary') {
-      this.riyter,transitionTo('password');
+      this.riyter, transitionTo('password');
     }
   }
 });

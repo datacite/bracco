@@ -462,10 +462,9 @@ export default Controller.extend({
 
         // Stop unnecessary requests to save contacts by adding some conditions.
         if (
-          (contact.roleName == null) || 
+          contact.roleName == null ||
           !_arr.isEqual(contact.roleName, roleName)
-        )
-        {
+        ) {
           contact.set('roleName', roleName);
           contact.save();
         }
@@ -479,13 +478,17 @@ export default Controller.extend({
         // Report the reason (error) to the user.  Without that, the form appears to be frozen.
         .catch(function (reason) {
           console.debug(reason);
-          let msg = (reason?.errors[0]?.title ? reason.errors[0].title : ( reason?.title? reason.title : 'Cause is unknown.  Please contact support.' ));
+          let msg = reason?.errors[0]?.title
+            ? reason.errors[0].title
+            : reason?.title
+            ? reason.title
+            : 'Cause is unknown.  Please contact support.';
 
           self
-          .get('flashMessages')
-          .danger(
-            'An error occurred and while saving this provider.' + '  ' + msg
-          );
+            .get('flashMessages')
+            .danger(
+              'An error occurred and while saving this provider.' + '  ' + msg
+            );
         });
     },
     cancel() {

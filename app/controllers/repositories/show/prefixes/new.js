@@ -19,30 +19,34 @@ export default Controller.extend({
     let self = this;
     let prefixes = [];
 
-    this.prefixes.get_prefixes(ENV.SHOW_N_PREFIXES, this.model.repository.get('provider.id'), query)
+    this.prefixes
+      .get_prefixes(
+        ENV.SHOW_N_PREFIXES,
+        this.model.repository.get('provider.id'),
+        query
+      )
       .then((values) => {
         let provider = this.model.repository.provider;
 
-        values.forEach(
-          function(value) {
-            if (value.constructor.modelName == 'provider-prefix') {
-              prefixes.push(value);
-            } else if (value.constructor.modelName == 'prefix') {
-              let prefix = value;
-              let providerPrefix;
-              providerPrefix = self.store.createRecord('providerPrefix', {
-                provider, prefix
-              });
-              prefixes.push(providerPrefix);
-            } else {
-              throw new Error("Expecting a prefix object. Got something else.");
-            }
+        values.forEach(function (value) {
+          if (value.constructor.modelName == 'provider-prefix') {
+            prefixes.push(value);
+          } else if (value.constructor.modelName == 'prefix') {
+            let prefix = value;
+            let providerPrefix;
+            providerPrefix = self.store.createRecord('providerPrefix', {
+              provider,
+              prefix
+            });
+            prefixes.push(providerPrefix);
+          } else {
+            throw new Error('Expecting a prefix object. Got something else.');
           }
-        );
+        });
 
         self.set('provider-prefixes', prefixes);
-
-      }).catch(function (reason) {
+      })
+      .catch(function (reason) {
         console.debug(reason);
         self.set('provider-prefixes', []);
       });
@@ -64,12 +68,10 @@ export default Controller.extend({
       if (this.model['repository-prefix'].get('provider-prefix')) {
         let self = this;
 
-        this.model['repository-prefix'].get('provider-prefix')
-          .then ( m => {
-            if (typeof m.get('createdAt') == 'undefined') {
-              m.save()
-              .then(function(value) {
-                self.model['repository-prefix']
+        this.model['repository-prefix'].get('provider-prefix').then((m) => {
+          if (typeof m.get('createdAt') == 'undefined') {
+            m.save().then(function (value) {
+              self.model['repository-prefix']
                 .save()
                 .then(function (repositoryPrefix) {
                   self.set('disabled', true);
@@ -84,9 +86,9 @@ export default Controller.extend({
                 .catch(function (reason) {
                   console.debug(reason);
                 });
-              })
-            } else {
-              self.model['repository-prefix']
+            });
+          } else {
+            self.model['repository-prefix']
               .save()
               .then(function (repositoryPrefix) {
                 self.set('disabled', true);
@@ -101,8 +103,8 @@ export default Controller.extend({
               .catch(function (reason) {
                 console.debug(reason);
               });
-            }
-          });
+          }
+        });
       } else {
         this.router.transitionTo(
           'repositories.show.prefixes',

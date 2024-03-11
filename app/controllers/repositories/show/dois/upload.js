@@ -50,16 +50,15 @@ export default Controller.extend({
         })
         .catch(function (reason) {
           console.debug(reason);
-          self
-            .get('flashMessages')
-            .warning(
-              'An error occured and this DOI could not be saved.' + (reason?.title ? '  ' + reason.title : '')
-              /*
+          self.get('flashMessages').warning(
+            'An error occured and this DOI could not be saved.' +
+              (reason?.title ? '  ' + reason.title : '')
+            /*
                 reason.errors[0]
                 ? reason.errors[0].title
                 : reason
                 */
-            );
+          );
         });
     },
     cancel() {

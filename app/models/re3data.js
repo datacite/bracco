@@ -36,22 +36,22 @@ export default Model.extend(Validations, {
   tags: union('subjects', 'keywords'),
 
   get reformattedSubjects() {
-    return this.subjects.map( (sub) => {
-      var [code, ...rest] = sub.text.split(" ");
+    return this.subjects.map((sub) => {
+      var [code, ...rest] = sub.text.split(' ');
       return {
         classificationCode: code,
-        subject: rest.join(" "),
+        subject: rest.join(' '),
         scheme: sub.scheme
       };
     });
   },
   get fosSubjects() {
-    var subjects = this.subjects.filter( (sub) => {
-      return sub.scheme == "DFG";
+    var subjects = this.subjects.filter((sub) => {
+      return sub.scheme == 'DFG';
     });
 
-    var ids = subjects.map( (sub) => {
-      var [code] = sub.text.split(" ",1);
+    var ids = subjects.map((sub) => {
+      var [code] = sub.text.split(' ', 1);
       return code;
     });
 

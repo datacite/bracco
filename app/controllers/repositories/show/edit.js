@@ -4,7 +4,7 @@ import { A } from '@ember/array';
 import { capitalize } from '@ember/string';
 import langs from 'langs';
 import { computed } from '@ember/object';
-import { clientTypeList, softwareList } from 'bracco/models/repository'
+import { clientTypeList, softwareList } from 'bracco/models/repository';
 
 export default Controller.extend({
   currentUser: service(),
@@ -21,8 +21,10 @@ export default Controller.extend({
   softwares: softwareList,
   clientTypeList,
   clientTypes: clientTypeList,
-  clientType: computed('model.clientType', function() {
-    return this.clientTypeList.find(item => item.value === this.get('model.clientType'));
+  clientType: computed('clientTypeList', 'model.clientType', function () {
+    return this.clientTypeList.find(
+      (item) => item.value === this.get('model.clientType')
+    );
   }),
 
   init(...args) {
@@ -83,8 +85,11 @@ export default Controller.extend({
                 A(repo.get('types')).mapBy('text')
               );
             }
-            if (repo.get('subjects').length > 0  && self.model.get('isDisciplinary')) {
-                self.model.set('subjects', repo.get('fosSubjects'));
+            if (
+              repo.get('subjects').length > 0 &&
+              self.model.get('isDisciplinary')
+            ) {
+              self.model.set('subjects', repo.get('fosSubjects'));
             }
             if (repo.get('certificates').length > 0) {
               self.model.set(

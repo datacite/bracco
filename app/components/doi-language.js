@@ -8,8 +8,10 @@ const languageList = ISO6391.getAllNames();
 export default Component.extend({
   languageList,
   languages: languageList,
-  language: computed('model.language', function() {
-    return ISO6391.getName(this.get('model.language')) !== '' ? ISO6391.getName(this.get('model.language')) : this.get('model.language');
+  language: computed('model.language', function () {
+    return ISO6391.getName(this.get('model.language')) !== ''
+      ? ISO6391.getName(this.get('model.language'))
+      : this.get('model.language');
   }),
 
   init(...args) {
@@ -36,14 +38,14 @@ export default Component.extend({
         !isBlank(select.searchText)
       ) {
         if (!this.selected.includes(select.searchText)) {
-          this.setLanguage(select.searchText)
-          this.languageList.push(select.searchText)
+          this.setLanguage(select.searchText);
+          this.languageList.push(select.searchText);
           select.actions.choose(select.searchText);
         }
       }
     },
     searchLanguage(query) {
-      let languages = languageList.filter(function(language) {
+      let languages = languageList.filter(function (language) {
         return language.toLowerCase().startsWith(query.toLowerCase());
       });
       this.set('languages', languages);
@@ -51,6 +53,6 @@ export default Component.extend({
     selectLanguage(language) {
       this.setLanguage(language);
       this.set('languages', this.languageList);
-    },
-  },
+    }
+  }
 });

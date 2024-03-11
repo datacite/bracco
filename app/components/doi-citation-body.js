@@ -5,14 +5,13 @@ export default Component.extend({
 
   didReceiveAttrs() {
     this._super(...arguments);
-
   },
 
   didRender() {
     this._super(...arguments);
 
     window.MathJax.typesetClear([this.element]);
-    this.element.innerHTML = this.text
+    this.element.innerHTML = this.text;
     window.MathJax.typeset([this.element]);
   }
 });

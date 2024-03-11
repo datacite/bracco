@@ -20,7 +20,7 @@ const UuidFormat = BaseValidator.extend({
         return message;
       }
     }
-  },
+  }
 });
 
 export default UuidFormat;

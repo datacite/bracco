@@ -12,20 +12,22 @@ export default Component.extend({
   generate() {
     let self = this;
     let url = ENV.API_URL + '/providers/random';
-    fetch(url).then(function(response) {
-      if (response.ok) {
-        response.json().then(function(data) {
-          if (self.isDestroying || self.isDestroyed) {
-            return;
-          }
-          self.model.set('symbol', data.symbol);
-        });
-      } else {
-        console.debug(response);
-      }
-    }).catch(function(error) {
-      console.debug(error);
-    });
+    fetch(url)
+      .then(function (response) {
+        if (response.ok) {
+          response.json().then(function (data) {
+            if (self.isDestroying || self.isDestroyed) {
+              return;
+            }
+            self.model.set('symbol', data.symbol);
+          });
+        } else {
+          console.debug(response);
+        }
+      })
+      .catch(function (error) {
+        console.debug(error);
+      });
   },
 
   actions: {
@@ -37,6 +39,6 @@ export default Component.extend({
     },
     clear() {
       this.model.set('symbol', null);
-    },
-  },
+    }
+  }
 });

@@ -11,7 +11,6 @@
 // import hbs from 'htmlbars-inline-precompile';
 // import { setupFactoryGuy, make } from 'ember-data-factory-guy';
 
-
 // module('Integration | Component | doi creators', function(hooks) {
 //   setupRenderingTest(hooks);
 //   setupFactoryGuy(hooks);

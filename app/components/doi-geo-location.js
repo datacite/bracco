@@ -1,8 +1,6 @@
 import Component from '@ember/component';
 
 export default Component.extend({
-
-
   actions: {
     updateGeoLocationPlace(value) {
       this.fragment.set('geoLocationPlace', value);
@@ -27,7 +25,7 @@ export default Component.extend({
     },
     deleteGeoLocation() {
       this.model.get('geoLocations').removeObject(this.fragment);
-    },
-  },
+    }
+  }
 });
 // updateGeoLocationPointLongitude

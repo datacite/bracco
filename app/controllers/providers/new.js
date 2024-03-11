@@ -179,7 +179,7 @@ export default Controller.extend({
       let estimate = this.model.get('doiEstimate');
 
       this.model.set('doiEstimate', '0');
-      this.model.set('doiEstimate', estimate);      //if (this.get('features').isEnabled('doiEstimate')) {
+      this.model.set('doiEstimate', estimate); //if (this.get('features').isEnabled('doiEstimate')) {
     },
     searchCountry(query) {
       let countries = countryList.filter(function (country) {

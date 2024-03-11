@@ -6,8 +6,7 @@
     {{#if this.model.isDraft}}
       {{#if (and (gt this.model.titles.length 0) (gt this.model.titles.firstObject.title.length 0))}}{{format-text this.model.titles.firstObject.title}}{{else}}{{this.model.doi}}{{/if}}
     {{else}}
-      <a target="_blank" rel="noopener"
-        href="{{this.model.identifier}}" data-test-doi>{{#if (gt this.model.titles.length 0)}}{{format-text this.model.titles.firstObject.title}}{{else}}{{this.model.doi}}{{/if}}</a>
+      <a target="_blank" rel="noopener noreferrer" href="{{this.model.identifier}}" data-test-doi>{{#if (gt this.model.titles.length 0)}}{{format-text this.model.titles.firstObject.title}}{{else}}{{this.model.doi}}{{/if}}</a>
     {{/if}}
     <span class="small" data-test-resource-type-general>{{this.model.types.resourceTypeGeneral}}</span>
   {{/if}}

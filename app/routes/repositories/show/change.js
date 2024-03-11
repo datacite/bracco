@@ -16,5 +16,5 @@ export default Route.extend({
     if (this.can.cannot('update repository', model)) {
       this.router.transitionTo('index');
     }
-  },
+  }
 });
