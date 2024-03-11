@@ -151,9 +151,17 @@ div[doi-format].power-select-fragment .ember-basic-dropdown-trigger div.ember-vi
   border-color: #2ecc71;
 }
 
-/* Fix a slight spacing problem. */
+/* Fix a slight spacing problem - text inputs doi forms - url/publication year. */
 .input-fragment .form-group div.col-md-9 {
   padding-left: 0;
+  width: 100%;
+}
+
+
+/* Fix a slight spacing problem - text inputs - doi forms - version. */
+.input-fragment div.col-md-9 {
+  padding-left: 0;
+  padding-right: 0;
   width: 100%;
 }
 
@@ -162,3 +170,16 @@ div[doi-format].power-select-fragment .ember-basic-dropdown-trigger div.ember-vi
 .fade.show {
   opacity: 1;
 }
+
+/* DOI UPDATE FORM - power-select styles. */
+
+/*
+.power-select-fragment {
+  margin-left: 0 !important;
+}
+
+
+.power-select-fragment[data-test-affiliation] {
+  margin-left: 0;
+}
+*/
