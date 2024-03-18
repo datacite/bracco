@@ -1,7 +1,9 @@
 import EmberRouter from '@ember/routing/router';
 import config from './config/environment';
 
-const Router = EmberRouter.extend();
+const Router = EmberRouter.extend({
+  location: 'auto'
+});
 
 Router.map(function () {
   this.route('providers', function () {
