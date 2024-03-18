@@ -1,4 +1,4 @@
-{{#if (and (not this.simple) (gt index 0)) }}
+{{#if (and (not this.simple) (gt this.index 0)) }}
   <div class="power-select-label">
     <label for="subject" class="subtitle">
       Subject
@@ -9,9 +9,9 @@
   <div class="power-select-fragment" data-test-doi-subject>
     <@form.element
        @controlType="power-select"
-       @options={{subjects}}
-       @value={{fragment.subject}}
-       @destination={{fragment.subject}}
+       @options={{this.subjects}}
+       @value={{this.fragment.subject}}
+       @destination={{this.fragment.subject}}
        class="power-select-subject" as |el|
        >
        <el.control
@@ -23,7 +23,7 @@
          @allowClear={{true}}
          @searchPlaceholder="Type to search subject OR create a new keyword..."
          @noMatchesMessage="Press ENTER to add new subject, keyword, classification code, or key phrase describing the resource."
-         @disabled={{disabled}}
+         @disabled={{this.disabled}}
          class="power-select-subject-field"
          />
        {{#unless this.simple }}
@@ -40,7 +40,7 @@
      </@form.element>
   </div>
     <span class="input-group-addon" style="vertical-align:top;padding-top:3px;">
-    <BsButton @outline={{true}} @onClick={{action 'deleteSubject' index}}>
+    <BsButton @outline={{true}} @onClick={{action 'deleteSubject' this.index}}>
       <i class="fas fa-trash pull-left"></i>
     </BsButton>
   </span>
@@ -57,7 +57,7 @@
     placeholder="Subject Scheme"
     class="form-control subject-scheme-field"
     disabled={{this.oecdSelected}}
-    value={{fragment.subjectScheme}}
+    value={{this.fragment.subjectScheme}}
     oninput={{action 'updateSubjectScheme' value='target.value'}}
     data-test-subject-scheme
   />
@@ -75,12 +75,12 @@
     placeholder="Subject Scheme URI"
     class="form-control subject-scheme-uri-field"
     disabled={{this.oecdSelected}}
-    value={{fragment.subjectSchemeUri}}
+    value={{this.fragment.subjectSchemeUri}}
     oninput={{action 'updateSubjectSchemeUri' value='target.value'}}
     data-test-subject-uri
   />
   <span class="input-group-btn">
-    <BsButton @outline={{true}} @onClick={{action 'deleteSubject' index}}>
+    <BsButton @outline={{true}} @onClick={{action 'deleteSubject' this.index}}>
       <i class="fas fa-trash"></i>
     </BsButton>
   </span>
@@ -98,7 +98,7 @@
   placeholder="Classification Code"
   class="form-control subject-classification-code-field"
   disabled={{this.oecdSelected}}
-  value={{fragment.classificationCode}}
+  value={{this.fragment.classificationCode}}
   oninput={{action 'updateClassificationCode' value='target.value'}}
   data-test-classification-code
 />

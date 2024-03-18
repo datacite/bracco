@@ -2,7 +2,7 @@
   <label for="relatedItemIdentifier" class="subtitle">Related Item Identifier</label> 
 </div> 
 <input type="text"
-    class="form-control related-item-identifier-field" placeholder="" value={{fragment.relatedItemIdentifier}} oninput={{action "updateRelatedItemIdentifier" value="target.value"}} data-test-related-item-identifier />
+    class="form-control related-item-identifier-field" placeholder="" value={{this.fragment.relatedItemIdentifier}} oninput={{action "updateRelatedItemIdentifier" value="target.value"}} data-test-related-item-identifier />
 
 <div
   class="help-block help-block-fragment related-item-identifier-field">
@@ -14,7 +14,7 @@
   <label for="relatedItemIdentifierType" class="subtitle">Related Identifier Type</label> 
 </div> 
 <div class="power-select-fragment" disabled={{this.controlledIdentifierType}} data-test-related-item-identifier-type>
-  <@form.element @controlType="power-select" @value={{fragment.relatedItemIdentifierType}} @helpText="The type of the Related Identifier." @options={{relatedItemIdentifierTypeList}} @destination={{relatedItemIdentifierType}} as |el|>
+  <@form.element @controlType="power-select" @value={{this.fragment.relatedItemIdentifierType}} @helpText="The type of the Related Identifier." @options={{this.relatedItemIdentifierTypeList}} @destination={{this.relatedItemIdentifierType}} as |el|>
     <el.control @onChange={{action "selectRelatedItemIdentifierType"}} @allowClear={{true}} @placeholder="Select related Identifier Type" @disabled={{this.controlledIdentifierType}} @allowClear={{true}} @searchEnabled={{true}} />
   </@form.element>
 </div>

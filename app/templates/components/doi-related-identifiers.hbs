@@ -12,7 +12,7 @@
       {{/if}}
 
       {{#if (gt this.model.relatedIdentifiers.length 0)}}
-        <BsButton id="toggle-related-identifiers" class="btn-sm" @outline={{true}} @onClick={{action "toggleRelatedIdentifiers"}}><i class="fas fa-eye-slash"></i> Hide {{pluralize this.model.relatedIdentifiers.length 'related identififier'}}</BsButton>
+        <BsButton id="toggle-related-identifiers" class="btn-sm" @outline={{true}} @onClick={{action "toggleRelatedIdentifiers"}}><i class="fas fa-eye-slash"></i> Hide {{pluralize this.model.relatedIdentifiers.length 'related identifier'}}</BsButton>
       {{/if}}
     {{else}}
       {{#if (gt this.model.relatedIdentifiers.length 0)}}
