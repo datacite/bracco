@@ -68,7 +68,7 @@
   <label for="affiliation" class="subtitle">Affiliation</label>
 
   {{#each this.fragment.affiliation as |affiliation index|}}
-    <DoiAffiliation @model={{this.model}} @creator={{this.fragment}} @fragment={{affiliation}} @form={{this.form}} @index={{this.index}} />
+    <DoiAffiliation @model={{this.model}} @creator={{this.fragment}} @fragment={{affiliation}} @form={{this.form}} @index={{index}} />
   {{/each}}
 
   {{#unless this.hasErrors}}
