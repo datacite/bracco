@@ -11,7 +11,7 @@
       </div>
     </div>
 
-    <BsForm @formLayout="horizontal" @horizontalLabelGridClass="col-md-3" @model={{this.this.model.doi}} @onSubmit={{action "submit" this.this.model.doi}} as |form|>
+    <BsForm @formLayout="horizontal" class="form-horizontal" @horizontalLabelGridClass="col-md-3" @model={{this.model.doi}} @onSubmit={{action "submit" this.model.doi}} as |form|>
       <h3 class="member-results">Required Properties</h3>
 
       <DoiDoi @model={{this.model.doi}} @repository={{this.model.repository}} @form={{form}} />
@@ -26,8 +26,9 @@
         </div>
       </div>
 
-      <DoiCreators @model={{this.model.doi}} @form={{form}} />
+      <DoiCreators @model={{this.model.doi}} @form={{this.form}} />
       <DoiTitles @model={{this.model.doi}} @form={{form}} />
+
       <DoiPublisher @model={{this.model.doi}} @form={{form}} @fragment={{this.model.doi.publisher}} />
 
       <div class="form-group required-nested-label {{if (v-get this.model.doi 'publicationYear' 'isInvalid') 'has-error' 'has-feedback'}}">
@@ -92,7 +93,7 @@
 
     <div class="row">
       <div class="col-md-9 col-md-offset-3">
-        {{#each this.this.flashMessages.queue as |flash|}}
+        {{#each this.flashMessages.queue as |flash|}}
           {{#if (eq flash.componentName "doi-error") }}
             <FlashMessage @flash={{flash}} />
           {{/if}}

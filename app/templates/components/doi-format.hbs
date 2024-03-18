@@ -1,8 +1,8 @@
 <div class="input-group" style="padding-top:30px;">
   <div class="power-select-fragment" doi-format>
-    <@form.element @controlType="power-select" @value={{fragment}} @options={{formats}} as |el|>
-      <el.control @onChange={{action "selectFormat"}} @onKeydown={{action "createOnEnter"}} @search={{action "searchFormat"}} @placeholder="Search standard formats OR create a new format" @searchPlaceholder="Type to search format OR create a new format..." @noMatchesMessage="Press ENTER to add new format." @allowClear={{true}} @disabled={{disabled}} @searchEnabled={{true}}  as |item|>
-        {{if item item fragment}}
+    <@form.element @controlType="power-select" @value={{this.fragment}} @options={{this.formats}} as |el|>
+      <el.control @onChange={{action "selectFormat"}} @onKeydown={{action "createOnEnter"}} @search={{action "searchFormat"}} @placeholder="Search standard formats OR create a new format" @searchPlaceholder="Type to search format OR create a new format..." @noMatchesMessage="Press ENTER to add new format." @allowClear={{true}} @disabled={{this.disabled}} @searchEnabled={{true}}  as |item|>
+        {{if item item this.fragment}}
       </el.control>
       <div class="help-block">
         The default format scheme is provided by the
@@ -16,10 +16,10 @@
     </@form.element>
   </div>
   <span class="input-group-addon" style="vertical-align:top;padding-top:3px;background-color:white;">
-  <BsButton @outline={{true}} @onClick={{action "deleteFormat" index}}><i class="fas fa-trash pull-left"></i></BsButton>
+  <BsButton @outline={{true}} @onClick={{action "deleteFormat" this.index}}><i class="fas fa-trash pull-left"></i></BsButton>
   </span>
 </div>
 
-{{#if fragment.affiliationIdentifier}}
-  <input type="text" class="form-control affiliation-identifier-field no-error no-success" value={{fragment.affiliationIdentifier}} readonly="true"/>
+{{#if this.fragment.affiliationIdentifier}}
+  <input type="text" class="form-control affiliation-identifier-field no-error no-success" value={{this.fragment.affiliationIdentifier}} readonly="true"/>
 {{/if}}

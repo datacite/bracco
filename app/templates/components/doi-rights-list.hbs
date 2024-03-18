@@ -4,7 +4,7 @@
     <div class="label-vertical">Rights information for the resource.</div>
     {{#if this.showRights}}
       {{#each this.model.rightsList as |rights index|}}
-        <DoiRights @model={{this.model}} @fragment={{rights}} @form={{this.form}} @index={{index}} @spdx={{spdx}} />
+        <DoiRights @model={{this.model}} @fragment={{rights}} @form={{this.form}} @index={{index}} @spdx={{this.spdx}} />
       {{/each}}
 
       {{#if (lte this.model.rightsList.length 4)}}

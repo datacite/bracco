@@ -1,16 +1,24 @@
 import Component from '@ember/component';
+import { schedule } from '@ember/runloop';
 
 export default Component.extend({
   showTitles: true,
+
+  init: function () {
+    this._super();
+
+    schedule("afterRender",this,function() {
+      if (this.model.get('titles').length == 0) {
+        this.send("addTitle");
+      }
+    });
+  },
 
   didReceiveAttrs() {
     this._super(...arguments);
 
     if (!this.model.get('titles')) {
       this.model.set('titles', []);
-    }
-    if (this.model.get('titles').length == 0) {
-      this.model.get('titles').createFragment();
     }
   },
 

@@ -3,10 +3,10 @@
 </div> 
 
 <div class="input-group">
-  <input type="text" class="form-control related-item-title-field" value={{fragment.title}} placeholder=""
+  <input type="text" class="form-control related-item-title-field" value={{this.fragment.title}} placeholder=""
   oninput={{action "updateRelatedItemTitle" value="target.value"}} data-test-related-item-title />
   <span class="input-group-btn">
-    <BsButton @outline={{true}} @onClick={{action "deleteRelatedItem" index}}><i class="fas fa-trash"></i></BsButton>
+    <BsButton @outline={{true}} @onClick={{action "deleteRelatedItem" this.index}}><i class="fas fa-trash"></i></BsButton>
   </span>
 </div>
 
@@ -19,7 +19,7 @@
   <label for="relatedItemType" class="required-label subtitle">Related Item Type</label> 
 </div> 
 <div class="power-select-fragment" data-test-related-item-type>
-  <@form.element @controlType="power-select" @value={{fragment.relatedItemType}} @helpText="The type of the Related Item." @options={{relatedItemTypeList}} @destination={{fragment.relatedItemType}} as |el|>
+  <@form.element @controlType="power-select" @value={{this.fragment.relatedItemType}} @helpText="The type of the Related Item." @options={{this.relatedItemTypeList}} @destination={this.fragment.relatedItemType}} as |el|>
     <el.control @onChange={{action "selectRelatedItemType"}} @allowClear={{true}} @placeholder="Select related item Type" @allowClear={{true}} @searchEnabled={{true}} />
   </@form.element>
 </div>
@@ -28,25 +28,25 @@
   <label for="relationType" class="required-label subtitle">Relation Type</label> 
 </div> 
 <div class="power-select-fragment" data-test-related-relation-type>
-  <@form.element @controlType="power-select" @value={{fragment.relationType}} @helpText="The type of the Relation." @options={{relationTypeList}} @destination={{fragment.relationType}} as |el|>
+  <@form.element @controlType="power-select" @value={{this.fragment.relationType}} @helpText="The type of the Relation." @options={{this.relationTypeList}} @destination={{this.fragment.relationType}} as |el|>
     <el.control
       @allowClear={{true}}
       @onChange={{action "selectRelationType"}}
       @placeholder="Select Relation Type"
-      @disabled={{disabled}} 
+      @disabled={{this.disabled}} 
       @searchEnabled={{true}} as |item|>
         {{humanize (underscore item)}}
     </el.control>
   </@form.element>
 </div>
 
-<DoiRelatedItemIdentifier @model={{model}} @form={{form}} @fragment={{fragment.relatedItemIdentifier}} />
+<DoiRelatedItemIdentifier @model={{this.model}} @form={{this.form}} @fragment={{this.fragment.relatedItemIdentifier}} />
 
 <div class="power-select-label">
   <label for="relatedItemVolume" class="subtitle">Volume</label> 
 </div> 
 <input type="text"
-    class="form-control related-item-volume-field" placeholder="" value={{fragment.volume}} oninput={{action "updateRelatedItemVolume" value="target.value"}} data-test-related-item-volume />
+    class="form-control related-item-volume-field" placeholder="" value={{this.fragment.volume}} oninput={{action "updateRelatedItemVolume" value="target.value"}} data-test-related-item-volume />
 
 <div
   class="help-block help-block-fragment related-item-volume-field">
@@ -57,7 +57,7 @@
   <label for="relatedItemIssue" class="subtitle">Issue</label> 
 </div> 
 <input type="text"
-    class="form-control related-item-issue-field" placeholder="" value={{fragment.issue}} oninput={{action "updateRelatedItemIssue" value="target.value"}} data-test-related-item-issue />
+    class="form-control related-item-issue-field" placeholder="" value={{this.fragment.issue}} oninput={{action "updateRelatedItemIssue" value="target.value"}} data-test-related-item-issue />
 
 <div
   class="help-block help-block-fragment related-item-issue-field">
@@ -68,7 +68,7 @@
   <label for="relatedItemNumber" class="subtitle">Number</label> 
 </div> 
 <input type="text"
-    class="form-control related-item-number-field" placeholder="" value={{fragment.number}} oninput={{action "updateRelatedItemNumber" value="target.value"}} data-test-related-item-number />
+    class="form-control related-item-number-field" placeholder="" value={{this.fragment.number}} oninput={{action "updateRelatedItemNumber" value="target.value"}} data-test-related-item-number />
 
 <div
   class="help-block help-block-fragment related-item-number-field">
@@ -79,7 +79,7 @@
   <label for="relatedItemPublicationYear" class="subtitle">Publication Year</label> 
 </div> 
 <input type="text"
-    class="form-control related-item-publication-year-field" placeholder="" value={{fragment.publicationYear}} oninput={{action "updateRelatedItemPublicationYear" value="target.value"}} data-test-related-item-publication-year />
+    class="form-control related-item-publication-year-field" placeholder="" value={{this.fragment.publicationYear}} oninput={{action "updateRelatedItemPublicationYear" value="target.value"}} data-test-related-item-publication-year />
 
 <div
   class="help-block help-block-fragment related-item-volume-field">
@@ -90,26 +90,26 @@
 
 <div class="row">
   <div class="col-sm-12">
-    {{#if showRelatedItemCreators}}
-      {{#each fragment.creators as |creator index|}}
-      <DoiRelatedItemCreator @model={{model}} @fragment={{creator}} @creator={{fragment}} @form={{form}}
+    {{#if this.showRelatedItemCreators}}
+      {{#each this.fragment.creators as |creator index|}}
+      <DoiRelatedItemCreator @model={{this.model}} @fragment={{creator}} @creator={{this.fragment}} @form={{this.form}}
         @index={{index}} />
       {{/each}}
-      {{#if (lte fragment.creators.length 24)}}
+      {{#if (lte this.fragment.creators.length 24)}}
       <BsButton id="add-related-item-creator" class="btn-sm" @outline={{true}} @onClick={{action "addRelatedItemCreator" }}><i
           class="fas fa-plus"></i> Add another creator</BsButton>
       {{/if}}
 
-      {{#if (gt fragment.creators.length 0)}}
+      {{#if (gt this.fragment.creators.length 0)}}
       <BsButton id="toggle-related-item-creators_1" class="btn-sm" @outline={{true}}
         @onClick={{action "toggleRelatedItemCreators" }}><i class="fas fa-eye-slash"></i> Hide {{pluralize
-        fragment.creators.length 'creator'}}</BsButton>
+        this.fragment.creators.length 'creator'}}</BsButton>
       {{/if}}
     {{else}}
-      {{#if (gt fragment.creators.length 0)}}
+      {{#if (gt this.fragment.creators.length 0)}}
       <BsButton id="toggle-related-item-creators_0" class="btn-sm" @outline={{true}}
         @onClick={{action "toggleRelatedItemCreators" }}><i class="fas fa-eye"></i> Show {{pluralize
-        fragment.creators.length 'creator'}}</BsButton>
+        this.fragment.creators.length 'creator'}}</BsButton>
       {{else}}
       <BsButton id="add-related-item-creator" class="btn-sm btn-warnin" @outline={{true}}
         @onClick={{action "addRelatedItemCreator" }}><i class="fas fa-plus"></i> Add creator</BsButton>
@@ -123,26 +123,26 @@
 <div class="row">
   <div class="col-sm-12">
 
-    {{#if showRelatedItemContributors}}
-      {{#each fragment.contributors as |contributor index|}}
-      <DoiRelatedItemContributor @model={{model}} @fragment={{contributor}} @creator={{fragment}} @form={{form}}
+    {{#if this.showRelatedItemContributors}}
+      {{#each this.fragment.contributors as |contributor index|}}
+      <DoiRelatedItemContributor @model={{this.model}} @fragment={{contributor}} @creator={{this.fragment}} @form={{this.form}}
         @index={{index}} />
       {{/each}}
-      {{#if (lte fragment.contributors.length 24)}}
+      {{#if (lte this.fragment.contributors.length 24)}}
       <BsButton id="add-related-item-contributor" class="btn-sm" @outline={{true}}
-        @onClick={{action "addRelatedItemContributor" }}><i class="fas fa-plus"></i> Add {{if (gt model.relatedIdentifiers.length 0) "another "}} contributor</BsButton>
+        @onClick={{action "addRelatedItemContributor" }}><i class="fas fa-plus"></i> Add {{if (gt this.model.relatedIdentifiers.length 0) "another "}} contributor</BsButton>
       {{/if}}
 
-      {{#if (gt fragment.contributors.length 0)}}
+      {{#if (gt this.fragment.contributors.length 0)}}
       <BsButton id="toggle-related-item-contributors_1" class="btn-sm" @outline={{true}}
         @onClick={{action "toggleRelatedItemContributors" }}><i class="fas fa-eye-slash"></i> Hide {{pluralize
-        fragment.contributors.length 'contributor'}}</BsButton>
+        this.fragment.contributors.length 'contributor'}}</BsButton>
       {{/if}}
     {{else}}
-      {{#if (gt fragment.contributors.length 0)}}
+      {{#if (gt this.fragment.contributors.length 0)}}
       <BsButton id="toggle-related-item-contributors_0" class="btn-sm" @outline={{true}}
         @onClick={{action "toggleRelatedItemContributors" }}><i class="fas fa-eye"></i> Show {{pluralize
-        fragment.contributors.length 'contributor'}}</BsButton>
+        this.fragment.contributors.length 'contributor'}}</BsButton>
       {{else}}
       <BsButton id="add-related-item-contributor" class="btn-sm btn-warnin" @outline={{true}}
         @onClick={{action "addRelatedItemContributor" }}><i class="fas fa-plus"></i> Add contributor</BsButton>
