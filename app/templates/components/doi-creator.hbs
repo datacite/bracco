@@ -2,7 +2,7 @@
   <label for="nameIdentifiers" class="subtitle">Name Identifier</label>
 
   {{#each this.fragment.nameIdentifiers as |nameIdentifier index|}}
-    <DoiNameIdentifier @model={{this.model}} @creator={{this.fragment}} @fragment={{this.nameIdentifier}} @form={{this.form}} @index={{this.index}} @joinNameParts={{action "joinNameParts"}} @setNameType={{action "selectNameType"}} @setReadOnly={{action "setReadOnly"}} />
+    <DoiNameIdentifier @model={{this.model}} @creator={{this.fragment}} @fragment={{this.nameIdentifier}} @form={{this.form}} @index={{index}} @joinNameParts={{action "joinNameParts"}} @setNameType={{action "selectNameType"}} @setReadOnly={{action "setReadOnly"}} />
   {{/each}}
 {{/if}}
 
