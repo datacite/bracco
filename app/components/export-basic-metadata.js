@@ -1,6 +1,6 @@
 import Component from '@ember/component';
 import Papa from 'papaparse';
-import FileSaver from 'file-saver';
+import { saveAs } from 'file-saver';
 import currentDate from '../utils/current-date';
 import formatCreators from '../utils/format-creators';
 
@@ -29,14 +29,13 @@ export default Component.extend({
 
       var csv = Papa.unparse(dois);
 
-      var FileSaver = require('file-saver');
       var blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
       var filename =
         currentDate() +
         (this.client_id ? '-' + this.client_id : '-' + 'dois') +
         (this.page ? '-' + this.page : '') +
         '.csv';
-      FileSaver.saveAs(blob, filename);
+      saveAs(blob, filename);
     }
   }
 });
