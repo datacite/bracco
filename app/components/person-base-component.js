@@ -28,20 +28,6 @@ export default Component.extend({
     this.joinNameParts({});
 
     this.selectNameType(this.fragment.get('nameType'));
-
-    if (!this.fragment.get('nameIdentifiers')) {
-      this.fragment.set('nameIdentifiers', []);
-    }
-    if (this.fragment.get('nameIdentifiers').length == 0) {
-      this.fragment.get('nameIdentifiers').createFragment();
-    }
-
-    if (!this.fragment.get('affiliation')) {
-      this.fragment.set('affiliation', []);
-    }
-    if (this.fragment.get('affiliation').length == 0) {
-      this.fragment.get('affiliation').createFragment();
-    }
   },
 
   joinNameParts(options = {}) {
