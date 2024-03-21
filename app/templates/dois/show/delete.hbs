@@ -2,12 +2,12 @@
   <div class="panel-body">
     <div class="col-md-9 col-md-offset-3">
       <BsForm @formLayout="vertical" @model={{this.model}} @onSubmit={{action "destroy"}} @submitOnEnter={{true}} as |form|>
-        <form.group>
+        <div class="form-group">
           <label class="control-label">Are you sure you want to delete the DOI {{this.model.doi}}? This action cannot be undone.</label>
           <form.element @controlType="text" @property="confirmDoi" id="confirm-doi" @helpText="Please add the DOI to confirm." @showValidationOn="input" as |el|>
             <el.control id="confirm-doi-field" autofocus={{true}} />
           </form.element>
-        </form.group>
+        </div>
 
         <div class="pseudo-footer">
           <div class="btn-toolbar pull-right">

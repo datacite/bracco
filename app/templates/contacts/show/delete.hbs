@@ -7,7 +7,7 @@
         @onSubmit={{action 'submit'}}
         @submitOnEnter={{true}} as |form|
       >
-        <form.group>
+        <div class="form-group">
           <label class="control-label">
             Are you sure you want to delete this contact? This action cannot be undone.
           </label>
@@ -20,7 +20,7 @@
           >
             <el.control id="confirm-delete-field" autofocus={{true}} />
           </form.element>
-        </form.group>
+        </div>
         <div class="pseudo-footer">
           <div class="btn-toolbar pull-right">
             <button id="cancel" class="btn btn-sm" type="button" {{action 'cancel'}}>
