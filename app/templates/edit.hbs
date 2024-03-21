@@ -9,12 +9,12 @@
         <div class="panel-body">
           <div class="col-md-offset-3 form-help-header"><h3 class="edit">Update Account</h3></div>
 
-          <BsForm @formLayout="horizontal" @horizontalLabelGridClass="col-md-3" @model={{model}} @onSubmit={{action "submit" model}} as |form|>
+          <BsForm @formLayout="horizontal" @horizontalLabelGridClass="col-md-3" @model={{this.model}} @onSubmit={{action "submit" this.model}} as |form|>
             <form.element @controlType="text" id="member-id" @label="Member ID" @property="symbol" @helpText="The Member ID is the unique identifier for each member and can't be changed." as |el|> <el.control disabled={{true}} required={{true}} id="member-id-field" /> </form.element>
             
-            <form.element @controlType="power-select" id="ror-id" @label="Organization identifier (optional)" @property="rorId" @optionLabelPath="name" @options={{organizations}} @destination={{rorId}} @helpText="Organization identifiers are provided by the Research Organization Registry (ROR)." as |el|>
+            <form.element @controlType="power-select" id="ror-id" @label="Organization identifier (optional)" @property="rorId" @optionLabelPath="name" @options={{this.organizations}} @destination={{this.rorId}} @helpText="Organization identifiers are provided by the Research Organization Registry (ROR)." as |el|>
               <el.control @onChange={{action "selectRor"}} @search={{action "searchRor"}} @placeholder="Select Organization" @searchPlaceholder="Type to search..." @searchEnabled={{true}} @allowClear={{true}} id="ror-id-field" as |item|>
-                {{if item.name item.name model.rorId}}
+                {{if item.name item.name this.model.rorId}}
               </el.control>
             </form.element>
 
@@ -23,24 +23,24 @@
             <form.element @controlType="text" id="twitter-handle" @label="Twitter (optional)" @property="twitterHandle" @helpText="DataCite will follow you on Twitter." as |el|> <el.control placeholder="Add @twitter account" id="twitter-handle-field" /> </form.element>
             <form.element @controlType="textarea" id="description" @label="Description (optional)" @property="description" rows="10" @helpText="Description of the provider. Please use markdown for formatting." as |el|>  <el.control id="description-field" /> </form.element>
    
-            <form.element @controlType="power-select" id="country" @label="Country (optional)" @property="country" @optionLabelPath="name" @options={{countries}} @destination={{country}} @helpText="Country where the member is located." as |el|>
+            <form.element @controlType="power-select" id="country" @label="Country (optional)" @property="country" @optionLabelPath="name" @options={{this.countries}} @destination={{this.country}} @helpText="Country where the member is located." as |el|>
               <el.control @onChange={{action "selectCountry"}} @search={{action "searchCountry"}} @searchField="name" @placeholder="Select Country" @searchPlaceholder="Type to search..." @searchEnabled={{true}} @allowClear={{true}} id="country-field" as |item|>
                 {{item.name}}
               </el.control>
             </form.element>
 
             <div class="col-md-9 col-md-offset-3">
-              {{#if (is-empty (provider-form-errors model))}}
+              {{#if (is-empty (provider-form-errors this.model))}}
                 <button type="submit" id="update-provider" class="btn btn-sm btn-fill" disabled={{false}}>Update Account</button>
               {{else}}
                 <BsAlert @dismissible={{false}} @type="danger">
-                  To save this member, first resolve the errors with these fields: {{provider-form-errors model}}.
+                  To save this member, first resolve the errors with these fields: {{provider-form-errors this.model}}.
                 </BsAlert>
 
                 <button type="submit" id="update-provider" class="btn btn-sm btn-fill" disabled={{true}}>Update Account</button>          
               {{/if}}
 
-              <button class="btn btn-sm" id="cancel" type="button" {{action "cancel" model}}>Cancel</button> 
+              <button class="btn btn-sm" id="cancel" type="button" {{action "cancel" this.model}}>Cancel</button> 
             </div>
           </BsForm>
         </div>
