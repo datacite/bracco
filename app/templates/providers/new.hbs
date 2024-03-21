@@ -8,29 +8,29 @@
           <h3 class="edit">
             Add Member
           </h3>
-          {{#each flashMessages.queue as |flash|}}
+          {{#each this.flashMessages.queue as |flash|}}
             <FlashMessage @flash={{flash}} />
           {{/each}}
         </div>
         <BsForm
           @formLayout="horizontal"
           @horizontalLabelGridClass="col-md-3"
-          @model={{model}}
-          @onSubmit={{action 'submit' model}}
+          @model={{this.model}}
+          @onSubmit={{action 'submit' this.model}}
           @submitOnEnter={{true}} as |form|
         >
           <h3 class="member-results">
             Organization Information
           </h3>
-          <ProviderId @model={{model}} @form={{form}} />
+          <ProviderId @model={{this.model}} @form={{form}} />
           <form.element
             @controlType="power-select"
             id="ror-id"
             @label="Organization identifier (optional)"
             @property="rorId"
             @optionLabelPath="rorId"
-            @options={{organizations}}
-            @destination={{rorId}}
+            @options={{this.organizations}}
+            @destination={{this.rorId}}
             @helpText="Organization identifiers are provided by the Research Organization Registry (ROR)." as |el|
           >
             <el.control
@@ -41,7 +41,7 @@
               @allowClear={{true}} 
               @searchEnabled={{true}} as |item|
             >
-              {{if item.name item.name model.rorId}}
+              {{if item.name item.name this.model.rorId}}
             </el.control>
           </form.element>
           <form.element
@@ -62,7 +62,7 @@
           >
             <el.control id="display-name-field" />
           </form.element>
-          {{#if (eq model.memberType 'consortium_organization')}}
+          {{#if (eq this.model.memberType 'consortium_organization')}}
             {{#if features.enableDoiEstimate}}
               <form.element
                 @controlType="text"
@@ -103,8 +103,8 @@
               id="member-type"
               @label="Member Type"
               @property="memberType"
-              @options={{memberTypes}}
-              @destination={{memberType}} as |el|
+              @options={{this.memberTypes}}
+              @destination={{this.memberType}} as |el|
             >
               <el.control
                 @onChange={{action 'selectMemberType'}}
@@ -121,8 +121,8 @@
               id="tax-status"
               @label="Tax Status"
               @property="nonProfitStatus"
-              @options={{nonProfitStatuses}}
-              @destination={{nonProfitStatus}} as |el|
+              @options={{this.nonProfitStatuses}}
+              @destination={{this.nonProfitStatus}} as |el|
             >
               <el.control
                 @onChange={{action 'selectNonProfitStatus'}}
@@ -134,7 +134,7 @@
                 {{titleize item}}
               </el.control>
             </form.element>
-            {{#if (eq model.model.memberType 'consortium_organization')}}
+            {{#if (eq this.model.memberType 'consortium_organization')}}
               <form.element
                 @controlType="power-select"
                 @property="consortium"
@@ -199,8 +199,8 @@
             @label="Country (optional)"
             @property="country"
             @optionLabelPath="name"
-            @options={{countries}}
-            @destination={{country}}
+            @options={{this.countries}}
+            @destination={{this.country}}
             @helpText="Country where the member is located." as |el|
           >
             <el.control
@@ -220,8 +220,8 @@
             id="organization-type"
             @label="Organization Type (optional)"
             @property="organizationType"
-            @options={{organizationTypes}}
-            @destination={{organizationType}} as |el|
+            @options={{this.organizationTypes}}
+            @destination={{this.organizationType}} as |el|
           >
             <el.control
               @onChange={{action 'selectOrganizationType'}}
@@ -239,8 +239,8 @@
             id="focus-area"
             @label="Focus Area (optional)"
             @property="focusArea"
-            @options={{focusAreas}}
-            @destination={{focusArea}}
+            @options={{this.focusAreas}}
+            @destination={{this.focusArea}}
             @helpText="Field of research covered by the member." as |el|
           >
             <el.control
@@ -263,7 +263,7 @@
           >
             <el.control rows="10" id="description-field" />
           </form.element>
-          {{#if (not-eq model.memberType 'consortium_organization')}}
+          {{#if (not-eq this.model.memberType 'consortium_organization')}}
             <label class="control-label col-md-3">
               Logo
             </label>
@@ -278,7 +278,7 @@
                 >
                   <span class="btn btn-sm">
                     <i class="fas fa-upload"></i>
-                    {{if model.logo 'Replace' 'Upload'}}
+                    {{if this.model.logo 'Replace' 'Upload'}}
                     Logo
                   </span>
                 </FileUpload>
@@ -296,7 +296,7 @@
               Please add at least one contact via the member contacts menu after creating this member.
             </BsAlert>
           </div>
-          {{#if (not-eq model.memberType 'consortium_organization')}}
+          {{#if (not-eq this.model.memberType 'consortium_organization')}}
             <h3 class="member-results">
               Billing Information
             </h3>
@@ -351,9 +351,9 @@
               @label="Billing Country"
               @property="billingInformation.country"
               @optionLabelPath="name"
-              @options={{countries}}
+              @options={{this.countries}}
               @helpText="Your organization's country for billing purposes."
-              @destination={{billingInformation.country}} as |el|
+              @destination={{this.billingInformation.country}} as |el|
             >
               <el.control
                 @onChange={{action 'selectBillingCountry'}}
@@ -367,14 +367,14 @@
                 {{item.name}}
               </el.control>
             </form.element>
-            {{#if showStateSearch}}
+            {{#if this.showStateSearch}}
               <form.element
                 @controlType="power-select"
                 id="billing-information-state"
                 @label="Billing State/Province"
                 @property="billingInformation.state"
                 @optionLabelPath="name"
-                @options={{states}}
+                @options={{this.states}}
                 @helpText="Your organization's state/province for billing purposes."
                 @destination={{billingInformation.country}} as |el|
               >
@@ -417,7 +417,7 @@
             </BsAlert>
           </div>
           <div class="col-md-9 col-md-offset-3">
-            {{#if (is-empty (provider-form-errors model))}}
+            {{#if (is-empty (provider-form-errors this.model))}}
               <button
                 type="submit"
                 id="add-provider"
@@ -429,7 +429,7 @@
             {{else}}
               <BsAlert @dismissible={{false}} @type="danger">
                 To save this member, first resolve the errors with these fields:
-                {{provider-form-errors model}}
+                {{provider-form-errors this.model}}
                 .
               </BsAlert>
               <button
