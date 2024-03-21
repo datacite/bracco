@@ -488,7 +488,7 @@
             @label="Billing State/Province"
             @property="billingInformation.state"
             @optionLabelPath="name"
-            @options={{states}}
+            @options={{this.states}}
             @helpText="Your organization's state/province for billing purposes."
             @destination={{this.billingInformation.country}} as |el|
           >
