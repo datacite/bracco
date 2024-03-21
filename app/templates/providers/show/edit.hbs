@@ -115,8 +115,8 @@
             @label="Consortium"
             @helpText="Consortium for this organization."
             @optionLabelPath="name"
-            @options={{consortia}}
-            @destination={{consortium.id}} as |el|
+            @options={{this.consortia}}
+            @destination={{this.consortium.id}} as |el|
           >
             <el.control
               @onChange={{action 'selectConsortium'}}
@@ -155,7 +155,7 @@
         @helpText="Name of your organization as you would like it to appear in Fabrica and on DataCite’s website."
       />
       {{#if (eq this.model.memberType 'consortium_organization')}}
-        {{#if features.enableDoiEstimate}}
+        {{#if this.features.enableDoiEstimate}}
           <form.element
             @controlType="text"
             id="doi-estimate"

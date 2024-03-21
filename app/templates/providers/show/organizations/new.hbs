@@ -4,14 +4,14 @@
       <h3 class="edit">
         Create Consortium Organization
       </h3>
-      {{#each flashMessages.queue as |flash|}}
+      {{#each this.flashMessages.queue as |flash|}}
         <FlashMessage @flash={{flash}} />
       {{/each}}
     </div>
     <BsForm
       @formLayout="horizontal"
       @horizontalLabelGridClass="col-md-3"
-      @model={{model.organization}}
+      @model={{this.model.organization}}
       @onSubmit={{action 'submit'}}
       @submitOnEnter={{true}} as |form|
     >
@@ -22,7 +22,7 @@
         @controlType="hidden"
         @property="consortium"
       />
-      <ProviderId @model={{model.organization}} @form={{form}} />
+      <ProviderId @model={{this.model.organization}} @form={{form}} />
       <form.element
         @controlType="text"
         id="member-type"
@@ -49,7 +49,7 @@
       >
         <el.control id="display-name-field" />
       </form.element>
-      {{#if features.enableDoiEstimate}}
+      {{#if this.features.enableDoiEstimate}}
         <form.element
           @controlType="text"
           id="doi-estimate"
@@ -67,8 +67,8 @@
         @label="Organization identifier (optional)"
         @property="rorId"
         @optionLabelPath="rorId"
-        @options={{organizations}}
-        @destination={{rorId}}
+        @options={{this.organizations}}
+        @destination={{this.rorId}}
         @helpText="Organization identifiers are provided by the Research Organization Registry (ROR)." as |el|
       >
         <el.control
@@ -79,7 +79,7 @@
           @allowClear={{true}}
           @searchEnabled={{true}} as |item|
         >
-          {{if item.name item.name model.organization.rorId}}
+          {{if item.name item.name this.model.organization.rorId}}
         </el.control>
       </form.element>
       {{#if (can 'create provider')}}
@@ -110,8 +110,8 @@
           id="tax-status"
           @label="Tax Status"
           @property="nonProfitStatus"
-          @options={{nonProfitStatuses}}
-          @destination={{nonProfitStatus}} as |el|
+          @options={{this.nonProfitStatuses}}
+          @destination={{this.nonProfitStatus}} as |el|
         >
           <el.control
             @onChange={{action 'selectNonProfitStatus'}}
@@ -166,8 +166,8 @@
         @label="Country (optional)"
         @property="country"
         @optionLabelPath="name"
-        @options={{countries}}
-        @destination={{country}}
+        @options={{this.countries}}
+        @destination={{this.country}}
         @helpText="Country where the organization is located." as |el|
       >
         <el.control
@@ -187,8 +187,8 @@
         id="organization-type"
         @label="Organization Type (optional)"
         @property="organizationType"
-        @options={{organizationTypes}}
-        @destination={{organizationType}} as |el|
+        @options={{this.organizationTypes}}
+        @destination={{this.organizationType}} as |el|
       >
         <el.control
           @onChange={{action 'selectOrganizationType'}}
@@ -206,8 +206,8 @@
         id="focus-area"
         @label="Focus Area (optional)"
         @property="focusArea"
-        @options={{focusAreas}}
-        @destination={{focusArea}}
+        @options={{this.focusAreas}}
+        @destination={{this.focusArea}}
         @helpText="Field of research covered by organization." as |el|
       >
         <el.control
@@ -261,7 +261,7 @@
         </BsAlert>
       </div>
       <div class="col-md-9 col-md-offset-3">
-        {{#if (is-empty (provider-form-errors model.organization))}}
+        {{#if (is-empty (provider-form-errors this.model.organization))}}
           <button
             type="submit"
             id="add-organization"
@@ -273,7 +273,7 @@
         {{else}}
           <BsAlert @dismissible={{false}} @type="danger">
             To save this consortium organization, first resolve the errors with these fields:
-            {{provider-form-errors model.organization}}
+            {{provider-form-errors this.model.organization}}
             .
           </BsAlert>
           <button
