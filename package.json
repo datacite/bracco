@@ -230,6 +230,7 @@
     "**/@types/estree": "1.0.5",
     "**/@types/eslint": "^7.2.13",
     "**/@types/ember-feature-flags/**/@types/ember__service": "3.16.9",
-    "**/@types/ember-data__model/**/@types/ember-data": "3.16.25"
+    "**/@types/ember-data__model/**/@types/ember-data": "3.16.25",
+    "**/ember-bootstrap/**/ember-focus-trap": "1.0.2"
   }
 }
