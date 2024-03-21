@@ -1,4 +1,5 @@
 <BsNavbar
+  class="navbar-default"
   @type={{this.type}}
   @fluid={{true}}
   @collapsed={{this.collapsed}}
@@ -6,7 +7,7 @@
   @onExpand={{action (mut this.collapsed) false}} as |navbar|
 >
   <div class="navbar-header">
-    {{navbar.toggle}}
+    <navbar.toggle class="navbar-toggle" />
     <a href="/" class="navbar-brand">
       {{#if this.showLogo}}<img src="/assets/images/fabrica-logo.svg" height="50" class="fabrica-logo"/>
       {{else}}{{this.title}}
