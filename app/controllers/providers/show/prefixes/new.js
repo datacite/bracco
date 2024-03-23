@@ -4,14 +4,12 @@ import ENV from 'bracco/config/environment';
 
 export default Controller.extend({
   store: service(),
-  router: service(),
-
   disabled: true,
   prefixes_service: service('prefixes'),
+  router: service(),
 
   init(...args) {
     this._super(...args);
-
     this.prefixes = this.prefixes || [];
   },
 

@@ -1,25 +1,22 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
-import { A } from '@ember/array';
-import prefix from 'bracco/abilities/prefix';
 import ENV from 'bracco/config/environment';
 
 export default Controller.extend({
   store: service(),
   disabled: true,
-  prefixes: service(),
+  prefixes_service: service('prefixes'),
   router: service(),
 
   init(...args) {
     this._super(...args);
-
-    this['provider-prefixes'] = this['provider-prefixes'] || [];
+    this.prefixes = this.prefixes || [];
   },
   searchPrefix(query) {
     let self = this;
     let prefixes = [];
 
-    this.prefixes
+    this.prefixes_service
       .get_prefixes(
         ENV.SHOW_N_PREFIXES,
         this.model.repository.get('provider.id'),
