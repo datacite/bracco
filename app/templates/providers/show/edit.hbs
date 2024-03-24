@@ -15,6 +15,7 @@
     </div>
     <BsForm
       @formLayout="horizontal"
+      class="form-horizontal"
       @horizontalLabelGridClass="col-md-3"
       @model={{this.model}}
       @onSubmit={{action 'submit' this.model}} as |form|
@@ -25,6 +26,7 @@
       <form.element
         @controlType="text"
         id="member-id"
+        class="form-group"
         @label="Member ID"
         @property="symbol"
         @helpText="The Member ID is the unique identifier for each member and can't be changed." as |el|
@@ -34,6 +36,7 @@
       <form.element
         @controlType="power-select"
         id="ror-id"
+        class="form-group"
         @label="Organization identifier (optional)"
         @property="rorId"
         @optionLabelPath="rorId"
@@ -56,6 +59,7 @@
         <form.element
           @controlType="text"
           id="salesforce-id"
+          class="form-group"
           @label="Salesforce ID"
           @property="salesforceId"
           @helpText="The 18 digit ID in Salesforce."
@@ -74,6 +78,7 @@
         <form.element
           @controlType="power-select"
           id="member-type"
+          class="form-group"
           @label="Member Type"
           @property="memberType"
           @options={{this.memberTypes}}
@@ -93,6 +98,7 @@
         <form.element
           @controlType="power-select"
           id="tax-status"
+          class="form-group"
           @label="Tax Status"
           @property="nonProfitStatus"
           @options={{this.nonProfitStatuses}}
@@ -111,6 +117,7 @@
         {{#if (eq this.model.memberType 'consortium_organization')}}
           <form.element
             @controlType="power-select"
+            class="form-group"
             @property="consortium"
             @label="Consortium"
             @helpText="Consortium for this organization."
@@ -133,6 +140,7 @@
       <form.element
         @controlType="text"
         id="name"
+        class="form-group"
         @label="{{if
             (eq this.model.memberType 'consortium_organization')
             'Organization'
@@ -145,6 +153,7 @@
       <form.element
         @controlType="text"
         id="display-name"
+        class="form-group"
         @label="{{if
             (eq this.model.memberType 'consortium_organization')
             'Organization'
@@ -159,6 +168,7 @@
           <form.element
             @controlType="text"
             id="doi-estimate"
+            class="form-group"
             @label="Estimated DOIs"
             @property="doiEstimate"
             required
@@ -171,6 +181,7 @@
       <form.element
         @controlType="text"
         id="system-email"
+        class="form-group"
         @label="System Email"
         @property="systemEmail"
         @helpText="This is the email used for sending password reset requests and similar system notifications."
@@ -178,6 +189,7 @@
       <form.element
         @controlType="text"
         id="group-email"
+        class="form-group"
         @label="Group Email (optional)"
         @property="groupEmail"
         @helpText="A generic shared email address (such as info@datacite.org or similar) where you would like to receive communications from DataCite."
@@ -185,6 +197,7 @@
       <form.element
         @controlType="text"
         id="website"
+        class="form-group"
         @label="Website (optional)"
         @property="website"
         @helpText="Website of the member."
@@ -192,6 +205,7 @@
       <form.element
         @controlType="text"
         id="twitter-handle"
+        class="form-group"
         @label="Twitter (optional)"
         @property="twitterHandle"
         @helpText="DataCite will follow you on Twitter." as |el|
@@ -201,6 +215,7 @@
       <form.element
         @controlType="power-select"
         id="country"
+        class="form-group"
         @label="Country (optional)"
         @property="country"
         @optionLabelPath="name"
@@ -223,6 +238,7 @@
       <form.element
         @controlType="power-select"
         id="organization-type"
+        class="form-group"
         @label="Organization Type (optional)"
         @property="organizationType"
         @options={{this.organizationTypes}}
@@ -242,6 +258,7 @@
       <form.element
         @controlType="power-select"
         id="focus-area"
+        class="form-group"
         @label="Focus Area (optional)"
         @property="focusArea"
         @options={{this.focusAreas}}
@@ -262,6 +279,7 @@
       <form.element
         @controlType="textarea"
         id="description"
+        class="form-group"
         @label="Description (optional)"
         @property="description"
         @helpText="Description of the member. Please use markdown for formatting." as |el|
@@ -322,7 +340,7 @@
             </BsAlert>
           </div>
           {{#if (not-eq this.model.memberType 'consortium_organization')}}
-            <form.element @controlType="power-select" id="voting-contact" @label="Voting Representative" @property="votingContact" @optionLabelPath="name" @options={{this.model.filteredContacts}} @helpText="Your organization's voting representative." @destination={{this.votingContact}} as |el|>
+            <form.element @controlType="power-select" id="voting-contact" class="form-group" @label="Voting Representative" @property="votingContact" @optionLabelPath="name" @options={{this.model.filteredContacts}} @helpText="Your organization's voting representative." @destination={{this.votingContact}} as |el|>
               <el.control
                 @searchEnabled={{false}}
                 @search={{action 'searchContact'}}
@@ -335,7 +353,7 @@
               </el.control>
             </form.element>
           {{/if}}
-          <form.element @controlType="power-select" id="service-contact" @label="Service Contact" @property="serviceContact" @optionLabelPath="displayName" @options={{this.model.filteredContacts}} @helpText="Your organization's service contact." @destination={{this.serviceContact}} as |el|>
+          <form.element @controlType="power-select" id="service-contact" class="form-group" @label="Service Contact" @property="serviceContact" @optionLabelPath="displayName" @options={{this.model.filteredContacts}} @helpText="Your organization's service contact." @destination={{this.serviceContact}} as |el|>
             <el.control
               @searchEnabled={{false}}
               @search={{action 'searchContact'}}
@@ -347,7 +365,7 @@
               {{item.displayName}}
             </el.control>
           </form.element>
-          <form.element @controlType="power-select" id="secondary-service-contact" @label="Secondary Service Contact" @property="secondaryServiceContact" @optionLabelPath="name" @options={{this.model.filteredContacts}} @helpText="Your organization's secondary service contact." @destination={{this.secondaryServiceContact}} as |el|>
+          <form.element @controlType="power-select" id="secondary-service-contact" class="form-group" @label="Secondary Service Contact" @property="secondaryServiceContact" @optionLabelPath="name" @options={{this.model.filteredContacts}} @helpText="Your organization's secondary service contact." @destination={{this.secondaryServiceContact}} as |el|>
             <el.control
               @searchEnabled={{false}}
               @search={{action 'searchContact'}}
@@ -360,7 +378,7 @@
               {{item.displayName}}
             </el.control>
           </form.element>
-          <form.element @controlType="power-select" id="technical-contact" @label="Technical Contact" @property="technicalContact" @optionLabelPath="name" @options={{this.model.filteredContacts}} @helpText="Your organization's technical contact." @destination={{this.technicalContact}} as |el|>
+          <form.element @controlType="power-select" id="technical-contact" class="form-group" @label="Technical Contact" @property="technicalContact" @optionLabelPath="name" @options={{this.model.filteredContacts}} @helpText="Your organization's technical contact." @destination={{this.technicalContact}} as |el|>
             <el.control
               @searchEnabled={{false}}
               @search={{action 'searchContact'}}
@@ -373,7 +391,7 @@
               {{item.displayName}}
             </el.control>
           </form.element>
-          <form.element @controlType="power-select" id="secondary-technical-contact" @label="Secondary Technical Contact" @property="secondaryTechnicalContact" @optionLabelPath="name" @options={{this.model.filteredContacts}} @helpText="Your organization's secondary technical contact." @destination={{this.secondaryTechnicalContact}} as |el|>
+          <form.element @controlType="power-select" id="secondary-technical-contact" class="form-group" @label="Secondary Technical Contact" @property="secondaryTechnicalContact" @optionLabelPath="name" @options={{this.model.filteredContacts}} @helpText="Your organization's secondary technical contact." @destination={{this.secondaryTechnicalContact}} as |el|>
             <el.control
               @searchEnabled={{false}}
               @search={{action 'searchContact'}}
@@ -387,7 +405,7 @@
             </el.control>
           </form.element>
           {{#if (not-eq this.model.memberType 'consortium_organization')}}
-            <form.element @controlType="power-select" id="billing-contact" @label="Billing Contact" @property="billingContact" @optionLabelPath="name" @options={{this.model.filteredContacts}} @helpText="Your organization's billing contact." @destination="billingContact" as |el|>
+            <form.element @controlType="power-select" id="billing-contact" class="form-group" @label="Billing Contact" @property="billingContact" @optionLabelPath="name" @options={{this.model.filteredContacts}} @helpText="Your organization's billing contact." @destination="billingContact" as |el|>
               <el.control
                 @searchEnabled={{false}}
                 @search={{action 'searchContact'}}
@@ -399,7 +417,7 @@
                 {{item.displayName}}
               </el.control>
             </form.element>
-            <form.element @controlType="power-select" id="secondary-billing-contact" @label="Secondary Billing Contact" @property="secondaryBillingContact" @optionLabelPath="name" @options={{this.model.filteredContacts}} @helpText="Your organization's secondary billing contact." @destination={{this.secondaryBillingContact}} as |el|>
+            <form.element @controlType="power-select" id="secondary-billing-contact" class="form-group" @label="Secondary Billing Contact" @property="secondaryBillingContact" @optionLabelPath="name" @options={{this.model.filteredContacts}} @helpText="Your organization's secondary billing contact." @destination={{this.secondaryBillingContact}} as |el|>
               <el.control
                 @searchEnabled={{false}}
                 @search={{action 'searchContact'}}
@@ -427,6 +445,7 @@
         <form.element
           @controlType="text"
           id="billing-information-department"
+          class="form-group"
           @label="Billing Department"
           @property="billingInformation.department"
           @helpText="Your organization's specific department that is responsible for payment"
@@ -434,6 +453,7 @@
         <form.element
           @controlType="text"
           id="billing-information-organization"
+          class="form-group"
           @label="Billing Organization"
           @property="billingInformation.organization"
           @helpText="Your organization's name for billing purposes if different from the official name"
@@ -441,6 +461,7 @@
         <form.element
           @controlType="text"
           id="billing-information-street"
+          class="form-group"
           @label="Billing Street"
           @property="billingInformation.address"
           @helpText="Your organization's street for billing purposes"
@@ -448,6 +469,7 @@
         <form.element
           @controlType="text"
           id="billing-information-city"
+          class="form-group"
           @label="Billing City"
           @property="billingInformation.city"
           @helpText="Your organization's city for billing purposes"
@@ -455,6 +477,7 @@
         <form.element
           @controlType="text"
           id="billing-information-postcode"
+          class="form-group"
           @label="Billing Zip/Post Code"
           @property="billingInformation.postCode"
           @helpText="Your organization's Zip/post code for billing purposes"
@@ -462,6 +485,7 @@
         <form.element
           @controlType="power-select"
           id="billing-information-country"
+          class="form-group"
           @label="Billing Country"
           @property="billingInformation.country"
           @optionLabelPath="name"
@@ -485,6 +509,7 @@
           <form.element
             @controlType="power-select"
             id="billing-information-state"
+            class="form-group"
             @label="Billing State/Province"
             @property="billingInformation.state"
             @optionLabelPath="name"
@@ -510,6 +535,7 @@
         <form.element
           @controlType="checkbox"
           id="is-active"
+          class="form-group"
           @label="Account is active"
           @property="isActive"
           @helpText="This account can manage repositories and prefixes" as |el|

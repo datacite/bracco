@@ -4,6 +4,7 @@ import { inject as service } from '@ember/service';
 export default Controller.extend({
   store: service(),
   router: service(),
+  flashMessages: service(),
 
   actions: {
     submit() {
