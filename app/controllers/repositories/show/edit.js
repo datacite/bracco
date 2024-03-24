@@ -10,6 +10,7 @@ export default Controller.extend({
   currentUser: service(),
   store: service(),
   router: service(),
+  flashMessages: service(),
 
   edit: false,
   change: false,
