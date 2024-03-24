@@ -1,18 +1,18 @@
-{{#if (gt index 0)}}
+{{#if (gt this.index 0)}}
   <div class="input-group">
     <div class="power-select-fragment">
-      <@form.element @controlType="power-select" @value={{languageName}} @options={{languages}} as |el|>
-        <el.control @onChange={{action "selectLanguage"}} @search={{action "searchLanguage"}} @placeholder="Select Language" @searchPlaceholder="Type to search..." @allowClear={{true}} @disabled={{disabled}} @searchEnabled={{true}} />
+      <@form.element class="form-group" @controlType="power-select" @value={{this.languageName}} @options={{this.languages}} as |el|>
+        <el.control @onChange={{action "selectLanguage"}} @search={{action "searchLanguage"}} @placeholder="Select Language" @searchPlaceholder="Type to search..." @allowClear={{true}} @disabled={{this.disabled}} @searchEnabled={{true}} />
       </@form.element>
     </div>
     <span class="input-group-addon" style="vertical-align:top;padding-top:3px;">
-    <BsButton @outline={{true}} @onClick={{action "deleteLanguage" index}}><i class="fas fa-trash pull-left"></i></BsButton>
+    <BsButton @outline={{true}} @onClick={{action "deleteLanguage" this.index}}><i class="fas fa-trash pull-left"></i></BsButton>
     </span>
   </div>
 {{else}}
   <div class="power-select-fragment">
-    <@form.element @controlType="power-select" @value={{languageName}} @options={{languages}} as |el|>
-      <el.control @onChange={{action "selectLanguage"}} @search={{action "searchLanguage"}} @placeholder="Select Language" @searchPlaceholder="Type to search..." @allowClear={{true}} @disabled={{disabled}} @searchEnabled={{true}} />
+    <@form.element class="form-group" @controlType="power-select" @value={{this.languageName}} @options={{this.languages}} as |el|>
+      <el.control @onChange={{action "selectLanguage"}} @search={{action "searchLanguage"}} @placeholder="Select Language" @searchPlaceholder="Type to search..." @allowClear={{true}} @disabled={{this.disabled}} @searchEnabled={{true}} />
     </@form.element>
   </div>
 {{/if}}

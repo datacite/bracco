@@ -115,8 +115,16 @@ div[doi-format].power-select-fragment .ember-basic-dropdown-trigger div.ember-vi
 }
 
 /***********************/
-/* ember-bootstrap 5 */
+/* ember-bootstrap 5   */
 /***********************/
+
+/* BASE DOI FROM assets.datacite.org/doi.css (based on bootstrap 3.4) - this must be fixed. */
+
+/*
+ * See migration documents: 
+ * - https://getbootstrap.com/docs/4.0/migration/#forms-1
+ * - https://getbootstrap.com/docs/5.0/migration/
+ */
 
 /* DOI UPDATE FORM - text input box tweeks. */
 
@@ -171,7 +179,7 @@ div[doi-format].power-select-fragment .ember-basic-dropdown-trigger div.ember-vi
   opacity: 1;
 }
 
-/* Application header - right side dropdown classes. */
+/* APPLICATION HEADER - right side dropdown classes. */
 
 .show .dropdown-menu {
   opacity: 1;
@@ -214,6 +222,28 @@ div[doi-format].power-select-fragment .ember-basic-dropdown-trigger div.ember-vi
   height: 1px;
   margin: 0;
   overflow: hidden;
+}
+
+/* REPOSITORY NEW/EDIT FORM */
+
+.form-horizontal .form-group label.col-form-label, .form-horizontal label.col-form-label {
+    padding-top: 7px;
+    margin-bottom: 0;
+    text-align: right;
+}
+
+.form-group#is-active div.col-md-9.offset-md-3 {
+  margin-left: 25%;
+}
+
+@media (max-width: 992px) {
+  .form-group#is-active div.col-md-9.offset-md-3 {
+      margin-left: 0;;
+  }
+}
+
+.form-group#is-active label.form-check-label {
+  padding-left: 7px;
 }
 
 /*

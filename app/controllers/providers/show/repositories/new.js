@@ -10,6 +10,7 @@ import { clientTypeList, softwareList } from 'bracco/models/repository';
 export default Controller.extend({
   store: service(),
   router: service(),
+  flashMessages: service(),
 
   re3data: null,
   softwareList,
