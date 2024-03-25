@@ -22,9 +22,10 @@ export default Component.extend({
       this.set('languages', languages);
     },
     selectLanguage(language) {
+      const selectedLanguageCode = language === null ? null : ISO6391.getCode(language);
       this.model
         .get('language')
-        .replace(this.index, 1, [ISO6391.getCode(language)]);
+        .replace(this.index, 1, [selectedLanguageCode]);
       this.set('languages', languageList);
     },
     deleteLanguage() {
