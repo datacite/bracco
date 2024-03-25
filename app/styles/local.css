@@ -248,7 +248,7 @@ div[doi-format].power-select-fragment .ember-basic-dropdown-trigger div.ember-vi
 
 /* SIGN-IN PAGE */
 
-.navbar .navbar-header a {
+.navbar .navbar-header a.navbar-brand.title-inverted  {
   color: #fff !important;
   background-color: transparent;
 }

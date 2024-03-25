@@ -8,11 +8,19 @@
 >
   <div class="navbar-header">
     <navbar.toggle class="navbar-toggle" />
-    <a href="/" class="navbar-brand">
-      {{#if this.showLogo}}<img src="/assets/images/fabrica-logo.svg" height="50" class="fabrica-logo"/>
-      {{else}}{{this.title}}
-      {{/if}}
-    </a>
+    {{#if this.session.isAuthenticated}}
+      <a href="/" class="navbar-brand">
+        {{#if this.showLogo}}<img src="/assets/images/fabrica-logo.svg" height="50" class="fabrica-logo"/>
+        {{else}}{{this.title}}
+        {{/if}}
+      </a>
+    {{else}}
+      <a href="/" class="navbar-brand title-inverted">
+        {{#if this.showLogo}}<img src="/assets/images/fabrica-logo.svg" height="50" class="fabrica-logo"/>
+        {{else}}{{this.title}}
+        {{/if}}
+      </a>
+    {{/if}}
   </div>
   <navbar.content>
     <navbar.nav class="navbar-right {{this.navBgColor}}" as |nav|>
