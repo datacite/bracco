@@ -59,10 +59,14 @@ export default Controller.extend({
             );
             self.model.repository.set('name', repo.get('repositoryName'));
             self.model.repository.set('description', repo.get('description'));
-            self.model.repository.set(
-              'alternateName',
-              A(repo.get('additionalNames')).get('firstObject').text
-            );
+            if (repo.get('additionalNames').length > 0) {
+              self.model.repository.set(
+                'alternateName',
+                A(repo.get('additionalNames')).get('firstObject').text
+              );
+            } else {
+              self.model.repository.set('alternateName', null);
+            }
             self.model.repository.set('url', repo.get('repositoryUrl'));
             if (repo.get('software').length > 0) {
               let software = repo.get('software')[0].name;
