@@ -4,7 +4,7 @@
     <div class="label-vertical">Subject, keyword, classification code, or key phrase describing the resource.</div>
     {{#if this.showSubjects}}
       {{#each this.model.subjects as |subject index|}}
-        <DoiSubject @model={{this.model}} @fragment={{subject}} @form={{form}} @index={{index}} />
+        <DoiSubject @model={{this.model}} @fragment={{subject}} @form={{this.form}} @index={{index}} />
       {{/each}}
 
       {{#if (lte this.model.subjects.length 6)}}
