@@ -238,12 +238,19 @@ div[doi-format].power-select-fragment .ember-basic-dropdown-trigger div.ember-vi
 
 @media (max-width: 992px) {
   .form-group#is-active div.col-md-9.offset-md-3 {
-      margin-left: 0;;
+      margin-left: 0;
   }
 }
 
 .form-group#is-active label.form-check-label {
   padding-left: 7px;
+}
+
+/* SIGN-IN PAGE */
+
+.navbar .navbar-header a {
+  color: #fff !important;
+  background-color: transparent;
 }
 
 /*
