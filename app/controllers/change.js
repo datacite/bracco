@@ -8,6 +8,20 @@ export default Controller.extend({
   router: service(),
 
   actions: {
+    togglePassword() {
+      const togglePassword = document.querySelector('#togglePassword');
+      const password = document.querySelector('#password-input-field');
+      const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+      password.setAttribute('type', type);
+      togglePassword.classList.toggle('bi-eye');
+    },
+    toggleConfirmPassword() {
+      const togglePassword = document.querySelector('#toggleConfirmPassword');
+      const password = document.querySelector('#confirm-password-input-field');
+      const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+      password.setAttribute('type', type);
+      togglePassword.classList.toggle('bi-eye');
+    },
     generate() {
       let self = this;
       let url = ENV.API_URL + '/random';

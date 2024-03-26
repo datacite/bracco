@@ -257,6 +257,20 @@ div[doi-format].power-select-fragment .ember-basic-dropdown-trigger div.ember-vi
   background-color: transparent;
 }
 
+/* PASSWORD CHANGE PAGES */
+
+/* Show/hide password in input field. */
+
+@media (min-width: 768px) {
+  form i#togglePassword, form i#toggleConfirmPassword {
+    z-index: 9999;
+    position: absolute;
+    top: 12%;
+    right: 25px;
+    cursor: pointer;
+  }
+}
+
 /*
 .show .dropdown-menu {
   opacity: 1;

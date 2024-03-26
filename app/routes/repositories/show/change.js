@@ -5,6 +5,7 @@ export default Route.extend({
   can: service(),
   features: service(),
   router: service(),
+  store: service(),
 
   model() {
     let repository = this.modelFor('repositories/show');
