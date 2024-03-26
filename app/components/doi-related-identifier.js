@@ -231,16 +231,16 @@ export default Component.extend({
     }
   },
   selectRelationType(relationType) {
-    if (this.isMetadataRelationTypes.includes(relationType)) {
+    const selectedRelationType = relationType ? pascalCase(relationType) : null;
+    if (this.isMetadataRelationTypes.includes(selectedRelationType)) {
       this.set('isMetadataRelationType', true);
     } else {
       this.set('isMetadataRelationType', false);
       this.fragment.set('schemeType', null);
       this.fragment.set('relatedMetadataScheme', null);
-      this.fragment.set('resourceTypeGeneral', null);
       this.fragment.set('schemeUri', null);
     }
-    this.fragment.set('relationType', pascalCase(relationType));
+    this.fragment.set('relationType', selectedRelationType);
     this.set('relationTypes', relationTypeList);
   },
   selectRelatedIdentifierType(relatedIdentifierType) {
@@ -248,7 +248,8 @@ export default Component.extend({
     this.set('relatedIdentifierTypes', relatedIdentifierTypeList);
   },
   selectResourceTypeGeneral(resourceTypeGeneral) {
-    this.fragment.set('resourceTypeGeneral', pascalCase(resourceTypeGeneral));
+    const selectedResourceTypeGeneral = resourceTypeGeneral ? pascalCase(resourceTypeGeneral) : null;
+    this.fragment.set('resourceTypeGeneral', selectedResourceTypeGeneral);
     this.set('resourceTypesGeneral', resourceTypeGeneralList);
   },
   actions: {
