@@ -4,7 +4,7 @@
     <div class="label-vertical">A globally unique string that identifies the resource and can't be changed.</div>
     <div class="input-group">
       <span class="input-group-addon">
-        <@form.element @controlType="power-select" id="prefix-field" @formLayout="vertical" @property="prefix" @options={{this.repositoryPrefixes}} @destination={this.prefix}} as |el|>
+        <@form.element @controlType="power-select" id="prefix-field" @formLayout="vertical" @property="prefix" @options={{this.repositoryPrefixes}} @destination={{this.prefix}} as |el|>
           <el.control @onChange={{action "selectPrefix"}} @searchPlaceholder="Select Prefix" @optionLabelPath={{this.id}} @searchEnabled={{true}} as |item|>
             {{if item.prefix.id item.prefix.id item}}
           </el.control>
