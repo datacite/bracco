@@ -45,7 +45,6 @@ export default Controller.extend({
     },
     submit(provider) {
       let self = this;
-      provider.set('keepPassword', false);
       provider
         .save()
         .then(function () {

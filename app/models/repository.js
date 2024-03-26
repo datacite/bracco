@@ -86,31 +86,19 @@ const Validations = buildValidations({
   ],
   passwordInput: [
     validator('presence', {
-      presence: true,
-      disabled: computed('model', function () {
-        return this.model.get('keepPassword');
-      })
+      presence: true
     }),
     validator('length', {
-      min: 8,
-      disabled: computed('model', function () {
-        return this.model.get('keepPassword');
-      })
+      min: 8
     })
   ],
   confirmPasswordInput: [
     validator('presence', {
-      presence: true,
-      disabled: computed('model', function () {
-        return this.model.get('keepPassword');
-      })
+      presence: true
     }),
     validator('confirmation', {
       on: 'passwordInput',
-      message: 'Password does not match',
-      disabled: computed('model', function () {
-        return this.model.get('keepPassword');
-      })
+      message: 'Password does not match'
     })
   ],
   name: validator('presence', true),
@@ -179,7 +167,6 @@ export default Model.extend(Validations, {
   isActive: attr('boolean', { defaultValue: true }),
   passwordInput: attr('string'),
   hasPassword: attr('boolean'),
-  keepPassword: attr('boolean', { defaultValue: true }),
   created: attr('date'),
   updated: attr('date'),
   subjects: fragmentArray('subject', { defaultValue: [] }),

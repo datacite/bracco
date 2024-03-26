@@ -2719,7 +2719,7 @@
     resolve "^1.20.0"
     semver "^7.3.2"
 
-"@embroider/macros@^1.12.0", "@embroider/macros@^1.15.0":
+"@embroider/macros@^1.12.0", "@embroider/macros@^1.13.2", "@embroider/macros@^1.15.0":
   version "1.15.0"
   resolved "https://registry.yarnpkg.com/@embroider/macros/-/macros-1.15.0.tgz#409e494281d365bdc55fb9eb6ab983819a22be55"
   integrity sha512-gXh46ZafqYb6AJVoCCaQwYRsqFIwAat/PVCaJgEDKnOgOP/BTyIXwAld0gLZlIgSKkqOccBih83bXMShflKkLg==
@@ -9545,13 +9545,13 @@ ember-copy@2.0.1:
   dependencies:
     ember-cli-babel "^7.22.1"
 
-ember-cp-validations@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/ember-cp-validations/-/ember-cp-validations-4.0.0.tgz#129a2672ca291cc7386f2024809f7845e7d8bd43"
-  integrity sha512-nZUwGxOtg7cu0xZb9ekEtv/pZoHMBThS5Ti3aQYY5lbeq9jQ67Kp8Rj0knq3wpQxUvIp6MQGiIQ2dD9NeP7/xQ==
+ember-cp-validations@^6.0.1:
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/ember-cp-validations/-/ember-cp-validations-6.0.1.tgz#bbe363a41a3b53f22d90b579775a280699923be2"
+  integrity sha512-OGxAsbb3thKE5SLsALFHQuTfOgshf2BCWY6FhK4TZatuu2G4cGD8f+Ys7Y4Yqx6ikfhjkTDVcZuU75+hHanVZA==
   dependencies:
-    ember-cli-babel "^7.26.10"
-    ember-require-module "^0.4.0"
+    "@embroider/macros" "^1.13.2"
+    ember-cli-babel "^7.26.11"
     ember-validators "^4.1.1"
 
 ember-data-factory-guy@^4.0.0-alpha.1:
@@ -9977,13 +9977,6 @@ ember-render-helpers@^0.2.0:
   dependencies:
     ember-cli-babel "^7.23.0"
     ember-cli-typescript "^4.0.0"
-
-ember-require-module@^0.4.0:
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/ember-require-module/-/ember-require-module-0.4.0.tgz#2f86bae244f70c3d4cb8b9ef8abbd617e7a95218"
-  integrity sha512-P8q/F/DhEjVSNVdgbMctIZ4tEB1nTalPTd0ZrRxRYgiJE/g1B+eQ5z6GSCzxeeMFTJhVjvIRFtzlFUIRN+EDFQ==
-  dependencies:
-    ember-cli-babel "^7.26.11"
 
 ember-resolver@^8.0.3:
   version "8.1.0"

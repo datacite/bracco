@@ -96,31 +96,19 @@ const Validations = buildValidations({
   ],
   passwordInput: [
     validator('presence', {
-      presence: true,
-      disabled: computed('model', function () {
-        return this.model.get('keepPassword');
-      })
+      presence: true
     }),
     validator('length', {
-      min: 8,
-      disabled: computed('model', function () {
-        return this.model.get('keepPassword');
-      })
+      min: 8
     })
   ],
   confirmPasswordInput: [
     validator('presence', {
-      presence: true,
-      disabled: computed('model', function () {
-        return this.model.get('keepPassword');
-      })
+      presence: true
     }),
     validator('confirmation', {
       on: 'passwordInput',
-      message: 'Password does not match',
-      disabled: computed('model', function () {
-        return this.model.get('keepPassword');
-      })
+      message: 'Password does not match'
     })
   ],
   website: [
@@ -271,7 +259,6 @@ export default Model.extend(Validations, {
   passwordInput: attr('string'),
   nonProfitStatus: attr('string'),
   hasPassword: attr('boolean'),
-  keepPassword: attr('boolean', { defaultValue: true }),
   rorId: attr('string'),
   salesforceId: attr('string'),
   twitterHandle: attr('string'),

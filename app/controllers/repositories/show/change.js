@@ -45,7 +45,6 @@ export default Controller.extend({
     },
     submit(repository) {
       let self = this;
-      repository.set('keepPassword', false);
       repository
         .save()
         .then(function (repository) {
