@@ -2,9 +2,11 @@ import Component from '@ember/component';
 import fetch from 'fetch';
 import { Promise } from 'rsvp';
 import ENV from 'bracco/config/environment';
+import { inject as service } from '@ember/service';
 
 export default Component.extend({
   json: null,
+  flashMessages: service(),
 
   didReceiveAttrs() {
     this._super(...arguments);

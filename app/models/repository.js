@@ -8,6 +8,8 @@ import {
 } from 'ember-data-model-fragments/attributes';
 import { validator, buildValidations } from 'ember-cp-validations';
 import isEmpty from 'bracco/utils/is-empty';
+import validatePwdInputs from 'bracco/utils/validate-pwd-inputs';
+import { inject as service } from '@ember/service';
 
 export const clientTypeList = [
   {
@@ -86,19 +88,31 @@ const Validations = buildValidations({
   ],
   passwordInput: [
     validator('presence', {
-      presence: true
+      presence: true,
+      disabled: computed('model', 'model.router.currentRouteName', function () {
+        return !validatePwdInputs(this.model.router.currentRouteName);
+      })
     }),
     validator('length', {
-      min: 8
+      min: 8,
+      disabled: computed('model', 'model.router.currentRouteName', function () {
+        return !validatePwdInputs(this.model.router.currentRouteName);
+      })
     })
   ],
   confirmPasswordInput: [
     validator('presence', {
-      presence: true
+      presence: true,
+      disabled: computed('model', 'model.router.currentRouteName', function () {
+        return !validatePwdInputs(this.model.router.currentRouteName);
+      })
     }),
     validator('confirmation', {
       on: 'passwordInput',
-      message: 'Password does not match'
+      message: 'Password does not match',
+      disabled: computed('model', 'model.router.currentRouteName', function () {
+        return !validatePwdInputs(this.model.router.currentRouteName);
+      })
     })
   ],
   name: validator('presence', true),
@@ -138,6 +152,8 @@ const Validations = buildValidations({
 });
 
 export default Model.extend(Validations, {
+  router: service(),
+
   provider: belongsTo('provider', {
     async: true
   }),

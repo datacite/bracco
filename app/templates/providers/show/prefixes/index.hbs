@@ -28,7 +28,7 @@
     {{else}}
       <div class="panel panel-transparent">
         <div class="panel-body">
-          {{link}}
+          {{this.link}}
           {{#if (eq this.model.provider.memberType 'consortium')}}
             <BsAlert @dismissible={{false}} @type="warning">
               New prefixes can't be assigned from this page.
