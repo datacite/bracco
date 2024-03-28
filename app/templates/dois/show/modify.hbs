@@ -1,4 +1,4 @@
-<div class="panel panel-transparent">
+<div class="panel panel-transparent" id="doi-modify-form-file-upload">
   <div class="panel-body">
     <div class="col-md-9 col-md-offset-3 form-help-header">
       <h3 class="help-header">Update DOI (File Upload)</h3>
@@ -7,7 +7,7 @@
       </div>
     </div>
 
-    <BsForm @formLayout="horizontal" @horizontalLabelGridClass="col-md-3" @model={{this.model}} @onSubmit={{action "submit" this.model}} as |form|>
+    <BsForm @formLayout="horizontal" class="form-horizontal" @horizontalLabelGridClass="col-md-3" @model={{this.model}} @onSubmit={{action "submit" this.model}} as |form|>
       <div class="form-group required-nested-label">
         <label class="control-label col-md-3">DOI</label>
         <div class="col-md-9 input-fragment">
@@ -24,7 +24,7 @@
         <label class="control-label col-md-3">URL</label>
         <div class="col-md-9 input-fragment">
           <div class="label-vertical">The location of the landing page with more information about the resource.</div>
-          <form.element id="url" @controlType="text" @property="url" @helpText="Should be a https URL — within the allowed domain(s) of your repository if domain restrictions are enabled in the repository settings. Http and ftp are also supported. For example http://example.org"  as |el| >
+          <form.element id="url" class="form-group" @controlType="text" @property="url" @helpText="Should be a https URL — within the allowed domain(s) of your repository if domain restrictions are enabled in the repository settings. Http and ftp are also supported. For example http://example.org"  as |el| >
             <el.control id="url-field" placeholder="URL" />
           </form.element>
         </div>
