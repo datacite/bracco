@@ -48,6 +48,12 @@ export default Controller.extend({
       repository
         .save()
         .then(function (repository) {
+          var controller = self;
+          controller.get('model').set('passwordInput', '');
+          controller.get('model').set('confirmPasswordInput', '');
+          return repository;
+        })
+        .then(function (repository) {
           self.router.transitionTo('repositories.show', repository);
         })
         .catch(function (reason) {
@@ -55,6 +61,9 @@ export default Controller.extend({
         });
     },
     cancel() {
+      let controller = this;
+      controller.get('model').set('passwordInput', '');
+      controller.get('model').set('confirmPasswordInput', '');
       this.model.rollbackAttributes();
       this.router.transitionTo('repositories.show', this.model);
     }

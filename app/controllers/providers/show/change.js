@@ -48,6 +48,12 @@ export default Controller.extend({
       this.model
         .save()
         .then(function (provider) {
+          var controller = self;
+          controller.get('model').set('passwordInput', '');
+          controller.get('model').set('confirmPasswordInput', '');
+          return provider;
+        })
+        .then(function (provider) {
           self.router.transitionTo('providers.show', provider);
         })
         .catch(function (reason) {
@@ -55,6 +61,9 @@ export default Controller.extend({
         });
     },
     cancel() {
+      let controller = this;
+      controller.get('model').set('passwordInput', '');
+      controller.get('model').set('confirmPasswordInput', '');
       this.model.rollbackAttributes();
       this.router.transitionTo('providers.show', this.model);
     }
