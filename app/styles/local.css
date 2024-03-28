@@ -61,14 +61,13 @@ div.create-doi-button {
   list-style: none;
 }
 
-/****************/
+/* INFO TAB - chart placement on info tab*/
 
-/* To make a left sidebar button line up with the others. */
-.btn-group-vertical {
-  margin-left: 5px;
+#info-tab.content div.row.user-role, #info-tab div.row.row-chart div  {
+  margin-left: 0 !important;
 }
 
-/* Fix info tab bar chart resize at upper breakpoints.  Div width @ 33% causes svg to overflow the box.*/
+/* Fix info tab bar chart resize at upper breakpoints.  Div width @ 33% causes chart svgs to overflow their boxes.*/
 
 @media (min-width: 992px) {
   .row-chart .col-md-4 {
@@ -76,12 +75,20 @@ div.create-doi-button {
   }
 }
 
-/* Fix info tab bar chart indent at upper breakpoint.*/
+/* Fix info tab bar chart indent at upper breakpoint. */
 @media (min-width: 1200px) {
   .col-lg-offset-3 {
-      /* margin-left: 25%; */
+      /* margin-left: 25%;  */
       margin-left: 0;
   }
+}
+
+
+/****************/
+
+/* To make a left sidebar button line up with the others. */
+.btn-group-vertical {
+  margin-left: 5px;
 }
 
 /* Make this look more like other "buttons" in the left sidebar. */
