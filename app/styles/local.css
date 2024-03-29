@@ -7,31 +7,35 @@
 
 /* Otherwise drop-down menu falls behind other objects. */
 .create-doi-button .ember-bootstrap-dropdown-bs3-popper {
-  z-index: 10000;
+z-index: 10000;
 }
 
-.create-doi-button ul.dropdown-menu.show {
+.create-doi-button .dropdown-menu.show {
   margin-top: -2px;
   margin-left: 10px;
   padding: 3px 0px;
+  left: 85%;
 }
 
-.create-doi-button ul.dropdown-menu.show a {
+.create-doi-button .dropdown-menu.show a {
+  display: block;
+  color: #88939a;
   width: 100%;
   font-size: 16px !important;
   padding: 6px 15px;
 }
 
-.create-doi-button ul.dropdown-menu.show a i {
+.create-doi-button .dropdown-menu.show a i {
   margin-right: 3px;
 }
 
-.create-doi-button ul.dropdown-menu.show a:hover {
+.create-doi-button .dropdown-menu.show a:hover {
   background-color: rgb(128, 128, 128, .1);
 }
 
 .create-doi-button button {
   font-size: 16px !important;
+  transition: none;
 }
 
 .create-doi-button .btn, .navbar .navbar-nav>li>a.btn {
@@ -50,7 +54,7 @@
 
 .create-doi-button .btn-group {
   width: 100%;
-  display: flex;
+  display: flex !important;
 }
 
 .create-doi-button .btn-group>.btn:first-child:not(:last-child):not(.dropdown-toggle) {
