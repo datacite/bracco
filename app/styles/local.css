@@ -1,49 +1,44 @@
 /*
  Overrides to shared css/scss/sass styles pulled from:
-    {{ENV.CDN_URL}}/stylesheets/doi.css?version=3.9.43 - soon to be locally kept in the bracco repository.
+    {{ENV.CDN_URL}}/stylesheets/doi.css?version=3.9.43
 */
 
-/* CREATE-DOI-BUTTON - lot of styling to make it more consistent with app styling */
+/* create-doi-button - lot of styling to make it more consistent with app styling */
 
-#create-doi-button.nav.nav-pills li.nav-item div.dropdown-menu {
-  -webkit-box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.4); 
-  box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.4);
-  margin-top: 5px;
+/* Otherwise drop-down menu falls behind other objects. */
+.create-doi-button .ember-bootstrap-dropdown-bs3-popper {
+  z-index: 10000;
 }
 
-#create-doi-button.nav.nav-pills li.nav-item a.nav-link.dropdown-toggle {
-  border-left-width: 0 !important;
-  border-color: rgb(230, 126, 34);
-  border-top-right-radius: 13px;
-  border-bottom-right-radius: 13px;
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-  color: rgb(230, 126, 34);
-  height: 100%;
+.create-doi-button ul.dropdown-menu.show {
+  margin-top: -2px;
+  margin-left: 10px;
+  padding: 3px 0px;
 }
 
-#create-doi-button.nav.nav-pills li.nav-item a.nav-link {
-  border-color: rgb(230, 126, 34);
-  border-top-left-radius: 13px;
-  border-bottom-left-radius: 13px;
-  color: rgb(230, 126, 34);
-  font-weight: 500;
+.create-doi-button ul.dropdown-menu.show a {
+  width: 100%;
+  font-size: 16px !important;
+  padding: 6px 15px;
+}
+
+.create-doi-button ul.dropdown-menu.show a i {
+  margin-right: 3px;
+}
+
+.create-doi-button ul.dropdown-menu.show a:hover {
+  background-color: rgb(128, 128, 128, .1);
+}
+
+.create-doi-button button {
+  font-size: 16px !important;
+}
+
+.create-doi-button .btn, .navbar .navbar-nav>li>a.btn {
   padding: 5px 10px;
 }
 
-#create-doi-button.nav.nav-pills li.nav-item a.nav-link:hover {
-  background-color: #e67e22;
-  color: hsla(0, 0%, 100%, .7);
-  border-color: #e67e22;
-}
-
-#create-doi-button.nav.nav-pills li.nav-item div.dropdown-menu a.dropdown-item:hover {
-  background-color: rgb(128, 128, 128, .2);
-  color: #34495e;
-  width: 100%
-}
-
-div.create-doi-button {
+.create-doi-button {
   margin-left: 5px;
   margin-bottom: 15px;
 }
@@ -53,12 +48,13 @@ div.create-doi-button {
   width: min-content;
 }
 
-.nav.nav-pills {
+.create-doi-button .btn-group {
+  width: 100%;
   display: flex;
-  flex-wrap: wrap;
-  padding-left: 0;
-  margin-bottom: 0;
-  list-style: none;
+}
+
+.create-doi-button .btn-group>.btn:first-child:not(:last-child):not(.dropdown-toggle) {
+  width: 100%;
 }
 
 /* INFO TAB - chart placement on info tab*/
@@ -96,7 +92,7 @@ div.create-doi-button {
   border-radius: 13px;
 }
 
-/* Style to change the caret icon orientation on aria state. Start orientation is point down. */
+/* Style to change the caret icon orientation on aria state. Start orientation is point down.*/
 
 button[aria-expanded="true"] > .caret.caret-point{
   transform: rotate(0deg);
@@ -295,6 +291,7 @@ div[doi-format].power-select-fragment .ember-basic-dropdown-trigger div.ember-vi
 }
 
 /*
+
 .show .dropdown-menu {
   opacity: 1;
   filter: alpha(opacity = 100);

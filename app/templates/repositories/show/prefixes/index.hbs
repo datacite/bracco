@@ -15,10 +15,10 @@
         <div class="panel facets add-25">
           <div class="panel-body">
             <div class="btn-toolbar">
+              <div class="shrink">
                 {{#if (and this.model.repository.isActive (or (can 'create doi' this.model) (can 'upload doi' this.model)) (gt this.model.repository-prefixes.length 0))}}
                   <CreateDoiButton @model={{this.model}} class="create-doi-button" />
                 {{/if}}
-                <div class="shrink">
                 <div class="btn-group-vertical btn-group-sm">
                   <LinkTo
                     @route="repositories.show.prefixes.new"
