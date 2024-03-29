@@ -1,6 +1,6 @@
 {{#if (can 'read index')}}
   <ApplicationHeader @default={{true}} />
-  <div class="container-fluid">
+  <div class="container-fluid" id="add-member-form">
     <IndexHeader />
     <div class="panel panel-transparent">
       <div class="panel-body">
@@ -14,6 +14,7 @@
         </div>
         <BsForm
           @formLayout="horizontal"
+          class="form-horizontal"
           @horizontalLabelGridClass="col-md-3"
           @model={{this.model}}
           @onSubmit={{action 'submit' this.model}}
@@ -26,6 +27,7 @@
           <form.element
             @controlType="power-select"
             id="ror-id"
+            class="form-group"
             @label="Organization identifier (optional)"
             @property="rorId"
             @optionLabelPath="rorId"
@@ -46,7 +48,8 @@
           </form.element>
           <form.element
             @controlType="text"
-            id="name"   
+            id="name" 
+            class="form-group"  
             @label="Member Name"
             @property="name"
             @helpText="The official name of your organization." as |el|
@@ -56,6 +59,7 @@
           <form.element
             @controlType="text"
             id="display-name"
+            class="form-group"
             @label="Member Display Name"
             @property="displayName"
             @helpText="Name of your organization as you would like it to appear in Fabrica and on DataCite’s website." as |el|
@@ -67,6 +71,7 @@
               <form.element
                 @controlType="text"
                 id="doi-estimate"
+                class="form-group"
                 @label="Estimated DOIs"
                 @property="doiEstimate"
                 @helpText={{html-safe (concat "Enter the number of DOIs expected to be registered annually. This amount will be pro-rated for the remaining months of the year. If the consortium fee cap applies enter zero (0). See more details in our <a href='" (get (links) "FEE_MODEL_URL" ) "' target='_blank'>fee model</a>.")}} as |el|
@@ -79,6 +84,7 @@
             <form.element
               @controlType="text"
               id="salesforce-id"
+              class="form-group"
               @label="Salesforce ID"
               @property="salesforceId"
               @helpText="The 18 digit ID in Salesforce." as |el|
@@ -90,6 +96,7 @@
             <form.element
               @controlType="text"
               id="globus-uuid"
+              class="form-group"
               @label="Globus UUID (optional)"
               @property="globusUuid"
               @helpText="The Globus UUID used for token authentication." as |el|
@@ -101,6 +108,7 @@
             <form.element
               @controlType="power-select"
               id="member-type"
+              class="form-group"
               @label="Member Type"
               @property="memberType"
               @options={{this.memberTypes}}
@@ -119,6 +127,7 @@
             <form.element
               @controlType="power-select"
               id="tax-status"
+              class="form-group"
               @label="Tax Status"
               @property="nonProfitStatus"
               @options={{this.nonProfitStatuses}}
@@ -137,6 +146,7 @@
             {{#if (eq this.model.memberType 'consortium_organization')}}
               <form.element
                 @controlType="power-select"
+                class="form-group"
                 @property="consortium"
                 @label="Consortium"
                 @helpText="Consortium for this organization."
@@ -160,6 +170,7 @@
           <form.element
             @controlType="text"
             id="system-email"
+            class="form-group"
             @label="System Email"
             @property="systemEmail"
             @helpText="This is the email used for sending password reset requests and similar system notifications." as |el|
@@ -169,6 +180,7 @@
           <form.element
             @controlType="text"
             id="group-email"
+            class="form-group"
             @label="Group Email (optional)"
             @property="groupEmail"
             @helpText="A generic shared email address (such as info@datacite.org or similar) where you would like to receive communications from DataCite." as |el|
@@ -178,6 +190,7 @@
           <form.element
             @controlType="text"
             id="website"
+            class="form-group"
             @label="Website (optional)"
             @property="website"
             @helpText="Website of the member." as |el|
@@ -187,6 +200,7 @@
           <form.element
             @controlType="text"
             id="twitter-handle"
+            class="form-group"
             @label="Twitter (optional)"
             @property="twitterHandle"
             @helpText="DataCite will follow you on twitter." as |el|
@@ -196,6 +210,7 @@
           <form.element
             @controlType="power-select"
             id="country"
+            class="form-group"
             @label="Country (optional)"
             @property="country"
             @optionLabelPath="name"
@@ -218,6 +233,7 @@
           <form.element
             @controlType="power-select"
             id="organization-type"
+            class="form-group"
             @label="Organization Type (optional)"
             @property="organizationType"
             @options={{this.organizationTypes}}
@@ -237,6 +253,7 @@
           <form.element
             @controlType="power-select"
             id="focus-area"
+            class="form-group"
             @label="Focus Area (optional)"
             @property="focusArea"
             @options={{this.focusAreas}}
@@ -257,6 +274,7 @@
           <form.element
             @controlType="textarea"
             id="description"
+            class="form-group"
             @label="Description (optional)"
             @property="description"app/templates/providers/new.hbs
             @helpText="Description of the member. Please use markdown for formatting." as |el|
@@ -303,6 +321,7 @@
             <form.element
               @controlType="text"
               id="billing-information-department"
+              class="form-group"
               @label="Billing Department"
               @property="billingInformation.department"
               @helpText="Your organization's specific department that is responsible for payment" as |el|
@@ -312,6 +331,7 @@
             <form.element
               @controlType="text"
               id="billing-information-organization"
+              class="form-group"
               @label="Billing Organization"
               @property="billingInformation.organization"
               @helpText="Your organization's name for billing purposes if different from the official name" as |el|
@@ -321,6 +341,7 @@
             <form.element
               @controlType="text"
               id="billing-information-street"
+              class="form-group"
               @label="Billing Street"
               @property="billingInformation.address"
               @helpText="Your organization's street for billing purposes" as |el|
@@ -330,6 +351,7 @@
             <form.element
               @controlType="text"
               id="billing-information-city"
+              class="form-group"
               @label="Billing City"
               @property="billingInformation.city"
               @helpText="Your organization's city for billing purposes" as |el|
@@ -339,6 +361,7 @@
             <form.element
               @controlType="text"
               id="billing-information-postcode"
+              class="form-group"
               @label="Billing Zip/Post Code"
               @property="billingInformation.postCode"
               @helpText="Your organization's Zip/post code for billing purposes" as |el|
@@ -348,6 +371,7 @@
             <form.element
               @controlType="power-select"
               id="billing-information-country"
+              class="form-group"
               @label="Billing Country"
               @property="billingInformation.country"
               @optionLabelPath="name"
@@ -371,6 +395,7 @@
               <form.element
                 @controlType="power-select"
                 id="billing-information-state"
+                class="form-group"
                 @label="Billing State/Province"
                 @property="billingInformation.state"
                 @optionLabelPath="name"
@@ -395,6 +420,7 @@
           <form.element
             @controlType="checkbox"
             id="is-active"
+            class="form-group"
             @label="Account is active"
             @property="isActive"
             @helpText="This account can manage repositories and prefixes" as |el|
