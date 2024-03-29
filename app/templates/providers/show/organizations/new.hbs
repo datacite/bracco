@@ -1,4 +1,4 @@
-<div class="panel panel-transparent">
+<div class="panel panel-transparent" id="create-consortium-organization-form">
   <div class="panel-body">
     <div class="col-md-9 col-md-offset-3">
       <h3 class="edit">
@@ -10,13 +10,14 @@
     </div>
     <BsForm
       @formLayout="horizontal"
+      class="form-horizontal"
       @horizontalLabelGridClass="col-md-3"
       @model={{this.model.organization}}
       @onSubmit={{action 'submit'}}
       @submitOnEnter={{true}} as |form|
     >
       <h3 class="member-results">
-        Organization Information
+        Organization Information 
       </h3>
       <form.element
         @controlType="hidden"
@@ -26,6 +27,7 @@
       <form.element
         @controlType="text"
         id="member-type"
+        class="form-group"
         @label="Member Type"
         @value="Consortium Organization" as |el|
       >
@@ -34,6 +36,7 @@
       <form.element
         @controlType="text"
         id="name"
+        class="form-group"
         @label="Organization Name"
         @property="name"
         @helpText="The official name of your organization." as |el|
@@ -43,6 +46,7 @@
       <form.element
         @controlType="text"
         id="display-name"
+        class="form-group"
         @label="Organization Display Name"
         @property="displayName"
         @helpText="Name of your organization as you would like it to appear in Fabrica and on DataCite’s website." as |el|
@@ -53,6 +57,7 @@
         <form.element
           @controlType="text"
           id="doi-estimate"
+          class="form-group"
           @label="Estimated DOIs"
           @property="doiEstimate"
           required
@@ -64,6 +69,7 @@
       <form.element
         @controlType="power-select"
         id="ror-id"
+        class="form-group"
         @label="Organization identifier (optional)"
         @property="rorId"
         @optionLabelPath="rorId"
@@ -86,6 +92,7 @@
         <form.element
           @controlType="text"
           id="salesforce-id"
+          class="form-group"
           @label="Salesforce ID"
           @property="salesforceId"
           @helpText="The 18 digit ID in Salesforce." as |el|
@@ -97,6 +104,7 @@
         <form.element
           @controlType="text"
           id="globus-uuid"
+          class="form-group"
           @label="Globus UUID (optional)"
           @property="globusUuid"
           @helpText="The Globus UUID used for token authentication." as |el|
@@ -108,6 +116,7 @@
         <form.element
           @controlType="power-select"
           id="tax-status"
+          class="form-group"
           @label="Tax Status"
           @property="nonProfitStatus"
           @options={{this.nonProfitStatuses}}
@@ -127,6 +136,7 @@
       <form.element
         @controlType="text"
         id="system-email"
+        class="form-group"
         @label="System Email"
         @property="systemEmail"
         @helpText="This is the email used for sending password reset requests and similar system notifications." as |el|
@@ -136,6 +146,7 @@
       <form.element
         @controlType="text"
         id="group-email"
+        class="form-group"
         @label="Group Email (optional)"
         @property="groupEmail"
         @helpText="A generic shared email address (such as info@datacite.org or similar) where you would like to receive communications from DataCite." as |el|
@@ -145,6 +156,7 @@
       <form.element
         @controlType="text"
         id="website"
+        class="form-group"
         @label="Website"
         @property="website (optional)"
         @helpText="Website of the organization." as |el|
@@ -154,6 +166,7 @@
       <form.element
         @controlType="text"
         id="twitter-handle"
+        class="form-group"
         @label="Twitter (optional)"
         @property="twitterHandle"
         @helpText="DataCite will follow you on twitter." as |el|
@@ -163,6 +176,7 @@
       <form.element
         @controlType="power-select"
         id="country"
+        class="form-group"
         @label="Country (optional)"
         @property="country"
         @optionLabelPath="name"
@@ -185,6 +199,7 @@
       <form.element
         @controlType="power-select"
         id="organization-type"
+        class="form-group"
         @label="Organization Type (optional)"
         @property="organizationType"
         @options={{this.organizationTypes}}
@@ -204,6 +219,7 @@
       <form.element
         @controlType="power-select"
         id="focus-area"
+        class="form-group"
         @label="Focus Area (optional)"
         @property="focusArea"
         @options={{this.focusAreas}}
@@ -224,6 +240,7 @@
       <form.element
         @controlType="textarea"
         id="description"
+        class="form-group"
         @label="Description (optional)"
         @property="description"
         @helpText="Description of the organization. Please use markdown for formatting." as |el|
@@ -233,6 +250,7 @@
       <form.element
         @controlType="checkbox"
         id="is-active"
+        class="form-group"
         @label="Account is active"
         @property="isActive"
         @helpText="This account can manage repositories and prefixes" as |el|
