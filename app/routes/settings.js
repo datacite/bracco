@@ -26,7 +26,7 @@ export default Route.extend({
 
   afterModel() {
     if (this.can.cannot('read index') && this.currentUser) {
-      this.self.transitionTo('index');
+      this.transitionTo('index');
     }
   },
 
