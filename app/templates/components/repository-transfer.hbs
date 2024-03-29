@@ -4,7 +4,7 @@
       <h3 class="edit">Transfer Repository</h3>
     </div>
 
-    <BsForm @formLayout="horizontal" @horizontalLabelGridClass="col-md-3" @model={{this}} @onSubmit={{action "submit"}} @submitOnEnter={{false}} data-test-transfer-select as |form|>
+    <BsForm @formLayout="horizontal" class="form-horizontal" @horizontalLabelGridClass="col-md-3" @model={{this}} @onSubmit={{action "submit"}} @submitOnEnter={{false}} data-test-transfer-select as |form|>
       <form.element @controlType="power-select" id="target-id" class="form-group" @label="Member/Consortium" @value={{this.provider}} @helpText="Transfer this repository to another member/consortium. It can take up to one hour for the transfer to complete." @options={{this.providers}} @destination={{this.provider}} as |el|>
         <el.control @onChange={{action "selectProvider"}} @allowClear={{true}} @searchEnabled={{true}} @search={{action "searchProvider"}} @placeholder="Type to search..." as |item|>
         {{item.name}}
