@@ -1,15 +1,15 @@
-{{#if model}}
+{{#if this.model}}
   <div class="row">
     <div class="col-md-3">
-      {{#if (can 'update prefix' model.prefix)}}
+      {{#if (can 'update prefix' this.model.prefix)}}
         <div class="panel facets add">
           <div class="panel-body">
-            {{#if model.repository.isActive}}
+            {{#if this.model.repository.isActive}}
               <div class="btn-toolbar">
                 <div class="btn-group btn-group-sm">
                   <LinkTo
                     @route="repositories.show.prefixes.show.delete"
-                    @models={{array model.repository.id model.prefix.id}}
+                    @models={{array this.model.repository.id this.model.prefix.id}}
                     class="btn btn-warning"
                   >
                     <i class="fas fa-pencil-alt"></i>
@@ -24,13 +24,13 @@
     </div>
     <div class="col-md-9">
       <h2 class="work">
-        {{model.prefix.id}}
+        {{this.model.prefix.id}}
       </h2>
     </div>
   </div>
   <div class="row">
     <div class="col-md-3">
-      <RepositorySidebar @model={{model}} />
+      <RepositorySidebar @model={{this.model}} />
     </div>
     <div class="col-md-9">
       <div class="panel panel-transparent">

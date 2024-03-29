@@ -5,6 +5,7 @@ import { A } from '@ember/array';
 export default Route.extend({
   can: service(),
   router: service(),
+  store: service(),
 
   model(params) {
     let self = this;
