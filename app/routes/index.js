@@ -29,9 +29,8 @@ export default Route.extend({
 
   afterModel() {
     if (this.get('currentUser.role_id') === 'staff_admin') {
-      this.router.transitionTo('index');
+      var self = this;
 
-      let self = this;
       this.prefixes.available().then(
         function (value) {
           if (
@@ -40,6 +39,7 @@ export default Route.extend({
           ) {
             return;
           }
+
           if (value <= 0) {
             self.get('flashMessages').danger(self.prefixes.msg_zero);
           } else if (value < self.prefixes.min) {
@@ -50,6 +50,8 @@ export default Route.extend({
           console.debug(reason);
         }
       );
+
+      this.router.transitionTo('/');
     } else if (
       w('provider_admin consortium_admin client_admin user').includes(
         this.get('currentUser.role_id')
@@ -58,7 +60,7 @@ export default Route.extend({
       let home = this.currentUser.get('home');
       this.router.transitionTo(home.route, home.id);
     } else if (this.get('currentUser.role_id') === 'temporary') {
-      this.riyter, transitionTo('password');
+      this.router.transitionTo('password');
     }
   }
 });
