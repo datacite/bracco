@@ -3,10 +3,10 @@
     <div class="panel-body">
       <div class="btn-toolbar">
         <div class="btn-group btn-group-sm">
-          {{#if model.repository}}
+          {{#if this.model.repository}}
             <LinkTo
-              @route={{link}}
-              @model={{model.repository.id}}
+              @route={{this.link}}
+              @model={{this.model.repository.id}}
               class="btn btn-warning"
               id="assign-prefix"
             >
@@ -15,8 +15,8 @@
             </LinkTo>
           {{else}}
             <LinkTo
-              @route={{link}}
-              @model={{model.repository.id}}
+              @route={{this.link}}
+              @model={{this.model.repository.id}}
               class="btn btn-warning"
               id="assign-prefix"
             >

@@ -67,7 +67,7 @@
             <el.control id="display-name-field" />
           </form.element>
           {{#if (eq this.model.memberType 'consortium_organization')}}
-            {{#if features.enableDoiEstimate}}
+            {{#if this.features.enableDoiEstimate}}
               <form.element
                 @controlType="text"
                 id="doi-estimate"
@@ -151,8 +151,8 @@
                 @label="Consortium"
                 @helpText="Consortium for this organization."
                 @optionLabelPath="name"
-                @options={{consortia}}
-                @destination={{consortium.id}} as |el|
+                @options={{this.consortia}}
+                @destination={{this.consortium.id}} as |el|
               >
                 <el.control
                   @onChange={{action 'selectConsortium'}}
@@ -401,7 +401,7 @@
                 @optionLabelPath="name"
                 @options={{this.states}}
                 @helpText="Your organization's state/province for billing purposes."
-                @destination={{billingInformation.country}} as |el|
+                @destination={{this.billingInformation.country}} as |el|
               >
                 <el.control
                   @onChange={{action 'selectBillingState'}}

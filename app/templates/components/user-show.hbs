@@ -5,16 +5,16 @@
     <div class="panel panel-transparent">
       <div class="panel-body">
         <h5>ORCID ID</h5>
-        <a href="{{model.orcid}}">{{model.orcid}}</a>
+        <a href="{{this.model.orcid}}">{{this.model.orcid}}</a>
 
-        {{#if model.givenName}}
+        {{#if this.model.givenName}}
           <h5>Given Name</h5>
-          {{model.givenName}}
+          {{this.model.givenName}}
         {{/if}}
 
-        {{#if model.familyName}}
+        {{#if this.model.familyName}}
           <h5>Family Name</h5>
-          {{model.familyName}}
+          {{this.model.familyName}}
         {{/if}}
       </div>
     </div>

@@ -1,21 +1,21 @@
 <div class="content">
 	<UserRole />
 	<div class="row row-chart">
-		<BarChart @data={{model.doiCount}} @label="DOI" @model={{model}} @link="users.show.dois" @summarize={{true}} @offset={{true}} />
-		<DonutChart @data={{model.resourceTypeCount}} @label="DOI" @model={{model}} @link="users.show.dois" />
+		<BarChart @data={{this.model.doiCount}} @label="DOI" @model={{this.model}} @link="users.show.dois" @summarize={{true}} @offset={{true}} />
+		<DonutChart @data={{this.model.resourceTypeCount}} @label="DOI" @model={{this.model}} @link="users.show.dois" />
 	</div>
 	<div class="row row-chart">
-		<MetricsCounter @label='Citations' @model={{model}} @link="users.show.dois" @query={{hash has-citations=1
-			has-views=null has-downloads=null}} @count={{model.totalCitationCount}} />
-		<MetricsCounter @label='Views' @model={{model}} @link="users.show.dois" @query={{hash has-citations=null has-views=1
-			has-downloads=null}} @count={{model.totalViewCount}} />
-		<MetricsCounter @label='Downloads' @model={{model}} @link="users.show.dois" @query={{hash has-citations=null
-			has-views=null has-downloads=1}} @count={{model.totalDownloadCount}} />
+		<MetricsCounter @label='Citations' @model={{this.model}} @link="users.show.dois" @query={{hash has-citations=1
+			has-views=null has-downloads=null}} @count={{this.model.totalCitationCount}} />
+		<MetricsCounter @label='Views' @model={{this.model}} @link="users.show.dois" @query={{hash has-citations=null has-views=1
+			has-downloads=null}} @count={{this.model.totalViewCount}} />
+		<MetricsCounter @label='Downloads' @model={{this.model}} @link="users.show.dois" @query={{hash has-citations=null
+			has-views=null has-downloads=1}} @count={{this.model.totalDownloadCount}} />
 	</div>
-	{{#if (can "read messages" model)}}
+	{{#if (can "read messages" this.model)}}
 	<div class="row">
 		<div class="col-md-9">
-			{{#each flashMessages.queue as |flash|}}
+			{{#each this.flashMessages.queue as |flash|}}
 			<FlashMessage @flash={{flash}} />
 			{{/each}}
 		</div>

@@ -1,5 +1,5 @@
-{{#if edit}}
-  <BsForm @formLayout="vertical" @model={{model}} @onSubmit={{action "submit" model}} as |form|>
+{{#if this.edit}}
+  <BsForm @formLayout="vertical" @model={{this.model}} @onSubmit={{action "submit" this.model}} as |form|>
     <form.element @controlType="text" @label="Name" @property="name" />
     <form.element @controlType="text" @label="Contact" @property="contact" />
     <form.element @controlType="email" @label="Email" @property="email" />
@@ -13,16 +13,16 @@
     </div>
   </BsForm>
 {{else}}
-  {{#if model.contactEmail}}
+  {{#if this.model.contactEmail}}
     <h5>Contact Email</h5>
-    <a href="{{model.contactEmail}}">{{model.contactEmail}}</a>
+    <a href="{{this.model.contactEmail}}">{{this.model.contactEmail}}</a>
   {{/if}}
 
   <div class="pseudo-footer">
-    {{model.uid}}
+    {{this.model.uid}}
     <span><i class="fas fa-question-circle"></i>
       <BsTooltip @placement="top" @viewportPadding={{10}}>Each provider has a unique ID.</BsTooltip>
     </span>
-    <button class="btn-link" type="button" {{action "edit" model}}><i class="fas fa-pencil-alt"></i></button>
+    <button class="btn-link" type="button" {{action "edit" this.model}}><i class="fas fa-pencil-alt"></i></button>
   </div>
 {{/if}}

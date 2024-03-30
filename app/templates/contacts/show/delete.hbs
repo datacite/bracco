@@ -3,7 +3,7 @@
     <div class="col-md-9 col-md-offset-3">
       <BsForm
         @formLayout="vertical"
-        @model={{model}}
+        @model={{this.model}}
         @onSubmit={{action 'submit'}}
         @submitOnEnter={{true}} as |form|
       >
@@ -27,7 +27,7 @@
               Cancel
             </button>
             <button
-              disabled={{v-get model 'confirmDelete' 'isInvalid'}}
+              disabled={{v-get this.model 'confirmDelete' 'isInvalid'}}
               id="delete"
               class="btn btn-sm btn-fill" type="button" {{action 'submit'}}
             >
