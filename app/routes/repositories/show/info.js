@@ -5,6 +5,7 @@ export default Route.extend({
   can: service(),
   router: service(),
   flashMessages: service(),
+  store: service(),
 
   model() {
     let self = this;

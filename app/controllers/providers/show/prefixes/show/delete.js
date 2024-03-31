@@ -3,6 +3,7 @@ import { inject as service } from '@ember/service';
 
 export default Controller.extend({
   router: service(),
+  store: service(),
 
   actions: {
     submit() {

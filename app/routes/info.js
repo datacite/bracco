@@ -7,6 +7,7 @@ export default Route.extend({
   flashMessages: service(),
   prefixes: service(),
   router: service(),
+  store: service(),
 
   model() {
     if (this.can.can('read index')) {

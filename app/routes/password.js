@@ -4,6 +4,7 @@ import Route from '@ember/routing/route';
 
 export default Route.extend(AuthenticatedRouteMixin, {
   currentUser: service(),
+  store: service(),
 
   authenticationRoute: 'sign-in',
 

@@ -10,6 +10,7 @@ export default Route.extend({
   features: service(),
   headData: service(),
   router: service(),
+  store: service(),
 
   model(params) {
     let self = this;
