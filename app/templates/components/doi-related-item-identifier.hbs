@@ -13,7 +13,7 @@
 <div class="power-select-label">
   <label for="relatedItemIdentifierType" class="subtitle">Related Identifier Type</label> 
 </div> 
-<div class="power-select-fragment" disabled={{this.controlledIdentifierType}} data-test-related-item-identifier-type>
+<div class="power-select-fragment" disabled={{this.controlledIdentifierType}} doi-related-item-identifier data-test-related-item-identifier-type>
   <@form.element @controlType="power-select" @value={{this.fragment.relatedItemIdentifierType}} @helpText="The type of the Related Identifier." @options={{this.relatedItemIdentifierTypeList}} @destination={{this.relatedItemIdentifierType}} as |el|>
     <el.control @onChange={{action "selectRelatedItemIdentifierType"}} @allowClear={{true}} @placeholder="Select related Identifier Type" @disabled={{this.controlledIdentifierType}} @allowClear={{true}} @searchEnabled={{true}} />
   </@form.element>

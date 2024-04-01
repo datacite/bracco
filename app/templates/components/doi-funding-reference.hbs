@@ -2,7 +2,7 @@
   <label for="funder-name" class="subtitle">Funder Name</label>
 </div>
   
-<div class="power-select-fragment" data-test-funder-name>
+<div class="power-select-fragment" doi-funder-name data-test-funder-name>
   <@form.element @controlType="power-select" @options={{this.funders}} @value={{this.fragment.funderName}} @destination={{this.fragment.funderName}} as |el|>
     <el.control @searchEnabled={{true}} @onChange={{action "selectFunderReference"}} @placeholder="Search Funders" @onKeydown={{action "createOnEnter"}} @search={{action "searchFundingReferences"}} @searchPlaceholder="Type to search..." @allowClear={{true}} @noMatchesMessage="Press ENTER to add new funder name." @allowClear={{true}} @disabled={{this.disabled}} as |item|>
       {{if item.name item.name this.fragment.funderName}}
@@ -33,7 +33,7 @@
 <div class="power-select-label">
   <label for="funderIdentifierType" class="subtitle">Funder Identifier Type</label>
 </div>
-<div class="power-select-fragment" data-test-funder-identifier-type>
+<div class="power-select-fragment" doi-funder-identifier-type data-test-funder-identifier-type>
   <@form.element @controlType="power-select" @value={{this.fragment.funderIdentifierType}} @helpText="The type of funder identifier, one of Crossref Funder ID, GRID, ISNI, or ROR." @options={{this.funderIdentifierTypeList}} @destination={{this.fragment.funderIdentifierType}} as |el|>
     <el.control @onChange={{action "selectFunderIdentifierType"}} @allowClear={{true}} @placeholder="Select Funder Identifier Type" @disabled={{this.isCrossrefId}} />
   </@form.element>

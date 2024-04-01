@@ -120,10 +120,12 @@ button[aria-expanded="false"] .caret.caret-point{
 }
 
 /* Power select - doi-format */
+/*
 div[doi-format].power-select-fragment .ember-basic-dropdown-trigger div.ember-view{
   display:inline-block;
   padding-left: 5px;
 }
+*/
 
 /***********************/
 /* ember-bootstrap 5   */
@@ -182,11 +184,13 @@ div[doi-format].power-select-fragment .ember-basic-dropdown-trigger div.ember-vi
 
 
 /* Fix a slight spacing problem - text inputs - doi forms - version. */
+
 .input-fragment div.col-md-9 {
-  padding-left: 0;
-  padding-right: 0;
+  /*padding-left: 0;
+  padding-right: 0;*/
   width: 100%;
 }
+
 
 /** flashmessage box at the bottom of the form - style changed from 'in' ti 'show' **/
 
@@ -382,9 +386,49 @@ div[doi-format].power-select-fragment .ember-basic-dropdown-trigger div.ember-vi
   width: 100%;
 }
 
+.power-select-fragment[doi-language], .power-select-fragment[doi-alternate-identifier-type] {
+  width: 100% !important;
+  margin: 0 !important;
+}
+
+.power-select-fragment[doi-alternate-identifier-type], .power-select-fragment[doi-rights], .power-select-fragment[doi-format] {
+  width: 100% !important;
+  margin-left: 15px !important;
+}
+
+.power-select-fragment[doi-language] div:first-child, .power-select-fragment[doi-alternate-identifier-type] div:first-child, .power-select-fragment[doi-rights] div:first-child, .power-select-fragment[doi-format] div:first-child {
+  padding: 0;
+  width: 100%;
+}
+
+.power-select-fragment[doi-funder-name], .power-select-fragment[doi-funder-identifier-type] {
+  width: 100% !important;
+  margin-left: 15px !important;
+}
+
+.power-select-fragment[doi-funder-name] div:first-child, .power-select-fragment[doi-funder-identifier-type] div:first-child {
+  padding: 0 !important;
+  width: 100% !important;
+}
+
+.power-select-fragment[doi-language] div:first-child, .power-select-fragment[doi-alternate-identifier-type] div:first-child, .power-select-fragment[doi-rights] div:first-child, .power-select-fragment[doi-format] div:first-child {
+  padding: 0;
+  width: 100%;
+}
+
 .power-select-fragment[doi-description-type] div:first-child, .power-select-fragment[doi-description-language] div:first-child {
   padding: 0;
   width: 100%;
+}
+
+.power-select-fragment[doi-related-item-type], .power-select-fragment[doi-relation-type], .power-select-fragment[doi-related-item-identifier] {
+  width: 100% !important;
+  margin-left: 15px !important;
+}
+
+.power-select-fragment[doi-related-item-type] div:first-child, .power-select-fragment[doi-relation-type] div:first-child, .power-select-fragment[doi-related-item-identifier] div:first-child {
+  padding: 0 !important;
+  width: 100% !important;
 }
 
 

@@ -1,4 +1,4 @@
-<div class="power-select-fragment" data-test-rights>
+<div class="power-select-fragment" doi-rights data-test-rights>
   <@form.element @controlType="power-select" @options={{this.spdxLicenseList}} @value={{this.fragment.rights}} @destination={{this.fragment.rights}} as |el|>
     <el.control @searchEnabled={{true}} @onChange={{action "selectRights"}} @placeholder="Search standard licenses" @onKeydown={{action "createOnEnter"}} @search={{action "searchRights"}} @searchPlaceholder="Type to search..." @allowClear={{true}} @noMatchesMessage="Press ENTER to add a new license." @disabled={{this.disabled}} @allowClear={{true}} as |item|>
       {{if item.name item.name this.fragment.rights}}
