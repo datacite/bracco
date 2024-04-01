@@ -348,18 +348,14 @@ div[doi-format].power-select-fragment .ember-basic-dropdown-trigger div.ember-vi
   width: 100% !important;
 }
 
-.power-select-fragment[data-test-affiliation] {
-  margin-left: 0 !important;
+.power-select-fragment[data-doi-affiliation], .power-select-fragment[doi-resource-type], .power-select-fragment.title-type, .power-select-fragment.title-lang  {
+  /*margin-left: 0 !important;*/
   width: 100% !important;
 }
 
-.power-select-fragment[doi-resource-type], .power-select-fragment.title-type, .power-select-fragment.title-lang  {
-  margin-left: 0 !important;
-  width: 100% !important;
-}
-
-.power-select-fragment[doi-resource-type] div:first-child, .power-select-fragment.title-type div:first-child, .power-select-fragment.title-lang div:first-child  {
-  width: 100% !important;
+.power-select-fragment[data-doi-affiliation] div:first-child, .power-select-fragment[doi-resource-type] div:first-child, .power-select-fragment.title-type div:first-child, .power-select-fragment.title-lang div:first-child  {
+  padding: 0;
+  width: 100%;
 }
 
 /* DOI FORMS - DOI field */
