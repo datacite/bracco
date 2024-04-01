@@ -15,7 +15,7 @@
   <label for="descriptionType" class="subtitle required-label">Description Type</label>
 </div>
 
-<div class="power-select-fragment">
+<div class="power-select-fragment" doi-description-type>
   <@form.element @controlType="power-select" @value={{this.fragment.descriptionType}} @options={{this.descriptionTypes}} @destination={{this.fragment.descriptionType}} as |el|>
     <el.control @class="description-types" @onChange={{action "selectDescriptionType"}} @placeholder="Select Description Type" @allowClear={{false}} @disabled={{this.disabled}} @searchEnabled={{true}} />
   </@form.element>
@@ -26,7 +26,7 @@
   <label for="descriptionLang" class="subtitle">Language</label>
 </div>
 
-<div class="power-select-fragment description-langs">
+<div class="power-select-fragment description-langs" doi-description-language>
   <@form.element @controlType="power-select" @value={{this.language}} @options={{this.languages}} as |el|>
     <el.control @class="description-langs" @onChange={{action "selectLanguage"}} @search={{action "searchLanguage"}} @placeholder="Select Language" @searchPlaceholder="Type to search..." @allowClear={{true}} @disabled={{this.disabled}} @searchEnabled={{true}} />
   </@form.element>

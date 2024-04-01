@@ -377,10 +377,16 @@ div[doi-format].power-select-fragment .ember-basic-dropdown-trigger div.ember-vi
   width: 100% !important;
 }
 
-.power-select-fragment[doi-date-type] div:first-child {
+.power-select-fragment[doi-date-type] div:first-child, .power-select-fragment[doi-related-identifier-type] div:first-child, .power-select-fragment[doi-relation-type] div:first-child, .power-select-fragment[doi-resource-type-general] div:first-child {
   padding: 0;
   width: 100%;
 }
+
+.power-select-fragment[doi-description-type] div:first-child, .power-select-fragment[doi-description-language] div:first-child {
+  padding: 0;
+  width: 100%;
+}
+
 
 /* DOI FORMS - DOI field */
 

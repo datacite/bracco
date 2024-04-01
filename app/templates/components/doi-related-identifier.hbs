@@ -15,7 +15,7 @@
 <div class="power-select-label">
   <label for="relatedIdentifierType" class="required-label subtitle">Related Identifier Type</label> 
 </div> 
-<div class="power-select-fragment" disabled={{this.controlledIdentifierType}} data-test-related-identifier-type>
+<div class="power-select-fragment" disabled={{this.controlledIdentifierType}} doi-related-identifier-type data-test-related-identifier-type>
   <@form.element @controlType="power-select" @value={{this.fragment.relatedIdentifierType}} @helpText="The type of the Related Identifier." @options={{this.relatedIdentifierTypeList}} @destination={{this.fragment.relatedIdentifierType}} as |el|>
     <el.control @onChange={{action "selectRelatedIdentifierType"}} @allowClear={{true}} @placeholder="Select related Identifier Type" @disabled={{this.controlledIdentifierType}} @searchEnabled={{true}} />
   </@form.element>
@@ -24,7 +24,7 @@
 <div class="power-select-label">
   <label for="relationType" class="required-label subtitle">Relation Type</label> 
 </div> 
-<div class="power-select-fragment" data-test-related-relation-type>
+<div class="power-select-fragment" doi-relation-type data-test-related-relation-type>
   <@form.element @controlType="power-select" @value={{this.fragment.relationType}} @helpText="The type of the Relation." @options={{this.relationTypeList}} @destination={{this.fragment.relationType}} as |el|>
     <el.control
       @onChange={{action "selectRelationType"}}
@@ -40,7 +40,7 @@
 <div class="power-select-label">
   <label for="relatedResourceType" class="subtitle">Resource Type General</label> 
 </div> 
-<div class="power-select-fragment" data-test-related-resource-type>
+<div class="power-select-fragment" doi-resource-type-general data-test-related-resource-type>
   <@form.element @controlType="power-select" @value={{this.fragment.resourceTypeGeneral}} @helpText="The general type of the related resource." @options={{this.resourceTypesGeneral}} @destination={{this.fragment.resourceTypeGeneral}} as |el|>
     <el.control
       @onChange={{action "selectResourceTypeGeneral"}}
