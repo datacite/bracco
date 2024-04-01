@@ -368,6 +368,20 @@ div[doi-format].power-select-fragment .ember-basic-dropdown-trigger div.ember-vi
   width: 100%;
 }
 
+.power-select-fragment[doi-contributor] {
+  margin-left: 0 !important;
+  width: 100% !important;
+}
+
+.power-select-fragment[doi-date-type] {
+  width: 100% !important;
+}
+
+.power-select-fragment[doi-date-type] div:first-child {
+  padding: 0;
+  width: 100%;
+}
+
 /* DOI FORMS - DOI field */
 
 #suffix {

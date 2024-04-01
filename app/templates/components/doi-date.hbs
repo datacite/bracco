@@ -10,7 +10,7 @@
   <label for="dateType" class="required-label subtitle">Date Type</label>
 </div>
 
-<div class="power-select-fragment">
+<div class="power-select-fragment" doi-date-type>
   <@form.element @controlType="power-select" @helpText="Type of date." @value={{this.fragment.dateType}} @options={{this.dateTypesList}} @destination={{this.fragment.dateType}} as |el|>
     <el.control @onChange={{action "selectDateType"}} @placeholder="Select Date Type"  @disabled={{this.disabled}} @searchEnabled={{true}}/>
   </@form.element>
