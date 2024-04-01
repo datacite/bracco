@@ -1,6 +1,6 @@
 {{#if (gt this.index 0)}}
   <div class="input-group">
-    <div class="power-select-fragment">
+    <div class="power-select-fragment" data-repository-type>
       <@form.element class="form-group" @controlType="power-select" @value={{this.repositoryType}} @options={{this.repositoryTypes}} as |el|>
         <el.control @onChange={{action "selectRepositoryType"}} @search={{action "searchRepositoryType"}} @placeholder="Select RepositoryType" @searchPlaceholder="Type to search..." @allowClear={{true}} @disabled={{this.disabled}} @searchEnabled={{true}} as |item|>
           {{titleize item}}
@@ -12,7 +12,7 @@
     </span>
   </div>
 {{else}}
-  <div class="power-select-fragmen">
+  <div class="power-select-fragment" data-repository-type>
     <@form.element class="form-group" @controlType="power-select" @value={{this.repositoryType}} @options={{this.repositoryTypes}} as |el|>
       <el.control @onChange={{action "selectRepositoryType"}} @search={{action "searchRepositoryType"}} @placeholder="Select RepositoryType" @searchPlaceholder="Type to search..." @allowClear={{true}} @disabled={{this.disabled}} @searchEnabled={{true}} as |item|>
         {{titleize item}}

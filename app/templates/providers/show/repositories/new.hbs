@@ -86,7 +86,7 @@
       <form.element @controlType="textarea" id="domains" class="form-group" @label="Domains" @property="domains" @helpText="List of domains, separated by comma, used for DOI registration, or use *. (e.g. *.example.org) to allow all subdomains, or use * to allow all domains." />
 
       {{#unless (eq this.model.repository.clientType "periodical")}}
-        <div class="form-group" id="repository-type" class="form-group">
+        <div class="form-group" id="repository-type">
           <label class="control-label col-md-3">Repository Type (optional)</label>
           <div class="col-md-9">
             {{#if (gt this.model.repository.repositoryType.length 0)}}

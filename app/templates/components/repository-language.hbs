@@ -1,6 +1,6 @@
 {{#if (gt this.index 0)}}
-  <div class="input-group">
-    <div class="power-select-fragment">
+  <div class="input-group repository-language">
+    <div class="power-select-fragment"  data-repository-language>
       <@form.element class="form-group" @controlType="power-select" @value={{this.languageName}} @options={{this.languages}} as |el|>
         <el.control @onChange={{action "selectLanguage"}} @search={{action "searchLanguage"}} @placeholder="Select Language" @searchPlaceholder="Type to search..." @allowClear={{true}} @disabled={{this.disabled}} @searchEnabled={{true}} />
       </@form.element>
@@ -10,7 +10,7 @@
     </span>
   </div>
 {{else}}
-  <div class="power-select-fragment">
+  <div class="power-select-fragment" data-repository-language>
     <@form.element class="form-group" @controlType="power-select" @value={{this.languageName}} @options={{this.languages}} as |el|>
       <el.control @onChange={{action "selectLanguage"}} @search={{action "searchLanguage"}} @placeholder="Select Language" @searchPlaceholder="Type to search..." @allowClear={{true}} @disabled={{this.disabled}} @searchEnabled={{true}} />
     </@form.element>
