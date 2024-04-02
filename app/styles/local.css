@@ -352,82 +352,59 @@ div[doi-format].power-select-fragment .ember-basic-dropdown-trigger div.ember-vi
   width: 100% !important;
 }
 
-.power-select-fragment[data-doi-subject], .power-select-fragment[data-doi-affiliation], .power-select-fragment[doi-resource-type], .power-select-fragment.title-type, .power-select-fragment.title-lang  {
+.power-select-fragment[doi-subject], 
+.power-select-fragment[doi-affiliation],
+.power-select-fragment[doi-resource-type],
+.power-select-fragment[doi-title-type],
+.power-select-fragment[doi-title-lang],
+.power-select-fragment[data-repository-language],
+.power-select-fragment[data-repository-type],
+.power-select-fragment[data-repository-certificate],
+.power-select-fragment[doi-date-type]
+{
   /*margin-left: 0 !important;*/
   width: 100% !important;
 }
 
-.power-select-fragment[data-doi-subject] div:first-child, .power-select-fragment[data-doi-affiliation] div:first-child, .power-select-fragment[doi-resource-type] div:first-child, .power-select-fragment.title-type div:first-child, .power-select-fragment.title-lang div:first-child  {
+.power-select-fragment[doi-subject] div:first-child,
+.power-select-fragment[doi-affiliation] div:first-child,
+.power-select-fragment[doi-resource-type] div:first-child,
+.power-select-fragment[doi-title-type] div:first-child,
+.power-select-fragment[doi-title-lang] div:first-child,
+.power-select-fragment[data-repository-language] div:first-child,
+.power-select-fragment[data-repository-type] div:first-child,
+.power-select-fragment[data-repository-certificate] div:first-child,
+.power-select-fragment[doi-date-type] div:first-child,
+.power-select-fragment[doi-related-identifier-type] div:first-child,
+.power-select-fragment[doi-relation-type] div:first-child,
+.power-select-fragment[doi-resource-type-general] div:first-child,
+.power-select-fragment[doi-language] div:first-child,
+.power-select-fragment[doi-alternate-identifier-type] div:first-child,
+.power-select-fragment[doi-rights] div:first-child,
+.power-select-fragment[doi-format] div:first-child,
+.power-select-fragment[doi-funder-name] div:first-child,
+.power-select-fragment[doi-funder-identifier-type] div:first-child,
+.power-select-fragment[doi-related-item-type] div:first-child,
+.power-select-fragment[doi-related-item-identifier] div:first-child,
+.power-select-fragment[doi-description-type] div:first-child,
+.power-select-fragment[doi-description-language] div:first-child
+{
   padding: 0;
   width: 100% !important;
 }
 
-.power-select-fragment[data-repository-language], .power-select-fragment[data-repository-type], .power-select-fragment[data-repository-certificate] {
-  /*margin-left: 0 !important;*/
-  width: 100% !important;
-} 
-
-.power-select-fragment[data-repository-language] div:first-child, .power-select-fragment[data-repository-type] div:first-child, .power-select-fragment[data-repository-certificate] div:first-child  {
-  padding: 0;
-  width: 100%;
-}
-
-.power-select-fragment[doi-contributor] {
+.power-select-fragment[doi-contributor],
+.power-select-fragment[doi-language],
+.power-select-fragment[doi-alternate-identifier-type],
+.power-select-fragment[doi-rights],
+.power-select-fragment[doi-format],
+.power-select-fragment[doi-funder-name],
+.power-select-fragment[doi-funder-identifier-type],
+.power-select-fragment[doi-related-item-type],
+.power-select-fragment[doi-relation-type],
+.power-select-fragment[doi-related-item-identifier]
+{
   margin-left: 0 !important;
-  width: 100% !important;
-}
-
-.power-select-fragment[doi-date-type] {
-  width: 100% !important;
-}
-
-.power-select-fragment[doi-date-type] div:first-child, .power-select-fragment[doi-related-identifier-type] div:first-child, .power-select-fragment[doi-relation-type] div:first-child, .power-select-fragment[doi-resource-type-general] div:first-child {
-  padding: 0;
-  width: 100%;
-}
-
-.power-select-fragment[doi-language], .power-select-fragment[doi-alternate-identifier-type] {
-  width: 100% !important;
-  margin: 0 !important;
-}
-
-.power-select-fragment[doi-alternate-identifier-type], .power-select-fragment[doi-rights], .power-select-fragment[doi-format] {
-  width: 100% !important;
-  margin-left: 15px !important;
-}
-
-.power-select-fragment[doi-language] div:first-child, .power-select-fragment[doi-alternate-identifier-type] div:first-child, .power-select-fragment[doi-rights] div:first-child, .power-select-fragment[doi-format] div:first-child {
-  padding: 0;
-  width: 100%;
-}
-
-.power-select-fragment[doi-funder-name], .power-select-fragment[doi-funder-identifier-type] {
-  width: 100% !important;
-  margin-left: 15px !important;
-}
-
-.power-select-fragment[doi-funder-name] div:first-child, .power-select-fragment[doi-funder-identifier-type] div:first-child {
-  padding: 0 !important;
-  width: 100% !important;
-}
-
-.power-select-fragment[doi-language] div:first-child, .power-select-fragment[doi-alternate-identifier-type] div:first-child, .power-select-fragment[doi-rights] div:first-child, .power-select-fragment[doi-format] div:first-child {
-  padding: 0;
-  width: 100%;
-}
-
-.power-select-fragment[doi-description-type] div:first-child, .power-select-fragment[doi-description-language] div:first-child {
-  padding: 0;
-  width: 100%;
-}
-
-.power-select-fragment[doi-related-item-type], .power-select-fragment[doi-relation-type], .power-select-fragment[doi-related-item-identifier] {
-  width: 100% !important;
-  margin-left: 15px !important;
-}
-
-.power-select-fragment[doi-related-item-type] div:first-child, .power-select-fragment[doi-relation-type] div:first-child, .power-select-fragment[doi-related-item-identifier] div:first-child {
-  padding: 0 !important;
   width: 100% !important;
 }
 
