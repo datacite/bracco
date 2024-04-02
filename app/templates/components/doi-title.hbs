@@ -17,7 +17,7 @@
   <label for="titleType" class="subtitle">Title Type</label>
 </div>
 
-<div class="power-select-fragment doi-title-type">
+<div class="power-select-fragment"  doi-title-type>
   <@form.element @controlType="power-select" class="form-group" @value={{this.fragment.titleType}} @options={{this.titleTypes}} @destination={{this.fragment.titleType}} as |el|>
     <el.control @onChange={{action "selectTitleType"}} @placeholder="Select Title Type" @allowClear={{true}} @disabled={{this.disabled}} @searchEnabled={{true}} />
   </@form.element>
@@ -27,7 +27,7 @@
   <label for="titleType" class="subtitle">Language</label>
 </div>
 
-<div class="power-select-fragment doi-title-lang">
+<div class="power-select-fragment"  doi-title-lang>
   <@form.element @controlType="power-select" class="form-group" @value={{this.language}} @options={{this.languages}} as |el|>
     <el.control @onChange={{action "selectLanguage"}} @search={{action "searchLanguage"}} @placeholder="Select Language" @searchPlaceholder="Type to search..." @allowClear={{true}} @disabled={{this.disabled}} @searchEnabled={{true}} />
   </@form.element>
