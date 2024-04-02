@@ -1,0 +1,60 @@
+//
+// Page
+// --------------------------------------------------
+html {
+  min-height: 100%;
+}
+
+body{
+    color: $font-color;
+    font-size: $font-size-base;
+    font-family: 'Source Sans Pro', "Helvetica", Arial, sans-serif;
+    background-color: $white-bg;
+}
+.container-fluid {
+  max-width: 1420px;
+  padding: 0 1em;
+}
+.content {
+  padding: .5em;
+}
+.landing-header {
+  background-size: cover;
+  min-height: 350px;
+  margin-top: -103px;
+
+  .motto{
+    padding-top: 15%;
+    text-align: center;
+    color: white;
+  }
+}
+.landing-full-header {
+  background-size: cover;
+  min-height: 900px;
+  margin-top: -122px;
+
+  .motto{
+    padding-top: 15%;
+    text-align: center;
+    color: white;
+  }
+}
+.landing-section {
+  margin-top: -122px;
+}
+.landing-alert {
+  margin: 0;
+
+  h5 {
+    font-weight: $font-weight-bold;
+    font-size: 16px;
+  }
+}
+.row-section {
+  margin: 0;
+}
+.row-chart {
+  margin-top: 10px;
+  margin-left: -3px;
+}

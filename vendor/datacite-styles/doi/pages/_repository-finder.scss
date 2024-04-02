@@ -1,0 +1,232 @@
+//
+// Repository Finder
+// -----------------
+
+.repository-finder {
+  padding-left: 8px;
+  padding-bottom: 10px;
+
+  h2.repository { margin-left: 0; }
+  h3.repository  {
+    margin-top: 1.5em;
+    margin-bottom: 0;
+    font-weight: bold;
+    color: $turquoise;
+
+    > a, > i, > .btn-icon {
+      color: $darker-gray;
+      font-size: 60%;
+    }
+  }
+
+  h3.work { margin-bottom: 0; font-weight: bold; }
+  h4.repository { margin-bottom: 0; }
+  h5 { margin-bottom: 0; font-weight: bold; }
+  .subtitle { font-weight: normal; font-size: $font-size-base; line-height: 1.1; margin-bottom: 10px; }
+  .alert-repository { 
+    p,li,h5 { color: $font-color; }
+    margin-top: 1.5em;
+  }
+}
+
+.recommended {
+  margin-top: 1.5em;
+  margin-left: -10px;
+}
+
+.icons-sprite, .icons-access_inactive, .icons-access_inactive_32, .icons-api_active, .icons-api_active_32, .icons-api_inactive, .icons-api_inactive_32, .icons-ark_active, .icons-ark_active_32, .icons-certificate_active, .icons-certificate_active_32, .icons-certificate_inactive, .icons-certificate_inactive_32, .icons-closed_access_active, .icons-closed_access_active_32, .icons-doi_active, .icons-doi_active_32, .icons-hdl_active, .icons-hdl_active_32, .icons-info_active, .icons-info_active_32, .icons-info_inactive, .icons-info_inactive_32, .icons-licenses_active, .icons-licenses_active_32, .icons-licenses_inactive, .icons-licenses_inactive_32, .icons-open_access_active, .icons-open_access_active_32, .icons-other_active, .icons-other_active_32, .icons-persistent_identifier_active, .icons-persistent_identifier_active_32, .icons-persistent_identifier_inactive, .icons-persistent_identifier_inactive_32, .icons-policy_active, .icons-policy_active_32, .icons-policy_inactive, .icons-policy_inactive_32, .icons-purl_active, .icons-purl_active_32, .icons-restricted_access_active, .icons-restricted_access_active_32, .icons-urn_active, .icons-urn_active_32 {
+  background-image: url('../images/repository-finder/icons-s64ac2f7a46.png');
+  background-repeat: no-repeat;
+}
+.icons-access_inactive {
+  background-position: 0 0;
+}
+.icons-access_inactive_32 {
+  background-position: 0 -20px;
+}
+.icons-api_active {
+  background-position: 0 -52px;
+}
+.icons-api_active_32 {
+  background-position: 0 -72px;
+}
+.icons-api_inactive {
+  background-position: 0 -104px;
+}
+.icons-api_inactive_32 {
+  background-position: 0 -124px;
+}
+.icons-ark_active {
+  background-position: 0 -156px;
+}
+.icons-ark_active_32 {
+  background-position: 0 -176px;
+}
+.icons-certificate_active {
+  background-position: 0 -208px;
+}
+.icons-certificate_active_32 {
+  background-position: 0 -228px;
+}
+.icons-certificate_inactive {
+  background-position: 0 -260px;
+}
+.icons-certificate_inactive_32 {
+  background-position: 0 -280px;
+}
+.icons-closed_access_active {
+  background-position: 0 -312px;
+}
+.icons-closed_access_active_32 {
+  background-position: 0 -332px;
+}
+.icons-doi_active {
+  background-position: 0 -364px;
+}
+.icons-doi_active_32 {
+  background-position: 0 -384px;
+}
+.icons-hdl_active {
+  background-position: 0 -416px;
+}
+.icons-hdl_active_32 {
+  background-position: 0 -436px;
+}
+.icons-info_active {
+  background-position: 0 -468px;
+}
+.icons-info_active_32 {
+  background-position: 0 -488px;
+}
+.icons-info_inactive {
+  background-position: 0 -520px;
+}
+.icons-info_inactive_32 {
+  background-position: 0 -540px;
+}
+.icons-licenses_active {
+  background-position: 0 -572px;
+}
+.icons-licenses_active_32 {
+  background-position: 0 -592px;
+}
+.icons-licenses_inactive {
+  background-position: 0 -624px;
+}
+.icons-licenses_inactive_32 {
+  background-position: 0 -644px;
+}
+.icons-open_access_active {
+  background-position: 0 -676px;
+}
+.icons-open_access_active_32 {
+  background-position: 0 -696px;
+}
+.icons-other_active {
+  background-position: 0 -728px;
+}
+.icons-other_active_32 {
+  background-position: 0 -748px;
+}
+.icons-persistent_identifier_active {
+  background-position: 0 -780px;
+}
+.icons-persistent_identifier_active_32 {
+  background-position: 0 -800px;
+}
+.icons-persistent_identifier_inactive {
+  background-position: 0 -832px;
+}
+.icons-persistent_identifier_inactive_32 {
+  background-position: 0 -852px;
+}
+.icons-policy_active {
+  background-position: 0 -884px;
+}
+.icons-policy_active_32 {
+  background-position: 0 -904px;
+}
+.icons-policy_inactive {
+  background-position: 0 -936px;
+}
+.icons-policy_inactive_32 {
+  background-position: 0 -956px;
+}
+.icons-purl_active {
+  background-position: 0 -988px;
+}
+.icons-purl_active_32 {
+  background-position: 0 -1008px;
+}
+.icons-restricted_access_active {
+  background-position: 0 -1040px;
+}
+.icons-restricted_access_active_32 {
+  background-position: 0 -1060px;
+}
+.icons-urn_active {
+  background-position: 0 -1092px;
+}
+.icons-urn_active_32 {
+  background-position: 0 -1112px;
+}
+.info-icon {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  vertical-align: -3px;
+  margin-left: 1px;
+}
+.info-icon-32 {
+  width: 32px;
+  height: 32px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.repository-toggle {
+  margin-top: 10px;
+}
+
+.splash {
+  padding: 0.5em 3em;
+
+  .strike {
+    display: block;
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap; 
+  }
+
+  .strike > span {
+      position: relative;
+      display: inline-block;
+  }
+
+  .strike > span:before,
+  .strike > span:after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 9999px;
+      height: 1px;
+      background: #dddddd;
+  }
+
+  .strike > span:before {
+      right: 100%;
+      margin-right: 15px;
+  }
+
+  .strike > span:after {
+      left: 100%;
+      margin-left: 15px;
+  }
+}
+
+.motto {
+  h1 {
+    font-size: 42px;
+    font-weight: bold;
+  }
+}

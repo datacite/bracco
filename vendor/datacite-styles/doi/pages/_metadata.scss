@@ -1,0 +1,44 @@
+pre.metadata {
+  background-color: $white-bg;
+  border: 0;
+  padding: 0;
+}
+textarea.metadata {
+  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+  font-size: 12px;
+  border-left-width: 1px;
+  border-left-color: #E3E3E3;
+}
+select.metadata {
+  border-left-width: 1px;
+  border-left-color: #E3E3E3;
+}
+
+.license {
+  a {
+    color: $wet-asphalt;
+
+    i {
+      font-size: 25px;
+      padding-top: 3px;
+    }
+  }
+  span {
+
+    i {
+      margin-bottom: 10px;
+      color: $darker-gray;
+      font-size: $font-size-base;
+    }
+  }
+}
+
+span.orcid {
+  cursor: pointer;
+  display: inline;
+  color: $turquoise;
+}
+
+.action-link {
+  cursor: pointer;
+}

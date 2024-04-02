@@ -1,0 +1,219 @@
+/*doc
+---
+title: Colors
+name: colors
+category: Globals
+---
+
+<div class="row">
+  <div class="col-sm-3">
+    <div class="thumbnail" style="background-color:#1abc9c">
+      <div class="caption">
+        <h4 style="color:white">turquoise</h4>
+        <p style="color:white">#1abc9c</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-3">
+    <div class="thumbnail" style="background-color:#2ecc71">
+      <div class="caption">
+        <h4 style="color:white">emerald</h4>
+        <p style="color:white">#2ecc71</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-3">
+    <div class="thumbnail" style="background-color:#3498db">
+      <div class="caption">
+        <h4 style="color:white">peter-river</h4>
+        <p style="color:white">#3498db</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-3">
+    <div class="thumbnail" style="background-color:#9b59b6">
+      <div class="caption">
+        <h4 style="color:white">amethyst</h4>
+        <p style="color:white">#9b59b6</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-3">
+    <div class="thumbnail" style="background-color:#f1c40f">
+      <div class="caption">
+        <h4 style="color:white">sun-flower</h4>
+        <p style="color:white">#f1c40f</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-3">
+    <div class="thumbnail" style="background-color:#e67e22">
+      <div class="caption">
+        <h4 style="color:white">carrot</h4>
+        <p style="color:white">#e67e22</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-3">
+    <div class="thumbnail" style="background-color:#e74c3c">
+      <div class="caption">
+        <h4 style="color:white">alizarin</h4>
+        <p style="color:white">#e74c3c</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-3">
+    <div class="thumbnail" style="background-color:#f4f6f7">
+      <div class="caption">
+        <h4>clouds</h4>
+        <p>#f4f6f7</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-3">
+    <div class="thumbnail" style="background-color:#bfc5c9">
+      <div class="caption">
+        <h4 style="color:white">silver</h4>
+        <p style="color:white">#bfc5c9</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-3">
+    <div class="thumbnail" style="background-color:#6c797a">
+      <div class="caption">
+        <h4 style="color:white">asbestos</h4>
+        <p style="color:white">#6c797a</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-3">
+    <div class="thumbnail" style="background-color:#34495e">
+      <div class="caption">
+        <h4 style="color:white">wet-asphalt</h4>
+        <p style="color:white">#34495e</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+*/
+
+$turquoise:     #1abc9c;
+$emerald:       #2ecc71;
+$peter-river:   #3498db;
+$amethyst:      #9b59b6;
+$wet-asphalt:   #34495e;
+$sun-flower:    #f1c40f;
+$carrot:        #e67e22;
+$alizarin:      #e74c3c;
+$clouds:        #f4f6f7;
+$silver:        #bfc5c9;
+$asbestos:      #6c797a;
+
+$default-turqouise-color: white !default;
+
+// $gray:          lighten($silver, 15%);
+// $gray-light:    lighten($silver, 20%);
+// $gray-lighter:  lighten($silver, 21%);
+// $gray-dark:     lighten($silver, 10%);
+// $gray-darker:   darken($silver, 20%);
+// $inverse:       white;
+//
+// $brand-primary:         $wet-asphalt;
+// $brand-secondary:       $peter-river;
+// $brand-success:         $emerald;
+// $brand-warning:         $sun-flower;
+// $brand-danger:          $carrot;
+// $brand-info:            $peter-river;
+//
+// $body-bg:               $gray-light;
+// $text-color:            $brand-primary;
+//
+$link-color:            $peter-river;
+$link-hover-color:      mix($peter-river, black, 85%);
+//
+// $hr-border:             $gray;
+// $brand-primary-light:   lighten($wet-asphalt, 20%);
+
+
+$white-color:                #FFFFFF !default;
+$white-bg:                   #FFFFFF !default;
+
+$smoke-bg:                   #F5F5F5 !default;
+$pale-bg:                    #FFFCF5 !default;
+$medium-pale-bg:             #F1EAE0 !default;
+
+$black-bg:                   rgba(30,30,30,.97) !default;
+
+$black-color:                #333333 !default;
+$black-hr:                   #444444 !default;
+
+$gray:                       lighten($silver, 5%);
+$lighter-gray:               lighten($silver, 21%);
+$light-gray:                 lighten($silver, 12%);
+$medium-gray:                $gray;
+$dark-gray:                  darken($silver, 10%);
+$darker-gray:                darken($silver, 20%);
+
+$gray-input-bg:              $white-bg !default;
+$danger-input-bg:            $alizarin !default;
+$success-input-bg:           #ABF3CB !default;
+$other-medium-gray:          #A49E93 !default;
+$transparent-bg:             transparent !default;
+
+$default-color:              $wet-asphalt !default;
+$default-bg:                 $wet-asphalt !default;
+$bg-default:                 $wet-asphalt !default;
+$default-states-color:       lighten($wet-asphalt, 15%) !default;
+
+$primary-color:              $turquoise !default;
+$primary-bg:                 $turquoise !default;
+$bg-primary:                 $turquoise !default;
+$primary-states-color:       darken($turquoise, 10%) !default;
+
+$success-color:              $emerald !default;
+$success-bg:                 $emerald !default;
+$bg-success:                 $emerald !default;
+$success-states-color:       darken($emerald, 10%) !default;
+
+$info-color:                 $peter-river !default;
+$info-bg:                    $peter-river !default;
+$bg-info:                    $peter-river !default;
+$info-states-color:          darken($peter-river, 10%) !default;
+
+$warning-color:              $carrot !default;
+$warning-bg:                 $carrot !default;
+$bg-warning:                 $carrot !default;
+$warning-states-color:       darken($carrot, 10%) !default;
+
+$danger-color:               $alizarin !default;
+$danger-bg:                  $alizarin !default;
+$bg-danger:                  $alizarin !default;
+$danger-states-color:        darken($alizarin, 10%) !default;
+
+$link-disabled-color:        #666666 !default;
+
+$light-blue:                 rgba($primary-color, .2);
+$light-azure:                rgba($info-color, .2);
+$light-green:                rgba($success-color, .2);
+$light-orange:               rgba($warning-color, .2);
+$light-red:                  rgba($danger-color, .2);
+
+$white-navbar:              rgba(#FFFFFF, .96);
+$blue-navbar:               rgba(#34ACDC, .98);
+$azure-navbar:              rgba(#5BCAFF, .98);
+$green-navbar:              rgba(#4CD964, .98);
+$orange-navbar:             rgba(#FF9500, .98);
+$red-navbar:                rgba(#FF4C40, .98);
+
+$bg-nude:               #FFFCF5 !default;
+
+$filter-blue:         darken($primary-color, 10%);
+$filter-azure:        darken($info-color, 10%);
+$filter-green:        darken($success-color, 10%);
+$filter-orange:       darken($warning-color, 10%);
+$filter-red:          darken($danger-color, 10%);

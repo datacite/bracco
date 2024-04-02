@@ -1,0 +1,63 @@
+//
+// Footer
+// --------------------------------------------------
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 340px;
+  font-size: 16px;
+  color: $dark-gray;
+  background-color: $lighter-gray;
+  padding: .75em 0;
+  margin: 0;
+
+  h4, h5 {
+    font-size: $font-size-large;
+    margin-top: .5em;
+    margin-bottom: .1em;
+  }
+  ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  a, a:hover, a:visited {
+    color: $dark-gray;
+  }
+  h4.share {
+    margin-bottom: .5em;
+  }
+  a.share {
+    margin-right: .5em;
+    font-size: 24px;
+  }
+  ul.share {
+    margin-top: .5em;
+  }
+
+  .color-dot {
+    border-radius: 5px;
+    display:inline-block;
+    width:10px;
+    height:10px;
+    margin-right:5px;
+    &.critical {
+      background-color:$danger-color;
+    }
+    &.major {
+      background-color:#e88832
+    }
+    &.minor {
+      background-color:$warning-color;
+    }
+    &.none {
+      background-color:$success-color;
+    }
+  }
+
+  .color-description {
+    font-size: 18px;
+    color: $dark-gray;
+  }
+}

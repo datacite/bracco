@@ -1,0 +1,119 @@
+/*doc
+---
+title: Typography
+name: typography
+category: Globals
+---
+
+DataCite uses the font [Raleway](https://www.theleagueofmoveabletype.com/raleway) as base font with a 18px base font size. [Font-Awesome](http://fortawesome.github.io/Font-Awesome/) is used for icons.
+
+### Headings
+
+```html_example
+<h1>h1.Heading <small>36 px</small></h1>
+<h2>h2.Heading <small>32.4 px</small></h2>
+<h3>h3.Heading <small>28.8 px</small></h3>
+<h4>h4.Heading <small>25.2 px</small></h4>
+<h5>h5.Heading <small>18 px</small></h5>
+<h6>h6.Heading <small>18 px</small></h6>
+```
+
+*/
+
+/*           Font Smoothing      */
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, li, .navbar, .brand, a, .td-name, td{
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+}
+
+h1, .h1, h2, .h2, h3, .h3, h4, .h4{
+    font-weight: $font-weight-normal;
+    margin: $margin-large-vertical 0 $margin-base-vertical;
+}
+
+h1, .h1 {
+    font-size: $font-size-h1;
+    margin: 15px 0 15px;
+}
+h2, .h2{
+    font-size: $font-size-h2;
+    margin: 15px 0 2px;
+    line-height: 1.2em;
+}
+h3, .h3{
+    font-size: $font-size-h3;
+    line-height: 1.4;
+    margin: 15px 0 0;
+}
+h4, .h4{
+    font-size: $font-size-h4;
+    font-weight: $font-weight-bold;
+    line-height: 1.2em;
+}
+h5, .h5 {
+    font-size: $font-size-h5;
+    font-weight: $font-weight-normal;
+    line-height: 1.4em;
+    margin-bottom: 15px;
+}
+h6, .h6{
+    font-size: $font-size-h6;
+    font-weight: $font-weight-bold;
+    text-transform: uppercase;
+}
+p{
+    font-size: $font-paragraph;
+    line-height: $line-height-general;
+}
+
+h1 small, h2 small, h3 small, h4 small, h5 small, h6 small, .h1 small, .h2 small, .h3 small, .h4 small, .h5 small, .h6 small, h1 .small, h2 .small, h3 .small, h4 .small, h5 .small, h6 .small, .h1 .small, .h2 .small, .h3 .small, .h4 .small, .h5 .small, .h6 .small {
+  color: $dark-gray;
+  font-weight: $font-weight-light;
+  line-height: $line-height-general;
+
+  > a, > i {
+    color: $darker-gray;
+  }
+}
+
+h1 small, h2 small, h3 small, h1 .small, h2 .small, h3 .small {
+  font-size: 60%;
+
+  > a, > i {
+    font-size: 60%;
+  }
+}
+.title-uppercase{
+    text-transform: uppercase;
+}
+blockquote{
+    font-style: italic;
+}
+blockquote small{
+    font-style: normal;
+}
+.text-muted{
+    color: $medium-gray;
+}
+.text-primary, .text-primary:hover{
+    color: $primary-states-color !important;
+}
+.text-info, .text-info:hover{
+    color: $info-states-color !important;
+}
+.text-success, .text-success:hover{
+    color: $success-states-color !important;
+}
+.text-warning, .text-warning:hover{
+    color: $warning-states-color !important;
+}
+.text-danger, .text-danger:hover{
+    color: $danger-states-color !important;
+}
+span.form-control-feedback {
+  visibility: hidden;
+}
+pre {
+  font-size: $font-size-small;
+}

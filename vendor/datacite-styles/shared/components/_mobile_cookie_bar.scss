@@ -1,0 +1,38 @@
+/* New styles for mobile-friendly cookie bar. */
+
+.MY_BUTTON_WRAPPER_CLASS {
+  white-space: nowrap;
+}
+
+@media screen and (min-width: 376px) {
+  .MY_CONTENT_CLASS {
+    flex: 1 0 180px !important;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .MY_CONTAINER_CLASS {
+    height: 130px !important;
+  }
+
+  .MY_CONTENT_CLASS {
+    flex: 1 0 160px !important;
+		font-size: 12px;
+    position: relative;
+    top: -25px;
+  }
+
+  .MY_DECLINE_BUTTON_CLASS {
+    margin: 15px 5px !important
+  }
+
+  .MY_BUTTON_WRAPPER_CLASS {
+    white-space: nowrap;
+    position: relative;
+    top: 5px;
+  }
+
+  .MY_BUTTON_WRAPPER_CLASS button {
+    height: 50px;
+  }
+}

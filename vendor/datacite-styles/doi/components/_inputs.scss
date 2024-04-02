@@ -1,0 +1,561 @@
+.form-control::-moz-placeholder{
+   @include placeholder($medium-gray,1);
+}
+.form-control:-moz-placeholder{
+   @include placeholder($medium-gray,1);
+}
+.form-control::-webkit-input-placeholder{
+   @include placeholder($medium-gray,1);
+}
+.form-control:-ms-input-placeholder{
+   @include placeholder($medium-gray,1);
+}
+
+.form-control, .es-control {
+    background-color: $gray-input-bg;
+    border: 1px solid $light-gray;
+    border-radius: $border-radius-base;
+    color: $font-color;
+    font-size: $font-size-base;
+    transition: background-color 0.3s ease 0s;
+    @include input-size($padding-base-vertical, $padding-base-horizontal, $height-base);
+    @include box-shadow(none);
+
+    &:focus{
+           background-color: $white-bg;
+           @include box-shadow(none);
+           outline: 0 !important;
+    }
+
+    .has-success &,
+    .has-error &,
+    .has-warning &,
+    .has-success &:focus,
+    .has-error &:focus,
+    .has-warning &:focus {
+        @include box-shadow(none);
+    }
+
+    .has-success &{
+        background-color: $white-bg;;
+        color: $success-color;
+        border-color: $success-color;
+    }
+    .has-success &:focus{
+        background-color: $white-bg;
+        border-color: $success-color;
+    }
+    .has-error &{
+        background-color: $white-bg;;
+        color: #e74c3c;
+        border-color: $danger-color;
+    }
+    .has-error &:focus{
+        background-color: $white-bg;
+        border-color: #e74c3c;
+    }
+    .has-warning &{
+        background-color: $white-bg;;
+        color: $warning-color;
+        border-color: $warning-color;
+    }
+    .has-warning &:focus{
+        background-color: $white-bg;
+        border-color: $warning-color;
+    }
+
+    & + .form-control-feedback{
+        border-radius: $border-radius-large;
+        font-size: $font-size-base;
+        margin-top: -7px;
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        vertical-align: middle;
+    }
+
+    .open &{
+        border-radius: $border-radius-base $border-radius-base 0 0;
+        border-bottom-color: transparent;
+    }
+}
+
+.input-lg{
+    height: 55px;
+    padding: $padding-large-vertical $padding-large-horizontal;
+}
+
+.has-error{
+    .form-control-feedback, .control-label{
+        color: $danger-color;
+    }
+}
+.has-success{
+    .form-control-feedback, .control-label{
+        color: $success-color;
+    }
+}
+.has-warning{
+    .form-control-feedback, .control-label{
+        color: $warning-color;
+    }
+}
+
+.input-group-addon {
+    background-color: $gray-input-bg;
+    border: medium none;
+    border-radius: $border-radius-base;
+
+    .has-success &,
+    .has-error &{
+        background-color: $white-color;
+    }
+    .has-error .form-control:focus + &{
+        color: $danger-color;
+    }
+    .has-success .form-control:focus + &{
+        color: $success-color;
+    }
+    .form-control:focus + &,
+    .form-control:focus ~ &{
+        background-color: $white-color;
+    }
+}
+
+.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
+    background-color: $light-gray;
+    color: $dark-gray;
+    cursor: not-allowed;
+}
+
+.input-group-btn .btn{
+    border-width: $border-thin;
+    padding: $padding-round-vertical $padding-base-horizontal;
+}
+.input-group-btn .btn-default:not(.btn-fill){
+    border-color: $medium-gray;
+}
+
+.input-group-btn:last-child > .btn {
+    margin-left: 0;
+}
+textarea.form-control {
+  padding: 10px;
+
+  &:metadata {
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+    font-size: 12px;
+  }
+}
+
+.label-small {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.label-vertical {
+  color: $darker-gray;
+  padding-top: 7px;
+  margin-bottom: 7px;
+}
+
+#metadata {
+  select {
+    font-family: $font-family-base;
+    font-size: $font-size-base;
+    color: $font-color;
+    margin-bottom: 0;
+  }
+}
+
+#sort {
+  select {
+    margin-bottom: 0;
+  }
+}
+
+.input-group-btn {
+  vertical-align: top;
+
+  .btn {
+    height: 40px;
+    padding-top: 6px;
+
+    i {
+      padding-top: 3px;
+    }
+  }
+}
+
+.radio-fragment {
+  padding-bottom: 20px;
+
+  .subtitle {
+    font-size: $font-size-small !important;
+    margin-right: 10px;
+  }
+}
+
+.add-name-identifier {
+  margin-top: -10px;
+  margin-bottom: 16px;
+}
+
+.power-select-label {
+  margin: 0 !important;
+}
+
+.input-fragment {
+  .col-md-9.col-md-offset-3 {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    width: 100%;
+  }
+  .form-group {
+    margin-bottom: -8px;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
+
+.power-select-fragment {
+  margin: 0 15px !important;
+
+  .col-md-9.col-md-offset-3 {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    width: 100%;
+  }
+}
+
+.col-md-9 {
+  label.subtitle {
+    font-size: $font-size-small;
+    margin-bottom: 5px;
+  }
+}
+
+.input-group-addon {
+  &.refresh-input {
+    z-index: 3;
+    color: $medium-gray;
+    font-size: 18px;
+    position: absolute;
+    right: 57px;
+    top: 5px;
+    height: 12px;
+    text-decoration: none;
+  }
+
+  &.clear-input {
+    z-index: 3;
+    color: $medium-gray;
+    font-size: 18px;
+    position: absolute;
+    right: 32px;
+    top: 5px;
+    height: 12px;
+    text-decoration: none;
+  }
+}
+
+.compound-form {
+  margin-bottom: 0 !important;
+
+  .input-group-btn {
+    vertical-align: top;
+
+    .btn {
+      height: 40px;
+
+      i {
+        padding-top: 3px;
+      }
+    }
+  }
+
+  .input-group {
+    position: relative;
+    float: left;
+    min-height: 1px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .input-group-no-float {
+    min-height: 1px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .input-group-addon {
+    vertical-align: top;
+    text-align: left;
+    margin: 0;
+    padding: 0;
+
+    .ember-power-select-trigger, .ember-basic-dropdown-trigger {
+      border-top-right-radius: 0 !important;
+      border-bottom-right-radius: 0 !important;
+
+      padding: 0;
+      height: 40px;
+      width: 120px;
+      font-size: 18px;
+
+      .ember-power-select-selected-item {
+        vertical-align: middle;
+        line-height: 1.42857;
+        padding: 6px 12px;
+        margin-left: 0;
+      }
+    }
+
+    &.refresh {
+      z-index: 3;
+      color: $medium-gray;
+      font-size: 18px;
+      position: absolute;
+      right: 45px;
+      top: 11px;
+      height: 12px;
+      text-decoration: none;
+    }
+
+    &.clear {
+      z-index: 3;
+      color: $medium-gray;
+      font-size: 18px;
+      position: absolute;
+      right: 18px;
+      top: 11px;
+      height: 12px;
+      text-decoration: none;
+    }
+  }
+  .form-group {
+    &.has-feedback .control-label {
+      left: -120px;
+    }
+
+    .form-control {
+      vertical-align: top;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      border-top-right-radius: 4px !important;
+      border-bottom-right-radius: 4px !important;
+    }
+
+    &.has-success {
+      background-color: $white-bg;
+      color: $success-color;
+      border-color: $success-color;
+    }
+    &.has-success &:focus {
+      background-color: $white-bg;
+      border-color: $success-color;
+    }
+    &.has-error {
+      background-color: $white-bg;;
+      color: $danger-color;
+      border-color: $danger-color;
+    }
+    &.has-error &:focus{
+      background-color: $white-bg;
+      border-color: $danger-color;
+    }
+    &.has-warning {
+      background-color: $white-bg;;
+      color: $warning-color;
+      border-color: $warning-color;
+    }
+    &.has-warning &:focus{
+      background-color: $white-bg;
+      border-color: $warning-color;
+    }
+  }
+
+  .help-block {
+    margin-left: -88px;
+    margin-top: 44px;
+  }
+}
+
+#search, #search-repository {
+  margin-bottom: 3px;
+  margin-left: auto;
+  margin-right: auto;
+
+  #search-clear {
+    z-index: 3;
+    color: $medium-gray;
+    position: absolute;
+    right: 90px;
+    top: 10px;
+    text-decoration: none;
+  }
+
+  #search-clear-repo {
+    z-index: 3;
+    color: $medium-gray;
+    position: absolute;
+    right: 90px;
+    top: 16px;
+    text-decoration: none;
+  }
+
+  input[name="query"]::-ms-clear {
+    display: none;
+  }
+
+  input[name="query"] {
+    z-index: 1;
+    height: 45px;
+    border-right: none;
+
+    &:focus {
+      border-color: $turquoise;
+    }
+  }
+  .input-group-btn {
+    .btn {
+      height: 45px;
+    }
+
+    .close {
+      z-index: 2;
+      position: relative;
+      color: $turquoise;
+      float: right;
+      left: -90px;
+      top: 12px;
+    }
+  }
+}
+
+#search-repository {
+  .input-group-btn {
+    vertical-align: middle;
+  
+    .btn {
+      height: 45px;
+      padding-top: 6px;
+  
+      i {
+        padding-top: 3px;
+      }
+    }
+  }
+}
+
+.form-group {
+  abbr { border: none; }
+  .help-block { font-size: $font-size-small; }
+  .help-block-fragment { display: block !important; }
+
+  &.has-error, &.has-warning {
+    .help-block:last-child {
+      display: none;
+    }
+  }
+}
+.form-group.has-error {
+  input, select { color: $danger-color; border-color: $danger-color; }
+  .help-block { color: $danger-color; }
+
+  input.no-error, textarea.no-error, select.no-error { color: $wet-asphalt; border-color: $medium-gray; }
+  .help-block.no-error { color: $darker-gray; }
+}
+.form-group.has-warning {
+  input, select { color: $warning-color; border-color: $warning-color; }
+  .help-block { color: $warning-color; }
+
+  input.no-error, textarea.no-error, select.no-error { color: $wet-asphalt; border-color: $medium-gray; }
+  .help-block.no-error { color: $darker-gray; }
+}
+.form-group.has-success {
+  input, select { color: $success-color; border-color: $success-color; }
+  .help-block { color: $success-color; }
+
+  input.no-success, textarea.no-success, select.no-success { color: $wet-asphalt; border-color: $medium-gray; }
+  .help-block.no-success { color: $darker-gray; }
+}
+
+#search-repository {
+  margin-bottom: 1.5em;
+}
+
+.search-wide {
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+form .logo img {
+  padding: 20px;
+}
+#password .input-group-btn { height: 40px; }
+
+.multi-part-form, .form-group {
+  margin-bottom: 1.5em;
+
+  .form-control {
+    margin-bottom: 0.5em;
+  }
+}
+
+h3.metadata-form {
+  font-weight: $font-weight-bold;
+  color: $turquoise;
+  border-bottom: 1px solid $medium-gray;
+  padding: 0;
+  margin: 0 0 .35em 0;
+
+  .small { font-size: $font-size-base; }
+}
+
+label.control-label.col-md-2 {
+  font-weight: $font-weight-normal;
+}
+
+span.twitter-typeahead {
+  width: 100%;
+  margin-top: 6px;
+}
+
+.tt-hint {
+  height: 45px;
+}
+
+.tt-input {
+  height: 45px;
+  border-right: none;
+}
+
+.tt-menu {
+  padding: 5px 10px 5px 10px;
+  border-left: 1px solid $dark-gray;
+  border-right: 1px solid $dark-gray;
+  border-bottom: 1px solid $dark-gray;
+  width: 100%;
+  background: white;
+  cursor: pointer;
+}
+
+.loading-slider {
+  position: fixed;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  z-index: 999;
+}
+
+.slider-progress-bar {
+  color: red;
+  z-index: 999;
+}

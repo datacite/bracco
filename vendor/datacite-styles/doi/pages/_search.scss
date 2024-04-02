@@ -1,0 +1,37 @@
+h3.results {
+  margin: 0 0 .35em .75em;
+  font-weight: $font-weight-bold;
+}
+h3.member-results, h3.provider-results, h3.user-results, h3.doi-results, h3.work-results, h3.client-results, h3.client-prefix-results, h3.prefix-results, , h3.provider-prefix-results, h3.repository-results {
+  font-weight: $font-weight-bold;
+  color: $turquoise;
+  border-bottom: 1px solid $medium-gray;
+  padding: 0;
+  margin: 0 0 .35em 10px;
+
+  .small { font-size: $font-size-base; }
+}
+h3.repository-results { margin: 0 0 .35em 0; }
+.col-md-9#content-work, .col-md-9#content-contributor, .col-md-9#content-data-center, #content-data-center, #content-member, #content-user {
+  padding-bottom: 1em;
+}
+.img-big {
+  margin: 4.5em 0 2em 0;
+}
+.centered, .search {
+  margin: auto;
+  max-width: 700px;
+  padding-bottom: 1.5em;
+}
+.panel-list .form-horizontal {
+  margin-bottom: 30px;
+
+  .help-block {
+    margin-left: 12px;
+  }
+
+  .help-block.search-form {
+    margin-left: 0;
+    font-size: $font-size-small;
+  }
+}

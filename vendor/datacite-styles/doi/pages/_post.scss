@@ -1,0 +1,76 @@
+//
+// Blog
+// -----------------
+.post-meta {
+  margin: 0 0 15px;
+
+  h1 {
+    margin: 0;
+  }
+}
+
+#disqus_thread {
+  color: $font-color;
+  font-size: $font-size-base;
+  font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+}
+
+.post-content {
+/*  p, li {
+    font-family: "Libre Baskerville", Georgia, "Times New Roman", Times, serif;
+    line-height: 1.5;
+  }
+
+  em, a {
+    font-family: "Libre Baskerville", Georgia, "Times New Roman", Times, serif;
+  }
+
+  h1, h2, h3, p.caption, p.caption a, p.doi a {
+    font-family: 'Source Sans Pro', "Helvetica", Arial, sans-serif;
+  }*/
+  img, table {
+    max-width: 100% !important;
+    margin: 0 auto .5em auto;
+    display: block;
+  }
+  figure, .figure {
+    margin: 0;
+    padding: 0 0 30px;
+
+    .caption {
+      font-size: $font-size-xs;
+    }
+  }
+  code {
+    font-size: $font-size-xs;
+  }
+  .unpublished {
+    color: $warning-color;
+  }
+}
+
+.panel-default .panel-footer {
+  border-top: 1px solid #ddd;
+}
+
+.panel-footer {
+  span, span a, a {
+    color: $gray-darker;
+  }
+  .tags .fa-tags {
+    margin-right: 3px;
+  }
+  .comment {
+    margin-left: 3px;
+  }
+  span.meta {
+    margin-right: 1.5em;
+  }
+  span.metrics {
+    color: $default-color;
+    margin-right: 1.5em;
+  }
+}
+.post-list {
+  margin-bottom: 10px !important;
+}

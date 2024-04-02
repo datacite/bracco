@@ -1,0 +1,83 @@
+.modal-header {
+    background-color: $lighter-gray;
+    border: 0;
+    border-radius: 10px 10px 0 0;
+    padding: 20px;
+    text-align: center;
+
+    h4 {
+      margin: 0;
+    }
+    .close {
+      padding-left: 10px;
+      font-size: 30px;
+    }
+}
+.modal-content {
+    border: 0 none;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.15), 0 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+.modal-dialog {
+    padding-top: 60px;
+}
+.modal-body{
+    padding: 20px 50px;
+    min-height: 240px;
+    max-height: calc(100vh - 150px);
+
+    pre {
+        font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+        font-size: 16px;
+        overflow-x: auto;
+        overflow-y: auto;
+        background-color: $white-color;
+        border: 0;
+    }
+    #citation-text {
+        font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+        font-size: 16px;
+        overflow-x: auto;
+        overflow-y: auto;
+    }
+    #spinner {
+        position: relative;
+        top: 20px;
+    }
+}
+.modal-footer {
+    border-top: 1px solid $medium-gray;
+    padding: 0px;
+
+   .left-side, .modal-footer .right-side {
+        display: inline-block;
+        text-align: center;
+        width: 49%;
+    }
+    .btn-simple {
+        padding: 20px;
+        width: 100%
+    }
+    .divider {
+        background-color: $medium-gray;
+        display: inline-block;
+        float: inherit;
+        height: 63px;
+        margin: 0px -3px;
+        position: absolute;
+        width: 1px;
+    }
+}
+.modal.fade .modal-dialog {
+    transform: none;
+    -webkit-transform: none;
+    -moz-transform: none;
+}
+.modal.in .modal-dialog {
+    transform: none;
+    -webkit-transform: none;
+    -moz-transform: none;
+}
+.modal-backdrop.in {
+    opacity: 0.25;
+}

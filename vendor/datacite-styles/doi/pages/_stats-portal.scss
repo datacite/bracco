@@ -1,0 +1,186 @@
+//
+// Stats Portal
+// -----------------
+
+#filters {
+  line-height: 150%;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+#filters .text {
+  color: #666;
+}
+
+.filter {
+  background: #F0F0F0;
+  padding: 2px;
+  white-space:nowrap;
+  margin-right: 1ex;
+}
+
+.filter .name {
+  font-size: small;
+  padding-right: 5px;
+}
+
+#stats {
+  td.number, td.date {
+      text-align: right;
+
+      span {
+        font-variant-numeric: lining-nums;
+        font-feature-settings: "lnum";
+      }
+  }
+
+  th {
+      text-align: center;
+  }
+
+  tr.group td.group {
+      /* copied from "table.tablesorter thead tr th" in tablesorter/style.css */
+      background-color:#969696;
+      // background-color: #e6EEEE;
+      border: 1px solid #FFF;
+      font-size: 10pt;
+      padding: 4px;
+      text-align: center;
+      font-weight: $font-weight-bold;
+  }
+
+  tr.totals td {
+      font-weight: $font-weight-bold;
+      font-size: 105%;
+  }
+
+  td.bold {
+      width: 9%;
+  }
+
+  td:not(.number .bold .date) {
+      width: 30%;
+  }
+
+
+  thead {
+      background-color: #CDCDCD;
+  }
+
+  .rotate { /* Safari */
+      -webkit-transform: rotate(-90deg);
+      -webkit-transform-origin: right center;
+      /* Firefox */
+      -moz-transform: rotate(-90deg);
+      -moz-transform-origin: right center;
+      /* IE */
+      -ms-transform: rotate(-90deg);
+      -ms-transform-origin: right center;
+      /* Opera */
+      -o-transform: rotate(-90deg);
+      -o-transform-origin: right center;
+  }
+
+  .tickLabel.rotate {
+      text-align: right !important;
+      white-space: nowrap;
+  }
+
+  .charts h2 {
+      clear: both;
+  }
+
+  .stats {
+      clear: both;
+  }
+
+  br {
+      clear: both;
+  }
+
+  a {
+      color: #0084B9 !important;
+  }
+
+  #tab-resolution-report > .noresults {
+      display: none;
+  }
+
+  #tab-resolution-report > .loading {
+      display: none;
+  }
+
+  .digit-spacer {
+      display: inline-block;
+      width: 5px;
+  }
+
+  .bold {
+      font-weight: $font-weight-bold;
+  }
+
+  #ui-state-default ui-corner-top ul{
+    list-style: none;
+  }
+
+  #ui-state-default ui-corner-top li{
+    display: inline;
+  }
+
+  table.tablesorter {
+  	font-family:arial;
+  	background-color: #CDCDCD;
+  	margin:10px 0pt 15px;
+  	font-size: 10pt;
+  	max-width: 1440px;
+    width: 100%;
+  	text-align: left;
+  }
+  table.tablesorter thead tr th, table.tablesorter tfoot tr th {
+  	background-color: #e6EEEE;
+  	border: 1px solid #FFF;
+  	font-size: 11pt;
+  	padding: 4px;
+  }
+  table.tablesorter thead tr .header {
+  	background-image: url(../images/stats-portal/bg.gif);
+  	background-repeat: no-repeat;
+  	background-position: center right;
+  	cursor: pointer;
+  	padding-right: 20px;
+  }
+  table.tablesorter tbody td {
+  	color: #3D3D3D;
+  	padding: 4px;
+  	/*background-color: #FFF;*/
+  	vertical-align: top;
+  }
+  table.tablesorter tbody tr.odd td {
+  	background-color:#F0F0F6;
+  }
+  table.tablesorter thead tr .headerSortUp {
+  	background-image: url(../images/stats-portal/asc.gif);
+  }
+  table.tablesorter thead tr .headerSortDown {
+  	background-image: url(../images/stats-portal/desc.gif);
+  }
+  table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSortUp {
+  background-color: #8dbdd8;
+  }
+
+  tr:nth-child(even) {
+    background: #eff0f1;
+    font-size: 14px;
+  }
+  tr:nth-child(odd) {
+    background: #FFF;
+    font-size: 14px;
+  }
+
+  ol li {
+    max-width:200px;
+    word-break: break-all;
+  }
+
+
+}

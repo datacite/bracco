@@ -1,0 +1,100 @@
+/*doc
+---
+title: Labels
+name: labels
+category: Components
+---
+
+```html_example
+<span class="label label-default">Default</span>
+<span class="label label-primary">Primary</span>
+<span class="label label-success">Success</span>
+<span class="label label-info">Info</span>
+<span class="label label-warning">Warning</span>
+<span class="label label-danger">Danger</span>
+```
+
+*/
+
+.label {
+  padding: 0.4em 0.6em;
+  border-radius: 10px;
+  color: #ffffff;
+  font-weight: 500;
+  font-size: $font-size-small;
+  display: inline-block;
+  margin-bottom: 3px;
+}
+.label-primary {
+  background-color: $primary-color;
+}
+.label-info {
+  background-color: $info-color;
+}
+.label-success {
+  background-color: $success-color;
+}
+.label-warning {
+  background-color: $warning-color;
+}
+.label-danger {
+  background-color: $danger-color;
+}
+.label-allocating {
+  color: $darker-gray;
+  background-color: $light-blue;
+  margin-left: 10px;
+}
+.label-non-allocating {
+  color: $darker-gray;
+  background-color: $light-red;
+  margin-left: 10px;
+}
+label.search-form {
+  display: block;
+}
+.label-primary-inv {
+  color: $primary-color;
+  background-color: #ffffff;
+  border: 2px solid $primary-color;
+}
+.label-info-inv {
+  color: $info-color;
+  background-color: #ffffff;
+  border: 2px solid $info-color;
+}
+.label-default-inv {
+  color: $dark-gray;
+  background-color: #ffffff;
+  border: 2px solid $dark-gray;
+}
+.label-warning-inv {
+  color: $warning-color;
+  background-color: #ffffff;
+  border: 2px solid $warning-color;
+}
+.label-sm {
+  font-size: $font-size-xs;
+}
+.subject {
+  margin-top: 6px;
+
+  .label-primary {
+    color: $primary-color;
+    background-color: #ffffff;
+    border: 2px solid $primary-color;
+  }
+  .label-info {
+    color: $info-color;
+    background-color: #ffffff;
+    border: 2px solid $info-color;
+  }
+  .label-default {
+    color: $dark-gray;
+    background-color: #ffffff;
+    border: 2px solid $dark-gray;
+  }
+  .label-sm {
+    font-size: $font-size-xs;
+  }
+}
