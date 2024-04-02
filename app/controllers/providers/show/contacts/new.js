@@ -12,7 +12,7 @@ export default Controller.extend({
       contact
         .save()
         .then(function (c) {
-          self.router.transitionTo('contacts.show', c);
+          self.router.transitionTo('contacts.show', c.id);
         })
         .catch(function (reason) {
           console.debug(reason);
