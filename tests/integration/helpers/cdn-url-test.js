@@ -10,6 +10,6 @@ module('helper:cdn-url', function (hooks) {
   test('it renders', async function (assert) {
     await render(hbs`{{cdn-url}}`);
 
-    assert.dom('*').hasText(ENV.CDN_URL);
+    assert.dom().hasText(ENV.CDN_URL);
   });
 });

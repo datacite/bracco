@@ -10,6 +10,6 @@ module('helper:orcid-url', function (hooks) {
   test('it renders', async function (assert) {
     await render(hbs`{{orcid-url}}`);
 
-    assert.dom('*').hasText(ENV.ORCID_URL);
+    assert.dom().hasText(ENV.ORCID_URL);
   });
 });

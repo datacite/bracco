@@ -11,6 +11,6 @@ module('helper:is-equal', function (hooks) {
 
     await render(hbs`{{is-equal inputValue}}`);
 
-    assert.dom('*').exists();
+    assert.dom().exists();
   });
 });

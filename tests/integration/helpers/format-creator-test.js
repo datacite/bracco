@@ -30,7 +30,7 @@ module('helper:format-creator', function (hooks) {
 
     await render(hbs`{{format-creator creators index=0 }}`);
 
-    assert.dom('*').hasText(', ');
+    assert.dom().hasText(', ');
   });
 
   test('it renders ampersand', async function (assert) {
@@ -57,7 +57,7 @@ module('helper:format-creator', function (hooks) {
 
     await render(hbs`{{format-creator creators index=1 }}`);
 
-    assert.dom('*').hasText(' & ');
+    assert.dom().hasText(' & ');
   });
 
   test('it renders empty space', async function (assert) {
@@ -84,6 +84,6 @@ module('helper:format-creator', function (hooks) {
 
     await render(hbs`{{format-creator creators index=2 }}`);
 
-    assert.dom('*').hasText('');
+    assert.dom().hasText('');
   });
 });

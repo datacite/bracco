@@ -10,6 +10,6 @@ module('helper:search-url', function (hooks) {
   test('it renders', async function (assert) {
     await render(hbs`{{search-url}}`);
 
-    assert.dom('*').hasText(ENV.SEARCH_URL);
+    assert.dom().hasText(ENV.SEARCH_URL);
   });
 });

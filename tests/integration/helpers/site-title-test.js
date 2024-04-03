@@ -10,6 +10,6 @@ module('helper:site-title', function (hooks) {
   test('it renders', async function (assert) {
     await render(hbs`{{site-title}}`);
 
-    assert.dom('*').hasText(ENV.SITE_TITLE);
+    assert.dom().hasText(ENV.SITE_TITLE);
   });
 });

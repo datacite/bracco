@@ -13,6 +13,6 @@ module('helper:format-test', function (hooks) {
 
     await render(hbs`{{format-metadata inputValue}}`);
 
-    assert.dom('*').hasText('published 1234');
+    assert.dom().hasText('published 1234');
   });
 });

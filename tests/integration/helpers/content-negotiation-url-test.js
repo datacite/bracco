@@ -14,7 +14,7 @@ module('helper:content-negotiation-url', function (hooks) {
     await render(hbs`{{content-negotiation-url inputValue}}`);
 
     assert
-      .dom('*')
+      .dom()
       .hasText(ENV.API_URL + '/dois/application/vnd.schemaorg.ld+json/1234');
   });
 });
