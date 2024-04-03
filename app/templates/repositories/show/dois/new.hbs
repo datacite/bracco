@@ -31,7 +31,7 @@
 
       <DoiPublisher @model={{this.model.doi}} @form={{form}} @fragment={{this.model.doi.publisher}} />
 
-      <div class="form-group required-nested-label {{if (v-get this.model.doi 'publicationYear' 'isInvalid') 'has-error' 'has-feedback'}}">
+      <div id="publication-year-form-group" class="form-group required-nested-label {{if (v-get this.model.doi 'publicationYear' 'isInvalid') 'has-error' 'has-feedback'}}">
         <label class="control-label col-md-3">Publication Year</label>
         <div class="col-md-9 input-fragment">
           <div class="label-vertical">The year when the resource was or will be made publicly available.</div>
