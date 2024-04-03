@@ -56,8 +56,8 @@ FactoryGuy.define('creator', {
     givenName: 'Mitesh',
     familyName: 'Patel',
     nameType: 'Personal',
-    nameIdentifiers: FactoryGuy.hasMany('nameIdentifier'),
-    affiliation: FactoryGuy.hasMany('affiliation')
+    nameIdentifiers: FactoryGuy.hasMany('nameIdentifier', 1),
+    affiliation: FactoryGuy.hasMany('affiliation', 1)
   }
 });
 
@@ -68,8 +68,8 @@ FactoryGuy.define('contributor', {
     givenName: 'Mitesh',
     familyName: 'Patel',
     nameType: 'Personal',
-    nameIdentifiers: FactoryGuy.hasMany('nameIdentifier'),
-    affiliation: FactoryGuy.hasMany('affiliation')
+    nameIdentifiers: FactoryGuy.hasMany('nameIdentifier', 1),
+    affiliation: FactoryGuy.hasMany('affiliation', 1)
   }
 });
 
