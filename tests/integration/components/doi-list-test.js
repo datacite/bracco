@@ -3,10 +3,12 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 import { setupFactoryGuy, makeList } from 'ember-data-factory-guy';
+import { setupIntl } from 'ember-intl/test-support';
 
 module('Integration | Component | doi-list', function (hooks) {
   setupRenderingTest(hooks);
   setupFactoryGuy(hooks);
+  setupIntl(hooks);
 
   test('it renders', async function (assert) {
     // model is list of DOIs
