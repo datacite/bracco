@@ -11,6 +11,6 @@ module('Integration | Component | application header', function (hooks) {
   test('it renders', async function (assert) {
     await render(hbs`{{application-header}}`);
 
-    assert.dom('*').hasText('Toggle navigation About Support Sign in');
+    assert.dom('*').hasText('About Support Sign in');
   });
 });
