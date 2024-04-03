@@ -6,6 +6,15 @@ import isAbleTo from '../utils/is-able-to';
 export default Ability.extend({
   currentUser: service(),
 
+  // Returns the total nuymber of contacts owned by the given contact's provider.
+  // We need this because the relationships are async so we need to resolve a promise.
+  async count_provider_contacts(this) {
+    var x =  await this.get('model.provider.contacts');
+    var n = x.length
+    return n;
+  },
+  
+
   canDelete: computed(
     'currentUser.{role_id,provider_id}',
     'model.roleName',
@@ -14,7 +23,7 @@ export default Ability.extend({
       if (
         (this.get('model.roleName') && this.get('model.roleName').length > 0) ||
         (this.get('model.provider.contacts') &&
-          this.get('model.provider.contacts').length == 1)
+          this.count_provider_contacts(this) == 1)
       ) {
         return false;
       } else {
