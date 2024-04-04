@@ -12,7 +12,7 @@ module('Integration | Component | doi related-item', function (hooks) {
     this.set('model', make('doi'));
     this.set('fragment', make('relatedItem'));
     await render(
-      hbs`{{doi-related-item model=model fragment=fragment index=0}}`
+      hbs`{{doi-related-item model=this.model fragment=this.fragment index=0}}`
     );
 
     assert.dom('*').includesText('One title by which the resource is known.');

@@ -11,7 +11,7 @@ module('Integration | Component | repository sidebar', function (hooks) {
   test('it renders', async function (assert) {
     this.set('model', make('repository'));
 
-    await render(hbs`{{repository-sidebar model=model}}`);
+    await render(hbs`{{repository-sidebar model=this.model}}`);
 
     assert.dom('*').hasText('');
   });

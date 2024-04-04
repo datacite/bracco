@@ -10,7 +10,7 @@ module('Integration | Component | doi geo-locations', function (hooks) {
 
   test('it renders', async function (assert) {
     this.set('model', make('doi'));
-    await render(hbs`{{doi-geo-locations model=model}}`);
+    await render(hbs`{{doi-geo-locations model=this.model}}`);
     await click('#add-geolocation');
     let geoLocations = this.element.querySelectorAll(
       'input.geo-location-place-field'
@@ -22,7 +22,7 @@ module('Integration | Component | doi geo-locations', function (hooks) {
 
   test('add multiple values', async function (assert) {
     this.set('model', make('doi'));
-    await render(hbs`{{doi-geo-locations model=model}}`);
+    await render(hbs`{{doi-geo-locations model=this.model}}`);
     await click('#add-geolocation');
     await click('#add-geolocation');
     let geoLocations = this.element.querySelectorAll(

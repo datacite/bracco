@@ -9,7 +9,7 @@ module('Integration | Helper | format-language', function (hooks) {
   test('it renders', async function (assert) {
     this.set('inputValue', 'en');
 
-    await render(hbs`{{format-language inputValue}}`);
+    await render(hbs`{{format-language this.inputValue}}`);
 
     assert.dom(this.element).hasText('English');
   });

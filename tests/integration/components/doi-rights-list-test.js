@@ -18,7 +18,7 @@ module('Integration | Component | doi rights-list', function (hooks) {
         }
       ]
     });
-    await render(hbs`{{doi-rights-list model=model spdx=spdx}}`);
+    await render(hbs`{{doi-rights-list model=this.model spdx=this.spdx}}`);
     await click('#add-rights');
     let rightsArray = this.element.querySelectorAll('[data-test-rights-uri]');
 
@@ -42,7 +42,7 @@ module('Integration | Component | doi rights-list', function (hooks) {
         }
       ]
     });
-    await render(hbs`{{doi-rights-list model=model spdx=spdx}}`);
+    await render(hbs`{{doi-rights-list model=this.model spdx=this.spdx}}`);
     await click('#add-rights');
     await click('#add-rights');
     let rightsArray = this.element.querySelectorAll('[data-test-rights-uri]');

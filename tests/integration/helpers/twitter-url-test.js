@@ -9,7 +9,7 @@ module('Integration | Helper | twitter-url', function (hooks) {
   test('it renders', async function (assert) {
     this.set('inputValue', '@datacite');
 
-    await render(hbs`{{twitter-url inputValue}}`);
+    await render(hbs`{{twitter-url this.inputValue}}`);
 
     assert.dom(this.element).hasText('https://twitter.com/datacite');
   });

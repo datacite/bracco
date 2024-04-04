@@ -13,7 +13,7 @@ module('Integration | Component | doi alternate-identifier', function (hooks) {
     this.set('model', make('doi'));
     this.set('fragment', make('alternateIdentifier'));
     await render(
-      hbs`{{doi-alternate-identifier model=model fragment=fragment index=0}}`
+      hbs`{{doi-alternate-identifier model=this.model fragment=this.fragment index=0}}`
     );
 
     assert.dom('*').hasText('Alternate Identifier Type');

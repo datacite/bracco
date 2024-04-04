@@ -15,7 +15,7 @@ module('Integration | Component | repository-list', function (hooks) {
     });
 
     await render(
-      hbs`{{repository-list model=model link="repositories" searchable=false}}`
+      hbs`{{repository-list model=this.model link="repositories" searchable=false}}`
     );
 
     assert.dom('div.panel-body > h3.work a').exists({ count: 2 });

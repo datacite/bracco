@@ -12,7 +12,7 @@ module('Integration | Component | cc license', function (hooks) {
       'http://creativecommons.org/licenses/by-nc/4.0/legalcode'
     );
 
-    await render(hbs`{{cc-license licenseURL=licenseURL}}`);
+    await render(hbs`{{cc-license licenseURL=this.licenseURL}}`);
 
     // logos for cc, by and nc
     assert.dom('i').exists({ count: 3 });

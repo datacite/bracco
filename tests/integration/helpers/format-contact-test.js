@@ -14,7 +14,7 @@ module('Integration | Helper | format-contact', function (hooks) {
     };
     this.set('inputValue', contact);
 
-    await render(hbs`{{format-contact inputValue}}`);
+    await render(hbs`{{format-contact this.inputValue}}`);
 
     assert.dom(this.element).hasText('Jack Slater');
     // assert.dom(this.element).hasAttribute('href', 'mailto:info@example.org');
@@ -24,7 +24,7 @@ module('Integration | Helper | format-contact', function (hooks) {
     let contact = { email: 'info@example.org' };
     this.set('inputValue', contact);
 
-    await render(hbs`{{format-contact inputValue}}`);
+    await render(hbs`{{format-contact this.inputValue}}`);
 
     assert.dom(this.element).hasText('info@example.org');
     // assert.dom(this.element).hasAttribute('href', 'mailto:info@example.org');
@@ -34,7 +34,7 @@ module('Integration | Helper | format-contact', function (hooks) {
     let contact = { givenName: 'Jack', familyName: 'Slater' };
     this.set('inputValue', contact);
 
-    await render(hbs`{{format-contact inputValue}}`);
+    await render(hbs`{{format-contact this.inputValue}}`);
 
     assert.dom(this.element).hasText('Jack Slater');
   });
@@ -43,7 +43,7 @@ module('Integration | Helper | format-contact', function (hooks) {
     let contact = {};
     this.set('inputValue', contact);
 
-    await render(hbs`{{format-contact inputValue}}`);
+    await render(hbs`{{format-contact this.inputValue}}`);
 
     assert.dom(this.element).hasText('');
   });

@@ -11,7 +11,7 @@ module('Integration | Component | doi related items', function (hooks) {
 
   test('it renders', async function (assert) {
     this.set('model', make('doi', { relatedItems: [] }));
-    await render(hbs`{{doi-related-items model=model}}`);
+    await render(hbs`{{doi-related-items model=this.model}}`);
     await click('#add-related-item');
     let relatedItemTitles = this.element.querySelectorAll(
       '[data-test-related-item-title]'
@@ -28,7 +28,7 @@ module('Integration | Component | doi related items', function (hooks) {
     this.set('relatedItem', make('relatedItem'));
     this.set('model', make('doi'));
     this.set('model.relatedItems', [this.relatedItem]);
-    await render(hbs`{{doi-related-items model=model}}`);
+    await render(hbs`{{doi-related-items model=this.model}}`);
     await click('#toggle-related-items');
     await click('#add-related-item');
 
@@ -43,7 +43,7 @@ module('Integration | Component | doi related items', function (hooks) {
     this.set('relatedItem', make('relatedItem'));
     this.set('model', make('doi'));
     this.set('model.relatedItems', [this.relatedItem]);
-    await render(hbs`{{doi-related-items model=model}}`);
+    await render(hbs`{{doi-related-items model=this.model}}`);
     await click('#toggle-related-items');
     await click('#add-related-item');
 

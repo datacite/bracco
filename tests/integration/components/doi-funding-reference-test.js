@@ -13,7 +13,7 @@ module('Integration | Component | doi funding-reference', function (hooks) {
     this.set('model', make('doi'));
     this.set('fragment', make('fundingReference'));
     await render(
-      hbs`{{doi-funding-reference model=model fragment=fragment index=0}}`
+      hbs`{{doi-funding-reference model=this.model fragment=this.fragment index=0}}`
     );
 
     assert

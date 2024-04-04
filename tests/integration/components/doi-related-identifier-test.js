@@ -13,7 +13,7 @@ module('Integration | Component | doi related-identifier', function (hooks) {
     this.set('model', make('doi'));
     this.set('fragment', make('relatedIdentifier'));
     await render(
-      hbs`{{doi-related-identifier model=model fragment=fragment index=0}}`
+      hbs`{{doi-related-identifier model=this.model fragment=this.fragment index=0}}`
     );
 
     assert

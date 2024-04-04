@@ -13,7 +13,7 @@ module('Integration | Component | doi description', function (hooks) {
     this.set('model', make('doi'));
     this.set('fragment', make('description'));
     await render(
-      hbs`{{doi-description model=model fragment=fragment index=0}}`
+      hbs`{{doi-description model=this.model fragment=this.fragment index=0}}`
     );
 
     assert

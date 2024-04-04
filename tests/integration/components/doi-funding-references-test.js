@@ -10,7 +10,7 @@ module('Integration | Component | doi funding-references', function (hooks) {
 
   test('it renders', async function (assert) {
     this.set('model', make('doi', { fundingReferences: [] }));
-    await render(hbs`{{doi-funding-references model=model}}`);
+    await render(hbs`{{doi-funding-references model=this.model}}`);
     await click('#add-funding-reference');
     let fundingReferences = this.element.querySelectorAll(
       '[data-test-funder-identifier]'
@@ -23,7 +23,7 @@ module('Integration | Component | doi funding-references', function (hooks) {
 
   test('add multiple values', async function (assert) {
     this.set('model', make('doi', { fundingReferences: [] }));
-    await render(hbs`{{doi-funding-references model=model}}`);
+    await render(hbs`{{doi-funding-references model=this.model}}`);
     await click('#add-funding-reference');
     await click('#add-funding-reference');
     let fundingReferences = this.element.querySelectorAll(

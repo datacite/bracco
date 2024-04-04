@@ -10,7 +10,7 @@ module('Integration | Component | doi-state', function (hooks) {
 
   test('it renders', async function (assert) {
     this.set('model', make('doi'));
-    await render(hbs`{{doi-state model=model}}`);
+    await render(hbs`{{doi-state model=this.model}}`);
 
     assert
       .dom('*')

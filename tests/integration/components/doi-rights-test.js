@@ -21,7 +21,7 @@ module('Integration | Component | doi rights', function (hooks) {
       ]
     });
     await render(
-      hbs`{{doi-rights model=model fragment=fragment spdx=spdx index=0}}`
+      hbs`{{doi-rights model=this.model fragment=this.fragment spdx=this.spdx index=0}}`
     );
 
     assert.dom('*').hasText('Rights URI The URI of the license.');
@@ -39,7 +39,7 @@ module('Integration | Component | doi rights', function (hooks) {
       ]
     });
     await render(
-      hbs`{{doi-rights model=model fragment=fragment spdx=spdx index=0}}`
+      hbs`{{doi-rights model=this.model fragment=this.fragment spdx=this.spdx index=0}}`
     );
 
     assert
@@ -59,7 +59,7 @@ module('Integration | Component | doi rights', function (hooks) {
       ]
     });
     await render(
-      hbs`{{doi-rights model=model fragment=fragment spdx=spdx index=0}}`
+      hbs`{{doi-rights model=this.model fragment=this.fragment spdx=this.spdx index=0}}`
     );
 
     assert

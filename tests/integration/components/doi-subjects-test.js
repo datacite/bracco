@@ -21,7 +21,7 @@ module('Integration | Component | doi subjects', function (hooks) {
         classificationCode: 'CustomCode'
       }
     ]);
-    await render(hbs`{{doi-subjects model=model}}`);
+    await render(hbs`{{doi-subjects model=this.model}}`);
     await click('#toggle-subjects');
 
     let subjectSchemesInput = this.element.querySelectorAll(

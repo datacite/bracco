@@ -10,7 +10,7 @@ module('Integration | Component | doi related-identifiers', function (hooks) {
 
   test('it renders', async function (assert) {
     this.set('model', make('doi'));
-    await render(hbs`{{doi-related-identifiers model=model}}`);
+    await render(hbs`{{doi-related-identifiers model=this.model}}`);
     await click('#add-related-identifier');
     let relatedIdentifiers = this.element.querySelectorAll(
       'input.related-identifier-field'
@@ -22,7 +22,7 @@ module('Integration | Component | doi related-identifiers', function (hooks) {
 
   test('add multiple values', async function (assert) {
     this.set('model', make('doi'));
-    await render(hbs`{{doi-related-identifiers model=model}}`);
+    await render(hbs`{{doi-related-identifiers model=this.model}}`);
     await click('#add-related-identifier');
     await click('#add-related-identifier');
     let relatedIdentifiers = this.element.querySelectorAll(

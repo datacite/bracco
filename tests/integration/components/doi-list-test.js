@@ -13,7 +13,7 @@ module('Integration | Component | doi-list', function (hooks) {
   test('it renders', async function (assert) {
     // model is list of DOIs
     this.set('model', makeList('doi', 1));
-    await render(hbs`{{doi-list model=model}}`);
+    await render(hbs`{{doi-list model=this.model}}`);
 
     // assert.dom('[data-test-doi]').hasText(this.model[0].doi);
     assert.dom('[data-test-resource-type-general]').hasText('Dataset');

@@ -12,7 +12,7 @@ module('Integration | Component | repository-id', function (hooks) {
     this.set('model', make('repository'));
     this.set('provider', make('provider'));
 
-    await render(hbs`{{repository-id model=model provider=provider}}`);
+    await render(hbs`{{repository-id model=this.model provider=this.provider}}`);
 
     assert
       .dom(this.element)

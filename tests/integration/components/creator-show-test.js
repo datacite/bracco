@@ -28,7 +28,7 @@ module('Integration | Component | creator-show', function (hooks) {
       }
     ]);
 
-    await render(hbs` {{creator-show creators=creators}}`);
+    await render(hbs` {{creator-show creators=this.creators}}`);
 
     assert.dom(this.element).hasText('Empbh R. Goh, M. Barrgow & M. Barrgoe');
   });

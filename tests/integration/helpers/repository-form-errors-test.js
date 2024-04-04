@@ -11,7 +11,7 @@ module('Integration | Helper | repository-form-errors', function (hooks) {
   test('it renders', async function (assert) {
     this.set('model', make('repository'));
 
-    await render(hbs`{{repository-form-errors model}}`);
+    await render(hbs`{{repository-form-errors this.model}}`);
 
     assert.dom(this.element).hasText('repository ID, confirm repository ID');
   });

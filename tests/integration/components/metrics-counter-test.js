@@ -15,7 +15,7 @@ module('Integration | Component | metrics counter', function (hooks) {
     this.set('query', { 'has-views': true });
 
     await render(
-      hbs`{{metrics-counter label="Views" model=model count=count link=link query=query}}`
+      hbs`{{metrics-counter label="Views" model=this.model count=this.count link=this.link query=this.query}}`
     );
 
     assert.dom('div#metrics-counter-doi').hasText('232.3K');

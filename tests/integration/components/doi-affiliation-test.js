@@ -14,7 +14,7 @@ module('Integration | Component | doi affiliation', function (hooks) {
     this.set('affiliation', make('affiliation'));
 
     await render(
-      hbs`{{doi-affiliation model=model creator=creator fragment=affiliation index=0}}`
+      hbs`{{doi-affiliation model=this.model creator=this.creator fragment=this.affiliation index=0}}`
     );
 
     assert.dom('*').hasText('');

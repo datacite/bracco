@@ -12,7 +12,7 @@ module('Integration | Component | doi creator', function (hooks) {
     this.set('model', make('doi'));
     this.set('creator', make('creator'));
 
-    await render(hbs`{{doi-creator model=model fragment=creator index=0}}`);
+    await render(hbs`{{doi-creator model=this.model fragment=this.creator index=0}}`);
 
     assert
       .dom('*')

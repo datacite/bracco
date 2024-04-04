@@ -10,7 +10,7 @@ module('helper:format-metadata', function (hooks) {
   test('it renders', async function (assert) {
     this.set('inputValue', '1234');
 
-    await render(hbs`{{format-metadata inputValue}}`);
+    await render(hbs`{{format-metadata this.inputValue}}`);
 
     assert.dom().hasText('published 1234');
   });

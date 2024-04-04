@@ -9,7 +9,7 @@ module('Integration | Helper | random-number', function (hooks) {
   test('it renders', async function (assert) {
     this.set('inputValue', 80);
 
-    await render(hbs`{{random-number inputValue}}`);
+    await render(hbs`{{random-number this.inputValue}}`);
 
     assert.dom(this.element).hasAnyText();
   });

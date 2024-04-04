@@ -11,7 +11,7 @@ module('Integration | Component | repository dois transfer', function (hooks) {
   test('it renders', async function (assert) {
     this.set('model', make('repository'));
 
-    await render(hbs`{{repository-dois-transfer model=model}}`);
+    await render(hbs`{{repository-dois-transfer model=this.model}}`);
 
     assert
       .dom('*')
@@ -21,7 +21,7 @@ module('Integration | Component | repository dois transfer', function (hooks) {
 
     // Template block usage:
     await render(hbs`
-      {{#repository-dois-transfer model=model}}
+      {{#repository-dois-transfer model=this.model}}
         
       {{/repository-dois-transfer}}
     `);

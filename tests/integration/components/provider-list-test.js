@@ -11,7 +11,7 @@ module('Integration | Component | provider-list', function (hooks) {
   test('it renders', async function (assert) {
     // Template block usage:
     await render(hbs`
-      {{#provider-list model=model link="repositories.index"}}
+      {{#provider-list model=this.model link="repositories.index"}}
 
       {{/provider-list}}
     `);

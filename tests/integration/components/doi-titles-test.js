@@ -10,7 +10,7 @@ module('Integration | Component | doi titles', function (hooks) {
 
   test('it renders', async function (assert) {
     this.set('model', make('doi'));
-    await render(hbs`{{doi-titles model=model}}`);
+    await render(hbs`{{doi-titles model=this.model}}`);
     await click('#add-title');
     let titles = this.element.querySelectorAll('input.title-field');
 
@@ -25,7 +25,7 @@ module('Integration | Component | doi titles', function (hooks) {
 
   test('add multiple titles', async function (assert) {
     this.set('model', make('doi'));
-    await render(hbs`{{doi-titles model=model}}`);
+    await render(hbs`{{doi-titles model=this.model}}`);
     await click('#add-title');
     await click('#add-title');
     let titles = this.element.querySelectorAll('input.title-field');
@@ -48,7 +48,7 @@ module('Integration | Component | doi titles', function (hooks) {
 
   test('no titles', async function (assert) {
     this.set('model', make('doi'));
-    await render(hbs`{{doi-titles model=model}}`);
+    await render(hbs`{{doi-titles model=this.model}}`);
     await click('#add-title');
     let titles = this.element.querySelector('input.title-field');
 

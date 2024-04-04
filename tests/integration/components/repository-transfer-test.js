@@ -11,7 +11,7 @@ module('Integration | Component | repository transfer', function (hooks) {
   test('it renders', async function (assert) {
     this.set('model', make('repository'));
 
-    await render(hbs`{{repository-transfer model=model}}`);
+    await render(hbs`{{repository-transfer model=this.model}}`);
 
     assert
       .dom('*')

@@ -10,7 +10,7 @@ module('Integration | Component | doi-title', function (hooks) {
 
   test('it renders', async function (assert) {
     this.set('model', make('doi'));
-    await render(hbs`{{doi-title model=model}}`);
+    await render(hbs`{{doi-title model=this.model}}`);
 
     assert.dom('*').hasText('Title Type Language');
   });

@@ -28,7 +28,7 @@ module('helper:format-creator', function (hooks) {
       }
     ]);
 
-    await render(hbs`{{format-creator creators index=0 }}`);
+    await render(hbs`{{format-creator this.creators index=0 }}`);
 
     assert.dom().hasText(', ');
   });
@@ -55,7 +55,7 @@ module('helper:format-creator', function (hooks) {
       }
     ]);
 
-    await render(hbs`{{format-creator creators index=1 }}`);
+    await render(hbs`{{format-creator this.creators index=1 }}`);
 
     assert.dom().hasText(' & ');
   });
@@ -82,7 +82,7 @@ module('helper:format-creator', function (hooks) {
       }
     ]);
 
-    await render(hbs`{{format-creator creators index=2 }}`);
+    await render(hbs`{{format-creator this.creators index=2 }}`);
 
     assert.dom().hasText('');
   });

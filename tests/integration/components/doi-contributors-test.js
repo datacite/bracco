@@ -11,7 +11,7 @@ module('Integration | Component | doi contributors', function (hooks) {
   test('adding multiple persons', async function (assert) {
     this.set('model', make('doi'));
 
-    await render(hbs`{{doi-contributors model=model}}`);
+    await render(hbs`{{doi-contributors model=this.model}}`);
     await click('button#add-contributor');
     await click('button#add-contributor');
 

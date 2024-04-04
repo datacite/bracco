@@ -11,7 +11,7 @@ module('Integration | Component | doi format', function (hooks) {
 
   test('it renders', async function (assert) {
     this.set('model', make('doi'));
-    await render(hbs`{{doi-format model=model fragment=fragment index=0}}`);
+    await render(hbs`{{doi-format model=this.model fragment=this.fragment index=0}}`);
 
     assert.dom('*').hasText('');
   });

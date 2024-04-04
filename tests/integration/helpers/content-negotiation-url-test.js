@@ -11,7 +11,7 @@ module('helper:content-negotiation-url', function (hooks) {
   test('it renders', async function (assert) {
     this.set('inputValue', '1234');
 
-    await render(hbs`{{content-negotiation-url inputValue}}`);
+    await render(hbs`{{content-negotiation-url this.inputValue}}`);
 
     assert
       .dom()

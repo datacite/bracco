@@ -13,7 +13,7 @@ module('Integration | Component | doi contributor', function (hooks) {
     this.set('contributor', make('contributor'));
 
     await render(
-      hbs`{{doi-contributor model=model fragment=contributor index=0}}`
+      hbs`{{doi-contributor model=this.model fragment=this.contributor index=0}}`
     );
 
     assert
