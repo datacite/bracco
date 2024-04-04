@@ -163,6 +163,10 @@ div[doi-format].power-select-fragment .ember-basic-dropdown-trigger div.ember-vi
   color: #e74c3c;
 }
 
+.form-group.has-error .form-text {
+  display: none;
+}
+
 .form-group .help-block.success {
   color: #2ecc71;
 }
@@ -170,6 +174,11 @@ div[doi-format].power-select-fragment .ember-basic-dropdown-trigger div.ember-vi
 .form-group input.is-valid, .form-group select.is-valid {
   color: #2ecc71; 
   border-color: #2ecc71;
+}
+
+/* Fragile - next sibiling */
+.form-group input.is-valid + div.form-text{
+  color: #2ecc71; 
 }
 
 #doi-edit-form div#doi, #doi-modify-form-file-upload div#doi {
