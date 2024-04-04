@@ -192,7 +192,10 @@ module.exports = function (environment) {
     JWT_BLACKLISTED: process.env.JWT_BLACKLISTED || '',
 
     googleTagManager: {
-      appId: process.env.GOOGLE_TAG_MANAGER_ID
+      appId:
+        process.env.FABRICA_DEPLOY_TARGET !== 'development'
+          ? process.env.GOOGLE_TAG_MANAGER_ID
+          : null
     },
 
     APP: {
