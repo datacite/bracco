@@ -26,6 +26,9 @@ export default Route.extend({
               self.router.transitionTo('/');
             });
         } else {
+          if (self.isDestroying || self.isDestroyed) {
+            return;
+          }
           console.log(response);
           self.router.transitionTo('/sign-in?globus');
         }
