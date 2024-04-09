@@ -122,14 +122,9 @@ module.exports = function (environment) {
       EXTEND_PROTOTYPES: false
     },
     '@sentry/ember': {
-      sentry: {
-        dsn:
-          process.env.SENTRY_DSN ||
-          'https://63201db022924202b697e03bc5e0d0ba@o239790.ingest.sentry.io/1420435',
-
-        disablePerformance: true,
-        environment: fabricaDeployTarget || 'stage'
-      }
+      dsn: process.env.SENTRY_DSN || 'https://63201db022924202b697e03bc5e0d0ba@o239790.ingest.sentry.io/1420435',
+      disablePerformance: true,
+      environment: fabricaDeployTarget || 'stage'
     },
     'ember-cli-string-helpers': {
       only: ['humanize', 'html-safe', 'truncate', 'titleize']
@@ -190,13 +185,14 @@ module.exports = function (environment) {
     VERSION: pkg.version,
     APP_NAME: pkg.name,
     JWT_BLACKLISTED: process.env.JWT_BLACKLISTED || '',
-
+    /*
     googleTagManager: {
       appId:
         process.env.FABRICA_DEPLOY_TARGET !== 'development'
           ? process.env.GOOGLE_TAG_MANAGER_ID
           : null
     },
+    */
 
     APP: {
       // Here you can pass flags/options to your application instance
