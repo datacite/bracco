@@ -3,7 +3,7 @@
     {{ENV.CDN_URL}}/stylesheets/doi.css?version=3.9.43
 */
 
-/* create-doi-button - lot of styling to make it more consistent with app styling */
+/* CREATE-DOI-BUTTON - lot of styling to make it more consistent with app styling */
 
 /* Otherwise drop-down menu falls behind other objects. */
 .create-doi-button .ember-bootstrap-dropdown-bs3-popper {
@@ -83,8 +83,7 @@ z-index: 10000;
   }
 }
 
-
-/****************/
+/* BUTTON GROUPS - LEFT SIDE OF PAGE */
 
 /* To make a left sidebar button line up with the others. */
 .btn-group-vertical {
@@ -139,7 +138,7 @@ div[doi-format].power-select-fragment .ember-basic-dropdown-trigger div.ember-vi
  * - https://getbootstrap.com/docs/5.0/migration/
  */
 
-/* DOI UPDATE FORM - text input box tweeks. */
+/*  VALIDATION - FORM-GROUPS */
 
 .form-group .form-text {
   font-size: 16px;
@@ -189,6 +188,31 @@ div[doi-format].power-select-fragment .ember-basic-dropdown-trigger div.ember-vi
 .input-fragment .form-group div.col-md-9 {
   padding-left: 0;
   width: 100%;
+}
+
+/*******/
+
+.form-group.has-success[doi-types] .control-label::before {
+  color: rgb(231, 76, 60);
+}
+
+.form-group.has-success[doi-types] .control-label {
+  color: rgb(52, 73, 94);
+}
+
+.form-group.has-success.has-feedback .form-text
+{
+  color: #2ecc71;
+}
+
+.form-group.has-success.has-feedback .ember-basic-dropdown-trigger
+{
+  color: #2ecc71;
+  border-color: #2ecc71;
+}
+
+lock {
+  color: #2ecc71;
 }
 
 
@@ -413,4 +437,17 @@ div[doi-format].power-select-fragment .ember-basic-dropdown-trigger div.ember-vi
 
 #resource-type-general > div {
   padding-right: 0px;
+}
+
+/* HAMBURGER - looks good, but doesn't work.  */
+
+.navbar-toggler-icon {
+  display: inline-block;
+  width: 1.5em;
+  height: 1.5em;
+  vertical-align: middle;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%2833, 37, 41, 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
 }
