@@ -366,7 +366,7 @@ export default Controller.extend({
       this.model
         .save()
         .then(function (provider) {
-          self.router.transitionTo('providers.show', provider);
+          self.router.transitionTo('providers.show', provider.id);
         })
         .catch(function (reason) {
           console.debug(reason);
