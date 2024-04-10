@@ -249,6 +249,7 @@ lock {
   opacity: 1;
   filter: alpha(opacity = 100);
   visibility: visible;
+  overflow: hidden;
 }
 
 .dropdown.show .dropdown-menu, .navbar-nav>li.open>.dropdown-menu {
