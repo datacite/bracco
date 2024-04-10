@@ -167,15 +167,18 @@ export default Controller.extend({
       repository
         .save()
         .then(function (repository) {
-          self.router.transitionTo(
-            'repositories.show.settings',
-            self.model.repository.id,
-            {
-              queryParams: {
-                assignedPrefix: repository.prefixes.firstObject.id
+          repository.prefixes.then(function (prefixes) {
+            self.router.transitionTo(
+              'repositories.show.settings',
+              self.model.repository.id,
+              {
+                queryParams: {
+                  assignedPrefix:
+                    prefixes.length > 0 ? prefixes.firstObject.id : null
+                }
               }
-            }
-          );
+            );
+          });
         })
         .catch(function (reason) {
           console.debug(reason);
@@ -192,6 +195,7 @@ export default Controller.extend({
             );
         });
     },
+
     cancel() {
       this.model.repository.rollbackAttributes();
       this.router.transitionTo(
