@@ -289,6 +289,16 @@ lock {
   overflow: hidden;
 }
 
+/* APPLICATION HEADER - progress bar */
+
+span.visually-hidden {
+  display: none;
+}
+
+div.progress {
+  margin-bottom: 0px;
+}
+
 /* REPOSITORY NEW/EDIT FORM */
 
 .form-horizontal .form-group label.col-form-label, .form-horizontal label.col-form-label {
