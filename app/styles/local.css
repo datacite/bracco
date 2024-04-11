@@ -462,3 +462,38 @@ div.progress {
   background-position: center;
   background-size: 100%;
 }
+
+/* DOI FORMS - UPLOAD */
+
+.has-error .form-control,
+.has-error .es-control,
+.is-invalid.text-area.form-control
+{
+  color: #e74c3c;
+  border-color: #e74c3c;
+}
+/*
+textarea.form-control.is-valid
+{
+  color: #2ecc71;
+  border-color: #2ecc71;
+}
+*/
+.form-group input.is-valid + div.form-text {
+    color: #2ecc71;
+}
+*/
+
+/* VALIDATION - text areas (Mostly in doi form upload.) */
+
+.form-group.has-feedback textarea.form-control
+{
+  color: #2ecc71;
+  border-color: #2ecc71;
+}
+
+.form-group.has-error textarea.form-control
+{
+  color: #e74c3c;
+  border-color: #e74c3c;
+}
