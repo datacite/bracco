@@ -497,3 +497,9 @@ textarea.form-control.is-valid
   color: #e74c3c;
   border-color: #e74c3c;
 }
+
+/* Fixes email service contract field (repositories/new) */
+.form-group .has-error .help-block
+{
+  color: #e74c3c;
+}
