@@ -5306,72 +5306,72 @@ button.close {
   filter: alpha(opacity=90);
   opacity: 0.9;
 }
-.tooltip.top {
+.bs-tooltip-top {
   padding: 5px 0;
   margin-top: -3px;
 }
-.tooltip.right {
+.bs-tooltip-right  {
   padding: 0 5px;
   margin-left: 3px;
 }
-.tooltip.bottom {
+.bs-tooltip-bottom {
   padding: 5px 0;
   margin-top: 3px;
 }
-.tooltip.left {
+.bs-tooltip-left   {
   padding: 0 5px;
   margin-left: -3px;
 }
-.tooltip.top .tooltip-arrow {
+.bs-tooltip-top .tooltip-arrow {
   bottom: 0;
   left: 50%;
   margin-left: -5px;
   border-width: 5px 5px 0;
   border-top-color: #000;
 }
-.tooltip.top-left .tooltip-arrow {
+.bs-tooltip-top-left   .tooltip-arrow {
   right: 5px;
   bottom: 0;
   margin-bottom: -5px;
   border-width: 5px 5px 0;
   border-top-color: #000;
 }
-.tooltip.top-right .tooltip-arrow {
+.bs-tooltip-top-right .tooltip-arrow {
   bottom: 0;
   left: 5px;
   margin-bottom: -5px;
   border-width: 5px 5px 0;
   border-top-color: #000;
 }
-.tooltip.right .tooltip-arrow {
+.bs-tooltip-right .tooltip-arrow {
   top: 50%;
   left: 0;
   margin-top: -5px;
   border-width: 5px 5px 5px 0;
   border-right-color: #000;
 }
-.tooltip.left .tooltip-arrow {
+.bs-tooltip-left .tooltip-arrow {
   top: 50%;
   right: 0;
   margin-top: -5px;
   border-width: 5px 0 5px 5px;
   border-left-color: #000;
 }
-.tooltip.bottom .tooltip-arrow {
+.bs-tooltip-bottom .tooltip-arrow {
   top: 0;
   left: 50%;
   margin-left: -5px;
   border-width: 0 5px 5px;
   border-bottom-color: #000;
 }
-.tooltip.bottom-left .tooltip-arrow {
+.bs-tooltip-bottom-left  .tooltip-arrow {
   top: 0;
   right: 5px;
   margin-top: -5px;
   border-width: 0 5px 5px;
   border-bottom-color: #000;
 }
-.tooltip.bottom-right .tooltip-arrow {
+.bs-tooltip-bottom-right .tooltip-arrow {
   top: 0;
   left: 5px;
   margin-top: -5px;
@@ -8597,43 +8597,43 @@ label.search-form {
   font-size: 16px;
   font-weight: 400;
 }
-.tooltip.top {
+.bs-tooltip-top {
   margin-top: -11px;
   padding: 0;
 }
-.tooltip.top .tooltip-inner:after {
+.bs-tooltip-top .tooltip-inner:after {
   border-top: 11px solid #FFFFFF;
   border-left: 11px solid rgba(0, 0, 0, 0);
   border-right: 11px solid rgba(0, 0, 0, 0);
   bottom: -10px;
 }
-.tooltip.top .tooltip-inner:before {
+.bs-tooltip-top .tooltip-inner:before {
   border-top: 11px solid rgba(0, 0, 0, 0.2);
   border-left: 11px solid rgba(0, 0, 0, 0);
   border-right: 11px solid rgba(0, 0, 0, 0);
   bottom: -11px;
 }
-.tooltip.bottom {
+.bs-tooltip-bottom {
   margin-top: 11px;
   padding: 0;
 }
-.tooltip.bottom .tooltip-inner:after {
+.bs-tooltip-bottom .tooltip-inner:after {
   border-bottom: 11px solid #FFFFFF;
   border-left: 11px solid rgba(0, 0, 0, 0);
   border-right: 11px solid rgba(0, 0, 0, 0);
   top: -10px;
 }
-.tooltip.bottom .tooltip-inner:before {
+.bs-tooltip-bottom .tooltip-inner:before {
   border-bottom: 11px solid rgba(0, 0, 0, 0.2);
   border-left: 11px solid rgba(0, 0, 0, 0);
   border-right: 11px solid rgba(0, 0, 0, 0);
   top: -11px;
 }
-.tooltip.left {
+.bs-tooltip-left   {
   margin-left: -11px;
   padding: 0;
 }
-.tooltip.left .tooltip-inner:after {
+.bs-tooltip-left   .tooltip-inner:after {
   border-left: 11px solid #FFFFFF;
   border-top: 11px solid rgba(0, 0, 0, 0);
   border-bottom: 11px solid rgba(0, 0, 0, 0);
@@ -8641,7 +8641,7 @@ label.search-form {
   left: auto;
   margin-left: 0;
 }
-.tooltip.left .tooltip-inner:before {
+.bs-tooltip-left   .tooltip-inner:before {
   border-left: 11px solid rgba(0, 0, 0, 0.2);
   border-top: 11px solid rgba(0, 0, 0, 0);
   border-bottom: 11px solid rgba(0, 0, 0, 0);
@@ -8649,11 +8649,11 @@ label.search-form {
   left: auto;
   margin-left: 0;
 }
-.tooltip.right {
+.bs-tooltip-right  {
   margin-left: 11px;
   padding: 0;
 }
-.tooltip.right .tooltip-inner:after {
+.bs-tooltip-right  .tooltip-inner:after {
   border-right: 11px solid #FFFFFF;
   border-top: 11px solid rgba(0, 0, 0, 0);
   border-bottom: 11px solid rgba(0, 0, 0, 0);
@@ -8661,7 +8661,7 @@ label.search-form {
   top: 10px;
   margin-left: 0;
 }
-.tooltip.right .tooltip-inner:before {
+.bs-tooltip-right  .tooltip-inner:before {
   border-right: 11px solid rgba(0, 0, 0, 0.2);
   border-top: 11px solid rgba(0, 0, 0, 0);
   border-bottom: 11px solid rgba(0, 0, 0, 0);

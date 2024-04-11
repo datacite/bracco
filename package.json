@@ -234,6 +234,7 @@
     "**/ember-bootstrap/**/ember-focus-trap": "1.0.2",
     "**/@babel/traverse": "^7.23.2",
     "**/browserify-sign": "^4.2.3",
-    "**/sanitize-html/**/postcss": "8.4.35"
+    "**/sanitize-html/**/postcss": "8.4.35",
+    "**/ember-modifier": "^3.2.7"
   }
 }

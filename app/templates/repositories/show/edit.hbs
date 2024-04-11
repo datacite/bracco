@@ -13,7 +13,7 @@
       <form.element @controlType="power-select" id="client-type" class="form-group" @label="Type" @value={{this.clientType}} @options={{this.clientTypes}} @optionLabelPath="label" as |el|>
         <el.control @onChange={{action "selectClientType"}} @search={{action "searchClientType"}} @placeholder="Select Client Type" @searchPlaceholder="Type to search..." @disabled={{if (eq this.model.clientType "igsnCatalog") true false}} @searchEnabled={{true}}/>
         {{#if (eq this.model.clientType "igsnCatalog")}}
-          <BsTooltip @placement="top" @viewportPadding={{10}}>IGSN ID Catalogs cannot be edited.</BsTooltip>
+          <BsTooltip @renderInPlace={{true}} @placement="top" @viewportPadding={{10}}>IGSN ID Catalogs cannot be edited.</BsTooltip>
         {{/if}}
       </form.element>
 

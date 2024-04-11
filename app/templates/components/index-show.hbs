@@ -21,7 +21,7 @@
   <div class="pseudo-footer">
     {{this.model.uid}}
     <span><i class="fas fa-question-circle"></i>
-      <BsTooltip @placement="top" @viewportPadding={{10}}>Each provider has a unique ID.</BsTooltip>
+      <BsTooltip @renderInPlace={{true}} @placement="top" @viewportPadding={{10}}>Each provider has a unique ID.</BsTooltip>
     </span>
     <button class="btn-link" type="button" {{action "edit" this.model}}><i class="fas fa-pencil-alt"></i></button>
   </div>
