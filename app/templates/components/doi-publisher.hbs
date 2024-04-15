@@ -2,7 +2,7 @@
   <label class="control-label col-md-3 required-label">Publisher</label>
   <div class="col-md-9 input-fragment">
     <div class="label-vertical">The name of the entity that holds, archives, publishes prints, distributes, releases, issues, or produces the resource.</div>
-    <@form.element @controlType="power-select" doi-publisher data-test-doi-publisher @value={{this.fragment.name}} @options={{this.organizations}} as |el| >
+    <@form.element class="form-group {{if (and (not-eq this.model.state 'draft') (v-get this.model 'publisher.name' 'isValid')) 'is-valid'}}" @controlType="power-select" doi-publisher data-test-doi-publisher @value={{this.fragment.name}} @options={{this.organizations}} as |el| >
       <el.control
         @onChange={{action "selectRor"}}
         @search={{action "searchRor"}}

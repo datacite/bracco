@@ -228,6 +228,17 @@ lock {
   color: #2ecc71;
 }
 
+/* Resource type general validation */
+
+.is-valid .ember-basic-dropdown-trigger {
+  color: #2ecc71;
+  border-color: #2ecc71;
+}
+
+.is-valid .form-text {
+  color: #2ecc71;
+  border-color: #2ecc71;
+}
 
 /* Fix a slight spacing problem - text inputs - doi forms - version. */
 
@@ -480,6 +491,10 @@ div.progress {
 }
 
 #resource-type-general > div {
+  padding-right: 0px;
+}
+
+div[doi-publisher] > div {
   padding-right: 0px;
 }
 

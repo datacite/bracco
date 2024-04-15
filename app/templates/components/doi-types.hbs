@@ -2,7 +2,7 @@
   <label class="control-label col-md-3">Resource Type General</label>
   <div class="col-md-9 input-fragment">
     <div class="label-vertical">The general type of the resource.</div>
-    <@form.element @controlType="power-select" id="resource-type-general" class="form-group" @property="types.resourceTypeGeneral" @options={{this.resourceTypesGeneral}} @helpText="If none of the provided values matches, use Other and specify the resource type in the field below." @destination={{this.resourceTypeGeneral}} as |el|>
+    <@form.element @controlType="power-select" id="resource-type-general" class="form-group {{if (and (not-eq this.model.state 'draft') (v-get this.model 'types.resourceTypeGeneral' 'isValid')) 'is-valid'}}" @property="types.resourceTypeGeneral" @options={{this.resourceTypesGeneral}} @helpText="If none of the provided values matches, use Other and specify the resource type in the field below." @destination={{this.resourceTypeGeneral}} as |el|>
       <el.control
         @onChange={{action "selectResourceTypeGeneral"}}
         @placeholder="Select Resource Type General"
