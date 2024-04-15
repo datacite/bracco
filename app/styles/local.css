@@ -162,6 +162,10 @@ div[doi-format].power-select-fragment .ember-basic-dropdown-trigger div.ember-vi
   color: #e74c3c;
 }
 
+.invalid-feedback {
+  font-size: 16px;
+}
+
 .form-group.has-error .form-text {
   display: none;
 }

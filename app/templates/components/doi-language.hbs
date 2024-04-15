@@ -9,7 +9,7 @@
       <@form.element @controlType="power-select" id="doi-language" @formLayout="vertical" @value={{this.language}} @options={{this.languages}} @helpText="The default Language vocabulary is provided by ISO 639-1. Any new language should be provided using two-letter or three-letter language codes." as |el|>
         <el.control @onChange={{action "selectLanguage"}} @search={{action "searchLanguage"}} @placeholder="Search standard format OR add a new Language code" @onKeydown={{action "createOnEnter"}} @searchPlaceholder="Type to search..." @noMatchesMessage="Press ENTER to add a new Language code." @allowClear={{true}} @disabled={{this.disabled}} @searchEnabled={{true}} @ />
         {{#if (v-get this.model 'language' 'isInvalid')}}
-          <div class='help-block'>{{v-get this.model 'language' 'message'}}</div>
+          <div class='invalid-feedback d-block'>{{v-get this.model 'language' 'message'}}</div>
         {{/if}}
       </@form.element>
     </div>
