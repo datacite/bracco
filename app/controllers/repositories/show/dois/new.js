@@ -160,7 +160,7 @@ export default Controller.extend({
         A(doi.get('alternateIdentifiers')).filter(function (
           alternateIdentifier
         ) {
-          return !isBlank(alternateIdentifier.identifier);
+          return !isBlank(alternateIdentifier.alternateIdentifier);
         })
       );
 

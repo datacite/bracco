@@ -176,7 +176,7 @@ export default Controller.extend({
         A(doi.get('alternateIdentifiers')).filter(function (
           alternateIdentifier
         ) {
-          return !isBlank(alternateIdentifier);
+          return !isBlank(alternateIdentifier.alternateIdentifier);
         })
       );
 
