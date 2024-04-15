@@ -144,7 +144,7 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
       cy.get('div#doi-language div[role="button"]').click({ waitForAnimations: true }).then(($dropdown) => {
         // Creates a new invalid language.
         cy.get('input.ember-power-select-search-input').type('Borgesian{enter}', { force: true });
-        cy.get('.help-block').contains('Must be a valid Language code.');
+        cy.get('.invalid-feedback').contains('Must be a valid Language code.');
       });
       cy.get('div#doi-language div[role="button"]').click({ waitForAnimations: true }).then(($dropdown) => {
         // Creates a new valid language.
