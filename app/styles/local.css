@@ -163,6 +163,7 @@ div[doi-format].power-select-fragment .ember-basic-dropdown-trigger div.ember-vi
 }
 
 .invalid-feedback {
+  margin-top: 5px;
   font-size: 16px;
 }
 
