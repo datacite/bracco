@@ -256,6 +256,26 @@ lock {
   }
 }
 
+.form-control.is-valid {
+  border-color: #2ecc71;
+  color: #2ecc71;
+}
+
+.form-control.is-valid ~ .form-text {
+  border-color: #2ecc71;
+  color: #2ecc71;
+}
+
+.form-control.is-invalid {
+  border-color: #e74c3c;
+  color: #e74c3c;
+}
+
+.form-control.is-invalid ~ .form-text {
+  border-color: #e74c3c;
+  color: #e74c3c;
+}
+
 /* APPLICATION HEADER - right side dropdown classes. */
 
 .show .dropdown-menu {
