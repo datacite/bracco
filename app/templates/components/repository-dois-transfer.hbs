@@ -2,8 +2,8 @@
   <div class="panel-body">
     <div class="col-md-9 col-md-offset-3"><h3 class="edit">Transfer DOIs</h3></div>
 
-    <BsForm @formLayout="horizontal" @horizontalLabelGridClass="col-md-3" @model={{this}} @onSubmit={{action "submit"}} @submitOnEnter={{true}} as |form|>
-      <form.element @controlType="power-select" @property="repository" @label="Repository" @helpText="Transfer all DOIs to this repository. It can take up to one hour for the transfer to complete." @optionLabelPath="name" @options={{this.repositories}} @destination={{this.repository}} as |el|>
+    <BsForm @formLayout="horizontal" class="form-horizontal" @horizontalLabelGridClass="col-md-3" @model={{this}} @onSubmit={{action "submit"}} @submitOnEnter={{true}} as |form|>
+      <form.element @controlType="power-select" class="form-group" @property="repository" @label="Repository" @helpText="Transfer all DOIs to this repository. It can take up to one hour for the transfer to complete." @optionLabelPath="name" @options={{this.repositories}} @destination={{this.repository}} as |el|>
         <el.control @onChange={{action "selectRepository"}} @search={{action "searchRepository"}} @searchField="name" @searchPlaceholder="Type to search..." @allowClear={{true}} @searchEnabled={{true}} as |item|>
           {{item.name}}
         </el.control>
