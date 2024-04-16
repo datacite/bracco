@@ -70,8 +70,6 @@ export default Component.extend({
         }
         return true;
       case this.fragment.get('nameType') === 'Organizational':
-        this.fragment.set('givenName', null);
-        this.fragment.set('familyName', null);
         this.fragment.set('name', options.name);
         this.set('isReadonly', false);
         return true;
