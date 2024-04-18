@@ -1,8 +1,8 @@
 <div class="input-group">
-  <input class="form-control date-field" value={{fragment.date}} onblur={{action "updateDate" value="target.value"}} placeholder="Date "
+  <input class="form-control date-field" value={{this.fragment.date}} onblur={{action "updateDate" value="target.value"}} placeholder="Date "
     data-test-date />
   <span class="input-group-btn">
-    <BsButton @outline={{true}} @onClick={{action "deleteDate" index}}><i class="fas fa-trash"></i></BsButton>
+    <BsButton @outline={{true}} @onClick={{action "deleteDate" this.index}}><i class="fas fa-trash"></i></BsButton>
   </span>
 </div>
 
@@ -10,9 +10,9 @@
   <label for="dateType" class="required-label subtitle">Date Type</label>
 </div>
 
-<div class="power-select-fragment">
-  <@form.element @controlType="power-select" @helpText="Type of date." @value={{fragment.dateType}} @options={{dateTypesList}} @destination={{fragment.dateType}} as |el|>
-    <el.control @onChange={{action "selectDateType"}} @placeholder="Select Date Type"  @disabled={{disabled}} @searchEnabled={{true}}/>
+<div class="power-select-fragment" doi-date-type>
+  <@form.element @controlType="power-select" @helpText="Type of date." @value={{this.fragment.dateType}} @options={{this.dateTypesList}} @destination={{this.fragment.dateType}} as |el|>
+    <el.control @onChange={{action "selectDateType"}} @placeholder="Select Date Type"  @disabled={{this.disabled}} @searchEnabled={{true}}/>
   </@form.element>
 </div>
 
@@ -20,7 +20,7 @@
   <label for="dateInformation" class="subtitle">Date Information</label>
 </div>
 
-<input class="form-control date-information-field" value={{fragment.dateInformation}}
+<input class="form-control date-information-field" value={{this.fragment.dateInformation}}
   placeholder="Date Information" 
   oninput={{action "updateDateInformation" value="target.value"}} data-test-date />
 <div class="help-block help-block-fragment">Specific information about the date, if appropriate.</div>

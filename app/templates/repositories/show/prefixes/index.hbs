@@ -1,6 +1,6 @@
 <div class="row">
   <div data-test-left-sidebar class="col-md-3">
-    {{#if (and model.repository.isActive (or (can 'create doi' model) (can 'upload doi' model)) (not (gt model.repository-prefixes.length 0)))}}
+    {{#if (and this.model.repository.isActive (or (can 'create doi' this.model) (can 'upload doi' this.model)) (not (gt this.model.repository-prefixes.length 0)))}}
       <div class="panel panel-transparent">
         <div class="panel-body">
           <BsAlert @dismissible={{false}} @type="warning">
@@ -10,22 +10,22 @@
       </div>
     {{/if}}
 
-    {{#if model.repository.isActive}}
+    {{#if this.model.repository.isActive}}
       {{#if (can 'write index')}}
         <div class="panel facets add-25">
           <div class="panel-body">
             <div class="btn-toolbar">
               <div class="shrink">
-                {{#if (and model.repository.isActive (or (can 'create doi' model) (can 'upload doi' model)) (gt model.repository-prefixes.length 0))}}
-                  <CreateDoiButton @model={{model}} class="create-doi-button" />
+                {{#if (and this.model.repository.isActive (or (can 'create doi' this.model) (can 'upload doi' this.model)) (gt this.model.repository-prefixes.length 0))}}
+                  <CreateDoiButton @model={{this.model}} class="create-doi-button" />
                 {{/if}}
                 <div class="btn-group-vertical btn-group-sm">
                   <LinkTo
                     @route="repositories.show.prefixes.new"
-                    @model={{model.repository.id}}
+                    @model={{this.model.repository.id}}
                     class="btn btn-warning"
-                    @id="assign-prefix"
-                    @disabled={{if (eq (await (prefixes-available model.provider.id)) 0) "true" ""}}
+                    id="assign-prefix"
+                    @disabled={{if (eq (await (prefixes-available this.model.provider.id)) 0) "true" ""}}
                   >
                     <i class="fas fa-link"></i>
                     Assign Prefix
@@ -40,27 +40,27 @@
           <div class="panel-body">
             <div class="btn-toolbar">
               <div class="shrink">
-                {{#if (and model.repository.isActive (or (can 'create doi' model) (can 'upload doi' model)) (gt model.repository-prefixes.length 0))}}
-                  <CreateDoiButton @model={{model}} class="create-doi-button" />
+                {{#if (and this.model.repository.isActive (or (can 'create doi' this.model) (can 'upload doi' this.model)) (gt this.model.repository-prefixes.length 0))}}
+                  <CreateDoiButton @model={{this.model}} class="create-doi-button" />
                 {{/if}}
               </div>
             </div>
           </div>
         </div>
       {{/if}}
-    {{else if (not model.repository.isActive)}}
+    {{else if (not this.model.repository.isActive)}}
 
     {{/if}}
-    {{#if model.repository-prefixes.meta.years}}
+    {{#if this.model.repository-prefixes.meta.years}}
       <div class="panel facets add">
         <div class="panel-body">
           <h4>
             Year created
           </h4>
           <ul>
-            {{#each model.repository-prefixes.meta.years as |year|}}
+            {{#each this.model.repository-prefixes.meta.years as |year|}}
               <li>
-                {{#if model.repository-prefixes.query.year}}
+                {{#if this.model.repository-prefixes.query.year}}
                   <LinkTo
                     @route="repositories.show.prefixes"
                     @query={{hash year=null}}
@@ -91,20 +91,20 @@
   </div>
   <div class="col-md-9 panel-list" id="content">
     <ModelSearch
-      @model={{model.repository-prefixes}}
+      @model={{this.model.repository-prefixes}}
       @name="Prefix"
       @link="repositories.show.prefixes"
     />
-    {{#if model.repository-prefixes}}
-      {{#each model.repository-prefixes as |repositoryPrefix|}}
+    {{#if this.model.repository-prefixes}}
+      {{#each this.model.repository-prefixes as |repositoryPrefix|}}
         <div class="panel panel-transparent" data-test-prefix>
           <div class="panel-body">
-            {{#if (and (can 'update prefix' model) model.isActive)}}
+            {{#if (and (can 'update prefix' this.model) this.model.isActive)}}
               <h3 class="work">
                 <LinkTo
-                  @id={{repositoryPrefix.prefix.id}}
+                  id={{repositoryPrefix.prefix.id}}
                   @route="repositories.show.prefixes.show"
-                  @models={{array model.repository.id repositoryPrefix.prefix.id}}
+                  @models={{array this.model.repository.id repositoryPrefix.prefix.id}}
                 >
                   {{repositoryPrefix.prefix.id}}
                 </LinkTo>
@@ -114,7 +114,7 @@
                 {{repositoryPrefix.prefix.id}}
               </h3>
             {{/if}}
-            {{#if features.useElasticsearch}}
+            {{#if this.features.useElasticsearch}}
               <h5>
                 DOIs
               </h5>
@@ -146,9 +146,9 @@
         </div>
       {{/each}}
       <div class="text-center">
-        {{#if (gt model.repository-prefixes.meta.totalPages 1)}}
+        {{#if (gt this.model.repository-prefixes.meta.totalPages 1)}}
           <PageNumbers
-            @model={{model.prefixes}}
+            @model={{this.model.prefixes}}
             @link="repositories.show.prefixes"
           />
         {{/if}}

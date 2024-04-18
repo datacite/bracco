@@ -13,7 +13,7 @@ const IssnFormat = BaseValidator.extend({
         return message;
       }
     }
-  },
+  }
 });
 
 export default IssnFormat;

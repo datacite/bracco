@@ -3,81 +3,87 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-module('helper:format-creator', function(hooks) {
+module('helper:format-creator', function (hooks) {
   setupRenderingTest(hooks);
 
-  test('it renders comma', async function(assert) {
+  test('it renders comma', async function (assert) {
     this.set('creators', [
       {
-        'type': 'Person',
-        'name': 'Empbh R. Goh',
+        type: 'Person',
+        name: 'Empbh R. Goh',
         'given-name': 'Empbh R.',
-        'family-name': 'Goh',
-      }, {
-        'type': 'Person',
-        'name': 'M. Barrgow',
-        'given-name': 'M.',
-        'family-name': 'Barrgow',
-      }, {
-        'type': 'Person',
-        'name': 'M. Barrgoe',
-        'given-name': 'M.',
-        'family-name': 'Barrgoe',
+        'family-name': 'Goh'
       },
+      {
+        type: 'Person',
+        name: 'M. Barrgow',
+        'given-name': 'M.',
+        'family-name': 'Barrgow'
+      },
+      {
+        type: 'Person',
+        name: 'M. Barrgoe',
+        'given-name': 'M.',
+        'family-name': 'Barrgoe'
+      }
     ]);
 
-    await render(hbs`{{format-creator creators index=0 }}`);
+    await render(hbs`{{format-creator this.creators index=0 }}`);
 
-    assert.dom('*').hasText(', ');
+    assert.dom().hasText(', ');
   });
 
-  test('it renders ampersand', async function(assert) {
+  test('it renders ampersand', async function (assert) {
     this.set('creators', [
       {
-        'type': 'Person',
-        'name': 'Empbh R. Goh',
+        type: 'Person',
+        name: 'Empbh R. Goh',
         'given-name': 'Empbh R.',
-        'family-name': 'Goh',
-      }, {
-        'type': 'Person',
-        'name': 'M. Barrgow',
-        'given-name': 'M.',
-        'family-name': 'Barrgow',
-      }, {
-        'type': 'Person',
-        'name': 'M. Barrgoe',
-        'given-name': 'M.',
-        'family-name': 'Barrgoe',
+        'family-name': 'Goh'
       },
+      {
+        type: 'Person',
+        name: 'M. Barrgow',
+        'given-name': 'M.',
+        'family-name': 'Barrgow'
+      },
+      {
+        type: 'Person',
+        name: 'M. Barrgoe',
+        'given-name': 'M.',
+        'family-name': 'Barrgoe'
+      }
     ]);
 
-    await render(hbs`{{format-creator creators index=1 }}`);
+    await render(hbs`{{format-creator this.creators index=1 }}`);
 
-    assert.dom('*').hasText(' & ');
+    assert.dom().hasText(' & ');
   });
 
-  test('it renders empty space', async function(assert) {
+  test('it renders empty space', async function (assert) {
     this.set('creators', [
       {
-        'type': 'Person',
-        'name': 'Empbh R. Goh',
+        type: 'Person',
+        name: 'Empbh R. Goh',
         'given-name': 'Empbh R.',
-        'family-name': 'Goh',
-      }, {
-        'type': 'Person',
-        'name': 'M. Barrgow',
-        'given-name': 'M.',
-        'family-name': 'Barrgow',
-      }, {
-        'type': 'Person',
-        'name': 'M. Barrgoe',
-        'given-name': 'M.',
-        'family-name': 'Barrgoe',
+        'family-name': 'Goh'
       },
+      {
+        type: 'Person',
+        name: 'M. Barrgow',
+        'given-name': 'M.',
+        'family-name': 'Barrgow'
+      },
+      {
+        type: 'Person',
+        name: 'M. Barrgoe',
+        'given-name': 'M.',
+        'family-name': 'Barrgoe'
+      }
     ]);
 
-    await render(hbs`{{format-creator creators index=2 }}`);
+    await render(hbs`{{format-creator this.creators index=2 }}`);
 
-    assert.dom('*').hasText('');
+    assert.dom().hasText('');
   });
 });

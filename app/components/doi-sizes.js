@@ -1,14 +1,21 @@
 import Component from '@ember/component';
+import { schedule } from '@ember/runloop';
 
 export default Component.extend({
   showSizes: false,
 
+  init: function () {
+    this._super();
+
+    schedule("afterRender",this,function() {
+      if (!this.model.get('sizes')) {
+        this.model.set('sizes', []);
+      }
+    });
+  },
+
   didReceiveAttrs() {
     this._super(...arguments);
-
-    if (!this.model.get('sizes')) {
-      this.model.set('sizes', []);
-    }
   },
   actions: {
     addSize() {
@@ -18,6 +25,6 @@ export default Component.extend({
     },
     toggleSizes() {
       this.set('showSizes', !this.showSizes);
-    },
-  },
+    }
+  }
 });

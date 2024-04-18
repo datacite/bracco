@@ -1,0 +1,51 @@
+/*doc
+---
+title: Images
+name: images
+category: Components
+---
+
+```html_example
+<img src="/images/kristian.png" class="img-details" />
+```
+*/
+
+.img-rounded{
+    border-radius: $border-radius-extreme;
+    box-shadow: 0 2px 2px rgba(204, 197, 185, 0.5);
+    transition: opacity 0.5s ease 0s;
+}
+.img-details{
+    min-height: 50px;
+    padding: 0 4px 0.5em;
+}
+.img-details .author{
+    margin-left: 10px;
+    margin-top: -21px;
+    width: 40px;
+}
+.img-circle{
+    background-color: $white-color;
+    margin-bottom: 10px;
+    padding: 4px;
+}
+.img-thumbnail{
+    border: 0 none;
+    border-radius: $border-radius-extreme;
+    box-shadow: 0 1px 2px rgba(164, 158, 147, 0.6);
+    margin-bottom: 10px;
+}
+.img-no-padding{
+    padding: 0px;
+}
+.img-big {
+  margin: 4.5em 0 2em 0;
+}
+.img-small {
+  max-height: 120px;
+}
+.centered, .search {
+  margin: auto;
+  max-width: 700px;
+  padding-bottom: 1.5em;
+}

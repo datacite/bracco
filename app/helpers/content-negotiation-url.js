@@ -1,7 +1,7 @@
 import { helper as buildHelper } from '@ember/component/helper';
 import ENV from 'bracco/config/environment';
 
-export function contentNegotiationUrl([ doi ], hash) {
+export function contentNegotiationUrl([doi], hash) {
   let mimeType = '';
   switch (hash.format) {
     case 'datacite':

@@ -6,6 +6,8 @@ import { inject as service } from '@ember/service';
 export default Route.extend({
   can: service(),
   features: service(),
+  router: service(),
+  store: service(),
 
   model(params) {
     let providerId = null;
@@ -38,12 +40,11 @@ export default Route.extend({
         })
     });
 
-    return ret.then( function(ret) {
+    return ret.then(function (ret) {
       // Workaround - going back to settings tab, contacts disappear.
       ret.provider.contacts = ret.contacts;
       return ret;
     });
-
   },
 
   queryParams: {
@@ -60,7 +61,7 @@ export default Route.extend({
 
   afterModel() {
     if (this.can.cannot('read provider', this.modelFor('providers/show'))) {
-      this.transitionTo('index');
+      this.router.transitionTo('index');
     }
   }
 });

@@ -1,0 +1,117 @@
+/*doc
+---
+title: Alerts
+name: alerts
+category: Components
+---
+
+```html_example
+<div class="alert alert-success" role="alert">You successfully read this important alert message.</div>
+<div class="alert alert-info" role="alert">This alert needs your attention, but it&#39;s not super important.</div>
+<div class="alert alert-warning" role="alert">Better check yourself, you&#39;re not looking too good.</div>
+<div class="alert alert-danger" role="alert">Change a few things up and try submitting again.</div>
+<div class="alert alert-danger" role="alert">Change a few things up and try submitting again.</div>
+```
+*/
+
+.alert{
+    border: 0;
+    border-radius: 0;
+    color: #FFFFFF;
+    padding: 10px 15px;
+    font-size: $font-size-base;
+
+    .container &{
+        border-radius: 4px;
+
+    }
+    .navbar &{
+        border-radius: 0;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 85px;
+        width: 100%;
+        z-index: 3;
+    }
+    .navbar:not(.navbar-transparent) &{
+        top: 70px;
+    }
+}
+
+.text-primary, .text-findable, .panel-footer .text-findable {
+    color: $primary-color;
+}
+.text-default, .text-inactive, .panel-footer .text-inactive {
+    color: $default-color;
+}
+.text-info, .text-registered, .panel-footer .text-registered {
+    color: $info-color;
+}
+.text-success {
+    color: $success-color;
+}
+.text-warning, .text-draft, .panel-footer .text-draft {
+    color: $warning-color;
+}
+.text-danger {
+    color: $danger-color;
+}
+
+.alert-info{
+    background-color: $white_bg;
+    color: $info-color;
+    border: 2px solid $info-color;
+
+    i {
+      color: $info-color;
+    }
+}
+.alert-success {
+    background-color: $white_bg;
+    color: $success-color;
+    border: 2px solid $success-color;
+
+    i {
+      color: $success-color;
+    }
+}
+.alert-warning {
+    background-color: $white_bg;
+    color: $warning-color;
+    border: 2px solid $warning-color;
+
+    i {
+      color: $warning-color;
+    }
+}
+.alert-danger {
+    background-color: $white_bg;
+    color: $danger-color;
+    border: 2px solid $danger-color;
+}
+
+.alert-simple-info {
+  background-color: transparent;
+  color: $default-color;
+  padding: 0 0 0 10px;
+}
+
+.required-nested-label label.control-label.col-md-3:before {
+    color: #e74c3c;
+    content: "* ";
+}
+
+.required-label:before {
+    color: #e74c3c;
+    content: "* ";
+}
+
+.required-nested-label .form-group.has-success label:before, .required-nested-label.form-group.has-success label:before {
+    content: "* ";
+    color: $success-color;
+  }
+  
+label.subtitle:after {
+  content: "";
+}

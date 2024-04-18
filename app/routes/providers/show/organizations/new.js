@@ -4,6 +4,7 @@ import { inject as service } from '@ember/service';
 
 export default Route.extend({
   can: service(),
+  store: service(),
 
   model() {
     let provider = this.modelFor('providers/show');
@@ -18,7 +19,7 @@ export default Route.extend({
       secondaryTechnicalContact: null,
       billingContact: null,
       secondaryBillingContact: null,
-      isActive: true,
+      isActive: true
       //doiEstimate: 0
     });
 

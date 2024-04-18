@@ -2,9 +2,11 @@ import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
+import { setupIntl } from 'ember-intl/test-support';
 
 module('Integration | Component | bar chart', function (hooks) {
   setupRenderingTest(hooks);
+  setupIntl(hooks);
 
   test('it renders', async function (assert) {
     await render(hbs`{{bar-chart}}`);
@@ -14,6 +16,6 @@ module('Integration | Component | bar chart', function (hooks) {
     let endDate = currentYear.toString();
 
     assert.dom('h3.panel-title').hasText('Charts by year');
-    assert.dom('div.panel-body').hasText(`0  ${startDate+endDate}`);
+    assert.dom('div.panel-body').hasText(`0  ${startDate + endDate}`);
   });
 });

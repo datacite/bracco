@@ -104,8 +104,8 @@ export default Ability.extend({
           return true;
         case 'client_admin':
           return (
-            this.get('currentUser.client_id') ===
-              this.get('model.query.client-id') || this.get('model.id')
+            this.get('currentUser.client_id') === this.get('model.query.client-id') ||
+            ((this.get('model.id') ? true : false))
           );
         default:
           return false;
@@ -122,7 +122,8 @@ export default Ability.extend({
         case 'client_admin':
           return (
             this.get('currentUser.client_id') ===
-              this.get('model.query.client-id') || this.get('model.id') || this.get('model.repository.id')   
+              this.get('model.query.client-id') ||
+            ((this.get('model.id') || this.get('model.repository.id') ? true : false))
           );
         default:
           return false;

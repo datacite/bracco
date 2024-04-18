@@ -5,6 +5,8 @@ export default Route.extend({
   can: service(),
   currentUser: service(),
   prefixes: service(),
+  router: service(),
+  store: service(),
 
   model() {
     if (this.can.can('read index')) {
@@ -24,7 +26,7 @@ export default Route.extend({
 
   afterModel() {
     if (this.can.cannot('read index') && this.currentUser) {
-      this.transitionTo('index');
+      this.router.transitionTo('index');
     }
   },
 

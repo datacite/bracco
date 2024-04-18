@@ -1,6 +1,10 @@
 import Controller from '@ember/controller';
+import { inject as service } from '@ember/service';
 
 export default Controller.extend({
+  router: service(),
+  store: service(),
+
   actions: {
     submit() {
       let self = this;
@@ -13,7 +17,7 @@ export default Controller.extend({
           repositoryPrefix.destroyRecord().then(function () {
             // We need a timeout because of ElasticSearch indexing
             setTimeout(() => {
-              self.transitionToRoute(
+              self.router.transitionTo(
                 'repositories.show.prefixes',
                 repositoryId
               );
@@ -25,7 +29,7 @@ export default Controller.extend({
         });
     },
     cancel() {
-      this.transitionToRoute(
+      this.router.transitionTo(
         'repositories.show.prefixes',
         this.model.get('repository.id')
       );

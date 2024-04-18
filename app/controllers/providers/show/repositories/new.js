@@ -5,19 +5,27 @@ import { capitalize } from '@ember/string';
 import langs from 'langs';
 import { A } from '@ember/array';
 import { computed } from '@ember/object';
-import { clientTypeList, softwareList } from 'bracco/models/repository'
+import { clientTypeList, softwareList } from 'bracco/models/repository';
 
 export default Controller.extend({
   store: service(),
+  router: service(),
+  flashMessages: service(),
 
   re3data: null,
   softwareList,
   softwares: softwareList,
   clientTypeList,
   clientTypes: clientTypeList,
-  clientType: computed('model.repository.clientType', function(){    
-    return this.clientTypeList.find(item => item.value === this.get('model.repository.clientType'));
-  }),
+  clientType: computed(
+    'clientTypeList',
+    'model.repository.clientType',
+    function () {
+      return this.clientTypeList.find(
+        (item) => item.value === this.get('model.repository.clientType')
+      );
+    }
+  ),
 
   init(...args) {
     this._super(...args);
@@ -51,10 +59,14 @@ export default Controller.extend({
             );
             self.model.repository.set('name', repo.get('repositoryName'));
             self.model.repository.set('description', repo.get('description'));
-            self.model.repository.set(
-              'alternateName',
-              A(repo.get('additionalNames')).get('firstObject').text
-            );
+            if (repo.get('additionalNames').length > 0) {
+              self.model.repository.set(
+                'alternateName',
+                A(repo.get('additionalNames')).get('firstObject').text
+              );
+            } else {
+              self.model.repository.set('alternateName', null);
+            }
             self.model.repository.set('url', repo.get('repositoryUrl'));
             if (repo.get('software').length > 0) {
               let software = repo.get('software')[0].name;
@@ -155,22 +167,38 @@ export default Controller.extend({
       repository
         .save()
         .then(function (repository) {
-          self.transitionToRoute('repositories.show.settings', self.model.repository.id, { queryParams: { assignedPrefix: repository.prefixes.firstObject.id } })
+          repository.prefixes.then(function (prefixes) {
+            self.router.transitionTo(
+              'repositories.show.settings',
+              self.model.repository.id,
+              {
+                queryParams: {
+                  assignedPrefix:
+                    prefixes.length > 0 ? prefixes.firstObject.id : null
+                }
+              }
+            );
+          });
         })
         .catch(function (reason) {
           console.debug(reason);
-          let msg = (reason?.errors[0]?.title ? reason.errors[0].title : ( reason?.title? reason.title : 'Cause is unknown.  Please contact support.' ));
+          let msg = reason?.errors[0]?.title
+            ? reason.errors[0].title
+            : reason?.title
+            ? reason.title
+            : 'Cause is unknown.  Please contact support.';
 
           self
-          .get('flashMessages')
-          .danger(
-            'An error occurred and while saving this repository.' + '  ' + msg
-          );
+            .get('flashMessages')
+            .danger(
+              'An error occurred and while saving this repository.' + '  ' + msg
+            );
         });
     },
+
     cancel() {
       this.model.repository.rollbackAttributes();
-      this.transitionToRoute(
+      this.router.transitionTo(
         'providers.show.repositories',
         this.get('model.provider.id')
       );

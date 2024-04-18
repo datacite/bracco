@@ -9,7 +9,7 @@ const descriptionTypes = [
   'SeriesInformation',
   'TableOfContents',
   'TechnicalInfo',
-  'Other',
+  'Other'
 ];
 const languageList = ISO6391.getAllNames();
 
@@ -17,7 +17,7 @@ export default Component.extend(LanguageComputedMixin, {
   descriptionTypes,
   languageList,
   languages: languageList,
-  isSeriesInformation: computed('fragment.descriptionType', function() {
+  isSeriesInformation: computed('fragment.descriptionType', function () {
     return this.get('fragment.descriptionType') == 'SeriesInformation';
   }),
 
@@ -32,7 +32,7 @@ export default Component.extend(LanguageComputedMixin, {
       this.fragment.set('descriptionType', descriptionType);
     },
     searchLanguage(query) {
-      let languages = languageList.filter(function(language) {
+      let languages = languageList.filter(function (language) {
         return language.toLowerCase().startsWith(query.toLowerCase());
       });
       this.set('languages', languages);
@@ -44,6 +44,6 @@ export default Component.extend(LanguageComputedMixin, {
         this.fragment.set('lang', null);
       }
       this.set('languages', languageList);
-    },
-  },
+    }
+  }
 });

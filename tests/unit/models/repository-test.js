@@ -3,22 +3,34 @@ import { setupTest } from 'ember-qunit';
 import { get } from '@ember/object';
 import { run } from '@ember/runloop';
 
-module('Unit | Model | repository', function(hooks) {
+module('Unit | Model | repository', function (hooks) {
   setupTest(hooks);
 
-  test('it exists', function(assert) {
-    let model = run(() => this.owner.lookup('service:store').createRecord('repository'));
+  test('it exists', function (assert) {
+    let model = run(() =>
+      this.owner.lookup('service:store').createRecord('repository')
+    );
     assert.ok(!!model);
   });
 
-  test('should belong to a provider', function(assert) {
-    const Repository = this.owner.lookup('service:store').modelFor('repository');
+  test('should belong to a provider', function (assert) {
+    const Repository = this.owner
+      .lookup('service:store')
+      .modelFor('repository');
 
     // lookup the relationship on the repository model
     const relationship = get(Repository, 'relationshipsByName').get('provider');
 
-    assert.equal(relationship.key, 'provider', 'has relationship with provider');
-    assert.equal(relationship.kind, 'belongsTo', 'kind of relationship is belongsTo');
+    assert.equal(
+      relationship.key,
+      'provider',
+      'has relationship with provider'
+    );
+    assert.equal(
+      relationship.kind,
+      'belongsTo',
+      'kind of relationship is belongsTo'
+    );
   });
 
   // test('should correctly compute domainList', function(assert) {

@@ -1,8 +1,8 @@
-{{#if hasMetadata}}
+{{#if this.hasMetadata}}
   <div id="metadata" class="input-group pull-right">
     <select onchange={{action "selectMetadata" value="target.value"}}>
-      {{#each-in formats as |key value|}}
-        <option name="metadata" value={{key}} selected={{eq metadata key}}>{{value}}</option>
+      {{#each-in this.formats as |key value|}}
+        <option name="metadata" value={{key}} selected={{eq this.metadata key}}>{{value}}</option>
       {{/each-in}}
     </select>
   </div>
@@ -10,18 +10,18 @@
   <div class="clearfix"/>
 
   <div class="panel panel-transparent">
-    {{#if output}}
+    {{#if this.output}}
       <div class="panel-body">
-        <CodeBlock @class="metadata" @code="{{output}}" />
+        <CodeBlock @class="metadata" @code="{{this.output}}" />
       </div>
     {{else}}
-      <DoiSummary @model={{model}} />
+      <DoiSummary @model={{this.model}} />
       
-      {{#if (not model.isDraft)}}
+      {{#unless this.model.isDraft}}
         <div class="panel-footer">
-          <a target="_blank" rel="noopener" href={{model.identifier}}><i class="fas fa-external-link-alt"></i> {{model.identifier}}</a>
+          <a target="_blank" rel="noopener noreferrer" href={{this.model.identifier}}><i class="fas fa-external-link-alt"></i> {{this.model.identifier}}</a>
         </div>
-      {{/if}}
+      {{/unless}}
     {{/if}}
   </div>
 {{/if}}

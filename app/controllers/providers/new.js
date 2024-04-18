@@ -10,6 +10,7 @@ import {
   focusAreaList,
   nonProfitStatusList
 } from 'bracco/models/provider';
+import FileReader from 'ember-file-upload/system/file-reader';
 
 // states and provinces use iso-3166-2 codes
 // TODO add Brazil, India, Ireland, Italy, Mexico, all supported in Salesforce
@@ -139,6 +140,8 @@ const stateListAustralia = [
 export default Controller.extend({
   store: service(),
   features: service(),
+  router: service(),
+  flashMessages: service(),
 
   countryList,
   countries: null,
@@ -178,7 +181,7 @@ export default Controller.extend({
       let estimate = this.model.get('doiEstimate');
 
       this.model.set('doiEstimate', '0');
-      this.model.set('doiEstimate', estimate);      //if (this.get('features').isEnabled('doiEstimate')) {
+      this.model.set('doiEstimate', estimate); //if (this.get('features').isEnabled('doiEstimate')) {
     },
     searchCountry(query) {
       let countries = countryList.filter(function (country) {
@@ -364,7 +367,7 @@ export default Controller.extend({
       this.model
         .save()
         .then(function (provider) {
-          self.transitionToRoute('providers.show', provider);
+          self.router.transitionTo('providers.show', provider.id);
         })
         .catch(function (reason) {
           console.debug(reason);
@@ -372,7 +375,7 @@ export default Controller.extend({
     },
     cancel() {
       this.model.rollbackAttributes();
-      this.transitionToRoute('providers');
+      this.router.transitionTo('providers');
     }
   }
 });

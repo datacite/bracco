@@ -6,18 +6,32 @@ import isAbleTo from '../utils/is-able-to';
 export default Ability.extend({
   currentUser: service(),
 
+  // Returns the total nuymber of contacts owned by the given contact's provider.
+  // We need this because the relationships are async so we need to resolve a promise.
+  async count_provider_contacts(this) {
+    var x =  await this.get('model.provider.contacts');
+    var n = x.length
+    return n;
+  },
+  
+
   canDelete: computed(
-    'currentUser.{role_id,provider_id}','model.roleName',
+    'currentUser.{role_id,provider_id}',
+    'model.roleName',
     'model.provider.{id,memberType,consortium.id,contacts}',
     function () {
-      if (this.get('model.roleName') && this.get('model.roleName').length > 0 || this.get('model.provider.contacts') && this.get('model.provider.contacts').length == 1) {
+      if (
+        (this.get('model.roleName') && this.get('model.roleName').length > 0) ||
+        (this.get('model.provider.contacts') &&
+          this.count_provider_contacts(this) == 1)
+      ) {
         return false;
       } else {
         switch (this.get('currentUser.role_id')) {
           case 'staff_admin':
             return true;
           case 'consortium_admin':
-            return (isAbleTo(this));
+            return isAbleTo(this);
           case 'provider_admin':
             return (
               this.get('currentUser.provider_id') ===
@@ -37,7 +51,7 @@ export default Ability.extend({
         case 'staff_admin':
           return true;
         case 'consortium_admin':
-          return (isAbleTo(this));
+          return isAbleTo(this);
         case 'provider_admin':
           return (
             this.get('currentUser.provider_id') ===
@@ -56,7 +70,7 @@ export default Ability.extend({
         case 'staff_admin':
           return true;
         case 'consortium_admin':
-          return (isAbleTo(this));
+          return isAbleTo(this);
         case 'provider_admin':
           return (
             this.get('currentUser.provider_id') ===
@@ -76,7 +90,7 @@ export default Ability.extend({
         case 'staff_admin':
           return true;
         case 'consortium_admin':
-          return (isAbleTo(this));
+          return isAbleTo(this);
         case 'provider_admin':
           return (
             this.get('currentUser.provider_id') ===

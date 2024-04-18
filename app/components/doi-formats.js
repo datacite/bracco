@@ -1,14 +1,22 @@
 import Component from '@ember/component';
+import { schedule } from '@ember/runloop';
 
 export default Component.extend({
   showFormats: false,
 
+  init: function () {
+    this._super();
+
+    schedule("afterRender",this,function() {
+      if (!this.model.get('formats')) {
+        this.model.set('formats', []);
+      }
+    });
+  },
+
   didReceiveAttrs() {
     this._super(...arguments);
 
-    if (!this.model.get('formats')) {
-      this.model.set('formats', []);
-    }
   },
   actions: {
     addFormat() {
@@ -18,6 +26,6 @@ export default Component.extend({
     },
     toggleFormats() {
       this.set('showFormats', !this.showFormats);
-    },
-  },
+    }
+  }
 });

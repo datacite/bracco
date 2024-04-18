@@ -1,38 +1,47 @@
 <BsNavbar
-  @type={{type}}
+  class="navbar-default"
+  @type={{this.type}}
   @fluid={{true}}
-  @collapsed={{collapsed}}
-  @onCollapse={{action (mut collapsed) true}}
-  @onExpand={{action (mut collapsed) false}} as |navbar|
+  @collapsed={{this.collapsed}}
+  @onCollapse={{action (mut this.collapsed) true}}
+  @onExpand={{action (mut this.collapsed) false}} as |navbar|
 >
   <div class="navbar-header">
-    {{navbar.toggle}}
-    <a href="/" class="navbar-brand">
-      {{#if showLogo}}<img src="/assets/images/fabrica-logo.svg" height="50" class="fabrica-logo"/>
-      {{else}}{{title}}
-      {{/if}}
-    </a>
+    <navbar.toggle class="navbar-toggle" />
+    {{#if this.session.isAuthenticated}}
+      <a href="/" class="navbar-brand">
+        {{#if this.showLogo}}<img src="/assets/images/fabrica-logo.svg" height="50" class="fabrica-logo"/>
+        {{else}}{{this.title}}
+        {{/if}}
+      </a>
+    {{else}}
+      <a href="/" class="navbar-brand title-inverted">
+        {{#if this.showLogo}}<img src="/assets/images/fabrica-logo.svg" height="50" class="fabrica-logo"/>
+        {{else}}{{this.title}}
+        {{/if}}
+      </a>
+    {{/if}}
   </div>
   <navbar.content>
-    <navbar.nav class="navbar-right {{navBgColor}}" as |nav|>
+    <navbar.nav class="navbar-right {{this.navBgColor}}" as |nav|>
       <nav.item>
-        <LinkTo @route="about" @id="about" class="{{navButtonColor}}">
+        <LinkTo @route="about" id="about" class="{{this.navButtonColor}}">
           About
         </LinkTo>
       </nav.item>
       <nav.item>
-        <a target="_blank" rel="noopener" href={{get (links) "SUPPORT_URL" }} class="{{navButtonColor}}">
+        <a target="_blank" rel="noopener noreferrer" href={{get (links) "SUPPORT_URL" }} class="{{this.navButtonColor}}">
           Support
         </a>
       </nav.item>
-      {{#if user}}
-        {{#if session.isAuthenticated}}
+      {{#if this.user}}
+        {{#if this.session.isAuthenticated}}
           <nav.dropdown as |dd|>
-            <dd.toggle id="account_menu_link" class="{{navButtonColor}}">
-              {{#if currentUser.isUser}}
-                {{currentUser.name}}
+            <dd.toggle id="account_menu_link" class="{{this.navButtonColor}}">
+              {{#if this.currentUser.isUser}}
+                {{this.currentUser.name}}
               {{else}}
-                {{uppercase currentUser.uid}}
+                {{uppercase this.currentUser.uid}}
               {{/if}}
               <span class="caret"></span>
             </dd.toggle>
@@ -40,14 +49,21 @@
               <menu.item>
                 <span  class="dropdown-header">
                   Role:
-                  {{currentUser.roleName}}
+                  {{this.currentUser.roleName}}
                 </span>
               </menu.item>
               <menu.item>
-                <DynamicLink @route="{{settings-route settings.route}}" @model="{{settings.model}}">
-                  <i class="fas fa-cog"></i>
-                  Settings
-                </DynamicLink>
+                {{#if (is-empty this.settings.model)}}
+                  <LinkTo @route="{{settings-route this.settings.route}}">
+                    <i class="fas fa-cog"></i>
+                      Settings
+                  </LinkTo>
+                {{else}}
+                  <LinkTo @route="{{settings-route this.settings.route}}" @model="{{this.settings.model}}">
+                    <i class="fas fa-cog"></i>
+                      Settings
+                  </LinkTo>
+                {{/if}}
               </menu.item>
               <menu.divider />
               <menu.item>
@@ -62,7 +78,7 @@
           <nav.item>
             <LinkTo
               @route="sign-in"
-              @id="sign-in"
+              id="sign-in"
               class="btn btn-sm btn-neutral"
             >
               <i class="fas fa-sign-in-alt"></i>

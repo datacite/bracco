@@ -2,9 +2,9 @@
   <div class="col-md-3">
     {{#if
       (and
-        (can 'write index' model)
-        (not-eq model.provider.memberType 'consortium')
-        (or (eq model.currentUser.role_id 'staff_admin') model.provider.hasRequiredContacts)
+        (can 'write index' this.model)
+        (not-eq this.model.provider.memberType 'consortium')
+        (or (eq this.model.currentUser.role_id 'staff_admin') this.model.provider.hasRequiredContacts)
       )
     }}
       <div class="panel facets">
@@ -13,7 +13,7 @@
             <div class="btn-group btn-group-sm">
               <LinkTo
                 @route="providers.show.prefixes.new"
-                @model={{model.provider.id}}
+                @model={{this.model.provider.id}}
                 class="btn btn-warning"
                 id="assign-prefix"
                 @disabled={{if (eq (await (prefixes-available)) 0) "true" ""}}
@@ -28,16 +28,16 @@
     {{else}}
       <div class="panel panel-transparent">
         <div class="panel-body">
-          {{link}}
-          {{#if (eq model.provider.memberType 'consortium')}}
+          {{this.link}}
+          {{#if (eq this.model.provider.memberType 'consortium')}}
             <BsAlert @dismissible={{false}} @type="warning">
               New prefixes can't be assigned from this page.
             </BsAlert>
-          {{else if (cannot 'create prefix' model)}}
+          {{else if (cannot 'create prefix' this.model)}}
             <BsAlert @dismissible={{false}} @type="warning">
               Please ask DataCite Staff if you want to add a prefix.
             </BsAlert>
-          {{else if (not model.provider.hasRequiredContacts)}}
+          {{else if (not this.model.provider.hasRequiredContacts)}}
             <BsAlert @dismissible={{false}} @type="warning">
               New prefixes can't be assigned unless all required contacts are assigned.
             </BsAlert>
@@ -46,22 +46,22 @@
       </div>
     {{/if}}
 
-    {{#if model.prefixes.meta.states}}
+    {{#if this.model.prefixes.meta.states}}
       <div class="panel facets add">
         <div class="panel-body">
           <h4>
             State
             <span class="small">
               <i class="fas fa-question-circle"></i>
-              <BsTooltip @placement="top">
+              <BsTooltip @renderInPlace={{true}} @placement="top">
                 Filter prefixes by whether they have been assigned to a repository.
               </BsTooltip>
             </span>
           </h4>
           <ul>
-            {{#each model.prefixes.meta.states as |state|}}
+            {{#each this.model.prefixes.meta.states as |state|}}
               <li>
-                {{#if model.prefixes.query.state}}
+                {{#if this.model.prefixes.query.state}}
                   <LinkTo
                     @route="providers.show.prefixes"
                     @query={{hash state=null}}
@@ -89,16 +89,16 @@
         </div>
       </div>
     {{/if}}
-    {{#if model.prefixes.meta.years}}
+    {{#if this.model.prefixes.meta.years}}
       <div class="panel facets add">
         <div class="panel-body">
           <h4>
             Year created
           </h4>
           <ul>
-            {{#each model.prefixes.meta.years as |year|}}
+            {{#each this.model.prefixes.meta.years as |year|}}
               <li>
-                {{#if model.prefixes.query.year}}
+                {{#if this.model.prefixes.query.year}}
                   <LinkTo
                     @route="providers.show.prefixes"
                     @query={{hash year=null}}
@@ -126,16 +126,16 @@
         </div>
       </div>
     {{/if}}
-    {{#if (eq model.provider.memberType 'consortium')}}
+    {{#if (eq this.model.provider.memberType 'consortium')}}
       <div class="panel facets">
         <div class="panel-body">
           <h4>
             Consortium Organizations
           </h4>
           <ul>
-            {{#each model.prefixes.meta.providers as |consortium-organization|}}
+            {{#each this.model.prefixes.meta.providers as |consortium-organization|}}
               <li>
-                {{#if model.prefixes.query.consortium-organization-id}}
+                {{#if this.model.prefixes.query.consortium-organization-id}}
                   <LinkTo
                     @route="providers.show.prefixes"
                     @query={{hash consortium-organization-id=null}}
@@ -168,16 +168,16 @@
   </div>
   <div class="col-md-9 panel-list" id="content">
     <ModelSearch
-      @model={{model.prefixes}}
+      @model={{this.model.prefixes}}
       @name="Prefix"
       @sortable={{true}}
       @link="providers.show.prefixes"
     />
-    {{#if model.prefixes}}
-      {{#each model.prefixes as |providerPrefix|}}
+    {{#if this.model.prefixes}}
+      {{#each this.model.prefixes as |providerPrefix|}}
         <div class="panel panel-transparent" data-test-prefix>
           <div class="panel-body">
-            {{#if (not-eq model.provider.memberType 'consortium')}}
+            {{#if (not-eq this.model.provider.memberType 'consortium')}}
               <h3 class="work">
                 <LinkTo
                   @route="providers.show.prefixes.show"
@@ -230,7 +230,7 @@
                 </LinkTo>
                 <br />
               {{/each}}
-              {{#if features.useElasticsearch}}
+              {{#if this.features.useElasticsearch}}
                 <h5>
                   DOIs
                 </h5>
@@ -267,9 +267,9 @@
         </div>
       {{/each}}
       <div class="text-center">
-        {{#if (gt model.prefixes.meta.totalPages 1)}}
+        {{#if (gt this.model.prefixes.meta.totalPages 1)}}
           <PageNumbers
-            @model={{model.prefixes}}
+            @model={{this.model.prefixes}}
             @link="providers.show.prefixes"
           />
         {{/if}}

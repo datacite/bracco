@@ -92,14 +92,19 @@ const Validations = buildValidations({
     validator('date', {
       onOrAfter: '1000',
       onOrBefore: computed('model.maxMintFutureOffset', function () {
-        let mydate = (new Date().getFullYear() + Number(this.model.get('maxMintFutureOffset'))).toString();
+        let mydate = (
+          new Date().getFullYear() +
+          Number(this.model.get('maxMintFutureOffset'))
+        ).toString();
         return mydate;
       }),
       precision: 'year',
       format: 'YYYY',
       errorFormat: 'YYYY',
       message: computed('model.maxMintFutureOffset', function () {
-        return `Must be a year between 1000 and ${new Date().getFullYear() + this.model.get('maxMintFutureOffset') }.`;
+        return `Must be a year between 1000 and ${
+          new Date().getFullYear() + this.model.get('maxMintFutureOffset')
+        }.`;
       }),
       disabled: computed('model.{mode,state}', function () {
         return (

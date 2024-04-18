@@ -1,31 +1,33 @@
-<div class="panel panel-transparent">
+<div class="panel panel-transparent" id="create-consortium-organization-form">
   <div class="panel-body">
     <div class="col-md-9 col-md-offset-3">
       <h3 class="edit">
         Create Consortium Organization
       </h3>
-      {{#each flashMessages.queue as |flash|}}
+      {{#each this.flashMessages.queue as |flash|}}
         <FlashMessage @flash={{flash}} />
       {{/each}}
     </div>
     <BsForm
       @formLayout="horizontal"
+      class="form-horizontal"
       @horizontalLabelGridClass="col-md-3"
-      @model={{model.organization}}
+      @model={{this.model.organization}}
       @onSubmit={{action 'submit'}}
       @submitOnEnter={{true}} as |form|
     >
       <h3 class="member-results">
-        Organization Information
+        Organization Information 
       </h3>
       <form.element
         @controlType="hidden"
         @property="consortium"
       />
-      <ProviderId @model={{model.organization}} @form={{form}} />
+      <ProviderId @model={{this.model.organization}} @form={{form}} />
       <form.element
         @controlType="text"
         id="member-type"
+        class="form-group"
         @label="Member Type"
         @value="Consortium Organization" as |el|
       >
@@ -34,6 +36,7 @@
       <form.element
         @controlType="text"
         id="name"
+        class="form-group"
         @label="Organization Name"
         @property="name"
         @helpText="The official name of your organization." as |el|
@@ -43,16 +46,18 @@
       <form.element
         @controlType="text"
         id="display-name"
+        class="form-group"
         @label="Organization Display Name"
         @property="displayName"
         @helpText="Name of your organization as you would like it to appear in Fabrica and on DataCite’s website." as |el|
       >
         <el.control id="display-name-field" />
       </form.element>
-      {{#if features.enableDoiEstimate}}
+      {{#if this.features.enableDoiEstimate}}
         <form.element
           @controlType="text"
           id="doi-estimate"
+          class="form-group"
           @label="Estimated DOIs"
           @property="doiEstimate"
           required
@@ -64,11 +69,12 @@
       <form.element
         @controlType="power-select"
         id="ror-id"
+        class="form-group"
         @label="Organization identifier (optional)"
         @property="rorId"
         @optionLabelPath="rorId"
-        @options={{organizations}}
-        @destination={{rorId}}
+        @options={{this.organizations}}
+        @destination={{this.rorId}}
         @helpText="Organization identifiers are provided by the Research Organization Registry (ROR)." as |el|
       >
         <el.control
@@ -79,13 +85,14 @@
           @allowClear={{true}}
           @searchEnabled={{true}} as |item|
         >
-          {{if item.name item.name model.organization.rorId}}
+          {{if item.name item.name this.model.organization.rorId}}
         </el.control>
       </form.element>
       {{#if (can 'create provider')}}
         <form.element
           @controlType="text"
           id="salesforce-id"
+          class="form-group"
           @label="Salesforce ID"
           @property="salesforceId"
           @helpText="The 18 digit ID in Salesforce." as |el|
@@ -97,6 +104,7 @@
         <form.element
           @controlType="text"
           id="globus-uuid"
+          class="form-group"
           @label="Globus UUID (optional)"
           @property="globusUuid"
           @helpText="The Globus UUID used for token authentication." as |el|
@@ -108,10 +116,11 @@
         <form.element
           @controlType="power-select"
           id="tax-status"
+          class="form-group"
           @label="Tax Status"
           @property="nonProfitStatus"
-          @options={{nonProfitStatuses}}
-          @destination={{nonProfitStatus}} as |el|
+          @options={{this.nonProfitStatuses}}
+          @destination={{this.nonProfitStatus}} as |el|
         >
           <el.control
             @onChange={{action 'selectNonProfitStatus'}}
@@ -127,6 +136,7 @@
       <form.element
         @controlType="text"
         id="system-email"
+        class="form-group"
         @label="System Email"
         @property="systemEmail"
         @helpText="This is the email used for sending password reset requests and similar system notifications." as |el|
@@ -136,6 +146,7 @@
       <form.element
         @controlType="text"
         id="group-email"
+        class="form-group"
         @label="Group Email (optional)"
         @property="groupEmail"
         @helpText="A generic shared email address (such as info@datacite.org or similar) where you would like to receive communications from DataCite." as |el|
@@ -145,6 +156,7 @@
       <form.element
         @controlType="text"
         id="website"
+        class="form-group"
         @label="Website"
         @property="website (optional)"
         @helpText="Website of the organization." as |el|
@@ -154,6 +166,7 @@
       <form.element
         @controlType="text"
         id="twitter-handle"
+        class="form-group"
         @label="Twitter (optional)"
         @property="twitterHandle"
         @helpText="DataCite will follow you on twitter." as |el|
@@ -163,11 +176,12 @@
       <form.element
         @controlType="power-select"
         id="country"
+        class="form-group"
         @label="Country (optional)"
         @property="country"
         @optionLabelPath="name"
-        @options={{countries}}
-        @destination={{country}}
+        @options={{this.countries}}
+        @destination={{this.country}}
         @helpText="Country where the organization is located." as |el|
       >
         <el.control
@@ -185,10 +199,11 @@
       <form.element
         @controlType="power-select"
         id="organization-type"
+        class="form-group"
         @label="Organization Type (optional)"
         @property="organizationType"
-        @options={{organizationTypes}}
-        @destination={{organizationType}} as |el|
+        @options={{this.organizationTypes}}
+        @destination={{this.organizationType}} as |el|
       >
         <el.control
           @onChange={{action 'selectOrganizationType'}}
@@ -204,10 +219,11 @@
       <form.element
         @controlType="power-select"
         id="focus-area"
+        class="form-group"
         @label="Focus Area (optional)"
         @property="focusArea"
-        @options={{focusAreas}}
-        @destination={{focusArea}}
+        @options={{this.focusAreas}}
+        @destination={{this.focusArea}}
         @helpText="Field of research covered by organization." as |el|
       >
         <el.control
@@ -224,6 +240,7 @@
       <form.element
         @controlType="textarea"
         id="description"
+        class="form-group"
         @label="Description (optional)"
         @property="description"
         @helpText="Description of the organization. Please use markdown for formatting." as |el|
@@ -233,6 +250,7 @@
       <form.element
         @controlType="checkbox"
         id="is-active"
+        class="form-group"
         @label="Account is active"
         @property="isActive"
         @helpText="This account can manage repositories and prefixes" as |el|
@@ -254,16 +272,14 @@
             For information about our privacy practices and commitment to protecting your privacy, please
             review our
           <a
-            target="_blank"
-            rel="noreferrer"
-            href={{get (links) "PRIVACY_POLICY_URL" }}
+            target="_blank" rel="noopener noreferrer" href={{get (links) "PRIVACY_POLICY_URL" }}
           >
             Privacy Policy
           </a>
         </BsAlert>
       </div>
       <div class="col-md-9 col-md-offset-3">
-        {{#if (is-empty (provider-form-errors model.organization))}}
+        {{#if (is-empty (provider-form-errors this.model.organization))}}
           <button
             type="submit"
             id="add-organization"
@@ -275,7 +291,7 @@
         {{else}}
           <BsAlert @dismissible={{false}} @type="danger">
             To save this consortium organization, first resolve the errors with these fields:
-            {{provider-form-errors model.organization}}
+            {{provider-form-errors this.model.organization}}
             .
           </BsAlert>
           <button
@@ -287,7 +303,7 @@
             Add Consortium Organization
           </button>
         {{/if}}
-        <button class="btn btn-sm" {{action 'cancel'}}>
+        <button class="btn btn-sm" type="button" {{action 'cancel'}}>
           Cancel
         </button>
       </div>

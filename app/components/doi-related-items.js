@@ -17,6 +17,6 @@ export default Component.extend({
     },
     toggleRelatedItems() {
       this.set('showRelatedItems', !this.showRelatedItems);
-    },
-  },
+    }
+  }
 });

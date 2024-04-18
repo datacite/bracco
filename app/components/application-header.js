@@ -8,6 +8,7 @@ export default Component.extend({
   session: service(),
   currentUser: service(),
   features: service(),
+  router: service(),
 
   default: false,
   type: 'transparent',

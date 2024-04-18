@@ -141,14 +141,17 @@ export default Component.extend({
   },
   updateRelatedIdentifier(value) {
     const ark = /^ark:\/[0-9]{5}\/\S+$/;
-    const lsid = /^[uU][rR][nN]:[lL][sS][iI][dD]:(A-Za-z0-9][A-Za-z0-9()+,-.=@;$_!*'"%]):(A-Za-z0-9][A-Za-z0-9()+,-.=@;$_!*'"%]):(A-Za-z0-9][A-Za-z0-9()+,-.=@;$_!*'"%])[:]?(A-Za-z0-9][A-Za-z0-9()+,-.=@;$_!*'"%])?$/;
+    const lsid =
+      /^[uU][rR][nN]:[lL][sS][iI][dD]:(A-Za-z0-9][A-Za-z0-9()+,-.=@;$_!*'"%]):(A-Za-z0-9][A-Za-z0-9()+,-.=@;$_!*'"%]):(A-Za-z0-9][A-Za-z0-9()+,-.=@;$_!*'"%])[:]?(A-Za-z0-9][A-Za-z0-9()+,-.=@;$_!*'"%])?$/;
     const purl = {
       require_host: true,
       host_whitelist: ['purl.org', 'oclc.org']
     };
-    const arxiv = /^(arXiv:)(\d{4}.\d{4,5}|[a-z\-]+(\.[A-Z]{2})?\/\d{7})(v\d+)?/;
+    const arxiv =
+      /^(arXiv:)(\d{4}.\d{4,5}|[a-z\-]+(\.[A-Z]{2})?\/\d{7})(v\d+)?/;
     const doi = /^(10\.\d{4,5}\/.+)/;
-    const doiUrl = /^(?:(http|https):\/\/(dx.)?(doi.org|handle.test.datacite.org)?\/)(10\.\d{4,5}\/.+)/
+    const doiUrl =
+      /^(?:(http|https):\/\/(dx.)?(doi.org|handle.test.datacite.org)?\/)(10\.\d{4,5}\/.+)/;
     const bibcode = /\d{4}[A-Za-z\.\&]{5}[\w\.]{4}[ELPQ-Z\.][\d\.]{4}[A-Z]/;
     const urn = /^urn:[a-z0-9][a-z0-9-]{0,31}:[a-z0-9()+,\-.:=@;$_!*'%/?#]/;
 
@@ -228,16 +231,16 @@ export default Component.extend({
     }
   },
   selectRelationType(relationType) {
-    if (this.isMetadataRelationTypes.includes(relationType)) {
+    const selectedRelationType = relationType ? pascalCase(relationType) : null;
+    if (this.isMetadataRelationTypes.includes(selectedRelationType)) {
       this.set('isMetadataRelationType', true);
     } else {
       this.set('isMetadataRelationType', false);
       this.fragment.set('schemeType', null);
       this.fragment.set('relatedMetadataScheme', null);
-      this.fragment.set('resourceTypeGeneral', null);
       this.fragment.set('schemeUri', null);
     }
-    this.fragment.set('relationType', pascalCase(relationType));
+    this.fragment.set('relationType', selectedRelationType);
     this.set('relationTypes', relationTypeList);
   },
   selectRelatedIdentifierType(relatedIdentifierType) {
@@ -245,7 +248,8 @@ export default Component.extend({
     this.set('relatedIdentifierTypes', relatedIdentifierTypeList);
   },
   selectResourceTypeGeneral(resourceTypeGeneral) {
-    this.fragment.set('resourceTypeGeneral', pascalCase(resourceTypeGeneral));
+    const selectedResourceTypeGeneral = resourceTypeGeneral ? pascalCase(resourceTypeGeneral) : null;
+    this.fragment.set('resourceTypeGeneral', selectedResourceTypeGeneral);
     this.set('resourceTypesGeneral', resourceTypeGeneralList);
   },
   actions: {

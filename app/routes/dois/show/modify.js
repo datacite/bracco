@@ -3,6 +3,8 @@ import { inject as service } from '@ember/service';
 
 export default Route.extend({
   can: service(),
+  router: service(),
+  store: service(),
 
   model() {
     let self = this;
@@ -21,13 +23,13 @@ export default Route.extend({
         console.debug(reason);
 
         self.get('flashMessages').warning(reason);
-        self.transitionTo('/');
+        self.router.transitionTo('/');
       });
   },
 
   afterModel() {
     if (this.can.cannot('delete doi', this.modelFor('dois/show'))) {
-      this.transitionTo('index');
+      this.router.transitionTo('index');
     } else {
       this.modelFor('dois/show').set('mode', 'modify');
     }

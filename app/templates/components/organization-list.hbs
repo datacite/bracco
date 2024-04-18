@@ -1,18 +1,18 @@
 <div class="col-md-3">
-  {{#if (can 'create organization' model)}}
+  {{#if (can 'create organization' this.model)}}
     <div class="panel facets">
       <div class="panel-body">
         <div class="btn-toolbar">
           <div class="btn-group btn-group-sm">
             <LinkTo
               @route="providers.show.organizations.new"
-              @model={{model.provider.id}}
+              @model={{this.model.provider.id}}
               class="btn btn-warning"
-              @id="add-organization"
+              id="add-organization"
             >
               <i class="fas fa-plus"></i>
               Add
-              {{if media.isXl 'Consortium '}}
+              {{if this.media.isXl 'Consortium '}}
               Organization
             </LinkTo>
           </div>
@@ -26,22 +26,22 @@
       </div>
     </div>
   {{/if}}
-  {{#if (or model.organizations.meta.years model.organizations.query.year)}}
+  {{#if (or this.model.organizations.meta.years this.model.organizations.query.year)}}
     <div class="panel facets add">
       <div class="panel-body">
         <h4>
           Year joined
         </h4>
         <ul>
-          {{#if model.organizations.meta.years}}
-            {{#each model.organizations.meta.years as |year|}}
+          {{#if this.model.organizations.meta.years}}
+            {{#each this.model.organizations.meta.years as |year|}}
               <li>
-                {{#if model.organizations.query.year}}
-                  <LinkTo @route={{link}} @query={{hash year=''}}>
+                {{#if this.model.organizations.query.year}}
+                  <LinkTo @route={{this.link}} @query={{hash year=''}}>
                     <i class="far fa-check-square"></i>
                   </LinkTo>
                 {{else}}
-                  <LinkTo @route={{link}} @query={{hash year=year.id}}>
+                  <LinkTo @route={{this.link}} @query={{hash year=year.id}}>
                     <i class="far fa-square"></i>
                   </LinkTo>
                 {{/if}}
@@ -56,11 +56,11 @@
             {{/each}}
           {{else}}
             <li>
-              <LinkTo @route={{link}} @query={{hash year=''}}>
+              <LinkTo @route={{this.link}} @query={{hash year=''}}>
                 <i class="far fa-check-square"></i>
               </LinkTo>
               <div class="facet-title">
-                {{model.query.year}}
+                {{this.model.query.year}}
               </div>
               <span class="number pull-right">
                 0
@@ -72,22 +72,22 @@
       </div>
     </div>
   {{/if}}
-  {{#if (or model.organizations.meta.regions model.organizations.query.region)}}
+  {{#if (or this.model.organizations.meta.regions this.model.organizations.query.region)}}
     <div class="panel facets">
       <div class="panel-body">
         <h4>
           Region
         </h4>
         <ul>
-          {{#if model.organizations.meta.regions}}
-            {{#each model.organizations.meta.regions as |region|}}
+          {{#if this.model.organizations.meta.regions}}
+            {{#each this.model.organizations.meta.regions as |region|}}
               <li>
-                {{#if model.organizations.query.region}}
-                  <LinkTo @route={{link}} @query={{hash region=''}}>
+                {{#if this.model.organizations.query.region}}
+                  <LinkTo @route={{this.link}} @query={{hash region=''}}>
                     <i class="far fa-check-square"></i>
                   </LinkTo>
                 {{else}}
-                  <LinkTo @route={{link}} @query={{hash region=region.id}}>
+                  <LinkTo @route={{this.link}} @query={{hash region=region.id}}>
                     <i class="far fa-square"></i>
                   </LinkTo>
                 {{/if}}
@@ -102,11 +102,11 @@
             {{/each}}
           {{else}}
             <li>
-              <LinkTo @route={{link}} @query={{hash region=''}}>
+              <LinkTo @route={{this.link}} @query={{hash region=''}}>
                 <i class="far fa-check-square"></i>
               </LinkTo>
               <div class="facet-title">
-                {{model.query.region}}
+                {{this.model.query.region}}
               </div>
               <span class="number pull-right">
                 0
@@ -121,8 +121,8 @@
   {{#if (can 'create organization')}}
     {{#if
       (or
-        model.organizations.meta.organizationTypes
-        model.organizations.query.organization-type
+        this.model.organizations.meta.organizationTypes
+        this.model.organizations.query.organization-type
       )
     }}
       <div class="panel facets">
@@ -131,21 +131,21 @@
             Organization Type
           </h4>
           <ul>
-            {{#if model.organizations.meta.organizationTypes}}
+            {{#if this.model.organizations.meta.organizationTypes}}
               {{#each
-                model.organizations.meta.organizationTypes as |organizationType|
+                this.model.organizations.meta.organizationTypes as |organizationType|
               }}
                 <li>
-                  {{#if model.organizations.query.organization-type}}
+                  {{#if this.model.organizations.query.organization-type}}
                     <LinkTo
-                      @route={{link}}
+                      @route={{this.link}}
                       @query={{hash organization-type=''}}
                     >
                       <i class="far fa-check-square"></i>
                     </LinkTo>
                   {{else}}
                     <LinkTo
-                      @route={{link}}
+                      @route={{this.link}}
                       @query={{hash organization-type=organizationType.id}}
                     >
                       <i class="far fa-square"></i>
@@ -162,11 +162,11 @@
               {{/each}}
             {{else}}
               <li>
-                <LinkTo @route={{link}} @query={{hash organization-type=''}}>
+                <LinkTo @route={{this.link}} @query={{hash organization-type=''}}>
                   <i class="far fa-check-square"></i>
                 </LinkTo>
                 <div class="facet-title">
-                  <model.query.organization-type />
+                  {{this.model.query.organization-type}}
                 </div>
                 <span class="number pull-right">
                   0
@@ -180,7 +180,7 @@
     {{/if}}
     {{#if
       (or
-        model.organizations.meta.focusAreas model.organizations.query.focus-area
+        this.model.organizations.meta.focusAreas this.model.organizations.query.focus-area
       )
     }}
       <div class="panel facets">
@@ -189,16 +189,16 @@
             Focus Area
           </h4>
           <ul>
-            {{#if model.organizations.meta.focusAreas}}
-              {{#each model.organizations.meta.focusAreas as |focusArea|}}
+            {{#if this.model.organizations.meta.focusAreas}}
+              {{#each this.model.organizations.meta.focusAreas as |focusArea|}}
                 <li>
-                  {{#if model.organizations.query.focus-area}}
-                    <LinkTo @route={{link}} @query={{hash focus-area=''}}>
+                  {{#if this.model.organizations.query.focus-area}}
+                    <LinkTo @route={{this.link}} @query={{hash focus-area=''}}>
                       <i class="far fa-check-square"></i>
                     </LinkTo>
                   {{else}}
                     <LinkTo
-                      @route={{link}}
+                      @route={{this.link}}
                       @query={{hash focus-area=focusArea.id}}
                     >
                       <i class="far fa-square"></i>
@@ -215,11 +215,11 @@
               {{/each}}
             {{else}}
               <li>
-                <LinkTo @route={{link}} @query={{hash focus-area=''}}>
+                <LinkTo @route={{this.link}} @query={{hash focus-area=''}}>
                   <i class="far fa-check-square"></i>
                 </LinkTo>
                 <div class="facet-title">
-                  <model.organizations.query.focus-area />
+                  {{this.model.organizations.query.focus-area}}
                 </div>
                 <span class="number pull-right">
                   0
@@ -234,27 +234,27 @@
   {{/if}}
 </div>
 <div class="col-md-9 panel-list" id="content">
-  {{#if searchable}}
+  {{#if this.searchable}}
     <ModelSearch
-      @model={{model.organizations}}
+      @model={{this.model.organizations}}
       @name="Consortium Organization"
       @sortable={{true}}
       @link="providers.show.organizations"
     />
   {{/if}}
-  {{#if model.organizations}}
-    {{#each model.organizations as |provider|}}
+  {{#if this.model.organizations}}
+    {{#each this.model.organizations as |provider|}}
       <div class="panel panel-transparent" data-test-organization>
         <div class="panel-body">
           <h3 class="work">
             <LinkTo @route="providers.show" @model={{provider.id}}>
               {{provider.displayName}}
             </LinkTo>
-            {{#if (not provider.isActive)}}
+            {{#unless provider.isActive}}
               <span class="label label-warning-inv">
                 Inactive
               </span>
-            {{/if}}
+            {{/unless}}
           </h3>
           <h5>
             Member ID
@@ -302,8 +302,8 @@
       </div>
     {{/each}}
     <div class="text-center">
-      {{#if (gt model.organizations.meta.totalPages 1)}}
-        <PageNumbers @model={{model.organizations}} @link={{link}} />
+      {{#if (gt this.model.organizations.meta.totalPages 1)}}
+        <PageNumbers @model={{this.model.organizations}} @link={{this.link}} />
       {{/if}}
     </div>
   {{else}}

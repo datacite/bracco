@@ -6,12 +6,16 @@ export default Route.extend({
   features: service(),
   flashMessages: service(),
   headData: service(),
+  router: service(),
+  store: service(),
 
   model(params) {
     let self = this;
 
     return this.store
-      .findRecord('repository', params.repository_id.toLowerCase(), { include: 'provider,prefixes' })
+      .findRecord('repository', params.repository_id.toLowerCase(), {
+        include: 'provider,prefixes'
+      })
       .then(function (repository) {
         self.headData.set('title', repository.name);
         self.headData.set('description', repository.description);
@@ -23,20 +27,21 @@ export default Route.extend({
         console.debug(reason);
 
         self.get('flashMessages').warning(reason);
-        self.transitionTo('index');
+        self.router.transitionTo('index');
       });
   },
 
   afterModel(model) {
     if (this.can.cannot('read repository', model)) {
-      this.transitionTo('index');
+      this.router.transitionTo('index');
     } else {
       if (this.paramsFor(this.routeName).assignedPrefix) {
-        this.flashMessages.success('Assigned prefix is: ' + this.paramsFor(this.routeName).assignedPrefix);
+        this.flashMessages.success(
+          'Assigned prefix is: ' + this.paramsFor(this.routeName).assignedPrefix
+        );
       }
     }
   },
-
 
   actions: {
     queryParamsDidChange() {

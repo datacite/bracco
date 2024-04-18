@@ -5,10 +5,10 @@
     <IndexHeader />
 
     <div class="content">
-      {{#if (can "read messages" model)}}
+      {{#if (can "read messages" this.model)}}
         <div class="row">
           <div class="col-md-9">
-            {{#each flashMessages.queue as |flash|}}
+            {{#each this.flashMessages.queue as |flash|}}
               <FlashMessage @flash={{flash}} />
             {{/each}}
           </div>
@@ -17,64 +17,64 @@
 
       <div class="row">
         <div class='col-md-3'>
-          {{#if (can "update provider" model)}}
+          {{#if (can "update provider" this.model)}}
             <div class="panel facets">
               <div class="panel-body">
                 <div class="btn-toolbar">
                   <div class="btn-group-vertical btn-group-sm">
-                    <LinkTo @route="change" class="btn btn-warning" @id="set-password-provider"><i class="fas fa-key"></i> Set Password</LinkTo>
-                    <LinkTo @route="edit" class="btn btn-warning" @id="edit-provider"><i class="fas fa-pencil-alt"></i> Update Account</LinkTo>
+                    <LinkTo @route="change" class="btn btn-warning" id="set-password-provider"><i class="fas fa-key"></i> Set Password</LinkTo>
+                    <LinkTo @route="edit" class="btn btn-warning" id="edit-provider"><i class="fas fa-pencil-alt"></i> Update Account</LinkTo>
                   </div>
                 </div>
               </div>
             </div>
           {{/if}}
 
-          <RepositorySidebar @model={{model}} />
+          <RepositorySidebar @model={{this.model}} />
         </div>
         <div class="col-md-9">
           <div class="panel panel-transparent">
             <div class="panel-body">
               <h5>Account ID</h5>
-              {{model.symbol}}
+              {{this.model.symbol}}
 
-              {{#if model.rorId}}
+              {{#if this.model.rorId}}
                 <h5>ROR ID</h5>
-                <a href="{{model.rorId}}">{{model.rorId}}</a>
+                <a href="{{this.model.rorId}}">{{this.model.rorId}}</a>
               {{/if}}
 
               <h5>System Email</h5>
-              <a href="mailto:{{model.systemEmail}}">{{model.systemEmail}}</a>
+              <a href="mailto:{{this.model.systemEmail}}">{{this.model.systemEmail}}</a>
 
-              {{#if model.groupEmail}}
+              {{#if this.model.groupEmail}}
                 <h5>Group Email</h5>
-                <a href="mailto:{{model.groupEmail}}">{{model.groupEmail}}</a>
+                <a href="mailto:{{this.model.groupEmail}}">{{this.model.groupEmail}}</a>
               {{/if}}
 
-              {{#if model.website}}
+              {{#if this.model.website}}
                 <h5>Website</h5>
-                <a href="{{model.website}}">{{model.website}}</a>
+                <a href="{{this.model.website}}">{{this.model.website}}</a>
               {{/if}}
 
-              {{#if model.twitterHandle}}
+              {{#if this.model.twitterHandle}}
                 <h5>Twitter</h5>
-                <a href="{{twitter-url model.twitterHandle}}">{{twitter-url model.twitterHandle}}</a>
+                <a href="{{twitter-url this.model.twitterHandle}}">{{twitter-url this.model.twitterHandle}}</a>
               {{/if}}
 
-              {{#if model.country}}
+              {{#if this.model.country}}
                 <h5>Country</h5>
-                {{model.country.name}}
+                {{this.model.country.name}}
               {{/if}}
 
-              {{#if model.description}}
+              {{#if this.model.description}}
                 <h5>Description</h5>
-                {{markdown-to-html model.description}}
+                {{markdown-to-html this.model.description}}
               {{/if}}
 
-              {{#if (not model.hasPassword)}}
+              {{#unless this.model.hasPassword}}
                 <h5>Password</h5>
                 <span class="small icon-warning">has not been set</span>
-              {{/if}}
+              {{/unless}}
             </div>
           </div>
         </div>

@@ -18,6 +18,6 @@ export default Component.extend({
     },
     toggleGeoLocations() {
       this.set('showGeoLocations', !this.showGeoLocations);
-    },
-  },
+    }
+  }
 });

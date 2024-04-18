@@ -2,13 +2,13 @@
   <label for="funder-name" class="subtitle">Funder Name</label>
 </div>
   
-<div class="power-select-fragment" data-test-funder-name>
-  <@form.element @controlType="power-select" @options={{funders}} @value={{fragment.funderName}} @destination={{fragment.funderName}} as |el|>
-    <el.control @searchEnabled={{true}} @onChange={{action "selectFunderReference"}} @placeholder="Search Funders" @onKeydown={{action "createOnEnter"}} @search={{action "searchFundingReferences"}} @searchPlaceholder="Type to search..." @allowClear={{true}} @noMatchesMessage="Press ENTER to add new funder name." @allowClear={{true}} @disabled={{disabled}} as |item|>
-      {{if item.name item.name fragment.funderName}}
+<div class="power-select-fragment" doi-funder-name data-test-funder-name>
+  <@form.element @controlType="power-select" @options={{this.funders}} @value={{this.fragment.funderName}} @destination={{this.fragment.funderName}} as |el|>
+    <el.control @searchEnabled={{true}} @onChange={{action "selectFunderReference"}} @placeholder="Search Funders" @onKeydown={{action "createOnEnter"}} @search={{action "searchFundingReferences"}} @searchPlaceholder="Type to search..." @allowClear={{true}} @noMatchesMessage="Press ENTER to add new funder name." @allowClear={{true}} @disabled={{this.disabled}} as |item|>
+      {{if item.name item.name this.fragment.funderName}}
     </el.control>
   <div class="help-block">
-    Funder names and identifiers are provided by the <a target="_blank" rel="noopener" href="https://www.crossref.org/services/funder-registry/">Crossref Funder Registry</a>.
+    Funder names and identifiers are provided by the <a target="_blank" rel="noopener noreferrer" href="https://www.crossref.org/services/funder-registry/">Crossref Funder Registry</a>.
   </div>
   </@form.element>
 </div>
@@ -17,7 +17,7 @@
   <label for="funder-identifier" class="subtitle">Funder Identifier</label>
 </div>
 <div class="input-group">
-  <input type="text" class="form-control funder-identifier-field" value={{fragment.funderIdentifier}} placeholder="Funder Identifier"
+  <input type="text" class="form-control funder-identifier-field" value={{this.fragment.funderIdentifier}} placeholder="Funder Identifier"
     disabled={{this.isCrossrefId}} oninput={{action "updateFunderIdentifier" value="target.value"}}
     data-test-funder-identifier />
 
@@ -26,23 +26,23 @@
   </div>
 
   <span class="input-group-btn">
-    <BsButton @outline={{true}} @onClick={{action "deleteFundingReference" index}}><i class="fas fa-trash"></i></BsButton>
+    <BsButton @outline={{true}} @onClick={{action "deleteFundingReference" this.index}}><i class="fas fa-trash"></i></BsButton>
   </span>
 </div>
 
 <div class="power-select-label">
   <label for="funderIdentifierType" class="subtitle">Funder Identifier Type</label>
 </div>
-<div class="power-select-fragment" data-test-funder-identifier-type>
-  <@form.element @controlType="power-select" @value={{fragment.funderIdentifierType}} @helpText="The type of funder identifier, one of Crossref Funder ID, GRID, ISNI, or ROR." @options={{funderIdentifierTypeList}} @destination={{fragment.funderIdentifierType}} as |el|>
-    <el.control @onChange={{action "selectFunderIdentifierType"}} @allowClear={{true}} @placeholder="Select Funder Identifier Type" @disabled={{isCrossrefId}} />
+<div class="power-select-fragment" doi-funder-identifier-type data-test-funder-identifier-type>
+  <@form.element @controlType="power-select" @value={{this.fragment.funderIdentifierType}} @helpText="The type of funder identifier, one of Crossref Funder ID, GRID, ISNI, or ROR." @options={{this.funderIdentifierTypeList}} @destination={{this.fragment.funderIdentifierType}} as |el|>
+    <el.control @onChange={{action "selectFunderIdentifierType"}} @allowClear={{true}} @placeholder="Select Funder Identifier Type" @disabled={{this.isCrossrefId}} />
   </@form.element>
 </div>
 
 <div class="power-select-label">
   <label for="award-number" class="subtitle">Award Number</label>
 </div>
-<input type="text" class="form-control award-number-field" value={{fragment.awardNumber}} placeholder="Award Number"
+<input type="text" class="form-control award-number-field" value={{this.fragment.awardNumber}} placeholder="Award Number"
   oninput={{action "updateAwardNumber" value="target.value"}} data-test-award-number />
 
 <div class="help-block help-block-fragment award-number-field}}">
@@ -53,7 +53,7 @@
   <label for="award-title" class="subtitle">Award Title</label>
 </div>
 
-<input type="text" class="form-control award-title-field" value={{fragment.awardTitle}} placeholder="Award Title"
+<input type="text" class="form-control award-title-field" value={{this.fragment.awardTitle}} placeholder="Award Title"
   oninput={{action "updateAwardTitle" value="target.value"}} data-test-award-title />
 
 <div class="help-block help-block-fragment award-title-field}}">
@@ -64,11 +64,11 @@
   <label for="award-uri" class="subtitle">Award URI</label>
 </div>
 
-<input type="text" class="form-control award-uri-field" value={{fragment.awardUri}} placeholder="Award URI"
+<input type="text" class="form-control award-uri-field" value={{this.fragment.awardUri}} placeholder="Award URI"
   oninput={{action "updateAwardUri" value="target.value"}} data-test-award-uri />
 
 <div class="help-block help-block-fragment award-uri-field">
-  The URI leading to a page provided by the funder for more information about the award (grant). For example, <a target="_blank" rel="noopener" href="https://www.moore.org/grants/list/GBMF3859.01">https://www.moore.org/grants/list/GBMF3859.01</a>.
+  The URI leading to a page provided by the funder for more information about the award (grant). For example, <a target="_blank" rel="noopener noreferrer" href="https://www.moore.org/grants/list/GBMF3859.01">https://www.moore.org/grants/list/GBMF3859.01</a>.
 </div>
 
 <hr />

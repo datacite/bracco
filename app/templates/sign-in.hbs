@@ -8,8 +8,8 @@
           <div class="register-card">
             <h3 class="title">Sign In</h3>
             
-            {{#if showGlobus}}
-              <a href="{{oidcAuthUrl}}" class="btn btn-block btn-social btn-globus btn-fill"><img id="globus-logo" src="{{globusLogoUrl}}" alt="Globus icon"/> Sign In with Globus</a>
+            {{#if this.showGlobus}}
+              <a href="{{this.oidcAuthUrl}}" class="btn btn-block btn-social btn-globus btn-fill"><img id="globus-logo" src="{{this.globusLogoUrl}}" alt="Globus icon" /> Sign In with Globus</a>
               
               <div id="or">or</div>
             {{/if}}
@@ -22,13 +22,13 @@
                 <el.control id="password-field" />
               </form.element>
 
-              {{#if errorMessage}}
-                <div class="alert alert-danger">{{errorMessage}}</div>
+              {{#if this.errorMessage}}
+                <div class="alert alert-danger">{{this.errorMessage}}</div>
               {{/if}}
 
-              <div>
-                <LinkTo @route="reset">Forgot password?</LinkTo> •
-                <a target="_blank" rel="noopener" href={{get (links) "CREATE_A_FABRICA_ACCOUNT_URL" }}>Need an account?</a>
+              <div><!-- need a fix here -->
+                <LinkTo @route="reset">Forgot password?</LinkTo> • 
+                <a target="_blank" rel="noopener noreferrer" href={{get (links) "CREATE_A_FABRICA_ACCOUNT_URL" }}>Need an account?</a>
               </div>
 
               <div class="pseudo-footer">

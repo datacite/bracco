@@ -17,7 +17,7 @@ export default Route.extend({
       certificate: [],
       issn: this.store.createFragment('issn'),
       serviceContact: this.store.createFragment('contact-fragment')
-    })
+    });
 
     repository.get('language').pushObject('');
     repository.get('repositoryType').pushObject('');

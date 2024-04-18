@@ -279,7 +279,7 @@ describe('ACCEPTANCE: STAFF_ADMIN | CONTACTS', () => {
         cy.wait(waitTime);
         cy.get('input#confirm-delete-field').click({ force: true }).type('Delete', { force: true });
         cy.wait(waitTime);
-        cy.get('#confirm-delete').should('have.class', 'has-success');
+        cy.get('#confirm-delete-field').should('have.class', 'is-valid');
 
         cy.get('button#delete').contains('Delete').click({force: true});
         cy.wait(waitTime3);

@@ -4,7 +4,7 @@ import { isPresent } from '@ember/utils';
 
 const validXml = BaseValidator.extend({
   validate(value) {
-    parseString(value, function(err, result) {
+    parseString(value, function (err, result) {
       if (err) {
         // was not well-formed
         let message = 'The XML formatting is not valid.';
@@ -13,13 +13,13 @@ const validXml = BaseValidator.extend({
         return isPresent(result);
       }
     });
-  },
+  }
 });
 
 validXml.reopenClass({
   getDependentsFor() {
-    return [ 'xml' ];
-  },
+    return ['xml'];
+  }
 });
 
 export default validXml;

@@ -4,20 +4,22 @@
       <h3 class="edit">
         Update Contact
       </h3>
-      {{#each flashMessages.queue as |flash|}}
+      {{#each this.flashMessages.queue as |flash|}}
         <FlashMessage @flash={{flash}} />
       {{/each}}
     </div>
     <BsForm
       @formLayout="horizontal"
+      class="form-horizontal"
       @horizontalLabelGridClass="col-md-3"
-      @model={{model}}
-      @onSubmit={{action 'submit' model}}
+      @model={{this.model}}
+      @onSubmit={{action 'submit' this.model}}
       @submitOnEnter={{true}} as |form|
     >
       <form.element
         @controlType="text"
         id="givenName"
+        class="form-group"
         @label="Given Name"
         @property="givenName" as |el|
       >
@@ -26,6 +28,7 @@
       <form.element
         @controlType="text"
         id="familyName"
+        class="form-group"
         @label="Family Name"
         @property="familyName"as |el|
       >
@@ -34,6 +37,7 @@
       <form.element
         @controlType="email"
         id="email"
+        class="form-group"
         @label="Email"
         @property="email"
         @helpText="Please enter a valid email address." as |el|
@@ -43,6 +47,7 @@
       <form.element
         @controlType="text"
         id="roles"
+        class="form-group"
         @label="Roles"
         @property="roleNameString"
         @helpText="Please assign roles in the
@@ -64,9 +69,7 @@
           For information about our privacy practices and commitment to protecting your privacy, please 
           review our
           <a
-            target="_blank"
-            rel="noreferrer"
-            href={{get (links) "PRIVACY_POLICY_URL" }}
+            target="_blank" rel="noopener noreferrer" href={{get (links) "PRIVACY_POLICY_URL" }}
           >
             Privacy Policy 
           </a>
@@ -74,7 +77,7 @@
         </BsAlert>
       </div>
       <div class="col-md-9 col-md-offset-3">
-        {{#if (is-empty (contact-form-errors model))}}
+        {{#if (is-empty (contact-form-errors this.model))}}
           <button
             type="submit"
             id="update-contact"
@@ -86,7 +89,7 @@
         {{else}}
           <BsAlert @dismissible={{false}} @type="danger">
             To save this contact, first resolve the errors with these fields:
-            {{contact-form-errors model}}
+            {{contact-form-errors this.model}}
             .
           </BsAlert>
           <button
@@ -98,7 +101,7 @@
             Update Contact
           </button>
         {{/if}}
-        <button class="btn btn-sm" {{action 'cancel' model}}>
+        <button class="btn btn-sm" type="button" {{action 'cancel' this.model}}>
           Cancel
         </button>
       </div>

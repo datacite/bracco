@@ -3,55 +3,55 @@
 
   <div class="panel panel-transparent">
     <div class="panel-body">
-      The URL <a target="_blank" rel="noopener" href="{{model.url}}">{{model.url}}</a> registered for
-      this DOI was last checked <strong>{{moment-from model.landingPage.checked }}</strong> on 
-      {{format-time model.landingPage.checked year='numeric' month='long' day='numeric'}}.
+      The URL <a target="_blank" rel="noopener noreferrer" href="{{this.model.url}}">{{this.model.url}}</a> registered for
+      this DOI was last checked <strong>{{moment-from this.model.landingPage.checked }}</strong> on 
+      {{format-time this.model.landingPage.checked year='numeric' month='long' day='numeric'}}.
 
       <ul class="checkbox">
         <li>
-          {{#if isFound.isChecked}}
+          {{#if this.isFound.isChecked}}
             <i class="far fa-check-circle"></i>
-            {{isFound.text}}
-            <div class="help-block checkbox-list">{{{isFound.helpText}}}</div>
+            {{this.isFound.text}}
+            <div class="help-block checkbox-list">{{{this.isFound.helpText}}}</div>
           {{else}}
             <i class="far fa-circle"></i>
-            {{isFound.text}}
-            <div class="help-block checkbox-list text-warning">{{{isFound.helpText}}}</div>
+            {{this.isFound.text}}
+            <div class="help-block checkbox-list text-warning">{{{this.isFound.helpText}}}</div>
           {{/if}}
         </li>
-        {{#if isFound.isChecked}}
+        {{#if this.isFound.isChecked}}
           <li>
-            {{#if hasLandingPage.isChecked}}
+            {{#if this.hasLandingPage.isChecked}}
               <i class="far fa-check-circle"></i>
-              {{hasLandingPage.text}}
-              <div class="help-block checkbox-list">{{{hasLandingPage.helpText}}}</div>
+              {{this.hasLandingPage.text}}
+              <div class="help-block checkbox-list">{{{this.hasLandingPage.helpText}}}</div>
             {{else}}
               <i class="far fa-circle"></i>
-              {{hasLandingPage.text}}
-              <div class="help-block checkbox-list text-warning">{{{hasLandingPage.helpText}}}</div>
+              {{this.hasLandingPage.text}}
+              <div class="help-block checkbox-list text-warning">{{{this.hasLandingPage.helpText}}}</div>
             {{/if}}
           </li>
           <li>
-            {{#if hasDoi.isChecked}}
+            {{#if this.hasDoi.isChecked}}
               <i class="far fa-check-circle"></i>
-              {{hasDoi.text}}
-              <div class="help-block checkbox-list">{{{hasDoi.helpText}}}</div>
+              {{this.hasDoi.text}}
+              <div class="help-block checkbox-list">{{{this.hasDoi.helpText}}}</div>
             {{else}}
               <i class="far fa-circle"></i>
-              {{hasDoi.text}}
-              <div class="help-block checkbox-list text-warning">{{{hasDoi.helpText}}}</div>
+              {{this.hasDoi.text}}
+              <div class="help-block checkbox-list text-warning">{{{this.hasDoi.helpText}}}</div>
             {{/if}}
           </li>
-          {{#if (eq model.types.resourceTypeGeneral 'Dataset')}}
+          {{#if (eq this.model.types.resourceTypeGeneral 'Dataset')}}
             <li>
-              {{#if hasSchemaOrg.isChecked}}
+              {{#if this.hasSchemaOrg.isChecked}}
                 <i class="far fa-check-circle"></i>
-                {{hasSchemaOrg.text}}
-                <div class="help-block checkbox-list">{{{hasSchemaOrg.helpText}}}</div>
+                {{this.hasSchemaOrg.text}}
+                <div class="help-block checkbox-list">{{{this.hasSchemaOrg.helpText}}}</div>
               {{else}}
                 <i class="far fa-circle"></i>
-                {{hasSchemaOrg.text}}
-                <div class="help-block checkbox-list text-warning">{{{hasSchemaOrg.helpText}}}</div>
+                {{this.hasSchemaOrg.text}}
+                <div class="help-block checkbox-list text-warning">{{{this.hasSchemaOrg.helpText}}}</div>
               {{/if}}
             </li>
           {{/if}}

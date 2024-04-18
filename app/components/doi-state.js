@@ -2,9 +2,9 @@ import Component from '@ember/component';
 import { A } from '@ember/array';
 
 const stateList = {
-  draft: [ 'draft', 'registered', 'findable' ],
-  registered: [ 'registered', 'findable' ],
-  findable: [ 'registered', 'findable' ],
+  draft: ['draft', 'registered', 'findable'],
+  registered: ['registered', 'findable'],
+  findable: ['registered', 'findable']
 };
 
 export default Component.extend({
@@ -43,6 +43,6 @@ export default Component.extend({
     },
     setStates(state) {
       this.setStates(state);
-    },
-  },
+    }
+  }
 });

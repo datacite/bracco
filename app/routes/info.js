@@ -6,6 +6,8 @@ export default Route.extend({
   currentUser: service(),
   flashMessages: service(),
   prefixes: service(),
+  router: service(),
+  store: service(),
 
   model() {
     if (this.can.can('read index')) {
@@ -19,14 +21,14 @@ export default Route.extend({
           console.debug(reason);
 
           self.get('flashMessages').warning(reason);
-          self.transitionTo('index');
+          self.router.transitionTo('index');
         });
     }
   },
 
   afterModel() {
     if (this.can.cannot('read index') && this.currentUser) {
-      this.transitionTo('index');
+      this.router.transitionTo('index');
     }
   },
 

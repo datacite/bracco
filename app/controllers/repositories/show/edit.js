@@ -4,11 +4,13 @@ import { A } from '@ember/array';
 import { capitalize } from '@ember/string';
 import langs from 'langs';
 import { computed } from '@ember/object';
-import { clientTypeList, softwareList } from 'bracco/models/repository'
+import { clientTypeList, softwareList } from 'bracco/models/repository';
 
 export default Controller.extend({
   currentUser: service(),
   store: service(),
+  router: service(),
+  flashMessages: service(),
 
   edit: false,
   change: false,
@@ -20,8 +22,10 @@ export default Controller.extend({
   softwares: softwareList,
   clientTypeList,
   clientTypes: clientTypeList,
-  clientType: computed('model.clientType', function() {
-    return this.clientTypeList.find(item => item.value === this.get('model.clientType'));
+  clientType: computed('clientTypeList', 'model.clientType', function () {
+    return this.clientTypeList.find(
+      (item) => item.value === this.get('model.clientType')
+    );
   }),
 
   init(...args) {
@@ -54,10 +58,14 @@ export default Controller.extend({
             self.model.set('re3data', 'https://doi.org/' + repo.get('id'));
             self.model.set('name', repo.get('repositoryName'));
             self.model.set('description', repo.get('description'));
-            self.model.set(
-              'alternateName',
-              A(repo.get('additionalNames')).get('firstObject').text
-            );
+            if (repo.get('additionalNames').length > 0) {
+              self.model.set(
+                'alternateName',
+                A(repo.get('additionalNames')).get('firstObject').text
+              );
+            } else {
+              self.model.set('alternateName', null);
+            }
             self.model.set('url', repo.get('repositoryUrl'));
             if (repo.get('software').length > 0) {
               let software = repo.get('software')[0].name;
@@ -82,8 +90,11 @@ export default Controller.extend({
                 A(repo.get('types')).mapBy('text')
               );
             }
-            if (repo.get('subjects').length > 0  && self.model.get('isDisciplinary')) {
-                self.model.set('subjects', repo.get('fosSubjects'));
+            if (
+              repo.get('subjects').length > 0 &&
+              self.model.get('isDisciplinary')
+            ) {
+              self.model.set('subjects', repo.get('fosSubjects'));
             }
             if (repo.get('certificates').length > 0) {
               self.model.set(
@@ -133,7 +144,7 @@ export default Controller.extend({
       repository
         .save()
         .then(function (repository) {
-          self.transitionToRoute('repositories.show', repository);
+          self.router.transitionTo('repositories.show', repository);
         })
         .catch(function (reason) {
           console.debug(reason);
@@ -141,7 +152,7 @@ export default Controller.extend({
     },
     cancel() {
       this.model.rollbackAttributes();
-      this.transitionToRoute('repositories.show', this.model);
+      this.router.transitionTo('repositories.show', this.model);
     }
   }
 });

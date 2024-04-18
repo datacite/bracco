@@ -8,6 +8,8 @@ import { validator, buildValidations } from 'ember-cp-validations';
 import { fragment } from 'ember-data-model-fragments/attributes';
 import addressFormatter from '@fragaria/address-formatter';
 import ENV from 'bracco/config/environment';
+import { inject as service } from '@ember/service';
+import validatePwdInputs from 'bracco/utils/validate-pwd-inputs';
 
 export const organizationTypeList = [
   'researchInstitution',
@@ -97,29 +99,29 @@ const Validations = buildValidations({
   passwordInput: [
     validator('presence', {
       presence: true,
-      disabled: computed('model', function () {
-        return this.model.get('keepPassword');
+      disabled: computed('model', 'model.router.currentRouteName', function () {
+        return !validatePwdInputs(this.model.router.currentRouteName);
       })
     }),
     validator('length', {
       min: 8,
-      disabled: computed('model', function () {
-        return this.model.get('keepPassword');
+      disabled: computed('model', 'model.router.currentRouteName', function () {
+        return !validatePwdInputs(this.model.router.currentRouteName);
       })
     })
   ],
   confirmPasswordInput: [
     validator('presence', {
       presence: true,
-      disabled: computed('model', function () {
-        return this.model.get('keepPassword');
+      disabled: computed('model', 'model.router.currentRouteName', function () {
+        return !validatePwdInputs(this.model.router.currentRouteName);
       })
     }),
     validator('confirmation', {
       on: 'passwordInput',
       message: 'Password does not match',
-      disabled: computed('model', function () {
-        return this.model.get('keepPassword');
+      disabled: computed('model', 'model.router.currentRouteName', function () {
+        return !validatePwdInputs(this.model.router.currentRouteName);
       })
     })
   ],
@@ -207,8 +209,7 @@ const Validations = buildValidations({
     })
   ],
   'billingInformation.state': [validator('billing-state')],
-  doiEstimate:
-  [
+  doiEstimate: [
     validator('presence', {
       presence: true,
       ignoreBlank: true,
@@ -219,7 +220,7 @@ const Validations = buildValidations({
           this.model.get('memberType') !== 'consortium_organization' ||
           !this.model.get('memberType') || // memberType is null for admin account
           !ENV.featureFlags['enable-doi-estimate']
-        )
+        );
       })
     }),
     validator('number', {
@@ -232,13 +233,15 @@ const Validations = buildValidations({
           this.model.get('memberType') !== 'consortium_organization' ||
           !this.model.get('memberType') || // memberType is null for admin account
           !ENV.featureFlags['enable-doi-estimate']
-        )
+        );
       })
     })
   ]
 });
 
 export default Model.extend(Validations, {
+  router: service(),
+
   consortium: belongsTo('provider', {
     inverse: 'consortiumOrganizations',
     async: true
@@ -272,7 +275,6 @@ export default Model.extend(Validations, {
   passwordInput: attr('string'),
   nonProfitStatus: attr('string'),
   hasPassword: attr('boolean'),
-  keepPassword: attr('boolean', { defaultValue: true }),
   rorId: attr('string'),
   salesforceId: attr('string'),
   twitterHandle: attr('string'),
@@ -294,10 +296,10 @@ export default Model.extend(Validations, {
     return this.id.toUpperCase();
   }),
   hasRequiredContacts: computed(
+    'billingContact.email',
     'memberType',
-    'votingContact',
-    'serviceContact',
-    'billingContact',
+    'serviceContact.email',
+    'votingContact.email',
     function () {
       if (this.memberType === 'consortium_organization') {
         return isPresent(this.serviceContact.email);

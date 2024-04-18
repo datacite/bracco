@@ -1,6 +1,10 @@
 import Controller from '@ember/controller';
+import { inject as service } from '@ember/service';
 
 export default Controller.extend({
+  router: service(),
+  flashMessages: service(),
+
   setEvent(state) {
     if (state === 'registered') {
       return 'register';
@@ -42,24 +46,23 @@ export default Controller.extend({
       doi
         .save()
         .then(function (doi) {
-          self.transitionToRoute('dois.show', doi);
+          self.router.transitionTo('dois.show', doi);
         })
         .catch(function (reason) {
           console.debug(reason);
-          self
-            .get('flashMessages')
-            .warning(
-              'An error occured and this DOI could not be saved.' + (reason?.title ? '  ' + reason.title : '')
-              /*
+          self.get('flashMessages').warning(
+            'An error occured and this DOI could not be saved.' +
+              (reason?.title ? '  ' + reason.title : '')
+            /*
                 reason.errors[0]
                 ? reason.errors[0].title
                 : reason
                 */
-            );
+          );
         });
     },
     cancel() {
-      this.transitionToRoute(
+      this.router.transitionTo(
         'repositories.show.dois',
         this.get('model.repository.id')
       );

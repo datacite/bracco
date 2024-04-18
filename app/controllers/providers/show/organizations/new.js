@@ -7,10 +7,13 @@ import {
   focusAreaList,
   nonProfitStatusList
 } from 'bracco/models/provider';
+import FileReader from 'ember-file-upload/system/file-reader';
 
 export default Controller.extend({
   store: service(),
   features: service(),
+  router: service(),
+  flashMessages: service(),
 
   countryList,
   countries: null,
@@ -145,7 +148,7 @@ export default Controller.extend({
       this.model.organization
         .save()
         .then(function (provider) {
-          self.transitionToRoute('providers.show', provider.id);
+          self.router.transitionTo('providers.show', provider.id);
         })
         .catch(function (reason) {
           console.debug(reason);
@@ -153,7 +156,7 @@ export default Controller.extend({
     },
     cancel() {
       this.model.organization.rollbackAttributes();
-      this.transitionToRoute(
+      this.router.transitionTo(
         'providers.show.organizations',
         this.get('model.provider.id')
       );

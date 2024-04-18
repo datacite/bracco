@@ -5,7 +5,7 @@ import ENV from 'bracco/config/environment';
 import { computed } from '@ember/object';
 import { isPresent } from '@ember/utils';
 
-const ApplicationAdapter =  JSONAPIAdapter.extend(DataAdapterMixin, {
+const ApplicationAdapter = JSONAPIAdapter.extend(DataAdapterMixin, {
   session: service(),
   host: ENV.API_URL,
 

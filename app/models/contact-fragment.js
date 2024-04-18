@@ -1,4 +1,4 @@
-import{ attr } from '@ember-data/model';
+import { attr } from '@ember-data/model';
 import { validator, buildValidations } from 'ember-cp-validations';
 import { computed } from '@ember/object';
 import Fragment from 'ember-data-model-fragments/fragment';

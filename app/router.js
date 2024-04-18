@@ -1,10 +1,8 @@
 import EmberRouter from '@ember/routing/router';
 import config from './config/environment';
-import GoogleAnalyticsRoute from 'ember-tracker/mixins/google-analytics-route';
 
-const Router = EmberRouter.extend(GoogleAnalyticsRoute, {
-  location: config.locationType,
-  rootURL: config.rootURL
+const Router = EmberRouter.extend({
+  location: 'auto'
 });
 
 Router.map(function () {
@@ -65,8 +63,7 @@ Router.map(function () {
   this.route('prefixes', function () {
     this.route('new');
   });
-  this.route('users', function () {
-  });
+  this.route('users', function () {});
   this.route('contacts', function () {
     this.route('show', { path: '/:contact_id' }, function () {
       this.route('edit');

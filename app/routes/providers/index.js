@@ -7,6 +7,8 @@ export default Route.extend({
   currentUser: service(),
   flashMessages: service(),
   prefixes: service(),
+  router: service(),
+  store: service(),
 
   model(params) {
     params = assign(params, {
@@ -60,7 +62,7 @@ export default Route.extend({
 
   afterModel() {
     if (this.can.cannot('read index')) {
-      this.transitionTo('index');
+      this.router.transitionTo('index');
     }
     /*
     } else if (this.get('currentUser.role_id') === 'staff_admin') {

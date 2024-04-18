@@ -1,20 +1,20 @@
-{{#if (gt index 0)}}
+{{#if (gt this.index 0)}}
   <div class="input-group">
-    <div class="power-select-fragment">
-      <@form.element @controlType="power-select" @value={{repositoryType}} @options={{repositoryTypes}} as |el|>
-        <el.control @onChange={{action "selectRepositoryType"}} @search={{action "searchRepositoryType"}} @placeholder="Select RepositoryType" @searchPlaceholder="Type to search..." @allowClear={{true}} @disabled={{disabled}} @searchEnabled={{true}} as |item|>
+    <div class="power-select-fragment" data-repository-type>
+      <@form.element class="form-group" @controlType="power-select" @value={{this.repositoryType}} @options={{this.repositoryTypes}} as |el|>
+        <el.control @onChange={{action "selectRepositoryType"}} @search={{action "searchRepositoryType"}} @placeholder="Select RepositoryType" @searchPlaceholder="Type to search..." @allowClear={{true}} @disabled={{this.disabled}} @searchEnabled={{true}} as |item|>
           {{titleize item}}
         </el.control>
       </@form.element>
     </div>
     <span class="input-group-addon" style="vertical-align:top;padding-top:3px;">
-    <BsButton @outline={{true}} @onClick={{action "deleteRepositoryType" index}}><i class="fas fa-trash pull-left"></i></BsButton>
+    <BsButton @outline={{true}} @onClick={{action "deleteRepositoryType" this.index}}><i class="fas fa-trash pull-left"></i></BsButton>
     </span>
   </div>
 {{else}}
-  <div class="power-select-fragment">
-    <@form.element @controlType="power-select" @value={{repositoryType}} @options={{repositoryTypes}} as |el|>
-      <el.control @onChange={{action "selectRepositoryType"}} @search={{action "searchRepositoryType"}} @placeholder="Select RepositoryType" @searchPlaceholder="Type to search..." @allowClear={{true}} @disabled={{disabled}} @searchEnabled={{true}} as |item|>
+  <div class="power-select-fragment" data-repository-type>
+    <@form.element class="form-group" @controlType="power-select" @value={{this.repositoryType}} @options={{this.repositoryTypes}} as |el|>
+      <el.control @onChange={{action "selectRepositoryType"}} @search={{action "searchRepositoryType"}} @placeholder="Select RepositoryType" @searchPlaceholder="Type to search..." @allowClear={{true}} @disabled={{this.disabled}} @searchEnabled={{true}} as |item|>
         {{titleize item}}
       </el.control>
     </@form.element>

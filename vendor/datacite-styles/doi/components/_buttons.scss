@@ -1,0 +1,253 @@
+/*doc
+---
+title: Buttons
+name: buttons
+category: Components
+---
+*/
+
+.btn,
+.navbar .navbar-nav > li > a.btn{
+    border-radius: $border-radius-btn-base;
+    box-sizing: border-box;
+    border-width: $border-thick;
+    background-color: $transparent-bg;
+//     line-height: $line-height;
+    font-size: $font-size-base;
+    font-weight: $font-weight-semi;
+
+    padding: $padding-base-vertical $padding-base-horizontal;
+
+    @include btn-styles($default-color, $default-states-color);
+    @include transition($fast-transition-time, linear);
+
+    &:hover,
+    &:focus{
+        outline: 0 !important;
+    }
+    &:active,
+    &.active,
+    .open > &.dropdown-toggle {
+         @include box-shadow(none);
+         outline: 0 !important;
+    }
+
+    &.btn-icon{
+        padding: $padding-base-vertical;
+    }
+
+    i{
+        margin-right: 5px;
+    }
+
+}
+
+.btn-group .btn + .btn,
+.btn-group .btn + .btn-group,
+.btn-group .btn-group + .btn,
+.btn-group .btn-group + .btn-group{
+    margin-left: -2px;
+}
+
+.btn-group-vertical > .btn {
+  text-align: left;
+}
+.btn-group-vertical > .btn:first-child:not(:last-child) {
+  border-top-left-radius: 13px;
+  border-top-right-radius: 13px;
+}
+.btn-group-vertical > .btn:not(:last-child) {
+  border-bottom-width: 0;
+}
+
+.btn-group-vertical>.btn:last-child:not(:first-child) {
+  border-bottom-left-radius: 13px;
+  border-bottom-right-radius: 13px;
+}
+
+// Apply the mixin to the buttons
+//.btn-default { @include btn-styles($default-color, $default-states-color); }
+.navbar .navbar-nav > li > a.btn-primary, .btn-primary { @include btn-styles($primary-color, $primary-states-color); }
+.navbar .navbar-nav > li > a.btn-success, .btn-success { @include btn-styles($success-color, $success-states-color); }
+.navbar .navbar-nav > li > a.btn-info, .btn-info    { @include btn-styles($info-color, $info-states-color); }
+.navbar .navbar-nav > li > a.btn-warning, .btn-warning { @include btn-styles($warning-color, $warning-states-color); }
+.navbar .navbar-nav > li > a.btn-danger, .btn-danger  { @include btn-styles($danger-color, $danger-states-color); }
+.navbar-transparent #sign-in, .btn-neutral {
+    @include btn-styles($white-color, $white-color);
+
+    &:hover,
+    &:focus{
+        color: $default-color;
+    }
+
+    &:active,
+    &.active,
+    .open > &.dropdown-toggle{
+         background-color: $white-color;
+         color: $default-color;
+    }
+
+    &.btn-fill{
+        color: $default-color;
+    }
+    &.btn-fill:hover,
+    &.btn-fill:focus{
+        color: $default-states-color;
+    }
+
+    &.btn-simple:active,
+    &.btn-simple.active{
+        background-color: transparent;
+    }
+}
+
+.btn{
+     &:disabled,
+     &[disabled],
+     &.disabled{
+        @include opacity(.5);
+    }
+}
+.btn-simple{
+    border: $none;
+    padding: $padding-base-vertical $padding-base-horizontal;
+
+    &.btn-icon{
+        padding: $padding-base-vertical;
+    }
+}
+.btn-lg{
+   @include btn-size($padding-large-vertical, $padding-large-horizontal, $font-size-large, $border-radius-btn-large, $line-height-small);
+   font-weight: $font-weight-normal;
+}
+.btn-sm{
+    @include btn-size($padding-small-vertical, $padding-small-horizontal, $font-size-small, $border-radius-btn-small, $line-height-small);
+}
+.btn-xs {
+    @include btn-size($padding-xs-vertical, $padding-xs-horizontal, $font-size-xs, $border-radius-btn-small, $line-height-small);
+}
+.btn-wd {
+    min-width: 140px;
+}
+
+.btn-group.select{
+    width: 100%;
+}
+.btn-group.select .btn{
+    text-align: left;
+}
+.btn-group.select .caret{
+    position: absolute;
+    top: 50%;
+    margin-top: -1px;
+    right: 8px;
+}
+
+$bs-height-base: ($line-height-computed + $padding-base-vertical * 2) !default;
+$bs-height-lg:   (floor($font-size-large * $line-height-base) + $padding-large-vertical * 2) !default;
+$bs-height-sm:   (floor($font-size-small * 1.5) + $padding-small-vertical * 2) !default;
+$bs-height-xs:   (floor($font-size-small * 1.2) + $padding-small-vertical + 1) !default;
+
+.btn-social {
+  position: relative;
+  padding-left: ($bs-height-base + $padding-base-horizontal);
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  > :first-child {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: $bs-height-base;
+    line-height: ($bs-height-base + 2);
+    font-size: 1.6em;
+    text-align: center;
+    border-right: 1px solid rgba(0, 0, 0, 0.2);
+  }
+  &.btn-lg {
+    padding-left: ($bs-height-lg + $padding-large-horizontal);
+    > :first-child {
+      line-height: $bs-height-lg;
+      width: $bs-height-lg;
+      font-size: 1.8em;
+    }
+  }
+  &.btn-sm {
+    padding-left: ($bs-height-sm + $padding-small-horizontal);
+    > :first-child {
+      line-height: $bs-height-sm;
+      width: $bs-height-sm;
+      font-size: 1.4em;
+    }
+  }
+  &.btn-xs {
+    padding-left: ($bs-height-xs + $padding-small-horizontal);
+    > :first-child {
+      line-height: $bs-height-xs;
+      width: $bs-height-xs;
+      font-size: 1.2em;
+    }
+  }
+}
+
+@mixin btn-social($color-bg, $color: $white-color) {
+  color: $color-bg;
+  border-color: $color-bg;
+  background-color: $white-color;
+  > :first-child { color: $color-bg; }
+
+  &:hover,
+  &:focus {
+    color: $color !important;
+    border-color: $color-bg;
+    background-color: $color-bg !important;
+    > :first-child { color: $color; }
+  }
+  &.btn-fill{
+    color: $color;
+    background-color: $color-bg;
+    > :first-child { color: $color; }
+  }
+  &.btn-fill:hover,
+  &.btn-fill:focus {
+    border-color: darken($color-bg, 10%);
+    background-color: darken($color-bg, 10%);
+    > :first-child { color: darken($color, 10%); }
+  }
+
+  @include button-variant($color-bg, $color, $color-bg);
+}
+
+.btn-facebook      { @include btn-social(#3b5998); }
+.btn-github        { @include btn-social(#444444); }
+.btn-google        { @include btn-social(#dd4b39); }
+.btn-orcid         { @include btn-social(#9dc33a); }
+.btn-globus        { @include btn-social(#294b8e); }
+
+.btn-orcid > :first-child {
+  left: 5px;
+  top: 5px;
+  bottom: 3px;
+  width: 29px;
+  height: 24px;
+  padding-right: 5px;
+  border-right: 1px solid #fff;
+}
+
+.btn-globus > :first-child {
+  left: 5px;
+  top: 5px;
+  bottom: 3px;
+  width: 38px;
+  height: 24px;
+  padding-right: 5px;
+  border-right: 1px solid #fff;
+}
+
+.btn-icon { padding-right: 0; }
+
+.claim-ok-btn {
+  i { color: $white-color !important; }
+}

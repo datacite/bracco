@@ -46,5 +46,5 @@ export default Fragment.extend(Validations, {
   relatedItemIdentifierType: attr('string', { defaultValue: null }),
   relatedMetadataScheme: attr('string', { defaultValue: null }),
   schemeUri: attr('string', { defaultValue: null }),
-  schemeType: attr('string', { defaultValue: null }),
+  schemeType: attr('string', { defaultValue: null })
 });

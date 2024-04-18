@@ -3,6 +3,8 @@ import { inject as service } from '@ember/service';
 
 export default Controller.extend({
   store: service(),
+  router: service(),
+  flashMessages: service(),
 
   actions: {
     submit(contact) {
@@ -10,14 +12,14 @@ export default Controller.extend({
       contact
         .save()
         .then(function (c) {
-          self.transitionToRoute('contacts.show', c);
+          self.router.transitionTo('contacts.show', c.id);
         })
         .catch(function (reason) {
           console.debug(reason);
         });
     },
     cancel() {
-      this.transitionToRoute('providers.show.contacts', this.model.provider);
+      this.router.transitionTo('providers.show.contacts', this.model.provider);
     }
   }
 });

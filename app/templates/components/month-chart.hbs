@@ -1,21 +1,21 @@
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title" id="{{chartId}}-title">
-      {{pluralize count label without-count=true}}
+    <h3 class="panel-title" id="{{this.chartId}}-title">
+      {{pluralize this.count this.label without-count=true}}
       <span class="small pull-right">by month</span>
     </h3>
   </div>
   <div class="panel-body panel-chart">
     <h2 class="member graphs">
-      {{#if model}}
-        <LinkTo @route={{link}} @model={{model.id}}>{{format-number count}}</LinkTo>
-      {{else if link}}
-        <LinkTo @route={{link}}>{{format-number count}}</LinkTo>
+      {{#if this.model}}
+        <LinkTo @route={{this.link}} @model={{this.model.id}}>{{format-number this.count}}</LinkTo>
+      {{else if this.link}}
+        <LinkTo @route={{this.link}}>{{format-number this.count}}</LinkTo>
       {{else}}
-        {{format-number count}}
+        {{format-number this.count}}
       {{/if}}
-      {{#if (not cumulative)}}<span class="small">in 2019</span>{{/if}}
+      {{#unless this.cumulative}}<span class="small">in 2019</span>{{/unless}}
     </h2>
-    <div class="graphs" id={{chartId}}></div>
+    <div class="graphs" id={{this.chartId}}></div>
   </div>
 </div>

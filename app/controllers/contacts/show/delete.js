@@ -3,6 +3,7 @@ import { inject as service } from '@ember/service';
 
 export default Controller.extend({
   store: service(),
+  router: service(),
 
   actions: {
     submit() {
@@ -18,7 +19,7 @@ export default Controller.extend({
             .then(function () {
               // We need a timeout because of ElasticSearch indexing
               setTimeout(() => {
-                self.transitionToRoute('providers.show.contacts', providerId);
+                self.router.transitionTo('providers.show.contacts', providerId);
               }, 1200);
             })
             .catch(function (reason) {
@@ -29,7 +30,7 @@ export default Controller.extend({
     cancel() {
       this.model.rollbackAttributes();
       this.model.set('confirmDelete', null);
-      this.transitionToRoute('contacts.show', this.model);
+      this.router.transitionTo('contacts.show', this.model);
     }
   }
 });

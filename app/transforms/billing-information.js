@@ -115,7 +115,7 @@ const stateList = [
   { code: 'AU-VIC', name: 'Victoria' },
   { code: 'AU-WA', name: 'Western Australia' },
   { code: 'AU-ACT', name: 'Australian Capital Territory' },
-  { code: 'AU-NT', name: 'Northern Territory' },
+  { code: 'AU-NT', name: 'Northern Territory' }
 ];
 
 export default Transform.extend({
@@ -123,12 +123,19 @@ export default Transform.extend({
     if (serialized) {
       return {
         city: serialized.city ? serialized.city : '',
-        state: serialized.state ? stateList.find(state => state.code === serialized.state) : {},
+        state: serialized.state
+          ? stateList.find((state) => state.code === serialized.state)
+          : {},
         postCode: serialized.postCode,
         department: serialized.department,
         address: serialized.address,
         organization: serialized.organization,
-        country: serialized.country ? { code: serialized.country, name: countryList.name(serialized.country) } : {},
+        country: serialized.country
+          ? {
+              code: serialized.country,
+              name: countryList.name(serialized.country)
+            }
+          : {}
       };
     } else {
       return null;
@@ -137,17 +144,17 @@ export default Transform.extend({
 
   serialize(deserialized) {
     if (deserialized) {
-      return  {
+      return {
         city: deserialized.city,
         state: deserialized.state ? deserialized.state.code : '',
         address: deserialized.address,
         postCode: deserialized.postCode,
         department: deserialized.department,
         organization: deserialized.organization,
-        country: deserialized.country ? deserialized.country.code : '',
+        country: deserialized.country ? deserialized.country.code : ''
       };
     } else {
       return null;
     }
-  },
+  }
 });

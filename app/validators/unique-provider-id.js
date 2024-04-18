@@ -8,24 +8,33 @@ const UniqueProviderId = BaseValidator.extend({
     if (value.length < 2 || !model.get('isNew')) {
       return true;
     } else {
-      return this.store.query('provider', { id: value }).then((result) => {
-        if (result.content.length > 0) {
-          return 'The Member ID ' + value + ' already exists, or existed before and has been deleted. Please contact DataCite staff if you want to create an account with this Member ID.';
-        } else {
-          return true;
-        }
-      }).catch(function(reason) {
-        console.debug(reason);
-        return 'An error happened while looking up the Member ID ' + value + '.';
-      });
+      return this.store
+        .query('provider', { id: value })
+        .then((result) => {
+          if (result.content.length > 0) {
+            return (
+              'The Member ID ' +
+              value +
+              ' already exists, or existed before and has been deleted. Please contact DataCite staff if you want to create an account with this Member ID.'
+            );
+          } else {
+            return true;
+          }
+        })
+        .catch(function (reason) {
+          console.debug(reason);
+          return (
+            'An error happened while looking up the Member ID ' + value + '.'
+          );
+        });
     }
-  },
+  }
 });
 
 UniqueProviderId.reopenClass({
   getDependentsFor() {
-    return [ 'id' ];
-  },
+    return ['id'];
+  }
 });
 
 export default UniqueProviderId;

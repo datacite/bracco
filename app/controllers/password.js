@@ -6,20 +6,24 @@ import ENV from 'bracco/config/environment';
 export default Controller.extend({
   session: service(),
   currentUser: service(),
+  router: service(),
 
   actions: {
     submit(user) {
       let self = this;
-      user.save().then(function() {
-        self.get('session').invalidate();
-      }).catch(function(reason) {
-        console.debug(reason);
-      });
+      user
+        .save()
+        .then(function () {
+          self.get('session').invalidate();
+        })
+        .catch(function (reason) {
+          console.debug(reason);
+        });
     },
     cancel() {
       let self = this;
-      this.session.invalidate().then(function() {
-        self.transitionTo('index');
+      this.session.invalidate().then(function () {
+        self.router.transitionTo('index');
       });
     },
     generate() {
@@ -27,19 +31,21 @@ export default Controller.extend({
       let url = ENV.API_URL + '/random';
       fetch(url, {
         headers: {
-          'Authorization': 'Bearer ' + this.currentUser.get('jwt'),
-        },
-      }).then(function(response) {
-        if (response.ok) {
-          response.json().then(function(data) {
-            self.get('model').set('passwordInput', data.phrase);
-          });
-        } else {
-          console.debug(response);
+          Authorization: 'Bearer ' + this.currentUser.get('jwt')
         }
-      }).catch(function(error) {
-        console.debug(error);
-      });
-    },
-  },
+      })
+        .then(function (response) {
+          if (response.ok) {
+            response.json().then(function (data) {
+              self.get('model').set('passwordInput', data.phrase);
+            });
+          } else {
+            console.debug(response);
+          }
+        })
+        .catch(function (error) {
+          console.debug(error);
+        });
+    }
+  }
 });

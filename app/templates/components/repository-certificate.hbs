@@ -1,18 +1,18 @@
-{{#if (gt index 0)}}
+{{#if (gt this.index 0)}}
   <div class="input-group">
-    <div class="power-select-fragment">
-      <@form.element @controlType="power-select" @value={{certificate}} @options={{certificates}} as |el|>
-        <el.control @onChange={{action "selectCertificate"}} @search={{action "searchCertificate"}} @placeholder="Select Certificate" @searchPlaceholder="Type to search..." @allowClear={{true}} @disabled={{disabled}} @searchEnabled={{true}} />
+    <div class="power-select-fragment" data-repository-certificate>
+      <@form.element class="form-group" @controlType="power-select" @value={{this.certificate}} @options={{this.certificates}} as |el|>
+        <el.control @onChange={{action "selectCertificate"}} @search={{action "searchCertificate"}} @placeholder="Select Certificate" @searchPlaceholder="Type to search..." @allowClear={{true}} @disabled={{this.disabled}} @searchEnabled={{true}} />
       </@form.element>
     </div>
     <span class="input-group-addon" style="vertical-align:top;padding-top:3px;">
-    <BsButton @outline={{true}} @onClick={{action "deleteCertificate" index}}><i class="fas fa-trash pull-left"></i></BsButton>
+    <BsButton @outline={{true}} @onClick={{action "deleteCertificate" this.index}}><i class="fas fa-trash pull-left"></i></BsButton>
     </span>
   </div>
 {{else}}
-  <div class="power-select-fragment">
-    <@form.element @controlType="power-select" @value={{certificate}} @options={{certificates}} as |el|>
-      <el.control @onChange={{action "selectCertificate"}} @search={{action "searchCertificate"}} @placeholder="Select Certificate" @searchPlaceholder="Type to search..." @allowClear={{true}} @disabled={{disabled}} @searchEnabled={{true}} />
+  <div class="power-select-fragment" data-repository-certificate>
+    <@form.element class="form-group" @controlType="power-select" @value={{this.certificate}} @options={{this.certificates}} as |el|>
+      <el.control @onChange={{action "selectCertificate"}} @search={{action "searchCertificate"}} @placeholder="Select Certificate" @searchPlaceholder="Type to search..." @allowClear={{true}} @disabled={{this.disabled}} @searchEnabled={{true}} />
     </@form.element>
   </div>
 {{/if}}

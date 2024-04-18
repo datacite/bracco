@@ -40,12 +40,12 @@ export default Ability.extend({
         case 'consortium_admin':
           return (
             this.get('currentUser.provider_id') ===
-              this.get('model.provider.consortium.id')
+            this.get('model.provider.consortium.id')
           );
         case 'provider_admin':
           return (
             this.get('currentUser.provider_id') ===
-              this.get('model.provider.id')
+            this.get('model.provider.id')
           );
         default:
           return false;

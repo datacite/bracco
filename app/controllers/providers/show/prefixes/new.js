@@ -6,10 +6,10 @@ export default Controller.extend({
   store: service(),
   disabled: true,
   prefixes_service: service('prefixes'),
+  router: service(),
 
   init(...args) {
     this._super(...args);
-
     this.prefixes = this.prefixes || [];
   },
 
@@ -17,22 +17,21 @@ export default Controller.extend({
     let self = this;
     let prefixes = [];
 
-    this.prefixes_service.get_prefixes(ENV.SHOW_N_PREFIXES, null, query)
+    this.prefixes_service
+      .get_prefixes(ENV.SHOW_N_PREFIXES, null, query)
       .then((values) => {
-        values.forEach(
-          function(value) {
-            if (value.constructor.modelName == 'prefix') {
-              let prefix = value;
-              prefixes.push(prefix);
-            } else {
-              throw new Error("Expecting a prefix object. Got something else.");
-            }
+        values.forEach(function (value) {
+          if (value.constructor.modelName == 'prefix') {
+            let prefix = value;
+            prefixes.push(prefix);
+          } else {
+            throw new Error('Expecting a prefix object. Got something else.');
           }
-        );
+        });
 
         self.set('prefixes', prefixes);
-
-      }).catch(function (reason) {
+      })
+      .catch(function (reason) {
         console.debug(reason);
         self.set('prefixes', []);
       });
@@ -55,7 +54,7 @@ export default Controller.extend({
           self.set('disabled', true);
           // We need a timeout because of ElasticSearch indexing
           setTimeout(() => {
-            self.transitionToRoute(
+            self.router.transitionTo(
               'providers.show.prefixes',
               providerPrefix.get('provider.id')
             );
@@ -68,7 +67,7 @@ export default Controller.extend({
     cancel() {
       this.model['provider-prefix'].set('prefix', null);
       this.set('disabled', true);
-      this.transitionToRoute(
+      this.router.transitionTo(
         'providers.show.prefixes',
         this.get('model.provider')
       );

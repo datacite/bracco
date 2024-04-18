@@ -9,13 +9,13 @@ const RepositoryId = BaseValidator.extend({
       let message = 'The Repository ID must begin with ' + providerId;
       return message;
     }
-  },
+  }
 });
 
 RepositoryId.reopenClass({
   getDependentsFor() {
-    return [ 'id' ];
-  },
+    return ['id'];
+  }
 });
 
 export default RepositoryId;

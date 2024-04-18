@@ -1,0 +1,122 @@
+//
+// Registration Page
+// --------------------------------------------------
+
+.register-background {
+  background-size: cover;
+  min-height: 900px;
+  margin-top: -122px;
+
+  .container{
+    padding-top: 15%;
+    position: relative;
+    z-index: 3;
+  }
+}
+
+.register-card, .register-card-login, .register-card-email, .register-card-globus {
+  background-color: $white-color;
+  border-radius: 8px;
+  max-width: 350px;
+  margin: 20px 0 70px;
+  min-height: 270px;
+  padding: 10px 30px;
+
+  .form-control {
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+
+  .form-control[disabled] {
+    background-color: $white-color;
+  }
+
+  .form-group {
+    margin: 0;
+  }
+
+  .title {
+    text-align: center;
+  }
+  .btn {
+    margin-top: 10px;
+    padding-left: 50px;
+    font-size: 16px;
+  }
+
+  .btn .btn-cancel {
+    margin-top: 10px;
+    padding-left: 50px;
+    font-size: 16px;
+  }
+
+  .sign-up {
+    margin-bottom: 6px;
+  }
+
+  .division {
+    float: none;
+    margin: 20px auto 16px;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    width: 100%;
+  }
+
+  .division .line {
+    border-top: 1px solid $medium-gray;
+    position: absolute;
+    top: 10px;
+    width: 34%;
+  }
+
+  .division .line.l {
+    left: 0;
+  }
+
+  .division .line.r {
+    right: 0;
+  }
+
+  .division span {
+    color: $dark-gray;
+    font-size: 16px;
+  }
+
+  #link-orcid {
+    margin-top: 20px;
+    font-size: 16px;
+  }
+
+  p {
+    margin: 10px;
+  }
+
+  .form-horizontal p {
+    margin: 3px;
+  }
+
+  button[type=submit], .btn-cancel {
+    padding-left: 12px;
+  }
+
+  .bottom {
+    position: absolute;
+    bottom: 90px;
+    right: 50px;
+  }
+}
+
+.register-card-login {
+  margin: 0 0 70px;
+  min-height: 460px;
+}
+
+.register-card-email {
+  min-height: 310px
+}
+
+.register-card-globus {
+  margin: 0 0 70px;
+  min-height: 160px;
+}

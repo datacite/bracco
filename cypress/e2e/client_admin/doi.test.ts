@@ -90,7 +90,7 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
       // Leave state at 'draft'.
 
       // Set 'url'.
-      cy.get('div#url .help-block').contains('Should be a https URL — within the allowed domain(s) of your repository if domain restrictions are enabled in the repository settings. Http and ftp are also supported. For example http://example.org')
+      cy.get('div#url .form-text').contains('Should be a https URL — within the allowed domain(s) of your repository if domain restrictions are enabled in the repository settings. Http and ftp are also supported. For example http://example.org')
       cy.get('input#url-field').should('be.visible').type('https://example.org', { force: true });
 
       // Set creator.
@@ -118,15 +118,15 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
       cy.get('#registered-radio').check({ waitForAnimations: true });
       cy.get('#publication-year-field').should('be.visible').type(yearOutOfRange, { force: true, waitForAnimations: true });
       cy.get('body').click(0,0);
-      cy.get('div#publication-year').should('have.class', 'has-error')
+      cy.get('div#publication-year-form-group').should('have.class', 'has-error')
 
       // Test in-range year.
 
       cy.get('#publication-year-field').should('be.visible').clear({ force: true, waitForAnimations: true });
       cy.get('#publication-year-field').should('be.visible').type(yearInRange, { force: true, waitForAnimations: true });
       cy.get('body').click(0,0);
-      cy.get('div#publication-year').should('have.class', 'has-success')
-      cy.get('div#publication-year .help-block').contains('Must be a year between 1000 and ' + yearInRange + '.');
+      cy.get('input#publication-year-field').should('have.class', 'is-valid')
+      cy.get('div#publication-year .form-text').contains('Must be a year between 1000 and ' + yearInRange + '.');
 
       // Set state back to draft
 
@@ -144,17 +144,17 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
       cy.get('div#doi-language div[role="button"]').click({ waitForAnimations: true }).then(($dropdown) => {
         // Creates a new invalid language.
         cy.get('input.ember-power-select-search-input').type('Borgesian{enter}', { force: true });
-        cy.get('.help-block').contains('Must be a valid Language code.');
+        cy.get('.invalid-feedback').contains('Must be a valid Language code.');
       });
       cy.get('div#doi-language div[role="button"]').click({ waitForAnimations: true }).then(($dropdown) => {
         // Creates a new valid language.
         cy.get('input.ember-power-select-search-input').type('pre-US{enter}', { force: true });
-        cy.get('.help-block').contains('The default Language vocabulary is provided by ISO 639-1. Any new language should be provided using two-letter or three-letter language codes.');
+        cy.get('.form-text').contains('The default Language vocabulary is provided by ISO 639-1. Any new language should be provided using two-letter or three-letter language codes.');
       });
       cy.get('div#doi-language div[role="button"]').click({ waitForAnimations: true }).then(($dropdown) => {
         // Makes a default selection.
         cy.get("ul.ember-power-select-options li").contains("English").click({ waitForAnimations: true });
-        cy.get('.help-block').contains('The default Language vocabulary is provided by ISO 639-1. Any new language should be provided using two-letter or three-letter language codes.');
+        cy.get('.form-text').contains('The default Language vocabulary is provided by ISO 639-1. Any new language should be provided using two-letter or three-letter language codes.');
       });
 
       // Set geolocation.
@@ -183,7 +183,7 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
       cy.get('#add-contributor').click({ waitForAnimations: true }).then(($subform) => {
         cy.get('.help-block.name-identifier-field').should('be.visible').should('have.text','Use name identifier expressed as URL. Uniquely identifies an individual or legal entity, according to various schemas, e.g. ORCID, ROR or ISNI. The Given Name, Family Name, and Name will automatically be filled out for ORCID and ROR identifiers.')
         // Causes the aria dropdown to be populated and displayed so that selection can be made.
-        cy.get('[doi-contributor] div[role="button"]').click({ waitForAnimations: true }).then(($dropdown) => {
+        cy.get('[doi-contributor-type] div[role="button"]').click({ waitForAnimations: true }).then(($dropdown) => {
           // Makes the selection from the dropdown.
           cy.get("ul.ember-power-select-options li").contains("Data collector").click({ waitForAnimations: true });
           cy.get('#toggle-contributors').should('be.visible').click({ waitForAnimations: true }).then(($toggle) => {
@@ -342,10 +342,10 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
 
       // Set 'url'.
       cy.wait(waitTime);
-      cy.get('div#url .help-block').contains('Should be a https URL — within the allowed domain(s) of your repository if domain restrictions are enabled in the repository settings. Http and ftp are also supported. For example http://example.org')
+      cy.get('div#url .form-text').contains('Should be a https URL — within the allowed domain(s) of your repository if domain restrictions are enabled in the repository settings. Http and ftp are also supported. For example http://example.org')
       cy.get('input#url-field').should('be.visible').type('https://example.org', { force: true })
         .clickOutside();
-      cy.get('#url').should('have.class', 'has-success');
+      cy.get('#url-field').should('have.class', 'is-valid');
 
       // Do the file upload. (just xml for now).  (Wow. That was easy!)
       cy.fixture('doi_sample_1.xml').then(fileContent => {
@@ -387,7 +387,7 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
           cy.wait(waitTime);
           cy.get('#confirm-doi-field').click({ force: true }).type(id, { force: true });
           cy.wait(waitTime);
-          cy.get('#confirm-doi').should('have.class', 'has-success');
+          cy.get('#confirm-doi-field').should('have.class', 'is-valid');
         }).then (() => {
           cy.get('button#delete-doi').click({force: true});
           cy.wait(waitTime);

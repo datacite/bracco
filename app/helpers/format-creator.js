@@ -1,6 +1,6 @@
 import { helper as buildHelper } from '@ember/component/helper';
 
-export function formatCreator([ creators ], hash) {
+export function formatCreator([creators], hash) {
   let limit = creators.length;
   if (hash.showOnly) {
     limit = hash.showOnly;

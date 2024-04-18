@@ -3,6 +3,8 @@ import { inject as service } from '@ember/service';
 
 export default Route.extend({
   can: service(),
+  router: service(),
+  store: service(),
 
   model() {
     return this.store.createRecord('provider', {
@@ -20,7 +22,7 @@ export default Route.extend({
 
   afterModel(model) {
     if (this.can.cannot('create provider', model)) {
-      return this.transitionTo('index');
+      return this.router.transitionTo('index');
     }
   }
 });

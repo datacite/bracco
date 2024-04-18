@@ -2,21 +2,21 @@
   <label class="control-label col-md-3" data-test-rights-list>Rights</label>
   <div class="col-md-9">
     <div class="label-vertical">Rights information for the resource.</div>
-    {{#if showRights}}
-      {{#each model.rightsList as |rights index|}}
-        <DoiRights @model={{model}} @fragment={{rights}} @form={{form}} @index={{index}} @spdx={{spdx}} />
+    {{#if this.showRights}}
+      {{#each this.model.rightsList as |rights index|}}
+        <DoiRights @model={{this.model}} @fragment={{rights}} @form={{this.form}} @index={{index}} @spdx={{this.spdx}} />
       {{/each}}
 
-      {{#if (lte model.rightsList.length 4)}}
-        <BsButton id="add-rights" class="btn-sm" @outline={{true}} @onClick={{action "addRights"}}><i class="fas fa-plus"></i> Add {{if (gt model.rightsList.length 0) "more "}} rights</BsButton>
+      {{#if (lte this.model.rightsList.length 4)}}
+        <BsButton id="add-rights" class="btn-sm" @outline={{true}} @onClick={{action "addRights"}}><i class="fas fa-plus"></i> Add {{if (gt this.model.rightsList.length 0) "more "}} rights</BsButton>
       {{/if}}
 
-      {{#if (gt model.rightsList.length 0)}}
-        <BsButton id="toggle-rights" class="btn-sm" @outline={{true}} @onClick={{action "toggleRights"}}><i class="fas fa-eye-slash"></i> Hide {{pluralize model.rightsList.length 'right'}}</BsButton>
+      {{#if (gt this.model.rightsList.length 0)}}
+        <BsButton id="toggle-rights" class="btn-sm" @outline={{true}} @onClick={{action "toggleRights"}}><i class="fas fa-eye-slash"></i> Hide {{pluralize this.model.rightsList.length 'right'}}</BsButton>
       {{/if}}
     {{else}}
-      {{#if (gt model.rightsList.length 0)}}
-        <BsButton id="toggle-rights" class="btn-sm" @outline={{true}} @onClick={{action "toggleRights"}}><i class="fas fa-eye"></i> Show {{pluralize model.rightsList.length 'right'}}</BsButton>
+      {{#if (gt this.model.rightsList.length 0)}}
+        <BsButton id="toggle-rights" class="btn-sm" @outline={{true}} @onClick={{action "toggleRights"}}><i class="fas fa-eye"></i> Show {{pluralize this.model.rightsList.length 'right'}}</BsButton>
       {{else}}
         <BsButton class="btn-sm btn-warning" id="add-rights" @outline={{true}} @onClick={{action "addRights"}}><i class="fas fa-plus"></i> Add rights</BsButton>
       {{/if}}

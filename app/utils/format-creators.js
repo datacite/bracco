@@ -18,11 +18,11 @@ export default function formatCreators(creators, hash) {
     } else if (element.givenName) {
       name = element.givenName;
     } else if (element.name) {
-      name = element.name
+      name = element.name;
     } else {
       name = '';
     }
-  
+
     if (name) {
       names.push(name);
     }
@@ -32,9 +32,9 @@ export default function formatCreators(creators, hash) {
 
   names.forEach((element, index, array) => {
     if (limit > index + 2) {
-      ret = ret + element +  ', ';
+      ret = ret + element + ', ';
     } else if (limit > index + 1) {
-      ret = ret + element +  ' & ';
+      ret = ret + element + ' & ';
     } else {
       ret = ret + element;
     }

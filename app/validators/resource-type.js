@@ -30,7 +30,7 @@ const ResourceType = BaseValidator.extend({
       'Software',
       'Sound',
       'Standard',
-      'StudyRegistration', 
+      'StudyRegistration',
       'Text',
       'Workflow',
       'Other'

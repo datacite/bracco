@@ -1,9 +1,9 @@
 <div class="form-group">
   <label class="control-label col-md-3">State</label>
   <div class="col-md-9 input-fragment">
-    <div class="label-vertical">The state determines whether a DOI is registered and findable. Once in Registered or Findable state, a DOI can't be set back to Draft state. <a target="_blank" rel="noopener" href="https://support.datacite.org/docs/doi-states">More&nbsp;…</a></div>
-    <div><RadioButton @value="draft" @groupValue={{state}} @radioClass="radio" @changed={{action "selectState"}} @disabled={{draft}} />Draft <span class="help-block">only visible in Fabrica, DOI can be deleted</span></div>
-    <div><RadioButton @value="registered" @groupValue={{state}} @radioClass="radio" @changed={{action "selectState"}} @disabled={{registered}} />Registered <span class="help-block">registered with the DOI Resolver</span></div>
-    <div><RadioButton @value="findable" @groupValue={{state}} @radioClass="radio" @changed={{action "selectState"}} @disabled={{findable}} />Findable <span class="help-block">registered with the DOI Resolver and indexed in DataCite Search</span></div>
+    <div class="label-vertical">The state determines whether a DOI is registered and findable. Once in Registered or Findable state, a DOI can't be set back to Draft state. <a target="_blank" rel="noopener noreferrer" href="https://support.datacite.org/docs/doi-states">More&nbsp;…</a></div>
+    <div><RadioButton @value="draft" @groupValue={{this.state}} @radioClass="radio" @changed={{action "selectState"}} @disabled={{this.draft}} />Draft <span class="help-block">only visible in Fabrica, DOI can be deleted</span></div>
+    <div><RadioButton @value="registered" @groupValue={{this.state}} @radioClass="radio" @changed={{action "selectState"}} @disabled={{this.registered}} />Registered <span class="help-block">registered with the DOI Resolver</span></div>
+    <div><RadioButton @value="findable" @groupValue={{this.state}} @radioClass="radio" @changed={{action "selectState"}} @disabled={{this.findable}} />Findable <span class="help-block">registered with the DOI Resolver and indexed in DataCite Search</span></div>
   </div>
 </div>

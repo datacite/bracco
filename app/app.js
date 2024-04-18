@@ -3,9 +3,9 @@ import './models/custom-inflector-rules';
 import Resolver from './resolver';
 import loadInitializers from 'ember-load-initializers';
 import config from './config/environment';
-import { InitSentryForEmber } from '@sentry/ember';
+import * as Sentry from "@sentry/ember";
 
-InitSentryForEmber();
+Sentry.init({});
 
 const App = Application.extend({
   modulePrefix: config.modulePrefix,

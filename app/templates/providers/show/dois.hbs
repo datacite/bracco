@@ -1,6 +1,6 @@
-{{#if model}}
+{{#if this.model}}
   <DoiList
-    @model={{model.dois}}
+    @model={{this.model.dois}}
     @link="providers.show.dois"
     @searchable={{true}}
   />

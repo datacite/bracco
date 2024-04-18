@@ -1,0 +1,72 @@
+.section{
+    padding: 30px 0;
+    position: relative;
+    background-color: #f4f3ef;
+}
+.section-with-space{
+    padding: 60px 0;
+}
+.section-gray{
+    background-color: #EEEEEE;
+}
+.section-white{
+    background-color: #FFFFFF;
+}
+.section-nude{
+    background-color: $bg-nude;
+}
+.section-light-brown{
+    background-color: #D8C1AB;
+    color: $white-color;
+}
+.section-brown{
+    background-color: #A59E94;
+    color: $white-color;
+}
+.section-light-blue{
+    background-color: $primary-color;
+    color: $white-color;
+}
+.section-dark-blue{
+    background-color: #506367;
+    color: $white-color;
+}
+.section-dark{
+    background-color: #1a1817;
+    color: $white-color;
+}
+
+.section-light-blue, .section-dark-blue, .section-light-brown {
+  a {
+    color: #FFFFFF;
+    font-weight: bold;
+  }
+}
+
+.info {
+  h3 {
+    margin-top: 0;
+    text-align: center;
+  }
+}
+
+.icon {
+  font-size: 2.5em;
+
+  [class^="fa-"], [class*=" fa-"] {
+    display: inline-block;
+    margin: 0 auto;
+  }
+}
+
+.description-centered {
+  text-align: center;
+}
+
+.icon-primary { color: $primary-color; }
+.icon-success { color: $success-color; }
+.icon-info { color: $info-color; }
+.icon-warning { color: $warning-color; }
+.icon-danger { color: $danger-color; }
+.icon-orcid { color: #9dc33a; }
+.icon-landing { color: #1abc9c; }

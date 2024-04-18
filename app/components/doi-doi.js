@@ -5,9 +5,9 @@ import fetch from 'fetch';
 import { A } from '@ember/array';
 
 const stateList = {
-  draft: [ 'draft', 'registered', 'findable' ],
-  registered: [ 'registered', 'findable' ],
-  findable: [ 'registered', 'findable' ],
+  draft: ['draft', 'registered', 'findable'],
+  registered: ['registered', 'findable'],
+  findable: ['registered', 'findable']
 };
 
 export default Component.extend({
@@ -31,21 +31,33 @@ export default Component.extend({
 
   setDefaultPrefix() {
     let self = this;
-    this.store.query('repository-prefix', { 'repository-id': this.repository.get('id'), sort: 'name', 'page[size]': 25 }).then(function(repositoryPrefixes) {
-      if ((typeof self.get('model').get('doi')) == 'undefined') {
-        self.set('repositoryPrefixes', repositoryPrefixes);
-      }
+    this.store
+      .query('repository-prefix', {
+        'repository-id': this.repository.get('id'),
+        sort: 'name',
+        'page[size]': 25
+      })
+      .then(function (repositoryPrefixes) {
+        if (typeof self.get('model').get('doi') == 'undefined') {
+          self.set('repositoryPrefixes', repositoryPrefixes);
+        }
 
-      let repositoryPrefix = repositoryPrefixes.length > 0 ? repositoryPrefixes.get('firstObject') : null;
-      self.get('model').set('prefix', repositoryPrefix.get('prefix').get('id'));
+        let repositoryPrefix =
+          repositoryPrefixes.length > 0
+            ? repositoryPrefixes.get('firstObject')
+            : null;
+        self
+          .get('model')
+          .set('prefix', repositoryPrefix.get('prefix').get('id'));
 
-      if (typeof self.get('model').get('doi') == 'undefined') {
-        self.generate();
-      }
-    }).catch(function(reason) {
-      console.debug(reason);
-      return [];
-    });
+        if (typeof self.get('model').get('doi') == 'undefined') {
+          self.generate();
+        }
+      })
+      .catch(function (reason) {
+        console.debug(reason);
+        return [];
+      });
   },
   async generate() {
     let self = this;
@@ -53,11 +65,11 @@ export default Component.extend({
     try {
       const response = await fetch(url, {
         headers: {
-          'Authorization': 'Bearer ' + this.currentUser.get('jwt'),
-        },
+          Authorization: 'Bearer ' + this.currentUser.get('jwt')
+        }
       });
       if (response.ok) {
-        return response.json().then(function(data) {
+        return response.json().then(function (data) {
           let suffix = data.dois[0].split('/', 2)[1];
           self.get('model').set('suffix', suffix);
           let doi = self.get('model').get('prefix') + '/' + suffix;
@@ -93,7 +105,10 @@ export default Component.extend({
   actions: {
     selectPrefix(repositoryPrefix) {
       this.model.set('prefix', repositoryPrefix.prefix.get('id'));
-      this.model.set('doi', repositoryPrefix.prefix.get('id') + '/' + this.model.get('suffix'));
+      this.model.set(
+        'doi',
+        repositoryPrefix.prefix.get('id') + '/' + this.model.get('suffix')
+      );
       this.selectState(this.model.get('state'));
     },
     selectSuffix(suffix) {
@@ -112,6 +127,6 @@ export default Component.extend({
     },
     selectState(state) {
       this.selectState(state);
-    },
-  },
+    }
+  }
 });

@@ -1,24 +1,30 @@
 import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
 import { computed } from '@ember/object';
 import ENV from 'bracco/config/environment';
-import { array, fragment, fragmentArray } from 'ember-data-model-fragments/attributes';
+import {
+  array,
+  fragment,
+  fragmentArray
+} from 'ember-data-model-fragments/attributes';
 import { validator, buildValidations } from 'ember-cp-validations';
 import isEmpty from 'bracco/utils/is-empty';
+import validatePwdInputs from 'bracco/utils/validate-pwd-inputs';
+import { inject as service } from '@ember/service';
 
 export const clientTypeList = [
   {
-    label: "Repository",
-    value: "repository"
+    label: 'Repository',
+    value: 'repository'
   },
   {
-    label: "Periodical",
-    value: "periodical"
+    label: 'Periodical',
+    value: 'periodical'
   },
   {
-    label: "IGSN ID Catalog",
-    value: "igsnCatalog"
+    label: 'IGSN ID Catalog',
+    value: 'igsnCatalog'
   }
-]
+];
 
 export const softwareList = [
   'Cayuse',
@@ -83,29 +89,29 @@ const Validations = buildValidations({
   passwordInput: [
     validator('presence', {
       presence: true,
-      disabled: computed('model', function () {
-        return this.model.get('keepPassword');
+      disabled: computed('model', 'model.router.currentRouteName', function () {
+        return !validatePwdInputs(this.model.router.currentRouteName);
       })
     }),
     validator('length', {
       min: 8,
-      disabled: computed('model', function () {
-        return this.model.get('keepPassword');
+      disabled: computed('model', 'model.router.currentRouteName', function () {
+        return !validatePwdInputs(this.model.router.currentRouteName);
       })
     })
   ],
   confirmPasswordInput: [
     validator('presence', {
       presence: true,
-      disabled: computed('model', function () {
-        return this.model.get('keepPassword');
+      disabled: computed('model', 'model.router.currentRouteName', function () {
+        return !validatePwdInputs(this.model.router.currentRouteName);
       })
     }),
     validator('confirmation', {
       on: 'passwordInput',
       message: 'Password does not match',
-      disabled: computed('model', function () {
-        return this.model.get('keepPassword');
+      disabled: computed('model', 'model.router.currentRouteName', function () {
+        return !validatePwdInputs(this.model.router.currentRouteName);
       })
     })
   ],
@@ -146,6 +152,8 @@ const Validations = buildValidations({
 });
 
 export default Model.extend(Validations, {
+  router: service(),
+
   provider: belongsTo('provider', {
     async: true
   }),
@@ -175,7 +183,6 @@ export default Model.extend(Validations, {
   isActive: attr('boolean', { defaultValue: true }),
   passwordInput: attr('string'),
   hasPassword: attr('boolean'),
-  keepPassword: attr('boolean', { defaultValue: true }),
   created: attr('date'),
   updated: attr('date'),
   subjects: fragmentArray('subject', { defaultValue: [] }),
@@ -202,7 +209,7 @@ export default Model.extend(Validations, {
   }),
 
   get isDisciplinary() {
-    return this.repositoryType.includes("disciplinary");
+    return this.repositoryType.includes('disciplinary');
   },
 
   clearSubjects() {

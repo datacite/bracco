@@ -1,7 +1,20 @@
 import Controller from '@ember/controller';
+import { inject as service } from '@ember/service';
 
 export default Controller.extend({
-  queryParams: [ 'query', 'year', 'client-type', 'repository-type', 'certificate', 'software', 'sort', 'page', 'size' ],
+  store: service(),
+
+  queryParams: [
+    'query',
+    'year',
+    'client-type',
+    'repository-type',
+    'certificate',
+    'software',
+    'sort',
+    'page',
+    'size'
+  ],
   query: null,
   year: null,
   'client-type': null,
@@ -10,5 +23,5 @@ export default Controller.extend({
   software: null,
   sort: null,
   page: 1,
-  size: 25,
+  size: 25
 });

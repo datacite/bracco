@@ -5,7 +5,12 @@ import { w } from '@ember/string';
 import countryList from 'iso-3166-country-list';
 import FileReader from 'ember-file-upload/system/file-reader';
 import ENV from 'bracco/config/environment';
-import { organizationTypeList, memberTypeList, focusAreaList, nonProfitStatusList } from 'bracco/models/provider';
+import {
+  organizationTypeList,
+  memberTypeList,
+  focusAreaList,
+  nonProfitStatusList
+} from 'bracco/models/provider';
 import _arr from 'lodash';
 
 // states and provinces use iso-3166-2 codes
@@ -135,6 +140,8 @@ const stateListAustralia = [
 export default Controller.extend({
   store: service(),
   features: service(),
+  router: service(),
+  flashMessages: service(),
 
   countryList,
   countries: null,
@@ -455,10 +462,9 @@ export default Controller.extend({
 
         // Stop unnecessary requests to save contacts by adding some conditions.
         if (
-          (contact.roleName == null) || 
+          contact.roleName == null ||
           !_arr.isEqual(contact.roleName, roleName)
-        )
-        {
+        ) {
           contact.set('roleName', roleName);
           contact.save();
         }
@@ -467,23 +473,27 @@ export default Controller.extend({
       this.model
         .save()
         .then(function (provider) {
-          self.transitionToRoute('providers.show', provider);
+          self.router.transitionTo('providers.show', provider);
         })
         // Report the reason (error) to the user.  Without that, the form appears to be frozen.
         .catch(function (reason) {
           console.debug(reason);
-          let msg = (reason?.errors[0]?.title ? reason.errors[0].title : ( reason?.title? reason.title : 'Cause is unknown.  Please contact support.' ));
+          let msg = reason?.errors[0]?.title
+            ? reason.errors[0].title
+            : reason?.title
+            ? reason.title
+            : 'Cause is unknown.  Please contact support.';
 
           self
-          .get('flashMessages')
-          .danger(
-            'An error occurred and while saving this provider.' + '  ' + msg
-          );
+            .get('flashMessages')
+            .danger(
+              'An error occurred and while saving this provider.' + '  ' + msg
+            );
         });
     },
     cancel() {
       this.model.rollbackAttributes();
-      this.transitionToRoute('providers.show', this.model);
+      this.router.transitionTo('providers.show', this.model);
     }
   }
 });

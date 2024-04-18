@@ -12,14 +12,18 @@ export default function reasonUtil(val = null, hash = { default: '' }) {
         val.responseJSON.errors.length > 0 &&
         val.responseJSON.errors[0].title
       ) {
-        ret = !isEmpty(val.responseJSON.errors[0].title) ? val.responseJSON.errors[0].title : hash.default;
+        ret = !isEmpty(val.responseJSON.errors[0].title)
+          ? val.responseJSON.errors[0].title
+          : hash.default;
       } else if (
         val.errors &&
         Array.isArray(val.errors) &&
         val.errors.length > 0 &&
         val.errors[0].title
       ) {
-        ret = !isEmpty(val.errors[0].title) ? val.errors[0].title : hash.default;
+        ret = !isEmpty(val.errors[0].title)
+          ? val.errors[0].title
+          : hash.default;
       } else {
         ret = hash.default;
       }

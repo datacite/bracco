@@ -2,9 +2,11 @@ import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
+import { setupIntl } from 'ember-intl/test-support';
 
 module('Integration | Component | provider-info', function (hooks) {
   setupRenderingTest(hooks);
+  setupIntl(hooks);
 
   test('it renders', async function (assert) {
     await render(hbs`{{provider-info}}`);
@@ -16,7 +18,9 @@ module('Integration | Component | provider-info', function (hooks) {
     assert
       .dom(this.element)
       .hasText(
-        `Role: Repositories by year 0 ${startDate+endDate} DOIs by year 0 in ${currentYear} ${startDate+endDate}`
+        `Role: Repositories by year 0 ${
+          startDate + endDate
+        } DOIs by year 0 in ${currentYear} ${startDate + endDate}`
       );
   });
 });

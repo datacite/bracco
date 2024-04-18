@@ -8,7 +8,7 @@
           <div class="register-card">
             <h3 class="title">Reset Password</h3>
 
-            {{#if requestSent}}
+            {{#if this.requestSent}}
               <br>
               <div>
                 <BsAlert @type="success">
@@ -18,7 +18,7 @@
 
               <div>
                 <LinkTo @route="sign-in">Use password</LinkTo> •
-                <a target="_blank" rel="noopener" href={{get (links) "CREATE_A_FABRICA_ACCOUNT_URL" }}>Need an account?</a>
+                <a target="_blank" rel="noopener noreferrer" href={{get (links) "CREATE_A_FABRICA_ACCOUNT_URL" }}>Need an account?</a>
               </div>
 
               <div class="pseudo-footer">
@@ -31,13 +31,13 @@
               <BsForm @formLayout="vertical" @model={{this}} @onSubmit={{action "sendLink"}} @submitOnEnter={{true}} as |form|>
                 <form.element @controlType="text" @property="identification" @label="Account ID" @helpText="Send a reset password link to the email address registered for this account."  />
 
-                {{#if errorMessage}}
-                  <div class="alert alert-danger">{{errorMessage}}</div>
+                {{#if this.errorMessage}}
+                  <div class="alert alert-danger">{{this.errorMessage}}</div>
                 {{/if}}
 
                 <div>
                   <LinkTo @route="sign-in">Use password</LinkTo> •
-                  <a target="_blank" rel="noopener" href={{get (links) "CREATE_A_FABRICA_ACCOUNT_URL" }}>Need an account?</a>
+                  <a target="_blank" rel="noopener noreferrer" href={{get (links) "CREATE_A_FABRICA_ACCOUNT_URL" }}>Need an account?</a>
                 </div>
 
                 <div class="pseudo-footer">

@@ -18,6 +18,6 @@ export default Component.extend({
     },
     toggleAlternateIdentifiers() {
       this.set('showAlternateIdentifiers', !this.showAlternateIdentifiers);
-    },
-  },
+    }
+  }
 });

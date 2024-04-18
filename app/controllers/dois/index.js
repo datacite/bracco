@@ -1,7 +1,31 @@
 import Controller from '@ember/controller';
+import { inject as service } from '@ember/service';
 
 export default Controller.extend({
-  queryParams: [ 'query', 'resource-type-id', 'provider-id', 'client-id', 'person-id', 'affiliation-id', 'prefix', 'year', 'created', 'registered', 'state', 'source', 'link-check-status', 'sort', 'schema-version', 'certificate', 'page', 'size', 'affiliation', 'publisher' ],
+  flashMessages: service(),
+
+  queryParams: [
+    'query',
+    'resource-type-id',
+    'provider-id',
+    'client-id',
+    'person-id',
+    'affiliation-id',
+    'prefix',
+    'year',
+    'created',
+    'registered',
+    'state',
+    'source',
+    'link-check-status',
+    'sort',
+    'schema-version',
+    'certificate',
+    'page',
+    'size',
+    'affiliation',
+    'publisher'
+  ],
   query: null,
   'resource-type-id': null,
   'provider-id': null,
@@ -22,5 +46,5 @@ export default Controller.extend({
   size: 25,
   affiliation: true,
   publisher: true,
-  composite: true,
+  composite: true
 });

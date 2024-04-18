@@ -1,11 +1,11 @@
 <div class="input-group">
-  <textarea class="form-control description-field {{if (not isSeriesInformation) 'no-error'}}" rows="8" style="resize:none" placeholder="Description" value={{fragment.description}}
-    oninput={{action "updateDescription" value="target.value"}} data-test-description/>    
+  <textarea class="form-control description-field {{unless this.isSeriesInformation 'no-error'}}" rows="8" style="resize:none" placeholder="Description" value={{this.fragment.description}}
+    oninput={{action "updateDescription" value="target.value"}} data-test-description />    
   <span class="input-group-addon">
-    <BsButton @outline={{true}} @onClick={{action "deleteDescription" index}}><i class="fas fa-trash pull-left"></i></BsButton>
+    <BsButton @outline={{true}} @onClick={{action "deleteDescription" this.index}}><i class="fas fa-trash pull-left"></i></BsButton>
   </span>
 </div>
-{{#if isSeriesInformation}}
+{{#if this.isSeriesInformation}}
   <div class="help-block help-block-fragment description-field">Enter series information in the recommended format of series title, followed by comma and optional volume(issue), firstpage-lastpage</div>
 {{else}}
   <div class="help-block help-block-fragment description-field">All additional information that does not fit in any of the other categories.</div>
@@ -15,9 +15,9 @@
   <label for="descriptionType" class="subtitle required-label">Description Type</label>
 </div>
 
-<div class="power-select-fragment">
-  <@form.element @controlType="power-select" @value={{fragment.descriptionType}} @options={{descriptionTypes}} @destination={{fragment.descriptionType}} as |el|>
-    <el.control @class="description-types" @onChange={{action "selectDescriptionType"}} @placeholder="Select Description Type" @allowClear={{false}} @disabled={{disabled}} @searchEnabled={{true}} />
+<div class="power-select-fragment" doi-description-type>
+  <@form.element @controlType="power-select" @value={{this.fragment.descriptionType}} @options={{this.descriptionTypes}} @destination={{this.fragment.descriptionType}} as |el|>
+    <el.control @class="description-types" @onChange={{action "selectDescriptionType"}} @placeholder="Select Description Type" @allowClear={{false}} @disabled={{this.disabled}} @searchEnabled={{true}} />
   </@form.element>
 </div>
 
@@ -26,9 +26,9 @@
   <label for="descriptionLang" class="subtitle">Language</label>
 </div>
 
-<div class="power-select-fragment description-langs">
-  <@form.element @controlType="power-select" @value={{language}} @options={{languages}} as |el|>
-    <el.control @class="description-langs" @onChange={{action "selectLanguage"}} @search={{action "searchLanguage"}} @placeholder="Select Language" @searchPlaceholder="Type to search..." @allowClear={{true}} @disabled={{disabled}} @searchEnabled={{true}} />
+<div class="power-select-fragment description-langs" doi-description-language>
+  <@form.element @controlType="power-select" @value={{this.language}} @options={{this.languages}} as |el|>
+    <el.control @class="description-langs" @onChange={{action "selectLanguage"}} @search={{action "searchLanguage"}} @placeholder="Select Language" @searchPlaceholder="Type to search..." @allowClear={{true}} @disabled={{this.disabled}} @searchEnabled={{true}} />
   </@form.element>
 </div>
 

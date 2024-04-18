@@ -3,19 +3,19 @@ import { setupTest } from 'ember-qunit';
 
 let options, builtOptions, validator, message;
 
-module('Unit | Validator | date-format', function(hooks) {
+module('Unit | Validator | date-format', function (hooks) {
   setupTest(hooks);
 
-  hooks.beforeEach(function() {
+  hooks.beforeEach(function () {
     validator = this.owner.lookup('validator:date-format');
   });
 
-  test('it works', function(assert) {
+  test('it works', function (assert) {
     let validator = this.owner.lookup('validator:date-format');
     assert.ok(validator);
   });
 
-  test('year', function(assert) {
+  test('year', function (assert) {
     assert.expect(2);
 
     builtOptions = validator.buildOptions({}).toObject();
@@ -24,10 +24,10 @@ module('Unit | Validator | date-format', function(hooks) {
     assert.equal(message, 'Please enter a valid date');
 
     message = validator.validate('2008', builtOptions);
-    assert.equal(message, true);
+    assert.true(message);
   });
 
-  test('year-month', function(assert) {
+  test('year-month', function (assert) {
     assert.expect(2);
 
     builtOptions = validator.buildOptions({}).toObject();
@@ -36,10 +36,10 @@ module('Unit | Validator | date-format', function(hooks) {
     assert.equal(message, 'Please enter a valid date');
 
     message = validator.validate('2008-12', builtOptions);
-    assert.equal(message, true);
+    assert.true(message);
   });
 
-  test('date', function(assert) {
+  test('date', function (assert) {
     assert.expect(2);
 
     builtOptions = validator.buildOptions({}).toObject();
@@ -48,10 +48,10 @@ module('Unit | Validator | date-format', function(hooks) {
     assert.equal(message, 'Please enter a valid date');
 
     message = validator.validate('2001-11-09', builtOptions);
-    assert.equal(message, true);
+    assert.true(message);
   });
 
-  test('timestamp', function(assert) {
+  test('timestamp', function (assert) {
     assert.expect(2);
 
     builtOptions = validator.buildOptions({}).toObject();
@@ -60,10 +60,10 @@ module('Unit | Validator | date-format', function(hooks) {
     assert.equal(message, 'Please enter a valid date');
 
     message = validator.validate('2015-07-02T06:00:05.000Z', builtOptions);
-    assert.equal(message, true);
+    assert.true(message);
   });
 
-  test('range', function(assert) {
+  test('range', function (assert) {
     assert.expect(2);
 
     builtOptions = validator.buildOptions({}).toObject();
@@ -72,10 +72,10 @@ module('Unit | Validator | date-format', function(hooks) {
     assert.equal(message, 'Please enter a valid date');
 
     message = validator.validate('2004-03-02/2005-06-02', builtOptions);
-    assert.equal(message, true);
+    assert.true(message);
   });
 
-  test('text', function(assert) {
+  test('text', function (assert) {
     assert.expect(2);
 
     builtOptions = validator.buildOptions({}).toObject();
@@ -87,7 +87,7 @@ module('Unit | Validator | date-format', function(hooks) {
     assert.equal(message, 'Please enter a valid date');
   });
 
-  test('500 BC', function(assert) {
+  test('500 BC', function (assert) {
     assert.expect(2);
 
     builtOptions = validator.buildOptions({}).toObject();
@@ -96,8 +96,6 @@ module('Unit | Validator | date-format', function(hooks) {
     assert.equal(message, 'Please enter a valid date');
 
     message = validator.validate('-0500', builtOptions);
-    assert.equal(message, true);
+    assert.true(message);
   });
 });
-
-

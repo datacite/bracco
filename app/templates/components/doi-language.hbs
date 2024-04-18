@@ -1,15 +1,15 @@
 <div
   class='form-group
-    {{if (v-get model "language" "isInvalid") "has-error" "has-feedback"}}'
+    {{if (v-get this.model "language" "isInvalid") "has-error" "has-feedback"}}'
 >
   <label class='control-label col-md-3'>Language</label>
   <div class='col-md-9'>
     <div class='label-vertical'>The primary language of the resource.</div>
     <div class='power-select-fragment' doi-language>
-      <@form.element @controlType="power-select" id="doi-language" @formLayout="vertical" @value={{language}} @options={{languages}} @helpText="The default Language vocabulary is provided by ISO 639-1. Any new language should be provided using two-letter or three-letter language codes." as |el|>
-        <el.control @onChange={{action "selectLanguage"}} @search={{action "searchLanguage"}} @placeholder="Search standard format OR add a new Language code" @onKeydown={{action "createOnEnter"}} @searchPlaceholder="Type to search..." @noMatchesMessage="Press ENTER to add a new Language code." @allowClear={{true}} @disabled={{disabled}} @searchEnabled={{true}} @ />
-        {{#if (v-get model 'language' 'isInvalid')}}
-          <div class='help-block'>{{v-get model 'language' 'message'}}</div>
+      <@form.element @controlType="power-select" id="doi-language" @formLayout="vertical" @value={{this.language}} @options={{this.languages}} @helpText="The default Language vocabulary is provided by ISO 639-1. Any new language should be provided using two-letter or three-letter language codes." as |el|>
+        <el.control @onChange={{action "selectLanguage"}} @search={{action "searchLanguage"}} @placeholder="Search standard format OR add a new Language code" @onKeydown={{action "createOnEnter"}} @searchPlaceholder="Type to search..." @noMatchesMessage="Press ENTER to add a new Language code." @allowClear={{true}} @disabled={{this.disabled}} @searchEnabled={{true}} @ />
+        {{#if (v-get this.model 'language' 'isInvalid')}}
+          <div class='invalid-feedback d-block'>{{v-get this.model 'language' 'message'}}</div>
         {{/if}}
       </@form.element>
     </div>

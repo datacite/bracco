@@ -42,11 +42,11 @@ export default Component.extend({
       this.set('oecdSelected', false);
     }
   },
-  subjectText(value){
+  subjectText(value) {
     if (this.simple) {
       return value;
     }
-    return "FOS: " + value;
+    return 'FOS: ' + value;
   },
 
   actions: {

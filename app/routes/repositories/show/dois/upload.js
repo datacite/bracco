@@ -4,16 +4,21 @@ import { inject as service } from '@ember/service';
 
 export default Route.extend({
   can: service(),
+  store: service(),
 
   model() {
     let repository = this.modelFor('repositories/show');
-    let doi = this.store.createRecord('doi', { repository, mode: 'upload', state: 'draft' });
+    let doi = this.store.createRecord('doi', {
+      repository,
+      mode: 'upload',
+      state: 'draft'
+    });
 
     return hash({
       repository,
-      doi,
+      doi
     });
-  },
+  }
 
   // afterModel(model) {
   //   if (this.get('can').cannot('create doi', model)) {

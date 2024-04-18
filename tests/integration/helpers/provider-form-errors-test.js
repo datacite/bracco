@@ -11,7 +11,7 @@ module('Integration | Helper | provider-form-errors', function (hooks) {
   test('it renders', async function (assert) {
     this.set('model', make('provider'));
 
-    await render(hbs`{{provider-form-errors model}}`);
+    await render(hbs`{{provider-form-errors this.model}}`);
 
     assert
       .dom(this.element)

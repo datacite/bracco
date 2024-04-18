@@ -1,51 +1,50 @@
 <h3 class="work">
-  {{#if isList}}
-    <LinkTo @route="dois.show" @model={{model.id}}>{{#if (and (gt model.titles.length 0) (gt model.titles.firstObject.title.length 0))}}{{format-text model.titles.firstObject.title}}{{else}}{{model.doi}}{{/if}}</LinkTo>
-    <span class="small" data-test-resource-type-general>{{model.types.resourceTypeGeneral}}</span>
+  {{#if this.isList}}
+    <LinkTo @route="dois.show" @model={{this.model.id}}>{{#if (and (gt this.model.titles.length 0) (gt this.model.titles.firstObject.title.length 0))}}{{format-text this.model.titles.firstObject.title}}{{else}}{{this.model.doi}}{{/if}}</LinkTo>
+    <span class="small" data-test-resource-type-general>{{this.model.types.resourceTypeGeneral}}</span>
   {{else}}
-    {{#if model.isDraft}}
-      {{#if (and (gt model.titles.length 0) (gt model.titles.firstObject.title.length 0))}}{{format-text model.titles.firstObject.title}}{{else}}{{model.doi}}{{/if}}
+    {{#if this.model.isDraft}}
+      {{#if (and (gt this.model.titles.length 0) (gt this.model.titles.firstObject.title.length 0))}}{{format-text this.model.titles.firstObject.title}}{{else}}{{this.model.doi}}{{/if}}
     {{else}}
-      <a target="_blank" rel="noopener"
-        href="{{model.identifier}}" data-test-doi>{{#if (gt model.titles.length 0)}}{{format-text model.titles.firstObject.title}}{{else}}{{model.doi}}{{/if}}</a>
+      <a target="_blank" rel="noopener noreferrer" href="{{this.model.identifier}}" data-test-doi>{{#if (gt this.model.titles.length 0)}}{{format-text this.model.titles.firstObject.title}}{{else}}{{this.model.doi}}{{/if}}</a>
     {{/if}}
-    <span class="small" data-test-resource-type-general>{{model.types.resourceTypeGeneral}}</span>
+    <span class="small" data-test-resource-type-general>{{this.model.types.resourceTypeGeneral}}</span>
   {{/if}}
 </h3>
-{{#if model.creators}}
+{{#if this.model.creators}}
 
-  <CreatorShow @creators={{model.creators}}  @showOnly="50" />
+  <CreatorShow @creators={{this.model.creators}}  @showOnly="50" />
 {{/if}}
 <div class="metadata" data-test-metadata>
-  {{format-metadata model.publicationYear resourceTypeGeneral=model.types.resourceTypeGeneral resourceType=model.types.resourceType container=model.bcontainer publisher=model.publisher version=model.version}}
+  {{format-metadata this.model.publicationYear resourceTypeGeneral=this.model.types.resourceTypeGeneral resourceType=this.model.types.resourceType container=this.model.bcontainer publisher=this.model.publisher version=this.model.version}}
 </div>
-{{#if model.descriptions}}
+{{#if this.model.descriptions}}
   <div class="description" data-test-description>
-    {{#if (gt model.descriptions.length 0)}}{{format-text model.descriptions.firstObject.description limit=150}}{{/if}}
+    {{#if (gt this.model.descriptions.length 0)}}{{format-text this.model.descriptions.firstObject.description limit=150}}{{/if}}
   </div>
 {{/if}}
-{{#if isList}}
+{{#if this.isList}}
   <div class="created" data-test-created>
     Created
-    {{format-time model.created year='numeric' month='long' day='numeric' hour='numeric' minute='numeric' second='numeric' timeZone='UTC' timeZoneName='short' hour12=false}}.
-    <span class="text-{{model.state}}">{{titleize model.state}}</span>
+    {{format-time this.model.created year='numeric' month='long' day='numeric' hour='numeric' minute='numeric' second='numeric' timeZone='UTC' timeZoneName='short' hour12=false}}.
+    <span class="text-{{this.model.state}}">{{titleize this.model.state}}</span>
   </div>
 {{/if}}
-{{#if isResearcherProfile}}
+{{#if this.isResearcherProfile}}
   <div class="metadata license">
     <div class="metrics-counter">
-      {{#if (add model.citationCount model.viewCount model.downloadCount)}}
-          {{#if model.citationCount}}
-            <i class="metrics-icons" citations-test-badge> <i class="fas fa-quote-right"></i> {{ format-numbers model.citationCount }} {{ pluralize model.citationCount 'Citation' without-count=true}}</i>
+      {{#if (add this.model.citationCount this.model.viewCount this.model.downloadCount)}}
+          {{#if this.model.citationCount}}
+            <i class="metrics-icons" citations-test-badge> <i class="fas fa-quote-right"></i> {{ format-numbers this.model.citationCount }} {{ pluralize this.model.citationCount 'Citation' without-count=true}}</i>
           {{else}}
             <i class="metrics-icons" citations-test-badge><i class="fas fa-info-circle"></i> No citations were reported.</i>
           {{/if}}
-          {{#if (add model.viewCount model.downloadCount) }}
-            {{#if model.viewCount}}
-              <i class="metrics-icons"><i class="fas fa-eye"></i> {{ format-numbers model.viewCount }}  {{ pluralize model.viewCount 'View' without-count=true }} </i>
+          {{#if (add this.model.viewCount this.model.downloadCount) }}
+            {{#if this.model.viewCount}}
+              <i class="metrics-icons"><i class="fas fa-eye"></i> {{ format-numbers this.model.viewCount }}  {{ pluralize this.model.viewCount 'View' without-count=true }} </i>
             {{/if}}
-            {{#if model.downloadCount}}
-              <i class="metrics-icons"><i class="fas fa-download"></i> {{ format-numbers model.downloadCount }}   {{ pluralize model.downloadCount 'Download' without-count=true }} </i>
+            {{#if this.model.downloadCount}}
+              <i class="metrics-icons"><i class="fas fa-download"></i> {{ format-numbers this.model.downloadCount }}   {{ pluralize this.model.downloadCount 'Download' without-count=true }} </i>
             {{/if}}
           {{else}}
             <i class="metrics-icons"><i class="fas fa-info-circle"></i> No usage information was reported.</i>
@@ -56,8 +55,8 @@
     </div>
   </div>
 {{/if}}
-{{#if model.rightsList}}
-  {{#each model.rightsList as |rights|}}
+{{#if this.model.rightsList}}
+  {{#each this.model.rightsList as |rights|}}
     <CcLicense @licenseURL={{rights.rightsUri}} />
   {{/each}}
 {{/if}}

@@ -9,11 +9,13 @@ export default Route.extend(ApplicationRouteMixin, {
   currentUser: service(),
   headData: service(),
   intl: service(),
+  router: service(),
 
   isTokenAuthenticating: null,
 
-  beforeModel() {
-    this.intl.setLocale([ 'en-us' ]);
+  async beforeModel() {
+    await this.session.setup();
+    this.intl.setLocale(['en-us']);
     set(this, 'headData.siteName', ENV.SITE_TITLE);
     return this._loadCurrentUser();
   },
@@ -25,7 +27,7 @@ export default Route.extend(ApplicationRouteMixin, {
         this.session.invalidate();
       }
       let self = this;
-      this.session.authenticate('authenticator:jwt', jwt).then(function() {
+      this.session.authenticate('authenticator:jwt', jwt).then(function () {
         return self._loadCurrentUser();
       });
     }
@@ -34,7 +36,7 @@ export default Route.extend(ApplicationRouteMixin, {
     if (!this.isTokenAuthenticating) {
       this._super(...arguments);
       this._loadCurrentUser();
-      this.transitionTo('providers');
+      this.router.transitionTo('providers');
     } else {
       this.set('isTokenAuthenticating', false);
     }
@@ -46,5 +48,5 @@ export default Route.extend(ApplicationRouteMixin, {
   },
   _loadCurrentUser() {
     return this.currentUser.load().catch(() => this.session.invalidate());
-  },
+  }
 });

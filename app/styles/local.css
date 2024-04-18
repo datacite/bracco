@@ -3,35 +3,39 @@
     {{ENV.CDN_URL}}/stylesheets/doi.css?version=3.9.43
 */
 
-/* create-doi-button - lot of styling to make it more consistent with app styling */
+/* CREATE-DOI-BUTTON - lot of styling to make it more consistent with app styling */
 
 /* Otherwise drop-down menu falls behind other objects. */
 .create-doi-button .ember-bootstrap-dropdown-bs3-popper {
-  z-index: 10000;
+z-index: 10000;
 }
 
-.create-doi-button ul.dropdown-menu.show {
+.create-doi-button .dropdown-menu.show {
   margin-top: -2px;
   margin-left: 10px;
   padding: 3px 0px;
+  left: 85%;
 }
 
-.create-doi-button ul.dropdown-menu.show a {
+.create-doi-button .dropdown-menu.show a {
+  display: block;
+  color: #88939a;
   width: 100%;
   font-size: 16px !important;
   padding: 6px 15px;
 }
 
-.create-doi-button ul.dropdown-menu.show a i {
+.create-doi-button .dropdown-menu.show a i {
   margin-right: 3px;
 }
 
-.create-doi-button ul.dropdown-menu.show a:hover {
+.create-doi-button .dropdown-menu.show a:hover {
   background-color: rgb(128, 128, 128, .1);
 }
 
 .create-doi-button button {
   font-size: 16px !important;
+  transition: none;
 }
 
 .create-doi-button .btn, .navbar .navbar-nav>li>a.btn {
@@ -50,21 +54,20 @@
 
 .create-doi-button .btn-group {
   width: 100%;
-  display: flex;
+  display: flex !important;
 }
 
 .create-doi-button .btn-group>.btn:first-child:not(:last-child):not(.dropdown-toggle) {
   width: 100%;
 }
 
-/****************/
+/* INFO TAB - chart placement on info tab*/
 
-/* To make a left sidebar button line up with the others. */
-.btn-group-vertical {
-  margin-left: 5px;
+#info-tab.content div.row.user-role, #info-tab div.row.row-chart div  {
+  margin-left: 0 !important;
 }
 
-/* Fix info tab bar chart resize at upper breakpoints.  Div width @ 33% causes svg to overflow the box.*/
+/* Fix info tab bar chart resize at upper breakpoints.  Div width @ 33% causes chart svgs to overflow their boxes.*/
 
 @media (min-width: 992px) {
   .row-chart .col-md-4 {
@@ -72,12 +75,19 @@
   }
 }
 
-/* Fix info tab bar chart indent at upper breakpoint.*/
+/* Fix info tab bar chart indent at upper breakpoint. */
 @media (min-width: 1200px) {
   .col-lg-offset-3 {
-      /* margin-left: 25%; */
+      /* margin-left: 25%;  */
       margin-left: 0;
   }
+}
+
+/* BUTTON GROUPS - LEFT SIDE OF PAGE */
+
+/* To make a left sidebar button line up with the others. */
+.btn-group-vertical {
+  margin-left: 5px;
 }
 
 /* Make this look more like other "buttons" in the left sidebar. */
@@ -109,7 +119,435 @@ button[aria-expanded="false"] .caret.caret-point{
 }
 
 /* Power select - doi-format */
+/*
 div[doi-format].power-select-fragment .ember-basic-dropdown-trigger div.ember-view{
   display:inline-block;
   padding-left: 5px;
+}
+*/
+
+/***********************/
+/* ember-bootstrap 5   */
+/***********************/
+
+/* BASE DOI FROM assets.datacite.org/doi.css (based on bootstrap 3.4) - this must be fixed. */
+
+/*
+ * See migration documents: 
+ * - https://getbootstrap.com/docs/4.0/migration/#forms-1
+ * - https://getbootstrap.com/docs/5.0/migration/
+ */
+
+/*  VALIDATION - FORM-GROUPS */
+
+.form-group .form-text {
+  font-size: 16px;
+  display: block;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  color: #737373;
+  font-size: 16px;
+}
+
+.form-group.has-error input, .form-group.has-error select {
+  color: #e74c3c; 
+  border-color: #e74c3c;
+}
+
+.form-group.has-error .help-block {
+  display: none;
+}
+
+.form-group.has-error .invalid-feedback {
+  color: #e74c3c;
+}
+
+.invalid-feedback {
+  margin-top: 5px;
+  font-size: 16px;
+}
+
+.is-invalid ~ .invalid-feedback {
+  color: #e74c3c;
+}
+
+.is-invalid ~ .form-text {
+  display: none;
+}
+
+.form-group.has-error .form-text {
+  display: none;
+}
+
+.form-group .help-block.success {
+  color: #2ecc71;
+}
+
+.form-group input.is-valid, .form-group select.is-valid {
+  color: #2ecc71; 
+  border-color: #2ecc71;
+}
+
+/* Fragile - next sibiling */
+.form-group input.is-valid + div.form-text{
+  color: #2ecc71; 
+}
+
+#doi-edit-form div#doi, #doi-modify-form-file-upload div#doi {
+  margin-left: 0;
+}
+
+/* Fix a slight spacing problem - text inputs doi forms - url/publication year. */
+.input-fragment .form-group div.col-md-9 {
+  padding-left: 0;
+  width: 100%;
+}
+
+/*******/
+
+.form-group.has-success[doi-types] .control-label::before {
+  color: rgb(231, 76, 60);
+}
+
+.form-group.has-success[doi-types] .control-label {
+  color: rgb(52, 73, 94);
+}
+
+.form-group.has-success.has-feedback .form-text
+{
+  color: #2ecc71;
+}
+
+.form-group.has-success.has-feedback .ember-basic-dropdown-trigger
+{
+  color: #2ecc71;
+  border-color: #2ecc71;
+}
+
+lock {
+  color: #2ecc71;
+}
+
+/* Resource type general validation */
+
+.is-valid .ember-basic-dropdown-trigger {
+  color: #2ecc71;
+  border-color: #2ecc71;
+}
+
+.is-valid .form-text {
+  color: #2ecc71;
+  border-color: #2ecc71;
+}
+
+/* Fix a slight spacing problem - text inputs - doi forms - version. */
+
+.input-fragment div.col-md-9 {
+  /*padding-left: 0;
+  padding-right: 0;*/
+  width: 100%;
+}
+
+
+/** flashmessage box at the bottom of the form - style changed from 'in' ti 'show' **/
+
+.fade.show {
+  opacity: 1;
+}
+
+/* DOI CREATE/EDIT FORM - FILE UPLOAD. */
+
+#metadata div:first-child {
+  margin-left: 25%;
+}
+
+@media (max-width: 992px) {
+  #metadata div:first-child {
+    margin-left: 0;
+  }
+}
+
+.form-control.is-valid {
+  border-color: #2ecc71;
+  color: #2ecc71;
+}
+
+.form-control.is-valid ~ .form-text {
+  border-color: #2ecc71;
+  color: #2ecc71;
+}
+
+.form-control.is-invalid {
+  border-color: #e74c3c;
+  color: #e74c3c;
+}
+
+.form-control.is-invalid ~ .form-text {
+  border-color: #e74c3c;
+  color: #e74c3c;
+}
+
+/* APPLICATION HEADER - right side dropdown classes. */
+
+.show .dropdown-menu {
+  opacity: 1;
+  filter: alpha(opacity = 100);
+  visibility: visible;
+  overflow: hidden;
+}
+
+.dropdown.show .dropdown-menu, .navbar-nav>li.open>.dropdown-menu {
+  transform: translateZ(0);
+}
+
+.dropdown.nav-item.show .dropdown-menu>a {
+  color: #34495e;
+  font-size: 16px;
+  padding: 6px 15px;
+  background-color: transparent;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  -ms-transition: none;
+  transition: none;
+  display: block;
+  clear: both;
+  font-weight: 400;
+  line-height: 1.42857;
+  white-space: nowrap;
+}
+
+.dropdown.nav-item.show .dropdown-menu a:focus, .dropdown.nav-item.show .dropdown-menu a:hover {
+  background-color: #34495e;
+  color: hsla(0,0%,100%,.7);
+  opacity: 1;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.dropdown.nav-item.show .dropdown-menu .dropdown-divider {
+  background-color: #e0e3e5;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  overflow: hidden;
+}
+
+/* APPLICATION HEADER - progress bar */
+
+span.visually-hidden {
+  display: none;
+}
+
+div.progress {
+  margin-bottom: 0px;
+}
+
+/* REPOSITORY NEW/EDIT FORM */
+
+.form-horizontal .form-group label.col-form-label, .form-horizontal label.col-form-label {
+    padding-top: 7px;
+    margin-bottom: 0;
+    text-align: right;
+}
+
+.form-group#is-active div.col-md-9.offset-md-3 {
+  margin-left: 25%;
+}
+
+@media (max-width: 992px) {
+  .form-group#is-active div.col-md-9.offset-md-3 {
+      margin-left: 0;
+  }
+}
+
+.form-group#is-active label.form-check-label {
+  padding-left: 7px;
+}
+
+/* SIGN-IN PAGE */
+
+.navbar .navbar-header a.navbar-brand.title-inverted  {
+  color: #fff !important;
+  background-color: transparent;
+}
+
+/* PASSWORD CHANGE PAGES */
+
+/* Show/hide password in input field. */
+
+@media (min-width: 768px) {
+  form i#togglePassword, form i#toggleConfirmPassword {
+    z-index: 9999;
+    position: absolute;
+    top: 12%;
+    right: 25px;
+    cursor: pointer;
+  }
+}
+
+/* DOI FORMS - power-select styles. */
+
+.power-select-fragment,
+.power-select-fragment[doi-contributor-type],
+.power-select-fragment[doi-language],
+.power-select-fragment[doi-related-item-contributor-type]
+{
+  margin-left: 0 !important;
+  width: 100% !important;
+}
+
+.power-select-fragment[doi-subject], 
+.power-select-fragment[doi-affiliation],
+.power-select-fragment[doi-resource-type],
+.power-select-fragment[doi-title-type],
+.power-select-fragment[doi-title-lang],
+.power-select-fragment[data-repository-language],
+.power-select-fragment[data-repository-type],
+.power-select-fragment[data-repository-certificate],
+.power-select-fragment[doi-date-type]
+{
+  /*margin-left: 0 !important;*/
+  margin-bottom: 1.5em !important;
+  width: 100% !important;
+}
+
+.power-select-fragment[doi-subject] div:first-child,
+.power-select-fragment[doi-affiliation] div:first-child,
+.power-select-fragment[doi-resource-type] div:first-child,
+.power-select-fragment[doi-title-type] div:first-child,
+.power-select-fragment[doi-title-lang] div:first-child,
+.power-select-fragment[data-repository-language] div:first-child,
+.power-select-fragment[data-repository-type] div:first-child,
+.power-select-fragment[data-repository-certificate] div:first-child,
+.power-select-fragment[doi-date-type] div:first-child,
+.power-select-fragment[doi-related-identifier-type] div:first-child,
+.power-select-fragment[doi-relation-type] div:first-child,
+.power-select-fragment[doi-resource-type-general] div:first-child,
+.power-select-fragment[doi-language] div:first-child,
+.power-select-fragment[doi-alternate-identifier-type] div:first-child,
+.power-select-fragment[doi-rights] div:first-child,
+.power-select-fragment[doi-format] div:first-child,
+.power-select-fragment[doi-funder-name] div:first-child,
+.power-select-fragment[doi-funder-identifier-type] div:first-child,
+.power-select-fragment[doi-related-item-type] div:first-child,
+.power-select-fragment[doi-related-item-identifier] div:first-child,
+.power-select-fragment[doi-description-type] div:first-child,
+.power-select-fragment[doi-description-language] div:first-child
+{
+  padding: 0;
+  width: 100% !important;
+}
+
+.power-select-fragment[doi-alternate-identifier-type],
+.power-select-fragment[doi-rights],
+.power-select-fragment[doi-format],
+.power-select-fragment[doi-funder-name],
+.power-select-fragment[doi-funder-identifier-type],
+.power-select-fragment[doi-related-item-type],
+.power-select-fragment[doi-relation-type],
+.power-select-fragment[doi-related-item-identifier]
+{
+  margin-left: 15px !important;
+  width: 100% !important;
+}
+
+/* DOI FORMS - DOI field */
+
+#suffix {
+  display: inline-block;
+  width: 100%;
+}
+
+#suffix .input-group-addon.refresh {
+  right: 55px;
+}
+
+#suffix .input-group-addon.clear {
+  right: 28px;
+}
+
+#suffix .form-text {
+  margin-left: -118px;
+  margin-top: 44px;
+}
+
+/* DOI FORMS */
+
+.add-name-identifier {
+  margin-top: 0px !important;
+}
+
+#doi > div {
+  padding-left: 0px;
+}
+
+#url > div {
+  padding-right: 0px;
+}
+
+#publication-year > div {
+  padding-right: 0px;
+}
+
+#resource-type-general > div {
+  padding-right: 0px;
+}
+
+div[doi-publisher] > div {
+  padding-right: 0px;
+}
+
+/* HAMBURGER - looks good, but doesn't work.  */
+
+.navbar-toggler-icon {
+  display: inline-block;
+  width: 1.5em;
+  height: 1.5em;
+  vertical-align: middle;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%2833, 37, 41, 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
+}
+
+/* DOI FORMS - UPLOAD */
+
+.has-error .form-control,
+.has-error .es-control,
+.is-invalid.text-area.form-control
+{
+  color: #e74c3c;
+  border-color: #e74c3c;
+}
+/*
+textarea.form-control.is-valid
+{
+  color: #2ecc71;
+  border-color: #2ecc71;
+}
+*/
+.form-group input.is-valid + div.form-text {
+    color: #2ecc71;
+}
+*/
+
+/* VALIDATION - text areas (Mostly in doi form upload.) */
+
+.form-group.has-feedback textarea.form-control
+{
+  color: #2ecc71;
+  border-color: #2ecc71;
+}
+
+.form-group.has-error textarea.form-control
+{
+  color: #e74c3c;
+  border-color: #e74c3c;
+}
+
+/* Fixes email service contract field (repositories/new) */
+.form-group .has-error .help-block
+{
+  color: #e74c3c;
 }

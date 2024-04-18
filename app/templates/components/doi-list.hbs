@@ -1,9 +1,9 @@
 <div data-test-left-sidebar class="col-md-3">
   {{#if
-    (eq link 'repositories.show.dois')
+    (eq this.link 'repositories.show.dois')
   }}
-    {{#if repository.isActive}}
-      {{#if (and repository.isActive (or (can 'create doi' model) (can 'upload doi' model)) (not (gt repository.meta.prefixCount 0)))}}
+    {{#if this.repository.isActive}}
+      {{#if (and this.repository.isActive (or (can 'create doi' this.model) (can 'upload doi' this.model)) (not (gt this.repository.meta.prefixCount 0)))}}
         <div class="panel panel-transparent">
           <div class="panel-body">
             <BsAlert @dismissible={{false}} @type="warning">
@@ -13,26 +13,26 @@
         </div>
       {{/if}}
 
-      {{#if (gt model.length 0) }} 
+      {{#if (gt this.model.length 0) }} 
         <div class="panel facets add-25">
           <div class="panel-body">
             <div class="btn-toolbar">
               <div class="shrink">
-                {{#if (and repository.isActive (or (can 'create doi' model) (can 'upload doi' model)) (gt repository.meta.prefixCount 0))}}
-                  <CreateDoiButton @model={{model}} class="create-doi-button" />
+                {{#if (and this.repository.isActive (or (can 'create doi' this.model) (can 'upload doi' this.model)) (gt this.repository.meta.prefixCount 0))}}
+                  <CreateDoiButton @model={{this.model}} class="create-doi-button" />
                 {{/if}}
                 <div class="btn-group-vertical btn-group-sm">
-                  <ExportBasicMetadata @model={{model}} @client_id={{repository.id}} @page={{page}} class="btn btn-warning" />
-                  {{#if (and (can 'move doi' repository))}} 
+                  <ExportBasicMetadata @model={{this.model}} @client_id={{this.repository.id}} @page={{this.page}} class="btn btn-warning" />
+                  {{#if (and (can 'move doi' this.repository))}} 
                     <LinkTo
                       @route="repositories.show.transfer"
-                      @model={{repository.id}}
+                      @model={{this.repository.id}}
                       class="btn btn-warning"
-                      @id="transfer-dois"
+                      id="transfer-dois"
                     >
                       <i class="fas fa-arrow-circle-right"></i>
                       Transfer
-                      {{if media.isXl ' DOIs'}}
+                      {{if this.media.isXl ' DOIs'}}
                     </LinkTo>
                   {{/if}}
                 </div>
@@ -41,10 +41,10 @@
           </div>
         </div>
       {{else}}
-        {{#if (and repository.isActive (or (can 'create doi' model) (can 'upload doi' model)) (gt repository.meta.prefixCount 0))}}
+        {{#if (and this.repository.isActive (or (can 'create doi' this.model) (can 'upload doi' this.model)) (gt this.repository.meta.prefixCount 0))}}
           <div class="panel facets">
             <div class="panel-body">
-              <CreateDoiButton @model={{model}} class="create-doi-button" />
+              <CreateDoiButton @model={{this.model}} class="create-doi-button" />
             </div>
           </div>
         {{/if}}
@@ -57,22 +57,22 @@
         </div> 
       {{/if}}
     {{else}}
-      {{#if (gt model.length 0) }} 
+      {{#if (gt this.model.length 0) }} 
         <div class="panel facets add-25">
           <div class="panel-body">
             <div class="btn-toolbar">
               <div class="btn-group-vertical btn-group-sm">
-                <ExportBasicMetadata @model={{model}} @client_id={{repository.id}} @page={{page}} class="btn btn-warning" />
-                {{#if (and (can 'move doi' repository))}} 
+                <ExportBasicMetadata @model={{this.model}} @client_id={{this.repository.id}} @page={{this.page}} class="btn btn-warning" />
+                {{#if (and (can 'move doi' this.repository))}} 
                   <LinkTo
                     @route="repositories.show.transfer"
-                    @model={{repository.id}}
+                    @model={{this.repository.id}}
                     class="btn btn-warning"
-                    @id="transfer-dois"
+                    id="transfer-dois"
                   >
                     <i class="fas fa-arrow-circle-right"></i>
                     Transfer
-                    {{if media.isXl ' DOIs'}}
+                    {{if this.media.isXl ' DOIs'}}
                   </LinkTo>
                 {{/if}}
               </div>
@@ -91,22 +91,22 @@
     {{/if}}
   {{/if}}
 
-  {{#if (and (can 'viewState doi') (or model.meta.states model.query.state))}}
+  {{#if (and (can 'viewState doi') (or this.model.meta.states this.model.query.state))}}
     <div class="panel facets">
       <div class="panel-body">
         <h4>
           State
         </h4>
         <ul>
-          {{#if model.meta.states}}
-            {{#each model.meta.states as |state|}}
+          {{#if this.model.meta.states}}
+            {{#each this.model.meta.states as |state|}}
               <li>
-                {{#if model.query.state}}
-                  <LinkTo @route={{link}} @query={{hash state=null}}>
+                {{#if this.model.query.state}}
+                  <LinkTo @route={{this.link}} @query={{hash state=null}}>
                     <i class="far fa-check-square"></i>
                   </LinkTo>
                 {{else}}
-                  <LinkTo @route={{link}} @query={{hash state=state.id}}>
+                  <LinkTo @route={{this.link}} @query={{hash state=state.id}}>
                     <i class="far fa-square"></i>
                   </LinkTo>
                 {{/if}}
@@ -121,11 +121,11 @@
             {{/each}}
           {{else}}
             <li>
-              <LinkTo @route={{link}} @query={{hash state=''}}>
+              <LinkTo @route={{this.link}} @query={{hash state=''}}>
                 <i class="far fa-check-square"></i>
               </LinkTo>
               <div class="facet-title">
-                {{titleize model.query.state}}
+                {{titleize this.model.query.state}}
               </div>
               <span class="number pull-right">
                 0
@@ -137,23 +137,23 @@
       </div>
     </div>
   {{/if}}
-  {{#if (or model.meta.resourceTypes model.query.resource-type-id)}}
+  {{#if (or this.model.meta.resourceTypes this.model.query.resource-type-id)}}
     <div class="panel facets">
       <div class="panel-body">
         <h4>
           Resource Type
         </h4>
         <ul>
-          {{#if model.meta.resourceTypes}}
-            {{#each model.meta.resourceTypes as |resourceType|}}
+          {{#if this.model.meta.resourceTypes}}
+            {{#each this.model.meta.resourceTypes as |resourceType|}}
               <li>
-                {{#if model.query.resource-type-id}}
-                  <LinkTo @route={{link}} @query={{hash resource-type-id=''}}>
+                {{#if this.model.query.resource-type-id}}
+                  <LinkTo @route={{this.link}} @query={{hash resource-type-id=''}}>
                     <i class="far fa-check-square"></i>
                   </LinkTo>
                 {{else}}
                   <LinkTo
-                    @route={{link}}
+                    @route={{this.link}}
                     @query={{hash resource-type-id=resourceType.id}}
                   >
                     <i class="far fa-square"></i>
@@ -170,11 +170,11 @@
             {{/each}}
           {{else}}
             <li>
-              <LinkTo @route={{link}} @query={{hash resource-type-id=''}}>
+              <LinkTo @route={{this.link}} @query={{hash resource-type-id=''}}>
                 <i class="far fa-check-square"></i>
               </LinkTo>
               <div class="facet-title">
-                {{humanize (underscore model.query.resource-type-id)}}
+                {{humanize (underscore this.model.query.resource-type-id)}}
               </div>
               <span class="number pull-right">
                 0
@@ -186,23 +186,23 @@
       </div>
     </div>
   {{/if}}
-  {{#if isResearcherProfile}}
-    {{#if (or model.meta.published model.query.published)}}
+  {{#if this.isResearcherProfile}}
+    {{#if (or this.model.meta.published this.model.query.published)}}
       <div class="panel facets">
         <div class="panel-body">
           <h4>
             Year published
           </h4>
           <ul>
-            {{#if model.meta.published}}
-              {{#each model.meta.published as |year|}}
+            {{#if this.model.meta.published}}
+              {{#each this.model.meta.published as |year|}}
                 <li>
-                  {{#if model.query.published}}
-                    <LinkTo @route={{link}} @query={{hash published=''}}>
+                  {{#if this.model.query.published}}
+                    <LinkTo @route={{this.link}} @query={{hash published=''}}>
                       <i class="far fa-check-square"></i>
                     </LinkTo>
                   {{else}}
-                    <LinkTo @route={{link}} @query={{hash published=year.id}}>
+                    <LinkTo @route={{this.link}} @query={{hash published=year.id}}>
                       <i class="far fa-square"></i>
                     </LinkTo>
                   {{/if}}
@@ -217,11 +217,11 @@
               {{/each}}
             {{else}}
               <li>
-                <LinkTo @route={{link}} @query={{hash published=''}}>
+                <LinkTo @route={{this.link}} @query={{hash published=''}}>
                   <i class="far fa-check-square"></i>
                 </LinkTo>
                 <div class="facet-title">
-                  {{model.query.published}}
+                  {{this.model.query.published}}
                 </div>
                 <span class="number pull-right">
                   0
@@ -233,22 +233,22 @@
         </div>
       </div>
     {{/if}}
-  {{else if (or model.meta.created model.query.created)}}
+  {{else if (or this.model.meta.created this.model.query.created)}}
     <div class="panel facets">
       <div class="panel-body">
         <h4>
           Year created
         </h4>
         <ul>
-          {{#if model.meta.created}}
-            {{#each model.meta.created as |year|}}
+          {{#if this.model.meta.created}}
+            {{#each this.model.meta.created as |year|}}
               <li>
-                {{#if model.query.created}}
-                  <LinkTo @route={{link}} @query={{hash created=''}}>
+                {{#if this.model.query.created}}
+                  <LinkTo @route={{this.link}} @query={{hash created=''}}>
                     <i class="far fa-check-square"></i>
                   </LinkTo>
                 {{else}}
-                  <LinkTo @route={{link}} @query={{hash created=year.id}}>
+                  <LinkTo @route={{this.link}} @query={{hash created=year.id}}>
                     <i class="far fa-square"></i>
                   </LinkTo>
                 {{/if}}
@@ -263,11 +263,11 @@
             {{/each}}
           {{else}}
             <li>
-              <LinkTo @route={{link}} @query={{hash created=''}}>
+              <LinkTo @route={{this.link}} @query={{hash created=''}}>
                 <i class="far fa-check-square"></i>
               </LinkTo>
               <div class="facet-title">
-                {{model.query.created}}
+                {{this.model.query.created}}
               </div>
               <span class="number pull-right">
                 0
@@ -281,7 +281,7 @@
   {{/if}}
   {{#if
     (and
-      (can 'source doi' model) (or model.meta.registered model.query.registered)
+      (can 'source doi' this.model) (or this.model.meta.registered this.model.query.registered)
     )
   }}
     <div class="panel facets">
@@ -290,15 +290,15 @@
           Year registered
         </h4>
         <ul>
-          {{#if model.meta.registered}}
-            {{#each model.meta.registered as |year|}}
+          {{#if this.model.meta.registered}}
+            {{#each this.model.meta.registered as |year|}}
               <li>
-                {{#if model.query.registered}}
-                  <LinkTo @route={{link}} @query={{hash registered=''}}>
+                {{#if this.model.query.registered}}
+                  <LinkTo @route={{this.link}} @query={{hash registered=''}}>
                     <i class="far fa-check-square"></i>
                   </LinkTo>
                 {{else}}
-                  <LinkTo @route={{link}} @query={{hash registered=year.id}}>
+                  <LinkTo @route={{this.link}} @query={{hash registered=year.id}}>
                     <i class="far fa-square"></i>
                   </LinkTo>
                 {{/if}}
@@ -313,11 +313,11 @@
             {{/each}}
           {{else}}
             <li>
-              <LinkTo @route={{link}} @query={{hash registered=''}}>
+              <LinkTo @route={{this.link}} @query={{hash registered=''}}>
                 <i class="far fa-check-square"></i>
               </LinkTo>
               <div class="facet-title">
-                {{model.query.registered}}
+                {{this.model.query.registered}}
               </div>
               <span class="number pull-right">
                 0
@@ -332,13 +332,10 @@
 
   {{#if
     (and
-      (not (is-empty model.content))
-      (not-eq
-        link
-        'repositories.show.dois'
-        or
-        model.meta.clients
-        model.query.client-id
+      (not (is-empty this.model.content))
+      (or
+        (not-eq this.link 'repositories.show.dois')
+        (not-eq this.model.meta.clients this.model.query.client-id)
       )
     )
   }}
@@ -348,15 +345,15 @@
           Repository
         </h4>
         <ul>
-          {{#if model.meta.clients}}
-            {{#each model.meta.clients as |client|}}
+          {{#if this.model.meta.clients}}
+            {{#each this.model.meta.clients as |client|}}
               <li>
-                {{#if model.query.client-id}}
-                  <LinkTo @route={{link}} @query={{hash client-id=''}}>
+                {{#if this.model.query.client-id}}
+                  <LinkTo @route={{this.link}} @query={{hash client-id=''}}>
                     <i class="far fa-check-square"></i>
                   </LinkTo>
                 {{else}}
-                  <LinkTo @route={{link}} @query={{hash client-id=client.id}}>
+                  <LinkTo @route={{this.link}} @query={{hash client-id=client.id}}>
                     <i class="far fa-square"></i>
                   </LinkTo>
                 {{/if}}
@@ -371,11 +368,11 @@
             {{/each}}
           {{else}}
             <li>
-              <LinkTo @route={{link}} @query={{hash client-id=''}}>
+              <LinkTo @route={{this.link}} @query={{hash client-id=''}}>
                 <i class="far fa-check-square"></i>
               </LinkTo>
               <div class="facet-title">
-                <model.query.client-id />
+                {{this.model.query.client-id}}
               </div>
               <span class="number pull-right">
                 0
@@ -389,8 +386,8 @@
   {{/if}}
   {{#if
     (and
-      (can 'source doi' model)
-      (or model.meta.affiliations model.query.affiliation-id)
+      (can 'source doi' this.model)
+      (or this.model.meta.affiliations this.model.query.affiliation-id)
     )
   }}
     <div class="panel facets add">
@@ -399,17 +396,17 @@
           Affiliation
         </h4>
         <ul>
-          {{#if model.meta.affiliations}}
-            {{#each model.meta.affiliations as |affiliation|}}
+          {{#if this.model.meta.affiliations}}
+            {{#each this.model.meta.affiliations as |affiliation|}}
               {{#if (not-eq affiliation.id affiliation.title)}}
                 <li>
-                  {{#if model.query.affiliation-id}}
-                    <LinkTo @route={{link}} @query={{hash affiliation-id=null}}>
+                  {{#if this.model.query.affiliation-id}}
+                    <LinkTo @route={{this.link}} @query={{hash affiliation-id=null}}>
                       <i class="far fa-check-square"></i>
                     </LinkTo>
                   {{else}}
                     <LinkTo
-                      @route={{link}}
+                      @route={{this.link}}
                       @query={{hash affiliation-id=affiliation.id}}
                     >
                       <i class="far fa-square"></i>
@@ -427,11 +424,11 @@
             {{/each}}
           {{else}}
             <li>
-              <LinkTo @route={{link}} @query={{hash affiliation-id=''}}>
+              <LinkTo @route={{this.link}} @query={{hash affiliation-id=''}}>
                 <i class="far fa-check-square"></i>
               </LinkTo>
               <div class="facet-title">
-                <model.query.affiliation-id />
+                {{this.model.query.affiliation-id}}
               </div>
               <span class="number pull-right">
                 0
@@ -443,23 +440,23 @@
       </div>
     </div>
   {{/if}}
-  {{#unless isResearcherProfile}}
-    {{#if (or model.meta.prefixes model.query.prefix)}}
+  {{#unless this.isResearcherProfile}}
+    {{#if (or this.model.meta.prefixes this.model.query.prefix)}}
       <div class="panel facets">
         <div class="panel-body">
           <h4>
             Prefix
           </h4>
           <ul>
-            {{#if model.meta.prefixes}}
-              {{#each model.meta.prefixes as |prefix|}}
+            {{#if this.model.meta.prefixes}}
+              {{#each this.model.meta.prefixes as |prefix|}}
                 <li>
-                  {{#if model.query.prefix}}
-                    <LinkTo @route={{link}} @query={{hash prefix=''}}>
+                  {{#if this.model.query.prefix}}
+                    <LinkTo @route={{this.link}} @query={{hash prefix=''}}>
                       <i class="far fa-check-square"></i>
                     </LinkTo>
                   {{else}}
-                    <LinkTo @route={{link}} @query={{hash prefix=prefix.id}}>
+                    <LinkTo @route={{this.link}} @query={{hash prefix=prefix.id}}>
                       <i class="far fa-square"></i>
                     </LinkTo>
                   {{/if}}
@@ -474,11 +471,11 @@
               {{/each}}
             {{else}}
               <li>
-                <LinkTo @route={{link}} @query={{hash prefix=''}}>
+                <LinkTo @route={{this.link}} @query={{hash prefix=''}}>
                   <i class="far fa-check-square"></i>
                 </LinkTo>
                 <div class="facet-title">
-                  {{model.query.prefix}}
+                  {{this.model.query.prefix}}
                 </div>
                 <span class="number pull-right">
                   0
@@ -491,23 +488,23 @@
       </div>
     {{/if}}
   {{/unless}}
-  {{#if (or model.meta.certificates model.query.certificate)}}
+  {{#if (or this.model.meta.certificates this.model.query.certificate)}}
     <div class="panel facets">
       <div class="panel-body">
         <h4>
           Repository Certificate
         </h4>
         <ul>
-          {{#if model.meta.certificates}}
-            {{#each model.meta.certificates as |certificate|}}
+          {{#if this.model.meta.certificates}}
+            {{#each this.model.meta.certificates as |certificate|}}
               <li>
-                {{#if model.query.certificate}}
-                  <LinkTo @route={{link}} @query={{hash certificate=''}}>
+                {{#if this.model.query.certificate}}
+                  <LinkTo @route={{this.link}} @query={{hash certificate=''}}>
                     <i class="far fa-check-square"></i>
                   </LinkTo>
                 {{else}}
                   <LinkTo
-                    @route={{link}}
+                    @route={{this.link}}
                     @query={{hash certificate=certificate.id}}
                   >
                     <i class="far fa-square"></i>
@@ -524,11 +521,11 @@
             {{/each}}
           {{else}}
             <li>
-              <LinkTo @route={{link}} @query={{hash certificate=''}}>
+              <LinkTo @route={{this.link}} @query={{hash certificate=''}}>
                 <i class="far fa-check-square"></i>
               </LinkTo>
               <div class="facet-title">
-                {{titleize model.query.certificate}}
+                {{titleize this.model.query.certificate}}
               </div>
               <span class="number pull-right">
                 0
@@ -540,24 +537,24 @@
       </div>
     </div>
   {{/if}}
-  {{#unless isResearcherProfile}}
-    {{#if (or model.meta.schemaVersions model.query.schema-version)}}
+  {{#unless this.isResearcherProfile}}
+    {{#if (or this.model.meta.schemaVersions this.model.query.schema-version)}}
       <div class="panel facets">
         <div class="panel-body">
           <h4>
             Schema Version
           </h4>
           <ul>
-            {{#if model.meta.schemaVersions}}
-              {{#each model.meta.schemaVersions as |schemaVersion|}}
+            {{#if this.model.meta.schemaVersions}}
+              {{#each this.model.meta.schemaVersions as |schemaVersion|}}
                 <li>
-                  {{#if model.query.schema-version}}
-                    <LinkTo @route={{link}} @query={{hash schema-version=''}}>
+                  {{#if this.model.query.schema-version}}
+                    <LinkTo @route={{this.link}} @query={{hash schema-version=''}}>
                       <i class="far fa-check-square"></i>
                     </LinkTo>
                   {{else}}
                     <LinkTo
-                      @route={{link}}
+                      @route={{this.link}}
                       @query={{hash schema-version=schemaVersion.id}}
                     >
                       <i class="far fa-square"></i>
@@ -574,11 +571,11 @@
               {{/each}}
             {{else}}
               <li>
-                <LinkTo @route={{link}} @query={{hash schema-version=''}}>
+                <LinkTo @route={{this.link}} @query={{hash schema-version=''}}>
                   <i class="far fa-check-square"></i>
                 </LinkTo>
                 <div class="facet-title">
-                  <model.query.schema-version />
+                  {{this.model.query.schema-version}}
                 </div>
                 <span class="number pull-right">
                   0
@@ -592,7 +589,7 @@
     {{/if}}
   {{/unless}}
   {{#if
-    (and (can 'source doi' model) (or model.meta.sources model.query.source))
+    (and (can 'source doi' this.model) (or this.model.meta.sources this.model.query.source))
   }}
     <div class="panel facets add">
       <div class="panel-body">
@@ -600,15 +597,15 @@
           Source
         </h4>
         <ul>
-          {{#if model.meta.sources}}
-            {{#each model.meta.sources as |source|}}
+          {{#if this.model.meta.sources}}
+            {{#each this.model.meta.sources as |source|}}
               <li>
-                {{#if model.query.source}}
-                  <LinkTo @route={{link}} @query={{hash source=null}}>
+                {{#if this.model.query.source}}
+                  <LinkTo @route={{this.link}} @query={{hash source=null}}>
                     <i class="far fa-check-square"></i>
                   </LinkTo>
                 {{else}}
-                  <LinkTo @route={{link}} @query={{hash source=source.id}}>
+                  <LinkTo @route={{this.link}} @query={{hash source=source.id}}>
                     <i class="far fa-square"></i>
                   </LinkTo>
                 {{/if}}
@@ -623,11 +620,11 @@
             {{/each}}
           {{else}}
             <li>
-              <LinkTo @route={{link}} @query={{hash source=''}}>
+              <LinkTo @route={{this.link}} @query={{hash source=''}}>
                 <i class="far fa-check-square"></i>
               </LinkTo>
               <div class="facet-title">
-                {{model.query.source}}
+                {{this.model.query.source}}
               </div>
               <span class="number pull-right">
                 0
@@ -641,8 +638,8 @@
   {{/if}}
   {{#if
     (and
-      (can 'viewHealth doi' model)
-      (or model.meta.linkChecksStatus model.query.link-checks-status)
+      (can 'viewHealth doi' this.model)
+      (or this.model.meta.linkChecksStatus this.model.query.link-checks-status)
     )
   }}
     <div class="panel facets add">
@@ -651,19 +648,19 @@
           Link Check Status
         </h4>
         <ul>
-          {{#if model.meta.linkChecksStatus}}
-            {{#each model.meta.linkChecksStatus as |linkCheckStatus|}}
+          {{#if this.model.meta.linkChecksStatus}}
+            {{#each this.model.meta.linkChecksStatus as |linkCheckStatus|}}
               <li>
-                {{#if model.query.link-check-status}}
+                {{#if this.model.query.link-check-status}}
                   <LinkTo
-                    @route={{link}}
+                    @route={{this.link}}
                     @query={{hash link-check-status=null}}
                   >
                     <i class="far fa-check-square"></i>
                   </LinkTo>
                 {{else}}
                   <LinkTo
-                    @route={{link}}
+                    @route={{this.link}}
                     @query={{hash link-check-status=linkCheckStatus.id}}
                   >
                     <i class="far fa-square"></i>
@@ -680,11 +677,11 @@
             {{/each}}
           {{else}}
             <li>
-              <LinkTo @route={{link}} @query={{hash link-check-status=''}}>
+              <LinkTo @route={{this.link}} @query={{hash link-check-status=''}}>
                 <i class="far fa-check-square"></i>
               </LinkTo>
               <div class="facet-title">
-                <model.query.link-check-status />
+                {{this.model.query.link-check-status}}
               </div>
               <span class="number pull-right">
                 0
@@ -700,16 +697,16 @@
 
 
 <div class="col-md-9 panel-list" id="content">
-  {{#if searchable}}
-    <ModelSearch @model={{model}} @link={{link}} @sortable={{true}} @placeholder="Type to search. For example 10.4121/17185607.v1" />
+  {{#if this.searchable}}
+    <ModelSearch @model={{this.model}} @link={{this.link}} @sortable={{true}} @placeholder="Type to search. For example 10.4121/17185607.v1" />
   {{/if}}
-  {{#if model}}
-    {{#each model as |doi|}}
+  {{#if this.model}}
+    {{#each this.model as |doi|}}
       <div class="panel panel-transparent" data-test-doi>
         <DoiSummary
           @model={{doi}}
           @isList={{true}}
-          @isResearcherProfile={{isResearcherProfile}}
+          @isResearcherProfile={{this.isResearcherProfile}}
         />
         <div class="panel-footer">
           {{#if doi.isDraft}}
@@ -725,8 +722,8 @@
       </div>
     {{/each}}
     <div class="text-center">
-      {{#if (gt model.meta.totalPages 1)}}
-        <PageNumbers @model={{model}} @link={{link}} />
+      {{#if (gt this.model.meta.totalPages 1)}}
+        <PageNumbers @model={{this.model}} @link={{this.link}} />
       {{/if}}
     </div>
   {{else}}

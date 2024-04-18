@@ -3,15 +3,22 @@ import { inject as service } from '@ember/service';
 
 export default Controller.extend({
   store: service(),
+  router: service(),
 
   setEvent(stateChange) {
     if (stateChange[0] === 'draft' && stateChange[1] === 'registered') {
       return 'register';
     } else if (stateChange[0] === 'draft' && stateChange[1] === 'findable') {
       return 'publish';
-    } else if (stateChange[0] === 'registered' && stateChange[1] === 'findable') {
+    } else if (
+      stateChange[0] === 'registered' &&
+      stateChange[1] === 'findable'
+    ) {
       return 'publish';
-    } else if (stateChange[0] === 'findable' && stateChange[1] === 'registered') {
+    } else if (
+      stateChange[0] === 'findable' &&
+      stateChange[1] === 'registered'
+    ) {
       return 'hide';
     }
   },
@@ -50,13 +57,13 @@ export default Controller.extend({
       doi.set('landingPage', null);
 
       let self = this;
-      doi.save().then(function(doi) {
-        self.transitionToRoute('dois.show', doi);
+      doi.save().then(function (doi) {
+        self.router.transitionTo('dois.show', doi);
       });
     },
     cancel() {
       this.model.rollbackAttributes();
-      this.transitionToRoute('dois.show', this.model);
-    },
-  },
+      this.router.transitionTo('dois.show', this.model);
+    }
+  }
 });

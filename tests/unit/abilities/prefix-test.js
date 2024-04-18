@@ -22,9 +22,9 @@ module('Unit | Ability | prefix', function (hooks) {
     });
     this.owner.register('service:current-user', currentUser);
 
-    assert.equal(ability.canWrite, true);
-    assert.equal(ability.canUpdate, true);
-    assert.equal(ability.canRead, true);
+    assert.true(ability.canWrite);
+    assert.true(ability.canUpdate);
+    assert.true(ability.canRead);
   });
 
   test('role provider_admin', function (assert) {
@@ -40,9 +40,9 @@ module('Unit | Ability | prefix', function (hooks) {
     this.set('model', make('ands'));
     ability.model = this.model;
 
-    assert.equal(ability.canWrite, false);
-    assert.equal(ability.canUpdate, false);
-    assert.equal(ability.canRead, true);
+    assert.false(ability.canWrite);
+    assert.false(ability.canUpdate);
+    assert.true(ability.canRead);
   });
 
   test('role client_admin', function (assert) {
@@ -63,8 +63,8 @@ module('Unit | Ability | prefix', function (hooks) {
     this.set('model', make('doi', { repository: this.repository }));
     ability.model = this.model;
 
-    assert.equal(ability.canWrite, false);
-    assert.equal(ability.canUpdate, false);
+    assert.false(ability.canWrite);
+    assert.false(ability.canUpdate);
 
     // make this work. model.repositories is undefined
     // assert.equal(ability.canRead, true);
@@ -88,8 +88,8 @@ module('Unit | Ability | prefix', function (hooks) {
     this.set('model', make('doi', { repository: this.repository }));
     ability.model = this.model;
 
-    assert.equal(ability.canWrite, false);
-    assert.equal(ability.canUpdate, false);
-    assert.equal(ability.canRead, true);
+    assert.false(ability.canWrite);
+    assert.false(ability.canUpdate);
+    assert.true(ability.canRead);
   });
 });

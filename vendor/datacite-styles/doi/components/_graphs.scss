@@ -1,0 +1,95 @@
+//
+// Graphs
+// --------------------------------------------------
+
+.graphs { text-align:center; }
+h2.graphs { margin-top: 2.5px; margin-bottom: 5px; }
+
+.chart div {
+  background-color: white;
+  text-align: right;
+  padding: 3px;
+  margin: 1px;
+  color: white;
+}
+
+.chart a {
+  fill: $link_color;
+}
+
+.chart .title, .title-only { font-size: 30px; }
+.chart .subtitle { fill: grey; }
+.chart .label {
+  color: $dark-gray;
+  font-size: $font-size-small;
+  font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+}
+
+.chart .line {
+  fill: none;
+  stroke: #999;
+  stroke-width: 1px;
+  shape-rendering: crispEdges;
+}
+
+.axis line, .axis path {
+  fill: none;
+  stroke: black;
+  stroke-width: 1;
+  shape-rendering: crispEdges;
+}
+.axis text {
+  font-size: 0.85em;
+  font: $font-family-base;
+}
+
+.brush rect.extent {
+  fill: #978d7f;
+  fill-opacity: .125;
+}
+
+.brush .resize path {
+  fill: #eee;
+  stroke: #666;
+}
+
+.donut {
+  display: block;
+  margin: auto;
+}
+
+.bar.tiny {
+  fill: $turquoise;
+}
+
+.bar.small {
+  fill: darken($turquoise, 4%);
+}
+
+.bar.medium {
+  fill: darken($turquoise, 9%);
+}
+
+.bar.large {
+  fill: darken($turquoise, 15%);
+}
+
+.bar.extra-large {
+  fill: darken($turquoise, 22%);
+}
+
+.bar.relations {
+  fill: $primary-color;
+}
+
+.bar.relations-alt {
+  fill: darken($primary-color, 15%);
+}
+
+.bar.results {
+  fill: $info-color;
+}
+
+.bar.results-alt {
+  fill: darken($info-color, 15%);
+}

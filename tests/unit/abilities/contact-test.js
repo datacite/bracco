@@ -21,10 +21,10 @@ module('Unit | Ability | contact', function (hooks) {
     });
     this.owner.register('service:current-user', currentUser);
 
-    assert.equal(ability.canCreate, true);
-    assert.equal(ability.canDelete, true);
-    assert.equal(ability.canUpdate, true);
-    assert.equal(ability.canRead, true);
+    assert.true(ability.canCreate);
+    assert.true(ability.canDelete);
+    assert.true(ability.canUpdate);
+    assert.true(ability.canRead);
   });
 
   test('role provider_admin', function (assert) {
@@ -41,10 +41,10 @@ module('Unit | Ability | contact', function (hooks) {
     this.set('model', make('contact', { provider: this.provider }));
     ability.model = this.model;
 
-    assert.equal(ability.canCreate, true);
-    assert.equal(ability.canDelete, false);
-    assert.equal(ability.canUpdate, true);
-    assert.equal(ability.canRead, true);
+    assert.true(ability.canCreate);
+    assert.true(ability.canDelete);
+    assert.true(ability.canUpdate);
+    assert.true(ability.canRead);
   });
 
   test('role client_admin', function (assert) {
@@ -61,9 +61,9 @@ module('Unit | Ability | contact', function (hooks) {
     this.set('model', make('contact', { provider: this.provider }));
     ability.model = this.model;
 
-    assert.equal(ability.canCreate, false);
-    assert.equal(ability.canDelete, false);
-    assert.equal(ability.canUpdate, false);
-    assert.equal(ability.canRead, false);
+    assert.false(ability.canCreate);
+    assert.false(ability.canDelete);
+    assert.false(ability.canUpdate);
+    assert.false(ability.canRead);
   });
 });

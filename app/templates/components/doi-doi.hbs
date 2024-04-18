@@ -1,11 +1,11 @@
-<div class="form-group compound-form">
+<div class="form-group compound-form" id="doi-form-field">
   <label class="control-label col-md-3 required-label">DOI</label>
   <div class="col-md-9">
     <div class="label-vertical">A globally unique string that identifies the resource and can't be changed.</div>
-    <div class="input-group">
+    <div class="input-group form-group">
       <span class="input-group-addon">
-        <@form.element @controlType="power-select" id="prefix-field" @formLayout="vertical" @property="prefix" @options={{repositoryPrefixes}} @destination={{prefix}} as |el|>
-          <el.control @onChange={{action "selectPrefix"}} @searchPlaceholder="Select Prefix" @optionLabelPath={{id}} @searchEnabled={{true}} as |item|>
+        <@form.element @controlType="power-select" id="prefix-field" @formLayout="vertical" @property="prefix" @options={{this.repositoryPrefixes}} @destination={{this.prefix}} as |el|>
+          <el.control @onChange={{action "selectPrefix"}} @searchPlaceholder="Select Prefix" @optionLabelPath={{this.id}} @searchEnabled={{true}} as |item|>
             {{if item.prefix.id item.prefix.id item}}
           </el.control>
         </@form.element>
@@ -22,9 +22,9 @@
 <div class="form-group">
   <label class="control-label col-md-3 required-label">State</label>
   <div class="col-md-9 input-fragment">
-    <div class="label-vertical">The state determines whether a DOI is registered and findable. Once in Registered or Findable state, a DOI can't be set back to Draft state. <a target="_blank" rel="noopener" href="https://support.datacite.org/docs/doi-states">More&nbsp;…</a></div>
-    <div><RadioButton @radioId="draft-radio" @value="draft" @groupValue={{state}} @radioClass="radio" @changed={{action "selectState"}} @disabled={{draft}} />Draft <span class="help-block">only visible in Fabrica, DOI can be deleted</span></div>
-    <div><RadioButton @radioId="registered-radio" @value="registered" @groupValue={{state}} @radioClass="radio" @changed={{action "selectState"}} @disabled={{registered}} />Registered <span class="help-block">registered with the DOI Resolver</span></div>
-    <div><RadioButton @radioId="findable-radio" @value="findable" @groupValue={{state}} @radioClass="radio" @changed={{action "selectState"}} @disabled={{findable}} />Findable <span class="help-block">registered with the DOI Resolver and indexed in DataCite Search</span></div>
+    <div class="label-vertical">The state determines whether a DOI is registered and findable. Once in Registered or Findable state, a DOI can't be set back to Draft state. <a target="_blank" rel="noopener noreferrer" href="https://support.datacite.org/docs/doi-states">More&nbsp;…</a></div>
+    <div><RadioButton @radioId="draft-radio" @value="draft" @groupValue={{this.state}} @radioClass="radio" @changed={{action "selectState"}} @disabled={{this.draft}} />Draft <span class="help-block">only visible in Fabrica, DOI can be deleted</span></div>
+    <div><RadioButton @radioId="registered-radio" @value="registered" @groupValue={{this.state}} @radioClass="radio" @changed={{action "selectState"}} @disabled={{this.registered}} />Registered <span class="help-block">registered with the DOI Resolver</span></div>
+    <div><RadioButton @radioId="findable-radio" @value="findable" @groupValue={{this.state}} @radioClass="radio" @changed={{action "selectState"}} @disabled={{this.findable}} />Findable <span class="help-block">registered with the DOI Resolver and indexed in DataCite Search</span></div>
   </div>
 </div>

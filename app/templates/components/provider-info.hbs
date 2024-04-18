@@ -1,48 +1,48 @@
-<div class="content">
+<div class="content" id="info-tab">
   <UserRole />
   <div class="row row-chart">
-    {{#if (eq model.memberType 'consortium')}}
+    {{#if (eq this.model.memberType 'consortium')}}
       <BarChart
-        @data={{json.providers}}
+        @data={{this.json.providers}}
         @label="Organization"
-        @model={{model}}
+        @model={{this.model}}
         @link="providers.show.organizations"
         @offset={{true}}
       />
     {{/if}}
     {{#if
       (and
-        (not-eq model.memberType 'member_only')
-        (not-eq model.memberType 'developer')
+        (not-eq this.model.memberType 'member_only')
+        (not-eq this.model.memberType 'developer')
       )
     }}
       <BarChart
-        @data={{json.clients}}
+        @data={{this.json.clients}}
         @label="Repository"
-        @model={{model}}
+        @model={{this.this.model}}
         @link="providers.show.repositories"
-        @offset={{if (not-eq model.memberType 'consortium') true}}
+        @offset={{if (not-eq this.model.memberType 'consortium') true}}
       />
       <BarChart
-        @data={{json.dois}}
+        @data={{this.json.dois}}
         @label="DOI"
-        @model={{model}}
+        @model={{this.model}}
         @link="providers.show.dois"
         @cumulative={{false}}
       />
     {{else}}
       <div class="panel panel-transparent">
         <div class="panel-body">
-          {{model.displayName}}
+          {{this.model.displayName}}
           does not provide DOI registration services.
         </div>
       </div>
     {{/if}}
   </div>
-  {{#if (can 'read messages' model)}}
+  {{#if (can 'read messages' this.model)}}
     <div class="row">
-      <div class="col-md-9 col-lg-offset-3">
-        {{#each flashMessages.queue as |flash|}}
+      <div class="col-md-9">
+        {{#each this.flashMessages.queue as |flash|}}
           <FlashMessage @flash={{flash}} />
         {{/each}}
       </div>

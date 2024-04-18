@@ -8,5 +8,5 @@ export default Component.extend({
     this._super(...arguments);
 
     this.set('url', this.url);
-  },
+  }
 });

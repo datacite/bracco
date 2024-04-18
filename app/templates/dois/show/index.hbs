@@ -1,50 +1,50 @@
 <div class="row">
   <div class="col-md-3">
-    {{#if model}}
+    {{#if this.model}}
       <div class="panel facets add">
         <div class="panel-body">
-          {{#if model.repository.isActive}}
+          {{#if this.model.repository.isActive}}
             <div class="btn-toolbar">
               <div class="btn-group-vertical btn-group-sm">
-                {{#if (can 'edit doi' model)}}
+                {{#if (can 'edit doi' this.model)}}
                   <LinkTo
                     @route="dois.show.edit"
-                    @model={{model.id}}
+                    @model={{this.model.id}}
                     class="btn btn-warning"
-                    @id="edit-doi"
+                    id="edit-doi"
                   >
                     <i class="fab fa-wpforms"></i>
                     Update DOI (Form)
                   </LinkTo>
                 {{/if}}
-                {{#if (can 'modify doi' model)}}
+                {{#if (can 'modify doi' this.model)}}
                   <LinkTo
                     @route="dois.show.modify"
-                    @model={{model.id}}
+                    @model={{this.model.id}}
                     class="btn btn-warning"
-                    @id="modify-doi"
+                    id="modify-doi"
                   >
                     <i class="fas fa-upload"></i>
                     Update DOI (File Upload)
                   </LinkTo>
                 {{/if}}
-                {{#if (can 'transfer doi' model)}}
+                {{#if (can 'transfer doi' this.model)}}
                   <LinkTo
                     @route="dois.show.transfer"
-                    @model={{model.id}}
+                    @model={{this.model.id}}
                     class="btn btn-warning"
-                    @id="transfer-doi"
+                    id="transfer-doi"
                   >
                     <i class="fas fa-arrow-circle-right"></i>
                     Transfer DOI
                   </LinkTo>
                 {{/if}}
-                {{#if (and (can 'delete doi' model) model.isDraft)}}
+                {{#if (and (can 'delete doi' this.model) this.model.isDraft)}}
                   <LinkTo
                     @route="dois.show.delete"
-                    @model={{model.id}}
+                    @model={{this.model.id}}
                     class="btn btn-warning"
-                    @id="delete-doi"
+                    id="delete-doi"
                   >
                     <i class="fas fa-trash"></i>
                     Delete DOI
@@ -55,29 +55,29 @@
           {{/if}}
         </div>
       </div>
-      <RepositorySidebar @model={{model}} />
+      <RepositorySidebar @model={{this.model}} />
     {{/if}}
   </div>
   <div class="col-md-9">
-    {{#if model}}
-      {{#if model.url}}
+    {{#if this.model}}
+      {{#if this.model.url}}
         <h3 class="member-results">
           URL
         </h3>
         <div class="panel panel-transparent url">
           <div class="panel-body">
-            <a href="{{model.url}}">
-              {{model.url}}
+            <a href="{{this.model.url}}">
+              {{this.model.url}}
             </a>
           </div>
         </div>
       {{/if}}
-      <DoiMetadata @model={{model}} />
-      {{#if model.showCitation}}
-        <DoiCitation @model={{model}} />
+      <DoiMetadata @model={{this.model}} />
+      {{#if this.model.showCitation}}
+        <DoiCitation @model={{this.model}} />
       {{/if}}
-      {{#if (and model.landingPage.checked (can 'viewHealth doi' model))}}
-        <DoiHealth @model={{model}} />
+      {{#if (and this.model.landingPage.checked (can 'viewHealth doi' this.model))}}
+        <DoiHealth @model={{this.model}} />
       {{/if}}
     {{else}}
       <div class="col-md-9">

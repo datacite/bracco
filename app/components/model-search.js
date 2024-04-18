@@ -1,6 +1,7 @@
 import { notEmpty } from '@ember/object/computed';
 import { assign } from '@ember/polyfills';
 import Component from '@ember/component';
+import { inject as service } from '@ember/service';
 
 const placeholders = {
   doi: 'DOI',
@@ -14,6 +15,8 @@ const placeholders = {
 };
 
 export default Component.extend({
+  router: service(),
+
   classNames: ['div'],
 
   hasInput: notEmpty('query'),
@@ -43,7 +46,7 @@ export default Component.extend({
         '-updated': 'Sort by Date Updated',
         '-created': 'Sort by Date Created',
         name: 'Sort by DOI',
-        'title': 'Sort Alphabetically',
+        title: 'Sort Alphabetically',
         relevance: 'Sort by Relevance'
       });
     } else if (this.modelName === 'Prefix') {

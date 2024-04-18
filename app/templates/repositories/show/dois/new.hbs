@@ -1,65 +1,66 @@
-<div class="panel panel-transparent">
+<div class="panel panel-transparent"  id="doi-new-form">
   <div class="panel-body">
     <div class="col-md-9 col-md-offset-3 form-help-header">
-      {{#each flashMessages.queue as |flash|}}
+      {{#each this.flashMessages.queue as |flash|}}
         <FlashMessage @flash={{flash}} />
       {{/each}}
 
       <h3 class="help-header">Create DOI (Form)</h3>
       <div class="label-vertical">
-        More information about DOI registration via form can be found on our <a target="_blank" rel="noopener" href="https://support.datacite.org/docs/fabrica-create-doi-form">Support Website</a>. Required properties are marked with a red asterisk.
+        More information about DOI registration via form can be found on our <a target="_blank" rel="noopener noreferrer" href="https://support.datacite.org/docs/fabrica-create-doi-form">Support Website</a>. Required properties are marked with a red asterisk.
       </div>
     </div>
 
-    <BsForm @formLayout="horizontal" @horizontalLabelGridClass="col-md-3" @model={{model.doi}} @onSubmit={{action "submit" model.doi}} as |form|>
+    <BsForm @formLayout="horizontal" class="form-horizontal" @horizontalLabelGridClass="col-md-3" @model={{this.model.doi}} @onSubmit={{action "submit" this.model.doi}} as |form|>
       <h3 class="member-results">Required Properties</h3>
 
-      <DoiDoi @model={{model.doi}} @repository={{model.repository}} @form={{form}} />
+      <DoiDoi @model={{this.model.doi}} @repository={{this.model.repository}} @form={{form}} />
 
-      <div class="form-group required-nested-label {{if (v-get model.doi 'url' 'isInvalid') 'has-error' 'has-feedback'}}">
+      <div class="form-group required-nested-label doi-url-field {{if (v-get this.model.doi 'url' 'isInvalid') 'has-error' 'has-feedback'}}">
         <label class="control-label col-md-3">URL</label>
         <div class="col-md-9 input-fragment">
           <div class="label-vertical">The location of the landing page with more information about the resource.</div>
-          <form.element id="url" @controlType="text" @property="url" @helpText="Should be a https URL — within the allowed domain(s) of your repository if domain restrictions are enabled in the repository settings. Http and ftp are also supported. For example http://example.org" as |el| >
+          <form.element id="url" class="form-group" @controlType="text" @property="url" @helpText="Should be a https URL — within the allowed domain(s) of your repository if domain restrictions are enabled in the repository settings. Http and ftp are also supported. For example http://example.org" as |el| >
             <el.control id="url-field" placeholder="URL" />
           </form.element>
         </div>
       </div>
 
-      <DoiCreators @model={{model.doi}} @form={{form}} />
-      <DoiTitles @model={{model.doi}} @form={{form}} />
-      <DoiPublisher @model={{model.doi}} @form={{form}} @fragment={{model.doi.publisher}} />
+      <DoiCreators @model={{this.model.doi}} @form={{form}} />
+      <DoiTitles @model={{this.model.doi}} @form={{form}} />
 
-      <div class="form-group required-nested-label {{if (v-get model.doi 'publicationYear' 'isInvalid') 'has-error' 'has-feedback'}}">
+      <DoiPublisher @model={{this.model.doi}} @form={{form}} @fragment={{this.model.doi.publisher}} />
+
+      <div id="publication-year-form-group" class="form-group required-nested-label {{if (v-get this.model.doi 'publicationYear' 'isInvalid') 'has-error' 'has-feedback'}}">
         <label class="control-label col-md-3">Publication Year</label>
         <div class="col-md-9 input-fragment">
           <div class="label-vertical">The year when the resource was or will be made publicly available.</div>
-          <form.element id="publication-year" @controlType="text" @property="publicationYear" @helpText="Must be a year between 1000 and {{current-year model.doi.maxMintFutureOffset}}."  as |el| >
+          <form.element id="publication-year" class="form-group" @controlType="text" @property="publicationYear" @helpText="Must be a year between 1000 and {{current-year this.model.doi.maxMintFutureOffset}}."  as |el| >
             <el.control id="publication-year-field" placeholder="Publication Year" />
           </form.element>
         </div>
       </div>
 
-      <DoiTypes @class="required-nested-label" @model={{model.doi}} @form={{form}} />
+      <DoiTypes @class="required-nested-label" @model={{this.model.doi}} @form={{form}} />
 
       <h3 class="member-results">Recommended Properties</h3>
 
-      <DoiSubjects @model={{model.doi}} @form={{form}} />
-      <DoiContributors @model={{model.doi}} @form={{form}} />
-      <DoiDates @model={{model.doi}} @form={{form}} />
-      <DoiRelatedIdentifiers @model={{model.doi}} @form={{form}} />
+      <DoiSubjects @model={{this.model.doi}} @form={{form}} />
+      <DoiContributors @model={{this.model.doi}} @form={{form}} />
+      <DoiDates @model={{this.model.doi}} @form={{form}} />
+      <DoiRelatedIdentifiers @model={{this.model.doi}} @form={{form}} />
 
-      <DoiDescriptions @model={{model.doi}} @form={{form}} />
+      <DoiDescriptions @model={{this.model.doi}} @form={{form}} />
 
-      <DoiGeoLocations @model={{model.doi}} @form={{form}} />
+      <DoiGeoLocations @model={{this.model.doi}} @form={{form}} />
 
       <h3 class="member-results">Optional Properties</h3>
 
-      <DoiLanguage @model={{model.doi}} @form={{form}} />
-      <DoiAlternateIdentifiers @model={{model.doi}} @form={{form}} />
-      <DoiRightsList @model={{model.doi}} @form={{form}} @spdx={{spdx}} />
-      <DoiSizes @model={{model.doi}} @form={{form}} />
-      <DoiFormats @model={{model.doi}} @form={{form}} />
+      <DoiLanguage @model={{this.model.doi}} @form={{form}} />
+      <DoiAlternateIdentifiers @model={{this.model.doi}} @form={{form}} />
+      <DoiRightsList @model={{this.model.doi}} @form={{form}} @spdx={{this.spdx}} />
+      <DoiSizes @model={{this.model.doi}} @form={{form}} />
+      <DoiFormats @model={{this.model.doi}} @form={{form}} />
 
       <div class="form-group">
         <label class="control-label col-md-3">Version</label>
@@ -71,28 +72,28 @@
         </div>
       </div>
 
-      <DoiFundingReferences @model={{model.doi}} @form={{form}} />
+      <DoiFundingReferences @model={{this.model.doi}} @form={{form}} />
 
-      <DoiRelatedItems @model={{model.doi}} @form={{form}} />
+      <DoiRelatedItems @model={{this.model.doi}} @form={{form}} />
 
       <div class="col-md-9 col-md-offset-3">
-        {{#if (is-empty (doi-form-errors model.doi))}}
+        {{#if (is-empty (doi-form-errors this.model.doi))}}
           <button type="submit" id="doi-create" class="btn btn-sm btn-fill" disabled={{false}}>Create DOI</button>
         {{else}}
           <BsAlert @dismissible={{false}} @type="danger">
-            To save this DOI, first resolve the errors with these properties: {{doi-form-errors model.doi}}.
+            To save this DOI, first resolve the errors with these properties: {{doi-form-errors this.model.doi}}.
           </BsAlert>
 
           <button type="submit" id="doi-create" class="btn btn-sm btn-fill" disabled={{true}}>Create DOI</button>
         {{/if}}
 
-        <button {{action "cancel"}} class="btn btn-sm">Cancel</button>
+        <button class="btn btn-sm" type="button" {{action "cancel"}}>Cancel</button>
       </div>
     </BsForm>
 
     <div class="row">
       <div class="col-md-9 col-md-offset-3">
-        {{#each flashMessages.queue as |flash|}}
+        {{#each this.flashMessages.queue as |flash|}}
           {{#if (eq flash.componentName "doi-error") }}
             <FlashMessage @flash={{flash}} />
           {{/if}}

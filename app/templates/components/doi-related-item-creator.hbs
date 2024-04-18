@@ -1,9 +1,9 @@
 <div>
     <label for="name" class="subtitle">Creator Name</label>
     <div class="input-group">
-        <input type="text" class="form-control name-field" value={{fragment.name}} placeholder="Name" oninput={{action "updateName" value="target.value"}} data-test-related-item-creator-name/> 
+        <input type="text" class="form-control name-field" value={{this.fragment.name}} placeholder="Name" oninput={{action "updateName" value="target.value"}} data-test-related-item-creator-name/> 
         <span class="input-group-btn">
-            <BsButton @outline={{true}} @onClick={{action "deleteRelatedItemCreator" index}}><i class="fas fa-trash"></i></BsButton>
+            <BsButton @outline={{true}} @onClick={{action "deleteRelatedItemCreator" this.index}}><i class="fas fa-trash"></i></BsButton>
         </span>
     </div>
 </div>
