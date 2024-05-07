@@ -23,6 +23,10 @@ export const clientTypeList = [
   {
     label: 'IGSN ID Catalog',
     value: 'igsnCatalog'
+  },
+  {
+    label: 'RAiD Registry',
+    value: 'raidRegistry'
   }
 ];
 
