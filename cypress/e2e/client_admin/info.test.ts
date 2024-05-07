@@ -141,6 +141,16 @@ describe('ACCEPTANCE: CLIENT_ADMIN | INFO', () => {
         })
       });
 
+      // Set client_type to RAiD Registry
+      cy.get('div#client-type div[role="button"]').click({ waitForAnimations: true }).then(() => {
+        cy.get('ul.ember-power-select-options li').contains('RAiD Registry').click({ waitForAnimations: true }).then(() => {
+          // RAiD Registry client_type divs should be visible
+          cy.get('#repository-issn').should('not.exist');
+          cy.get('#repository-type').should('be.visible');
+          cy.get('#certificate').should('be.visible');   
+        })
+      });
+
       // Set client_type back to Repository
       cy.get('div#client-type div[role="button"]').click({ waitForAnimations: true, force: true }).then(($dropdown) => {
         cy.get('ul.ember-power-select-options li').contains('Repository').click({ waitForAnimations: true })
@@ -177,7 +187,7 @@ describe('ACCEPTANCE: CLIENT_ADMIN | INFO', () => {
     });
   });
 
-  it.only('can see info when using capitalized identifier URL subdirectory', () => {
+  it('can see info when using capitalized identifier URL subdirectory', () => {
     cy.visit('/repositories/DATACITE.TEST');
     cy.url().should('include', '/repositories/DATACITE.TEST').then(() => {
       

@@ -9,6 +9,8 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | REPOSITORIES', () => {
   const waitTime = 1000;
   const waitTime2 = 2000;
   const waitTime3 = 3000;
+  const waitTime4 = 4000;
+  const waitTime5 = 5000;
   let prefix = '';
   let suffix = '';
   const min = 500000;
@@ -106,7 +108,7 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | REPOSITORIES', () => {
     cy.visit('/providers/' + provider_id + '/repositories/new');
     cy.url().should('include', '/providers/' + provider_id + '/repositories/new').then(() => {
 
-      cy.wait(waitTime2);
+      cy.wait(waitTime5);
       cy.get('h2.work').contains('DataCite');
       cy.get('a#account_menu_link').should('contain', Cypress.env('organization_admin_username').toUpperCase());
 
@@ -116,7 +118,6 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | REPOSITORIES', () => {
       cy.get('#client-type').should('be.visible');
       cy.get('#client-type .ember-power-select-selected-item').should('contain', 'Repository');
 
-      /* - TEMPORARILY SKIP THIS
       // Set client_type to Periodical
       cy.get('div#client-type div[role="button"]').click({ waitForAnimations: true }).then(() => {
         cy.get('ul.ember-power-select-options li').contains('Periodical').click({ waitForAnimations: true }).then(() => {
@@ -138,13 +139,21 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | REPOSITORIES', () => {
         })
       });
 
+      // Set client_type to RAiD Registry
+      cy.get('div#client-type div[role="button"]').click({ waitForAnimations: true }).then(() => {
+        cy.get('ul.ember-power-select-options li').contains('RAiD Registry').click({ waitForAnimations: true }).then(() => {
+          // RAiD Registry client_type divs should be visible
+          cy.get('#repository-issn').should('not.exist');
+          cy.get('#repository-type').should('be.visible');
+          cy.get('#certificate').should('be.visible');   
+        })
+      });
 
       // Set client_type back to Repository
       cy.get('div#client-type div[role="button"]').click({ waitForAnimations: true }).then(() => {
         cy.get('ul.ember-power-select-options li').contains('Repository').click({ waitForAnimations: true })
       });
       cy.get('#client-type .ember-power-select-selected-item').should('contain', 'Repository');
-      */
 
       cy.get('#re3data').should('be.visible');
       cy.get('#name').should('be.visible');
