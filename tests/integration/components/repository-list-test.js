@@ -1,8 +1,8 @@
+import { hbs } from 'ember-cli-htmlbars';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { setupFactoryGuy, makeList } from 'ember-data-factory-guy';
 import { render } from '@ember/test-helpers';
-import hbs from 'htmlbars-inline-precompile';
 
 module('Integration | Component | repository-list', function (hooks) {
   setupRenderingTest(hooks);
