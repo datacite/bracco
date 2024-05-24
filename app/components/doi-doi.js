@@ -23,7 +23,7 @@ export default Component.extend({
 
   repositoryPrefixes: null,
 
-  didReceiveAttrs() {
+  init() {
     this._super(...arguments);
 
     this.setDefaultPrefix();
@@ -104,6 +104,7 @@ export default Component.extend({
 
   actions: {
     selectPrefix(repositoryPrefix) {
+      console.log("SELECT PREFIX")
       this.model.set('prefix', repositoryPrefix.prefix.get('id'));
       this.model.set(
         'doi',
