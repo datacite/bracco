@@ -14,7 +14,8 @@ export default Component.extend({
 
     let promise = new Promise((resolve, reject) => {
       const url =
-        ENV.API_URL + '/repositories/' + this.model.get('id') + '/stats';
+        ENV.API_URL + '/repositories/' + (this.model ? this.model.get('id') : '') + '/stats';
+
       const headers = { Accept: 'application/json' };
       fetch(url, {
         headers
