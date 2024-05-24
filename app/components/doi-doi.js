@@ -104,7 +104,6 @@ export default Component.extend({
 
   actions: {
     selectPrefix(repositoryPrefix) {
-      console.log("SELECT PREFIX")
       this.model.set('prefix', repositoryPrefix.prefix.get('id'));
       this.model.set(
         'doi',
