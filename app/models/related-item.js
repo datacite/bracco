@@ -61,16 +61,16 @@ const Validations = buildValidations({
     })
   ],
   relatedItemContributors: [
-    validator(
-      function () {
-        let valid = true;
-        this.model.get('contributors').forEach((element) => {
-          const { validations } = element.validateSync();
-          valid = validations.get('isValid');
-        });
-        return valid;
-      },
+   validator('inline',
       {
+        validate () {
+          let valid = true;
+          this.model.get('contributors').forEach((element) => {
+            const { validations } = element.validateSync();
+            valid = validations.get('isValid');
+          });
+          return valid;
+        },
         dependentKeys: [
           'model.contributors.@each.name',
           'model.contributors.@each.contributorType'
