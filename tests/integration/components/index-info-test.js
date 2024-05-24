@@ -9,7 +9,7 @@ module('Integration | Component | index-info', function (hooks) {
   setupIntl(hooks);
 
   test('it renders', async function (assert) {
-    await render(hbs`{{index-info}}`);
+    await render(hbs`<IndexInfo />`);
 
     let currentYear = new Date().getFullYear();
     let startDate = (currentYear - 10).toString();

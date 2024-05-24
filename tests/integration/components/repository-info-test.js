@@ -9,7 +9,7 @@ module('Integration | Component | repository-info', function (hooks) {
   setupIntl(hooks);
 
   test('it renders', async function (assert) {
-    await render(hbs`{{repository-info}}`);
+    await render(hbs`<RepositoryInfo />`);
 
     let currentYear = new Date().getFullYear();
     let startDate = (currentYear - 10).toString();

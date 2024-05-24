@@ -9,7 +9,7 @@ module('Integration | Component | provider-info', function (hooks) {
   setupIntl(hooks);
 
   test('it renders', async function (assert) {
-    await render(hbs`{{provider-info}}`);
+    await render(hbs`<ProviderInfo />`);
 
     let currentYear = new Date().getFullYear();
     let startDate = (currentYear - 10).toString();
