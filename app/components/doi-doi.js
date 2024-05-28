@@ -23,7 +23,7 @@ export default Component.extend({
 
   repositoryPrefixes: null,
 
-  didReceiveAttrs() {
+  init() {
     this._super(...arguments);
 
     this.setDefaultPrefix();
