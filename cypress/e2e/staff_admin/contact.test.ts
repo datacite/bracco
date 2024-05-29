@@ -52,12 +52,13 @@ describe('ACCEPTANCE: STAFF_ADMIN | CONTACTS', () => {
 
     cy.getCookie('_jwt').then((cookie) => {
       cy.createContact(email, given_name, family_name, roles, type, provider_id, Cypress.env('api_url'), cookie.value).then((id) => {
+        cy.wait(waitTime4)
         cy.log('CREATED CONTACT: ' + given_name + ' ' + family_name + ' (' + id + ')');
 
         // Give it a little extra time to process the new contact so that we can search for it.
         cy.visit('/contacts');
         cy.url().should('include', '/contacts')
-        cy.wait(waitTime)
+        cy.wait(waitTime4)
 
         cy.get('input[name="query"]')
           .type(family_name + '{enter}', { force: true } )
