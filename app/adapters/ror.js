@@ -1,8 +1,7 @@
 import JSONAPIAdapter from '@ember-data/adapter/json-api';
-import DataAdapterMixin from 'ember-simple-auth/mixins/data-adapter-mixin';
 import ENV from 'bracco/config/environment';
 
-export default JSONAPIAdapter.extend(DataAdapterMixin, {
+export default JSONAPIAdapter.extend({
   host: ENV.ROR_API_URL,
 
   init() {

@@ -1,12 +1,16 @@
 import { inject as service } from '@ember/service';
-import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 import Route from '@ember/routing/route';
 
-export default Route.extend(AuthenticatedRouteMixin, {
+export default Route.extend({
   currentUser: service(),
   store: service(),
+  session: service(),
 
-  authenticationRoute: 'sign-in',
+  beforeModel(transition) {
+    this.session.requireAuthentication(transition, 'sign-in');
+  },
+
+  //authenticationRoute: 'sign-in',
 
   model() {
     if (this.currentUser.get('client_id')) {
