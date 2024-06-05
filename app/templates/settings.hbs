@@ -68,7 +68,7 @@
 
               {{#if this.model.description}}
                 <h5>Description</h5>
-                {{markdown-to-html this.model.description}}
+                 <MarkdownToHtml @markdown={{this.model.description}} />
               {{/if}}
 
               {{#unless this.model.hasPassword}}

@@ -151,7 +151,7 @@
           <h5>
             Description
           </h5>
-          {{markdown-to-html this.model.description}}
+          <MarkdownToHtml @markdown={{this.model.description}} />
         {{/if}}
         {{#if this.model.organizationType}}
           <h5>
