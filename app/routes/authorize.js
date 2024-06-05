@@ -15,7 +15,6 @@ export default Route.extend({
         let jwt = response.headers.get('x-amzn-oidc-data');
 
         if (jwt) {
-          console.log(jwt);
           self.session
             .authenticate('authenticator:globus', jwt)
             .catch((reason) => {
