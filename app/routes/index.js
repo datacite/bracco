@@ -1,14 +1,27 @@
-import Route from '@ember/routing/route';
+import classic from 'ember-classic-decorator';
 import { inject as service } from '@ember/service';
+import Route from '@ember/routing/route';
 import { w } from '@ember/string';
 
-export default Route.extend({
-  can: service(),
-  currentUser: service(),
-  flashMessages: service(),
-  prefixes: service(),
-  router: service(),
-  store: service(),
+@classic
+export default class IndexRoute extends Route {
+  @service
+  can;
+
+  @service
+  currentUser;
+
+  @service
+  flashMessages;
+
+  @service
+  prefixes;
+
+  @service
+  router;
+
+  @service
+  store;
 
   model() {
     if (this.can.can('read index')) {
@@ -25,7 +38,7 @@ export default Route.extend({
           self.router.transitionTo('index');
         });
     }
-  },
+  }
 
   afterModel() {
     if (this.get('currentUser.role_id') === 'staff_admin') {
@@ -63,4 +76,4 @@ export default Route.extend({
       this.router.transitionTo('password');
     }
   }
-});
+}

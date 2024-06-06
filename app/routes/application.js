@@ -1,23 +1,35 @@
-import Route from '@ember/routing/route';
+import classic from 'ember-classic-decorator';
 import { inject as service } from '@ember/service';
+import Route from '@ember/routing/route';
 import ENV from 'bracco/config/environment';
 import { set } from '@ember/object';
 
-export default Route.extend({
-  session: service(),
-  currentUser: service(),
-  headData: service(),
-  intl: service(),
-  router: service(),
+@classic
+export default class ApplicationRoute extends Route {
+  @service
+  session;
 
-  isTokenAuthenticating: null,
+  @service
+  currentUser;
+
+  @service
+  headData;
+
+  @service
+  intl;
+
+  @service
+  router;
+
+  isTokenAuthenticating = null;
 
   async beforeModel() {
     await this.session.setup();
     this.intl.setLocale(['en-us']);
     set(this, 'headData.siteName', ENV.SITE_TITLE);
     return this._loadCurrentUser();
-  },
+  }
+
   model(params) {
     const { jwt } = params;
     if (jwt) {
@@ -30,22 +42,25 @@ export default Route.extend({
         return self._loadCurrentUser();
       });
     }
-  },
+  }
+
   sessionAuthenticated() {
     if (!this.isTokenAuthenticating) {
-      this._super(...arguments);
+      undefined;
       this._loadCurrentUser();
       this.router.transitionTo('providers');
     } else {
       this.set('isTokenAuthenticating', false);
     }
-  },
+  }
+
   sessionInvalidated() {
     if (!this.isTokenAuthenticating) {
-      this._super();
+      undefined;
     }
-  },
+  }
+
   _loadCurrentUser() {
     return this.currentUser.load().catch(() => this.session.invalidate());
   }
-});
+}

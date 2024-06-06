@@ -1,11 +1,18 @@
+import classic from 'ember-classic-decorator';
+import { inject as service } from '@ember/service';
 import { hash } from 'rsvp';
 import Route from '@ember/routing/route';
-import { inject as service } from '@ember/service';
 
-export default Route.extend({
-  can: service(),
-  flashMessages: service(),
-  store: service(),
+@classic
+export default class NewRoute extends Route {
+  @service
+  can;
+
+  @service
+  flashMessages;
+
+  @service
+  store;
 
   model() {
     let repository = this.modelFor('repositories/show');
@@ -23,4 +30,4 @@ export default Route.extend({
       doi
     });
   }
-});
+}

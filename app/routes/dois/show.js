@@ -1,10 +1,15 @@
-import Route from '@ember/routing/route';
+import classic from 'ember-classic-decorator';
 import { inject as service } from '@ember/service';
+import Route from '@ember/routing/route';
 // import { set } from '@ember/object';
 
-export default Route.extend({
-  can: service(),
-  store: service(),
+@classic
+export default class ShowRoute extends Route {
+  @service
+  can;
+
+  @service
+  store;
 
   model(params) {
     // let self = this;
@@ -35,4 +40,4 @@ export default Route.extend({
   //     return this.transitionTo('index');
   //   }
   // }
-});
+}

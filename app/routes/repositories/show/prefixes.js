@@ -1,6 +1,9 @@
-import Route from '@ember/routing/route';
+import classic from 'ember-classic-decorator';
 import { inject as service } from '@ember/service';
+import Route from '@ember/routing/route';
 
-export default Route.extend({
-  store: service()
-});
+@classic
+export default class PrefixesRoute extends Route {
+  @service
+  store;
+}

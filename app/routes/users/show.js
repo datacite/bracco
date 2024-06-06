@@ -1,16 +1,27 @@
-import Route from '@ember/routing/route';
+import classic from 'ember-classic-decorator';
 import { inject as service } from '@ember/service';
-import { set } from '@ember/object';
+import Route from '@ember/routing/route';
+import { set, action } from '@ember/object';
 
 import { all } from 'rsvp';
 import { assign } from '@ember/polyfills';
 
-export default Route.extend({
-  can: service(),
-  features: service(),
-  headData: service(),
-  router: service(),
-  store: service(),
+@classic
+export default class ShowRoute extends Route {
+  @service
+  can;
+
+  @service
+  features;
+
+  @service
+  headData;
+
+  @service
+  router;
+
+  @service
+  store;
 
   model(params) {
     let self = this;
@@ -57,17 +68,16 @@ export default Route.extend({
         })
         .catch(reject);
     });
-  },
+  }
 
   afterModel(model) {
     if (this.can.cannot('read user', model)) {
       this.router.transitionTo('index');
     }
-  },
-
-  actions: {
-    queryParamsDidChange() {
-      this.refresh();
-    }
   }
-});
+
+  @action
+  queryParamsDidChange() {
+    this.refresh();
+  }
+}

@@ -1,12 +1,19 @@
+import classic from 'ember-classic-decorator';
+import { inject as service } from '@ember/service';
 import { hash } from 'rsvp';
 import { assign } from '@ember/polyfills';
 import Route from '@ember/routing/route';
-import { inject as service } from '@ember/service';
 
-export default Route.extend({
-  can: service(),
-  router: service(),
-  store: service(),
+@classic
+export default class DoisRoute extends Route {
+  @service
+  can;
+
+  @service
+  router;
+
+  @service
+  store;
 
   model(params) {
     let user = this.modelFor('users/show');
@@ -30,20 +37,20 @@ export default Route.extend({
           return null;
         })
     });
-  },
+  }
 
-  queryParams: {
+  queryParams = {
     page: {
       refreshModel: true
     },
     size: {
       refreshModel: true
     }
-  },
+  };
 
   afterModel() {
     if (this.can.cannot('read user', this.modelFor('users/show').user)) {
       this.router.transitionTo('index');
     }
   }
-});
+}

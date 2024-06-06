@@ -1,10 +1,17 @@
-import Route from '@ember/routing/route';
+import classic from 'ember-classic-decorator';
 import { inject as service } from '@ember/service';
+import Route from '@ember/routing/route';
 
-export default Route.extend({
-  can: service(),
-  router: service(),
-  store: service(),
+@classic
+export default class NewRoute extends Route {
+  @service
+  can;
+
+  @service
+  router;
+
+  @service
+  store;
 
   model() {
     return this.store.createRecord('provider', {
@@ -18,11 +25,11 @@ export default Route.extend({
       secondaryBillingContact: null,
       isActive: true
     });
-  },
+  }
 
   afterModel(model) {
     if (this.can.cannot('create provider', model)) {
       return this.router.transitionTo('index');
     }
   }
-});
+}

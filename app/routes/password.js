@@ -1,14 +1,21 @@
+import classic from 'ember-classic-decorator';
 import { inject as service } from '@ember/service';
 import Route from '@ember/routing/route';
 
-export default Route.extend({
-  currentUser: service(),
-  store: service(),
-  session: service(),
+@classic
+export default class PasswordRoute extends Route {
+  @service
+  currentUser;
+
+  @service
+  store;
+
+  @service
+  session;
 
   beforeModel(transition) {
     this.session.requireAuthentication(transition, 'sign-in');
-  },
+  }
 
   //authenticationRoute: 'sign-in',
 
@@ -45,4 +52,4 @@ export default Route.extend({
         });
     }
   }
-});
+}

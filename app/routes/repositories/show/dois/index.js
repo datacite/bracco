@@ -1,12 +1,19 @@
+import classic from 'ember-classic-decorator';
+import { inject as service } from '@ember/service';
 import { hash } from 'rsvp';
 import { assign } from '@ember/polyfills';
 import Route from '@ember/routing/route';
-import { inject as service } from '@ember/service';
 
-export default Route.extend({
-  can: service(),
-  router: service(),
-  store: service(),
+@classic
+export default class IndexRoute extends Route {
+  @service
+  can;
+
+  @service
+  router;
+
+  @service
+  store;
 
   model(params) {
     params = assign(params, {
@@ -30,16 +37,16 @@ export default Route.extend({
         }),
       page: params['page']['number']
     });
-  },
+  }
 
-  queryParams: {
+  queryParams = {
     page: {
       refreshModel: true
     },
     size: {
       refreshModel: true
     }
-  },
+  };
 
   afterModel() {
     if (
@@ -48,4 +55,4 @@ export default Route.extend({
       this.router.transitionTo('index');
     }
   }
-});
+}

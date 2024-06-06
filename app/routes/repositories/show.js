@@ -1,13 +1,27 @@
+import classic from 'ember-classic-decorator';
+import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 import Route from '@ember/routing/route';
 
-export default Route.extend({
-  can: service(),
-  features: service(),
-  flashMessages: service(),
-  headData: service(),
-  router: service(),
-  store: service(),
+@classic
+export default class ShowRoute extends Route {
+  @service
+  can;
+
+  @service
+  features;
+
+  @service
+  flashMessages;
+
+  @service
+  headData;
+
+  @service
+  router;
+
+  @service
+  store;
 
   model(params) {
     let self = this;
@@ -29,7 +43,7 @@ export default Route.extend({
         self.get('flashMessages').warning(reason);
         self.router.transitionTo('index');
       });
-  },
+  }
 
   afterModel(model) {
     if (this.can.cannot('read repository', model)) {
@@ -41,11 +55,10 @@ export default Route.extend({
         );
       }
     }
-  },
-
-  actions: {
-    queryParamsDidChange() {
-      this.refresh();
-    }
   }
-});
+
+  @action
+  queryParamsDidChange() {
+    this.refresh();
+  }
+}

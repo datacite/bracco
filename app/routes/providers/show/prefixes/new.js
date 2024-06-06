@@ -1,11 +1,18 @@
+import classic from 'ember-classic-decorator';
+import { inject as service } from '@ember/service';
 import { hash } from 'rsvp';
 import Route from '@ember/routing/route';
-import { inject as service } from '@ember/service';
 
-export default Route.extend({
-  can: service(),
-  router: service(),
-  store: service(),
+@classic
+export default class NewRoute extends Route {
+  @service
+  can;
+
+  @service
+  router;
+
+  @service
+  store;
 
   model() {
     let provider = this.modelFor('providers/show');
@@ -16,16 +23,16 @@ export default Route.extend({
         provider
       })
     });
-  },
+  }
 
   setupController(controller, model) {
-    this._super(controller, model);
+    super.setupController(controller, model);
 
     this.controllerFor('providers.show.prefixes.new').send(
       'searchPrefix',
       null
     );
-  },
+  }
 
   afterModel() {
     if (this.can.cannot('read index')) {
@@ -35,4 +42,4 @@ export default Route.extend({
       );
     }
   }
-});
+}
