@@ -1,15 +1,18 @@
+import classic from 'ember-classic-decorator';
 import Base from 'ember-simple-auth/authenticators/base';
 import { Promise } from 'rsvp';
 import fetch from 'fetch';
 import ENV from 'bracco/config/environment';
 import { isEmpty } from '@ember/utils';
 
-export default Base.extend({
-  serverTokenEndpoint: ENV.API_URL + '/oidc-token',
+@classic
+export default class Globus extends Base {
+  serverTokenEndpoint = ENV.API_URL + '/oidc-token';
 
   restore(data) {
     return this._validate(data) ? Promise.resolve(data) : Promise.reject();
-  },
+  }
+
   authenticate(jwt) {
     return new Promise((resolve, reject) => {
       const serverTokenEndpoint = this.serverTokenEndpoint;
@@ -39,11 +42,13 @@ export default Base.extend({
         })
         .catch(reject);
     });
-  },
+  }
+
   invalidate() {
     return Promise.resolve();
-  },
+  }
+
   _validate(data) {
     return !isEmpty(data.access_token);
   }
-});
+}
