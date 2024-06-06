@@ -1,82 +1,87 @@
+import classic from 'ember-classic-decorator';
 import { computed } from '@ember/object';
-import { equal } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
+import { equal } from '@ember/object/computed';
 import { Ability } from 'ember-can';
 
-export default Ability.extend({
-  currentUser: service(),
+@classic
+export default class Repository extends Ability {
+  @service
+  currentUser;
 
-  canSource: equal('currentUser.role_id', 'staff_admin'),
+  @equal('currentUser.role_id', 'staff_admin')
+  canSource;
 
-  canDelete: computed(
+  @computed(
     'currentUser.{role_id,provider_id}',
-    'model.provider.{id,memberType,consortium.id}',
-    function () {
-      switch (this.get('currentUser.role_id')) {
-        case 'staff_admin':
-          return true;
-        case 'consortium_admin':
-          return (
-            this.get('currentUser.provider_id') ===
-            this.get('model.provider.consortium.id')
-          );
-        case 'provider_admin':
-          return (
-            this.get('currentUser.provider_id') ===
-            this.get('model.provider.id')
-          );
-        default:
-          return false;
-      }
+    'model.provider.{id,memberType,consortium.id}'
+  )
+  get canDelete() {
+    switch (this.get('currentUser.role_id')) {
+      case 'staff_admin':
+        return true;
+      case 'consortium_admin':
+        return (
+          this.get('currentUser.provider_id') ===
+          this.get('model.provider.consortium.id')
+        );
+      case 'provider_admin':
+        return (
+          this.get('currentUser.provider_id') ===
+          this.get('model.provider.id')
+        );
+      default:
+        return false;
     }
-  ),
-  canCreate: computed(
-    'currentUser.{role_id,provider_id}',
-    'model.provider.{id,consortium.id}',
-    function () {
-      switch (this.get('currentUser.role_id')) {
-        case 'staff_admin':
-          return true;
-        case 'consortium_admin':
-          return (
-            this.get('currentUser.provider_id') ===
-            this.get('model.provider.consortium.id')
-          );
-        case 'provider_admin':
-          return (
-            this.get('currentUser.provider_id') ===
-            this.get('model.provider.id')
-          );
-        default:
-          return false;
-      }
+  }
+
+  @computed('currentUser.{role_id,provider_id}', 'model.provider.{id,consortium.id}')
+  get canCreate() {
+    switch (this.get('currentUser.role_id')) {
+      case 'staff_admin':
+        return true;
+      case 'consortium_admin':
+        return (
+          this.get('currentUser.provider_id') ===
+          this.get('model.provider.consortium.id')
+        );
+      case 'provider_admin':
+        return (
+          this.get('currentUser.provider_id') ===
+          this.get('model.provider.id')
+        );
+      default:
+        return false;
     }
-  ),
-  canUpdate: computed(
+  }
+
+  @computed(
     'currentUser.{role_id,provider_id,client_id}',
-    'model.{id,provider.id,provider.memberType,provider.consortium.id}',
-    function () {
-      switch (this.get('currentUser.role_id')) {
-        case 'staff_admin':
-          return true;
-        case 'consortium_admin':
-          return (
-            this.get('currentUser.provider_id') ===
-            this.get('model.provider.consortium.id')
-          );
-        case 'provider_admin':
-          return (
-            this.get('currentUser.provider_id') ===
-            this.get('model.provider.id')
-          );
-        case 'client_admin':
-          return this.get('currentUser.client_id') === this.get('model.id');
-        default:
-          return false;
-      }
+    'model.{id,provider.id,provider.memberType,provider.consortium.id}'
+  )
+  get canUpdate() {
+    switch (this.get('currentUser.role_id')) {
+      case 'staff_admin':
+        return true;
+      case 'consortium_admin':
+        return (
+          this.get('currentUser.provider_id') ===
+          this.get('model.provider.consortium.id')
+        );
+      case 'provider_admin':
+        return (
+          this.get('currentUser.provider_id') ===
+          this.get('model.provider.id')
+        );
+      case 'client_admin':
+        return this.get('currentUser.client_id') === this.get('model.id');
+      default:
+        return false;
     }
-  ),
-  canToken: computed('currentUser.role_id', 'model.provider.id', function () {
+  }
+
+  @computed('currentUser.role_id', 'model.provider.id')
+  get canToken() {
     switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
@@ -93,55 +98,56 @@ export default Ability.extend({
       default:
         return false;
     }
-  }),
-  canRead: computed(
+  }
+
+  @computed(
     'currentUser.{role_id,provider_id,client_id}',
-    'model.{id,provider.id,provider.consortium.id}',
-    function () {
-      this.get('currentUser.role_id');
-      switch (this.get('currentUser.role_id')) {
-        case 'staff_admin':
-          return true;
-        case 'consortium_admin':
-          return (
-            this.get('currentUser.provider_id') ===
-            this.get('model.provider.consortium.id')
-          );
-        case 'provider_admin':
-          return (
-            this.get('currentUser.provider_id') ===
-            this.get('model.provider.id')
-          );
-        case 'client_admin':
-          return this.get('currentUser.client_id') === this.get('model.id');
-        default:
-          return false;
-      }
+    'model.{id,provider.id,provider.consortium.id}'
+  )
+  get canRead() {
+    this.get('currentUser.role_id');
+    switch (this.get('currentUser.role_id')) {
+      case 'staff_admin':
+        return true;
+      case 'consortium_admin':
+        return (
+          this.get('currentUser.provider_id') ===
+          this.get('model.provider.consortium.id')
+        );
+      case 'provider_admin':
+        return (
+          this.get('currentUser.provider_id') ===
+          this.get('model.provider.id')
+        );
+      case 'client_admin':
+        return this.get('currentUser.client_id') === this.get('model.id');
+      default:
+        return false;
     }
-  ),
-  canTransfer: computed(
-    'currentUser.{role_id,provider_id}',
-    'model.provider.{id,consortium.id}',
-    function () {
-      switch (this.get('currentUser.role_id')) {
-        case 'staff_admin':
-          return true;
-        case 'consortium_admin':
-          return (
-            this.get('currentUser.provider_id') ===
-            this.get('model.provider.consortium.id')
-          );
-        default:
-          return false;
-      }
+  }
+
+  @computed('currentUser.{role_id,provider_id}', 'model.provider.{id,consortium.id}')
+  get canTransfer() {
+    switch (this.get('currentUser.role_id')) {
+      case 'staff_admin':
+        return true;
+      case 'consortium_admin':
+        return (
+          this.get('currentUser.provider_id') ===
+          this.get('model.provider.consortium.id')
+        );
+      default:
+        return false;
     }
-  ),
-  canMove: computed('currentUser.role_id', function () {
+  }
+
+  @computed('currentUser.role_id')
+  get canMove() {
     switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
       default:
         return false;
     }
-  })
-});
+  }
+}
