@@ -1,8 +1,10 @@
+import classic from 'ember-classic-decorator';
 import ApplicationAdapter from './application';
 import ENV from 'bracco/config/environment';
 import { isPresent } from '@ember/utils';
 
-export default ApplicationAdapter.extend({
+@classic
+export default class Doi extends ApplicationAdapter {
   urlForFindRecord(id, modelName, snapshot) {
     let baseUrl = this.buildURL(modelName, id, snapshot);
     let query = '';
@@ -13,7 +15,7 @@ export default ApplicationAdapter.extend({
     query = query ? '?' + query : '';
 
     return baseUrl + query;
-  },
+  }
 
   // For API requests from doi.save()/PATCH
   urlForUpdateRecord(id, modelName, snapshot) {
@@ -23,19 +25,19 @@ export default ApplicationAdapter.extend({
     query = '?' + 'affiliation=true&publisher=true';
 
     return baseUrl + query;
-  },
+  }
 
   // For API requests from doi.save()/POST
   urlForCreateRecord(modelName, snapshot) {
-    let baseUrl = this._super(...arguments);
+    let baseUrl = super.urlForCreateRecord(...arguments);
     let query = '?' + 'affiliation=true&publisher=true';
 
     return baseUrl + query;
-  },
+  }
 
   pathForType() {
     return 'dois';
-  },
+  }
 
   buildQuery(options) {
     const allowedKeys = ['affiliation', 'publisher'];
@@ -53,4 +55,4 @@ export default ApplicationAdapter.extend({
     }
     return queryParts.join('&');
   }
-});
+}

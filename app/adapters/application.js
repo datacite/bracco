@@ -1,14 +1,19 @@
-import JSONAPIAdapter from '@ember-data/adapter/json-api';
-import { inject as service } from '@ember/service';
-import ENV from 'bracco/config/environment';
+import classic from 'ember-classic-decorator';
 import { computed } from '@ember/object';
+import { inject as service } from '@ember/service';
+import JSONAPIAdapter from '@ember-data/adapter/json-api';
+import ENV from 'bracco/config/environment';
 import { isPresent } from '@ember/utils';
 
-const ApplicationAdapter = JSONAPIAdapter.extend({
-  session: service(),
-  host: ENV.API_URL,
+@classic
+class ApplicationAdapter extends JSONAPIAdapter {
+  @service
+  session;
 
-  headers: computed('session.data.authenticated.token', function () {
+  host = ENV.API_URL;
+
+  @computed('session.data.authenticated.token')
+  get headers() {
     const headers = {};
     let { access_token } = this.get('session.data.authenticated');
     if (isPresent(access_token)) {
@@ -16,13 +21,14 @@ const ApplicationAdapter = JSONAPIAdapter.extend({
     }
 
     return headers;
-  }),
+  }
+
   handleResponse(status, headers, payload) {
     if ([422, 409, 500].includes(status)) {
       return payload.errors[0];
     }
-    return this._super(...arguments);
+    return super.handleResponse(...arguments);
   }
-});
+}
 
 export default ApplicationAdapter;
