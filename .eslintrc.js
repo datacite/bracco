@@ -31,9 +31,16 @@ module.exports = {
     'ember/require-tagless-components': 0,
     'ember/no-mixins': 0,
     // TODO
-    'ember/classic-decorator-no-classic-methods': 0,
+    //'ember/classic-decorator-no-classic-methods': 0,
     'ember/no-get': 0,
-    'ember/no-controller-access-in-routes': 0
+    'ember/no-controller-access-in-routes': 0,
+    // NEW - WITH UPGRADE TO ES-PLUGIN-EMBER V12
+    'ember/no-jquery': 'error',
+    'ember/no-replace-test-comments': 'error',
+    'ember/no-replace-test-comments': 'error',
+    // NEW - for ember-classic-decorator and move to native js classes
+    'ember/classic-decorator-hooks': 'error',
+    'ember/classic-decorator-no-classic-methods': 'error'
   },
   overrides: [
     // node files
