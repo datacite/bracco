@@ -1,7 +1,8 @@
+import classic from 'ember-classic-decorator';
+import { computed } from '@ember/object';
 import { attr } from '@ember-data/model';
 import Fragment from 'ember-data-model-fragments/fragment';
 import { validator, buildValidations } from 'ember-cp-validations';
-import { computed } from '@ember/object';
 
 const Validations = buildValidations({
   dateType: [
@@ -23,8 +24,14 @@ const Validations = buildValidations({
   ]
 });
 
-export default Fragment.extend(Validations, {
-  date: attr('string'),
-  dateType: attr('string'),
-  dateInformation: attr('string')
-});
+@classic
+export default class Date extends Fragment.extend(Validations) {
+  @attr('string')
+  date;
+
+  @attr('string')
+  dateType;
+
+  @attr('string')
+  dateInformation;
+}

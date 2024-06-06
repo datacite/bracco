@@ -1,6 +1,8 @@
-import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
+import classic from 'ember-classic-decorator';
 import { computed } from '@ember/object';
+import { inject as service } from '@ember/service';
 import { reads } from '@ember/object/computed';
+import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
 import { isPresent, isBlank } from '@ember/utils';
 import { w } from '@ember/string';
 // import ENV from 'bracco/config/environment';
@@ -8,7 +10,6 @@ import { validator, buildValidations } from 'ember-cp-validations';
 import { fragment } from 'ember-data-model-fragments/attributes';
 import addressFormatter from '@fragaria/address-formatter';
 import ENV from 'bracco/config/environment';
-import { inject as service } from '@ember/service';
 import validatePwdInputs from 'bracco/utils/validate-pwd-inputs';
 
 export const organizationTypeList = [
@@ -239,109 +240,189 @@ const Validations = buildValidations({
   ]
 });
 
-export default Model.extend(Validations, {
-  router: service(),
+@classic
+export default class Provider extends Model.extend(Validations) {
+  @service
+  router;
 
-  consortium: belongsTo('provider', {
+  @belongsTo('provider', {
     inverse: 'consortiumOrganizations',
     async: true
-  }),
-  consortiumOrganizations: hasMany('provider', {
+  })
+  consortium;
+
+  @hasMany('provider', {
     inverse: 'consortium',
     async: true
-  }),
-  contacts: hasMany('contact', {
+  })
+  consortiumOrganizations;
+
+  @hasMany('contact', {
     inverse: 'provider',
     async: true
-  }),
+  })
+  contacts;
 
-  meta: attr(),
+  @attr()
+  meta;
 
-  name: attr('string'),
-  displayName: attr('string'),
-  symbol: attr('string'),
-  globusUuid: attr('string'),
-  description: attr('string'),
-  region: attr('string'),
-  country: attr('country'),
-  memberType: attr('string'),
-  organizationType: attr('string'),
-  focusArea: attr('string'),
-  logoUrl: attr('string'),
-  systemEmail: attr('string'),
-  groupEmail: attr('string'),
-  website: attr('string'),
-  isActive: attr('boolean', { defaultValue: true }),
-  passwordInput: attr('string'),
-  nonProfitStatus: attr('string'),
-  hasPassword: attr('boolean'),
-  rorId: attr('string'),
-  salesforceId: attr('string'),
-  twitterHandle: attr('string'),
-  logo: attr(),
-  billingInformation: attr('billingInformation'),
-  technicalContact: fragment('contact-fragment'),
-  secondaryTechnicalContact: fragment('contact-fragment'),
-  billingContact: fragment('contact-fragment'),
-  secondaryBillingContact: fragment('contact-fragment'),
-  secondaryServiceContact: fragment('contact-fragment'),
-  serviceContact: fragment('contact-fragment'),
-  votingContact: fragment('contact-fragment'),
-  joined: attr('date'),
-  created: attr('date'),
-  updated: attr('date'),
-  doiEstimate: attr('number'),
+  @attr('string')
+  name;
 
-  uid: computed('id', function () {
+  @attr('string')
+  displayName;
+
+  @attr('string')
+  symbol;
+
+  @attr('string')
+  globusUuid;
+
+  @attr('string')
+  description;
+
+  @attr('string')
+  region;
+
+  @attr('country')
+  country;
+
+  @attr('string')
+  memberType;
+
+  @attr('string')
+  organizationType;
+
+  @attr('string')
+  focusArea;
+
+  @attr('string')
+  logoUrl;
+
+  @attr('string')
+  systemEmail;
+
+  @attr('string')
+  groupEmail;
+
+  @attr('string')
+  website;
+
+  @attr('boolean', { defaultValue: true })
+  isActive;
+
+  @attr('string')
+  passwordInput;
+
+  @attr('string')
+  nonProfitStatus;
+
+  @attr('boolean')
+  hasPassword;
+
+  @attr('string')
+  rorId;
+
+  @attr('string')
+  salesforceId;
+
+  @attr('string')
+  twitterHandle;
+
+  @attr()
+  logo;
+
+  @attr('billingInformation')
+  billingInformation;
+
+  @fragment('contact-fragment')
+  technicalContact;
+
+  @fragment('contact-fragment')
+  secondaryTechnicalContact;
+
+  @fragment('contact-fragment')
+  billingContact;
+
+  @fragment('contact-fragment')
+  secondaryBillingContact;
+
+  @fragment('contact-fragment')
+  secondaryServiceContact;
+
+  @fragment('contact-fragment')
+  serviceContact;
+
+  @fragment('contact-fragment')
+  votingContact;
+
+  @attr('date')
+  joined;
+
+  @attr('date')
+  created;
+
+  @attr('date')
+  updated;
+
+  @attr('number')
+  doiEstimate;
+
+  @computed('id')
+  get uid() {
     return this.id.toUpperCase();
-  }),
-  hasRequiredContacts: computed(
+  }
+
+  @computed(
     'billingContact.email',
     'memberType',
     'serviceContact.email',
-    'votingContact.email',
-    function () {
-      if (this.memberType === 'consortium_organization') {
-        return isPresent(this.serviceContact.email);
-      } else if (this.memberType !== 'developer') {
-        return (
-          isPresent(this.votingContact.email) &&
-          isPresent(this.serviceContact.email) &&
-          isPresent(this.billingContact.email)
-        );
-      }
-    }
-  ),
-  filteredContacts: reads('contacts'),
-  formattedBillingInformation: computed(
-    'billingInformation',
-    'billingInformation.{address,city,postCode,state.name,country,country.name,country.code}',
-    function () {
-      if (this.billingInformation) {
-        return addressFormatter.format(
-          {
-            road: this.billingInformation.address,
-            city: this.billingInformation.city,
-            postcode: this.billingInformation.postCode
-              ? this.billingInformation.postCode
-              : null,
-            state: this.billingInformation.state
-              ? this.billingInformation.state.name
-              : null,
-            country: this.billingInformation.country
-              ? this.billingInformation.country.name
-              : null,
-            countryCode: this.billingInformation.country
-              ? this.billingInformation.country.code
-              : null
-          },
-          {
-            output: 'array'
-          }
-        );
-      } else {
-        return null;
-      }
-    }
+    'votingContact.email'
   )
-});
+  get hasRequiredContacts() {
+    if (this.memberType === 'consortium_organization') {
+      return isPresent(this.serviceContact.email);
+    } else if (this.memberType !== 'developer') {
+      return (
+        isPresent(this.votingContact.email) &&
+        isPresent(this.serviceContact.email) &&
+        isPresent(this.billingContact.email)
+      );
+    }
+  }
+
+  @reads('contacts')
+  filteredContacts;
+
+  @computed(
+    'billingInformation',
+    'billingInformation.{address,city,postCode,state.name,country,country.name,country.code}'
+  )
+  get formattedBillingInformation() {
+    if (this.billingInformation) {
+      return addressFormatter.format(
+        {
+          road: this.billingInformation.address,
+          city: this.billingInformation.city,
+          postcode: this.billingInformation.postCode
+            ? this.billingInformation.postCode
+            : null,
+          state: this.billingInformation.state
+            ? this.billingInformation.state.name
+            : null,
+          country: this.billingInformation.country
+            ? this.billingInformation.country.name
+            : null,
+          countryCode: this.billingInformation.country
+            ? this.billingInformation.country.code
+            : null
+        },
+        {
+          output: 'array'
+        }
+      );
+    } else {
+      return null;
+    }
+  }
+}

@@ -1,5 +1,6 @@
+import classic from 'ember-classic-decorator';
+import { reads, union } from '@ember/object/computed';
 import Model, { attr } from '@ember-data/model';
-import { union, reads } from '@ember/object/computed';
 import { validator, buildValidations } from 'ember-cp-validations';
 import dfgMapping from '../utils/dfg-mappings';
 
@@ -13,27 +14,59 @@ const Validations = buildValidations({
   ]
 });
 
-export default Model.extend(Validations, {
-  re3dataId: attr('string'),
-  repositoryName: attr('string'),
-  additionalNames: attr(),
-  description: attr('string'),
-  repositoryUrl: attr('string'),
-  repositoryContacts: attr(),
-  repositoryLanguages: attr(),
-  software: attr(),
-  subjects: attr(),
-  certificates: attr(),
-  dataUploads: attr(),
-  dataAccesses: attr(),
-  types: attr(),
-  created: attr('date'),
-  updated: attr('date'),
+@classic
+export default class Re3Data extends Model.extend(Validations) {
+  @attr('string')
+  re3dataId;
 
-  name: reads('repositoryName'),
+  @attr('string')
+  repositoryName;
+
+  @attr()
+  additionalNames;
+
+  @attr('string')
+  description;
+
+  @attr('string')
+  repositoryUrl;
+
+  @attr()
+  repositoryContacts;
+
+  @attr()
+  repositoryLanguages;
+
+  @attr()
+  software;
+
+  @attr()
+  subjects;
+
+  @attr()
+  certificates;
+
+  @attr()
+  dataUploads;
+
+  @attr()
+  dataAccesses;
+
+  @attr()
+  types;
+
+  @attr('date')
+  created;
+
+  @attr('date')
+  updated;
+
+  @reads('repositoryName')
+  name;
 
   // combine subject areas and keywords
-  tags: union('subjects', 'keywords'),
+  @union('subjects', 'keywords')
+  tags;
 
   get reformattedSubjects() {
     return this.subjects.map((sub) => {
@@ -44,7 +77,8 @@ export default Model.extend(Validations, {
         scheme: sub.scheme
       };
     });
-  },
+  }
+
   get fosSubjects() {
     var subjects = this.subjects.filter((sub) => {
       return sub.scheme == 'DFG';
@@ -57,4 +91,4 @@ export default Model.extend(Validations, {
 
     return dfgMapping.findByIds(ids);
   }
-});
+}

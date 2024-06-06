@@ -1,7 +1,8 @@
+import classic from 'ember-classic-decorator';
+import { computed } from '@ember/object';
 import { attr } from '@ember-data/model';
 import { validator, buildValidations } from 'ember-cp-validations';
 import Fragment from 'ember-data-model-fragments/fragment';
-import { computed } from '@ember/object';
 import { isBlank } from '@ember/utils';
 
 const Validations = buildValidations({
@@ -110,9 +111,17 @@ const Validations = buildValidations({
   ]
 });
 
-export default Fragment.extend(Validations, {
-  southBoundLatitude: attr('number', { defaultValue: null }),
-  northBoundLatitude: attr('number', { defaultValue: null }),
-  westBoundLongitude: attr('number', { defaultValue: null }),
-  eastBoundLongitude: attr('number', { defaultValue: null })
-});
+@classic
+export default class GeoLocationBox extends Fragment.extend(Validations) {
+  @attr('number', { defaultValue: null })
+  southBoundLatitude;
+
+  @attr('number', { defaultValue: null })
+  northBoundLatitude;
+
+  @attr('number', { defaultValue: null })
+  westBoundLongitude;
+
+  @attr('number', { defaultValue: null })
+  eastBoundLongitude;
+}

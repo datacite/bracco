@@ -1,3 +1,4 @@
+import classic from 'ember-classic-decorator';
 import { attr } from '@ember-data/model';
 import Fragment from 'ember-data-model-fragments/fragment';
 // import { validator, buildValidations } from 'ember-cp-validations';
@@ -16,8 +17,14 @@ import Fragment from 'ember-data-model-fragments/fragment';
 //   ],
 // });
 
-export default Fragment.extend({
-  description: attr('string', { defaultValue: null }),
-  descriptionType: attr('string', { defaultValue: 'Abstract' }),
-  lang: attr('string', { defaultValue: null })
-});
+@classic
+export default class Description extends Fragment {
+  @attr('string', { defaultValue: null })
+  description;
+
+  @attr('string', { defaultValue: 'Abstract' })
+  descriptionType;
+
+  @attr('string', { defaultValue: null })
+  lang;
+}

@@ -1,48 +1,77 @@
-import Model, { attr } from '@ember-data/model';
+import classic from 'ember-classic-decorator';
 import { computed } from '@ember/object';
 import { reads } from '@ember/object/computed';
+import Model, { attr } from '@ember-data/model';
 import { A } from '@ember/array';
 
-export default Model.extend({
-  meta: attr(),
+@classic
+export default class User extends Model {
+  @attr()
+  meta;
 
-  name: attr('string'),
-  givenName: attr('string'),
-  familyName: attr('string'),
-  createdAt: attr('date'),
-  updatedAt: attr('date'),
+  @attr('string')
+  name;
 
-  orcid: computed('id', function () {
+  @attr('string')
+  givenName;
+
+  @attr('string')
+  familyName;
+
+  @attr('date')
+  createdAt;
+
+  @attr('date')
+  updatedAt;
+
+  @computed('id')
+  get orcid() {
     return 'https://orcid.org/' + this.id;
-  }),
-  doiCount: reads('meta.published'),
-  totalDoiCount: computed('meta.published', function () {
+  }
+
+  @reads('meta.published')
+  doiCount;
+
+  @computed('meta.published')
+  get totalDoiCount() {
     return this.get('meta.published').reduce(function (a, b) {
       return a + b.count;
     }, 0);
-  }),
-  resourceTypeCount: reads('meta.resourceTypes'),
-  totalResourceTypeCount: computed('meta.resourceTypes', function () {
+  }
+
+  @reads('meta.resourceTypes')
+  resourceTypeCount;
+
+  @computed('meta.resourceTypes')
+  get totalResourceTypeCount() {
     return this.get('meta.resourceTypes').reduce(function (a, b) {
       return a + b.count;
     }, 0);
-  }),
-  totalCitationCount: computed('meta.citations', function () {
+  }
+
+  @computed('meta.citations')
+  get totalCitationCount() {
     return this.get('meta.citations').reduce(function (a, b) {
       return a + b.count;
     }, 0);
-  }),
-  totalViewCount: computed('meta.views', function () {
+  }
+
+  @computed('meta.views')
+  get totalViewCount() {
     return this.get('meta.views').reduce(function (a, b) {
       return a + b.count;
     }, 0);
-  }),
-  totalDownloadCount: computed('meta.downloads', function () {
+  }
+
+  @computed('meta.downloads')
+  get totalDownloadCount() {
     return this.get('meta.downloads').reduce(function (a, b) {
       return a + b.count;
     }, 0);
-  }),
-  currentDoiCount: computed('doiCount', function () {
+  }
+
+  @computed('doiCount')
+  get currentDoiCount() {
     let currentYear = A(this.doiCount).findBy(
       'id',
       new Date().getFullYear().toString()
@@ -52,5 +81,5 @@ export default Model.extend({
     } else {
       return 0;
     }
-  })
-});
+  }
+}

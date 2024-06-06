@@ -1,7 +1,8 @@
+import classic from 'ember-classic-decorator';
+import { computed } from '@ember/object';
 import { attr } from '@ember-data/model';
 import Fragment from 'ember-data-model-fragments/fragment';
 import { validator, buildValidations } from 'ember-cp-validations';
-import { computed } from '@ember/object';
 import { isBlank } from '@ember/utils';
 
 const Validations = buildValidations({
@@ -74,12 +75,26 @@ const Validations = buildValidations({
   ]
 });
 
-export default Fragment.extend(Validations, {
-  relatedIdentifier: attr('string', { defaultValue: null }),
-  relatedIdentifierType: attr('string', { defaultValue: null }),
-  relationType: attr('string', { defaultValue: null }),
-  relatedMetadataScheme: attr('string', { defaultValue: null }),
-  schemeUri: attr('string', { defaultValue: null }),
-  schemeType: attr('string', { defaultValue: null }),
-  resourceTypeGeneral: attr('string', { defaultValue: null })
-});
+@classic
+export default class RelatedIdentifier extends Fragment.extend(Validations) {
+  @attr('string', { defaultValue: null })
+  relatedIdentifier;
+
+  @attr('string', { defaultValue: null })
+  relatedIdentifierType;
+
+  @attr('string', { defaultValue: null })
+  relationType;
+
+  @attr('string', { defaultValue: null })
+  relatedMetadataScheme;
+
+  @attr('string', { defaultValue: null })
+  schemeUri;
+
+  @attr('string', { defaultValue: null })
+  schemeType;
+
+  @attr('string', { defaultValue: null })
+  resourceTypeGeneral;
+}

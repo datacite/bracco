@@ -1,9 +1,17 @@
+import classic from 'ember-classic-decorator';
 import Model, { attr } from '@ember-data/model';
 
-export default Model.extend({
-  meta: attr(),
+@classic
+export default class Funder extends Model {
+  @attr()
+  meta;
 
-  name: attr('string'),
-  altNames: attr('array'),
-  location: attr('string')
-});
+  @attr('string')
+  name;
+
+  @attr('array')
+  altNames;
+
+  @attr('string')
+  location;
+}

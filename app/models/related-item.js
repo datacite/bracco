@@ -1,9 +1,10 @@
+import classic from 'ember-classic-decorator';
+import { computed } from '@ember/object';
 import { reads } from '@ember/object/computed';
 import { attr } from '@ember-data/model';
 import Fragment from 'ember-data-model-fragments/fragment';
 import { fragmentArray, fragment } from 'ember-data-model-fragments/attributes';
 import { validator, buildValidations } from 'ember-cp-validations';
-import { computed } from '@ember/object';
 import { isBlank } from '@ember/utils';
 import { A } from '@ember/array';
 
@@ -87,30 +88,61 @@ const Validations = buildValidations({
   ]
 });
 
-export default Fragment.extend(Validations, {
-  relatedItemType: attr('string', { defaultValue: null }),
-  relationType: attr('string', { defaultValue: null }),
-  relatedItemIdentifier: fragment('related-item-identifier', {
-    defaultValue: {}
-  }),
-  creators: fragmentArray('related-item-creator', { defaultValue: [] }),
-  titles: fragmentArray('title', { defaultValue: [] }),
-  volume: attr('string', { defaultValue: null }),
-  issue: attr('string', { defaultValue: null }),
-  number: attr(),
-  publicationYear: attr('string', { defaultValue: null }),
-  contributors: fragmentArray('related-item-contributor', { defaultValue: [] }),
-  firstPage: attr('string', { defaultValue: null }),
-  lastPage: attr('string', { defaultValue: null }),
-  publisher: fragment('publisher'),
-  edition: attr('string', { defaultValue: null }),
+@classic
+export default class RelatedItem extends Fragment.extend(Validations) {
+  @attr('string', { defaultValue: null })
+  relatedItemType;
 
-  title: computed('titles.@each.title', function () {
+  @attr('string', { defaultValue: null })
+  relationType;
+
+  @fragment('related-item-identifier', {
+    defaultValue: {}
+  })
+  relatedItemIdentifier;
+
+  @fragmentArray('related-item-creator', { defaultValue: [] })
+  creators;
+
+  @fragmentArray('title', { defaultValue: [] })
+  titles;
+
+  @attr('string', { defaultValue: null })
+  volume;
+
+  @attr('string', { defaultValue: null })
+  issue;
+
+  @attr()
+  number;
+
+  @attr('string', { defaultValue: null })
+  publicationYear;
+
+  @fragmentArray('related-item-contributor', { defaultValue: [] })
+  contributors;
+
+  @attr('string', { defaultValue: null })
+  firstPage;
+
+  @attr('string', { defaultValue: null })
+  lastPage;
+
+  @fragment('publisher')
+  publisher;
+
+  @attr('string', { defaultValue: null })
+  edition;
+
+  @computed('titles.@each.title')
+  get title() {
     if (this.titles.length > 0) {
       return A(this.titles).get('firstObject').title;
     } else {
       return null;
     }
-  }),
-  relatedItemContributors: reads('contributors')
-});
+  }
+
+  @reads('contributors')
+  relatedItemContributors;
+}

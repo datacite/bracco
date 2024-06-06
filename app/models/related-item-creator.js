@@ -1,7 +1,8 @@
+import classic from 'ember-classic-decorator';
+import { computed } from '@ember/object';
 import { attr } from '@ember-data/model';
 import Fragment from 'ember-data-model-fragments/fragment';
 import { validator, buildValidations } from 'ember-cp-validations';
-import { computed } from '@ember/object';
 
 const Validations = buildValidations({
   name: [
@@ -12,15 +13,24 @@ const Validations = buildValidations({
   ]
 });
 
-export default Fragment.extend(Validations, {
-  name: attr('string'),
-  givenName: attr('string', { defaultValue: null }),
-  familyName: attr('string', { defaultValue: null }),
-  nameType: attr('string', { defaultValue: null }),
+@classic
+export default class RelatedItemCreator extends Fragment.extend(Validations) {
+  @attr('string')
+  name;
 
-  displayName: computed('name', 'givenName', 'familyName', function () {
+  @attr('string', { defaultValue: null })
+  givenName;
+
+  @attr('string', { defaultValue: null })
+  familyName;
+
+  @attr('string', { defaultValue: null })
+  nameType;
+
+  @computed('name', 'givenName', 'familyName')
+  get displayName() {
     return this.familyName
       ? [this.givenName, this.familyName].join(' ')
       : this.name;
-  })
-});
+  }
+}
