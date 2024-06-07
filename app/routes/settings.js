@@ -20,6 +20,9 @@ export default class SettingsRoute extends Route {
   @service
   store;
 
+  @service
+  flashMessages;
+
   model() {
     if (this.can.can('read index')) {
       let self = this;
