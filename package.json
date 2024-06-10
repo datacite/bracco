@@ -71,6 +71,7 @@
     "@ember/optional-features": "^2.1.0",
     "@ember/string": "3.1.1",
     "@ember/test-helpers": "^2.9.3",
+    "@embroider/macros": "1.16.2",
     "@glimmer/component": "^1.1.2",
     "@glimmer/tracking": "^1.1.2",
     "@pollyjs/adapter-fetch": "^6.0.0",
@@ -110,10 +111,11 @@
     "devtron": "^1.4.0",
     "edtf": "^2.7.1",
     "ember-auto-import": "^2.7.2",
-    "ember-bootstrap": "^5.1.1",
+    "ember-basic-dropdown": "^8.1.0",
+    "ember-bootstrap": "^6.1.1",
     "ember-bootstrap-cp-validations": "^2.1.0",
     "ember-bootstrap-icons": "^0.0.1",
-    "ember-bootstrap-power-select": "^4.1.0",
+    "ember-bootstrap-power-select": "^5.0.0",
     "ember-can": "^4.2.0",
     "ember-classic-decorator": "^3.0.1",
     "ember-cli": "~4.12.2",
@@ -124,7 +126,7 @@
     "ember-cli-deprecation-workflow": "^2.2.0",
     "ember-cli-dotenv": "^3.1.0",
     "ember-cli-fastboot": "^3.3.2",
-    "ember-cli-flash": "^2.2.2",
+    "ember-cli-flash": "^5.1.0",
     "ember-cli-head": "^2.0.0",
     "ember-cli-htmlbars": "^6.2.0",
     "ember-cli-inject-live-reload": "^2.1.0",
@@ -137,6 +139,7 @@
     "ember-cli-terser": "^4.0.2",
     "ember-cli-typescript-blueprints": "^3.0.0",
     "ember-composable-helpers": "^5.0.0",
+    "ember-concurrency": "^4.0.2",
     "ember-cp-validations": "^6.0.1",
     "ember-data": "~4.11.3",
     "ember-data-factory-guy": "^4.0.0-alpha.1",
@@ -153,8 +156,8 @@
     "ember-modifier": "^4.1.0",
     "ember-moment": "^9.0.1",
     "ember-page-title": "^7.0.0",
-    "ember-power-select": "^7.2.0",
-    "ember-prism": "^0.10.0",
+    "ember-power-select": "^8.2.0",
+    "ember-prism": "^0.13.0",
     "ember-qunit": "^6.2.0",
     "ember-radio-button": "3.0.0-beta.1",
     "ember-resolver": "^10.0.0",
@@ -199,7 +202,7 @@
     "xml2js": "^0.5.0"
   },
   "engines": {
-    "node": "14.* || 16.* || >= 18"
+    "node": ">= 18"
   },
   "ember": {
     "edition": "octane"
@@ -236,10 +239,8 @@
     "**/@types/eslint": "^7.2.13",
     "**/@types/ember-feature-flags/**/@types/ember__service": "3.16.9",
     "**/@types/ember-data__model/**/@types/ember-data": "3.16.25",
-    "**/ember-bootstrap/**/ember-focus-trap": "1.0.2",
     "**/@babel/traverse": "^7.23.2",
     "**/browserify-sign": "^4.2.3",
-    "**/sanitize-html/**/postcss": "8.4.35",
-    "**/ember-modifier": "^3.2.7"
+    "**/sanitize-html/**/postcss": "8.4.35"
   }
 }

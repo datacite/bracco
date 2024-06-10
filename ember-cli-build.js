@@ -24,7 +24,8 @@ module.exports = function (defaults) {
     'ember-bootstrap': {
       importBootstrapCSS: false,
       importBootstrapFont: false,
-      bootstrapVersion: 5
+      bootstrapVersion: 5,
+      insertEmberWormholeElementToDom: false
     },
     // 'ember-cli-terser': {
     //    enabled: true
@@ -57,7 +58,8 @@ module.exports = function (defaults) {
         node: {
           global: true
           // fs: 'empty'
-        }
+        },
+        devtool: 'source-map'
         /*
         resolve: {
           fallback: {
