@@ -240,6 +240,7 @@
     "**/@types/ember-data__model/**/@types/ember-data": "3.16.25",
     "**/@babel/traverse": "^7.23.2",
     "**/browserify-sign": "^4.2.3",
-    "**/sanitize-html/**/postcss": "8.4.35"
+    "**/sanitize-html/**/postcss": "8.4.35",
+    "**/fast-sourcemap-concat": "2.1.1"
   }
 }
