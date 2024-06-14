@@ -1,5 +1,5 @@
 import Component from '@ember/component';
-import FileReader from 'ember-file-upload/system/file-reader';
+import { FileReader } from 'ember-file-upload';
 
 export default Component.extend({
   b64DecodeUnicode(str) {

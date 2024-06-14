@@ -10,7 +10,7 @@ import {
   focusAreaList,
   nonProfitStatusList
 } from 'bracco/models/provider';
-import FileReader from 'ember-file-upload/system/file-reader';
+import { FileReader } from 'ember-file-upload';
 
 // states and provinces use iso-3166-2 codes
 // TODO add Brazil, India, Ireland, Italy, Mexico, all supported in Salesforce

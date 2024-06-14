@@ -7,7 +7,7 @@ import {
   focusAreaList,
   nonProfitStatusList
 } from 'bracco/models/provider';
-import FileReader from 'ember-file-upload/system/file-reader';
+import { FileReader } from 'ember-file-upload';
 
 export default Controller.extend({
   store: service(),

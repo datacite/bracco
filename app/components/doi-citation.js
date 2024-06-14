@@ -2,7 +2,7 @@ import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 import fetch from 'fetch';
 import ENV from 'bracco/config/environment';
-import FileReader from 'ember-file-upload/system/file-reader';
+import { FileReader } from 'ember-file-upload';
 
 export default Component.extend({
   currentUser: service(),

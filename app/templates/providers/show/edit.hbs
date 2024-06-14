@@ -18,7 +18,7 @@
       class="form-horizontal"
       @horizontalLabelGridClass="col-md-3"
       @model={{this.model}}
-      @onSubmit={{action 'submit' this.model}} as |form|
+      @onSubmit={{action this.submit this.model}} as |form|
     >
       <h3 class="member-results">
         Organization Information
@@ -293,19 +293,30 @@
         </label>
         <div class="col-md-9 form-help-header">
           <div class="btn-toolbar btn-sm btn-file">
-            <FileUpload
-              @name="files"
-              @id="upload-file"
-              @multiple={{false}}
-              @accept="image/png,image/jpeg"
-              @onfileadd={{action 'didSelectFiles'}}
-            >
-              <span class="btn btn-sm">
-                <i class="fas fa-upload"></i>
-                {{if this.model.logo 'Replace' 'Upload'}}
-                Logo
-              </span>
-            </FileUpload>
+            {{! v5 syntax}}
+            {{#let (file-queue name="photos" onFileAdded=this.didSelectFiles) as |queue|}}
+              <!--
+              <label for="upload-photo">
+                <span role="button" tabindex="0" aria-controls="upload-photo">
+                  Choose photo
+                </span>
+              </label>
+              -->
+              <label for="upload-photo">
+                <span class="btn btn-sm" role="button" aria-controls="upload-photo">
+                  <i class="fas fa-upload"></i>
+                  {{if this.model.logo 'Replace' 'Upload'}}
+                  Logo
+                </span>
+              </label>
+              <input
+                type="file"
+                id="upload-photo"
+                accept="image/png,image/jpeg"
+                hidden
+                {{queue.selectFile}}
+              >
+            {{/let}}
           </div>
           <div class="help-block">
             Please upload your horizontal logo in either png or jpeg format. It will be proportionally resized to be no larger than 500 x 200 px.
