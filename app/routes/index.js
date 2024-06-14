@@ -47,8 +47,7 @@ export default class IndexRoute extends Route {
       this.prefixes.available().then(
         function (value) {
           if (
-            self.get('flashMessages').isDestroying ||
-            self.get('flashMessages').isDestroyed
+            self.isDestroying || self.isDestroyed
           ) {
             return;
           }

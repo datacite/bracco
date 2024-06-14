@@ -54,10 +54,7 @@ export default class ShowRoute extends Route {
       let self = this;
       this.prefixes.available().then(
         function (value) {
-          if (
-            self.get('flashMessages').isDestroying ||
-            self.get('flashMessages').isDestroyed
-          ) {
+          if (self.isDestroyed || self.isDestroying) {
             return;
           }
           if (value <= 0) {
