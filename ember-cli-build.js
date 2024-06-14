@@ -8,6 +8,14 @@ module.exports = function (defaults) {
   const pkg = require('./package.json');
 
   let app = new EmberApp(defaults, {
+    // Use the polyfill for 'TypeError: _crypto.randomUUID is not a function'
+    '@embroider/macros': {
+      setConfig: {
+        '@ember-data/store': {
+          polyfillUUID: true
+        },
+      },
+    },
     minifyCSS: {
       options: { processImport: true }
     },
