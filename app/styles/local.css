@@ -300,7 +300,7 @@ lock {
   transform: translateZ(0);
 }
 
-.dropdown.nav-item.show .dropdown-menu>a {
+.dropdown.nav-item.show .dropdown-menu>a, .dropdown.show .dropdown-menu>a {
   color: #34495e;
   font-size: 16px;
   padding: 6px 15px;
@@ -317,9 +317,9 @@ lock {
   white-space: nowrap;
 }
 
-.dropdown.nav-item.show .dropdown-menu a:focus, .dropdown.nav-item.show .dropdown-menu a:hover {
+.dropdown.nav-item.show .dropdown-menu a:focus, .dropdown.nav-item.show .dropdown-menu a:hover, .dropdown.show .dropdown-menu>a:focus, .dropdown.show .dropdown-menu>a:hover {
   background-color: #34495e;
-  color: hsla(0,0%,100%,.7);
+  color: hsla(0, 0%, 100%, .7);
   opacity: 1;
   text-decoration: none;
   cursor: pointer;
