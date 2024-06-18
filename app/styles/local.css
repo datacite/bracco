@@ -388,6 +388,17 @@ div.progress {
 
 /* DOI FORMS - power-select styles. */
 
+.ember-power-select-visually-hidden {
+  display: none;
+}
+
+.power-select-fragment[doi-affiliation] .ember-basic-dropdown-trigger {
+  margin-left: 15px;
+}
+.power-select-fragment .form-group {
+   margin-left: 0;
+}
+
 .power-select-fragment,
 .power-select-fragment[doi-contributor-type],
 .power-select-fragment[doi-language],

@@ -112,7 +112,7 @@
     "edtf": "^2.7.1",
     "ember-auto-import": "^2.7.2",
     "ember-basic-dropdown": "^8.1.0",
-    "ember-bootstrap": "^6.1.1",
+    "ember-bootstrap": "^6.3.1",
     "ember-bootstrap-cp-validations": "^2.1.0",
     "ember-bootstrap-icons": "^0.0.1",
     "ember-bootstrap-power-select": "^5.0.0",

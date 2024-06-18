@@ -9268,7 +9268,7 @@ ember-bootstrap-power-select@^5.0.0:
     fs-extra "^11.0.0"
     rsvp "^4.0.1"
 
-ember-bootstrap@^6.1.1:
+ember-bootstrap@^6.3.1:
   version "6.3.1"
   resolved "https://registry.yarnpkg.com/ember-bootstrap/-/ember-bootstrap-6.3.1.tgz#cbf6fbb57d98ccd6fffb7ee6d581e618bbcc4f0f"
   integrity sha512-+8suIUMpMpvsd21x8JlWExLQ/nEz2aUe18EO1vY7oKj2/X1uOJTYX0S+yjCtHfCtS3d7OwgwF0t/jWSMUkQAcg==

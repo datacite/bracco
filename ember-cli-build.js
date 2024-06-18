@@ -27,13 +27,18 @@ module.exports = function (defaults) {
       extensions: ['js']
     },
     babel: {
+      // ember-concurrency plugins for ember-power-select upgrade
+      plugins: [
+        // ... any other plugins
+        require.resolve("ember-concurrency/async-arrow-task-transform"),
+  
+        // NOTE: put any code coverage plugins last, after the transform.
+      ],
       sourceMaps: 'inline'
     },
     'ember-bootstrap': {
       importBootstrapCSS: false,
-      importBootstrapFont: false,
-      bootstrapVersion: 5,
-      insertEmberWormholeElementToDom: false
+      bootstrapVersion: 5
     },
     // 'ember-cli-terser': {
     //    enabled: true
