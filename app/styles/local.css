@@ -433,8 +433,8 @@ div.progress {
 .power-select-fragment[data-repository-certificate] div:first-child,
 .power-select-fragment[doi-date-type] div:first-child,
 .power-select-fragment[doi-related-identifier-type] div:first-child,
-.power-select-fragment[doi-relation-type] div:first-child,
 .power-select-fragment[doi-resource-type-general] div:first-child,
+.power-select-fragment[doi-relation-type] div:first-child,
 .power-select-fragment[doi-language] div:first-child,
 .power-select-fragment[doi-alternate-identifier-type] div:first-child,
 .power-select-fragment[doi-rights] div:first-child,
@@ -446,20 +446,21 @@ div.progress {
 .power-select-fragment[doi-description-type] div:first-child,
 .power-select-fragment[doi-description-language] div:first-child
 {
+  margin-left: 0;
   padding: 0;
   width: 100% !important;
 }
 
-.power-select-fragment[doi-alternate-identifier-type],
-.power-select-fragment[doi-rights],
-.power-select-fragment[doi-format],
-.power-select-fragment[doi-funder-name],
-.power-select-fragment[doi-funder-identifier-type],
-.power-select-fragment[doi-related-item-type],
-.power-select-fragment[doi-relation-type],
-.power-select-fragment[doi-related-item-identifier]
+.power-select-fragment[doi-relation-type] .row.mb-3 .col-md-9,
+.power-select-fragment[doi-alternate-identifier-type] .row.mb-3 .col-md-9,
+.power-select-fragment[doi-rights] .row.mb-3 .col-md-9,
+.power-select-fragment[doi-format] .row.mb-3 .col-md-9,
+.power-select-fragment[doi-funder-name] .row.mb-3 .col-md-9,
+.power-select-fragment[doi-funder-identifier-type] .row.mb-3 .col-md-9,
+.power-select-fragment[doi-funder-identifier-type] .row.mb-3 .col-md-9,
+.power-select-fragment[doi-related-item-type] .row.mb-3 .col-md-9,
+.power-select-fragment[doi-related-item-identifier] .row.mb-3 .col-md-9
 {
-  margin-left: 15px !important;
   width: 100% !important;
 }
 
@@ -531,13 +532,7 @@ div[doi-publisher] > div {
   color: #e74c3c;
   border-color: #e74c3c;
 }
-/*
-textarea.form-control.is-valid
-{
-  color: #2ecc71;
-  border-color: #2ecc71;
-}
-*/
+
 .form-group input.is-valid + div.form-text {
     color: #2ecc71;
 }
