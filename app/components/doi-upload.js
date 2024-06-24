@@ -1,7 +1,10 @@
+import classic from 'ember-classic-decorator';
+import { action } from '@ember/object';
 import Component from '@ember/component';
-import { FileReader } from 'ember-file-upload';
+import { UploadFile, UploadFileReader } from 'ember-file-upload';
 
-export default Component.extend({
+@classic
+export default class DoiUpload extends Component {
   b64DecodeUnicode(str) {
     // Going backwards: from bytestream, to percent-encoding, to original string.
     return decodeURIComponent(
@@ -12,21 +15,16 @@ export default Component.extend({
         })
         .join('')
     );
-  },
-
-  actions: {
-    didSelectFiles(file) {
-      let reader = new FileReader();
-      let self = this;
-
-      reader.readAsText(file.blob).then(
-        (xml) => {
-          self.get('model').set('xml', xml);
-        },
-        (err) => {
-          console.error(err);
-        }
-      );
-    }
   }
-});
+
+  @action
+  async didSelectFiles(file) {
+    file.readAsText().then((xml) => {
+        this.model.set('xml', xml)
+      },
+      (err) => {
+        console.error(err);
+      }
+    );
+  }
+}
