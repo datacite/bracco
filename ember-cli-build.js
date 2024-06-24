@@ -37,6 +37,7 @@ module.exports = function (defaults) {
       sourceMaps: 'inline'
     },
     'ember-bootstrap': {
+      insertEmberWormholeElementToDom: false,
       importBootstrapCSS: false,
       bootstrapVersion: 5
     },
