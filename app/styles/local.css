@@ -384,6 +384,14 @@ div.progress {
     right: 25px;
     cursor: pointer;
   }
+
+  .password-container-fp {
+    position: relative;
+  }
+
+  .password-container-fp i#togglePassword, .password-container-fp i#toggleConfirmPassword {
+    right: 15px;
+  }
 }
 
 /* DOI FORMS - power-select styles. */
