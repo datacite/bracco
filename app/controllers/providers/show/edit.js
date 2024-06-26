@@ -369,6 +369,7 @@ export default class EditController extends Controller {
 
   @action
   async didSelectFiles(file) {
+    // Type is FileUpload
     file.readAsDataURL().then((logo) => {
         this.model.set('logo', logo)
       },
@@ -495,7 +496,7 @@ export default class EditController extends Controller {
   }
 
   @action
-  submit() {
+  doSubmit() {
     let self = this;
     let m = this.model;
     // iterate through all contacts and update roles

@@ -1,22 +1,27 @@
+import classic from 'ember-classic-decorator';
+import { action } from '@ember/object';
+import { tagName } from '@ember-decorators/component';
 import { inject as service } from '@ember/service';
 import fetch from 'fetch';
 import Component from '@ember/component';
 import { isPresent } from '@ember/utils';
 import vkbeautify from 'vkbeautify';
 import ENV from 'bracco/config/environment';
-import { FileReader } from 'ember-file-upload';
+import { UploadFile, UploadFileReader } from 'ember-file-upload';
 
-export default Component.extend({
-  currentUser: service(),
+@classic
+@tagName('div')
+export default class DoiMetadata extends Component {
+  @service
+  currentUser;
 
-  tagName: 'div',
-  hasMetadata: false,
-  metadata: null,
-  output: null,
-  summary: true,
+  hasMetadata = false;
+  metadata = null;
+  output = null;
+  summary = true;
 
   didReceiveAttrs() {
-    this._super(...arguments);
+    super.didReceiveAttrs(...arguments);
 
     // show metadata if at least one of these attributes is set
     if (
@@ -44,7 +49,7 @@ export default Component.extend({
       jats: 'JATS XML'
     };
     this.set('formats', formats);
-  },
+  }
 
   showMetadata(metadata) {
     if (metadata === 'summary') {
@@ -80,12 +85,12 @@ export default Component.extend({
         }
       });
 
-      result.then(function (response) {
+      result.then(async function (response) {
         if (typeof response === 'string') {
           self.set('output', vkbeautify.json(JSON.stringify(response)));
         } else {
-          let reader = new FileReader();
-          reader.readAsText(response).then(
+          let reader = UploadFile.fromBlob(response, 'blob')
+          reader.readAsText().then(
             (result) => {
               self.set('output', vkbeautify.xml(result));
             },
@@ -97,11 +102,10 @@ export default Component.extend({
       });
     }
     // this.get('router').transitionTo({ queryParams: { metadata: metadata } });
-  },
-
-  actions: {
-    selectMetadata(metadata) {
-      this.showMetadata(metadata);
-    }
   }
-});
+
+  @action
+  selectMetadata(metadata) {
+    this.showMetadata(metadata);
+  }
+}

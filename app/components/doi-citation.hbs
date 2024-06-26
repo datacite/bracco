@@ -1,6 +1,6 @@
 {{#if this.model.publicationYear}}
   <div id="citation" class="input-group pull-right">
-    <select onchange={{action 'selectStyle' value="target.value"}}>
+    <select onchange={{action 'doSelectStyle' value="target.value"}}>
       {{#each-in this.citationFormats as |key value|}}
         <option name="citation" value={{key}} selected={{eq this.citation key}}>{{value}}</option>
       {{/each-in}}

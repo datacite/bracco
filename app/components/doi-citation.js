@@ -1,18 +1,23 @@
-import Component from '@ember/component';
+import classic from 'ember-classic-decorator';
+import { action } from '@ember/object';
+import { tagName } from '@ember-decorators/component';
 import { inject as service } from '@ember/service';
+import Component from '@ember/component';
 import fetch from 'fetch';
 import ENV from 'bracco/config/environment';
-import { FileReader } from 'ember-file-upload';
+import { UploadFile, UploadFileReader } from 'ember-file-upload';
 
-export default Component.extend({
-  currentUser: service(),
+@classic
+@tagName('div')
+export default class DoiCitation extends Component {
+  @service
+  currentUser;
 
-  tagName: 'div',
-  citation: null,
-  citationOutput: null,
+  citation = null;
+  citationOutput = null;
 
   didReceiveAttrs() {
-    this._super(...arguments);
+    super.didReceiveAttrs(...arguments);
 
     this.selectStyle('apa');
 
@@ -25,7 +30,7 @@ export default Component.extend({
       ieee: 'IEEE'
     };
     this.set('citationFormats', citationFormats);
-  },
+  }
 
   selectStyle(style) {
     let self = this;
@@ -48,17 +53,17 @@ export default Component.extend({
       }
     });
 
-    result.then(function (response) {
+    result.then(async function (response) {
       if (typeof response === 'string') {
         self.set('citationOutput', response);
       } else {
         if (self.isDestroying || self.isDestroyed) {
           return;
         }
-        let reader = new FileReader();
-        reader.readAsText(response).then(
-          (r) => {
-            self.set('citationOutput', r);
+        let reader = UploadFile.fromBlob(response, 'blob')
+        reader.readAsText().then(
+          (result) => {
+            self.set('citationOutput', result);
           },
           (err) => {
             console.error(err);
@@ -67,17 +72,16 @@ export default Component.extend({
       }
     });
     // this.get('router').transitionTo({ queryParams: { citation: citation } });
-  },
+  }
 
-  actions: {
-    selectStyle(style) {
-      // APA is default citation style
-      style = style === undefined ? 'apa' : style;
-      this.selectStyle(style);
-    }
-  },
+  @action
+  doSelectStyle(style) {
+    // APA is default citation style
+    style = style === undefined ? 'apa' : style;
+    this.selectStyle(style);
+  }
 
   didRender() {
-    this._super(...arguments);
+    super.didRender(...arguments);
   }
-});
+}

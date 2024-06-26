@@ -17,7 +17,7 @@
           class="form-horizontal"
           @horizontalLabelGridClass="col-md-3"
           @model={{this.model}}
-          @onSubmit={{action 'submit' this.model}}
+          @onSubmit={{action 'doSubmit' this.model}}
           @submitOnEnter={{true}} as |form|
         >
           <h3 class="member-results">
@@ -287,19 +287,25 @@
             </label>
             <div class="col-md-9 form-help-header">
               <div class="btn-toolbar btn-sm btn-file">
-                <FileUpload
-                  @name="files"
-                  @id="upload-file"
-                  @multiple={{false}}
-                  @accept="image/png,image/jpeg"
-                  @onfileadd={{action 'didSelectFiles'}}
-                >
-                  <span class="btn btn-sm">
-                    <i class="fas fa-upload"></i>
-                    {{if this.model.logo 'Replace' 'Upload'}}
-                    Logo
-                  </span>
-                </FileUpload>
+
+                {{! v5 syntax - ember-file-upload}}
+                {{#let (file-queue name="logos" onFileAdded=this.didSelectFiles) as |queue|}}
+                  <label for="upload-logo">
+                    <span class="btn btn-sm" role="button" aria-controls="upload-logo">
+                      <i class="fas fa-upload"></i>
+                      {{if this.model.logo 'Replace' 'Upload'}}
+                      Logo
+                    </span>
+                  </label>
+                  <input
+                    type="file"
+                    id="upload-logo"
+                    accept="image/png,image/jpeg"
+                    hidden
+                    {{queue.selectFile}}
+                  >
+                {{/let}}
+
               </div>
               <div class="help-block">
                 Please upload your horizontal logo in either png or jpeg format. It will be proportionally resized to be no larger than 500 x 200 px.
