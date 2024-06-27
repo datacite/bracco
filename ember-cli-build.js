@@ -68,7 +68,11 @@ module.exports = function (defaults) {
     autoImport: {
       forbidEval: true,
       webpack: {
-        plugins: [new NodePolyfillPlugin()],
+        plugins: [
+          new NodePolyfillPlugin({
+            additionalAliases: ['process'],
+          })
+        ],
         node: {
           global: true
           // fs: 'empty'
