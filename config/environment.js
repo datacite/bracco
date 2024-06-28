@@ -185,15 +185,12 @@ module.exports = function (environment) {
     VERSION: pkg.version,
     APP_NAME: pkg.name,
     JWT_BLACKLISTED: process.env.JWT_BLACKLISTED || '',
-    /*
     googleTagManager: {
       appId:
         process.env.FABRICA_DEPLOY_TARGET !== 'development'
           ? process.env.GOOGLE_TAG_MANAGER_ID
           : null
     },
-    */
-
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
