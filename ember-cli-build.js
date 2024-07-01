@@ -69,9 +69,7 @@ module.exports = function (defaults) {
       forbidEval: true,
       webpack: {
         plugins: [
-          new NodePolyfillPlugin({
-            additionalAliases: ['process'],
-          })
+          new NodePolyfillPlugin()
         ],
         node: {
           global: true

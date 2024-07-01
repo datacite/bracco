@@ -184,7 +184,7 @@
     "minimatch": "^5.1.6",
     "miragejs": "^0.1.48",
     "morgan": "^1.10.0",
-    "node-polyfill-webpack-plugin": "^4.0.0",
+    "node-polyfill-webpack-plugin": "^3.0.0",
     "papaparse": "^5.4.1",
     "patch-package": "^7.0.2",
     "postinstall-postinstall": "^2.1.0",
@@ -242,6 +242,7 @@
     "**/@babel/traverse": "^7.23.2",
     "**/browserify-sign": "^4.2.3",
     "**/sanitize-html/**/postcss": "8.4.35",
-    "**/fast-sourcemap-concat": "2.1.1"
+    "**/fast-sourcemap-concat": "2.1.1",
+    "**/testem/**/fireworm": "0.7.2"
   }
 }
