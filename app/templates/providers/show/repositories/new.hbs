@@ -18,6 +18,7 @@
 
       {{#if (can "create provider")}}
         <form.element @controlType="text" id="salesforce-id" class="form-group" @label="Salesforce ID" @property="salesforceId" @helpText="The 18 digit ID in Salesforce." />
+        <form.element @controlType="text" id="analytics-tracking-id" class="form-group" @label="Analytics Tracking ID (optional)" @property="analyticsTrackingId" @helpText="The Analytics Tracking ID used to generate usage reports." />
       {{/if}}
 
       {{#if (can "token provider")}}

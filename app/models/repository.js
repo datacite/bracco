@@ -174,6 +174,7 @@ export default Model.extend(Validations, {
   domains: attr('string', { defaultValue: '*' }),
   systemEmail: attr('string'),
   salesforceId: attr('string'),
+  analyticsTrackingId: attr('string'),
   year: attr('number'),
   description: attr('string'),
   language: array(),
