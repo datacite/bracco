@@ -11,9 +11,9 @@ module('Integration | Component | provider-list', function (hooks) {
   test('it renders', async function (assert) {
     // Template block usage:
     await render(hbs`
-      {{#provider-list model=this.model link="repositories.index"}}
+      <ProviderList @model={{this.model}} @link="repositories.index">
 
-      {{/provider-list}}
+      </ProviderList>
     `);
 
     assert.dom('*').hasText('No members found.');

@@ -9,9 +9,9 @@ module('Integration | Component | prefix new', function (hooks) {
   test('it renders', async function (assert) {
     // Template block usage:
     await render(hbs`
-      {{#prefix-new}}
+      <PrefixNew>
         template block text
-      {{/prefix-new}}
+      </PrefixNew>
     `);
 
     assert

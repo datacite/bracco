@@ -16,9 +16,9 @@ module('Integration | Component | landing page', function (hooks) {
 
     // Template block usage:
     await render(hbs`
-      {{#landing-page}}
+      <LandingPage>
 
-      {{/landing-page}}
+      </LandingPage>
     `);
 
     assert.ok(

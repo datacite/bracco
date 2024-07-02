@@ -9,9 +9,9 @@ module('Integration | Component | doi upload', function (hooks) {
   test('it renders', async function (assert) {
     // Template block usage:
     await render(hbs`
-      {{#doi-upload}}
+      <DoiUpload>
         template block text
-      {{/doi-upload}}
+      </DoiUpload>
     `);
 
     assert

@@ -21,9 +21,9 @@ module('Integration | Component | repository dois transfer', function (hooks) {
 
     // Template block usage:
     await render(hbs`
-      {{#repository-dois-transfer model=this.model}}
+      <RepositoryDoisTransfer @model={{this.model}}>
         
-      {{/repository-dois-transfer}}
+      </RepositoryDoisTransfer>
     `);
 
     assert

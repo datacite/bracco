@@ -9,9 +9,9 @@ module('Integration | Component | doi metadata', function (hooks) {
   test('it renders', async function (assert) {
     // Template block usage:
     await render(hbs`
-      {{#doi-metadata}}
+      <DoiMetadata>
 
-      {{/doi-metadata}}
+      </DoiMetadata>
   `);
 
     assert.dom('*').hasText('');

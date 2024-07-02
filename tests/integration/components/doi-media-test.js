@@ -16,9 +16,9 @@ module('Integration | Component | doi media', function (hooks) {
 
     // Template block usage:
     await render(hbs`
-      {{#doi-media}}
+      <DoiMedia>
 
-      {{/doi-media}}
+      </DoiMedia>
     `);
 
     assert.ok(
