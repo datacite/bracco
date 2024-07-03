@@ -8,8 +8,11 @@ window.deprecationWorkflow.config = {
     { handler: 'silence', matchId: 'ember-data:deprecate-model-reopenclass' },
     { handler: 'silence', matchId: 'ember-data:deprecate-normalize-modelname-helper' },
     { handler: 'silence', matchId: 'ember-data:deprecate-v1cache-store-apis' },
-    { handler: 'silence', matchId: 'ember-polyfills.deprecate-assign' },
+    { handler: 'silence', matchId: 'ember-data:rsvp-unresolved-async' },
     { handler: 'silence', matchId: 'ember-string.add-package' },
-    { handler: 'silence', matchId: 'remove-owner-inject' }
+    { handler: 'silence', matchId: 'remove-owner-inject' },
+    // deprecations that showed up in testing
+    { handler: 'silence', matchId: 'ember-polyfills.deprecate-assign' },
+    { handler: 'silence', matchId: 'deprecate-ember-error' }
   ]
 };
