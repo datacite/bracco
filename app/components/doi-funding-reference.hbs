@@ -4,7 +4,7 @@
   
 <div class="power-select-fragment" doi-funder-name data-test-funder-name>
   <@form.element @controlType="power-select" @options={{this.funders}} @value={{this.fragment.funderName}} @destination={{this.fragment.funderName}} as |el|>
-    <el.control @searchEnabled={{true}} @onChange={{action "selectFunderReference"}} @placeholder="Search Funders" @onKeydown={{action "createOnEnter"}} @search={{action "searchFundingReferences"}} @searchPlaceholder="Type to search..." @allowClear={{true}} @noMatchesMessage="Press ENTER to add new funder name." @allowClear={{true}} @disabled={{this.disabled}} as |item|>
+    <el.control @searchEnabled={{true}} @onChange={{action "selectFunderReference"}} @placeholder="Search Funders" @onKeydown={{action "createOnEnter"}} @search={{action "searchFundingReferences"}} @searchPlaceholder="Type to search..." @allowClear={{true}} @noMatchesMessage="Press ENTER to add new funder name." @disabled={{this.disabled}} as |item|>
       {{if item.name item.name this.fragment.funderName}}
     </el.control>
   <div class="help-block">

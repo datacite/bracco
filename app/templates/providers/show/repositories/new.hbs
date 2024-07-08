@@ -64,7 +64,7 @@
       </form.element>
       <form.element @controlType="text" id="url" class="form-group" @label="URL (optional)" @property="url" @helpText="The homepage of the repository." />
 
-      <div class="form-group" id="language" class="form-group">
+      <div class="form-group" id="language">
         <label class="control-label col-md-3">Language (optional)</label>
         <div class="col-md-9">
           {{#if (gt this.model.repository.language.length 0)}}
