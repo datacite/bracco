@@ -66,7 +66,7 @@ export default Component.extend({
 
     let route = this.router.currentRouteName;
 
-    if (route === 'index' || route === 'sign-in' || route === 'password' || route === 'reset' || route === '404') {
+    if ((!this.session.isAuthenticated && route === 'index') || route === 'sign-in' || route === 'password' || route === 'reset' || route === '404') {
       this.showLogo = false;
     }
 
