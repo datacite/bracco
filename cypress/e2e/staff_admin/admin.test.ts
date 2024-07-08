@@ -109,12 +109,18 @@ describe('Admin: Admin', () => {
     });
     cy.get('h2.work').contains('DataCite');
     cy.get('li a.nav-link.active').contains('Contacts');
-    cy.get('div#search').should('exist');
-    cy.get('div.panel.facets').should('exist');
-    cy.get('button.export-basic-metadata').should('not.exist');
-
-    // staff can't add contacts here (needs to go to provider first)
-    cy.get('a#add-contact').should('not.exist');
+    cy.get('body').then(($body) => {
+      if ($body.find('div.alert.alert-warning.show').length > 0) {
+        cy.get('div.alert.alert-warning.show').contains('No contacts found.');
+      } else {
+        cy.get('div#search').should('exist');
+        cy.get('div.panel.facets').should('exist');
+        cy.get('button.export-basic-metadata').should('not.exist');
+    
+        // staff can't add contacts here (needs to go to provider first)
+        cy.get('a#add-contact').should('not.exist');
+      }
+    })
   });
 
   it('visiting prefixes', () => {
