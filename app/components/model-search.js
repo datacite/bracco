@@ -31,6 +31,10 @@ export default Component.extend({
   didReceiveAttrs() {
     this._super(...arguments);
 
+    if (!this.model) {
+      return;
+    }
+
     this.set('query', this.model.get('query.query'));
     this.set('sort', this.model.get('query.sort'));
     this.set('filters', this.model.get('query'));
