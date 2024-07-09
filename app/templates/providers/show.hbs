@@ -54,7 +54,7 @@
         </span>
       {{/unless}}
     </h2>
-    <ShowProviderTabs />
+    <ShowProviderTabs @model={{this.model}}/>
     {{outlet}}
   </div>
 {{else}}
