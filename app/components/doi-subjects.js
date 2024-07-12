@@ -12,10 +12,6 @@ export default class DoiSubjects extends Component {
     if (!this.model.get('subjects')) {
       this.model.set('subjects', []);
     }
-
-    if (this.model.get('subjects').length == 0) {
-      this.send("addSubject");
-    }
   }
 
   @action

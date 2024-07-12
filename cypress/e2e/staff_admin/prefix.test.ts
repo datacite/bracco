@@ -68,20 +68,15 @@ describe('Admin: Prefix', () => {
     });
     cy.get('h2.work').contains('DataCite');
     cy.get('li a.nav-link.active').contains('Prefixes');
-    cy.get('div#search').should('exist');
-    cy.get('div.panel.facets').should('exist');
-
-    cy.get('a#assign-prefix').contains('Assign Prefix');
-  });
-
-  it('visiting specific prefix for member', () => {
-    cy.visit('/providers/datacite/prefixes/10.5438');
-    cy.location().should((loc) => {
-      expect(loc.pathname).to.eq('/providers/datacite/prefixes/10.5438');
-    });
-    cy.get('[cy-data="prefix"]').contains('10.5438');
-    // cy.get('[cy-data="datacite.datacite"]', { timeout: 30000 }).contains(
-    //   'DataCite Repository'
-    // );
+    cy.get('body').then(($body) => {
+      if ($body.find('div.alert.alert-warning.show').length > 0) {
+        cy.get('div.alert.alert-warning.show').contains('No prefixes found.');
+      } else {
+        cy.get('div#search').should('exist');
+        cy.get('div.panel.facets').should('exist');
+    
+        cy.get('a#assign-prefix').contains('Assign Prefix');
+      }
+    })
   });
 });

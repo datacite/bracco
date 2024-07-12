@@ -58,7 +58,7 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | REPOSITORIES', () => {
       cy.get('a#account_menu_link').should('contain', Cypress.env('consortium_admin_username').toUpperCase());
 
       // Has tabs with correct one activated.
-      cy.get('ul.nav-tabs li.active a').contains(/Repositories/i)
+      cy.get('ul.nav-tabs li.active a', { timeout: 10000 }).contains(/Repositories/i)
         .and('have.attr', 'href').and('include', '/providers/' + consortium_id + '/repositories');
 
       // Has left sidebar message box.

@@ -128,8 +128,8 @@ describe('ACCEPTANCE: CLIENT_ADMIN | INFO', () => {
       cy.get('#client-type').should('be.visible');
       cy.get('#client-type .ember-power-select-selected-item').should('contain', 'Repository');
 
-      cy.get('div#client-type div[role="button"]').click({ waitForAnimations: true }).then(($dropdown) => {
-        // IGSN ID Catalog option should not exist for existing Periodical and Repository client_types
+      cy.get('div#client-type div[role="combobox"]').click({ waitForAnimations: true }).then(($dropdown) => {
+          // IGSN ID Catalog option should not exist for existing Periodical and Repository client_types
         cy.get('ul.ember-power-select-options li').contains('IGSN ID Catalog').should('not.exist');
 
         // Set client_type to Periodical
@@ -142,8 +142,8 @@ describe('ACCEPTANCE: CLIENT_ADMIN | INFO', () => {
       });
 
       // Set client_type to RAiD Registry
-      cy.get('div#client-type div[role="button"]').click({ waitForAnimations: true }).then(() => {
-        cy.get('ul.ember-power-select-options li').contains('RAiD Registry').click({ waitForAnimations: true }).then(() => {
+      cy.get('div#client-type div[role="combobox"]').click({ waitForAnimations: true }).then(() => {
+          cy.get('ul.ember-power-select-options li').contains('RAiD Registry').click({ waitForAnimations: true }).then(() => {
           // RAiD Registry client_type divs should be visible
           cy.get('#repository-issn').should('not.exist');
           cy.get('#repository-type').should('be.visible');
@@ -152,8 +152,8 @@ describe('ACCEPTANCE: CLIENT_ADMIN | INFO', () => {
       });
 
       // Set client_type back to Repository
-      cy.get('div#client-type div[role="button"]').click({ waitForAnimations: true, force: true }).then(($dropdown) => {
-        cy.get('ul.ember-power-select-options li').contains('Repository').click({ waitForAnimations: true })
+      cy.get('div#client-type div[role="combobox"]').click({ waitForAnimations: true, force: true }).then(($dropdown) => {
+          cy.get('ul.ember-power-select-options li').contains('Repository').click({ waitForAnimations: true })
       });
 
       cy.get('#re3data').should('be.visible');

@@ -31,7 +31,8 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | DOIS', () => {
     it('is logged in to dois page', () => {
       cy.visit('/providers/datacite/dois');
       cy.url().should('include', '/providers/datacite/dois').then (() => {
-  
+        cy.wait(15000)
+
         // Has upper right user profile link.
         cy.get('h2.work').contains('DataCite');
         cy.get('a#account_menu_link').should('contain', 'DATACITE');
