@@ -168,7 +168,7 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | INFO', () => {
         cy.get('#organization-type').should('be.visible');
         cy.get('#focus-area').should('be.visible');
         cy.get('#description').should('be.visible');
-        cy.get('#upload-file').contains(/Upload\s*Logo/);
+        cy.get('label[for="upload-logo"]').contains(/Upload\s*Logo/);
 
         cy.get('h3.member-results').contains('Contact Information');
         cy.get('.alert-info').contains(/Contacts are created.*and then assigned roles here./i )
