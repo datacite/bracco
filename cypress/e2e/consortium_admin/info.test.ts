@@ -202,7 +202,7 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | INFO', () => {
     });
   });
 
-  it.('can see info when using capitalized identifier URL subdirectory', () => {
+  it('can see info when using capitalized identifier URL subdirectory', () => {
     cy.visit('/providers/DC');
     cy.url().should('include', '/providers/DC').then(() => {
       
