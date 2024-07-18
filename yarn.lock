@@ -10373,14 +10373,12 @@ ember-lodash@^4.19.5:
     ember-cli-babel "^7.0.0"
     lodash-es "^4.17.4"
 
-ember-math-helpers@^2.18.2:
-  version "2.18.2"
-  resolved "https://registry.yarnpkg.com/ember-math-helpers/-/ember-math-helpers-2.18.2.tgz#5778f0aae08f3502be8defbacd383794f42b177e"
-  integrity sha512-ikAXlIiT0wk8X8uuMtHkrRYt8HnDt9Wk+iNoY9IoBmt6IRZjCD5BmuxrIPj5Eop2/afMfKmNKnc4L1StkXM3wg==
+ember-math-helpers@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/ember-math-helpers/-/ember-math-helpers-4.0.0.tgz#f9ad94d1b0f38498eaab7209980536016091d6fb"
+  integrity sha512-f83fUNp9/DbnPK6WWiYDLdxSePMC2YVxt7aZZPsDy3Zlwp75mhzUknbqd6wSCeKwJYJm+1xh0l/SygxzLvKgnw==
   dependencies:
-    broccoli-funnel "^3.0.8"
-    ember-cli-babel "^7.26.11"
-    ember-cli-htmlbars "^6.0.1"
+    "@embroider/addon-shim" "^1.8.6"
 
 ember-modifier-manager-polyfill@^1.2.0:
   version "1.2.0"
