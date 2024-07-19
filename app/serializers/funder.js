@@ -1,6 +1,5 @@
 import JSONSerializer from '@ember-data/serializer/json';
 import { underscore } from '@ember/string';
-import { assign } from '@ember/polyfills';
 
 export default JSONSerializer.extend({
   normalizeArrayResponse(store, primaryModelClass, payload, id, requestType) {
@@ -12,7 +11,7 @@ export default JSONSerializer.extend({
       return item;
     });
     let data = this._super(store, primaryModelClass, payload, id, requestType);
-    return assign(data, meta);
+    return Object.assign(data, meta);
   },
   normalizeSingleResponse(store, primaryModelClass, payload, id, requestType) {
     // add DOI prefix

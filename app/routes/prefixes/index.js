@@ -1,7 +1,7 @@
 import classic from 'ember-classic-decorator';
 import { inject as service } from '@ember/service';
 import Route from '@ember/routing/route';
-import { assign } from '@ember/polyfills';
+
 
 @classic
 export default class IndexRoute extends Route {
@@ -24,7 +24,7 @@ export default class IndexRoute extends Route {
   store;
 
   model(params) {
-    params = assign(params, {
+    params = Object.assign(params, {
       page: {
         number: params.page,
         size: params.size

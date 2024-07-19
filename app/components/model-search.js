@@ -1,5 +1,4 @@
 import { notEmpty } from '@ember/object/computed';
-import { assign } from '@ember/polyfills';
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 
@@ -68,7 +67,7 @@ export default Component.extend({
   },
 
   search() {
-    let params = assign(this.model.get('query'), {
+    let params = Object.assign(this.model.get('query'), {
       query: this.query,
       sort: this.sort
     });

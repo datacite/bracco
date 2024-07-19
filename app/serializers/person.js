@@ -1,4 +1,3 @@
-// import { assign } from '@ember/polyfills';
 import JSONSerializer from '@ember-data/serializer/json';
 
 export default JSONSerializer.extend({

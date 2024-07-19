@@ -2,7 +2,6 @@ import classic from 'ember-classic-decorator';
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { hash } from 'rsvp';
-import { assign } from '@ember/polyfills';
 import Route from '@ember/routing/route';
 
 @classic
@@ -22,7 +21,7 @@ export default class IndexRoute extends Route {
   model(params) {
     let repositoryId = this.modelFor('repositories/show').get('id');
 
-    params = assign(params, {
+    params = Object.assign(params, {
       page: {
         number: params.page,
         size: params.size

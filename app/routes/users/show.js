@@ -4,7 +4,6 @@ import Route from '@ember/routing/route';
 import { set, action } from '@ember/object';
 
 import { all } from 'rsvp';
-import { assign } from '@ember/polyfills';
 
 @classic
 export default class ShowRoute extends Route {
@@ -26,7 +25,7 @@ export default class ShowRoute extends Route {
   model(params) {
     let self = this;
 
-    let parameters = assign(params, {
+    let parameters = Object.assign(params, {
       page: {
         number: params.page,
         size: params.size
@@ -64,7 +63,7 @@ export default class ShowRoute extends Route {
           .catch((error) => console.log(error))
       ])
         .then(function ([hashA, hashB]) {
-          resolve(assign(hashA, hashB));
+          resolve(Object.assign(hashA, hashB));
         })
         .catch(reject);
     });
