@@ -14,7 +14,7 @@
     "test": "tests"
   },
   "scripts": {
-    "build": "NODE_OPTIONS=--openssl-legacy-provider ember build --environment=production",
+    "build": "ember build --environment=production",
     "lint": "concurrently \"npm:lint:*(!fix)\" --names \"lint:\"",
     "lint:css": "stylelint \"**/*.css\"",
     "lint:css:fix": "concurrently \"npm:lint:css -- --fix\"",
@@ -24,9 +24,9 @@
     "format": "prettier --config .prettierrc.json '**/*.js|ts' --write",
     "lint:hbs:fix": "ember-template-lint . --fix",
     "lint:js:fix": "eslint . --fix",
-    "start": "NODE_OPTIONS=--openssl-legacy-provider ./node_modules/.bin/ember serve",
+    "start": "./node_modules/.bin/ember serve",
     "test": "concurrently \"npm:lint\" \"npm:test:*\" --names \"lint,test:\"",
-    "ci": "NODE_ENV=test NODE_OPTIONS=--openssl-legacy-provider ember serve & wait-on http://localhost:4200 && yarn cy:run --record --quiet",
+    "ci": "NODE_ENV=test ember serve & wait-on http://localhost:4200 && yarn cy:run --record --quiet",
     "cy:open": "./node_modules/.bin/cypress open",
     "cy:run": "./node_modules/.bin/cypress run",
     "postinstall": "patch-package"
