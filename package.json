@@ -234,7 +234,6 @@
     "**/@sideway/formula": "3.0.1",
     "**/chokidar": "^3.0.0",
     "**/json5": "^1.0.2",
-    "**/ember-fetch/**/browserslist": "^4.16.5",
     "**/@types/estree": "1.0.5",
     "**/@types/eslint": "^7.2.13",
     "**/@types/ember-feature-flags/**/@types/ember__service": "3.16.9",
