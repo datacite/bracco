@@ -64,7 +64,6 @@ module.exports = {
         browser: false,
         node: true
       },
-<<<<<<< HEAD
       plugins: ['node'],
       extends: ['plugin:node/recommended'],
       rules: {
@@ -72,9 +71,6 @@ module.exports = {
         // https://github.com/mysticatea/eslint-plugin-node/issues/77
         'node/no-unpublished-require': 'off'
       }
-=======
-      extends: ['plugin:n/recommended'],
->>>>>>> 002a20fc... v3.28.6...v4.12.2
     },
     {
       // test files
