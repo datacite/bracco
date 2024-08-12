@@ -198,6 +198,9 @@ export default class Repository extends Model.extend(Validations) {
   @attr('string')
   salesforceId;
 
+  @attr('string')
+  analyticsTrackingId;
+
   @attr('number')
   year;
 
