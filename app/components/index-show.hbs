@@ -1,12 +1,12 @@
 {{#if this.edit}}
-  <BsForm @formLayout="vertical" @model={{this.model}} @onSubmit={{action "submit" this.model}} as |form|>
+  <BsForm @formLayout="vertical" @model={{this.model}} @onSubmit={{action "submitAction" this.model}} as |form|>
     <form.element @controlType="text" @label="Name" @property="name" />
     <form.element @controlType="text" @label="Contact" @property="contact" />
     <form.element @controlType="email" @label="Email" @property="email" />
 
     <div class="pseudo-footer">
       <div class="btn-toolbar pull-right">
-        <button class="btn btn-sm" type="button" {{action "cancel"}}>Cancel</button>
+        <button class="btn btn-sm" type="button" {{action "cancelAction"}}>Cancel</button>
         <button type="submit" class="btn btn-sm btn-fill">Save</button>
       </div>
       <div class="clearfix"/>
@@ -23,6 +23,6 @@
     <span><i class="fas fa-question-circle"></i>
       <BsTooltip @renderInPlace={{true}} @placement="top" @viewportPadding={{10}}>Each provider has a unique ID.</BsTooltip>
     </span>
-    <button class="btn-link" type="button" {{action "edit" this.model}}><i class="fas fa-pencil-alt"></i></button>
+    <button class="btn-link" type="button" {{action "editAction" this.model}}><i class="fas fa-pencil-alt"></i></button>
   </div>
 {{/if}}

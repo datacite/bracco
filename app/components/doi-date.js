@@ -1,3 +1,5 @@
+import classic from 'ember-classic-decorator';
+import { action } from '@ember/object';
 import Component from '@ember/component';
 
 const dateTypesCompleteList = [
@@ -14,29 +16,35 @@ const dateTypesCompleteList = [
   'Other'
 ];
 
-export default Component.extend({
-  dateTypesCompleteList,
-  dateTypesList: dateTypesCompleteList,
+@classic
+export default class DoiDate extends Component {
+  dateTypesCompleteList = dateTypesCompleteList;
+  dateTypesList = dateTypesCompleteList;
 
   init(...args) {
-    this._super(...args);
+    super.init(...args);
 
     this.dateTypes = this.dateTypes || [];
-  },
-
-  actions: {
-    updateDate(value) {
-      this.fragment.set('date', value);
-    },
-    selectDateType(value) {
-      this.fragment.set('dateType', value);
-      this.set('dateType', this.dateTypesCompleteList);
-    },
-    updateDateInformation(value) {
-      this.fragment.set('dateInformation', value);
-    },
-    deleteDate() {
-      this.model.get('dates').removeObject(this.fragment);
-    }
   }
-});
+
+  @action
+  updateDate(value) {
+    this.fragment.set('date', value);
+  }
+
+  @action
+  selectDateType(value) {
+    this.fragment.set('dateType', value);
+    this.set('dateType', this.dateTypesCompleteList);
+  }
+
+  @action
+  updateDateInformation(value) {
+    this.fragment.set('dateInformation', value);
+  }
+
+  @action
+  deleteDate() {
+    this.model.get('dates').removeObject(this.fragment);
+  }
+}

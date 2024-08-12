@@ -1,17 +1,26 @@
-import Controller from '@ember/controller';
+import classic from 'ember-classic-decorator';
+import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
+import Controller from '@ember/controller';
 import ENV from 'bracco/config/environment';
 
-export default Controller.extend({
-  store: service(),
-  disabled: true,
-  prefixes_service: service('prefixes'),
-  router: service(),
+@classic
+export default class NewController extends Controller {
+  @service
+  store;
+
+  disabled = true;
+
+  @service('prefixes')
+  prefixes_service;
+
+  @service
+  router;
 
   init(...args) {
-    this._super(...args);
+    super.init(...args);
     this.prefixes = this.prefixes || [];
-  },
+  }
 
   searchPrefix(query) {
     let self = this;
@@ -35,42 +44,47 @@ export default Controller.extend({
         console.debug(reason);
         self.set('prefixes', []);
       });
-  },
-
-  actions: {
-    searchPrefix(query) {
-      this.searchPrefix(query);
-    },
-    selectPrefix(prefix) {
-      this.model['provider-prefix'].set('prefix', prefix);
-      this.set('disabled', false);
-      this.searchPrefix(null);
-    },
-    submit() {
-      let self = this;
-      this.model['provider-prefix']
-        .save()
-        .then(function (providerPrefix) {
-          self.set('disabled', true);
-          // We need a timeout because of ElasticSearch indexing
-          setTimeout(() => {
-            self.router.transitionTo(
-              'providers.show.prefixes',
-              providerPrefix.get('provider.id')
-            );
-          }, 1200);
-        })
-        .catch(function (reason) {
-          console.debug(reason);
-        });
-    },
-    cancel() {
-      this.model['provider-prefix'].set('prefix', null);
-      this.set('disabled', true);
-      this.router.transitionTo(
-        'providers.show.prefixes',
-        this.get('model.provider')
-      );
-    }
   }
-});
+
+  @action
+  searchPrefixAction(query) {
+    this.searchPrefix(query);
+  }
+
+  @action
+  selectPrefixAction(prefix) {
+    this.model['provider-prefix'].set('prefix', prefix);
+    this.set('disabled', false);
+    this.searchPrefix(null);
+  }
+
+  @action
+  submitAction() {
+    let self = this;
+    this.model['provider-prefix']
+      .save()
+      .then(function (providerPrefix) {
+        self.set('disabled', true);
+        // We need a timeout because of ElasticSearch indexing
+        setTimeout(() => {
+          self.router.transitionTo(
+            'providers.show.prefixes',
+            providerPrefix.get('provider.id')
+          );
+        }, 1200);
+      })
+      .catch(function (reason) {
+        console.debug(reason);
+      });
+  }
+
+  @action
+  cancelAction() {
+    this.model['provider-prefix'].set('prefix', null);
+    this.set('disabled', true);
+    this.router.transitionTo(
+      'providers.show.prefixes',
+      this.get('model.provider')
+    );
+  }
+}

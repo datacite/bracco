@@ -247,7 +247,7 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
       // Set funding reference.
       cy.get('#add-funding-reference').click({ force: true }).then(($subform) => {
         // Causes the aria dropdown to be populated and displayed so that selection can be made.
-        cy.get('[data-test-funder-name] div[role="combobox"]').click({ force: true }).then(() => {
+        cy.get('[data-test-funder-name] div[role="combobox"]').click({ waitForAnimations: true,force: true }).then(() => {
           // Makes the selection from the dropdown. (Type it.)
           cy.get('input.ember-power-select-search-input').type('Action for M.E.{enter}', { force: true }).then(() => {
 
@@ -276,7 +276,7 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
         cy.get('[data-test-related-item-title]').should('be.visible').type('HEPP Yearly', { force: true });
         // Select the type
         cy.get('[data-test-related-item-type] div[role="combobox"]').click({ force: true}).then(($dropdown) => {
-          cy.get("ul.ember-power-select-options li").contains("Journal").click({ force: true });
+          cy.get("ul.ember-power-select-options li").contains("Journal").click({ waitForAnimations: true, force: true });
         })
         // Add related item identifier
         cy.get('[data-test-related-item-identifier]').should('be.visible').type('10.12345/example').then(() => {

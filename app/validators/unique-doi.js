@@ -1,8 +1,11 @@
+import classic from 'ember-classic-decorator';
 import { inject as service } from '@ember/service';
 import BaseValidator from 'ember-cp-validations/validators/base';
 
-const UniqueDoi = BaseValidator.extend({
-  store: service(),
+@classic
+class UniqueDoi extends BaseValidator {
+  @service
+  store;
 
   validate(value, options) {
     let doi = options.dependentKeys[0] + '/' + value;
@@ -20,7 +23,7 @@ const UniqueDoi = BaseValidator.extend({
         return 'An error happened while looking up the DOI ' + value + '.';
       });
   }
-});
+}
 
 UniqueDoi.reopenClass({
   getDependentsFor() {

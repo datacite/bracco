@@ -1,9 +1,14 @@
-import Controller from '@ember/controller';
+import classic from 'ember-classic-decorator';
 import { inject as service } from '@ember/service';
+import Controller from '@ember/controller';
 
-export default Controller.extend({
-  flashMessages: service(),
+@classic
+export default class ShowController extends Controller {
+  @service
+  flashMessages;
+
   // Enables showing newly assigned prefix on result page of repository creation.
-  queryParams: ['assignedPrefix'],
-  assignedPrefix: null
-});
+  queryParams = ['assignedPrefix'];
+
+  assignedPrefix = null;
+}

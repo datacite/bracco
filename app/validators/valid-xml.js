@@ -1,8 +1,10 @@
+import classic from 'ember-classic-decorator';
 import BaseValidator from 'ember-cp-validations/validators/base';
 import { parseString } from 'xml2js';
 import { isPresent } from '@ember/utils';
 
-const validXml = BaseValidator.extend({
+@classic
+class validXml extends BaseValidator {
   validate(value) {
     parseString(value, function (err, result) {
       if (err) {
@@ -14,7 +16,7 @@ const validXml = BaseValidator.extend({
       }
     });
   }
-});
+}
 
 validXml.reopenClass({
   getDependentsFor() {

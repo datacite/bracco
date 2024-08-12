@@ -1,21 +1,26 @@
-import Component from '@ember/component';
+import classic from 'ember-classic-decorator';
+import { action } from '@ember/object';
+import { classNames } from '@ember-decorators/component';
 import { inject as service } from '@ember/service';
+import Component from '@ember/component';
 
-export default Component.extend({
-  currentUser: service(),
-  router: service(),
+@classic
+@classNames('')
+export default class CreateDoiButton extends Component {
+  @service
+  currentUser;
 
-  classNames: [],
+  @service
+  router;
 
   didReceiveAttrs() {
-    this._super(...arguments);
+    super.didReceiveAttrs(...arguments);
 
     this.set('currentUser', this.currentUser);
-  },
-
-  actions: {
-    createDoi() {
-      this.router.transitionTo('repositories.show.dois.new');
-    }
   }
-});
+
+  @action
+  createDoi() {
+    this.router.transitionTo('repositories.show.dois.new');
+  }
+}

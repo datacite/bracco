@@ -1,8 +1,8 @@
 <div class="input-group">
   <input type="text"
-    class="form-control related-identifier-field no-error {{unless this.fragment.relatedIdentifier 'no-success'}}" placeholder="Related Identifier" value={{this.fragment.relatedIdentifier}} oninput={{action "updateRelatedIdentifier" value="target.value"}} data-test-related-identifier />
+    class="form-control related-identifier-field no-error {{unless this.fragment.relatedIdentifier 'no-success'}}" placeholder="Related Identifier" value={{this.fragment.relatedIdentifier}} oninput={{action "updateRelatedIdentifierAction" value="target.value"}} data-test-related-identifier />
   <span class="input-group-btn">
-    <BsButton @outline={{true}} @onClick={{action "deleteRelatedIdentifier" this.index}}><i class="fas fa-trash"></i></BsButton>
+    <BsButton @outline={{true}} @onClick={{action "deleteRelatedIdentifierAction" this.index}}><i class="fas fa-trash"></i></BsButton>
   </span>
 </div>
 
@@ -17,7 +17,7 @@
 </div> 
 <div class="power-select-fragment" disabled={{this.controlledIdentifierType}} doi-related-identifier-type data-test-related-identifier-type>
   <@form.element @controlType="power-select" @value={{this.fragment.relatedIdentifierType}} @helpText="The type of the Related Identifier." @options={{this.relatedIdentifierTypeList}} @destination={{this.fragment.relatedIdentifierType}} as |el|>
-    <el.control @onChange={{action "selectRelatedIdentifierType"}} @allowClear={{true}} @placeholder="Select related Identifier Type" @disabled={{this.controlledIdentifierType}} @searchEnabled={{true}} />
+    <el.control @onChange={{action "selectRelatedIdentifierTypeAction"}} @allowClear={{true}} @placeholder="Select related Identifier Type" @disabled={{this.controlledIdentifierType}} @searchEnabled={{true}} />
   </@form.element>
 </div>
 
@@ -27,7 +27,7 @@
 <div class="power-select-fragment" doi-relation-type data-test-related-relation-type>
   <@form.element @controlType="power-select" @value={{this.fragment.relationType}} @helpText="The type of the Relation." @options={{this.relationTypeList}} @destination={{this.fragment.relationType}} as |el|>
     <el.control
-      @onChange={{action "selectRelationType"}}
+      @onChange={{action "selectRelationTypeAction"}}
       @placeholder="Select Relation Type" 
       @disabled={{this.disabled}}
       @allowClear={{true}} 
@@ -43,7 +43,7 @@
 <div class="power-select-fragment" doi-resource-type-general data-test-related-resource-type>
   <@form.element @controlType="power-select" @value={{this.fragment.resourceTypeGeneral}} @helpText="The general type of the related resource." @options={{this.resourceTypesGeneral}} @destination={{this.fragment.resourceTypeGeneral}} as |el|>
     <el.control
-      @onChange={{action "selectResourceTypeGeneral"}}
+      @onChange={{action "selectResourceTypeGeneralAction"}}
       @allowClear={{true}}
       @placeholder="Select Resource Type General" 
       @disabled={{this.disabled}}
@@ -58,7 +58,7 @@
     <label for="relatedMetadataScheme" class="subtitle">Related Metadata Scheme</label> 
   </div> 
   <input type="text" class="form-control related-metadata-scheme-field" value={{this.fragment.relatedMetadataScheme}} placeholder="Related Metadata Scheme"
-    oninput={{action "updateRelatedMetadataScheme" value="target.value"}} data-test-related-metadata-scheme />
+    oninput={{action "updateRelatedMetadataSchemeAction" value="target.value"}} data-test-related-metadata-scheme />
 
   <div
     class="help-block help-block-fragment related-metadata-scheme-field}}">
@@ -69,7 +69,7 @@
     <label for="relatedSchemeURI" class="subtitle">Related Metadata Scheme URI</label> 
   </div> 
   <input type="text" class="form-control related-scheme-uri-field" value={{this.fragment.schemeUri}} placeholder="Related Metadata Scheme URI"
-    oninput={{action "updateSchemeURI" value="target.value"}} data-test-related-scheme-uri />
+    oninput={{action "updateSchemeURIAction" value="target.value"}} data-test-related-scheme-uri />
 
   <div
     class="help-block help-block-fragment related-scheme-uri-field}}">
@@ -81,7 +81,7 @@
   </div> 
 
   <input type="text" class="form-control related-scheme-type-field" value={{this.fragment.schemeType}} placeholder="Related Metadata Scheme Type"
-    oninput={{action "updateSchemeType" value="target.value"}} data-test-related-scheme-type />
+    oninput={{action "updateSchemeTypeAction" value="target.value"}} data-test-related-scheme-type />
 
   <div
     class="help-block help-block-fragment related-scheme-type-field}}">

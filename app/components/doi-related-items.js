@@ -1,22 +1,27 @@
+import classic from 'ember-classic-decorator';
+import { action } from '@ember/object';
 import Component from '@ember/component';
 
-export default Component.extend({
-  showRelatedItems: false,
+@classic
+export default class DoiRelatedItems extends Component {
+  showRelatedItems = false;
 
   didReceiveAttrs() {
-    this._super(...arguments);
+    super.didReceiveAttrs(...arguments);
 
     if (!this.model.get('relatedItems')) {
       this.model.set('relatedItems', []);
     }
-  },
-  actions: {
-    addRelatedItem() {
-      this.model.get('relatedItems').createFragment();
-      this.set('showRelatedItems', true);
-    },
-    toggleRelatedItems() {
-      this.set('showRelatedItems', !this.showRelatedItems);
-    }
   }
-});
+
+  @action
+  addRelatedItem() {
+    this.model.get('relatedItems').createFragment();
+    this.set('showRelatedItems', true);
+  }
+
+  @action
+  toggleRelatedItems() {
+    this.set('showRelatedItems', !this.showRelatedItems);
+  }
+}

@@ -1,7 +1,9 @@
+import classic from 'ember-classic-decorator';
 import { A } from '@ember/array';
 import BaseValidator from 'ember-cp-validations/validators/base';
 
-const NumberRange = BaseValidator.extend({
+@classic
+class NumberRange extends BaseValidator {
   validate(value, options, model) {
     let first = A(model.firstPrefix.split('.')).get('lastObject');
     let last = A(value.split('.')).get('lastObject');
@@ -17,7 +19,7 @@ const NumberRange = BaseValidator.extend({
       return true;
     }
   }
-});
+}
 
 NumberRange.reopenClass({
   getDependentsFor() {

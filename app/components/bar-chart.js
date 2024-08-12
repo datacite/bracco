@@ -1,5 +1,7 @@
+import classic from 'ember-classic-decorator';
+import { classNameBindings, classNames, tagName } from '@ember-decorators/component';
+import { action, computed } from '@ember/object';
 import { schedule } from '@ember/runloop';
-import { computed } from '@ember/object';
 import Component from '@ember/component';
 import { select } from 'd3-selection';
 // import { format } from "d3-format";
@@ -10,13 +12,16 @@ import { timeFormat } from 'd3-time-format';
 import { scaleTime, scaleLinear } from 'd3-scale';
 import { A } from '@ember/array';
 
-export default Component.extend({
-  tagName: 'div',
-  classNames: ['col-lg-3', 'col-md-4'],
-  classNameBindings: ['offset:col-lg-offset-3'],
-  offset: false,
-  data: null,
-  count: computed('data', 'summarize', 'currentYear', function () {
+@classic
+@tagName('div')
+@classNames('col-lg-3', 'col-md-4')
+@classNameBindings('offset:col-lg-offset-3')
+export default class BarChart extends Component {
+  offset = false;
+  data = null;
+
+  @computed('data', 'summarize', 'currentYear')
+  get count() {
     if (this.data) {
       if (this.summarize) {
         return A(this.data).reduce(function (a, b) {
@@ -36,30 +41,34 @@ export default Component.extend({
     } else {
       return 0;
     }
-  }),
-  label: 'Chart',
-  chartId: computed('label', function () {
+  }
+
+  label = 'Chart';
+
+  @computed('label')
+  get chartId() {
     return 'chart-' + this.label.toLowerCase();
-  }),
-  currentYear: new Date().getFullYear(),
-  cumulative: true,
-  summarize: false,
+  }
+
+  currentYear = new Date().getFullYear();
+  cumulative = true;
+  summarize = false;
 
   init() {
-    this._super();
+    super.init();
 
     schedule('afterRender', this, function () {
       this.send('barChart');
     });
-  },
+  }
 
   didReceiveAttrs() {
-    this._super(...arguments);
+    super.didReceiveAttrs(...arguments);
 
-    this.barChart();
-  },
+    this.barChartInt();
+  }
 
-  barChart() {
+  barChartInt() {
     let formatYear = timeFormat('%Y');
     // let formatFixed = format(",.0f");
 
@@ -179,11 +188,10 @@ export default Component.extend({
     } catch (error) {
       // console.error(error);
     }
-  },
-
-  actions: {
-    barChart() {
-      this.barChart();
-    }
   }
-});
+
+  @action
+  barChart() {
+    this.barChartInt();
+  }
+}

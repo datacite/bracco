@@ -1,6 +1,8 @@
+import classic from 'ember-classic-decorator';
+import { classNames, tagName } from '@ember-decorators/component';
 import Component from '@ember/component';
 
-export default Component.extend({
-  tagName: 'div',
-  classNames: ['row']
-});
+@classic
+@tagName('div')
+@classNames('row')
+export default class OrganizationList extends Component {}

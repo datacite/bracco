@@ -1,7 +1,9 @@
+import classic from 'ember-classic-decorator';
 import BaseValidator from 'ember-cp-validations/validators/base';
 import isISSN from 'validator/lib/isISSN';
 
-const IssnFormat = BaseValidator.extend({
+@classic
+class IssnFormat extends BaseValidator {
   validate(value, options) {
     if (!value && options.allowBlank) {
       return true;
@@ -14,6 +16,6 @@ const IssnFormat = BaseValidator.extend({
       }
     }
   }
-});
+}
 
 export default IssnFormat;

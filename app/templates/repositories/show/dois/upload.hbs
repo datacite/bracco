@@ -19,7 +19,7 @@
       class="form-horizontal"
       @horizontalLabelGridClass="col-md-3"
       @model={{this.model.doi}}
-      @onSubmit={{action 'submit' this.model.doi}} as |form|
+      @onSubmit={{action 'submitAction' this.model.doi}} as |form|
     >
       <DoiDoi
         @model={{this.model.doi}}
@@ -78,7 +78,7 @@
             Create DOI
           </button>
         {{/if}}
-        <button class="btn btn-sm" type="button" {{action 'cancel'}}>
+        <button class="btn btn-sm" type="button" {{action 'cancelAction'}}>
           Cancel
         </button>
       </div>

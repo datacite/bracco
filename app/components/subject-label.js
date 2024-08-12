@@ -1,10 +1,12 @@
+import classic from 'ember-classic-decorator';
+import { tagName } from '@ember-decorators/component';
 import Component from '@ember/component';
 
-export default Component.extend({
-  tagName: 'span',
-
+@classic
+@tagName('span')
+export default class SubjectLabel extends Component {
   didReceiveAttrs() {
-    this._super(...arguments);
+    super.didReceiveAttrs(...arguments);
 
     let text = this.get('tag.text');
 
@@ -14,4 +16,4 @@ export default Component.extend({
       this.set('text', text.toLowerCase());
     }
   }
-});
+}

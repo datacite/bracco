@@ -1,6 +1,8 @@
+import classic from 'ember-classic-decorator';
+import { action } from '@ember/object';
+import { inject as service } from '@ember/service';
 /* eslint-disable no-useless-escape */
 import Component from '@ember/component';
-import { inject as service } from '@ember/service';
 import { isURL, isISBN } from 'validator';
 import { isBlank } from '@ember/utils';
 import { pascalCase } from 'pascal-case';
@@ -99,28 +101,31 @@ const resourceTypeGeneralList = [
   'Other'
 ];
 
-export default Component.extend({
-  store: service(),
-  relationTypeList,
-  relationTypes: relationTypeList,
-  relatedIdentifierTypeList,
-  relatedIdentifierTypes: relatedIdentifierTypeList,
-  controlledIdentifierType: false,
-  isMetadataRelationType: false,
-  resourceTypeGeneralList,
-  resourceTypesGeneral: resourceTypeGeneralList,
+@classic
+export default class DoiRelatedIdentifier extends Component {
+  @service
+  store;
+
+  relationTypeList = relationTypeList;
+  relationTypes = relationTypeList;
+  relatedIdentifierTypeList = relatedIdentifierTypeList;
+  relatedIdentifierTypes = relatedIdentifierTypeList;
+  controlledIdentifierType = false;
+  isMetadataRelationType = false;
+  resourceTypeGeneralList = resourceTypeGeneralList;
+  resourceTypesGeneral = resourceTypeGeneralList;
 
   init(...args) {
-    this._super(...args);
+    super.init(...args);
 
     this.isMetadataRelationTypes = this.isMetadataRelationTypes || [
       'HasMetadata',
       'IsMetadataFor'
     ];
-  },
+  }
 
   didReceiveAttrs() {
-    this._super(...arguments);
+    super.didReceiveAttrs(...arguments);
 
     if (
       relatedIdentifierTypeList.includes(
@@ -138,7 +143,8 @@ export default Component.extend({
     } else {
       this.set('isMetadataRelationType', false);
     }
-  },
+  }
+
   updateRelatedIdentifier(value) {
     const ark = /^ark:\/[0-9]{5}\/\S+$/;
     const lsid =
@@ -229,7 +235,8 @@ export default Component.extend({
         this.set('controlledIdentifierType', false);
         break;
     }
-  },
+  }
+
   selectRelationType(relationType) {
     const selectedRelationType = relationType ? pascalCase(relationType) : null;
     if (this.isMetadataRelationTypes.includes(selectedRelationType)) {
@@ -242,40 +249,56 @@ export default Component.extend({
     }
     this.fragment.set('relationType', selectedRelationType);
     this.set('relationTypes', relationTypeList);
-  },
+  }
+
   selectRelatedIdentifierType(relatedIdentifierType) {
     this.fragment.set('relatedIdentifierType', relatedIdentifierType);
     this.set('relatedIdentifierTypes', relatedIdentifierTypeList);
-  },
+  }
+
   selectResourceTypeGeneral(resourceTypeGeneral) {
     const selectedResourceTypeGeneral = resourceTypeGeneral ? pascalCase(resourceTypeGeneral) : null;
     this.fragment.set('resourceTypeGeneral', selectedResourceTypeGeneral);
     this.set('resourceTypesGeneral', resourceTypeGeneralList);
-  },
-  actions: {
-    updateRelatedIdentifier(value) {
-      this.updateRelatedIdentifier(value.trim());
-    },
-    updateRelatedMetadataScheme(value) {
-      this.fragment.set('relatedMetadataScheme', value);
-    },
-    updateSchemeURI(value) {
-      this.fragment.set('schemeUri', value);
-    },
-    updateSchemeType(value) {
-      this.fragment.set('schemeType', value);
-    },
-    selectRelationType(relationType) {
-      this.selectRelationType(relationType);
-    },
-    selectRelatedIdentifierType(relatedIdentifierType) {
-      this.selectRelatedIdentifierType(relatedIdentifierType);
-    },
-    selectResourceTypeGeneral(resourceTypeGeneral) {
-      this.selectResourceTypeGeneral(resourceTypeGeneral);
-    },
-    deleteRelatedIdentifier() {
-      this.model.get('relatedIdentifiers').removeObject(this.fragment);
-    }
   }
-});
+
+  @action
+  updateRelatedIdentifierAction(value) {
+    this.updateRelatedIdentifier(value.trim());
+  }
+
+  @action
+  updateRelatedMetadataSchemeAction(value) {
+    this.fragment.set('relatedMetadataScheme', value);
+  }
+
+  @action
+  updateSchemeURIAction(value) {
+    this.fragment.set('schemeUri', value);
+  }
+
+  @action
+  updateSchemeTypeAction(value) {
+    this.fragment.set('schemeType', value);
+  }
+
+  @action
+  selectRelationTypeAction(relationType) {
+    this.selectRelationType(relationType);
+  }
+
+  @action
+  selectRelatedIdentifierTypeAction(relatedIdentifierType) {
+    this.selectRelatedIdentifierType(relatedIdentifierType);
+  }
+
+  @action
+  selectResourceTypeGeneralAction(resourceTypeGeneral) {
+    this.selectResourceTypeGeneral(resourceTypeGeneral);
+  }
+
+  @action
+  deleteRelatedIdentifierAction() {
+    this.model.get('relatedIdentifiers').removeObject(this.fragment);
+  }
+}

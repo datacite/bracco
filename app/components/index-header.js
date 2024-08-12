@@ -1,10 +1,12 @@
+import classic from 'ember-classic-decorator';
+import { tagName } from '@ember-decorators/component';
 import Component from '@ember/component';
 
-export default Component.extend({
-  tagName: 'div',
-  
+@classic
+@tagName('div')
+export default class IndexHeader extends Component {
   didRender() {
-    this._super(...arguments);
+    super.didRender(...arguments);
 
     if (this.element.querySelector('a.active.nav-link') == null) {
       this.element.querySelector('a.nav-link').classList.add("active")
@@ -14,4 +16,4 @@ export default Component.extend({
       this.element.querySelector('a.active.nav-link').parentElement.classList.add("active")
     }
   }
-});
+}

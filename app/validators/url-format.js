@@ -1,7 +1,9 @@
+import classic from 'ember-classic-decorator';
 import BaseValidator from 'ember-cp-validations/validators/base';
 import isURL from 'validator/lib/isURL';
 
-const UrlFormat = BaseValidator.extend({
+@classic
+class UrlFormat extends BaseValidator {
   validate(value, options) {
     if (!value && options.allowBlank) {
       return true;
@@ -35,6 +37,6 @@ const UrlFormat = BaseValidator.extend({
       }
     }
   }
-});
+}
 
 export default UrlFormat;

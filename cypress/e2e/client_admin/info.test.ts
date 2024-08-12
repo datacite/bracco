@@ -128,7 +128,7 @@ describe('ACCEPTANCE: CLIENT_ADMIN | INFO', () => {
       cy.get('#client-type').should('be.visible');
       cy.get('#client-type .ember-power-select-selected-item').should('contain', 'Repository');
 
-      cy.get('div#client-type div[role="combobox"]').click({ waitForAnimations: true }).then(($dropdown) => {
+      cy.get('div#client-type div[role="combobox"]').click({ waitForAnimations: true, force: true }).then(($dropdown) => {
           // IGSN ID Catalog option should not exist for existing Periodical and Repository client_types
         cy.get('ul.ember-power-select-options li').contains('IGSN ID Catalog').should('not.exist');
 

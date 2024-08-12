@@ -1,22 +1,27 @@
+import classic from 'ember-classic-decorator';
+import { action } from '@ember/object';
 import Component from '@ember/component';
 
-export default Component.extend({
-  showDates: false,
+@classic
+export default class DoiDates extends Component {
+  showDates = false;
 
   didReceiveAttrs() {
-    this._super(...arguments);
+    super.didReceiveAttrs(...arguments);
 
     if (!this.model.get('dates')) {
       this.model.set('dates', []);
     }
-  },
-  actions: {
-    addDate() {
-      this.model.get('dates').createFragment();
-      this.set('showDates', true);
-    },
-    toggleDates() {
-      this.set('showDates', !this.showDates);
-    }
   }
-});
+
+  @action
+  addDate() {
+    this.model.get('dates').createFragment();
+    this.set('showDates', true);
+  }
+
+  @action
+  toggleDates() {
+    this.set('showDates', !this.showDates);
+  }
+}

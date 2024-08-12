@@ -1,8 +1,12 @@
-import Component from '@ember/component';
+import classic from 'ember-classic-decorator';
+import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
+import Component from '@ember/component';
 
-export default Component.extend({
-  store: service(),
+@classic
+export default class DoiNameIdentifier extends Component {
+  @service
+  store;
 
   validateOrcidIdentifier(id) {
     let self = this;
@@ -22,7 +26,8 @@ export default Component.extend({
           nameIdentifierScheme: 'ORCID'
         });
       });
-  },
+  }
+
   validateRorIdentifier(value) {
     let self = this;
     let id = 'ror.org/' + value.substr(value.indexOf('0'));
@@ -34,7 +39,8 @@ export default Component.extend({
       .catch(function () {
         self.joinNameParts({ name: null, nameIdentifierScheme: 'ROR' });
       });
-  },
+  }
+
   updateNameIdentifier(value) {
     if (
       value.startsWith('https://orcid.org') ||
@@ -73,14 +79,15 @@ export default Component.extend({
       this.fragment.set('nameIdentifierScheme', 'Other');
       this.fragment.set('nameIdentifier', value);
     }
-  },
-
-  actions: {
-    updateNameIdentifier(value) {
-      this.updateNameIdentifier(value);
-    },
-    deleteNameIdentifier() {
-      this.creator.get('nameIdentifiers').removeObject(this.fragment);
-    }
   }
-});
+
+  @action
+  updateNameIdentifierAction(value) {
+    this.updateNameIdentifier(value);
+  }
+
+  @action
+  deleteNameIdentifierAction() {
+    this.creator.get('nameIdentifiers').removeObject(this.fragment);
+  }
+}

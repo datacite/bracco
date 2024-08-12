@@ -1,6 +1,8 @@
+import classic from 'ember-classic-decorator';
 import BaseValidator from 'ember-cp-validations/validators/base';
 
-const RepositoryId = BaseValidator.extend({
+@classic
+class RepositoryId extends BaseValidator {
   validate(value, options, model) {
     let providerId = model.get('provider.id').toUpperCase() + '.';
     if (value.startsWith(providerId)) {
@@ -10,7 +12,7 @@ const RepositoryId = BaseValidator.extend({
       return message;
     }
   }
-});
+}
 
 RepositoryId.reopenClass({
   getDependentsFor() {

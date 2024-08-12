@@ -1,23 +1,27 @@
+import classic from 'ember-classic-decorator';
+import { action } from '@ember/object';
 import Component from '@ember/component';
 
-export default Component.extend({
-  showRights: false,
+@classic
+export default class DoiRightsList extends Component {
+  showRights = false;
 
   didReceiveAttrs() {
-    this._super(...arguments);
+    super.didReceiveAttrs(...arguments);
 
     if (!this.model.get('rightsList')) {
       this.model.set('rightsList', []);
     }
-  },
-
-  actions: {
-    addRights() {
-      this.model.get('rightsList').createFragment();
-      this.set('showRights', true);
-    },
-    toggleRights() {
-      this.set('showRights', !this.showRights);
-    }
   }
-});
+
+  @action
+  addRights() {
+    this.model.get('rightsList').createFragment();
+    this.set('showRights', true);
+  }
+
+  @action
+  toggleRights() {
+    this.set('showRights', !this.showRights);
+  }
+}

@@ -1,30 +1,35 @@
+import classic from 'ember-classic-decorator';
+import { action } from '@ember/object';
 import Component from '@ember/component';
 import { schedule } from '@ember/runloop';
 
-export default Component.extend({
-  showSizes: false,
+@classic
+export default class DoiSizes extends Component {
+  showSizes = false;
 
-  init: function () {
-    this._super();
+  init() {
+    super.init();
 
     schedule("afterRender",this,function() {
       if (!this.model.get('sizes')) {
         this.model.set('sizes', []);
       }
     });
-  },
+  }
 
   didReceiveAttrs() {
-    this._super(...arguments);
-  },
-  actions: {
-    addSize() {
-      this.model.get('sizes').push('');
-      this.model.set('sizes', Array.from(this.model.get('sizes')));
-      this.set('showSizes', true);
-    },
-    toggleSizes() {
-      this.set('showSizes', !this.showSizes);
-    }
+    super.didReceiveAttrs(...arguments);
   }
-});
+
+  @action
+  addSize() {
+    this.model.get('sizes').push('');
+    this.model.set('sizes', Array.from(this.model.get('sizes')));
+    this.set('showSizes', true);
+  }
+
+  @action
+  toggleSizes() {
+    this.set('showSizes', !this.showSizes);
+  }
+}

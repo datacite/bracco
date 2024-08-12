@@ -2,7 +2,7 @@
 <label for="contributorType" class="subtitle">Contributor Type</label>
   <div class="power-select-fragment" doi-contributor-type>
     <@form.element @controlType="power-select" @value={{this.humanContributorType}} @helpText="The type of contributor of the resource." @options={{this.humanContributorTypes}} @formLayout="vertical" @selected={{this.humanContributorType}} @destination={{this.humanContributorType}}  as |el|>
-      <el.control @onChange={{action "selectContributorType"}} @placeholder="Select Contributor Type" @disabled={{this.disabled}} @searchEnabled={{true}} />
+      <el.control @onChange={{action "selectContributorTypeAction"}} @placeholder="Select Contributor Type" @disabled={{this.disabled}} @searchEnabled={{true}} />
     </@form.element>
 </div>  
 {{#if (gt this.fragment.nameIdentifiers.length 0)}}
@@ -40,7 +40,7 @@
   <div class="input-group">
     <input type="text" class="form-control name-field" value={{this.fragment.name}} placeholder="Name" oninput={{action "updateName" value="target.value"}} readonly={{this.isReadonly}} data-test-name/>
     <span class="input-group-btn">
-      <BsButton @outline={{true}} @onClick={{action "deleteContributor" this.index}}><i class="fas fa-trash"></i></BsButton>
+      <BsButton @outline={{true}} @onClick={{action "deleteContributorAction" this.index}}><i class="fas fa-trash"></i></BsButton>
     </span>
   </div>
 </div>

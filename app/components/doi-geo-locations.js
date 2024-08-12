@@ -1,23 +1,27 @@
+import classic from 'ember-classic-decorator';
+import { action } from '@ember/object';
 import Component from '@ember/component';
 
-export default Component.extend({
-  showGeoLocations: false,
+@classic
+export default class DoiGeoLocations extends Component {
+  showGeoLocations = false;
 
   didReceiveAttrs() {
-    this._super(...arguments);
+    super.didReceiveAttrs(...arguments);
 
     if (!this.model.get('geoLocations')) {
       this.model.set('geoLocations', []);
     }
-  },
-
-  actions: {
-    addGeoLocation() {
-      this.model.get('geoLocations').createFragment();
-      this.set('showGeoLocations', true);
-    },
-    toggleGeoLocations() {
-      this.set('showGeoLocations', !this.showGeoLocations);
-    }
   }
-});
+
+  @action
+  addGeoLocation() {
+    this.model.get('geoLocations').createFragment();
+    this.set('showGeoLocations', true);
+  }
+
+  @action
+  toggleGeoLocations() {
+    this.set('showGeoLocations', !this.showGeoLocations);
+  }
+}

@@ -1,14 +1,18 @@
-import Component from '@ember/component';
+import classic from 'ember-classic-decorator';
+import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
+import Component from '@ember/component';
 
-export default Component.extend({
-  store: service(),
+@classic
+export default class DoiAffiliation extends Component {
+  @service
+  store;
 
   init(...args) {
-    this._super(...args);
+    super.init(...args);
 
     this.organizations = this.organizations || [];
-  },
+  }
 
   updateAffiliation(organizationRecord) {
     if (organizationRecord) {
@@ -22,26 +26,29 @@ export default Component.extend({
       this.fragment.set('schemeUri', 'https://ror.org');
       this.fragment.set('affiliationIdentifierScheme', 'ROR');
     }
-  },
-
-  actions: {
-    searchRor(query) {
-      let self = this;
-      this.store
-        .query('ror', { query })
-        .then(function (organizations) {
-          self.set('organizations', organizations);
-        })
-        .catch(function (reason) {
-          console.debug(reason);
-          return [];
-        });
-    },
-    selectRor(ror) {
-      this.updateAffiliation(ror);
-    },
-    deleteAffiliation() {
-      this.creator.get('affiliation').removeObject(this.fragment);
-    }
   }
-});
+
+  @action
+  searchRor(query) {
+    let self = this;
+    this.store
+      .query('ror', { query })
+      .then(function (organizations) {
+        self.set('organizations', organizations);
+      })
+      .catch(function (reason) {
+        console.debug(reason);
+        return [];
+      });
+  }
+
+  @action
+  selectRor(ror) {
+    this.updateAffiliation(ror);
+  }
+
+  @action
+  deleteAffiliation() {
+    this.creator.get('affiliation').removeObject(this.fragment);
+  }
+}

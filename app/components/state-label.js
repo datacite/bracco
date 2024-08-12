@@ -1,12 +1,14 @@
+import classic from 'ember-classic-decorator';
+import { classNameBindings, tagName } from '@ember-decorators/component';
 import Component from '@ember/component';
 import { capitalize } from '@ember/string';
 
-export default Component.extend({
-  tagName: 'span',
-  classNameBindings: ['label'],
-
+@classic
+@tagName('span')
+@classNameBindings('label')
+export default class StateLabel extends Component {
   didReceiveAttrs() {
-    this._super(...arguments);
+    super.didReceiveAttrs(...arguments);
 
     let state = this.state || 'draft';
     let stateLabels = {
@@ -18,4 +20,4 @@ export default Component.extend({
     this.set('label', 'label ' + stateLabels[state]);
     this.set('stateDisplay', capitalize(state));
   }
-});
+}

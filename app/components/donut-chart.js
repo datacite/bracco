@@ -1,5 +1,7 @@
+import classic from 'ember-classic-decorator';
+import { classNames, tagName } from '@ember-decorators/component';
+import { action, computed } from '@ember/object';
 import { schedule } from '@ember/runloop';
-import { computed } from '@ember/object';
 import Component from '@ember/component';
 import { select } from 'd3-selection';
 import { format } from 'd3-format';
@@ -22,10 +24,12 @@ const categoryList = [
   'other4'
 ];
 
-export default Component.extend({
-  tagName: 'div',
-  classNames: ['col-lg-3', 'col-md-4'],
-  count: computed('data', function () {
+@classic
+@tagName('div')
+@classNames('col-lg-3', 'col-md-4')
+export default class DonutChart extends Component {
+  @computed('data')
+  get count() {
     if (this.data) {
       return this.data.reduce(function (a, b) {
         return a + b.count;
@@ -33,34 +37,40 @@ export default Component.extend({
     } else {
       return 0;
     }
-  }),
-  label: 'Chart',
-  chartId: computed('label', function () {
+  }
+
+  label = 'Chart';
+
+  @computed('label')
+  get chartId() {
     return 'chart-donut-' + this.label.toLowerCase();
-  }),
-  doiLink: computed('link', 'model.id', function () {
+  }
+
+  @computed('link', 'model.id')
+  get doiLink() {
     if (this.link === 'users.show.dois') {
       return '/users/' + this.model.id + '/dois';
     } else {
       return null;
     }
-  }),
-  categories: categoryList,
+  }
+
+  categories = categoryList;
 
   init(...args) {
-    this._super(...args);
+    super.init(...args);
 
     this.set(this, this.data, []);
     schedule('afterRender', this, function () {
       this.send('donutChart');
     });
-  },
+  }
 
   didReceiveAttrs() {
-    this._super(...arguments);
+    super.didReceiveAttrs(...arguments);
 
     this.donutChart();
-  },
+  }
 
   donutChart() {
     let formatFixed = format(',.0f');
@@ -162,11 +172,10 @@ export default Component.extend({
     } catch (error) {
       // console.error(error);
     }
-  },
-
-  actions: {
-    donutChart() {
-      this.donutChart();
-    }
   }
-});
+
+  @action
+  donutChartAction() {
+    this.donutChart();
+  }
+}

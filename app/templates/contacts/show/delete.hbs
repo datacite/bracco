@@ -4,7 +4,7 @@
       <BsForm
         @formLayout="vertical"
         @model={{this.model}}
-        @onSubmit={{action 'submit'}}
+        @onSubmit={{action 'submitAction'}}
         @submitOnEnter={{true}} as |form|
       >
         <div class="form-group">
@@ -23,13 +23,13 @@
         </div>
         <div class="pseudo-footer">
           <div class="btn-toolbar pull-right">
-            <button id="cancel" class="btn btn-sm" type="button" {{action 'cancel'}}>
+            <button id="cancel" class="btn btn-sm" type="button" {{action 'cancelAction'}}>
               Cancel
             </button>
             <button
               disabled={{v-get this.model 'confirmDelete' 'isInvalid'}}
               id="delete"
-              class="btn btn-sm btn-fill" type="button" {{action 'submit'}}
+              class="btn btn-sm btn-fill" type="button" {{action 'submitAction'}}
             >
               Delete
             </button>

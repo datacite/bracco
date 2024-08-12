@@ -1,15 +1,22 @@
-import Component from '@ember/component';
+import classic from 'ember-classic-decorator';
 import { inject as service } from '@ember/service';
+import Component from '@ember/component';
 
-export default Component.extend({
-  currentUser: service(),
-  store: service(),
-  prefixes: service(),
+@classic
+export default class RepositoryList extends Component {
+  @service
+  currentUser;
 
-  hasRequiredContacts: false,
+  @service
+  store;
+
+  @service
+  prefixes;
+
+  hasRequiredContacts = false;
 
   didReceiveAttrs() {
-    this._super(...arguments);
+    super.didReceiveAttrs(...arguments);
 
     // check that current user is staff, or has all required contacts set
     // this is separate from abilities as it triggers a specific error message
@@ -27,4 +34,4 @@ export default Component.extend({
         });
     }
   }
-});
+}

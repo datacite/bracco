@@ -1,26 +1,36 @@
+import classic from 'ember-classic-decorator';
+import { action } from '@ember/object';
+import { inject as service } from '@ember/service';
 import { typeOf } from '@ember/utils';
 import { htmlSafe } from '@ember/template';
 import Component from '@ember/component';
-import { inject as service } from '@ember/service';
 import ENV from 'bracco/config/environment';
 
-export default Component.extend({
-  session: service(),
-  currentUser: service(),
-  features: service(),
-  router: service(),
+@classic
+export default class ApplicationHeader extends Component {
+  @service
+  session;
 
-  default: false,
-  type: 'transparent',
-  title: null,
-  home: '/',
-  user: true,
-  showLogo: true,
-  navBgColor: '',
-  navButtonColor: '',
+  @service
+  currentUser;
+
+  @service
+  features;
+
+  @service
+  router;
+
+  default = false;
+  type = 'transparent';
+  title = null;
+  home = '/';
+  user = true;
+  showLogo = true;
+  navBgColor = '';
+  navButtonColor = '';
 
   init(...args) {
-    this._super(...args);
+    super.init(...args);
 
     if (ENV.featureFlags['enable-doi-estimate']) {
       this.features.enable('enableDoiEstimate');
@@ -29,10 +39,10 @@ export default Component.extend({
     }
 
     this.data = this.data || {};
-  },
+  }
 
   didReceiveAttrs() {
-    this._super(...arguments);
+    super.didReceiveAttrs(...arguments);
 
     if (this.default) {
       this.set('type', null);
@@ -78,14 +88,15 @@ export default Component.extend({
       this.set('navBgColor', 'navbar-consortium');
       this.set('navButtonColor', 'navbar-button-consortium');
     }
-  },
-
-  actions: {
-    transitionNoAccess() {
-      this.router.transitionTo(this.home);
-    },
-    invalidateSession() {
-      this.session.invalidate();
-    }
   }
-});
+
+  @action
+  transitionNoAccess() {
+    this.router.transitionTo(this.home);
+  }
+
+  @action
+  invalidateSession() {
+    this.session.invalidate();
+  }
+}

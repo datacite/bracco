@@ -1,23 +1,27 @@
+import classic from 'ember-classic-decorator';
+import { action } from '@ember/object';
 import Component from '@ember/component';
 
-export default Component.extend({
-  showDescriptions: false,
+@classic
+export default class DoiDescriptions extends Component {
+  showDescriptions = false;
 
   didReceiveAttrs() {
-    this._super(...arguments);
+    super.didReceiveAttrs(...arguments);
 
     if (!this.model.get('descriptions')) {
       this.model.set('descriptions', []);
     }
-  },
-
-  actions: {
-    addDescription() {
-      this.model.get('descriptions').createFragment();
-      this.set('showDescriptions', true);
-    },
-    toggleDescriptions() {
-      this.set('showDescriptions', !this.showDescriptions);
-    }
   }
-});
+
+  @action
+  addDescription() {
+    this.model.get('descriptions').createFragment();
+    this.set('showDescriptions', true);
+  }
+
+  @action
+  toggleDescriptions() {
+    this.set('showDescriptions', !this.showDescriptions);
+  }
+}

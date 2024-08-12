@@ -1,7 +1,9 @@
+import classic from 'ember-classic-decorator';
 import BaseValidator from 'ember-cp-validations/validators/base';
 import isEmail from 'validator/lib/isEmail';
 
-const EmailFormat = BaseValidator.extend({
+@classic
+class EmailFormat extends BaseValidator {
   validate(value, options) {
     if (!value && options.allowBlank) {
       return true;
@@ -14,6 +16,6 @@ const EmailFormat = BaseValidator.extend({
       }
     }
   }
-});
+}
 
 export default EmailFormat;

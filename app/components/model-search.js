@@ -1,6 +1,9 @@
+import classic from 'ember-classic-decorator';
+import { action } from '@ember/object';
+import { classNames } from '@ember-decorators/component';
+import { inject as service } from '@ember/service';
 import { notEmpty } from '@ember/object/computed';
 import Component from '@ember/component';
-import { inject as service } from '@ember/service';
 
 const placeholders = {
   doi: 'DOI',
@@ -13,22 +16,25 @@ const placeholders = {
   'provider-prefix': 'Prefix'
 };
 
-export default Component.extend({
-  router: service(),
+@classic
+@classNames('div')
+export default class ModelSearch extends Component {
+  @service
+  router;
 
-  classNames: ['div'],
+  @notEmpty('query')
+  hasInput;
 
-  hasInput: notEmpty('query'),
-  hasFilters: true,
-  helpText: null,
-  filters: null,
-  query: null,
-  sort: null,
-  queryParams: {},
-  modelName: null,
+  hasFilters = true;
+  helpText = null;
+  filters = null;
+  query = null;
+  sort = null;
+  queryParams = {};
+  modelName = null;
 
   didReceiveAttrs() {
-    this._super(...arguments);
+    super.didReceiveAttrs(...arguments);
 
     if (!this.model) {
       return;
@@ -64,7 +70,7 @@ export default Component.extend({
         relevance: 'Sort by Relevance'
       });
     }
-  },
+  }
 
   search() {
     let params = Object.assign(this.model.get('query'), {
@@ -73,30 +79,35 @@ export default Component.extend({
     });
 
     this.router.transitionTo({ queryParams: params });
-  },
-
-  actions: {
-    doSearch(query) {
-      if (query) {
-        this.set('sort', 'relevance');
-      } else if (this.sort === 'relevance') {
-        this.set('sort', null);
-      }
-
-      this.set('query', query);
-      this.search();
-    },
-    clear() {
-      this.set('query', null);
-      this.set('sort', null);
-      this.search();
-    },
-    selectMetadata(metadata) {
-      this.showMetadata(metadata);
-    },
-    sort(sort) {
-      this.set('sort', sort);
-      this.search();
-    }
   }
-});
+
+  @action
+  doSearch(query) {
+    if (query) {
+      this.set('sort', 'relevance');
+    } else if (this.sort === 'relevance') {
+      this.set('sort', null);
+    }
+
+    this.set('query', query);
+    this.search();
+  }
+
+  @action
+  clear() {
+    this.set('query', null);
+    this.set('sort', null);
+    this.search();
+  }
+
+  @action
+  selectMetadata(metadata) {
+    this.showMetadata(metadata);
+  }
+
+  @action
+  sort(sort) {
+    this.set('sort', sort);
+    this.search();
+  }
+}

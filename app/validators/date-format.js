@@ -1,8 +1,10 @@
+import classic from 'ember-classic-decorator';
 /* eslint-disable no-useless-escape */
 import BaseValidator from 'ember-cp-validations/validators/base';
 import edtf from 'edtf';
 
-const DateFormat = BaseValidator.extend({
+@classic
+class DateFormat extends BaseValidator {
   validate(value, options) {
     switch (true) {
       case !value && options.allowBlank:
@@ -26,6 +28,6 @@ const DateFormat = BaseValidator.extend({
         }
     }
   }
-});
+}
 
 export default DateFormat;

@@ -1,6 +1,8 @@
+import classic from 'ember-classic-decorator';
 import JSONSerializer from '@ember-data/serializer/json';
 
-export default JSONSerializer.extend({
+@classic
+export default class Person extends JSONSerializer {
   normalizeSingleResponse(store, primaryModelClass, payload, id, requestType) {
     let name = payload.person.name;
 
@@ -11,7 +13,7 @@ export default JSONSerializer.extend({
       familyName: name['family-name'] ? name['family-name'].value : null
     };
 
-    return this._super(store, primaryModelClass, payload, id, requestType);
+    return super.normalizeSingleResponse(store, primaryModelClass, payload, id, requestType);
   }
   // normalizeFindRecordResponse(store, primaryModelClass, payload) {
   //   payload.data.attributes.meta = payload.meta || {};
@@ -21,4 +23,4 @@ export default JSONSerializer.extend({
   // keyForAttribute(attr) {
   //   return underscore(attr);
   // }
-});
+}

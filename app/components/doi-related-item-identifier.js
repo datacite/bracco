@@ -1,6 +1,8 @@
+import classic from 'ember-classic-decorator';
+import { action } from '@ember/object';
+import { inject as service } from '@ember/service';
 /* eslint-disable no-useless-escape */
 import Component from '@ember/component';
-import { inject as service } from '@ember/service';
 import { isURL, isISBN } from 'validator';
 import { isBlank } from '@ember/utils';
 
@@ -26,17 +28,20 @@ const relatedItemIdentifierTypeList = [
   'w3id'
 ];
 
-export default Component.extend({
-  store: service(),
-  relatedItemIdentifierTypeList,
-  relatedItemIdentifierTypes: relatedItemIdentifierTypeList,
+@classic
+export default class DoiRelatedItemIdentifier extends Component {
+  @service
+  store;
+
+  relatedItemIdentifierTypeList = relatedItemIdentifierTypeList;
+  relatedItemIdentifierTypes = relatedItemIdentifierTypeList;
 
   init(...args) {
-    this._super(...args);
-  },
+    super.init(...args);
+  }
 
   didReceiveAttrs() {
-    this._super(...arguments);
+    super.didReceiveAttrs(...arguments);
 
     if (
       relatedItemIdentifierTypeList.includes(this.relatedItemIdentifierType)
@@ -45,7 +50,8 @@ export default Component.extend({
     } else {
       this.set('controlledIdentifierType', false);
     }
-  },
+  }
+
   updateRelatedItemIdentifier(value) {
     const ark = /^ark:\/[0-9]{5}\/\S+$/;
     const lsid =
@@ -125,19 +131,20 @@ export default Component.extend({
         this.set('controlledIdentifierType', false);
         break;
     }
-  },
+  }
 
   selectRelatedItemIdentifierType(relatedItemIdentifierType) {
     this.fragment.set('relatedItemIdentifierType', relatedItemIdentifierType);
     this.set('relatedItemIdentifierTypes', relatedItemIdentifierTypeList);
-  },
-
-  actions: {
-    updateRelatedItemIdentifier(value) {
-      this.updateRelatedItemIdentifier(value.trim());
-    },
-    selectRelatedItemIdentifierType(relatedItemIdentifierType) {
-      this.selectRelatedItemIdentifierType(relatedItemIdentifierType);
-    }
   }
-});
+
+  @action
+  updateRelatedItemIdentifierAction(value) {
+    this.updateRelatedItemIdentifier(value.trim());
+  }
+
+  @action
+  selectRelatedItemIdentifierTypeAction(relatedItemIdentifierType) {
+    this.selectRelatedItemIdentifierType(relatedItemIdentifierType);
+  }
+}

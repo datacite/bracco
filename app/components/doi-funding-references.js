@@ -1,23 +1,27 @@
+import classic from 'ember-classic-decorator';
+import { action } from '@ember/object';
 import Component from '@ember/component';
 
-export default Component.extend({
-  showFundingReferences: false,
+@classic
+export default class DoiFundingReferences extends Component {
+  showFundingReferences = false;
 
   didReceiveAttrs() {
-    this._super(...arguments);
+    super.didReceiveAttrs(...arguments);
 
     if (!this.model.get('fundingReferences')) {
       this.model.set('fundingReferences', []);
     }
-  },
-
-  actions: {
-    addFundingReference() {
-      this.model.get('fundingReferences').createFragment();
-      this.set('showFundingReferences', true);
-    },
-    toggleFundingReferences() {
-      this.set('showFundingReferences', !this.showFundingReferences);
-    }
   }
-});
+
+  @action
+  addFundingReference() {
+    this.model.get('fundingReferences').createFragment();
+    this.set('showFundingReferences', true);
+  }
+
+  @action
+  toggleFundingReferences() {
+    this.set('showFundingReferences', !this.showFundingReferences);
+  }
+}

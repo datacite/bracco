@@ -1,15 +1,17 @@
+import classic from 'ember-classic-decorator';
 import { w } from '@ember/string';
 import { A } from '@ember/array';
 import Component from '@ember/component';
 
-export default Component.extend({
-  isFound: null,
-  hasLandingPage: null,
-  hasDoi: null,
-  hasSchemaOrg: null,
+@classic
+export default class DoiHealth extends Component {
+  isFound = null;
+  hasLandingPage = null;
+  hasDoi = null;
+  hasSchemaOrg = null;
 
   didReceiveAttrs() {
-    this._super(...arguments);
+    super.didReceiveAttrs(...arguments);
 
     if (this.model.get('landingPage').status == 200) {
       let redirectText = 'resolved ';
@@ -110,4 +112,4 @@ export default Component.extend({
       });
     }
   }
-});
+}

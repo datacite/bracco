@@ -1,10 +1,12 @@
+import classic from 'ember-classic-decorator';
 /* global StatusPage*/
 
 import Component from '@ember/component';
 
-export default Component.extend({
+@classic
+export default class FooterStatus extends Component {
   didReceiveAttrs() {
-    this._super(...arguments);
+    super.didReceiveAttrs(...arguments);
 
     if (typeof StatusPage !== 'undefined') {
       let sp = new StatusPage.page({ page: 'nmtzsv0smzk5' });
@@ -21,4 +23,4 @@ export default Component.extend({
       });
     }
   }
-});
+}

@@ -13,7 +13,7 @@
       class="form-horizontal"
       @horizontalLabelGridClass="col-md-3"
       @model={{this.model}}
-      @onSubmit={{action 'submit' this.model}}
+      @onSubmit={{action 'submitAction' this.model}}
       @submitOnEnter={{true}} as |form|
     >
       <form.element
@@ -101,7 +101,7 @@
             Update Contact
           </button>
         {{/if}}
-        <button class="btn btn-sm" type="button" {{action 'cancel' this.model}}>
+        <button class="btn btn-sm" type="button" {{action 'cancelAction' this.model}}>
           Cancel
         </button>
       </div>

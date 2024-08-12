@@ -1,14 +1,17 @@
-import Component from '@ember/component';
+import classic from 'ember-classic-decorator';
+import { classNames } from '@ember-decorators/component';
 import { inject as service } from '@ember/service';
+import Component from '@ember/component';
 
-export default Component.extend({
-  currentUser: service(),
-
-  classNames: ['panel', 'facets', 'add'],
+@classic
+@classNames('panel', 'facets', 'add')
+export default class RepositorySidebar extends Component {
+  @service
+  currentUser;
 
   didReceiveAttrs() {
-    this._super(...arguments);
+    super.didReceiveAttrs(...arguments);
 
     this.set('currentUser', this.currentUser);
   }
-});
+}

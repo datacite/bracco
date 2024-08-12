@@ -1,16 +1,19 @@
+import classic from 'ember-classic-decorator';
+import { inject as service } from '@ember/service';
 import Component from '@ember/component';
 import fetch from 'fetch';
 import { Promise } from 'rsvp';
 import ENV from 'bracco/config/environment';
-import { inject as service } from '@ember/service';
 
-export default Component.extend({
-  flashMessages: service(),
+@classic
+export default class RepositoryInfo extends Component {
+  @service
+  flashMessages;
 
-  json: null,
+  json = null;
 
   didReceiveAttrs() {
-    this._super(...arguments);
+    super.didReceiveAttrs(...arguments);
 
     let promise = new Promise((resolve, reject) => {
       const url =
@@ -52,4 +55,4 @@ export default Component.extend({
       }
     );
   }
-});
+}

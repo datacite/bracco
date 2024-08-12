@@ -1,21 +1,25 @@
+import classic from 'ember-classic-decorator';
+import { action } from '@ember/object';
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 
-export default Controller.extend({
-  flashMessages: service(),
+@classic
+export default class ApplicationController extends Controller {
+  @service
+  flashMessages;
 
-  queryParams: [
+  queryParams = [
     'query',
     'role-name',
     'include-deleted',
     'sort',
     'page',
     'size'
-  ],
-  query: null,
-  'role-name': null,
-  'include-deleted': null,
-  sort: null,
-  page: 1,
-  size: 25
-});
+  ];
+  query = null;
+  'role-name' = null;
+  'include-deleted' = null;
+  sort = null;
+  page = 1;
+  size = 25;
+};

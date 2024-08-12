@@ -1,7 +1,9 @@
+import classic from 'ember-classic-decorator';
 import JSONSerializer from '@ember-data/serializer/json';
 import { isBlank, typeOf } from '@ember/utils';
 
-export default JSONSerializer.extend({
+@classic
+export default class RelatedItem extends JSONSerializer {
   serialize(snapshot) {
     let json = {};
 
@@ -23,7 +25,8 @@ export default JSONSerializer.extend({
     });
 
     return json;
-  },
+  }
+
   filterNull(snapshot) {
     if (isBlank(snapshot)) {
       return {};
@@ -53,4 +56,4 @@ export default JSONSerializer.extend({
 
     return json;
   }
-});
+}
