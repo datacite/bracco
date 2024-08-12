@@ -238,10 +238,11 @@
     "**/@types/eslint": "^7.2.13",
     "**/@types/ember-feature-flags/**/@types/ember__service": "3.16.9",
     "**/@types/ember-data__model/**/@types/ember-data": "3.16.25",
-    "**/@babel/traverse": "^7.23.2",
     "**/browserify-sign": "^4.2.3",
     "**/sanitize-html/**/postcss": "8.4.35",
     "**/fast-sourcemap-concat": "2.1.1",
-    "**/testem/**/fireworm": "0.7.2"
+    "**/testem/**/fireworm": "0.7.2",
+    "**/ws": "8.17.1",
+    "**/braces": "3.0.3"
   }
 }
