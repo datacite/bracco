@@ -1,4 +1,3 @@
-{{#if this.model}}
   <form class="form-horizontal" {{action 'doSearch' this.query on='submit'}}>
     <div id="search" class="input-group">
       <Input
@@ -85,4 +84,3 @@
       {{pluralize this.model.meta.total this.modelName without-count=true}}
     </h3>
   {{/if}}
-{{/if}}
