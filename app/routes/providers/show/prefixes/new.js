@@ -29,7 +29,7 @@ export default class NewRoute extends Route {
     super.setupController(controller, model);
 
     this.controllerFor('providers.show.prefixes.new').send(
-      'searchPrefix',
+      'searchPrefixAction',
       null
     );
   }
