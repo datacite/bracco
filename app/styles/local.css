@@ -30,7 +30,7 @@ z-index: 10000;
 }
 
 .create-doi-button .dropdown-menu.show a:hover {
-  background-color: rgb(128, 128, 128, .1);
+  background-color: rgb(128, 128, 128, .1) !important;
 }
 
 .create-doi-button button {
