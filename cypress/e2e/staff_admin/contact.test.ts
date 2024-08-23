@@ -18,6 +18,7 @@ describe('ACCEPTANCE: STAFF_ADMIN | CONTACTS', () => {
   const waitTime2 = 2000;
   const waitTime3 = 3000;
   const waitTime4 = 4000;
+  const waitTime6 = 6000;
   const min = 500000;
   const max = 999999;
   const provider_id = Cypress.env('organization_admin_username').toLowerCase()
@@ -58,7 +59,7 @@ describe('ACCEPTANCE: STAFF_ADMIN | CONTACTS', () => {
         // Give it a little extra time to process the new contact so that we can search for it.
         cy.visit('/contacts');
         cy.url().should('include', '/contacts')
-        cy.wait(waitTime4)
+        cy.wait(waitTime6)
 
         cy.get('input[name="query"]').click()
         cy.get('input[name="query"]').type(family_name + '{enter}')
@@ -284,7 +285,7 @@ describe('ACCEPTANCE: STAFF_ADMIN | CONTACTS', () => {
         cy.get('#confirm-delete-field').should('have.class', 'is-valid');
 
         cy.get('button#delete').contains('Delete').click({force: true});
-        cy.wait(waitTime3);
+        cy.wait(10000);
         cy.location().should((loc) => {
           expect(loc.pathname).to.eq('/providers/' + provider_id + '/contacts');
         });

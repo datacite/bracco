@@ -50,7 +50,7 @@ export default class IndexRoute extends Route {
 
     return ret.then(function (ret) {
       // Workaround - going back to settings tab, contacts disappear.
-      ret.provider.contacts = ret.contacts;
+      // ret.provider.contacts = ret.contacts;
       return ret;
     });
   }
