@@ -347,7 +347,17 @@
             </BsAlert>
           </div>
           {{#if (not-eq this.model.memberType 'consortium_organization')}}
-            <form.element @controlType="power-select" id="voting-contact" class="form-group" @label="Voting Representative" @property="votingContact" @optionLabelPath="name" @options={{this.model.filteredContacts}} @helpText="Your organization's voting representative." @destination={{this.votingContact}} as |el|>
+            <form.element 
+              @controlType="power-select" 
+              id="voting-contact" 
+              class="form-group" 
+              @label="Voting Representative" 
+              @property="votingContact" 
+              @optionLabelPath="name" 
+              @options={{this.model.filteredContacts}} 
+              @helpText="Your organization's voting representative." 
+              @destination={{this.model.votingContact}} as |el|
+            >
               <el.control
                 @searchEnabled={{false}}
                 @search={{action 'searchContact'}}
@@ -360,7 +370,17 @@
               </el.control>
             </form.element>
           {{/if}}
-          <form.element @controlType="power-select" id="service-contact" class="form-group" @label="Service Contact" @property="serviceContact" @optionLabelPath="displayName" @options={{this.model.filteredContacts}} @helpText="Your organization's service contact." @destination={{this.serviceContact}} as |el|>
+          <div>{{this.model.filteredContacts.length}}</div>
+          <form.element 
+            @controlType="power-select" 
+            id="service-contact" class="form-group" 
+            @label="Service Contact" 
+            @property="serviceContact" 
+            @optionLabelPath="displayName" 
+            @options={{this.model.filteredContacts}} 
+            @helpText="Your organization's service contact." 
+            @destination={{this.model.serviceContact}} as |el|
+          >
             <el.control
               @searchEnabled={{false}}
               @search={{action 'searchContact'}}
@@ -372,7 +392,17 @@
               {{item.displayName}}
             </el.control>
           </form.element>
-          <form.element @controlType="power-select" id="secondary-service-contact" class="form-group" @label="Secondary Service Contact" @property="secondaryServiceContact" @optionLabelPath="name" @options={{this.model.filteredContacts}} @helpText="Your organization's secondary service contact." @destination={{this.secondaryServiceContact}} as |el|>
+          <form.element 
+            @controlType="power-select" 
+            id="secondary-service-contact" 
+            class="form-group" 
+            @label="Secondary Service Contact" 
+            @property="secondaryServiceContact" 
+            @optionLabelPath="name" 
+            @options={{this.model.filteredContacts}} 
+            @helpText="Your organization's secondary service contact." 
+            @destination={{this.model.secondaryServiceContact}} as |el|
+          >
             <el.control
               @searchEnabled={{false}}
               @search={{action 'searchContact'}}
@@ -385,7 +415,17 @@
               {{item.displayName}}
             </el.control>
           </form.element>
-          <form.element @controlType="power-select" id="technical-contact" class="form-group" @label="Technical Contact" @property="technicalContact" @optionLabelPath="name" @options={{this.model.filteredContacts}} @helpText="Your organization's technical contact." @destination={{this.technicalContact}} as |el|>
+          <form.element 
+            @controlType="power-select" 
+            id="technical-contact" 
+            class="form-group" 
+            @label="Technical Contact" 
+            @property="technicalContact" 
+            @optionLabelPath="name" 
+            @options={{this.model.filteredContacts}} 
+            @helpText="Your organization's technical contact." 
+            @destination={{this.model.technicalContact}} as |el|
+          >
             <el.control
               @searchEnabled={{false}}
               @search={{action 'searchContact'}}
@@ -398,7 +438,17 @@
               {{item.displayName}}
             </el.control>
           </form.element>
-          <form.element @controlType="power-select" id="secondary-technical-contact" class="form-group" @label="Secondary Technical Contact" @property="secondaryTechnicalContact" @optionLabelPath="name" @options={{this.model.filteredContacts}} @helpText="Your organization's secondary technical contact." @destination={{this.secondaryTechnicalContact}} as |el|>
+          <form.element 
+            @controlType="power-select" 
+            id="secondary-technical-contact" 
+            class="form-group" 
+            @label="Secondary Technical Contact" 
+            @property="secondaryTechnicalContact" 
+            @optionLabelPath="name" 
+            @options={{this.model.filteredContacts}} 
+            @helpText="Your organization's secondary technical contact." 
+            @destination={{this.model.secondaryTechnicalContact}} as |el|
+          >
             <el.control
               @searchEnabled={{false}}
               @search={{action 'searchContact'}}
@@ -412,7 +462,17 @@
             </el.control>
           </form.element>
           {{#if (not-eq this.model.memberType 'consortium_organization')}}
-            <form.element @controlType="power-select" id="billing-contact" class="form-group" @label="Billing Contact" @property="billingContact" @optionLabelPath="name" @options={{this.model.filteredContacts}} @helpText="Your organization's billing contact." @destination="billingContact" as |el|>
+            <form.element 
+              @controlType="power-select" 
+              id="billing-contact" 
+              class="form-group" 
+              @label="Billing Contact"
+               @property="billingContact" 
+               @optionLabelPath="name" 
+               @options={{this.model.filteredContacts}} 
+               @helpText="Your organization's billing contact." 
+               @destination={{this.model.billingContact}} as |el|
+              >
               <el.control
                 @searchEnabled={{false}}
                 @search={{action 'searchContact'}}
@@ -424,7 +484,17 @@
                 {{item.displayName}}
               </el.control>
             </form.element>
-            <form.element @controlType="power-select" id="secondary-billing-contact" class="form-group" @label="Secondary Billing Contact" @property="secondaryBillingContact" @optionLabelPath="name" @options={{this.model.filteredContacts}} @helpText="Your organization's secondary billing contact." @destination={{this.secondaryBillingContact}} as |el|>
+            <form.element 
+              @controlType="power-select" 
+              id="secondary-billing-contact" 
+              class="form-group" 
+              @label="Secondary Billing Contact" 
+              @property="secondaryBillingContact" 
+              @optionLabelPath="name" 
+              @options={{this.model.filteredContacts}} 
+              @helpText="Your organization's secondary billing contact." 
+              @destination={{this.model.secondaryBillingContact}} as |el|
+            >
               <el.control
                 @searchEnabled={{false}}
                 @search={{action 'searchContact'}}

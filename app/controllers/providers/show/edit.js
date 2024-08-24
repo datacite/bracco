@@ -382,7 +382,6 @@ export default class EditController extends Controller {
   @action
   searchContact(query) {
     let filteredContacts = this.model.contacts.filter(function (contact) {
-      console.log(contact.displayName.toLowerCase);
       return contact.displayName
         .toLowerCase()
         .startsWith(query.toLowerCase());
@@ -396,7 +395,6 @@ export default class EditController extends Controller {
       let votingContact = {
         givenName: contact.givenName,
         familyName: contact.familyName,
-        displayName: contact.displayName,
         email: contact.email
       };
       this.model.set('votingContact', votingContact);
@@ -410,7 +408,6 @@ export default class EditController extends Controller {
       let serviceContact = {
         givenName: contact.givenName,
         familyName: contact.familyName,
-        displayName: contact.displayName,
         email: contact.email
       };
       this.model.set('serviceContact', serviceContact);
@@ -424,7 +421,6 @@ export default class EditController extends Controller {
       let secondaryServiceContact = {
         givenName: contact.givenName,
         familyName: contact.familyName,
-        displayName: contact.displayName,
         email: contact.email
       };
       this.model.set('secondaryServiceContact', secondaryServiceContact);
@@ -439,7 +435,6 @@ export default class EditController extends Controller {
       let technicalContact = {
         givenName: contact.givenName,
         familyName: contact.familyName,
-        displayName: contact.displayName,
         email: contact.email
       };
       this.model.set('technicalContact', technicalContact);
@@ -455,7 +450,6 @@ export default class EditController extends Controller {
       let secondaryTechnicalContact = {
         givenName: contact.givenName,
         familyName: contact.familyName,
-        displayName: contact.displayName,
         email: contact.email
       };
       this.model.set('secondaryTechnicalContact', secondaryTechnicalContact);
@@ -471,7 +465,6 @@ export default class EditController extends Controller {
       let billingContact = {
         givenName: contact.givenName,
         familyName: contact.familyName,
-        displayName: contact.displayName,
         email: contact.email
       };
       this.model.set('billingContact', billingContact);
@@ -485,7 +478,6 @@ export default class EditController extends Controller {
       let secondaryBillingContact = {
         givenName: contact.givenName,
         familyName: contact.familyName,
-        displayName: contact.displayName,
         email: contact.email
       };
       this.model.set('secondaryBillingContact', secondaryBillingContact);
