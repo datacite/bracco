@@ -17,8 +17,7 @@
           class="form-horizontal"
           @horizontalLabelGridClass="col-md-3"
           @model={{this.model}}
-          @onSubmit={{action 'doSubmit' this.model}}
-          @submitOnEnter={{true}} as |form|
+          @onSubmit={{action 'doSubmit' this.model}} as |form|
         >
           <h3 class="member-results">
             Organization Information
