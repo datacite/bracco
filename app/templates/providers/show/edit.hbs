@@ -322,7 +322,7 @@
         <h3 class="member-results">
           Contact Information
         </h3>
-        {{#if (is-empty this.model.contacts)}}
+        {{#if (is-empty this.model.filteredContacts)}}
           <div class="col-md-9 col-md-offset-3">
             <BsAlert @dismissible={{false}} @type="danger">
               There are no contacts in your contacts list. Please

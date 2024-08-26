@@ -13,9 +13,16 @@ export default class EditRoute extends Route {
   @service
   router;
 
-  model() {
+  async model() {
     let provider = this.modelFor('providers/show');
     provider.set('confirmSymbol', provider.get('symbol'));
+
+    let contacts = await provider.get('contacts')
+    let filteredContacts = contacts.filter(function (contact) {
+      return contact.deleted === null;
+    })
+    provider.set('filteredContacts', filteredContacts)
+
     return provider;
   }
 

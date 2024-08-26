@@ -398,7 +398,6 @@ export default class EditController extends Controller {
         email: contact.email
       };
       this.model.set('votingContact', votingContact);
-      this.model.set('filteredContacts', this.model.contacts);
     }
   }
 
@@ -411,7 +410,6 @@ export default class EditController extends Controller {
         email: contact.email
       };
       this.model.set('serviceContact', serviceContact);
-      this.model.set('filteredContacts', this.model.contacts);
     }
   }
 
@@ -441,7 +439,6 @@ export default class EditController extends Controller {
     } else {
       this.model.set('technicalContact', null);
     }
-    this.model.set('filteredContacts', this.model.contacts);
   }
 
   @action
@@ -456,7 +453,6 @@ export default class EditController extends Controller {
     } else {
       this.model.set('secondaryTechnicalContact', null);
     }
-    this.model.set('filteredContacts', this.model.contacts);
   }
 
   @action
@@ -469,7 +465,6 @@ export default class EditController extends Controller {
       };
       this.model.set('billingContact', billingContact);
     }
-    this.model.set('filteredContacts', this.model.contacts);
   }
 
   @action
@@ -484,7 +479,6 @@ export default class EditController extends Controller {
     } else {
       this.model.set('secondaryBillingContact', null);
     }
-    this.model.set('filteredContacts', this.model.contacts);
   }
 
   @action
