@@ -26,7 +26,7 @@ export default class DeleteController extends Controller {
             // We need a timeout because of ElasticSearch indexing
             setTimeout(() => {
               self.router.transitionTo('providers.show.contacts', providerId);
-            }, 4800);
+            }, 3600);
           })
           .catch(function (reason) {
             console.debug(reason);
