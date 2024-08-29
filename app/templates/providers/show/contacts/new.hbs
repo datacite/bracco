@@ -14,7 +14,7 @@
       @horizontalLabelGridClass="col-md-3"
       @model={{this.model.contact}}
       @onSubmit={{action 'submitAction' this.model.contact this.model}}
-      @submitOnEnter={{true}} as |form|
+      @submitOnEnter={{false}} as |form|
     >
       <form.element
         @controlType="text"
