@@ -99,8 +99,11 @@ export default class Contact extends Ability {
         return isAbleTo(this);
       case 'provider_admin':
         return (
-          this.get('currentUser.provider_id') ===
-          this.get('model.provider.id')
+          // 'this.get('model.provider. ...') === undefined' -  Happens only on contact deletion 
+          //  as the result of destroyRecord which destroys the contact/provider relationship.
+          this.get('model.provider.id') === undefined ? 
+            true : 
+            this.get('currentUser.provider_id') === this.get('model.provider.id') 
         );
       default:
         return false;
