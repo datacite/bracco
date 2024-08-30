@@ -13,7 +13,7 @@
       </form.element>
 
       <div class="col-md-9 col-md-offset-3">
-        <button type="submit" disabled={{this.isDisabled}} class="btn btn-sm btn-fill">Transfer DOI</button>
+        <button type="submit" disabled={{this.isDisabled}} {{action "submitAction" this.model}} class="btn btn-sm btn-fill">Transfer DOI</button>
         <button class="btn btn-sm" type="button" {{action "cancelAction" this.model}}>Cancel</button>
       </div>
     </BsForm>
