@@ -156,6 +156,7 @@ export default class DoiFundingReference extends Component {
     this.store
       .query('funder', { query })
       .then(function (funders) {
+        funders = funders.sortBy('name')
         self.set('funders', funders);
       })
       .catch(function (reason) {

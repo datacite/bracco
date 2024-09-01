@@ -34,6 +34,8 @@ export default class DoiAffiliation extends Component {
     this.store
       .query('ror', { query })
       .then(function (organizations) {
+        // ROR API does not seem to offer sorting of results.  The Ember array 'sortBy' seems to work.
+        organizations = organizations.sortBy('name')
         self.set('organizations', organizations);
       })
       .catch(function (reason) {

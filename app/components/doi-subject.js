@@ -5,7 +5,7 @@ import Component from '@ember/component';
 import { isBlank } from '@ember/utils';
 import fosMapping from '../utils/fos-mappings';
 
-const completeSubjectList = fosMapping.allLabels();
+const completeSubjectList = fosMapping.allLabels().sort();
 
 @classic
 @attributeBindings('simple')
