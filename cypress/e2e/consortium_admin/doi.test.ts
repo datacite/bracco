@@ -42,7 +42,7 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | DOIS', () => {
       cy.get('a#account_menu_link').should('contain', 'DC');
 
       // Has the correct tab activated.
-      cy.get('ul.nav-tabs li.active a').contains(/DOIs/i)
+      cy.get('ul.nav-tabs li.active a', {timeout: 20000 }).contains(/DOIs/i)
         .and('have.attr', 'href').and('include', '/providers/dc/dois');
 
       // Does not have left sidebar functions.

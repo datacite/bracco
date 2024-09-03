@@ -1,9 +1,11 @@
+import classic from 'ember-classic-decorator';
 import EmberRouter from '@ember/routing/router';
 import config from './config/environment';
 
-const Router = EmberRouter.extend({
-  location: 'auto'
-});
+@classic
+class Router extends EmberRouter {
+  location = 'history';
+}
 
 Router.map(function () {
   this.route('providers', function () {

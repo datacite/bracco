@@ -6,12 +6,12 @@
       {{/each}}
     </div>
 
-    <BsForm @formLayout="horizontal" class="form-horizontal" @horizontalLabelGridClass="col-md-3" @model={{this.model}} @onSubmit={{action "submit" this.model}} @submitOnEnter={{true}} as |form|>
+    <BsForm @formLayout="horizontal" class="form-horizontal" @horizontalLabelGridClass="col-md-3" @model={{this.model}} @onSubmit={{action "submitAction" this.model}} @submitOnEnter={{true}} as |form|>
       <form.element @controlType="text" id="repository-id" class="form-group" @label="Repository ID" @property="symbol" @helpText="The Repository ID is the unique identifier for each repository in DataCite and can't be changed." as |el| >
         <el.control disabled={{true}} />
       </form.element>
       <form.element @controlType="power-select" id="client-type" class="form-group" @label="Type" @value={{this.clientType}} @options={{this.clientTypes}} @optionLabelPath="label" as |el|>
-        <el.control @onChange={{action "selectClientType"}} @search={{action "searchClientType"}} @placeholder="Select Client Type" @searchPlaceholder="Type to search..." @disabled={{if (eq this.model.clientType "igsnCatalog") true false}} @searchEnabled={{true}}/>
+        <el.control @onChange={{action "selectClientTypeAction"}} @search={{action "searchClientTypeAction"}} @placeholder="Select Client Type" @searchPlaceholder="Type to search..." @disabled={{if (eq this.model.clientType "igsnCatalog") true false}} @searchEnabled={{true}}/>
         {{#if (eq this.model.clientType "igsnCatalog")}}
           <BsTooltip @renderInPlace={{true}} @placement="top" @viewportPadding={{10}}>IGSN ID Catalogs cannot be edited.</BsTooltip>
         {{/if}}
@@ -30,7 +30,7 @@
         <RepositoryIssn @model={{this.model}} @fragment={{this.model.issn}} @form={{form}} />
       {{else}}
         <form.element @controlType="power-select" id="re3data" class="form-group" @property="re3data" @label="re3data Record (optional)" @optionLabelPath="re3data" @options={{this.repositories}} @destination={{this.re3data}} @helpText="re3data is a registry of research data repositories." as |el|>
-          <el.control @onChange={{action "selectRe3Data"}} @search={{action "searchRe3Data"}} @searchField="repositoryName" @searchPlaceholder="Type to search..." @allowClear={{true}} @searchEnabled={{true}} as |item|>
+          <el.control @onChange={{action "selectRe3DataAction"}} @search={{action "searchRe3DataAction"}} @searchField="repositoryName" @searchPlaceholder="Type to search..." @allowClear={{true}} @searchEnabled={{true}} as |item|>
             {{if item.name item.name this.model.re3data}}
           </el.control>
         </form.element>
@@ -73,13 +73,13 @@
             {{/each}}
           {{/if}}
           {{#if (lte this.model.language.length 2)}}
-            <BsButton class="btn-sm add-language" @outline={{true}} @onClick={{action "addLanguage"}}><i class="fas fa-plus-circle"></i> Add Language</BsButton>
+            <BsButton class="btn-sm add-language" @outline={{true}} @onClick={{action "addLanguageAction"}}><i class="fas fa-plus-circle"></i> Add Language</BsButton>
           {{/if}}
         </div>
       </div>
 
       <form.element @controlType="power-select" id="software" class="form-group" @label="Software (optional)" @property="software" @options={{this.softwares}} @destination={{this.software}} @helpText="The name of the software that is used to run the repository." as |el|>
-        <el.control @onChange={{action "selectSoftware"}} @search={{action "searchSoftware"}} @placeholder="Select Software" @searchPlaceholder="Type to search..." @allowClear={{true}} @searchEnabled={{true}} as |item|>
+        <el.control @onChange={{action "selectSoftwareAction"}} @search={{action "searchSoftwareAction"}} @placeholder="Select Software" @searchPlaceholder="Type to search..." @allowClear={{true}} @searchEnabled={{true}} as |item|>
           {{item}}
         </el.control>
       </form.element>
@@ -95,7 +95,7 @@
               {{/each}}
             {{/if}}
             {{#if (lte this.model.repositoryType.length 2)}}
-              <BsButton class="btn-sm add-repositoryType" @outline={{true}} @onClick={{action "addRepositoryType"}}><i class="fas fa-plus-circle"></i> Add Repository Type</BsButton>
+              <BsButton class="btn-sm add-repositoryType" @outline={{true}} @onClick={{action "addRepositoryTypeAction"}}><i class="fas fa-plus-circle"></i> Add Repository Type</BsButton>
             {{/if}}
           </div>
         </div>
@@ -114,7 +114,7 @@
               {{/each}}
             {{/if}}
             {{#if (lte this.model.certificate.length 2)}}
-              <BsButton class="btn-sm add-certificate" @outline={{true}} @onClick={{action "addCertificate"}}><i class="fas fa-plus-circle"></i> Add Certificate</BsButton>
+              <BsButton class="btn-sm add-certificate" @outline={{true}} @onClick={{action "addCertificateAction"}}><i class="fas fa-plus-circle"></i> Add Certificate</BsButton>
             {{/if}}
           </div>
         </div>
@@ -147,7 +147,7 @@
           <button type="submit" id="update-repository" class="btn btn-sm btn-fill" disabled={{true}}>Update {{if (eq this.currentUser.uid this.model.id) 'Account' 'Repository'}}</button>
         {{/if}}
 
-        <button class="btn btn-sm" type="button" {{action "cancel" this.model}}>Cancel</button>
+        <button class="btn btn-sm" type="button" {{action "cancelAction" this.model}}>Cancel</button>
       </div>
     </BsForm>
   </div>

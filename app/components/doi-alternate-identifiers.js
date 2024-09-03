@@ -1,23 +1,27 @@
+import classic from 'ember-classic-decorator';
+import { action } from '@ember/object';
 import Component from '@ember/component';
 
-export default Component.extend({
-  showAlternateIdentifiers: false,
+@classic
+export default class DoiAlternateIdentifiers extends Component {
+  showAlternateIdentifiers = false;
 
   didReceiveAttrs() {
-    this._super(...arguments);
+    super.didReceiveAttrs(...arguments);
 
     if (!this.model.get('alternateIdentifiers')) {
       this.model.set('alternateIdentifiers', []);
     }
-  },
-
-  actions: {
-    addAlternateIdentifier() {
-      this.model.get('alternateIdentifiers').createFragment();
-      this.set('showAlternateIdentifiers', true);
-    },
-    toggleAlternateIdentifiers() {
-      this.set('showAlternateIdentifiers', !this.showAlternateIdentifiers);
-    }
   }
-});
+
+  @action
+  addAlternateIdentifier() {
+    this.model.get('alternateIdentifiers').createFragment();
+    this.set('showAlternateIdentifiers', true);
+  }
+
+  @action
+  toggleAlternateIdentifiers() {
+    this.set('showAlternateIdentifiers', !this.showAlternateIdentifiers);
+  }
+}

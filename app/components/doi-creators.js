@@ -1,46 +1,54 @@
+import classic from 'ember-classic-decorator';
+import { action } from '@ember/object';
 import Component from '@ember/component';
 import { schedule } from '@ember/runloop';
 
-export default Component.extend({
-  showCreators: true,
+@classic
+export default class DoiCreators extends Component {
+  showCreators = true;
 
-  init: function () {
-    this._super();
+  init() {
+    super.init();
 
     schedule("afterRender",this,function() {
+      if (!this.model.get('creators')) {
+        this.model.set('creators', []);
+      }
+
       if (this.model.get('creators').length == 0) {
         this.send("addCreator");
       }
     });
-  },
+  }
 
   didReceiveAttrs() {
-    this._super(...arguments);
+    super.didReceiveAttrs(...arguments);
 
-    if (!this.model.get('creators')) {
+     if (!this.model.get('creators')) {
       this.model.set('creators', []);
     }
-  },
-
-  actions: {
-    addCreator() {
-      this.model
-        .get('creators')
-        .createFragment({ nameIdentifiers: [], affiliation: [] });
-      this.model
-        .get('creators')
-        .get('lastObject')
-        .get('nameIdentifiers')
-        .createFragment();
-      this.model
-        .get('creators')
-        .get('lastObject')
-        .get('affiliation')
-        .createFragment();
-      this.set('showCreators', true);
-    },
-    toggleCreators() {
-      this.set('showCreators', !this.showCreators);
-    }
   }
-});
+
+  @action
+  addCreator() {
+    this.model
+      .get('creators')
+      .createFragment({ nameIdentifiers: [], affiliation: [] });
+    this.model
+      .get('creators')
+      .get('lastObject')
+      .get('nameIdentifiers')
+      .createFragment();
+    this.model
+      .get('creators')
+      .get('lastObject')
+      .get('affiliation')
+      .createFragment();
+    this.set('showCreators', true);
+  }
+
+  @action
+  toggleCreators() {
+    this.set('showCreators', !this.showCreators);
+  }
+}

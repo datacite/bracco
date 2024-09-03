@@ -1,10 +1,13 @@
-import BaseValidator from 'ember-cp-validations/validators/base';
+import classic from 'ember-classic-decorator';
 import { inject as service } from '@ember/service';
+import BaseValidator from 'ember-cp-validations/validators/base';
 import { A } from '@ember/array';
 import URI from 'urijs';
 
-const UrlDomain = BaseValidator.extend({
-  store: service(),
+@classic
+class UrlDomain extends BaseValidator {
+  @service
+  store;
 
   validate(value, options, model) {
     if (!value && options.allowBlank) {
@@ -41,6 +44,6 @@ const UrlDomain = BaseValidator.extend({
         });
     }
   }
-});
+}
 
 export default UrlDomain;

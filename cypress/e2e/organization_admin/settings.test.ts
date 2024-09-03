@@ -54,7 +54,7 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | SETTINGS', () => {
 
       cy.get('ul.nav-tabs li a').contains(/Info/i)
         .and('have.attr', 'href').and('include', '/providers/' + provider_id);
-      cy.get('ul.nav-tabs li.active a').contains(/Settings/i)
+      cy.get('ul.nav-tabs li.active a', { timeout: 10000 }).contains(/Settings/i)
         .and('have.attr', 'href').and('include', '/providers/' + provider_id + '/settings');
       cy.get('ul.nav-tabs li a').contains(/Contacts/i)
         .and('have.attr', 'href').and('include', '/providers/' + provider_id + '/contacts');

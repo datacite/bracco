@@ -1,7 +1,9 @@
+import classic from 'ember-classic-decorator';
 import Component from '@ember/component';
 
-export default Component.extend({
+@classic
+export default class CreatorShow extends Component {
   didReceiveAttrs() {
-    this._super(...arguments);
+    super.didReceiveAttrs(...arguments);
   }
-});
+}

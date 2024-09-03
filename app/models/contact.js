@@ -1,6 +1,7 @@
+import classic from 'ember-classic-decorator';
+import { computed } from '@ember/object';
 import Model, { attr, belongsTo } from '@ember-data/model';
 import { validator, buildValidations } from 'ember-cp-validations';
-import { computed } from '@ember/object';
 import _string from 'lodash/string';
 
 const Validations = buildValidations({
@@ -30,30 +31,51 @@ const Validations = buildValidations({
   ]
 });
 
-export default Model.extend(Validations, {
-  provider: belongsTo('provider', {
+@classic
+export default class Contact extends Model.extend(Validations) {
+  @belongsTo('provider', {
     async: true
-  }),
+  })
+  provider;
 
-  meta: attr(),
+  @attr()
+  meta;
 
-  email: attr('string'),
-  givenName: attr('string'),
-  familyName: attr('string'),
-  name: attr('string'),
-  roleName: attr(),
-  created: attr('date'),
-  updated: attr('date'),
-  deleted: attr('date'),
+  @attr('string')
+  email;
 
-  displayName: computed('name', 'email', function () {
+  @attr('string')
+  givenName;
+
+  @attr('string')
+  familyName;
+
+  @attr('string')
+  name;
+
+  @attr()
+  roleName;
+
+  @attr('date')
+  created;
+
+  @attr('date')
+  updated;
+
+  @attr('date')
+  deleted;
+
+  @computed('name', 'email')
+  get displayName() {
     if (this.name) {
       return this.name;
     } else {
       return this.email;
     }
-  }),
-  roleNameString: computed('roleName', function () {
+  }
+
+  @computed('roleName')
+  get roleNameString() {
     if (this.roleName) {
       return this.roleName
         .map(function (role) {
@@ -63,5 +85,5 @@ export default Model.extend(Validations, {
     } else {
       return null;
     }
-  })
-});
+  }
+}

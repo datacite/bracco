@@ -11,7 +11,7 @@
       </div>
     </div>
 
-    <BsForm @formLayout="horizontal" class="form-horizontal" @horizontalLabelGridClass="col-md-3" @model={{this.model.doi}} @onSubmit={{action "submit" this.model.doi}} as |form|>
+    <BsForm @formLayout="horizontal" class="form-horizontal" @horizontalLabelGridClass="col-md-3" @model={{this.model.doi}} @onSubmit={{action "submitAction" this.model.doi}} as |form|>
       <h3 class="member-results">Required Properties</h3>
 
       <DoiDoi @model={{this.model.doi}} @repository={{this.model.repository}} @form={{form}} />
@@ -87,7 +87,7 @@
           <button type="submit" id="doi-create" class="btn btn-sm btn-fill" disabled={{true}}>Create DOI</button>
         {{/if}}
 
-        <button class="btn btn-sm" type="button" {{action "cancel"}}>Cancel</button>
+        <button class="btn btn-sm" type="button" {{action "cancelAction"}}>Cancel</button>
       </div>
     </BsForm>
 

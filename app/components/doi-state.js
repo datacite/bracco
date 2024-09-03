@@ -1,3 +1,5 @@
+import classic from 'ember-classic-decorator';
+import { action } from '@ember/object';
 import Component from '@ember/component';
 import { A } from '@ember/array';
 
@@ -7,25 +9,26 @@ const stateList = {
   findable: ['registered', 'findable']
 };
 
-export default Component.extend({
-  draft: true,
-  registered: true,
-  findable: true,
-
-  stateList,
-  state: null,
+@classic
+export default class DoiState extends Component {
+  draft = true;
+  registered = true;
+  findable = true;
+  stateList = stateList;
+  state = null;
 
   didReceiveAttrs() {
-    this._super(...arguments);
+    super.didReceiveAttrs(...arguments);
 
     this.selectState(this.model.get('state'));
-  },
+  }
 
   selectState(state) {
     this.set('state', state);
     this.model.set('state', state);
     this.setStates(state);
-  },
+  }
+
   setStates(state) {
     if (state == '' || state == 'undetermined') {
       state = 'draft';
@@ -35,14 +38,15 @@ export default Component.extend({
     A(states).forEach((item) => {
       this.set(item, false);
     });
-  },
-
-  actions: {
-    selectState(state) {
-      this.selectState(state);
-    },
-    setStates(state) {
-      this.setStates(state);
-    }
   }
-});
+
+  @action
+  selectStateAction(state) {
+    this.selectState(state);
+  }
+
+  @action
+  setStatesAction(state) {
+    this.setStates(state);
+  }
+}

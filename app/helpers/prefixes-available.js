@@ -1,10 +1,13 @@
-import Helper from '@ember/component/helper';
+import classic from 'ember-classic-decorator';
 import { inject as service } from '@ember/service';
+import Helper from '@ember/component/helper';
 
-export default Helper.extend({
-  prefixes: service(),
+@classic
+export default class PrefixesAvailable extends Helper {
+  @service
+  prefixes;
 
   compute([provider_id]) {
     return this.prefixes.available(provider_id);
   }
-});
+}

@@ -13,7 +13,7 @@
       class="form-horizontal"
       @horizontalLabelGridClass="col-md-3"
       @model={{this.model.organization}}
-      @onSubmit={{action 'submit'}}
+      @onSubmit={{action 'doSubmit'}}
       @submitOnEnter={{true}} as |form|
     >
       <h3 class="member-results">
@@ -245,7 +245,7 @@
         @property="description"
         @helpText="Description of the organization. Please use markdown for formatting." as |el|
       >
-        <el.control id="description-field" rows=10 />
+        <el.control id="description-field" rows="10" />
       </form.element>
       <form.element
         @controlType="checkbox"

@@ -1,13 +1,22 @@
-import Route from '@ember/routing/route';
-import UnauthenticatedRouteMixin from 'ember-simple-auth/mixins/unauthenticated-route-mixin';
+import classic from 'ember-classic-decorator';
+import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
+import Route from '@ember/routing/route';
 
-export default Route.extend(UnauthenticatedRouteMixin, {
-  router: service(),
+@classic
+export default class ResetRoute extends Route {
+  @service
+  router;
 
-  actions: {
-    close() {
-      this.router.transitionTo('index');
-    }
+  @service
+  session;
+
+  beforeModel(transition) {
+    this.session.prohibitAuthentication('index');
   }
-});
+
+  @action
+  close() {
+    this.router.transitionTo('index');
+  }
+}

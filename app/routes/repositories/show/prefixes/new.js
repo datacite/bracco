@@ -1,11 +1,19 @@
+import classic from 'ember-classic-decorator';
+import { action } from '@ember/object';
+import { inject as service } from '@ember/service';
 import { hash } from 'rsvp';
 import Route from '@ember/routing/route';
-import { inject as service } from '@ember/service';
 
-export default Route.extend({
-  can: service(),
-  router: service(),
-  store: service(),
+@classic
+export default class NewRoute extends Route {
+  @service
+  can;
+
+  @service
+  router;
+
+  @service
+  store;
 
   model() {
     let repository = this.modelFor('repositories/show');
@@ -15,25 +23,26 @@ export default Route.extend({
         repository
       })
     });
-  },
+  }
 
   setupController(controller, model) {
-    this._super(controller, model);
+    super.setupController(controller, model);
 
     this.controllerFor('repositories.show.prefixes.new').send(
-      'searchPrefix',
+      'searchPrefixAction',
       null
     );
-  },
+  }
 
-  actions: {
-    queryParamsDidChange() {
-      this.refresh();
-    },
-    refreshCurrentRoute() {
-      this.refresh();
-    }
-  },
+  @action
+  queryParamsDidChange() {
+    this.refresh();
+  }
+
+  @action
+  refreshCurrentRoute() {
+    this.refresh();
+  }
 
   afterModel() {
     if (this.can.cannot('read index')) {
@@ -43,4 +52,4 @@ export default Route.extend({
       );
     }
   }
-});
+}

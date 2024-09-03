@@ -1,13 +1,21 @@
+import classic from 'ember-classic-decorator';
+import { inject as service } from '@ember/service';
 import { hash } from 'rsvp';
 import Route from '@ember/routing/route';
-import { assign } from '@ember/polyfills';
-import { inject as service } from '@ember/service';
 
-export default Route.extend({
-  can: service(),
-  features: service(),
-  router: service(),
-  store: service(),
+@classic
+export default class IndexRoute extends Route {
+  @service
+  can;
+
+  @service
+  features;
+
+  @service
+  router;
+
+  @service
+  store;
 
   model(params) {
     let providerId = null;
@@ -18,7 +26,7 @@ export default Route.extend({
     } else {
       providerId = model.get('id').toLowerCase();
     }
-    params = assign(params, {
+    params = Object.assign(params, {
       page: {
         number: params.page,
         size: params.size
@@ -42,12 +50,12 @@ export default Route.extend({
 
     return ret.then(function (ret) {
       // Workaround - going back to settings tab, contacts disappear.
-      ret.provider.contacts = ret.contacts;
+      // ret.provider.contacts = ret.contacts;
       return ret;
     });
-  },
+  }
 
-  queryParams: {
+  queryParams = {
     page: {
       refreshModel: true
     },
@@ -57,11 +65,11 @@ export default Route.extend({
     'role-name': {
       refreshModel: true
     }
-  },
+  };
 
   afterModel() {
     if (this.can.cannot('read provider', this.modelFor('providers/show'))) {
       this.router.transitionTo('index');
     }
   }
-});
+}

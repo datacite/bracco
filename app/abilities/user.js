@@ -1,11 +1,15 @@
+import classic from 'ember-classic-decorator';
 import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { Ability } from 'ember-can';
 
-export default Ability.extend({
-  currentUser: service(),
+@classic
+export default class User extends Ability {
+  @service
+  currentUser;
 
-  canUpdate: computed('currentUser.{role_id,uid}', 'model.id', function () {
+  @computed('currentUser.{role_id,uid}', 'model.id')
+  get canUpdate() {
     switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
@@ -17,8 +21,10 @@ export default Ability.extend({
       default:
         return false;
     }
-  }),
-  canRead: computed('currentUser.role_id', function () {
+  }
+
+  @computed('currentUser.role_id')
+  get canRead() {
     return true;
-  })
-});
+  }
+}

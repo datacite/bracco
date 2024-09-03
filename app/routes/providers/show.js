@@ -1,16 +1,33 @@
-import Route from '@ember/routing/route';
+import classic from 'ember-classic-decorator';
 import { inject as service } from '@ember/service';
-import { set } from '@ember/object';
+import Route from '@ember/routing/route';
+import { set, action } from '@ember/object';
 
-export default Route.extend({
-  can: service(),
-  features: service(),
-  headData: service(),
-  currentUser: service(),
-  prefixes: service(),
-  router: service(),
-  store: service(),
-  flashMessages: service(),
+@classic
+export default class ShowRoute extends Route {
+  @service
+  can;
+
+  @service
+  features;
+
+  @service
+  headData;
+
+  @service
+  currentUser;
+
+  @service
+  prefixes;
+
+  @service
+  router;
+
+  @service
+  store;
+
+  @service
+  flashMessages;
 
   model(params) {
     let self = this;
@@ -30,17 +47,14 @@ export default Route.extend({
         self.get('flashMessages').warning(reason);
         self.router.transitionTo('/');
       });
-  },
+  }
 
   afterModel() {
     if (this.get('currentUser.role_id') === 'staff_admin') {
       let self = this;
       this.prefixes.available().then(
         function (value) {
-          if (
-            self.get('flashMessages').isDestroying ||
-            self.get('flashMessages').isDestroyed
-          ) {
+          if (self.isDestroyed || self.isDestroying) {
             return;
           }
           if (value <= 0) {
@@ -54,17 +68,16 @@ export default Route.extend({
         }
       );
     }
-  },
+  }
 
   redirect(model) {
     if (this.can.cannot('read provider', model)) {
       this.router.transitionTo('index');
     }
-  },
-
-  actions: {
-    queryParamsDidChange() {
-      this.refresh();
-    }
   }
-});
+
+  @action
+  queryParamsDidChange() {
+    this.refresh();
+  }
+}

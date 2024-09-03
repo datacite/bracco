@@ -1,3 +1,5 @@
+import classic from 'ember-classic-decorator';
+import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 import Component from '@ember/component';
 import { validator, buildValidations } from 'ember-cp-validations';
@@ -21,13 +23,19 @@ const Validations = buildValidations({
   ]
 });
 
-export default Component.extend(Validations, {
-  store: service(),
-  prefixes: service(),
-  router: service(),
+@classic
+export default class PrefixNew extends Component.extend(Validations) {
+  @service
+  store;
 
-  firstPrefix: '',
-  lastPrefix: '',
+  @service
+  prefixes;
+
+  @service
+  router;
+
+  firstPrefix = '';
+  lastPrefix = '';
 
   addPrefixes() {
     let first = A(this.firstPrefix.split('.')).get('lastObject');
@@ -39,22 +47,29 @@ export default Component.extend(Validations, {
 
       first++;
     }
-  },
-
-  actions: {
-    new() {},
-    submitFirstPrefix(firstPrefix) {
-      this.set('firstPrefix', firstPrefix);
-    },
-    submitLastPrefix(lastPrefix) {
-      this.set('lastPrefix', lastPrefix);
-    },
-    submit() {
-      this.addPrefixes();
-      this.router.transitionTo('prefixes');
-    },
-    cancel() {
-      this.router.transitionTo('prefixes');
-    }
   }
-});
+
+  @action
+  new() {}
+
+  @action
+  submitFirstPrefixAction(firstPrefix) {
+    this.set('firstPrefix', firstPrefix);
+  }
+
+  @action
+  submitLastPrefixAction(lastPrefix) {
+    this.set('lastPrefix', lastPrefix);
+  }
+
+  @action
+  submitAction() {
+    this.addPrefixes();
+    this.router.transitionTo('prefixes');
+  }
+
+  @action
+  cancelAction() {
+    this.router.transitionTo('prefixes');
+  }
+}

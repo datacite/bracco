@@ -1,10 +1,14 @@
+import classic from 'ember-classic-decorator';
+import { action } from '@ember/object';
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 
-export default Controller.extend({
-  flashMessages: service(),
+@classic
+export default class ModifyController extends Controller {
+  @service
+  flashMessages;
 
-  queryParams: [
+  queryParams = [
     'query',
     'year',
     'provider-id',
@@ -16,16 +20,16 @@ export default Controller.extend({
     'sort',
     'page',
     'size'
-  ],
-  query: null,
-  year: null,
-  'provider-id': null,
-  'client-type': null,
-  'repository-type': null,
-  certificate: null,
-  software: null,
-  'include-deleted': null,
-  sort: null,
-  page: 1,
-  size: 25
-});
+  ];
+  query = null;
+  year = null;
+  'provider-id' = null;
+  'client-type' = null;
+  'repository-type' = null;
+  certificate = null;
+  software = null;
+  'include-deleted' = null;
+  sort = null;
+  page = 1;
+  size = 25;
+};

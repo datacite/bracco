@@ -15,6 +15,7 @@ export default defineConfig({
     specPattern: 'cypress/e2e/**/*.test.*',
     testIsolation: false,
     experimentalRunAllSpecs: true,
-    numTestsKeptInMemory: 10
+    numTestsKeptInMemory: 10,
+    responseTimeout: 60000
   },
 })

@@ -1,8 +1,11 @@
+import classic from 'ember-classic-decorator';
 import { inject as service } from '@ember/service';
 import BaseValidator from 'ember-cp-validations/validators/base';
 
-const UniqueProviderId = BaseValidator.extend({
-  store: service(),
+@classic
+class UniqueProviderId extends BaseValidator {
+  @service
+  store;
 
   validate(value, options, model) {
     if (value.length < 2 || !model.get('isNew')) {
@@ -29,7 +32,7 @@ const UniqueProviderId = BaseValidator.extend({
         });
     }
   }
-});
+}
 
 UniqueProviderId.reopenClass({
   getDependentsFor() {

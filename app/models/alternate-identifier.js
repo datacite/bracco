@@ -1,7 +1,8 @@
+import classic from 'ember-classic-decorator';
+import { computed } from '@ember/object';
 import { attr } from '@ember-data/model';
 import Fragment from 'ember-data-model-fragments/fragment';
 import { validator, buildValidations } from 'ember-cp-validations';
-import { computed } from '@ember/object';
 import { isBlank } from '@ember/utils';
 
 const Validations = buildValidations({
@@ -16,7 +17,11 @@ const Validations = buildValidations({
   ]
 });
 
-export default Fragment.extend(Validations, {
-  alternateIdentifier: attr('string', { defaultValue: null }),
-  alternateIdentifierType: attr('string', { defaultValue: null })
-});
+@classic
+export default class AlternateIdentifier extends Fragment.extend(Validations) {
+  @attr('string', { defaultValue: null })
+  alternateIdentifier;
+
+  @attr('string', { defaultValue: null })
+  alternateIdentifierType;
+}

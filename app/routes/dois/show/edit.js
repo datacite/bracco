@@ -1,12 +1,21 @@
-import Route from '@ember/routing/route';
+import classic from 'ember-classic-decorator';
 import { inject as service } from '@ember/service';
+import Route from '@ember/routing/route';
 import { isBlank } from '@ember/utils';
 
-export default Route.extend({
-  can: service(),
-  flashMessages: service(),
-  router: service(),
-  store: service(),
+@classic
+export default class EditRoute extends Route {
+  @service
+  can;
+
+  @service
+  flashMessages;
+
+  @service
+  router;
+
+  @service
+  store;
 
   model() {
     let self = this;
@@ -42,7 +51,7 @@ export default Route.extend({
         self.get('flashMessages').warning(reason);
         self.router.transitionTo('/');
       });
-  },
+  }
 
   afterModel() {
     if (this.can.cannot('delete doi', this.modelFor('dois/show'))) {
@@ -51,4 +60,4 @@ export default Route.extend({
       this.modelFor('dois/show').set('mode', 'edit');
     }
   }
-});
+}

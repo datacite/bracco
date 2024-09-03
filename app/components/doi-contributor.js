@@ -1,7 +1,8 @@
+import classic from 'ember-classic-decorator';
+import { action, computed } from '@ember/object';
 import PersonBaseComponent from './person-base-component';
 import { pascalCase } from 'pascal-case';
 import humanizeString from 'humanize-string';
-import { computed } from '@ember/object';
 import { isBlank } from '@ember/utils';
 
 const contributorTypes = [
@@ -53,13 +54,16 @@ const personalContributorTypes = [
   'WorkPackageLeader'
 ];
 
-export default PersonBaseComponent.extend({
-  humanContributorTypes,
-  humanContributorType: computed('fragment.contributorType', function () {
+@classic
+export default class DoiContributor extends PersonBaseComponent {
+  humanContributorTypes = humanContributorTypes;
+
+  @computed('fragment.contributorType')
+  get humanContributorType() {
     return isBlank(this.get('fragment.contributorType'))
       ? null
       : humanizeString(this.get('fragment.contributorType'));
-  }),
+  }
 
   selectContributorType(contributorType) {
     if (contributorType) {
@@ -78,14 +82,15 @@ export default PersonBaseComponent.extend({
       this.fragment.set('contributorType', null);
     }
     this.set('humanContributorTypes', humanContributorTypes);
-  },
-
-  actions: {
-    deleteContributor() {
-      this.model.get('contributors').removeObject(this.fragment);
-    },
-    selectContributorType(contributorType) {
-      this.selectContributorType(contributorType);
-    }
   }
-});
+
+  @action
+  deleteContributorAction() {
+    this.model.get('contributors').removeObject(this.fragment);
+  }
+
+  @action
+  selectContributorTypeAction(contributorType) {
+    this.selectContributorType(contributorType);
+  }
+}

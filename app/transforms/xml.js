@@ -1,6 +1,8 @@
+import classic from 'ember-classic-decorator';
 import Transform from '@ember-data/serializer/transform';
 
-export default Transform.extend({
+@classic
+export default class Xml extends Transform {
   deserialize(serialized) {
     if (!serialized || serialized === 'xmlversiog==') {
       return null;
@@ -8,7 +10,7 @@ export default Transform.extend({
       let xml = this.b64DecodeUnicode(serialized);
       return ['<hsh></hsh>', 'ée'].includes(xml) ? '' : xml;
     }
-  },
+  }
 
   serialize(deserialized) {
     if (!deserialized) {
@@ -16,7 +18,8 @@ export default Transform.extend({
     } else {
       return this.b64EncodeUnicode(deserialized);
     }
-  },
+  }
+
   b64EncodeUnicode(str) {
     // first we use encodeURIComponent to get percent-encoded UTF-8,
     // then we convert the percent encodings into raw bytes which
@@ -29,7 +32,8 @@ export default Transform.extend({
         }
       )
     );
-  },
+  }
+
   b64DecodeUnicode(str) {
     try {
       // Going backwards: from bytestream, to percent-encoding, to original string.
@@ -45,4 +49,4 @@ export default Transform.extend({
       return null;
     }
   }
-});
+}

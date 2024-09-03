@@ -1,16 +1,19 @@
+import classic from 'ember-classic-decorator';
+import { action } from '@ember/object';
 import Component from '@ember/component';
 import { isBlank, typeOf } from '@ember/utils';
 
-export default Component.extend({
-  isSpdxId: false,
+@classic
+export default class DoiRights extends Component {
+  isSpdxId = false;
 
   init(...args) {
-    this._super(...args);
+    super.init(...args);
 
     this.selected = this.selected || [];
     this.set('spdxLicenseListComplete', this.spdx.spdxList);
     this.set('spdxLicenseList', this.spdx.spdxList);
-  },
+  }
 
   updateRights(rights) {
     switch (true) {
@@ -30,38 +33,45 @@ export default Component.extend({
         this.set('isSpdxId', true);
         break;
     }
-  },
+  }
 
-  actions: {
-    createOnEnter(select, e) {
-      if (
-        e.keyCode === 13 &&
-        select.isOpen &&
-        !select.highlighted &&
-        !isBlank(select.searchText)
-      ) {
-        if (!this.selected.includes(select.searchText)) {
-          this.spdxLicenseList.push(select.searchText);
-          select.actions.choose(select.searchText);
-          this.updateRights(select.searchText);
-          this.set('spdxLicenseList', this.spdxLicenseListComplete);
-        }
+  @action
+  createOnEnter(select, e) {
+    if (
+      e.keyCode === 13 &&
+      select.isOpen &&
+      !select.highlighted &&
+      !isBlank(select.searchText)
+    ) {
+      if (!this.selected.includes(select.searchText)) {
+        this.spdxLicenseList.push(select.searchText);
+        select.actions.choose(select.searchText);
+        this.updateRights(select.searchText);
+        this.set('spdxLicenseList', this.spdxLicenseListComplete);
       }
-    },
-    selectRights(value) {
-      this.updateRights(value);
-    },
-    updateRightsUri(value) {
-      this.fragment.set('rightsUri', value);
-    },
-    deleteRights() {
-      this.model.get('rightsList').removeObject(this.fragment);
-    },
-    searchRights(query) {
-      let rightsFound = this.spdxLicenseListComplete.filter(function (rights) {
-        return rights.name.toLowerCase().startsWith(query.toLowerCase());
-      });
-      this.set('spdxLicenseList', rightsFound);
     }
   }
-});
+
+  @action
+  selectRights(value) {
+    this.updateRights(value);
+  }
+
+  @action
+  updateRightsUri(value) {
+    this.fragment.set('rightsUri', value);
+  }
+
+  @action
+  deleteRights() {
+    this.model.get('rightsList').removeObject(this.fragment);
+  }
+
+  @action
+  searchRights(query) {
+    let rightsFound = this.spdxLicenseListComplete.filter(function (rights) {
+      return rights.name.toLowerCase().startsWith(query.toLowerCase());
+    });
+    this.set('spdxLicenseList', rightsFound);
+  }
+}

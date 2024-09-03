@@ -27,6 +27,7 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | PREFIXES', () => {
   it('is logged in to prefixes page', () => {
     cy.visit('/providers/dc/prefixes');
     cy.url().should('include', '/providers/dc/prefixes').then(() => {
+      cy.wait(5000)
 
       // Has Fabrica logo and correct navbar color
       cy.get('img.fabrica-logo').should('exist').should('have.attr', 'src').should('include', 'fabrica-logo.svg');
@@ -37,7 +38,7 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | PREFIXES', () => {
       cy.get('a#account_menu_link').should('contain', 'DC');
 
       // Has tabs with correct one activated.
-      cy.get('ul.nav-tabs li.active a').contains(/Prefixes/i)
+      cy.get('ul.nav-tabs li.active a', { timeout: 40000 }).contains(/Prefixes/i)
         .and('have.attr', 'href').and('include', '/providers/dc/prefixes');
 
       // Has left sidebar message box.

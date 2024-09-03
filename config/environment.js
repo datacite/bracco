@@ -113,8 +113,9 @@ module.exports = function (environment) {
     modulePrefix: 'bracco',
     environment,
     rootURL: '/',
-    locationType: process.env.EMBER_CLI_ELECTRON ? 'hash' : 'auto',
+    locationType: process.env.EMBER_CLI_ELECTRON ? 'hash' : 'history',
     EmberENV: {
+      EXTEND_PROTOTYPES: false,
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
         // e.g. EMBER_NATIVE_DECORATOR_SUPPORT: true

@@ -1,17 +1,19 @@
+import classic from 'ember-classic-decorator';
+import { tagName } from '@ember-decorators/component';
 import Component from '@ember/component';
 
-export default Component.extend({
-  tagName: 'div',
-
+@classic
+@tagName('div')
+export default class DoiCitationBody extends Component {
   didReceiveAttrs() {
-    this._super(...arguments);
-  },
+    super.didReceiveAttrs(...arguments);
+  }
 
   didRender() {
-    this._super(...arguments);
+    super.didRender(...arguments);
 
     window.MathJax.typesetClear([this.element]);
     this.element.innerHTML = this.text;
     window.MathJax.typeset([this.element]);
   }
-});
+}

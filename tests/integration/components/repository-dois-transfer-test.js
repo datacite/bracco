@@ -1,8 +1,8 @@
+import { hbs } from 'ember-cli-htmlbars';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { setupFactoryGuy, make } from 'ember-data-factory-guy';
 import { render } from '@ember/test-helpers';
-import hbs from 'htmlbars-inline-precompile';
 
 module('Integration | Component | repository dois transfer', function (hooks) {
   setupRenderingTest(hooks);
@@ -21,9 +21,9 @@ module('Integration | Component | repository dois transfer', function (hooks) {
 
     // Template block usage:
     await render(hbs`
-      {{#repository-dois-transfer model=this.model}}
+      <RepositoryDoisTransfer @model={{this.model}}>
         
-      {{/repository-dois-transfer}}
+      </RepositoryDoisTransfer>
     `);
 
     assert

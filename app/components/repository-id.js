@@ -1,13 +1,16 @@
+import classic from 'ember-classic-decorator';
+import { action } from '@ember/object';
 import Component from '@ember/component';
 import fetch from 'fetch';
 import ENV from 'bracco/config/environment';
 
-export default Component.extend({
+@classic
+export default class RepositoryId extends Component {
   init() {
-    this._super(...arguments);
+    super.init(...arguments);
 
     this.generate();
-  },
+  }
 
   generate() {
     let self = this;
@@ -31,17 +34,20 @@ export default Component.extend({
       .catch(function (error) {
         console.debug(error);
       });
-  },
-
-  actions: {
-    generate() {
-      this.generate();
-    },
-    refresh() {
-      this.generate();
-    },
-    clear() {
-      this.model.set('symbol', null);
-    }
   }
-});
+
+  @action
+  generateAction() {
+    this.generate();
+  }
+
+  @action
+  refreshAction() {
+    this.generate();
+  }
+
+  @action
+  clearAction() {
+    this.model.set('symbol', null);
+  }
+}

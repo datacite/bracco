@@ -1,11 +1,19 @@
-import Route from '@ember/routing/route';
+import classic from 'ember-classic-decorator';
+import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
+import Route from '@ember/routing/route';
 import { A } from '@ember/array';
 
-export default Route.extend({
-  can: service(),
-  router: service(),
-  store: service(),
+@classic
+export default class ShowRoute extends Route {
+  @service
+  can;
+
+  @service
+  router;
+
+  @service
+  store;
 
   model(params) {
     let self = this;
@@ -23,17 +31,16 @@ export default Route.extend({
         self.get('flashMessages').warning(reason);
         self.router.transitionTo('/');
       });
-  },
+  }
 
   afterModel(model) {
     if (this.can.cannot('read prefix', model)) {
       this.router.transitionTo('index');
     }
-  },
-
-  actions: {
-    queryParamsDidChange() {
-      this.refresh();
-    }
   }
-});
+
+  @action
+  queryParamsDidChange() {
+    this.refresh();
+  }
+}

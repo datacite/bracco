@@ -1,0 +1,21 @@
+<div class="panel panel-transparent">
+  <div class="panel-body">
+    <div class="col-md-9 col-md-offset-3 form-help-header">
+      <h3 class="help-header">Transfer DOI</h3>
+    </div>
+
+    <BsForm @formLayout="horizontal" class="form-horizontal" @horizontalLabelGridClass="col-md-3" @model={{this.model}} @on={{action "submitAction" this.model}} as |form|>
+      <form.element @controlType="hidden" class="form-group" @property="doi" />
+      <form.element @controlType="power-select" class="form-group" @property="repository" @label="Repository" @helpText="Transfer the DOI to this repository." @optionLabelPath="name" @options={{this.repositories}} @destination={{this.repository.id}} as |el|>
+        <el.control @onChange={{action "selectRepositoryAction"}} @search={{action "searchRepositoryAction"}} @searchField="name" @searchPlaceholder="Type to search..." @searchEnabled={{true}} as |item|>
+          {{item.name}}
+        </el.control>
+      </form.element>
+
+      <div class="col-md-9 col-md-offset-3">
+        <button type="submit" disabled={{this.isDisabled}} {{action "submitAction" this.model}} class="btn btn-sm btn-fill">Transfer DOI</button>
+        <button class="btn btn-sm" type="button" {{action "cancelAction" this.model}}>Cancel</button>
+      </div>
+    </BsForm>
+  </div>
+</div>

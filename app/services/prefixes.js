@@ -1,12 +1,15 @@
+import classic from 'ember-classic-decorator';
 import Service, { inject as service } from '@ember/service';
 import ENV from 'bracco/config/environment';
 import fetch from 'fetch';
 
-export default Service.extend({
-  store: service(),
+@classic
+export default class PrefixesService extends Service {
+  @service
+  store;
 
   init() {
-    this._super(...arguments);
+    super.init(...arguments);
     this.min = ENV.MIN_PREFIXES_AVAILABLE;
     this.msg_zero =
       'There are 0 prefixes available. Request new prefixes from CNRI.';
@@ -14,7 +17,7 @@ export default Service.extend({
       'There are fewer than ' +
       this.min +
       ' prefixes available. Contact CNRI and request more prefixes.';
-  },
+  }
 
   get_n_available() {
     let promise = new Promise((resolve, reject) => {
@@ -44,7 +47,7 @@ export default Service.extend({
     });
 
     return promise;
-  },
+  }
 
   get_n_available_pp(provider_id = null) {
     let promise = new Promise((resolve, reject) => {
@@ -77,7 +80,7 @@ export default Service.extend({
     });
 
     return promise;
-  },
+  }
 
   prefix_list(n = 1, provider_id = null, query = '') {
     let tot = n < 0 ? 0 : n;
@@ -117,7 +120,7 @@ export default Service.extend({
     });
 
     return promise;
-  },
+  }
 
   //// These return a promise.
 
@@ -131,7 +134,7 @@ export default Service.extend({
     let n = await this.get_n_available();
 
     return m + n;
-  },
+  }
 
   // Returns total available: provider prefixes
   async available_pp(provider_id = null) {
@@ -141,7 +144,7 @@ export default Service.extend({
     }
 
     return m;
-  },
+  }
 
   // Returns a mixed array of prefixes including available pool prefixes, and
   // available provider_prefixes (if a provider is given).
@@ -150,4 +153,4 @@ export default Service.extend({
 
     return prefixes;
   }
-});
+}

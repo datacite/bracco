@@ -1,7 +1,9 @@
+import classic from 'ember-classic-decorator';
 /* eslint-disable no-useless-escape */
 import BaseValidator from 'ember-cp-validations/validators/base';
 
-const ContributorType = BaseValidator.extend({
+@classic
+class ContributorType extends BaseValidator {
   validate(value, options, model) {
     const organizationalContributorTypes = [
       'HostingInstitution',
@@ -64,6 +66,6 @@ const ContributorType = BaseValidator.extend({
         return 'The value ' + value + ' is not a valid type';
     }
   }
-});
+}
 
 export default ContributorType;

@@ -1,6 +1,9 @@
-import Controller from '@ember/controller';
+import classic from 'ember-classic-decorator';
 import { inject as service } from '@ember/service';
+import Controller from '@ember/controller';
 
-export default Controller.extend({
-  features: service()
-});
+@classic
+export default class PrefixesController extends Controller {
+  @service
+  features;
+}

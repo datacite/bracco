@@ -1,12 +1,18 @@
-import { hash } from 'rsvp';
-import { assign } from '@ember/polyfills';
-import Route from '@ember/routing/route';
+import classic from 'ember-classic-decorator';
 import { inject as service } from '@ember/service';
+import { hash } from 'rsvp';
+import Route from '@ember/routing/route';
 
-export default Route.extend({
-  can: service(),
-  router: service(),
-  store: service(),
+@classic
+export default class DoisRoute extends Route {
+  @service
+  can;
+
+  @service
+  router;
+
+  @service
+  store;
 
   model(params) {
     let providerId = null;
@@ -17,7 +23,7 @@ export default Route.extend({
     } else {
       providerId = model.get('id');
     }
-    params = assign(params, {
+    params = Object.assign(params, {
       page: {
         number: params.page,
         size: params.size
@@ -38,20 +44,20 @@ export default Route.extend({
           return null;
         })
     });
-  },
+  }
 
-  queryParams: {
+  queryParams = {
     page: {
       refreshModel: true
     },
     size: {
       refreshModel: true
     }
-  },
+  };
 
   afterModel() {
     if (this.can.cannot('read provider', this.modelFor('providers/show'))) {
       this.router.transitionTo('index');
     }
   }
-});
+}

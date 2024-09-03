@@ -8,6 +8,14 @@ module.exports = function (defaults) {
   const pkg = require('./package.json');
 
   let app = new EmberApp(defaults, {
+    // Use the polyfill for 'TypeError: _crypto.randomUUID is not a function'
+    '@embroider/macros': {
+      setConfig: {
+        '@ember-data/store': {
+          polyfillUUID: true
+        },
+      },
+    },
     minifyCSS: {
       options: { processImport: true }
     },
@@ -19,11 +27,18 @@ module.exports = function (defaults) {
       extensions: ['js']
     },
     babel: {
+      // ember-concurrency plugins for ember-power-select upgrade
+      plugins: [
+        // ... any other plugins
+        require.resolve("ember-concurrency/async-arrow-task-transform"),
+  
+        // NOTE: put any code coverage plugins last, after the transform.
+      ],
       sourceMaps: 'inline'
     },
     'ember-bootstrap': {
+      insertEmberWormholeElementToDom: false,
       importBootstrapCSS: false,
-      importBootstrapFont: false,
       bootstrapVersion: 5
     },
     // 'ember-cli-terser': {
@@ -53,11 +68,14 @@ module.exports = function (defaults) {
     autoImport: {
       forbidEval: true,
       webpack: {
-        plugins: [new NodePolyfillPlugin()],
+        plugins: [
+          new NodePolyfillPlugin()
+        ],
         node: {
           global: true
           // fs: 'empty'
-        }
+        },
+        devtool: 'source-map'
         /*
         resolve: {
           fallback: {

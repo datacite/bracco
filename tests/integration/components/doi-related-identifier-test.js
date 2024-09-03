@@ -1,7 +1,7 @@
+import { hbs } from 'ember-cli-htmlbars';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
-import hbs from 'htmlbars-inline-precompile';
 // import { selectChoose } from 'ember-power-select/test-support';
 import { setupFactoryGuy, make } from 'ember-data-factory-guy';
 

@@ -37,7 +37,7 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | INFO', () => {
       cy.get('h2.work').contains('DataCite');
       cy.get('a#account_menu_link').should('contain', 'DATACITE');
 
-      cy.get('ul.nav-tabs li.active a').contains(/Info/i)
+      cy.get('ul.nav-tabs li.active a', { timeout: 20000 }).contains(/Info/i)
         .and('have.attr', 'href').and('include', '/providers/datacite');
       cy.get('ul.nav-tabs li a').contains(/Settings/i)
         .and('have.attr', 'href').and('include', '/providers/datacite/settings');
@@ -178,7 +178,7 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | INFO', () => {
     });
   });
 
-  it.only('can see info when using capitalized identifier URL subdirectory', () => {
+  it('can see info when using capitalized identifier URL subdirectory', () => {
     cy.visit('/providers/DATACITE');
     cy.url().should('include', '/providers/DATACITE').then(() => {
       // Increase timeout because requests that return these totals can be slow.

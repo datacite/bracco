@@ -1,7 +1,7 @@
+import { hbs } from 'ember-cli-htmlbars';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
-import hbs from 'htmlbars-inline-precompile';
 
 module('Integration | Component | index show', function (hooks) {
   setupRenderingTest(hooks);
@@ -13,9 +13,9 @@ module('Integration | Component | index show', function (hooks) {
 
     // Template block usage:
     await render(hbs`
-      {{#index-show}}
+      <IndexShow>
         
-      {{/index-show}}
+      </IndexShow>
     `);
 
     assert.dom('*').hasText('');

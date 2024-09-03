@@ -1,5 +1,6 @@
+import classic from 'ember-classic-decorator';
+import { action, computed } from '@ember/object';
 import Component from '@ember/component';
-import { computed } from '@ember/object';
 import { pascalCase } from 'pascal-case';
 import humanizeString from 'humanize-string';
 import { isBlank } from '@ember/utils';
@@ -32,23 +33,29 @@ const humanContributorTypes = contributorTypes.map((type) =>
   humanizeString(type)
 );
 
-export default Component.extend({
-  humanContributorTypes,
-  humanContributorType: computed('fragment.contributorType', function () {
+@classic
+export default class DoiRelatedItemContributor extends Component {
+  humanContributorTypes = humanContributorTypes;
+
+  @computed('fragment.contributorType')
+  get humanContributorType() {
     return isBlank(this.get('fragment.contributorType'))
       ? null
       : humanizeString(this.get('fragment.contributorType'));
-  }),
-  showPersonal: computed('fragment.nameType', function () {
+  }
+
+  @computed('fragment.nameType')
+  get showPersonal() {
     return this.get('fragment.nameType') !== 'Organizational';
-  }),
-  isReadonlyNameType: false,
-  isReadonly: false,
-  isReadonlyNameParts: false,
+  }
+
+  isReadonlyNameType = false;
+  isReadonly = false;
+  isReadonlyNameParts = false;
 
   didReceiveAttrs() {
-    this._super(...arguments);
-  },
+    super.didReceiveAttrs(...arguments);
+  }
 
   joinNameParts(options = {}) {
     if (options.nameIdentifierScheme === 'ORCID') {
@@ -102,7 +109,7 @@ export default Component.extend({
         this.set('isReadonly', false);
         return true;
     }
-  },
+  }
 
   selectContributorType(contributorType) {
     if (contributorType) {
@@ -113,17 +120,20 @@ export default Component.extend({
       this.fragment.set('contributorType', null);
     }
     this.set('humanContributorTypes', humanContributorTypes);
-  },
-
-  actions: {
-    updateName(value) {
-      this.fragment.set('name', value);
-    },
-    selectContributorType(contributorType) {
-      this.selectContributorType(contributorType);
-    },
-    deleteRelatedItemContributor() {
-      this.creator.get('contributors').removeObject(this.fragment);
-    }
   }
-});
+
+  @action
+  updateName(value) {
+    this.fragment.set('name', value);
+  }
+
+  @action
+  selectContributorType(contributorType) {
+    this.selectContributorType(contributorType);
+  }
+
+  @action
+  deleteRelatedItemContributor() {
+    this.creator.get('contributors').removeObject(this.fragment);
+  }
+}

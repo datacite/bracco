@@ -33,8 +33,6 @@ jobs:
           echo "### CURRENT BRANCH NAME:  ${{ github.ref_name }}."
 
       - name: Build
-        env:
-          NODE_OPTIONS: "--openssl-legacy-provider"
         run: |
           yarn --prefer-offline
           ./node_modules/.bin/ember build --output-path="test_build" --environment=development

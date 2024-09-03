@@ -1,5 +1,7 @@
-import Component from '@ember/component';
+import classic from 'ember-classic-decorator';
+import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
+import Component from '@ember/component';
 import { isBlank } from '@ember/utils';
 import mime from 'mime/lite';
 
@@ -12,46 +14,54 @@ function getMatchingFormats(input) {
   return matchingFormats;
 }
 
-export default Component.extend({
-  store: service(),
+@classic
+export default class DoiFormat extends Component {
+  @service
+  store;
 
   init(...args) {
-    this._super(...args);
+    super.init(...args);
     this.formats = FORMATS;
 
     this.selected = this.selected || [];
-  },
+  }
+
   didReceiveAttrs() {
-    this._super(...arguments);
-  },
+    super.didReceiveAttrs(...arguments);
+  }
 
-  actions: {
-    createOnEnter(select, e) {
-      if (
-        e.keyCode === 13 &&
-        select.isOpen &&
-        !select.highlighted &&
-        !isBlank(select.searchText)
-      ) {
-        if (!this.selected.includes(select.searchText)) {
-          this.formats.push(select.searchText);
-          select.actions.choose(select.searchText);
+  @action
+  createOnEnter(select, e) {
+    if (
+      e.keyCode === 13 &&
+      select.isOpen &&
+      !select.highlighted &&
+      !isBlank(select.searchText)
+    ) {
+      if (!this.selected.includes(select.searchText)) {
+        this.formats.push(select.searchText);
+        select.actions.choose(select.searchText);
 
-          this.model.get('formats').splice(this.index, 1, select.searchText);
-          this.set('formats', FORMATS);
-        }
+        this.model.get('formats').splice(this.index, 1, select.searchText);
+        this.set('formats', FORMATS);
       }
-    },
-    searchFormat(query) {
-      this.set('formats', getMatchingFormats(query));
-    },
-    selectFormat(formatExtension) {
-      this.model.get('formats').splice(this.index, 1, formatExtension);
-      this.model.set('formats', Array.from(this.model.get('formats')));
-    },
-    deleteFormat() {
-      this.model.get('formats').splice(this.index, 1);
-      this.model.set('formats', Array.from(this.model.get('formats')));
     }
   }
-});
+
+  @action
+  searchFormat(query) {
+    this.set('formats', getMatchingFormats(query));
+  }
+
+  @action
+  selectFormat(formatExtension) {
+    this.model.get('formats').splice(this.index, 1, formatExtension);
+    this.model.set('formats', Array.from(this.model.get('formats')));
+  }
+
+  @action
+  deleteFormat() {
+    this.model.get('formats').splice(this.index, 1);
+    this.model.set('formats', Array.from(this.model.get('formats')));
+  }
+}

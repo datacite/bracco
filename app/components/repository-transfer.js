@@ -1,30 +1,43 @@
-import Component from '@ember/component';
+import classic from 'ember-classic-decorator';
+import { action } from '@ember/object';
+import { classNames, tagName } from '@ember-decorators/component';
 import { inject as service } from '@ember/service';
+import Component from '@ember/component';
 
-export default Component.extend({
-  currentUser: service(),
-  store: service(),
-  flashMessages: service(),
-  intl: service(),
-  router: service(),
+@classic
+@tagName('div')
+@classNames('row')
+export default class RepositoryTransfer extends Component {
+  @service
+  currentUser;
 
-  tagName: 'div',
-  classNames: ['row'],
-  provider: null,
-  repository: null,
-  isDisabled: true,
+  @service
+  store;
+
+  @service
+  flashMessages;
+
+  @service
+  intl;
+
+  @service
+  router;
+
+  provider = null;
+  repository = null;
+  isDisabled = true;
 
   init(...args) {
-    this._super(...args);
+    super.init(...args);
 
     this.providers = this.providers || [];
-  },
+  }
 
   didReceiveAttrs() {
-    this._super(...arguments);
+    super.didReceiveAttrs(...arguments);
     this.model.set('mode', 'transfer');
     this.searchProvider(null);
-  },
+  }
 
   searchProvider(query) {
     let self = this;
@@ -60,38 +73,44 @@ export default Component.extend({
           self.set('providers', []);
         });
     }
-  },
+  }
+
   selectProvider(provider) {
     this.set('provider', provider);
     this.set('isDisabled', false);
     this.model.set('targetId', provider.uid);
-  },
-
-  actions: {
-    searchProvider(query) {
-      this.searchProvider(query);
-    },
-    selectProvider(provider) {
-      this.selectProvider(provider);
-    },
-    submit() {
-      this.model.save();
-      let count = this.model.get('meta.doiCount');
-      this.flashMessages.success(
-        'DOI transfer for ' +
-          this.intl.formatNumber(count) +
-          ' DOIs started, the transfer should take about ' +
-          this.intl.formatNumber(Math.ceil(count / 5000) + 1) +
-          ' minutes to complete.',
-        {
-          timeout: 5000,
-          sticky: true
-        }
-      );
-      this.router.transitionTo('repositories.show', this.model);
-    },
-    cancel() {
-      this.router.transitionTo('repositories.show', this.model);
-    }
   }
-});
+
+  @action
+  searchProviderAction(query) {
+    this.searchProvider(query);
+  }
+
+  @action
+  selectProviderAction(provider) {
+    this.selectProvider(provider);
+  }
+
+  @action
+  submitAction() {
+    this.model.save();
+    let count = this.model.get('meta.doiCount');
+    this.flashMessages.success(
+      'DOI transfer for ' +
+        this.intl.formatNumber(count) +
+        ' DOIs started, the transfer should take about ' +
+        this.intl.formatNumber(Math.ceil(count / 5000) + 1) +
+        ' minutes to complete.',
+      {
+        timeout: 5000,
+        sticky: true
+      }
+    );
+    this.router.transitionTo('repositories.show', this.model);
+  }
+
+  @action
+  canceAction() {
+    this.router.transitionTo('repositories.show', this.model);
+  }
+}

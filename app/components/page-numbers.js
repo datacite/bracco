@@ -1,13 +1,19 @@
+import classic from 'ember-classic-decorator';
+import { computed } from '@ember/object';
 import { alias } from '@ember/object/computed';
 import Component from '@ember/component';
-import { computed } from '@ember/object';
 import { A } from '@ember/array';
 
-export default Component.extend({
-  currentPage: alias('model.meta.page'),
-  totalPages: alias('model.meta.totalPages'),
+@classic
+export default class PageNumbers extends Component {
+  @alias('model.meta.page')
+  currentPage;
 
-  pageItems: computed('currentPage', 'totalPages', function () {
+  @alias('model.meta.totalPages')
+  totalPages;
+
+  @computed('currentPage', 'totalPages')
+  get pageItems() {
     const page = Number(this.currentPage || 1);
     const totalPages = Number(this.totalPages || 1);
 
@@ -21,9 +27,10 @@ export default Component.extend({
       }
       return sum;
     }, []);
-  }),
+  }
 
-  nextPage: computed('currentPage', 'totalPages', function () {
+  @computed('currentPage', 'totalPages')
+  get nextPage() {
     const page = Number(this.currentPage || 1);
     const totalPages = Number(this.totalPages || 1);
     if (page < totalPages) {
@@ -31,14 +38,15 @@ export default Component.extend({
     } else {
       return null;
     }
-  }),
+  }
 
-  previousPage: computed('currentPage', function () {
+  @computed('currentPage')
+  get previousPage() {
     const page = Number(this.currentPage || 1);
     if (page > 1) {
       return page - 1;
     } else {
       return null;
     }
-  })
-});
+  }
+}

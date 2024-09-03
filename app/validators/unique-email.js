@@ -1,8 +1,11 @@
+import classic from 'ember-classic-decorator';
 import { inject as service } from '@ember/service';
 import BaseValidator from 'ember-cp-validations/validators/base';
 
-const UniqueEmail = BaseValidator.extend({
-  store: service(),
+@classic
+class UniqueEmail extends BaseValidator {
+  @service
+  store;
 
   validate(value, options, model) {
     let providerId = model.get('provider.id');
@@ -36,7 +39,7 @@ const UniqueEmail = BaseValidator.extend({
         );
       });
   }
-});
+}
 
 UniqueEmail.reopenClass({
   getDependentsFor() {

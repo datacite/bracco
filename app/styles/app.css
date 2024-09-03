@@ -1,3 +1,10 @@
 @import 'header.css';
 @import 'local.css';
+/* 
+  Assets such as doi.css, consent.js, or header.png can be picked up either locally (https://localhost:4200/assets)
+  or from the usual places (assets.datacite.org/assets.stage.datacite.org) depending on the CDN env variable setting.  
+  Note that logos are always picked up from (assets.test.datacite.org or assets.datacite.org).
+*/
+/*
 @import 'doi.css';
+*/

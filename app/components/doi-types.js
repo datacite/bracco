@@ -1,3 +1,5 @@
+import classic from 'ember-classic-decorator';
+import { action } from '@ember/object';
 import Component from '@ember/component';
 import { pascalCase } from 'pascal-case';
 
@@ -34,20 +36,20 @@ const resourceTypeGeneralList = [
   'Other'
 ];
 
-export default Component.extend({
-  resourceTypeGeneralList,
-  resourceTypesGeneral: resourceTypeGeneralList,
+@classic
+export default class DoiTypes extends Component {
+  resourceTypeGeneralList = resourceTypeGeneralList;
+  resourceTypesGeneral = resourceTypeGeneralList;
 
   selectResourceTypeGeneral(resourceTypeGeneral) {
     this.model.set('types', {
       resourceTypeGeneral: pascalCase(resourceTypeGeneral)
     });
     this.set('resourceTypesGeneral', resourceTypeGeneralList);
-  },
-
-  actions: {
-    selectResourceTypeGeneral(resourceTypeGeneral) {
-      this.selectResourceTypeGeneral(resourceTypeGeneral);
-    }
   }
-});
+
+  @action
+  selectResourceTypeGeneralAction(resourceTypeGeneral) {
+    this.selectResourceTypeGeneral(resourceTypeGeneral);
+  }
+}

@@ -1,0 +1,51 @@
+    <div class="tab-content nav-tabs-member">
+      <BsNav
+        @type="tabs"
+        @justified={{false}}
+        @stacked={{false}}
+        @fill={{false}} as |nav|
+      >
+        <nav.item>
+            <nav.linkTo @route='providers.show.index' class='nav-link'>
+                Info
+            </nav.linkTo>
+        </nav.item>
+        <nav.item>
+            <nav.linkTo @route='providers.show.settings' class='nav-link'>
+                Settings
+            </nav.linkTo>
+        </nav.item>
+        {{#if (eq this.model.memberType 'consortium')}}
+          <nav.item>
+              <nav.linkTo @route='providers.show.organizations' class='nav-link'>
+                  Consortium Organizations
+              </nav.linkTo>
+          </nav.item>
+        {{/if}}
+        {{#if (not-eq this.model.memberType 'developer')}}
+          <nav.item>
+              <nav.linkTo @route='providers.show.contacts' class='nav-link'>
+                  Contacts
+              </nav.linkTo>
+          </nav.item>
+          {{#if (not-eq this.model.memberType 'member_only')}}
+            <nav.item>
+                <nav.linkTo @route='providers.show.repositories' class='nav-link'>
+                    Repositories
+                </nav.linkTo>
+            </nav.item>
+            <nav.item>
+                <nav.linkTo @route='providers.show.prefixes' class='nav-link'>
+                    Prefixes
+                </nav.linkTo>
+            </nav.item>
+            <nav.item>
+                <nav.linkTo @route='providers.show.dois' class='nav-link'>
+                    DOIs
+                </nav.linkTo>
+            </nav.item>
+          {{/if}}
+        {{/if}}
+      </BsNav>
+    </div>
+  

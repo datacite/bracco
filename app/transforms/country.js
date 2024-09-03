@@ -1,14 +1,16 @@
+import classic from 'ember-classic-decorator';
 import Transform from '@ember-data/serializer/transform';
 import countryList from 'iso-3166-country-list';
 
-export default Transform.extend({
+@classic
+export default class Country extends Transform {
   deserialize(serialized) {
     if (serialized) {
       return { code: serialized, name: countryList.name(serialized) };
     } else {
       return null;
     }
-  },
+  }
 
   serialize(deserialized) {
     if (deserialized) {
@@ -17,4 +19,4 @@ export default Transform.extend({
       return null;
     }
   }
-});
+}

@@ -1,10 +1,18 @@
-import Route from '@ember/routing/route';
+import classic from 'ember-classic-decorator';
+import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
+import Route from '@ember/routing/route';
 
-export default Route.extend({
-  can: service(),
-  router: service(),
-  store: service(),
+@classic
+export default class InfoRoute extends Route {
+  @service
+  can;
+
+  @service
+  router;
+
+  @service
+  store;
 
   model() {
     let self = this;
@@ -24,17 +32,16 @@ export default Route.extend({
         });
         self.router.transitionTo('/');
       });
-  },
+  }
 
   afterModel() {
     if (this.can.cannot('read user', this.modelFor('users/show'))) {
       this.router.transitionTo('index');
     }
-  },
-
-  actions: {
-    queryParamsDidChange() {
-      this.refresh();
-    }
   }
-});
+
+  @action
+  queryParamsDidChange() {
+    this.refresh();
+  }
+}

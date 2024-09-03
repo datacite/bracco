@@ -18,10 +18,11 @@ describe('ACCEPTANCE: STAFF_ADMIN | CONTACTS', () => {
   const waitTime2 = 2000;
   const waitTime3 = 3000;
   const waitTime4 = 4000;
+  const waitTime6 = 6000;
   const min = 500000;
   const max = 999999;
   const provider_id = Cypress.env('organization_admin_username').toLowerCase()
-  const test_contact_family_name_prefix = "StaffAdmin"
+  const test_contact_family_name_prefix = "_StaffAdmin"
 
   before(function () {
     cy.login(Cypress.env('staff_admin_username'), Cypress.env('staff_admin_password'));
@@ -58,21 +59,22 @@ describe('ACCEPTANCE: STAFF_ADMIN | CONTACTS', () => {
         // Give it a little extra time to process the new contact so that we can search for it.
         cy.visit('/contacts');
         cy.url().should('include', '/contacts')
-        cy.wait(waitTime4)
+        cy.wait(waitTime6)
 
-        cy.get('input[name="query"]')
-          .type(family_name + '{enter}', { force: true } )
-          .get('[data-test-contact]')
+        cy.get('input[name="query"]').click()
+        cy.get('input[name="query"]').type(family_name + '{enter}')
+
+        cy.get('[data-test-contact]').first()
           .should('contain', family_name);
 
-          cy.get('h2.work').contains('DataCite');
-          cy.get('li a.nav-link.active').contains('Contacts');
-          cy.get('div#search').should('exist');
+        cy.get('h2.work').contains('DataCite');
+        cy.get('li a.nav-link.active').contains('Contacts');
+        cy.get('div#search').should('exist');
 
-          cy.get('a#add-contact').should('not.exist');
+        cy.get('a#add-contact').should('not.exist');
 
-          // Create DOI button
-          cy.get('.create-doi-button').should('not.exist');
+        // Create DOI button
+        cy.get('.create-doi-button').should('not.exist');
       });
     });
   });
@@ -283,7 +285,7 @@ describe('ACCEPTANCE: STAFF_ADMIN | CONTACTS', () => {
         cy.get('#confirm-delete-field').should('have.class', 'is-valid');
 
         cy.get('button#delete').contains('Delete').click({force: true});
-        cy.wait(waitTime3);
+        cy.wait(10000);
         cy.location().should((loc) => {
           expect(loc.pathname).to.eq('/providers/' + provider_id + '/contacts');
         });

@@ -1,5 +1,7 @@
-import Component from '@ember/component';
+import classic from 'ember-classic-decorator';
+import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
+import Component from '@ember/component';
 import { isBlank } from '@ember/utils';
 
 const funderIdentifierTypeList = [
@@ -10,28 +12,32 @@ const funderIdentifierTypeList = [
   'Other'
 ];
 
-export default Component.extend({
-  funderIdentifierTypeList,
-  funderIdentifierTypes: funderIdentifierTypeList,
-  isCrossrefId: false,
-  store: service(),
+@classic
+export default class DoiFundingReference extends Component {
+  funderIdentifierTypeList = funderIdentifierTypeList;
+  funderIdentifierTypes = funderIdentifierTypeList;
+  isCrossrefId = false;
+
+  @service
+  store;
 
   init(...args) {
-    this._super(...args);
+    super.init(...args);
 
     this.selected = this.selected || [];
     this.funders = this.funders || [];
-  },
+  }
 
   didReceiveAttrs() {
-    this._super(...arguments);
+    super.didReceiveAttrs(...arguments);
 
     if (funderIdentifierTypeList.includes(this.fragment.get('subject'))) {
       this.set('isCrossrefId', true);
     } else {
       this.set('isCrossrefId', false);
     }
-  },
+  }
+
   updateFunderSchemeAndType(scheme) {
     switch (scheme) {
       case scheme == 'ROR':
@@ -50,7 +56,8 @@ export default Component.extend({
         this.fragment.set('funderIdentifierType', 'Other');
         break;
     }
-  },
+  }
+
   updateFunderReference(funder) {
     switch (true) {
       case funder === null:
@@ -78,63 +85,83 @@ export default Component.extend({
         this.set('isCrossrefId', true);
         break;
     }
-  },
+  }
 
-  actions: {
-    createOnEnter(select, e) {
-      if (
-        e.keyCode === 13 &&
-        select.isOpen &&
-        !select.highlighted &&
-        !isBlank(select.searchText)
-      ) {
-        if (!this.selected.includes(select.searchText)) {
-          this.funderIdentifierTypes.push(select.searchText);
-          select.actions.choose(select.searchText);
-          this.fragment.set('funderName', select.searchText);
-          this.fragment.set('funderIdentifierType', 'Other');
-          this.set('funderIdentifierTypes', funderIdentifierTypeList);
-        }
+  @action
+  createOnEnterAction(select, e) {
+    if (
+      e.keyCode === 13 &&
+      select.isOpen &&
+      !select.highlighted &&
+      !isBlank(select.searchText)
+    ) {
+      if (!this.selected.includes(select.searchText)) {
+        this.funderIdentifierTypes.push(select.searchText);
+        select.actions.choose(select.searchText);
+        this.fragment.set('funderName', select.searchText);
+        this.fragment.set('funderIdentifierType', 'Other');
+        this.set('funderIdentifierTypes', funderIdentifierTypeList);
       }
-    },
-    updateFunderIdentifier(value) {
-      this.fragment.set('funderIdentifier', value);
-    },
-    selectFunderReference(value) {
-      this.updateFunderReference(value);
-    },
-    updateFunderName(value) {
-      this.fragment.set('funderName', value);
-    },
-    selectFunderIdentifierType(value) {
-      this.fragment.set('funderIdentifierType', value);
-    },
-    updateSchemeUri(value) {
-      this.fragment.set('schemeUri', value);
-    },
-    updateAwardNumber(value) {
-      this.fragment.set('awardNumber', value);
-    },
-    updateAwardTitle(value) {
-      this.fragment.set('awardTitle', value);
-    },
-    updateAwardUri(value) {
-      this.fragment.set('awardUri', value);
-    },
-    deleteFundingReference() {
-      this.model.get('fundingReferences').removeObject(this.fragment);
-    },
-    searchFundingReferences(query) {
-      let self = this;
-      this.store
-        .query('funder', { query })
-        .then(function (funders) {
-          self.set('funders', funders);
-        })
-        .catch(function (reason) {
-          console.debug(reason);
-          return [];
-        });
     }
   }
-});
+
+  @action
+  updateFunderIdentifierAction(value) {
+    this.fragment.set('funderIdentifier', value);
+  }
+
+  @action
+  selectFunderReferenceAction(value) {
+    this.updateFunderReference(value);
+  }
+
+  @action
+  updateFunderNameAction(value) {
+    this.fragment.set('funderName', value);
+  }
+
+  @action
+  selectFunderIdentifierTypeAction(value) {
+    this.fragment.set('funderIdentifierType', value);
+  }
+
+  @action
+  updateSchemeUri(value) {
+    this.fragment.set('schemeUri', value);
+  }
+
+  @action
+  updateAwardNumberAction(value) {
+    this.fragment.set('awardNumber', value);
+  }
+
+  @action
+  updateAwardTitleAction(value) {
+    this.fragment.set('awardTitle', value);
+  }
+
+  @action
+  updateAwardUriAction(value) {
+    this.fragment.set('awardUri', value);
+  }
+
+  @action
+  deleteFundingReferenceAction() {
+    this.model.get('fundingReferences').removeObject(this.fragment);
+  }
+
+  @action
+  searchFundingReferencesAction(query) {
+    let self = this;
+    this.store
+      .query('funder', { query })
+      .then(function (funders) {
+        funders = funders.sortBy('name')
+        self.set('funders', funders);
+      })
+      .catch(function (reason) {
+        console.debug(reason);
+        return [];
+      });
+  }
+}

@@ -1,5 +1,7 @@
-import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
+import classic from 'ember-classic-decorator';
 import { computed } from '@ember/object';
+import { inject as service } from '@ember/service';
+import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
 import ENV from 'bracco/config/environment';
 import {
   array,
@@ -9,7 +11,6 @@ import {
 import { validator, buildValidations } from 'ember-cp-validations';
 import isEmpty from 'bracco/utils/is-empty';
 import validatePwdInputs from 'bracco/utils/validate-pwd-inputs';
-import { inject as service } from '@ember/service';
 
 export const clientTypeList = [
   {
@@ -155,52 +156,114 @@ const Validations = buildValidations({
   ]
 });
 
-export default Model.extend(Validations, {
-  router: service(),
+@classic
+export default class Repository extends Model.extend(Validations) {
+  @service
+  router;
 
-  provider: belongsTo('provider', {
+  @belongsTo('provider', {
     async: true
-  }),
-  prefixes: hasMany('prefix', {
+  })
+  provider;
+
+  @hasMany('prefix', {
     async: true
-  }),
-  meta: attr(),
+  })
+  prefixes;
 
-  name: attr('string'),
-  alternateName: attr('string'),
-  symbol: attr('string'),
-  globusUuid: attr('string'),
-  re3data: attr('string'),
-  domains: attr('string', { defaultValue: '*' }),
-  systemEmail: attr('string'),
-  salesforceId: attr('string'),
-  analyticsTrackingId: attr('string'),
-  year: attr('number'),
-  description: attr('string'),
-  language: array(),
-  certificate: array(),
-  serviceContact: fragment('contact-fragment'),
-  issn: fragment('issn'),
-  url: attr('string'),
-  clientType: attr('string'),
-  repositoryType: array(),
-  software: attr('string'),
-  isActive: attr('boolean', { defaultValue: true }),
-  passwordInput: attr('string'),
-  hasPassword: attr('boolean'),
-  created: attr('date'),
-  updated: attr('date'),
-  subjects: fragmentArray('subject', { defaultValue: [] }),
-  targetId: attr(),
-  mode: attr('string'),
+  @attr()
+  meta;
 
-  domainList: computed('domains', function () {
+  @attr('string')
+  name;
+
+  @attr('string')
+  alternateName;
+
+  @attr('string')
+  symbol;
+
+  @attr('string')
+  globusUuid;
+
+  @attr('string')
+  re3data;
+
+  @attr('string', { defaultValue: '*' })
+  domains;
+
+  @attr('string')
+  systemEmail;
+
+  @attr('string')
+  salesforceId;
+
+  @attr('string')
+  analyticsTrackingId;
+
+  @attr('number')
+  year;
+
+  @attr('string')
+  description;
+
+  @array()
+  language;
+
+  @array()
+  certificate;
+
+  @fragment('contact-fragment')
+  serviceContact;
+
+  @fragment('issn')
+  issn;
+
+  @attr('string')
+  url;
+
+  @attr('string')
+  clientType;
+
+  @array()
+  repositoryType;
+
+  @attr('string')
+  software;
+
+  @attr('boolean', { defaultValue: true })
+  isActive;
+
+  @attr('string')
+  passwordInput;
+
+  @attr('boolean')
+  hasPassword;
+
+  @attr('date')
+  created;
+
+  @attr('date')
+  updated;
+
+  @fragmentArray('subject', { defaultValue: [] })
+  subjects;
+
+  @attr()
+  targetId;
+
+  @attr('string')
+  mode;
+
+  @computed('domains')
+  get domainList() {
     return this.domains.split(',').map(function (item) {
       return item.trim();
     });
-  }),
+  }
 
-  badgeUrl: computed('re3data', function () {
+  @computed('re3data')
+  get badgeUrl() {
     if (this.re3data) {
       return (
         ENV.API_URL +
@@ -211,18 +274,19 @@ export default Model.extend(Validations, {
     } else {
       return null;
     }
-  }),
+  }
 
   get isDisciplinary() {
     return this.repositoryType.includes('disciplinary');
-  },
+  }
 
   clearSubjects() {
     this.subjects = [];
-  },
+  }
+
   certifyDisciplinaryRepository() {
     if (!this.isDisciplinary) {
       this.clearSubjects();
     }
   }
-});
+}

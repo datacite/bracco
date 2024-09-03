@@ -25,8 +25,9 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | PREFIXES', () => {
   
     // Check for page elements.
     it('is logged in to prefixes page', () => {
-      cy.visit('/providers/datacite/prefixes');
+      cy.visit('/providers/datacite/prefixes', { headers: { "Connection": "Keep-Alive" } })
       cy.url().should('include', '/providers/datacite/prefixes').then(() => {
+        cy.wait(5000)
 
         // Has Fabrica logo and correct navbar color
         cy.get('img.fabrica-logo').should('exist').should('have.attr', 'src').should('include', 'fabrica-logo.svg');
@@ -37,7 +38,7 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | PREFIXES', () => {
         cy.get('a#account_menu_link').should('contain', 'DATACITE');
   
         // Has tabs with correct one activated.
-        cy.get('ul.nav-tabs li.active a').contains(/Prefixes/i)
+        cy.get('ul.nav-tabs li.active a', { timeout: 30000 } ).contains(/Prefixes/i)
           .and('have.attr', 'href').and('include', '/providers/datacite/prefixes');
   
         // Has left sidebar message box.

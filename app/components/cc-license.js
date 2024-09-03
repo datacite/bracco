@@ -1,3 +1,5 @@
+import classic from 'ember-classic-decorator';
+import { classNames, tagName } from '@ember-decorators/component';
 import { htmlSafe } from '@ember/template';
 import { w } from '@ember/string';
 import { A } from '@ember/array';
@@ -37,12 +39,12 @@ const Tooltips = [
   }
 ];
 
-export default Component.extend({
-  tagName: 'div',
-  classNames: ['license'],
-
+@classic
+@tagName('div')
+@classNames('license')
+export default class CcLicense extends Component {
   didReceiveAttrs() {
-    this._super(...arguments);
+    super.didReceiveAttrs(...arguments);
 
     if (this.licenseURL != null) {
       let uri = new URI(this.licenseURL);
@@ -82,4 +84,4 @@ export default Component.extend({
       this.set('licenseLogo', null);
     }
   }
-});
+}

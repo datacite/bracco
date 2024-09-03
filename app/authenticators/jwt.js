@@ -1,7 +1,9 @@
+import classic from 'ember-classic-decorator';
 import { Promise } from 'rsvp';
 import OAuth2PasswordGrantAuthenticator from 'ember-simple-auth/authenticators/oauth2-password-grant';
 
-export default OAuth2PasswordGrantAuthenticator.extend({
+@classic
+export default class Jwt extends OAuth2PasswordGrantAuthenticator {
   authenticate(jwt) {
     return new Promise((resolve) => {
       resolve({
@@ -10,4 +12,4 @@ export default OAuth2PasswordGrantAuthenticator.extend({
       });
     });
   }
-});
+}

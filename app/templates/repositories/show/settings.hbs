@@ -165,7 +165,7 @@
             Description
           </h5>
           <p id="description">
-            {{markdown-to-html this.model.description}}
+             <MarkdownToHtml @markdown={{this.model.description}} />
           </p>
         {{/if}}
         {{#if (or this.model.serviceContact.name this.model.serviceContact.email)}}

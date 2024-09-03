@@ -10,13 +10,13 @@
         </div>
         <div class="pseudo-footer">
           <div class="btn-toolbar btn-sm pull-right">
-            <button class="btn btn-sm" type="button" {{action "cancel" this.model}}>Cancel</button>
+            <button class="btn btn-sm" type="button" {{action "cancelAction" this.model}}>Cancel</button>
             <LinkTo @route="repositories.show.transfer" @model={{this.model.id}} class="btn btn-sm"><i class="fas fa-arrow-circle-right"></i>Transfer DOIs</LinkTo>
           </div>
           <div class="clearfix"/>
         </div>
       {{else}}
-        <BsForm @formLayout="vertical" @model={{this.model}} @onSubmit={{action "submit"}} @submitOnEnter={{true}} as |form|>
+        <BsForm @formLayout="vertical" @model={{this.model}} @onSubmit={{action "submitAction"}} @submitOnEnter={{true}} as |form|>
           <div class="form-group">
             <label class="control-label">Are you sure you want to delete the {{uppercase this.model.id}} repository? This action cannot be undone.</label>
             <form.element @controlType="text" id="confirm-symbol" @property="confirmSymbol" @showValidationOn="input" @helpText="Please add the Repository ID to delete."  as |el| >
@@ -26,8 +26,8 @@
 
           <div class="pseudo-footer">
             <div class="btn-toolbar pull-right">
-              <button id="cancel" class="btn btn-sm" type="button" {{action "cancel"}}>Cancel</button>
-              <button disabled={{v-get this.model 'confirmSymbol' 'isInvalid'}} id="delete" class="btn btn-sm btn-fill" type="button" {{action "submit"}}>Delete</button>
+              <button id="cancel" class="btn btn-sm" type="button" {{action "cancelAction"}}>Cancel</button>
+              <button disabled={{v-get this.model 'confirmSymbol' 'isInvalid'}} id="delete" class="btn btn-sm btn-fill" type="button" {{action "submitAction"}}>Delete</button>
             </div>
             <div class="clearfix"/>
           </div>

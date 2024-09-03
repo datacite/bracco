@@ -12,7 +12,6 @@ module('Unit | Serializer | geo-location', function (hooks) {
           assert.expect(1);
 
           let store = this.owner.lookup('service:store');
-          let serializer = store.serializerFor('geo-location');
           let payload = {
             geoLocationPlace: null,
             geoLocationPoint: {
@@ -27,9 +26,8 @@ module('Unit | Serializer | geo-location', function (hooks) {
 
           run(() => {
             let model = store.createRecord('geo-location', payload);
-            let snapshot = model._internalModel.createSnapshot();
 
-            let serializedPayload = serializer.serialize(snapshot);
+            let serializedPayload = model.serialize(payload);
             let expectedPayload = {
               geoLocationPoint: {
                 pointLatitude: 42

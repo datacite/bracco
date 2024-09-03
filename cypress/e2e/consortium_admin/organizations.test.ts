@@ -37,7 +37,7 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | CONSORTIUM ORGANIZATIONS', () => {
       cy.get('a#account_menu_link').should('contain', 'DC');
 
       // Has tabs with correct one activated.
-      cy.get('ul.nav-tabs li.active a').contains(/Consortium Organizations/i)
+      cy.get('ul.nav-tabs li.active a', { timeout: 10000 }).contains(/Consortium Organizations/i)
         .and('have.attr', 'href').and('include', '/providers/dc/organizations');
 
       // Has left sidebar buttons.

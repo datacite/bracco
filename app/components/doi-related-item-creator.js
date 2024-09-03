@@ -1,16 +1,20 @@
+import classic from 'ember-classic-decorator';
+import { action, computed } from '@ember/object';
 import Component from '@ember/component';
-import { computed } from '@ember/object';
 
-export default Component.extend({
-  showPersonal: computed('fragment.nameType', function () {
+@classic
+export default class DoiRelatedItemCreator extends Component {
+  @computed('fragment.nameType')
+  get showPersonal() {
     return this.get('fragment.nameType') !== 'Organizational';
-  }),
-  isReadonlyNameType: false,
-  isReadonly: false,
-  isReadonlyNameParts: false,
+  }
+
+  isReadonlyNameType = false;
+  isReadonly = false;
+  isReadonlyNameParts = false;
 
   didReceiveAttrs() {
-    this._super(...arguments);
+    super.didReceiveAttrs(...arguments);
 
     this.selectNameType(this.fragment.get('nameType'));
 
@@ -28,7 +32,7 @@ export default Component.extend({
       this.fragment.set('familyName', familyName);
     }
     this.joinNameParts({});
-  },
+  }
 
   joinNameParts(options = {}) {
     if (options.nameIdentifierScheme === 'ORCID') {
@@ -82,7 +86,8 @@ export default Component.extend({
         this.set('isReadonly', false);
         return true;
     }
-  },
+  }
+
   selectNameType(value) {
     this.fragment.set('nameType', value);
     this.set('nameType', value);
@@ -93,14 +98,15 @@ export default Component.extend({
     } else {
       this.set('isReadonly', false);
     }
-  },
-
-  actions: {
-    updateName(value) {
-      this.joinNameParts({ name: value });
-    },
-    deleteRelatedItemCreator() {
-      this.creator.get('creators').removeObject(this.fragment);
-    }
   }
-});
+
+  @action
+  updateName(value) {
+    this.joinNameParts({ name: value });
+  }
+
+  @action
+  deleteRelatedItemCreator() {
+    this.creator.get('creators').removeObject(this.fragment);
+  }
+}

@@ -7,7 +7,7 @@
         </div>
         <div class="pseudo-footer">
           <div class="btn-toolbar btn-sm pull-right">
-            <button class="btn btn-sm" type="button" {{action "cancel" this.model}}>Cancel</button>
+            <button class="btn btn-sm" type="button" {{action "cancelAction" this.model}}>Cancel</button>
             <LinkTo @route="providers.show.organizations" @model={{this.model.id}} class="btn btn-sm">All Consortium Organizations</LinkTo>
           </div>
           <div class="clearfix"/>
@@ -18,13 +18,13 @@
         </div>
         <div class="pseudo-footer">
           <div class="btn-toolbar btn-sm pull-right">
-            <button class="btn btn-sm" type="button" {{action "cancel" this.model}}>Cancel</button>
+            <button class="btn btn-sm" type="button" {{action "cancelAction" this.model}}>Cancel</button>
             <LinkTo @route="providers.show.repositories" @model={{this.model.id}} class="btn btn-sm">All Repositories</LinkTo>
           </div>
           <div class="clearfix"/>
         </div>
       {{else}}
-        <BsForm @formLayout="vertical" @model={{this.model}} @onSubmit={{action "submit" this.model}} @submitOnEnter={{true}} as |form|>
+        <BsForm @formLayout="vertical" @model={{this.model}} @onSubmit={{action "submitAction" this.model}} @submitOnEnter={{true}} as |form|>
           <div class="form-group">
             <label class="control-label">Are you sure you want to delete the {{uppercase this.model.id}} {{if (eq this.model.memberType "consortium_organization") 'organization' 'member'}}? This action cannot be undone.</label>
             <form.element @controlType="text" id="confirm-symbol" @property="confirmSymbol" @showValidationOn="input" @helpText="Please add the {{if (eq this.model.memberType "consortium_organization") 'Organization' 'Member'}} ID to delete." as |el| >
@@ -35,7 +35,7 @@
           <div class="pseudo-footer">
             <div class="btn-toolbar pull-right">
               <button id="cancel" class="btn btn-sm" type="button" {{action "cancel" this.model}}>Cancel</button>
-              <button id="delete" disabled={{v-get this.model 'confirmSymbol' 'isInvalid'}} class="btn btn-sm btn-fill" type="button" {{action "submit"}}>Delete</button>
+              <button id="delete" disabled={{v-get this.model 'confirmSymbol' 'isInvalid'}} class="btn btn-sm btn-fill" type="button" {{action "submitAction"}}>Delete</button>
             </div>
             <div class="clearfix"/>
           </div>

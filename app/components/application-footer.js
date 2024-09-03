@@ -1,7 +1,8 @@
+import classic from 'ember-classic-decorator';
+import { inject as service } from '@ember/service';
 import { htmlSafe } from '@ember/template';
 import Component from '@ember/component';
 import ENV from 'bracco/config/environment';
-import { inject as service } from '@ember/service';
 
 const data = {
   about_links: [
@@ -96,15 +97,16 @@ const data = {
   ]
 };
 
-export default Component.extend({
-  data,
+@classic
+export default class ApplicationFooter extends Component {
+  data = data;
 
   didReceiveAttrs() {
-    this._super(...arguments);
+    super.didReceiveAttrs(...arguments);
 
     if (this.default) {
       this.set('type', null);
       this.set('title', htmlSafe(ENV.SITE_TITLE));
     }
   }
-});
+}

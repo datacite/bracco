@@ -1,9 +1,10 @@
-import Controller from '@ember/controller';
+import classic from 'ember-classic-decorator';
+import { action, computed } from '@ember/object';
 import { inject as service } from '@ember/service';
-import { computed } from '@ember/object';
+import Controller from '@ember/controller';
 import { w } from '@ember/string';
 import countryList from 'iso-3166-country-list';
-import FileReader from 'ember-file-upload/system/file-reader';
+import { UploadFile, UploadFileReader } from 'ember-file-upload';
 import ENV from 'bracco/config/environment';
 import {
   organizationTypeList,
@@ -12,6 +13,8 @@ import {
   nonProfitStatusList
 } from 'bracco/models/provider';
 import _arr from 'lodash';
+import RSVP from 'rsvp';
+
 
 // states and provinces use iso-3166-2 codes
 const stateList = [
@@ -137,363 +140,411 @@ const stateListAustralia = [
   { code: 'AU-NT', name: 'Northern Territory' }
 ];
 
-export default Controller.extend({
-  store: service(),
-  features: service(),
-  router: service(),
-  flashMessages: service(),
+@classic
+export default class EditController extends Controller {
+  @service
+  store;
 
-  countryList,
-  countries: null,
-  stateList,
-  provinceListCanada,
-  provinceListChina,
-  stateListAustralia,
-  states: null,
-  organizationTypeList,
-  organizationTypes: organizationTypeList,
-  memberTypeList,
-  memberTypes: memberTypeList,
-  focusAreaList,
-  focusAreas: focusAreaList,
-  nonProfitStatusList,
-  nonProfitStatuses: nonProfitStatusList,
+  @service
+  features;
+
+  @service
+  router;
+
+  @service
+  flashMessages;
+
+  countryList = countryList;
+  countries = null;
+  stateList = stateList;
+  provinceListCanada = provinceListCanada;
+  provinceListChina = provinceListChina;
+  stateListAustralia = stateListAustralia;
+  states = null;
+  organizationTypeList = organizationTypeList;
+  organizationTypes = organizationTypeList;
+  memberTypeList = memberTypeList;
+  memberTypes = memberTypeList;
+  focusAreaList = focusAreaList;
+  focusAreas = focusAreaList;
+  nonProfitStatusList = nonProfitStatusList;
+  nonProfitStatuses = nonProfitStatusList;
+
   // we are storing state/province information for US, CA, AU and CN
-  showStateSearch: computed('model.billingInformation.country', function () {
+  @computed('model.billingInformation.country')
+  get showStateSearch() {
     return (
       this.model.get('billingInformation.country') &&
       w('US CA AU CN').includes(
         this.model.get('billingInformation.country.code')
       )
     );
-  }),
+  }
 
   init(...args) {
-    this._super(...args);
+    super.init(...args);
 
     this.organizations = this.organizations || [];
-  },
+  }
 
-  actions: {
-    toggleInput() {
-      let estimate = this.model.get('doiEstimate');
+  @action
+  toggleInput() {
+    let estimate = this.model.get('doiEstimate');
 
-      this.model.set('doiEstimate', '0');
-      this.model.set('doiEstimate', estimate);
-    },
-    searchCountry(query) {
-      let countries = countryList.filter(function (country) {
-        return country.name.toLowerCase().startsWith(query.toLowerCase());
-      });
-      this.set('countries', countries);
-    },
-    selectCountry(country) {
-      this.model.set('country', {
-        code: country.code,
-        name: countryList.name(country.code)
-      });
-      this.set('countries', countryList);
-    },
-    searchState(query) {
-      let states = null;
-      if (this.model.get('billingInformation.country.code') === 'US') {
-        states = stateList.filter(function (state) {
-          return state.name.toLowerCase().startsWith(query.toLowerCase());
-        });
-      } else if (this.model.get('billingInformation.country.code') === 'CA') {
-        states = provinceListCanada.filter(function (state) {
-          return state.name.toLowerCase().startsWith(query.toLowerCase());
-        });
-      } else if (this.model.get('billingInformation.country.code') === 'CN') {
-        states = provinceListChina.filter(function (state) {
-          return state.name.toLowerCase().startsWith(query.toLowerCase());
-        });
-      } else if (this.model.get('billingInformation.country.code') === 'AU') {
-        states = stateListAustralia.filter(function (state) {
-          return state.name.toLowerCase().startsWith(query.toLowerCase());
-        });
-      }
-      this.set('states', states);
-    },
-    searchOrganizationType(query) {
-      let organizationTypes = organizationTypeList.filter(function (
-        organizationType
-      ) {
-        return organizationType.startsWith(query.toLowerCase());
-      });
-      this.set('organizationTypes', organizationTypes);
-    },
-    selectOrganizationType(organizationType) {
-      this.model.set('organizationType', organizationType);
-      this.set('organizationTypes', organizationTypeList);
-    },
-    searchMemberType(query) {
-      let memberTypes = memberTypeList.filter(function (memberType) {
-        return memberType.startsWith(query.toLowerCase());
-      });
-      this.set('memberTypes', memberTypes);
-    },
-    selectMemberType(memberType) {
-      this.model.set('memberType', memberType);
-      this.set('memberTypes', memberTypeList);
-      if (this.features.isEnabled('enable-doi-estimate')) {
-        this.send('toggleInput');
-      }
-    },
-    searchFocusArea(query) {
-      let focusAreas = focusAreaList.filter(function (focusArea) {
-        return focusArea.startsWith(query.toLowerCase());
-      });
-      this.set('focusAreas', focusAreas);
-    },
-    selectFocusArea(focusArea) {
-      this.model.set('focusArea', focusArea);
-      this.set('focusAreas', focusAreaList);
-    },
-    searchNonProfitStatus(query) {
-      let nonProfitStatuses = nonProfitStatusList.filter(function (
-        nonProfitStatus
-      ) {
-        return nonProfitStatus.startsWith(query.toLowerCase());
-      });
-      this.set('nonProfitStatuses', nonProfitStatuses);
-    },
-    selectNonProfitStatus(nonProfitStatus) {
-      this.model.set('nonProfitStatus', nonProfitStatus);
-      this.set('nonProfitStatuses', nonProfitStatusList);
-    },
-    searchConsortium(query) {
-      let self = this;
-      this.store
-        .query('provider', {
-          query,
-          'member-type': 'consortium',
-          sort: 'name',
-          'page[size]': 100
-        })
-        .then(function (consortia) {
-          self.set('consortia', consortia);
-        })
-        .catch(function (reason) {
-          console.debug(reason);
-          self.set('consortia', []);
-        });
-    },
-    selectConsortium(consortium) {
-      this.model.set('consortium', consortium);
-    },
-    selectBillingCountry(billingCountry) {
-      if (billingCountry) {
-        this.model.set('billingInformation.country', {
-          code: billingCountry.code,
-          name: countryList.name(billingCountry.code)
-        });
-      } else {
-        this.model.set('billingInformation.country', null);
-      }
-      this.model.set('billingInformation.state', null);
-      this.set('countries', countryList);
-    },
-    selectBillingState(billingState) {
-      this.model.set('billingInformation.state', billingState);
-    },
-    searchRor(query) {
-      let self = this;
-      this.store
-        .query('ror', { query })
-        .then(function (organizations) {
-          self.set('organizations', organizations);
-        })
-        .catch(function (reason) {
-          console.debug(reason);
-          self.set('organizations', []);
-        });
-    },
-    selectRor(ror) {
-      if (ror) {
-        this.model.set('rorId', ror.id);
-        this.model.set('name', ror.name);
-        this.model.set('displayName', ror.name);
-      } else {
-        this.model.set('rorId', null);
-      }
-      this.set('organizations', []);
-    },
-    didSelectFiles(file) {
-      let reader = new FileReader();
-      let self = this;
+    this.model.set('doiEstimate', '0');
+    this.model.set('doiEstimate', estimate);
+  }
 
-      reader.readAsDataURL(file.blob).then(
-        (logo) => {
-          self.get('model').set('logo', logo);
-        },
-        (err) => {
-          console.error(err);
-        }
-      );
-    },
-    searchContact(query) {
-      let filteredContacts = this.model.contacts.filter(function (contact) {
-        console.log(contact.displayName.toLowerCase);
-        return contact.displayName
-          .toLowerCase()
-          .startsWith(query.toLowerCase());
+  @action
+  searchCountry(query) {
+    let countries = countryList.filter(function (country) {
+      return country.name.toLowerCase().startsWith(query.toLowerCase());
+    });
+    this.set('countries', countries);
+  }
+
+  @action
+  selectCountry(country) {
+    this.model.set('country', {
+      code: country.code,
+      name: countryList.name(country.code)
+    });
+    this.set('countries', countryList);
+  }
+
+  @action
+  searchState(query) {
+    let states = null;
+    if (this.model.get('billingInformation.country.code') === 'US') {
+      states = stateList.filter(function (state) {
+        return state.name.toLowerCase().startsWith(query.toLowerCase());
       });
-      this.model.set('filteredContacts', filteredContacts);
-    },
-    selectVotingContact(contact) {
-      if (contact) {
-        let votingContact = {
-          givenName: contact.givenName,
-          familyName: contact.familyName,
-          displayName: contact.displayName,
-          email: contact.email
-        };
-        this.model.set('votingContact', votingContact);
-        this.model.set('filteredContacts', this.model.contacts);
-      }
-    },
-    selectServiceContact(contact) {
-      if (contact) {
-        let serviceContact = {
-          givenName: contact.givenName,
-          familyName: contact.familyName,
-          displayName: contact.displayName,
-          email: contact.email
-        };
-        this.model.set('serviceContact', serviceContact);
-        this.model.set('filteredContacts', this.model.contacts);
-      }
-    },
-    selectSecondaryServiceContact(contact) {
-      if (contact) {
-        let secondaryServiceContact = {
-          givenName: contact.givenName,
-          familyName: contact.familyName,
-          displayName: contact.displayName,
-          email: contact.email
-        };
-        this.model.set('secondaryServiceContact', secondaryServiceContact);
-      } else {
-        this.model.set('secondaryServiceContact', null);
-      }
-    },
-    selectTechnicalContact(contact) {
-      if (contact) {
-        let technicalContact = {
-          givenName: contact.givenName,
-          familyName: contact.familyName,
-          displayName: contact.displayName,
-          email: contact.email
-        };
-        this.model.set('technicalContact', technicalContact);
-      } else {
-        this.model.set('technicalContact', null);
-      }
-      this.model.set('filteredContacts', this.model.contacts);
-    },
-    selectSecondaryTechnicalContact(contact) {
-      if (contact) {
-        let secondaryTechnicalContact = {
-          givenName: contact.givenName,
-          familyName: contact.familyName,
-          displayName: contact.displayName,
-          email: contact.email
-        };
-        this.model.set('secondaryTechnicalContact', secondaryTechnicalContact);
-      } else {
-        this.model.set('secondaryTechnicalContact', null);
-      }
-      this.model.set('filteredContacts', this.model.contacts);
-    },
-    selectBillingContact(contact) {
-      if (contact) {
-        let billingContact = {
-          givenName: contact.givenName,
-          familyName: contact.familyName,
-          displayName: contact.displayName,
-          email: contact.email
-        };
-        this.model.set('billingContact', billingContact);
-      }
-      this.model.set('filteredContacts', this.model.contacts);
-    },
-    selectSecondaryBillingContact(contact) {
-      if (contact) {
-        let secondaryBillingContact = {
-          givenName: contact.givenName,
-          familyName: contact.familyName,
-          displayName: contact.displayName,
-          email: contact.email
-        };
-        this.model.set('secondaryBillingContact', secondaryBillingContact);
-      } else {
-        this.model.set('secondaryBillingContact', null);
-      }
-      this.model.set('filteredContacts', this.model.contacts);
-    },
-    submit() {
-      let self = this;
-      let m = this.model;
-      // iterate through all contacts and update roles
-      this.model.get('contacts').forEach(function (contact) {
-        let roleName = [];
-        if (contact.email === m.get('votingContact.email')) {
-          roleName.push('voting');
-        }
-        if (contact.email === m.get('serviceContact.email')) {
-          roleName.push('service');
-        }
-        if (contact.email === m.get('secondaryServiceContact.email')) {
-          roleName.push('secondary_service');
-        }
-        if (contact.email === m.get('technicalContact.email')) {
-          roleName.push('technical');
-        }
-        if (contact.email === m.get('secondaryTechnicalContact.email')) {
-          roleName.push('secondary_technical');
-        }
-        if (contact.email === m.get('billingContact.email')) {
-          roleName.push('billing');
-        }
-        if (contact.email === m.get('secondaryBillingContact.email')) {
-          roleName.push('secondary_billing');
-        }
-
-        // Stop unnecessary requests to save contacts by adding some conditions.
-        if (
-          contact.roleName == null ||
-          !_arr.isEqual(contact.roleName, roleName)
-        ) {
-          contact.set('roleName', roleName);
-          contact.save();
-        }
+    } else if (this.model.get('billingInformation.country.code') === 'CA') {
+      states = provinceListCanada.filter(function (state) {
+        return state.name.toLowerCase().startsWith(query.toLowerCase());
       });
+    } else if (this.model.get('billingInformation.country.code') === 'CN') {
+      states = provinceListChina.filter(function (state) {
+        return state.name.toLowerCase().startsWith(query.toLowerCase());
+      });
+    } else if (this.model.get('billingInformation.country.code') === 'AU') {
+      states = stateListAustralia.filter(function (state) {
+        return state.name.toLowerCase().startsWith(query.toLowerCase());
+      });
+    }
+    this.set('states', states);
+  }
 
-      this.model
-        .save()
-        .then(function (provider) {
-          self.router.transitionTo('providers.show', provider);
-        })
-        // Report the reason (error) to the user.  Without that, the form appears to be frozen.
-        .catch(function (reason) {
-          console.debug(reason);
-          let msg = reason?.errors[0]?.title
-            ? reason.errors[0].title
-            : reason?.title
-            ? reason.title
-            : 'Cause is unknown.  Please contact support.';
+  @action
+  searchOrganizationType(query) {
+    let organizationTypes = organizationTypeList.filter(function (
+      organizationType
+    ) {
+      return organizationType.startsWith(query.toLowerCase());
+    });
+    this.set('organizationTypes', organizationTypes);
+  }
 
-          self
-            .get('flashMessages')
-            .danger(
-              'An error occurred and while saving this provider.' + '  ' + msg
-            );
-        });
-    },
-    cancel() {
-      this.model.rollbackAttributes();
-      this.router.transitionTo('providers.show', this.model);
+  @action
+  selectOrganizationType(organizationType) {
+    this.model.set('organizationType', organizationType);
+    this.set('organizationTypes', organizationTypeList);
+  }
+
+  @action
+  searchMemberType(query) {
+    let memberTypes = memberTypeList.filter(function (memberType) {
+      return memberType.startsWith(query.toLowerCase());
+    });
+    this.set('memberTypes', memberTypes);
+  }
+
+  @action
+  selectMemberType(memberType) {
+    this.model.set('memberType', memberType);
+    this.set('memberTypes', memberTypeList);
+    if (this.features.isEnabled('enable-doi-estimate')) {
+      this.send('toggleInput');
     }
   }
-});
+
+  @action
+  searchFocusArea(query) {
+    let focusAreas = focusAreaList.filter(function (focusArea) {
+      return focusArea.startsWith(query.toLowerCase());
+    });
+    this.set('focusAreas', focusAreas);
+  }
+
+  @action
+  selectFocusArea(focusArea) {
+    this.model.set('focusArea', focusArea);
+    this.set('focusAreas', focusAreaList);
+  }
+
+  @action
+  searchNonProfitStatus(query) {
+    let nonProfitStatuses = nonProfitStatusList.filter(function (
+      nonProfitStatus
+    ) {
+      return nonProfitStatus.startsWith(query.toLowerCase());
+    });
+    this.set('nonProfitStatuses', nonProfitStatuses);
+  }
+
+  @action
+  selectNonProfitStatus(nonProfitStatus) {
+    this.model.set('nonProfitStatus', nonProfitStatus);
+    this.set('nonProfitStatuses', nonProfitStatusList);
+  }
+
+  @action
+  searchConsortium(query) {
+    let self = this;
+    this.store
+      .query('provider', {
+        query,
+        'member-type': 'consortium',
+        sort: 'name',
+        'page[size]': 100
+      })
+      .then(function (consortia) {
+        self.set('consortia', consortia);
+      })
+      .catch(function (reason) {
+        console.debug(reason);
+        self.set('consortia', []);
+      });
+  }
+
+  @action
+  selectConsortium(consortium) {
+    this.model.set('consortium', consortium);
+  }
+
+  @action
+  selectBillingCountry(billingCountry) {
+    if (billingCountry) {
+      this.model.set('billingInformation.country', {
+        code: billingCountry.code,
+        name: countryList.name(billingCountry.code)
+      });
+    } else {
+      this.model.set('billingInformation.country', null);
+    }
+    this.model.set('billingInformation.state', null);
+    this.set('countries', countryList);
+  }
+
+  @action
+  selectBillingState(billingState) {
+    this.model.set('billingInformation.state', billingState);
+  }
+
+  @action
+  searchRor(query) {
+    let self = this;
+    this.store
+      .query('ror', { query })
+      .then(function (organizations) {
+        self.set('organizations', organizations);
+      })
+      .catch(function (reason) {
+        console.debug(reason);
+        self.set('organizations', []);
+      });
+  }
+
+  @action
+  selectRor(ror) {
+    if (ror) {
+      this.model.set('rorId', ror.id);
+      this.model.set('name', ror.name);
+      this.model.set('displayName', ror.name);
+    } else {
+      this.model.set('rorId', null);
+    }
+    this.set('organizations', []);
+  }
+
+  @action
+  async didSelectFiles(file) {
+    // Type is FileUpload
+    file.readAsDataURL().then((logo) => {
+        this.model.set('logo', logo)
+      },
+      (err) => {
+        console.error(err);
+      }
+    );
+  }
+
+  @action
+  searchContact(query) {
+    let filteredContacts = this.model.contacts.filter(function (contact) {
+      return contact.displayName
+        .toLowerCase()
+        .startsWith(query.toLowerCase());
+    });
+    this.model.set('filteredContacts', filteredContacts);
+  }
+
+  @action
+  selectVotingContact(contact) {
+    if (contact) {
+      let votingContact = {
+        givenName: contact.givenName,
+        familyName: contact.familyName,
+        email: contact.email
+      };
+      this.model.set('votingContact', votingContact);
+    }
+  }
+
+  @action
+  selectServiceContact(contact) {
+    if (contact) {
+      let serviceContact = {
+        givenName: contact.givenName,
+        familyName: contact.familyName,
+        email: contact.email
+      };
+      this.model.set('serviceContact', serviceContact);
+    }
+  }
+
+  @action
+  selectSecondaryServiceContact(contact) {
+    if (contact) {
+      let secondaryServiceContact = {
+        givenName: contact.givenName,
+        familyName: contact.familyName,
+        email: contact.email
+      };
+      this.model.set('secondaryServiceContact', secondaryServiceContact);
+    } else {
+      this.model.set('secondaryServiceContact', null);
+    }
+  }
+
+  @action
+  selectTechnicalContact(contact) {
+    if (contact) {
+      let technicalContact = {
+        givenName: contact.givenName,
+        familyName: contact.familyName,
+        email: contact.email
+      };
+      this.model.set('technicalContact', technicalContact);
+    } else {
+      this.model.set('technicalContact', null);
+    }
+  }
+
+  @action
+  selectSecondaryTechnicalContact(contact) {
+    if (contact) {
+      let secondaryTechnicalContact = {
+        givenName: contact.givenName,
+        familyName: contact.familyName,
+        email: contact.email
+      };
+      this.model.set('secondaryTechnicalContact', secondaryTechnicalContact);
+    } else {
+      this.model.set('secondaryTechnicalContact', null);
+    }
+  }
+
+  @action
+  selectBillingContact(contact) {
+    if (contact) {
+      let billingContact = {
+        givenName: contact.givenName,
+        familyName: contact.familyName,
+        email: contact.email
+      };
+      this.model.set('billingContact', billingContact);
+    }
+  }
+
+  @action
+  selectSecondaryBillingContact(contact) {
+    if (contact) {
+      let secondaryBillingContact = {
+        givenName: contact.givenName,
+        familyName: contact.familyName,
+        email: contact.email
+      };
+      this.model.set('secondaryBillingContact', secondaryBillingContact);
+    } else {
+      this.model.set('secondaryBillingContact', null);
+    }
+  }
+
+  @action
+  doSubmit() {
+    let self = this;
+    let m = this.model;
+    // iterate through all contacts and update roles
+    this.model.get('contacts').forEach(function (contact) {
+      let roleName = [];
+      if (contact.email === m.get('votingContact.email')) {
+        roleName.push('voting');
+      }
+      if (contact.email === m.get('serviceContact.email')) {
+        roleName.push('service');
+      }
+      if (contact.email === m.get('secondaryServiceContact.email')) {
+        roleName.push('secondary_service');
+      }
+      if (contact.email === m.get('technicalContact.email')) {
+        roleName.push('technical');
+      }
+      if (contact.email === m.get('secondaryTechnicalContact.email')) {
+        roleName.push('secondary_technical');
+      }
+      if (contact.email === m.get('billingContact.email')) {
+        roleName.push('billing');
+      }
+      if (contact.email === m.get('secondaryBillingContact.email')) {
+        roleName.push('secondary_billing');
+      }
+
+      // Stop unnecessary requests to save contacts by adding some conditions.
+      if (
+        contact.roleName == null ||
+        !_arr.isEqual(contact.roleName, roleName)
+      ) {
+        contact.set('roleName', roleName);
+        contact.save();
+      }
+    });
+
+    this.model
+      .save()
+      .then(function (provider) {
+        self.router.transitionTo('providers.show', provider);
+      })
+      // Report the reason (error) to the user.  Without that, the form appears to be frozen.
+      .catch(function (reason) {
+        console.debug(reason);
+        let msg = reason?.errors[0]?.title
+          ? reason.errors[0].title
+          : reason?.title
+          ? reason.title
+          : 'Cause is unknown.  Please contact support.';
+
+        self
+          .get('flashMessages')
+          .danger(
+            'An error occurred and while saving this provider.' + '  ' + msg
+          );
+      });
+  }
+
+  @action
+  cancel() {
+    this.model.rollbackAttributes();
+    this.router.transitionTo('providers.show', this.model);
+  }
+}

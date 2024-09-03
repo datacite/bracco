@@ -1,0 +1,30 @@
+<div class="form-group required-nested-label {{if (v-get this.model 'xml' 'isInvalid') 'has-error' 'has-feedback'}}">
+  <label class="control-label col-md-3">Metadata</label>
+  <div class="col-md-9 input-fragment">
+    <div class="label-vertical">Metadata that describe the resource.</div>
+    <div class="btn-toolbar btn-sm btn-file">
+
+      {{! v5 syntax - ember-file-upload}}
+      {{#let (file-queue name="file" onFileAdded=this.didSelectFiles) as |queue|}}
+        <label for="upload-file">
+          <span class="btn btn-sm" role="button" aria-controls="upload-file">
+            <i class="fas fa-upload"></i>
+            Upload File
+          </span>
+        </label>
+        <input
+          type="file"
+          id="upload-file"
+          accept="application/xml,application/json,text/plain,.bib,.ris"
+          hidden
+          {{queue.selectFile}}
+        >
+      {{/let}}
+
+    </div>
+  </div>
+
+  <@form.element @controlType="textarea" @property="xml" @showValidationOn="focusOut" id="metadata" @helpText="Upload a file with metadata in DataCite XML format, or one of the other supported formats. The DOI in the metadata will be replaced with the DOI in the DOI field if different." as |el|>
+    <el.control class="form-control metadata" rows={{15}} />
+  </@form.element>
+</div>

@@ -1,7 +1,9 @@
+import classic from 'ember-classic-decorator';
 /* eslint-disable no-useless-escape */
 import BaseValidator from 'ember-cp-validations/validators/base';
 
-const ResourceType = BaseValidator.extend({
+@classic
+class ResourceType extends BaseValidator {
   validate(value, options) {
     const resourceTypeGeneralList = [
       'Audiovisual',
@@ -47,6 +49,6 @@ const ResourceType = BaseValidator.extend({
         return message;
     }
   }
-});
+}
 
 export default ResourceType;

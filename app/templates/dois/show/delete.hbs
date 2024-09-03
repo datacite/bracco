@@ -1,7 +1,7 @@
 <div class="panel panel-transparent">
   <div class="panel-body">
     <div class="col-md-9 col-md-offset-3">
-      <BsForm @formLayout="vertical" @model={{this.model}} @onSubmit={{action "destroy"}} @submitOnEnter={{true}} as |form|>
+      <BsForm @formLayout="vertical" @model={{this.model}} @onSubmit={{action "destroyAction"}} @submitOnEnter={{true}} as |form|>
         <div class="form-group">
           <label class="control-label">Are you sure you want to delete the DOI {{this.model.doi}}? This action cannot be undone.</label>
           <form.element @controlType="text" @property="confirmDoi" id="confirm-doi" @helpText="Please add the DOI to confirm." @showValidationOn="input" as |el|>
@@ -11,8 +11,8 @@
 
         <div class="pseudo-footer">
           <div class="btn-toolbar pull-right">
-            <button class="btn btn-sm" type="button" {{action "cancel"}}>Cancel</button>
-            <button disabled={{v-get this.model 'confirmDoi' 'isInvalid'}} id="delete-doi" class="btn btn-sm btn-fill" type="button" {{action "destroy"}}>Delete</button>
+            <button class="btn btn-sm" type="button" {{action "cancelAction"}}>Cancel</button>
+            <button disabled={{v-get this.model 'confirmDoi' 'isInvalid'}} id="delete-doi" class="btn btn-sm btn-fill" type="button" {{action "destroyAction"}}>Delete</button>
           </div>
           <div class="clearfix"/>
         </div>

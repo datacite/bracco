@@ -1,18 +1,27 @@
-import { hash } from 'rsvp';
-import { assign } from '@ember/polyfills';
-import Route from '@ember/routing/route';
+import classic from 'ember-classic-decorator';
+import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
+import { hash } from 'rsvp';
+import Route from '@ember/routing/route';
 
-export default Route.extend({
-  can: service(),
-  prefixes: service(),
-  router: service(),
-  store: service(),
+@classic
+export default class IndexRoute extends Route {
+  @service
+  can;
+
+  @service
+  prefixes;
+
+  @service
+  router;
+
+  @service
+  store;
 
   model(params) {
     let repositoryId = this.modelFor('repositories/show').get('id');
 
-    params = assign(params, {
+    params = Object.assign(params, {
       page: {
         number: params.page,
         size: params.size
@@ -32,7 +41,7 @@ export default Route.extend({
           return null;
         })
     });
-  },
+  }
 
   afterModel() {
     if (
@@ -40,14 +49,15 @@ export default Route.extend({
     ) {
       this.router.transitionTo('index');
     }
-  },
-
-  actions: {
-    queryParamsDidChange() {
-      this.refresh();
-    },
-    refreshCurrentRoute() {
-      this.refresh();
-    }
   }
-});
+
+  @action
+  queryParamsDidChange() {
+    this.refresh();
+  }
+
+  @action
+  refreshCurrentRoute() {
+    this.refresh();
+  }
+}

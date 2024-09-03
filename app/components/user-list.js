@@ -1,3 +1,5 @@
+import classic from 'ember-classic-decorator';
 import Component from '@ember/component';
 
-export default class UserListComponent extends Component {}
+@classic
+export default class UserList extends Component {}

@@ -1,34 +1,38 @@
+import classic from 'ember-classic-decorator';
+import { action } from '@ember/object';
 import Component from '@ember/component';
 import { schedule } from '@ember/runloop';
 
-export default Component.extend({
-  showTitles: true,
+@classic
+export default class DoiTitles extends Component {
+  showTitles = true;
 
-  init: function () {
-    this._super();
+  init() {
+    super.init();
 
     schedule("afterRender",this,function() {
       if (this.model.get('titles').length == 0) {
         this.send("addTitle");
       }
     });
-  },
+  }
 
   didReceiveAttrs() {
-    this._super(...arguments);
+    super.didReceiveAttrs(...arguments);
 
     if (!this.model.get('titles')) {
       this.model.set('titles', []);
     }
-  },
-
-  actions: {
-    addTitle() {
-      this.model.get('titles').createFragment();
-      this.set('showTitles', true);
-    },
-    toggleTitles() {
-      this.set('showTitles', !this.showTitles);
-    }
   }
-});
+
+  @action
+  addTitle() {
+    this.model.get('titles').createFragment();
+    this.set('showTitles', true);
+  }
+
+  @action
+  toggleTitles() {
+    this.set('showTitles', !this.showTitles);
+  }
+}

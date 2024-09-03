@@ -1,10 +1,17 @@
-import Route from '@ember/routing/route';
+import classic from 'ember-classic-decorator';
 import { inject as service } from '@ember/service';
+import Route from '@ember/routing/route';
 
-export default Route.extend({
-  can: service(),
-  router: service(),
-  store: service(),
+@classic
+export default class TransferRoute extends Route {
+  @service
+  can;
+
+  @service
+  router;
+
+  @service
+  store;
 
   model() {
     let self = this;
@@ -21,7 +28,7 @@ export default Route.extend({
         self.get('flashMessages').warning(reason);
         self.router.transitionTo('/');
       });
-  },
+  }
 
   afterModel() {
     if (this.can.cannot('transfer doi', this.modelFor('dois/show'))) {
@@ -30,4 +37,4 @@ export default Route.extend({
       this.modelFor('dois/show').set('mode', 'modify');
     }
   }
-});
+}

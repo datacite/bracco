@@ -1,11 +1,16 @@
+import classic from 'ember-classic-decorator';
+import { inject as service } from '@ember/service';
 import Route from '@ember/routing/route';
 import fetch from 'fetch';
 import ENV from 'bracco/config/environment';
-import { inject as service } from '@ember/service';
 
-export default Route.extend({
-  session: service(),
-  router: service(),
+@classic
+export default class AuthorizeRoute extends Route {
+  @service
+  session;
+
+  @service
+  router;
 
   model() {
     let self = this;
@@ -15,7 +20,6 @@ export default Route.extend({
         let jwt = response.headers.get('x-amzn-oidc-data');
 
         if (jwt) {
-          console.log(jwt);
           self.session
             .authenticate('authenticator:globus', jwt)
             .catch((reason) => {
@@ -38,4 +42,4 @@ export default Route.extend({
         this.router.transitionTo('/sign-in?globus');
       });
   }
-});
+}

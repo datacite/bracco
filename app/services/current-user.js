@@ -1,32 +1,41 @@
+import classic from 'ember-classic-decorator';
 import { resolve } from 'rsvp';
 import Service, { inject as service } from '@ember/service';
 import { isEmpty } from '@ember/utils';
 import nodeJsonWebToken from 'jsonwebtoken';
 import ENV from 'bracco/config/environment';
 
-export default Service.extend({
-  session: service(),
-  store: service(),
-  flashMessages: service(),
-  features: service(),
+@classic
+export default class CurrentUserService extends Service {
+  @service
+  session;
 
-  uid: null,
-  jwt: null,
-  name: null,
-  email: null,
-  role_id: null,
-  roleName: null,
-  provider_id: null,
-  client_id: null,
-  home: null,
-  settings: null,
-  isAdmin: false,
-  isConsortium: false,
-  isProvider: false,
-  isClient: false,
-  isUser: false,
-  isDeveloper: false,
-  isBetaTester: false,
+  @service
+  store;
+
+  @service
+  flashMessages;
+
+  @service
+  features;
+
+  uid = null;
+  jwt = null;
+  name = null;
+  email = null;
+  role_id = null;
+  roleName = null;
+  provider_id = null;
+  client_id = null;
+  home = null;
+  settings = null;
+  isAdmin = false;
+  isConsortium = false;
+  isProvider = false;
+  isClient = false;
+  isUser = false;
+  isDeveloper = false;
+  isBetaTester = false;
 
   load() {
     if (this.get('session.data.authenticated.access_token')) {
@@ -71,7 +80,7 @@ export default Service.extend({
       this.initUser(this.get('session.data.authenticated'));
     }
     return resolve();
-  },
+  }
 
   initUser(payload) {
     if (!isEmpty(payload) && !isEmpty(payload.uid)) {
@@ -135,4 +144,4 @@ export default Service.extend({
       // }
     }
   }
-});
+}

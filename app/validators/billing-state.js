@@ -1,7 +1,9 @@
+import classic from 'ember-classic-decorator';
 import BaseValidator from 'ember-cp-validations/validators/base';
 import { isBlank } from '@ember/utils';
 
-const BillingState = BaseValidator.extend({
+@classic
+class BillingState extends BaseValidator {
   validate(value, options, model) {
     if (isBlank(model.get('billingInformation.country'))) {
       return true;
@@ -19,7 +21,7 @@ const BillingState = BaseValidator.extend({
       return message;
     }
   }
-});
+}
 
 BillingState.reopenClass({
   getDependentsFor() {

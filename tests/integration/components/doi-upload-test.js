@@ -1,7 +1,7 @@
+import { hbs } from 'ember-cli-htmlbars';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
-import hbs from 'htmlbars-inline-precompile';
 
 module('Integration | Component | doi upload', function (hooks) {
   setupRenderingTest(hooks);
@@ -9,9 +9,9 @@ module('Integration | Component | doi upload', function (hooks) {
   test('it renders', async function (assert) {
     // Template block usage:
     await render(hbs`
-      {{#doi-upload}}
+      <DoiUpload>
         template block text
-      {{/doi-upload}}
+      </DoiUpload>
     `);
 
     assert

@@ -1,5 +1,6 @@
+import classic from 'ember-classic-decorator';
 import { computed } from '@ember/object';
-import { equal, reads } from '@ember/object/computed';
+import { reads, equal } from '@ember/object/computed';
 import { validator, buildValidations } from 'ember-cp-validations';
 import ENV from 'bracco/config/environment';
 import Model, { attr, belongsTo } from '@ember-data/model';
@@ -165,84 +166,184 @@ const Validations = buildValidations({
   ]
 });
 
-export default Model.extend(Validations, {
-  repository: belongsTo('repository', {
+@classic
+export default class Doi extends Model.extend(Validations) {
+  @belongsTo('repository', {
     async: true
-  }),
+  })
+  repository;
 
-  doi: attr('string'),
-  confirmDoi: attr('string', { defaultValue: null }),
-  prefix: attr('string'),
-  suffix: attr('string'),
-  url: attr('string'),
-  contentUrl: attr(),
-  creators: fragmentArray('creator', { defaultValue: [] }),
-  titles: fragmentArray('title', { defaultValue: [] }),
-  publisher: fragment('publisher', { defaultValue: {} }),
-  bcontainer: attr(),
-  publicationYear: attr('number'),
-  subjects: fragmentArray('subject', { defaultValue: [] }),
-  contributors: fragmentArray('contributor', { defaultValue: [] }),
-  alternateIdentifiers: fragmentArray('alternateIdentifier', {
+  @attr('string')
+  doi;
+
+  @attr('string', { defaultValue: null })
+  confirmDoi;
+
+  @attr('string')
+  prefix;
+
+  @attr('string')
+  suffix;
+
+  @attr('string')
+  url;
+
+  @attr()
+  contentUrl;
+
+  @fragmentArray('creator', { defaultValue: [] })
+  creators;
+
+  @fragmentArray('title', { defaultValue: [] })
+  titles;
+
+  @fragment('publisher', { defaultValue: {} })
+  publisher;
+
+  @attr()
+  bcontainer;
+
+  @attr('number')
+  publicationYear;
+
+  @fragmentArray('subject', { defaultValue: [] })
+  subjects;
+
+  @fragmentArray('contributor', { defaultValue: [] })
+  contributors;
+
+  @fragmentArray('alternateIdentifier', {
     defaultValue: []
-  }),
-  dates: fragmentArray('date', { defaultValue: [] }),
-  language: attr('string'),
-  types: attr(),
-  relatedIdentifiers: fragmentArray('relatedIdentifier', { defaultValue: [] }),
-  sizes: attr('array'),
-  formats: attr('array'),
-  version: attr('string'),
-  rightsList: fragmentArray('rights', { defaultValue: [] }),
-  descriptions: fragmentArray('description', { defaultValue: [] }),
-  geoLocations: fragmentArray('geoLocation', { defaultValue: [] }),
-  fundingReferences: fragmentArray('fundingReference', { defaultValue: [] }),
-  relatedItems: fragmentArray('relatedItem', { defaultValue: [] }),
-  landingPage: attr(),
-  xml: attr('xml'),
-  metadataVersion: attr('string'),
-  schemaVersion: attr('string'),
-  source: attr('string', { defaultValue: 'fabrica' }),
-  state: attr('string'),
-  breason: attr('string', { defaultValue: null }),
-  isActive: attr('boolean', { defaultValue: true }),
-  event: attr('string'),
-  created: attr('date'),
-  registered: attr('date'),
-  updated: attr('date'),
-  mode: attr('string'),
-  meta: attr(),
-  citationCount: attr('number'),
-  viewCount: attr('number'),
-  downloadCount: attr('number'),
+  })
+  alternateIdentifiers;
 
-  identifier: computed('doi', 'repository', function () {
+  @fragmentArray('date', { defaultValue: [] })
+  dates;
+
+  @attr('string')
+  language;
+
+  @attr()
+  types;
+
+  @fragmentArray('relatedIdentifier', { defaultValue: [] })
+  relatedIdentifiers;
+
+  @attr('array')
+  sizes;
+
+  @attr('array')
+  formats;
+
+  @attr('string')
+  version;
+
+  @fragmentArray('rights', { defaultValue: [] })
+  rightsList;
+
+  @fragmentArray('description', { defaultValue: [] })
+  descriptions;
+
+  @fragmentArray('geoLocation', { defaultValue: [] })
+  geoLocations;
+
+  @fragmentArray('fundingReference', { defaultValue: [] })
+  fundingReferences;
+
+  @fragmentArray('relatedItem', { defaultValue: [] })
+  relatedItems;
+
+  @attr()
+  landingPage;
+
+  @attr('xml')
+  xml;
+
+  @attr('string')
+  metadataVersion;
+
+  @attr('string')
+  schemaVersion;
+
+  @attr('string', { defaultValue: 'fabrica' })
+  source;
+
+  @attr('string')
+  state;
+
+  @attr('string', { defaultValue: null })
+  breason;
+
+  @attr('boolean', { defaultValue: true })
+  isActive;
+
+  @attr('string')
+  event;
+
+  @attr('date')
+  created;
+
+  @attr('date')
+  registered;
+
+  @attr('date')
+  updated;
+
+  @attr('string')
+  mode;
+
+  @attr()
+  meta;
+
+  @attr('number')
+  citationCount;
+
+  @attr('number')
+  viewCount;
+
+  @attr('number')
+  downloadCount;
+
+  @computed('doi', 'repository')
+  get identifier() {
     return ENV.HANDLE_SERVER + '/' + this.doi;
-  }),
-  isDraft: equal('state', 'draft'),
-  showCitation: reads('registered'),
-  schemaVersionString: computed('schemaVersion', function () {
+  }
+
+  @equal('state', 'draft')
+  isDraft;
+
+  @reads('registered')
+  showCitation;
+
+  @computed('schemaVersion')
+  get schemaVersionString() {
     if (this.schemaVersion) {
       return A(this.schemaVersion.split('-')).get('lastObject');
     } else {
       return null;
     }
-  }),
-  title: computed('titles.length', function () {
+  }
+
+  @computed('titles.length')
+  get title() {
     if (this.titles.length > 0) {
       return A(this.titles).get('firstObject').get('title');
     } else {
       return null;
     }
-  }),
-  description: computed('descriptions.length', function () {
+  }
+
+  @computed('descriptions.length')
+  get description() {
     if (this.descriptions.length > 0) {
       return A(this.descriptions).get('firstObject').get('description');
     } else {
       return null;
     }
-  }),
-  maxMintFutureOffset: computed(function () {
+  }
+
+  @computed
+  get maxMintFutureOffset() {
     return ENV.MAX_MINT_FUTURE_OFFSET;
-  })
-});
+  }
+}

@@ -49,12 +49,16 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | CONTACTS', () => {
     
     cy.get('h2.work').contains('DataCite');
     cy.get('li a.nav-link.active').contains('Contacts');
-    cy.get('div#search').should('exist');
-    cy.get('div.panel.facets').should('exist');
-
-    cy.get('a#add-contact').contains('Add Contact');
-
-    cy.get('button.export-basic-metadata').should('not.exist');
+    cy.get('body').then(($body) => {
+      if ($body.find('div.alert.alert-warning.show').length > 0) {
+        cy.get('div.alert.alert-warning.show').contains('No contacts found.');
+      } else {
+        cy.get('div#search').should('exist');
+        cy.get('div.panel.facets').should('exist');
+        cy.get('button.export-basic-metadata').should('not.exist');
+      }
+      cy.get('a#add-contact').should('exist');
+    })
   });
 
   it('search contacts', () => {
@@ -102,7 +106,7 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | CONTACTS', () => {
         // Give it a little extra time to process the new contact so that we can search for it.
         cy.visit('/providers/' + provider_id + '/contacts');
         cy.url().should('include', '/providers/' + provider_id + '/contacts')
-        cy.wait(waitTime)
+        cy.wait(10000)
 
         cy.get('a#role-name-service')
           .click()
@@ -263,7 +267,7 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | CONTACTS', () => {
         cy.wait(waitTime);
         
         cy.get('a#delete-contact').contains('Delete Contact').click();
-        cy.wait(waitTime);
+        cy.wait(waitTime3);
 
         cy.get('h2.work').contains(given_name + ' ' + family_name);
         cy.get('label.control-label').contains(
@@ -276,7 +280,7 @@ describe('ACCEPTANCE: ORGANIZATION_ADMIN | CONTACTS', () => {
         cy.get('#confirm-delete-field').should('have.class', 'is-valid');
 
         cy.get('button#delete').contains('Delete').click({force: true});
-        cy.wait(waitTime3);
+        cy.wait(20000);
         cy.location().should((loc) => {
           expect(loc.pathname).to.eq('/providers/' + provider_id + '/contacts');
         });

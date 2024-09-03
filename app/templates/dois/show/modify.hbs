@@ -7,7 +7,7 @@
       </div>
     </div>
 
-    <BsForm @formLayout="horizontal" class="form-horizontal" @horizontalLabelGridClass="col-md-3" @model={{this.model}} @onSubmit={{action "submit" this.model}} as |form|>
+    <BsForm @formLayout="horizontal" class="form-horizontal" @horizontalLabelGridClass="col-md-3" @model={{this.model}} @onSubmit={{action "submitAction" this.model}} as |form|>
       <div class="form-group required-nested-label">
         <label class="control-label col-md-3">DOI</label>
         <div class="col-md-9 input-fragment">
@@ -43,7 +43,7 @@
           <button type="submit" id="doi-modify" class="btn btn-sm btn-fill" disabled={{true}}>Update DOI</button>          
         {{/if}}
 
-        <button class="btn btn-sm" type="button" {{action "cancel"}}>Cancel</button>
+        <button class="btn btn-sm" type="button" {{action "cancelAction"}}>Cancel</button>
       </div>
     </BsForm>
   </div>

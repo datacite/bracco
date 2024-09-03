@@ -1,8 +1,10 @@
+import classic from 'ember-classic-decorator';
 /* eslint-disable no-useless-escape */
 import BaseValidator from 'ember-cp-validations/validators/base';
 import { isURL, isISBN } from 'validator';
 
-const IdentifierFormat = BaseValidator.extend({
+@classic
+class IdentifierFormat extends BaseValidator {
   validate(value, options, model) {
     const ark = /^ark:\/[0-9]{5}\/\S+$/;
     const lsid =
@@ -59,6 +61,6 @@ const IdentifierFormat = BaseValidator.extend({
         return 'Please enter a Related Identedfier type.';
     }
   }
-});
+}
 
 export default IdentifierFormat;

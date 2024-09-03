@@ -1,7 +1,9 @@
+import classic from 'ember-classic-decorator';
 import Transform from '@ember-data/serializer/transform';
 import { typeOf } from '@ember/utils';
 
-export default Transform.extend({
+@classic
+export default class Wrapped extends Transform {
   deserialize(serialized) {
     if (typeOf(serialized) === 'array') {
       return this.deserialize(serialized[0]);
@@ -10,9 +12,9 @@ export default Transform.extend({
     } else {
       return serialized;
     }
-  },
+  }
 
   serialize(deserialized) {
     return deserialized;
   }
-});
+}

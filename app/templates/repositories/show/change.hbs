@@ -3,19 +3,19 @@
       <div class="col-md-9 col-md-offset-3">
         <h3 class="edit">Set Password</h3>
 
-        <span class="help-block">Click <a class="action-link" {{action "generate"}} data-test-password-suggestion>here</a> for a password suggestion.</span>
+        <span class="help-block">Click <a class="action-link" {{action "generateAction"}} data-test-password-suggestion>here</a> for a password suggestion.</span>
       </div>
 
-      <BsForm @formLayout="horizontal" class="form-horizontal" @horizontalLabelGridClass="col-md-3" @model={{this.model}} @onSubmit={{action "submit"}} @submitOnEnter={{true}} as |form|>
+      <BsForm @formLayout="horizontal" class="form-horizontal" @horizontalLabelGridClass="col-md-3" @model={{this.model}} @onSubmit={{action "submitAction"}} @submitOnEnter={{true}} as |form|>
         <form.element @controlType="password" id="password-input" class="form-group" @property="passwordInput" @label="New Password" as |el| >
-          <el.control id="password-input-field" /><i class="bi bi-eye-slash" id="togglePassword" {{action 'togglePassword'}}></i>
+          <el.control id="password-input-field" /><i class="bi bi-eye-slash" id="togglePassword" {{action 'togglePasswordAction'}}></i>
         </form.element>
         <form.element @controlType="password"id="confirm-password-input" class="form-group" @property="confirmPasswordInput" @label="Confirm Password" as |el| >
-          <el.control id="confirm-password-input-field" /><i class="bi bi-eye-slash" id="toggleConfirmPassword" {{action 'toggleConfirmPassword'}}></i>
+          <el.control id="confirm-password-input-field" /><i class="bi bi-eye-slash" id="toggleConfirmPassword" {{action 'toggleConfirmPasswordAction'}}></i>
         </form.element>
         <div class="col-md-9 col-md-offset-3">
           <button type="submit" class="btn btn-sm btn-fill" disabled={{v-get this.model 'confirmPasswordInput' 'isInvalid'}}>Set Password</button>
-          <button class="btn btn-sm" id="cancel" type="button" {{action "cancel" this.model}}>Cancel</button>
+          <button class="btn btn-sm" id="cancel" type="button" {{action "cancelAction" this.model}}>Cancel</button>
         </div>
       </BsForm>
     </div>

@@ -1,10 +1,14 @@
+import classic from 'ember-classic-decorator';
 import { inject as service } from '@ember/service';
 import BaseValidator from 'ember-cp-validations/validators/base';
+
 // import fetch from 'fetch';
 // import Checkdigit from 'checkdigit';
 
-const NameIdentifier = BaseValidator.extend({
-  store: service(),
+@classic
+class NameIdentifier extends BaseValidator {
+  @service
+  store;
 
   validate(value) {
     if (!value) {
@@ -101,7 +105,7 @@ const NameIdentifier = BaseValidator.extend({
       // });
     }
   }
-});
+}
 
 NameIdentifier.reopenClass({
   getDependentsFor() {

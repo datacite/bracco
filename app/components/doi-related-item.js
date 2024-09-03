@@ -1,6 +1,8 @@
+import classic from 'ember-classic-decorator';
+import { action } from '@ember/object';
+import { inject as service } from '@ember/service';
 /* eslint-disable no-useless-escape */
 import Component from '@ember/component';
-import { inject as service } from '@ember/service';
 import { pascalCase } from 'pascal-case';
 
 const relationTypeList = [
@@ -75,26 +77,29 @@ const relatedItemTypeList = [
   'Other'
 ];
 
-export default Component.extend({
-  store: service(),
-  relationTypeList,
-  relationTypes: relationTypeList,
-  relatedItemTypeList,
-  relatedItemTypes: relatedItemTypeList,
-  showRelatedItemCreators: false,
-  showRelatedItemContributors: false,
+@classic
+export default class DoiRelatedItem extends Component {
+  @service
+  store;
+
+  relationTypeList = relationTypeList;
+  relationTypes = relationTypeList;
+  relatedItemTypeList = relatedItemTypeList;
+  relatedItemTypes = relatedItemTypeList;
+  showRelatedItemCreators = false;
+  showRelatedItemContributors = false;
 
   init(...args) {
-    this._super(...args);
+    super.init(...args);
 
     this.isMetadataRelationTypes = this.isMetadataRelationTypes || [
       'HasMetadata',
       'IsMetadataFor'
     ];
-  },
+  }
 
   didReceiveAttrs() {
-    this._super(...arguments);
+    super.didReceiveAttrs(...arguments);
 
     if (!this.fragment.get('relatedItemIdentifier')) {
       this.fragment.set('relatedIdentifier', {});
@@ -115,7 +120,8 @@ export default Component.extend({
     if (!this.fragment.get('contributors')) {
       this.fragment.set('contributors', []);
     }
-  },
+  }
+
   selectRelationType(relationType) {
     if (this.isMetadataRelationTypes.includes(relationType)) {
       this.set('isMetadataRelationType', true);
@@ -131,7 +137,8 @@ export default Component.extend({
       this.fragment.set('relationType', null);
     }
     this.set('relationTypes', relationTypeList);
-  },
+  }
+
   selectRelatedItemType(relatedItemType) {
     if (relatedItemType) {
       this.fragment.set('relatedItemType', pascalCase(relatedItemType));
@@ -139,48 +146,70 @@ export default Component.extend({
       this.fragment.set('relatedItemType', null);
     }
     this.set('relatedItemTypes', relatedItemTypeList);
-  },
-  actions: {
-    updateRelatedItemTitle(value) {
-      this.fragment.set('titles', [{ title: value }]);
-    },
-    updateRelatedItemVolume(value) {
-      this.fragment.set('volume', value);
-    },
-    updateRelatedItemIssue(value) {
-      this.fragment.set('issue', value);
-    },
-    updateRelatedItemNumber(value) {
-      this.fragment.set('number', value);
-    },
-    updateRelatedItemPublicationYear(value) {
-      this.fragment.set('publicationYear', value);
-    },
-    selectRelationType(relationType) {
-      this.selectRelationType(relationType);
-    },
-    selectRelatedItemType(relatedItemType) {
-      this.selectRelatedItemType(relatedItemType);
-    },
-    deleteRelatedItem() {
-      this.model.get('relatedItems').removeObject(this.fragment);
-    },
-    addRelatedItemCreator() {
-      this.fragment.get('creators').createFragment();
-      this.set('showRelatedItemCreators', true);
-    },
-    toggleRelatedItemCreators() {
-      this.set('showRelatedItemCreators', !this.showRelatedItemCreators);
-    },
-    addRelatedItemContributor() {
-      this.fragment.get('contributors').createFragment();
-      this.set('showRelatedItemContributors', true);
-    },
-    toggleRelatedItemContributors() {
-      this.set(
-        'showRelatedItemContributors',
-        !this.showRelatedItemContributors
-      );
-    }
   }
-});
+
+  @action
+  updateRelatedItemTitleAction(value) {
+    this.fragment.set('titles', [{ title: value }]);
+  }
+
+  @action
+  updateRelatedItemVolumeAction(value) {
+    this.fragment.set('volume', value);
+  }
+
+  @action
+  updateRelatedItemIssueAction(value) {
+    this.fragment.set('issue', value);
+  }
+
+  @action
+  updateRelatedItemNumberAction(value) {
+    this.fragment.set('number', value);
+  }
+
+  @action
+  updateRelatedItemPublicationYearAction(value) {
+    this.fragment.set('publicationYear', value);
+  }
+
+  @action
+  selectRelationTypeAction(relationType) {
+    this.selectRelationType(relationType);
+  }
+
+  @action
+  selectRelatedItemTypeAction(relatedItemType) {
+    this.selectRelatedItemType(relatedItemType);
+  }
+
+  @action
+  deleteRelatedItemAction() {
+    this.model.get('relatedItems').removeObject(this.fragment);
+  }
+
+  @action
+  addRelatedItemCreatorAction() {
+    this.fragment.get('creators').createFragment();
+    this.set('showRelatedItemCreators', true);
+  }
+
+  @action
+  toggleRelatedItemCreatorsAction() {
+    this.set('showRelatedItemCreators', !this.showRelatedItemCreators);
+  }
+
+  @action
+  addRelatedItemContributorAction() {
+    this.fragment.get('contributors').createFragment();
+    this.set('showRelatedItemContributors', true);
+  }
+
+  @action
+  toggleRelatedItemContributorsAction() {
+    this.set(
+      'showRelatedItemContributors',
+      !this.showRelatedItemContributors
+    );
+  }
+}

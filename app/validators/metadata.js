@@ -1,10 +1,13 @@
+import classic from 'ember-classic-decorator';
 import { inject as service } from '@ember/service';
 import BaseValidator from 'ember-cp-validations/validators/base';
 import fetch from 'fetch';
 import ENV from 'bracco/config/environment';
 
-const metadata = BaseValidator.extend({
-  currentUser: service(),
+@classic
+class metadata extends BaseValidator {
+  @service
+  currentUser;
 
   validate(value, options, model) {
     if (!value && options.allowBlank) {
@@ -55,7 +58,8 @@ const metadata = BaseValidator.extend({
           console.debug(error);
         });
     }
-  },
+  }
+
   b64EncodeUnicode(str) {
     // first we use encodeURIComponent to get percent-encoded UTF-8,
     // then we convert the percent encodings into raw bytes which
@@ -69,7 +73,7 @@ const metadata = BaseValidator.extend({
       )
     );
   }
-});
+}
 
 metadata.reopenClass({
   getDependentsFor() {

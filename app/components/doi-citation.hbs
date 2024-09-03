@@ -1,0 +1,17 @@
+{{#if this.model.publicationYear}}
+  <div id="citation" class="input-group pull-right">
+    <select onchange={{action 'doSelectStyle' value="target.value"}}>
+      {{#each-in this.citationFormats as |key value|}}
+        <option name="citation" value={{key}} selected={{eq this.citation key}}>{{value}}</option>
+      {{/each-in}}
+    </select>
+  </div>
+  <h3 class="member-results">Citation</h3>
+  <div class="clearfix"/>
+
+  <div class="panel panel-transparent">
+    <div class="panel-body" data-test-citation>
+      <DoiCitationBody @text="{{format-text this.citationOutput}}" />
+    </div>
+  </div>
+{{/if}}

@@ -1,8 +1,9 @@
+import classic from 'ember-classic-decorator';
+import { computed } from '@ember/object';
 import { attr } from '@ember-data/model';
 import Fragment from 'ember-data-model-fragments/fragment';
 import { fragmentArray } from 'ember-data-model-fragments/attributes';
 import { validator, buildValidations } from 'ember-cp-validations';
-import { computed } from '@ember/object';
 import { A } from '@ember/array';
 import { isBlank } from '@ember/utils';
 
@@ -31,21 +32,38 @@ const Validations = buildValidations({
   ]
 });
 
-export default Fragment.extend(Validations, {
-  name: attr('string'),
-  contributorType: attr('string', { defaultValue: null }),
-  givenName: attr('string', { defaultValue: null }),
-  familyName: attr('string', { defaultValue: null }),
-  nameType: attr('string', { defaultValue: null }),
-  nameIdentifiers: fragmentArray('name-identifier'),
-  affiliation: fragmentArray('affiliation'),
+@classic
+export default class Contributor extends Fragment.extend(Validations) {
+  @attr('string')
+  name;
 
-  displayName: computed('name', 'givenName', 'familyName', function () {
+  @attr('string', { defaultValue: null })
+  contributorType;
+
+  @attr('string', { defaultValue: null })
+  givenName;
+
+  @attr('string', { defaultValue: null })
+  familyName;
+
+  @attr('string', { defaultValue: null })
+  nameType;
+
+  @fragmentArray('name-identifier')
+  nameIdentifiers;
+
+  @fragmentArray('affiliation')
+  affiliation;
+
+  @computed('name', 'givenName', 'familyName')
+  get displayName() {
     return this.familyName
       ? [this.givenName, this.familyName].join(' ')
       : this.name;
-  }),
-  orcid: computed('nameIdentifiers', function () {
+  }
+
+  @computed('nameIdentifiers')
+  get orcid() {
     if (this.nameIdentifiers) {
       let id = A(this.nameIdentifiers).findBy('nameIdentifierScheme', 'ORCID');
       if (
@@ -59,5 +77,5 @@ export default Fragment.extend(Validations, {
     } else {
       return null;
     }
-  })
-});
+  }
+}

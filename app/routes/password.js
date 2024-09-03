@@ -1,12 +1,23 @@
+import classic from 'ember-classic-decorator';
 import { inject as service } from '@ember/service';
-import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-route-mixin';
 import Route from '@ember/routing/route';
 
-export default Route.extend(AuthenticatedRouteMixin, {
-  currentUser: service(),
-  store: service(),
+@classic
+export default class PasswordRoute extends Route {
+  @service
+  currentUser;
 
-  authenticationRoute: 'sign-in',
+  @service
+  store;
+
+  @service
+  session;
+
+  beforeModel(transition) {
+    this.session.requireAuthentication(transition, 'sign-in');
+  }
+
+  //authenticationRoute: 'sign-in',
 
   model() {
     if (this.currentUser.get('client_id')) {
@@ -41,4 +52,4 @@ export default Route.extend(AuthenticatedRouteMixin, {
         });
     }
   }
-});
+}

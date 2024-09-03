@@ -1,17 +1,29 @@
+import classic from 'ember-classic-decorator';
 import { inject as service } from '@ember/service';
 import Route from '@ember/routing/route';
-import { assign } from '@ember/polyfills';
 
-export default Route.extend({
-  can: service(),
-  currentUser: service(),
-  flashMessages: service(),
-  prefixes: service(),
-  router: service(),
-  store: service(),
+@classic
+export default class IndexRoute extends Route {
+  @service
+  can;
+
+  @service
+  currentUser;
+
+  @service
+  flashMessages;
+
+  @service
+  prefixes;
+
+  @service
+  router;
+
+  @service
+  store;
 
   model(params) {
-    params = assign(params, {
+    params = Object.assign(params, {
       page: {
         number: params.page,
         size: params.size
@@ -27,9 +39,9 @@ export default Route.extend({
         console.debug(reason);
         return null;
       });
-  },
+  }
 
-  queryParams: {
+  queryParams = {
     page: {
       refreshModel: true
     },
@@ -42,11 +54,11 @@ export default Route.extend({
     'repository-id': {
       refreshModel: true
     }
-  },
+  };
 
   afterModel() {
     if (this.can.cannot('read index')) {
       this.router.transitionTo('index');
     }
   }
-});
+}

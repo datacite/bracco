@@ -1,7 +1,9 @@
+import classic from 'ember-classic-decorator';
 import BaseValidator from 'ember-cp-validations/validators/base';
 import isUUID from 'validator/lib/isUUID';
 
-const UuidFormat = BaseValidator.extend({
+@classic
+class UuidFormat extends BaseValidator {
   validate(value, options) {
     if (!value && options.allowBlank) {
       return true;
@@ -21,6 +23,6 @@ const UuidFormat = BaseValidator.extend({
       }
     }
   }
-});
+}
 
 export default UuidFormat;

@@ -1,23 +1,27 @@
+import classic from 'ember-classic-decorator';
+import { action } from '@ember/object';
 import Component from '@ember/component';
 
-export default Component.extend({
-  showSubjects: false,
+@classic
+export default class DoiSubjects extends Component {
+  showSubjects = false;
 
   didReceiveAttrs() {
-    this._super(...arguments);
+    super.didReceiveAttrs(...arguments);
 
     if (!this.model.get('subjects')) {
       this.model.set('subjects', []);
     }
-  },
-
-  actions: {
-    addSubject() {
-      this.model.get('subjects').createFragment();
-      this.set('showSubjects', true);
-    },
-    toggleSubjects() {
-      this.set('showSubjects', !this.showSubjects);
-    }
   }
-});
+
+  @action
+  addSubject() {
+    this.model.get('subjects').createFragment();
+    this.set('showSubjects', true);
+  }
+
+  @action
+  toggleSubjects() {
+    this.set('showSubjects', !this.showSubjects);
+  }
+}

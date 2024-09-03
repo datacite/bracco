@@ -1,22 +1,30 @@
+import classic from 'ember-classic-decorator';
+import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 import Component from '@ember/component';
 
-export default Component.extend({
-  currentUser: service(),
-  store: service(),
-  router: service(),
+@classic
+export default class DoiTransfer extends Component {
+  @service
+  currentUser;
 
-  oldRepository: null,
-  repositories: null,
-  isDisabled: true,
+  @service
+  store;
+
+  @service
+  router;
+
+  oldRepository = null;
+  repositories = null;
+  isDisabled = true;
 
   didReceiveAttrs() {
-    this._super(...arguments);
+    super.didReceiveAttrs(...arguments);
 
     this.model.set('mode', 'transfer');
 
     this.searchRepository(null);
-  },
+  }
 
   searchRepository(query) {
     let self = this;
@@ -64,29 +72,35 @@ export default Component.extend({
           self.set('repositories', []);
         });
     }
-  },
+  }
+
   selectRepository(repository) {
     this.set('oldRepository', this.model.get('repository.id'));
     this.model.set('repository', repository);
     this.model.set('provider', repository.get('provider'));
     this.set('isDisabled', repository.id === this.oldRepository);
-  },
-
-  actions: {
-    searchRepository(query) {
-      this.searchRepository(query);
-    },
-    selectRepository(repository) {
-      this.selectRepository(repository);
-    },
-    submit(doi) {
-      let self = this;
-      doi.save().then(function (doi) {
-        self.router.transitionTo('dois.show', doi);
-      });
-    },
-    cancel() {
-      this.router.transitionTo('dois.show', this.model);
-    }
   }
-});
+
+  @action
+  searchRepositoryAction(query) {
+    this.searchRepository(query);
+  }
+
+  @action
+  selectRepositoryAction(repository) {
+    this.selectRepository(repository);
+  }
+
+  @action
+  submitAction(doi) {
+    let self = this;
+    doi.save().then(function (doi) {
+      self.router.transitionTo('dois.show', doi);
+    });
+  }
+
+  @action
+  cancelAction() {
+    this.router.transitionTo('dois.show', this.model);
+  }
+}
