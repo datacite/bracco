@@ -43,13 +43,16 @@ const relationTypeList = [
   'Is original form of',
   'Is identical to',
   'Is collected by',
-  'Collects'
+  'Collects',
+  'Is translation of',
+  'Has translation'
 ];
 
 const relatedIdentifierTypeList = [
   'ARK',
   'arXiv',
   'bibcode',
+  'CSTR',
   'DOI',
   'EAN13',
   'EISSN',
@@ -62,6 +65,7 @@ const relatedIdentifierTypeList = [
   'LSID',
   'PMID',
   'PURL',
+  'RRID',
   'UPC',
   'URL',
   'URN',
@@ -70,6 +74,7 @@ const relatedIdentifierTypeList = [
 
 const resourceTypeGeneralList = [
   'Audiovisual',
+  'Award',
   'Book',
   'BookChapter',
   'Collection',
@@ -90,6 +95,7 @@ const resourceTypeGeneralList = [
   'PeerReview',
   'PhysicalObject',
   'Preprint',
+  'Project',
   'Report',
   'Service',
   'Software',
