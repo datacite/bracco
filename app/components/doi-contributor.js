@@ -52,6 +52,7 @@ const personalContributorTypes = [
   'RelatedPerson',
   'Researcher',
   'Supervisor',
+  'Translator',
   'WorkPackageLeader'
 ];
 
