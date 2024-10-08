@@ -7,6 +7,7 @@ class ResourceType extends BaseValidator {
   validate(value, options) {
     const resourceTypeGeneralList = [
       'Audiovisual',
+      'Award',
       'Book',
       'BookChapter',
       'Collection',
@@ -27,6 +28,7 @@ class ResourceType extends BaseValidator {
       'PeerReview',
       'PhysicalObject',
       'Preprint',
+      'Project',
       'Report',
       'Service',
       'Software',

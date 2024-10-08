@@ -7,6 +7,7 @@ const dateTypesCompleteList = [
   'Available',
   'Copyrighted',
   'Collected',
+  'Coverage',
   'Created',
   'Issued',
   'Submitted',

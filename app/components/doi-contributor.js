@@ -25,6 +25,7 @@ const contributorTypes = [
   'RightsHolder',
   'Sponsor',
   'Supervisor',
+  'Translator',
   'WorkPackageLeader',
   'Other'
 ];
@@ -51,6 +52,7 @@ const personalContributorTypes = [
   'RelatedPerson',
   'Researcher',
   'Supervisor',
+  'Translator',
   'WorkPackageLeader'
 ];
 

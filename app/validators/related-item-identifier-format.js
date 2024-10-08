@@ -18,6 +18,7 @@ class RelatedItemIdentifierFormat extends BaseValidator {
     const doi = /^(10\.\d{4,5}\/.+)/;
     const bibcode = /\d{4}[A-Za-z\.\&]{5}[\w\.]{4}[ELPQ-Z\.][\d\.]{4}[A-Z]/;
     const urn = /^urn:[a-z0-9][a-z0-9-]{0,31}:[a-z0-9()+,\-.:=@;$_!*'%/?#]/;
+    const rrid = '^RRID:[a-zA-Z]+.+$';
     const types = [
       'EAN13',
       'EISSN',
@@ -43,6 +44,8 @@ class RelatedItemIdentifierFormat extends BaseValidator {
         return bibcode.test(value) ? true : 'Please enter a valid bibcode.';
       case model.relatedItemIdentifierType == 'LSID':
         return lsid.test(value) ? true : 'Please enter a valid LSID.';
+      case model.relatedItemIdentifierType == 'RRID':
+        return rrid.test(value) ? true : 'Please enter a valid RRID.';
       case model.relatedItemIdentifierType == 'PURL':
         return isURL(value, purl) ? true : 'Please enter a valid PURL.';
       case model.relatedItemIdentifierType == 'URN':
