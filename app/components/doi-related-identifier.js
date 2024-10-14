@@ -166,6 +166,7 @@ export default class DoiRelatedIdentifier extends Component {
       /^(?:(http|https):\/\/(dx.)?(doi.org|handle.test.datacite.org)?\/)(10\.\d{4,5}\/.+)/;
     const bibcode = /\d{4}[A-Za-z\.\&]{5}[\w\.]{4}[ELPQ-Z\.][\d\.]{4}[A-Z]/;
     const urn = /^urn:[a-z0-9][a-z0-9-]{0,31}:[a-z0-9()+,\-.:=@;$_!*'%/?#]/;
+    const rrid = /^RRID:[a-zA-Z]+.+$/;
 
     switch (true) {
       case isBlank(value):
@@ -215,6 +216,11 @@ export default class DoiRelatedIdentifier extends Component {
       case urn.test(value):
         this.fragment.set('relatedIdentifier', value);
         this.fragment.set('relatedIdentifierType', 'URN');
+        this.set('controlledIdentifierType', true);
+        break;
+      case rrid.test(value):
+        this.fragment.set('relatedIdentifier', value);
+        this.fragment.set('relatedIdentifierType', 'RRID');
         this.set('controlledIdentifierType', true);
         break;
       case isISBN(value):
