@@ -115,7 +115,106 @@ Cypress.Commands.add("createDoi", (prefix, api_url, jwt) => {
   });
 });
 
+Cypress.Commands.add("createRegisteredDoi", (prefix, api_url, jwt) => {
+  return cy.request({
+    method: 'POST',
+    url: api_url + '/dois',
+    body: {
+      'data': {
+        'type': 'dois',
+        'attributes': { 
+          'prefix': prefix,
+          "url": "https://example.com",
+          "creators": [
+              {
+                  "name": "Minnie Mouse",
+                  "givenName": null,
+                  "familyName": null,
+                  "nameType": null,
+                  "nameIdentifiers": [],
+                  "affiliation": []
+              }
+          ],
+          "titles": [
+              {
+                  "title": "Test Title",
+                  "titleType": null,
+                  "lang": null
+              }
+          ],
+          "publisher": {
+              "name": "University of Illinois Urbana-Champaign",
+              "lang": null,
+              "publisherIdentifier": "https://ror.org/047426m28",
+              "publisherIdentifierScheme": "ROR",
+              "schemeUri": "https://ror.org"
+          },
+          "publicationYear": 2024,
+          "subjects": [],
+          "contributors": [],
+          "alternateIdentifiers": [],
+          "dates": [],
+          "language": null,
+          "types": {
+              "resourceTypeGeneral": "Dataset"
+          },
+          "relatedIdentifiers": [],
+          "sizes": [],
+          "formats": [],
+          "version": null,
+          "rightsList": [],
+          "descriptions": [],
+          "geoLocations": [],
+          "fundingReferences": [],
+          "relatedItems": [],
+          "xml": null,
+          "schemaVersion": "http://datacite.org/schema/kernel-4",
+          "source": "fabricaForm",
+          "state": "registered",
+          "reason": null,
+          "event": "register",
+          "mode": "new"        
+        }
+      }
+    },
+    headers: {
+      authorization: 'Bearer ' + jwt,
+    }
+  }).then((response) => {
+    // redirect status code is 302
+    expect(response.status).to.eq(201)
+    return(response.body.data.id);
+  });
+});
+
 Cypress.Commands.add("createDoiXmlUpload", (prefix, fixture, api_url, jwt) => {
+
+  cy.readFile('cypress/fixtures/' + fixture, 'base64').then(text => {
+    return cy.request({
+      method: 'POST',
+      url: api_url + '/dois',
+      body: {
+        'data': {
+          'type': 'dois',
+          'attributes': {
+            'prefix': prefix,
+            "url": "https://schema.datacite.org/meta/kernel-4.0/index.html",
+            "xml": text,
+          }
+        }
+      },
+      headers: {
+        authorization: 'Bearer ' + jwt,
+      }
+    }).then((response) => {
+      // redirect status code is 302
+      expect(response.status).to.eq(201)
+      return(response.body.data.id);
+    });
+  });
+});
+
+Cypress.Commands.add("createRegisteredDoiXmlUpload", (prefix, fixture, api_url, jwt) => {
 
   cy.readFile('cypress/fixtures/' + fixture, 'base64').then(text => {
     return cy.request({

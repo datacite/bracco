@@ -35,7 +35,7 @@
   </div>
 {{/if}}
 
-<div>
+<div data-test-contributor-name>
   <label for="name" class="subtitle required-label">Name{{if this.isReadonly ' (from Given Name and Family Name)'}}</label>
   <div class="input-group">
     <input type="text" class="form-control name-field" value={{this.fragment.name}} placeholder="Name" oninput={{action "updateName" value="target.value"}} readonly={{this.isReadonly}} data-test-name/>
