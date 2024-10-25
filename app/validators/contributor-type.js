@@ -47,7 +47,6 @@ class ContributorType extends BaseValidator {
       'RelatedPerson',
       'Researcher',
       'Supervisor',
-      'Translator',
       'WorkPackageLeader'
     ];
 
