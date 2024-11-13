@@ -39,11 +39,11 @@ export default class EditController extends Controller {
   state = null;
   source = null;
   'link-check-status' = null;
-  sort = null;
+  sort = '-updated';
   'schema-version' = null;
   certificate = null;
   page = 1;
   size = 25;
   affiliation = true;
   publisher = true;
-};
+}
