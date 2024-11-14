@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://datacite.org/schema/kernel-3" xsi:schemaLocation="http://datacite.org/schema/kernel-3 http://schema.datacite.org/meta/kernel-3/metadata.xsd">
+  <identifier identifierType="DOI">10.14454/0000-0003</identifier>
+  <creators>
+    <creator>
+      <creatorName nameType="Personal">Travolta, John</creatorName>
+      <givenName>John</givenName>
+      <familyName>Travolta</familyName>
+    </creator>
+    <creator>
+      <creatorName nameType="Personal">X, Mr</creatorName>
+      <givenName>Mr</givenName>
+      <familyName>X</familyName>
+    </creator>
+    <creator>
+      <creatorName nameType="Personal">Mozart, Wolfgang Amadeus</creatorName>
+      <givenName>Wolfgang Amadeus</givenName>
+      <familyName>Mozart</familyName>
+    </creator>
+  </creators>
+  <titles>
+    <title>Test Title</title>
+  </titles>
+  <publisher>University of Illinois at Chicago</publisher>
+  <publicationYear>2024</publicationYear>
+  <contributors>
+    <contributor contributorType="RightsHolder">
+      <contributorName>Durham University</contributorName>
+    </contributor>
+    <contributor contributorType="HostingInstitution">
+      <contributorName>Durham University</contributorName>
+    </contributor>
+    <contributor contributorType="Funder">
+      <contributorName>Durham University</contributorName>
+    </contributor>
+  </contributors>
+  <sizes/>
+  <formats/>
+  <version/>
+</resource>
