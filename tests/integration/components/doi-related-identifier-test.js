@@ -19,7 +19,7 @@ module('Integration | Component | doi related-identifier', function (hooks) {
     assert
       .dom('*')
       .hasText(
-        'Must be a globally unique identifier. Visit our support website for the list of supported unique identifiers. Related Identifier Type Relation Type Resource Type General Related Metadata Scheme The name of the scheme. Related Metadata Scheme URI The URI of the relatedMetadataScheme. For example: http://www.ddialliance.org/Specification/DDILifecycle/3.1/XMLSchema/instance.xsd for DDI-L schema. Related Metadata Scheme Type The type of the relatedMetadataScheme, linked with the schemeURI.'
+        'Must be a globally unique identifier. Visit the DataCite Metadata Schema documentation for the list of supported unique identifiers. Related Identifier Type Relation Type Resource Type General Related Metadata Scheme The name of the scheme. Related Metadata Scheme URI The URI of the relatedMetadataScheme. For example: http://www.ddialliance.org/Specification/DDILifecycle/3.1/XMLSchema/instance.xsd for DDI-L schema. Related Metadata Scheme Type The type of the relatedMetadataScheme, linked with the schemeURI.'
       );
   });
 });

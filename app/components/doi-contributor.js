@@ -25,6 +25,7 @@ const contributorTypes = [
   'RightsHolder',
   'Sponsor',
   'Supervisor',
+  'Translator',
   'WorkPackageLeader',
   'Other'
 ];

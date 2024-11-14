@@ -5,6 +5,7 @@ import { pascalCase } from 'pascal-case';
 
 const resourceTypeGeneralList = [
   'Audiovisual',
+  'Award',
   'Book',
   'BookChapter',
   'Collection',
@@ -25,6 +26,7 @@ const resourceTypeGeneralList = [
   'PeerReview',
   'PhysicalObject',
   'Preprint',
+  'Project',
   'Report',
   'Service',
   'Software',
