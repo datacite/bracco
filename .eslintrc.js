@@ -30,17 +30,15 @@ module.exports = {
     'ember/no-component-lifecycle-hooks': 0,
     'ember/require-tagless-components': 0,
     'ember/no-mixins': 0,
-    // TODO
-    //'ember/classic-decorator-no-classic-methods': 0,
     'ember/no-get': 0,
     'ember/no-controller-access-in-routes': 0,
-    // NEW - WITH UPGRADE TO ES-PLUGIN-EMBER V12
-    'ember/no-jquery': 'error',
-    'ember/no-replace-test-comments': 'error',
-    'ember/no-replace-test-comments': 'error',
-    // NEW - for ember-classic-decorator and move to native js classes
-    'ember/classic-decorator-hooks': 'error',
-    'ember/classic-decorator-no-classic-methods': 'error'
+    // NEW - WITH UPGRADE TO ESLINT-PLUGIN-EMBER V12
+    // 'ember/no-jquery': 'error',
+    // 'ember/no-replace-test-comments': 'error',
+    // 'ember/no-replace-test-comments': 'error',
+    // NEW - for ember-classic-decorator and migration to native js classes
+    'ember/classic-decorator-hooks': 0,
+    'ember/classic-decorator-no-classic-methods': 0
   },
   overrides: [
     // node files
@@ -64,8 +62,8 @@ module.exports = {
         browser: false,
         node: true
       },
-      plugins: ['node'],
-      extends: ['plugin:node/recommended'],
+      plugins: ['n'],
+      extends: ['plugin:n/recommended'],
       rules: {
         // this can be removed once the following is fixed
         // https://github.com/mysticatea/eslint-plugin-node/issues/77
