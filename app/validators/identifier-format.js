@@ -22,6 +22,7 @@ class IdentifierFormat extends BaseValidator {
     const urn = /^urn:[a-z0-9][a-z0-9-]{0,31}:[a-z0-9()+,\-.:=@;$_!*'%/?#]/;
     const rrid = /^RRID:[a-zA-Z]+.+$/;
     const types = [
+      'CSTR',
       'EAN13',
       'EISSN',
       'Handle',
