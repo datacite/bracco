@@ -1,8 +1,6 @@
-import classic from 'ember-classic-decorator';
 import Transform from '@ember-data/serializer/transform';
 import { typeOf } from '@ember/utils';
 
-@classic
 export default class Wrapped extends Transform {
   deserialize(serialized) {
     if (typeOf(serialized) === 'array') {

@@ -1,11 +1,9 @@
-import classic from 'ember-classic-decorator';
 import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 import JSONAPIAdapter from '@ember-data/adapter/json-api';
 import ENV from 'bracco/config/environment';
 import { isPresent } from '@ember/utils';
 
-@classic
 class ApplicationAdapter extends JSONAPIAdapter {
   @service
   session;

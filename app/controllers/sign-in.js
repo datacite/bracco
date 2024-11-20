@@ -1,4 +1,3 @@
-import classic from 'ember-classic-decorator';
 import { action, computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 import Controller from '@ember/controller';
@@ -6,7 +5,6 @@ import ENV from 'bracco/config/environment';
 import { isPresent } from '@ember/utils';
 import reasonUtil from '../utils/reason-util';
 
-@classic
 export default class SignInController extends Controller {
   @service
   session;

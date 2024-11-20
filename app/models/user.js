@@ -1,10 +1,8 @@
-import classic from 'ember-classic-decorator';
 import { computed } from '@ember/object';
 import { reads } from '@ember/object/computed';
 import Model, { attr } from '@ember-data/model';
 import { A } from '@ember/array';
 
-@classic
 export default class User extends Model {
   @attr()
   meta;

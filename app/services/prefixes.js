@@ -1,9 +1,7 @@
-import classic from 'ember-classic-decorator';
 import Service, { inject as service } from '@ember/service';
 import ENV from 'bracco/config/environment';
 import fetch from 'fetch';
 
-@classic
 export default class PrefixesService extends Service {
   @service
   store;

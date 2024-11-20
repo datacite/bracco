@@ -1,4 +1,3 @@
-import classic from 'ember-classic-decorator';
 import { action, computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 import Controller from '@ember/controller';
@@ -8,7 +7,6 @@ import langs from 'langs';
 import { A } from '@ember/array';
 import { clientTypeList, softwareList } from 'bracco/models/repository';
 
-@classic
 export default class NewController extends Controller {
   @service
   store;

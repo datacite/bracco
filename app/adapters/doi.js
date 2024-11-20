@@ -1,9 +1,7 @@
-import classic from 'ember-classic-decorator';
 import ApplicationAdapter from './application';
 import ENV from 'bracco/config/environment';
 import { isPresent } from '@ember/utils';
 
-@classic
 export default class Doi extends ApplicationAdapter {
   urlForFindRecord(id, modelName, snapshot) {
     let baseUrl = this.buildURL(modelName, id, snapshot);

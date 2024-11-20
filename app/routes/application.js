@@ -1,10 +1,8 @@
-import classic from 'ember-classic-decorator';
 import { inject as service } from '@ember/service';
 import Route from '@ember/routing/route';
 import ENV from 'bracco/config/environment';
 import { set } from '@ember/object';
 
-@classic
 export default class ApplicationRoute extends Route {
   @service
   session;

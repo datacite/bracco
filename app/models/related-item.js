@@ -1,4 +1,3 @@
-import classic from 'ember-classic-decorator';
 import { computed } from '@ember/object';
 import { reads } from '@ember/object/computed';
 import { attr } from '@ember-data/model';
@@ -88,7 +87,6 @@ const Validations = buildValidations({
   ]
 });
 
-@classic
 export default class RelatedItem extends Fragment.extend(Validations) {
   @attr('string', { defaultValue: null })
   relatedItemType;

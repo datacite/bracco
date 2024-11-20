@@ -2,7 +2,6 @@ import classic from 'ember-classic-decorator';
 import JSONSerializer from '@ember-data/serializer/json';
 import { underscore } from '@ember/string';
 
-@classic
 export default class Ror extends JSONSerializer {
   normalizeArrayResponse(store, primaryModelClass, payload, id, requestType) {
     let total = payload.number_of_results;

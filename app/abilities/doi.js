@@ -1,9 +1,7 @@
-import classic from 'ember-classic-decorator';
 import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { Ability } from 'ember-can';
 
-@classic
 export default class Doi extends Ability {
   @service
   currentUser;

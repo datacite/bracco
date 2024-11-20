@@ -1,4 +1,3 @@
-import classic from 'ember-classic-decorator';
 import { computed } from '@ember/object';
 import { attr } from '@ember-data/model';
 import { validator, buildValidations } from 'ember-cp-validations';
@@ -111,7 +110,6 @@ const Validations = buildValidations({
   ]
 });
 
-@classic
 export default class GeoLocationBox extends Fragment.extend(Validations) {
   @attr('number', { defaultValue: null })
   southBoundLatitude;

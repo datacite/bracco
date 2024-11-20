@@ -1,4 +1,3 @@
-import classic from 'ember-classic-decorator';
 import { action, computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 import Controller from '@ember/controller';
@@ -138,7 +137,6 @@ const stateListAustralia = [
   { code: 'AU-NT', name: 'Northern Territory' }
 ];
 
-@classic
 export default class NewController extends Controller {
   @service
   store;

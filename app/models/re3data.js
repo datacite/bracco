@@ -1,4 +1,3 @@
-import classic from 'ember-classic-decorator';
 import { reads, union } from '@ember/object/computed';
 import Model, { attr } from '@ember-data/model';
 import { validator, buildValidations } from 'ember-cp-validations';
@@ -14,7 +13,6 @@ const Validations = buildValidations({
   ]
 });
 
-@classic
 export default class Re3Data extends Model.extend(Validations) {
   @attr('string')
   re3dataId;

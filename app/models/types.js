@@ -1,8 +1,6 @@
-import classic from 'ember-classic-decorator';
 import { attr } from '@ember-data/model';
 import Fragment from 'ember-data-model-fragments/fragment';
 
-@classic
 export default class Types extends Fragment {
   @attr('string')
   ris;

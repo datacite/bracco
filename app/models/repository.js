@@ -1,4 +1,3 @@
-import classic from 'ember-classic-decorator';
 import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 import Model, { attr, belongsTo, hasMany } from '@ember-data/model';
@@ -156,7 +155,6 @@ const Validations = buildValidations({
   ]
 });
 
-@classic
 export default class Repository extends Model.extend(Validations) {
   @service
   router;

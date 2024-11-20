@@ -1,4 +1,3 @@
-import classic from 'ember-classic-decorator';
 import { computed } from '@ember/object';
 import { reads, equal } from '@ember/object/computed';
 import { validator, buildValidations } from 'ember-cp-validations';
@@ -166,7 +165,6 @@ const Validations = buildValidations({
   ]
 });
 
-@classic
 export default class Doi extends Model.extend(Validations) {
   @belongsTo('repository', {
     async: true

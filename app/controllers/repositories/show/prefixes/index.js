@@ -1,9 +1,7 @@
-import classic from 'ember-classic-decorator';
 import { action } from '@ember/object';
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 
-@classic
 export default class EditController extends Controller {
   prefixes = service();
   queryParams = ['query', 'provider-id', 'client-id', 'year', 'page', 'size'];

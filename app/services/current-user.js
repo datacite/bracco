@@ -1,11 +1,9 @@
-import classic from 'ember-classic-decorator';
 import { resolve } from 'rsvp';
 import Service, { inject as service } from '@ember/service';
 import { isEmpty } from '@ember/utils';
 import nodeJsonWebToken from 'jsonwebtoken';
 import ENV from 'bracco/config/environment';
 
-@classic
 export default class CurrentUserService extends Service {
   @service
   session;

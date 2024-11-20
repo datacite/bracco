@@ -1,7 +1,6 @@
 import classic from 'ember-classic-decorator';
 import JSONSerializer from '@ember-data/serializer/json';
 
-@classic
 export default class Person extends JSONSerializer {
   normalizeSingleResponse(store, primaryModelClass, payload, id, requestType) {
     let name = payload.person.name;

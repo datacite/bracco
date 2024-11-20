@@ -1,9 +1,7 @@
-import classic from 'ember-classic-decorator';
 import { inject as service } from '@ember/service';
 import Route from '@ember/routing/route';
 // import { set } from '@ember/object';
 
-@classic
 export default class ShowRoute extends Route {
   @service
   can;

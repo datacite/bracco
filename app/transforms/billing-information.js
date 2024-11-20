@@ -1,4 +1,3 @@
-import classic from 'ember-classic-decorator';
 import Transform from '@ember-data/serializer/transform';
 import countryList from 'iso-3166-country-list';
 
@@ -119,7 +118,6 @@ const stateList = [
   { code: 'AU-NT', name: 'Northern Territory' }
 ];
 
-@classic
 export default class BillingInformation extends Transform {
   deserialize(serialized) {
     if (serialized) {

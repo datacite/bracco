@@ -1,11 +1,9 @@
-import classic from 'ember-classic-decorator';
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 import Controller from '@ember/controller';
 import fetch from 'fetch';
 import ENV from 'bracco/config/environment';
 
-@classic
 export default class ChangeController extends Controller {
   @service
   currentUser;

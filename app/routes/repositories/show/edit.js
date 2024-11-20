@@ -1,9 +1,7 @@
-import classic from 'ember-classic-decorator';
 import { inject as service } from '@ember/service';
 import Route from '@ember/routing/route';
 import { clientTypeList } from 'bracco/models/repository';
 
-@classic
 export default class EditRoute extends Route {
   @service
   can;

@@ -1,10 +1,8 @@
-import classic from 'ember-classic-decorator';
 import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { Ability } from 'ember-can';
 import isAbleTo from '../utils/is-able-to';
 
-@classic
 export default class Contact extends Ability {
   @service
   currentUser;

@@ -1,10 +1,8 @@
-import classic from 'ember-classic-decorator';
 import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { equal } from '@ember/object/computed';
 import { Ability } from 'ember-can';
 
-@classic
 export default class Repository extends Ability {
   @service
   currentUser;

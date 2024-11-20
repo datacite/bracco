@@ -1,8 +1,6 @@
-import classic from 'ember-classic-decorator';
 import JSONAPIAdapter from '@ember-data/adapter/json-api';
 import ENV from 'bracco/config/environment';
 
-@classic
 export default class Person extends JSONAPIAdapter {
   host = ENV.ORCID_API_URL;
 

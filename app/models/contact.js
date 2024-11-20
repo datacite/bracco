@@ -1,4 +1,3 @@
-import classic from 'ember-classic-decorator';
 import { computed } from '@ember/object';
 import Model, { attr, belongsTo } from '@ember-data/model';
 import { validator, buildValidations } from 'ember-cp-validations';
@@ -31,7 +30,6 @@ const Validations = buildValidations({
   ]
 });
 
-@classic
 export default class Contact extends Model.extend(Validations) {
   @belongsTo('provider', {
     async: true

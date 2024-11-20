@@ -1,4 +1,3 @@
-import classic from 'ember-classic-decorator';
 import { computed } from '@ember/object';
 import { attr } from '@ember-data/model';
 import Fragment from 'ember-data-model-fragments/fragment';
@@ -32,7 +31,6 @@ const Validations = buildValidations({
   ]
 });
 
-@classic
 export default class Contributor extends Fragment.extend(Validations) {
   @attr('string')
   name;
