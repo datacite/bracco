@@ -1,12 +1,12 @@
-import classic from 'ember-classic-decorator';
-import { action } from '@ember/object';
+// Finish conversion of this component to a @glimmer component.
+import { action, computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { typeOf } from '@ember/utils';
 import { htmlSafe } from '@ember/template';
 import Component from '@ember/component';
 import ENV from 'bracco/config/environment';
+import { tracked } from '@glimmer/tracking';
 
-@classic
 export default class ApplicationHeader extends Component {
   @service
   session;
@@ -20,73 +20,118 @@ export default class ApplicationHeader extends Component {
   @service
   router;
 
-  default = false;
-  type = 'transparent';
-  title = null;
-  home = '/';
-  user = true;
-  showLogo = true;
-  navBgColor = '';
-  navButtonColor = '';
+  @tracked default = false;
+  @tracked data = {}
 
-  init(...args) {
-    super.init(...args);
+  constructor(...args) {
+    super(...args);
 
     if (ENV.featureFlags['enable-doi-estimate']) {
       this.features.enable('enableDoiEstimate');
     } else {
       this.features.disable('enableDoiEstimate');
     }
-
-    this.data = this.data || {};
   }
 
-  didReceiveAttrs() {
-    super.didReceiveAttrs(...arguments);
-
+  @computed('default')
+  get type() {
     if (this.default) {
-      this.set('type', null);
-      this.set('title', htmlSafe(ENV.SITE_TITLE));
-    } else if (this['sign-in']) {
-      this.set('title', htmlSafe(ENV.SITE_TITLE));
-      this.set('user', false);
+      return null;
+    } else {
+      return 'transparent';
     }
+  }
 
-    let home = this.currentUser.get('home');
+  @computed('default','router.currentRouteName')
+  get title() {
+    if (this.default) {
+      return htmlSafe(ENV.SITE_TITLE);
+    } else if (this.router.currentRouteName == 'sign-in' ){
+      return htmlSafe(ENV.SITE_TITLE);
+    } else {
+      return null;
+    }
+  }
+
+  @computed('currentUser.home')
+  get home() {
+    let home = this.currentUser.home;
+
     if (typeOf(home) == 'object') {
-      this.set('home', { route: home.route, model: home.id });
+      return { route: home.route, model: home.id };
     } else if (home === 'password') {
-      this.set('home', null);
+      return null;
     } else if (home) {
-      this.set('home', { href: home });
+      return { href: home };
     } else {
-      this.set('home', null);
+      return null;
     }
+  }
 
-    let settings = this.currentUser.get('settings');
+  @computed('currentUser.settings')
+  get settings() {
+    let settings = this.currentUser.settings;
+
     if (typeOf(settings) == 'object') {
-      this.set('settings', { route: settings.route, model: settings.id });
+      return { route: settings.route, model: settings.id };
     } else if (home === 'password') {
-      this.set('settings', null);
+      return null;
     } else if (home) {
-      this.set('settings', { href: settings });
+      return { href: settings };
     } else {
-      this.set('settings', null);
+      return null;
     }
+  }
 
+  @computed('router.currentRouteName')
+  get user() {
+    let route = this.router.currentRouteName;
+
+    if ((!this.session.isAuthenticated && route === 'index') || 
+         route === 'sign-in' || 
+         route === 'password' || 
+         route === 'reset' || 
+         route === '404') {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  @computed('router.currentRouteName', 'session.isAuthenticated')
+  get showLogo() {
     let route = this.router.currentRouteName;
 
     if ((!this.session.isAuthenticated && route === 'index') || route === 'sign-in' || route === 'password' || route === 'reset' || route === '404') {
-      this.showLogo = false;
+      return false;
+    } else {
+      return true;
     }
+  }
 
-    let role = this.currentUser.get('roleName');
-    if (role === 'Member') {
-      this.set('navBgColor', 'navbar-member');
-      this.set('navButtonColor', 'navbar-button-member');
-    } else if (role === 'Consortium') {
-      this.set('navBgColor', 'navbar-consortium');
-      this.set('navButtonColor', 'navbar-button-consortium');
+  @computed('currentUser.roleName')
+  get navBgColor() {
+    let role = this.currentUser.roleName;
+
+    if (role == 'Member') {
+      return 'navbar-member';
+    } else if (role == 'Consortium') {
+      return 'navbar-consortium'
+    } else {
+      return '';
+    }
+  }
+
+  @computed('currentUser.roleName')
+  get navButtonColor() {
+    let role = this.currentUser.roleName;
+
+    if (role == 'Member') {
+      return 'navbar-button-member';
+    } else if (role == 'Consortium') {
+      return 'navbar-button-consortium'
+    } else {
+      return '';
     }
   }
 

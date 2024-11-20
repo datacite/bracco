@@ -1,8 +1,9 @@
-import classic from 'ember-classic-decorator';
+// Finish conversion of this component to a @glimmer component.
 import { inject as service } from '@ember/service';
 import { htmlSafe } from '@ember/template';
 import Component from '@ember/component';
 import ENV from 'bracco/config/environment';
+import { tracked } from '@glimmer/tracking';
 
 const data = {
   about_links: [
@@ -97,16 +98,8 @@ const data = {
   ]
 };
 
-@classic
 export default class ApplicationFooter extends Component {
-  data = data;
-
-  didReceiveAttrs() {
-    super.didReceiveAttrs(...arguments);
-
-    if (this.default) {
-      this.set('type', null);
-      this.set('title', htmlSafe(ENV.SITE_TITLE));
-    }
-  }
+  @tracked data = data;
+  @tracked type = null;
+  @tracked title = htmlSafe(ENV.SITE_TITLE);
 }
