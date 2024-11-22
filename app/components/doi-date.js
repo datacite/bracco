@@ -1,6 +1,7 @@
-import classic from 'ember-classic-decorator';
+// Finish conversion of this component to a @glimmer component.
 import { action } from '@ember/object';
 import Component from '@ember/component';
+import { tracked } from '@glimmer/tracking';
 
 const dateTypesCompleteList = [
   'Accepted',
@@ -16,35 +17,34 @@ const dateTypesCompleteList = [
   'Other'
 ];
 
-@classic
 export default class DoiDate extends Component {
   dateTypesCompleteList = dateTypesCompleteList;
   dateTypesList = dateTypesCompleteList;
 
-  init(...args) {
-    super.init(...args);
+  constructor(...args) {
+    super(...args);
 
     this.dateTypes = this.dateTypes || [];
   }
 
   @action
   updateDate(value) {
-    this.fragment.set('date', value);
+    this.fragment.date = value;
   }
 
   @action
   selectDateType(value) {
-    this.fragment.set('dateType', value);
-    this.set('dateType', this.dateTypesCompleteList);
+    this.fragment.dateType = value;
+    this.dateType = this.dateTypesCompleteList;
   }
 
   @action
   updateDateInformation(value) {
-    this.fragment.set('dateInformation', value);
+    this.fragment.dateInformation = value;
   }
 
   @action
   deleteDate() {
-    this.model.get('dates').removeObject(this.fragment);
+    this.model.dates.removeObject(this.fragment);
   }
 }

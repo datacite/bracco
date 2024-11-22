@@ -1,27 +1,27 @@
-import classic from 'ember-classic-decorator';
+// Finish conversion of this component to a @glimmer component.
 import { action } from '@ember/object';
 import Component from '@ember/component';
+import { tracked } from '@glimmer/tracking';
 
-@classic
 export default class DoiDates extends Component {
-  showDates = false;
+  @tracked showDates = false;
 
   didReceiveAttrs() {
     super.didReceiveAttrs(...arguments);
 
-    if (!this.model.get('dates')) {
-      this.model.set('dates', []);
+    if (!this.model.dates) {
+      this.model.dates = [];
     }
   }
 
   @action
   addDate() {
-    this.model.get('dates').createFragment();
-    this.set('showDates', true);
+    this.model.dates.createFragment();
+    this.showDates = true;
   }
 
   @action
   toggleDates() {
-    this.set('showDates', !this.showDates);
+    this.showDates = !this.showDates;
   }
 }

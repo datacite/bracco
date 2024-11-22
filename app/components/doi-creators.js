@@ -1,21 +1,21 @@
-import classic from 'ember-classic-decorator';
+// Finish conversion of this component to a @glimmer component.
 import { action } from '@ember/object';
 import Component from '@ember/component';
 import { schedule } from '@ember/runloop';
+import { tracked } from '@glimmer/tracking';
 
-@classic
 export default class DoiCreators extends Component {
-  showCreators = true;
+  @tracked showCreators = true;
 
-  init() {
-    super.init();
+  constructor(...args) {
+    super(...args);
 
     schedule("afterRender",this,function() {
-      if (!this.model.get('creators')) {
-        this.model.set('creators', []);
+      if (!this.model.creators) {
+        this.model.creators = [];
       }
 
-      if (this.model.get('creators').length == 0) {
+      if (this.model.creators.length == 0) {
         this.send("addCreator");
       }
     });
@@ -24,31 +24,21 @@ export default class DoiCreators extends Component {
   didReceiveAttrs() {
     super.didReceiveAttrs(...arguments);
 
-     if (!this.model.get('creators')) {
-      this.model.set('creators', []);
+     if (!this.model.creators) {
+      this.model.creators = [];
     }
   }
 
   @action
   addCreator() {
-    this.model
-      .get('creators')
-      .createFragment({ nameIdentifiers: [], affiliation: [] });
-    this.model
-      .get('creators')
-      .get('lastObject')
-      .get('nameIdentifiers')
-      .createFragment();
-    this.model
-      .get('creators')
-      .get('lastObject')
-      .get('affiliation')
-      .createFragment();
-    this.set('showCreators', true);
+    this.model.creators.createFragment({ nameIdentifiers: [], affiliation: [] });
+    this.model.creators.lastObject.nameIdentifiers.createFragment();
+    this.model.creators.lastObject.affiliation.createFragment();
+    this.showCreators = true;
   }
 
   @action
   toggleCreators() {
-    this.set('showCreators', !this.showCreators);
+    this.showCreators = !this.showCreators;
   }
 }

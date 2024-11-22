@@ -1,10 +1,11 @@
-import classic from 'ember-classic-decorator';
+// Finish conversion of this component to a @glimmer component.
 import { classNames, tagName } from '@ember-decorators/component';
 import { htmlSafe } from '@ember/template';
 import { w } from '@ember/string';
 import { A } from '@ember/array';
 import Component from '@ember/component';
 import URI from 'urijs';
+import { tracked } from '@glimmer/tracking';
 
 const Tooltips = [
   {
@@ -39,7 +40,6 @@ const Tooltips = [
   }
 ];
 
-@classic
 @tagName('div')
 @classNames('license')
 export default class CcLicense extends Component {
@@ -79,9 +79,9 @@ export default class CcLicense extends Component {
             ];
         }
       }
-      this.set('licenseLogo', licenseLogo);
+      this.licenseLogo = licenseLogo;
     } else {
-      this.set('licenseLogo', null);
+      this.licenseLogo = null;
     }
   }
 }

@@ -1,4 +1,4 @@
-import classic from 'ember-classic-decorator';
+// Finish conversion of this component to a @glimmer component.
 import { action } from '@ember/object';
 import { tagName } from '@ember-decorators/component';
 import { inject as service } from '@ember/service';
@@ -6,8 +6,8 @@ import Component from '@ember/component';
 import fetch from 'fetch';
 import ENV from 'bracco/config/environment';
 import { UploadFile, UploadFileReader } from 'ember-file-upload';
+import { tracked } from '@glimmer/tracking';
 
-@classic
 @tagName('div')
 export default class DoiCitation extends Component {
   @service
@@ -29,17 +29,17 @@ export default class DoiCitation extends Component {
       'chicago-fullnote-bibliography': 'Chicago',
       ieee: 'IEEE'
     };
-    this.set('citationFormats', citationFormats);
+    this.citationFormats = citationFormats;
   }
 
   selectStyle(style) {
     let self = this;
     let url =
-      ENV.API_URL + '/dois/' + this.model.get('doi') + '?style=' + style;
+      ENV.API_URL + '/dois/' + this.modeldoi + '?style=' + style;
     let headers = { Accept: 'text/x-bibliography' };
-    if (this.currentUser.get('jwt')) {
+    if (this.currentUser.jwt) {
       headers = {
-        Authorization: 'Bearer ' + this.currentUser.get('jwt'),
+        Authorization: 'Bearer ' + this.currentUser.jwt,
         Accept: 'text/x-bibliography'
       };
     }
@@ -55,7 +55,7 @@ export default class DoiCitation extends Component {
 
     result.then(async function (response) {
       if (typeof response === 'string') {
-        self.set('citationOutput', response);
+        self.citationOutput = response;
       } else {
         if (self.isDestroying || self.isDestroyed) {
           return;
@@ -63,7 +63,7 @@ export default class DoiCitation extends Component {
         let reader = UploadFile.fromBlob(response, 'blob')
         reader.readAsText().then(
           (result) => {
-            self.set('citationOutput', result);
+            self.citationOutput = result;
           },
           (err) => {
             console.error(err);
@@ -71,7 +71,6 @@ export default class DoiCitation extends Component {
         );
       }
     });
-    // this.get('router').transitionTo({ queryParams: { citation: citation } });
   }
 
   @action

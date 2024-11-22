@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 module.exports = {
   root: true,
@@ -37,8 +37,8 @@ module.exports = {
     // 'ember/no-replace-test-comments': 'error',
     // 'ember/no-replace-test-comments': 'error',
     // NEW - for ember-classic-decorator and migration to native js classes
-    'ember/classic-decorator-hooks': 0,
-    'ember/classic-decorator-no-classic-methods': 0
+    'ember/classic-decorator-hooks': 2,
+    'ember/classic-decorator-no-classic-methods': 2
   },
   overrides: [
     // node files

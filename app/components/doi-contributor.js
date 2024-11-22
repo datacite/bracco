@@ -1,9 +1,10 @@
-import classic from 'ember-classic-decorator';
+// Finish conversion of this component to a @glimmer component.
 import { action, computed } from '@ember/object';
 import PersonBaseComponent from './person-base-component';
 import { pascalCase } from 'pascal-case';
 import humanizeString from 'humanize-string';
 import { isBlank } from '@ember/utils';
+import { tracked } from '@glimmer/tracking';
 
 const contributorTypes = [
   'ContactPerson',
@@ -54,22 +55,21 @@ const personalContributorTypes = [
   'WorkPackageLeader'
 ];
 
-@classic
 export default class DoiContributor extends PersonBaseComponent {
   humanContributorTypes = humanContributorTypes;
 
   @computed('fragment.contributorType')
   get humanContributorType() {
-    return isBlank(this.get('fragment.contributorType'))
+    return isBlank(this.fragment.contributorType)
       ? null
-      : humanizeString(this.get('fragment.contributorType'));
+      : humanizeString(this.fragment.contributorType);
   }
 
   selectContributorType(contributorType) {
     if (contributorType) {
       let contributorTypeId = pascalCase(contributorType);
-      this.fragment.set('contributorType', contributorTypeId);
-      this.set('contributorType', contributorType);
+      this.fragment.contributorType = contributorTypeId;
+      this.contributorType = contributorType;
 
       if (organizationalContributorTypes.includes(contributorTypeId)) {
         this.selectNameType('Organizational');
@@ -79,14 +79,14 @@ export default class DoiContributor extends PersonBaseComponent {
         this.selectNameType('Personal');
       }
     } else {
-      this.fragment.set('contributorType', null);
+      this.fragment.contributorType = null;
     }
-    this.set('humanContributorTypes', humanContributorTypes);
+    this.humanContributorTypes = humanContributorTypes;
   }
 
   @action
   deleteContributorAction() {
-    this.model.get('contributors').removeObject(this.fragment);
+    this.model.contributors.removeObject(this.fragment);
   }
 
   @action

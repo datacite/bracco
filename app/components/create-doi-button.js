@@ -1,10 +1,10 @@
-import classic from 'ember-classic-decorator';
+// Finish conversion of this component to a @glimmer component.
 import { action } from '@ember/object';
 import { classNames } from '@ember-decorators/component';
 import { inject as service } from '@ember/service';
 import Component from '@ember/component';
+import { tracked } from '@glimmer/tracking';
 
-@classic
 @classNames('')
 export default class CreateDoiButton extends Component {
   @service
@@ -12,12 +12,6 @@ export default class CreateDoiButton extends Component {
 
   @service
   router;
-
-  didReceiveAttrs() {
-    super.didReceiveAttrs(...arguments);
-
-    this.set('currentUser', this.currentUser);
-  }
 
   @action
   createDoi() {

@@ -1,27 +1,27 @@
-import classic from 'ember-classic-decorator';
+// Finish conversion of this component to a @glimmer component.
 import { action } from '@ember/object';
 import Component from '@ember/component';
+import { tracked } from '@glimmer/tracking';
 
-@classic
 export default class DoiAlternateIdentifiers extends Component {
-  showAlternateIdentifiers = false;
+  @tracked showAlternateIdentifiers = false;
 
   didReceiveAttrs() {
     super.didReceiveAttrs(...arguments);
 
-    if (!this.model.get('alternateIdentifiers')) {
-      this.model.set('alternateIdentifiers', []);
+    if (!this.model.alternateIdentifiers) {
+      this.model.alternateIdentifiers = [];
     }
   }
 
   @action
   addAlternateIdentifier() {
-    this.model.get('alternateIdentifiers').createFragment();
-    this.set('showAlternateIdentifiers', true);
+    this.model.alternateIdentifiers.createFragment();
+    this.showAlternateIdentifiers = true;
   }
 
   @action
   toggleAlternateIdentifiers() {
-    this.set('showAlternateIdentifiers', !this.showAlternateIdentifiers);
+    this.showAlternateIdentifiers = !this.showAlternateIdentifiers;
   }
 }

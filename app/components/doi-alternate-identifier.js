@@ -1,7 +1,8 @@
-import classic from 'ember-classic-decorator';
+// Finish conversion of this component to a @glimmer component.
 import { action } from '@ember/object';
 import Component from '@ember/component';
 import { isBlank } from '@ember/utils';
+import { tracked } from '@glimmer/tracking';
 
 const alternateIdentifierTypeList = [
   'ARK',
@@ -25,13 +26,12 @@ const alternateIdentifierTypeList = [
   'w3id'
 ];
 
-@classic
 export default class DoiAlternateIdentifier extends Component {
   alternateIdentifierTypeList = alternateIdentifierTypeList;
   alternateIdentifierTypes = alternateIdentifierTypeList;
 
-  init(...args) {
-    super.init(...args);
+  constructor(...args) {
+    super(...args);
 
     this.selected = this.selected || [];
   }
@@ -48,7 +48,7 @@ export default class DoiAlternateIdentifier extends Component {
         this.alternateIdentifierTypes.push(select.searchText);
         select.actions.choose(select.searchText);
         this.fragment.set('alternateIdentifierType', select.searchText);
-        this.set('alternateIdentifierTypes', alternateIdentifierTypeList);
+        this.alternateIdentifierTypes = alternateIdentifierTypeList;
       }
     }
   }
@@ -61,11 +61,11 @@ export default class DoiAlternateIdentifier extends Component {
   @action
   selectAlternateIdentifierType(alternateIdentifierType) {
     this.fragment.set('alternateIdentifierType', alternateIdentifierType);
-    this.set('alternateIdentifierTypes', alternateIdentifierTypeList);
+    this.alternateIdentifierTypes = alternateIdentifierTypeList;
   }
 
   @action
   deleteAlternateIdentifier() {
-    this.model.get('alternateIdentifiers').removeObject(this.fragment);
+    this.model.alternateIdentifiers.removeObject(this.fragment);
   }
 }
