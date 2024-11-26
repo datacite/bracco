@@ -11,6 +11,6 @@
 <label for="contributorType" class="subtitle">Contributor Type</label>
   <div class="power-select-fragment" doi-related-item-contributor-type>
     <@form.element @controlType="power-select" @value={{this.humanContributorType}} @helpText="The type of contributor of the resource." @options={{this.humanContributorTypes}} @formLayout="vertical" @selected={{this.humanContributorType}} @destination={{this.humanContributorType}} as |el|>
-      <el.control @allowClear={{true}} @onChange={{action "selectContributorType"}} @placeholder="Select Contributor Type" @disabled={{this.disabled}} @searchEnabled={{true}} />
+      <el.control @allowClear={{true}} @onChange={{action "selectContributorTypeAction"}} @placeholder="Select Contributor Type" @disabled={{this.disabled}} @searchEnabled={{true}} />
     </@form.element>
 </div>  

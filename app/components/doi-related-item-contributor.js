@@ -129,7 +129,7 @@ export default class DoiRelatedItemContributor extends Component {
   }
 
   @action
-  selectContributorType(contributorType) {
+  selectContributorTypeAction(contributorType) {
     this.selectContributorType(contributorType);
   }
 
