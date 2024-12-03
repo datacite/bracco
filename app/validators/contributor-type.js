@@ -33,6 +33,7 @@ class ContributorType extends BaseValidator {
       'RightsHolder',
       'Sponsor',
       'Supervisor',
+      'Translator',
       'WorkPackageLeader',
       'Other'
     ];

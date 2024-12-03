@@ -25,6 +25,7 @@ const contributorTypes = [
   'RightsHolder',
   'Sponsor',
   'Supervisor',
+  'Translator',
   'WorkPackageLeader',
   'Other'
 ];
@@ -128,7 +129,7 @@ export default class DoiRelatedItemContributor extends Component {
   }
 
   @action
-  selectContributorType(contributorType) {
+  selectContributorTypeAction(contributorType) {
     this.selectContributorType(contributorType);
   }
 
