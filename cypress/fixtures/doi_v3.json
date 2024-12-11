@@ -1,0 +1,138 @@
+{
+  "data": {
+      "id": "10.14454/0000-0003",
+      "type": "dois",
+      "attributes": {
+          "doi": "10.14454/0000-0003",
+          "prefix": "10.14454",
+          "suffix": "0000-0003",
+          "identifiers": [],
+          "alternateIdentifiers": [],
+          "creators": [
+              {
+                  "name": "Travolta, John",
+                  "nameType": "Personal",
+                  "givenName": "John",
+                  "familyName": "Travolta",
+                  "affiliation": [],
+                  "nameIdentifiers": []
+              },
+              {
+                  "name": "X, Mr",
+                  "nameType": "Personal",
+                  "givenName": "Mr",
+                  "familyName": "X",
+                  "affiliation": [],
+                  "nameIdentifiers": []
+              },
+              {
+                  "name": "Mozart, Wolfgang Amadeus",
+                  "nameType": "Personal",
+                  "givenName": "Wolfgang Amadeus",
+                  "familyName": "Mozart",
+                  "affiliation": [],
+                  "nameIdentifiers": []
+              }
+          ],
+          "titles": [
+              {
+                  "title": "Test Title"
+              }
+          ],
+          "publisher": "University of Illinois at Chicago",
+          "container": {},
+          "publicationYear": 2024,
+          "subjects": [],
+          "contributors": [
+              {
+                  "name": "Durham University",
+                  "affiliation": [],
+                  "contributorType": "RightsHolder",
+                  "nameIdentifiers": []
+              },
+              {
+                  "name": "Durham University",
+                  "affiliation": [],
+                  "contributorType": "HostingInstitution",
+                  "nameIdentifiers": []
+              },
+              {
+                  "name": "Durham University",
+                  "affiliation": [],
+                  "contributorType": "Funder",
+                  "nameIdentifiers": []
+              }
+          ],
+          "dates": [],
+          "language": null,
+          "relatedIdentifiers": [],
+          "relatedItems": [],
+          "sizes": [],
+          "formats": [],
+          "version": null,
+          "rightsList": [],
+          "descriptions": [],
+          "geoLocations": [],
+          "fundingReferences": [],
+          "xml": "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHJlc291cmNlIHhtbG5zOnhzaT0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEtaW5zdGFuY2UiIHhtbG5zPSJodHRwOi8vZGF0YWNpdGUub3JnL3NjaGVtYS9rZXJuZWwtMyIgeHNpOnNjaGVtYUxvY2F0aW9uPSJodHRwOi8vZGF0YWNpdGUub3JnL3NjaGVtYS9rZXJuZWwtMyBodHRwOi8vc2NoZW1hLmRhdGFjaXRlLm9yZy9tZXRhL2tlcm5lbC0zL21ldGFkYXRhLnhzZCI+CiAgPGlkZW50aWZpZXIgaWRlbnRpZmllclR5cGU9IkRPSSI+MTAuMTQ0NTQvMDAwMC0wMDAzPC9pZGVudGlmaWVyPgogIDxjcmVhdG9ycz4KICAgIDxjcmVhdG9yPgogICAgICA8Y3JlYXRvck5hbWUgbmFtZVR5cGU9IlBlcnNvbmFsIj5UcmF2b2x0YSwgSm9objwvY3JlYXRvck5hbWU+CiAgICAgIDxnaXZlbk5hbWU+Sm9objwvZ2l2ZW5OYW1lPgogICAgICA8ZmFtaWx5TmFtZT5UcmF2b2x0YTwvZmFtaWx5TmFtZT4KICAgIDwvY3JlYXRvcj4KICAgIDxjcmVhdG9yPgogICAgICA8Y3JlYXRvck5hbWUgbmFtZVR5cGU9IlBlcnNvbmFsIj5YLCBNcjwvY3JlYXRvck5hbWU+CiAgICAgIDxnaXZlbk5hbWU+TXI8L2dpdmVuTmFtZT4KICAgICAgPGZhbWlseU5hbWU+WDwvZmFtaWx5TmFtZT4KICAgIDwvY3JlYXRvcj4KICAgIDxjcmVhdG9yPgogICAgICA8Y3JlYXRvck5hbWUgbmFtZVR5cGU9IlBlcnNvbmFsIj5Nb3phcnQsIFdvbGZnYW5nIEFtYWRldXM8L2NyZWF0b3JOYW1lPgogICAgICA8Z2l2ZW5OYW1lPldvbGZnYW5nIEFtYWRldXM8L2dpdmVuTmFtZT4KICAgICAgPGZhbWlseU5hbWU+TW96YXJ0PC9mYW1pbHlOYW1lPgogICAgPC9jcmVhdG9yPgogIDwvY3JlYXRvcnM+CiAgPHRpdGxlcz4KICAgIDx0aXRsZT5UZXN0IFRpdGxlPC90aXRsZT4KICA8L3RpdGxlcz4KICA8cHVibGlzaGVyPlVuaXZlcnNpdHkgb2YgSWxsaW5vaXMgYXQgQ2hpY2FnbzwvcHVibGlzaGVyPgogIDxwdWJsaWNhdGlvblllYXI+MjAyNDwvcHVibGljYXRpb25ZZWFyPgogIDxjb250cmlidXRvcnM+CiAgICA8Y29udHJpYnV0b3IgY29udHJpYnV0b3JUeXBlPSJSaWdodHNIb2xkZXIiPgogICAgICA8Y29udHJpYnV0b3JOYW1lPkR1cmhhbSBVbml2ZXJzaXR5PC9jb250cmlidXRvck5hbWU+CiAgICA8L2NvbnRyaWJ1dG9yPgogICAgPGNvbnRyaWJ1dG9yIGNvbnRyaWJ1dG9yVHlwZT0iSG9zdGluZ0luc3RpdHV0aW9uIj4KICAgICAgPGNvbnRyaWJ1dG9yTmFtZT5EdXJoYW0gVW5pdmVyc2l0eTwvY29udHJpYnV0b3JOYW1lPgogICAgPC9jb250cmlidXRvcj4KICAgIDxjb250cmlidXRvciBjb250cmlidXRvclR5cGU9IkZ1bmRlciI+CiAgICAgIDxjb250cmlidXRvck5hbWU+RHVyaGFtIFVuaXZlcnNpdHk8L2NvbnRyaWJ1dG9yTmFtZT4KICAgIDwvY29udHJpYnV0b3I+CiAgPC9jb250cmlidXRvcnM+CiAgPHNpemVzLz4KICA8Zm9ybWF0cy8+CiAgPHZlcnNpb24vPgo8L3Jlc291cmNlPg==",
+          "url": null,
+          "contentUrl": null,
+          "metadataVersion": 0,
+          "schemaVersion": "http://datacite.org/schema/kernel-3",
+          "source": "api",
+          "isActive": false,
+          "state": "registered",
+          "reason": null,
+          "landingPage": null,
+          "viewCount": 0,
+          "viewsOverTime": [],
+          "downloadCount": 0,
+          "downloadsOverTime": [],
+          "referenceCount": 0,
+          "citationCount": 0,
+          "citationsOverTime": [],
+          "partCount": 0,
+          "partOfCount": 0,
+          "versionCount": 0,
+          "versionOfCount": 0,
+          "created": "2024-10-11T14:24:51.000Z",
+          "registered": "2024-10-11T14:24:51.000Z",
+          "published": "2024",
+          "updated": "2024-10-11T14:28:50.000Z"
+      },
+      "relationships": {
+          "client": {
+              "data": {
+                  "id": "datacite.test",
+                  "type": "clients"
+              }
+          },
+          "provider": {
+              "data": {
+                  "id": "datacite",
+                  "type": "providers"
+              }
+          },
+          "media": {
+          },
+          "references": {
+              "data": []
+          },
+          "citations": {
+              "data": []
+          },
+          "parts": {
+              "data": []
+          },
+          "partOf": {
+              "data": []
+          },
+          "versions": {
+              "data": []
+          },
+          "versionOf": {
+              "data": []
+          }
+      }
+  }
+}

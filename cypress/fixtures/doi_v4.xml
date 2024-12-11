@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resource
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://datacite.org/schema/kernel-4" xsi:schemaLocation="http://datacite.org/schema/kernel-4 http://schema.datacite.org/meta/kernel-4/metadata.xsd">
+    <identifier identifierType="DOI">10.14454/2X3Y-Y837</identifier>
+    <creators>
+        <creator>
+            <creatorName nameType="Personal">Travolta, John</creatorName>
+            <givenName>John</givenName>
+            <familyName>Travolta</familyName>
+        </creator>
+        <creator>
+            <creatorName nameType="Personal">X, Mr</creatorName>
+            <givenName>Mr</givenName>
+            <familyName>X</familyName>
+        </creator>
+        <creator>
+            <creatorName nameType="Personal">Mozart, Wolfgang Amadeus</creatorName>
+            <givenName>Wolfgang Amadeus</givenName>
+            <familyName>Mozart</familyName>
+        </creator>
+    </creators>
+    <titles>
+        <title>Test Title</title>
+    </titles>
+    <publisher>University of Illinois at Chicago</publisher>
+    <publicationYear>2024</publicationYear>
+    <resourceType resourceTypeGeneral="Dataset"/>
+    <contributors>
+        <contributor contributorType="RightsHolder">
+            <contributorName>Durham University</contributorName>
+        </contributor>
+        <contributor contributorType="HostingInstitution">
+            <contributorName>Durham University</contributorName>
+        </contributor>
+    </contributors>
+    <sizes/>
+    <formats/>
+    <version/>
+    <fundingReferences>
+        <fundingReference>
+            <funderName>Beckman Institute for Advanced Science and Technology, University of Illinois, Urbana-Champaign</funderName>
+            <funderIdentifier funderIdentifierType="Crossref Funder ID">https://doi.org/10.13039/100005471</funderIdentifier>
+        </fundingReference>
+    </fundingReferences>
+</resource>
