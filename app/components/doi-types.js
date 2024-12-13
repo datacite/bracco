@@ -1,7 +1,8 @@
-import classic from 'ember-classic-decorator';
+// Finish conversion of this component to a @glimmer component.
 import { action } from '@ember/object';
 import Component from '@ember/component';
 import { pascalCase } from 'pascal-case';
+import { tracked } from '@glimmer/tracking';
 
 const resourceTypeGeneralList = [
   'Audiovisual',
@@ -36,16 +37,15 @@ const resourceTypeGeneralList = [
   'Other'
 ];
 
-@classic
 export default class DoiTypes extends Component {
   resourceTypeGeneralList = resourceTypeGeneralList;
   resourceTypesGeneral = resourceTypeGeneralList;
 
   selectResourceTypeGeneral(resourceTypeGeneral) {
-    this.model.set('types', {
+    this.model.types = {
       resourceTypeGeneral: pascalCase(resourceTypeGeneral)
-    });
-    this.set('resourceTypesGeneral', resourceTypeGeneralList);
+    };
+    this.resourceTypesGeneral = resourceTypeGeneralList;
   }
 
   @action

@@ -1,13 +1,13 @@
-import classic from 'ember-classic-decorator';
+// Finish conversion of this component to a @glimmer component.
 import { action } from '@ember/object';
 import Component from '@ember/component';
 import fetch from 'fetch';
 import ENV from 'bracco/config/environment';
+import { tracked } from '@glimmer/tracking';
 
-@classic
 export default class RepositoryId extends Component {
-  init() {
-    super.init(...arguments);
+  constructor() {
+    super(...arguments);
 
     this.generate();
   }
@@ -24,7 +24,7 @@ export default class RepositoryId extends Component {
             }
             self.model.set(
               'symbol',
-              self.provider.get('id').toUpperCase() + '.' + data.symbol
+              self.provider.id.toUpperCase() + '.' + data.symbol
             );
           });
         } else {
@@ -48,6 +48,6 @@ export default class RepositoryId extends Component {
 
   @action
   clearAction() {
-    this.model.set('symbol', null);
+    this.model.symbol = null;
   }
 }

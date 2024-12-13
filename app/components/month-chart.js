@@ -1,4 +1,4 @@
-import classic from 'ember-classic-decorator';
+// Finish conversion of this component to a @glimmer component.
 import { classNames, tagName } from '@ember-decorators/component';
 import { action, computed } from '@ember/object';
 import { schedule } from '@ember/runloop';
@@ -11,8 +11,8 @@ import { timeYears } from 'd3-time';
 import { timeFormat } from 'd3-time-format';
 import { scaleTime, scaleLinear } from 'd3-scale';
 import { A } from '@ember/array';
+import { tracked } from '@glimmer/tracking';
 
-@classic
 @tagName('div')
 @classNames('col-lg-3', 'col-md-4')
 export default class MonthChart extends Component {
@@ -55,17 +55,17 @@ export default class MonthChart extends Component {
     super.init();
 
     schedule('afterRender', this, function () {
-      this.send('barChart');
+      this.send('doBarChart');
     });
   }
 
   didReceiveAttrs() {
     super.didReceiveAttrs(...arguments);
 
-    this.barChartInt();
+    this.barChart();
   }
 
-  barChartInt() {
+  barChart() {
     let formatMonthYear = timeFormat('%B %Y');
     // let formatFixed = format(",.0f");
 
@@ -188,7 +188,7 @@ export default class MonthChart extends Component {
   }
 
   @action
-  barChart() {
-    this.barChartInt();
+  doBarChart() {
+    this.barChart();
   }
 }

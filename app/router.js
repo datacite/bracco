@@ -1,8 +1,7 @@
-import classic from 'ember-classic-decorator';
+// Finish conversion of this component to a @glimmer component.
 import EmberRouter from '@ember/routing/router';
 import config from './config/environment';
 
-@classic
 class Router extends EmberRouter {
   location = 'history';
 }

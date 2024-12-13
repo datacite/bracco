@@ -1,4 +1,4 @@
-import classic from 'ember-classic-decorator';
+// Finish conversion of this component to a @glimmer component.
 import { action } from '@ember/object';
 import { classNames, tagName } from '@ember-decorators/component';
 import Component from '@ember/component';
@@ -6,8 +6,8 @@ import Papa from 'papaparse';
 import { saveAs } from 'file-saver';
 import currentDate from '../utils/current-date';
 import formatCreators from '../utils/format-creators';
+import { tracked } from '@glimmer/tracking';
 
-@classic
 @tagName('')
 @classNames('')
 export default class ExportBasicMetadata extends Component {

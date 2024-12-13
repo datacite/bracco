@@ -1,23 +1,23 @@
-import classic from 'ember-classic-decorator';
+// Finish conversion of this component to a @glimmer component.
 import { action } from '@ember/object';
 import Component from '@ember/component';
+import { tracked } from '@glimmer/tracking';
 
-@classic
 export default class DoiSize extends Component {
   @action
   updateSize(value) {
-    this.set('fragment', value);
+    this.fragment = value;
   }
 
   @action
   selectSize() {
-    this.model.get('sizes').splice(this.index, 1, this.fragment);
-    this.model.set('sizes', Array.from(this.model.get('sizes')));
+    this.model.sizes.splice(this.index, 1, this.fragment);
+    this.model.sizes = Array.from(this.model.sizes);
   }
 
   @action
   deleteSize() {
-    this.model.get('sizes').splice(this.index, 1);
-    this.model.set('sizes', Array.from(this.model.get('sizes')));
+    this.model.sizes.splice(this.index, 1);
+    this.model.sizes = Array.from(this.model.sizes);
   }
 }

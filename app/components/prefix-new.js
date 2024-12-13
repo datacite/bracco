@@ -1,4 +1,4 @@
-import classic from 'ember-classic-decorator';
+// Finish conversion of this component to a @glimmer component.
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 import Component from '@ember/component';
@@ -23,7 +23,6 @@ const Validations = buildValidations({
   ]
 });
 
-@classic
 export default class PrefixNew extends Component.extend(Validations) {
   @service
   store;
@@ -38,8 +37,8 @@ export default class PrefixNew extends Component.extend(Validations) {
   lastPrefix = '';
 
   addPrefixes() {
-    let first = A(this.firstPrefix.split('.')).get('lastObject');
-    let last = A(this.lastPrefix.split('.')).get('lastObject');
+    let first = A(this.firstPrefix.split('.')).lastObject;
+    let last = A(this.lastPrefix.split('.')).lastObject;
 
     while (first <= last) {
       let prefix = this.store.createRecord('prefix', { id: '10.' + first });

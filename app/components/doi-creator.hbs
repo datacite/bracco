@@ -2,7 +2,7 @@
   <label for="nameIdentifiers" class="subtitle">Name Identifier</label>
 
   {{#each this.fragment.nameIdentifiers as |nameIdentifier index|}}
-    <DoiNameIdentifier @model={{this.model}} @creator={{this.fragment}} @fragment={{nameIdentifier}} @form={{this.form}} @index={{index}} @joinNameParts={{action "joinNameParts"}} @setNameType={{action "selectNameType"}} @setReadOnly={{action "setReadOnly"}} />
+    <DoiNameIdentifier @model={{this.model}} @creator={{this.fragment}} @fragment={{nameIdentifier}} @form={{this.form}} @index={{index}} @joinNameParts={{action "doJoinNameParts"}} @setNameType={{action "doSelectNameType"}} @setReadOnly={{action "setReadOnly"}} />
   {{/each}}
 {{/if}}
 
@@ -11,9 +11,9 @@
 {{/if}}
 
 <div class="radio-fragment">
-  <RadioButton @value="Personal" @groupValue={{this.nameType}} @radioClass="radio select-person" @changed={{action "selectNameType"}} @disabled={{this.isReadonlyNameType}}/><span class="subtitle">Person</span>
-  <RadioButton @value="Organizational" @groupValue={{this.nameType}} @radioClass="radio select-organisation" @changed={{action "selectNameType"}} @disabled={{this.isReadonlyNameType}} /><span class="subtitle">Organization</span>
-  <RadioButton @value={{null}} @groupValue={{this.nameType}} @radioClass="radio select-unknown" @changed={{action "selectNameType"}} @disabled={{this.isReadonlyNameType}} /><span class="subtitle">Unknown</span>
+  <RadioButton @value="Personal" @groupValue={{this.nameType}} @radioClass="radio select-person" @changed={{action "doSelectNameType"}} @disabled={{this.isReadonlyNameType}}/><span class="subtitle">Person</span>
+  <RadioButton @value="Organizational" @groupValue={{this.nameType}} @radioClass="radio select-organisation" @changed={{action "doSelectNameType"}} @disabled={{this.isReadonlyNameType}} /><span class="subtitle">Organization</span>
+  <RadioButton @value={{null}} @groupValue={{this.nameType}} @radioClass="radio select-unknown" @changed={{action "doSelectNameType"}} @disabled={{this.isReadonlyNameType}} /><span class="subtitle">Unknown</span>
 </div>
 
 {{#if (gt this.index 0)}}

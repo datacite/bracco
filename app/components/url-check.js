@@ -1,8 +1,7 @@
-import classic from 'ember-classic-decorator';
+// Finish conversion of this component to a @glimmer component.
 import { inject as service } from '@ember/service';
 import Component from '@ember/component';
 
-@classic
 export default class UrlCheck extends Component {
   @service
   currentUser;
@@ -10,6 +9,7 @@ export default class UrlCheck extends Component {
   didReceiveAttrs() {
     super.didReceiveAttrs(...arguments);
 
-    this.set('url', this.url);
+    // ??? - doesn't make sense
+    // this.set('url', this.url);
   }
 }

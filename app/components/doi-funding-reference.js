@@ -1,8 +1,9 @@
-import classic from 'ember-classic-decorator';
+// Finish conversion of this component to a @glimmer component.
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 import Component from '@ember/component';
 import { isBlank } from '@ember/utils';
+import { tracked } from '@glimmer/tracking';
 
 const funderIdentifierTypeList = [
   'Crossref Funder ID',
@@ -12,7 +13,6 @@ const funderIdentifierTypeList = [
   'Other'
 ];
 
-@classic
 export default class DoiFundingReference extends Component {
   funderIdentifierTypeList = funderIdentifierTypeList;
   funderIdentifierTypes = funderIdentifierTypeList;
@@ -21,8 +21,8 @@ export default class DoiFundingReference extends Component {
   @service
   store;
 
-  init(...args) {
-    super.init(...args);
+  constructor(...args) {
+    super(...args);
 
     this.selected = this.selected || [];
     this.funders = this.funders || [];
@@ -31,29 +31,29 @@ export default class DoiFundingReference extends Component {
   didReceiveAttrs() {
     super.didReceiveAttrs(...arguments);
 
-    if (funderIdentifierTypeList.includes(this.fragment.get('subject'))) {
-      this.set('isCrossrefId', true);
+    if (funderIdentifierTypeList.includes(this.fragment.subject)) {
+      this.isCrossrefId = true;
     } else {
-      this.set('isCrossrefId', false);
+      this.isCrossrefId = false;
     }
   }
 
   updateFunderSchemeAndType(scheme) {
     switch (scheme) {
       case scheme == 'ROR':
-        this.fragment.set('funderIdentifierType', 'ROR');
+        this.fragment.funderIdentifierType = 'ROR';
         break;
       case scheme == 'Crossref Funder ID':
-        this.fragment.set('funderIdentifierType', 'Crossref Funder ID');
+        this.fragment.funderIdentifierType = 'Crossref Funder ID';
         break;
       case scheme == 'GRID':
-        this.fragment.set('relatedIdentifierType', 'GRID');
+        this.fragment.relatedIdentifierType = 'GRID';
         break;
       case scheme == 'ISNI':
-        this.fragment.set('funderIdentifierType', 'ISNI');
+        this.fragment.funderIdentifierType = 'ISNI';
         break;
       default:
-        this.fragment.set('funderIdentifierType', 'Other');
+        this.fragment.funderIdentifierType = 'Other';
         break;
     }
   }
@@ -61,28 +61,25 @@ export default class DoiFundingReference extends Component {
   updateFunderReference(funder) {
     switch (true) {
       case funder === null:
-        this.fragment.set('funderIdentifierType', 'Other');
-        this.fragment.set('funderIdentifier', null);
-        this.fragment.set('funderName', null);
+        this.fragment.funderIdentifierType = 'Other';
+        this.fragment.funderIdentifier = null;
+        this.fragment.funderName = null;
         this.updateFunderSchemeAndType(null);
-        this.set('isCrossrefId', false);
+        this.isCrossrefId = false;
         break;
       case typeof funder == 'string':
-        this.fragment.set('funderIdentifierType', 'Other');
-        this.fragment.set('funderIdentifier', null);
-        this.fragment.set('funderName', funder);
+        this.fragment.funderIdentifierType = 'Other';
+        this.fragment.funderIdentifier = null;
+        this.fragment.funderName = funder;
         this.updateFunderSchemeAndType(null);
-        this.set('isCrossrefId', false);
+        this.isCrossrefId = alse;
         break;
       default:
-        this.fragment.set('funderName', funder.name);
-        this.fragment.set('funderIdentifierType', 'Crossref Funder ID');
-        this.fragment.set(
-          'schemeUri',
-          'https://www.crossref.org/services/funder-registry/'
-        );
-        this.fragment.set('funderIdentifier', 'https://doi.org/' + funder.id);
-        this.set('isCrossrefId', true);
+        this.fragment.funderName = funder.name;
+        this.fragment.funderIdentifierType = 'Crossref Funder ID';
+        this.fragment.schemeUri = 'https://www.crossref.org/services/funder-registry/';
+        this.fragment.funderIdentifier = 'https://doi.org/' + funder.id;
+        this.isCrossrefId = true;
         break;
     }
   }
@@ -98,16 +95,16 @@ export default class DoiFundingReference extends Component {
       if (!this.selected.includes(select.searchText)) {
         this.funderIdentifierTypes.push(select.searchText);
         select.actions.choose(select.searchText);
-        this.fragment.set('funderName', select.searchText);
-        this.fragment.set('funderIdentifierType', 'Other');
-        this.set('funderIdentifierTypes', funderIdentifierTypeList);
+        this.fragment.funderName = select.searchText;
+        this.fragment.funderIdentifierType = 'Other';
+        this.funderIdentifierTypes = funderIdentifierTypeList;
       }
     }
   }
 
   @action
   updateFunderIdentifierAction(value) {
-    this.fragment.set('funderIdentifier', value);
+    this.fragment.funderIdentifier = value;
   }
 
   @action
@@ -117,37 +114,37 @@ export default class DoiFundingReference extends Component {
 
   @action
   updateFunderNameAction(value) {
-    this.fragment.set('funderName', value);
+    this.fragment.funderName = value;
   }
 
   @action
   selectFunderIdentifierTypeAction(value) {
-    this.fragment.set('funderIdentifierType', value);
+    this.fragment.funderIdentifierType = value;
   }
 
   @action
   updateSchemeUri(value) {
-    this.fragment.set('schemeUri', value);
+    this.fragment.schemeUri = value;
   }
 
   @action
   updateAwardNumberAction(value) {
-    this.fragment.set('awardNumber', value);
+    this.fragment.awardNumber = value;
   }
 
   @action
   updateAwardTitleAction(value) {
-    this.fragment.set('awardTitle', value);
+    this.fragment.awardTitle = value;
   }
 
   @action
   updateAwardUriAction(value) {
-    this.fragment.set('awardUri', value);
+    this.fragment.awardUri = value;
   }
 
   @action
   deleteFundingReferenceAction() {
-    this.model.get('fundingReferences').removeObject(this.fragment);
+    this.model.fundingReferences.removeObject(this.fragment);
   }
 
   @action
@@ -157,7 +154,7 @@ export default class DoiFundingReference extends Component {
       .query('funder', { query })
       .then(function (funders) {
         funders = funders.sortBy('name')
-        self.set('funders', funders);
+        self.funders = funders;
       })
       .catch(function (reason) {
         console.debug(reason);

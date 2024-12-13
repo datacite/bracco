@@ -1,10 +1,10 @@
-import classic from 'ember-classic-decorator';
+// Finish conversion of this component to a @glimmer component.
 import { action } from '@ember/object';
 import { classNames, tagName } from '@ember-decorators/component';
 import { inject as service } from '@ember/service';
 import Component from '@ember/component';
+import { tracked } from '@glimmer/tracking';
 
-@classic
 @tagName('div')
 @classNames('row')
 export default class RepositoryDoisTransfer extends Component {
@@ -27,8 +27,8 @@ export default class RepositoryDoisTransfer extends Component {
   repository = null;
   isDisabled = true;
 
-  init(...args) {
-    super.init(...args);
+  constructor(...args) {
+    super(...args);
 
     this.repositories = this.repositories || [];
   }
@@ -41,7 +41,7 @@ export default class RepositoryDoisTransfer extends Component {
 
   searchRepository(query) {
     let self = this;
-    if (this.currentUser.get('isAdmin')) {
+    if (this.currentUser.isAdmin) {
       this.store
         .query('repository', { query, sort: 'name', 'page[size]': 100 })
         .then(function (repositories) {
@@ -51,11 +51,11 @@ export default class RepositoryDoisTransfer extends Component {
           console.debug(reason);
           self.set('repositories', []);
         });
-    } else if (this.currentUser.get('isConsortium')) {
+    } else if (this.currentUser.isConsortium) {
       this.store
         .query('repository', {
           query,
-          'consortium-id': this.currentUser.get('provider_id'),
+          'consortium-id': this.currentUser.provider_id,
           sort: 'name',
           'page[size]': 100
         })
@@ -66,11 +66,11 @@ export default class RepositoryDoisTransfer extends Component {
           console.debug(reason);
           self.set('repositories', []);
         });
-    } else if (this.currentUser.get('isProvider')) {
+    } else if (this.currentUser.isProvider) {
       this.store
         .query('repository', {
           query,
-          'provider-id': this.currentUser.get('provider_id'),
+          'provider-id': this.currentUser.provider_id,
           sort: 'name',
           'page[size]': 100
         })
@@ -88,9 +88,11 @@ export default class RepositoryDoisTransfer extends Component {
     this.set('repository', repository);
     this.set(
       'isDisabled',
-      repository === null || repository.id === this.get('model.id')
+      repository === null || repository.id === this.model.id
     );
-    this.model.set('targetId', repository.id);
+    if (repository !== null) {
+      this.model.set('targetId', repository.id);
+    }
   }
 
   @action
@@ -106,7 +108,7 @@ export default class RepositoryDoisTransfer extends Component {
   @action
   submitAction() {
     this.model.save();
-    let count = this.model.get('meta.doiCount');
+    let count = this.model.meta.doiCount;
     this.flashMessages.success(
       'DOI transfer for ' +
         this.intl.formatNumber(count) +

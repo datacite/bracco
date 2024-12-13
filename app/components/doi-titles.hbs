@@ -2,6 +2,7 @@
   <label class="control-label col-md-3 required-label" data-test-titles>Titles</label>
   <div class="col-md-9">
     <div class="label-vertical">One or more names or titles by which the resource is known.</div>
+   <div>GOT HERE!!!</div>
     {{#if this.showTitles}}
       {{#each this.model.titles as |title index|}}
         <DoiTitle @model={{this.model}} @fragment={{title}} @form={{this.form}} @index={{index}} />

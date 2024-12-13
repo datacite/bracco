@@ -1,30 +1,29 @@
-import classic from 'ember-classic-decorator';
+// Finish conversion of this component to a @glimmer component.
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 import Component from '@ember/component';
 
-@classic
 export default class DoiAffiliation extends Component {
   @service
   store;
 
-  init(...args) {
-    super.init(...args);
+  constructor(...args) {
+    super(...args);
 
     this.organizations = this.organizations || [];
   }
 
   updateAffiliation(organizationRecord) {
     if (organizationRecord) {
-      this.fragment.set('name', organizationRecord.name);
-      this.fragment.set('affiliationIdentifier', organizationRecord.id);
-      this.fragment.set('schemeUri', 'https://ror.org');
-      this.fragment.set('affiliationIdentifierScheme', 'ROR');
+      this.fragment.name = organizationRecord.name;
+      this.fragment.affiliationIdentifier = organizationRecord.id;
+      this.fragment.schemeUri = 'https://ror.org';
+      this.fragment.affiliationIdentifierScheme = 'ROR';
     } else {
-      this.fragment.set('name', null);
-      this.fragment.set('affiliationIdentifier', null);
-      this.fragment.set('schemeUri', 'https://ror.org');
-      this.fragment.set('affiliationIdentifierScheme', 'ROR');
+      this.fragment.name = null;
+      this.fragment.affiliationIdentifier = null;
+      this.fragment.schemeUri = 'https://ror.org';
+      this.fragment.affiliationIdentifierScheme = 'ROR';
     }
   }
 
@@ -51,6 +50,6 @@ export default class DoiAffiliation extends Component {
 
   @action
   deleteAffiliation() {
-    this.creator.get('affiliation').removeObject(this.fragment);
+    this.creator.affiliation.removeObject(this.fragment);
   }
 }

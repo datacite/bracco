@@ -1,4 +1,4 @@
-import classic from 'ember-classic-decorator';
+// Finish conversion of this component to a @glimmer component.
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 import Component from '@ember/component';
@@ -13,7 +13,6 @@ const certificateList = [
   'WDS'
 ];
 
-@classic
 export default class RepositoryCertificate extends Component {
   @service
   store;
@@ -27,17 +26,17 @@ export default class RepositoryCertificate extends Component {
     let certificates = certificateList.filter(function (certificate) {
       return certificate.toLowerCase().startsWith(query.toLowerCase());
     });
-    this.set('certificates', certificates);
+    this.certificates = certificates;
   }
 
   @action
   selectCertificate(certificate) {
-    this.model.get('certificate').replace(this.index, 1, [certificate]);
-    this.set('certificates', certificateList);
+    this.model.certificate.replace(this.index, 1, [certificate]);
+    this.certificates = certificateList;
   }
 
   @action
   deleteCertificate() {
-    this.model.get('certificate').removeAt(this.index);
+    this.model.certificate.removeAt(this.index);
   }
 }

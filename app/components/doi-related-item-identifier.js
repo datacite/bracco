@@ -1,4 +1,4 @@
-import classic from 'ember-classic-decorator';
+// Finish conversion of this component to a @glimmer component.
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 /* eslint-disable no-useless-escape */
@@ -28,7 +28,6 @@ const relatedItemIdentifierTypeList = [
   'w3id'
 ];
 
-@classic
 export default class DoiRelatedItemIdentifier extends Component {
   @service
   store;
@@ -36,8 +35,8 @@ export default class DoiRelatedItemIdentifier extends Component {
   relatedItemIdentifierTypeList = relatedItemIdentifierTypeList;
   relatedItemIdentifierTypes = relatedItemIdentifierTypeList;
 
-  init(...args) {
-    super.init(...args);
+  constructor(...args) {
+    super(...args);
   }
 
   didReceiveAttrs() {
@@ -46,9 +45,9 @@ export default class DoiRelatedItemIdentifier extends Component {
     if (
       relatedItemIdentifierTypeList.includes(this.relatedItemIdentifierType)
     ) {
-      this.set('controlledIdentifierType', true);
+      this.controlledIdentifierType = true;
     } else {
-      this.set('controlledIdentifierType', false);
+      this.controlledIdentifierType = false;
     }
   }
 
@@ -70,72 +69,72 @@ export default class DoiRelatedItemIdentifier extends Component {
 
     switch (true) {
       case isBlank(value):
-        this.fragment.set('relatedItemIdentifier', null);
-        this.fragment.set('relatedItemIdentifierType', null);
-        this.set('controlledIdentifierType', false);
+        this.fragment.relatedItemIdentifier = null;
+        this.fragment.relatedItemIdentifierType = null;
+        this.controlledIdentifierType = false;
         break;
       case ark.test(value):
-        this.fragment.set('relatedItemIdentifier', value);
-        this.fragment.set('relatedItemIdentifierType', 'ARK');
-        this.set('controlledIdentifierType', true);
+        this.fragment.relatedItemIdentifier = value;
+        this.fragment.relatedItemIdentifierType = 'ARK';
+        this.controlledIdentifierType = true;
         break;
       case arxiv.test(value):
-        this.fragment.set('relatedItemIdentifier', value);
-        this.fragment.set('relatedItemIdentifierType', 'arXiv');
-        this.set('controlledIdentifierType', true);
+        this.fragment.relatedItemIdentifier = value;
+        this.fragment.relatedItemIdentifierType = 'arXiv';
+        this.controlledIdentifierType = true;
         break;
       case doi.test(value):
-        this.fragment.set('relatedItemIdentifier', value);
-        this.fragment.set('relatedItemIdentifierType', 'DOI');
-        this.set('controlledIdentifierType', true);
+        this.fragment.relatedItemIdentifier = value;
+        this.fragment.relatedItemIdentifierType = 'DOI';
+        this.controlledIdentifierType = true;
         break;
       case doiUrl.test(value):
-        this.fragment.set('relatedItemIdentifier', value);
-        this.fragment.set('relatedItemIdentifierType', 'DOI');
-        this.set('controlledIdentifierType', true);
+        this.fragment.relatedItemIdentifier = value;
+        this.fragment.relatedItemIdentifierType = 'DOI';
+        this.controlledIdentifierType = true;
         break;
       case bibcode.test(value):
-        this.fragment.set('relatedItemIdentifier', value);
-        this.fragment.set('relatedItemIdentifierType', 'bibcode');
-        this.set('controlledIdentifierType', true);
+        this.fragment.relatedItemIdentifier = value;
+        this.fragment.relatedItemIdentifierType = 'bibcode';
+        this.controlledIdentifierType = true;
         break;
       case lsid.test(value):
-        this.fragment.set('relatedItemIdentifier', value);
-        this.fragment.set('relatedItemIdentifierType', 'LSID');
-        this.set('controlledIdentifierType', true);
+        this.fragment.relatedItemIdentifier = value;
+        this.fragment.relatedItemIdentifierType = 'LSID';
+        this.controlledIdentifierType = true;
         break;
       case isURL(value, purl):
-        this.fragment.set('relatedItemIdentifier', value);
-        this.fragment.set('relatedItemIdentifierType', 'PURL');
-        this.set('controlledIdentifierType', true);
+        this.fragment.relatedItemIdentifier = value;
+        this.fragment.relatedItemIdentifierType = 'PURL';
+        this.controlledIdentifierType = true;
         break;
       case urn.test(value):
-        this.fragment.set('relatedItemIdentifier', value);
-        this.fragment.set('relatedIdentifierType', 'URN');
-        this.set('controlledIdentifierType', true);
+        this.fragment.relatedItemIdentifier = value;
+        this.fragment.relatedIdentifierType = 'URN';
+        this.controlledIdentifierType = true;
         break;
       case isISBN(value):
-        this.fragment.set('relatedItemIdentifier', value);
-        this.fragment.set('relatedIdentifierType', 'ISBN');
-        this.set('controlledIdentifierType', true);
+        this.fragment.relatedItemIdentifier = value;
+        this.fragment.relatedIdentifierType = 'ISBN';
+        this.controlledIdentifierType = true;
         break;
       case isURL(value):
-        this.fragment.set('relatedItemIdentifier', value);
-        this.fragment.set('relatedItemIdentifierType', 'URL');
-        this.set('controlledIdentifierType', true);
+        this.fragment.relatedItemIdentifier = value;
+        this.fragment.relatedItemIdentifierType = 'URL';
+        this.controlledIdentifierType = true;
         break;
       default:
         // // Clears the relatedItemIdentifierType in case the user changes the relatedItemIdentifier after selecting it once before.
-        this.fragment.set('relatedItemIdentifier', value);
-        this.fragment.set('relatedItemIdentifierType', null);
-        this.set('controlledIdentifierType', false);
+        this.fragment.relatedItemIdentifier = value;
+        this.fragment.relatedItemIdentifierType = null;
+        this.controlledIdentifierType = false;
         break;
     }
   }
 
   selectRelatedItemIdentifierType(relatedItemIdentifierType) {
-    this.fragment.set('relatedItemIdentifierType', relatedItemIdentifierType);
-    this.set('relatedItemIdentifierTypes', relatedItemIdentifierTypeList);
+    this.fragment.relatedItemIdentifierType = relatedItemIdentifierType;
+    this.relatedItemIdentifierTypes = relatedItemIdentifierTypeList;
   }
 
   @action

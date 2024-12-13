@@ -1,27 +1,27 @@
-import classic from 'ember-classic-decorator';
+// Finish conversion of this component to a @glimmer component.
 import { action } from '@ember/object';
 import Component from '@ember/component';
+import { tracked } from '@glimmer/tracking';
 
-@classic
 export default class DoiFundingReferences extends Component {
-  showFundingReferences = false;
+  @tracked showFundingReferences = false;
 
   didReceiveAttrs() {
     super.didReceiveAttrs(...arguments);
 
-    if (!this.model.get('fundingReferences')) {
-      this.model.set('fundingReferences', []);
+    if (!this.modelfundingReferences) {
+      this.model.fundingReferences = [];
     }
   }
 
   @action
   addFundingReference() {
-    this.model.get('fundingReferences').createFragment();
-    this.set('showFundingReferences', true);
+    this.model.fundingReferences.createFragment();
+    this.showFundingReferences = true;
   }
 
   @action
   toggleFundingReferences() {
-    this.set('showFundingReferences', !this.showFundingReferences);
+    this.showFundingReferences = !this.showFundingReferences;
   }
 }

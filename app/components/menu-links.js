@@ -1,9 +1,7 @@
-import classic from 'ember-classic-decorator';
+// Finish conversion of this component to a @glimmer component.
 import { tagName } from '@ember-decorators/component';
 import Component from '@ember/component';
 import ENV from 'bracco/config/environment';
-
-@classic
 @tagName('li')
 export default class MenuLinks extends Component {
   didReceiveAttrs() {

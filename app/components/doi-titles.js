@@ -1,17 +1,17 @@
-import classic from 'ember-classic-decorator';
+// Finish conversion of this component to a @glimmer component.
 import { action } from '@ember/object';
 import Component from '@ember/component';
 import { schedule } from '@ember/runloop';
+import { tracked } from '@glimmer/tracking';
 
-@classic
 export default class DoiTitles extends Component {
   showTitles = true;
 
-  init() {
-    super.init();
+  constructor(...args) {
+    super(...args);
 
     schedule("afterRender",this,function() {
-      if (this.model.get('titles').length == 0) {
+      if (this.model.titles.length == 0) {
         this.send("addTitle");
       }
     });
@@ -20,14 +20,14 @@ export default class DoiTitles extends Component {
   didReceiveAttrs() {
     super.didReceiveAttrs(...arguments);
 
-    if (!this.model.get('titles')) {
-      this.model.set('titles', []);
+    if (!this.model.titles) {
+      this.model.titles = [];
     }
   }
 
   @action
   addTitle() {
-    this.model.get('titles').createFragment();
+    this.model.titles.createFragment();
     this.set('showTitles', true);
   }
 

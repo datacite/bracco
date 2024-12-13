@@ -70,7 +70,7 @@
     "@cypress/browserify-preprocessor": "^3.0.2",
     "@cypress/code-coverage": "^3.12.33",
     "@ember/optional-features": "^2.1.0",
-    "@ember/string": "^3.1.1",
+    "@ember/string": "^4.0.0",
     "@ember/test-helpers": "^2.9.3",
     "@embroider/macros": "1.16.2",
     "@glimmer/component": "^1.1.2",

@@ -1,8 +1,9 @@
-import classic from 'ember-classic-decorator';
+// Finish conversion of this component to a @glimmer component.
 import { action, computed } from '@ember/object';
 import Component from '@ember/component';
 import ISO6391 from 'iso-639-1';
 import LanguageComputedMixin from '../mixins/language-computed';
+import { tracked } from '@glimmer/tracking';
 
 const descriptionTypes = [
   'Abstract',
@@ -14,7 +15,6 @@ const descriptionTypes = [
 ];
 const languageList = ISO6391.getAllNames();
 
-@classic
 export default class DoiDescription extends Component.extend(LanguageComputedMixin) {
   descriptionTypes = descriptionTypes;
   languageList = languageList;
@@ -22,7 +22,7 @@ export default class DoiDescription extends Component.extend(LanguageComputedMix
 
   @computed('fragment.descriptionType')
   get isSeriesInformation() {
-    return this.get('fragment.descriptionType') == 'SeriesInformation';
+    return this.fragment.descriptionType == 'SeriesInformation';
   }
 
   @action
@@ -32,12 +32,12 @@ export default class DoiDescription extends Component.extend(LanguageComputedMix
 
   @action
   deleteDescription() {
-    this.model.get('descriptions').removeObject(this.fragment);
+    this.model.descriptions.removeObject(this.fragment);
   }
 
   @action
   selectDescriptionType(descriptionType) {
-    this.fragment.set('descriptionType', descriptionType);
+    this.fragment.descriptionType = descriptionType;
   }
 
   @action
@@ -45,16 +45,16 @@ export default class DoiDescription extends Component.extend(LanguageComputedMix
     let languages = languageList.filter(function (language) {
       return language.toLowerCase().startsWith(query.toLowerCase());
     });
-    this.set('languages', languages);
+    this.languages = languages;
   }
 
   @action
   selectLanguage(language) {
     if (language) {
-      this.fragment.set('lang', ISO6391.getCode(language));
+      this.fragment.lang = ISO6391.getCode(language);
     } else {
-      this.fragment.set('lang', null);
+      this.fragment.lang = null;
     }
-    this.set('languages', languageList);
+    this.languages = languageList;
   }
 }

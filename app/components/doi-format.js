@@ -1,9 +1,10 @@
-import classic from 'ember-classic-decorator';
+// Finish conversion of this component to a @glimmer component.
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 import Component from '@ember/component';
 import { isBlank } from '@ember/utils';
 import mime from 'mime/lite';
+import { tracked } from '@glimmer/tracking';
 
 const FORMATS = Object.keys(mime._extensions);
 
@@ -14,13 +15,12 @@ function getMatchingFormats(input) {
   return matchingFormats;
 }
 
-@classic
 export default class DoiFormat extends Component {
   @service
   store;
 
-  init(...args) {
-    super.init(...args);
+  constructor(...args) {
+    super(...args);
     this.formats = FORMATS;
 
     this.selected = this.selected || [];
@@ -42,26 +42,26 @@ export default class DoiFormat extends Component {
         this.formats.push(select.searchText);
         select.actions.choose(select.searchText);
 
-        this.model.get('formats').splice(this.index, 1, select.searchText);
-        this.set('formats', FORMATS);
+        this.model.formats.splice(this.index, 1, select.searchText);
+        this.formats = FORMATS;
       }
     }
   }
 
   @action
   searchFormat(query) {
-    this.set('formats', getMatchingFormats(query));
+    this.formats = getMatchingFormats(query);
   }
 
   @action
   selectFormat(formatExtension) {
-    this.model.get('formats').splice(this.index, 1, formatExtension);
-    this.model.set('formats', Array.from(this.model.get('formats')));
+    this.model.formats.splice(this.index, 1, formatExtension);
+    this.model.formats = Array.from(this.model.formats);
   }
 
   @action
   deleteFormat() {
-    this.model.get('formats').splice(this.index, 1);
-    this.model.set('formats', Array.from(this.model.get('formats')));
+    this.model.formats.splice(this.index, 1);
+    this.model.formats = Array.from(this.model.formats);
   }
 }

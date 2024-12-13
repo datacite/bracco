@@ -1,8 +1,8 @@
-import classic from 'ember-classic-decorator';
+// Finish conversion of this component to a @glimmer component.
 import { inject as service } from '@ember/service';
 import Component from '@ember/component';
+import { tracked } from '@glimmer/tracking';
 
-@classic
 export default class RepositoryList extends Component {
   @service
   currentUser;
@@ -20,17 +20,17 @@ export default class RepositoryList extends Component {
 
     // check that current user is staff, or has all required contacts set
     // this is separate from abilities as it triggers a specific error message
-    if (this.currentUser.get('isAdmin')) {
-      this.set('hasRequiredContacts', true);
+    if (this.currentUser.isAdmin) {
+      this.hasRequiredContacts = true;
     } else if (
-      this.currentUser.get('isConsortium') ||
-      this.currentUser.get('isProvider')
+      this.currentUser.isConsortium ||
+      this.currentUser.isProvider
     ) {
       let self = this;
       this.store
-        .findRecord('provider', this.currentUser.get('provider_id'))
+        .findRecord('provider', this.currentUser.provider_id)
         .then(function (provider) {
-          self.set('hasRequiredContacts', provider.get('hasRequiredContacts'));
+          self.hasRequiredContacts = provider.hasRequiredContacts;
         });
     }
   }

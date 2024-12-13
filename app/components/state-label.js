@@ -1,9 +1,9 @@
-import classic from 'ember-classic-decorator';
+// Finish conversion of this component to a @glimmer component.
 import { classNameBindings, tagName } from '@ember-decorators/component';
 import Component from '@ember/component';
 import { capitalize } from '@ember/string';
 
-@classic
+
 @tagName('span')
 @classNameBindings('label')
 export default class StateLabel extends Component {
@@ -17,7 +17,7 @@ export default class StateLabel extends Component {
       findable: 'label-primary'
     };
 
-    this.set('label', 'label ' + stateLabels[state]);
-    this.set('stateDisplay', capitalize(state));
+    this.label = 'label ' + stateLabels[state];
+    this.stateDisplay = capitalize(state);
   }
 }

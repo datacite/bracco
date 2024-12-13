@@ -1,9 +1,9 @@
-import classic from 'ember-classic-decorator';
+// Finish conversion of this component to a @glimmer component.
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 import Component from '@ember/component';
+import { tracked } from '@glimmer/tracking';
 
-@classic
 export default class IndexShow extends Component {
   @service
   store;
@@ -13,18 +13,18 @@ export default class IndexShow extends Component {
 
   @action
   editAction(provider) {
-    this.set('provider', provider);
-    this.set('edit', true);
+    this.provider = provider;
+    this.edit = true;
   }
 
   @action
   submitAction() {
     this.provider.save();
-    this.set('edit', false);
+    this.edit = false;
   }
 
   @action
   cancelAction() {
-    this.set('edit', false);
+    this.edit = false;
   }
 }

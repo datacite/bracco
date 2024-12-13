@@ -1,21 +1,21 @@
-import classic from 'ember-classic-decorator';
+// Finish conversion of this component to a @glimmer component.
 import { action } from '@ember/object';
 import { attributeBindings } from '@ember-decorators/component';
 import Component from '@ember/component';
 import { isBlank } from '@ember/utils';
 import fosMapping from '../utils/fos-mappings';
+import { tracked } from '@glimmer/tracking';
 
 const completeSubjectList = fosMapping.allLabels().sort();
 
-@classic
 @attributeBindings('simple')
 export default class DoiSubject extends Component {
   completeSubjectList = completeSubjectList;
   subjects = completeSubjectList;
   oecdSelected = false;
 
-  init(...args) {
-    super.init(...args);
+  constructor(...args) {
+    super(...args);
     this.selected = this.selected || [];
   }
 
@@ -23,30 +23,30 @@ export default class DoiSubject extends Component {
     super.didReceiveAttrs(...arguments);
 
     if (
-      this.fragment.get('subject') &&
+      this.fragment.subject &&
       completeSubjectList.includes(
-        this.fragment.get('subject').replace('FOS: ', '')
+        this.fragment.subject.replace('FOS: ', '')
       )
     ) {
-      this.set('oecdSelected', true);
+      this.oecdSelected = true;
     } else {
-      this.set('oecdSelected', false);
+      this.oecdSelected = false;
     }
   }
 
   setSchemeUri(value) {
-    this.fragment.set('schemeUri', value);
-    this.set('schemeUri', value);
+    this.fragment.schemeUri = value;
+    this.schemeUri = value;
   }
 
   setScheme(value) {
-    this.fragment.set('subjectScheme', value);
-    this.set('subjectScheme', value);
+    this.fragment.subjectScheme = value;
+    this.subjectScheme = value;
   }
 
   setClassificationCode(value) {
-    this.fragment.set('classificationCode', value);
-    this.set('classificationCode', value);
+    this.fragment.classificationCode = value;
+    this.classificationCode = value;
   }
 
   subjectText(value) {
@@ -67,7 +67,7 @@ export default class DoiSubject extends Component {
       if (!this.selected.includes(select.searchText)) {
         this.subjects.push(select.searchText);
         select.actions.choose(select.searchText);
-        this.fragment.set('subject', select.searchText);
+        this.fragment.subject = select.searchText;
         this.set('subjects', completeSubjectList);
       }
     }
@@ -77,23 +77,23 @@ export default class DoiSubject extends Component {
   updateSubject(value) {
     var fos = fosMapping.findSubjectByLabel(value);
     if (fos) {
-      this.fragment.set('subject', this.subjectText(fos.subject));
+      this.fragment.subject = this.subjectText(fos.subject);
       this.setScheme(fos.subjectScheme);
       this.setSchemeUri(fos.schemeUri);
       this.setClassificationCode(fos.classificationCode);
-      this.set('oecdSelected', true);
+      this.oecdSelected = true;
     } else {
-      this.fragment.set('subject', value);
+      this.fragment.subject = value;
       this.setScheme(null);
       this.setSchemeUri(null);
       this.setClassificationCode(null);
-      this.set('oecdSelected', false);
+      this.oecdSelected = false;
     }
   }
 
   @action
   updateSubjectScheme(value) {
-    this.fragment.set('subjectScheme', value);
+    this.fragment.subjectScheme = value;
   }
 
   @action
@@ -108,7 +108,7 @@ export default class DoiSubject extends Component {
 
   @action
   deleteSubject() {
-    this.model.get('subjects').removeObject(this.fragment);
+    this.model.subjects.removeObject(this.fragment);
   }
 
   @action

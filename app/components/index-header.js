@@ -1,8 +1,7 @@
-import classic from 'ember-classic-decorator';
+// Finish conversion of this component to a @glimmer component.
 import { tagName } from '@ember-decorators/component';
 import Component from '@ember/component';
 
-@classic
 @tagName('div')
 export default class IndexHeader extends Component {
   didRender() {

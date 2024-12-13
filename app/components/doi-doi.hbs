@@ -6,11 +6,12 @@
       <span class="input-group-addon">
         <@form.element @controlType="power-select" id="prefix-field" @formLayout="vertical" @property="prefix" @options={{this.repositoryPrefixes}} @destination={{this.prefix}} as |el|>
           <el.control @onChange={{action "selectPrefix"}} @searchPlaceholder="Select Prefix" @optionLabelPath={{this.id}} @searchEnabled={{true}} as |item|>
+
             {{if item.prefix.id item.prefix.id item}}
           </el.control>
         </@form.element>
       </span>
-      <@form.element @controlType="text" class="suffix" id="suffix" @formLayout="vertical" @property="suffix" @onChange={{action "selectSuffix"}} @helpText="Click the circle icon for a new random suffix, or the cross icon to delete the random suffix and enter a value manually." as |el| >
+      <@form.element @controlType="text" class="suffix" id="suffix" @formLayout="vertical" @property="suffix" @onChange={{action "doSelectSuffix"}} @helpText="Click the circle icon for a new random suffix, or the cross icon to delete the random suffix and enter a value manually." as |el| >
         <el.control id="suffix-field" />
           <span class="input-group-addon refresh" title="Refresh" aria-label="Refresh" {{action 'refresh'}}><i class="fas fa-sync"></i></span>
           <span class="input-group-addon clear" title="Clear" aria-label="Clear" {{action 'clear'}}><i class="fas fa-times-circle"></i></span>
@@ -23,8 +24,8 @@
   <label class="control-label col-md-3 required-label">State</label>
   <div class="col-md-9 input-fragment">
     <div class="label-vertical">The state determines whether a DOI is registered and findable. Once in Registered or Findable state, a DOI can't be set back to Draft state. <a target="_blank" rel="noopener noreferrer" href="https://support.datacite.org/docs/doi-states">More&nbsp;…</a></div>
-    <div><RadioButton @radioId="draft-radio" @value="draft" @groupValue={{this.state}} @radioClass="radio" @changed={{action "selectState"}} @disabled={{this.draft}} />Draft <span class="help-block">only visible in Fabrica, DOI can be deleted</span></div>
-    <div><RadioButton @radioId="registered-radio" @value="registered" @groupValue={{this.state}} @radioClass="radio" @changed={{action "selectState"}} @disabled={{this.registered}} />Registered <span class="help-block">registered with the DOI Resolver</span></div>
-    <div><RadioButton @radioId="findable-radio" @value="findable" @groupValue={{this.state}} @radioClass="radio" @changed={{action "selectState"}} @disabled={{this.findable}} />Findable <span class="help-block">registered with the DOI Resolver and indexed in DataCite Search</span></div>
+    <div><RadioButton @radioId="draft-radio" @value="draft" @groupValue={{this.state}} @radioClass="radio" @changed={{action "doSelectState"}} @disabled={{this.draft}} />Draft <span class="help-block">only visible in Fabrica, DOI can be deleted</span></div>
+    <div><RadioButton @radioId="registered-radio" @value="registered" @groupValue={{this.state}} @radioClass="radio" @changed={{action "doSelectState"}} @disabled={{this.registered}} />Registered <span class="help-block">registered with the DOI Resolver</span></div>
+    <div><RadioButton @radioId="findable-radio" @value="findable" @groupValue={{this.state}} @radioClass="radio" @changed={{action "doSelectState"}} @disabled={{this.findable}} />Findable <span class="help-block">registered with the DOI Resolver and indexed in DataCite Search</span></div>
   </div>
 </div>

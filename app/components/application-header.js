@@ -1,5 +1,5 @@
 // Finish conversion of this component to a @glimmer component.
-import { action, computed } from '@ember/object';
+import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { typeOf } from '@ember/utils';
 import { htmlSafe } from '@ember/template';
@@ -20,8 +20,14 @@ export default class ApplicationHeader extends Component {
   @service
   router;
 
-  @tracked default = false;
-  @tracked data = {}
+  default = false;
+  type = 'transparent';
+  title = null;
+  home = '/';
+  user = true;
+  showLogo = true;
+  navBgColor = '';
+  navButtonColor = '';
 
   constructor(...args) {
     super(...args);
@@ -31,107 +37,56 @@ export default class ApplicationHeader extends Component {
     } else {
       this.features.disable('enableDoiEstimate');
     }
+
+    this.data = this.data || {};
   }
 
-  @computed('default')
-  get type() {
+  didReceiveAttrs() {
+    super.didReceiveAttrs(...arguments);
+
     if (this.default) {
-      return null;
-    } else {
-      return 'transparent';
+      this.type = null;
+      this.title = htmlSafe(ENV.SITE_TITLE);
+    } else if (this['sign-in']) {
+      this.title = htmlSafe(ENV.SITE_TITLE);
+      this.user = false;
     }
-  }
 
-  @computed('default','router.currentRouteName')
-  get title() {
-    if (this.default) {
-      return htmlSafe(ENV.SITE_TITLE);
-    } else if (this.router.currentRouteName == 'sign-in' ){
-      return htmlSafe(ENV.SITE_TITLE);
-    } else {
-      return null;
-    }
-  }
-
-  @computed('currentUser.home')
-  get home() {
     let home = this.currentUser.home;
-
     if (typeOf(home) == 'object') {
-      return { route: home.route, model: home.id };
+      this.home = { route: home.route, model: home.id };
     } else if (home === 'password') {
-      return null;
+      this.home = null;
     } else if (home) {
-      return { href: home };
+      this.home = { href: home };
     } else {
-      return null;
+      this.home = null;
     }
-  }
 
-  @computed('currentUser.settings')
-  get settings() {
     let settings = this.currentUser.settings;
-
     if (typeOf(settings) == 'object') {
-      return { route: settings.route, model: settings.id };
+      this.settings = { route: settings.route, model: settings.id };
     } else if (home === 'password') {
-      return null;
+      this.settings = null;
     } else if (home) {
-      return { href: settings };
+      this.settings = { href: settings };
     } else {
-      return null;
+      this.settings = null;
     }
-  }
 
-  @computed('router.currentRouteName')
-  get user() {
-    let route = this.router.currentRouteName;
-
-    if ((!this.session.isAuthenticated && route === 'index') || 
-         route === 'sign-in' || 
-         route === 'password' || 
-         route === 'reset' || 
-         route === '404') {
-      return false;
-    } else {
-      return true;
-    }
-  }
-
-  @computed('router.currentRouteName', 'session.isAuthenticated')
-  get showLogo() {
     let route = this.router.currentRouteName;
 
     if ((!this.session.isAuthenticated && route === 'index') || route === 'sign-in' || route === 'password' || route === 'reset' || route === '404') {
-      return false;
-    } else {
-      return true;
+      this.showLogo = false;
     }
-  }
 
-  @computed('currentUser.roleName')
-  get navBgColor() {
     let role = this.currentUser.roleName;
-
-    if (role == 'Member') {
-      return 'navbar-member';
-    } else if (role == 'Consortium') {
-      return 'navbar-consortium'
-    } else {
-      return '';
-    }
-  }
-
-  @computed('currentUser.roleName')
-  get navButtonColor() {
-    let role = this.currentUser.roleName;
-
-    if (role == 'Member') {
-      return 'navbar-button-member';
-    } else if (role == 'Consortium') {
-      return 'navbar-button-consortium'
-    } else {
-      return '';
+    if (role === 'Member') {
+      this.navBgColor = 'navbar-member';
+      this.navButtonColor = 'navbar-button-member';
+    } else if (role === 'Consortium') {
+      this.navBgColor = 'navbar-consortium';
+      this.navButtonColor = 'navbar-button-consortium';
     }
   }
 

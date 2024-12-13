@@ -1,4 +1,5 @@
 // Finish conversion of this component to a @glimmer component.
+import { classNameBindings, classNames, tagName } from '@ember-decorators/component';
 import { inject as service } from '@ember/service';
 import { htmlSafe } from '@ember/template';
 import Component from '@ember/component';

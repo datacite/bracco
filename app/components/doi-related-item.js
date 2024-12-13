@@ -1,9 +1,10 @@
-import classic from 'ember-classic-decorator';
+// Finish conversion of this component to a @glimmer component.
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 /* eslint-disable no-useless-escape */
 import Component from '@ember/component';
 import { pascalCase } from 'pascal-case';
+import { tracked } from '@glimmer/tracking';
 
 const relationTypeList = [
   'Cites',
@@ -77,7 +78,6 @@ const relatedItemTypeList = [
   'Other'
 ];
 
-@classic
 export default class DoiRelatedItem extends Component {
   @service
   store;
@@ -89,8 +89,8 @@ export default class DoiRelatedItem extends Component {
   showRelatedItemCreators = false;
   showRelatedItemContributors = false;
 
-  init(...args) {
-    super.init(...args);
+  constructor(...args) {
+    super(...args);
 
     this.isMetadataRelationTypes = this.isMetadataRelationTypes || [
       'HasMetadata',
@@ -101,76 +101,76 @@ export default class DoiRelatedItem extends Component {
   didReceiveAttrs() {
     super.didReceiveAttrs(...arguments);
 
-    if (!this.fragment.get('relatedItemIdentifier')) {
-      this.fragment.set('relatedIdentifier', {});
-      // this.fragment.get('relatedIdentifier').createFragment();
+    if (!this.fragment.relatedItemIdentifier) {
+      this.fragment.relatedIdentifier = {};
+      // this.fragment.relatedIdentifier').createFragment();
     }
 
-    if (!this.fragment.get('titles')) {
-      this.fragment.set('titles', []);
+    if (!this.fragment.titles) {
+      this.fragment.titles = [];
     }
-    if (this.fragment.get('titles').length == 0) {
-      this.fragment.get('titles').createFragment();
-    }
-
-    if (!this.fragment.get('creators')) {
-      this.fragment.set('creators', []);
+    if (this.fragment.titles.length == 0) {
+      this.fragment.titles.createFragment();
     }
 
-    if (!this.fragment.get('contributors')) {
-      this.fragment.set('contributors', []);
+    if (!this.fragment.creators) {
+      this.fragment.creators = [];
+    }
+
+    if (!this.fragment.contributors) {
+      this.fragment.contributors = [];
     }
   }
 
   selectRelationType(relationType) {
     if (this.isMetadataRelationTypes.includes(relationType)) {
-      this.set('isMetadataRelationType', true);
+      this.isMetadataRelationType = true;
     } else {
-      this.set('isMetadataRelationType', false);
-      this.fragment.set('schemeType', null);
-      this.fragment.set('relatedMetadataScheme', null);
-      this.fragment.set('schemeUri', null);
+      this.isMetadataRelationType = false;
+      this.fragment.schemeType = null;
+      this.fragment.relatedMetadataScheme = null;
+      this.fragment.schemeUri = null;
     }
     if (relationType) {
-      this.fragment.set('relationType', pascalCase(relationType));
+      this.fragment.relationType = pascalCase(relationType);
     } else {
-      this.fragment.set('relationType', null);
+      this.fragment.relationType = null;
     }
-    this.set('relationTypes', relationTypeList);
+    this.relationTypes = relationTypeList;
   }
 
   selectRelatedItemType(relatedItemType) {
     if (relatedItemType) {
-      this.fragment.set('relatedItemType', pascalCase(relatedItemType));
+      this.fragment.relatedItemType = pascalCase(relatedItemType);
     } else {
-      this.fragment.set('relatedItemType', null);
+      this.fragment.relatedItemType = null;
     }
-    this.set('relatedItemTypes', relatedItemTypeList);
+    this.relatedItemTypes = relatedItemTypeList;
   }
 
   @action
   updateRelatedItemTitleAction(value) {
-    this.fragment.set('titles', [{ title: value }]);
+    this.fragment.titles = [{ title: value }];
   }
 
   @action
   updateRelatedItemVolumeAction(value) {
-    this.fragment.set('volume', value);
+    this.fragment.volume = value;
   }
 
   @action
   updateRelatedItemIssueAction(value) {
-    this.fragment.set('issue', value);
+    this.fragment.issue = value;
   }
 
   @action
   updateRelatedItemNumberAction(value) {
-    this.fragment.set('number', value);
+    this.fragment.number = value;
   }
 
   @action
   updateRelatedItemPublicationYearAction(value) {
-    this.fragment.set('publicationYear', value);
+    this.fragment.publicationYear = value;
   }
 
   @action
@@ -185,23 +185,23 @@ export default class DoiRelatedItem extends Component {
 
   @action
   deleteRelatedItemAction() {
-    this.model.get('relatedItems').removeObject(this.fragment);
+    this.model.relatedItems.removeObject(this.fragment);
   }
 
   @action
   addRelatedItemCreatorAction() {
-    this.fragment.get('creators').createFragment();
+    this.fragment.creators.createFragment();
     this.set('showRelatedItemCreators', true);
   }
 
   @action
   toggleRelatedItemCreatorsAction() {
-    this.set('showRelatedItemCreators', !this.showRelatedItemCreators);
+    this.showRelatedItemCreators =!this.showRelatedItemCreators;
   }
 
   @action
   addRelatedItemContributorAction() {
-    this.fragment.get('contributors').createFragment();
+    this.fragment.contributors.createFragment();
     this.set('showRelatedItemContributors', true);
   }
 

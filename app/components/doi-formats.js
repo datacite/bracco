@@ -1,18 +1,18 @@
-import classic from 'ember-classic-decorator';
+// Finish conversion of this component to a @glimmer component.
 import { action } from '@ember/object';
 import Component from '@ember/component';
 import { schedule } from '@ember/runloop';
+import { tracked } from '@glimmer/tracking';
 
-@classic
 export default class DoiFormats extends Component {
-  showFormats = false;
+  @tracked showFormats = false;
 
-  init() {
-    super.init();
+  constructor(...args) {
+    super(...arguments);
 
     schedule("afterRender",this,function() {
-      if (!this.model.get('formats')) {
-        this.model.set('formats', []);
+      if (!this.model.formats) {
+        this.model.formats = [];
       }
     });
   }
@@ -24,13 +24,13 @@ export default class DoiFormats extends Component {
 
   @action
   addFormat() {
-    this.model.get('formats').push('');
-    this.model.set('formats', Array.from(this.model.get('formats')));
-    this.set('showFormats', true);
+    this.model.formats.push('');
+    this.model.formats = Array.from(this.model.formats);
+    this.showFormats = true;
   }
 
   @action
   toggleFormats() {
-    this.set('showFormats', !this.showFormats);
+    this.showFormats = !this.showFormats;
   }
 }

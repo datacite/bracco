@@ -1,7 +1,8 @@
-import classic from 'ember-classic-decorator';
+// Finish conversion of this component to a @glimmer component.
 import { action } from '@ember/object';
 import Component from '@ember/component';
 import { A } from '@ember/array';
+import { tracked } from '@glimmer/tracking';
 
 const stateList = {
   draft: ['draft', 'registered', 'findable'],
@@ -9,7 +10,6 @@ const stateList = {
   findable: ['registered', 'findable']
 };
 
-@classic
 export default class DoiState extends Component {
   draft = true;
   registered = true;
@@ -20,12 +20,12 @@ export default class DoiState extends Component {
   didReceiveAttrs() {
     super.didReceiveAttrs(...arguments);
 
-    this.selectState(this.model.get('state'));
+    this.selectState(this.model.state);
   }
 
   selectState(state) {
     this.set('state', state);
-    this.model.set('state', state);
+    this.model.state = state;
     this.setStates(state);
   }
 
@@ -41,7 +41,7 @@ export default class DoiState extends Component {
   }
 
   @action
-  selectStateAction(state) {
+  doSelectState(state) {
     this.selectState(state);
   }
 

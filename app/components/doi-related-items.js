@@ -1,8 +1,8 @@
-import classic from 'ember-classic-decorator';
+// Finish conversion of this component to a @glimmer component.
 import { action } from '@ember/object';
 import Component from '@ember/component';
+import { tracked } from '@glimmer/tracking';
 
-@classic
 export default class DoiRelatedItems extends Component {
   showRelatedItems = false;
 
@@ -10,13 +10,13 @@ export default class DoiRelatedItems extends Component {
     super.didReceiveAttrs(...arguments);
 
     if (!this.model.get('relatedItems')) {
-      this.model.set('relatedItems', []);
+      this.model.relatedItems = [];
     }
   }
 
   @action
   addRelatedItem() {
-    this.model.get('relatedItems').createFragment();
+    this.model.relatedItems.createFragment();
     this.set('showRelatedItems', true);
   }
 

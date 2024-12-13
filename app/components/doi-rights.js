@@ -1,9 +1,9 @@
-import classic from 'ember-classic-decorator';
+// Finish conversion of this component to a @glimmer component.
 import { action } from '@ember/object';
 import Component from '@ember/component';
 import { isBlank, typeOf } from '@ember/utils';
+import { tracked } from '@glimmer/tracking';
 
-@classic
 export default class DoiRights extends Component {
   isSpdxId = false;
 
@@ -11,26 +11,26 @@ export default class DoiRights extends Component {
     super.init(...args);
 
     this.selected = this.selected || [];
-    this.set('spdxLicenseListComplete', this.spdx.spdxList);
-    this.set('spdxLicenseList', this.spdx.spdxList);
+    this.spdxLicenseListComplete = this.spdx.spdxList;
+    this.spdxLicenseList = this.spdx.spdxList;
   }
 
   updateRights(rights) {
     switch (true) {
       case isBlank(rights):
-        this.fragment.set('rights', null);
-        this.fragment.set('rightsUri', null);
-        this.set('isSpdxId', false);
+        this.fragment.rights = null;
+        this.fragment.rightsUri = null;
+        this.isSpdxId = false;
         break;
       case typeOf(rights) === 'string':
-        this.fragment.set('rights', rights);
-        this.fragment.set('rightsUri', null);
-        this.set('isSpdxId', false);
+        this.fragment.rights = rights;
+        this.fragment.rightsUri = null;
+        this.isSpdxId = false;
         break;
       default:
-        this.fragment.set('rights', rights.name);
-        this.fragment.set('rightsUri', rights.seeAlso[0]);
-        this.set('isSpdxId', true);
+        this.fragment.rights = rights.name;
+        this.fragment.rightsUri = rights.seeAlso[0];
+        this.isSpdxId = true;
         break;
     }
   }
@@ -47,7 +47,7 @@ export default class DoiRights extends Component {
         this.spdxLicenseList.push(select.searchText);
         select.actions.choose(select.searchText);
         this.updateRights(select.searchText);
-        this.set('spdxLicenseList', this.spdxLicenseListComplete);
+        this.spdxLicenseList = this.spdxLicenseListComplete;
       }
     }
   }
@@ -59,12 +59,12 @@ export default class DoiRights extends Component {
 
   @action
   updateRightsUri(value) {
-    this.fragment.set('rightsUri', value);
+    this.fragment.rightsUri = value;
   }
 
   @action
   deleteRights() {
-    this.model.get('rightsList').removeObject(this.fragment);
+    this.model.rightsList.removeObject(this.fragment);
   }
 
   @action
@@ -72,6 +72,6 @@ export default class DoiRights extends Component {
     let rightsFound = this.spdxLicenseListComplete.filter(function (rights) {
       return rights.name.toLowerCase().startsWith(query.toLowerCase());
     });
-    this.set('spdxLicenseList', rightsFound);
+    this.spdxLicenseList = rightsFound;
   }
 }

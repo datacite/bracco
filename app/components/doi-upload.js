@@ -1,9 +1,9 @@
-import classic from 'ember-classic-decorator';
+// Finish conversion of this component to a @glimmer component.
 import { action } from '@ember/object';
 import Component from '@ember/component';
 import { UploadFile, UploadFileReader } from 'ember-file-upload';
+import { tracked } from '@glimmer/tracking';
 
-@classic
 export default class DoiUpload extends Component {
   b64DecodeUnicode(str) {
     // Going backwards: from bytestream, to percent-encoding, to original string.
@@ -20,7 +20,7 @@ export default class DoiUpload extends Component {
   @action
   async didSelectFiles(file) {
     file.readAsText().then((xml) => {
-        this.model.set('xml', xml)
+        this.model.xml = xml
       },
       (err) => {
         console.error(err);

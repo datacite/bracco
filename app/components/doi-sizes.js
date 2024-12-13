@@ -1,30 +1,26 @@
-import classic from 'ember-classic-decorator';
+// Finish conversion of this component to a @glimmer component.
 import { action } from '@ember/object';
 import Component from '@ember/component';
 import { schedule } from '@ember/runloop';
+import { tracked } from '@glimmer/tracking';
 
-@classic
 export default class DoiSizes extends Component {
   showSizes = false;
 
-  init() {
-    super.init();
+  constructor() {
+    super(...arguments);
 
     schedule("afterRender",this,function() {
-      if (!this.model.get('sizes')) {
-        this.model.set('sizes', []);
+      if (!this.model.sizes) {
+        this.model.sizes = [];
       }
     });
   }
 
-  didReceiveAttrs() {
-    super.didReceiveAttrs(...arguments);
-  }
-
   @action
   addSize() {
-    this.model.get('sizes').push('');
-    this.model.set('sizes', Array.from(this.model.get('sizes')));
+    this.model.sizes.push('');
+    this.model.sizes = Array.from(this.model.sizes);
     this.set('showSizes', true);
   }
 

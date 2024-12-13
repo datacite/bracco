@@ -1,3 +1,5 @@
+// Finish conversion of this component to a @glimmer component.
+import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 import Component from '@ember/component';
 import ENV from 'bracco/config/environment';
@@ -10,47 +12,51 @@ const stateList = {
   findable: ['registered', 'findable']
 };
 
-export default Component.extend({
-  currentUser: service(),
-  store: service(),
+export default class DoiDoi extends Component {
+  @service
+  currentUser;
 
-  draft: true,
-  registered: true,
-  findable: true,
+  @service
+  store;
 
-  stateList,
-  state: null,
+  draft = true;
+  registered = true;
+  findable = true;
+  stateList = stateList;
+  state = null;
+  repositoryPrefixes = null;
 
-  repositoryPrefixes: null,
+  constructor() {
+    super(...arguments);
+  }
 
   init() {
-    this._super(...arguments);
+    super.init(...arguments);
 
     this.setDefaultPrefix();
-  },
+  }
 
   setDefaultPrefix() {
     let self = this;
     this.store
       .query('repository-prefix', {
-        'repository-id': this.repository.get('id'),
+        'repository-id': this.repository.id,
         sort: 'name',
         'page[size]': 25
       })
       .then(function (repositoryPrefixes) {
-        if (typeof self.get('model').get('doi') == 'undefined') {
+        if (typeof self.model.doi == 'undefined') {
+          // Need .set - ???
           self.set('repositoryPrefixes', repositoryPrefixes);
         }
-
         let repositoryPrefix =
           repositoryPrefixes.length > 0
-            ? repositoryPrefixes.get('firstObject')
+            ? repositoryPrefixes.firstObject
             : null;
-        self
-          .get('model')
-          .set('prefix', repositoryPrefix.get('prefix').get('id'));
+        // Need .get - prefix is proxy
+        self.model.prefix = repositoryPrefix.prefix.get('id');
 
-        if (typeof self.get('model').get('doi') == 'undefined') {
+        if (typeof self.model.doi == 'undefined') {
           self.generate();
         }
       })
@@ -58,23 +64,24 @@ export default Component.extend({
         console.debug(reason);
         return [];
       });
-  },
+  }
+
   async generate() {
     let self = this;
-    let url = ENV.API_URL + '/dois/random?prefix=' + this.model.get('prefix');
+    let url = ENV.API_URL + '/dois/random?prefix=' + this.model.prefix;
     try {
       const response = await fetch(url, {
         headers: {
-          Authorization: 'Bearer ' + this.currentUser.get('jwt')
+          Authorization: 'Bearer ' + this.currentUser.jwt
         }
       });
       if (response.ok) {
         return response.json().then(function (data) {
           let suffix = data.dois[0].split('/', 2)[1];
-          self.get('model').set('suffix', suffix);
-          let doi = self.get('model').get('prefix') + '/' + suffix;
-          self.get('model').set('doi', doi);
-          self.selectState(self.get('model').get('state'));
+          self.model.suffix = suffix;
+          let doi = self.model.prefix + '/' + suffix;
+          self.model.doi = doi;
+          self.selectState(self.model.state);
           return suffix;
         });
       } else {
@@ -85,12 +92,16 @@ export default Component.extend({
     } catch (error) {
       console.debug(error);
     }
-  },
-  selectState(state) {
+  }
+
+  selectState(state) 
+  {
+    // Need .set - ???
     this.set('state', state);
-    this.model.set('state', state);
+    this.model.state = state;
     this.setStates(state);
-  },
+  }
+  
   setStates(state) {
     if (state == '' || state == 'undetermined') {
       state = 'draft';
@@ -98,35 +109,39 @@ export default Component.extend({
     let states = [];
     states = stateList[state];
     A(states).forEach((item) => {
+      // Need .set - ???
       this.set(item, false);
     });
-  },
-
-  actions: {
-    selectPrefix(repositoryPrefix) {
-      this.model.set('prefix', repositoryPrefix.prefix.get('id'));
-      this.model.set(
-        'doi',
-        repositoryPrefix.prefix.get('id') + '/' + this.model.get('suffix')
-      );
-      this.selectState(this.model.get('state'));
-    },
-    selectSuffix(suffix) {
-      this.model.set('suffix', suffix);
-      this.model.set('doi', this.model.get('prefix') + '/' + suffix);
-    },
-    generate() {
-      this.generate();
-    },
-    refresh() {
-      this.generate();
-    },
-    clear() {
-      this.model.set('suffix', null);
-      // this.$('input[type=text]:first').focus();
-    },
-    selectState(state) {
-      this.selectState(state);
-    }
   }
-});
+
+  @action
+  selectPrefix(repositoryPrefix) {
+    // Need .get - ???
+    this.model.prefix = repositoryPrefix.prefix.get('id');
+    // Need .get - ???
+    this.model.doi = repositoryPrefix.prefix.get('id') + '/' + this.model.suffix;
+    this.selectState(this.model.state);
+  }
+
+  @action
+  doSelectSuffix(suffix) {
+    this.model.suffix = suffix;
+    this.model.doi = this.model.prefix + '/' + suffix;
+  }
+
+  @action
+  refresh() {
+    this.generate();
+  }
+
+  @action
+  clear() {
+    this.model.suffix = null;
+    // this.$('input[type=text]:first').focus();
+  }
+
+  @action
+  doSelectState(state) {
+    this.selectState(state);
+  }
+}

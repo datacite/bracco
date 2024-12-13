@@ -4,7 +4,8 @@ import classic from 'ember-classic-decorator';
 import Component from '@ember/component';
 
 @classic
-export default class FooterStatus extends Component {
+export default class 
+FooterStatus extends Component {
   didReceiveAttrs() {
     super.didReceiveAttrs(...arguments);
 

@@ -1,10 +1,10 @@
-import classic from 'ember-classic-decorator';
+// Finish conversion of this component to a @glimmer component.
 import { action } from '@ember/object';
 import { classNames, tagName } from '@ember-decorators/component';
 import { inject as service } from '@ember/service';
 import Component from '@ember/component';
+import { tracked } from '@glimmer/tracking';
 
-@classic
 @tagName('div')
 @classNames('row')
 export default class RepositoryTransfer extends Component {
@@ -27,21 +27,21 @@ export default class RepositoryTransfer extends Component {
   repository = null;
   isDisabled = true;
 
-  init(...args) {
-    super.init(...args);
+  constructor(...args) {
+    super(...args);
 
     this.providers = this.providers || [];
   }
 
   didReceiveAttrs() {
     super.didReceiveAttrs(...arguments);
-    this.model.set('mode', 'transfer');
+    this.model.mode = 'transfer';
     this.searchProvider(null);
   }
 
   searchProvider(query) {
     let self = this;
-    if (this.currentUser.get('isAdmin')) {
+    if (this.currentUser.isAdmin) {
       this.store
         .query('provider', {
           query,
@@ -56,11 +56,11 @@ export default class RepositoryTransfer extends Component {
           console.debug(reason);
           self.set('providers', []);
         });
-    } else if (this.currentUser.get('isConsortium')) {
+    } else if (this.currentUser.isConsortium) {
       this.store
         .query('provider', {
           query,
-          'consortium-id': this.currentUser.get('provider_id'),
+          'consortium-id': this.currentUser.provider_id,
           sort: 'name',
           'member-type': 'consortium_organization',
           'page[size]': 100
@@ -76,9 +76,16 @@ export default class RepositoryTransfer extends Component {
   }
 
   selectProvider(provider) {
+    //this.set('provider', provider);
+    //this.set('isDisabled', false);
+    //this.model.set('targetId', provider.uid);
+
     this.set('provider', provider);
-    this.set('isDisabled', false);
-    this.model.set('targetId', provider.uid);
+    //this.provider = provider;
+    this.set('isDisabled', provider === null || provider.id === this.model.provider.get('id'));
+    if (provider !== null) {
+      this.model.set('targetId', provider.uid);
+    }
   }
 
   @action
@@ -94,7 +101,7 @@ export default class RepositoryTransfer extends Component {
   @action
   submitAction() {
     this.model.save();
-    let count = this.model.get('meta.doiCount');
+    let count = this.model.meta.doiCount;
     this.flashMessages.success(
       'DOI transfer for ' +
         this.intl.formatNumber(count) +
@@ -110,7 +117,7 @@ export default class RepositoryTransfer extends Component {
   }
 
   @action
-  canceAction() {
+  cancelAction() {
     this.router.transitionTo('repositories.show', this.model);
   }
 }

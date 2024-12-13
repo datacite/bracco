@@ -1,4 +1,4 @@
-import classic from 'ember-classic-decorator';
+// Finish conversion of this component to a @glimmer component.
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 /* eslint-disable no-useless-escape */
@@ -6,6 +6,7 @@ import Component from '@ember/component';
 import { isURL, isISBN } from 'validator';
 import { isBlank } from '@ember/utils';
 import { pascalCase } from 'pascal-case';
+import { tracked } from '@glimmer/tracking';
 
 const relationTypeList = [
   'Cites',
@@ -101,7 +102,6 @@ const resourceTypeGeneralList = [
   'Other'
 ];
 
-@classic
 export default class DoiRelatedIdentifier extends Component {
   @service
   store;
@@ -115,8 +115,8 @@ export default class DoiRelatedIdentifier extends Component {
   resourceTypeGeneralList = resourceTypeGeneralList;
   resourceTypesGeneral = resourceTypeGeneralList;
 
-  init(...args) {
-    super.init(...args);
+  constructor(...args) {
+    super(...args);
 
     this.isMetadataRelationTypes = this.isMetadataRelationTypes || [
       'HasMetadata',
@@ -129,19 +129,19 @@ export default class DoiRelatedIdentifier extends Component {
 
     if (
       relatedIdentifierTypeList.includes(
-        this.fragment.get('relatedIdentifierType')
+        this.fragment.relatedIdentifierType
       )
     ) {
-      this.set('controlledIdentifierType', true);
+      this.controlledIdentifierType = true;
     } else {
-      this.set('controlledIdentifierType', false);
+      this.controlledIdentifierType = false;
     }
     if (
-      this.isMetadataRelationTypes.includes(this.fragment.get('relationType'))
+      this.isMetadataRelationTypes.includes(this.fragment.relationType)
     ) {
-      this.set('isMetadataRelationType', true);
+      this.isMetadataRelationType = true;
     } else {
-      this.set('isMetadataRelationType', false);
+      this.isMetadataRelationType = false;
     }
   }
 
@@ -163,76 +163,76 @@ export default class DoiRelatedIdentifier extends Component {
 
     switch (true) {
       case isBlank(value):
-        this.fragment.set('relatedIdentifier', null);
-        this.fragment.set('relatedIdentifierType', null);
-        this.set('controlledIdentifierType', false);
+        this.fragment.relatedIdentifier = null;
+        this.fragment.relatedIdentifierType = null;
+        this.controlledIdentifierType = false;
         this.selectResourceTypeGeneral(null);
-        this.fragment.set('schemeType', null);
-        this.fragment.set('relatedMetadataScheme', null);
-        this.fragment.set('relationType', null);
+        this.fragment.schemeType = null;
+        this.fragment.relatedMetadataScheme = null;
+        this.fragment.relationType = null;
         break;
       case ark.test(value):
-        this.fragment.set('relatedIdentifier', value);
-        this.fragment.set('relatedIdentifierType', 'ARK');
-        this.set('controlledIdentifierType', true);
+        this.fragment.relatedIdentifier = value;
+        this.fragment.relatedIdentifierType = 'ARK';
+        this.controlledIdentifierType = true;
         break;
       case arxiv.test(value):
-        this.fragment.set('relatedIdentifier', value);
-        this.fragment.set('relatedIdentifierType', 'arXiv');
-        this.set('controlledIdentifierType', true);
+        this.fragment.relatedIdentifier = value;
+        this.fragment.relatedIdentifierType = 'arXiv';
+        this.controlledIdentifierType = true;
         break;
       case doi.test(value):
-        this.fragment.set('relatedIdentifier', value);
-        this.fragment.set('relatedIdentifierType', 'DOI');
-        this.set('controlledIdentifierType', true);
+        this.fragment.relatedIdentifier = value;
+        this.fragment.relatedIdentifierType = 'DOI';
+        this.controlledIdentifierType = true;
         break;
       case doiUrl.test(value):
-        this.fragment.set('relatedIdentifier', value);
-        this.fragment.set('relatedIdentifierType', 'DOI');
-        this.set('controlledIdentifierType', true);
+        this.fragment.relatedIdentifier = value;
+        this.fragment.relatedIdentifierType = 'DOI';
+        this.controlledIdentifierType = true;
         break;
       case bibcode.test(value):
-        this.fragment.set('relatedIdentifier', value);
-        this.fragment.set('relatedIdentifierType', 'bibcode');
-        this.set('controlledIdentifierType', true);
+        this.fragment.relatedIdentifier = value;
+        this.fragment.relatedIdentifierType = 'bibcode';
+        this.controlledIdentifierType = true;
         break;
       case lsid.test(value):
-        this.fragment.set('relatedIdentifier', value);
-        this.fragment.set('relatedIdentifierType', 'LSID');
-        this.set('controlledIdentifierType', true);
+        this.fragment.relatedIdentifier = value;
+        this.fragment.relatedIdentifierType = 'LSID';
+        this.controlledIdentifierType = true;
         break;
       case isURL(value, purl):
-        this.fragment.set('relatedIdentifier', value);
-        this.fragment.set('relatedIdentifierType', 'PURL');
-        this.set('controlledIdentifierType', true);
+        this.fragment.relatedIdentifier = value;
+        this.fragment.relatedIdentifierType = 'PURL';
+        this.controlledIdentifierType = true;
         break;
       case urn.test(value):
-        this.fragment.set('relatedIdentifier', value);
-        this.fragment.set('relatedIdentifierType', 'URN');
-        this.set('controlledIdentifierType', true);
+        this.fragment.relatedIdentifier = value;
+        this.fragment.relatedIdentifierType = 'URN';
+        this.controlledIdentifierType = true;
         break;
       case isISBN(value):
-        this.fragment.set('relatedIdentifier', value);
-        this.fragment.set('relatedIdentifierType', 'ISBN');
-        this.set('controlledIdentifierType', true);
+        this.fragment.relatedIdentifier = value;
+        this.fragment.relatedIdentifierType = 'ISBN';
+        this.controlledIdentifierType = true;
         break;
       // // EAN currently not supported https://github.com/validatorjs/validator.js/issues/797
       // case isEAN(value):
-      //   this.fragment.set('relatedIdentifier', value);
-      //   this.fragment.set('relatedIdentifierType', 'EAN13');
-      //   this.set('controlledIdentifierType', true);
+      //   this.fragment.relatedIdentifier', value);
+      //   this.fragment.relatedIdentifierType', 'EAN13');
+      //   this.controlledIdentifierType', true);
       //   break;
       case isURL(value):
-        this.fragment.set('relatedIdentifier', value);
-        this.fragment.set('relatedIdentifierType', 'URL');
-        this.set('controlledIdentifierType', true);
+        this.fragment.relatedIdentifier = value;
+        this.fragment.relatedIdentifierType = 'URL';
+        this.controlledIdentifierType = true;
         break;
       default:
         // // Clears the relatedIdentifierType in case the user changes the relatedIdentifier after selecting it once before.
-        this.fragment.set('relatedIdentifier', value);
-        this.fragment.set('relatedIdentifierType', null);
-        this.fragment.set('relationType', null);
-        this.set('controlledIdentifierType', false);
+        this.fragment.relatedIdentifier = value;
+        this.fragment.relatedIdentifierType = null;
+        this.fragment.relationType = null;
+        this.controlledIdentifierType = false;
         break;
     }
   }
@@ -240,26 +240,26 @@ export default class DoiRelatedIdentifier extends Component {
   selectRelationType(relationType) {
     const selectedRelationType = relationType ? pascalCase(relationType) : null;
     if (this.isMetadataRelationTypes.includes(selectedRelationType)) {
-      this.set('isMetadataRelationType', true);
+      this.isMetadataRelationType = true;
     } else {
-      this.set('isMetadataRelationType', false);
-      this.fragment.set('schemeType', null);
-      this.fragment.set('relatedMetadataScheme', null);
-      this.fragment.set('schemeUri', null);
+      this.isMetadataRelationType = false;
+      this.fragment.schemeType = null;
+      this.fragment.relatedMetadataScheme = null;
+      this.fragment.schemeUri = null;
     }
-    this.fragment.set('relationType', selectedRelationType);
-    this.set('relationTypes', relationTypeList);
+    this.fragment.relationType = selectedRelationType;
+    this.relationTypes = relationTypeList;
   }
 
   selectRelatedIdentifierType(relatedIdentifierType) {
-    this.fragment.set('relatedIdentifierType', relatedIdentifierType);
-    this.set('relatedIdentifierTypes', relatedIdentifierTypeList);
+    this.fragment.relatedIdentifierType = relatedIdentifierType;
+    this.relatedIdentifierTypes = relatedIdentifierTypeList;
   }
 
   selectResourceTypeGeneral(resourceTypeGeneral) {
     const selectedResourceTypeGeneral = resourceTypeGeneral ? pascalCase(resourceTypeGeneral) : null;
-    this.fragment.set('resourceTypeGeneral', selectedResourceTypeGeneral);
-    this.set('resourceTypesGeneral', resourceTypeGeneralList);
+    this.fragment.resourceTypeGeneral = selectedResourceTypeGeneral;
+    this.resourceTypesGeneral = resourceTypeGeneralList;
   }
 
   @action
@@ -269,17 +269,17 @@ export default class DoiRelatedIdentifier extends Component {
 
   @action
   updateRelatedMetadataSchemeAction(value) {
-    this.fragment.set('relatedMetadataScheme', value);
+    this.fragment.relatedMetadataScheme = value;
   }
 
   @action
   updateSchemeURIAction(value) {
-    this.fragment.set('schemeUri', value);
+    this.fragment.schemeUri = value;
   }
 
   @action
   updateSchemeTypeAction(value) {
-    this.fragment.set('schemeType', value);
+    this.fragment.schemeType = value;
   }
 
   @action
@@ -299,6 +299,6 @@ export default class DoiRelatedIdentifier extends Component {
 
   @action
   deleteRelatedIdentifierAction() {
-    this.model.get('relatedIdentifiers').removeObject(this.fragment);
+    this.model.relatedIdentifiers.removeObject(this.fragment);
   }
 }

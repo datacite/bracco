@@ -1,12 +1,12 @@
-import classic from 'ember-classic-decorator';
+// Finish conversion of this component to a @glimmer component.
 import { action, computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 import Component from '@ember/component';
 import ISO6391 from 'iso-639-1';
+import { tracked } from '@glimmer/tracking';
 
 const languageList = ISO6391.getAllNames();
 
-@classic
 export default class RepositoryLanguage extends Component {
   @service
   store;
@@ -31,13 +31,13 @@ export default class RepositoryLanguage extends Component {
   selectLanguage(language) {
     const selectedLanguageCode = language === null ? null : ISO6391.getCode(language);
     this.model
-      .get('language')
+      .language
       .replace(this.index, 1, [selectedLanguageCode]);
-    this.set('languages', languageList);
+    this.languages = languageList;
   }
 
   @action
   deleteLanguage() {
-    this.model.get('language').removeAt(this.index);
+    this.model.language.removeAt(this.index);
   }
 }

@@ -1,4 +1,4 @@
-import classic from 'ember-classic-decorator';
+// Finish conversion of this component to a @glimmer component.
 import { action } from '@ember/object';
 import { tagName } from '@ember-decorators/component';
 import { inject as service } from '@ember/service';
@@ -8,8 +8,8 @@ import { isPresent } from '@ember/utils';
 import vkbeautify from 'vkbeautify';
 import ENV from 'bracco/config/environment';
 import { UploadFile, UploadFileReader } from 'ember-file-upload';
+import { tracked } from '@glimmer/tracking';
 
-@classic
 @tagName('div')
 export default class DoiMetadata extends Component {
   @service
@@ -25,16 +25,16 @@ export default class DoiMetadata extends Component {
 
     // show metadata if at least one of these attributes is set
     if (
-      isPresent(this.get('model.publicationYear')) ||
-      isPresent(this.get('model.titles')) ||
-      isPresent(this.get('model.publisher')) ||
-      isPresent(this.get('model.creators')) ||
-      (this.get('model.types') instanceof Object &&
-        !!this.get('model.types.resourceTypeGeneral')) ||
-      (this.get('model.types') instanceof Object &&
-        !!this.get('model.types.resourceType'))
+      isPresent(this.model.publicationYear) ||
+      isPresent(this.model.titles) ||
+      isPresent(this.model.publisher) ||
+      isPresent(this.model.creators) ||
+      (this.model.types instanceof Object &&
+        !!this.model.types.resourceTypeGeneral) ||
+      (this.model.types instanceof Object &&
+        !!this.model.types.resourceType)
     ) {
-      this.set('hasMetadata', true);
+      this.hasMetadata = true;
     }
 
     let formats = {
@@ -48,16 +48,16 @@ export default class DoiMetadata extends Component {
       ris: 'RIS',
       jats: 'JATS XML'
     };
-    this.set('formats', formats);
+    this.formats = formats;
   }
 
   showMetadata(metadata) {
     if (metadata === 'summary') {
-      this.set('output', '');
+      this.output = '';
     } else {
-      this.set('output', '');
+      this.output = '';
       let self = this;
-      let url = ENV.API_URL + '/dois/' + this.model.get('doi');
+      let url = ENV.API_URL + '/dois/' + this.model.doi;
       let acceptHeaders = {
         datacite: 'application/vnd.datacite.datacite+xml',
         datacite_json: 'application/vnd.datacite.datacite+json',
@@ -69,9 +69,9 @@ export default class DoiMetadata extends Component {
         jats: 'application/vnd.jats+xml'
       };
       let headers = { Accept: acceptHeaders[metadata] };
-      if (this.currentUser.get('jwt')) {
+      if (this.currentUser.jwt) {
         headers = {
-          Authorization: 'Bearer ' + this.currentUser.get('jwt'),
+          Authorization: 'Bearer ' + this.currentUser.jwt,
           Accept: acceptHeaders[metadata]
         };
       }
@@ -87,12 +87,12 @@ export default class DoiMetadata extends Component {
 
       result.then(async function (response) {
         if (typeof response === 'string') {
-          self.set('output', vkbeautify.json(JSON.stringify(response)));
+          self.output = vkbeautify.json(JSON.stringify(response));
         } else {
           let reader = UploadFile.fromBlob(response, 'blob')
           reader.readAsText().then(
             (result) => {
-              self.set('output', vkbeautify.xml(result));
+              self.output = vkbeautify.xml(result);
             },
             (err) => {
               console.error(err);
@@ -101,7 +101,7 @@ export default class DoiMetadata extends Component {
         }
       });
     }
-    // this.get('router').transitionTo({ queryParams: { metadata: metadata } });
+    // this.router.transitionTo({ queryParams: { metadata: metadata } });
   }
 
   @action

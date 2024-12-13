@@ -1,9 +1,9 @@
-import classic from 'ember-classic-decorator';
+// Finish conversion of this component to a @glimmer component.
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 import Component from '@ember/component';
+import { tracked } from '@glimmer/tracking';
 
-@classic
 export default class DoiTransfer extends Component {
   @service
   currentUser;
@@ -21,7 +21,7 @@ export default class DoiTransfer extends Component {
   didReceiveAttrs() {
     super.didReceiveAttrs(...arguments);
 
-    this.model.set('mode', 'transfer');
+    this.model.mode = 'transfer';
 
     this.searchRepository(null);
   }
@@ -31,7 +31,7 @@ export default class DoiTransfer extends Component {
     if (self.isDestroying || self.isDestroyed) {
       return;
     }
-    if (this.currentUser.get('isAdmin')) {
+    if (this.currentUser.isAdmin) {
       this.store
         .query('repository', { query, sort: 'name', 'page[size]': 100 })
         .then(function (repositories) {
@@ -41,11 +41,11 @@ export default class DoiTransfer extends Component {
           console.debug(reason);
           self.set('repositories', []);
         });
-    } else if (this.currentUser.get('isConsortium')) {
+    } else if (this.currentUser.isConsortium) {
       this.store
         .query('repository', {
           query,
-          'consortium-id': this.currentUser.get('provider_id'),
+          'consortium-id': this.currentUser.provider_id,
           sort: 'name',
           'page[size]': 100
         })
@@ -56,11 +56,11 @@ export default class DoiTransfer extends Component {
           console.debug(reason);
           self.set('repositories', []);
         });
-    } else if (this.currentUser.get('isProvider')) {
+    } else if (this.currentUser.isProvider) {
       this.store
         .query('repository', {
           query,
-          'provider-id': this.currentUser.get('provider_id'),
+          'provider-id': this.currentUser.provider_id,
           sort: 'name',
           'page[size]': 100
         })
@@ -75,10 +75,14 @@ export default class DoiTransfer extends Component {
   }
 
   selectRepository(repository) {
-    this.set('oldRepository', this.model.get('repository.id'));
-    this.model.set('repository', repository);
-    this.model.set('provider', repository.get('provider'));
-    this.set('isDisabled', repository.id === this.oldRepository);
+    // Fix to enambe/disable  the 'Transfer' button appropriatly.
+    // (I.e., don't try and transfer a doi to it's current repository.)
+    if (this.oldRepository === null) {
+      this.oldRepository = this.model.repository.get('id');
+    }
+    this.model.repository = repository;
+    this.model.provider = repository.get('provider');
+    this.set('isDisabled', repository.get('id') === this.oldRepository);
   }
 
   @action

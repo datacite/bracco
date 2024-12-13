@@ -1,7 +1,8 @@
-import classic from 'ember-classic-decorator';
+// Finish conversion of this component to a @glimmer component.
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 import Component from '@ember/component';
+import { tracked } from '@glimmer/tracking';
 
 const repositoryTypeList = [
   'disciplinary',
@@ -12,7 +13,6 @@ const repositoryTypeList = [
   'other'
 ];
 
-@classic
 export default class RepositoryRepositoryType extends Component {
   @service
   store;
@@ -33,7 +33,7 @@ export default class RepositoryRepositoryType extends Component {
 
   @action
   selectRepositoryType(repositoryType) {
-    this.model.get('repositoryType').replace(this.index, 1, [repositoryType]);
+    this.model.repositoryType.replace(this.index, 1, [repositoryType]);
     this.set('repositoryTypes', repositoryTypeList);
     this.model.certifyDisciplinaryRepository();
   }

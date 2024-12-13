@@ -1,9 +1,10 @@
-import classic from 'ember-classic-decorator';
+// Finish conversion of this component to a @glimmer component.
 import { action } from '@ember/object';
 import { classNames } from '@ember-decorators/component';
 import { inject as service } from '@ember/service';
 import { notEmpty } from '@ember/object/computed';
 import Component from '@ember/component';
+import { tracked } from '@glimmer/tracking';
 
 const placeholders = {
   doi: 'DOI',
@@ -16,7 +17,6 @@ const placeholders = {
   'provider-prefix': 'Prefix'
 };
 
-@classic
 @classNames('div')
 export default class ModelSearch extends Component {
   @service
@@ -28,7 +28,7 @@ export default class ModelSearch extends Component {
   hasFilters = true;
   helpText = null;
   filters = null;
-  query = null;
+  @tracked query = null;
   sort = null;
   queryParams = {};
   modelName = null;
@@ -40,40 +40,40 @@ export default class ModelSearch extends Component {
       return;
     }
 
-    this.set('query', this.model.get('query.query'));
-    this.set('sort', this.model.get('query.sort'));
-    this.set('filters', this.model.get('query'));
+    this.query = this.model.query.query;
+    this.sort = this.model.query.sort;
+    this.filters = this.model.query;
 
     if (this.name) {
-      this.set('modelName', this.name);
+      this.modelName = this.name;
     } else {
-      this.set('modelName', placeholders[this.model.get('modelName')]);
+      this.modelName = placeholders[this.model.modelName];
     }
 
     if (this.modelName === 'DOI') {
-      this.set('formats', {
+      this.formats = {
         '-updated': 'Sort by Date Updated',
         '-created': 'Sort by Date Created',
         name: 'Sort by DOI',
         title: 'Sort Alphabetically',
         relevance: 'Sort by Relevance'
-      });
+      };
     } else if (this.modelName === 'Prefix') {
-      this.set('formats', {
+      this.formats = {
         name: 'Sort by Prefix',
         '-created': 'Sort by Date Created'
-      });
+      };
     } else {
-      this.set('formats', {
+      this.formats = {
         name: 'Sort by Name',
         '-created': 'Sort by Date Joined',
         relevance: 'Sort by Relevance'
-      });
+      };
     }
   }
 
   search() {
-    let params = Object.assign(this.model.get('query'), {
+    let params = Object.assign(this.model.query, {
       query: this.query,
       sort: this.sort
     });
@@ -84,19 +84,19 @@ export default class ModelSearch extends Component {
   @action
   doSearch(query) {
     if (query) {
-      this.set('sort', 'relevance');
+      this.sort = 'relevance';
     } else if (this.sort === 'relevance') {
-      this.set('sort', null);
+      this.sort = null;
     }
-
-    this.set('query', query);
+    
+    this.query = query;
     this.search();
   }
 
   @action
   clear() {
-    this.set('query', null);
-    this.set('sort', null);
+    this.query = null;
+    this.sort = null;
     this.search();
   }
 
@@ -107,7 +107,7 @@ export default class ModelSearch extends Component {
 
   @action
   sort(sort) {
-    this.set('sort', sort);
+    this.sort = sort;
     this.search();
   }
 }

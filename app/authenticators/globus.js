@@ -1,11 +1,10 @@
-import classic from 'ember-classic-decorator';
+// Finish conversion of this component to a @glimmer component.
 import Base from 'ember-simple-auth/authenticators/base';
 import { Promise } from 'rsvp';
 import fetch from 'fetch';
 import ENV from 'bracco/config/environment';
 import { isEmpty } from '@ember/utils';
 
-@classic
 export default class Globus extends Base {
   serverTokenEndpoint = ENV.API_URL + '/oidc-token';
 

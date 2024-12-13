@@ -1,4 +1,5 @@
 // Finish conversion of this component to a @glimmer component.
+
 import { action } from '@ember/object';
 import { tagName } from '@ember-decorators/component';
 import { inject as service } from '@ember/service';
@@ -14,7 +15,7 @@ export default class DoiCitation extends Component {
   currentUser;
 
   citation = null;
-  citationOutput = null;
+  @tracked citationOutput = null;
 
   didReceiveAttrs() {
     super.didReceiveAttrs(...arguments);
@@ -35,7 +36,7 @@ export default class DoiCitation extends Component {
   selectStyle(style) {
     let self = this;
     let url =
-      ENV.API_URL + '/dois/' + this.modeldoi + '?style=' + style;
+      ENV.API_URL + '/dois/' + this.model.doi + '?style=' + style;
     let headers = { Accept: 'text/x-bibliography' };
     if (this.currentUser.jwt) {
       headers = {

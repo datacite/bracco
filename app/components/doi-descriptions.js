@@ -1,27 +1,27 @@
-import classic from 'ember-classic-decorator';
+// Finish conversion of this component to a @glimmer component.
 import { action } from '@ember/object';
 import Component from '@ember/component';
+import { tracked } from '@glimmer/tracking';
 
-@classic
 export default class DoiDescriptions extends Component {
-  showDescriptions = false;
+  @tracked showDescriptions = false;
 
   didReceiveAttrs() {
     super.didReceiveAttrs(...arguments);
 
-    if (!this.model.get('descriptions')) {
-      this.model.set('descriptions', []);
+    if (!this.model.descriptions) {
+      this.model.descriptions = [];
     }
   }
 
   @action
   addDescription() {
     this.model.get('descriptions').createFragment();
-    this.set('showDescriptions', true);
+    this.showDescriptions = true;
   }
 
   @action
   toggleDescriptions() {
-    this.set('showDescriptions', !this.showDescriptions);
+    this.showDescriptions = !this.showDescriptions;
   }
 }

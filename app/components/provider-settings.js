@@ -1,5 +1,4 @@
-import classic from 'ember-classic-decorator';
+// Finish conversion of this component to a @glimmer component.
 import Component from '@ember/component';
 
-@classic
 export default class ProviderSettings extends Component {}

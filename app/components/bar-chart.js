@@ -58,17 +58,17 @@ export default class BarChart extends Component {
     super(...args);
 
     schedule('afterRender', this, function () {
-      this.send('barChart');
+      this.send('doBarChart');
     });
   }
 
   didReceiveAttrs() {
     super.didReceiveAttrs(...arguments);
 
-    this.barChartInt();
+    this.barChart();
   }
 
-  barChartInt() {
+  barChart() {
     let formatYear = timeFormat('%Y');
     // let formatFixed = format(",.0f");
 
@@ -191,7 +191,7 @@ export default class BarChart extends Component {
   }
 
   @action
-  barChart() {
-    this.barChartInt();
+  doBarChart() {
+    this.barChart();
   }
 }

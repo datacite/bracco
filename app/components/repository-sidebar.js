@@ -1,9 +1,8 @@
-import classic from 'ember-classic-decorator';
+// Finish conversion of this component to a @glimmer component.
 import { classNames } from '@ember-decorators/component';
 import { inject as service } from '@ember/service';
 import Component from '@ember/component';
 
-@classic
 @classNames('panel', 'facets', 'add')
 export default class RepositorySidebar extends Component {
   @service
@@ -12,6 +11,7 @@ export default class RepositorySidebar extends Component {
   didReceiveAttrs() {
     super.didReceiveAttrs(...arguments);
 
-    this.set('currentUser', this.currentUser);
+    this.currentUser = this.currentUser;
+
   }
 }

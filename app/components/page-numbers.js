@@ -1,10 +1,10 @@
-import classic from 'ember-classic-decorator';
+// Finish conversion of this component to a @glimmer component.
 import { computed } from '@ember/object';
 import { alias } from '@ember/object/computed';
 import Component from '@ember/component';
 import { A } from '@ember/array';
+import { tracked } from '@glimmer/tracking';
 
-@classic
 export default class PageNumbers extends Component {
   @alias('model.meta.page')
   currentPage;

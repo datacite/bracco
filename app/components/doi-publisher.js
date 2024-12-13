@@ -1,16 +1,15 @@
-import classic from 'ember-classic-decorator';
+// Finish conversion of this component to a @glimmer component.
 import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 import Component from '@ember/component';
-import { isBlank } from '@ember/utils';
+import { tracked } from '@glimmer/tracking';
 
-@classic
 export default class DoiPublisher extends Component {
   @service
   store;
 
-  init(...args) {
-    super.init(...args);
+  constructor(...args) {
+    super(...args);
 
     this.organizations = this.organizations || [];
   }
@@ -18,24 +17,24 @@ export default class DoiPublisher extends Component {
   didReceiveAttrs() {
     super.didReceiveAttrs(...arguments);
 
-    if (!this.model.get('publisher')) {
-      this.model.set('publisher', this.store.createFragment('publisher'));
+    if (!this.model.publisher) {
+      this.model.publisher = this.store.createFragment('publisher');
     }
   }
 
   updatePublisher(organizationRecord) {
     if (organizationRecord) {
-      this.fragment.set('name', organizationRecord.name);
-      this.set('name', organizationRecord.name);
-      this.fragment.set('publisherIdentifier', organizationRecord.id);
-      this.fragment.set('schemeUri', 'https://ror.org');
-      this.fragment.set('publisherIdentifierScheme', 'ROR');
+      this.fragment.name = organizationRecord.name;
+      this.name = organizationRecord.name;
+      this.fragment.publisherIdentifier = organizationRecord.id;
+      this.fragment.schemeUri = 'https://ror.org';
+      this.fragment.publisherIdentifierScheme = 'ROR';
     } else {
-      this.fragment.set('name', '');
-      this.fragment.set('publisherIdentifier', null);
-      this.fragment.set('schemeUri', null);
-      this.fragment.set('publisherIdentifierScheme', null);
-      this.fragment.set('lang', null);
+      this.fragment.name = '';
+      this.fragment.publisherIdentifier = null;
+      this.fragment.schemeUri = null;
+      this.fragment.publisherIdentifierScheme = null;
+      this.fragment.lang = null;
     }
   }
 
@@ -43,11 +42,11 @@ export default class DoiPublisher extends Component {
   createOnEnter(select, e) {
     if (e.keyCode === 13 && select.isOpen && !isBlank(select.searchText)) {
       select.actions.choose(select.searchText);
-      this.fragment.set('name', select.searchText);
-      this.fragment.set('publisherIdentifier', null);
-      this.fragment.set('schemeUri', null);
-      this.fragment.set('publisherIdentifierScheme', null);
-      this.fragment.set('lang', null);
+      this.fragment.name = select.searchText;
+      this.fragment.publisherIdentifier = null;
+      this.fragment.schemeUri = null;
+      this.fragment.publisherIdentifierScheme = null;
+      this.fragment.lang = null;
     }
   }
 
@@ -73,6 +72,6 @@ export default class DoiPublisher extends Component {
 
   @action
   updatePublisherIdentifier(value) {
-    this.fragment.set('publisherIdentifier', value);
+    this.fragment.publisherIdentifier = value;
   }
 }

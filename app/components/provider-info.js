@@ -1,11 +1,11 @@
-import classic from 'ember-classic-decorator';
+// Finish conversion of this component to a @glimmer component.
 import { inject as service } from '@ember/service';
 import Component from '@ember/component';
 import fetch from 'fetch';
 import { Promise } from 'rsvp';
 import ENV from 'bracco/config/environment';
+import { tracked } from '@glimmer/tracking';
 
-@classic
 export default class ProviderInfo extends Component {
   json = null;
 
@@ -16,7 +16,7 @@ export default class ProviderInfo extends Component {
     super.didReceiveAttrs(...arguments);
 
     let promise = new Promise((resolve, reject) => {
-      const url = ENV.API_URL + '/providers/' + (this.model ? this.model.get('id') : '') + '/stats';
+      const url = ENV.API_URL + '/providers/' + (this.model ? this.model.id : '') + '/stats';
       const headers = { Accept: 'application/json' };
       fetch(url, {
         headers
@@ -46,7 +46,7 @@ export default class ProviderInfo extends Component {
         if (self.isDestroying || self.isDestroyed) {
           return;
         }
-        self.set('json', value);
+        self.json = value;
       },
       function (reason) {
         console.debug(reason);

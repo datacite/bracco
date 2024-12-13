@@ -1,8 +1,7 @@
-import classic from 'ember-classic-decorator';
+// Finish conversion of this component to a @glimmer component.
 import { classNames, tagName } from '@ember-decorators/component';
 import Component from '@ember/component';
 
-@classic
 @tagName('div')
 @classNames('row')
 export default class OrganizationList extends Component {}

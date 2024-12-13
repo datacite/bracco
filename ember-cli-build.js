@@ -30,8 +30,7 @@ module.exports = function (defaults) {
       // ember-concurrency plugins for ember-power-select upgrade
       plugins: [
         // ... any other plugins
-        require.resolve("ember-concurrency/async-arrow-task-transform"),
-  
+        require.resolve('ember-concurrency/async-arrow-task-transform')
         // NOTE: put any code coverage plugins last, after the transform.
       ],
       sourceMaps: 'inline'
@@ -68,9 +67,7 @@ module.exports = function (defaults) {
     autoImport: {
       forbidEval: true,
       webpack: {
-        plugins: [
-          new NodePolyfillPlugin()
-        ],
+        plugins: [new NodePolyfillPlugin()],
         node: {
           global: true
           // fs: 'empty'

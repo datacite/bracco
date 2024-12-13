@@ -1,4 +1,4 @@
-import classic from 'ember-classic-decorator';
+// Finish conversion of this component to a @glimmer component.
 import { classNames, tagName } from '@ember-decorators/component';
 import { action, computed } from '@ember/object';
 import { schedule } from '@ember/runloop';
@@ -8,6 +8,7 @@ import { format } from 'd3-format';
 import { arc, pie } from 'd3-shape';
 import { scaleOrdinal } from 'd3-scale';
 import { schemeSet3 } from 'd3-scale-chromatic';
+import { tracked } from '@glimmer/tracking';
 
 const categoryList = [
   'user',
@@ -24,7 +25,6 @@ const categoryList = [
   'other4'
 ];
 
-@classic
 @tagName('div')
 @classNames('col-lg-3', 'col-md-4')
 export default class DonutChart extends Component {

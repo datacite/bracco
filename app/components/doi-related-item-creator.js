@@ -1,12 +1,12 @@
-import classic from 'ember-classic-decorator';
+// Finish conversion of this component to a @glimmer component.
 import { action, computed } from '@ember/object';
 import Component from '@ember/component';
+import { tracked } from '@glimmer/tracking';
 
-@classic
 export default class DoiRelatedItemCreator extends Component {
   @computed('fragment.nameType')
   get showPersonal() {
-    return this.get('fragment.nameType') !== 'Organizational';
+    return this.fragment.nameType !== 'Organizational';
   }
 
   isReadonlyNameType = false;
@@ -16,49 +16,49 @@ export default class DoiRelatedItemCreator extends Component {
   didReceiveAttrs() {
     super.didReceiveAttrs(...arguments);
 
-    this.selectNameType(this.fragment.get('nameType'));
+    this.selectNameType(this.fragment.nameType);
 
     // if no givenName and familyName, and set for nameType "Personal"
     if (
-      this.fragment.get('name') &&
-      this.fragment.get('nameType') === 'Personal' &&
-      (!this.fragment.get('givenName') || this.fragment.get('familyName'))
+      this.fragment.name &&
+      this.fragment.nameType === 'Personal' &&
+      (!this.fragment.givenName || this.fragment.familyName)
     ) {
-      let familyName = this.fragment.get('name').split(',', 2)[0];
-      let givenName = this.fragment.get('name').split(',', 2)[1];
+      let familyName = this.fragment.name.split(',', 2)[0];
+      let givenName = this.fragment.name.split(',', 2)[1];
       familyName = familyName ? familyName.trim() : null;
       givenName = givenName ? givenName.trim() : null;
-      this.fragment.set('givenName', givenName);
-      this.fragment.set('familyName', familyName);
+      this.fragment.givenName = givenName;
+      this.fragment.familyName= familyName;
     }
     this.joinNameParts({});
   }
 
   joinNameParts(options = {}) {
     if (options.nameIdentifierScheme === 'ORCID') {
-      this.fragment.set('nameType', 'Personal');
-      this.set('nameType', 'Personal');
-      this.set('isReadonlyNameParts', true);
-      this.set('isReadonlyNameType', true);
+      this.fragment.nameType = 'Personal';
+      this.nameType = 'Personal';
+      this.isReadonlyNameParts = true;
+      this.isReadonlyNameType = true;
     } else if (options.nameIdentifierScheme === 'ROR') {
-      this.fragment.set('nameType', 'Organizational');
-      this.set('nameType', 'Organizational');
-      this.set('isReadonlyNameType', true);
+      this.fragment.nameType = 'Organizational';
+      this.nameType = 'Organizational';
+      this.isReadonlyNameType = true;
     } else {
-      options.givenName = options.givenName || this.fragment.get('givenName');
+      options.givenName = options.givenName || this.fragment.givenName;
       options.familyName =
-        options.familyName || this.fragment.get('familyName');
-      options.name = options.name || this.fragment.get('name');
+        options.familyName || this.fragment.familyName;
+      options.name = options.name || this.fragment.name;
 
-      this.set('isReadonlyNameParts', false);
-      this.set('isReadonlyNameType', false);
+      this.isReadonlyNameParts = false;
+      this.isReadonlyNameType = false;
     }
     switch (true) {
-      case this.fragment.get('nameType') === 'Personal':
-        this.set('isReadonly', true);
+      case this.fragment.nameType === 'Personal':
+        this.isReadonly = true;
 
-        this.fragment.set('givenName', options.givenName);
-        this.fragment.set('familyName', options.familyName);
+        this.fragment.givenName = options.givenName;
+        this.fragment.familyName = options.familyName;
 
         if (options.givenName && options.familyName) {
           this.fragment.set(
@@ -66,37 +66,37 @@ export default class DoiRelatedItemCreator extends Component {
             options.familyName + ', ' + options.givenName
           );
         } else if (options.givenName) {
-          this.fragment.set('name', options.givenName);
+          this.fragment.name = options.givenName;
         } else if (options.familyName) {
-          this.fragment.set('name', options.familyName);
+          this.fragment.name = options.familyName;
         } else {
-          this.fragment.set('name', options.name);
+          this.fragment.name = options.name;
         }
         return true;
-      case this.fragment.get('nameType') === 'Organizational':
-        this.fragment.set('givenName', null);
-        this.fragment.set('familyName', null);
-        this.fragment.set('name', options.name);
-        this.set('isReadonly', false);
+      case this.fragment.nameType === 'Organizational':
+        this.fragment.givenName = null;
+        this.fragment.familyName = null;
+        this.fragment.name = options.name;
+        this.isReadonly = false;
         return true;
       default:
-        this.fragment.set('givenName', options.givenName);
-        this.fragment.set('familyName', options.familyName);
-        this.fragment.set('name', options.name);
-        this.set('isReadonly', false);
+        this.fragment.givenName = options.givenName;
+        this.fragment.familyName = options.familyName;
+        this.fragment.name = options.name;
+        this.isReadonly = false;
         return true;
     }
   }
 
   selectNameType(value) {
-    this.fragment.set('nameType', value);
-    this.set('nameType', value);
+    this.fragment.nameType = value;
+    this.nameType = value;
 
-    if (this.fragment.get('nameType') === 'Personal') {
-      this.set('isReadonly', true);
+    if (this.fragment.nameType === 'Personal') {
+      this.isReadonly = true;
       this.joinNameParts();
     } else {
-      this.set('isReadonly', false);
+      this.isReadonly = false;
     }
   }
 
@@ -107,6 +107,6 @@ export default class DoiRelatedItemCreator extends Component {
 
   @action
   deleteRelatedItemCreator() {
-    this.creator.get('creators').removeObject(this.fragment);
+    this.creator.creators.removeObject(this.fragment);
   }
 }

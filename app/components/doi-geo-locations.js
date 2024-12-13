@@ -1,27 +1,28 @@
+// Finish conversion of this component to a @glimmer component.
 import classic from 'ember-classic-decorator';
 import { action } from '@ember/object';
 import Component from '@ember/component';
+import { tracked } from '@glimmer/tracking';
 
-@classic
 export default class DoiGeoLocations extends Component {
-  showGeoLocations = false;
+  @tracked showGeoLocations = false;
 
   didReceiveAttrs() {
     super.didReceiveAttrs(...arguments);
 
-    if (!this.model.get('geoLocations')) {
-      this.model.set('geoLocations', []);
+    if (!this.model.geoLocations) {
+      this.model.geoLocations = [];
     }
   }
 
   @action
   addGeoLocation() {
-    this.model.get('geoLocations').createFragment();
-    this.set('showGeoLocations', true);
+    this.model.geoLocations.createFragment();
+    this.showGeoLocations = true;
   }
 
   @action
   toggleGeoLocations() {
-    this.set('showGeoLocations', !this.showGeoLocations);
+    this.showGeoLocations = !this.showGeoLocations;
   }
 }
