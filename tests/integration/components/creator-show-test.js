@@ -1,13 +1,13 @@
-import { hbs } from 'ember-cli-htmlbars';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
+import { hbs } from 'ember-cli-htmlbars';
 
 module('Integration | Component | creator-show', function (hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function (assert) {
-    this.set('creators', [
+    this.creators = [
       {
         nameType: 'Person',
         displayName: 'Empbh R. Goh',
@@ -26,9 +26,9 @@ module('Integration | Component | creator-show', function (hooks) {
         givenName: 'M.',
         familyName: 'Barrgoe'
       }
-    ]);
+    ];
 
-    await render(hbs` {{creator-show creators=this.creators}}`);
+    await render(hbs`<CreatorShow @creators={{this.creators}}/>`);
 
     assert.dom(this.element).hasText('Empbh R. Goh, M. Barrgow & M. Barrgoe');
   });

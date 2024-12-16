@@ -1,9 +1,9 @@
-{{#if this.creators}}
-  {{#each (take (or this.showOnly this.creators.length) this.creators) as |creator index|}}
+{{#if @creators}}
+  {{#each (take (or @showOnly @creators.length) @creators) as |creator index|}}
     {{#if (and creator.orcid (feature-flag 'showResearchers'))}}
-      <a href="https://commons.datacite.org/orcid.org/{{creator.orcid}}">{{creator.displayName~}}</a>{{format-creator this.creators index=index}}
+      <a href="https://commons.datacite.org/orcid.org/{{creator.orcid}}">{{creator.displayName~}}</a>{{format-creator @creators index=index}}
     {{else}}
-      {{creator.displayName~}}{{format-creator this.creators index=index showOnly=(or this.showOnly this.creators.length)}}
+      {{creator.displayName~}}{{format-creator @creators index=index showOnly=(or @showOnly @creators.length)}}
     {{/if}}
   {{/each}}
 {{/if}}

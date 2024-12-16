@@ -6,12 +6,12 @@
   </div>
 </div>
 <div class="col-md-9 panel-list" id="content">
-  {{#if this.searchable}}
-    <ModelSearch @model={{this.model}} @sortable={{true}} @name="User" @link="users" />
+  {{#if @searchable}}
+    <ModelSearch @model={{@model}} @sortable={{true}} @name="User" @link="users" />
   {{/if}}
 
-  {{#if this.model}}
-    {{#each this.model as |user|}}
+  {{#if @model}}
+    {{#each @model as |user|}}
       <div class="panel panel-transparent" data-test-user>
         <div class="panel-body">
           <h3 class="work">
@@ -34,8 +34,8 @@
       </div>
     {{/each}}
     <div class="text-center">
-      {{#if (gt this.model.meta.totalPages 1)}}
-        <PageNumbers @model={{this.model}} @link="users" />
+      {{#if (gt @model.meta.totalPages 1)}}
+        <PageNumbers @model={{@model}} @link="users" />
       {{/if}}
     </div>
   {{else}}
