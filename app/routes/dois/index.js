@@ -28,7 +28,8 @@ export default class IndexRoute extends Route {
         number: params.page,
         size: params.size
       },
-      include: 'client'
+      include: 'client',
+      sort: params.sort || '-updated'
     });
 
     return this.store
