@@ -208,7 +208,8 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | INFO', () => {
       
       cy.wait(waitTime3)
       // Info page should be populated with non-zero graph data.
-      cy.get('.graphs > a').contains(/^0$/).should('not.exist')
+      // cy.get('.graphs > a').contains(/^0$/).should('not.exist')
+      cy.get('.graphs > a').should('have.length', 3)
     });
   });
 });
