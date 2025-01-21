@@ -10,6 +10,7 @@ const relatedItemIdentifierTypeList = [
   'ARK',
   'arXiv',
   'bibcode',
+  'CSTR',
   'DOI',
   'EAN13',
   'EISSN',
@@ -22,6 +23,7 @@ const relatedItemIdentifierTypeList = [
   'LSID',
   'PMID',
   'PURL',
+  'RRID',
   'UPC',
   'URL',
   'URN',
@@ -66,6 +68,7 @@ export default class DoiRelatedItemIdentifier extends Component {
       /^(?:(http|https):\/\/(dx.)?(doi.org|handle.test.datacite.org)?\/)(10\.\d{4,5}\/.+)/;
     const bibcode = /\d{4}[A-Za-z\.\&]{5}[\w\.]{4}[ELPQ-Z\.][\d\.]{4}[A-Z]/;
     const urn = /^urn:[a-z0-9][a-z0-9-]{0,31}:[a-z0-9()+,\-.:=@;$_!*'%/?#]/;
+    const rrid = /^RRID:[a-zA-Z]+.+$/;
 
     switch (true) {
       case isBlank(value):
@@ -122,6 +125,11 @@ export default class DoiRelatedItemIdentifier extends Component {
         this.fragment.relatedItemIdentifier = value;
         this.fragment.relatedItemIdentifierType = 'URL';
         this.controlledIdentifierType = true;
+        break;
+      case rrid.test(value):
+        this.fragment.set('relatedItemIdentifier', value);
+        this.fragment.set('relatedIdentifierType', 'RRID');
+        this.set('controlledIdentifierType', true);
         break;
       default:
         // // Clears the relatedItemIdentifierType in case the user changes the relatedItemIdentifier after selecting it once before.

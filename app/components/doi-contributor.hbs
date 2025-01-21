@@ -1,5 +1,5 @@
 
-<label for="contributorType" class="subtitle">Contributor Type</label>
+<label for="contributorType" class="subtitle required-label">Contributor Type</label>
   <div class="power-select-fragment" doi-contributor-type>
     <@form.element @controlType="power-select" @value={{this.humanContributorType}} @helpText="The type of contributor of the resource." @options={{this.humanContributorTypes}} @formLayout="vertical" @selected={{this.humanContributorType}} @destination={{this.humanContributorType}}  as |el|>
       <el.control @onChange={{action "selectContributorTypeAction"}} @placeholder="Select Contributor Type" @disabled={{this.disabled}} @searchEnabled={{true}} />
@@ -35,7 +35,7 @@
   </div>
 {{/if}}
 
-<div>
+<div data-test-contributor-name>
   <label for="name" class="subtitle required-label">Name{{if this.isReadonly ' (from Given Name and Family Name)'}}</label>
   <div class="input-group">
     <input type="text" class="form-control name-field" value={{this.fragment.name}} placeholder="Name" oninput={{action "updateName" value="target.value"}} readonly={{this.isReadonly}} data-test-name/>

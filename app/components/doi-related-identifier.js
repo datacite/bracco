@@ -9,48 +9,51 @@ import { pascalCase } from 'pascal-case';
 import { tracked } from '@glimmer/tracking';
 
 const relationTypeList = [
-  'Cites',
   'Is cited by',
-  'Compiles',
-  'Is compiled by',
-  'Continues',
+  'Cites',
+  'Is supplement to',
+  'Is supplemented by',
   'Is continued by',
-  'Describes',
+  'Continues',
   'Is described by',
-  'Documents',
-  'Is documented by',
-  'Is derived from',
-  'Is source of',
+  'Describes',
   'Has metadata',
   'Is metadata for',
-  'Has part',
-  'Is part of',
-  'Is supplemented by',
-  'Is supplement to',
-  'Obsoletes',
-  'Is obsoleted by',
-  'References',
-  'Is referenced by',
-  'Requires',
-  'Is required by',
-  'Reviews',
-  'Is reviewed by',
   'Has version',
   'Is version of',
   'Is new version of',
   'Is previous version of',
+  'Is part of',
+  'Has part',
   'Is published in',
+  'Is referenced by',
+  'References',
+  'Is documented by',
+  'Documents',
+  'Is compiled by',
+  'Compiles',
   'Is variant form of',
   'Is original form of',
   'Is identical to',
+  'Is reviewed by',
+  'Reviews',
+  'Is derived from',
+  'Is source of',
+  'Is required by',
+  'Requires',
+  'Is obsoleted by',
+  'Obsoletes',
   'Is collected by',
-  'Collects'
+  'Collects',
+  'Is translation of',
+  'Has translation'
 ];
 
 const relatedIdentifierTypeList = [
   'ARK',
   'arXiv',
   'bibcode',
+  'CSTR',
   'DOI',
   'EAN13',
   'EISSN',
@@ -63,6 +66,7 @@ const relatedIdentifierTypeList = [
   'LSID',
   'PMID',
   'PURL',
+  'RRID',
   'UPC',
   'URL',
   'URN',
@@ -71,6 +75,7 @@ const relatedIdentifierTypeList = [
 
 const resourceTypeGeneralList = [
   'Audiovisual',
+  'Award',
   'Book',
   'BookChapter',
   'Collection',
@@ -91,6 +96,7 @@ const resourceTypeGeneralList = [
   'PeerReview',
   'PhysicalObject',
   'Preprint',
+  'Project',
   'Report',
   'Service',
   'Software',
@@ -160,6 +166,7 @@ export default class DoiRelatedIdentifier extends Component {
       /^(?:(http|https):\/\/(dx.)?(doi.org|handle.test.datacite.org)?\/)(10\.\d{4,5}\/.+)/;
     const bibcode = /\d{4}[A-Za-z\.\&]{5}[\w\.]{4}[ELPQ-Z\.][\d\.]{4}[A-Z]/;
     const urn = /^urn:[a-z0-9][a-z0-9-]{0,31}:[a-z0-9()+,\-.:=@;$_!*'%/?#]/;
+    const rrid = /^RRID:[a-zA-Z]+.+$/;
 
     switch (true) {
       case isBlank(value):
@@ -210,6 +217,11 @@ export default class DoiRelatedIdentifier extends Component {
         this.fragment.relatedIdentifier = value;
         this.fragment.relatedIdentifierType = 'URN';
         this.controlledIdentifierType = true;
+        break;
+      case rrid.test(value):
+        this.fragment.set('relatedIdentifier', value);
+        this.fragment.set('relatedIdentifierType', 'RRID');
+        this.set('controlledIdentifierType', true);
         break;
       case isISBN(value):
         this.fragment.relatedIdentifier = value;

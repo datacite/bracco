@@ -202,13 +202,13 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | INFO', () => {
     });
   });
 
-  it('can see info when using capitalized identifier URL subdirectory', () => {
+  it('can see info page when using capitalized identifier URL subdirectory', () => {
     cy.visit('/providers/DC');
     cy.url().should('include', '/providers/DC').then(() => {
       
       cy.wait(waitTime3)
-      // Info page should be populated with non-zero graph data.
-      cy.get('.graphs > a').contains(/^0$/).should('not.exist')
+      // Info page should be populated with 3 graphs.
+      cy.get('.graphs > a').should('have.length', 3)
     });
   });
 });

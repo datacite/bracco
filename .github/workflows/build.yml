@@ -19,7 +19,7 @@ jobs:
         id: yarn-cache-dir-path
         run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
 
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         id: cypress-cache
         with:
           path: |
@@ -38,7 +38,7 @@ jobs:
           ./node_modules/.bin/ember build --output-path="test_build" --environment=development
 
       - name: Upload Test Build artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: test_build
           path: test_build/

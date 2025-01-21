@@ -498,4 +498,150 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
       cy.contains('No DOIs found.').should('not.exist')
     });
   });
+
+  it('can update a doi with outdated kernel-3 to the latest kernel-4 (Via form update.)', () => {
+    // For local dev with different prefix
+    // let prefix = "10.14454"
+
+    cy.getCookie('_jwt').then((cookie) => {
+
+      // Create a doi we can work with.
+      cy.createRegisteredDoi(prefix, Cypress.env('api_url'), cookie.value).then((id) => {
+        let encDoi = encodeURIComponent(id)
+        let prefix = id.split('/', 1)[0]
+        let suffix = id.substr(prefix + '/'.length)
+
+        cy.fixture('doi_v3.json').then((doi) => {
+          doi.data.id = id;
+          doi.data.attributes.doi = id;
+          doi.data.attributes.prefix = prefix;
+          doi.data.attributes.suffix = suffix;
+
+          // Intercept the call to GET the DOI info so we can substitute a v3 response which will show in the form.
+          cy.intercept('GET', '/dois/' + encDoi + '?affiliation=true&publisher=true', doi).as('backendAPI');
+          cy.visit('/dois/' + encDoi + '/edit');
+          cy.wait('@backendAPI').then(xhr => {
+            expect(xhr.response.statusCode).to.equal(200);
+          });
+        });
+
+        // Check the page for appropriate warnings in the form.
+        cy.contains('div.flash-message.alert.alert-warning.active', 'Using the Form would update this DOI to the latest schema version.')
+        cy.contains('div.alert.fade.alert-danger.show', 'To save this DOI, first resolve the errors with these properties:')
+        cy.get('[data-test-doi-url]').should('have.class', 'has-error')
+        cy.contains('div.alert.fade.alert-danger.show', 'publisher.name, types.resourceTypeGeneral, contributorType')
+        
+        // Check that the form 'Update DOI' button (the submit button) is disabled.
+        cy.get('#doi-update:button').should('be.disabled')
+
+        //
+        // Now fix the schema 3 elements for transition doi to schema 4 metadata.
+        //
+
+        cy.get('[data-test-doi-url] .form-group#url input').click()
+        cy.get('[data-test-doi-url] .form-group#url input').type('https://example.org{enter}')
+
+        // Fix the publisher.
+        cy.get('[data-test-doi-publisher]').click({ waitForAnimations: true })
+        cy.get('input.ember-power-select-search-input').type('University of Illinois at Chicago{enter}', { force: true });
+
+        // Add a resourceTypeGeneral.
+        cy.get('#resource-type-general .ember-basic-dropdown-trigger').click()
+        cy.contains('ul[role=listbox].ember-power-select-options li.ember-power-select-option', 'Dataset').click()
+
+        // Show the contributors.
+        cy.get('button#toggle-contributors').click()
+
+        // Remove the contributor with the 'Funder' contributorType. (Find it and click its 'trash' button.)
+        cy.get('.form-group.data-test-contributors .ember-view:has(.ember-power-select-selected-item:contains("Funder")) [data-test-contributor-name] button').click()
+
+        //
+        // Now add the schema 4 fundingReference to replace the removed 'Funder' contributor.
+        //
+
+        cy.get('button#add-funding-reference').click()
+
+        // Add a fundingReference.
+        cy.get('.form-group[data-test-funding-references] [data-test-funding-reference] [data-test-funder-name]  .ember-basic-dropdown-trigger').click()
+        cy.get('#ember-basic-dropdown-wormhole .ember-power-select-search-input').type('University of Illinois at Urbana-Champaign{enter}')
+
+        // Make sure alerts have gone away.
+        cy.contains('div.alert.fade.alert-danger.show', 'To save this DOI, first resolve the errors with these properties: types.resourceTypeGeneral, contributorType.').should('not.exist')
+
+        // Make sure the form doi-update button is enabled.
+        cy.get('#doi-update:button').should('be.enabled')
+        cy.get('#doi-update:button').click()
+
+        // Check the metadata version,
+        cy.contains('div.schema-version', '4');
+      });
+    });
+  });
+
+
+  it('can update a doi with outdated kernel-3 to the latest kernel-4 (Via file upload.)', () => {
+    // For local dev with different prefix
+    // let prefix = "10.14454"
+    
+    cy.getCookie('_jwt').then((cookie) => {
+
+      // Create a doi we can work with.
+      cy.createRegisteredDoi(prefix, Cypress.env('api_url'), cookie.value).then((id) => {
+        let encDoi = encodeURIComponent(id)
+        let prefix = id.split('/', 1)[0]
+        let suffix = id.substr(prefix + '/'.length)
+        let xml = ''
+
+        // Intercept the call to GET the DOI info so we can substitute a v3 response which will show in the form.
+        cy.fixture('doi_v3_1.json').then((doi) => {
+          doi.data.id = id;
+          doi.data.attributes.doi = id;
+          doi.data.attributes.prefix = prefix;
+          doi.data.attributes.suffix = suffix;
+          xml = atob(doi.data.attributes.xml);
+          xml = xml.replace(/<identifier identifierType="DOI">.*<\/identifier>/, '<identifier identifierType="DOI">' + id + '</identifier>')
+          xml = btoa(xml)
+          doi.data.attributes.xml = xml
+
+          // Intercept the call to get the DOI info so we can substitute a v3 response which will show in the form.
+          cy.intercept('GET', '/dois/' + encDoi + '?affiliation=true&publisher=true', doi).as('backendAPI');
+          cy.visit('/dois/' + encDoi + '/modify');
+          cy.wait('@backendAPI').then(xhr => {
+            expect(xhr.response.statusCode).to.equal(200);
+          });
+        });    
+
+        // Check the page for appropriate warnings.
+        cy.get('[data-test-doi-url]').should('have.class', 'has-error')
+        cy.get('[data-test-doi-metadata]  div.form-group').should('have.class', 'has-error')
+        cy.get('div[data-test-doi-metadata] .has-error')
+        cy.contains('div.alert-danger.show', 'To save this DOI, first resolve the errors with these properties:')
+        cy.contains('div.alert-danger.show', 'url, xml')
+
+        // Check that the form 'Update DOI' button (the submit button) is disabled.
+        cy.get('button#doi-modify').should('be.disabled')
+
+        // update the url
+        cy.get('[data-test-doi-url] input#url-field').click()
+        cy.get('[data-test-doi-url] input#url-field').type('https://example.org{enter}')
+
+        // bring in the v4 metadata
+        cy.fixture('doi_v4_1.xml').then((xml) => {
+          xml = xml.replace(/<identifier identifierType="DOI">.*<\/identifier>/, '<identifier identifierType="DOI">' + id + '</identifier>')
+          cy.get('textarea,metadata').clear().invoke('val', xml).trigger('input');
+          cy.get('textarea,metadata').type(" {backspace}");
+        });  
+ 
+        // Make sure alerts have gone away.
+        cy.contains('div.alert-danger.show', 'To save this DOI, first resolve the errors with these properties:').should('not.exist')
+
+        // Make sure the doi-update button is enabled and submit
+        cy.get('button#doi-modify').should('be.enabled')
+        cy.get('button#doi-modify').click()
+
+        // Check the metadata version on the show page.
+        cy.contains('div.schema-version', '4');
+      })
+    })
+  })
 });

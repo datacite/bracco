@@ -42,11 +42,14 @@ const relationTypeList = [
   'Is original form of',
   'Is identical to',
   'Is collected by',
-  'Collects'
+  'Collects',
+  'Is translation of',
+  'Has translation'
 ];
 
 const relatedItemTypeList = [
   'Audiovisual',
+  'Award',
   'Book',
   'BookChapter',
   'Collection',
@@ -67,6 +70,7 @@ const relatedItemTypeList = [
   'PeerReview',
   'PhysicalObject',
   'Preprint',
+  'Project',
   'Report',
   'Service',
   'Software',

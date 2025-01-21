@@ -6,6 +6,7 @@ import { tracked } from '@glimmer/tracking';
 
 const resourceTypeGeneralList = [
   'Audiovisual',
+  'Award',
   'Book',
   'BookChapter',
   'Collection',
@@ -26,6 +27,7 @@ const resourceTypeGeneralList = [
   'PeerReview',
   'PhysicalObject',
   'Preprint',
+  'Project',
   'Report',
   'Service',
   'Software',
