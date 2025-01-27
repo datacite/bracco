@@ -4698,7 +4698,7 @@
   dependencies:
     "@types/ember__service" "*"
 
-"@types/ember@*", "@types/ember@^4.0.11":
+"@types/ember@*":
   version "4.0.11"
   resolved "https://registry.yarnpkg.com/@types/ember/-/ember-4.0.11.tgz#3a624a8018ef4b0015a299ecf1481401d60ec18b"
   integrity sha512-v7VIex0YILK8fP87LkIfzeeYKNnu74+xwf6U56v6MUDDGfSs9q/6NCxiUfwkxD+z5nQiUcwvfKVokX8qzZFRLw==
@@ -4785,7 +4785,7 @@
     "@types/ember" "*"
     "@types/rsvp" "*"
 
-"@types/ember__owner@*", "@types/ember__owner@4.0.9":
+"@types/ember__owner@*":
   version "4.0.9"
   resolved "https://registry.yarnpkg.com/@types/ember__owner/-/ember__owner-4.0.9.tgz#6abe1d529a9969a461692848dfac375d395f209e"
   integrity sha512-iyBda4aUIjBmeiKTKmPow/EJO7xWn8m85CnQTOCqQzTWJyJpgfObbXSHahOHXOfMm279Oa5NlbmS/EontB+XiQ==
@@ -4812,7 +4812,7 @@
   dependencies:
     "@types/ember" "*"
 
-"@types/ember__service@*", "@types/ember__service@^4.0.9":
+"@types/ember__service@*":
   version "4.0.9"
   resolved "https://registry.yarnpkg.com/@types/ember__service/-/ember__service-4.0.9.tgz#8b15a14843026854df73bb8c2d45c11551ea4dde"
   integrity sha512-DrepocL/4hH5YxbDWbxEKMDcAchBPSGGa4g+LEINW1Po81RmSdKw5GZV4UO0mvRWgkdu3EbWUxbTzB4gmbDSeQ==
@@ -4851,7 +4851,7 @@
     "@types/eslint" "*"
     "@types/estree" "*"
 
-"@types/eslint@*", "@types/eslint@^8.4.9", "@types/eslint@^8.56.12":
+"@types/eslint@*", "@types/eslint@^8.4.9":
   version "8.56.12"
   resolved "https://registry.yarnpkg.com/@types/eslint/-/eslint-8.56.12.tgz#1657c814ffeba4d2f84c0d4ba0f44ca7ea1ca53a"
   integrity sha512-03ruubjWyOHlmljCVoxSuNDdmfZDzsrrz0P2LeJsOXr+ZwFQ+0yQIwNCwt/GYhV7Z31fgtXJTAEs+FYlEL851g==
