@@ -4,10 +4,14 @@
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
 
-module.exports = function (defaults) {
+module.exports = async function (defaults) {
   const pkg = require('./package.json');
+  const { setConfig } = await import('@warp-drive-mirror/build-config');
 
   let app = new EmberApp(defaults, {
+    'ember-fetch': {
+      preferNative: true
+    },
     // Use the polyfill for 'TypeError: _crypto.randomUUID is not a function'
     '@embroider/macros': {
       setConfig: {
@@ -87,6 +91,23 @@ module.exports = function (defaults) {
         }
         */
       }
+    },
+    emberData: {
+      features: {
+        /*
+      SAMPLE_FEATURE_FLAG: false // utliize existing behavior, strip code for the new feature
+      OTHER_FEATURE_FLAG: true // utilize this new feature, strip code for the older behavior
+      */
+      }
+    }
+  });
+
+  setConfig(app, __dirname, {
+    deprecations: {
+      ENABLE_LEGACY_SCHEMA_SERVICE: true
+      /*
+      DEPRECATE_EMBER_INFLECTOR: false 
+      */
     }
   });
 

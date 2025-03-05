@@ -31,7 +31,20 @@
       "*": [
         "types/*"
       ]
-    }
+    },
+    "types": [
+      "ember-source/types",
+      "./node_modules/@ember-data-mirror/store/unstable-preview-types",
+      "./node_modules/@ember-data-mirror/graph/unstable-preview-types",
+      "./node_modules/@ember-data-mirror/json-api/unstable-preview-types",
+      "./node_modules/@ember-data-mirror/request/unstable-preview-types",
+      "./node_modules/@ember-data-mirror/request-utils/unstable-preview-types",
+      "./node_modules/@ember-data-mirror/tracking/unstable-preview-types",
+      "./node_modules/@warp-drive-mirror/core-types/unstable-preview-types",
+      "./node_modules/@warp-drive-mirror/schema-record/unstable-preview-types",
+      "./node_modules/@warp-drive-mirror/ember/unstable-preview-types",
+      "./node_modules/@ember-data-mirror/legacy-compat/unstable-preview-types"
+    ]
   },
   "include": [
     "app/**/*",

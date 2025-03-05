@@ -19,6 +19,9 @@ export default class ApplicationRoute extends Route {
   @service
   router;
 
+  @service
+  v2Store;
+
   isTokenAuthenticating = null;
 
   async beforeModel() {
@@ -30,6 +33,7 @@ export default class ApplicationRoute extends Route {
 
   model(params) {
     const { jwt } = params;
+    this.v2Store.createSchemaService();
     if (jwt) {
       this.set('isTokenAuthenticating', true);
       if (this.get('session.isAuthenticated')) {

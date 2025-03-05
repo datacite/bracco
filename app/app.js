@@ -3,9 +3,16 @@ import './models/custom-inflector-rules';
 import Resolver from './resolver';
 import loadInitializers from 'ember-load-initializers';
 import config from './config/environment';
-import * as Sentry from "@sentry/ember";
+import * as Sentry from '@sentry/ember';
+import { setBuildURLConfig } from '@ember-data-mirror/request-utils';
+import ENV from 'bracco/config/environment';
 
 Sentry.init({});
+
+setBuildURLConfig({
+  host: ENV.API_URL,
+  namespace: ''
+});
 
 export default class App extends Application {
   modulePrefix = config.modulePrefix;
