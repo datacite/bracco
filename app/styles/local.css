@@ -474,6 +474,11 @@ div.progress {
 
 /* DOI FORMS - DOI field */
 
+.form-text code {
+  color:inherit;
+  background-color: #eee;
+}
+
 #suffix {
   display: inline-block;
   width: 100%;

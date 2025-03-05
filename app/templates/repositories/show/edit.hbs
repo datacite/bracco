@@ -83,7 +83,13 @@
           {{item}}
         </el.control>
       </form.element>
-      <form.element @controlType="textarea" id="domains" class="form-group" @label="Domains" @property="domains" @helpText="List of domains, separated by comma, used for DOI registration, or use *. (e.g. *.example.org) to allow all subdomains, or use * to allow all domains." />
+      <form.element @controlType="textarea" id="domains" class="form-group" @label="Domains" @property="domains">
+        <Input @type="textarea" class="form-control" @value={{this.model.domains}} />
+        <div class="form-text">
+          <div>Define which domains or subdomains can be used for DOI URLs in the repository.</div>
+          <div>Use <code>*</code> to allow all domains, specify an exact domain (e.g., <code>example.org</code> or <code>www.example.org</code>), or use <code>*.</code> before a domain to allow only its subdomains (e.g., <code>*.example.org</code>). You can also separate multiple entries with commas (e.g., <code>example.org,*.example.org,www.secondexample.org</code>). <a href="https://support.datacite.org/docs/update-repository-settings#domains" target="_blank" rel="noopener noreferrer">Learn more...</a></div>
+        </div>
+      </form.element>
 
       {{#unless (eq this.model.clientType "periodical")}}
         <div class="form-group" id="repository-type">
