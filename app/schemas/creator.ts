@@ -62,7 +62,6 @@ export const CreatorSchema: ResourceSchema = {
 // Derivations
 ////////////////////
 
-
 function displayName(record: any, options: any, prop: any) {
   return record.familyName
     ? [record.givenName, record.familyName].join(' ')

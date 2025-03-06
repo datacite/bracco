@@ -87,7 +87,6 @@ export type Dois = Readonly<{
   citationCount: number;
   viewCount: number;
   downloadCount: number;
-  //isDraft: boolean;
 
   [Type]: 'dois';
 }>;
@@ -407,9 +406,9 @@ export function registerDoiSchema(schema: SchemaService) {
   ])
 }
 
-//////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////
 // Helper function to register the derivations on creation of the schema service (in the store)
-//////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////
 
 export function registerDoiDerivations(schema: SchemaService) {
   registerContributorDerivations(schema);

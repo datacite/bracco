@@ -1,7 +1,5 @@
 import type { DerivedField, ResourceSchema } from '@warp-drive-mirror/core-types/schema/fields';
 import type { SchemaService } from '@ember-data-mirror/store/types';
-import { type Affiliation, registerAffiliationSchema } from './affiliation';
-import { type NameIdentifier, registerNameIdentifierSchema } from './name-identifier';
 import { Type } from '@warp-drive-mirror/core-types/symbols';
 
 export type RelatedItemCreator = {
@@ -13,7 +11,7 @@ export type RelatedItemCreator = {
 
 export const RelatedItemCreatorSchema: ResourceSchema = {
   identity: null,
-  type: 'Creator',
+  type: 'RelatedItemCreator',
   fields: [
     {
       kind: 'field',
@@ -56,10 +54,7 @@ displayName[Type] = 'displayName';
 // Register Schemas
 ////////////////////
 
-export function registerRelatedItemCreatorSchema(schema: SchemaService) {
-  registerAffiliationSchema(schema);
-  registerNameIdentifierSchema(schema);
-  
+export function registerRelatedItemCreatorSchema(schema: SchemaService) { 
   schema.registerResources([
     RelatedItemCreatorSchema
   ])
