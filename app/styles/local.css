@@ -570,3 +570,10 @@ div[doi-publisher] > div {
 {
   color: #e74c3c;
 }
+
+/* Landing page */
+
+.icon-landing {
+  display: flex;
+  padding-bottom: 0.5em;
+}
