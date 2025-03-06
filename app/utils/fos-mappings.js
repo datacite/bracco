@@ -1,8 +1,8 @@
 const OECD_SCHEME = 'Fields of Science and Technology (FOS)';
-const OECD_SCHEME_URI = 'http://www.oecd.org/science/inno/38235147.pdf';
+const OECD_SCHEME_URI = 'https://web-archive.oecd.org/2012-06-15/138575-38235147.pdf';
 const MAPPING = {
   mappingListVersion: '1.0',
-  originalUrl: 'https://www.oecd.org/science/inno/38235147.pdf',
+  originalUrl: 'https://web-archive.oecd.org/2012-06-15/138575-38235147.pdf',
   fosFields: [
     {
       fosId: '1',
