@@ -12,7 +12,9 @@ module.exports = function (environment) {
           typeof TransformStream !== 'undefined' ? TransformStream : require('node:stream/web').TransformStream,
         Headers: typeof Headers !== 'undefined' ? Headers : undefined,
         DOMException,
-        URLSearchParams
+        URLSearchParams,
+        fetch,
+        Response
       });
     }
   };
