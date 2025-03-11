@@ -1,6 +1,5 @@
 import { inject as service } from '@ember/service';
 import Route from '@ember/routing/route';
-import fetch from 'fetch';
 import ENV from 'bracco/config/environment';
 
 export default class AuthorizeRoute extends Route {

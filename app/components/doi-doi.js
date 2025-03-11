@@ -3,7 +3,6 @@ import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 import Component from '@ember/component';
 import ENV from 'bracco/config/environment';
-import fetch from 'fetch';
 import { A } from '@ember/array';
 
 const stateList = {

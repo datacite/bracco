@@ -1,7 +1,6 @@
 // Finish conversion of this component to a @glimmer component.
 import { action } from '@ember/object';
 import Component from '@ember/component';
-import fetch from 'fetch';
 import ENV from 'bracco/config/environment';
 import { tracked } from '@glimmer/tracking';
 

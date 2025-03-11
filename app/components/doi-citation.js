@@ -4,7 +4,6 @@ import { action } from '@ember/object';
 import { tagName } from '@ember-decorators/component';
 import { inject as service } from '@ember/service';
 import Component from '@ember/component';
-import fetch from 'fetch';
 import ENV from 'bracco/config/environment';
 import { UploadFile, UploadFileReader } from 'ember-file-upload';
 import { tracked } from '@glimmer/tracking';

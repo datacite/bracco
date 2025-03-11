@@ -1,7 +1,6 @@
 // Finish conversion of this component to a @glimmer component.
 import Base from 'ember-simple-auth/authenticators/base';
 import { Promise } from 'rsvp';
-import fetch from 'fetch';
 import ENV from 'bracco/config/environment';
 import { isEmpty } from '@ember/utils';
 

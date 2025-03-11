@@ -2,7 +2,6 @@
 import { action } from '@ember/object';
 import { tagName } from '@ember-decorators/component';
 import { inject as service } from '@ember/service';
-import fetch from 'fetch';
 import Component from '@ember/component';
 import { isPresent } from '@ember/utils';
 import vkbeautify from 'vkbeautify';

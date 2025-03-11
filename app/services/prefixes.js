@@ -1,7 +1,5 @@
 import Service, { inject as service } from '@ember/service';
 import ENV from 'bracco/config/environment';
-import fetch from 'fetch';
-
 export default class PrefixesService extends Service {
   @service
   store;
