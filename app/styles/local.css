@@ -474,6 +474,11 @@ div.progress {
 
 /* DOI FORMS - DOI field */
 
+.form-text code {
+  color:inherit;
+  background-color: #eee;
+}
+
 #suffix {
   display: inline-block;
   width: 100%;
@@ -564,4 +569,11 @@ div[doi-publisher] > div {
 .form-group .has-error .help-block
 {
   color: #e74c3c;
+}
+
+/* Landing page */
+
+.icon-landing {
+  display: flex;
+  padding-bottom: 0.5em;
 }

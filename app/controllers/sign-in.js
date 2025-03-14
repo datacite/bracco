@@ -27,6 +27,7 @@ export default class SignInController extends Controller {
   authenticate() {
     let self = this;
     let { identification, password } = this;
+    identification = identification.trim();
     this.session
       .authenticate('authenticator:oauth2', identification, password)
       .then(() => {
