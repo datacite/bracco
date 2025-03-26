@@ -1,54 +1,54 @@
 <div class="panel-body metadata">
-  {{#if this.model.doi}}
-    {{#if (and (can "detail doi" this.model) this.model.state)}}
+  {{#if @model.doi}}
+    {{#if (and (can "detail doi" @model) @model.state)}}
       <div class="state">
-        <StateLabel @state={{this.model.state}} />
+        <StateLabel @state={{@model.state}} />
       </div>
     {{/if}}
-    {{#if (and (eq this.model.state 'findable') this.model.xml)}}
+    {{#if (and (eq @model.state 'findable') @model.xml)}}
       <h5>Metadata Export</h5>
       <div class="download">
-        <a target="_blank" rel="noopener noreferrer" href="{{{content-negotiation-url this.model.doi format='datacite'}}}">DataCite XML</a>
+        <a target="_blank" rel="noopener noreferrer" href="{{{content-negotiation-url @model.doi format='datacite'}}}">DataCite XML</a>
       </div>
       <div class="download">
-        <a target="_blank" rel="noopener noreferrer" href="{{{content-negotiation-url this.model.doi format='datacite_json'}}}">DataCite JSON</a>
+        <a target="_blank" rel="noopener noreferrer" href="{{{content-negotiation-url @model.doi format='datacite_json'}}}">DataCite JSON</a>
       </div>
       <div class="download">
-        <a target="_blank" rel="noopener noreferrer" href="{{{content-negotiation-url this.model.doi format='schema_org'}}}">Schema.org JSON-LD</a>
+        <a target="_blank" rel="noopener noreferrer" href="{{{content-negotiation-url @model.doi format='schema_org'}}}">Schema.org JSON-LD</a>
       </div>
       <div class="download">
-        <a target="_blank" rel="noopener noreferrer" href="{{{content-negotiation-url this.model.doi format='bibtex'}}}">BibTeX</a>
+        <a target="_blank" rel="noopener noreferrer" href="{{{content-negotiation-url @model.doi format='bibtex'}}}">BibTeX</a>
       </div>
     {{/if}}
-    {{#if (can "detail doi" this.model)}}
-      {{#if this.model.created}}
+    {{#if (can "detail doi" @model)}}
+      {{#if @model.created}}
         <h5>DOI created</h5>
         <div class="created">
-          {{format-time this.model.created year='numeric' month='long' day='numeric' hour='numeric' minute='numeric' second='numeric' timeZone='UTC' timeZoneName='short' hour12=false}}
+         {{format-time @model.created year='numeric' month='long' day='numeric' hour='numeric' minute='numeric' second='numeric' timeZone='UTC' timeZoneName='short' hour12=false}}
         </div>
       {{/if}}
     {{/if}}
-    {{#if (eq this.model.repository.id "crossref.citations")}}
+    {{#if (eq @model.repository.id "crossref.citations")}}
       <h5>DOI imported</h5>
       <div class="created">
-        {{format-time this.model.created year='numeric' month='long' day='numeric' hour='numeric' minute='numeric' second='numeric' timeZone='UTC' timeZoneName='short' hour12=false}}
+        {{format-time @model.created year='numeric' month='long' day='numeric' hour='numeric' minute='numeric' second='numeric' timeZone='UTC' timeZoneName='short' hour12=false}}
       </div>
     {{else}}
-      {{#if this.model.registered}}
+      {{#if @model.registered}}
         <h5>DOI registered</h5>
         <div class="registered">
-          {{format-time this.model.registered year='numeric' month='long' day='numeric' hour='numeric' minute='numeric' second='numeric' timeZone='UTC' timeZoneName='short' hour12=false}}
+          {{format-time @model.registered year='numeric' month='long' day='numeric' hour='numeric' minute='numeric' second='numeric' timeZone='UTC' timeZoneName='short' hour12=false}}
         </div>
       {{/if}}
-      {{#if (gt this.model.updated this.model.created)}}
+      {{#if (gt @model.updated @model.created)}}
         <h5>DOI last updated</h5>
         <div class="updated">
-          {{format-time this.model.updated year='numeric' month='long' day='numeric' hour='numeric' minute='numeric' second='numeric' timeZone='UTC' timeZoneName='short' hour12=false}}
+          {{format-time @model.updated year='numeric' month='long' day='numeric' hour='numeric' minute='numeric' second='numeric' timeZone='UTC' timeZoneName='short' hour12=false}}
         </div>
       {{/if}}
     {{/if}}
-    {{#if (can "detail doi" this.model)}}
-      {{#if (gt this.model.metadataVersion 0)}}
+    {{#if (can "detail doi" @model)}}
+      {{#if (gt @model.metadataVersion 0)}}
         <h5>
           Metadata version
           <span>
@@ -57,10 +57,10 @@
           </span>
         </h5>
         <div class="metadata-version">
-          {{this.model.metadataVersion}}
+          {{@model.metadataVersion}}
         </div>
       {{/if}}
-      {{#if this.model.schemaVersionString}}
+      {{#if @model.schemaVersionString}}
         <h5>
           Schema
           <span>
@@ -69,11 +69,12 @@
           </span>
         </h5>
         <div class="schema-version">
-          <a href="http://schema.datacite.org/meta/kernel-{{this.model.schemaVersionString}}">DataCite Metadata Schema {{this.model.schemaVersionString}}</a>
+          <a href="http://schema.datacite.org/meta/kernel-{{@model.schemaVersionString}}">DataCite Metadata Schema {{@model.schemaVersionString}}</a>
         </div>
       {{/if}}
     {{/if}}
-    {{#if (and (can "source doi" this.model) this.model.source)}}
+
+    {{#if (and (can "source doi" @model) @model.source)}}
       <h5>
         Source
         <span>
@@ -82,20 +83,20 @@
         </span>
       </h5>
       <div class="source">
-        {{this.model.source}}
+        {{@model.source}}
       </div>
     {{/if}}
   {{else}}
-    {{#if this.model.created}}
+    {{#if @model.created}}
       <h5>Record created</h5>
       <div class="created">
-        {{format-time this.model.created year='numeric' month='long' day='numeric' hour='numeric' minute='numeric' second='numeric' timeZone='UTC' timeZoneName='short' hour12=false}}
+        {{format-time @model.created year='numeric' month='long' day='numeric' hour='numeric' minute='numeric' second='numeric' timeZone='UTC' timeZoneName='short' hour12=false}}
       </div>
     {{/if}}
-    {{#if (gt this.model.updated this.model.created)}}
+    {{#if (gt @model.updated @model.created)}}
       <h5>Record last modified</h5>
       <div class="updated">
-        {{format-time this.model.updated year='numeric' month='long' day='numeric' hour='numeric' minute='numeric' second='numeric' timeZone='UTC' timeZoneName='short' hour12=false}}
+        {{format-time @model.updated year='numeric' month='long' day='numeric' hour='numeric' minute='numeric' second='numeric' timeZone='UTC' timeZoneName='short' hour12=false}}
       </div>
     {{/if}}
   {{/if}}
