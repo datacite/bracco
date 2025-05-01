@@ -1,4 +1,20 @@
 <div data-test-left-sidebar class="col-md-3">
+  {{#unless (and (can 'create doi' this.model) (can 'upload doi' this.model))}}
+    <div class="panel panel-transparent">
+      <div class="panel-body">
+          <BsAlert @dismissible={{false}} @type="warning">
+            {{#if this.repository}}
+              Sign in with the <b>{{this.repository.symbol}}</b> Repository account to create and update DOIs in this Repository.
+            {{else}}
+              Sign in with a Repository account to create and update DOIs.
+            {{/if}}
+            <a href="https://support.datacite.org/docs/why-cant-i-see-the-option-to-create-or-update-dois-when-i-log-into-fabrica" target="_blank" rel="noopener noreferrer">
+              Learn more...
+            </a>
+          </BsAlert>
+      </div>
+    </div>
+  {{/unless}}
   {{#if
     (eq this.link 'repositories.show.dois')
   }}
@@ -48,13 +64,6 @@
             </div>
           </div>
         {{/if}}
-        <div class="panel panel-transparent">
-          <div class="panel-body">
-            <BsAlert @dismissible={{false}} @type="warning">
-              No DOIs available to transfer.
-            </BsAlert>
-          </div>
-        </div> 
       {{/if}}
     {{else}}
       {{#if (gt this.model.length 0) }} 
@@ -79,14 +88,6 @@
             </div>
           </div>
         </div>
-      {{else}}
-        <div class="panel panel-transparent">
-          <div class="panel-body">
-            <BsAlert @dismissible={{false}} @type="warning">
-              No DOIs available to transfer.
-            </BsAlert>
-          </div>
-        </div>  
       {{/if}}
     {{/if}}
   {{/if}}
