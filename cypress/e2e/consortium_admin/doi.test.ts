@@ -48,6 +48,7 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | DOIS', () => {
       // Does not have left sidebar functions.
       cy.get('.btn-group-vertical a#new-doi').should('not.exist');
       cy.get('.btn-group-vertical a#upload-doi').should('not.exist');
+      cy.get(('#no-doi-permissions')).should('exist');
 
       cy.get('button.export-basic-metadata').should('not.exist');
 
