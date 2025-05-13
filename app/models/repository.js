@@ -51,7 +51,9 @@ export const softwareList = [
   'Pubman',
   'Pure',
   'Redivis',
+  'RSpace',
   'Samvera',
+  'SESAR',
   'Ubiquity',
   'Other'
 ];

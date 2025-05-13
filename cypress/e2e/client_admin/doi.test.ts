@@ -63,6 +63,7 @@ describe('ACCEPTANCE: CLIENT_ADMIN | DOIS', () => {
           //cy.get('.create-doi-button ul.dropdown-menu ul li a').contains(/File\s*Upload/i);
         });
       });
+      cy.get(('#no-doi-permissions')).should('not.exist');
 
       cy.get('button.export-basic-metadata').should('exist');
 
