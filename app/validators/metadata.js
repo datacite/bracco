@@ -1,7 +1,6 @@
 import classic from 'ember-classic-decorator';
 import { inject as service } from '@ember/service';
 import BaseValidator from 'ember-cp-validations/validators/base';
-import fetch from 'fetch';
 import ENV from 'bracco/config/environment';
 
 @classic

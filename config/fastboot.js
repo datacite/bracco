@@ -14,7 +14,8 @@ module.exports = function (environment) {
         DOMException,
         URLSearchParams,
         fetch,
-        Response
+        Response,
+        structuredClone
       });
     }
   };

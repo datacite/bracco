@@ -18,9 +18,12 @@ export default class RepositoryId extends Component {
       .then(function (response) {
         if (response.ok) {
           response.json().then(function (data) {
+            // DEBUGGER
+            /* Temporarily comment this out
             if (self.isDestroying || self.isDestroyed) {
               return;
             }
+            */
             self.model.set(
               'symbol',
               self.provider.id.toUpperCase() + '.' + data.symbol

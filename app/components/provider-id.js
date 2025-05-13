@@ -17,9 +17,12 @@ export default class ProviderId extends Component {
       .then(function (response) {
         if (response.ok) {
           response.json().then(function (data) {
+            // DEBUGGER
+            /* Temporarily comment this out
             if (self.isDestroying || self.isDestroyed) {
               return;
             }
+            */
             self.model.symbol = data.symbol;
           });
         } else {

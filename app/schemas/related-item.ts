@@ -6,6 +6,7 @@ import { type RelatedItemContributor, registerRelatedItemContributorSchema } fro
 import { type RelatedItemIdentifier, registerRelatedItemIdentifierSchema } from './related-item-identifier';
 import { type Title, registerTitleSchema } from './title';
 import { Type } from '@warp-drive-mirror/core-types/symbols';
+import { registerDerivations } from '@ember-data-mirror/model/migration-support';
 
 export type RelatedItem = {
   relatedItemType: string;
@@ -131,4 +132,5 @@ export function registerRelatedItemDerivations(schema: SchemaService) {
 
   schema.registerDerivation(title);
   schema.registerDerivation(relatedItemContributors);
+  //registerDerivations(schema);
 }

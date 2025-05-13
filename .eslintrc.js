@@ -9,7 +9,8 @@ module.exports = {
     requireConfigFile: false,
     ecmaFeatures: {
       legacyDecorators: true
-    }
+    },
+    plugins: ['decorators']
   },
   plugins: ['ember'],
   extends: [

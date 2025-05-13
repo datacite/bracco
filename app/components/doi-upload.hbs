@@ -5,6 +5,7 @@
     <div class="btn-toolbar btn-sm btn-file">
 
       {{! v5 syntax - ember-file-upload}}
+      {{!-- Temporarily comment this out
       {{#let (file-queue name="file" onFileAdded=this.didSelectFiles) as |queue|}}
         <label for="upload-file">
           <span class="btn btn-sm" role="button" aria-controls="upload-file">
@@ -20,6 +21,7 @@
           {{queue.selectFile}}
         >
       {{/let}}
+      --}}
 
     </div>
   </div>

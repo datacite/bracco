@@ -19,6 +19,7 @@ export default class DoiUpload extends Component {
 
   @action
   async didSelectFiles(file) {
+    /* Temporarily comment this out
     file.readAsText().then((xml) => {
         this.model.xml = xml
       },
@@ -26,5 +27,6 @@ export default class DoiUpload extends Component {
         console.error(err);
       }
     );
+    */
   }
-}
+} 

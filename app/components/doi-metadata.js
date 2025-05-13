@@ -11,12 +11,11 @@ import { tracked } from '@glimmer/tracking';
 
 @tagName('div')
 export default class DoiMetadata extends Component {
-  @service
-  currentUser;
+  @service currentUser;
 
   hasMetadata = false;
   metadata = null;
-  output = null;
+  @tracked output = null;
   summary = true;
 
   didReceiveAttrs() {
@@ -28,10 +27,8 @@ export default class DoiMetadata extends Component {
       isPresent(this.model.titles) ||
       isPresent(this.model.publisher) ||
       isPresent(this.model.creators) ||
-      (this.model.types instanceof Object &&
-        !!this.model.types.resourceTypeGeneral) ||
-      (this.model.types instanceof Object &&
-        !!this.model.types.resourceType)
+      (this.model.types instanceof Object && !!this.model.types.resourceTypeGeneral) ||
+      (this.model.types instanceof Object && !!this.model.types.resourceType)
     ) {
       this.hasMetadata = true;
     }
@@ -51,6 +48,7 @@ export default class DoiMetadata extends Component {
   }
 
   showMetadata(metadata) {
+
     if (metadata === 'summary') {
       this.output = '';
     } else {

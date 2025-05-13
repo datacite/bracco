@@ -1,6 +1,7 @@
 import type { DerivedField, ResourceSchema } from '@warp-drive-mirror/core-types/schema/fields';
 import type { SchemaService } from '@ember-data-mirror/store/types';
 import { Type } from '@warp-drive-mirror/core-types/symbols';
+import { registerDerivations } from '@ember-data-mirror/model/migration-support';
 
 export type RelatedItemCreator = {
   name: string;
@@ -66,4 +67,5 @@ export function registerRelatedItemCreatorSchema(schema: SchemaService) {
 
 export function registerRelatedItemCreatorDerivations(schema: SchemaService) {
   schema.registerDerivation(displayName);
+  //registerDerivations(schema);
 };

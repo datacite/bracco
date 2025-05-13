@@ -1,10 +1,10 @@
 import type { SchemaService } from '@ember-data-mirror/store/types'; 
-import type { DerivedField, ResourceSchema } from '@warp-drive-mirror/core-types/schema/fields';
+import type { DerivedField, LegacyBelongsToField, ResourceSchema, LegacyAliasField } from '@warp-drive-mirror/core-types/schema/fields';
 import { Type } from '@warp-drive-mirror/core-types/symbols';
-import { withDefaults } from '@warp-drive-mirror/schema-record/schema';
+import { registerDerivations, withDefaults } from '@ember-data-mirror/model/migration-support';
+import { belongsTo } from '@ember-data-mirror/model';
 import { SchemaArrayField } from '@warp-drive-mirror/core-types/schema/fields';
 import ENV from 'bracco/config/environment';
-import { A } from '@ember/array';
 
 import { type AlternateIdentifier, registerAlternateIdentifierSchema } from './alternate-identifier';
 import { type Contributor, registerContributorSchema, registerContributorDerivations } from './contributor';
@@ -14,6 +14,7 @@ import { type Description, registerDescriptionSchema } from './description';
 import { type FundingReference, registerFundingReferenceSchema  } from './funding-reference';
 import { type GeoLocation, registerGeoLocationSchema  } from './geo-location';
 import { type Publisher, registerPublisherSchema } from './publisher';
+import { type Identifier, registerIdentifierSchema } from './identifier';
 import { type RelatedIdentifier, registerRelatedIdentifierSchema } from './related-identifier';
 import { type RelatedItem, registerRelatedItemSchema, registerRelatedItemDerivations} from './related-item';
 import { type Rights, registerRightsSchema } from './rights';
@@ -21,39 +22,29 @@ import { type Subject, registerSubjectSchema, registerSubjectDerivations} from '
 import { type Title, registerTitleSchema } from './title';
 import { type TypeAlt, registerTypeSchema } from './type';
 
-// SchemaService RFC 1027
-// https://rfcs.emberjs.com/id/1027-ember-data-schema-service/#the-schemaservice 
 
-/*
-export type LegacyBelongsToField = {
-  kind: 'belongsTo';
-  name: 'repository';
-  type: 'RepositoryType';
-  options: {
-    async: true;
-    inverse: null;
-    as?: string;
-    polymorphic?: GLsizei;dr;
-  };
-};
-*/
+//import{ type Repositories, registerRepositorySchema } from './repository';
+import{ type Client, registerClientSchema } from './client';
 
 /*****TYPES*****/
 
-export type Dois = Readonly<{
+export type Doi = Readonly<{
   id: string;
   $type: 'dois';
 
+  client: Readonly<LegacyBelongsToField>;
+  repository: Readonly<LegacyAliasField>;
   doi: string;
   confirmDoi: string;
   prefix: string;
   suffix: string;
+  identifiers: Readonly<Identifier[]>
   url: string;
-  //contentUrl: string;
+  contentUrl: string;
   creators: Readonly<Creator[]>;
   titles: Readonly<Title[]>;
   publisher: Readonly<Publisher>;
-  //bcontainer: string;
+  bcontainer: string;
   publicationYear: number;
   subjects: Readonly<Subject[]>;
   contributors: Readonly<Contributor[]>;
@@ -69,31 +60,61 @@ export type Dois = Readonly<{
   descriptions: Readonly<Description[]>;
   geoLocations: Readonly<GeoLocation[]>;
   fundingReferences: Readonly<FundingReference>;
-  relatedItems: Readonly<RelatedItem>;
-  landingpage: string;
+  relatedItems: Readonly<RelatedItem[]>;
+  landingPage: string;
   xml: string;
-  metaDataVersion: string;
+  metadataVersion: string;
   schemaVersion: string;
   source: string;
   state: string; 
-  //breason: string;
+  breason: string;
   isActive: boolean;
   event: string;
-  created: Date;
-  registered: Date;
-  updated: Date;
+  created: string;
+  registered: string;
+  published: string;
+  updated: string;
   mode: string;
   meta: string;
   citationCount: number;
   viewCount: number;
   downloadCount: number;
+  //???????
+  query: string;
 
   [Type]: 'dois';
 }>;
 
-const DoiSchema: ResourceSchema = withDefaults({
+//export const DoiSchema: ResourceSchema = withDefaults({
+export const DoiSchema = withDefaults({
   type: 'dois',
+  legacy: true,
   fields: [
+    {
+      kind: 'belongsTo',
+      name: 'client',
+      type: 'clients',
+      options: {
+        async: true,
+        //linksMode: true,
+        inverse: null,
+      }
+    },
+    {
+      kind: 'alias',
+      name: 'repository',
+      type: null,
+      options: {
+        kind: 'belongsTo',
+        name: 'client',
+        type: 'clients',
+        options: {
+          async: true,
+          //linksMode: true,
+          inverse: null,
+        }
+      }
+    },
     {
       kind: 'field',
       name: 'doi',
@@ -108,18 +129,21 @@ const DoiSchema: ResourceSchema = withDefaults({
     },
     {
       kind: 'field',
-      name: 'suffix:',
+      name: 'suffix',
+    },
+    {
+      kind: 'schema-array',
+      name: 'identifiers',
+      type: 'Identifier',
     },
     {
       kind: 'field',
       name: 'url',
     },
-    /*
     {
       kind: 'field',
       name: 'contentUrl',
     },
-    */
     {
       kind: 'schema-array',
       name: 'creators',
@@ -135,12 +159,10 @@ const DoiSchema: ResourceSchema = withDefaults({
       name: 'publisher',
       type: 'Publisher',
     },
-    /*
     {
       kind: 'field',
       name: 'bcontainer',
     },    
-    */
     {
       kind: 'field',
       name: 'publicationYear',
@@ -213,7 +235,7 @@ const DoiSchema: ResourceSchema = withDefaults({
     },
     {
       kind: 'schema-array',
-      name: 'relatedItem',
+      name: 'relatedItems',
       type: 'RelatedItem',
     },
     {
@@ -222,7 +244,12 @@ const DoiSchema: ResourceSchema = withDefaults({
     },
     {
       kind: 'field',
-      name: 'metaDataVersion',
+      name: 'xml',
+    },
+
+    {
+      kind: 'field',
+      name: 'metadataVersion',
     },
     {
       kind: 'field',
@@ -236,12 +263,10 @@ const DoiSchema: ResourceSchema = withDefaults({
       kind: 'field',
       name: 'state',
     },
-    /*
     {
       kind: 'field',
       name: 'breason',
     },
-    */
     {
       kind: 'field',
       name: 'isActive',
@@ -251,19 +276,20 @@ const DoiSchema: ResourceSchema = withDefaults({
       name: 'event',
     },
     {
-      kind: 'schema-object',
+      kind: 'field',
       name: 'created',
-      type: 'Date',
     },
     {
-      kind: 'schema-object',
+      kind: 'field',
       name: 'registered',
-      type: 'Date',
     },
     {
-      kind: 'schema-object',
+      kind: 'field',
+      name: 'published',
+    },
+    {
+      kind: 'field',
       name: 'updated',
-      type: 'Date',
     },
     {
       kind: 'field',
@@ -327,12 +353,16 @@ const DoiSchema: ResourceSchema = withDefaults({
       options: { fields: [], separator: ' ' },
       kind: 'derived',
     },
+    {
+      kind: 'field',
+      name: 'query',
+    },
   ],
 });
 
-////////////////////////////////////
-// Derivations (similar to @computed) 
-////////////////////////////////////
+  ////////////////////////////////////
+  // Derivations (similar to @computed) 
+  ////////////////////////////////////
 
 function identifier(record: any, options: any, prop: any) {
   return ENV.HANDLE_SERVER + '/' + record.doi;
@@ -351,7 +381,8 @@ showCitation[Type] = 'showCitation';
 
 function schemaVersionString(record: any, options: any, prop: any) {
   if (record.schemaVersion) {
-    return A(record.schemaVersion.split('-')).get('lastObject');
+    //return A(record.schemaVersion.split('-')).get('lastObject');
+    return record.schemaVersion.split('-').lastObject;
   } else {
     return null;
   }
@@ -393,6 +424,7 @@ export function registerDoiSchema(schema: SchemaService) {
   registerDescriptionSchema(schema);
   registerFundingReferenceSchema(schema);
   registerGeoLocationSchema(schema);
+  registerIdentifierSchema(schema);
   registerPublisherSchema(schema); 
   registerRelatedIdentifierSchema(schema);
   registerRelatedItemSchema(schema);
@@ -400,6 +432,7 @@ export function registerDoiSchema(schema: SchemaService) {
   registerSubjectSchema(schema);
   registerTitleSchema(schema);
   registerTypeSchema(schema);
+  registerClientSchema(schema)
 
   schema.registerResources([
     DoiSchema,
@@ -423,4 +456,6 @@ export function registerDoiDerivations(schema: SchemaService) {
   schema.registerDerivation(title);
   schema.registerDerivation(description);
   schema.registerDerivation(maxMintFutureOffset);
+
+  registerDerivations(schema);
 }

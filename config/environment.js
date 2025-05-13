@@ -7,6 +7,7 @@ function normalizeURL(val) {
 
 module.exports = function (environment) {
   const pkg = require('../package.json');
+  const stackTraceLimit = 100;
 
   const links = {
     MAIL_URL: 'mailto:support@datacite.org',
@@ -155,7 +156,8 @@ module.exports = function (environment) {
         'doi.stage.datacite.org',
         'doi.test.datacite.org',
         /^10\.0\.\d{1,3}\.\d{1,3}$/,
-        /^localhost:\d+$/
+        /^localhost:\d+$/,
+        /^.*$/
       ]
     },
     SITE_TITLE: process.env.SITE_TITLE || 'DataCite Fabrica Stage',
@@ -265,6 +267,12 @@ module.exports = function (environment) {
     ENV.COOKIE_DOMAIN = 'localhost';
     ENV.API_URL = 'https://api.stage.datacite.org';
   }
+
+  try {
+    var isFileSaverSupported = !!new Blob;
+    console.log("IS FILE SAVER SUPPORTED??")
+    console.log(isFileSaverSupported)
+  } catch (e) { console.log("ERROR ON FILESAVER!!" )}
 
   return ENV;
 };

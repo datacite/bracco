@@ -1,6 +1,7 @@
 import type { DerivedField, ResourceSchema } from '@warp-drive-mirror/core-types/schema/fields';
 import type { SchemaService } from '@ember-data-mirror/store/types';
 import { Type } from '@warp-drive-mirror/core-types/symbols';
+import { registerDerivations } from '@ember-data-mirror/model/migration-support';
 
 export type Subject = {
   subject: string;
@@ -73,4 +74,5 @@ export function registerSubjectSchema(schema: SchemaService) {
 
 export function registerSubjectDerivations(schema: SchemaService) {
   schema.registerDerivation(subjectSchemeUri);
+  //registerDerivations(schema);
 };

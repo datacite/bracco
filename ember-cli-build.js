@@ -98,6 +98,18 @@ module.exports = async function (defaults) {
       SAMPLE_FEATURE_FLAG: false // utliize existing behavior, strip code for the new feature
       OTHER_FEATURE_FLAG: true // utilize this new feature, strip code for the older behavior
       */
+      },
+      /* Temporary - for debugging purposes. */
+      debug: {
+        LOG_PAYLOADS: false, // data store received to update cache with
+        LOG_OPERATIONS: false, // updates to cache remote state
+        LOG_MUTATIONS: false, // updates to cache local state
+        LOG_NOTIFICATIONS: false,
+        LOG_REQUESTS: false,
+        LOG_REQUEST_STATUS: false,
+        LOG_IDENTIFIERS: false,
+        LOG_GRAPH: false,
+        LOG_INSTANCE_CACHE: false
       }
     }
   });

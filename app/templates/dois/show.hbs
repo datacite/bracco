@@ -1,5 +1,11 @@
 <ApplicationHeader @default={{true}} />
-
+{{!--
+<div>MEMBER TYPE = {{this.model.repository.provider.memberType}}</div>
+<div>REPOSITORY name = {{this.model.repository.name}}</div>
+<div>REPOSITORY name = {{this.model.provider.name}}</div>
+<div>ID = {{this.model.id}}</div>
+--}}
+<div>MEMBER TYPE = {{this.model.repository.provider.memberType}}</div>
 <div class="container-fluid">
   <ol class="breadcrumb">
     {{#if (can "read index")}}
@@ -27,7 +33,6 @@
       <li class="breadcrumb-item"><LinkTo @route="repositories.show.dois" @model={{this.model.repository.id}}>DOIs</LinkTo></li>
     {{/if}}
   </ol>
-  
   <div id="show">
     <h2 class="work">{{this.model.id}}</h2>
   </div>

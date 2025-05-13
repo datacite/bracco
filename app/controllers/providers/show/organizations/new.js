@@ -168,6 +168,7 @@ export default class NewController extends Controller {
   @action
   didSelectFiles(file) {
     // Type is UploadFile
+    /* Temporarily comment this out
     file.readAsDataURL().then((logo) => {
         this.model.set('logo', logo)
       },
@@ -175,6 +176,7 @@ export default class NewController extends Controller {
         console.error(err);
       }
     );
+    */
   }
 
   @action

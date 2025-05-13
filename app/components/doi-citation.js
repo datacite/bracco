@@ -10,8 +10,7 @@ import { tracked } from '@glimmer/tracking';
 
 @tagName('div')
 export default class DoiCitation extends Component {
-  @service
-  currentUser;
+  @service currentUser;
 
   citation = null;
   @tracked citationOutput = null;
@@ -34,8 +33,7 @@ export default class DoiCitation extends Component {
 
   selectStyle(style) {
     let self = this;
-    let url =
-      ENV.API_URL + '/dois/' + this.model.doi + '?style=' + style;
+    let url = ENV.API_URL + '/dois/' + this.model.doi + '?style=' + style;
     let headers = { Accept: 'text/x-bibliography' };
     if (this.currentUser.jwt) {
       headers = {

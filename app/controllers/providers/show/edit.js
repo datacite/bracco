@@ -368,6 +368,7 @@ export default class EditController extends Controller {
   @action
   async didSelectFiles(file) {
     // Type is FileUpload
+    /* Temporarily comment this out
     file.readAsDataURL().then((logo) => {
         this.model.set('logo', logo)
       },
@@ -375,6 +376,7 @@ export default class EditController extends Controller {
         console.error(err);
       }
     );
+    */
   }
 
   @action

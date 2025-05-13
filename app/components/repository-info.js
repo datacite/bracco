@@ -44,9 +44,12 @@ export default class RepositoryInfo extends Component {
     let self = this;
     promise.then(
       function (value) {
+        // DEBUGGER
+        /* Temporarily comment this out
         if (self.isDestroying || self.isDestroyed) {
           return;
         }
+        */
         self.json = value;
       },
       function (reason) {

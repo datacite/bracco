@@ -3,6 +3,7 @@ import type { SchemaService } from '@ember-data-mirror/store/types';
 import { type Affiliation, registerAffiliationSchema } from './affiliation';
 import { type NameIdentifier, registerNameIdentifierSchema } from './name-identifier';
 import { Type } from '@warp-drive-mirror/core-types/symbols';
+import { registerDerivations } from '@ember-data-mirror/model/migration-support';
 
 export type Contributor = {
   name: string;
@@ -109,4 +110,5 @@ export function registerContributorSchema(schema: SchemaService) {
 export function registerContributorDerivations(schema: SchemaService) {
   schema.registerDerivation(orcid);
   schema.registerDerivation(displayName);
+  //registerDerivations(schema);
 };

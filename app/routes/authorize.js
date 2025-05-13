@@ -27,9 +27,12 @@ export default class AuthorizeRoute extends Route {
               self.router.transitionTo('/');
             });
         } else {
+          // debugger
+          /* Temporarily comment this out
           if (self.isDestroying || self.isDestroyed) {
             return;
           }
+          */
           console.log(response);
           self.router.transitionTo('/sign-in?globus');
         }

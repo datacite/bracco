@@ -1,6 +1,13 @@
 <div class="row">
   <div class="col-md-3">
+    <div>GOT HERE 1111!!!!</div>
     {{#if this.model}}
+      <div>GOT HERE 2!!!!</div>
+      <div>ISACTIVE = {{this.model.repository.isActive}}</div>
+      <div>repo name = {{this.model.repository.name}}</div>
+      <div>repo symbol = {{this.model.repository.symbol}}</div>
+      <div>repo clientType = {{this.model.repository.clientType}}</div>
+      
       <div class="panel facets add">
         <div class="panel-body">
           {{#if this.model.repository.isActive}}

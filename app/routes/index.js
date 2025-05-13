@@ -1,27 +1,20 @@
 import { inject as service } from '@ember/service';
 import Route from '@ember/routing/route';
 import { w } from '@ember/string';
+import { query } from '@ember-data-mirror/request/fetch';
 
 export default class IndexRoute extends Route {
-  @service
-  can;
-
-  @service
-  currentUser;
-
-  @service
-  flashMessages;
-
-  @service
-  prefixes;
-
-  @service
-  router;
-
-  @service
-  store;
+  @service can;
+  @service currentUser;
+  @service flashMessages;
+  @service prefixes;
+  @service router;
+  @service store;
+  @service v2Store;
 
   model() {
+    //this.v2Store.createSchemaService()
+
     if (this.can.can('read index')) {
       let self = this;
       return this.store
@@ -44,11 +37,14 @@ export default class IndexRoute extends Route {
 
       this.prefixes.available().then(
         function (value) {
+          // DEBUGGER
+          /* Temporarily comment this out
           if (
             self.isDestroying || self.isDestroyed
           ) {
             return;
           }
+          */
 
           if (value <= 0) {
             self.get('flashMessages').danger(self.prefixes.msg_zero);

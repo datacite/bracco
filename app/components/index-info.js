@@ -43,9 +43,12 @@ export default class IndexInfo extends Component {
     promise.then(
       function (value) {
         // Error without checking is: 'TypeError: Cannot read property 'isDestroyed' of undefined'.
+        // debugger
+        /* Temporarily comment this out
         if (self.isDestroyed) {
           return;
         }
+        */
 
         self.json = value;
       },

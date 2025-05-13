@@ -4,14 +4,12 @@ import { inject as service } from '@ember/service';
 import Component from '@ember/component';
 import { tracked } from '@glimmer/tracking';
 
-
 @tagName('div')
 @classNames('panel-body')
 export default class DoiSummary extends Component {
   isList = false;
 
-  @service
-  store;
+  @service v2Store;
 
   isResearcherProfile = false;
 

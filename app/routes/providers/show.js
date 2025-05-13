@@ -52,9 +52,12 @@ export default class ShowRoute extends Route {
       let self = this;
       this.prefixes.available().then(
         function (value) {
+          // DEBUGGER
+          /* Temporarily comment this out
           if (self.isDestroyed || self.isDestroying) {
             return;
           }
+            */
           if (value <= 0) {
             self.get('flashMessages').danger(self.prefixes.msg_zero);
           } else if (value < self.prefixes.min) {
