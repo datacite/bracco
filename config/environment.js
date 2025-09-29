@@ -164,7 +164,7 @@ module.exports = function (environment) {
     ORCID_URL: process.env.ORCID_URL || 'https://orcid.org',
     API_URL: process.env.API_URL || 'https://api.stage.datacite.org',
     FABRICA_URL: process.env.FABRICA_URL || 'https://doi.stage.datacite.org',
-    ROR_API_URL: process.env.ROR_API_URL || 'https://api.ror.org/v1',
+    ROR_API_URL: process.env.ROR_API_URL || 'https://api.ror.org/v2',
     CROSSREF_API_URL:
       process.env.CROSSREF_API_URL || 'https://api.crossref.org',
     ORCID_API_URL: process.env.ORCID_API_URL || 'https://pub.orcid.org',
