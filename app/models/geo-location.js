@@ -13,4 +13,7 @@ export default class GeoLocation extends Fragment {
 
   @fragment('geoLocationBox', { defaultValue: {} })
   geoLocationBox;
+
+  @attr()
+  geoLocationPolygon;
 }

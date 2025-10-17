@@ -26,7 +26,10 @@ export default class GeoLocation extends JSONSerializer {
     if (isBlank(snapshot)) {
       return {};
     }
-    if (typeOf(snapshot) === 'string') {
+    if ( 
+      typeOf(snapshot) === 'string' ||
+      snapshot.constructor.name !== "Snapshot"
+    ) {
       return snapshot;
     }
 
