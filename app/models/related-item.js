@@ -128,7 +128,10 @@ export default class RelatedItem extends Fragment.extend(Validations) {
   @attr('string', { defaultValue: null })
   lastPage;
 
-  @fragment('publisher')
+  @attr('string', { defaultValue: null })
+  numberType;
+
+  @attr('string', { defaultValue: null })
   publisher;
 
   @attr('string', { defaultValue: null })
