@@ -15,7 +15,7 @@ module('Integration | Component | doi-state', function (hooks) {
     assert
       .dom('*')
       .hasText(
-        "State The state determines whether a DOI is registered and findable. Once in Registered or Findable state, a DOI can't be set back to Draft state. More … Draft only visible in Fabrica, DOI can be deleted Registered registered with the DOI Resolver Findable registered with the DOI Resolver and indexed in DataCite Search"
+        "State The state determines whether a DOI is registered and findable. Once in Registered or Findable state, a DOI can't be set back to Draft state. More … Draft the DOI is not yet registered in the global Handle System, doesn’t require valid metadata or a URL, and can be deleted Registered the DOI is registered in the global Handle System, but the metadata is not publicly available Findable the DOI is registered in the global Handle System and the metadata is publicly available"
       );
   });
 });
