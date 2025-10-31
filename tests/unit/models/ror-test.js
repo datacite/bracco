@@ -11,7 +11,7 @@ module('Unit | Model | ror', function (hooks) {
     let payload = {
       id: 'https://ror.org/038sjwq14',
       names: [
-        { value: 'European Bioinformatics Institute', types: ['label'] },
+        { value: 'European Bioinformatics Institute', types: ['ror_display'] },
         { value: 'EBI', types: ['alias'] }
       ],
       country: { country_name: 'United Kingdom' },
