@@ -20,7 +20,6 @@
 
             <form.element @controlType="text" id="system-email" class="form-group" @label="System Email" @property="systemEmail" @helpText="This is the email used for sending password reset requests and similar system notifications." as |el|> <el.control id="system-email-field" /> </form.element>
             <form.element @controlType="text" id="website" class="form-group" @label="Website" @property="website" @helpText="Website of the member." as |el|> <el.control id="website-field" /> </form.element>
-            <form.element @controlType="text" id="twitter-handle" class="form-group" @label="Twitter (optional)" @property="twitterHandle" @helpText="DataCite will follow you on Twitter." as |el|> <el.control placeholder="Add @twitter account" id="twitter-handle-field" /> </form.element>
             <form.element @controlType="textarea" id="description" class="form-group" @label="Description (optional)" @property="description" rows="10" @helpText="Description of the provider. Please use markdown for formatting." as |el|>  <el.control id="description-field" /> </form.element>
    
             <form.element @controlType="power-select" id="country" class="form-group" @label="Country (optional)" @property="country" @optionLabelPath="name" @options={{this.countries}} @destination={{this.country}} @helpText="Country where the member is located." as |el|>
