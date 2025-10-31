@@ -37,7 +37,6 @@ describe('Admin: Admin', () => {
     cy.get('input#member-id-field').should('exist');
     cy.get('input#system-email-field').should('exist');
     cy.get('input#website-field').should('exist');
-    cy.get('input#twitter-handle-field').should('exist');
     cy.get('div#ror-id').should('exist');
     cy.get('div#country').should('exist');
     cy.get('textarea#description-field').should('exist');

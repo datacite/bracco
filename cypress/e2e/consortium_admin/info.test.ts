@@ -164,7 +164,6 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | INFO', () => {
         cy.get('#system-email').should('be.visible');
         cy.get('#group-email').should('be.visible');
         cy.get('#website').should('be.visible');
-        cy.get('#twitter-handle').should('be.visible');
         cy.get('#organization-type').should('be.visible');
         cy.get('#focus-area').should('be.visible');
         cy.get('#description').should('be.visible');
