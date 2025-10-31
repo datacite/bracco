@@ -48,7 +48,15 @@
             )
           }}
             <BsAlert @dismissible={{false}} @type="warning">
-              New repositories can't be created from this page.
+              {{#if (eq this.currentUser.role_id 'staff_admin')}}
+                Select a Member or Consortium Organization to create a repository.
+              {{else if (eq this.model.provider.memberType 'consortium')}}
+                Select a  
+                <LinkTo @route="providers.show.organizations" @model={{this.model.provider.id}}>
+                  Consortium Organization
+                </LinkTo>
+                to create a repository.
+              {{/if}}
             </BsAlert>
           {{else if (cannot 'create repository' this.model)}}
             <BsAlert @dismissible={{false}} @type="warning">
