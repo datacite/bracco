@@ -173,11 +173,17 @@ export default class EditController extends Controller {
           isBlank(geoLocation.geoLocationBox.northBoundLatitude)
             ? []
             : [geoLocation.geoLocationBox];
-
+        let polygon = 
+          geoLocation.geoLocationPolygon == null ||
+          !Array.isArray(geoLocation.geoLocationPolygon) ||
+          geoLocation.geoLocationPolygon.length === 0
+            ? null
+            : geoLocation.geoLocationPolygon
         return (
           !isBlank(geoLocation.geoLocationPlace) ||
           !isBlank(point) ||
-          !isBlank(box)
+          !isBlank(box) ||
+          !isBlank(polygon)
         );
       })
     );

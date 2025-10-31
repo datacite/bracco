@@ -12,21 +12,24 @@ export default class GeoLocation extends JSONSerializer {
     });
 
     Object.keys(json).forEach((key) => {
-      if (Object.keys(this.filterNull(json[key])).length === 0) {
+      if (Object.keys(this.filterNull(json[key], key)).length === 0) {
         delete json[key];
       } else {
-        json[key] = this.filterNull(json[key]);
+        json[key] = this.filterNull(json[key], key);
       }
     });
 
     return json;
   }
 
-  filterNull(snapshot) {
+  filterNull(snapshot, key) {
     if (isBlank(snapshot)) {
       return {};
     }
-    if (typeOf(snapshot) === 'string') {
+    if ( 
+      typeOf(snapshot) === 'string' ||
+      (snapshot.constructor.name === 'Array' && key === 'geoLocationPolygon')
+    ) {
       return snapshot;
     }
 
