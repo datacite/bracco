@@ -1,8 +1,8 @@
 <div class="form-group">
   <label class="control-label col-md-3">State</label>
   <div class="col-md-9 input-fragment">
-    <div class="label-vertical">The state determines whether a DOI is registered and findable. Once in Registered or Findable state, a DOI can't be set back to Draft state. <a target="_blank" rel="noopener noreferrer" href="https://support.datacite.org/docs/doi-states">More&nbsp;…</a></div>
-    <div><RadioButton @value="draft" @groupValue={{this.state}} @radioClass="radio" @changed={{action "selectStateAction"}} @disabled={{this.draft}} />Draft <span class="help-block">the DOI is not yet registered in the global Handle System, doesn’t require valid metadata or a URL, and can be deleted</span></div>
+    <div class="label-vertical">The state determines whether a DOI is registered in the global Handle System and if its metadata is publicly available. Once in Registered or Findable state, a DOI cannot be deleted. <a target="_blank" rel="noopener noreferrer" href="https://support.datacite.org/docs/doi-states">Learn more&nbsp;…</a></div>
+    <div><RadioButton @value="draft" @groupValue={{this.state}} @radioClass="radio" @changed={{action "selectStateAction"}} @disabled={{this.draft}} />Draft <span class="help-block">the DOI is not yet registered in the global Handle System, does not need to have valid metadata or a URL, and can be deleted</span></div>
     <div><RadioButton @value="registered" @groupValue={{this.state}} @radioClass="radio" @changed={{action "selectStateAction"}} @disabled={{this.registered}} />Registered <span class="help-block">the DOI is registered in the global Handle System, but the metadata is not publicly available</span></div>
     <div><RadioButton @value="findable" @groupValue={{this.state}} @radioClass="radio" @changed={{action "selectStateAction"}} @disabled={{this.findable}} />Findable <span class="help-block">the DOI is registered in the global Handle System and the metadata is publicly available</span></div>
   </div>
