@@ -49,13 +49,13 @@
           }}
             <BsAlert @dismissible={{false}} @type="warning">
               {{#if (eq this.currentUser.role_id 'staff_admin')}}
-                Select a Member or Consortium Organization to create a repository.
+                Select a Member or Consortium Organization to add a repository.
               {{else if (eq this.model.provider.memberType 'consortium')}}
                 Select a  
                 <LinkTo @route="providers.show.organizations" @model={{this.model.provider.id}}>
                   Consortium Organization
                 </LinkTo>
-                to create a repository.
+                to add a repository.
               {{/if}}
             </BsAlert>
           {{else if (cannot 'create repository' this.model)}}
