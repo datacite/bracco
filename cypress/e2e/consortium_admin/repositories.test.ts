@@ -62,7 +62,7 @@ describe('ACCEPTANCE: CONSORTIUM_ADMIN | REPOSITORIES', () => {
         .and('have.attr', 'href').and('include', '/providers/' + consortium_id + '/repositories');
 
       // Has left sidebar message box.
-      cy.get('div.alert').contains(/New repositories can't be created from this page./i);
+      cy.get('div.alert').contains(/Select a Consortium Organization to create a new repository./i);
 
       cy.get('button.export-basic-metadata').should('not.exist');
 

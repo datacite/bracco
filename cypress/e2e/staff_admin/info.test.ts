@@ -169,7 +169,6 @@ describe('ACCEPTANCE: STAFF_ADMIN | INFO', () => {
         cy.get('#ror-id').should('be.visible');
         cy.get('#system-email').should('be.visible');
         cy.get('#website').should('be.visible');
-        cy.get('#twitter-handle').should('be.visible');
         cy.get('#description').should('be.visible');
         cy.get('#country').should('be.visible');
         cy.get('button#update-provider').should('be.visible');
