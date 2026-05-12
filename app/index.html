@@ -21,6 +21,19 @@
 
   <script defer data-domain="doi.datacite.org" src="https://plausible.io/js/script.js"></script>
   <script id="datacite-toasts" data-site="{{content-for 'toast-data-site'}}" src="https://assets.datacite.org/javascripts/toast_notifications.js" integrity="sha384-GcQ+0oaToUM4aiWhvr9TGxAqENo62EqS5oqGlWBooarQhVPVZCx80Uk+QWf6zVg1" crossorigin="anonymous" async></script>
+  <body>
+  <script>
+    (function() {
+      var div = document.createElement('div');
+      div.className = 'dc-header-wrapper';
+      div.style.height = '45px';
+      div.style.position = 'relative';
+      div.style.borderBottom = '1px solid rgba(36, 59, 84, 0.16)';
+      div.style.backgroundColor = '#F7FAFC';
+      document.body.prepend(div);
+    })();
+  </script>
+  <script src="https://gist.githack.com/codycooperross/0eeeda1faea9526c78f18224ab9cefc6/raw/service-bar.js" async></script>
 
   <script>
      window.MathJax = {
