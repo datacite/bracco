@@ -583,6 +583,15 @@ div[doi-publisher] > div {
   display: flex;
   padding-bottom: 0.5em;
 }
+
+/* Hero section - fix contrast: ensure h1/subtitle text is white over dark overlay */
+.motto h1,
+.motto p {
+  color: #fff;
+  background-color: transparent;
+  opacity: 1;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.75);
+}
 /* Footer Color for accessibility */
 
 .footer {
