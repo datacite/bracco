@@ -597,3 +597,44 @@ div[doi-publisher] > div {
   font-size: 18px;
   color: #243B54;
 }
+
+/* Landing page accessibility fixes */
+
+.landing-header {
+  position: relative;
+}
+
+.landing-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgb(0 0 0 / 50%);
+}
+
+.landing-header .container-fluid {
+  position: relative;
+  z-index: 1;
+}
+
+.landing-header .motto h1,
+.landing-header .motto p {
+  color: #fff;
+}
+
+.navbar-default .navbar-right:not(.navbar-member):not(.navbar-consortium) {
+  background-color: rgb(0 0 0 / 55%);
+}
+
+.navbar-default .navbar-right:not(.navbar-member):not(.navbar-consortium) > li > a {
+  color: #fff !important;
+}
+
+.navbar-default .navbar-right:not(.navbar-member):not(.navbar-consortium) > li > a:hover,
+.navbar-default .navbar-right:not(.navbar-member):not(.navbar-consortium) > li > a:focus {
+  color: #f2f6fa !important;
+}
+
+main a:not(.btn):not(.navbar-brand),
+.wrapper .section a:not(.btn):not(.navbar-brand) {
+  text-decoration: underline;
+}
