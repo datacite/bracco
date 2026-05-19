@@ -44,6 +44,7 @@ export const softwareList = [
   'Figshare',
   'Invenio',
   'Islandora',
+  'Medad',
   'MyCoRe',
   'Nesstar',
   'Omega-PSIR',
