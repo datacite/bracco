@@ -9,6 +9,6 @@ module('Integration | Component | footer status', function (hooks) {
   test('it renders', async function (assert) {
     await render(hbs`{{footer-status}}`);
 
-    assert.dom('*').hasText('');
+    assert.dom('a').hasText('System status');
   });
 });
