@@ -13,6 +13,9 @@ module('Integration | Component | landing page', function (hooks) {
       /^DataCite Fabrica+/.test(find('*').textContent.trim()),
       'begins with "DataCite Fabrica"'
     );
+    assert.dom('.landing-page .motto h1').exists();
+    assert.dom('.landing-page .landing-feature-title').exists({ count: 3 });
+    assert.dom('.landing-page .a11y-inline-link').exists({ count: 5 });
 
     // Template block usage:
     await render(hbs`

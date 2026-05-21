@@ -12,5 +12,12 @@ module('Integration | Component | application header', function (hooks) {
     await render(hbs`{{application-header}}`);
 
     assert.dom('*').hasText('About Support Sign in');
+    assert
+      .dom('.navbar-toggle')
+      .hasAttribute('aria-label', 'Toggle navigation menu');
+    assert
+      .dom('.navbar-header a.navbar-brand')
+      .hasAttribute('aria-label', 'DataCite Fabrica home');
+    assert.dom('.navbar-toggle .navbar-toggler-icon').hasAttribute('aria-hidden', 'true');
   });
 });
