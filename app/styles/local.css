@@ -627,7 +627,8 @@ main a:not(.btn):not(.navbar-brand):not(.nav-link):focus,
 /* Landing page WAVE contrast fixes */
 .landing-header {
   position: relative;
-  background-color: #16324f;
+  background-color: rgba(0, 0, 0, 0.4);
+  background-blend-mode: multiply;
 }
 
 /* Accessible inline-link utility */
@@ -658,11 +659,6 @@ main a:not(.btn):not(.navbar-brand):not(.nav-link):focus,
 .navbar .navbar-nav > li > a.landing-nav-link.btn {
   color: #fff !important;
   border-color: #fff !important;
-}
-
-/* Normal/light pages like /about */
-.navbar-default .navbar-right:not(.navbar-member):not(.navbar-consortium) > li > a:not(.landing-nav-link) {
-  color: #243b54 !important;
 }
 
 /* Landing page icon */
