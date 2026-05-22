@@ -579,82 +579,6 @@ div[doi-publisher] > div {
 
 /* Landing page */
 
-.icon-landing {
-  display: flex;
-  padding-bottom: 0.5em;
-}
-
-.landing-page .landing-header {
-  position: relative;
-}
-
-.landing-page .landing-header::before {
-  position: absolute;
-  inset: 0;
-  background: rgb(0 0 0 / 42%);
-  content: '';
-}
-
-.landing-page .landing-header .container-fluid {
-  position: relative;
-  z-index: 1;
-}
-
-.landing-page .motto h1,
-.landing-page .motto p {
-  color: #fff;
-  text-shadow: 0 1px 2px rgb(0 0 0 / 45%);
-}
-
-.landing-page .a11y-inline-link {
-  color: #005f8a;
-  font-weight: 600;
-  text-decoration: underline;
-  text-underline-offset: 0.1em;
-}
-
-.landing-page .a11y-inline-link:hover,
-.landing-page .a11y-inline-link:focus {
-  color: #004766;
-}
-
-.landing-page .landing-feature-title {
-  font-size: 24px;
-}
-
-.navbar .navbar-nav > li > a.btn-neutral {
-  color: #243b54 !important;
-  font-weight: 600;
-  text-decoration: underline;
-}
-
-.navbar .navbar-nav > li > a.btn-neutral:hover,
-.navbar .navbar-nav > li > a.btn-neutral:focus {
-  color: #102a43 !important;
-}
-
-.navbar-button-member {
-  color: #243b54 !important;
-  font-weight: 600;
-}
-
-.navbar-button-member:hover,
-.navbar-button-member:focus {
-  color: #102a43 !important;
-  text-decoration: underline;
-}
-
-.navbar-button-consortium:hover,
-.navbar-button-consortium:focus {
-  color: #d9f0ff !important;
-  text-decoration: underline;
-}
-
-.navbar-default .navbar-nav > li > a:not(.btn),
-.navbar-default .navbar-nav > li > .dropdown > a {
-  font-weight: 600;
-}
-
 /* Footer Color for accessibility */
 
 .footer {
@@ -676,9 +600,7 @@ div[doi-publisher] > div {
 
 main a:not(.btn):not(.navbar-brand):not(.nav-link),
 .wrapper a:not(.btn):not(.navbar-brand):not(.nav-link) {
-  color: #005f8a;
-  font-weight: 600;
-  text-decoration: underline;
+  color: #006b8f;
   text-underline-offset: 0.1em;
 }
 
@@ -687,4 +609,20 @@ main a:not(.btn):not(.navbar-brand):not(.nav-link):focus,
 .wrapper a:not(.btn):not(.navbar-brand):not(.nav-link):hover,
 .wrapper a:not(.btn):not(.navbar-brand):not(.nav-link):focus {
   color: #004766;
+}
+.about-title,
+h3.member {
+  color: #006b5b;
+  font-size: 24px;
+  font-weight: 600;
+}
+.landing-nav-link {
+  color: #243b54 !important;
+  background-color: #fff !important;
+}
+
+.landing-nav-link:hover,
+.landing-nav-link:focus {
+  color: #102a43 !important;
+  background-color: #fff !important;
 }
