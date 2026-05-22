@@ -673,3 +673,18 @@ div[doi-publisher] > div {
   font-size: 18px;
   color: #243B54;
 }
+
+main a:not(.btn):not(.navbar-brand):not(.nav-link),
+.wrapper a:not(.btn):not(.navbar-brand):not(.nav-link) {
+  color: #005f8a;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 0.1em;
+}
+
+main a:not(.btn):not(.navbar-brand):not(.nav-link):hover,
+main a:not(.btn):not(.navbar-brand):not(.nav-link):focus,
+.wrapper a:not(.btn):not(.navbar-brand):not(.nav-link):hover,
+.wrapper a:not(.btn):not(.navbar-brand):not(.nav-link):focus {
+  color: #004766;
+}

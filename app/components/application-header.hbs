@@ -12,13 +12,13 @@
     </navbar.toggle>
     {{#if this.session.isAuthenticated}}
       <a href="/" class="navbar-brand title-inverted" aria-label="DataCite Fabrica home">
-        {{#if this.showLogo}}<img src="/assets/images/fabrica-logo.svg" height="50" class="fabrica-logo"/>
+        {{#if this.showLogo}}<img src="/assets/images/fabrica-logo.svg" height="50" class="fabrica-logo" alt="" aria-hidden="true"/>
         {{else}}{{this.title}}
         {{/if}}
       </a>
     {{else}}
       <a href="/" class="navbar-brand title-inverted" aria-label="DataCite Fabrica home">
-        {{#if this.showLogo}}<img src="/assets/images/fabrica-logo.svg" height="50" class="fabrica-logo"/>
+        {{#if this.showLogo}}<img src="/assets/images/fabrica-logo.svg" height="50" class="fabrica-logo" alt="" aria-hidden="true"/>
         {{else}}{{this.title}}
         {{/if}}
       </a>
