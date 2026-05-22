@@ -610,11 +610,17 @@ main a:not(.btn):not(.navbar-brand):not(.nav-link):focus,
 .wrapper a:not(.btn):not(.navbar-brand):not(.nav-link):focus {
   color: #004766;
 }
-.about-title,
-h3.member {
+.about-title {
   color: #006b5b;
   font-size: 24px;
   font-weight: 600;
+}
+.footer-heading {
+  font-size: 24px;
+  margin-top: .5em;
+  margin-bottom: .1em;
+  font-weight: 600;
+  line-height: 1.2em;
 }
 .landing-nav-link {
   color: #243b54 !important;
@@ -625,4 +631,15 @@ h3.member {
 .landing-nav-link:focus {
   color: #102a43 !important;
   background-color: #fff !important;
+}
+
+.a11y-inline-link,
+.a11y-inline-link:visited {
+  font-weight: 600;
+  text-underline-offset: 2px;
+}
+
+.a11y-inline-link:hover,
+.a11y-inline-link:focus {
+  text-decoration-thickness: 2px;
 }
