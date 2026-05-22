@@ -577,8 +577,6 @@ div[doi-publisher] > div {
   color: #e74c3c;
 }
 
-/* Landing page */
-
 /* Footer Color for accessibility */
 
 .footer {
@@ -598,6 +596,7 @@ div[doi-publisher] > div {
   color: #243B54;
 }
 
+/* Accessible inline links in content only */
 main a:not(.btn):not(.navbar-brand):not(.nav-link),
 .wrapper a:not(.btn):not(.navbar-brand):not(.nav-link) {
   color: #006b8f;
@@ -610,11 +609,13 @@ main a:not(.btn):not(.navbar-brand):not(.nav-link):focus,
 .wrapper a:not(.btn):not(.navbar-brand):not(.nav-link):focus {
   color: #004766;
 }
+
 .about-title {
   color: #006b5b;
   font-size: 24px;
   font-weight: 600;
 }
+
 .footer-heading {
   font-size: 24px;
   margin-top: .5em;
@@ -622,17 +623,31 @@ main a:not(.btn):not(.navbar-brand):not(.nav-link):focus,
   font-weight: 600;
   line-height: 1.2em;
 }
-.landing-nav-link {
-  color: #243b54 !important;
-  background-color: #fff !important;
+
+/* Landing page WAVE contrast fixes */
+.landing-header {
+  position: relative;
+  background-color: #16324f;
 }
 
-.landing-nav-link:hover,
-.landing-nav-link:focus {
-  color: #102a43 !important;
-  background-color: #fff !important;
+.landing-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgb(0 0 0 / 45%);
 }
 
+.landing-header .container-fluid {
+  position: relative;
+  z-index: 1;
+}
+
+.landing-header .motto h1,
+.landing-header .motto p {
+  color: #fff;
+}
+
+/* Accessible inline-link utility */
 .a11y-inline-link,
 .a11y-inline-link:visited {
   font-weight: 600;
@@ -642,4 +657,53 @@ main a:not(.btn):not(.navbar-brand):not(.nav-link):focus,
 .a11y-inline-link:hover,
 .a11y-inline-link:focus {
   text-decoration-thickness: 2px;
+}
+
+/* Landing/homepage nav links on dark hero */
+.landing-nav-link {
+  color: #fff !important;
+  background-color: transparent !important;
+}
+
+.landing-nav-link:hover,
+.landing-nav-link:focus {
+  color: #f2f6fa !important;
+  background-color: transparent !important;
+}
+
+.landing-nav-link.btn,
+.navbar .navbar-nav > li > a.landing-nav-link.btn {
+  color: #fff !important;
+  border-color: #fff !important;
+}
+
+/* Normal/light pages like /about */
+.navbar-default .navbar-right:not(.navbar-member):not(.navbar-consortium) > li > a:not(.landing-nav-link) {
+  color: #243b54 !important;
+}
+
+/* Landing page icon */
+.icon-landing {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.info {
+  text-align: center;
+}
+
+.info h3,
+.info p,
+.description-centered {
+  text-align: center;
+}
+
+.description-centered p {
+  max-width: 260px;
+  margin: 0 auto;
+}
+
+.landing-feature-title {
+  font-size: 24px;
 }
