@@ -379,21 +379,6 @@ div.progress {
   background-color: transparent;
 }
 
-main a:not(.btn):not(.navbar-brand):not(.nav-link),
-.register-card a:not(.btn):not(.navbar-brand):not(.nav-link) {
-  color: #005f8a;
-  font-weight: 600;
-  text-decoration: underline;
-  text-underline-offset: 0.1em;
-}
-
-main a:not(.btn):not(.navbar-brand):not(.nav-link):hover,
-main a:not(.btn):not(.navbar-brand):not(.nav-link):focus,
-.register-card a:not(.btn):not(.navbar-brand):not(.nav-link):hover,
-.register-card a:not(.btn):not(.navbar-brand):not(.nav-link):focus {
-  color: #004766;
-}
-
 /* PASSWORD CHANGE PAGES */
 
 /* Show/hide password in input field. */
