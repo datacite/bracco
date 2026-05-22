@@ -592,12 +592,6 @@ div[doi-publisher] > div {
   color: #e74c3c;
 }
 
-/* Landing page */
-
-.icon-landing {
-  display: flex;
-  padding-bottom: 0.5em;
-}
 /* Footer Color for accessibility */
 
 .footer {
@@ -608,7 +602,102 @@ div[doi-publisher] > div {
   color: #243B54;
 }
 
+.footer h3 {
+  font-size: 18px;
+}
+
 .footer .color-description {
   font-size: 18px;
   color: #243B54;
+}
+
+/* Accessible inline links in content only */
+main a:not(.btn):not(.navbar-brand):not(.nav-link),
+.wrapper a:not(.btn):not(.navbar-brand):not(.nav-link) {
+  color: #006b8f;
+  text-underline-offset: 0.1em;
+}
+
+main a:not(.btn):not(.navbar-brand):not(.nav-link):hover,
+main a:not(.btn):not(.navbar-brand):not(.nav-link):focus,
+.wrapper a:not(.btn):not(.navbar-brand):not(.nav-link):hover,
+.wrapper a:not(.btn):not(.navbar-brand):not(.nav-link):focus {
+  color: #004766;
+}
+
+.about-title {
+  color: #006b5b;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.footer-heading {
+  font-size: 24px;
+  margin-top: .5em;
+  margin-bottom: .1em;
+  font-weight: 600;
+  line-height: 1.2em;
+}
+
+/* Landing page WAVE contrast fixes */
+.landing-header {
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.4);
+  background-blend-mode: multiply;
+}
+
+/* Accessible inline-link utility */
+.a11y-inline-link,
+.a11y-inline-link:visited {
+  font-weight: 600;
+  text-underline-offset: 2px;
+}
+
+.a11y-inline-link:hover,
+.a11y-inline-link:focus {
+  text-decoration-thickness: 2px;
+}
+
+/* Landing/homepage nav links on dark hero */
+.landing-nav-link {
+  color: #fff !important;
+  background-color: transparent !important;
+}
+
+.landing-nav-link:hover,
+.landing-nav-link:focus {
+  color: #f2f6fa !important;
+  background-color: transparent !important;
+}
+
+.landing-nav-link.btn,
+.navbar .navbar-nav > li > a.landing-nav-link.btn {
+  color: #fff !important;
+  border-color: #fff !important;
+}
+
+/* Landing page icon */
+.icon-landing {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.info {
+  text-align: center;
+}
+
+.info h3,
+.info p,
+.description-centered {
+  text-align: center;
+}
+
+.description-centered p {
+  max-width: 260px;
+  margin: 0 auto;
+}
+
+.landing-feature-title {
+  font-size: 24px;
 }

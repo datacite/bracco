@@ -6,7 +6,9 @@
   </WhileLoading>
 
   <HeadLayout />
-  {{outlet}}
+  <main id="main-content">
+    {{outlet}}
+  </main>
 
   <ApplicationFooter @model={{this.model}} />
 </div>
