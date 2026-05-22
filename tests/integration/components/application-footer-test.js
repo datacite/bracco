@@ -9,7 +9,7 @@ module('Integration | Component | application footer', function (hooks) {
   test('it renders accessible social links', async function (assert) {
     await render(hbs`<ApplicationFooter />`);
 
-    assert.dom('.footer h3').exists({ count: 5 });
+    assert.dom('.footer h2.footer-heading').exists({ count: 5 });
     assert.dom('a[aria-label="DataCite on GitHub"]').exists();
     assert.dom('a[aria-label="DataCite on LinkedIn"]').exists();
     assert.dom('a[aria-label="DataCite on YouTube"]').exists();

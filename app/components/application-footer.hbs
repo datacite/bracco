@@ -1,21 +1,21 @@
 <footer class='row footer'>
   <div class="container-fluid">
     <div class='col-md-3 col-sm-4 footer-column'>
-      <h3>About Us</h3>
+      <h2 class="footer-heading">About Us</h2>
       <ListLinks @links={{this.data.about_links}} />
     </div>
     <div class='col-md-3 col-sm-4 footer-column'>
-      <h3>Work With Us</h3>
+      <h2 class="footer-heading">Work With Us</h2>
       <ListLinks @links={{this.data.work_with_us_links}} />
     </div>
     <div class='col-md-3 col-sm-4 footer-column'>
-      <h3>Membership</h3>
+      <h2 class="footer-heading">Membership</h2>
       <ListLinks @links={{this.data.membership_links}} />
-      <h3>Resources</h3>
+      <h2 class="footer-heading">Resources</h2>
       <ListLinks @links={{this.data.resources_links}} />
     </div>
     <div class='col-md-3 footer-column'>
-      <h3 class="share">Contact us</h3>
+      <h2 class="share footer-heading">Contact us</h2>
       <a href={{get (links) 'MAIL_URL' }} class="share" aria-label="Email DataCite">
         <i class="fas fa-envelope" aria-hidden="true"></i>
       </a>
