@@ -292,10 +292,9 @@
       </div>
     </div>
   {{/if}}
+  
   {{#if
-    (and
-      (can 'source doi' this.model) (or this.model.meta.registered this.model.query.registered)
-    )
+    (or this.model.meta.registered this.model.query.registered)
   }}
     <div class="panel facets">
       <div class="panel-body">
