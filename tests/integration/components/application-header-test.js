@@ -11,7 +11,8 @@ module('Integration | Component | application header', function (hooks) {
   test('it renders', async function (assert) {
     await render(hbs`{{application-header}}`);
 
-    assert.dom('*').hasText('About Support Sign in');
+    assert.dom('*').hasText('Skip to main content About Support Sign in');
+    assert.dom('.skip-link').hasAttribute('href', '#content');
     assert
       .dom('.navbar-toggle')
       .hasAttribute('aria-label', 'Toggle navigation menu');

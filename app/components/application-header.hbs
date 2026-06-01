@@ -1,3 +1,4 @@
+<a class="skip-link" href="#content">Skip to main content</a>
 <BsNavbar
   class="navbar-default"
   @type={{this.type}}
@@ -6,7 +7,7 @@
   @onCollapse={{action (mut this.collapsed) true}}
   @onExpand={{action (mut this.collapsed) false}} as |navbar|
 >
-  <div class="navbar-header">
+  <div class="navbar-header" id="main-navigation">
     <navbar.toggle class="navbar-toggle" aria-label="Toggle navigation menu">
       <span class="navbar-toggler-icon" aria-hidden="true"></span>
     </navbar.toggle>
@@ -69,10 +70,10 @@
               </menu.item>
               <menu.divider />
               <menu.item>
-                <a {{action 'invalidateSession'}}>
+                <button type="button" class="dropdown-action" {{action 'invalidateSession'}}>
                   <i class="fas fa-sign-out-alt" aria-hidden="true"></i>
                   Sign out
-                </a>
+                </button>
               </menu.item>
             </dd.menu>
           </nav.dropdown>

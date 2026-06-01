@@ -33,6 +33,26 @@ export default class ModelSearch extends Component {
   queryParams = {};
   modelName = null;
 
+  get searchLabel() {
+    if (this.placeholder) {
+      return `${this.placeholder} search`;
+    }
+
+    if (this.modelName) {
+      return `${this.modelName} search`;
+    }
+
+    return 'Search';
+  }
+
+  get sortLabel() {
+    if (this.modelName) {
+      return `Sort ${this.modelName.toLowerCase()} results`;
+    }
+
+    return 'Sort results';
+  }
+
   didReceiveAttrs() {
     super.didReceiveAttrs(...arguments);
 

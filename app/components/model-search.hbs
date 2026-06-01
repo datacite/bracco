@@ -1,22 +1,27 @@
   <form class="form-horizontal" {{action 'doSearch' this.query on='submit'}}>
+    <label for="query" class="sr-only">{{this.searchLabel}}</label>
     <div id="search" class="input-group">
       <Input
+        id="query"
         name="query"
         @value={{this.query}}
         class="form-control"
         placeholder={{if this.placeholder this.placeholder "Type to search..."}}
+        aria-label={{this.searchLabel}}
         @escape-press={{action 'clear'}}
         @enter={{action 'doSearch'}}
       />
       {{#if this.hasInput}}
-        <span
+        <button
+          type="button"
           id="search-clear"
-          title="Clear"
-          aria-label="Clear"
+          title="Clear search"
+          aria-label="Clear search"
+          class="search-clear-btn"
           {{action 'clear'}}
         >
           <i class="fas fa-times-circle"></i>
-        </span>
+        </button>
       {{/if}}
       <div class="input-group-btn">
         <button type="submit" class="btn btn-primary hidden-xs">
@@ -70,7 +75,12 @@
   {{#if (gt this.model.meta.total 1)}}
     {{#if this.sortable}}
       <div id="sort" class="input-group pull-right">
-        <select onchange={{action 'sort' value='target.value'}}>
+        <label for="sort-results" class="sr-only">{{this.sortLabel}}</label>
+        <select
+          id="sort-results"
+          aria-label={{this.sortLabel}}
+          onchange={{action 'sort' value='target.value'}}
+        >
           {{#each-in this.formats as |key value|}}
             <option name="sort" value={{key}} selected={{eq this.sort key}}>
               {{value}}

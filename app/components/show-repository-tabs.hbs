@@ -1,4 +1,4 @@
-      <div class="tab-content nav-tabs-member">
+      <nav class="tab-content nav-tabs-member" aria-label="Repository sections">
         <BsNav
           @type="tabs"
           @justified={{false}}
@@ -31,26 +31,26 @@
           <!-- NEEDS FIX FOR ASSIGNED PREFIX -->
 
           <nav.item>
-            <nav.linkTo @route='repositories.show.index' class='nav-link'>
+            <nav.linkTo @route='repositories.show.index' @current-when='repositories.show.index' class='nav-link'>
               Info
             </nav.linkTo>
           </nav.item>
           <nav.item>
-            <nav.linkTo @route='repositories.show.settings' class='nav-link'>
+            <nav.linkTo @route='repositories.show.settings' @current-when='repositories.show.settings' class='nav-link'>
               Settings
             </nav.linkTo>
           </nav.item>
           <nav.item>
-            <nav.linkTo @route='repositories.show.prefixes' class='nav-link'>
+            <nav.linkTo @route='repositories.show.prefixes' @current-when='repositories.show.prefixes' class='nav-link'>
               Prefixes
             </nav.linkTo>
           </nav.item>
           <nav.item>
-            <nav.linkTo @route='repositories.show.dois' class='nav-link'>
+            <nav.linkTo @route='repositories.show.dois' @current-when='repositories.show.dois' class='nav-link'>
               DOIs
             </nav.linkTo>
           </nav.item>
 
         </BsNav>
-      </div>
+      </nav>
       

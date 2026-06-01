@@ -1,7 +1,7 @@
 <h2 class="work">
   DataCite
 </h2>
-<div class="tab-content nav-tabs-member">
+<nav class="tab-content nav-tabs-member" aria-label="Main sections">
   <BsNav
     @type="tabs"
     @justified={{false}}
@@ -9,46 +9,46 @@
     @fill={{false}} as |nav|
   >
     <nav.item>
-      <nav.linkTo @route="index" class="nav-link">
+      <nav.linkTo @route="index" @current-when="index" class="nav-link">
         Info
       </nav.linkTo>
     </nav.item>
     <nav.item>
-      <nav.linkTo @route="settings" class="nav-link">
+      <nav.linkTo @route="settings" @current-when="settings" class="nav-link">
         Settings
       </nav.linkTo>
     </nav.item>
     <nav.item>
-      <nav.linkTo @route="providers" class="nav-link">
+      <nav.linkTo @route="providers" @current-when="providers" class="nav-link">
         Members
       </nav.linkTo>
     </nav.item>
     <nav.item>
-      <nav.linkTo @route="contacts" class="nav-link">
+      <nav.linkTo @route="contacts" @current-when="contacts" class="nav-link">
         Contacts
       </nav.linkTo>
     </nav.item>
     {{#if (feature-flag 'showResearchers')}}
       <nav.item>
-        <nav.linkTo @route="users" class="nav-link">
+        <nav.linkTo @route="users" @current-when="users" class="nav-link">
           Users
         </nav.linkTo>
       </nav.item>
     {{/if}}
     <nav.item>
-      <nav.linkTo @route="repositories" class="nav-link">
+      <nav.linkTo @route="repositories" @current-when="repositories" class="nav-link">
         Repositories
       </nav.linkTo>
     </nav.item>
     <nav.item>
-      <nav.linkTo @route="prefixes" class="nav-link">
+      <nav.linkTo @route="prefixes" @current-when="prefixes" class="nav-link">
         Prefixes
       </nav.linkTo>
     </nav.item>
     <nav.item>
-      <nav.linkTo @route="dois" class="nav-link">
+      <nav.linkTo @route="dois" @current-when="dois" class="nav-link">
         DOIs
       </nav.linkTo>
     </nav.item>
   </BsNav>
-</div>
+</nav>
