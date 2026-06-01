@@ -90,16 +90,6 @@ export default class ApplicationHeader extends Component {
   }
 
   @action
-  collapseNavbar() {
-    this.set('collapsed', true);
-  }
-
-  @action
-  expandNavbar() {
-    this.set('collapsed', false);
-  }
-
-  @action
   invalidateSession() {
     this.session.invalidate();
   }

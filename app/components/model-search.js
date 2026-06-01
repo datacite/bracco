@@ -114,6 +114,12 @@ export default class ModelSearch extends Component {
   }
 
   @action
+  handleSubmit(event) {
+    event.preventDefault();
+    this.doSearch(this.query);
+  }
+
+  @action
   clear() {
     this.set('query', null);
     this.set('sort', null);
@@ -129,5 +135,10 @@ export default class ModelSearch extends Component {
   sort(sort) {
     this.set('sort', sort);
     this.search();
+  }
+
+  @action
+  handleSortChange(event) {
+    this.sort(event.target.value);
   }
 }

@@ -5,31 +5,6 @@
           @stacked={{false}}
           @fill={{false}} as |nav|
         >
-          <!--
-          <LinkTo @route='repositories.show.index' @tagName="li" @model=this.model.id>
-            <LinkTo @route='repositories.show.index' class='nav-link' @query=assignedPrefix>
-              Info
-            </LinkTo>
-          </LinkTo>
-          <LinkTo @route='repositories.show.settings' @tagName="li" @model=this.model.id>
-            <LinkTo @route='repositories.show.settings' class='nav-link' @query=assignedPrefix>
-              Settings
-            </LinkTo>
-          </LinkTo>
-          <LinkTo @route='repositories.show.prefixes' @tagName="li" @model=this.model.id>
-            <LinkTo @route='repositories.show.prefixes' class='nav-link' @query=assignedPrefix>
-              Prefixes
-            </LinkTo>
-          </LinkTo>
-          <LinkTo @route='repositories.show.dois' @tagName="li" @model=this.model.id>
-            <LinkTo @route='repositories.show.dois' class='nav-link' @query=assignedPrefix>
-              DOIs
-            </LinkTo>
-          </LinkTo>
-          -->
-        
-          <!-- NEEDS FIX FOR ASSIGNED PREFIX -->
-
           <nav.item>
             <nav.linkTo @route='repositories.show.index' @current-when='repositories.show.index' class='nav-link'>
               Info

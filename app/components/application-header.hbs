@@ -4,8 +4,8 @@
   @type={{this.type}}
   @fluid={{true}}
   @collapsed={{this.collapsed}}
-  @onCollapse={{this.collapseNavbar}}
-  @onExpand={{this.expandNavbar}} as |navbar|
+  @onCollapse={{fn (mut this.collapsed) true}}
+  @onExpand={{fn (mut this.collapsed) false}} as |navbar|
 >
   <div class="navbar-header" id="main-navigation">
     <navbar.toggle class="navbar-toggle" aria-label="Toggle navigation menu">
