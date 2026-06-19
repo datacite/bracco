@@ -52,16 +52,21 @@
               {{#each this.model.meta.states as |state|}}
                 <li>
                   {{#if this.model.query.state}}
-                    <LinkTo @route="prefixes" @query={{hash state=null}}>
-                      <i class="far fa-check-square"></i>
+                    <LinkTo
+                      @route="prefixes"
+                      @query={{hash state=null}}
+                      aria-label="Clear State filter"
+                    >
+                      <i class="far fa-check-square" aria-hidden="true"></i>
                     </LinkTo>
                   {{else}}
                     <LinkTo
                       id="prefix-{{state.id}}"
                       @route="prefixes"
                       @query={{hash state=state.id}}
+                      aria-label="Filter prefixes by State {{state.title}}"
                     >
-                      <i class="far fa-square"></i>
+                      <i class="far fa-square" aria-hidden="true"></i>
                     </LinkTo>
                   {{/if}}
                   <div class="facet-title">
@@ -87,12 +92,20 @@
               {{#each this.model.meta.years as |year|}}
                 <li>
                   {{#if this.model.query.year}}
-                    <LinkTo @route="prefixes" @query={{hash year=null}}>
-                      <i class="far fa-check-square"></i>
+                    <LinkTo
+                      @route="prefixes"
+                      @query={{hash year=null}}
+                      aria-label="Clear Year created filter"
+                    >
+                      <i class="far fa-check-square" aria-hidden="true"></i>
                     </LinkTo>
                   {{else}}
-                    <LinkTo @route="prefixes" @query={{hash year=year.id}}>
-                      <i class="far fa-square"></i>
+                    <LinkTo
+                      @route="prefixes"
+                      @query={{hash year=year.id}}
+                      aria-label="Filter prefixes by Year created {{year.title}}"
+                    >
+                      <i class="far fa-square" aria-hidden="true"></i>
                     </LinkTo>
                   {{/if}}
                   <div class="facet-title">
@@ -118,15 +131,20 @@
               {{#each this.model.meta.providers as |provider|}}
                 <li>
                   {{#if this.model.query.provider-id}}
-                    <LinkTo @route="prefixes" @query={{hash provider-id=null}}>
-                      <i class="far fa-check-square"></i>
+                    <LinkTo
+                      @route="prefixes"
+                      @query={{hash provider-id=null}}
+                      aria-label="Clear Member filter"
+                    >
+                      <i class="far fa-check-square" aria-hidden="true"></i>
                     </LinkTo>
                   {{else}}
                     <LinkTo
                       @route="prefixes"
                       @query={{hash provider-id=provider.id}}
+                      aria-label="Filter prefixes by Member {{provider.title}}"
                     >
-                      <i class="far fa-square"></i>
+                      <i class="far fa-square" aria-hidden="true"></i>
                     </LinkTo>
                   {{/if}}
                   <div class="facet-title">
@@ -158,8 +176,7 @@
                 {{prefix.id}}
               </h3>
               <h5>
-                {{pluralize prefix.providers.length 'Member' without-count=true
-                }}
+                {{pluralize prefix.providers.length 'Member' without-count=true}}
               </h5>
               {{#if prefix.providers}}
                 {{#each prefix.providers as |provider|}}

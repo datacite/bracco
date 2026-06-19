@@ -657,8 +657,8 @@ main a:not(.btn):not(.navbar-brand):not(.nav-link):focus,
 
 .landing-nav-link.btn,
 .navbar .navbar-nav > li > a.landing-nav-link.btn {
-  color: #fff !important;
-  border-color: #fff !important;
+  color: #243b54 !important;
+  border-color: #243b54 !important;
 }
 
 /* Landing page icon */
@@ -686,3 +686,174 @@ main a:not(.btn):not(.navbar-brand):not(.nav-link):focus,
 .landing-feature-title {
   font-size: 24px;
 }
+
+/* Accessibility: warning action buttons + sidebar facet contrast */
+
+/* Match Commons/Akita hover/focus behavior for warning buttons */
+.btn.btn-warning,
+.btn-group-vertical .btn.btn-warning,
+.btn-group .btn.btn-warning {
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn.btn-warning:hover,
+.btn.btn-warning:active,
+.btn-group-vertical .btn.btn-warning:hover,
+.btn-group-vertical .btn.btn-warning:active,
+.btn-group .btn.btn-warning:hover,
+.btn-group .btn.btn-warning:active {
+  background-color: var(--datacite-color-primary, #00B1E2);
+  border-color: var(--datacite-color-primary, #00B1E2);
+  color: #fff;
+}
+
+.btn.btn-warning:hover i,
+.btn.btn-warning:active i,
+.btn-group-vertical .btn.btn-warning:hover i,
+.btn-group-vertical .btn.btn-warning:active i,
+.btn-group .btn.btn-warning:hover i,
+.btn-group .btn.btn-warning:active i {
+  color: #fff;
+}
+
+.btn.btn-warning:focus,
+.btn.btn-warning:focus-visible,
+.btn-group-vertical .btn.btn-warning:focus,
+.btn-group-vertical .btn.btn-warning:focus-visible,
+.btn-group .btn.btn-warning:focus,
+.btn-group .btn.btn-warning:focus-visible {
+  background-color: var(--datacite-color-primary, #00B1E2);
+  border-color: var(--datacite-color-primary, #00B1E2);
+  color: #fff;
+  outline: 2px solid transparent;
+  box-shadow: 0 0 0 3px rgba(0, 177, 226, 0.35);
+}
+
+.btn.btn-warning:focus i,
+.btn.btn-warning:focus-visible i,
+.btn-group-vertical .btn.btn-warning:focus i,
+.btn-group-vertical .btn.btn-warning:focus-visible i,
+.btn-group .btn.btn-warning:focus i,
+.btn-group .btn.btn-warning:focus-visible i {
+  color: #fff;
+}
+
+/* Keep filled submit buttons keyboard-visible */
+.btn.btn-fill:focus,
+.btn.btn-fill:focus-visible {
+  outline: 2px solid transparent;
+  box-shadow: 0 0 0 3px rgba(0, 177, 226, 0.35);
+}
+
+/* Fix low-contrast facet labels and counts */
+.panel.facets .facet-title,
+.panel.facets .number,
+.panel.facets .number.pull-right {
+  color: #50595E;
+}
+
+.panel-body .small,
+.panel-body small {
+  color: #50595E;
+}
+
+.panel-body.metadata {
+  color: #50595E;
+}
+
+/* Accessibility: inline warning/missing-information text */
+.icon-warning,
+.small.icon-warning {
+  color: #7C410E;
+}
+
+.alert-warning, .label-warning-inv {
+    background-color: #fff;
+    color: #7C410E;
+    border: 2px solid #7C410E;
+}
+
+/* Accessibility: Provider page facet filter links */
+.panel.facets a,
+.panel.facets a:visited {
+  color: #308276;
+}
+h2.repository, h2.work {
+    font-weight: 600;
+    color: #308276;
+}
+.nav-tabs-member .nav-tabs .active>a, .nav-tabs-member .nav-tabs .active>a:focus, .nav-tabs-member .nav-tabs>li>a:focus, .nav-tabs-member .nav-tabs a:focus {
+    color: #308276;
+}
+
+#account_menu_link {
+  color: #243b54;
+}
+
+#account_menu_link:hover,
+#account_menu_link:focus {
+  color: #243b54;
+}
+
+/* Consistent hover color across Bracco */
+/* Action buttons */
+.btn.btn-warning,
+.btn-group-vertical .btn.btn-warning {
+  color: #243B54 !important;
+}
+
+/* Hover/focus */
+.btn.btn-warning:hover,
+.btn.btn-warning:focus,
+.btn.btn-warning:active,
+.btn-group-vertical .btn.btn-warning:hover,
+.btn-group-vertical .btn.btn-warning:focus,
+.btn-group-vertical .btn.btn-warning:active {
+  background-color: #e67e22 !important;
+  border-color: #e67e22 !important;
+  color: #FFFFFF !important;
+}
+
+/* Accessibility: facet section headers */
+.panel.facets h4,
+.facets h4 {
+  color: #308276 !important;
+}
+
+/* 2. Summary count headings like “573 Members” */
+h3.member-results,
+h3.provider-results,
+h3.repository-results,
+h3.doi-results,
+h3.work-results {
+  color: #308276;
+}
+
+/* 3. Facet section headings like Year joined, Region, Member Type */
+.facets h4 {
+  color: #308276;
+}
+.pagination > li:not(.active) > a,
+.pagination > li:not(.active) > span {
+  color: #006B8F;
+}
+
+.label-primary-inv {
+    color: #308276;
+    background-color: #fff;
+    border: 2px solid #308276;
+}
+
+.panel-body h3.member {
+    margin-bottom: 0;
+    color: #308276;
+}
+
+/* Dois info */
+.panel-transparent .panel-footer {
+    color: #50595E;
+}
+
+.text-registered { color: #165783; }
+.text-findable { color: #308276; }
+.text-draft { color: #7C410E; }

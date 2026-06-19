@@ -1,7 +1,21 @@
-<a href="{this.licenseURL}}">
+<a
+  href={{this.licenseURL}}
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="Creative Commons license"
+>
   {{#each this.licenseLogo as |license|}}
     {{#if license.class}}
-      <i class="{{license.class}}"><BsPopover @placement="top" @viewportPadding={{10}} @triggerEvents="hover" @title={{license.tooltip.title}}>{{license.tooltip.text}}</BsPopover></i>
+      <i class="{{license.class}}" aria-hidden="true">
+        <BsPopover
+          @placement="top"
+          @viewportPadding={{10}}
+          @triggerEvents="hover"
+          @title={{license.tooltip.title}}
+        >
+          {{license.tooltip.text}}
+        </BsPopover>
+      </i>
     {{else}}
       {{license.logo}}
     {{/if}}

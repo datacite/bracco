@@ -37,12 +37,12 @@
             {{#each this.model.organizations.meta.years as |year|}}
               <li>
                 {{#if this.model.organizations.query.year}}
-                  <LinkTo @route={{this.link}} @query={{hash year=''}}>
-                    <i class="far fa-check-square"></i>
+                  <LinkTo @route={{this.link}} @query={{hash year=''}} aria-label="Clear Year joined filter">
+                    <i class="far fa-check-square" aria-hidden="true"></i>
                   </LinkTo>
                 {{else}}
-                  <LinkTo @route={{this.link}} @query={{hash year=year.id}}>
-                    <i class="far fa-square"></i>
+                  <LinkTo @route={{this.link}} @query={{hash year=year.id}} aria-label="Filter organizations by Year joined {{year.title}}">
+                    <i class="far fa-square" aria-hidden="true"></i>
                   </LinkTo>
                 {{/if}}
                 <div class="facet-title">
@@ -56,8 +56,8 @@
             {{/each}}
           {{else}}
             <li>
-              <LinkTo @route={{this.link}} @query={{hash year=''}}>
-                <i class="far fa-check-square"></i>
+              <LinkTo @route={{this.link}} @query={{hash year=''}} aria-label="Clear Year joined filter">
+                <i class="far fa-check-square" aria-hidden="true"></i>
               </LinkTo>
               <div class="facet-title">
                 {{this.model.query.year}}
@@ -83,12 +83,12 @@
             {{#each this.model.organizations.meta.regions as |region|}}
               <li>
                 {{#if this.model.organizations.query.region}}
-                  <LinkTo @route={{this.link}} @query={{hash region=''}}>
-                    <i class="far fa-check-square"></i>
+                  <LinkTo @route={{this.link}} @query={{hash region=''}} aria-label="Clear Region filter">
+                    <i class="far fa-check-square" aria-hidden="true"></i>
                   </LinkTo>
                 {{else}}
-                  <LinkTo @route={{this.link}} @query={{hash region=region.id}}>
-                    <i class="far fa-square"></i>
+                  <LinkTo @route={{this.link}} @query={{hash region=region.id}} aria-label="Filter organizations by Region {{region.title}}">
+                    <i class="far fa-square" aria-hidden="true"></i>
                   </LinkTo>
                 {{/if}}
                 <div class="facet-title">
@@ -102,8 +102,8 @@
             {{/each}}
           {{else}}
             <li>
-              <LinkTo @route={{this.link}} @query={{hash region=''}}>
-                <i class="far fa-check-square"></i>
+              <LinkTo @route={{this.link}} @query={{hash region=''}} aria-label="Clear Region filter">
+                <i class="far fa-check-square" aria-hidden="true"></i>
               </LinkTo>
               <div class="facet-title">
                 {{this.model.query.region}}
@@ -140,15 +140,17 @@
                     <LinkTo
                       @route={{this.link}}
                       @query={{hash organization-type=''}}
+                      aria-label="Clear Organization Type filter"
                     >
-                      <i class="far fa-check-square"></i>
+                      <i class="far fa-check-square" aria-hidden="true"></i>
                     </LinkTo>
                   {{else}}
                     <LinkTo
                       @route={{this.link}}
                       @query={{hash organization-type=organizationType.id}}
+                      aria-label="Filter organizations by Organization Type {{organizationType.title}}"
                     >
-                      <i class="far fa-square"></i>
+                      <i class="far fa-square" aria-hidden="true"></i>
                     </LinkTo>
                   {{/if}}
                   <div class="facet-title">
@@ -162,8 +164,8 @@
               {{/each}}
             {{else}}
               <li>
-                <LinkTo @route={{this.link}} @query={{hash organization-type=''}}>
-                  <i class="far fa-check-square"></i>
+                <LinkTo @route={{this.link}} @query={{hash organization-type=''}} aria-label="Clear Organization Type filter">
+                  <i class="far fa-check-square" aria-hidden="true"></i>
                 </LinkTo>
                 <div class="facet-title">
                   {{this.model.query.organization-type}}
@@ -193,15 +195,16 @@
               {{#each this.model.organizations.meta.focusAreas as |focusArea|}}
                 <li>
                   {{#if this.model.organizations.query.focus-area}}
-                    <LinkTo @route={{this.link}} @query={{hash focus-area=''}}>
-                      <i class="far fa-check-square"></i>
+                    <LinkTo @route={{this.link}} @query={{hash focus-area=''}} aria-label="Clear Focus Area filter">
+                      <i class="far fa-check-square" aria-hidden="true"></i>
                     </LinkTo>
                   {{else}}
                     <LinkTo
                       @route={{this.link}}
                       @query={{hash focus-area=focusArea.id}}
+                      aria-label="Filter organizations by Focus Area {{focusArea.title}}"
                     >
-                      <i class="far fa-square"></i>
+                      <i class="far fa-square" aria-hidden="true"></i>
                     </LinkTo>
                   {{/if}}
                   <div class="facet-title">
@@ -215,8 +218,8 @@
               {{/each}}
             {{else}}
               <li>
-                <LinkTo @route={{this.link}} @query={{hash focus-area=''}}>
-                  <i class="far fa-check-square"></i>
+                <LinkTo @route={{this.link}} @query={{hash focus-area=''}} aria-label="Clear Focus Area filter">
+                  <i class="far fa-check-square" aria-hidden="true"></i>
                 </LinkTo>
                 <div class="facet-title">
                   {{this.model.organizations.query.focus-area}}

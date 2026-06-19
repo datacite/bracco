@@ -38,6 +38,7 @@
                       @route="providers.show.contacts"
                       @model={{this.model.provider.id}}
                       @query={{hash role-name=null}}
+                      aria-label="Clear Role filter"
                     >
                       <i class="far fa-check-square"></i>
                     </LinkTo>
@@ -47,6 +48,7 @@
                       @model={{this.model.provider.id}}
                       id="role-name-{{role.id}}"
                       @query={{hash role-name=role.id}}
+                      aria-label="Filter contacts by Role {{role.title}}"
                     >
                       <i class="far fa-square"></i>
                     </LinkTo>
