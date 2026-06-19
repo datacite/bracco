@@ -28,13 +28,14 @@
               {{#each this.model.contacts.meta.roles as |role|}}
                 <li>
                   {{#if (eq this.model.contacts.query.role-name role.id)}}
-                    <LinkTo @route="contacts" @query={{hash role-name=null}}>
-                      <i class="far fa-check-square"></i>
+                    <LinkTo @route="contacts" @query={{hash role-name=null}} aria-label="Clear role filter {{role.title}}">
+                      <i class="far fa-check-square" aria-hidden="true"></i>
                     </LinkTo>
                   {{else}}
                     <LinkTo
                       @route="contacts"
                       @query={{hash role-name=role.id}}
+                      aria-label="Filter contacts by role {{role.title}}"
                       id="role-name-{{role.id}}"
                     >
                       <i class="far fa-square"></i>

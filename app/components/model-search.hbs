@@ -5,6 +5,7 @@
         @value={{this.query}}
         class="form-control"
         placeholder={{if this.placeholder this.placeholder "Type to search..."}}
+        aria-label={{if this.ariaLabel this.ariaLabel "Search"}}
         @escape-press={{action 'clear'}}
         @enter={{action 'doSearch'}}
       />
