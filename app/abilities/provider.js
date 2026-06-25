@@ -13,6 +13,8 @@ export default class Provider extends Ability {
     switch (this.get('currentUser.role_id')) {
       case 'staff_admin':
         return true;
+      case 'consortium_admin':
+        return true;
       default:
         return false;
     }
