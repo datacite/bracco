@@ -22,6 +22,7 @@ export default class EditRoute extends Route {
       return contact.deleted === null;
     })
     provider.set('filteredContacts', filteredContacts)
+    provider.set("consortium_id", this.modelFor('providers/show').get('consortium.id'));
 
     return provider;
   }

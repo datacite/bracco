@@ -96,6 +96,19 @@
             {{titleize (humanize item)}}
           </el.control>
         </form.element>
+      {{/if}}
+      {{#if (or 
+              (can 'create provider')
+              (and
+                (or (eq this.model.memberType 'consortium') 
+                    (and
+                      (eq this.model.memberType 'consortium_organization')
+                      (eq this.model.consortium_id this.model.consortium.id)
+                    )
+                )
+              )
+            )
+      }}
         <form.element
           @controlType="power-select"
           id="tax-status"
@@ -115,6 +128,8 @@
             {{titleize item}}
           </el.control>
         </form.element>
+      {{/if}}
+      {{#if (can 'create provider')}}
         {{#if (eq this.model.memberType 'consortium_organization')}}
           <form.element
             @controlType="power-select"
@@ -138,27 +153,7 @@
           </form.element>
         {{/if}}
       {{/if}}
-      {{#if (eq this.model.memberType 'consortium')}}
-        <form.element
-          @controlType="power-select"
-          id="tax-status"
-          class="form-group"
-          @label="Tax Status"
-          @property="nonProfitStatus"
-          @options={{this.nonProfitStatuses}}
-          @destination={{this.nonProfitStatus}} as |el|
-        >
-          <el.control
-            @onChange={{action 'selectNonProfitStatus'}}
-            @search={{action 'searchNonProfitStatus'}}
-            @placeholder="Tax Status"
-            @searchPlaceholder="Type to search..."
-            @searchEnabled={{true}} as |item|
-          >
-            {{titleize item}}
-          </el.control>
-        </form.element>
-      {{/if}}
+ 
       <form.element
         @controlType="text"
         id="name"
