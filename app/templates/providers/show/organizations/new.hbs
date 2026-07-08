@@ -75,7 +75,7 @@
           {{if item.name item.name this.model.organization.rorId}}
         </el.control>
       </form.element>
-      {{#if (can 'create provider')}}
+      {{#if (can 'editSalesforceField provider')}}
         <form.element
           @controlType="text"
           id="salesforce-id"
@@ -97,27 +97,6 @@
           @helpText="The Globus UUID used for token authentication." as |el|
         >
           <el.control id="globus-uuid-field" />
-        </form.element>
-      {{/if}}
-      {{#if (can 'create provider')}}
-        <form.element
-          @controlType="power-select"
-          id="tax-status"
-          class="form-group"
-          @label="Tax Status"
-          @property="nonProfitStatus"
-          @options={{this.nonProfitStatuses}}
-          @destination={{this.nonProfitStatus}} as |el|
-        >
-          <el.control
-            @onChange={{action 'selectNonProfitStatus'}}
-            @search={{action 'searchNonProfitStatus'}}
-            @placeholder="Tax Status"
-            @searchPlaceholder="Type to search..."
-            @searchEnabled={{true}} as |item|
-          >
-            {{titleize item}}
-          </el.control>
         </form.element>
       {{/if}}
       <form.element
@@ -174,6 +153,27 @@
           {{item.name}}
         </el.control>
       </form.element>
+      {{#if (can 'create provider')}}
+        <form.element
+          @controlType="power-select"
+          id="tax-status"
+          class="form-group"
+          @label="Tax Status"
+          @property="nonProfitStatus"
+          @options={{this.nonProfitStatuses}}
+          @destination={{this.nonProfitStatus}} as |el|
+        >
+          <el.control
+            @onChange={{action 'selectNonProfitStatus'}}
+            @search={{action 'searchNonProfitStatus'}}
+            @placeholder="Tax Status"
+            @searchPlaceholder="Type to search..."
+            @searchEnabled={{true}} as |item|
+          >
+            {{titleize item}}
+          </el.control>
+        </form.element>
+      {{/if}}
       <form.element
         @controlType="power-select"
         id="organization-type"

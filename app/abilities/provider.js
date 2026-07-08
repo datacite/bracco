@@ -20,6 +20,16 @@ export default class Provider extends Ability {
     }
   }
 
+  @computed('currentUser.role_id', 'model.{id,provider_id}')
+  get canEditSalesforceField() {
+    switch (this.get('currentUser.role_id')) {
+      case 'staff_admin':
+        return true;
+      default:
+        return false;
+    }
+  }
+
   @computed('currentUser.{role_id,provider_id}', 'model.consortium.id')
   get canDelete() {
     switch (this.get('currentUser.role_id')) {
