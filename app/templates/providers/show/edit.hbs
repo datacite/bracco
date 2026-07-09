@@ -75,7 +75,7 @@
           @helpText="The Globus UUID used for token authentication."
         />
       {{/if}}
-      {{#if (can 'create provider')}}
+      {{#if (can 'editMemberTypeField provider')}}
         <form.element
           @controlType="power-select"
           id="member-type"
@@ -97,7 +97,7 @@
           </el.control>
         </form.element>
       {{/if}}
-      {{#if (can 'create provider')}}
+      {{#if (can 'editConsortiumField provider')}}
         {{#if (eq this.model.memberType 'consortium_organization')}}
           <form.element
             @controlType="power-select"
@@ -121,7 +121,6 @@
           </form.element>
         {{/if}}
       {{/if}}
- 
       <form.element
         @controlType="text"
         id="name"
@@ -599,7 +598,7 @@
           </form.element>
         {{/if}}
       {{/if}}
-      {{#if (can 'create provider')}}
+      {{#if (can 'editActiveField provider')}}
         <form.element
           @controlType="checkbox"
           id="is-active"
