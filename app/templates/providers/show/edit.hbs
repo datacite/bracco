@@ -55,7 +55,7 @@
           {{if item.name item.name this.model.rorId}}
         </el.control>
       </form.element>
-      {{#if (can 'create provider')}}
+      {{#if (can 'editSalesforceField provider')}}
         <form.element
           @controlType="text"
           id="salesforce-id"
@@ -75,7 +75,7 @@
           @helpText="The Globus UUID used for token authentication."
         />
       {{/if}}
-      {{#if (can 'create provider')}}
+      {{#if (can 'editMemberTypeField provider')}}
         <form.element
           @controlType="power-select"
           id="member-type"
@@ -96,25 +96,8 @@
             {{titleize (humanize item)}}
           </el.control>
         </form.element>
-        <form.element
-          @controlType="power-select"
-          id="tax-status"
-          class="form-group"
-          @label="Tax Status"
-          @property="nonProfitStatus"
-          @options={{this.nonProfitStatuses}}
-          @destination={{this.nonProfitStatus}} as |el|
-        >
-          <el.control
-            @onChange={{action 'selectNonProfitStatus'}}
-            @search={{action 'searchNonProfitStatus'}}
-            @placeholder="Tax Status"
-            @searchPlaceholder="Type to search..."
-            @searchEnabled={{true}} as |item|
-          >
-            {{titleize item}}
-          </el.control>
-        </form.element>
+      {{/if}}
+      {{#if (can 'editConsortiumField provider')}}
         {{#if (eq this.model.memberType 'consortium_organization')}}
           <form.element
             @controlType="power-select"
@@ -212,6 +195,38 @@
           {{item.name}}
         </el.control>
       </form.element>
+      {{#if (or 
+              (can 'create provider')
+              (and
+                (or (eq this.model.memberType 'consortium') 
+                    (and
+                      (eq this.model.memberType 'consortium_organization')
+                      (eq this.model.consortium_id this.model.consortium.id)
+                    )
+                )
+              )
+            )
+      }}
+        <form.element
+          @controlType="power-select"
+          id="tax-status"
+          class="form-group"
+          @label="Tax Status"
+          @property="nonProfitStatus"
+          @options={{this.nonProfitStatuses}}
+          @destination={{this.nonProfitStatus}} as |el|
+        >
+          <el.control
+            @onChange={{action 'selectNonProfitStatus'}}
+            @search={{action 'searchNonProfitStatus'}}
+            @placeholder="Tax Status"
+            @searchPlaceholder="Type to search..."
+            @searchEnabled={{true}} as |item|
+          >
+            {{titleize item}}
+          </el.control>
+        </form.element>
+      {{/if}}
       <form.element
         @controlType="power-select"
         id="organization-type"
@@ -583,7 +598,7 @@
           </form.element>
         {{/if}}
       {{/if}}
-      {{#if (can 'create provider')}}
+      {{#if (can 'editActiveField provider')}}
         <form.element
           @controlType="checkbox"
           id="is-active"

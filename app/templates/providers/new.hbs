@@ -109,25 +109,6 @@
                 {{titleize (humanize item)}}
               </el.control>
             </form.element>
-            <form.element
-              @controlType="power-select"
-              id="tax-status"
-              class="form-group"
-              @label="Tax Status"
-              @property="nonProfitStatus"
-              @options={{this.nonProfitStatuses}}
-              @destination={{this.nonProfitStatus}} as |el|
-            >
-              <el.control
-                @onChange={{action 'selectNonProfitStatus'}}
-                @search={{action 'searchNonProfitStatus'}}
-                @placeholder="Tax Status"
-                @searchPlaceholder="Type to search..."
-                @searchEnabled={{true}} as |item|
-              >
-                {{titleize item}}
-              </el.control>
-            </form.element>
             {{#if (eq this.model.memberType 'consortium_organization')}}
               <form.element
                 @controlType="power-select"
@@ -204,6 +185,25 @@
               @searchEnabled={{true}} as |item|
             >
               {{item.name}}
+            </el.control>
+          </form.element>
+          <form.element
+            @controlType="power-select"
+            id="tax-status"
+            class="form-group"
+            @label="Tax Status"
+            @property="nonProfitStatus"
+            @options={{this.nonProfitStatuses}}
+            @destination={{this.nonProfitStatus}} as |el|
+          >
+            <el.control
+              @onChange={{action 'selectNonProfitStatus'}}
+              @search={{action 'searchNonProfitStatus'}}
+              @placeholder="Tax Status"
+              @searchPlaceholder="Type to search..."
+              @searchEnabled={{true}} as |item|
+            >
+              {{titleize item}}
             </el.control>
           </form.element>
           <form.element
