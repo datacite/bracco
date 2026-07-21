@@ -42,6 +42,13 @@ describe('ACCEPTANCE: UI | LOGIN', function () {
       cy.visit('/sign-in')
     })
 
+    it('associates visible labels with login inputs', function () {
+      cy.get('label[for="account-field"]').should('contain', 'Account ID')
+      cy.get('label[for="password-field"]').should('contain', 'Password')
+      cy.get('input#account-field').should('exist')
+      cy.get('input#password-field').should('exist')
+    })
+
     it('displays errors on incorrect login', function () {
       // incorrect username on purpose
       cy.get('input#account-field').type(bad_username)

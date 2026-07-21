@@ -33,9 +33,11 @@ describe('ACCEPTANCE: ANONYMOUS - AVAILABLE PAGES', () => {
   describe('About', () => {
     it('Header', () => {
       cy.visit('/about');
-      cy.get('h3.member').contains('About');
+      cy.contains('h1', 'About');
       cy.get('a#sign-in').should('exist');
       cy.get('img.fabrica-logo').should('exist').should('have.attr', 'src').should('include', 'fabrica-logo.svg');
+      cy.get('img.fabrica-logo').should('have.attr', 'alt', '');
+      cy.get('img.fabrica-logo').should('have.attr', 'aria-hidden', 'true');
     });
 
     // it('Version', () => {

@@ -7,16 +7,18 @@
   @onExpand={{action (mut this.collapsed) false}} as |navbar|
 >
   <div class="navbar-header">
-    <navbar.toggle class="navbar-toggle" />
+    <navbar.toggle class="navbar-toggle" aria-label="Toggle navigation menu">
+      <span class="navbar-toggler-icon" aria-hidden="true"></span>
+    </navbar.toggle>
     {{#if this.session.isAuthenticated}}
-      <a href="/" class="navbar-brand title-inverted">
-        {{#if this.showLogo}}<img src="/assets/images/fabrica-logo.svg" height="50" class="fabrica-logo"/>
+      <a href="/" class="navbar-brand title-inverted" aria-label="DataCite Fabrica home">
+        {{#if this.showLogo}}<img src="/assets/images/fabrica-logo.svg" height="50" class="fabrica-logo" alt="" aria-hidden="true"/>
         {{else}}{{this.title}}
         {{/if}}
       </a>
     {{else}}
-      <a href="/" class="navbar-brand title-inverted">
-        {{#if this.showLogo}}<img src="/assets/images/fabrica-logo.svg" height="50" class="fabrica-logo"/>
+      <a href="/" class="navbar-brand title-inverted" aria-label="DataCite Fabrica home">
+        {{#if this.showLogo}}<img src="/assets/images/fabrica-logo.svg" height="50" class="fabrica-logo" alt="" aria-hidden="true"/>
         {{else}}{{this.title}}
         {{/if}}
       </a>
@@ -43,7 +45,7 @@
               {{else}}
                 {{uppercase this.currentUser.uid}}
               {{/if}}
-              <span class="caret"></span>
+              <span class="caret" aria-hidden="true"></span>
             </dd.toggle>
             <dd.menu class="navbar-menu" as |menu|>
               <menu.item>
@@ -55,12 +57,12 @@
               <menu.item>
                 {{#if (is-empty this.settings.model)}}
                   <LinkTo @route="{{settings-route this.settings.route}}">
-                    <i class="fas fa-cog"></i>
+                    <i class="fas fa-cog" aria-hidden="true"></i>
                       Settings
                   </LinkTo>
                 {{else}}
                   <LinkTo @route="{{settings-route this.settings.route}}" @model="{{this.settings.model}}">
-                    <i class="fas fa-cog"></i>
+                    <i class="fas fa-cog" aria-hidden="true"></i>
                       Settings
                   </LinkTo>
                 {{/if}}
@@ -68,7 +70,7 @@
               <menu.divider />
               <menu.item>
                 <a {{action 'invalidateSession'}}>
-                  <i class="fas fa-sign-out-alt"></i>
+                  <i class="fas fa-sign-out-alt" aria-hidden="true"></i>
                   Sign out
                 </a>
               </menu.item>
@@ -81,7 +83,7 @@
               id="sign-in"
               class="btn btn-sm btn-neutral"
             >
-              <i class="fas fa-sign-in-alt"></i>
+              <i class="fas fa-sign-in-alt" aria-hidden="true"></i>
               {{t 'user.signin'}}
             </LinkTo>
           </nav.item>
