@@ -35,6 +35,7 @@ export const softwareList = [
   'Archipelago',
   'Cayuse',
   'CKAN',
+  'CSTR & DOI Registration API',
   'Dataverse',
   'dLibra',
   'DSpace',
