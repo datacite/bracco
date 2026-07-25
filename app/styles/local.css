@@ -686,3 +686,59 @@ main a:not(.btn):not(.navbar-brand):not(.nav-link):focus,
 .landing-feature-title {
   font-size: 24px;
 }
+
+/* Shared accessibility utilities */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  z-index: 1050;
+  padding: 8px 12px;
+  color: #fff;
+  background-color: #005f8a;
+  text-decoration: none;
+}
+
+.skip-link:focus,
+.skip-link:focus-visible {
+  top: 0;
+}
+
+:focus-visible {
+  outline: 2px solid #005f8a;
+  outline-offset: 2px;
+}
+
+.search-clear-btn {
+  border: 0;
+  background-color: transparent;
+  color: #495057;
+}
+
+.search-clear-btn:hover,
+.search-clear-btn:focus {
+  color: #243b54;
+}
+
+.dropdown-action {
+  display: block;
+  width: 100%;
+  padding: 6px 15px;
+  border: 0;
+  color: #34495e;
+  text-align: left;
+  white-space: nowrap;
+  background-color: transparent;
+}
+
+.dropdown-action:hover,
+.dropdown-action:focus {
+  background-color: #34495e;
+  color: hsla(0, 0%, 100%, .7);
+  text-decoration: none;
+}
+
+.muted-readable,
+.text-muted-readable {
+  color: #495057 !important;
+}

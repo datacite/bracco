@@ -1,8 +1,8 @@
-<div class="pagination-centered">
+<nav class="pagination-centered" aria-label="Pagination">
   <ul class="pagination">
     {{#if this.previousPage}}
       <li class="arrow prev enabled-arrow">
-        <LinkTo @route={{this.link}} @query={{hash page=this.previousPage
+        <LinkTo @route={{this.link}} aria-label="Go to previous page" @query={{hash page=this.previousPage
           size=25
           created=this.model.query.created
           registered=this.model.query.registered  
@@ -22,23 +22,23 @@
         </LinkTo>
       </li>
     {{else}}
-      <li class="arrow prev disabled">
-        <a>&laquo;</a>
+      <li class="arrow prev disabled" aria-label="Previous page unavailable">
+        <span aria-hidden="true">&laquo;</span>
       </li>
     {{/if}}
 
     {{#each this.pageItems as |item|}}
       {{#if item.dots}}
-        <li class="dots disabled">
+        <li class="dots disabled" aria-hidden="true">
           <span>...</span>
         </li>
       {{else if item.current}}
-        <li class="active page-number">
-          <a>{{item.page}}</a>
+        <li class="active page-number" aria-label="Current page, page {{item.page}}">
+          <span aria-current="page">{{item.page}}</span>
         </li>
       {{else}}
         <li class="page-number">
-          <LinkTo @route={{this.link}} @query={{hash page=item.page
+          <LinkTo @route={{this.link}} aria-label="Go to page {{item.page}}" @query={{hash page=item.page
             size=25
             created=this.model.query.created
             registered=this.model.query.registered  
@@ -62,7 +62,7 @@
 
     {{#if this.nextPage}}
       <li class="arrow next enabled-arrow">
-        <LinkTo @route={{this.link}} @query={{hash page=this.nextPage
+        <LinkTo @route={{this.link}} aria-label="Go to next page" @query={{hash page=this.nextPage
           size=25
           created=this.model.query.created
           registered=this.model.query.registered  
@@ -82,9 +82,9 @@
         </LinkTo>
       </li>
     {{else}}
-      <li class="arrow next disabled">
-        <a>&raquo;</a>
+      <li class="arrow next disabled" aria-label="Next page unavailable">
+        <span aria-hidden="true">&raquo;</span>
       </li>
     {{/if}}
   </ul>
-</div>
+</nav>

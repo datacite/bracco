@@ -1,0 +1,5 @@
+
+> bracco@4.12.4 build
+> ember build --environment=production
+
+sh: 1: ember: not found

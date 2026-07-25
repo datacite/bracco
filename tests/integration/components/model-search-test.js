@@ -1,53 +1,49 @@
-// import { module, test } from 'qunit';
-// import { setupRenderingTest } from 'ember-qunit';
-// import { render } from '@ember/test-helpers';
-// import hbs from 'htmlbars-inline-precompile';
+import { hbs } from 'ember-cli-htmlbars';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { click, fillIn, render } from '@ember/test-helpers';
+import EmberObject from '@ember/object';
+import Service from '@ember/service';
 
-// module('Integration | Component | model search', function(hooks) {
-//   setupRenderingTest(hooks);
+class RouterStub extends Service {
+  transitionTo() {}
+}
 
-//   test('search dois', async function(assert) {
-//     await render(hbs`
-//       {{#model-search name='DOI' query='climate' total=2 sortable=true}}
+module('Integration | Component | model-search', function (hooks) {
+  setupRenderingTest(hooks);
 
-//       {{/model-search}}
-//     `);
-//     assert.dom('*').hasText('Search Reset All Sort by Date Updated Sort by Date Created Sort by DOI Sort by Relevance 2 Dois');
-//   });
+  hooks.beforeEach(function () {
+    this.owner.register('service:router', RouterStub);
+    this.model = EmberObject.create({
+      query: EmberObject.create({
+        query: null,
+        sort: null,
+        page: 1,
+        size: 25
+      }),
+      meta: EmberObject.create({
+        total: 2
+      }),
+      modelName: 'doi'
+    });
+  });
 
-//   test('search providers', async function(assert) {
-//     await render(hbs`
-//       {{#model-search name='Member' query='university' total=31 sortable=true}}
+  test('it renders accessible labels for search and sort controls', async function (assert) {
+    await render(hbs`<ModelSearch @model={{this.model}} @sortable={{true}} @link="dois" @name="DOI" />`);
 
-//       {{/model-search}}
-//     `);
-//     assert.dom('*').hasText('Search Reset All Sort by Name Sort by Date Joined Sort by Relevance 31 Members');
-//   });
+    assert.dom('label[for="query"]').exists();
+    assert.dom('#query').hasAttribute('aria-label');
+    assert.dom('label[for="sort-results"]').exists();
+    assert.dom('#sort-results').hasAttribute('aria-label');
+  });
 
-//   test('search repositories', async function(assert) {
-//     await render(hbs`
-//       {{#model-search name='Repository' query='university' total=22 sortable=true}}
+  test('it renders clear control as a button', async function (assert) {
+    await render(hbs`<ModelSearch @model={{this.model}} @sortable={{true}} @link="dois" @name="DOI" />`);
 
-//       {{/model-search}}
-//     `);
-//     assert.dom('*').hasText('Search Reset All Sort by Name Sort by Date Joined Sort by Relevance 22 Repositories');
-//   });
+    await fillIn('#query', 'climate');
 
-//   test('search prefixes', async function(assert) {
-//     await render(hbs`
-//       {{#model-search name='Prefix' query='10.5038' total=3 sortable=true}}
-
-//       {{/model-search}}
-//     `);
-//     assert.dom('*').hasText('Search Reset All Sort by Prefix Sort by Date Created 3 Prefixes');
-//   });
-
-//   test('search users', async function(assert) {
-//     await render(hbs`
-//       {{#model-search name='User' query='john' total=64 sortable=true}}
-
-//       {{/model-search}}
-//     `);
-//     assert.dom('*').hasText('Search Reset All Sort by Name Sort by Date Joined Sort by Relevance 64 Users');
-//   });
-// });
+    assert.dom('#search-clear').hasAttribute('type', 'button');
+    await click('#search-clear');
+    assert.dom('#query').hasValue('');
+  });
+});
