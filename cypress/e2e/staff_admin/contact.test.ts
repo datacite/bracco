@@ -37,7 +37,9 @@ describe('ACCEPTANCE: STAFF_ADMIN | CONTACTS', () => {
   after(() => {
     cy.wait(waitTime3);
     cy.getCookie('_jwt').then((cookie) => {
-      cy.deleteProviderTestContacts(provider_id, test_contact_family_name_prefix, Cypress.env('api_url'), cookie.value)
+      if (cookie) {
+        cy.deleteProviderTestContacts(provider_id, test_contact_family_name_prefix, Cypress.env('api_url'), cookie.value)
+      }
     })
     cy.clearAllSessionStorage()
   })

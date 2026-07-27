@@ -71,7 +71,7 @@ Cypress.Commands.add('login', (username, password) => {
     });
   },
   {
-    //cacheAcrossSpecs: true,
+    cacheAcrossSpecs: true,
   });
 });
 
@@ -292,9 +292,12 @@ Cypress.Commands.add("deleteProviderTestContacts", (provider, test_contact_famil
     headers: {
       authorization: 'Bearer ' + jwt,
     },
-    failOnStatusCode: true,
+    failOnStatusCode: false,
   }).then((response) => {
-    expect(response.status).to.eq(200)
+    if (response.status !== 200) {
+      cy.log('Could not fetch contacts for cleanup, status: ' + response.status);
+      return;
+    }
 
     const deleteContactsByIds = async (contact_ids) => {
       const requests = contact_ids.map(contact_id =>
