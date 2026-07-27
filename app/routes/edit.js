@@ -11,9 +11,6 @@ export default class EditRoute extends Route {
   router;
 
   @service
-  flashMessages;
-
-  @service
   store;
 
   model() {
