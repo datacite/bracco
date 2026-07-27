@@ -11,6 +11,9 @@ export default class ChangeRoute extends Route {
   router;
 
   @service
+  flashMessages;
+
+  @service
   store;
 
   model() {
