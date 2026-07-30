@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row sidebar-list-page">
   <div data-test-left-sidebar class="col-md-3">
     {{#if (and this.model.repository.isActive (or (can 'create doi' this.model) (can 'upload doi' this.model)) (not (gt this.model.repository-prefixes.length 0)))}}
       <div class="panel panel-transparent">
