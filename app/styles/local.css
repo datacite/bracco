@@ -599,11 +599,17 @@ div[doi-publisher] > div {
 /* Accessible inline links in content only */
 main a:not(.btn):not(.navbar-brand):not(.nav-link),
 .wrapper a:not(.btn):not(.navbar-brand):not(.nav-link) {
-  color: #243b54;
+  color: #006B8F;
 }
 
-.sidebar-list-page a:not(.btn):not(.navbar-brand):not(.nav-link) {
-  color: #50595E;
+main a:not(.btn):not(.navbar-brand):not(.nav-link),
+.wrapper a:not(.btn):not(.navbar-brand):not(.nav-link) {
+    color: #006B8F;
+}
+
+.sidebar-list-page .facets a:not(.btn):not(.navbar-brand):not(.nav-link),
+.sidebar-list-page .help-block a:not(.btn):not(.navbar-brand):not(.nav-link) {
+    color: #50595E;
 }
 
 .about-title {
@@ -904,3 +910,18 @@ h3.work-results {
   border-color: #308276;
   color: #fff;
 }
+
+/* Accessibility: Improve contrast for pagination controls */
+.pagination > li.active > a,
+.pagination > li.active > a:focus,
+.pagination > li.active > a:hover,
+.pagination > li.active > span,
+.pagination > li.active > span:focus,
+.pagination > li.active > span:hover,
+.pagination > li > a:hover,
+.pagination > li > a:focus {
+  background-color: #85460F;
+  border-color: #85460F;
+  color: #fff !important;
+}
+
