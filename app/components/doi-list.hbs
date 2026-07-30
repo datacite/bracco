@@ -1,3 +1,4 @@
+<div class="sidebar-list-page">
 <div data-test-left-sidebar class="col-md-3">
   {{#unless (and (can 'create doi' this.model) (can 'upload doi' this.model))}}
     <div class="panel panel-transparent">
@@ -750,4 +751,5 @@
       No DOIs found.
     </BsAlert>
   {{/if}}
+</div>
 </div>

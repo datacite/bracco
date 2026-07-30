@@ -19,7 +19,7 @@ z-index: 10000;
 
 .create-doi-button .dropdown-menu.show a {
   display: block;
-  color: #88939a !important;
+  color: #50595E !important;
   width: 100%;
   font-size: 16px !important;
   padding: 6px 15px;
@@ -187,17 +187,17 @@ div[doi-format].power-select-fragment .ember-basic-dropdown-trigger div.ember-vi
 }
 
 .form-group .help-block.success {
-  color: #2ecc71;
+  color: #308276;
 }
 
 .form-group input.is-valid, .form-group select.is-valid {
-  color: #2ecc71;
-  border-color: #2ecc71;
+  color: #308276;
+  border-color: #308276;
 }
 
 /* Fragile - next sibiling */
 .form-group input.is-valid + div.form-text{
-  color: #2ecc71;
+  color: #308276;
 }
 
 #doi-edit-form div#doi, #doi-modify-form-file-upload div#doi {
@@ -222,29 +222,29 @@ div[doi-format].power-select-fragment .ember-basic-dropdown-trigger div.ember-vi
 
 .form-group.has-success.has-feedback .form-text
 {
-  color: #2ecc71;
+  color: #308276;
 }
 
 .form-group.has-success.has-feedback .ember-basic-dropdown-trigger
 {
-  color: #2ecc71;
-  border-color: #2ecc71;
+  color: #308276;
+  border-color: #308276;
 }
 
 lock {
-  color: #2ecc71;
+  color: #308276;
 }
 
 /* Resource type general validation */
 
 .is-valid .ember-basic-dropdown-trigger {
-  color: #2ecc71;
-  border-color: #2ecc71;
+  color: #308276;
+  border-color: #308276;
 }
 
 .is-valid .form-text {
-  color: #2ecc71;
-  border-color: #2ecc71;
+  color: #308276;
+  border-color: #308276;
 }
 
 /* Fix a slight spacing problem - text inputs - doi forms - version. */
@@ -275,13 +275,13 @@ lock {
 }
 
 .form-control.is-valid {
-  border-color: #2ecc71;
-  color: #2ecc71;
+  border-color: #308276;
+  color: #308276;
 }
 
 .form-control.is-valid ~ .form-text {
-  border-color: #2ecc71;
-  color: #2ecc71;
+  border-color: #308276;
+  color: #308276;
 }
 
 .form-control.is-invalid {
@@ -554,15 +554,15 @@ div[doi-publisher] > div {
 }
 
 .form-group input.is-valid + div.form-text {
-    color: #2ecc71;
+    color: #308276;
 }
 
 /* VALIDATION - text areas (Mostly in doi form upload.) */
 
 .form-group.has-feedback textarea.form-control
 {
-  color: #2ecc71;
-  border-color: #2ecc71;
+  color: #308276;
+  border-color: #308276;
 }
 
 .form-group.has-error textarea.form-control
@@ -599,15 +599,11 @@ div[doi-publisher] > div {
 /* Accessible inline links in content only */
 main a:not(.btn):not(.navbar-brand):not(.nav-link),
 .wrapper a:not(.btn):not(.navbar-brand):not(.nav-link) {
-  color: #006b8f;
-  text-underline-offset: 0.1em;
+  color: #243b54;
 }
 
-main a:not(.btn):not(.navbar-brand):not(.nav-link):hover,
-main a:not(.btn):not(.navbar-brand):not(.nav-link):focus,
-.wrapper a:not(.btn):not(.navbar-brand):not(.nav-link):hover,
-.wrapper a:not(.btn):not(.navbar-brand):not(.nav-link):focus {
-  color: #004766;
+.sidebar-list-page a:not(.btn):not(.navbar-brand):not(.nav-link) {
+  color: #50595E;
 }
 
 .about-title {
@@ -687,7 +683,7 @@ main a:not(.btn):not(.navbar-brand):not(.nav-link):focus,
   font-size: 24px;
 }
 
-/* Accessibility: warning action buttons + sidebar facet contrast */
+/* Accessibility */
 
 /* Match Commons/Akita hover/focus behavior for warning buttons */
 .btn.btn-warning,
@@ -774,10 +770,7 @@ main a:not(.btn):not(.navbar-brand):not(.nav-link):focus,
 }
 
 /* Accessibility: Provider page facet filter links */
-.panel.facets a,
-.panel.facets a:visited {
-  color: #308276;
-}
+
 h2.repository, h2.work {
     font-weight: 600;
     color: #308276;
@@ -795,13 +788,6 @@ h2.repository, h2.work {
   color: #243b54;
 }
 
-/* Consistent hover color across Bracco */
-/* Action buttons */
-.btn.btn-warning,
-.btn-group-vertical .btn.btn-warning {
-  color: #243B54 !important;
-}
-
 /* Hover/focus */
 .btn.btn-warning:hover,
 .btn.btn-warning:focus,
@@ -809,8 +795,8 @@ h2.repository, h2.work {
 .btn-group-vertical .btn.btn-warning:hover,
 .btn-group-vertical .btn.btn-warning:focus,
 .btn-group-vertical .btn.btn-warning:active {
-  background-color: #e67e22 !important;
-  border-color: #e67e22 !important;
+  background-color: #85460F !important;
+  border-color: #85460F !important;
   color: #FFFFFF !important;
 }
 
@@ -857,3 +843,64 @@ h3.work-results {
 .text-registered { color: #165783; }
 .text-findable { color: #308276; }
 .text-draft { color: #7C410E; }
+
+.panel-body h3.help-header, .panel-body h3.edit, .panel-body h3.edit {
+  color: #308276 !important;
+}
+
+.btn-warning, .navbar .navbar-nav>li>a.btn-warning {
+  border-color: #85460F;
+  color: #85460F;
+}
+
+.btn-warning .caret, .navbar .navbar-nav>li>a.btn-warning .caret{ border-top-color: #85460F;}
+
+.transfer-dois-heading {
+  color: #308276;
+}
+
+.label-vertical {
+  color: #50595E;
+}
+
+/* Search button only */
+#search .btn-primary {
+  border-color: #308276;
+  color: #308276;
+}
+
+/* Hover, focus, active */
+#search .btn-primary:hover,
+#search .btn-primary:focus,
+#search .btn-primary:active,
+#search .btn-primary.active {
+  background-color: #308276;
+  border-color: #308276;
+  color: #fff;
+}
+
+.alert-danger {
+    background-color: #fff;
+    color: #A82315;
+    border: 2px solid #A82315;
+}
+/* Accessibility: Improve contrast of Registered DOI state badge */
+.metadata .state .label-info {
+  background-color: #185D8B;
+  border-color: #185D8B;
+  color: #fff;
+}
+
+/* Accessibility: Improve contrast of Draft DOI state badge */
+.metadata .state .label-warning {
+  background-color: #85460F;
+  border-color: #85460F;
+  color: #fff;
+}
+
+/* Accessibility: Improve contrast of Findable DOI state badge */
+.metadata .state .label-primary {
+  background-color: #308276;
+  border-color: #308276;
+  color: #fff;
+}
