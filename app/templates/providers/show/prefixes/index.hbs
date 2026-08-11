@@ -65,15 +65,17 @@
                   <LinkTo
                     @route="providers.show.prefixes"
                     @query={{hash state=null}}
+                    aria-label="Clear State filter"
                   >
-                    <i class="far fa-check-square"></i>
+                    <i class="far fa-check-square" aria-hidden="true"></i>
                   </LinkTo>
                 {{else}}
                   <LinkTo
                     @route="providers.show.prefixes"
                     @query={{hash state=state.id}}
+                    aria-label="Filter prefixes by State {{state.title}}"
                   >
-                    <i class="far fa-square"></i>
+                    <i class="far fa-square" aria-hidden="true"></i>
                   </LinkTo>
                 {{/if}}
                 <div class="facet-title">
@@ -102,15 +104,17 @@
                   <LinkTo
                     @route="providers.show.prefixes"
                     @query={{hash year=null}}
+                    aria-label="Clear Year created filter"
                   >
-                    <i class="far fa-check-square"></i>
+                    <i class="far fa-check-square" aria-hidden="true"></i>
                   </LinkTo>
                 {{else}}
                   <LinkTo
                     @route="providers.show.prefixes"
                     @query={{hash year=year.id}}
+                    aria-label="Filter prefixes by Year created {{year.title}}"
                   >
-                    <i class="far fa-square"></i>
+                    <i class="far fa-square" aria-hidden="true"></i>
                   </LinkTo>
                 {{/if}}
                 <div class="facet-title">
@@ -139,8 +143,9 @@
                   <LinkTo
                     @route="providers.show.prefixes"
                     @query={{hash consortium-organization-id=null}}
+                    aria-label="Clear Consortium Organization filter"
                   >
-                    <i class="far fa-check-square"></i>
+                    <i class="far fa-check-square" aria-hidden="true"></i>
                   </LinkTo>
                 {{else}}
                   <LinkTo
@@ -148,8 +153,9 @@
                     @query={{hash
                       consortium-organization-id=consortium-organization.id
                     }}
+                    aria-label="Filter prefixes by Consortium Organization {{consortium-organization.title}}"
                   >
-                    <i class="far fa-square"></i>
+                    <i class="far fa-square" aria-hidden="true"></i>
                   </LinkTo>
                 {{/if}}
                 <div class="facet-title">

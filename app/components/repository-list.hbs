@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row sidebar-list-page">
   <div data-test-left-sidebar class="col-md-3">
     {{#if
 
@@ -111,12 +111,12 @@
               {{#each this.model.repositories.meta.years as |year|}}
                 <li>
                   {{#if this.model.repositories.query.year}}
-                    <LinkTo @route={{this.link}} @query={{hash year=''}}>
-                      <i class="far fa-check-square"></i>
+                    <LinkTo @route={{this.link}} @query={{hash year=''}}  aria-label="Clear Year joined filter">
+                      <i class="far fa-check-square" aria-hidden="true"></i>
                     </LinkTo>
                   {{else}}
-                    <LinkTo @route={{this.link}} @query={{hash year=year.id}}>
-                      <i class="far fa-square"></i>
+                    <LinkTo @route={{this.link}} @query={{hash year=year.id}} aria-label="Filter repositories by Year joined {{year.title}}">
+                      <i class="far fa-square" aria-hidden="true"></i>
                     </LinkTo>
                   {{/if}}
                   <div class="facet-title">
@@ -131,7 +131,7 @@
             {{else}}
               <li>
                 <LinkTo @route="repositories" @query={{hash year=''}}>
-                  <i class="far fa-check-square"></i>
+                  <i class="far fa-check-square" aria-hidden="true"></i>
                 </LinkTo>
                 <div class="facet-title">
                   {{this.model.repositories.query.year}}
@@ -164,15 +164,16 @@
               {{#each this.model.repositories.meta.providers as |provider|}}
                 <li>
                   {{#if this.model.repositories.query.provider-id}}
-                    <LinkTo @route={{this.link}} @query={{hash provider-id=''}}>
-                      <i class="far fa-check-square"></i>
+                    <LinkTo @route={{this.link}} @query={{hash provider-id=''}} aria-label="Clear Member filter">
+                      <i class="far fa-check-square" aria-hidden="true"></i>
                     </LinkTo>
                   {{else}}
                     <LinkTo
                       @route={{this.link}}
                       @query={{hash provider-id=provider.id}}
+                      aria-label="Filter repositories by Member {{provider.title}}"
                     >
-                      <i class="far fa-square"></i>
+                      <i class="far fa-square" aria-hidden="true"></i>
                     </LinkTo>
                   {{/if}}
                   <div class="facet-title">
@@ -187,7 +188,7 @@
             {{else}}
               <li>
                 <LinkTo @route={{this.link}} @query={{hash provider=''}}>
-                  <i class="far fa-check-square"></i>
+                  <i class="far fa-check-square" aria-hidden="true"></i>
                 </LinkTo>
                 <div class="facet-title">
                   {{titleize this.model.repositories.query.provider}}
@@ -217,15 +218,16 @@
               {{#each this.model.repositories.meta.clientTypes as |clientType|}}
                 <li>
                   {{#if this.model.repositories.query.client-type}}
-                    <LinkTo @route={{this.link}} @query={{hash client-type=''}}>
-                      <i class="far fa-check-square"></i>
+                    <LinkTo @route={{this.link}} @query={{hash client-type=''}} aria-label="Clear Client Type filter">
+                      <i class="far fa-check-square" aria-hidden="true"></i>
                     </LinkTo>
                   {{else}}
                     <LinkTo
                       @route={{this.link}}
                       @query={{hash client-type=clientType.id}}
+                      aria-label="Filter repositories by Client Type {{clientType.title}}"
                     >
-                      <i class="far fa-square"></i>
+                      <i class="far fa-square" aria-hidden="true"></i>
                     </LinkTo>
                   {{/if}}
                   <div class="facet-title">
@@ -240,7 +242,7 @@
             {{else}}
               <li>
                 <LinkTo @route={{this.link}} @query={{hash client-type=''}}>
-                  <i class="far fa-check-square"></i>
+                  <i class="far fa-check-square" aria-hidden="true"></i>
                 </LinkTo>
                 <div class="facet-title">
                   {{titleize this.model.repositories.query.client-type}}
@@ -273,15 +275,16 @@
               }}
                 <li>
                   {{#if this.model.repositories.query.repository-type}}
-                    <LinkTo @route={{this.link}} @query={{hash repository-type=''}}>
-                      <i class="far fa-check-square"></i>
+                    <LinkTo @route={{this.link}} @query={{hash repository-type=''}} aria-label="Clear Repository Type filter">
+                      <i class="far fa-check-square" aria-hidden="true"></i>
                     </LinkTo>
                   {{else}}
                     <LinkTo
                       @route={{this.link}}
                       @query={{hash repository-type=repositoryType.id}}
+                      aria-label="Filter repositories by Repository Type {{repositoryType.title}}"
                     >
-                      <i class="far fa-square"></i>
+                      <i class="far fa-square" aria-hidden="true"></i>
                     </LinkTo>
                   {{/if}}
                   <div class="facet-title">
@@ -296,7 +299,7 @@
             {{else}}
               <li>
                 <LinkTo @route={{this.link}} @query={{hash repository-type=''}}>
-                  <i class="far fa-check-square"></i>
+                  <i class="far fa-check-square" aria-hidden="true"></i>
                 </LinkTo>
                 <div class="facet-title">
                   {{this.model.repositories.query.repository-type}}
@@ -327,15 +330,16 @@
               {{#each this.model.repositories.meta.certificates as |certificate|}}
                 <li>
                   {{#if this.model.repositories.query.certificate}}
-                    <LinkTo @route={{this.link}} @query={{hash certificate=''}}>
-                      <i class="far fa-check-square"></i>
+                    <LinkTo @route={{this.link}} @query={{hash certificate=''}} aria-label="Clear Certificate filter">
+                      <i class="far fa-check-square" aria-hidden="true"></i>
                     </LinkTo>
                   {{else}}
                     <LinkTo
                       @route={{this.link}}
                       @query={{hash certificate=certificate.id}}
+                      aria-label="Filter repositories by Certificate {{certificate.title}}"
                     >
-                      <i class="far fa-square"></i>
+                      <i class="far fa-square" aria-hidden="true"></i>
                     </LinkTo>
                   {{/if}}
                   <div class="facet-title">
@@ -350,7 +354,7 @@
             {{else}}
               <li>
                 <LinkTo @route={{this.link}} @query={{hash certificate=''}}>
-                  <i class="far fa-check-square"></i>
+                  <i class="far fa-check-square" aria-hidden="true"></i>
                 </LinkTo>
                 <div class="facet-title">
                   {{this.model.repositories.query.certificate}}
@@ -378,15 +382,16 @@
               {{#each this.model.repositories.meta.software as |software|}}
                 <li>
                   {{#if this.model.repositories.query.software}}
-                    <LinkTo @route={{this.link}} @query={{hash software=''}}>
-                      <i class="far fa-check-square"></i>
+                    <LinkTo @route={{this.link}} @query={{hash software=''}} aria-label="Clear Software filter">
+                      <i class="far fa-check-square" aria-hidden="true"></i>
                     </LinkTo>
                   {{else}}
                     <LinkTo
                       @route={{this.link}}
                       @query={{hash software=software.id}}
+                      aria-label="Filter repositories by Software {{software.title}}"
                     >
-                      <i class="far fa-square"></i>
+                      <i class="far fa-square" aria-hidden="true"></i>
                     </LinkTo>
                   {{/if}}
                   <div class="facet-title">
@@ -401,7 +406,7 @@
             {{else}}
               <li>
                 <LinkTo @route={{this.link}} @query={{hash software=''}}>
-                  <i class="far fa-check-square"></i>
+                  <i class="far fa-check-square" aria-hidden="true"></i>
                 </LinkTo>
                 <div class="facet-title">
                   {{this.model.repositories.query.software}}

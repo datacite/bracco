@@ -19,7 +19,7 @@ z-index: 10000;
 
 .create-doi-button .dropdown-menu.show a {
   display: block;
-  color: #88939a !important;
+  color: #50595E !important;
   width: 100%;
   font-size: 16px !important;
   padding: 6px 15px;
@@ -187,17 +187,17 @@ div[doi-format].power-select-fragment .ember-basic-dropdown-trigger div.ember-vi
 }
 
 .form-group .help-block.success {
-  color: #2ecc71;
+  color: #308276;
 }
 
 .form-group input.is-valid, .form-group select.is-valid {
-  color: #2ecc71;
-  border-color: #2ecc71;
+  color: #308276;
+  border-color: #308276;
 }
 
 /* Fragile - next sibiling */
 .form-group input.is-valid + div.form-text{
-  color: #2ecc71;
+  color: #308276;
 }
 
 #doi-edit-form div#doi, #doi-modify-form-file-upload div#doi {
@@ -222,29 +222,29 @@ div[doi-format].power-select-fragment .ember-basic-dropdown-trigger div.ember-vi
 
 .form-group.has-success.has-feedback .form-text
 {
-  color: #2ecc71;
+  color: #308276;
 }
 
 .form-group.has-success.has-feedback .ember-basic-dropdown-trigger
 {
-  color: #2ecc71;
-  border-color: #2ecc71;
+  color: #308276;
+  border-color: #308276;
 }
 
 lock {
-  color: #2ecc71;
+  color: #308276;
 }
 
 /* Resource type general validation */
 
 .is-valid .ember-basic-dropdown-trigger {
-  color: #2ecc71;
-  border-color: #2ecc71;
+  color: #308276;
+  border-color: #308276;
 }
 
 .is-valid .form-text {
-  color: #2ecc71;
-  border-color: #2ecc71;
+  color: #308276;
+  border-color: #308276;
 }
 
 /* Fix a slight spacing problem - text inputs - doi forms - version. */
@@ -275,13 +275,13 @@ lock {
 }
 
 .form-control.is-valid {
-  border-color: #2ecc71;
-  color: #2ecc71;
+  border-color: #308276;
+  color: #308276;
 }
 
 .form-control.is-valid ~ .form-text {
-  border-color: #2ecc71;
-  color: #2ecc71;
+  border-color: #308276;
+  color: #308276;
 }
 
 .form-control.is-invalid {
@@ -554,15 +554,15 @@ div[doi-publisher] > div {
 }
 
 .form-group input.is-valid + div.form-text {
-    color: #2ecc71;
+    color: #308276;
 }
 
 /* VALIDATION - text areas (Mostly in doi form upload.) */
 
 .form-group.has-feedback textarea.form-control
 {
-  color: #2ecc71;
-  border-color: #2ecc71;
+  color: #308276;
+  border-color: #308276;
 }
 
 .form-group.has-error textarea.form-control
@@ -599,15 +599,17 @@ div[doi-publisher] > div {
 /* Accessible inline links in content only */
 main a:not(.btn):not(.navbar-brand):not(.nav-link),
 .wrapper a:not(.btn):not(.navbar-brand):not(.nav-link) {
-  color: #006b8f;
-  text-underline-offset: 0.1em;
+  color: #006B8F;
 }
 
-main a:not(.btn):not(.navbar-brand):not(.nav-link):hover,
-main a:not(.btn):not(.navbar-brand):not(.nav-link):focus,
-.wrapper a:not(.btn):not(.navbar-brand):not(.nav-link):hover,
-.wrapper a:not(.btn):not(.navbar-brand):not(.nav-link):focus {
-  color: #004766;
+main a:not(.btn):not(.navbar-brand):not(.nav-link),
+.wrapper a:not(.btn):not(.navbar-brand):not(.nav-link) {
+    color: #006B8F;
+}
+
+.sidebar-list-page .facets a:not(.btn):not(.navbar-brand):not(.nav-link),
+.sidebar-list-page .help-block a:not(.btn):not(.navbar-brand):not(.nav-link) {
+    color: #50595E;
 }
 
 .about-title {
@@ -657,8 +659,8 @@ main a:not(.btn):not(.navbar-brand):not(.nav-link):focus,
 
 .landing-nav-link.btn,
 .navbar .navbar-nav > li > a.landing-nav-link.btn {
-  color: #fff !important;
-  border-color: #fff !important;
+  color: #243b54 !important;
+  border-color: #243b54 !important;
 }
 
 /* Landing page icon */
@@ -686,3 +688,240 @@ main a:not(.btn):not(.navbar-brand):not(.nav-link):focus,
 .landing-feature-title {
   font-size: 24px;
 }
+
+/* Accessibility */
+
+/* Match Commons/Akita hover/focus behavior for warning buttons */
+.btn.btn-warning,
+.btn-group-vertical .btn.btn-warning,
+.btn-group .btn.btn-warning {
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn.btn-warning:hover,
+.btn.btn-warning:active,
+.btn-group-vertical .btn.btn-warning:hover,
+.btn-group-vertical .btn.btn-warning:active,
+.btn-group .btn.btn-warning:hover,
+.btn-group .btn.btn-warning:active {
+  background-color: var(--datacite-color-primary, #00B1E2);
+  border-color: var(--datacite-color-primary, #00B1E2);
+  color: #fff;
+}
+
+.btn.btn-warning:hover i,
+.btn.btn-warning:active i,
+.btn-group-vertical .btn.btn-warning:hover i,
+.btn-group-vertical .btn.btn-warning:active i,
+.btn-group .btn.btn-warning:hover i,
+.btn-group .btn.btn-warning:active i {
+  color: #fff;
+}
+
+.btn.btn-warning:focus,
+.btn.btn-warning:focus-visible,
+.btn-group-vertical .btn.btn-warning:focus,
+.btn-group-vertical .btn.btn-warning:focus-visible,
+.btn-group .btn.btn-warning:focus,
+.btn-group .btn.btn-warning:focus-visible {
+  background-color: var(--datacite-color-primary, #00B1E2);
+  border-color: var(--datacite-color-primary, #00B1E2);
+  color: #fff;
+  outline: 2px solid transparent;
+  box-shadow: 0 0 0 3px rgba(0, 177, 226, 0.35);
+}
+
+.btn.btn-warning:focus i,
+.btn.btn-warning:focus-visible i,
+.btn-group-vertical .btn.btn-warning:focus i,
+.btn-group-vertical .btn.btn-warning:focus-visible i,
+.btn-group .btn.btn-warning:focus i,
+.btn-group .btn.btn-warning:focus-visible i {
+  color: #fff;
+}
+
+/* Keep filled submit buttons keyboard-visible */
+.btn.btn-fill:focus,
+.btn.btn-fill:focus-visible {
+  outline: 2px solid transparent;
+  box-shadow: 0 0 0 3px rgba(0, 177, 226, 0.35);
+}
+
+/* Fix low-contrast facet labels and counts */
+.panel.facets .facet-title,
+.panel.facets .number,
+.panel.facets .number.pull-right {
+  color: #50595E;
+}
+
+.panel-body .small,
+.panel-body small {
+  color: #50595E;
+}
+
+.panel-body.metadata {
+  color: #50595E;
+}
+
+/* Accessibility: inline warning/missing-information text */
+.icon-warning,
+.small.icon-warning {
+  color: #7C410E;
+}
+
+.alert-warning, .label-warning-inv {
+    background-color: #fff;
+    color: #7C410E;
+    border: 2px solid #7C410E;
+}
+
+/* Accessibility: Provider page facet filter links */
+
+h2.repository, h2.work {
+    font-weight: 600;
+    color: #308276;
+}
+.nav-tabs-member .nav-tabs .active>a, .nav-tabs-member .nav-tabs .active>a:focus, .nav-tabs-member .nav-tabs>li>a:focus, .nav-tabs-member .nav-tabs a:focus {
+    color: #308276;
+}
+
+#account_menu_link {
+  color: #243b54;
+}
+
+#account_menu_link:hover,
+#account_menu_link:focus {
+  color: #243b54;
+}
+
+/* Hover/focus */
+.btn.btn-warning:hover,
+.btn.btn-warning:focus,
+.btn.btn-warning:active,
+.btn-group-vertical .btn.btn-warning:hover,
+.btn-group-vertical .btn.btn-warning:focus,
+.btn-group-vertical .btn.btn-warning:active {
+  background-color: #85460F !important;
+  border-color: #85460F !important;
+  color: #FFFFFF !important;
+}
+
+/* Accessibility: facet section headers */
+.panel.facets h4,
+.facets h4 {
+  color: #308276 !important;
+}
+
+/* 2. Summary count headings like “573 Members” */
+h3.member-results,
+h3.provider-results,
+h3.repository-results,
+h3.doi-results,
+h3.work-results {
+  color: #308276;
+}
+
+/* 3. Facet section headings like Year joined, Region, Member Type */
+.facets h4 {
+  color: #308276;
+}
+.pagination > li:not(.active) > a,
+.pagination > li:not(.active) > span {
+  color: #006B8F;
+}
+
+.label-primary-inv {
+    color: #308276;
+    background-color: #fff;
+    border: 2px solid #308276;
+}
+
+.panel-body h3.member {
+    margin-bottom: 0;
+    color: #308276;
+}
+
+/* Dois info */
+.panel-transparent .panel-footer {
+    color: #50595E;
+}
+
+.text-registered { color: #165783; }
+.text-findable { color: #308276; }
+.text-draft { color: #7C410E; }
+
+.panel-body h3.help-header, .panel-body h3.edit, .panel-body h3.edit {
+  color: #308276 !important;
+}
+
+.btn-warning, .navbar .navbar-nav>li>a.btn-warning {
+  border-color: #85460F;
+  color: #85460F;
+}
+
+.btn-warning .caret, .navbar .navbar-nav>li>a.btn-warning .caret{ border-top-color: #85460F;}
+
+.transfer-dois-heading {
+  color: #308276;
+}
+
+.label-vertical {
+  color: #50595E;
+}
+
+/* Search button only */
+#search .btn-primary {
+  border-color: #308276;
+  color: #308276;
+}
+
+/* Hover, focus, active */
+#search .btn-primary:hover,
+#search .btn-primary:focus,
+#search .btn-primary:active,
+#search .btn-primary.active {
+  background-color: #308276;
+  border-color: #308276;
+  color: #fff;
+}
+
+.alert-danger {
+    background-color: #fff;
+    color: #A82315;
+    border: 2px solid #A82315;
+}
+/* Accessibility: Improve contrast of Registered DOI state badge */
+.metadata .state .label-info {
+  background-color: #185D8B;
+  border-color: #185D8B;
+  color: #fff;
+}
+
+/* Accessibility: Improve contrast of Draft DOI state badge */
+.metadata .state .label-warning {
+  background-color: #85460F;
+  border-color: #85460F;
+  color: #fff;
+}
+
+/* Accessibility: Improve contrast of Findable DOI state badge */
+.metadata .state .label-primary {
+  background-color: #308276;
+  border-color: #308276;
+  color: #fff;
+}
+
+/* Accessibility: Improve contrast for pagination controls */
+.pagination > li.active > a,
+.pagination > li.active > a:focus,
+.pagination > li.active > a:hover,
+.pagination > li.active > span,
+.pagination > li.active > span:focus,
+.pagination > li.active > span:hover,
+.pagination > li > a:hover,
+.pagination > li > a:focus {
+  background-color: #85460F;
+  border-color: #85460F;
+  color: #fff !important;
+}
+

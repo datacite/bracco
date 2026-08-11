@@ -15,11 +15,11 @@
       <h3 class="member-results">Required Properties</h3>
 
       <div class="form-group required-nested-label">
-        <label class="control-label col-md-3">DOI</label>
+        <label class="control-label col-md-3" for="doi-field">DOI</label>
         <div class="col-md-9 input-fragment">
           <div class="label-vertical">The globally unique string that identifies the resource and can't be changed.</div>
           <form.element @controlType="text" id="doi" @property="doi" as |el|>
-            <el.control disabled={{true}} />
+            <el.control @id="doi-field" disabled={{true}} />
           </form.element>
         </div>
       </div>
@@ -27,11 +27,11 @@
       <DoiState @class="required-nested-label" @model={{this.model}} @form={{form}} />
 
       <div class="form-group required-nested-label {{if (v-get this.model 'url' 'isInvalid') 'has-error' 'has-feedback'}}" data-test-doi-url>
-        <label class="control-label col-md-3">URL</label>
+        <label class="control-label col-md-3" for="url-field">URL</label>
         <div class="col-md-9 input-fragment">
           <div class="label-vertical">The location of the landing page with more information about the resource.</div>
           <form.element id="url" class="form-group" @controlType="text" @property="url" as |el| >
-            <el.control placeholder="URL" />
+            <el.control @id="url-field" placeholder="URL" />
             <div class="{{el.validation}} help-block">Should be a https URL — within the allowed domain(s) of your repository if domain restrictions are enabled in the repository settings. Http and ftp are also supported. For example http://example.org</div>
           </form.element>
         </div>
@@ -42,11 +42,11 @@
       <DoiPublisher @model={{this.model}} @form={{form}} @fragment={{this.model.publisher}} />
 
       <div class="form-group required-nested-label {{if (v-get this.model 'publicationYear' 'isInvalid') 'has-error' 'has-feedback'}}">
-        <label class="control-label col-md-3">Publication Year</label>
+        <label class="control-label col-md-3" for="publication-year-field">Publication Year</label>
         <div class="col-md-9 input-fragment">
           <div class="label-vertical">The year when the resource was or will be made publicly available.</div>
           <form.element id="publication-year" class="form-group" @controlType="text" @property="publicationYear" as |el| >
-            <el.control />
+            <el.control @id="publication-year-field" />
             <div class="{{el.validation}} help-block">Must be a year between 1000 and {{current-year this.model.maxMintFutureOffset}}.</div>
           </form.element>
         </div>
@@ -74,11 +74,11 @@
       <DoiFormats @model={{this.model}} @form={{form}} />
 
       <div class="form-group">
-        <label class="control-label col-md-3">Version</label>
+        <label class="control-label col-md-3" for="version-field">Version</label>
         <div class="col-md-9 input-fragment">
           <div class="label-vertical">The version number of the resource.</div>
           <form.element id="version" @controlType="text" @property="version" data-test-version as |el| >
-            <el.control placeholder="Version" id="version-field" />
+            <el.control @id="version-field" placeholder="Version" />
           </form.element>
         </div>
       </div>

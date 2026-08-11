@@ -1,3 +1,4 @@
+<div class="sidebar-list-page">
 <div data-test-left-sidebar class="col-md-3">
   {{#unless (and (can 'create doi' this.model) (can 'upload doi' this.model))}}
     <div class="panel panel-transparent">
@@ -115,12 +116,12 @@
             {{#each this.model.meta.states as |state|}}
               <li>
                 {{#if this.model.query.state}}
-                  <LinkTo @route={{this.link}} @query={{hash state=null}}>
-                    <i class="far fa-check-square"></i>
+                  <LinkTo @route={{this.link}} @query={{hash state=null}} aria-label="Clear State filter">
+                    <i class="far fa-check-square" aria-hidden="true"></i>
                   </LinkTo>
                 {{else}}
-                  <LinkTo @route={{this.link}} @query={{hash state=state.id}}>
-                    <i class="far fa-square"></i>
+                  <LinkTo @route={{this.link}} @query={{hash state=state.id}} aria-label="Filter DOIs by State {{state.title}}">
+                    <i class="far fa-square" aria-hidden="true"></i>
                   </LinkTo>
                 {{/if}}
                 <div class="facet-title">
@@ -134,8 +135,8 @@
             {{/each}}
           {{else}}
             <li>
-              <LinkTo @route={{this.link}} @query={{hash state=''}}>
-                <i class="far fa-check-square"></i>
+              <LinkTo @route={{this.link}} @query={{hash state=''}} aria-label="Clear State filter">
+                <i class="far fa-check-square" aria-hidden="true"></i>
               </LinkTo>
               <div class="facet-title">
                 {{titleize this.model.query.state}}
@@ -161,15 +162,16 @@
             {{#each this.model.meta.resourceTypes as |resourceType|}}
               <li>
                 {{#if this.model.query.resource-type-id}}
-                  <LinkTo @route={{this.link}} @query={{hash resource-type-id=''}}>
-                    <i class="far fa-check-square"></i>
+                  <LinkTo @route={{this.link}} @query={{hash resource-type-id=''}} aria-label="Clear Resource Type filter">
+                    <i class="far fa-check-square" aria-hidden="true"></i>
                   </LinkTo>
                 {{else}}
                   <LinkTo
                     @route={{this.link}}
                     @query={{hash resource-type-id=resourceType.id}}
+                    aria-label="Filter DOIs by Resource Type {{resourceType.title}}"
                   >
-                    <i class="far fa-square"></i>
+                    <i class="far fa-square" aria-hidden="true"></i>
                   </LinkTo>
                 {{/if}}
                 <div class="facet-title">
@@ -183,8 +185,8 @@
             {{/each}}
           {{else}}
             <li>
-              <LinkTo @route={{this.link}} @query={{hash resource-type-id=''}}>
-                <i class="far fa-check-square"></i>
+              <LinkTo @route={{this.link}} @query={{hash resource-type-id=''}} aria-label="Clear Resource Type filter">
+                <i class="far fa-check-square" aria-hidden="true"></i>
               </LinkTo>
               <div class="facet-title">
                 {{humanize (underscore this.model.query.resource-type-id)}}
@@ -211,12 +213,12 @@
               {{#each this.model.meta.published as |year|}}
                 <li>
                   {{#if this.model.query.published}}
-                    <LinkTo @route={{this.link}} @query={{hash published=''}}>
-                      <i class="far fa-check-square"></i>
+                    <LinkTo @route={{this.link}} @query={{hash published=''}} aria-label="Clear Year published filter">
+                      <i class="far fa-check-square" aria-hidden="true"></i>
                     </LinkTo>
                   {{else}}
-                    <LinkTo @route={{this.link}} @query={{hash published=year.id}}>
-                      <i class="far fa-square"></i>
+                    <LinkTo @route={{this.link}} @query={{hash published=year.id}} aria-label="Filter DOIs by Year published {{year.title}}">
+                      <i class="far fa-square" aria-hidden="true"></i>
                     </LinkTo>
                   {{/if}}
                   <div class="facet-title">
@@ -230,8 +232,8 @@
               {{/each}}
             {{else}}
               <li>
-                <LinkTo @route={{this.link}} @query={{hash published=''}}>
-                  <i class="far fa-check-square"></i>
+                <LinkTo @route={{this.link}} @query={{hash published=''}} aria-label="Clear Year published filter">
+                  <i class="far fa-check-square" aria-hidden="true"></i>
                 </LinkTo>
                 <div class="facet-title">
                   {{this.model.query.published}}
@@ -257,12 +259,12 @@
             {{#each this.model.meta.created as |year|}}
               <li>
                 {{#if this.model.query.created}}
-                  <LinkTo @route={{this.link}} @query={{hash created=''}}>
-                    <i class="far fa-check-square"></i>
+                  <LinkTo @route={{this.link}} @query={{hash created=''}} aria-label="Clear Year created filter">
+                    <i class="far fa-check-square" aria-hidden="true"></i>
                   </LinkTo>
                 {{else}}
-                  <LinkTo @route={{this.link}} @query={{hash created=year.id}}>
-                    <i class="far fa-square"></i>
+                  <LinkTo @route={{this.link}} @query={{hash created=year.id}} aria-label="Filter DOIs by Year created {{year.title}}">
+                    <i class="far fa-square" aria-hidden="true"></i>
                   </LinkTo>
                 {{/if}}
                 <div class="facet-title">
@@ -276,8 +278,8 @@
             {{/each}}
           {{else}}
             <li>
-              <LinkTo @route={{this.link}} @query={{hash created=''}}>
-                <i class="far fa-check-square"></i>
+              <LinkTo @route={{this.link}} @query={{hash created=''}} aria-label="Clear Year created filter">
+                <i class="far fa-check-square" aria-hidden="true"></i>
               </LinkTo>
               <div class="facet-title">
                 {{this.model.query.created}}
@@ -307,12 +309,12 @@
             {{#each this.model.meta.registered as |year|}}
               <li>
                 {{#if this.model.query.registered}}
-                  <LinkTo @route={{this.link}} @query={{hash registered=''}}>
-                    <i class="far fa-check-square"></i>
+                  <LinkTo @route={{this.link}} @query={{hash registered=''}} aria-label="Clear Year registered filter">
+                    <i class="far fa-check-square" aria-hidden="true"></i>
                   </LinkTo>
                 {{else}}
-                  <LinkTo @route={{this.link}} @query={{hash registered=year.id}}>
-                    <i class="far fa-square"></i>
+                  <LinkTo @route={{this.link}} @query={{hash registered=year.id}} aria-label="Filter DOIs by Year registered {{year.title}}">
+                    <i class="far fa-square" aria-hidden="true"></i>
                   </LinkTo>
                 {{/if}}
                 <div class="facet-title">
@@ -326,8 +328,8 @@
             {{/each}}
           {{else}}
             <li>
-              <LinkTo @route={{this.link}} @query={{hash registered=''}}>
-                <i class="far fa-check-square"></i>
+              <LinkTo @route={{this.link}} @query={{hash registered=''}} aria-label="Clear Year registered filter">
+                <i class="far fa-check-square" aria-hidden="true"></i>
               </LinkTo>
               <div class="facet-title">
                 {{this.model.query.registered}}
@@ -362,12 +364,12 @@
             {{#each this.model.meta.clients as |client|}}
               <li>
                 {{#if this.model.query.client-id}}
-                  <LinkTo @route={{this.link}} @query={{hash client-id=''}}>
-                    <i class="far fa-check-square"></i>
+                  <LinkTo @route={{this.link}} @query={{hash client-id=''}} aria-label="Clear Repository filter">
+                    <i class="far fa-check-square" aria-hidden="true"></i>
                   </LinkTo>
                 {{else}}
-                  <LinkTo @route={{this.link}} @query={{hash client-id=client.id}}>
-                    <i class="far fa-square"></i>
+                  <LinkTo @route={{this.link}} @query={{hash client-id=client.id}} aria-label="Filter DOIs by Repository {{client.title}}">
+                    <i class="far fa-square" aria-hidden="true"></i>
                   </LinkTo>
                 {{/if}}
                 <div class="facet-title">
@@ -381,8 +383,8 @@
             {{/each}}
           {{else}}
             <li>
-              <LinkTo @route={{this.link}} @query={{hash client-id=''}}>
-                <i class="far fa-check-square"></i>
+              <LinkTo @route={{this.link}} @query={{hash client-id=''}} aria-label="Clear Repository filter">
+                <i class="far fa-check-square" aria-hidden="true"></i>
               </LinkTo>
               <div class="facet-title">
                 {{this.model.query.client-id}}
@@ -414,15 +416,16 @@
               {{#if (not-eq affiliation.id affiliation.title)}}
                 <li>
                   {{#if this.model.query.affiliation-id}}
-                    <LinkTo @route={{this.link}} @query={{hash affiliation-id=null}}>
-                      <i class="far fa-check-square"></i>
+                    <LinkTo @route={{this.link}} @query={{hash affiliation-id=null}} aria-label="Clear Affiliation filter">
+                      <i class="far fa-check-square" aria-hidden="true"></i>
                     </LinkTo>
                   {{else}}
                     <LinkTo
                       @route={{this.link}}
                       @query={{hash affiliation-id=affiliation.id}}
+                      aria-label="Filter DOIs by Affiliation {{affiliation.title}}"
                     >
-                      <i class="far fa-square"></i>
+                      <i class="far fa-square" aria-hidden="true"></i>
                     </LinkTo>
                   {{/if}}
                   <div class="facet-title">
@@ -437,8 +440,8 @@
             {{/each}}
           {{else}}
             <li>
-              <LinkTo @route={{this.link}} @query={{hash affiliation-id=''}}>
-                <i class="far fa-check-square"></i>
+              <LinkTo @route={{this.link}} @query={{hash affiliation-id=''}} aria-label="Clear Affiliation filter">
+                <i class="far fa-check-square" aria-hidden="true"></i>
               </LinkTo>
               <div class="facet-title">
                 {{this.model.query.affiliation-id}}
@@ -465,12 +468,12 @@
               {{#each this.model.meta.prefixes as |prefix|}}
                 <li>
                   {{#if this.model.query.prefix}}
-                    <LinkTo @route={{this.link}} @query={{hash prefix=''}}>
-                      <i class="far fa-check-square"></i>
+                    <LinkTo @route={{this.link}} @query={{hash prefix=''}} aria-label="Clear Prefix filter">
+                      <i class="far fa-check-square" aria-hidden="true"></i>
                     </LinkTo>
                   {{else}}
-                    <LinkTo @route={{this.link}} @query={{hash prefix=prefix.id}}>
-                      <i class="far fa-square"></i>
+                    <LinkTo @route={{this.link}} @query={{hash prefix=prefix.id}} aria-label="Filter DOIs by Prefix {{prefix.title}}">
+                      <i class="far fa-square" aria-hidden="true"></i>
                     </LinkTo>
                   {{/if}}
                   <div class="facet-title">
@@ -484,8 +487,8 @@
               {{/each}}
             {{else}}
               <li>
-                <LinkTo @route={{this.link}} @query={{hash prefix=''}}>
-                  <i class="far fa-check-square"></i>
+                <LinkTo @route={{this.link}} @query={{hash prefix=''}} aria-label="Clear Prefix filter">
+                  <i class="far fa-check-square" aria-hidden="true"></i>
                 </LinkTo>
                 <div class="facet-title">
                   {{this.model.query.prefix}}
@@ -512,15 +515,16 @@
             {{#each this.model.meta.certificates as |certificate|}}
               <li>
                 {{#if this.model.query.certificate}}
-                  <LinkTo @route={{this.link}} @query={{hash certificate=''}}>
-                    <i class="far fa-check-square"></i>
+                  <LinkTo @route={{this.link}} @query={{hash certificate=''}} aria-label="Clear Repository Certificate filter">
+                    <i class="far fa-check-square" aria-hidden="true"></i>
                   </LinkTo>
                 {{else}}
                   <LinkTo
                     @route={{this.link}}
                     @query={{hash certificate=certificate.id}}
+                    aria-label="Filter DOIs by Repository Certificate {{certificate.title}}"
                   >
-                    <i class="far fa-square"></i>
+                    <i class="far fa-square" aria-hidden="true"></i>
                   </LinkTo>
                 {{/if}}
                 <div class="facet-title">
@@ -534,8 +538,8 @@
             {{/each}}
           {{else}}
             <li>
-              <LinkTo @route={{this.link}} @query={{hash certificate=''}}>
-                <i class="far fa-check-square"></i>
+              <LinkTo @route={{this.link}} @query={{hash certificate=''}} aria-label="Clear Repository Certificate filter">
+                <i class="far fa-check-square" aria-hidden="true"></i>
               </LinkTo>
               <div class="facet-title">
                 {{titleize this.model.query.certificate}}
@@ -562,15 +566,16 @@
               {{#each this.model.meta.schemaVersions as |schemaVersion|}}
                 <li>
                   {{#if this.model.query.schema-version}}
-                    <LinkTo @route={{this.link}} @query={{hash schema-version=''}}>
-                      <i class="far fa-check-square"></i>
+                    <LinkTo @route={{this.link}} @query={{hash schema-version=''}} aria-label="Clear Schema Version filter">
+                      <i class="far fa-check-square" aria-hidden="true"></i>
                     </LinkTo>
                   {{else}}
                     <LinkTo
                       @route={{this.link}}
                       @query={{hash schema-version=schemaVersion.id}}
+                      aria-label="Filter DOIs by Schema Version {{schemaVersion.title}}"
                     >
-                      <i class="far fa-square"></i>
+                      <i class="far fa-square" aria-hidden="true"></i>
                     </LinkTo>
                   {{/if}}
                   <div class="facet-title">
@@ -584,8 +589,8 @@
               {{/each}}
             {{else}}
               <li>
-                <LinkTo @route={{this.link}} @query={{hash schema-version=''}}>
-                  <i class="far fa-check-square"></i>
+                <LinkTo @route={{this.link}} @query={{hash schema-version=''}} aria-label="Clear Schema Version filter">
+                  <i class="far fa-check-square" aria-hidden="true"></i>
                 </LinkTo>
                 <div class="facet-title">
                   {{this.model.query.schema-version}}
@@ -614,12 +619,12 @@
             {{#each this.model.meta.sources as |source|}}
               <li>
                 {{#if this.model.query.source}}
-                  <LinkTo @route={{this.link}} @query={{hash source=null}}>
-                    <i class="far fa-check-square"></i>
+                  <LinkTo @route={{this.link}} @query={{hash source=null}} aria-label="Clear Source filter">
+                    <i class="far fa-check-square" aria-hidden="true"></i>
                   </LinkTo>
                 {{else}}
-                  <LinkTo @route={{this.link}} @query={{hash source=source.id}}>
-                    <i class="far fa-square"></i>
+                  <LinkTo @route={{this.link}} @query={{hash source=source.id}} aria-label="Filter DOIs by Source {{source.title}}">
+                    <i class="far fa-square" aria-hidden="true"></i>
                   </LinkTo>
                 {{/if}}
                 <div class="facet-title">
@@ -633,8 +638,8 @@
             {{/each}}
           {{else}}
             <li>
-              <LinkTo @route={{this.link}} @query={{hash source=''}}>
-                <i class="far fa-check-square"></i>
+              <LinkTo @route={{this.link}} @query={{hash source=''}} aria-label="Clear Source filter">
+                <i class="far fa-check-square" aria-hidden="true"></i>
               </LinkTo>
               <div class="facet-title">
                 {{this.model.query.source}}
@@ -668,15 +673,17 @@
                   <LinkTo
                     @route={{this.link}}
                     @query={{hash link-check-status=null}}
+                    aria-label="Clear Link Check Status filter"
                   >
-                    <i class="far fa-check-square"></i>
+                    <i class="far fa-check-square" aria-hidden="true"></i>
                   </LinkTo>
                 {{else}}
                   <LinkTo
                     @route={{this.link}}
                     @query={{hash link-check-status=linkCheckStatus.id}}
+                    aria-label="Filter DOIs by Link Check Status {{linkCheckStatus.id}}"
                   >
-                    <i class="far fa-square"></i>
+                    <i class="far fa-square" aria-hidden="true"></i>
                   </LinkTo>
                 {{/if}}
                 <div class="facet-title">
@@ -690,8 +697,8 @@
             {{/each}}
           {{else}}
             <li>
-              <LinkTo @route={{this.link}} @query={{hash link-check-status=''}}>
-                <i class="far fa-check-square"></i>
+              <LinkTo @route={{this.link}} @query={{hash link-check-status=''}} aria-label="Clear Link Check Status filter">
+                <i class="far fa-check-square" aria-hidden="true"></i>
               </LinkTo>
               <div class="facet-title">
                 {{this.model.query.link-check-status}}
@@ -744,4 +751,5 @@
       No DOIs found.
     </BsAlert>
   {{/if}}
+</div>
 </div>
