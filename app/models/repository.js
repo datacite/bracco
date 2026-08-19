@@ -33,31 +33,23 @@ export const clientTypeList = [
 
 export const softwareList = [
   'Archipelago',
-  'Cayuse',
   'CKAN',
+  'CSTR & DOI Registration API',
   'Dataverse',
   'dLibra',
   'DSpace',
   'EPrints',
   'Ex Libris Esploro',
-  'Fedora',
   'Figshare',
   'Invenio',
-  'Islandora',
-  'MyCoRe',
-  'Nesstar',
+  'Medad',
   'Omega-PSIR',
   'Omeka S',
   'Open Journal Systems (OJS)',
-  'OPUS',
-  'Pubman',
   'Pure',
   'Redivis',
   'RSpace',
-  'Samvera',
-  'SESAR',
-  'Ubiquity',
-  'Other'
+  'SESAR'
 ];
 
 const Validations = buildValidations({

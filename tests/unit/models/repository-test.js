@@ -2,6 +2,7 @@ import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
 import { get } from '@ember/object';
 import { run } from '@ember/runloop';
+import { softwareList } from 'bracco/models/repository';
 
 module('Unit | Model | repository', function (hooks) {
   setupTest(hooks);
@@ -11,6 +12,33 @@ module('Unit | Model | repository', function (hooks) {
       this.owner.lookup('service:store').createRecord('repository')
     );
     assert.ok(!!model);
+  });
+
+  test('softwareList matches supported RSP software', function (assert) {
+    assert.deepEqual(softwareList, [
+      'Archipelago',
+      'CKAN',
+      'CSTR & DOI Registration API',
+      'Dataverse',
+      'dLibra',
+      'DSpace',
+      'EPrints',
+      'Ex Libris Esploro',
+      'Figshare',
+      'Invenio',
+      'Medad',
+      'Omega-PSIR',
+      'Omeka S',
+      'Open Journal Systems (OJS)',
+      'Pure',
+      'Redivis',
+      'RSpace',
+      'SESAR'
+    ]);
+    assert.notOk(
+      softwareList.includes('Other'),
+      'Other is not a suggested option'
+    );
   });
 
   test('should belong to a provider', function (assert) {
