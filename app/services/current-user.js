@@ -56,25 +56,31 @@ export default class CurrentUserService extends Service {
 
       // verify asymmetric token, using RSA with SHA-256 hash algorithm
       let self = this;
-      nodeJsonWebToken.verify(
-        jwt,
-        cert,
-        { algorithms: ['RS256'] },
-        function (error, payload) {
-          if (payload) {
-            self.set('jwt', jwt);
-            self.initUser(payload);
-          } else if (error.message !== 'jwt must be provided') {
-            self.session.invalidate().then(function () {
-              self
-                .get('flashMessages')
-                .danger(
-                  'Unable to authenticate because the token was wrong or has expired.'
-                );
-            });
+      return new Promise(function (resolve, reject) {
+        nodeJsonWebToken.verify(
+          jwt,
+          cert,
+          { algorithms: ['RS256'] },
+          function (error, payload) {
+            if (payload) {
+              self.set('jwt', jwt);
+              self.initUser(payload);
+              resolve();
+            } else if (error && error.message !== 'jwt must be provided') {
+              self.session.invalidate().then(function () {
+                self
+                  .get('flashMessages')
+                  .danger(
+                    'Unable to authenticate because the token was wrong or has expired.'
+                  );
+                resolve();
+              }, reject);
+            } else {
+              resolve();
+            }
           }
-        }
-      );
+        );
+      });
     } else if (this.get('session.data.authenticated.role_id')) {
       // using authenticator:test
       this.initUser(this.get('session.data.authenticated'));
