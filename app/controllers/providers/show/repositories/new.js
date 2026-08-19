@@ -66,6 +66,27 @@ export default class NewController extends Controller {
     this.set('softwares', softwareList);
   }
 
+
+  @action
+  createSoftwareOnEnter(select, e) {
+    if (
+      e.keyCode === 13 &&
+      select.isOpen &&
+      !select.highlighted &&
+      !isBlank(select.searchText)
+    ) {
+      e.preventDefault();
+      const software = select.searchText;
+      if (!this.softwares.includes(software)) {
+        this.set('softwares', [...this.softwares, software]);
+      }
+      select.actions.choose(software);
+      this.model.repository.set('software', software);
+      this.set('softwares', softwareList);
+      return false;
+    }
+  }
+
   @action
   addLanguageAction() {
     this.model.repository.get('language').pushObject(null);

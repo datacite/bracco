@@ -72,7 +72,7 @@
           {{/if}}
         </div>
       </div>
-      <form.element id="software" class="form-group required-label {{if (and this.isSoftwareFieldActive (v-get this.model.repository 'software' 'isInvalid')) 'has-error'}}" @controlType="power-select" @label="Software" @property="software" @options={{this.softwares}} @destination={{this.software}} @helpText="The name of the software that is used to run the repository. Select 'Other' if your repository software is not listed." as |el|>
+      <form.element id="software" class="form-group required-label {{if (and this.isSoftwareFieldActive (v-get this.model.repository 'software' 'isInvalid')) 'has-error'}}" @controlType="power-select" @label="Software" @property="software" @options={{this.softwares}} @destination={{this.software}} @helpText="The name of the software that is used to run the repository. Select 'Other' or type the name of your repository software if it is not listed." as |el|>
         <el.control {{on "click" this.activateSoftwareField}} @onChange={{action "selectSoftwareAction"}} @search={{action "searchSoftwareAction"}} @placeholder="Select Software" @searchPlaceholder="Type to search..." @allowClear={{true}} @searchEnabled={{true}} as |item|>
           {{item}}
         </el.control>

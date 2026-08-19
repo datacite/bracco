@@ -12,6 +12,34 @@ module('Unit | Controller | providers', function (hooks) {
     assert.ok(controller);
   });
 
+  test('createSoftwareOnEnter sets a custom software name', function (assert) {
+    let controller = this.owner.lookup(
+      'controller:providers.show.repositories.new'
+    );
+    let model = {
+      repository: make('repository')
+    };
+    controller.set('model', model);
+
+    let chosen = null;
+    controller.send('createSoftwareOnEnter', {
+      isOpen: true,
+      highlighted: null,
+      searchText: 'NADA',
+      actions: {
+        choose(value) {
+          chosen = value;
+        }
+      }
+    }, {
+      keyCode: 13,
+      preventDefault() {}
+    });
+
+    assert.equal(controller.model.repository.get('software'), 'NADA');
+    assert.equal(chosen, 'NADA');
+  });
+
   test('should list countries', function (assert) {
     let controller = this.owner.lookup(
       'controller:providers.show.organizations.new'

@@ -5,6 +5,7 @@ import Controller from '@ember/controller';
 import { A } from '@ember/array';
 import { capitalize } from '@ember/string';
 import langs from 'langs';
+import { isBlank } from '@ember/utils';
 import { clientTypeList, softwareList } from 'bracco/models/repository';
 
 @classic
@@ -71,6 +72,26 @@ export default class EditController extends Controller {
   selectSoftwareAction(software) {
     this.model.set('software', software);
     this.set('softwares', softwareList);
+  }
+
+  @action
+  createSoftwareOnEnter(select, e) {
+    if (
+      e.keyCode === 13 &&
+      select.isOpen &&
+      !select.highlighted &&
+      !isBlank(select.searchText)
+    ) {
+      e.preventDefault();
+      const software = select.searchText;
+      if (!this.softwares.includes(software)) {
+        this.set('softwares', [...this.softwares, software]);
+      }
+      select.actions.choose(software);
+      this.model.set('software', software);
+      this.set('softwares', softwareList);
+      return false;
+    }
   }
 
   @action
