@@ -33,6 +33,7 @@ module('Unit | Model | repository', function (hooks) {
       'Pure',
       'Redivis',
       'RSpace',
+      'Samvera Hyrax',
       'SESAR'
     ]);
     assert.notOk(

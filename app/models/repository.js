@@ -49,6 +49,7 @@ export const softwareList = [
   'Pure',
   'Redivis',
   'RSpace',
+  'Samvera Hyrax',
   'SESAR'
 ];
 
