@@ -303,7 +303,7 @@ export default class NewController extends Controller {
 
   @action
   selectAnnualRevenue(annualRevenue) {
-    this.model.set('annualRevenue', annualRevenue);
+    this.model.set('annualRevenue', annualRevenue ? annualRevenue.value : null);
   }
 
   @action

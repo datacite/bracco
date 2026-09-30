@@ -42,11 +42,11 @@ export const focusAreaList = [
 ];
 export const nonProfitStatusList = ['non-profit', 'for-profit'];
 export const annualRevenueList = [
-  '0€ to 500,000€',
-  '500,001€ to 2,000,000€',
-  '2,000,001€ to 50,000,000€',
-  '50,000,001€ to 1,000,000,000€',
-  'Over 1,000,000,000€'
+  { label: '0€ to 500,000€', value: '0-500.000€' },
+  { label: '500,001€ to 2,000,000€', value: '500.001€-2.000.000€' },
+  { label: '2,000,001€ to 50,000,000€', value: '2.000.001€-50.000.000€' },
+  { label: '50,000,001€ to 1,000,000,000€', value: '50.000.001€-1.000.000.000€' },
+  { label: 'Over 1,000,000,000€', value: '>1.000.000.000' }
 ];
 
 const Validations = buildValidations({
@@ -361,6 +361,17 @@ export default class Provider extends Model.extend(Validations) {
   @computed('id')
   get uid() {
     return this.id.toUpperCase();
+  }
+
+  @computed('annualRevenue')
+  get annualRevenueLabel() {
+    let option = annualRevenueList.find((item) => item.value === this.annualRevenue);
+    return option ? option.label : this.annualRevenue;
+  }
+
+  @computed('annualRevenue')
+  get selectedAnnualRevenue() {
+    return annualRevenueList.find((item) => item.value === this.annualRevenue);
   }
 
   @computed(

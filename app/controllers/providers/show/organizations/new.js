@@ -131,7 +131,10 @@ export default class NewController extends Controller {
 
   @action
   selectAnnualRevenue(annualRevenue) {
-    this.model.organization.set('annualRevenue', annualRevenue);
+    this.model.organization.set(
+      'annualRevenue',
+      annualRevenue ? annualRevenue.value : null
+    );
   }
 
   @action

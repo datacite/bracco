@@ -213,15 +213,16 @@
               class="form-group"
               @label="Annual Revenue (EUR)"
               @property="annualRevenue"
+              @optionLabelPath="label"
               @options={{this.annualRevenues}}
-              @destination={{this.annualRevenue}} as |el|
+              @destination={{this.model.selectedAnnualRevenue}} as |el|
             >
               <el.control
                 @onChange={{action 'selectAnnualRevenue'}}
                 @placeholder="Select Annual Revenue"
                 @searchEnabled={{false}} as |item|
               >
-                {{item}}
+                {{if item.label item.label this.model.annualRevenueLabel}}
               </el.control>
             </form.element>
           {{/if}}
