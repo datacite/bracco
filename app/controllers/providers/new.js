@@ -9,7 +9,8 @@ import {
   organizationTypeList,
   memberTypeList,
   focusAreaList,
-  nonProfitStatusList
+  nonProfitStatusList,
+  annualRevenueList
 } from 'bracco/models/provider';
 import { UploadFile, UploadFileReader } from 'ember-file-upload';
 
@@ -167,6 +168,8 @@ export default class NewController extends Controller {
   focusAreas = focusAreaList;
   nonProfitStatusList = nonProfitStatusList;
   nonProfitStatuses = nonProfitStatusList;
+  annualRevenueList = annualRevenueList;
+  annualRevenues = annualRevenueList;
   isCountryFieldActive = false;
 
   // we are storing state/province information for US, CA, AU and CN
@@ -293,6 +296,14 @@ export default class NewController extends Controller {
   selectNonProfitStatus(nonProfitStatus) {
     this.model.set('nonProfitStatus', nonProfitStatus);
     this.set('nonProfitStatuses', nonProfitStatusList);
+    if (nonProfitStatus !== 'for-profit') {
+      this.model.set('annualRevenue', null);
+    }
+  }
+
+  @action
+  selectAnnualRevenue(annualRevenue) {
+    this.model.set('annualRevenue', annualRevenue);
   }
 
   @action

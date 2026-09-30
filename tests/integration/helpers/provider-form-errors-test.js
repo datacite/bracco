@@ -19,4 +19,12 @@ module('Integration | Helper | provider-form-errors', function (hooks) {
         'member ID, confirm member ID, provider name, provider display name, system email, country'
       );
   });
+
+  test('it includes annual revenue when tax status is for-profit', async function (assert) {
+    this.set('model', make('provider', { nonProfitStatus: 'for-profit' }));
+
+    await render(hbs`{{provider-form-errors this.model}}`);
+
+    assert.dom(this.element).includesText('annual revenue');
+  });
 });

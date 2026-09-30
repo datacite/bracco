@@ -41,6 +41,13 @@ export const focusAreaList = [
   'general'
 ];
 export const nonProfitStatusList = ['non-profit', 'for-profit'];
+export const annualRevenueList = [
+  '0€ to 500,000€',
+  '500,001€ to 2,000,000€',
+  '2,000,001€ to 50,000,000€',
+  '50,000,001€ to 1,000,000,000€',
+  'Over 1,000,000,000€'
+];
 
 const Validations = buildValidations({
   symbol: [
@@ -212,6 +219,14 @@ const Validations = buildValidations({
   'billingInformation.state': [validator('billing-state')],
   country: [
     validator('presence', true)
+  ],
+  annualRevenue: [
+    validator('presence', {
+      presence: true,
+      disabled: computed('model.nonProfitStatus', function () {
+        return this.model.get('nonProfitStatus') !== 'for-profit';
+      })
+    })
   ]
 });
 
@@ -291,6 +306,9 @@ export default class Provider extends Model.extend(Validations) {
 
   @attr('string')
   nonProfitStatus;
+
+  @attr('string')
+  annualRevenue;
 
   @attr('boolean')
   hasPassword;

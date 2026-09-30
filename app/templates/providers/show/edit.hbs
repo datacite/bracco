@@ -227,6 +227,25 @@
           </el.control>
         </form.element>
       {{/if}}
+      {{#if (eq this.model.nonProfitStatus 'for-profit')}}
+        <form.element
+          @controlType="power-select"
+          id="annual-revenue"
+          class="form-group"
+          @label="Annual Revenue (EUR)"
+          @property="annualRevenue"
+          @options={{this.annualRevenues}}
+          @destination={{this.annualRevenue}} as |el|
+        >
+          <el.control
+            @onChange={{action 'selectAnnualRevenue'}}
+            @placeholder="Select Annual Revenue"
+            @searchEnabled={{false}} as |item|
+          >
+            {{item}}
+          </el.control>
+        </form.element>
+      {{/if}}
       <form.element
         @controlType="power-select"
         id="organization-type"
