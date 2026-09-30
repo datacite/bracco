@@ -100,6 +100,18 @@
             Tax Status
           </h5>
           {{titleize this.model.nonProfitStatus}}
+          {{#if (eq this.model.nonProfitStatus 'for-profit')}}
+            <h5>
+              Annual Revenue (EUR)
+            </h5>
+            {{#if this.model.annualRevenue}}
+              {{this.model.annualRevenueLabel}}
+            {{else}}
+              <span class="small icon-warning">
+                Please provide this information.
+              </span>
+            {{/if}}
+          {{/if}}
           <h5>
             Organization Name
           </h5>

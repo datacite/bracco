@@ -41,6 +41,13 @@ export const focusAreaList = [
   'general'
 ];
 export const nonProfitStatusList = ['non-profit', 'for-profit'];
+export const annualRevenueList = [
+  { label: '0€ to 500,000€', value: '0-500.000€' },
+  { label: '500,001€ to 2,000,000€', value: '500.001€-2.000.000€' },
+  { label: '2,000,001€ to 50,000,000€', value: '2.000.001€-50.000.000€' },
+  { label: '50,000,001€ to 1,000,000,000€', value: '50.000.001€-1.000.000.000€' },
+  { label: 'Over 1,000,000,000€', value: '>1.000.000.000' }
+];
 
 const Validations = buildValidations({
   symbol: [
@@ -212,6 +219,14 @@ const Validations = buildValidations({
   'billingInformation.state': [validator('billing-state')],
   country: [
     validator('presence', true)
+  ],
+  annualRevenue: [
+    validator('presence', {
+      presence: true,
+      disabled: computed('model.nonProfitStatus', function () {
+        return this.model.get('nonProfitStatus') !== 'for-profit';
+      })
+    })
   ]
 });
 
@@ -292,6 +307,9 @@ export default class Provider extends Model.extend(Validations) {
   @attr('string')
   nonProfitStatus;
 
+  @attr('string')
+  annualRevenue;
+
   @attr('boolean')
   hasPassword;
 
@@ -343,6 +361,17 @@ export default class Provider extends Model.extend(Validations) {
   @computed('id')
   get uid() {
     return this.id.toUpperCase();
+  }
+
+  @computed('annualRevenue')
+  get annualRevenueLabel() {
+    let option = annualRevenueList.find((item) => item.value === this.annualRevenue);
+    return option ? option.label : this.annualRevenue;
+  }
+
+  @computed('annualRevenue')
+  get selectedAnnualRevenue() {
+    return annualRevenueList.find((item) => item.value === this.annualRevenue);
   }
 
   @computed(

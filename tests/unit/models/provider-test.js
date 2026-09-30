@@ -50,4 +50,54 @@ module('Unit | Model | provider', function (hooks) {
       'kind of relationship is hasMany'
     );
   });
+
+  test('annualRevenue is required when tax status is for-profit', function (assert) {
+    let model = run(() =>
+      this.owner.lookup('service:store').createRecord('provider', {
+        nonProfitStatus: 'for-profit'
+      })
+    );
+
+    assert.false(model.validations.attrs.annualRevenue.isValid);
+
+    run(() => model.set('annualRevenue', '0-500.000€'));
+
+    assert.true(model.validations.attrs.annualRevenue.isValid);
+  });
+
+  test('annualRevenue is not required when tax status is non-profit', function (assert) {
+    let model = run(() =>
+      this.owner.lookup('service:store').createRecord('provider', {
+        nonProfitStatus: 'non-profit'
+      })
+    );
+
+    assert.true(model.validations.attrs.annualRevenue.isValid);
+  });
+
+  test('annualRevenue is not required after switching from for-profit to non-profit', function (assert) {
+    let model = run(() =>
+      this.owner.lookup('service:store').createRecord('provider', {
+        nonProfitStatus: 'for-profit'
+      })
+    );
+
+    assert.false(model.validations.attrs.annualRevenue.isValid);
+
+    run(() => model.set('nonProfitStatus', 'non-profit'));
+
+    assert.true(model.validations.attrs.annualRevenue.isValid);
+  });
+
+  test('annualRevenueLabel maps backend values to display labels', function (assert) {
+    let model = run(() =>
+      this.owner.lookup('service:store').createRecord('provider', {
+        annualRevenue: '0-500.000€'
+      })
+    );
+
+    assert.equal(model.annualRevenueLabel, '0€ to 500,000€');
+    assert.equal(model.selectedAnnualRevenue.value, '0-500.000€');
+    assert.equal(model.selectedAnnualRevenue.label, '0€ to 500,000€');
+  });
 });

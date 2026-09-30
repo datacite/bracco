@@ -10,7 +10,8 @@ import {
   organizationTypeList,
   memberTypeList,
   focusAreaList,
-  nonProfitStatusList
+  nonProfitStatusList,
+  annualRevenueList
 } from 'bracco/models/provider';
 import _arr from 'lodash';
 import RSVP from 'rsvp';
@@ -169,6 +170,8 @@ export default class EditController extends Controller {
   focusAreas = focusAreaList;
   nonProfitStatusList = nonProfitStatusList;
   nonProfitStatuses = nonProfitStatusList;
+  annualRevenueList = annualRevenueList;
+  annualRevenues = annualRevenueList;
   isCountryFieldActive = false;
 
   // we are storing state/province information for US, CA, AU and CN
@@ -294,6 +297,14 @@ export default class EditController extends Controller {
   selectNonProfitStatus(nonProfitStatus) {
     this.model.set('nonProfitStatus', nonProfitStatus);
     this.set('nonProfitStatuses', nonProfitStatusList);
+    if (nonProfitStatus !== 'for-profit') {
+      this.model.set('annualRevenue', null);
+    }
+  }
+
+  @action
+  selectAnnualRevenue(annualRevenue) {
+    this.model.set('annualRevenue', annualRevenue ? annualRevenue.value : null);
   }
 
   @action

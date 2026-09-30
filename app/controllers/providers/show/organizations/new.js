@@ -7,7 +7,8 @@ import {
   organizationTypeList,
   memberTypeList,
   focusAreaList,
-  nonProfitStatusList
+  nonProfitStatusList,
+  annualRevenueList
 } from 'bracco/models/provider';
 import { UploadFile, UploadFileReader } from 'ember-file-upload';
 
@@ -35,6 +36,8 @@ export default class NewController extends Controller {
   focusAreas = focusAreaList;
   nonProfitStatusList = nonProfitStatusList;
   nonProfitStatuses = nonProfitStatusList;
+  annualRevenueList = annualRevenueList;
+  annualRevenues = annualRevenueList;
   isCountryFieldActive = false;
 
   init(...args) {
@@ -121,6 +124,17 @@ export default class NewController extends Controller {
   selectNonProfitStatus(nonProfitStatus) {
     this.model.organization.set('nonProfitStatus', nonProfitStatus);
     this.set('nonProfitStatuses', nonProfitStatusList);
+    if (nonProfitStatus !== 'for-profit') {
+      this.model.organization.set('annualRevenue', null);
+    }
+  }
+
+  @action
+  selectAnnualRevenue(annualRevenue) {
+    this.model.organization.set(
+      'annualRevenue',
+      annualRevenue ? annualRevenue.value : null
+    );
   }
 
   @action
