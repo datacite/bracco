@@ -34,7 +34,8 @@ module('Unit | Model | repository', function (hooks) {
       'Redivis',
       'RSpace',
       'Samvera Hyrax',
-      'SESAR'
+      'SESAR',
+      'Janeway'
     ]);
     assert.notOk(
       softwareList.includes('Other'),

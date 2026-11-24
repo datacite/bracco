@@ -50,7 +50,8 @@ export const softwareList = [
   'Redivis',
   'RSpace',
   'Samvera Hyrax',
-  'SESAR'
+  'SESAR',
+  'Janeway'
 ];
 
 const Validations = buildValidations({
