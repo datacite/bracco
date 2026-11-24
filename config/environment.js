@@ -17,7 +17,7 @@ module.exports = function (environment) {
     LINKEDIN_URL: 'https://www.linkedin.com/company/datacite',
     YOUTUBE_URL: 'https://www.youtube.com/channel/UCVsSDZhIN_WbnD_v5o9eB_A',
     CREATE_A_FABRICA_ACCOUNT_URL:
-      'https://support.datacite.org/docs/create-a-fabrica-account',
+      'https://support.datacite.org/docs/doi-fabrica#locate-your-account-credentials',
     FEE_MODEL_URL: 'https://datacite.org/fee-model',
     PRIVACY_POLICY_URL: 'https://datacite.org/privacy-policy',
     STATUS_URL: 'https://status.datacite.org',
